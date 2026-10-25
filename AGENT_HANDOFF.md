@@ -12,30 +12,14 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Current verified state
 
-- On the initial repository tree inspection, the visible tracked contents were .github/workflows/main.yml and research_state/workflow_run_diagnostics.jsonl. The diagnostics ledger was empty. No README, research pipeline, scripts directory, tests directory, or prior research report was visible at that inspection. Recheck current HEAD rather than assuming nothing has changed.
-- Added RESEARCH_PROMPT.md, the primary research protocol/agent instruction. Initial creation commit: cceedfc2dc32809a985bbef0f8a0b327d6a607ca. Upgraded and expanded prompt commit: 4f501d5478cd593f95640ea9afb83e8e37a5c720.
-- No data ingestion, model fitting, backtest, test suite, forecast evaluation, or liquidation-label verification has yet been performed as part of this setup. Do not describe the hypothesis as tested.
-- The prompt cites the September 2026 SSRN working paper “Limits to Coordination: Funding Drag in Crypto Perpetual Funding Rates” as motivation and requires independent evaluation. The reported 27h vs 3h correction-time contrast is not itself evidence of liquidation forecasting.
-- Public Binance market-data archives are a sensible first source for funding, futures klines, mark-price/index-price/premium-index data and public market metrics. Historical direct liquidation label availability must be verified against actual unauthenticated files; do not infer event-free intervals from missing records.
-- The current workflow appears to call scripts/controller_progress.py during checkpoint/progress accounting, and push-only controller tests appear to reference tests/test_controller_progress_accounting.py, tests/test_workflow_diagnostics_scanner.py, tests/test_nonfinite_result_serialization.py, and tests/test_campaign_resume.py. Those ordinary code/test paths were not present in the initial recursive tree. Treat this as a high-priority audit item, not a proven runtime failure: inspect all call sites and semantics, verify the current tree, then implement only the minimum compatible non-workflow code and tests if required. Do not fabricate progress accounting or edit workflow files.
-
-## Prompt-quality review and verified upgrade
-
-A repository-quality review compared the initial prompt against a mature continuous quantitative research workflow with frozen hypotheses, point-in-time expanding-universe controls, complete expected-versus-observed result accounting, adaptive feasibility gates, negative-result preservation, immutable holdouts, and deterministic validation. The initial prompt was strong on scientific caution but left too much of the first experiment and long-running evidence governance unspecified.
-
-RESEARCH_PROMPT.md now includes sections 13–20 adding:
-- Stable hypothesis/experiment IDs and immutable source/config/result lineage.
-- A concrete FCLR-001 starter design: hourly panel, primary 24-hour forward realized-variance target, B0/B1 volatility baselines, funding-augmented C1, combined C2, and a declared primary contrast.
-- Chronological 60/20/20 default splits, a 7-day purge/embargo, minimum instrument/time-block evidence requirements, QLIKE, fixed inference, and a practical effect-size gate.
-- Separate observed-liquidation, modeled-boundary, volatility, and funding-correction research tracks.
-- An adaptive feasibility trigger that permits new, separately registered pilot/alternative tracks without loosening hard scientific constraints.
-- Whole-family multiple-testing treatment, sequential alpha spending, complete terminal result ledgers, idempotent resume, adversarial tests, independent result recomputation, and a per-session research feedback contract.
-
-This is a prompt/protocol upgrade only. It has not executed ingestion, tests, model fitting, or a backtest. It must not be reported as empirical validation. The protected workflow has not been edited.
-
-## Next task — do this first
-
-FCLR-001 protocol frozen in `research_state/research_protocol.md` (methodology, target, baselines B0/B1/C1/C2, primary contrast C2 vs B1, 7-day embargo; exact split timestamps pending coverage audit). Next: coverage audit + minimum viable dataset for BTCUSDT — download 2024-01 funding (monthly) and 2024-01-01 daily 1h mark/index/premium/OHLCV archives, verify checksums, normalize UTC, validate schema, record gaps, produce run manifest. Acceptance check: `test -s research_state/run_manifest.json` and a fixture-based test passes offline.
+- Added RESEARCH_PROMPT.md, the primary research protocol/agent instruction. Prompt upgraded with sections 13–20 (frozen hypotheses/lineage, FCLR-001 starter design, chronological splits/embargo, multiplicity/inference, negative-result preservation).
+- Protocol frozen in `research_state/research_protocol.md` (FCLR-001 v1.0). Split timestamps pending coverage audit; no outcomes computed.
+- Controller progress accounting script present at `scripts/controller_progress.py` with tests passing (`tests/test_controller_progress_accounting.py` - 6/6 passed).
+- Coverage audit completed for BTCUSDT minimum viable dataset:
+  - Downloaded/cached archives verified (checksums match binance_source_probe.md): `fundingRate-2024-01.zip` (sha256 3e0d3087...), `klines-1h-2024-01-01.zip` (sha256 09a24635...), mark/index/premium zips present.
+  - Extracted and schema-validated: funding 93 rows (2024-01), klines/mark/index/premium 24 rows each (2024-01-01).
+  - Normalized to UTC, gaps recorded (none observed in audited range). Direct liquidation labels: NOT VERIFIED (no archives found; API restricted).
+- Created `research_state/run_manifest.json` with full provenance (git SHA, data hashes, sample counts, software versions, status AUDIT_COMPLETE_PENDING_SPLITS). `test -s research_state/run_manifest.json` passes.
 
 ## Research gates
 
@@ -48,6 +32,17 @@ FCLR-001 protocol frozen in `research_state/research_protocol.md` (methodology, 
 - Risk-overlay phase: INELIGIBLE.
 
 Keep these states accurate. Engineering scaffolding is not performance evidence.
+
+## Unresolved blockers
+
+- Split boundaries not yet frozen (need to extend coverage audit beyond 2024-01-01 to determine valid 60/20/20 splits with 7-day embargo). Current cached data only covers 2024-01-01 daily klines + 2024-01 monthly funding (insufficient for full splits).
+
+## Highest-value next task
+
+**Extend coverage audit and freeze split boundaries for FCLR-001.**
+- Download/ingest additional daily/hourly archives to build sufficient history for chronological 60/20/20 split with 7-calendar-day embargo (at minimum extend beyond Jan 1 2024). Verify checksums against binance_source_probe or discover patterns, normalize UTC, validate schemas, record gaps.
+- Freeze exact split timestamps in `research_state/research_protocol.md` section 6 and update `research_state/run_manifest.json` with `split_boundaries` populated (train/val/holdout UTC timestamps, embargo applied).
+- Acceptance check: protocol section 6 has non-pending split timestamps; `run_manifest.json` contains frozen `split_boundaries` with train_start/end, val_start/end, test_start/end and embargo_days=7; coverage audit documents sufficient sample counts for minimum claim-worthy test (>=5 instruments in paired OOS panel, >=3 non-overlapping 30-day blocks). No target outcomes computed.
 
 ## Durable handoff requirement
 

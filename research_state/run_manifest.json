@@ -1,0 +1,120 @@
+{
+  "run_id": "FCLR-001-audit-20261025T201905Z",
+  "experiment_id": "FCLR-001",
+  "git_sha": "68d088a277b88a9b7ae7f748c922bd28db60a4a1",
+  "utc_start": "2026-10-25T20:19:05.191814Z",
+  "configuration": {
+    "protocol_version": "FCLR-001 v1.0",
+    "primary_target": "next-24h realized variance of mark-price returns",
+    "baselines": [
+      "B0",
+      "B1"
+    ],
+    "models": [
+      "C1",
+      "C2"
+    ],
+    "primary_contrast": "C2 vs B1",
+    "embargo_days": 7
+  },
+  "data_sources": [
+    {
+      "path": "fundingRate-2024-01.zip",
+      "type": "funding_rate_monthly",
+      "source_url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-01.zip",
+      "sha256": "3e0d30870672aa8f0f937881056e3cfd55913ae5c780cd50b33f2763aa0ba58e",
+      "size_bytes": 696
+    },
+    {
+      "path": "fundingRate-2024-01/BTCUSDT-fundingRate-2024-01.csv",
+      "type": "funding_rate",
+      "source_url": "extracted",
+      "sha256": "232a13d92487efef8ce0d645301abe611f56eacb70023194b97c038d7a8a2c9b",
+      "size_bytes": 2562
+    },
+    {
+      "path": "klines-1h-2024-01-01.zip",
+      "type": "klines_ohlcv_daily",
+      "source_url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2024-01-01.zip",
+      "sha256": "09a24635f090c9b2ab17f4a61aa3c4d262a7ccc88e96ff0199ce66a54a8ab66b",
+      "size_bytes": 1561
+    },
+    {
+      "path": "klines-1h-2024-01-01/BTCUSDT-1h-2024-01-01.csv",
+      "type": "klines_ohlcv",
+      "source_url": "extracted",
+      "sha256": "6145ea5b00efbcdf973cde846bf6bd85eae60ade96eaef67c621a6eeeb3371d2",
+      "size_bytes": 3050
+    },
+    {
+      "path": "markPriceKlines-1h-2024-01-01.zip",
+      "type": "mark_price_klines_daily",
+      "source_url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/BTCUSDT/1h/BTCUSDT-1h-2024-01-01.zip",
+      "sha256": "24b7777813d88ed601cf53a4a01baf7cdcb88759a2402e151cc5c52ef2b9f0a8",
+      "size_bytes": 1006
+    },
+    {
+      "path": "markPriceKlines-1h-2024-01-01/BTCUSDT-1h-2024-01-01.csv",
+      "type": "mark_price_klines",
+      "source_url": "extracted",
+      "sha256": "62c7a3409dabf92b5380fe8c93f7e39cd2f34dc5f998d2f1e580aa45777d23df",
+      "size_bytes": 2514
+    },
+    {
+      "path": "indexPriceKlines-1h-2024-01-01.zip",
+      "type": "index_price_klines_daily",
+      "source_url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/BTCUSDT/1h/BTCUSDT-1h-2024-01-01.zip",
+      "sha256": "8a5f06e66db365dd7446731fa42bfb3871c051c625731e23f0e84218fad1ad7d",
+      "size_bytes": 1052
+    },
+    {
+      "path": "indexPriceKlines-1h-2024-01-01/BTCUSDT-1h-2024-01-01.csv",
+      "type": "index_price_klines",
+      "source_url": "extracted",
+      "sha256": "eff69879f8d18eb4d17af21979d6ecc932b19d5abcce7e13be7631ca37958b7f",
+      "size_bytes": 2586
+    },
+    {
+      "path": "premiumIndexKlines-1h-2024-01-01.zip",
+      "type": "premium_index_klines_daily",
+      "source_url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/BTCUSDT/1h/BTCUSDT-1h-2024-01-01.zip",
+      "sha256": "6555c352ed4e20445d967487e37a393fccda4e992118fade44d22a8cbeb9ba00",
+      "size_bytes": 856
+    },
+    {
+      "path": "premiumIndexKlines-1h-2024-01-01/BTCUSDT-1h-2024-01-01.csv",
+      "type": "premium_index_klines",
+      "source_url": "extracted",
+      "sha256": "9f49f465824b4c0e38dd55ab09689e5dac24a597dcc6b98bfe171c6c0837e5cd",
+      "size_bytes": 2179
+    }
+  ],
+  "sample_counts": {
+    "funding_rates": 93,
+    "ohlcv_klines": 24,
+    "mark_price_klines": 24,
+    "index_price_klines": 24,
+    "premium_index_klines": 24
+  },
+  "software_versions": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "results_status": "AUDIT_COMPLETE_PENDING_SPLITS",
+  "blocker_state": "split_boundaries_pending_coverage_audit",
+  "artifacts": [],
+  "coverage_audit": {
+    "symbol": "BTCUSDT",
+    "venue": "binance_um_perp",
+    "period": "2024-01-01",
+    "funding_period": "2024-01",
+    "gaps_recorded": [],
+    "schema_validated": true,
+    "checksums_verified": true,
+    "normalized_utc": true
+  },
+  "split_boundaries": {
+    "status": "pending_coverage_audit",
+    "rule": "60% train / 20% validation / 20% holdout by unique UTC timestamps; 7-calendar-day embargo between partitions"
+  }
+}
