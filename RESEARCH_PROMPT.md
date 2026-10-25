@@ -272,6 +272,162 @@ At the end of every session, AGENT_HANDOFF.md must say:
 
 Do not claim success from prose alone. Make it possible for the next agent to continue from the persisted repository state without asking the user to repeat instructions.
 
+## 13. Immutable experiment IDs, versioning, and evidence accounting
+
+Treat this as a long-running research program, not one model run. Allocate stable hypothesis IDs such as FCLR-H001 (incremental 24-hour volatility forecasting), FCLR-H002 (funding-extreme correction-time replication), FCLR-H003 (hypothetical boundary-breach forecast), and FCLR-H004 (observed liquidation outcomes, conditional on adequate labels). Allocate experiment IDs such as FCLR-001 for the frozen starter forecast experiment, with deterministic run IDs incorporating the UTC start time, git SHA, and configuration hash.
+
+Maintain the following only when there is meaningful content:
+- research_state/hypothesis_registry.json: each hypothesis, directional claim, estimand, status, prior tests, next falsification test, and links to immutable artifacts.
+- research_state/experiment_frontier.json: ordered unfinished tasks, source/feature coverage, candidate instrument universe, blockers and next actions. Do not claim that the frontier is exhausted until the discovery procedure and pagination have been audited.
+- research_state/run_manifest.json: git SHA, configuration hash, UTC timestamps, exact source vintages and data hashes, cutoff dates, split boundaries, package/runtime versions, expected/observed sample counts, result status, and artifact locations.
+- research_state/result_ledger.jsonl or a documented equivalent: exactly one terminal record for every expected configuration/target/model combination, including NOT_RUN, BLOCKED, INVALID, FAILED, INCONCLUSIVE, and COMPLETE states with reasons.
+- research_state/research_protocol.md: the preregistered design and decision gates, updated only by issuing a new protocol version after the prior version is frozen.
+- research_state/negative_results_report.md and research_state/leakage_audit.md: maintain durable nulls, failed routes, exclusions, and adversarial findings.
+
+Never overwrite a prior experiment, frozen configuration, opened holdout, raw source vintage, or conclusion. If the question, feature, outcome, universe, cost assumption, margin scenario, split, data source, model family or parameter changes after outcomes are inspected, create a new version/ID and explain the estimand change. Do not relabel a previously exploratory result as confirmatory. Every manifest must distinguish planned, started, completed, blocked and independently verified work. A green test suite proves only the contracts actually tested.
+
+## 14. Mandatory frozen starter protocol: FCLR-001
+
+Before computing any target outcome, create research_state/research_protocol.md and preregister the following starter study. First inspect source availability, but do not inspect outcome summaries or choose cutoffs based on forecast results. Freeze exact timestamp cutoffs and source hashes after a coverage-only audit and before target generation. If a material detail below is infeasible, record the precise reason and register a separate pilot/alternative version before computing its outcomes.
+
+### Unit, timing, and universe
+
+- Unit: one eligible linear perpetual contract × one fully closed UTC hourly timestamp.
+- Forecast timestamp t is immediately after all data for the closed hour t are available. Every input must have been available by that instant. Outcomes begin with the next hourly interval; no same-bar or future data may enter a predictor.
+- Build the broadest defensible, expanding universe of linear perpetual contracts discoverable automatically from public listing/instrument metadata and historical archives, including delisted contracts where evidence is available. There is no fixed top-N cutoff. Record first verified listing, last verified eligibility, migrations, symbol reuse, contract type, source coverage, and missing periods. Current survivors alone are not a valid historical universe.
+- Do not make historical market-cap rankings a hard dependency for this mechanism. If credible free point-in-time ranks exist, maintain a separate descending-cap universe arm; never substitute present-day ranks for historical ranks or merge a restricted arm into the primary venue-native universe without a new protocol version.
+- All model comparisons use identical forecast origins and a common eligible sample. Separately report coverage gained or lost by each feature group. Missing features remain missing; do not zero-fill or forward-fill them to make models comparable.
+
+### Primary outcome and forecast target
+
+The single primary outcome is the next-24-hour realized variance of mark-price returns, defined as the sum of squared log returns over the next 24 complete hourly intervals, from t+1 through t+24. Record target units and the exact mark-price field. If trustworthy historic mark-price data cannot support adequate coverage, do not silently substitute last price or index price: register a separate price-source version and label it accordingly.
+
+Secondary target horizons are 6 hours, 72 hours and 168 hours. They are explicitly secondary; include every tested horizon/model/feature comparison in the declared multiplicity family. Do not promote a secondary horizon because it happens to perform better than the primary target.
+
+### Frozen predictor definitions
+
+All features are causal and computed per contract from data ending no later than t:
+- RV1h, RV24h and RV168h: trailing realized variances from hourly mark-price log returns.
+- Signed funding: the latest funding observation whose availability timestamp is no later than t, retaining sign and its source cadence.
+- Funding extremeness: the percentile rank of absolute funding versus that contract's preceding 90 calendar days only. Require at least 30 valid historical funding observations before emitting the percentile; record the actual observation count. Also keep the signed funding value separately.
+- Premium feature: mark price divided by index price minus one, only when the two fields have a valid, contemporaneous alignment under a frozen tolerance.
+- Smoothing/dislocation feature: mark price divided by a 24-hour exponential moving average minus one, with the EMA computed from prior/current fully closed bars only.
+- Do not invent a direct price-delay measurement. Mark/index premium and EMA distance are observable dislocation proxies, not proof that a price was delayed. Any extra predictors require a new registered version or must be declared in the original protocol before any results are inspected.
+
+Feature standardization, scaling, transformations and missing-data eligibility must be fitted or calculated using training information only. Use the same common panel for paired comparisons to prevent coverage differences from masquerading as forecasting skill.
+
+### Frozen baseline and nested model comparisons
+
+Evaluate these fixed model definitions:
+- B0, persistence baseline: forecast the next-24-hour realized variance using the preceding RV24h.
+- B1, volatility baseline: a fixed-form HAR-style model using log RV1h, log RV24h and log RV168h as predictors of log next-24-hour realized variance.
+- C1, funding-augmented model: the same model form and fitting procedure as B1, plus signed funding and the past-only 90-day absolute-funding percentile.
+- C2, combined candidate: the same model form and fitting procedure, plus the C1 features and the mark/index premium and mark/EMA24 distance.
+
+Use a transparent fixed log-linear regression procedure for B1, C1 and C2; transform forecasts back to strictly positive variance with a documented, training-only back-transformation correction. Freeze any regularization, clipping, epsilon, feature scaling, missingness, and fitting rules before outcome calculation. Do not tune model families or penalties against validation/final-holdout outcomes.
+
+Primary contrast: C2 versus B1 on 24-hour out-of-sample QLIKE. C1 versus B1 and C2 versus C1 are registered secondary contrasts. B0 supplies a simple, interpretable baseline; report all baselines, not only the weakest one. Use paired forecast origins and identical eligible rows across the compared models.
+
+### Splits, embargo, and inference
+
+- Determine date boundaries from data availability alone, store them in the preregistration, and hash/freeze the eligible panel before computing results.
+- Use chronological development/training, validation, and final holdout partitions in time order. Use a 60%/20%/20% chronological split as the default when the audited coverage supports it; boundaries are based on unique UTC timestamps, not randomly sampled rows.
+- Apply a 7-calendar-day purge/embargo at all split boundaries because the registered secondary horizon extends to 168 hours. No target interval can overlap training, validation and test folds.
+- Any feature selection or model correction is done on development/validation data. The final holdout is opened once for the frozen protocol and then permanently marked as inspected/development evidence for subsequent research.
+- The minimum claim-worthy test requires at least five instruments represented in the paired out-of-sample panel, at least three non-overlapping 30-day evaluation blocks, and valid uncertainty estimation. If these are not met, report PILOT/INCONCLUSIVE and state the exact data shortfall; do not relax thresholds after seeing outcomes.
+- Primary metric: paired out-of-sample QLIKE difference, defined consistently and reported as both absolute difference and relative reduction. Secondary metrics: MAE/RMSE on the stated target and rank/error diagnostics where appropriate. Event predictions additionally require Brier score, log loss, calibration, and precision-recall analysis.
+- Estimate uncertainty with a reproducible block bootstrap that resamples complete UTC time blocks jointly across instruments (preserving common market shocks and serial dependence), with at least 2,000 deterministic-seed replicates if sample size permits. Report sensitivity to instrument concentration, leave-one-instrument-out results, and regime/time-block stability. If the method is infeasible, disclose why and use a pre-registered dependence-aware alternative; never replace invalid inference with an ordinary IID standard error without qualification.
+- Pre-register a minimum practically meaningful improvement—default at least 2% relative reduction in primary QLIKE—before the holdout is opened. A smaller apparent gain does not pass the forecast gate unless a different justified materiality threshold was frozen in advance.
+- Use a two-sided uncertainty interval for the paired loss difference and require the interval to support improvement, the practical threshold to be met, and the predeclared multiplicity rule to pass. No significance claim based on an in-sample coefficient alone.
+
+The exact timestamp boundaries, cutoff, eligible sample definition, regression/back-transformation details, bootstrap configuration, and source hashes must be recorded in research_state/research_protocol.md before computing holdout outcomes. Changes thereafter require a new protocol/experiment ID.
+
+## 15. Keep outcome families distinct and impose an honest liquidation-label gate
+
+Maintain separate hypothesis and result tracks:
+- Volatility forecasting from observed mark/index/contract prices.
+- Direct observed liquidation-event forecasting.
+- Modeled hypothetical boundary-breach forecasting.
+- Funding-extreme correction-time replication.
+
+Direct liquidation data are admissible only if source documentation and empirical audits support the temporal coverage and meaning of observed records. Check event-reporting limits, truncation, rate caps, venue scope, missing periods and known changes to collection rules. A liquidation stream that reports only a capped sample of events is not a complete event census. Absence from such a feed cannot be labeled “no liquidation.” If completeness cannot be supported, use observed events as a partial positive signal only with an explicit incomplete-label design, or do not use them for a binary absence/presence target.
+
+For hypothetical boundary breaches, register each margin/leverage scenario before examining outcomes. Use historical contract specifications and margin-tier/liquidation rules only when their time applicability is supported. If historical maintenance-margin parameters cannot be verified, label the label as an illustrative adverse-move proxy, not a liquidation boundary. Keep long and short outcomes separate and state funding, fees, price-reference and gap assumptions. Do not claim the proxy reproduces account-specific liquidation engines, cross/portfolio margin, or actual forced liquidations.
+
+The funding-correction paper replication is a separate secondary hypothesis with its own frozen event definition, censoring rules, eligible contracts, volatility split, and uncertainty. Report it as exact replication only if the paper's required methods and data are sufficiently available and independently reconstructed. Its correction-time association cannot substitute for evidence on volatility forecast skill, boundary breaches, or actual liquidations.
+
+## 16. Adaptive feasibility policy: progress without weakening evidence
+
+Maintain two separate tracks:
+- Confirmatory track: preserve each frozen hypothesis, universe, source eligibility gate, sample rule, model comparison, time split, costs/margin assumptions, metric and acceptance threshold.
+- Exploratory/pilot track: if the same gate remains blocked after three materially distinct documented routes spanning at least two independent source families/methods, or if structural impossibility is established by access terms, schema, date coverage or sample counts, create the smallest useful alternative experiment with a new ID. Repeating the same failed endpoint is not a distinct route.
+
+Relax only the least damaging feasibility constraint, one at a time, and only if the estimand remains meaningful. Examples include using a verified narrower historical-instrument cohort, studying the outcome with complete public mark-price data first, using a shorter sample for a low-powered pilot, or testing the frozen anchor before any secondary analysis. Record exactly which claim becomes narrower. Do not select a relaxation based on outcomes.
+
+Hard safeguards never relax: no look-ahead, survivorship substitution, forward fill, synthetic market evidence, silent exclusions, unregistered feature/grid expansion, paid/manual inputs, reuse of an inspected holdout as fresh confirmation, or misleading labels. An alternative analysis never clears the original blocked gate. Do not write another blocker memo and wait if there is a valid, bounded free-data or diagnostic task available; execute that task and preserve the original status.
+
+A blocked instrument, source, target or model cell blocks only the affected cell. Continue other source discovery, usable target tracks, ingestion tests, inference audits, coverage diagnostics and preregistered hypotheses. Continue expanding instrument discovery automatically; do not stop because a first cohort has been exhausted or because the latest performance result is unfavorable.
+
+## 17. Continuous forward testing, multiplicity, and promotion
+
+Treat the complete, declared family as including all tried primary/secondary targets, feature ablations, thresholds, model versions, price-source arms and universe arms. Apply Holm correction or another explicitly justified method to the whole relevant family, not just the winning subset. Report unadjusted and adjusted results and every failed/not-run cell with reasons.
+
+Once the historical holdout has been inspected, it cannot be called untouched evidence again. For ongoing evaluation, preregister the next forward block, source cutoff, exact target maturity time and metrics before its outcomes are calculated. Never evaluate a truncated forward target. Record every sequential confirmatory look. For repeated looks at the same primary hypothesis, use a persistent alpha-spending rule such as alpha_k = 0.05 / (k × (k + 1)), where k is the sequential look number; save k and the allocated alpha in the registry. If a different policy is used, justify and freeze it before the next look.
+
+A promotion decision requires all of the following:
+1. The relevant data and label gates pass.
+2. The frozen out-of-sample comparison beats the declared volatility baseline on the primary target.
+3. The practical materiality floor and multiplicity/uncertainty conditions pass.
+4. Skill is not dominated by one coin, one venue, one brief crisis or one time block.
+5. Calibration and subgroup diagnostics are acceptable for any probability forecast.
+6. Independent recomputation from the stored input hashes and configuration reproduces the headline result within a declared numerical tolerance.
+7. Red-team and leakage audits show no unresolved issue capable of reversing the conclusion.
+
+If any condition fails, retain NOT_SUPPORTED, INCONCLUSIVE, EXPLORATORY_ONLY or DATA_BLOCKED as appropriate. The best model in a losing family is not a proven edge. No number of exploratory variants may rescue an unsuccessful confirmatory primary test.
+
+## 18. Result integrity and deterministic resume
+
+Before any grid or walk-forward run, create a complete manifest of expected model/feature/target/fold combinations. After execution, compare expected and observed keys exactly. Every expected unit must finish in exactly one terminal status; no duplicates, missing keys, silently skipped failures or partial output presented as a completed run.
+
+Store the protocol version, grid hash, source/file hashes, preprocessing fingerprint, model specification, seed, software version, row counts before/after every filter, reason-coded exclusions, forecast count, target count, independent time-block count, per-instrument coverage, and final state in the manifest. Resume idempotently from checkpoints, reconciling by stable key rather than appending duplicate rows. Never rewrite raw inputs to repair a downstream calculation; produce a new cleaned dataset with lineage and preserve the original hash.
+
+Add known-answer and adversarial tests for:
+- future-row perturbation cannot change earlier features or forecasts;
+- target intervals never overlap across splits after purge/embargo;
+- funding publication/settlement times and sign are handled correctly;
+- mark/index alignment respects the pre-registered timestamp tolerance;
+- zero/missing funding and market observations remain missing rather than invented;
+- delisted contracts and symbol migrations retain the correct identity and eligibility date;
+- duplicate, out-of-order and missing pages are detected;
+- censored correction events and incomplete liquidation labels are not treated as completed negatives;
+- an interrupted grid resumes to the exact expected terminal-key set;
+- multiplicity and sequential alpha-spending calculations are deterministic; and
+- independent result recomputation matches the canonical metrics.
+
+Run fixture tests offline as the default deterministic CI path. Use bounded live-source probes separately so a transient external outage does not randomly break ordinary unit tests. Do not use oversized raw archives or large generated ledgers to replace concise, verifiable summaries; keep bulk data/caches out of Git and store only permitted, necessary artifacts.
+
+## 19. Per-session definition of done and research feedback
+
+Each worker session must deliver one substantive, verifiable result: a source-probe with coverage/provenance, a tested adapter, a repaired blocker, a validated dataset/label, a preregistered experiment, a completed test block, an independent recomputation, or an explicit evidence-backed structural blocker plus execution of the next valid independent task.
+
+Before finishing, answer in the handoff:
+- What did the evidence support, contradict, or leave unknown?
+- What is the strongest alternative explanation?
+- Which data/label/inference limitation currently dominates uncertainty?
+- What concrete new test would falsify the current leading hypothesis?
+- What task has the highest expected information gain per unit of free compute?
+- What exact artifact and command/test demonstrate progress?
+
+Read the actual branch head and latest artifacts at every session start. Inspect the full diff and verify frozen prior artifacts remain unchanged. Use stable source/experiment IDs; do not wait for manually assigned IDs. Do not declare the research complete because one worker, run, dataset or test ends. Do not spend repeated sessions on cosmetic status documents while the data, baseline, primary result or unresolved scientific gate remains untouched.
+
+## 20. Final research status contract
+
+Use explicit statuses per hypothesis, data track, and experiment: NOT_STARTED, SOURCE_PROBING, DATA_BLOCKED, DATA_READY, PROTOCOL_FROZEN, EXPLORATORY_ONLY, PILOT_ONLY, RUNNING, COMPLETE, NOT_SUPPORTED, INCONCLUSIVE, CONFIRMATORY_RUNNING, CONFIRMATORY_COMPLETE, FORECAST_GATE_PASSED, and OVERLAY_ELIGIBLE.
+
+Never promote status on the basis of an HTTP 200, successful download, green CI, model convergence, a large raw point estimate, or completion of a scheduled activation. The status must be supported by the relevant manifest, tests, artifacts and review.
+
+The initial goal is a reproducible, honest forecast test—not a positive result. If it discovers no edge, preserve the null. If data block only the direct-liquidation subproblem, continue the valid volatility track. If data quality blocks the primary test, complete the best separately registered pilot and keep confirmatory status blocked. Always leave a precise next task that the next worker can execute without user intervention.
+
 ## References to start from
 
 - Shek, “Limits to Coordination: Funding Drag in Crypto Perpetual Funding Rates,” SSRN (posted 29 September 2026): https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458
