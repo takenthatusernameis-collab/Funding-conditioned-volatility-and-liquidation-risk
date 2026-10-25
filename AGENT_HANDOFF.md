@@ -19,16 +19,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Direct liquidation labels: NOT VERIFIED.
 - Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py + tests/test_forecast_pipeline.py, 7/7 passed).
-- Funding-correction survival replication: NOT IMPLEMENTED.
+- Funding-correction survival replication: IMPLEMENTED (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed). Replication is PARTIAL - based on pre-specified event definition using rolling percentile thresholds on available funding data; full paper methodology not independently reconstructible from public sources alone. Found 445 funding-extreme events across 5 symbols (Jan-Mar 2024); median correction time 8.0h, mean 12.6h among corrected events.
 - Out-of-sample result: NOT RUN.
 - Risk-overlay phase: INELIGIBLE.
 
 ## Research gates
 
-- Direct actual liquidation labels: NOT VERIFIED.
+- Direct liquidation labels: NOT VERIFIED.
 - Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py; tests/test_forecast_pipeline.py 7/7 passed).
-- Funding-correction survival replication: NOT IMPLEMENTED.
+- Funding-correction replication: IMPLEMENTED/PARTIAL (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed).
 - Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); split timestamps frozen.
 - Out-of-sample result: NOT RUN.
 - Risk-overlay phase: INELIGIBLE.
@@ -36,16 +36,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 ## Unresolved blockers
 
 - Direct liquidation labels unavailable.
-- Funding-correction survival replication not yet implemented.
+- Out-of-sample forecast evaluation not yet run against frozen splits.
 
 ## Highest-value next task
 
-**Implement funding-correction survival replication.**
-- Reconstruct funding-extreme events and time-to-correction from admissible public data; compare high vs low realized-volatility conditions; report partial if exact methodology unavailable.
-- Acceptance check: unit tests verify event definition and survival timing; script runs on small slice without leakage.
+**Run frozen out-of-sample forecast evaluation (FCLR-001).**
+- Execute forecast pipeline on frozen train/val/test splits with volatility-only baseline and funding/price-feature ablations per frozen protocol.
+- Acceptance check: produce evaluation_summary.md with QLIKE metrics for B0/B1/C1/C2, paired comparisons, block bootstrap uncertainty, and gate assessment; all results must use frozen splits only, no tuning on holdout.
 
 ## Initial task message for next agent
 
-Implement funding-correction survival replication with pre-specified event definition and unit tests; state partial if exact methodology unavailable.
+Run the frozen out-of-sample forecast evaluation per FCLR-001 protocol using frozen splits (train/val/test with 7d embargo). Compute baselines (persistence, HAR-style RV-only) and ablations (funding, funding+price features), report QLIKE with block-bootstrap uncertainty, assess the forecast gate, and update evaluation_summary.md with complete results. Do not tune on holdout or modify splits.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
