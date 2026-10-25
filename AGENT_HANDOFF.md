@@ -18,7 +18,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Controller progress accounting script present; tests 6/6 passed.
 - Direct liquidation labels: NOT VERIFIED.
 - Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
-- Future realized-volatility target: NOT IMPLEMENTED.
+- Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py + tests/test_forecast_pipeline.py, 7/7 passed).
 - Funding-correction survival replication: NOT IMPLEMENTED.
 - Out-of-sample result: NOT RUN.
 - Risk-overlay phase: INELIGIBLE.
@@ -27,7 +27,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 - Direct actual liquidation labels: NOT VERIFIED.
 - Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
-- Future realized-volatility target: NOT IMPLEMENTED.
+- Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py; tests/test_forecast_pipeline.py 7/7 passed).
 - Funding-correction survival replication: NOT IMPLEMENTED.
 - Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); split timestamps frozen.
 - Out-of-sample result: NOT RUN.
@@ -40,14 +40,12 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Highest-value next task
 
-**Implement future realized-volatility target and build the forecast pipeline skeleton.**
-- Implement next-24h realized variance target from mark-price hourly returns per protocol (section 2), with proper alignment (outcome from t+1..t+24), no leakage.
-- Implement frozen predictors (RV1h/RV24h/RV168h, signed funding, funding extremeness 90d past-only, premium, mark/EMA24) with training-only standardization/scaling.
-- Build data loader over frozen splits with 7-day embargo enforcement and common panel.
-- Acceptance check: unit tests for target construction and leakage checks pass; pipeline can load frozen splits and produce features/targets on a small slice without computing final OOS results. No promotion to risk-overlay phase.
+**Implement synthetic hypothetical mark-price boundary labels.**
+- Generate synthetic liquidation-stress labels from mark-price paths crossing pre-specified boundaries; no claim of direct liquidation labels.
+- Acceptance check: unit tests verify boundary crossing logic and no leakage; loader can attach labels to frozen splits on small slice.
 
 ## Initial task message for next agent
 
-Implement future realized-volatility target and build the forecast pipeline skeleton. Compute next-24h realized variance of mark-price returns (sum of squared log returns over t+1..t+24) using markPriceKlines close, with strict causal alignment. Implement frozen predictors (RV1h/RV24h/RV168h, signed funding, 90d past-only absolute funding percentile, premium mark/index, mark/EMA24), training-only standardization, missing-data handling per protocol. Enforce frozen splits and 7-day embargo. Add leakage/unit tests. Acceptance: tests pass; loader works on frozen splits with no target outcomes promoted.
+Implement synthetic hypothetical mark-price boundary labels with causal alignment and unit tests; no direct liquidation claims.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
