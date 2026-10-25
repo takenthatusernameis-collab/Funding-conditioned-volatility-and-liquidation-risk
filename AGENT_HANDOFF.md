@@ -17,7 +17,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Protocol still frozen; splits now frozen.
 - Controller progress accounting script present; tests 6/6 passed.
 - Direct liquidation labels: NOT VERIFIED.
-- Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
+- Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py + tests/test_forecast_pipeline.py, 7/7 passed).
 - Funding-correction survival replication: NOT IMPLEMENTED.
 - Out-of-sample result: NOT RUN.
@@ -26,7 +26,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 ## Research gates
 
 - Direct actual liquidation labels: NOT VERIFIED.
-- Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
+- Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py; tests/test_forecast_pipeline.py 7/7 passed).
 - Funding-correction survival replication: NOT IMPLEMENTED.
 - Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); split timestamps frozen.
@@ -35,17 +35,17 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Unresolved blockers
 
-- Only coverage/splits frozen; targets/features/pipeline not yet implemented.
 - Direct liquidation labels unavailable.
+- Funding-correction survival replication not yet implemented.
 
 ## Highest-value next task
 
-**Implement synthetic hypothetical mark-price boundary labels.**
-- Generate synthetic liquidation-stress labels from mark-price paths crossing pre-specified boundaries; no claim of direct liquidation labels.
-- Acceptance check: unit tests verify boundary crossing logic and no leakage; loader can attach labels to frozen splits on small slice.
+**Implement funding-correction survival replication.**
+- Reconstruct funding-extreme events and time-to-correction from admissible public data; compare high vs low realized-volatility conditions; report partial if exact methodology unavailable.
+- Acceptance check: unit tests verify event definition and survival timing; script runs on small slice without leakage.
 
 ## Initial task message for next agent
 
-Implement synthetic hypothetical mark-price boundary labels with causal alignment and unit tests; no direct liquidation claims.
+Implement funding-correction survival replication with pre-specified event definition and unit tests; state partial if exact methodology unavailable.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
