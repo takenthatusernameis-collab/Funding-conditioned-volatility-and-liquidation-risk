@@ -12,14 +12,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Current verified state
 
-- Added RESEARCH_PROMPT.md, the primary research protocol/agent instruction. Prompt upgraded with sections 13–20 (frozen hypotheses/lineage, FCLR-001 starter design, chronological splits/embargo, multiplicity/inference, negative-result preservation).
-- Protocol frozen in `research_state/research_protocol.md` (FCLR-001 v1.0). Split timestamps pending coverage audit; no outcomes computed.
-- Controller progress accounting script present at `scripts/controller_progress.py` with tests passing (`tests/test_controller_progress_accounting.py` - 6/6 passed).
-- Coverage audit completed for BTCUSDT minimum viable dataset:
-  - Downloaded/cached archives verified (checksums match binance_source_probe.md): `fundingRate-2024-01.zip` (sha256 3e0d3087...), `klines-1h-2024-01-01.zip` (sha256 09a24635...), mark/index/premium zips present.
-  - Extracted and schema-validated: funding 93 rows (2024-01), klines/mark/index/premium 24 rows each (2024-01-01).
-  - Normalized to UTC, gaps recorded (none observed in audited range). Direct liquidation labels: NOT VERIFIED (no archives found; API restricted).
-- Created `research_state/run_manifest.json` with full provenance (git SHA, data hashes, sample counts, software versions, status AUDIT_COMPLETE_PENDING_SPLITS). `test -s research_state/run_manifest.json` passes.
+- Coverage audit extended for BTCUSDT: downloaded/verified 31 daily klines/mark/index/premium archives for 2024-01-01..2024-01-31 (cached under research_state/data_cache/btcusdt_jan2024/). Funding monthly (2024-01) remains sole funding source.
+- Protocol still frozen; split timestamps remain pending (insufficient instruments/coverage for acceptance: need >=5 instruments and >=3 non-overlapping 30-day blocks).
+- Controller progress accounting script present; tests 6/6 passed.
+- Direct liquidation labels: NOT VERIFIED.
+- Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
+- Future realized-volatility target: NOT IMPLEMENTED.
+- Funding-correction survival replication: NOT IMPLEMENTED.
+- Out-of-sample result: NOT RUN.
+- Risk-overlay phase: INELIGIBLE.
 
 ## Research gates
 
@@ -31,18 +32,17 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Out-of-sample result: NOT RUN.
 - Risk-overlay phase: INELIGIBLE.
 
-Keep these states accurate. Engineering scaffolding is not performance evidence.
-
 ## Unresolved blockers
 
-- Split boundaries not yet frozen (need to extend coverage audit beyond 2024-01-01 to determine valid 60/20/20 splits with 7-day embargo). Current cached data only covers 2024-01-01 daily klines + 2024-01 monthly funding (insufficient for full splits).
+- Only BTCUSDT covered; need >=5 instruments (e.g., ETHUSDT) with aligned daily archives across >=3 non-overlapping 30-day blocks to freeze 60/20/20 splits with 7-day embargo.
+- Direct liquidation labels unavailable.
 
 ## Highest-value next task
 
-**Extend coverage audit and freeze split boundaries for FCLR-001.**
-- Download/ingest additional daily/hourly archives to build sufficient history for chronological 60/20/20 split with 7-calendar-day embargo (at minimum extend beyond Jan 1 2024). Verify checksums against binance_source_probe or discover patterns, normalize UTC, validate schemas, record gaps.
-- Freeze exact split timestamps in `research_state/research_protocol.md` section 6 and update `research_state/run_manifest.json` with `split_boundaries` populated (train/val/holdout UTC timestamps, embargo applied).
-- Acceptance check: protocol section 6 has non-pending split timestamps; `run_manifest.json` contains frozen `split_boundaries` with train_start/end, val_start/end, test_start/end and embargo_days=7; coverage audit documents sufficient sample counts for minimum claim-worthy test (>=5 instruments in paired OOS panel, >=3 non-overlapping 30-day blocks). No target outcomes computed.
+**Extend coverage audit to >=5 instruments and freeze split boundaries.**
+- Download/ingest daily archives for ETHUSDT (and additional UM perpetuals) for 2024-01..2024-03 (or equivalent), verify checksums, normalize UTC, validate schemas, record gaps.
+- Freeze exact split timestamps in research_state/research_protocol.md section 6 and update run_manifest.json with split_boundaries (train/val/test UTC, embargo_days=7).
+- Acceptance check: protocol section 6 non-pending; run_manifest.json contains frozen split_boundaries; coverage audit documents >=5 instruments paired OOS panel and >=3 non-overlapping 30-day blocks. No target outcomes computed.
 
 ## Durable handoff requirement
 
