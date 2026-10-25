@@ -12,9 +12,9 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Current verified state
 
-- Coverage audit extended for BTCUSDT: downloaded/verified 31 daily klines/mark/index/premium archives for 2024-01-01..2024-01-31 (cached under research_state/data_cache/btcusdt_jan2024/). Funding monthly (2024-01) remains sole funding source.
-- ETHUSDT archive availability verified (funding monthly 2024-01 HTTP 200; klines daily 2024-01-01 HTTP 200); full download/ingest not yet executed.
-- Protocol still frozen; split timestamps remain pending (insufficient instruments/coverage for acceptance: need >=5 instruments and >=3 non-overlapping 30-day blocks).
+- Coverage audit extended to >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) with paired daily archives across 2024-01-01..2024-03-31 (2136 common hourly timestamps). All checksums verified, schemas validated, normalized to UTC; gaps recorded in coverage_audit_multi.
+- Split boundaries frozen in research_state/research_protocol.md section 6 and research_state/run_manifest.json (train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z, embargo 7d).
+- Protocol still frozen; splits now frozen.
 - Controller progress accounting script present; tests 6/6 passed.
 - Direct liquidation labels: NOT VERIFIED.
 - Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
@@ -29,24 +29,25 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Synthetic hypothetical mark-price boundary labels: NOT IMPLEMENTED.
 - Future realized-volatility target: NOT IMPLEMENTED.
 - Funding-correction survival replication: NOT IMPLEMENTED.
-- Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); exact split timestamps pending coverage audit.
+- Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); split timestamps frozen.
 - Out-of-sample result: NOT RUN.
 - Risk-overlay phase: INELIGIBLE.
 
 ## Unresolved blockers
 
-- Only BTCUSDT covered; need >=5 instruments (e.g., ETHUSDT) with aligned daily archives across >=3 non-overlapping 30-day blocks to freeze 60/20/20 splits with 7-day embargo.
+- Only coverage/splits frozen; targets/features/pipeline not yet implemented.
 - Direct liquidation labels unavailable.
 
 ## Highest-value next task
 
-**Extend coverage audit to >=5 instruments and freeze split boundaries.**
-- Download/ingest daily archives for ETHUSDT (and additional UM perpetuals) for 2024-01..2024-03 (or equivalent), verify checksums, normalize UTC, validate schemas, record gaps.
-- Freeze exact split timestamps in research_state/research_protocol.md section 6 and update run_manifest.json with split_boundaries (train/val/test UTC, embargo_days=7).
-- Acceptance check: protocol section 6 non-pending; run_manifest.json contains frozen split_boundaries; coverage audit documents >=5 instruments paired OOS panel and >=3 non-overlapping 30-day blocks. No target outcomes computed.
+**Implement future realized-volatility target and build the forecast pipeline skeleton.**
+- Implement next-24h realized variance target from mark-price hourly returns per protocol (section 2), with proper alignment (outcome from t+1..t+24), no leakage.
+- Implement frozen predictors (RV1h/RV24h/RV168h, signed funding, funding extremeness 90d past-only, premium, mark/EMA24) with training-only standardization/scaling.
+- Build data loader over frozen splits with 7-day embargo enforcement and common panel.
+- Acceptance check: unit tests for target construction and leakage checks pass; pipeline can load frozen splits and produce features/targets on a small slice without computing final OOS results. No promotion to risk-overlay phase.
 
 ## Initial task message for next agent
 
-Extend coverage audit to >=5 instruments and freeze split boundaries. Download/ingest daily archives for ETHUSDT (and additional UM perpetuals) for 2024-01..2024-03, verify checksums, normalize UTC, validate schemas, record gaps. Freeze exact split timestamps in research_state/research_protocol.md section 6 and update run_manifest.json with split_boundaries (train/val/test UTC, embargo_days=7). Acceptance: protocol section 6 non-pending; run_manifest.json contains frozen split_boundaries; coverage audit documents >=5 instruments paired OOS panel and >=3 non-overlapping 30-day blocks. No target outcomes computed.
+Implement future realized-volatility target and build the forecast pipeline skeleton. Compute next-24h realized variance of mark-price returns (sum of squared log returns over t+1..t+24) using markPriceKlines close, with strict causal alignment. Implement frozen predictors (RV1h/RV24h/RV168h, signed funding, 90d past-only absolute funding percentile, premium mark/index, mark/EMA24), training-only standardization, missing-data handling per protocol. Enforce frozen splits and 7-day embargo. Add leakage/unit tests. Acceptance: tests pass; loader works on frozen splits with no target outcomes promoted.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.

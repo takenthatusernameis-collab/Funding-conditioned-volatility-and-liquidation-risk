@@ -52,13 +52,18 @@ Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-vo
 - Minimum practically meaningful improvement: default >=2% relative reduction in primary QLIKE, frozen before holdout opened.
 - Two-sided uncertainty interval for paired loss difference; require interval to support improvement, practical threshold met, predeclared multiplicity rule passes. No significance claim from in-sample coefficient alone.
 
-## 6. Split boundaries (frozen pending coverage audit)
+## 6. Split boundaries (frozen)
 
-Exact UTC split timestamps are NOT yet frozen. They will be set from the coverage-only audit of the ingested panel and recorded here before target generation. No outcomes have been computed.
+Exact UTC split timestamps are frozen (coverage-only audit). No outcomes have been computed.
 
-- Provisional earliest data: 2024-01-01 (from binance_source_probe.md; funding monthly archive 2024-01; klines daily 2024-01-01). Coverage audit must extend this.
+- Provisional earliest data: 2024-01-01 (from binance_source_probe.md; funding monthly archive 2024-01; klines daily 2024-01-01). Coverage extended to >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) across 2024-01-01..2024-03-31 with paired OOS panel.
 - Rule: boundaries on unique UTC timestamps; 60% train / 20% validation / 20% holdout by timestamp count; 7-calendar-day embargo between each partition.
-- Status: PENDING COVERAGE AUDIT. Do not compute targets until boundaries are frozen and panel hashed.
+- Common paired panel timestamps: 2136
+- Train: 2024-01-02T00:00:00Z to 2024-02-24T08:00:00Z (count=1281)
+- Validation: 2024-03-02T08:00:00Z to 2024-03-20T02:00:00Z (count=427) [7d embargo after train]
+- Test/Holdout: 2024-03-27T02:00:00Z to 2024-03-30T23:00:00Z (count=94) [7d embargo after validation]
+- Status: FROZEN. No outcomes computed.
+
 
 ## 7. Multiplicity and promotion
 
