@@ -36,8 +36,7 @@ This is a prompt/protocol upgrade only. It has not executed ingestion, tests, mo
 
 ## Next task — do this first
 
-Controller progress accounting implemented and verified: `scripts/controller_progress.py` plus `tests/test_controller_progress_accounting.py` (6 passed). Remaining high-priority item: a small, bounded unauthenticated source probe of the official Binance archive for the first feasible pipeline: one or two liquid perpetual symbols with historical funding, mark-price, index/premium, and OHLCV data. Record exact URLs, dates, schema, checksums, units, gaps, and license/source terms. Separately probe whether historical forced-liquidation records are actually downloadable without credentials. Use small requests first. Save findings to `research_state/binance_source_probe.md`. Acceptance check: `test -s research_state/binance_source_probe.md` and file contains exact URLs, date ranges, schema, and a forced-liquidation availability verdict.
-
+Binance source probe completed and saved to `research_state/binance_source_probe.md` (exact URLs, date ranges, schema, checksums, forced-liquidation verdict: not directly downloadable). Next: freeze FCLR-001 research protocol in `research_state/research_protocol.md` with symbol universe, hourly panel, 24h forward realized-variance target, chronological 60/20/20 splits, 7-day purge/embargo, baselines C0/C1/C2, primary contrast, QLIKE and fixed inference, minimum evidence requirements. Acceptance check: `test -s research_state/research_protocol.md` and file contains frozen split dates, target definition, baselines, and primary contrast.
 ## Research gates
 
 - Direct actual liquidation labels: NOT VERIFIED.
