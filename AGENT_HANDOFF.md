@@ -36,19 +36,7 @@ This is a prompt/protocol upgrade only. It has not executed ingestion, tests, mo
 
 ## Next task — do this first
 
-1. Reinspect git status, current HEAD, recent commits, full current tree, RESEARCH_PROMPT.md, AGENT_HANDOFF.md, and .github/workflows/main.yml.
-2. Audit every workflow reference to scripts, tests, controller progress, handoff, and persistence. Verify which missing paths are actually required on the scheduled path and which are only used on push/diagnostics paths.
-3. If scripts/controller_progress.py is genuinely missing and needed for correct meaningful-progress accounting, implement the smallest correct ordinary script based on every caller and expected output/exit semantics. Add focused tests covering:
-   - clean/no-change session is not credited as progress;
-   - a meaningful project change is credited only for the intended base/head range;
-   - workflow-only changes are never counted as project progress;
-   - invalid/missing SHAs fail closed;
-   - the verified remote SHA must match the head before durable progress is credited;
-   - no status-only or marker-only commit can masquerade as research progress.
-   Inspect whether the referenced tests are also missing; add coherent tests for real controller behavior rather than empty test stubs.
-4. Run the focused tests and static checks, capture exact outcomes, and update the relevant research-state notes. Do not change .github/workflows.
-5. Then make a small, bounded unauthenticated source probe of the official Binance archive for the first feasible pipeline: one or two liquid perpetual symbols with historical funding, mark-price, index/premium, and OHLCV data. Record exact URLs, dates, schema, checksums, units, gaps, and license/source terms. Separately probe whether historical forced-liquidation records are actually downloadable without credentials. Use small requests first.
-6. Pick the next action based on observed evidence and update this file with the command/test that verifies the next step.
+Controller progress accounting implemented and verified: `scripts/controller_progress.py` plus `tests/test_controller_progress_accounting.py` (6 passed). Remaining high-priority item: a small, bounded unauthenticated source probe of the official Binance archive for the first feasible pipeline: one or two liquid perpetual symbols with historical funding, mark-price, index/premium, and OHLCV data. Record exact URLs, dates, schema, checksums, units, gaps, and license/source terms. Separately probe whether historical forced-liquidation records are actually downloadable without credentials. Use small requests first. Save findings to `research_state/binance_source_probe.md`. Acceptance check: `test -s research_state/binance_source_probe.md` and file contains exact URLs, date ranges, schema, and a forced-liquidation availability verdict.
 
 ## Research gates
 
