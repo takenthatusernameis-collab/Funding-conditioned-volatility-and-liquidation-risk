@@ -324,7 +324,7 @@ Evaluate these fixed model definitions:
 - C1, funding-augmented model: the same model form and fitting procedure as B1, plus signed funding and the past-only 90-day absolute-funding percentile.
 - C2, combined candidate: the same model form and fitting procedure, plus the C1 features and the mark/index premium and mark/EMA24 distance.
 
-Use a transparent fixed log-linear regression procedure for B1, C1 and C2; transform forecasts back to strictly positive variance with a documented, training-only back-transformation correction. Freeze any regularization, clipping, epsilon, feature scaling, missingness, and fitting rules before outcome calculation. Do not tune model families or penalties against validation/final-holdout outcomes.
+Use ordinary least squares (OLS) for the fixed log-linear regression in B1, C1 and C2. Model log(RV + 1e-12), with epsilon fixed in advance in squared-log-return units; standardize predictor columns using training-only means and standard deviations, and specify handling for zero-variance columns before outcomes are inspected. Use a documented training-only smearing correction to transform forecasts back to strictly positive variance. Do not use regularization, model-family searches, or hyperparameter tuning in FCLR-001. Freeze missingness rules and fitting procedures before outcome calculation.
 
 Primary contrast: C2 versus B1 on 24-hour out-of-sample QLIKE. C1 versus B1 and C2 versus C1 are registered secondary contrasts. B0 supplies a simple, interpretable baseline; report all baselines, not only the weakest one. Use paired forecast origins and identical eligible rows across the compared models.
 
