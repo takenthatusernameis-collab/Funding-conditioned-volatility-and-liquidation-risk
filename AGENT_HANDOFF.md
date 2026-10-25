@@ -13,6 +13,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 ## Current verified state
 
 - Coverage audit extended for BTCUSDT: downloaded/verified 31 daily klines/mark/index/premium archives for 2024-01-01..2024-01-31 (cached under research_state/data_cache/btcusdt_jan2024/). Funding monthly (2024-01) remains sole funding source.
+- ETHUSDT archive availability verified (funding monthly 2024-01 HTTP 200; klines daily 2024-01-01 HTTP 200); full download/ingest not yet executed.
 - Protocol still frozen; split timestamps remain pending (insufficient instruments/coverage for acceptance: need >=5 instruments and >=3 non-overlapping 30-day blocks).
 - Controller progress accounting script present; tests 6/6 passed.
 - Direct liquidation labels: NOT VERIFIED.
@@ -44,6 +45,8 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Freeze exact split timestamps in research_state/research_protocol.md section 6 and update run_manifest.json with split_boundaries (train/val/test UTC, embargo_days=7).
 - Acceptance check: protocol section 6 non-pending; run_manifest.json contains frozen split_boundaries; coverage audit documents >=5 instruments paired OOS panel and >=3 non-overlapping 30-day blocks. No target outcomes computed.
 
-## Durable handoff requirement
+## Initial task message for next agent
+
+Extend coverage audit to >=5 instruments and freeze split boundaries. Download/ingest daily archives for ETHUSDT (and additional UM perpetuals) for 2024-01..2024-03, verify checksums, normalize UTC, validate schemas, record gaps. Freeze exact split timestamps in research_state/research_protocol.md section 6 and update run_manifest.json with split_boundaries (train/val/test UTC, embargo_days=7). Acceptance: protocol section 6 non-pending; run_manifest.json contains frozen split_boundaries; coverage audit documents >=5 instruments paired OOS panel and >=3 non-overlapping 30-day blocks. No target outcomes computed.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
