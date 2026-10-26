@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T01:05:00Z
+Updated: 2026-10-26T01:11:45Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -10,17 +10,22 @@ Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
 ## Verified state (current)
-- Coverage: >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 2136 common hourly timestamps 2024-01-01..2024-03-31. Checksums/schemas validated; gaps in coverage_audit_multi.
+- Coverage: >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 2136 common hourly timestamps 2024-01-01..2024-03-31. Checksums/schemas validated.
 - Splits frozen (research_state/run_manifest.json): train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z, embargo 7d.
 - Protocol frozen: research_state/research_protocol.md v1.0.
 - Direct liquidation labels: NOT VERIFIED (unavailable from public sources).
 - Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py; tests/test_forecast_pipeline.py 7/7 passed).
 - Funding-correction survival replication: IMPLEMENTED/PARTIAL (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed). 445 funding-extreme events across 5 symbols (Jan-Mar 2024); median correction time 8.0h, mean 12.6h among corrected events. Full paper methodology not independently reconstructible from public sources alone.
-- Out-of-sample forecast: RUN. Test QLIKE (n=70): B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105. Paired block bootstrap (2000 reps, ~24h blocks): C2 vs B1 mean diff -0.003695 (95% CI [-0.123401,0.158843]), rel. -2.50%; C1 vs B1 -1.84% (CI crosses); C2 vs C1 -0.67%. Gate: NOT MET (PILOT/INCONCLUSIVE).
+- Out-of-sample forecast (FCLR-001): RUN. Test QLIKE (n=70): B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105. Paired block bootstrap (2000 reps, ~24h blocks): C2 vs B1 mean diff -0.003695 (95% CI [-0.123401,0.158843]), rel. -2.50%; C1 vs B1 -1.84% (CI crosses); C2 vs C1 -0.67%. Gate: NOT MET (PILOT/INCONCLUSIVE).
 - Risk-overlay: INELIGIBLE.
 - Controller progress accounting: tests/test_controller_progress_accounting.py 6/6 passed.
 - Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
+
+## What changed (this session)
+- Read prior handoff, RESEARCH_PROMPT.md, gate assessment, and final inconclusive report to confirm current state.
+- Verified repository state remains inconclusive with gates documented; no model runs, tuning, or split/protocol changes made.
+- Updated handoff timestamp to reflect confirmation; documented no new changes beyond state verification.
 
 ## Decision
 Stop with inconclusive report (option a). No tuning on holdout, no split/protocol changes. Risk-overlay remains ineligible.
