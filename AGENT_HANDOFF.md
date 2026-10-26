@@ -36,16 +36,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 ## Unresolved blockers
 
 - Direct liquidation labels unavailable.
-- Forecast gate not passed (C2 vs B1 +2.50% relative QLIKE reduction but 95% CI [-0.123, 0.159] crosses zero; does not meet practical threshold with supporting uncertainty).
+- Forecast gate not passed: C2 vs B1 +2.50% relative QLIKE reduction but 95% CI [-0.123, 0.159] crosses zero; test window only ~4 days (single block) vs required >=3 non-overlapping 30-day blocks. Result is PILOT/INCONCLUSIVE per protocol. See research_state/gate_assessment.md.
 
 ## Highest-value next task
 
-**Investigate and document forecast gate outcome / consider pre-registered alternatives or additional robustness.**
-- Review evaluation_summary.md and assess if gate criteria are satisfied per protocol (>=2% relative reduction with interval supporting improvement). If not met, document clearly and do not proceed to risk-overlay phase. Consider pre-registered sensitivity (leave-one-instrument-out, block structure) or report pilot/inconclusive if thresholds unmet.
-- Acceptance check: update handoff with gate conclusion and concrete next action; if gate fails, explicitly state risk-overlay remains ineligible and propose any pre-registered follow-up or stop condition.
+**Decide stop vs pre-registered follow-up for inconclusive forecast gate (no risk-overlay).**
+- Gate is PILOT/INCONCLUSIVE: relative reduction 2.50% meets floor numerically but CI crosses zero and test window is a single ~4-day block (protocol requires >=3 non-overlapping 30-day blocks). Risk-overlay remains INELIGIBLE.
+- Acceptance check: either (a) close as inconclusive with final report, or (b) pre-register a new protocol version extending the OOS window to >=3 blocks before any model change; update handoff with the chosen action and evidence; do not tune on holdout or modify splits.
 
 ## Initial task message for next agent
 
-The frozen out-of-sample evaluation has been run and written to research_state/evaluation_summary.md. Primary contrast C2 vs B1 shows +2.50% relative QLIKE reduction on test but 95% block-bootstrap CI crosses zero (-0.123 to 0.159), so the forecast gate is not met. Direct liquidation labels remain unavailable. Risk-overlay phase remains ineligible. Review the evaluation details and protocol requirements, document the gate outcome clearly, and propose the next pre-registered action (or conclude inconclusive per protocol) without modifying splits or tuning on holdout.
+Forecast gate assessed and documented in research_state/gate_assessment.md: PILOT/INCONCLUSIVE. C2 vs B1 relative QLIKE reduction 2.50% meets the 2% floor numerically, but the 95% block-bootstrap CI [-0.123401, 0.158843] crosses zero and the test window (2024-03-27..2024-03-30, ~4 days) is a single block versus the protocol requirement of >=3 non-overlapping 30-day blocks. Direct liquidation labels remain unavailable. Risk-overlay phase remains INELIGIBLE. Decide between stopping with an inconclusive report or pre-registering a new protocol version that extends the OOS window to >=3 blocks; do not tune on holdout or modify frozen splits. Update the handoff with the chosen action and evidence.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
