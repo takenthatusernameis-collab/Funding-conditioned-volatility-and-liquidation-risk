@@ -44,11 +44,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Highest-value next task
 
-**Produce final inconclusive report per protocol.**
-- Acceptance check: Create/update a final report summarizing gates, evidence (evaluation_summary.md, gate_assessment.md), blockers, and conclusion (inconclusive; no risk-overlay). State explicitly that forecast improvement did not meet uncertainty/block requirements. Do not modify frozen splits/protocol or tune models. Update handoff to reflect completion state.
+**No further model work.** Final inconclusive report produced at research_state/final_inconclusive_report.md. Risk-overlay remains INELIGIBLE. Optional next step only with a new pre-registered protocol and sufficient data (>=3 non-overlapping 30-day blocks, >=5 instruments).
 
 ## Initial task message for next agent
 
-Forecast gate has been decided as STOP (inconclusive). Evidence: research_state/gate_assessment.md concludes NOT MET (2.50% relative reduction but 95% CI crosses zero, single ~4-day block vs >=3x30-day blocks required). Direct liquidation labels unavailable; risk-overlay remains INELIGIBLE. No tuning on holdout, no split/protocol changes. Produce a final inconclusive report per protocol capturing gates, tests executed, evidence, blockers, and conclusion. Update handoff if needed; no further model changes or OOS extension attempted without new pre-registered protocol and sufficient data.
+Final inconclusive report written to research_state/final_inconclusive_report.md capturing gates, tests, evidence, blockers, and conclusion (inconclusive; no risk-overlay). Forecast gate NOT MET (2.50% relative reduction but 95% CI crosses zero, single ~4-day block vs >=3x30-day blocks required). Direct liquidation labels unavailable. No tuning on holdout, no split/protocol changes. No further model changes or OOS extension without new pre-registered protocol and sufficient data.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
