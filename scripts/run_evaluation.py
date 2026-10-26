@@ -8,10 +8,21 @@ import random
 from datetime import datetime, timezone
 from pathlib import Path
 
+import os
+
 REPO = Path(__file__).resolve().parents[1]
 RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
 PROTOCOL = REPO / "research_state" / "research_protocol.md"
-OUT = REPO / "research_state" / "evaluation_summary.md"
+
+# Experiment selection via env var: "FCLR-001" (default, frozen window ending
+# 2024-03-31) or "FCLR-002" (extended window ending 2024-06-30, protocol v2.0).
+EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-001")
+if EXPERIMENT == "FCLR-002":
+    OUT = REPO / "research_state" / "evaluation_summary_FCLR002.md"
+    DATA_END = "2024-06-30"
+else:
+    OUT = REPO / "research_state" / "evaluation_summary.md"
+    DATA_END = "2024-03-31"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 EPS = 1e-12
@@ -115,9 +126,27 @@ def load_mark_series(sym, start_dt, end_dt):
         dedup.append((ts_ms, close))
     return dedup
 
-def load_funding_series_all(sym):
+def funding_months(end_ym: str) -> list[str]:
+    """All YYYY-MM months from 2024-01 through end_ym inclusive.
+
+    end_ym may be a YYYY-MM or a YYYY-MM-DD string.
+    """
+    y, m = end_ym[:7].split("-")
+    out = []
+    cur_y, cur_m = 2024, 1
+    while (cur_y, cur_m) < (int(y), int(m)):
+        out.append(f"{cur_y}-{cur_m:02d}")
+        cur_m += 1
+        if cur_m > 12:
+            cur_m = 1
+            cur_y += 1
+    out.append(f"{cur_y}-{cur_m:02d}")
+    return out
+
+
+def load_funding_series_all(sym, months: list[str]):
     rows = []
-    for month in ['2024-01', '2024-02', '2024-03']:
+    for month in months:
         csvp = find_funding_csv(sym, month)
         if not csvp or not csvp.exists():
             continue
@@ -174,13 +203,14 @@ def build_panel():
 
     # load all mark series for all symbols (wide range)
     start_all = parse_iso("2024-01-01T00:00:00Z")
-    end_all = parse_iso("2024-03-31T23:00:00Z")
+    end_all = parse_iso(f"{DATA_END}T23:00:00Z")
+    months = funding_months(DATA_END)
 
     data = {}
     for sym in SYMBOLS:
         data[sym] = {
             'mark': load_mark_series(sym, start_all, end_all),
-            'funding': load_funding_series_all(sym)
+            'funding': load_funding_series_all(sym, months)
         }
     return train, val, test, data
 
@@ -647,8 +677,10 @@ def main():
 
     # write summary
     lines = []
-    lines.append('# Evaluation Summary (FCLR-001)')
+    lines.append(f'# Evaluation Summary ({EXPERIMENT})')
     lines.append('')
+    lines.append(f'Experiment: {EXPERIMENT}')
+    lines.append(f'Data range: 2024-01-01 .. {DATA_END}')
     lines.append(f'Generated: {datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}')
     lines.append('')
     lines.append('## Splits (frozen)')
