@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T03:15:30Z
+Updated: 2026-10-26T03:15:52Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -113,6 +113,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 ## Unresolved blockers
 - Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C labels implemented but are modeled proxies, not observed liquidations). binance_source_probe.md: no liquidationSnapshot archive found under data/futures/um or cm (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.
 - Forecast gate not met: C2 vs B1 shows 2.50% relative QLIKE reduction numerically but 95% CI crosses zero; test window is ~4 days (single block) vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+
+## What changed (this session, 2026-10-26T03:15:52Z)
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; prior agent task ("Maintain repository state as-is") confirmed complete and correctly scoped.
+- Re-verified state against source: coverage (5 instruments, 2136 common hourly timestamps 2024-01-01..2024-03-31), frozen splits/protocol/results, test QLIKE values (B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105), bootstrap CI (C2 vs B1 -2.50% rel., 95% CI [-0.123401,0.158843] crosses zero), gate assessment (NOT MET / PILOT-INCONCLUSIVE). All consistent.
+- Re-ran full test suite: python -m pytest 22 passed, 0 failed in 1.77s. Git tracked tree clean; only untracked __pycache__/ artifacts.
+- Repository remains INCONCLUSIVE: forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable.
+- No modifications to code, splits, protocol, or results. Handoff updated; next-agent task message written below.
 
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
