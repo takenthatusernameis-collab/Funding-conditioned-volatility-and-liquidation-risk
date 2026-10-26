@@ -430,8 +430,8 @@ Inconclusive report retained. No tuning on holdout, no split/protocol changes. R
 - Durable artifacts present (protocol §13): research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/leakage_audit.md, research_state/negative_results_report.md, research_state/coverage_audit_recheck.md, research_state/evaluation_summary.md, research_state/evaluation_summary_FCLR002.md, research_state/gate_assessment.md, research_state/final_inconclusive_report.md, research_state/binance_source_probe.md.
 
 **What to do:**
-1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, research_state/gate_assessment.md, and research_state/coverage_audit_recheck.md to confirm current state.
-2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning. Note that a 5-instrument panel requires a window starting 2024-04-01 or later.
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments; a panel starting no earlier than 2024-04-01 can satisfy the instrument requirement) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
 3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
