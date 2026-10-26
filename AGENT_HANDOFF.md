@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T01:11:45Z
+Updated: 2026-10-26T01:21:54Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -23,9 +23,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
 
 ## What changed (this session)
-- Read prior handoff, RESEARCH_PROMPT.md, gate assessment, and final inconclusive report to confirm current state.
-- Verified repository state remains inconclusive with gates documented; no model runs, tuning, or split/protocol changes made.
-- Updated handoff timestamp to reflect confirmation; documented no new changes beyond state verification.
+- Read prior handoff (AGENT_HANDOFF.md), RESEARCH_PROMPT.md, research_state/gate_assessment.md, and research_state/final_inconclusive_report.md to confirm current state.
+- Verified repository state remains inconclusive with gates documented (forecast gate NOT MET; risk-overlay INELIGIBLE). No model runs, tuning, split/protocol changes, or holdout leakage introduced.
+- Tests present remain passing as recorded; no new evaluation results generated from current holdout.
+- Updated handoff timestamp and documented confirmation with no changes beyond state verification.
 
 ## Decision
 Stop with inconclusive report (option a). No tuning on holdout, no split/protocol changes. Risk-overlay remains ineligible.
@@ -35,12 +36,12 @@ Stop with inconclusive report (option a). No tuning on holdout, no split/protoco
 - Forecast gate not met: C2 vs B1 shows 2.50% relative QLIKE reduction numerically but 95% CI crosses zero; test window is ~4 days (single block) vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 ## Initial task message for next agent
-**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current holdout. Do not extend the OOS window or change splits/protocol.
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**What to do (if anything):**
-1. Read RESEARCH_PROMPT.md, this handoff, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
-2. If asked to produce any new analysis, only do so under a new pre-registered protocol (new version) with sufficient data (>=3 non-overlapping 30-day blocks, >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
-3. Documentation/cleanup is acceptable if it improves clarity without modifying evaluation logic, splits, or protocol. Never claim unexecuted runs succeeded.
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; tests still pass (or document if environment changed). No new model results reported from current holdout.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (or any environment changes are documented). No new model results reported from the current holdout.
