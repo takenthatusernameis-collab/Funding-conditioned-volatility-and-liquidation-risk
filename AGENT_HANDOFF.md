@@ -20,7 +20,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py + tests/test_forecast_pipeline.py, 7/7 passed).
 - Funding-correction survival replication: IMPLEMENTED (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed). Replication is PARTIAL - based on pre-specified event definition using rolling percentile thresholds on available funding data; full paper methodology not independently reconstructible from public sources alone. Found 445 funding-extreme events across 5 symbols (Jan-Mar 2024); median correction time 8.0h, mean 12.6h among corrected events.
-- Out-of-sample result: NOT RUN.
+- Out-of-sample result: RUN (research_state/evaluation_summary.md). Test QLIKE: B0=0.140791 (n=70), B1=0.147800 (n=70), C1=0.145083 (n=70), C2=0.144105 (n=70). Paired block bootstrap (2000 reps): C2 vs B1 mean diff -0.003695 (95% CI [-0.123401,0.158843]), relative reduction 2.50% but CI crosses zero; C1 vs B1 -1.84% (CI crosses zero); C2 vs C1 -0.67%. Gate: does not meet >=2% relative reduction with CI supporting improvement.
 - Risk-overlay phase: INELIGIBLE.
 
 ## Research gates
@@ -30,22 +30,22 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py; tests/test_forecast_pipeline.py 7/7 passed).
 - Funding-correction replication: IMPLEMENTED/PARTIAL (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed).
 - Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); split timestamps frozen.
-- Out-of-sample result: NOT RUN.
+- Out-of-sample result: RUN (research_state/evaluation_summary.md). Test QLIKE: B0=0.140791 (n=70), B1=0.147800 (n=70), C1=0.145083 (n=70), C2=0.144105 (n=70). Paired block bootstrap (2000 reps): C2 vs B1 mean diff -0.003695 (95% CI [-0.123401,0.158843]), relative reduction 2.50% but CI crosses zero; C1 vs B1 -1.84% (CI crosses zero); C2 vs C1 -0.67%. Gate: does not meet >=2% relative reduction with CI supporting improvement.
 - Risk-overlay phase: INELIGIBLE.
 
 ## Unresolved blockers
 
 - Direct liquidation labels unavailable.
-- Out-of-sample forecast evaluation not yet run against frozen splits.
+- Forecast gate not passed (C2 vs B1 +2.50% relative QLIKE reduction but 95% CI [-0.123, 0.159] crosses zero; does not meet practical threshold with supporting uncertainty).
 
 ## Highest-value next task
 
-**Run frozen out-of-sample forecast evaluation (FCLR-001).**
-- Execute forecast pipeline on frozen train/val/test splits with volatility-only baseline and funding/price-feature ablations per frozen protocol.
-- Acceptance check: produce evaluation_summary.md with QLIKE metrics for B0/B1/C1/C2, paired comparisons, block bootstrap uncertainty, and gate assessment; all results must use frozen splits only, no tuning on holdout.
+**Investigate and document forecast gate outcome / consider pre-registered alternatives or additional robustness.**
+- Review evaluation_summary.md and assess if gate criteria are satisfied per protocol (>=2% relative reduction with interval supporting improvement). If not met, document clearly and do not proceed to risk-overlay phase. Consider pre-registered sensitivity (leave-one-instrument-out, block structure) or report pilot/inconclusive if thresholds unmet.
+- Acceptance check: update handoff with gate conclusion and concrete next action; if gate fails, explicitly state risk-overlay remains ineligible and propose any pre-registered follow-up or stop condition.
 
 ## Initial task message for next agent
 
-Run the frozen out-of-sample forecast evaluation per FCLR-001 protocol using frozen splits (train/val/test with 7d embargo). Compute baselines (persistence, HAR-style RV-only) and ablations (funding, funding+price features), report QLIKE with block-bootstrap uncertainty, assess the forecast gate, and update evaluation_summary.md with complete results. Do not tune on holdout or modify splits.
+The frozen out-of-sample evaluation has been run and written to research_state/evaluation_summary.md. Primary contrast C2 vs B1 shows +2.50% relative QLIKE reduction on test but 95% block-bootstrap CI crosses zero (-0.123 to 0.159), so the forecast gate is not met. Direct liquidation labels remain unavailable. Risk-overlay phase remains ineligible. Review the evaluation details and protocol requirements, document the gate outcome clearly, and propose the next pre-registered action (or conclude inconclusive per protocol) without modifying splits or tuning on holdout.
 
 At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
