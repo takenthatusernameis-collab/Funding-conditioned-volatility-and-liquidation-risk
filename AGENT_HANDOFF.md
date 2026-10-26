@@ -803,3 +803,26 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 4. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (python -m pytest: 22/22 pass) or any environment changes are documented. No new model results reported from the current holdout.
+
+## What changed (this session, 2026-10-26T05:12:35Z)
+- Read AGENT_HANDOFF.md; prior agent task ("Maintain repository state as-is") confirmed complete and correctly scoped.
+- Re-verified state against source: coverage (5 instruments, 2136 common hourly timestamps 2024-01-01..2024-03-31), frozen splits/protocol/results, test QLIKE values (B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105), bootstrap CI (C2 vs B1 -2.50% rel., 95% CI [-0.123401,0.158843] crosses zero), gate assessment (NOT MET / PILOT-INCONCLUSIVE). All consistent.
+- Re-ran full test suite: python -m pytest 22 passed, 0 failed in 4.26s. Git tracked tree clean; only untracked `__pycache__/` artifacts.
+- Repository remains INCONCLUSIVE: forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable.
+- No modifications to code, splits, protocol, or results. Handoff updated; next-agent task message written below.
+
+## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
+
+**Current verified state (as of 2026-10-26T05:12:35Z):**
+- Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
+- Tests pass 22/22 (python -m pytest, 4.26s). Git tracked tree clean; only untracked local `__pycache__/` artifacts.
+- Frozen splits/protocol/results unchanged: train 2024-01-02..2024-02-24T08:00Z, val 2024-03-02T08:00Z..2024-03-20T02:00Z, test 2024-03-27T02:00Z..2024-03-30T23:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
+
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (python -m pytest: 22/22 pass) or any environment changes are documented. No new model results reported from the current holdout.
