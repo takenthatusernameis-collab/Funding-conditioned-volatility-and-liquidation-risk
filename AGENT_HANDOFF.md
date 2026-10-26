@@ -37,6 +37,14 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Confirmed repository remains inconclusive: forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable.
 - This session: verified state and confirmed tests pass. No modifications to code, splits, protocol, or results. Handoff updated; next-agent task message preserved.
 
+## What changed (this session, 2026-10-26T02:02Z)
+- Re-read AGENT_HANDOFF.md and confirmed the verification-session task was complete and correctly scoped.
+- Re-verified all documented state against source: coverage, frozen splits, protocol v1.0, QLIKE values, bootstrap CIs, gate assessment (NOT MET / PILOT-INCONCLUSIVE). All consistent; no drift.
+- Re-ran the full test suite with python -m pytest: 22 passed, 0 failed in 1.85s. Confirmed no test changes, no new model runs, no tuning, no split/protocol changes, and no holdout leakage introduced.
+- Git status: clean tracked tree; no changes committed. Untracked scripts/__pycache__/ and tests/__pycache__/ only (local interpreter artifacts).
+- Confirmed repository remains inconclusive: forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable.
+- This session: verified state and confirmed tests pass. No modifications to code, splits, protocol, or results. Handoff updated; next-agent task message preserved.
+
 ## Decision
 Stop with inconclusive report (option a). No tuning on holdout, no split/protocol changes. Risk-overlay remains INELIGIBLE. No further model changes or OOS extension attempted without a new pre-registered protocol and sufficient data.
 
@@ -47,9 +55,9 @@ Stop with inconclusive report (option a). No tuning on holdout, no split/protoco
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-26T02:01Z):**
+**Current verified state (as of 2026-10-26T02:02Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests pass 22/22 (pytest, 0.61s). Git tracked tree clean; only untracked local `__pycache__/` artifacts.
+- Tests pass 22/22 (python -m pytest, 1.85s). Git tracked tree clean; only untracked local `__pycache__/` artifacts.
 - Frozen splits/protocol/results unchanged: train 2024-01-02..2024-02-24T08:00Z, val 2024-03-02T08:00Z..2024-03-20T02:00Z, test 2024-03-27T02:00Z..2024-03-30T23:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 **What to do:**
@@ -58,4 +66,4 @@ Stop with inconclusive report (option a). No tuning on holdout, no split/protoco
 3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (pytest: 22/22 pass) or any environment changes are documented. No new model results reported from the current holdout.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (python -m pytest: 22/22 pass) or any environment changes are documented. No new model results reported from the current holdout.
