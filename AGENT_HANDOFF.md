@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T04:12:42Z
+Updated: 2026-10-26T08:08:28Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -1197,3 +1197,30 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 4. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid or any environment changes are documented. No new model results reported from the current holdout.
+
+## What changed (this session, 2026-10-26T08:08:28Z)
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; prior agent task ("Maintain repository state as-is") confirmed complete and correctly scoped.
+- Independently re-verified state against source:
+  - Coverage: 5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) confirmed on disk — funding-rate monthly zips for Jan/Feb/Mar 2024 plus per-symbol kline/mark/index/premium daily zips and extracted CSVs; data_cache holds instrument-months for 2024-04..2024-06 (outside the frozen 2024-01..03 window, not used in evaluation).
+  - Frozen splits confirmed in research_state/run_manifest.json split_boundaries: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z (1281), val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z (427), test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (94), 7d embargo; totals 1802.
+  - Protocol v1.0 frozen (research_state/research_protocol.md); results B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401,0.158843] crosses zero; gate NOT MET (PILOT/INCONCLUSIVE); risk-overlay INELIGIBLE; direct liquidation labels unavailable (binance_source_probe.md: no liquidationSnapshot archive, fapi forceOrders returns 451).
+- Environment note: pytest was not installed in this session's interpreter (python3 3.12.3, base conda). Installed pytest 9.1.1 via pip into the user site (not committed; local-only). Re-ran full suite: **22 passed, 0 failed in 4.25s**. Confirmed no test changes, no new model runs, no tuning, no split/protocol changes, no holdout leakage.
+- Verified scripts/forecast_pipeline.py loads splits from run_manifest.json (load_splits() returns the frozen train/val/test bounds; manifest git_sha 68d088a exists as a commit).
+- Git status: tracked tree clean; no changes committed. Untracked scripts/__pycache__/ and tests/__pycache__/ only (local interpreter artifacts).
+- Repository remains INCONCLUSIVE. No modifications to code, splits, protocol, or results. Handoff updated; next-agent task message written below.
+
+## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
+
+**Current verified state (as of 2026-10-26T08:08:28Z):**
+- Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
+- Tests pass 22/22 (python -m pytest, 4.25s) — pytest 9.1.1 installed locally this session; if absent in your environment, `pip install pytest` first. Git tracked tree clean; only untracked local `__pycache__/` artifacts.
+- Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401,0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
+
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (python -m pytest: 22/22 pass) or any environment changes are documented. No new model results reported from the current holdout.
