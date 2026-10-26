@@ -1,0 +1,62 @@
+{
+  "registry_version": "1.0",
+  "generated": "2026-10-26T18:47:07Z",
+  "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
+  "current_status": "INCONCLUSIVE",
+  "summary": "FCLR-001 forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable. Frontier lists unfinished tasks ordered by information gain; none may reuse the sealed holdout for selection.",
+  "frontier": [
+    {
+      "rank": 1,
+      "task": "Pre-registered FCLR-002: extend out-of-sample evaluation to >=3 non-overlapping 30-day blocks across >=5 instruments",
+      "prerequisite": "New protocol version FCLR-002 v1.0 registered BEFORE any outcomes computed; sufficient historical coverage (data beyond 2024-03-31 or a re-partitioned panel) confirmed by coverage-only audit",
+      "acceptance": ">=5 instruments in paired OOS panel; >=3 non-overlapping 30-day blocks; block-bootstrap uncertainty supporting improvement after multiplicity correction; >=2% relative QLIKE on primary contrast C2 vs B1",
+      "blockers": "Frozen FCLR-001 coverage is 2024-01-01..2024-03-31; current test window is a single ~4-day block. Extending the window requires new admissible source downloads and a re-frozen split.",
+      "do_not": "Do not reuse the FCLR-001 sealed holdout for selection, tuning, or re-evaluation."
+    },
+    {
+      "rank": 2,
+      "task": "Enumerate and test additional admissible public liquidation sources (Track A)",
+      "prerequisite": "None beyond the source-discovery procedure",
+      "acceptance": "Documented unauthenticated download path, temporal coverage, schema, completeness diagnostics, license/terms for at least one source; or a documented verdict that Track A is unviable",
+      "blockers": "Binance liquidationSnapshot archive HTTP 404; fapi forceOrders returns 451 restricted location",
+      "do_not": "Do not infer event-free intervals from missing data; do not accept a capped/partial event stream as a complete census."
+    },
+    {
+      "rank": 3,
+      "task": "Register margin/leverage scenarios and run out-of-sample hypothetical boundary-breach forecast (FCLR-H003)",
+      "prerequisite": "New protocol version registering each margin/leverage scenario BEFORE outcome inspection; synthetic boundary labels already implemented (scripts/synthetic_boundary_labels.py, 5/5 tests)",
+      "acceptance": "Pre-registered scenarios; Brier/log-loss/calibration/precision-recall reported; long and short labels kept separate; funding/fee/price-reference assumptions disclosed",
+      "blockers": "FCLR-001 forecast gate not met; boundary forecast is a separate hypothesis and does not unblock the risk-overlay phase",
+      "do_not": "Do not describe modeled boundary breaches as observed liquidations."
+    },
+    {
+      "rank": 4,
+      "task": "Obtain and document the Shek (SSRN, posted 29 Sep 2026) full methodology to convert FCLR-H002 from PARTIAL to exact replication",
+      "prerequisite": "Paper's event definition, censoring rules, volatility-regime split, and contract set",
+      "acceptance": "Independent reconstruction of the full methodology from admissible sources; otherwise remain PARTIAL and do not promote the correction-time association",
+      "blockers": "Full methodology not independently reconstructible from public sources alone",
+      "do_not": "Do not conflate correction time with volatility forecast skill, boundary breaches, or observed liquidations."
+    },
+    {
+      "rank": 5,
+      "task": "Adversarial re-audit of any FCLR-002 panel before its holdout is opened",
+      "prerequisite": "FCLR-002 panel frozen",
+      "acceptance": "All 11 leakage-audit checklist items re-run on the new panel; no unresolved defect",
+      "blockers": "None beyond FCLR-002 execution",
+      "do_not": "Do not open the FCLR-002 holdout before the audit passes."
+    }
+  ],
+  "coverage": {
+    "instruments": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+    "venue": "binance_um_perp",
+    "common_hourly_timestamps": 2136,
+    "period": "2024-01-01..2024-03-31",
+    "test_block_shortfall": "single ~4-day block vs >=3 non-overlapping 30-day blocks required"
+  },
+  "blocked_cells": [
+    {"hypothesis": "FCLR-H004", "reason": "Direct liquidation labels unavailable from admissible public sources", "status": "BLOCKED"}
+  ],
+  "untested_cells": [
+    {"hypothesis": "FCLR-H003", "reason": "No out-of-sample breach evaluation run; scenarios not pre-registered", "status": "NOT_STARTED"}
+  ]
+}
