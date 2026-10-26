@@ -1,0 +1,80 @@
+{
+  "registry_version": "1.0",
+  "frozen_date": "2026-10-25",
+  "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
+  "hypotheses": [
+    {
+      "hypothesis_id": "FCLR-H001",
+      "title": "Incremental 24-hour volatility forecasting",
+      "claim": "Funding extremes plus price-dislocation/smoothing features improve out-of-sample forecasts of next-24-hour realized variance of mark-price returns over a realized-volatility-only HAR-style baseline.",
+      "estimand": "Paired out-of-sample QLIKE difference (C2 vs B1) on the frozen test panel.",
+      "directional_claim": "C2 lower QLIKE than B1 (improvement).",
+      "status": "INCONCLUSIVE",
+      "status_evidence": "research_state/evaluation_summary.md; research_state/gate_assessment.md; research_state/final_inconclusive_report.md",
+      "prior_tests": [
+        {
+          "experiment_id": "FCLR-001",
+          "result": "C2 vs B1: -2.50% relative QLIKE reduction; 95% CI [-0.123401, 0.158843] crosses zero; test window single ~4-day block",
+          "verdict": "PILOT/INCONCLUSIVE; forecast gate NOT MET"
+        }
+      ],
+      "next_falsification_test": "Pre-registered FCLR-002 (or later) with >=3 non-overlapping 30-day evaluation blocks across >=5 instruments, uncertainty supporting improvement after multiplicity correction, before any risk-overlay phase.",
+      "links": [
+        "research_state/research_protocol.md",
+        "research_state/evaluation_summary.md",
+        "research_state/final_inconclusive_report.md"
+      ]
+    },
+    {
+      "hypothesis_id": "FCLR-H002",
+      "title": "Funding-extreme correction-time replication",
+      "claim": "The working-paper pattern (Shek, SSRN, posted 29 Sep 2026) of shorter median funding-extreme correction times in low-volatility versus high-volatility conditions can be independently reconstructed from admissible public Binance data.",
+      "estimand": "Median/mean time-to-correction among corrected funding-extreme events, split by realized-volatility regime.",
+      "directional_claim": "Correction time lower in low-volatility conditions.",
+      "status": "PARTIAL_REPLICATION",
+      "status_evidence": "scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py (4/4 passed); 445 funding-extreme events across 5 symbols Jan-Mar 2024",
+      "prior_tests": [
+        {
+          "experiment_id": "FCLR-001-H002",
+          "result": "Median correction time 8.0h, mean 12.6h among corrected events (Jan-Mar 2024, 5 symbols)",
+          "verdict": "Partial: full paper methodology not independently reconstructible from public sources alone"
+        }
+      ],
+      "next_falsification_test": "Obtain and document the paper's full event-definition and censoring rules; if unavailable, report as partial replication and do not promote correction-time association to volatility-forecast or liquidation evidence.",
+      "links": [
+        "scripts/funding_correction_replication.py",
+        "research_state/final_inconclusive_report.md"
+      ]
+    },
+    {
+      "hypothesis_id": "FCLR-H003",
+      "title": "Hypothetical boundary-breach forecast",
+      "claim": "Funding and price-dislocation features improve out-of-sample forecasts of whether mark prices breach a precomputed hypothetical long/short liquidation boundary within a pre-specified horizon under disclosed margin/leverage assumptions.",
+      "estimand": "Brier score / log loss / precision-recall on synthetic mark-price boundary-breach labels.",
+      "directional_claim": "Candidate models beat the volatility-only baseline on breach probability.",
+      "status": "NOT_STARTED",
+      "status_evidence": "No out-of-sample breach evaluation has been run; labels are implemented but unvalidated against holdout.",
+      "prior_tests": [],
+      "next_falsification_test": "Register margin/leverage scenarios before examining any outcomes; run only under a new pre-registered protocol version with sufficient data.",
+      "links": [
+        "scripts/synthetic_boundary_labels.py",
+        "research_state/research_protocol.md"
+      ]
+    },
+    {
+      "hypothesis_id": "FCLR-H004",
+      "title": "Observed liquidation outcomes",
+      "claim": "Funding extremes predict observed forced-liquidation events or liquidation-notional intensity.",
+      "estimand": "Event/liquidation-notional intensity normalized by open interest or volume.",
+      "directional_claim": "Funding features add predictive value for observed liquidations.",
+      "status": "BLOCKED",
+      "status_evidence": "research_state/binance_source_probe.md: no liquidationSnapshot archive found (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.",
+      "prior_tests": [],
+      "next_falsification_test": "Enumerate and test additional admissible public liquidation sources (academic/GitHub/Zenodo/Hugging Face archives, other venue-native historical archives) before concluding Track A is unviable; do not infer event-free intervals from missing data.",
+      "links": [
+        "research_state/binance_source_probe.md",
+        "RESEARCH_PROMPT.md"
+      ]
+    }
+  ]
+}
