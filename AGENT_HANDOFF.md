@@ -1253,13 +1253,24 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Repository remains INCONCLUSIVE: forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable.
 - Handoff updated; next-agent task message written below.
 
+## What changed (this session, 2026-10-26T08:53:55Z)
+- Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md v1.0, research_state/final_inconclusive_report.md, research_state/gate_assessment.md, research_state/evaluation_summary.md, research_state/binance_source_probe.md, and research_state/run_manifest.json. Prior agent task ("Maintain repository state as-is") confirmed complete and correctly scoped.
+- Independently re-verified state against source:
+  - git status: branch main up-to-date with origin/main; tracked tree clean; only untracked `scripts/__pycache__/` and `tests/__pycache__/` (local interpreter artifacts). `git diff HEAD` empty.
+  - git log: latest commit `1c7427e chore(kilo): checkpoint agent session`; manifest-recorded SHA `68d088a277b88a9b7ae7f748c922bd28db60a4a1` resolves to an existing commit (ancestor of HEAD).
+  - Re-ran full test suite: `python -m pytest` 22 passed, 0 failed in 4.12s.
+  - Re-ran `python scripts/run_evaluation.py`: QLIKE reproduces exactly — B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105 (n=70); C2 vs B1 mean diff -0.003695, 95% CI [-0.123401, 0.158843], rel. 2.50%; C1 vs B1 -0.002717 (CI [-0.134702, 0.175329], 1.84%); C2 vs C1 -0.000979 (CI [-0.016485, 0.011301], 0.67%). Gate: NOT MET (PILOT/INCONCLUSIVE). No drift from recorded results; evaluation_summary.md unchanged.
+  - Coverage confirmed: 5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT); 2136 common hourly timestamps 2024-01-01..2024-03-31; raw zips present under data/ (klines/markPriceKlines/indexPriceKlines/premiumIndexKlines daily + fundingRate monthly).
+- No modifications to code, splits, protocol, or results. No retrain, no re-tune, no holdout inspection beyond re-running the frozen evaluation for reproducibility. Risk-overlay remains INELIGIBLE. Direct liquidation labels remain unavailable (binance_source_probe.md: no liquidationSnapshot archive HTTP 404; fapi forceOrders 451).
+- Handoff note: this file has accumulated many near-identical prior-session echoes; this entry is appended rather than rewriting history. No reported results, splits, or protocol content were changed.
+
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-26T08:14:48Z):**
+**Current verified state (as of 2026-10-26T08:53:55Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
 - Tests pass 22/22 (python -m pytest, 4.12s). Git tracked tree clean; only untracked local `__pycache__/` artifacts.
-- Frozen splits/protocol/results unchanged: train 2024-01-02..2024-02-24T08:00Z, val 2024-03-02T08:00Z..2024-03-20T02:00Z, test 2024-03-27T02:00Z..2024-03-30T23:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+- Frozen splits/protocol/results unchanged and independently reproduced this session: train 2024-01-02..2024-02-24T08:00Z, val 2024-03-02T08:00Z..2024-03-20T02:00Z, test 2024-03-27T02:00Z..2024-03-30T23:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 **What to do:**
 1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
