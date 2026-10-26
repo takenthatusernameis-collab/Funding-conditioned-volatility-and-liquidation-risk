@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T14:43:00Z
+Updated: 2026-10-26T14:48:10Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -22,19 +22,18 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Controller progress accounting: tests/test_controller_progress_accounting.py 6/6 passed.
 - Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
 
-## What changed (this session, 2026-10-26T14:43:00Z)
-- Read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion.
-- Confirmed tests pass: python -m pytest 22 passed, 0 failed in 2.76s. Git tracked tree clean; only untracked local `__pycache__/` artifacts.
-- Verified state unchanged: inconclusive, forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged.
-- Updated handoff timestamp and wrote clear initial task message for next agent.
+## What changed (this session, 2026-10-26T14:48:10Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: repository state unchanged, no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 22 passed, 0 failed in 2.75s. Git tracked tree clean except this modified AGENT_HANDOFF.md; only untracked local `__pycache__/` artifacts.
+- Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged.
 
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-26T14:43:00Z):**
+**Current verified state (as of 2026-10-26T14:48:10Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests pass 22/22 (python -m pytest, 2.76s). Git tracked tree clean; only untracked local `__pycache__/` artifacts.
-- Frozen splits/protocol/results unchanged: train 2024-01-02..2024-02-24T08:00Z, val 2024-03-02T08:00Z..2024-03-20T02:00Z, test 2024-03-27T02:00Z..2024-03-30T23:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+- Tests pass 22/22 (`python -m pytest`, ~2.75s). Git tracked tree clean; only untracked local `__pycache__/` artifacts.
+- Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 **What to do:**
 1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
@@ -42,7 +41,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (python -m pytest: 22/22 pass). No new model results reported from the current holdout.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (`python -m pytest`: 22/22 pass). No new model results reported from the current holdout.
 
 ## Unresolved blockers
 - Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C labels implemented but are modeled proxies, not observed liquidations). binance_source_probe.md: no liquidationSnapshot archive found under data/futures/um or cm (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.
