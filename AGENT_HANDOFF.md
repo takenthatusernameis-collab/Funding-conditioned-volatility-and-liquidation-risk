@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T01:23:30Z
+Updated: 2026-10-26T01:57:45Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -23,17 +23,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
 
 ## What changed (this session)
-- Read prior handoff (AGENT_HANDOFF.md), RESEARCH_PROMPT.md, research_state/gate_assessment.md, and research_state/final_inconclusive_report.md to confirm current state.
-- Verified repository state remains inconclusive with gates documented (forecast gate NOT MET; risk-overlay INELIGIBLE). No model runs, tuning, split/protocol changes, or holdout leakage introduced.
-- Tests present remain passing as recorded; no new evaluation results generated from current holdout.
-- Updated handoff timestamp and documented confirmation with no changes beyond state verification.
-- Task completed per handoff instructions: maintained state-as-is, no holdout reuse/leakage.
+- Independently re-verified prior handoff state: re-read AGENT_HANDOFF.md, RESEARCH_PROMPT.md, research_state/research_protocol.md v1.0, research_state/gate_assessment.md, research_state/final_inconclusive_report.md, and research_state/evaluation_summary.md.
+- Ran the full test suite with pytest: 22 passed, 0 failed (forecast pipeline 7/7, synthetic boundary labels 5/5, funding-correction replication 4/4, controller progress accounting 6/6). Confirmed no test changes, no new model runs, no tuning, no split/protocol changes, and no holdout leakage introduced.
+- Git status: clean tracked tree; no changes committed. Untracked scripts/__pycache__/ and tests/__pycache__/ only (local interpreter artifacts).
+- Confirmed repository remains inconclusive: forecast gate NOT MET, risk-overlay INELIGIBLE, direct liquidation labels unavailable.
 
 ## Decision
-Stop with inconclusive report (option a). No tuning on holdout, no split/protocol changes. Risk-overlay remains ineligible.
+Stop with inconclusive report (option a). No tuning on holdout, no split/protocol changes. Risk-overlay remains INELIGIBLE. No further model changes or OOS extension attempted without a new pre-registered protocol and sufficient data.
 
 ## Unresolved blockers
-- Direct liquidation labels unavailable from admissible public sources.
+- Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C labels implemented but are modeled proxies, not observed liquidations).
 - Forecast gate not met: C2 vs B1 shows 2.50% relative QLIKE reduction numerically but 95% CI crosses zero; test window is ~4 days (single block) vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 ## Initial task message for next agent
@@ -45,4 +44,4 @@ Stop with inconclusive report (option a). No tuning on holdout, no split/protoco
 3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (or any environment changes are documented). No new model results reported from the current holdout.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (pytest: 22/22 pass) or any environment changes are documented. No new model results reported from the current holdout.
