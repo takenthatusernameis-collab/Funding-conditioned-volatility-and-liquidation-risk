@@ -412,6 +412,31 @@ Inconclusive report retained. No tuning on holdout, no split/protocol changes. R
 - Confirmed tests pass: `python -m pytest` 22 passed, 0 failed in 3.47s. Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch up to date with origin/main.
 - Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
 
+## What changed (this session, 2026-10-26T22:47:49Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree clean (`git status --porcelain` shows only untracked local `scripts/__pycache__/` and `tests/__pycache__/` artifacts; `git diff --stat HEAD` empty; HEAD `af131da` tracking `origin/main`), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 22 passed, 0 failed in 3.50s.
+- Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged.
+- **New coverage finding confirmed:** `research_state/coverage_audit_recheck.md` (2026-10-26T20:45Z) shows the evaluated FCLR-001/FCLR-002 panel is **BTCUSDT-only** (1 of 5 instruments). The other four symbols have zero mark-price rows in Jan–Mar 2024 (their mark-price cache begins 2024-04-01), so the recorded `common_panel_timestamps: 2136` is not reproducible from the current working tree. This is a coverage/representativeness defect, not a leakage defect — it makes the shortfall more serious than previously recorded (single-instrument AND single ~4-day block).
+- Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
+
+## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
+
+**Current verified state (as of 2026-10-26T22:47:49Z):**
+- Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
+- Tests pass 22/22 (`python -m pytest`, ~3.50s). Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch `main` up to date with `origin/main` (HEAD `af131da`).
+- Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
+- **Coverage defect (new):** the evaluated panel is BTCUSDT-only. ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT have zero mark-price rows in Jan–Mar 2024 (cache begins 2024-04-01). The ">=5 instruments" gate was therefore never met, and the recorded `common_panel_timestamps: 2136` is not reproducible from the current checkout. A 5-instrument panel is possible only for windows starting 2024-04-01.
+- Durable artifacts present (protocol §13): research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/leakage_audit.md, research_state/negative_results_report.md, research_state/coverage_audit_recheck.md, research_state/evaluation_summary.md, research_state/evaluation_summary_FCLR002.md, research_state/gate_assessment.md, research_state/final_inconclusive_report.md, research_state/binance_source_probe.md.
+
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, research_state/gate_assessment.md, and research_state/coverage_audit_recheck.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning. Note that a 5-instrument panel requires a window starting 2024-04-01 or later.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
+
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (`python -m pytest`: 22/22 pass). No new model results reported from the current holdout.
+
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
