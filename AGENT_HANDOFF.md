@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26T14:48:10Z
+Updated: 2026-10-26T14:50:02Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -22,9 +22,9 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Controller progress accounting: tests/test_controller_progress_accounting.py 6/6 passed.
 - Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
 
-## What changed (this session, 2026-10-26T14:48:10Z)
+## What changed (this session, 2026-10-26T14:50:02Z)
 - Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: repository state unchanged, no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
-- Confirmed tests pass: `python -m pytest` 22 passed, 0 failed in 2.75s. Git tracked tree clean except this modified AGENT_HANDOFF.md; only untracked local `__pycache__/` artifacts.
+- Confirmed tests pass: `python -m pytest` 22 passed, 0 failed in 2.74s. Git tracked tree clean except this modified AGENT_HANDOFF.md; only untracked local `__pycache__/` artifacts.
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged.
 
 ## Initial task message for next agent
