@@ -1,53 +1,41 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-26
+Updated: 2026-10-26T01:05:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
-## Mission
-
+## Mission (unchanged)
 Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized volatility, and pre-specified delayed/smoothed-price features add out-of-sample predictive value for future volatility or liquidation-related stress. Forecast validation comes first. A risk-reduction overlay is ineligible until a frozen out-of-sample forecast gate passes.
 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
-## Current verified state
-
-- Coverage audit extended to >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) with paired daily archives across 2024-01-01..2024-03-31 (2136 common hourly timestamps). All checksums verified, schemas validated, normalized to UTC; gaps recorded in coverage_audit_multi.
-- Split boundaries frozen in research_state/research_protocol.md section 6 and research_state/run_manifest.json (train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z, embargo 7d).
-- Protocol still frozen; splits now frozen.
-- Controller progress accounting script present; tests 6/6 passed.
-- Direct liquidation labels: NOT VERIFIED.
-- Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
-- Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py + tests/test_forecast_pipeline.py, 7/7 passed).
-- Funding-correction survival replication: IMPLEMENTED (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed). Replication is PARTIAL - based on pre-specified event definition using rolling percentile thresholds on available funding data; full paper methodology not independently reconstructible from public sources alone. Found 445 funding-extreme events across 5 symbols (Jan-Mar 2024); median correction time 8.0h, mean 12.6h among corrected events.
-- Out-of-sample result: RUN (research_state/evaluation_summary.md). Test QLIKE: B0=0.140791 (n=70), B1=0.147800 (n=70), C1=0.145083 (n=70), C2=0.144105 (n=70). Paired block bootstrap (2000 reps): C2 vs B1 mean diff -0.003695 (95% CI [-0.123401,0.158843]), relative reduction 2.50% but CI crosses zero; C1 vs B1 -1.84% (CI crosses zero); C2 vs C1 -0.67%. Gate: does not meet >=2% relative reduction with CI supporting improvement / minimum claim-worthy test requirements.
-- Risk-overlay phase: INELIGIBLE.
-
-## Research gates
-
-- Direct liquidation labels: NOT VERIFIED.
+## Verified state (current)
+- Coverage: >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 2136 common hourly timestamps 2024-01-01..2024-03-31. Checksums/schemas validated; gaps in coverage_audit_multi.
+- Splits frozen (research_state/run_manifest.json): train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z, embargo 7d.
+- Protocol frozen: research_state/research_protocol.md v1.0.
+- Direct liquidation labels: NOT VERIFIED (unavailable from public sources).
 - Synthetic hypothetical mark-price boundary labels: IMPLEMENTED (scripts/synthetic_boundary_labels.py; tests/test_synthetic_boundary_labels.py 5/5 passed).
 - Future realized-volatility target: IMPLEMENTED (scripts/forecast_pipeline.py; tests/test_forecast_pipeline.py 7/7 passed).
-- Funding-correction replication: IMPLEMENTED/PARTIAL (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed).
-- Frozen research protocol: FROZEN (research_state/research_protocol.md v1.0); split timestamps frozen.
-- Out-of-sample result: RUN (research_state/evaluation_summary.md). Gate assessment in research_state/gate_assessment.md: PILOT/INCONCLUSIVE.
-- Risk-overlay phase: INELIGIBLE.
+- Funding-correction survival replication: IMPLEMENTED/PARTIAL (scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py 4/4 passed). 445 funding-extreme events across 5 symbols (Jan-Mar 2024); median correction time 8.0h, mean 12.6h among corrected events. Full paper methodology not independently reconstructible from public sources alone.
+- Out-of-sample forecast: RUN. Test QLIKE (n=70): B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105. Paired block bootstrap (2000 reps, ~24h blocks): C2 vs B1 mean diff -0.003695 (95% CI [-0.123401,0.158843]), rel. -2.50%; C1 vs B1 -1.84% (CI crosses); C2 vs C1 -0.67%. Gate: NOT MET (PILOT/INCONCLUSIVE).
+- Risk-overlay: INELIGIBLE.
+- Controller progress accounting: tests/test_controller_progress_accounting.py 6/6 passed.
+- Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
 
-## Decision (completed)
-
-**Stop with inconclusive report (option a).** Forecast gate assessed in research_state/gate_assessment.md: C2 vs B1 relative QLIKE reduction 2.50% meets the 2% floor numerically, but 95% CI [-0.123401, 0.158843] crosses zero and test window (2024-03-27..2024-03-30, ~4 days) is a single block vs protocol requirement of >=3 non-overlapping 30-day blocks (>=5 instruments met). Direct liquidation labels remain unavailable. Risk-overlay phase remains INELIGIBLE. No tuning on holdout, no split changes. Chose stop over pre-registering protocol extension because available public data window does not support extending to >=3 non-overlapping 30-day blocks without changing scope beyond what is verifiably available under the constraints (no paid services, no user intervention).
+## Decision
+Stop with inconclusive report (option a). No tuning on holdout, no split/protocol changes. Risk-overlay remains ineligible.
 
 ## Unresolved blockers
-
-- Direct liquidation labels unavailable.
-- Forecast gate not met (PILOT/INCONCLUSIVE). CI crosses zero; insufficient test blocks per protocol requirements.
-
-## Highest-value next task
-
-**No further model work.** Final inconclusive report produced at research_state/final_inconclusive_report.md. Risk-overlay remains INELIGIBLE. Optional next step only with a new pre-registered protocol and sufficient data (>=3 non-overlapping 30-day blocks, >=5 instruments).
+- Direct liquidation labels unavailable from admissible public sources.
+- Forecast gate not met: C2 vs B1 shows 2.50% relative QLIKE reduction numerically but 95% CI crosses zero; test window is ~4 days (single block) vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 ## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current holdout. Do not extend the OOS window or change splits/protocol.
 
-Final inconclusive report: research_state/final_inconclusive_report.md. Decision: stop (option a), no risk-overlay. Forecast gate NOT MET (C2 vs B1 +2.50% QLIKE, 95% CI crosses zero; test only ~4 days vs >=3 non-overlapping 30-day blocks). Direct liquidation labels unavailable. Gates: 5 instruments OK, splits frozen, protocol v1.0 frozen. Tests: synthetic_boundary_labels 5/5, forecast_pipeline 7/7, funding_correction_replication 4/4, controller 6/6. No tuning on holdout, no split/protocol changes. No further model work/OOS extension without a new pre-registered protocol and sufficient data (>=3x30d blocks, >=5 instruments). Focus only on documentation/cleanup if requested; do not retrain or re-evaluate on current holdout.
+**What to do (if anything):**
+1. Read RESEARCH_PROMPT.md, this handoff, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If asked to produce any new analysis, only do so under a new pre-registered protocol (new version) with sufficient data (>=3 non-overlapping 30-day blocks, >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable if it improves clarity without modifying evaluation logic, splits, or protocol. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
 
-At the end of each session, replace this handoff with a concise update that preserves the verified state, summarizes only executed tests and evidence, records unresolved blockers, and names one highest-value next task with an exact acceptance check. Never claim an unexecuted command, unverified source, or incomplete workflow run succeeded.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; tests still pass (or document if environment changed). No new model results reported from current holdout.
