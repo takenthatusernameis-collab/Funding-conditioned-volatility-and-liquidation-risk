@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T12:17:09Z
+Updated: 2026-10-27T12:18:30Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,10 +14,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T12:17:09Z):
+Verification (this session, 2026-10-27T12:18:30Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: 242edb15 (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded e8c48cc6 touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
-- `python -m pytest -q`: 25 passed, 0 failed in ~4.52s.
+- HEAD: 501786af (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded 242edb15 touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
+- `python -m pytest -q`: 25 passed, 0 failed in ~4.55s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
 - No working-tree drift; research_state/fclr002_coverage_audit.json remains synchronized with HEAD.
 
@@ -43,6 +43,6 @@ Verification (this session, 2026-10-27T12:17:09Z):
 4. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 5. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (242edb15) except for authorized checkpoint/documentation commits.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (501786af) except for authorized checkpoint/documentation commits.
 
 (End of file - total 47 lines)
