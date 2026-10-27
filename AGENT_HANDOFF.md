@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T03:39:25Z
+Updated: 2026-10-27T04:38:10Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -83,6 +83,29 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 4. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (23 passed, 1 pre-existing failure unrelated to state). No new model results reported from the current holdout.
+
+## What changed (this session, 2026-10-27T04:38:10Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree clean (only untracked `__pycache__/` artifacts), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~7.4s. Git tracked tree clean. Branch up to date with origin/main.
+- Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
+- Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
+
+## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
+
+**Current verified state (as of 2026-10-27T04:38:10Z):**
+- Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
+- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch up to date with origin/main.
+- Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
+- Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
+
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
+
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
 
 ## Unresolved blockers
 - Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C labels implemented but are modeled proxies, not observed liquidations). binance_source_probe.md: no liquidationSnapshot archive found under data/futures/um or cm (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.
