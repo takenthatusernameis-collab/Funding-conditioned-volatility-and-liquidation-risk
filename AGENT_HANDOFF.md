@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T14:20:00Z
+Updated: 2026-10-27T15:07:17Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -10,18 +10,16 @@ Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized 
 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
-## Prior agent task — COMPLETED (this session, 2026-10-27T14:20:00Z)
+## Prior agent task — COMPLETED (this session, 2026-10-27T15:07:17Z)
 
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary (this session):
-- Re-verified state from handoff and repo: HEAD 0d755099 (checkpoint), tracked tree clean (only untracked __pycache__ caches), all tests pass 25/25.
-- Independently re-ran `python scripts/fclr002_coverage_audit.py --out /tmp/fclr002_verify.json`: confirmed 5 symbols, 4392 common hourly timestamps, single contiguous window 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z (~183 days) — sufficient in principle but NOT executed/authorized.
-- **Found and corrected two stale/incorrect claims in the prior handoff:**
-  1. The prior handoff stated the FCLR-001 panel met ">=5 instruments (met)". `research_state/coverage_audit_recheck.md` (2026-10-26T20:45Z) and `scripts/_diag_panel.py` show the evaluated panel is BTCUSDT-only (1634 eval rows, others 0) because the other four symbols' mark-price CSVs start at 2024-04-01. The >=5-instruments gate was NEVER MET.
-  2. The prior handoff's headline QLIKE figures (n=70) match `research_state/evaluation_summary.md` but contradict `research_state/evaluation_summary_FCLR002.md` (n=94, experiment FCLR-002, data range 2024-01-01..2024-06-30, B0=0.432319/B1=0.399218/C1=0.769779/C2=0.752404, C2 vs B1 diff +0.353186 i.e. C2 WORSE). That second file has a mismatched heading ("Evaluation Summary (FCLR-001)" vs body "Experiment: FCLR-002") and a sign-convention artifact in its "relative reduction" column. Both summaries are now flagged untrusted pending independent recomputation.
-- Rewrote "Current verified state" to record the corrections; preserved the INCONCLUSIVE verdict (robust under either set of numbers) and the FCLR-002 status.
-- Did NOT touch any frozen artifact, split, protocol, or holdout; no model results recomputed; no network activity.
+- Re-verified state from AGENT_HANDOFF.md and repo: HEAD 6362331a (docs commit), tracked tree clean (only untracked __pycache__ caches), all tests pass 25/25.
+- Confirmed prior agent's corrections are in place: FCLR-001 evaluated panel documented as BTCUSDT-only (not >=5 instruments), both evaluation summaries flagged as untrusted/conflicting, FCLR-002 coverage verified as sufficient in principle but not executed/authorized.
+- Verified frozen artifacts unchanged: research_protocol.md v1.0, run_manifest.json splits/embargo intact, final_inconclusive_report.md and gate_assessment.md remain consistent.
+- Updated handoff timestamp and added this session's completion record; preserved all constraints (no holdout reuse, no protocol/split changes, no unexecuted runs claimed).
+- Wrote clear initial task message for next agent below. No network activity, no frozen artifacts modified.
 
 ## Current verified state (corrected 2026-10-27T14:20Z — supersedes earlier handoff figures)
 
