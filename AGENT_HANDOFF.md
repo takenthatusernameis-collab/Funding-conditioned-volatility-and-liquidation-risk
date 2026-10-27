@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T12:13:27Z
+Updated: 2026-10-27T12:17:09Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,10 +14,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T12:13:27Z):
+Verification (this session, 2026-10-27T12:17:09Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: e8c48cc6 (chore(kilo): checkpoint agent session), branch main. Two checkpoint commits (e8c48cc6, 799945ba) ahead of the previously recorded eca7d11f touched AGENT_HANDOFF.md, scripts/fclr002_coverage_audit.py, and tests/test_fclr002_coverage_audit.py only; no holdout/model/split/protocol changes.
-- `python -m pytest -q`: 25 passed, 0 failed in ~4.49s (includes tests/test_fclr002_coverage_audit.py).
+- HEAD: 242edb15 (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded e8c48cc6 touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
+- `python -m pytest -q`: 25 passed, 0 failed in ~4.52s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
 - No working-tree drift; research_state/fclr002_coverage_audit.json remains synchronized with HEAD.
 
@@ -25,7 +25,7 @@ Verification (this session, 2026-10-27T12:13:27Z):
 
 - Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay phase INELIGIBLE. Direct liquidation labels unavailable (Track A BLOCKED).
 - Frozen protocol: research_state/research_protocol.md v1.0 (FCLR-001).
-- Frozen splits (research_state/run_manifest.json): train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z; val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z; test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z; 7-day embargo.
+- Frozen splits (research_state/run_manifest.json): train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z; val 2024-03-02T8:00:00Z..2024-03-20T02:00:00Z; test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z; 7-day embargo.
 - Test QLIKE (n=70): B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105.
 - Primary contrast C2 vs B1: relative reduction 2.50% (met numerically), but 95% CI [-0.123401, 0.158843] crosses zero; single ~4-day test block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments; multiplicity conditions not satisfied. Gate NOT MET.
 - Implementation state: forecast target implemented (tests/test_forecast_pipeline.py 7/7); synthetic hypothetical mark-price boundary labels implemented (tests/test_synthetic_boundary_labels.py 5/5); funding-correction replication implemented/partial (tests/test_funding_correction_replication.py 4/4; 445 events, median correction time 8.0h); controller progress accounting 6/6; fclr002 coverage audit tests added and passing.
@@ -43,6 +43,6 @@ Verification (this session, 2026-10-27T12:13:27Z):
 4. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 5. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (e8c48cc6) except for authorized checkpoint/documentation commits.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (242edb15) except for authorized checkpoint/documentation commits.
 
 (End of file - total 47 lines)
