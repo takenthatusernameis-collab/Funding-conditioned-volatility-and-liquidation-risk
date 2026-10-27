@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T21:23:00Z
+Updated: 2026-10-27T21:12:45Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: bcc1d297 (matches origin/main)
+Current HEAD: c0f1151d (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -16,8 +16,8 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Prior agent session completed this task (checkpoint bcc1d297). HEAD now bcc1d297 matches origin/main; tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`; `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
-- This session: verified state (HEAD bcc1d297, 25 passed), refreshed stale handoff HEAD/timestamp, rewrote Prior agent task summary and initial task message for next agent. Changes uncommitted.
+- Prior agent session completed this task (checkpoint bcc1d297). HEAD now bcc1d297 matched origin/main.
+- This session (c0f1151d): verified state (HEAD c0f1151d, matches origin/main), refreshed handoff HEAD/timestamp, confirmed 25 passed tests, no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes uncommitted.
 
 ## Current verified state
 
@@ -44,7 +44,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `bcc1d297` on `main`, matches `origin/main`.
+- HEAD `c0f1151d` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - Changes this session: AGENT_HANDOFF.md metadata/state update only (uncommitted).
