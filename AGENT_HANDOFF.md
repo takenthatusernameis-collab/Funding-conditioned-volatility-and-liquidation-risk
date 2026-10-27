@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T21:15:00Z
+Updated: 2026-10-27T21:23:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: d08eecc2 (matches origin/main)
+Current HEAD: bcc1d297 (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -16,8 +16,8 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Prior agent session completed this task: re-read AGENT_HANDOFF.md prior session state, verified repository state, ran `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified, tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. No substantive code or research-artifact changes.
-- This session: confirmed prior completion still holds. HEAD `d08eecc2` matches `origin/main`. `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Refreshed stale handoff HEAD field (`c7a9a248` → `d08eecc2`) and timestamp/initial task message. Change left uncommitted in working tree.
+- Prior agent session completed this task (checkpoint bcc1d297). HEAD now bcc1d297 matches origin/main; tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`; `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
+- This session: verified state (HEAD bcc1d297, 25 passed), refreshed stale handoff HEAD/timestamp, rewrote Prior agent task summary and initial task message for next agent. Changes uncommitted.
 
 ## Current verified state
 
@@ -35,7 +35,7 @@ Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Ris
 
 ## Initial task message for next agent
 
-Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Please read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001 v1.0) before doing anything else.
+Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001 v1.0) before doing anything else.
 
 **Current state: INCONCLUSIVE. Forecast gate NOT MET. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
 
@@ -44,22 +44,22 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `d08eecc2` on `main`, matches `origin/main`.
+- HEAD `bcc1d297` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- Only change this session is AGENT_HANDOFF.md metadata/state update (HEAD field + timestamp).
+- Changes this session: AGENT_HANDOFF.md metadata/state update only (uncommitted).
 
 Key facts to know:
-- Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — a coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
-- Headline FCLR-001 result: C2 vs B1 = -2.50% relative, 95% CI [-0.123401, 0.158843] crosses zero. Forecast gate NOT MET.
-- Track A is BLOCKED: no complete unauthenticated public liquidation census exists across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals or treat partial streams as a complete census.
-- FCLR-H003 was pre-registered and executed on the frozen FCLR-001 test block; results are synthetic modeled boundary breaches only, no risk-overlay implications.
-- FCLR-002 coverage is sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
+- Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
+- Headline FCLR-001: C2 vs B1 = -2.50% relative, 95% CI [-0.123401, 0.158843] crosses zero. Forecast gate NOT MET.
+- Track A BLOCKED: no complete unauthenticated public liquidation census across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals or treat partial streams as a complete census.
+- FCLR-H003 pre-registered and executed on frozen FCLR-001 test block; results synthetic modeled boundary breaches only, no risk-overlay implications.
+- FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
 
-**Authorized next work (only one of these, and only if explicitly requested):**
-1. If FCLR-002 is explicitly requested: pre-register FCLR-002 v1.0 with splits and acceptance criteria BEFORE computing any outcomes; run walk-forward evaluation on the 2024-04..2024-09 panel; run an adversarial leakage audit before opening its holdout (rank 5). Never open the holdout before the audit.
+**Authorized next work (only one, and only if explicitly requested):**
+1. If FCLR-002 is explicitly requested: pre-register FCLR-002 v1.0 with splits and acceptance criteria BEFORE computing any outcomes; run walk-forward evaluation on 2024-04..2024-09 panel; run adversarial leakage audit before opening its holdout (rank 5). Never open holdout before audit.
 2. Otherwise: document/clarify only. Do not touch splits, protocol, evaluation logic, or reported results. No new runs.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-Acceptance: state remains inconclusive with gates documented; no holdout leakage; all tests pass (25/25); no new results from the sealed holdout; HEAD unchanged except authorized checkpoint/documentation commits.
+Acceptance: state remains inconclusive with gates documented; no holdout leakage; all tests pass (25/25); no new results from sealed holdout; HEAD unchanged except authorized checkpoint/documentation commits.
