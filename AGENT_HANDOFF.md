@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T15:12:00Z
+Updated: 2026-10-27T15:25:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -62,3 +62,10 @@ Completion summary (this session):
 - Bybit public trading data exists but contains per-trade data, not a liquidation event census; no liquidation directory found. Converting trades is not a complete census.
 - No other obvious unauthenticated complete public liquidation archives identified. 
 - Documented findings in `research_state/liquidation_sources_enumeration.md`. Track A remains BLOCKED (unviable with admissible unauthenticated public sources). Do not infer event-free intervals; do not use partial streams as complete census.
+
+## Update (2026-10-27T15:25:00Z) — FCLR-H003 pre-registration
+- Pre-registered margin/leverage scenarios for FCLR-H003 in `research_state/fclr_h003_pre_registration.md` (leverages 3/5/10/20x, long+short separate, 24h horizon, MMR 0.005, zero-cost boundary, FCLR-001 test block). No outcomes computed; synthetic labels remain modeled proxies only.
+- Tests pass 25/25; tracked tree clean. No frozen artifacts modified. Risk-overlay remains INELIGIBLE.
+
+## Initial task message for next agent
+Next highest-value authorized task (rank 4): obtain and document the Shek (SSRN, posted 29 Sep 2026) full methodology to convert FCLR-H002 from PARTIAL to exact replication, or remain PARTIAL. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, and research_state/fclr_h003_pre_registration.md first. Do not conflate correction time with forecast skill. Leave risk-overlay INELIGIBLE.
