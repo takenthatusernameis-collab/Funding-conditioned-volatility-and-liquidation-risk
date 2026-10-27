@@ -487,3 +487,27 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 4. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
+
+## What changed (this session, 2026-10-27T10:18:49Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: HEAD=8a264570 on main, git tracked tree clean (only untracked __pycache__ caches), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~5.01s. Tracked tree clean.
+- Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
+- Updated AGENT_HANDOFF.md with verification record and next-agent task.
+
+## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE. FCLR-002 coverage is confirmed sufficient (>=5 instruments, >=3 non-overlapping 30-day blocks feasible from 2024-04..2024-09) but FCLR-002 execution is NOT authorized unless explicitly requested with a pre-registered protocol version. Do not run scripts/fclr002_download.py or scripts/fclr002_coverage_audit.py unless explicitly instructed.
+
+**Current verified state (as of 2026-10-27T10:18:49Z):**
+- Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
+- Tests: `python -m pytest` 24 passed, 0 failed in ~5.01s. Git tracked tree: HEAD=8a264570 on main; clean (only untracked __pycache__ caches). No research logic/split/protocol/results changes.
+- Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
+- Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
+- FCLR-002 coverage (research_state/fclr002_coverage_audit.json): 5 symbols, 4392 common hourly timestamps, single contiguous window 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z (~183 days). This satisfies the protocol's minimum claim-worthy test data requirement (>=5 instruments, >=3 non-overlapping 30-day blocks) but FCLR-002 has NOT been executed and its holdout has NOT been opened. scripts/fclr002_download.py is idempotent (skips existing files); data_cache holds 4174 zips / 7350 extracted CSVs. No network activity was performed this session.
+
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If FCLR-002 is explicitly requested, first pre-register a new protocol version (FCLR-002 v1.0) with split/acceptance criteria BEFORE computing any outcomes; then run the walk-forward evaluation on the 2024-04..2024-09 panel; then run the leakage audit on the new panel before opening its holdout. Do not reuse the FCLR-001 sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
+
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
