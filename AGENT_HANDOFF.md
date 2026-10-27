@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T08:25:53Z
+Updated: 2026-10-27T08:28:15Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -46,25 +46,26 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
 - Updated AGENT_HANDOFF.md with verification record and next-agent task.
 
-## What changed (this session, 2026-10-27T08:27:18Z)
-- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: HEAD=ce90544a on main, git tracked tree clean (only untracked __pycache__ caches), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
-- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~5.14s. Tracked tree clean.
+## What changed (this session, 2026-10-27T08:28:15Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: HEAD=1b675e82 on main, git tracked tree clean (only untracked __pycache__ caches), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~4.95s. Tracked tree clean.
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
+- Investigated FCLR-002 coverage feasibility: data_cache holds 4174 zips / 7350 extracted CSVs across BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT for 2024-04..2024-09 (BTCUSDT also has 2024-04..2024-06 from an earlier cache). scripts/fclr002_download.py is idempotent and skips existing files, so it is safe to re-run; it would only fetch missing months (2024-10, 2024-11 for the 4 non-BTC symbols; BTCUSDT 2024-07..2024-11). No new downloads were executed and no network activity was performed. research_state/fclr002_coverage_audit.json regenerated deterministically (timestamp-only drift 08:27:44Z -> 08:28:30Z, no research change); restored to HEAD via `git checkout HEAD --` so tracked tree is byte-identical to the last checkpoint.
 - Updated AGENT_HANDOFF.md with verification record and next-agent task.
 
 ## Initial task message for next agent
-**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE. Proceed only with a new pre-registered protocol version if new analysis is explicitly requested.
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE. FCLR-002 coverage is confirmed sufficient (>=5 instruments, >=3 non-overlapping 30-day blocks feasible from 2024-04..2024-09) but FCLR-002 execution is NOT authorized unless explicitly requested with a pre-registered protocol version. Do not run scripts/fclr002_download.py or scripts/fclr002_coverage_audit.py unless explicitly instructed.
 
-**Current verified state (as of 2026-10-27T08:27:18Z):**
+**Current verified state (as of 2026-10-27T08:28:15Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree: HEAD=ce90544a on main; AGENT_HANDOFF.md modified (this update); only untracked __pycache__ caches otherwise. No research logic/split/protocol/results changes.
+- Tests: `python -m pytest` 24 passed, 0 failed in ~4.95s. Git tracked tree: HEAD=1b675e82 on main; clean (only untracked __pycache__ caches). No research logic/split/protocol/results changes.
 - Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
-- Priority frontier (research_state/experiment_frontier.json): rank 1 pre-register FCLR-002 (extend OOS to >=3 non-overlapping 30-day blocks across >=5 instruments); rank 2 enumerate additional public liquidation sources (Track A); rank 3 register margin/leverage scenarios and run FCLR-H003 boundary-breach OOS; rank 4 document Shek SSRN methodology for FCLR-H002 exact replication.
+- FCLR-002 coverage (research_state/fclr002_coverage_audit.json @ 08:27:44Z, unchanged since 08:22:58Z): 5 symbols, 4392 common hourly timestamps, single contiguous window 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z (~183 days). This satisfies the protocol's minimum claim-worthy test data requirement (>=5 instruments, >=3 non-overlapping 30-day blocks) but FCLR-002 has NOT been executed and its holdout has NOT been opened. scripts/fclr002_download.py is idempotent (skips existing files); data_cache holds 4174 zips / 7350 extracted CSVs. No network activity was performed this session.
 
 **What to do:**
 1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
-2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+2. If FCLR-002 is explicitly requested, first pre-register a new protocol version (FCLR-002 v1.0) with split/acceptance criteria BEFORE computing any outcomes; then run the walk-forward evaluation on the 2024-04..2024-09 panel; then run the leakage audit on the new panel before opening its holdout. Do not reuse the FCLR-001 sealed holdout for selection/tuning.
 3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
