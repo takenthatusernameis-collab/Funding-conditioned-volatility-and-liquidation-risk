@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T22:02:21Z
+Updated: 2026-10-27T22:05:17Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 38947fe8 (matches origin/main)
+Current HEAD: abff1517 (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -17,7 +17,7 @@ Task: Read the prior agent task from the durable handoff and complete it. Then u
 
 Completion summary:
 - Prior agent session (checkpoint c0f1151d): verified state (HEAD c0f1151d, matches origin/main), refreshed handoff HEAD/timestamp, confirmed 25 passed tests, no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes uncommitted.
-- Current session (HEAD 38947fe8): refreshed handoff metadata (HEAD/timestamp), confirmed tests (25 passed), no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes uncommitted.
+- Current session (HEAD abff1517): refreshed handoff metadata (HEAD/timestamp), confirmed tests (25 passed), no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes uncommitted.
 
 ## Current verified state
 
@@ -44,7 +44,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `38947fe8` on `main`, matches `origin/main`.
+- HEAD `abff1517` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - Changes this session: AGENT_HANDOFF.md metadata/state update only (uncommitted).
