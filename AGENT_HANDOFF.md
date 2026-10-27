@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T23:53:30Z
+Updated: 2026-10-27T23:54:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: b91eda54 (chore(kilo): checkpoint agent session)
+Current HEAD: da1ea553 (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -16,13 +16,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is b91eda54 on main.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is da1ea553 on main.
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Updated handoff timestamp and initial task message for next agent.
+- **Corrected two stale references found during verification:**
+  1. Handoff's recorded HEAD `b91eda54` did not match actual HEAD `da1ea553` (the prior checkpoint commit). Updated.
+  2. `research_state/experiment_frontier.json` coverage block still claimed `common_hourly_timestamps: 2136` for the FCLR-001 window, directly contradicting `research_state/coverage_audit_recheck.md` (true intersection across all 5 symbols = 0 timestamps). Corrected to 0 with an explanatory note. This was a documentation defect only — no frozen protocol, split, or evaluation result was changed.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD unchanged.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Two stale documentation references corrected; HEAD unchanged.
 
 ## Current verified state
 
@@ -49,10 +52,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `b91eda54` on `main` (local checkpoint).
+- HEAD `da1ea553` on `main` (local checkpoint).
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- No new research results; this session was a state handoff refresh only.
+- No new research results; this session was a state handoff refresh plus two stale-reference corrections (see below).
 
 Key facts to know:
 - Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
@@ -60,6 +63,10 @@ Key facts to know:
 - Track A BLOCKED: no complete unauthenticated public liquidation census across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals or treat partial streams as a complete census.
 - FCLR-H003 pre-registered and executed on frozen FCLR-001 test block; results synthetic modeled boundary breaches only, no risk-overlay implications.
 - FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
+
+**Corrections applied this session (documentation only; no frozen artifact changed):**
+1. Handoff recorded HEAD as `b91eda54`; actual HEAD is `da1ea553`. Corrected.
+2. `research_state/experiment_frontier.json` coverage block claimed `common_hourly_timestamps: 2136` for the FCLR-001 window. Per `research_state/coverage_audit_recheck.md` the true 5-symbol intersection in 2024-01..2024-03 is **0 timestamps** (BTCUSDT alone has 2160; the other four have zero mark-price CSVs before 2024-04-01). Corrected to 0 with a note. The 2136 figure is not reproducible from the current working tree.
 
 **Authorized next work (only one, and only if explicitly requested):**
 1. If FCLR-002 is explicitly requested: pre-register FCLR-002 v1.0 with splits and acceptance criteria BEFORE computing any outcomes; run walk-forward evaluation on 2024-04..2024-09 panel; run adversarial leakage audit before opening its holdout (rank 5). Never open holdout before audit.

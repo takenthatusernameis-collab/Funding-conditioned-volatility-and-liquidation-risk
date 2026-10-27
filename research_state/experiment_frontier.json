@@ -49,8 +49,9 @@
   "coverage": {
     "instruments": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
     "venue": "binance_um_perp",
-    "common_hourly_timestamps": 2136,
+    "common_hourly_timestamps": 0,
     "period": "2024-01-01..2024-03-31",
+    "note": "CORRECTED per research_state/coverage_audit_recheck.md: intersection across all 5 symbols is 0 timestamps in the FCLR-001 window. BTCUSDT alone has 2160 mark-price timestamps Jan-Mar; the other four symbols have zero mark-price CSVs before 2024-04-01. The previously recorded 2136 figure is not reproducible from the current working tree.",
     "test_block_shortfall": "single ~4-day block vs >=3 non-overlapping 30-day blocks required"
   },
   "blocked_cells": [
