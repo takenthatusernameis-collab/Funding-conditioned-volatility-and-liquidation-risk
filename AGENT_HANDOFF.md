@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T11:22:52Z
+Updated: 2026-10-27T11:25:15Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,10 +14,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T11:22:52Z):
+Verification (this session, 2026-10-27T11:25:15Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: d0d2201a (chore(kilo): checkpoint agent session), branch main.
-- `python -m pytest -q`: 24 passed, 0 failed in ~4.74s.
+- HEAD: f2a1d18e (chore(kilo): checkpoint agent session), branch main.
+- `python -m pytest -q`: 24 passed, 0 failed in ~5.13s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
 - research_state/fclr002_coverage_audit.json unchanged at HEAD (no timestamp-only drift regenerated this session).
 
@@ -34,12 +34,13 @@ Verification (this session, 2026-10-27T11:22:52Z):
 
 ## Initial task message for next agent
 
-**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE. FCLR-002 coverage is confirmed sufficient but FCLR-002 execution is NOT authorized unless explicitly requested with a pre-registered protocol version. Do not run scripts/fclr002_download.py or scripts/fclr002_coverage_audit.py unless explicitly instructed.
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay phase remains INELIGIBLE until a frozen out-of-sample forecast gate passes. FCLR-002 coverage is confirmed sufficient but FCLR-002 execution is NOT authorized unless explicitly requested with a pre-registered protocol version. Do not run scripts/fclr002_download.py or scripts/fclr002_coverage_audit.py unless explicitly instructed.
 
 **What to do:**
 1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
-2. If FCLR-002 is explicitly requested, first pre-register a new protocol version (FCLR-002 v1.0) with split/acceptance criteria BEFORE computing any outcomes; then run the walk-forward evaluation on the 2024-04..2024-09 panel; then run the leakage audit on the new panel before opening its holdout. Do not reuse the FCLR-001 sealed holdout for selection/tuning.
-3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
-4. Leave risk-overlay phase INELIGIBLE.
+2. Confirm the repository remains in the verified state below (clean tracked tree, all tests pass, no holdout leakage introduced).
+3. If FCLR-002 is explicitly requested, first pre-register a new protocol version (FCLR-002 v1.0) with split/acceptance criteria BEFORE computing any outcomes; then run the walk-forward evaluation on the 2024-04..2024-09 panel; then run the leakage audit on the new panel before opening its holdout. Do not reuse the FCLR-001 sealed holdout for selection/tuning.
+4. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+5. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
