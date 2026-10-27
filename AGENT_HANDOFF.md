@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T13:14:53Z
+Updated: 2026-10-27T13:17:05Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,12 +14,12 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
-Verification (this session, 2026-10-27T13:14:53Z):
-- `git log --oneline -3`: b0eb9fb6, 2085b7f0, ad528a2b (HEAD at b0eb9fb6).
+Verification (this session, 2026-10-27T13:17:05Z):
+- `git log --oneline -3`: 9418b2cf, b0eb9fb6, 2085b7f0 (HEAD at 9418b2cf).
 - `git status --short`: clean tracked tree; only untracked scripts/__pycache__/ and tests/__pycache__/ caches (no tracked changes).
-- `python -m pytest -q`: 25 passed, 0 failed in ~4.39s.
+- `python -m pytest -q`: 25 passed, 0 failed in ~4.44s.
 - Confirmed handoff/registry/state: repo INCONCLUSIVE (PILOT/INCONCLUSIVE), forecast gate NOT MET, risk-overlay INELIGIBLE, FCLR-001 frozen, no holdout leakage; FCLR-002 coverage sufficient but unexecuted/not authorized.
-- Updated AGENT_HANDOFF.md with clear initial task message below.
+- Updated AGENT_HANDOFF.md timestamp and verification above; initial task message retained for next agent.
 
 ## Current verified state
 
