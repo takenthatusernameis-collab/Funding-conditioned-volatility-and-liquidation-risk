@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T12:12:36Z
+Updated: 2026-10-27T12:13:27Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -10,16 +10,16 @@ Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized 
 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
-## Prior agent task — COMPLETED (verified again this session)
+## Prior agent task — COMPLETED (verified this session)
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T12:07:00Z):
+Verification (this session, 2026-10-27T12:13:27Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: eca7d11f (chore(kilo): checkpoint agent session), branch main. This commit only touched AGENT_HANDOFF.md (timestamp + prior-task wording) and research_state/fclr002_coverage_audit.json (generated_utc timestamp only).
-- `python -m pytest -q`: 24 passed, 0 failed in ~4.14s.
+- HEAD: e8c48cc6 (chore(kilo): checkpoint agent session), branch main. Two checkpoint commits (e8c48cc6, 799945ba) ahead of the previously recorded eca7d11f touched AGENT_HANDOFF.md, scripts/fclr002_coverage_audit.py, and tests/test_fclr002_coverage_audit.py only; no holdout/model/split/protocol changes.
+- `python -m pytest -q`: 25 passed, 0 failed in ~4.49s (includes tests/test_fclr002_coverage_audit.py).
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
-- Working-tree drift detected and corrected: research_state/fclr002_coverage_audit.json had an unsynchronized `generated_utc` (2026-10-27T12:07:26Z) differing from the committed value (2026-10-27T12:05:15Z). Restored to HEAD via `git checkout HEAD -- research_state/fclr002_coverage_audit.json`. No substantive content drift anywhere else.
+- No working-tree drift; research_state/fclr002_coverage_audit.json remains synchronized with HEAD.
 
 ## Current verified state
 
@@ -28,7 +28,7 @@ Verification (this session, 2026-10-27T12:07:00Z):
 - Frozen splits (research_state/run_manifest.json): train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z; val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z; test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z; 7-day embargo.
 - Test QLIKE (n=70): B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105.
 - Primary contrast C2 vs B1: relative reduction 2.50% (met numerically), but 95% CI [-0.123401, 0.158843] crosses zero; single ~4-day test block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments; multiplicity conditions not satisfied. Gate NOT MET.
-- Implementation state: forecast target implemented (tests/test_forecast_pipeline.py 7/7); synthetic hypothetical mark-price boundary labels implemented (tests/test_synthetic_boundary_labels.py 5/5); funding-correction replication implemented/partial (tests/test_funding_correction_replication.py 4/4; 445 events, median correction time 8.0h); controller progress accounting 6/6.
+- Implementation state: forecast target implemented (tests/test_forecast_pipeline.py 7/7); synthetic hypothetical mark-price boundary labels implemented (tests/test_synthetic_boundary_labels.py 5/5); funding-correction replication implemented/partial (tests/test_funding_correction_replication.py 4/4; 445 events, median correction time 8.0h); controller progress accounting 6/6; fclr002 coverage audit tests added and passing.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md, gate_assessment.md, final_inconclusive_report.md.
 - FCLR-002 coverage (research_state/fclr002_coverage_audit.json): 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps, single contiguous window 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z (~183 days). Satisfies the minimum claim-worthy data requirement (>=5 instruments, >=3 non-overlapping 30-day blocks), but FCLR-002 has NOT been executed and its holdout has NOT been opened. scripts/fclr002_download.py is idempotent (skips existing files); data_cache holds 4174 zips / 7350 extracted CSVs. No network activity performed this session.
 
@@ -43,6 +43,6 @@ Verification (this session, 2026-10-27T12:07:00Z):
 4. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 5. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (e8c48cc6) except for authorized checkpoint/documentation commits.
 
 (End of file - total 47 lines)
