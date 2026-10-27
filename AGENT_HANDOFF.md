@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T13:07:30Z
+Updated: 2026-10-27T13:08:50Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -16,7 +16,7 @@ Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate m
 
 Verification (this session, 2026-10-27T13:07:30Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: 84b9d571 (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded 27407e96 touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
+- HEAD: 7f6c52cf (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded 27407e96 touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
 - `python -m pytest -q`: 25 passed, 0 failed in ~4.38s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
 - No working-tree drift; research_state/fclr002_coverage_audit.json remains synchronized with HEAD.
