@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T08:21:29Z
+Updated: 2026-10-27T08:22:45Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -26,6 +26,12 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 ## What changed (this session, 2026-10-27T08:21:29Z)
 - Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: git tracked tree clean (only untracked __pycache__ caches), HEAD=7cee9041 on main, no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
 - Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~4.76s. Tracked tree clean.
+- Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
+- Updated AGENT_HANDOFF.md with verification record and next-agent task.
+
+## What changed (this session, 2026-10-27T08:22:45Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: git tracked tree clean (only untracked __pycache__ caches), HEAD=4a16c458 on main, no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~4.98s. Tracked tree clean.
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
 - Updated AGENT_HANDOFF.md with verification record and next-agent task.
 
