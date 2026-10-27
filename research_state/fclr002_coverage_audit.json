@@ -1,0 +1,58 @@
+{
+  "experiment": "FCLR-002",
+  "generated_utc": "2026-10-27T02:41:50Z",
+  "universe": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "per_symbol": [
+    {
+      "symbol": "BTCUSDT",
+      "mark_rows": 2208,
+      "first": "2024-07-01T00:00:00+00:00",
+      "last": "2024-09-30T23:00:00+00:00"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "mark_rows": 2208,
+      "first": "2024-07-01T00:00:00+00:00",
+      "last": "2024-09-30T23:00:00+00:00"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "mark_rows": 2208,
+      "first": "2024-07-01T00:00:00+00:00",
+      "last": "2024-09-30T23:00:00+00:00"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "mark_rows": 2208,
+      "first": "2024-07-01T00:00:00+00:00",
+      "last": "2024-09-30T23:00:00+00:00"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "mark_rows": 2208,
+      "first": "2024-07-01T00:00:00+00:00",
+      "last": "2024-09-30T23:00:00+00:00"
+    }
+  ],
+  "common_timestamps": 2208,
+  "common_first": "2024-07-01T00:00:00+00:00",
+  "common_last": "2024-09-30T23:00:00+00:00",
+  "common_contiguous_windows": [
+    {
+      "start": "2024-07-01T00:00:00+00:00",
+      "end": "2024-09-30T23:00:00+00:00",
+      "hours": 2208.0
+    }
+  ],
+  "longest_window": {
+    "start": "2024-07-01T00:00:00+00:00",
+    "end": "2024-09-30T23:00:00+00:00",
+    "hours": 2208.0
+  }
+}
