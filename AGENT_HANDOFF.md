@@ -43,6 +43,6 @@ Verification (this session, 2026-10-27T12:18:30Z):
 4. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 5. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (501786af) except for authorized checkpoint/documentation commits.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (1dbda730) except for authorized checkpoint/documentation commits.
 
 (End of file - total 47 lines)
