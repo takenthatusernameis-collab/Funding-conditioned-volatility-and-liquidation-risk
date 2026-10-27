@@ -69,3 +69,10 @@ Completion summary (this session):
 
 ## Initial task message for next agent
 Next highest-value authorized task (rank 4): obtain and document the Shek (SSRN, posted 29 Sep 2026) full methodology to convert FCLR-H002 from PARTIAL to exact replication, or remain PARTIAL. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, and research_state/fclr_h003_pre_registration.md first. Do not conflate correction time with forecast skill. Leave risk-overlay INELIGIBLE.
+
+## Update (2026-10-27T16:10:00Z) — Shek methodology (rank 4)
+- Attempted to obtain the Shek (SSRN, posted 29 Sep 2026) full methodology: abstract page and PDF delivery both returned HTTP 403 in this environment. Only partial abstract details recoverable via web search (1,696 events / 18 contracts; median 27.0h high-vol vs 3.0h low-vol; log-rank chi-square 147.25).
+- Documented availability and missing methodological items in `research_state/shek_methodology_availability.md`. FCLR-H002 remains PARTIAL_REPLICATION; replication script unchanged; no outcomes computed. Correction time not conflated with forecast skill. Risk-overlay remains INELIGIBLE.
+
+## Initial task message for next agent
+Next highest-value authorized task (rank 5): resolve the `evaluation_summary.md` vs `evaluation_summary_FCLR002.md` contradiction — either recompute both canonically from the frozen artifacts or annotate both as untrusted — before either is cited. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/evaluation_summary.md, research_state/evaluation_summary_FCLR002.md, and scripts/_diag_panel.py first. Do not modify protocol, splits, or reported results without pre-registration. Leave risk-overlay INELIGIBLE. Acceptance: both files either reconciled with a documented canonical recomputation or explicitly marked untrusted; tests pass 25/25; no holdout leakage introduced.
