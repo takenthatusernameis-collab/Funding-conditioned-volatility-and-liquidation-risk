@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T07:39:00Z
+Updated: 2026-10-27T08:17:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -23,18 +23,18 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Final report: research_state/final_inconclusive_report.md; gate assessment: research_state/gate_assessment.md.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
 
-## What changed (this session, 2026-10-27T07:39:00Z)
-- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: git tracked tree clean (only untracked __pycache__ caches), branch up to date with origin/main (HEAD = 3fb4a7cd = origin/main), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+## What changed (this session, 2026-10-27T08:17:00Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: git tracked tree clean (only untracked __pycache__ caches), branch up to date with origin/main HEAD=d05146c7 on main, no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
 - Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~4.76s. Tracked tree clean.
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
-- Only change since last handoff: AGENT_HANDOFF.md updated with this session's verification record and next-agent task; fclr002_coverage_audit.json timestamp refreshed (metadata only, no result change).
+- Updated AGENT_HANDOFF.md with verification record and next-agent task.
 
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-27T07:39:00Z):**
+**Current verified state (as of 2026-10-27T08:17:00Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree clean (only untracked __pycache__ caches). Branch up to date with origin/main (HEAD = 3fb4a7cd).
+- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree clean (only untracked __pycache__ caches). HEAD=d05146c7 on main.
 - Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
 
