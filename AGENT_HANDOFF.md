@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T13:12:08Z
+Updated: 2026-10-27T13:14:53Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -10,14 +10,14 @@ Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized 
 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
-## Prior agent task — COMPLETED (verified this session, 2026-10-27T13:10:34Z)
+## Prior agent task — COMPLETED (verified this session, 2026-10-27T13:14:53Z)
 
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
-Verification (this session, 2026-10-27T13:10:34Z):
-- `git log --oneline -3`: 2085b7f0, ad528a2b, e85a3958 (HEAD at 2085b7f0).
+Verification (this session, 2026-10-27T13:14:53Z):
+- `git log --oneline -3`: b0eb9fb6, 2085b7f0, ad528a2b (HEAD at b0eb9fb6).
 - `git status --short`: clean tracked tree; only untracked scripts/__pycache__/ and tests/__pycache__/ caches (no tracked changes).
-- `python -m pytest -q`: 25 passed, 0 failed in ~4.38s.
+- `python -m pytest -q`: 25 passed, 0 failed in ~4.39s.
 - Confirmed handoff/registry/state: repo INCONCLUSIVE (PILOT/INCONCLUSIVE), forecast gate NOT MET, risk-overlay INELIGIBLE, FCLR-001 frozen, no holdout leakage; FCLR-002 coverage sufficient but unexecuted/not authorized.
 - Updated AGENT_HANDOFF.md with clear initial task message below.
 
