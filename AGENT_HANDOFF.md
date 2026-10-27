@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T11:25:15Z
+Updated: 2026-10-27T11:26:35Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,10 +14,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T11:25:15Z):
+Verification (this session, 2026-10-27T11:26:35Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: f2a1d18e (chore(kilo): checkpoint agent session), branch main.
-- `python -m pytest -q`: 24 passed, 0 failed in ~5.13s.
+- HEAD: a7532d14 (chore(kilo): checkpoint agent session), branch main.
+- `python -m pytest -q`: 24 passed, 0 failed in ~4.72s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
 - research_state/fclr002_coverage_audit.json unchanged at HEAD (no timestamp-only drift regenerated this session).
 
