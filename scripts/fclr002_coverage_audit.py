@@ -17,8 +17,10 @@ Idempotent and deterministic.  No network access, no credentials.
 """
 from __future__ import annotations
 
+import argparse
 import glob
 import json
+import tempfile
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -77,7 +79,18 @@ def contiguous_windows(ts_set: set[int]) -> list[tuple[int, int]]:
     return windows
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--out",
+        default=None,
+        help="Path to write the audit JSON. Defaults to the tracked artifact "
+        "research_state/fclr002_coverage_audit.json. Pass a temporary path from "
+        "tests so the tracked artifact is never rewritten by a test run.",
+    )
+    args = parser.parse_args(argv)
+    out_path = Path(args.out) if args.out else OUT
+
     per_symbol = {s: parse_mark_timestamps(s) for s in SYMBOLS}
     common = set.intersection(*per_symbol.values()) if per_symbol else set()
     windows = contiguous_windows(common)
@@ -117,7 +130,7 @@ def main() -> int:
             "hours": (longest[1] - longest[0]) / 3600000 + 1 if longest[0] is not None else 0,
         },
     }
-    OUT.write_text(json.dumps(doc, indent=2))
+    out_path.write_text(json.dumps(doc, indent=2))
     print(json.dumps(doc, indent=2))
     return 0
 
