@@ -1310,15 +1310,23 @@ Inconclusive report retained. No tuning on holdout, no split/protocol changes. R
 - Coverage defect documented: evaluated panel is BTCUSDT-only for Jan-Mar 2024 (other four symbols' mark-price coverage begins 2024-04-01). A 5-instrument panel is possible only from 2024-04-01 onward.
 - Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
 
+## What changed (this session, 2026-10-27T00:04:17Z)
+- Read the prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree clean (`git status --porcelain` shows only untracked local `scripts/__pycache__/` and `tests/__pycache__/` artifacts; `git diff --stat HEAD` empty; HEAD `a3038c0` tracking `origin/main`), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 22 passed, 0 failed in 3.58s.
+- Verified state unchanged: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable; splits/protocol/results unchanged.
+- Confirmed all four durable artifacts present: research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/leakage_audit.md, research_state/negative_results_report.md. Coverage defect documented: research_state/coverage_audit_recheck.md shows the actual evaluated panel is BTCUSDT-only for Jan-Mar 2024 (other four symbols' mark-price coverage begins 2024-04-01).
+- Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
+
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-27T00:02:15Z):**
+**Current verified state (as of 2026-10-27T00:04:17Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests pass 22/22 (`python -m pytest`, ~3.57s). Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch up to date with origin/main (HEAD b58b590).
+- Tests pass 22/22 (`python -m pytest`, ~3.58s). Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch `main` up to date with `origin/main` (HEAD `a3038c0`).
 - Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
-- Registry artifacts present: research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/negative_results_report.md, research_state/leakage_audit.md exist (protocol §13 durable artifacts).
+- All four durable artifacts present: research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/leakage_audit.md, research_state/negative_results_report.md.
 - Coverage defect documented: research_state/coverage_audit_recheck.md shows actual evaluated panel is BTCUSDT-only for Jan-Mar 2024 (other four symbols' mark-price coverage begins 2024-04-01). A 5-instrument panel is possible only from 2024-04-01 onward.
+- FCLR-002 (frontier rank 1) is NOT started: no FCLR-002 protocol version registered, no FCLR-002 evaluation run. Only partial admissible data exists (BTCUSDT 2024-07 and 2024-08 daily archives downloaded; manifest_fclr002.json absent; 2024-09 and the other four symbols' 2024-07..2024-09 archives are missing). Do not begin FCLR-002 without a registered FCLR-002 protocol version and complete coverage.
 
 **What to do:**
 1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
