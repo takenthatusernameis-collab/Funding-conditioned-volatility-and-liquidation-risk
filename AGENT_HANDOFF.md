@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T23:15:09Z
+Updated: 2026-10-27T23:16:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 189735ab (checkpoint agent session; local main)
+Current HEAD: b2fe12cb (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -16,13 +16,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 1832814b on main.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is b2fe12cb on main (updated from 189735ab).
 - Ran tests: `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
-- Refreshed handoff with current timestamp and confirmed state; prepared clear initial task message for next agent.
+- Refreshed handoff with current timestamp and state; prepared clear initial task message for next agent.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 25 tests pass; frozen artifacts unchanged.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 25 tests pass; frozen artifacts unchanged. HEAD advanced by checkpoint commits.
 
 ## Current verified state
 
@@ -49,7 +49,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `1832814b` on `main` (local checkpoint).
+- HEAD `b2fe12cb` on `main` (local checkpoint).
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session was a state handoff refresh only.
