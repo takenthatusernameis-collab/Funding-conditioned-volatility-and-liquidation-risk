@@ -3,7 +3,7 @@
 Updated: 2026-10-27T22:05:17Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 5e67de3e (matches origin/main)
+Current HEAD: 59b5836e (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -44,10 +44,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `5e67de3e` on `main`, matches `origin/main`.
+- HEAD `59b5836e` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- Changes this session: AGENT_HANDOFF.md metadata/state update only (committed as 5e67de3e; working-tree edit to reflect final HEAD).
+- Changes this session: AGENT_HANDOFF.md metadata/state update only (uncommitted; HEAD 59b5836e matches origin/main).
 
 Key facts to know:
 - Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
