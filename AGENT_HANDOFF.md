@@ -1403,3 +1403,35 @@ Inconclusive report retained. No tuning on holdout, no split/protocol changes. R
 4. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid. No new model results reported from the current holdout.
+
+## What changed (this session, 2026-10-27T00:28:24Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree clean (`git status --porcelain` empty; HEAD `9e649a4` tracking `origin/main`), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- pytest not installed in this environment (`python -m pytest` unavailable); repository tests previously verified 22/22 pass. No code changes made.
+- Verified state unchanged: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable; splits/protocol/results unchanged.
+- All four durable artifacts present: research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/leakage_audit.md, research_state/negative_results_report.md. Coverage defect documented: research_state/coverage_audit_recheck.md shows actual evaluated panel is BTCUSDT-only for Jan-Mar 2024 (other four symbols' mark-price coverage begins 2024-04-01).
+- Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
+
+## Initial task message for next agent
+**Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
+
+**Current verified state (as of 2026-10-27T00:28:24Z):**
+- Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
+- Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch `main` up to date with `origin/main` (HEAD `9e649a4`).
+- Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+- All four durable artifacts present: research_state/hypothesis_registry.json, research_state/experiment_frontier.json, research_state/leakage_audit.md, research_state/negative_results_report.md.
+- Coverage defect documented: actual evaluated panel is BTCUSDT-only for Jan-Mar 2024 (other four symbols' mark-price coverage begins 2024-04-01); a 5-instrument panel is possible only from 2024-04-01 onward.
+
+**What to do:**
+1. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/research_protocol.md, research_state/final_inconclusive_report.md, and research_state/gate_assessment.md to confirm current state.
+2. If new analysis is requested, only proceed under a new pre-registered protocol version with sufficient data (>=3 non-overlapping 30-day blocks across >=5 instruments; a panel starting no earlier than 2024-04-01 can satisfy the instrument requirement) and explicit acceptance criteria; do not reuse the sealed holdout for selection/tuning.
+3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
+4. Leave risk-overlay phase INELIGIBLE.
+
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (`python -m pytest`: 22/22 pass). No new model results reported from the current holdout.
+
+## Unresolved blockers
+- Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C are modeled proxies, not observed liquidations). research_state/binance_source_probe.md: no liquidationSnapshot archive under data/futures/um or cm (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location.
+- Forecast gate not met: C2 vs B1 shows 2.50% relative QLIKE reduction numerically but 95% CI [-0.123401, 0.158843] crosses zero; test window is ~4 days (single block) vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
+
+## Decision
+Inconclusive report retained. No tuning on holdout, no split/protocol changes. Risk-overlay remains INELIGIBLE. No further model changes or OOS extension attempted without a new pre-registered protocol and sufficient data.
