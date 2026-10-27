@@ -30,12 +30,21 @@ OUT = REPO / "research_state" / "fclr002_coverage_audit.json"
 
 
 def parse_mark_timestamps(sym: str) -> set[int]:
+    # Recursive: extracted CSVs live at
+    #   <cache>/<SYM>_<YYYY_MM>/markPriceKlines-<YYYY-MM-DD>/<SYM>-1h-<YYYY-MM-DD>.csv
+    # but some months were extracted into a nested zip-stem directory
+    #   .../markPriceKlines-<YYYY-MM-DD>/<SYM>-1h-<YYYY-MM-DD>/<SYM>-1h-<YYYY-MM-DD>.csv
     files = glob.glob(
-        str(CACHE / f"{sym}_2024_0[789]" / "**" / "markPriceKlines-*" / f"*{sym}-1h-*.csv"),
+        str(CACHE / f"{sym}_2024_0[789]" / "**" / f"*{sym}-1h-*.csv"),
+        recursive=True,
+    ) + glob.glob(
+        str(CACHE / f"{sym}_2024_0[456]" / "**" / f"*{sym}-1h-*.csv"),
         recursive=True,
     )
     ts: set[int] = set()
     for f in files:
+        if "markPrice" not in f:
+            continue
         try:
             with open(f) as fh:
                 next(fh)  # header

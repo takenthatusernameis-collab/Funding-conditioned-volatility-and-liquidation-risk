@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download extended Binance archive coverage (2024-07..2024-09) for FCLR-002.
+"""Download extended Binance archive coverage (2024-04..2024-09) for FCLR-002.
 
 FCLR-002 is a pre-registered follow-up to FCLR-001.  It reuses the same frozen
 feature/target/model definitions as FCLR-001 v1.0 but evaluates them on a
@@ -10,12 +10,12 @@ The FCLR-001 window (2024-01..2024-03) is single-instrument (BTCUSDT only:
 the other four symbols' Jan-Mar markPriceKlines files are mislabelled
 BTCUSDT-1h-*.csv duplicates, see research_state/coverage_audit_recheck.md).
 A 5-instrument panel is only available from 2024-04-01 onward.  This script
-extends the cache to 2024-09-30 so a walk-forward design with four 30-day
+extends the cache through 2024-09-30 so a walk-forward design with four 30-day
 test blocks (2024-06, 2024-07, 2024-08, 2024-09) is possible.
 
 Idempotent: skips existing files, records provenance in
-research_state/data_cache/manifest_fclr002.json.
-No credentials, no paid services, no trading.
+research_state/data_cache/manifest_fclr002.json.  Coverage-only: no outcomes
+are computed here.  No credentials, no paid services, no trading.
 """
 from __future__ import annotations
 
@@ -34,7 +34,12 @@ BASE = "https://data.binance.vision/data/futures/um"
 MANIFEST_OUT = REPO / "research_state" / "data_cache" / "manifest_fclr002.json"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
-MONTHS = ["2024-07", "2024-08", "2024-09"]
+# 2024-04..2024-09 inclusive.  BTCUSDT's April-June cache predates this script;
+# the other four symbols had no April-June markPriceKlines downloaded at all, so
+# the walk-forward design (test blocks 2024-06..2024-09) was not actually
+# supportable until these months are present.  Idempotent: existing files are
+# skipped, so re-running only fills the gaps.
+MONTHS = ["2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11"]
 KINDS_DAILY = ["markPriceKlines", "indexPriceKlines", "premiumIndexKlines", "klines"]
 MAX_ATTEMPTS = 4
 TIMEOUT = 60
