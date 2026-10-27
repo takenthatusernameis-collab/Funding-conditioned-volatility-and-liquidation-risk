@@ -26,10 +26,14 @@ def test_audit_runs_and_reports_5_instruments():
     assert doc["longest_window"]["hours"] >= 30 * 24
 
 
-def test_longest_window_is_contiguous_and_within_jul_sep():
+def test_longest_window_is_contiguous_and_meets_minimum_blocks():
     doc = json.loads((REPO / "research_state" / "fclr002_coverage_audit.json").read_text())
     lw = doc["longest_window"]
-    assert lw["start"] >= "2024-07-01"
+    # The audited 5-instrument common window is 2024-04-01..2024-09-30
+    # (mark-price coverage for the other four symbols begins 2024-04-01).
+    assert lw["start"] == doc["common_first"]
+    assert lw["end"] == doc["common_last"]
+    assert lw["start"] >= "2024-04-01"
     assert lw["end"] <= "2024-09-30T23:59:59Z"
     # >=3 non-overlapping 30-day blocks must fit inside the window
     assert lw["hours"] >= 3 * 30 * 24
