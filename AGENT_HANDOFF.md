@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T20:10:45Z
+Updated: 2026-10-27T21:00:09Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 39ab0812 (chore(kilo): checkpoint agent session; matches origin/main)
+Current HEAD: 483b3f16 (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -46,7 +46,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `39ab0812` on `main`, matches `origin/main`.
+- HEAD `483b3f16` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - Only change since the last recorded HEAD (`c5881a74`) is this handoff's metadata.
