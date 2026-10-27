@@ -3,7 +3,7 @@
 Updated: 2026-10-27T22:05:17Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: a71fc3e3 (matches origin/main)
+Current HEAD: 46db64da (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -17,7 +17,7 @@ Task: Read the prior agent task from the durable handoff and complete it. Then u
 
 Completion summary:
 - Prior agent session (checkpoint c0f1151d): verified state (HEAD c0f1151d, matches origin/main), refreshed handoff HEAD/timestamp, confirmed 25 passed tests, no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes uncommitted.
-- Current session (HEAD a71fc3e3): refreshed handoff metadata (HEAD/timestamp), confirmed tests (25 passed), no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes uncommitted.
+- Current session (HEAD 46db64da): refreshed handoff metadata (HEAD/timestamp), confirmed tests (25 passed), no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Changes committed across checkpoint commits.
 
 ## Current verified state
 
@@ -44,10 +44,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `a71fc3e3` on `main`, matches `origin/main`.
+- HEAD `46db64da` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- Changes this session: AGENT_HANDOFF.md metadata/state update only (committed as a71fc3e3).
+- Changes this session: AGENT_HANDOFF.md metadata/state update only (committed as 46db64da).
 
 Key facts to know:
 - Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
