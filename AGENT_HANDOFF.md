@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T21:04:38Z
+Updated: 2026-10-27T21:05:12Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 48e01c0a (matches origin/main)
+Current HEAD: 5bfbad5d (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -16,9 +16,8 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read the prior agent task from AGENT_HANDOFF.md (re-read prior session state). Verified repository state: HEAD `48e01c0a` matches origin/main. Tests `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
-- Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- Updated handoff timestamp/HEAD to current session state and refreshed initial task message for next agent. No substantive code or research-artifact changes.
+- Prior agent session completed this task: re-read AGENT_HANDOFF.md prior session state, verified repository state, ran `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified, tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. No substantive code or research-artifact changes.
+- This session: confirmed prior completion still holds. HEAD `5bfbad5d` matches `origin/main`. `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified. Tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. Fixed stale handoff HEAD field (`48e01c0a` → `5bfbad5d`) and refreshed timestamp/initial task message.
 
 ## Current verified state
 
@@ -45,10 +44,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `48e01c0a` on `main`, matches `origin/main`.
+- HEAD `5bfbad5d` on `main`, matches `origin/main`.
 - `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- Only change this session is AGENT_HANDOFF.md metadata/state update.
+- Only change this session is AGENT_HANDOFF.md metadata/state update (HEAD field + timestamp).
 
 Key facts to know:
 - Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — a coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
