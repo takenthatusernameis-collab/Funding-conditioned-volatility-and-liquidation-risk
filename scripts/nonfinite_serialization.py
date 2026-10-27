@@ -53,14 +53,19 @@ def loads(text: str) -> dict:
 
 
 def is_strict_json(text: str) -> bool:
-    """Return True iff text parses as strict JSON with no NaN/Infinity tokens."""
+    """Return True iff text parses as strict JSON with no NaN/Infinity tokens.
+
+    ``json.loads`` accepts the bare tokens ``NaN`` / ``Infinity`` /
+    ``-Infinity`` by default, so we install a ``parse_constant`` hook that
+    rejects them. Quoted string values such as the NONFINITE_SENTINEL
+    ``"NaN"`` are ordinary JSON strings and remain valid.
+    """
     try:
-        value = json.loads(text)
+        json.loads(text, parse_constant=_reject_nonfinite)
     except (ValueError, TypeError):
         return False
-    # json.loads accepts NaN/Infinity by default; reject those tokens explicitly.
-    stripped = text.strip()
-    for token in ("NaN", "Infinity", "-Infinity"):
-        if token in stripped:
-            return False
-    return value is not None or stripped == "null"
+    return True
+
+
+def _reject_nonfinite(token: str):
+    raise ValueError(f"non-finite JSON constant not allowed: {token!r}")

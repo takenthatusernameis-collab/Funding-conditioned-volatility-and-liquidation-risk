@@ -126,9 +126,28 @@ def serialize_records(records: Iterable[dict]) -> str:
     return "\n".join(lines) + ("\n" if lines else "")
 
 
+# Authorization-specific secret patterns. ``_LONG_VALUE_RE`` is deliberately
+# excluded: it is used during *writing* to redact long opaque values, but a
+# persisted ledger may legitimately contain long public URLs (run URLs, log
+# URLs, repository paths). Those are not authorization material. A ledger is
+# "secret-free" only when it contains no bearer tokens, GitHub tokens, JWTs,
+# secret assignments, or URL-embedded secrets.
+_AUTH_PATTERNS = (
+    _BEARER_RE,
+    _GH_TOKEN_RE,
+    _JWT_RE,
+    _SECRET_ASSIGN_RE,
+    _URL_SECRET_RE,
+)
+
+
 def ledger_has_no_secrets(text: str) -> bool:
-    """Return True if the ledger text contains no unredacted secrets."""
-    for pattern in (_BEARER_RE, _GH_TOKEN_RE, _JWT_RE, _SECRET_ASSIGN_RE, _URL_SECRET_RE, _LONG_VALUE_RE):
+    """Return True if the ledger text contains no unredacted authorization material.
+
+    Long opaque values and public URLs are not treated as secrets here; use
+    :func:`redact` when *writing* a record to strip long opaque values.
+    """
+    for pattern in _AUTH_PATTERNS:
         if pattern.search(text):
             return False
     return True
