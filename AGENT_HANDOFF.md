@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T19:01:34Z
+Updated: 2026-10-27T19:04:05Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: d7e51099 (chore(kilo): checkpoint agent session)
+Current HEAD: bcfe9a57 (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -20,7 +20,7 @@ Completion summary:
 - FCLR-H003 pre-registered in `research_state/fclr_h003_pre_registration.md` and executed on the frozen FCLR-001 test block — results in `research_state/evaluation_summary_h003.md` (synthetic modeled boundary breaches only, base rates near-zero, no risk-overlay implications).
 - Evaluation summaries reconciled canonically: `research_state/evaluation_summary.md` (FCLR-001) and `research_state/evaluation_summary_FCLR002.md` (FCLR-002); contradiction resolved by recomputation from frozen artifacts.
 - FCLR-001 frozen holdout NOT reused/retrained/re-evaluated; splits/protocol unchanged; no holdout leakage introduced.
-- Verified this session: HEAD d7e51099, tracked tree clean except untracked `__pycache__`, `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
+- Verified this session: HEAD bcfe9a57, tracked tree clean except untracked `__pycache__`, `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 
 ## Current verified state
 
@@ -39,7 +39,7 @@ Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Ris
 
 ## Initial task message for next agent
 
-State: INCONCLUSIVE. Forecast gate NOT_MET (PILOT/INCONCLUSIVE). Risk-overlay phase INELIGIBLE. Track A BLOCKED — no complete unauthenticated public liquidation census found; documented in `research_state/liquidation_sources_enumeration.md`. FCLR-001 frozen (BTCUSDT-only panel; sealed holdout NOT reused/retrained/re-evaluated; OOS window and splits must NOT change). FCLR-H003 pre-registered in `research_state/fclr_h003_pre_registration.md` and executed on the frozen test block; results in `research_state/evaluation_summary_h003.md` — synthetic modeled boundary breaches only, no risk-overlay implications. Evaluation summaries reconciled canonically; headline C2 vs B1 on FCLR-001 is -2.50% relative with CI crossing zero; forecast gate NOT_MET either way. FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and NOT authorized unless explicitly requested with pre-registered FCLR-002 v1.0 (splits + acceptance criteria BEFORE outcomes) and an adversarial leakage audit before opening its holdout. Verified this session: HEAD d7e51099, tracked tree clean except untracked `__pycache__`, `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
+State: INCONCLUSIVE. Forecast gate NOT_MET (PILOT/INCONCLUSIVE). Risk-overlay phase INELIGIBLE. Track A BLOCKED — no complete unauthenticated public liquidation census found; documented in `research_state/liquidation_sources_enumeration.md`. FCLR-001 frozen (BTCUSDT-only panel; sealed holdout NOT reused/retrained/re-evaluated; OOS window and splits must NOT change). FCLR-H003 pre-registered in `research_state/fclr_h003_pre_registration.md` and executed on the frozen test block; results in `research_state/evaluation_summary_h003.md` — synthetic modeled boundary breaches only, no risk-overlay implications. Evaluation summaries reconciled canonically; headline C2 vs B1 on FCLR-001 is -2.50% relative with CI crossing zero; forecast gate NOT_MET either way. FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and NOT authorized unless explicitly requested with pre-registered FCLR-002 v1.0 (splits + acceptance criteria BEFORE outcomes) and an adversarial leakage audit before opening its holdout. Verified this session: HEAD bcfe9a57, tracked tree clean except untracked `__pycache__`, `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
 
 Authorized next work: if FCLR-002 is explicitly requested, pre-register FCLR-002 v1.0 with splits and acceptance criteria BEFORE computing any outcomes, then run walk-forward evaluation on the 2024-04..2024-09 panel and an adversarial leakage audit before opening its holdout (rank 5). Otherwise no new runs are authorized — document/clarify only without touching splits, protocol, evaluation logic, or reported results; never claim unexecuted runs succeeded. Leave risk-overlay INELIGIBLE.
 
