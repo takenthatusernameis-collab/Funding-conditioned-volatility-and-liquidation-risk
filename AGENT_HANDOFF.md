@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T08:22:45Z
+Updated: 2026-10-27T08:25:53Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -40,12 +40,18 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~4.82s.
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
 
+## What changed (this session, 2026-10-27T08:25:53Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: HEAD=8cd6a104 on main, git tracked tree clean (only untracked __pycache__ caches), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~4.77s. Tracked tree clean.
+- Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
+- Updated AGENT_HANDOFF.md with verification record and next-agent task.
+
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-27T08:23:18Z):**
+**Current verified state (as of 2026-10-27T08:25:53Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree: HEAD=ef4a638d on main; AGENT_HANDOFF.md modified (this update), research_state/fclr002_coverage_audit.json auto-regenerated (timestamp only); only untracked __pycache__ caches otherwise. No research logic/split/protocol/results changes.
+- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree: HEAD=8cd6a104 on main; AGENT_HANDOFF.md modified (this update), research_state/fclr002_coverage_audit.json auto-regenerated (timestamp only); only untracked __pycache__ caches otherwise. No research logic/split/protocol/results changes.
 - Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
 
