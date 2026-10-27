@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T11:30:47Z
+Updated: 2026-10-27T11:33:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,12 +14,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T11:30:47Z):
+Verification (this session, 2026-10-27T11:33:00Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: 79c2fbc4 (chore(kilo): checkpoint agent session), branch main.
-- `python -m pytest -q`: 24 passed, 0 failed in ~4.95s.
+- HEAD: 424d2a06 (chore(kilo): checkpoint agent session), branch main.
+- `python -m pytest -q`: 24 passed, 0 failed in ~4.83s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
-- Diff vs prior handoff HEAD (a7532d14): AGENT_HANDOFF.md timestamp line only; no results, protocol, or split changes.
+- Diff vs prior handoff HEAD (a7532d14): AGENT_HANDOFF.md (timestamp + prior-task wording) and research_state/fclr002_coverage_audit.json (generated_utc timestamp only). No results, protocol, or split changes.
+- Working-tree drift detected and corrected: research_state/fclr002_coverage_audit.json had an unsynchronized `generated_utc` (2026-10-27T11:32:06Z) differing from the committed value (2026-10-27T11:31:27Z). Restored to HEAD via `git checkout HEAD -- research_state/fclr002_coverage_audit.json`. No substantive content drift anywhere else.
 
 ## Current verified state
 
@@ -44,3 +45,5 @@ Verification (this session, 2026-10-27T11:30:47Z):
 5. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
+
+(End of file - total 46 lines)
