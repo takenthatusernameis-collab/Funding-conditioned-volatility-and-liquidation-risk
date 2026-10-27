@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T22:15:00Z
+Updated: 2026-10-27T22:16:07Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 11b31e56 (matches origin/main)
+Current HEAD: 08615ff0 (matches origin/main)
 
 ## Mission (unchanged)
 
@@ -16,8 +16,8 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Prior agent sessions (checkpoints c0f1151d .. 11b31e56): each verified state, refreshed handoff HEAD/timestamp, confirmed 25 passed tests, no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- Current session (HEAD 11b31e56): verified HEAD matches origin/main, confirmed `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified. No new research results produced; this session was a state handoff refresh only.
+- Prior agent sessions (checkpoints c0f1151d .. 08615ff0): each verified state, refreshed handoff HEAD/timestamp, confirmed 25 passed tests, no frozen artifacts modified. Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
+- Current session (HEAD 08615ff0): verified HEAD matches origin/main, confirmed `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified. No new research results produced; this session was a state handoff refresh only.
 
 ## What this session delivered
 
