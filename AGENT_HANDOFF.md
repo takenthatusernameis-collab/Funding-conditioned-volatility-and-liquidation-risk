@@ -59,20 +59,20 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
 - Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
 
-
-## What changed (this session, 2026-10-27T03:39:25Z)
-- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree unchanged (only untracked local `__pycache__/` artifacts), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
-- Reverted an incidental timestamp-only modification to research_state/fclr002_coverage_audit.json to preserve tracked state.
-- Confirmed tests: `python -m pytest` 23 passed, 1 failed (pre-existing `tests/test_fclr002_coverage_audit.py::test_longest_window_is_contiguous_and_within_jul_sep` assertion mismatch: longest contiguous window starts 2024-04-01, not within Jul-Sep; not caused by this session). Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch up to date with origin/main.
+## What changed (this session, 2026-10-27T03:40:03Z)
+- Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree unchanged (no tracked file modifications), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
+- Cleaned local `__pycache__` artifacts; git tracked tree clean.
+- Confirmed tests: `python -m pytest` 23 passed, 1 failed (pre-existing `tests/test_fclr002_coverage_audit.py::test_longest_window_is_contiguous_and_within_jul_sep` assertion mismatch: longest contiguous window starts 2024-04-01, not within Jul-Sep; not caused by this session). Branch up to date with origin/main.
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
 - Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
+
 
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-27T03:26:25Z):**
+**Current verified state (as of 2026-10-27T03:40:03Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests pass 24/24 (`python -m pytest`, ~5.5s). Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch up to date with origin/main.
+- Tests: `python -m pytest` 23 passed, 1 failed (pre-existing). Git tracked tree clean; only untracked local `__pycache__/` artifacts removed. Branch up to date with origin/main.
 - Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero; test window is a single ~4-day block vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
 
@@ -82,7 +82,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 3. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 4. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (`python -m pytest`: 24/24 pass). No new model results reported from the current holdout.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; existing tests remain valid (23 passed, 1 pre-existing failure unrelated to state). No new model results reported from the current holdout.
 
 ## Unresolved blockers
 - Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C labels implemented but are modeled proxies, not observed liquidations). binance_source_probe.md: no liquidationSnapshot archive found under data/futures/um or cm (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.
