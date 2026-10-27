@@ -272,18 +272,18 @@ Inconclusive report retained. No tuning on holdout, no split/protocol changes. R
 ## Decision
 Inconclusive report retained. No tuning on holdout, no split/protocol changes. Risk-overlay remains INELIGIBLE. No further model changes or OOS extension attempted without a new pre-registered protocol and sufficient data.
 
-## What changed (this session, 2026-10-27T05:31:07Z)
+## What changed (this session, 2026-10-27T05:37:03Z)
 - Re-read prior agent task from AGENT_HANDOFF.md ("Maintain repository state as-is") and verified completion: tracked tree clean (git status clean), no holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol changes.
-- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~7.33s. Git tracked tree clean. Branch up to date with origin/main (HEAD = 6c55a68).
+- Confirmed tests pass: `python -m pytest` 24 passed, 0 failed in ~7.3s. Git tracked tree clean. Branch up to date with origin/main (HEAD = c151c05).
 - Verified state unchanged: inconclusive, forecast gate NOT MET (PILOT/INCONCLUSIVE), risk-overlay INELIGIBLE, direct liquidation labels unavailable; splits/protocol/results unchanged. Registry artifacts present.
 - Prior agent task (maintain state as-is) confirmed COMPLETE. Updated handoff with clear task message for next agent.
 
 ## Initial task message for next agent
 **Task:** Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout. Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-**Current verified state (as of 2026-10-27T05:31:07Z):**
+**Current verified state (as of 2026-10-27T05:37:03Z):**
 - Repository is INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable.
-- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree clean; only untracked local `__pycache__/` artifacts. Branch up to date with origin/main (HEAD = 6c55a68).
+- Tests: `python -m pytest` 24 passed, 0 failed. Git tracked tree clean. Branch up to date with origin/main (HEAD = c151c05).
 - Frozen splits/protocol/results unchanged: train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z (7d embargo); test QLIKE B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 2.50% rel. reduction, 95% CI [-0.123401, 0.158843] crosses zero.
 - Registry artifacts present: research_state/hypothesis_registry.json, experiment_frontier.json, negative_results_report.md, leakage_audit.md.
 
@@ -294,10 +294,6 @@ Inconclusive report retained. No tuning on holdout, no split/protocol changes. R
 4. Leave risk-overlay phase INELIGIBLE.
 
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (24 passed). No new model results reported from the current holdout.
-
-## Unresolved blockers
-- Direct liquidation labels unavailable from admissible public sources (Track A not viable; Track B/C labels implemented but are modeled proxies, not observed liquidations). binance_source_probe.md: no liquidationSnapshot archive found under data/futures/um or cm (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.
-- Forecast gate not met: C2 vs B1 shows 2.50% relative QLIKE reduction numerically but 95% CI crosses zero; test window is ~4 days (single block) vs protocol requirement of >=3 non-overlapping 30-day blocks across >=5 instruments.
 
 ## Decision
 Inconclusive report retained. No tuning on holdout, no split/protocol changes. Risk-overlay remains INELIGIBLE. No further model changes or OOS extension attempted without a new pre-registered protocol and sufficient data.
