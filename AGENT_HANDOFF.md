@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T23:04:16Z
+Updated: 2026-10-27T23:07:30Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 Current HEAD: 6586f676 (matches origin/main)
@@ -18,7 +18,7 @@ Task: Read the prior agent task from the durable handoff and complete it. Then u
 Completion summary:
 - Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 6586f676 on main matching origin/main.
 - Ran tests: `python3 -m pytest tests/ -q` — 25 passed, no frozen artifacts modified.
-- Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. No new research results produced; this session was a state handoff refresh only.
+- Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`. No new research results produced; handoff refreshed and updated.
 
 ## What this session delivered
 
@@ -36,7 +36,7 @@ Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Ris
 - Registry present: `hypothesis_registry.json`, `experiment_frontier.json`, `negative_results_report.md`, `leakage_audit.md`, `gate_assessment.md`, `final_inconclusive_report.md`, `fclr002_coverage_audit.json`.
 - Track A (liquidation sources enumeration): `research_state/liquidation_sources_enumeration.md` — BLOCKED. No complete unauthenticated public liquidation census found across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals; do not use partial streams as complete census.
 - FCLR-H003 pre-registered in `research_state/fclr_h003_pre_registration.md` and executed on frozen FCLR-001 test block — results in `research_state/evaluation_summary_h003.md` (synthetic modeled boundary breaches only, base rates near-zero, no risk-overlay implications).
-- FCLR-002 coverage (independently re-verified): 5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps, single contiguous window 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z (~183 days). Sufficient in principle for >=3 non-overlapping 30-day blocks, but NOT executed and its holdout NOT opened.
+- FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
 
 ## Initial task message for next agent
 
