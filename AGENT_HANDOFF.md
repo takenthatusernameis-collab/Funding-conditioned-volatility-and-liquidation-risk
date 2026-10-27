@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T11:33:00Z
+Updated: 2026-10-27T12:04:26Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -14,13 +14,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
 
-Verification (this session, 2026-10-27T11:33:00Z):
+Verification (this session, 2026-10-27T12:04:26Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: 424d2a06 (chore(kilo): checkpoint agent session), branch main.
-- `python -m pytest -q`: 24 passed, 0 failed in ~4.83s.
+- HEAD: 127bd8f3 (chore: capture completed workflow run diagnostics), branch main. Two post-handoff commits since the prior recorded HEAD 424d2a06: 0615ded5 (chore(kilo): checkpoint agent session) and 127bd8f3 (chore: capture completed workflow run diagnostics, appending one record to research_state/workflow_run_diagnostics.jsonl).
+- `python -m pytest -q`: 24 passed, 0 failed in ~3.99s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
-- Diff vs prior handoff HEAD (a7532d14): AGENT_HANDOFF.md (timestamp + prior-task wording) and research_state/fclr002_coverage_audit.json (generated_utc timestamp only). No results, protocol, or split changes.
-- Working-tree drift detected and corrected: research_state/fclr002_coverage_audit.json had an unsynchronized `generated_utc` (2026-10-27T11:32:06Z) differing from the committed value (2026-10-27T11:31:27Z). Restored to HEAD via `git checkout HEAD -- research_state/fclr002_coverage_audit.json`. No substantive content drift anywhere else.
+- Diff vs prior handoff HEAD (424d2a06): AGENT_HANDOFF.md (timestamp + prior-task wording), research_state/fclr002_coverage_audit.json (generated_utc timestamp only), and research_state/workflow_run_diagnostics.jsonl (one appended diagnostics record). No results, protocol, or split changes.
+- Working-tree drift from the prior session was previously corrected (research_state/fclr002_coverage_audit.json restored to HEAD). No substantive content drift anywhere else this session.
 
 ## Current verified state
 
