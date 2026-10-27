@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-27T13:08:50Z
+Updated: 2026-10-27T13:09:17Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 
@@ -10,14 +10,14 @@ Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized 
 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
-## Prior agent task — COMPLETED (verified this session)
+## Prior agent task — COMPLETED (verified this session, 2026-10-27T13:09:17Z)
 
-Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay remains INELIGIBLE.
+Task: Maintain repository state as-is. Do not retrain, re-tune, or re-evaluate models on the current sealed holdout (FCLR-001). Do not extend the OOS window or change splits/protocol. Risk-overlay phase INELIGIBLE.
 
-Verification (this session, 2026-10-27T13:07:30Z):
+Verification (this session, 2026-10-27T13:09:17Z):
 - `git status --short`: tracked tree clean; only untracked scripts/__pycache__/ and tests/__pycache__/ caches.
-- HEAD: 7f6c52cf (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded 27407e96 touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
-- `python -m pytest -q`: 25 passed, 0 failed in ~4.38s.
+- HEAD: e85a3958 (chore(kilo): checkpoint agent session), branch main. Diff vs previously recorded 7f6c52cf touches AGENT_HANDOFF.md only (timestamp + wording); no holdout/model/split/protocol/results changes.
+- `python -m pytest -q`: 25 passed, 0 failed in ~4.36s.
 - No holdout leakage, no model retraining/re-tuning/re-evaluation on the sealed holdout, no split/protocol/results changes.
 - No working-tree drift; research_state/fclr002_coverage_audit.json remains synchronized with HEAD.
 
@@ -43,6 +43,6 @@ Verification (this session, 2026-10-27T13:07:30Z):
 4. Documentation/cleanup is acceptable only if it improves clarity without modifying evaluation logic, splits, protocol, or reported results. Never claim unexecuted runs succeeded.
 5. Leave risk-overlay phase INELIGIBLE.
 
-**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (27407e96) except for authorized checkpoint/documentation commits.
+**Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged (7f6c52cf) except for authorized checkpoint/documentation commits.
 
 (End of file - total 48 lines)
