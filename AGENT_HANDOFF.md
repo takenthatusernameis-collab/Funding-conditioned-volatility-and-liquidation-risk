@@ -57,10 +57,10 @@ Completion summary (this session):
 **Acceptance check:** State remains inconclusive with gates documented; no holdout leakage introduced; all existing tests pass (25 passed). No new model results reported from the current holdout. HEAD unchanged except for authorized checkpoint/documentation commits.
 
 ## Update (2026-10-27T15:12:XXZ) — Track A enumeration
-- Enumerated admissible public liquidation sources for Track A (Binance data.binance.vision, Bybit public.bybit.com, OKX/Deribit, academic/GitHub/HF/Zenodo, vendors). 
+- Enumerated admissible public liquidation sources for Track A (Binance data.binance.vision, Bybit public.bybit.com, OKX/Deribit, academic/GitHub/HF/Zenodo, vendors).
 - Binance liquidationSnapshot daily/monthly archives return 404; fapi forceOrders returns 451 in this environment. No unauthenticated complete public liquidation census found for required symbols/window.
 - Bybit public trading data exists but contains per-trade data, not a liquidation event census; no liquidation directory found. Converting trades is not a complete census.
-- No other obvious unauthenticated complete public liquidation archives identified. 
+- No other obvious unauthenticated complete public liquidation archives identified.
 - Documented findings in `research_state/liquidation_sources_enumeration.md`. Track A remains BLOCKED (unviable with admissible unauthenticated public sources). Do not infer event-free intervals; do not use partial streams as complete census.
 
 ## Update (2026-10-27T15:25:00Z) — FCLR-H003 pre-registration
@@ -92,3 +92,8 @@ Next highest-value authorized task (rank 1): if FCLR-002 is explicitly requested
 
 ## Initial task message for next agent
 State: INCONCLUSIVE, forecast gate NOT_MET, risk-overlay INELIGIBLE, Track A BLOCKED. FCLR-001 frozen (BTCUSDT-only panel verified). Evaluation summaries reconciled canonically. FCLR-002 coverage sufficient but not requested/executed; if explicitly requested must pre-register FCLR-002 v1.0 before outcomes and do adversarial leakage audit before opening holdout. Next highest-value authorized work without executing unregistered runs: (1) if desired, run FCLR-H003 out-of-sample hypothetical boundary-breach forecast using pre-registered scenarios in `research_state/fclr_h003_pre_registration.md` (separate from forecast gate, keep long/short separate, disclose assumptions, do NOT call modeled breaches observed liquidations), or (2) continue documentation/clarity improvements without touching splits/protocol/evaluation logic. Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/fclr_h003_pre_registration.md, research_state/experiment_frontier.json first. Leave risk-overlay INELIGIBLE. Acceptance: no holdout leakage, all tests pass (25/25), no new results from sealed holdout, any new results clearly labeled as modeled/synthetic and not unblocking overlay.
+
+## Update (2026-10-27T16:22:XXZ) — FCLR-H003 out-of-sample evaluation (pre-registered)
+- Ran out-of-sample hypothetical boundary-breach forecast on FCLR-001 frozen test block (2024-03-27T02:00:00Z..2024-03-30T23:00:00Z) using pre-registered scenarios in `research_state/fclr_h003_pre_registration.md`: leverages 3/5/10/20x, long/short separate, horizon 24h, MMR 0.005, zero-cost boundary, entry at mark close t.
+- Labels are synthetic modeled boundary breaches only (scripts/synthetic_boundary_labels.py) — not observed liquidations. Evaluated B0 and C2 (logistic) per scenario; reported Brier/log-loss/calibration/precision-recall. Results in `research_state/evaluation_summary_h003.md`. In this short single-instrument test block base rates are near-zero (as expected); forecasts are near-constant low probability. No risk-overlay implications.
+- All tests pass 25/25; tracked tree clean. No frozen artifacts (protocol/splits/holdout) modified.
