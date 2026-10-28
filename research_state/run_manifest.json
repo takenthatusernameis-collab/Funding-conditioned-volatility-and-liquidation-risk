@@ -8550,6 +8550,7 @@
     ],
     "status": "complete",
     "common_panel_timestamps": 2136,
+    "coverage_audit_correction": "RE-VERIFIED 2026-10-28. The recorded common_panel_timestamps=2136 is NOT reproducible from the working tree. Per research_state/coverage_audit_recheck.md the true 5-symbol mark-price intersection in 2024-01-01..2024-03-31 is 0 timestamps: BTCUSDT alone has 2160 mark-price rows; ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT have zero mark-price CSVs before 2024-04-01. The original value is preserved here as a historical record of what the coverage audit reported at generation time; the corrected figure is 0 and the evaluated panel is BTCUSDT-only.",
     "common_panel_first": "2024-01-02T00:00:00Z",
     "common_panel_last": "2024-03-30T23:00:00Z",
     "symbols": [

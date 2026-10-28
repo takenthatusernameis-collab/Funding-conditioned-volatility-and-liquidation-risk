@@ -58,7 +58,7 @@ Exact UTC split timestamps are frozen (coverage-only audit). No outcomes have be
 
 - Provisional earliest data: 2024-01-01 (from binance_source_probe.md; funding monthly archive 2024-01; klines daily 2024-01-01). Coverage extended to >=5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) across 2024-01-01..2024-03-31 with paired OOS panel.
 - Rule: boundaries on unique UTC timestamps; 60% train / 20% validation / 20% holdout by timestamp count; 7-calendar-day embargo between each partition.
-- Common paired panel timestamps: 2136
+- Common paired panel timestamps: 0 across the declared 5-symbol universe (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) in 2024-01-01..2024-03-31. Per research_state/coverage_audit_recheck.md the true 5-symbol mark-price intersection is 0 timestamps; only BTCUSDT has mark-price rows in this window (2160). The previously recorded 2136 figure is not reproducible from the working tree. The frozen split boundaries below are BTCUSDT-anchored and remain valid; the >=5-instruments gate in §5 was never met.
 - Train: 2024-01-02T00:00:00Z to 2024-02-24T08:00:00Z (count=1281)
 - Validation: 2024-03-02T08:00:00Z to 2024-03-20T02:00:00Z (count=427) [7d embargo after train]
 - Test/Holdout: 2024-03-27T02:00:00Z to 2024-03-30T23:00:00Z (count=94) [7d embargo after validation]

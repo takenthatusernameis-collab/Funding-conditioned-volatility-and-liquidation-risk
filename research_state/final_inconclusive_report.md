@@ -9,7 +9,7 @@ Decision: Stop with inconclusive report (option a). No risk-overlay phase.
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Coverage audit (>=5 instruments) | MET | 5 instruments (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT); 2136 common hourly timestamps, 2024-01-01..2024-03-31 |
+| Coverage audit (>=5 instruments) | NOT MET | 5 instruments declared (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) but only BTCUSDT has mark-price CSVs in 2024-01-01..2024-03-31; true 5-symbol mark-price intersection = 0 timestamps (research_state/coverage_audit_recheck.md). Evaluated panel is BTCUSDT-only (1634 rows). Previously recorded 2136 common hourly timestamps is not reproducible. |
 | Frozen split boundaries | MET | research_state/run_manifest.json; train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z, val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z, test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z, embargo 7d |
 | Frozen research protocol | MET | research_state/research_protocol.md v1.0 |
 | Direct liquidation labels | NOT VERIFIED | unavailable from public sources |
@@ -42,7 +42,7 @@ Paired block bootstrap (2000 reps, ~24h blocks):
 Gate criteria (protocol §5):
 1. >=2% relative QLIKE reduction on primary contrast C2 vs B1: met numerically (2.50%).
 2. Two-sided 95% CI for paired loss difference must support improvement: NOT met (CI crosses zero).
-3. Minimum claim-worthy test: >=5 instruments (met) AND >=3 non-overlapping 30-day evaluation blocks: NOT met (test span 2024-03-27..2024-03-30, ~4 days, single block).
+3. Minimum claim-worthy test: >=5 instruments (NOT MET — evaluated panel is BTCUSDT-only, 1634 rows; true 5-symbol mark-price intersection = 0) AND >=3 non-overlapping 30-day evaluation blocks: NOT met (test span 2024-03-27..2024-03-30, ~4 days, single block).
 4. Multiplicity/uncertainty conditions: not satisfied.
 
 ## 4. Conclusion
