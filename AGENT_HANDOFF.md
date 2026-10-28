@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T02:57:20Z
+Updated: 2026-10-28T02:58:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 924b9dc1c9d60854b0888bc30e089bbf6d1a301d (checkpoint)
+Current HEAD: 5440fb64622fc30e19bf8efee68487ed29bacfaf (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,12 +16,12 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified actual HEAD is c4a045be414dd8e0998ad410a223f7206b10fc3c on main; the handoff text previously recorded 2a36ca66 (stale snapshot, corrected).
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 5440fb64622fc30e19bf8efee68487ed29bacfaf on main (recorded HEAD was stale: 924b9dc...; prior summary's c4a045be also stale — corrected).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- Updated handoff timestamp and HEAD to c4a045be414dd8e0998ad410a223f7206b10fc3c.
+- Tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
+- Updated handoff timestamp and HEAD to 5440fb64622fc30e19bf8efee68487ed29bacfaf.
 - Rewrote the "Initial task message for next agent" section with current state and a fresh task message.
-- Verified state is consistent with prior corrections; no stale references found beyond the HEAD snapshot itself.
+- Verified state is consistent with prior corrections.
 
 ## What this session delivered
 
@@ -52,7 +52,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `924b9dc1c9d60854b0888bc30e089bbf6d1a301d` on `main` (local checkpoint, "chore(kilo): checkpoint agent session"). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `5440fb64622fc30e19bf8efee68487ed29bacfaf` on `main` (local checkpoint). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
