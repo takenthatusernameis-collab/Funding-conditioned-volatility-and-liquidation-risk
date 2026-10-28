@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T02:59:16Z
+Updated: 2026-10-28T03:49:05Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 577f4ceeff219c2946b00b6e02f3a390261392a5 (checkpoint)
+Current HEAD: 7d21071c27a0c7ad0884e698570f335385e6e86e (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,7 +16,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 577f4ceeff219c2946b00b6e02f3a390261392a5 on main (recorded HEAD was stale — corrected).
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 7d21071c27a0c7ad0884e698570f335385e6e86e on main (recorded HEAD was stale — corrected).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
 - Updated handoff timestamp and HEAD to 577f4ceeff219c2946b00b6e02f3a390261392a5.
@@ -50,7 +50,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `5440fb64622fc30e19bf8efee68487ed29bacfaf` on `main` (local checkpoint). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `7d21071c27a0c7ad0884e698570f335385e6e86e` on `main` (local checkpoint). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
