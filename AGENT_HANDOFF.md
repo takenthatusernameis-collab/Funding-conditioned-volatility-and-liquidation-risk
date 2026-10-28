@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T01:58:00Z
+Updated: 2026-10-28T02:00:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 9116311c (chore(kilo): checkpoint agent session)
+Current HEAD: ef3e4a3e (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is d418b925 on main.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is ef3e4a3e on main (handoff metadata had recorded 9116311c — stale; corrected).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Updated handoff timestamp and HEAD to d418b925.
-- Wrote a clear initial task message for the next agent.
+- Updated handoff timestamp and HEAD to ef3e4a3e.
+- Rewrote the "Initial task message for next agent" section with current state and a fresh task message.
 - Verified state is consistent with prior corrections; no stale references found.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `d418b925`.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `ef3e4a3e`.
 
 ## Current verified state
 
@@ -51,7 +51,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `9116311c` on `main` (local checkpoint, "chore(kilo): checkpoint agent session").
+- HEAD `ef3e4a3e` on `main` (local checkpoint, "chore(kilo): checkpoint agent session"). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in three consecutive sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session refreshed handoff metadata and verified state after prior corrections.
@@ -69,6 +69,7 @@ Key facts to know:
 3. `research_state/research_protocol.md:61` ("Common paired panel timestamps: 2136") → corrected to 0 with the coverage-audit explanation. Split boundaries themselves remain frozen and valid.
 4. `research_state/run_manifest.json:8552` (`common_panel_timestamps: 2136`) → original value preserved as a historical record, plus a `coverage_audit_correction` field documenting the non-reproducibility (true intersection = 0; BTCUSDT-only).
 5. `research_state/final_inconclusive_report.md:12,45` ("Coverage audit (>=5 instruments) | MET ... 2136" and ">=5 instruments (met)") → corrected to NOT MET / NOT MET, consistent with `coverage_audit_recheck.md`.
+6. **Stale-HEAD recurrence (this session).** The handoff recorded HEAD as `9116311c`; actual HEAD at task start was `ef3e4a3e` (a later local checkpoint). Corrected across handoff. The prior task's own completion summary had recorded `d418b925`, which was already stale at that time. Treat the handoff's recorded HEAD as a snapshot, not a guarantee; always re-verify with `git rev-parse HEAD` at session start.
 
 **Authorized next work (only one, and only if explicitly requested):**
 1. If FCLR-002 is explicitly requested: pre-register FCLR-002 v1.0 with splits and acceptance criteria BEFORE computing any outcomes; run walk-forward evaluation on 2024-04..2024-09 panel; run adversarial leakage audit before opening its holdout (rank 5). Never open holdout before audit.
