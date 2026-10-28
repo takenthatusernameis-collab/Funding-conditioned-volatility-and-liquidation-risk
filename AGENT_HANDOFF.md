@@ -3,7 +3,7 @@
 Updated: 2026-10-28T10:42:16Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: ae7d6c35a12f4d15efdddba9ebe5e103b9eac544 (verify with `git rev-parse HEAD`)
+Current HEAD: c71f86825bbd6d672479764f6122bd1e9bb6adab (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,7 +16,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = 4640f35500e38ab94e8bc798222d21b7b9fabcb8.
+- Verified repo state: `git rev-parse HEAD` = c71f86825bbd6d672479764f6122bd1e9bb6adab.
 - `python3 -m pytest tests/ -q` — ...................................................                      [100%]
 51 passed in 1.03s; no frozen artifacts modified.
 - `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
@@ -26,7 +26,7 @@ Completion summary:
 
 ## What this session delivered
 
-Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD corrected to current 4640f35500e38ab94e8bc798222d21b7b9fabcb8; initial task message for next agent refreshed.
+Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD corrected to current c71f86825bbd6d672479764f6122bd1e9bb6adab; initial task message for next agent refreshed.
 
 
 ## Current verified state
@@ -54,14 +54,14 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `4640f35500e38ab94e8bc798222d21b7b9fabcb8` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
+- HEAD `c71f86825bbd6d672479764f6122bd1e9bb6adab` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state, corrected a stale HEAD, and refreshed the snapshot.
 
 **Your tasks (do not expand scope):**
 
-1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `4640f35500e38ab94e8bc798222d21b7b9fabcb8`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
+1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `c71f86825bbd6d672479764f6122bd1e9bb6adab`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
 2. Highest-value next research task: execute FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
    - Prerequisite: FCLR-002 v1.0 is already pre-registered in `research_state/research_protocol.md` (§§80-144) with frozen splits, feature definitions, model contrasts (C2 vs B1 primary), >=2% relative QLIKE materiality floor, multiplicity rule, and block-bootstrap config. Do not re-register; proceed to execution.
@@ -77,4 +77,4 @@ What is verified this session:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint a735cae if you make a commit.
+**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint c71f86825bbd6d672479764f6122bd1e9bb6adab if you make a commit.
