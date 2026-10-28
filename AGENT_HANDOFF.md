@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T20:26:00Z
+Updated: 2026-10-28T20:28:18Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session start): 590da8601961232c9976baf5431bf4517dac232c (verify with `git rev-parse HEAD`; this is the `chore(kilo): checkpoint agent session` commit on top of baseline `2900fce2ae7c2c8638003a6d1ee022682830ec11`)
+Current HEAD (verified at session start): 6abc1870365ded0c916b250d1bb5c1a7eb9392cb (verify with `git rev-parse HEAD`; this is the `chore(kilo): checkpoint agent session` commit on top of `590da8601961232c9976baf5431bf4517dac232c` which was on top of baseline `2900fce2ae7c2c8638003a6d1ee022682830ec11`)
 
 ## Mission (unchanged)
 
@@ -16,12 +16,11 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state at session start: `git rev-parse HEAD` = `590da8601961232c9976baf5431bf4517dac232c` on `main`. Working tree clean (only untracked `__pycache__/`). `python3 -m pytest tests/ -q` → 51 passed in ~1.07s.
-- Confirmed prior HEAD `2900fce2ae7c2c8638003a6d1ee022682830ec11` was a `chore(kilo): checkpoint agent session` commit whose only change was to `AGENT_HANDOFF.md` itself; it did not touch any research artifact, split, or evaluation. The checkpoint commit `c71cae76` on top contains only this handoff update.
-- Re-read all gate-relevant artifacts and confirmed gates are unchanged: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`, `research_state/evaluation_summary.md`). FCLR-002 CONFLICTED/UNTRUSTED (`research_state/evaluation_summary_FCLR002.md` shows a numerical pass but is flagged untrusted in `research_state/evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded). Do NOT claim verified FCLR-002 pass or recompute (would require opening/altering the sealed holdout or unpre-registered config, both prohibited). Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
+- Verified repo state at session start: `git rev-parse HEAD` = `6abc1870365ded0c916b250d1bb5c1a7eb9392cb` on `main`. Working tree clean (only untracked `__pycache__/`). `python3 -m pytest tests/ -q` → 51 passed in ~1.04s.
+- Re-read prior handoff (at `590da860`) and all gate-relevant artifacts; gates unchanged: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`, `research_state/evaluation_summary.md`). FCLR-002 CONFLICTED/UNTRUSTED (`research_state/evaluation_summary_FCLR002.md` shows a numerical pass but is flagged untrusted in `research_state/evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded). Do NOT claim verified FCLR-002 pass or recompute (would require opening/altering the sealed holdout or unpre-registered config, both prohibited). Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Coverage re-confirmed: `research_state/fclr002_coverage_audit.json` — 5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z.
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed. All constraints respected.
-- Updated HEAD in this handoff from `2900fce2ae7c2c8638003a6d1ee022682830ec11` to `590da8601961232c9976baf5431bf4517dac232c`.
+- Updated HEAD in this handoff from `590da8601961232c9976baf5431bf4517dac232c` to `6abc1870365ded0c916b250d1bb5c1a7eb9392cb`.
 
 ## Current verified state
 
@@ -48,11 +47,11 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted FCLR-002 summary as verified.
 
 **Your tasks (do not expand scope):**
-1. Verify repo state: `git rev-parse HEAD` → `590da8601961232c9976baf5431bf4517dac232c` (the verified baseline; this checkpoint commit contains only this handoff update on top of `2900fce2ae7c2c8638003a6d1ee022682830ec11`); `python3 -m pytest tests/ -q` → 51 passed. Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `6abc1870365ded0c916b250d1bb5c1a7eb9392cb` (checkpoint commit containing only this handoff update on top of `590da8601961232c9976baf5431bf4517dac232c`, on top of baseline `2900fce2ae7c2c8638003a6d1ee022682830ec11`); `python3 -m pytest tests/ -q` → 51 passed. Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; verified HEAD `590da8601961232c9976baf5431bf4517dac232c` on `main` (checkpoint commit on top of baseline `2900fce2ae7c2c8638003a6d1ee022682830ec11`, containing only this handoff).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; verified HEAD `6abc1870365ded0c916b250d1bb5c1a7eb9392cb` on `main` (checkpoint commit on top of `590da8601961232c9976baf5431bf4517dac232c`, containing only this handoff).
