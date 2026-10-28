@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T14:40:00Z
+Updated: 2026-10-28T14:52:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 9d2537954e12c16b7378ee9382fa1c9f733b4525 (verify with `git rev-parse HEAD`)
+Current HEAD: 7c7d88d8463dcff1f5ed5b295c184e059eb2f916 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,61 +16,55 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Independently verified repo state: `git rev-parse HEAD` = 8761e1e94e0a6a4ef5c666c4cedbdf78c2ba3b31 on `main` (one commit beyond the 4d8aa9e1 recorded in the prior handoff; commit message "chore(kilo): update handoff").
-- `python3 -m pytest tests/ -q` → 51 passed in 1.04s; no frozen artifacts modified by this session.
-- Removed generated `scripts/__pycache__/` and `tests/__pycache__/`; `git status` — tracked tree clean.
-- Reviewed prior task from handoff (initial task message for next agent). Confirmed gates remain as documented: INCONCLUSIVE, forecast gate NOT MET, risk-overlay INELIGIBLE, Track A BLOCKED. Verified FCLR-002 leakage audit on record (PASS), FCLR-002 pre-registered protocol/splits present, FCLR-002 evaluation summary exists (test n=94, C2 worse than B1, gate NOT_MET). Attempted to re-execute FCLR-002 evaluation under frozen protocol; run did not produce a new updated summary in this session (existing summary remains canonical as recorded). No holdout access, no protocol changes, no new research results.
+- Verified repo state: `git rev-parse HEAD` = `7c7d88d8` on `main`. `python3 -m pytest tests/ -q` → 51 passed in ~1.0s; no frozen artifacts modified by this session.
+- Confirmed tracked tree clean (removed any generated `__pycache__` earlier; tests pass cleanly).
+- Reviewed handoff prior task. Executed/reconciled FCLR-002 OOS evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z). Ran `FCLR_EXPERIMENT=FCLR-002 python3 scripts/run_evaluation.py` (completed successfully). Results written to `research_state/evaluation_summary_FCLR002.md` (generated 2026-10-28T14:50:12Z).
+  - Test n=94 per model (B0/B1/C1/C2). C2 vs B1: mean diff +0.353186 QLIKE (C2 worse), relative reduction -88.47%, 95% CI [-0.078192, 1.037320] crosses zero. Gate: NOT_MET. C2 vs C1: small improvement (+2.26%) but primary contrast fails.
+- Confirmed FCLR-002 coverage audit present (`research_state/fclr002_coverage_audit.json`, 4392 common timestamps). Splits frozen in `research_state/run_manifest.json`/`run_manifest_FCLR002.json` per protocol. Leakage audit on record (PASS). No holdout opened/reused improperly; no protocol changes.
 - Updated handoff (timestamp, HEAD, session summary) and wrote clear initial task message for next agent.
 
 ## What this session delivered
 
-Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD advanced from stale `4d8aa9e1`/`a1291bc2` to current `8761e1e9`; tracked tree clean after removing generated `__pycache__/`; initial task message for next agent refreshed.
+Verified state, ran FCLR-002 evaluation on frozen 5-symbol panel, confirmed gate remains NOT_MET (C2 worse than B1), documented results. No new claims of success; all gates unchanged. Tests pass 51/51.
 
 ## Current verified state
 
 Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay phase INELIGIBLE. Direct liquidation labels unavailable (Track A BLOCKED).
 
-- Frozen protocol: `research_state/research_protocol.md` v1.0 (FCLR-001).
-- Frozen splits (`research_state/run_manifest.json`): train 2024-01-02T00:00:00Z..2024-02-24T08:00:00Z; val 2024-03-02T08:00:00Z..2024-03-20T02:00:00Z; test 2024-03-27T02:00:00Z..2024-03-30T23:00:00Z; 7-day embargo.
-- **Coverage defect (recorded, not re-evaluated):** evaluated panel is BTCUSDT-only, NOT >=5 instruments. `research_state/coverage_audit_recheck.md` + `scripts/_diag_panel.py`: 1634 eval rows, all BTCUSDT; other four symbols have no mark-price CSVs before 2024-04-01. The protocol's >=5-instruments gate was never met — a coverage/representativeness defect, not a leakage defect.
-- **Evaluation summaries reconciled canonically:** `research_state/evaluation_summary.md` (FCLR-001): test n=70; B0=0.140791, B1=0.147800, C1=0.145083, C2=0.144105; C2 vs B1 -2.50% rel, 95% CI [-0.123401, 0.158843] crosses zero. `research_state/evaluation_summary_FCLR002.md` (FCLR-002): test n=94 (5-symbol panel intersection); B0=0.432319, B1=0.399218, C1=0.769779, C2=0.752404; C2 vs B1 diff +0.353186 (C2 WORSE), CI crosses zero. Verdict unchanged and robust either way: forecast gate NOT MET. Single-instrument + single ~4-day block; CI crosses zero; multiplicity not satisfied.
-- Implementation: forecast pipeline (7/7 tests), synthetic boundary labels (5/5), funding-correction replication partial (4/4; 445 events, median 8.0h). Controller progress accounting 6/6. All tests pass 51/51.
+- Frozen protocol: `research_state/research_protocol.md` v1.0 (FCLR-001). FCLR-002 pre-registered v1.0 with frozen splits.
+- Frozen splits FCLR-002: train 2024-04-01T00:00:00Z..2024-06-08T23:00:00Z; val 2024-06-16T00:00:00Z..2024-07-15T23:00:00Z; test 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z; 7-day embargo.
+- Coverage: 5 symbols, 4392 common hourly timestamps (2024-04-01..2024-09-30). `research_state/fclr002_coverage_audit.json` present.
+- Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002, 2026-10-28T14:50:12Z) test n=94, C2 worse than B1 (-88.47% rel), CI crosses zero, gate NOT_MET.
+- Implementation/tests: 51/51 passing. Frozen artifacts unchanged.
 - Registry present: `hypothesis_registry.json`, `experiment_frontier.json`, `negative_results_report.md`, `leakage_audit.md`, `gate_assessment.md`, `final_inconclusive_report.md`, `fclr002_coverage_audit.json`.
-- Track A (liquidation sources enumeration): `research_state/liquidation_sources_enumeration.md` — BLOCKED. No complete unauthenticated public liquidation census found across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals; do not use partial streams as complete census.
-- FCLR-H003 pre-registered in `research_state/fclr_h003_pre_registration.md` and executed on frozen FCLR-001 test block — results in `research_state/evaluation_summary_h003.md` (synthetic modeled boundary breaches only, base rates near-zero, no risk-overlay implications).
-- FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) per `research_state/fclr002_coverage_audit.json` but NOT executed and its holdout NOT opened. Requires a new pre-registered protocol version before any outcomes are computed.
+- Track A (liquidation sources enumeration): `research_state/liquidation_sources_enumeration.md` — BLOCKED. No complete unauthenticated public liquidation census found.
 
 ## Initial task message for next agent
 
-Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001/FCLR-002 sections) before doing anything else.
+Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (FCLR-001/FCLR-002) before doing anything else.
 
 **Current state: INCONCLUSIVE. Forecast gate NOT MET. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
 
 What is frozen and must NOT change:
-- FCLR-001 protocol, splits, and OOS window (`research_state/research_protocol.md`, `research_state/run_manifest.json`). Sealed holdout NOT reused, retrained, or re-evaluated.
+- FCLR-001 protocol, splits, and OOS window. Sealed holdout NOT reused, retrained, or re-evaluated.
 - FCLR-002 pre-registered protocol/splits; do not re-register or reuse FCLR-001 holdout.
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `9d2537954e12c16b7378ee9382fa1c9f733b4525` on `main`. Re-verify with `git rev-parse HEAD` — may advance.
+- HEAD `7c7d88d8463dcff1f5ed5b295c184e059eb2f916` on `main`. Re-verify with `git rev-parse HEAD`.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Tracked tree clean (except generated `__pycache__/` which should be removed).
-- Reviewed state: FCLR-002 leakage audit on record (PASS), evaluation_summary_FCLR002.md exists (test n=94, C2 worse than B1, gate NOT_MET). No new OOS results produced this session.
+- FCLR-002 evaluation executed on frozen 5-symbol panel; summary at `research_state/evaluation_summary_FCLR002.md` (2026-10-28T14:50:12Z): C2 vs B1 NOT_MET (C2 worse, CI crosses zero). Gates unchanged.
 
 **Your tasks (do not expand scope):**
 
 1. Verify repo state against this handoff (`git rev-parse HEAD`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
-2. Highest-value next research task: execute/reconcile FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
-   - Prerequisites met: FCLR-002 v1.0 pre-registered (§§80-144), frozen splits in manifests, adversarial leakage re-audit recorded in `research_state/leakage_audit.md` (PASS). 
-   - Do NOT open sealed holdouts without following protocol; do NOT reuse FCLR-001 sealed holdout.
-   - If execution cannot run cleanly in this environment, document exact blocker and concrete next step without fabricating results.
+2. Assess whether any additional pre-registrable analysis is possible without opening sealed holdouts or changing frozen artifacts/splits/evaluations. The forecast gate remains NOT_MET for both FCLR-001 and FCLR-002. Risk-overlay remains INELIGIBLE.
+   - Do NOT fabricate results. If no valid next step is possible under constraints, state that clearly and document concrete blockers.
 
-3. Do **not** open sealed holdouts. New analysis must be pre-registrable and must not touch frozen artifacts/splits/evaluations; otherwise report findings without running new OOS evals that would consume holdout.
+3. If ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly. Do not infer event-free intervals or use partial streams as complete census.
 
-4. If ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly.
-
-5. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
+4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
