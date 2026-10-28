@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T22:58:48Z
+Updated: 2026-10-28T23:07:07Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session end): 8a5a449cc82f95a49100a593c035e5e3faabc621 (verify with `git rev-parse HEAD`)
+Current HEAD (verified at session end): 0fc43a9ed51cde531bab260ce44396663be39a7c (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,10 +16,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state at session start/end: `git rev-parse HEAD` = `8a5a449cc82f95a49100a593c035e5e3faabc621` on `main` (previous handoff recorded `2472a76921f715dae436409f86b87be47128ad24`). Working tree clean except untracked `__pycache__/` dirs (`scripts/__pycache__/`, `tests/__pycache__/`).
-- Read prior handoff (previous session) and all gate-relevant artifacts independently. Confirmed prior session's completion summary is accurate; no new work executed this session. Gates unchanged: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`, `research_state/evaluation_summary.md`). FCLR-002 CONFLICTED/UNTRUSTED (`research_state/evaluation_summary_FCLR002.md` shows numerical pass but flagged untrusted in `research_state/evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded). Do NOT claim verified FCLR-002 pass or recompute (would require opening/altering sealed holdout or unpre-registered config, both prohibited). Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
+- Verified repo state at session start/end: `git rev-parse HEAD` = `0fc43a9ed51cde531bab260ce44396663be39a7c` on `main` (previous handoff recorded `8a5a449cc82f95a49100a593c035e5e3faabc621`; new commit `0fc43a9e` added `research_state/workflow_run_diagnostics.jsonl`).
+- Read prior handoff and gate-relevant artifacts. Gates unchanged: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`, `research_state/evaluation_summary.md`). FCLR-002 CONFLICTED/UNTRUSTED (`research_state/evaluation_summary_FCLR002.md` shows numerical pass but flagged untrusted in `research_state/evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded). Do NOT claim verified FCLR-002 pass or recompute (would require opening/altering sealed holdout or unpre-registered config, both prohibited). Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Coverage confirmed: `research_state/fclr002_coverage_audit.json` — 5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z.
-- Ran tests: `python3 -m pytest tests/ -q` → 51 passed in ~1.05s.
+- Tests: `python3 -m pytest tests/ -q` — pytest not installed in this environment (ModuleNotFoundError). No tests executed; prior handoff reported 51/51 passing in previous environment. Working tree clean of modifications except this handoff update.
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed.
 - Acknowledged all blockers. No valid next step exists without touching frozen artifacts or opening sealed holdouts; no new pre-registrable analysis identified that would be executable under constraints.
 - Updated this handoff for current session state.
@@ -31,8 +31,8 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT MET (PILOT/INCONCLUS
 - Frozen protocol: `research_state/research_protocol.md` v1.0 (FCLR-001). FCLR-002 pre-registered v1.0 with frozen splits; holdout NOT opened per protocol §6/§9.
 - Frozen splits FCLR-002: train 2024-04-01T00:00:00Z..2024-06-08T23:00:00Z; val 2024-06-16T00:00:00Z..2024-07-15T23:00:00Z; test 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z; 7-day embargo.
 - Coverage: 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps (2024-04-01..2024-09-30). `research_state/fclr002_coverage_audit.json` present.
-- Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there (sign-convention artifacts, heading/body mismatch, BTCUSDT-only panel per `coverage_audit_recheck.md`).
-- Implementation/tests: 51/51 passing. Frozen artifacts unchanged except this handoff.
+- Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there.
+- Implementation: tests exist; pytest unavailable in current environment, tests not re-run. Frozen artifacts unchanged except this handoff.
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
 
 ## Initial task message for next agent
@@ -49,10 +49,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted FCLR-002 summary as verified.
 
 **Your tasks (do not expand scope):**
-1. Verify repo state: `git rev-parse HEAD` → `8a5a449cc82f95a49100a593c035e5e3faabc621`; `python3 -m pytest tests/ -q` → 51 passed. Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `0fc43a9ed51cde531bab260ce44396663be39a7c`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
-4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
+4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 **No valid next step exists** under current constraints. Concrete blockers:
 - Forecast gate FCLR-001 not met; risk-overlay ineligible until forecast gate passes (protocol constraint).
@@ -62,4 +62,4 @@ What is frozen and must NOT change:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; verified HEAD `8a5a449cc82f95a49100a593c035e5e3faabc621` on `main`.
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `0fc43a9ed51cde531bab260ce44396663be39a7c` on `main`. Test environment limitation noted (pytest unavailable).
