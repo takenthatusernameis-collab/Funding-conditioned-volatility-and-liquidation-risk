@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T16:39:08Z
+Updated: 2026-10-28T16:40:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: e7763d4d4d745da67b3355038ea0abd2dcd9f9e6 (verify with `git rev-parse HEAD`)
+Current HEAD: dd08846bd896c8a40d4b977b65bb9c908ac708e5 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -52,14 +52,14 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat the untrusted FCLR-002 summary as verified.
 
 What is verified this session:
-- HEAD `e7763d4d4d745da67b3355038ea0abd2dcd9f9e6` on `main`. Re-verify with `git rev-parse HEAD`.
+- HEAD `dd08846bd896c8a40d4b977b65bb9c908ac708e5` on `main`. Re-verify with `git rev-parse HEAD`.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified. Tracked tree clean (only `__pycache__` untracked).
 - Frozen artifacts unchanged since `e1b0af00` (only `AGENT_HANDOFF.md` changed in checkpoint commits).
 - No new experiments or analyses executed; assessment found no valid next pre-registrable step under constraints.
 
 **Your tasks (do not expand scope):**
 
-1. Verify repo state against this handoff (`git rev-parse HEAD` → `3fb40190...`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented, including the FCLR-002 conflict.
+1. Verify repo state against this handoff (`git rev-parse HEAD` → `dd08846b...`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented, including the FCLR-002 conflict.
 
 2. Acknowledge blockers: FCLR-001 forecast gate NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED (no complete unauthenticated public liquidation census). Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 
@@ -69,4 +69,4 @@ What is verified this session:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint `e7763d4d4d745da67b3355038ea0abd2dcd9f9e6`.
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint `dd08846bd896c8a40d4b977b65bb9c908ac708e5`.
