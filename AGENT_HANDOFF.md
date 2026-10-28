@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T23:10:25Z
+Updated: 2026-10-28T23:10:48Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session end): af302d62683c165ea172fd2ee083776e96dc74aa (verify with `git rev-parse HEAD`)
+Current HEAD (verified at session end): ecec67595a69c3d0211f6bc734e8ddc9275444b3 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,7 +16,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state at session start/end: `git rev-parse HEAD` = `af302d62683c165ea172fd2ee083776e96dc74aa` on `main` (previous handoff recorded `0fc43a9ed51cde531bab260ce44396663be39a7c`; new commit `af302d62` is a kilo checkpoint).
+- Verified repo state at session start/end: `git rev-parse HEAD` = `ecec67595a69c3d0211f6bc734e8ddc9275444b3` on `main` (previous handoff recorded `af302d62683c165ea172fd2ee083776e96dc74aa`; new commit `ecec6759` is a kilo checkpoint that only refreshed `AGENT_HANDOFF.md`; no research artifacts changed). `AGENT_HANDOFF.md` itself has a pending working-tree update (this refresh); no commit was requested.
 - Read prior handoff and gate-relevant artifacts. Gates unchanged: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`, `research_state/evaluation_summary.md`). FCLR-002 CONFLICTED/UNTRUSTED (`research_state/evaluation_summary_FCLR002.md` shows numerical pass but flagged untrusted in `research_state/evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded). Do NOT claim verified FCLR-002 pass or recompute (would require opening/altering sealed holdout or unpre-registered config, both prohibited). Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Coverage confirmed: `research_state/fclr002_coverage_audit.json` — 5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z.
 - Tests: `python3 -m pytest tests/ -q` — pytest not installed in this environment (ModuleNotFoundError). No tests executed; prior handoff reported 51/51 passing in previous environment. Working tree clean of modifications except this handoff update.
@@ -49,7 +49,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted FCLR-002 summary as verified.
 
 **Your tasks (do not expand scope):**
-1. Verify repo state: `git rev-parse HEAD` → `af302d62683c165ea172fd2ee083776e96dc74aa`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `ecec67595a69c3d0211f6bc734e8ddc9275444b3`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
@@ -62,4 +62,4 @@ What is frozen and must NOT change:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `af302d62683c165ea172fd2ee083776e96dc74aa` on `main`. Test environment limitation noted (pytest unavailable).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `ecec67595a69c3d0211f6bc734e8ddc9275444b3` on `main`. Test environment limitation noted (pytest unavailable). `AGENT_HANDOFF.md` refreshed (working-tree update, not committed).
