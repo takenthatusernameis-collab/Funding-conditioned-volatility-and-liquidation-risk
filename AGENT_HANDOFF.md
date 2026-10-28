@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T01:53:24Z
+Updated: 2026-10-28T01:55:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 460b4bb0 (chore(kilo): checkpoint agent session)
+Current HEAD: d418b925 (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 460b4bb0 on main.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is d418b925 on main.
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Updated handoff timestamp and HEAD to 460b4bb0.
+- Updated handoff timestamp and HEAD to d418b925.
 - Wrote a clear initial task message for the next agent.
 - Verified state is consistent with prior corrections; no stale references found.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `460b4bb0`.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `d418b925`.
 
 ## Current verified state
 
@@ -51,13 +51,13 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `460b4bb0` on `main` (local checkpoint, "chore(kilo): checkpoint agent session").
+- HEAD `d418b925` on `main` (local checkpoint, "chore(kilo): checkpoint agent session").
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session refreshed handoff metadata and verified state after prior corrections.
 
 Key facts to know:
-- Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
+- Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instruments gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
 - Headline FCLR-001: C2 vs B1 = -2.50% relative QLIKE, 95% CI [-0.123401, 0.158843] crosses zero. Forecast gate NOT MET.
 - Track A BLOCKED: no complete unauthenticated public liquidation census across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals or treat partial streams as a complete census.
 - FCLR-H003 pre-registered and executed on frozen FCLR-001 test block; results synthetic modeled boundary breaches only, no risk-overlay implications.
