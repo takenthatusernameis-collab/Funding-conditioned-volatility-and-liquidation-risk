@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T05:42:35Z
+Updated: 2026-10-28T06:35:16Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: d33557286a156911cdaefaede630f15071297ce2 (checkpoint; HEAD advanced from prior recorded 5f8939ba131b7194096cd9cad81ea92e8924ac2f by prior session's handoff update commit)
+Current HEAD: b8314e7f47ec0bc90f48fb27240294fb577d5048 (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,16 +16,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = d33557286a156911cdaefaede630f15071297ce2 (local checkpoint; prior recorded HEAD 5f8939ba131b7194096cd9cad81ea92e8924ac2f was advanced by the previous session's handoff commit).
+- Verified repo state: `git rev-parse HEAD` = b8314e7f47ec0bc90f48fb27240294fb577d5048.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- Diff vs recorded prior HEAD: only AGENT_HANDOFF.md changed (7 insertions, 7 deletions) — no code, protocol, split, or evaluation artifacts touched.
+- Diff vs prior HEAD: only AGENT_HANDOFF.md changed — no code, protocol, split, or evaluation artifacts touched.
 - No new research results, no holdout access, no protocol changes, no risk overlay.
 - Updated handoff timestamp and HEAD to current checkpoint; initial task message for next agent refreshed below.
 
 ## What this session delivered
 
-State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `d33557286a156911cdaefaede630f15071297ce2`.
+State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `b8314e7f47ec0bc90f48fb27240294fb577d5048`.
 
 ## Current verified state
 
@@ -52,7 +52,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `5f8939ba131b7194096cd9cad81ea92e8924ac2f` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
+- HEAD `b8314e7f47ec0bc90f48fb27240294fb577d5048` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and refreshed the snapshot.
