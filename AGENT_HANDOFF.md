@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T14:35:00Z
+Updated: 2026-10-28T14:37:19Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: d1c9b6f4f6c2e4925a94b252891cbe9555aafc65 (verify with `git rev-parse HEAD`)
+Current HEAD: 9ca30261f73984a022624893f1de13fd9934d729 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -52,7 +52,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `fdb55c0683fc75817c90c016a34fa0c484f0741b` on `main`. Re-verify with `git rev-parse HEAD` — may advance.
+- HEAD `9ca30261f73984a022624893f1de13fd9934d729` on `main`. Re-verify with `git rev-parse HEAD` — may advance.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean (except generated `__pycache__/` which should be removed).
 - Reviewed state: FCLR-002 leakage audit on record (PASS), evaluation_summary_FCLR002.md exists (test n=94, C2 worse than B1, gate NOT_MET). No new OOS results produced this session.
