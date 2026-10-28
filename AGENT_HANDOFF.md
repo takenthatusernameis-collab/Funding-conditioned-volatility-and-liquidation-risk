@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T15:35:00Z
+Updated: 2026-10-28T15:38:48Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 842356dd3227453f9f89761e5c330f00ac21cca8 (verify with `git rev-parse HEAD`)
+Current HEAD: 1245a95528b1c083c9983ac654147ae45b6261a5 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = `842356dd` on `main`. `python3 -m pytest tests/ -q` → 51 passed in ~0.95s; tracked tree clean after removing `__pycache__`.
-- Reconciled HEAD drift: handoff previously recorded `7c7d88d8`; actual HEAD advanced to `842356dd` (checkpoint commit). No frozen artifacts modified.
+- Verified repo state: `git rev-parse HEAD` = `1245a955` on `main`. `python3 -m pytest tests/ -q` → 51 passed in ~0.97s; tracked tree clean (only `__pycache__` untracked).
+- Reconciled HEAD drift: handoff previously recorded `842356dd`; actual HEAD advanced to `1245a955` (checkpoint commit). No frozen artifacts modified.
 - Assessed next steps under constraints: forecast gate NOT_MET for both FCLR-001 and FCLR-002; risk-overlay INELIGIBLE; Track A (liquidation labels) BLOCKED. No additional pre-registrable analysis possible without opening sealed holdouts, changing frozen artifacts/splits/evaluations, or fabricating results. No new experiments registered.
 - Confirmed blockers documented in `research_state/liquidation_sources_enumeration.md` (BLOCKED) and evaluation summaries. No holdout leakage.
 - Updated handoff (timestamp, HEAD, session summary) and wrote clear initial task message for next agent.
 
 ## What this session delivered
 
-Verified state, ran FCLR-002 evaluation on frozen 5-symbol panel, confirmed gate remains NOT_MET (C2 worse than B1), documented results. No new claims of success; all gates unchanged. Tests pass 51/51.
+Verified state against this handoff, reconciled HEAD drift (`842356dd` → `1245a955`), confirmed 51/51 tests pass and gates unchanged (FCLR-001/FCLR-002 NOT_MET; risk-overlay INELIGIBLE; Track A BLOCKED). No new claims of success; all gates unchanged. Tests pass 51/51.
 
 ## Current verified state
 
@@ -50,8 +50,8 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `842356dd3227453f9f89761e5c330f00ac21cca8` on `main`. Re-verify with `git rev-parse HEAD`.
-- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified. Tracked tree clean.
+- HEAD `1245a95528b1c083c9983ac654147ae45b6261a5` on `main`. Re-verify with `git rev-parse HEAD`.
+- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified. Tracked tree clean (only `__pycache__` untracked).
 - No new experiments or analyses executed; assessment found no valid next pre-registrable step under constraints.
 
 **Your tasks (do not expand scope):**
@@ -66,4 +66,4 @@ What is verified this session:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint.
+**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint `1245a955`.
