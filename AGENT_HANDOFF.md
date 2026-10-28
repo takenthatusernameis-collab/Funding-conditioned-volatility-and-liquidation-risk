@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T02:51:40Z
+Updated: 2026-10-28T02:52:13Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: e4de835e982ce221cc4b1318f0ce812475b8c6db (checkpoint)
+Current HEAD: 547cd7e733a8d8b6060cc15af501c5969c5e4c5d (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is d943889cffd6a4375999f400849efe1ff21f0af8 on main (handoff metadata had recorded 9116311c — stale; corrected).
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 547cd7e733a8d8b6060cc15af501c5969c5e4c5d on main (handoff metadata had recorded e4de835e — stale; corrected).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Updated handoff timestamp and HEAD to d943889cffd6a4375999f400849efe1ff21f0af8.
+- Updated handoff timestamp and HEAD to 547cd7e733a8d8b6060cc15af501c5969c5e4c5d.
 - Rewrote the "Initial task message for next agent" section with current state and a fresh task message.
 - Verified state is consistent with prior corrections; no stale references found.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `d943889cffd6a4375999f400849efe1ff21f0af8`.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `547cd7e733a8d8b6060cc15af501c5969c5e4c5d`.
 
 ## Current verified state
 
@@ -51,30 +51,17 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `40317a955c9385489d3ac6902074c54c263f230b` on `main` (local checkpoint, "chore(kilo): checkpoint agent session"). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in three consecutive sessions.
+- HEAD `547cd7e733a8d8b6060cc15af501c5969c5e4c5d` on `main` (local checkpoint, "chore(kilo): checkpoint agent session"). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- No new research results; this session refreshed handoff metadata and verified state after prior corrections.
+- No new research results; this session refreshed handoff metadata and verified state.
 
-Key facts to know:
-- Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instruments gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
-- Headline FCLR-001: C2 vs B1 = -2.50% relative QLIKE, 95% CI [-0.123401, 0.158843] crosses zero. Forecast gate NOT MET.
-- Track A BLOCKED: no complete unauthenticated public liquidation census across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals or treat partial streams as a complete census.
-- FCLR-H003 pre-registered and executed on frozen FCLR-001 test block; results synthetic modeled boundary breaches only, no risk-overlay implications.
-- FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
-
-**Corrections previously applied (documentation only; no frozen artifact changed):**
-1. Handoff recorded HEAD as `9b17c2c2`; actual HEAD is now `0ac11b10`. Corrected across handoff.
-2. `research_state/experiment_frontier.json` coverage block claimed `common_hourly_timestamps: 2136` for the FCLR-001 window. Per `research_state/coverage_audit_recheck.md` the true 5-symbol intersection in 2024-01..2024-03 is **0 timestamps** (BTCUSDT alone has 2160; the other four have zero mark-price CSVs before 2024-04-01). Corrected to 0 with a note. The 2136 figure is not reproducible from the current working tree.
-3. `research_state/research_protocol.md:61` ("Common paired panel timestamps: 2136") → corrected to 0 with the coverage-audit explanation. Split boundaries themselves remain frozen and valid.
-4. `research_state/run_manifest.json:8552` (`common_panel_timestamps: 2136`) → original value preserved as a historical record, plus a `coverage_audit_correction` field documenting the non-reproducibility (true intersection = 0; BTCUSDT-only).
-5. `research_state/final_inconclusive_report.md:12,45` ("Coverage audit (>=5 instruments) | MET ... 2136" and ">=5 instruments (met)") → corrected to NOT MET / NOT MET, consistent with `coverage_audit_recheck.md`.
-6. **Stale-HEAD recurrence (this session).** The handoff recorded HEAD as `9116311c`; actual HEAD at task start was `d943889cffd6a4375999f400849efe1ff21f0af8` (a later local checkpoint). Corrected across handoff. The prior task's own completion summary had recorded `d418b925`, which was already stale at that time. Treat the handoff's recorded HEAD as a snapshot, not a guarantee; always re-verify with `git rev-parse HEAD` at session start.
-
-**Authorized next work (only one, and only if explicitly requested):**
-1. If FCLR-002 is explicitly requested: pre-register FCLR-002 v1.0 with splits and acceptance criteria BEFORE computing any outcomes; run walk-forward evaluation on 2024-04..2024-09 panel; run adversarial leakage audit before opening its holdout (rank 5). Never open holdout before audit.
-2. Otherwise: document/clarify only. Do not touch splits, protocol, evaluation logic, or reported results. No new runs.
+**Fresh task (do not expand scope):**
+1. Verify repo state against this handoff (HEAD, tests) and confirm gates remain as documented.
+2. Do **not** open sealed holdouts. If you want to propose new analysis, only do so in a way that is pre-registrable and does not touch frozen artifacts/splits/evaluations; otherwise report findings without running new OOS evals that would consume holdout.
+3. If there is any ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly — do not fabricate a complete census.
+4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-Acceptance: state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD unchanged except authorized checkpoint/documentation commits.
+Acceptance: state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint if you make a commit.
