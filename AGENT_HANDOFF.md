@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T02:54:40Z
+Updated: 2026-10-28T02:55:08Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 2a36ca66ce81c1705d386328a5bc6afff9b1b8c6 (checkpoint)
+Current HEAD: c4a045be414dd8e0998ad410a223f7206b10fc3c (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 2a36ca66ce81c1705d386328a5bc6afff9b1b8c6 on main (handoff metadata had recorded 547cd7e7 — stale; corrected).
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified actual HEAD is c4a045be414dd8e0998ad410a223f7206b10fc3c on main; the handoff text previously recorded 2a36ca66 (stale snapshot, corrected).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Updated handoff timestamp and HEAD to 2a36ca66ce81c1705d386328a5bc6afff9b1b8c6.
+- Tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
+- Updated handoff timestamp and HEAD to c4a045be414dd8e0998ad410a223f7206b10fc3c.
 - Rewrote the "Initial task message for next agent" section with current state and a fresh task message.
-- Verified state is consistent with prior corrections; no stale references found.
+- Verified state is consistent with prior corrections; no stale references found beyond the HEAD snapshot itself.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `2a36ca66ce81c1705d386328a5bc6afff9b1b8c6`.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `c4a045be414dd8e0998ad410a223f7206b10fc3c`.
 
 ## Current verified state
 
@@ -51,10 +52,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `2a36ca66ce81c1705d386328a5bc6afff9b1b8c6` on `main` (local checkpoint, "chore(kilo): checkpoint agent session"). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `c4a045be414dd8e0998ad410a223f7206b10fc3c` on `main` (local checkpoint, "chore(kilo): checkpoint agent session"). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- No new research results; this session refreshed handoff metadata and verified state.
+- No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
 
 **Fresh task (do not expand scope):**
 1. Verify repo state against this handoff (HEAD, tests) and confirm gates remain as documented.
