@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T06:35:16Z
+Updated: 2026-10-28T06:37:xxZ
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: b8314e7f47ec0bc90f48fb27240294fb577d5048 (checkpoint)
+Current HEAD: 877b95194b062927c4b79635acdf26edcee10382 (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,16 +16,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = b8314e7f47ec0bc90f48fb27240294fb577d5048.
+- Verified repo state: `git rev-parse HEAD` = 877b95194b062927c4b79635acdf26edcee10382.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- Diff vs prior HEAD: only AGENT_HANDOFF.md changed — no code, protocol, split, or evaluation artifacts touched.
+- Diff vs prior recorded HEAD: only AGENT_HANDOFF.md updated (HEAD + session summary). No code, protocol, split, or evaluation artifacts touched.
 - No new research results, no holdout access, no protocol changes, no risk overlay.
 - Updated handoff timestamp and HEAD to current checkpoint; initial task message for next agent refreshed below.
 
 ## What this session delivered
 
-State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `b8314e7f47ec0bc90f48fb27240294fb577d5048`.
+State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `877b95194b062927c4b79635acdf26edcee10382`.
 
 ## Current verified state
 
