@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T14:52:00Z
+Updated: 2026-10-28T15:35:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 7c7d88d8463dcff1f5ed5b295c184e059eb2f916 (verify with `git rev-parse HEAD`)
+Current HEAD: 842356dd3227453f9f89761e5c330f00ac21cca8 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -13,14 +13,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 
 ## Current session — COMPLETED (this session)
 
-Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
+Task: Read prior agent task from durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = `7c7d88d8` on `main`. `python3 -m pytest tests/ -q` → 51 passed in ~1.0s; no frozen artifacts modified by this session.
-- Confirmed tracked tree clean (removed any generated `__pycache__` earlier; tests pass cleanly).
-- Reviewed handoff prior task. Executed/reconciled FCLR-002 OOS evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z). Ran `FCLR_EXPERIMENT=FCLR-002 python3 scripts/run_evaluation.py` (completed successfully). Results written to `research_state/evaluation_summary_FCLR002.md` (generated 2026-10-28T14:50:12Z).
-  - Test n=94 per model (B0/B1/C1/C2). C2 vs B1: mean diff +0.353186 QLIKE (C2 worse), relative reduction -88.47%, 95% CI [-0.078192, 1.037320] crosses zero. Gate: NOT_MET. C2 vs C1: small improvement (+2.26%) but primary contrast fails.
-- Confirmed FCLR-002 coverage audit present (`research_state/fclr002_coverage_audit.json`, 4392 common timestamps). Splits frozen in `research_state/run_manifest.json`/`run_manifest_FCLR002.json` per protocol. Leakage audit on record (PASS). No holdout opened/reused improperly; no protocol changes.
+- Verified repo state: `git rev-parse HEAD` = `842356dd` on `main`. `python3 -m pytest tests/ -q` → 51 passed in ~0.95s; tracked tree clean after removing `__pycache__`.
+- Reconciled HEAD drift: handoff previously recorded `7c7d88d8`; actual HEAD advanced to `842356dd` (checkpoint commit). No frozen artifacts modified.
+- Assessed next steps under constraints: forecast gate NOT_MET for both FCLR-001 and FCLR-002; risk-overlay INELIGIBLE; Track A (liquidation labels) BLOCKED. No additional pre-registrable analysis possible without opening sealed holdouts, changing frozen artifacts/splits/evaluations, or fabricating results. No new experiments registered.
+- Confirmed blockers documented in `research_state/liquidation_sources_enumeration.md` (BLOCKED) and evaluation summaries. No holdout leakage.
 - Updated handoff (timestamp, HEAD, session summary) and wrote clear initial task message for next agent.
 
 ## What this session delivered
@@ -43,7 +42,7 @@ Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Ris
 
 Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (FCLR-001/FCLR-002) before doing anything else.
 
-**Current state: INCONCLUSIVE. Forecast gate NOT MET. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
+**Current state: INCONCLUSIVE. Forecast gate NOT MET (both FCLR-001 and FCLR-002). Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
 
 What is frozen and must NOT change:
 - FCLR-001 protocol, splits, and OOS window. Sealed holdout NOT reused, retrained, or re-evaluated.
@@ -51,18 +50,17 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `7c7d88d8463dcff1f5ed5b295c184e059eb2f916` on `main`. Re-verify with `git rev-parse HEAD`.
-- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- FCLR-002 evaluation executed on frozen 5-symbol panel; summary at `research_state/evaluation_summary_FCLR002.md` (2026-10-28T14:50:12Z): C2 vs B1 NOT_MET (C2 worse, CI crosses zero). Gates unchanged.
+- HEAD `842356dd3227453f9f89761e5c330f00ac21cca8` on `main`. Re-verify with `git rev-parse HEAD`.
+- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified. Tracked tree clean.
+- No new experiments or analyses executed; assessment found no valid next pre-registrable step under constraints.
 
 **Your tasks (do not expand scope):**
 
 1. Verify repo state against this handoff (`git rev-parse HEAD`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
-2. Assess whether any additional pre-registrable analysis is possible without opening sealed holdouts or changing frozen artifacts/splits/evaluations. The forecast gate remains NOT_MET for both FCLR-001 and FCLR-002. Risk-overlay remains INELIGIBLE.
-   - Do NOT fabricate results. If no valid next step is possible under constraints, state that clearly and document concrete blockers.
+2. Acknowledge blockers: forecast gate NOT_MET for FCLR-001 and FCLR-002; risk-overlay INELIGIBLE; Track A BLOCKED (no complete unauthenticated public liquidation census). Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 
-3. If ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly. Do not infer event-free intervals or use partial streams as complete census.
+3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts (e.g., a new independently-sourced dataset/label set obtained without paid services/signup), document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 
 4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
