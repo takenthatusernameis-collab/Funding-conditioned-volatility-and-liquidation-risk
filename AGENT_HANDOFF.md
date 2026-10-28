@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T18:39:34Z
+Updated: 2026-10-28T18:40:30Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 542d7b818b7ecfbb61e5963cb1ac421331a35257 (verify with `git rev-parse HEAD`)
+Current HEAD: 8b879be83f58b5a7e429b9bd07f76f21f925c1cc (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -47,11 +47,11 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted FCLR-002 summary as verified.
 
 **Your tasks (do not expand scope):**
-1. Verify repo state: `git rev-parse HEAD` → `542d7b818b7ecfbb61e5963cb1ac421331a35257`; `python3 -m pytest tests/ -q` → 51 passed. Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `8b879be83f58b5a7e429b9bd07f76f21f925c1cc`; `python3 -m pytest tests/ -q` → 51 passed. Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint `542d7b818b7ecfbb61e5963cb1ac421331a35257`.
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint `8b879be83f58b5a7e429b9bd07f76f21f925c1cc`.
