@@ -1,43 +1,43 @@
 # Evaluation Summary (FCLR-002)
 
 Experiment: FCLR-002
-Data range: 2024-01-01 .. 2024-06-30
-Generated: 2026-10-27T16:13:10Z
+Data range: 2024-01-01 .. 2024-09-30
+Generated: 2026-10-28T15:55:10Z
 
 ## Splits (frozen)
-- Train: 2024-01-02T00:00:00Z .. 2024-02-24T08:00:00Z
-- Val: 2024-03-02T08:00:00Z .. 2024-03-20T02:00:00Z
-- Test: 2024-03-27T02:00:00Z .. 2024-03-30T23:00:00Z (7d embargo)
+- Train: 2024-04-01T00:00:00Z .. 2024-06-08T23:00:00Z
+- Val: 2024-06-16T00:00:00Z .. 2024-07-15T23:00:00Z
+- Test: 2024-07-23T00:00:00Z .. 2024-09-30T23:00:00Z (7d embargo)
 
 ## Test set QLIKE (lower is better)
 
-- B0: mean_QLIKE=0.432319 (n=94)
-- B1: mean_QLIKE=0.399218 (n=94)
-- C1: mean_QLIKE=0.769779 (n=94)
-- C2: mean_QLIKE=0.752404 (n=94)
+- B0: mean_QLIKE=0.543471 (n=8280)
+- B1: mean_QLIKE=0.487438 (n=8274)
+- C1: mean_QLIKE=0.487455 (n=8274)
+- C2: mean_QLIKE=0.442223 (n=8274)
 
 ## Paired comparisons (block bootstrap, ~24h blocks, 2000 replications)
 
 ### C2_vs_B1
-- Paired n: 94
-- Mean diff (modelA - modelB), QLIKE: 0.353186 (95% CI [-0.078192, 1.037320])
-- Relative reduction (QLIKE): -88.47% (negative diff means improvement)
+- Paired n: 8274
+- Mean diff (modelA - modelB), QLIKE: -0.045215 (95% CI [-0.097648, -0.008788])
+- Relative reduction (QLIKE): 9.28% (negative diff means improvement)
 
 ### C1_vs_B1
-- Paired n: 94
-- Mean diff (modelA - modelB), QLIKE: 0.370560 (95% CI [-0.084321, 1.085979])
-- Relative reduction (QLIKE): -92.82% (negative diff means improvement)
+- Paired n: 8274
+- Mean diff (modelA - modelB), QLIKE: 0.000017 (95% CI [-0.005982, 0.006047])
+- Relative reduction (QLIKE): -0.00% (negative diff means improvement)
 
 ### C2_vs_C1
-- Paired n: 94
-- Mean diff (modelA - modelB), QLIKE: -0.017375 (95% CI [-0.048658, 0.006128])
-- Relative reduction (QLIKE): 2.26% (negative diff means improvement)
+- Paired n: 8274
+- Mean diff (modelA - modelB), QLIKE: -0.045232 (95% CI [-0.098089, -0.009173])
+- Relative reduction (QLIKE): 9.28% (negative diff means improvement)
 
 ## Gate assessment (primary contrast C2 vs B1)
 
-- Primary contrast C2 vs B1 meets >=2% relative QLIKE reduction: NOT_MET
-- Relative reduction: -88.47%
-- 95% CI for diff (C2-B1): [-0.078192, 1.037320]
+- Primary contrast C2 vs B1 meets >=2% relative QLIKE reduction: PASS
+- Relative reduction: 9.28%
+- 95% CI for diff (C2-B1): [-0.097648, -0.008788]
 
 ## Notes
 - All results use frozen splits only; no tuning on holdout.
