@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T16:40:00Z
+Updated: 2026-10-28T16:42:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: dd08846bd896c8a40d4b977b65bb9c908ac708e5 (verify with `git rev-parse HEAD`)
+Current HEAD: df7d7f75c172df154d97d53607f68223a8fe2aa4 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -38,7 +38,25 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT MET (PILOT/INCONCLUS
 - Registry present: `hypothesis_registry.json`, `experiment_frontier.json`, `negative_results_report.md`, `leakage_audit.md`, `gate_assessment.md`, `final_inconclusive_report.md`, `fclr002_coverage_audit.json`.
 - Track A (liquidation sources enumeration): `research_state/liquidation_sources_enumeration.md` — BLOCKED. No complete unauthenticated public liquidation census found.
 
+## Session completed 2026-10-28 (this run)
+
+Verified repo state: HEAD `df7d7f75c172df154d97d53607f68223a8fe2aa4` on `main`; `python3 -m pytest tests/ -q` → 51 passed in ~1.17s. Gates unchanged: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED. No holdout opened, no frozen artifacts changed, no new experiments.
+
 ## Initial task message for next agent
+
+Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (FCLR-001/FCLR-002) before doing anything else.
+
+**Current state: INCONCLUSIVE. FCLR-001 forecast gate NOT MET (PILOT/INCONCLUSIVE). FCLR-002 gate CONFLICTED/UNTRUSTED — do NOT claim a verified pass. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
+
+Your tasks (do not expand scope):
+1. Verify repo state: `git rev-parse HEAD` → `df7d7f75...`; `python3 -m pytest tests/ -q` → 51 passed.
+2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted; risk-overlay INELIGIBLE; Track A BLOCKED. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
+3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
+4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent.
+
+Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
+
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; all tests pass (51/51); no fabricated results; HEAD `df7d7f75c172df154d97d53607f68223a8fe2aa4`.
 
 Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (FCLR-001/FCLR-002) before doing anything else.
 
