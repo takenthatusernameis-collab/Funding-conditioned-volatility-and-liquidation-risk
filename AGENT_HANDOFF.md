@@ -3,7 +3,7 @@
 Updated: 2026-10-28T10:42:16Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 4640f35500e38ab94e8bc798222d21b7b9fabcb8 (verify with `git rev-parse HEAD`; prior recorded HEAD was stale)
+Current HEAD: ae7d6c35a12f4d15efdddba9ebe5e103b9eac544 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
