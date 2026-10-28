@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T01:51:30Z
+Updated: 2026-10-28T01:53:24Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 17f1a4e5 (chore(kilo): checkpoint agent session - handoff update)
+Current HEAD: 460b4bb0 (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is d4c198df on main.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 460b4bb0 on main.
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Updated handoff timestamp and HEAD to d4c198df.
+- Updated handoff timestamp and HEAD to 460b4bb0.
 - Wrote a clear initial task message for the next agent.
-- No stale references found this session; verified previous corrections remain consistent.
+- Verified state is consistent with prior corrections; no stale references found.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `aaee9a38`.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `460b4bb0`.
 
 ## Current verified state
 
@@ -51,7 +51,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `aaee9a38` on `main` (local checkpoint, "chore(kilo): checkpoint agent session - handoff update").
+- HEAD `460b4bb0` on `main` (local checkpoint, "chore(kilo): checkpoint agent session").
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session refreshed handoff metadata and verified state after prior corrections.
