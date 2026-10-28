@@ -194,11 +194,26 @@ def qlike(y, yhat):
         return None
     return y/yhat - math.log(y/yhat) - 1.0
 
+
+def build_panel():
     m = json.loads(RUN_MANIFEST.read_text())
     splits = m['split_boundaries']
     train = (parse_iso(splits['train']['start']), parse_iso(splits['train']['end']))
     val = (parse_iso(splits['validation']['start']), parse_iso(splits['validation']['end']))
     test = (parse_iso(splits['test']['start']), parse_iso(splits['test']['end']))
+
+    # load all mark series for all symbols (wide range)
+    start_all = parse_iso("2024-01-01T00:00:00Z")
+    end_all = parse_iso(f"{DATA_END}T23:00:00Z")
+    months = funding_months(DATA_END)
+
+    data = {}
+    for sym in SYMBOLS:
+        data[sym] = {
+            'mark': load_mark_series(sym, start_all, end_all),
+            'funding': load_funding_series_all(sym, months)
+        }
+    return train, val, test, data
 
 def get_funding_latest(funding_series, ts_ms):
     # find latest with calc_time <= ts_ms
