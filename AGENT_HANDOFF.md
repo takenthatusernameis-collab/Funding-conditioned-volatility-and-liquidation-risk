@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T05:41:23Z
+Updated: 2026-10-28T05:42:35Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 5f8939ba131b7194096cd9cad81ea92e8924ac2f (checkpoint, branch up to date with origin/main)
+Current HEAD: d33557286a156911cdaefaede630f15071297ce2 (checkpoint; HEAD advanced from prior recorded 5f8939ba131b7194096cd9cad81ea92e8924ac2f by prior session's handoff update commit)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = 5f8939ba131b7194096cd9cad81ea92e8924ac2f (up to date with origin/main).
+- Verified repo state: `git rev-parse HEAD` = d33557286a156911cdaefaede630f15071297ce2 (local checkpoint; prior recorded HEAD 5f8939ba131b7194096cd9cad81ea92e8924ac2f was advanced by the previous session's handoff commit).
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
+- Diff vs recorded prior HEAD: only AGENT_HANDOFF.md changed (7 insertions, 7 deletions) — no code, protocol, split, or evaluation artifacts touched.
 - No new research results, no holdout access, no protocol changes, no risk overlay.
-- Updated handoff timestamp and HEAD to current checkpoint; wrote fresh initial task message for next agent.
+- Updated handoff timestamp and HEAD to current checkpoint; initial task message for next agent refreshed below.
 
 ## What this session delivered
 
-State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `5f8939ba131b7194096cd9cad81ea92e8924ac2f`.
+State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `d33557286a156911cdaefaede630f15071297ce2`.
 
 ## Current verified state
 
