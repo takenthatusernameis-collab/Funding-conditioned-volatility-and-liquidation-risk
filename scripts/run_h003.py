@@ -17,6 +17,17 @@ REPO = Path(__file__).resolve().parents[1]
 RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
 OUT = REPO / "research_state" / "evaluation_summary_h003.md"
 
+# Experiment selection via env var: "FCLR-001" (default, frozen window ending
+# 2024-03-31, BTCUSDT-only 4-day test block) or "FCLR-002" (extended 5-symbol
+# panel 2024-04-01..2024-09-30 per frozen protocol). Default preserves the
+# existing recorded FCLR-H003 artifact exactly.
+EXPERIMENT = os.environ.get("H003_EXPERIMENT", "FCLR-001")
+if EXPERIMENT == "FCLR-002":
+    DATA_END = "2024-09-30"
+    OUT = REPO / "research_state" / "evaluation_summary_h003_FCLR002.md"
+else:
+    DATA_END = "2024-03-31"
+
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 EPS = 1e-12
 HORIZON = 24
@@ -58,15 +69,18 @@ def find_funding_csv(sym, month):
         return p
     return None
 
-def funding_months():
+def funding_months(end_ym: str) -> list[str]:
+    """All YYYY-MM months from 2024-01 through end_ym inclusive."""
+    y, m = end_ym[:7].split("-")
     out = []
     cur_y, cur_m = 2024, 1
-    while (cur_y, cur_m) <= (2024, 3):
+    while (cur_y, cur_m) < (int(y), int(m)):
         out.append(f"{cur_y}-{cur_m:02d}")
         cur_m += 1
         if cur_m > 12:
             cur_m = 1
             cur_y += 1
+    out.append(f"{cur_y}-{cur_m:02d}")
     return out
 
 def load_mark_series(sym, start_dt, end_dt):
@@ -306,11 +320,11 @@ def main():
     val = (parse_iso(splits['validation']['start']), parse_iso(splits['validation']['end']))
     test = (parse_iso(splits['test']['start']), parse_iso(splits['test']['end']))
 
-    months = funding_months()
+    months = funding_months(DATA_END)
     data = {}
     for sym in SYMBOLS:
         data[sym] = {
-            'mark': load_mark_series(sym, parse_iso("2024-01-01T00:00:00Z"), parse_iso("2024-03-30T23:00:00Z")),
+            'mark': load_mark_series(sym, parse_iso("2024-01-01T00:00:00Z"), parse_iso(f"{DATA_END}T23:00:00Z")),
             'funding': load_funding_series_all(sym, months)
         }
 
@@ -431,8 +445,9 @@ def main():
     lines.append('# Evaluation Summary (FCLR-H003)')
     lines.append('')
     lines.append(f'Generated: {datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}')
+    lines.append(f'Experiment: {EXPERIMENT}')
     lines.append(f'Horizon: {HORIZON}h | MMR: {MMR} | Leverages: {LEVERAGES} | Sides: {SIDES} (separate)')
-    lines.append(f'Panel: FCLR-001 frozen test block {test[0].strftime("%Y-%m-%dT%H:%M:%SZ")} .. {test[1].strftime("%Y-%m-%dT%H:%M:%SZ")}')
+    lines.append(f'Panel: {EXPERIMENT} test block {test[0].strftime("%Y-%m-%dT%H:%M:%SZ")} .. {test[1].strftime("%Y-%m-%dT%H:%M:%SZ")}')
     lines.append('')
     lines.append('Notes: Labels are synthetic modeled boundary breaches (not observed liquidations). Long/short evaluated separately. Assumptions: maintenance margin rate 0.005, zero-cost boundary, mark close at decision time as entry, horizon 24h forward mark closes.')
     lines.append('')

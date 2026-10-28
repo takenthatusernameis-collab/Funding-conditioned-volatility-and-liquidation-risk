@@ -3,7 +3,7 @@
   "generated": "2026-10-26T18:47:07Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
   "current_status": "INCONCLUSIVE",
-  "summary": "FCLR-001 forecast gate NOT MET (PILOT/INCONCLUSIVE). Risk-overlay INELIGIBLE. Direct liquidation labels unavailable. Frontier lists unfinished tasks ordered by information gain; none may reuse the sealed holdout for selection.",
+  "summary": "FCLR-001 forecast gate NOT MET (PILOT/INCONCLUSIVE). FCLR-002 forecast gate NOT MET: primary contrast C2 vs B1 numerically passes (9.28% relative QLIKE, 95% CI [-0.097648, -0.008788] excludes zero, independently reproduced byte-identical 2026-10-28) but the minimum claim-worthy test (>=3 non-overlapping 30-day blocks) is NOT met -- test window 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks + 10-day remainder. Risk-overlay INELIGIBLE. FCLR-H003 boundary-breach forecast evaluated on both panels: INCONCLUSIVE, no incremental skill. Direct liquidation labels unavailable. Frontier lists unfinished tasks ordered by information gain; none may reuse a sealed holdout for selection.",
   "frontier": [
     {
       "rank": 1,
@@ -23,11 +23,12 @@
     },
     {
       "rank": 3,
-      "task": "Register margin/leverage scenarios and run out-of-sample hypothetical boundary-breach forecast (FCLR-H003)",
-      "prerequisite": "New protocol version registering each margin/leverage scenario BEFORE outcome inspection; synthetic boundary labels already implemented (scripts/synthetic_boundary_labels.py, 5/5 tests)",
+      "task": "COMPLETE: FCLR-H003 out-of-sample hypothetical boundary-breach forecast on both FCLR-001 and FCLR-002 panels",
+      "prerequisite": "Pre-registered scenarios before outcome inspection (research_state/fclr_h003_pre_registration.md, research_state/fclr_h003_fclr002_pre_registration.md)",
       "acceptance": "Pre-registered scenarios; Brier/log-loss/calibration/precision-recall reported; long and short labels kept separate; funding/fee/price-reference assumptions disclosed",
-      "blockers": "FCLR-001 forecast gate not met; boundary forecast is a separate hypothesis and does not unblock the risk-overlay phase",
-      "do_not": "Do not describe modeled boundary breaches as observed liquidations."
+      "result": "FCLR-001-H003: degenerate (base rate 0.0000, no events). FCLR-002-H003: real events at 5x/10x/20x but C2 does not beat B0 on Brier or log-loss in any scenario; INCONCLUSIVE, no incremental skill.",
+      "blockers": "None beyond execution (completed 2026-10-28).",
+      "do_not": "Do not describe modeled boundary breaches as observed liquidations. Do not threshold-shop best-F1 to claim a pass."
     },
     {
       "rank": 4,
@@ -49,15 +50,15 @@
   "coverage": {
     "instruments": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
     "venue": "binance_um_perp",
-    "common_hourly_timestamps": 0,
-    "period": "2024-01-01..2024-03-31",
-    "note": "CORRECTED per research_state/coverage_audit_recheck.md: intersection across all 5 symbols is 0 timestamps in the FCLR-001 window. BTCUSDT alone has 2160 mark-price timestamps Jan-Mar; the other four symbols have zero mark-price CSVs before 2024-04-01. The previously recorded 2136 figure is not reproducible from the current working tree.",
-    "test_block_shortfall": "single ~4-day block vs >=3 non-overlapping 30-day blocks required"
+    "common_hourly_timestamps": 4392,
+    "period": "2024-04-01..2024-09-30 (FCLR-002 panel; fully cached, no downloads needed)",
+    "note": "FCLR-001 window (2024-01-01..2024-03-31) has 0 common 5-symbol mark-price timestamps; only BTCUSDT has mark-price rows there (see coverage_audit_recheck.md). FCLR-002 panel is the only >=5-instrument panel available.",
+    "fclr002_test_blocks": "test 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks (Jul 23-Aug 21, Aug 22-Sep 20) + 10-day remainder Sep 21-30. Protocol requires >=3 -> NOT MET."
   },
   "blocked_cells": [
     {"hypothesis": "FCLR-H004", "reason": "Direct liquidation labels unavailable from admissible public sources", "status": "BLOCKED"}
   ],
   "untested_cells": [
-    {"hypothesis": "FCLR-H003", "reason": "No out-of-sample breach evaluation run; scenarios not pre-registered", "status": "NOT_STARTED"}
+    {"hypothesis": "FCLR-H003 (alternate horizons/tiers)", "reason": "Completed for 24h horizon / MMR 0.005 / lev 3-20 on both panels (INCONCLUSIVE, no incremental skill). Longer horizons (72h/168h), lower MMR tiers, and an event-intensity target are untested and would require a fresh pre-registration before outcome inspection.", "status": "NOT_STARTED"}
   ]
 }
