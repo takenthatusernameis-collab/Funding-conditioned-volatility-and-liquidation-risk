@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T09:37:27Z
+Updated: 2026-10-28T09:38:09Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 7f2f24485231b27959c3bc8dcf9f48b1fb748112 (verify with `git rev-parse HEAD`; prior recorded HEAD 802b43d0 was stale)
+Current HEAD: c17e1bc6e935b22bbe7da7f0b3d1d450062e661a (verify with `git rev-parse HEAD`; prior recorded HEAD 7f2f2448 was stale)
 
 ## Mission (unchanged)
 
@@ -52,14 +52,14 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `7f2f24485231b27959c3bc8dcf9f48b1fb748112` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
+- HEAD `c17e1bc6e935b22bbe7da7f0b3d1d450062e661a` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state, corrected a stale HEAD, and refreshed the snapshot.
 
 **Your tasks (do not expand scope):**
 
-1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `7f2f24485231b27959c3bc8dcf9f48b1fb748112`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
+1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `c17e1bc6e935b22bbe7da7f0b3d1d450062e661a`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
 2. Highest-value next research task: execute FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
    - Prerequisite: register a NEW protocol version FCLR-002 v1.0 in `research_state/research_protocol.md` BEFORE computing any outcomes. Record frozen splits, feature definitions, model contrasts (C2 vs B1 primary), >=2% relative QLIKE materiality floor, multiplicity rule, and block-bootstrap config.
