@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T14:02:53Z
+Updated: 2026-10-28T14:03:10Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: a1291bc24dba54c62162e1f62853ce0433e42e2e (verify with `git rev-parse HEAD`)
+Current HEAD: 8761e1e94e0a6a4ef5c666c4cedbdf78c2ba3b31 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = 4d8aa9e116f2a0abe20423993a839f869b5d5422 (HEAD advanced beyond a1291bc2 recorded in prior handoff; commits include a5bd278e, 4d8aa9e1 since). Tests: `python3 -m pytest tests/ -q` → 51 passed in 0.93s; no frozen artifacts modified by this session.
-- `git status` — tracked tree clean (no untracked `__pycache__/` committed).
+- Independently verified repo state: `git rev-parse HEAD` = 8761e1e94e0a6a4ef5c666c4cedbdf78c2ba3b31 on `main` (one commit beyond the 4d8aa9e1 recorded in the prior handoff; commit message "chore(kilo): update handoff").
+- `python3 -m pytest tests/ -q` → 51 passed in 1.04s; no frozen artifacts modified by this session.
+- Removed generated `scripts/__pycache__/` and `tests/__pycache__/`; `git status` — tracked tree clean.
 - Reviewed prior task from handoff (initial task message for next agent). Confirmed gates remain as documented: INCONCLUSIVE, forecast gate NOT MET, risk-overlay INELIGIBLE, Track A BLOCKED. Verified FCLR-002 leakage audit on record (PASS), FCLR-002 pre-registered protocol/splits present, FCLR-002 evaluation summary exists (test n=94, C2 worse than B1, gate NOT_MET). Attempted to re-execute FCLR-002 evaluation under frozen protocol; run did not produce a new updated summary in this session (existing summary remains canonical as recorded). No holdout access, no protocol changes, no new research results.
 - Updated handoff (timestamp, HEAD, session summary) and wrote clear initial task message for next agent.
 
 ## What this session delivered
 
-Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD corrected from stale `310ad249` to current `a1291bc2`; FCLR-002 leakage audit and `run_evaluation.py` changes (already committed) recorded; initial task message for next agent refreshed.
-
+Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD advanced from stale `4d8aa9e1`/`a1291bc2` to current `8761e1e9`; tracked tree clean after removing generated `__pycache__/`; initial task message for next agent refreshed.
 
 ## Current verified state
 
@@ -52,9 +52,9 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `4d8aa9e116f2a0abe20423993a839f869b5d5422` on `main`. Re-verify with `git rev-parse HEAD` — may advance.
+- HEAD `8761e1e94e0a6a4ef5c666c4cedbdf78c2ba3b31` on `main`. Re-verify with `git rev-parse HEAD` — may advance.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Tracked tree clean (except `__pycache__/` if generated).
+- Tracked tree clean (except generated `__pycache__/` which should be removed).
 - Reviewed state: FCLR-002 leakage audit on record (PASS), evaluation_summary_FCLR002.md exists (test n=94, C2 worse than B1, gate NOT_MET). No new OOS results produced this session.
 
 **Your tasks (do not expand scope):**
