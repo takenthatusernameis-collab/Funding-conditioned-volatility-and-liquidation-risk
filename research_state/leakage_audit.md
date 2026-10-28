@@ -37,3 +37,41 @@ Scope: all feature, label, split, and transformation checks for the frozen FCLR-
 No unresolved leakage, timestamp, label, or transformation defect capable of
 reversing the INCONCLUSIVE conclusion was found. The dominant limitation is
 statistical power (single short test block), not look-ahead or data corruption.
+## Leakage Audit — FCLR-002 (Extended 5-symbol panel)
+
+Date: 2026-10-28
+Protocol: research_state/research_protocol.md v1.0 §80-144 (FCLR-002 v1.0, FROZEN)
+Scope: adversarial leakage re-audit on new 5-symbol panel prior to opening sealed holdout.
+
+### Panel verification
+- Universe (frozen): BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT (Binance USDⓈ-M perpetuals)
+- Coverage audit: `research_state/fclr002_coverage_audit.json` — 4392 common hourly timestamps 2024-04-01T00:00:00Z to 2024-09-30T23:00:00Z, contiguous window, >=5 instruments. Met.
+- Cached data present under `research_state/data_cache/` for all 5 symbols across required months (2024-04 through 2024-09). Verified by directory listing.
+
+### Split/embargo integrity
+- Frozen splits (FCLR-002): train 2024-04-01T00:00:00Z..2024-06-08T23:00:00Z, val 2024-06-16T00:00:00Z..2024-07-15T23:00:00Z, test/holdout 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z (7-calendar-day embargo). Boundaries match `research_state/run_manifest.json` and `research_state/run_manifest_FCLR002.json`.
+- Embargo between partitions >=7d enforced by chronological separation with gaps (train ends 06-08T23:00Z, val starts 06-16T00:00Z = 7d gap; val ends 07-15T23:00Z, test starts 07-23T00:00Z = 7d gap). Purge/embargo at boundaries holds.
+- No reuse of FCLR-001 sealed holdout (2024-03-27..2024-03-30). Development uses only common paired panel for FCLR-002 window.
+
+### Timestamp alignment & feature computation
+- Unit is one contract × closed UTC hourly timestamp; forecast at t uses only information available by t. Targets use t+1..t+h (mark-price close). No same-bar leakage.
+- Funding: latest funding with calc_time/availability <= t only, sign retained; past-only 90d window for absolute-funding percentile (>=30 obs). No forward-fill/zero-fill.
+- Premium/EMA: mark/index contemporaneously aligned under tolerance when available; missing not imputed to zero. Core RV features required; rows dropped if core RV missing as per pipeline.
+- Common panel enforcement for paired comparisons prevents coverage differences masquerading as skill.
+
+### Leakage checks
+| # | Check | Result | Evidence |
+|---|-------|--------|----------|
+| F2-1 | No future information in features/targets | PASS | Same construction as FCLR-001 (trailing only; next-RV from t+1 onward). |
+| F2-2 | Split/embargo integrity on new boundaries | PASS | 7d embargo verified; chronological ordering holds. |
+| F2-3 | Funding availability/sign correct | PASS | Funding loaded by month, latest with ts_f <= ts_t only; no leakage. |
+| F2-4 | Alignment/missingness handled without fabrication | PASS | Missing premium/alignments remain missing; no zero-fill. |
+| F2-5 | No holdout reuse / no contamination | PASS | FCLR-002 uses disjoint window (Apr 2024–Sep 2024); FCLR-001 holdout not accessed for selection/tuning. |
+| F2-6 | Panel intersection correct | PASS | Common timestamps across all 5 symbols = 4392; paired comparisons use intersection. |
+
+### Residual notes
+- Mark/index premium coverage may be partial for some symbols/timestamps (missingness tracked, not imputed) — consistent with FCLR-001.
+- Holdout (test) not yet "opened" for outcome inspection beyond pre-registered execution; this audit is recorded before opening per requirement.
+
+### Verdict (FCLR-002)
+No unresolved leakage/timestamp/label/transformation defect found. Proceed to FCLR-002 out-of-sample evaluation on frozen splits/panel per protocol. Holdout remains sealed until execution under frozen protocol with this audit on record.

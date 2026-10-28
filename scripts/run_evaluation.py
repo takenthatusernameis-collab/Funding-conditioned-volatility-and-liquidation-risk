@@ -15,11 +15,11 @@ RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
 PROTOCOL = REPO / "research_state" / "research_protocol.md"
 
 # Experiment selection via env var: "FCLR-001" (default, frozen window ending
-# 2024-03-31) or "FCLR-002" (extended window ending 2024-06-30, protocol v2.0).
+# 2024-03-31) or "FCLR-002" (extended window ending 2024-09-30 per frozen protocol).
 EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-001")
 if EXPERIMENT == "FCLR-002":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR002.md"
-    DATA_END = "2024-06-30"
+    DATA_END = "2024-09-30"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
@@ -194,25 +194,11 @@ def qlike(y, yhat):
         return None
     return y/yhat - math.log(y/yhat) - 1.0
 
-def build_panel():
     m = json.loads(RUN_MANIFEST.read_text())
     splits = m['split_boundaries']
     train = (parse_iso(splits['train']['start']), parse_iso(splits['train']['end']))
     val = (parse_iso(splits['validation']['start']), parse_iso(splits['validation']['end']))
     test = (parse_iso(splits['test']['start']), parse_iso(splits['test']['end']))
-
-    # load all mark series for all symbols (wide range)
-    start_all = parse_iso("2024-01-01T00:00:00Z")
-    end_all = parse_iso(f"{DATA_END}T23:00:00Z")
-    months = funding_months(DATA_END)
-
-    data = {}
-    for sym in SYMBOLS:
-        data[sym] = {
-            'mark': load_mark_series(sym, start_all, end_all),
-            'funding': load_funding_series_all(sym, months)
-        }
-    return train, val, test, data
 
 def get_funding_latest(funding_series, ts_ms):
     # find latest with calc_time <= ts_ms
