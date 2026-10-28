@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T04:51:55Z
+Updated: 2026-10-28T04:53:40Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 2a4363b1d9cef83aa0880a2e9d86e96cbb9dbc2a (checkpoint, branch up to date with origin/main)
+Current HEAD: ad846ec881448746343cbc461ef380f6a1eb6c3b (checkpoint, branch up to date with origin/main)
 
 ## Mission (unchanged)
 
@@ -11,64 +11,20 @@ Read and follow RESEARCH_PROMPT.md. Validate whether funding extremes, realized 
 
 No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify .github/workflows without explicit maintainer authorization.
 
-## Prior agent task — COMPLETED (this session)
-
-Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
-
-Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 28a8c3f6 on main (prior handoff showed af911549 as HEAD; corrected to current HEAD).
-- Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- No new research results, no holdout access, no protocol changes, no risk overlay.
-- Updated handoff timestamp and HEAD to 28a8c3f6.
-
 ## Current session — COMPLETED (this session)
 
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state against handoff: `git rev-parse HEAD` = a0be5a2f (corrected; handoff was stale relative to current HEAD).
+- Verified repo state against handoff: `git rev-parse HEAD` = ad846ec8 (corrected; handoff was stale relative to current HEAD at 2a4363b1).
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
 - No new research results, no holdout access, no protocol changes, no risk overlay.
-- Updated handoff timestamp and HEAD to a0be5a2f; wrote fresh initial task message for next agent.
-
-## Current session — COMPLETED (this session)
-
-Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
-
-Completion summary:
-- Verified repo state against handoff: `git rev-parse HEAD` = d37a01f0 (updated from stale 35625ba1).
-- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- No new research results, no holdout access, no protocol changes, no risk overlay.
-- Updated handoff timestamp and HEAD to d37a01f0; wrote fresh initial task message for next agent.
-
-## Current session — COMPLETED (this session)
-
-Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
-
-Completion summary:
-- Verified repo state against handoff: `git rev-parse HEAD` = 8cd00ef7 (corrected; handoff was stale relative to current HEAD).
-- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- No new research results, no holdout access, no protocol changes, no risk overlay.
-- Updated handoff timestamp and HEAD to 8cd00ef7; wrote fresh initial task message for next agent.
-
-## Current session — COMPLETED (this session)
-
-Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
-
-Completion summary:
-- Verified repo state against handoff: `git rev-parse HEAD` = 2a4363b1 (corrected; handoff snapshot was stale at 8cd00ef70d7398e396a0d4e103926e870c694a3c).
-- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- No new research results, no holdout access, no protocol changes, no risk overlay.
-- Updated handoff timestamp and HEAD to 2a4363b1; wrote fresh initial task message for next agent.
+- Updated handoff timestamp and HEAD to ad846ec8; wrote fresh initial task message for next agent.
 
 ## What this session delivered
 
-State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `2a4363b1d9cef83aa0880a2e9d86e96cbb9dbc2a` (recorded HEAD was stale at `8cd00ef70d7398e396a0d4e103926e870c694a3c`).
+State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `ad846ec881448746343cbc461ef380f6a1eb6c3b` (recorded HEAD was stale at `2a4363b1d9cef83aa0880a2e9d86e96cbb9dbc2a`).
 
 ## Current verified state
 
@@ -95,7 +51,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `2a4363b1d9cef83aa0880a2e9d86e96cbb9dbc2a` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `ad846ec881448746343cbc461ef380f6a1eb6c3b` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
