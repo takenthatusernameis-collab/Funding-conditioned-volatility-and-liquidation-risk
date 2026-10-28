@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T01:49:09Z
+Updated: 2026-10-28T01:50:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 73e3aec6 (chore(kilo): checkpoint agent session)
+Current HEAD: 30d1b10a (chore(kilo): checkpoint agent session - handoff update)
 
 ## Mission (unchanged)
 
@@ -24,7 +24,7 @@ Completion summary:
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `30d1b10a`.
 
 ## Current verified state
 
@@ -51,14 +51,14 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `73e3aec6` on `main` (local checkpoint).
+- HEAD `30d1b10a` on `main` (local checkpoint, "chore(kilo): checkpoint agent session - handoff update").
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session refreshed handoff metadata and verified state after prior corrections.
 
 Key facts to know:
 - Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
-- Headline FCLR-001: C2 vs B1 = -2.50% relative, 95% CI [-0.123401, 0.158843] crosses zero. Forecast gate NOT MET.
+- Headline FCLR-001: C2 vs B1 = -2.50% relative QLIKE, 95% CI [-0.123401, 0.158843] crosses zero. Forecast gate NOT MET.
 - Track A BLOCKED: no complete unauthenticated public liquidation census across Binance/Bybit/OKX/Deribit/academic/vendors. Do not infer event-free intervals or treat partial streams as a complete census.
 - FCLR-H003 pre-registered and executed on frozen FCLR-001 test block; results synthetic modeled boundary breaches only, no risk-overlay implications.
 - FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
