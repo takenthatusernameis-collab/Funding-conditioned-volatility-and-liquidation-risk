@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T05:34:53Z
+Updated: 2026-10-28T05:36:54Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: a7f63104f21d6c490d7cab5ec3d224b5986c4e25 (checkpoint, branch up to date with origin/main)
+Current HEAD: 1650c669748edbd86309d0351d1a6df0c442db57 (checkpoint, branch up to date with origin/main)
 
 ## Mission (unchanged)
 
@@ -51,7 +51,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `a7f63104f21d6c490d7cab5ec3d224b5986c4e25` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `1650c669748edbd86309d0351d1a6df0c442db57` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
