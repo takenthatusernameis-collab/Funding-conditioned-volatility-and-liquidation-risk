@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T10:46:07Z
+Updated: 2026-10-28T11:26:18Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 0461279bebea8c0cf370757483cee7b556626922 (verify with `git rev-parse HEAD`)
+Current HEAD: 310ad2496705cf14b5c71af95e84fc33483eaab8 (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -61,7 +61,7 @@ What is verified this session:
 
 **Your tasks (do not expand scope):**
 
-1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `0461279bebea8c0cf370757483cee7b556626922`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
+1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `310ad2496705cf14b5c71af95e84fc33483eaab8`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
 2. Highest-value next research task: execute FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
    - Prerequisite: FCLR-002 v1.0 is already pre-registered in `research_state/research_protocol.md` (§§80-144) with frozen splits, feature definitions, model contrasts (C2 vs B1 primary), >=2% relative QLIKE materiality floor, multiplicity rule, and block-bootstrap config. Do not re-register; proceed to execution.
@@ -77,4 +77,4 @@ What is verified this session:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint 0461279bebea8c0cf370757483cee7b556626922 if you make a commit.
+**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint 310ad2496705cf14b5c71af95e84fc33483eaab8 if you make a commit.
