@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T00:52:26Z
+Updated: 2026-10-28T00:53:15Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 835a9b63 (chore(kilo): checkpoint agent session)
+Current HEAD: 0ac11b10 (chore(kilo): checkpoint agent session)
 
 ## Mission (unchanged)
 
@@ -16,20 +16,14 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 0a7e5b95 on main.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md. Verified current HEAD is 0ac11b10 on main.
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Updated handoff timestamp and initial task message for next agent.
-- **Corrected three stale references found during verification:**
-  1. Handoff's recorded HEAD `9b17c2c2` did not match actual HEAD `0a7e5b95` (the most recent checkpoint commit). Updated.
-  2. `research_state/experiment_frontier.json` coverage block still claimed `common_hourly_timestamps: 2136` for the FCLR-001 window, directly contradicting `research_state/coverage_audit_recheck.md` (true intersection across all 5 symbols = 0 timestamps). Corrected to 0 with an explanatory note. This was a documentation defect only — no frozen protocol, split, or evaluation result was changed.
-  3. **New this session — three additional stale `2136` references the prior agent missed:**
-     - `research_state/research_protocol.md:61` ("Common paired panel timestamps: 2136") → corrected to 0 with the coverage-audit explanation.
-     - `research_state/run_manifest.json:8552` (`common_panel_timestamps: 2136`) → value preserved as a historical record of the original coverage-audit figure, with a `coverage_audit_correction` field added documenting that it is not reproducible (true intersection = 0; BTCUSDT-only 2160 rows).
-     - `research_state/final_inconclusive_report.md:12,45` ("Coverage audit (>=5 instruments) | MET ... 2136 common hourly timestamps" and ">=5 instruments (met)") → corrected to NOT MET / NOT MET, consistent with `coverage_audit_recheck.md`.
+- No stale references found this session; verified previous corrections remain consistent.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Four stale documentation references corrected; HEAD unchanged.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD.
 
 ## Current verified state
 
@@ -56,10 +50,10 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `835a9b63` on `main` (local checkpoint).
+- HEAD `0ac11b10` on `main` (local checkpoint).
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- No new research results; this session was a state handoff refresh plus stale-reference corrections (see below).
+- No new research results; this session refreshed handoff metadata and verified state after prior corrections.
 
 Key facts to know:
 - Evaluated panel is BTCUSDT-only (1634 eval rows). The protocol's >=5-instrument gate was never met — coverage/representativeness defect, not leakage. Other symbols have no mark-price CSVs before 2024-04-01.
@@ -68,8 +62,8 @@ Key facts to know:
 - FCLR-H003 pre-registered and executed on frozen FCLR-001 test block; results synthetic modeled boundary breaches only, no risk-overlay implications.
 - FCLR-002 coverage sufficient in principle (5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z, ~183 days) but NOT executed and its holdout NOT opened.
 
-**Corrections applied this session (documentation only; no frozen artifact changed):**
-1. Handoff recorded HEAD as `9b17c2c2`; actual HEAD is `0a7e5b95`. Corrected.
+**Corrections previously applied (documentation only; no frozen artifact changed):**
+1. Handoff recorded HEAD as `9b17c2c2`; actual HEAD is now `0ac11b10`. Corrected across handoff.
 2. `research_state/experiment_frontier.json` coverage block claimed `common_hourly_timestamps: 2136` for the FCLR-001 window. Per `research_state/coverage_audit_recheck.md` the true 5-symbol intersection in 2024-01..2024-03 is **0 timestamps** (BTCUSDT alone has 2160; the other four have zero mark-price CSVs before 2024-04-01). Corrected to 0 with a note. The 2136 figure is not reproducible from the current working tree.
 3. `research_state/research_protocol.md:61` ("Common paired panel timestamps: 2136") → corrected to 0 with the coverage-audit explanation. Split boundaries themselves remain frozen and valid.
 4. `research_state/run_manifest.json:8552` (`common_panel_timestamps: 2136`) → original value preserved as a historical record, plus a `coverage_audit_correction` field documenting the non-reproducibility (true intersection = 0; BTCUSDT-only).
