@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T18:46:24Z
+Updated: 2026-10-28T18:47:27Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 626ef583f50d3bea0b86aedc8aeda01970d5f7eb (verify with `git rev-parse HEAD`)
+Current HEAD: cd94f4ef48487cce9f85c017915d47290b69261a (verify with `git rev-parse HEAD`)
 
 ## Mission (unchanged)
 
@@ -16,11 +16,11 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = `626ef583f50d3bea0b86aedc8aeda01970d5f7eb` on `main` (latest checkpoint). Working tree clean. `python3 -m pytest tests/ -q` → 51 passed in ~0.96s.
+- Verified repo state: `git rev-parse HEAD` = `cd94f4ef48487cce9f85c017915d47290b69261a` on `main` (latest checkpoint). Working tree clean. `python3 -m pytest tests/ -q` → 51 passed in ~1.17s.
 - Confirmed gates: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`). FCLR-002 CONFLICTED/UNTRUSTED (`research_state/evaluation_summary_FCLR002.md` shows numerical pass but flagged untrusted in `research_state/evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened/no outcomes computed; provenance not recorded). Do NOT claim verified FCLR-002 pass or recompute (would require opening/altering sealed holdout or unpre-registered config, both prohibited). Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Coverage re-confirmed: `research_state/fclr002_coverage_audit.json` — 5 symbols, 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z.
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed. All constraints respected.
-- Updated HEAD in this handoff from `c365b7ab9227a80a6ed6d65fd33c62f4e3bd778e` to `626ef583f50d3bea0b86aedc8aeda01970d5f7eb`.
+- Updated HEAD in this handoff from `626ef583f50d3bea0b86aedc8aeda01970d5f7eb` to `cd94f4ef48487cce9f85c017915d47290b69261a`.
 
 ## Current verified state
 
