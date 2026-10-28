@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T03:00:00Z
+Updated: 2026-10-28T02:59:16Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: f83e2823b53a8ec6730ab8c805b2e949b9f71b2e (checkpoint)
+Current HEAD: 577f4ceeff219c2946b00b6e02f3a390261392a5 (checkpoint)
 
 ## Mission (unchanged)
 
@@ -16,16 +16,14 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 5440fb64622fc30e19bf8efee68487ed29bacfaf on main (recorded HEAD was stale: 924b9dc...; prior summary's c4a045be also stale — corrected).
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 577f4ceeff219c2946b00b6e02f3a390261392a5 on main (recorded HEAD was stale — corrected).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- Updated handoff timestamp and HEAD to 5440fb64622fc30e19bf8efee68487ed29bacfaf.
-- Rewrote the "Initial task message for next agent" section with current state and a fresh task message.
-- Verified state is consistent with prior corrections.
+- Updated handoff timestamp and HEAD to 577f4ceeff219c2946b00b6e02f3a390261392a5.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `c4a045be414dd8e0998ad410a223f7206b10fc3c`.
+State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `577f4ceeff219c2946b00b6e02f3a390261392a5`.
 
 ## Current verified state
 
