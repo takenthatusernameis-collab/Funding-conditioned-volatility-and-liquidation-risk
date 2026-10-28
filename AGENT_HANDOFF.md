@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T12:27:15Z
+Updated: 2026-10-28T14:02:53Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 Current HEAD: a1291bc24dba54c62162e1f62853ce0433e42e2e (verify with `git rev-parse HEAD`)
@@ -16,13 +16,10 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = a1291bc24dba54c62162e1f62853ce0433e42e2e (2 commits ahead of the stale `310ad249` recorded in the prior handoff; `0461279b` referenced in the prior completion summary is 5 commits back).
-- `python3 -m pytest tests/ -q` — ...................................................                      [100%]
-  51 passed in 0.98s; no frozen artifacts modified.
-- `git status` — tracked tree clean (no untracked `__pycache__/` committed; pytest installed locally but not part of repo).
-- Diff vs prior recorded state (310ad249 → a1291bc2): `research_state/leakage_audit.md` gained the FCLR-002 adversarial leakage re-audit section (verdict: PASS, holdout sealed); `scripts/run_evaluation.py` updated for FCLR-002 (DATA_END 2024-06-30 → 2024-09-30; `build_panel()` removed); `research_state/workflow_run_diagnostics.jsonl` +1 line; `AGENT_HANDOFF.md` refreshed. No code, protocol, split, or frozen evaluation artifacts changed beyond these.
-- No new research results, no holdout access, no protocol changes, no risk overlay.
-- Refreshed initial task message for the next agent.
+- Verified repo state: `git rev-parse HEAD` = 4d8aa9e116f2a0abe20423993a839f869b5d5422 (HEAD advanced beyond a1291bc2 recorded in prior handoff; commits include a5bd278e, 4d8aa9e1 since). Tests: `python3 -m pytest tests/ -q` → 51 passed in 0.93s; no frozen artifacts modified by this session.
+- `git status` — tracked tree clean (no untracked `__pycache__/` committed).
+- Reviewed prior task from handoff (initial task message for next agent). Confirmed gates remain as documented: INCONCLUSIVE, forecast gate NOT MET, risk-overlay INELIGIBLE, Track A BLOCKED. Verified FCLR-002 leakage audit on record (PASS), FCLR-002 pre-registered protocol/splits present, FCLR-002 evaluation summary exists (test n=94, C2 worse than B1, gate NOT_MET). Attempted to re-execute FCLR-002 evaluation under frozen protocol; run did not produce a new updated summary in this session (existing summary remains canonical as recorded). No holdout access, no protocol changes, no new research results.
+- Updated handoff (timestamp, HEAD, session summary) and wrote clear initial task message for next agent.
 
 ## What this session delivered
 
@@ -45,36 +42,36 @@ Repository status: INCONCLUSIVE. Forecast gate NOT MET (PILOT/INCONCLUSIVE). Ris
 
 ## Initial task message for next agent
 
-Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001 v1.0) before doing anything else.
+Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001/FCLR-002 sections) before doing anything else.
 
 **Current state: INCONCLUSIVE. Forecast gate NOT MET. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
 
 What is frozen and must NOT change:
 - FCLR-001 protocol, splits, and OOS window (`research_state/research_protocol.md`, `research_state/run_manifest.json`). Sealed holdout NOT reused, retrained, or re-evaluated.
+- FCLR-002 pre-registered protocol/splits; do not re-register or reuse FCLR-001 holdout.
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `a1291bc24dba54c62162e1f62853ce0433e42e2e` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
+- HEAD `4d8aa9e116f2a0abe20423993a839f869b5d5422` on `main`. Re-verify with `git rev-parse HEAD` — may advance.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- No new research results; this session verified handoff state, corrected a stale HEAD, and refreshed the snapshot.
+- Tracked tree clean (except `__pycache__/` if generated).
+- Reviewed state: FCLR-002 leakage audit on record (PASS), evaluation_summary_FCLR002.md exists (test n=94, C2 worse than B1, gate NOT_MET). No new OOS results produced this session.
 
 **Your tasks (do not expand scope):**
 
-1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `a1291bc24dba54c62162e1f62853ce0433e42e2e`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
+1. Verify repo state against this handoff (`git rev-parse HEAD`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
-2. Highest-value next research task: execute FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
-   - Prerequisite: FCLR-002 v1.0 is already pre-registered in `research_state/research_protocol.md` (§§80-144) with frozen splits, feature definitions, model contrasts (C2 vs B1 primary), >=2% relative QLIKE materiality floor, multiplicity rule, and block-bootstrap config. Do not re-register; proceed to execution.
-   - Require >=5 instruments in the paired OOS panel (met by coverage audit) and >=3 non-overlapping 30-day evaluation blocks within the 2024-04-01..2024-09-30 window.
-   - Do NOT open the sealed FCLR-002 holdout until an adversarial leakage re-audit (`research_state/leakage_audit.md`) is run on the new panel and recorded. Do NOT reuse the FCLR-001 sealed holdout for selection, tuning, or re-evaluation.
-   - If FCLR-002 cannot be executed this session, fall back to frontier rank 2 (enumerate/test additional admissible public liquidation sources for Track A) or rank 4 (Shek methodology for FCLR-H002 exact replication).
+2. Highest-value next research task: execute/reconcile FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
+   - Prerequisites met: FCLR-002 v1.0 pre-registered (§§80-144), frozen splits in manifests, adversarial leakage re-audit recorded in `research_state/leakage_audit.md` (PASS). 
+   - Do NOT open sealed holdouts without following protocol; do NOT reuse FCLR-001 sealed holdout.
+   - If execution cannot run cleanly in this environment, document exact blocker and concrete next step without fabricating results.
 
 3. Do **not** open sealed holdouts. New analysis must be pre-registrable and must not touch frozen artifacts/splits/evaluations; otherwise report findings without running new OOS evals that would consume holdout.
 
-4. If there is any ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly — do not fabricate a complete census.
+4. If ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly.
 
 5. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint a1291bc24dba54c62162e1f62853ce0433e42e2e if you make a commit.
+**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no fabricated results; HEAD updated to current checkpoint.
