@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T00:46:00Z
+Updated: 2026-10-28T00:52:02Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
 Current HEAD: 0a7e5b95 (chore(kilo): checkpoint agent session)
