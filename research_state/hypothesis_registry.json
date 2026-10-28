@@ -16,14 +16,21 @@
           "experiment_id": "FCLR-001",
           "result": "C2 vs B1: -2.50% relative QLIKE reduction; 95% CI [-0.123401, 0.158843] crosses zero; test window single ~4-day block",
           "verdict": "PILOT/INCONCLUSIVE; forecast gate NOT MET"
+        },
+        {
+          "experiment_id": "FCLR-002",
+          "result": "C2 vs B1: -9.28% relative QLIKE reduction; 95% CI [-0.097648, -0.008788] does NOT cross zero; n=8274 paired rows across 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT); test window 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z = 70 days = only 2 non-overlapping 30-day blocks",
+          "verdict": "INCONCLUSIVE; primary contrast numerically met and CI supports improvement, but minimum-claim-worthy test (>=3 non-overlapping 30-day blocks) NOT MET. Independently reproduced 2026-10-28 by re-running frozen scripts/run_evaluation.py with FCLR_EXPERIMENT=FCLR-002 (byte-identical numbers)."
         }
       ],
-      "next_falsification_test": "Pre-registered FCLR-002 (or later) with >=3 non-overlapping 30-day evaluation blocks across >=5 instruments, uncertainty supporting improvement after multiplicity correction, before any risk-overlay phase.",
+      "next_falsification_test": "Pre-registered FCLR-003 (or later) with >=3 non-overlapping 30-day evaluation blocks across >=5 instruments, uncertainty supporting improvement after multiplicity correction, before any risk-overlay phase.",
       "links": [
         "research_state/research_protocol.md",
         "research_state/evaluation_summary.md",
-        "research_state/final_inconclusive_report.md"
-      ]
+        "research_state/final_inconclusive_report.md",
+        "research_state/evaluation_summary_conflict.md"
+      ],
+      "superseded_by": "FCLR-002 (numbers independently reproduced 2026-10-28, but frozen test window 2024-07-23..2024-09-30 = 70 days = only 2 non-overlapping 30-day blocks; protocol >=3-block requirement NOT MET. Gate: primary contrast met numerically, minimum-claim-worthy test NOT MET -> INCONCLUSIVE, same as FCLR-001.)"
     },
     {
       "hypothesis_id": "FCLR-H002",
