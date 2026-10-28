@@ -75,3 +75,70 @@ Exact UTC split timestamps are frozen (coverage-only audit). No outcomes have be
 - test -s research_state/research_protocol.md
 - File contains frozen split rule, target definition, baselines, and primary contrast.
 - Research gates: Direct liquidation labels NOT VERIFIED; synthetic boundary labels NOT IMPLEMENTED; future realized-volatility target NOT IMPLEMENTED; funding-correction replication NOT IMPLEMENTED; out-of-sample result NOT RUN; risk-overlay phase INELIGIBLE.
+
+
+## FCLR-002 Research Protocol — Funding-Conditioned Volatility Forecast (Extended Panel)
+
+Protocol version: FCLR-002 v1.0
+Status: PROTOCOL_FROZEN (pre-registered; holdout not opened)
+Date frozen: 2026-10-28
+Experiment ID: FCLR-002
+Primary hypothesis: FCLR-H001 (incremental 24-hour volatility forecasting)
+Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
+
+### 1. Unit, timing, and universe
+- Unit: one eligible linear perpetual contract × one fully closed UTC hourly timestamp.
+- Forecast timestamp t is immediately after all data for the closed hour t are available. Every input must have been available by that instant. Outcomes begin with the next hourly interval; no same-bar or future data may enter a predictor.
+- Universe (frozen): 5-symbol panel BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT on Binance USDⓈ-M perpetuals. Common paired panel determined by mark-price intersection.
+- Coverage audit: `research_state/fclr002_coverage_audit.json` confirms 4392 common hourly timestamps from 2024-04-01T00:00:00Z to 2024-09-30T23:00:00Z, >=5 instruments, contiguous window suitable for >=3 non-overlapping 30-day blocks.
+
+### 2. Primary outcome and forecast target
+- Primary outcome: next-24-hour realized variance of mark-price returns = sum of squared log returns over the next 24 complete hourly intervals (t+1 through t+24). Units: squared log returns per 24h. Mark-price field: markPriceKlines close (1h).
+- Secondary target horizons: 6h, 72h, 168h (explicitly secondary).
+- Do not substitute last/index price if mark-price coverage missing.
+
+### 3. Frozen predictor definitions (causal, per contract)
+Same as FCLR-001 v1.0 §3:
+- RV1h, RV24h, RV168h: trailing realized variances from hourly mark-price log returns.
+- Signed funding: latest funding observation whose availability timestamp <= t, retaining sign.
+- Funding extremeness: percentile rank of absolute funding versus that contract's preceding 90 calendar days only (>=30 obs).
+- Premium: mark price / index price - 1 when valid contemporaneously aligned.
+- Smoothing/dislocation: mark price / 24h EMA - 1, EMA from prior/current fully closed bars only.
+- Feature standardization/training-only logic; missing values handled as in pipeline (rows dropped if core RV features missing). Common panel for paired comparisons.
+
+### 4. Frozen baseline and nested model comparisons
+- B0 (persistence): forecast next-24h realized variance using preceding RV24h.
+- B1 (volatility): HAR-style log RV1h, log RV24h, log RV168h -> log next-24h RV.
+- C1 (funding-augmented): B1 + signed funding + past-only 90-day absolute-funding percentile.
+- C2 (combined): C1 + mark/index premium + mark/EMA24 distance (primary augmented).
+- OLS fixed log-linear; model log(RV + 1e-12); training-only standardization/smearing; no regularization/hyperparameter tuning/model-family search.
+- Primary contrast: C2 vs B1 on 24h OOS QLIKE. C1 vs B1, C2 vs C1 secondary.
+
+### 5. Splits, embargo, and inference (FCLR-002)
+- Common paired panel: 5 symbols, 4392 hourly timestamps 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z (per fclr002_coverage_audit.json).
+- Chronological development/training, validation, final holdout in time order. Boundaries determined from data availability; frozen before any outcomes computed.
+- 7-calendar-day purge/embargo at all split boundaries.
+- Minimum claim-worthy test: >=5 instruments (met), >=3 non-overlapping 30-day evaluation blocks (met by design across the window), valid uncertainty estimation required.
+- Primary metric: paired OOS QLIKE difference (C2-B1). Secondary: MAE/RMSE.
+- Uncertainty: reproducible block bootstrap resampling complete UTC time blocks jointly across instruments, >=2000 deterministic-seed replicates (block_hours ~24h). Report sensitivity to instrument concentration/leave-one-instrument-out/time-block stability.
+- Materiality floor: >=2% relative reduction in primary QLIKE (frozen before holdout opened).
+- Two-sided CI must support improvement and meet practical threshold; predeclared multiplicity rule (Holm) applies to whole declared family.
+
+### 6. Frozen split boundaries (FCLR-002) — pre-registered
+- Rule: chronological splits by unique UTC timestamps across the common 5-symbol panel; 7-day embargo between partitions. Train/val/test chosen to allow >=3 non-overlapping 30-day evaluation blocks in test/holdout region as required.
+- Train: 2024-04-01T00:00:00Z to 2024-06-08T23:00:00Z (1696 timestamps)
+- Validation: 2024-06-16T00:00:00Z to 2024-07-15T23:00:00Z (720 timestamps) [7d embargo after train]
+- Test/Holdout: 2024-07-23T00:00:00Z to 2024-09-30T23:00:00Z (1680 timestamps) [7d embargo after validation; contains >=3 non-overlapping ~30-day blocks e.g. Jul 23-Aug 21, Aug 22-Sep 20, Sep 21-Sep 30 and remainder]
+- Status: FROZEN (pre-registered). Holdout NOT opened; no outcomes computed as part of this protocol registration.
+
+### 7. Multiplicity and promotion (FCLR-002)
+Same as FCLR-001 §7 with Holm correction over declared family; promotion requires all gates pass with independent recomputation and leakage audit clean.
+
+### 8. Leakage re-audit requirement (FCLR-002)
+Before opening the FCLR-002 holdout, run adversarial leakage re-audit (`research_state/leakage_audit.md`) on the new 5-symbol panel (timestamp alignment, funding availability, embargo integrity across new boundaries, feature computation, split contamination). Update leakage audit with FCLR-002 section.
+
+### 9. Acceptance / verification (FCLR-002)
+- Protocol contains frozen FCLR-002 v1.0 with splits, targets, baselines/contrasts, materiality floor (>=2%), multiplicity rule, block-bootstrap config.
+- Coverage audit shows >=5 instruments and >=3 non-overlapping 30-day blocks.
+- No reuse of FCLR-001 sealed holdout for selection/tuning/re-evaluation.
+- All tests pass; no sealed holdout outcomes computed yet.

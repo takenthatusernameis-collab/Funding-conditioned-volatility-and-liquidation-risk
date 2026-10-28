@@ -1,10 +1,10 @@
 {
   "run_id": "FCLR-001-audit-20261025T201905Z",
-  "experiment_id": "FCLR-001",
+  "experiment_id": "FCLR-002",
   "git_sha": "68d088a277b88a9b7ae7f748c922bd28db60a4a1",
   "utc_start": "2026-10-25T20:19:05.191814Z",
   "configuration": {
-    "protocol_version": "FCLR-001 v1.0",
+    "protocol_version": "FCLR-002 v1.0",
     "primary_target": "next-24h realized variance of mark-price returns",
     "baselines": [
       "B0",
@@ -115,22 +115,19 @@
   },
   "split_boundaries": {
     "status": "frozen",
-    "rule": "60% train / 20% validation / 20% holdout by unique UTC timestamps; 7-calendar-day embargo between partitions",
+    "rule": "chronological splits by unique UTC timestamps across the common 5-symbol panel; 7-day embargo between partitions (FCLR-002 pre-registered)",
     "embargo_days": 7,
     "train": {
-      "start": "2024-01-02T00:00:00Z",
-      "end": "2024-02-24T08:00:00Z",
-      "count_timestamps": 1281
+      "start": "2024-04-01T00:00:00Z",
+      "end": "2024-06-08T23:00:00Z"
     },
     "validation": {
-      "start": "2024-03-02T08:00:00Z",
-      "end": "2024-03-20T02:00:00Z",
-      "count_timestamps": 427
+      "start": "2024-06-16T00:00:00Z",
+      "end": "2024-07-15T23:00:00Z"
     },
     "test": {
-      "start": "2024-03-27T02:00:00Z",
-      "end": "2024-03-30T23:00:00Z",
-      "count_timestamps": 94
+      "start": "2024-07-23T00:00:00Z",
+      "end": "2024-09-30T23:00:00Z"
     }
   },
   "coverage_audit_multi": {
