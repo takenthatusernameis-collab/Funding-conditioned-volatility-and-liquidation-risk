@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T09:38:09Z
+Updated: 2026-10-28T09:38:25Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: c17e1bc6e935b22bbe7da7f0b3d1d450062e661a (verify with `git rev-parse HEAD`; prior recorded HEAD 7f2f2448 was stale)
+Current HEAD: 371598ddf4b8652d5ee99e56bcfaa3274fa14b78 (verify with `git rev-parse HEAD`; prior recorded HEAD c17e1bc6 was stale)
 
 ## Mission (unchanged)
 
@@ -16,16 +16,16 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = 802b43d0419584c011ebaa60051df6ccb63ce46f. Prior handoff recorded stale HEAD 393ec972; corrected to current HEAD in this file.
+- Verified repo state: `git rev-parse HEAD` = 371598ddf4b8652d5ee99e56bcfaa3274fa14b78. Prior handoff recorded stale HEAD c17e1bc6; corrected to current HEAD in this file.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - `git status` — tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- Diff vs prior recorded HEAD 9d25b6d7: only AGENT_HANDOFF.md updated (HEAD correction + session summary). No code, protocol, split, or evaluation artifacts touched.
+- Diff vs prior recorded HEAD c17e1bc6: only AGENT_HANDOFF.md updated (HEAD correction + session summary). No code, protocol, split, or evaluation artifacts touched.
 - No new research results, no holdout access, no protocol changes, no risk overlay.
 - Corrected stale HEAD references and refreshed the initial task message for the next agent.
 
 ## What this session delivered
 
-Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD corrected from stale 9d25b6d7 to current d04858da; initial task message for next agent refreshed.
+Handoff hygiene and state verification only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. HEAD corrected from stale c17e1bc6 to current 371598dd; initial task message for next agent refreshed.
 
 ## Current verified state
 
@@ -52,14 +52,14 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `c17e1bc6e935b22bbe7da7f0b3d1d450062e661a` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
+- HEAD `371598ddf4b8652d5ee99e56bcfaa3274fa14b78` on `main`. Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and may go stale across sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state, corrected a stale HEAD, and refreshed the snapshot.
 
 **Your tasks (do not expand scope):**
 
-1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `c17e1bc6e935b22bbe7da7f0b3d1d450062e661a`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
+1. Verify repo state against this handoff (`git rev-parse HEAD` → expect `371598ddf4b8652d5ee99e56bcfaa3274fa14b78`; `python3 -m pytest tests/ -q` → 51 passed) and confirm gates remain as documented.
 
 2. Highest-value next research task: execute FCLR-002 out-of-sample evaluation on the verified 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z; 4392 common hourly timestamps).
    - Prerequisite: register a NEW protocol version FCLR-002 v1.0 in `research_state/research_protocol.md` BEFORE computing any outcomes. Record frozen splits, feature definitions, model contrasts (C2 vs B1 primary), >=2% relative QLIKE materiality floor, multiplicity rule, and block-bootstrap config.
@@ -75,4 +75,4 @@ What is verified this session:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint if you make a commit.
+**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint 371598dd if you make a commit.
