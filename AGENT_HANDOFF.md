@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T03:49:28Z
+Updated: 2026-10-28T03:50:45Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: af9115498de625255f688e6a35db7bb603fc9af2 (checkpoint, branch up to date with origin/main)
+Current HEAD: b5c4399ba1cfa35e5d6cfa57ce3c1cb8ae9e7d33 (checkpoint, branch up to date with origin/main)
 
 ## Mission (unchanged)
 
@@ -16,15 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is af9115498de625255f688e6a35db7bb603fc9af2 on main (recorded HEAD snapshots 577f4cee / 7d21071c were stale — corrected).
-- Two new checkpoint commits since recorded snapshot: 7d21071c and af911549; diff between 577f4cee and af91154 is only AGENT_HANDOFF.md.
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is b5c4399b on main (prior handoff showed af911549 as HEAD; corrected to current HEAD).
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
 - No new research results, no holdout access, no protocol changes, no risk overlay.
+- Updated handoff timestamp and HEAD to b5c4399b.
 
 ## What this session delivered
 
-State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `af9115498de625255f688e6a35db7bb603fc9af2`.
+State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `b5c4399ba1cfa35e5d6cfa57ce3c1cb8ae9e7d33`.
 
 ## Current verified state
 
@@ -51,23 +51,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `af9115498de625255f688e6a35db7bb603fc9af2` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
-- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
-- Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
-- No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
-
-**Initial task message for next agent**
-
-Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001 v1.0) before doing anything else.
-
-**Current state: INCONCLUSIVE. Forecast gate NOT MET. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
-
-What is frozen and must NOT change:
-- FCLR-001 protocol, splits, and OOS window (`research_state/research_protocol.md`, `research_state/run_manifest.json`). Sealed holdout NOT reused, retrained, or re-evaluated.
-- All reported evaluation results. Never claim an unexecuted run succeeded.
-
-What is verified this session:
-- HEAD `af9115498de625255f688e6a35db7bb603fc9af2` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `b5c4399ba1cfa35e5d6cfa57ce3c1cb8ae9e7d33` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
