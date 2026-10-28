@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-28T03:49:05Z
+Updated: 2026-10-28T03:49:28Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD: 7d21071c27a0c7ad0884e698570f335385e6e86e (checkpoint)
+Current HEAD: af9115498de625255f688e6a35db7bb603fc9af2 (checkpoint, branch up to date with origin/main)
 
 ## Mission (unchanged)
 
@@ -16,14 +16,15 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is 7d21071c27a0c7ad0884e698570f335385e6e86e on main (recorded HEAD was stale — corrected).
+- Read AGENT_HANDOFF.md and RESEARCH_PROMPT.md; verified actual HEAD is af9115498de625255f688e6a35db7bb603fc9af2 on main (recorded HEAD snapshots 577f4cee / 7d21071c were stale — corrected).
+- Two new checkpoint commits since recorded snapshot: 7d21071c and af911549; diff between 577f4cee and af91154 is only AGENT_HANDOFF.md.
 - Ran tests: `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `scripts/__pycache__/` and `tests/__pycache__/`.
-- Updated handoff timestamp and HEAD to 577f4ceeff219c2946b00b6e02f3a390261392a5.
+- No new research results, no holdout access, no protocol changes, no risk overlay.
 
 ## What this session delivered
 
-State verification and handoff refresh. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `577f4ceeff219c2946b00b6e02f3a390261392a5`.
+State verification and handoff refresh only. No new runs, no holdout access, no protocol changes, no new evidence. All 51 tests pass; frozen artifacts unchanged. Handoff metadata updated to reflect current HEAD `af9115498de625255f688e6a35db7bb603fc9af2`.
 
 ## Current verified state
 
@@ -50,17 +51,33 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded.
 
 What is verified this session:
-- HEAD `7d21071c27a0c7ad0884e698570f335385e6e86e` on `main` (local checkpoint). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- HEAD `af9115498de625255f688e6a35db7bb603fc9af2` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
 - `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
 - Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
 - No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
 
-**Fresh task (do not expand scope):**
-1. Verify repo state against this handoff (HEAD, tests) and confirm gates remain as documented.
-2. Do **not** open sealed holdouts. If you want to propose new analysis, only do so in a way that is pre-registrable and does not touch frozen artifacts/splits/evaluations; otherwise report findings without running new OOS evals that would consume holdout.
+**Initial task message for next agent**
+
+Hello. This is the durable handoff for the "Funding-Conditioned Volatility and Liquidation Risk" research repo. Read this file and `RESEARCH_PROMPT.md` first, then `research_state/research_protocol.md` (frozen FCLR-001 v1.0) before doing anything else.
+
+**Current state: INCONCLUSIVE. Forecast gate NOT MET. Risk-overlay phase INELIGIBLE. Track A (liquidation labels) BLOCKED.**
+
+What is frozen and must NOT change:
+- FCLR-001 protocol, splits, and OOS window (`research_state/research_protocol.md`, `research_state/run_manifest.json`). Sealed holdout NOT reused, retrained, or re-evaluated.
+- All reported evaluation results. Never claim an unexecuted run succeeded.
+
+What is verified this session:
+- HEAD `af9115498de625255f688e6a35db7bb603fc9af2` on `main` (local checkpoint; branch up to date with origin/main). Re-verify with `git rev-parse HEAD` — the recorded HEAD in this file is a snapshot and has been stale in multiple sessions.
+- `python3 -m pytest tests/ -q` — 51 passed, no frozen artifacts modified.
+- Tracked tree clean except untracked `__pycache__/` under `scripts/`, `tests/`.
+- No new research results; this session verified handoff state and corrected the stale HEAD snapshot.
+
+**Your tasks (do not expand scope):**
+1. Verify repo state against this handoff (`git rev-parse HEAD`, `python3 -m pytest tests/ -q`) and confirm gates remain as documented.
+2. Do **not** open sealed holdouts. New analysis must be pre-registrable and must not touch frozen artifacts/splits/evaluations; otherwise report findings without running new OOS evals that would consume holdout.
 3. If there is any ambiguity about Track A (liquidation labels), follow `research_state/liquidation_sources_enumeration.md` (BLOCKED) strictly — do not fabricate a complete census.
 4. Update this handoff at the end of your session with: HEAD, test result, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-Acceptance: state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint if you make a commit.
+**Acceptance:** state remains inconclusive with gates documented; no holdout leakage; all tests pass (51/51); no new results from sealed holdout; HEAD updated to current checkpoint if you make a commit.
