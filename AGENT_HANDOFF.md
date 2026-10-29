@@ -1,46 +1,48 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-UPDATED: 2026-10-29T22:08:53Z
+UPDATED: 2026-10-29T22:10:00Z
 HEAD: 3b068206 (main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
-## MISSION (PRIORITIZED)
-H002 partial replication campaign FIRST. Forecast-gate track (H001/FCLR-001/002/003) is INCONCLUSIVE and structurally blocked — no unused >=30-day test window exists outside sealed partitions. FCLR-004 is BLOCKED and must NOT be re-attempted. Risk-overlay remains INELIGIBLE until the forecast gate passes. H004 (observed liquidations) is BLOCKED — no direct labels available.
+## SINGLE INITIAL TASK FOR NEXT AGENT (MANDATORY)
+PRIORITY 1 — EXECUTE HEAVY WORK (no credentials/downloads/sealed holdouts). Repo name centers on funding-conditioned behavior; H002 is the only live track.
 
-## WHAT WAS DONE (HEAVY WORK)
-- FCLR-001: PILOT/INCONCLUSIVE. C2 vs B1 -2.50% QLIKE, CI crosses zero, ~4-day single block, BTC-only 5-symbol intersection (0 common mark-price timestamps). Gate NOT MET.
-- FCLR-002: INCONCLUSIVE. C2 vs B1 -9.28%, CI [-0.097648,-0.008788] excludes zero, byte-identical repro (2026-10-28), but only 2 of required >=3 non-overlapping 30-day blocks (70-day window). Gate NOT MET.
-- FCLR-003: INCONCLUSIVE. Meets block design (91 days, 3 blocks, 5 instruments) but C2 vs B1 CI crosses zero (-3.78%); C2 vs C1 WORSE (+12.92%); sign flip vs FCLR-002. C1 vs B1 is secondary only.
-- FCLR-004: BLOCKED (pre-registered pivot to 6h). Exhaustive timestamp audit: only 2024-10-01 unused (1 day); no >=30-day window outside frozen partitions. Cannot satisfy >=3 blocks without reusing sealed holdouts — forbidden. No run executed.
-- H002: PARTIAL_REPLICATION. 445 funding-extreme events (Jan-Mar 2024, 5 symbols); median correction 8.0h, mean 12.6h; full Shek methodology not independently reconstructable from public sources.
-- H003: INCONCLUSIVE on both panels (no incremental skill over volatility-only baseline on Brier/log-loss; degenerate base rate on FCLR-001).
-- H004: BLOCKED. Binance liquidationSnapshot archive HTTP 404; fapi forceOrders returns 451 restricted location.
+CAMPAIGN: H002-PARTIAL-REPLICA-v1 — Independently assess Shek (SSRN 7529458) funding-extreme correction pattern.
 
-## BOTTLENECK REMOVED
-FCLR-004 is structurally blocked by data availability (all partitions consumed, no unused >=30-day window). Re-attempting FCLR-004/FCLR-001/OOS extensions is forbidden without a new pre-registered protocol AND newly available admissible data — none exists locally. Future sessions must not re-run these. This removes the bottleneck of repeated blocked forecast attempts. The only executable heavy work is H002 partial replication (uses cached Jan-Mar 2024 data; no sealed holdouts; no downloads needed).
+### DO NOT DEVIATE
+- Do NOT re-attempt FCLR-001/FCLR-002/FCLR-003/FCLR-004 or any forecast-gate (sealed partitions exhausted; FCLR-004 blocked).
+- Do NOT touch .github/workflows. Do NOT do risk-overlay/trading/simulation. Do NOT merge Track A/B/C.
+- Preserve negative/inconclusive results. No threshold-shopping after seeing numbers.
 
-## NEXT ACTION (FOR NEXT AGENT) — INITIAL TASK 2026-10-29T22:08:53Z
-Campaign: H002 partial replication of Shek funding-correction hazard (SSRN, posted 29 Sep 2026, abstract_id=7529458) + final consolidated state.
+### STEPS (MUST COMPLETE IN THIS SESSION)
+1. FREEZE DEFINITION (write first, before computation)
+   - Create/update `research_state/h002_pre_registration.md` with: extreme definition (funding rate threshold/normalization), correction definition (time to cross frozen threshold back), RV regime split (pre-registered bins), censoring (max window, uncorrected), eligible symbols/venues, exclusion rules.
+   - Cite paper claim explicitly: 1,696 events / 18 contracts; median 27h (high-vol) vs 3h (low-vol); lower hazard with higher RV.
 
-Steps (in order):
-1. Pre-specify the event definition in writing BEFORE computing outcomes: funding-extreme identification, correction-time definition, volatility-regime split, censoring rules, eligible contracts. Record in research_state (new pre-registration note).
-2. Compute correction hazard by realized-volatility regime from admissible Binance funding/mark data (cached Jan-Mar 2024, 5 symbols). Handle censored events; do not invent liquidation labels.
-3. Compare reconstructed numbers to the paper's claimed figures (median 27h high-vol vs 3h low-vol correction; 1,696 events across 18 contracts; lower hazard with higher RV). Report explicitly as PARTIAL replication, not exact.
-4. Extend scripts/funding_correction_replication.py with hazard-by-regime output; add focused tests. Produce a reproducible report artifact.
-5. Final consolidated state: refresh negative_results_report.md, gate_assessment.md, hypothesis_registry.json, run_manifest.json with H002 outcome.
+2. COMPUTE FROM CACHED DATA (no new downloads)
+   - Use cached Jan-Mar 2024 funding/mark/index/premium where present (BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT). Extend `scripts/funding_correction_replication.py` to output hazard-by-RV-regime with censoring summary.
+   - Handle uncorrected events as censored; report counts by symbol/regime.
 
-Acceptance criteria:
-- Event definition frozen in writing before outcome computation.
-- Correction hazard computed by RV regime with censoring reported; no threshold-shopping.
-- Report states PARTIAL vs exact replication explicitly; no promotion of correction-time to forecast/liquidation evidence.
-- No sealed-holdout reuse; no risk-overlay work.
-- `pytest tests/test_funding_correction_replication.py` passes (4/4 existing plus new hazard tests).
+3. COMPARE & REPORT AS PARTIAL
+   - Compare reconstructed medians/hazard to paper claims. Write `research_state/h002_replication_report.md` stating PARTIAL replication (full methodology not reconstructible from public sources). Explicitly separate correction-time from volatility forecast/liquidation.
 
-Exact verification command:
-pytest tests/test_funding_correction_replication.py -q
+4. TESTS + STATE CONSOLIDATION
+   - Add/extend tests in `tests/test_funding_correction_replication.py` for hazard regime logic/censoring; ensure all pass.
+   - Update `research_state/hypothesis_registry.json` (H002 status/evidence), `research_state/run_manifest.json`, `research_state/negative_results_report.md` if needed.
 
-## WHAT MUST NOT BE REPEATED
-- Do not re-attempt FCLR-004, FCLR-001/OOS extension, or any forecast-gate run reusing sealed holdouts.
-- Do not relax block/multiplicity/uncertainty gates after seeing outcomes.
-- Do not relabel exploratory/partial results as confirmatory.
-- Do not report unexecuted H003 alternate horizons/tiers or H004 as completed/null.
-- No paid services/trials/keys/live/paper trading; no .github/workflows changes; append-only.
+### ACCEPTANCE
+- `research_state/h002_pre_registration.md` exists with frozen definition.
+- `research_state/h002_replication_report.md` exists with hazard table + comparison + PARTIAL statement.
+- `pytest tests/test_funding_correction_replication.py -q` passes.
+- No sealed holdouts reused. No forecast-gate runs.
+
+### EVIDENCE
+- H002 current: 445 events, median 8.0h, mean 12.6h (Jan-Mar 2024). Full Shek methods not independently reconstructible.
+
+## BOTTLENECKS (REMOVED)
+FCLR-004 structurally blocked (no unused >=30-day window outside sealed partitions). Re-attempts forbidden. This handoff forces H002 as the only viable heavy campaign.
+
+## CONTEXT SNAPSHOT
+- Forecast gate: INCONCLUSIVE/BLOCKED across FCLR-001-004.
+- H003: INCONCLUSIVE (no incremental skill).
+- H004: BLOCKED (no direct liquidation labels).
+- Risk overlay: INELIGIBLE.
