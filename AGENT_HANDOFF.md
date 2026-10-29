@@ -1,10 +1,10 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T13:00:36Z
+Updated: 2026-10-29T13:01:23Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified): `06a0632e3f3ddd314b951db3104037a669a48e5e` on `main` (checkpoint ahead of `fd10532c`; diff touched only AGENT_HANDOFF.md — no research/code/frozen-artifact changes). Recent checkpoints: `fd10532c`, `944a066d`, `e685bd68`, `2915c6ae`.
-Note: Prior session completed its task (read prior handoff task, verified gates/tests, refreshed handoff). This session re-verified state: HEAD advanced only via a checkpoint commit to AGENT_HANDOFF.md; tests pass (51/51); gates unchanged; no research changes.
+Current HEAD (verified): `207baddffe2bf07bf716bfe451b99afbd5ab5868` on `main` (checkpoint ahead; diff touched only AGENT_HANDOFF.md — no research/code/frozen-artifact changes). Recent checkpoints: `207baddf`, `06a0632e`, `fd10532c`, `944a066d`, `e685bd68`.
+Note: This session read the prior agent task from the durable handoff and completed it. Verified gates/tests, confirmed blockers, updated handoff for next agent.
 
 ## Mission (unchanged)
 
@@ -17,13 +17,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read prior handoff task from AGENT_HANDOFF.md.
-- Verified repo state: `git rev-parse HEAD` = `944a066da4fe993fbc1fb24b35a6f6b45b3ccb43` on `main`; `git status` clean apart from untracked `__pycache__` under scripts/ and tests/; diff vs prior checkpoint `e685bd68` touched only AGENT_HANDOFF.md — no code/data/frozen-artifact changes.
+- Read prior handoff task from AGENT_HANDOFF.md (instructions for this session).
+- Verified repo state: `git rev-parse HEAD` = `207baddffe2bf07bf716bfe451b99afbd5ab5868` on `main`; `git status` clean apart from untracked `__pycache__` under scripts/ and tests/; no code/data/frozen-artifact changes.
 - Re-confirmed gates from artifacts: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; CI crosses zero, single ~4-day test block, BTCUSDT-only paired panel per `coverage_audit_recheck.md` — >=5 instruments gate NOT met). `research_state/evaluation_summary.md` flagged untrusted pending independent recomputation (`evaluation_summary_conflict.md`). FCLR-002 `research_state/evaluation_summary_FCLR002.md` flagged untrusted in `evaluation_summary_conflict.md` (heading/body mismatch, sign-convention artifacts, provenance not recorded); protocol §6/§9 holdout NOT opened / no outcomes computed. Do NOT claim verified FCLR-002 pass; do NOT recompute. Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
-- Tests: `python3 -m pytest tests/ -q` — 51 passed in 1.08s (Python 3.12.3, /usr/bin/python3).
+- Tests: `python3 -m pytest tests/ -q` — 51 passed in 1.13s (Python 3.12.3, /usr/bin/python3).
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed.
 - Acknowledged all blockers. No valid next research step exists without touching frozen artifacts/splits/evaluations or opening sealed holdouts (both prohibited by protocol).
-- Refreshed this handoff for current session state (HEAD `944a066da4fe993fbc1fb24b35a6f6b45b3ccb43` on `main`; test result confirmed 51 passed in 1.08s; gates unchanged; next-agent task message written below).
+- Refreshed this handoff for current session state (HEAD `207baddffe2bf07bf716bfe451b99afbd5ab5868` on `main`; test result confirmed 51 passed in 1.13s; gates unchanged; next-agent task message written below).
 
 ## Current verified state
 
@@ -33,10 +33,10 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUS
 - Frozen splits FCLR-002: train 2024-04-01T00:00:00Z..2024-06-08T23:00:00Z; val 2024-06-16T00:00:00Z..2024-07-15T23:00:00Z; test 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z; 7-day embargo. FCLR-001 window 2024-01-01..2024-03-31 (BTCUSDT-only mark-price coverage; other four symbols have zero mark-price rows there).
 - Coverage: 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps for FCLR-002 panel (2024-04-01..2024-09-30). `research_state/fclr002_coverage_audit.json` present; FCLR-001 common-panel figure of 2136 timestamps in run_manifest.json is NOT reproducible from the current tree (`coverage_audit_recheck.md`).
 - Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there.
-- Implementation: tests exist and pass. `python3 -m pytest tests/ -q` → 51 passed, 1.08s (Python 3.12.3).
+- Implementation: tests exist and pass. `python3 -m pytest tests/ -q` → 51 passed, 1.13s (Python 3.12.3).
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
-- Verified HEAD: `06a0632e3f3ddd314b951db3104037a669a48e5e` on `main` (checkpoint commit).
-- Tests: `python3 -m pytest tests/ -q` → 51 passed, 1.08s (Python 3.12.3, /usr/bin/python3).
+- Verified HEAD: `207baddffe2bf07bf716bfe451b99afbd5ab5868` on `main`.
+- Tests: `python3 -m pytest tests/ -q` → 51 passed, 1.13s (Python 3.12.3, /usr/bin/python3).
 
 ## Initial task message for next agent
 
@@ -54,7 +54,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted summaries as verified.
 
 Your tasks (do not expand scope):
-1. Verify repo state: `git rev-parse HEAD` → `06a0632e3f3ddd314b951db3104037a669a48e5e` (current on `main`); run `python3 -m pytest tests/ -q` (expect 51 passed; Python 3.12.3, /usr/bin/python3). Confirm gates remain as documented including the FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `207baddffe2bf07bf716bfe451b99afbd5ab5868` (current on `main`); run `python3 -m pytest tests/ -q` (expect 51 passed; Python 3.12.3, /usr/bin/python3). Confirm gates remain as documented including the FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
@@ -67,4 +67,4 @@ Your tasks (do not expand scope):
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `06a0632e3f3ddd314b951db3104037a669a48e5e` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `207baddffe2bf07bf716bfe451b99afbd5ab5868` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
