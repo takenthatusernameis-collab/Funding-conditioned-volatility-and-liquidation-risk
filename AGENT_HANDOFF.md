@@ -1,16 +1,22 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-29T23:51:30Z
-HEAD: c3236af1 (main)
+UPDATED: 2026-10-29T23:56:55Z
+HEAD: 58186ede (main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
 ## CORE PRIORITY (inferred from repo name): LIQUIDATION RISK — H004 MUST BE UNBLOCKED
 
-This repo is about **funding-conditioned volatility and liquidation risk**. Forecasting skill (FCLR-001–004) is SEALED as NOT_MET/BLOCKED. **Observed liquidations (H004 / Track A)** are the ONLY remaining path that can move the "liquidation risk" pillar forward. Everything else that would spin on forecast gates is a bottleneck to remove — do NOT re-attempt them.
+This repo is about **funding-conditioned volatility and liquidation risk**. Forecasting skill gates (FCLR-001–004) are **SEALED as NOT_MET/BLOCKED**. **Observed liquidations (H004 / Track A)** are the ONLY remaining path that can move the "liquidation risk" pillar forward. Treat everything else as noise to strip away.
 
-## SINGLE, TIMESTAMPED INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION
+## SINGLE, TIMESTAMPED INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (DURABLE)
 
-> **[2026-10-29T23:51:30Z] INITIAL MANDATORY TASK: H004-SOURCE-DISCOVERY-v3 — Find an admissible unauthenticated public source of complete (or defensibly partial with explicit incomplete-label design) historical forced-liquidation events for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} covering 2024 to construct observed liquidation labels for the frozen test windows. Do HEAVY work: enumerate, probe with exact evidence, make an explicit VIABLE/BLOCKED decision, and leave zero ambiguity. Do not re-run sealed forecast gates.**
+> **[2026-10-29T23:56:55Z] MANDATORY FIRST ACTION — H004-SOURCE-DISCOVERY-v4 (HEAVY WORK, NO ESCAPE):**
+>
+> **Objective:** Find ANY admissible unauthenticated public source that can yield observed forced-liquidation events for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} covering 2024 with defensible provenance. If none exists for frozen 2024 windows, produce STRUCTURAL EVIDENCE (exact paths, codes, reasons) proving it is impossible under constraints — and propose the SMALLEST defensible expansion of scope (different venue/year/window) that IS admissible, with a concrete label construction plan. Do NOT stop at "none found" without evidence.
+>
+> **Rules:** No credentials, no paid services, no user intervention. No forecast gate re-runs. No .github/workflows changes. No trading/risk-overlay. Distinguish observed (Track A) from modeled (Track B). If completeness cannot be proven, do NOT infer event-free intervals.
+>
+> **Deliverables:** Update `research_state/liquidation_sources_enumeration.md` with ranked table, explicit VIABLE/BLOCKED, concrete next steps. If VIABLE, create/update `research_state/fclr_h004_tracka_viable.json` with source, coverage, files, plan. If BLOCKED for 2024, state viable alternative scope with evidence or explain why ALL liquidation-adjacent research must proceed via Tracks B/C only.
 
 ## MANDATORY EXECUTION ORDER (DO NOT SKIP)
 
@@ -21,66 +27,54 @@ This repo is about **funding-conditioned volatility and liquidation risk**. Fore
    - `research_state/hypothesis_registry.json` (H004 status/links)
    - `AGENT_HANDOFF.md` (this file)
 
-2. **Enumerate admissible sources (unauthenticated ONLY)**
-   Systematically probe:
-   - **Binance**: `data.binance.vision` variants (UM/CM, daily/monthly, different dirs), also check any liquidation-related paths; note `fapi.binance.com/fapi/v1/forceOrders` returns 451 in this env.
-   - **Bybit**: `public.bybit.com` — check `linear/`, `inverse/`, `spot/` for `liquidation/`, `liq/`, `forceLiquidation/` across years/months.
+2. **Enumerate & probe (unauthenticated ONLY) - HEAVY**
+   Probe exhaustively with exact evidence:
+   - **Binance**: `data.binance.vision` variants (UM/CM/daily/monthly), any liquidation-related dirs/files; `fapi.binance.com` public endpoints
+   - **Bybit**: `public.bybit.com` (linear/inverse/spot) for liquidation/liq/force* paths + any archive dirs
    - **OKX**: public archives for liquidation-related files
-   - **Deribit**: public archives (less likely)
-   - **HuggingFace/Zenodo/GitHub**: unauthenticated downloads only (note HF has 2026 liquidation ticks but NOT 2024)
-   - **Other venue-native public archives**; academic mirrors only if directly downloadable without auth
+   - **Deribit**: public archives
+   - **CoinGlass/other aggregators**: only if directly downloadable unauthenticated bulk (most require auth/pay)
+   - **HuggingFace/Zenodo/GitHub/raw archives**: unauthenticated downloads only (note HF has 2026 but check for older; try alternate datasets)
+   - **Tardis/Kaiko-like**: SKIP if requires auth/payment
+   - **Venue-native archives**: any other exchange with public historical data
 
-3. **Probe with forensic evidence (record EVERYTHING)**
-   For each candidate tried, append to `research_state/liquidation_sources_enumeration.md`:
-   - Source URL/path attempted (exact)
-   - Access time (UTC), method (GET/HEAD/curl), HTTP code
-   - Auth required? (Y/N)
-   - License/terms notes if visible
-   - Schema/fields, earliest/latest timestamps
-   - Venue/symbol coverage vs frozen universe {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT}
-   - Completeness indicators (gaps/truncation/caps/warnings)
-   - File size/hashes/ETags if present
-   - **Admissible (Y/N)** and **Complete-census plausible (Y/N)**
-   - **Rejection reason** (explicit)
+3. **For each attempt record FORENSIC evidence**
+   Append to `research_state/liquidation_sources_enumeration.md`:
+   - Exact URL/path, UTC time, method (GET/HEAD/curl), HTTP code
+   - Auth required? (Y/N), license/terms if visible
+   - Schema/fields, earliest/latest, venue/symbol coverage vs {BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}
+   - Completeness (gaps/truncation/caps/warnings), file size/hashes/ETags
+   - Admissible (Y/N), Complete-census plausible (Y/N), Rejection reason (explicit)
 
-4. **Make explicit viability decision (no ambiguity)**
-   - **If ANY source meets the direct-label quality gate** (defensible provenance, covers needed 2024 window for frozen universe, meaning of "observed forced liquidation" matches, complete census OR explicitly acceptable incomplete-label design per protocol):
-     - Set **Track A = VIABLE**
-     - Write/update `research_state/liquidation_sources_enumeration.md` with **concrete label construction plan** (source, coverage table, transformation steps, files to produce, minimal next steps)
-     - If helpful create/update `research_state/fclr_h004_tracka_viable.json`
-   - **If NONE pass:**
-     - Set **Track A = BLOCKED for frozen 2024 windows** with **structural evidence** citing specific probed paths/codes
-     - State **Tracks B/C remain the only liquidation-adjacent paths**
-     - Do **NOT** infer event-free intervals; do **NOT** re-attempt forecast gates (FCLR-001–004 SEALED)
+4. **Decision (no ambiguity)**
+   - **VIABLE** if any source meets quality gate for frozen 2024 windows OR defensibly acceptable incomplete-label design with concrete plan → set Track A VIABLE, write plan + create/update `fclr_h004_tracka_viable.json`
+   - **BLOCKED for 2024** only if exhaustive probes show impossible → document structural evidence, propose smallest admissible alternative scope with concrete plan, or state Tracks B/C only path
 
-5. **Leave a clean handoff**
-   Update `research_state/liquidation_sources_enumeration.md` with a clean **ranked table + decision + concrete next steps**. The repo state alone must be sufficient for the next agent.
+5. **Clean handoff**
+   Leave `research_state/liquidation_sources_enumeration.md` sufficient that next agent can act without re-probing from scratch.
 
 ## BOTTLENECKS REMOVED / HARD CONSTRAINTS
-
-- **Forecast gates SEALED.** Do NOT re-run/re-attempt FCLR-001/FCLR-002/FCLR-003/FCLR-004 (NOT_MET/BLOCKED). Remove this bottleneck by ignoring them.
+- **Forecast gates SEALED:** Do NOT re-run/re-attempt FCLR-001–004 (NOT_MET/BLOCKED). Remove bottleneck by ignoring.
 - **Do NOT touch `.github/workflows`.**
 - **Do NOT do risk-overlay/trading/simulation/merge tracks.**
-- **Preserve distinctions.** Never conflate H002 (correction-time), H003 (hypothetical boundary breaches), or volatility with observed liquidations (Track A).
+- **Preserve distinctions:** H002/H003/volatility ≠ observed liquidations (Track A).
 - **No credentials, no paid services, no user intervention.** Only unauthenticated public sources.
 - **Capped sample != census.** Absence ≠ zero liquidations. If completeness unprovable, cannot infer event-free intervals.
 - **pytest unavailable:** use `python -m unittest tests.test_funding_correction_replication -v` (10/10 pass).
 - **H002:** PARTIAL_REPLICATION complete; RV-regime contrast infeasible (Jan-Mar 2024 mark prices missing).
 
 ## CURRENT STATE SNAPSHOT
-
 - **H001:** INCONCLUSIVE
 - **H002:** PARTIAL_REPLICATION (complete)
 - **H003:** INCONCLUSIVE
-- **H004 (Track A):** BLOCKED → UNBLOCK VIA SOURCE DISCOVERY ONLY
+- **H004 (Track A):** BLOCKED for 2024 windows → **UNBLOCK VIA SOURCE DISCOVERY ONLY (HEAVY)**
 - **Forecast gates:** NOT_MET/BLOCKED (sealed)
 - **Risk-overlay:** INELIGIBLE
 
 ## KEY EVIDENCE
-
 - Handoff: `AGENT_HANDOFF.md` (this file)
 - H004: `research_state/liquidation_sources_enumeration.md`, `research_state/binance_source_probe.md`
 - H002: `research_state/h002_replication_report.md`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`
 - Protocol: `RESEARCH_PROMPT.md`, `research_state/research_protocol*.md`
 
-**START NOW. Do heavy work on H004 source discovery. Leave a clean, unambiguous handoff for the next agent. No other track is a priority given the repo focus on liquidation risk.**
+**START NOW. Do HEAVY work on H004 source discovery. Leave a clean, unambiguous handoff for the next agent. NO OTHER TRACK IS A PRIORITY given repo focus on liquidation risk.**
