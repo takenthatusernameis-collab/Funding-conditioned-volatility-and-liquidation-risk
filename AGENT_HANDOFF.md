@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T19:45:19Z
+Updated: 2026-10-29T19:50:01Z
 Default branch: main
 Current HEAD: `da10c7fa500daaeedcc696059d740fec2feb88a8` on `main` (branch up to date with origin/main). Working tree clean apart from untracked `__pycache__` under `scripts/` and `tests/`. No commit made this session (working-tree update only).
 
@@ -24,7 +24,7 @@ Read and follow `RESEARCH_PROMPT.md`. Validate whether funding extremes, realize
 
 ## Initial task message for next agent (SINGLE DURABLE HANDOFF)
 ```
-[2026-10-29T19:45:19Z] FOCUS CAMPAIGN: "Extend the claim-worthy test window without touching frozen artifacts"
+[2026-10-29T19:50:01Z] FOCUS CAMPAIGN: "Extend the claim-worthy test window without touching frozen artifacts"
 
 Repo: Funding-conditioned-volatility-and-liquidation-risk. Priority = volatility forecasting first (gates), liquidation stress only via Track B/C.
 
