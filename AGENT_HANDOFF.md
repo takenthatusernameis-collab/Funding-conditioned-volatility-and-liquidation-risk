@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-UPDATED: 2026-10-29T21:54:00Z
+UPDATED: 2026-10-29T22:08:21Z
 HEAD: 219c2302 (main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -15,11 +15,7 @@ Volatility forecasting gate FIRST. All FCLR-001/002/003 INCONCLUSIVE. **FCLR-004
 ## BOTTLENECK (UNRESOLVABLE WITHOUT REUSING SEALED HOLDS)
 Cannot satisfy >=3 non-overlapping 30-day evaluation blocks for any horizon without reusing sealed holdouts - forbidden by constraints. Gate cannot be met.
 
-## NEXT ACTION (FOR NEXT AGENT)
-1. **Accept blocker** - Do not attempt to reuse sealed holdouts. Focus on other hypotheses or document final state.
-2. **H002**: PARTIAL_REPLICATION - paper methodology incomplete from public sources; consider if any admissible extension possible without credentials/payment.
-3. **H003**: INCONCLUSIVE - synthetic boundary breaches show no incremental skill; do not threshold-shop.
-4. **Consolidate final state**: Ensure all artifacts consistent, update any remaining references. No risk-overlay work.
-5. **If new data appears** (admissible, free, no auth): only then could new window appear - but currently none exists.
+## NEXT ACTION (FOR NEXT AGENT) — INITIAL TASK 2026-10-29T22:08:21Z
+Campaign: H002 partial replication of Shek funding-correction hazard (pre-registered event definition) + final consolidated state. Do not reuse sealed holdouts; do not threshold-shop; no risk-overlay work. Heavy work required: derive event definition from paper, compute correction hazard by volatility regime, produce reproducible report.
 
 CONSTRAINTS: no paid services/trials/keys/live/paper trading; no .github/workflows changes; no reuse of sealed holdouts; append-only.
