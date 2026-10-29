@@ -1,6 +1,6 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T18:44:46Z
+Updated: 2026-10-29T18:45:43Z
 Default branch: main
 Current HEAD (verified this session): `aa87383541f567fcf41a31d9a597bf68aa006217` on `main` (branch up to date with origin/main). Prior documented checkpoint `8dc61d2a` was superseded by `aa873835` ("chore(kilo): checkpoint agent session"); working tree clean apart from untracked `__pycache__` under `scripts/` and `tests/`. Between `8dc61d2a` and `aa873835` only `AGENT_HANDOFF.md` changed (`git diff --name-only 8dc61d2a aa873835` → AGENT_HANDOFF.md). No frozen-split/protocol/frozen-artifact changes this session.Note: This session read the prior agent task from the durable handoff, verified the actual repo state against documented gates (FCLR-001/FCLR-002/Track A/FCLR-H003/H004), confirmed blockers remain, and refreshed the handoff for the next agent.
 
