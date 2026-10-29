@@ -3,7 +3,7 @@
 Updated: 2026-10-29T12:58:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified): `f38fb7ce0b003dacae65b4d3cbeb096f6c56d5fa` on `main` (checkpoint ahead of `e685bd68`; diff vs `e685bd68` touched only AGENT_HANDOFF.md — no research/code/frozen-artifact changes). Recent checkpoints: `3467b47b`, `e685bd68`, `2915c6ae`, `a7a2e195`.
+Current HEAD (verified): `d951c4935bad5c0e2d1f6ff4931cb6a197cc5023` on `main` (checkpoint ahead of `e685bd68`; diff vs `e685bd68` touched only AGENT_HANDOFF.md — no research/code/frozen-artifact changes). Recent checkpoints: `3467b47b`, `e685bd68`, `2915c6ae`, `a7a2e195`.
 Note: Prior session completed its task (read prior handoff task, verified gates/tests, refreshed handoff). This session re-verified state: HEAD advanced only via a checkpoint commit to AGENT_HANDOFF.md; tests pass (51/51); gates unchanged; no research changes.
 
 ## Mission (unchanged)
