@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T03:14:00Z
+Updated: 2026-10-29T03:12:55Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session end): 5695cdee13e224a0bc0330a758b6c5321523d857 on `main` (advanced from handoff's previously recorded `5695cdee13e224a0bc0330a758b6c5321523d857` via checkpoint commit `5695cdee` "chore(kilo): checkpoint agent session"; diff limited to AGENT_HANDOFF.md); working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
+Current HEAD (verified at session end): ea4805fd44a0bbfde3fbc77473db4d2fdf91ec37 on `main`; working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
 
 ## Mission (unchanged)
 
