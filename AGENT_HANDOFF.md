@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T11:17:00Z
+Updated: 2026-10-29T11:48:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified): `0da402f32e3c5b861bcd3ff70ec27cee1fa247ce` on `main` (working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/).
+Current HEAD (verified): `b84cecd4d2b5a7a784f0c6e4c9a8c7af65a7fa92` on `main` (working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/).
 Note: No research/code/frozen-artifact changes in this session. Updated handoff to reflect current HEAD; tests pass (51/51).
 
 ## Mission (unchanged)
@@ -54,7 +54,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted summaries as verified.
 
 Your tasks (do not expand scope):
-1. Verify repo state: `git rev-parse HEAD` → `0da402f32e3c5b861bcd3ff70ec27cee1fa247ce` (current on `main`); run `python3 -m pytest tests/ -q` (expect 51 passed). Confirm gates remain as documented including the FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `b84cecd4d2b5a7a784f0c6e4c9a8c7af65a7fa92` (current on `main`); run `python3 -m pytest tests/ -q` (expect 51 passed). Confirm gates remain as documented including the FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
@@ -67,4 +67,4 @@ Your tasks (do not expand scope):
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `0da402f32e3c5b861bcd3ff70ec27cee1fa247ce` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `b84cecd4d2b5a7a784f0c6e4c9a8c7af65a7fa92` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
