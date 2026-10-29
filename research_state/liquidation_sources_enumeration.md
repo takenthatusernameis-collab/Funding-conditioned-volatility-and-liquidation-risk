@@ -54,9 +54,39 @@ This document enumerates and tests admissible public liquidation data sources fo
 - Cannot confirm complete license terms for all sources without deeper inspection, but no obvious paywall encountered for data.binance.vision index.
 
 ## Conclusion for Track A
-**Track A (direct observed liquidation labels) is NOT VIABLE with admissible unauthenticated public sources.** 
+**Track A (direct observed liquidation labels) is NOT VIABLE with admissible unauthenticated public sources.**
 - No complete census found for Binance (primary venue) via unauthenticated public archives.
 - Other venues lack obvious unauthenticated complete liquidation archives.
 - Partial streams (e.g., trades) cannot satisfy "complete event census" requirement per protocol (§7.2). Absence cannot be inferred from missing data.
 
 This matches blockers already logged. Recommendation: remain on Tracks B/C (synthetic/modeled proxies) as implemented; do not claim observed liquidation labels. Do not infer event-free intervals.
+
+## Additional probes (2026-10-29)
+
+### 7) HuggingFace - crypto-liquidation-ticks (ochinimus/nick128373)
+- Dataset: https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks (also mirror nick128373/crypto-liquidation-ticks)
+- License: CC BY 4.0 (stated)
+- Coverage: 2026-07-08 16:42:32 to 2026-08-06 23:59:42 UTC (recent). 1,442,664 events across Binance/Bybit/OKX, 800 symbols.
+- Files: `liquidations_full_20260807.csv`, `coverage_20260807.csv` (unauthenticated download paths exist on HF hub)
+- Schema: ts_ms, utc_time, symbol, exchange, event, size, price, usd
+- Completeness notes (per README): Bybit complete (allLiquidation stream), Binance undercounts (snapshot capped at 1 order per symbol per 1000ms), OKX undercounts (1 update/sec). Warns about universe change on 2026-07-12. Treat cross-venue totals as lower bound.
+- Relevance to frozen tests: **NO** - covers 2026, not 2024 windows used in FCLR-001/002/003/004. Frozen tests use 2024 data; no 2024 coverage found.
+- Verdict: Admissible source in general (unauthenticated, CC BY 4.0), but **does not cover required 2024 windows** → not usable for frozen experiments. If expanding scope to 2026, would need to evaluate completeness per venue/symbol.
+
+### 8) Zenodo search (liquidation binance perpetual)
+- Searched via API; results are predominantly legal/corporate liquidation papers (not crypto market liquidation event data). No crypto liquidation event datasets found for 2024.
+- Verdict: No relevant event data.
+
+### 9) GitHub code search
+- API requires auth (401); raw searches return 404. No obvious unauthenticated bulk liquidation event datasets found.
+- Verdict: No relevant event data surfaced.
+
+## Updated conclusion for Track A (FCLR-H004)
+**Track A (direct observed liquidation labels) remains NOT VIABLE for the frozen 2024 test windows.**
+- Binance data.binance.vision liquidationSnapshot paths: HTTP 404 (daily/monthly) for UM/CM - confirmed.
+- Binance fapi forceOrders: HTTP 451 restricted in this environment - confirmed.
+- Other venues (Bybit/OKX/Deribit): no unauthenticated complete census found for 2024.
+- HuggingFace has recent (2026) liquidation tick datasets with noted undercounting for Binance/OKX (Bybit complete) - admissible if scope expands, but **does not cover 2024 windows** required by frozen experiments.
+- Partial streams (trades) cannot satisfy "complete event census" requirement per protocol §7.2; absence cannot be inferred as zero liquidations.
+
+**Decision:** Track A = **BLOCKED for frozen 2024 windows** with structural evidence above. Tracks B (modeled boundary breaches) and C (volatility/stress) remain the only liquidation-adjacent paths. No event-free intervals may be inferred. Do **NOT** re-attempt forecast gates (FCLR-001-004 sealed).
