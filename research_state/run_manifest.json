@@ -135,19 +135,19 @@
     "rule": "chronological splits by unique UTC timestamps across the common 5-symbol panel extended to 2024-12-31; 7-day embargo between partitions (FCLR-003 v1.0, pre-registered before outcomes)",
     "embargo_days": 7,
     "train": {
-     "start": "2024-04-01T00:00:00Z",
-     "end": "2024-07-23T23:00:00Z"
+      "start": "2024-04-01T00:00:00Z",
+      "end": "2024-07-23T23:00:00Z"
     },
     "validation": {
-     "start": "2024-07-31T00:00:00Z",
-     "end": "2024-09-24T23:00:00Z"
+      "start": "2024-07-31T00:00:00Z",
+      "end": "2024-09-24T23:00:00Z"
     },
     "test": {
-     "start": "2024-10-02T00:00:00Z",
-     "end": "2024-12-31T23:00:00Z"
+      "start": "2024-10-02T00:00:00Z",
+      "end": "2024-12-31T23:00:00Z"
     }
-   },
-   "coverage_audit_multi": {
+  },
+  "coverage_audit_multi": {
     "instruments": [
       {
         "symbol": "BTCUSDT",
@@ -8577,6 +8577,29 @@
     "range": {
       "start": "2024-01-01",
       "end": "2024-03-31"
+    }
+  },
+  "fclr004": {
+    "status": "PRE_REGISTERED",
+    "protocol": "research_state/research_protocol_fclr004.md",
+    "primary_contrast": "C1' vs B1",
+    "rationale": "Pivot based on FCLR-003 showing funding signal (C1) stronger than combined (C2)"
+  },
+  "split_boundaries_fclr004": {
+    "status": "frozen",
+    "rule": "chronological splits by unique UTC timestamps across common 5-symbol panel; 7-day embargo between partitions (FCLR-004 v1.0, pre-registered before outcomes)",
+    "embargo_days": 7,
+    "train": {
+      "start": "2024-04-01T00:00:00Z",
+      "end": "2024-05-10T23:00:00Z"
+    },
+    "validation": {
+      "start": "2024-05-18T00:00:00Z",
+      "end": "2024-05-31T23:00:00Z"
+    },
+    "test": {
+      "start": "2024-06-08T00:00:00Z",
+      "end": "2024-09-05T23:00:00Z"
     }
   }
 }

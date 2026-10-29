@@ -75,3 +75,10 @@ Scope: adversarial leakage re-audit on new 5-symbol panel prior to opening seale
 
 ### Verdict (FCLR-002)
 No unresolved leakage/timestamp/label/transformation defect found. Proceed to FCLR-002 out-of-sample evaluation on frozen splits/panel per protocol. Holdout remains sealed until execution under frozen protocol with this audit on record.
+
+
+## FCLR-004 Pre-Registration (2026-10-29T20:57:00Z)
+- Experiment FCLR-004 pre-registered in research_protocol_fclr004.md
+- Primary contrast pivoted to C1' vs B1 based on FCLR-003 evidence (C1 beats B1, C2 degrades)
+- Split reuse audit required; no sealed holdouts reused
+- Feature fixes applied to evaluation pipeline (EMA/premium loading) before runs

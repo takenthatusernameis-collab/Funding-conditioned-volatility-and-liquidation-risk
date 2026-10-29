@@ -98,6 +98,13 @@
         "research_state/binance_source_probe.md",
         "RESEARCH_PROMPT.md"
       ]
+    },
+    {
+      "hypothesis_id": "FCLR-H001",
+      "experiment_id": "FCLR-004",
+      "status": "PRE_REGISTERED",
+      "pre_registration_path": "research_state/research_protocol_fclr004.md",
+      "notes": "Pivot to funding-augmented (C1') vs B1 due to C2 feature degradation; search for unused window or justify alternative horizon."
     }
   ]
 }

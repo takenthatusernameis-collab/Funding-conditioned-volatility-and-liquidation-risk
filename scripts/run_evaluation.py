@@ -183,6 +183,100 @@ def load_funding_series_all(sym, months: list[str]):
         dedup.append((ts, fr))
     return dedup
 
+
+def find_premium_csv(sym, date_str):
+    candidates = []
+    for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
+        sp = str(p)
+        if 'premiumIndex' in sp:
+            candidates.append(p)
+    for base in [REPO/"research_state"/"data_cache"]:
+        if base.exists():
+            for sub in base.iterdir():
+                if not sub.is_dir():
+                    continue
+                p = sub / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
+                if p.exists():
+                    candidates.append(p)
+                p = sub / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
+                if p.exists():
+                    candidates.append(p)
+    seen = set()
+    out = []
+    for c in candidates:
+        rp = c.resolve()
+        if rp in seen:
+            continue
+        seen.add(rp)
+        out.append(rp)
+    return out[0] if out else None
+
+def find_index_csv(sym, date_str):
+    candidates = []
+    for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
+        sp = str(p)
+        if 'indexPrice' in sp and 'premium' not in sp:
+            candidates.append(p)
+    for base in [REPO/"research_state"/"data_cache"]:
+        if base.exists():
+            for sub in base.iterdir():
+                if not sub.is_dir():
+                    continue
+                p = sub / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
+                if p.exists():
+                    candidates.append(p)
+                p = sub / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
+                if p.exists():
+                    candidates.append(p)
+    seen = set()
+    out = []
+    for c in candidates:
+        rp = c.resolve()
+        if rp in seen:
+            continue
+        seen.add(rp)
+        out.append(rp)
+    return out[0] if out else None
+
+def load_premium_close(sym, ts_ms, start_dt, end_dt):
+    # try same day
+    dt = ts_to_dt(ts_ms)
+    date_str = dt.strftime("%Y-%m-%d")
+    csvp = find_premium_csv(sym, date_str)
+    if csvp and csvp.exists():
+        try:
+            with csvp.open() as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    try:
+                        rts = int(row['open_time'])
+                        if rts == ts_ms or abs(rts - ts_ms) < 1000:  # same hour
+                            return float(row['close'])
+                    except Exception:
+                        continue
+        except Exception:
+            pass
+    return None
+
+def load_index_close(sym, ts_ms, start_dt, end_dt):
+    dt = ts_to_dt(ts_ms)
+    date_str = dt.strftime("%Y-%m-%d")
+    csvp = find_index_csv(sym, date_str)
+    if csvp and csvp.exists():
+        try:
+            with csvp.open() as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    try:
+                        rts = int(row['open_time'])
+                        if rts == ts_ms or abs(rts - ts_ms) < 1000:
+                            return float(row['close'])
+                    except Exception:
+                        continue
+        except Exception:
+            pass
+    return None
+
 def log_ret(p1, p0):
     if p0 <= 0 or p1 <= 0:
         return None
@@ -251,18 +345,14 @@ def get_funding_abs_percentile(funding_series, ts_ms, window_days=90, min_obs=30
     cnt = sum(1 for v in abs_hist if v <= abs_latest)
     return cnt / len(abs_hist) if abs_hist else None
 
-def build_features_for_origin(mark_series, funding_series, t_idx, train_stats=None):
-    # t_idx is index in mark_series (hourly bars)
+def build_features_for_origin(mark_series, funding_series, t_idx, train_stats=None, sym=None):
     if t_idx < 0 or t_idx >= len(mark_series):
         return None
     ts_ms_t = mark_series[t_idx][0]
-    # trailing RVs
-    # RV1h - just last return squared? or realized variance over 1h window of 1 bar? "RV1h, RV24h, RV168h: trailing realized variances from hourly mark-price log returns"
-    # trailing_rv over window of hours
+
     def trailing_rv_window(n):
         if t_idx - n < 0:
             return None
-        # sum of squares of returns over n bars ending at t_idx? i.e. from t_idx-n to t_idx gives n returns?
         rv = 0.0
         for i in range(t_idx - n + 1, t_idx + 1):
             if i <= 0:
@@ -277,35 +367,40 @@ def build_features_for_origin(mark_series, funding_series, t_idx, train_stats=No
     rv24h = trailing_rv_window(24)
     rv168h = trailing_rv_window(168)
 
-    # funding
     latest_f = get_funding_latest(funding_series, ts_ms_t)
     signed_funding = latest_f[1] if latest_f else None
     abs_fund_pct = get_funding_abs_percentile(funding_series, ts_ms_t)
 
-    # premium/EMA - protocol says mark/index premium and mark/EMA24 distance; but we may not have index fully; try to use premium index if exists? or skip if missing
     prem = None
     ema_dist = None
-    # try to find premium/index/ema from files if possible - look up quickly
-    # for now compute EMA of mark price over 24h
-    if t_idx >= 23:  # need 24 bars
-        # compute EMA (simple)
-        # start with SMA
-        ema = sum(mark_series[i][1] for i in range(t_idx-23, t_idx+1)) / 24.0
-        # rough EMA
-        alpha = 2.0 / (24.0 + 1.0)
-        ema = sum(mark_series[i][1] * (alpha * (1-alpha)**(t_idx - i)) for i in range(max(0,t_idx-200), t_idx+1)) / sum(alpha * (1-alpha)**(t_idx-i) for i in range(max(0,t_idx-200), t_idx+1)) if False else None
-        # simpler approximation
-        ema = mark_series[t_idx][1]  # placeholder not great; better compute recursively
-    # easier EMA
+    # Compute proper EMA (24-period)
     if t_idx >= 0:
-        # compute EMA up to t_idx
-        ema = mark_series[0][1]
-        alpha = 2.0/(24+1)
-        for i in range(1, t_idx+1):
-            ema = alpha * mark_series[i][1] + (1-alpha) * ema
-        ema_dist = mark_series[t_idx][1] / ema - 1.0 if ema > 0 else None
+        alpha = 2.0 / (24.0 + 1.0)
+        # initialize with SMA for first values
+        if t_idx < 23:
+            ema = sum(mark_series[i][1] for i in range(t_idx + 1)) / (t_idx + 1) if t_idx >= 0 else mark_series[0][1]
+            # continue
+            ema_cur = ema
+            for i in range(max(1, t_idx - 100), t_idx + 1):  # rough
+                pass
+        # compute full EMA up to t_idx
+        ema_cur = sum(mark_series[i][1] for i in range(max(0, t_idx - 23), t_idx + 1)) / min(24, t_idx + 1)
+        for i in range(max(1, t_idx - 200), t_idx + 1):
+            ema_cur = alpha * mark_series[i][1] + (1 - alpha) * ema_cur
+        if ema_cur > 0:
+            ema_dist = mark_series[t_idx][1] / ema_cur - 1.0
     else:
         ema_dist = None
+
+    # Try to load premium
+    if sym is not None:
+        prem_close = load_premium_close(sym, ts_ms_t, None, None)
+        if prem_close is not None:
+            prem = float(prem_close)
+        else:
+            idx_close = load_index_close(sym, ts_ms_t, None, None)
+            if idx_close is not None and idx_close > 0:
+                prem = mark_series[t_idx][1] / idx_close - 1.0
 
     return {
         'ts_ms': ts_ms_t,
@@ -315,7 +410,7 @@ def build_features_for_origin(mark_series, funding_series, t_idx, train_stats=No
         'signed_funding': signed_funding,
         'abs_fund_pct': abs_fund_pct,
         'ema_dist': ema_dist,
-        'prem': prem,  # may be missing
+        'prem': prem,
     }
 
 def fit_ols(X_list, y_list):
@@ -461,7 +556,7 @@ def main():
             y = realized_variance_from_prices(future_prices)
             if y is None or y <= 0:
                 continue
-            feats = build_features_for_origin(mark_list, fund_list, i)
+            feats = build_features_for_origin(mark_list, fund_list, i, sym=sym)
             if feats is None:
                 continue
             eval_rows.append({
