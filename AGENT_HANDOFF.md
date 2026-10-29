@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T10:09:33Z
+Updated: 2026-10-29T10:13:14Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified): `315d1054b80284581f3bfeee4e9b33eafce24a6e` on `main` (previous checkpoint commits; working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/).
+Current HEAD (verified): `6e91842316565956b7d231ebb4b6bbacf2621d94` on `main` (previous checkpoint commits; working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/).
 
 ## Mission (unchanged)
 
@@ -16,13 +16,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read the prior agent task from the durable handoff and complete it. Then update the handoff and write a clear initial task message for the next agent.
 
 Completion summary:
-- Read prior handoff task from AGENT_HANDOFF.md. Verified current repo state at session start.
-- Verified repo state: `git rev-parse HEAD` = `315d1054b80284581f3bfeee4e9b33eafce24a6e` on `main`; `git status` clean apart from untracked `__pycache__`; no code/data/frozen-artifact changes in this session.
+- Read prior handoff task from AGENT_HANDOFF.md. Verified current repo state at session start (HEAD `6e91842316565956b7d231ebb4b6bbacf2621d94`, working tree clean apart from untracked `__pycache__`; tests 51 passed).
+- Verified repo state: `git rev-parse HEAD` = `6e91842316565956b7d231ebb4b6bbacf2621d94` on `main`; `git status` clean apart from untracked `__pycache__`; no code/data/frozen-artifact changes in this session.
 - Re-confirmed gates from artifacts: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; CI crosses zero, single ~4-day test block, BTCUSDT-only paired panel per `coverage_audit_recheck.md` — >=5 instruments gate NOT met). `research_state/evaluation_summary.md` flagged untrusted pending independent recomputation (`evaluation_summary_conflict.md`). FCLR-002 `research_state/evaluation_summary_FCLR002.md` flagged untrusted in `evaluation_summary_conflict.md` (heading/body mismatch, sign-convention artifacts, n=94 single-instrument BTCUSDT rows per `_diag_panel.py`); protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded. Do NOT claim verified FCLR-002 pass; do NOT recompute. Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
-- Tests: `python3 -m pytest tests/ -q` — 51 passed in 1.49s.
+- Tests: `python3 -m pytest tests/ -q` — 51 passed in 1.46s.
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed.
 - Acknowledged all blockers. No valid next research step exists without touching frozen artifacts/splits/evaluations or opening sealed holdouts (both prohibited by protocol).
-- Updated this handoff for current session state (HEAD refreshed to `315d1054`; test result confirmed; gates unchanged).
+- Updated this handoff for current session state (HEAD refreshed to `6e918423` on `main`; test result confirmed; gates unchanged).
 
 ## Current verified state
 
@@ -34,7 +34,8 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUS
 - Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there.
 - Implementation: tests exist and pass. `python3 -m pytest tests/ -q` → 51 passed, 1.47s.
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
-- Verified HEAD: `315d1054b80284581f3bfeee4e9b33eafce24a6e` on `main`.
+- Verified HEAD: `6e91842316565956b7d231ebb4b6bbacf2621d94` on `main`.
+- Tests: `python3 -m pytest tests/ -q` → 51 passed, 1.46s.
 
 ## Initial task message for next agent
 
@@ -65,4 +66,4 @@ Your tasks (do not expand scope):
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `315d1054b80284581f3bfeee4e9b33eafce24a6e` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `6e91842316565956b7d231ebb4b6bbacf2621d94` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
