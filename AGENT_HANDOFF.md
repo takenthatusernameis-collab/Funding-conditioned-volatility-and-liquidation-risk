@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T15:05:16Z
+Updated: 2026-10-29T15:10:00Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified this session): `f5bc12f6d6570b4736bf42a28a370dbe37b7bc46` on `main` (branch up to date with origin/main). Previous checkpoint `afde0e5e` was superseded by `f5bc12f6` ("chore(kilo): checkpoint agent session"); working tree clean apart from untracked `__pycache__` under `scripts/` and `tests/`. No frozen-split/protocol/frozen-artifact changes this session.
+Current HEAD (verified this session): `4bd2c06d5e0f656d5c2122d4870390be40ede01e` on `main` (branch up to date with origin/main). Previous checkpoint `f5bc12f6` was superseded by `4bd2c06d` ("chore(kilo): checkpoint agent session"); working tree clean apart from untracked `__pycache__` under `scripts/` and `tests/`. No frozen-split/protocol/frozen-artifact changes this session.
 Note: This session read the prior agent task from the durable handoff, verified the actual repo state against documented gates (FCLR-001/FCLR-002/Track A/FCLR-H003/H004), confirmed blockers remain, and refreshed the handoff for the next agent.
 
 ## Mission (unchanged)
@@ -66,7 +66,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted summaries as verified. FCLR-H003/H004 cells are untested/blocked — do not report them as completed or null.
 
 Your tasks (do not expand scope):
-1. Verify repo state: `git rev-parse HEAD` → `afde0e5ef3ec01ffaf4f222ff54e59ca99e43598` (current on `main`); run `python3 -m pytest tests/ -q` (expect 51 passed; Python 3.12.3, /usr/bin/python3). Confirm gates remain as documented including the FCLR-002 NOT_MET/INCONCLUSIVE status.
+1. Verify repo state: `git rev-parse HEAD` → `4bd2c06d5e0f656d5c2122d4870390be40ede01e` (current on `main`); run `python3 -m pytest tests/ -q` (expect 51 passed; Python 3.12.3, /usr/bin/python3). Confirm gates remain as documented including the FCLR-002 NOT_MET/INCONCLUSIVE status.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 NOT_MET/INCONCLUSIVE (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE; FCLR-H003/H004 not claimable. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
