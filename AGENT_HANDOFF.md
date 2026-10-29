@@ -32,9 +32,9 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUS
 - Frozen splits FCLR-002: train 2024-04-01T00:00:00Z..2024-06-08T23:00:00Z; val 2024-06-16T00:00:00Z..2024-07-15T23:00:00Z; test 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z; 7-day embargo. FCLR-001 window 2024-01-01..2024-03-31 (BTCUSDT-only mark-price coverage; other four symbols have zero mark-price rows there).
 - Coverage: 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps for FCLR-002 panel (2024-04-01..2024-09-30). `research_state/fclr002_coverage_audit.json` present; FCLR-001 common-panel figure of 2136 timestamps in run_manifest.json is NOT reproducible from the current tree (`coverage_audit_recheck.md`).
 - Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there.
-- Implementation: tests exist and pass. `python3 -m pytest tests/ -q` → 51 passed, 1.49s.
+- Implementation: tests exist and pass. `python3 -m pytest tests/ -q` → 51 passed, 1.47s.
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
-- Verified HEAD: `535cf05ed3474bf2299a6f1f2276983598ca6ff7` on `main`.
+- Verified HEAD: `90eb4532dea088a547ca2caecc078ceb7568a9e8` on `main`.
 
 ## Initial task message for next agent
 
@@ -65,4 +65,4 @@ Your tasks (do not expand scope):
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `535cf05ed3474bf2299a6f1f2276983598ca6ff7` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `90eb4532dea088a547ca2caecc078ceb7568a9e8` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
