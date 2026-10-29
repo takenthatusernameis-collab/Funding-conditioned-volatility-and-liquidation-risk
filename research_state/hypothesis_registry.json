@@ -39,18 +39,35 @@
       "estimand": "Median/mean time-to-correction among corrected funding-extreme events, split by realized-volatility regime.",
       "directional_claim": "Correction time lower in low-volatility conditions.",
       "status": "PARTIAL_REPLICATION",
-      "status_evidence": "scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py (4/4 passed); 445 funding-extreme events across 5 symbols Jan-Mar 2024",
+      "status_evidence": "scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py (10/10 passed); research_state/h002_replication_report.md; research_state/shek_methodology_availability.md; 88 funding-extreme events across 5 symbols Jan-Mar 2024; 84 corrected, 4 censored, median correction 8.0 h, mean 12.6 h; all RV regimes missing (no Jan-Mar 2024 mark prices in cache; SSRN 403 blocks full methodology)",
       "prior_tests": [
         {
           "experiment_id": "FCLR-001-H002",
           "result": "Median correction time 8.0h, mean 12.6h among corrected events (Jan-Mar 2024, 5 symbols)",
           "verdict": "Partial: full paper methodology not independently reconstructible from public sources alone"
+        },
+        {
+          "experiment_id": "H002-PARTIAL-REPLICA-v1",
+          "result": "88 events (Jan-Mar 2024, 5 symbols), 84 corrected, 4 censored, median 8.0 h, mean 12.6 h; per-symbol: BTCUSDT n=22 c=20 x=2 med=8.0 h; ETHUSDT n=20 c=18 x=2 med=16.0 h; BNBUSDT n=14 c=14 x=0 med=16.0 h; SOLUSDT n=21 c=21 x=0 med=8.0 h; XRPUSDT n=11 c=11 x=0 med=16.0 h. RV-regime contrast infeasible: all 88 events missing (mark-price cache starts 2024-04; no downloads permitted). Paper claim (1,696 events/18 contracts; median 27 h high-RV vs 3 h low-RV; lower hazard with higher RV) not testable on this panel.",
+          "verdict": "PARTIAL_REPLICATION: reconstructed event/censoring statistics reported; RV-regime contrast could not be computed; SSRN HTTP 403 prevents exact replication. Not promoted to confirmatory, forecast-skill, or liquidation evidence.",
+          "artifacts": [
+            "research_state/h002_replication_report.md",
+            "research_state/h002_pre_registration.md",
+            "scripts/funding_correction_replication.py",
+            "tests/test_funding_correction_replication.py",
+            "research_state/shek_methodology_availability.md"
+          ],
+          "run_record": "appended to research_state/run_manifest.json (git SHA c3236af1, data = cached Jan–Mar 2024 funding)"
         }
       ],
-      "next_falsification_test": "Obtain and document the paper's full event-definition and censoring rules; if unavailable, report as partial replication and do not promote correction-time association to volatility-forecast or liquidation evidence.",
+      "next_falsification_test": "Obtain and document the paper's full event-definition and censoring rules (SSRN remains blocked by HTTP 403); if still unavailable, report as partial replication and do not promote correction-time association to volatility-forecast or liquidation evidence. No RV-regime contrast possible without Jan-Mar 2024 mark prices.",
       "links": [
         "scripts/funding_correction_replication.py",
-        "research_state/final_inconclusive_report.md"
+        "research_state/h002_replication_report.md",
+        "research_state/h002_pre_registration.md",
+        "research_state/shek_methodology_availability.md",
+        "research_state/final_inconclusive_report.md",
+        "research_state/run_manifest.json"
       ]
     },
     {
@@ -100,7 +117,7 @@
       ]
     },
     {
-      "hypothesis_id": "FCLR-H001",
+      "hypothesis_id": "FCLR-H004",
       "experiment_id": "FCLR-004",
       "status": "PRE_REGISTERED",
       "pre_registration_path": "research_state/research_protocol_fclr004.md",

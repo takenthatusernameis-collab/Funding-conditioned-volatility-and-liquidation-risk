@@ -8601,5 +8601,135 @@
       "start": "2024-06-08T00:00:00Z",
       "end": "2024-09-05T23:00:00Z"
     }
+  },
+  "h002_partial_replica_v1": {
+    "run_id": "H002-PARTIAL-REPLICA-v1",
+    "experiment_id": "H002-PARTIAL-REPLICA-v1",
+    "git_sha": "c3236af1",
+    "utc_start": "2026-10-29T22:54:25Z",
+    "configuration": {
+      "protocol_version": "H002-PARTIAL-REPLICA-v1",
+      "pre_registration": "research_state/h002_pre_registration.md (frozen 2026-10-29T22:48:55Z)",
+      "primary_estimand": "Median/mean time-to-correction among corrected funding-extreme events, split by realized-volatility regime",
+      "data_period": "2024-01-01T00:00:00Z .. 2024-03-31T23:59:59Z",
+      "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+      "data_source": "cached Jan–Mar 2024 Binance USDⓈ-M perpetual funding rates (root: {SYMBOL}-fundingRate-2024-0{1,2,3}/*.csv)",
+      "no_downloads": true,
+      "no_sealed_holdouts": true,
+      "no_forecast_gate": true
+    },
+    "data_sources": [
+      {
+        "path": "BTCUSDT-fundingRate-2024-01/BTCUSDT-fundingRate-2024-01.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from BTCUSDT-fundingRate-2024-01.zip (data.binance.vision monthly archive)"
+      },
+      {
+        "path": "BTCUSDT-fundingRate-2024-02/BTCUSDT-fundingRate-2024-02.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from BTCUSDT-fundingRate-2024-02.zip"
+      },
+      {
+        "path": "BTCUSDT-fundingRate-2024-03/BTCUSDT-fundingRate-2024-03.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from BTCUSDT-fundingRate-2024-03.zip"
+      },
+      {
+        "path": "ETHUSDT-fundingRate-2024-01/ETHUSDT-fundingRate-2024-01.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from ETHUSDT-fundingRate-2024-01.zip"
+      },
+      {
+        "path": "ETHUSDT-fundingRate-2024-02/ETHUSDT-fundingRate-2024-02.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from ETHUSDT-fundingRate-2024-02.zip"
+      },
+      {
+        "path": "ETHUSDT-fundingRate-2024-03/ETHUSDT-fundingRate-2024-03.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from ETHUSDT-fundingRate-2024-03.zip"
+      },
+      {
+        "path": "BNBUSDT-fundingRate-2024-01/BNBUSDT-fundingRate-2024-01.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from BNBUSDT-fundingRate-2024-01.zip"
+      },
+      {
+        "path": "BNBUSDT-fundingRate-2024-02/BNBUSDT-fundingRate-2024-02.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from BNBUSDT-fundingRate-2024-02.zip"
+      },
+      {
+        "path": "BNBUSDT-fundingRate-2024-03/BNBUSDT-fundingRate-2024-03.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from BNBUSDT-fundingRate-2024-03.zip"
+      },
+      {
+        "path": "SOLUSDT-fundingRate-2024-01/SOLUSDT-fundingRate-2024-01.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from SOLUSDT-fundingRate-2024-01.zip"
+      },
+      {
+        "path": "SOLUSDT-fundingRate-2024-02/SOLUSDT-fundingRate-2024-02.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from SOLUSDT-fundingRate-2024-02.zip"
+      },
+      {
+        "path": "SOLUSDT-fundingRate-2024-03/SOLUSDT-fundingRate-2024-03.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from SOLUSDT-fundingRate-2024-03.zip"
+      },
+      {
+        "path": "XRPUSDT-fundingRate-2024-01/XRPUSDT-fundingRate-2024-01.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from XRPUSDT-fundingRate-2024-01.zip"
+      },
+      {
+        "path": "XRPUSDT-fundingRate-2024-02/XRPUSDT-fundingRate-2024-02.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from XRPUSDT-fundingRate-2024-02.zip"
+      },
+      {
+        "path": "XRPUSDT-fundingRate-2024-03/XRPUSDT-fundingRate-2024-03.csv",
+        "type": "funding_rate",
+        "source_url": "extracted from XRPUSDT-fundingRate-2024-03.zip"
+      }
+    ],
+    "sample_counts": {
+      "total_events": 88,
+      "corrected": 84,
+      "censored": 4,
+      "correction_rate": 0.9545454545454546,
+      "median_correction_hours": 8.0,
+      "mean_correction_hours": 12.6,
+      "rv_regime_valid_events": 0,
+      "rv_regime_missing_events": 88,
+      "by_symbol": {
+        "BTCUSDT": {"events": 22, "corrected": 20, "censored": 2, "median_correction_hours": 8.0, "correction_rate": 0.9090909090909091},
+        "ETHUSDT": {"events": 20, "corrected": 18, "censored": 2, "median_correction_hours": 16.0, "correction_rate": 0.9},
+        "BNBUSDT": {"events": 14, "corrected": 14, "censored": 0, "median_correction_hours": 16.0, "correction_rate": 1.0},
+        "SOLUSDT": {"events": 21, "corrected": 21, "censored": 0, "median_correction_hours": 8.0, "correction_rate": 1.0},
+        "XRPUSDT": {"events": 11, "corrected": 11, "censored": 0, "median_correction_hours": 16.0, "correction_rate": 1.0}
+      }
+    },
+    "software_versions": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux"
+    },
+    "results_status": "PARTIAL_REPLICATION_COMPLETE",
+    "blocker_state": "rv_regime_contrast_infeasible_no_jan_mar_2024_mark_prices",
+    "artifacts": [
+      "research_state/h002_replication_report.md",
+      "research_state/h002_pre_registration.md",
+      "scripts/funding_correction_replication.py",
+      "tests/test_funding_correction_replication.py",
+      "research_state/shek_methodology_availability.md"
+    ],
+    "verdict": "PARTIAL_REPLICATION: reconstructed 88 funding-extreme events across 5 symbols (Jan-Mar 2024); median correction 8.0 h, mean 12.6 h; 84 corrected, 4 censored. RV-regime contrast could not be computed (all events missing; mark-price cache starts 2024-04; no downloads permitted). Paper claim (1,696 events/18 contracts; median 27 h high-RV vs 3 h low-RV; lower hazard with higher RV) not testable on this panel. Not promoted to forecast-skill or liquidation evidence.",
+    "limitations": [
+      "SSRN 7529458 full methodology unavailable (HTTP 403); exact replication not possible",
+      "No Jan-Mar 2024 mark prices in cache; RV-regime contrast infeasible",
+      "Correction time is separate from volatility forecast skill and liquidation outcomes; no such claims made"
+    ]
   }
 }
