@@ -81,3 +81,77 @@ Secondary contrasts (also inconclusive, CIs cross zero):
 - Do not relax the block/multiplicity/uncertainty gates after seeing outcomes.
 - Do not relabel exploratory or partial results as confirmatory.
 - Do not report unexecuted cells (H003, H004) as completed or null.
+
+---
+
+# FCLR-002 (superseding note) and FCLR-003
+
+Date: 2026-10-29
+Protocols: FCLR-002 v1.0 and FCLR-003 v1.0 (frozen splits recorded in
+`research_state/run_manifest.json` under `split_boundaries` and
+`split_boundaries_fclr003` respectively). Both use the same frozen
+feature/target/model definitions as FCLR-001 v1.0 (B0/B1/C1/C2, OLS on
+log RV, 7-day embargo) and were executed by `scripts/run_evaluation.py` with
+`FCLR_EXPERIMENT=FCLR-002` / `FCLR_EXPERIMENT=FCLR-003`. No tuning, no
+holdout reuse, no split changes.
+
+## FCLR-002 (test 2024-07-23..2024-09-30, 5 symbols, n=8274 paired)
+
+- **Outcome:** INCONCLUSIVE. Forecast gate NOT MET.
+- **Primary contrast C2 vs B1:** -9.28% relative QLIKE reduction; 95% CI
+  [-0.097648, -0.008788] excludes zero. Numerically met and independently
+  reproduced byte-identical (`evaluation_summary_FCLR002_REPRO.md`).
+- **Block requirement:** NOT MET. Test window 2024-07-23..2024-09-30 = 70 days
+  = 2 non-overlapping 30-day blocks (+10-day remainder); protocol requires >=3.
+  Instrument requirement (>=5) IS met.
+- **Interpretation:** The primary contrast passes on the numerical and
+  uncertainty criteria on this panel, but the minimum claim-worthy test is not
+  satisfied, so the gate does not pass. Retain INCONCLUSIVE. Do not promote.
+- Secondary contrasts: C1 vs B1 ~0.00% (CI crosses zero); C2 vs C1 -9.28%
+  (CI excludes zero) -- the incremental gain over C1 is what drives the C2 vs
+  B1 improvement, i.e. the price-dislocation/EMA feature set, not funding alone.
+
+## FCLR-003 (test 2024-10-02..2024-12-31, 5 symbols, n=10796 paired)
+
+- **Outcome:** INCONCLUSIVE. Forecast gate NOT MET. This is the first variant to
+  satisfy the minimum claim-worthy test on sample design.
+- **Primary contrast C2 vs B1:** -3.78% relative QLIKE reduction; 95% CI
+  [-0.020240, 0.056734] crosses zero -> NOT MET on uncertainty.
+- **Minimum claim-worthy test:** MET on design (5 instruments; test window
+  2024-10-02..2024-12-31 = 91 days = 3 non-overlapping 30-day blocks). The
+  gate fails purely on the outcome criteria.
+- **Registered secondary contrasts:**
+  - C1 vs B1: -8.09% (95% CI [-0.045813, -0.020303], excludes zero) -- funding
+    features DO add incremental skill in this window.
+  - C2 vs C1: +12.92% (95% CI [0.006214, 0.095465], excludes zero) -- adding the
+    price-dislocation/EMA features to C1 makes forecasts measurably WORSE.
+- **Interpretation:** The frozen candidate C2 (volatility + funding + price
+  dislocation) is dominated by C1 (volatility + funding only) on the FCLR-003
+  panel. The price-dislocation features do not add incremental value here and
+  actively degrade it. This is a durable negative result for the C2 model form
+  on a >=3-block panel; it is preserved rather than explained away. The
+  funding-only candidate C1 beats B1 in this window, but C1 is a registered
+  secondary contrast, not the primary, and the protocol's primary contrast is
+  C2 vs B1.
+- **Cross-experiment note:** C2 vs B1 improves on FCLR-002 (-9.28%, CI excludes
+  zero) and degrades on FCLR-003 (-3.78%, CI crosses zero). The sign flip across
+  two frozen, non-overlapping test windows is itself evidence that the apparent
+  FCLR-002 edge does not generalize. No single window supports a gate pass.
+
+## Baselines (FCLR-003)
+
+- B0 (persistence) test QLIKE = 0.487674 vs B1 = 0.401884. B1 beats B0 on this
+  panel (unlike the FCLR-001 window where B0 won), so the HAR-style baseline is
+  the stronger of the two baselines here. C1 (0.369366) beats both.
+
+## What must not be repeated (all experiments)
+
+- Do not reuse any sealed holdout for selection, tuning, or re-evaluation.
+- Do not relax the block/multiplicity/uncertainty gates after seeing outcomes.
+- Do not relabel exploratory or partial results as confirmatory.
+- Do not report unexecuted cells (H003 alternate horizons/tiers, H004) as
+  completed or null.
+- Do not promote the FCLR-002 C2-vs-B1 point estimate to a gate pass; the
+  >=3-block criterion is not met there.
+- Do not claim the FCLR-003 C1-vs-B1 result as a primary-gate pass; C1 is a
+  registered secondary contrast and the primary contrast (C2 vs B1) fails.

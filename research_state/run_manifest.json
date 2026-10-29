@@ -125,13 +125,12 @@
       "start": "2024-06-16T00:00:00Z",
       "end": "2024-07-15T23:00:00Z"
     },
-"test": {
+    "test": {
       "start": "2024-07-23T00:00:00Z",
       "end": "2024-09-30T23:00:00Z"
-     }
     }
-   },
-   "split_boundaries_fclr003": {
+  },
+  "split_boundaries_fclr003": {
     "status": "frozen",
     "rule": "chronological splits by unique UTC timestamps across the common 5-symbol panel extended to 2024-12-31; 7-day embargo between partitions (FCLR-003 v1.0, pre-registered before outcomes)",
     "embargo_days": 7,

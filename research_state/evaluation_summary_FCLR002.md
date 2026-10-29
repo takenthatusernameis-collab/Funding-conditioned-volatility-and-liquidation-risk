@@ -2,7 +2,7 @@
 
 Experiment: FCLR-002
 Data range: 2024-01-01 .. 2024-09-30
-Generated: 2026-10-29T02:22:32Z
+Generated: 2026-10-29T19:28:05Z
 
 ## Splits (frozen)
 - Train: 2024-04-01T00:00:00Z .. 2024-06-08T23:00:00Z
@@ -37,7 +37,10 @@ Generated: 2026-10-29T02:22:32Z
 
 - Primary contrast C2 vs B1 meets >=2% relative QLIKE reduction: PASS
 - Relative reduction: 9.28%
-- 95% CI for diff (C2-B1): [-0.097648, -0.008788]
+- 95% CI for diff (C2-B1): [-0.097648, -0.008788] (excludes zero: yes)
+- Paired OOS instruments: 5 (BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT) -> >=5: PASS
+- Test window: 2024-07-23 .. 2024-09-30 = 70 days = 2 non-overlapping 30-day block(s) -> >=3: NOT_MET
+- Forecast gate (all criteria): NOT_MET
 
 ## Notes
 - All results use frozen splits only; no tuning on holdout.

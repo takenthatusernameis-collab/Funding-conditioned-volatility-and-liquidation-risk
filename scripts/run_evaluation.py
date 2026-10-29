@@ -15,14 +15,24 @@ RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
 PROTOCOL = REPO / "research_state" / "research_protocol.md"
 
 # Experiment selection via env var: "FCLR-001" (default, frozen window ending
-# 2024-03-31) or "FCLR-002" (extended window ending 2024-09-30 per frozen protocol).
+# 2024-03-31), "FCLR-002" (extended window ending 2024-09-30 per frozen protocol),
+# or "FCLR-003" (forward-extended window ending 2024-12-31, pre-registered
+# split_boundaries_fclr003 in run_manifest.json).  FCLR-003 is the first variant
+# whose test window satisfies the protocol's >=3 non-overlapping 30-day block
+# requirement across >=5 instruments.
 EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-001")
 if EXPERIMENT == "FCLR-002":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR002.md"
     DATA_END = "2024-09-30"
+    SPLIT_KEY = "split_boundaries"
+elif EXPERIMENT == "FCLR-003":
+    OUT = REPO / "research_state" / "evaluation_summary_FCLR003.md"
+    DATA_END = "2024-12-31"
+    SPLIT_KEY = "split_boundaries_fclr003"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
+    SPLIT_KEY = "split_boundaries"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 EPS = 1e-12
@@ -197,7 +207,7 @@ def qlike(y, yhat):
 
 def build_panel():
     m = json.loads(RUN_MANIFEST.read_text())
-    splits = m['split_boundaries']
+    splits = m[SPLIT_KEY]
     train = (parse_iso(splits['train']['start']), parse_iso(splits['train']['end']))
     val = (parse_iso(splits['validation']['start']), parse_iso(splits['validation']['end']))
     test = (parse_iso(splits['test']['start']), parse_iso(splits['test']['end']))
@@ -693,7 +703,9 @@ def main():
     lines.append('')
     for name in ['B0','B1','C1','C2']:
         s = summary[name]
-        lines.append(f"- {name}: mean_QLIKE={s['test_qlike_mean']:.6f} (n={s['test_n']})")
+        mq = s['test_qlike_mean']
+        qstr = f"{mq:.6f}" if mq is not None else "N/A (no test rows)"
+        lines.append(f"- {name}: mean_QLIKE={qstr} (n={s['test_n']})")
     lines.append('')
     lines.append('## Paired comparisons (block bootstrap, ~24h blocks, 2000 replications)')
     lines.append('')
@@ -707,13 +719,26 @@ def main():
     lines.append('## Gate assessment (primary contrast C2 vs B1)')
     lines.append('')
     c = contrasts.get('C2_vs_B1')
+    # Minimum claim-worthy test per research_protocol.md: >=5 instruments in the
+    # paired OOS panel and >=3 non-overlapping 30-day evaluation blocks.
+    test_days = (test[1] - test[0]).days + 1
+    n_blocks_30 = test_days // 30
+    paired_syms = sorted({p['sym'] for p in results['C2']['test']}) if results.get('C2',{}).get('test') else []
+    block_pass = n_blocks_30 >= 3
+    instr_pass = len(paired_syms) >= 5
     if c:
-        passed = c['rel_reduction_pct'] is not None and c['rel_reduction_pct'] >= 2.0 and c['ci_hi'] < 0  # improvement means negative diff
-        lines.append(f"- Primary contrast C2 vs B1 meets >=2% relative QLIKE reduction: {'PASS' if passed else 'NOT_MET'}")
+        rel_pass = c['rel_reduction_pct'] is not None and c['rel_reduction_pct'] >= 2.0
+        ci_pass = c['ci_hi'] < 0
+        passed = rel_pass and ci_pass and block_pass and instr_pass
+        lines.append(f"- Primary contrast C2 vs B1 meets >=2% relative QLIKE reduction: {'PASS' if rel_pass else 'NOT_MET'}")
         lines.append(f"- Relative reduction: {c['rel_reduction_pct']:.2f}%")
-        lines.append(f"- 95% CI for diff (C2-B1): [{c['ci_lo']:.6f}, {c['ci_hi']:.6f}]")
+        lines.append(f"- 95% CI for diff (C2-B1): [{c['ci_lo']:.6f}, {c['ci_hi']:.6f}] (excludes zero: {'yes' if ci_pass else 'no'})")
     else:
+        passed = False
         lines.append('- Primary contrast: NOT_EVALUABLE')
+    lines.append(f"- Paired OOS instruments: {len(paired_syms)} ({', '.join(paired_syms)}) -> >=5: {'PASS' if instr_pass else 'NOT_MET'}")
+    lines.append(f"- Test window: {test[0].strftime('%Y-%m-%d')} .. {test[1].strftime('%Y-%m-%d')} = {test_days} days = {n_blocks_30} non-overlapping 30-day block(s) -> >=3: {'PASS' if block_pass else 'NOT_MET'}")
+    lines.append(f"- Forecast gate (all criteria): {'PASS' if passed else 'NOT_MET'}")
     lines.append('')
     lines.append('## Notes')
     lines.append('- All results use frozen splits only; no tuning on holdout.')
