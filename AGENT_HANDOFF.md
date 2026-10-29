@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T01:15:49Z
+Updated: 2026-10-29T01:18:32Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session end): f052e3e1dad7d14dfdb5f182f04442261c36bc19 on `main`; previous handoff recorded `8094cda1`, checkpoint commit updated `AGENT_HANDOFF.md`; working tree clean except untracked `scripts/__pycache__/`
+Current HEAD (verified at session end): a79b1f2e71cdadaec36ee18736a88653bdafd9f8 on `main`; previous handoff recorded `f052e3e1`, checkpoint commit updated `AGENT_HANDOFF.md`; working tree clean except untracked `scripts/__pycache__/`
 
 ## Mission (unchanged)
 
@@ -16,7 +16,7 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from the durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = `f052e3e1dad7d14dfdb5f182f04442261c36bc19` on `main`. Handoff updated from previous checkpoint `8094cda1`; working tree clean except untracked `scripts/__pycache__/`. No new commit made this session.
+- Verified repo state: `git rev-parse HEAD` = `a79b1f2e71cdadaec36ee18736a88653bdafd9f8` on `main`. Handoff updated from previous checkpoint `f052e3e1`; working tree clean except untracked `scripts/__pycache__/`. No new commit made this session.
 - Re-confirmed gates from artifacts without opening sealed holdouts or recomputing: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`; CI crosses zero, single ~4-day test block, BTCUSDT-only paired panel per `coverage_audit_recheck.md`). `research_state/evaluation_summary.md` numerical summary flagged untrusted pending independent recomputation (`evaluation_summary_conflict.md`). FCLR-002 `research_state/evaluation_summary_FCLR002.md` shows numerical pass (9.28%) but flagged untrusted in `evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded. Do NOT claim verified FCLR-002 pass; do NOT recompute. Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Coverage confirmed: `research_state/fclr002_coverage_audit.json` — 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z.
 - Tests: `python3 -m pytest tests/ -q` — pytest not installed in this environment (ModuleNotFoundError). No tests executed.
@@ -34,7 +34,7 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT MET (PILOT/INCONCLUS
 - Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there (both summaries flagged untrusted until independently recomputed).
 - Implementation: tests exist; pytest unavailable in current environment (`python3 -m pytest tests/ -q` failed with ModuleNotFoundError), tests not re-run. Frozen artifacts unchanged except this handoff.
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
-- Verified HEAD: `f052e3e1dad7d14dfdb5f182f04442261c36bc19` on `main`. Working tree clean except untracked `scripts/__pycache__/`. No commit made (not requested).
+- Verified HEAD: `a79b1f2e71cdadaec36ee18736a88653bdafd9f8` on `main`. Working tree clean except untracked `scripts/__pycache__/`. No commit made (not requested).
 
 ## Initial task message for next agent
 
@@ -52,7 +52,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted summaries as verified.
 
 **Your tasks (do not expand scope):**
-1. Verify repo state: `git rev-parse HEAD` → `f052e3e1dad7d14dfdb5f182f04442261c36bc19`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `a79b1f2e71cdadaec36ee18736a88653bdafd9f8`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
