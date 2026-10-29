@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T02:45:29Z
+Updated: 2026-10-29T02:47:10Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session end): 6165b296219287ede263432b67f65c910547cf8f on `main` (newer than previous handoff's recorded `a79b1f2e`); previous handoff recorded `f052e3e1`, checkpoint commits updated `AGENT_HANDOFF.md`; working tree clean except untracked `scripts/__pycache__/`
+Current HEAD (verified at session end): 771468c3ccf0b7ff00764b214e84ed0ec666171f on `main` (advanced from handoff's previously recorded `6165b296219287ede263432b67f65c910547cf8f` via checkpoint commit `771468c3` "chore(kilo): checkpoint agent session"; diff limited to AGENT_HANDOFF.md); working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
 
 ## Mission (unchanged)
 
@@ -16,13 +16,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from the durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Verified repo state: `git rev-parse HEAD` = `6165b296219287ede263432b67f65c910547cf8f` on `main` (ahead of handoff's previously recorded `a79b1f2e`). Working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
+- Verified repo state: `git rev-parse HEAD` = `771468c3ccf0b7ff00764b214e84ed0ec666171f` on `main` (advanced from handoff's previously recorded `6165b296219287ede263432b67f65c910547cf8f` via checkpoint commit `771468c3` "chore(kilo): checkpoint agent session"; diff limited to AGENT_HANDOFF.md). Working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
 - Re-confirmed gates from artifacts without opening sealed holdouts or recomputing: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`; CI crosses zero, single ~4-day test block, BTCUSDT-only paired panel per `coverage_audit_recheck.md`). `research_state/evaluation_summary.md` numerical summary flagged untrusted pending independent recomputation (`evaluation_summary_conflict.md`). FCLR-002 `research_state/evaluation_summary_FCLR002.md` shows numerical pass (9.28%) but flagged untrusted in `evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded. Do NOT claim verified FCLR-002 pass; do NOT recompute. Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Coverage confirmed: `research_state/fclr002_coverage_audit.json` — 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 4392 common hourly timestamps, 2024-04-01T00:00:00Z..2024-09-30T23:00:00Z.
-- Tests: `python3 -m pytest tests/ -q` — pytest not installed in this environment (ModuleNotFoundError). No tests executed.
+- Tests: `python3 -m pytest tests/ -q` — pytest not installed in this environment (ModuleNotFoundError). No tests executed. Confirmed again this session.
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed.
 - Acknowledged all blockers. No valid next step exists without touching frozen artifacts or opening sealed holdouts; no new pre-registrable analysis identified that would be executable under constraints.
-- Updated this handoff for current session state.
+- Updated this handoff for current session state (HEAD refresh, pytest reconfirmation).
 
 ## Current verified state
 
