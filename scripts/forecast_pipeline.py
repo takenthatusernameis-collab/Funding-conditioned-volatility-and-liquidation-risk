@@ -72,7 +72,34 @@ def apply_standardization(values, mean, sd):
 
 
 def load_splits():
-    m = json.loads(RUN_MANIFEST.read_text())
+    content = RUN_MANIFEST.read_text()
+    # Parse only the first JSON object in case of concatenated data
+    depth = 0
+    in_str = False
+    esc = False
+    for i, ch in enumerate(content):
+        if in_str:
+            if esc:
+                esc = False
+                continue
+            if ch == '\\':
+                esc = True
+                continue
+            if ch == '"':
+                in_str = False
+            continue
+        else:
+            if ch == '"':
+                in_str = True
+                continue
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    content = content[: i + 1]
+                    break
+    m = json.loads(content)
     # default frozen boundaries from protocol/manifest if present
     splits = m.get("splits", {})
     if not splits:
