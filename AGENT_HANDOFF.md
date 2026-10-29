@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T09:09:55Z
+Updated: 2026-10-29T09:10:30Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified): `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` on `main` (advanced from prior recorded `19b99d1869e7d5ca0f18ad95eb28c6f393dcfca9`; working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/).
+Current HEAD (verified): `2795410eb8f2c9ee4995aabb2eac42fcba92b7ce` on `main` (advanced from prior recorded `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7`; working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/).
 
 ## Mission (unchanged)
 
@@ -16,13 +16,13 @@ No paid services, paid trials, account signup, manually supplied keys/files, use
 Task: Read prior agent task from the durable handoff and complete it; update handoff and write initial task message for next agent.
 
 Completion summary:
-- Prior session's task was already complete; the handoff was current as of `eb3b40d7ae5b48a34f1dbd6ce47ddb35538c9e25`. A new checkpoint commit `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` was created after that handoff, so this session refreshed the handoff to the new HEAD (the only change between `eb3b40d7..HEAD` is this handoff file itself).
-- Verified repo state: `git rev-parse HEAD` = `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` on `main`; working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/.
+- Prior session's task was already complete; the handoff was current as of `eb3b40d7ae5b48a34f1dbd6ce47ddb35538c9e25`. New checkpoint commits advanced HEAD to `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` then `2795410eb8f2c9ee4995aabb2eac42fcba92b7ce` (latest). This session refreshed the handoff to current HEAD (only handoff changed relative to prior state).
+- Verified repo state: `git rev-parse HEAD` = `2795410eb8f2c9ee4995aabb2eac42fcba92b7ce` on `main`; working tree clean apart from untracked pytest `__pycache__` cache dirs under scripts/ and tests/.
 - Re-confirmed gates from artifacts without opening sealed holdouts or recomputing: FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUSIVE; `research_state/gate_assessment.md`; CI crosses zero, single ~4-day test block, BTCUSDT-only paired panel per `coverage_audit_recheck.md`). `research_state/evaluation_summary.md` numerical summary flagged untrusted pending independent recomputation (`evaluation_summary_conflict.md`). FCLR-002 `research_state/evaluation_summary_FCLR002.md` shows a numerical pass (9.28%) but is flagged untrusted in `evaluation_summary_conflict.md`; protocol §6/§9 holdout NOT opened / no outcomes computed; provenance not recorded. Do NOT claim verified FCLR-002 pass; do NOT recompute. Risk-overlay INELIGIBLE. Track A BLOCKED/NOT VIABLE (`research_state/liquidation_sources_enumeration.md`: no complete unauthenticated public liquidation census).
 - Tests: `python3 -m pytest tests/ -q` — **All 51 tests passed in 1.46s.**
 - No new experiments registered/executed. No holdout leakage. No frozen artifacts/splits/evaluations changed.
 - Acknowledged all blockers. No valid next research step exists without touching frozen artifacts/splits/evaluations or opening sealed holdouts (both prohibited by protocol).
-- Updated this handoff for current session state (HEAD refresh to `1278daad`; test result updated).
+- Updated this handoff for current session state (HEAD refresh to `2795410e`; test result updated).
 
 ## Current verified state
 
@@ -34,7 +34,7 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT_MET (PILOT/INCONCLUS
 - Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there (both summaries flagged untrusted until independently recomputed).
 - Implementation: tests exist and pass. `python3 -m pytest tests/ -q` → 51 passed, 1.46s.
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
-- Verified HEAD: `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` on `main`.
+- Verified HEAD: `2795410eb8f2c9ee4995aabb2eac42fcba92b7ce` on `main`.
 
 ## Initial task message for next agent
 
@@ -52,7 +52,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted summaries as verified.
 
 Your tasks (do not expand scope):
-1. Verify repo state: `git rev-parse HEAD` → `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` (if different, note it); run `python3 -m pytest tests/ -q` (expect 51 passed). Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `2795410eb8f2c9ee4995aabb2eac42fcba92b7ce` (if different, note it); run `python3 -m pytest tests/ -q` (expect 51 passed). Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
@@ -65,4 +65,4 @@ Your tasks (do not expand scope):
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `1278daadd84fd3afd8cd1e99492a2e1b8e806aa7` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `2795410eb8f2c9ee4995aabb2eac42fcba92b7ce` on `main`; tests pass (51/51). `AGENT_HANDOFF.md` refreshed (working-tree update; no commit made — commit checkpoint only if explicitly requested).
