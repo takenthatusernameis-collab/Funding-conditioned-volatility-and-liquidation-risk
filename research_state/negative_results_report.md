@@ -155,3 +155,9 @@ holdout reuse, no split changes.
   >=3-block criterion is not met there.
 - Do not claim the FCLR-003 C1-vs-B1 result as a primary-gate pass; C1 is a
   registered secondary contrast and the primary contrast (C2 vs B1) fails.
+
+## FCLR-004 (2026-10-29T21:53:30Z) — BLOCKED
+- Attempted to run FCLR-004 per pre-registration; pivoted to 6h primary due to 24h split reuse.
+- Exhaustive timestamp audit of 5-symbol common panel shows all partitions consumed; only 2024-10-01 unused (1 day). No >=30-day contiguous window outside sealed partitions.
+- Cannot satisfy >=3 non-overlapping 30-day blocks without reusing sealed holdouts -> forbidden.
+- Result: BLOCKED with full evidence; gate remains not met.

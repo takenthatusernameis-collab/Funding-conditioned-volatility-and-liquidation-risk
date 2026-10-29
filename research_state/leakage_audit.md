@@ -82,3 +82,12 @@ No unresolved leakage/timestamp/label/transformation defect found. Proceed to FC
 - Primary contrast pivoted to C1' vs B1 based on FCLR-003 evidence (C1 beats B1, C2 degrades)
 - Split reuse audit required; no sealed holdouts reused
 - Feature fixes applied to evaluation pipeline (EMA/premium loading) before runs
+
+
+## FCLR-004 split reuse audit (2026-10-29T21:52:00Z)
+- 5-symbol common panel fully covered 2024-04-01 onward.
+- All partitions of FCLR-001/002/003 mapped; embargo gaps verified.
+- Unused contiguous days: only 2024-10-01 (1 day). No >=30-day unused window exists.
+- FCLR-003 test is the only window with >=3 blocks for 24h but is frozen/sealed (used). Overlap detected for proposed 24h splits.
+- Pivot to 6h primary does not create unused timestamps; reuse constraint remains blocking.
+- Conclusion: valid out-of-sample window meeting block-count requirement not constructible without reusing sealed holdouts -> gate not satisfiable under current constraints.

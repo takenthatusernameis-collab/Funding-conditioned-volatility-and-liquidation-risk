@@ -128,3 +128,10 @@ If timestamp-audit shows no unused window satisfies >=3 blocks for 24h test with
 - If valid window exists with >=3 blocks and >=5 instruments: run with full report
 - If not: exhaustive documentation + justified alternative (e.g., 6h primary) or concrete blocker analysis
 - No modification of frozen experiments/splits
+
+
+## PIVOT ADDENDUM (2026-10-29T21:49:00Z) — Primary horizon 6h due to split reuse
+
+Timestamp audit (5-symbol common panel): only 2024-10-01 remains unused across all frozen partitions (FCLR-001/002/003). No window of >=90 days exists unconsumed; FCLR-003 test (2024-10-02..2024-12-31, 91d, 3 blocks) is the only frozen window meeting >=3 blocks for 24h. Proposed 24h splits in run_manifest.json overlap frozen partitions. Per protocol, pivot to 6h as primary.
+
+Primary outcome: next-6h realized variance of mark-price returns (sum of squared log returns over t+1..t+6). Block bootstrap uses ~24h blocks for robustness; report block counts explicitly. Splits use split_boundaries_fclr004_6h with 7d embargo, no overlap with any frozen partition.

@@ -13,3 +13,11 @@ Forecast gate: NOT MET. Result is PILOT/INCONCLUSIVE. No significance claim. Ris
 
 ## Next pre-registered action
 Either (a) stop per protocol with inconclusive report, or (b) pre-register a follow-up protocol version extending the out-of-sample window to >=3 non-overlapping 30-day blocks before any further model changes; do not reuse current holdout for selection.
+
+
+## FCLR-004 (2026-10-29T21:53:00Z)
+- Pre-registered, pivoted to 6h primary due to 24h split reuse
+- Timestamp audit shows only 1 unused day, no >=30-day window outside sealed partitions
+- Cannot meet >=3 blocks requirement without reusing sealed holdouts -> BLOCKED
+- Forecast gate: NOT_MET (blocked by data/split constraints, not by model performance)
+- Risk-overlay: INELIGIBLE
