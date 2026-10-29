@@ -1,9 +1,9 @@
 # Agent Handoff — Funding-Conditioned Volatility and Liquidation Risk
 
-Updated: 2026-10-29T03:11:09Z
+Updated: 2026-10-29T03:11:54Z
 Repository: https://github.com/takenthatusernameis-collab/Funding-conditioned-volatility-and-liquidation-risk
 Default branch: main
-Current HEAD (verified at session end): f18f202ff95bae32f796b60cd5184182dcdb9a1f on `main` (advanced from handoff's previously recorded `a8e694a42876bd9d04146d03a258e58198765816` via checkpoint commit `f0ff083b` "chore(kilo): checkpoint agent session"; diff limited to AGENT_HANDOFF.md); working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
+Current HEAD (verified at session end): eda4e1a7335b80c2878ab941995355656dfff304 on `main` (advanced from handoff's previously recorded `a8e694a42876bd9d04146d03a258e58198765816` via checkpoint commit `f0ff083b` "chore(kilo): checkpoint agent session"; diff limited to AGENT_HANDOFF.md); working tree clean except untracked `scripts/__pycache__/`. No new commit made this session (not requested).
 
 ## Mission (unchanged)
 
@@ -34,7 +34,7 @@ Repository status: INCONCLUSIVE. FCLR-001 forecast gate NOT MET (PILOT/INCONCLUS
 - Evaluation summaries: `research_state/evaluation_summary.md` (FCLR-001) gate NOT_MET; `research_state/evaluation_summary_FCLR002.md` (FCLR-002) flagged untrusted in `evaluation_summary_conflict.md`; conflict documented there (both summaries flagged untrusted until independently recomputed).
 - Implementation: tests exist; pytest unavailable in current environment (`python3 -m pytest tests/ -q` failed with ModuleNotFoundError), tests not re-run. Frozen artifacts unchanged except this handoff.
 - Track A: `research_state/liquidation_sources_enumeration.md` — NOT VIABLE/BLOCKED.
-- Verified HEAD: `f18f202ff95bae32f796b60cd5184182dcdb9a1f` on `main`. Working tree clean except untracked `scripts/__pycache__/`. No commit made (not requested).
+- Verified HEAD: `eda4e1a7335b80c2878ab941995355656dfff304` on `main`. Working tree clean except untracked `scripts/__pycache__/`. No commit made (not requested).
 
 ## Initial task message for next agent
 
@@ -52,7 +52,7 @@ What is frozen and must NOT change:
 - All reported evaluation results. Never claim an unexecuted run succeeded. Do not treat untrusted summaries as verified.
 
 **Your tasks (do not expand scope):**
-1. Verify repo state: `git rev-parse HEAD` → `f18f202ff95bae32f796b60cd5184182dcdb9a1f`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
+1. Verify repo state: `git rev-parse HEAD` → `eda4e1a7335b80c2878ab941995355656dfff304`; note if pytest available (`python3 -m pytest tests/ -q`) else report environment limitation. Confirm gates remain as documented including FCLR-002 conflict.
 2. Acknowledge blockers: FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted (do not claim pass); risk-overlay INELIGIBLE; Track A BLOCKED/NOT VIABLE. Do NOT fabricate results, open sealed holdouts, or change frozen artifacts/splits/evaluations.
 3. If and only if a genuinely new, pre-registrable analysis becomes possible without touching frozen artifacts, document it as a new pre-registration before execution. Otherwise state clearly that no valid next step exists and list concrete blockers.
 4. Update this handoff at the end of your session with: HEAD, test result/environment note, what you did/did not do, and a clear initial task message for the next agent. Do not leave the handoff stale.
@@ -65,4 +65,4 @@ What is frozen and must NOT change:
 
 Leave risk-overlay INELIGIBLE. No paid services, paid trials, account signup, manually supplied keys/files, user intervention, live trading, or paper trading. Do not modify `.github/workflows` without explicit maintainer authorization.
 
-**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `f18f202ff95bae32f796b60cd5184182dcdb9a1f` on `main`. Test environment limitation noted (pytest unavailable). `AGENT_HANDOFF.md` refreshed (working-tree update, not committed).
+**Acceptance:** state remains inconclusive with gates documented (FCLR-001 NOT_MET; FCLR-002 conflicted/untrusted); no holdout leakage; no fabricated results; verified HEAD `eda4e1a7335b80c2878ab941995355656dfff304` on `main`. Test environment limitation noted (pytest unavailable). `AGENT_HANDOFF.md` refreshed (working-tree update, not committed).
