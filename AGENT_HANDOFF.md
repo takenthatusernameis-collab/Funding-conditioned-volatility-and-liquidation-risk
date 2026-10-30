@@ -1,6 +1,6 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (LIQUIDATION-RISK CAMPAIGN)
 
-UPDATED: 2026-10-30T19:25:17Z
+UPDATED: 2026-10-30T19:44:40Z
 HEAD: (current)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned **volatility and liquidation risk**)
