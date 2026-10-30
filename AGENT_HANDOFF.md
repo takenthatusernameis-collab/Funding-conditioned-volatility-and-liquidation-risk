@@ -1,20 +1,20 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T03:06:00Z
-HEAD: 2119505d (main, origin/main)
+UPDATED: 2026-10-30T03:51:37Z
+HEAD: d05dd830 (main, origin/main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
 ## PRIORITY (repo name): LIQUIDATION RISK — H004 / TRACK A IS THE ONLY UNBLOCKED PATH
 
 The repo studies funding-conditioned volatility and liquidation risk. Liquidation risk (observed labels, H004 / Track A) is the namesake priority and the only track that is neither sealed nor concluded. All forecast gates FCLR-001–004 are SEALED (NOT_MET/BLOCKED). Do NOT re-run them. Do NOT build risk overlays/simulations/merges until a forecast gate passes (none do). Do NOT touch .github/workflows/.
 
-## SINGLE TIMESTAMPED INITIAL TASK — CAMPAIGN H004-20261030
+## SINGLE TIMESTAMPED INITIAL TASK — CAMPAIGN H004-20261030 (REFRESHED 2026-10-30)
 
-> **[2026-10-30T03:02:50Z] CAMPAIGN: UNBLOCK H004 — OBSERVED LIQUIDATION LABELS (HEAVY WORK, NO ESCAPE HATCH)**
+> **[2026-10-30T03:51:00Z] CAMPAIGN: UNBLOCK H004 — OBSERVED LIQUIDATION LABELS (HEAVY WORK, NO ESCAPE HATCH)**
 
 Mission: produce either (a) an admissible unauthenticated public source of observed forced-liquidation events covering the frozen 2024 test windows for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} with defensible provenance, or (b) documented STRUCTURAL EVIDENCE proving Track A infeasible under constraints PLUS the smallest defensible scope expansion (venue / year / window) with a concrete label-construction plan.
 
-Network is reachable in this session (curl to data.binance.vision returned HTTP 404, not a connection failure) — unauthenticated probes are executable now. Do not treat "no network" as an excuse.
+Network is reachable (curl to data.binance.vision returned HTTP 404, not a connection failure) — unauthenticated probes are executable now. Do not treat "no network" as an excuse.
 
 Hard constraints:
 - No credentials, paid services/trials, manually supplied keys/files, user intervention. No bypassing auth/rate limits/terms.
@@ -38,6 +38,7 @@ Bottlenecks removed (enforced this session):
 - Forecast gates sealed — no re-runs, no overlay/sim/merge.
 - Capped != census; absence != zero — prevents false "event-free" claims.
 - Session scope: H004 source discovery ONLY. No exploration tangents.
+- Working tree clean (only __pycache__ untracked); commit nothing merely to show activity.
 
 Verification gate: `python -m unittest tests.test_funding_correction_replication -v` must stay green (10/10). research_state/liquidation_sources_enumeration.md must grow monotonically each session.
 
@@ -45,7 +46,7 @@ START NOW. HEAVY WORK ON H004. Liquidation risk is the repo's namesake priority 
 
 ## SECONDARY PATH (only if H004 is structurally exhausted across all source families)
 
-H001's ≥3-block gate can be unblocked WITHOUT new downloads: research_state/data_cache holds cached Q4-2024 data (Oct–Dec) for all 5 symbols and run_manifest.json records pre-registered FCLR-003 splits (test 2024-10-02T00:00:00Z..2024-12-31T23:00:00Z, ~91 days = 3 non-overlapping 30-day blocks). Unblock route: coverage-only audit of the cached Q4 panel → frozen protocol version FCLR-003 v1.0 → run frozen pipeline → record canonical numbers. This does NOT open any sealed holdout for selection and does NOT change the INCONCLUSIVE verdict unless the gate passes. Do not let this distract from H004.
+H001's ≥3-block gate can be unblocked WITHOUT new downloads: research_state/data_cache holds cached Q4-2024 data (Oct–Dec) for all 5 symbols and run_manifest.json records pre-registered FCLR-003 splits (test 2024-10-02T00:00:00Z..2024-12-31T23:59:59Z, ~91 days = 3 non-overlapping 30-day blocks). Unblock route: coverage-only audit of the cached Q4 panel → frozen protocol version FCLR-003 v1.0 → run frozen pipeline → record canonical numbers. This does NOT open any sealed holdout for selection and does NOT change the INCONCLUSIVE verdict unless the gate passes. Do not let this distract from H004.
 
 ## CURRENT STATE SNAPSHOT
 
@@ -59,16 +60,17 @@ H001's ≥3-block gate can be unblocked WITHOUT new downloads: research_state/da
 
 ## KEY EVIDENCE
 
-- research_state/liquidation_sources_enumeration.md — Track A source enumeration (expand exhaustively per campaign)
+- research_state/liquidation_sources_enumeration.md — Track A source enumeration (expand exhaustively per campaign; must grow monotonically)
 - research_state/binance_source_probe.md — Binance verified URLs + liquidation verdict (NOT VERIFIED / not directly downloadable)
 - research_state/coverage_audit_recheck.md — FCLR-001 panel BTCUSDT-only; 5-symbol intersection 0 timestamps Jan–Mar 2024
 - research_state/hypothesis_registry.json — FCLR-H001..H004 statuses and next falsification tests
 - RESEARCH_PROMPT.md §§5, 7.2, 12 — constraints, source tracks, handoff contract
 - research_state/data_cache/ — cached Q4-2024 panel for all 5 symbols (H001 secondary unblock path)
+- scripts/h004_audit.py — audits cached HF crypto-liquidation-ticks (2026 only; wrong window for frozen tests)
 
 ## DURABLE HANDOFF CONTRACT (per RESEARCH_PROMPT §12)
 
-1. What changed and why: session state inspected; H001 unblock path identified (cached Q4 panel + pre-registered FCLR-003 splits); network reachability confirmed; AGENT_HANDOFF.md refreshed with timestamped H004 campaign and enforced bottleneck removals.
+1. What changed and why: session state inspected; H001 unblock path identified (cached Q4 panel + pre-registered FCLR-003 splits); network reachability confirmed; AGENT_HANDOFF.md refreshed with timestamped H004 campaign and enforced bottleneck removals; stale HEAD pointer corrected to d05dd830.
 2. What was actually tested, exact outcomes: `python -m unittest tests.test_funding_correction_replication -v` → 10/10 OK; curl data.binance.vision → HTTP 404 (reachable, path missing).
 3. Evidence added: none new this session beyond reachability confirmation and H001 unblock documentation; enumeration unchanged — next session must grow research_state/liquidation_sources_enumeration.md.
 4. Current state of each research gate: H001 INCONCLUSIVE (≥3-block gate NOT met); H002 PARTIAL_REPLICATION; H003 INCONCLUSIVE; H004 BLOCKED; forecast gates sealed NOT_MET; overlay INELIGIBLE.
