@@ -16,23 +16,32 @@ PROTOCOL = REPO / "research_state" / "research_protocol.md"
 
 # Experiment selection via env var: "FCLR-001" (default, frozen window ending
 # 2024-03-31), "FCLR-002" (extended window ending 2024-09-30 per frozen protocol),
-# or "FCLR-003" (forward-extended window ending 2024-12-31, pre-registered
-# split_boundaries_fclr003 in run_manifest.json).  FCLR-003 is the first variant
-# whose test window satisfies the protocol's >=3 non-overlapping 30-day block
-# requirement across >=5 instruments.
+# "FCLR-003" (forward-extended window ending 2024-12-31, pre-registered
+# split_boundaries_fclr003 in run_manifest.json), or "FCLR-006" (confirmatory
+# unsealed 2026 panel ending 2026-08-06, pre-registered split_boundaries_fclr006).
+# FCLR-003 is the first variant whose test window satisfies the protocol's >=3
+# non-overlapping 30-day block requirement across >=5 instruments.
 EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-001")
 if EXPERIMENT == "FCLR-002":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR002.md"
     DATA_END = "2024-09-30"
     SPLIT_KEY = "split_boundaries"
+    START_ALL = "2024-01-01"
 elif EXPERIMENT == "FCLR-003":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR003.md"
     DATA_END = "2024-12-31"
     SPLIT_KEY = "split_boundaries_fclr003"
+    START_ALL = "2024-01-01"
+elif EXPERIMENT == "FCLR-006":
+    OUT = REPO / "research_state" / "evaluation_summary_FCLR006.md"
+    DATA_END = "2026-08-06"
+    SPLIT_KEY = "split_boundaries_fclr006"
+    START_ALL = "2026-04-01"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
     SPLIT_KEY = "split_boundaries"
+    START_ALL = "2024-01-01"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 EPS = 1e-12
@@ -59,44 +68,45 @@ def parse_iso(s):
         dt = dt.replace(tzinfo=timezone.utc)
     return dt
 
-def find_mark_csv(sym, date_str):
-    # look in various cache dirs
-    candidates = []
-    sym_lower = sym.lower()
-    # common patterns
+def cache_month_dir(sym, date_str):
+    y, m, _ = date_str.split("-")
+    return REPO / "research_state" / "data_cache" / f"{sym}_{y}_{int(m):02d}"
+
+
+def mark_csv_path(sym, date_str):
+    # direct cache path (2026 flat layout: .../markPriceKlines-{date}/{sym}-1h-{date}.csv)
+    base = cache_month_dir(sym, date_str)
+    for cand in [
+        base / f"markPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv",
+        base / f"markPriceKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv",
+    ]:
+        if cand.exists():
+            return cand
+    # rglob fallback (covers legacy/nested layouts)
     for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
         if 'markPrice' in sp:
-            # prefer ones in cache dirs
-            candidates.append(p)
-    # also look in specific dirs
-    for base in [REPO/"research_state"/"data_cache"]:
-        for sub in base.iterdir() if base.exists() else []:
-            p = sub / f"markPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p.exists():
-                candidates.append(p)
-            # also maybe files directly
-    # deduplicate
-    seen = set()
-    out = []
-    for c in candidates:
-        rp = c.resolve()
-        if rp in seen:
-            continue
-        seen.add(rp)
-        out.append(rp)
-    return out[0] if out else None
+            return p
+    return None
 
-def find_funding_csv(sym, month):
+
+def find_mark_csv(sym, date_str):
+    return mark_csv_path(sym, date_str)
+
+def funding_csv_path(sym, month):
+    y, m = month.split("-")
+    base = REPO / "research_state" / "data_cache" / f"{sym}_{y}_{int(m):02d}"
+    cand = base / f"{sym}-fundingRate-{month}" / f"{sym}-fundingRate-{month}.csv"
+    if cand.exists():
+        return cand
+    # rglob fallback
     for p in REPO.rglob(f"{sym}-fundingRate-{month}.csv"):
         return p
-    # in specific dirs
-    for base in [REPO/"research_state"/"data_cache"]:
-        for sub in base.iterdir() if base.exists() else []:
-            p = sub / f"{sym}-fundingRate-{month}" / f"{sym}-fundingRate-{month}.csv"
-            if p.exists():
-                return p
     return None
+
+
+def find_funding_csv(sym, month):
+    return funding_csv_path(sym, month)
 
 def load_mark_series(sym, start_dt, end_dt):
     # build daily range
@@ -185,58 +195,34 @@ def load_funding_series_all(sym, months: list[str]):
 
 
 def find_premium_csv(sym, date_str):
-    candidates = []
+    base = cache_month_dir(sym, date_str)
+    for cand in [
+        base / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}.csv",
+        base / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv",
+    ]:
+        if cand.exists():
+            return cand
+    # rglob fallback
     for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
         if 'premiumIndex' in sp:
-            candidates.append(p)
-    for base in [REPO/"research_state"/"data_cache"]:
-        if base.exists():
-            for sub in base.iterdir():
-                if not sub.is_dir():
-                    continue
-                p = sub / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
-                if p.exists():
-                    candidates.append(p)
-                p = sub / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
-                if p.exists():
-                    candidates.append(p)
-    seen = set()
-    out = []
-    for c in candidates:
-        rp = c.resolve()
-        if rp in seen:
-            continue
-        seen.add(rp)
-        out.append(rp)
-    return out[0] if out else None
+            return p
+    return None
 
 def find_index_csv(sym, date_str):
-    candidates = []
+    base = cache_month_dir(sym, date_str)
+    for cand in [
+        base / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv",
+        base / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv",
+    ]:
+        if cand.exists():
+            return cand
+    # rglob fallback
     for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
         if 'indexPrice' in sp and 'premium' not in sp:
-            candidates.append(p)
-    for base in [REPO/"research_state"/"data_cache"]:
-        if base.exists():
-            for sub in base.iterdir():
-                if not sub.is_dir():
-                    continue
-                p = sub / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
-                if p.exists():
-                    candidates.append(p)
-                p = sub / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
-                if p.exists():
-                    candidates.append(p)
-    seen = set()
-    out = []
-    for c in candidates:
-        rp = c.resolve()
-        if rp in seen:
-            continue
-        seen.add(rp)
-        out.append(rp)
-    return out[0] if out else None
+            return p
+    return None
 
 def load_premium_close(sym, ts_ms, start_dt, end_dt):
     # try same day
@@ -307,7 +293,7 @@ def build_panel():
     test = (parse_iso(splits['test']['start']), parse_iso(splits['test']['end']))
 
     # load all mark series for all symbols (wide range)
-    start_all = parse_iso("2024-01-01T00:00:00Z")
+    start_all = parse_iso(f"{START_ALL}T00:00:00Z")
     end_all = parse_iso(f"{DATA_END}T23:00:00Z")
     months = funding_months(DATA_END)
 

@@ -33,6 +33,11 @@
           "experiment_id": "FCLR-002",
           "result": "C2 vs B1: -9.28% relative QLIKE reduction; 95% CI [-0.097648, -0.008788] does NOT cross zero; n=8274 paired rows across 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT); test window 2024-07-23T00:00:00Z..2024-09-30T23:00:00Z = 70 days = only 2 non-overlapping 30-day blocks",
           "verdict": "INCONCLUSIVE; primary contrast numerically met and CI supports improvement, but minimum-claim-worthy test (>=3 non-overlapping 30-day blocks) NOT MET. Independently reproduced 2026-10-28 by re-running frozen scripts/run_evaluation.py with FCLR_EXPERIMENT=FCLR-002 (byte-identical numbers)."
+        },
+        {
+          "experiment_id": "FCLR-006",
+          "result": "Confirmatory on unsealed 2026 test panel (train 2026-04-01..04-24, val 2026-05-02..05-15, test/holdout 2026-05-23..2026-08-06, 7d embargoes; splits frozen before outcomes in run_manifest.json#split_boundaries_fclr006). Test QLIKE: B0=0.518169, B1=0.527290, C1=0.626463, C2=0.895879 (n=8987 paired, 5 instruments BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT). Primary contrast C2 vs B1: mean diff +0.368588, 95% CI [0.173748, 0.615614] entirely positive (C2 significantly WORSE than B1), relative -69.90%. C1 vs B1: +0.099173, CI [0.040500, 0.173461] (worse). C2 vs C1: +0.269416, CI [0.117749, 0.462135] (worse). Block bootstrap ~24h blocks, 2000 deterministic-seed replicates.",
+          "verdict": "EXPERIMENT_COMPLETE_NEGATIVE. Forecast gate NOT_MET: primary contrast C2 vs B1 fails >=2% relative reduction (-69.90% = worse) and CI excludes zero on the worse side; >=5 instruments PASS; >=3 non-overlapping 30-day blocks NOT_MET (76 days = 2 blocks). H001 NOT_SUPPORTED on unsealed 2026 data. Independently reproduced byte-identical on re-run (numbers identical; only Generated timestamp differs). Canonical artifact: research_state/evaluation_summary_FCLR006.md.",
         }
       ],
       "closeout_status": "SEALED_NEGATIVE",
