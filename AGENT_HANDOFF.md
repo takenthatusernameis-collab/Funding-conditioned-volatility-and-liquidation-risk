@@ -86,10 +86,10 @@ No viable liquidation-risk path remains without paid data/credentials or a new a
 
 ---
 
-# HANDOFF UPDATE — 2026-10-30T22:55:57Z (VOLATILITY-FOCUS CAMPAIGN OPENED)
+# HANDOFF UPDATE — 2026-10-30T22:56:23Z (VOLATILITY-FOCUS CAMPAIGN OPENED)
 
 HEAD: 86c4f3ce
-UPDATED: 2026-10-30T22:55:57Z
+UPDATED: 2026-10-30T22:56:23Z
 SESSION: volatility-campaign-open
 PRIORITY_SOURCE: Repository name inference (funding-conditioned **volatility** and liquidation risk) — liquidation risk closed; volatility remains.
 
