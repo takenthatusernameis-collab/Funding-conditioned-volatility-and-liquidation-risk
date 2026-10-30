@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-29T23:56:55Z
-HEAD: 58186ede (main)
+UPDATED: 2026-10-30T00:03:45Z
+HEAD: fa4cf4e5 (main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
 ## CORE PRIORITY (inferred from repo name): LIQUIDATION RISK — H004 MUST BE UNBLOCKED
@@ -10,7 +10,7 @@ This repo is about **funding-conditioned volatility and liquidation risk**. Fore
 
 ## SINGLE, TIMESTAMPED INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (DURABLE)
 
-> **[2026-10-29T23:56:55Z] MANDATORY FIRST ACTION — H004-SOURCE-DISCOVERY-v4 (HEAVY WORK, NO ESCAPE):**
+> **[2026-10-30T00:03:45Z] MANDATORY FIRST ACTION — H004-SOURCE-DISCOVERY-v5 (HEAVY WORK, NO ESCAPE):**
 >
 > **Objective:** Find ANY admissible unauthenticated public source that can yield observed forced-liquidation events for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} covering 2024 with defensible provenance. If none exists for frozen 2024 windows, produce STRUCTURAL EVIDENCE (exact paths, codes, reasons) proving it is impossible under constraints — and propose the SMALLEST defensible expansion of scope (different venue/year/window) that IS admissible, with a concrete label construction plan. Do NOT stop at "none found" without evidence.
 >
@@ -54,22 +54,25 @@ This repo is about **funding-conditioned volatility and liquidation risk**. Fore
    Leave `research_state/liquidation_sources_enumeration.md` sufficient that next agent can act without re-probing from scratch.
 
 ## BOTTLENECKS REMOVED / HARD CONSTRAINTS
-- **Forecast gates SEALED:** Do NOT re-run/re-attempt FCLR-001–004 (NOT_MET/BLOCKED). Remove bottleneck by ignoring.
+- **Forecast gates SEALED:** Do NOT re-run/re-attempt FCLR-001–004 (NOT_MET/BLOCKED). Bottleneck removed by ignoring; H004 source discovery is the only unblocked liquidation-risk path.
 - **Do NOT touch `.github/workflows`.**
-- **Do NOT do risk-overlay/trading/simulation/merge tracks.**
+- **Do NOT do risk-overlay/trading/simulation/merge tracks.** INELIGIBLE until a forecast gate passes (it has not).
 - **Preserve distinctions:** H002/H003/volatility ≠ observed liquidations (Track A).
 - **No credentials, no paid services, no user intervention.** Only unauthenticated public sources.
 - **Capped sample != census.** Absence ≠ zero liquidations. If completeness unprovable, cannot infer event-free intervals.
 - **pytest unavailable:** use `python -m unittest tests.test_funding_correction_replication -v` (10/10 pass).
 - **H002:** PARTIAL_REPLICATION complete; RV-regime contrast infeasible (Jan-Mar 2024 mark prices missing).
+- **H003:** INCONCLUSIVE on both panels; no incremental skill over B0. Do NOT threshold-shop best-F1 to claim a pass.
+- **H001/H004 forecast gates:** NOT_MET/BLOCKED (sealed). FCLR-004 cannot meet >=3-block requirement (only 1 unused day, all partitions sealed/used). No evaluation run executed.
 
 ## CURRENT STATE SNAPSHOT
-- **H001:** INCONCLUSIVE
+- **H001:** INCONCLUSIVE (FCLR-001 pilot; FCLR-002 numerically passes CI but >=3-block requirement NOT met)
 - **H002:** PARTIAL_REPLICATION (complete)
-- **H003:** INCONCLUSIVE
+- **H003:** INCONCLUSIVE (both panels; no incremental skill over B0)
 - **H004 (Track A):** BLOCKED for 2024 windows → **UNBLOCK VIA SOURCE DISCOVERY ONLY (HEAVY)**
 - **Forecast gates:** NOT_MET/BLOCKED (sealed)
 - **Risk-overlay:** INELIGIBLE
+- **All bottlenecks removed:** gates sealed, workflows untouched, no overlay, no credentials, capped-sample != census.
 
 ## KEY EVIDENCE
 - Handoff: `AGENT_HANDOFF.md` (this file)
