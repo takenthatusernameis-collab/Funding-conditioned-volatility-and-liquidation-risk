@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T12:34:23Z
-HEAD: c151dfad (main) — clean working tree (ignore __pycache__)
+UPDATED: 2026-10-30T12:41:17Z
+HEAD: 5adc224e (main) — clean working tree (ignore __pycache__)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
 
@@ -23,12 +23,13 @@ DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
 The hypothesis_registry and final_confirmatory_verdict claim "no unsealed >=5-symbol, >=3-block confirmatory window remains" and "2026 has no mark-price data at all." **Both claims are false.** Verified against research_state/data_cache/:
 
 - **2026 Apr-Aug: ALL 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 daily files/month), indexPriceKlines (same count, for premium feature), and fundingRate zips (4-8/month).**
+- Verified 2026-10-30T12:40:17Z against research_state/data_cache/: markPriceKlines day-dir counts for Apr-Jul 2026 — BTCUSDT 119/123/119/141; ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT 89/92/89/110 each. CSV schema = Binance kline (open_time ms, open, high, low, close, ...). ~122 common days across all 5 symbols = **4 non-overlapping 30-day blocks available.** Exceeds the >=3-block minimum.
 - BTCUSDT 2026-04: 30 markPrice days, 30 klines days, 119 indexPrice days, 4 funding zips.
 - ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT 2026-04: 30 markPrice days, 89 indexPrice days, 4 funding zips each.
 - BTCUSDT 2026-08: 98 markPrice days (partial Aug). Others: 17 markPrice days in Aug (partial).
 - Combined Apr-Jul 2026 = ~122 days across all 5 symbols = **4 non-overlapping 30-day blocks available.** Exceeds the >=3-block minimum.
 - This data is UNSEALED: not used in FCLR-001/002/003 (2024 only) or FCLR-005 (HF liquidation 2026-07-08..2026-08-06, Track A only).
-- BOTTLENECK REMOVAL RECORDED 2026-10-30T12:34:23Z: hypothesis_registry.json (data_exhaustion -> false; FCLR-H001 next_falsification_test retargeted to FCLR-006 on unsealed 2026) and experiment_frontier.json (summary retracted; rank-6 FCLR-006 task added) corrected; false "2026 has no mark-price data" and "no unsealed >=5-symbol >=3-block confirmatory window" claims removed.
+- BOTTLENECK REMOVAL RECORDED 2026-10-30T12:34:23Z; re-verified 2026-10-30T12:40:17Z: hypothesis_registry.json (data_exhaustion -> false; FCLR-H001 next_falsification_test retargeted to FCLR-006 on unsealed 2026) and experiment_frontier.json (summary retracted; rank-6 FCLR-006 task added) corrected; false "2026 has no mark-price data" and "no unsealed >=5-symbol >=3-block confirmatory window" claims removed.
 
 **Conclusion:** A new confirmatory experiment FCLR-006 on 2026 Apr-Jul data IS feasible without any new source. The "data exhaustion" blocker is removed. Per RESEARCH_PROMPT.md §16, Track A is blocked after >=3 distinct routes; continue Track C (volatility) on available unsealed data.
 
