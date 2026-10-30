@@ -46,3 +46,9 @@ python -m unittest discover -s tests -v
 FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py
 git log --oneline -2
 ```
+
+---
+
+## NEXT SESSION INITIAL TASK (2026-10-30T16:38:17Z) — DURABLE SINGLE HANDOFF
+
+**Initial task (timestamped):** 2026-10-30T16:38:17Z — Perform a final record-closure and source-provenance audit campaign for the closed program. Deliverables: (1) re-verify all 14 tests pass and byte-identical FCLR-006 reproduction; (2) confirm no sealed experiment re-run occurred; (3) produce `research_state/final_record_closure_audit.md` enumerating every experiment ID (FCLR-001..006), hypothesis (H001/H002/H003), and track (A) with final verdict, evidence path, and seal status; (4) re-scan all research_state markdown for any remaining stale "next task" pointers and collapse them to the closed-program directive; (5) verify file permissions on all research_state/*.md and *.json are world-readable (remove 600-mode bottlenecks) so future agents can read them. Heavy working required: do not stop at status-only edits; each deliverable must be backed by a command output or written artifact. Stop cleanly only after all five deliverables are recorded here with timestamps.
