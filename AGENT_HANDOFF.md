@@ -1,80 +1,68 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T05:17:50Z
-HEAD: 7a1debef (main, origin/main)
+UPDATED: 2026-10-30T06:25:00Z
+HEAD: 37ddd9fd (main) — working tree has uncommitted campaign artifacts (do NOT commit unless explicitly asked)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
-## PRIORITY (repo name): LIQUIDATION RISK — FCLR-005 / H004 TRACK A IS THE ONLY PATH FORWARD
+## PRIORITY (repo name): LIQUIDATION RISK — FCLR-005 / H004 TRACK A CAMPAIGN COMPLETE
 
-The repository name is "Funding-conditioned-volatility-and-liquidation-risk". Observed liquidation risk (FCLR-H004 / Track A) is the namesake priority. All other forecast gates (FCLR-001–004) are SEALED (NOT_MET/BLOCKED). Do NOT re-run them. Do NOT build risk overlays/simulations/merges. Do NOT touch .github/workflows/.
+CAMPAIGN H004-20261030T051500Z ran to completion 2026-10-30T06:23:25Z. scripts/h004_fclr005_pipeline.py exists, is idempotent/resumable (checkpoint research_state/.cache/fclr005_panel.json), deterministic (seed 123456789), and produced research_state/evaluation_summary_FCLR005.md. Liquidation risk remains the repo's namesake priority; Track A on the 2026 window is the only executed liquidation path and is now EXHAUSTED for this source/window.
+
+## CAMPAIGN RESULT (exact, from research_state/evaluation_summary_FCLR005.md)
+
+Panel: 3,520 hourly rows (train 1,760 / val 880 / test 880), Bybit census labels 2026-07-08T16:42:32Z..2026-08-06T23:59:42Z vs Binance 2026 features, 5 symbols {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT}.
+- Liquidations: total_rows=1,442,664; bybit=346,269 / okx=236,896 / binance=859,499 (audit confirmed via scripts/h004_audit.py).
+- Base rates (test): long 0.480682 (423/880 events), short 0.419318 (369/880 events). Hourly presence target has high base rate because any Bybit census row in an hour counts as an event — treat as observed-presence intensity, not a rare event.
+- Primary contrast C2 vs B1 on Brier: long 0.251629 vs 0.251538 (+0.000091, C2 negligibly worse); short 0.243571 vs 0.244900 (-0.001329, negligible). C2 vs B0: long worse (0.251629 vs 0.250713); short negligibly better (0.243571 vs 0.245027).
+- Block-bootstrap 95% CIs overlap across models; leave-one-symbol-out Brier deltas within +/-0.004221.
+- Test window holds 0 non-overlapping 30-day blocks (< 3 required) → confirmatory gate NOT MET.
+- Verdict: PILOT/EXPLORATORY_ONLY. No incremental skill of funding+price features (C2) over RV-only (B1) or persistence (B0). Directional claim NOT_SUPPORTED on this panel. No confirmatory skill claimed. FCLR-H004 remains BLOCKED for frozen 2024. Does NOT clear any sealed FCLR-001-004 gate. No risk overlay justified.
+
+## DELIVERABLES (all present)
+- scripts/h004_fclr005_pipeline.py — idempotent/resumable pipeline; rerun reproduces identical numbers (verified 2026-10-30T06:23Z). DO NOT re-run as "new work"; it is complete.
+- research_state/evaluation_summary_FCLR005.md — exact numbers, base rates, prevalence, coverage gaps, bootstrap CIs, leave-one-symbol-out, honest PILOT verdict, explicit <3-block statement.
+- research_state/.cache/fclr005_panel.json — panel checkpoint (resume without recompute).
+- research_state/liquidation_sources_enumeration.md — FCLR-005 execution record appended 2026-10-30T06:23:25Z (monotonically grown; git SHA recorded, not literal shell substitution).
+- research_state/hypothesis_registry.json — FCLR-H004 status EXPLORATORY_ONLY (2026 pilot), BLOCKED (frozen 2024); FCLR-005 prior test recorded with exact numbers.
+- research_state/run_manifest.json — fclr005 run record added (run_id FCLR-005-20261030T061843Z, git SHA 37ddd9fd..., config hash c837d714..., liquidations sha256 c07351b4..., feature-cache fingerprint, UTC start/end, sample counts, results status, blocker state).
+
+## STATE OF RESEARCH GATES
+- FCLR-001..004 forecast gates: SEALED (NOT_MET/BLOCKED) — do NOT re-run.
+- FCLR-H004: EXPLORATORY_ONLY on the 2026 pilot window; BLOCKED for frozen 2024 (no admissible 2024 observed-liquidation census; routes exhausted).
+- FCLR-005: COMPLETE as pilot; clears no gate; no overlay justified.
+- tests.test_funding_correction_replication: 10/10 pass (regression guard retained).
+- scripts/h004_audit.py: liquidations schema/coverage confirmed.
 
 ## BOTTLENECKS REMOVED (enforced — do not re-open)
+- Source discovery: Bybit census via HuggingFace ochinimus/crypto-liquidation-ticks (CC BY 4.0, unauthenticated) admissible and verified. All 2024 liquidation routes exhausted and recorded (Binance archives/API 404/451; Bybit/OKX/Deribit no census; HF/Zenodo/GitHub dead ends). Do NOT re-probe without concrete new evidence.
+- Feature cache: 2026 cache VERIFIED COMPLETE on disk (mark/index/premium klines 1h + monthly fundingRate 2026-04-01..2026-08-06 under research_state/data_cache/<SYM>_2026_*/). liquidations_full_20260807.csv verified via h004_audit.py (1,442,664 rows). scripts/h004_complete_cache.py NOT needed — do not re-run.
+- Protocol frozen: research_state/research_protocol_fclr005.md (FCLR-005 v1.0) frozen before outcome inspection. Do NOT change targets/features/splits.
+- Capped != census; absence != zero: Bybit rows = census arm only; Binance/OKX = undercounted lower-bound only. Never infer event-free intervals from missing data.
 
-- **Source discovery**: Bybit census via HuggingFace `ochinimus/crypto-liquidation-ticks` (CC BY 4.0, unauthenticated) is admissible and verified. All 2024 liquidation routes exhausted and recorded (Binance archives/API 404/451, Bybit/OKX/Deribit no census, HF/Zenodo/GitHub dead ends). Do NOT re-probe without concrete new evidence.
-- **Feature cache**: 2026 feature cache VERIFIED COMPLETE on disk — mark/index/premium klines 1h + monthly fundingRate for 2026-04-01..2026-08-06 present under `research_state/data_cache/<SYM>_2026_*/` (extracted CSVs confirmed). `research_state/data_cache/liquidations_full_20260807.csv` verified via `scripts/h004_audit.py` (1,442,664 rows; bybit=346,269 / okx=236,896 / binance=859,499; target symbols present). `scripts/h004_complete_cache.py` NOT needed — do not re-run.
-- **Protocol frozen**: `research_state/research_protocol_fclr005.md` (FCLR-005 v1.0) frozen before outcome inspection. Do NOT change targets/features/splits.
-- **Capped != census; absence != zero**: Bybit rows = census arm only. Binance/OKX = undercounted lower-bound only. Never infer event-free intervals from missing data.
-
-## SINGLE TIMESTAMPED INITIAL TASK — CAMPAIGN H004-20261030T051500Z (HEAVY WORK, MANDATORY, NO ESCAPE HATCH)
-
-> **[2026-10-30T05:15:00Z] CAMPAIGN: BUILD AND EXECUTE FCLR-005 END-TO-END — TRACK A OBSERVED LIQUIDATION OUTCOMES ON THE 2026 BYBIT CENSUS**
-
-**Binary outcome required:** Produce either (a) `research_state/evaluation_summary_FCLR005.md` with exact numbers for B0/B1/C1/C2 (Brier, log-loss, calibration slope/intercept, precision-recall, AUPRC), base rate/event prevalence, coverage gaps, leave-one-symbol-out stability, block-bootstrap uncertainty, and an honest PILOT/EXPLORATORY verdict (the ~30-day label window cannot meet the >=3-block confirmatory gate — do NOT claim confirmatory skill), OR (b) a concrete, evidence-backed blocker with the exact failing step and what is missing.
-
-**Network:** Reachable. Unauthenticated downloads/probes are allowed. Do NOT use "no network" as an excuse.
-
-### HEAVY WORK (DO ALL IN ORDER — NO SHORTCUTS)
-
-1. **Absorb context (mandatory):**
-   - `research_state/research_protocol_fclr005.md` (read completely, treat as frozen)
-   - `research_state/fclr_h004_tracka_viable.json`
-   - `research_state/liquidation_sources_enumeration.md` (§1-4, §84-92)
-   - `research_state/binance_source_probe.md`
-   - `research_state/hypothesis_registry.json` (FCLR-H004)
-   - `AGENT_HANDOFF.md` (this file)
-
-2. **Verify cache completeness (confirm only):**
-   - Confirm all 5 symbols have extracted mark/index/premium 1h klines and monthly fundingRate CSVs for 2026-04-01..2026-08-06 under `research_state/data_cache/<SYM>_2026_*/`
-   - Confirm `research_state/data_cache/liquidations_full_20260807.csv` exists. If unsure, run `python scripts/h004_audit.py` once.
-
-3. **Build the Track A pipeline (CREATE NEW SCRIPT — HEAVY WORK):**
-   Create `scripts/h004_fclr005_pipeline.py` that is idempotent, checkpoint-resumable, and deterministic (fixed seed). It MUST:
-   - Load Bybit liquidation rows from `liquidations_full_20260807.csv` ONLY for the census arm (exchange == 'bybit'). Never use Binance/OKX to construct the binary presence/absence target.
-   - Merge with Binance 2026 features (mark/index/premium klines 1h + funding) at hourly UTC granularity for symbols {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT}.
-   - Construct hourly targets: event count and USD notional intensity for long_liquidated and short_liquidated separately. Treat hours with zero Bybit rows as "observed zero in census arm only" — NEVER infer "no liquidations" from missing data.
-   - Compute frozen predictors per `research_state/research_protocol_fclr005.md` §3 (RV1h/RV24h/RV168h, signed funding, |funding| percentile over trailing 90d with >=30 obs, mark/index premium, mark/EMA24 distance). No forward-fill, no zero-fill across splits.
-   - Enforce chronological train/val/test split within 2026-07-08..2026-08-06 with embargo/purge. Explicitly record that window length < 3x30d blocks.
-   - Implement B0 (persistence), B1 (RV-only), C1 (+funding), C2 (+price). Fixed logistic form, no hyperparameter search, no threshold tuning on outcomes.
-   - Run block bootstrap (over complete UTC hours), leave-one-symbol-out stability, deterministic seed. Compute Brier, log-loss, calibration slope/intercept, precision-recall, AUPRC.
-   - Write intermediate checkpoints (e.g., `research_state/.cache/fclr005_*.parquet` or JSON) to resume without recomputing.
-   - Log all row counts, merges, drops, and coverage gaps.
-
-4. **Execute evaluation (RUN THE PIPELINE):**
-   Run `python scripts/h004_fclr005_pipeline.py` to completion. Do not stop early. If it fails, fix the script (not the protocol) and resume from checkpoints.
-
-5. **Forensic logging (MANDATORY):**
-   Append a dated execution record to `research_state/liquidation_sources_enumeration.md` with UTC timestamp, script run, git SHA, rows merged by (exchange,symbol), symbol coverage, label window used, train/val/test boundaries, sample counts, events per hour stats, drops, and checkpoint paths.
-
-6. **Write deliverables & update state:**
-   - `research_state/evaluation_summary_FCLR005.md` — exact numbers, base rates, prevalence, coverage gaps, block counts, bootstrap CIs where computed, leave-one-symbol-out, and explicit PILOT/EXPLORATORY verdict stating cannot meet >=3-block confirmatory gate and FCLR-H004 remains BLOCKED for frozen 2024.
-   - `research_state/hypothesis_registry.json` — update FCLR-H004 status to PILOT_ONLY/EXPLORATORY_ONLY for 2026 window with evidence links to the new summary and protocol; keep BLOCKED for frozen 2024.
-   - `research_state/run_manifest.json` — append/update with run_id, git SHA, config hash, data hashes (liquidations_full_20260807.csv + feature files used), UTC start/end, sample counts, results status, blocker state.
-   - `AGENT_HANDOFF.md` — update with precise next actions and any new blockers.
-
-### HARD CONSTRAINTS (NON-NEGOTIABLE)
+## HARD CONSTRAINTS (NON-NEGOTIABLE)
 - No credentials, paid services/trials, manually supplied keys/files, user intervention. No bypassing auth/rate limits/terms.
 - No forecast gate re-runs (FCLR-001–004 sealed). No .github/workflows changes. No trading/risk-overlay/simulation/merge tracks until a forecast gate passes.
 - Observed (Track A) != modeled (Track B) != volatility-only (Track C). Capped sample != census. Absence != zero. Event-free intervals may NEVER be inferred from missing data.
 - Bybit = census arm only. Binance/OKX = lower-bound partial evidence only (never census, never binary absence/presence target).
-- Do NOT change `research_protocol_fclr005.md`. Do NOT threshold-shop. Do NOT claim confirmatory skill.
+- Do NOT change research_protocol_fclr005.md. Do NOT threshold-shop. Do NOT claim confirmatory skill.
 - Commit nothing merely to show activity.
 
-### VERIFICATION GATES (MUST PASS BEFORE STOPPING)
-- `python -m unittest tests.test_funding_correction_replication -v` → 10/10
-- `python scripts/h004_audit.py` → liquidations_full_20260807.csv schema/coverage confirmed
-- `research_state/liquidation_sources_enumeration.md` grew monotonically with FCLR-005 execution record (appended this session)
-- `scripts/h004_fclr005_pipeline.py` exists, is idempotent/resumable, and ran to completion
-- `research_state/evaluation_summary_FCLR005.md` exists with exact numbers + honest PILOT/EXPLORATORY verdict + explicit statement about <3 blocks
-- `research_state/hypothesis_registry.json` and `research_state/run_manifest.json` updated with evidence links
+## SINGLE NEXT TASK — MANDATORY, NO ESCAPE HATCH
 
-**START NOW. HEAVY WORK ON FCLR-005 / H004 TRACK A. Liquidation risk is the repo's namesake priority — this is the only liquidation path forward.**
+>[2026-10-30T06:25:00Z] NEXT SESSION: CLOSE OUT TRACK A — ESTABLISH WHETHER ANY CONFIRMATORY-FEASIBLE OBSERVED-LIQUIDATION SOURCE EXISTS
+
+The 2026 Bybit census window (2026-07-08..2026-08-06) is exhausted: one source, one ~30-day window, 0 confirmatory blocks. FCLR-005 is idempotent and complete — DO NOT re-run it as new work. No sealed gate may be re-run. No overlay may be built. The remaining liquidation-risk work is source discovery for a confirmatory-feasible window (>=3 non-overlapping 30-day blocks) or an explicit structural blocker.
+
+Required execution (heavy work, do all in order — no shortcuts):
+1. Resume research_state/liquidation_sources_enumeration.md immediately after the FCLR-005 execution record (§92+). Enumerate and probe at least TWO materially distinct new source families/methods (RESEARCH_PROMPT.md §16 — repeating a dead endpoint is not a distinct route) for an UNAUTHENTICATED observed-liquidation source covering a window with >=3 non-overlapping 30-day blocks (candidates: other years of HF crypto-liquidation-ticks if extended, other venue-native archives, academic/GitHub/Zenodo archives not yet probed).
+2. For each probe record: exact URL/endpoint, HTTP status, auth requirement, schema, license, earliest/latest timestamp, cadence, symbol/venue coverage, row counts, completeness verdict (census vs capped lower-bound), rejection reason if inadmissible. No credentials, no paid services, no manually supplied files.
+3. IF a confirmatory-feasible source is found: register a NEW protocol version (new experiment ID — never overwrite FCLR-005 or frozen FCLR-005 v1.0), pre-register targets/features/splits before outcome inspection, then build and run the Track A evaluation on that window.
+4. IF all routes are exhausted: write a structural-blocker note with exact evidence (endpoints tested, HTTP statuses, coverage gaps), set FCLR-H004 to NOT_SUPPORTED with evidence, update hypothesis_registry.json, run_manifest.json, and AGENT_HANDOFF.md, then stop cleanly. No workaround, no synthetic labels as observed liquidations, no threshold shopping.
+
+VERIFICATION GATES (MUST PASS BEFORE STOPPING)
+- python -m unittest tests.test_funding_correction_replication -v → 10/10 (regression guard)
+- python scripts/h004_audit.py → liquidations_full_20260807.csv schema/coverage confirmed (do NOT re-run the FCLR-005 pipeline; it is complete and deterministic)
+- research_state/liquidation_sources_enumeration.md grew monotonically this session (>=2 new probes recorded with verdicts)
+- research_state/hypothesis_registry.json, research_state/run_manifest.json, AGENT_HANDOFF.md updated with evidence links to any new probes or to the structural blocker
+
+START NOW. TRACK A 2026 PILOT IS DONE; THE ONLY LIQUIDATION-RISK WORK LEFT IS A NEW SOURCE OR A DOCUMENTED STRUCTURAL BLOCKER.

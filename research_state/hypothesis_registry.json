@@ -107,16 +107,26 @@
       "claim": "Funding extremes predict observed forced-liquidation events or liquidation-notional intensity.",
       "estimand": "Event/liquidation-notional intensity normalized by open interest or volume.",
       "directional_claim": "Funding features add predictive value for observed liquidations.",
-      "status": "BLOCKED",
-      "status_evidence": "research_state/binance_source_probe.md: no liquidationSnapshot archive found (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.",
-      "prior_tests": [],
-      "next_falsification_test": "Enumerate and test additional admissible public liquidation sources (academic/GitHub/Zenodo/Hugging Face archives, other venue-native historical archives) before concluding Track A is unviable; do not infer event-free intervals from missing data. If exhaustively impossible, document structural evidence, propose the smallest admissible scope expansion (different venue/year/window) with a concrete label-construction plan, or state Tracks B/C only.",
+      "status": "EXPLORATORY_ONLY",
+      "status_evidence": "2024 frozen windows: BLOCKED (research_state/binance_source_probe.md: Binance liquidationSnapshot HTTP 404; fapi forceOrders HTTP 451 restricted location; no Bybit/OKX/Deribit unauthenticated liquidation census; HF/Zenodo/GitHub dead ends — research_state/liquidation_sources_enumeration.md §1-4, §84-92). 2026 expansion: EXPLORATORY_ONLY / PILOT via experiment FCLR-005 (research_state/research_protocol_fclr005.md v1.0 frozen before outcome inspection; scripts/h004_fclr005_pipeline.py; research_state/evaluation_summary_FCLR005.md; research_state/run_manifest.json fclr005 record).",
+      "prior_tests": [
+        {
+          "experiment_id": "FCLR-005",
+          "result": "Panel 3,520 hourly rows (train 1,760 / val 880 / test 880), label window 2026-07-08T16:42:32Z..2026-08-06T23:59:42Z, Bybit census labels vs Binance 2026 features, 5 symbols. Test base rates: long 0.480682 (423/880 events), short 0.419318 (369/880 events). Primary contrast C2 vs B1 on Brier: long 0.251629 vs 0.251538 (+0.000091, C2 negligibly worse); short 0.243571 vs 0.244900 (-0.001329, negligible). C2 vs B0: long worse (0.251629 vs 0.250713); short negligibly better (0.243571 vs 0.245027). Block-bootstrap 95% CIs overlap across models; leave-one-symbol-out Brier deltas within +/-0.004221. Test window holds 0 non-overlapping 30-day blocks.",
+          "verdict": "PILOT/EXPLORATORY_ONLY on the 2026 window. No incremental skill of funding+price features (C2) over RV-only (B1) or persistence (B0); directional claim NOT_SUPPORTED on this panel. Confirmatory gate NOT MET (< 3 blocks). FCLR-H004 remains BLOCKED for frozen 2024."
+        }
+      ],
+      "next_falsification_test": "Confirmatory-feasible Track A requires an admissible observed-liquidation source with >=3 non-overlapping 30-day evaluation blocks. The HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (single ~30-day window; exhausted by FCLR-005). All 2024 routes are dead (binance_source_probe.md; enumeration §1-4, §84-92). Next: enumerate and test at least two materially distinct new source families/methods (RESEARCH_PROMPT.md §16) for a source with a confirmatory-feasible window, or register a new protocol version for a different estimand. Do NOT re-run FCLR-005 (idempotent, complete) or sealed FCLR-001-004 gates.",
       "links": [
         "research_state/binance_source_probe.md",
-        "RESEARCH_PROMPT.md",
-        "research_state/research_protocol_fclr004.md"
+        "research_state/liquidation_sources_enumeration.md",
+        "research_state/research_protocol_fclr005.md",
+        "research_state/evaluation_summary_FCLR005.md",
+        "scripts/h004_fclr005_pipeline.py",
+        "research_state/run_manifest.json",
+        "RESEARCH_PROMPT.md"
       ],
-      "notes": "FCLR-004 pre-registered (research_state/research_protocol_fclr004.md) but sealed/unexecuted. Forecast gates FCLR-001–004 are sealed (NOT_MET/BLOCKED): do not re-run. Track A source discovery is the only unblocked liquidation-risk path."
+      "notes": "FCLR-004 pre-registered (research_state/research_protocol_fclr004.md) but sealed/unexecuted. Forecast gates FCLR-001–004 are sealed (NOT_MET/BLOCKED): do not re-run. Hourly presence target has high base rate (~0.4-0.48) because any Bybit census row in an hour counts as an event; treat as observed-presence intensity, not a rare event. Capped sample (Binance/OKX) != census; absence != zero; no event-free inference from missing data."
     }
   ]
 }

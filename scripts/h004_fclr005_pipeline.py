@@ -1,11 +1,23 @@
 #!/usr/bin/env python3
+"""FCLR-005 Track A pipeline: observed liquidation outcomes on the 2026 Bybit census.
+
+Idempotent, checkpoint-resumable, deterministic (fixed seed). Builds the hourly
+(binance feature × bybit label) panel for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT},
+fits fixed-form logistic models B0/B1/C1/C2, and reports Brier / log-loss /
+calibration slope-intercept / precision-recall / AUPRC with block-bootstrap
+uncertainty and leave-one-symbol-out stability. PILOT/EXPLORATORY ONLY: the
+~30-day label window cannot satisfy the >=3 non-overlapping 30-day confirmatory
+gate, so no confirmatory skill is claimed and FCLR-H004 remains BLOCKED for
+frozen 2024.
+"""
 from __future__ import annotations
 
 import csv
 import json
 import math
 import random
-from collections import defaultdict
+import subprocess
+from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import hashlib
@@ -17,6 +29,8 @@ RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
 HYP = REPO / "research_state" / "hypothesis_registry.json"
 OUT_SUM = REPO / "research_state" / "evaluation_summary_FCLR005.md"
 LIQ_ENUM = REPO / "research_state" / "liquidation_sources_enumeration.md"
+CKPT_DIR = REPO / "research_state" / ".cache"
+CKPT_PANEL = CKPT_DIR / "fclr005_panel.json"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 SEED = 123456789
@@ -27,6 +41,8 @@ LABEL_END = datetime(2026, 8, 6, 23, 59, 42, tzinfo=timezone.utc)
 FEATURE_START = datetime(2026, 4, 1, 0, 0, 0, tzinfo=timezone.utc)
 
 EPS = 1e-12
+BOOTSTRAP_REPLICATES = 1000
+BOOTSTRAP_SEED = SEED + 1
 
 
 def ts_to_dt(ts_ms):
@@ -41,6 +57,10 @@ def dt_to_iso_z(dt):
     return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def iso_to_dt(s):
+    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+
+
 def sha256_file(p):
     h = hashlib.sha256()
     with open(p, 'rb') as f:
@@ -49,154 +69,55 @@ def sha256_file(p):
     return h.hexdigest()
 
 
-def find_mark_csv(sym, date_str):
-    for base in [CACHE]:
-        if not base.exists():
-            continue
-        for sub in base.iterdir():
-            if not sub.is_dir():
-                continue
-            p1 = sub / f"markPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p1.exists():
-                return p1
-            p1b = sub / f"markPriceKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p1b.exists():
-                return p1b
-            for p in sub.rglob(f"{sym}-1h-{date_str}.csv"):
-                sp = str(p)
-                if 'markPrice' in sp:
-                    return p
-    return None
+def git_sha():
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(REPO), "rev-parse", "HEAD"],
+            capture_output=True, text=True, check=True,
+        )
+        return out.stdout.strip()
+    except Exception:
+        return "unknown"
 
 
-def find_funding_csv(sym, month):
-    for base in [CACHE]:
-        if not base.exists():
+def find_file(kind, sym, date_str_or_month):
+    """Locate an extracted CSV for kind in {mark,index,premium} (daily) or funding (monthly)."""
+    if not CACHE.exists():
+        return None
+    if kind == "funding":
+        patterns = [
+            f"{sym}-fundingRate-{date_str_or_month}/{sym}-fundingRate-{date_str_or_month}.csv",
+            f"{sym}-fundingRate-{date_str_or_month}.csv",
+        ]
+    else:
+        prefix = {"mark": "markPriceKlines", "index": "indexPriceKlines",
+                  "premium": "premiumIndexKlines"}[kind]
+        patterns = [
+            f"{prefix}-{date_str_or_month}/{sym}-1h-{date_str_or_month}.csv",
+            f"{prefix}-{date_str_or_month}/{sym}-1h-{date_str_or_month}/{sym}-1h-{date_str_or_month}.csv",
+        ]
+    for sub in CACHE.iterdir():
+        if not sub.is_dir():
             continue
-        for sub in base.iterdir():
-            if not sub.is_dir():
-                continue
-            p = sub / f"{sym}-fundingRate-{month}" / f"{sym}-fundingRate-{month}.csv"
+        for rel in patterns:
+            p = sub / rel
             if p.exists():
                 return p
-            p2 = sub / f"{sym}-fundingRate-{month}.csv"
-            if p2.exists():
-                return p2
-            for p in sub.rglob(f"{sym}-fundingRate-{month}.csv"):
+        for p in sub.rglob(f"{sym}-1h-{date_str_or_month}.csv" if kind != "funding" else f"{sym}-fundingRate-{date_str_or_month}.csv"):
+            sp = str(p)
+            if kind == "funding" or f"{kind}Price" in sp or kind == "premium" and "premiumIndex" in sp:
                 return p
     return None
 
 
-def find_index_csv(sym, date_str):
-    for base in [CACHE]:
-        if not base.exists():
-            continue
-        for sub in base.iterdir():
-            if not sub.is_dir():
-                continue
-            p1 = sub / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p1.exists():
-                return p1
-            p1b = sub / f"indexPriceKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p1b.exists():
-                return p1b
-            for p in sub.rglob(f"{sym}-1h-{date_str}.csv"):
-                sp = str(p)
-                if 'indexPrice' in sp:
-                    return p
-    return None
-
-
-def find_premium_csv(sym, date_str):
-    for base in [CACHE]:
-        if not base.exists():
-            continue
-        for sub in base.iterdir():
-            if not sub.is_dir():
-                continue
-            p1 = sub / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p1.exists():
-                return p1
-            p1b = sub / f"premiumIndexKlines-{date_str}" / f"{sym}-1h-{date_str}" / f"{sym}-1h-{date_str}.csv"
-            if p1b.exists():
-                return p1b
-            for p in sub.rglob(f"{sym}-1h-{date_str}.csv"):
-                sp = str(p)
-                if 'premiumIndex' in sp:
-                    return p
-    return None
-
-
-def load_mark_series(sym, start_dt, end_dt):
+def load_series(kind, sym, start_dt, end_dt):
     from datetime import timedelta
     series = []
     cur = start_dt.replace(hour=0, minute=0, second=0, microsecond=0)
     end_day = end_dt.replace(hour=0, minute=0, second=0, microsecond=0)
     while cur <= end_day:
         date_str = cur.strftime("%Y-%m-%d")
-        csvp = find_mark_csv(sym, date_str)
-        if csvp and csvp.exists():
-            try:
-                with csvp.open() as f:
-                    reader = csv.DictReader(f)
-                    for row in reader:
-                        try:
-                            ts_ms = int(row['open_time'])
-                            ts_dt = ts_to_dt(ts_ms)
-                            if ts_dt < start_dt - timedelta(hours=2) or ts_dt > end_dt + timedelta(hours=2):
-                                continue
-                            close = float(row['close'])
-                            series.append((ts_dt.replace(minute=0, second=0, microsecond=0), close))
-                        except Exception:
-                            continue
-            except Exception:
-                pass
-        cur += timedelta(days=1)
-    d = {}
-    for k, v in series:
-        d[k] = v
-    return d
-
-
-def load_index_series(sym, start_dt, end_dt):
-    from datetime import timedelta
-    series = []
-    cur = start_dt.replace(hour=0, minute=0, second=0, microsecond=0)
-    end_day = end_dt.replace(hour=0, minute=0, second=0, microsecond=0)
-    while cur <= end_day:
-        date_str = cur.strftime("%Y-%m-%d")
-        csvp = find_index_csv(sym, date_str)
-        if csvp and csvp.exists():
-            try:
-                with csvp.open() as f:
-                    reader = csv.DictReader(f)
-                    for row in reader:
-                        try:
-                            ts_ms = int(row['open_time'])
-                            ts_dt = ts_to_dt(ts_ms)
-                            if ts_dt < start_dt - timedelta(hours=2) or ts_dt > end_dt + timedelta(hours=2):
-                                continue
-                            close = float(row['close'])
-                            series.append((ts_dt.replace(minute=0, second=0, microsecond=0), close))
-                        except Exception:
-                            continue
-            except Exception:
-                pass
-        cur += timedelta(days=1)
-    d = {}
-    for k, v in series:
-        d[k] = v
-    return d
-
-
-def load_premium_series(sym, start_dt, end_dt):
-    from datetime import timedelta
-    series = []
-    cur = start_dt.replace(hour=0, minute=0, second=0, microsecond=0)
-    end_day = end_dt.replace(hour=0, minute=0, second=0, microsecond=0)
-    while cur <= end_day:
-        date_str = cur.strftime("%Y-%m-%d")
-        csvp = find_premium_csv(sym, date_str)
+        csvp = find_file(kind, sym, date_str)
         if csvp and csvp.exists():
             try:
                 with csvp.open() as f:
@@ -223,7 +144,7 @@ def load_premium_series(sym, start_dt, end_dt):
 def load_funding_series(sym, months):
     rows = []
     for month in months:
-        csvp = find_funding_csv(sym, month)
+        csvp = find_file("funding", sym, month)
         if not csvp or not csvp.exists():
             continue
         try:
@@ -239,8 +160,7 @@ def load_funding_series(sym, months):
         except Exception:
             continue
     rows.sort(key=lambda x: x[0])
-    dedup = []
-    seen = set()
+    dedup, seen = [], set()
     for ts, fr in rows:
         if ts in seen:
             continue
@@ -251,8 +171,7 @@ def load_funding_series(sym, months):
 
 def funding_months_up_to(end_ym):
     y, m = end_ym[:7].split('-')
-    out = []
-    cur_y, cur_m = 2026, 4
+    out, cur_y, cur_m = [], 2026, 4
     end_y, end_m = int(y), int(m)
     while (cur_y, cur_m) <= (end_y, end_m):
         out.append(f"{cur_y}-{cur_m:02d}")
@@ -287,8 +206,10 @@ def fit_logistic(X, y, lr=0.01, epochs=1500):
         return [0.0] * (len(X[0]) + 1) if X else [0.0]
     d = len(X[0])
     w = [0.0] * (d + 1)
+    prev_loss = float('inf')
     for _ in range(epochs):
         gw = [0.0] * (d + 1)
+        loss = 0.0
         for i in range(n):
             xi = X[i]
             z = w[0]
@@ -299,12 +220,18 @@ def fit_logistic(X, y, lr=0.01, epochs=1500):
                 z += w[j + 1] * val
             p = sigmoid(z)
             err = p - y[i]
+            loss += -(y[i] * math.log(min(max(p, 1e-15), 1 - 1e-15))
+                      + (1 - y[i]) * math.log(1 - min(max(p, 1e-15), 1 - 1e-15)))
             gw[0] += err
             for j in range(d):
                 val = xi[j]
                 if val is None or (isinstance(val, float) and (math.isnan(val) or math.isinf(val))):
                     val = 0.0
                 gw[j + 1] += err * val
+        loss /= n
+        if abs(prev_loss - loss) < 1e-10:
+            break
+        prev_loss = loss
         for j in range(len(w)):
             w[j] -= lr * gw[j] / n
     return w
@@ -324,10 +251,7 @@ def brier_score(y, p):
     n = len(y)
     if n == 0:
         return 0.0
-    s = 0.0
-    for i in range(n):
-        s += (p[i] - y[i]) ** 2
-    return s / n
+    return sum((pi - yi) ** 2 for pi, yi in zip(p, y)) / n
 
 
 def log_loss_score(y, p):
@@ -335,317 +259,474 @@ def log_loss_score(y, p):
     if n == 0:
         return 0.0
     s = 0.0
-    for i in range(n):
-        pp = min(max(p[i], 1e-15), 1 - 1e-15)
-        s += -(y[i] * math.log(pp) + (1 - y[i]) * math.log(1 - pp))
+    for yi, pi in zip(y, p):
+        pp = min(max(pi, 1e-15), 1 - 1e-15)
+        s += -(yi * math.log(pp) + (1 - yi) * math.log(1 - pp))
     return s / n
 
 
 def precision_recall_auc(y, p):
-    # simple PR AUC
     pairs = list(zip(p, y))
     pairs.sort(reverse=True)
-    tp = 0
-    fp = 0
+    tp = fp = 0
     fn = sum(y)
-    tn = len(y) - fn
-    prev_prec = 1.0
-    prev_rec = 0.0
-    auc = 0.0
+    prev_prec, prev_rec, auc = 1.0, 0.0, 0.0
     for pp, yy in pairs:
         if yy == 1:
             tp += 1
             fn -= 1
         else:
             fp += 1
-            tn -= 1
-        if tp + fp == 0:
-            prec = 1.0
-        else:
-            prec = tp / (tp + fp)
-        if tp + fn == 0:
-            rec = 0.0
-        else:
-            rec = tp / (tp + fn)
+        prec = 1.0 if tp + fp == 0 else tp / (tp + fp)
+        rec = 0.0 if tp + fn == 0 else tp / (tp + fn)
         auc += (rec - prev_rec) * (prec + prev_prec) / 2.0
-        prev_prec = prec
-        prev_rec = rec
+        prev_prec, prev_rec = prec, rec
     return auc
+
+
+def precision_at_base_rate(y, p):
+    n = len(y)
+    if n == 0:
+        return 0.0, 0.0
+    base = sum(y) / n
+    thr = sorted(p)[max(0, int(math.ceil((1.0 - base) * n)) - 1)] if n > 0 else 0.5
+    tp = fp = 0
+    for yi, pi in zip(y, p):
+        if pi >= thr:
+            if yi == 1:
+                tp += 1
+            else:
+                fp += 1
+    prec = 1.0 if tp + fp == 0 else tp / (tp + fp)
+    return prec, thr
+
+
+def calibration_slope_intercept(y, p):
+    # Logistic calibration of y on logit(p); standardized logit for stability,
+    # then rescaled to raw logit units: intercept/slope of logit(p_cal) = a + b*logit(p).
+    logits = []
+    for pi in p:
+        pp = min(max(pi, 1e-15), 1 - 1e-15)
+        logits.append(math.log(pp / (1.0 - pp)))
+    m = sum(logits) / len(logits)
+    sd = math.sqrt(sum((v - m) ** 2 for v in logits) / len(logits)) or 1.0
+    X = [[(v - m) / sd] for v in logits]
+    w = fit_logistic(X, y, lr=0.01, epochs=5000)
+    slope = w[1] / sd
+    intercept = w[0] - w[1] * m / sd
+    return intercept, slope
+
+
+def block_bootstrap(hour_pairs, hours, metric_fn, replicates, seed):
+    rng = random.Random(seed)
+    n = len(hours)
+    if n == 0:
+        return {'mean': 0.0, 'ci_lo': 0.0, 'ci_hi': 0.0, 'replicates': replicates}
+    rows_by_hour = defaultdict(list)
+    for h, pairs in hour_pairs.items():
+        rows_by_hour[h] = pairs
+    stats = []
+    for _ in range(replicates):
+        draw = [hours[rng.randrange(n)] for _ in range(n)]
+        sel = []
+        for h in draw:
+            sel.extend(rows_by_hour[h])
+        ys = [y for y, _ in sel]
+        ps = [p for _, p in sel]
+        stats.append(metric_fn(ys, ps))
+    stats.sort()
+    lo_i = max(0, int(0.025 * replicates) - 1)
+    hi_i = min(len(stats) - 1, int(0.975 * replicates))
+    return {
+        'mean': sum(stats) / len(stats),
+        'ci_lo': stats[lo_i],
+        'ci_hi': stats[hi_i],
+        'replicates': replicates,
+    }
+
+
+def model_feature_row(r, model):
+    base = [r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)),
+            math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0]
+    if model == 'B1':
+        return base
+    if model == 'C1':
+        return base + [r['fund_signed'], r['fund_abs_pct']]
+    if model == 'C2':
+        return base + [r['fund_signed'], r['fund_abs_pct'], r['prem_feat'], r['ema_dist']]
+    return base
+
+
+def fit_predict(train_rows, test_rows, model, yname):
+    Xtr, ytr = [], []
+    for r in train_rows:
+        Xtr.append(model_feature_row(r, model))
+        ytr.append(r[yname])
+    w = fit_logistic(Xtr, ytr)
+    return [predict_logistic(w, model_feature_row(r, model)) for r in test_rows]
 
 
 def main():
     start_time = datetime.now(timezone.utc)
     print("FCLR-005 pipeline starting", flush=True)
-    # Load liquidations bybit census
+    CKPT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # ---- 1. Load Bybit liquidation census (label side) ----
     liq_by_hp = defaultdict(lambda: {'long_count': 0, 'short_count': 0, 'long_usd': 0.0, 'short_usd': 0.0})
+    per_exchange = Counter()
+    per_sym_exchange = Counter()
     total_rows = 0
     total_bybit = 0
+    target_bybit_rows = 0
     with LIQ.open() as f:
         reader = csv.DictReader(f)
         for row in reader:
             total_rows += 1
+            ex = (row.get('exchange') or '').strip().lower()
+            sym = (row.get('symbol') or '').strip()
+            per_exchange[ex] += 1
+            per_sym_exchange[(sym, ex)] += 1
+            if ex != 'bybit':
+                continue
+            if sym not in SYMBOLS:
+                continue
             try:
-                ex = (row.get('exchange') or '').strip().lower()
-                if ex != 'bybit':
-                    continue
-                sym = (row.get('symbol') or '').strip()
-                if sym not in SYMBOLS:
-                    continue
-                ev = (row.get('event') or '').strip()
                 ts_ms = int(row.get('ts_ms'))
-                ts_dt = ts_to_dt(ts_ms)
-                hp = (sym, ts_dt.replace(minute=0, second=0, microsecond=0))
-                usd = float(row.get('usd') or 0)
-                if ev == 'long_liquidated':
-                    liq_by_hp[hp]['long_count'] += 1
-                    liq_by_hp[hp]['long_usd'] += usd
-                    total_bybit += 1
-                elif ev == 'short_liquidated':
-                    liq_by_hp[hp]['short_count'] += 1
-                    liq_by_hp[hp]['short_usd'] += usd
-                    total_bybit += 1
             except Exception:
                 continue
-    print(f"Loaded: total_rows={total_rows} bybit_census={total_bybit}", flush=True)
+            ev = (row.get('event') or '').strip()
+            ts_dt = ts_to_dt(ts_ms).replace(minute=0, second=0, microsecond=0)
+            usd = float(row.get('usd') or 0)
+            hp = (sym, ts_dt)
+            target_bybit_rows += 1
+            if ev == 'long_liquidated':
+                liq_by_hp[hp]['long_count'] += 1
+                liq_by_hp[hp]['long_usd'] += usd
+                total_bybit += 1
+            elif ev == 'short_liquidated':
+                liq_by_hp[hp]['short_count'] += 1
+                liq_by_hp[hp]['short_usd'] += usd
+                total_bybit += 1
+    print(f"Loaded: total_rows={total_rows} bybit_census_target_symbols={target_bybit_rows}", flush=True)
 
+    # ---- 2. Load features ----
     months_fund = funding_months_up_to('2026-08')
     funding_all = {sym: load_funding_series(sym, months_fund) for sym in SYMBOLS}
-    print("Funding loaded", flush=True)
+    mark_maps = {sym: load_series('mark', sym, FEATURE_START, LABEL_END) for sym in SYMBOLS}
+    idx_maps = {sym: load_series('index', sym, FEATURE_START, LABEL_END) for sym in SYMBOLS}
+    prem_maps = {sym: load_series('premium', sym, FEATURE_START, LABEL_END) for sym in SYMBOLS}
+    print("Feature maps loaded", flush=True)
 
-    mark_maps = {sym: load_mark_series(sym, FEATURE_START, LABEL_END) for sym in SYMBOLS}
-    idx_maps = {sym: load_index_series(sym, FEATURE_START, LABEL_END) for sym in SYMBOLS}
-    prem_maps = {sym: load_premium_series(sym, FEATURE_START, LABEL_END) for sym in SYMBOLS}
-    print("Price maps loaded", flush=True)
-
+    # ---- 3. Build panel (checkpoint-resumable) ----
     panel_rows = []
-    for sym in SYMBOLS:
-        mark_map = mark_maps[sym]
-        idx_map = idx_maps[sym]
-        fund_ser = funding_all[sym]
-        fund_ser_sorted = sorted(fund_ser, key=lambda x: x[0])
-        cur = LABEL_START.replace(minute=0, second=0, microsecond=0)
-        end_h = LABEL_END.replace(minute=0, second=0, microsecond=0)
-        while cur <= end_h:
-            h_dt = cur
-            if h_dt < FEATURE_START + timedelta(days=90):
+    resumed = False
+    if CKPT_PANEL.exists():
+        try:
+            ckpt = json.loads(CKPT_PANEL.read_text())
+            if ckpt.get('label_start') == dt_to_iso_z(LABEL_START) \
+               and ckpt.get('label_end') == dt_to_iso_z(LABEL_END) \
+               and ckpt.get('symbols') == SYMBOLS:
+                for r in ckpt['rows']:
+                    r['hour'] = iso_to_dt(r['hour_iso'])
+                    panel_rows.append(r)
+                resumed = True
+                print(f"Resumed panel from checkpoint: {len(panel_rows)} rows", flush=True)
+        except Exception as e:
+            print(f"Checkpoint load failed ({e}); rebuilding", flush=True)
+            panel_rows = []
+
+    if not resumed:
+        drops = Counter()
+        for sym in SYMBOLS:
+            mark_map = mark_maps[sym]
+            idx_map = idx_maps[sym]
+            prem_map = prem_maps[sym]
+            fund_ser = sorted(funding_all[sym], key=lambda x: x[0])
+            cur = LABEL_START.replace(minute=0, second=0, microsecond=0)
+            end_h = LABEL_END.replace(minute=0, second=0, microsecond=0)
+            while cur <= end_h:
+                h_dt = cur
+                if h_dt < FEATURE_START + timedelta(days=90):
+                    drops['before_90d_funding_history'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                mark_c = mark_map.get(h_dt)
+                if mark_c is None or mark_c <= 0:
+                    drops['missing_mark'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                # RV (trailing up to 168h)
+                rv_list = []
+                for k in range(1, 169):
+                    hk = h_dt - timedelta(hours=k)
+                    hkm1 = h_dt - timedelta(hours=k - 1)
+                    ck = mark_map.get(hk)
+                    ckm1 = mark_map.get(hkm1)
+                    if ck is None or ckm1 is None or ck <= 0 or ckm1 <= 0:
+                        break
+                    rv_list.append(math.log(ckm1 / ck) ** 2)
+                if len(rv_list) < 24:
+                    drops['insufficient_rv_history'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                rv1h = rv_list[0]
+                rv24h = sum(rv_list[0:24])
+                rv168h = sum(rv_list[0:168]) if len(rv_list) >= 168 else None
+                # Signed funding (latest <= t)
+                latest_f, latest_f_ts = None, -10 ** 19
+                for fts, fr in fund_ser:
+                    fdt = ts_to_dt(fts)
+                    if fdt <= h_dt and fts > latest_f_ts:
+                        latest_f, latest_f_ts = fr, fts
+                if latest_f is None:
+                    drops['missing_funding'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                # |funding| percentile over preceding 90 days, >=30 obs
+                cutoff = h_dt - timedelta(days=90)
+                hist_abs = [abs(fr) for fts, fr in fund_ser
+                            if cutoff <= ts_to_dt(fts) < h_dt]
+                if len(hist_abs) < 30:
+                    drops['insufficient_funding_history'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                hist_abs_sorted = sorted(hist_abs)
+                af = abs(latest_f)
+                cnt_le = sum(1 for v in hist_abs_sorted if v <= af + 1e-18)
+                fund_pct = cnt_le / len(hist_abs_sorted)
+                # Premium (contemporaneous mark/index)
+                idx_c = idx_map.get(h_dt)
+                prem_feat = (mark_c / idx_c - 1.0) if (idx_c is not None and idx_c > 0) else None
+                if prem_feat is None:
+                    drops['missing_premium'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                # EMA24 distance (fully closed prior bars only)
+                ema_series = []
+                for k in range(0, 24):
+                    ck = mark_map.get(h_dt - timedelta(hours=k))
+                    if ck is None:
+                        break
+                    ema_series.append(ck)
+                if len(ema_series) < 24:
+                    drops['insufficient_ema_history'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                ema24v_res = ema(list(reversed(ema_series)), 24)
+                if ema24v_res is None or ema24v_res <= 0:
+                    drops['ema_invalid'] += 1
+                    cur += timedelta(hours=1)
+                    continue
+                ema_dist = mark_c / ema24v_res - 1.0
+                hp = (sym, h_dt)
+                lq = liq_by_hp.get(hp, {'long_count': 0, 'short_count': 0, 'long_usd': 0.0, 'short_usd': 0.0})
+                panel_rows.append({
+                    'sym': sym,
+                    'hour_iso': dt_to_iso_z(h_dt),
+                    'rv1h': rv1h,
+                    'rv24h': rv24h,
+                    'rv168h': rv168h if rv168h is not None else 0.0,
+                    'fund_signed': latest_f,
+                    'fund_abs_pct': fund_pct,
+                    'prem_feat': prem_feat,
+                    'ema_dist': ema_dist,
+                    'y_long': 1 if lq['long_count'] > 0 else 0,
+                    'y_short': 1 if lq['short_count'] > 0 else 0,
+                    'long_cnt': lq['long_count'],
+                    'short_cnt': lq['short_count'],
+                    'long_usd': lq['long_usd'],
+                    'short_usd': lq['short_usd'],
+                })
                 cur += timedelta(hours=1)
-                continue
-            mark_c = mark_map.get(h_dt)
-            if mark_c is None or mark_c <= 0:
-                cur += timedelta(hours=1)
-                continue
-            # RV
-            rv_list = []
-            for k in range(1, 169):
-                hk = h_dt - timedelta(hours=k)
-                hkm1 = h_dt - timedelta(hours=k - 1)
-                ck = mark_map.get(hk)
-                ckm1 = mark_map.get(hkm1)
-                if ck is None or ckm1 is None or ck <= 0 or ckm1 <= 0:
-                    break
-                r = math.log(ckm1 / ck)
-                rv_list.append(r * r)
-            if len(rv_list) < 24:
-                cur += timedelta(hours=1)
-                continue
-            rv1h = rv_list[0]
-            rv24h = sum(rv_list[0:24])
-            rv168h = sum(rv_list[0:168]) if len(rv_list) >= 168 else None
-            # funding
-            latest_f = None
-            latest_f_ts = -10 ** 19
-            for fts, fr in fund_ser_sorted:
-                fdt = ts_to_dt(fts)
-                if fdt <= h_dt and fts > latest_f_ts:
-                    latest_f = fr
-                    latest_f_ts = fts
-            if latest_f is None:
-                cur += timedelta(hours=1)
-                continue
-            hist_abs = []
-            cutoff = h_dt - timedelta(days=90)
-            for fts, fr in fund_ser_sorted:
-                fdt = ts_to_dt(fts)
-                if fdt >= cutoff and fdt < h_dt:
-                    hist_abs.append(abs(fr))
-            if len(hist_abs) < 30:
-                cur += timedelta(hours=1)
-                continue
-            hist_abs_sorted = sorted(hist_abs)
-            af = abs(latest_f)
-            cnt_le = 0
-            for v in hist_abs_sorted:
-                if v <= af + 1e-18:
-                    cnt_le += 1
-            fund_pct = cnt_le / len(hist_abs_sorted)
-            # premium
-            idx_c = idx_map.get(h_dt)
-            if idx_c is not None and idx_c > 0:
-                prem_feat = mark_c / idx_c - 1.0
-            else:
-                prem_feat = None
-            # ema24
-            ema_series = []
-            for k in range(0, 24):
-                hk = h_dt - timedelta(hours=k)
-                ck = mark_map.get(hk)
-                if ck is None:
-                    break
-                ema_series.append(ck)
-            if len(ema_series) < 24:
-                cur += timedelta(hours=1)
-                continue
-            seq = list(reversed(ema_series))
-            ema24v_res = ema(seq, 24)
-            if ema24v_res is None or ema24v_res <= 0:
-                cur += timedelta(hours=1)
-                continue
-            ema_dist = mark_c / ema24v_res - 1.0
-            hp = (sym, h_dt)
-            lq = liq_by_hp.get(hp, {'long_count': 0, 'short_count': 0, 'long_usd': 0.0, 'short_usd': 0.0})
-            y_long = 1 if lq['long_count'] > 0 else 0
-            y_short = 1 if lq['short_count'] > 0 else 0
-            panel_rows.append({
-                'sym': sym,
-                'hour': h_dt,
-                'rv1h': rv1h,
-                'rv24h': rv24h,
-                'rv168h': rv168h if rv168h is not None else 0.0,
-                'fund_signed': latest_f,
-                'fund_abs_pct': fund_pct,
-                'prem_feat': prem_feat if prem_feat is not None else 0.0,
-                'ema_dist': ema_dist,
-                'y_long': y_long,
-                'y_short': y_short,
-                'long_cnt': lq['long_count'],
-                'short_cnt': lq['short_count'],
-                'long_usd': lq['long_usd'],
-                'short_usd': lq['short_usd'],
-            })
-            cur += timedelta(hours=1)
-    print(f"Panel rows built: {len(panel_rows)}", flush=True)
-    (REPO / "research_state" / ".cache").mkdir(parents=True, exist_ok=True)
-    ckpt = REPO / "research_state" / ".cache" / "fclr005_panel_checkpoint.json"
-    ckpt.write_text(json.dumps({'count': len(panel_rows), 'built_at': dt_to_iso_z(datetime.now(timezone.utc)), 'label_start': dt_to_iso_z(LABEL_START), 'label_end': dt_to_iso_z(LABEL_END)}))
-    print("Checkpoint saved", flush=True)
-    # Chrono split
+        print(f"Panel rows built: {len(panel_rows)}, drops: {dict(drops)}", flush=True)
+        ckpt = {
+            'label_start': dt_to_iso_z(LABEL_START),
+            'label_end': dt_to_iso_z(LABEL_END),
+            'symbols': SYMBOLS,
+            'built_at': dt_to_iso_z(datetime.now(timezone.utc)),
+            'count': len(panel_rows),
+            'rows': panel_rows,
+        }
+        CKPT_PANEL.write_text(json.dumps(ckpt))
+        print("Panel checkpoint saved", flush=True)
+
+    for r in panel_rows:
+        r['hour'] = iso_to_dt(r['hour_iso'])
+
+    # ---- 4. Chronological train/val/test split ----
     hours_sorted = sorted(set(r['hour'] for r in panel_rows))
     n_h = len(hours_sorted)
-    # simple split: train 50%, val 25%, test 25% chronologically
-    train_end = hours_sorted[int(n_h * 0.5) - 1] if n_h > 0 else hours_sorted[0]
+    train_end = hours_sorted[int(n_h * 0.5) - 1] if n_h > 0 else None
     val_end = hours_sorted[int(n_h * 0.75) - 1] if n_h > 0 else train_end
+
     def get_split(h):
+        if train_end is None:
+            return 'test'
         if h <= train_end:
             return 'train'
-        elif h <= val_end:
+        if h <= val_end:
             return 'val'
-        else:
-            return 'test'
+        return 'test'
+
     for r in panel_rows:
         r['split'] = get_split(r['hour'])
+
+    train_rows = [r for r in panel_rows if r['split'] == 'train']
+    val_rows = [r for r in panel_rows if r['split'] == 'val']
+    test_rows = [r for r in panel_rows if r['split'] == 'test']
+
+    # test window block count (non-overlapping 30-day blocks)
+    test_hours = sorted(set(r['hour'] for r in test_rows))
+    block_count = 0
+    if test_hours:
+        cur_block = test_hours[0]
+        end_all = test_hours[-1]
+        while cur_block <= end_all:
+            block_end = cur_block + timedelta(days=30) - timedelta(hours=1)
+            if block_end <= end_all:
+                block_count += 1
+            cur_block = block_end + timedelta(hours=1)
+
     results = {}
     for target in ['long', 'short']:
         yname = f'y_{target}'
         results[target] = {}
+        train_base = (sum(r[yname] for r in train_rows) / len(train_rows)) if train_rows else 0.0
+        test_base = (sum(r[yname] for r in test_rows) / len(test_rows)) if test_rows else 0.0
+        test_prev = sum(1 for r in test_rows if r[yname] == 1)
         for model in ['B0', 'B1', 'C1', 'C2']:
-            # B0 persistence: use lagged target? use trailing count prevalence as proxy - simple persistence of base rate by hour? or just use previous hour's target mean? use mean of previous same symbol in train? easier: use trailing average of target in train window
-            # compute persistence
-            train_rows_all = [r for r in panel_rows if r['split'] == 'train']
-            # base rate
-            base_train = sum(r[yname] for r in train_rows_all) / len(train_rows_all) if train_rows_all else 0.0
-            test_rows = [r for r in panel_rows if r['split'] == 'test']
             if model == 'B0':
-                p_pred = [base_train for _ in test_rows]
-            elif model == 'B1':
-                # RV only
-                Xtr = []
-                ytr = []
-                for r in train_rows_all:
-                    Xtr.append([r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)), math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0])
-                    ytr.append(r[yname])
-                w = fit_logistic(Xtr, ytr)
-                p_pred = []
-                for r in test_rows:
-                    x = [r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)), math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0]
-                    p_pred.append(predict_logistic(w, x))
-            elif model == 'C1':
-                Xtr = []
-                ytr = []
-                for r in train_rows_all:
-                    Xtr.append([r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)), math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0, r['fund_signed'], r['fund_abs_pct']])
-                    ytr.append(r[yname])
-                w = fit_logistic(Xtr, ytr)
-                p_pred = []
-                for r in test_rows:
-                    x = [r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)), math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0, r['fund_signed'], r['fund_abs_pct']]
-                    p_pred.append(predict_logistic(w, x))
-            elif model == 'C2':
-                Xtr = []
-                ytr = []
-                for r in train_rows_all:
-                    Xtr.append([r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)), math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0, r['fund_signed'], r['fund_abs_pct'], r['prem_feat'], r['ema_dist']])
-                    ytr.append(r[yname])
-                w = fit_logistic(Xtr, ytr)
-                p_pred = []
-                for r in test_rows:
-                    x = [r['rv1h'], r['rv24h'], math.log(max(r['rv24h'], 1e-18)), math.log(max(r['rv168h'], 1e-18)) if r['rv168h'] > 0 else -20.0, r['fund_signed'], r['fund_abs_pct'], r['prem_feat'], r['ema_dist']]
-                    p_pred.append(predict_logistic(w, x))
+                p_pred = [train_base for _ in test_rows]
             else:
-                p_pred = [base_train for _ in test_rows]
+                p_pred = fit_predict(train_rows, test_rows, model, yname)
             y_test = [r[yname] for r in test_rows]
+            hour_pairs = defaultdict(list)
+            for r, pp in zip(test_rows, p_pred):
+                hour_pairs[r['hour']].append((r[yname], pp))
             bs = brier_score(y_test, p_pred)
             ll = log_loss_score(y_test, p_pred)
-            prauc = precision_recall_auc(y_test, p_pred)
-            results[target][model] = {'brier': bs, 'logloss': ll, 'prauc': prauc, 'n_test': len(test_rows), 'base_rate': sum(y_test)/len(y_test) if y_test else 0.0}
-    # Write summary
+            auc = precision_recall_auc(y_test, p_pred)
+            prec_br, thr_br = precision_at_base_rate(y_test, p_pred)
+            ci, slope = calibration_slope_intercept(y_test, p_pred)
+            boot_bs = block_bootstrap(hour_pairs, test_hours,
+                                      lambda ys, ps: brier_score(ys, ps),
+                                      BOOTSTRAP_REPLICATES, BOOTSTRAP_SEED)
+            boot_ll = block_bootstrap(hour_pairs, test_hours,
+                                      lambda ys, ps: log_loss_score(ys, ps),
+                                      BOOTSTRAP_REPLICATES, BOOTSTRAP_SEED)
+            results[target][model] = {
+                'brier': bs, 'logloss': ll, 'prauc': auc,
+                'brier_boot': boot_bs, 'logloss_boot': boot_ll,
+                'cal_intercept': ci, 'cal_slope': slope,
+                'precision_at_base_rate': prec_br, 'base_rate_threshold': thr_br,
+                'n_test': len(test_rows), 'events_test': int(test_prev),
+                'base_rate': test_base, 'train_base_rate': train_base,
+            }
+
+    # ---- 5. Leave-one-symbol-out stability (primary contrast C2 vs B1) ----
+    loso = {}
+    for held in SYMBOLS:
+        tr = [r for r in panel_rows if r['sym'] != held and r['split'] == 'train']
+        te = [r for r in panel_rows if r['sym'] == held and r['split'] == 'test']
+        loso[held] = {}
+        for target in ['long', 'short']:
+            yname = f'y_{target}'
+            if not te or not tr:
+                loso[held][target] = {'n_test': 0, 'skipped': True}
+                continue
+            p_b1 = fit_predict(tr, te, 'B1', yname)
+            p_c2 = fit_predict(tr, te, 'C2', yname)
+            ys = [r[yname] for r in te]
+            loso[held][target] = {
+                'n_test': len(te),
+                'events': int(sum(ys)),
+                'base_rate': sum(ys) / len(ys),
+                'brier_b1': brier_score(ys, p_b1),
+                'brier_c2': brier_score(ys, p_c2),
+                'brier_diff_c2_minus_b1': brier_score(ys, p_c2) - brier_score(ys, p_b1),
+            }
+
+    # ---- 6. Write evaluation summary ----
     end_time = datetime.now(timezone.utc)
     lines = []
-    lines.append(f"# FCLR-005 Evaluation Summary — Track A Observed Liquidation Outcomes (2026 pilot)")
-    lines.append(f"")
-    lines.append(f"**Experiment:** FCLR-005 (pre-registered, protocol frozen 2026-10-30T04:30:00Z)")
-    lines.append(f"**Status:** PILOT/EXPLORATORY_ONLY — ~30-day label window cannot satisfy >=3 non-overlapping 30-day blocks; FCLR-H004 remains BLOCKED for frozen 2024")
-    lines.append(f"**Run start:** {dt_to_iso_z(start_time)}  \n**Run end:** {dt_to_iso_z(end_time)}")
-    lines.append(f"**Git SHA:** $(git -C {REPO} rev-parse HEAD 2>&1 | tail -1)")
-    lines.append(f"")
-    lines.append(f"## Data provenance")
-    lines.append(f"- Liquidations: `{LIQ}` (HF ochinimus/crypto-liquidation-ticks, CC BY 4.0). total_rows={total_rows}, bybit_census_rows={total_bybit} (Binance/OKX treated as lower-bound only)")
-    lines.append(f"- Label window (Bybit): {dt_to_iso_z(LABEL_START)} .. {dt_to_iso_z(LABEL_END)}")
-    lines.append(f"- Feature cache: research_state/data_cache/<SYM>_2026_*/ (mark/index/premium 1h, funding monthly) — verified complete on disk")
-    lines.append(f"- Universe: {SYMBOLS}")
-    lines.append(f"- Panel rows after filtering: {len(panel_rows)}")
-    lines.append(f"- Split (chronological): train<= {dt_to_iso_z(train_end) if 'train_end' in locals() else 'n/a'}, val<= {dt_to_iso_z(val_end) if 'val_end' in locals() else 'n/a'}, test> val")
-    lines.append(f"- Block count: < 3 non-overlapping 30-day blocks in test window (pilot limitation — cannot meet confirmatory gate)")
-    lines.append(f"")
-    lines.append(f"## Results (hourly binary presence, Bybit census only)")
+    lines.append("# FCLR-005 Evaluation Summary — Track A Observed Liquidation Outcomes (2026 pilot)")
+    lines.append("")
+    lines.append("**Experiment:** FCLR-005 (protocol FCLR-005 v1.0, frozen 2026-10-30T04:30:00Z, pre-registered before outcome inspection)")
+    lines.append("**Status:** PILOT/EXPLORATORY_ONLY — ~30-day label window cannot satisfy the >=3 non-overlapping 30-day confirmatory gate; no confirmatory skill claimed; FCLR-H004 remains BLOCKED for frozen 2024")
+    lines.append(f"**Run start:** {dt_to_iso_z(start_time)}  |  **Run end:** {dt_to_iso_z(end_time)}")
+    lines.append(f"**Git SHA:** {git_sha()}")
+    lines.append("")
+    lines.append("## Data provenance")
+    lines.append(f"- Liquidations: `{LIQ}` (HF ochinimus/crypto-liquidation-ticks, CC BY 4.0, unauthenticated)")
+    lines.append(f"- Liquidation total_rows={total_rows}; bybit census rows (target symbols)={target_bybit_rows}; bybit exchange rows={per_exchange.get('bybit', 0)}")
+    lines.append(f"- Per exchange: {dict(sorted(per_exchange.items()))}")
+    lines.append(f"- Per symbol/exchange (target symbols, bybit): " + ", ".join(
+        f"{s}={per_sym_exchange.get((s, 'bybit'), 0)}" for s in SYMBOLS))
+    lines.append(f"- Binance/OKX rows excluded from the binary presence/absence target (undercounted lower-bound only; never census)")
+    lines.append(f"- Label window (Bybit census): {dt_to_iso_z(LABEL_START)} .. {dt_to_iso_z(LABEL_END)}")
+    lines.append(f"- Feature cache: research_state/data_cache/<SYM>_2026_*/ mark/index/premium 1h + monthly fundingRate, 2026-04-01..2026-08-06 (verified complete on disk)")
+    lines.append(f"- Universe: {SYMBOLS} (Binance mark-price features cross-referenced to Bybit liquidation labels)")
+    lines.append(f"- Panel rows after causal filtering: {len(panel_rows)}")
+    lines.append(f"- Split (chronological, by unique UTC hour): train<= {dt_to_iso_z(train_end) if train_end else 'n/a'}, val<= {dt_to_iso_z(val_end) if val_end else 'n/a'}, test> val")
+    lines.append(f"- Train rows={len(train_rows)}, test rows={len(test_rows)}")
+    lines.append(f"- Non-overlapping 30-day blocks in test window: {block_count} (< 3 required for confirmatory -> pilot limitation)")
+    lines.append("")
+    lines.append("## Results (hourly binary liquidation presence, Bybit census only)")
     for target in ['long', 'short']:
-        lines.append(f"### Target: {target}_liquidated (short/long liquidation events -> {target} side)")
+        lines.append(f"### Target: {target}_liquidated (Bybit '{target}_liquidated' events -> {target} side)")
+        lines.append(f"- Base rate (test): {results[target]['B0']['base_rate']:.6f}; events in test={results[target]['B0']['events_test']}/{results[target]['B0']['n_test']}")
         for model in ['B0', 'B1', 'C1', 'C2']:
             r = results[target][model]
-            lines.append(f"- {model}: Brier={r['brier']:.6f}, logloss={r['logloss']:.6f}, AUPRC={r['prauc']:.6f}, n_test={r['n_test']}, base_rate={r['base_rate']:.6f}")
-        lines.append(f"")
-    lines.append(f"## Notes")
-    lines.append(f"- Event-free intervals NOT inferred from missing data. Hours with zero Bybit rows = observed zero in census arm only.")
-    lines.append(f"- Binance/OKX rows excluded from census target (undercounted).")
-    lines.append(f"- No threshold tuning, no hyperparameter search. Fixed logistic form.")
-    lines.append(f"- FCLR-005 is PILOT/EXPLORATORY ONLY. Does NOT clear any sealed FCLR-001-004 gate. FCLR-H004 remains BLOCKED for frozen 2024.")
-    lines.append(f"- This summary is generated by scripts/h004_fclr005_pipeline.py (idempotent).")
-    OUT_SUM.write_text('\n'.join(lines))
+            bb, bl = r['brier_boot'], r['logloss_boot']
+            lines.append(
+                f"- {model}: Brier={r['brier']:.6f} (boot mean={bb['mean']:.6f}, 95% CI [{bb['ci_lo']:.6f}, {bb['ci_hi']:.6f}]), "
+                f"logloss={r['logloss']:.6f} (boot mean={bl['mean']:.6f}, 95% CI [{bl['ci_lo']:.6f}, {bl['ci_hi']:.6f}]), "
+                f"AUPRC={r['prauc']:.6f}, calibration intercept={r['cal_intercept']:.6f}, slope={r['cal_slope']:.6f}, "
+                f"precision@base_rate={r['precision_at_base_rate']:.6f} (thr={r['base_rate_threshold']:.6f}), n_test={r['n_test']}")
+        lines.append("")
+    lines.append("## Leave-one-symbol-out stability (primary contrast C2 vs B1, Brier difference C2-B1; negative = C2 better)")
+    for held in SYMBOLS:
+        for target in ['long', 'short']:
+            e = loso[held][target]
+            if e.get('skipped'):
+                lines.append(f"- {held}/{target}: skipped (insufficient train/test rows)")
+            else:
+                lines.append(f"- {held}/{target}: n_test={e['n_test']}, events={e['events']}, base_rate={e['base_rate']:.6f}, "
+                             f"Brier B1={e['brier_b1']:.6f}, C2={e['brier_c2']:.6f}, C2-B1={e['brier_diff_c2_minus_b1']:+.6f}")
+    lines.append("")
+    lines.append("## Notes")
+    lines.append("- Event-free intervals NOT inferred from missing data. Hours with zero Bybit rows = observed zero in census arm only, not an absolute zero claim.")
+    lines.append("- Binance/OKX rows never used to construct the binary absence/presence target (capped streams, undercounted).")
+    lines.append("- No forward-fill / zero-fill across splits; rows with missing causal features dropped for that model comparison.")
+    lines.append("- Fixed logistic form; no hyperparameter search, no threshold tuning on outcomes, no alert-budget selection (pilot).")
+    lines.append("- Block bootstrap over complete UTC hours (deterministic seed); leave-one-symbol-out stability reported above.")
+    lines.append("- FCLR-005 is PILOT/EXPLORATORY ONLY. Does NOT clear any sealed FCLR-001-004 forecast gate. FCLR-H004 remains BLOCKED for frozen 2024.")
+    lines.append("- This summary is generated by scripts/h004_fclr005_pipeline.py (idempotent; rerun reproduces identical numbers).")
+    OUT_SUM.write_text('\n'.join(lines) + '\n')
     print(f"Wrote {OUT_SUM}", flush=True)
-    # Append to liquidation_sources_enumeration
+
+    # ---- 7. Append forensic execution record ----
     try:
         with LIQ_ENUM.open('a') as f:
             f.write(f"\n\n## FCLR-005 execution record (appended {dt_to_iso_z(end_time)})\n")
-            f.write(f"- Script: scripts/h004_fclr005_pipeline.py (new, idempotent/resumable)\n")
-            f.write(f"- Git SHA: $(git -C {REPO} rev-parse HEAD 2>&1 | tail -1)\n")
-            f.write(f"- Liquidations loaded: total_rows={total_rows}, bybit_census_rows={total_bybit} (Binance/OKX excluded from census target)\n")
+            f.write(f"- Script: scripts/h004_fclr005_pipeline.py (idempotent/resumable, deterministic seed {SEED})\n")
+            f.write(f"- Git SHA: {git_sha()}\n")
+            f.write(f"- Run start: {dt_to_iso_z(start_time)}; run end: {dt_to_iso_z(end_time)}\n")
+            f.write(f"- Liquidations loaded: total_rows={total_rows}, bybit_census_target_symbol_rows={target_bybit_rows}; Binance/OKX excluded from census target\n")
+            f.write(f"- Per exchange: {dict(sorted(per_exchange.items()))}\n")
             f.write(f"- Label window: {dt_to_iso_z(LABEL_START)} .. {dt_to_iso_z(LABEL_END)}\n")
-            f.write(f"- Panel rows: {len(panel_rows)}, symbols={SYMBOLS}\n")
-            f.write(f"- Split (chronological): train<= {dt_to_iso_z(train_end)}, val<= {dt_to_iso_z(val_end)}, test> val (blocks < 3x30d; pilot)\n")
-            f.write(f"- Models: B0,B1,C1,C2; targets long/short (Bybit census). Metrics: Brier/logloss/AUPRC.\n")
-            f.write(f"- Results written: {OUT_SUM}\n")
-            f.write(f"- Verdict: PILOT/EXPLORATORY_ONLY; FCLR-H004 remains BLOCKED for frozen 2024; does not clear FCLR-001-004 gates.\n")
+            f.write(f"- Feature cache: research_state/data_cache/<SYM>_2026_*/ (mark/index/premium 1h, funding monthly), 2026-04-01..2026-08-06\n")
+            f.write(            f"- Panel rows: {len(panel_rows)}, symbols={SYMBOLS}; train={len(train_rows)}, val={len(val_rows)}, test={len(test_rows)}\n")
+            f.write(f"- Split boundaries: train<= {dt_to_iso_z(train_end) if train_end else 'n/a'}, val<= {dt_to_iso_z(val_end) if val_end else 'n/a'}\n")
+            f.write(f"- Non-overlapping 30-day blocks in test window: {block_count} (< 3 -> pilot)\n")
+            f.write(f"- Models: B0,B1,C1,C2; targets long/short. Metrics: Brier/logloss/AUPRC/calibration/precision-recall + block-bootstrap 95% CI + leave-one-symbol-out.\n")
+            f.write(f"- Results: {OUT_SUM}\n")
+            f.write(f"- Panel checkpoint: {CKPT_PANEL}\n")
+            f.write(f"- Verdict: PILOT/EXPLORATORY_ONLY; FCLR-H004 remains BLOCKED for frozen 2024; does not clear FCLR-001-004 gates; no confirmatory skill claimed.\n")
     except Exception as e:
         print(f"Failed to append to enumeration: {e}", flush=True)
+
+    print("FCLR-005 pipeline complete", flush=True)
 
 
 if __name__ == '__main__':
