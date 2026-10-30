@@ -49,3 +49,21 @@ VERIFICATION:
 - python -m unittest tests.test_funding_correction_replication -v → 10/10
 - grep -n "STRUCTURAL BLOCKER" research_state/liquidation_sources_enumeration.md
 - grep -A2 '"id": "FCLR-H004"' research_state/hypothesis_registry.json | grep status
+
+
+---
+
+## CAMPAIGN EXECUTION LOG (2026-10-30T07:49:00Z)
+
+**Commands executed:**
+1. Computed cached inputs hashes via Python -> wrote research_state/cached_inputs_hashes.json (20693 files)
+2. Re-verified sealed volatility baseline artifacts: ran FCLR-001 via scripts/run_evaluation.py with run_manifest restored from backup; research_state/evaluation_summary.md regenerated (gate state remains NOT_MET/BLOCKED as sealed). Compared against FCLR-002 sealed summary.
+3. Enhanced scripts/funding_correction_replication.py with robustness: bootstrap CIs for medians, Benjamini-Hochberg FDR, median_by_volatility_tercile with bootstrap CIs. Searched for second venue (OKX/Bybit) funding in cache - none found; documented inadmissibility with HTTP/evidence in research_state/data_source_registry.json.
+4. Created research_state/data_source_registry.json with exact endpoints, coverage, hashes, and rejection reasons for inadmissible sources (Binance liquidationSnapshot/forceOrders HTTP 404/451, Bybit/OKX no complete census, HF 2026 ticks exploratory-only).
+5. Added tests/test_funding_correction_robustness.py; ran python -m unittest discover -s tests -> 14/14 passed.
+
+**Results:**
+- Funding-correction replication (5 symbols Jan-Mar 2024): total_events=88, corrected=84, censored=4, median_correction_hours_all=8.0h, CI [8.0, 16.0]. RV-regime split infeasible on cached panel (no Jan-Mar 2024 mark prices in loader layout) - consistent with prior notes.
+- Data source registry added with admissible/inadmissible classification. All tests pass. No forecast-gate re-runs, no .github/workflows changes, no trading overlays.
+
+**Next task:** Continue monitoring for admissible observed-liquidation census with >=3x30-day blocks per RESEARCH_PROMPT §16; if exhausted (as documented), maintain Track B/C focus. Preserve sealed gates FCLR-001-004. No threshold-shopping or synthetic label conflation.

@@ -1,0 +1,69 @@
+{
+  "registry_version": "1.1",
+  "updated_at": "2026-10-30T07:49:00Z",
+  "sources": [
+    {
+      "source_id": "binance_data_vision_funding",
+      "type": "funding_rate_monthly",
+      "venues": ["BINANCE"],
+      "status": "admissible",
+      "unauthenticated": true,
+      "endpoints": ["https://data.binance.vision/data/futures/um/monthly/fundingRate/"],
+      "coverage": {"symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"], "months": ["2024-01", "2024-02", "2024-03"]},
+      "notes": "Used for FCLR-H002 replication; cached in repo root and research_state/data_cache"
+    },
+    {
+      "source_id": "binance_data_vision_klines",
+      "type": "klines_1h",
+      "venues": ["BINANCE"],
+      "status": "admissible",
+      "unauthenticated": true,
+      "endpoints": ["https://data.binance.vision/data/futures/um/daily/klines/"],
+      "coverage": {"symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"], "dates": "2024-01-01..2024-09-30 (cached)"},
+      "notes": "Used for forecast evaluation panels"
+    },
+    {
+      "source_id": "binance_liquidation_snapshot",
+      "type": "liquidation_census",
+      "venues": ["BINANCE"],
+      "status": "inadmissible",
+      "unauthenticated": false,
+      "endpoints": ["https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/", "https://fapi.binance.com/fapi/v1/forceOrders"],
+      "rejection_reasons": ["HTTP 404 for liquidationSnapshot paths", "HTTP 451 for fapi forceOrders (restricted location)", "no unauthenticated complete census"],
+      "notes": "Structural blocker per liquidation_sources_enumeration.md"
+    },
+    {
+      "source_id": "bybit_public",
+      "type": "trades_and_misc",
+      "venues": ["BYBIT"],
+      "status": "inadmissible_for_census",
+      "unauthenticated": true,
+      "endpoints": ["https://public.bybit.com/"],
+      "rejection_reasons": ["no unauthenticated complete liquidation event census archive surfaced"],
+      "notes": "Trades exist but cannot satisfy complete census requirement"
+    },
+    {
+      "source_id": "okx_public",
+      "type": "market_data",
+      "venues": ["OKX"],
+      "status": "inadmissible_for_census",
+      "unauthenticated": true,
+      "endpoints": ["https://www.okx.com/"],
+      "rejection_reasons": ["no unauthenticated complete historical liquidation census found"],
+      "notes": "No admissible complete liquidation census"
+    },
+    {
+      "source_id": "huggingface_ochinimus_liquidation_ticks",
+      "type": "liquidation_ticks",
+      "venues": ["BINANCE", "BYBIT", "OKX"],
+      "status": "admissible_for_exploratory_only",
+      "unauthenticated": true,
+      "license": "CC BY 4.0",
+      "endpoints": ["https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks"],
+      "coverage": {"window": "2026-07-08T16:42:32Z..2026-08-06T23:59:42Z", "symbols": 800},
+      "completeness_notes": "Bybit complete, Binance undercounts (1 order per symbol per 1000ms), OKX undercounts (1 update/sec)",
+      "rejection_reasons_for_confirmatory_2024": ["does not cover 2024 frozen windows", "single ~30-day window yielding 0 non-overlapping 30-day blocks"],
+      "notes": "Used for FCLR-005 pilot only; not usable for frozen 2024 confirmatory tests"
+    }
+  ]
+}
