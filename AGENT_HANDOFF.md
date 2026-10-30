@@ -14,8 +14,8 @@ Do not shorten sample requirements, use paid/signup data, inspect sealed holdout
 
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (LIQUIDATION-RISK CAMPAIGN)
 
-UPDATED: 2026-10-30T22:04:43Z
-HEAD: (current)
+UPDATED: 2026-10-30T22:48:49Z
+HEAD: 86c4f3ce
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned **volatility and liquidation risk**)
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
