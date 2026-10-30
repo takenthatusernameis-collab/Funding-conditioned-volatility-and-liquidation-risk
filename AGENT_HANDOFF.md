@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T07:03:56Z
+UPDATED: 2026-10-30T07:04:24Z
 HEAD: 37ddd9fd (main) — working tree has uncommitted campaign artifacts (do NOT commit unless explicitly asked)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -34,7 +34,7 @@ FCLR-005 pilot complete (EXPLORATORY_ONLY). Continued discovery probed distinct 
 - Observed != modeled != volatility-only. Capped != census. Absence != zero. Never infer event-free intervals from missing data.
 - Do NOT re-run FCLR-005. Do NOT threshold-shop. No synthetic labels as observed liquidations.
 
-## SINGLE NEXT TASK — 2026-10-30T06:43:46Z (HEAVY-WORK CAMPAIGN: VOLATILITY TRACK + FUNDING-CORRECTION REPLICATION)
+## SINGLE NEXT TASK — 2026-10-30T07:04:24Z (HEAVY-WORK CAMPAIGN: VOLATILITY TRACK + FUNDING-CORRECTION REPLICATION)
 
 Since Track A (observed liquidations) is structurally blocked and volatility gates FCLR-001..004 are sealed (NOT_MET/BLOCKED) and must not be re-run, the next agentic work session must execute a bounded, high-effort campaign that cannot be skipped:
 
