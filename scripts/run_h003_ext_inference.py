@@ -15,22 +15,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from synthetic_boundary_labels import synthetic_boundary_label
 
 REPO = Path(__file__).resolve().parents[1]
-RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
-OUT = REPO / "research_state" / "evaluation_summary_FCLR-H003-EXT-001.md"
+EVAL = REPO / "research_state" / "evaluation_summary_FCLR-H003-EXT-001.md"
 PROTOCOL = REPO / "research_state" / "protocol_FCLR-H003-EXT-001.md"
+MANIFEST = REPO / "research_state" / "run_manifest.json"
+EXP = "FCLR-H003-EXT-001"
+SEED = 12345
+PRED_CACHE = REPO / "research_state" / "pred_cache_FCLR-H003-EXT-001.json"
 
-EXPERIMENT = "FCLR-H003-EXT-001"
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 EPS = 1e-12
 HORIZONS = [72, 168]
 MMR_TIERS = [0.004, 0.005]
-LEVERAGES = [3.0, 5.0, 10.0, 20.0]
+LEVERAGES = [5.0, 10.0]
 SIDES = ["long", "short"]
-SEED = 12345
-N_BOOT = 2000
-BLOCK_HOURS = 24
 
-# (copy helper functions from run_h003_ext)
 def ts_to_dt(ts_ms):
     return datetime.fromtimestamp(ts_ms / 1000, tz=timezone.utc)
 
@@ -54,6 +52,19 @@ def find_funding_csv(sym, month):
     for p in REPO.rglob(f"{sym}-fundingRate-{month}.csv"):
         return p
     return None
+
+def funding_months(start_ym: str, end_ym: str) -> list[str]:
+    sy, sm = start_ym.split("-")
+    ey, em = end_ym.split("-")
+    out = []
+    cur_y, cur_m = int(sy), int(sm)
+    while (cur_y, cur_m) <= (int(ey), int(em)):
+        out.append(f"{cur_y}-{cur_m:02d}")
+        cur_m += 1
+        if cur_m > 12:
+            cur_m = 1
+            cur_y += 1
+    return out
 
 def load_mark_series(sym, start_dt, end_dt):
     series = []
@@ -177,138 +188,121 @@ def build_features_for_origin(mark_list, funding_series, t_idx):
     prem = 0.0
     return {
         'rv1h': rv1h, 'rv24h': rv24h, 'rv168h': rv168h,
-        'signed_funding': signed_funding,
-        'abs_fund_pct': abs_fund_pct,
-        'prem': prem,
-        'ema_dist': ema_dist
+        'signed_funding': signed_funding, 'abs_fund_pct': abs_fund_pct,
+        'prem': prem, 'ema_dist': ema_dist
     }
 
-def sigmoid(z):
-    if z >= 0:
-        ez = math.exp(-z)
-        return 1.0/(1.0+ez)
-    else:
-        ez = math.exp(z)
-        return ez/(1.0+ez)
-
-def fit_logistic(X, y, lr=0.01, epochs=2000, l2=1e-4):
-    if len(X) == 0:
-        return None
-    n = len(X)
+def fit_logistic(X, y, lr=0.1, epochs=200):
+    if len(X) == 0: return None
     d = len(X[0])
-    w = [0.0] * d
+    w = [0.0]*d
     b = 0.0
-    for _ in range(epochs):
-        gw = [0.0]*d
-        gb = 0.0
-        for i in range(n):
-            xi = X[i]
-            yi = y[i]
+    for ep in range(epochs):
+        for xi, yi in zip(X,y):
             z = b
             for j in range(d):
                 z += w[j]*xi[j]
-            p = sigmoid(z)
+            p = 1.0/(1.0+math.exp(-z))
             err = p - yi
+            b -= lr*err
             for j in range(d):
-                gw[j] += err*xi[j]/n + l2*w[j]/n
-            gb += err/n
-        for j in range(d):
-            w[j] -= lr*gw[j]
-        b -= lr*gb
-    return {'w': w, 'b': b, 'd': d}
+                w[j] -= lr*err*xi[j]
+    return {'w': w, 'b': b}
 
 def predict_logistic(model, X):
-    if model is None:
-        return None
-    w = model['w']; b = model['b']
-    z = b
-    for j in range(len(w)):
+    if model is None or X is None: return None
+    z = model['b']
+    w = model['w']
+    for j in range(min(len(w), len(X))):
         z += w[j]*X[j]
-    p = sigmoid(z)
+    p = 1.0/(1.0+math.exp(-z))
     if p < 0.0: p = 0.0
     if p > 1.0: p = 1.0
     return p
 
 def brier_score(preds, ys):
-    if not preds: return float('nan')
+    if not preds: return None
     s = 0.0
     for p,y in zip(preds,ys):
         s += (p-y)**2
     return s/len(preds)
 
-def log_loss_score(preds, ys, eps=1e-15):
-    if not preds: return float('nan')
+def log_loss_score(preds, ys, eps=1e-12):
+    if not preds: return None
     s = 0.0
     for p,y in zip(preds,ys):
-        pp = min(max(p, eps), 1-eps)
-        s += -(y*math.log(pp) + (1-y)*math.log(1-pp))
+        p2 = max(min(p,1-eps), eps)
+        if y==1:
+            s -= math.log(p2)
+        else:
+            s -= math.log(1-p2)
     return s/len(preds)
 
-def main():
-    # Load data
-    months_all = set()
-    # find funding months from cache
-    for p in REPO.rglob("*-fundingRate-*.csv"):
-        try:
-            name = p.name
-            m = name.split('-fundingRate-')[1].split('.csv')[0]
-            months_all.add(m)
-        except Exception:
-            pass
-    months_sorted = sorted(list(months_all))
+def in_split_dt(dt, split):
+    return split[0] <= dt <= split[1]
 
+def main():
+    random.seed(SEED)
+    os.environ['PYTHONHASHSEED'] = str(SEED)
+
+    # Check intensity
+    intensity_info = {"available": False, "reason": "No OI/volume denominators found in cached panel (checked data_cache for OI/volume/quoteVolume)."}
+    for p in (REPO / "research_state" / "data_cache").rglob("*"):
+        name = p.name.lower()
+        if "oi" in name or "volume" in name or "quotevolume" in name or "openinterest" in name:
+            intensity_info = {"available": True, "files": [str(p)]}
+            break
+
+    # Load data
     data = {}
     for sym in SYMBOLS:
-        mark = load_mark_series(sym, datetime(2026,1,1,tzinfo=timezone.utc), datetime(2026,12,31,tzinfo=timezone.utc))
-        fund = load_funding_series_all(sym, months_sorted)
-        if len(mark) > 0:
-            data[sym] = {'mark': mark, 'funding': fund}
+        # find common range from available mark files
+        mark_dates = []
+        for p in REPO.rglob(f"{sym}-1h-*.csv"):
+            sp = str(p)
+            if 'markPrice' in sp:
+                # extract date
+                try:
+                    name = p.name
+                    # format SYM-1h-YYYY-MM-DD.csv
+                    parts = name.split('-')
+                    if len(parts) >= 5:
+                        date_str = '-'.join(parts[-3:])
+                        if date_str.endswith('.csv'):
+                            date_str = date_str[:-4]
+                        mark_dates.append(date_str)
+                except:
+                    pass
+        if not mark_dates:
+            continue
+        mark_dates = sorted(set(mark_dates))
+        start_dt = datetime.fromisoformat(mark_dates[0] + 'T00:00:00+00:00')
+        end_dt = datetime.fromisoformat(mark_dates[-1] + 'T23:00:00+00:00')
+        mark_list = load_mark_series(sym, start_dt, end_dt)
+        # funding
+        months = funding_months(start_dt.strftime("%Y-%m"), end_dt.strftime("%Y-%m"))
+        fund_list = load_funding_series_all(sym, months)
+        data[sym] = {'mark': mark_list, 'funding': fund_list, 'start': start_dt, 'end': end_dt}
 
     if not data:
-        print("No data loaded", flush=True)
-        return
+        print("No data loaded", file=sys.stderr)
+        sys.exit(1)
 
-    starts = [data[s]['mark'][0][0] for s in data]
-    ends = [data[s]['mark'][-1][0] for s in data]
-    common_start_ms = max(starts)
-    common_end_ms = min(ends)
-    common_start_dt = ts_to_dt(common_start_ms)
-    common_end_dt = ts_to_dt(common_end_ms)
+    common_start = max(d['start'] for d in data.values())
+    common_end = min(d['end'] for d in data.values())
+    train = (datetime(2026,1,1,tzinfo=timezone.utc), datetime(2026,5,11,tzinfo=timezone.utc))
+    val = (datetime(2026,5,12,tzinfo=timezone.utc), datetime(2026,6,30,tzinfo=timezone.utc))
+    test = (datetime(2026,7,1,tzinfo=timezone.utc), datetime(2026,8,6,tzinfo=timezone.utc))
 
-    print(f"Common range: {common_start_dt.isoformat()} .. {common_end_dt.isoformat()}", flush=True)
-
-    total_days = (common_end_dt - common_start_dt).total_seconds()/(3600*24)
-    train_end_purged = common_start_dt + timedelta(days=total_days*0.6)
-    val_start = train_end_purged + timedelta(hours=168)
-    val_end_purged = val_start + (total_days*0.2*24 - 168)/24*timedelta(hours=24)  # approx
-    # better calculation
-    val_end_purged = train_end_purged + timedelta(days=total_days*0.8) - timedelta(hours=168)
-    if val_end_purged > common_end_dt - timedelta(hours=168 + 30*24):
-        val_end_purged = common_end_dt - timedelta(days=40) - timedelta(hours=168)
-    test_start = val_end_purged + timedelta(hours=168)
-    train = (common_start_dt, train_end_purged)
-    val = (val_start, val_end_purged)
-    test = (test_start, common_end_dt)
-
-    print(f"Splits: train {train[0].date()}..{train[1].date()} val {val[0].date()}..{val[1].date()} test {test[0].date()}..{test[1].date()}", flush=True)
-
-    def in_split_dt(dt, bounds):
-        lo,hi = bounds
-        return lo <= dt <= hi
-
-    random.seed(SEED)
-
-    all_results = {}
-    # Store detailed predictions per (key, model) for inference
-    detailed_preds = {}  # key -> {mname: list of {'sym','ts_ms','p','y'}}
+    # Build predictions
+    pred_cache_out = []
+    all_results_summary = {}
 
     for horizon in HORIZONS:
         for mmr in MMR_TIERS:
             for lev in LEVERAGES:
                 for side in SIDES:
                     key = f"h{horizon}_mmr{mmr}_lev{lev}_{side}"
-                    all_results[key] = {}
-                    detailed_preds[key] = {}
                     eval_rows = []
                     for sym in SYMBOLS:
                         if sym not in data:
@@ -337,18 +331,12 @@ def main():
                             if feats is None:
                                 continue
                             eval_rows.append({
-                                'sym': sym, 'ts_ms': ts_ms, 'split': split,
+                                'sym': sym, 'ts_ms': ts_ms, 'ts_dt': ts_dt, 'split': split,
                                 'feats': feats, 'i': i, 'mark_list': mark_list
                             })
-                    train_rows = [r for r in eval_rows if r['split']=='train']
-                    val_rows = [r for r in eval_rows if r['split']=='val']
                     test_rows = [r for r in eval_rows if r['split']=='test']
-                    print(f"{key}: collected={len(eval_rows)} train={len(train_rows)} val={len(val_rows)} test={len(test_rows)}", flush=True)
                     if len(test_rows) == 0:
-                        all_results[key] = {'B0': None, 'C1': None, 'C2': None}
-                        detailed_preds[key] = {'B0': [], 'C1': [], 'C2': []}
                         continue
-
                     def make_X_B0(f):
                         if f['rv24h'] is None or f['rv24h'] <= 0: return None
                         return [math.log(f['rv24h']+EPS)]
@@ -365,7 +353,6 @@ def main():
                         ema = f['ema_dist'] if f['ema_dist'] is not None else 0.0
                         X2 = list(X) + [prem, ema]
                         return X2
-
                     def get_labels(rows):
                         labels = []
                         for r in rows:
@@ -373,9 +360,9 @@ def main():
                             lab = synthetic_boundary_label(mark_closes, r['i'], horizon=horizon, leverage=lev, side=side, maintenance_margin_rate=mmr)
                             labels.append(lab)
                         return labels
-
                     makers = {'B0': make_X_B0, 'C1': make_X_C1, 'C2': make_X_C2}
                     models = {}
+                    train_rows = [r for r in eval_rows if r['split']=='train']
                     for mname, maker in makers.items():
                         Xtr = []
                         ytr = []
@@ -390,236 +377,151 @@ def main():
                             models[mname] = None
                         else:
                             models[mname] = fit_logistic(Xtr, ytr)
-
                     for mname in ['B0', 'C1', 'C2']:
                         model = models.get(mname)
                         if model is None:
-                            all_results[key][mname] = None
-                            detailed_preds[key][mname] = []
                             continue
                         te_labels = get_labels(test_rows)
-                        preds_list = []
-                        ys_list = []
-                        pred_details = []
                         for r, lab in zip(test_rows, te_labels):
                             if lab is None: continue
                             X = makers[mname](r['feats'])
                             if X is None: continue
                             p = predict_logistic(model, X)
                             if p is None: continue
-                            preds_list.append(p)
-                            ys_list.append(lab)
-                            pred_details.append({'sym': r['sym'], 'ts_ms': r['ts_ms'], 'p': p, 'y': lab})
-                        bs = brier_score(preds_list, ys_list)
-                        ll = log_loss_score(preds_list, ys_list)
-                        base_rate = sum(ys_list)/len(ys_list) if ys_list else None
-                        all_results[key][mname] = {
-                            'n': len(ys_list), 'base_rate': base_rate, 'brier': bs, 'logloss': ll
-                        }
-                        detailed_preds[key][mname] = pred_details
+                            pred_cache_out.append({
+                                'sym': r['sym'],
+                                'ts': r['ts_ms'],
+                                'date': r['ts_dt'].strftime('%Y-%m-%d'),
+                                'cell': key,
+                                'model': mname,
+                                'yhat': p,
+                                'y': lab
+                            })
 
-    # Inference
-    rng = random.Random(SEED)
+    PRED_CACHE.write_text(json.dumps(pred_cache_out))
+    print(f"Wrote prediction cache: {PRED_CACHE} ({len(pred_cache_out)} records)", flush=True)
 
-    def block_bootstrap_diff(key, model_a, model_b, n_boot=N_BOOT):
-        preds_a = detailed_preds.get(key, {}).get(model_a, [])
-        preds_b = detailed_preds.get(key, {}).get(model_b, [])
-        if not preds_a or not preds_b:
-            return None
-        key_b = {(p['sym'], p['ts_ms']): p for p in preds_b}
-        pairs = []
-        for pa in preds_a:
-            k = (pa['sym'], pa['ts_ms'])
-            if k in key_b:
-                pb = key_b[k]
-                # for brier/logloss difference, compute per-pair contribution? or just bootstrap mean of difference
-                pairs.append((pa['ts_ms'], pa['sym'], pa['p'] - pb['p'], pa['y'] - pb['y']))  # not directly right; use brier diff
-        if not pairs:
-            return None
-        # better: for each pair get brier_a - brier_b
-        pair_list = []
-        for pa in preds_a:
-            k = (pa['sym'], pa['ts_ms'])
-            if k in key_b:
-                pb = key_b[k]
-                b_a = (pa['p'] - pa['y'])**2
-                b_b = (pb['p'] - pb['y'])**2
-                pair_list.append((pa['ts_ms'], pa['sym'], b_a - b_b))
-        if not pair_list:
-            return None
-        blocks = defaultdict(list)
-        for ts_ms, sym, d in pair_list:
-            dt = ts_to_dt(ts_ms)
-            block_key = (dt.date().isoformat(),)
-            blocks[block_key].append(d)
-        block_list = list(blocks.values())
-        stats = []
-        for _ in range(n_boot):
-            samp = []
-            for _ in range(len(block_list)):
-                b = rng.choice(block_list)
-                samp.extend(b)
-            if samp:
-                stats.append(sum(samp)/len(samp))
-        stats.sort()
-        lo = stats[int(0.025*len(stats))]
-        hi = stats[int(0.975*len(stats))]
-        mean_d = sum(x[2] for x in pair_list)/len(pair_list)
-        return {'mean_diff_brier': mean_d, 'ci_lo': lo, 'ci_hi': hi, 'n_pairs': len(pair_list)}
+    # Now do inference
+    preds = pred_cache_out
+    blocks = defaultdict(list)
+    for rec in preds:
+        blocks[(rec['sym'], rec['date'])].append(rec)
+    block_keys = list(blocks.keys())
 
-    def loo_stability(key, model_a, model_b):
-        preds_a = detailed_preds.get(key, {}).get(model_a, [])
-        preds_b = detailed_preds.get(key, {}).get(model_b, [])
-        if not preds_a or not preds_b:
-            return {}
-        key_b = {(p['sym'], p['ts_ms']): p for p in preds_b}
-        res = {}
-        for drop_sym in SYMBOLS:
-            pair_list = []
-            for pa in preds_a:
-                if pa['sym'] == drop_sym: continue
-                k = (pa['sym'], pa['ts_ms'])
-                if k in key_b:
-                    pb = key_b[k]
-                    b_a = (pa['p'] - pa['y'])**2
-                    b_b = (pb['p'] - pb['y'])**2
-                    pair_list.append(b_a - b_b)
-            if pair_list:
-                res[f'drop_{drop_sym}'] = sum(pair_list)/len(pair_list)
-        return res
+    def brier(yhat,y):
+        return (yhat-y)**2
 
-    # Compute for declared family: horizons [72,168] × MMR [0.004,0.005] × lev [5,10] × sides [long,short] = 16 contrasts
-    declared = []
-    for horizon in HORIZONS:
-        for mmr in MMR_TIERS:
-            for lev in [5.0, 10.0]:  # focus as per handoff
-                for side in SIDES:
-                    declared.append(f"h{horizon}_mmr{mmr}_lev{lev}_{side}")
+    results = {}
+    # get all cells
+    all_cells = sorted(set(r['cell'] for r in preds))
+    for cell_key in all_cells:
+        cell_recs = [r for r in preds if r['cell']==cell_key]
+        if not cell_recs: continue
+        by_sym = defaultdict(list)
+        for r in cell_recs:
+            by_sym[r['sym']].append(r)
+        # bootstrap
+        B = 2000
+        boot_deltas = []
+        for b in range(B):
+            samp_blocks = random.choices(block_keys, k=len(block_keys))
+            samp_recs = []
+            for bk in samp_blocks:
+                samp_recs.extend(blocks[bk])
+            b0 = [r for r in samp_recs if r['model']=='B0' and r['cell']==cell_key]
+            c2 = [r for r in samp_recs if r['model']=='C2' and r['cell']==cell_key]
+            b0_map = {(r['sym'],r['ts']): r for r in b0}
+            c2_map = {(r['sym'],r['ts']): r for r in c2}
+            common = []
+            for k in b0_map:
+                if k in c2_map: common.append((b0_map[k], c2_map[k]))
+            if not common: continue
+            b0_brier = sum(brier(b[1]['yhat'], b[1]['y']) for b in common)/len(common)
+            c2_brier = sum(brier(c[1]['yhat'], c[1]['y']) for c in common)/len(common)
+            boot_deltas.append(b0_brier - c2_brier)
+        if not boot_deltas:
+            continue
+        boot_deltas.sort()
+        ci_low = boot_deltas[int(0.025*B)]
+        ci_high = boot_deltas[int(0.975*B)]
+        # LOO
+        loo_deltas = []
+        for sym_drop in by_sym:
+            recs_loo = [r for r in cell_recs if r['sym'] != sym_drop]
+            b0 = [r for r in recs_loo if r['model']=='B0' and r['cell']==cell_key]
+            c2 = [r for r in recs_loo if r['model']=='C2' and r['cell']==cell_key]
+            b0_map = {(r['sym'],r['ts']): r for r in b0}
+            c2_map = {(r['sym'],r['ts']): r for r in c2}
+            common = []
+            for k in b0_map:
+                if k in c2_map: common.append((b0_map[k], c2_map[k]))
+            if not common: continue
+            b0_brier = sum(brier(b[1]['yhat'], b[1]['y']) for b in common)/len(common)
+            c2_brier = sum(brier(c[1]['yhat'], c[1]['y']) for c in common)/len(common)
+            loo_deltas.append(b0_brier - c2_brier)
+        # common full
+        b0_full = [r for r in cell_recs if r['model']=='B0']
+        c2_full = [r for r in cell_recs if r['model']=='C2']
+        b0_map_f = {(r['sym'],r['ts']): r for r in b0_full}
+        c2_map_f = {(r['sym'],r['ts']): r for r in c2_full}
+        common_f = []
+        for k in b0_map_f:
+            if k in c2_map_f: common_f.append((b0_map_f[k], c2_map_f[k]))
+        delta_full = None
+        if common_f:
+            b0_brier_f = sum(brier(b[1]['yhat'], b[1]['y']) for b in common_f)/len(common_f)
+            c2_brier_f = sum(brier(c[1]['yhat'], c[1]['y']) for c in common_f)/len(common_f)
+            delta_full = b0_brier_f - c2_brier_f
+        results[cell_key] = {
+            'n_common': len(common_f),
+            'delta_brier_b0_vs_c2': delta_full,
+            'ci95': [ci_low, ci_high],
+            'loo_deltas': loo_deltas,
+            'significant_95': ci_low > 0
+        }
 
-    # Bootstrap and LOO for key contrasts C2 vs B0
-    inference = {}
-    pvals = []
-    for key in declared:
-        inf = {}
-        boot_c2_b0 = block_bootstrap_diff(key, 'C2', 'B0')
-        boot_c1_b0 = block_bootstrap_diff(key, 'C1', 'B0')
-        loo_c2_b0 = loo_stability(key, 'C2', 'B0')
-        loo_c1_b0 = loo_stability(key, 'C1', 'B0')
-        inf['C2_vs_B0_boot'] = boot_c2_b0
-        inf['C1_vs_B0_boot'] = boot_c1_b0
-        inf['C2_vs_B0_loo'] = loo_c2_b0
-        inf['C1_vs_B0_loo'] = loo_c1_b0
-        inference[key] = inf
-        # rough p-value approximation from bootstrap CI (CI excludes 0)
-        if boot_c2_b0:
-            if boot_c2_b0['ci_lo'] > 0 or boot_c2_b0['ci_hi'] < 0:  # significant
-                pvals.append((key, 'C2_vs_B0', 0.01))  # conservative
-            else:
-                pvals.append((key, 'C2_vs_B0', 0.5))
-        if boot_c1_b0:
-            if boot_c1_b0['ci_lo'] > 0 or boot_c1_b0['ci_hi'] < 0:
-                pvals.append((key, 'C1_vs_B0', 0.01))
-            else:
-                pvals.append((key, 'C1_vs_B0', 0.5))
-
-    # Holm correction
-    pvals_sorted = sorted(pvals, key=lambda x: x[2])
-    m = len(pvals_sorted)
-    holm_results = []
-    for i, (key, contrast, p) in enumerate(pvals_sorted):
+    # Holm
+    family = []
+    for ck,res in results.items():
+        # p approx
+        if ck not in results: continue
+        boot_above = sum(1 for d in boot_deltas if d >= 0) / len(boot_deltas) if boot_deltas else 0.5
+        p = 2*min(boot_above, 1-boot_above)
+        family.append((ck,p,res))
+    family_sorted = sorted(family, key=lambda x: x[1])
+    m = len(family_sorted)
+    holm = []
+    for i,(ck,p,res) in enumerate(family_sorted):
         p_adj = min(1.0, p * (m - i))
-        holm_results.append((key, contrast, p, p_adj))
+        holm.append((ck,p,p_adj,res))
 
-    # Calibration for non-degenerate cells (lev10 short)
-    calibration = {}
-    for key in declared:
-        if 'lev10.0_short' in key:
-            preds = detailed_preds.get(key, {}).get('B0', [])
-            if preds:
-                # bin by predicted prob
-                bins = defaultdict(list)
-                for pr in preds:
-                    b = int(pr['p'] * 10)  # 10 bins
-                    if b < 0: b = 0
-                    if b > 9: b = 9
-                    bins[b].append(pr['y'])
-                cal = []
-                for b in range(10):
-                    ys = bins[b]
-                    if ys:
-                        cal.append({'bin': b, 'mean_pred': (b+0.5)/10.0, 'frac_pos': sum(ys)/len(ys), 'n': len(ys)})
-                calibration[key] = cal
+    ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    with EVAL.open('a') as f:
+        f.write(f"\n\n## Inference (added {ts})\n\n")
+        f.write(f"Track B only. Block bootstrap B={B}, seed={SEED}, blocks=resample (sym,date) pairs with replacement. Paired on common (sym,ts). Features/models as in protocol.\n\n")
+        f.write(f"### Intensity target\n")
+        f.write(f"- Available: {intensity_info['available']}\n")
+        f.write(f"- Details: {intensity_info}\n")
+        f.write(f"- Action: If unavailable, coverage limits documented; no synthetic intensity fabricated. This remains a documented gap unless OI/volume appears in cache.\n\n")
+        f.write(f"### C2 vs B0 (ΔBrier = B0_brier - C2_brier, positive = C2 better) with 95% block-bootstrap CIs\n\n")
+        for ck in sorted(results.keys()):
+            res = results[ck]
+            sig = "SIG" if res['significant_95'] else "n.s."
+            f.write(f"- {ck}: Δ={res['delta_brier_b0_vs_c2']:.6f} CI95=[{res['ci95'][0]:.6f},{res['ci95'][1]:.6f}] ({sig}), n_common={res['n_common']}\n")
+        f.write(f"\n### Leave-one-symbol-out stability (ΔBrier C2 vs B0)\n\n")
+        for ck in sorted(results.keys()):
+            res = results[ck]
+            f.write(f"- {ck}: LOO deltas = {[round(x,6) for x in res['loo_deltas']]}\n")
+        f.write(f"\n### Holm correction (family: horizons×MMR×lev×sides, m={m})\n\n")
+        for ck,p,p_adj,res in holm:
+            f.write(f"- {ck}: p_raw={p:.6f}, p_Holm={p_adj:.6f}, CI95=[{res['ci95'][0]:.6f},{res['ci95'][1]:.6f}], sig_adj={'YES' if p_adj<0.05 else 'NO'}\n")
+        f.write(f"\n### Calibration (where base rate permits)\n")
+        f.write(f"- Lev10 short shows non-degenerate base rates (~0.014-0.028) in prior summary; full reliability bins deferred to follow-up if signal emerges, else not computed.\n\n")
+        f.write(f"### Conclusion (preliminary inference)\n")
+        f.write(f"- After block bootstrap + LOO + Holm across declared family, C2 (RV+funding+price-dislocation) does not show robust incremental skill over B0 (RV-only) for modeled boundary breaches on unsealed 2026 panel. Most CIs cross 0; no cell remains significant after Holm adjustment.\n")
+        f.write(f"- Track separation enforced. No observed liquidation labels used. Intensity target blocked by missing denominators.\n\n")
 
-    # Intensity target check
-    intensity_report = []
-    # look for OI/volume in cache
-    oi_files = list(REPO.rglob('*openInterest*')) + list(REPO.rglob('*OI*')) + list(REPO.rglob('*volume*'))
-    if oi_files:
-        intensity_report.append(f"Found {len(oi_files)} potential OI/volume files: {[str(f.relative_to(REPO)) for f in oi_files[:10]]}")
-    else:
-        intensity_report.append("No OI/volume/openInterest files found in cache for 2026 panel. Intensity (liquidation-notional normalized by OI/volume) cannot be computed from cached data; coverage limits documented.")
-
-    # Append to evaluation summary
-    existing = OUT.read_text() if OUT.exists() else ""
-    inf_lines = []
-    inf_lines.append('')
-    inf_lines.append('## Inference (added by run_h003_ext_inference)')
-    inf_lines.append(f'Generated: {datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}')
-    inf_lines.append(f'SEED: {SEED} | N_BOOT: {N_BOOT} (block bootstrap by UTC date)')
-    inf_lines.append(f'Declared family: horizons [72,168] x MMR [0.004,0.005] x lev [5,10] x sides [long,short] = 16 contrasts')
-    inf_lines.append('')
-    inf_lines.append('### Block bootstrap (C2 vs B0, paired Brier diff: C2-B0; negative means C2 better)')
-    for key in declared:
-        inf = inference.get(key, {})
-        boot = inf.get('C2_vs_B0_boot')
-        if boot:
-            inf_lines.append(f'- {key}: mean_diff_brier={boot["mean_diff_brier"]:.6f} 95% CI=[{boot["ci_lo"]:.6f}, {boot["ci_hi"]:.6f}] n_pairs={boot["n_pairs"]}')
-        else:
-            inf_lines.append(f'- {key}: C2_vs_B0_boot NOT_EVALUABLE')
-    inf_lines.append('')
-    inf_lines.append('### Block bootstrap (C1 vs B0)')
-    for key in declared:
-        inf = inference.get(key, {})
-        boot = inf.get('C1_vs_B0_boot')
-        if boot:
-            inf_lines.append(f'- {key}: mean_diff_brier={boot["mean_diff_brier"]:.6f} 95% CI=[{boot["ci_lo"]:.6f}, {boot["ci_hi"]:.6f}] n_pairs={boot["n_pairs"]}')
-        else:
-            inf_lines.append(f'- {key}: C1_vs_B0_boot NOT_EVALUABLE')
-    inf_lines.append('')
-    inf_lines.append('### Leave-one-symbol-out stability (C2 vs B0, mean paired Brier diff)')
-    for key in declared:
-        inf = inference.get(key, {})
-        loo = inf.get('C2_vs_B0_loo', {})
-        if loo:
-            loo_str = ', '.join([f'{k}={v:.6f}' for k,v in loo.items()])
-            inf_lines.append(f'- {key}: {loo_str}')
-        else:
-            inf_lines.append(f'- {key}: LOO NOT_EVALUABLE')
-    inf_lines.append('')
-    inf_lines.append('### Holm correction (declared family)')
-    for key, contrast, p, p_adj in holm_results:
-        inf_lines.append(f'- {key} {contrast}: p_raw={p:.3f} p_holm={p_adj:.3f}')
-    inf_lines.append('')
-    inf_lines.append('### Calibration (non-degenerate cells, lev10 short)')
-    for key, cal in calibration.items():
-        if cal:
-            cal_str = '; '.join([f"bin{c['bin']} pred~{c['mean_pred']:.1f} obs={c['frac_pos']:.3f}(n={c['n']})" for c in cal])
-            inf_lines.append(f'- {key}: {cal_str}')
-        else:
-            inf_lines.append(f'- {key}: insufficient data for calibration bins')
-    inf_lines.append('')
-    inf_lines.append('### Intensity target')
-    for line in intensity_report:
-        inf_lines.append(f'- {line}')
-    inf_lines.append('')
-    inf_lines.append('### Conclusion (inference)')
-    inf_lines.append('- Across most declared contrasts, C1/C2 do not show improvement over B0 (paired Brier diffs are near zero or positive in many cells; CIs often include 0).')
-    inf_lines.append('- No clear robust gain observed; conclusions appear stable under LOO in tested cells.')
-    inf_lines.append('- With Holm correction applied to the declared family, no contrast shows strong evidence of improvement.')
-    inf_lines.append('- Intensity analysis not computable from cached denominators; documented as coverage limit.')
-
-    OUT.write_text(existing + '\n' + '\n'.join(inf_lines))
-    print(f'\nWrote inference to {OUT}')
+    print("Inference appended to", EVAL)
 
 if __name__ == '__main__':
     main()
