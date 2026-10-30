@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T03:51:37Z
+UPDATED: 2026-10-30T03:54:04Z
 HEAD: d05dd830 (main, origin/main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
