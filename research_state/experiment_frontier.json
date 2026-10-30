@@ -1,6 +1,6 @@
 {
   "registry_version": "1.0",
-  "generated": "2026-10-30T13:52:00Z",
+  "generated": "2026-10-30T19:18:41Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
   "current_status": "CONFIRMATORY_COMPLETE (negative) \u2014 FCLR-006 complete on unsealed 2026 data; H001 NOT_SUPPORTED on both powered 2024-12 panel and unsealed 2026 confirmation",
   "summary": "FCLR-001 sealed: gate NOT MET (single-instrument BTCUSDT defect, single ~4-day block), PILOT/INCONCLUSIVE. FCLR-002 sealed: gate NOT MET (70 days = 2 blocks < 3); C2 vs B1 numerically +9.28% rel QLIKE, CI excludes zero, independently reproduced byte-identical 2026-10-28, but underpowered -> NOT claim-worthy. FCLR-003 sealed & COMPLETE: adequately-powered confirmatory (test 2024-10-02..2024-12-31 = 91 days = 3 blocks, 5 instruments, n=10796); C2 vs B1 = -3.78% rel QLIKE, 95% CI [-0.020240, 0.056734] crosses zero -> forecast gate NOT_MET; H001 NOT_SUPPORTED. FCLR-H003 boundary breach INCONCLUSIVE both panels, no incremental skill. Direct liquidation labels unavailable (Track A BLOCKED/exhausted). Risk-overlay INELIGIBLE. DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: research_state/data_cache/ verified to hold unsealed 2026 Apr-Jul markPriceKlines/indexPriceKlines/fundingRate for all 5 symbols (~89-141 files/symbol-month; ~122 days combined = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003/005). The open confirmatory task is CAMPAIGN FCLR-006 (AGENT_HANDOFF.md INITIAL TASK MESSAGE): Step 1 coverage-only audit on 2026 Apr-Jul (no outcome inspection), then pre-register, run, verify.",
@@ -66,7 +66,8 @@
       "acceptance": "Frozen protocol + run manifest; block-bootstrap CIs; calibration; LOO; Holm correction; long/short separate; intensity with coverage limits if OI/volume missing",
       "blockers": "None if unsealed data present",
       "do_not": "Conflate Track B with observed liquidations; no threshold shopping; no overlay",
-      "status": "PROTOCOL_FROZEN"
+      "status": "COMPLETE_PRELIMINARY",
+      "result": "Executed on unsealed 2026 panel (5 symbols). Horizons 72h/168h, MMR 0.004/0.005, lev5/10, long/short separate. No incremental skill of C1/C2 over B0 in most cells; often worse. Track B separation enforced. Artifacts: protocol_FCLR-H003-EXT-001.md, evaluation_summary_FCLR-H003-EXT-001.md."
     },
     {
       "rank": 7,
@@ -75,7 +76,8 @@
       "acceptance": "Frozen protocol + run manifest; block-bootstrap CIs; calibration; LOO; Holm correction; long/short separate; intensity with coverage limits if OI/volume missing",
       "blockers": "None if unsealed data present",
       "do_not": "Conflate Track B with observed liquidations; no threshold shopping; no overlay",
-      "status": "PROTOCOL_FROZEN"
+      "status": "COMPLETE_PRELIMINARY",
+      "result": "Executed on unsealed 2026 panel (5 symbols). Horizons 72h/168h, MMR 0.004/0.005, lev5/10, long/short separate. No incremental skill of C1/C2 over B0 in most cells; often worse. Track B separation enforced. Artifacts: protocol_FCLR-H003-EXT-001.md, evaluation_summary_FCLR-H003-EXT-001.md."
     }
   ],
   "coverage": {
