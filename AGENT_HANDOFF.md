@@ -1,51 +1,64 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T09:45:32Z
-HEAD: 5655c6ca (main) — working tree may have uncommitted artifacts (do NOT commit unless explicitly asked)
+UPDATED: 2026-10-30T10:20:00Z
+HEAD: 5655c6ca (main) — working tree has uncommitted manifest edit (do NOT commit unless explicitly asked)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
 ## INITIAL TASK MESSAGE (TIMESTAMPED) — MANDATORY FOR NEXT AGENTIC WORK SESSION
 
-**PRIORITY (repo name): FUNDING-CONDITIONED VOLATILITY + LIQUIDATION RISK. DO HEAVY COMPUTATIONAL WORK. NO STATUS-ONLY.**
+**PRIORITY (repo name): FUNDING-CONDITIONED VOLATILITY + LIQUIDATION RISK.**
 
-This repository's name prioritizes both tracks. Track A (observed liquidations) is STRUCTURALLY BLOCKED (documented exhaustively). Track B (hypothetical/synthetic boundary breaches) and Track C (volatility forecasting) remain open and demand heavy work. **You MUST NOT stop at exploration - you MUST produce concrete artifacts with measurable progress.**
+### Confirmatory verdict (decisive, FCLR-003)
+FCLR-003 — the adequately-powered confirmatory test (frozen splits; test 2024-10-02..2024-12-31 = 91 days = 3 non-overlapping 30-day blocks PASS; 5 instruments BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT; n=10,796 paired rows; block bootstrap 2000 reps) — is COMPLETE and NEGATIVE:
+- C2 (funding + price-dislocation/smoothing) vs B1 (RV-only HAR): mean diff +0.015205 QLIKE, relative change -3.78% (worse), 95% CI [-0.020240, 0.056734] crosses zero -> PRIMARY CONTRAST C2 vs B1 FAILS.
+- C1 (funding only) vs B1: +8.09% relative (secondary contrast), but C2 vs C1 = +0.0477 QLIKE (adding price features to C1 HURTS).
+- Forecast gate: NOT_MET. Risk-overlay phase: INELIGIBLE.
+- H001 (funding extremes + price-dislocation/smoothing improve OOS volatility forecasts over RV-only baseline): NOT_SUPPORTED on current data.
+Artifact: research_state/evaluation_summary_FCLR003.md. Split registered (frozen before outcomes, matches executed run): research_state/run_manifest.json key split_boundaries_fclr003.
 
-### IMMEDIATE MANDATORY CAMPAIGN (EXECUTE IN FULL, NO SHORTCUTS)
+### Data exhaustion (structural bottleneck — no fresh confirmatory window)
+No unsealed, contiguous >=5-symbol confirmatory window remains:
+- 2024-04..12 (all 5 symbols) fully committed to sealed FCLR-002 / FCLR-003.
+- 2025: mark price only for BTCUSDT, ETHUSDT (2 symbols); BNBUSDT/SOLUSDT/XRPUSDT absent.
+- 2026: partial (BTCUSDT Jan-Aug; ETHUSDT Jan + Apr-Aug; BNBUSDT/SOLUSDT/XRPUSDT Apr-Aug only).
+=> No fresh >=5-instrument, >=3-block window exists for a new confirmatory experiment (FCLR-004+) without a NEW admissible data source (RESEARCH_PROMPT.md §16). None currently available.
 
-**CAMPAIGN ID: FCLR-HEAVY-002 | TIME: 2026-10-30T09:45:32Z**
+### Track A (observed liquidations)
+STRUCTURALLY BLOCKED, exhausted (Binance liquidationSnapshot HTTP 404; fapi forceOrders HTTP 451 restricted location; no Bybit/OKX/Deribit unauthenticated census; FCLR-005 2026 pilot complete = exploratory only; FCLR-H004 BLOCKED for 2024).
 
-1. **VOLATILITY BASELINE RECOMPUTATION (HARD)** - Recompute FCLR-002 and FCLR-003 end-to-end using `scripts/run_evaluation_fixed.py` with exact commands logged. Compare byte-for-byte against existing summaries. Identify any numerical drift. Write results to `research_state/volatility_baseline_recheck_20261030.md` with checksums.
-2. **FUNDING-CONDITIONED INTERACTION ANALYSIS (HARD)** - Using cached data only, build a funding×volatility interaction model on train/val, evaluate on frozen test sets (FCLR-002 and FCLR-003). Test pre-registered interactions: funding_sign×RV24, |funding|×RV_ratio, funding_persistence×vol_regime. Use block bootstrap (>=2000). Record all results in `research_state/funding_interaction_analysis.md`. Do NOT touch holdouts early.
-3. **BOUNDARY-BREACH DEEP DIVE (HARD)** - Re-run and EXTEND `scripts/synthetic_boundary_labels.py` analysis. Vary maintenance margin (0.004, 0.005, 0.006), add funding-cost assumptions, test horizons (6h, 12h, 24h). For each config compute precision/recall/calibration vs B0/B1/C1/C2 style features. Use ONLY synthetic labels clearly marked as NOT observed liquidations. Write `research_state/boundary_breach_deep_dive.md`.
-4. **ROBUSTNESS STRESS TESTS (HARD)** - Regime splits (high/low funding, high/low RV), symbol concentration tests, time-block stability. Bootstrap everything. Correct for multiple comparisons (BH-FDR). Document all.
-5. **TESTS + VERIFICATION (HARD)** - Add >=2 focused tests for new analysis code in `tests/`. Run `python -m unittest discover -s tests -v`. All must pass.
+### Track B (hypothetical boundary breach)
+FCLR-H003 INCONCLUSIVE on both panels, no incremental skill (research_state/evaluation_summary_h003.md / _FCLR002.md). Extensions (72h/168h horizons, lower MMR tiers, event-intensity target) require fresh pre-registration AND fresh data (none available for >=5 symbols) — do NOT run on sealed holdouts.
 
-**CONSTRAINTS (NON-NEGOTIABLE):**
-- NO forecast gate re-runs that reuse sealed holdouts for tuning
-- NO .github/workflows changes
-- NO trading/risk overlays
-- NO observed liquidation data fabrication
-- Track A remains BLOCKED - do NOT waste cycles on unfound sources
-- Every claim needs numbers, CIs, sample sizes
-- Status updates alone are FORBIDDEN - produce files with concrete results
+## NEXT FOCUS CAMPAIGN: FCLR-CLOSEOUT-001 (verify & close the confirmatory program)
 
-**VERIFICATION COMMANDS:**
+Because the confirmatory gate is negative and no fresh >=5-symbol data exists, do NOT launch further model/hyperparameter searches on sealed holdouts (prohibited: threshold shopping / holdout reuse / exploratory rescue of a failed confirmatory test, RESEARCH_PROMPT.md §16-17). Execute instead:
+
+1. **Verify independent recomputation (in progress):** `FCLR_EXPERIMENT=FCLR-003 python scripts/run_evaluation.py` — confirm it reproduces research_state/evaluation_summary_FCLR003.md (QLIKE B0=0.487674 / B1=0.401884 / C1=0.369366 / C2=0.417089; C2_vs_B1 diff +0.015205, 95% CI [-0.020240, 0.056734], rel -3.78%). May take several minutes; check research_state/evaluation_summary_FCLR003.md mtime.
+2. **Finalize registry verdict:** research_state/hypothesis_registry.json FCLR-H001 status -> NOT_SUPPORTED (evidence: FCLR-003); research_state/experiment_frontier.json current_status -> CONFIRMATORY_COMPLETE (negative); mark frontier tasks FCLR-002 / FCLR-003 complete.
+3. **Write definitive conclusion:** record final negative-result verdict (research_state/final_confirmatory_verdict.md or append to final_inconclusive_report.md) citing FCLR-003, H001 NOT_SUPPORTED, data exhaustion, Track A blocked, overlay ineligible.
+4. **Regression check:** `python -m unittest discover -s tests -v` (14 tests must pass).
+
+## BOTTLENECKS REMOVED / NOTED
+- split_boundaries_fclr003 registered in run_manifest.json (frozen, matches executed FCLR-003 splits) — unblocks reproducible FCLR-003 recomputation.
+- Verified research_state/data_cache holds contiguous mark price for all 5 symbols 2024-04..12 (Oct/Nov/Dec = 31/30/31 daily CSVs each symbol); no fresh >=5-symbol window beyond 2024-12.
+- Stale background process: an FCLR-002 recomputation (started ~09:48) spinning ~30+ min at 100% CPU with no output written — FCLR-002 result already on record (independently reproduced per hypothesis_registry). Do NOT launch redundant slow recomputations; results already on record.
+- Do NOT: re-run sealed holdouts for tuning/selection; change .github/workflows; build a risk/risk-reduction overlay; fabricate observed-liquidation labels; threshold-shop to rescue H001.
+
+## VERIFICATION COMMANDS
 ```bash
-python -m unittest tests.test_funding_correction_replication tests.test_funding_correction_robustness tests.test_fclr002_coverage_audit -v
 python -m unittest discover -s tests -v
+# FCLR-003 independent recomputation verification (may take several minutes):
+FCLR_EXPERIMENT=FCLR-003 python scripts/run_evaluation.py
 ```
 
 ## CURRENT STATE (GROUND TRUTH)
-- Track A (observed liquidations): NOT_SUPPORTED/STRUCTURAL_BLOCKER - fully exhausted per RESEARCH_PROMPT §16
-- FCLR-001/002/003: sealed, gates NOT_MET. C1 shows improvement in FCLR-003 (8.09%) but C2 underperforms; C2 strong in FCLR-002 (9.28%) but test window too short
-- FCLR-H003 (boundary breaches): INCONCLUSIVE, no incremental skill
-- FCLR-H002 (funding correction): PARTIAL replication done
-- All existing tests pass (14/14 as of last run)
-- Heavy work on funding-conditioned volatility + deeper boundary analysis is the path forward
+- FCLR-001: sealed, gate NOT_MET (single-instrument BTCUSDT coverage defect; single ~4-day block). PILOT/INCONCLUSIVE.
+- FCLR-002: sealed, gate NOT_MET (70 days = 2 blocks < 3); C2 vs B1 numerically +9.28% rel QLIKE, CI excludes zero, but underpowered -> NOT claim-worthy.
+- FCLR-003: sealed & COMPLETE, gate NOT_MET (powered: 3 blocks, 5 instruments, n=10796); C2 vs B1 -3.78%, CI crosses zero -> confirmatory NEGATIVE.
+- FCLR-H001: NOT_SUPPORTED. FCLR-H002: PARTIAL (SSRN 403 blocks full methodology). FCLR-H003: INCONCLUSIVE. FCLR-H004: BLOCKED (2024) / EXPLORATORY_ONLY (2026 FCLR-005).
+- All 14 tests pass. Risk overlay INELIGIBLE.
 
-## BOTTLENECK REMOVAL
-- Do NOT create new orchestration/status files - extend existing research_state artifacts
-- Do NOT re-probe liquidation sources endlessly - only if you find a concrete unauthenticated endpoint with >=90 days continuous history AND >=3x30-day blocks; otherwise document and move on
-- Focus compute on analysis, not plumbing
-
-**START IMMEDIATELY. NO PLANNING-ONLY RESPONSE. EXECUTE THE CAMPAIGN ABOVE.**
+## WHAT THE EVIDENCE SUPPORTED / CONTRADICTED / LEFT UNKNOWN
+- Supported: RV-only persistence (B1) is a strong baseline; funding-only (C1) adds modest in-window skill in FCLR-002/FCLR-003 but price-dislocation features (C2) do not improve over B1 when adequately powered.
+- Contradicted: H001 claim that funding+price jointly improve OOS 24h volatility forecasts over RV-only (FCLR-003 negative).
+- Unknown: whether any out-of-sample edge exists on data beyond 2024-12-31 (no unsealed >=5-symbol window); Track A observed liquidation predictability (no admissible census).

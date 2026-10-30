@@ -2,8 +2,8 @@
   "registry_version": "1.0",
   "generated": "2026-10-26T18:47:07Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "INCONCLUSIVE",
-  "summary": "FCLR-001 forecast gate NOT MET (PILOT/INCONCLUSIVE). FCLR-002 forecast gate NOT MET: primary contrast C2 vs B1 numerically passes (9.28% relative QLIKE, 95% CI [-0.097648, -0.008788] excludes zero, independently reproduced byte-identical 2026-10-28) but the minimum claim-worthy test (>=3 non-overlapping 30-day blocks) is NOT met -- test window 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks + 10-day remainder. Risk-overlay INELIGIBLE. FCLR-H003 boundary-breach forecast evaluated on both panels: INCONCLUSIVE, no incremental skill. Direct liquidation labels unavailable. Frontier lists unfinished tasks ordered by information gain; none may reuse a sealed holdout for selection.",
+  "current_status": "CONFIRMATORY_COMPLETE (negative)",
+  "summary": "FCLR-001 sealed: gate NOT MET (single-instrument BTCUSDT defect, single ~4-day block), PILOT/INCONCLUSIVE. FCLR-002 sealed: gate NOT MET (70 days = 2 blocks < 3); C2 vs B1 numerically +9.28% rel QLIKE, CI excludes zero, independently reproduced byte-identical 2026-10-28, but underpowered -> NOT claim-worthy. FCLR-003 sealed & COMPLETE: adequately-powered confirmatory (test 2024-10-02..2024-12-31 = 91 days = 3 blocks, 5 instruments, n=10796); C2 vs B1 = -3.78% rel QLIKE, 95% CI [-0.020240, 0.056734] crosses zero -> forecast gate NOT_MET; H001 NOT_SUPPORTED. FCLR-H003 boundary breach INCONCLUSIVE both panels, no incremental skill. Direct liquidation labels unavailable (Track A BLOCKED/exhausted). Risk-overlay INELIGIBLE. No unsealed >=5-symbol, >=3-block confirmatory window remains (2025 = BTC/ETH only; 2026 partial). Reopening requires a NEW admissible data source (RESEARCH_PROMPT.md §16) registered under a new experiment ID before any outcome inspection. Frontier tasks below reflect completed experiments; no unfinished confirmatory work is possible on current data.",
   "frontier": [
     {
       "rank": 1,
@@ -11,7 +11,9 @@
       "prerequisite": "New protocol version FCLR-002 v1.0 registered BEFORE any outcomes computed; sufficient historical coverage (data beyond 2024-03-31 or a re-partitioned panel) confirmed by coverage-only audit",
       "acceptance": ">=5 instruments in paired OOS panel; >=3 non-overlapping 30-day blocks; block-bootstrap uncertainty supporting improvement after multiplicity correction; >=2% relative QLIKE on primary contrast C2 vs B1",
       "blockers": "Frozen FCLR-001 coverage is 2024-01-01..2024-03-31; current test window is a single ~4-day block. Extending the window requires new admissible source downloads and a re-frozen split.",
-      "do_not": "Do not reuse the FCLR-001 sealed holdout for selection, tuning, or re-evaluation."
+      "do_not": "Do not reuse the FCLR-001 sealed holdout for selection, tuning, or re-evaluation.",
+      "status": "COMPLETE",
+      "result": "Superseded by FCLR-003 (adequately powered, 3 blocks); FCLR-003 primary contrast C2 vs B1 = -3.78% rel QLIKE, CI crosses zero -> gate NOT_MET; H001 NOT_SUPPORTED."
     },
     {
       "rank": 2,
@@ -28,7 +30,8 @@
       "acceptance": "Pre-registered scenarios; Brier/log-loss/calibration/precision-recall reported; long and short labels kept separate; funding/fee/price-reference assumptions disclosed",
       "result": "FCLR-001-H003: degenerate (base rate 0.0000, no events). FCLR-002-H003: real events at 5x/10x/20x but C2 does not beat B0 on Brier or log-loss in any scenario; INCONCLUSIVE, no incremental skill.",
       "blockers": "None beyond execution (completed 2026-10-28).",
-      "do_not": "Do not describe modeled boundary breaches as observed liquidations. Do not threshold-shop best-F1 to claim a pass."
+      "do_not": "Do not describe modeled boundary breaches as observed liquidations. Do not threshold-shop best-F1 to claim a pass.",
+      "status": "COMPLETE"
     },
     {
       "rank": 4,

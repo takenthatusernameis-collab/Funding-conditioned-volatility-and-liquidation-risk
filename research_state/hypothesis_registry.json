@@ -9,8 +9,8 @@
       "claim": "Funding extremes plus price-dislocation/smoothing features improve out-of-sample forecasts of next-24-hour realized variance of mark-price returns over a realized-volatility-only HAR-style baseline.",
       "estimand": "Paired out-of-sample QLIKE difference (C2 vs B1) on the frozen test panel.",
       "directional_claim": "C2 lower QLIKE than B1 (improvement).",
-      "status": "INCONCLUSIVE",
-      "status_evidence": "research_state/evaluation_summary.md; research_state/gate_assessment.md; research_state/final_inconclusive_report.md",
+      "status": "NOT_SUPPORTED",
+      "status_evidence": "research_state/evaluation_summary_FCLR003.md (powered confirmatory: 3 blocks, 5 instruments, n=10796); research_state/gate_assessment.md; research_state/final_inconclusive_report.md; AGENT_HANDOFF.md",
       "prior_tests": [
         {
           "experiment_id": "FCLR-001",
@@ -23,7 +23,7 @@
           "verdict": "INCONCLUSIVE; primary contrast numerically met and CI supports improvement, but minimum-claim-worthy test (>=3 non-overlapping 30-day blocks) NOT MET. Independently reproduced 2026-10-28 by re-running frozen scripts/run_evaluation.py with FCLR_EXPERIMENT=FCLR-002 (byte-identical numbers)."
         }
       ],
-      "next_falsification_test": "Pre-registered FCLR-003 (or later) with >=3 non-overlapping 30-day evaluation blocks across >=5 instruments, uncertainty supporting improvement after multiplicity correction, before any risk-overlay phase.",
+      "next_falsification_test": "None possible on current data: no unsealed >=5-symbol, >=3-block confirmatory window remains (2025 mark price only BTC/ETH; 2026 partial). Reopening requires a NEW admissible data source per RESEARCH_PROMPT.md §16 with >=5 instruments and >=3 non-overlapping 30-day blocks, registered under a new experiment ID before any outcome inspection.",
       "links": [
         "research_state/research_protocol.md",
         "research_state/evaluation_summary.md",
