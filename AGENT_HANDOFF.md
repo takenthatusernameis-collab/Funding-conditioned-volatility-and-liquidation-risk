@@ -16,6 +16,9 @@ SESSION_GOAL: PROGRAM CLOSED NEGATIVE — CONFIRMED CLOSEOUT. H001 NOT_SUPPORTED
 - **H003 (Modeled boundary-breach):** INCONCLUSIVE on both panels; no incremental skill.
 - **Track A (observed liquidations, FCLR-H004):** BLOCKED/exhausted after >=2 materially distinct source families (Binance liquidationSnapshot 404, fapi forceOrders 451; Bybit trades non-census; HuggingFace 2026-only with undercounting, no 2024 coverage; Zenodo/GitHub no admissible census). No confirmatory-feasible window. (research_state/liquidation_sources_enumeration.md, research_state/binance_source_probe.md)
 
+### Reporting erratum
+- The FCLR-006 summary displays `excludes zero: no`, but the reported interval `[0.173748, 0.615614]` is entirely positive and therefore excludes zero. See `research_state/reporting_errata_FCLR006.md`. This corrects only the reporting flag; the two-block shortfall remains and the formal gate remains NOT_MET.
+
 ### Verification
 - Tests: `python -m unittest discover -s tests -v` → **14 tests OK**
 - Byte-identical repro: `FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py` → only "Generated" timestamp differs; results identical.
