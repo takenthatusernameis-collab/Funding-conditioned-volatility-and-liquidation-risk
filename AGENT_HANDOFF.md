@@ -1,3 +1,17 @@
+# DELAY-ELIMINATION OVERRIDE — 2026-10-30
+
+**Track A source status is already a documented structural block:** the admissible 2024 Binance liquidationSnapshot/forceOrders probes previously returned 404/451, and no other verified free source was established. Do not repeat the same Track A source sweep on every agent activation.
+
+- Reuse the existing source-attempt evidence and local cache inventory. Re-check Track A only when a genuinely new free source/endpoint, dataset, provider-status change, or network context appears.
+- Keep Track B (modeled boundary breaches) as the active path. Run the fast inference path first; preserve the cache and deterministic seed; profile the exact slow stage before attempting the full inference pipeline.
+- Parallelize independent symbol/horizon/MMR/leverage/sides calculations only where deterministic outputs and shared-state isolation are preserved. Do not rerun completed cells.
+- Run affected unit tests after local changes; run the full test suite after a coherent inference/code batch and at the final decision gate, not after every no-op handoff refresh.
+- Do not refresh the timestamp or rewrite handoff-only metadata when no research state changed. A session with no new inference, source evidence, or code change should exit without manufacturing progress.
+
+Do not shorten sample requirements, use paid/signup data, inspect sealed holdouts, or fabricate liquidation labels. A real structural blocker remains a blocker; the optimization is to avoid repeatedly rediscovering it while progressing the independent Track B work.
+
+---
+
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (LIQUIDATION-RISK CAMPAIGN)
 
 UPDATED: 2026-10-30T20:41:54Z
