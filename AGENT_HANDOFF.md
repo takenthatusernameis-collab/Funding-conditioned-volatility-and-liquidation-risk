@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T06:28:50Z
+UPDATED: 2026-10-30T07:03:56Z
 HEAD: 37ddd9fd (main) — working tree has uncommitted campaign artifacts (do NOT commit unless explicitly asked)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
