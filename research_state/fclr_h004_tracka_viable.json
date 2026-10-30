@@ -49,11 +49,12 @@
     "XRPUSDT": {"rows": 12928, "first": "2026-07-10", "last": "2026-08-06"}
   },
   "feature_cache_status_2026": {
-    "markPriceKlines": "COMPLETE 2026-04-01..2026-08-06, 5 symbols",
-    "indexPriceKlines": "MISSING - 104 days x 5 symbols; completion script scripts/h004_complete_cache.py",
-    "premiumIndexKlines": "MISSING - 104 days x 5 symbols; completion script scripts/h004_complete_cache.py",
-    "fundingRate_monthly": "MISSING - 5 months x 5 symbols (2026-04..2026-08); completion script scripts/h004_complete_cache.py"
+    "markPriceKlines": "COMPLETE 2026-04-01..2026-08-06, 5 symbols (extracted CSVs on disk)",
+    "indexPriceKlines": "COMPLETE 2026-04-01..2026-08-06, 5 symbols (extracted CSVs on disk; verified 2026-10-30T04:52:10Z)",
+    "premiumIndexKlines": "COMPLETE 2026-04-01..2026-08-06, 5 symbols (extracted CSVs on disk; verified 2026-10-30T04:52:10Z)",
+    "fundingRate_monthly": "COMPLETE 2026-04..2026-08, 5 symbols (extracted CSVs on disk; verified 2026-10-30T04:52:10Z)"
   },
+  "cache_status_note": "scripts/h004_complete_cache.py NOT needed — cache already complete; do not re-run unless evidence changes.",
   "blocked_paths_confirmed_dead_2024": [
     "Binance data.binance.vision liquidationSnapshot (UM/CM daily+monthly): HTTP 404",
     "Binance fapi forceOrders: HTTP 451 restricted location",
