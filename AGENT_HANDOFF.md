@@ -1,64 +1,78 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T10:20:00Z
-HEAD: 5655c6ca (main) — working tree has uncommitted manifest edit (do NOT commit unless explicitly asked)
+UPDATED: 2026-10-30T10:46:44Z
+HEAD: 5655c6ca (main) — working tree clean of uncommitted research edits (do NOT commit unless explicitly asked)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
+DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
 
 ## INITIAL TASK MESSAGE (TIMESTAMPED) — MANDATORY FOR NEXT AGENTIC WORK SESSION
 
-**PRIORITY (repo name): FUNDING-CONDITIONED VOLATILITY + LIQUIDATION RISK.**
+**PRIORITY: CLOSE OUT CONFIRMATORY PROGRAM (FCLR-CLOSEOUT-001) — NO NEW MODEL TUNING ON SEALED HOLDS**
 
-### Confirmatory verdict (decisive, FCLR-003)
-FCLR-003 — the adequately-powered confirmatory test (frozen splits; test 2024-10-02..2024-12-31 = 91 days = 3 non-overlapping 30-day blocks PASS; 5 instruments BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT; n=10,796 paired rows; block bootstrap 2000 reps) — is COMPLETE and NEGATIVE:
-- C2 (funding + price-dislocation/smoothing) vs B1 (RV-only HAR): mean diff +0.015205 QLIKE, relative change -3.78% (worse), 95% CI [-0.020240, 0.056734] crosses zero -> PRIMARY CONTRAST C2 vs B1 FAILS.
-- C1 (funding only) vs B1: +8.09% relative (secondary contrast), but C2 vs C1 = +0.0477 QLIKE (adding price features to C1 HURTS).
-- Forecast gate: NOT_MET. Risk-overlay phase: INELIGIBLE.
-- H001 (funding extremes + price-dislocation/smoothing improve OOS volatility forecasts over RV-only baseline): NOT_SUPPORTED on current data.
-Artifact: research_state/evaluation_summary_FCLR003.md. Split registered (frozen before outcomes, matches executed run): research_state/run_manifest.json key split_boundaries_fclr003.
+### VERDICT (DECISIVE)
+- **FCLR-003 (confirmatory, powered):** COMPLETE & NEGATIVE. C2 (funding+price-dislocation/smoothing) vs B1 (RV-only HAR): mean diff +0.015205 QLIKE, relative -3.78% (worse), 95% CI [-0.020240, 0.056734] crosses zero. **C2 vs B1 FAILS.** Gate NOT_MET. Risk-overlay phase INELIGIBLE.
+- **H001 (funding extremes + price features improve OOS 24h vol over RV-only):** **NOT_SUPPORTED** on current admissible data.
+- **FCLR-002:** Underpowered (2 blocks) but showed direction; not claim-worthy.
+- **FCLR-001:** Defective coverage; inconclusive.
+- Artifacts: `research_state/evaluation_summary_FCLR003.md`, `research_state/run_manifest.json` (splits_fclr003 frozen before outcomes).
 
-### Data exhaustion (structural bottleneck — no fresh confirmatory window)
-No unsealed, contiguous >=5-symbol confirmatory window remains:
-- 2024-04..12 (all 5 symbols) fully committed to sealed FCLR-002 / FCLR-003.
-- 2025: mark price only for BTCUSDT, ETHUSDT (2 symbols); BNBUSDT/SOLUSDT/XRPUSDT absent.
-- 2026: partial (BTCUSDT Jan-Aug; ETHUSDT Jan + Apr-Aug; BNBUSDT/SOLUSDT/XRPUSDT Apr-Aug only).
-=> No fresh >=5-instrument, >=3-block window exists for a new confirmatory experiment (FCLR-004+) without a NEW admissible data source (RESEARCH_PROMPT.md §16). None currently available.
+### BOTTLENECKS (REMOVE THEM NOW)
+1. **Stale long-running process:** A background FCLR-002 recomputation (~09:48+) appears stuck at high CPU with no new artifacts. FCLR-002 already has recorded results and was independently reproduced in context. **Do NOT** relaunch redundant sealed-holdout recomputations. Kill or ignore if still running; verify no new files written in last 30min before acting.
+2. **Data exhaustion (structural):** No unsealed, contiguous >=5-symbol confirmatory window remains (2024-04..12 fully used by FCLR-002/003; 2025 has only BTC/ETH mark price for 2 symbols; 2026 partial). No fresh admissible >=5-instrument >=3-block window exists without a NEW admissible source per RESEARCH_PROMPT.md §16.
+3. **Tracks blocked/exhausted:** Track A (observed liquidations) structurally blocked (Binance liquidationSnapshot 404, forceOrders geo-restricted). Track B (modeled boundary breach) inconclusive with no fresh data to extend rigorously. **Do NOT** rescue H001 by threshold-shopping on sealed holds.
 
-### Track A (observed liquidations)
-STRUCTURALLY BLOCKED, exhausted (Binance liquidationSnapshot HTTP 404; fapi forceOrders HTTP 451 restricted location; no Bybit/OKX/Deribit unauthenticated census; FCLR-005 2026 pilot complete = exploratory only; FCLR-H004 BLOCKED for 2024).
+### IMMEDIATE EXECUTION PLAN (HEAVY WORK, NO CREDENTIALS)
+Execute in order. Each step must produce durable artifacts/evidence.
 
-### Track B (hypothetical boundary breach)
-FCLR-H003 INCONCLUSIVE on both panels, no incremental skill (research_state/evaluation_summary_h003.md / _FCLR002.md). Extensions (72h/168h horizons, lower MMR tiers, event-intensity target) require fresh pre-registration AND fresh data (none available for >=5 symbols) — do NOT run on sealed holdouts.
+**STEP 1: INDEPENDENT REPRODUCIBILITY CHECK (verify FCLR-003)**
+```bash
+# May take several minutes - this is the only justified recomputation
+FCLR_EXPERIMENT=FCLR-003 timeout 1800 python scripts/run_evaluation.py
+```
+- Confirm outputs match `research_state/evaluation_summary_FCLR003.md`: B0=0.487674, B1=0.401884, C1=0.369366, C2=0.417089; C2_vs_B1 diff +0.015205, CI [-0.020240,0.056734], rel -3.78%. If mismatch, document exact diff with hashes/timestamps.
 
-## NEXT FOCUS CAMPAIGN: FCLR-CLOSEOUT-001 (verify & close the confirmatory program)
+**STEP 2: FREEZE REGISTRIES TO FINAL STATE**
+- Update `research_state/hypothesis_registry.json`: set `FCLR-H001` status → `NOT_SUPPORTED`, add evidence links (`evaluation_summary_FCLR003.md`, `run_manifest.json#split_boundaries_fclr003`), timestamp.
+- Update `research_state/experiment_frontier.json`: mark `FCLR-002`, `FCLR-003` complete; set `current_status` → `CONFIRMATORY_COMPLETE` (negative); record `data_exhaustion: true`, `track_a_blocked: true`, `overlay_eligible: false`.
+- If missing, ensure `research_state/evaluation_summary_FCLR003.md` is the canonical artifact referenced.
 
-Because the confirmatory gate is negative and no fresh >=5-symbol data exists, do NOT launch further model/hyperparameter searches on sealed holdouts (prohibited: threshold shopping / holdout reuse / exploratory rescue of a failed confirmatory test, RESEARCH_PROMPT.md §16-17). Execute instead:
+**STEP 3: WRITE DEFINITIVE CLOSEOUT (durable, citable)**
+Create/update `research_state/final_confirmatory_verdict.md` with:
+- Executive verdict: H001 NOT_SUPPORTED (powered confirmatory negative)
+- Numbers table (B0/B1/C1/C2 + contrasts + CIs)
+- Gates: all criteria fail for primary contrast; overlay ineligible
+- Data exhaustion statement (no unsealed >=5-symbol window)
+- Tracks: A blocked, B inconclusive
+- Reproducibility: frozen splits, commits, commands
+- Recommendations: do NOT pursue overlay; any future claim requires NEW admissible data source(s) + pre-registered protocol
 
-1. **Verify independent recomputation (in progress):** `FCLR_EXPERIMENT=FCLR-003 python scripts/run_evaluation.py` — confirm it reproduces research_state/evaluation_summary_FCLR003.md (QLIKE B0=0.487674 / B1=0.401884 / C1=0.369366 / C2=0.417089; C2_vs_B1 diff +0.015205, 95% CI [-0.020240, 0.056734], rel -3.78%). May take several minutes; check research_state/evaluation_summary_FCLR003.md mtime.
-2. **Finalize registry verdict:** research_state/hypothesis_registry.json FCLR-H001 status -> NOT_SUPPORTED (evidence: FCLR-003); research_state/experiment_frontier.json current_status -> CONFIRMATORY_COMPLETE (negative); mark frontier tasks FCLR-002 / FCLR-003 complete.
-3. **Write definitive conclusion:** record final negative-result verdict (research_state/final_confirmatory_verdict.md or append to final_inconclusive_report.md) citing FCLR-003, H001 NOT_SUPPORTED, data exhaustion, Track A blocked, overlay ineligible.
-4. **Regression check:** `python -m unittest discover -s tests -v` (14 tests must pass).
-
-## BOTTLENECKS REMOVED / NOTED
-- split_boundaries_fclr003 registered in run_manifest.json (frozen, matches executed FCLR-003 splits) — unblocks reproducible FCLR-003 recomputation.
-- Verified research_state/data_cache holds contiguous mark price for all 5 symbols 2024-04..12 (Oct/Nov/Dec = 31/30/31 daily CSVs each symbol); no fresh >=5-symbol window beyond 2024-12.
-- Stale background process: an FCLR-002 recomputation (started ~09:48) spinning ~30+ min at 100% CPU with no output written — FCLR-002 result already on record (independently reproduced per hypothesis_registry). Do NOT launch redundant slow recomputations; results already on record.
-- Do NOT: re-run sealed holdouts for tuning/selection; change .github/workflows; build a risk/risk-reduction overlay; fabricate observed-liquidation labels; threshold-shop to rescue H001.
-
-## VERIFICATION COMMANDS
+**STEP 4: REGRESSION SAFETY**
 ```bash
 python -m unittest discover -s tests -v
-# FCLR-003 independent recomputation verification (may take several minutes):
-FCLR_EXPERIMENT=FCLR-003 python scripts/run_evaluation.py
+```
+All tests must remain passing. If any test fails, fix with minimal code change outside `.github/workflows` and document.
+
+**STEP 5: CLEAN HANDOFF UPDATE**
+Update this file with final closeout status, commands run, artifacts written, and a crisp "NEXT AGENT" directive (point to final_confirmatory_verdict.md; explicitly forbid sealed-holdout tuning/rescue).
+
+### VERIFICATION COMMANDS (COPY/PASTE)
+```bash
+# Reproducibility
+FCLR_EXPERIMENT=FCLR-003 timeout 1800 python scripts/run_evaluation.py
+# Tests
+python -m unittest discover -s tests -v
 ```
 
-## CURRENT STATE (GROUND TRUTH)
-- FCLR-001: sealed, gate NOT_MET (single-instrument BTCUSDT coverage defect; single ~4-day block). PILOT/INCONCLUSIVE.
-- FCLR-002: sealed, gate NOT_MET (70 days = 2 blocks < 3); C2 vs B1 numerically +9.28% rel QLIKE, CI excludes zero, but underpowered -> NOT claim-worthy.
-- FCLR-003: sealed & COMPLETE, gate NOT_MET (powered: 3 blocks, 5 instruments, n=10796); C2 vs B1 -3.78%, CI crosses zero -> confirmatory NEGATIVE.
-- FCLR-H001: NOT_SUPPORTED. FCLR-H002: PARTIAL (SSRN 403 blocks full methodology). FCLR-H003: INCONCLUSIVE. FCLR-H004: BLOCKED (2024) / EXPLORATORY_ONLY (2026 FCLR-005).
-- All 14 tests pass. Risk overlay INELIGIBLE.
+### CURRENT GROUND TRUTH
+- FCLR-001: PILOT/INCONCLUSIVE (coverage defect)
+- FCLR-002: SEALED/NOT_CLAIMWORTHY (underpowered)
+- FCLR-003: SEALED/COMPLETE/NEGATIVE (powered, 5 symbols, 3 blocks)
+- H001: NOT_SUPPORTED | H002: PARTIAL | H003: INCONCLUSIVE | H004: BLOCKED/EXPLORATORY_ONLY
+- Risk overlay: INELIGIBLE
+- All 14 tests passing (as of last state)
 
-## WHAT THE EVIDENCE SUPPORTED / CONTRADICTED / LEFT UNKNOWN
-- Supported: RV-only persistence (B1) is a strong baseline; funding-only (C1) adds modest in-window skill in FCLR-002/FCLR-003 but price-dislocation features (C2) do not improve over B1 when adequately powered.
-- Contradicted: H001 claim that funding+price jointly improve OOS 24h volatility forecasts over RV-only (FCLR-003 negative).
-- Unknown: whether any out-of-sample edge exists on data beyond 2024-12-31 (no unsealed >=5-symbol window); Track A observed liquidation predictability (no admissible census).
+### NEXT AGENT DIRECTIVE (HARD CONSTRAINTS)
+- **DO NOT** tune hyperparameters/thresholds/features on sealed test sets to "rescue" H001.
+- **DO NOT** modify `.github/workflows` without explicit maintainer authorization.
+- **DO NOT** fabricate observed liquidation labels or conflate modeled breaches with observed liquidations.
+- **DO** complete closeout above. If new admissible data appears (with provenance/unauthenticated access), ONLY then pre-register a new experiment on a truly unsealed window.
