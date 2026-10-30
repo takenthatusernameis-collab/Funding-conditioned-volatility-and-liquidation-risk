@@ -1,14 +1,14 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T13:55:00Z
-HEAD: 1f595d2a (main) — working tree: evaluation_summary_FCLR006.md regenerated (Generated timestamp only; byte-identical numbers), __pycache__ untracked
+UPDATED: 2026-10-30T13:56:38Z
+HEAD: 1f595d2a (main) — working tree: AGENT_HANDOFF.md refreshed; liquidation_sources_enumeration.md duplicate FCLR-005 records collapsed; __pycache__ untracked
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
 SESSION_GOAL: PROGRAM CLOSED NEGATIVE — FCLR-006 COMPLETE (NEGATIVE); ALL CLOSEOUT RECORDS RECONCILED; FINAL VERIFICATION PASSED; NO FURTHER CONFIRMATORY PATH ON EXISTING ADMISSIBLE DATA
 
-## INITIAL TASK MESSAGE (TIMESTAMPED) — MANDATORY FOR NEXT AGENTIC WORK SESSION
+## INITIAL TASK MESSAGE (TIMESTAMPED 2026-10-30T13:56:38Z) — MANDATORY FOR NEXT AGENTIC WORK SESSION
 
-**PRIORITY: REPORT PROGRAM CLOSEOUT NEGATIVE — NO FURTHER CONFIRMATORY WORK FEASIBLE ON EXISTING ADMISSIBLE DATA**
+**PRIORITY: REPORT PROGRAM CLOSEOUT NEGATIVE — H001 NOT_SUPPORTED ON ALL CONFIRMATORY PATHS; NO FURTHER CONFIRMATORY WORK FEASIBLE ON EXISTING ADMISSIBLE DATA**
 
 ### GROUND TRUTH (DECISIVE)
 - **FCLR-003 (2024-10-02..2024-12-31):** SEALED NEGATIVE. C2 vs B1: +0.015205 QLIKE (worse), -3.78% rel, CI [-0.020240, 0.056734] crosses 0. 91 days = 3 blocks, 5 instruments, n=10796. **FCLR-H001: NOT_SUPPORTED.** Risk-overlay INELIGIBLE. Canonical: research_state/evaluation_summary_FCLR003.md
@@ -22,6 +22,7 @@ SESSION_GOAL: PROGRAM CLOSED NEGATIVE — FCLR-006 COMPLETE (NEGATIVE); ALL CLOS
 - experiment_frontier.json rank 6: FCLR-006 status COMPLETE; result recorded; gate NOT_MET / H001 NOT_SUPPORTED (unsealed 2026 confirmation). DONE.
 - AGENT_HANDOFF.md obsolete instruction to re-run FCLR-006 Step 1 removed; Steps 1-4 complete (coverage audit 12:52:01Z, protocol frozen 13:45:00Z, evaluation run 13:47:31Z, byte-identical repro verified 13:55:23Z).
 - final_confirmatory_verdict.md data-exhaustion claim (FCLR-FINAL-001, 10:46:44Z) RETRACTED 2026-10-30T12:34:23Z per hypothesis_registry.json closeout; 2026 Apr-Jul holds all 5 symbols unsealed and was exhausted by FCLR-006. Not current on data-exhaustion.
+- research_state/liquidation_sources_enumeration.md duplicate FCLR-005 execution records collapsed to one (was appended 5x identically). DONE.
 
 ### EXECUTION PLAN — ALL STEPS COMPLETE
 - STEP 1 MARK FCLR-006 COMPLETE: DONE (experiment_frontier.json rank 6 COMPLETE).
