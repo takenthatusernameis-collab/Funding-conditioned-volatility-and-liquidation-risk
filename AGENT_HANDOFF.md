@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T07:54:12Z
+UPDATED: 2026-10-30T09:45:32Z
 HEAD: 5655c6ca (main) — working tree may have uncommitted artifacts (do NOT commit unless explicitly asked)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@ This repository's name prioritizes both tracks. Track A (observed liquidations) 
 
 ### IMMEDIATE MANDATORY CAMPAIGN (EXECUTE IN FULL, NO SHORTCUTS)
 
-**CAMPAIGN ID: FCLR-HEAVY-001 | TIME: 2026-10-30T07:54:12Z**
+**CAMPAIGN ID: FCLR-HEAVY-002 | TIME: 2026-10-30T09:45:32Z**
 
 1. **VOLATILITY BASELINE RECOMPUTATION (HARD)** - Recompute FCLR-002 and FCLR-003 end-to-end using `scripts/run_evaluation_fixed.py` with exact commands logged. Compare byte-for-byte against existing summaries. Identify any numerical drift. Write results to `research_state/volatility_baseline_recheck_20261030.md` with checksums.
 2. **FUNDING-CONDITIONED INTERACTION ANALYSIS (HARD)** - Using cached data only, build a funding×volatility interaction model on train/val, evaluate on frozen test sets (FCLR-002 and FCLR-003). Test pre-registered interactions: funding_sign×RV24, |funding|×RV_ratio, funding_persistence×vol_regime. Use block bootstrap (>=2000). Record all results in `research_state/funding_interaction_analysis.md`. Do NOT touch holdouts early.
