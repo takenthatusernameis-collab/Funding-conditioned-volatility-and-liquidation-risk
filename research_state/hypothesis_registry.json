@@ -2,16 +2,16 @@
   "registry_version": "1.1",
   "frozen_date": "2026-10-30",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "closeout": {
+    "closeout": {
     "report_id": "FCLR-FINAL-001",
     "closed_date": "2026-10-30T11:10:00Z",
-    "verdict": "CONFIRMATORY_COMPLETE (negative)",
-    "primary_claim": "FCLR-H001 NOT_SUPPORTED on the only adequately-powered confirmatory window (FCLR-003)",
+    "verdict": "CONFIRMATIVE_COMPLETE (negative); H001 NOT_SUPPORTED on powered 2024-12 panel (FCLR-003) and unsealed 2026 panel (FCLR-006, underpowered)",
+    "primary_claim": "FCLR-H001 NOT_SUPPORTED on the only adequately-powered confirmatory window (FCLR-003); reconfirmed negative on unsealed 2026 FCLR-006 (2 blocks, significantly worse)",
     "overlay_eligible": false,
     "data_exhaustion": false,
     "track_a_blocked": true,
     "track_b_inconclusive": true,
-    "note": "Independent reproducibility re-run of FCLR-003 initiated 2026-10-30T11:00Z (bgp_18c914b78001ZWxMSjA8l35RtN, log /tmp/fclr003_repro.log). Prior canonical numbers (evaluation_summary_FCLR003.md, 2026-10-29T19:13:39Z) already independently reproduced byte-identical on 2026-10-28; this re-run is a final-verification pass. DATA_EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: verified against research_state/data_cache/ \u2014 2026 Apr-Jul all 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 files/symbol-month), indexPriceKlines, and fundingRate zips (4-8/month); combined Apr-Jul 2026 \u2248 122 days = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003 (2024) and FCLR-005 (HF liquidation 2026-07-08..2026-08-06, Track A only). FCLR-006 confirmatory path on unsealed 2026 data is open; see AGENT_HANDOFF.md INITIAL TASK MESSAGE and experiment_frontier.json rank 6."
+    "note": "DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: verified against research_state/data_cache/ — 2026 Apr-Jul all 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 files/symbol-month), indexPriceKlines, and fundingRate zips; combined ~122 days = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003 (2024) and FCLR-005 (Track A only). FCLR-006 COMPLETE_NEGATIVE (underpowered 2-block panel). OPEN CONFIRMATORY PATH: CAMPAIGN FCLR-007 on unsealed 2026-04-01..2026-07-31 (~122 days, 4 blocks, >=5 instruments); pre-register research_state/research_protocol_fclr007.md BEFORE outcome inspection per AGENT_HANDOFF.md SESSION_GOAL and experiment_frontier.json rank 1."
   },
   "hypotheses": [
     {
