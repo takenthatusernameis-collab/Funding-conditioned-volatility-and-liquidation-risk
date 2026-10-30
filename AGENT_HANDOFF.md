@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T17:39:37Z
+UPDATED: 2026-10-30T17:41:01Z
 HEAD: fb7b0da1 (main) — working tree clean (only untracked __pycache__/)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
