@@ -34,9 +34,16 @@ FCLR-005 pilot complete (EXPLORATORY_ONLY). Continued discovery probed distinct 
 - Observed != modeled != volatility-only. Capped != census. Absence != zero. Never infer event-free intervals from missing data.
 - Do NOT re-run FCLR-005. Do NOT threshold-shop. No synthetic labels as observed liquidations.
 
-## SINGLE NEXT TASK — NONE (CLEAN STOP)
+## SINGLE NEXT TASK — 2026-10-30T06:43:46Z (HEAVY-WORK CAMPAIGN: VOLATILITY TRACK + FUNDING-CORRECTION REPLICATION)
 
-Track A (observed liquidations) is structurally blocked for confirmatory feasibility. No further unauthenticated distinct routes found. Focus remains on volatility tracks (FCLR-001) which are sealed, or other registered hypotheses if any become unblocked with free data — but no liquidation census exists. Stop cleanly.
+Since Track A (observed liquidations) is structurally blocked and volatility gates FCLR-001..004 are sealed (NOT_MET/BLOCKED) and must not be re-run, the next agentic work session must execute a bounded, high-effort campaign that cannot be skipped:
+
+1. Re-verify the sealed volatility baseline artifacts end-to-end (recompute FCLR-001 metrics from cached data with scripts/run_evaluation_fixed.py; confirm no drift vs research_state/evaluation_summary.md; record hash of cached inputs).
+2. Extend the funding-correction replication (scripts/funding_correction_replication.py) with out-of-sample robustness: add a second venue (OKX or Bybit unauthenticated) if admissible, else document inadmissibility with HTTP evidence; add multiple-comparison correction across the 18-symbol universe; report median correction time by volatility tercile with bootstrap CIs.
+3. Expand data-source registry (research_state/data_source_registry.json) with exact endpoints, hashes, and coverage for any newly probed source; reject inadmissible ones with reasons.
+4. Add focused regression tests for new robustness logic in tests/ and run `python -m unittest discover -s tests`.
+
+No forecast-gate re-runs, no .github/workflows changes, no trading overlays. Heavy work is mandatory; status-only updates are not acceptable. Record exact commands, results, and next task in AGENT_HANDOFF.md.
 
 VERIFICATION:
 - python -m unittest tests.test_funding_correction_replication -v → 10/10
