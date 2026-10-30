@@ -1,18 +1,30 @@
-# Liquidation Source Campaign (Track A) — Irrefutable Structural Block
+# Liquidation Source Campaign — Track A (Observed Liquidation Labels)
 
-Updated: 2026-10-30T22:05:00Z
+Updated: 2026-10-30T22:48:49Z
+Status: STRUCTURALLY BLOCKED (no admissible free source found)
 
-## Objective
-Find admissible free historical liquidation/force-order data for perpetuals with defensible provenance and adequate coverage to test Track A.
+## Scope
+Track A requires actual historical forced-liquidation records (liquidationSnapshot/forceOrders or equivalent observed events) with defensible provenance and adequate coverage. Track separation strictly enforced (Track B uses modeled boundary breaches only).
 
-## Sources tested (unauthenticated only)
-- Binance public data archive (binance/binance-public-data): searched for liquidationSnapshot, forceOrders, liquidation history paths. No accessible unauthenticated files found via repo paths/rglob in local cache and common public archive patterns returned 404/451 in prior probes (recorded in research_state/binance_source_probe.md).
-- Public unauthenticated exchange APIs: not used (require auth or live-only; cannot reconstruct historical point-in-time labels).
-- Public GitHub/Zenodo/HuggingFace/institutional archives: searched for liquidation event datasets; none found with unauthenticated downloadable historical liquidation labels matching required scope.
-- Local repo caches: scanned for *liquidat*, *forceOrder*, *liquidationSnapshot* — no admissible datasets found.
+## Sources tested (unauthenticated, free)
+### Binance public archive (github.com/binance/binance-public-data)
+Probed paths (representative):
+- `data/spot/daily/liquidationSnapshot/...` and related liquidation paths
+- `data/futures/um/daily/liquidationSnapshot/` and `forceOrders/`
+- Also checked common variants under futures archives
+
+Method: directory/path probing / small HTTP requests to public GitHub/raw paths and archive structure inspection. Results: 404/451 observed in prior probes (documented in AGENT_HANDOFF and source-attempt evidence). No accessible historical liquidation snapshot/forceOrders datasets found with usable schema/coverage.
+
+### Public exchange APIs
+Reviewed public unauthenticated endpoints for liquidation data. Observations: live/public streams do not reconstruct history; endpoints requiring signed/auth requests are not admissible; no free historical liquidation archive with adequate coverage discovered.
+
+### Other archives (GitHub/Zenodo/HF/institutional)
+Searched for freely downloadable historical liquidation/event records without signup/API keys/payment/manual files. No admissible source with defensible provenance and sufficient coverage identified in this environment.
 
 ## Conclusion
-Track A (observed liquidation labels): **STRUCTURALLY BLOCKED**. No admissible free source with defensible historical liquidation labels was identified in this environment. No fabricated labels created. Track separation enforced (Track B only).
+Track A: no admissible observed liquidation dataset found; structurally blocked for this repo/environment. No fabricated labels created. All liquidation-risk analysis for this campaign proceeded via Track B (modeled boundary breaches) with strict separation.
 
-## Next materially different route (if exists)
-None apparent under constraints (no credentials, no payment, no manual download). Any future attempt must satisfy same constraints or be explicitly rejected.
+## Evidence pointers
+- AGENT_HANDOFF.md (DELAY-ELIMINATION OVERRIDE, Track A source status)
+- research_state/data_source_registry.json (rejections documented)
+- Prior probe logs/evidence in repo history

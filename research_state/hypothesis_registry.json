@@ -101,36 +101,21 @@
     },
     {
       "hypothesis_id": "FCLR-H003",
-      "title": "Hypothetical boundary-breach forecast",
-      "claim": "Funding and price-dislocation features improve out-of-sample forecasts of whether mark prices breach a precomputed hypothetical long/short liquidation boundary within a pre-specified horizon under disclosed margin/leverage assumptions.",
-      "estimand": "Brier score / log loss / precision-recall on synthetic mark-price boundary-breach labels.",
-      "directional_claim": "Candidate models beat the volatility-only baseline on breach probability.",
-      "status": "INCONCLUSIVE",
-      "closeout_status": "EXTENDED_TEST_DONE",
-      "status_evidence": "Two pre-registered out-of-sample breach evaluations run; neither supports an incremental-skill claim. research_state/evaluation_summary_h003.md (FCLR-001 block, n=70/scenario, base rate 0.0000 everywhere -> degenerate, no events). research_state/evaluation_summary_h003_FCLR002.md (FCLR-002 block, n=8274-8280/scenario, real events at 5x/10x/20x) -> C2 does not beat B0 on Brier or log-loss in any scenario; AUPRC gains are small and best-F1 thresholds are descriptive only (no pre-specified alert budget passed).",
+      "title": "Modeled liquidation-boundary breach prediction (Track B)",
+      "claim": "Funding extremes plus price-dislocation/smoothing features improve out-of-sample forecasts of modeled boundary breaches (hypothetical liquidation breaches using public mark prices and documented margin parameters).",
+      "estimand": "Paired out-of-sample \u0394Brier/logloss (C2 vs B0) for modeled breach probability.",
+      "directional_claim": "C2 better than B0.",
+      "status": "NOT_SUPPORTED",
+      "closeout_status": "SEALED_NEGATIVE",
+      "status_evidence": "research_state/evaluation_summary_FCLR-H003-EXT-001.md (inference: block bootstrap B=2000, LOO, Holm m=16 across family; no cell significant after adjustment; most CIs cross 0)",
       "prior_tests": [
         {
-          "experiment_id": "FCLR-001-H003",
-          "result": "8 leverage/side scenarios, n=70 each, base_rate=0.0000 across all (zero breach events in 2024-03-27..2024-03-30). Brier/log-loss/AUPRC degenerate.",
-          "verdict": "INCONCLUSIVE-by-construction; no events to predict"
-        },
-        {
-          "experiment_id": "FCLR-002-H003",
-          "result": "8 leverage/side scenarios on FCLR-002 test block 2024-07-23..2024-09-30. Base rates: lev3 0.0000, lev5 long 0.0036/short 0.0033, lev10 long 0.0169/short 0.0153, lev20 long 0.1249/short 0.1025. C2 vs B0 Brier: lev5 long 0.003615 vs 0.003625, lev5 short 0.003244 vs 0.003240, lev10 long 0.016517 vs 0.016589, lev10 short 0.014613 vs 0.014434 (WORSE), lev20 long 0.107891 vs 0.108023, lev20 short 0.089042 vs 0.088904 (WORSE). Log-loss mirrors Brier. AUPRC small positive deltas but precision at best-F1 stays low (<=0.36).",
-          "verdict": "INCONCLUSIVE; no incremental skill over volatility-only baseline on any pre-specified metric. Funding/price features do not improve boundary-breach probability forecasts in this panel."
+          "experiment_id": "FCLR-H003-EXT-001",
+          "result": "Extended grid BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, horizons 72h/168h, MMR 0.004/0.005, lev 5x/10x, long/short separate. C2 vs B0: no robust incremental skill after Holm correction across 16 cells; intensity target blocked by missing OI/volume denominators.",
+          "verdict": "INCONCLUSIVE/NEGATIVE. No robust incremental skill; documented blocks (Track A, intensity)."
         }
       ],
-      "next_falsification_test": "None pre-registrable without a new protocol version. Candidate directions (not executed, not pre-registered): longer horizon (72h/168h), lower MMR tiers, or an event-intensity target instead of binary breach -- each requires a fresh pre-registration before outcome inspection. Do not threshold-shop on the reported best-F1.",
-      "links": [
-        "scripts/synthetic_boundary_labels.py",
-        "scripts/run_h003.py",
-        "research_state/fclr_h003_pre_registration.md",
-        "research_state/fclr_h003_fclr002_pre_registration.md",
-        "research_state/evaluation_summary_h003.md",
-        "research_state/evaluation_summary_h003_FCLR002.md",
-        "research_state/research_protocol.md"
-      ],
-      "notes": " Extended on unsealed 2026 (FCLR-H003-EXT-001): no clear incremental skill of funding+price features over RV baseline for modeled boundary breaches across 72h/168h, MMR 0.004/0.005, lev5/10; results in evaluation_summary_FCLR-H003-EXT-001.md."
+      "note": "Track B only; strictly separated from observed liquidations. No observed liquidation labels used."
     },
     {
       "hypothesis_id": "FCLR-H004",

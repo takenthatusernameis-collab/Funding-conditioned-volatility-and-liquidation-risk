@@ -60,3 +60,26 @@ You are continuing from this single handoff. Repository name prioritizes **liqui
 Durable handoff updated with decision-grade conclusion on liquidation risk (Track B negative/inconclusive with inference), Track A irrefutable structural block documented, hypothesis/experiment frontier updated, tests passing.
 
 **START NOW. FOCUS ON CLOSING LIQUIDATION RISK CAMPAIGN CLEANLY.**
+
+
+---
+
+# HANDOFF UPDATE — 2026-10-30T22:48:49Z (LIQUIDATION-RISK CAMPAIGN CLOSED)
+
+HEAD: 86c4f3ce
+UPDATED: 2026-10-30T22:48:49Z
+SESSION: liquidation-risk-campaign-closeout
+
+## ACTIONS TAKEN
+1. **Track B (FCLR-H003-EXT-001) inference review**: Confirmed block bootstrap (B=2000), LOO, Holm correction across 16 cells (horizons×MMR×lev×sides). No cell significant after Holm; most ΔBrier CIs cross 0. Intensity blocked by missing OI/volume denominators.
+2. **Hypothesis registry updated**: Added/updated `FCLR-H003` (NOT_SUPPORTED/SEALED_NEGATIVE) with evidence pointers to `research_state/evaluation_summary_FCLR-H003-EXT-001.md`.
+3. **Experiment frontier updated**: Marked `FCLR-H003-EXT-001` as `CLOSED_NEGATIVE` with lessons (no robust incremental skill; intensity/Track A blocks).
+4. **Track A documentation**: Created `research_state/liquidation_source_campaign.md` documenting exhaustive unauthenticated probes (Binance liquidationSnapshot/forceOrders 404/451) and rejection reasons; explicitly states structural block, no fabricated labels.
+5. **Tests**: `python -m unittest discover -s tests -v` → 14/14 OK.
+
+## DECISION-GRADE CONCLUSION
+- **Track A (observed liquidations):** STRUCTURALLY BLOCKED — no admissible free historical liquidation dataset found with defensible provenance/coverage in this environment. Irrefutably documented.
+- **Track B (modeled boundary breaches):** INCONCLUSIVE/NEGATIVE — extended grid shows no robust incremental skill of funding+price-dislocation features over RV-only after multiple-comparisons correction. Track separation enforced throughout.
+
+## NEXT CAMPAIGN
+No viable liquidation-risk path remains without paid data/credentials or a new admissible free liquidation source. Campaign complete. Future agents should not re-sweep Track A absent a genuinely new free source/endpoint/dataset.

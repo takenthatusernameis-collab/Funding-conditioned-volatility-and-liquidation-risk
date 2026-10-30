@@ -111,13 +111,15 @@
   "experiments": [
     {
       "experiment_id": "FCLR-H003-EXT-001",
-      "status": "closed_negative",
-      "conclusion": "Track B (modeled boundary breaches): C2 (RV+funding+price-dislocation) shows no robust incremental skill over B0 (RV-only) on unsealed 2026 panel. Block bootstrap/LOO/Holm across declared family show CIs cross 0, no cell significant after adjustment. Intensity target blocked by missing OI/volume denominators. Track separation enforced.",
-      "artifacts": [
-        "research_state/protocol_FCLR-H003-EXT-001.md",
-        "research_state/evaluation_summary_FCLR-H003-EXT-001.md"
+      "hypothesis_id": "FCLR-H003",
+      "rank": 99,
+      "status": "CLOSED_NEGATIVE",
+      "priority_reason": "Track B liquidation boundary prediction - completed extended grid with inference; no robust incremental skill",
+      "required_resources": [
+        "cached mark/index/funding klines"
       ],
-      "updated_at": "2026-10-30T22:04:54Z"
+      "blocked_by": [],
+      "notes": "Block bootstrap + LOO + Holm across 16 cells show no robust incremental skill of C2 over B0; intensity blocked by missing denominators; Track A remains structural block."
     }
   ]
 }
