@@ -1,91 +1,62 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T12:50:00Z
-HEAD: 20671b69 (main) — clean working tree (ignore __pycache__)
+UPDATED: 2026-10-30T13:52:00Z
+HEAD: 1f595d2a (main) — clean working tree (ignore __pycache__)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
-SESSION_GOAL: EXECUTE FCLR-006 ON UNSEALED 2026 DATA — NO SEAL VIOLATIONS
+SESSION_GOAL: CLOSE OUT CONFIRMATORY PROGRAM — FCLR-006 COMPLETE (NEGATIVE); RECONCILE STALE RECORDS; DOCUMENT STRUCTURAL BLOCKERS; FINAL VERIFICATION
 
 ## INITIAL TASK MESSAGE (TIMESTAMPED) — MANDATORY FOR NEXT AGENTIC WORK SESSION
 
-**PRIORITY: CAMPAIGN FCLR-006 — CONFIRMATORY VOLATILITY FORECAST ON UNSEALED 2026 DATA (HEAVY EXECUTION REQUIRED)**
+**PRIORITY: PROGRAM CLOSEOUT AND FINAL VERIFICATION — NO FURTHER CONFIRMATORY WORK FEASIBLE ON EXISTING ADMISSIBLE DATA**
 
 ### GROUND TRUTH (DECISIVE)
-- **FCLR-003 (2024-10-02..2024-12-31):** COMPLETE & NEGATIVE. C2 vs B1: +0.015205 QLIKE (worse), -3.78% rel, CI crosses 0. **FCLR-H001: NOT_SUPPORTED.** Risk-overlay INELIGIBLE.
-- **FCLR-002 (2024-07-23..2024-09-30):** Underpowered (<3 blocks), SEALED, INCONCLUSIVE.
-- **FCLR-001 (2024 Q1):** Coverage defect, BTCUSDT-only effectively, SEALED, INCONCLUSIVE.
-- **H002 (Funding-correction replication):** PARTIAL_REPLICATION (SSRN 7529458). 88 events Jan-Mar 2024, median 8.0h. Full replication blocked by methodology access — document structural impossibility if no alternative source found.
-- **H003 (Modeled boundary-breach):** INCONCLUSIVE on both panels; no incremental skill. Never conflate with observed liquidations.
-- **Track A (observed liquidations):** BLOCKED after exhaustive probes (Binance/Bybit/OKX/Deribit/HF/GitHub). No admissible unauthenticated liquidation labels found. Remain BLOCKED — do not fabricate.
+- **FCLR-003 (2024-10-02..2024-12-31):** SEALED NEGATIVE. C2 vs B1: +0.015205 QLIKE (worse), -3.78% rel, CI [-0.020240, 0.056734] crosses 0. 91 days = 3 blocks, 5 instruments, n=10796. **FCLR-H001: NOT_SUPPORTED.** Risk-overlay INELIGIBLE. Canonical: research_state/evaluation_summary_FCLR003.md
+- **FCLR-006 (unsealed 2026-05-23..2026-08-06):** COMPLETE NEGATIVE, byte-identical reproduction confirmed. C2 vs B1: +0.368588 QLIKE (significantly WORSE), CI [0.173748, 0.615614] entirely positive, -69.90% rel. n=8987 paired, 5 instruments. Test window 76 days = 2 blocks < 3 required -> block criterion NOT_MET. Gate NOT_MET. Canonical: research_state/evaluation_summary_FCLR006.md (Generated 2026-10-30T13:47:31Z); hypothesis_registry.json closeout FCLR-FINAL-001.
+- **H002 (Funding-correction replication):** PARTIAL_REPLICATION; SSRN HTTP 403 blocks full methodology — structural impossibility. 88 events Jan-Mar 2024, median 8.0h. Do not promote.
+- **H003 (Modeled boundary-breach):** INCONCLUSIVE on both panels; no incremental skill.
+- **Track A (observed liquidations):** BLOCKED/exhausted after >=2 materially distinct source families (Binance fapi forceOrders 451, liquidationSnapshot 404; Bybit HF census single 30-day window used by FCLR-005; Zenodo/GitHub dead ends). No confirmatory-feasible window.
+- All 14 tests pass (`python -m unittest discover -s tests -v`).
 
-### BOTTLENECK REMOVAL (COMPLETED)
-**"Data exhaustion" is FALSE.** Verified 2026-10-30T12:40:17Z in `research_state/data_cache/`:
-- **2026 Apr–Jul:** ALL 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have `markPriceKlines/`, `indexPriceKlines/`, `fundingRate/` coverage.
-- **Unsealed:** Not used in FCLR-001/002/003 or FCLR-005. This is the only unblocked confirmatory window.
-- **Sufficient size:** ~122 common UTC hourly days across all 5 symbols = **>=4 non-overlapping 30-day blocks** (> required >=3).
-- `hypothesis_registry.json` and `experiment_frontier.json` already reflect FCLR-006 on unsealed data.
+### STALE RECORDS TO RECONCILE (BOTTLENECK REMOVAL)
+- **experiment_frontier.json rank 6 still shows FCLR-006 status NOT_STARTED** — it is COMPLETE (results in hypothesis_registry.json, evaluation_summary_FCLR006.md, reproduction verified). Fix: mark COMPLETE, record gate NOT_MET / H001 NOT_SUPPORTED (unsealed 2026 confirmation).
+- **AGENT_HANDOFF.md previously instructed re-running FCLR-006 Step 1** — obsolete; Steps 1-4 complete (coverage audit 12:52:01Z, protocol frozen 13:45:00Z, evaluation run 13:47:31Z, byte-identical repro verified).
+- **final_confirmatory_verdict.md (FCLR-FINAL-001, 10:46:44Z) claims data exhaustion** — retracted 2026-10-30T12:34:23Z per hypothesis_registry.json closeout (2026 Apr-Aug holds all 5 symbols unsealed; now exhausted by FCLR-006). Do not treat as current on data-exhaustion.
 
-### EXECUTION PLAN (DO IN THIS EXACT ORDER — NO SHORTCUTS)
+### EXECUTION PLAN (DO IN THIS EXACT ORDER)
 
-#### STEP 1: COVERAGE-ONLY AUDIT (NO OUTCOME INSPECTION) — START HERE
-- **Goal:** Audit coverage for BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT for 2026-04-01 through 2026-07-31 with ZERO look at QLIKE/model performance.
-- **Actions:**
-  1. Inventory `markPriceKlines`, `indexPriceKlines`, `fundingRate` files per symbol-month.
-  2. Compute common UTC hourly timestamps across all 5 symbols (require >=5 instruments, >=90 common days).
-  3. Identify contiguous gaps, delisted/symbol-reuse, or schema anomalies. Quarantine suspicious rows with provenance. Do NOT guess repairs.
-  4. Propose chronological splits (60/20/20) with 7-day purge/embargo boundaries based purely on coverage.
-- **Output:** `research_state/fclr006_coverage_audit.md` with exact counts, common timestamp total, proposed frozen splits, file hashes per source set.
-- **Constraint:** COVERAGE-ONLY. No evaluation metrics.
+#### STEP 1: MARK FCLR-006 COMPLETE
+- experiment_frontier.json rank 6: status -> COMPLETE; result: "C2 vs B1 +0.368588 QLIKE (worse), CI [0.173748, 0.615614], -69.90% rel, gate NOT_MET, block criterion NOT_MET (2 blocks < 3); H001 NOT_SUPPORTED on unsealed 2026 data; byte-identical repro verified."
+- Mark Steps 1-4 complete; note coverage audit + protocol + evaluation + reproduction all done.
 
-#### STEP 2: PRE-REGISTER FCLR-006 PROTOCOL (BEFORE OUTCOMES)
-- **Goal:** Freeze protocol before computing any results.
-- **Actions:**
-  1. Create `research_state/research_protocol_fclr006.md` v1.0 copying the FCLR-001 design.
-  2. Specify: unit = contract x UTC hour; target = next-24h realized variance of mark-price log returns (sum of squared log returns t+1..t+24); predictors RV1h/RV24h/RV168h + signed funding + 90-day abs-funding percentile + mark/index premium + mark/EMA24 distance.
-  3. Models: B0 (persistence), B1 (RV-only HAR), C1 (funding-augmented), C2 (combined). Primary contrast C2 vs B1 on QLIKE.
-  4. Freeze: chronological splits, >=2% relative QLIKE materiality floor, Holm multiplicity, block bootstrap 2000 replicates, >=5 instruments, >=3 non-overlapping 30-day blocks.
-  5. Record git SHA, config hash, and source file hashes.
-- **Output:** Frozen protocol. Do NOT run evaluation until this file exists.
+#### STEP 2: DOCUMENT H002 STRUCTURAL IMPOSSIBILITY
+- Create research_state/h002_replication_blocker.md: SSRN 7529458 HTTP 403 blocks full methodology/event definition/censoring rules; PARTIAL_REPLICATION final (88 events Jan-Mar 2024, median 8.0h); no promotion to confirmatory/forecast-skill/liquidation evidence; no RV-regime contrast possible (no Jan-Mar 2024 mark prices in cache; downloads not permitted).
 
-#### STEP 3: BUILD/RUN EVALUATION
-- **Goal:** Execute evaluation on frozen splits.
-- **Actions:**
-  1. Use `scripts/run_evaluation.py` with `FCLR_EXPERIMENT=FCLR-006` (idempotent, checkpointed).
-  2. Verify ingestion handles 2026 schema (same as 2024). If schema differs, adapt minimally with provenance notes.
-  3. Run full evaluation with 2000 bootstrap replicates.
-- **Output:** `research_state/evaluation_summary_FCLR006.md`, gate assessment, updated `research_state/run_manifest.json`.
+#### STEP 3: FINAL TRACK A VERDICT
+- Confirm BLOCKED: >=2 materially distinct source families exhausted (Binance/Bybit/OKX/Deribit/HF/GitHub/Zenodo). Evidence: research_state/binance_source_probe.md; research_state/liquidation_sources_enumeration.md §1-4, §84-92. No new admissible liquidation source with >=3 non-overlapping 30-day blocks. If a new source appears, register a new protocol before examining outcomes (RESEARCH_PROMPT.md §16).
 
-#### STEP 4: RECORD, VERIFY, REPRODUCE
-- **Goal:** Seal results with verification.
-- **Actions:**
-  1. Update `research_state/hypothesis_registry.json` with FCLR-H001 status on FCLR-006 (seal after outcomes).
-  2. Update `research_state/experiment_frontier.json`.
-  3. Run `python -m unittest discover -s tests -v` (must pass all tests).
-  4. Reproduce: `FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py` and confirm byte-identical numbers.
-- **Output:** Update this handoff with final status and next action.
+#### STEP 4: FINAL VERIFICATION
+- `python -m unittest discover -s tests -v` — must pass all 14 tests.
+- Byte-identical repro: `FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py`; diff against research_state/evaluation_summary_FCLR006.md (numbers identical; only Generated timestamp may differ).
+- `git log --oneline -2` — confirm HEAD 1f595d2a, clean tree.
+- Update this AGENT_HANDOFF.md with final closeout status once Steps 1-4 are done.
 
-### SECONDARY WORK (ONLY AFTER FCLR-006 OR IF BLOCKED)
-- **H002:** Attempt alternative SSRN mirrors (arXiv, author institutional pages). If all fail, write `research_state/h002_replication_blocker.md` stating structural impossibility with evidence.
-- **H003:** Only consider if FCLR-006 passes AND new unsealed data becomes available with pre-registration.
-- **Track A:** Remain BLOCKED. No new admissible liquidation source exists. Do not hunt dead endpoints endlessly.
+### SECONDARY WORK
+- None on existing admissible data. Only new route: a new unauthenticated liquidation/price source with confirmatory-feasible coverage (>=5 symbols, >=3 non-overlapping 30-day blocks) -> pre-register a new experiment ID before examining outcomes. Do not re-run sealed FCLR-001/002/003/005/006 holds.
 
 ### HARD CONSTRAINTS
-- **NO SEAL VIOLATIONS:** Never tune on sealed FCLR-002/003/005 holds.
-- **COVERAGE-ONLY FIRST:** Step 1 has zero outcome inspection.
-- **PRE-REGISTER BEFORE OUTCOMES:** Protocol must be frozen before any QLIKE computed.
-- **NO FABRICATION:** No invented liquidation labels; distinguish modeled (H003) vs observed (H004).
-- **NO WORKFLOW CHANGES:** No `.github/workflows/*` changes without explicit maintainer authorization.
-- **EVIDENCE-BASED:** If blocked, document evidence and next materially different route. No guessing.
-- **HEAVY WORK:** This campaign must produce measurable research output. Avoid status-only files, wrappers, or polling loops.
+- No seal violations; no tuning on sealed holds; no threshold shopping.
+- No `.github/workflows/*` changes without explicit maintainer authorization.
+- No fabrication; distinguish modeled (H003) vs observed (H004).
+- Preserve negative results; H001 NOT_SUPPORTED is the correct scientific outcome.
+- No further confirmatory experiment feasible without a NEW admissible data source (RESEARCH_PROMPT.md §16).
 
 ### VERIFICATION COMMANDS
 ```bash
 python -m unittest discover -s tests -v
+FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py
 git log --oneline -2
-ls research_state/data_cache/BTCUSDT_2026_04/markPriceKlines-* | wc -l  # expect ~30
-ls research_state/data_cache/ETHUSDT_2026_07/markPriceKlines-* | wc -l  # spot check
-ls research_state/data_cache/BNBUSDT_2026_05/fundingRate-* | wc -l
 ```
 
 ### NEXT AGENT DIRECTIVE
-**START IMMEDIATELY WITH STEP 1.** Do not explore unrelated files, do not re-probe dead liquidation endpoints, do not rationalize data exhaustion. Run the coverage-only audit on 2026-04-01..2026-07-31 for all 5 symbols. Produce `research_state/fclr006_coverage_audit.md` with exact common-timestamp count and proposed frozen splits. If >=5 symbols and >=90 common days confirmed, proceed to Step 2. If coverage is sufficient, execute all steps through reproduction. This is the only unblocked confirmatory path forward — do heavy working.
+Execute Steps 1-4 in order. The confirmatory program is closed negative: H001 NOT_SUPPORTED on both the powered 2024-12 panel and unsealed 2026 data; overlay INELIGIBLE; Track A BLOCKED; H002 PARTIAL (structural); H003 INCONCLUSIVE. Produce: updated experiment_frontier.json, new h002_replication_blocker.md, final verification evidence, and this handoff updated with closeout status. If no new admissible data source appears, report the program as closed with H001 NOT_SUPPORTED and no further confirmatory path on current data. Do heavy working — close the records honestly; do not re-run completed experiments.

@@ -1,8 +1,8 @@
 {
   "registry_version": "1.0",
-  "generated": "2026-10-26T18:47:07Z",
+  "generated": "2026-10-30T13:52:00Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CONFIRMATORY_COMPLETE (negative)",
+  "current_status": "CONFIRMATORY_COMPLETE (negative) — FCLR-006 complete on unsealed 2026 data; H001 NOT_SUPPORTED on both powered 2024-12 panel and unsealed 2026 confirmation",
   "summary": "FCLR-001 sealed: gate NOT MET (single-instrument BTCUSDT defect, single ~4-day block), PILOT/INCONCLUSIVE. FCLR-002 sealed: gate NOT MET (70 days = 2 blocks < 3); C2 vs B1 numerically +9.28% rel QLIKE, CI excludes zero, independently reproduced byte-identical 2026-10-28, but underpowered -> NOT claim-worthy. FCLR-003 sealed & COMPLETE: adequately-powered confirmatory (test 2024-10-02..2024-12-31 = 91 days = 3 blocks, 5 instruments, n=10796); C2 vs B1 = -3.78% rel QLIKE, 95% CI [-0.020240, 0.056734] crosses zero -> forecast gate NOT_MET; H001 NOT_SUPPORTED. FCLR-H003 boundary breach INCONCLUSIVE both panels, no incremental skill. Direct liquidation labels unavailable (Track A BLOCKED/exhausted). Risk-overlay INELIGIBLE. DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: research_state/data_cache/ verified to hold unsealed 2026 Apr-Jul markPriceKlines/indexPriceKlines/fundingRate for all 5 symbols (~89-141 files/symbol-month; ~122 days combined = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003/005). The open confirmatory task is CAMPAIGN FCLR-006 (AGENT_HANDOFF.md INITIAL TASK MESSAGE): Step 1 coverage-only audit on 2026 Apr-Jul (no outcome inspection), then pre-register, run, verify.",
   "frontier": [
     {
@@ -56,13 +56,8 @@
       "acceptance": "research_state/fclr006_coverage_audit.md published (exact symbol-month coverage, common timestamp count, proposed frozen chronological 60/20/20 splits with 7-day purge/embargo, source file hashes); research_state/research_protocol_fclr006.md v1.0 frozen BEFORE outcomes (copy of FCLR-001 design: B0 persistence, B1 RV-HAR, C1 funding-augmented, C2 combined; primary contrast C2 vs B1 on QLIKE, >=2% relative QLIKE floor, Holm multiplicity, block bootstrap 2000 replicates); research_state/evaluation_summary_FCLR006.md + gate assessment + run_manifest.json update; `python -m unittest discover -s tests -v` passes (14 tests); byte-identical reproducibility re-run of FCLR_EXPERIMENT=FCLR-006 verified",
       "blockers": "None — data verified present in research_state/data_cache/; no downloads or credentials required; Track A remains BLOCKED and is NOT a prerequisite for Track C",
       "do_not": "Do not inspect QLIKE/model results during Step 1 coverage audit; do not re-open sealed FCLR-001/002/003/005 holds; do not tune thresholds on the holdout; no .github/workflows/* changes; do not relabel exploratory results as confirmatory",
-      "status": "NOT_STARTED",
-      "steps": [
-        "Step 1: coverage-only audit of 2026 Apr-Jul (markPriceKlines, indexPriceKlines, fundingRate coverage; common UTC hourly timestamp count across all 5 symbols; gap/delisting/symbol-reuse diagnostics; quarantined rows with provenance) -> research_state/fclr006_coverage_audit.md",
-        "Step 2: pre-register FCLR-006 protocol -> research_state/research_protocol_fclr006.md v1.0, frozen before outcomes",
-        "Step 3: run scripts/run_evaluation.py with FCLR_EXPERIMENT=FCLR-006 on frozen splits -> research_state/evaluation_summary_FCLR006.md, gate assessment, manifest update",
-        "Step 4: update hypothesis_registry.json FCLR-H001 on FCLR-006 (sealed after outcome); update experiment_frontier.json; run tests; byte-identical reproducibility re-run; update AGENT_HANDOFF.md with campaign status and next action"
-      ]
+      "status": "COMPLETE",
+      "result": "FCLR-006 COMPLETE NEGATIVE on unsealed 2026-05-23..2026-08-06 (76 days = 2 blocks, 5 instruments, n=8987). C2 vs B1 +0.368588 QLIKE (significantly WORSE), 95% CI [0.173748, 0.615614] entirely positive, relative -69.90%. Primary contrast C2 vs B1 meets >=2% relative reduction: NOT_MET. Block criterion >=3 non-overlapping 30-day blocks: NOT_MET (2 blocks). >=5 instruments PASS. Forecast gate NOT_MET. Byte-identical reproduction verified 2026-10-30. Canonical artifact: research_state/evaluation_summary_FCLR006.md. H001 NOT_SUPPORTED on unsealed 2026 data (confirms FCLR-003 powered negative). Steps 1-4 complete: coverage audit (12:52:01Z), protocol frozen (13:45:00Z), evaluation run (13:47:31Z), byte-identical repro verified."
     }
   ],
   "coverage": {
