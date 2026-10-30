@@ -47,7 +47,7 @@ def audit_liq():
     print("by venue:", dict(per_venue))
     print("\ntarget symbols (BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT):")
     for s in sorted(TARGETS):
-        c = sum(c for (sym, v), n_ in per_sym_venue.items() if sym == s)
+        c = sum(n_ for (sym, v), n_ in per_sym_venue.items() if sym == s)
         print(f"  {s}: rows={c} first={sym_first.get(s)} last={sym_last.get(s)}")
 
 def audit_cov():

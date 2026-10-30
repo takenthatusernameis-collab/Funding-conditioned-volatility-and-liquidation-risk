@@ -1,0 +1,73 @@
+{
+  "decision": "TRACK_A_UNBLOCKED_2026",
+  "decision_utc": "2026-10-30T02:15:00Z",
+  "prior_status": "BLOCKED for frozen 2024 windows",
+  "resolution": "No admissible observed-liquidation source exists for the frozen 2024 test windows (FCLR-001/002/003/004). Track A is therefore UNBLOCKED ONLY by expanding the evaluation window to 2026, where an admissible, unauthenticated, CC-BY-4.0 observed-liquidation census exists.",
+  "source": {
+    "name": "Crypto Perpetual Liquidation Ticks",
+    "host": "https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks",
+    "license": "CC BY 4.0",
+    "unauthenticated_download": true,
+    "local_cache": "research_state/data_cache/liquidations_full_20260807.csv",
+    "rows": 1442664,
+    "window_utc": "2026-07-08 16:42:32 .. 2026-08-06 23:59:42",
+    "schema": ["ts_ms", "utc_time", "symbol", "exchange", "event", "size", "price", "usd"],
+    "events": ["short_liquidated", "long_liquidated"],
+    "venues": ["binance", "bybit", "okx"]
+  },
+  "completeness_per_venue": {
+    "bybit": {
+      "rows": 346269,
+      "completeness": "COMPLETE - allLiquidation stream pushes every liquidation at 500ms",
+      "admissible_as_census": true,
+      "note": "Only venue in this dataset that is a defensible complete census. Use Bybit rows as the primary Track A label source."
+    },
+    "binance": {
+      "rows": 859499,
+      "completeness": "UNDERCOUNT - liquidation streams are snapshots capped at 1 order per symbol per 1000ms",
+      "admissible_as_census": false,
+      "note": "Treat as lower bound only. Worst undercount during cascades."
+    },
+    "okx": {
+      "rows": 236896,
+      "completeness": "UNDERCOUNT - 1 update per second per contract",
+      "admissible_as_census": false,
+      "note": "Treat as lower bound only."
+    }
+  },
+  "universe_change_artifact": {
+    "timestamp": "2026-07-12 16:23 UTC",
+    "before": 5,
+    "after": 800,
+    "handling": "Filter to the 5-symbol universe {BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT} for continuity, or start after 2026-07-12 16:23 UTC."
+  },
+  "target_symbol_coverage_2026": {
+    "BTCUSDT": {"rows": 51248, "first": "2026-07-08", "last": "2026-08-06"},
+    "ETHUSDT": {"rows": 50163, "first": "2026-07-10", "last": "2026-08-06"},
+    "BNBUSDT": {"rows": 3467, "first": "2026-07-12", "last": "2026-08-06"},
+    "SOLUSDT": {"rows": 21831, "first": "2026-07-08", "last": "2026-08-06"},
+    "XRPUSDT": {"rows": 12928, "first": "2026-07-10", "last": "2026-08-06"}
+  },
+  "feature_cache_status_2026": {
+    "markPriceKlines": "COMPLETE 2026-04-01..2026-08-06, 5 symbols",
+    "indexPriceKlines": "MISSING - 104 days x 5 symbols; completion script scripts/h004_complete_cache.py",
+    "premiumIndexKlines": "MISSING - 104 days x 5 symbols; completion script scripts/h004_complete_cache.py",
+    "fundingRate_monthly": "MISSING - 5 months x 5 symbols (2026-04..2026-08); completion script scripts/h004_complete_cache.py"
+  },
+  "blocked_paths_confirmed_dead_2024": [
+    "Binance data.binance.vision liquidationSnapshot (UM/CM daily+monthly): HTTP 404",
+    "Binance fapi forceOrders: HTTP 451 restricted location",
+    "Bybit public.bybit.com: no liquidation directory; trading/ holds per-trade CSVs only, no liquidation census",
+    "OKX / Deribit: no unauthenticated complete public liquidation census found",
+    "Zenodo / GitHub: no 2024 crypto liquidation event datasets"
+  ],
+  "constraints_respected": [
+    "No credentials, paid services, trials, manual files/keys, user intervention",
+    "No forecast gate re-runs (FCLR-001..004 sealed)",
+    "No .github/workflows changes",
+    "No trading/risk-overlay/simulation/merge tracks until a forecast gate passes",
+    "Capped sample != census; absence != zero",
+    "Bybit-only rows used as the census arm; Binance/OKX treated as lower-bound partial evidence only"
+  ],
+  "next_action": "Run scripts/h004_complete_cache.py to finish the 2026 feature cache, then pre-register FCLR-005 (Track A, 2026 window, Bybit census) before any outcome inspection."
+}
