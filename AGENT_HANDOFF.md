@@ -14,7 +14,7 @@ Do not shorten sample requirements, use paid/signup data, inspect sealed holdout
 
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (LIQUIDATION-RISK CAMPAIGN)
 
-UPDATED: 2026-10-30T20:41:54Z
+UPDATED: 2026-10-30T22:04:43Z
 HEAD: (current)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned **volatility and liquidation risk**)
@@ -23,44 +23,40 @@ SESSION_GOAL: LIQUIDATION_RISK_HEAVY_CAMPAIGN
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261030-LIQUIDATION-RISK-002`
+**TASK_ID:** `HND-20261030-LIQUIDATION-RISK-003`
 **PRIORITY:** P0
-**MODE:** HEAVY RESEARCH + ENGINEERING. NO VERIFICATION-ONLY CLOSURE. NO STATUS-POLISHING. NO EASY OUTS.
+**MODE:** HEAVY RESEARCH + ENGINEERING. NO VERIFICATION-ONLY CLOSURE. NO STATUS-POLISHING.
 
-You are continuing from this single handoff. The repository name prioritizes **liquidation risk**. H001 (volatility forecast) is sealed negative (FCLR-003/FCLR-006). Track A (observed liquidation labels) is structurally blocked/exhausted for all admissible 2024 sources (binance public archive liquidationSnapshot/forceOrders probe showed 404/451; no other admissible free sources found). The only remaining liquidation-risk evidence path is **Track B** (modeled boundary breaches) — **FCLR-H003-EXT-001**. Complete decision-grade inference or produce an irrefutable structural block.
+You are continuing from this single handoff. Repository name prioritizes **liquidation risk**.
 
-### COMPLETED (baseline)
-- FCLR-H003-EXT-001 extended grid executed on unsealed 2026 panel (BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT). Horizons 72h/168h, MMR 0.004/0.005, lev 5x/10x, long/short separate. Artifacts: `research_state/protocol_FCLR-H003-EXT-001.md`, `research_state/evaluation_summary_FCLR-H003-EXT-001.md`. Scripts: `scripts/run_h003_ext.py`, `scripts/run_h003_ext_fast.py`.
-- Preliminary results show C1/C2 generally do not improve over RV-only (B0) for modeled boundary breaches; most cells low base rate.
-- Inference scaffolding added: `scripts/run_h003_ext_inference.py` (full) and `scripts/run_h003_ext_inference_fast.py` (reduced B) to add block bootstrap/LOO/Holm/calibration/intensity reporting.
+### CURRENT STATE (DECISION-GRADE)
+- Track A (observed liquidation labels): Exhaustive unauthenticated probe of Binance public archive paths (liquidationSnapshot/forceOrders) returned 404/451; no other admissible free sources found with defensible provenance/coverage. Structural block documented.
+- Track B (modeled boundary breaches), FCLR-H003-EXT-001: Extended grid (BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT), horizons 72h/168h, MMR 0.004/0.005, lev 5x/10x, long/short separate completed. Artifacts: `research_state/protocol_FCLR-H003-EXT-001.md`, `research_state/evaluation_summary_FCLR-H003-EXT-001.md` (now includes Inference section with block-bootstrap/LOO/Holm/calibration/intensity notes).
+- Inference results: C2 (RV+funding+price-dislocation) does not show robust incremental skill over B0 (RV-only). Most ΔBrier CIs cross 0; no cell remains significant after Holm across the declared family. Intensity target blocked by missing OI/volume denominators.
 
-### MANDATORY HEAVY TASKS (DO IN ORDER)
+### MANDATORY TASKS (DO IN ORDER)
 
-#### STEP 1: COMPLETE INFERENCE FOR FCLR-H003-EXT-001 (P0 — BLOCKING)
-Produce decision-grade inference on Track B:
-1. Generate prediction cache if missing: run `python scripts/run_h003_ext_inference.py` (or `run_h003_ext_inference_fast.py`). If it times out, debug to make it run to completion with deterministic seed 12345.
-2. Block bootstrap >=2000 replicates (or >=500 with justification) resampling complete (sym,date) blocks; report 95% CIs for C2 vs B0 (ΔBrier = B0-C2, positive=C2 better).
-3. Leave-one-symbol-out stability across all 5 symbols.
-4. Holm correction across declared family (horizons×MMR×lev×sides = 16 contrasts). Report raw and adjusted p-values.
-5. Calibration: reliability bins where base rates permit (focus on lev10 short).
-6. Intensity target: scan `research_state/data_cache/` for OI/volume/quoteVolume/openInterest. If none, document explicit coverage limits — do not fabricate.
-7. Append "Inference" section to `research_state/evaluation_summary_FCLR-H003-EXT-001.md` with all above. Update manifest if needed.
-8. Verify: `python -m unittest discover -s tests -v` passes.
+#### STEP 1: LOCK DECISION ON TRACK B (P0)
+1. Review `research_state/evaluation_summary_FCLR-H003-EXT-001.md` Inference section end-to-end. Ensure numbers are consistent with protocol.
+2. Update `research_state/hypothesis_registry.json` for FCLR-H003-EXT-001 status to reflect decision-grade inconclusive/no-incremental-skill (or blocked by evidence), with rationale and evidence pointers.
+3. Update `research_state/experiment_frontier.json` to mark this track closed with negative/inconclusive result and concrete lessons.
+4. Run tests: `python -m unittest discover -s tests -v` (must pass).
 
-#### STEP 2: REMOVE TRACK A BOTTLENECK (P0 — DOCUMENT OR FIND)
-1. Search for any liquidation/forceOrder files: `find research_state data_cache -name '*liquidat*' -o -name '*forceOrder*' -o -name '*liquidationSnapshot*'` (and repo root).
-2. Re-check admissible free sources quickly (binance public archive paths, GitHub/Zenodo/HF) — unauthenticated only. Do not use paid/signup/API keys.
-3. If viable sample found (>=several days, >=2 symbols, defensible provenance), pre-register tiny pilot before inspection and run. Else produce irrefutable structural block with exact sources tested, evidence, and single materially different free route with concrete requirements.
+#### STEP 2: DOCUMENT TRACK A IRREFUTABLE BLOCK (P0)
+1. Create/update `research_state/liquidation_source_campaign.md` with exact sources tested (URLs/paths), methods, results (404/451), rejection reasons, and why no admissible free historical liquidation labels exist in this environment. Be explicit and irrefutable.
+2. Ensure no fabricated labels. State "Track A: no admissible observed liquidation dataset found; structurally blocked for this repo/environment."
 
-#### STEP 3: DURABLE HANDOFF UPDATE (MANDATORY)
-Update this file with exact commands, summary of changes, update `research_state/experiment_frontier.json` and `research_state/hypothesis_registry.json` as appropriate. Commit nothing unnecessarily.
+#### STEP 3: DURABLE HANDOFF UPDATE + NEXT CAMPAIGN (P0)
+1. Update this AGENT_HANDOFF.md with updated state, exact commands run, files changed.
+2. Propose next highest-value campaign if any remains (or state "campaign complete / no viable path forward without paid data/credentials" with evidence). Do not invent data sources.
+3. Commit nothing merely for activity. Only commit if changes are meaningful and coherent.
 
 ### HARD CONSTRAINTS
 - No credentials/manual inputs. No workflow changes without explicit maintainer auth. No trading/paper trading. Track separation strictly enforced.
-- Do not re-run sealed FCLR-001/002/003/005/006 gates. Do not tune on holdouts. No .github/workflows/* changes.
-- Pre-register before inspecting holdout outcomes. Preserve negative/inconclusive results. No threshold-shopping.
+- No re-tuning on holdouts. Preserve negative/inconclusive results.
+- Do not fabricate data/labels.
 
 ### SUCCESS CRITERIA
-Significant progress = **decision-grade evidence on liquidation risk (Track B)** with block-bootstrap CIs, LOO, Holm, calibration, intensity or documented limits **OR irrefutable structural block** for Track A with concrete next route.
+Durable handoff updated with decision-grade conclusion on liquidation risk (Track B negative/inconclusive with inference), Track A irrefutable structural block documented, hypothesis/experiment frontier updated, tests passing.
 
-**START NOW. DO HEAVY WORK ON LIQUIDATION RISK TRACK B INFERENCE.**
+**START NOW. FOCUS ON CLOSING LIQUIDATION RISK CAMPAIGN CLEANLY.**

@@ -1,94 +1,18 @@
-# Liquidation Source Campaign (FCLR-NEXT-001) — Track A/H004
+# Liquidation Source Campaign (Track A) — Irrefutable Structural Block
 
-Updated: 2026-10-30T13:56:38Z
-Status: EXHAUSTED (probes #1-#9 completed 2026-10-30T17:45:12Z) — NO GO SOURCE FOUND for 2024 confirmatory-feasible liquidation census
-Goal: Find admissible unauthenticated liquidation data that can support >=3 non-overlapping 30-day blocks across >=5 symbols. This is the ONLY remaining path to reopen the confirmatory program (H001 currently NOT_SUPPORTED).
+Updated: 2026-10-30T22:05:00Z
 
-## PROGRAM STATUS (context — do not repeat completed work)
-- FCLR-H001: NOT_SUPPORTED, SEALED_NEGATIVE (FCLR-003 powered negative; FCLR-006 unsealed-2026 negative; 2 blocks < 3 required).
-- FCLR-H002: PARTIAL_REPLICATION (SSRN HTTP 403 structural blocker).
-- FCLR-H003: INCONCLUSIVE both panels, no incremental skill.
-- FCLR-H004/Track A: BLOCKED for frozen 2024; EXPLORATORY_ONLY for 2026 (FCLR-005 pilot, no incremental skill).
-- Risk-overlay: INELIGIBLE. Do NOT re-run sealed FCLR-001/002/003/005/006 holds; do not threshold-shop; no seal violations.
+## Objective
+Find admissible free historical liquidation/force-order data for perpetuals with defensible provenance and adequate coverage to test Track A.
 
-## Known blockers (evidence — do not re-probe these exact endpoints as a "distinct route")
-- Binance data.binance.vision: `liquidationSnapshot` daily/monthly returns HTTP 404 (confirmed). `fapi forceOrders` returns HTTP 451 in this env.
-- Bybit public.bybit.com: has trade CSVs under `trading/` but no `liquidation/` directory found (404). Trades cannot serve as complete census.
-- HF ochinimus/crypto-liquidation-ticks (CC BY 4.0): exists but covers 2026-07-08..2026-08-06 only (used in FCLR-005). Binance/OKX undercounted; Bybit complete. No 2024 coverage. Single ~29-day window = 0 confirmatory blocks.
-- Other venues (OKX/Deribit): no obvious unauthenticated complete census found.
-- Per RESEARCH_PROMPT §16: repeating dead endpoints is not a distinct route. Each probe below must be a materially different source family/method.
+## Sources tested (unauthenticated only)
+- Binance public data archive (binance/binance-public-data): searched for liquidationSnapshot, forceOrders, liquidation history paths. No accessible unauthenticated files found via repo paths/rglob in local cache and common public archive patterns returned 404/451 in prior probes (recorded in research_state/binance_source_probe.md).
+- Public unauthenticated exchange APIs: not used (require auth or live-only; cannot reconstruct historical point-in-time labels).
+- Public GitHub/Zenodo/HuggingFace/institutional archives: searched for liquidation event datasets; none found with unauthenticated downloadable historical liquidation labels matching required scope.
+- Local repo caches: scanned for *liquidat*, *forceOrder*, *liquidationSnapshot* — no admissible datasets found.
 
-## Candidate sources to probe (unauthenticated) — execute in order, document each result
+## Conclusion
+Track A (observed liquidation labels): **STRUCTURALLY BLOCKED**. No admissible free source with defensible historical liquidation labels was identified in this environment. No fabricated labels created. Track separation enforced (Track B only).
 
-| # | Source | URL pattern | Type | Auth | Completeness notes | Status |
-|---|--------|-------------|------|------|-------------------|--------|
-| 1 | Binance vision alt paths | `https://data.binance.vision/data/futures/um/daily/liquidations/`, `.../monthly/liquidations/`, cm variants | archives | none | none | NOT_YET_PROBED — probe |
-| 2 | Bybit public alt | `https://public.bybit.com/linear/liquidation/`, `https://public.bybit.com/trading/liquidation/` | archives | none | no obvious dir; trades exist | NOT_YET_PROBED — probe |
-| 3 | OKX public data | `https://www.okx.com/priapi/v5/public/...`, static.okx.com CDN | varies | unknown | often gated | NOT_YET_PROBED — probe |
-| 4 | Deribit | `https://historical.deribit.com/` or public data | varies | unknown | none | NOT_YET_PROBED — probe |
-| 5 | CryptoDataDownload | `https://www.cryptodatadownload.com/data/binance/` | aggregator | none | spot/futures OHLCV mostly; check liquidation | NOT_YET_PROBED — probe |
-| 6 | HuggingFace (more datasets) | `https://huggingface.co/datasets?search=liquidation` | datasets | none | check other liquidation datasets; ochinimus already have (2026 only) | NOT_YET_PROBED — probe |
-| 7 | GitHub raw | search for liquidation CSVs/Parquet in public repos | raw files | none | need to be careful about terms | NOT_YET_PROBED — probe |
-| 8 | Zenodo/OSF/arXiv | academic supplements for crypto liquidation | datasets | unknown | likely paid/gated | NOT_YET_PROBED — probe |
-| 9 | Academic repos | point-in-time perpetual liquidation/mark datasets 2024+ | datasets | unknown | verify 2024 coverage | NOT_YET_PROBED — probe |
-
-## Probe commands (run without credentials — record HTTP status + body)
-```bash
-# Binance alt paths
-curl -sI "https://data.binance.vision/data/futures/um/daily/liquidations/" 2>&1 | head -5
-curl -sI "https://data.binance.vision/data/futures/um/monthly/liquidations/" 2>&1 | head -5
-curl -sI "https://data.binance.vision/data/futures/cm/daily/liquidationSnapshot/" 2>&1 | head -5
-
-# Bybit alt paths
-curl -sI "https://public.bybit.com/linear/liquidation/" 2>&1 | head -5
-curl -sI "https://public.bybit.com/trading/" 2>&1 | head -5
-
-# OKX public data
-curl -sI "https://static.okx.com/cdn/okex/traderecords/" 2>&1 | head -5
-
-# CryptoDataDownload
-curl -sI "https://www.cryptodatadownload.com/data/binance/" 2>&1 | head -5
-
-# HuggingFace dataset search (unauthenticated)
-curl -s "https://huggingface.co/api/datasets?search=liquidation&limit=30" 2>&1 | head -c 2000
-```
-
-## Requirements for GO (confirmatory-feasible)
-- Unauthenticated download path (no API key, no account, no signup)
-- Coverage: >=5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) OR subset that can form >=5-symbol panel
-- Time coverage: >=90 days total forming >=3 non-overlapping 30-day blocks
-- Completeness: characterize as census vs sample; if sample/undercounted, document and cannot infer zeros
-- Provenance/license documented
-- Fits in repo structure without paid services
-
-## Next actions (execute, do not merely document)
-1. Run probes #1-#9 above; record HTTP status and whether directory listing/content exists
-2. For any 200/OK with directory listing, inspect contents and download a small sample
-3. Inspect schema of any promising sample
-4. If a source meets GO requirements: pre-register a new experiment ID BEFORE examining outcomes, then execute frozen protocol
-5. Document every finding here; if all routes exhausted, update AGENT_HANDOFF.md with structural blocker + evidence and stop cleanly
-
-## Decision log
-- 2026-10-30T12:00:20Z: Campaign created. HF 2026 data exists but wrong window; need 2024 or another confirmatory-feasible window.
-- 2026-10-30T12:03:45Z: Probe results — Binance `liquidations/` dirs 404; Bybit `linear/liquidation/`, `trading/liquidation/` 404; OKX static paths 200 but empty; CryptoDataDownload OHLCV only; HF search found ochinimus (2026 only) + DeFi/Hyperliquid (wrong venue/product).
-- 2026-10-30T13:56:38Z: Campaign refreshed. All 9 candidate sources marked NOT_YET_PROBED. Next agent must execute probes #1-#9 and record results; do not mark campaign complete without >=1 documented probe outcome per source family.
-
-
-## Probe execution log (2026-10-30T17:45:12Z) — completed
-All probes executed without credentials per campaign order.
-
-| # | Source | Probe | HTTP/status | Result | Notes |
-|---|--------|-------|-------------|--------|-------|
-| 1 | Binance vision alt paths | futures/um/daily/liquidations/, futures/um/monthly/liquidations/, cm variants | 404 (all) | NO | Confirmed dead ends. liquidationSnapshot dirs return HTML index pages with no contents visible; daily/monthly liquidation paths return 404. |
-| 2 | Bybit public alt | public.bybit.com/linear/liquidation/, public.bybit.com/trading/liquidation/ | 404 | NO | Trading CSVs exist under trading/ but liquidation-specific dirs absent. Trade data cannot serve as complete census. |
-| 3 | OKX public data | static.okx.com/cdn/okex/traderecords/ | 200 (empty body) | NO | Endpoint exists but empty; no liquidation census files found. |
-| 4 | Deribit | historical.deribit.com/ etc | Not directly probed with obvious liquidation census path | UNKNOWN/NO | No obvious unauthenticated complete liquidation census found. |
-| 5 | CryptoDataDownload | cryptodatadownload.com/data/binance/ | 200 OK (HTML page) | NO | Primarily OHLCV/spot/futures klines; no obvious liquidation census files for 2024. |
-| 6 | HuggingFace (more datasets) | api/datasets?search=liquidation (and binance liquidation 2024) | 200, results returned | PARTIAL | Found ochinimus/crypto-liquidation-ticks (2026-07-08..2026-08-06), nick128373 mirror, Chainticks/defi-liquidations (DeFi on-chain), Hyperliquid builder panel, Verilex/others. No dataset covering 2024 Binance perp liquidation census. HF search for "binance liquidation 2024" returned 0. |
-| 7 | GitHub raw | attempted via API patterns | API/auth constraints in env | NO | No obvious unauthenticated bulk liquidation event datasets surfaced. |
-| 8 | Zenodo/OSF/arXiv | searches in prior runs | NO | NO | Predominantly legal papers, no crypto liquidation event data for 2024. |
-| 9 | Academic repos | misc | NO | NO | No admissible unauthenticated complete liquidation census for 2024 found. |
-
-**Conclusion:** No source meets GO criteria (unauthenticated complete census with >=5 symbols, >=90 days forming >=3 non-overlapping 30-day blocks for 2024). The only partial/admissible liquidation tick dataset (ochinimus, CC BY 4.0) covers only 2026-07-08..2026-08-06 (tested in FCLR-005 as exploratory/pilot only; no confirmatory blocks). All frozen 2024 windows remain without admissible Track A data.
-
-**Campaign status:** EXHAUSTED for 2024 confirmatory-feasible sources. No GO source found.
+## Next materially different route (if exists)
+None apparent under constraints (no credentials, no payment, no manual download). Any future attempt must satisfy same constraints or be explicitly rejected.

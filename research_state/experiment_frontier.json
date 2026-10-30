@@ -107,5 +107,17 @@
       "reason": "Completed for 24h horizon / MMR 0.005 / lev 3-20 on both panels (INCONCLUSIVE, no incremental skill). Longer horizons (72h/168h), lower MMR tiers, and an event-intensity target are untested and would require a fresh pre-registration before outcome inspection.",
       "status": "NOT_STARTED"
     }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "FCLR-H003-EXT-001",
+      "status": "closed_negative",
+      "conclusion": "Track B (modeled boundary breaches): C2 (RV+funding+price-dislocation) shows no robust incremental skill over B0 (RV-only) on unsealed 2026 panel. Block bootstrap/LOO/Holm across declared family show CIs cross 0, no cell significant after adjustment. Intensity target blocked by missing OI/volume denominators. Track separation enforced.",
+      "artifacts": [
+        "research_state/protocol_FCLR-H003-EXT-001.md",
+        "research_state/evaluation_summary_FCLR-H003-EXT-001.md"
+      ],
+      "updated_at": "2026-10-30T22:04:54Z"
+    }
   ]
 }

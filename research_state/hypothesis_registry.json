@@ -160,5 +160,11 @@
       ],
       "notes": "FCLR-004 pre-registered (research_state/research_protocol_fclr004.md) but sealed/unexecuted. Forecast gates FCLR-001\u2013004 are sealed (NOT_MET/BLOCKED): do not re-run. Hourly presence target has high base rate (~0.4-0.48) because any Bybit census row in an hour counts as an event; treat as observed-presence intensity, not a rare event. Capped sample (Binance/OKX) != census; absence != zero; no event-free inference from missing data."
     }
-  ]
+  ],
+  "FCLR-H003-EXT-001": {
+    "id": "FCLR-H003-EXT-001",
+    "status": "closed_negative",
+    "conclusion": "No robust incremental forecast skill for modeled boundary breaches; inference completed with multiplicity correction.",
+    "updated_at": "2026-10-30T22:05:03Z"
+  }
 }
