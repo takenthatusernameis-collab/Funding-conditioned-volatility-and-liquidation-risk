@@ -110,18 +110,13 @@
       "status": "BLOCKED",
       "status_evidence": "research_state/binance_source_probe.md: no liquidationSnapshot archive found (HTTP 404); Binance fapi forceOrders endpoint returns 451 restricted location in this environment.",
       "prior_tests": [],
-      "next_falsification_test": "Enumerate and test additional admissible public liquidation sources (academic/GitHub/Zenodo/Hugging Face archives, other venue-native historical archives) before concluding Track A is unviable; do not infer event-free intervals from missing data.",
+      "next_falsification_test": "Enumerate and test additional admissible public liquidation sources (academic/GitHub/Zenodo/Hugging Face archives, other venue-native historical archives) before concluding Track A is unviable; do not infer event-free intervals from missing data. If exhaustively impossible, document structural evidence, propose the smallest admissible scope expansion (different venue/year/window) with a concrete label-construction plan, or state Tracks B/C only.",
       "links": [
         "research_state/binance_source_probe.md",
-        "RESEARCH_PROMPT.md"
-      ]
-    },
-    {
-      "hypothesis_id": "FCLR-H004",
-      "experiment_id": "FCLR-004",
-      "status": "PRE_REGISTERED",
-      "pre_registration_path": "research_state/research_protocol_fclr004.md",
-      "notes": "Pivot to funding-augmented (C1') vs B1 due to C2 feature degradation; search for unused window or justify alternative horizon."
+        "RESEARCH_PROMPT.md",
+        "research_state/research_protocol_fclr004.md"
+      ],
+      "notes": "FCLR-004 pre-registered (research_state/research_protocol_fclr004.md) but sealed/unexecuted. Forecast gates FCLR-001–004 are sealed (NOT_MET/BLOCKED): do not re-run. Track A source discovery is the only unblocked liquidation-risk path."
     }
   ]
 }

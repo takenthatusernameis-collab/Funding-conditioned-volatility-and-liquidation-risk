@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T00:03:45Z
-HEAD: fa4cf4e5 (main)
+UPDATED: 2026-10-30T01:49:58Z
+HEAD: 6863fb4a (main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
 ## CORE PRIORITY (inferred from repo name): LIQUIDATION RISK — H004 MUST BE UNBLOCKED
@@ -10,11 +10,11 @@ This repo is about **funding-conditioned volatility and liquidation risk**. Fore
 
 ## SINGLE, TIMESTAMPED INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (DURABLE)
 
-> **[2026-10-30T00:03:45Z] MANDATORY FIRST ACTION — H004-SOURCE-DISCOVERY-v5 (HEAVY WORK, NO ESCAPE):**
+> **[2026-10-30T01:49:58Z] MANDATORY FIRST ACTION — H004-SOURCE-DISCOVERY-v6 (HEAVY WORK, NO ESCAPE):**
 >
-> **Objective:** Find ANY admissible unauthenticated public source that can yield observed forced-liquidation events for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} covering 2024 with defensible provenance. If none exists for frozen 2024 windows, produce STRUCTURAL EVIDENCE (exact paths, codes, reasons) proving it is impossible under constraints — and propose the SMALLEST defensible expansion of scope (different venue/year/window) that IS admissible, with a concrete label construction plan. Do NOT stop at "none found" without evidence.
+> **Objective:** Find ANY admissible unauthenticated public source that can yield observed forced-liquidation events for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} covering 2024 with defensible provenance. If none exists for frozen 2024 windows, produce STRUCTURAL EVIDENCE (exact paths, codes, reasons) proving it is impossible under constraints — and propose the SMALLEST defensible expansion of scope (different venue/year/window) that IS admissible, with a concrete label construction plan. Do NOT stop at "none found" without evidence. Do NOT infer event-free intervals.
 >
-> **Rules:** No credentials, no paid services, no user intervention. No forecast gate re-runs. No .github/workflows changes. No trading/risk-overlay. Distinguish observed (Track A) from modeled (Track B). If completeness cannot be proven, do NOT infer event-free intervals.
+> **Rules:** No credentials, no paid services, no user intervention. No forecast gate re-runs. No .github/workflows changes. No trading/risk-overlay/simulation/merge tracks. Distinguish observed (Track A) from modeled (Track B/C).
 >
 > **Deliverables:** Update `research_state/liquidation_sources_enumeration.md` with ranked table, explicit VIABLE/BLOCKED, concrete next steps. If VIABLE, create/update `research_state/fclr_h004_tracka_viable.json` with source, coverage, files, plan. If BLOCKED for 2024, state viable alternative scope with evidence or explain why ALL liquidation-adjacent research must proceed via Tracks B/C only.
 
@@ -55,6 +55,7 @@ This repo is about **funding-conditioned volatility and liquidation risk**. Fore
 
 ## BOTTLENECKS REMOVED / HARD CONSTRAINTS
 - **Forecast gates SEALED:** Do NOT re-run/re-attempt FCLR-001–004 (NOT_MET/BLOCKED). Bottleneck removed by ignoring; H004 source discovery is the only unblocked liquidation-risk path.
+- **Duplicate H004 registry entry removed:** one `research_state/hypothesis_registry.json` row per hypothesis (was duplicated FCLR-H004).
 - **Do NOT touch `.github/workflows`.**
 - **Do NOT do risk-overlay/trading/simulation/merge tracks.** INELIGIBLE until a forecast gate passes (it has not).
 - **Preserve distinctions:** H002/H003/volatility ≠ observed liquidations (Track A).
@@ -64,6 +65,7 @@ This repo is about **funding-conditioned volatility and liquidation risk**. Fore
 - **H002:** PARTIAL_REPLICATION complete; RV-regime contrast infeasible (Jan-Mar 2024 mark prices missing).
 - **H003:** INCONCLUSIVE on both panels; no incremental skill over B0. Do NOT threshold-shop best-F1 to claim a pass.
 - **H001/H004 forecast gates:** NOT_MET/BLOCKED (sealed). FCLR-004 cannot meet >=3-block requirement (only 1 unused day, all partitions sealed/used). No evaluation run executed.
+- **Do NOT re-probe already-confirmed dead ends** (Binance liquidationSnapshot 404, forceOrders 451, HF 2026 dataset = wrong window) without new evidence; record them once and move to unprobed sources.
 
 ## CURRENT STATE SNAPSHOT
 - **H001:** INCONCLUSIVE (FCLR-001 pilot; FCLR-002 numerically passes CI but >=3-block requirement NOT met)
