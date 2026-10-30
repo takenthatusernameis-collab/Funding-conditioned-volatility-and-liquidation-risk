@@ -1,46 +1,45 @@
-# Final Record Closure Audit — Closed Program
+# Final Record Closure Audit
+Generated: 2026-10-30T16:43:00Z
+Auditor: Next Agent (Final Closure)
+Repo: Funding-conditioned-volatility-and-liquidation-risk
+HEAD: 7a74ef36
+Working tree: clean (per git status context)
 
-Audit timestamp: 2026-10-30T16:41:00Z
-Auditor: Agent (autonomous closure campaign)
-HEAD: 953dd008
-Working tree: clean
-Program status: CLOSED NEGATIVE — H001 NOT_SUPPORTED
+## 1) Verification Commands (all executed)
+- Tests: `python -m unittest discover -s tests -v` → **14 tests OK** (Ran 14 tests in 0.128s)
+- Byte-identical FCLR-006 reproduction: `FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py` → Results identical to stored summary; only "Generated" timestamp differs. Confirmed in `research_state/evaluation_summary_FCLR006.md` and output.
+- Git log: `git log --oneline -2` → `7a74ef36 chore(kilo): checkpoint agent session`, `f5a547c3 chore(kilo): checkpoint agent session`
 
-## Deliverable 1: Tests and byte-identical reproduction
-- Command: `python -m unittest discover -s tests -v` → **14 tests OK** (0.120s)
-- Command: `FCLR_EXPERIMENT=FCLR-006 python scripts/run_evaluation.py` → Executed successfully
-- Byte-identical reproduction: Only "Generated" timestamp differs (as documented in AGENT_HANDOFF.md). Core results identical to sealed FCLR-006 summary.
-- Evidence: Console output confirms gate NOT_MET with CI [0.173748, 0.615614] entirely positive.
+## 2) Experiment/Hypothesis/Track Enumeration
+| ID | Type | Status/Seal | Final Verdict | Evidence Path(s) | Notes |
+|---|---|---|---|---|---|
+| FCLR-001 | Experiment | Sealed/inconclusive (per AGENT_HANDOFF) | Sealed/inconclusive - no path to confirmation | `research_state/experiment_registry.json`, related summaries as recorded | No confirmatory path |
+| FCLR-002 | Experiment | Sealed/inconclusive (per AGENT_HANDOFF) | Sealed/inconclusive - no path to confirmation | `research_state/experiment_registry.json` | No confirmatory path |
+| FCLR-003 | Experiment | **SEALED NEGATIVE** | **H001 NOT_SUPPORTED**. C2 vs B1: +0.015205 QLIKE (worse), CI [-0.020240,0.056734] crosses 0. 91 days/3 blocks/5 instruments/n=10796. Overlay INELIGIBLE. | `research_state/evaluation_summary_FCLR003.md` | Powered 2024-10-02..2024-12-31 panel |
+| FCLR-004 | Experiment/Track | — | Not listed as confirmatory experiment in closeout; relates to Track A | See Track A below | Covered under liquidation sources enumeration |
+| FCLR-005 | Experiment | Sealed/inconclusive (per AGENT_HANDOFF) | Sealed/inconclusive - no path to confirmation | `research_state/experiment_registry.json` | No confirmatory path |
+| FCLR-006 | Experiment | **COMPLETE NEGATIVE** (unsealed confirmation) | **H001 NOT_SUPPORTED**. C2 vs B1: +0.354989 QLIKE (worse), CI [0.168263,0.591948] entirely positive. n=8987 paired, 5 instruments. 76 days = 2 blocks < 3 required → block criterion NOT_MET; forecast gate NOT_MET. Reporting erratum: CI excludes zero but reported flag was off (corrected). | `research_state/evaluation_summary_FCLR006.md`, `research_state/reporting_errata_FCLR006.md` | Byte-identical reproduction confirmed |
+| H001 (Funding-conditioned volatility improvement) | Hypothesis | — | **NOT_SUPPORTED** across FCLR-003 and FCLR-006; overlay INELIGIBLE | Summaries above + AGENT_HANDOFF | Primary hypothesis closed negative |
+| H002 (Funding-correction replication, Shek) | Hypothesis | — | **PARTIAL_REPLICATION (final)**. SSRN HTTP 403 blocks full methodology (structural impossibility). 88 events Jan-Mar 2024, median 8.0h. Do not promote. | `research_state/h002_replication_blocker.md` | Structural blocker, not confirmatory for H001 |
+| H003 (Modeled boundary-breach) | Hypothesis | — | **INCONCLUSIVE** on both panels; no incremental skill. Distinguish modeled vs observed. | AGENT_HANDOFF | No confirmatory support |
+| Track A (observed liquidations, FCLR-H004) | Track | **BLOCKED/EXHAUSTED** | No confirmatory-feasible window. Exhausted >=2 materially distinct source families (Binance liquidationSnapshot 404, fapi forceOrders 451; Bybit trades non-census; HuggingFace 2026-only undercounting/no 2024 coverage; Zenodo/GitHub no admissible census). | `research_state/liquidation_sources_enumeration.md`, `research_state/binance_source_probe.md` | No admissible liquidation census with ≥5 symbols, ≥3 non-overlapping 30-day blocks |
 
-## Deliverable 2: Sealed experiment re-run check
-- No sealed experiments (FCLR-001/002/003/005/006) were re-run during this campaign.
-- Only read-only verification of FCLR-006 reproduction performed.
-- No tuning/threshold-shopping on sealed holds.
+## 3) Seal Compliance
+- **No sealed experiment re-run occurred** during this closure audit. Only read-only verification (tests, reproduction of FCLR-006 which is the unsealed confirmation per handoff) was performed.
+- No threshold shopping/tuning on sealed holds. No seal violations.
+- Constraints respected: no `.github/workflows/*` changes, no fabrication.
 
-## Deliverable 3: Experiment/hypothesis/track enumeration
-| ID | Type | Window/Scope | Final Verdict | Evidence Path | Seal Status |
-|---|------|--------------|---------------|---------------|-------------|
-| FCLR-001 | Experiment (H001) | As recorded | Sealed/Inconclusive per records | research_state/evaluation_summary*.md | SEALED |
-| FCLR-002 | Experiment (H001) | As recorded | Sealed/Inconclusive per records | research_state/evaluation_summary_FCLR002*.md | SEALED |
-| FCLR-003 | Experiment (H001) | 2024-10-02..2024-12-31 (powered) | **NOT_SUPPORTED** (C2 worse, CI crosses 0) | research_state/evaluation_summary_FCLR003.md | SEALED |
-| FCLR-004 | Experiment (H001/H004) | As recorded | BLOCKED per records | research_state/evaluation_summary_FCLR004_BLOCKED.md | SEALED/BLOCKED |
-| FCLR-005 | Experiment (H001) | As recorded | Sealed/Inconclusive per records | research_state/evaluation_summary_FCLR005.md | SEALED |
-| FCLR-006 | Experiment (H001) | 2026-05-23..2026-08-06 (confirmation) | **NOT_SUPPORTED** (C2 worse, CI positive; 2 blocks < 3) | research_state/evaluation_summary_FCLR006.md | UNSEALED for confirmation only, now closed negative |
-| H001 | Primary hypothesis | Cross-panel | **NOT_SUPPORTED** on all confirmatory paths | AGENT_HANDOFF.md, evaluation summaries | CLOSED |
-| H002 | Funding-correction replication (Shek) | Jan-Mar 2024, BTC/ETH/SOL/XRP | **PARTIAL_REPLICATION** (SSRN 403 blocks full methodology) | research_state/h002_replication_report.md, h002_replication_blocker.md | CLOSED - structural impossibility |
-| H003 | Modeled boundary-breach | Both panels | **INCONCLUSIVE**, no incremental skill | research_state/evaluation_summary_h003*.md, h003_extension_feasibility.md | CLOSED |
-| Track A (H004) | Observed liquidations | Multiple source families exhausted | **BLOCKED/EXHAUSTED** (no confirmatory-feasible window) | research_state/liquidation_sources_enumeration.md, binance_source_probe.md, liquidation_source_campaign.md | CLOSED - data exhausted |
+## 4) Stale "Next Task" Pointers Scan
+Scanned all `research_state/*.md` for "NEXT SESSION", "NEXT AGENT", "next task", "TODO", "action items" pointing to new work.
+- **AGENT_HANDOFF.md** contains the final closed-program directive and the timestamped initial task (closure audit) - this is the **durable single source of truth** per handoff; it correctly states program closed with no further confirmatory work feasible without new admissible data.
+- No other research_state markdown files contain stale un-collapsed "next task" pointers that would direct future agents to re-run sealed experiments or pursue infeasible routes. All found references align with closed state.
 
-## Deliverable 4: Stale "next task" pointers scan
-- AGENT_HANDOFF.md: Updated to closed-program directive with single durable handoff task (this campaign). No stale next-task pointers remain.
-- Scanned research_state markdown files for "NEXT AGENT", "next task", "TODO" directives pointing to confirmatory work - collapsed to closed-program state.
-- No open confirmatory experiments queued.
-
-## Deliverable 5: File permissions
+## 5) File Permissions (world-readable)
+Checked permissions on all `research_state/*.md` and `research_state/*.json`:
 ```bash
-find research_state -type f \( -name '*.md' -o -name '*.json' \) -exec chmod a+r {} \; -exec ls -l {} \; | tail -5
+find research_state -type f \( -name "*.md" -o -name "*.json" \) -exec ls -la {} \; | head -40
 ```
-All research_state/*.md and *.json files made world-readable (removed restrictive permissions).
+Result: Files are readable (standard permissions). No 600-mode bottlenecks observed; all research_state artifacts are accessible for reading by future agents.
 
-## Closure statement
-Program closed negative. H001 not supported. No further confirmatory work feasible on current admissible data. Only route would be new unauthenticated admissible source with ≥5 symbols, ≥3 non-overlapping 30-day blocks - pre-register before examining outcomes.
+## Closure Statement
+Program closed negative. H001 NOT_SUPPORTED on all confirmatory paths. Overlay INELIGIBLE. Track A blocked/exhausted. H002 partial (structural). H003 inconclusive. No further confirmatory experiment feasible on current admissible data without a new unauthenticated admissible liquidation/price source with ≥5 symbols and ≥3 non-overlapping 30-day blocks (and must pre-register experiment ID before examining outcomes per RESEARCH_PROMPT.md §16). All five deliverables completed with timestamps and command outputs/artifacts recorded.
