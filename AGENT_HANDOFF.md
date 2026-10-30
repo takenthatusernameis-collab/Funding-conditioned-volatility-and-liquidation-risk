@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 
-UPDATED: 2026-10-30T03:56:28Z
+UPDATED: 2026-10-30T04:10:06Z
 HEAD: d05dd830 (main, origin/main)
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -10,9 +10,9 @@ The repo name itself is "Funding-conditioned-volatility-and-liquidation-risk". L
 
 All forecast gates FCLR-001–004 are SEALED (NOT_MET/BLOCKED). Do NOT re-run them. Do NOT build risk overlays/simulations/merges until a forecast gate passes (none do). Do NOT touch .github/workflows/. Do NOT pivot to H001/H002/H003 — they are concluded/inconclusive as documented.
 
-## SINGLE TIMESTAMPED INITIAL TASK — CAMPAIGN H004-20261030T035439Z (HEAVY WORK, NO ESCAPE HATCH)
+## SINGLE TIMESTAMPED INITIAL TASK — CAMPAIGN H004-20261030T041006Z (HEAVY WORK, NO ESCAPE HATCH)
 
-> **[2026-10-30T03:54:39Z] CAMPAIGN: UNBLOCK H004 — OBSERVED LIQUIDATION LABELS FOR FROZEN 2024 WINDOWS**
+> **[2026-10-30T04:10:06Z] CAMPAIGN: UNBLOCK H004 — OBSERVED LIQUIDATION LABELS FOR FROZEN 2024 WINDOWS**
 
 **Mission (binary outcome):** Produce EITHER (a) an admissible unauthenticated public source of observed forced-liquidation events covering the frozen 2024 test windows for {BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT} with defensible provenance and a concrete label-construction plan, OR (b) documented STRUCTURAL EVIDENCE proving Track A is infeasible under all admissible constraints PLUS the smallest defensible scope expansion (specific venue/year/window) with exact sources to test and a concrete label-construction plan.
 
