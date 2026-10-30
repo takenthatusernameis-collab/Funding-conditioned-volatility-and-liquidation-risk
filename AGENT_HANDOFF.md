@@ -83,3 +83,45 @@ SESSION: liquidation-risk-campaign-closeout
 
 ## NEXT CAMPAIGN
 No viable liquidation-risk path remains without paid data/credentials or a new admissible free liquidation source. Campaign complete. Future agents should not re-sweep Track A absent a genuinely new free source/endpoint/dataset.
+
+---
+
+# HANDOFF UPDATE — 2026-10-30T22:55:57Z (VOLATILITY-FOCUS CAMPAIGN OPENED)
+
+HEAD: 86c4f3ce
+UPDATED: 2026-10-30T22:55:57Z
+SESSION: volatility-campaign-open
+PRIORITY_SOURCE: Repository name inference (funding-conditioned **volatility** and liquidation risk) — liquidation risk closed; volatility remains.
+
+## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
+
+**TASK_ID:** `HND-20261030-VOLATILITY-001`
+**PRIORITY:** P0
+**MODE:** HEAVY RESEARCH + ENGINEERING. NO VERIFICATION-ONLY CLOSURE. NO STATUS-POLISHING.
+
+Liquidation-risk campaign is closed (Track A structurally blocked; Track B inconclusive). Pivot to the remaining repo-name priority: **volatility forecasting**.
+
+### MANDATORY TASKS (DO IN ORDER)
+
+#### STEP 1: LOCK VOLATILITY PROTOCOL (P0)
+1. Read `research_state/research_protocol.md`, `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, and `research_state/evaluation_summary.md`.
+2. Define/verify FCLR-VOL-001 hypothesis: funding extremes + price dislocation improve 24h/72h realized-volatility forecast vs RV-only baseline (B0) under chronological OOS, block bootstrap, Holm across horizon×symbol family.
+3. Freeze splits/thresholds before any holdout touch. Record in `research_state/research_protocol_fclr_vol001.md` (create only if meaningful).
+
+#### STEP 2: EXECUTE HEAVY PIPELINE (P0)
+1. Reuse cached panels; do not redownload. Run fast inference first, profile slow stage, then full grid.
+2. Produce metrics (Brier/MAE/CRPS as applicable), block-bootstrap CIs, LOO, Holm, calibration, intensity if denominators available.
+3. Write `research_state/evaluation_summary_FCLR-VOL-001.md` with decision-grade numbers.
+
+#### STEP 3: UPDATE REGISTRIES + HANDOFF (P0)
+1. Update `hypothesis_registry.json` and `experiment_frontier.json`.
+2. Run `python -m unittest discover -s tests -v`.
+3. Update this handoff with exact commands/files/results and next task.
+
+### HARD CONSTRAINTS
+No credentials/paid data. No workflow changes. No holdout tuning. Preserve negatives. No fabricated labels.
+
+### SUCCESS CRITERIA
+Volatility campaign has frozen protocol, executed inference, decision-grade summary, updated registries, tests green, durable handoff updated.
+
+**START NOW. FOCUS ON HEAVY VOLATILITY WORK.**
