@@ -1,0 +1,66 @@
+{
+ "panel": "2025-01-01..2026-03-31",
+ "symbols": [
+  "BTCUSDT",
+  "ETHUSDT",
+  "BNBUSDT",
+  "SOLUSDT",
+  "XRPUSDT"
+ ],
+ "per_symbol": {
+  "BTCUSDT": {
+   "n_rows": 10920,
+   "first": "2025-01-01T00:00:00+00:00",
+   "last": "2026-03-31T23:00:00+00:00"
+  },
+  "ETHUSDT": {
+   "n_rows": 10920,
+   "first": "2025-01-01T00:00:00+00:00",
+   "last": "2026-03-31T23:00:00+00:00"
+  },
+  "BNBUSDT": {
+   "n_rows": 10920,
+   "first": "2025-01-01T00:00:00+00:00",
+   "last": "2026-03-31T23:00:00+00:00"
+  },
+  "SOLUSDT": {
+   "n_rows": 10920,
+   "first": "2025-01-01T00:00:00+00:00",
+   "last": "2026-03-31T23:00:00+00:00"
+  },
+  "XRPUSDT": {
+   "n_rows": 10920,
+   "first": "2025-01-01T00:00:00+00:00",
+   "last": "2026-03-31T23:00:00+00:00"
+  }
+ },
+ "common": {
+  "n": 10920,
+  "first": "2025-01-01T00:00:00+00:00",
+  "last": "2026-03-31T23:00:00+00:00"
+ },
+ "common_gaps": 0,
+ "missing_mark_days": {},
+ "funding": {
+  "BTCUSDT": {
+   "n_rows": 1365,
+   "missing_months": []
+  },
+  "ETHUSDT": {
+   "n_rows": 1365,
+   "missing_months": []
+  },
+  "BNBUSDT": {
+   "n_rows": 1365,
+   "missing_months": []
+  },
+  "SOLUSDT": {
+   "n_rows": 1365,
+   "missing_months": []
+  },
+  "XRPUSDT": {
+   "n_rows": 1365,
+   "missing_months": []
+  }
+ }
+}
