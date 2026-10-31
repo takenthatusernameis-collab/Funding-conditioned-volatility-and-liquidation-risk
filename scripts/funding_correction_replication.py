@@ -21,6 +21,9 @@ from datetime import datetime, timezone
 
 REPO = Path(__file__).resolve().parents[1]
 DATA_CACHE = REPO / "research_state" / "data_cache"
+# Repo-root archive layout used for Jan-Mar 2024 mark prices (never extracted to
+# data_cache; present on disk as markPriceKlines-1h-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv).
+MARK_PRICE_ROOT = REPO
 
 DEFAULT_SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 WINDOW_DAYS = 90
@@ -141,34 +144,45 @@ def time_to_correction(funding_series, event_ts, event_side, threshold_low,
 
 
 def load_mark_prices(symbol, year_months):
-    """Load cached hourly mark-price closes for a symbol. Returns dict ts_ms->price."""
+    """Load cached hourly mark-price closes for a symbol. Returns dict ts_ms->price.
+
+    Reads two layouts and merges (later timestamps win on duplicates):
+      1. research_state/data_cache/{symbol}_{YYYY_MM}/{symbol}-markPriceKlines-1h/*.csv
+      2. repo-root archive: markPriceKlines-1h-YYYY-MM-DD/{symbol}-1h-YYYY-MM-DD.csv
+    Row schema: open_time,open,high,low,close,volume,close_time,... (close = c).
+    """
     prices = {}
-    for month in year_months:
-        d = DATA_CACHE / f"{symbol}_{month}"
-        kl = d / f"{symbol}-markPriceKlines-1h"
-        # folder layout: indexPriceKlines-1h-YYYY-MM-DD / per-day files
-        if not d.exists():
-            continue
-        for day_dir in sorted(d.iterdir()):
-            if not day_dir.is_dir():
-                continue
-            if not day_dir.name.startswith("markPriceKlines-1h-"):
-                continue
-            for csv_file in sorted(day_dir.glob("*.csv")):
-                try:
-                    with open(csv_file) as f:
-                        reader = csv.DictReader(f)
-                        for r in reader:
-                            try:
-                                ts = int(r.get("t", r.get("open_time", "")))
-                                c = r.get("c", r.get("close", ""))
-                                if ts == 0 or c == "":
-                                    continue
-                                prices[ts] = float(c)
-                            except Exception:
-                                continue
-                except Exception:
+    roots = [DATA_CACHE, MARK_PRICE_ROOT]
+    for root in roots:
+        for month in year_months:
+            month_key = month.replace("-", "_")
+            if root == DATA_CACHE:
+                d = root / f"{symbol}_{month_key}"
+                pattern_dirs = [d] if d.exists() else []
+                glob_pat = "*.csv"
+            else:
+                yyyy = month_key[:4]
+                mm = month_key[5:7]
+                pattern_dirs = sorted(root.glob(f"markPriceKlines-1h-{yyyy}-{mm}-*"))
+                glob_pat = f"{symbol}-1h-*.csv"
+            for day_dir in pattern_dirs:
+                if not day_dir.is_dir():
                     continue
+                for csv_file in sorted(day_dir.glob(glob_pat)):
+                    try:
+                        with open(csv_file) as f:
+                            reader = csv.DictReader(f)
+                            for r in reader:
+                                try:
+                                    ts = int(r.get("open_time", r.get("t", "")))
+                                    c = r.get("close", r.get("c", ""))
+                                    if ts == 0 or c == "":
+                                        continue
+                                    prices[ts] = float(c)
+                                except Exception:
+                                    continue
+                    except Exception:
+                        continue
     return prices
 
 
@@ -231,6 +245,74 @@ def bootstrap_median_ci(times, n_boot=2000, seed=12345):
     lo = medians[int(0.025 * n_boot)]
     hi = medians[int(0.975 * n_boot)]
     return (lo, hi)
+
+
+def log_rank_test(events_a, events_b):
+    """Two-sample log-rank chi-square test for difference in correction-time
+    distributions, respecting right-censoring.
+
+    Each argument is a list of (time_hours, censored_bool). Returns the
+    chi-square statistic and two-sided p-value (1 degree of freedom).
+    """
+    import math
+    all_times = sorted({e[0] for e in events_a + events_b if e[0] is not None})
+    if not all_times:
+        return None, None
+    # group boundaries at unique event/censor times
+    boundaries = sorted({t for e in events_a + events_b for t in [e[0]] if t is not None})
+    O1 = 0.0  # observed events in group A
+    E1 = 0.0  # expected events in group A
+    V1 = 0.0  # variance (hypergeometric)
+    n1 = len(events_a)
+    n2 = len(events_b)
+    at_risk1 = n1
+    at_risk2 = n2
+    for t in boundaries:
+        d1 = sum(1 for (tt, c) in events_a if tt == t and not c)
+        d2 = sum(1 for (tt, c) in events_b if tt == t and not c)
+        d = d1 + d2
+        n = at_risk1 + at_risk2
+        if n > 0 and d > 0:
+            E1 += d * (at_risk1 / n)
+            O1 += d1
+            if n > 1:
+                V1 += (at_risk1 * at_risk2 * d * (n - d)) / (n * n * (n - 1))
+        # remove those whose time == t from risk set after counting
+        at_risk1 -= sum(1 for (tt, c) in events_a if tt == t)
+        at_risk2 -= sum(1 for (tt, c) in events_b if tt == t)
+    if V1 <= 0:
+        return None, None
+    chi2 = (O1 - E1) ** 2 / V1
+    # chi-square survival with 1 df via the incomplete gamma function
+    try:
+        from math import gamma
+        # p = 1 - P(chi2_1 <= x); use series for the regularized lower gamma
+        # P(chi2_1 <= x) = erf(sqrt(x/2))
+        p = 1.0 - math.erf(math.sqrt(chi2 / 2.0))
+    except Exception:
+        p = None
+    return chi2, p
+
+
+def _log_rank_high_vs_low(regimes):
+    """Run the pre-registered high-RV vs low-RV log-rank contrast."""
+    high = [(e["time_to_correction_hours"], e["censored"])
+            for e in regimes.get("high", {}).get("events", [])]
+    low = [(e["time_to_correction_hours"], e["censored"])
+           for e in regimes.get("low", {}).get("events", [])]
+    if not high or not low:
+        return {"status": "underpowered", "high_n": len(high), "low_n": len(low)}
+    chi2, p = log_rank_test(high, low)
+    return {
+        "status": "computed",
+        "high_n": len(high), "low_n": len(low),
+        "chi2": chi2, "p_two_sided": p,
+        "high_median_hours": regimes["high"]["median_correction_hours"],
+        "low_median_hours": regimes["low"]["median_correction_hours"],
+        "direction_lower_hazard_high_rv": (
+            regimes["high"]["median_correction_hours"] >
+            regimes["low"]["median_correction_hours"]),
+    }
 
 
 def replicate_funding_correction(symbols=None, months=None):
@@ -356,8 +438,9 @@ def replicate_funding_correction(symbols=None, months=None):
     for ev in all_events:
         rg = regimes.setdefault(ev["rv_regime"], {
             "n": 0, "corrected": 0, "censored": 0,
-            "correction_times": [], "by_symbol": {}})
+            "correction_times": [], "by_symbol": {}, "events": []})
         rg["n"] += 1
+        rg["events"].append(ev)
         if ev["censored"]:
             rg["censored"] += 1
         else:
@@ -389,6 +472,7 @@ def replicate_funding_correction(symbols=None, months=None):
             except Exception:
                 bsym["median_ci"] = None
     results["hazard_by_rv_regime"] = regimes
+    results["log_rank_high_vs_low"] = _log_rank_high_vs_low(regimes)
 
     # Multiple comparison correction across 18-symbol universe context
     # Report per-regime and per-symbol comparisons with BH adjustment

@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from funding_correction_replication import (
     benjamini_hochberg,
     bootstrap_median_ci,
+    log_rank_test,
     replicate_funding_correction,
 )
 
@@ -31,6 +32,28 @@ class TestFundingCorrectionRobustness(unittest.TestCase):
         self.assertIsNotNone(hi)
         self.assertLessEqual(lo, hi)
 
+    def test_log_rank_identical_groups_not_significant(self):
+        # Two identical survival samples -> chi2 ~ 0, p ~ 1
+        a = [(8.0, False), (16.0, False), (24.0, True)]
+        chi2, p = log_rank_test(a, list(a))
+        self.assertIsNotNone(chi2)
+        self.assertLessEqual(chi2, 1e-9)
+        self.assertGreaterEqual(p, 0.99)
+
+    def test_log_rank_separated_groups_significant(self):
+        # Group A corrects immediately, group B never corrects (censored)
+        a = [(8.0, False)] * 10
+        b = [(168.0, True)] * 10
+        chi2, p = log_rank_test(a, b)
+        self.assertIsNotNone(chi2)
+        self.assertGreater(chi2, 10.0)
+        self.assertLess(p, 0.01)
+
+    def test_log_rank_empty(self):
+        chi2, p = log_rank_test([], [])
+        self.assertIsNone(chi2)
+        self.assertIsNone(p)
+
     def test_robustness_outputs_present(self):
         res = replicate_funding_correction(symbols=["BTCUSDT"])
         self.assertIn("median_correction_hours_all_ci", res)
@@ -39,6 +62,8 @@ class TestFundingCorrectionRobustness(unittest.TestCase):
         mc = res["multiple_comparisons"]
         self.assertEqual(mc["method"], "Benjamini-Hochberg FDR")
         self.assertIn("18-symbol universe", mc["universe_note"])
+        # log-rank contrast must be present (pre-registered primary contrast)
+        self.assertIn("log_rank_high_vs_low", res)
 
 
 if __name__ == "__main__":

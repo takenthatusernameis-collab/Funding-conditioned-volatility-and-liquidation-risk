@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from funding_correction_replication import (
     load_funding_series,
+    load_mark_prices,
     identify_funding_extremes,
     time_to_correction,
     compute_rv_at_event,
@@ -74,6 +75,23 @@ class TestFundingCorrectionReplication(unittest.TestCase):
         rv, n = compute_rv_at_event({}, 1704067200000)
         self.assertIsNone(rv)
         self.assertEqual(n, 0)
+
+    def test_load_mark_prices_repo_root_btc_jan(self):
+        # Jan 2024 BTCUSDT mark prices live in the repo-root archive
+        # (markPriceKlines-1h-2024-01-*/BTCUSDT-1h-2024-01-*.csv), not in
+        # data_cache. Loader must find them and return hourly closes.
+        prices = load_mark_prices("BTCUSDT", ["2024-01", "2024-02", "2024-03"])
+        self.assertGreater(len(prices), 500)
+        # 2024-01-02T00:00:00Z open_time = 1704153600000 (2024-01-01 dir is empty)
+        self.assertIn(1704153600000, prices)
+        self.assertGreater(prices[1704153600000], 0)
+        # hourly cadence: first two timestamps are 3600000 ms (1h) apart
+        ts_sorted = sorted(prices)
+        self.assertEqual(ts_sorted[1] - ts_sorted[0], 3600000)
+
+    def test_load_mark_prices_missing_symbol_returns_empty(self):
+        prices = load_mark_prices("DOGEUSDT", ["2024-01"])
+        self.assertEqual(prices, {})
 
     def test_pipeline_runs_btcusdt(self):
         res = replicate_funding_correction(symbols=["BTCUSDT"])
