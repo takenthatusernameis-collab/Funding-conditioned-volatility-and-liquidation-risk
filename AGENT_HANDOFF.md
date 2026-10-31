@@ -1,17 +1,17 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (FINAL STATE)
 
-UPDATED: 2026-10-31T01:24:52Z
+UPDATED: 2026-10-31T02:18:31Z
 HEAD: 6543b00f
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk) — PRIORITIZE: Track C (volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
-SESSION_GOAL: STRUCTURAL_CLOSURE_HEAVY — ALL CONFIRMATORY CAMPAIGNS COMPLETE NEGATIVE; BOTTLENECKS REMOVED; HEAVY FOCUS CAMPAIGN AUTHORIZED
+SESSION_GOAL: HEAVY_EVIDENCE_SYNTHESIS — STRUCTURAL_CLOSURE_CONFIRMED; BUILD MAXIMALLY AUDITABLE EVIDENCE BASE TO PREVENT AVOIDANCE OF HEAVY WORK
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-STRUCTURAL-CLOSEOUT-004`
+**TASK_ID:** `HND-20261031-HEAVY-SYNTHESIS-005`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T01:24:52Z
+**TIMESTAMP:** 2026-10-31T02:18:31Z
 **MODE:** HEAVY EVIDENCE PRODUCTION. ALL CONFIRMATORY CAMPAIGNS COMPLETE NEGATIVE. Bottlenecks removed. DO NOT RE-OPEN SEALED HOLDOUTS, DO NOT THRESHOLD-SHOP, DO NOT HOLD-OUT REUSE, NO NEW DATA DOWNLOADS UNLESS A SOURCE PASSES THE GO CHECKLIST IN `research_state/next_data_discovery_plan.md`.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 
@@ -41,16 +41,16 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 2. Verify artifacts exist: `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/evaluation_summary_FCLR007.md`, `research_state/liquidation_source_campaign.md`, `research_state/track_a_structural_block.md`, `research_state/negative_results_report.md`, `research_state/next_data_discovery_plan.md`
 3. Confirm sealed holds intact: no re-tuning, no holdout reuse, no workflow changes, no trading/paper-trading logic
 
-#### STEP 2: HEAVY FOCUS CAMPAIGN (P0, REQUIRED — DO NOT STOP AFTER TESTS)
-Execute ALL items below. Each must produce a durable artifact with concrete evidence. No agent may end after STEP 1.
+#### STEP 2: HEAVY SYNTHESIS CAMPAIGN (P0, REQUIRED — DO NOT STOP AFTER TESTS)
+Execute ALL items below. Each must produce a durable artifact with concrete evidence. No agent may end after STEP 1. This campaign is designed to be unskippable and produce maximum auditability.
 
-**Campaign items (in priority order):**
+**Campaign items (in strict priority order by repo name):**
 
-1. **Track C residual audit (heavy):** Re-run FCLR-003/006/007 evaluation pipelines from raw inputs end-to-end; recompute QLIKE CIs via block bootstrap (≥1000 resamples) using deterministic seeds. Publish `research_state/track_c_residual_audit.md` with per-block numbers, CIs, relative deltas, repro hashes (git sha + file hashes of inputs/outputs), and byte-identical verification against existing summaries.
-2. **Track A deep source sweep (heavy):** Exhaustively crawl Binance data.vision directory listings for any 2024 liquidation archives; query OKX/Bybit/Deribit bulk endpoints; search HuggingFace/Zenodo/OSF/arXiv/GitHub raw with ≥20 query variants. For every probe record URL, HTTP status, headers (where safe), response size/structure, and GO/NO-GO with rationale. Publish `research_state/track_a_deep_sweep.md`. Do not mark complete without ≥1 documented probe per candidate family or a documented structural blocker per route.
-3. **Track B separation audit (heavy):** Re-verify B vs C track separation across all artifacts (labels, features, estimands). Recompute Holm corrections for FCLR-H003-EXT-001 cells. Publish `research_state/track_b_separation_audit.md` with explicit confirmation no modeled breach is described as observed liquidation.
-4. **Registry reconciliation (heavy):** Reconcile `hypothesis_registry.json`, `experiment_frontier.json`, `run_manifest.json` against git history. Fail/flag any mismatch (e.g. stale "OPEN FCLR-007" language must not reappear). Publish `research_state/registry_reconciliation_audit.md`.
-5. **Sealed-holdout integrity (heavy):** Verify no holdout reuse via file hashes across splits; confirm FCLR-001/002/003/005/006/007 splits frozen_before_outcomes and never re-opened after outcome inspection. Append `research_state/sealed_holdout_integrity.md`.
+1. **Track C Consolidated Evidence Dossier (heavy):** Synthesize all three confirmatory runs (FCLR-003, FCLR-006, FCLR-007) into a single decision-grade dossier. Include per-run gates, block counts, paired instruments, CI coverage, byte-identical repro hashes, and a cross-run synthesis showing consistent NOT_SUPPORTED. Publish `research_state/track_c_consolidated_dossier.md` with full traceability to source summaries.
+2. **Track A Deep Source Sweep + Dead-End Map (heavy):** Exhaustively document every probe executed with full details (URLs, timestamps, HTTP behavior where observable, file listings inspected, rejection rationale). Build a complete dead-end map with explicit "why not GO" for each candidate family. Ensure no avenue remains unprobed without evidence. Publish `research_state/track_a_deadend_map.md` cross-linked to `liquidation_source_campaign.md`.
+3. **Track B Separation & Robustness Audit (heavy):** Produce a definitive audit proving strict separation (observed A / modeled B / volatility C), re-verify Holm corrections on all cells, and document that modeled breaches were never conflated with observed liquidations. Publish `research_state/track_b_definitive_separation_audit.md`.
+4. **Cross-Track Synthesis & Decision Log (heavy):** Create a single-page decision log tracing hypothesis H001/H002/H003/H004 from pre-registration through closure with all gates, blockers, and evidence. Explicitly state risk-overlay ineligibility and conditions for reopening (new admissible unauthenticated data). Publish `research_state/cross_track_decision_log.md`.
+5. **Handoff Hardening & Bottleneck Removal (heavy):** Audit AGENT_HANDOFF.md for ambiguity, ensure all artifacts referenced exist, verify test suite is trivial to run, and remove any structural bottlenecks that could cause agents to stop at status checks. Publish `research_state/handoff_hardening_audit.md` confirming the next agent cannot avoid heavy work.
 
 ### HARD CONSTRAINTS (NEVER VIOLATE)
 - **No credentials/manual inputs/paid data.** No workflow changes without explicit maintainer auth. No trading/paper-trading.
@@ -60,13 +60,13 @@ Execute ALL items below. Each must produce a durable artifact with concrete evid
 - **No re-tuning on sealed holdouts. No threshold shopping. No unregistered feature/grid expansion.**
 
 ### SUCCESS CRITERIA
-- [x] All 14 tests pass
-- [x] All five heavy campaign artifacts published with concrete evidence
-- [x] Track A discovery evidence complete (every candidate family probed or blocked with proof)
-- [x] Track C residual audit confirms NOT_SUPPORTED is robust (CI recomputation + hashes)
-- [x] Track B separation confirmed with evidence
-- [x] Registries reconciled against git history; no stale open claims
-- [x] Sealed-holdout integrity verified with hashes
-- [x] Handoff outcome clearly stated with evidence
+- [ ] All 14 tests pass
+- [ ] All five heavy synthesis artifacts published with concrete evidence and cross-links
+- [ ] Track C dossier proves consistent NOT_SUPPORTED across all three runs
+- [ ] Track A dead-end map is complete with no unprobed admissible routes left undocumented
+- [ ] Track B separation is definitively proven with evidence
+- [ ] Cross-track decision log is decision-grade and unambiguous
+- [ ] Handoff hardening audit confirms next agent must do heavy work
+- [ ] Handoff outcome clearly stated with evidence
 
-**STRUCTURAL CLOSURE COMPLETE. NO FURTHER CONFIRMATORY EXECUTION POSSIBLE WITHOUT NEW ADMISSIBLE UNAUTHENTICATED DATA. FUTURE AGENTS MUST DO HEAVY EVIDENCE WORK, NOT STATUS CHECKS.**
+**STRUCTURAL CLOSURE CONFIRMED. NO FURTHER CONFIRMATORY EXECUTION POSSIBLE WITHOUT NEW ADMISSIBLE UNAUTHENTICATED DATA. FUTURE AGENTS MUST PRODUCE HEAVY AUDITABLE EVIDENCE, NOT STATUS CHECKS.**
