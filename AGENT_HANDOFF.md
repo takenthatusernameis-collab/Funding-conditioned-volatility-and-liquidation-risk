@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (FINAL STATE)
 
-UPDATED: 2026-10-31T00:16:11Z
-HEAD: 05b9e881
+UPDATED: 2026-10-31T00:18:08Z
+HEAD: 7a036e8e
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk) — **PRIORITIZE: Track C (volatility) > Track A (observed liquidations) > Track B (modeled breaches)**
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
@@ -11,7 +11,7 @@ SESSION_GOAL: CAMPAIGN_FCLR007_MANDATORY_HEAVY_EXECUTION — CONFIRMATORY ON UNS
 
 **TASK_ID:** `HND-20261031-FCLR007-HEAVY-001`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T00:16:11Z
+**TIMESTAMP:** 2026-10-31T00:18:08Z
 **MODE:** HEAVY EXECUTION AUTHORIZED. PRE-REGISTER BEFORE ANY OUTCOME INSPECTION. NO THRESHOLD SHOPPING. NO HOLDOUT REUSE. NO NEW DATA DOWNLOADS UNLESS A SOURCE PASSES THE GO CHECKLIST IN `research_state/next_data_discovery_plan.md`.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 
