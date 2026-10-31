@@ -1,6 +1,6 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T14:00:44Z
+UPDATED: 2026-10-31T14:11:14Z
 HEAD: 4947ef07 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
@@ -13,7 +13,7 @@ BOTTLE_NECK_REMOVAL: MANDATORY — Eliminate structural/efficiency blockers so s
 
 **TASK_ID:** `HND-20261031-120456-FORCED_HEAVY_EVIDENCE_SYNTHESIS`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T14:00:44Z
+**TIMESTAMP:** 2026-10-31T14:11:14Z
 **MODE:** FORCED HEAVY WORK — NO EXPLICIT STEP-BY-STEP DIRECTIONS ASSUMED. BUILD THE NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** This is the SINGLE DURABLE HANDOFF. Prioritize strictly by repo name: Track C → Track A → Track B. Remove bottlenecks. Status-only work is FORBIDDEN. Every action must yield concrete artifacts with provenance (file paths, line ranges, hashes/manifests, timestamps, HEAD).
