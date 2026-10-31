@@ -118,3 +118,13 @@ Execute `HND-20261031-141600-FORCED_HEAVY_EVIDENCE_SYNTHESIS` verbatim from `AGE
 **Tests:** Verified 27/27 PASS at start of refresh; must remain green at end.
 **State:** Confirmatory program closed on all panels; Track A structurally blocked (no admissible unauthenticated source passes rubric); Track C/Track B closed/negative with hard proof; H002 exploratory only (pre-registration REQUIRED before outcome inspection per RESEARCH_PROMPT §16).
 **Bottlenecks addressed:** HEAD staleness resolved; all internal HEAD references now consistent with `80df88a9`; traceability/enforcement/separation matrices mandated with concrete deliverables; heavy evidence work made unavoidable — no status-only path for the next agent.
+
+## REFRESH (2026-10-31T16:13:04Z)
+**Task ID:** HND-20261031-161304-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V8
+**HEAD:** af858aa4
+**Action:** Refreshed `AGENT_HANDOFF.md` as SINGLE DURABLE HANDOFF with new timestamped task message (V8). Resolved HEAD staleness bottleneck: internal HEAD reference corrected from stale `80df88a9` to actual HEAD `af858aa4` (latest checkpoint commits touch only handoff docs; `research_state` unchanged). Tests verified 27/27 PASS.
+**Priority:** Track C → Track A → Track B → H002 (by repo name: funding-conditioned volatility first).
+**Mode:** FORCED_HEAVY_EVIDENCE_SYNTHESIS — status-only work FORBIDDEN; every action must produce concrete artifacts with provenance (file:line, hashes/manifests, timestamps, HEAD).
+**Tests:** 27/27 PASS (verified at refresh). Must remain green.
+**State:** Confirmatory program closed on all panels; Track A structurally blocked (no admissible unauthenticated source passes rubric); Track C/Track B closed/negative with hard proof; H002 exploratory only (pre-registration REQUIRED before outcome inspection per RESEARCH_PROMPT §16).
+**Bottlenecks addressed:** HEAD staleness resolved and consistent; traceability/enforcement/separation matrices mandated; heavy evidence work made unavoidable — no status-only path.

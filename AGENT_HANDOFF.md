@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T16:12:29Z
-HEAD: fc554b76 (main). Working tree clean except untracked `__pycache__/` (scripts/tests). HEAD staleness bottleneck RESOLVED: internal reference now matches actual HEAD `fc554b76`.
+UPDATED: 2026-10-31T16:13:04Z
+HEAD: af858aa4 (main). Working tree clean except untracked `__pycache__/` (scripts/tests). HEAD staleness bottleneck RESOLVED: internal reference now matches actual HEAD `af858aa4`.
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk) — **FUNDING-CONDITIONED VOLATILITY FIRST**
 PRIORITY_ORDER: Track C (Funding-conditioned volatility forecasting) > Track A (Observed liquidations) > Track B (Modeled boundary breaches) > H002 (Funding-extreme correction time, exploratory-only)
@@ -9,13 +9,13 @@ DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
 SESSION_GOAL: FORCED_HEAVY_EVIDENCE_CAMPAIGN — NO STATUS-ONLY PATH. EVERY ITERATION MUST PRODUCE MEASURABLE ARTIFACTS. REMOVE ALL BOTTLENECKS. MAKE FUTURE AGENTS UNABLE TO AVOID HEAVY WORK.
 BOTTLE_NECK_REMOVAL: MANDATORY — Eliminate structural inefficiencies so significant progress continues.
 
-HEAD_NOTE: Checkpoint commits after prior state touched only AGENT_HANDOFF.md / AGENT_HANDOFF_OUTCOME.md; research_state unchanged. Verify HEAD at start.
+HEAD_NOTE: Verify HEAD at start. Checkpoint commits after prior state touched only AGENT_HANDOFF.md / AGENT_HANDOFF_OUTCOME.md; research_state unchanged.
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-161012-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V7`
+**TASK_ID:** `HND-20261031-161304-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V8`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T16:12:29Z
+**TIMESTAMP:** 2026-10-31T16:13:04Z
 **MODE:** FORCED HEAVY WORK — INFERRED FROM REPO NAME. BUILD THE NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** SINGLE DURABLE HANDOFF. Prioritize strictly by repo name: **Track C → Track A → Track B → H002**. Remove bottlenecks. Status-only work FORBIDDEN. Every action must yield concrete artifacts with provenance (file paths, line ranges, hashes/manifests, timestamps, HEAD). No re-tuning on sealed holdouts.
@@ -24,7 +24,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 
 ### CURRENT VERIFIED STATE (VERIFY AT START - DO NOT TRUST BLINDLY)
 - Tests: `python -m unittest discover -s tests -v` → **27/27 PASS** (must remain green). Verify at start and end.
-- HEAD: `fc554b76` (main). Working tree clean except untracked `__pycache__/`.
+- HEAD: `af858aa4` (main). Working tree clean except untracked `__pycache__/`.
 - Track C (H001, funding-conditioned volatility): **NOT_SUPPORTED — CONFIRMATORY CLOSED**. FCLR-003 C2 vs B1 +0.015205 QLIKE, 95% CI [-0.020240, 0.056734] crosses zero (-3.78% worse). FCLR-006/FCLR-007 worse in 2026 windows. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. Full synthesis in `research_state/track_c_final_synthesis_dossier.md`. **DO NOT REOPEN** without pre-registration + documented holdout discipline violations with evidence.
 - Track A (H004, observed liquidations): **STRUCTURALLY BLOCKED**. Machine-checkable rubric applied to ALL enumerated candidates — no source passes ALL items (unauthenticated, >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK, census/defensible). Sole reopen: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16 with concrete evidence. Proof in `research_state/track_a_final_block_proof.md` and `research_state/track_a_deadend_map.md`.
 - Track B (H003, modeled boundary breaches): **CLOSED_NEGATIVE**. FCLR-H003-EXT-001: no robust incremental skill after Holm correction across 16 cells. Strict separation from Track A proven. Proof in `research_state/track_b_separation_proof_hardened.md` / `research_state/track_b_definitive_separation_audit.md`.
@@ -40,8 +40,8 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 ### FORCED HEAVY EVIDENCE CAMPAIGN (EXECUTE ALL - CANNOT SKIP)
 
 #### STEP 1: INTEGRITY CHECK (P0)
-1. `python -m unittest discover -s tests -v` → MUST be 27/27 PASS. Record timestamp, HEAD (`fc554b76`), and full summary in `research_state/AGENT_HANDOFF_OUTCOME.md`.
-2. Confirm HEAD `fc554b76` and working tree state.
+1. `python -m unittest discover -s tests -v` → MUST be 27/27 PASS. Record timestamp, HEAD (`af858aa4`), and full summary in `research_state/AGENT_HANDOFF_OUTCOME.md`.
+2. Confirm HEAD `af858aa4` and working tree state.
 3. Verify critical artifacts exist and cross-linked.
 
 #### STEP 2: EVIDENCE SYNTHESIS BY PRIORITY (P0 - HEAVY WORK)
@@ -55,7 +55,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 **2D. H002 (PRIORITY 4)**: Do NOT inspect outcomes blindly. If concrete path to confirmatory per RESEARCH_PROMPT §16 exists, **PRE-REGISTER FIRST** in `research_state/h002_pre_registration.md` before any outcome inspection. Else document ruling out with evidence.
 
 #### STEP 3: INTEGRATION, HARDENING & FINALIZE HANDOFF (P0)
-1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (`fc554b76`), artifacts modified, commands executed, concrete numbers, tests (27/27), and BOTTLENECKS REMOVED WITH EVIDENCE.
+1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (`af858aa4`), artifacts modified, commands executed, concrete numbers, tests (27/27), and BOTTLENECKS REMOVED WITH EVIDENCE.
 2. Update `research_state/handoff_hardening_audit.md` proving bottlenecks removed and heavy work unavoidable.
 3. Update `research_state/cross_track_decision_log.md` with C→A→B→H002 synthesis and concrete decisions.
 4. Cross-link all artifacts; ensure single source of truth.
@@ -73,13 +73,13 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 - Use only data/software accessible automatically without payment/signup/keys/manual downloads.
 
 ### SUCCESS CRITERIA
-- [ ] All tests pass (27/27), timestamp + HEAD (`fc554b76`) recorded in `research_state/AGENT_HANDOFF_OUTCOME.md`
+- [ ] All tests pass (27/27), timestamp + HEAD (`af858aa4`) recorded in `research_state/AGENT_HANDOFF_OUTCOME.md`
 - [ ] Track C hardened with `track_c_traceability_matrix.md`
 - [ ] Track A hardened with `track_a_rubric_enforcement_matrix.md` + active sweep evidence + all candidates in `track_a_deadend_map.md`
 - [ ] Track B hardened with `track_b_codepath_separation_matrix.md` + grep evidence
 - [ ] H002 handled correctly (pre-registered BEFORE outcome inspection OR ruled out with evidence)
 - [ ] `research_state/AGENT_HANDOFF_OUTCOME.md`, `research_state/handoff_hardening_audit.md`, `research_state/cross_track_decision_log.md` updated
 - [ ] All artifacts cross-linked; handoff remains single source of truth
-- [ ] HEAD references consistent with `fc554b76`
+- [ ] HEAD references consistent with `af858aa4`
 
 **FORCED HEAVY SYNTHESIS CAMPAIGN — PRIORITIZED BY REPO NAME (FUNDING-CONDITIONED VOLATILITY → LIQUIDATION RISK). NO SHORTCUTS. BUILD EVIDENCE, NOT STATUS. REMOVE BOTTLENECKS. MAKE IT IMPOSSIBLE TO AVOID HEAVY WORK.**
