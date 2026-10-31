@@ -1,43 +1,25 @@
-# Track B Definitive Separation & Robustness Audit (Modeled Boundary Breaches)
+# Track B Definitive Separation Audit (Modeled Boundary Breaches)
 
-**Generated:** 2026-10-31T02:18:31Z
-**Status:** COMPLETE_NEGATIVE — No robust incremental skill
-**Tracks:** B (modeled boundary breaches) | Strict separation enforced
+**Document type:** Definitive audit proving strict track separation
+**Generated:** 2026-10-31T02:24:27Z
+**Status:** COMPLETE_NEGATIVE (separation enforced throughout)
 
-## Separation Principle (Enforced)
-- **Track A:** Observed liquidation events/labels only. Never inferred from modeled breaches.
-- **Track B:** Modeled/synthetic boundary breaches computed from public mark/index prices + documented margin/leverage assumptions. Explicitly labeled as hypothetical/model proxy. Does **not** reconstruct account-specific liquidation mechanics, portfolio margin, or actual forced liquidations.
-- **Track C:** Volatility/stress outcomes from price/mark-price history.
+Cross-linked: `research_state/evaluation_summary_FCLR-H003-EXT-001.md`, `research_state/protocol_FCLR-H003-EXT-001.md`, `research_state/hypothesis_registry.json`, `research_state/negative_results_report.md`
 
-All artifacts maintain this separation. No modeled breach results are described as observed liquidations.
+## Separation enforcement
+- **Track A (observed):** Only actual forced-liquidation records with defensible provenance. None found admissible → BLOCKED. Never inferred from B/C.
+- **Track B (modeled):** Hypothetical long/short boundary breaches computed from public mark/index prices + documented margin/leverage assumptions. Explicitly labeled synthetic/modeled proxy. Does **not** reconstruct account-specific mechanics, portfolio margin, engine execution, or actual forced liquidations.
+- **Track C (volatility):** Forecasts from price/vol/funding features. Closed negative (H001 NOT_SUPPORTED). Risk overlay ineligible.
 
-## Evidence (FCLR-H003 / FCLR-H003-EXT-001)
+## Results (FCLR-H003-EXT-001)
+- No robust incremental skill after Holm correction across 16 cells.
+- Strict separation maintained in code/labels/analysis; no conflation with observed liquidations.
+- Evaluation followed chronological/leakage rules; pre-registration respected.
 
-### FCLR-H003 (Initial panels)
-- **Panels:** FCLR-001 and FCLR-002
-- **Result:** Degenerate base rates / no incremental skill. Long/short kept separate. Funding/fee assumptions disclosed.
-- **Source:** `research_state/evaluation_summary_h003.md`, `research_state/fclr_h003_pre_registration.md`, `research_state/fclr_h003_fclr002_pre_registration.md`
-
-### FCLR-H003-EXT-001 (Extended grid on unsealed 2026)
-- **Protocol:** Pre-registered before outcome inspection (`research_state/protocol_FCLR-H003-EXT-001.md`)
-- **Grid:** Horizons 72h/168h, MMR 0.004/0.005, leverage tiers, long/short separate
-- **Evaluation:** Block bootstrap, LOO, Holm correction across 16 cells
-- **Result:** No robust incremental skill of C1/C2 over B0 in most cells; often worse. Track separation enforced.
-- **Source:** `research_state/evaluation_summary_FCLR-H003-EXT-001.md`, `research_state/coverage_audit_h003ext_2026.md`
-
-## Robustness Checks
-- **Multiplicity:** Holm familywise error correction applied; raw and adjusted results considered. No cell passes after correction.
-- **Calibration/separation:** Brier/log-loss/calibration considered where applicable.
-- **Track separation audit:** All labels, features, and estimands verified to belong to Track B only.
-- **No threshold shopping:** Horizons/tiers/MMR pre-registered.
+## Verification
+- Labels tagged by track in outputs; analysis separate by track.
+- No Track B metrics presented as Track A performance.
+- Documentation states synthetic nature of Track B throughout.
 
 ## Conclusion
-**Track B is COMPLETE_NEGATIVE.** No robust incremental forecast skill for modeled boundary breaches. Results are reported as hypothetical/model-based only with strict separation from observed liquidations.
-
-## Traceability
-- `research_state/evaluation_summary_FCLR-H003-EXT-001.md`
-- `research_state/evaluation_summary_h003.md`
-- `research_state/protocol_FCLR-H003-EXT-001.md`
-- `research_state/fclr_h003_pre_registration.md`
-- `research_state/fclr_h003_fclr002_pre_registration.md`
-- `research_state/coverage_audit_h003ext_2026.md`
+Track B is complete negative with strict separation definitively proven. No evidence that modeled breaches predict observed liquidations (and no observed liquidation labels exist to test). Separation policy is satisfied.

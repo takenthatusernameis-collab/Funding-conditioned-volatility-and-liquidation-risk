@@ -1,31 +1,26 @@
 # Handoff Hardening Audit
 
-**Generated:** 2026-10-31T02:18:31Z
-**Status:** HARDENED — Next agent cannot avoid heavy work
+**Document type:** Bottleneck removal & unskippability verification
+**Generated:** 2026-10-31T02:24:27Z
+**Auditor:** Current session (following durable handoff)
 
-## Checks
-- [x] AGENT_HANDOFF.md is single durable source of truth with verbatim initial task message
-- [x] All 14 tests pass (`python -m unittest discover -s tests -v` → OK)
-- [x] All required artifacts exist (hypothesis_registry.json, experiment_frontier.json, evaluation summaries, liquidation discovery artifacts)
-- [x] Heavy synthesis campaign explicitly required (5 items) with concrete artifacts
-- [x] Track separation enforced in handoff and artifacts
-- [x] No re-tuning/threshold-shopping/holdout reuse allowed
-- [x] Conditions for reopening clearly stated (Track A only on new admissible data)
-- [x] Risk overlay ineligible stated
-- [x] No workflow changes authorized
-- [x] Bottlenecks removed (all confirmatory campaigns complete; no blocked-by-data for Track C synthesis)
+## Checks performed
+- [x] AGENT_HANDOFF.md is the single durable source of truth (updated 2026-10-31T02:23:46Z, HEAD 28759df5). Contains verbatim initial task message and explicit campaign.
+- [x] All required artifacts exist: hypothesis_registry.json, experiment_frontier.json, evaluation summaries (FCLR003/006/007, FCLR-H003-EXT-001), liquidation_source_campaign.md, track_a_structural_block.md, negative_results_report.md, next_data_discovery_plan.md.
+- [x] Test suite passes: 14/14 OK (ran `python -m unittest discover -s tests -v`).
+- [x] Heavy synthesis campaign artifacts created: track_c_consolidated_dossier.md, track_a_deadend_map.md, track_b_definitive_separation_audit.md, cross_track_decision_log.md, handoff_hardening_audit.md.
+- [x] All artifacts cross-linked for traceability.
+- [x] Constraints explicit: no credentials/paid data/workflow changes/trading, track separation, no holdout reuse/tuning, pre-registration required for any Track A GO.
+- [x] Campaign is explicit and ordered (STEP 1 integrity → STEP 2 heavy synthesis) with success criteria; cannot be satisfied by tests alone.
 
-## Bottlenecks Removed
-- **Track C:** All three confirmatory runs complete with evidence; synthesis only remains
-- **Track A:** Discovery complete with dead-end map; no more speculative probes without new data
-- **Track B:** Complete negative with separation audit
-- **Tests:** All passing, fast to verify
+## Bottlenecks removed
+- Ambiguity eliminated: handoff states "DO NOT STOP AFTER TESTS" and lists 5 required heavy items with deliverables.
+- Traceability enforced via cross-links and consolidated dossiers.
+- "Avoidance of heavy work" prevented by making heavy synthesis mandatory and auditable.
+- Structural closure unambiguous with clear reopen conditions.
 
 ## Verification
-```bash
-python -m unittest discover -s tests -v
-ls research_state/track_c_consolidated_dossier.md research_state/track_a_deadend_map.md research_state/track_b_definitive_separation_audit.md research_state/cross_track_decision_log.md research_state/handoff_hardening_audit.md
-```
+Next agent cannot avoid heavy work: STEP 2 is REQUIRED with concrete artifacts. Tests are necessary but insufficient. All evidence points to structural closure without new admissible unauthenticated data.
 
 ## Conclusion
-Handoff is hardened. Next agent is directed to heavy evidence synthesis/verification with no path to stop at status checks.
+Handoff hardened. Ready for clean stop after verification (no further confirmatory execution possible).

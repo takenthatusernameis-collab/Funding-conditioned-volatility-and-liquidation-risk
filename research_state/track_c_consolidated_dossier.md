@@ -1,58 +1,26 @@
-# Track C Consolidated Evidence Dossier (H001: Funding-Conditioned Volatility Forecasting)
+# Track C Consolidated Evidence Dossier (FCLR-H001)
 
-**Generated:** 2026-10-31T02:18:31Z
-**Status:** NOT_SUPPORTED — SEALED_NEGATIVE
-**Tracks:** C (volatility forecasting) | Priority: P0 (by repo name)
+**Document type:** Decision-grade synthesis (sealed; no holdout reuse/tuning)
+**Repository:** Funding-conditioned-volatility-and-liquidation-risk
+**Generated:** 2026-10-31T02:24:27Z
+**Hypothesis:** H001 — Do funding extremes, realized volatility, and pre-specified price dislocation/smoothing features improve OOS forecasts of future realized volatility/stress vs RV-only baseline?
+**Status:** NOT_SUPPORTED (all confirmatory campaigns complete negative). Risk overlay INELIGIBLE.
 
-## Executive Summary
+## Cross-run summary (byte-identical reproduction verified)
 
-Across all three confirmatory/unsealed runs on Binance USDⓈ-M perpetuals (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), adding funding-conditioned features (C1/C2) does **not** improve out-of-sample 24h realized volatility forecasts over a realized-volatility HAR baseline (B1). In all cases the gate fails; in two cases (FCLR-006, FCLR-007) the funding-conditioned model is significantly worse. Risk overlay is **ineligible**.
+| Run | Window (test) | Blocks (30d, non-overlap) | Paired n | C2 vs B1 ΔQLIKE (CI) | Rel QLIKE | Gate | Verdict |
+|---|---|---|---|---|---|---|---|
+| FCLR-003 | 2024-10-02 .. 2024-12-31 (91d) | 3 | 10796 | +0.015205 [-0.020240, 0.056734] | -3.78% | NOT_MET (CI crosses zero; improvement criteria fail) | COMPLETE_NEGATIVE |
+| FCLR-006 | 2026-05-23 .. 2026-08-06 (76d) | 2 (<3) | 8987 | +0.354989 [0.168263, 0.591948] | -67.32% | NOT_MET (worse, underpowered blocks) | COMPLETE_NEGATIVE |
+| FCLR-007 | 2026-07-21 .. 2026-07-31 (11d) | 0 (<3) | 1195 | +0.010258 [0.001308, 0.019737] | -3.42% | NOT_MET (worse, entirely positive CI, underpowered) | COMPLETE_NEGATIVE |
 
-## Run-by-Run Evidence
-
-### FCLR-003 (Powered confirmatory, 2024-10-02..2024-12-31)
-- **Source:** `research_state/evaluation_summary_FCLR003.md`
-- **Test window:** 2024-10-02T00:00:00Z .. 2024-12-31T23:00:00Z (91 days = 3 non-overlapping 30-day blocks)
-- **Instruments:** 5 (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) — PASS (>=5)
-- **Paired n (C2 vs B1):** 10796
-- **QLIKE (test):** B1=0.193940, C2=0.202835
-- **C2 vs B1:** mean diff = +0.015205, 95% CI [-0.020240, 0.056734] (crosses zero)
-- **Relative reduction:** -3.78% (negative = worse)
-- **Gate:** NOT_MET (CI crosses zero; relative < 2%)
-- **Repro:** Byte-identical reproduction verified
-
-### FCLR-006 (Unsealed 2026, underpowered blocks, 2026-05-23..2026-08-06)
-- **Source:** `research_state/evaluation_summary_FCLR006.md`, `research_state/fclr006_coverage_audit.md`
-- **Test window:** 2026-05-23T00:00:00Z .. 2026-08-06T23:00:00Z (76 days = 2 non-overlapping 30-day blocks)
-- **Instruments:** 5 — PASS
-- **Paired n (C2 vs B1):** 8987
-- **QLIKE (test):** B1=0.527053, C2=0.895641
-- **C2 vs B1:** mean diff = +0.368588, 95% CI [0.173749, 0.615614] (entirely positive)
-- **Relative reduction:** -69.90% (significantly worse)
-- **Gate:** NOT_MET (CI excludes zero on worse side; blocks < 3)
-- **Repro:** Byte-identical reproduction verified
-
-### FCLR-007 (Unsealed 2026, pre-registered before outcomes, 2026-04-01..2026-07-31)
-- **Source:** `research_state/evaluation_summary_FCLR007.md`, `research_state/fclr007_coverage_audit.md`
-- **Test window:** 2026-07-21T00:00:00Z .. 2026-07-31T23:00:00Z (11 days = 0 non-overlapping 30-day blocks)
-- **Instruments:** 5 — PASS
-- **Paired n (C2 vs B1):** 1114 (from summary)
-- **QLIKE (test):** B1=0.300332, C2=0.310590
-- **C2 vs B1:** mean diff = +0.010258, 95% CI [0.001308, 0.019737] (entirely positive)
-- **Relative reduction:** -3.42% (worse)
-- **Gate:** NOT_MET (CI excludes zero on worse side; blocks < 3, test window too short)
-- **Pre-registration:** Frozen before outcome inspection per protocol; splits in run_manifest under `split_boundaries_fclr007`
-- **Repro:** Byte-identical repro verified
-
-## Cross-Run Synthesis
-- **Consistency:** All three runs fail the forecast gate. Two show statistically significant degradation.
-- **Block/bootstrap:** All use paired comparisons with block bootstrap (~24h blocks) as specified.
-- **Track separation:** Strictly Track C (volatility). No conflation with liquidation labels.
-- **Conclusion:** H001 (funding-conditioned volatility forecasting) is **NOT_SUPPORTED**. Risk overlay is **ineligible**.
+**Conclusion:** Across all three confirmatory runs, C2 (RV + funding + price features) does not meet the pre-registered gate vs B1 (RV-only). In some windows it is neutral-to-worse; in the most recent unsealed windows it is statistically worse. No path to passing gate without violating pre-registration (no tuning/holdout reuse). H001 is NOT_SUPPORTED.
 
 ## Traceability
-- `scripts/run_evaluation.py` (FCLR-003/006/007 modes)
-- `research_state/run_manifest.json` (split boundaries, hashes)
-- `research_state/evaluation_summary_FCLR003.md`, `evaluation_summary_FCLR006.md`, `evaluation_summary_FCLR007.md`
-- `research_state/fclr007_coverage_audit.md`, `fclr006_coverage_audit.md`
-- Tests: `tests/test_funding_correction_*.py` all pass (14/14)
+- FCLR-003: `research_state/evaluation_summary_FCLR003.md` (generated 2026-10-29T19:13:39Z)
+- FCLR-006: `research_state/evaluation_summary_FCLR006.md` (generated 2026-10-30T16:52:51Z), `research_state/reporting_errata_FCLR006.md`
+- FCLR-007: `research_state/evaluation_summary_FCLR007.md` (generated 2026-10-31T00:21:05Z)
+- Protocols/splits frozen pre-outcome; byte-identical reproduction verified per handoff.
+
+## Decision
+- Track C CLOSED (negative). Risk overlay INELIGIBLE per §9 of RESEARCH_PROMPT.md.
