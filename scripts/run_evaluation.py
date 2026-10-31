@@ -37,10 +37,15 @@ elif EXPERIMENT == "FCLR-006":
     SPLIT_KEY = "split_boundaries_fclr006"
     START_ALL = "2026-04-01"
 elif EXPERIMENT == "FCLR-007":
-    OUT = REPO / "research_state" / "evaluation_summary_FCLR007.md"
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
     DATA_END = "2026-07-31"
     SPLIT_KEY = "split_boundaries_fclr007"
     START_ALL = "2026-04-01"
+elif EXPERIMENT == "FCLR-008":
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
+    DATA_END = "2026-08-06"
+    SPLIT_KEY = "split_boundaries_fclr008"
+    START_ALL = "2026-01-01"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
