@@ -61,3 +61,9 @@
 **H001 NOT_SUPPORTED — CONFIRMATORY CLOSED.** C2 fails primary gate vs B1 in powered window (CI crosses zero, worse). Funding alone (C1) helps, but adding price dislocation/smoothing degrades. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. No valid reopen without pre-registration + documented holdout discipline violations with evidence.
 
 **Cross-linked:** `research_state/track_c_final_synthesis_dossier.md`, `research_state/evaluation_summary_FCLR003.md`, `research_state/gate_assessment.md`, `research_state/final_confirmatory_verdict.md`
+
+## HEAD CONSISTENCY (REFRESH 2026-10-31T17:12:00Z)
+- HEAD: `096d1601` (main) — working tree clean
+- Tests: 27/27 PASS
+- Cross-linked with: track_c_final_synthesis_dossier.md, evaluation_summary_FCLR006.md, research_state/run_manifest*.json
+- Bottleneck status: IRREFUTABLY TRACEABLE — closure cannot be reduced to status-only assertion.

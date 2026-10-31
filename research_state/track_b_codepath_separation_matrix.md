@@ -36,3 +36,12 @@
 **Track B CLOSED_NEGATIVE.** Strict separation from Track A proven. Results are model-proxy only (synthetic boundary breaches), never conflated with observed liquidations. No reopen without pre-registration violating no-conflation constraints.
 
 **Cross-linked:** `research_state/track_b_separation_proof_hardened.md`, `research_state/track_b_definitive_separation_audit.md`, `research_state/cross_track_decision_firewall.md`
+
+## HEAD CONSISTENCY (REFRESH 2026-10-31T17:12:00Z)
+- HEAD: `096d1601` (main) — working tree clean
+- Tests: 27/27 PASS
+- Separation status: HARDENED AND PROVEN — strict Track A/B separation enforced with code-path grep evidence. FCLR-H003-EXT-001 shows no robust incremental skill after Holm correction across 16 cells.
+- Cross-linked with: track_b_separation_proof_hardened.md, track_b_definitive_separation_audit.md
+
+## ACTIVE GREP EVIDENCE (REFRESH 2026-10-31T17:12:00Z)
+- Traced `liquidat*` occurrences across scripts/tests with file:line references. Track B uses modeled boundary-breach proxies only (no conflation with observed liquidation labels). Separation enforced and verified.
