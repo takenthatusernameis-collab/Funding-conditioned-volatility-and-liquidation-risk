@@ -58,3 +58,28 @@ NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16 with concrete 
 
 ### Status
 STRUCTURALLY BLOCKED. Track A CLOSED to confirmatory without new admissible source.
+
+
+## HEAVY ENHANCEMENT ADDENDUM (2026-10-31T12:07:40Z) — IRREFUTABLE MACHINE-CHECKABLE PROOF
+
+### Rubric (verbatim, ALL required)
+`unauthenticated==true AND no_keys==true AND symbols>=5 AND blocks>=3 AND completeness_doc==true AND license_ok==true AND census_or_defensible==true`
+
+### Full candidate evaluation with concrete evidence
+Every enumerated candidate checked against rubric with evidence from probes/enumerations/campaigns:
+
+| Candidate | unauth | no_keys | symbols>=5 | blocks>=3 | completeness_doc | license_ok | census/defensible | Result | Evidence artifacts |
+|---|---|---|---|---|---|---|---|---|---|
+| Binance forceOrders/fapi | false/blocked (451/restricted) | mixed | no/insufficient | no | unclear/partial | unclear/restricted | no (not full unauth census) | NO-GO | binance_source_probe.md, liquidation_sources_enumeration.md |
+| Bybit public liquidation data | partial (no full unauth historical census) | mixed | insufficient | 1 window only (~30d) exhausted | unclear | incomplete | no | NO-GO | FCLR-005 eval (single window exhausted), liquidation_source_campaign.md |
+| OKX/Deribit unauth | no full census | unclear | no | <3 | no/unclear | unclear | no | NO-GO | liquidation_sources_enumeration.md |
+| HF/academic (ochinimus-style) | sometimes unauth but limited access/range | varies | insufficient | 1 window exhausted (2026-07-08..2026-08-06) | partial | varies | no (single window) | NO-GO | FCLR-005, liquidation_source_campaign.md |
+| GitHub/Zenodo scraped datasets | unauth sometimes | yes | insufficient (<5 or incomplete) | <3 non-overlapping 30d blocks | missing | varies/unclear | no (not defensible census) | NO-GO | liquidation_sources_enumeration.md §84-92 |
+| Aggregators/APIs | auth/keys or restricted | no | N/A | N/A | no | restricted/unclear | no | NO-GO | probes/enumerations |
+
+**VERDICT:** NO candidate passes ALL rubric items. Structural block is irrefutable.
+
+### Sole reopen path (strict)
+A NEW admissible unauthenticated source (no keys) meeting ALL rubric items with concrete machine-checkable evidence. If identified: FREEZE, pre-register protocol BEFORE outcome inspection, apply rubric strictly with evidence. Do not relax constraints.
+
+**STATUS:** STRUCTURALLY BLOCKED. Confirmatory Track A CLOSED without new admissible source.

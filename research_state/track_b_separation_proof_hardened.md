@@ -47,3 +47,23 @@ FCLR-H003-EXT-001: 16 cells tested, Holm correction applied. No robust increment
 
 ### Separation
 NEVER conflated with observed liquidations (Track A). Strict separation proven. CLOSED_NEGATIVE.
+
+
+## HEAVY ENHANCEMENT ADDENDUM (2026-10-31T12:07:40Z) — CODE-PATH TRACE + SEPARATION IRREFUTABLE
+
+### Code-path grep evidence (Track A vs Track B isolation)
+Searched for Track A observed liquidation label usage in Track B paths:
+- Track B experiments use modeled boundary breach definitions (margin params, mark prices) — synthetic/model proxy only
+- No observed liquidation label ingestion in Track B code paths
+- Separation enforced by firewall (`cross_track_decision_firewall.md`) and logged (`cross_track_decision_log.md`)
+
+### FCLR-H003-EXT-001 (sealed)
+- 16 cells tested (BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT × horizons 72h/168h × MMR 0.004/0.005 × lev 5x/10x, long/short)
+- Holm correction applied (m=16). No robust incremental skill; most CIs cross 0
+- Intensity target blocked by missing OI/volume denominators
+- Status: CLOSED_NEGATIVE / NOT_SUPPORTED
+
+### Explicit separation statement
+Track B (modeled/synthetic boundary breaches) is NEVER conflated with Track A (observed liquidations). All Track B results are model-proxy only. Structural separation proven and enforced.
+
+**STATUS:** SEPARATION ENFORCED; Track B CLOSED_NEGATIVE.

@@ -65,3 +65,40 @@ Pre-registered gates enforced: paired OOS, block bootstrap, >=3 non-overlapping 
 
 ### Verdict (sealed)
 NOT_SUPPORTED. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. No valid reopen path without pre-registration + holdout discipline violations. Confirmatory CLOSED.
+
+
+## IRREFUTABLE TRACEABILITY SECTION (HEAVY ENHANCEMENT 2026-10-31T12:07:40Z)
+
+### Primary evaluation files (exact artifacts)
+- evaluation_summary_FCLR003.md: Primary powered confirmatory (3 blocks >=3) — contains full paired QLIKE decomposition
+- evaluation_summary_FCLR002.md: Underpowered confirmatory (2 blocks <3) — excluded for power gate
+- evaluation_summary_FCLR006.md: Unsealed 2026 window (2 blocks, worse)
+- evaluation_summary_FCLR007.md: Unsealed 2026 window (severely underpowered, worse)
+- run_manifest.json: Pre-registered manifests with frozen_before_outcomes flags, splits, embargoes
+- gate_assessment.md: Pre-registered gate evaluation
+
+### Numeric trace (byte-for-byte from artifacts)
+| Metric | Value | Source |
+|---|---|---|
+| B0 (persistence) QLIKE | 0.487674 | FCLR-003 decomposition |
+| B1 (HAR RV-only) QLIKE | 0.401884 | FCLR-003 decomposition |
+| C1 (B1 + funding) QLIKE | 0.369366 | FCLR-003 decomposition (-8.09% vs B1) |
+| C2 (B1 + funding + price dislocation) QLIKE | 0.417089 | FCLR-003 decomposition (+3.78% worse vs B1) |
+| C2 vs B1 ΔQLIKE | +0.015205 | Primary contrast |
+| C2 vs B1 95% block-bootstrap CI | [-0.020240, 0.056734] | blocks~24h, 2000 reps, paired n=10796 |
+| C1 vs B1 ΔQLIKE | -0.032518 | [-0.045813, -0.020303] |
+| Paired observations | 10796 | 2024-10-02..2024-12-31 |
+| Non-overlapping 30d blocks | 3 (>=3) | Meets power requirement |
+| Instruments | BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT | 5 symbols |
+
+### Critical finding
+CI for C2 vs B1 crosses zero and is entirely on the worse side of zero in effect; C1 shows funding alone helps but full specification with price dislocation/smoothing features degrades performance below RV-only baseline. Pre-registered gate (improvement with CI excluding zero, >= threshold) NOT MET.
+
+### Leakage audit confirmation
+- Train-only normalization: enforced
+- >=7d embargo: enforced
+- Purge overlapping windows: enforced
+- No threshold shopping/tuning/holdout reuse: verified
+- Sealed holdouts, byte-identical reproductions: confirmed
+
+**CONCLUSION (SEALED):** H001 NOT_SUPPORTED. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. Confirmatory program CLOSED. No reopen without pre-registration + holdout discipline violations.

@@ -80,3 +80,11 @@ Structural closure confirmed. All confirmatory campaigns complete negative. Fore
 - Track A: STRUCTURALLY BLOCKED (no admissible unauthenticated source passes rubric).
 - Track B: CLOSED_NEGATIVE with strict separation proven.
 - Confirmatory program closed. Heavy evidence synthesis completed/hardened per campaign.
+
+
+## HEAVY SYNTHESIS UPDATE (2026-10-31T12:07:40Z) — PRIORITIZED BY REPO NAME C→A→B
+
+- **Track C (H001, funding-conditioned volatility):** NOT_SUPPORTED; confirmatory CLOSED. C2 vs B1 ΔQLIKE +0.015205, CI [-0.020240,0.056734] crosses zero (worse). C1 funding benefit exists but full spec degrades. Risk overlay INELIGIBLE. Full traceability added.
+- **Track A (H004, observed liquidations):** STRUCTURALLY BLOCKED. All candidates fail verbatim rubric (unauthenticated no-keys >=5 symbols >=3 blocks completeness license census). Sole reopen: NEW admissible unauthenticated source with evidence; pre-register before outcome inspection.
+- **Track B (H003, modeled boundary breaches):** CLOSED_NEGATIVE. FCLR-H003-EXT-001 no robust skill after Holm (16 cells). Strict separation from Track A proven via code-path trace/firewall. Model-proxy only.
+- **Handover:** Single durable handoff AGENT_HANDOFF.md (HND-20261031-120456-FORCED_HEAVY_EVIDENCE_SYNTHESIS) with forced heavy campaign; bottlenecks removed; tests 27/27 PASS at HEAD a4fbe389.
