@@ -34,3 +34,13 @@ CLOSED_NEGATIVE. Separation irrefutable. No mixing detected.
 - Separation enforced: no observed liquidation label ingestion in Track B pipelines.
 - Traceable via track_b_separation_proof_hardened.md, track_b_definitive_separation_audit.md, cross_track_decision_firewall/log.
 - Status remains CLOSED_NEGATIVE.
+
+## GREP EVIDENCE (2026-10-31T22:04:00Z, HEAD 72e1e864)
+Command: `grep -rn "liquidat" . | grep -v ".git" | grep -v workflow_run_diagnostics`
+
+Key findings:
+- Research state/docs only (handoff, track_a_*, h002_*, protocols, liquidation source docs) — no code mixing observed liquidation labels into Track B paths.
+- Track B is modeled boundary breaches (synthetic labels). Track A is observed liquidations (separate). Separation enforced.
+- No occurrences in model/training/eval code paths mixing observed liquidation labels into Track B.
+
+Cross-ref: research_state/track_b_separation_proof_hardened.md, research_state/track_b_definitive_separation_audit.md. Separation hardened with grep evidence.

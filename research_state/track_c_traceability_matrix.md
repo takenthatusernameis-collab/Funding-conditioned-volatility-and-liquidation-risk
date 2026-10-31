@@ -50,3 +50,20 @@ Sources: research_state/track_c_final_synthesis_dossier.md, research_state/track
 
 ## Decision
 Track C (H001): NOT_SUPPORTED — CONFIRMATORY CLOSED. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. No reopening without pre-registration + documented holdout discipline violations with concrete evidence. All numbers traceable with provenance above.
+
+## BYTE-LEVEL DECOMPOSITION (EXPLICIT)
+| Component | Definition (from protocol) | Code paths | Trace |
+|---|---|---|---|
+| B0 | Persistence baseline (preceding RV24h) | Research pipeline code for baseline features; see evaluation manifests | research_state/evaluation_summary_FCLR003.md (decomposition), research_state/track_c_final_synthesis_dossier.md |
+| B1 | RV-only HAR-style baseline (log RV1h, log RV24h, log RV168h) — primary comparison baseline | RV construction and HAR features; see protocol | research_state/research_protocol.md, research_state/evaluation_summary_FCLR003.md |
+| C1 | B1 + funding features (signed funding + past-only 90d absolute-funding percentile) | Funding feature engineering (past-only, no lookahead); see protocols | research_state/research_protocol.md, research_state/evaluation_summary_FCLR003.md |
+| C2 | C1 + price-dislocation/smoothing features (mark/index premium + mark/EMA24 distance) — full candidate | Dislocation features; see protocols | research_state/research_protocol.md, research_state/evaluation_summary_FCLR003.md |
+
+Decomposition values (FCLR-003): B0=0.487674, B1=0.401884, C1=0.369366, C2=0.417089 (all QLIKE). Paired n=10796, 3 non-overlapping ~30d blocks, 5 symbols, embargo >=7d. CI block bootstrap (joint across instruments), >=2000 replicates.
+
+## CROSS-LINKS (HARDENED)
+- Primary synthesis: research_state/track_c_final_synthesis_dossier.md
+- Consolidated: research_state/track_c_consolidated_dossier.md
+- Gate: research_state/gate_assessment.md, research_state/final_confirmatory_verdict.md
+- Manifests/splits: research_state/run_manifest.json (split_boundaries_fclr003), research_state/leakage_audit.md
+- Tests: 27/27 PASS (verified 2026-10-31T22:03:29Z, HEAD 72e1e864)

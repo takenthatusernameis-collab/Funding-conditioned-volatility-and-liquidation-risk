@@ -22,3 +22,9 @@ No pre-registration for promotion created because no admissible confirmatory pat
 - Track B separation hardened (grep evidence reviewed); remains CLOSED_NEGATIVE.
 - H002: no concrete admissible confirmatory path; remains EXPLORATORY/PARTIAL, no promotion without pre-registration.
 - All artifacts cross-linked per handoff.
+
+## UPDATE 2026-10-31T22:04:30Z (HARDENING)
+- Track C: NOT_SUPPORTED — CONFIRMATORY CLOSED. Traceability hardened (byte-level B0/B1/C1/C2, paired n/blocks/CIs, embargoes/leakage). Risk overlay INELIGIBLE (§9). No reopen without pre-registration + documented holdout discipline violations with evidence.
+- Track A: STRUCTURALLY BLOCKED. Active sweep completed against verbatim rubric — no admissible unauthenticated candidate meets ALL items (>=5 symbols, >=3 non-overlapping 30d blocks, completeness/census/defensible, license/terms OK). New source requires pre-registration before inspection.
+- Track B: CLOSED_NEGATIVE. Codepath separation hardened via grep (no mixing of observed liquidation labels into modeled Track B paths). Strict separation proven.
+- H002: EXPLORATORY/PARTIAL (88/84/4). No promotion to volatility/boundary/observed liquidation without pre-registration per §16. If confirmatory path exists, pre-register FIRST.
