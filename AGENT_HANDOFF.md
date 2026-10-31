@@ -1,98 +1,110 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T08:31:03Z
-HEAD: 056d0b29
+UPDATED: 2026-10-31T09:10:42Z
+HEAD: 52506b1a
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
-SESSION_GOAL: HEAVY_EVIDENCE_CAMPAIGN — NO SHORTCUTS. FORCE AUDITABLE HEAVY WORK. MAXIMIZE DEFENSIBLE EVIDENCE.
+SESSION_GOAL: HEAVY_EVIDENCE_SYNTHESIS_CAMPAIGN — NO SHORTCUTS. FORCE AUDITABLE HEAVY WORK. MAXIMIZE DEFENSIBLE EVIDENCE.
 BOTTLE_NECK_REMOVAL: MANDATORY — Remove any structural/efficiency blockers so significant progress continues. No status-only work.
+STRICT_SEPARATION: Track A (observed), Track B (modeled/synthetic), Track C (volatility forecasting) — NEVER conflate.
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-083103-VERIFY-FINAL-CLOSEOUT-HEAVY`
+**TASK_ID:** `HND-20261031-091042-FORCE-HEAVY-SYNTHESIS-CAMPAIGN`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T08:31:03Z
-**MODE:** FORCED VERIFY-AND-CLOSEOUT CAMPAIGN — EXPLICIT DIRECTIONS ABSENT, BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
+**TIMESTAMP:** 2026-10-31T09:10:42Z
+**MODE:** FORCED HEAVY WORK — EXPLICIT DIRECTIONS ABSENT; BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff. Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). If sessions are blocked/inefficient, remove bottlenecks so significant progress continues. Status-only work is FORBIDDEN.
+**MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff. Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). If sessions are blocked/inefficient, remove bottlenecks so significant progress continues. Status-only work is FORBIDDEN. Every iteration must produce measurable research/data/testing/engineering progress.
 
 You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by repo name: Track C FIRST, then Track A, then Track B.**
 
-### CURRENT KNOWN STATE (DO NOT TRUST BLINDLY - VERIFY)
-- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (verified 2026-10-31T08:31:03Z). Must stay green.
-- HEAD: 056d0b29 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
-- H002 PARTIAL_REPLICATION: RV-regime contrast blocker REMOVED 2026-10-31 via scripts/h002_download_2024_q1.py (data.binance.vision, 1365/1365 files). Contrast computed: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.0815, two-sided p=0.0792, direction matches paper but NOT significant at 5%, magnitude differs (paper 27 h/3 h). SSRN HTTP 403 irremovable → H002 stays PARTIAL, never confirmatory/forecast-skill/liquidation evidence. Do not re-attempt SSRN.
-- Track C (H001): NOT_SUPPORTED (SEALED_NEGATIVE). All confirmatory panels negative:
-  - FCLR-003 (powered, 2024-10-02..2024-12-31, 3 blocks, n=10796): C2 vs B1 +0.015205 QLIKE, CI [-0.020240, 0.056734] crosses zero, -3.78% rel → gate NOT_MET → COMPLETE_NEGATIVE.
-  - FCLR-006 (unsealed 2026-05-23..2026-08-06, 2 blocks <3, n=8987): C2 vs B1 +0.368588 QLIKE, CI entirely positive → WORSE, -69.90% rel → gate NOT_MET → COMPLETE_NEGATIVE.
-  - FCLR-007 (unsealed 2026-07-21..2026-07-31, 0 blocks <3, n=1195): C2 vs B1 +0.010258 QLIKE, CI [0.001308, 0.019737] entirely positive → WORSE, -3.42% rel → gate NOT_MET → COMPLETE_NEGATIVE.
-  - Risk overlay INELIGIBLE. No reopen path without violating pre-registration/holdout discipline.
-- Track A (H004): BLOCKED/EXPLORATORY (STRUCTURALLY BLOCKED). No admissible unauthenticated observed-liquidation census with ≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness, license OK. Sole reopen path: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16. FCLR-005 was exploratory-only on exhausted 2026-07-08..2026-08-06 window (0 blocks, no incremental skill).
-- Track B (H003): COMPLETE_NEGATIVE (SEALED_NEGATIVE). 16 cells, Holm correction, no robust incremental skill. Strict separation from Track A proven (track_b_definitive_separation_audit.md).
-- Forecast gate NOT_MET on every tested panel. Confirmatory program CLOSED. Heavy evidence work (forensic/synthesis/audit/source-discovery/hardening) is mandatory and unavoidable.
+### CURRENT KNOWN STATE (VERIFY, DO NOT TRUST BLINDLY)
+- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (must remain green). Verify at start and end.
+- HEAD: 52506b1a (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- H002 PARTIAL_REPLICATION: RV-regime contrast computed from admissible data (data.binance.vision). high-RV median 16.0h vs low-RV 8.0h, log-rank chi2=3.0815 p=0.0792 (direction matches, not significant). SSRN HTTP 403 irremovable → PARTIAL only, never confirmatory/forecast-skill/liquidation evidence. Do not re-attempt SSRN.
+- Track C (H001): **CLOSED_NEGATIVE / NOT_SUPPORTED**. Confirmatory: FCLR-003 C2 vs B1 +0.015205 QLIKE, CI crosses zero, -3.78%; FCLR-006 worse (-69.90%); FCLR-007 worse (-3.42%, CI positive). Risk overlay INELIGIBLE. No reopen path without pre-registration/holdout discipline violation.
+- Track A (H004): **STRUCTURALLY BLOCKED**. All admissible unauthenticated sources probed (machine-checkable). No source meets rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK, census). Sole reopen: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16.
+- Track B (H003): **CLOSED_NEGATIVE**. FCLR-H003-EXT-001 no robust incremental skill after Holm correction across 16 cells. Strict separation enforced from Track A.
+- Confirmatory program CLOSED. Forecast gate NOT_MET on all tested panels.
 
-### BOTTLENECK REMOVAL MANDATE (ALREADY EXECUTED — RE-VERIFY, DO NOT RE-OPEN)
-Bottlenecks identified and removed or proven irremovable with evidence (see `research_state/handoff_hardening_audit.md`, `research_state/track_a_deadend_map.md`, `research_state/track_c_consolidated_dossier.md`, `research_state/track_b_definitive_separation_audit.md`):
-1. **Data access bottlenecks**: ALL admissible unauthenticated sources for Track A probed with machine-checkable GO/NO-GO (HTTP codes, timestamps, coverage math). No source passes rubric → irrefutable dead-end evidence. Do NOT loop retries.
-2. **Compute/analysis bottlenecks**: Cached data in `research_state/data_cache/` and repo zips available; restartable incremental analyses; do NOT recompute sealed results.
-3. **Evidence bottlenecks**: Every claim needs provenance, hashes/splits, tests. Artifacts carry concrete numbers (track_c_consolidated_dossier.md FORENSIC_REAUDIT_20261031; track_a_deadend_map.md MACHINE_CHECKABLE_FIREWALL_20261031; track_b_definitive_separation_audit.md SEPARATION_AUDIT_20261031).
-4. **Handoff bottlenecks**: This file is single source of truth. Impossible for next agent to do status-only work. If blocked, remove bottleneck or produce irrefutable evidence — do NOT report "blocked" without concrete evidence and attempted removals.
+### BOTTLENECK REMOVAL MANDATE (RE-VERIFY AND HARDEN)
+Identify and remove/irrefutably document any remaining blockers:
+1. **Data access**: Track A firewall already applied; if any new candidate appears, test with machine-checkable GO/NO-GO immediately.
+2. **Compute/analysis**: Use cached data in `research_state/data_cache/` and repo zips; restartable incremental work; never recompute sealed confirmatory results.
+3. **Evidence**: Every claim needs provenance, hashes/splits, tests, file:line references. Gaps MUST be filled with heavy evidence work, not status.
+4. **Handoff**: This file is SINGLE source of truth. Next agent must be unable to do status-only work.
 
-### MANDATORY HEAVY EVIDENCE CAMPAIGN (EXECUTE ALL - CANNOT SKIP)
+### FORCED HEAVY EVIDENCE CAMPAIGN (EXECUTE ALL - CANNOT SKIP)
 
-**STEP 1: INTEGRITY CHECK (P0, ~2-5 min)**
-1. `python -m unittest discover -s tests -v` → **MUST PASS ALL TESTS** (currently 21 tests). Verify and record timestamp.
-2. Verify key artifacts exist and are cross-linked: `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/track_c_consolidated_dossier.md` (FORENSIC_REAUDIT_20261031 section with numbers), `research_state/track_a_deadend_map.md` (MACHINE_CHECKABLE_FIREWALL_20261031), `research_state/track_b_definitive_separation_audit.md` (SEPARATION_AUDIT_20261031), `research_state/cross_track_decision_log.md`, `research_state/cross_track_decision_firewall.md`, `research_state/handoff_hardening_audit.md`, `research_state/negative_results_report.md`, `research_state/next_data_discovery_plan.md`, `research_state/final_confirmatory_verdict.md`, `research_state/structural_closure_verdict_heavy.md`.
-3. Confirm constraints: no workflow changes, no trading logic, strict track separation, preserve negatives. Log integrity check in `research_state/AGENT_HANDOFF_OUTCOME.md`.
+#### STEP 1: INTEGRITY CHECK (P0, ~2-5 min)
+1. `python -m unittest discover -s tests -v` → MUST be 21/21 PASS. Record timestamp.
+2. Verify cross-linked artifacts exist and consistent:
+   - `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`
+   - `research_state/track_c_consolidated_dossier.md` (FORENSIC_REAUDIT_20261031 with concrete numbers)
+   - `research_state/track_a_deadend_map.md` (MACHINE_CHECKABLE_FIREWALL_20261031)
+   - `research_state/track_b_definitive_separation_audit.md` (SEPARATION_AUDIT_20261031)
+   - `research_state/cross_track_decision_log.md`, `research_state/cross_track_decision_firewall.md`
+   - `research_state/handoff_hardening_audit.md`
+   - `research_state/negative_results_report.md`, `research_state/next_data_discovery_plan.md`
+   - `research_state/final_confirmatory_verdict.md`, `research_state/structural_closure_verdict_heavy.md`
+   - `research_state/AGENT_HANDOFF_OUTCOME.md` (create/update)
+3. Log integrity check in `research_state/AGENT_HANDOFF_OUTCOME.md`.
 
-**STEP 2: VERIFY CLOSURE EVIDENCE & CLOSE GAPS (P0, PRIORITIZE BY REPO NAME)**
-Prioritize Track C → Track A → Track B. For each track, confirm closure evidence is complete and concrete; if any gap/missing number/missing artifact is found, EXECUTE the corresponding heavy work before closing:
+#### STEP 2: EVIDENCE SYNTHESIS BY PRIORITY (P0 - HEAVY WORK)
+**PRIORITIZE Track C → Track A → Track B**
 
-**2A. TRACK C — FUNDING-CONDITIONED VOLATILITY (FIRST - HIGHEST PRIORITY)**
-- Confirm `FORENSIC_REAUDIT_20261031` section in `research_state/track_c_consolidated_dossier.md` contains: exact splits/embargoes/blocks/paired n per run, full QLIKE decomposition (B0/B1/C1/C2), C2 vs B1 means + 95% CIs (block bootstrap), leakage checks, block structure verification.
-- Confirm `research_state/evaluation_summary.md`, `research_state/negative_results_report.md`, `research_state/final_confirmatory_verdict.md` carry concrete numbers/tables for FCLR-003/006/007.
-- Any alternative ablation/robustness stress test that does NOT touch sealed holdouts may be added with numbers; anything touching sealed holdouts is BLOCKED and documented with evidence.
-- Track C remains CLOSED (NOT_SUPPORTED), risk overlay INELIGIBLE — no reopen without pre-registration violation.
+**2A. TRACK C — FUNDING-CONDITIONED VOLATILITY FORECASTING (HIGHEST PRIORITY)**
+Produce/strengthen a single **SYNTHESIS DOSSIER** (`research_state/track_c_final_synthesis_dossier.md`) with:
+- Exact frozen splits/embargoes/blocks/paired n per FCLR-003/006/007 with references to manifests/eval summaries
+- Full QLIKE decomposition (B0/B1/C1/C2), C2 vs B1 means + 95% block-bootstrap CIs, relative % with exact numbers
+- Leakage audit cross-checks (timestamp alignment, normalization fit only on train, purge/embargo)
+- Robustness notes (block structure, instrument concentration), gate assessment with pre-registered thresholds
+- Explicit conclusion: NOT_SUPPORTED, risk overlay INELIGIBLE, no valid reopen path under constraints
+- Every number must trace to existing artifacts (file:line or manifest keys). NO recomputation of sealed holdouts.
 
-**2B. TRACK A — OBSERVED LIQUIDATIONS (SECOND — REMOVE BOTTLENECKS)**
-- Confirm machine-checkable firewall applied to ALL candidates in `research_state/liquidation_sources_enumeration.md` with evidence fields filled (URLs, HTTP codes, timestamps, coverage math, sizes, attempt logs) in `research_state/track_a_deadend_map.md`.
-- Confirm NO source passes rubric: `unauthenticated == true AND no_keys == true AND symbols>=5 AND blocks>=3 AND completeness_doc == true AND license_ok == true AND census_or_defensible == true`.
-- If any source passes rubric: FREEZE protocol (pre-register) BEFORE examining outcomes, then test. Never peek first. Document GO/NO-GO with evidence.
-- Otherwise Track A remains STRUCTURALLY BLOCKED with irrefutable dead-end evidence; sole reopen: new admissible unauthenticated source per RESEARCH_PROMPT.md §16.
+**2B. TRACK A — OBSERVED LIQUIDATIONS (SECOND - REMOVE BOTTLENECKS)**
+Harden dead-end evidence into a **MACHINE-CHECKABLE FINAL BLOCK** (`research_state/track_a_final_block_proof.md`):
+- Consolidate ALL candidates from `liquidation_sources_enumeration.md`, `liquidation_source_campaign.md`, `track_a_deep_sweep.md`, `track_a_structural_block.md`, `track_a_deadend_map.md`
+- For each candidate: URL/endpoint, auth requirement, HTTP/status/timestamps, attempted ranges, symbol coverage, block counts, completeness/license, GO/NO-GO with rubric
+- Prove NO candidate passes ALL rubric items with concrete evidence
+- Document exact rubric in artifact: unauthenticated==true AND no_keys==true AND symbols>=5 AND blocks>=3 AND completeness_doc==true AND license_ok==true AND census_or_defensible==true
+- State SOLE reopen condition verbatim from RESEARCH_PROMPT.md §16 + evidence requirements
+- If ANY candidate appears to pass on re-check, FREEZE protocol and pre-register BEFORE outcome inspection. Otherwise confirm structural block is irrefutable.
 
-**2C. TRACK B — MODELED BREACHES (THIRD)**
-- Confirm separation evidence in `research_state/track_b_definitive_separation_audit.md` with concrete file paths/line references (Track B never consumes Track A liquidation labels).
-- Confirm `research_state/cross_track_decision_firewall.md` and `research_state/cross_track_decision_log.md` enforce strict separation.
-- Sensitivity analysis (margin/leverage/funding assumptions) documented with numbers; results labeled synthetic/model proxy, never conflated with observed liquidations.
+**2C. TRACK B — MODELED BOUNDARY BREACHES (THIRD - PROVE SEPARATION)**
+Strengthen separation proof (`research_state/track_b_separation_proof_hardened.md`):
+- Code-path trace: grep for Track A liquidation label usage in Track B codepaths; document findings with file paths and line ranges
+- Prove `cross_track_decision_firewall.md` + `cross_track_decision_log.md` enforced
+- Summarize FCLR-H003-EXT-001 results with Holm correction, sensitivity (margin/leverage/funding assumptions) labeled as synthetic/model proxy
+- Explicitly state NEVER conflated with observed liquidations
 
-**STEP 3: DOCUMENTATION & HARDENING (P0)**
-1. Create/update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (5f49304d), detailed evidence summary of ALL work done (artifacts modified/created, commands run, numbers).
-2. Update `research_state/handoff_hardening_audit.md` proving bottlenecks removed and next agent CANNOT avoid heavy work (specific blockers identified+removed or irrefutable dead-ends).
-3. Update `research_state/cross_track_decision_log.md` with new findings.
-4. Ensure all artifacts cross-linked.
-5. Run tests again: `python -m unittest discover -s tests -v` → MUST PASS. Record final test result with timestamp.
+#### STEP 3: INTEGRATION, HARDENING & FINALIZE HANDOFF (P0)
+1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (52506b1a), ALL artifacts created/modified, commands run, concrete numbers from synthesis, test results.
+2. Update `research_state/handoff_hardening_audit.md` with proof bottlenecks removed/irrefutable, and explicit statement that next agent CANNOT avoid heavy work (must produce evidence artifacts or hit hard constraints).
+3. Update `research_state/cross_track_decision_log.md` with synthesis findings.
+4. Ensure all new artifacts cross-linked from `AGENT_HANDOFF.md`, `research_state/negative_results_report.md`, `research_state/final_confirmatory_verdict.md`.
+5. Run `python -m unittest discover -s tests -v` → MUST PASS (21/21). Record final timestamp.
 
 ### HARD CONSTRAINTS (NEVER VIOLATE)
 - No credentials/manual inputs/paid data. No `.github/workflows` changes without explicit maintainer auth. No trading/paper-trading/live orders.
-- Strict track separation. Never conflate modeled breaches (B) with observed liquidations (A).
+- Strict track separation. Never conflate Track B (modeled) with Track A (observed).
 - Preserve negatives/inconclusives. No fabricated data/labels. No zero-fill of missing values.
 - Pre-registration REQUIRED for any new experiment. NO outcome inspection before pre-registration.
 - No re-tuning on sealed holdouts. No threshold shopping.
-- No re-running completed confirmatory experiments. No relaxing the ≥3-block/≥2%-relative-QLIKE gate.
+- No re-running completed confirmatory experiments (FCLR-002/003/006/007/H003-EXT). No relaxing gates.
 - Every iteration must create measurable research/data/testing/engineering progress. Status-only checks are FORBIDDEN.
 
 ### SUCCESS CRITERIA
-- [ ] All tests pass (record timestamp/HEAD)
-- [ ] All key artifacts present and cross-linked (integrity check logged)
-- [ ] Track C: closure evidence with concrete tables/numbers verified; FORENSIC_REAUDIT_20261031 present (or heavy gap-filling work executed)
-- [ ] Track A: machine-checkable firewall applied to ALL candidates; dead-end irrefutable OR GO experiment pre-registered and executed per rules
-- [ ] Track B: separation proven with concrete code-path evidence (file paths/lines)
-- [ ] Bottlenecks identified and removed (documented with evidence) - no unsubstantiated "blocked"
-- [ ] `research_state/AGENT_HANDOFF_OUTCOME.md` created/updated with full evidence (artifacts, commands, numbers)
+- [ ] All tests pass (21/21), timestamp + HEAD recorded
+- [ ] `research_state/track_c_final_synthesis_dossier.md` created with full traceable numbers
+- [ ] `research_state/track_a_final_block_proof.md` created with machine-checkable rubric + evidence for ALL candidates
+- [ ] `research_state/track_b_separation_proof_hardened.md` created with code-path trace
+- [ ] `research_state/AGENT_HANDOFF_OUTCOME.md` updated with full evidence
 - [ ] `research_state/handoff_hardening_audit.md` proves heavy work unavoidable
 - [ ] `research_state/cross_track_decision_log.md` updated
-- [ ] This handoff remains single source of truth
+- [ ] All artifacts cross-linked; this handoff remains single source of truth
 
-**FORCED HEAVY CAMPAIGN. NO SHORTCUTS. BUILD EVIDENCE, NOT STATUS.**
+**FORCED HEAVY SYNTHESIS CAMPAIGN. NO SHORTCUTS. BUILD EVIDENCE, NOT STATUS. PRIORITIZE BY REPO NAME.**

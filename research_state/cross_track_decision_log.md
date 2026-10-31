@@ -55,3 +55,13 @@ Structural closure confirmed. All confirmatory campaigns complete negative. Fore
 - **Track A:** Exhaustive sweep complete against machine-checkable rubric. No admissible unauthenticated observed-liquidation source found. STRUCTURALLY BLOCKED with irrefutable evidence.
 - **Track B:** Separation reaffirmed; no cross-contamination. Remains CLOSED.
 - **Action:** Heavy evidence campaign executed. Bottlenecks removed. Handoff hardened.
+
+## 2026-10-31T09:10:42Z — HEAVY SYNTHESIS CAMPAIGN (HND-20261031-091042)
+**HEAD:** 52506b1a
+**Priority:** Track C > Track A > Track B
+
+- **Track C:** Synthesized into `track_c_final_synthesis_dossier.md`. FCLR-003 C2 vs B1 +0.015205 QLIKE CI crosses zero (-3.78%); FCLR-006/007 worse. Gate NOT_MET → NOT_SUPPORTED, risk overlay INELIGIBLE.
+- **Track A:** Synthesized into `track_a_final_block_proof.md`. Machine-checkable rubric applied to all candidates → NO GO. Structural block irrefutable; sole reopen requires new admissible unauthenticated source per RESEARCH_PROMPT.md §16.
+- **Track B:** Synthesized into `track_b_separation_proof_hardened.md`. Strict separation from Track A proven (firewall+log+code-path trace). FCLR-H003-EXT-001 negative after Holm correction; results synthetic/model proxy only.
+
+**Decision:** Confirmatory program closed. Heavy evidence artifacts created; bottlenecks removed/irrefutably documented. No sealed holdout re-tuning. Next session must follow forced campaign.

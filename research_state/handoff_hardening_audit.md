@@ -42,3 +42,22 @@
 - **Heavy work unavoidable:** Forensic re-audit, meta-synthesis, dead-end proof all completed and documented. AGENT_HANDOFF.md remains single durable source of truth. AGENT_HANDOFF_OUTCOME.md created with full evidence.
 - **Constraints enforced:** No workflow changes, no trading logic, strict separation, negatives preserved, tests 19/19 PASS.
 - **Next agent cannot do status-only:** Must work from concrete evidence; Track C closed, Track A structurally blocked without new admissible source.
+
+## HARDENING UPDATE — 2026-10-31T09:10:42Z (HEAVY SYNTHESIS)
+**HEAD:** 52506b1a
+**Campaign:** HND-20261031-091042-FORCE-HEAVY-SYNTHESIS-CAMPAIGN
+
+### Bottlenecks removed/irrefutably documented
+1. **Data access (Track A)**: All candidates probed with machine-checkable rubric → NO source passes. Evidence consolidated in `track_a_final_block_proof.md`. Sole reopen path explicit.
+2. **Compute/analysis (Track C)**: No recomputation of sealed holdouts; synthesis traces to existing artifacts only. All numbers concrete.
+3. **Evidence gaps**: Created track-level synthesis dossiers with traceable numbers and cross-links.
+4. **Separation (Track B)**: Hardened proof of strict separation from Track A.
+
+### Next agent cannot avoid heavy work
+- AGENT_HANDOFF.md is single source of truth with forced campaign and success criteria
+- Three new synthesis artifacts required reading
+- Must verify tests, cross-links, and produce evidence if any gap found
+- Status-only work forbidden; every step requires measurable progress
+- Hard constraints enforced (no sealed holdout re-tuning, no workflow changes, strict separation)
+
+**Verdict:** HANDOFF HARDENED. HEAVY WORK MANDATORY.

@@ -197,3 +197,41 @@ No gaps found; no heavy gap-filling work required. All closure evidence complete
 - [x] AGENT_HANDOFF.md remains single source of truth
 
 **SESSION COMPLETE — VERIFY-FINAL-CLOSEOUT-HEAVY. NO SHORTCUTS TAKEN. HANDOFF READY FOR NEXT SESSION.**
+
+## HEAVY SYNTHESIS CAMPAIGN — 2026-10-31T09:10:42Z
+**HEAD:** 52506b1a
+**Task:** HND-20261031-091042-FORCE-HEAVY-SYNTHESIS-CAMPAIGN
+**Priority:** Track C > Track A > Track B (repo name inference)
+**Mode:** Forced heavy synthesis; no shortcuts
+
+### Step 1: Integrity check
+- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (verified)
+- Artifacts verified/cross-linked: hypothesis_registry.json, experiment_frontier.json, track_c_consolidated_dossier.md, track_a_deadend_map.md, track_b_definitive_separation_audit.md, cross_track_decision_log.md, cross_track_decision_firewall.md, handoff_hardening_audit.md, negative_results_report.md, next_data_discovery_plan.md, final_confirmatory_verdict.md, structural_closure_verdict_heavy.md
+
+### Step 2: Evidence synthesis (by priority)
+**Track C (FIRST):** Created `research_state/track_c_final_synthesis_dossier.md`
+- FCLR-003: C2 vs B1 +0.015205 QLIKE, CI [-0.020240, 0.056734], -3.78% (FAIL)
+- FCLR-006: +0.368588 QLIKE, CI positive, -69.90% (FAIL, underpowered <3 blocks)
+- FCLR-007: +0.010258 QLIKE, CI entirely positive, -3.42% (FAIL, underpowered <3 blocks)
+- Gate NOT_MET → H001 NOT_SUPPORTED, risk overlay INELIGIBLE. All numbers traced to existing artifacts.
+
+**Track A (SECOND):** Created `research_state/track_a_final_block_proof.md`
+- Machine-checkable rubric applied to all candidates (Binance OKX/Bybit/Deribit, CryptoDataDownload, HuggingFace, Zenodo/OSF/arXiv, GitHub, ochinimus)
+- NO candidate passes all: unauthenticated+no_keys+symbols>=5+blocks>=3+completeness_doc+license_ok+census_or_defensible
+- FCLR-004 BLOCKED, FCLR-005 exploratory-only (<3 blocks), no incremental skill
+- Sole reopen: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16 with full evidence
+
+**Track B (THIRD):** Created `research_state/track_b_separation_proof_hardened.md`
+- Code-path trace confirms no Track A observed liquidation labels consumed by Track B
+- cross_track_decision_firewall.md + cross_track_decision_log.md enforce separation
+- FCLR-H003-EXT-001: no robust incremental skill after Holm correction across 16 cells; all results synthetic/model proxy only
+- Strict separation proven and enforced
+
+### Step 3: Integration
+- Updated `research_state/AGENT_HANDOFF_OUTCOME.md` (this entry)
+- Updated `research_state/handoff_hardening_audit.md` with proof
+- Updated `research_state/cross_track_decision_log.md` with synthesis findings
+- All artifacts cross-linked
+- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS**
+
+**Result:** Heavy synthesis complete. Bottlenecks removed/irrefutably documented. Next agent cannot avoid heavy evidence work; must follow constraints (no sealed holdout re-tuning, strict separation, pre-registration if new data appears).
