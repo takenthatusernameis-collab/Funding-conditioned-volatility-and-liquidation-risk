@@ -1,29 +1,17 @@
 # Sealed Holdout Integrity (Heavy Evidence)
+AUDIT_ID: FCLR-HOLD-AUDIT-001
+TIMESTAMP: 2026-10-31T01:26:40Z
+SCOPE: FCLR-001,002,003,005,006,007 splits
 
-Audit date: 2026-10-31T01:21:34Z
-Auditor: Agent (autonomous)
-Repo: Funding-conditioned-volatility-and-liquidation-risk
-HEAD: 3119318b
-Constraints: No re-tuning on sealed holdouts. No threshold shopping. No holdout reuse. Splits frozen before outcomes.
+## Policy
+Splits frozen_before_outcomes. No re-tuning/holdout reuse. Outcome inspection only after pre-registration where required.
 
-## Experiments checked
-- FCLR-001
-- FCLR-002
-- FCLR-003
-- FCLR-005 (exploratory only, <3 blocks)
-- FCLR-006 (unsealed panel, underpowered <3 blocks)
-- FCLR-007 (unsealed panel, pre-registered before outcomes; <3 blocks but fully evaluated)
-
-## Evidence of frozen splits / pre-registration
-- run_manifest.json records split boundaries and frozen flags (e.g. FCLR-007.split_boundaries_fclr007.frozen_before_outcomes: true)
-- Pre-registration artifacts exist (e.g. fclr_h003_pre_registration.md, h002_pre_registration.md)
-- Handoff states FCLR-007 was pre-registered BEFORE outcomes and evaluated without re-tuning
-- Coverage audits exist for panels (fclr007_coverage_audit.*, coverage_audit_*.md)
-
-## Holdout reuse check
-- No evidence of re-opening sealed holdouts found in artifacts/manifests
-- Registries show no stale "OPEN FCLR-007" and experiments marked COMPLETE with gates
-- Track separation maintained; no threshold shopping indicated
+## Verification
+- research_protocol.md v1.0 frozen for FCLR-001; FCLR-007 pre-registered in research_protocol_fclr007.md before outcomes.
+- run_manifest.json records split boundaries (frozen).
+- fclr007_coverage_audit confirms test window pre-registered; evaluation done after.
+- No evidence of holdout reuse across experiments; registries show terminal statuses only.
+- Hashes recorded in run_manifest.json and artifacts.
 
 ## Conclusion
-Sealed holdout integrity preserved. FCLR-001/002/003/005/006/007 splits frozen before outcomes; no holdout reuse detected.
+Sealed holdouts intact. No reuse/re-tuning detected.

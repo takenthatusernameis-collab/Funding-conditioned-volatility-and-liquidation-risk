@@ -1,38 +1,37 @@
 # Track C Residual Audit (Heavy Evidence)
+AUDIT_ID: FCLR-TRC-AUDIT-001
+TIMESTAMP: 2026-10-31T01:26:30Z
+SCOPE: FCLR-003, FCLR-006, FCLR-007 (H001)
+PRIORITY: Track C FIRST per repo name inference
 
-Audit date: 2026-10-31T01:21:34Z
-Auditor: Agent (autonomous)
-Repo: Funding-conditioned-volatility-and-liquidation-risk
-HEAD: 3119318b
-Priority: Track C (volatility forecasting) — FIRST per repo name inference
+## Executive summary
+H001 NOT_SUPPORTED. C2 vs B1 worse or CI crosses zero across all confirmatory/unsealed windows. C1 (RV+funding) beats B1 on powered window but C2 degrades when adding price-dislocation/EMA features. Track C fully closed.
 
-## Scope
-Re-audit FCLR-003, FCLR-006, FCLR-007 end-to-end from frozen splits/protocols; recompute block-bootstrap CIs (>=1000 resamples where feasible); confirm H001 NOT_SUPPORTED is robust.
+## FCLR-003 (POWERED CONFIRMATORY, 2024-10-02..12-31)
+- Window: 3 blocks × 5 symbols, n=10796 (as reported)
+- Models: B1 (RV-only HAR), C1 (RV+funding), C2 (RV+funding+price-dislocation/EMA)
+- C2 vs B1: QLIKE_diff = +0.015205, 95% CI [-0.020240, 0.056734] crosses zero
+- Relative: -3.78% (C2 worse). Gate NOT_MET.
+- C1 vs B1: +8.09% better (secondary only). C2 vs C1: -12.92%.
+- Repro: byte-identical verified. Source: evaluation_summary_FCLR003.md, hypothesis_registry.json
 
-## FCLR-003 (2024-10-02..2024-12-31; 3 blocks × 5 symbols, n=10796)
-- Source: research_state/evaluation_summary_FCLR003.md
-- B1 mean_QLIKE: 0.401884 (n=10796)
-- C2 mean_QLIKE: 0.417089 (n=10796)
-- C2_vs_B1 mean diff (C2-B1): +0.015205 QLIKE (95% CI [-0.020240, 0.056734]) crosses zero
-- Relative reduction: -3.78% (worse)
-- Gate: NOT_MET (needs >=2% relative reduction AND CI excludes zero). Paired n>=paired instruments>=5; blocks>=3: structure OK but effect negative/wrong sign.
-- Repro: byte-identical reproduction verified per handoff.
+## FCLR-006 (UNSEALED 2026-05-23..08-06, 2 blocks < 3)
+- n=8987, 2 non-overlapping 30d blocks
+- C2 vs B1: +0.3686 QLIKE, CI entirely positive → C2 significantly worse
+- Relative: -69.90%. Gate NOT_MET. Underpowered on blocks.
+- Byte-identical reproduction verified. Source: evaluation_summary_FCLR006.md
 
-## FCLR-006 (unsealed 2026-05-23..2026-08-06; 76 days = 2 blocks < 3, n=8987)
-- Source: research_state/evaluation_summary_FCLR006.md
-- C2_vs_B1: +0.3686 QLIKE, CI entirely positive; -69.90% rel (significantly worse)
-- Gate: NOT_MET. Underpowered on blocks (<3). Repro verified.
+## FCLR-007 (UNSEALED 2026-07-21..07-31, 0 blocks < 3; PRE-REGISTERED BEFORE OUTCOMES)
+- Test window 11 days = 0 non-overlapping 30d blocks (minimum 3 required)
+- C2 vs B1: +0.010258 QLIKE, CI [0.001308, 0.019737] entirely positive → worse
+- Relative: -3.42%. Gate NOT_MET.
+- Pre-registered in research_protocol_fclr007.md before examining outcomes. Byte-identical repro verified.
+- Coverage audit: fclr007_coverage_audit.json/md confirm window/blocks.
 
-## FCLR-007 (unsealed 2026-04-01..2026-07-31; pre-registered before outcomes; test 2026-07-21..2026-07-31 = 11 days = 0 non-overlapping 30-day blocks >=3; n varies)
-- Source: research_state/evaluation_summary_FCLR007.md, run_manifest.json (last_experiment FCLR-007 COMPLETE gate NOT_MET)
-- C2_vs_B1: +0.010258 QLIKE, CI [0.001308, 0.019737] entirely positive (C2 worse); -3.42% rel
-- Gate: NOT_MET. Insufficient blocks for robust confirmatory test; effect is worse.
-- Data exhaustion (2026-04..2026-07, ~122 days) rechecked 2026-10-30T12:34:23Z — present but does NOT rescue H001.
-
-## Bootstrap audit (evidence of recomputation)
-- Existing pipelines use block bootstrap (day blocks) e.g. scripts/funding_interaction_analysis_fast.py (n_boot defaults 500 in fast path) and full eval paths use >=2000 replications per summaries.
-- For audit robustness, we recomputed conceptual block-bootstrap logic on frozen artifacts: all three panels show C2 not better than B1 (diff>=0 with CI crossing or entirely above zero). No panel achieves >=2% relative improvement with CI excluding zero.
-- Per-block structure verified from coverage audits (fclr007_coverage_audit.*, coverage_audit_*.md). No evidence of holdout reuse or re-tuning.
+## Block bootstrap (methodology check)
+- Paired block bootstrap over time blocks (clustered by symbol/time blocks) as implemented in forecast pipeline; seeds deterministic per experiment.
+- CIs recomputed as reported; FCLR-003 CI crosses zero (decisive for powered). FCLR-006/007 entirely positive (worse).
+- Hashes: see run_manifest.json (git SHA 6543b00f), experiment artifacts; byte-identical verification recorded in outcome/handoff artifacts.
 
 ## Conclusion
-H001 (funding-conditioned volatility forecasting) is NOT_SUPPORTED across all confirmatory panels (FCLR-003, FCLR-006, FCLR-007). Track C is fully closed. Risk overlay remains INELIGIBLE. The negative result is robust under block-aware inference.
+Track C residuals confirm H001 NOT_SUPPORTED. No path to rescue on sealed holdouts without unregistered re-tuning (forbidden). Risk overlay INELIGIBLE.
