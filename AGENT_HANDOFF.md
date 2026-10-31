@@ -1,33 +1,35 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T10:16:49Z
-HEAD: 0ab2231d
+UPDATED: 2026-10-31T10:23:51Z
+HEAD: d404d8e0 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
-SESSION_GOAL: HEAVY_EVIDENCE_SYNTHESIS_CAMPAIGN — NO SHORTCUTS. FORCE AUDITABLE HEAVY WORK. MAXIMIZE DEFENSIBLE EVIDENCE.
+SESSION_GOAL: FINAL_CLOSEOUT_AND_HANDOFF_CLEANUP — ALL CONFIRMATORY CAMPAIGNS CLOSED NEGATIVE. REMOVE STALE BOTTLENECKS. MAINTAIN SINGLE SOURCE OF TRUTH. NO STATUS-ONLY WORK.
 BOTTLE_NECK_REMOVAL: MANDATORY — Remove any structural/efficiency blockers so significant progress continues. No status-only work.
 STRICT_SEPARATION: Track A (observed), Track B (modeled/synthetic), Track C (volatility forecasting) — NEVER conflate.
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-101552-FORCE-HEAVY-SYNTHESIS-CAMPAIGN`
+**TASK_ID:** `HND-20261031-102351-FINAL_CLOSEOUT_AND_HANDOFF_CLEANUP`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T10:15:52Z
+**TIMESTAMP:** 2026-10-31T10:23:51Z
 **MODE:** FORCED HEAVY WORK — EXPLICIT DIRECTIONS ABSENT; BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff. Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). If sessions are blocked/inefficient, remove bottlenecks so significant progress continues. Status-only work is FORBIDDEN. Every iteration must produce measurable research/data/testing/engineering progress.
+**MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff (`AGENT_HANDOFF.md`). Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). Remove all stale/duplicate artifacts and bottlenecks so significant progress continues. Status-only work is FORBIDDEN. Every iteration must produce measurable research/data/testing/engineering progress.
 
 You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by repo name: Track C FIRST, then Track A, then Track B.**
 
 ### CURRENT KNOWN STATE (VERIFY, DO NOT TRUST BLINDLY)
-- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (must remain green). Verify at start and end.
-- HEAD: 4c882a4f (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
-- Track C (H001): **CLOSED_NEGATIVE / NOT_SUPPORTED**. FCLR-003 C2 vs B1 -3.78% (CI crosses zero), FCLR-006 -69.90% worse, FCLR-007 -3.42% worse (CI positive). Risk overlay INELIGIBLE. No reopen path without pre-registration/holdout discipline violation.
-- Track A (H004): **STRUCTURALLY BLOCKED**. Machine-checkable firewall applied to all admissible unauthenticated sources - no source passes rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK, census). Sole reopen: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16 with evidence requirements.
-- Track B (H003): **CLOSED_NEGATIVE**. FCLR-H003-EXT-001 no robust incremental skill after Holm correction across 16 cells. Strict separation enforced.
-- Confirmatory program CLOSED. Forecast gate NOT_MET on all tested panels.
+- Tests: `python -m unittest discover -s tests -v` → **27/27 PASS** (must remain green). Verify at start and end.
+- HEAD: d404d8e0 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- Track C (H001): **NOT_SUPPORTED — CONFIRMATORY PROGRAM CLOSED**. FCLR-003 C2 vs B1 +0.015205 QLIKE CI [-0.020240, 0.056734] crosses zero (-3.78% rel, worse); FCLR-006 +0.368588 (-69.90% rel, worse); FCLR-007 +0.010258 (-3.42% rel, worse). Risk overlay INELIGIBLE. No reopen path without pre-registration/holdout discipline violation. Full trace in `research_state/track_c_final_synthesis_dossier.md`.
+- Track A (H004): **STRUCTURALLY BLOCKED**. Machine-checkable firewall applied to ALL candidates — no source passes rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK, census). Sole reopen: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16 with evidence requirements. Full proof in `research_state/track_a_final_block_proof.md`.
+- Track B (H003): **CLOSED_NEGATIVE**. FCLR-H003-EXT-001 no robust incremental skill after Holm correction across 16 cells. Strict separation from Track A proven. Full proof in `research_state/track_b_separation_proof_hardened.md`.
+- H002-correction (secondary): **PARTIAL_REPLICATION** (88 events, 84 corrected, 4 censored, median 8.0h; SSRN HTTP 403 blocks full methodology). Do not promote as evidence on volatility skill, boundary breaches, or observed liquidations.
+- Confirmatory program CLOSED on all panels. Forecast gate NOT_MET on every tested panel. Risk overlay INELIGIBLE (§9 RESEARCH_PROMPT.md).
+- All synthesis/separation/block-proof artifacts created and cross-linked. `research_state/AGENT_HANDOFF_OUTCOME.md` is the current outcome record (root `AGENT_HANDOFF_OUTCOME.md` is STALE — do not use).
 
 ### BOTTLENECK REMOVAL MANDATE (RE-VERIFY AND HARDEN)
 Identify and remove/irrefutably document any remaining blockers:
@@ -39,7 +41,8 @@ Identify and remove/irrefutably document any remaining blockers:
 ### FORCED HEAVY EVIDENCE CAMPAIGN (EXECUTE ALL - CANNOT SKIP)
 
 #### STEP 1: INTEGRITY CHECK (P0, ~2-5 min)
-1. `python -m unittest discover -s tests -v` → MUST be 21/21 PASS. Record timestamp.
+1. `python -m unittest discover -s tests -v` → MUST be 27/27 PASS. Record timestamp.
+2. Confirm HEAD is `d404d8e0` and working tree clean except `__pycache__/`. Reject any stale HEAD/test-count references.
 2. Verify cross-linked artifacts exist and consistent:
    - `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`
    - `research_state/track_c_consolidated_dossier.md`, `research_state/track_c_final_synthesis_dossier.md`
