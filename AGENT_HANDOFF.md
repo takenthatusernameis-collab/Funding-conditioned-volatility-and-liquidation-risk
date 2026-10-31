@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T10:15:52Z
-HEAD: 4c882a4f
+UPDATED: 2026-10-31T10:16:49Z
+HEAD: 0ab2231d
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
