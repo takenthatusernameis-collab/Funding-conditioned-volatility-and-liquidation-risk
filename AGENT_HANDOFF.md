@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T05:25:23Z
-HEAD: b395da8e719b2532ff0606abe2454ff913494571
+UPDATED: 2026-10-31T05:27:03Z
+HEAD: 5fbae046d4dffa2c2526f10a57de91123ff16963
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -12,7 +12,7 @@ SESSION_GOAL: HEAVY_EVIDENCE_CAMPAIGN — NO SHORTCUTS. FORCE AUDITABLE HEAVY WO
 
 **TASK_ID:** `HND-20261031-HEAVY-DEFENSE-010`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T05:25:23Z
+**TIMESTAMP:** 2026-10-31T05:27:03Z
 **MODE:** STRUCTURAL CLOSURE CONFIRMED — ALL CAMPAIGNS EXHAUSTED. Bottlenecks removed. DO NOT RE-OPEN SEALED HOLDOUTS. DO NOT THRESHOLD-SHOP. DO NOT REUSE HOLDS. NO NEW DATA DOWNLOADS WITHOUT PASSING GO CHECKLIST IN `research_state/next_data_discovery_plan.md`. NO WORKFLOW CHANGES.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 
