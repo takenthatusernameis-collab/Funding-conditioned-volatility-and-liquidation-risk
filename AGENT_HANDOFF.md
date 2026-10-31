@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T09:18:10Z
-HEAD: 52506b1a
+UPDATED: 2026-10-31T09:19:14Z
+HEAD: 1ce155ab
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -12,9 +12,9 @@ STRICT_SEPARATION: Track A (observed), Track B (modeled/synthetic), Track C (vol
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-091810-FORCE-HEAVY-SYNTHESIS-CAMPAIGN`
+**TASK_ID:** `HND-20261031-091914-FORCE-HEAVY-SYNTHESIS-CAMPAIGN`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T09:18:10Z
+**TIMESTAMP:** 2026-10-31T09:19:14Z
 **MODE:** FORCED HEAVY WORK — EXPLICIT DIRECTIONS ABSENT; BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff. Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). If sessions are blocked/inefficient, remove bottlenecks so significant progress continues. Status-only work is FORBIDDEN. Every iteration must produce measurable research/data/testing/engineering progress.
@@ -23,7 +23,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 
 ### CURRENT KNOWN STATE (VERIFY, DO NOT TRUST BLINDLY)
 - Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (must remain green). Verify at start and end.
-- HEAD: 52506b1a (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- HEAD: 1ce155ab (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
 - H002 PARTIAL_REPLICATION: RV-regime contrast computed from admissible data (data.binance.vision). high-RV median 16.0h vs low-RV 8.0h, log-rank chi2=3.0815 p=0.0792 (direction matches, not significant). SSRN HTTP 403 irremovable → PARTIAL only, never confirmatory/forecast-skill/liquidation evidence. Do not re-attempt SSRN.
 - Track C (H001): **CLOSED_NEGATIVE / NOT_SUPPORTED**. Confirmatory: FCLR-003 C2 vs B1 +0.015205 QLIKE, CI crosses zero, -3.78%; FCLR-006 worse (-69.90%); FCLR-007 worse (-3.42%, CI positive). Risk overlay INELIGIBLE. No reopen path without pre-registration/holdout discipline violation.
 - Track A (H004): **STRUCTURALLY BLOCKED**. All admissible unauthenticated sources probed (machine-checkable). No source meets rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK, census). Sole reopen: NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16.
@@ -82,7 +82,7 @@ Strengthen separation proof (`research_state/track_b_separation_proof_hardened.m
 - Explicitly state NEVER conflated with observed liquidations
 
 #### STEP 3: INTEGRATION, HARDENING & FINALIZE HANDOFF (P0)
-1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (52506b1a), ALL artifacts created/modified, commands run, concrete numbers from synthesis, test results.
+1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (1ce155ab), ALL artifacts created/modified, commands run, concrete numbers from synthesis, test results.
 2. Update `research_state/handoff_hardening_audit.md` with proof bottlenecks removed/irrefutable, and explicit statement that next agent CANNOT avoid heavy work (must produce evidence artifacts or hit hard constraints).
 3. Update `research_state/cross_track_decision_log.md` with synthesis findings.
 4. Ensure all new artifacts cross-linked from `AGENT_HANDOFF.md`, `research_state/negative_results_report.md`, `research_state/final_confirmatory_verdict.md`.
