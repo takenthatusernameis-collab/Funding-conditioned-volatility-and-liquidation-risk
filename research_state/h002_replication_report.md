@@ -64,24 +64,81 @@ Censored events (no correction within 168 h): 2 BTCUSDT, 2 ETHUSDT; 0 for BNBUSD
 | middle | 0 | 0 | 0 | — | — | — |
 | high | 0 | 0 | 0 | — | — | — |
 
-### RV-regime contrast — could not be computed
+### RV-regime contrast — COMPUTED 2026-10-31 (blocker removed)
 
-All 88 events have `rv_regime = "missing"`. The mark-price cache under `research_state/data_cache/` starts at 2024-04 (folders `{SYMBOL}_2024_04` through `{SYMBOL}_2024_12` exist; Jan–Mar 2024 mark-price files are absent). No new downloads are permitted, so no Jan–Mar 2024 mark prices are available and no trailing 24 h RV can be computed for any Jan–Mar event. Consequently:
-- Per-symbol RV tercile edges could not be established; `regime_edges` is empty.
-- No high-RV vs low-RV hazard contrast exists.
-- The paper's claimed contrast (median 27 h high-RV vs 3 h low-RV; lower hazard with higher RV) cannot be assessed on this panel.
+**Status change:** previously `rv_regime = "missing"` for all 88 events because no Jan–Mar 2024
+mark prices were cached. The cache gap was filled on 2026-10-31 by
+`scripts/h002_download_2024_q1.py` (free, unauthenticated `data.binance.vision` daily
+archive; HTTP 200 verified; 1,365/1,365 files downloaded: 5 symbols x 91 days x 3 kinds
+[markPriceKlines, indexPriceKlines, premiumIndexKlines]; Feb 2024 = 29 days as expected).
+The RV-regime contrast is now computable and is reported below. SSRN HTTP 403 still blocks
+the paper's full methodology, so this remains a PARTIAL replication, never an exact one.
 
-This is a pre-registered limitation of the PARTIAL replication, not a blocker: overall correction statistics are reported and the RV-regime infeasibility is stated explicitly.
+#### Regime assignment (per pre-registration §4)
+Per-symbol tercile edges computed from the full Jan–Mar sample before the contrast
+(`regime_edges` recorded per symbol in the run output). Low = bottom tercile, high = top
+tercile, middle reported but excluded from the primary high/low contrast.
+
+| Symbol | n_rv_valid | low_edge | high_edge |
+|---|---|---|---|
+| BTCUSDT | 22 | 0.01581 | 0.02440 |
+| ETHUSDT | 20 | 0.01666 | 0.02921 |
+| BNBUSDT | 14 | 0.02336 | 0.03963 |
+| SOLUSDT | 21 | 0.03607 | 0.05003 |
+| XRPUSDT | 11 | 0.02100 | 0.04758 |
+
+`load_errors: []` — no mark-price file failed to load for any symbol/day in Q1 2024.
+
+#### Hazard-by-RV-regime table (censoring reported, never counted as negatives)
+
+| Regime | N | Corrected | Censored | Correction rate | Median correction (h) | 95% CI (h) |
+|---|---|---|---|---|---|---|
+| low | 31 | 30 | 1 | 0.968 | 8.0 | [8.0, 16.0] |
+| middle | 26 | 25 | 1 | 0.962 | 8.0 | [8.0, 8.0] |
+| high | 31 | 29 | 2 | 0.935 | 16.0 | [8.0, 16.0] |
+
+#### Primary contrast: high-RV vs low-RV (log-rank, two-sided)
+
+| Metric | Value |
+|---|---|
+| high n / low n | 31 / 31 |
+| high median correction | 16.0 h |
+| low median correction | 8.0 h |
+| chi-squared (df=1) | 3.0815 |
+| two-sided p-value | **0.0792** |
+| direction_lower_hazard_high_rv | **true** |
+
+The reconstructed direction matches the paper's claimed direction (lower correction hazard
+with higher realized volatility; longer median correction in the high-RV regime). However:
+- The magnitude is much smaller than the paper claim (16 h vs 8 h here, vs 27 h vs 3 h in the paper).
+- The contrast is **not statistically significant** at the 5% level (p = 0.079, two-sided log-rank).
+- The sample is 88 events on 5 contracts vs the paper's 1,696 events on 18 contracts.
+
+#### Comparison to paper claim (updated)
+
+| Dimension | Paper claim (Shek, SSRN 7529458) | Reconstructed (this report) | Assessment |
+|---|---|---|---|
+| Events | 1,696 across 18 contracts | 88 across 5 contracts | Partial: smaller universe, different method |
+| Median correction (high-RV) | 27 h | 16.0 h | Direction reproduced; magnitude not |
+| Median correction (low-RV) | 3 h | 8.0 h | Direction reproduced; magnitude not |
+| Direction: lower hazard with higher RV | Claimed | **Reproduced** (high median 16h > low 8h; log-rank p=0.079) | Directionally consistent, NOT significant |
+| Overall median correction | Not reported | 8.0 h | Different estimand |
+
+The paper's directional claim is independently reproduced on admissible public data, but the
+result is not statistically significant at this sample size and the magnitude differs from
+the paper. This does not constitute confirmation of the paper's finding, and — critically —
+correction time remains a separate outcome from volatility forecast skill, hypothetical
+boundary-breach prediction, and observed liquidation outcomes. No such claim is made here.
 
 ## 5. Comparison to paper claim
 
 | Dimension | Paper claim (Shek, SSRN 7529458) | Reconstructed (this report) | Assessment |
 |---|---|---|---|
 | Events | 1,696 across 18 contracts | 88 across 5 contracts | Partial: smaller universe, different method |
-| Median correction (high-RV) | 27 h | Not computable (all RV missing) | Infeasible |
-| Median correction (low-RV) | 3 h | Not computable (all RV missing) | Infeasible |
+| Median correction (high-RV) | 27 h | 16.0 h (regime computed 2026-10-31) | Direction reproduced; magnitude not; p=0.079 |
+| Median correction (low-RV) | 3 h | 8.0 h (regime computed 2026-10-31) | Direction reproduced; magnitude not; p=0.079 |
 | Overall median correction | Not reported | 8.0 h | Different estimand |
-| Direction: lower hazard with higher RV | Claimed | Cannot test (no RV regimes) | Untestable |
+| Direction: lower hazard with higher RV | Claimed | Reproduced (log-rank p=0.079, two-sided) | Directionally consistent, NOT significant at 5% |
 
 The reconstructed overall median correction time (8.0 h) falls between the paper's low-RV (3 h) and high-RV (27 h) medians, but since no RV regime can be assigned, no directional comparison to the paper's hazard claim is possible.
 

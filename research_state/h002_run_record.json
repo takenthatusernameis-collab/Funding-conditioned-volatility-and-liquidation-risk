@@ -1,0 +1,74 @@
+{
+  "experiment_id": "H002-PARTIAL-REPLICA-v2-RVREGIME",
+  "hypothesis_id": "FCLR-H002",
+  "campaign": "H002-PARTIAL-REPLICA-v2",
+  "git_head": "de125757a0e5bec7590e33eed8c1a9fd1e3bc023",
+  "utc_start": "2026-10-31T08:23:00Z",
+  "utc_end": "2026-10-31T08:35:00Z",
+  "status": "PARTIAL_REPLICATION",
+  "blocker_removed": {
+    "what": "RV-regime contrast uncomputable: no Jan-Mar 2024 mark prices cached",
+    "removal_script": "scripts/h002_download_2024_q1.py",
+    "source": "https://data.binance.vision/data/futures/um/daily (free, unauthenticated)",
+    "probe": "HTTP 200, size 1137 bytes, single BTCUSDT-1h-2024-01-15.csv row verified",
+    "files_downloaded": 1365,
+    "files_expected": 1365,
+    "coverage": "5 symbols x 91 days x 3 kinds [markPriceKlines, indexPriceKlines, premiumIndexKlines]; Feb 2024 = 29 days as expected",
+    "load_errors": [],
+    "destination": "research_state/data_cache/{SYM}_{YYYY}_{MM}/"
+  },
+  "data_vintages": {
+    "funding": "repo root {SYMBOL}-fundingRate-2024-01/02/03.csv (cached, unchanged)",
+    "mark_price": "research_state/data_cache/{SYM}_2024_{01,02,03}/markPriceKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv (downloaded 2026-10-31)",
+    "index_price": "same layout, indexPriceKlines",
+    "premium_index": "same layout, premiumIndexKlines"
+  },
+  "frozen_definition": "research_state/h002_pre_registration.md (frozen 2026-10-29T22:48:55Z; unchanged this session)",
+  "results": {
+    "total_events": 88,
+    "corrected": 84,
+    "censored": 4,
+    "median_correction_hours_all": 8.0,
+    "regime_table": {
+      "low": {"n": 31, "corrected": 30, "censored": 1, "median_correction_hours": 8.0, "correction_rate": 0.9677},
+      "middle": {"n": 26, "corrected": 25, "censored": 1, "median_correction_hours": 8.0, "correction_rate": 0.9615},
+      "high": {"n": 31, "corrected": 29, "censored": 2, "median_correction_hours": 16.0, "correction_rate": 0.9355}
+    },
+    "primary_contrast": {
+      "high_n": 31,
+      "low_n": 31,
+      "high_median_hours": 16.0,
+      "low_median_hours": 8.0,
+      "log_rank_chi2": 3.0815,
+      "log_rank_p_two_sided": 0.0792,
+      "direction_lower_hazard_high_rv": true
+    },
+    "paper_claim": {
+      "events": 1696,
+      "contracts": 18,
+      "median_high_rv_hours": 27.0,
+      "median_low_rv_hours": 3.0,
+      "claim": "lower correction hazard with higher realized volatility"
+    },
+    "assessment": "Direction reproduced (lower hazard with higher RV) but NOT statistically significant at the 5% level (p=0.079, two-sided log-rank) and magnitude differs from the paper (16 h/8 h vs 27 h/3 h). Sample 88 events / 5 contracts vs 1,696 / 18. NOT a confirmation of the paper claim."
+  },
+  "remaining_blocker": "SSRN 7529458 HTTP 403 blocks the paper's full methodology; H002 remains PARTIAL, cannot be promoted to exact replication, confirmatory, volatility-forecast-skill, or liquidation evidence.",
+  "track_separation": "Correction time is a separate outcome from volatility forecast skill (Track C), hypothetical boundary-breach prediction (Track B), and observed liquidation outcomes (Track A). No conflation.",
+  "tests": {
+    "test_funding_correction_replication": "10/10 PASS",
+    "test_funding_correction_robustness": "7/7 PASS",
+    "full_suite": "21/21 PASS (python -m unittest discover -s tests -v)"
+  },
+  "artifacts": [
+    "research_state/h002_replication_report.md",
+    "research_state/h002_replication_blocker.md",
+    "research_state/h002_pre_registration.md",
+    "research_state/hypothesis_registry.json",
+    "research_state/h002_run_record.json",
+    "scripts/h002_download_2024_q1.py",
+    "scripts/funding_correction_replication.py",
+    "tests/test_funding_correction_replication.py",
+    "tests/test_funding_correction_robustness.py"
+  ],
+  "constraints_respected": "No credentials, no paid data, no trading/paper-trading, no .github/workflows changes, no sealed holdouts reused, no forecast gate runs, no risk overlay. Negatives preserved."
+}
