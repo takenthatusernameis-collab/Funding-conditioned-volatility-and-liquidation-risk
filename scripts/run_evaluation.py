@@ -13,6 +13,35 @@ import os
 REPO = Path(__file__).resolve().parents[1]
 RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
 PROTOCOL = REPO / "research_state" / "research_protocol.md"
+DATA_CACHE = REPO / "research_state" / "data_cache"
+
+# One-time index of every CSV under data_cache. Replaces per-lookup rglob scans
+# (the original fallback path rglobbed ~19k CSVs on every premium/index/funding
+# lookup, making a single FCLR-003 recomputation pathologically slow). The index
+# is built once at import; lookups are O(1) dict hits. Fallback semantics
+# (symbol-qualified filename match) are preserved exactly.
+_CSV_INDEX: dict[str, list[Path]] | None = None
+
+
+def _build_csv_index() -> dict[str, list[Path]]:
+    idx: dict[str, list[Path]] = {}
+    if not DATA_CACHE.exists():
+        return idx
+    for p in DATA_CACHE.rglob("*.csv"):
+        idx.setdefault(p.name, []).append(p)
+    return idx
+
+
+def _csv_index() -> dict[str, list[Path]]:
+    global _CSV_INDEX
+    if _CSV_INDEX is None:
+        _CSV_INDEX = _build_csv_index()
+    return _CSV_INDEX
+
+
+def _indexed_rglob(pattern: str) -> list[Path]:
+    """rglob-equivalent over the prebuilt CSV index (fast)."""
+    return list(_csv_index().get(pattern, []))
 
 # Experiment selection via env var: "FCLR-001" (default, frozen window ending
 # 2024-03-31), "FCLR-002" (extended window ending 2024-09-30 per frozen protocol),
@@ -91,8 +120,8 @@ def mark_csv_path(sym, date_str):
     ]:
         if cand.exists():
             return cand
-    # rglob fallback (covers legacy/nested layouts)
-    for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
+    # indexed fallback (covers legacy/nested layouts)
+    for p in _indexed_rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
         if 'markPrice' in sp:
             return p
@@ -108,8 +137,8 @@ def funding_csv_path(sym, month):
     cand = base / f"{sym}-fundingRate-{month}" / f"{sym}-fundingRate-{month}.csv"
     if cand.exists():
         return cand
-    # rglob fallback
-    for p in REPO.rglob(f"{sym}-fundingRate-{month}.csv"):
+    # indexed fallback
+    for p in _indexed_rglob(f"{sym}-fundingRate-{month}.csv"):
         return p
     return None
 
@@ -211,8 +240,8 @@ def find_premium_csv(sym, date_str):
     ]:
         if cand.exists():
             return cand
-    # rglob fallback
-    for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
+    # indexed fallback
+    for p in _indexed_rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
         if 'premiumIndex' in sp:
             return p
@@ -226,8 +255,8 @@ def find_index_csv(sym, date_str):
     ]:
         if cand.exists():
             return cand
-    # rglob fallback
-    for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
+    # indexed fallback
+    for p in _indexed_rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
         if 'indexPrice' in sp and 'premium' not in sp:
             return p
