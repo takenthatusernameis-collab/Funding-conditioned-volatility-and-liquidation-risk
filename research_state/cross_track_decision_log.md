@@ -1,7 +1,7 @@
 # Cross-Track Decision Log (C → A → B → H002)
 
-UPDATED: 2026-10-31T18:02:00Z
-HEAD: ef70860f
+UPDATED: 2026-10-31T18:59:09Z
+HEAD: cee31508
 PRIORITY: Repo-name driven (funding-conditioned volatility first)
 
 ## Decisions
@@ -13,7 +13,7 @@ PRIORITY: Repo-name driven (funding-conditioned volatility first)
 | H002 | EXPLORATORY/PARTIAL only. No promotion. | 88 events, 84 corrected, 4 censored. Pre-registered BEFORE outcome inspection in `research_state/h002_pre_registration.md`. No concrete admissible path to confirmatory per RESEARCH_PROMPT §16 identified; do not conflate with volatility skill/boundary breaches/observed liquidations. | `research_state/h002_pre_registration.md` |
 
 ## Cross-links
-All artifacts above cross-linked. HEAD consistent at ef70860f. Tests 27/27 PASS.
+All artifacts above cross-linked. HEAD consistent at cee31508. Tests 27/27 PASS.
 
 ## Synthesis
 Priority order strictly followed (C→A→B→H002). Bottlenecks removed with concrete evidence. No reopen paths without meeting strict pre-registration/gate constraints.
