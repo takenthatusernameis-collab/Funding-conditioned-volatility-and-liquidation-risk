@@ -1,27 +1,26 @@
-# AGENT HANDOFF OUTCOME — 2026-10-31T00:21:20Z
+# AGENT_HANDOFF_OUTCOME (DURABLE, SINGLE-SOURCE)
 
-HEAD: 7a036e8e
-REPO: Funding-conditioned-volatility-and-liquidation-risk
+**TIMESTAMP:** 2026-10-31T03:20:26Z
+**HEAD:** f990a25be3c37c6553fa29d1f789958dbaf966b7
+**REPO:** Funding-conditioned-volatility-and-liquidation-risk
+**STATUS:** STRUCTURAL_CLOSURE_CONFIRMED — ALL CAMPAIGNS COMPLETE NEGATIVE
 
-## Integrity
-- Tests: 14/14 PASS (python -m unittest discover -s tests -v)
+## Integrity (STEP 1)
+- `python -m unittest discover -s tests -v` → **14/14 PASS**
+- All required research_state artifacts present and cross-linked
+- Sealed holds intact; no re-tuning, threshold-shopping, holdout reuse, or workflow/trading changes
 
-## Track C (Volatility) — FCLR-007 CONFIRMATORY
-- Protocol pre-registered: research_state/research_protocol_fclr007.md v1.0 (BEFORE outcomes)
-- Coverage audit: research_state/fclr007_coverage_audit.md (BEFORE outcomes)
-- Executed: FCLR_EXPERIMENT=FCLR-007 → research_state/evaluation_summary_FCLR007.md
-- Gate: NOT_MET (C2 vs B1: +0.010258 QLIKE diff, CI [0.001308,0.019737], rel -3.42%; test window 11 days < 3 blocks)
-- Byte-identical repro verified (same numbers on second run)
-- Registries updated: hypothesis_registry.json (FCLR-H001 NOT_SUPPORTED), experiment_frontier.json (FCLR-007 COMPLETE/NOT_MET), run_manifest.json
+## Heavy Synthesis Artifacts (STEP 2) — all present & restored
+- `research_state/track_c_consolidated_dossier.md` — H001 NOT_SUPPORTED across FCLR-003/006/007; risk overlay INELIGIBLE
+- `research_state/track_a_deadend_map.md` — Exhaustive probe map; no admissible unauthenticated liquidation source found (≥5 symbols/≥3 blocks/completeness/license). Sole reopen: new admissible unauth source
+- `research_state/track_b_definitive_separation_audit.md` — Strict A/B/C separation proven; Track B COMPLETE_NEGATIVE
+- `research_state/cross_track_decision_log.md` — End-to-end decision trace (H001/H002/H003/H004); conditions for reopening explicit
+- `research_state/handoff_hardening_audit.md` — Bottlenecks removed; confirms next agent cannot avoid heavy work
 
-## Track A (Observed liquidations) — DISCOVERY
-- Campaign executed: research_state/liquidation_source_campaign.md
-- Probed: Binance alt paths, OKX, Deribit, Zenodo/OSF/arXiv, GitHub raw, Hugging Face, CryptoDataDownload
-- Result: NO-GO for all (no admissible unauthenticated source meeting >=5 symbols, >=3 blocks, completeness, license)
-- Structural blocker documented with evidence
+## Decision Summary (by priority per repo name)
+1. **Track C (volatility forecasting)** — CLOSED NEGATIVE. H001 NOT_SUPPORTED.
+2. **Track A (observed liquidations)** — BLOCKED NO-GO. Structural dead-end under free unauthenticated data constraints.
+3. **Track B (modeled boundary breaches)** — CLOSED NEGATIVE. Strictly separated from observed liquidations.
 
-## Track B
-- Remains COMPLETE_NEGATIVE (separation enforced)
-
-## Conclusion
-H001 (funding-conditioned volatility) NOT_SUPPORTED across FCLR-003, FCLR-006, FCLR-007. No admissible observed-liquids source found. Future progress requires new admissible unauthenticated liquidation data per RESEARCH_PROMPT.md §16.
+## Next Agent Task (verbatim from AGENT_HANDOFF.md)
+Follow `AGENT_HANDOFF.md` §INITIAL TASK MESSAGE. Do STEP 1 (integrity) then STEP 2 (heavy synthesis campaign) — tests alone insufficient. Produce/update durable artifacts with evidence; no re-opening sealed holds or confirmatory re-runs without new admissible unauthenticated data.
