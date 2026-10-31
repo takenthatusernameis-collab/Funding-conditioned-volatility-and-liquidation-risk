@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T07:22:58Z
-HEAD: 27233188
+UPDATED: 2026-10-31T08:22:04Z
+HEAD: 5f49304d
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -11,9 +11,9 @@ BOTTLE_NECK_REMOVAL: MANDATORY — Remove any structural/efficiency blockers so 
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-072258-VERIFY-CLOSEOUT-HEAVY`
+**TASK_ID:** `HND-20261031-082204-VERIFY-FINAL-CLOSEOUT-HEAVY`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T07:22:58Z
+**TIMESTAMP:** 2026-10-31T08:22:04Z
 **MODE:** FORCED VERIFY-AND-CLOSEOUT CAMPAIGN — EXPLICIT DIRECTIONS ABSENT, BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff. Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). If sessions are blocked/inefficient, remove bottlenecks so significant progress continues. Status-only work is FORBIDDEN.
@@ -21,8 +21,8 @@ BOTTLE_NECK_REMOVAL: MANDATORY — Remove any structural/efficiency blockers so 
 You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by repo name: Track C FIRST, then Track A, then Track B.**
 
 ### CURRENT KNOWN STATE (DO NOT TRUST BLINDLY - VERIFY)
-- Tests: `python -m unittest discover -s tests -v` → **19/19 PASS** (verified 2026-10-31T07:22:58Z). Must stay green.
-- HEAD: 27233188 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (verified 2026-10-31T08:22:04Z). Must stay green.
+- HEAD: 5f49304d (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
 - Track C (H001): NOT_SUPPORTED (SEALED_NEGATIVE). All confirmatory panels negative:
   - FCLR-003 (powered, 2024-10-02..2024-12-31, 3 blocks, n=10796): C2 vs B1 +0.015205 QLIKE, CI [-0.020240, 0.056734] crosses zero, -3.78% rel → gate NOT_MET → COMPLETE_NEGATIVE.
   - FCLR-006 (unsealed 2026-05-23..2026-08-06, 2 blocks <3, n=8987): C2 vs B1 +0.368588 QLIKE, CI entirely positive → WORSE, -69.90% rel → gate NOT_MET → COMPLETE_NEGATIVE.
@@ -42,7 +42,7 @@ Bottlenecks identified and removed or proven irremovable with evidence (see `res
 ### MANDATORY HEAVY EVIDENCE CAMPAIGN (EXECUTE ALL - CANNOT SKIP)
 
 **STEP 1: INTEGRITY CHECK (P0, ~2-5 min)**
-1. `python -m unittest discover -s tests -v` → **MUST PASS ALL TESTS** (currently 19 tests). Verify and record timestamp.
+1. `python -m unittest discover -s tests -v` → **MUST PASS ALL TESTS** (currently 21 tests). Verify and record timestamp.
 2. Verify key artifacts exist and are cross-linked: `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/track_c_consolidated_dossier.md` (FORENSIC_REAUDIT_20261031 section with numbers), `research_state/track_a_deadend_map.md` (MACHINE_CHECKABLE_FIREWALL_20261031), `research_state/track_b_definitive_separation_audit.md` (SEPARATION_AUDIT_20261031), `research_state/cross_track_decision_log.md`, `research_state/cross_track_decision_firewall.md`, `research_state/handoff_hardening_audit.md`, `research_state/negative_results_report.md`, `research_state/next_data_discovery_plan.md`, `research_state/final_confirmatory_verdict.md`, `research_state/structural_closure_verdict_heavy.md`.
 3. Confirm constraints: no workflow changes, no trading logic, strict track separation, preserve negatives. Log integrity check in `research_state/AGENT_HANDOFF_OUTCOME.md`.
 
@@ -67,7 +67,7 @@ Prioritize Track C → Track A → Track B. For each track, confirm closure evid
 - Sensitivity analysis (margin/leverage/funding assumptions) documented with numbers; results labeled synthetic/model proxy, never conflated with observed liquidations.
 
 **STEP 3: DOCUMENTATION & HARDENING (P0)**
-1. Create/update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (27233188), detailed evidence summary of ALL work done (artifacts modified/created, commands run, numbers).
+1. Create/update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (5f49304d), detailed evidence summary of ALL work done (artifacts modified/created, commands run, numbers).
 2. Update `research_state/handoff_hardening_audit.md` proving bottlenecks removed and next agent CANNOT avoid heavy work (specific blockers identified+removed or irrefutable dead-ends).
 3. Update `research_state/cross_track_decision_log.md` with new findings.
 4. Ensure all artifacts cross-linked.
