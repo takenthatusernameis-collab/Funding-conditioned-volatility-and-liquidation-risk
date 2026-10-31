@@ -13,6 +13,16 @@ HEAD_NOTE: HEAD verified at a1241997. Verify HEAD at start. Tests: 27/27 PASS.
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
+## NO ESCAPE CLAUSE (NON-NEGOTIABLE)
+- **NO STATUS REPORTS**: "X is blocked/closed" without new concrete artifacts is not acceptable. Prove with files/lines/hashes.
+- **NO LAZY SWEEPS**: Track A requires testing EVERY plausible candidate against the verbatim rubric with HTTP/auth/coverage evidence NOW.
+- **NO REOPENING WITHOUT GATES**: Track C is sealed. Track B is closed negative with separation proven. Only NEW admissible data per RESEARCH_PROMPT §16 can reopen anything.
+- **HEAVY OR NOTHING**: If your turn produces only reading logs/status without creating/modifying research_state artifacts with provenance, you have failed this mandate.
+- **FORCE MULTIPLICATION**: Every artifact you create must enable the next agent to do more heavy work, not less.
+- **REPO-NAME DRIVEN**: Funding-conditioned volatility (Track C) comes FIRST because the repo says so. Execute in that order regardless of curiosity.
+
+
+
 **TASK_ID:** `HND-20261031-172000-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V13`
 **PRIORITY:** P0
 **TIMESTAMP:** 2026-10-31T17:20:00Z
