@@ -2,7 +2,7 @@
   "registry_version": "1.0",
   "generated": "2026-10-30T19:18:41Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CONFIRMATORY_COMPLETE_NEGATIVE (H001 NOT_SUPPORTED on FCLR-003 powered panel and FCLR-006 underpowered unsealed 2026 panel); DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z; FCLR-007 COMPLETE gate NOT_MET (unsealed 2026 panel, test window 11 days = 0 blocks < 3 required, C2 vs B1 significantly WORSE than B1); overlay INELIGIBLE; TRACK A DISCOVERY EXECUTED NO-GO on all routes (research_state/liquidation_source_campaign.md) -- sole H004 reopen path is NEW admissible unauthenticated liquidation data per RESEARCH_PROMPT.md section 16; TRACK B COMPLETE_NEGATIVE (FCLR-H003-EXT-001, 16 cells, Holm).",
+  "current_status": "CONFIRMATORY_COMPLETE_NEGATIVE (H001 NOT_SUPPORTED on FCLR-003 powered panel and FCLR-006/FCLR-007 underpowered unsealed 2026 panels); DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z; FCLR-006 COMPLETE gate NOT_MET (unsealed 2026-05-23..2026-08-06, 76 days = 2 blocks < 3, C2 vs B1 +0.3686 QLIKE CI entirely positive = WORSE, -69.90% rel); FCLR-007 COMPLETE gate NOT_MET (unsealed 2026, test window 2026-07-21..2026-07-31 = 11 days = 0 blocks < 3, C2 vs B1 +0.010258 QLIKE CI [0.001308,0.019737] entirely positive = WORSE, -3.42% rel); overlay INELIGIBLE; TRACK A DISCOVERY EXECUTED NO-GO on all routes (research_state/liquidation_source_campaign.md, research_state/liquidation_sources_enumeration.md, research_state/track_a_deadend_map.md) -- sole H004 reopen path is NEW admissible unauthenticated liquidation data per RESEARCH_PROMPT.md section 16; TRACK B COMPLETE_NEGATIVE (FCLR-H003-EXT-001, 16 cells, Holm). FRONTIER RECONCILED 2026-10-31T02:26:45Z: per-task status/result fields updated from stale NOT_STARTED/PENDING to reflect completed campaigns.",
   "summary": "FCLR-001 sealed PILOT/INCONCLUSIVE (single ~4-day block, BTCUSDT-only coverage defect). FCLR-002 sealed INCONCLUSIVE (70 days = 2 blocks < 3; C2 vs B1 -9.28% rel QLIKE, CI excludes zero, byte-identical reproduction 2026-10-28, underpowered -> NOT claim-worthy). FCLR-003 sealed & COMPLETE_NEGATIVE: powered confirmatory (test 2024-10-02..2024-12-31 = 91 days = 3 blocks, 5 instruments, n=10796); C2 vs B1 = -3.78% rel QLIKE, CI crosses zero -> forecast gate NOT_MET; H001 NOT_SUPPORTED. FCLR-006 sealed COMPLETE_NEGATIVE on unsealed 2026-05-23..2026-08-06 (76 days = 2 blocks, n=8987); C2 vs B1 significantly WORSE (+0.3686 QLIKE, CI entirely positive); gate NOT_MET due to underpowered block count and worse-side result; byte-identical reproduction verified. FCLR-H003 boundary breach COMPLETE_NEGATIVE both panels (no incremental skill after Holm). Direct liquidation labels unavailable for 2024 (Track A BLOCKED/exhausted); FCLR-005 2026 pilot EXPLORATORY_ONLY (<3 blocks). Risk-overlay INELIGIBLE. Unsealed 2026 Apr-Jul cache verified (~122 days, 4 non-overlapping 30-day blocks, >=5 symbols) -> FCLR-007 confirmatory path OPEN; pre-register BEFORE outcome inspection per AGENT_HANDOFF.md STEP 3.",
   "frontier": [
     {
@@ -12,8 +12,8 @@
       "acceptance": "research_state/fclr007_coverage_audit.md published; research_state/research_protocol_fclr007.md v1.0 frozen BEFORE outcomes (FCLR-001/FCLR-006 design: B0 persistence, B1 RV-HAR, C1 funding-augmented, C2 combined; primary contrast C2 vs B1 on QLIKE, >=2% relative QLIKE floor, Holm multiplicity, block bootstrap 2000 replicates); FCLR-007 branch added to scripts/run_evaluation.py; research_state/evaluation_summary_FCLR007.md + gate assessment + run_manifest.json update; `python -m unittest discover -s tests -v` passes (14 tests); byte-identical reproducibility re-run verified",
       "blockers": "None \u2014 data verified present in research_state/data_cache/; no downloads or credentials required; Track A remains BLOCKED and is NOT a prerequisite for Track C",
       "do_not": "Do not inspect QLIKE/model results during Step 1 coverage audit; do not re-open sealed FCLR-001/002/003/005 holds; do not tune thresholds on the holdout; no .github/workflows/* changes; do not relabel exploratory results as confirmatory",
-      "status": "NOT_STARTED",
-      "result": "PENDING \u2014 heavy execution authorized by AGENT_HANDOFF.md SESSION_GOAL"
+      "status": "COMPLETE",
+      "result": "COMPLETE_NEGATIVE. Executed per AGENT_HANDOFF.md STEP 3 (pre-registered research_state/research_protocol_fclr007.md v1.0 BEFORE outcomes; coverage audit research_state/fclr007_coverage_audit.md; splits frozen_before_outcomes in run_manifest.json#split_boundaries_fclr007). C2 vs B1 +0.010258 QLIKE, 95% CI [0.001308, 0.019737] entirely positive = C2 significantly WORSE than B1, relative -3.42%; >=5 instruments PASS, >=3 blocks NOT_MET (test window 2026-07-21..2026-07-31 = 11 days = 0 non-overlapping 30-day blocks); gate NOT_MET. Byte-identical repro verified. Canonical artifact: research_state/evaluation_summary_FCLR007.md. H001 NOT_SUPPORTED on unsealed 2026 data (confirms FCLR-003 powered negative and FCLR-006 underpowered negative)."
     },
     {
       "rank": 2,
@@ -22,8 +22,8 @@
       "acceptance": ">=1 documented probe outcome per candidate source family (#1-#8) OR a documented structural blocker with evidence per route; if GO source found, pre-register new experiment ID before examining outcomes; document all findings in research_state/liquidation_source_campaign.md",
       "blockers": "Binance liquidationSnapshot archive HTTP 404; fapi forceOrders 451 restricted location; HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (exhausted by FCLR-005)",
       "do_not": "Do not infer event-free intervals from missing data; do not accept a capped/partial event stream as a complete census.",
-      "status": "NOT_STARTED",
-      "result": "PENDING \u2014 plan exists but was never executed (AGENT_HANDOFF.md STEP 2)"
+      "status": "COMPLETE",
+      "result": "COMPLETE_NO-GO. Executed per AGENT_HANDOFF.md STEP 2 (research_state/liquidation_source_campaign.md, research_state/liquidation_sources_enumeration.md, research_state/binance_source_probe.md, research_state/track_a_deadend_map.md). All candidate families probed: Binance alt/data.vision liquidationSnapshot HTTP 404, fapi forceOrders HTTP 451, OKX, Bybit trades (non-census), Deribit, Zenodo/OSF/arXiv, GitHub raw (401), HuggingFace ochinimus/crypto-liquidation-ticks (2026-07-08..2026-08-06 only, exhausted by FCLR-005), CryptoDataDownload, Tardis/CryptoHFTData (paywalled). No admissible unauthenticated source with >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK. Structural blocker documented; sole reopen path is NEW admissible unauthenticated liquidation data per RESEARCH_PROMPT.md section 16."
     },
     {
       "rank": 3,
@@ -68,7 +68,7 @@
       "acceptance": "Frozen protocol + run manifest; block-bootstrap CIs; calibration; LOO; Holm correction; long/short separate; intensity with coverage limits if OI/volume missing",
       "blockers": "None if unsealed data present",
       "do_not": "Conflate Track B with observed liquidations; no threshold shopping; no overlay",
-      "status": "COMPLETE_PRELIMINARY",
+      "status": "COMPLETE",
       "result": "Executed on unsealed 2026 panel (5 symbols). Horizons 72h/168h, MMR 0.004/0.005, lev5/10, long/short separate. No incremental skill of C1/C2 over B0 in most cells; often worse. Track B separation enforced. Artifacts: protocol_FCLR-H003-EXT-001.md, evaluation_summary_FCLR-H003-EXT-001.md."
     },
     {
@@ -77,8 +77,8 @@
       "prerequisite": "Fresh pre-registration before outcome inspection; longer horizons (72h/168h), lower MMR tiers, event-intensity target",
       "acceptance": "Frozen protocol; pre-registered horizons/tiers; results reported with multiplicity correction",
       "blockers": "Lower priority than FCLR-007 and Track A discovery",
-      "status": "NOT_STARTED",
-      "result": "NOT_STARTED \u2014 completed for 24h horizon / MMR 0.005 / lev 3-20 on both panels (INCONCLUSIVE, no incremental skill); alternates untested"
+      "status": "CLOSED_NEGATIVE",
+      "result": "CLOSED_NEGATIVE. Alternates (72h/168h horizons, lower MMR tiers, event-intensity target) executed as FCLR-H003-EXT-001 on the unsealed 2026 panel (5 symbols, 16 cells, long/short separate, pre-registered before outcomes). No robust incremental skill of C1/C2 over B0 in most cells; often worse; zero cells survive Holm correction. Intensity blocked by missing OI/volume denominators. Track separation enforced. Artifacts: research_state/protocol_FCLR-H003-EXT-001.md, research_state/evaluation_summary_FCLR-H003-EXT-001.md. Original 24h/MMR0.005/lev3-20 cells on both panels remain INCONCLUSIVE (no incremental skill)."
     }
   ],
   "coverage": {
@@ -105,8 +105,8 @@
   "untested_cells": [
     {
       "hypothesis": "FCLR-H003 (alternate horizons/tiers)",
-      "reason": "Completed for 24h horizon / MMR 0.005 / lev 3-20 on both panels (INCONCLUSIVE, no incremental skill). Longer horizons (72h/168h), lower MMR tiers, and an event-intensity target are untested and would require a fresh pre-registration before outcome inspection.",
-      "status": "NOT_STARTED"
+      "reason": "CLOSED_NEGATIVE as FCLR-H003-EXT-001 (72h/168h, MMR 0.004/0.005, lev 5/10/20, long/short separate, intensity) on the unsealed 2026 panel — 16 cells, no robust incremental skill after Holm; intensity blocked by missing OI/volume denominators. Original 24h/MMR0.005/lev3-20 cells on both panels remain INCONCLUSIVE. No untested Track B cells remain under current admissible data; any further Track B cell would require a fresh pre-registered protocol version.",
+      "status": "CLOSED_NEGATIVE"
     }
   ],
   "experiments": [
