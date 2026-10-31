@@ -1,8 +1,8 @@
 # AGENT_HANDOFF.md (DURABLE — PROGRAM CLOSED OUT)
-**TIMESTAMP (UTC):** 2026-10-31T23:40:18Z
+**TIMESTAMP (UTC):** 2026-10-31T23:42:14Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 320b342f (clean working tree)
-**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261031T234018Z
+**BRANCH/HEAD:** main @ c5131b67 (clean working tree)
+**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261031T234214Z
 **PRIORITY:** NONE — confirmatory research program closed out as negative; no remaining heavy work.
 
 ## 1) WHAT CHANGED & WHY
