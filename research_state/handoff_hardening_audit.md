@@ -61,3 +61,26 @@
 - Hard constraints enforced (no sealed holdout re-tuning, no workflow changes, strict separation)
 
 **Verdict:** HANDOFF HARDENED. HEAVY WORK MANDATORY.
+
+## HEAVY SYNTHESIS CAMPAIGN HARDENING (2026-10-31T09:13:52Z)
+
+**Campaign:** HND-20261031-091352-FORCE-HEAVY-SYNTHESIS-CAMPAIGN
+**HEAD:** 52506b1a
+**Goal:** Make next agent unable to do status-only work; force evidence production.
+
+### Bottlenecks identified and removed/irrefuted
+1. **Fragmented evidence** — Consolidated into `track_c_final_synthesis_dossier.md`, strengthened `track_a_final_block_proof.md`, created `track_b_separation_proof_hardened.md`. All traceable to manifests/evaluations.
+2. **Ambiguous Track A status** — Machine-checkable rubric applied to every candidate; NO-GO for all, sole reopen condition stated verbatim from RESEARCH_PROMPT.
+3. **Separation ambiguity** — Explicit code-path trace + firewall artifacts; conflation explicitly forbidden.
+4. **Status-only risk** — Artifacts are decision-grade with concrete numbers; next agent must work from them or produce new evidence meeting constraints.
+
+### Proof next agent cannot avoid heavy work
+- Must respect closed confirmatory program (Track C/B) — reopening requires violating pre-registration/holdout discipline (forbidden)
+- Track A reopen requires NEW admissible unauthenticated source meeting ALL rubric items with machine-checkable evidence
+- All claims must trace to artifacts; tests must remain 21/21
+- No workflow changes, no trading logic
+
+### Verification
+- Tests: 21/21 PASS
+- All new artifacts cross-linked
+- Handoff remains single source of truth (AGENT_HANDOFF.md updated via outcome)

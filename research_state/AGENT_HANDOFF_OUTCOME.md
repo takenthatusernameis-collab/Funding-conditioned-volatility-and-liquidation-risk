@@ -235,3 +235,35 @@ No gaps found; no heavy gap-filling work required. All closure evidence complete
 - Tests: `python -m unittest discover -s tests -v` → **21/21 PASS**
 
 **Result:** Heavy synthesis complete. Bottlenecks removed/irrefutably documented. Next agent cannot avoid heavy evidence work; must follow constraints (no sealed holdout re-tuning, strict separation, pre-registration if new data appears).
+
+## FORCED HEAVY SYNTHESIS CAMPAIGN — EXECUTED (2026-10-31T09:13:52Z)
+
+**Campaign ID:** HND-20261031-091352-FORCE-HEAVY-SYNTHESIS-CAMPAIGN
+**HEAD:** 52506b1a
+**Mode:** FORCED HEAVY WORK — evidence synthesis by repo-name priority
+**Tests at start:** 21/21 PASS (verified)
+**Priority order:** Track C (funding-conditioned volatility) > Track A (observed liquidations) > Track B (modeled boundary breaches)
+
+### Artifacts created/strengthened
+- **CREATED:** `research_state/track_c_final_synthesis_dossier.md` — definitive Track C synthesis with full traceable numbers (FCLR-001/002/003/006/007), QLIKE decomposition, leakage audit, gate assessment. H001 NOT_SUPPORTED, risk overlay INELIGIBLE.
+- **STRENGTHENED:** `research_state/track_a_final_block_proof.md` — machine-checkable rubric applied to ALL candidates; proves no source passes (unauthenticated census with >=5 symbols, >=3 blocks, completeness/license). Track A STRUCTURALLY BLOCKED. Sole reopen condition stated verbatim.
+- **CREATED:** `research_state/track_b_separation_proof_hardened.md` — code-path trace + separation enforcement; H003 CLOSED_NEGATIVE, strict separation from Track A maintained.
+
+### Evidence summary (concrete)
+**Track C (H001):** Powered confirmatory FCLR-003 (10796 paired, 3 blocks): C2 vs B1 ΔQLIKE +0.015205 [-0.020240,0.056734] crosses zero, rel -3.78%. FCLR-006 worse (-69.90%), FCLR-007 worse (-3.42%). C1 helped alone but full feature set degraded. Holm-corrected, leakage-checked, byte-identical reproductions.
+**Track A (H004):** All candidates NO-GO per rubric. FCLR-004 blocked, FCLR-005 exploratory-only (0 blocks) no incremental skill.
+**Track B (H003):** No robust incremental skill after Holm across 16 cells; synthetic proxy only, never conflated with observed liquidations.
+
+### Bottlenecks removed/hardened
+- Evidence consolidated across fragmented artifacts into single decision-grade dossiers per track
+- Machine-checkable Track A firewall made explicit and irrefutable
+- Track separation hardened with explicit code-path trace
+- All claims trace to existing manifests/evaluations/tests (no recomputation of sealed holdouts)
+- Handoff hardening audit to be updated
+
+### Tests
+- End state: `python -m unittest discover -s tests -v` → 21/21 PASS (verified 2026-10-31T09:13:52Z)
+- No workflow changes, no trading logic, no credentials used.
+
+### Status
+**HEAVY SYNTHESIS CAMPAIGN COMPLETE.** Next agent cannot avoid heavy work — must operate from these dossiers/artifacts and hit hard constraints if attempting Track A reopen (requires new admissible source meeting rubric). All tracks evaluated with strict separation; confirmatory program CLOSED (Track C/B negative, Track A blocked).

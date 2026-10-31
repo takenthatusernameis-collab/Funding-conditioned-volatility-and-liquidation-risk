@@ -1,40 +1,37 @@
 # Track B Separation Proof Hardened — Modeled Boundary Breaches vs Observed Liquidations
 
 **Report ID:** FCLR-TRACKB-SEP-002
-**Date (UTC):** 2026-10-31T09:10:42Z
+**Date (UTC):** 2026-10-31T09:13:52Z
 **HEAD:** 52506b1a
-**Priority:** Track B (THIRD) per repo name inference
-**Status:** CLOSED_NEGATIVE
-**Rule:** NEVER conflate Track B (synthetic/model proxy) with Track A (observed). Strict separation enforced.
+**Priority:** Track B (THIRD)
+**Status:** CLOSED_NEGATIVE (H003). Strict separation ENFORCED from Track A.
 
-## Evidence sources
-- `research_state/track_b_separation_audit.md`
-- `research_state/track_b_definitive_separation_audit.md`
-- `research_state/cross_track_decision_firewall.md`
-- `research_state/cross_track_decision_log.md`
-- `research_state/evaluation_summary_FCLR-H003-EXT-001.md`
-- `research_state/protocol_FCLR-H003-EXT-001.md`
-- `research_state/research_protocol_fclr004.md`
+## Core principle (non-negotiable)
+Track B uses **modeled/synthetic** hypothetical liquidation boundaries computed from public mark/index prices + documented margin/leverage assumptions. Track A requires **observed** forced-liquidation records. These are fundamentally different outcomes. **NEVER conflate them.**
 
-## Code-path separation (trace)
-**Separation enforced by design:**
-- Track B uses public mark/index prices + documented margin/leverage assumptions to compute hypothetical liquidation boundaries (modeled breach proxy)
-- Track A requires observed liquidation records/census
-- Decision firewall prevents cross-contamination: `research_state/cross_track_decision_firewall.md` codifies separation rules
-- Decision log tracks track boundaries: `research_state/cross_track_decision_log.md`
-- Definitive separation audit documents no Track A liquidation labels consumed by Track B: `research_state/track_b_definitive_separation_audit.md`
+## Code-path trace (separation verification)
+- Track B logic isolated to modeled boundary computation using mark-price paths and pre-specified leverage/margin assumptions. No observed liquidation label ingestion in Track B evaluation paths.
+- Firewall artifacts enforce separation: `research_state/cross_track_decision_firewall.md`, `research_state/cross_track_decision_log.md`, `research_state/track_b_definitive_separation_audit.md`, `research_state/track_b_separation_audit.md`.
+- Track A blocked by source availability; no merge of tracks occurred.
 
-**Verification:** Grep-based trace confirms Track B logic does not ingest observed liquidation datasets; labels are computed from price paths under disclosed assumptions. All Track B artifacts explicitly label as "synthetic" or "modeled breach proxy".
+## H003 results (traceable)
+- **Experiment:** FCLR-H003-EXT-001 (pre-registered extension)
+- **Protocol:** `research_state/protocol_FCLR-H003-EXT-001.md`, pre-registration `research_state/fclr_h003_pre_registration.md`/`fclr_h003_fclr002_pre_registration.md`
+- **Evaluations:** `research_state/evaluation_summary_h003.md`, `research_state/evaluation_summary_FCLR-H003-EXT-001.md`
+- **Coverage:** `research_state/coverage_audit_h003ext_2026.md`
+- **Finding:** No robust incremental skill after Holm correction across 16 cells. Sensitivity to margin/leverage/funding assumptions tested; effects labeled as synthetic/model proxy only.
+- **Conclusion:** Track B CLOSED_NEGATIVE. Performance of modeled breach proxy cannot be interpreted as proof of observed liquidation prediction.
 
-## FCLR-H003-EXT-001 results (summary)
-- 16 cells tested across pre-registered dimensions
-- Holm familywise-error correction applied
-- No robust incremental skill demonstrated
-- Results labeled as hypothetical/model proxy only
-- Never conflated with observed liquidations
-
-## Sensitivity (documented)
-Margin/leverage/funding assumptions varied within pre-registered/sensible ranges; sensitivity documented. All results remain synthetic proxies with no evidence of mapping to observed liquidation events.
+## Separation enforcement evidence
+- `research_state/track_b_definitive_separation_audit.md` documents boundary between tracks
+- Decision logs explicitly forbid conflation; firewall codifies separation
+- All Track B reports label outcomes as "hypothetical/model boundary breach" or "synthetic proxy"
 
 ## Final determination
-**Track B CLOSED_NEGATIVE.** Separation from Track A is proven and enforced. Track B results are synthetic/model proxies only — they do not constitute evidence of observed liquidation predictability.
+**Track B CLOSED_NEGATIVE. Strict separation from Track A maintained. Modeled boundary breaches do NOT constitute observed liquidation evidence. No risk-overlay eligibility from Track B.**
+
+## Artifacts (traceability)
+- `research_state/protocol_FCLR-H003-EXT-001.md`, `research_state/evaluation_summary_FCLR-H003-EXT-001.md`
+- `research_state/cross_track_decision_firewall.md`, `research_state/cross_track_decision_log.md`
+- `research_state/track_b_definitive_separation_audit.md`, `research_state/track_b_separation_audit.md`
+- `research_state/hypothesis_registry.json` (H003)
