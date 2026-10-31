@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T11:26:38Z
-HEAD: 23d97f3b (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.</arg_value>
+UPDATED: 2026-10-31T11:27:14Z
+HEAD: b3411119 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.</arg_value>
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -14,7 +14,7 @@ STRICT_SEPARATION: Track A (observed), Track B (modeled/synthetic), Track C (vol
 
 **TASK_ID:** `HND-20261031-112409-FINAL_EVIDENCE_SYNTHESIS_HEAVY`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T11:26:38Z
+**TIMESTAMP:** 2026-10-31T11:27:14Z
 **MODE:** FORCED HEAVY WORK — EXPLICIT DIRECTIONS ABSENT; BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff (`AGENT_HANDOFF.md`). Prioritize strictly by repo name: Track C FIRST, then Track A, then Track B. Remove bottlenecks. Status-only work is FORBIDDEN. Every iteration must produce measurable research/data/testing/engineering progress.
@@ -40,7 +40,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 
 #### STEP 1: INTEGRITY CHECK (P0, ~2-5 min)
 1. `python -m unittest discover -s tests -v` → MUST be 27/27 PASS. Record timestamp + HEAD.
-2. Confirm HEAD `be23c0cb` and working tree clean except `__pycache__/`.
+2. Confirm HEAD `b3411119` and working tree clean except `__pycache__/`.
 3. Verify critical artifacts exist and are consistent:
    - `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`
    - `research_state/track_c_final_synthesis_dossier.md`, `research_state/track_c_consolidated_dossier.md`
