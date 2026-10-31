@@ -1,7 +1,7 @@
 # Track B Codepath Separation Matrix — Modeled Boundary Breaches (H003)
 
-**Generated:** 2026-10-31T18:02:00Z
-**HEAD:** 3d413b10
+**Generated:** 2026-10-31T18:53:55Z
+**HEAD:** ef70860f
 **Status:** CLOSED_NEGATIVE (separation proven)
 **Priority:** Track B
 
@@ -38,7 +38,7 @@
 **Cross-linked:** `research_state/track_b_separation_proof_hardened.md`, `research_state/track_b_definitive_separation_audit.md`, `research_state/cross_track_decision_firewall.md`
 
 ## HEAD CONSISTENCY
-- HEAD: `3d413b10` (main) — working tree clean
+- HEAD: `ef70860f` (main) — working tree clean
 - Tests: 27/27 PASS
 - Separation status: HARDENED AND PROVEN — strict Track A/B separation enforced with code-path grep evidence. FCLR-H003-EXT-001 shows no robust incremental skill after Holm correction across 16 cells.
 - Cross-linked with: track_b_separation_proof_hardened.md, track_b_definitive_separation_audit.md

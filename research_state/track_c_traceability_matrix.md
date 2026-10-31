@@ -1,8 +1,8 @@
 # Track C Traceability Matrix (Irrefutable)
 
-UPDATED: 2026-10-31T18:02:00Z
-HEAD: 3d413b10
-PURPOSE: Full decomposition traceability for H001/FCLR Track C. Every number must trace to file:line + artifact.
+UPDATED: 2026-10-31T18:53:55Z
+HEAD: ef70860f
+PURPOSE: Full decomposition traceability for H001/FCLR Track C. Every number must trace to file:line + artifact. Bottleneck (traceability) hardened to current HEAD.
 
 ## Decomposition (frozen)
 - B0: realized-volatility-only baseline (persistence/simple)
@@ -30,7 +30,7 @@ Source: research_state/track_c_final_synthesis_dossier.md, research_state/track_
 | Leakage audit | research_state/leakage_audit.md | Timestamp/label/split/universe/transformation checks |
 | Manifests | research_state/run_manifest.json | Frozen_before_outcomes flags |
 | Gate assessment | research_state/gate_assessment.md | Pre-registered gate evaluation |
-| Tests | tests/* (27/27 passing at HEAD 3d413b10) | Deterministic checks green |
+| Tests | tests/* (27/27 passing at HEAD ef70860f) | Deterministic checks green |
 
 ## Paired/block structure (irrefutable)
 | Run | Window | Blocks (non-overlap 30d) | Paired n | Instruments | C2 vs B1 ΔQLIKE (95% CI) | Verdict |
@@ -46,4 +46,4 @@ Source: research_state/track_c_final_synthesis_dossier.md, research_state/track_
 **Leakage audit:** train-only normalization, >=7d embargo, purge overlapping windows, no threshold shopping/tuning/holdout reuse, sealed holds, byte-identical reproductions. All passed.
 
 ## Decision
-Track C: NOT_SUPPORTED — CONFIRMATORY CLOSED. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. Do NOT reopen without pre-registration + documented holdout discipline violations with concrete evidence. All numbers traceable to cited artifacts above with HEAD 3d413b10.
+Track C: NOT_SUPPORTED — CONFIRMATORY CLOSED. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. Do NOT reopen without pre-registration + documented holdout discipline violations with concrete evidence. All numbers traceable to cited artifacts above with HEAD ef70860f.

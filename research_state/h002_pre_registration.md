@@ -1,7 +1,7 @@
 # H002 Pre-Registration (Funding-Extreme Correction Time) — Decision Record
 
-**Generated:** 2026-10-31T16:04:XXZ
-**HEAD:** 7c248295
+**Generated:** 2026-10-31T18:53:55Z
+**HEAD:** ef70860f
 **Status:** EXPLORATORY/PARTIAL (NO CONFIRMATORY PRE-REGISTRATION EXECUTED)
 **Priority:** H002 (last)
 
@@ -17,4 +17,4 @@
 ## Decision
 **NO CONFIRMATORY PRE-REGISTRATION EXECUTED.** No concrete admissible path to advancing H002 to confirmatory is evidenced at this time. H002 remains exploratory/partial. Do **NOT** promote to volatility skill/boundary breaches/observed liquidations. Any future attempt to make H002 confirmatory MUST pre-register fully (frozen definition, censoring, eligible set, uncertainty, stopping rules, pre-registered comparisons) BEFORE inspecting outcomes, using only admissible unauthenticated data.
 
-**Evidence:** `research_state/h002_replication_report.md`, `research_state/h002_methodology_dossier.md`, `research_state/h002_replication_blocker.md`
+**Evidence:** `research_state/h002_replication_report.md`, `research_state/h002_methodology_dossier.md`, `research_state/h002_replication_blocker.md` (HEAD ef70860f; gated per §16).
