@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T14:16:00Z
-HEAD: 1d364c41 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+UPDATED: 2026-10-31T14:16:58Z
+HEAD: a915cd38 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -38,8 +38,8 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 ### FORCED HEAVY EVIDENCE CAMPAIGN (EXECUTE ALL - CANNOT SKIP)
 
 #### STEP 1: INTEGRITY CHECK (P0, ~2-5 min)
-1. `python -m unittest discover -s tests -v` → MUST be 27/27 PASS. Record timestamp, HEAD (`1d364c41`), and full summary in `research_state/AGENT_HANDOFF_OUTCOME.md`.
-2. Confirm HEAD `1d364c41` and working tree clean except `__pycache__/`.
+1. `python -m unittest discover -s tests -v` → MUST be 27/27 PASS. Record timestamp, HEAD (`a915cd38`), and full summary in `research_state/AGENT_HANDOFF_OUTCOME.md`.
+2. Confirm HEAD `a915cd38` and working tree clean except `__pycache__/`.
 3. Verify critical artifacts exist and are consistent (all listed artifacts must be present and cross-linked).
 4. Log integrity check in `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp and HEAD.
 
@@ -49,7 +49,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 **2C. TRACK B**: Harden separation with grep/code-path trace of liquidat* usage, firewall enforcement evidence, Holm-corrected FCLR-H003-EXT-001 summary. Create/update `research_state/track_b_codepath_separation_matrix.md`.
 
 #### STEP 3: INTEGRATION, HARDENING & FINALIZE HANDOFF (P0)
-1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (`1d364c41`), artifacts modified, commands, numbers, 27/27, BOTTLENECKS REMOVED.
+1. Update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD (`a915cd38`), artifacts modified, commands, numbers, 27/27, BOTTLENECKS REMOVED.
 2. Update `research_state/handoff_hardening_audit.md` proving bottlenecks removed and heavy work unavoidable.
 3. Update `research_state/cross_track_decision_log.md` with C→A→B synthesis.
 4. Cross-link all artifacts; ensure single source of truth.
@@ -66,7 +66,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 - Evidence over assertion: every claim needs provenance/hashes/splits/tests/file:line.
 
 ### SUCCESS CRITERIA
-- [ ] All tests pass (27/27), timestamp + HEAD (`1d364c41`) recorded
+- [ ] All tests pass (27/27), timestamp + HEAD (`a915cd38`) recorded
 - [ ] Track C synthesis hardened with full traceable numbers + traceability matrix
 - [ ] Track A block proof hardened with machine-checkable rubric + enforcement matrix + all candidates
 - [ ] Track B separation hardened with code-path trace matrix + grep evidence

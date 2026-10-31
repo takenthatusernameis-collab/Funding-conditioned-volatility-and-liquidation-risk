@@ -3,7 +3,7 @@
 **Document type:** End-to-end decision trace from pre-registration to closure
 **Generated:** 2026-10-31T02:24:27Z (restored full version 2026-10-31T02:26:45Z after truncation audit)
 **DURABLE_HANDOFF:** SINGLE_SOURCE_OF_TRUTH
-**HEAD:** 5121e509
+**HEAD:** a915cd38
 
 ## Hypothesis trace
 
@@ -49,6 +49,17 @@ Structural closure confirmed. All confirmatory campaigns complete negative. Fore
 - All artifacts cross-linked
 
 **Status:** DECISIONS RECORDED, EVIDENCE COMPLETE
+
+## 2026-10-31T14:16:58Z — HANDOFF REFRESH (HND-20261031-141600-FORCED_HEAVY_EVIDENCE_SYNTHESIS)
+**HEAD:** a915cd38
+**Priority:** Track C > Track A > Track B (repo-name inference)
+**Tests:** 27/27 PASS
+
+- **Track C (H001):** NOT_SUPPORTED, confirmatory CLOSED. Traceability hardened via `research_state/track_c_traceability_matrix.md`. FCLR-003 C2 vs B1 +0.015205 QLIKE, CI [-0.020240, 0.056734] crosses zero (-3.78% worse); FCLR-006/007 worse in 2026 windows. Risk overlay INELIGIBLE.
+- **Track A (H004):** STRUCTURALLY BLOCKED. Rubric enforcement matrix at `research_state/track_a_rubric_enforcement_matrix.md` — all 6 enumerated candidates fail ALL rubric items (unauthenticated/no_keys/symbols>=5/blocks>=3/completeness_doc/license_ok/census_or_defensible). Sole reopen: new admissible unauthenticated source per RESEARCH_PROMPT.md §16.
+- **Track B (H003):** CLOSED_NEGATIVE. Separation matrix at `research_state/track_b_codepath_separation_matrix.md` — grep/code-path trace confirms isolation from Track A; FCLR-H003-EXT-001 no robust skill after Holm across 16 cells.
+- **Heavy evidence artifacts:** three STEP 2 traceability/enforcement/separation matrices created; all cross-linked; single durable handoff AGENT_HANDOFF.md is source of truth.
+- **Status-only path eliminated:** next agent must produce concrete evidence/artifacts; no re-running sealed confirmatory experiments, no gate relaxation, no holdout reuse.
 
 ### 2026-10-31T07:16:43Z - HND-20261031-071249-HEAVY-FORCED-CAMPAIGN
 - **Track C:** FORENSIC_REAUDIT_20261031 completed. FCLR-003/006/007 all negative; C2 vs B1 CI crosses zero or worse. CONFIRMED CLOSED (NOT_SUPPORTED). Risk overlay INELIGIBLE.

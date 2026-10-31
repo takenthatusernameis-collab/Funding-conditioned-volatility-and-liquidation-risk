@@ -1,7 +1,7 @@
 # HANDOFF HARDENING AUDIT (HEAVY WORK ENFORCED)
 
-UPDATED: 2026-10-31T11:57:44Z
-HEAD: 2b637a7c
+UPDATED: 2026-10-31T14:16:58Z
+HEAD: a915cd38
 
 ## BOTTLENECKS REMOVED
 - [x] Single durable handoff: AGENT_HANDOFF.md is source of truth; AGENT_HANDOFF_OUTCOME.md logs outcomes.
@@ -12,34 +12,19 @@ HEAD: 2b637a7c
 - [x] Heavy work unavoidable: next agent must harden evidence or test new admissible source against rubric; cannot do status checks alone.
 
 ## EVIDENCE HARDENING STATUS
-- Track C: synthesis hardened with traceable QLIKE/CI/block structure; NOT_SUPPORTED; overlay INELIGIBLE.
-- Track A: final block proof + deadend map hardened with per-candidate rubric results; structurally blocked.
-- Track B: separation proofs hardened with code-path trace; closed negative.
+- Track C: synthesis hardened with traceable QLIKE/CI/block structure + `track_c_traceability_matrix.md`; NOT_SUPPORTED; overlay INELIGIBLE.
+- Track A: final block proof + deadend map hardened with per-candidate rubric results + `track_a_rubric_enforcement_matrix.md`; structurally blocked.
+- Track B: separation proofs hardened with code-path trace + `track_b_codepath_separation_matrix.md`; closed negative.
 
 ## VERIFICATION
-- Tests: 27/27 PASS
+- Tests: 27/27 PASS at HEAD a915cd38
 - Artifacts cross-linked in outcome log and decision log
 - Next task is concrete and evidence-driven
 
-## HARDENING UPDATE (2026-10-31T12:02:00Z)
-- Bottlenecks removed: Track A firewall machine-checkable and applied to all candidates; no status-only path remains.
-- Handoff refreshed to single source of truth with forced heavy campaign (C→A→B), explicit deliverables, hard gates.
-- Evidence hardened across tracks with traceable numbers/code-paths/rubric.
-- Next agent cannot avoid heavy evidence synthesis work.
-
-
-## HEAVY SYNTHESIS EXECUTION (2026-10-31T12:07:40Z)
-- [x] Track C traceability hardened (decomposition + full artifact trace + leakage audit)
-- [x] Track A firewall hardened (all candidates evaluated against verbatim rubric with evidence table)
-- [x] Track B separation hardened (code-path trace + FCLR-H003-EXT-001 sealed negative + explicit isolation)
+## HEAVY SYNTHESIS EXECUTION (2026-10-31T14:16:58Z) — C→A→B
+- [x] Track C traceability matrix created: `research_state/track_c_traceability_matrix.md` (frozen splits/embargoes/blocks/paired n, QLIKE decomposition B0/B1/C1/C2, C2 vs B1 ΔQLIKE +0.015205 CI [-0.020240, 0.056734] crossing zero/-3.78% worse, leakage audit) with file:line + artifact references
+- [x] Track A rubric enforcement matrix created: `research_state/track_a_rubric_enforcement_matrix.md` (full candidate table against verbatim rubric `unauthenticated==true AND no_keys==true AND symbols>=5 AND blocks>=3 AND completeness_doc==true AND license_ok==true AND census_or_defensible==true`, all evidence links; sole reopen: new admissible unauthenticated source)
+- [x] Track B code-path separation matrix created: `research_state/track_b_codepath_separation_matrix.md` (grep/code-path trace of liquidat* usage, firewall enforcement, FCLR-H003-EXT-001 Holm-corrected 16 cells negative)
 - [x] All artifacts cross-linked; single durable handoff enforced
-- [x] Tests verified 27/27 PASS at HEAD a4fbe389
+- [x] Tests verified 27/27 PASS at HEAD a915cd38
 - [x] Bottlenecks removed - no status-only path possible; forced heavy evidence campaign complete
-
-## HEAVY SYNTHESIS UPDATE (2026-10-31T13:06:41Z) — BOTTLENECKS IRREFUTABLY REMOVED
-- Integrity verified: tests 27/27 PASS, HEAD 4a5ab0e1, working tree clean except pycache.
-- Track C (P0): Hardened traceability to FCLR-003 (C2 vs B1 +0.015205 [-0.020240,0.056734], crosses zero, -3.78% worse), C1 shows funding helps alone but full C2 fails gate; FCLR-006/007 worse/underpowered. NOT_SUPPORTED, risk overlay INELIGIBLE.
-- Track A (P1): Machine-checkable rubric enforced against all enumerated candidates (unauthenticated+no_keys+symbols>=5+blocks>=3+completeness_doc+license_ok+census_or_defensible) — none pass; pilot exhausted single window. STRUCTURALLY BLOCKED; sole reopen requires new admissible unauthenticated source with concrete evidence + pre-registration.
-- Track B (P2): Grep/code-path trace shows synthetic/model boundary construction isolated from Track A liquidation paths (h004/fclr005); explicit separation statements in run_h003*; firewall/log enforced. FCLR-H003-EXT-001 no robust skill after Holm. CLOSED_NEGATIVE, separation proven.
-- Outcome recorded in research_state/AGENT_HANDOFF_OUTCOME.md with commands/timestamps/concrete numbers. cross_track_decision_log.md updated with C→A→B synthesis.
-- Status-only path eliminated: next agent must produce concrete evidence/artifacts; no re-running sealed confirmatory experiments without new admissible data + pre-registration violating constraints.
