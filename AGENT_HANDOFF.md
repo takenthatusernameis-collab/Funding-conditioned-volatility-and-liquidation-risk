@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T08:22:04Z
-HEAD: 5f49304d
+UPDATED: 2026-10-31T08:31:03Z
+HEAD: 056d0b29
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (funding-conditioned volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -11,9 +11,9 @@ BOTTLE_NECK_REMOVAL: MANDATORY — Remove any structural/efficiency blockers so 
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-082204-VERIFY-FINAL-CLOSEOUT-HEAVY`
+**TASK_ID:** `HND-20261031-083103-VERIFY-FINAL-CLOSEOUT-HEAVY`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T08:22:04Z
+**TIMESTAMP:** 2026-10-31T08:31:03Z
 **MODE:** FORCED VERIFY-AND-CLOSEOUT CAMPAIGN — EXPLICIT DIRECTIONS ABSENT, BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff. Prioritize strictly by repo name: Track C (funding-conditioned volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches). If sessions are blocked/inefficient, remove bottlenecks so significant progress continues. Status-only work is FORBIDDEN.
@@ -21,8 +21,9 @@ BOTTLE_NECK_REMOVAL: MANDATORY — Remove any structural/efficiency blockers so 
 You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by repo name: Track C FIRST, then Track A, then Track B.**
 
 ### CURRENT KNOWN STATE (DO NOT TRUST BLINDLY - VERIFY)
-- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (verified 2026-10-31T08:22:04Z). Must stay green.
-- HEAD: 5f49304d (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- Tests: `python -m unittest discover -s tests -v` → **21/21 PASS** (verified 2026-10-31T08:31:03Z). Must stay green.
+- HEAD: 056d0b29 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- H002 PARTIAL_REPLICATION: RV-regime contrast blocker REMOVED 2026-10-31 via scripts/h002_download_2024_q1.py (data.binance.vision, 1365/1365 files). Contrast computed: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.0815, two-sided p=0.0792, direction matches paper but NOT significant at 5%, magnitude differs (paper 27 h/3 h). SSRN HTTP 403 irremovable → H002 stays PARTIAL, never confirmatory/forecast-skill/liquidation evidence. Do not re-attempt SSRN.
 - Track C (H001): NOT_SUPPORTED (SEALED_NEGATIVE). All confirmatory panels negative:
   - FCLR-003 (powered, 2024-10-02..2024-12-31, 3 blocks, n=10796): C2 vs B1 +0.015205 QLIKE, CI [-0.020240, 0.056734] crosses zero, -3.78% rel → gate NOT_MET → COMPLETE_NEGATIVE.
   - FCLR-006 (unsealed 2026-05-23..2026-08-06, 2 blocks <3, n=8987): C2 vs B1 +0.368588 QLIKE, CI entirely positive → WORSE, -69.90% rel → gate NOT_MET → COMPLETE_NEGATIVE.
