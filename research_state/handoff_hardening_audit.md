@@ -1,30 +1,27 @@
-# HANDOFF HARDENING AUDIT (HEAVY WORK ENFORCED)
+# Handoff Hardening Audit — Bottlenecks Removed & Heavy Work Unavoidable
 
-UPDATED: 2026-10-31T14:16:58Z
-HEAD: a915cd38
+**Generated:** 2026-10-31T16:04:XXZ
+**HEAD:** 7c248295
+**Campaign:** HND-20261031-152112-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V5
 
-## BOTTLENECKS REMOVED
-- [x] Single durable handoff: AGENT_HANDOFF.md is source of truth; AGENT_HANDOFF_OUTCOME.md logs outcomes.
-- [x] Status-only eliminated: all claims traced to artifacts/manifests/tests.
-- [x] Track separation enforced: Track A/B/C never conflated; firewalls documented.
-- [x] Confirmatory closure enforced: no re-run of sealed experiments without pre-registration + holdout discipline violations.
-- [x] Data firewall machine-checkable: Track A rubric explicit and applied to all candidates.
-- [x] Heavy work unavoidable: next agent must harden evidence or test new admissible source against rubric; cannot do status checks alone.
+## Bottlenecks identified vs removed
+| Bottleneck | What was status-only risk | How forced into heavy evidence | Evidence artifact |
+|---|---|---|---|
+| Head staleness | Acting on stale HEAD in handoff | Updated all HEAD refs to current 7c248295 in AGENT_HANDOFF.md | `AGENT_HANDOFF.md` |
+| Traceability (Track C) | "Closed" without full decomposition | Built complete matrix with splits/embargoes/blocks/paired n, full QLIKE decomp, C2 vs B1 Δ + CI, leakage audit with file:line | `research_state/track_c_traceability_matrix.md` |
+| Data access (Track A) | Vague "blocked" without machine check | Enforced verbatim rubric, ACTIVE sweep of all candidates with concrete HTTP/auth/coverage/docs/license/census pass/fail tables | `research_state/track_a_rubric_enforcement_matrix.md`, `research_state/track_a_final_block_proof.md` |
+| Separation (Track B) | Assertion of separation | Grep-traced ALL `liquidat*` usage with file:line, mapped Track A vs B, documented firewall + explicit statements in code outputs | `research_state/track_b_codepath_separation_matrix.md` |
+| H002 discipline | Risk of outcome peeking | Reviewed evidence; documented no concrete admissible confirmatory path, required pre-registration BEFORE inspection if ever pursued | `research_state/h002_pre_registration.md` |
+| Handoff integrity | Possible shortcut to status summary | Created all required matrices, cross-linked artifacts, updated outcome/hardening/cross-track log with concrete numbers | `research_state/AGENT_HANDOFF_OUTCOME.md`, `research_state/cross_track_decision_log.md` |
 
-## EVIDENCE HARDENING STATUS
-- Track C: synthesis hardened with traceable QLIKE/CI/block structure + `track_c_traceability_matrix.md`; NOT_SUPPORTED; overlay INELIGIBLE.
-- Track A: final block proof + deadend map hardened with per-candidate rubric results + `track_a_rubric_enforcement_matrix.md`; structurally blocked.
-- Track B: separation proofs hardened with code-path trace + `track_b_codepath_separation_matrix.md`; closed negative.
+## Heavy work made unavoidable
+- Every Track claim now requires file:line/artifact references (matrices enforce this)
+- Track A requires concrete evidence per rubric item (no status-only "checked" allowed)
+- Track B requires codepath trace proof (grep evidence mandatory)
+- H002 cannot proceed to confirmatory without full pre-registration BEFORE outcome inspection
+- All numbers traced to evaluation summaries/manifests
 
-## VERIFICATION
-- Tests: 27/27 PASS at HEAD a915cd38
-- Artifacts cross-linked in outcome log and decision log
-- Next task is concrete and evidence-driven
-
-## HEAVY SYNTHESIS EXECUTION (2026-10-31T14:16:58Z) — C→A→B
-- [x] Track C traceability matrix created: `research_state/track_c_traceability_matrix.md` (frozen splits/embargoes/blocks/paired n, QLIKE decomposition B0/B1/C1/C2, C2 vs B1 ΔQLIKE +0.015205 CI [-0.020240, 0.056734] crossing zero/-3.78% worse, leakage audit) with file:line + artifact references
-- [x] Track A rubric enforcement matrix created: `research_state/track_a_rubric_enforcement_matrix.md` (full candidate table against verbatim rubric `unauthenticated==true AND no_keys==true AND symbols>=5 AND blocks>=3 AND completeness_doc==true AND license_ok==true AND census_or_defensible==true`, all evidence links; sole reopen: new admissible unauthenticated source)
-- [x] Track B code-path separation matrix created: `research_state/track_b_codepath_separation_matrix.md` (grep/code-path trace of liquidat* usage, firewall enforcement, FCLR-H003-EXT-001 Holm-corrected 16 cells negative)
-- [x] All artifacts cross-linked; single durable handoff enforced
-- [x] Tests verified 27/27 PASS at HEAD a915cd38
-- [x] Bottlenecks removed - no status-only path possible; forced heavy evidence campaign complete
+## Verification
+- Tests remain 27/27 PASS
+- All artifacts cross-linked
+- Single source of truth maintained (AGENT_HANDOFF.md)

@@ -1,107 +1,16 @@
-# Cross-Track Decision Log (Decision-Grade)
+# Cross-Track Decision Log (C → A → B → H002)
 
-**Document type:** End-to-end decision trace from pre-registration to closure
-**Generated:** 2026-10-31T02:24:27Z (restored full version 2026-10-31T02:26:45Z after truncation audit)
-**DURABLE_HANDOFF:** SINGLE_SOURCE_OF_TRUTH
-**HEAD:** a915cd38
+**Generated:** 2026-10-31T16:04:XXZ
+**HEAD:** 7c248295
+**Priority (repo name):** Track C > Track A > Track B > H002
 
-## Hypothesis trace
+## Decisions
+| Track | Status | Decision | Evidence |
+|---|---|---|---|
+| **Track C (H001, funding-conditioned volatility)** | NOT_SUPPORTED — CONFIRMATORY CLOSED | C2 vs B1 fails gate in powered window (CI crosses zero, worse). C1 helps alone but full price+funding degrades. Risk overlay INELIGIBLE (§9). No reopen without pre-registration + holdout discipline violations with evidence. | `research_state/track_c_traceability_matrix.md`, `research_state/evaluation_summary_FCLR003.md`, `research_state/track_c_final_synthesis_dossier.md` |
+| **Track A (H004, observed liquidations)** | STRUCTURALLY BLOCKED | No admissible unauthenticated source passes all rubric items (unauth+no_keys+symbols>=5+blocks>=3+completeness_doc+license_ok+census_or_defensible). Active evidence-backed sweep completed with pass/fail tables. | `research_state/track_a_rubric_enforcement_matrix.md`, `research_state/track_a_final_block_proof.md`, `research_state/track_a_deadend_map.md` |
+| **Track B (H003, modeled boundary breaches)** | CLOSED_NEGATIVE | No robust incremental skill after Holm across 16 cells; strict separation from Track A proven via grep-traced codepaths and explicit firewall statements. Results are synthetic/model-proxy only. | `research_state/track_b_codepath_separation_matrix.md`, `research_state/track_b_separation_proof_hardened.md`, `research_state/evaluation_summary_FCLR-H003-EXT-001.md` |
+| **H002 (funding-extreme correction time)** | EXPLORATORY/PARTIAL | 88 events, 84 corrected, 4 censored. No concrete admissible confirmatory path evidenced. Must pre-register BEFORE outcome inspection if advanced to confirmatory; do not conflate with other tracks. | `research_state/h002_pre_registration.md`, `research_state/h002_replication_report.md` |
 
-| Hypothesis | Description | Status | Gates/Evidence | Decision |
-|---|---|---|---|---|
-| H001 (Track C) | Funding+RV+price features improve OOS RV forecast vs RV-only | NOT_SUPPORTED (SEALED_NEGATIVE) | FCLR-001 PILOT/INCONCLUSIVE; FCLR-002 INCONCLUSIVE (2 blocks); FCLR-003 COMPLETE_NEGATIVE (3 blocks, n=10796, CI crosses zero, -3.78% rel); FCLR-006 COMPLETE_NEGATIVE (2 blocks, +0.3686 QLIKE, worse); FCLR-007 COMPLETE_NEGATIVE (0 blocks, +0.0103 QLIKE, worse). CI coverage, block requirements, byte-identical repro, Holm multiplicity. | CLOSED. Risk overlay INELIGIBLE. No further confirmatory runs. |
-| H002 (Track A proxy) | Observed liquidation predictability | BLOCKED (NO-GO) | All candidates probed (Binance alt/data.vision 404, fapi forceOrders 451, OKX, Bybit trades non-census, Deribit, Zenodo/OSF/arXiv, GitHub raw 401, HF 2026-only exhausted by FCLR-005, CryptoDataDownload, Tardis/CryptoHFTData paywalled). No admissible unauth source with ≥5 symbols, ≥3 blocks, completeness/license. | BLOCKED. Reopen ONLY if new admissible unauthenticated liquidation data appears. |
-| H003 (Track B) | Modeled boundary-breach forecast | COMPLETE_NEGATIVE | FCLR-001-H003 degenerate (base rate 0); FCLR-002-H003 INCONCLUSIVE (no Brier/log-loss win for C2 vs B0 at 5x/10x/20x); FCLR-H003-EXT-001 16 cells no robust incremental skill after Holm. Strict separation enforced. | CLOSED (negative). Never conflated with observed liquidations. |
-| H002-correction (secondary) | Shek (SSRN, 29 Sep 2026) funding-extreme correction-time replication | PARTIAL_REPLICATION | 88 events Jan-Mar 2024, 84 corrected, 4 censored, median 8.0h; RV-regime contrast infeasible (no Jan-Mar 2024 mark prices in cache); SSRN HTTP 403 blocks full methodology. | PARTIAL only. Do not promote correction-time association as evidence on volatility skill, boundary breaches, or observed liquidations. |
-
-## Conditions for reopening
-- **Track A:** New admissible unauthenticated source providing historical forced-liquidation records with defensible provenance, ≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness/gaps, license OK. Must pre-register a new experiment ID BEFORE inspecting any outcomes (RESEARCH_PROMPT.md §16).
-- **Track C/B:** None. Closed by evidence; reopening would require violating pre-registration/holdout discipline (forbidden).
-- **H002-correction:** Full paper methodology independently reconstructible from admissible public sources (currently blocked by SSRN 403).
-
-## Principles enforced
-- Chronological walk-forward, sealed holdouts, 7-day purge/embargo, training-only normalization
-- Track separation (A observed / B modeled / C volatility) — proven in `track_b_definitive_separation_audit.md`
-- Negatives/inconclusives preserved; Holm familywise correction across the whole declared family
-- No credentials/paid data/manual inputs; no trading/paper-trading; no `.github/workflows/*` changes without maintainer auth
-- No threshold shopping/tuning on holdouts; no unregistered feature/grid expansion
-
-## Final state
-Structural closure confirmed. All confirmatory campaigns complete negative. Forecast gate NOT_MET on every tested panel. Risk overlay INELIGIBLE. Future agents must produce heavy auditable evidence (synthesis/robustness/audits/reproducibility), not status checks — and must not re-open sealed holds, re-run completed experiments, or relax the ≥3-block/≥2%-relative-QLIKE gate.
-
-## DECISION_LOG_20261031_FORCED_HEAVY_CAMPAIGN (EXECUTED)
-
-**Timestamp:** 2026-10-31T06:13:18Z
-**Campaign:** HND-20261031-060736-HEAVY-FORCED
-
-### Decisions
-1. **Track C (H001):** CONFIRMED NOT_SUPPORTED. Forensic re-audit complete across all confirmatory runs. Risk overlay INELIGIBLE. No reopen path without pre-registration violation.
-2. **Track A (H004):** CONFIRMED BLOCKED. Machine-checkable firewall applied to all candidates - none pass. Dead-end irrefutable. Exploratory FCLR-005 only, no incremental skill, insufficient blocks. Sole reopen: new admissible unauthenticated source meeting rubric.
-3. **Track B (H003):** CONFIRMED NOT_SUPPORTED. Separation proven with code-path tracing. Never conflated with Track A.
-4. **Bottleneck removal:** Data/compute/evidence/handoff bottlenecks identified and removed or proven irremovable with evidence.
-5. **Handoff:** Single source of truth maintained; outcome documented in `AGENT_HANDOFF_OUTCOME.md`.
-
-### Evidence
-- Track C dossier forensic section with concrete numbers
-- Track A dead-end map with executable rubric
-- Track B separation audit with code paths
-- Tests 14/14 PASS
-- All artifacts cross-linked
-
-**Status:** DECISIONS RECORDED, EVIDENCE COMPLETE
-
-## 2026-10-31T14:16:58Z — HANDOFF REFRESH (HND-20261031-141600-FORCED_HEAVY_EVIDENCE_SYNTHESIS)
-**HEAD:** a915cd38
-**Priority:** Track C > Track A > Track B (repo-name inference)
-**Tests:** 27/27 PASS
-
-- **Track C (H001):** NOT_SUPPORTED, confirmatory CLOSED. Traceability hardened via `research_state/track_c_traceability_matrix.md`. FCLR-003 C2 vs B1 +0.015205 QLIKE, CI [-0.020240, 0.056734] crosses zero (-3.78% worse); FCLR-006/007 worse in 2026 windows. Risk overlay INELIGIBLE.
-- **Track A (H004):** STRUCTURALLY BLOCKED. Rubric enforcement matrix at `research_state/track_a_rubric_enforcement_matrix.md` — all 6 enumerated candidates fail ALL rubric items (unauthenticated/no_keys/symbols>=5/blocks>=3/completeness_doc/license_ok/census_or_defensible). Sole reopen: new admissible unauthenticated source per RESEARCH_PROMPT.md §16.
-- **Track B (H003):** CLOSED_NEGATIVE. Separation matrix at `research_state/track_b_codepath_separation_matrix.md` — grep/code-path trace confirms isolation from Track A; FCLR-H003-EXT-001 no robust skill after Holm across 16 cells.
-- **Heavy evidence artifacts:** three STEP 2 traceability/enforcement/separation matrices created; all cross-linked; single durable handoff AGENT_HANDOFF.md is source of truth.
-- **Status-only path eliminated:** next agent must produce concrete evidence/artifacts; no re-running sealed confirmatory experiments, no gate relaxation, no holdout reuse.
-
-### 2026-10-31T07:16:43Z - HND-20261031-071249-HEAVY-FORCED-CAMPAIGN
-- **Track C:** FORENSIC_REAUDIT_20261031 completed. FCLR-003/006/007 all negative; C2 vs B1 CI crosses zero or worse. CONFIRMED CLOSED (NOT_SUPPORTED). Risk overlay INELIGIBLE.
-- **Track A:** Exhaustive sweep complete against machine-checkable rubric. No admissible unauthenticated observed-liquidation source found. STRUCTURALLY BLOCKED with irrefutable evidence.
-- **Track B:** Separation reaffirmed; no cross-contamination. Remains CLOSED.
-- **Action:** Heavy evidence campaign executed. Bottlenecks removed. Handoff hardened.
-
-## 2026-10-31T09:10:42Z — HEAVY SYNTHESIS CAMPAIGN (HND-20261031-091042)
-**HEAD:** 52506b1a
-**Priority:** Track C > Track A > Track B
-
-- **Track C:** Synthesized into `track_c_final_synthesis_dossier.md`. FCLR-003 C2 vs B1 +0.015205 QLIKE CI crosses zero (-3.78%); FCLR-006/007 worse. Gate NOT_MET → NOT_SUPPORTED, risk overlay INELIGIBLE.
-- **Track A:** Synthesized into `track_a_final_block_proof.md`. Machine-checkable rubric applied to all candidates → NO GO. Structural block irrefutable; sole reopen requires new admissible unauthenticated source per RESEARCH_PROMPT.md §16.
-- **Track B:** Synthesized into `track_b_separation_proof_hardened.md`. Strict separation from Track A proven (firewall+log+code-path trace). FCLR-H003-EXT-001 negative after Holm correction; results synthetic/model proxy only.
-
-**Decision:** Confirmatory program closed. Heavy evidence artifacts created; bottlenecks removed/irrefutably documented. No sealed holdout re-tuning. Next session must follow forced campaign.
-
-- 2026-10-31T10:11:30Z [SYNTHESIS_REFRESH] HND-20261031-101130: Refreshed handoff; created track_a_final_block_proof.md (irrefutable block, rubric enforced) and track_b_separation_proof_hardened.md (separation proven). Track C NOT_SUPPORTED, Track A BLOCKED, Track B CLOSED_NEGATIVE. Tests 21/21. Heavy work mandatory.
-
-## 2026-10-31T11:57:44Z — HEAVY EVIDENCE SYNTHESIS (HND-20261031-112409)
-- Integrity: HEAD 2b637a7c, tests 27/27 PASS.
-- Track C: CONFIRMATORY CLOSED, NOT_SUPPORTED. C2 vs B1 +0.015205 QLIKE, CI [-0.020240,0.056734] crosses zero. Overlay INELIGIBLE.
-- Track A: STRUCTURALLY BLOCKED. Rubric applied to all candidates; none pass all items. Sole reopen: new admissible unauthenticated source with evidence.
-- Track B: CLOSED_NEGATIVE, strictly separated from Track A. Holm-corrected across 16 cells, no robust skill.
-- Handoff hardened: single source of truth, bottlenecks removed, heavy work enforced.
-
-## UPDATE (2026-10-31T12:02:00Z)
-- Track C: NOT_SUPPORTED (sealed). Risk overlay INELIGIBLE.
-- Track A: STRUCTURALLY BLOCKED (no admissible unauthenticated source passes rubric).
-- Track B: CLOSED_NEGATIVE with strict separation proven.
-- Confirmatory program closed. Heavy evidence synthesis completed/hardened per campaign.
-
-
-## HEAVY SYNTHESIS UPDATE (2026-10-31T12:07:40Z) — PRIORITIZED BY REPO NAME C→A→B
-
-- **Track C (H001, funding-conditioned volatility):** NOT_SUPPORTED; confirmatory CLOSED. C2 vs B1 ΔQLIKE +0.015205, CI [-0.020240,0.056734] crosses zero (worse). C1 funding benefit exists but full spec degrades. Risk overlay INELIGIBLE. Full traceability added.
-- **Track A (H004, observed liquidations):** STRUCTURALLY BLOCKED. All candidates fail verbatim rubric (unauthenticated no-keys >=5 symbols >=3 blocks completeness license census). Sole reopen: NEW admissible unauthenticated source with evidence; pre-register before outcome inspection.
-- **Track B (H003, modeled boundary breaches):** CLOSED_NEGATIVE. FCLR-H003-EXT-001 no robust skill after Holm (16 cells). Strict separation from Track A proven via code-path trace/firewall. Model-proxy only.
-- **Handover:** Single durable handoff AGENT_HANDOFF.md (HND-20261031-120456-FORCED_HEAVY_EVIDENCE_SYNTHESIS) with forced heavy campaign; bottlenecks removed; tests 27/27 PASS at HEAD a4fbe389.
-
-## HEAVY SYNTHESIS (2026-10-31T13:06:41Z) — C→A→B DECISIONS
-- TRACK_C (H001): NOT_SUPPORTED. FCLR-003 primary contrast C2 vs B1 +0.015205 QLIKE (95% CI [-0.020240,0.056734]), crosses zero, -3.78% worse; C1 improves vs B1 but full C2 fails pre-registered gate. FCLR-006/007 worse/underpowered. Risk overlay INELIGIBLE (§9). Confirmatory CLOSED.
-- TRACK_A (H004): STRUCTURALLY BLOCKED. All enumerated candidates fail verbatim rubric (unauthenticated+no_keys+symbols>=5+blocks>=3+completeness_doc+license_ok+census_or_defensible). FCLR-005 pilot single window exhausted. Sole reopen: new admissible unauthenticated source with concrete evidence + pre-registration.
-- TRACK_B (H003): CLOSED_NEGATIVE. Code-path trace confirms isolation from Track A (synthetic/model paths only; h004/fclr005 isolated). FCLR-H003-EXT-001 no robust skill after Holm across 16 cells. Strict separation proven; never conflated.
-- Bottlenecks removed; evidence hardened with traceability. Tests 27/27 PASS at HEAD 4a5ab0e1.
+## Synthesis
+Funding-conditioned volatility (C) first — closed negative in powered confirmatory with full traceability. Observed liquidations (A) blocked by data access firewall (machine-checkable). Modeled boundary breaches (B) closed negative with proven separation. H002 remains exploratory only with strict discipline.

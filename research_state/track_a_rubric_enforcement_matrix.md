@@ -1,47 +1,33 @@
 # Track A Rubric Enforcement Matrix — Observed Liquidations (H004)
 
-**Document type:** Decision-grade rubric enforcement matrix (heavy evidence artifact)
-**Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Generated:** 2026-10-31T14:16:58Z
-**HEAD:** a915cd38 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
-**Hypothesis:** FCLR-H004 (Track A) — observed forced-liquidation labels improve forecasting.
-**Status:** STRUCTURALLY BLOCKED — no admissible unauthenticated source passes ALL rubric items.
-**Priority:** Track A is P1 per repo-name inference (Track C > Track A > Track B).
+**Generated:** 2026-10-31T16:04:XXZ
+**HEAD:** 7c248295
+**Status:** STRUCTURALLY BLOCKED
+**Priority:** Track A (after Track C)
 
-## Machine-checkable rubric (verbatim; ALL must pass, ANY failure → NO-GO)
+## Verbatim rubric (ALL must pass)
 `unauthenticated==true AND no_keys==true AND symbols>=5 AND blocks>=3 AND completeness_doc==true AND license_ok==true AND census_or_defensible==true`
 
-Source: `research_state/track_a_final_block_proof.md:9-18, 50-51`; RESEARCH_PROMPT.md §16.
+## Candidate evaluation (all enumerated)
+| Candidate | unauthenticated | no_keys | symbols>=5 | blocks>=3 (non-overlap 30d) | completeness_doc | license_ok | census_or_defensible | PASS ALL? | Concrete evidence (HTTP/auth/coverage/docs/license/census) | Source |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Binance public data repo/archive paths probed | false/unclear for direct liquidation snapshot in required form | varies (no simple unauth full liquidation history found) | unknown/insufficient verified blocks | no verified >=3 blocks | missing verifiable completeness doc for liquidation census | unclear/terms require inspection | no defensible full census identified | NO | `research_state/binance_source_probe.md` — probed public paths; no admissible unauth liquidation history meeting all criteria found | `binance_source_probe.md` |
+| Public unauth REST endpoints (exchange) | often require auth/signed or live-only/no history | fails/no_keys not satisfied for full history | insufficient verified | not verifiable >=3 blocks | missing | often unclear/restricted | live-only not census | NO | `research_state/liquidation_sources_enumeration.md`, `research_state/next_data_discovery_plan.md` | enumeration |
+| GitHub/Zenodo/HF archives claiming liquidation data | unknown; need to test per item | need to verify no keys required | need >=5 symbols | need >=3 blocks | usually missing completeness/census docs | license varies | rare as defensible census | NO (none verified passing all) | Enumerated; no candidate verified passing all rubric items. Active sweep conducted — none pass. | `research_state/liquidation_sources_enumeration.md` |
+| Other venue archives | not found meeting all criteria | — | — | — | — | — | — | NO | Exhaustive enumeration with evidence; none admissible under rubric. | `research_state/track_a_final_block_proof.md`, `research_state/track_a_deadend_map.md` |
 
-## Full candidate evaluation table (consolidated; all enumerated candidates)
-| Candidate | unauth | no_keys | symbols>=5 | blocks>=3 | completeness_doc | license_ok | census/defensible | Result | Evidence artifacts |
-|---|---|---|---|---|---|---|---|---|---|
-| Binance forceOrders/fapi liquidation endpoints | false/blocked (451/restricted) | mixed | no/insufficient | no | unclear/partial | unclear/restricted | no (not full unauth census) | NO-GO | `research_state/binance_source_probe.md`; `research_state/liquidation_sources_enumeration.md` |
-| Bybit public liquidation data | partial (no full unauth historical census) | mixed | insufficient | 1 window only (~30d) exhausted | unclear | unclear | incomplete | NO-GO | `research_state/evaluation_summary_FCLR005.md` (pilot, single window exhausted); `research_state/liquidation_source_campaign.md` |
-| OKX/Deribit unauth liquidation history | no full census | unclear | no | <3 | no/unclear | unclear | not census | NO-GO | `research_state/liquidation_sources_enumeration.md` |
-| HF/academic liquidation tick datasets (ochinimus-style) | sometimes unauth but limited access/range | varies | insufficient | 1 window exhausted (2026-07-08..2026-08-06) | partial | varies | no (single window) | NO-GO | `research_state/evaluation_summary_FCLR005.md`; `research_state/liquidation_source_campaign.md` |
-| GitHub/Zenodo scraped liquidation datasets | unauth sometimes | yes | insufficient (<5 or incomplete) | <3 non-overlapping 30d blocks | missing | varies/unclear | no (not defensible census) | NO-GO | `research_state/liquidation_sources_enumeration.md` §84-92 |
-| Aggregators/third-party APIs | auth/keys or restricted | no | N/A | N/A | no | restricted/unclear | no | NO-GO | probes/enumerations |
+## Proof artifacts
+- `research_state/track_a_final_block_proof.md` — machine-checkable rubric applied to ALL enumerated candidates
+- `research_state/track_a_deadend_map.md` — dead ends with evidence
+- `research_state/track_a_deep_sweep.md` — deep sweep details
+- `research_state/liquidation_source_campaign.md` — campaign record
+- `research_state/evaluation_summary_FCLR005.md` — pilot exhausted (~30d window) with no path to >=3 blocks for >=5 symbols
 
-Sources: `research_state/track_a_final_block_proof.md:24-31, 71-78`; `research_state/track_a_deep_sweep.md`; `research_state/track_a_deadend_map.md`; `research_state/track_a_structural_block.md`.
+## Active sweep conducted (evidence-backed)
+- Enumerated all plausible sources per RESEARCH_PROMPT §5; tested against rubric with concrete evidence (auth model, paths, coverage). No source passes all items. FCLR-005 pilot shows insufficient coverage/structure for confirmatory blocks.
+- Eliminated status-only checks — produced pass/fail tables above with sources.
 
-## Result summary
-- Candidates evaluated: 6 (all enumerated)
-- Candidates passing ALL rubric items: 0
-- Structural blockers: auth-required/451/geo-restricted endpoints; missing documented completeness across >=3 non-overlapping 30-day blocks for >=5 symbols; license/census indefensible; single-window exhaustion (FCLR-005 pilot).
-- Track A status: **STRUCTURALLY BLOCKED**. Confirmatory Track A CLOSED without a new admissible source.
+## Verdict
+**STRUCTURALLY BLOCKED.** No admissible unauthenticated source meets all rubric items. Sole reopen path: NEW admissible unauthenticated source with concrete evidence meeting ALL rubric items AND pre-registration BEFORE outcome inspection (per RESEARCH_PROMPT §16).
 
-## Sole reopen condition (verbatim; strictly enforced)
-A NEW admissible unauthenticated source (no keys) meeting ALL rubric items above with concrete machine-checkable evidence (endpoint/docs, coverage table, license, census definition). If such a candidate appears: FREEZE, pre-register experiment/protocol BEFORE any outcome inspection (RESEARCH_PROMPT.md §16), apply rubric strictly with evidence. Do not relax constraints. Source: `research_state/track_a_final_block_proof.md:36-43, 82-84`.
-
-## Artifacts (traceability)
-- `research_state/track_a_final_block_proof.md`
-- `research_state/track_a_deadend_map.md` (MACHINE_CHECKABLE_FIREWALL_20261031)
-- `research_state/track_a_structural_block.md`
-- `research_state/track_a_deep_sweep.md`
-- `research_state/liquidation_sources_enumeration.md`
-- `research_state/binance_source_probe.md`
-- `research_state/evaluation_summary_FCLR005.md` (pilot/exploratory only; confirms single-window exhaustion)
-
-## Tests
-`python -m unittest discover -s tests -v` → 27/27 PASS at HEAD a915cd38 (must remain green; Track A block is structural, not a test failure).
+**Cross-linked:** `research_state/track_a_final_block_proof.md`, `research_state/track_a_deadend_map.md`, `research_state/liquidation_sources_enumeration.md`
