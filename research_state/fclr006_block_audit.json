@@ -1,0 +1,85 @@
+{
+  "generated": "2026-10-31T10:21:10Z",
+  "head": null,
+  "purpose": "Rigorous non-overlapping 30-day block count for FCLR-003/006/007 test windows",
+  "definitions": {
+    "strict": "only full 30-day blocks count (partial trailing block discarded)",
+    "loose": "every non-overlapping block counts, including a shorter final block"
+  },
+  "windows": {
+    "FCLR-003": {
+      "test_start": "2024-10-02T00:00:00Z",
+      "test_end": "2024-12-31T23:00:00Z",
+      "span_days": 90.96,
+      "blocks_strict_full_only": 3,
+      "blocks_loose_including_partial": 4,
+      "gate_3_blocks_strict": true,
+      "gate_3_blocks_loose": true,
+      "block_ranges_loose": [
+        {
+          "start": "2024-10-02T00:00:00Z",
+          "end": "2024-11-01T00:00:00Z",
+          "days": 30.0
+        },
+        {
+          "start": "2024-11-01T00:00:00Z",
+          "end": "2024-12-01T00:00:00Z",
+          "days": 30.0
+        },
+        {
+          "start": "2024-12-01T00:00:00Z",
+          "end": "2024-12-31T00:00:00Z",
+          "days": 30.0
+        },
+        {
+          "start": "2024-12-31T00:00:00Z",
+          "end": "2024-12-31T23:00:00Z",
+          "days": 0.96
+        }
+      ]
+    },
+    "FCLR-006": {
+      "test_start": "2026-05-23T00:00:00Z",
+      "test_end": "2026-08-06T23:00:00Z",
+      "span_days": 75.96,
+      "blocks_strict_full_only": 2,
+      "blocks_loose_including_partial": 3,
+      "gate_3_blocks_strict": false,
+      "gate_3_blocks_loose": true,
+      "block_ranges_loose": [
+        {
+          "start": "2026-05-23T00:00:00Z",
+          "end": "2026-06-22T00:00:00Z",
+          "days": 30.0
+        },
+        {
+          "start": "2026-06-22T00:00:00Z",
+          "end": "2026-07-22T00:00:00Z",
+          "days": 30.0
+        },
+        {
+          "start": "2026-07-22T00:00:00Z",
+          "end": "2026-08-06T23:00:00Z",
+          "days": 15.96
+        }
+      ]
+    },
+    "FCLR-007": {
+      "test_start": "2026-07-21T00:00:00Z",
+      "test_end": "2026-07-31T23:00:00Z",
+      "span_days": 10.96,
+      "blocks_strict_full_only": 0,
+      "blocks_loose_including_partial": 1,
+      "gate_3_blocks_strict": false,
+      "gate_3_blocks_loose": false,
+      "block_ranges_loose": [
+        {
+          "start": "2026-07-21T00:00:00Z",
+          "end": "2026-07-31T23:00:00Z",
+          "days": 10.96
+        }
+      ]
+    }
+  },
+  "manifest_split_boundaries_fclr006": "test window 2026-05-23..2026-08-06 = 76 days = 2 non-overlapping 30-day blocks (May 23-Jun 21, Jun 22-Jul 21) plus Jul 22-Aug 6 remainder; required >=3 -> NOT_MET on this panel; report exact shortfall, do not relax"
+}
