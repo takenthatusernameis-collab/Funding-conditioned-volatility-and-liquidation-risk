@@ -67,3 +67,10 @@ Structural closure confirmed. All confirmatory campaigns complete negative. Fore
 **Decision:** Confirmatory program closed. Heavy evidence artifacts created; bottlenecks removed/irrefutably documented. No sealed holdout re-tuning. Next session must follow forced campaign.
 
 - 2026-10-31T10:11:30Z [SYNTHESIS_REFRESH] HND-20261031-101130: Refreshed handoff; created track_a_final_block_proof.md (irrefutable block, rubric enforced) and track_b_separation_proof_hardened.md (separation proven). Track C NOT_SUPPORTED, Track A BLOCKED, Track B CLOSED_NEGATIVE. Tests 21/21. Heavy work mandatory.
+
+## 2026-10-31T11:57:44Z — HEAVY EVIDENCE SYNTHESIS (HND-20261031-112409)
+- Integrity: HEAD 2b637a7c, tests 27/27 PASS.
+- Track C: CONFIRMATORY CLOSED, NOT_SUPPORTED. C2 vs B1 +0.015205 QLIKE, CI [-0.020240,0.056734] crosses zero. Overlay INELIGIBLE.
+- Track A: STRUCTURALLY BLOCKED. Rubric applied to all candidates; none pass all items. Sole reopen: new admissible unauthenticated source with evidence.
+- Track B: CLOSED_NEGATIVE, strictly separated from Track A. Holm-corrected across 16 cells, no robust skill.
+- Handoff hardened: single source of truth, bottlenecks removed, heavy work enforced.
