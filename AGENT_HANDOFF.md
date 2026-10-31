@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T02:33:47Z
-HEAD: d0c03ffb
+UPDATED: 2026-10-31T03:18:58Z
+HEAD: f990a25be3c37c6553fa29d1f789958dbaf966b7
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -10,10 +10,10 @@ SESSION_GOAL: HEAVY_EVIDENCE_SYNTHESIS — STRUCTURAL_CLOSURE_CONFIRMED. MAXIMIZ
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-HEAVY-SYNTHESIS-007`
+**TASK_ID:** `HND-20261031-HEAVY-SYNTHESIS-008`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T02:33:47Z
-**MODE:** HEAVY EVIDENCE PRODUCTION. ALL CONFIRMATORY CAMPAIGNS COMPLETE. Bottlenecks removed. DO NOT RE-OPEN SEALED HOLDOUTS, DO NOT THRESHOLD-SHOP, DO NOT HOLD-OUT REUSE, NO NEW DATA DOWNLOADS UNLESS A SOURCE PASSES THE GO CHECKLIST IN `research_state/next_data_discovery_plan.md`.
+**TIMESTAMP:** 2026-10-31T03:18:58Z
+**MODE:** STRUCTURAL CLOSURE CONFIRMED — ALL CAMPAIGNS COMPLETE NEGATIVE. Bottlenecks removed. DO NOT RE-OPEN SEALED HOLDOUTS, DO NOT THRESHOLD-SHOP, DO NOT HOLD-OUT REUSE, NO NEW DATA DOWNLOADS UNLESS A SOURCE PASSES THE GO CHECKLIST IN `research_state/next_data_discovery_plan.md`.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 
 You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by repo name: Track C (volatility forecasting) FIRST, then Track A (observed liquidations), then Track B (modeled boundary breaches).**
