@@ -1,6 +1,6 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T11:14:30Z
+UPDATED: 2026-10-31T11:23:41Z
 HEAD: a7cc3e73 (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
@@ -12,9 +12,9 @@ STRICT_SEPARATION: Track A (observed), Track B (modeled/synthetic), Track C (vol
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-111430-FINAL_EVIDENCE_SYNTHESIS_HEAVY`
+**TASK_ID:** `HND-20261031-112341-FINAL_EVIDENCE_SYNTHESIS_HEAVY`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T11:14:30Z
+**TIMESTAMP:** 2026-10-31T11:23:41Z
 **MODE:** FORCED HEAVY WORK — EXPLICIT DIRECTIONS ABSENT; BUILD NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **MANDATE:** Leave the most relevant inferred timestamped clear initial task message for the next agentic work session in the single durable handoff (`AGENT_HANDOFF.md`). Prioritize strictly by repo name: Track C FIRST, then Track A, then Track B. Remove bottlenecks. Status-only work is FORBIDDEN. Every iteration must produce measurable research/data/testing/engineering progress.
