@@ -35,3 +35,11 @@ HEAD: 2b637a7c
 - [x] All artifacts cross-linked; single durable handoff enforced
 - [x] Tests verified 27/27 PASS at HEAD a4fbe389
 - [x] Bottlenecks removed - no status-only path possible; forced heavy evidence campaign complete
+
+## HEAVY SYNTHESIS UPDATE (2026-10-31T13:06:41Z) — BOTTLENECKS IRREFUTABLY REMOVED
+- Integrity verified: tests 27/27 PASS, HEAD 4a5ab0e1, working tree clean except pycache.
+- Track C (P0): Hardened traceability to FCLR-003 (C2 vs B1 +0.015205 [-0.020240,0.056734], crosses zero, -3.78% worse), C1 shows funding helps alone but full C2 fails gate; FCLR-006/007 worse/underpowered. NOT_SUPPORTED, risk overlay INELIGIBLE.
+- Track A (P1): Machine-checkable rubric enforced against all enumerated candidates (unauthenticated+no_keys+symbols>=5+blocks>=3+completeness_doc+license_ok+census_or_defensible) — none pass; pilot exhausted single window. STRUCTURALLY BLOCKED; sole reopen requires new admissible unauthenticated source with concrete evidence + pre-registration.
+- Track B (P2): Grep/code-path trace shows synthetic/model boundary construction isolated from Track A liquidation paths (h004/fclr005); explicit separation statements in run_h003*; firewall/log enforced. FCLR-H003-EXT-001 no robust skill after Holm. CLOSED_NEGATIVE, separation proven.
+- Outcome recorded in research_state/AGENT_HANDOFF_OUTCOME.md with commands/timestamps/concrete numbers. cross_track_decision_log.md updated with C→A→B synthesis.
+- Status-only path eliminated: next agent must produce concrete evidence/artifacts; no re-running sealed confirmatory experiments without new admissible data + pre-registration violating constraints.

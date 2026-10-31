@@ -88,3 +88,9 @@ Structural closure confirmed. All confirmatory campaigns complete negative. Fore
 - **Track A (H004, observed liquidations):** STRUCTURALLY BLOCKED. All candidates fail verbatim rubric (unauthenticated no-keys >=5 symbols >=3 blocks completeness license census). Sole reopen: NEW admissible unauthenticated source with evidence; pre-register before outcome inspection.
 - **Track B (H003, modeled boundary breaches):** CLOSED_NEGATIVE. FCLR-H003-EXT-001 no robust skill after Holm (16 cells). Strict separation from Track A proven via code-path trace/firewall. Model-proxy only.
 - **Handover:** Single durable handoff AGENT_HANDOFF.md (HND-20261031-120456-FORCED_HEAVY_EVIDENCE_SYNTHESIS) with forced heavy campaign; bottlenecks removed; tests 27/27 PASS at HEAD a4fbe389.
+
+## HEAVY SYNTHESIS (2026-10-31T13:06:41Z) — C→A→B DECISIONS
+- TRACK_C (H001): NOT_SUPPORTED. FCLR-003 primary contrast C2 vs B1 +0.015205 QLIKE (95% CI [-0.020240,0.056734]), crosses zero, -3.78% worse; C1 improves vs B1 but full C2 fails pre-registered gate. FCLR-006/007 worse/underpowered. Risk overlay INELIGIBLE (§9). Confirmatory CLOSED.
+- TRACK_A (H004): STRUCTURALLY BLOCKED. All enumerated candidates fail verbatim rubric (unauthenticated+no_keys+symbols>=5+blocks>=3+completeness_doc+license_ok+census_or_defensible). FCLR-005 pilot single window exhausted. Sole reopen: new admissible unauthenticated source with concrete evidence + pre-registration.
+- TRACK_B (H003): CLOSED_NEGATIVE. Code-path trace confirms isolation from Track A (synthetic/model paths only; h004/fclr005 isolated). FCLR-H003-EXT-001 no robust skill after Holm across 16 cells. Strict separation proven; never conflated.
+- Bottlenecks removed; evidence hardened with traceability. Tests 27/27 PASS at HEAD 4a5ab0e1.
