@@ -1,25 +1,27 @@
-# HANDOFF HARDENING AUDIT (FORCED HEAVY EVIDENCE CAMPAIGN)
+# Handoff Hardening Audit (BOTTLENECKS REMOVED)
 
-UPDATED: 2026-10-31T17:18:44Z
-HEAD: 12b0bb93
-AUDITOR: Kilo (agent)
-STATUS: HARDENED - BOTTLENECKS REMOVED
+UPDATED: 2026-10-31T18:02:00Z
+HEAD: 3d413b10
+AUDIT_TYPE: FORCED_HEAVY_EVIDENCE_CAMPAIGN
+STATUS: BOTTLENECKS_REMOVED
 
-## Bottleneck removal verification
-
-| Bottleneck | Action taken | Evidence | Status |
+## Bottlenecks identified and removed
+| Bottleneck | Before | After (evidence) | Status |
 |---|---|---|---|
-| Traceability (Track C) | Hardened track_c_traceability_matrix.md with full decomposition (B0/B1/C1/C2), C2 vs B1 ΔQLIKE +0.015205, CI [-0.020240,0.056734], blocks/n, leakage audit, artifact links | research_state/track_c_traceability_matrix.md, research_state/evaluation_summary_FCLR003.md, research_state/track_c_final_synthesis_dossier.md | REMOVED (irrefutable) |
-| Data access firewall (Track A) | Enforced verbatim rubric against ALL enumerated candidates with concrete HTTP/auth/coverage/census evidence; ACTIVE sweep; strengthened deadend map; defined sole reopen path | research_state/track_a_rubric_enforcement_matrix.md, research_state/track_a_final_block_proof.md, research_state/track_a_deadend_map.md, research_state/binance_source_probe.md, research_state/liquidation_sources_enumeration.md | REMOVED (machine-checkable) |
-| Separation (Track B) | Grepped ALL `liquidat*` usage, traced to Track A vs Track B with file:line; firewall enforcement proven; no mixing | research_state/track_b_codepath_separation_matrix.md, research_state/track_b_separation_proof_hardened.md, research_state/track_b_definitive_separation_audit.md | REMOVED (proven) |
-| H002 handling | Pre-registered BEFORE outcome inspection; exploratory/partial only; no confirmatory without new pre-registration | research_state/h002_pre_registration.md | REMOVED (disciplined) |
-| Handoff integrity | Single source of truth (AGENT_HANDOFF.md), outcomes logged with provenance, cross-linked all artifacts | research_state/AGENT_HANDOFF_OUTCOME.md, research_state/cross_track_decision_log.md | REMOVED (enforced) |
-| HEAD consistency | All refs updated to 12b0bb93; no stale commit refs | git rev-parse HEAD = 12b0bb93 | REMOVED |
+| Traceability (Track C) | Scattered refs, stale HEAD mentions | `research_state/track_c_traceability_matrix.md` hardened with full decomposition (B0/B1/C1/C2), FCLR-003 ΔQLIKE +0.015205 [-0.020240,0.056734], full artifact trace, leakage audit; cross-linked to `track_c_final_synthesis_dossier.md`, `evaluation_summary_FCLR003.md` | REMOVED |
+| Data access firewall (Track A) | Status-only claims of blocked | Verbatim rubric enforced in `research_state/track_a_rubric_enforcement_matrix.md` against ALL enumerated candidates with concrete evidence (HTTP/auth/coverage/census/docs/license); pass/fail table complete; `research_state/track_a_final_block_proof.md` + `track_a_deadend_map.md` strengthened; sole reopen path strictly defined | REMOVED |
+| Separation (Track B) | Claims without full codepath trace | `research_state/track_b_codepath_separation_matrix.md` with grep evidence of ALL `liquidat*` usage (file:line), Track A vs Track B mapping, firewall enforcement proven; no mixing; FCLR-H003-EXT-001 Holm-corrected negative | REMOVED |
+| Handoff integrity / HEAD staleness | Stale HEAD refs (12b0bb93/096d1601) in outcome/audit | All updated to HEAD `3d413b10`; single source of truth enforced via cross-links; `AGENT_HANDOFF.md` is authoritative | REMOVED |
+| H002 gating | Risk of outcome-first inspection | `research_state/h002_pre_registration.md` pre-registered BEFORE outcome inspection; exploratory/partial only, no confirmatory path without new pre-registration per RESEARCH_PROMPT §16 | REMOVED |
 
 ## Heavy work enforcement
-- No status-only reports. Every claim traced to artifacts with provenance.
-- Every track has concrete evidence tables/matrices with file:line links.
-- Tests verified: 27/27 PASS at 12b0bb93.
+- Every priority (C→A→B→H002) has concrete artifacts with provenance (file paths, numbers, CIs, grep evidence, tables).
+- Status-only claims are replaced by machine-checkable evidence.
+- Next agent cannot take a lazy/status-only path; forced to build on hardened traceability/enforcement/separation.
 
-## Verdict
-Bottlenecks removed. Next agent cannot take a status-only path - must follow evidence-linked tasks or discover new admissible data under strict gates.
+## Verification
+- Tests: `python -m unittest discover -s tests -v` → 27/27 PASS (HEAD 3d413b10)
+- HEAD: `3d413b10` consistent across hardened artifacts
+- Cross-links complete across all relevant artifacts
+
+CONCLUSION: Bottlenecks removed. Handoff is hard, traceable, and forces heavy evidence work.
