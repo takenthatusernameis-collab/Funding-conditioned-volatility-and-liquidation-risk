@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
 
-UPDATED: 2026-10-31T05:27:03Z
-HEAD: 5fbae046d4dffa2c2526f10a57de91123ff16963
+UPDATED: 2026-10-31T05:32:27Z
+HEAD: fe5c6bc5080cfc95498e10d557a88be1b287c8a4
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk)
 PRIORITY_ORDER: Track C (volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
@@ -12,7 +12,7 @@ SESSION_GOAL: HEAVY_EVIDENCE_CAMPAIGN — NO SHORTCUTS. FORCE AUDITABLE HEAVY WO
 
 **TASK_ID:** `HND-20261031-HEAVY-DEFENSE-010`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T05:27:03Z
+**TIMESTAMP:** 2026-10-31T05:32:27Z
 **MODE:** STRUCTURAL CLOSURE CONFIRMED — ALL CAMPAIGNS EXHAUSTED. Bottlenecks removed. DO NOT RE-OPEN SEALED HOLDOUTS. DO NOT THRESHOLD-SHOP. DO NOT REUSE HOLDS. NO NEW DATA DOWNLOADS WITHOUT PASSING GO CHECKLIST IN `research_state/next_data_discovery_plan.md`. NO WORKFLOW CHANGES.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 
@@ -37,7 +37,7 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 3. Confirm seals: no re-tuning, no holdout reuse, no threshold shopping, no workflow changes, no trading logic
 
 **STEP 2: FORTIFICATION CAMPAIGN (P0, HEAVY - REQUIRED)**
-Execute in strict priority order. Every item must refresh/create a durable artifact with concrete evidence.
+Execute in strict priority order. Every item must refresh/create a durable artifact with concrete evidence. Status-only completion is not acceptable.
 
 1. **Track C Fortification (HEAVY):** Re-audit all three runs (FCLR-003/006/007). Verify block structure, paired instruments, QLIKE deltas, CI coverage, byte-identical repro hashes. Harden `research_state/track_c_consolidated_dossier.md` with per-run "why NOT_SUPPORTED" + cross-run invariants. Leave zero ambiguity.
 2. **Track A Admissibility Firewall (HEAVY):** Harden `research_state/track_a_deadend_map.md` with a machine-checkable GO/NO-GO rubric (unauthenticated, ≥5 symbols, ≥3 non-overlapping 30-day blocks, completeness documented, license OK). Enumerate every probed candidate with evidence. Explicitly state what NEW data would qualify. Cross-link to `research_state/next_data_discovery_plan.md`.
@@ -60,6 +60,6 @@ Execute in strict priority order. Every item must refresh/create a durable artif
 - [ ] Track B separation guards documented and verified
 - [ ] Cross-track decision firewall is decision-grade and immutable
 - [ ] Handoff hardening proves heavy work is unavoidable
-- [ ] Create/update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp (2026-10-31T05:21:40Z), HEAD, and evidence summary
+- [ ] Create/update `research_state/AGENT_HANDOFF_OUTCOME.md` with timestamp, HEAD, and evidence summary
 
 **STRUCTURAL CLOSURE CONFIRMED. NO FURTHER CONFIRMATORY EXECUTION WITHOUT NEW ADMISSIBLE UNAUTHENTICATED DATA. FUTURE AGENTS MUST PRODUCE HEAVY AUDITABLE EVIDENCE - NOT STATUS CHECKS.**
