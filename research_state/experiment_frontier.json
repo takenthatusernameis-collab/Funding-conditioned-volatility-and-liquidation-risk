@@ -10,10 +10,10 @@
       "task": "CAMPAIGN FCLR-007: confirmatory volatility forecast on unsealed 2026 Apr-Jul panel (all 5 symbols BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT)",
       "prerequisite": "Step 1 coverage-only audit on 2026-04-01..2026-07-31 complete (>=5 symbols, >=90 common hourly days; verified ~122 days = 4 non-overlapping 30-day blocks); NO outcome/QLIKE inspection before pre-registration",
       "acceptance": "research_state/fclr007_coverage_audit.md published; research_state/research_protocol_fclr007.md v1.0 frozen BEFORE outcomes (FCLR-001/FCLR-006 design: B0 persistence, B1 RV-HAR, C1 funding-augmented, C2 combined; primary contrast C2 vs B1 on QLIKE, >=2% relative QLIKE floor, Holm multiplicity, block bootstrap 2000 replicates); FCLR-007 branch added to scripts/run_evaluation.py; research_state/evaluation_summary_FCLR007.md + gate assessment + run_manifest.json update; `python -m unittest discover -s tests -v` passes (14 tests); byte-identical reproducibility re-run verified",
-      "blockers": "None — data verified present in research_state/data_cache/; no downloads or credentials required; Track A remains BLOCKED and is NOT a prerequisite for Track C",
+      "blockers": "None \u2014 data verified present in research_state/data_cache/; no downloads or credentials required; Track A remains BLOCKED and is NOT a prerequisite for Track C",
       "do_not": "Do not inspect QLIKE/model results during Step 1 coverage audit; do not re-open sealed FCLR-001/002/003/005 holds; do not tune thresholds on the holdout; no .github/workflows/* changes; do not relabel exploratory results as confirmatory",
       "status": "NOT_STARTED",
-      "result": "PENDING — heavy execution authorized by AGENT_HANDOFF.md SESSION_GOAL"
+      "result": "PENDING \u2014 heavy execution authorized by AGENT_HANDOFF.md SESSION_GOAL"
     },
     {
       "rank": 2,
@@ -23,7 +23,7 @@
       "blockers": "Binance liquidationSnapshot archive HTTP 404; fapi forceOrders 451 restricted location; HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (exhausted by FCLR-005)",
       "do_not": "Do not infer event-free intervals from missing data; do not accept a capped/partial event stream as a complete census.",
       "status": "NOT_STARTED",
-      "result": "PENDING — plan exists but was never executed (AGENT_HANDOFF.md STEP 2)"
+      "result": "PENDING \u2014 plan exists but was never executed (AGENT_HANDOFF.md STEP 2)"
     },
     {
       "rank": 3,
@@ -56,14 +56,14 @@
       "task": "COMPLETE: FCLR-006 confirmatory volatility forecast on unsealed 2026 May-Aug data (all 5 symbols)",
       "prerequisite": "Coverage-only audit complete (verified ~122 days available across Apr-Aug; FCLR-006 used 2026-05-23..2026-08-06)",
       "acceptance": "research_state/fclr006_coverage_audit.md published; research_state/research_protocol_fclr006.md frozen before outcomes; research_state/evaluation_summary_FCLR006.md + gate assessment + run_manifest.json update; tests pass; byte-identical repro verified",
-      "blockers": "None — data verified present",
+      "blockers": "None \u2014 data verified present",
       "do_not": "Do not re-run FCLR-006 (idempotent, complete); do not relax the >=3-block criterion",
       "status": "COMPLETE",
       "result": "FCLR-006 COMPLETE NEGATIVE on unsealed 2026-05-23..2026-08-06 (76 days = 2 blocks, 5 instruments, n=8987). C2 vs B1 +0.368588 QLIKE (significantly WORSE), 95% CI [0.173749, 0.615614] entirely positive, relative -69.90%. >=2% relative reduction NOT_MET; >=3 blocks NOT_MET (2 blocks); >=5 instruments PASS. Gate NOT_MET. H001 NOT_SUPPORTED on unsealed 2026 data (confirms FCLR-003 powered negative)."
     },
     {
       "rank": 7,
-      "task": "FCLR-H003-EXT-001: pre-registered Track B boundary breaches on unsealed 2026 (72h/168h, MMR 0.004/0.005, intensity) — heavy execution",
+      "task": "FCLR-H003-EXT-001: pre-registered Track B boundary breaches on unsealed 2026 (72h/168h, MMR 0.004/0.005, intensity) \u2014 heavy execution",
       "prerequisite": "Protocol frozen before outcome inspection; coverage audit on unsealed 2026 panel",
       "acceptance": "Frozen protocol + run manifest; block-bootstrap CIs; calibration; LOO; Holm correction; long/short separate; intensity with coverage limits if OI/volume missing",
       "blockers": "None if unsealed data present",
@@ -78,7 +78,7 @@
       "acceptance": "Frozen protocol; pre-registered horizons/tiers; results reported with multiplicity correction",
       "blockers": "Lower priority than FCLR-007 and Track A discovery",
       "status": "NOT_STARTED",
-      "result": "NOT_STARTED — completed for 24h horizon / MMR 0.005 / lev 3-20 on both panels (INCONCLUSIVE, no incremental skill); alternates untested"
+      "result": "NOT_STARTED \u2014 completed for 24h horizon / MMR 0.005 / lev 3-20 on both panels (INCONCLUSIVE, no incremental skill); alternates untested"
     }
   ],
   "coverage": {
@@ -121,6 +121,13 @@
       ],
       "blocked_by": [],
       "notes": "Block bootstrap + LOO + Holm across 16 cells show no robust incremental skill of C2 over B0; intensity blocked by missing denominators; Track A remains structural block."
+    },
+    {
+      "id": "FCLR-007",
+      "track": "C",
+      "status": "COMPLETE",
+      "gate": "NOT_MET",
+      "summary": "Confirmatory volatility; C2 vs B1 worse, <3 blocks in test window"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "registry_version": "1.1",
   "frozen_date": "2026-10-30",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-    "closeout": {
+  "closeout": {
     "report_id": "FCLR-FINAL-001",
     "closed_date": "2026-10-30T11:10:00Z",
     "verdict": "CONFIRMATIVE_COMPLETE (negative); H001 NOT_SUPPORTED on powered 2024-12 panel (FCLR-003) and unsealed 2026 panel (FCLR-006, underpowered)",
@@ -11,7 +11,7 @@
     "data_exhaustion": false,
     "track_a_blocked": true,
     "track_b_inconclusive": true,
-    "note": "DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: verified against research_state/data_cache/ — 2026 Apr-Jul all 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 files/symbol-month), indexPriceKlines, and fundingRate zips; combined ~122 days = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003 (2024) and FCLR-005 (Track A only). FCLR-006 COMPLETE_NEGATIVE (underpowered 2-block panel). OPEN CONFIRMATORY PATH: CAMPAIGN FCLR-007 on unsealed 2026-04-01..2026-07-31 (~122 days, 4 blocks, >=5 instruments); pre-register research_state/research_protocol_fclr007.md BEFORE outcome inspection per AGENT_HANDOFF.md SESSION_GOAL and experiment_frontier.json rank 1."
+    "note": "DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: verified against research_state/data_cache/ \u2014 2026 Apr-Jul all 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 files/symbol-month), indexPriceKlines, and fundingRate zips; combined ~122 days = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003 (2024) and FCLR-005 (Track A only). FCLR-006 COMPLETE_NEGATIVE (underpowered 2-block panel). OPEN CONFIRMATORY PATH: CAMPAIGN FCLR-007 on unsealed 2026-04-01..2026-07-31 (~122 days, 4 blocks, >=5 instruments); pre-register research_state/research_protocol_fclr007.md BEFORE outcome inspection per AGENT_HANDOFF.md SESSION_GOAL and experiment_frontier.json rank 1."
   },
   "hypotheses": [
     {

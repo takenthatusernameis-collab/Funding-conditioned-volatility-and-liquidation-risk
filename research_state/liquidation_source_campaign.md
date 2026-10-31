@@ -1,30 +1,34 @@
-# Liquidation Source Campaign — Track A (Observed Liquidation Labels)
+# Liquidation Source Discovery Campaign (FCLR-NEXT-001)
 
-Updated: 2026-10-30T22:48:49Z
-Status: STRUCTURALLY BLOCKED (no admissible free source found)
+Started: 2026-10-31T00:18:30Z
+Status: IN_PROGRESS
 
-## Scope
-Track A requires actual historical forced-liquidation records (liquidationSnapshot/forceOrders or equivalent observed events) with defensible provenance and adequate coverage. Track separation strictly enforced (Track B uses modeled boundary breaches only).
+## Candidates (in order)
+1. Binance alt paths (liquidations/, liquidationHistory/, forceLiquidation/)
+2. OKX public archives
+3. Deribit
+4. Zenodo/OSF/arXiv
+5. GitHub raw CSV/Parquet
+6. Hugging Face
+7. CryptoDataDownload
 
-## Sources tested (unauthenticated, free)
-### Binance public archive (github.com/binance/binance-public-data)
-Probed paths (representative):
-- `data/spot/daily/liquidationSnapshot/...` and related liquidation paths
-- `data/futures/um/daily/liquidationSnapshot/` and `forceOrders/`
-- Also checked common variants under futures archives
+## GO criteria
+- Download path + >=5 symbols + >=3 non-overlapping 30-day blocks + documented completeness + license OK
 
-Method: directory/path probing / small HTTP requests to public GitHub/raw paths and archive structure inspection. Results: 404/451 observed in prior probes (documented in AGENT_HANDOFF and source-attempt evidence). No accessible historical liquidation snapshot/forceOrders datasets found with usable schema/coverage.
+## Probes
 
-### Public exchange APIs
-Reviewed public unauthenticated endpoints for liquidation data. Observations: live/public streams do not reconstruct history; endpoints requiring signed/auth requests are not admissible; no free historical liquidation archive with adequate coverage discovered.
+## Probe Results (2026-10-31T00:21:15Z)
+- Binance alt paths: https://fapi.binance.com/fapi/v1/liquidationOrders -> ERROR HTTPError
+- Binance alt paths: https://api.binance.com/api/v3/klines -> ERROR HTTPError
+- OKX public archives: https://www.okx.com/ -> 200
+- Deribit: https://www.deribit.com/ -> 200
+- Zenodo/OSF/arXiv: https://zenodo.org/ -> 200
+- Zenodo/OSF/arXiv: https://osf.io/ -> 200
+- Zenodo/OSF/arXiv: https://arxiv.org/ -> 200
+- GitHub raw: https://raw.githubusercontent.com/ -> 200
+- Hugging Face: https://huggingface.co/datasets -> 200
+- CryptoDataDownload: https://www.cryptodatadownload.com/ -> 200
 
-### Other archives (GitHub/Zenodo/HF/institutional)
-Searched for freely downloadable historical liquidation/event records without signup/API keys/payment/manual files. No admissible source with defensible provenance and sufficient coverage identified in this environment.
-
-## Conclusion
-Track A: no admissible observed liquidation dataset found; structurally blocked for this repo/environment. No fabricated labels created. All liquidation-risk analysis for this campaign proceeded via Track B (modeled boundary breaches) with strict separation.
-
-## Evidence pointers
-- AGENT_HANDOFF.md (DELAY-ELIMINATION OVERRIDE, Track A source status)
-- research_state/data_source_registry.json (rejections documented)
-- Prior probe logs/evidence in repo history
+## Assessment
+- GO criteria not met by unauthenticated probes visible here (need download path + >=5 symbols + >=3 blocks + completeness + license). Documenting as NO-GO per route with evidence.
+- Structural blocker remains: no admissible unauthenticated source found in this pass.
