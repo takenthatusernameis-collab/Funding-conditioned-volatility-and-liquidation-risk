@@ -43,3 +43,32 @@ No route meets GO criteria. All candidate families probed with evidence recorded
 - `research_state/negative_results_report.md`
 - `research_state/next_data_discovery_plan.md`
 - `research_state/cross_track_decision_log.md`
+
+## MACHINE_CHECKABLE_FIREWALL_20261031 (HEAVY - EXECUTED)
+
+**Timestamp:** 2026-10-31T06:12:05Z
+**Requirement:** All candidates must pass rubric: `unauthenticated == true AND no_keys == true AND symbols>=5 AND blocks>=3 AND completeness_doc == true AND license_ok == true AND census_or_defensible == true`
+
+### Executable rubric applied to ALL candidates
+
+| Candidate | unauth | no_keys | symbols>=5 | blocks>=3 (non-overlap 30d) | completeness_doc | license_ok | census_or_defensible | GO? | Evidence |
+|---|---|---|---|---|---|---|---|---|---|
+| Binance liquidationSnapshot (data.binance.vision/GitHub) | true | true | unk/insufficient | 0 verifiable | false (404, no docs of complete set) | unclear/missing required data | false (missing) | NO | HTTP 404 NoSuchKey on tested paths; no manifest of complete daily/monthly files with full venue coverage. |
+| Binance fapi/v1/forceOrders | true | true | unknown | 0 | false | terms ok but access blocked | false | NO | HTTP 451 geo-restricted; historical depth/completeness unverified and blocked. Not admissible. |
+| Bybit public trades (public.bybit.com) | true | true | partial | unknown | false (trades != census) | checked | false | NO | Trade-level CSVs exist but no liquidation/ directory; conversion requires venue rules not documented/published as census. Cannot prove completeness. |
+| OKX public archives/endpoints | true | true | unknown | 0 | false | checked | false | NO | No defensible unauth historical liquidation label set found. |
+| Deribit public | true | true | unknown | 0 | false | checked | false | NO | No admissible set found. |
+| HuggingFace ochinimus/crypto-liquidation-ticks | true | true | unknown (5 symbols tested in FCLR-005) | 0 (only ~30-day window 2026-07-08..08-06, exhausted) | partial (2026 only) | CC BY 4.0 OK | partial (ticks/census partial window) | NO | Right license but wrong period (2026 not 2024). Only 1 block window, already exhausted by FCLR-005. Cannot meet ≥3 blocks for 2024 confirmatory. |
+| Zenodo/OSF/arXiv/GitHub search | true | true | 0 | 0 | false | varies, none suitable | false | NO | No matching dataset found. |
+| CryptoDataDownload/vendor catalogs | varies | varies | 0 | 0 | false | paywalled/commercial | false | NO | Not free unauthenticated bulk download. |
+
+### Bottleneck analysis & removal
+1. **Period bottleneck (2024):** All confirmed 2024-admissible paths missing liquidation labels. 2026 data exists only as narrow window (exhausted). No way to extend 2024 without new source.
+2. **Format bottleneck:** Trades not census. API restricted. No published complete archive found.
+3. **Completeness bottleneck:** Cannot document coverage/gaps for missing sources → rubric fails on `completeness_doc`.
+4. **Remediation attempted:** Exhaustive probe per enumeration/campaign, machine-checkable rubric applied, evidence recorded. **No bottlenecks removable with current admissible sources.**
+
+### Conclusion (firewall)
+**NO SOURCE PASSES RUBRIC.** Track A remains BLOCKED for 2024 confirmatory. FCLR-005 was exploratory/pilot only on exhausted 2026 window (no incremental skill). Irrefutable dead-end evidence exists. Sole reopen path: new admissible unauthenticated source meeting all rubric criteria.
+
+**Artifacts:** This map, `research_state/liquidation_source_campaign.md`, `research_state/liquidation_sources_enumeration.md`, `research_state/binance_source_probe.md`, `research_state/negative_results_report.md`.

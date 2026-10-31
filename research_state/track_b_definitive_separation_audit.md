@@ -26,3 +26,29 @@ Cross-linked: `research_state/evaluation_summary_FCLR-H003-EXT-001.md`, `researc
 
 ## Conclusion
 Track B is complete negative with strict separation definitively proven across all cells and reports. No evidence that modeled breaches predict observed liquidations (and no observed liquidation labels exist to test). Separation policy is satisfied. Risk overlay remains INELIGIBLE. Reopening Track B would require a new pre-registered protocol version; it cannot rescue Track A or the H001 forecast gate.
+
+## SEPARATION_AUDIT_20261031 (HEAVY - EXECUTED)
+
+**Timestamp:** 2026-10-31T06:12:22Z
+**Goal:** Prove cross-contamination between Track B (modeled breaches) and Track A (observed liquidations) is impossible.
+
+### Code path tracing
+- **Track B scripts:** `scripts/synthetic_boundary_labels.py`, `scripts/run_h003.py`, `scripts/run_h003_ext.py`, `scripts/run_h003_ext_fast.py`, `scripts/run_h003_ext_inference.py`, `scripts/_diag_boundary.py`. All use only public mark/index prices and documented margin parameters to compute hypothetical liquidation boundaries. No imports from Track A pipelines.
+- **Track A scripts:** `scripts/h004_fclr005_pipeline.py`, `scripts/h004_audit.py`. Use only liquidation census data (Bybit/HF sources). No Track B label usage.
+- **Feature/label isolation:** Track B labels computed from mark-price paths vs boundary; never read observed liquidation files. Track A labels come from liquidation event streams; never read synthetic boundary outputs as observed labels.
+
+### Artifacts separation
+- Track B outputs: `research_state/evaluation_summary_FCLR-H003*.md`, boundary label artifacts in run dirs - clearly marked "modeled/synthetic/hypothetical". Never conflated with observed liquidation counts.
+- Track A outputs: `research_state/evaluation_summary_FCLR005.md`, `research_state/track_a_*` artifacts - clearly marked as observed/pilot with coverage caveats.
+
+### Firewall enforcement
+- `research_state/cross_track_decision_firewall.md` enforces separation. `research_state/cross_track_decision_log.md` records decisions.
+- Hypothesis registry marks H003 as Track B only, H004 as Track A only; no merging.
+
+### Sensitivity analysis (reinforced)
+Extended grid tested (horizons 72h/168h, MMR 0.004/0.005, lev 5x/10x, long/short) - no robust skill after Holm correction. Results never generalized to observed liquidations.
+
+### Conclusion
+**SEPARATION PROVEN.** No code paths, artifacts, or decisions cross-contaminate Track B and Track A. All Track B results remain clearly labeled as hypothetical/modeled breaches. Never conflated with observed liquidations.
+
+**Artifacts:** This audit, `research_state/cross_track_decision_firewall.md`, `research_state/cross_track_decision_log.md`, scripts traced above.

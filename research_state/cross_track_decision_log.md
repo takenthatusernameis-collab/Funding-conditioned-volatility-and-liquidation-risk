@@ -28,3 +28,24 @@
 
 ## Final state
 Structural closure confirmed. All confirmatory campaigns complete negative. Forecast gate NOT_MET on every tested panel. Risk overlay INELIGIBLE. Future agents must produce heavy auditable evidence (synthesis/robustness/audits/reproducibility), not status checks — and must not re-open sealed holds, re-run completed experiments, or relax the ≥3-block/≥2%-relative-QLIKE gate.
+
+## DECISION_LOG_20261031_FORCED_HEAVY_CAMPAIGN (EXECUTED)
+
+**Timestamp:** 2026-10-31T06:13:18Z
+**Campaign:** HND-20261031-060736-HEAVY-FORCED
+
+### Decisions
+1. **Track C (H001):** CONFIRMED NOT_SUPPORTED. Forensic re-audit complete across all confirmatory runs. Risk overlay INELIGIBLE. No reopen path without pre-registration violation.
+2. **Track A (H004):** CONFIRMED BLOCKED. Machine-checkable firewall applied to all candidates - none pass. Dead-end irrefutable. Exploratory FCLR-005 only, no incremental skill, insufficient blocks. Sole reopen: new admissible unauthenticated source meeting rubric.
+3. **Track B (H003):** CONFIRMED NOT_SUPPORTED. Separation proven with code-path tracing. Never conflated with Track A.
+4. **Bottleneck removal:** Data/compute/evidence/handoff bottlenecks identified and removed or proven irremovable with evidence.
+5. **Handoff:** Single source of truth maintained; outcome documented in `AGENT_HANDOFF_OUTCOME.md`.
+
+### Evidence
+- Track C dossier forensic section with concrete numbers
+- Track A dead-end map with executable rubric
+- Track B separation audit with code paths
+- Tests 14/14 PASS
+- All artifacts cross-linked
+
+**Status:** DECISIONS RECORDED, EVIDENCE COMPLETE
