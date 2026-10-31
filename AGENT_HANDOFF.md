@@ -1,5 +1,5 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
-UPDATED: 2026-10-31T20:03:11Z
+UPDATED: 2026-10-31T20:10:37Z
 HEAD: 68142043 (main). Working tree clean (untracked __pycache__ ignored).
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk) — FUNDING-CONDITIONED VOLATILITY FIRST
