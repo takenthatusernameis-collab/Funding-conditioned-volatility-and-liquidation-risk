@@ -68,3 +68,13 @@ Execute `HND-20261031-141600-FORCED_HEAVY_EVIDENCE_SYNTHESIS` verbatim from `AGE
 - Next agent cannot avoid heavy evidence work; no status-only path
 
 **Campaign complete. Evidence built, not status. Prioritized by repo name (C→A→B). Bottlenecks removed.**
+
+## REFRESH (2026-10-31T15:10:12Z)
+**Task ID:** HND-20261031-151012-FORCED_HEAVY_EVIDENCE_SYNTHESIS
+**HEAD:** 7385221a
+**Action:** Refreshed `AGENT_HANDOFF.md` as SINGLE DURABLE HANDOFF with new timestamped task message.
+**Priority:** Track C → Track A → Track B (by repo name).
+**Mode:** FORCED_HEAVY_EVIDENCE_SYNTHESIS — status-only work FORBIDDEN; every action must produce concrete artifacts with provenance.
+**Bottlenecks:** Mandated active evidence-backed sweep for Track A (rubric enforcement), deep traceability for Track C, hard separation for Track B, handoff integrity enforced.
+**Tests:** Will be verified at start/end (must remain 27/27).
+**State:** Confirmatory program closed on all panels; Track A structurally blocked (no admissible unauthenticated source passes rubric); Track C/Track B closed/negative with hard proof; H002 exploratory only (pre-registration required before outcome inspection).
