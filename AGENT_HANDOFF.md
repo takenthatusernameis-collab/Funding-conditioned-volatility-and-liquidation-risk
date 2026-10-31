@@ -1,7 +1,7 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (FINAL STATE)
 
-UPDATED: 2026-10-31T02:18:31Z
-HEAD: 6543b00f
+UPDATED: 2026-10-31T02:23:46Z
+HEAD: 28759df5
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk) — PRIORITIZE: Track C (volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)
 DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
@@ -9,9 +9,9 @@ SESSION_GOAL: HEAVY_EVIDENCE_SYNTHESIS — STRUCTURAL_CLOSURE_CONFIRMED; BUILD M
 
 ## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE THIS VERBATIM)
 
-**TASK_ID:** `HND-20261031-HEAVY-SYNTHESIS-005`
+**TASK_ID:** `HND-20261031-HEAVY-SYNTHESIS-006`
 **PRIORITY:** P0
-**TIMESTAMP:** 2026-10-31T02:18:31Z
+**TIMESTAMP:** 2026-10-31T02:23:46Z
 **MODE:** HEAVY EVIDENCE PRODUCTION. ALL CONFIRMATORY CAMPAIGNS COMPLETE NEGATIVE. Bottlenecks removed. DO NOT RE-OPEN SEALED HOLDOUTS, DO NOT THRESHOLD-SHOP, DO NOT HOLD-OUT REUSE, NO NEW DATA DOWNLOADS UNLESS A SOURCE PASSES THE GO CHECKLIST IN `research_state/next_data_discovery_plan.md`.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 
@@ -70,3 +70,6 @@ Execute ALL items below. Each must produce a durable artifact with concrete evid
 - [ ] Handoff outcome clearly stated with evidence
 
 **STRUCTURAL CLOSURE CONFIRMED. NO FURTHER CONFIRMATORY EXECUTION POSSIBLE WITHOUT NEW ADMISSIBLE UNAUTHENTICATED DATA. FUTURE AGENTS MUST PRODUCE HEAVY AUDITABLE EVIDENCE, NOT STATUS CHECKS.**
+
+## CAMPAIGN STATUS UPDATE (2026-10-31T02:23:46Z)
+All 14 tests PASS. All five heavy synthesis artifacts present and cross-linked. Structural closure confirmed. Next session: run integrity check, verify artifacts, then STOP cleanly (no further confirmatory execution without new admissible unauthenticated data).
