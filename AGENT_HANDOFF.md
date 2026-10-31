@@ -1,55 +1,117 @@
-# AGENT HANDOFF — SINGLE DURABLE HANDOFF (PRIORITIZED BY REPO NAME)
-UPDATED: 2026-10-31T23:00:23Z
-HEAD: 6ecd811c (main). Working tree clean (untracked __pycache__ ignored).
-REPO: Funding-conditioned-volatility-and-liquidation-risk
-PRIORITY_SOURCE: Repository name inference ("Funding-conditioned-volatility-and-liquidation-risk") — FUNDING-CONDITIONED VOLATILITY FIRST
-PRIORITY_ORDER: Track C (Funding-conditioned volatility forecasting, H001) > Track A (Observed liquidations, H004) > Track B (Modeled boundary breaches, H003) > H002 (Funding-extreme correction time, exploratory)
-DURABLE_HANDOFF: SINGLE_SOURCE_OF_TRUTH
-SESSION_GOAL: FORCED_HEAVY_EVIDENCE_CAMPAIGN — NO STATUS-ONLY PATH. EVERY ITERATION MUST PRODUCE MEASURABLE ARTIFACTS. REMOVE BOTTLENECKS SO SIGNIFICANT PROGRESS CONTINUES. MAKE FUTURE AGENTS UNABLE TO AVOID HEAVY WORK.
-BOTTLENECK_REMOVAL: MANDATORY
+# AGENT_HANDOFF.md (DURABLE)
+**TIMESTAMP (UTC):** 2026-10-31T23:40:18Z
+**REPO:** Funding-conditioned-volatility-and-liquidation-risk
+**BRANCH/HEAD:** (inspect at session start)
+**HANDOFF ID:** FCLR-HANDOFF-20261031T234018Z
+**PRIORITY:** HEAVY WORK - DATA PIPELINE FIRST
 
-HEAD_NOTE: HEAD verified at 6ecd811c. This is the single durable source of truth; supersede all prior handoff copies.
+## 1) WHAT CHANGED & WHY
+- **Baseline established:** Repository contains large ZIP sets of public Binance data (funding rates, klines, mark/index/premium/indexPriceKlines) for BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT covering 2024-01 through 2024-03. No `AGENT_HANDOFF.md`, `research_state/` artifacts, or obvious research pipeline code were present at inspection.
+- **Bottleneck identified:** With explicit heavy data already present locally, the highest ROI action is to convert raw archives into a restartable, leakage-resistant dataset and freeze the FCLR-001 protocol before any "analysis" passes. Avoid documentation-only sessions.
+- **Campaign initialized:** This handoff forces a data-first campaign (ingest → validate → features/labels → baseline) with concrete verifiable acceptance tests.
 
-## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (COPY AND EXECUTE VERBATIM)
+## 2) CURRENT STATE SNAPSHOT (EVIDENCE)
+**Present data (high-signal):**
+- Funding: `BTCUSDT-fundingRate-2024-01/02/03.zip`, `ETHUSDT-fundingRate-*.zip`, `SOLUSDT-fundingRate-*.zip`, `XRPUSDT-fundingRate-*.zip` (+ extracted dirs)
+- Spot/contract klines: `*USDT-1h-YYYY-MM-DD.zip` (Jan-Mar 2024)
+- Reference: `klines-1h-*`, `markPriceKlines-1h-*`, `indexPriceKlines-1h-*`, `premiumIndexKlines-1h-*` for overlapping dates
 
-TASK_ID: HND-20261031-230023-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V26
-PRIORITY: P0
-TIMESTAMP: 2026-10-31T23:00:23Z
-MODE: FORCED HEAVY WORK — INFERRED FROM REPO NAME. BUILD THE NEXT FOCUS CAMPAIGN SO FUTURE AGENTS CANNOT AVOID HEAVY WORK.
-REPO: Funding-conditioned-volatility-and-liquidation-risk
-MANDATE: SINGLE DURABLE HANDOFF. Prioritize strictly by repo name: Track C → Track A → Track B → H002. Remove bottlenecks. Status-only work FORBIDDEN. Every action must yield concrete artifacts with provenance (file paths, line ranges, hashes/manifests, timestamps, HEAD). No re-tuning on sealed holdouts. The remaining required work is an independent recomputation audit of the Track C headline result (FCLR-003) plus final campaign seal. Heavy evidence campaign is substantively complete; only the independent recomputation audit and seal remain.
+**Missing (must create):**
+- `research_state/research_protocol.md` (FCLR-001 frozen)
+- `research_state/data_source_registry.json`
+- `research_state/run_manifest.json`
+- `research_state/hypothesis_registry.json`
+- `research_state/evaluation_summary.md` (empty/placeholder until computed)
+- `research_state/negative_results_report.md`
+- `research_state/leakage_audit.md`
+- `scripts/` ingestion/feature code (tested)
+- `tests/` fixtures for timestamp/split/embargo checks
 
-### STARTING DIRECTIVE (IMMEDIATE ACTIONS IN ORDER)
-1. **VERIFY BASELINE**: Run `python -m unittest discover -s tests -v` — must be 27/27 PASS. Record HEAD (6ecd811c), timestamp, and result in `research_state/AGENT_HANDOFF_OUTCOME.md` (create/update). Verify working tree clean except untracked `__pycache__/`.
-2. **INDEPENDENT RECOMPUTATION AUDIT — TRACK C HEADLINE (PRIORITY 1, REPO-NAME FORCED)**: Track C (H001/FCLR-003) is NOT_SUPPORTED/CONFIRMATORY CLOSED; risk overlay INELIGIBLE per RESEARCH_PROMPT §9. Before any future agent builds on or cites this result, independently recompute the headline C2 vs B1 ΔQLIKE = +0.015205 (worse), 95% CI [-0.020240, 0.056734] crosses zero, paired n=10796, 3 non-overlapping 30-day blocks, instruments BTC/ETH/BNB/SOL/XRP, window 2024-10-02..2024-12-31, from stored inputs/data hashes/config in `research_state/run_manifest.json`, `research_state/data_cache/manifest_fclr003.json`, `research_state/evaluation_summary_FCLR003.md`. Confirm byte-identical reproduction within declared numerical tolerance. Write `research_state/independent_recompute_audit_FCLR003.md` with exact commands, input hashes, recomputed values, match/mismatch vs recorded values, tolerance, timestamp, HEAD. Cross-link to `research_state/track_c_traceability_matrix.md` and `research_state/track_c_final_synthesis_dossier.md`. Prove no holdout reuse/tuning.
-3. **SEAL THE CAMPAIGN**: Create/update `research_state/AGENT_HANDOFF_OUTCOME.md`, `research_state/handoff_hardening_audit.md`, `research_state/cross_track_decision_log.md`. Record final per-track verdicts: C = NOT_SUPPORTED/CLOSED (overlay INELIGIBLE); A = STRUCTURALLY BLOCKED (no rubric-passing candidate; reopen only via new admissible unauthenticated source + pre-registration before inspection); B = CLOSED_NEGATIVE (codepath separation irrefutable); H002 = EXPLORATORY/PARTIAL (88/84/4), no promotion without pre-registration per §16. Ensure all artifacts cross-linked; this handoff remains single source of truth. Commit nothing merely for activity.
-4. **CONFIRM NO BOTTLENECKS**: All tracks resolved/blocked with evidence; no session is left waiting on an external decision. If a genuinely new admissible unauthenticated liquidation source appears (Track A rubric), pre-register per §16 BEFORE inspection — otherwise do not reopen.
+## 3) SINGLE HIGHEST-VALUE NEXT TASK (DO THIS FIRST)
+**TASK ID:** FCLR-T001 | **TYPE:** HEAVY ENGINEERING + DATA
+**GOAL:** Build a restartable ingestion path for BTCUSDT (MVP) that unzips/reads funding + mark/index/klines, normalizes to UTC hourly, produces a validated panel, and freezes FCLR-001 protocol.
 
-### CURRENT VERIFIED STATE (VERIFY AT START - DO NOT TRUST BLINDLY)
-- Tests: `python -m unittest discover -s tests -v` → 27/27 PASS (must remain green)
-- HEAD: `6ecd811c` (main). Working tree clean except untracked `__pycache__/`.
-- Track C (H001): NOT_SUPPORTED — CONFIRMATORY CLOSED. FCLR-003 C2 vs B1 +0.015205 QLIKE, 95% CI [-0.020240,0.056734] crosses zero (-3.78% worse). Risk overlay INELIGIBLE (§9). Traceability hardened: `research_state/track_c_traceability_matrix.md`. Synthesis: `research_state/track_c_final_synthesis_dossier.md`. Independent recomputation audit NOT YET WRITTEN (`research_state/independent_recompute_audit_FCLR003.md` missing) — this is the open P0 task. DO NOT REOPEN without pre-registration + documented holdout discipline violations with evidence.
-- Track A (H004): STRUCTURALLY BLOCKED. Active sweep complete; no candidate passes verbatim rubric (unauthenticated, no_keys, >=5 symbols, >=3 non-overlapping 30-day blocks, completeness/census/defensible coverage, license/terms OK). Proof: `research_state/track_a_final_block_proof.md`, `research_state/track_a_rubric_enforcement_matrix.md`, `research_state/track_a_deadend_map.md`.
-- Track B (H003): CLOSED_NEGATIVE. Strict separation from Track A proven via `grep -rn "liquidat" .` codepath trace; no observed-liquidation labels mixed into modeled Track B paths. Proof: `research_state/track_b_codepath_separation_matrix.md`, `research_state/track_b_separation_proof_hardened.md`, `research_state/track_b_definitive_separation_audit.md`.
-- H002: EXPLORATORY/PARTIAL (88 events, 84 corrected, 4 censored). High-RV median 16.0h vs low-RV 8.0h, log-rank p=0.0792 (direction matches paper, not significant). SSRN methodology inaccessible (HTTP 403) — cannot promote to exact replication/confirmatory/volatility-skill/liquidation evidence. No promotion without pre-registration per §16.
+**WHY:** Repo name prioritizes funding-conditioned volatility/liquidation risk. Data is local (no network/auth needed). This unblocks baselines (B0/B1) immediately and forces measurable progress.
 
-### HARD CONSTRAINTS (NEVER VIOLATE)
-- No credentials/manual inputs/paid data. No `.github/workflows` changes without explicit maintainer auth. No trading/paper-trading/live orders.
-- Strict track separation. Never conflate Track B (modeled) with Track A (observed).
-- Preserve negatives/inconclusives. No fabricated data/labels. No zero-fill of missing values.
-- Pre-registration REQUIRED for any new experiment. NO outcome inspection before pre-registration.
-- No re-tuning on sealed holdouts. No threshold shopping. No re-running completed confirmatory experiments.
-- Every iteration must create measurable research/data/testing/engineering progress. Status-only checks are FORBIDDEN.
-- Evidence over assertion: every claim needs provenance/hashes/splits/tests/file:line/HEAD/timestamps.
+### Concrete steps (execute in order)
+1. **Create research_state skeleton** (minimal, meaningful only):
+   - `research_state/research_protocol.md` - copy FCLR-001 from RESEARCH_PROMPT.md, fill BTCUSDT scope, freeze cutoffs after coverage audit (do NOT peek at outcomes)
+   - `research_state/data_source_registry.json` - log each ZIP/dir, paths, tested access, coverage
+   - `research_state/hypothesis_registry.json` - FCLR-H001/H002/H003/H004 with statuses
+   - `research_state/run_manifest.json` - git SHA, start time, config hash
+   - `research_state/leakage_audit.md` - checklist items
 
-### SUCCESS CRITERIA
-- [ ] Tests 27/27 PASS, HEAD 6ecd811c recorded in `research_state/AGENT_HANDOFF_OUTCOME.md`
-- [ ] Independent recomputation audit of FCLR-003 headline (C2 vs B1 ΔQLIKE +0.015205, CI [-0.020240, 0.056734]) written to `research_state/independent_recompute_audit_FCLR003.md` with input hashes, commands, match/mismatch, tolerance
-- [ ] Track C traceability confirmed irrefutable; sealed NOT_SUPPORTED, overlay INELIGIBLE
-- [ ] Track A: active sweep evidence-backed, block irrefutable, rubric + deadend map current
-- [ ] Track B: codepath separation matrix current with grep evidence
-- [ ] H002: correctly classified exploratory/partial, no speculative pre-registration
-- [ ] `research_state/AGENT_HANDOFF_OUTCOME.md`, `research_state/handoff_hardening_audit.md`, `research_state/cross_track_decision_log.md` updated and cross-linked
-- [ ] Handoff remains single source of truth; no bottlenecks blocking the next session
+2. **Ingest MVP (BTCUSDT)**:
+   - Write `scripts/ingest_binance_zips.py` (or equivalent) to:
+     - Discover all relevant ZIPs/dirs for `BTCUSDT`
+     - Extract on-demand or read via zipfile (avoid duplicating huge raw trees unnecessarily)
+     - Parse timestamps to UTC, normalize units, detect column defs
+     - Build hourly panel: `fundingRate`, `markPrice`, `indexPrice`, `klines` (open/high/low/close/volume), align by timestamp
+     - Emit `data/processed/btcusdt_hourly_panel.parquet` (git-ignored) + checksums in manifest
 
-FORCED HEAVY SYNTHESIS CAMPAIGN — PRIORITIZED BY REPO NAME (FUNDING-CONDITIONED VOLATILITY → LIQUIDATION RISK). NO SHORTCUTS. BUILD EVIDENCE, NOT STATUS. REMOVE BOTTLENECKS. MAKE IT IMPOSSIBLE TO AVOID HEAVY WORK.
+3. **Validate schema & leakage guards**:
+   - Write `tests/test_ingest_timestamps.py` - UTC normalization, no future leakage, dup detection
+   - Write `tests/test_split_embargo.py` - 7-day embargo logic
+   - Add data quality report to `research_state/leakage_audit.md`
+
+4. **Freeze protocol & compute coverage**:
+   - Set train/val/test boundaries from coverage only (60/20/20 chronological), record hashes/cutoffs in protocol BEFORE targets
+   - Run coverage audit, update `run_manifest.json`
+
+**ACCEPTANCE TEST (must pass to call T001 done):**
+- [ ] `research_state/research_protocol.md` exists, references FCLR-001, has frozen split boundaries + hashes
+- [ ] `scripts/ingest_binance_zips.py` + tests pass locally
+- [ ] `data/processed/btcusdt_hourly_panel.parquet` exists with row count, date range, checksum logged in `run_manifest.json`
+- [ ] `tests/test_ingest_timestamps.py`, `tests/test_split_embargo.py` all pass
+- [ ] `research_state/data_source_registry.json` lists all BTCUSDT sources tested with pass/fail
+
+## 4) BOTTLENECK REMOVAL PLAN
+- **No doc-sprawl:** Don't create 10 empty markdown files. Only create artifacts with real content as you build them.
+- **Work with local data:** All required data is present as ZIPs - no network calls needed. Force extraction/processing, not probing.
+- **Parallelize where possible:** Ingestion + tests can be written together; schema validation first.
+- **Fail fast:** If a ZIP is corrupt/missing expected columns, quarantine with provenance in registry (don't guess).
+- **Kill busywork:** Skip workflow changes, status dashboards, or orchestrator code unless it directly unblocks T001.
+
+## 5) NEXT FOCUS CAMPAIGN (FOR FUTURE SESSIONS)
+**CAMPAIGN NAME:** `FCLR-CAMPAIGN-01-FUNDING-VOL-BUILD`
+
+**MANDATE:** "Build the pipeline. Compute baselines. No overlay. No trading."
+
+**ORDER OF OPERATIONS (cannot skip):**
+1. **T001 (NOW):** Ingest BTCUSDT + freeze protocol ← **BLOCKS EVERYTHING**
+2. **T002:** Build features per FCLR-001 (RV1h/RV24h/RV168h, funding extremeness, premium, EMA dislocation) with training-only normalization
+3. **T003:** Build targets (next-24h realized variance) + apply 7-day embargo
+4. **T004:** Compute B0/B1 baselines on val, then holdout once frozen
+5. **T005:** Add C1/C2, run QLIKE comparison vs B1 with block bootstrap
+
+**RULE:** If stuck, do NOT write another handoff memo - fix the ingestion/parser/test or try the next materially different local file. Every session must produce a tested artifact or a concrete blocker with evidence.
+
+## 6) EXACT COMMANDS TO START (COPY/PASTE)
+```bash
+# Verify environment
+cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
+git log -1 --oneline
+ls -1 *.zip | wc -l && echo "---" && ls -d *fundingRate* *klines* 2>&1 | head -5
+
+# Create dirs
+mkdir -p research_state scripts tests data/processed data/raw_cache
+
+# Start T001 immediately - read prompt for FCLR-001 section again
+grep -n "14. Mandatory frozen starter protocol" RESEARCH_PROMPT.md | head -1
+```
+
+**DO NOT:** read the entire paper, browse web, create issue trackers, or "plan" for 3 hours. **DO:** unzip, parse, validate, test.
+
+## 7) SESSION CHECKLIST (END OF SESSION MUST SATISFY)
+- [ ] Updated `AGENT_HANDOFF.md` only if state changed materially (or leave as-is if T001 in progress)
+- [ ] Logged changes/commands/results in handoff notes below
+- [ ] All tests run with exact pass/fail
+- [ ] `run_manifest.json` updated with hashes/timestamps
+- [ ] Next action is unambiguous and executable without user input
+- [ ] No placeholder files committed without content
+
+## SESSION LOG (APPEND ONLY)
+**2026-10-31T23:40:18Z - HANDOFF CREATED**
+- Initialized FCLR-CAMPAIGN-01 with T001 as hard gate
+- Identified local ZIP data as primary resource (no auth/network dependency)
+- Forced data-first, test-driven approach per RESEARCH_PROMPT constraints
