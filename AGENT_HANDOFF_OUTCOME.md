@@ -138,3 +138,13 @@ Execute `HND-20261031-141600-FORCED_HEAVY_EVIDENCE_SYNTHESIS` verbatim from `AGE
 **Tests:** 27/27 PASS (verified at refresh). Must remain green.
 **State:** Confirmatory program closed on all panels; Track A structurally blocked (no admissible unauthenticated source passes rubric); Track C/Track B closed/negative with hard proof; H002 exploratory only (pre-registration REQUIRED before outcome inspection per RESEARCH_PROMPT §16).
 **Bottlenecks addressed:** HEAD staleness resolved and consistent; traceability/enforcement/separation matrices mandated; heavy evidence work made unavoidable — no status-only path.
+
+## REFRESH (2026-10-31T17:05:19Z)
+**Task ID:** HND-20261031-170519-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V10
+**HEAD:** e4382caf (main). Working tree clean except untracked `__pycache__/` (scripts/tests).
+**Action:** Refreshed `AGENT_HANDOFF.md` as SINGLE DURABLE HANDOFF with new timestamped initial task message (V10). Resolved head-staleness bottleneck: internal HEAD reference corrected from stale `4bdd24a5` to actual HEAD `e4382caf` (checkpoint commits touch only handoff docs; `research_state` unchanged). Tests verified 27/27 PASS at 2026-10-31T17:05:19Z.
+**Priority:** Track C → Track A → Track B → H002 (by repo name: funding-conditioned volatility first).
+**Mode:** FORCED_HEAVY_EVIDENCE_SYNTHESIS — status-only work FORBIDDEN; every action must produce concrete artifacts with provenance (file:line, hashes/manifests, timestamps, HEAD).
+**Tests:** Verified 27/27 PASS at start of refresh; must remain green at end.
+**State:** Confirmatory program closed on all panels; Track A structurally blocked (no admissible unauthenticated source passes rubric); Track C/Track B closed/negative with hard proof; H002 exploratory only (pre-registration REQUIRED before outcome inspection per RESEARCH_PROMPT §16).
+**Bottlenecks addressed:** HEAD staleness resolved and consistent; traceability/enforcement/separation matrices mandated; heavy evidence work made unavoidable — no status-only path for the next agent.
