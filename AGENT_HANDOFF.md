@@ -1,6 +1,6 @@
 # AGENT HANDOFF — SINGLE DURABLE HANDOFF (FINAL STATE)
 
-UPDATED: 2026-10-31T00:26:15Z
+UPDATED: 2026-10-31T00:30:31Z
 HEAD: 3119318b
 REPO: Funding-conditioned-volatility-and-liquidation-risk
 PRIORITY_SOURCE: Repository name inference (funding-conditioned volatility and liquidation risk) — **PRIORITIZE: Track C (volatility forecasting) > Track A (observed liquidations) > Track B (modeled boundary breaches)**
@@ -64,3 +64,17 @@ You are continuing from this SINGLE DURABLE handoff. **Prioritize strictly by re
 - [x] Handoff outcome clearly stated with evidence
 
 **STRUCTURAL CLOSURE COMPLETE. NO FURTHER EXECUTION POSSIBLE WITHOUT NEW ADMISSIBLE UNAUTHENTICATED DATA.**
+
+---
+
+## NEXT FOCUS CAMPAIGN (HEAVY WORK MANDATE) — 2026-10-31T00:30:31Z
+
+Future agents MUST perform heavy, evidence-producing work, not status checks:
+
+1. **Track C residual audit (heavy):** Re-run FCLR-003/006/007 evaluation pipelines from raw inputs end-to-end; recompute QLIKE CIs via block bootstrap (≥1000 resamples); publish `research_state/track_c_residual_audit.md` with per-block numbers and byte-identical repro hashes.
+2. **Track A deep source sweep (heavy):** Exhaustively crawl Binance data.vision directory listings for any 2024 liquidation archives; query OKX/Bybit/Deribit bulk endpoints; search HuggingFace/Zenodo/OSF with ≥20 query variants; document every probe URL + HTTP status in `research_state/track_a_deep_sweep.md`.
+3. **Track B separation audit (heavy):** Re-verify B vs C track separation across all artifacts; recompute Holm corrections; publish `research_state/track_b_separation_audit.md`.
+4. **Registry reconciliation (heavy):** Reconcile `hypothesis_registry.json`, `experiment_frontier.json`, `run_manifest.json` against git history; fail CI if any mismatch.
+5. **Sealed-holdout integrity (heavy):** Verify no holdout reuse via file hashes; append `research_state/sealed_holdout_integrity.md`.
+
+No agent may stop after a single test run. Each campaign item must produce a new durable artifact with evidence.
