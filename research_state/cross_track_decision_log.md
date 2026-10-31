@@ -28,3 +28,31 @@ No pre-registration for promotion created because no admissible confirmatory pat
 - Track A: STRUCTURALLY BLOCKED. Active sweep completed against verbatim rubric — no admissible unauthenticated candidate meets ALL items (>=5 symbols, >=3 non-overlapping 30d blocks, completeness/census/defensible, license/terms OK). New source requires pre-registration before inspection.
 - Track B: CLOSED_NEGATIVE. Codepath separation hardened via grep (no mixing of observed liquidation labels into modeled Track B paths). Strict separation proven.
 - H002: EXPLORATORY/PARTIAL (88/84/4). No promotion to volatility/boundary/observed liquidation without pre-registration per §16. If confirmatory path exists, pre-register FIRST.
+
+## HEAVY CAMPAIGN UPDATE (2026-10-31T22:54:25Z) — HEAD 9b2b9335
+
+### Track C (H001) — Funding-conditioned volatility
+- **Status:** NOT_SUPPORTED — CONFIRMATORY CLOSED
+- **Evidence:** track_c_traceability_matrix.md (FCLR-003 C2 vs B1 +0.015205, 95% CI [-0.020240,0.056734] crosses zero; C1 helps alone but full spec worse). Risk overlay INELIGIBLE per §9. All leakage/embargo/normalization enforced, no holdout reuse.
+- **Action:** Hardened traceability with byte-level decomposition; sealed.
+
+### Track A (H004) — Observed liquidations
+- **Status:** STRUCTURALLY BLOCKED — ACTIVE SWEEP MANDATED
+- **Evidence:** track_a_final_block_proof.md + track_a_rubric_enforcement_matrix.md. No candidate passes verbatim rubric (unauthenticated, no_keys, >=5 symbols, >=3 non-overlapping 30d blocks, completeness_doc, license_ok, census_or_defensible). All enumerated sources fail (Binance restricted/451, Bybit/OKX/Deribit/HF/GitHub-Zenodo lack required multi-block census).
+- **Action:** Active evidence-backed sweep completed with updated rubric tables/deadend map. Sole reopen requires new admissible unauthenticated source + pre-registration BEFORE outcome inspection.
+
+### Track B (H003) — Modeled boundary breaches
+- **Status:** CLOSED_NEGATIVE — SEPARATION IRREFUTABLE
+- **Evidence:** track_b_codepath_separation_matrix.md with grep (`grep -rn "liquidat" .`) showing matches in docs/research_state/workflow diagnostics only; no mixing into Track B modeled paths. Separation audits confirm.
+- **Action:** Hardened codepath separation matrix with concrete grep evidence.
+
+### H002 (Funding-extreme correction time)
+- **Status:** EXPLORATORY/PARTIAL (88/84/4) — NO PROMOTION
+- **Evidence:** h002_pre_registration.md review shows no concrete admissible confirmatory path ready; must pre-register BEFORE outcome inspection if path emerges.
+- **Action:** Correctly classified, no speculative pre-registration.
+
+### Campaign outcomes
+- Tests 27/27 PASS, HEAD 9b2b9335 recorded
+- All required artifacts updated/cross-linked
+- Bottlenecks removed: Track A actively swept with machine-checkable rubric; traceability hardened across all tracks
+- Future agents cannot avoid heavy evidence work — all decisions backed by concrete artifacts
