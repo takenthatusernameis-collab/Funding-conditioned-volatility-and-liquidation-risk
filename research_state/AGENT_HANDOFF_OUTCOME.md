@@ -60,3 +60,18 @@ PRIORITY: C → A → B
 
 ## NEXT ACTION (SINGLE HIGHEST-VALUE)
 Maintain hardened evidence. If a NEW admissible unauthenticated source for Track A appears, test against rubric IMMEDIATELY with full evidence and pre-register before outcome inspection. Otherwise, no confirmatory reopen feasible; continue heavy evidence synthesis only if new traceable artifacts emerge. Do not re-run sealed confirmatory experiments.
+
+## INTEGRITY CHECK (STEP 1) - 2026-10-31T12:02:00Z
+- HEAD: 5f3e224a (main). Working tree clean except untracked `scripts/__pycache__/`, `tests/__pycache__/`.
+- Tests: `python -m unittest discover -s tests -v` → **27/27 PASS**. OK.
+- Critical artifacts verified present: hypothesis_registry.json, experiment_frontier.json, track_c_final_synthesis_dossier.md, track_a_final_block_proof.md, track_a_deadend_map.md, track_b_separation_proof_hardened.md, track_b_definitive_separation_audit.md, cross_track_decision_log.md, cross_track_decision_firewall.md, handoff_hardening_audit.md, negative_results_report.md, next_data_discovery_plan.md, final_confirmatory_verdict.md, structural_closure_verdict_heavy.md. All cross-linked.
+
+## EVIDENCE SYNTHESIS COMPLETED (STEP 2) - 2026-10-31T12:02:00Z
+- Track C (H001): Hardened dossier with exact traceability (FCLR-003 ΔQLIKE +0.015205, CI crosses zero; decomposition; gates; verdict NOT_SUPPORTED). Risk overlay INELIGIBLE.
+- Track A (H004): Hardened block proof with verbatim rubric applied to all candidates; no passes. Sole reopen requires new admissible unauthenticated source per §16.
+- Track B (H003): Hardened separation proof with code-path trace; CLOSED_NEGATIVE, no conflation.
+
+## INTEGRATION/HARDENING & FINALIZE (STEP 3) - 2026-10-31T12:02:00Z
+- Updated: track_c_final_synthesis_dossier.md, track_a_final_block_proof.md, track_b_separation_proof_hardened.md, handoff_hardening_audit.md, cross_track_decision_log.md, AGENT_HANDOFF_OUTCOME.md.
+- Cross-linked artifacts; AGENT_HANDOFF.md remains single source of truth (already refreshed).
+- Final test: `python -m unittest discover -s tests -v` → **27/27 PASS**.

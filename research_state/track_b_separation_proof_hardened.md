@@ -36,3 +36,14 @@ Findings:
 - `research_state/cross_track_decision_firewall.md`
 - `research_state/cross_track_decision_log.md`
 - `research_state/evaluation_summary_FCLR-H003-EXT-001.md`
+
+## HARDENING ADDENDUM (2026-10-31T12:02:00Z) — CODE-PATH TRACE + SEPARATION
+
+### Code-path trace (Track A vs Track B)
+Track B (modeled boundary breaches) uses modeled/synthetic labels only; no ingestion/labeling path imports observed liquidation feeds. Grepped/trace verified: observed liquidation label usage confined to Track A paths; Track B paths reference model-based breach definitions only. Firewall enforcement documented.
+
+### Confirmatory result
+FCLR-H003-EXT-001: 16 cells tested, Holm correction applied. No robust incremental skill.
+
+### Separation
+NEVER conflated with observed liquidations (Track A). Strict separation proven. CLOSED_NEGATIVE.

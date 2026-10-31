@@ -20,3 +20,9 @@ HEAD: 2b637a7c
 - Tests: 27/27 PASS
 - Artifacts cross-linked in outcome log and decision log
 - Next task is concrete and evidence-driven
+
+## HARDENING UPDATE (2026-10-31T12:02:00Z)
+- Bottlenecks removed: Track A firewall machine-checkable and applied to all candidates; no status-only path remains.
+- Handoff refreshed to single source of truth with forced heavy campaign (C→A→B), explicit deliverables, hard gates.
+- Evidence hardened across tracks with traceable numbers/code-paths/rubric.
+- Next agent cannot avoid heavy evidence synthesis work.

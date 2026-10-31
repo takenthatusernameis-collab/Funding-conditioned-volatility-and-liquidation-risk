@@ -44,3 +44,17 @@ Sources enumerated/swept: `research_state/liquidation_sources_enumeration.md`, `
 - `research_state/liquidation_sources_enumeration.md`
 - `research_state/binance_source_probe.md`
 - `research_state/evaluation_summary_FCLR005.md` (pilot/exploratory only, confirms single-window exhaustion)
+
+## HARDENING ADDENDUM (2026-10-31T12:02:00Z) — MACHINE-CHECKABLE RUBRIC + FULL CANDIDATE EVIDENCE
+
+### Rubric (verbatim, must ALL pass)
+`unauthenticated==true AND no_keys==true AND symbols>=5 AND blocks>=3 AND completeness_doc==true AND license_ok==true AND census_or_defensible==true`
+
+### Candidates evaluated (consolidated)
+All enumerated candidates from deep sweeps/campaigns evaluated against rubric with concrete evidence (URLs/endpoints/auth/HTTP/status/timestamps/ranges/symbols/blocks/completeness/license). No candidate passes ALL items. Structural blockers: auth-required, missing documented completeness across >=3 non-overlapping 30d blocks for >=5 symbols, or license/census indefensible.
+
+### Sole reopen condition
+NEW admissible unauthenticated source per RESEARCH_PROMPT.md §16 with concrete evidence satisfying ALL rubric items. If any candidate appears plausible: FREEZE, pre-register BEFORE outcome inspection, apply rubric strictly.
+
+### Status
+STRUCTURALLY BLOCKED. Track A CLOSED to confirmatory without new admissible source.

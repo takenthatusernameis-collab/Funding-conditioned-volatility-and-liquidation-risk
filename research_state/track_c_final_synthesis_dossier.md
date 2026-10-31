@@ -51,3 +51,17 @@ Repo name "Funding-conditioned-volatility-and-liquidation-risk" prioritizes Trac
 - Evaluations: `research_state/evaluation_summary_FCLR002.md`, `research_state/evaluation_summary_FCLR003.md`, `research_state/evaluation_summary_FCLR006.md`, `evaluation_summary_FCLR007.md`
 - Manifests/audits: `research_state/run_manifest.json` (fclr003/fclr006/fclr007), `research_state/gate_assessment.md`, `research_state/final_confirmatory_verdict.md`, `research_state/final_inconclusive_report.md`, `research_state/track_c_consolidated_dossier.md`, `research_state/leakage_audit.md`
 - Tests: `python -m unittest discover -s tests -v` (21/21 PASS as of 2026-10-31T09:13:52Z)
+
+## HARDENING ADDENDUM (2026-10-31T12:02:00Z) — IRREFUTABLE TRACEABILITY
+
+### Exact traceability (numbers)
+- FCLR-003 primary contrast C2 vs B1: ΔQLIKE = +0.015205; 95% block-bootstrap CI [-0.020240, 0.056734] (blocks ~24h, 2000 reps). Paired n=10796 over 2024-10-02..2024-12-31 (3 non-overlapping 30d blocks). Instruments BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT. Decomposition B0=0.487674, B1=0.401884, C1=0.369366, C2=0.417089. C1 vs B1 -0.032518 [-0.045813,-0.020303] (+8.09%). Relative to B1: C2 -3.78% worse (worse). CI crosses zero.
+- FCLR-002 (underpowered): 2024-07-23..2024-09-30, 2 blocks, paired n=8274; C2 vs B1 -0.008788 [-0.097648, -0.008788] (excl zero but < 3 blocks) — NOT_MET gate.
+- FCLR-006: 2026-05-23..2026-08-06, 2 blocks, n=8987, C2 vs B1 +0.368588 [0.173748, 0.615614] worse.
+- FCLR-007: 2026-07-21..2026-07-31, 0 blocks, n=1195, C2 vs B1 +0.010258 [0.001308, 0.019737] worse.
+
+### Gate enforcement
+Pre-registered gates enforced: paired OOS, block bootstrap, >=3 non-overlapping 30d blocks, train-only normalization, >=7d embargo, leakage controls, multiplicity (Holm). FCLR-003 meets power but fails improvement (CI crosses zero on worse side). Others fail power/worse. No threshold shopping/holdout reuse.
+
+### Verdict (sealed)
+NOT_SUPPORTED. Risk overlay INELIGIBLE per RESEARCH_PROMPT §9. No valid reopen path without pre-registration + holdout discipline violations. Confirmatory CLOSED.
