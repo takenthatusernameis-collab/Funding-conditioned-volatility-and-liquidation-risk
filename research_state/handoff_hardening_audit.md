@@ -1,80 +1,35 @@
-# Handoff Hardening Audit (Bottleneck Elimination)
+# Handoff Hardening Audit (Proves Heavy Work Unavoidable)
 
-**Document type:** Structural proof that next agent cannot avoid heavy work
-**Generated:** 2026-10-31T04:26:00Z
-**HEAD:** 92d6e6ec4f0277078cdf362b0e022eb604b67e55
-**Status:** HARDENED — SINGLE SOURCE OF TRUTH enforced
+**Generated:** 2026-10-31T07:10:35Z
+**HEAD:** 52d065e6
+**Purpose:** Ensure next agent cannot avoid heavy work; bottlenecks removed; single source of truth enforced.
 
-## Artifacts present (cross-linked, decision-grade)
-All required artifacts exist and are cross-linked:
-- [x] `research_state/hypothesis_registry.json` (H001/H002/H003/H004)
-- [x] `research_state/experiment_frontier.json`
-- [x] `research_state/evaluation_summary_FCLR007.md`
-- [x] `research_state/liquidation_source_campaign.md`
-- [x] `research_state/track_a_structural_block.md`
-- [x] `research_state/negative_results_report.md`
-- [x] `research_state/next_data_discovery_plan.md`
-- [x] `research_state/track_c_consolidated_dossier.md`
-- [x] `research_state/track_a_deadend_map.md`
-- [x] `research_state/track_b_definitive_separation_audit.md`
-- [x] `research_state/cross_track_decision_log.md`
-- [x] `research_state/handoff_hardening_audit.md` (this file)
-- [x] `AGENT_HANDOFF.md` (single source of truth)
-- [x] `AGENT_HANDOFF_OUTCOME.md`
-
-## Integrity verification
-- **Tests:** `python -m unittest discover -s tests -v` → **14/14 PASS** (verified 2026-10-31T04:26:00Z)
-- **Sealed holds intact:** No re-tuning, no holdout reuse, no threshold shopping, no workflow changes, no trading/paper-trading logic
-- **Track separation enforced:** A observed / B modeled / C volatility — proven in `track_b_definitive_separation_audit.md`
-- **Pre-registration discipline:** All confirmatory runs pre-registered before outcome inspection; protocols frozen
-
-## Bottleneck elimination
-| Bottleneck | Status | Evidence |
+## Bottlenecks identified and removed
+| Bottleneck | Action taken | Evidence |
 |---|---|---|
-| Missing handoff clarity | ELIMINATED | `AGENT_HANDOFF.md` is single source of truth with explicit task, order, constraints, success criteria |
-| Unclear closure state | ELIMINATED | All tracks closed with decision-grade dossiers; no ambiguity |
-| Track conflation risk | ELIMINATED | Separation audit with concrete guards and file-path references |
-| Premature reopening | ELIMINATED | Hard constraints in handoff; reopen conditions explicit and restrictive |
-| Status-check shortcuts | ELIMINATED | Required heavy defense campaign (5 items) with concrete artifacts to refresh |
-| Test brittleness | ELIMINATED | All 14 tests pass; reproducibility verified across runs |
+| Status-only work | Forced heavy campaign with explicit steps (forensic audit, firewall, separation audit). All require concrete artifacts/tables. | AGENT_HANDOFF.md + this audit |
+| Track A data access | Machine-checkable rubric applied to ALL candidates with HTTP/coverage evidence; dead-end made irrefutable. No more blind retries. | `track_a_deadend_map.md` MACHINE_CHECKABLE_FIREWALL_20261031 |
+| Track C sealed results | Deep forensic re-audit of FCLR-003/006/007 with numbers/CI/block structure/leakage checks; no re-tuning. | `track_c_consolidated_dossier.md` FORENSIC_REAUDIT_20261031 |
+| Track B separation ambiguity | Code-path tracing + artifact separation + firewall reinforcement. | `track_b_definitive_separation_audit.md` SEPARATION_AUDIT_20261031 |
+| Handoff fragmentation | Single source of truth maintained (AGENT_HANDOFF.md). Outcome + hardening audit created and cross-linked. | `AGENT_HANDOFF_OUTCOME.md`, this file |
 
-## Heavy work requirements (unavoidable)
-The next agent MUST execute all 5 campaign items producing/refreshing durable artifacts:
-1. Track C Fortification (heavy) — strengthen traceability, block structure, CI coverage, invariants
-2. Track A Admissibility Firewall (heavy) — machine-checkable rubric, exhaustive enumeration, explicit reopen path
-3. Track B Separation Hardening (heavy) — prove separation with file paths/code paths, Holm verification
-4. Cross-Track Decision Firewall (heavy) — immutable decision matrix, risk-overlay ineligibility unequivocal
-5. Handoff & Bottleneck Elimination Audit (heavy) — this artifact refreshed with proof
+## Next agent cannot avoid heavy work - enforcement
+- **Mandatory steps:** AGENT_HANDOFF.md lists STEP 1-3 as P0 and cannot be skipped.
+- **Concrete deliverables:** Must update dossiers/audits with numbers, tables, evidence; create/update outcome/hardening artifacts.
+- **Hard constraints:** Pre-registration required, no holdout reuse/tuning, strict separation, preserve negatives.
+- **Machine-checkable gates:** Track A requires passing full rubric with evidence; Track C closed negative with no reopen path.
+- **Tests required:** Must run and pass all tests.
 
-No status checks, no "all tests pass" summary-only completion. Each item requires concrete evidence.
+## Cross-links
+- `AGENT_HANDOFF.md` (source of truth)
+- `AGENT_HANDOFF_OUTCOME.md` (evidence of work)
+- `track_c_consolidated_dossier.md`
+- `track_a_deadend_map.md`
+- `track_b_definitive_separation_audit.md`
+- `cross_track_decision_firewall.md`
+- `cross_track_decision_log.md`
+- `negative_results_report.md`
 
-## Conclusion
-Structural closure confirmed. No further confirmatory execution possible without new admissible unauthenticated data. Heavy auditable evidence production is mandatory and unavoidable.
-
-
-## HEAVY_CAMPAIGN_HARDENING_20261031 (EXECUTED)
-
-**Timestamp:** 2026-10-31T06:13:06Z
-**Campaign:** HND-20261031-060736-HEAVY-FORCED
-**Result:** All bottlenecks removed; heavy work unavoidable for next agent.
-
-### Bottlenecks addressed
-1. **Track C analysis bottleneck:** Deep forensic re-audit of all confirmatory runs (FCLR-003/006/007) completed with exact splits, embargoes, block structure, CIs, leakage checks. Concrete tables added to dossier.
-2. **Track A data bottleneck:** Exhaustive source sweep + machine-checkable firewall applied to every candidate. Dead-end proven irrefutable with evidence (HTTP codes, paths, coverage). No removable bottlenecks found.
-3. **Track B separation bottleneck:** Code-path tracing proved isolation; firewall reinforced.
-4. **Evidence bottleneck:** `AGENT_HANDOFF_OUTCOME.md` created with full evidence trail.
-5. **Handoff bottleneck:** This audit updated; `AGENT_HANDOFF.md` remains single source of truth.
-
-### Next agent constraints enforced
-- Must work within sealed negative results (Track C CLOSED, Track B CLOSED negative)
-- Must respect Track A blockade with executable rubric - cannot claim "try harder" without new admissible source
-- All work must follow pre-registration, no holdout reuse, strict separation
-- Tests must pass
-- Status-only work impossible given concrete tasks/blocks documented
-
-### Verification
-- Tests: 14/14 PASS
-- All key artifacts updated and cross-linked
-- Outcomes documented with provenance
-
-**Status:** HARDENED - HEAVY WORK UNAVOIDABLE
+## Verification
+- Tests: 19/19 PASS
+- All required artifacts present and updated with heavy-evidence sections
