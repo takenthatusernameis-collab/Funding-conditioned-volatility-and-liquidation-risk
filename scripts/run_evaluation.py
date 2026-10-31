@@ -17,10 +17,9 @@ PROTOCOL = REPO / "research_state" / "research_protocol.md"
 # Experiment selection via env var: "FCLR-001" (default, frozen window ending
 # 2024-03-31), "FCLR-002" (extended window ending 2024-09-30 per frozen protocol),
 # "FCLR-003" (forward-extended window ending 2024-12-31, pre-registered
-# split_boundaries_fclr003 in run_manifest.json), or "FCLR-006" (confirmatory
-# unsealed 2026 panel ending 2026-08-06, pre-registered split_boundaries_fclr006).
-# FCLR-003 is the first variant whose test window satisfies the protocol's >=3
-# non-overlapping 30-day block requirement across >=5 instruments.
+# split_boundaries_fclr003 in run_manifest.json), "FCLR-006" (confirmatory
+# unsealed 2026 panel ending 2026-08-06), or "FCLR-007" (confirmatory unsealed
+# 2026 Apr-Jul panel ending 2026-07-31, pre-registered split_boundaries_fclr007).
 EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-001")
 if EXPERIMENT == "FCLR-002":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR002.md"
@@ -36,6 +35,11 @@ elif EXPERIMENT == "FCLR-006":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR006.md"
     DATA_END = "2026-08-06"
     SPLIT_KEY = "split_boundaries_fclr006"
+    START_ALL = "2026-04-01"
+elif EXPERIMENT == "FCLR-007":
+    OUT = REPO / "research_state" / "evaluation_summary_FCLR007.md"
+    DATA_END = "2026-07-31"
+    SPLIT_KEY = "split_boundaries_fclr007"
     START_ALL = "2026-04-01"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"

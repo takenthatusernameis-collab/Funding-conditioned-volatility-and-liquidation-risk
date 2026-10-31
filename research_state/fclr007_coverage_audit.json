@@ -1,5 +1,5 @@
 {
- "panel": "2025-01-01..2026-03-31",
+ "panel": "2026-04-01..2026-07-31",
  "symbols": [
   "BTCUSDT",
   "ETHUSDT",
@@ -7,60 +7,92 @@
   "SOLUSDT",
   "XRPUSDT"
  ],
+ "audit_timestamp": "2026-10-30T23:59:19Z",
  "per_symbol": {
   "BTCUSDT": {
-   "n_rows": 10920,
-   "first": "2025-01-01T00:00:00+00:00",
-   "last": "2026-03-31T23:00:00+00:00"
+   "n_rows": 2928,
+   "first": "2026-04-01T00:00:00+00:00",
+   "last": "2026-07-31T23:00:00+00:00"
   },
   "ETHUSDT": {
-   "n_rows": 10920,
-   "first": "2025-01-01T00:00:00+00:00",
-   "last": "2026-03-31T23:00:00+00:00"
+   "n_rows": 2928,
+   "first": "2026-04-01T00:00:00+00:00",
+   "last": "2026-07-31T23:00:00+00:00"
   },
   "BNBUSDT": {
-   "n_rows": 10920,
-   "first": "2025-01-01T00:00:00+00:00",
-   "last": "2026-03-31T23:00:00+00:00"
+   "n_rows": 2928,
+   "first": "2026-04-01T00:00:00+00:00",
+   "last": "2026-07-31T23:00:00+00:00"
   },
   "SOLUSDT": {
-   "n_rows": 10920,
-   "first": "2025-01-01T00:00:00+00:00",
-   "last": "2026-03-31T23:00:00+00:00"
+   "n_rows": 2928,
+   "first": "2026-04-01T00:00:00+00:00",
+   "last": "2026-07-31T23:00:00+00:00"
   },
   "XRPUSDT": {
-   "n_rows": 10920,
-   "first": "2025-01-01T00:00:00+00:00",
-   "last": "2026-03-31T23:00:00+00:00"
+   "n_rows": 2928,
+   "first": "2026-04-01T00:00:00+00:00",
+   "last": "2026-07-31T23:00:00+00:00"
+  }
+ },
+ "funding": {
+  "BTCUSDT": {
+   "n_rows": 366,
+   "missing_months": []
+  },
+  "ETHUSDT": {
+   "n_rows": 366,
+   "missing_months": []
+  },
+  "BNBUSDT": {
+   "n_rows": 366,
+   "missing_months": []
+  },
+  "SOLUSDT": {
+   "n_rows": 366,
+   "missing_months": []
+  },
+  "XRPUSDT": {
+   "n_rows": 366,
+   "missing_months": []
   }
  },
  "common": {
-  "n": 10920,
-  "first": "2025-01-01T00:00:00+00:00",
-  "last": "2026-03-31T23:00:00+00:00"
+  "n": 2928,
+  "first": "2026-04-01T00:00:00+00:00",
+  "last": "2026-07-31T23:00:00+00:00",
+  "estimated_common_utc_hours": 2928
  },
  "common_gaps": 0,
+ "gap_pairs": [],
  "missing_mark_days": {},
- "funding": {
-  "BTCUSDT": {
-   "n_rows": 1365,
-   "missing_months": []
+ "proposed_splits": {
+  "rule": "chronological 60/20/20 by unique UTC timestamps across the common 5-symbol panel; 7-day purge/embargo at all split boundaries; no target interval overlaps train/val/test folds",
+  "train": {
+   "start": "2026-04-01T00:00:00Z",
+   "end": "2026-06-12T23:00:00Z",
+   "days": 73
   },
-  "ETHUSDT": {
-   "n_rows": 1365,
-   "missing_months": []
+  "embargo_1": {
+   "start": "2026-06-13T00:00:00Z",
+   "end": "2026-06-19T23:00:00Z",
+   "days": 7
   },
-  "BNBUSDT": {
-   "n_rows": 1365,
-   "missing_months": []
+  "validation": {
+   "start": "2026-06-20T00:00:00Z",
+   "end": "2026-07-13T23:00:00Z",
+   "days": 24
   },
-  "SOLUSDT": {
-   "n_rows": 1365,
-   "missing_months": []
+  "embargo_2": {
+   "start": "2026-07-14T00:00:00Z",
+   "end": "2026-07-20T23:00:00Z",
+   "days": 7
   },
-  "XRPUSDT": {
-   "n_rows": 1365,
-   "missing_months": []
-  }
+  "test": {
+   "start": "2026-07-21T00:00:00Z",
+   "end": "2026-07-31T23:00:00Z",
+   "days": 11
+  },
+  "block_requirement": "test window 2026-07-21..2026-07-31 = 11 days = 0 non-overlapping 30-day blocks; required >=3 -> NOT_MET on this split; do not relax thresholds after outcomes (see FCLR-006 precedent: shortfall documented, experiment still run confirmatory on unsealed data)"
  }
 }
