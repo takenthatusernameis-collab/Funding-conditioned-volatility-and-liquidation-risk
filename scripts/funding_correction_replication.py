@@ -21,9 +21,6 @@ from datetime import datetime, timezone
 
 REPO = Path(__file__).resolve().parents[1]
 DATA_CACHE = REPO / "research_state" / "data_cache"
-# Repo-root archive layout used for Jan-Mar 2024 mark prices (never extracted to
-# data_cache; present on disk as markPriceKlines-1h-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv).
-MARK_PRICE_ROOT = REPO
 
 DEFAULT_SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 WINDOW_DAYS = 90
@@ -146,43 +143,45 @@ def time_to_correction(funding_series, event_ts, event_side, threshold_low,
 def load_mark_prices(symbol, year_months):
     """Load cached hourly mark-price closes for a symbol. Returns dict ts_ms->price.
 
-    Reads two layouts and merges (later timestamps win on duplicates):
-      1. research_state/data_cache/{symbol}_{YYYY_MM}/{symbol}-markPriceKlines-1h/*.csv
-      2. repo-root archive: markPriceKlines-1h-YYYY-MM-DD/{symbol}-1h-YYYY-MM-DD.csv
-    Row schema: open_time,open,high,low,close,volume,close_time,... (close = c).
+    Reads the canonical nested cache layout written by scripts/h004_download_2026.py
+    and scripts/h002_download_2024_q1.py:
+
+        research_state/data_cache/{symbol}_{YYYY_MM}/markPriceKlines-YYYY-MM-DD/
+            {symbol}-1h-YYYY-MM-DD.csv
+
+    Only directories whose name contains 'markPrice' are read. The repo-root
+    markPriceKlines-1h-* directories are NOT used: they contain OHLCV klines
+    (verified identical to online klines, not markPriceKlines), and reading them
+    silently substituted spot closes for mark prices. See
+    research_state/h002_replication_report.md traceability note.
+    Row schema: open_time,open,high,low,close,volume,close_time,quote_volume,count,
+    taker_buy_volume,taker_buy_quote_volume,ignore (close = c).
     """
     prices = {}
-    roots = [DATA_CACHE, MARK_PRICE_ROOT]
-    for root in roots:
-        for month in year_months:
-            month_key = month.replace("-", "_")
-            if root == DATA_CACHE:
-                d = root / f"{symbol}_{month_key}"
-                pattern_dirs = [d] if d.exists() else []
-                glob_pat = "*.csv"
-            else:
-                yyyy = month_key[:4]
-                mm = month_key[5:7]
-                pattern_dirs = sorted(root.glob(f"markPriceKlines-1h-{yyyy}-{mm}-*"))
-                glob_pat = f"{symbol}-1h-*.csv"
-            for day_dir in pattern_dirs:
-                if not day_dir.is_dir():
-                    continue
-                for csv_file in sorted(day_dir.glob(glob_pat)):
-                    try:
-                        with open(csv_file) as f:
-                            reader = csv.DictReader(f)
-                            for r in reader:
-                                try:
-                                    ts = int(r.get("open_time", r.get("t", "")))
-                                    c = r.get("close", r.get("c", ""))
-                                    if ts == 0 or c == "":
-                                        continue
-                                    prices[ts] = float(c)
-                                except Exception:
-                                    continue
-                    except Exception:
-                        continue
+    for month in year_months:
+        month_key = month.replace("-", "_")
+        month_dir = DATA_CACHE / f"{symbol}_{month_key}"
+        if not month_dir.is_dir():
+            continue
+        # recurse: markPriceKlines-YYYY-MM-DD/{symbol}-1h-YYYY-MM-DD.csv
+        for csv_file in sorted(month_dir.rglob(f"{symbol}-1h-*.csv")):
+            sp = str(csv_file)
+            if "markPrice" not in sp:
+                continue
+            try:
+                with open(csv_file) as f:
+                    reader = csv.DictReader(f)
+                    for r in reader:
+                        try:
+                            ts = int(r.get("open_time", r.get("t", "")))
+                            c = r.get("close", r.get("c", ""))
+                            if ts == 0 or c == "":
+                                continue
+                            prices[ts] = float(c)
+                        except Exception:
+                            continue
+            except Exception:
+                continue
     return prices
 
 

@@ -93,6 +93,32 @@ class TestFundingCorrectionReplication(unittest.TestCase):
         prices = load_mark_prices("DOGEUSDT", ["2024-01"])
         self.assertEqual(prices, {})
 
+    def test_load_mark_prices_uses_markprice_not_ohlcv(self):
+        # Regression: the repo-root markPriceKlines-1h-* directories actually
+        # contain OHLCV klines (identical to klines-1h-*), NOT mark prices.
+        # Reading them silently substituted spot closes for mark prices and
+        # produced bogus RV regimes. The loader must read only files whose
+        # path contains 'markPrice' under research_state/data_cache.
+        prices = load_mark_prices("BTCUSDT", ["2024-01"])
+        # 2024-01-02T00:00:00Z mark-price close is ~45152.58 (markPriceKlines),
+        # while the OHLCV open is 44230.30. A loader that fell back to the
+        # mislabeled repo-root dirs would return the OHLCV open here.
+        self.assertIn(1704153600000, prices)
+        self.assertAlmostEqual(prices[1704153600000], 45152.58329433, places=2)
+
+    def test_rv_regime_computable_for_btcusdt(self):
+        # Regression: before the 2024-01..03 mark-price download, every event
+        # had rv_regime == "missing" and the RV-regime hazard contrast was
+        # uncomputable (h002_replication_report.md §4). With mark prices cached,
+        # BTCUSDT funding extremes must resolve into low/middle/high regimes.
+        res = replicate_funding_correction(symbols=["BTCUSDT"])
+        regimes = res["hazard_by_rv_regime"]
+        present = {rg for rg in regimes if regimes[rg]["n"] > 0}
+        self.assertIn("low", present)
+        self.assertIn("high", present)
+        total = sum(regimes[rg]["n"] for rg in regimes)
+        self.assertEqual(total, res["total_events"])
+
     def test_pipeline_runs_btcusdt(self):
         res = replicate_funding_correction(symbols=["BTCUSDT"])
         self.assertEqual(res["status"], "partial")
