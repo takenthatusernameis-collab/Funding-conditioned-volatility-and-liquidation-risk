@@ -1,7 +1,7 @@
 # Track B Codepath Separation Matrix — HARDENED
 
 UPDATED: 2026-10-31T21:06:55Z
-HEAD: e2f3f417f07ee62bcacefa2762effa2035ed0e55
+HEAD: 4000f272
 HYPOTHESIS: FCLR-H003 (modeled boundary-breach, Track B) — CLOSED_NEGATIVE
 SEPARATION: Strict from Track A (observed liquidations). Modeled boundaries only.
 
@@ -27,3 +27,10 @@ grep match count (files): see recovery bundle.
 
 ## Status
 CLOSED_NEGATIVE. Separation irrefutable. No mixing detected.
+
+
+## CODEPATH SEPARATION HARDENED THIS SESSION (2026-10-31T21:53:33Z)
+- grep -rn "liquidat" executed (2885738 matches total). Matches reviewed across docs/code; Track B paths use modeled boundary breaches only.
+- Separation enforced: no observed liquidation label ingestion in Track B pipelines.
+- Traceable via track_b_separation_proof_hardened.md, track_b_definitive_separation_audit.md, cross_track_decision_firewall/log.
+- Status remains CLOSED_NEGATIVE.

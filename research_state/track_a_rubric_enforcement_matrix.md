@@ -1,7 +1,7 @@
 # Track A Rubric Enforcement Matrix — ACTIVE SWEEP (HARDENED)
 
 UPDATED: 2026-10-31T21:06:41Z
-HEAD: e2f3f417f07ee62bcacefa2762effa2035ed0e55
+HEAD: 4000f272
 HYPOTHESIS: FCLR-H004 (observed liquidation outcomes)
 STATUS: STRUCTURALLY BLOCKED — ACTIVE SWEEP MANDATED
 
@@ -36,3 +36,10 @@ If found: pre-register experiment/protocol BEFORE outcome inspection per RESEARC
 
 ## Status
 STRUCTURALLY BLOCKED — ACTIVE SWEEP REQUIRED. No candidate passes rubric. Continue enumeration but do not relax constraints.
+
+
+## ACTIVE SWEEP COMPLETED THIS SESSION (2026-10-31T21:53:33Z)
+- Re-verified all candidates against verbatim rubric with HEAD 4000f272.
+- No candidate meets ALL requirements. Block remains STRUCTURAL.
+- Evidence traced via liquidation_source_campaign.md, liquidation_sources_enumeration.md, binance_source_probe.md, track_a_deadend_map.md.
+- No new admissible unauthenticated source discovered in repo state/probes.

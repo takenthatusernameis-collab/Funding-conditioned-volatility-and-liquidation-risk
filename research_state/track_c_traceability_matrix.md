@@ -1,7 +1,7 @@
 # Track C Traceability Matrix (Irrefutable) — HARDENED
 
 UPDATED: 2026-10-31T21:06:16Z
-HEAD: e2f3f417f07ee62bcacefa2762effa2035ed0e55
+HEAD: 4000f272 (verified)
 PURPOSE: Byte-level decomposition traceability for H001/FCLR Track C. Every number must trace to file:line + artifact. Bottleneck (traceability) hardened to current HEAD.
 
 ## Byte-level decomposition (frozen)

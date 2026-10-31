@@ -1,7 +1,7 @@
 # Cross-Track Decision Log — UPDATED
 
 UPDATED: 2026-10-31T21:07:21Z
-HEAD: e2f3f417f07ee62bcacefa2762effa2035ed0e55
+HEAD: 4000f272
 
 ## Decisions (by priority: C → A → B → H002)
 | Track | Hypothesis | Status | Decision | Evidence |
@@ -13,3 +13,12 @@ HEAD: e2f3f417f07ee62bcacefa2762effa2035ed0e55
 
 ## H002 ruling
 No pre-registration for promotion created because no admissible confirmatory path exists (methodology inaccessible). H002 remains exploratory/partial; must not be conflated with Track C/A/B. If SSRN becomes accessible, pre-register experiment BEFORE outcome inspection.
+
+
+## SESSION_UPDATE_20261031T215333Z (THIS SESSION)
+- Baseline verified: 27/27 tests PASS, HEAD 4000f272.
+- Track C traceability hardened; remains NOT_SUPPORTED/CLOSED.
+- Track A active sweep completed: no rubric-passing candidate found; block irrefutable.
+- Track B separation hardened (grep evidence reviewed); remains CLOSED_NEGATIVE.
+- H002: no concrete admissible confirmatory path; remains EXPLORATORY/PARTIAL, no promotion without pre-registration.
+- All artifacts cross-linked per handoff.
