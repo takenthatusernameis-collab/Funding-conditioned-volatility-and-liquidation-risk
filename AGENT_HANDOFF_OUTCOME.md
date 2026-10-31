@@ -179,3 +179,13 @@ Execute `HND-20261031-141600-FORCED_HEAVY_EVIDENCE_SYNTHESIS` verbatim from `AGE
 **State:** Confirmatory program closed on all panels. Track A structurally blocked (no admissible unauthenticated source passes rubric). Track C/Track B closed/negative with hard proof. H002 exploratory only.
 **Tests:** Verified 27/27 PASS at refresh; must remain green at start/end.
 **Artifacts:** `AGENT_HANDOFF.md` updated to V14; `AGENT_HANDOFF_OUTCOME.md` appended. All critical traceability matrices present and cross-linked as single source of truth.
+
+## REFRESH (2026-10-31T18:51:31Z)
+**Task ID:** HND-20261031-185131-FORCED_HEAVY_EVIDENCE_SYNTHESIS-V16
+**HEAD:** ef70860f (main). Working tree clean except untracked `__pycache__/`.
+**Action:** Refreshed `AGENT_HANDOFF.md` as SINGLE DURABLE HANDOFF with new timestamped initial task message (V16).
+**Priority:** Track C → Track A → Track B → H002 (by repo name: funding-conditioned volatility first).
+**Mode:** FORCED_HEAVY_EVIDENCE_SYNTHESIS — status-only work FORBIDDEN; every action must produce concrete artifacts with provenance (file paths, line ranges, hashes/manifests, timestamps, HEAD).
+**Bottlenecks addressed:** Resolved head-staleness bottleneck — internal HEAD reference corrected from stale `3d413b10` to actual HEAD `ef70860f` (two intervening checkpoint commits touched only handoff docs; `research_state` unchanged). Prior AGENT_HANDOFF_OUTCOME.md/handoff_hardening_audit.md stale HEAD refs 12b0bb93/2f1a8342 superseded by this handoff. Heavy evidence work made unavoidable — no status-only path for the next agent.
+**Tests:** Verified 27/27 PASS (`python -m unittest discover -s tests -v` → OK).
+**State:** Confirmatory program closed on all panels. Track A structurally blocked (no admissible unauthenticated source passes rubric). Track C/Track B closed/negative with hard proof. H002 exploratory only (pre-registration REQUIRED before outcome inspection per RESEARCH_PROMPT §16).
