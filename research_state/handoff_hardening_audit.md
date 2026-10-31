@@ -84,3 +84,10 @@
 - Tests: 21/21 PASS
 - All new artifacts cross-linked
 - Handoff remains single source of truth (AGENT_HANDOFF.md updated via outcome)
+
+## HARDENING UPDATE 2026-10-31T10:11:30Z (FORCED HEAVY SYNTHESIS)
+- Updated AGENT_HANDOFF.md to fresh timestamp HEAD 4c882a4f with HND-20261031-101130 task
+- Created `research_state/track_a_final_block_proof.md` with machine-checkable rubric applied to ALL candidates; proves irrefutable block
+- Created `research_state/track_b_separation_proof_hardened.md` with explicit code-path trace and firewall enforcement
+- Confirmed tests 21/21 PASS
+- Bottlenecks removed/hardened: single source of truth enforced, priority by repo name explicit, heavy deliverables mandatory, no status-only path possible
