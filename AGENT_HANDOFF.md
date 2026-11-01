@@ -1,8 +1,8 @@
 # AGENT_HANDOFF.md (DURABLE - PROGRAM CLOSED OUT)
-**TIMESTAMP (UTC):** 2026-11-01T00:40:30Z
+**TIMESTAMP (UTC):** 2026-11-01T00:42:41Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 22aa9815 (clean working tree)
-**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261031T234609Z
+**BRANCH/HEAD:** main @ d142f650 (clean working tree)
+**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261101T004241Z
 **PRIORITY:** NONE - confirmatory research program closed out as negative; no remaining heavy work.
 
 ## 1) WHAT CHANGED & WHY
@@ -76,7 +76,7 @@ grep -n "frozen_before_outcomes" research_state/run_manifest.json
 - **Demonstrating progress:** `research_state/final_confirmatory_verdict.md` + `python -m unittest discover -s tests -v` (27/27 PASS)
 
 ## SESSION LOG
-**2026-10-31T23:46:09Z - HANDOFF REWRITTEN (CLOSEOUT, CLEAR INITIAL TASK)**
-- Replaced stale T001 task with explicit verification-only next task
-- Removed all bottlenecks (ingestion complete, no re-tuning)
-- Made unambiguous: program closed negative, no heavy work, only new admissible data can reopen
+**2026-11-01T00:42:41Z - HANDOFF REFRESHED (CLOSEOUT, CLEAR INITIAL TASK)**
+- Re-verified baseline: 27/27 PASS at HEAD d142f650
+- Refreshed timestamp/HEAD to current checkpoint; working tree clean (only __pycache__)
+- No bottlenecks; program closed negative; no heavy work scheduled
