@@ -810,7 +810,7 @@ def main():
     lines.append(f'# Evaluation Summary ({EXPERIMENT})')
     lines.append('')
     lines.append(f'Experiment: {EXPERIMENT}')
-    lines.append(f'Data range: 2024-01-01 .. {DATA_END}')
+    lines.append(f'Data range: {START_ALL} .. {DATA_END}')
     lines.append(f'Generated: {datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}')
     lines.append('')
     lines.append('## Splits (frozen)')
