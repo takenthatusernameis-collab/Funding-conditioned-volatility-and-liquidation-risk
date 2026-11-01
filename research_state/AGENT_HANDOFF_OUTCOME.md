@@ -1,8 +1,8 @@
 # AGENT HANDOFF OUTCOME — SINGLE DURABLE HANDOFF (source of truth)
 
-Generated: 2026-11-01T18:32:42Z
-**Task ID:** HND-20261101-183050-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V27
-**HEAD:** e6ef6bfe (main), up to date with origin/main
+Generated: 2026-11-01T19:13:34Z
+**Task ID:** HND-20261101-191334-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V28
+**HEAD:** a0135068 (main), up to date with origin/main
 **Repo:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority order (repo name: funding-conditioned volatility → liquidation risk):** Track C → Track A → Track B → H002
 **Mode:** FORCED_HEAVY_EVIDENCE_CAMPAIGN — status-only work forbidden
@@ -20,7 +20,7 @@ Generated: 2026-11-01T18:32:42Z
 | B | FCLR-H003 modeled boundary breaches | CLOSED_NEGATIVE | Codepath separation irrefutable (grep evidence); no incremental skill after Holm (FCLR-H003-EXT-001). |
 | H002 | funding-extreme correction time | EXPLORATORY/PARTIAL (88/84/4) — PERMANENT BOTTLENECK | SSRN HTTP 403 blocks full methodology; cannot reconstruct event definition/censoring/regime split from admissible sources. No promotion, no speculative pre-registration. Revisit only if SSRN becomes accessible, with pre-registration BEFORE outcome inspection. |
 
-## NEXT SESSION — INITIAL TASK (timestamped 2026-11-01T18:32:42Z)
+## NEXT SESSION — INITIAL TASK (timestamped 2026-11-01T19:13:34Z)
 Run in order; do not skip to later items before earlier acceptance is recorded.
 
 1. **Re-verify baseline:** `python -m unittest discover -s tests -v` → 27/27 PASS at HEAD aad0450b; record result here.
@@ -52,5 +52,5 @@ Run in order; do not skip to later items before earlier acceptance is recorded.
 
 ## Verification
 - Tests: 27/27 PASS (just re-verified)
-- HEAD: f2bf578b (main)
+- HEAD: a0135068 (main)
 - Priority enforced by repo name; status-only work forbidden.
