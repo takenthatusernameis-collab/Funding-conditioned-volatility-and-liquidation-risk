@@ -48,7 +48,10 @@ def _indexed_rglob(pattern: str) -> list[Path]:
 # "FCLR-003" (forward-extended window ending 2024-12-31, pre-registered
 # split_boundaries_fclr003 in run_manifest.json), "FCLR-006" (confirmatory
 # unsealed 2026 panel ending 2026-08-06), or "FCLR-007" (confirmatory unsealed
-# 2026 Apr-Jul panel ending 2026-07-31, pre-registered split_boundaries_fclr007).
+# 2026 Apr-Jul panel ending 2026-07-31, pre-registered split_boundaries_fclr007),
+# "FCLR-008" (confirmatory unsealed 2026-01-01..2026-08-06), or "FCLR-009"
+# (confirmatory unsealed 2025-01-01..2025-12-31, pre-registered
+# split_boundaries_fclr009).
 EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-001")
 if EXPERIMENT == "FCLR-002":
     OUT = REPO / "research_state" / "evaluation_summary_FCLR002.md"
@@ -75,6 +78,11 @@ elif EXPERIMENT == "FCLR-008":
     DATA_END = "2026-08-06"
     SPLIT_KEY = "split_boundaries_fclr008"
     START_ALL = "2026-01-01"
+elif EXPERIMENT == "FCLR-009":
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
+    DATA_END = "2025-12-31"
+    SPLIT_KEY = "split_boundaries_fclr009"
+    START_ALL = "2025-01-01"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
@@ -184,14 +192,15 @@ def load_mark_series(sym, start_dt, end_dt):
         dedup.append((ts_ms, close))
     return dedup
 
-def funding_months(end_ym: str) -> list[str]:
-    """All YYYY-MM months from 2024-01 through end_ym inclusive.
+def funding_months(end_ym: str, start_ym: str = "2024-01") -> list[str]:
+    """All YYYY-MM months from start_ym through end_ym inclusive.
 
-    end_ym may be a YYYY-MM or a YYYY-MM-DD string.
+    end_ym/start_ym may be a YYYY-MM or a YYYY-MM-DD string.
     """
     y, m = end_ym[:7].split("-")
+    sy, sm = start_ym[:7].split("-")
     out = []
-    cur_y, cur_m = 2024, 1
+    cur_y, cur_m = int(sy), int(sm)
     while (cur_y, cur_m) < (int(y), int(m)):
         out.append(f"{cur_y}-{cur_m:02d}")
         cur_m += 1
@@ -333,7 +342,7 @@ def build_panel():
     # load all mark series for all symbols (wide range)
     start_all = parse_iso(f"{START_ALL}T00:00:00Z")
     end_all = parse_iso(f"{DATA_END}T23:00:00Z")
-    months = funding_months(DATA_END)
+    months = funding_months(DATA_END, START_ALL[:7])
 
     data = {}
     for sym in SYMBOLS:
