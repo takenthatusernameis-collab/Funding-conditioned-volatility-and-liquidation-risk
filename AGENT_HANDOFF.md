@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T20:27:00Z
+**TIMESTAMP (UTC):** 2026-11-01T21:14:17Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Volatility/liquidation + funding-conditioned research program **TERMINAL (ARCHIVED)**. All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, or cross-track merge. Only immutable verification/archival inspection remains.
 **BRANCH/HEAD:** main @ 25d66913 (checkpoint)
-**HANDOFF ID:** FCLR-HANDOFF-057-20261101T202700Z
-**SUPERSEDES:** FCLR-HANDOFF-056-20261101T202301Z
+**HANDOFF ID:** FCLR-HANDOFF-058-20261101T211417Z
+**SUPERSEDES:** FCLR-HANDOFF-057-20261101T202700Z
 
 **STATUS:** Tests 27/27 PASS. All sealed artifacts present and verified. Tree clean (only this AGENT_HANDOFF.md). PROJECT TERMINAL — ARCHIVED.
 
