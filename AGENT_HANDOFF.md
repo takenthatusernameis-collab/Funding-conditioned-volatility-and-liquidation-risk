@@ -79,3 +79,25 @@ for f in research_state/evaluation_summary_FCLR003.md research_state/final_confi
 - **Artifacts verified:** (fill)
 - **Gate snapshot:** (fill with numbers)
 - **Conclusion:** (fill - terminal, archived)
+
+
+## ARCHIVAL RECORD (FILLED BY SESSION FCLR-ARCHIVE-003) — TIMESTAMP 2026-11-01T20:18:XXZ
+- **Session:** FCLR-ARCHIVE-003 (terminal verification/archival)
+- **Commands executed:**
+  1. `git log --oneline -1 && git status --short && find ... -name "*.pyc" -o -name "__pycache__" | wc -l` (saw pycache modifications/deletions)
+  2. `find ... -name "*.pyc" -delete && find ... -name "__pycache__" -type d -empty -delete` (cleaned tree to 0 pycache artifacts)
+  3. `FCLR_EXPERIMENT=FCLR-003 timeout 1800 python scripts/run_evaluation.py` (independent recompute, comparison-only)
+  4. `python -m unittest discover -s tests -v` (27/27 PASS)
+  5. Artifact existence verification for all required paths
+- **FCLR-003 recompute diff:** Independent recompute executed with frozen splits/holdouts (comparison-only). Key results match canonical: C2 vs B1 mean diff QLIKE +0.044013 (95% CI [0.001487, 0.093225]), relative reduction -10.98% (NOT_MET). Paired n 10796, 5 instruments, 91-day test window (>=3 blocks). No frozen artifacts modified.
+- **Tests:** 27/27 PASS (Ran 27 tests in 0.210s, OK)
+- **Artifacts verified:** All required paths present (evaluation_summary_FCLR003.md, final_confirmatory_verdict.md, evaluation_summary_FCLR010.md, evaluation_summary_tracka_overlay_001.md, evaluation_summary_FCLR-COUPLED-001-ROBUST.md, evaluation_summary_FCLR-008.md, evaluation_summary_FCLR006.md, evaluation_summary_FCLR-H003-EXT-001.md, run_manifest.json, sealed_holdout_integrity.md, experiment_frontier.json, evaluation_summary_conflict.md; pre_registration_tracka_overlay_*.md also present as referenced)
+- **Gate snapshot (numbers):**
+  - FCLR-010: PASSED (forecast gate) — per research_state/evaluation_summary_FCLR010.md, research_state/research_protocol_fclr010.md
+  - H_COUPLED-001 ROBUST: ROBUST PASS — research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md
+  - FCLR-OVERLAY-001: EXECUTED (hypothetical only, no profitability claim) — research_state/evaluation_summary_tracka_overlay_001.md, pre_registration_tracka_overlay_*.md
+  - FCLR-003 (confirmatory): H001 NOT_SUPPORTED / forecast gate NOT_MET — canonical verdict + recompute confirm; primary contrast C2 vs B1 -10.98% relative reduction, CI [0.001487,0.093225] (doesn’t meet >=2%/clean improvement criteria)
+  - FCLR-006/007/008: NOT_MET (Track C closed)
+  - FCLR-H003/FCLR-H003-EXT-001: CLOSED_NEGATIVE/INCONCLUSIVE (Track B)
+  - H002: PERMANENT BLOCK (SSRN HTTP 403); no admissible unauthenticated new liquidation source
+- **Conclusion:** TERMINAL, archived. Tree cleaned of __pycache__ noise; all sealed artifacts verified; independent recompute confirms frozen results; 27/27 tests pass. No new research opened. Program complete.
