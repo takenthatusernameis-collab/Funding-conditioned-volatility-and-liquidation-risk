@@ -20,15 +20,49 @@ Generated: 2026-11-01T20:21:01Z
 | B | FCLR-H003 modeled boundary breaches | CLOSED_NEGATIVE | Codepath separation irrefutable (grep evidence); no incremental skill after Holm (FCLR-H003-EXT-001). |
 | H002 | funding-extreme correction time | EXPLORATORY/PARTIAL (88/84/4) — PERMANENT BOTTLENECK | SSRN HTTP 403 blocks full methodology; cannot reconstruct event definition/censoring/regime split from admissible sources. No promotion, no speculative pre-registration. Revisit only if SSRN becomes accessible, with pre-registration BEFORE outcome inspection. |
 
-## NEXT SESSION — INITIAL TASK (timestamped 2026-11-01T20:21:01Z)
-Run in order; do not skip to later items before earlier acceptance is recorded.
+## NEXT SESSION — INITIAL TASK (timestamped 2026-11-01T20:25:54Z)
+**Priority by repo name (funding-conditioned volatility → liquidation risk):** Track C (CLOSED) → Track A (REOPENED, gate PASSED) → Track B (CLOSED) → H002 (PERMANENT BLOCK).
 
-1. **Re-verify baseline:** `python -m unittest discover -s tests -v` → 27/27 PASS at HEAD aad0450b; record result here.
-2. **Independent recomputation audit of FCLR-010 headline** (heavy verification, from cached inputs + SHA-256 hashes only — no new downloads, no outcome re-inspection): reproduce B0/B1/C1/C2 Brier, paired C2 vs B1 diff -0.003077, CI approx [-0.004892, -0.001263], relative reduction 2.21%, n=199, 5 blocks, 7-day embargoes → `research_state/independent_recompute_audit_FCLR010.md`. Must match `evaluation_summary_FCLR010.md` within declared tolerance.
-3. **FCLR-010 leakage / label-history audit:** protocol note states features are "causal proxies from label history where needed" — audit every predictor for future-label leakage; document per-feature provenance; fix/remove any leaking feature before any promotion claim. Zero unresolved leaking features is a hard acceptance gate.
-4. **Calibration + subgroup diagnostics** (promotion requirement, research_protocol.md §7): per-symbol and per-month Brier/log-loss; confirm skill is not dominated by one coin/venue/time block; acceptable calibration for probability forecast → record in `research_state/fclr010_diagnostics.md`.
-5. **Track A risk-overlay eligibility decision:** forecast gate MET → overlay now eligible. Either (a) draft liquidation-risk overlay / position-sizing specification and pre-register it BEFORE any overlay outcome inspection, or (b) formally close Track A with overlay rationale documented. No overlay building or tuning without pre-registration.
-6. **Seal campaign:** update `experiment_frontier.json` (FCLR-010 COMPLETE/gate PASSED, Track A REOPENED→EXECUTED), `research_state/cross_track_decision_log.md` (Track A status), and this file. Keep this handoff the single source of truth; tree clean except `__pycache__/`.
+**Campaign directive:** NO status-only reporting. Every step below requires concrete artifacts with file:line/provenance, computed values, and explicit acceptance checks. Do heavy verification work first (recomputation + audits). Do not proceed to later steps until the acceptance gates for earlier steps are satisfied.
+
+Run in strict order; record outcomes against acceptance gates as you go.
+
+### Step 1: Baseline (must pass)
+- [ ] `python -m unittest discover -s tests -v` → **27/27 PASS** at HEAD a0135068. Record exact output + HEAD in `research_state/AGENT_HANDOFF_OUTCOME.md` (update verification section).
+- [ ] Working tree clean except `__pycache__/`. If dirty, explain and revert non-essential changes.
+
+### Step 2: Independent recomputation audit of FCLR-010 (HEAVY VERIFICATION - required)
+From cached inputs only (`research_state/data_cache/`, hashes in `research_state/data_source_registry.json`, manifests) with no new downloads, no outcome re-inspection:
+- [ ] Reproduce B0/B1/C1/C2 Brier scores and paired C2 vs B1 difference.
+- [ ] Reproduce 95% CI for paired difference (must be approx [-0.004892, -0.001263], excluding zero).
+- [ ] Reproduce relative reduction (must be >= 2.21%), n=199 paired OOS instruments, 5 non-overlapping 30-day blocks, 7-day embargoes.
+- [ ] Write full audit with per-block tables, hashes used, code paths exercised → `research_state/independent_recompute_audit_FCLR010.md`. Must match `evaluation_summary_FCLR010.md` within declared tolerance. **Gate:** values within tolerance or explain deviation with evidence; any mismatch blocks promotion.
+
+### Step 3: FCLR-010 leakage / label-history audit (HARD GATE)
+- [ ] Audit every predictor used in FCLR-010 for future-label leakage. Document per-feature provenance (source file + logic) and whether it uses only information available at prediction time given 7-day embargoes.
+- [ ] Explicitly check "causal proxies from label history where needed" are admissible under embargoes and protocol.
+- [ ] Fix/remove any leaking feature before any promotion claim.
+- [ ] Record audit → `research_state/fclr010_leakage_audit.md`. **Gate:** ZERO unresolved leaking features. Block promotion if any unresolved.
+
+### Step 4: Calibration + subgroup diagnostics (PROMOTION REQUIREMENT)
+- [ ] Per-symbol Brier/log-loss for all 199 instruments (show min/max/mean, outliers).
+- [ ] Per-month/block Brier/log-loss across the 5 blocks.
+- [ ] Check dominance: no single coin/venue/time block accounts for >40% of total skill (or justify if different).
+- [ ] Calibration assessment for probability forecast (reliability diagram data + summary).
+- [ ] Write → `research_state/fclr010_diagnostics.md`. **Gate:** no single-coin/venue/block dominance; acceptable calibration. Block promotion if dominated or miscalibrated.
+
+### Step 5: Track A risk-overlay decision (ELIGIBILITY NOW MET)
+Forecast gate PASSED → liquidation-risk overlay eligible. You MUST do one of:
+- [ ] **(a) PRE-REGISTER overlay spec BEFORE any overlay outcome inspection.** Draft `research_state/track_a_risk_overlay_spec.md` with: hypothesis, instruments (Hyperliquid only, firewall to Binance), features, split boundaries frozen before outcomes, test window proposal (must be >=5 symbols, >=3 blocks, with embargoes), metrics (e.g. PnL/turnover/capital efficiency with liquidation-adjusted metrics), null, acceptance criteria, pre-registration timestamp. Do NOT build/tune/run overlay outcomes until spec exists and is committed to state.
+- [ ] **(b) FORMALLY CLOSE Track A with overlay rationale.** If no admissible pre-registrable overlay exists, write `research_state/track_a_closure_rationale.md` explaining why ineligible despite gate pass, with evidence.
+
+**Gate:** Decision documented with evidence. No overlay outcomes computed without (a).
+
+### Step 6: Seal campaign (CLEAN CLOSEOUT)
+- [ ] Update `experiment_frontier.json` (FCLR-010: COMPLETE/gate PASSED; Track A: REOPENED→EXECUTED or CLOSED with rationale; record timestamps/HEAD).
+- [ ] Update `research_state/cross_track_decision_log.md` with all decisions above (Track A status, FCLR-010 audits, gates).
+- [ ] Update this file (`research_state/AGENT_HANDOFF_OUTCOME.md`) with verification results, artifact paths, gate outcomes, and HEAD.
+- [ ] Ensure single source of truth maintained. Tree clean except `__pycache__/`. Do not commit merely for activity.
 
 ## Bottlenecks removed (do not recreate)
 - Track A structural block: removed (admissible ironflow source passes full rubric). Do not re-run the exhausted next_data_discovery_plan source families unless a NEW source family appears.
