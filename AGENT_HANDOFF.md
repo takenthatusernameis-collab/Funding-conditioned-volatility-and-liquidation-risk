@@ -1,15 +1,15 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T16:56:00Z
+**TIMESTAMP (UTC):** 2026-11-01T17:08:32Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Treat funding × volatility × liquidation risk as ONE coupled system. The repo name demands investigating the coupling between funding conditions, volatility regimes, and observed liquidation/liquidity stress. No track-siloing.
-**BRANCH/HEAD:** main @ 6c95ca2c (up to date with origin/main)
-**HANDOFF ID:** FCLR-HANDOFF-047-20261101T165600Z
-**SUPERSEDES:** FCLR-HANDOFF-046-20261101T152600Z; AGENT_HANDOFF_OUTCOME.md read-only — this file is the single durable handoff going forward.
+**BRANCH/HEAD:** main @ 7763c2f1 (up to date with origin/main)
+**HANDOFF ID:** FCLR-HANDOFF-048-20261101T170832Z
+**SUPERSEDES:** FCLR-HANDOFF-047-20261101T165600Z; AGENT_HANDOFF_OUTCOME.md read-only — this file is the single durable handoff going forward.
 **PRIORITIZATION RATIONALE:** Repo name = funding-conditioned volatility ∩ liquidation risk. Treat as ONE coupled system. Track C exhausted/confirms no clean win (sealed). Track B CLOSED_NEGATIVE. H002 PERMANENTLY BLOCKED (SSRN HTTP 403). Track A FCLR-010 FORECAST_GATE_PASSED (C2 vs B1 −0.003077, 95% CI [−0.004892,−0.001263], rel −2.21%, n=199, 5 blocks, frozen splits 2026-11-01T05:39:07Z). H_COUPLED-001 ROBUST PASSED (≥2000 reps target met; +4.61% rel Brier, CI [0.002511,0.003158], 199 perps, 164 blocks). **COUPLED ROBUSTNESS SEALED. NEXT FOCUS: pre-register liquidation-risk overlay/position-sizing for Track A before any overlay outcome inspection.**
 
 **STATUS:** Tests 27/27 PASS at HEAD 6c95ca2c. Working tree clean (except __pycache__). FCLR-010 gate PASSED (sealed). H_COUPLED-001 ROBUST PASS. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY).
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T16:56:00Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T17:08:32Z
 **PRIORITY P0 | TYPE: TRACKA-OVERLAY-PRE-REG | BLOCK ALL OTHER WORK | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS | NO OUTCOME RE-INSPECTION**
 
 **MANDATE:** This repo is about funding-conditioned volatility and liquidation risk. Treat funding × vol regime × lagged observed flow as ONE coupled system. No shortcuts. Do heavy work only as specified.
