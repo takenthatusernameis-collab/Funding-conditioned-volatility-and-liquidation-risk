@@ -1,8 +1,8 @@
 # AGENT_HANDOFF.md (DURABLE — FCLR-TERMINAL / HANDOFF-012)
-**TIMESTAMP (UTC):** 2026-11-01T01:46:14Z
+**TIMESTAMP (UTC):** 2026-11-01T02:03:30Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **BRANCH/HEAD:** main @ b8dd5271 (working tree: __pycache__ only)
-**HANDOFF ID:** FCLR-HANDOFF-012-20261101T014614Z
+**HANDOFF ID:** FCLR-HANDOFF-013-20261101T020330Z
 **STATUS:** TERMINAL — confirmatory program exhausted; no unsealed powered confirmatory panel remains untested
 
 ## 1) STATE AT HANDOFF
@@ -64,7 +64,9 @@ cat research_state/gate_assessment.md | grep -A 40 "FCLR-008"
 - Terminal verdict unchanged: H001 INCONCLUSIVE on decisive unsealed powered panel FCLR-008 (+4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero); forecast gate NOT_MET; overlay INELIGIBLE. All confirmatory panels exhausted (001/002/003/006/007/008). Track A structural NO-GO; Track B negative; H002 partial.
 - No bottlenecks remain to remove. The only path back to heavy confirmatory work is NEW admissible unauthenticated data (≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness/license, no signup/key/payment) + fresh pre-registered experiment ID BEFORE inspecting outcomes. If none exists, stop cleanly — no dashboards, orchestrators, wrappers, or placeholder docs.
 
-**2026-11-01T01:46:14Z - HANDOFF-012 (FCLR-TERMINAL)**
+**2026-11-01T02:03:30Z - HANDOFF-013 (FCLR-TERMINAL)**
+- Supersedes HANDOFF-012. Timestamp refreshed to 2026-11-01T02:03:30Z. Terminal verdict unchanged: H001 INCONCLUSIVE on decisive unsealed powered panel FCLR-008 (+4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero); forecast gate NOT_MET; overlay INELIGIBLE. All confirmatory panels exhausted (001/002/003/006/007/008). Track A structural NO-GO; Track B negative; H002 partial.
+- No bottlenecks remain to remove. The only path back to heavy confirmatory work is NEW admissible unauthenticated data (≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness/license, no signup/key/payment) + fresh pre-registered experiment ID BEFORE inspecting outcomes. If none exists, stop cleanly — no dashboards, orchestrators, wrappers, or placeholder docs.
 - Supersedes HANDOFF-011. Head advanced 56276674 → b8dd5271 (checkpoint only; no research change). Baseline re-verified live: 27/27 PASS, clean tree except __pycache__.
 - Terminal verdict unchanged: H001 INCONCLUSIVE on decisive unsealed powered panel FCLR-008 (+4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero); forecast gate NOT_MET; overlay INELIGIBLE. All confirmatory panels exhausted (001/002/003/006/007/008). Track A structural NO-GO; Track B negative; H002 partial.
 - No bottlenecks remain to remove. The only path back to heavy confirmatory work is NEW admissible unauthenticated data (≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness/license, no signup/key/payment) + fresh pre-registered experiment ID BEFORE inspecting outcomes. If none exists, stop cleanly — no dashboards, orchestrators, wrappers, or placeholder docs.
