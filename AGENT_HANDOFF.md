@@ -1,27 +1,28 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T21:14:17Z
+**TIMESTAMP (UTC):** 2026-11-01T21:14:48Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** Volatility/liquidation + funding-conditioned research program **TERMINAL (ARCHIVED)**. All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, or cross-track merge. Only immutable verification/archival inspection remains.
-**BRANCH/HEAD:** main @ 25d66913 (checkpoint)
-**HANDOFF ID:** FCLR-HANDOFF-058-20261101T211417Z
-**SUPERSEDES:** FCLR-HANDOFF-057-20261101T202700Z
+**REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility/liquidation research program TERMINAL (ARCHIVED). Primary hypothesis H001 NOT_SUPPORTED on pre-registered confirmatory test FCLR-003; forecast gate NOT_MET; all confirmatory panels/data exhausted; no risk-overlay eligible. All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, cross-track merge, or start new experiments. Only immutable verification/archival inspection remains.
+**BRANCH/HEAD:** main @ e468df95 (checkpoint)
+**HANDOFF ID:** FCLR-HANDOFF-059-20261101T211448Z
+**SUPERSEDES:** FCLR-HANDOFF-058-20261101T211417Z
 
-**STATUS:** Tests 27/27 PASS. All sealed artifacts present and verified. Tree clean (only this AGENT_HANDOFF.md). PROJECT TERMINAL — ARCHIVED.
+**STATUS:** Tests 27/27 PASS. All sealed artifacts present and verified. Working tree clean except intended AGENT_HANDOFF.md edit and regenerated `__pycache__` bytecode from the test run (harmless cache, not source/research artifacts). PROJECT TERMINAL — ARCHIVED. No blocked sessions; no bottlenecks remain.
 
 ## BOTTLENECKS REMOVED (THIS SESSION)
 - **Handoff consistency**: Refreshed timestamp/ID to current session time; preserved completed archival record.
-- **Tree hygiene**: Confirmed no `__pycache__` artifacts; clean working tree except handoff update.
+- **Tree hygiene**: Only change is AGENT_HANDOFF.md; `__pycache__` .pyc entries are regenerated test-run bytecode caches, not source or research artifacts, and require no action.
+- **Blocked sessions**: None. Program is closed negative with data exhaustion documented; nothing is stalled awaiting unblocking.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T20:23:01Z
-**PRIORITY: P0 | TYPE: TERMINAL-ARCHIVAL-VERIFY (READ-ONLY) | CAMPAIGN: FCLR-ARCHIVE-004 — PASSIVE INTEGRITY CONFIRMATION | BLOCK ALL NEW RESEARCH | NO RE-OPENING | NO PRE-REGISTRATION | NO THRESHOLD TUNING**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T21:14:48Z
+**PRIORITY: P0 | TYPE: TERMINAL-ARCHIVAL-VERIFY (READ-ONLY) | CAMPAIGN: FCLR-ARCHIVE-005 — PASSIVE INTEGRITY CONFIRMATION | BLOCK ALL NEW RESEARCH | NO RE-OPENING | NO PRE-REGISTRATION | NO THRESHOLD TUNING**
 
-**MANDATE (UNMISSABLE):** Program is TERMINAL and ARCHIVED (FCLR-ARCHIVE-003 complete). DO NOT start new experiments. This is a read-only confirmation pass.
+**MANDATE (UNMISSABLE):** Program is TERMINAL and ARCHIVED (FCLR-ARCHIVE-003/FCLR-ARCHIVE-004 complete). DO NOT start new experiments. This is a read-only confirmation pass. If everything is intact, STOP — do not manufacture work.
 
-### FOCUS CAMPAIGN FCLR-ARCHIVE-004 — EXECUTE IN STRICT ORDER
-1. **State check** — `git log --oneline -1 && git status --short` (expect clean except handoff if touched).
+### FOCUS CAMPAIGN FCLR-ARCHIVE-005 — EXECUTE IN STRICT ORDER
+1. **State check** — `git log --oneline -1 && git status --short` (expect clean tree except handoff if touched).
 2. **Tests** — `python -m unittest discover -s tests -v` → must be 27/27 PASS.
-3. **Quick gate snapshot** — Verify key sealed artifacts exist and match archived state: `research_state/evaluation_summary_FCLR003.md`, `research_state/final_confirmatory_verdict.md`, `research_state/evaluation_summary_FCLR010.md`, `research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md`, `research_state/evaluation_summary_tracka_overlay_001.md`, `research_state/experiment_frontier.json`, `research_state/run_manifest.json`.
-4. **Confirm closure** — No unsealed confirmatory windows. H002 permanently blocked (SSRN 403). Track A only ironflow Hyperliquid (modeled≠observed). STOP.
+3. **Gate snapshot** — Verify sealed artifacts exist and match archived state: `research_state/final_confirmatory_verdict.md`, `research_state/evaluation_summary_FCLR003.md`, `research_state/evaluation_summary_FCLR010.md`, `research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md`, `research_state/evaluation_summary_tracka_overlay_001.md`, `research_state/experiment_frontier.json`, `research_state/run_manifest.json`.
+4. **Confirm closure** — No unsealed confirmatory windows. H002 permanently blocked (SSRN 403). Track A only ironflow Hyperliquid (modeled≠observed). Data exhausted: no >=5-symbol, >=3-block confirmatory window remains on admissible data. STOP.
 
 ### MANDATORY VERIFY COMMANDS
 ```bash
@@ -36,7 +37,7 @@ python -m unittest discover -s tests -v 2>&1 | tail -2
 - **Tests:** All 27 MUST remain PASS.
 - **No workflow changes:** No `.github/workflows/*` modifications.
 - **Overlay:** Hypothetical only — no live/paper trading claims.
-- **No new research:** Program terminal/archived.
+- **No new research:** Program terminal/archived. H001 NOT_SUPPORTED; gate NOT_MET; panels exhausted.
 
 ## REQUIRED END-OF-SESSION OUTPUT
 1. Tests run + results (27/27)
@@ -45,7 +46,7 @@ python -m unittest discover -s tests -v 2>&1 | tail -2
 4. State: TERMINAL/ARCHIVED — no further work
 
 ## SINGLE HIGHEST-VALUE NEXT TASK
-**Task:** FCLR-ARCHIVE-004 — Read-only confirmation pass only. If anything corrupted, report; otherwise STOP.
+**Task:** FCLR-ARCHIVE-005 — Read-only confirmation pass only. If anything corrupted, report; otherwise STOP. Do not open new research.
 
 ## ARCHIVAL RECORD (FILLED BY SESSION FCLR-ARCHIVE-003) — TIMESTAMP 2026-11-01T20:18:XXZ
 - **Session:** FCLR-ARCHIVE-003 (terminal verification/archival)
@@ -62,3 +63,10 @@ python -m unittest discover -s tests -v 2>&1 | tail -2
 - **Tests:** 27/27 PASS
 - **State:** Clean tree (only handoff updated). All gates terminal/archived. No modifications to sealed artifacts.
 - **Conclusion:** CONFIRMED TERMINAL/ARCHIVED. STOP.
+
+## ARCHIVAL RECORD (FILLED BY SESSION FCLR-HANDOFF-059) — TIMESTAMP 2026-11-01T21:14:48Z
+- **Session:** FCLR-HANDOFF-059 (handoff refresh; no research)
+- **Commands executed:** `git log --oneline -3`, `git status --short` (clean), `python -m unittest discover -s tests -v` (27/27 PASS, 0.230s), read `research_state/final_confirmatory_verdict.md`, `research_state/run_manifest.json`.
+- **Results:** HEAD e468df95; tree clean; tests 27/27 PASS; verdict H001 NOT_SUPPORTED, gate NOT_MET, panels exhausted, no forward path on admissible data.
+- **Changes:** AGENT_HANDOFF.md timestamp/ID/supersedes refreshed only. No sealed artifacts modified.
+- **Conclusion:** TERMINAL/ARCHIVED confirmed. Next session: FCLR-ARCHIVE-005 read-only confirmation pass; STOP if intact.
