@@ -1,12 +1,12 @@
 # AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-035)
-**TIMESTAMP (UTC):** 20261101T105253Z
+**TIMESTAMP (UTC):** 20261101T112304Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ a316c76a (working tree clean apart from compiled __pycache__ and untracked hl_coverage_probe.py/.json — stray Track A probe debris, NOT part of the coupled campaign; ignorable)
-**HANDOFF ID:** FCLR-HANDOFF-035-20261101T105253Z
+**BRANCH/HEAD:** main @ 5cbea3bb (working tree clean; no stray debris or blocked sessions)
+**HANDOFF ID:** FCLR-HANDOFF-036-20261101T112304Z
 **STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001) on frozen FCLR-010 splits. Tracks A/B/C sealed (NOT_SUPPORTED / COMPLETE_NEGATIVE / BLOCKED-NO-GO). Cross-track firewall IMMUTABLE/SEALED. Bottlenecks removed: no open track re-spin; fclr010_execute_fast.py fabricates hardcoded metrics and MUST NOT be used for confirmatory numbers — real path is scripts/fclr010_execute.py extended to >=2000 replicates + LOSO + time-split + ablation. Next: FCLR-COUPLED-ROBUST (robustness/inference) on ironflow-only with firewall intact.
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM)
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T105253Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T112304Z
 **PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/GENERALIZATION (HEAVY) | NO DISCOVERY/SPIN | NO CROSS-TRACK MERGE | NO FABRICATED FAST PATH**
 
 Pre-registration locked: pre_registration_h_coupled_001_20261101T093727Z.md
