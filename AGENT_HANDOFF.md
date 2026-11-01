@@ -1,14 +1,14 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-038)
-**TIMESTAMP (UTC):** 20261101T124600Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-039)
+**TIMESTAMP (UTC):** 20261101T132349Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 375a09ca (working tree clean except untracked __pycache__/)
-**HANDOFF ID:** FCLR-HANDOFF-038-20261101T124600Z
-**SUPERSEDES:** FCLR-HANDOFF-037 (20261101T112400Z); see research_state/AGENT_HANDOFF_OUTCOME.md (2026-11-01T12:23:41Z) for completed campaign record.
-**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001, 500 reps) on frozen FCLR-010 splits. Tracks A/B/C SEALED (A SUPPORTED/PASSED via FCLR-010 gate; B CLOSED_NEGATIVE; C NOT_SUPPORTED/CLOSED). H002 PERMANENT BLOCKER (SSRN 403, stop scheduling). Cross-track firewall IMMUTABLE. Bottlenecks REMOVED: do NOT use scripts/fclr010_execute_fast.py (hardcodes fabricated numbers). Use real computation path only.
+**BRANCH/HEAD:** main @ 375a09ca (working tree clean except untracked __pycache__/; tests 27/27 PASS re-verified 2026-11-01T13:23:49Z)
+**HANDOFF ID:** FCLR-HANDOFF-039-20261101T132349Z
+**SUPERSEDES:** FCLR-HANDOFF-038 (20261101T124600Z); sealed campaign record in research_state/AGENT_HANDOFF_OUTCOME.md (2026-11-01T12:23:41Z).
+**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001, 500 reps) on frozen FCLR-010 splits. Tracks A/B/C SEALED (A SUPPORTED/PASSED via FCLR-010 gate; B CLOSED_NEGATIVE; C NOT_SUPPORTED/CLOSED). H002 PERMANENT BLOCKER (SSRN 403, stop scheduling). Cross-track firewall IMMUTABLE. Bottlenecks REMOVED: do NOT use scripts/fclr010_execute_fast.py (hardcodes fabricated numbers). Use real computation path only. FCLR-COUPLED-ROBUST campaign NOT YET RUN — no research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md exists.
 
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM). Next focus is MANDATORY HEAVY ROBUSTNESS of the coupled model on ironflow Hyperliquid ONLY. Status-only work forbidden.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T124600Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T132349Z
 **PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/INFERENCE (HEAVY, UNAVOIDABLE) | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
 
 Pre-reg: research_state/pre_registration_h_coupled_001_20261101T093727Z.md (frozen). Coupled PASSED with 500 reps. Must prove stability at >=2000 reps under strict constraints.
@@ -53,6 +53,7 @@ All work must use FROZEN FCLR-010 splits from run_manifest.json. Ironflow Hyperl
 - FCLR-010: execution complete, gate passed, window sealed. Do not re-fit, re-tune, or re-inspect outcomes.
 - H002: SSRN 403 accepted as permanent block; stop scheduling H002 confirmatory work.
 - Test C/B/A discovery: exhausted/closed. Do not rerun.
+- Fabricated-numbers shortcut removed: scripts/fclr010_execute_fast.py banned for confirmatory work; real computation path only.
 
 ## REQUIRED END-OF-SESSION OUTPUT
 1. What changed and why (concrete files/lines)
