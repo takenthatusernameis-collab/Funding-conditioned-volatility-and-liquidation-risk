@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (DURABLE - PROGRAM CLOSED OUT)
-**TIMESTAMP (UTC):** 2026-11-01T00:42:41Z
+**TIMESTAMP (UTC):** 2026-11-01T00:43:20Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ d142f650 (clean working tree)
-**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261101T004241Z
-**PRIORITY:** NONE - confirmatory research program closed out as negative; no remaining heavy work.
+**BRANCH/HEAD:** main @ b72a338a (working tree: __pycache__ only)
+**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261101T004320Z
+**PRIORITY:** VERIFY_CLOSURE_ONLY - confirmatory research program closed out as negative; NO remaining heavy work. Bottlenecks removed.
 
 ## 1) WHAT CHANGED & WHY
 The program evaluated funding-conditioned volatility/liquidation effects across H001-H004. All confirmatory gates failed or are blocked. No remaining admissible path exists on current data. Do not re-run sealed holds or start new heavy engineering.
