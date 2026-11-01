@@ -1,29 +1,38 @@
 # AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-030)
-**TIMESTAMP (UTC):** 2026-11-01T09:15:53Z
+**TIMESTAMP (UTC):** 2026-11-01T09:19:10Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **BRANCH/HEAD:** main @ f79c9767 (working tree: clean except __pycache__)
-**HANDOFF ID:** FCLR-HANDOFF-030-20261101T091553Z
-**STATUS:** COUPLED PROBLEM — FCLR-010 PASSED (Track A). Integration required.
+**HANDOFF ID:** FCLR-HANDOFF-031-20261101T091910Z
+**STATUS:** COUPLED SYNTHESIS COMPLETE (09:19:10Z). Next: pre-register H_COUPLED-001.
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM)
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T09:15:53Z
-**PRIORITY P0 | TYPE: HEAVY SYNTHESIS/INTEGRATION (COUPLED) | NO DISCOVERY/SPIN**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T09:19:10Z
+**PRIORITY P0 | TYPE: PRE-REGISTRATION (HEAVY) | NO DISCOVERY/SPIN**
 
-FCLR-010 (Track A, observed liquidations on Hyperliquid via ironflow census) has **PASSED**.
-- Track C (volatility-only): EXHAUSTED/NOT_SUPPORTED (no incremental edge).
-- Track B (hypothetical boundary): CLOSED_NEGATIVE.
-- H002 (funding-correction): PARTIAL/EXPLORATORY (no promotion).
-
-The bottleneck is **integration**: do not run more exhausted panels. Synthesize funding-conditioned volatility AND liquidation risk as a coupled system.
+Coupled synthesis complete (`research_state/coupled_integration_synthesis_20261101T091910Z.md`).
+Next bottleneck: lock H_COUPLED-001 protocol before any runs.
 
 ### MANDATORY FIRST ACTION (30s)
 ```bash
 cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
 git log -1 --oneline && git status --short
 python -m unittest discover -s tests -v  # MUST remain 27/27 PASS
-python3 -c "import json;d=json.load(open('research_state/run_manifest.json'));e=d['experiments']['FCLR-010'];print('FCLR-010:',e['status'],e['gate'])"
-grep -B1 -A10 'Gate assessment' research_state/evaluation_summary_FCLR010.md
+LATEST=$(ls -t research_state/coupled_integration_synthesis_*.md | head -1); test -n "$LATEST" && wc -l "$LATEST"
 ```
+
+### FOCUS CAMPAIGN: `FCLR-COUPLED-PREREG` (HEAVY WORK)
+Create `research_state/pre_registration_h_coupled_001_$(date -u +%Y%m%dT%H%M%SZ).md` with:
+
+1. Hypothesis H_COUPLED-001 (funding×vol×observed-flow conditioning >= +1.0% rel Brier vs FCLR-010 C2).
+2. Frozen feature set, contrasts, metrics, gates (>=+1.0% rel Brier, paired OOS>=5, >=3 blocks, firewall, calibration).
+3. Splits/embargo/inference/multiplicity (Holm if >1). Fixed logistic, no tuning.
+4. Firewall: Hyperliquid labels only; no merge with Binance price panels. Modeled≠observed.
+5. Exact verify command and next executable step.
+
+### HARD CONSTRAINTS
+- No re-running exhausted Track C/B panels. No broad data discovery.
+- Cross-track firewall preserved. No .github/workflows changes. No activity commits.
+- All tests MUST remain 27/27 PASS.
 
 ### FOCUS CAMPAIGN: `FCLR-COUPLED-INTEGRATE` (HEAVY WORK)
 Create `research_state/coupled_integration_synthesis_$(date -u +%Y%m%dT%H%M%SZ).md` with:
@@ -59,5 +68,5 @@ Create `research_state/coupled_integration_synthesis_$(date -u +%Y%m%dT%H%M%SZ).
 7. Blockers + next materially different free route OR proof of exhaustive search
 
 ## SINGLE HIGHEST-VALUE NEXT TASK
-**Task:** Produce coupled integration synthesis per above.
-**Verify:** `LATEST=$(ls -t research_state/coupled_integration_synthesis_*.md 2>/dev/null | head -1); test -n "$LATEST" && echo $LATEST && wc -l $LATEST`
+**Task:** Produce pre-registration for H_COUPLED-001 per above.
+**Verify:** `LATEST_PREREG=$(ls -t research_state/pre_registration_h_coupled_001_*.md 2>/dev/null | head -1); test -n "$LATEST_PREREG" && echo $LATEST_PREREG && wc -l $LATEST_PREREG`
