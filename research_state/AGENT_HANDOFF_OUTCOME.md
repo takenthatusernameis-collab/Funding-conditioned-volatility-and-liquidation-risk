@@ -1,6 +1,6 @@
 # AGENT HANDOFF OUTCOME — SINGLE DURABLE HANDOFF (source of truth)
 
-Generated: 2026-11-01T13:31:24Z
+Generated: 2026-11-01T13:42:47Z
 **Task ID:** HND-20261101-122341-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V25
 **HEAD:** aea29c56 (main), up to date with origin/main
 **Repo:** Funding-conditioned-volatility-and-liquidation-risk
