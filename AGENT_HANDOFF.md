@@ -1,78 +1,71 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T22:16:37Z
+**TIMESTAMP (UTC):** 2026-11-01T22:25:00Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility/liquidation research program. Primary hypothesis H001 NOT_SUPPORTED on pre-registered confirmatory test FCLR-003 (gate NOT_MET). Confirmatory panels exhausted on admissible data. However, liquidation-risk microstructure remains under-exploited within the SINGLE admissible source (ironflow Hyperliquid). Campaign shifted from "confirm H001" to "mechanistic mapping of funding-conditioned liquidation intensity" with pre-registered, falsifiable sub-hypotheses and no re-opening of sealed H001 confirmatory tests.
-**BRANCH/HEAD:** main @ 251cae78 (checkpoint)
-**HANDOFF ID:** FCLR-HANDOFF-063-20261101T221637Z
-**SUPERSEDES:** FCLR-HANDOFF-062-20261101T221603Z
+**REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility and liquidation risk. Primary volatility hypothesis H001 NOT_SUPPORTED (FCLR-003 gate NOT_MET). Track A liquidation forecast (FCLR-010) PASSED on Hyperliquid ironflow data; overlay executed hypothetically. Current liqmicro campaign (FCLR-LIQMICRO-001) ran but funding features are zeroed (no Hyperliquid funding integrated). Bottleneck: funding data not wired for Hyperliquid perps despite repo focus on "funding-conditioned".
+**BRANCH/HEAD:** main @ 5cf38b32
+**HANDOFF ID:** FCLR-HANDOFF-064-20261101T222500Z
+**SUPERSEDES:** FCLR-HANDOFF-063-20261101T221637Z
 
-**STATUS:** Tests 27/27 PASS. Sealed artifacts intact. Working tree clean except intended AGENT_HANDOFF.md edit and regenerated `__pycache__` bytecode from test runs (harmless caches). Program NOT fully terminal - focused mechanistic work remains on admissible data with strict firewalls.
+**STATUS:** Tests 27/27 PASS. Sealed artifacts intact. Working tree has modified __pycache__ and src/analysis/liqmicro/__pycache__ (harmless). Heavy funding-conditioned work required.
 
-## BOTTLENECKS REMOVED (THIS SESSION)
-- **Handoff clarity**: Replaced passive "read-only stop" with an actionable, heavy-work campaign that cannot be avoided.
-- **Scope ambiguity**: Explicitly carved a new track (Track D: Liquidation Microstructure) that fits the repo name without violating cross-track firewalls or re-opening sealed H001 tests.
-- **Stall risk**: Pre-registered three falsifiable hypotheses (D1-D3), concrete data audit, required tables/figures, and hard stop conditions. No open-ended "explore" allowed.
+## BOTTLENECKS IDENTIFIED (REMOVE THEM)
+- **Funding data missing for Hyperliquid**: liqmicro features set funding_rate/sign/abs/zscore to 0.0 because no funding_df passed. Hyperliquid has funding history; need to fetch/integrate public funding data for the same symbols/time range as ironflow liquidations (or use existing cached funding files mapped to symbols). This is blocking proper "funding-conditioned" analysis.
+- **Cross-track clarity**: Need to properly test D1-D3 with actual funding variation, not zeros. Current results may be invalid/degenerate.
+- **Heavy work needed**: Integration + re-analysis with real funding is compute-heavy and directly matches repo name.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T22:16:37Z
-**PRIORITY: P0 | TYPE: HEAVY MECHANISTIC RESEARCH (PRE-REGISTERED) | CAMPAIGN: FCLR-LIQMICRO-001 | FIREWALLS ENFORCED | NO RE-OPENING OF SEALED CONFIRMATORY TESTS**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T22:25:00Z
+**PRIORITY: P0 | TYPE: HEAVY FUNDING-CONDITIONED RESEARCH | CAMPAIGN: FCLR-LIQMICRO-002 | FIREWALLS ENFORCED**
 
-**MANDATE (UNMISSABLE):** Do NOT re-test H001, do NOT re-split FCLR-003, do NOT threshold-shop, do NOT merge Binance data, do NOT pre-register a replacement for FCLR-003. Your job is to map funding-conditioned liquidation risk using ONLY admissible data. Heavy computation is required. If you finish early by claiming "nothing found", you have failed - you must produce falsifiable evidence for or against D1-D3.
+**MANDATE:** Integrate Hyperliquid funding data properly and re-run funding-conditioned liquidation microstructure with REAL funding variation. Do NOT re-open sealed H001/FCLR-003. Do NOT merge Binance. Use ONLY admissible data.
 
-### FOCUS CAMPAIGN FCLR-LIQMICRO-001 — EXECUTE IN STRICT ORDER
-1. **Sanity + constraints** (5 min)
-   - `git log --oneline -1 && git status --short && python -m unittest discover -s tests -v` → must stay 27/27 PASS. If tests fail, STOP and report.
-   - Read `research_state/final_confirmatory_verdict.md`, `research_state/run_manifest.json`, `research_state/experiment_frontier.json` to internalize sealed state.
+### CAMPAIGN FCLR-LIQMICRO-002 — EXECUTE IN STRICT ORDER
+1. **Sanity** (5 min)
+   - `git log --oneline -1 && git status --short && python -m unittest discover -s tests -v` → must stay 27/27 PASS
 
-2. **Data audit (HEAVY)** (required)
-   - Inventory ALL ironflow/Hyperliquid liquidation-related files in repo (search for `liquid`, `ironflow`, `hyperliquid`, `funding`). Document paths, sizes, time ranges, coverage.
-   - Build a coverage table: symbol, date range, funding events present, liquidation events present, overlap %, missingness. Write to `research_state/liqmicro_data_audit_001.md`.
-   - If coverage < 60% of hours for any symbol OR liquidation events < 10^4 total across all symbols, document explicitly and still proceed with what exists (do not expand data sources).
+2. **Funding data discovery for Hyperliquid** (HEAVY)
+   - Find Hyperliquid funding data. Check public sources: Hyperliquid API (unauthenticated), or any cached funding files that can be mapped to Hyperliquid symbols. Hyperliquid perpetual symbols in ironflow are like `BTC-PERP` (native perps).
+   - Look in research_state/data_cache for any hyperliquid funding, or check if we need to fetch from api.hyperliquid.xyz (info endpoint for funding history) - but must be unauthenticated and follow constraints.
+   - If no existing cached funding matches Hyperliquid symbols, document and try to construct from available sources. Do NOT fabricate.
+   - Write audit to `research_state/liqmicro_funding_audit_002.md` with coverage.
 
-3. **Pre-registered hypotheses (FALSIFIABLE)**
-   Create `research_state/pre_registration_FCLR-LIQMICRO-001.md` with:
-   - **D1 (Funding asymmetry):** Funding rate sign predicts liquidation intensity asymmetry (long vs short liquidations) in next 1-4h. Null: |ΔL/L| < 2% or CI crosses 0.
-   - **D2 (Volatility interaction):** Funding-conditioned liquidation intensity is higher when realized vol is in top tercile vs bottom tercile, controlling for funding level. Null: interaction term p>=0.05 with BH FDR.
-   - **D3 (Cascade):** Liquidation clustering (auto-correlation) increases with |funding| after controlling for vol/volume. Null: no significant increase in top |funding| decile.
-   - **Estimand, unit of obs, clustering, controls, FDR, stopping rule.**
+3. **Wire funding into pipeline** (IMPLEMENT)
+   - Extend `src/analysis/liqmicro/ingest.py` or add `funding_ingest.py` to load Hyperliquid funding aligned to symbol/hour.
+   - Fix `features.py::add_funding_features` to actually use funding_df with proper alignment (handle symbol mapping BTC-PERP vs BTCUSDT, timestamps).
+   - Ensure no look-ahead, proper timezone handling.
 
-4. **Build pipeline (IMPLEMENT, DON'T JUST DESCRIBE)**
-   - Create `src/analysis/liqmicro/` with modules: `ingest.py` (load ironflow Hyperliquid), `features.py` (funding z-score, vol terciles, liquidation rates), `models.py` (clustered regressions), `stats.py` (bootstrap/CIs, BH FDR).
-   - Use ONLY ironflow Hyperliquid. NO Binance. Track A firewall absolute.
-   - Handle timestamps/timezones explicitly. No look-ahead.
+4. **Re-run with real funding** (HEAVY COMPUTATION)
+   - Rebuild panel with real funding features (funding_rate, funding_sign, funding_abs, funding_zscore).
+   - Re-test D1-D3 with proper funding variation. Regenerate results in `results/liqmicro_v2/` or overwrite with versioned artifacts.
+   - Update pre-registration if needed? Or create new one `pre_registration_FCLR-LIQMICRO-002.md` noting it's a fix to funding integration while keeping hypotheses same.
+   - Write `research_state/evaluation_summary_FCLR-LIQMICRO-002.md`.
 
-5. **Execute & produce artifacts (HEAVY)**
-   - Run analysis for D1-D3. Generate tables (LaTeX/CSV) and figures (PNG/PDF) in `results/liqmicro/`.
-   - Write `research_state/evaluation_summary_FCLR-LIQMICRO-001.md` with point estimates, CIs, p-values, FDR q-values, sample sizes, robustness (placebo funding shifts), and pass/fail per D1-D3.
-   - Update `research_state/experiment_frontier.json` with FCLR-LIQMICRO-001 status (IN_PROGRESS/COMPLETE) and results.
-
-6. **Hard stop / report**
-   - If all nulls hold AND robustness passes → state "NO MECHANISM FOUND (D1-D3 all null)" with evidence. Do NOT spin up new hypotheses.
-   - If any survives FDR → report mechanism, magnitudes, and EXPLICITLY state "does NOT imply H001 reversal" and "no confirmatory re-test of H001".
-   - Final answer must include paths to all artifacts created.
+5. **Validate & report**
+   - Confirm funding features have variation (std > 0). If still zero after trying all routes, document blocker with evidence and try alternative approaches.
+   - All tests must remain 27/27.
+   - Explicitly state relation to H001 (no reversal, no re-test).
 
 ### MANDATORY VERIFY COMMANDS
 ```bash
 git -C /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk log --oneline -1 && \
 git -C /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk status --short && \
-python -m unittest discover -s tests -v 2>&1 | tail -2 && \
-find . -name '*liqmicro*' -not -path '*/__pycache__/*' | head -20
+python -m unittest discover -s tests -v 2>&1 | tail -2
 ```
 
-## HARD CONSTRAINTS (NON-NEGOTIABLE)
-- **Cross-track firewall:** ONLY ironflow Hyperliquid for Track A. NO Binance merge. Modeled != Observed.
-- **Frozen:** Do NOT re-open FCLR-003, do NOT tune H001 thresholds, do NOT pre-register H001 variant.
-- **Tests:** All 27 MUST remain PASS. Do not modify tests.
-- **No workflow changes:** No `.github/workflows/*` modifications.
-- **Overlay:** Hypothetical only — no live/paper trading claims.
-- **Data scope:** Cannot fabricate data. Work with what exists. Expanding sources is FORBIDDEN.
-- **Sealed artifacts:** Do not edit `research_state/final_confirmatory_verdict.md`, sealed evaluation summaries, or `run_manifest.json` except to add NEW entries (experiment_frontier.json may be extended).
+## HARD CONSTRAINTS
+- NO Binance merge, NO FCLR-003/H001 re-opening
+- All 27 tests must PASS
+- No .github/workflows changes
+- Use only admissible free data
+- Do not fabricate data
+- Sealed artifacts unchanged except new ones
 
 ## REQUIRED END-OF-SESSION OUTPUT
-1. Tests run + results (27/27) + tree status
-2. Data audit path + key numbers (symbols, liquidation count, coverage)
-3. Pre-registration path + D1-D3 decisions
-4. All artifacts created (modules, results/, evaluation summary) with paths
-5. Per-hypothesis verdicts with CIs/FDR + final state (MECHANISM FOUND / NO MECHANISM FOUND) + explicit statement re: H001
+1. Tests + tree status
+2. Funding audit path + coverage (symbols with funding, % overlap)
+3. Code changes to wire funding
+4. New results with funding variation confirmed
+5. Updated evaluation summary with D1-D3 verdict
+6. Explicit statement re: H001
 
 ## SINGLE HIGHEST-VALUE NEXT TASK
-**Task:** FCLR-LIQMICRO-001 — Execute full pipeline. This is heavy work by design. Produce falsifiable evidence or strong nulls. Do NOT stop at planning.
+**Task:** FCLR-LIQMICRO-002 - Integrate real Hyperliquid funding data and re-analyze funding-conditioned liquidations. This is heavy, directly matches repo name, fixes the critical bottleneck.
