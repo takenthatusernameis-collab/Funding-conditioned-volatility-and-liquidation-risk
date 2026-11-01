@@ -1,8 +1,8 @@
-# AGENT_HANDOFF.md (DURABLE — FCLR-TERMINAL / HANDOFF-010)
-**TIMESTAMP (UTC):** 2026-11-01T01:42:59Z
+# AGENT_HANDOFF.md (DURABLE — FCLR-TERMINAL / HANDOFF-011)
+**TIMESTAMP (UTC):** 2026-11-01T01:44:52Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 6c58534e (working tree: __pycache__ only)
-**HANDOFF ID:** FCLR-HANDOFF-010-20261101T014259Z
+**BRANCH/HEAD:** main @ 56276674 (working tree: __pycache__ only)
+**HANDOFF ID:** FCLR-HANDOFF-011-20261101T014452Z
 **STATUS:** TERMINAL — confirmatory program exhausted; no unsealed powered confirmatory panel remains untested
 
 ## 1) STATE AT HANDOFF
@@ -57,3 +57,8 @@ cat research_state/gate_assessment.md | grep -A 40 "FCLR-008"
 - Supersedes HANDOFF-009. FCLR-008 complete and decisive: +4.30% rel QLIKE but CI crosses zero → H001 INCONCLUSIVE, gate NOT_MET, overlay INELIGIBLE.
 - All confirmatory panels exhausted (001/002/003/006/007/008). Track A structural NO-GO; Track B negative; H002 partial.
 - 27/27 tests PASS. Byte-identical reproducibility verified. Terminal state enforced; reopen requires NEW admissible unauthenticated data + fresh pre-registered experiment ID before outcomes. No heavy work remains.
+
+**2026-11-01T01:44:52Z - HANDOFF-011 (FCLR-TERMINAL)**
+- Supersedes HANDOFF-010. Head advanced 6c58534e → 56276674 (checkpoint only; no research change). Baseline verified: 27/27 PASS, clean tree except __pycache__.
+- Terminal verdict unchanged: H001 INCONCLUSIVE on decisive unsealed powered panel FCLR-008 (+4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero); forecast gate NOT_MET; overlay INELIGIBLE. All confirmatory panels exhausted (001/002/003/006/007/008). Track A structural NO-GO; Track B negative; H002 partial.
+- No bottlenecks remain to remove. The only path back to heavy confirmatory work is NEW admissible unauthenticated data (≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness/license, no signup/key/payment) + fresh pre-registered experiment ID BEFORE inspecting outcomes. If none exists, stop cleanly — no dashboards, orchestrators, wrappers, or placeholder docs.
