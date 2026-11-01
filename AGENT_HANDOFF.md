@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T17:15:12Z
+**TIMESTAMP (UTC):** 2026-11-01T18:33:23Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Treat funding × volatility × liquidation risk as ONE coupled system. Repo name demands investigating the coupling between funding conditions, volatility regimes, and observed liquidation/liquidity stress. No track-siloing. Track A (observed liquidations via ironflow Hyperliquid) is the ONLY eligible track. Tracks B/C closed/blocked. H002 blocked.
 **BRANCH/HEAD:** main @ 06989c49 (checkpoint); working tree has __pycache__ modifications only (non-functional)
@@ -9,7 +9,7 @@
 
 **STATUS:** Tests 27/27 PASS. Working tree clean except __pycache__. FCLR-010 sealed. H_COUPLED-001 ROBUST sealed. FCLR-OVERLAY-001 PRE-REGISTERED → EXECUTE NOW. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY).
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T17:15:12Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T18:33:23Z
 **PRIORITY P0 | TYPE: TRACKA-OVERLAY-EXECUTE | BLOCK ALL OTHER WORK | NO THRESHOLD SHOPPING | NO TUNING ON TEST | NO FCLR-010 RE-INSPECTION | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
 
 **MANDATE:** This repo = funding-conditioned volatility × liquidation risk. The overlay pre-registration is DONE. Your job is HEAVY EXECUTION: compute overlay metrics exactly as specified on frozen splits and write the evaluation summary. No exploration, no refactors, no new features.
