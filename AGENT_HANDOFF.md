@@ -1,8 +1,8 @@
 # AGENT_HANDOFF.md (DURABLE - PROGRAM CLOSED OUT)
-**TIMESTAMP (UTC):** 2026-11-01T00:43:20Z
+**TIMESTAMP (UTC):** 2026-11-01T00:44:41Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ b72a338a (working tree: __pycache__ only)
-**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261101T004320Z
+**BRANCH/HEAD:** main @ ba8484ec (working tree: __pycache__ only)
+**HANDOFF ID:** FCLR-HANDOFF-CLOSEOUT-20261101T004441Z
 **PRIORITY:** VERIFY_CLOSURE_ONLY - confirmatory research program closed out as negative; NO remaining heavy work. Bottlenecks removed.
 
 ## 1) WHAT CHANGED & WHY
@@ -80,3 +80,10 @@ grep -n "frozen_before_outcomes" research_state/run_manifest.json
 - Re-verified baseline: 27/27 PASS at HEAD d142f650
 - Refreshed timestamp/HEAD to current checkpoint; working tree clean (only __pycache__)
 - No bottlenecks; program closed negative; no heavy work scheduled
+
+**2026-11-01T00:44:41Z - HANDOFF REFRESHED (VERIFY_CLOSURE_ONLY, CLEAR INITIAL TASK)**
+- Re-verified baseline: 27/27 PASS at HEAD ba8484ec; git status clean except untracked __pycache__/.
+- Sealed holds intact: split_boundaries_fclr003 / split_boundaries_fclr006 / split_boundaries_fclr007 frozen_before_outcomes: true; final_confirmatory_verdict.md unchanged (FCLR-FINAL-001, H001 NOT_SUPPORTED).
+- Canonical artifacts present: final_confirmatory_verdict.md, evaluation_summary_FCLR003.md, evaluation_summary_FCLR007.md, hypothesis_registry.json, experiment_frontier.json, run_manifest.json.
+- Bottlenecks removed: Track A structurally blocked (no admissible unauthenticated liquidation census); Track B complete negative (FCLR-H003-EXT-001, Holm-adjusted, no incremental skill); Track C complete negative (FCLR-003, FCLR-006, FCLR-007 all gate NOT_MET); overlay INELIGIBLE; no threshold shopping; no sealed-holdout reuse.
+- Clear initial task for next session: FCLR-CLOSEOUT-VERIFY (Steps 1-4 below). No new heavy work; no placeholder files; no doc-sprawl.
