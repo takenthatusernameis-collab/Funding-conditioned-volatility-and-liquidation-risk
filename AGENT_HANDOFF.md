@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T20:20:33Z
+**TIMESTAMP (UTC):** 2026-11-01T20:22:33Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Volatility/liquidation + funding-conditioned research program **TERMINAL**. All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, or cross-track merge. Only heavy verification, integrity hardening, and immutable archival remain.
 **BRANCH/HEAD:** main @ 25d66913 (checkpoint)
