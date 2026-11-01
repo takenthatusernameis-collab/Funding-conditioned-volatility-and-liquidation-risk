@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T18:34:12Z
+**TIMESTAMP (UTC):** 2026-11-01T19:14:03Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** All research campaigns terminal. Track A (ironflow Hyperliquid observed liquidations) complete via FCLR-010 forecast gate PASSED + H_COUPLED-001 ROBUST PASS + FCLR-OVERLAY-001 EXECUTED. Track B CLOSED_NEGATIVE. Track C closed negative (FCLR-006/008 gate NOT_MET, H001 INCONCLUSIVE/NOT_SUPPORTED). H002 permanently blocked (SSRN HTTP 403). No remaining heavy work; no unblocked campaign. Do not re-open sealed outcomes; do not re-pre-register; no new tracks.
 **BRANCH/HEAD:** main @ ecf631fb (checkpoint); working tree has __pycache__ modifications only (non-functional)
