@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T19:21:58Z
+**TIMESTAMP (UTC):** 2026-11-01T19:24:25Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Research program TERMINAL. H001 NOT_SUPPORTED (FCLR-003 confirmatory gate NOT_MET; C2 vs B1 +3.78% worse, CI [-0.020240,0.056734] crosses zero); risk overlay INELIGIBLE. Track A: FCLR-010 forecast gate PASSED (+ H_COUPLED-001 ROBUST PASS + FCLR-OVERLAY-001 EXECUTED, hypothetical only, no profitability claim). Track B CLOSED_NEGATIVE. Track C closed negative (FCLR-006/008 NOT_MET). H002 permanent block (SSRN HTTP 403). No unsealed confirmatory window remains; no admissible unauthenticated new liquidation source; no new confirmatory experiment feasible on current data (RESEARCH_PROMPT.md §16). NO NEW RESEARCH — only verification, archival, and reproducibility hardening remain.
 **BRANCH/HEAD:** main @ 78ab2a3d (checkpoint); working tree clean except this AGENT_HANDOFF.md update (intended); no __pycache__ noise
-**HANDOFF ID:** FCLR-HANDOFF-053-20261101T192158Z
-**SUPERSEDES:** FCLR-HANDOFF-052-20261101T191429Z
+**HANDOFF ID:** FCLR-HANDOFF-054-20261101T192425Z
+**SUPERSEDES:** FCLR-HANDOFF-053-20261101T192158Z
 **PRIORITIZATION RATIONALE:** All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, or cross-track merge. Bottlenecks removed: conflict docs annotated UNTRUSTED/SUPERSEDED (canonical = FCLR-003/final_confirmatory_verdict), working tree cleaned.
 
 **STATUS:** Tests 27/27 PASS. All sealed artifacts present. PROJECT TERMINAL — heavy verification campaign MANDATORY before stopping.
