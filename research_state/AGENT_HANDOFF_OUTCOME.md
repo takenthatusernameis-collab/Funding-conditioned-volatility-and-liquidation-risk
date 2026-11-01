@@ -1,8 +1,8 @@
 # AGENT HANDOFF OUTCOME — SINGLE DURABLE HANDOFF (source of truth)
 
-Generated: 2026-11-01T12:23:41Z
+Generated: 2026-11-01T13:31:24Z
 **Task ID:** HND-20261101-122341-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V25
-**HEAD:** aad0450b (main), up to date with origin/main
+**HEAD:** aea29c56 (main), up to date with origin/main
 **Repo:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority order (repo name: funding-conditioned volatility → liquidation risk):** Track C → Track A → Track B → H002
 **Mode:** FORCED_HEAVY_EVIDENCE_CAMPAIGN — status-only work forbidden
@@ -52,5 +52,5 @@ Run in order; do not skip to later items before earlier acceptance is recorded.
 
 ## Verification
 - Tests: 27/27 PASS (just re-verified)
-- HEAD: aad0450b (main)
+- HEAD: aea29c56 (main)
 - Priority enforced by repo name; status-only work forbidden.
