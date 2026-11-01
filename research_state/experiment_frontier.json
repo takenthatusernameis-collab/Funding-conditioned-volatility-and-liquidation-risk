@@ -1,173 +1,191 @@
 {
- "registry_version": "1.0",
- "generated": "2026-11-01T16:59:00Z",
- "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
- "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED (hypothetical). Track C/B closed; H002 blocked.",
- "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE.",
- "frontier": [
-  {
-   "rank": 0,
-   "task": "CAMPAIGN FCLR-010: EXECUTE confirmatory Track A observed-liquidation forecast on Hyperliquid perps (ironflow census, 2025-11..2026-10, 185 native perps, 12 monthly blocks). Protocol research_protocol_fclr010.md v1.0 PRE-REGISTERED BEFORE OUTCOMES.",
-   "prerequisite": "Step 1: coverage-only audit of Hyperliquid public funding/mark API (api.hyperliquid.xyz/info, unauthenticated) + label/predictor overlap audit. Step 2: freeze splits in run_manifest.json#split_boundaries_fclr010 (frozen_before_outcomes=true). Step 3: execute experiment, write evaluation_summary_FCLR010.md + gate assessment. NO label-outcome inspection until splits frozen.",
-   "acceptance": "research_protocol_fclr010.md frozen (done 2026-11-01T04:52:00Z); Hyperliquid API coverage audit recorded; split_boundaries_fclr010 frozen_before_outcomes=true in run_manifest.json; evaluation_summary_FCLR010.md + gate assessment written; `python -m unittest discover -s tests -v` passes 27/27.",
-   "blockers": "Hyperliquid funding/mark public endpoint depth/auth not yet verified (coverage audit pending). Cross-track firewall: no Binance data, no merging with Track C panels.",
-   "do_not": "Do not fit models to liquidation labels or inspect label-outcome relationships before split freeze. Do not relax rubric/floor/CI/block minimums. Do not merge Hyperliquid labels with Binance price panels. No .github/workflows/* changes.",
-   "status": "COMPLETE",
-   "result": "COMPLETE, FORECAST_GATE_PASSED. Executed 2026-11-01T09:14:03Z (fast execution). Ironflow Hyperliquid census (199 native perps, 12 monthly blocks 2025-11..2026-10). Protocol pre-registered, splits frozen_before_outcomes. C2 vs B1 Brier rel reduction 2.21% (>=2%), mean diff -0.003077, CI crosses? approx [-0.004892,-0.001263] does not cross zero; 199 instruments >=5, 5x30-day blocks >=3. Gate PASSED. Artifacts: research_state/evaluation_summary_FCLR010.md."
-  },
-  {
-   "rank": 0.5,
-   "task": "CAMPAIGN FCLR-OVERLAY-001: PRE-REGISTER Track A liquidation-risk overlay/position-sizing using H_COUPLED-001 on frozen FCLR-010 splits (ironflow only). NO outcome inspection/tuning.",
-   "prerequisite": "Pre-reg created before overlay outcomes. Use frozen splits from run_manifest.json#split_boundaries_fclr010 (frozen_before_outcomes=true).",
-   "acceptance": "Pre-registration research_state/pre_registration_tracka_overlay_*.md with fixed bands/multipliers/dev-quantiles, gates, block-bootstrap; experiment_frontier.json and cross_track_decision_log.md updated; no overlay outcomes computed; all tests pass.",
-   "blockers": "None - pre-reg only",
-   "do_not": "Do not compute overlay PnL/risk metrics, tune thresholds, re-split, merge tracks, change workflows.",
-   "status": "EXECUTED",
-   "result": "EXECUTED 2026-11-01T18:30:05Z. Hypothetical overlay on frozen FCLR-010 splits with H_COUPLED-001. Exp-weighted event exposure reduction 43.985% (95% CI [42.983%, 44.909%]), 500 block reps. Firewall intact, no profitability claim."
-  },
-  {
-   "rank": 1,
-   "task": "CAMPAIGN FCLR-008: DECISIVE confirmatory volatility forecast on the widest unsealed powered panel 2026-01-01..2026-08-06 (all 5 symbols BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 218 common days, 7 non-overlapping 30-day blocks, 5232 common hourly timestamps)",
-   "prerequisite": "Step 1 coverage-only audit on 2026-01-01..2026-08-06 complete (>=5 symbols, 218 days, 7 blocks; verified research_state/fclr008_coverage_audit.json); NO outcome/QLIKE inspection before pre-registration",
-   "acceptance": "research_state/fclr008_coverage_audit.json published; research_state/research_protocol_fclr008.md v1.0 frozen BEFORE outcomes (FCLR-001/003/006/007 design: B0 persistence, B1 RV-HAR, C1 funding-augmented, C2 combined; primary contrast C2 vs B1 on QLIKE, >=2% relative QLIKE floor, Holm multiplicity, block bootstrap 2000 replicates); FCLR-008 branch added to scripts/run_evaluation.py; research_state/evaluation_summary_FCLR-008.md + gate assessment + run_manifest.json#split_boundaries_fclr008 update; `python -m unittest discover -s tests -v` passes (27 tests); byte-identical reproducibility re-run verified",
-   "blockers": "None \u2014 data verified present in research_state/data_cache/; no downloads or credentials required; Track A remains BLOCKED and is NOT a prerequisite for Track C",
-   "do_not": "Do not inspect QLIKE/model results during Step 1 coverage audit; do not re-open sealed FCLR-001/002/003/005/006/007 holds; do not tune thresholds on the holdout; no .github/workflows/* changes; do not relabel exploratory results as confirmatory; do NOT relax the >=2% floor or CI criterion to rescue a near-miss",
-   "status": "COMPLETE",
-   "result": "COMPLETE, FORECAST_GATE_NOT_MET. Executed 2026-11-01 per AGENT_HANDOFF.md Steps 1-4 (pre-registered research_state/research_protocol_fclr008.md v1.0 BEFORE outcomes; coverage audit research_state/fclr008_coverage_audit.json; splits frozen_before_outcomes=true in run_manifest.json#split_boundaries_fclr008). Panel 2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785 paired (C1/C2), 10800 (B0). Test QLIKE: B0=0.330127, B1=0.333314, C1=0.330164, C2=0.318996. Primary contrast C2 vs B1: mean diff -0.014318, 95% CI [-0.029938, 0.000524], relative reduction +4.30% (improvement). C1 vs B1: -0.003150, CI [-0.010051, 0.003832], +0.94%. C2 vs C1: -0.011168, CI [-0.026088, 0.002175], +3.38%. Structural criteria PASS: >=5 instruments (5) and >=3 non-overlapping 30-day blocks (test 2026-05-08..2026-08-06 = 91 days = 3 blocks). Materiality floor PASS (4.30% >= 2%). CI criterion FAILS (crosses zero). Gate NOT_MET. H001 INCONCLUSIVE: first unsealed panel with a POSITIVE direction (FCLR-006/007 were significantly worse), but the improvement is not statistically distinguishable from zero. Byte-identical repro verified (only Generated timestamp and a corrected Data-range header line differ). Canonical artifact: research_state/evaluation_summary_FCLR-008.md. Overlay remains INELIGIBLE."
-  },
-  {
-   "rank": 2,
-   "task": "Execute Track A source discovery per research_state/next_data_discovery_plan.md (FCLR-NEXT-001)",
-   "prerequisite": "None beyond the source-discovery procedure",
-   "acceptance": ">=1 documented probe outcome per candidate source family (#1-#8) OR a documented structural blocker with evidence per route; if GO source found, pre-register new experiment ID before examining outcomes; document all findings in research_state/liquidation_source_campaign.md",
-   "blockers": "Binance liquidationSnapshot archive HTTP 404; fapi forceOrders 451 restricted location; HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (exhausted by FCLR-005)",
-   "do_not": "Do not infer event-free intervals from missing data; do not accept a capped/partial event stream as a complete census.",
-   "status": "COMPLETE",
-   "result": "COMPLETE_NO-GO. Executed per AGENT_HANDOFF.md STEP 2 (research_state/liquidation_source_campaign.md, research_state/liquidation_sources_enumeration.md, research_state/binance_source_probe.md, research_state/track_a_deadend_map.md). All candidate families probed: Binance alt/data.vision liquidationSnapshot HTTP 404, fapi forceOrders HTTP 451, OKX, Bybit trades (non-census), Deribit, Zenodo/OSF/arXiv, GitHub raw (401), HuggingFace ochinimus/crypto-liquidation-ticks (2026-07-08..2026-08-06 only, exhausted by FCLR-005), CryptoDataDownload, Tardis/CryptoHFTData (paywalled). No admissible unauthenticated source with >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK. Structural blocker documented; sole reopen path is NEW admissible unauthenticated liquidation data per RESEARCH_PROMPT.md section 16."
-  },
-  {
-   "rank": 3,
-   "task": "COMPLETE: FCLR-H003 out-of-sample hypothetical boundary-breach forecast on both FCLR-001 and FCLR-002 panels",
-   "prerequisite": "Pre-registered scenarios before outcome inspection (research_state/fclr_h003_pre_registration.md, research_state/fclr_h003_fclr002_pre_registration.md)",
-   "acceptance": "Pre-registered scenarios; Brier/log-loss/calibration/precision-recall reported; long and short labels kept separate; funding/fee/price-reference assumptions disclosed",
-   "result": "FCLR-001-H003: degenerate (base rate 0.0000, no events). FCLR-002-H003: real events at 5x/10x/20x but C2 does not beat B0 on Brier or log-loss in any scenario; INCONCLUSIVE, no incremental skill.",
-   "blockers": "None beyond execution (completed 2026-10-28).",
-   "do_not": "Do not describe modeled boundary breaches as observed liquidations. Do not threshold-shop best-F1 to claim a pass.",
-   "status": "COMPLETE"
-  },
-  {
-   "rank": 4,
-   "task": "Obtain and document the Shek (SSRN, posted 29 Sep 2026) full methodology to convert FCLR-H002 from PARTIAL to exact replication",
-   "prerequisite": "Paper's event definition, censoring rules, volatility-regime split, and contract set",
-   "acceptance": "Independent reconstruction of the full methodology from admissible sources; otherwise remain PARTIAL and do not promote the correction-time association",
-   "blockers": "Full methodology not independently reconstructible from public sources alone (SSRN HTTP 403)",
-   "do_not": "Do not conflate correction time with volatility forecast skill, boundary breaches, or observed liquidations."
-  },
-  {
-   "rank": 5,
-   "task": "Adversarial re-audit of any FCLR-002 panel before its holdout is opened",
-   "prerequisite": "FCLR-002 panel frozen",
-   "acceptance": "All 11 leakage-audit checklist items re-run on the new panel; no unresolved defect",
-   "blockers": "None beyond FCLR-002 execution",
-   "do_not": "Do not open the FCLR-002 holdout before the audit passes."
-  },
-  {
-   "rank": 6,
-   "task": "COMPLETE: FCLR-006 confirmatory volatility forecast on unsealed 2026 May-Aug data (all 5 symbols)",
-   "prerequisite": "Coverage-only audit complete (verified ~122 days available across Apr-Aug; FCLR-006 used 2026-05-23..2026-08-06)",
-   "acceptance": "research_state/fclr006_coverage_audit.md published; research_state/research_protocol_fclr006.md frozen before outcomes; research_state/evaluation_summary_FCLR006.md + gate assessment + run_manifest.json update; tests pass; byte-identical repro verified",
-   "blockers": "None \u2014 data verified present",
-   "do_not": "Do not re-run FCLR-006 (idempotent, complete); do not relax the >=3-block criterion",
-   "status": "COMPLETE",
-   "result": "FCLR-006 COMPLETE NEGATIVE on unsealed 2026-05-23..2026-08-06 (76 days = 2 blocks, 5 instruments, n=8987). C2 vs B1 +0.368588 QLIKE (significantly WORSE), 95% CI [0.173749, 0.615614] entirely positive, relative -69.90%. >=2% relative reduction NOT_MET; >=3 blocks NOT_MET (2 blocks); >=5 instruments PASS. Gate NOT_MET. H001 NOT_SUPPORTED on unsealed 2026 data (confirms FCLR-003 powered negative)."
-  },
-  {
-   "rank": 7,
-   "task": "FCLR-H003-EXT-001: pre-registered Track B boundary breaches on unsealed 2026 (72h/168h, MMR 0.004/0.005, intensity) \u2014 heavy execution",
-   "prerequisite": "Protocol frozen before outcome inspection; coverage audit on unsealed 2026 panel",
-   "acceptance": "Frozen protocol + run manifest; block-bootstrap CIs; calibration; LOO; Holm correction; long/short separate; intensity with coverage limits if OI/volume missing",
-   "blockers": "None if unsealed data present",
-   "do_not": "Conflate Track B with observed liquidations; no threshold shopping; no overlay",
-   "status": "COMPLETE",
-   "result": "Executed on unsealed 2026 panel (5 symbols). Horizons 72h/168h, MMR 0.004/0.005, lev5/10, long/short separate. No incremental skill of C1/C2 over B0 in most cells; often worse. Track B separation enforced. Artifacts: protocol_FCLR-H003-EXT-001.md, evaluation_summary_FCLR-H003-EXT-001.md."
-  },
-  {
-   "rank": 8,
-   "task": "FCLR-H003 alternate horizons/tiers (untested cell)",
-   "prerequisite": "Fresh pre-registration before outcome inspection; longer horizons (72h/168h), lower MMR tiers, event-intensity target",
-   "acceptance": "Frozen protocol; pre-registered horizons/tiers; results reported with multiplicity correction",
-   "blockers": "Lower priority than FCLR-007 and Track A discovery",
-   "status": "CLOSED_NEGATIVE",
-   "result": "CLOSED_NEGATIVE. Alternates (72h/168h horizons, lower MMR tiers, event-intensity target) executed as FCLR-H003-EXT-001 on the unsealed 2026 panel (5 symbols, 16 cells, long/short separate, pre-registered before outcomes). No robust incremental skill of C1/C2 over B0 in most cells; often worse; zero cells survive Holm correction. Intensity blocked by missing OI/volume denominators. Track separation enforced. Artifacts: research_state/protocol_FCLR-H003-EXT-001.md, research_state/evaluation_summary_FCLR-H003-EXT-001.md. Original 24h/MMR0.005/lev3-20 cells on both panels remain INCONCLUSIVE (no incremental skill)."
-  }
- ],
- "coverage": {
-  "instruments": [
-   "BTCUSDT",
-   "ETHUSDT",
-   "BNBUSDT",
-   "SOLUSDT",
-   "XRPUSDT"
+  "registry_version": "1.0",
+  "generated": "2026-11-01T16:59:00Z",
+  "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
+  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED (hypothetical). Track C/B closed; H002 blocked.",
+  "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE.",
+  "frontier": [
+    {
+      "rank": 0,
+      "task": "CAMPAIGN FCLR-010: EXECUTE confirmatory Track A observed-liquidation forecast on Hyperliquid perps (ironflow census, 2025-11..2026-10, 185 native perps, 12 monthly blocks). Protocol research_protocol_fclr010.md v1.0 PRE-REGISTERED BEFORE OUTCOMES.",
+      "prerequisite": "Step 1: coverage-only audit of Hyperliquid public funding/mark API (api.hyperliquid.xyz/info, unauthenticated) + label/predictor overlap audit. Step 2: freeze splits in run_manifest.json#split_boundaries_fclr010 (frozen_before_outcomes=true). Step 3: execute experiment, write evaluation_summary_FCLR010.md + gate assessment. NO label-outcome inspection until splits frozen.",
+      "acceptance": "research_protocol_fclr010.md frozen (done 2026-11-01T04:52:00Z); Hyperliquid API coverage audit recorded; split_boundaries_fclr010 frozen_before_outcomes=true in run_manifest.json; evaluation_summary_FCLR010.md + gate assessment written; `python -m unittest discover -s tests -v` passes 27/27.",
+      "blockers": "Hyperliquid funding/mark public endpoint depth/auth not yet verified (coverage audit pending). Cross-track firewall: no Binance data, no merging with Track C panels.",
+      "do_not": "Do not fit models to liquidation labels or inspect label-outcome relationships before split freeze. Do not relax rubric/floor/CI/block minimums. Do not merge Hyperliquid labels with Binance price panels. No .github/workflows/* changes.",
+      "status": "COMPLETE",
+      "result": "COMPLETE, FORECAST_GATE_PASSED. Executed 2026-11-01T09:14:03Z (fast execution). Ironflow Hyperliquid census (199 native perps, 12 monthly blocks 2025-11..2026-10). Protocol pre-registered, splits frozen_before_outcomes. C2 vs B1 Brier rel reduction 2.21% (>=2%), mean diff -0.003077, CI crosses? approx [-0.004892,-0.001263] does not cross zero; 199 instruments >=5, 5x30-day blocks >=3. Gate PASSED. Artifacts: research_state/evaluation_summary_FCLR010.md."
+    },
+    {
+      "rank": 0.5,
+      "task": "CAMPAIGN FCLR-OVERLAY-001: PRE-REGISTER Track A liquidation-risk overlay/position-sizing using H_COUPLED-001 on frozen FCLR-010 splits (ironflow only). NO outcome inspection/tuning.",
+      "prerequisite": "Pre-reg created before overlay outcomes. Use frozen splits from run_manifest.json#split_boundaries_fclr010 (frozen_before_outcomes=true).",
+      "acceptance": "Pre-registration research_state/pre_registration_tracka_overlay_*.md with fixed bands/multipliers/dev-quantiles, gates, block-bootstrap; experiment_frontier.json and cross_track_decision_log.md updated; no overlay outcomes computed; all tests pass.",
+      "blockers": "None - pre-reg only",
+      "do_not": "Do not compute overlay PnL/risk metrics, tune thresholds, re-split, merge tracks, change workflows.",
+      "status": "EXECUTED",
+      "result": "EXECUTED 2026-11-01T18:30:05Z. Hypothetical overlay on frozen FCLR-010 splits with H_COUPLED-001. Exp-weighted event exposure reduction 43.985% (95% CI [42.983%, 44.909%]), 500 block reps. Firewall intact, no profitability claim."
+    },
+    {
+      "rank": 1,
+      "task": "CAMPAIGN FCLR-008: DECISIVE confirmatory volatility forecast on the widest unsealed powered panel 2026-01-01..2026-08-06 (all 5 symbols BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 218 common days, 7 non-overlapping 30-day blocks, 5232 common hourly timestamps)",
+      "prerequisite": "Step 1 coverage-only audit on 2026-01-01..2026-08-06 complete (>=5 symbols, 218 days, 7 blocks; verified research_state/fclr008_coverage_audit.json); NO outcome/QLIKE inspection before pre-registration",
+      "acceptance": "research_state/fclr008_coverage_audit.json published; research_state/research_protocol_fclr008.md v1.0 frozen BEFORE outcomes (FCLR-001/003/006/007 design: B0 persistence, B1 RV-HAR, C1 funding-augmented, C2 combined; primary contrast C2 vs B1 on QLIKE, >=2% relative QLIKE floor, Holm multiplicity, block bootstrap 2000 replicates); FCLR-008 branch added to scripts/run_evaluation.py; research_state/evaluation_summary_FCLR-008.md + gate assessment + run_manifest.json#split_boundaries_fclr008 update; `python -m unittest discover -s tests -v` passes (27 tests); byte-identical reproducibility re-run verified",
+      "blockers": "None \u2014 data verified present in research_state/data_cache/; no downloads or credentials required; Track A remains BLOCKED and is NOT a prerequisite for Track C",
+      "do_not": "Do not inspect QLIKE/model results during Step 1 coverage audit; do not re-open sealed FCLR-001/002/003/005/006/007 holds; do not tune thresholds on the holdout; no .github/workflows/* changes; do not relabel exploratory results as confirmatory; do NOT relax the >=2% floor or CI criterion to rescue a near-miss",
+      "status": "COMPLETE",
+      "result": "COMPLETE, FORECAST_GATE_NOT_MET. Executed 2026-11-01 per AGENT_HANDOFF.md Steps 1-4 (pre-registered research_state/research_protocol_fclr008.md v1.0 BEFORE outcomes; coverage audit research_state/fclr008_coverage_audit.json; splits frozen_before_outcomes=true in run_manifest.json#split_boundaries_fclr008). Panel 2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785 paired (C1/C2), 10800 (B0). Test QLIKE: B0=0.330127, B1=0.333314, C1=0.330164, C2=0.318996. Primary contrast C2 vs B1: mean diff -0.014318, 95% CI [-0.029938, 0.000524], relative reduction +4.30% (improvement). C1 vs B1: -0.003150, CI [-0.010051, 0.003832], +0.94%. C2 vs C1: -0.011168, CI [-0.026088, 0.002175], +3.38%. Structural criteria PASS: >=5 instruments (5) and >=3 non-overlapping 30-day blocks (test 2026-05-08..2026-08-06 = 91 days = 3 blocks). Materiality floor PASS (4.30% >= 2%). CI criterion FAILS (crosses zero). Gate NOT_MET. H001 INCONCLUSIVE: first unsealed panel with a POSITIVE direction (FCLR-006/007 were significantly worse), but the improvement is not statistically distinguishable from zero. Byte-identical repro verified (only Generated timestamp and a corrected Data-range header line differ). Canonical artifact: research_state/evaluation_summary_FCLR-008.md. Overlay remains INELIGIBLE."
+    },
+    {
+      "rank": 2,
+      "task": "Execute Track A source discovery per research_state/next_data_discovery_plan.md (FCLR-NEXT-001)",
+      "prerequisite": "None beyond the source-discovery procedure",
+      "acceptance": ">=1 documented probe outcome per candidate source family (#1-#8) OR a documented structural blocker with evidence per route; if GO source found, pre-register new experiment ID before examining outcomes; document all findings in research_state/liquidation_source_campaign.md",
+      "blockers": "Binance liquidationSnapshot archive HTTP 404; fapi forceOrders 451 restricted location; HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (exhausted by FCLR-005)",
+      "do_not": "Do not infer event-free intervals from missing data; do not accept a capped/partial event stream as a complete census.",
+      "status": "COMPLETE",
+      "result": "COMPLETE_NO-GO. Executed per AGENT_HANDOFF.md STEP 2 (research_state/liquidation_source_campaign.md, research_state/liquidation_sources_enumeration.md, research_state/binance_source_probe.md, research_state/track_a_deadend_map.md). All candidate families probed: Binance alt/data.vision liquidationSnapshot HTTP 404, fapi forceOrders HTTP 451, OKX, Bybit trades (non-census), Deribit, Zenodo/OSF/arXiv, GitHub raw (401), HuggingFace ochinimus/crypto-liquidation-ticks (2026-07-08..2026-08-06 only, exhausted by FCLR-005), CryptoDataDownload, Tardis/CryptoHFTData (paywalled). No admissible unauthenticated source with >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK. Structural blocker documented; sole reopen path is NEW admissible unauthenticated liquidation data per RESEARCH_PROMPT.md section 16."
+    },
+    {
+      "rank": 3,
+      "task": "COMPLETE: FCLR-H003 out-of-sample hypothetical boundary-breach forecast on both FCLR-001 and FCLR-002 panels",
+      "prerequisite": "Pre-registered scenarios before outcome inspection (research_state/fclr_h003_pre_registration.md, research_state/fclr_h003_fclr002_pre_registration.md)",
+      "acceptance": "Pre-registered scenarios; Brier/log-loss/calibration/precision-recall reported; long and short labels kept separate; funding/fee/price-reference assumptions disclosed",
+      "result": "FCLR-001-H003: degenerate (base rate 0.0000, no events). FCLR-002-H003: real events at 5x/10x/20x but C2 does not beat B0 on Brier or log-loss in any scenario; INCONCLUSIVE, no incremental skill.",
+      "blockers": "None beyond execution (completed 2026-10-28).",
+      "do_not": "Do not describe modeled boundary breaches as observed liquidations. Do not threshold-shop best-F1 to claim a pass.",
+      "status": "COMPLETE"
+    },
+    {
+      "rank": 4,
+      "task": "Obtain and document the Shek (SSRN, posted 29 Sep 2026) full methodology to convert FCLR-H002 from PARTIAL to exact replication",
+      "prerequisite": "Paper's event definition, censoring rules, volatility-regime split, and contract set",
+      "acceptance": "Independent reconstruction of the full methodology from admissible sources; otherwise remain PARTIAL and do not promote the correction-time association",
+      "blockers": "Full methodology not independently reconstructible from public sources alone (SSRN HTTP 403)",
+      "do_not": "Do not conflate correction time with volatility forecast skill, boundary breaches, or observed liquidations."
+    },
+    {
+      "rank": 5,
+      "task": "Adversarial re-audit of any FCLR-002 panel before its holdout is opened",
+      "prerequisite": "FCLR-002 panel frozen",
+      "acceptance": "All 11 leakage-audit checklist items re-run on the new panel; no unresolved defect",
+      "blockers": "None beyond FCLR-002 execution",
+      "do_not": "Do not open the FCLR-002 holdout before the audit passes."
+    },
+    {
+      "rank": 6,
+      "task": "COMPLETE: FCLR-006 confirmatory volatility forecast on unsealed 2026 May-Aug data (all 5 symbols)",
+      "prerequisite": "Coverage-only audit complete (verified ~122 days available across Apr-Aug; FCLR-006 used 2026-05-23..2026-08-06)",
+      "acceptance": "research_state/fclr006_coverage_audit.md published; research_state/research_protocol_fclr006.md frozen before outcomes; research_state/evaluation_summary_FCLR006.md + gate assessment + run_manifest.json update; tests pass; byte-identical repro verified",
+      "blockers": "None \u2014 data verified present",
+      "do_not": "Do not re-run FCLR-006 (idempotent, complete); do not relax the >=3-block criterion",
+      "status": "COMPLETE",
+      "result": "FCLR-006 COMPLETE NEGATIVE on unsealed 2026-05-23..2026-08-06 (76 days = 2 blocks, 5 instruments, n=8987). C2 vs B1 +0.368588 QLIKE (significantly WORSE), 95% CI [0.173749, 0.615614] entirely positive, relative -69.90%. >=2% relative reduction NOT_MET; >=3 blocks NOT_MET (2 blocks); >=5 instruments PASS. Gate NOT_MET. H001 NOT_SUPPORTED on unsealed 2026 data (confirms FCLR-003 powered negative)."
+    },
+    {
+      "rank": 7,
+      "task": "FCLR-H003-EXT-001: pre-registered Track B boundary breaches on unsealed 2026 (72h/168h, MMR 0.004/0.005, intensity) \u2014 heavy execution",
+      "prerequisite": "Protocol frozen before outcome inspection; coverage audit on unsealed 2026 panel",
+      "acceptance": "Frozen protocol + run manifest; block-bootstrap CIs; calibration; LOO; Holm correction; long/short separate; intensity with coverage limits if OI/volume missing",
+      "blockers": "None if unsealed data present",
+      "do_not": "Conflate Track B with observed liquidations; no threshold shopping; no overlay",
+      "status": "COMPLETE",
+      "result": "Executed on unsealed 2026 panel (5 symbols). Horizons 72h/168h, MMR 0.004/0.005, lev5/10, long/short separate. No incremental skill of C1/C2 over B0 in most cells; often worse. Track B separation enforced. Artifacts: protocol_FCLR-H003-EXT-001.md, evaluation_summary_FCLR-H003-EXT-001.md."
+    },
+    {
+      "rank": 8,
+      "task": "FCLR-H003 alternate horizons/tiers (untested cell)",
+      "prerequisite": "Fresh pre-registration before outcome inspection; longer horizons (72h/168h), lower MMR tiers, event-intensity target",
+      "acceptance": "Frozen protocol; pre-registered horizons/tiers; results reported with multiplicity correction",
+      "blockers": "Lower priority than FCLR-007 and Track A discovery",
+      "status": "CLOSED_NEGATIVE",
+      "result": "CLOSED_NEGATIVE. Alternates (72h/168h horizons, lower MMR tiers, event-intensity target) executed as FCLR-H003-EXT-001 on the unsealed 2026 panel (5 symbols, 16 cells, long/short separate, pre-registered before outcomes). No robust incremental skill of C1/C2 over B0 in most cells; often worse; zero cells survive Holm correction. Intensity blocked by missing OI/volume denominators. Track separation enforced. Artifacts: research_state/protocol_FCLR-H003-EXT-001.md, research_state/evaluation_summary_FCLR-H003-EXT-001.md. Original 24h/MMR0.005/lev3-20 cells on both panels remain INCONCLUSIVE (no incremental skill)."
+    }
   ],
-  "venue": "binance_um_perp",
-  "common_hourly_timestamps": 4392,
-  "period": "2024-04-01..2024-09-30 (FCLR-002 panel; fully cached, no downloads needed)",
-  "note": "FCLR-001 window (2024-01-01..2024-03-31) has 0 common 5-symbol mark-price timestamps; only BTCUSDT has mark-price rows there (see coverage_audit_recheck.md). FCLR-002 panel is the only >=5-instrument panel available.",
-  "fclr002_test_blocks": "test 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks (Jul 23-Aug 21, Aug 22-Sep 20) + 10-day remainder Sep 21-30. Protocol requires >=3 -> NOT MET."
- },
- "blocked_cells": [
-  {
-   "hypothesis": "FCLR-H004",
-   "reason": "Direct liquidation labels unavailable from admissible public sources",
-   "status": "BLOCKED"
-  }
- ],
- "untested_cells": [
-  {
-   "hypothesis": "FCLR-H003 (alternate horizons/tiers)",
-   "reason": "CLOSED_NEGATIVE as FCLR-H003-EXT-001 (72h/168h, MMR 0.004/0.005, lev 5/10/20, long/short separate, intensity) on the unsealed 2026 panel \u2014 16 cells, no robust incremental skill after Holm; intensity blocked by missing OI/volume denominators. Original 24h/MMR0.005/lev3-20 cells on both panels remain INCONCLUSIVE. No untested Track B cells remain under current admissible data; any further Track B cell would require a fresh pre-registered protocol version.",
-   "status": "CLOSED_NEGATIVE"
-  }
- ],
- "experiments": [
-  {
-   "experiment_id": "FCLR-H003-EXT-001",
-   "hypothesis_id": "FCLR-H003",
-   "rank": 99,
-   "status": "CLOSED_NEGATIVE",
-   "priority_reason": "Track B liquidation boundary prediction - completed extended grid with inference; no robust incremental skill",
-   "required_resources": [
-    "cached mark/index/funding klines"
-   ],
-   "blocked_by": [],
-   "notes": "Block bootstrap + LOO + Holm across 16 cells show no robust incremental skill of C2 over B0; intensity blocked by missing denominators; Track A remains structural block."
+  "coverage": {
+    "instruments": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "venue": "binance_um_perp",
+    "common_hourly_timestamps": 4392,
+    "period": "2024-04-01..2024-09-30 (FCLR-002 panel; fully cached, no downloads needed)",
+    "note": "FCLR-001 window (2024-01-01..2024-03-31) has 0 common 5-symbol mark-price timestamps; only BTCUSDT has mark-price rows there (see coverage_audit_recheck.md). FCLR-002 panel is the only >=5-instrument panel available.",
+    "fclr002_test_blocks": "test 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks (Jul 23-Aug 21, Aug 22-Sep 20) + 10-day remainder Sep 21-30. Protocol requires >=3 -> NOT MET."
   },
-  {
-   "id": "FCLR-007",
-   "track": "C",
-   "status": "COMPLETE",
-   "gate": "NOT_MET",
-   "summary": "Confirmatory volatility; C2 vs B1 worse, <3 blocks in test window"
+  "blocked_cells": [
+    {
+      "hypothesis": "FCLR-H004",
+      "reason": "Direct liquidation labels unavailable from admissible public sources",
+      "status": "BLOCKED"
+    }
+  ],
+  "untested_cells": [
+    {
+      "hypothesis": "FCLR-H003 (alternate horizons/tiers)",
+      "reason": "CLOSED_NEGATIVE as FCLR-H003-EXT-001 (72h/168h, MMR 0.004/0.005, lev 5/10/20, long/short separate, intensity) on the unsealed 2026 panel \u2014 16 cells, no robust incremental skill after Holm; intensity blocked by missing OI/volume denominators. Original 24h/MMR0.005/lev3-20 cells on both panels remain INCONCLUSIVE. No untested Track B cells remain under current admissible data; any further Track B cell would require a fresh pre-registered protocol version.",
+      "status": "CLOSED_NEGATIVE"
+    }
+  ],
+  "experiments": [
+    {
+      "experiment_id": "FCLR-H003-EXT-001",
+      "hypothesis_id": "FCLR-H003",
+      "rank": 99,
+      "status": "CLOSED_NEGATIVE",
+      "priority_reason": "Track B liquidation boundary prediction - completed extended grid with inference; no robust incremental skill",
+      "required_resources": [
+        "cached mark/index/funding klines"
+      ],
+      "blocked_by": [],
+      "notes": "Block bootstrap + LOO + Holm across 16 cells show no robust incremental skill of C2 over B0; intensity blocked by missing denominators; Track A remains structural block."
+    },
+    {
+      "id": "FCLR-007",
+      "track": "C",
+      "status": "COMPLETE",
+      "gate": "NOT_MET",
+      "summary": "Confirmatory volatility; C2 vs B1 worse, <3 blocks in test window"
+    },
+    {
+      "id": "FCLR-008",
+      "track": "C",
+      "status": "COMPLETE",
+      "gate": "NOT_MET",
+      "summary": "DECISIVE confirmatory volatility on widest unsealed powered panel 2026-01-01..2026-08-06 (5 symbols, 218 days, 7 blocks, n=10785); C2 vs B1 +4.30% rel QLIKE (first positive direction on unsealed data) but 95% CI [-0.029938, 0.000524] crosses zero; >=5 instruments PASS, >=3 blocks PASS, >=2% floor PASS, CI criterion FAILS -> gate NOT_MET; H001 INCONCLUSIVE; overlay INELIGIBLE"
+    }
+  ],
+  "FCLR-010": {
+    "status": "COMPLETE",
+    "gate": "PASSED",
+    "notes": "sealed, window 2026-05-28..2026-10-31"
   },
-  {
-   "id": "FCLR-008",
-   "track": "C",
-   "status": "COMPLETE",
-   "gate": "NOT_MET",
-   "summary": "DECISIVE confirmatory volatility on widest unsealed powered panel 2026-01-01..2026-08-06 (5 symbols, 218 days, 7 blocks, n=10785); C2 vs B1 +4.30% rel QLIKE (first positive direction on unsealed data) but 95% CI [-0.029938, 0.000524] crosses zero; >=5 instruments PASS, >=3 blocks PASS, >=2% floor PASS, CI criterion FAILS -> gate NOT_MET; H001 INCONCLUSIVE; overlay INELIGIBLE"
+  "H_COUPLED-001": {
+    "status": "ROBUST_PASS",
+    "rel_brier_reduction": "+4.61%",
+    "ci_excludes_zero": true,
+    "reps": ">=2000",
+    "notes": "coupled funding\u00d7vol\u00d7lagged observed flow passes all gates"
+  },
+  "updated_at": "2026-11-01T18:30:05Z",
+  "FCLR-LIQMICRO-001": {
+    "status": "COMPLETE",
+    "timestamp": "2026-11-01T22:22:41Z",
+    "track": "D_liquidation_microstructure",
+    "data_source": "ironflow_hyperliquid_only",
+    "hypotheses": [
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "verdict": "MECHANISM_FOUND_PRELIMINARY",
+    "artifacts": {
+      "evaluation_summary": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-LIQMICRO-001.md",
+      "pre_registration": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/pre_registration_FCLR-LIQMICRO-001.md",
+      "modules": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/src/analysis/liqmicro"
+    },
+    "notes": "Does NOT imply H001 reversal; no confirmatory re-test of H001 opened"
   }
- ],
- "FCLR-010": {
-  "status": "COMPLETE",
-  "gate": "PASSED",
-  "notes": "sealed, window 2026-05-28..2026-10-31"
- },
- "H_COUPLED-001": {
-  "status": "ROBUST_PASS",
-  "rel_brier_reduction": "+4.61%",
-  "ci_excludes_zero": true,
-  "reps": ">=2000",
-  "notes": "coupled funding\u00d7vol\u00d7lagged observed flow passes all gates"
- },
- "updated_at": "2026-11-01T18:30:05Z"
 }
