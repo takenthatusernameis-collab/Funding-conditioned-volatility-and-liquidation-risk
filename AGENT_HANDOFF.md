@@ -1,65 +1,70 @@
-# AGENT_HANDOFF.md (DURABLE — FCLR-HANDOFF-018)
-**TIMESTAMP (UTC):** 2026-11-01T02:47:43Z
+# AGENT_HANDOFF.md (DURABLE — FCLR-HANDOFF-019)
+**TIMESTAMP (UTC):** 2026-11-01T02:49:37Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 3df84bb8 (working tree: __pycache__ only)
-**HANDOFF ID:** FCLR-HANDOFF-018-20261101T024743Z
-**STATUS:** ACTIVE - DATA-DRIVEN HEAVY CAMPAIGN (NOT TERMINAL BY DEFAULT)
+**BRANCH/HEAD:** main @ 106652ad (working tree: __pycache__ only)
+**HANDOFF ID:** FCLR-HANDOFF-019-20261101T024937Z
+**STATUS:** ACTIVE - INTEGRATED HEAVY CAMPAIGN (COUPLED PRIORITY BY REPO NAME)
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T02:47:43Z
-**PRIORITY P0 | TYPE: INTEGRATED UNBLOCK (FUNDING-CONDITIONED VOLATILITY + LIQUIDATION RISK)**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T02:49:37Z
+**PRIORITY P0 | TYPE: COUPLED INTEGRATION (FUNDING-CONDITIONED VOLATILITY ∩ LIQUIDATION RISK)**
 
-Repo name is the priority order. Do **not** split into "if no A then skip" — treat **Funding-conditioned volatility AND liquidation risk** as coupled. The prior terminal verdict is based on exhausted 2024 confirmatory panels with current admissible data; it does **not** close discovery.
+**REPO NAME IS THE SPEC:** Treat "Funding-conditioned-volatility AND liquidation-risk" as a **single coupled problem**. Do NOT silo into independent tracks - test how funding-conditioned volatility dynamics inform liquidation risk and vice versa. Prior terminal labels do not close discovery.
 
-**DO THIS FIRST (60s):**
+### MANDATORY FIRST ACTION (30s)
 ```bash
 cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
 git log -1 --oneline && git status --short
-python -m unittest discover -s tests -v  # must remain 27/27 PASS
+python -m unittest discover -s tests -v  # MUST remain 27/27 PASS
 ```
 
-**NEXT FOCUS CAMPAIGN: `FCLR-INTEGRATED-UNBLOCK`**
+### FOCUS CAMPAIGN: `FCLR-COUPLED-DISCOVERY` (FORCE HEAVY WORKING)
 
-Execute in strict order of repo-name priority:
+Execute in this exact order. **No shortcuts. No "already exhausted" without running these steps.**
 
-### 1) TRACK A + INTEGRATION (LIQUIDATION RISK) — HEAVY DISCOVERY (BLOCKING)
-Treat observed liquidations as the binding gap. Do **not** fabricate/simulate to "unlock" confirmatory status.
-- Read: `research_state/track_a_deadend_map.md`, `research_state/liquidation_source_campaign.md`, `research_state/liquidation_sources_enumeration.md`, `research_state/binance_source_probe.md`, `research_state/data_source_registry.json`
-- Candidate families already exhausted with evidence: Binance `liquidationSnapshot` (404), `fapi/v1/forceOrders` (451/restricted), Bybit trades (not a census), OKX, Deribit, Zenodo/OSF/arXiv, GitHub raw, HuggingFace `ochinimus/crypto-liquidation-ticks` (2026-07-08..2026-08-06 only - exhausted by FCLR-005; cannot cover 2024 frozen windows / cannot form ≥3 non-overlapping 30-day blocks for confirmatory 2024)
-- **Only accept**: unauthenticated download path, census-level or defensibly complete event records with venue/symbol/time, documented completeness/truncation, license/terms, provenance. If partial/capped, explicitly model incompleteness and cannot treat absence as zero.
-- **Output required**: if none found → `research_state/track_a_discovery_gap.md` with exact URLs probed, HTTP/status, headers, paths tried, and concrete "next probe" list (new families). If found → add to `data_source_registry.json` with hashes/vintages and **STOP to pre-register** before any outcome inspection.
+#### STEP 1: LIQUIDATION RISK DISCOVERY (TRACK A) - HIGHEST BOTTLENECK
+**Goal:** Find admissible observed liquidation census data (unauthenticated, no keys).
+- **Read exhaustively:** `research_state/track_a_deadend_map.md`, `research_state/liquidation_source_campaign.md`, `research_state/liquidation_sources_enumeration.md`, `research_state/binance_source_probe.md`, `research_state/data_source_registry.json`
+- **Probe ALL viable families:** Binance alt archives, Bybit/OKX/Deribit public data, data.binance.vision variants, GitHub raw, HuggingFace, Zenodo/OSF/arXiv, CryptoDataDownload, vendor-free mirrors. Try alternate paths/layouts/formats.
+- **Rubric (MUST ALL PASS):** unauthenticated + no_keys + >=5 symbols (perp) + >=3 non-overlapping 30-day blocks + documented completeness/gaps + license OK + census/defensible event records
+- **If ANY pass:** add to `data_source_registry.json` with hashes/vintages, **PRE-REGISTER** protocol before outcome inspection, freeze splits
+- **If NONE pass:** write `research_state/track_a_discovery_gap_YYYYMMDDTHHMMSSZ.md` with **EVERY URL probed, HTTP status/headers, paths tried, errors, and 3-5 specific next probes** (different families/mirrors/formats). This is MANDATORY.
 
-### 2) TRACK C (FUNDING-CONDITIONED VOLATILITY) — EXTEND COVERAGE, NOT RE-RUN
-FCLR-008 was decisive unsealed powered but **INCONCLUSIVE** (C2 vs B1 +4.30% rel QLIKE, CI crosses zero). Do **not** re-run sealed panels or relax multiplicity/gates.
-- Find **new admissible unauthenticated** mark/index/funding/klines with longer/alternate coverage (or missing symbols/eras) that can form a **new frozen panel** meeting §14: ≥5 symbols, ≥3 non-overlapping 30-day blocks, embargoed splits, common eligible sample.
-- If such coverage exists → pre-register fresh experiment (new ID) in `research_state/research_protocol_fclrXXX.md` with `splits/frozen_before_outcomes=true`, record source hashes/vintages in `run_manifest.json`. Do not inspect/fit until pre-registered.
-- If only existing cached data → **do not** run another confirmatory grid; focus on integration (1)+(3).
+#### STEP 2: FUNDING-CONDITIONED VOLATILITY EXTENSION (TRACK C) - EXPAND COVERAGE
+**Goal:** Find NEW admissible data to resolve FCLR-008 inconclusiveness (+4.30% but CI crosses zero).
+- **Read:** `research_state/evaluation_summary_FCLR-008.md`, `research_state/research_protocol_fclr008.md`, `research_state/hypothesis_registry.json`
+- **Search for:** longer/unsealed 2026 coverage, alternate symbols, different monthly layouts, delisted symbols, mark/index/funding/klines from free unauthenticated sources
+- **If found:** pre-register fresh experiment ID (FCLR-009+) with `splits/frozen_before_outcomes=true` BEFORE inspecting results. Record source hashes/vintages in `run_manifest.json`
+- **If NOT found:** **DO NOT** re-run existing panels. Focus on STEP 3 (integration).
 
-### 3) INTEGRATED TESTS (HEAVY WORK IF DATA FOUND)
-Only if (1) or (2) yields admissible data:
-- **H003 integration**: test funding-conditioned effects on liquidation-relevant outcomes (Track A events or defensible Track B boundary proxies) with frozen definitions, separation preserved, Holm correction.
-- **H002**: SSRN 403 blocks full methodology; only pursue if full paper/method becomes accessible via admissible unauthenticated source. Otherwise keep PARTIAL/blocked.
-- **Never** merge Track B into observed liquidations. Keep separation irrefutable.
+#### STEP 3: COUPLED INTEGRATION TEST (FORCE PROGRESS)
+**Goal:** Test the COUPLED hypothesis - funding-conditioned volatility effects on liquidation risk.
+- **If STEP 1 finds admissible liquidation data:** Run integrated test H003 coupling funding-conditioned features to observed liquidation outcomes (or defensible proxies). Preserve separation (Track B modeled != observed). Apply Holm correction.
+- **If ONLY STEP 2 finds data:** Run new pre-registered volatility experiment with tighter design to reduce CI width (more blocks/symbols) without threshold-shopping.
+- **If NEITHER yields new admissible data:** You MUST still produce coupled analysis using existing evidence - write `research_state/coupled_integration_analysis_YYYYMMDDTHHMMSSZ.md` synthesizing FCLR-008 (+4.30% direction) with Track A blockage, H002 partial results, proposing **specific testable hypotheses** with concrete data needs and exact probe plan. No status-only report.
 
-## BOTTLENECK REMOVAL RULES (ENFORCED)
-- **Ambiguity killed**: "terminal" is only acceptable if after exhaustive documented search **no admissible unauthenticated source** exists for (1) or (2). Do not default to terminal.
-- **Force heavy working**: if no new data found after completing (1) with concrete probes, you **must** produce `research_state/track_a_discovery_gap.md` (exhaustive) and also run a **breadth probe** of funding/mark/index archives (alternate paths, delisted symbols, different monthly/daily layouts) for Track C extension before concluding.
-- **Pre-registration is a gate, not paperwork**: finding data ≠ running. Must freeze protocol/splits before outcomes.
-- **No busywork**: no dashboards/orchestrators/wrappers/polling/status-only files/placeholder docs. No changes to `.github/workflows/*`. Commit nothing merely to show activity.
-- **Integrity**: preserve negative results, correct for multiplicity, block-aware inference. Do not threshold-shop or relabel exploratory as confirmatory.
+### BOTTLENECK REMOVAL (ENFORCED)
+- **Ambiguity kills progress:** "terminal/exhausted" is ONLY acceptable if after completing ALL steps with documented evidence you prove no admissible route exists. Default = CONTINUE DISCOVERY.
+- **Force heavy working:** Breadth probes required. Try 5-10 materially different source families minimum before concluding.
+- **Pre-registration is a GATE:** Finding data != running. Freeze protocol/splits before outcomes. New experiment IDs for new panels.
+- **No busywork:** No dashboards/orchestrators/wrappers/polling/status-only files. No `.github/workflows/*` changes. Commit nothing just for activity.
+- **Integrity:** Preserve negatives, correct for multiplicity, block-aware inference. No threshold-shopping or relabeling exploratory as confirmatory.
+- **Efficiency:** Remove any redundant/confusing handoff artifacts blocking next agent - keep ONLY this file as the single durable handoff reference.
 
-## CURRENT EVIDENCE BASE (DO NOT RE-LITIGATE)
-- Tests: 27/27 PASS (verified 2026-11-01T02:47:43Z)
-- FCLR-008: FORECAST_GATE_NOT_MET, H001 INCONCLUSIVE, overlay INELIGIBLE
-- Tracks: A structurally blocked (no rubric-passing observed census), B closed-negative, H002 partial/blocked
-- All prior confirmatory (FCLR-001/002/003/004/005/006/007) exhausted with evidence
+### CURRENT STATE (DO NOT RE-LITIGATE)
+- Tests: 27/27 PASS
+- FCLR-008: INCONCLUSIVE (+4.30% C2 vs B1, CI crosses zero) - first positive direction unsealed
+- Track A: BLOCKED for 2024 (all sources exhausted per evidence) - needs new source
+- Track B: SEALED_NEGATIVE (no robust skill)
+- H002: PARTIAL (direction matches paper, not significant)
+- All prior confirmatory exhausted
 
-## REQUIRED HANDOFF OUTPUT (END OF SESSION)
+### REQUIRED END-OF-SESSION OUTPUT
 1. **What changed and why** (concrete files/lines)
 2. **What was actually tested** (exact commands + outcomes)
-3. **Evidence added and where** (probes, URLs, status, hashes)
-4. **Gate states** per track (A/B/C/H002/H003) with evidence
-5. **Single highest-value next task** (must be executable without user intervention)
+3. **Evidence added** (probes with URLs/status/headers/paths tried, hashes if data found)
+4. **Gate states per track** (A/B/C/H002/H003) with evidence
+5. **Single highest-value next task** (executable without user intervention)
 6. **Precise verify command** for next task
-7. **Blockers + next materially different free route** (or "NO NEW ADMISSIBLE DATA FOUND" with exhaustive proof)
+7. **Blockers + next materially different free route** OR proof of exhaustive search with concrete next probes
 
-**DEFAULT ACTION:** Do heavy discovery. Only accept terminal after exhaustive, documented proof. Never avoid heavy working by claiming "exhausted" without running the integrated discovery above.
+**MANDATE:** Prioritize by repo name - COUPLE funding-conditioned volatility with liquidation risk. Do heavy discovery. Never avoid heavy working.
