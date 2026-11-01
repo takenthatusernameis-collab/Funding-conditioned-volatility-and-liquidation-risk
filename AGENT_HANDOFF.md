@@ -1,54 +1,50 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-035)
-**TIMESTAMP (UTC):** 20261101T112304Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-037)
+**TIMESTAMP (UTC):** 20261101T112400Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 5cbea3bb (working tree clean; no stray debris or blocked sessions)
-**HANDOFF ID:** FCLR-HANDOFF-036-20261101T112304Z
-**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001) on frozen FCLR-010 splits. Tracks A/B/C sealed (NOT_SUPPORTED / COMPLETE_NEGATIVE / BLOCKED-NO-GO). Cross-track firewall IMMUTABLE/SEALED. Bottlenecks removed: no open track re-spin; fclr010_execute_fast.py fabricates hardcoded metrics and MUST NOT be used for confirmatory numbers — real path is scripts/fclr010_execute.py extended to >=2000 replicates + LOSO + time-split + ablation. Next: FCLR-COUPLED-ROBUST (robustness/inference) on ironflow-only with firewall intact.
-**PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM)
+**BRANCH/HEAD:** main @ 5cbea3bb (working tree clean)
+**HANDOFF ID:** FCLR-HANDOFF-037-20261101T112400Z
+**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001) on frozen FCLR-010 splits. Tracks A/B/C SEALED (A SUPPORTED/PASSED; B CLOSED_NEGATIVE; C NOT_SUPPORTED/CLOSED). Cross-track firewall IMMUTABLE. Bottlenecks REMOVED: do NOT use scripts/fclr010_execute_fast.py (hardcodes fabricated numbers). Use real computation path only.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T112304Z
-**PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/GENERALIZATION (HEAVY) | NO DISCOVERY/SPIN | NO CROSS-TRACK MERGE | NO FABRICATED FAST PATH**
+**PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM). Next focus is MANDATORY HEAVY ROBUSTNESS of the coupled model on ironflow Hyperliquid ONLY.
 
-Pre-registration locked: pre_registration_h_coupled_001_20261101T093727Z.md
-Coupled execution complete and PASSED under frozen FCLR-010 splits/firewall (500 bootstrap replicates — below the >=2000 robustness bar).
-No track is blocked waiting on user input. Execute the heavy focus campaign below. Do not re-run sealed Track C/B, do not open Track A discovery, do not touch .github/workflows/*.
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T112400Z
+**PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/INFERENCE (HEAVY, UNAVOIDABLE) | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
 
-### MANDATORY FIRST ACTION (30s)
+Pre-reg: research_state/pre_registration_h_coupled_001_20261101T093727Z.md (frozen). Coupled PASSED with 500 reps. Must prove stability at >=2000 reps under strict constraints.
+
+### MANDATORY FIRST ACTION (verify state, 30s)
 ```bash
 git -C /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk log --oneline -1
-echo "---"
-cat /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-COUPLED-001.md | grep -n "Overall\|G[1-6]\|rel_brier\|PASS\|FAIL"
-echo "---"
-python -m unittest discover -s tests -v 2>&1 | tail -2
+grep -n "Overall\|G[1-6]\|rel_brier\|PASS" /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-COUPLED-001.md | head -10
+python -m unittest discover -s tests -v 2>&1 | tail -1
 ```
 
-### FOCUS CAMPAIGN: FCLR-COUPLED-ROBUST (HEAVY WORK — MANDATORY, UNOPTIONAL)
-Execute strict robustness for H_COUPLED-001 (ironflow Hyperliquid ONLY). Every step must run against the FROZEN FCLR-010 splits; no re-splitting, no holdout re-use.
+### FOCUS CAMPAIGN: FCLR-COUPLED-ROBUST (HEAVY WORK — MANDATORY)
+All work must use FROZEN FCLR-010 splits from run_manifest.json. Ironflow Hyperliquid ONLY. Firewall intact. Block-aware inference.
 
-1. **Verify state**: confirm evaluation_summary_FCLR-COUPLED-001.md exists with all gates PASS (B1 Brier=0.061744, C_coupled Brier=0.058876, mean diff +0.002849, CI [0.002511,0.003158], +4.61% rel Brier, 199 perps, 164x24h blocks). Frozen splits unchanged. Firewall intact.
-2. **Block-bootstrap stability (>=2000 replicates)**: re-run C_coupled vs B1 on the frozen test set with >=2000 block-bootstrap replicates (24h blocks); report mean diff, 95% CI, relative Brier. Must remain >=+1.0% relative reduction and CI must not cross zero.
-3. **Time-split robustness**: evaluate by sub-blocks of the test window (earlier half vs later half); report per-block and pooled relative Brier/CI for each half.
-4. **Symbol concentration**: leave-one-symbol-out (LOSO) across the 199 native perps (or top symbols); ensure no single symbol dominates the improvement; report max/min per-symbol relative Brier.
-5. **Feature ablation**: pre-specified ablations — drop interactions; drop lagged flow — keeping firewall and fixed logistic form intact; report each ablation's relative Brier vs B1.
-6. **Write results**: produce `research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md` with tables/CI for all steps above; update AGENT_HANDOFF.md gate states (H_COUPLED-001 ROBUST PASS/FAIL with numbers).
+1. **Verify baseline**: confirm evaluation_summary_FCLR-COUPLED-001.md shows all gates PASS (+4.61% rel Brier, CI [0.002511,0.003158], 199 perps, 164x24h blocks). Splits unchanged.
+2. **>=2000 block-bootstrap replicates**: Recompute C_coupled vs B1 on frozen test set with >=2000 block-bootstrap replicates (24h blocks). Report mean diff, 95% CI, relative Brier reduction. Must remain >=+1.0% and CI must not cross zero.
+3. **Time-split robustness**: Split test window into earlier half and later half (chronological). Evaluate each half separately and pooled. Report per-half relative Brier and CIs.
+4. **Leave-one-symbol-out (LOSO)**: Across all 199 native perps, drop each symbol in turn and recompute paired contrast. Ensure no single symbol drives improvement (report min/max relative Brier, worst case CI).
+5. **Pre-specified ablations** (fixed logistic form): (a) drop interactions, (b) drop lagged observed flow terms. Keep firewall, splits, decision-time features. Report relative Brier vs B1 for each.
+6. **Write full report**: Create `research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md` with tables for all above. Update AGENT_HANDOFF.md gate states (H_COUPLED-001 ROBUST PASS/FAIL with concrete numbers). Do NOT touch sealed tracks.
 
-### HARD CONSTRAINTS
-- Cross-track firewall: ONLY ironflow Hyperliquid labels. NO merge with Binance panels. Modeled!=observed.
-- Use frozen FCLR-010 splits (do not re-split). Fixed logistic form or justified minimal change only if strictly necessary.
-- Block-aware inference; Holm if multiplicity introduced.
-- No .github/workflows/* changes. No activity commits.
-- All tests MUST remain 27/27 PASS.
-- Do not rerun exhausted Track C/B.
-- Do NOT use scripts/fclr010_execute_fast.py for confirmatory results (it hardcodes metrics); extend scripts/fclr010_execute.py (real computation path).
+### HARD CONSTRAINTS (NON-NEGOTIABLE)
+- Cross-track firewall: ONLY ironflow Hyperliquid labels. NO Binance merge. Modeled!=observed.
+- Frozen splits only (no re-splitting). Fixed logistic form unless strictly necessary and justified.
+- Block-aware; Holm if multiplicity introduced.
+- No .github/workflows/* changes. No activity commits unless explicitly requested.
+- All 27 tests MUST remain PASS.
+- Do NOT rerun exhausted Track C/B/A discovery.
+- NEVER use scripts/fclr010_execute_fast.py for confirmatory numbers (fabricated). Use real computation (extend/implement proper pipeline). If extending scripts/fclr010_execute.py, do it correctly with >=2000 reps.
 
-## CURRENT STATE (GATES)
+### CURRENT STATE
 | Track | Hypothesis | Status | Evidence |
 |-------|-----------|--------|----------|
-| A | FCLR-H004 (observed liquidations) | SUPPORTED/PASSED | research_state/evaluation_summary_FCLR010.md (+2.21% rel Brier C2 vs B1) |
-| Coupled | H_COUPLED-001 | **SUPPORTED/PASSED (500 reps); ROBUST PENDING (>=2000 reps)** | research_state/evaluation_summary_FCLR-COUPLED-001.md (+4.61% rel Brier C_coupled vs B1; CI [0.00251,0.00316], 199 perps, 164x24h blocks) |
-| C | FCLR-H001 (volatility) | NOT_SUPPORTED/CLOSED | research_state/evaluation_summary_FCLR009.md |
-| B | FCLR-H003 (boundary breach) | CLOSED_NEGATIVE | research_state/evaluation_summary_FCLR-H003-EXT-001.md |
-| H002 | funding-correction | PARTIAL/EXPLORATORY | research_state/h002_replication_report.md |
+| A | FCLR-H004 | SUPPORTED/PASSED | research_state/evaluation_summary_FCLR010.md (+2.21% rel Brier C2 vs B1) |
+| Coupled | H_COUPLED-001 | SUPPORTED/PASSED (500 reps); ROBUST PENDING (>=2000 reps) | research_state/evaluation_summary_FCLR-COUPLED-001.md (+4.61% rel Brier C_coupled vs B1; CI [0.00251,0.00316]) |
+| C | FCLR-H001 | NOT_SUPPORTED/CLOSED | research_state/evaluation_summary_FCLR009.md |
+| B | FCLR-H003 | CLOSED_NEGATIVE | research_state/evaluation_summary_FCLR-H003-EXT-001.md |
 
 ## REQUIRED END-OF-SESSION OUTPUT
 1. What changed and why (concrete files/lines)
@@ -59,6 +55,10 @@ Execute strict robustness for H_COUPLED-001 (ironflow Hyperliquid ONLY). Every s
 6. Precise verify command for next task
 7. Blockers + next materially different free route OR proof of exhaustive search
 
-## SINGLE HIGHEST-VALUE NEXT TASK
-**Task:** Run FCLR-COUPLED-001 robustness (>=2000 block bootstrap, time-split halves, LOSO across 199 perps, pre-specified ablations) on frozen FCLR-010 splits; write research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md.
-**Verify:** `LATEST_ROBUST=$(ls -t research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST*.md 2>/dev/null | head -1); test -n "$LATEST_ROBUST" && echo $LATEST_ROBUST && grep -n "rel.*Brier\|LOSO\|PASS\|FAIL" $LATEST_ROBUST | head -15`
+## SINGLE HIGHEST-VALUE NEXT TASK (EXECUTABLE NOW)
+**Task:** Run FCLR-COUPLED-001 robustness: >=2000 block-bootstrap (24h blocks), chronological time-split halves, LOSO over 199 perps, pre-specified ablations (drop interactions; drop lagged observed flow). Write `research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md`. Update AGENT_HANDOFF.md with ROBUST gate.
+
+**Verify:**
+```bash
+LATEST_ROBUST=$(ls -t research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST*.md 2>/dev/null | head -1); test -n "$LATEST_ROBUST" && echo "=== $LATEST_ROBUST ===" && grep -n -E "rel.*Brier|LOSO|time.*split|ablat|PASS|FAIL|CI" "$LATEST_ROBUST" | head -30
+```
