@@ -1,19 +1,22 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T14:24:02Z
+**TIMESTAMP (UTC):** 2026-11-01T15:26:00Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
+**REPO PRIORITIZATION (INFERRED):** Treat funding × volatility × liquidation risk as ONE coupled system. The repo name demands investigating the coupling between funding conditions, volatility regimes, and observed liquidation/liquidity stress. No track-siloing.
 **BRANCH/HEAD:** main @ 6c95ca2c (up to date with origin/main)
-**HANDOFF ID:** FCLR-HANDOFF-045-20261101T142402Z
-**SUPERSEDES:** FCLR-HANDOFF-044-20261101T134005Z; AGENT_HANDOFF_OUTCOME.md read-only — this file is the single durable handoff going forward.
+**HANDOFF ID:** FCLR-HANDOFF-046-20261101T152600Z
+**SUPERSEDES:** FCLR-HANDOFF-045-20261101T142402Z; AGENT_HANDOFF_OUTCOME.md read-only — this file is the single durable handoff going forward.
 **PRIORITIZATION RATIONALE:** Repo name = funding-conditioned volatility ∩ liquidation risk. Treat as ONE coupled system. Track C (volatility-only): exhausted/confirms no clean win; sealed. Track B (modeled boundaries): CLOSED_NEGATIVE; separation irrefutable. H002: PERMANENTLY BLOCKED (SSRN HTTP 403). Track A (observed liquidations, ironflow Hyperliquid): FCLR-010 FORECAST_GATE_PASSED (C2 vs B1 −0.003077, 95% CI [−0.004892,−0.001263], rel −2.21%, n=199, 5 blocks, frozen splits 2026-11-01T05:39:07Z) — overlay only if pre-registered. H_COUPLED-001 (funding × vol regime × lagged observed flow): PASSED at 500 reps (+4.61% rel Brier vs B1, CI [0.002511,0.003158]) but pre-registration requires ≥2000 block-bootstrap reps. **THIS IS THE ONLY PATH TO A PUBLISHABLE COUPLED RESULT. NO OTHER TRACK JUSTIFIES COMPUTE UNTIL COUPLED ROBUSTNESS IS SEALED WITH ARTIFACTS.**
 
 **STATUS:** Tests 27/27 PASS at HEAD 6c95ca2c. Working tree clean. FCLR-010 gate PASSED (sealed). H_COUPLED-001 ROBUST (≥2000 reps) NOT STARTED — MANDATORY HEAVY WORK. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY). scripts/fclr010_execute_fast.py banned.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T14:24:02Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T15:26:00Z
 **PRIORITY P0 | TYPE: FCLR-COUPLED-ROBUST (HEAVY, UNAVOIDABLE) | BLOCK ALL OTHER WORK | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS | NO OUTCOME RE-INSPECTION**
 
-**MANDATE:** Treat this as a single campaign. Do NOT split focus to other tracks. Remove bottlenecks; run the full robustness suite to completion and seal it. If blocked, only fix blockers that directly prevent items 1-8 below. No shortcuts.
+**MANDATE:** This repo is about funding-conditioned volatility and liquidation risk. Treat funding × vol regime × lagged observed flow as ONE coupled system. Do NOT split focus. Remove every bottleneck that blocks the items below. Run heavy compute to completion. If explicit directions are absent, build the next focus campaign so future agents cannot avoid doing heavy work. No shortcuts.
 
 All work uses FROZEN FCLR-010 splits from `research_state/run_manifest.json#split_boundaries_fclr010` (frozen_before_outcomes=true, frozen_at 2026-11-01T05:39:07Z). Ironflow Hyperliquid ONLY. Test window 2026-05-28 .. 2026-10-31 SEALED — no outcome re-inspection, no threshold tuning, no split changes, no relabeling. Fixed logistic form unless strictly necessary and pre-registered with justification.
+
+**EXECUTE IN ORDER (ALL MANDATORY):**
 
 1. **Verify baseline (30s):**
    - `git -C <repo> log --oneline -1` → expect 6c95ca2c
@@ -25,7 +28,7 @@ All work uses FROZEN FCLR-010 splits from `research_state/run_manifest.json#spli
 
 3. **FCLR-010 leakage / label-history audit:** audit every predictor for future-label leakage; document per-feature provenance; fix/remove any leaking feature before any promotion claim. Zero unresolved leaking features is a hard acceptance gate → document in `research_state/fclr010_leakage_audit.md`.
 
-4. **≥2000 block-bootstrap robustness of H_COUPLED-001 (coupled):** recompute C_coupled vs B1 on the frozen test set with ≥2000 block-bootstrap replicates (~24h blocks); report mean diff, 95% CI, relative Brier reduction. Acceptance: relative Brier reduction ≥ +1.0% AND CI does not cross zero.
+4. **≥2000 block-bootstrap robustness of H_COUPLED-001 (coupled, HEAVY):** recompute C_coupled vs B1 on the frozen test set with ≥2000 block-bootstrap replicates (~24h blocks); report mean diff, 95% CI, relative Brier reduction. Acceptance: relative Brier reduction ≥ +1.0% AND CI does not cross zero.
 
 5. **Chronological time-split robustness:** split the test window into earlier half and later half; evaluate each half separately and pooled; report per-half relative Brier and CIs.
 
