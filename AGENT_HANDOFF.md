@@ -1,16 +1,17 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T13:35:38Z
+**TIMESTAMP (UTC):** 2026-11-01T13:37:48Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **BRANCH/HEAD:** main @ 85458d67 (up to date with origin/main)
-**HANDOFF ID:** FCLR-HANDOFF-042-20261101T133538Z
-**SUPERSEDES:** FCLR-HANDOFF-041 (20261101T133405Z); research_state/AGENT_HANDOFF_OUTCOME.md (2026-11-01T13:31:24Z) is archived read-only — this file is the single durable handoff going forward.
-**PRIORITIZATION RATIONALE:** Repo name = funding-conditioned volatility ∩ liquidation risk, read as ONE coupled problem. Track C (volatility-only forecast): all confirmatory panels exhausted, H001 NOT_SUPPORTED/INCONCLUSIVE, sealed — no cells remain without new admissible data + fresh pre-registration; do not rerun (FCLR-003/006/007/008). Track B (modeled boundary breaches): CLOSED_NEGATIVE; codepath separation irrefutable; do not rerun. H002 (funding-correction replication): PERMANENTLY BLOCKED (SSRN HTTP 403; methodology unreconstructible from admissible sources) — stop scheduling, do not promote, no speculative pre-registration. Track A (observed liquidations, ironflow Hyperliquid census): FCLR-010 FORECAST_GATE_PASSED (C2 vs B1 Brier diff −0.003077, 95% CI [−0.004892, −0.001263], relative reduction 2.21% ≥ 2% floor, n=199 instruments, 5 non-overlapping 30-day blocks, 7-day embargo; pre-registered research_state/research_protocol_fclr010.md v1.0 before outcomes; splits frozen_before_outcomes=true at 2026-11-01T05:39:07Z) — the ONLY live confirmatory track; forecast gate MET → risk-overlay eligible ONLY via pre-registration. H_COUPLED-001 (funding × vol regime × lagged observed flow): PASSED at 500 block-bootstrap reps (+4.61% rel Brier vs B1, CI [0.002511, 0.003158], 199 perps, 164 blocks) but pre-registration requires ≥2000 reps — robustness campaign is the mandatory next heavy work.
-**STATUS:** Tests 27/27 PASS at HEAD 85458d67 (re-verified 2026-11-01T13:35:00Z). Working tree clean except __pycache__/ rebuilds. FCLR-010 gate PASSED; H_COUPLED-001 PASSED (500 reps), ROBUST (≥2000 reps) NOT STARTED — MANDATORY. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY; no Binance merge; modeled ≠ observed). scripts/fclr010_execute_fast.py banned for confirmatory numbers (fabricated shortcut).
+**HANDOFF ID:** FCLR-HANDOFF-043-20261101T133748Z
+**SUPERSEDES:** FCLR-HANDOFF-042-20261101T133538Z; research_state/AGENT_HANDOFF_OUTCOME.md (2026-11-01T13:31:24Z) is archived read-only — this file is the single durable handoff going forward.
+**PRIORITIZATION RATIONALE:** Repo name = funding-conditioned volatility ∩ liquidation risk. Treat as ONE coupled system. Track C (volatility-only): exhausted/confirms no clean win; sealed. Track B (modeled boundaries): CLOSED_NEGATIVE; separation irrefutable. H002: PERMANENTLY BLOCKED (SSRN HTTP 403). Track A (observed liquidations, ironflow Hyperliquid): FCLR-010 FORECAST_GATE_PASSED (C2 vs B1 −0.003077, 95% CI [−0.004892,−0.001263], rel −2.21%, n=199, 5 blocks, frozen splits 2026-11-01T05:39:07Z) — overlay only if pre-registered. H_COUPLED-001 (funding × vol regime × lagged observed flow): PASSED at 500 reps (+4.61% rel Brier vs B1, CI [0.002511,0.003158]) but pre-registration requires ≥2000 block-bootstrap reps. **This is the ONLY path to a publishable coupled result.** No other track justifies compute until coupled robustness is sealed with artifacts.
+**STATUS:** Tests 27/27 PASS at HEAD 85458d67. Working tree clean except __pycache__/. FCLR-010 gate PASSED (sealed). H_COUPLED-001 ROBUST (≥2000 reps) NOT STARTED — MANDATORY HEAVY WORK. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY). scripts/fclr010_execute_fast.py banned.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T13:35:38Z
-**PRIORITY P0 | TYPE: FCLR-COUPLED-ROBUST + FCLR-010 VERIFICATION (HEAVY, UNAVOIDABLE) | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS | NO OUTCOME RE-INSPECTION**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T13:37:48Z
+**PRIORITY P0 | TYPE: FCLR-COUPLED-ROBUST (HEAVY, UNAVOIDABLE) | BLOCK ALL OTHER WORK | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS | NO OUTCOME RE-INSPECTION**
+**MANDATE:** Treat this as a single campaign. Do NOT split focus to other tracks. Remove bottlenecks; run the full robustness suite to completion and seal it. If blocked, only fix blockers that directly prevent items 1-8.
 
-All work uses FROZEN FCLR-010 splits from run_manifest.json#split_boundaries_fclr010 (frozen_before_outcomes=true, frozen_at 2026-11-01T05:39:07Z). Ironflow Hyperliquid ONLY. Test window 2026-05-28 .. 2026-10-31 SEALED — no outcome re-inspection, no threshold tuning, no split changes, no relabeling.
+All work uses FROZEN FCLR-010 splits from `run_manifest.json#split_boundaries_fclr010` (frozen_before_outcomes=true, frozen_at 2026-11-01T05:39:07Z). Ironflow Hyperliquid ONLY. Test window 2026-05-28 .. 2026-10-31 SEALED — no outcome re-inspection, no threshold tuning, no split changes, no relabeling. Fixed logistic form unless strictly necessary and pre-registered with justification.
 
 1. **Verify baseline (30s):**
    `git -C <repo> log --oneline -1` → 85458d67
@@ -20,7 +21,7 @@ All work uses FROZEN FCLR-010 splits from run_manifest.json#split_boundaries_fcl
 
 2. **Independent recomputation audit of FCLR-010 headline (heavy):** from cached inputs + SHA-256 hashes only — no new downloads, no outcome re-inspection — reproduce B0/B1/C1/C2 Brier, paired C2 vs B1 diff −0.003077, CI approx [−0.004892, −0.001263], relative reduction 2.21%, n=199, 5 non-overlapping 30-day blocks, 7-day embargoes → write `research_state/independent_recompute_audit_FCLR010.md`. Must match `evaluation_summary_FCLR010.md` within declared tolerance.
 
-3. **FCLR-010 leakage / label-history audit:** audit every predictor for future-label leakage; document per-feature provenance; fix/remove any leaking feature before any promotion claim. Zero unresolved leaking features is a hard acceptance gate → document in `research_state/fclr010_leakage_audit.md` (consolidate into research_state/leakage_audit.md if preferred).
+3. **FCLR-010 leakage / label-history audit:** audit every predictor for future-label leakage; document per-feature provenance; fix/remove any leaking feature before any promotion claim. Zero unresolved leaking features is a hard acceptance gate → document in `research_state/fclr010_leakage_audit.md`.
 
 4. **≥2000 block-bootstrap robustness of H_COUPLED-001 (coupled):** recompute C_coupled vs B1 on the frozen test set with ≥2000 block-bootstrap replicates (~24h blocks); report mean diff, 95% CI, relative Brier reduction. Acceptance: relative Brier reduction ≥ +1.0% AND CI does not cross zero.
 
@@ -40,18 +41,18 @@ All work uses FROZEN FCLR-010 splits from run_manifest.json#split_boundaries_fcl
 - Block-aware inference; Holm/BH if multiplicity introduced.
 - No .github/workflows/* changes. No activity commits unless explicitly requested.
 - All 27 tests MUST remain PASS.
-- Do not rerun exhausted Track C/B/A discovery or sealed panels (FCLR-001..009); do not re-inspect sealed FCLR-010 outcomes.
+- Do not rerun exhausted Track C/B/A discovery or sealed panels; do not re-inspect sealed FCLR-010 outcomes.
 - No threshold shopping, relabeling, or outcome inspection before/after split freeze.
 - No risk overlay without pre-registration.
-- If tempted to "explore" anything else — don't. The repo is funding-conditioned volatility ∩ liquidation risk. Finish coupled robustness + Track A verification first.
+- If tempted to "explore" anything else — don't. Finish coupled robustness + Track A verification first.
 
 ## BOTTLENECKS REMOVED (DO NOT RECREATE)
-- H002: SSRN 403 accepted as permanent block; stop scheduling H002 confirmatory work; revisit only if SSRN becomes accessible, with pre-registration BEFORE outcome inspection.
-- Track B: CLOSED_NEGATIVE; separation irrefutable; no rerun.
-- Track C: H001 NOT_SUPPORTED / CONFIRMATORY CLOSED; all confirmatory panels exhausted; no rerun without new admissible data + fresh pre-registered experiment ID.
-- Track A structural block: REMOVED — admissible ironflow source passes full rubric (12 monthly blocks 2025-11..2026-10, 199 native perps, CC BY 4.0, unauthenticated, no_keys, hashes in data_source_registry.json). Do not re-run exhausted source families unless a NEW source family appears.
-- FCLR-010: execution complete, gate passed, window sealed. Do not re-fit, re-tune, or re-inspect outcomes.
-- Fabricated shortcut removed: scripts/fclr010_execute_fast.py banned for confirmatory work; real computation path only (≥2000 reps).
+- H002: SSRN 403 accepted as permanent block; stop scheduling H002 confirmatory work.
+- Track B: CLOSED_NEGATIVE; separation irrefutable.
+- Track C: H001 NOT_SUPPORTED / CONFIRMATORY CLOSED; all confirmatory panels exhausted.
+- Track A structural block: REMOVED (admissible ironflow). Do not re-run exhausted source families.
+- FCLR-010: execution complete, gate passed, window sealed.
+- Fabricated shortcut removed: scripts/fclr010_execute_fast.py banned for confirmatory work.
 
 ## REQUIRED END-OF-SESSION OUTPUT
 1. What changed and why (concrete files/lines)
@@ -73,7 +74,7 @@ python -m unittest discover -s tests -v 2>&1 | tail -1
 ```
 
 ## DO-NOT RULES (CROSS-CUTTING)
-- No merging Hyperliquid labels with Binance panels (cross-track firewall).
-- No outcome/Brier/QLIKE inspection before split freeze; no sealed-window reuse (FCLR-010 test window sealed).
+- No merging Hyperliquid labels with Binance panels.
+- No outcome/Brier/QLIKE inspection before split freeze; no sealed-window reuse.
 - Do not relax rubric, ≥2% floor (FCLR-010) / ≥1.0% floor (coupled), CI-excludes-zero, ≥5 instruments, ≥3-block minimums; no threshold shopping; no relabeling exploratory as confirmatory.
 - No risk overlay without pre-registration; no .github/workflows/* changes; commit nothing merely for activity.
