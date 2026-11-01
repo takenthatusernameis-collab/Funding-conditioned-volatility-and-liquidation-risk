@@ -1,76 +1,78 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T17:13:16Z
+**TIMESTAMP (UTC):** 2026-11-01T17:15:12Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** Treat funding × volatility × liquidation risk as ONE coupled system. The repo name demands investigating the coupling between funding conditions, volatility regimes, and observed liquidation/liquidity stress. No track-siloing. Track A (observed liquidations via ironflow Hyperliquid) is the live track; Tracks B/C are closed/blocked.
-**BRANCH/HEAD:** main @ f5374d52 (up to date with origin/main); working tree clean (except __pycache__)
-**HANDOFF ID:** FCLR-HANDOFF-049-20261101T171316Z
-**SUPERSEDES:** FCLR-HANDOFF-048-20261101T170832Z (stale: claimed HEAD 6c95ca2c/7763c2f1; actual HEAD f5374d52; overlay pre-registration already done at 16:59:00Z — that step is CLOSED, not pending)
-**PRIORITIZATION RATIONALE:** Repo name = funding-conditioned volatility ∩ liquidation risk. Treat as ONE coupled system. Track C exhausted/confirms no clean win (sealed). Track B CLOSED_NEGATIVE. H002 PERMANENTLY BLOCKED (SSRN HTTP 403). Track A structural block REMOVED — ironflow Hyperliquid liquidation census admissible per registry v1.2 (CC BY 4.0, unauthenticated, 12 months 2025-11..2026-10, 199 native perps, SHA-256 hashes documented). FCLR-010 FORECAST_GATE_PASSED (C2 vs B1 −0.003077, 95% CI [−0.004892,−0.001263], rel −2.21%, n=199, 5 blocks, frozen splits 2026-11-01T05:39:07Z). H_COUPLED-001 ROBUST PASSED (≥2000 reps target met; +4.61% rel Brier, CI [0.002511,0.003158], 199 perps, 164 blocks). **COUPLED ROBUSTNESS SEALED. FCLR-OVERLAY-001 PRE-REGISTERED (2026-11-01T16:59:00Z). NEXT FOCUS: EXECUTE the Track A liquidation-risk overlay/position-sizing evaluation per the pre-registration — no threshold shopping, no tuning, no FCLR-010 outcome re-inspection, ironflow only.**
+**REPO PRIORITIZATION (INFERRED):** Treat funding × volatility × liquidation risk as ONE coupled system. Repo name demands investigating the coupling between funding conditions, volatility regimes, and observed liquidation/liquidity stress. No track-siloing. Track A (observed liquidations via ironflow Hyperliquid) is the ONLY eligible track. Tracks B/C closed/blocked. H002 blocked.
+**BRANCH/HEAD:** main @ 06989c49 (checkpoint); working tree has __pycache__ modifications only (non-functional)
+**HANDOFF ID:** FCLR-HANDOFF-050-20261101T171512Z
+**SUPERSEDES:** FCLR-HANDOFF-049-20261101T171316Z
+**PRIORITIZATION RATIONALE:** FCLR-010 forecast gate PASSED (C2 vs B1 −0.003077, 95% CI [−0.004892,−0.001263], rel −2.21%, n=199, 5 blocks). H_COUPLED-001 ROBUST PASSED (+4.61% rel Brier reduction, CI [0.002511,0.003158], >=2000 reps). FCLR-OVERLAY-001 PRE-REGISTERED at 2026-11-01T16:59:00Z with FIXED bands/multipliers. **EXECUTION IS THE ONLY REMAINING HEAVY WORK. DO NOT RE-PRE-REGISTER. DO NOT RE-INSPECT SEALED FCLR-010 OUTCOMES.**
 
-**STATUS:** Tests 27/27 PASS at HEAD f5374d52. Working tree clean (except __pycache__). FCLR-010 gate PASSED (sealed). H_COUPLED-001 ROBUST PASS. FCLR-OVERLAY-001 PRE-REGISTERED, execution pending. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY).
+**STATUS:** Tests 27/27 PASS. Working tree clean except __pycache__. FCLR-010 sealed. H_COUPLED-001 ROBUST sealed. FCLR-OVERLAY-001 PRE-REGISTERED → EXECUTE NOW. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY).
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T17:13:16Z
-**PRIORITY P0 | TYPE: TRACKA-OVERLAY-EXECUTE | BLOCK ALL OTHER WORK | NO THRESHOLD SHOPPING | NO TUNING ON TEST | NO FCLR-010 OUTCOME RE-INSPECTION | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T17:15:12Z
+**PRIORITY P0 | TYPE: TRACKA-OVERLAY-EXECUTE | BLOCK ALL OTHER WORK | NO THRESHOLD SHOPPING | NO TUNING ON TEST | NO FCLR-010 RE-INSPECTION | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
 
-**MANDATE:** This repo is about funding-conditioned volatility and liquidation risk. Treat funding × vol regime × lagged observed flow as ONE coupled system. The overlay pre-registration (research_state/pre_registration_tracka_overlay_20261101T165900Z.md) is complete; the remaining heavy work is to EXECUTE it exactly as specified on the frozen FCLR-010 test window and produce the evaluation summary. Do heavy work only as specified.
-
-All work uses FROZEN FCLR-010 splits from `research_state/run_manifest.json#split_boundaries_fclr010` (frozen_before_outcomes=true, frozen_at 2026-11-01T05:39:07Z). Ironflow Hyperliquid ONLY. Test window 2026-05-28 .. 2026-10-31 SEALED.
+**MANDATE:** This repo = funding-conditioned volatility × liquidation risk. The overlay pre-registration is DONE. Your job is HEAVY EXECUTION: compute overlay metrics exactly as specified on frozen splits and write the evaluation summary. No exploration, no refactors, no new features.
 
 **EXECUTE IN ORDER (MANDATORY):**
-1. **Verify baseline (30s):**
-   - `git -C <repo> log --oneline -1` → expect f5374d52
-   - `python -m unittest discover -s tests -v` → 27/27 PASS
-   - Confirm `research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md` exists and shows H_COUPLED-001 ROBUST PASS (+4.61%, CI excludes zero, >=2000 reps)
-   - Confirm `research_state/independent_recompute_audit_FCLR010.md` and `research_state/fclr010_leakage_audit.md` present (PASS)
-   - Confirm `research_state/pre_registration_tracka_overlay_20261101T165900Z.md` exists (STATUS: PRE-REGISTERED, not executed)
+1. **Verify baseline (fast):**
+   ```bash
+   git -C <repo> log --oneline -1
+   python -m unittest discover -s tests -v 2>&1 | tail -2
+   test -f research_state/pre_registration_tracka_overlay_20261101T165900Z.md && echo "PRE-REG OK"
+   test -f research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST.md && echo "COUPLED-ROBUST OK"
+   grep -n "frozen_before_outcomes" research_state/run_manifest.json | head -2
+   ```
 
-2. **Execute Track A overlay evaluation per pre-registration FCLR-OVERLAY-001 (AFTER pre-registration; outcome computation now permitted):**
-   - Load frozen FCLR-010 test splits only (2026-05-28 .. 2026-10-31); features computed with information available at forecast time t; embargo/purge respected as in FCLR-010.
-   - Compute predicted liquidation-risk p_t from coupled model H_COUPLED-001 (logistic, fixed form).
-   - Apply FIXED pre-registered risk bands (p_low/p_mid/p_high = dev-set 0.33/0.67/0.90 quantiles, computed once from frozen dev set) and FIXED multipliers (s_mid=0.8, s_high=0.6, s_very_high=0.4; max 1.0, min 0.0; no dynamic stop rules).
-   - Compute pre-registered primary metrics: calibration by risk bucket; event capture/false alarm (precision/recall) in high-risk buckets vs baseline; hypothetical risk-reduction proxy (exposure-weighted event exposure reduction) with block-bootstrap CIs; turnover/stability; robustness (leave-one-instrument-out, by time block, by regime).
-   - Enforce gates: calibration acceptable in all buckets; no leakage (frozen splits, causal features); firewall intact (ironflow only); block-bootstrap CIs; no threshold shopping / no tuning on test / no relabeling.
-   - Write `research_state/evaluation_summary_tracka_overlay_001.md` with exact metrics, CIs, gate states, and "no profitability claim" disclaimer. Do NOT compute any metric not pre-registered.
+2. **Execute FCLR-OVERLAY-001 per pre-registration (ONLY allowed outcome computation):**
+   - Load frozen FCLR-010 test splits from `run_manifest.json#split_boundaries_fclr010` (test 2026-05-28 .. 2026-10-31). Dev set for quantiles only.
+   - Use coupled model H_COUPLED-001 predictions on frozen test window (ironflow Hyperliquid native perps only).
+   - Compute dev-only quantiles: p_low = 0.33, p_mid = 0.67, p_high = 0.90 from frozen dev calibration distribution.
+   - Apply FIXED multipliers: s_mid=0.8, s_high=0.6, s_very_high=0.4 (max 1.0, min 0.0). No dynamic rules.
+   - Compute pre-registered metrics: calibration by bucket, event capture/precision-recall in high-risk buckets vs baseline, exposure-weighted event exposure reduction with block-bootstrap CIs (~24h blocks), turnover/stability, robustness (LOSO, by time block, by regime).
+   - Enforce: causal features only, embargo/purge respected, firewall intact, no threshold shopping/tuning, no relabeling.
 
-3. **Update tracking:**
-   - Update `research_state/experiment_frontier.json` (Track A overlay FCLR-OVERLAY-001: EXECUTED + result; gate state), `research_state/cross_track_decision_log.md` (add overlay execution entry). Tree clean except __pycache__.
+3. **Write artifacts & update tracking:**
+   - Write `research_state/evaluation_summary_tracka_overlay_001.md` with exact numbers, CIs, gate states, "no profitability claim" disclaimer, and hash/config provenance.
+   - Update `research_state/experiment_frontier.json` (FCLR-OVERLAY-001: EXECUTED + result + gate state)
+   - Update `research_state/cross_track_decision_log.md` (add execution entry with timestamp)
+   - Keep tree clean except `__pycache__`. Do not commit.
 
 ## HARD CONSTRAINTS (NON-NEGOTIABLE)
-- Cross-track firewall: ONLY ironflow Hyperliquid labels. NO Binance merge. Modeled != observed.
-- Frozen splits only; no re-splitting; fixed logistic form unless strictly necessary and pre-registered with justification.
-- Block-aware inference; Holm/BH if multiplicity introduced.
-- No .github/workflows/* changes. No activity commits unless explicitly requested.
+- Cross-track firewall: ONLY ironflow Hyperliquid. NO Binance merge. Modeled != observed.
+- Frozen splits only. Fixed logistic form. Dev-only quantiles. Fixed multipliers.
+- Block-aware inference (block-bootstrap). Control multiplicity only if variants introduced (but only fixed params specified).
+- No .github/workflows/* changes. No activity commits.
 - All 27 tests MUST remain PASS.
-- Do not rerun exhausted Track C/B/H002 or re-inspect sealed FCLR-010 outcomes beyond what FCLR-010 already established.
-- No threshold shopping, relabeling, or outcome re-inspection of FCLR-010 sealed outcomes.
-- Overlay must follow the pre-registered fixed parameters only; no new bands/multipliers.
+- Do not rerun Track C/B/H002 or re-inspect sealed FCLR-010 outcomes.
+- No threshold shopping, relabeling, or outcome re-inspection.
+- Overlay is hypothetical only - no live/paper trading. Explicit "no profitability claim".
 
-## BOTTLENECKS REMOVED (DO NOT RECREATE)
-- H002: SSRN 403 accepted as permanent block.
-- Track B: CLOSED_NEGATIVE.
-- Track C: H001 NOT_SUPPORTED / confirmatory closed; FCLR-008 gate NOT_MET but complete.
-- Track A structural block: REMOVED (admissible ironflow Hyperliquid census, registry v1.2).
-- FCLR-010: gate passed, sealed.
-- H_COUPLED-001: ROBUST PASS (sealed path).
-- FCLR-OVERLAY-001 pre-registration: DONE (2026-11-01T16:59:00Z) — execution is now the required next step; do not re-pre-register.
-- Fabricated shortcut removed: scripts/fclr010_execute_fast.py banned for confirmatory work.
+## BOTTLENECKS REMOVED
+- H002: SSRN 403 → permanent block (done)
+- Track B: CLOSED_NEGATIVE (done)
+- Track C: exhausted/closed (done)
+- Track A structural block: removed (ironflow admissible)
+- FCLR-010: passed/sealed (done)
+- H_COUPLED-001: ROBUST PASS (done)
+- FCLR-OVERLAY-001 pre-registration: DONE (done) → execution now unblocked
 
 ## REQUIRED END-OF-SESSION OUTPUT
 1. What changed and why (concrete files/lines)
-2. What was actually tested (exact commands + outcomes)
-3. Evidence added (paths: robust summary, overlay evaluation summary)
-4. Gate states per track (H_COUPLED-001 ROBUST PASS with numbers; Track A overlay EXECUTED with metrics/CIs/gates)
+2. Exact tests run + results
+3. Evidence added (path to `evaluation_summary_tracka_overlay_001.md`)
+4. Gate states: H_COUPLED-001 ROBUST PASS (numbers), FCLR-OVERLAY-001 EXECUTED (metrics/CIs/gates)
 5. Single highest-value next task (executable without user intervention)
-6. Precise verify command for next task
-7. Blockers + next materially different free route OR proof of exhaustive search
+6. Precise verify command
+7. Blockers or proof of exhaustive search
 
 ## SINGLE HIGHEST-VALUE NEXT TASK (EXECUTABLE NOW)
-**Task:** Execute FCLR-OVERLAY-001 Track A liquidation-risk overlay evaluation per the pre-registration on frozen FCLR-010 splits; write research_state/evaluation_summary_tracka_overlay_001.md; update experiment_frontier.json and cross_track_decision_log.md.
+**Task:** Execute FCLR-OVERLAY-001 Track A liquidation-risk overlay evaluation per pre-registration on frozen FCLR-010 splits; write `research_state/evaluation_summary_tracka_overlay_001.md`; update `experiment_frontier.json` and `cross_track_decision_log.md`.
 
 **Verify:**
 ```bash
 git -C <repo> log --oneline -1
 python -m unittest discover -s tests -v 2>&1 | tail -1
-test -f research_state/evaluation_summary_tracka_overlay_001.md && echo "=== overlay summary ===" && grep -n "calibration\|risk.reduction\|block.bootstrap\|firewall\|no.*tuning\|ironflow" research_state/evaluation_summary_tracka_overlay_001.md | head -30
-grep -n '"FCLR-OVERLAY-001"\|"H_COUPLED-001"' research_state/experiment_frontier.json
+test -f research_state/evaluation_summary_tracka_overlay_001.md && echo "=== OVERLAY ===" && grep -n "calibration\|exposure.*reduction\|block.*bootstrap\|firewall\|no.*profit\|ironflow" research_state/evaluation_summary_tracka_overlay_001.md | head -40
+grep -A 2 -B 2 '"FCLR-OVERLAY-001"' research_state/experiment_frontier.json | head -15
 ```
