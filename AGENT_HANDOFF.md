@@ -1,13 +1,14 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-037)
-**TIMESTAMP (UTC):** 20261101T112400Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-038)
+**TIMESTAMP (UTC):** 20261101T124600Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 5cbea3bb (working tree clean)
-**HANDOFF ID:** FCLR-HANDOFF-037-20261101T112400Z
-**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001) on frozen FCLR-010 splits. Tracks A/B/C SEALED (A SUPPORTED/PASSED; B CLOSED_NEGATIVE; C NOT_SUPPORTED/CLOSED). Cross-track firewall IMMUTABLE. Bottlenecks REMOVED: do NOT use scripts/fclr010_execute_fast.py (hardcodes fabricated numbers). Use real computation path only.
+**BRANCH/HEAD:** main @ 375a09ca (working tree clean except untracked __pycache__/)
+**HANDOFF ID:** FCLR-HANDOFF-038-20261101T124600Z
+**SUPERSEDES:** FCLR-HANDOFF-037 (20261101T112400Z); see research_state/AGENT_HANDOFF_OUTCOME.md (2026-11-01T12:23:41Z) for completed campaign record.
+**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001, 500 reps) on frozen FCLR-010 splits. Tracks A/B/C SEALED (A SUPPORTED/PASSED via FCLR-010 gate; B CLOSED_NEGATIVE; C NOT_SUPPORTED/CLOSED). H002 PERMANENT BLOCKER (SSRN 403, stop scheduling). Cross-track firewall IMMUTABLE. Bottlenecks REMOVED: do NOT use scripts/fclr010_execute_fast.py (hardcodes fabricated numbers). Use real computation path only.
 
-**PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM). Next focus is MANDATORY HEAVY ROBUSTNESS of the coupled model on ironflow Hyperliquid ONLY.
+**PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM). Next focus is MANDATORY HEAVY ROBUSTNESS of the coupled model on ironflow Hyperliquid ONLY. Status-only work forbidden.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T112400Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T124600Z
 **PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/INFERENCE (HEAVY, UNAVOIDABLE) | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
 
 Pre-reg: research_state/pre_registration_h_coupled_001_20261101T093727Z.md (frozen). Coupled PASSED with 500 reps. Must prove stability at >=2000 reps under strict constraints.
@@ -45,6 +46,13 @@ All work must use FROZEN FCLR-010 splits from run_manifest.json. Ironflow Hyperl
 | Coupled | H_COUPLED-001 | SUPPORTED/PASSED (500 reps); ROBUST PENDING (>=2000 reps) | research_state/evaluation_summary_FCLR-COUPLED-001.md (+4.61% rel Brier C_coupled vs B1; CI [0.00251,0.00316]) |
 | C | FCLR-H001 | NOT_SUPPORTED/CLOSED | research_state/evaluation_summary_FCLR009.md |
 | B | FCLR-H003 | CLOSED_NEGATIVE | research_state/evaluation_summary_FCLR-H003-EXT-001.md |
+| H002 | funding-extreme correction time | EXPLORATORY/PARTIAL — PERMANENT BLOCKER | SSRN HTTP 403; cannot reconstruct event definition/censoring/regime split. Stop scheduling. |
+
+### BOTTLENECKS REMOVED (DO NOT RECREATE)
+- Track A structural block: removed (admissible ironflow source passes full rubric). Do not re-run exhausted source families unless a NEW source family appears.
+- FCLR-010: execution complete, gate passed, window sealed. Do not re-fit, re-tune, or re-inspect outcomes.
+- H002: SSRN 403 accepted as permanent block; stop scheduling H002 confirmatory work.
+- Test C/B/A discovery: exhausted/closed. Do not rerun.
 
 ## REQUIRED END-OF-SESSION OUTPUT
 1. What changed and why (concrete files/lines)
@@ -62,3 +70,9 @@ All work must use FROZEN FCLR-010 splits from run_manifest.json. Ironflow Hyperl
 ```bash
 LATEST_ROBUST=$(ls -t research_state/evaluation_summary_FCLR-COUPLED-001-ROBUST*.md 2>/dev/null | head -1); test -n "$LATEST_ROBUST" && echo "=== $LATEST_ROBUST ===" && grep -n -E "rel.*Brier|LOSO|time.*split|ablat|PASS|FAIL|CI" "$LATEST_ROBUST" | head -30
 ```
+
+## DO-NOT RULES (CROSS-CUTTING)
+- No merging Hyperliquid labels with Binance panels (cross-track firewall).
+- No outcome/Brier inspection before split freeze; no sealed-window reuse.
+- Do not relax rubric, >=1.0% floor, CI-excludes-zero, >=5 instruments, or >=3-block minimums; no threshold shopping; no relabeling exploratory as confirmatory.
+- No risk overlay without pre-registration; no .github/workflows/* changes; commit nothing merely for activity.
