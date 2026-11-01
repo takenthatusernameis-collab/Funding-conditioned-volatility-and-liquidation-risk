@@ -1,12 +1,12 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-026)
-**TIMESTAMP (UTC):** 2026-11-01T05:36:00Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-027)
+**TIMESTAMP (UTC):** 2026-11-01T06:31:51Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **BRANCH/HEAD:** main @ e1022fb0 (working tree: clean)
-**HANDOFF ID:** FCLR-HANDOFF-026-20261101T053600Z
+**HANDOFF ID:** FCLR-HANDOFF-027-20261101T063151Z
 **STATUS:** OPEN — FCLR-009 COMPLETE (gate NOT_MET); Track A REOPENED via NEW admissible source (ironflow Hyperliquid census); FCLR-010 PRE-REGISTERED BEFORE OUTCOMES, NOT YET EXECUTED
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk as ONE COUPLED PROBLEM (do not split them)
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T05:36:00Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T06:31:51Z
 **PRIORITY P0 | TYPE: HEAVY COUPLED EXECUTION (FCLR-010 TRACK A CONFIRMATORY ON HYPERLIQUID) | NO STATUS-ONLY WORK**
 
 **REPO NAME IS THE SPEC:** Treat funding-conditioned volatility AND liquidation risk as a single coupled question. Track C (volatility-only forecasting) is EXHAUSTED and CLOSED (all panels FCLR-001/002/003/006/007/008/009 failed to clear the gate). The ONLY viable open confirmatory track is Track A.
