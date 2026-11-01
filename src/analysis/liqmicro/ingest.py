@@ -77,3 +77,45 @@ class IronflowIngestor:
 
         grouped = grouped.fillna(0)
         return grouped
+
+
+class HyperliquidFundingIngestor:
+    def __init__(self, data_dir: Path = None):
+        if data_dir is None:
+            data_dir = REPO / "research_state" / "data_cache" / "hyperliquid_funding"
+        self.data_dir = data_dir
+        self.files = sorted([f for f in os.listdir(data_dir) if f.endswith('.json')]) if data_dir.exists() else []
+
+    def load_all(self) -> pd.DataFrame:
+        import json
+        dfs = []
+        for fname in self.files:
+            try:
+                coin = fname.replace('.json', '')
+                with open(self.data_dir / fname) as f:
+                    data = json.load(f)
+                rows = []
+                for rec in data:
+                    try:
+                        t = rec.get('time') or rec.get('timestamp')
+                        fr = rec.get('fundingRate')
+                        if t is None or fr is None:
+                            continue
+                        ts = pd.to_datetime(int(t), unit='ms', utc=True)
+                        rows.append({
+                            'coin': coin,
+                            'symbol_hl': f'{coin}-PERP',
+                            'timestamp': ts,
+                            'funding_rate': float(fr),
+                            'hour': ts.floor('h')
+                        })
+                    except Exception:
+                        continue
+                if rows:
+                    dfs.append(pd.DataFrame(rows))
+            except Exception as e:
+                print(f"Error loading {fname}: {e}")
+        if not dfs:
+            return pd.DataFrame()
+        df = pd.concat(dfs, ignore_index=True)
+        return df
