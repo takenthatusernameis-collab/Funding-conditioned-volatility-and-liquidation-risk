@@ -1,12 +1,12 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-021)
-**TIMESTAMP (UTC):** 2026-11-01T03:45:24Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-022)
+**TIMESTAMP (UTC):** 2026-11-01T04:44:56Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 3a1886a1 (working tree: clean)
-**HANDOFF ID:** FCLR-HANDOFF-021-20261101T034524Z
-**STATUS:** CLOSED_CONFIRMATORY — OPEN_ONLY_VIA_NEW_ADMISSIBLE_DATA (Track A); Track C/B/H002 sealed
+**BRANCH/HEAD:** main @ 676fe7d3 (working tree: clean)
+**HANDOFF ID:** FCLR-HANDOFF-022-20261101T044456Z
+**STATUS:** OPEN — HEAVY WORK PENDING (Track A reopen probe + coupled integration synthesis fallback)
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk as ONE coupled problem
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T03:45:24Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T04:44:56Z
 **PRIORITY P0 | TYPE: HEAVY DATA DISCOVERY + COUPLED SYNTHESIS (FALLBACK)**
 
 **REPO NAME IS THE SPEC:** Couple funding-conditioned volatility (Track C) with liquidation risk (Track A). Do NOT re-run sealed confirmatory panels (FCLR-001/002/003/006/007/008) — all exhausted, byte-identical reproducibility already verified. Do NOT re-probe Track A source families already in `track_a_final_block_proof.md` / `track_a_deadend_map.md` / `liquidation_sources_enumeration.md` — irrefutable structural block.
