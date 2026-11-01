@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T19:24:25Z
+**TIMESTAMP (UTC):** 2026-11-01T19:24:54Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Research program TERMINAL. H001 NOT_SUPPORTED (FCLR-003 confirmatory gate NOT_MET; C2 vs B1 +3.78% worse, CI [-0.020240,0.056734] crosses zero); risk overlay INELIGIBLE. Track A: FCLR-010 forecast gate PASSED (+ H_COUPLED-001 ROBUST PASS + FCLR-OVERLAY-001 EXECUTED, hypothetical only, no profitability claim). Track B CLOSED_NEGATIVE. Track C closed negative (FCLR-006/008 NOT_MET). H002 permanent block (SSRN HTTP 403). No unsealed confirmatory window remains; no admissible unauthenticated new liquidation source; no new confirmatory experiment feasible on current data (RESEARCH_PROMPT.md §16). NO NEW RESEARCH — only verification, archival, and reproducibility hardening remain.
 **BRANCH/HEAD:** main @ 78ab2a3d (checkpoint); working tree clean except this AGENT_HANDOFF.md update (intended); no __pycache__ noise
@@ -11,10 +11,13 @@
 
 ## BOTTLENECKS REMOVED (THIS SESSION)
 - **Conflict ambiguity**: `research_state/evaluation_summary_conflict.md` clarifies `evaluation_summary.md` and `evaluation_summary_FCLR002.md` are UNTRUSTED/SUPERSEDED; canonical confirmatory numbers are `research_state/evaluation_summary_FCLR003.md` per `research_state/final_confirmatory_verdict.md`. No sealed holdout re-opened.
-- **Tree noise**: `__pycache__` purged; tree clean (`git status --short` will show only this handoff).
+- **Tree noise**: `__pycache__` purged (18 tracked `.pyc` deletions); tree clean apart from this AGENT_HANDOFF.md update.
 - **Stale backup**: `run_manifest.json.bak_fclr001` left tracked but annotated as superseded (non-blocking).
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T19:21:58Z
+## MATERIAL VERIFICATION TARGET (DO NOT SKIP)
+- `research_state/evaluation_summary_FCLR003.md` was regenerated 2026-11-01T19:20:58Z and its C2-vs-B1 95% CI [0.001487, 0.093225] EXCLUDES zero, while `research_state/final_confirmatory_verdict.md` reports C2-vs-B1 CI [-0.020240, 0.056734] which CROSSES zero (+3.78% worse). These conflict on whether the forecast gate is met. `final_confirmatory_verdict.md` is canonical per the conflict doc; the independent recompute (FCLR-ARCHIVE-002 step 1) must arbitrate which set is reproducible from stored hashes and report the exact diff or declare a blocker. Do not treat either as settled until the recompute matches one within tolerance.
+
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T19:24:54Z
 **PRIORITY: P0 | TYPE: TERMINAL-ARCHIVAL-VERIFY (HEAVY) | CAMPAIGN: FCLR-ARCHIVE-002 — INDEPENDENT REPRODUCIBILITY + FULL INTEGRITY SWEEP | BLOCK ALL NEW RESEARCH | NO RE-OPENING | NO PRE-REGISTRATION | NO THRESHOLD TUNING**
 
 **MANDATE (UNMISSABLE):** The program is TERMINAL. Your job is NOT to find a new experiment — it is to PROVE reproducibility from frozen artifacts/hashes and produce an immutable archival record. You MUST perform the heavy verification below end-to-end. Skipping any step is a failure of this session.
