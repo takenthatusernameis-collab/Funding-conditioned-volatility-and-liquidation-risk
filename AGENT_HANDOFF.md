@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T21:46:38Z
+**TIMESTAMP (UTC):** 2026-11-01T22:16:03Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility/liquidation research program TERMINAL (ARCHIVED). Primary hypothesis H001 NOT_SUPPORTED on pre-registered confirmatory test FCLR-003; forecast gate NOT_MET; all confirmatory panels/data exhausted; no risk-overlay eligible. All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, cross-track merge, or start new experiments. Only immutable verification/archival inspection remains.
 **BRANCH/HEAD:** main @ 251cae78 (checkpoint)
-**HANDOFF ID:** FCLR-HANDOFF-061-20261101T214638Z
-**SUPERSEDES:** FCLR-HANDOFF-060-20261101T211906Z
+**HANDOFF ID:** FCLR-HANDOFF-062-20261101T221603Z
+**SUPERSEDES:** FCLR-HANDOFF-061-20261101T214638Z
 
 **STATUS:** Tests 27/27 PASS. All sealed artifacts present and verified. Working tree clean except intended AGENT_HANDOFF.md edit and regenerated `__pycache__` bytecode from the test run (harmless cache, not source/research artifacts). PROJECT TERMINAL — ARCHIVED. No blocked sessions; no bottlenecks remain.
 
