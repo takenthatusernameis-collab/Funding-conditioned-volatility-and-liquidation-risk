@@ -1,14 +1,14 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-040)
-**TIMESTAMP (UTC):** 20261101T133230Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-041)
+**TIMESTAMP (UTC):** 20261101T133405Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ 375a09ca (working tree clean except untracked __pycache__/; tests 27/27 PASS re-verified 2026-11-01T13:23:49Z)
-**HANDOFF ID:** FCLR-HANDOFF-040-20261101T133230Z
-**SUPERSEDES:** FCLR-HANDOFF-039 (20261101T132349Z)
+**BRANCH/HEAD:** main @ 80a658f3 (working tree clean except tracked __pycache__/ rebuilds from test runs; tests 27/27 PASS re-verified 2026-11-01T13:33:00Z)
+**HANDOFF ID:** FCLR-HANDOFF-041-20261101T133405Z
+**SUPERSEDES:** FCLR-HANDOFF-040 (20261101T133230Z)
 **PRIORITIZATION RATIONALE:** Repo name is "Funding-conditioned-volatility-and-liquidation-risk" — the natural intersection is funding-conditioned dynamics interacting with liquidation/volatility. The coupled model (funding + flow/liquidation signals) already PASSED at 500 reps; the highest-value remaining work is to PROVE ROBUSTNESS of that exact coupled formulation under heavier stress. All other tracks are either sealed (A/C/B) or permanently blocked (H002). No discovery work permitted.
 
 **STATUS:** H_COUPLED-001 PASSED (500 reps). ROBUSTNESS MANDATORY. FCLR-COUPLED-ROBUST NOT STARTED. Firewall IMMUTABLE (ironflow Hyperliquid ONLY). Cross-track merge FORBIDDEN. Do NOT use scripts/fclr010_execute_fast.py (fabricated). Use real computation only. H002 PERMANENTLY BLOCKED (SSRN 403).
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T133230Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T133405Z
 **PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/INFERENCE (HEAVY, UNAVOIDABLE) | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS**
 
 Pre-reg: research_state/pre_registration_h_coupled_001_20261101T093727Z.md (frozen). Coupled PASSED with 500 reps. Must prove stability at >=2000 reps under strict constraints.
@@ -17,7 +17,7 @@ Pre-reg: research_state/pre_registration_h_coupled_001_20261101T093727Z.md (froz
 ```bash
 git -C /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk log --oneline -1
 grep -n "Overall\|G[1-6]\|rel_brier\|PASS" /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-COUPLED-001.md | head -10
-python -m unittest discover -s tests -v 2>&1 | tail -1
+python -m unittest discover -s /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests -v 2>&1 | tail -1
 ```
 
 ### FOCUS CAMPAIGN: FCLR-COUPLED-ROBUST (HEAVY WORK — MANDATORY, NO ESCAPE)
@@ -45,7 +45,7 @@ All work must use FROZEN FCLR-010 splits from run_manifest.json. Ironflow Hyperl
 | Track | Hypothesis | Status | Evidence |
 |-------|-----------|--------|----------|
 | A | FCLR-H004 | SUPPORTED/PASSED | research_state/evaluation_summary_FCLR010.md (+2.21% rel Brier C2 vs B1) |
-| Coupled | H_COUPLED-001 | SUPPORTED/PASSED (500 reps); ROBUST PENDING (>=2000 reps) | research_state/evaluation_summary_FCLR-COUPLED-001.md (+4.61% rel Brier C_coupled vs B1; CI [0.00251,0.00316]) |
+| Coupled | H_COUPLED-001 | SUPPORTED/PASSED (500 reps); ROBUST PENDING (>=2000 reps) | research_state/evaluation_summary_FCLR-COUPLED-001.md (+4.61% rel Brier C_coupled vs B1; CI [0.002511,0.003158]) |
 | C | FCLR-H001 | NOT_SUPPORTED/CLOSED | research_state/evaluation_summary_FCLR009.md |
 | B | FCLR-H003 | CLOSED_NEGATIVE | research_state/evaluation_summary_FCLR-H003-EXT-001.md |
 | H002 | funding-extreme correction time | EXPLORATORY/PARTIAL — PERMANENT BLOCKER | SSRN HTTP 403; cannot reconstruct event definition/censoring/regime split. STOP SCHEDULING. |
