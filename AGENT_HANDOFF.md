@@ -1,17 +1,19 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-024)
-**TIMESTAMP (UTC):** 2026-11-01T05:30:18Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-026)
+**TIMESTAMP (UTC):** 2026-11-01T05:36:00Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **BRANCH/HEAD:** main @ e1022fb0 (working tree: clean)
-**HANDOFF ID:** FCLR-HANDOFF-025-20261101T053018Z
-**STATUS:** OPEN — FCLR-009 COMPLETE (gate NOT_MET); Track A REOPENED via NEW admissible source (ironflow Hyperliquid census); FCLR-010 PRE-REGISTERED BEFORE OUTCOMES, awaiting execution
-**PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk as ONE coupled problem
+**HANDOFF ID:** FCLR-HANDOFF-026-20261101T053600Z
+**STATUS:** OPEN — FCLR-009 COMPLETE (gate NOT_MET); Track A REOPENED via NEW admissible source (ironflow Hyperliquid census); FCLR-010 PRE-REGISTERED BEFORE OUTCOMES, NOT YET EXECUTED
+**PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk as ONE COUPLED PROBLEM (do not split them)
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T05:30:18Z
-**PRIORITY P0 | TYPE: HEAVY COUPLED EXECUTION (FCLR-010 TRACK A CONFIRMATORY ON HYPERLIQUID)**
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T05:36:00Z
+**PRIORITY P0 | TYPE: HEAVY COUPLED EXECUTION (FCLR-010 TRACK A CONFIRMATORY ON HYPERLIQUID) | NO STATUS-ONLY WORK**
 
-**REPO NAME IS THE SPEC:** Couple funding-conditioned volatility with liquidation risk. Track A is now REOPENED: `ironflow_hyperliquid_liquidation_events` (HuggingFace, CC BY 4.0, unauthenticated) passed ALL rubric items (unauthenticated, no_keys, symbols>=5 [185 native perps], blocks>=3 [12 monthly blocks 2025-11..2026-10], completeness_doc, license_ok, census_or_defensible). Files hashed and cached at `research_state/data_cache/ironflow_events/`.
+**REPO NAME IS THE SPEC:** Treat funding-conditioned volatility AND liquidation risk as a single coupled question. Track C (volatility-only forecasting) is EXHAUSTED and CLOSED (all panels FCLR-001/002/003/006/007/008/009 failed to clear the gate). The ONLY viable open confirmatory track is Track A.
 
-FCLR-010 is PRE-REGISTERED (`research_state/research_protocol_fclr010.md`, v1.0, frozen 2026-11-01T04:52:00Z) BEFORE any outcome inspection. **No model may be fitted to liquidation labels and no label-outcome relationship may be inspected until splits are frozen in `run_manifest.json#split_boundaries_fclr010` (frozen_before_outcomes=true).**
+Track A is REOPENED: `ironflow_hyperliquid_liquidation_events` (HuggingFace, CC BY 4.0, unauthenticated) passed ALL rubric items (unauthenticated, no_keys, symbols>=5 [185 native perps], blocks>=3 [12 monthly blocks 2025-11..2026-10], completeness_doc, license_ok, census_or_defensible). Files hashed and cached at `research_state/data_cache/ironflow_events/`.
+
+FCLR-010 is PRE-REGISTERED (`research_state/research_protocol_fclr010.md`, v1.0, frozen 2026-11-01T04:52:00Z) BEFORE any outcome inspection. **ABSOLUTE FIREWALL:** No model may be fitted to liquidation labels and no label-outcome relationship may be inspected until `run_manifest.json#split_boundaries_fclr010` exists with `frozen_before_outcomes=true`. Cross-track firewall: NO Binance data merged into Hyperliquid label/predictor panels.
 
 ### MANDATORY FIRST ACTION (30s)
 ```bash
