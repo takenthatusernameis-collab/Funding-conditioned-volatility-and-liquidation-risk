@@ -1,16 +1,17 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-033)
-**TIMESTAMP (UTC):** 20261101T101239Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-034)
+**TIMESTAMP (UTC):** 20261101T103708Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ ff2c282 (working tree: modified research_state + AGENT_HANDOFF)
-**HANDOFF ID:** FCLR-HANDOFF-033-20261101T101239Z
-**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001). Next: COUPLED-GENERALIZATION (robustness/inference) on ironflow-only with firewall intact.
+**BRANCH/HEAD:** main @ 24445e8d (working tree clean apart from compiled __pycache__)
+**HANDOFF ID:** FCLR-HANDOFF-034-20261101T103708Z
+**STATUS:** H_COUPLED-001 PASSED (FCLR-COUPLED-001). Tracks A/B/C sealed (NOT_SUPPORTED / COMPLETE_NEGATIVE / BLOCKED-NO-GO). Cross-track firewall IMMUTABLE/SEALED. Bottlenecks removed: no open track re-spin. Next: COUPLED-ROBUSTNESS (robustness/inference) on ironflow-only with firewall intact.
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk (ONE COUPLED PROBLEM)
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T101239Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 20261101T103708Z
 **PRIORITY P0 | TYPE: COUPLED ROBUSTNESS/GENERALIZATION (HEAVY) | NO DISCOVERY/SPIN | NO CROSS-TRACK MERGE**
 
 Pre-registration locked: pre_registration_h_coupled_001_20261101T093727Z.md
 Coupled execution complete and PASSED under frozen FCLR-010 splits/firewall.
+No track is blocked waiting on user input. Execute the heavy focus campaign below.
 
 ### MANDATORY FIRST ACTION (30s)
 ```bash
