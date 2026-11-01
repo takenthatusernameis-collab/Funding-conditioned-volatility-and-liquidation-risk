@@ -1,14 +1,14 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T13:40:05Z
+**TIMESTAMP (UTC):** 2026-11-01T14:24:02Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **BRANCH/HEAD:** main @ 6c95ca2c (up to date with origin/main)
-**HANDOFF ID:** FCLR-HANDOFF-044-20261101T134005Z
-**SUPERSEDES:** FCLR-HANDOFF-043-20261101T133748Z; AGENT_HANDOFF_OUTCOME.md read-only — this file is the single durable handoff going forward.
+**HANDOFF ID:** FCLR-HANDOFF-045-20261101T142402Z
+**SUPERSEDES:** FCLR-HANDOFF-044-20261101T134005Z; AGENT_HANDOFF_OUTCOME.md read-only — this file is the single durable handoff going forward.
 **PRIORITIZATION RATIONALE:** Repo name = funding-conditioned volatility ∩ liquidation risk. Treat as ONE coupled system. Track C (volatility-only): exhausted/confirms no clean win; sealed. Track B (modeled boundaries): CLOSED_NEGATIVE; separation irrefutable. H002: PERMANENTLY BLOCKED (SSRN HTTP 403). Track A (observed liquidations, ironflow Hyperliquid): FCLR-010 FORECAST_GATE_PASSED (C2 vs B1 −0.003077, 95% CI [−0.004892,−0.001263], rel −2.21%, n=199, 5 blocks, frozen splits 2026-11-01T05:39:07Z) — overlay only if pre-registered. H_COUPLED-001 (funding × vol regime × lagged observed flow): PASSED at 500 reps (+4.61% rel Brier vs B1, CI [0.002511,0.003158]) but pre-registration requires ≥2000 block-bootstrap reps. **THIS IS THE ONLY PATH TO A PUBLISHABLE COUPLED RESULT. NO OTHER TRACK JUSTIFIES COMPUTE UNTIL COUPLED ROBUSTNESS IS SEALED WITH ARTIFACTS.**
 
 **STATUS:** Tests 27/27 PASS at HEAD 6c95ca2c. Working tree clean. FCLR-010 gate PASSED (sealed). H_COUPLED-001 ROBUST (≥2000 reps) NOT STARTED — MANDATORY HEAVY WORK. Cross-track firewall IMMUTABLE (ironflow Hyperliquid ONLY). scripts/fclr010_execute_fast.py banned.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T13:40:05Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T14:24:02Z
 **PRIORITY P0 | TYPE: FCLR-COUPLED-ROBUST (HEAVY, UNAVOIDABLE) | BLOCK ALL OTHER WORK | NO DISCOVERY | NO CROSS-TRACK MERGE | NO FABRICATED METRICS | NO OUTCOME RE-INSPECTION**
 
 **MANDATE:** Treat this as a single campaign. Do NOT split focus to other tracks. Remove bottlenecks; run the full robustness suite to completion and seal it. If blocked, only fix blockers that directly prevent items 1-8 below. No shortcuts.
