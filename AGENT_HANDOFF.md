@@ -1,12 +1,12 @@
-# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-023)
-**TIMESTAMP (UTC):** 2026-11-01T04:52:00Z
+# AGENT_HANDOFF.md (DURABLE - FCLR-HANDOFF-024)
+**TIMESTAMP (UTC):** 2026-11-01T05:29:50Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**BRANCH/HEAD:** main @ ab926bc1 (working tree: clean except untracked research_state/evaluation_summary_FCLR009.md pending commit decision)
-**HANDOFF ID:** FCLR-HANDOFF-023-20261101T045200Z
+**BRANCH/HEAD:** main @ e1022fb0 (working tree: clean)
+**HANDOFF ID:** FCLR-HANDOFF-024-20261101T052950Z
 **STATUS:** OPEN — FCLR-009 COMPLETE (gate NOT_MET); Track A REOPENED via NEW admissible source (ironflow Hyperliquid census); FCLR-010 PRE-REGISTERED BEFORE OUTCOMES, awaiting execution
 **PRIORITIZED BY:** repo name = funding-conditioned volatility ∩ liquidation risk as ONE coupled problem
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T04:52:00Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T05:29:50Z
 **PRIORITY P0 | TYPE: HEAVY COUPLED EXECUTION (FCLR-010 TRACK A CONFIRMATORY ON HYPERLIQUID)**
 
 **REPO NAME IS THE SPEC:** Couple funding-conditioned volatility with liquidation risk. Track A is now REOPENED: `ironflow_hyperliquid_liquidation_events` (HuggingFace, CC BY 4.0, unauthenticated) passed ALL rubric items (unauthenticated, no_keys, symbols>=5 [185 native perps], blocks>=3 [12 monthly blocks 2025-11..2026-10], completeness_doc, license_ok, census_or_defensible). Files hashed and cached at `research_state/data_cache/ironflow_events/`.
