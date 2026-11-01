@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T20:17:43Z
+**TIMESTAMP (UTC):** 2026-11-01T20:20:33Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Volatility/liquidation + funding-conditioned research program **TERMINAL**. All experimental gates sealed. Future agents MUST NOT re-open sealed holds, re-pre-register, threshold-shop, or cross-track merge. Only heavy verification, integrity hardening, and immutable archival remain.
 **BRANCH/HEAD:** main @ 25d66913 (checkpoint)
@@ -13,7 +13,7 @@
 - **Conflict docs**: `research_state/evaluation_summary_conflict.md` marks `evaluation_summary.md` and `evaluation_summary_FCLR002.md` UNTRUSTED/SUPERSEDED; canonical = FCLR-003 per `final_confirmatory_verdict.md`. Conflict arbitrated by recompute (see archival record).
 - **Stale artifacts**: `run_manifest.json.bak_fclr001` remains tracked but annotated superseded (non-blocking).
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T20:17:43Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T20:20:33Z
 **PRIORITY: P0 | TYPE: TERMINAL-ARCHIVAL-VERIFY (HEAVY) | CAMPAIGN: FCLR-ARCHIVE-003 — FINAL INTEGRITY SWEEP + IMMUTABLE ARCHIVAL | BLOCK ALL NEW RESEARCH | NO RE-OPENING | NO PRE-REGISTRATION | NO THRESHOLD TUNING**
 
 **MANDATE (UNMISSABLE):** Program is TERMINAL. Do NOT search for new experiments or new liquidation sources. PROVE reproducibility from frozen artifacts/hashes and leave an immutable archival record. Execute ALL steps below end-to-end; skipping any step fails this session.
