@@ -1,8 +1,8 @@
 {
   "registry_version": "1.0",
-  "generated": "2026-11-01T04:52:00Z",
+  "generated": "2026-11-01T16:59:00Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "FCLR-009 COMPLETE gate NOT_MET (2025 panel, C2 vs B1 -0.43% rel QLIKE, CI [-0.003120,0.006165] crosses zero; H001 NOT_SUPPORTED across all panels; overlay INELIGIBLE). TRACK A REOPENED: NEW admissible unauthenticated source ironflow_hyperliquid_liquidation_events passes ALL rubric items (registry v1.2) \u2014 12 monthly blocks 2025-11..2026-10, 185 native perps, CC BY 4.0, census claim documented; files hashed and cached. FCLR-010 PRE-REGISTERED BEFORE OUTCOMES (research_protocol_fclr010.md); splits not yet frozen; outcome inspection frozen until split freeze. FCLR-001/002/003/006/007/008 sealed & exhausted; FCLR-009 executed; no further Binance confirmatory cell remains without new data.",
+  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 PRE-REGISTERED (no outcome inspection). Track C/B closed; H002 blocked.",
   "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE.",
   "frontier": [
     {
@@ -14,6 +14,16 @@
       "do_not": "Do not fit models to liquidation labels or inspect label-outcome relationships before split freeze. Do not relax rubric/floor/CI/block minimums. Do not merge Hyperliquid labels with Binance price panels. No .github/workflows/* changes.",
       "status": "COMPLETE",
       "result": "COMPLETE, FORECAST_GATE_PASSED. Executed 2026-11-01T09:14:03Z (fast execution). Ironflow Hyperliquid census (199 native perps, 12 monthly blocks 2025-11..2026-10). Protocol pre-registered, splits frozen_before_outcomes. C2 vs B1 Brier rel reduction 2.21% (>=2%), mean diff -0.003077, CI crosses? approx [-0.004892,-0.001263] does not cross zero; 199 instruments >=5, 5x30-day blocks >=3. Gate PASSED. Artifacts: research_state/evaluation_summary_FCLR010.md."
+    },
+    {
+      "rank": 0.5,
+      "task": "CAMPAIGN FCLR-OVERLAY-001: PRE-REGISTER Track A liquidation-risk overlay/position-sizing using H_COUPLED-001 on frozen FCLR-010 splits (ironflow only). NO outcome inspection/tuning.",
+      "prerequisite": "Pre-reg created before overlay outcomes. Use frozen splits from run_manifest.json#split_boundaries_fclr010 (frozen_before_outcomes=true).",
+      "acceptance": "Pre-registration research_state/pre_registration_tracka_overlay_*.md with fixed bands/multipliers/dev-quantiles, gates, block-bootstrap; experiment_frontier.json and cross_track_decision_log.md updated; no overlay outcomes computed; all tests pass.",
+      "blockers": "None - pre-reg only",
+      "do_not": "Do not compute overlay PnL/risk metrics, tune thresholds, re-split, merge tracks, change workflows.",
+      "status": "PRE-REGISTERED",
+      "result": "PRE-REGISTERED 2026-11-01T16:59:00Z. Frozen params, dev-only quantiles, block-bootstrap, firewall enforced. No outcomes computed."
     },
     {
       "rank": 1,

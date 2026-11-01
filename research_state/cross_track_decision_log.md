@@ -16,3 +16,4 @@
 
 ## H002
 - PERMANENTLY BLOCKED (SSRN HTTP 403). No further work.
+2026-11-01T17:07:48Z | FCLR-OVERLAY-001 PRE-REGISTERED | Created research_state/pre_registration_tracka_overlay_20261101T165900Z.md with frozen bands/multipliers (p_low/p_mid/p_high from dev quantiles), block-bootstrap, gates, no-tuning/no-outcome-inspection constraints. Updated experiment_frontier.json. Firewall: ironflow Hyperliquid only.
