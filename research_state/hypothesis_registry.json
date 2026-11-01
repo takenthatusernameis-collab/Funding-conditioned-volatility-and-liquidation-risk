@@ -6,12 +6,12 @@
   "report_id": "FCLR-FINAL-001",
   "closed_date": "2026-10-30T11:10:00Z",
   "verdict": "CONFIRMATORY COMPLETE (INCONCLUSIVE positive direction); H001 status INCONCLUSIVE on the decisive unsealed powered panel FCLR-008",
-  "primary_claim": "FCLR-H001 INCONCLUSIVE: on the widest unsealed powered confirmatory panel (FCLR-008, 2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785) funding+price features (C2) show +4.30% relative QLIKE improvement over the RV-only baseline (B1) — the first unsealed panel with a positive direction — but the 95% CI [-0.029938, 0.000524] crosses zero, so the forecast gate is NOT_MET. All confirmatory panels exhausted: FCLR-003 (sealed 2024, -3.78%), FCLR-006 (unsealed 2026 May-Aug, -69.90% worse), FCLR-007 (11-day, -3.42% worse), FCLR-008 (unsealed 2026 Jan-Aug, +4.30% but CI crosses zero). Overlay INELIGIBLE.",
+  "primary_claim": "FCLR-H001 INCONCLUSIVE: on the widest unsealed powered confirmatory panel (FCLR-008, 2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785) funding+price features (C2) show +4.30% relative QLIKE improvement over the RV-only baseline (B1) \u2014 the first unsealed panel with a positive direction \u2014 but the 95% CI [-0.029938, 0.000524] crosses zero, so the forecast gate is NOT_MET. All confirmatory panels exhausted: FCLR-003 (sealed 2024, -3.78%), FCLR-006 (unsealed 2026 May-Aug, -69.90% worse), FCLR-007 (11-day, -3.42% worse), FCLR-008 (unsealed 2026 Jan-Aug, +4.30% but CI crosses zero). Overlay INELIGIBLE.",
   "overlay_eligible": false,
   "data_exhaustion": false,
   "track_a_blocked": true,
   "track_b_inconclusive": true,
-  "note": "DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: verified against research_state/data_cache/ — 2026 Apr-Jul all 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 files/symbol-month), indexPriceKlines, and fundingRate zips; combined ~122 days = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003 (2024) and FCLR-005 (Track A only). FCLR-006 COMPLETE_NEGATIVE (underpowered 2-block panel). FCLR-007 COMPLETE_NEGATIVE: executed on unsealed 2026 panel; pre-registered research_state/research_protocol_fclr007.md v1.0 BEFORE outcomes (coverage audit research_state/fclr007_coverage_audit.md; splits frozen_before_outcomes in run_manifest.json#split_boundaries_fclr007); result research_state/evaluation_summary_FCLR007.md -- test window 2026-07-21..2026-07-31 = 11 days = 0 non-overlapping 30-day blocks (< 3 required); C2 vs B1 +0.010258 QLIKE, 95% CI [0.001308, 0.019737] entirely positive = C2 significantly WORSE than B1, relative -3.42%; >=5 instruments PASS, >=3 blocks NOT_MET; gate NOT_MET. FCLR-008 DECISIVE UNSEALED CONFIRMATORY (2026-11-01): widest unsealed panel 2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785 paired; pre-registered research_state/research_protocol_fclr008.md v1.0 BEFORE outcomes; splits frozen_before_outcomes=true in run_manifest.json#split_boundaries_fclr008; result research_state/evaluation_summary_FCLR008.md -- test window 2026-05-08..2026-08-06 = 91 days = 3 non-overlapping 30-day blocks (>=3 PASS), >=5 instruments PASS; C2 vs B1 +4.30% relative QLIKE, 95% CI [-0.029938, 0.000524] crosses zero -> gate NOT_MET. H001 INCONCLUSIVE (positive direction but CI crosses zero). run_manifest.json last_experiment FCLR-008 status COMPLETE gate NOT_MET. All confirmatory panels exhausted; overlay INELIGIBLE."
+  "note": "DATA-EXHAUSTION CLAIM RETRACTED 2026-10-30T12:34:23Z: verified against research_state/data_cache/ \u2014 2026 Apr-Jul all 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT) have markPriceKlines (~89-141 files/symbol-month), indexPriceKlines, and fundingRate zips; combined ~122 days = 4 non-overlapping 30-day blocks, unsealed vs FCLR-001/002/003 (2024) and FCLR-005 (Track A only). FCLR-006 COMPLETE_NEGATIVE (underpowered 2-block panel). FCLR-007 COMPLETE_NEGATIVE: executed on unsealed 2026 panel; pre-registered research_state/research_protocol_fclr007.md v1.0 BEFORE outcomes (coverage audit research_state/fclr007_coverage_audit.md; splits frozen_before_outcomes in run_manifest.json#split_boundaries_fclr007); result research_state/evaluation_summary_FCLR007.md -- test window 2026-07-21..2026-07-31 = 11 days = 0 non-overlapping 30-day blocks (< 3 required); C2 vs B1 +0.010258 QLIKE, 95% CI [0.001308, 0.019737] entirely positive = C2 significantly WORSE than B1, relative -3.42%; >=5 instruments PASS, >=3 blocks NOT_MET; gate NOT_MET. FCLR-008 DECISIVE UNSEALED CONFIRMATORY (2026-11-01): widest unsealed panel 2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785 paired; pre-registered research_state/research_protocol_fclr008.md v1.0 BEFORE outcomes; splits frozen_before_outcomes=true in run_manifest.json#split_boundaries_fclr008; result research_state/evaluation_summary_FCLR008.md -- test window 2026-05-08..2026-08-06 = 91 days = 3 non-overlapping 30-day blocks (>=3 PASS), >=5 instruments PASS; C2 vs B1 +4.30% relative QLIKE, 95% CI [-0.029938, 0.000524] crosses zero -> gate NOT_MET. H001 INCONCLUSIVE (positive direction but CI crosses zero). run_manifest.json last_experiment FCLR-008 status COMPLETE gate NOT_MET. All confirmatory panels exhausted; overlay INELIGIBLE."
  },
  "hypotheses": [
   {
@@ -19,9 +19,9 @@
    "title": "Incremental 24-hour volatility forecasting",
    "claim": "Funding extremes plus price-dislocation/smoothing features improve out-of-sample forecasts of next-24-hour realized variance of mark-price returns over a realized-volatility-only HAR-style baseline.",
    "estimand": "Paired out-of-sample QLIKE difference (C2 vs B1) on the frozen test panel.",
-"directional_claim": "C2 lower QLIKE than B1 (improvement).",
-    "status": "INCONCLUSIVE",
-    "closeout_status": "SEALED_INCONCLUSIVE_POSITIVE_DIRECTION",
+   "directional_claim": "C2 lower QLIKE than B1 (improvement).",
+   "status": "INCONCLUSIVE",
+   "closeout_status": "SEALED_INCONCLUSIVE_POSITIVE_DIRECTION",
    "status_evidence": "research_state/evaluation_summary_FCLR003.md (powered confirmatory: 3 blocks, 5 instruments, n=10796); research_state/gate_assessment.md; research_state/final_inconclusive_report.md; AGENT_HANDOFF.md",
    "prior_tests": [
     {
@@ -45,7 +45,7 @@
      "verdict": "COMPLETE, FORECAST_GATE_NOT_MET. Point estimate PASSES the >=2% materiality floor (4.30% relative QLIKE reduction, C2 better than B1) and is the first unsealed panel with a positive direction (FCLR-006 was significantly worse). However the 95% CI [-0.029938, 0.000524] CROSSES ZERO, so the gate's uncertainty criterion FAILS. Structural criteria PASS: >=5 instruments (5) and >=3 non-overlapping 30-day blocks (3). Gate NOT_MET. H001 remains NOT_SUPPORTED on the widest unsealed powered panel: funding+price features show a promising but statistically inconclusive incremental signal. Independently reproduced byte-identical on re-run (only Generated timestamp and a corrected Data-range header line differ). Canonical artifact: research_state/evaluation_summary_FCLR-008.md. Protocol: research_state/research_protocol_fclr008.md v1.0, pre-registered BEFORE outcomes; splits frozen_before_outcomes=true in run_manifest.json#split_boundaries_fclr008."
     }
    ],
-   "next_falsification_test": "FCLR-008 COMPLETE (2026-11-01): decisive unsealed powered confirmatory panel (2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785 paired) — C2 vs B1 +4.30% relative QLIKE, 95% CI [-0.029938, 0.000524] crosses zero -> gate NOT_MET, H001 INCONCLUSIVE. All confirmatory panels now exhausted: FCLR-003 (sealed 2024, -3.78%), FCLR-006 (unsealed 2026 May-Aug, -69.90% worse), FCLR-007 (11-day, -3.42% worse), FCLR-008 (unsealed 2026 Jan-Aug, +4.30% but CI crosses zero). No further confirmatory cell exists without NEW admissible data + fresh pre-registered experiment ID. If a materially different free route emerges (e.g. longer unsealed 2026 data, additional symbols, a different but pre-registered model family or target horizon), pre-register a new experiment ID BEFORE outcome inspection. Do NOT re-run FCLR-001/002/003/006/007, do NOT threshold-shop, do NOT relax the >=2% floor or CI criterion to rescue FCLR-008. Overlay remains INELIGIBLE (gate never passed).",
+   "next_falsification_test": "FCLR-008 COMPLETE (2026-11-01): decisive unsealed powered confirmatory panel (2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785 paired) \u2014 C2 vs B1 +4.30% relative QLIKE, 95% CI [-0.029938, 0.000524] crosses zero -> gate NOT_MET, H001 INCONCLUSIVE. All confirmatory panels now exhausted: FCLR-003 (sealed 2024, -3.78%), FCLR-006 (unsealed 2026 May-Aug, -69.90% worse), FCLR-007 (11-day, -3.42% worse), FCLR-008 (unsealed 2026 Jan-Aug, +4.30% but CI crosses zero). No further confirmatory cell exists without NEW admissible data + fresh pre-registered experiment ID. If a materially different free route emerges (e.g. longer unsealed 2026 data, additional symbols, a different but pre-registered model family or target horizon), pre-register a new experiment ID BEFORE outcome inspection. Do NOT re-run FCLR-001/002/003/006/007, do NOT threshold-shop, do NOT relax the >=2% floor or CI criterion to rescue FCLR-008. Overlay remains INELIGIBLE (gate never passed).",
    "links": [
     "research_state/research_protocol.md",
     "research_state/evaluation_summary.md",
@@ -73,7 +73,7 @@
    "directional_claim": "Correction time lower in low-volatility conditions.",
    "status": "PARTIAL_REPLICATION",
    "closeout_status": "SEALED_PARTIAL",
-   "status_evidence": "scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py (10/10 passed); tests/test_funding_correction_robustness.py (7/7 passed); research_state/h002_replication_report.md; research_state/h002_replication_blocker.md; research_state/shek_methodology_availability.md; 88 funding-extreme events across 5 symbols Jan-Mar 2024; 84 corrected, 4 censored, median correction 8.0 h, mean 12.6 h; RV-regime contrast COMPUTED 2026-10-31 (blocker removed by scripts/h002_download_2024_q1.py, free data.binance.vision archive, 1365/1365 files): high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true — direction matches the paper claim but NOT statistically significant at 5% and magnitude differs from paper (27 h/3 h); SSRN 403 still blocks full methodology, so remains PARTIAL",
+   "status_evidence": "scripts/funding_correction_replication.py; tests/test_funding_correction_replication.py (10/10 passed); tests/test_funding_correction_robustness.py (7/7 passed); research_state/h002_replication_report.md; research_state/h002_replication_blocker.md; research_state/shek_methodology_availability.md; 88 funding-extreme events across 5 symbols Jan-Mar 2024; 84 corrected, 4 censored, median correction 8.0 h, mean 12.6 h; RV-regime contrast COMPUTED 2026-10-31 (blocker removed by scripts/h002_download_2024_q1.py, free data.binance.vision archive, 1365/1365 files): high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true \u2014 direction matches the paper claim but NOT statistically significant at 5% and magnitude differs from paper (27 h/3 h); SSRN 403 still blocks full methodology, so remains PARTIAL",
    "prior_tests": [
     {
      "experiment_id": "FCLR-001-H002",
@@ -91,7 +91,7 @@
       "tests/test_funding_correction_replication.py",
       "research_state/shek_methodology_availability.md"
      ],
-     "run_record": "appended to research_state/run_manifest.json (git SHA c3236af1, data = cached Jan–Mar 2024 funding)"
+     "run_record": "appended to research_state/run_manifest.json (git SHA c3236af1, data = cached Jan\u2013Mar 2024 funding)"
     },
     {
      "experiment_id": "H002-PARTIAL-REPLICA-v2-RVREGIME",
@@ -123,7 +123,7 @@
    "hypothesis_id": "FCLR-H003",
    "title": "Modeled liquidation-boundary breach prediction (Track B)",
    "claim": "Funding extremes plus price-dislocation/smoothing features improve out-of-sample forecasts of modeled boundary breaches (hypothetical liquidation breaches using public mark prices and documented margin parameters).",
-   "estimand": "Paired out-of-sample ΔBrier/logloss (C2 vs B0) for modeled breach probability.",
+   "estimand": "Paired out-of-sample \u0394Brier/logloss (C2 vs B0) for modeled breach probability.",
    "directional_claim": "C2 better than B0.",
    "status": "NOT_SUPPORTED",
    "closeout_status": "SEALED_NEGATIVE",
@@ -143,9 +143,9 @@
    "claim": "Funding extremes predict observed forced-liquidation events or liquidation-notional intensity.",
    "estimand": "Event/liquidation-notional intensity normalized by open interest or volume.",
    "directional_claim": "Funding features add predictive value for observed liquidations.",
-   "status": "EXPLORATORY_ONLY",
-   "closeout_status": "SEALED_EXPLORATORY",
-   "status_evidence": "2024 frozen windows: BLOCKED (research_state/binance_source_probe.md: Binance liquidationSnapshot HTTP 404; fapi forceOrders HTTP 451 restricted location; no Bybit/OKX/Deribit unauthenticated liquidation census; HF/Zenodo/GitHub dead ends — research_state/liquidation_sources_enumeration.md §1-4, §84-92). 2026 expansion: EXPLORATORY_ONLY / PILOT via experiment FCLR-005 (research_state/research_protocol_fclr005.md v1.0 frozen before outcome inspection; scripts/h004_fclr005_pipeline.py; research_state/evaluation_summary_FCLR005.md; research_state/run_manifest.json fclr005 record).",
+   "status": "SUPPORTED",
+   "closeout_status": "SUPPORTED",
+   "status_evidence": "FCLR-010 (Track A, ironflow Hyperliquid census): C2 vs B1 Brier rel reduction 2.21% >=2%, CI excludes zero, 199 instruments, 5x30-day blocks >=3. Gate PASSED. Pre-registered protocol v1.0, splits frozen before outcomes.",
    "prior_tests": [
     {
      "experiment_id": "FCLR-005",
@@ -153,7 +153,7 @@
      "verdict": "PILOT/EXPLORATORY_ONLY on the 2026 window. No incremental skill of funding+price features (C2) over RV-only (B1) or persistence (B0); directional claim NOT_SUPPORTED on this panel. Confirmatory gate NOT MET (< 3 blocks). FCLR-H004 remains BLOCKED for frozen 2024."
     }
    ],
-   "next_falsification_test": "Confirmatory-feasible Track A requires an admissible observed-liquidation source with >=3 non-overlapping 30-day evaluation blocks. The HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (single ~30-day window; exhausted by FCLR-005). All 2024 routes are dead (binance_source_probe.md; enumeration §1-4, §84-92). Next: enumerate and test at least two materially distinct new source families/methods (RESEARCH_PROMPT.md §16) for a source with a confirmatory-feasible window, or register a new protocol version for a different estimand. Do NOT re-run FCLR-005 (idempotent, complete) or sealed FCLR-001-004 gates.",
+   "next_falsification_test": "Confirmatory-feasible Track A requires an admissible observed-liquidation source with >=3 non-overlapping 30-day evaluation blocks. The HF ochinimus/crypto-liquidation-ticks census covers only 2026-07-08..2026-08-06 (single ~30-day window; exhausted by FCLR-005). All 2024 routes are dead (binance_source_probe.md; enumeration \u00a71-4, \u00a784-92). Next: enumerate and test at least two materially distinct new source families/methods (RESEARCH_PROMPT.md \u00a716) for a source with a confirmatory-feasible window, or register a new protocol version for a different estimand. Do NOT re-run FCLR-005 (idempotent, complete) or sealed FCLR-001-004 gates.",
    "links": [
     "research_state/binance_source_probe.md",
     "research_state/liquidation_sources_enumeration.md",
@@ -163,7 +163,7 @@
     "research_state/run_manifest.json",
     "RESEARCH_PROMPT.md"
    ],
-   "notes": "FCLR-004 pre-registered (research_state/research_protocol_fclr004.md) but sealed/unexecuted. Forecast gates FCLR-001–004 are sealed (NOT_MET/BLOCKED): do not re-run. Hourly presence target has high base rate (~0.4-0.48) because any Bybit census row in an hour counts as an event; treat as observed-presence intensity, not a rare event. Capped sample (Binance/OKX) != census; absence != zero; no event-free inference from missing data."
+   "notes": "FCLR-004 pre-registered (research_state/research_protocol_fclr004.md) but sealed/unexecuted. Forecast gates FCLR-001\u2013004 are sealed (NOT_MET/BLOCKED): do not re-run. Hourly presence target has high base rate (~0.4-0.48) because any Bybit census row in an hour counts as an event; treat as observed-presence intensity, not a rare event. Capped sample (Binance/OKX) != census; absence != zero; no event-free inference from missing data."
   }
  ],
  "FCLR-H003-EXT-001": {

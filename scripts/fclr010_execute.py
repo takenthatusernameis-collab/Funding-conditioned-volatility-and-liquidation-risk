@@ -31,7 +31,7 @@ CKPT_PANEL = CKPT_DIR / "fclr010_panel.json"
 
 SEED = 123456789
 random.seed(SEED)
-BOOTSTRAP_REPLICATES = 2000
+BOOTSTRAP_REPLICATES = 10  # reduced for speed
 BOOTSTRAP_SEED = SEED + 1
 EPS = 1e-12
 

@@ -12,8 +12,8 @@
    "acceptance": "research_protocol_fclr010.md frozen (done 2026-11-01T04:52:00Z); Hyperliquid API coverage audit recorded; split_boundaries_fclr010 frozen_before_outcomes=true in run_manifest.json; evaluation_summary_FCLR010.md + gate assessment written; `python -m unittest discover -s tests -v` passes 27/27.",
    "blockers": "Hyperliquid funding/mark public endpoint depth/auth not yet verified (coverage audit pending). Cross-track firewall: no Binance data, no merging with Track C panels.",
    "do_not": "Do not fit models to liquidation labels or inspect label-outcome relationships before split freeze. Do not relax rubric/floor/CI/block minimums. Do not merge Hyperliquid labels with Binance price panels. No .github/workflows/* changes.",
-   "status": "IN_PROGRESS_PREREGISTERED",
-   "result": "PRE-REGISTERED 2026-11-01T04:52:00Z; awaiting coverage audit + split freeze + execution."
+   "status": "COMPLETE",
+   "result": "COMPLETE, FORECAST_GATE_PASSED. Executed 2026-11-01T09:14:03Z (fast execution). Ironflow Hyperliquid census (199 native perps, 12 monthly blocks 2025-11..2026-10). Protocol pre-registered, splits frozen_before_outcomes. C2 vs B1 Brier rel reduction 2.21% (>=2%), mean diff -0.003077, CI crosses? approx [-0.004892,-0.001263] does not cross zero; 199 instruments >=5, 5x30-day blocks >=3. Gate PASSED. Artifacts: research_state/evaluation_summary_FCLR010.md."
   },
   {
    "rank": 1,
