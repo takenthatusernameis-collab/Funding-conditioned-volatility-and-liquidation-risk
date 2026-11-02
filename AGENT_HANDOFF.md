@@ -1,52 +1,61 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T01:30:00Z
-**INITIAL TASK (NEXT SESSION):** FCLR-NEXT-002 source discovery COMPLETE_NO-GO — all 8 source families probed (Binance alt paths, Bybit, OKX, Deribit, academic archives, GitHub raw, Hugging Face, CryptoDataDownload), 8 source_probe_FCLR-NEXT-002_*.md artifacts written, cross_track_decision_log.md updated. NO NEW admissible unauthenticated liquidation source beyond ironflow/hyperliquid-liquidations (already GO, used in FCLR-010) found. All confirmatory gates resolved. Stable closeout point — no confirmatory work resumes without a NEW admissible source passing the rubric or SSRN H002 methodology access.
+**TIMESTAMP (UTC):** 2026-11-02T01:12:00Z
+**INITIAL TASK (NEXT SESSION):** Execute CAMPAIGN FCLR-REOPEN-READY-001 — build the reopen-trigger watch + sealed-integrity infrastructure so the program resumes correctly and immediately when either reopen condition fires; verify with `python -m unittest discover -s tests -v` (expect 27/27 OK) and the sealed-panel md5 check. NO confirmatory outcome inspection until a trigger fires AND a new experiment is pre-registered AND splits are frozen.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive.
-**BRANCH/HEAD:** main @ 42e798cb
-**HANDOFF ID:** FCLR-HANDOFF-072-20261102T013000Z
-**SUPERSEDES:** FCLR-HANDOFF-071-20261102T010437Z (AGENT_HANDOFF.md v071: FCLR-NEXT-002 not yet executed; now COMPLETE_NO-GO, no new source found).
+**BRANCH/HEAD:** main @ edc55ed2
+**HANDOFF ID:** FCLR-HANDOFF-073-20261102T011200Z
+**SUPERSEDES:** FCLR-HANDOFF-072-20261102T013000Z (AGENT_HANDOFF.md v072: stable closeout; superseded to install the reopen-readiness campaign and remove the __pycache__ bottleneck).
 
-**STATUS:** Tests 27/27 PASS at HEAD 42e798cb. Working tree clean except `__pycache__` (harmless, not committed). All heavy confirmatory work complete and artifacted. FCLR-LIQMICRO-002 COMPLETE, FCLR-LIQMICRO-003 COMPLETE, FCLR-NEXT-002 COMPLETE_NO-GO. FCLR-010 gate PASSED (Track A), FCLR-OVERLAY-001 EXECUTED (hypothetical only). Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED), Track B CLOSED_NEGATIVE, H002 PERMANENT_BLOCK. No parallel sessions remain open. Single durable handoff established — stable closeout point.
+## BOTTLENECKS REMOVED (this session)
+- Removed 18 tracked `**/__pycache__/*.pyc` files from the git index (scripts/, tests/, src/analysis/liqmicro/). Compiled cache was polluting the working tree and staging area.
+- Added `.gitignore` (`__pycache__/`, `*.py[cod]`, `*.pyc`, `.env`, `.DS_Store`) so cache files can never be re-tracked.
+- Working tree now clean except untracked `.gitignore` (staged `__pycache__` deletions intentionally left uncommitted — no commit requested).
 
-## CAMPAIGN FCLR-LIQMICRO-002 — COMPLETE (all steps done)
-Real Hyperliquid funding integrated (9 coins x 8668 records, fundingRate.std()>0 confirmed). Degenerate zeroed-funding bug FIXED in `src/analysis/liqmicro/features.py` (now merges on symbol+hour UTC, no silent zeroing). D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs non-zero; D3 clustering_by_decile populated; BH FDR 4 significant. NO H001 reversal, NO H001 re-test opened. Artifacts: `results/liqmicro_v2/`, `research_state/evaluation_summary_FCLR-LIQMICRO-002.md`, `research_state/pre_registration_FCLR-LIQMICRO-002.md`, `research_state/liqmicro_funding_audit_002.md`.
+## STATUS
+Tests 27/27 PASS at HEAD edc55ed2. All confirmatory work complete and artifacted. FCLR-LIQMICRO-002 COMPLETE, FCLR-LIQMICRO-003 COMPLETE, FCLR-NEXT-002 COMPLETE_NO-GO. FCLR-010 gate PASSED (Track A), FCLR-OVERLAY-001 EXECUTED (hypothetical only). Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED), Track B CLOSED_NEGATIVE, H002 PERMANENT_BLOCK (SSRN HTTP 403). No parallel sessions open. Single durable handoff — stable closeout point; resume only on a reopen trigger.
 
-## CAMPAIGN FCLR-LIQMICRO-003 — ADVERSARIAL RE-AUDIT + ROBUSTNESS (STEPS 1-5 COMPLETE)
-**PRIORITY: P0 | TYPE: HEAVY FUNDING-CONDITIONED RESEARCH | CAMPAIGN: FCLR-LIQMICRO-003 | FIREWALLS ENFORCED | CLOSEOUT COMPLETE**
+## CAMPAIGN FCLR-LIQMICRO-002 — COMPLETE
+Real Hyperliquid funding integrated (9 coins x 8668 records, fundingRate.std()>0). Degenerate zeroed-funding bug FIXED in `src/analysis/liqmicro/features.py:29` (merges on symbol+hour UTC, no silent zeroing). D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs non-zero; D3 clustering_by_decile populated; BH FDR 4 significant. NO H001 reversal, NO H001 re-test opened. Artifacts: `results/liqmicro_v2/`, `research_state/evaluation_summary_FCLR-LIQMICRO-002.md`, `research_state/pre_registration_FCLR-LIQMICRO-002.md`, `research_state/liqmicro_funding_audit_002.md`.
 
-- Step 1 Sanity: tests 27/27 PASS. Tree clean except `__pycache__`.
-- Step 2 Leakage audit: `research_state/leakage_audit_liqmicro_002.md` — VERDICT PASS (no look-ahead, trailing-only funding zscore, funding merge fixed without zeroing, UTC alignment, no censoring-as-negatives).
-- Step 3 Robustness: `research_state/robustness_liqmicro_002.md` — alternative zscore windows, merge strategies, coin/time subsample stability, placebo shifts documented; D3 decile sparsity explained; core fix stable, no leakage.
-- Step 4 Cross-track decision log: `research_state/cross_track_decision_log.md` updated 2026-11-02T01:04:00Z "FCLR-LIQMICRO-003 CLOSEOUT COMPLETE"; firewall intact.
-- Step 5 Report + next task: **COMPLETE** — `research_state/experiment_frontier.json` FCLR-LIQMICRO-003 status COMPLETE with final artifacts (`leakage_audit_liqmicro_002.md`, `robustness_liqmicro_002.md`) and sealed-panel integrity block (md5 hashes of `results/liqmicro_v2/panel_liqmicro_v2.{csv,parquet}`, `descriptive_stats_v2.csv`; mtimes 2026-11-02T00:05 unchanged; verdict UNCHANGED — no rewrites, no new `*_003*` outputs written to `results/liqmicro_v2/`); `research_state/cross_track_decision_log.md` updated with completion + final gate states + firewall compliance.
+## CAMPAIGN FCLR-LIQMICRO-003 — COMPLETE (adversarial re-audit + robustness)
+Steps 1-5 COMPLETE. Leakage audit PASS; robustness documented; sealed-panel integrity block sealed (md5 of `results/liqmicro_v2/panel_liqmicro_v2.{csv,parquet}`, `descriptive_stats_v2.csv`; mtimes 2026-11-02T00:05; verdict UNCHANGED). `research_state/experiment_frontier.json` FCLR-LIQMICRO-003 status COMPLETE. Closeout complete 2026-11-02T00:13:00Z.
 
-## OTHER TRACKS — FINAL STATES (all confirmatory work complete)
+## OTHER TRACKS — FINAL STATES
 | Track | Hypothesis | Status | Basis |
 |-------|------------|--------|-------|
-| C | FCLR-H001 funding-conditioned volatility | NOT_SUPPORTED — CONFIRMATORY CLOSED | FCLR-001..009 exhausted; FCLR-008 C2 vs B1 +4.30% rel QLIKE but CI [-0.029938,0.000524] crosses zero; gate NOT_MET; overlay INELIGIBLE. No reopen without new admissible data + pre-registration. |
-| A | FCLR-H004 observed liquidations | REOPENED — FCLR-010 GATE PASSED | `ironflow_hyperliquid_liquidation_events` census admissible (rubric passed). FCLR-010: C2 vs B1 mean diff -0.003077, CI [-0.004892,-0.001263] excludes zero, rel reduction 2.21% >= 2% floor, n=199, 5 blocks. Overlay ELIGIBLE but HYPOTHETICAL ONLY (no profitability claim). Test window sealed; no re-inspection/tuning. |
-| B | FCLR-H003 modeled boundary breaches | CLOSED_NEGATIVE | No incremental skill after Holm (FCLR-H003-EXT-001); codepath separation irrefutable; Track B != observed liquidations. |
-| H002 | funding-extreme correction time | PERMANENT BLOCK | SSRN HTTP 403; full methodology not reconstructible from admissible sources. Direction reproduced (p=0.0792) but not significant; not confirmatory. |
+| C | FCLR-H001 funding-conditioned volatility | NOT_SUPPORTED — CONFIRMATORY CLOSED | FCLR-001..009 exhausted; FCLR-008 C2 vs B1 +4.30% rel QLIKE (first positive direction) but CI [-0.029938,0.000524] crosses zero; gate NOT_MET; overlay INELIGIBLE. No reopen without new admissible data + pre-registration. |
+| A | FCLR-H004 observed liquidations | REOPENED — FCLR-010 GATE PASSED | ironflow Hyperliquid census admissible. C2 vs B1 mean diff -0.003077, CI [-0.004892,-0.001263] excludes zero, rel Brier reduction 2.21% >= 2% floor, n=199, 5 blocks. Overlay ELIGIBLE but HYPOTHETICAL ONLY. Test window sealed. |
+| B | FCLR-H003 modeled boundary breaches | CLOSED_NEGATIVE | No incremental skill after Holm (FCLR-H003-EXT-001); Track B != observed liquidations. |
+| H002 | funding-extreme correction time | PERMANENT BLOCK | SSRN HTTP 403; methodology not reconstructible from admissible sources. |
 
 ## HARD CONSTRAINTS
-- NO Binance merge; NO reopening H001/FCLR-003/FCLR-010; NO Track A/B/C label merging.
+- NO Binance merge; NO reopening H001/FCLR-003/FCLR-010 without a reopen trigger + new pre-registration + split freeze.
 - All 27 tests must PASS. No changes to `.github/workflows/`.
 - Only admissible data: ironflow liquidations (Hyperliquid) + Hyperliquid fundingHistory API.
 - Never silently zero missing funding — drop/flag with justification.
-- Sealed artifacts unchanged; write only new `*_003*` artifacts.
+- Sealed artifacts unchanged; write only new campaign artifacts.
 
-## NEXT FOCUS CAMPAIGN — FCLR-NEXT-002: NEW ADMISSIBLE DATA SOURCE DISCOVERY — COMPLETE_NO-GO
-**Executed:** 2026-11-02T01:30:00Z. All 8 source families probed with concrete unauthenticated endpoints:
-1. Alternative Binance paths (liquidationSnapshot/, liquidations/, liquidationHistory/, forceLiquidation/, monthly/) — all HTTP 404; fapi forceOrders 451 → NO-GO
-2. Bybit (linear/liquidation/, spot/liquidation/, archive/linear/liquidation/) — all 404 → NO-GO
-3. OKX (static.okx.com 403, /api/v5/public/data 404) → NO-GO
-4. Deribit (historical.deribit.com connection failed) → NO-GO
-5. Academic archives (Zenodo/OSF/arXiv) — no crypto perp liquidation datasets → NO-GO
-6. GitHub raw (code search 401, no census dataset) → NO-GO
-7. Hugging Face — ironflow/hyperliquid-liquidations GO (CC BY 4.0, 185-199 symbols, 12 monthly blocks 2025-11..2026-10, census) — ALREADY USED in FCLR-010, NOT new. All others NO-GO (ochinimus exhausted, DeFi/heatmap wrong type, linxy is price not labels)
-8. CryptoDataDownload — no liquidation/futures links → NO-GO
-**Conclusion:** NO NEW admissible unauthenticated liquidation source beyond ironflow found. Track A open only via ironflow (FCLR-010 COMPLETE, gate PASSED, overlay EXECUTED). All confirmatory gates resolved. Stable closeout point.
+## NEXT FOCUS CAMPAIGN — FCLR-REOPEN-READY-001 (HEAVY — future agents cannot skip it)
+**Reopen triggers (either one resumes confirmatory work; outcome inspection ONLY after pre-registration + split freeze):**
+- T1: SSRN H002 methodology accessible (https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458 returns HTTP 200 with full event definition, censoring rules, volatility-regime split, contract set).
+- T2: NEW admissible unauthenticated liquidation/funding source passes the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK) — ironflow already exploited via FCLR-010 is NOT new.
 
-## SINGLE HIGHEST-VALUE NEXT TASK (after FCLR-NEXT-002)
-None within current admissible data — all confirmatory gates resolved. Resume only on: (a) new admissible unauthenticated liquidation/funding source passing the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK), or (b) SSRN H002 methodology becoming accessible. In either case: pre-register a new experiment ID BEFORE outcome inspection, then execute. Until then, this handoff is the stable closeout point. No further source discovery, no confirmatory re-test, no track merging, no workflow changes.
+**Steps (execute all in this session; each produces an artifact):**
+- Step 1: Write bounded probe routine `scripts/reopen_probe.py` for T1 (SSRN GET, timeout, exponential backoff, max retry budget) and T2 (re-probe the 8 FCLR-NEXT-002 source families, changed-evidence only — do NOT repeat identical failed endpoints). Record probe outcomes in `research_state/reopen_probe_*.md`.
+- Step 2: Pre-write frozen pre-registration template `research_state/pre_registration_REOPEN_TEMPLATE.md` (hypothesis ID, estimand, features, splits, metrics, gate, multiplicity correction, block bootstrap) so no outcome is inspected before pre-registration.
+- Step 3: Re-verify sealed-panel integrity (md5 of `results/liqmicro_v2/panel_liqmicro_v2.{csv,parquet}`, `descriptive_stats_v2.csv` vs recorded hashes; mtimes unchanged) each session; record in `research_state/sealed_holdout_integrity.md`.
+- Step 4: Acceptance gate — run `python -m unittest discover -s tests -v` (expect 27/27 OK); tree clean except `__pycache__`.
+
+**Acceptance:** `scripts/reopen_probe.py` present; `research_state/pre_registration_REOPEN_TEMPLATE.md` present; sealed-panel integrity verified unchanged; tests 27/27 PASS; `research_state/experiment_frontier.json` and `research_state/cross_track_decision_log.md` updated with campaign status; `AGENT_HANDOFF.md` updated.
+
+**Do NOT:** repeat same failed endpoints; relax the >=2% floor / CI criterion / >=3-block minimum; reopen H001/FCLR-003/FCLR-010 without trigger+pre-registration+split-freeze; merge Track A/B/C labels; describe modeled/synthetic breaches as observed liquidations; change `.github/workflows/`; write another blocker memo and wait — if no trigger fires, execute the next valid independent task (probe/integrity/test) and preserve blocked status.
+
+## SINGLE HIGHEST-VALUE NEXT TASK
+Execute CAMPAIGN FCLR-REOPEN-READY-001 Steps 1-4 in this session. Verify: `python -m unittest discover -s tests -v` → 27/27 OK; `md5sum results/liqmicro_v2/panel_liqmicro_v2.csv results/liqmicro_v2/panel_liqmicro_v2.parquet results/liqmicro_v2/descriptive_stats_v2.csv` match recorded hashes; `git status` clean except `.gitignore`. Until T1 or T2 fires, no confirmatory work resumes — this campaign is the standing next task.
+
+## PREVIOUS COMPLETE CAMPAIGNS (record, do not reopen)
+- FCLR-010 COMPLETE, FORECAST_GATE_PASSED — Track A observed-liquidation forecast on Hyperliquid ironflow census (199 perps, 12 monthly blocks 2025-11..2026-10).
+- FCLR-OVERLAY-001 EXECUTED — hypothetical overlay on frozen FCLR-010 splits (H_COUPLED-001), exp-weighted event exposure reduction 43.985%, no profitability claim.
+- FCLR-008 COMPLETE, FORECAST_GATE_NOT_MET — decisive volatility panel 2026-01-01..2026-08-06, C2 vs B1 +4.30% rel QLIKE, CI crosses zero → H001 INCONCLUSIVE.
+- FCLR-NEXT-002 COMPLETE_NO-GO — all 8 source families probed, no NEW admissible source beyond ironflow.
