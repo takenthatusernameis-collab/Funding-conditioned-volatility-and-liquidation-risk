@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T10:12:00Z
-**HANDOFF ID:** FCLR-HANDOFF-110-20261102T101200Z
+**TIMESTAMP (UTC):** 2026-11-02T10:14:00Z
+**HANDOFF ID:** FCLR-HANDOFF-111-20261102T101400Z
 **SUPERSEDES:** FCLR-HANDOFF-109-20261102T095727Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name). Track A (observed liquidations) is the only open confirmatory track. Treat liquidation risk as the default axis of work until Track A forward validation is resolved or exhaustively blocked with irrefutable evidence.
