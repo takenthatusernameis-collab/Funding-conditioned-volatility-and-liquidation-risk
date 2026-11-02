@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T13:01:47Z
+**TIMESTAMP:** 2026-11-02T13:48:13Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk (Track A liquidation risk PRIORITIZED)
 **SESSION GOAL FOR NEXT AGENT:** Execute campaign LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i. All confirmatory gates resolved at stable closeout. The ONLY open path is new post-2026-10 ironflow Hyperliquid liquidation data. If it appears: pre-register BEFORE outcome inspection, run frozen FCLR-010 harness, write evaluation summary + gate assessment. If still absent (expected): STRENGTHEN AUTOMATION + TESTS + BLOCKER EVIDENCE — heavy work mandatory, no coasting. Never avoid heavy working.
 
 ## DATA STATUS (CONFIRMED BLOCKED — DO NOT RE-PROBE WITHOUT NEW EVIDENCE)
-- Last probe: `research_state/ironflow_monitor_state.json` (quick-checked this session). Probed 2026-11,2026-12,2027-01,2027-02 — all 404 for events+fills. `data_through=2026-10`, `consecutive_absent=3`. post-2026-10 available: none.
+- Last probe: `research_state/ironflow_monitor_state.json` (quick-checked via `scripts/monitor_ironflow_liquidations.py --quick` at 2026-11-02T13:48:13Z). Probed 2026-11,2026-12,2027-01,2027-02 — all 404 EntryNotFound for events+fills. `data_through=2026-10`, `consecutive_absent=3`. post-2026-10 available: none. No resume trigger fired.
 - Alt-hunt: `research_state/data_source_registry_alt_hunt.json` — 12 source families probed, COMPLETE_NO-GO. No new admissible unauthenticated Track A sources.
 - Tests: `python -m unittest discover -s tests -v` → 64/64 PASS (monitor tests extended).
 
