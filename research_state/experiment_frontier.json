@@ -1,9 +1,9 @@
 {
   "registry_version": "1.0",
-  "generated": "2026-11-01T16:59:00Z",
+  "generated": "2026-11-02T00:04:02Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED (hypothetical). Track C/B closed; H002 blocked.",
-  "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE.",
+  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED (hypothetical). Track C/B closed; H002 blocked. FCLR-LIQMICRO-002 COMPLETE (real funding integration, D1-D3 TESTED, funding std>0).",
+  "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE. FCLR-LIQMICRO-002 COMPLETE: real Hyperliquid funding (9 coins x 8668 records, fundingRate.std()>0) wired into features.py; D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs now non-zero (was degenerate 0.0 in FCLR-LIQMICRO-001); D3 clustering_by_decile now populated (was empty {}); BH FDR 4 significant; NO H001 reversal, NO H001 re-test opened.",
   "frontier": [
     {
       "rank": 0,
@@ -143,6 +143,20 @@
       "notes": "Block bootstrap + LOO + Holm across 16 cells show no robust incremental skill of C2 over B0; intensity blocked by missing denominators; Track A remains structural block."
     },
     {
+      "id": "FCLR-LIQMICRO-002",
+      "track": "D_liquidation_microstructure",
+      "status": "COMPLETE",
+      "gate": "N/A (microstructure D1-D3, not forecast gate)",
+      "summary": "Real funding integration fix to FCLR-LIQMICRO-001. Hyperliquid fundingHistory (unauthenticated) fetched for 9 coins x 8668 records (fundingRate.std()>0 confirmed). features.py funding merge fixed (no longer zeroes funding_rate). Panel: 93,504 symbol-hour obs x 199 symbols, panel.funding_rate std 6.98e-06 > 0, 93,504 non-NaN funding. D1-D3 TESTED; BH FDR 4 significant. Artifacts: results/liqmicro_v2/, research_state/evaluation_summary_FCLR-LIQMICRO-002.md, research_state/pre_registration_FCLR-LIQMICRO-002.md. NO H001 reversal, NO H001 re-test opened.",
+      "artifacts": {
+        "evaluation_summary": "research_state/evaluation_summary_FCLR-LIQMICRO-002.md",
+        "pre_registration": "research_state/pre_registration_FCLR-LIQMICRO-002.md",
+        "data_audit": "research_state/liqmicro_funding_audit_002.md",
+        "panel": "results/liqmicro_v2/panel_liqmicro_v2.parquet",
+        "modules": "src/analysis/liqmicro/"
+      }
+    },
+    {
       "id": "FCLR-007",
       "track": "C",
       "status": "COMPLETE",
@@ -187,5 +201,26 @@
       "modules": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/src/analysis/liqmicro"
     },
     "notes": "Does NOT imply H001 reversal; no confirmatory re-test of H001 opened"
-  }
+  },
+  "FCLR-LIQMICRO-002": {
+    "status": "COMPLETE",
+    "timestamp": "2026-11-02T00:05:49Z",
+    "track": "D_liquidation_microstructure",
+    "data_source": "ironflow_hyperliquid_only + hyperliquid_fundingHistory_api",
+    "hypotheses": [
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "verdict": "MECHANISM_TESTED_WITH_REAL_FUNDING",
+    "artifacts": {
+      "evaluation_summary": "research_state/evaluation_summary_FCLR-LIQMICRO-002.md",
+      "pre_registration": "research_state/pre_registration_FCLR-LIQMICRO-002.md",
+      "data_audit": "research_state/liqmicro_funding_audit_002.md",
+      "panel": "results/liqmicro_v2/panel_liqmicro_v2.parquet",
+      "modules": "src/analysis/liqmicro/"
+    },
+    "notes": "Fixes degenerate zeroed-funding bug in FCLR-LIQMICRO-001. Funding features now have real variation (std>0). Does NOT imply H001 reversal; no confirmatory re-test of H001 opened."
+  },
+  "updated_at": "2026-11-02T00:04:02Z"
 }
