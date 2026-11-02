@@ -1,14 +1,14 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T03:05:25Z
+**TIMESTAMP (UTC):** 2026-11-02T03:13:59Z
 **INITIAL TASK (NEXT SESSION):** EXECUTE CAMPAIGN FCLR-HEAVY-001 — Funding-conditioned liquidation-risk deepening (Track A operational hardening). START AT STEP 1 IMMEDIATELY. DO HEAVY WORK. Do not stop until ALL 6 steps produce artifacts + `python -m unittest discover -s tests -v` returns 27/27. NO confirmatory outcome inspection for sealed panels. Treat all outputs as hypothetical-only.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (name is directive). Priority order: (1) Track A operational hardening on frozen ironflow Hyperliquid census (gate PASSED, overlay EXECUTED) — exhaust this before anything else → (2) nothing else until heavy Track A analysis is fully exhausted. Track C sealed (NOT_SUPPORTED), Track B closed (CLOSED_NEGATIVE), H002 permanently blocked.
-**BRANCH/HEAD:** main @ d7243ea2
-**HANDOFF ID:** FCLR-HANDOFF-080-20261102T030525Z
-**SUPERSEDES:** FCLR-HANDOFF-079-20261102T022615Z
+**BRANCH/HEAD:** main @ 4b67de49
+**HANDOFF ID:** FCLR-HANDOFF-081-20261102T031359Z
+**SUPERSEDES:** FCLR-HANDOFF-080-20261102T030525Z
 
 ## BOTTLENECKS REMOVED (this session)
-- **State clean:** Tests 27/27 PASS. No workflow edits needed. No open forks. All discovery exhausted (FCLR-NEXT-002 COMPLETE_NO-GO).
+- **State clean:** Tests 27/27 PASS (verified `python -m unittest discover -s tests -v`). No workflow edits needed. No open forks. All discovery exhausted (FCLR-NEXT-002 COMPLETE_NO-GO).
 - **Path unambiguous:** The only admissible Track A path (ironflow Hyperliquid census) is already exploited (FCLR-010 PASSED). The highest value left is deepening, not reopening.
 - **Ambiguity eliminated:** FCLR-HEAVY-001 is NOT STARTED. No artifacts exist under `research_state/fclr_heavy001_*` or `results/fclr_heavy001/`. Step 1 is the immediate, unblocked action.
 - **No dead-ends left open:** H001 inconclusive but not reopenable without new admissible data; Track B/C closed; H002 blocked. No parallel "discovery" loops to chase.
