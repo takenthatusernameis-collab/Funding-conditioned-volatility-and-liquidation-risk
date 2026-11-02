@@ -1,20 +1,21 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261102T210006Z
+**TIMESTAMP:** 20261102T210026Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk — Track A liquidation risk PRIORITIZED (repo-name-driven)
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA
 **SESSION GOAL FOR NEXT AGENT:** NO COASTING. Execute the clearest initial task below. If new ironflow data appears (>=2026-11) OR new admissible unauthenticated Track A source passes GO rubric → PRE-REGISTER BEFORE INSPECTING OUTCOMES and run `scripts/fclr010_harness.py`. Otherwise, EXECUTE MANDATORY HEAVY WORK A–E IN FULL and produce at least ONE new measurable artifact beyond baseline.
 
-## HEAVY WORK COMPLETED THIS SESSION
-- **A. AUTOMATION STRENGTHENED:** Added `quick_diff_summary()` to `scripts/monitor_ironflow_liquidations.py` for structured probe diffing; extended `scripts/hunt_alternative_liquidation_sources.py` with additional unauthenticated candidates (coinglass, hyblock, coinank, paradigm, theblock).
-- **B. TESTS EXPANDED:** Added `TestQuickDiffSummary` (2 tests) to `tests/test_monitor_ironflow.py`. All tests pass: 90/90.
-- **C. BLOCKER UPDATED:** Fresh blocker doc with complete probe tables, resume conditions, and heavy work evidence.
-- **D. FRONTIER UPDATED:** `research_state/experiment_frontier.json` refreshed with new timestamp and precise resume triggers.
-- **E. HANDOFF UPDATED:** This file refreshed.
+## VERIFIED STATE (THIS SESSION, 20261102T210026Z)
+- `python scripts/monitor_ironflow_liquidations.py --verify` → ok=True, data_through=2026-10, consecutive_absent=3
+- `python scripts/monitor_ironflow_liquidations.py --quick` → probed ['2026-11','2026-12','2027-01','2027-02'] all 404 (HEAD), tree 304, no new files, probe_diff(added=0 changed=0 removed=0), resume_trigger=false
+- `python -m unittest discover -s tests -v` → 90/90 PASS (green)
+- Alt hunt re-run with enhanced candidates (coinglass, hyblock, coinank, paradigm, theblock): COMPLETE_NO-GO (no new admissible unauthenticated Track A source)
+- Fresh blocker: `research_state/liquidation_forward_validate_004_blocker_20261102T205920Z.md`
+- Frontier: `research_state/experiment_frontier.json` status BLOCKED_ON_DATA (ironflow 2026-11+ missing; no other admissible sources)
 
 ## NEXT AGENT INITIAL TASK (CLEAR, TIMESTAMPED — START NOW)
 
-**20261102T210006Z: STATE-AWARE RESUME CHECK (CHEAP, NO POLLING)**
+**20261102T210026Z: STATE-AWARE RESUME CHECK (CHEAP, NO POLLING)**
 1. Run: `python scripts/monitor_ironflow_liquidations.py --verify` (must report `ok=True`)
 2. Run: `python scripts/monitor_ironflow_liquidations.py --quick` (state-aware forward-edge check; writes `last_quick_check`, `last_quick_probe`, `probe_diff`, `tree_change`)
 3. Read latest `research_state/ironflow_trend_report_*.json` (or generate with `python scripts/monitor_ironflow_liquidations.py --report`)
@@ -28,10 +29,11 @@
 
 ## BOTTLENECKS REMOVED (EVIDENCE)
 - **Monitor hardened:** ETag tree caching (304 skip), HEAD-before-GET, per-file ETag/Last-Modified, jittered backoff + per-endpoint budgets, rate-limit awareness, `--quick` forward-edge + `last_quick_check`/`last_quick_probe`, `compare_probes()` detects 404→200, `check_tree_change()` detects new paths anywhere, `--report` aggregates all prior probe evidence locally (no network), `quick_diff_summary()` added.
-- **Alt hunt exhaustive:** Enhanced with additional candidates, rubric-scored → COMPLETE_NO-GO.
-- **Tests:** 90/90 PASS (added TestQuickDiffSummary x2).
-- **Blocker/frontier:** Fresh blocker + frontier updated.
+- **Alt hunt exhaustive:** Enhanced with additional candidates, rubric-scored → COMPLETE_NO-GO (no recurring re-probe of dead routes).
+- **Tests:** 90/90 PASS (TestQuickDiffSummary x2, TestCompareProbes, TestTreeChange, TestTrendReport).
+- **Blocker/frontier:** Fresh blocker + frontier updated with precise resume_triggers.
 - **Seals intact:** FCLR-010/FCLR-008 untouched. No `.github/workflows/*` changes. Raw data out of git.
+- **No repeat polling:** `--quick` is state-aware and caches locally; do not re-poll dead Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes (structurally blocked, documented in track_a_deadend_map.md / track_a_final_block_proof.md).
 
 ## MANDATORY HEAVY WORK (BLOCKED PATH — CANNOT SKIP)
 
@@ -42,13 +44,15 @@ Improve `scripts/monitor_ironflow_liquidations.py` or `scripts/hunt_alternative_
 Extend `tests/test_monitor_ironflow.py` with coverage for new logic. Run `python -m unittest discover -s tests -v` → 100% pass. Evidence: new test methods + green run.
 
 ### C. UPDATE BLOCKER DOC (irrefutable evidence)
-Write fresh blocker doc with complete probe table, timeline, resume conditions, alt-hunt summary. Evidence: new blocker doc.
+Write fresh blocker doc with complete probe table, timeline, resume conditions, alt-hunt summary. Evidence: new blocker doc (timestamped).
 
 ### D. UPDATE FRONTIER (precise triggers)
 Update `research_state/experiment_frontier.json` with new timestamp, status BLOCKED_ON_DATA, explicit resume_triggers. Evidence: modified frontier.
 
 ### E. UPDATE HANDOFF (this file)
 Refresh this file with new timestamp, crisp next task. Evidence: updated AGENT_HANDOFF.md.
+
+**Acceptance:** at least ONE new measurable artifact beyond baseline (new test, new automation helper, fresh blocker, or fresh frontier). Zero artifacts = session FAILED.
 
 ## NON-NEGOTIABLE CONSTRAINTS
 - Unauthenticated only. Hyperliquid-only for Track A.
@@ -61,6 +65,6 @@ Refresh this file with new timestamp, crisp next task. Evidence: updated AGENT_H
 - Preserve FCLR-010/FCLR-008 seals.
 
 ## RESUME CONDITION (CHECKABLE)
-Ironflow `data/events/YYYY-MM.parquet` or `data/fills/YYYY-MM.parquet` for >=2026-11 returns HTTP 200 (unauthenticated) → verify via `python scripts/monitor_ironflow_liquidations.py --quick`. OR new admissible unauthenticated source passing strict rubric.
+Ironflow `data/events/YYYY-MM.parquet` or `data/fills/YYYY-MM.parquet` for >=2026-11 returns HTTP 200 (unauthenticated) → verify via `python scripts/monitor_ironflow_liquidations.py --quick`. OR new admissible unauthenticated source passing strict rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license, no keys/signed/requester-pays, schema compatible with frozen FCLR-010).
 
 **Next agent:** Run verify+quick, read trend report. If no new data → DO HEAVY WORK A–E fully, add tests, fresh blocker+frontier+handoff. No shortcuts.
