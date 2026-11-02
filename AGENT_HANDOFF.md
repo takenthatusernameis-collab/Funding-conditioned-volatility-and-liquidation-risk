@@ -1,15 +1,16 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T02:20:21Z
+**TIMESTAMP (UTC):** 2026-11-02T02:21:44Z
 **INITIAL TASK (NEXT SESSION):** EXECUTE CAMPAIGN FCLR-HEAVY-001 — Funding-conditioned liquidation-risk deepening (Track A operational hardening). DO HEAVY WORK. Start at Step 1 immediately. Do not stop until ALL 6 steps produce artifacts + tests pass (27/27). NO confirmatory outcome inspection for sealed panels. Treat everything as hypothetical-only.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (name is directive). Priority order: (1) Track A operational hardening on frozen ironflow Hyperliquid census (highest concrete signal, gate PASSED) → (2) nothing else until heavy Track A analysis exhausted. Track C sealed (NOT_SUPPORTED), Track B closed (CLOSED_NEGATIVE), H002 permanently blocked.
 **BRANCH/HEAD:** main @ a6556d87
-**HANDOFF ID:** FCLR-HANDOFF-077-20261102T022021Z
-**SUPERSEDES:** FCLR-HANDOFF-076-20261102T021856Z
+**HANDOFF ID:** FCLR-HANDOFF-078-20261102T022144Z
+**SUPERSEDES:** FCLR-HANDOFF-077-20261102T022021Z
 
 ## BOTTLENECKS REMOVED (this session)
 - Verified clean state: tests 27/27 PASS. No workflow edits needed. No blocking issues. Sealed panels intact.
 - Removed ambiguity: single unambiguous task, no open forks. All discovery exhausted (FCLR-NEXT-002 COMPLETE_NO-GO).
+- FCLR-HEAVY-001 NOT STARTED: zero artifacts under research_state/fclr_heavy001_* or results/fclr_heavy001/. Step 1 is the immediate next action with nothing blocking it.
 
 ## STATUS (CURRENT - FROZEN)
 - Track A (FCLR-010): GATE PASSED on Hyperliquid ironflow census (199 perps, Nov 2025–Oct 2026, 12 blocks). C2 vs B1 Brier rel -2.21%, CI [-0.004892,-0.001263] excludes zero. Overlay FCLR-OVERLAY-001 executed (HYPOTHETICAL ONLY). Splits frozen 2026-11-01T05:39:07Z.
