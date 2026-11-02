@@ -13,13 +13,13 @@
       "blockers": "No post-2026-10-31 ironflow data. No admissible unauthenticated sources (alt-hunt COMPLETE_NO-GO). data_through=2026-10, consecutive_absent=3. State --verify ok=True.",
       "do_not": "Do not inspect outcomes before pre-reg; do not merge tracks; do not touch .github/workflows; no polling loops without new evidence.",
       "status": "BLOCKED_ON_DATA",
-      "result": "BLOCKED_ON_DATA as of 2026-11-02T20:59:34Z. Heavy work session completed: strengthened monitor (quick_diff_summary), enhanced alt-hunt candidates, added 2 tests (90/90 PASS), fresh blocker/trend evidence. No post-2026-10 data; resume_trigger_met=false. Automation hardened, tests expanded.",
+      "result": "BLOCKED_ON_DATA as of 2026-11-02T21:57:31Z. Heavy work refreshed: added resume_block_summary(), enhanced quick_diff_summary(), fixed check_baseline_drift() tree-pair filtering, added test; tests 94/94 PASS. No post-2026-10 data; resume_trigger_met=false. Automation hardened, new blocker/fresh evidence.",
       "resume_triggers": [
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11 (verify via scripts/monitor_ironflow_liquidations.py --quick)",
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11",
         "OR new source passes GO: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010 (Hyperliquid-only for Track A)"
       ],
-      "generated": "2026-11-02T20:59:34Z"
+      "generated": "2026-11-02T21:57:31Z"
     },
     {
       "rank": 0,
@@ -230,7 +230,7 @@
     "reps": ">=2000",
     "notes": "coupled funding\u00d7vol\u00d7lagged observed flow passes all gates"
   },
-  "updated_at": "2026-11-02T19:48:46Z",
+  "updated_at": "2026-11-02T21:57:31Z",
   "FCLR-LIQMICRO-001": {
     "status": "COMPLETE",
     "timestamp": "2026-11-01T22:22:41Z",

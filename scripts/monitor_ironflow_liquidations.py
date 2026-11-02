@@ -726,6 +726,12 @@ def check_baseline_drift(state):
     cache = state.get("file_cache", {}) or {}
     known_paths = state.get("tree_parquet_paths", []) or []
     known_months = scan_events_fills_only(known_paths)
+    # Build set of (kind, month) that exist in tree
+    tree_pairs = set()
+    for p in known_paths:
+        m = re.match(r"^(data/(events|fills)/)(\d{4}-\d{2})\.parquet$", p)
+        if m:
+            tree_pairs.add((m.group(2), m.group(3)))
     result = {
         "known_months": known_months,
         "cached_months": sorted(cache.keys()),
@@ -735,6 +741,8 @@ def check_baseline_drift(state):
     }
     for ym in known_months:
         for kind in ("events", "fills"):
+            if (kind, ym) not in tree_pairs:
+                continue  # Only check entries that exist in tree
             key = f"{kind}:{ym}"
             c = cache.get(key)
             if not c:
@@ -1469,6 +1477,27 @@ def quick_diff_summary(prev_state, curr_rc):
         "removed": s.get("removed_count", 0),
         "added_files": [f"{x['month']}/{x['kind']}" for x in diff.get("added", [])],
         "changed_files": [f"{x['month']}/{x['kind']}:{x['prev']}->{x['curr']}" for x in diff.get("changed", [])],
+        "changed_list": diff.get("changed", []),
+        "added_list": diff.get("added", []),
+        "removed_list": diff.get("removed", []),
+    }
+
+
+def resume_block_summary(state=None):
+    """Machine-readable summary of current block state (no network)."""
+    state = state if state is not None else load_state()
+    rt = state.get("resume_trigger", {}) or {}
+    last_q = state.get("last_quick_check", {}) or {}
+    vr = verify_state(state)
+    return {
+        "campaign": rt.get("campaign"),
+        "data_through": state.get("data_through"),
+        "consecutive_absent": state.get("consecutive_absent"),
+        "triggered": bool(rt.get("currently_fired")) or bool(last_q.get("triggered")),
+        "conditions": rt.get("conditions", []),
+        "last_quick_check": last_q,
+        "verify_ok": vr.get("ok"),
+        "verify_errors": vr.get("errors", []),
     }
 
 

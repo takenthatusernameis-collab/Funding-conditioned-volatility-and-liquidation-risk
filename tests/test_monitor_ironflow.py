@@ -793,6 +793,22 @@ class TestQuickDiffSummary(unittest.TestCase):
         self.assertEqual(summary["added"], 0)
         self.assertEqual(summary["changed"], 0)
 
+    def test_quick_diff_summary_with_changes(self):
+        state = {
+            "last_quick_probe": {
+                "probes": [
+                    {"kind": "events", "month": "2026-11", "status": 404},
+                ]
+            }
+        }
+        rc = {"probes": [
+            {"kind": "events", "month": "2026-11", "status": 200},
+        ]}
+        summary = mon.quick_diff_summary(state, rc)
+        self.assertTrue(summary["any_change"])
+        self.assertEqual(summary["changed"], 1)
+        self.assertIn("2026-11/events:404->200", summary["changed_files"][0])
+
 
 class TestBaselineDrift(unittest.TestCase):
     """Tests for check_baseline_drift: cache-incomplete is not drift."""
