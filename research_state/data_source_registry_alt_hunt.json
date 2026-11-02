@@ -1,6 +1,6 @@
 {
-  "hunt_id": "alt_hunt_20261102T105416Z",
-  "timestamp_utc": "2026-11-02T10:54:16.240107+00:00",
+  "hunt_id": "alt_hunt_20261102T114530Z",
+  "timestamp_utc": "2026-11-02T11:45:30.955571+00:00",
   "candidates": [
     {
       "name": "hyperliquid_public_api_info",
@@ -12,16 +12,16 @@
           "headers": {
             "Content-Length": "0",
             "Connection": "close",
-            "Server": "nginx/1.22.1",
-            "Date": "Mon, 02 Nov 2026 10:54:16 GMT",
+            "Server": "nginx/1.30.3",
+            "Date": "Mon, 02 Nov 2026 11:45:31 GMT",
             "allow": "POST",
             "access-control-allow-origin": "*",
             "vary": "origin",
             "access-control-expose-headers": "*",
             "X-Cache": "Error from cloudfront",
-            "Via": "1.1 1ccbe83f7855d0d971ed6a905298f094.cloudfront.net (CloudFront)",
+            "Via": "1.1 a62d8bd02be3d9c979e8846318619f0c.cloudfront.net (CloudFront)",
             "X-Amz-Cf-Pop": "PHX52-P3",
-            "X-Amz-Cf-Id": "kn_npscDFCkHSDf0HtYfRUQrmQYKfE1WEeTjYvmY6YMNkWc4VxjZPg=="
+            "X-Amz-Cf-Id": "Y-eY6iOrGv0zF1DAbe2qKBlqbYwGwGmEvwZv5-e0HmJEAjHbAuCoFA=="
           },
           "body_len": 0,
           "error": true
@@ -44,20 +44,20 @@
             "X-Frame-Options": "deny",
             "X-XSS-Protection": "1; mode=block",
             "Content-Type": "text/plain; charset=utf-8",
-            "X-GitHub-Request-Id": "289E:196A0B:B6025:10654A:6AE86BD7",
+            "X-GitHub-Request-Id": "8D7C:22EAA1:C2B9C:11AAD8:6AE877DA",
             "x-github-edge-region": "westus3",
             "Accept-Ranges": "bytes",
-            "Date": "Mon, 02 Nov 2026 10:54:16 GMT",
+            "Date": "Mon, 02 Nov 2026 11:45:31 GMT",
             "Via": "1.1 varnish",
-            "X-Served-By": "cache-bur-kbur8200149-BUR",
+            "X-Served-By": "cache-bur-kbur8200168-BUR",
             "X-Cache": "MISS",
             "X-Cache-Hits": "0",
-            "X-Timer": "S1793616856.451947,VS0,VE55",
+            "X-Timer": "S1793619931.143496,VS0,VE55",
             "Vary": "Authorization,Accept-Encoding",
             "Access-Control-Allow-Origin": "*",
             "Cross-Origin-Resource-Policy": "cross-origin",
-            "X-Fastly-Request-ID": "635e8a37736c2d24135288c35ce642b531e2654e",
-            "Expires": "Mon, 02 Nov 2026 10:59:16 GMT",
+            "X-Fastly-Request-ID": "cc32a628317bd7ee0abc44187f1e9f8b61f49d31",
+            "Expires": "Mon, 02 Nov 2026 11:50:31 GMT",
             "Source-Age": "0"
           },
           "body_len": 14,
@@ -76,11 +76,11 @@
             "Content-Type": "application/json; charset=utf-8",
             "Content-Length": "1250",
             "Connection": "close",
-            "Date": "Mon, 02 Nov 2026 10:54:16 GMT",
+            "Date": "Mon, 02 Nov 2026 11:45:31 GMT",
             "ETag": "W/\"4e2-xsDr/mFUwzoKy63H1He2Z792x58\"",
             "X-Powered-By": "huggingface-moon",
-            "X-Request-Id": "Root=1-6ae86bd8-5278113f40ae1e4458db732f",
-            "RateLimit": "\"api\";r=498;t=296",
+            "X-Request-Id": "Root=1-6ae877db-032e5fd63685c2863c135609",
+            "RateLimit": "\"api\";r=498;t=221",
             "RateLimit-Policy": "\"fixed window\";\"api\";q=500;w=300",
             "cross-origin-opener-policy": "same-origin",
             "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -88,12 +88,12 @@
             "Access-Control-Allow-Origin": "https://huggingface.co",
             "Vary": "Origin",
             "Access-Control-Expose-Headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
-            "Server-Timing": "mongo1-0;dur=1.7345579997636378",
+            "Server-Timing": "mongo1-0;dur=1.4557050000876188",
             "X-Cache": "Miss from cloudfront",
             "Via": "1.1 0f70e5eaca4dd7c42bcbb3d7bfe22c0e.cloudfront.net (CloudFront)",
             "X-Amz-Cf-Pop": "PHX52-P3",
             "Alt-Svc": "h3=\":443\"; ma=86400",
-            "X-Amz-Cf-Id": "rzOiJOOVT_G1OPSyv4OYRwiV9vsV8rdKUxki-Bq9Ylq4nXJtWelsVw==",
+            "X-Amz-Cf-Id": "c5QDBNV6JVKaIA7AyE2YG47f1a7G58NITak0Jm4PzOs6pANyZ0hhaQ==",
             "Strict-Transport-Security": "max-age=31536000"
           },
           "body_len": 1250
@@ -109,16 +109,16 @@
           "status": 200,
           "headers": {
             "server": "nginx",
-            "date": "Mon, 02 Nov 2026 10:54:18 GMT",
+            "date": "Mon, 02 Nov 2026 11:45:31 GMT",
             "content-type": "application/json",
-            "content-length": "233299",
+            "content-length": "233303",
             "vary": "Accept-Encoding",
             "access-control-allow-origin": "*",
             "access-control-expose-headers": "Content-Type, ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
             "x-ratelimit-limit": "30",
             "x-ratelimit-remaining": "29",
-            "x-ratelimit-reset": "1793616918",
-            "retry-after": "59",
+            "x-ratelimit-reset": "1793619992",
+            "retry-after": "60",
             "permissions-policy": "interest-cohort=()",
             "x-frame-options": "sameorigin",
             "x-xss-protection": "1; mode=block",
@@ -129,7 +129,7 @@
             "x-source": "api",
             "connection": "close"
           },
-          "body_len": 233299
+          "body_len": 233303
         }
       ]
     },
@@ -141,7 +141,7 @@
           "url": "https://api.osf.io/v2/search/",
           "status": 404,
           "headers": {
-            "Date": "Mon, 02 Nov 2026 10:54:19 GMT",
+            "Date": "Mon, 02 Nov 2026 11:45:32 GMT",
             "Content-Type": "application/vnd.api+json; application/json",
             "Content-Length": "38",
             "Connection": "close",
@@ -172,11 +172,11 @@
             "content-type": "application/atom+xml; charset=utf-8",
             "Accept-Ranges": "bytes",
             "Age": "0",
-            "Date": "Mon, 02 Nov 2026 10:54:19 GMT",
-            "X-Served-By": "cache-lga-kjfk8660038-LGA, cache-lga-kjfk8660038-LGA, cache-lga-kjfk8660029-LGA, cache-phx1710065-PHX",
-            "X-Cache": "MISS, MISS, MISS",
-            "X-Cache-Hits": "0, 0, 0",
-            "X-Timer": "S1793616859.173179,VS0,VE242",
+            "Date": "Mon, 02 Nov 2026 11:45:32 GMT",
+            "X-Served-By": "cache-lga-kjfk8660038-LGA, cache-lga-kjfk8660038-LGA, cache-lga-kjfk8660029-LGA, cache-hhr-khhr2060023-HHR",
+            "X-Cache": "MISS, HIT, MISS",
+            "X-Cache-Hits": "0, 1, 0",
+            "X-Timer": "S1793619933.853446,VS0,VE67",
             "Strict-Transport-Security": "max-age=300"
           },
           "body_len": 19948
@@ -191,7 +191,7 @@
           "url": "https://www.cryptodatadownload.com/",
           "status": 200,
           "headers": {
-            "Date": "Mon, 02 Nov 2026 10:54:19 GMT",
+            "Date": "Mon, 02 Nov 2026 11:45:33 GMT",
             "Content-Type": "text/html; charset=utf-8",
             "Content-Length": "197396",
             "Connection": "close",
