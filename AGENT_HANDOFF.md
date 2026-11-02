@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T13:01:00Z
+**TIMESTAMP:** 2026-11-02T13:01:47Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk (Track A liquidation risk PRIORITIZED)
 **SESSION GOAL FOR NEXT AGENT:** Execute campaign LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i. All confirmatory gates resolved at stable closeout. The ONLY open path is new post-2026-10 ironflow Hyperliquid liquidation data. If it appears: pre-register BEFORE outcome inspection, run frozen FCLR-010 harness, write evaluation summary + gate assessment. If still absent (expected): STRENGTHEN AUTOMATION + TESTS + BLOCKER EVIDENCE — heavy work mandatory, no coasting. Never avoid heavy working.
 
