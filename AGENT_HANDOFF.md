@@ -1,13 +1,13 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T03:24:03Z
-**HANDOFF ID:** FCLR-HANDOFF-083-20261102T032403Z
-**SUPERSEDES:** FCLR-HANDOFF-082-20261102T032157Z
+**TIMESTAMP (UTC):** 2026-11-02T04:06:00Z
+**HANDOFF ID:** FCLR-HANDOFF-084-20261102T040600Z
+**SUPERSEDES:** FCLR-HANDOFF-083-20261102T032403Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (repo name is directive). Primary objective remains proving incremental value of funding/price features for volatility stress OR liquidation risk.
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY):**
 ```
-[2026-11-02T03:24:03Z] FOCUS CAMPAIGN: DATA_HUNT_LIQUIDATIONS_HEAVY-001
+[2026-11-02T04:06:00Z] FOCUS CAMPAIGN: DATA_HUNT_LIQUIDATIONS_HEAVY-001
 OBJECTIVE (non-optional): Find NEW admissible unauthenticated liquidation/funding data that can reopen Track A. Do NOT re-open sealed experiments (FCLR-010/OVERLAY) or H001/H003.
 HEAVY WORK REQUIRED (cannot be avoided):
 1. SCAN all admissible public sources per protocol §5: Binance public-data repo paths/archives, public unauthenticated exchange APIs (historical funding/mark/index/klines), public GitHub/Zenodo/HF/institutional archives with no auth/signup/payment.
