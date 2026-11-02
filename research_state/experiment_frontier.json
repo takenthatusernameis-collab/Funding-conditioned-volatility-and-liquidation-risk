@@ -102,10 +102,10 @@
     },
     {
       "rank": 9,
-      "task": "CAMPAIGN FCLR-NEXT-002: NEW ADMISSIBLE DATA SOURCE DISCOVERY — COMPLETE_NO-GO. All 8 source families probed (Binance alt paths, Bybit, OKX, Deribit, academic archives, GitHub raw, Hugging Face, CryptoDataDownload). 8 source_probe_FCLR-NEXT-002_*.md artifacts written. NO NEW admissible unauthenticated liquidation source beyond ironflow/hyperliquid-liquidations (already GO, used in FCLR-010) found. Track A open only via ironflow (FCLR-010 COMPLETE, gate PASSED, overlay EXECUTED). Stable closeout point.",
+      "task": "CAMPAIGN FCLR-NEXT-002: NEW ADMISSIBLE DATA SOURCE DISCOVERY \u2014 COMPLETE_NO-GO. All 8 source families probed (Binance alt paths, Bybit, OKX, Deribit, academic archives, GitHub raw, Hugging Face, CryptoDataDownload). 8 source_probe_FCLR-NEXT-002_*.md artifacts written. NO NEW admissible unauthenticated liquidation source beyond ironflow/hyperliquid-liquidations (already GO, used in FCLR-010) found. Track A open only via ironflow (FCLR-010 COMPLETE, gate PASSED, overlay EXECUTED). Stable closeout point.",
       "prerequisite": "None beyond source-discovery procedure.",
       "acceptance": ">=1 documented probe outcome per candidate source family (#1-#8) OR documented structural blocker with evidence per route; all artifacts written; cross_track_decision_log.md updated; AGENT_HANDOFF.md updated.",
-      "blockers": "No NEW admissible source found — ironflow is the sole Track A reopen path and is already exploited via FCLR-010.",
+      "blockers": "No NEW admissible source found \u2014 ironflow is the sole Track A reopen path and is already exploited via FCLR-010.",
       "do_not": "Do not repeat the same failed endpoints; do not write another blocker memo and wait; no confirmatory work resumes without a NEW admissible source or SSRN H002 access.",
       "status": "COMPLETE_NO-GO",
       "result": "COMPLETE_NO-GO. Executed 2026-11-02T01:30:00Z. #1 Binance alt paths NO-GO (all HTTP 404, fapi 451). #2 Bybit NO-GO (no liquidation directory). #3 OKX NO-GO (CDN 403, API 404). #4 Deribit NO-GO (connection failed). #5 Academic archives NO-GO (no crypto perp liquidation datasets). #6 GitHub raw NO-GO (code search 401, no census). #7 Hugging Face: ironflow GO (already used in FCLR-010, NOT new); ochinimus exhausted; others wrong type. #8 CryptoDataDownload NO-GO (no liquidation/futures links). No new source beyond ironflow."
@@ -252,5 +252,25 @@
       "modules": "src/analysis/liqmicro/"
     },
     "notes": "Fixes degenerate zeroed-funding bug in FCLR-LIQMICRO-001. Funding features now have real variation (std>0). Does NOT imply H001 reversal; no confirmatory re-test of H001 opened."
+  },
+  "FCLR-HEAVY-001": {
+    "campaign": "FCLR-HEAVY-001",
+    "track": "A",
+    "status": "EXECUTED_ALL_STEPS",
+    "steps": {
+      "1_funding_liq_coupling": "DONE",
+      "2_regime_strat": "DONE",
+      "3_leadlag_censor": "DONE",
+      "4_ablation_funding": "DONE",
+      "5_concentration": "DONE",
+      "6_integrity": "DONE"
+    },
+    "artifacts_root": [
+      "results/fclr_heavy001/",
+      "research_state/fclr_heavy001_*"
+    ],
+    "hypothetical_only": true,
+    "sealed_fclr010_untouched": true,
+    "tests_pass": "27/27"
   }
 }

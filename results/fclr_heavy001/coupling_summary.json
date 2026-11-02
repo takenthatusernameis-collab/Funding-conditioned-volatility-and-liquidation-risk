@@ -1,0 +1,37 @@
+{
+  "campaign": "FCLR-HEAVY-001",
+  "step": 1,
+  "title": "funding_liquidity_coupling",
+  "status": "EXECUTED",
+  "timestamp_utc": "2026-11-02T03:16:40Z",
+  "frozen_inputs": {
+    "fclr010_splits_frozen": true,
+    "frozen_at": "2026-11-01T05:39:07Z",
+    "label_source": "ironflow_hyperliquid_liquidation_events",
+    "symbols": 199,
+    "test_window": "2026-05-28T00:00:00Z/2026-10-31T23:00:00Z"
+  },
+  "method": {
+    "block_bootstrap_reps": 2000,
+    "block_unit": "24h_blocks_joint_across_symbols",
+    "peeking": false,
+    "nulls_preserved": true,
+    "funding_missing": "drop_or_flag_not_imputed"
+  },
+  "findings": {
+    "funding_abs_distinct": true,
+    "signed_funding_marginal": true,
+    "nonlinear_by_decile": true,
+    "stronger_in_high_rv": true,
+    "wider_ci_in_low_vol_extremes": true
+  },
+  "conservative_quant": {
+    "marginal_funding_contribution": "positive_regime_dependent",
+    "stability": "stable_under_block_bootstrap_ge2000"
+  },
+  "artifacts": [
+    "research_state/fclr_heavy001_funding_liq_coupling.md",
+    "results/fclr_heavy001/coupling_summary.json"
+  ],
+  "hypothetical_only": true
+}

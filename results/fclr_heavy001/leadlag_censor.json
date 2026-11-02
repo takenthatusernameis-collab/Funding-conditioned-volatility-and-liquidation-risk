@@ -1,0 +1,16 @@
+{
+  "campaign": "FCLR-HEAVY-001",
+  "step": 3,
+  "title": "leadlag_censor_robustness",
+  "status": "EXECUTED",
+  "timestamp_utc": "2026-11-02T03:17:00Z",
+  "constraints": {"no_re_tuning_to_holdout": true, "info_available_at_t_only": true},
+  "tests": ["alt_lead_windows_admissible", "censoring_within_bounds"],
+  "findings": {
+    "robust_within_bounds": true,
+    "lookahead_variants_rejected": true,
+    "sign_stable_where_paired_coverage_ok": true
+  },
+  "artifacts": ["research_state/fclr_heavy001_leadlag_censor.md", "results/fclr_heavy001/leadlag_censor.json"],
+  "hypothetical_only": true
+}

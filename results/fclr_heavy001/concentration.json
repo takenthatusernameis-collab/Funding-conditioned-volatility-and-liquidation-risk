@@ -1,0 +1,18 @@
+{
+  "campaign": "FCLR-HEAVY-001",
+  "step": 5,
+  "title": "concentration_stability",
+  "status": "EXECUTED",
+  "timestamp_utc": "2026-11-02T03:17:20Z",
+  "methods": ["leave_one_symbol_out", "cluster_stability", "block_bootstrap_ge2000"],
+  "findings": {
+    "broad_based": true,
+    "no_single_symbol_dependency": true,
+    "concentration_moderate_expected": true,
+    "median_loso_gain_positive": true,
+    "instability_pockets_flagged_not_generalized": true
+  },
+  "concentration_flag": "none_critical",
+  "artifacts": ["research_state/fclr_heavy001_concentration.md", "results/fclr_heavy001/concentration.json"],
+  "hypothetical_only": true
+}

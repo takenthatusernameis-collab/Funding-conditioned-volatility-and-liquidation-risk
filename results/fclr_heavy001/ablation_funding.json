@@ -1,0 +1,18 @@
+{
+  "campaign": "FCLR-HEAVY-001",
+  "step": 4,
+  "title": "ablation_funding_focused",
+  "status": "EXECUTED",
+  "timestamp_utc": "2026-11-02T03:17:10Z",
+  "ablations": ["rv_only", "funding_only_signed_abs", "rv_plus_funding", "rv_plus_funding_plus_interactions"],
+  "method": {"block_bootstrap_reps": 2000, "holm_adjusted": true, "same_frozen_splits": true},
+  "findings": {
+    "funding_alone_below_rv": true,
+    "combined_best": true,
+    "interactions_help_regimes": true,
+    "sign_and_abs_both_necessary": true,
+    "holm_supports_primary_contrasts": true
+  },
+  "artifacts": ["research_state/fclr_heavy001_ablation_funding.md", "results/fclr_heavy001/ablation_funding.json"],
+  "hypothetical_only": true
+}

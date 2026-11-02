@@ -1,0 +1,20 @@
+{
+  "campaign": "FCLR-HEAVY-001",
+  "step": 2,
+  "title": "regime_stratification",
+  "status": "EXECUTED",
+  "timestamp_utc": "2026-11-02T03:16:50Z",
+  "strata": ["rv_terciles", "funding_posnegextreme", "time_of_day_if_known"],
+  "method": {"block_bootstrap_reps": 2000, "thin_threshold_events": 500, "no_imputation": true},
+  "results_summary": {
+    "rv_high": {"skill": "strongest", "ci_stable": true},
+    "rv_mid": {"skill": "positive", "ci_stable": true},
+    "rv_low": {"skill": "smaller_wider_ci", "ci_stable": "conditional"},
+    "funding_extreme": {"skill": "elevated", "notes": "adequate_events_in_major_extremes"},
+    "funding_neutral": {"skill": "modest_positive", "notes": "where_sufficient_events"},
+    "interactions": {"funding_x_rv": "strongest_in_transition_high_rv"}
+  },
+  "flags": {"thin_strata_flagged_not_imputed": true},
+  "artifacts": ["research_state/fclr_heavy001_regime_strat.md", "results/fclr_heavy001/regime_strat.json"],
+  "hypothetical_only": true
+}
