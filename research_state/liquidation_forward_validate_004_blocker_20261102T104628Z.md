@@ -1,12 +1,12 @@
 # LIQUIDATION_FORWARD_VALIDATE_004 BLOCKER EVIDENCE — SESSION 2026-11-02T10:46:28Z (HEAVY)
 
-**Campaign:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004g (forward validation of frozen FCLR-010 model on post-2026-10-31 Hyperliquid ironflow liquidation data)
+**Campaign:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (forward validation of frozen FCLR-010 model on post-2026-10-31 Hyperliquid ironflow liquidation data)
 **Session timestamp:** 2026-11-02T10:46:28Z
 **Repo HEAD:** a60a5afdb669b795cc2ab10b4bcd1eaa7df4118c
 **Verdict:** NO-GO for this session — no post-2026-10-31 (2026-11+) observed-liquidation data exists yet on the sole admissible source. Forward validation DEFERRED, not skipped. Resume condition stated below.
 
 ## Governing references (read first, authoritative)
-- AGENT_HANDOFF.md (current) — single durable handoff; campaign LIQUIDATION_FORWARD_VALIDATE_HEAVY-004g
+- AGENT_HANDOFF.md (current) — single durable handoff; campaign LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i
 - RESEARCH_PROMPT.md §§1,5,6,7,8,15 — admissible sources, Track A firewall, freeze-before-outcomes, no fabricated data
 - research_state/research_protocol_fclr010.md v1.0 — frozen FCLR-010 model (C2 vs B1 on Brier), splits frozen_before_outcomes=true
 - research_state/evaluation_summary_FCLR010.md — gate PASSED (C2 vs B1 Brier rel −2.21%, CI excludes zero)

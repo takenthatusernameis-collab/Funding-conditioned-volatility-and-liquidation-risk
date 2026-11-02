@@ -1,18 +1,18 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T10:55:00Z
-**HANDOFF ID:** FCLR-HANDOFF-117-20261102T105500Z
-**SUPERSEDES:** FCLR-HANDOFF-116-20261102T105118Z (and all earlier)
+**TIMESTAMP (UTC):** 2026-11-02T10:59:05Z
+**HANDOFF ID:** FCLR-HANDOFF-118-20261102T105905Z
+**SUPERSEDES:** FCLR-HANDOFF-117-20261102T105500Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name decisive). Track A (observed liquidations, Hyperliquid ironflow) is the ONLY open confirmatory track with a passed gate. Treat liquidation risk as the default axis until Track A forward validation completes or is exhaustively blocked with irrefutable evidence.
 
 **BRANCH/HEAD:** main @ a60a5afdb669b795cc2ab10b4bcd1eaa7df4118c
 
 ## CAMPAIGN ID HARMONIZATION (BOTTLENECK REMOVED)
-- Standardized on LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i everywhere (previously fragmented as 004d in pre-reg, 004g in frontier/blocker docs, 004i in handoff). All artifacts must use 004i going forward.
+- Standardized on LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i everywhere. Removed fragmentation: 004d pre-reg/script, 004g frontier/blocker docs harmonized to 004i. All artifacts must use 004i going forward. Frozen historical artifacts (pre-reg JSON at 060650Z, older blocker docs) preserved unchanged per sealed-history rule; `create_forward_prereg.py` default updated to 004i for new pre-regs.
 
 ## INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP)
 ```
-[2026-11-02T10:55:00Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (HEAVY EXECUTION MANDATORY - NO PASSIVE WAITING)
+[2026-11-02T10:59:05Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (HEAVY EXECUTION MANDATORY - NO PASSIVE WAITING)
 
 PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA. Block is DATA AVAILABILITY ONLY. YOU MUST NOT idle, poll conversationally, or "check once and stop". YOU MUST convert this block into reusable automation, airtight evidence, AND eliminate bottlenecks so significant progress continues.
 
@@ -25,7 +25,7 @@ OBJECTIVE (NON-OPTIONAL, MAXIMUM HEAVY WORK - DO ALL OF THE BELOW):
 
 2) MAINTAIN/USE FROZEN HARNESS (READY FOR INSTANT EXECUTION)
    - Use `scripts/fclr010_harness.py` + `scripts/fclr010_validate.py` (frozen). DO NOT retune.
-   - Pre-reg template exists: `research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json`. If new rubric-passing data appears for >=2026-11, CREATE A FRESH PRE-REG with NEW TIMESTAMP BEFORE inspecting any label/outcome columns. Protocol must freeze splits from manifest, primary contrast C2 vs B1 on Brier, block-bootstrap >=2000 reps, multiplicity handling.
+   - Pre-reg template exists: `research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json` (frozen, campaign 004d preserved as history). If new rubric-passing data appears for >=2026-11, CREATE A FRESH PRE-REG with NEW TIMESTAMP via `scripts/create_forward_prereg.py` (default now 004i) BEFORE inspecting any label/outcome columns. Protocol must freeze splits from manifest, primary contrast C2 vs B1 on Brier, block-bootstrap >=2000 reps, multiplicity handling.
 
 3) ELIMINATE BOTTLENECKS - STRENGTHEN AUTOMATION (HEAVY WORK REQUIRED)
    - IMPROVE `scripts/monitor_ironflow_liquidations.py` if gaps exist: add more failure classification, faster detection, better parsing of HF tree, add retry logic with exponential backoff (respecting rate limits), track more resume triggers.
@@ -50,10 +50,10 @@ MANDATORY READS FIRST (IN ORDER):
 - research_state/fclr010_leakage_audit.md
 - research_state/cross_track_decision_log.md
 - research_state/experiment_frontier.json
-- research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md (latest blocker; harmonize campaign ID to 004i on next edit)
+- research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md (latest blocker; campaign harmonized to 004i)
 - research_state/ironflow_probe_20261102T105415Z.json (freshest)
 - research_state/ironflow_monitor_state.json
-- research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json
+- research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json (frozen template, do not modify)
 - research_state/data_source_registry_alt_hunt.json
 
 CONSTRAINTS (NON-NEGOTIABLE):
@@ -69,14 +69,14 @@ CONSTRAINTS (NON-NEGOTIABLE):
 - Never avoid heavy working. Build the next focus campaign that future agents cannot avoid doing heavy work.
 
 ## BOTTLENECKS REMOVED / ELIMINATED
-- **Fresh evidence established:** Monitor (20261102T105415Z) shows 2026-10 present, 2026-11 events/fills both HTTP 404. data_through=2026-10, consecutive_absent=3. Alt-hunt confirms no other admissible sources. Complete blocker doc: `research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md`.
+- **Fresh evidence established:** Monitor (20261102T105415Z) shows 2026-10 present, 2026-11 events/fills both HTTP 404. data_through=2026-10, consecutive_absent=3. Alt-hunt confirms no other admissible sources. Complete blocker doc: `research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md` (campaign harmonized to 004i).
 - **Eliminated passive waiting:** Monitor is state-aware (only genuinely new files reported), wider window (trailing 6 months + current+3 future), failure classification (NEW_AVAILABLE/CONFIRMED_ABSENT/RATE_LIMITED/TRANSIENT_ERROR), explicit post-2026-10 summary. MUST execute both monitor + alt-hunt at session start.
 - **Automation strengthened:** `scripts/monitor_ironflow_liquidations.py` rewritten with state-aware diff, wider probe window, failure classification, data_through/consecutive_absent tracking. Tests added: `tests/test_monitor_ironflow.py`. Test suite 42/42 PASS.
-- **Campaign ID harmonized:** Standardized on LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i across all artifacts (was fragmented as 004d pre-reg, 004g frontier/blocker, 004i handoff). Eliminates cross-artifact ambiguity that could cause future agents to target the wrong campaign.
+- **Campaign ID harmonized:** Standardized on LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i across `AGENT_HANDOFF.md`, `research_state/experiment_frontier.json`, `research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md`, and `scripts/create_forward_prereg.py`. Frozen historical artifacts (004d pre-reg JSON, older blocker docs) preserved. Eliminates cross-artifact ambiguity that could cause future agents to target the wrong campaign.
 - **Forced heavy work:** Cannot finish turn without measurable progress (automation improvement, new tests, stronger evidence, or complete blocker documentation with concrete resume conditions).
 - **Discovery-driven:** Continue watching sole admissible source (ironflow/hyperliquid-liquidations). Instant response on new data with pre-reg before outcomes.
 - **Pre-registration ready:** Template exists; mandatory before any outcome inspection.
-- **Single source of truth:** This file supersedes all prior handoffs.
+- **Single source of truth:** This file supersedes all prior handoffs including `research_state/AGENT_HANDOFF.md`.
 - **Preserved seals:** All sealed artifacts intact. No reopening of closed tracks.
 - **Clean execution posture:** Tests passing (42/42), firewall intact, raw data excluded from git.
 
@@ -95,7 +95,7 @@ CONSTRAINTS (NON-NEGOTIABLE):
 **Success Definition:**
 - Run `scripts/monitor_ironflow_liquidations.py` and `scripts/hunt_alternative_liquidation_sources.py`, commit evidence files if updated
 - Strengthen automation (improve scripts, add tests) - measurable improvement required
-- Harmonize campaign ID 004i across `research_state/experiment_frontier.json` and `research_state/liquidation_forward_validate_004_blocker_*.md` (remove 004g/004d fragmentation)
+- Campaign ID 004i harmonized across `research_state/experiment_frontier.json` and `research_state/liquidation_forward_validate_004_blocker_*.md` (004g/004d fragmentation removed)
 - If new rubric-passing data found: fresh pre-reg created BEFORE outcomes + forward validation executed with full report (calibration/LOO/concentration/block-bootstrap/multiplicity/gate)
 - Else: updated complete blocker doc with explicit, checkable resume conditions; `research_state/experiment_frontier.json` updated with concrete resume triggers; automation strengthened further
 
@@ -109,3 +109,5 @@ CONSTRAINTS (NON-NEGOTIABLE):
 - **Keep tests green:** `python -m unittest discover -s tests -v` must pass.
 - **Git hygiene:** Raw data out of git. Commit only code/manifests/reports.
 - **No busywork loops:** Evidence over retries. If blocked after exhaustive proof, document completely and build automation.
+
+(End of file - total 111 lines)
