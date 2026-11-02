@@ -712,5 +712,19 @@
     ],
     "on_trigger": "Pre-register BEFORE inspecting outcomes, then run scripts/fclr010_harness.py and write research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.md",
     "currently_fired": false
+  },
+  "last_quick_check": {
+    "timestamp_utc": "2026-11-02T15:09:48.242604+00:00",
+    "triggered": false,
+    "triggering_files": [],
+    "months_probed": [
+      "2026-11",
+      "2026-12",
+      "2027-01",
+      "2027-02"
+    ],
+    "head_probes": 8,
+    "cached_hits": 0,
+    "data_through": "2026-10"
   }
 }

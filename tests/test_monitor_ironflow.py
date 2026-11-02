@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from pathlib import Path
 import sys
+import json
 from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -329,6 +330,75 @@ class TestCandidateMonthsStability(unittest.TestCase):
             y, m = ym.split("-")
             self.assertGreaterEqual(int(m), 1)
             self.assertLessEqual(int(m), 12)
+
+
+class TestQuickPathPersistence(unittest.TestCase):
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    @patch("scripts.monitor_ironflow_liquidations.check_resume_condition")
+    def test_quick_persists_last_quick_check(self, mock_rc, mock_get):
+        mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
+        mock_rc.return_value = {
+            "triggered": False,
+            "triggering_files": [],
+            "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+            "head_probes": 8,
+            "cached_hits": 0,
+            "data_through": "2026-10",
+            "probes": [],
+        }
+        old_argv = sys.argv
+        sys.argv = ["monitor_ironflow_liquidations.py", "--quick"]
+        state_path = Path(mon.REPO_ROOT) / "research_state" / "ironflow_monitor_state.json"
+        _tmp = state_path.read_text() if state_path.exists() else "{}"
+        try:
+            state_path.write_text(json.dumps({"data_through": "2026-10", "tree_etag": 'W/"x"'}))
+            mon.main()
+            state = json.loads(state_path.read_text())
+            lqc = state.get("last_quick_check")
+            self.assertIsNotNone(lqc)
+            self.assertFalse(lqc["triggered"])
+            self.assertEqual(lqc["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
+            self.assertEqual(lqc["head_probes"], 8)
+            self.assertEqual(lqc["cached_hits"], 0)
+            self.assertEqual(lqc["data_through"], "2026-10")
+        finally:
+            state_path.write_text(_tmp)
+            sys.argv = old_argv
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    @patch("scripts.monitor_ironflow_liquidations.check_resume_condition")
+    def test_quick_evidence_records_mode_and_post_2026_10_summary(self, mock_rc, mock_get):
+        mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
+        mock_rc.return_value = {
+            "triggered": False,
+            "triggering_files": [],
+            "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+            "head_probes": 8,
+            "cached_hits": 0,
+            "data_through": "2026-10",
+            "probes": [],
+        }
+        old_argv = sys.argv
+        sys.argv = ["monitor_ironflow_liquidations.py", "--quick"]
+        state_path = Path(mon.REPO_ROOT) / "research_state" / "ironflow_monitor_state.json"
+        evidence_dir = Path(mon.EVIDENCE_DIR)
+        _tmp = state_path.read_text() if state_path.exists() else "{}"
+        before = {p.name for p in evidence_dir.glob("ironflow_probe_*.json")}
+        try:
+            state_path.write_text(json.dumps({"data_through": "2026-10", "tree_etag": 'W/"x"'}))
+            mon.main()
+            after = {p.name for p in evidence_dir.glob("ironflow_probe_*.json")}
+            new_files = sorted(after - before)
+            self.assertEqual(len(new_files), 1, f"expected exactly one new probe file, got {new_files}")
+            ev = json.loads((evidence_dir / new_files[0]).read_text())
+            self.assertEqual(ev["mode"], "quick")
+            self.assertIn("quick_resume_check", ev)
+            self.assertEqual(ev["quick_resume_check"]["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
+            self.assertEqual(ev["head_probes"], 8)
+            self.assertEqual(ev["cached_hits"], 0)
+        finally:
+            state_path.write_text(_tmp)
+            sys.argv = old_argv
 
 
 def _blocked_state():

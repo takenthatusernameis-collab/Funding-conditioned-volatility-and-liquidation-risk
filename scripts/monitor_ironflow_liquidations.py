@@ -816,6 +816,20 @@ def main():
         evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
         with open(evidence_path, "w") as f:
             json.dump(evidence, f, indent=2)
+        # Persist a machine-readable record of this resume check so future
+        # sessions can confirm a state-aware check was performed without
+        # re-probing (avoids duplicate network calls between sessions).
+        state["last_quick_check"] = {
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "triggered": bool(rc["triggered"]),
+            "triggering_files": rc["triggering_files"],
+            "months_probed": rc["months_probed"],
+            "head_probes": rc.get("head_probes"),
+            "cached_hits": rc.get("cached_hits"),
+            "data_through": rc["data_through"],
+        }
+        with open(STATE_PATH, "w") as f:
+            json.dump(state, f, indent=2)
         print(f"Wrote evidence: {evidence_path}")
         if rc["triggered"]:
             print(f"RESUME TRIGGER FIRED: {rc['triggering_files']}")
