@@ -1,144 +1,161 @@
 #!/usr/bin/env python3
 """
-Ironflow Hyperliquid Liquidations Monitor
-Idempotent, unauthenticated-only, rate-limited monitor for new monthly parquets
+Ironflow Hyperliquid liquidations monitor (Track A only)
+Probes HF tree for data/events/YYYY-MM.parquet and data/fills/YYYY-MM.parquet.
+Unauthenticated only. Records full evidence, caches state, writes timestamped probes.
 """
-
 import json
 import hashlib
-import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
+HF_DATASET = "ironflow/hyperliquid-liquidations"
+TREE_URL = f"https://huggingface.co/api/datasets/{HF_DATASET}/tree/main?recursive=true"
+EVENTS_TEMPLATE = f"https://huggingface.co/datasets/{HF_DATASET}/resolve/main/data/events/%s.parquet"
+FILLS_TEMPLATE = f"https://huggingface.co/datasets/{HF_DATASET}/resolve/main/data/fills/%s.parquet"
 
-class IronflowMonitor:
-    def __init__(self, repo_root=None):
-        if repo_root is None:
-            repo_root = Path(__file__).parent.parent
-        self.repo_root = Path(repo_root)
-        self.state_path = self.repo_root / "research_state" / "ironflow_monitor_state.json"
-        self.evidence_dir = self.repo_root / "research_state"
-        self.base_url = "https://huggingface.co"
-        self.dataset = "ironflow/hyperliquid-liquidations"
-        self.load_state()
+REPO_ROOT = Path(__file__).parent.parent
+STATE_PATH = REPO_ROOT / "research_state" / "ironflow_monitor_state.json"
+EVIDENCE_DIR = REPO_ROOT / "research_state"
+EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
 
-    def load_state(self):
-        if self.state_path.exists():
-            with open(self.state_path) as f:
-                self.state = json.load(f)
-        else:
-            self.state = {
-                "last_check": None,
-                "last_seen_files": {},
-                "known_events": [],
-                "known_fills": []
-            }
 
-    def save_state(self):
-        with open(self.state_path, 'w') as f:
-            json.dump(self.state, f, indent=2)
+def now_z():
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
-    def probe_url(self, url):
-        """Probe URL with full evidence capture (unauthenticated)"""
-        evidence = {
+
+def sha256_bytes(b):
+    h = hashlib.sha256()
+    h.update(b)
+    return h.hexdigest()
+
+
+def http_get(url, timeout=60):
+    req = Request(url, headers={"User-Agent": "fclr-monitor/1.0"})
+    try:
+        with urlopen(req, timeout=timeout) as resp:
+            status = resp.getcode()
+            headers = dict(resp.headers.items())
+            body = resp.read()
+            return {"ok": True, "status": status, "headers": headers, "body": body, "url": url}
+    except HTTPError as e:
+        try:
+            body = e.read()
+        except Exception:
+            body = b""
+        headers = dict(getattr(e, "headers", {}) or {})
+        return {"ok": False, "status": e.code, "headers": headers, "body": body, "url": url}
+    except URLError as e:
+        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url}
+    except Exception as e:
+        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url}
+
+
+def probe_month(ym):
+    res = {"month": ym, "events": None, "fills": None}
+    for kind, tmpl in [("events", EVENTS_TEMPLATE), ("fills", FILLS_TEMPLATE)]:
+        url = tmpl % ym
+        r = http_get(url)
+        rec = {
             "url": url,
             "method": "GET",
-            "timestamp_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "status": None,
-            "headers": {},
-            "body_preview": None,
-            "content_length": None,
-            "sha256": None,
-            "error": None
+            "status": r["status"],
+            "headers": {k: v for k, v in r["headers"].items()},
+            "body_preview": r["body"][:200].decode("utf-8", errors="replace"),
         }
-        try:
-            req = Request(url)
-            req.add_header('User-Agent', 'FCLR-Monitor/1.0')
-            with urlopen(req, timeout=30) as resp:
-                evidence["status"] = resp.status
-                # Capture headers
-                for k, v in resp.headers.items():
-                    evidence["headers"][k.lower()] = v
-                evidence["content_length"] = resp.headers.get('Content-Length')
-                body = resp.read()
-                evidence["sha256"] = hashlib.sha256(body).hexdigest()
-                evidence["body_preview"] = body[:200].decode('utf-8', errors='replace')
-        except HTTPError as e:
-            evidence["status"] = e.code
-            evidence["error"] = str(e)
-            for k, v in e.headers.items():
-                evidence["headers"][k.lower()] = v
-            try:
-                body = e.read()
-                evidence["sha256"] = hashlib.sha256(body).hexdigest()
-                evidence["body_preview"] = body[:200].decode('utf-8', errors='replace')
-            except:
-                pass
-        except Exception as e:
-            evidence["error"] = str(e)
-        return evidence
-
-    def check_tree(self):
-        """Check HF dataset tree for new files"""
-        tree_url = f"{self.base_url}/api/datasets/{self.dataset}/tree/main?recursive=true"
-        return self.probe_url(tree_url)
-
-    def check_month(self, year_month):
-        """Check specific month files"""
-        results = {}
-        for prefix in ['data/events', 'data/fills']:
-            url = f"{self.base_url}/datasets/{self.dataset}/resolve/main/{prefix}/{year_month}.parquet"
-            results[f"{prefix}/{year_month}.parquet"] = self.probe_url(url)
-        return results
-
-    def run(self):
-        """Run monitor probe with full evidence"""
-        timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        evidence = {
-            "monitor_run_id": f"ironflow_probe_{timestamp}",
-            "timestamp_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "tree_probe": None,
-            "month_probes": {},
-            "new_files_found": [],
-            "action_required": False
-        }
-
-        # Probe tree
-        evidence["tree_probe"] = self.check_tree()
-
-        # Probe recent months (check Nov 2026 onward and a few recent)
-        for ym in ['2026-11', '2026-12']:
-            evidence["month_probes"][ym] = self.check_month(ym)
-            for path, probe in evidence["month_probes"][ym].items():
-                if probe["status"] == 200 and probe["content_length"] and int(probe["content_length"]) > 1000:
-                    evidence["new_files_found"].append(path)
-                    evidence["action_required"] = True
-
-        # Save evidence
-        evidence_file = self.evidence_dir / f"ironflow_probe_{timestamp}.json"
-        with open(evidence_file, 'w') as f:
-            json.dump(evidence, f, indent=2)
-
-        # Update state
-        self.state["last_check"] = evidence["timestamp_utc"]
-        self.save_state()
-
-        print(json.dumps({
-            "monitor_run_id": evidence["monitor_run_id"],
-            "new_files_found": evidence["new_files_found"],
-            "action_required": evidence["action_required"],
-            "evidence_file": str(evidence_file)
-        }, indent=2))
-
-        return evidence
+        if r["ok"] and r["status"] == 200:
+            rec["sha256"] = sha256_bytes(r["body"])
+            rec["content_length"] = len(r["body"])
+        res[kind] = rec
+    return res
 
 
 def main():
-    monitor = IronflowMonitor()
-    monitor.run()
+    ts = now_z()
+    evidence = {
+        "probe_id": f"ironflow_probe_{ts}",
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        "dataset": HF_DATASET,
+        "tree_url": TREE_URL,
+        "tree": None,
+        "months_probed": [],
+        "new_files_found": [],
+    }
+
+    # Probe tree
+    tree_res = http_get(TREE_URL)
+    evidence["tree"] = {
+        "url": TREE_URL,
+        "method": "GET",
+        "status": tree_res["status"],
+        "headers": {k: v for k, v in tree_res["headers"].items()},
+    }
+    if tree_res["ok"] and tree_res["status"] == 200:
+        try:
+            tree_data = json.loads(tree_res["body"].decode("utf-8"))
+            evidence["tree"]["parsed"] = True
+            paths = []
+            for item in tree_data if isinstance(tree_data, list) else tree_data.get("tree", []):
+                if isinstance(item, dict):
+                    p = item.get("path") or item.get("name") or ""
+                else:
+                    p = str(item)
+                if p.endswith(".parquet"):
+                    paths.append(p)
+            evidence["tree"]["parquet_paths"] = sorted(set(paths))
+        except Exception as e:
+            evidence["tree"]["parsed"] = False
+            evidence["tree"]["parse_error"] = str(e)
+    else:
+        evidence["tree"]["parsed"] = False
+
+    # Probe likely new months
+    now = datetime.now(timezone.utc)
+    candidates = []
+    for delta in range(-1, 3):
+        m = now.month + delta
+        y = now.year
+        while m > 12:
+            m -= 12
+            y += 1
+        while m < 1:
+            m += 12
+            y -= 1
+        candidates.append(f"{y:04d}-{m:02d}")
+    candidates = sorted(set(candidates))
+    for ym in candidates:
+        evidence["months_probed"].append(probe_month(ym))
+        pm = evidence["months_probed"][-1]
+        if pm["events"] and pm["events"]["status"] == 200:
+            evidence["new_files_found"].append({"kind": "events", "month": ym, "url": pm["events"]["url"]})
+        if pm["fills"] and pm["fills"]["status"] == 200:
+            evidence["new_files_found"].append({"kind": "fills", "month": ym, "url": pm["fills"]["url"]})
+
+    evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
+    with open(evidence_path, "w") as f:
+        json.dump(evidence, f, indent=2)
+    print(f"Wrote evidence: {evidence_path}")
+
+    state = {}
+    if STATE_PATH.exists():
+        try:
+            with open(STATE_PATH) as f:
+                state = json.load(f)
+        except Exception:
+            state = {}
+    state["last_probe"] = evidence
+    state["last_probe_ts"] = ts
+    with open(STATE_PATH, "w") as f:
+        json.dump(state, f, indent=2)
+    print(f"Updated state: {STATE_PATH}")
+
+    if evidence["new_files_found"]:
+        print(f"NEW FILES FOUND: {len(evidence['new_files_found'])}")
+    else:
+        print("No new files found (all 404 or none 200)")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,0 +1,53 @@
+{
+  "experiment_id": "LIQUIDATION_FORWARD_VALIDATE_004",
+  "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d",
+  "timestamp_utc": "2026-11-02T06:06:50.304323+00:00",
+  "pre_registered_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "protocol_ref": "research_state/research_protocol_fclr010.md v1.0",
+  "harness_ref": "scripts/fclr010_harness.py",
+  "track": "A",
+  "primary_contrast": "C2_vs_B1",
+  "primary_metric": "brier",
+  "bootstrap_reps": 2000,
+  "splits_from_manifest": {
+    "status": "frozen",
+    "rule": "chronological 60/20/20 split by unique UTC timestamps across common Hyperliquid native-perp panel; 7-day purge/embargo at all split boundaries (FCLR-010 pre-registered, Track A observed liquidations). NO Binance data merged; outcomes frozen until this record exists.",
+    "embargo_days": 7,
+    "data_window": {
+      "start": "2025-11-01T00:00:00Z",
+      "end": "2026-10-31T23:00:00Z"
+    },
+    "train": {
+      "start": "2025-11-01T00:00:00Z",
+      "end": "2026-03-06T23:00:00Z"
+    },
+    "validation": {
+      "start": "2026-03-14T00:00:00Z",
+      "end": "2026-05-20T23:00:00Z"
+    },
+    "test": {
+      "start": "2026-05-28T00:00:00Z",
+      "end": "2026-10-31T23:00:00Z"
+    },
+    "block_requirement": ">=3 non-overlapping 30-day blocks in test window required; >=5 instruments required",
+    "frozen_before_outcomes": true,
+    "frozen_at": "2026-11-01T05:39:07Z",
+    "protocol_ref": "research_state/research_protocol_fclr010.md v1.0",
+    "label_source": "ironflow_hyperliquid_liquidation_events",
+    "predictor_source": "hyperliquid_public_api (api.hyperliquid.xyz/info) - coverage audit pending before/at execution per protocol"
+  },
+  "multiplicity": {
+    "plan": "Holm across registered family if applicable"
+  },
+  "rubric_go": {
+    "min_symbols": 5,
+    "min_blocks_or_month": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks",
+    "completeness_doc_required": true,
+    "license_ok": true,
+    "unauthenticated_only": true,
+    "no_requester_pays": true,
+    "schema_compatible_fclr010": true
+  },
+  "notes": "Pre-registered before inspecting any post-2026-10-31 label/outcome columns"
+}
