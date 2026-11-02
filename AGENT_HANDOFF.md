@@ -1,22 +1,13 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261102T210204Z
+**TIMESTAMP:** 20261102T210334Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk — Track A liquidation risk PRIORITIZED (repo-name-driven)
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA
-**SESSION GOAL FOR NEXT AGENT:** NO COASTING. Execute the clearest initial task below. If new ironflow data appears (>=2026-11) OR new admissible unauthenticated Track A source passes GO rubric → PRE-REGISTER BEFORE INSPECTING OUTCOMES and run `scripts/fclr010_harness.py`. Otherwise, EXECUTE MANDATORY HEAVY WORK A–E IN FULL and produce at least ONE new measurable artifact beyond baseline.
-
-## VERIFIED STATE (THIS SESSION, 20261102T210204Z)
-- `python scripts/monitor_ironflow_liquidations.py --verify` → ok=True, data_through=2026-10, consecutive_absent=3
-- `python scripts/monitor_ironflow_liquidations.py --quick` → probed ['2026-11','2026-12','2027-01','2027-02'] all 404 (HEAD), tree 304, no new files, probe_diff(added=0 changed=0 removed=0), resume_trigger=false
-- `python -m unittest discover -s tests -v` → OK (green)
-- Alt hunt re-run with enhanced candidates (coinglass, hyblock, coinank, paradigm, theblock): COMPLETE_NO-GO (no new admissible unauthenticated Track A source)
-- Fresh blocker: `research_state/liquidation_forward_validate_004_blocker_20261102T205920Z.md`
-- Frontier: `research_state/experiment_frontier.json` status BLOCKED_ON_DATA (ironflow 2026-11+ missing; no other admissible sources)
-- All confirmatory gates resolved; stable closeout point: Track A FCLR-010 COMPLETE/FORECAST_GATE_PASSED + overlay EXECUTED (HYPOTHETICAL_ONLY); Track B CLOSED_NEGATIVE; Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED); H002 PERMANENT_BLOCK (SSRN HTTP 403); FCLR-NEXT-002 COMPLETE_NO-GO across 8 source families.
+**SESSION GOAL FOR NEXT AGENT:** NO COASTING. Execute the clearest initial task below. If new ironflow data appears (>=2026-11) OR new admissible unauthenticated Track A source passes GO rubric → PRE-REGISTER BEFORE INSPECTING OUTCOMES and run `scripts/fclr010_harness.py`. Otherwise, EXECUTE MANDATORY HEAVY WORK A–E IN FULL and produce at least ONE new measurable artifact beyond baseline. "Nothing to do" is not an option — session fails otherwise.
 
 ## NEXT AGENT INITIAL TASK (CLEAR, TIMESTAMPED — START NOW)
 
-**20261102T210204Z: STATE-AWARE RESUME CHECK (CHEAP, NO POLLING)**
+**20261102T210334Z: STATE-AWARE RESUME CHECK (CHEAP, NO POLLING)**
 1. Run: `python scripts/monitor_ironflow_liquidations.py --verify` (must report `ok=True`)
 2. Run: `python scripts/monitor_ironflow_liquidations.py --quick` (state-aware forward-edge check; writes `last_quick_check`, `last_quick_probe`, `probe_diff`, `tree_change`; no network beyond 8 HEAD probes; caches locally)
 3. Read latest `research_state/ironflow_trend_report_*.json` (or generate offline with `python scripts/monitor_ironflow_liquidations.py --report`)
@@ -27,6 +18,15 @@
   - Run `python scripts/fclr010_harness.py`.
   - Write `research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.md` (calibration, LOO, concentration, block-bootstrap CIs>=2000 reps, Holm, gate). Update frontier + cross-track log.
 - **BLOCKED PATH (EXPECTED):** No new data. Execute **MANDATORY HEAVY WORK A–E** below in full. You MUST produce at least ONE NEW measurable artifact beyond baseline. "Nothing to do" is not an option — session fails otherwise.
+
+## VERIFIED STATE (THIS SESSION, 20261102T210204Z)
+- `python scripts/monitor_ironflow_liquidations.py --verify` → ok=True, data_through=2026-10, consecutive_absent=3
+- `python scripts/monitor_ironflow_liquidations.py --quick` → probed ['2026-11','2026-12','2027-01','2027-02'] all 404 (HEAD), tree 304, no new files, probe_diff(added=0 changed=0 removed=0), resume_trigger=false
+- `python -m unittest discover -s tests -v` → OK (green)
+- Alt hunt re-run with enhanced candidates (coinglass, hyblock, coinank, paradigm, theblock): COMPLETE_NO-GO (no new admissible unauthenticated Track A source)
+- Fresh blocker: `research_state/liquidation_forward_validate_004_blocker_20261102T205920Z.md`
+- Frontier: `research_state/experiment_frontier.json` status BLOCKED_ON_DATA (ironflow 2026-11+ missing; no other admissible sources)
+- All confirmatory gates resolved; stable closeout point: Track A FCLR-010 COMPLETE/FORECAST_GATE_PASSED + overlay EXECUTED (HYPOTHETICAL_ONLY); Track B CLOSED_NEGATIVE; Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED); H002 PERMANENT_BLOCK (SSRN HTTP 403); FCLR-NEXT-002 COMPLETE_NO-GO across 8 source families.
 
 ## BOTTLENECKS REMOVED (EVIDENCE — DO NOT RE-EXPLORE)
 - **Monitor hardened:** ETag tree caching (304 skip), HEAD-before-GET, per-file ETag/Last-Modified, jittered backoff + per-endpoint budgets, rate-limit awareness, `--quick` forward-edge + `last_quick_check`/`last_quick_probe`, `compare_probes()` detects 404→200, `check_tree_change()` detects new paths anywhere, `--report` aggregates all prior probe evidence locally (no network), `quick_diff_summary()` added.

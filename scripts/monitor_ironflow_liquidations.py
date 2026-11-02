@@ -741,7 +741,14 @@ def check_baseline_drift(state):
                 result["missing_cache_entries"].append({"month": ym, "kind": kind, "cache_key": key})
             elif not c.get("etag") or not c.get("sha256"):
                 result["stale_cache_entries"].append({"month": ym, "kind": kind, "cache_key": key, "entry": c})
-    result["drifted"] = bool(result["missing_cache_entries"] or result["stale_cache_entries"])
+    # A missing cache entry means the file was never downloaded: there is no
+    # baseline to drift from, so it is cache-incomplete, not drift. Real drift
+    # (200 -> 404 or ETag/Last-Modified change) can only be observed against a
+    # previously-cached entry and is detected by the network-aware
+    # check_baseline_drift_probe (run inside --quick). Drift here means actual
+    # cache corruption: a cached entry missing its etag/sha256.
+    result["cache_incomplete"] = bool(result["missing_cache_entries"])
+    result["drifted"] = bool(result["stale_cache_entries"])
     return result
 
 

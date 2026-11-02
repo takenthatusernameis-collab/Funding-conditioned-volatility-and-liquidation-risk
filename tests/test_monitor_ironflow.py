@@ -792,3 +792,39 @@ class TestQuickDiffSummary(unittest.TestCase):
         self.assertFalse(summary["any_change"])
         self.assertEqual(summary["added"], 0)
         self.assertEqual(summary["changed"], 0)
+
+
+class TestBaselineDrift(unittest.TestCase):
+    """Tests for check_baseline_drift: cache-incomplete is not drift."""
+
+    def test_empty_cache_is_incomplete_not_drift(self):
+        # tree_parquet_paths lists known months but nothing was ever downloaded.
+        state = {
+            "tree_parquet_paths": ["data/events/2026-10.parquet", "data/fills/2026-10.parquet"],
+            "file_cache": {},
+        }
+        bd = mon.check_baseline_drift(state)
+        self.assertTrue(bd["cache_incomplete"])
+        self.assertFalse(bd["drifted"])
+        self.assertEqual(bd["checked"], 1)
+        self.assertEqual(len(bd["missing_cache_entries"]), 2)
+        self.assertEqual(bd["stale_cache_entries"], [])
+
+    def test_stale_cache_entry_is_drift(self):
+        state = {
+            "tree_parquet_paths": ["data/events/2026-10.parquet"],
+            "file_cache": {"events:2026-10": {"etag": None, "sha256": None}},
+        }
+        bd = mon.check_baseline_drift(state)
+        self.assertFalse(bd["cache_incomplete"])
+        self.assertTrue(bd["drifted"])
+        self.assertEqual(len(bd["stale_cache_entries"]), 1)
+
+    def test_complete_cache_not_drift(self):
+        state = {
+            "tree_parquet_paths": ["data/events/2026-10.parquet"],
+            "file_cache": {"events:2026-10": {"etag": 'W/"x"', "sha256": "abc"}},
+        }
+        bd = mon.check_baseline_drift(state)
+        self.assertFalse(bd["cache_incomplete"])
+        self.assertFalse(bd["drifted"])
