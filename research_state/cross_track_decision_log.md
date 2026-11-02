@@ -23,3 +23,9 @@
 2026-11-02T00:08:30Z | FCLR-LIQMICRO-003 STARTED | Adversarial leakage/quality audit + robustness sensitivity on FCLR-LIQMICRO-002 panel (ironflow Hyperliquid + Hyperliquid funding). Firewall intact: no Binance merge, no H001/FCLR-003/FCLR-010 re-test. Artifacts: leakage_audit_liqmicro_002.md, robustness_liqmicro_002.md.
 
 2026-11-02T00:13:00Z | FCLR-LIQMICRO-003 COMPLETE | Closeout done. experiment_frontier.json FCLR-LIQMICRO-003 status=COMPLETE with sealed_panel_integrity block (md5 hashes of results/liqmicro_v2/* recorded; mtimes 2026-11-02T00:05 unchanged; verdict UNCHANGED — no rewrites). All 27 tests PASS at HEAD 358cea47. Firewall intact: no Binance merge, no H001/FCLR-003/FCLR-010 re-test, no Track A/B/C label merging. Final gate states: Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED); Track A FCLR-010 gate PASSED / overlay HYPOTHETICAL_ONLY; Track B CLOSED_NEGATIVE; H002 PERMANENT_BLOCK; FCLR-LIQMICRO-002/003 COMPLETE. Resume condition: new admissible unauthenticated liquidation/funding source passing the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK) OR SSRN H002 methodology accessible — in either case pre-register a new experiment ID BEFORE outcome inspection.
+
+## 2026-11-02T01:04:00Z — FCLR-LIQMICRO-003 CLOSEOUT COMPLETE
+- Status COMPLETE. Artifacts: leakage_audit_liqmicro_002.md (PASS), robustness_liqmicro_002.md.
+- Sealed panel verified unchanged (md5s recorded). Tests 27/27 PASS.
+- Firewall intact: Hyperliquid-only; no Binance; no H001/FCLR-003/FCLR-010 re-test; no Track label merging.
+- Resume condition: new admissible unauthenticated liquidation/funding source passing rubric OR SSRN H002 access; pre-register before outcome inspection.

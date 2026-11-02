@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T00:13:12Z
+**TIMESTAMP (UTC):** 2026-11-02T01:04:00Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive.
 **BRANCH/HEAD:** main @ fb5ebec8

@@ -2,7 +2,7 @@
   "registry_version": "1.0",
   "generated": "2026-11-02T00:04:02Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED. Track C/B closed; H002 blocked. FCLR-LIQMICRO-002 COMPLETE (real funding). FCLR-LIQMICRO-003 IN PROGRESS (adversarial audit + robustness).",
+  "current_status": "FCLR-010 PASSED; FCLR-OVERLAY-001 EXECUTED; Track C/B closed; H002 blocked. FCLR-LIQMICRO-002 COMPLETE (real funding). FCLR-LIQMICRO-003 COMPLETE (adversarial audit+robustness closeout 2026-11-02). ALL CONFIRMATORY GATES RESOLVED.",
   "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE. FCLR-LIQMICRO-002 COMPLETE: real Hyperliquid funding (9 coins x 8668 records, fundingRate.std()>0) wired into features.py; D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs now non-zero (was degenerate 0.0 in FCLR-LIQMICRO-001); D3 clustering_by_decile now populated (was empty {}); BH FDR 4 significant; NO H001 reversal, NO H001 re-test opened.",
   "frontier": [
     {
@@ -156,7 +156,7 @@
         "modules": "src/analysis/liqmicro/"
       }
     },
-{
+    {
       "id": "FCLR-LIQMICRO-003",
       "track": "D_liquidation_microstructure",
       "status": "COMPLETE",
@@ -174,7 +174,7 @@
           "descriptive_stats_v2.csv": "8d96c2b9ac866f85ec3970485c4e291c"
         },
         "mtimes": "2026-11-02T00:05 (FCLR-LIQMICRO-002 write time)",
-        "verdict": "UNCHANGED — no rewrites, no new *_003* outputs written to results/liqmicro_v2/"
+        "verdict": "UNCHANGED \u2014 no rewrites, no new *_003* outputs written to results/liqmicro_v2/"
       }
     },
     {
@@ -204,7 +204,7 @@
     "reps": ">=2000",
     "notes": "coupled funding\u00d7vol\u00d7lagged observed flow passes all gates"
   },
-  "updated_at": "2026-11-02T00:04:02Z",
+  "updated_at": "2026-11-02T01:04:00Z",
   "FCLR-LIQMICRO-001": {
     "status": "COMPLETE",
     "timestamp": "2026-11-01T22:22:41Z",
