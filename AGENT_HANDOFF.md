@@ -1,7 +1,7 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T09:08:53Z
-**HANDOFF ID:** FCLR-HANDOFF-107-20261102T080716Z
-**SUPERSEDES:** FCLR-HANDOFF-106-20261102T080610Z (and all earlier)
+**TIMESTAMP (UTC):** 2026-11-02T09:23:47Z
+**HANDOFF ID:** FCLR-HANDOFF-108-20261102T092347Z
+**SUPERSEDES:** FCLR-HANDOFF-107-20261102T080716Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name). Track A (observed liquidations) is the only open confirmatory track. Treat liquidation risk as the default axis of work until Track A is resolved or exhaustively blocked with irrefutable evidence.
 
@@ -9,33 +9,34 @@
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T08:07:16Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004f (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
+[2026-11-02T09:23:47Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004g (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
 
 PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA. The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". YOU MUST convert this block into reusable automation and airtight evidence.
 
 OBJECTIVE (NON-OPTIONAL, HEAVY WORK - DO ALL OF THE BELOW):
+
 1) MAINTAIN/USE FROZEN HARNESS
    - Use `scripts/fclr010_harness.py` + `scripts/fclr010_validate.py` (already present). If you extend, do NOT retune. Keep tests passing (`python -m unittest discover -s tests -v` must pass >=31).
    - Pre-reg template exists: `research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json`. If new data appears, CREATE a fresh pre-reg with new timestamp BEFORE inspecting outcomes.
 
 2) RUN IRONFLOW MONITOR ON DEMAND (SESSION START, IDENTIFIED)
    - Run `python scripts/monitor_ironflow_liquidations.py` at start of session (idempotent). It probes tree + events/fills for recent months, writes `research_state/ironflow_probe_YYYYMMDDTHHMMSSZ.json`, updates `research_state/ironflow_monitor_state.json`. Evidence includes URLs/status/headers/sha256 if present.
-   - Fresh run just completed (20261102T080716Z): 2026-10 present (events/fills HTTP 200), 2026-11 events/fills HTTP 404. If monitor finds new files (status 200) for >=2026-11, DO NOT just log - go to step 4 immediately.
+   - Prior fresh run (20261102T080716Z): 2026-10 present (events/fills HTTP 200), 2026-11 events/fills HTTP 404. If monitor finds new files (status 200) for >=2026-11, DO NOT just log - go to step 4 immediately.
 
 3) EXHAUSTIVE ALTERNATIVE SOURCE HUNT (RE-RUN WITH FRESH EVIDENCE)
    - Run `python scripts/hunt_alternative_liquidation_sources.py` to refresh evidence. Update `research_state/data_source_registry_alt_hunt.json`. Re-probe ALL admissible unauthenticated families per RESEARCH_PROMPT §5 with concrete HTTP evidence.
    - Strict GO/NO-GO: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness, license OK, unauthenticated access confirmed, no requester-pays, schema compatible with frozen FCLR-010. Never merge tracks.
-   - Fresh alt-hunt just completed (20261102T080722Z): no new admissible sources beyond ironflow.
+   - Prior alt-hunt (20261102T091337Z): no new admissible sources beyond ironflow.
 
 4) PRE-REGISTER & VALIDATE ON DISCOVERY (HEAVY, DISCIPLINED)
    - If new rubric-passing post-2026-10-31 observed-liquidation data found: CREATE `research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.json` BEFORE inspecting outcomes. Freeze protocol (splits from manifest, primary contrast C2 vs B1 on Brier, block-bootstrap >=2000 reps, multiplicity).
    - Run forward validation IMMEDIATELY with frozen harness. Write `research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<ID>.md` with calibration, LOO, concentration, block-bootstrap CIs, and explicit gate assessment.
 
 5) IF STILL BLOCKED AFTER EXHAUSTIVE (HEAVY DOCUMENTATION, AUTOMATION, NO LOOPS)
-   - If after exhaustive proof no rubric-passing post-2026-10-31 observed-liquidation data exists, update/create complete blocker evidence doc with full probe tables (URLs/status/headers) and update `research_state/experiment_frontier.json` resume condition with concrete, checkable triggers.
-   - Strengthen automation: improve `scripts/monitor_ironflow_liquidations.py` or add tests if gaps found. Add focused tests if you add/modify modules.
+   - If after exhaustive proof no rubric-passing post-2026-10-31 observed-liquidation data exists, UPDATE/CREATE complete blocker evidence doc with full probe tables (URLs/status/headers), concrete resume conditions (exact paths/filenames/patterns to watch), and update `research_state/experiment_frontier.json` resume condition with checkable triggers.
+   - STRENGTHEN AUTOMATION: improve `scripts/monitor_ironflow_liquidations.py` (better parsing, failure classification, retry-with-new-evidence only), add tests if gaps found, or add focused tests for any modified modules. Add monitoring coverage for plausible new paths discovered during hunt.
    - DO NOT create infinite polling loops. DO NOT reopen sealed FCLR-001/002/003/006/007/008/009. DO NOT change `.github/workflows/*`.
-   - Build automation if gaps exist even if blocked - heavy work required.
+   - BUILD AUTOMATION IF GAPS EXIST EVEN IF BLOCKED - HEAVY WORK REQUIRED.
 
 MANDATORY READS FIRST:
 - AGENT_HANDOFF.md (this file)
@@ -49,6 +50,7 @@ MANDATORY READS FIRST:
 - research_state/liquidation_forward_validate_004_blocker_20261102T061021Z.md (latest blocker)
 - research_state/ironflow_probe_20261102T080716Z.json (fresh)
 - research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json
+- research_state/data_source_registry_alt_hunt.json
 
 CONSTRAINTS (NON-NEGOTIABLE):
 - Unauthenticated only. No API keys, tokens, cookies, signed requests, requester-pays.
@@ -62,10 +64,10 @@ CONSTRAINTS (NON-NEGOTIABLE):
 ```
 
 ## BOTTLENECKS REMOVED (THIS HANDOFF UPDATE)
-- **Fresh evidence:** Monitor (20261102T080716Z) and alt-hunt (20261102T080722Z) just run; 2026-10 present, 2026-11 still 404 on both events/fills. No new sources found.
-- **Eliminated passive waiting:** Must execute monitor + alt-hunt, strengthen automation if needed, and produce complete evidence even if blocked.
-- **Forced heavy work:** Cannot finish turn without measurable progress (automation, tests, or complete blocker documentation with concrete resume conditions).
-- **Discovery-driven:** Continue watching for new data on sole admissible source (ironflow).
+- **Fresh evidence established:** Monitor (20261102T080716Z) and alt-hunt (20261102T091337Z) show 2026-10 present, 2026-11 still 404 on events/fills. No rubric-passing sources found.
+- **Eliminated passive waiting:** Must execute monitor + alt-hunt at session start, strengthen automation if gaps exist, and produce complete evidence even if blocked.
+- **Forced heavy work:** Cannot finish turn without measurable progress (automation improvement, new tests, or complete blocker documentation with concrete resume conditions).
+- **Discovery-driven:** Continue watching for new data on sole admissible source (ironflow/hyperliquid-liquidations). Monitor must actively probe for 2026-11+ files.
 - **Pre-registration ready:** Template exists; required before any outcome inspection.
 - **Single source of truth:** This file supersedes all prior handoffs.
 - **Preserved seals:** All sealed artifacts intact. No reopening of closed tracks.
@@ -74,19 +76,19 @@ CONSTRAINTS (NON-NEGOTIABLE):
 ## CURRENT STATUS (AUTHORITATIVE)
 - **H001 (volatility): NOT_SUPPORTED** (FCLR-003) — Track C CONFIRMATORY_CLOSED
 - **Track A (observed liquidations): OPEN** — FCLR-010 PASSED (Hyperliquid ironflow 2025-11..2026-10, 199 instruments, 5 blocks, C2 vs B1 Brier -2.21%, CI excludes zero). Overlay executed (hypothetical only).
-- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004f: BLOCKED_ON_DATA** — Fresh monitor (20261102T080716Z) shows 2026-10 present; no 2026-11 events/fills (both HTTP 404 EntryNotFound). Alt-hunt confirms no other admissible sources. Must run monitor + alt-hunt on session start and produce heavy evidence/automation.
+- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004g: BLOCKED_ON_DATA** — Fresh monitor shows 2026-10 present; 2026-11 events/fills both HTTP 404. Alt-hunt confirms no other admissible sources. Must run monitor + alt-hunt on session start and produce heavy evidence/automation.
 - **Track B: CLOSED_NEGATIVE** (FCLR-H003-EXT-001). **H002: PERMANENTLY_BLOCKED** (SSRN 403). **FCLR-NEXT-002: COMPLETE_NO-GO** for new sources beyond ironflow.
 - **Sealed holds:** FCLR-001/002/003/006/007/008/009 sealed.
 
 ## NEXT FOCUS CAMPAIGN
-**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004f
+**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004g
 **Priority:** CRITICAL (liquidation risk)
-**Effort:** HEAVY (harness + monitor + alt-hunt + pre-reg + evidence + possible automation improvements)
+**Effort:** HEAVY (harness + monitor + alt-hunt + pre-reg + evidence + automation improvements + tests)
 **Trigger:** Auto-detect new post-2026-10 data via monitor OR produce complete blocker evidence if none found.
 **Success Definition:**
 - Run `scripts/monitor_ironflow_liquidations.py` and `scripts/hunt_alternative_liquidation_sources.py`, commit evidence files if updated
 - If new rubric-passing data found: pre-reg created BEFORE outcomes + forward validation executed with full report
-- Else: updated complete blocker doc with explicit resume condition, experiment_frontier.json updated if needed; strengthen automation/scripts/tests if useful
+- Else: updated complete blocker doc with explicit, checkable resume conditions; `research_state/experiment_frontier.json` updated with concrete resume triggers; strengthen automation/scripts/tests to detect future appearance faster
 
 ## HARD RULES (NON-NEGOTIABLE)
 - **Heavy or bust:** If you can finish the turn without creating/strengthening automation or tests, you haven't followed this handoff.
