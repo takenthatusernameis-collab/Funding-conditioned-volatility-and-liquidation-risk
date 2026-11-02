@@ -106,3 +106,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# Additional probe for common exchange liquidation endpoints (unauthenticated)
+EXTRA_PROBES = [
+    ("bybit_public_instruments", ["https://api.bybit.com/v5/market/instruments-info?category=linear"]),
+    ("okx_public_instruments", ["https://www.okx.com/api/v5/public/instruments?instType=SWAP"]),
+]

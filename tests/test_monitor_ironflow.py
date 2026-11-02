@@ -222,5 +222,104 @@ class TestConsecutiveAbsent(unittest.TestCase):
         self.assertEqual(consecutive_absent, 0)
 
 
+class TestForwardEdge(unittest.TestCase):
+    def test_forward_months_after_data_through(self):
+        months = mon.forward_edge_months("2026-10", n=4)
+        self.assertEqual(months, ["2026-11", "2026-12", "2027-01", "2027-02"])
+
+    def test_forward_months_year_rollover(self):
+        months = mon.forward_edge_months("2026-12", n=3)
+        self.assertEqual(months, ["2027-01", "2027-02", "2027-03"])
+
+    def test_forward_months_invalid_falls_back(self):
+        months = mon.forward_edge_months("not-a-date", n=2)
+        self.assertGreaterEqual(len(months), 2)
+
+    def test_forward_months_smaller_than_full_window(self):
+        full = mon.candidate_months()
+        fwd = mon.forward_edge_months("2026-10", n=mon.FORWARD_EDGE_MONTHS)
+        self.assertLess(len(fwd), len(full))
+
+
+class TestRateLimitSleep(unittest.TestCase):
+    def test_no_budget_header(self):
+        # Without a RateLimit header, returns a positive backoff.
+        self.assertGreater(mon._rate_limit_sleep({}, 1), 0)
+
+    def test_low_remaining_waits_longer(self):
+        low = mon._rate_limit_sleep({"RateLimit": 'api;r=3;t=60'}, 0)
+        normal = mon._rate_limit_sleep({"RateLimit": 'api;r=100;t=60'}, 0)
+        self.assertGreater(low, normal)
+
+    def test_moderate_remaining_uses_backoff(self):
+        v = mon._rate_limit_sleep({"RateLimit": 'api;r=40;t=60'}, 2)
+        self.assertGreaterEqual(v, 0)
+
+
+class TestCheckResumeCondition(unittest.TestCase):
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_no_trigger_when_all_absent(self, mock_get):
+        mock_get.return_value = {"ok": False, "status": 404, "headers": {}, "body": b"Entry not found", "url": "x"}
+        rc = mon.check_resume_condition({"data_through": "2026-10"})
+        self.assertFalse(rc["triggered"])
+        self.assertEqual(rc["triggering_files"], [])
+        self.assertEqual(len(rc["probes"]), 2 * len(rc["months_probed"]))
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_trigger_fires_on_200(self, mock_get):
+        def side(url, timeout=60, max_retries=3, **kw):
+            if "2026-11" in url:
+                return {"ok": True, "status": 200, "headers": {}, "body": b"PAR1", "url": url}
+            return {"ok": False, "status": 404, "headers": {}, "body": b"Entry not found", "url": url}
+        mock_get.side_effect = side
+        rc = mon.check_resume_condition({"data_through": "2026-10"})
+        self.assertTrue(rc["triggered"])
+        self.assertEqual(len(rc["triggering_files"]), 2)  # events + fills
+
+
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestNewUtilities(unittest.TestCase):
+    def test_now_z_format(self):
+        from scripts.monitor_ironflow_liquidations import now_z
+        ts = now_z()
+        self.assertRegex(ts, r"^\d{8}T\d{6}Z$")
+
+    def test_sha256_bytes(self):
+        from scripts.monitor_ironflow_liquidations import sha256_bytes
+        h = sha256_bytes(b"hello")
+        self.assertEqual(len(h), 64)
+        self.assertIsInstance(h, str)
+
+    def test_forward_edge_months_empty_through(self):
+        from scripts.monitor_ironflow_liquidations import forward_edge_months
+        months = forward_edge_months(None)
+        self.assertGreaterEqual(len(months), 4)
+
+    def test_classify_304(self):
+        from scripts.monitor_ironflow_liquidations import classify
+        self.assertEqual(classify(304), "NOT_MODIFIED")
+
+
+class TestQuickPath(unittest.TestCase):
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_check_resume_condition_structure(self, mock_get):
+        mock_get.return_value = {"ok": False, "status": 404, "headers": {}, "body": b"", "url": "x"}
+        rc = mon.check_resume_condition({"data_through": "2026-10"})
+        self.assertIn("triggered", rc)
+        self.assertIn("triggering_files", rc)
+        self.assertIn("data_through", rc)
+        self.assertIn("probes", rc)
+        self.assertIn("months_probed", rc)
+
+
+class TestCandidateMonthsStability(unittest.TestCase):
+    def test_candidate_months_deterministic_format(self):
+        months = mon.candidate_months()
+        for ym in months:
+            self.assertRegex(ym, r"^\d{4}-\d{2}$")
+            y, m = ym.split("-")
+            self.assertGreaterEqual(int(m), 1)
+            self.assertLessEqual(int(m), 12)

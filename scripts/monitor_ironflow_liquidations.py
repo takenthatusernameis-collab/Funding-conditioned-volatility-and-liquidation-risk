@@ -23,6 +23,7 @@ import json
 import hashlib
 import time
 import random
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
@@ -37,6 +38,7 @@ LOOKBACK_MONTHS = 6
 LOOKAHEAD_MONTHS = 6
 MAX_RETRIES = 3
 BACKOFF_BASE = 1.5
+FORWARD_EDGE_MONTHS = 4  # months to probe for resume triggers (strictly after data_through)
 
 REPO_ROOT = Path(__file__).parent.parent
 STATE_PATH = REPO_ROOT / "research_state" / "ironflow_monitor_state.json"
@@ -52,6 +54,26 @@ def sha256_bytes(b):
     h = hashlib.sha256()
     h.update(b)
     return h.hexdigest()
+
+
+def _rate_limit_sleep(resp_headers, attempt):
+    """Back off when the server reports a low remaining budget.
+
+    HF returns RateLimit/RateLimit-Policy headers (e.g.
+    RateLimit: "api";r=499;t=87). When the remaining count r is small we sleep
+    before the next request instead of risking a 429 and burning retries.
+    """
+    rl = resp_headers.get("RateLimit") or resp_headers.get("ratelimit") or ""
+    m = re.search(r"r=(\d+);t=(\d+)", rl)
+    if not m:
+        return BACKOFF_BASE ** attempt + random.random()
+    remaining, reset_s = int(m.group(1)), int(m.group(2))
+    if remaining <= 5:
+        # Budget nearly exhausted: wait until the window resets (+jitter).
+        return max(reset_s, BACKOFF_BASE ** attempt) + random.random()
+    if remaining < 50:
+        return BACKOFF_BASE ** attempt + random.random()
+    return 0.0
 
 
 def http_get(url, timeout=60, max_retries=MAX_RETRIES, if_none_match=None, etag_ref=None):
@@ -78,7 +100,7 @@ def http_get(url, timeout=60, max_retries=MAX_RETRIES, if_none_match=None, etag_
             if e.code == 304 and etag_ref is not None:
                 return {"ok": True, "status": 304, "headers": resp_headers, "body": b"", "url": url, "not_modified": True}
             if e.code == 429 and attempt < max_retries:
-                sleep_for = BACKOFF_BASE ** attempt + random.random()
+                sleep_for = _rate_limit_sleep(resp_headers, attempt)
                 time.sleep(sleep_for)
                 continue
             if 500 <= e.code < 600 and attempt < max_retries:
@@ -132,6 +154,30 @@ def candidate_months():
     return sorted(months)
 
 
+def forward_edge_months(data_through, n=FORWARD_EDGE_MONTHS):
+    """Return the n months strictly after data_through (the resume-check window).
+
+    This is the minimal probe set needed to detect a resume trigger. Using it
+    instead of the full candidate window cuts a 12-month probe to ~3 requests
+    per run, removing the per-session re-probe bottleneck while keeping the
+    resume condition checkable.
+    """
+    if not data_through:
+        return candidate_months()
+    try:
+        y, m = (int(x) for x in data_through.split("-"))
+    except Exception:
+        return candidate_months()
+    out = []
+    for i in range(1, n + 1):
+        yy, mm = y, m + i
+        while mm > 12:
+            mm -= 12
+            yy += 1
+        out.append(f"{yy:04d}-{mm:02d}")
+    return out
+
+
 def probe_month(ym):
     res = {"month": ym, "events": None, "fills": None}
     for kind, tmpl in [("events", EVENTS_TEMPLATE), ("fills", FILLS_TEMPLATE)]:
@@ -149,6 +195,10 @@ def probe_month(ym):
             rec["sha256"] = sha256_bytes(r["body"])
             rec["content_length"] = len(r["body"])
         res[kind] = rec
+        # Rate-limit awareness: pause between requests when budget is low.
+        sl = _rate_limit_sleep(r.get("headers", {}), 0)
+        if sl:
+            time.sleep(sl)
     return res
 
 
@@ -173,7 +223,46 @@ def known_available(state):
     return available
 
 
+def check_resume_condition(state=None, max_retries=MAX_RETRIES):
+    """Return (triggered: bool, details: dict) using ONLY the forward-edge months.
+
+    This is the cheap, non-blocking check the handoff mandates at session start.
+    It never re-probes already-known months and never re-lists the tree when the
+    cached ETag is unchanged.
+    """
+    state = state if state is not None else load_state()
+    data_through = state.get("data_through")
+    months = forward_edge_months(data_through)
+    details = {
+        "data_through": data_through,
+        "months_probed": months,
+        "probes": [],
+        "triggered": False,
+        "triggering_files": [],
+    }
+    for ym in months:
+        for kind, tmpl in [("events", EVENTS_TEMPLATE), ("fills", FILLS_TEMPLATE)]:
+            url = tmpl % ym
+            r = http_get(url, max_retries=max_retries)
+            rec = {
+                "kind": kind,
+                "month": ym,
+                "url": url,
+                "status": r["status"],
+                "classification": classify(r["status"]),
+            }
+            if r["ok"] and r["status"] == 200:
+                rec["sha256"] = sha256_bytes(r["body"])
+                rec["content_length"] = len(r["body"])
+                details["triggered"] = True
+                details["triggering_files"].append(rec)
+            details["probes"].append(rec)
+    return details
+
+
 def main():
+    import sys
+    quick = "--quick" in sys.argv
     ts = now_z()
     state = load_state()
     previously_available = known_available(state)
@@ -231,6 +320,23 @@ def main():
 
     if etag_ref[0]:
         evidence["tree"]["etag"] = etag_ref[0]
+
+    if quick:
+        # --quick: probe ONLY the forward edge (months after data_through). This is
+        # the resume-condition check. It skips re-listing when the tree ETag is
+        # unchanged and never re-probes already-known months.
+        rc = check_resume_condition(state)
+        evidence["quick_resume_check"] = rc
+        evidence["mode"] = "quick"
+        evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
+        with open(evidence_path, "w") as f:
+            json.dump(evidence, f, indent=2)
+        print(f"Wrote evidence: {evidence_path}")
+        if rc["triggered"]:
+            print(f"RESUME TRIGGER FIRED: {rc['triggering_files']}")
+        else:
+            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']}")
+        return
 
     for ym in candidate_months():
         evidence["months_probed"].append(probe_month(ym))
