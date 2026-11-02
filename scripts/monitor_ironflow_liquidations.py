@@ -1144,3 +1144,11 @@ def check_post_october():
         if found:
             return True
     return False
+
+
+# [HEAVY-004i session 20261102T160400Z] ensure compare_probes tolerates missing fields
+def _compare_probes_safe(prev_state, rc):
+    try:
+        return compare_probes(prev_state, rc)
+    except Exception as e:
+        return {"summary": {"added_count": 0, "changed_count": 0, "removed_count": 0, "error": str(e)}, "added": [], "changed": [], "removed": []}
