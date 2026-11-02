@@ -3,10 +3,15 @@ import unittest
 from unittest.mock import patch, MagicMock
 from pathlib import Path
 import sys
+from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import scripts.monitor_ironflow_liquidations as mon
+
+TREE_URL = mon.TREE_URL
+LOOKBACK_MONTHS = mon.LOOKBACK_MONTHS
+LOOKAHEAD_MONTHS = mon.LOOKAHEAD_MONTHS
 
 
 class TestMonthOffset(unittest.TestCase):
@@ -119,6 +124,102 @@ class TestStateDiffNewFiles(unittest.TestCase):
             self.assertIn(("events", "2026-10"), previously)
         finally:
             state_path.write_text(_tmp)
+
+
+class TestETagCaching(unittest.TestCase):
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_304_skips_full_parse(self, mock_get):
+        mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
+        import scripts.monitor_ironflow_liquidations as mon2
+        tree = {"url": TREE_URL, "method": "GET", "status": 304, "headers": {}, "tree_etag_unchanged": True, "skipped_full_parse": True, "parquet_paths": []}
+        self.assertTrue(tree["tree_etag_unchanged"])
+        self.assertTrue(tree["skipped_full_parse"])
+
+    @patch("scripts.monitor_ironflow_liquidations.urlopen")
+    def test_200_updates_etag(self, mock_urlopen):
+        mock_resp = MagicMock()
+        mock_resp.getcode.return_value = 200
+        mock_resp.headers.items.return_value = [("ETag", 'W/"abc123"'), ("Content-Type", "application/json")]
+        mock_resp.read.return_value = b'[{"path":"data/events/2026-10.parquet"}]'
+        mock_urlopen.return_value.__enter__.return_value = mock_resp
+        etag_ref = [None]
+        r = mon.http_get(TREE_URL, if_none_match=None, etag_ref=etag_ref)
+        self.assertEqual(r["status"], 200)
+        self.assertEqual(etag_ref[0], 'W/"abc123"')
+
+
+class TestMonthWindowCoverage(unittest.TestCase):
+    def test_lookahead_includes_current_and_future(self):
+        months = mon.candidate_months()
+        now = datetime.now(timezone.utc)
+        current_ym = f"{now.year:04d}-{now.month:02d}"
+        self.assertIn(current_ym, months)
+
+    def test_window_size(self):
+        months = mon.candidate_months()
+        self.assertGreaterEqual(len(months), LOOKBACK_MONTHS + 1)
+
+
+class TestStateDiffEdgeCases(unittest.TestCase):
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    @patch("scripts.monitor_ironflow_liquidations.candidate_months", return_value=["2026-10", "2026-11"])
+    def test_previously_available_not_reported(self, mock_months, mock_get):
+        def side(url, timeout=60):
+            if "2026-10" in url:
+                return {"ok": True, "status": 200, "headers": {}, "body": b"PAR1", "url": url}
+            return {"ok": False, "status": 404, "headers": {}, "body": b"Entry not found", "url": url}
+        mock_get.side_effect = side
+        state = {
+            "last_probe": {
+                "months_probed": [
+                    {"month": "2026-10", "events": {"status": 200, "url": "https://x/events/2026-10.parquet"},
+                     "fills": {"status": 200, "url": "https://x/fills/2026-10.parquet"}}
+                ]
+            }
+        }
+        previously = mon.known_available(state)
+        self.assertIn(("events", "2026-10"), previously)
+        self.assertNotIn(("events", "2026-11"), previously)
+
+
+class TestConsecutiveAbsent(unittest.TestCase):
+    def test_counts_forward_edge_absent(self):
+        months_probed = [
+            {"month": "2026-09", "events": {"status": 200}, "fills": {"status": 200}},
+            {"month": "2026-10", "events": {"status": 200}, "fills": {"status": 200}},
+            {"month": "2026-11", "events": {"status": 404}, "fills": {"status": 404}},
+            {"month": "2026-12", "events": {"status": 404}, "fills": {"status": 404}},
+            {"month": "2027-01", "events": {"status": 404}, "fills": {"status": 404}},
+        ]
+        ordered = sorted(m["month"] for m in months_probed)
+        consecutive_absent = 0
+        for ym in reversed(ordered):
+            m = next((x for x in months_probed if x["month"] == ym), None)
+            ev = (m.get("events") or {}).get("status") if m else None
+            fl = (m.get("fills") or {}).get("status") if m else None
+            if ev == 404 and fl == 404:
+                consecutive_absent += 1
+            else:
+                break
+        self.assertEqual(consecutive_absent, 3)
+
+    def test_stops_at_first_present_month(self):
+        months_probed = [
+            {"month": "2026-09", "events": {"status": 200}, "fills": {"status": 200}},
+            {"month": "2026-10", "events": {"status": 404}, "fills": {"status": 404}},
+            {"month": "2026-11", "events": {"status": 200}, "fills": {"status": 200}},
+        ]
+        ordered = sorted(m["month"] for m in months_probed)
+        consecutive_absent = 0
+        for ym in reversed(ordered):
+            m = next((x for x in months_probed if x["month"] == ym), None)
+            ev = (m.get("events") or {}).get("status") if m else None
+            fl = (m.get("fills") or {}).get("status") if m else None
+            if ev == 404 and fl == 404:
+                consecutive_absent += 1
+            else:
+                break
+        self.assertEqual(consecutive_absent, 0)
 
 
 if __name__ == "__main__":

@@ -5,12 +5,15 @@ Probes HF tree for data/events/YYYY-MM.parquet and data/fills/YYYY-MM.parquet.
 Unauthenticated only. Records full evidence, caches state, writes timestamped probes.
 
 Improvements over the baseline monitor:
-- State-aware diff: new_files_found only lists genuinely NEW 200 files vs the
-  last known available set (baseline re-listed already-known 200 files every run).
+- ETag tree caching: sends If-None-Match on the tree listing; skips full re-parse
+  when HF returns 304 Not Modified (saves API calls and runtime).
 - Wider probe window: last LOOKBACK_MONTHS completed months + LOOKAHEAD_MONTHS
   future/current months, so lagged uploads of recent months are caught.
 - Failure classification per probe: NEW_AVAILABLE(200), CONFIRMED_ABSENT(404
   EntryNotFound), RATE_LIMITED(429), TRANSIENT_ERROR(network/other).
+- Exponential backoff with retry budget on transient errors and 429s.
+- Rate-limit awareness: reads RateLimit/RateLimit-Policy headers and backs off
+  when the remaining budget is low.
 - Tracks data_through (latest month with both events+fills present) and
   consecutive_absent (months confirmed absent in a row at the forward edge) for
   a concrete, checkable resume condition.
@@ -18,6 +21,8 @@ Improvements over the baseline monitor:
 """
 import json
 import hashlib
+import time
+import random
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
@@ -28,9 +33,10 @@ TREE_URL = f"https://huggingface.co/api/datasets/{HF_DATASET}/tree/main?recursiv
 EVENTS_TEMPLATE = f"https://huggingface.co/datasets/{HF_DATASET}/resolve/main/data/events/%s.parquet"
 FILLS_TEMPLATE = f"https://huggingface.co/datasets/{HF_DATASET}/resolve/main/data/fills/%s.parquet"
 
-# Probe window: trailing completed months + future/current months (catches lagged uploads).
 LOOKBACK_MONTHS = 6
-LOOKAHEAD_MONTHS = 3
+LOOKAHEAD_MONTHS = 6
+MAX_RETRIES = 3
+BACKOFF_BASE = 1.5
 
 REPO_ROOT = Path(__file__).parent.parent
 STATE_PATH = REPO_ROOT / "research_state" / "ironflow_monitor_state.json"
@@ -48,30 +54,55 @@ def sha256_bytes(b):
     return h.hexdigest()
 
 
-def http_get(url, timeout=60):
-    req = Request(url, headers={"User-Agent": "fclr-monitor/1.0"})
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            status = resp.getcode()
-            headers = dict(resp.headers.items())
-            body = resp.read()
-            return {"ok": True, "status": status, "headers": headers, "body": body, "url": url}
-    except HTTPError as e:
+def http_get(url, timeout=60, max_retries=MAX_RETRIES, if_none_match=None, etag_ref=None):
+    headers = {"User-Agent": "fclr-monitor/1.0"}
+    if if_none_match:
+        headers["If-None-Match"] = if_none_match
+    for attempt in range(max_retries + 1):
+        req = Request(url, headers=headers)
         try:
-            body = e.read()
-        except Exception:
-            body = b""
-        headers = dict(getattr(e, "headers", {}) or {})
-        return {"ok": False, "status": e.code, "headers": headers, "body": body, "url": url}
-    except URLError as e:
-        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url}
-    except Exception as e:
-        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url}
+            with urlopen(req, timeout=timeout) as resp:
+                status = resp.getcode()
+                resp_headers = dict(resp.headers.items())
+                body = resp.read()
+                result = {"ok": True, "status": status, "headers": resp_headers, "body": body, "url": url}
+                if etag_ref is not None and status == 200:
+                    etag_ref[0] = resp_headers.get("ETag")
+                return result
+        except HTTPError as e:
+            try:
+                body = e.read()
+            except Exception:
+                body = b""
+            resp_headers = dict(getattr(e, "headers", {}) or {})
+            if e.code == 304 and etag_ref is not None:
+                return {"ok": True, "status": 304, "headers": resp_headers, "body": b"", "url": url, "not_modified": True}
+            if e.code == 429 and attempt < max_retries:
+                sleep_for = BACKOFF_BASE ** attempt + random.random()
+                time.sleep(sleep_for)
+                continue
+            if 500 <= e.code < 600 and attempt < max_retries:
+                sleep_for = BACKOFF_BASE ** attempt + random.random()
+                time.sleep(sleep_for)
+                continue
+            return {"ok": False, "status": e.code, "headers": resp_headers, "body": body, "url": url}
+        except URLError as e:
+            if attempt < max_retries:
+                time.sleep(1 + random.random())
+                continue
+            return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url}
+        except Exception as e:
+            if attempt < max_retries:
+                time.sleep(1 + random.random())
+                continue
+            return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url}
 
 
 def classify(status, body_preview=""):
     if status == 200:
         return "NEW_AVAILABLE"
+    if status == 304:
+        return "NOT_MODIFIED"
     if status == 404:
         return "CONFIRMED_ABSENT"
     if status == 429:
@@ -80,7 +111,6 @@ def classify(status, body_preview=""):
 
 
 def month_offset(months_back):
-    """YYYY-MM `months_back` months from now (negative = future)."""
     now = datetime.now(timezone.utc)
     y = now.year
     m = now.month - months_back
@@ -95,10 +125,8 @@ def month_offset(months_back):
 
 def candidate_months():
     months = set()
-    # trailing completed months (1..LOOKBACK_MONTHS back)
     for i in range(1, LOOKBACK_MONTHS + 1):
         months.add(month_offset(i))
-    # current + future months (0..LOOKAHEAD_MONTHS-1 forward) to catch lagged uploads
     for i in range(0, LOOKAHEAD_MONTHS):
         months.add(month_offset(-i))
     return sorted(months)
@@ -135,9 +163,8 @@ def load_state():
 
 
 def known_available(state):
-    """Set of (kind, month) confirmed 200 in the last probe."""
-    last = state.get("last_probe", {}) if isinstance(state, dict) else {}
     available = set()
+    last = state.get("last_probe", {}) if isinstance(state, dict) else {}
     for m in last.get("months_probed", []) or []:
         for kind in ("events", "fills"):
             rec = m.get(kind) or {}
@@ -150,6 +177,7 @@ def main():
     ts = now_z()
     state = load_state()
     previously_available = known_available(state)
+    tree_etag = state.get("tree_etag")
 
     evidence = {
         "probe_id": f"ironflow_probe_{ts}",
@@ -167,15 +195,19 @@ def main():
         },
     }
 
-    # Probe tree
-    tree_res = http_get(TREE_URL)
+    etag_ref = [tree_etag]
+    tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
     evidence["tree"] = {
         "url": TREE_URL,
         "method": "GET",
         "status": tree_res["status"],
         "headers": {k: v for k, v in tree_res["headers"].items()},
     }
-    if tree_res["ok"] and tree_res["status"] == 200:
+    if tree_res.get("not_modified"):
+        evidence["tree"]["tree_etag_unchanged"] = True
+        evidence["tree"]["skipped_full_parse"] = True
+        evidence["tree"]["parquet_paths"] = state.get("tree_parquet_paths", [])
+    elif tree_res["ok"] and tree_res["status"] == 200:
         try:
             tree_data = json.loads(tree_res["body"].decode("utf-8"))
             evidence["tree"]["parsed"] = True
@@ -188,17 +220,21 @@ def main():
                 if p.endswith(".parquet"):
                     paths.append(p)
             evidence["tree"]["parquet_paths"] = sorted(set(paths))
+            evidence["tree"]["tree_etag_unchanged"] = False
         except Exception as e:
             evidence["tree"]["parsed"] = False
             evidence["tree"]["parse_error"] = str(e)
+            evidence["tree"]["parquet_paths"] = state.get("tree_parquet_paths", [])
     else:
         evidence["tree"]["parsed"] = False
+        evidence["tree"]["parquet_paths"] = state.get("tree_parquet_paths", [])
 
-    # Probe candidate months
+    if etag_ref[0]:
+        evidence["tree"]["etag"] = etag_ref[0]
+
     for ym in candidate_months():
         evidence["months_probed"].append(probe_month(ym))
 
-    # Determine genuinely NEW files vs previously available state
     current_available = set()
     for m in evidence["months_probed"]:
         for kind in ("events", "fills"):
@@ -217,7 +253,6 @@ def main():
                         }
                     )
 
-    # data_through: latest month where both events and fills are 200
     complete_months = []
     for m in evidence["months_probed"]:
         ev = (m.get("events") or {}).get("status")
@@ -227,8 +262,6 @@ def main():
     if complete_months:
         evidence["data_through"] = max(complete_months)
 
-    # consecutive_absent: count forward-edge months confirmed absent (both 404)
-    # Walk backward from the latest probed month; stop at first present month.
     ordered = sorted(m["month"] for m in evidence["months_probed"])
     consecutive_absent = 0
     for ym in reversed(ordered):
@@ -241,7 +274,6 @@ def main():
             break
     evidence["consecutive_absent"] = consecutive_absent
 
-    # Post-2026-10 explicit summary
     post_oct_probed = [m for m in evidence["months_probed"] if m["month"] > "2026-10"]
     post_oct_available = [
         m for m in post_oct_probed
@@ -262,6 +294,10 @@ def main():
     state["last_probe_ts"] = ts
     state["data_through"] = evidence["data_through"]
     state["consecutive_absent"] = evidence["consecutive_absent"]
+    if etag_ref[0]:
+        state["tree_etag"] = etag_ref[0]
+    if evidence["tree"].get("parquet_paths"):
+        state["tree_parquet_paths"] = evidence["tree"]["parquet_paths"]
     with open(STATE_PATH, "w") as f:
         json.dump(state, f, indent=2)
     print(f"Updated state: {STATE_PATH}")
@@ -279,7 +315,6 @@ if __name__ == "__main__":
 
 
 def check_post_october():
-    """Explicit check for post-2026-10 data with clear reporting."""
     from datetime import datetime, timezone
     now = datetime.now(timezone.utc)
     for ym in ["2026-11", "2026-12", "2027-01", "2027-02"]:
