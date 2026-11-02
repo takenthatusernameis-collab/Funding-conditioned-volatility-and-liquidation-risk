@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T01:18:40Z
+**TIMESTAMP (UTC):** 2026-11-02T02:06:35Z
 **INITIAL TASK (NEXT SESSION):** Execute CAMPAIGN FCLR-HEAVY-001 — Funding-conditioned liquidation-risk deepening (Track A operational hardening). Do NOT reopen H001/FCLR-003/FCLR-008/010 without triggers; treat all outcomes as hypothetical-only. Start at Step 1 below and do not stop until all steps produce artifacts + tests pass. NO confirmatory outcome inspection for sealed panels.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (name is directive). Focus first on Track A (observed liquidations, ironflow Hyperliquid) — highest concrete signal with passed gate — while keeping Track C sealed and Track B closed.
-**BRANCH/HEAD:** main @ edc55ed2
-**HANDOFF ID:** FCLR-HANDOFF-074-20261102T011840Z
-**SUPERSEDES:** FCLR-HANDOFF-073-20261102T011200Z
+**BRANCH/HEAD:** main @ a6556d87
+**HANDOFF ID:** FCLR-HANDOFF-075-20261102T020635Z
+**SUPERSEDES:** FCLR-HANDOFF-074-20261102T011840Z
 
 ## BOTTLENECKS REMOVED (this session)
 - Verified __pycache__ removed from index; .gitignore present. Working tree clean except untracked .gitignore.
