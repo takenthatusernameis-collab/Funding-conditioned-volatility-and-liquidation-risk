@@ -1,7 +1,7 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T10:47:30Z
-**HANDOFF ID:** FCLR-HANDOFF-114-20261102T104730Z
-**SUPERSEDES:** FCLR-HANDOFF-113-20261102T104435Z (and all earlier)
+**TIMESTAMP (UTC):** 2026-11-02T10:49:41Z
+**HANDOFF ID:** FCLR-HANDOFF-115-20261102T104941Z
+**SUPERSEDES:** FCLR-HANDOFF-114-20261102T104730Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name is decisive). Track A (observed liquidations) is the ONLY open confirmatory track with a passed gate. Treat liquidation risk as the default axis until Track A forward validation completes or is exhaustively blocked with irrefutable evidence.
 
@@ -9,7 +9,7 @@
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T10:47:30Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004h (HEAVY EXECUTION MANDATORY - NO PASSIVE WAITING)
+[2026-11-02T10:49:41Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004h (HEAVY EXECUTION MANDATORY - NO PASSIVE WAITING)
 
 PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA. The block is DATA AVAILABILITY ONLY. YOU MUST NOT idle, poll conversationally, or "check once and stop". YOU MUST convert this block into reusable automation, airtight evidence, AND eliminate bottlenecks.
 
@@ -47,7 +47,7 @@ MANDATORY READS FIRST (IN ORDER):
 - research_state/fclr010_leakage_audit.md
 - research_state/cross_track_decision_log.md
 - research_state/experiment_frontier.json
-- research_state/liquidation_forward_validate_004_blocker_20261102T101200Z.md (latest)
+- research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md (latest)
 - research_state/ironflow_probe_20261102T104733Z.json (freshest)
 - research_state/ironflow_monitor_state.json
 - research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json
@@ -66,7 +66,7 @@ CONSTRAINTS (NON-NEGOTIABLE):
 ```
 
 ## BOTTLENECKS REMOVED / ELIMINATED
-- **Fresh evidence established:** Monitor (20261102T104733Z) shows 2026-10 present, 2026-11 events/fills both HTTP 404. data_through=2026-10, consecutive_absent=3. Alt-hunt confirms no other admissible sources.
+- **Fresh evidence established:** Monitor (20261102T104733Z) shows 2026-10 present, 2026-11 events/fills both HTTP 404. data_through=2026-10, consecutive_absent=3. Alt-hunt confirms no other admissible sources. Complete blocker doc: `research_state/liquidation_forward_validate_004_blocker_20261102T104628Z.md`.
 - **Eliminated passive waiting:** Monitor is state-aware (only genuinely new files reported), wider window (trailing 6 months + current+3 future), failure classification (NEW_AVAILABLE/CONFIRMED_ABSENT/RATE_LIMITED/TRANSIENT_ERROR), explicit post-2026-10 summary. MUST execute both monitor + alt-hunt at session start.
 - **Automation strengthened:** `scripts/monitor_ironflow_liquidations.py` rewritten with state-aware diff, wider probe window, failure classification, data_through/consecutive_absent tracking. Tests added: `tests/test_monitor_ironflow.py`. Test suite 42/42 PASS.
 - **Forced heavy work:** Cannot finish turn without measurable progress (automation improvement, new tests, stronger evidence, or complete blocker documentation with concrete resume conditions).
