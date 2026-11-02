@@ -1,23 +1,23 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T10:49:41Z
-**HANDOFF ID:** FCLR-HANDOFF-115-20261102T104941Z
-**SUPERSEDES:** FCLR-HANDOFF-114-20261102T104730Z (and all earlier)
+**TIMESTAMP (UTC):** 2026-11-02T10:51:18Z
+**HANDOFF ID:** FCLR-HANDOFF-116-20261102T105118Z
+**SUPERSEDES:** FCLR-HANDOFF-115-20261102T104941Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name is decisive). Track A (observed liquidations) is the ONLY open confirmatory track with a passed gate. Treat liquidation risk as the default axis until Track A forward validation completes or is exhaustively blocked with irrefutable evidence.
+**REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name decisive). Track A (observed liquidations, Hyperliquid ironflow) is the ONLY open confirmatory track with a passed gate. Treat liquidation risk as the default axis until Track A forward validation completes or is exhaustively blocked with irrefutable evidence.
 
 **BRANCH/HEAD:** main @ a60a5afdb669b795cc2ab10b4bcd1eaa7df4118c
 
-**INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
+## INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP)
 ```
-[2026-11-02T10:49:41Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004h (HEAVY EXECUTION MANDATORY - NO PASSIVE WAITING)
+[2026-11-02T10:51:18Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (HEAVY EXECUTION MANDATORY - NO PASSIVE WAITING)
 
-PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA. The block is DATA AVAILABILITY ONLY. YOU MUST NOT idle, poll conversationally, or "check once and stop". YOU MUST convert this block into reusable automation, airtight evidence, AND eliminate bottlenecks.
+PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA. Block is DATA AVAILABILITY ONLY. YOU MUST NOT idle, poll conversationally, or "check once and stop". YOU MUST convert this block into reusable automation, airtight evidence, AND eliminate bottlenecks so significant progress continues.
 
 OBJECTIVE (NON-OPTIONAL, MAXIMUM HEAVY WORK - DO ALL OF THE BELOW):
 
 1) ESTABLISH FRESH EVIDENCE AT SESSION START (IDENTIFIED, MANDATORY)
-   - Run `python scripts/monitor_ironflow_liquidations.py` IMMEDIATELY. It must report state-aware diffs only (genuinely new files).
-   - Run `python scripts/hunt_alternative_liquidation_sources.py` IMMEDIATELY with fresh evidence.
+   - Run `python scripts/monitor_ironflow_liquidations.py` IMMEDIATELY. Must report state-aware diffs only (genuinely new files). Commit updated probe/state if changed.
+   - Run `python scripts/hunt_alternative_liquidation_sources.py` IMMEDIATELY with fresh evidence. Commit updated alt-hunt registry if changed.
    - Run `python -m unittest discover -s tests -v` and ensure ALL tests pass (>=42). If adding code/tests, keep green.
 
 2) MAINTAIN/USE FROZEN HARNESS (READY FOR INSTANT EXECUTION)
@@ -37,7 +37,7 @@ OBJECTIVE (NON-OPTIONAL, MAXIMUM HEAVY WORK - DO ALL OF THE BELOW):
 5) IF STILL BLOCKED AFTER EXHAUSTIVE EVIDENCE (HEAVY DOCUMENTATION + AUTOMATION)
    - If after running monitor+alt-hunt multiple times with improvements no rubric-passing post-2026-10-31 data exists: CREATE/UPDATE a COMPLETE blocker evidence doc with full probe tables (all URLs tried, status codes, headers, body previews), explicit checkable resume conditions with exact paths/patterns/URLs to watch, update `research_state/experiment_frontier.json` with concrete resume triggers, and STRENGTHEN AUTOMATION FURTHER.
    - DO NOT create infinite polling loops. DO NOT reopen sealed FCLR-001/002/003/006/007/008/009. DO NOT change `.github/workflows/*`.
-   - BUILD AUTOMATION EVEN IF BLOCKED - THIS IS MANDATORY HEAVY WORK.
+   - BUILD AUTOMATION EVEN IF BLOCKED - THIS IS MANDATORY HEAVY WORK. NEVER AVOID HEAVY WORK.
 
 MANDATORY READS FIRST (IN ORDER):
 - AGENT_HANDOFF.md (this file - read fully)
@@ -63,6 +63,7 @@ CONSTRAINTS (NON-NEGOTIABLE):
 - Raw data out of git. Commit ONLY code/manifests/reports.
 - No retry loops without new evidence. Produce automation + evidence, not "checked again, nothing".
 - Heavy work required. If nothing measurable done, you failed this session.
+- Never avoid heavy working. Build the next focus campaign that future agents cannot avoid doing heavy work.
 ```
 
 ## BOTTLENECKS REMOVED / ELIMINATED
@@ -79,12 +80,12 @@ CONSTRAINTS (NON-NEGOTIABLE):
 ## CURRENT STATUS (AUTHORITATIVE)
 - **H001 (volatility): NOT_SUPPORTED** (FCLR-003) — Track C CONFIRMATORY_CLOSED
 - **Track A (observed liquidations): OPEN** — FCLR-010 PASSED (Hyperliquid ironflow 2025-11..2026-10, 199 instruments, 5 blocks, C2 vs B1 Brier -2.21%, CI excludes zero). Overlay executed (hypothetical only).
-- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004h: BLOCKED_ON_DATA** — Fresh monitor shows 2026-10 present; 2026-11 events/fills both HTTP 404. Alt-hunt confirms no other admissible sources. Must run monitor + alt-hunt on session start, improve automation, produce heavy evidence/automation until new data appears.
+- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i: BLOCKED_ON_DATA** — Fresh monitor shows 2026-10 present; 2026-11 events/fills both HTTP 404. Alt-hunt confirms no other admissible sources. Must run monitor + alt-hunt on session start, improve automation, produce heavy evidence/automation until new data appears.
 - **Track B: CLOSED_NEGATIVE** (FCLR-H003-EXT-001). **H002: PERMANENTLY_BLOCKED** (SSRN 403). **FCLR-NEXT-002: COMPLETE_NO-GO** for new sources beyond ironflow.
 - **Sealed holds:** FCLR-001/002/003/006/007/008/009 sealed.
 
 ## NEXT FOCUS CAMPAIGN
-**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004h
+**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i
 **Priority:** CRITICAL (liquidation risk - repo name driven)
 **Effort:** HEAVY (harness + monitor + alt-hunt + pre-reg + evidence + automation improvements + tests)
 **Trigger:** Auto-detect new post-2026-10 data via monitor OR produce complete blocker evidence if none found
@@ -96,6 +97,7 @@ CONSTRAINTS (NON-NEGOTIABLE):
 
 ## HARD RULES (NON-NEGOTIABLE)
 - **Heavy or bust:** If you can finish the turn without creating/strengthening automation or tests, you haven't followed this handoff.
+- **Never avoid heavy working:** Build automation and evidence even when blocked. Future agents must be forced into heavy work.
 - **Pre-register before outcomes:** Any inspection of new forward data requires a pre-reg file created BEFORE reading label/outcome columns.
 - **Firewalls:** Hyperliquid-only for Track A. No track merging. Never conflate modeled with observed.
 - **Admissible only:** Unauthenticated sources only. No keys/paid/requester-pays.
