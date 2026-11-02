@@ -47,7 +47,7 @@ MANDATORY READS FIRST:
 - research_state/fclr010_coverage_audit.json
 - research_state/cross_track_decision_log.md
 - research_state/experiment_frontier.json
-- research_state/liquidation_forward_validate_004_blocker_20261102T061021Z.md (latest blocker)
+- research_state/liquidation_forward_validate_004_blocker_20261102T080042Z.md (latest blocker)
 - research_state/ironflow_probe_20261102T080716Z.json (fresh)
 - research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json
 - research_state/data_source_registry_alt_hunt.json
