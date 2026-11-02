@@ -271,6 +271,10 @@ class TestCheckResumeCondition(unittest.TestCase):
     @patch("scripts.monitor_ironflow_liquidations.head_probe")
     def test_trigger_fires_on_200(self, mock_head, mock_resolve):
         def head_side(url, timeout=30):
+            # HEAD 200 for the present forward-edge month (realistic: HEAD
+            # success means the file exists); 404 head_ok False elsewhere.
+            if "2026-11" in url:
+                return {"ok": True, "status": 200, "headers": {}, "body": b"", "url": url, "head_ok": True}
             return {"ok": False, "status": 404, "headers": {}, "body": b"", "url": url, "head_ok": False, "head_failed": True}
         mock_head.side_effect = head_side
         def resolve_side(url, etag_ref=None, last_modified_ref=None, timeout=60, max_retries=3):
@@ -942,6 +946,70 @@ class TestResumeSimulation(unittest.TestCase):
             new_files=[{"month": "2026-09", "kind": "events"}],
         )
         self.assertFalse(res["new_data_path"])
+
+
+class TestHead404FastPath(unittest.TestCase):
+    """HEAD-404 fast path: classify CONFIRMED_ABSENT without a GET body download."""
+
+    def _head_404(self, url, timeout=30):
+        return {"ok": False, "status": 404, "headers": {}, "body": b"", "url": url, "head_ok": False, "head_failed": True}
+
+    @patch("scripts.monitor_ironflow_liquidations.head_probe")
+    @patch("scripts.monitor_ironflow_liquidations.resolve_get")
+    def test_probe_month_head_404_skips_get(self, mock_resolve, mock_head):
+        mock_head.side_effect = self._head_404
+        res = mon.probe_month("2026-11")
+        for kind in ("events", "fills"):
+            rec = res[kind]
+            self.assertEqual(rec["classification"], "CONFIRMED_ABSENT")
+            self.assertEqual(rec["status"], 404)
+            self.assertEqual(rec["method"], "HEAD")
+            self.assertTrue(rec.get("get_skipped"))
+        mock_resolve.assert_not_called()
+
+    @patch("scripts.monitor_ironflow_liquidations.head_probe")
+    @patch("scripts.monitor_ironflow_liquidations.resolve_get")
+    def test_check_resume_condition_head_404_skips_get(self, mock_resolve, mock_head):
+        mock_head.side_effect = self._head_404
+        rc = mon.check_resume_condition({"data_through": "2026-10"})
+        self.assertFalse(rc["triggered"])
+        self.assertEqual(rc["get_requests_skipped"], 8)  # 4 months x 2 kinds
+        self.assertEqual(rc["get_requests"], 0)
+        self.assertEqual(rc["head_requests"], 8)
+        self.assertEqual(rc["bytes_downloaded"], 0)
+        for rec in rc["probes"]:
+            self.assertEqual(rec["classification"], "CONFIRMED_ABSENT")
+            self.assertTrue(rec.get("get_skipped"))
+        mock_resolve.assert_not_called()
+
+
+class TestDownloadAccounting(unittest.TestCase):
+    """Per-session request/byte accounting in the blocked-path resume check."""
+
+    def _head_200_unavailable(self, url, timeout=30):
+        # HEAD reports 200 but with no cached ETag -> falls to Last-Modified check
+        # which we miss, so resolve_get is used.
+        return {"ok": True, "status": 200, "headers": {"Last-Modified": "old"}, "body": b"", "url": url, "head_ok": True}
+
+    def _get_200_body(self, url, etag_ref=None, last_modified_ref=None, timeout=60, max_retries=3):
+        body = b"PAR1" + b"x" * 96  # 100-byte body
+        return {"ok": True, "status": 200, "headers": {}, "body": body, "url": url, "method": "GET"}
+
+    @patch("scripts.monitor_ironflow_liquidations.head_probe")
+    @patch("scripts.monitor_ironflow_liquidations.resolve_get")
+    def test_bytes_and_requests_accounted(self, mock_resolve, mock_head):
+        # cached etag present so the Last-Modified fast-path is skipped; resolve_get
+        # returns 200 -> bytes downloaded and get requests counted.
+        state = {"data_through": "2026-10", "file_cache": {"events:2026-11": {"etag": "W/\"old\""}}}
+        mock_head.side_effect = self._head_200_unavailable
+        mock_resolve.side_effect = self._get_200_body
+        rc = mon.check_resume_condition(state)
+        # All 8 forward-edge (kind,month) pairs reach resolve_get.
+        self.assertEqual(rc["get_requests"], 8)
+        self.assertEqual(rc["head_requests"], 8)
+        self.assertEqual(rc["bytes_downloaded"], 800)  # 8 x 100-byte bodies
+        self.assertEqual(rc["get_requests_skipped"], 0)
+        self.assertTrue(rc["triggered"])
 
 
 if __name__ == "__main__":

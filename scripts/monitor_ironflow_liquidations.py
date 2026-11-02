@@ -365,15 +365,23 @@ def probe_month(ym, state=None):
             "head_ok": head.get("head_ok", False),
         }
 
-        if head.get("head_ok") and head["status"] == 404:
+        head_status = head.get("status")
+        # A HEAD 404 is a definitive absence signal even when HF rejects the HEAD
+        # method (head_ok False). Classify CONFIRMED_ABSENT here and skip the
+        # wasteful full-GET body download: removes the per-session
+        # wasted-download bottleneck on the blocked forward edge. Non-404 HEAD
+        # failures (network error, 429, 5xx) stay uncertain and fall through to
+        # resolve_get for a definitive classification.
+        if head_status == 404:
             rec = {
                 "url": url,
-                "method": "GET",
+                "method": "HEAD",
                 "status": 404,
                 "headers": head["headers"],
                 "body_preview": "",
                 "classification": "CONFIRMED_ABSENT",
                 "head_probe": head_rec,
+                "get_skipped": True,
             }
             res[kind] = rec
             continue
@@ -903,6 +911,14 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
         "triggering_files": [],
         "cached_hits": 0,
         "head_probes": 0,
+        # Per-session download accounting: makes the blocked-path resume check
+        # measurable (how many GET bodies were avoided by the HEAD-404 fast
+        # path, how many bytes actually downloaded). Evidence is persisted with
+        # --quick so future sessions can compare efficiency across runs.
+        "head_requests": 0,
+        "get_requests": 0,
+        "get_requests_skipped": 0,
+        "bytes_downloaded": 0,
     }
     cache = state.get("file_cache", {})
     for ym in months:
@@ -912,8 +928,12 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
             cached = cache.get(cache_key, {})
             head = head_probe(url)
             details["head_probes"] += 1
+            details["head_requests"] += 1
             head_rec = {"kind": kind, "month": ym, "url": url, "method": "HEAD", "status": head["status"], "head_ok": head.get("head_ok", False)}
-            if head.get("head_ok") and head["status"] == 404:
+            head_status = head.get("status")
+            if head_status == 404:
+                # HEAD-404 fast path: definitive absence, no GET body download.
+                details["get_requests_skipped"] += 1
                 rec = {
                     "kind": kind,
                     "month": ym,
@@ -921,10 +941,11 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
                     "status": 404,
                     "classification": "CONFIRMED_ABSENT",
                     "head_probe": head_rec,
+                    "get_skipped": True,
                 }
                 details["probes"].append(rec)
                 continue
-            if head.get("head_ok") and head["status"] == 200 and not cached.get("etag"):
+            if head.get("head_ok") and head_status == 200 and not cached.get("etag"):
                 new_lm = head["headers"].get("Last-Modified")
                 if cached.get("last_modified") and new_lm and new_lm == cached.get("last_modified"):
                     details["cached_hits"] += 1
@@ -944,6 +965,7 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
             etag_ref = [cached.get("etag")]
             lm_ref = [cached.get("last_modified")]
             r = resolve_get(url, etag_ref=etag_ref, last_modified_ref=lm_ref, max_retries=max_retries)
+            details["get_requests"] += 1
             if r.get("not_modified"):
                 details["cached_hits"] += 1
             rec = {
@@ -956,6 +978,8 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
             }
             if r["ok"] and r["status"] == 200:
                 rec["sha256"] = sha256_bytes(r["body"])
+                rec["content_length"] = len(r["body"])
+                details["bytes_downloaded"] += rec["content_length"]
                 rec["content_length"] = len(r["body"])
                 details["triggered"] = True
                 details["triggering_files"].append(rec)
