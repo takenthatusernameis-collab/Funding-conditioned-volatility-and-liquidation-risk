@@ -29,3 +29,8 @@
 - Sealed panel verified unchanged (md5s recorded). Tests 27/27 PASS.
 - Firewall intact: Hyperliquid-only; no Binance; no H001/FCLR-003/FCLR-010 re-test; no Track label merging.
 - Resume condition: new admissible unauthenticated liquidation/funding source passing rubric OR SSRN H002 access; pre-register before outcome inspection.
+
+## 2026-11-02T01:30:00Z — FCLR-NEXT-002 COMPLETE_NO-GO
+- Executed Campaign FCLR-NEXT-002 source discovery across 8 source families. Wrote 8 artifacts: research_state/source_probe_FCLR-NEXT-002_{binance_alt_paths,bybit,okx,deribit,academic_archives,github_raw,huggingface,cryptodatadownload}.md.
+- Results: #1 Binance alt paths NO-GO (all 5 paths HTTP 404, fapi forceOrders 451). #2 Bybit NO-GO (no liquidation directory, trades only). #3 OKX NO-GO (static CDN 403, API 404). #4 Deribit NO-GO (connection failed). #5 Academic archives NO-GO (no crypto perp liquidation datasets). #6 GitHub raw NO-GO (code search 401, no census dataset). #7 Hugging Face: ironflow/hyperliquid-liquidations GO (CC BY 4.0, 185-199 symbols, 12 monthly blocks, 2025-11..2026-10, census) — ALREADY USED in FCLR-010, NOT a new source. All other HF datasets NO-GO (ochinimus exhausted, deFi/heatmap wrong type, linxy is price data not labels). #8 CryptoDataDownload NO-GO (no liquidation/futures links).
+- Conclusion: NO NEW admissible unauthenticated liquidation source beyond ironflow found. Track A remains open only via ironflow (FCLR-010 COMPLETE, gate PASSED, overlay EXECUTED). All confirmatory gates resolved. Firewall intact. Stable closeout point.

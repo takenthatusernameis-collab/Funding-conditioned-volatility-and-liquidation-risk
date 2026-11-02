@@ -1,13 +1,13 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T01:06:28Z
-**INITIAL TASK (NEXT SESSION):** Execute Campaign FCLR-NEXT-002 source discovery — run steps 1-8 unauthenticated probes across 8 source families, write one artifact per family to research_state/source_probe_FCLR-NEXT-002_<source>.md, record GO/NO-GO per rubric; update cross_track_decision_log.md; leave explicit next task. No confirmatory work resumes until a source passes the rubric.
+**TIMESTAMP (UTC):** 2026-11-02T01:30:00Z
+**INITIAL TASK (NEXT SESSION):** FCLR-NEXT-002 source discovery COMPLETE_NO-GO — all 8 source families probed (Binance alt paths, Bybit, OKX, Deribit, academic archives, GitHub raw, Hugging Face, CryptoDataDownload), 8 source_probe_FCLR-NEXT-002_*.md artifacts written, cross_track_decision_log.md updated. NO NEW admissible unauthenticated liquidation source beyond ironflow/hyperliquid-liquidations (already GO, used in FCLR-010) found. All confirmatory gates resolved. Stable closeout point — no confirmatory work resumes without a NEW admissible source passing the rubric or SSRN H002 methodology access.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive.
 **BRANCH/HEAD:** main @ 42e798cb
-**HANDOFF ID:** FCLR-HANDOFF-071-20261102T010437Z
-**SUPERSEDES:** FCLR-HANDOFF-070-20261102T010400Z (AGENT_HANDOFF.md v070: stale HEAD fb5ebec8, FCLR-LIQMICRO-003 Step 5 left PENDING despite cross_track_decision_log.md recording COMPLETE at 2026-11-02T01:04:00Z; dual-handoff/parallel-session artifacts retired here — this file is now the single source of truth).
+**HANDOFF ID:** FCLR-HANDOFF-072-20261102T013000Z
+**SUPERSEDES:** FCLR-HANDOFF-071-20261102T010437Z (AGENT_HANDOFF.md v071: FCLR-NEXT-002 not yet executed; now COMPLETE_NO-GO, no new source found).
 
-**STATUS:** Tests 27/27 PASS at HEAD 42e798cb. Working tree clean except `__pycache__` (harmless, not committed). All heavy confirmatory work is complete and artifacted; FCLR-LIQMICRO-003 closeout (Step 5) now COMPLETE. No parallel sessions remain open. Single durable handoff established.
+**STATUS:** Tests 27/27 PASS at HEAD 42e798cb. Working tree clean except `__pycache__` (harmless, not committed). All heavy confirmatory work complete and artifacted. FCLR-LIQMICRO-002 COMPLETE, FCLR-LIQMICRO-003 COMPLETE, FCLR-NEXT-002 COMPLETE_NO-GO. FCLR-010 gate PASSED (Track A), FCLR-OVERLAY-001 EXECUTED (hypothetical only). Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED), Track B CLOSED_NEGATIVE, H002 PERMANENT_BLOCK. No parallel sessions remain open. Single durable handoff established — stable closeout point.
 
 ## CAMPAIGN FCLR-LIQMICRO-002 — COMPLETE (all steps done)
 Real Hyperliquid funding integrated (9 coins x 8668 records, fundingRate.std()>0 confirmed). Degenerate zeroed-funding bug FIXED in `src/analysis/liqmicro/features.py` (now merges on symbol+hour UTC, no silent zeroing). D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs non-zero; D3 clustering_by_decile populated; BH FDR 4 significant. NO H001 reversal, NO H001 re-test opened. Artifacts: `results/liqmicro_v2/`, `research_state/evaluation_summary_FCLR-LIQMICRO-002.md`, `research_state/pre_registration_FCLR-LIQMICRO-002.md`, `research_state/liqmicro_funding_audit_002.md`.
@@ -36,27 +36,17 @@ Real Hyperliquid funding integrated (9 coins x 8668 records, fundingRate.std()>0
 - Never silently zero missing funding — drop/flag with justification.
 - Sealed artifacts unchanged; write only new `*_003*` artifacts.
 
-## NEXT FOCUS CAMPAIGN — FCLR-NEXT-002: NEW ADMISSIBLE DATA SOURCE DISCOVERY (HEAVY VERIFICATION WORK)
-**Deadline:** execute this session; do not mark complete without concrete probe artifacts per source family. This is heavy verification work, not status-only reporting. Every step produces a concrete artifact.
+## NEXT FOCUS CAMPAIGN — FCLR-NEXT-002: NEW ADMISSIBLE DATA SOURCE DISCOVERY — COMPLETE_NO-GO
+**Executed:** 2026-11-02T01:30:00Z. All 8 source families probed with concrete unauthenticated endpoints:
+1. Alternative Binance paths (liquidationSnapshot/, liquidations/, liquidationHistory/, forceLiquidation/, monthly/) — all HTTP 404; fapi forceOrders 451 → NO-GO
+2. Bybit (linear/liquidation/, spot/liquidation/, archive/linear/liquidation/) — all 404 → NO-GO
+3. OKX (static.okx.com 403, /api/v5/public/data 404) → NO-GO
+4. Deribit (historical.deribit.com connection failed) → NO-GO
+5. Academic archives (Zenodo/OSF/arXiv) — no crypto perp liquidation datasets → NO-GO
+6. GitHub raw (code search 401, no census dataset) → NO-GO
+7. Hugging Face — ironflow/hyperliquid-liquidations GO (CC BY 4.0, 185-199 symbols, 12 monthly blocks 2025-11..2026-10, census) — ALREADY USED in FCLR-010, NOT new. All others NO-GO (ochinimus exhausted, DeFi/heatmap wrong type, linxy is price not labels)
+8. CryptoDataDownload — no liquidation/futures links → NO-GO
+**Conclusion:** NO NEW admissible unauthenticated liquidation source beyond ironflow found. Track A open only via ironflow (FCLR-010 COMPLETE, gate PASSED, overlay EXECUTED). All confirmatory gates resolved. Stable closeout point.
 
-Resume condition (RESEARCH_PROMPT §16): confirmatory program remains BLOCKED until a NEW admissible unauthenticated liquidation/funding source passes the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK) OR SSRN H002 methodology becomes accessible. Until then, no further confirmatory cell exists. The heavy work now is systematic source discovery across materially distinct source families/methods — repeating the same failed endpoint is NOT a distinct route.
-
-Run in strict order:
-1. `git log --oneline -1 && git status --short && python -m unittest discover -s tests -v` → must remain 27/27 PASS; tree clean except `__pycache__`.
-2. For each candidate source family below, execute one unauthenticated probe (bounded download, exponential backoff, max retry budget, honor rate limits). Record: exact URL/endpoint, access date, test method, no-auth result (HTTP 200 / 404 / 451 / etc.), license/terms, fields, earliest/latest timestamp, observed cadence, symbol/venue coverage, known gaps, file hashes or ETags where feasible, rejection reason if inadmissible. Write one artifact per source family to `research_state/source_probe_FCLR-NEXT-002_<source>.md`.
-   - **#1 Alternative Binance paths:** `data.binance.vision` — liquidationHistory/, liquidations/, forceLiquidation/, monthly/ (beyond the 404 liquidationSnapshot already ruled out).
-   - **#2 Bybit:** public archive/linear/liquidation/ trading/liquidation/ locations.
-   - **#3 OKX:** public data endpoints, static.okx.com CDN historical liquidation/klines.
-   - **#4 Deribit:** historical.deribit.com/ historical perp data.
-   - **#5 Academic/institutional archives:** Zenodo, OSF, arXiv supplements (dataset files, unauthenticated GET).
-   - **#6 GitHub raw:** public repos containing CSV/Parquet liquidation or perp mark-price data (raw content, unauthenticated).
-   - **#7 Hugging Face datasets:** unauthenticated HF API search + download for liquidation/perp datasets.
-   - **#8 CryptoDataDownload / other venue-native archives:** all products, unauthenticated downloads.
-3. Acceptance per source: GO only if concrete download path confirmed (HTTP 200, no key/account) AND coverage >=5 symbols AND >=3 non-overlapping 30-day blocks AND documented completeness (census vs sample characterized) AND license OK AND no sealed-hold reuse.
-4. If ANY source reaches GO: pre-register a NEW experiment ID (`FCLR-NEXT-XXX`) BEFORE inspecting outcomes; then execute the frozen protocol on that source. Document pre-registration in `research_state/pre_registration_FCLR-NEXT-*.md`; update `experiment_frontier.json`; do not inspect label-outcome relationships before split freeze.
-5. If ALL routes exhausted: document a structural blocker with evidence per route in `research_state/liquidation_source_campaign.md` and `research_state/track_a_final_block_proof.md`; update `experiment_frontier.json` blocked_cells; leave this handoff as the stable closeout point. Do NOT write another blocker memo and wait if a valid bounded free-data/diagnostic task remains — execute it.
-6. Update `research_state/cross_track_decision_log.md` with probe outcomes + firewall compliance + resume condition.
-7. Leave explicit next task in this file (below).
-
-## SINGLE HIGHEST-VALUE NEXT TASK (after source discovery)
-None within current admissible data — all confirmatory gates resolved. Resume only on: (a) new admissible unauthenticated liquidation/funding source passing the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK), or (b) SSRN H002 methodology becoming accessible. In either case: pre-register a new experiment ID BEFORE outcome inspection, then execute. Until then, this handoff is the stable closeout point.
+## SINGLE HIGHEST-VALUE NEXT TASK (after FCLR-NEXT-002)
+None within current admissible data — all confirmatory gates resolved. Resume only on: (a) new admissible unauthenticated liquidation/funding source passing the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK), or (b) SSRN H002 methodology becoming accessible. In either case: pre-register a new experiment ID BEFORE outcome inspection, then execute. Until then, this handoff is the stable closeout point. No further source discovery, no confirmatory re-test, no track merging, no workflow changes.
