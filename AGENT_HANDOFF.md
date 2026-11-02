@@ -5,7 +5,7 @@
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Liquidation risk > funding-conditioned volatility (repo name). Track A (observed liquidations) is OPEN via Hyperliquid ironflow census — FCLR-010 gate PASSED, overlay EXECUTED (hypothetical only). Data hunt FCLR-NEXT-002 COMPLETE_NO-GO (all 8 source families probed, no NEW admissible unauthenticated source beyond ironflow). Do NOT reopen sealed negative experiments without a concrete new data source meeting pre-registration requirements.
 
-**BRANCH/HEAD:** main @ 0d1398f0766686bf6ef2e5df5e15e70f608979cd
+**BRANCH/HEAD:** main @ 4eb23f80cf3083d4391393da2cae5d249f1bfff3
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
