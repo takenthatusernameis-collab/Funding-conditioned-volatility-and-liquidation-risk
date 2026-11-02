@@ -1,54 +1,57 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T04:06:00Z
-**HANDOFF ID:** FCLR-HANDOFF-084-20261102T040600Z
-**SUPERSEDES:** FCLR-HANDOFF-083-20261102T032403Z
+**TIMESTAMP (UTC):** 2026-11-02T04:15:01Z
+**HANDOFF ID:** FCLR-HANDOFF-085-20261102T041501Z
+**SUPERSEDES:** FCLR-HANDOFF-084-20261102T040600Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (repo name is directive). Primary objective remains proving incremental value of funding/price features for volatility stress OR liquidation risk.
-
-**INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY):**
-```
-[2026-11-02T04:06:00Z] FOCUS CAMPAIGN: DATA_HUNT_LIQUIDATIONS_HEAVY-001
-OBJECTIVE (non-optional): Find NEW admissible unauthenticated liquidation/funding data that can reopen Track A. Do NOT re-open sealed experiments (FCLR-010/OVERLAY) or H001/H003.
-HEAVY WORK REQUIRED (cannot be avoided):
-1. SCAN all admissible public sources per protocol §5: Binance public-data repo paths/archives, public unauthenticated exchange APIs (historical funding/mark/index/klines), public GitHub/Zenodo/HF/institutional archives with no auth/signup/payment.
-2. For EACH candidate: record exact URL/endpoint, access date, test method, no-auth result, license/terms, fields, earliest/latest, cadence, symbols/venue, gaps, hashes/ETags, revision limits, rejection reason. Write to research_state/data_discovery_scan_YYYYMMDDTHHMMSSZ.md with evidence.
-3. APPLY GO RUBRIC strictly: >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness (listing/delisting), license OK, historical (not live-only), no signed request/account required, no requester-pays.
-4. IF ANY GO: pre-register experiment ID BEFORE outcome inspection, freeze splits with frozen_before_outcomes=true, create protocol delta, run minimal viable ingestion/tests, update handoff.
-5. IF NO GO after exhausting all candidates with concrete tests: write evidence-based NO-GO with tested endpoints/archives/commits, update experiment_frontier.json, STOP. Do not create blocker memos to "wait" - produce test evidence or stop.
-CONSTRAINTS: only admissible unauthenticated sources. Never merge Track A/B/C. Never promote modeled breaches to observed. Never touch .github/workflows. All tests must pass.
-```
+**REPO PRIORITIZATION (INFERRED):** Liquidation risk > funding-conditioned volatility. Repo name is directive — liquidation data gap is the binding blocker. Primary objective: find NEW admissible unauthenticated liquidation/funding data to reopen Track A; do NOT reopen sealed negative experiments without a concrete new data source meeting pre-registration requirements.
 
 **BRANCH/HEAD:** main @ a03d9a63ea2b828f1c0c30c76ca3ff83ef6e4c87
 
-## BOTTLENECKS REMOVED
-- Integrity placeholders in FCLR-HEAVY-001 fixed (all 6 files timestamped 2026-11-02T03:21:57Z). Sealed artifacts verified unchanged.
-- Campaign completed; no open loops.
+**INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
+```
+[2026-11-02T04:15:01Z] FOCUS CAMPAIGN: LIQUIDATION_DATA_HUNT_HEAVY-002 (NO FREE LUNCH)
+PRIORITY: CRITICAL - ONLY PATH TO CONFIRMATORY TRACK A. REPO NAME DEMANDS LIQUIDATION RISK FOCUS.
 
-## STATUS
-- Track A (FCLR-010): PASSED (Hyperliquid ironflow). Overlay hypothetical only. Sealed.
-- FCLR-HEAVY-001: COMPLETE (6/6). Hypothetical only.
-- Track C/H001: NOT_SUPPORTED (closed). Track B/H003: CLOSED_NEGATIVE. H002: PERMANENT BLOCK (403).
-- FCLR-NEXT-002: COMPLETE_NO-GO. No admissible unauthenticated liquidation source found to date.
+OBJECTIVE (NON-OPTIONAL, HEAVY WORK REQUIRED):
+Find ANY admissible unauthenticated liquidation/funding dataset that satisfies GO criteria. Do NOT re-examine sealed tracks FCLR-010/OVERLAY, H001/H003. Do NOT tune on sealed holds. If no GO after exhaustive evidence, produce complete NO-GO and STOP cleanly.
+
+MANDATORY EXECUTION STEPS (DO ALL):
+1. READ FIRST: AGENT_HANDOFF.md, RESEARCH_PROMPT.md §5, research_state/liquidation_source_campaign.md, research_state/final_confirmatory_verdict.md, research_state/experiment_frontier.json. Treat as authoritative.
+2. SYSTEMATIC SCAN (exhaustive, evidence-based): Test ALL of the following with concrete HTTP/download attempts where feasible:
+   - Binance public-data (https://github.com/binance/binance-public-data) - look for liquidation/forceOrder/liquidationSnapshot under futures/um/daily/, also check data.binance.vision paths; test small ranges 2023-2024.
+   - Public unauthenticated exchange archives/APIs: Bybit, OKX, Deribit, Bitget, Gate.io, KuCoin, HTX (Huobi) - check bulk historical liquidation data availability without auth/signup/payment. Explicitly reject any requiring signed requests/keys.
+   - Academic/archival: Zenodo, OSF, arXiv, Figshare, ICPSR - search for "perpetual liquidation" "funding rate" datasets (2023-2025). No-auth download required.
+   - Code/data repos: GitHub raw (search via web/public index), HuggingFace datasets (filter by license, no-auth), Kaggle (reject if requires login/payment).
+   - Other: CryptoQuant public pages? Glassnode? Reject if payment/auth. Check if any venue has unauthenticated liquidation history.
+3. EVIDENCE PER CANDIDATE (write to research_state/liquidation_hunt_002_YYYYMMDDTHHMMSSZ.md): exact URL/endpoint, access_date (UTC), test_method (curl/wget/python), HTTP status/headers/ETags/hashes, no-auth result (Y/N), license/terms, fields/schema, earliest/latest timestamps, cadence, symbols/venue/contract type, listing/delisting/completeness, gaps, file sizes/revisions, rejection reason. NO VAGUE "NOT FOUND".
+4. GO RUBRIC (STRICT): >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness (listing/delisting), license allows research use, historical (not live-only), no signed request/account required, no requester-pays. ALL must hold.
+5. IF ANY GO: pre-register experiment ID BEFORE inspecting any outcomes, freeze splits with frozen_before_outcomes=true, create research_state/experiment_prereg_<ID>.json + protocol delta, implement minimal ingestion outside .github/workflows with tests, update AGENT_HANDOFF.md. DO NOT SKIP PRE-REG.
+6. IF NO GO AFTER EXHAUSTING ALL CANDIDATES WITH CONCRETE TEST EVIDENCE: write research_state/liquidation_hunt_002_nogo_YYYYMMDDTHHMMSSZ.md with full per-candidate evidence table, update experiment_frontier.json to reflect NO-GO with evidence, STOP CLEANLY. NO "waiting", NO retry loops without new evidence.
+
+CONSTRAINTS: Only admissible unauthenticated sources. Never merge Track A/B/C. Never promote modeled breaches to observed liquidations. Never touch .github/workflows. Tests must pass. Keep raw data out of git. Commit only code/manifests/reports.
+```
+
+## BOTTLENECKS REMOVED
+- Consolidated to single durable handoff (this file). No duplicate handoff files.
+- All sealed artifacts verified intact (FCLR-HEAVY-001 integrity OK). No reopening of closed negative tracks.
+- Tests: `python -m unittest discover -s tests -v` passes (27/27).
+- No workflow modifications. No redundant controllers/schedulers added.
+
+## CURRENT STATUS (AUTHORITATIVE)
+- **H001 (volatility forecasting): NOT_SUPPORTED** (FCLR-003) — forecast gate failed. No risk overlay eligible.
+- **Track A (observed liquidations): BLOCKED** for 2024 confirmatory window. Only exploratory 2026 HF data exists (FCLR-005) — insufficient blocks. No new admissible source found to date (FCLR-NEXT-001/002).
+- **Track B (hypothetical boundary breach): CLOSED_NEGATIVE/INCONCLUSIVE** (FCLR-H003). No incremental skill.
+- **H002 (paper replication): BLOCKED** (403, methodology/data not independently accessible).
+- **Data exhaustion:** 2024 fully committed; 2025 limited (2 symbols); 2026 partial. No unsealed confirmatory window on existing data.
 
 ## NEXT FOCUS CAMPAIGN (HEAVY WORK - CANNOT AVOID)
-**Campaign ID:** DATA_HUNT_LIQUIDATIONS_HEAVY-001
-**Priority:** CRITICAL (only route to new confirmatory work).
-**Effort:** Heavy (systematic scan + evidence).
-**Success criterion:** Either (a) GO candidate found with full evidence + pre-registered experiment ready to run, or (b) complete evidence NO-GO across all tested admissible sources.
+**Campaign ID:** LIQUIDATION_DATA_HUNT_HEAVY-002
+**Priority:** CRITICAL
+**Effort:** Heavy (systematic exhaustive scan + concrete evidence)
+**Success Criterion:** Either (a) GO candidate with full evidence + pre-registered experiment ready, or (b) complete evidence-based NO-GO across ALL tested admissible sources.
 
-**Targets to test (concrete):**
-- Binance public-data: check fundingRate/klines/markPriceKlines/indexPriceKlines/premiumIndexKlines/liquidation? (look for any liquidation directories/files historically) across 2019-2024 for USDⓈ-M; test small date ranges.
-- Public APIs: Bybit/OKX/Deribit historical funding/mark/index (unauthenticated) - check depth/gaps; explicitly reject auth-required.
-- Archives: CoinAPI public samples? No. Check GitHub repos mentioning "liquidation" + "perpetual" with downloadable CSV/JSON (unauthenticated). Check Zenodo/HF for liquidation datasets (filter no-auth/download).
-- Hyperliquid: we already used ironflow (admissible). Check if newer blocks exist? Only if unauthenticated and complete.
-
-**Deliverables required:**
-- `research_state/data_discovery_scan_20261102T032403Z.md` (per-candidate evidence table)
-- If GO: `research_state/experiment_prereg_<ID>.json` + protocol delta + ingestion test passing
-- If NO-GO: `research_state/data_discovery_nogo_20261102T032403Z.md` with full evidence
-
-## HARD CONSTRAINTS
-- NO Binance merge. NO reopening sealed tracks without trigger+pre-reg+split freeze.
-- Tests must pass (27/27). NO changes to `.github/workflows/`.
-- Only unauthenticated admissible sources. Modeled != observed.
-- If no new admissible data: STOP. No "waiting for data" loops.
+**HARD RULES:**
+- Heavy work only. Superficial link checks insufficient — must attempt actual access/downloads where possible with evidence.
+- If blocked by geo/rate limits, document with headers/status and move to next candidate (do not retry endlessly).
+- Never fabricate data/sources.
+- If no new admissible data exists after exhaustive search with evidence, STOP. No blocking/waiting loops.
