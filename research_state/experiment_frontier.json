@@ -156,15 +156,25 @@
         "modules": "src/analysis/liqmicro/"
       }
     },
-    {
+{
       "id": "FCLR-LIQMICRO-003",
       "track": "D_liquidation_microstructure",
-      "status": "IN_PROGRESS",
+      "status": "COMPLETE",
       "gate": "N/A (audit/robustness)",
-      "summary": "Adversarial leakage/quality audit + robustness sensitivity on FCLR-LIQMICRO-002 panel. Leakage audit PASS (no look-ahead, correct trailing windows, funding merge fixed). Robustness: sparse funding_abs (median 0, 80% zero funding_sign) explains D3 binning; D1 numerical issues; D2 marginal interactions. No leakage found; no H001 re-test opened.",
+      "summary": "Adversarial leakage/quality audit + robustness sensitivity on FCLR-LIQMICRO-002 panel. Leakage audit PASS (no look-ahead, correct trailing windows, funding merge fixed without zeroing, UTC alignment, no censoring-as-negatives). Robustness: sparse funding_abs (median 0, 80% zero funding_sign) explains D3 binning; D1 numerical issues (multicollinearity, coef ~1e20, p~1.0); D2 marginal interactions (p 0.051/0.064). No leakage found; no H001 re-test opened. Closeout complete 2026-11-02T00:13:00Z.",
       "artifacts": {
         "leakage_audit": "research_state/leakage_audit_liqmicro_002.md",
         "robustness": "research_state/robustness_liqmicro_002.md"
+      },
+      "sealed_panel_integrity": {
+        "verified_at": "2026-11-02T00:13:00Z",
+        "md5": {
+          "panel_liqmicro_v2.csv": "549f89e3884ce0e275ebb1e4454c4ee9",
+          "panel_liqmicro_v2.parquet": "ea0287f5d5692e9f01ded3268317a3b0",
+          "descriptive_stats_v2.csv": "8d96c2b9ac866f85ec3970485c4e291c"
+        },
+        "mtimes": "2026-11-02T00:05 (FCLR-LIQMICRO-002 write time)",
+        "verdict": "UNCHANGED — no rewrites, no new *_003* outputs written to results/liqmicro_v2/"
       }
     },
     {
