@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T13:56:06Z
+**TIMESTAMP:** 2026-11-02T14:04:05Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk (Track A liquidation risk PRIORITIZED)
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (CONTINUATION - FORCE HEAVY WORK)
 **SESSION GOAL FOR NEXT AGENT:** Execute with ZERO coasting. Data is blocked (ironflow through 2026-10 only). Your first action is to eliminate bottlenecks in detection/automation, harden tests, and produce irrefutable evidence. If ANY post-2026-10 ironflow data appears at any point, you MUST pre-register BEFORE inspecting outcomes and run the frozen FCLR-010 harness immediately.
@@ -80,7 +80,7 @@ Update this `AGENT_HANDOFF.md` with a new timestamp and a crisp "NEXT AGENT INIT
 10. `scripts/monitor_ironflow_liquidations.py` and `scripts/hunt_alternative_liquidation_sources.py`
 
 ## NEXT AGENT INITIAL TASK (CLEAR, TIMESTAMPED)
-**START NOW (2026-11-02T13:54:12Z):** Check evidence via `scripts/monitor_ironflow_liquidations.py --quick`. If none (expected per latest probe), execute A-E above with full rigor. Your deliverables at session end: (1) improved monitor/hunt automation, (2) new/extended tests all passing, (3) fresh blocker doc with complete probe tables, (4) updated frontier with precise resume triggers, (5) updated AGENT_HANDOFF.md with new timestamp and checked heavy-work list, (6) summary of measurable changes. Do not end until all checked. If new data appears, drop everything and run the new-data path.
+**START NOW (2026-11-02T14:04:05Z):** Check evidence via `scripts/monitor_ironflow_liquidations.py --quick`. If none (expected per latest probe), execute A-E above with full rigor. Your deliverables at session end: (1) improved monitor/hunt automation, (2) new/extended tests all passing, (3) fresh blocker doc with complete probe tables, (4) updated frontier with precise resume triggers, (5) updated AGENT_HANDOFF.md with new timestamp and checked heavy-work list, (6) summary of measurable changes. Do not end until all checked. If new data appears, drop everything and run the new-data path.
 
 **RESUME CONDITION (CONCRETE):** Ironflow publishes `data/events/YYYY-MM.parquet` and/or `data/fills/YYYY-MM.parquet` for any month >= 2026-11 with HTTP 200 on unauthenticated GET (verified via `scripts/monitor_ironflow_liquidations.py --quick`), OR a NEW admissible unauthenticated source passes strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, unauthenticated only, schema compatible with frozen FCLR-010). Hyperliquid-only for Track A.
 

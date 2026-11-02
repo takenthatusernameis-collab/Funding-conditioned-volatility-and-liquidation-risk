@@ -265,13 +265,17 @@ class TestCheckResumeCondition(unittest.TestCase):
         self.assertEqual(rc["triggering_files"], [])
         self.assertEqual(len(rc["probes"]), 2 * len(rc["months_probed"]))
 
-    @patch("scripts.monitor_ironflow_liquidations.http_get")
-    def test_trigger_fires_on_200(self, mock_get):
-        def side(url, timeout=60, max_retries=3, **kw):
+    @patch("scripts.monitor_ironflow_liquidations.resolve_get")
+    @patch("scripts.monitor_ironflow_liquidations.head_probe")
+    def test_trigger_fires_on_200(self, mock_head, mock_resolve):
+        def head_side(url, timeout=30):
+            return {"ok": False, "status": 404, "headers": {}, "body": b"", "url": url, "head_ok": False, "head_failed": True}
+        mock_head.side_effect = head_side
+        def resolve_side(url, etag_ref=None, last_modified_ref=None, timeout=60, max_retries=3):
             if "2026-11" in url:
-                return {"ok": True, "status": 200, "headers": {}, "body": b"PAR1", "url": url}
-            return {"ok": False, "status": 404, "headers": {}, "body": b"Entry not found", "url": url}
-        mock_get.side_effect = side
+                return {"ok": True, "status": 200, "headers": {}, "body": b"PAR1", "url": url, "method": "GET"}
+            return {"ok": False, "status": 404, "headers": {}, "body": b"Entry not found", "url": url, "method": "GET"}
+        mock_resolve.side_effect = resolve_side
         rc = mon.check_resume_condition({"data_through": "2026-10"})
         self.assertTrue(rc["triggered"])
         self.assertEqual(len(rc["triggering_files"]), 2)  # events + fills
@@ -304,9 +308,11 @@ class TestNewUtilities(unittest.TestCase):
 
 
 class TestQuickPath(unittest.TestCase):
-    @patch("scripts.monitor_ironflow_liquidations.http_get")
-    def test_check_resume_condition_structure(self, mock_get):
-        mock_get.return_value = {"ok": False, "status": 404, "headers": {}, "body": b"", "url": "x"}
+    @patch("scripts.monitor_ironflow_liquidations.resolve_get")
+    @patch("scripts.monitor_ironflow_liquidations.head_probe")
+    def test_check_resume_condition_structure(self, mock_head, mock_resolve):
+        mock_head.return_value = {"ok": False, "status": 404, "headers": {}, "body": b"", "url": "x", "head_ok": False, "head_failed": True}
+        mock_resolve.return_value = {"ok": False, "status": 404, "headers": {}, "body": b"", "url": "x", "method": "GET"}
         rc = mon.check_resume_condition({"data_through": "2026-10"})
         self.assertIn("triggered", rc)
         self.assertIn("triggering_files", rc)
