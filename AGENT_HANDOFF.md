@@ -1,17 +1,17 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T06:07:51Z
-**HANDOFF ID:** FCLR-HANDOFF-099-20261102T060751Z
-**SUPERSEDES:** FCLR-HANDOFF-098-20261102T060700Z
+**TIMESTAMP (UTC):** 2026-11-02T06:53:53Z
+**HANDOFF ID:** FCLR-HANDOFF-100-20261102T065353Z
+**SUPERSEDES:** FCLR-HANDOFF-099-20261102T060751Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name). Track A (observed liquidations) is the only open confirmatory track. Treat liquidation risk as the default axis of work until Track A is resolved or exhaustively blocked with irrefutable evidence.
 
-**BRANCH/HEAD:** main @ a35e82f0ded50badbc8248bd721b3f6cc8b7a0c3
+**BRANCH/HEAD:** main @ 06ce166e42e05317a8e240b6bb6e9e8027cc3fa7
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T06:07:51Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
+[2026-11-02T06:53:53Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
 
-PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet confirmed as of latest probe). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". YOU MUST convert this block into reusable automation and airtight evidence.
+PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet confirmed as of latest probe 20261102T061021Z). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". YOU MUST convert this block into reusable automation and airtight evidence.
 
 OBJECTIVE (NON-OPTIONAL, HEAVY WORK - DO ALL OF THE BELOW):
 1) MAINTAIN/USE FROZEN HARNESS
@@ -43,7 +43,7 @@ MANDATORY READS FIRST:
 - research_state/fclr010_coverage_audit.json
 - research_state/cross_track_decision_log.md
 - research_state/experiment_frontier.json
-- research_state/liquidation_forward_validate_004_blocker_20261102T050600Z.md
+- research_state/liquidation_forward_validate_004_blocker_20261102T061021Z.md (latest blocker)
 - research_state/ironflow_probe_*.json (latest)
 - research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json
 
@@ -63,15 +63,15 @@ CONSTRAINTS (NON-NEGOTIABLE):
 - **Forced heavy work:** Cannot satisfy campaign by a single probe; must produce timestamped evidence files and, if blocked, a complete blocker doc + frontier resume condition.
 - **Discovery-driven:** Monitor operational with state + timestamped evidence (`ironflow_monitor_state.json`, `ironflow_probe_*.json`).
 - **Pre-registration ready:** Template created before outcomes; pre-reg required BEFORE any outcome inspection.
-- **Single source of truth:** This file supersedes all prior handoffs (FCLR-HANDOFF-098 and earlier).
+- **Single source of truth:** This file supersedes all prior handoffs (FCLR-HANDOFF-099 and earlier).
 - **Preserved seals:** All sealed artifacts intact. No reopening of closed tracks.
-- **Clean execution posture:** Tests passing (31/31 at HEAD a35e82f0), firewall intact, raw data excluded from git.
-- **HEAD sync:** Handoff HEAD synced to actual git HEAD a35e82f0 (was stale at e478ab8a); working-tree pyc noise excluded from commits.
+- **Clean execution posture:** Tests passing (31/31 at HEAD 06ce166e), firewall intact, raw data excluded from git.
+- **HEAD sync:** Handoff HEAD synced to actual git HEAD 06ce166e (was stale at a35e82f0 in FCLR-HANDOFF-099); working-tree pyc noise excluded from commits.
 
 ## CURRENT STATUS (AUTHORITATIVE)
 - **H001 (volatility): NOT_SUPPORTED** (FCLR-003) — Track C CONFIRMATORY_CLOSED
 - **Track A (observed liquidations): OPEN** — FCLR-010 PASSED (Hyperliquid ironflow 2025-11..2026-10, 199 instruments, 5 blocks, C2 vs B1 Brier -2.21%, CI excludes zero). Overlay executed (hypothetical only).
-- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d: BLOCKED_ON_DATA** — Latest monitor probe shows 2026-10 present; no 2026-11 events/fills 200 yet as of probe (2026-11 events/fills both HTTP 404 EntryNotFound). Must run monitor + alt-hunt on session start.
+- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d: BLOCKED_ON_DATA** — Latest monitor probe (20261102T061021Z) shows 2026-10 present; no 2026-11 events/fills 200 yet (2026-11 events/fills both HTTP 404 EntryNotFound; 2026-12 and 2027-01 also 404). Must run monitor + alt-hunt on session start.
 - **Track B: CLOSED_NEGATIVE** (FCLR-H003-EXT-001). **H002: PERMANENTLY_BLOCKED** (SSRN 403). **FCLR-NEXT-002: COMPLETE_NO-GO** for new sources beyond ironflow (must re-probe with fresh evidence per step 3).
 - **Sealed holds:** FCLR-001/002/003/006/007/008/009 sealed.
 
