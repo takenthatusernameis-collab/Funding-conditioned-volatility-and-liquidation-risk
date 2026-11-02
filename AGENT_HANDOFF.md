@@ -1,7 +1,7 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T05:55:30Z
-**HANDOFF ID:** FCLR-HANDOFF-096-20261102T055530Z
-**SUPERSEDES:** FCLR-HANDOFF-095-20261102T055405Z
+**TIMESTAMP (UTC):** 2026-11-02T05:57:15Z
+**HANDOFF ID:** FCLR-HANDOFF-097-20261102T055715Z
+**SUPERSEDES:** FCLR-HANDOFF-096-20261102T055530Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name). Track A (observed liquidations) is the only open confirmatory track. Treat liquidation risk as the default axis of work until Track A is resolved or exhaustively blocked with irrefutable evidence.
 
@@ -9,9 +9,9 @@
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T05:55:30Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_MONITOR_AUTOMATE_HEAVY-004c (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
+[2026-11-02T05:57:15Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_MONITOR_AUTOMATE_HEAVY-004d (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
 
-PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet as of 2026-11-02T05:54Z). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". You MUST convert this block into reusable automation and airtight evidence.
+PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet as of 2026-11-02T05:57Z). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". YOU MUST convert this block into reusable automation and airtight evidence.
 
 OBJECTIVE (NON-OPTIONAL, HEAVY WORK - DO ALL OF THE BELOW):
 1) FREEZE & HARDEN THE VALIDATION HARNESS (HEAVY, CODE + TESTS)
@@ -31,7 +31,7 @@ OBJECTIVE (NON-OPTIONAL, HEAVY WORK - DO ALL OF THE BELOW):
    - Re-probe ALL admissible unauthenticated families per RESEARCH_PROMPT §5 with concrete HTTP evidence (tree/listings/resolve). Do not rely on memory from prior probes.
    - Explicitly re-check: Hyperliquid public APIs/archives, other venues, GitHub raw search with evidence, HuggingFace other datasets, Zenodo/OSF/arXiv, CryptoDataDownload.
    - For each candidate produce a strict GO/NO-GO against rubric: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness, license OK, unauthenticated access confirmed, no requester-pays, schema compatible with frozen FCLR-010.
-   - Update `research_state/data_source_registry.json` with per-candidate evidence tables. Do NOT merge Track A with B or C. Never promote modeled breaches to observed liquidations.
+   - Update `research_state/data_source_registry.json` with per-candidate evidence tables. DO NOT merge Track A with B or C. Never promote modeled breaches to observed liquidations.
 
 4) PRE-REGISTER & VALIDATE ON DISCOVERY (HEAVY, DISCIPLINED)
    - If monitor finds new post-2026-10-31 files OR you find a rubric-passing source: CREATE `research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.json` BEFORE inspecting outcomes. Freeze protocol (splits from manifest, primary contrast C2 vs B1 on Brier, block-bootstrap >=2000 reps, multiplicity).
@@ -75,12 +75,12 @@ CONSTRAINTS (NON-NEGOTIABLE):
 ## CURRENT STATUS (AUTHORITATIVE)
 - **H001 (volatility): NOT_SUPPORTED** (FCLR-003) — Track C CONFIRMATORY_CLOSED
 - **Track A (observed liquidations): OPEN** — FCLR-010 PASSED (Hyperliquid ironflow 2025-11..2026-10, 199 instruments, 5 blocks, C2 vs B1 Brier -2.21%, CI excludes zero). Overlay executed (hypothetical only).
-- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004c: BLOCKED_ON_DATA** — No 2026-11+ ironflow parquet as of 2026-11-02T05:54Z. Must build harness + monitor + alt-hunt NOW.
+- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d: BLOCKED_ON_DATA** — No 2026-11+ ironflow parquet as of 2026-11-02T05:57Z. Must build harness + monitor + alt-hunt NOW.
 - **Track B: CLOSED_NEGATIVE** (FCLR-H003-EXT-001). **H002: PERMANENTLY_BLOCKED** (SSRN 403). **FCLR-NEXT-002: COMPLETE_NO-GO** for new sources beyond ironflow (must re-probe with fresh evidence per step 3).
 - **Sealed holds:** FCLR-001/002/003/006/007/008/009 sealed.
 
 ## NEXT FOCUS CAMPAIGN
-**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004c
+**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d
 **Priority:** CRITICAL (liquidation risk)
 **Effort:** HEAVY (harness hardening + CLI + tests + ironflow monitor + exhaustive alt-source hunt + pre-reg ready)
 **Trigger:** Auto-detect new post-2026-10 data via monitor OR produce complete blocker evidence if none found.
