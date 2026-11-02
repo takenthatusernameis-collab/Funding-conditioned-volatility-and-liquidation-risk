@@ -159,3 +159,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def check_post_october():
+    """Explicit check for post-2026-10 data with clear reporting."""
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    # Check Nov 2026 onwards
+    for ym in ["2026-11", "2026-12", "2027-01", "2027-02"]:
+        res_e = http_get(EVENTS_TEMPLATE % ym)
+        res_f = http_get(FILLS_TEMPLATE % ym)
+        print(f"POST-CHECK {ym}: events={res_e['status']} fills={res_f['status']}")
+        if res_e['status'] == 200 or res_f['status'] == 200:
+            return True
+    return False
