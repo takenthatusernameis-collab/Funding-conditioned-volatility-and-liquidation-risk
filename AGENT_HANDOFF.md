@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T13:54:12Z
+**TIMESTAMP:** 2026-11-02T13:56:06Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk (Track A liquidation risk PRIORITIZED)
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (CONTINUATION - FORCE HEAVY WORK)
 **SESSION GOAL FOR NEXT AGENT:** Execute with ZERO coasting. Data is blocked (ironflow through 2026-10 only). Your first action is to eliminate bottlenecks in detection/automation, harden tests, and produce irrefutable evidence. If ANY post-2026-10 ironflow data appears at any point, you MUST pre-register BEFORE inspecting outcomes and run the frozen FCLR-010 harness immediately.
