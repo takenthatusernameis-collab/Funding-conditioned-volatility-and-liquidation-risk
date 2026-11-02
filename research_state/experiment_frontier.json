@@ -2,7 +2,7 @@
   "registry_version": "1.0",
   "generated": "2026-11-02T00:04:02Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED (hypothetical). Track C/B closed; H002 blocked. FCLR-LIQMICRO-002 COMPLETE (real funding integration, D1-D3 TESTED, funding std>0).",
+  "current_status": "FCLR-010 PASSED, H_COUPLED-001 ROBUST PASS; FCLR-OVERLAY-001 EXECUTED. Track C/B closed; H002 blocked. FCLR-LIQMICRO-002 COMPLETE (real funding). FCLR-LIQMICRO-003 IN PROGRESS (adversarial audit + robustness).",
   "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE. FCLR-LIQMICRO-002 COMPLETE: real Hyperliquid funding (9 coins x 8668 records, fundingRate.std()>0) wired into features.py; D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs now non-zero (was degenerate 0.0 in FCLR-LIQMICRO-001); D3 clustering_by_decile now populated (was empty {}); BH FDR 4 significant; NO H001 reversal, NO H001 re-test opened.",
   "frontier": [
     {
@@ -157,6 +157,17 @@
       }
     },
     {
+      "id": "FCLR-LIQMICRO-003",
+      "track": "D_liquidation_microstructure",
+      "status": "IN_PROGRESS",
+      "gate": "N/A (audit/robustness)",
+      "summary": "Adversarial leakage/quality audit + robustness sensitivity on FCLR-LIQMICRO-002 panel. Leakage audit PASS (no look-ahead, correct trailing windows, funding merge fixed). Robustness: sparse funding_abs (median 0, 80% zero funding_sign) explains D3 binning; D1 numerical issues; D2 marginal interactions. No leakage found; no H001 re-test opened.",
+      "artifacts": {
+        "leakage_audit": "research_state/leakage_audit_liqmicro_002.md",
+        "robustness": "research_state/robustness_liqmicro_002.md"
+      }
+    },
+    {
       "id": "FCLR-007",
       "track": "C",
       "status": "COMPLETE",
@@ -183,7 +194,7 @@
     "reps": ">=2000",
     "notes": "coupled funding\u00d7vol\u00d7lagged observed flow passes all gates"
   },
-  "updated_at": "2026-11-01T18:30:05Z",
+  "updated_at": "2026-11-02T00:04:02Z",
   "FCLR-LIQMICRO-001": {
     "status": "COMPLETE",
     "timestamp": "2026-11-01T22:22:41Z",
@@ -221,6 +232,5 @@
       "modules": "src/analysis/liqmicro/"
     },
     "notes": "Fixes degenerate zeroed-funding bug in FCLR-LIQMICRO-001. Funding features now have real variation (std>0). Does NOT imply H001 reversal; no confirmatory re-test of H001 opened."
-  },
-  "updated_at": "2026-11-02T00:04:02Z"
+  }
 }

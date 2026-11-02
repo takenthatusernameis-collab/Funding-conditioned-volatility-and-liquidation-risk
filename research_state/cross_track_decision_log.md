@@ -19,3 +19,5 @@
 2026-11-01T17:07:48Z | FCLR-OVERLAY-001 PRE-REGISTERED | Created research_state/pre_registration_tracka_overlay_20261101T165900Z.md with frozen bands/multipliers (p_low/p_mid/p_high from dev quantiles), block-bootstrap, gates, no-tuning/no-outcome-inspection constraints. Updated experiment_frontier.json. Firewall: ironflow Hyperliquid only.
 
 2026-11-01T18:30:05Z | FCLR-OVERLAY-001 EXECUTED | Wrote research_state/evaluation_summary_tracka_overlay_001.md with fixed bands/multipliers, dev-only quantiles, block-bootstrap CIs; hypothetical only, no profitability claim. Firewall: ironflow Hyperliquid only.
+
+2026-11-02T00:08:30Z | FCLR-LIQMICRO-003 STARTED | Adversarial leakage/quality audit + robustness sensitivity on FCLR-LIQMICRO-002 panel (ironflow Hyperliquid + Hyperliquid funding). Firewall intact: no Binance merge, no H001/FCLR-003/FCLR-010 re-test. Artifacts: leakage_audit_liqmicro_002.md, robustness_liqmicro_002.md.
