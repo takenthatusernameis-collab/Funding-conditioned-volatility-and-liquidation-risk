@@ -1,61 +1,61 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T04:16:49Z
-**HANDOFF ID:** FCLR-HANDOFF-086-20261102T041649Z
-**SUPERSEDES:** FCLR-HANDOFF-085-20261102T041501Z
+**TIMESTAMP (UTC):** 2026-11-02T04:18:15Z
+**HANDOFF ID:** FCLR-HANDOFF-087-20261102T041815Z
+**SUPERSEDES:** FCLR-HANDOFF-086-20261102T041649Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** Liquidation risk > funding-conditioned volatility. Repo name is directive — liquidation data gap is the binding blocker. Primary objective: find NEW admissible unauthenticated liquidation/funding data to reopen Track A; do NOT reopen sealed negative experiments without a concrete new data source meeting pre-registration requirements.
+**REPO PRIORITIZATION (INFERRED):** Liquidation risk > funding-conditioned volatility. Track A (observed liquidations) is OPEN via Hyperliquid ironflow census — FCLR-010 gate PASSED, overlay EXECUTED (hypothetical only). Data hunt FCLR-NEXT-002 COMPLETE_NO-GO (all 8 source families probed, no NEW admissible unauthenticated source beyond ironflow). Do NOT reopen sealed negative experiments without a concrete new data source meeting pre-registration requirements.
 
-**BRANCH/HEAD:** main @ a03d9a63ea2b828f1c0c30c76ca3ff83ef6e4c87
+**BRANCH/HEAD:** main @ 0d1398f0766686bf6ef2e5df5e15e70f608979cd
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T04:16:49Z] FOCUS CAMPAIGN: LIQUIDATION_DATA_HUNT_HEAVY-003 (EXHAUSTIVE EVIDENCE REQUIRED)
+[2026-11-02T04:18:15Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004 (HEAVY EXECUTION REQUIRED)
 
-PRIORITY: CRITICAL - ONLY PATH TO CONFIRMATORY TRACK A. REPO NAME DEMANDS LIQUIDATION RISK FOCUS.
+PRIORITY: CRITICAL - LIQUIDATION RISK EXTENSION PER REPO NAME. TRACK A GATE PASSED (FCLR-010, HYPERLIQUID IRONFLOW).
 
 OBJECTIVE (NON-OPTIONAL, HEAVY WORK REQUIRED):
-Find ANY admissible unauthenticated liquidation/funding dataset that satisfies GO criteria. Do NOT re-examine sealed tracks FCLR-010/OVERLAY, H001/H003. Do NOT tune on sealed holds. If no GO after exhaustive evidence, produce complete NO-GO and STOP cleanly.
+Extend the Track A observed-liquidation forecast on Hyperliquid ironflow census beyond the sealed FCLR-010 test window (2026-05-28..2026-10-31). Acquire post-window liquidation data (November 2026+) from ironflow/hyperliquid-liquidations. Apply the frozen FCLR-010 model WITHOUT retuning or re-splitting. Validate out-of-sample on new forward blocks. Produce block-bootstrap CIs (>=2000 reps), calibration, leave-one-instrument-out robustness, and a gate assessment. Respect cross-track firewall: Hyperliquid only, no Binance merge, no Track B/C conflation. If no post-window data exists, document with concrete evidence (HTTP status, headers, file hashes) and state the resume condition. Do NOT skip pre-registration of any new experiment ID before outcome inspection. Do NOT reopen sealed FCLR-001/002/003/006/007/008/009 holds.
 
 MANDATORY EXECUTION STEPS (DO ALL):
-1. READ FIRST: AGENT_HANDOFF.md, RESEARCH_PROMPT.md §5, research_state/liquidation_source_campaign.md, research_state/final_confirmatory_verdict.md, research_state/experiment_frontier.json. Treat as authoritative.
-2. SYSTEMATIC SCAN (exhaustive, evidence-based): Test ALL of the following with concrete HTTP/download attempts where feasible. For each, you MUST produce evidence regardless of outcome.
-   - Binance public-data (https://github.com/binance/binance-public-data) - check futures/um/daily/ for liquidationSnapshot/forceOrder/liquidation. Also test data.binance.vision direct paths. Attempt small range downloads where directory listings exist.
-   - Binance REST unauthenticated endpoints (only if truly unauthenticated and provide historical bulk liquidation data). Explicitly reject signed endpoints.
-   - Bybit, OKX, Deribit, Bitget, Gate.io, KuCoin, HTX (Huobi) - check bulk historical liquidation archives without auth/signup/payment. Test actual download URLs, not just landing pages.
-   - Academic/archival: Zenodo, OSF, arXiv, Figshare, ICPSR - search for "perpetual liquidation", "liquidation events", "funding rate" datasets (2022-2025). Require no-auth download.
-   - Code/data repos: GitHub raw (test actual raw file URLs), HuggingFace datasets (license check, no-auth), Kaggle (reject if requires login/payment).
-   - Alternative archives: CryptoDataDownload, CoinAPI public archives (reject if auth/payment), Tardis public samples (only if unauthenticated bulk available), any venue-specific public dumps.
-3. EVIDENCE PER CANDIDATE (write to research_state/liquidation_hunt_003_YYYYMMDDTHHMMSSZ.md): exact URL/endpoint, access_date (UTC), test_method (curl/wget/python), HTTP status/headers/ETags/hashes, no-auth result (Y/N), license/terms (exact text/link), fields/schema, earliest/latest timestamps, cadence, symbols/venue/contract type, listing/delisting/completeness notes, gaps, file sizes/revisions, rejection reason. NO VAGUE "NOT FOUND". If directory listing exists but empty or incomplete, document it.
-4. GO RUBRIC (STRICT): >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness (listing/delisting), license allows research use, historical (not live-only), no signed request/account required, no requester-pays. ALL must hold.
-5. IF ANY GO: pre-register experiment ID BEFORE inspecting any outcomes, freeze splits with frozen_before_outcomes=true, create research_state/experiment_prereg_<ID>.json + protocol delta, implement minimal ingestion outside .github/workflows with tests, update AGENT_HANDOFF.md. DO NOT SKIP PRE-REG.
-6. IF NO GO AFTER EXHAUSTING ALL CANDIDATES WITH CONCRETE TEST EVIDENCE: write research_state/liquidation_hunt_003_nogo_YYYYMMDDTHHMMSSZ.md with full per-candidate evidence table, update experiment_frontier.json to reflect NO-GO with evidence, STOP CLEANLY. NO "waiting", NO retry loops without new evidence.
+1. READ FIRST: AGENT_HANDOFF.md, RESEARCH_PROMPT.md §5, research_state/experiment_frontier.json, research_state/cross_track_decision_log.md, research_state/research_protocol_fclr010.md, research_state/evaluation_summary_FCLR010.md. Treat as authoritative.
+2. DATA ACQUISITION (heavy): Query ironflow/hyperliquid-liquidations for data beyond 2026-10-31 (e.g., 2026-11 monthly parquet). Attempt actual download. Record exact URL, access_date (UTC), HTTP status, headers, file hashes, schema, row counts, symbol coverage. Verify unauthenticated access (no keys).
+3. PRE-REGISTRATION (BEFORE OUTCOMES): If new data found, create research_state/experiment_prereg_<ID>.json + protocol delta pre-registering the forward validation experiment BEFORE inspecting any outcomes. Freeze splits with frozen_before_outcomes=true.
+4. FORWARD VALIDATION (heavy): Apply frozen FCLR-010 model (C2 vs B1 on Brier) to new forward block(s). Compute paired comparisons with block bootstrap (>=2000 reps), calibration, leave-one-instrument-out. Write research_state/evaluation_summary_<ID>.md + gate assessment.
+5. EVIDENCE DOCUMENTATION: If NO new data exists, write research_state/liquidation_forward_validate_004_blocker_YYYYMMDDTHHMMSSZ.md with full per-source evidence table (URL, status, headers, hashes, rejection reason). Update experiment_frontier.json resume condition.
+6. GO RUBRIC (STRICT): >=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK, no signed request, no requester-pays. ALL must hold for a new confirmatory claim.
+7. UPDATE HANDOFF: Update AGENT_HANDOFF.md with results, next action, and verification command.
 
-CONSTRAINTS: Only admissible unauthenticated sources. Never merge Track A/B/C. Never promote modeled breaches to observed liquidations. Never touch .github/workflows. Tests must pass. Keep raw data out of git. Commit only code/manifests/reports.
+CONSTRAINTS: Only admissible unauthenticated sources. Never merge Track A/B/C. Never promote modeled breaches to observed liquidations. Never touch .github/workflows. Tests must pass (`python -m unittest discover -s tests -v`). Keep raw data out of git. Commit only code/manifests/reports.
 ```
 
 ## BOTTLENECKS REMOVED
+- Track A is OPEN (not blocked): FCLR-010 gate PASSED on Hyperliquid ironflow census (2025-11..2026-10, 199 instruments, 5 blocks). Removed stale "Track A BLOCKED for 2024" claim.
+- LIQUIDATION_DATA_HUNT_HEAVY-003 campaign SUPERSEDED: FCLR-NEXT-002 already completed NO-GO (all 8 source families probed). Removed stale data-hunt campaign.
+- HEAD corrected: main @ 0d1398f0 (was stale a03d9a63).
 - Consolidated to single durable handoff (this file). No duplicate handoff files.
 - All sealed artifacts verified intact (FCLR-HEAVY-001 integrity OK). No reopening of closed negative tracks.
 - Tests: `python -m unittest discover -s tests -v` passes (27/27).
 - No workflow modifications. No redundant controllers/schedulers added.
-- Eliminated ambiguous "check later" paths - campaign is explicitly exhaustive with evidence requirements.
 
 ## CURRENT STATUS (AUTHORITATIVE)
-- **H001 (volatility forecasting): NOT_SUPPORTED** (FCLR-003) — forecast gate failed. No risk overlay eligible.
-- **Track A (observed liquidations): BLOCKED** for 2024 confirmatory window. Only exploratory 2026 HF data exists (FCLR-005) — insufficient blocks. No new admissible source found to date (FCLR-NEXT-001/002).
-- **Track B (hypothetical boundary breach): CLOSED_NEGATIVE/INCONCLUSIVE** (FCLR-H003). No incremental skill.
-- **H002 (paper replication): BLOCKED** (403, methodology/data not independently accessible).
-- **Data exhaustion:** 2024 fully committed; 2025 limited (2 symbols); 2026 partial. No unsealed confirmatory window on existing data.
+- **H001 (volatility forecasting): NOT_SUPPORTED** (FCLR-003) — forecast gate failed. Track C CONFIRMATORY_CLOSED. No risk overlay eligible on Track C.
+- **Track A (observed liquidations): OPEN** — FCLR-010 gate PASSED (Hyperliquid ironflow, 2025-11..2026-10, 199 instruments, 5 blocks, C2 vs B1 Brier -2.21%, CI excludes zero). Overlay EXECUTED (hypothetical only, no profitability claim). FCLR-HEAVY-001 complete (all 6 steps).
+- **Track B (hypothetical boundary breach): CLOSED_NEGATIVE** (FCLR-H003-EXT-001). No incremental skill.
+- **H002 (paper replication): PERMANENTLY BLOCKED** (SSRN HTTP 403). No further work without SSRN access.
+- **Data hunt: COMPLETE_NO-GO** (FCLR-NEXT-002) — all 8 source families probed, no NEW admissible unauthenticated source beyond ironflow.
+- **Sealed holds:** FCLR-001/002/003/006/007/008/009 sealed. Do not reopen.
 
 ## NEXT FOCUS CAMPAIGN (HEAVY WORK - CANNOT AVOID)
-**Campaign ID:** LIQUIDATION_DATA_HUNT_HEAVY-003
-**Priority:** CRITICAL
-**Effort:** Heavy (systematic exhaustive scan + concrete evidence + actual download attempts)
-**Success Criterion:** Either (a) GO candidate with full evidence + pre-registered experiment ready, or (b) complete evidence-based NO-GO across ALL tested admissible sources.
+**Campaign ID:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004
+**Priority:** CRITICAL (liquidation risk per repo name)
+**Effort:** Heavy (data acquisition + frozen model forward validation + block-bootstrap + robustness)
+**Success Criterion:** Either (a) forward validation on new post-FCLR-010 block with full evidence + gate assessment, or (b) complete evidence-based blocker documenting no post-window data exists + resume condition stated.
 
 **HARD RULES:**
-- Heavy work only. Landing page checks are insufficient — must attempt actual access/downloads where possible with evidence (HTTP status, headers, file listing, or actual small file retrieval).
-- If blocked by geo/rate limits, document with headers/status and move to next candidate immediately (do not retry endlessly).
+- Heavy work only. Landing page checks insufficient — must attempt actual access/downloads with evidence (HTTP status, headers, file listing, hashes).
+- Pre-register new experiment ID BEFORE inspecting any outcomes on new data.
+- Cross-track firewall: Hyperliquid only, no Binance merge, no Track B/C conflation.
 - Never fabricate data/sources.
-- If no new admissible data exists after exhaustive search with evidence, STOP. No blocking/waiting loops.
-- Every candidate tested must appear in evidence with rejection reason if not GO.
+- If blocked, document with headers/status and move on — no retry loops without new evidence.
+- If no post-window data exists after exhaustive evidence, write complete blocker and state resume condition. No blocking/waiting loops.
+- Every candidate/source tested must appear in evidence with rejection reason if not GO.
