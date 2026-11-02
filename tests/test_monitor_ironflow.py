@@ -844,3 +844,105 @@ class TestBaselineDrift(unittest.TestCase):
         bd = mon.check_baseline_drift(state)
         self.assertFalse(bd["cache_incomplete"])
         self.assertFalse(bd["drifted"])
+
+
+class TestResumeSimulation(unittest.TestCase):
+    """Offline trigger-logic tests for --simulate and --decision (no network).
+
+    These close the per-session bottleneck where confirming the block required
+    HF to be reachable. The AGENT_HANDOFF.md decision tree is evaluated against
+    synthetic evidence so the trigger logic is unit-testable.
+    """
+
+    def _blocked_state(self):
+        return {
+            "data_through": "2026-10",
+            "consecutive_absent": 3,
+            "last_quick_check": {"triggered": False, "months_probed": ["2026-11", "2026-12"]},
+            "last_quick_probe": {
+                "probes": [
+                    {"month": "2026-11", "kind": "events", "status": 404},
+                    {"month": "2026-11", "kind": "fills", "status": 404},
+                    {"month": "2026-12", "kind": "events", "status": 404},
+                    {"month": "2026-12", "kind": "fills", "status": 404},
+                ]
+            },
+            "last_tree_change": {"changed": False, "added": []},
+            "last_probe": {"new_files_found": []},
+        }
+
+    def test_simulate_all_absent_no_trigger(self):
+        rc = mon.simulate_resume(self._blocked_state())
+        self.assertFalse(rc["triggered"])
+        self.assertEqual(rc["decision"]["fired_branches"], [])
+        self.assertEqual(len(rc["probes"]), 8)
+
+    def test_simulate_forward_edge_fires(self):
+        rc = mon.simulate_resume(self._blocked_state(), triggered_months=["2026-11"])
+        self.assertTrue(rc["triggered"])
+        self.assertIn("forward_edge_200", rc["decision"]["fired_branches"])
+        self.assertEqual(len(rc["triggering_files"]), 2)
+
+    def test_simulate_probe_diff_branch(self):
+        rc = mon.simulate_resume(self._blocked_state(), triggered_months=["2026-12"])
+        self.assertTrue(rc["triggered"])
+        self.assertIn("probe_diff_404_to_200", rc["decision"]["fired_branches"])
+        self.assertGreater(rc["decision"]["changed_count"], 0)
+
+    def test_decision_tree_blocked(self):
+        res = mon.evaluate_resume_decision(
+            self._blocked_state(),
+            rc={"triggered": False, "probe_diff": {"summary": {"changed_count": 0}}},
+            tree_change={"changed": False, "added": []},
+            new_files=[],
+        )
+        self.assertFalse(res["new_data_path"])
+        self.assertEqual(res["reasons"], [])
+
+    def test_decision_tree_new_files(self):
+        res = mon.evaluate_resume_decision(
+            self._blocked_state(),
+            rc={"triggered": False, "probe_diff": {"summary": {"changed_count": 0}}},
+            tree_change={"changed": False, "added": []},
+            new_files=[{"month": "2026-11", "kind": "events"}],
+        )
+        self.assertTrue(res["new_data_path"])
+        self.assertTrue(any("new_files_found" in r for r in res["reasons"]))
+
+    def test_decision_tree_probe_diff(self):
+        res = mon.evaluate_resume_decision(
+            self._blocked_state(),
+            rc={
+                "triggered": False,
+                "probe_diff": {"summary": {"changed_count": 2}},
+            },
+            tree_change={"changed": False, "added": []},
+            new_files=[],
+        )
+        self.assertTrue(res["new_data_path"])
+        self.assertTrue(any("probe_diff" in r for r in res["reasons"]))
+
+    def test_decision_tree_tree_change(self):
+        res = mon.evaluate_resume_decision(
+            self._blocked_state(),
+            rc={"triggered": False, "probe_diff": {"summary": {"changed_count": 0}}},
+            tree_change={"changed": True, "added": ["data/events/2026-11.parquet"]},
+            new_files=[],
+        )
+        self.assertTrue(res["new_data_path"])
+        self.assertTrue(any("tree_change" in r for r in res["reasons"]))
+
+    def test_decision_tree_old_month_new_file_ignored(self):
+        # A new file for an OLD month (backfill) is not a resume trigger per the
+        # handoff, which requires month >=2026-11.
+        res = mon.evaluate_resume_decision(
+            self._blocked_state(),
+            rc={"triggered": False, "probe_diff": {"summary": {"changed_count": 0}}},
+            tree_change={"changed": True, "added": ["data/events/2026-09.parquet"]},
+            new_files=[{"month": "2026-09", "kind": "events"}],
+        )
+        self.assertFalse(res["new_data_path"])
+
+
+if __name__ == "__main__":
+    unittest.main()

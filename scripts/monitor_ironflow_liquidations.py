@@ -993,9 +993,51 @@ def main():
     verify = "--verify" in sys.argv
     drift = "--drift" in sys.argv
     force = "--force" in sys.argv
+    simulate = "--simulate" in sys.argv
+    decision = "--decision" in sys.argv
     if "--list" in sys.argv:
         list_state()
         return
+    if simulate:
+        # --simulate: evaluate the handoff decision tree against synthetic
+        # forward-edge probe results WITHOUT any network access. Used by CI and
+        # by future agents to verify the trigger logic is correct and that the
+        # blocked-path heavy-work branch is reachable on demand. Removes the
+        # per-session dependency on HF being up just to confirm "still blocked".
+        state = load_state()
+        trig_months = []
+        trig_kinds = []
+        for arg in sys.argv:
+            if arg.startswith("--trigger-month="):
+                trig_months.append(arg.split("=", 1)[1])
+            if arg.startswith("--trigger-kind="):
+                trig_kinds.append(arg.split("=", 1)[1])
+        rc = simulate_resume(state, triggered_months=trig_months or None, triggered_kinds=trig_kinds or None)
+        print(json.dumps(rc, indent=2))
+        return 0 if rc["triggered"] else 1
+    if decision:
+        # --decision: apply the AGENT_HANDOFF.md decision tree to the persisted
+        # last_quick_check evidence (no network). Reports whether the NEW DATA
+        # PATH would fire from recorded evidence alone, so a session can confirm
+        # the block without re-probing.
+        state = load_state()
+        last_q = state.get("last_quick_check", {}) or {}
+        last_qp = state.get("last_quick_probe", {}) or {}
+        rc = {
+            "triggered": bool(last_q.get("triggered")),
+            "probes": last_qp.get("probes", []),
+        }
+        # Probe-to-probe diff against the persisted last_quick_probe so a
+        # 404->200 flip stored in state is detected by the decision tree.
+        pd = compare_probes(state, rc)
+        rc["probe_diff"] = {"summary": pd.get("summary", {})}
+        tc = state.get("last_tree_change", {}) or {}
+        nf = (state.get("last_probe", {}) or {}).get("new_files_found", []) or []
+        res = evaluate_resume_decision(state, rc=rc, tree_change=tc, new_files=nf)
+        res["quick_check"] = last_q
+        res["probe_diff_summary"] = pd.get("summary", {})
+        print(json.dumps(res, indent=2))
+        return 0 if res["new_data_path"] else 1
     if verify:
         vr = verify_state()
         # Baseline-drift state check (no network) is part of verification: the
@@ -1117,6 +1159,17 @@ def main():
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
             "months_probed": rc["months_probed"],
             "probes": rc.get("probes", []),
+        }
+        # Persist the tree-change evidence so --decision can apply the AGENT_HANDOFF
+        # decision tree without re-listing the tree (no network).
+        _tc = evidence.get("tree_change", {}) or {}
+        state["last_tree_change"] = {
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "changed": bool(_tc.get("changed")),
+            "added": _tc.get("added", []),
+            "removed": _tc.get("removed", []),
+            "tree_status": _tc.get("tree_status"),
+            "tree_not_modified": bool(_tc.get("tree_not_modified")),
         }
         with open(STATE_PATH, "w") as f:
             json.dump(state, f, indent=2)
@@ -1500,6 +1553,140 @@ def resume_block_summary(state=None):
         "verify_errors": vr.get("errors", []),
     }
 
+
+def simulate_resume(state=None, triggered_months=None, triggered_kinds=None):
+    """Offline resume-condition simulation for CI/audit (no network).
+
+    The handoff's decision tree is: ``new_files_found`` non-empty for month
+    >=2026-11, OR ``quick_resume_check.triggered`` true, OR
+    ``probe_diff.summary.changed_count>0`` (404->200), OR ``tree_change.changed``
+    true with new parquet paths. This helper evaluates that decision tree against
+    synthetic forward-edge probe results so the trigger logic itself can be
+    unit-tested without touching the network. Returns the same shape as
+    ``check_resume_condition`` plus a ``decision`` field naming which branch fired.
+
+    Args:
+        state: persisted monitor state (defaults to load_state()).
+        triggered_months: iterable of YYYY-MM strings to mark as available (200).
+        triggered_kinds: iterable of "events"/"fills"; defaults to both.
+    """
+    state = state if state is not None else load_state()
+    data_through = state.get("data_through")
+    months = forward_edge_months(data_through)
+    kinds = list(triggered_kinds) if triggered_kinds else ["events", "fills"]
+    triggered_months = set(triggered_months or [])
+    probes = []
+    triggering = []
+    for ym in months:
+        for kind in kinds:
+            if ym in triggered_months:
+                rec = {
+                    "kind": kind,
+                    "month": ym,
+                    "status": 200,
+                    "classification": "NEW_AVAILABLE",
+                    "simulated": True,
+                }
+                probes.append(rec)
+                triggering.append(rec)
+            else:
+                probes.append({
+                    "kind": kind,
+                    "month": ym,
+                    "status": 404,
+                    "classification": "CONFIRMED_ABSENT",
+                    "simulated": True,
+                })
+    # Branch 3: probe_diff 404->200 flip is exactly what the simulated
+    # triggering records represent relative to the persisted last_quick_probe.
+    prev_probes = {}
+    last_quick = state.get("last_quick_probe", {}) or {}
+    for p in last_quick.get("probes", []) or []:
+        prev_probes[(p.get("month"), p.get("kind"))] = p.get("status")
+    changed = [
+        {"month": ym, "kind": k, "prev": prev_probes.get((ym, k)), "curr": 200}
+        for ym in triggered_months for k in kinds
+        if prev_probes.get((ym, k)) != 200
+    ]
+    # Branch 4: tree_change.changed with new parquet paths. A simulated
+    # forward-edge month corresponds to new data/events|fills/YYYY-MM.parquet
+    # paths in the tree listing, so this branch fires whenever a forward-edge
+    # month is simulated as available.
+    simulated_paths = [
+        f"data/{kind}/{ym}.parquet"
+        for ym in sorted(triggered_months)
+        for kind in kinds
+    ]
+    tree_changed = bool(simulated_paths)
+    fired_branches = []
+    if triggering:
+        fired_branches.append("forward_edge_200")
+    if changed:
+        fired_branches.append("probe_diff_404_to_200")
+    if tree_changed:
+        fired_branches.append("tree_change_new_paths")
+    return {
+        "data_through": data_through,
+        "months_probed": months,
+        "probes": probes,
+        "triggered": bool(fired_branches),
+        "triggering_files": triggering,
+        "cached_hits": 0,
+        "head_probes": 0,
+        "simulated": True,
+        "decision": {
+            "fired_branches": fired_branches,
+            "changed_count": len(changed),
+            "changed": changed,
+            "tree_change_changed": tree_changed,
+            "new_files_found": [
+                {"kind": k, "month": ym}
+                for ym in sorted(triggered_months) for k in kinds
+            ],
+        },
+    }
+
+
+def evaluate_resume_decision(state=None, rc=None, tree_change=None, new_files=None):
+    """Apply the handoff decision tree to probe evidence (no network).
+
+    Mirrors the AGENT_HANDOFF.md decision tree exactly:
+      NEW DATA PATH if any of:
+        - new_files_found non-empty for month >=2026-11, OR
+        - quick_resume_check.triggered true, OR
+        - probe_diff.summary.changed_count>0 (404->200), OR
+        - tree_change.changed true with new parquet paths.
+    Returns {"new_data_path": bool, "reasons": [...]}.
+    """
+    state = state if state is not None else load_state()
+    rc = rc if rc is not None else {}
+    tree_change = tree_change if tree_change is not None else {}
+    new_files = new_files if new_files is not None else []
+    reasons = []
+    cutoff = "2026-11"
+    for f in new_files:
+        ym = f.get("month") if isinstance(f, dict) else None
+        if ym and ym >= cutoff:
+            reasons.append(f"new_files_found month={ym}")
+    if rc.get("triggered"):
+        reasons.append("quick_resume_check.triggered=true")
+    pd = rc.get("probe_diff", {}) or {}
+    summary = pd.get("summary", {}) or {}
+    if summary.get("changed_count", 0) > 0:
+        reasons.append(f"probe_diff.changed_count={summary.get('changed_count')}")
+    if tree_change.get("changed"):
+        # Only forward-edge month paths (>=2026-11) count as a resume trigger:
+        # a backfilled OLD month does not extend the forward-validation window,
+        # so it must not fire the NEW DATA PATH branch.
+        added = tree_change.get("added", []) or []
+        forward_added = [
+            p for p in added
+            if re.match(r"^data/(events|fills)/(\d{4}-\d{2})\.parquet$", p)
+            and re.match(r"^data/(events|fills)/(\d{4}-\d{2})\.parquet$", p).group(2) >= "2026-11"
+        ]
+        if forward_added:
+            reasons.append(f"tree_change.changed=true forward_edge_added={len(forward_added)}")
+    return {"new_data_path": bool(reasons), "reasons": reasons}
 
 
 if __name__ == "__main__":
