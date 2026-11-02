@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T15:49:13Z
+**TIMESTAMP:** 2026-11-02T15:51:49Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk — Track A liquidation risk PRIORITIZED (repo-name-driven prioritization: observed-liquidation forecast validation before any volatility overlay).
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA
-**SESSION GOAL FOR NEXT AGENT:** Execute with ZERO coasting. Data is blocked (ironflow through 2026-10 only; 2026-11/12/2027-01/2027-02 all CONFIRMED_ABSENT at 20261102T150946Z; tree 304 no backfill at 20261102T150101Z). Your first action is the state-aware resume check, then mandatory heavy work in full. If ANY post-2026-10 ironflow data appears, you MUST pre-register BEFORE inspecting outcomes and run the frozen FCLR-010 harness immediately.
+**SESSION GOAL FOR NEXT AGENT:** Execute with ZERO coasting. Data blocked (ironflow through 2026-10; 2026-11/12/2027-01/2027-02 CONFIRMED_ABSENT). First action: state-aware resume check (`python scripts/monitor_ironflow_liquidations.py --quick` + `--verify`). If ANY post-2026-10 ironflow data appears OR new admissible Track A source found, PRE-REGISTER BEFORE inspecting outcomes and run frozen `scripts/fclr010_harness.py`. Otherwise MANDATORY HEAVY WORK A–E in full — no measurable artifact beyond previous diff = session FAILED. Fresh blocker/frontier/handoff written at 2026-11-02T15:51:49Z.
 
 ## NEXT AGENT INITIAL TASK (CLEAR, TIMESTAMPED — START NOW)
 **2026-11-02T15:49:13Z:** Run `python scripts/monitor_ironflow_liquidations.py --quick` (state-aware, cheap, forward-edge only). Read `research_state/ironflow_monitor_state.json` (and confirm `python scripts/monitor_ironflow_liquidations.py --verify` reports ok=True).
