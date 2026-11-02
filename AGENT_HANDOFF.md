@@ -1,62 +1,69 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T02:06:35Z
-**INITIAL TASK (NEXT SESSION):** Execute CAMPAIGN FCLR-HEAVY-001 — Funding-conditioned liquidation-risk deepening (Track A operational hardening). Do NOT reopen H001/FCLR-003/FCLR-008/010 without triggers; treat all outcomes as hypothetical-only. Start at Step 1 below and do not stop until all steps produce artifacts + tests pass. NO confirmatory outcome inspection for sealed panels.
+**TIMESTAMP (UTC):** 2026-11-02T02:18:56Z
+**INITIAL TASK (NEXT SESSION):** EXECUTE CAMPAIGN FCLR-HEAVY-001 — Funding-conditioned liquidation-risk deepening (Track A operational hardening). DO HEAVY WORK. Start at Step 1 immediately. Do not stop until ALL 6 steps produce artifacts + tests pass (27/27). NO confirmatory outcome inspection for sealed panels. Treat everything as hypothetical-only.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (name is directive). Focus first on Track A (observed liquidations, ironflow Hyperliquid) — highest concrete signal with passed gate — while keeping Track C sealed and Track B closed.
+**REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (name is directive). Priority order: (1) Track A operational hardening on frozen ironflow Hyperliquid census (highest concrete signal, gate PASSED) → (2) nothing else until heavy Track A analysis exhausted. Track C sealed (NOT_SUPPORTED), Track B closed (CLOSED_NEGATIVE), H002 permanently blocked.
 **BRANCH/HEAD:** main @ a6556d87
-**HANDOFF ID:** FCLR-HANDOFF-075-20261102T020635Z
-**SUPERSEDES:** FCLR-HANDOFF-074-20261102T011840Z
+**HANDOFF ID:** FCLR-HANDOFF-076-20261102T021856Z
+**SUPERSEDES:** FCLR-HANDOFF-075-20261102T020635Z
 
 ## BOTTLENECKS REMOVED (this session)
-- Verified __pycache__ removed from index; .gitignore present. Working tree clean except untracked .gitignore.
-- No blocking workflow edits. Tests 27/27 PASS at HEAD edc55ed2.
+- Verified clean state: tests 27/27 PASS. No workflow edits needed. No blocking issues. Sealed panels intact.
+- Removed ambiguity: single unambiguous task, no open forks. All discovery exhausted (FCLR-NEXT-002 COMPLETE_NO-GO).
 
-## STATUS (CURRENT)
-- Track A (FCLR-010): GATE PASSED on Hyperliquid ironflow census (199 perps, 12 blocks Nov 2025–Oct 2026). C2 vs B1 mean diff -0.003077, CI [-0.004892,-0.001263] excludes zero, rel Brier -2.21% >= 2% floor. Overlay FCLR-OVERLAY-001 executed (hypothetical only). Test window SEALED.
-- Track C (H001): NOT_SUPPORTED — CONFIRMATORY CLOSED (FCLR-008 +4.30% but CI crosses zero; all unsealed powered panels exhausted).
-- Track B (H003): CLOSED_NEGATIVE.
+## STATUS (CURRENT - FROZEN)
+- Track A (FCLR-010): GATE PASSED on Hyperliquid ironflow census (199 perps, Nov 2025–Oct 2026, 12 blocks). C2 vs B1 Brier rel -2.21%, CI [-0.004892,-0.001263] excludes zero. Overlay FCLR-OVERLAY-001 executed (HYPOTHETICAL ONLY). Splits frozen 2026-11-01T05:39:07Z.
+- Track C (H001): NOT_SUPPORTED — CONFIRMATORY CLOSED.
+- Track B (H003): CLOSED_NEGATIVE (extended grid no robust skill).
 - H002: PERMANENT BLOCK (SSRN HTTP 403).
-- Reopen readiness exists (FCLR-REOPEN-READY-001) but passive.
+- FCLR-LIQMICRO-002/003 COMPLETE. No new admissible unauthenticated liquidation source found.
 
-## CAMPAIGN FCLR-HEAVY-001 (HEAVY — future agents cannot avoid doing heavy working)
-Goal: extract maximum admissible value from Track A without crossing into trading/overlay deployment claims. All analysis must remain hypothetical-only; never merge labels across tracks.
+## CAMPAIGN FCLR-HEAVY-001 (HEAVY — future agents CANNOT avoid doing heavy working)
+**OBJECTIVE:** Extract maximum admissible value from frozen Track A without crossing deployment/trading claims. All outputs hypothetical-only. No label merging across tracks.
 
-### Steps (execute in order; each produces durable artifact)
-1. **Funding-liquidity coupling audit**
-   Build `research_state/fclr_heavy001_funding_liq_coupling.md` + `results/fclr_heavy001/coupling_summary.json`. Recompute funding-conditioned liquidation intensity using frozen FCLR-010 panel/splits. Quantify marginal contribution of funding_abs/signed funding deciles to liquidation intensity controlling for RV/vol proxies. Block bootstrap by time blocks. Preserve nulls.
+### EXECUTE IN ORDER (each step MANDATORY - produce artifacts or precise blocker + continue)
+1. **Funding-liquidity coupling audit** (HEAVY)
+   - Create: `research_state/fclr_heavy001_funding_liq_coupling.md`, `results/fclr_heavy001/coupling_summary.json`
+   - Recompute funding-conditioned liquidation intensity using frozen FCLR-010 panel/splits. Quantify marginal contribution of funding_abs/signed funding deciles controlling for RV/vol proxies. Block bootstrap by time blocks (>=2000). Preserve nulls. No peeking.
 
-2. **Regime stratification (adversarial)**
-   Build `research_state/fclr_heavy001_regime_strat.md` + `results/fclr_heavy001/regime_strat.json`. Stratify by realized vol terciles, funding regime (pos/neg/extreme), and time-of-day/funding-cycle where knowable. For each stratum report event counts, Brier/logloss, calibration, and block-bootstrap CIs for C2 vs B1. Flag thin strata (< n_events threshold) without imputing.
+2. **Regime stratification (adversarial)** (HEAVY)
+   - Create: `research_state/fclr_heavy001_regime_strat.md`, `results/fclr_heavy001/regime_strat.json`
+   - Stratify by realized vol terciles, funding regime (pos/neg/extreme), funding cycle/time-of-day if knowable. Report event counts, Brier/logloss, calibration, block-bootstrap CIs for C2 vs B1 per stratum. Flag thin strata (< threshold events) without imputing.
 
-3. **Lead/lag & censoring robustness**
-   Build `research_state/fclr_heavy001_leadlag_censor.md` + `results/fclr_heavy001/leadlag_censor.json`. Test alternative lead windows and censoring rules consistent with frozen protocol. Show sensitivity without re-tuning to holdout. Explicitly document any rule changes as non-conforming and reject if they require peeking.
+3. **Lead/lag & censoring robustness** (HEAVY)
+   - Create: `research_state/fclr_heavy001_leadlag_censor.md`, `results/fclr_heavy001/leadlag_censor.json`
+   - Test alternative lead windows/censoring consistent with frozen protocol. No re-tuning to holdout. Document any non-conforming rule changes as REJECTED if peeking required.
 
-4. **Feature ablation hardening (funding-focused)**
-   Build `research_state/fclr_heavy001_ablation_funding.md` + `results/fclr_heavy001/ablation_funding.json`. Isolate funding alone vs RV-only vs combined; include funding sign/abs interactions. Use same frozen splits/blocks/bootstrap. Report raw + adjusted for multiplicity (Holm) across registered comparisons.
+4. **Feature ablation hardening (funding-focused)** (HEAVY)
+   - Create: `research_state/fclr_heavy001_ablation_funding.md`, `results/fclr_heavy001/ablation_funding.json`
+   - Isolate funding alone vs RV-only vs combined; include funding sign/abs interactions. Same frozen splits/blocks/bootstrap. Report raw + Holm-adjusted across registered comparisons.
 
-5. **Cross-symbol concentration & stability**
-   Build `research_state/fclr_heavy001_concentration.md` + `results/fclr_heavy001/concentration.json`. Leave-one-symbol-out and symbol-cluster stability. Identify concentration (e.g. top symbols driving improvement). If improvement concentrates in <20% symbols with wide CIs, call out instability explicitly.
+5. **Cross-symbol concentration & stability** (HEAVY)
+   - Create: `research_state/fclr_heavy001_concentration.md`, `results/fclr_heavy001/concentration.json`
+   - Leave-one-symbol-out, symbol-cluster stability. Identify concentration; if improvement driven by <20% symbols with wide CIs, call out instability explicitly.
 
-6. **Reproducibility + integrity lock-in**
-   Re-verify sealed FCLR-010 artifacts untouched (hashes/mtimes). Write `research_state/fclr_heavy001_integrity.md`. Run `python -m unittest discover -s tests -v` → 27/27. Update `research_state/experiment_frontier.json` with FCLR-HEAVY-001 entries (status IN_PROGRESS/COMPLETE per step) and append to `research_state/cross_track_decision_log.md`.
+6. **Reproducibility + integrity lock-in** (MANDATORY)
+   - Re-verify sealed FCLR-010 artifacts untouched (hashes/mtimes). Write `research_state/fclr_heavy001_integrity.md`.
+   - Run `python -m unittest discover -s tests -v` → must be 27/27.
+   - Update `research_state/experiment_frontier.json` (FCLR-HEAVY-001 status per step) and append to `research_state/cross_track_decision_log.md`.
 
-### Acceptance Criteria
-- All 6 steps produce artifacts above.
-- Tests remain 27/27.
-- No sealed panel modified; all new outputs under `results/fclr_heavy001/` and `research_state/fclr_heavy001_*.md/json`.
-- Conclusions strictly hypothetical-only; no trading/paper/live claims; no label merging.
-- If any step would require peeking/re-tuning sealed splits or adding unregistered comparisons, STOP and document blocker in handoff + log.
+### ACCEPTANCE CRITERIA (HARD)
+- All 6 steps produce artifacts. No step skipped.
+- Tests: 27/27 PASS.
+- No sealed panel modified. All new outputs under `results/fclr_heavy001/` and `research_state/fclr_heavy001_*.md/json`.
+- Strictly hypothetical-only. No trading/paper/live claims. No label merging.
+- If peeking/re-tuning sealed splits or unregistered comparisons required → STOP, document blocker in handoff/log, continue to next step if possible or report blocked with evidence.
 
-### Parallel readiness (do not block)
-While doing FCLR-HEAVY-001, also keep `scripts/reopen_probe.py` functional (SSRN + source families) per FCLR-REOPEN-READY-001. If T1 or T2 fires, freeze splits/pre-register before inspecting outcomes.
+## PARALLEL READINESS (NON-BLOCKING)
+Keep `scripts/reopen_probe.py` functional per FCLR-REOPEN-READY-001. Only if NEW admissible unauthenticated liquidation source passes rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK) OR SSRN H002 accessible → pre-register new experiment BEFORE outcome inspection.
 
 ## HARD CONSTRAINTS
 - NO Binance merge. NO reopening H001/FCLR-003/FCLR-008/FCLR-010 without trigger + pre-registration + split freeze.
-- All 27 tests must PASS. No changes to `.github/workflows/`.
-- Only admissible: ironflow Hyperliquid liquidations + Hyperlquid fundingHistory API.
+- ALL 27 tests MUST PASS. NO changes to `.github/workflows/`.
+- Only admissible: ironflow Hyperliquid liquidations + Hyperliquid fundingHistory API.
 - Never silently zero missing funding — drop/flag with justification.
 - Sealed artifacts unchanged. Track A/B/C never merged; modeled != observed.
 - No risk-overlay promotion beyond hypothetical.
 
 ## SINGLE HIGHEST-VALUE NEXT TASK
-**Execute CAMPAIGN FCLR-HEAVY-001 starting at Step 1.** Do heavy analysis on frozen Track A data. Verify integrity, keep tests green, produce concrete artifacts that future agents cannot ignore. If blocked by data availability for any subanalysis, write precise evidence + smallest verifiable alternative and continue to next step.
+**START NOW: CAMPAIGN FCLR-HEAVY-001 Step 1.** Do heavy, rigorous analysis on frozen Track A. Be exhaustive. Produce concrete artifacts future agents cannot ignore. If any subanalysis blocked by data, write precise evidence + smallest verifiable alternative and proceed.
