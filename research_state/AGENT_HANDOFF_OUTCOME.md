@@ -1,6 +1,6 @@
 # AGENT HANDOFF OUTCOME — SINGLE DURABLE HANDOFF (source of truth)
 
-Generated: 2026-11-01T20:21:01Z
+Generated: 2026-11-02T00:07:51Z
 **Task ID:** HND-20261101-191334-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V28
 **HEAD:** a0135068 (main), up to date with origin/main
 **Repo:** Funding-conditioned-volatility-and-liquidation-risk
@@ -20,7 +20,7 @@ Generated: 2026-11-01T20:21:01Z
 | B | FCLR-H003 modeled boundary breaches | CLOSED_NEGATIVE | Codepath separation irrefutable (grep evidence); no incremental skill after Holm (FCLR-H003-EXT-001). |
 | H002 | funding-extreme correction time | EXPLORATORY/PARTIAL (88/84/4) — PERMANENT BOTTLENECK | SSRN HTTP 403 blocks full methodology; cannot reconstruct event definition/censoring/regime split from admissible sources. No promotion, no speculative pre-registration. Revisit only if SSRN becomes accessible, with pre-registration BEFORE outcome inspection. |
 
-## NEXT SESSION — INITIAL TASK (timestamped 2026-11-01T20:25:54Z)
+## NEXT SESSION — INITIAL TASK (timestamped 2026-11-02T00:07:51Z)
 **Priority by repo name (funding-conditioned volatility → liquidation risk):** Track C (CLOSED) → Track A (REOPENED, gate PASSED) → Track B (CLOSED) → H002 (PERMANENT BLOCK).
 
 **Campaign directive:** NO status-only reporting. Every step below requires concrete artifacts with file:line/provenance, computed values, and explicit acceptance checks. Do heavy verification work first (recomputation + audits). Do not proceed to later steps until the acceptance gates for earlier steps are satisfied.
