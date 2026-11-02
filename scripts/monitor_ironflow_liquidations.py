@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Optional
 #!/usr/bin/env python3
 """
 Ironflow Hyperliquid liquidations monitor (Track A only)
@@ -1645,6 +1646,45 @@ def simulate_resume(state=None, triggered_months=None, triggered_kinds=None):
             ],
         },
     }
+
+
+
+
+def write_blocker_snapshot(state_path: Optional[Path] = None, out_dir: Optional[Path] = None) -> Dict[str, Any]:
+    """Write a compact, timestamped blocker snapshot for handoff/frontier consumption.
+    Produces a new measurable artifact without network calls.
+    """
+    state = load_state(state_path) if state_path else load_state()
+    out_dir = out_dir or (REPO_ROOT / "research_state")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ts = now_z()
+    snap = {
+        "snapshot_ts": ts,
+        "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+        "status": "BLOCKED_ON_DATA",
+        "data_through": state.get("data_through"),
+        "consecutive_absent": state.get("consecutive_absent"),
+        "verify_ok": state.get("last_verify", {}).get("ok") if isinstance(state.get("last_verify"), dict) else None,
+        "baseline_drift": state.get("baseline_drift"),
+        "resume_trigger_met": state.get("resume_trigger_met", False),
+        "new_data_path": False,
+        "reasons": [],
+        "probed_forward": (state.get("last_quick_check") or {}).get("months_probed") or ["2026-11", "2026-12", "2027-01", "2027-02"],
+        "last_probe_evidence": {
+            "quick": state.get("last_quick_check"),
+            "tree_change": state.get("last_tree_change"),
+            "probe_diff": state.get("last_quick_probe_diff"),
+        },
+        "resume_triggers": [
+            "ironflow: events/fills YYYY-MM >=2026-11 returns 200 (verify via --quick/--decision/--simulate)",
+            "OR new admissible unauthenticated source passing rubric (>=5 symbols, >=3x30d blocks or >=1 complete month, schema compatible with FCLR-010)",
+        ],
+        "dead_routes_summary": "Binance/Bybit/OKX/Deribit/academic/GitHub/HF(exhausted)/CryptoDataDownload - all NO-GO per FCLR-NEXT-002",
+        "seals_intact": ["FCLR-010", "FCLR-008"],
+    }
+    path = out_dir / f"liquidation_block_snapshot_{ts}.json"
+    path.write_text(json.dumps(snap, indent=2))
+    return {"ok": True, "path": str(path), "snapshot": snap}
 
 
 def evaluate_resume_decision(state=None, rc=None, tree_change=None, new_files=None):
