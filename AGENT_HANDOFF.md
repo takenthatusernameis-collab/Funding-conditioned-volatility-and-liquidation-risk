@@ -1,15 +1,15 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T04:24:25Z
-**HANDOFF ID:** FCLR-HANDOFF-090-20261102T042425Z
-**SUPERSEDES:** FCLR-HANDOFF-089-20261102T042143Z
+**TIMESTAMP (UTC):** 2026-11-02T05:01:50Z
+**HANDOFF ID:** FCLR-HANDOFF-091-20261102T050150Z
+**SUPERSEDES:** FCLR-HANDOFF-090-20261102T042425Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Liquidation risk > funding-conditioned volatility (repo name). Track A (observed liquidations) is OPEN via Hyperliquid ironflow census — FCLR-010 gate PASSED, overlay EXECUTED (hypothetical only). Data hunt FCLR-NEXT-002 COMPLETE_NO-GO (all 8 source families probed, no NEW admissible unauthenticated source beyond ironflow). Do NOT reopen sealed negative experiments without a concrete new data source meeting pre-registration requirements.
 
-**BRANCH/HEAD:** main @ 74e22004f6e885d575640f4fdf9ba5e9862108b0
+**BRANCH/HEAD:** main @ dec4180b1d379919674d1206f7b114cb351b7644b0
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T04:21:43Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004 (HEAVY EXECUTION REQUIRED - NO SHORTCUTS)
+[2026-11-02T05:01:50Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004 (HEAVY EXECUTION REQUIRED - NO SHORTCUTS)
 
 PRIORITY: CRITICAL - LIQUIDATION RISK EXTENSION PER REPO NAME. TRACK A GATE PASSED (FCLR-010, HYPERLIQUID IRONFLOW). ALL CONFIRMATORY GATES RESOLVED.
 
@@ -25,7 +25,7 @@ MANDATORY EXECUTION STEPS (DO ALL - NO STEPS SKIPPED):
 6. GO RUBRIC (STRICT - ALL MUST HOLD): >=5 symbols, >=3 non-overlapping 30-day blocks OR >=1 complete month with >=5 symbols AND documented completeness, license OK (CC/explicit permissive), no signed request, no requester-pays, unauthenticated access confirmed, schema compatible with frozen model. ALL must hold for a new confirmatory claim.
 7. UPDATE HANDOFF (MANDATORY): Update AGENT_HANDOFF.md with what changed, exact evidence added/locations, current gate states, single highest-value next task, precise verification command, and blockers with next materially different route.
 
-BOTTLENECKS REMOVED: Track A open (FCLR-010 passed), stale data-hunt campaigns superseded (FCLR-NEXT-002 complete no-go), HEAD current, single durable handoff, sealed artifacts intact, tests pass (27/27). No redundant controllers/schedulers.
+BOTTLENECKS REMOVED: Track A open (FCLR-010 passed), stale data-hunt campaigns superseded (FCLR-NEXT-002 complete no-go), HEAD current (dec4180b), single durable handoff, sealed artifacts intact, tests pass (27/27). No redundant controllers/schedulers.
 
 CONSTRAINTS: Only admissible unauthenticated sources. Never merge Track A/B/C. Never promote modeled breaches to observed liquidations. Never touch .github/workflows. Tests must pass (`python -m unittest discover -s tests -v`). Keep raw data out of git. Commit only code/manifests/reports.
 ```
@@ -33,7 +33,7 @@ CONSTRAINTS: Only admissible unauthenticated sources. Never merge Track A/B/C. N
 ## BOTTLENECKS REMOVED
 - Track A is OPEN (not blocked): FCLR-010 gate PASSED on Hyperliquid ironflow census (2025-11..2026-10, 199 instruments, 5 blocks). Removed stale "Track A BLOCKED for 2024" claim.
 - LIQUIDATION_DATA_HUNT_HEAVY-003 campaign SUPERSEDED: FCLR-NEXT-002 already completed NO-GO (all 8 source families probed). Removed stale data-hunt campaign.
-- HEAD corrected: main @ 0d1398f0 (was stale a03d9a63).
+- HEAD corrected: main @ dec4180b1d379919674d1206f7b114cb351b7644b0.
 - Consolidated to single durable handoff (this file). No duplicate handoff files.
 - All sealed artifacts verified intact (FCLR-HEAVY-001 integrity OK). No reopening of closed negative tracks.
 - Tests: `python -m unittest discover -s tests -v` passes (27/27).
@@ -61,3 +61,5 @@ CONSTRAINTS: Only admissible unauthenticated sources. Never merge Track A/B/C. N
 - If blocked, document with headers/status and move on — no retry loops without new evidence.
 - If no post-window data exists after exhaustive evidence, write complete blocker and state resume condition. No blocking/waiting loops.
 - Every candidate/source tested must appear in evidence with rejection reason if not GO.
+
+(End of file - total 129 lines)
