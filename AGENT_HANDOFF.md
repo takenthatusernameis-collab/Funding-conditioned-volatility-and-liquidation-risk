@@ -1,12 +1,12 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T15:12:00Z
+**TIMESTAMP:** 2026-11-02T15:49:13Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk — Track A liquidation risk PRIORITIZED (repo-name-driven prioritization: observed-liquidation forecast validation before any volatility overlay).
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA
 **SESSION GOAL FOR NEXT AGENT:** Execute with ZERO coasting. Data is blocked (ironflow through 2026-10 only; 2026-11/12/2027-01/2027-02 all CONFIRMED_ABSENT at 20261102T150946Z; tree 304 no backfill at 20261102T150101Z). Your first action is the state-aware resume check, then mandatory heavy work in full. If ANY post-2026-10 ironflow data appears, you MUST pre-register BEFORE inspecting outcomes and run the frozen FCLR-010 harness immediately.
 
 ## NEXT AGENT INITIAL TASK (CLEAR, TIMESTAMPED — START NOW)
-**2026-11-02T15:12:00Z:** Run `python scripts/monitor_ironflow_liquidations.py --quick` (state-aware, cheap, forward-edge only). Read `research_state/ironflow_monitor_state.json` (and confirm `python scripts/monitor_ironflow_liquidations.py --verify` reports ok=True).
+**2026-11-02T15:49:13Z:** Run `python scripts/monitor_ironflow_liquidations.py --quick` (state-aware, cheap, forward-edge only). Read `research_state/ironflow_monitor_state.json` (and confirm `python scripts/monitor_ironflow_liquidations.py --verify` reports ok=True).
 - If `new_files_found` is non-empty for any month >= 2026-11, OR any month >= 2026-11 returns HTTP 200 for events OR fills → NEW DATA PATH (Step 2 below). Create fresh pre-registration BEFORE inspecting outcomes, then run `scripts/fclr010_harness.py` and write `research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.md` (calibration, LOO, concentration, block-bootstrap CIs >=2000 reps, Holm multiplicity, gate assessment). Update frontier + cross-track log.
 - Otherwise (expected) → BLOCKED PATH: execute MANDATORY HEAVY WORK A–E below in full, ESCALATED: this session must produce at least ONE new measurable artifact beyond the previous session's diff (previous session: monitor now persists `last_quick_check` on `--quick`; tests 73→75 PASS; blocker doc 15:12:00Z; frontier refreshed). "Nothing to do" is not an option. A session producing no measurable automation, tests, or evidence FAILS.
 
