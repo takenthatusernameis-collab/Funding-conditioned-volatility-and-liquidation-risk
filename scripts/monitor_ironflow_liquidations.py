@@ -18,6 +18,12 @@ Improvements over the baseline monitor:
   consecutive_absent (months confirmed absent in a row at the forward edge) for
   a concrete, checkable resume condition.
 - Idempotent: re-running produces the same evidence unless new data appears.
+- Baseline-drift detection (--drift state check, integrated into --quick and --verify):
+  re-HEADs every previously-available month and flags silent archive regressions
+  (200 -> 404, or ETag/Last-Modified change) that a forward-edge-only probe
+  cannot see. The frozen FCLR-010 baseline panel depends on these months, so a
+  regression must surface before the next forward-validation run, not silently
+  corrupt it.
 """
 import json
 import hashlib
@@ -702,6 +708,119 @@ def verify_state(state=None):
     return {"ok": len(errors) == 0, "checks": checks, "errors": errors, "data_through": data_through, "consecutive_absent": stored_absent}
 
 
+def check_baseline_drift(state):
+    """Detect silent archive regressions: a previously-available month disappearing.
+
+    The forward-edge probe only watches months AFTER data_through, so it cannot
+    notice if the archive regresses (a month that used to return 200 now returns
+    404, or its ETag/size changes without new forward-edge files). Such a change
+    would corrupt the frozen FCLR-010 baseline (which depends on the exact
+    2025-11..2026-10 panel) and must be surfaced immediately rather than silently
+    corrupting the next forward-validation run.
+
+    Compares the persisted file_cache (recorded on the last successful GET of each
+    known month) against the cached tree_parquet_paths. Returns a dict describing
+    every known month whose cached ETag/size is present (no network here; this is
+    a state-consistency check). The network-aware variant is check_baseline_drift_probe.
+    """
+    cache = state.get("file_cache", {}) or {}
+    known_paths = state.get("tree_parquet_paths", []) or []
+    known_months = scan_events_fills_only(known_paths)
+    result = {
+        "known_months": known_months,
+        "cached_months": sorted(cache.keys()),
+        "missing_cache_entries": [],
+        "stale_cache_entries": [],
+        "checked": len(known_months),
+    }
+    for ym in known_months:
+        for kind in ("events", "fills"):
+            key = f"{kind}:{ym}"
+            c = cache.get(key)
+            if not c:
+                result["missing_cache_entries"].append({"month": ym, "kind": kind, "cache_key": key})
+            elif not c.get("etag") or not c.get("sha256"):
+                result["stale_cache_entries"].append({"month": ym, "kind": kind, "cache_key": key, "entry": c})
+    result["drifted"] = bool(result["missing_cache_entries"] or result["stale_cache_entries"])
+    return result
+
+
+def check_baseline_drift_probe(state, max_retries=MAX_RETRIES):
+    """Network-aware baseline-drift check: re-HEAD every known available month.
+
+    Cheap HEAD requests (no body download) against every (kind, month) pair the
+    monitor has ever recorded as available. Any month that flips 200 -> 404, or
+    whose ETag changes, is a regression of the frozen baseline and is reported in
+    ``regressions``. Months that are 404 in the cache are skipped (they were never
+    part of the baseline). This is bounded: only previously-available months are
+    re-checked, and HEAD probes carry a retry budget of 1.
+    """
+    cache = state.get("file_cache", {}) or {}
+    regressions = []
+    checked = 0
+    changed_etags = []
+    for key, c in sorted(cache.items()):
+        if not c or not c.get("etag"):
+            continue
+        # cache keys are "kind:YYYY-MM"
+        if ":" not in key:
+            continue
+        kind, ym = key.split(":", 1)
+        url = (EVENTS_TEMPLATE if kind == "events" else FILLS_TEMPLATE) % ym
+        head = head_probe(url)
+        checked += 1
+        rec = {
+            "month": ym,
+            "kind": kind,
+            "url": url,
+            "head_status": head["status"],
+            "cached_etag": c.get("etag"),
+            "cached_sha256": c.get("sha256"),
+            "cached_content_length": c.get("content_length"),
+        }
+        if head.get("head_ok") and head["status"] == 200:
+            new_etag = head["headers"].get("ETag")
+            new_lm = head["headers"].get("Last-Modified")
+            rec["new_etag"] = new_etag
+            rec["new_last_modified"] = new_lm
+            if new_etag and new_etag != c.get("etag"):
+                rec["reason"] = "etag_changed"
+                regressions.append(rec)
+                changed_etags.append(rec)
+            elif c.get("last_modified") and new_lm and new_lm != c.get("last_modified"):
+                rec["reason"] = "last_modified_changed"
+                regressions.append(rec)
+            else:
+                rec["reason"] = "unchanged"
+        elif head.get("head_ok") and head["status"] == 404:
+            rec["reason"] = "regressed_200_to_404"
+            regressions.append(rec)
+        else:
+            rec["reason"] = f"head_failed_status_{head['status']}"
+            # Head failure is not treated as a regression: HF sometimes rejects
+            # HEAD; fall back to a GET to classify definitively.
+            r = resolve_get(url, etag_ref=[c.get("etag")], max_retries=max_retries)
+            rec["get_status"] = r["status"]
+            if r["ok"] and r["status"] == 200:
+                rec["reason"] = "unchanged_via_get"
+            elif r["status"] == 404:
+                rec["reason"] = "regressed_200_to_404"
+                regressions.append(rec)
+            else:
+                rec["reason"] = f"unclassified_status_{r['status']}"
+        # Rate-limit awareness between probes.
+        sl = _rate_limit_sleep(head.get("headers", {}) or {}, 0)
+        if sl:
+            time.sleep(sl)
+    return {
+        "checked": checked,
+        "regressions": regressions,
+        "regression_count": len(regressions),
+        "changed_etags": changed_etags,
+        "baseline_intact": len(regressions) == 0,
+    }
+
+
 def check_tree_change(state, max_retries=MAX_RETRIES):
     """Cheap tree ETag check to detect new parquet paths anywhere in the archive.
 
@@ -857,15 +976,31 @@ def main():
     quick = "--quick" in sys.argv
     scan = "--scan" in sys.argv
     verify = "--verify" in sys.argv
+    drift = "--drift" in sys.argv
     force = "--force" in sys.argv
     if "--list" in sys.argv:
         list_state()
         return
     if verify:
         vr = verify_state()
+        # Baseline-drift state check (no network) is part of verification: the
+        # frozen FCLR-010 baseline panel depends on every known month retaining a
+        # complete cache entry.
+        bd = check_baseline_drift(load_state())
+        vr["baseline_drift"] = bd
+        vr["ok"] = vr["ok"] and not bd["drifted"]
+        if bd["drifted"]:
+            vr["errors"].append(f"baseline drift detected: {bd['missing_cache_entries'] + bd['stale_cache_entries']}")
         print(json.dumps(vr, indent=2))
-        print(f"VERIFY ok={vr['ok']} data_through={vr['data_through']} consecutive_absent={vr['consecutive_absent']}")
+        print(f"VERIFY ok={vr['ok']} data_through={vr['data_through']} consecutive_absent={vr['consecutive_absent']} baseline_drift={bd["drifted"]}")
         return 0 if vr["ok"] else 1
+    if drift:
+        # --drift: state-only baseline-drift check (no network). Confirms the
+        # frozen baseline's cache is complete for every known month.
+        bd = check_baseline_drift(load_state())
+        print(json.dumps(bd, indent=2))
+        print(f"DRIFT drifted={bd['drift']} checked={bd['checked']} missing={len(bd['missing_cache_entries'])} stale={len(bd['stale_cache_entries'])}")
+        return 0 if not bd["drifted"] else 1
     ts = now_z()
     state = load_state()
     previously_available = known_available(state)
@@ -941,6 +1076,11 @@ def main():
         # previously persisted last_probe so any status flip (e.g. 404 -> 200) is
         # captured as structured evidence even if triggered is misread.
         evidence["probe_diff"] = compare_probes(state, rc)
+        # Baseline-drift check: re-HEAD every previously-available month to catch
+        # silent archive regressions (200 -> 404 or ETag change) that the
+        # forward-edge probe cannot see. A corrupted baseline would silently
+        # invalidate the next forward-validation run, so this is checked here.
+        evidence["baseline_drift"] = check_baseline_drift_probe(state)
         evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
         with open(evidence_path, "w") as f:
             json.dump(evidence, f, indent=2)
@@ -971,7 +1111,8 @@ def main():
         else:
             pd = evidence.get("probe_diff", {}) or {}
             summary = pd.get("summary", {}) or {}
-            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)})")
+            bd = evidence.get("baseline_drift", {}) or {}
+            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd.get('baseline_intact')} regressions={bd.get('regression_count',0)})")
         return
 
     if "--report" in sys.argv:

@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T20:50:33Z
+**TIMESTAMP:** 2026-11-02T20:54:44Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk — Track A liquidation risk PRIORITIZED (repo-name-driven)
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA
 **SESSION GOAL FOR NEXT AGENT:** NO COASTING. Execute the clearest initial task below. If new ironflow data appears (>=2026-11) OR new admissible unauthenticated Track A source passes GO rubric → PRE-REGISTER BEFORE INSPECTING OUTCOMES and run `scripts/fclr010_harness.py`. Otherwise, EXECUTE MANDATORY HEAVY WORK A–E IN FULL and produce at least ONE new measurable artifact beyond: `scripts/monitor_ironflow_liquidations.py` now has `--report` trend mode + `check_tree_change` + probe-diff + `last_quick_probe`; `ironflow_trend_report_20261102T195805Z.json`; `tests/test_monitor_ironflow.py` has TestTrendReport x4 + TestTreeChange x3 + TestCompareProbes x6; `run_manifest.json` fixed (valid JSON); blocker/frontier/handoff refreshed.

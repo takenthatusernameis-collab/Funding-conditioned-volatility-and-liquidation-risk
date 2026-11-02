@@ -714,7 +714,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-02T20:01:09.405988+00:00",
+    "timestamp_utc": "2026-11-02T20:54:58.735186+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -728,7 +728,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-02T20:01:09.406011+00:00",
+    "timestamp_utc": "2026-11-02T20:54:58.735200+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
