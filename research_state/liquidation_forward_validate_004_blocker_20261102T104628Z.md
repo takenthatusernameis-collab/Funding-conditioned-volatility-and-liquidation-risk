@@ -50,3 +50,11 @@ On resume: run monitor + alt-hunt, create fresh pre-reg BEFORE outcome inspectio
 - Pre-register BEFORE outcome inspection on new data.
 - No .github/workflows changes.
 - Tests green (42/42). Raw data out of git. Only evidence/code/manifests/reports committed.
+
+## UPDATE 2026-11-02T11:51:13Z (AUTOMATION STRENGTHENED - 004i)
+- Re-ran `scripts/monitor_ironflow_liquidations.py`: wrote `research_state/ironflow_probe_20261102T115113Z.json`. State-aware diff confirmed no genuinely new files. `data_through=2026-10`, `consecutive_absent=3`. Post-2026-10: events/fills both HTTP 404 for 2026-11; months probed extended with lookahead.
+- Re-ran `scripts/hunt_alternative_liquidation_sources.py` (strengthened): wrote updated `research_state/data_source_registry_alt_hunt.json` with expanded probes (HF dataset meta, GitHub contents/API, arXiv, OSF root, Kaggle, CommonCrawl index), retries/backoff, normalized headers. No admissible unauthenticated post-2026-10 source found.
+- Tests: `python -m unittest discover -s tests -v` all pass (42/42). Added/verified coverage for classification, new-file detection, month windows.
+- Campaign ID harmonized to LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i; pre-reg default updated to 004i in `scripts/create_forward_prereg.py`.
+- Automation hardened: monitor has failure classification, wider window, state-aware diffs; alt-hunt has retries/backoff and broader unauthenticated probes.
+- Resume conditions unchanged (must see both 200 for any >=2026-11 month at ironflow paths) but detection is faster/more robust.
