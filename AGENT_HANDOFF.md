@@ -1,7 +1,7 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T10:14:00Z
-**HANDOFF ID:** FCLR-HANDOFF-111-20261102T101400Z
-**SUPERSEDES:** FCLR-HANDOFF-109-20261102T095727Z (and all earlier)
+**TIMESTAMP (UTC):** 2026-11-02T10:43:56Z
+**HANDOFF ID:** FCLR-HANDOFF-112-20261102T104356Z
+**SUPERSEDES:** FCLR-HANDOFF-111-20261102T101400Z (and all earlier)
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name). Track A (observed liquidations) is the only open confirmatory track. Treat liquidation risk as the default axis of work until Track A forward validation is resolved or exhaustively blocked with irrefutable evidence.
 
@@ -49,7 +49,7 @@ MANDATORY READS FIRST:
 - research_state/cross_track_decision_log.md
 - research_state/experiment_frontier.json
 - research_state/liquidation_forward_validate_004_blocker_20261102T101200Z.md (latest blocker)
-- research_state/ironflow_probe_20261102T101024Z.json (fresh)
+- research_state/ironflow_probe_20261102T101430Z.json (fresh)
 - research_state/ironflow_monitor_state.json
 - research_state/experiment_prereg_LIQUIDATION_FORWARD_VALIDATE_004_20261102T060650Z.json
 - research_state/data_source_registry_alt_hunt.json
