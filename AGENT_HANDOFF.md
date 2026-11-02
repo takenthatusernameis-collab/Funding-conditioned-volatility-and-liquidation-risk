@@ -1,7 +1,7 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T05:54:05Z
-**HANDOFF ID:** FCLR-HANDOFF-095-20261102T055405Z
-**SUPERSEDES:** FCLR-HANDOFF-094-20261102T050745Z
+**TIMESTAMP (UTC):** 2026-11-02T05:55:30Z
+**HANDOFF ID:** FCLR-HANDOFF-096-20261102T055530Z
+**SUPERSEDES:** FCLR-HANDOFF-095-20261102T055405Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** LIQUIDATION RISK > funding-conditioned volatility (repo name). Track A (observed liquidations) is the only open confirmatory track. Treat liquidation risk as the default axis of work until Track A is resolved or exhaustively blocked with irrefutable evidence.
 
@@ -9,7 +9,7 @@
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T05:54:05Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_MONITOR_AUTOMATE_HEAVY-004c (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
+[2026-11-02T05:55:30Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_MONITOR_AUTOMATE_HEAVY-004c (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
 
 PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet as of 2026-11-02T05:54Z). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". You MUST convert this block into reusable automation and airtight evidence.
 
