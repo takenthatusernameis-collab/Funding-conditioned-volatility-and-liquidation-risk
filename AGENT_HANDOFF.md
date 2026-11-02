@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T02:18:56Z
+**TIMESTAMP (UTC):** 2026-11-02T02:19:58Z
 **INITIAL TASK (NEXT SESSION):** EXECUTE CAMPAIGN FCLR-HEAVY-001 — Funding-conditioned liquidation-risk deepening (Track A operational hardening). DO HEAVY WORK. Start at Step 1 immediately. Do not stop until ALL 6 steps produce artifacts + tests pass (27/27). NO confirmatory outcome inspection for sealed panels. Treat everything as hypothetical-only.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk (name is directive). Priority order: (1) Track A operational hardening on frozen ironflow Hyperliquid census (highest concrete signal, gate PASSED) → (2) nothing else until heavy Track A analysis exhausted. Track C sealed (NOT_SUPPORTED), Track B closed (CLOSED_NEGATIVE), H002 permanently blocked.
