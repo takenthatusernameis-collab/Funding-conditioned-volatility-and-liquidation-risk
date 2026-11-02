@@ -538,6 +538,79 @@ def recompute_consecutive_absent(months_probed):
     return count
 
 
+def compare_probes(prev_state, curr_rc):
+    """Diff current forward-edge probe results against the previous persisted probe.
+
+    Compares every (kind, month) entry in the previous ``last_probe.months_probed``
+    against the current ``check_resume_condition`` probes. Returns added (newly
+    available), changed (status flip), removed (gone from available to absent),
+    and unchanged entries, plus a summary. This makes a resume trigger impossible
+    to miss even if the ``triggered`` flag were somehow miscomputed.
+    """
+    prev_months = {}
+    # Prefer the persisted forward-edge quick probe (last_quick_probe) so the diff
+    # can detect a 404 -> 200 flip across consecutive --quick runs. Fall back to
+    # last_probe.months_probed (full --force probe results) when unavailable.
+    last_quick = (prev_state or {}).get("last_quick_probe", {}) or {}
+    if last_quick.get("probes"):
+        for p in last_quick["probes"]:
+            ym = p.get("month")
+            kind = p.get("kind")
+            if ym and kind:
+                prev_months.setdefault(ym, {})[kind] = p.get("status")
+    else:
+        last_probe = (prev_state or {}).get("last_probe", {}) or {}
+        for m in last_probe.get("months_probed", []) or []:
+            ym = m.get("month")
+            if ym:
+                prev_months[ym] = {
+                    "events": (m.get("events") or {}).get("status"),
+                    "fills": (m.get("fills") or {}).get("status"),
+                }
+
+    curr = {}
+    for p in (curr_rc or {}).get("probes", []) or []:
+        ym = p.get("month")
+        kind = p.get("kind")
+        if ym and kind:
+            curr.setdefault(ym, {})[kind] = p.get("status")
+
+    added = []
+    changed = []
+    removed = []
+    unchanged = []
+
+    all_months = sorted(set(list(prev_months.keys()) + list(curr.keys())))
+    for ym in all_months:
+        prev = prev_months.get(ym, {})
+        cur = curr.get(ym, {})
+        for kind in ("events", "fills"):
+            ps = prev.get(kind)
+            cs = cur.get(kind)
+            if ps is None and cs is not None:
+                added.append({"month": ym, "kind": kind, "prev": None, "curr": cs})
+            elif ps is not None and cs is None:
+                removed.append({"month": ym, "kind": kind, "prev": ps, "curr": None})
+            elif ps != cs:
+                changed.append({"month": ym, "kind": kind, "prev": ps, "curr": cs})
+            else:
+                unchanged.append({"month": ym, "kind": kind, "prev": ps, "curr": cs})
+
+    return {
+        "added": added,
+        "changed": changed,
+        "removed": removed,
+        "unchanged": unchanged,
+        "summary": {
+            "added_count": len(added),
+            "changed_count": len(changed),
+            "removed_count": len(removed),
+            "unchanged_count": len(unchanged),
+            "any_change": bool(added or changed or removed),
+        },
+    }
+
+
 def verify_state(state=None):
     """Machine-readable state-consistency verification (no network).
 
@@ -813,6 +886,10 @@ def main():
         evidence["mode"] = "quick"
         evidence["head_probes"] = rc.get("head_probes", 0)
         evidence["cached_hits"] = rc.get("cached_hits", 0)
+        # Probe-to-probe diff: compare current forward-edge results against the
+        # previously persisted last_probe so any status flip (e.g. 404 -> 200) is
+        # captured as structured evidence even if triggered is misread.
+        evidence["probe_diff"] = compare_probes(state, rc)
         evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
         with open(evidence_path, "w") as f:
             json.dump(evidence, f, indent=2)
@@ -828,13 +905,22 @@ def main():
             "cached_hits": rc.get("cached_hits"),
             "data_through": rc["data_through"],
         }
+        # Persist per-month per-kind forward-edge probe results so the probe-to-
+        # probe diff can detect a 404 -> 200 flip across consecutive quick runs.
+        state["last_quick_probe"] = {
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "months_probed": rc["months_probed"],
+            "probes": rc.get("probes", []),
+        }
         with open(STATE_PATH, "w") as f:
             json.dump(state, f, indent=2)
         print(f"Wrote evidence: {evidence_path}")
         if rc["triggered"]:
             print(f"RESUME TRIGGER FIRED: {rc['triggering_files']}")
         else:
-            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')}")
+            pd = evidence.get("probe_diff", {}) or {}
+            summary = pd.get("summary", {}) or {}
+            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)})")
         return
 
     if scan:

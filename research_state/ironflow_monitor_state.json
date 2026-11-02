@@ -714,7 +714,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-02T15:50:25.325069+00:00",
+    "timestamp_utc": "2026-11-02T15:54:45.063915+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -726,5 +726,136 @@
     "head_probes": 8,
     "cached_hits": 0,
     "data_through": "2026-10"
+  },
+  "last_quick_probe": {
+    "timestamp_utc": "2026-11-02T15:54:45.063929+00:00",
+    "months_probed": [
+      "2026-11",
+      "2026-12",
+      "2027-01",
+      "2027-02"
+    ],
+    "probes": [
+      {
+        "kind": "events",
+        "month": "2026-11",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2026-11",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "fills",
+        "month": "2026-11",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-11.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2026-11",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-11.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "events",
+        "month": "2026-12",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-12.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2026-12",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-12.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "fills",
+        "month": "2026-12",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-12.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2026-12",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-12.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "events",
+        "month": "2027-01",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-01.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2027-01",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-01.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "fills",
+        "month": "2027-01",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-01.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2027-01",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-01.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "events",
+        "month": "2027-02",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-02.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2027-02",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-02.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      },
+      {
+        "kind": "fills",
+        "month": "2027-02",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-02.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2027-02",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-02.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        }
+      }
+    ]
   }
 }

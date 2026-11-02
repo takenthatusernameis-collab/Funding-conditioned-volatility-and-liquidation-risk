@@ -505,3 +505,115 @@ class TestVerifyState(unittest.TestCase):
         state["tree_etag"] = None
         vr = mon.verify_state(state)
         self.assertFalse(vr["ok"])
+
+
+class TestCompareProbes(unittest.TestCase):
+    def _quick_state(self, probes):
+        return {
+            "last_quick_probe": {
+                "timestamp_utc": "2026-11-02T15:00:00Z",
+                "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+                "probes": probes,
+            }
+        }
+
+    def _rc(self, probes):
+        return {"months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"], "probes": probes}
+
+    def test_all_absent_no_change(self):
+        prev_probes = [
+            {"kind": "events", "month": "2026-11", "status": 404},
+            {"kind": "fills", "month": "2026-11", "status": 404},
+            {"kind": "events", "month": "2026-12", "status": 404},
+            {"kind": "fills", "month": "2026-12", "status": 404},
+        ]
+        curr_probes = [
+            {"kind": "events", "month": "2026-11", "status": 404},
+            {"kind": "fills", "month": "2026-11", "status": 404},
+            {"kind": "events", "month": "2026-12", "status": 404},
+            {"kind": "fills", "month": "2026-12", "status": 404},
+        ]
+        diff = mon.compare_probes(self._quick_state(prev_probes), self._rc(curr_probes))
+        self.assertEqual(diff["summary"]["added_count"], 0)
+        self.assertEqual(diff["summary"]["changed_count"], 0)
+        self.assertEqual(diff["summary"]["removed_count"], 0)
+        self.assertFalse(diff["summary"]["any_change"])
+
+    def test_404_to_200_flip_detected_as_changed(self):
+        prev_probes = [
+            {"kind": "events", "month": "2026-11", "status": 404},
+            {"kind": "fills", "month": "2026-11", "status": 404},
+        ]
+        curr_probes = [
+            {"kind": "events", "month": "2026-11", "status": 200},
+            {"kind": "fills", "month": "2026-11", "status": 200},
+        ]
+        diff = mon.compare_probes(self._quick_state(prev_probes), self._rc(curr_probes))
+        self.assertEqual(diff["summary"]["changed_count"], 2)
+        self.assertTrue(diff["summary"]["any_change"])
+        changed = {c["month"] + "/" + c["kind"]: c for c in diff["changed"]}
+        self.assertIn("2026-11/events", changed)
+        self.assertEqual(changed["2026-11/events"]["prev"], 404)
+        self.assertEqual(changed["2026-11/events"]["curr"], 200)
+
+    def test_new_month_detected_as_added(self):
+        prev_probes = [
+            {"kind": "events", "month": "2026-11", "status": 404},
+            {"kind": "fills", "month": "2026-11", "status": 404},
+        ]
+        curr_probes = [
+            {"kind": "events", "month": "2026-11", "status": 404},
+            {"kind": "fills", "month": "2026-11", "status": 404},
+            {"kind": "events", "month": "2027-02", "status": 200},
+            {"kind": "fills", "month": "2027-02", "status": 200},
+        ]
+        diff = mon.compare_probes(self._quick_state(prev_probes), self._rc(curr_probes))
+        self.assertEqual(diff["summary"]["added_count"], 2)
+        self.assertTrue(diff["summary"]["any_change"])
+
+    def test_month_gone_detected_as_removed(self):
+        prev_probes = [
+            {"kind": "events", "month": "2026-11", "status": 200},
+            {"kind": "fills", "month": "2026-11", "status": 200},
+            {"kind": "events", "month": "2026-12", "status": 404},
+            {"kind": "fills", "month": "2026-12", "status": 404},
+        ]
+        curr_probes = [
+            {"kind": "events", "month": "2026-12", "status": 404},
+            {"kind": "fills", "month": "2026-12", "status": 404},
+        ]
+        diff = mon.compare_probes(self._quick_state(prev_probes), self._rc(curr_probes))
+        self.assertEqual(diff["summary"]["removed_count"], 2)
+        self.assertTrue(diff["summary"]["any_change"])
+
+    def test_prefers_last_quick_probe_over_last_probe(self):
+        # last_probe has stale 200 for 2026-11; last_quick_probe has correct 404.
+        state = {
+            "last_probe": {
+                "months_probed": [
+                    {"month": "2026-11", "events": {"status": 200}, "fills": {"status": 200}},
+                ]
+            },
+            "last_quick_probe": {
+                "timestamp_utc": "2026-11-02T15:00:00Z",
+                "months_probed": ["2026-11"],
+                "probes": [
+                    {"kind": "events", "month": "2026-11", "status": 404},
+                    {"kind": "fills", "month": "2026-11", "status": 404},
+                ],
+            },
+        }
+        curr = {"months_probed": ["2026-11"], "probes": [
+            {"kind": "events", "month": "2026-11", "status": 404},
+            {"kind": "fills", "month": "2026-11", "status": 404},
+        ]}
+        diff = mon.compare_probes(state, curr)
+        self.assertEqual(diff["summary"]["changed_count"], 0)
+        self.assertFalse(diff["summary"]["any_change"])
+
+    def test_empty_state_returns_all_added(self):
+        diff = mon.compare_probes(None, self._rc([
+            {"kind": "events", "month": "2026-11", "status": 404},
+        ]))
+        self.assertEqual(diff["summary"]["added_count"], 1)
+        self.assertTrue(diff["summary"]["any_change"])
