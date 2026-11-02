@@ -763,3 +763,32 @@ class TestTreeChange(unittest.TestCase):
         self.assertFalse(res["changed"])
         self.assertEqual(res["added"], [])
         self.assertEqual(res["removed"], [])
+
+
+class TestQuickDiffSummary(unittest.TestCase):
+    """Tests for quick_diff_summary helper added in heavy work."""
+
+    def test_quick_diff_summary_empty(self):
+        state = {}
+        rc = {"probes": [
+            {"kind": "events", "month": "2026-11", "status": 404},
+        ]}
+        summary = mon.quick_diff_summary(state, rc)
+        self.assertTrue(summary["any_change"])
+        self.assertEqual(summary["added"], 1)
+
+    def test_quick_diff_summary_no_change(self):
+        state = {
+            "last_quick_probe": {
+                "probes": [
+                    {"kind": "events", "month": "2026-11", "status": 404},
+                ]
+            }
+        }
+        rc = {"probes": [
+            {"kind": "events", "month": "2026-11", "status": 404},
+        ]}
+        summary = mon.quick_diff_summary(state, rc)
+        self.assertFalse(summary["any_change"])
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(summary["changed"], 0)

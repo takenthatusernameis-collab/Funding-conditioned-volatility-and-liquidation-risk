@@ -146,6 +146,11 @@ def main():
         {"name": "kaggle", "urls": ["https://www.kaggle.com/api/v1/datasets/list?search=hyperliquid%20liquidations"], "notes": "Public API root/search style"},
         {"name": "github_code_search_unauth", "urls": ["https://api.github.com/search/code?q=hyperliquid+liquidations+parquet"], "notes": "Unauthenticated code search (usually 401)"},
         {"name": "github_repos_search", "urls": ["https://api.github.com/search/repositories?q=hyperliquid+liquidations"], "notes": "Unauthenticated repo search"},
+        {"name": "coinglass_public", "urls": ["https://www.coinglass.com/", "https://www.coinglass.com/LiquidationData"], "notes": "Public site structure probe"},
+        {"name": "hyblock_public", "urls": ["https://hyblockcapital.com/"], "notes": "Public site probe"},
+        {"name": "coinank_public", "urls": ["https://www.coinank.com/"], "notes": "Public site probe"},
+        {"name": "paradigm_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
+        {"name": "theblock_research", "urls": ["https://www.theblock.co/research"], "notes": "Research page probe"},
     ]
     results = {"hunt_id": f"alt_hunt_{ts}", "timestamp_utc": datetime.now(timezone.utc).isoformat(), "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i", "unauthenticated_only": True, "rubric": RUBRIC, "candidates": []}
     for c in candidates:
@@ -173,4 +178,15 @@ if __name__ == "__main__":
 EXTRA_PROBES = [
     ("bybit_public_instruments", ["https://api.bybit.com/v5/market/instruments-info?category=linear"]),
     ("okx_public_instruments", ["https://www.okx.com/api/v5/public/instruments?instType=SWAP"]),
+]
+
+
+# HEAVY-004i enhancement: add more unauthenticated candidates
+ENHANCED_CANDIDATES = [
+    {"name": "coinglass_public_liquidations", "urls": ["https://www.coinglass.com/api/liquidation/chart", "https://www.coinglass.com/LiquidationData"], "notes": "Coinglass public pages (often requires JS; probe for structure only)"},
+    {"name": "coinank_public", "urls": ["https://www.coinank.com/"], "notes": "Public site probe"},
+    {"name": "laevitas_public", "urls": ["https://laevitas.ch/"], "notes": "Public site probe"},
+    {"name": "hyblock_public", "urls": ["https://hyblockcapital.com/"], "notes": "Public site probe"},
+    {"name": "paradigm_data_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
+    {"name": "glassnode_public_docs", "urls": ["https://docs.glassnode.com/"], "notes": "Docs probe"},
 ]

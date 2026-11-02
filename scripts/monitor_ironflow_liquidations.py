@@ -1450,5 +1450,21 @@ def _compare_probes_safe(prev_state, rc):
         return {"summary": {"added_count": 0, "changed_count": 0, "removed_count": 0, "error": str(e)}, "added": [], "changed": [], "removed": []}
 
 
+# [HEAVY-004i session enhancement] quick diff summary helper for automation
+def quick_diff_summary(prev_state, curr_rc):
+    """Fast structured summary of probe changes for logging/automation."""
+    diff = compare_probes(prev_state, curr_rc)
+    s = diff.get("summary", {})
+    return {
+        "any_change": bool(s.get("any_change")),
+        "added": s.get("added_count", 0),
+        "changed": s.get("changed_count", 0),
+        "removed": s.get("removed_count", 0),
+        "added_files": [f"{x['month']}/{x['kind']}" for x in diff.get("added", [])],
+        "changed_files": [f"{x['month']}/{x['kind']}:{x['prev']}->{x['curr']}" for x in diff.get("changed", [])],
+    }
+
+
+
 if __name__ == "__main__":
     main()
