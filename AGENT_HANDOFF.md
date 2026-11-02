@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T00:11:12Z
+**TIMESTAMP (UTC):** 2026-11-02T00:13:12Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive.
 **BRANCH/HEAD:** main @ fb5ebec8
-**HANDOFF ID:** FCLR-HANDOFF-069-20261102T001112Z
+**HANDOFF ID:** FCLR-HANDOFF-070-20261102T001312Z
 **SUPERSEDES:** FCLR-HANDOFF-068-20261102T000726Z (AGENT_HANDOFF_OUTCOME.md narrative consolidated here; its HEAD a0135068 does not exist in git — that parallel session's artifacts are recorded below and retired).
 
 **STATUS:** Tests 27/27 PASS at HEAD fb5ebec8. Working tree clean except `__pycache__` (harmless). All heavy confirmatory work from both parallel sessions is complete and artifacted; neither session closed out. Dual-handoff bottleneck removed — this file is now the single source of truth.
