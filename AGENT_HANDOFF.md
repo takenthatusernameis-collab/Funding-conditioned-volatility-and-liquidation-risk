@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T00:04:02Z
+**TIMESTAMP (UTC):** 2026-11-02T00:07:26Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive. Funding-conditioned analysis is #1.
 **BRANCH/HEAD:** main @ 2841cebf
-**HANDOFF ID:** FCLR-HANDOFF-067-20261102T000402Z
-**SUPERSEDES:** FCLR-HANDOFF-066-20261101T222855Z
+**HANDOFF ID:** FCLR-HANDOFF-068-20261102T000726Z
+**SUPERSEDES:** FCLR-HANDOFF-067-20261102T000402Z
 
 **STATUS:** Tests 27/27 PASS. FCLR-LIQMICRO-002 COMPLETE. Real Hyperliquid funding integrated (9 coins x 8668 records, fundingRate.std()>0 confirmed in research_state/liqmicro_funding_audit_002.md). Degenerate zeroed-funding bug FIXED in src/analysis/liqmicro/features.py (was zeroing funding_rate/funding_abs; now merges on symbol+hour UTC). D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs non-zero (was 0.0); D3 clustering_by_decile populated (was {}); BH FDR 4 significant. NO H001 reversal, NO H001 re-test opened. Sealed artifacts intact. Working tree has only `__pycache__` modifications (harmless).
 
