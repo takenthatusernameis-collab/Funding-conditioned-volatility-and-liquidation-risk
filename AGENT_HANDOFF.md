@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-01T22:28:55Z
+**TIMESTAMP (UTC):** 2026-11-02T00:03:23Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive. Funding-conditioned analysis is #1.
 **BRANCH/HEAD:** main @ 9b7a7161
@@ -11,7 +11,7 @@
 ## IMMEDIATE BLOCKER TO FIX (THE ONLY REASON TO NOT PROGRESS)
 **FCLR-LIQMICRO-001 is DEGENERATE.** `src/analysis/liqmicro/features.py::add_funding_features` never consumes `funding_df` - it zeroes `funding_rate`, `funding_sign`, `funding_abs`, `funding_zscore`. D2 has `funding_abs=0.0` with NaN p-values. D3 clustering_by_decile is empty. This violates the repo's priority and invalidates D2/D3. Must be fixed now.
 
-## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-01T22:28:55Z
+## INITIAL TASK MESSAGE (FOR NEXT AGENTIC SESSION) — TIMESTAMPED 2026-11-02T00:03:23Z
 **PRIORITY: P0 | TYPE: HEAVY FUNDING-CONDITIONED RESEARCH | CAMPAIGN: FCLR-LIQMICRO-002 | FIREWALLS ENFORCED**
 
 **MANDATE:** Integrate REAL Hyperliquid funding data and re-run D1-D3 with actual funding variation. Do NOT reopen H001/FCLR-003/FCLR-010. Do NOT merge Binance. Only use ironflow liquidations + Hyperliquid fundingHistory API. Every action must produce concrete artifacts with file:line, provenance, computed values, and acceptance checks. Do heavy verification work - do not shortcut.
