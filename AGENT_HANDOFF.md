@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T04:21:43Z
-**HANDOFF ID:** FCLR-HANDOFF-089-20261102T042143Z
-**SUPERSEDES:** FCLR-HANDOFF-088-20261102T042039Z
+**TIMESTAMP (UTC):** 2026-11-02T04:24:25Z
+**HANDOFF ID:** FCLR-HANDOFF-090-20261102T042425Z
+**SUPERSEDES:** FCLR-HANDOFF-089-20261102T042143Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Liquidation risk > funding-conditioned volatility (repo name). Track A (observed liquidations) is OPEN via Hyperliquid ironflow census — FCLR-010 gate PASSED, overlay EXECUTED (hypothetical only). Data hunt FCLR-NEXT-002 COMPLETE_NO-GO (all 8 source families probed, no NEW admissible unauthenticated source beyond ironflow). Do NOT reopen sealed negative experiments without a concrete new data source meeting pre-registration requirements.
 
-**BRANCH/HEAD:** main @ 4eb23f80cf3083d4391393da2cae5d249f1bfff3
+**BRANCH/HEAD:** main @ 74e22004f6e885d575640f4fdf9ba5e9862108b0
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
