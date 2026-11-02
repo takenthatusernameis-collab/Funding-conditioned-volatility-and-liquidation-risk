@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (DURABLE — SINGLE SOURCE OF TRUTH)
-**TIMESTAMP (UTC):** 2026-11-02T01:05:49Z
+**TIMESTAMP (UTC):** 2026-11-02T01:06:28Z
 **INITIAL TASK (NEXT SESSION):** Execute Campaign FCLR-NEXT-002 source discovery — run steps 1-8 unauthenticated probes across 8 source families, write one artifact per family to research_state/source_probe_FCLR-NEXT-002_<source>.md, record GO/NO-GO per rubric; update cross_track_decision_log.md; leave explicit next task. No confirmatory work resumes until a source passes the rubric.
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **REPO PRIORITIZATION (INFERRED):** Funding-conditioned volatility → liquidation risk. The repo name is the directive.
