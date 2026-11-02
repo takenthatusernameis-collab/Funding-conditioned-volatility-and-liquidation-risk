@@ -31,31 +31,92 @@ def now_z():
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
-def http_probe(url, max_retries=2):
+def http_probe(url, max_retries=2, method="GET", timeout=30, body_preview_len=200):
+    """HTTP probe with retry/backoff and body preview capture.
+
+    method may be "GET" or "HEAD". A body preview (first body_preview_len bytes,
+    decoded as latin-1 for binary-safety) is captured so error pages and small
+    JSON responses can be classified by content, not just status code.
+    """
     for attempt in range(max_retries + 1):
-        req = Request(url, headers={"User-Agent": USER_AGENT})
+        req = Request(url, headers={"User-Agent": USER_AGENT}, method=method)
         try:
-            with urlopen(req, timeout=30) as resp:
+            with urlopen(req, timeout=timeout) as resp:
                 status = resp.getcode()
                 headers = dict(resp.headers.items())
                 body = resp.read()
-                return {"url": url, "status": status, "headers": {k.lower(): v for k, v in headers.items()}, "body_len": len(body), "attempts": attempt + 1}
+                preview = body[:body_preview_len].decode("latin-1", errors="replace")
+                return {
+                    "url": url,
+                    "method": method,
+                    "status": status,
+                    "headers": {k.lower(): v for k, v in headers.items()},
+                    "body_len": len(body),
+                    "body_preview": preview,
+                    "attempts": attempt + 1,
+                }
         except HTTPError as e:
             try:
                 body = e.read()
             except Exception:
                 body = b""
             headers = dict(getattr(e, "headers", {}) or {})
-            result = {"url": url, "status": e.code, "headers": {k.lower(): v for k, v in headers.items()}, "body_len": len(body), "error": True, "attempts": attempt + 1}
+            result = {
+                "url": url,
+                "method": method,
+                "status": e.code,
+                "headers": {k.lower(): v for k, v in headers.items()},
+                "body_len": len(body),
+                "body_preview": body[:body_preview_len].decode("latin-1", errors="replace"),
+                "error": True,
+                "attempts": attempt + 1,
+            }
             if e.code == 429 and attempt < max_retries:
                 time.sleep(2 ** attempt + random.random())
+                continue
+            if 500 <= e.code < 600 and attempt < max_retries:
+                time.sleep(1 + random.random())
                 continue
             return result
         except Exception as e:
             if attempt < max_retries:
                 time.sleep(1 + random.random())
                 continue
-            return {"url": url, "status": None, "headers": {}, "body_len": 0, "error": str(e), "attempts": attempt + 1}
+            return {
+                "url": url,
+                "method": method,
+                "status": None,
+                "headers": {},
+                "body_len": 0,
+                "body_preview": str(e),
+                "error": str(e),
+                "attempts": attempt + 1,
+            }
+
+
+def probe_directory_listing(url, max_retries=2):
+    """For a directory-style URL, try GET and capture enough to classify content.
+
+    Returns the same dict shape as http_probe plus a 'content_kind' guess
+    ('json' | 'html' | 'parquet' | 'text' | 'binary') derived from Content-Type
+    and the magic bytes of the body.
+    """
+    r = http_probe(url, max_retries=max_retries)
+    ct = (r.get("headers", {}).get("content-type") or "").lower()
+    pv = r.get("body_preview") or ""
+    if r.get("status") == 200 and "parquet" in ct:
+        r["content_kind"] = "parquet"
+    elif r.get("status") == 200 and "json" in ct:
+        r["content_kind"] = "json"
+    elif r.get("status") == 200 and "html" in ct:
+        r["content_kind"] = "html"
+    elif r.get("status") == 200 and pv.startswith("PAR1"):
+        r["content_kind"] = "parquet"
+    elif r.get("status") == 200:
+        r["content_kind"] = "text"
+    else:
+        r["content_kind"] = "error"
+    return r
 
 
 def assess_rubric(entry):

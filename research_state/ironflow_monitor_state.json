@@ -610,7 +610,107 @@
       "available_months": []
     }
   },
-  "last_probe_ts": "20261102T115745Z",
+  "last_probe_ts": "20261102T150101Z",
   "data_through": "2026-10",
-  "consecutive_absent": 3
+  "consecutive_absent": 3,
+  "tree_parquet_paths": [
+    "data/events/2025-05.parquet",
+    "data/events/2025-06.parquet",
+    "data/events/2025-07.parquet",
+    "data/events/2025-08.parquet",
+    "data/events/2025-09.parquet",
+    "data/events/2025-10.parquet",
+    "data/events/2025-11.parquet",
+    "data/events/2025-12.parquet",
+    "data/events/2026-01.parquet",
+    "data/events/2026-02.parquet",
+    "data/events/2026-03.parquet",
+    "data/events/2026-04.parquet",
+    "data/events/2026-05.parquet",
+    "data/events/2026-06.parquet",
+    "data/events/2026-07.parquet",
+    "data/events/2026-08.parquet",
+    "data/events/2026-09.parquet",
+    "data/events/2026-10.parquet",
+    "data/fills/2025-05.parquet",
+    "data/fills/2025-06.parquet",
+    "data/fills/2025-07.parquet",
+    "data/fills/2025-08.parquet",
+    "data/fills/2025-09.parquet",
+    "data/fills/2025-10.parquet",
+    "data/fills/2025-11.parquet",
+    "data/fills/2025-12.parquet",
+    "data/fills/2026-01.parquet",
+    "data/fills/2026-02.parquet",
+    "data/fills/2026-03.parquet",
+    "data/fills/2026-04.parquet",
+    "data/fills/2026-05.parquet",
+    "data/fills/2026-06.parquet",
+    "data/fills/2026-07.parquet",
+    "data/fills/2026-08.parquet",
+    "data/fills/2026-09.parquet",
+    "data/fills/2026-10.parquet"
+  ],
+  "tree_etag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
+  "last_scan": {
+    "scan_id": "ironflow_scan_20261102T150101Z",
+    "timestamp_utc": "2026-11-02T15:01:03.263499+00:00",
+    "tree_status": 304,
+    "diff": {
+      "added": [],
+      "removed": [],
+      "changed": false,
+      "current_count": 36,
+      "previous_count": 36
+    },
+    "triggered": false
+  },
+  "resume_trigger": {
+    "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+    "generated_utc": "2026-11-02T15:01:03.263525+00:00",
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "check_command": "python scripts/monitor_ironflow_liquidations.py --quick",
+    "conditions": [
+      {
+        "id": "ironflow_events",
+        "description": "Ironflow data/events/YYYY-MM.parquet returns HTTP 200 on unauthenticated GET",
+        "urls": [
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-12.parquet",
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-01.parquet",
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-02.parquet"
+        ],
+        "months": [
+          "2026-11",
+          "2026-12",
+          "2027-01",
+          "2027-02"
+        ]
+      },
+      {
+        "id": "ironflow_fills",
+        "description": "Ironflow data/fills/YYYY-MM.parquet returns HTTP 200 on unauthenticated GET",
+        "urls": [
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-11.parquet",
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-12.parquet",
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-01.parquet",
+          "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-02.parquet"
+        ],
+        "months": [
+          "2026-11",
+          "2026-12",
+          "2027-01",
+          "2027-02"
+        ]
+      },
+      {
+        "id": "new_admissible_source",
+        "description": "Any new unauthenticated source passing strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, no keys/signed/requester-pays, schema compatible with frozen FCLR-010)",
+        "check": "python scripts/hunt_alternative_liquidation_sources.py"
+      }
+    ],
+    "on_trigger": "Pre-register BEFORE inspecting outcomes, then run scripts/fclr010_harness.py and write research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.md",
+    "currently_fired": false
+  }
 }

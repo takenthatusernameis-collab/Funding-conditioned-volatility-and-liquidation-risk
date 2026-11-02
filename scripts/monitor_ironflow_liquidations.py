@@ -445,6 +445,190 @@ def known_available(state):
     return available
 
 
+def tree_diff(current_paths, previous_paths):
+    """Compute added/removed parquet paths between two tree listings.
+
+    Catches lagged uploads of OLDER months (not just the forward edge), which a
+    forward-edge-only probe can miss: a dataset may backfill a missing month
+    weeks after its calendar date. Returns a dict with sorted added/removed lists
+    and a boolean indicating whether anything changed.
+    """
+    cur = set(current_paths or [])
+    prev = set(previous_paths or [])
+    added = sorted(cur - prev)
+    removed = sorted(prev - cur)
+    return {
+        "added": added,
+        "removed": removed,
+        "changed": bool(added or removed),
+        "current_count": len(cur),
+        "previous_count": len(prev),
+    }
+
+
+def scan_mode(state, max_retries=MAX_RETRIES):
+    """Full tree listing + forward-edge probe, returning a compact scan summary.
+
+    Unlike --quick (forward edge only), --scan re-lists the whole dataset tree
+    (honoring the cached ETag) and diffs against the previously recorded tree, so
+    it detects new files ANYWHERE in the archive, including backfilled older
+    months. The forward-edge probe still runs to classify the resume trigger.
+    """
+    tree_etag = state.get("tree_etag")
+    etag_ref = [tree_etag]
+    prev_paths = state.get("tree_parquet_paths", [])
+    tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
+    current_paths = []
+    tree_status = tree_res["status"]
+    not_modified = bool(tree_res.get("not_modified"))
+    if not_modified:
+        current_paths = list(prev_paths)
+    elif tree_res["ok"] and tree_res["status"] == 200:
+        try:
+            tree_data = json.loads(tree_res["body"].decode("utf-8"))
+            for item in tree_data if isinstance(tree_data, list) else tree_data.get("tree", []):
+                p = item.get("path") if isinstance(item, dict) else str(item)
+                if isinstance(p, str) and p.endswith(".parquet"):
+                    current_paths.append(p)
+            current_paths = sorted(set(current_paths))
+        except Exception as e:
+            current_paths = list(prev_paths)
+            tree_status = f"parse_error:{e}"
+    diff = tree_diff(current_paths, prev_paths)
+    rc = check_resume_condition(state, max_retries=max_retries)
+    return {
+        "tree_status": tree_status,
+        "tree_not_modified": not_modified,
+        "tree_etag": etag_ref[0],
+        "current_parquet_count": len(current_paths),
+        "current_parquet_paths": current_paths,
+        "diff": diff,
+        "resume_check": rc,
+        "triggered": bool(rc["triggered"]) or diff["changed"],
+    }
+
+
+def scan_events_fills_only(current_paths):
+    """Filter tree paths to events/fills/YYYY-MM.parquet and return sorted months."""
+    months = set()
+    for p in current_paths or []:
+        m = re.match(r"^(data/(events|fills)/)(\d{4}-\d{2})\.parquet$", p)
+        if m:
+            months.add(m.group(3))
+    return sorted(months)
+
+
+def recompute_consecutive_absent(months_probed):
+    """Recompute consecutive_absent from a months_probed list (reversed, trailing).
+
+    Counts how many of the most recent probed months have BOTH events and fills
+    at 404. Stops at the first month that is not fully absent. Mirrors the logic
+    in main() so the stored consecutive_absent can be cross-checked.
+    """
+    ordered = sorted(m["month"] for m in months_probed or [])
+    count = 0
+    for ym in reversed(ordered):
+        m = next((x for x in (months_probed or []) if x["month"] == ym), None)
+        ev = (m.get("events") or {}).get("status") if m else None
+        fl = (m.get("fills") or {}).get("status") if m else None
+        if ev == 404 and fl == 404:
+            count += 1
+        else:
+            break
+    return count
+
+
+def verify_state(state=None):
+    """Machine-readable state-consistency verification (no network).
+
+    Cross-checks the persisted state for internal contradictions a session might
+    otherwise miss: data_through vs. the recorded available months, the stored
+    consecutive_absent vs. a recomputation from last_probe, and the resume
+    trigger condition URLs vs. forward_edge_months(data_through). Returns a dict
+    with ok=True only when every check passes, plus a list of check records and
+    any errors.
+    """
+    state = state if state is not None else load_state()
+    checks = []
+    errors = []
+
+    last = state.get("last_probe", {}) or {}
+    months_probed = last.get("months_probed", []) or []
+    data_through = state.get("data_through")
+    stored_absent = state.get("consecutive_absent")
+
+    # 1. data_through must be a complete month present in last_probe (200 for both).
+    available_complete = []
+    for m in months_probed:
+        ev = (m.get("events") or {}).get("status")
+        fl = (m.get("fills") or {}).get("status")
+        if ev == 200 and fl == 200:
+            available_complete.append(m["month"])
+    max_complete = max(available_complete) if available_complete else None
+    checks.append({
+        "id": "data_through_consistent",
+        "description": "data_through equals the latest complete month in last_probe",
+        "data_through": data_through,
+        "recomputed_max_complete": max_complete,
+        "pass": data_through == max_complete,
+    })
+    if data_through != max_complete:
+        errors.append(f"data_through={data_through} but latest complete month={max_complete}")
+
+    # 2. consecutive_absent must match recomputation from last_probe.
+    recomputed = recompute_consecutive_absent(months_probed)
+    checks.append({
+        "id": "consecutive_absent_consistent",
+        "description": "stored consecutive_absent matches recomputation from last_probe",
+        "stored": stored_absent,
+        "recomputed": recomputed,
+        "pass": stored_absent == recomputed,
+    })
+    if stored_absent != recomputed:
+        errors.append(f"consecutive_absent stored={stored_absent} recomputed={recomputed}")
+
+    # 3. resume_trigger condition months must equal forward_edge_months(data_through).
+    rt = state.get("resume_trigger", {}) or {}
+    fwd_expected = forward_edge_months(data_through) if data_through else []
+    rt_conditions_months = []
+    for cond in rt.get("conditions", []) or []:
+        if cond.get("id") in ("ironflow_events", "ironflow_fills"):
+            rt_conditions_months.extend(cond.get("months", []) or [])
+    rt_conditions_months = sorted(set(rt_conditions_months))
+    checks.append({
+        "id": "resume_trigger_months_match_forward_edge",
+        "description": "resume trigger months equal forward_edge_months(data_through)",
+        "expected": fwd_expected,
+        "recorded": rt_conditions_months,
+        "pass": fwd_expected == rt_conditions_months,
+    })
+    if fwd_expected != rt_conditions_months:
+        errors.append("resume_trigger condition months do not match forward_edge_months(data_through)")
+
+    # 4. resume_trigger.on_trigger references the frozen harness and pre-reg-before-outcomes.
+    on_trigger = rt.get("on_trigger", "")
+    checks.append({
+        "id": "on_trigger_prereg_before_outcomes",
+        "description": "resume trigger mandates pre-registration before outcome inspection",
+        "pass": "Pre-register" in on_trigger and "BEFORE inspecting outcomes" in on_trigger,
+    })
+    if "Pre-register" not in on_trigger or "BEFORE inspecting outcomes" not in on_trigger:
+        errors.append("resume_trigger.on_trigger missing pre-register-before-outcomes mandate")
+
+    # 5. tree_etag present when tree_parquet_paths present.
+    checks.append({
+        "id": "tree_etag_present",
+        "description": "tree_etag recorded alongside tree_parquet_paths",
+        "tree_etag": bool(state.get("tree_etag")),
+        "tree_paths_count": len(state.get("tree_parquet_paths", []) or []),
+        "pass": bool(state.get("tree_etag")) or len((state.get("tree_parquet_paths") or [])) == 0,
+    })
+    if not state.get("tree_etag") and len((state.get("tree_parquet_paths") or [])) > 0:
+        errors.append("tree_parquet_paths present without tree_etag")
+
+    return {"ok": len(errors) == 0, "checks": checks, "errors": errors, "data_through": data_through, "consecutive_absent": stored_absent}
+
+
 def check_resume_condition(state=None, max_retries=MAX_RETRIES):
     """Return (triggered: bool, details: dict) using ONLY the forward-edge months.
 
@@ -524,9 +708,44 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
     return details
 
 
+def list_state():
+    """Print a compact, machine-parseable summary of the persisted monitor state.
+
+    No network access. Lets a session quickly confirm data_through,
+    consecutive_absent, the resume trigger, and the last probe id without
+    parsing the whole state JSON by hand.
+    """
+    state = load_state()
+    rt = state.get("resume_trigger", {})
+    lines = [
+        f"last_probe_ts={state.get('last_probe_ts')}",
+        f"data_through={state.get('data_through')}",
+        f"consecutive_absent={state.get('consecutive_absent')}",
+        f"tree_etag={state.get('tree_etag')}",
+        f"tree_parquet_count={len(state.get('tree_parquet_paths', []) or [])}",
+        f"file_cache_entries={len(state.get('file_cache', {}) or {})}",
+        f"resume_trigger_fired={rt.get('currently_fired')}",
+        f"last_scan={ (state.get('last_scan') or {}).get('scan_id') }",
+    ]
+    for line in lines:
+        print(line)
+    return state
+
+
 def main():
     import sys
     quick = "--quick" in sys.argv
+    scan = "--scan" in sys.argv
+    verify = "--verify" in sys.argv
+    force = "--force" in sys.argv
+    if "--list" in sys.argv:
+        list_state()
+        return
+    if verify:
+        vr = verify_state()
+        print(json.dumps(vr, indent=2))
+        print(f"VERIFY ok={vr['ok']} data_through={vr['data_through']} consecutive_absent={vr['consecutive_absent']}")
+        return 0 if vr["ok"] else 1
     ts = now_z()
     state = load_state()
     previously_available = known_available(state)
@@ -603,6 +822,87 @@ def main():
         else:
             print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')}")
         return
+
+    if scan:
+        # --scan: full tree listing + diff + forward-edge probe. Detects new files
+        # anywhere in the archive (including backfilled older months), not just the
+        # forward edge. Writes a compact scan evidence file and updates state.
+        scan_res = scan_mode(state)
+        evidence["scan"] = scan_res
+        evidence["mode"] = "scan"
+        current_paths = scan_res.get("current_parquet_paths", [])
+        evidence["tree"]["parquet_paths"] = current_paths
+        evidence_path = EVIDENCE_DIR / f"ironflow_scan_{ts}.json"
+        with open(evidence_path, "w") as f:
+            json.dump(evidence, f, indent=2)
+        print(f"Wrote scan: {evidence_path}")
+        print(f"  tree_status={scan_res['tree_status']} not_modified={scan_res['tree_not_modified']}")
+        print(f"  parquet_count={scan_res['current_parquet_count']} diff_added={scan_res['diff']['added']} diff_removed={scan_res['diff']['removed']}")
+        print(f"  resume_triggered={scan_res['triggered']}")
+        if scan_res["diff"]["added"]:
+            print(f"  NEW PARQUET PATHS: {scan_res['diff']['added']}")
+        if scan_res["resume_check"]["triggered"]:
+            print(f"  RESUME TRIGGER FIRED: {scan_res['resume_check']['triggering_files']}")
+        # Persist tree paths/etag for the next session's diff baseline.
+        if scan_res["tree_not_modified"] is False and scan_res["tree_status"] == 200:
+            state["tree_parquet_paths"] = current_paths
+        if scan_res.get("tree_etag"):
+            state["tree_etag"] = scan_res["tree_etag"]
+        state["last_scan"] = {
+            "scan_id": f"ironflow_scan_{ts}",
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "tree_status": scan_res["tree_status"],
+            "diff": scan_res["diff"],
+            "triggered": scan_res["triggered"],
+        }
+        state["last_probe_ts"] = ts
+        # Rebuild the machine-readable resume_trigger block so the scan path
+        # keeps it self-consistent with data_through and the frozen pre-register
+        # mandate (the full --force probe path also writes it).
+        fwd = forward_edge_months(state.get("data_through")) if state.get("data_through") else []
+        state["resume_trigger"] = {
+            "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+            "generated_utc": datetime.now(timezone.utc).isoformat(),
+            "data_through": state.get("data_through"),
+            "consecutive_absent": state.get("consecutive_absent", 0),
+            "check_command": "python scripts/monitor_ironflow_liquidations.py --quick",
+            "conditions": [
+                {
+                    "id": "ironflow_events",
+                    "description": "Ironflow data/events/YYYY-MM.parquet returns HTTP 200 on unauthenticated GET",
+                    "urls": [EVENTS_TEMPLATE % ym for ym in fwd],
+                    "months": fwd,
+                },
+                {
+                    "id": "ironflow_fills",
+                    "description": "Ironflow data/fills/YYYY-MM.parquet returns HTTP 200 on unauthenticated GET",
+                    "urls": [FILLS_TEMPLATE % ym for ym in fwd],
+                    "months": fwd,
+                },
+                {
+                    "id": "new_admissible_source",
+                    "description": "Any new unauthenticated source passing strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, no keys/signed/requester-pays, schema compatible with frozen FCLR-010)",
+                    "check": "python scripts/hunt_alternative_liquidation_sources.py",
+                },
+            ],
+            "on_trigger": "Pre-register BEFORE inspecting outcomes, then run scripts/fclr010_harness.py and write research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.md",
+            "currently_fired": bool(scan_res["resume_check"]["triggered"]),
+        }
+        with open(STATE_PATH, "w") as f:
+            json.dump(state, f, indent=2)
+        print(f"Updated state: {STATE_PATH}")
+        return
+
+    # --force guard: the full candidate-months probe re-downloads every known
+    # month and is discouraged without new evidence (retry-loop guard).
+    # Use --quick for the cheap resume check; use --force to acknowledge a full
+    # re-probe is intended.
+    if not force:
+        print("REFUSING full candidate-months probe without --force.")
+        print("Use: python scripts/monitor_ironflow_liquidations.py --quick   (cheap resume check)")
+        print("     python scripts/monitor_ironflow_liquidations.py --force   (acknowledge full re-probe)")
+        print("     python scripts/monitor_ironflow_liquidations.py --verify   (state consistency, no network)")
+        return 2
 
     for ym in candidate_months():
         evidence["months_probed"].append(probe_month(ym, state))

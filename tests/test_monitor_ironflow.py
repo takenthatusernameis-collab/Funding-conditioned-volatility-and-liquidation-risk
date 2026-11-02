@@ -329,3 +329,109 @@ class TestCandidateMonthsStability(unittest.TestCase):
             y, m = ym.split("-")
             self.assertGreaterEqual(int(m), 1)
             self.assertLessEqual(int(m), 12)
+
+
+def _blocked_state():
+    """Build a consistent blocked-path state mirroring the persisted monitor state."""
+    months_probed = [
+        {"month": "2026-09", "events": {"status": 200}, "fills": {"status": 200}},
+        {"month": "2026-10", "events": {"status": 200}, "fills": {"status": 200}},
+        {"month": "2026-11", "events": {"status": 404}, "fills": {"status": 404}},
+        {"month": "2026-12", "events": {"status": 404}, "fills": {"status": 404}},
+        {"month": "2027-01", "events": {"status": 404}, "fills": {"status": 404}},
+    ]
+    return {
+        "last_probe": {"months_probed": months_probed},
+        "data_through": "2026-10",
+        "consecutive_absent": 3,
+        "tree_etag": 'W/"abc"',
+        "tree_parquet_paths": ["data/events/2026-10.parquet"],
+        "resume_trigger": {
+            "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+            "data_through": "2026-10",
+            "consecutive_absent": 3,
+            "conditions": [
+                {"id": "ironflow_events", "months": ["2026-11", "2026-12", "2027-01", "2027-02"]},
+                {"id": "ironflow_fills", "months": ["2026-11", "2026-12", "2027-01", "2027-02"]},
+                {"id": "new_admissible_source"},
+            ],
+            "on_trigger": "Pre-register BEFORE inspecting outcomes, then run scripts/fclr010_harness.py",
+        },
+    }
+
+
+class TestRecomputeConsecutiveAbsent(unittest.TestCase):
+    def test_counts_trailing_absent_months(self):
+        months_probed = [
+            {"month": "2026-09", "events": {"status": 200}, "fills": {"status": 200}},
+            {"month": "2026-10", "events": {"status": 200}, "fills": {"status": 200}},
+            {"month": "2026-11", "events": {"status": 404}, "fills": {"status": 404}},
+            {"month": "2026-12", "events": {"status": 404}, "fills": {"status": 404}},
+            {"month": "2027-01", "events": {"status": 404}, "fills": {"status": 404}},
+        ]
+        self.assertEqual(mon.recompute_consecutive_absent(months_probed), 3)
+
+    def test_stops_at_first_present_month(self):
+        months_probed = [
+            {"month": "2026-09", "events": {"status": 200}, "fills": {"status": 200}},
+            {"month": "2026-10", "events": {"status": 404}, "fills": {"status": 404}},
+            {"month": "2026-11", "events": {"status": 200}, "fills": {"status": 200}},
+        ]
+        self.assertEqual(mon.recompute_consecutive_absent(months_probed), 0)
+
+    def test_empty_input(self):
+        self.assertEqual(mon.recompute_consecutive_absent([]), 0)
+        self.assertEqual(mon.recompute_consecutive_absent(None), 0)
+
+
+class TestVerifyState(unittest.TestCase):
+    def test_consistent_state_passes(self):
+        vr = mon.verify_state(_blocked_state())
+        self.assertTrue(vr["ok"])
+        self.assertEqual(vr["errors"], [])
+        self.assertEqual(vr["data_through"], "2026-10")
+        self.assertEqual(vr["consecutive_absent"], 3)
+        ids = {c["id"] for c in vr["checks"]}
+        self.assertIn("data_through_consistent", ids)
+        self.assertIn("consecutive_absent_consistent", ids)
+        self.assertIn("resume_trigger_months_match_forward_edge", ids)
+        self.assertIn("on_trigger_prereg_before_outcomes", ids)
+        self.assertIn("tree_etag_present", ids)
+        for c in vr["checks"]:
+            self.assertTrue(c["pass"], f"check {c['id']} failed: {c}")
+
+    def test_data_through_mismatch_fails(self):
+        state = _blocked_state()
+        state["data_through"] = "2026-09"
+        vr = mon.verify_state(state)
+        self.assertFalse(vr["ok"])
+        self.assertTrue(any("data_through" in e for e in vr["errors"]))
+
+    def test_consecutive_absent_mismatch_fails(self):
+        state = _blocked_state()
+        state["consecutive_absent"] = 99
+        vr = mon.verify_state(state)
+        self.assertFalse(vr["ok"])
+        self.assertTrue(any("consecutive_absent" in e for e in vr["errors"]))
+
+    def test_resume_trigger_months_mismatch_fails(self):
+        state = _blocked_state()
+        for cond in state["resume_trigger"]["conditions"]:
+            if cond.get("id") in ("ironflow_events", "ironflow_fills"):
+                cond["months"] = ["2026-11"]
+        vr = mon.verify_state(state)
+        self.assertFalse(vr["ok"])
+        self.assertTrue(any("resume_trigger" in e for e in vr["errors"]))
+
+    def test_on_trigger_missing_mandate_fails(self):
+        state = _blocked_state()
+        state["resume_trigger"]["on_trigger"] = "just run the harness"
+        vr = mon.verify_state(state)
+        self.assertFalse(vr["ok"])
+        self.assertTrue(any("Pre-register" in e or "on_trigger" in e for e in vr["errors"]))
+
+    def test_missing_tree_etag_with_paths_fails(self):
+        state = _blocked_state()
+        state["tree_etag"] = None
+        vr = mon.verify_state(state)
+        self.assertFalse(vr["ok"])
