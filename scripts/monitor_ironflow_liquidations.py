@@ -702,6 +702,53 @@ def verify_state(state=None):
     return {"ok": len(errors) == 0, "checks": checks, "errors": errors, "data_through": data_through, "consecutive_absent": stored_absent}
 
 
+def check_tree_change(state, max_retries=MAX_RETRIES):
+    """Cheap tree ETag check to detect new parquet paths anywhere in the archive.
+
+    Uses If-None-Match with the cached tree ETag. When HF returns 304 Not Modified,
+    the tree is unchanged and no new files exist anywhere (including backfilled
+    older months the forward-edge probe cannot see). When 200, diffs current paths
+    against cached tree_parquet_paths to detect added/removed files. This closes
+    the forward-edge-only gap: a backfilled older month would otherwise be invisible
+    to --quick until it falls inside the forward-edge window.
+    """
+    tree_etag = state.get("tree_etag")
+    prev_paths = state.get("tree_parquet_paths", [])
+    etag_ref = [tree_etag]
+    tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
+    result = {
+        "tree_status": tree_res["status"],
+        "tree_not_modified": bool(tree_res.get("not_modified")),
+        "tree_etag": etag_ref[0],
+        "changed": False,
+        "added": [],
+        "removed": [],
+        "current_count": len(prev_paths),
+        "previous_count": len(prev_paths),
+    }
+    if tree_res.get("not_modified"):
+        result["current_parquet_paths"] = list(prev_paths)
+        return result
+    if tree_res["ok"] and tree_res["status"] == 200:
+        try:
+            tree_data = json.loads(tree_res["body"].decode("utf-8"))
+            paths = []
+            for item in tree_data if isinstance(tree_data, list) else tree_data.get("tree", []):
+                p = item.get("path") if isinstance(item, dict) else str(item)
+                if isinstance(p, str) and p.endswith(".parquet"):
+                    paths.append(p)
+            current_paths = sorted(set(paths))
+            result["current_parquet_paths"] = current_paths
+            result["current_count"] = len(current_paths)
+            diff = tree_diff(current_paths, prev_paths)
+            result["changed"] = diff["changed"]
+            result["added"] = diff["added"]
+            result["removed"] = diff["removed"]
+        except Exception as e:
+            result["parse_error"] = str(e)
+    return result
+
+
 def check_resume_condition(state=None, max_retries=MAX_RETRIES):
     """Return (triggered: bool, details: dict) using ONLY the forward-edge months.
 
@@ -886,6 +933,10 @@ def main():
         evidence["mode"] = "quick"
         evidence["head_probes"] = rc.get("head_probes", 0)
         evidence["cached_hits"] = rc.get("cached_hits", 0)
+        # Tree-change detection: cheap ETag check catches new parquet paths ANYWHERE
+        # in the archive (including backfilled older months), not just the forward
+        # edge probed by check_resume_condition. Adds evidence without a full re-probe.
+        evidence["tree_change"] = check_tree_change(state)
         # Probe-to-probe diff: compare current forward-edge results against the
         # previously persisted last_probe so any status flip (e.g. 404 -> 200) is
         # captured as structured evidence even if triggered is misread.

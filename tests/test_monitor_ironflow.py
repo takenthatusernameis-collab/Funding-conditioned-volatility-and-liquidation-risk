@@ -617,3 +617,59 @@ class TestCompareProbes(unittest.TestCase):
         ]))
         self.assertEqual(diff["summary"]["added_count"], 1)
         self.assertTrue(diff["summary"]["any_change"])
+
+
+class TestTreeChange(unittest.TestCase):
+    """Tests for check_tree_change: detects new parquet paths anywhere in archive."""
+
+    def _tree_state(self, etag, paths):
+        return {
+            "tree_etag": etag,
+            "tree_parquet_paths": paths,
+        }
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_304_not_modified_unchanged(self, mock_get):
+        mock_get.return_value = {
+            "ok": True, "status": 304, "headers": {}, "body": b"",
+            "url": mon.TREE_URL, "not_modified": True,
+        }
+        state = self._tree_state('W/"abc"', ["data/events/2026-10.parquet"])
+        res = mon.check_tree_change(state)
+        self.assertTrue(res["tree_not_modified"])
+        self.assertFalse(res["changed"])
+        self.assertEqual(res["added"], [])
+        self.assertEqual(res["removed"], [])
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_200_new_paths_detected(self, mock_get):
+        body = '[{"path":"data/events/2026-10.parquet"},{"path":"data/events/2026-11.parquet"}]'
+
+        def http_get_side(url, **kwargs):
+            etag_ref = kwargs.get("etag_ref")
+            if etag_ref is not None:
+                etag_ref[0] = 'W/"def"'
+            return {
+                "ok": True, "status": 200, "headers": {"ETag": 'W/"def"'},
+                "body": body.encode("utf-8"), "url": url,
+            }
+        mock_get.side_effect = http_get_side
+        state = self._tree_state('W/"abc"', ["data/events/2026-10.parquet"])
+        res = mon.check_tree_change(state)
+        self.assertFalse(res["tree_not_modified"])
+        self.assertTrue(res["changed"])
+        self.assertIn("data/events/2026-11.parquet", res["added"])
+        self.assertEqual(res["tree_etag"], 'W/"def"')
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_200_same_paths_unchanged(self, mock_get):
+        body = '[{"path":"data/events/2026-10.parquet"}]'
+        mock_get.return_value = {
+            "ok": True, "status": 200, "headers": {"ETag": 'W/"def"'},
+            "body": body.encode("utf-8"), "url": mon.TREE_URL,
+        }
+        state = self._tree_state('W/"abc"', ["data/events/2026-10.parquet"])
+        res = mon.check_tree_change(state)
+        self.assertFalse(res["changed"])
+        self.assertEqual(res["added"], [])
+        self.assertEqual(res["removed"], [])

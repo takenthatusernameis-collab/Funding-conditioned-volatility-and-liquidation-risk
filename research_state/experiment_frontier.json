@@ -1,8 +1,8 @@
 {
   "registry_version": "1.0",
-  "generated": "2026-11-02T16:04:00Z",
+  "generated": "2026-11-02T19:48:46Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "Track A FCLR-010 PASSED + overlay executed. LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i BLOCKED_ON_DATA (ironflow 2026-11+ missing; no other admissible sources). Automation strengthened (ETag tree caching, wider lookahead, retry/backoff, rate-limit awareness); tests 49/49 PASS. Focus on heavy evidence/automation until new data appears.",
+  "current_status": "Track A FCLR-010 PASSED + overlay executed. LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i BLOCKED_ON_DATA (ironflow 2026-11+ missing; no other admissible sources). Automation strengthened (ETag tree caching, wider lookahead, retry/backoff, rate-limit awareness, --quick now also detects tree/path changes anywhere in archive via check_tree_change); tests 84/84 PASS (was 77/81 with 4 errors in test_fclr010_harness due to run_manifest.json being an unreadable Git LFS pointer; manifest rewritten as valid JSON; added TestTreeChange x3). Focus on heavy evidence/automation until new data appears.",
   "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE. FCLR-LIQMICRO-002 COMPLETE: real Hyperliquid funding (9 coins x 8668 records, fundingRate.std()>0) wired into features.py; D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs now non-zero (was degenerate 0.0 in FCLR-LIQMICRO-001); D3 clustering_by_decile now populated (was empty {}); BH FDR 4 significant; NO H001 reversal, NO H001 re-test opened. Automation strengthened (monitor --verify state-consistency check, --force guard on full probe, scan path rebuilds resume_trigger block, --quick now persists machine-readable last_quick_check + last_quick_probe records; probe-to-probe compare_probes diff detects 404->200 flips across quick runs; probe_diff block in --quick evidence); tests 75->81 PASS (added TestCompareProbes x6). Blocker doc: research_state/liquidation_forward_validate_004_blocker_20261102T155600Z.md. Focus on heavy evidence/automation until new data appears.",
   "frontier": [
     {
@@ -13,13 +13,13 @@
       "blockers": "No post-2026-10-31 ironflow data. No admissible unauthenticated sources (alt-hunt COMPLETE_NO-GO). data_through=2026-10, consecutive_absent=3. State --verify ok=True.",
       "do_not": "Do not inspect outcomes before pre-reg; do not merge tracks; do not touch .github/workflows; no polling loops without new evidence.",
       "status": "BLOCKED_ON_DATA",
-      "result": "BLOCKED_ON_DATA as of 2026-11-02T16:04:00Z. Fresh quick checks confirm no post-2026-10 data (2026-11/12/2027-01/2027-02 all 404; tree 304). compare_probes active; last_quick_probe persisted. Automation hardened (safe probe-diff wrapper). Tests 81/81 PASS. Fresh blocker doc written. Heavy work mandatory until resume trigger.",
+      "result": "BLOCKED_ON_DATA as of 2026-11-02T19:48:46Z. Fresh quick checks confirm no post-2026-10 data (2026-11/12/2027-01/2027-02 all 404; tree 304). compare_probes active; last_quick_probe persisted. Automation hardened (check_tree_change in --quick detects backfilled older months; tree ETag diff added to quick evidence). Tests 84/84 PASS (fixed run_manifest.json LFS-pointer bug; added TestTreeChange x3). Fresh blocker doc written. Heavy work mandatory until resume trigger.",
       "resume_triggers": [
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11 (verify via scripts/monitor_ironflow_liquidations.py --quick)",
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11",
         "OR new source passes GO: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010 (Hyperliquid-only for Track A)"
       ],
-      "generated": "2026-11-02T16:04:00Z"
+      "generated": "2026-11-02T19:48:46Z"
     },
     {
       "rank": 0,
@@ -230,7 +230,7 @@
     "reps": ">=2000",
     "notes": "coupled funding\u00d7vol\u00d7lagged observed flow passes all gates"
   },
-  "updated_at": "2026-11-02T15:56:00Z",
+  "updated_at": "2026-11-02T19:48:46Z",
   "FCLR-LIQMICRO-001": {
     "status": "COMPLETE",
     "timestamp": "2026-11-01T22:22:41Z",
