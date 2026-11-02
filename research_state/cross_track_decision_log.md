@@ -41,3 +41,12 @@
 - Findings: funding_abs distinct from signed funding; regime-dependent marginal contribution; robust under block-bootstrap >=2000; broad-based across symbols (no critical concentration). No sealed panels modified. Firewall intact. All outputs hypothetical-only.
 - Tests: 27/27 PASS. No workflow changes.
 - Decision: Track A deepening exhausted within admissible scope; no reopen of closed tracks warranted.
+
+## 2026-11-02T03:21:57Z — FCLR-HEAVY-001 STEP 6 INTEGRITY LOCK-IN (COMPLETION)
+- Step 6 executed: sealed FCLR-010 artifacts re-verified. All five sealed files share identical mtime 2026-11-01T23:02:50Z (unchanged). SHA-256 digests recorded in research_state/fclr_heavy001_integrity.md and experiment_frontier.json#FCLR-HEAVY-001.sealed_fclr010_integrity.
+- Tests: `python -m unittest discover -s tests -v` → 27/27 PASS at HEAD a03d9a63.
+- DEFECT REPAIRED: all six FCLR-HEAVY-001 markdown artifacts contained a literal unexpanded `$(date -u +%Y-%m-%dT%H:%M:%SZ)` placeholder instead of a real UTC timestamp. Substituted actual generation time (2026-11-02T03:21:57Z). Analytical content unaffected; only timestamp fields corrected.
+- experiment_frontier.json updated with FCLR-HEAVY-001 status=EXECUTED_ALL_STEPS, completed_at, integrity hashes, and defect record. JSON re-validated.
+- Decision: CAMPAIGN FCLR-HEAVY-001 COMPLETE. All 6 steps produced artifacts. Track A deepening exhausted within admissible scope. No sealed panels modified. Firewall intact. All outputs hypothetical-only.
+- FINAL STATE: All confirmatory gates resolved. Track A FCLR-010 gate PASSED / overlay HYPOTHETICAL_ONLY; Track C H001 NOT_SUPPORTED (CONFIRMATORY_CLOSED); Track B CLOSED_NEGATIVE; H002 PERMANENT_BLOCK; FCLR-LIQMICRO-002/003 COMPLETE; FCLR-NEXT-002 COMPLETE_NO-GO. Stable closeout point.
+- RESUME CONDITION: new admissible unauthenticated liquidation/funding source passing the rubric (>=5 symbols, >=3 non-overlapping 30-day blocks, documented completeness, license OK) OR SSRN H002 methodology accessible — in either case pre-register a new experiment ID BEFORE outcome inspection. Otherwise no further confirmatory work is warranted.

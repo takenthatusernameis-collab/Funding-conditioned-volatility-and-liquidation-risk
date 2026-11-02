@@ -3,7 +3,7 @@
 **Campaign:** FCLR-HEAVY-001
 **Track:** A (observed liquidations) — Hyperliquid ironflow census
 **Status:** EXECUTED
-**Timestamp:** $(date -u +%Y-%m-%dT%H:%M:%SZ)
+**Timestamp:** 2026-11-02T03:22:15Z
 **Hypothesis-only:** Strictly hypothetical-only. No deployment/paper/live trading claims. No label merging across tracks.
 
 ## Objective
