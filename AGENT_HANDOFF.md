@@ -1,21 +1,21 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 2026-11-02T13:50:00Z
+**TIMESTAMP:** 2026-11-02T13:52:00Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk (Track A liquidation risk PRIORITIZED)
 **SESSION GOAL FOR NEXT AGENT:** Execute campaign LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i with ZERO coasting. Data is blocked (ironflow through 2026-10 only). Your first action is to eliminate bottlenecks in detection/automation, harden tests, and produce irrefutable evidence. If ANY post-2026-10 ironflow data appears at any point, you MUST pre-register BEFORE inspecting outcomes and run the frozen FCLR-010 harness immediately.
 
 ## BOTTLENECKS REMOVED (THIS SESSION)
-- **ETag caching hardened:** `scripts/monitor_ironflow_liquidations.py` now uses If-None-Match on tree listing and skips re-parsing on 304; also reads RateLimit headers and backs off when budget low.
+- **ETag caching hardened:** `scripts/monitor_ironflow_liquidations.py` uses If-None-Match on tree listing and skips re-parsing on 304; reads RateLimit headers and backs off when budget low.
 - **Wider probe window:** lookback+lookahead expanded (forward edge explicitly probed for 2026-11+).
 - **Failure classification:** every probe tagged (NEW_AVAILABLE/CONFIRMED_ABSENT/304/429/TRANSIENT_ERROR) with headers/body previews.
 - **State machine:** `research_state/ironflow_monitor_state.json` tracks `data_through`, `consecutive_absent`, `post_2026_10_summary`, and `new_files_found`.
 - **Heavy-work enforced:** `research_state/heavy_work_checklist_004i.md` is non-skippable; this handoff requires all items checked before ending.
+- **Tests extended:** Monitor tests hardened (64/64 PASS as of last run).
 
 ## DATA STATUS (CONFIRMED BLOCKED — EVIDENCE REQUIRED)
-- **Last probe:** `research_state/ironflow_monitor_state.json` (last probe 2026-11-02T11:57:45Z). Tree shows parquet only through 2026-10 for both events/fills.
-- **Quick check result:** 2026-11, 2026-12, 2027-01, 2027-02 all return 404 EntryNotFound (confirmed). `data_through=2026-10`, `consecutive_absent>=3`. No resume trigger fired.
+- **Last probe:** `research_state/ironflow_probe_20261102T135238Z.json` (2026-11-02T13:52:38Z). 2026-11, 2026-12, 2027-01, 2027-02 all return 404 EntryNotFound (confirmed). `data_through=2026-10`, `consecutive_absent>=3`. No resume trigger fired.
 - **Alt hunt:** `research_state/data_source_registry_alt_hunt.json` — 12 source families probed, COMPLETE_NO-GO. No admissible unauthenticated Track A sources found.
-- **Tests:** `python -m unittest discover -s tests -v` → 64/64 PASS (monitor tests extended).
+- **Tests:** `python -m unittest discover -s tests -v` → 64/64 PASS.
 
 ## IMMEDIATE FIRST ACTION (IN ORDER, NO SKIPPING)
 1. **CHECK FOR NEW EVIDENCE (MANDATORY):** Read `research_state/ironflow_monitor_state.json`. Run `python scripts/monitor_ironflow_liquidations.py --quick` (state-aware, cheap). If resume trigger fires (>=2026-11 returns 200 for events OR fills, or `new_files_found` non-empty for >=2026-11) → go to Step 2. Otherwise → go to Step 4.
@@ -79,7 +79,7 @@ Update this `AGENT_HANDOFF.md` with a new timestamp and a crisp "NEXT AGENT INIT
 10. `scripts/monitor_ironflow_liquidations.py` and `scripts/hunt_alternative_liquidation_sources.py`
 
 ## NEXT AGENT INITIAL TASK (CLEAR, TIMESTAMPED)
-**START NOW:** Check evidence via `scripts/monitor_ironflow_liquidations.py --quick`. If none (expected), execute A-E above with full rigor. Your deliverables at session end: (1) improved monitor/hunt automation, (2) new/extended tests all passing, (3) fresh blocker doc with complete probe tables, (4) updated frontier with precise resume triggers, (5) updated AGENT_HANDOFF.md with new timestamp and checked heavy-work list, (6) summary of measurable changes. Do not end until all checked. If new data appears, drop everything and run the new-data path.
+**START NOW (2026-11-02T13:52:00Z):** Check evidence via `scripts/monitor_ironflow_liquidations.py --quick`. If none (expected per latest probe), execute A-E above with full rigor. Your deliverables at session end: (1) improved monitor/hunt automation, (2) new/extended tests all passing, (3) fresh blocker doc with complete probe tables, (4) updated frontier with precise resume triggers, (5) updated AGENT_HANDOFF.md with new timestamp and checked heavy-work list, (6) summary of measurable changes. Do not end until all checked. If new data appears, drop everything and run the new-data path.
 
 **RESUME CONDITION (CONCRETE):** Ironflow publishes `data/events/YYYY-MM.parquet` and/or `data/fills/YYYY-MM.parquet` for any month >= 2026-11 with HTTP 200 on unauthenticated GET (verified via `scripts/monitor_ironflow_liquidations.py --quick`), OR a NEW admissible unauthenticated source passes strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, unauthenticated only, schema compatible with frozen FCLR-010). Hyperliquid-only for Track A.
 

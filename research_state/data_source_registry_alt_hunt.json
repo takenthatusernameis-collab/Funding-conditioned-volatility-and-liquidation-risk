@@ -1,8 +1,17 @@
 {
-  "hunt_id": "alt_hunt_20261102T115229Z",
-  "timestamp_utc": "2026-11-02T11:52:29.388501+00:00",
+  "hunt_id": "alt_hunt_20261102T135240Z",
+  "timestamp_utc": "2026-11-02T13:52:40.075473+00:00",
   "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
   "unauthenticated_only": true,
+  "rubric": {
+    "min_symbols": 5,
+    "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks",
+    "completeness_doc_required": true,
+    "license_ok": true,
+    "unauthenticated_only": true,
+    "no_requester_pays": true,
+    "schema_compatible_fclr010": true
+  },
   "candidates": [
     {
       "name": "hyperliquid_public_api_info",
@@ -14,8 +23,8 @@
           "headers": {
             "content-length": "0",
             "connection": "close",
-            "server": "nginx/1.22.1",
-            "date": "Mon, 02 Nov 2026 11:52:29 GMT",
+            "server": "nginx/1.30.3",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
             "allow": "POST",
             "access-control-allow-origin": "*",
             "vary": "origin",
@@ -23,13 +32,14 @@
             "x-cache": "Error from cloudfront",
             "via": "1.1 1ccbe83f7855d0d971ed6a905298f094.cloudfront.net (CloudFront)",
             "x-amz-cf-pop": "PHX52-P3",
-            "x-amz-cf-id": "Wsd4fVfU7qG0_e6UpurwEyPO4lZA56Zs89cY8MA5Z9zaUVwSqYAyXA=="
+            "x-amz-cf-id": "Zluu3i3_EJQMewedyoi9w8C9E9IKAydAJYCHui_XykZxw9XUpCaovA=="
           },
           "body_len": 0,
           "error": true,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "NO-GO"
     },
     {
       "name": "github_raw_search_hyperliquid_liquidations",
@@ -47,27 +57,28 @@
             "x-frame-options": "deny",
             "x-xss-protection": "1; mode=block",
             "content-type": "text/plain; charset=utf-8",
-            "x-github-request-id": "FD76:2E8B7E:C6CCD:11FC50:6AE8797D",
-            "x-github-edge-region": "westus3",
+            "x-github-request-id": "EEDA:114B96:17B4A7:1FA74F:6AE895A7",
+            "x-github-edge-region": "sea",
             "accept-ranges": "bytes",
-            "date": "Mon, 02 Nov 2026 11:52:29 GMT",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
             "via": "1.1 varnish",
             "x-served-by": "cache-bur-kbur8200149-BUR",
             "x-cache": "MISS",
             "x-cache-hits": "0",
-            "x-timer": "S1793620350.591473,VS0,VE68",
+            "x-timer": "S1793627560.250248,VS0,VE129",
             "vary": "Authorization,Accept-Encoding",
             "access-control-allow-origin": "*",
             "cross-origin-resource-policy": "cross-origin",
-            "x-fastly-request-id": "b68581ce9f71968817071ad4765cbf0d3c885bc7",
-            "expires": "Mon, 02 Nov 2026 11:57:29 GMT",
+            "x-fastly-request-id": "649f5fbb449e7f9411929c9dfb3fb4f5cc6338f5",
+            "expires": "Mon, 02 Nov 2026 13:57:40 GMT",
             "source-age": "0"
           },
           "body_len": 14,
           "error": true,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "NO-GO"
     },
     {
       "name": "github_api_repos",
@@ -82,7 +93,7 @@
             "content-length": "127",
             "content-security-policy": "default-src 'none'",
             "content-type": "application/json; charset=utf-8",
-            "date": "Mon, 02 Nov 2026 11:52:29 GMT",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
             "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
             "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
             "vary": "Accept-Encoding, Accept, X-Requested-With",
@@ -93,11 +104,11 @@
             "x-xss-protection": "0",
             "server": "github.com",
             "x-ratelimit-limit": "60",
-            "x-ratelimit-remaining": "58",
-            "x-ratelimit-used": "2",
+            "x-ratelimit-remaining": "59",
+            "x-ratelimit-used": "1",
             "x-ratelimit-resource": "core",
-            "x-ratelimit-reset": "1793622114",
-            "x-github-request-id": "5450:21C227:F85C7B:3329176:6AE8797D",
+            "x-ratelimit-reset": "1793631160",
+            "x-github-request-id": "5450:21C227:1DE92E5:6268DBC:6AE895A8",
             "x-github-edge-region": "iad",
             "connection": "close"
           },
@@ -105,7 +116,8 @@
           "error": true,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "NO-GO"
     },
     {
       "name": "huggingface_other_datasets",
@@ -116,13 +128,13 @@
           "status": 200,
           "headers": {
             "content-type": "application/json; charset=utf-8",
-            "content-length": "1250",
+            "content-length": "1306",
             "connection": "close",
-            "date": "Mon, 02 Nov 2026 11:52:29 GMT",
-            "etag": "W/\"4e2-xsDr/mFUwzoKy63H1He2Z792x58\"",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
+            "etag": "W/\"51a-mj/cGhErCkS7dhuFXA44Pq0hv2g\"",
             "x-powered-by": "huggingface-moon",
-            "x-request-id": "Root=1-6ae8797d-019707ed0ab1ead8738cc86a",
-            "ratelimit": "\"api\";r=497;t=103",
+            "x-request-id": "Root=1-6ae895a8-4a09abe90f6302aa764af9bb",
+            "ratelimit": "\"api\";r=498;t=92",
             "ratelimit-policy": "\"fixed window\";\"api\";q=500;w=300",
             "cross-origin-opener-policy": "same-origin",
             "referrer-policy": "strict-origin-when-cross-origin",
@@ -130,15 +142,15 @@
             "access-control-allow-origin": "https://huggingface.co",
             "vary": "Origin",
             "access-control-expose-headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
-            "server-timing": "mongo1-0;dur=1.542004999704659",
+            "server-timing": "mongo1-0;dur=1.2207140009850264",
             "x-cache": "Miss from cloudfront",
-            "via": "1.1 0f70e5eaca4dd7c42bcbb3d7bfe22c0e.cloudfront.net (CloudFront)",
+            "via": "1.1 7e583e8ec559785986ed23003d9879aa.cloudfront.net (CloudFront)",
             "x-amz-cf-pop": "PHX52-P3",
             "alt-svc": "h3=\":443\"; ma=86400",
-            "x-amz-cf-id": "Cqsgjn2L2-4hySnv4hUJ7T7LgKlFJYQnbuNmUQdwtbudUC3SRlu5jw==",
+            "x-amz-cf-id": "p9DiNdAN2hi4OC1z12oJfotZfPQf0GYU_mKxrrwuQK_U3YUfF8uSAw==",
             "strict-transport-security": "max-age=31536000"
           },
-          "body_len": 1250,
+          "body_len": 1306,
           "attempts": 1
         },
         {
@@ -146,13 +158,13 @@
           "status": 200,
           "headers": {
             "content-type": "application/json; charset=utf-8",
-            "content-length": "3231",
+            "content-length": "3401",
             "connection": "close",
-            "date": "Mon, 02 Nov 2026 11:52:30 GMT",
-            "etag": "W/\"c9f-mASkV9kZy0ldoFy4w/nHZlq+RsY\"",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
+            "etag": "W/\"d49-nvzWilmOtop6tuSiHXP7AWzg5go\"",
             "x-powered-by": "huggingface-moon",
-            "x-request-id": "Root=1-6ae8797e-74922f7462eee24c701f522c",
-            "ratelimit": "\"api\";r=496;t=102",
+            "x-request-id": "Root=1-6ae895a8-3fbd8007349ede255e0fd1b5",
+            "ratelimit": "\"api\";r=497;t=92",
             "ratelimit-policy": "\"fixed window\";\"api\";q=500;w=300",
             "cross-origin-opener-policy": "same-origin",
             "referrer-policy": "strict-origin-when-cross-origin",
@@ -164,13 +176,111 @@
             "via": "1.1 cc7f512eb666c6805bf6af1b4b77c2d6.cloudfront.net (CloudFront)",
             "x-amz-cf-pop": "PHX52-P3",
             "alt-svc": "h3=\":443\"; ma=86400",
-            "x-amz-cf-id": "cpwx7MeHwtdepLgod6v1Zlq234O6WFwyYZpFq4PkBzcenlzU1QHMLw==",
+            "x-amz-cf-id": "Az8czqyG4cTCJb0Xn7IDhSxyPkWLxrm8aYkTxjO8qTbu3vAQsCgn4A==",
             "strict-transport-security": "max-age=31536000"
           },
-          "body_len": 3231,
+          "body_len": 3401,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
+    },
+    {
+      "name": "huggingface_liquidation_search_broad",
+      "notes": "Broad HF liquidation dataset discovery",
+      "probes": [
+        {
+          "url": "https://huggingface.co/api/datasets?search=liquidations",
+          "status": 200,
+          "headers": {
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "4038",
+            "connection": "close",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
+            "etag": "W/\"fc6-RqdQLPxkgiHUoo0/apu3epC7uEg\"",
+            "x-powered-by": "huggingface-moon",
+            "x-request-id": "Root=1-6ae895a8-30c172861d11d4c34c052b2b",
+            "ratelimit": "\"api\";r=496;t=92",
+            "ratelimit-policy": "\"fixed window\";\"api\";q=500;w=300",
+            "cross-origin-opener-policy": "same-origin",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "access-control-max-age": "86400",
+            "access-control-allow-origin": "https://huggingface.co",
+            "vary": "Origin",
+            "access-control-expose-headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
+            "server-timing": "mongo1-0;dur=1.9377660006284714",
+            "x-cache": "Miss from cloudfront",
+            "via": "1.1 fc20c1482245d494719df97cc96116e0.cloudfront.net (CloudFront)",
+            "x-amz-cf-pop": "PHX52-P3",
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "x-amz-cf-id": "Dsyilof3GiXZSwD-l7RAbOC_IzzL1tYQyZJcLHXai3p-wdHtn32Phw==",
+            "strict-transport-security": "max-age=31536000"
+          },
+          "body_len": 4038,
+          "attempts": 1
+        },
+        {
+          "url": "https://huggingface.co/api/datasets?search=crypto%20liquidation",
+          "status": 200,
+          "headers": {
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "2745",
+            "connection": "close",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
+            "etag": "W/\"ab9-l5FBnbNtMLbBSTjM7D95zZft6G8\"",
+            "x-powered-by": "huggingface-moon",
+            "x-request-id": "Root=1-6ae895a8-3e0d68a62d24fc487402eeb9",
+            "ratelimit": "\"api\";r=495;t=92",
+            "ratelimit-policy": "\"fixed window\";\"api\";q=500;w=300",
+            "cross-origin-opener-policy": "same-origin",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "access-control-max-age": "86400",
+            "access-control-allow-origin": "https://huggingface.co",
+            "vary": "Origin",
+            "access-control-expose-headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
+            "server-timing": "mongo1-0;dur=1.9657569993287325",
+            "x-cache": "Miss from cloudfront",
+            "via": "1.1 aa9b9c12b94db5189f50b3f65f41c702.cloudfront.net (CloudFront)",
+            "x-amz-cf-pop": "PHX52-P3",
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "x-amz-cf-id": "I939Ah8ToyHDIpg9bJEBDrVBkHuutxnmv-JEyt-BU99ZrUHWDhWDzQ==",
+            "strict-transport-security": "max-age=31536000"
+          },
+          "body_len": 2745,
+          "attempts": 1
+        },
+        {
+          "url": "https://huggingface.co/api/datasets?search=perpetual%20liquidation",
+          "status": 200,
+          "headers": {
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "2",
+            "connection": "close",
+            "date": "Mon, 02 Nov 2026 13:52:40 GMT",
+            "etag": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"",
+            "x-powered-by": "huggingface-moon",
+            "x-request-id": "Root=1-6ae895a8-111222c720daeef466e76270",
+            "ratelimit": "\"api\";r=494;t=92",
+            "ratelimit-policy": "\"fixed window\";\"api\";q=500;w=300",
+            "cross-origin-opener-policy": "same-origin",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "access-control-max-age": "86400",
+            "access-control-allow-origin": "https://huggingface.co",
+            "vary": "Origin",
+            "access-control-expose-headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
+            "server-timing": "mongo1-0;dur=1.3165709991008043",
+            "x-cache": "Miss from cloudfront",
+            "via": "1.1 f9bb854514bf1b40a7175016f26fcc5a.cloudfront.net (CloudFront)",
+            "x-amz-cf-pop": "PHX52-P3",
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "x-amz-cf-id": "DQ_nnBL93XGXuXoZMnTilqyFtxCMxYSMpPsJaGDThFn4hWNnI0N-EA==",
+            "strict-transport-security": "max-age=31536000"
+          },
+          "body_len": 2,
+          "attempts": 1
+        }
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
     },
     {
       "name": "zenodo",
@@ -181,15 +291,15 @@
           "status": 200,
           "headers": {
             "server": "nginx",
-            "date": "Mon, 02 Nov 2026 11:52:31 GMT",
+            "date": "Mon, 02 Nov 2026 13:52:42 GMT",
             "content-type": "application/json",
-            "content-length": "233303",
+            "content-length": "233291",
             "vary": "Accept-Encoding",
             "access-control-allow-origin": "*",
             "access-control-expose-headers": "Content-Type, ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
             "x-ratelimit-limit": "30",
             "x-ratelimit-remaining": "29",
-            "x-ratelimit-reset": "1793620411",
+            "x-ratelimit-reset": "1793627622",
             "retry-after": "59",
             "permissions-policy": "interest-cohort=()",
             "x-frame-options": "sameorigin",
@@ -201,10 +311,39 @@
             "x-source": "api",
             "connection": "close"
           },
-          "body_len": 233303,
+          "body_len": 233291,
+          "attempts": 1
+        },
+        {
+          "url": "https://zenodo.org/api/records?q=crypto%20liquidation%20perpetual",
+          "status": 200,
+          "headers": {
+            "server": "nginx",
+            "date": "Mon, 02 Nov 2026 13:52:43 GMT",
+            "content-type": "application/json",
+            "content-length": "192304",
+            "vary": "Accept-Encoding",
+            "access-control-allow-origin": "*",
+            "access-control-expose-headers": "Content-Type, ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset",
+            "x-ratelimit-limit": "30",
+            "x-ratelimit-remaining": "28",
+            "x-ratelimit-reset": "1793627622",
+            "retry-after": "58",
+            "permissions-policy": "interest-cohort=()",
+            "x-frame-options": "sameorigin",
+            "x-xss-protection": "1; mode=block",
+            "x-content-type-options": "nosniff",
+            "content-security-policy": "default-src 'self' fonts.googleapis.com *.gstatic.com data: 'unsafe-inline' 'unsafe-eval' blob: zenodo-broker.web.cern.ch zenodo-broker-qa.web.cern.ch maxcdn.bootstrapcdn.com cdnjs.cloudflare.com ajax.googleapis.com webanalytics.web.cern.ch",
+            "strict-transport-security": "max-age=31556926; includeSubDomains",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "x-source": "api",
+            "connection": "close"
+          },
+          "body_len": 192304,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
     },
     {
       "name": "osf",
@@ -214,7 +353,7 @@
           "url": "https://api.osf.io/v2/",
           "status": 200,
           "headers": {
-            "date": "Mon, 02 Nov 2026 11:52:32 GMT",
+            "date": "Mon, 02 Nov 2026 13:52:44 GMT",
             "content-type": "application/vnd.api+json; charset=utf-8",
             "content-length": "1375",
             "connection": "close",
@@ -231,7 +370,8 @@
           "body_len": 1375,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
     },
     {
       "name": "arxiv",
@@ -243,23 +383,46 @@
           "headers": {
             "connection": "close",
             "content-length": "10545",
-            "server": "Google Frontend",
-            "x-cloud-trace-context": "d3ed8ff1f075492c5b62e5038e781a53",
-            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "x-cloud-trace-context": "2d6a19b14bed9b9f1ebb05ce29ca1d4f",
             "content-type": "application/atom+xml; charset=utf-8",
+            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "server": "Google Frontend",
             "accept-ranges": "bytes",
             "age": "0",
-            "date": "Mon, 02 Nov 2026 11:52:33 GMT",
-            "x-served-by": "cache-lga-kjfk8660043-LGA, cache-lga-kjfk8660043-LGA, cache-lga-kjfk8660071-LGA, cache-phx1710065-PHX",
-            "x-cache": "MISS, MISS, MISS",
-            "x-cache-hits": "0, 0, 0",
-            "x-timer": "S1793620353.743426,VS0,VE325",
+            "date": "Mon, 02 Nov 2026 13:52:44 GMT",
+            "x-served-by": "cache-lga-kjfk8660072-LGA, cache-lga-kjfk8660072-LGA, cache-lga-kjfk8660071-LGA, cache-bur-kbur8200133-BUR",
+            "x-cache": "MISS, HIT, MISS",
+            "x-cache-hits": "0, 2, 0",
+            "x-timer": "S1793627565.795167,VS0,VE60",
             "strict-transport-security": "max-age=300"
           },
           "body_len": 10545,
           "attempts": 1
+        },
+        {
+          "url": "https://export.arxiv.org/api/query?search_query=all:crypto+liquidation+perpetual&max_results=5",
+          "status": 200,
+          "headers": {
+            "connection": "close",
+            "content-length": "12785",
+            "server": "Google Frontend",
+            "x-cloud-trace-context": "372cc6220b756c52499e8452dd8220c1",
+            "content-type": "application/atom+xml; charset=utf-8",
+            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "accept-ranges": "bytes",
+            "age": "0",
+            "date": "Mon, 02 Nov 2026 13:52:44 GMT",
+            "x-served-by": "cache-lga-kjfk8660069-LGA, cache-lga-kjfk8660069-LGA, cache-lga-kjfk8660022-LGA, cache-bur-kbur8200145-BUR",
+            "x-cache": "MISS, HIT, MISS",
+            "x-cache-hits": "0, 1, 0",
+            "x-timer": "S1793627565.894462,VS0,VE60",
+            "strict-transport-security": "max-age=300"
+          },
+          "body_len": 12785,
+          "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
     },
     {
       "name": "data_commoncrawl",
@@ -270,7 +433,7 @@
           "status": 200,
           "headers": {
             "server": "nginx/1.31.8",
-            "date": "Mon, 02 Nov 2026 11:52:33 GMT",
+            "date": "Mon, 02 Nov 2026 13:52:45 GMT",
             "content-type": "text/html",
             "content-length": "7391",
             "last-modified": "Sun, 22 Feb 2026 22:05:56 GMT",
@@ -281,7 +444,8 @@
           "body_len": 7391,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
     },
     {
       "name": "kaggle",
@@ -292,18 +456,18 @@
           "status": 200,
           "headers": {
             "content-type": "application/json",
-            "date": "Mon, 02 Nov 2026 11:52:33 GMT",
+            "date": "Mon, 02 Nov 2026 13:52:45 GMT",
             "access-control-allow-credentials": "true",
             "access-control-allow-origin": "*",
-            "set-cookie": "GCLB=CO3T36nwuIT6iwEQAw; path=/; HttpOnly",
+            "set-cookie": "GCLB=CPmRt9HygNj6zAEQAw; path=/; HttpOnly",
             "vary": "Accept-Encoding",
-            "x-kaggle-millisecondselapsed": "106",
-            "x-kaggle-requestid": "94f6ed2336c3f8e5090f98d28fcae9f3",
+            "x-kaggle-millisecondselapsed": "85",
+            "x-kaggle-requestid": "1e12f45fda89719ca3fbc87ae485bdc8",
             "x-kaggle-apiversion": "2.2.5",
             "x-kaggle-hubversion": "1.0.3",
             "x-frame-options": "SAMEORIGIN",
             "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
-            "content-security-policy": "object-src 'none'; script-src 'nonce-KyEbMsrfoz1lFWSUIZRTuw==' 'report-sample' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:; base-uri 'none'; report-uri https://csp.withgoogle.com/csp/kaggle/20201130; frame-src 'self' https://www.kaggleusercontent.com https://www.youtube.com/embed/ https://youtu.be https://polygraph-cool.github.io https://www.google.com/recaptcha/ https://www.docdroid.com https://www.docdroid.net https://kaggle-static.storage.googleapis.com https://kkb-production.jupyter-proxy.kaggle.net https://kkb-production.firebaseapp.com https://kaggle-metastore.firebaseapp.com https://apis.google.com https://content-sheets.googleapis.com/ https://accounts.google.com/ https://storage.googleapis.com https://docs.google.com https://drive.google.com https://calendar.google.com/ https://google.qualtrics.com/ https://player.kick.com/ https://player.twitch.tv/ https://kaggle.com http://localhost:* https://localhost:* localhost:* ;",
+            "content-security-policy": "object-src 'none'; script-src 'nonce-rI7hMxewrN+R3dQMI+Y7pg==' 'report-sample' 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:; base-uri 'none'; report-uri https://csp.withgoogle.com/csp/kaggle/20201130; frame-src 'self' https://www.kaggleusercontent.com https://www.youtube.com/embed/ https://youtu.be https://polygraph-cool.github.io https://www.google.com/recaptcha/ https://www.docdroid.com https://www.docdroid.net https://kaggle-static.storage.googleapis.com https://kkb-production.jupyter-proxy.kaggle.net https://kkb-production.firebaseapp.com https://kaggle-metastore.firebaseapp.com https://apis.google.com https://content-sheets.googleapis.com/ https://accounts.google.com/ https://storage.googleapis.com https://docs.google.com https://drive.google.com https://calendar.google.com/ https://google.qualtrics.com/ https://player.kick.com/ https://player.twitch.tv/ https://kaggle.com http://localhost:* https://localhost:* localhost:* ;",
             "x-content-type-options": "nosniff",
             "referrer-policy": "strict-origin-when-cross-origin",
             "via": "1.1 google",
@@ -311,10 +475,104 @@
             "connection": "close",
             "transfer-encoding": "chunked"
           },
-          "body_len": 26740,
+          "body_len": 31855,
           "attempts": 1
         }
-      ]
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
+    },
+    {
+      "name": "github_code_search_unauth",
+      "notes": "Unauthenticated code search (usually 401)",
+      "probes": [
+        {
+          "url": "https://api.github.com/search/code?q=hyperliquid+liquidations+parquet",
+          "status": 401,
+          "headers": {
+            "content-type": "application/json; charset=utf-8",
+            "x-github-media-type": "github.v3; format=json",
+            "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, X-GitHub-Edge-Region, Deprecation, Sunset",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+            "x-frame-options": "deny",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "0",
+            "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+            "content-security-policy": "default-src 'none'",
+            "vary": "Accept-Encoding, Accept, X-Requested-With",
+            "server": "github.com",
+            "date": "Mon, 02 Nov 2026 13:52:45 GMT",
+            "x-ratelimit-limit": "60",
+            "x-ratelimit-remaining": "58",
+            "x-ratelimit-used": "2",
+            "x-ratelimit-resource": "core",
+            "x-ratelimit-reset": "1793631160",
+            "content-length": "120",
+            "x-github-request-id": "5451:10A824:1CA2DE4:5E7CEB3:6AE895AD",
+            "x-github-edge-region": "iad",
+            "connection": "close"
+          },
+          "body_len": 120,
+          "error": true,
+          "attempts": 1
+        }
+      ],
+      "rubric_assessment": "NO-GO"
+    },
+    {
+      "name": "github_repos_search",
+      "notes": "Unauthenticated repo search",
+      "probes": [
+        {
+          "url": "https://api.github.com/search/repositories?q=hyperliquid+liquidations",
+          "status": 200,
+          "headers": {
+            "date": "Mon, 02 Nov 2026 13:52:46 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "no-cache",
+            "vary": "Accept,Accept-Encoding, Accept, X-Requested-With",
+            "x-github-media-type": "github.v3; format=json",
+            "link": "<https://api.github.com/search/repositories?q=hyperliquid+liquidations&page=2>; rel=\"next\", <https://api.github.com/search/repositories?q=hyperliquid+liquidations&page=4>; rel=\"last\"",
+            "x-github-api-version-selected": "2022-11-28",
+            "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset, Warning",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+            "x-frame-options": "deny",
+            "x-content-type-options": "nosniff",
+            "x-xss-protection": "0",
+            "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+            "content-security-policy": "default-src 'none'",
+            "server": "github.com",
+            "accept-ranges": "bytes",
+            "x-ratelimit-limit": "10",
+            "x-ratelimit-remaining": "4",
+            "x-ratelimit-used": "6",
+            "x-ratelimit-resource": "search",
+            "x-ratelimit-reset": "1793627607",
+            "transfer-encoding": "chunked",
+            "x-github-request-id": "5452:832D5:1D0A887:5F51B36:6AE895AD",
+            "x-github-edge-region": "iad",
+            "connection": "close"
+          },
+          "body_len": 175966,
+          "attempts": 1
+        }
+      ],
+      "rubric_assessment": "REVIEW_REQUIRED"
     }
-  ]
+  ],
+  "summary": {
+    "candidates_probed": 12,
+    "go_or_review_sources": [
+      "huggingface_other_datasets",
+      "huggingface_liquidation_search_broad",
+      "zenodo",
+      "osf",
+      "arxiv",
+      "data_commoncrawl",
+      "kaggle",
+      "github_repos_search"
+    ],
+    "conclusion": "Review required for: ['huggingface_other_datasets', 'huggingface_liquidation_search_broad', 'zenodo', 'osf', 'arxiv', 'data_commoncrawl', 'kaggle', 'github_repos_search']"
+  }
 }
