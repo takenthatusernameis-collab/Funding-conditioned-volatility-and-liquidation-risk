@@ -9,9 +9,9 @@
 
 **INITIAL TASK MESSAGE FOR NEXT SESSION (TIMESTAMPED, MANDATORY - CANNOT SKIP):**
 ```
-[2026-11-02T05:57:15Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_MONITOR_AUTOMATE_HEAVY-004d (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
+[2026-11-02T06:01:54Z] FOCUS CAMPAIGN: LIQUIDATION_FORWARD_MONITOR_AUTOMATE_HEAVY-004d (HEAVY EXECUTION REQUIRED - NO PASSIVE WAITING)
 
-PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet as of 2026-11-02T05:57Z). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". YOU MUST convert this block into reusable automation and airtight evidence.
+PRIORITY: CRITICAL - LIQUIDATION RISK (repo-name driven). Track A gate PASSED (FCLR-010). Forward validation beyond 2026-10-31 is BLOCKED_ON_DATA (ironflow has no 2026-11 parquet as of 2026-11-02T06:01:54Z). The block is DATA AVAILABILITY, not methodology. YOU MUST NOT idle, poll in conversation, or "check the landing page once". YOU MUST convert this block into reusable automation and airtight evidence.
 
 OBJECTIVE (NON-OPTIONAL, HEAVY WORK - DO ALL OF THE BELOW):
 1) FREEZE & HARDEN THE VALIDATION HARNESS (HEAVY, CODE + TESTS)
@@ -75,7 +75,7 @@ CONSTRAINTS (NON-NEGOTIABLE):
 ## CURRENT STATUS (AUTHORITATIVE)
 - **H001 (volatility): NOT_SUPPORTED** (FCLR-003) — Track C CONFIRMATORY_CLOSED
 - **Track A (observed liquidations): OPEN** — FCLR-010 PASSED (Hyperliquid ironflow 2025-11..2026-10, 199 instruments, 5 blocks, C2 vs B1 Brier -2.21%, CI excludes zero). Overlay executed (hypothetical only).
-- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d: BLOCKED_ON_DATA** — No 2026-11+ ironflow parquet as of 2026-11-02T05:57Z. Must build harness + monitor + alt-hunt NOW.
+- **LIQUIDATION_FORWARD_VALIDATE_HEAVY-004d: BLOCKED_ON_DATA** — No 2026-11+ ironflow parquet as of 2026-11-02T06:01:54Z. Must build harness + monitor + alt-hunt NOW.
 - **Track B: CLOSED_NEGATIVE** (FCLR-H003-EXT-001). **H002: PERMANENTLY_BLOCKED** (SSRN 403). **FCLR-NEXT-002: COMPLETE_NO-GO** for new sources beyond ironflow (must re-probe with fresh evidence per step 3).
 - **Sealed holds:** FCLR-001/002/003/006/007/008/009 sealed.
 
