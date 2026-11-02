@@ -4,6 +4,7 @@ from unittest.mock import patch, MagicMock
 from pathlib import Path
 import sys
 import json
+import tempfile
 from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -399,6 +400,95 @@ class TestQuickPathPersistence(unittest.TestCase):
         finally:
             state_path.write_text(_tmp)
             sys.argv = old_argv
+
+
+class TestTrendReport(unittest.TestCase):
+    def _write_probe(self, evidence_dir, name, data_through, consecutive_absent, triggered, new_files_found=0, mode="quick"):
+        probe = {
+            "probe_id": name,
+            "timestamp_utc": "2026-11-02T10:00:00Z",
+            "mode": mode,
+            "data_through": data_through,
+            "consecutive_absent": consecutive_absent,
+            "quick_resume_check": {
+                "triggered": triggered,
+                "triggering_files": [],
+                "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+                "head_probes": 8,
+                "cached_hits": 0,
+                "data_through": data_through,
+                "probes": [],
+            },
+            "probe_diff": {"summary": {"added_count": 0, "changed_count": 0, "removed_count": 0, "any_change": False}},
+            "tree_change": {"changed": False, "added": [], "removed": []},
+            "tree": {"status": 304, "tree_etag_unchanged": True},
+            "new_files_found": [],
+        }
+        (evidence_dir / name).write_text(json.dumps(probe))
+        return probe
+
+    def test_report_aggregates_probe_runs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evidence_dir = Path(tmp)
+            old_dir = mon.EVIDENCE_DIR
+            mon.EVIDENCE_DIR = evidence_dir
+            try:
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T100000Z.json", "2026-10", 3, False)
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T110000Z.json", "2026-10", 3, False)
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T120000Z.json", "2026-11", 0, True, new_files_found=2)
+                report = mon.generate_trend_report()
+                self.assertEqual(report["total_runs"], 3)
+                self.assertEqual(report["runs_triggered"], 1)
+                self.assertEqual(report["runs_blocked"], 2)
+                self.assertEqual(report["latest"]["data_through"], "2026-11")
+                self.assertTrue(report["resume_trigger_met"])
+            finally:
+                mon.EVIDENCE_DIR = old_dir
+
+    def test_report_no_files_returns_zeros(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evidence_dir = Path(tmp)
+            old_dir = mon.EVIDENCE_DIR
+            mon.EVIDENCE_DIR = evidence_dir
+            try:
+                report = mon.generate_trend_report()
+                self.assertEqual(report["total_runs"], 0)
+                self.assertEqual(report["runs_triggered"], 0)
+                self.assertEqual(report["runs_blocked"], 0)
+                self.assertEqual(report["longest_stable_blocked_streak"], 0)
+                self.assertFalse(report["resume_trigger_met"])
+                self.assertEqual(report["latest"], {})
+            finally:
+                mon.EVIDENCE_DIR = old_dir
+
+    def test_report_limit_caps_runs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evidence_dir = Path(tmp)
+            old_dir = mon.EVIDENCE_DIR
+            mon.EVIDENCE_DIR = evidence_dir
+            try:
+                for i in range(5):
+                    self._write_probe(evidence_dir, f"ironflow_probe_20261102T1{i:02d}0000Z.json", "2026-10", 3, False)
+                report = mon.generate_trend_report(limit=3)
+                self.assertEqual(len(report["runs"]), 3)
+                self.assertEqual(report["total_runs"], 3)
+            finally:
+                mon.EVIDENCE_DIR = old_dir
+
+    def test_report_stable_blocked_streak(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evidence_dir = Path(tmp)
+            old_dir = mon.EVIDENCE_DIR
+            mon.EVIDENCE_DIR = evidence_dir
+            try:
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T100000Z.json", "2026-10", 3, False)
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T110000Z.json", "2026-10", 3, False)
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T120000Z.json", "2026-10", 3, False)
+                self._write_probe(evidence_dir, "ironflow_probe_20261102T130000Z.json", "2026-11", 0, True, new_files_found=2)
+                report = mon.generate_trend_report()
+                self.assertEqual(report["longest_stable_blocked_streak"], 3)
+            finally:
+                mon.EVIDENCE_DIR = old_dir
 
 
 def _blocked_state():

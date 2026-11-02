@@ -974,6 +974,35 @@ def main():
             print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)})")
         return
 
+    if "--report" in sys.argv:
+        # --report: aggregate all saved ironflow_probe_*.json evidence into a
+        # data-availability trend (no network). Removes the per-session
+        # re-confirmation bottleneck: a future session can read the trend and
+        # confirm the block persists without re-probing the remote endpoint.
+        limit = None
+        for arg in sys.argv:
+            if arg.startswith("--limit="):
+                try:
+                    limit = int(arg.split("=", 1)[1])
+                except Exception:
+                    pass
+        report = generate_trend_report(limit=limit)
+        report_path = EVIDENCE_DIR / f"ironflow_trend_report_{now_z()}.json"
+        with open(report_path, "w") as f:
+            json.dump(report, f, indent=2)
+        latest = report.get("latest") or {}
+        print(json.dumps({
+            "report": report_path.name,
+            "total_runs": report["total_runs"],
+            "runs_triggered": report["runs_triggered"],
+            "runs_blocked": report["runs_blocked"],
+            "longest_stable_blocked_streak": report["longest_stable_blocked_streak"],
+            "latest_data_through": latest.get("data_through"),
+            "latest_consecutive_absent": latest.get("consecutive_absent"),
+            "resume_trigger_met": report["resume_trigger_met"],
+        }, indent=2))
+        return
+
     if scan:
         # --scan: full tree listing + diff + forward-edge probe. Detects new files
         # anywhere in the archive (including backfilled older months), not just the
@@ -1170,10 +1199,6 @@ def main():
     print(f"post-2026-10 available: {evidence['post_2026_10_summary']['any_available']}")
 
 
-if __name__ == "__main__":
-    main()
-
-
 def check_post_october():
     """Forward-edge probe for months strictly after 2026-10 (resume check).
 
@@ -1197,9 +1222,92 @@ def check_post_october():
     return False
 
 
+def generate_trend_report(limit=None):
+    """Aggregate all ironflow_probe_*.json evidence files into a data-availability trend.
+
+    Purely local (no network). Reads every saved probe evidence file, extracts the
+    per-run data_through / consecutive_absent / triggered status and probe-diff
+    summary, and returns a machine-readable trend. Used by --report so future
+    sessions can confirm the block persists across many runs without re-probing
+    the remote endpoint, removing the per-session re-confirmation bottleneck.
+    """
+    evidence_dir = EVIDENCE_DIR
+    files = sorted(evidence_dir.glob("ironflow_probe_*.json"), key=lambda p: p.name)
+    runs = []
+    for p in files:
+        try:
+            ev = json.loads(p.read_text())
+        except Exception:
+            continue
+        qrc = ev.get("quick_resume_check", {}) or {}
+        pd = ev.get("probe_diff", {}) or {}
+        summary = pd.get("summary", {}) or {}
+        tc = ev.get("tree_change", {}) or {}
+        tree = ev.get("tree", {}) or {}
+        runs.append({
+            "probe_file": p.name,
+            "probe_id": ev.get("probe_id"),
+            "timestamp_utc": ev.get("timestamp_utc"),
+            "mode": ev.get("mode"),
+            "data_through": qrc.get("data_through", ev.get("data_through")),
+            "consecutive_absent": qrc.get("consecutive_absent", ev.get("consecutive_absent")),
+            "triggered": bool(qrc.get("triggered")),
+            "months_probed": qrc.get("months_probed", []),
+            "head_probes": qrc.get("head_probes", ev.get("head_probes")),
+            "cached_hits": qrc.get("cached_hits", ev.get("cached_hits")),
+            "probe_diff": {
+                "added": summary.get("added_count", 0),
+                "changed": summary.get("changed_count", 0),
+                "removed": summary.get("removed_count", 0),
+                "any_change": bool(summary.get("any_change")),
+            },
+            "tree_change": {
+                "changed": bool(tc.get("changed")),
+                "added": len(tc.get("added", []) or []),
+                "removed": len(tc.get("removed", []) or []),
+                "tree_status": tree.get("status"),
+                "tree_not_modified": bool(tree.get("tree_etag_unchanged") or tc.get("tree_not_modified")),
+            },
+            "new_files_found": len(ev.get("new_files_found", []) or []),
+        })
+    if limit is not None:
+        runs = runs[-limit:]
+    latest = runs[-1] if runs else {}
+    # Longest stable blocked streak: consecutive runs not triggered and no new files,
+    # with the same data_through (i.e. nothing changed between runs).
+    streak = 0
+    max_streak = 0
+    prev_through = None
+    for r in runs:
+        blocked = (not r["triggered"]) and r["new_files_found"] == 0
+        same_through = (r["data_through"] == prev_through) if prev_through is not None else False
+        if blocked and same_through:
+            streak += 1
+        else:
+            streak = 1 if blocked else 0
+        max_streak = max(max_streak, streak)
+        prev_through = r["data_through"]
+    return {
+        "report_id": f"ironflow_trend_report_{now_z()}",
+        "generated_utc": datetime.now(timezone.utc).isoformat(),
+        "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+        "total_runs": len(runs),
+        "runs_triggered": sum(1 for r in runs if r["triggered"]),
+        "runs_blocked": sum(1 for r in runs if not r["triggered"] and r["new_files_found"] == 0),
+        "longest_stable_blocked_streak": max_streak,
+        "latest": latest,
+        "resume_trigger_met": bool((latest or {}).get("triggered")) or (latest or {}).get("new_files_found", 0) > 0,
+        "runs": runs,
+    }
+
+
 # [HEAVY-004i session 20261102T160400Z] ensure compare_probes tolerates missing fields
 def _compare_probes_safe(prev_state, rc):
     try:
         return compare_probes(prev_state, rc)
     except Exception as e:
         return {"summary": {"added_count": 0, "changed_count": 0, "removed_count": 0, "error": str(e)}, "added": [], "changed": [], "removed": []}
+
+
+if __name__ == "__main__":
+    main()
