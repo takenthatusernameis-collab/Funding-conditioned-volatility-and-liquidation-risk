@@ -1,0 +1,132 @@
+{
+  "campaign": "FCLR-NEXT-016-TRIGGER-HARDENING",
+  "task_id": "FCLR-NEXT-016-WATCH-HARDEN",
+  "generated_utc": "2026-11-03T17:54:09Z",
+  "sealed_window": {
+    "start": "2026-05-08",
+    "end": "2026-08-06"
+  },
+  "trigger_status": "BLOCKED_NO_ADMISSIBLE_DATA",
+  "track_a_ironflow": {
+    "cache_dir": "research_state/data_cache/ironflow_events/",
+    "latest_parquet": "2026-10.parquet",
+    "latest_parquet_date": "2026-10-31",
+    "trigger_condition": "new parquet > 2026-10-31",
+    "probed_future": [
+      "2026-11",
+      "2026-12",
+      "2027-01",
+      "2027-02"
+    ],
+    "probe_result": "none found",
+    "trigger_fired": false
+  },
+  "track_v_binance": {
+    "root_zip_count": 463,
+    "symbols": {
+      "BNBUSDT": {
+        "klines": 90,
+        "fundingRate": 3
+      },
+      "BTCUSDT": {
+        "klines": 90,
+        "fundingRate": 3
+      },
+      "ETHUSDT": {
+        "klines": 90,
+        "fundingRate": 3
+      },
+      "SOLUSDT": {
+        "klines": 89,
+        "fundingRate": 3
+      },
+      "XRPUSDT": {
+        "klines": 89,
+        "fundingRate": 3
+      }
+    },
+    "klines_date_summary": {
+      "BNBUSDT:klines": {
+        "first": "2024-01-01",
+        "last": "2024-03-30",
+        "count": 90
+      },
+      "BNBUSDT:fundingRate": {
+        "first": "2024-01-01",
+        "last": "2024-03-01",
+        "count": 3
+      },
+      "BTCUSDT:klines": {
+        "first": "2024-01-01",
+        "last": "2024-03-30",
+        "count": 90
+      },
+      "BTCUSDT:fundingRate": {
+        "first": "2024-01-01",
+        "last": "2024-03-01",
+        "count": 3
+      },
+      "ETHUSDT:klines": {
+        "first": "2024-01-01",
+        "last": "2024-03-30",
+        "count": 90
+      },
+      "ETHUSDT:fundingRate": {
+        "first": "2024-01-01",
+        "last": "2024-03-01",
+        "count": 3
+      },
+      "SOLUSDT:klines": {
+        "first": "2024-01-01",
+        "last": "2024-03-29",
+        "count": 89
+      },
+      "SOLUSDT:fundingRate": {
+        "first": "2024-01-01",
+        "last": "2024-03-01",
+        "count": 3
+      },
+      "XRPUSDT:klines": {
+        "first": "2024-01-01",
+        "last": "2024-03-29",
+        "count": 89
+      },
+      "XRPUSDT:fundingRate": {
+        "first": "2024-01-01",
+        "last": "2024-03-01",
+        "count": 3
+      }
+    },
+    "all_klines_dates_first": "2024-01-01",
+    "all_klines_dates_last": "2024-03-30",
+    "dates_in_sealed_window": 0,
+    "dates_outside_sealed_window": 90,
+    "outside_first": "2024-01-01",
+    "outside_last": "2024-03-30",
+    "new_data_beyond_sealed_found": false,
+    "all_files_pre_2026": true,
+    "unsealed_2026_panel_beyond_2026_08_06": false
+  },
+  "prereg_gating_proof": {
+    "harness": "scripts/fclr010_harness.py",
+    "evaluate_forward_without_prereg": "BLOCKED - Pre-registration path required.",
+    "evaluate_forward_with_prereg_but_no_data": "BLOCKED - Data path not found.",
+    "gating_enforced": true,
+    "preregister_before_outcomes": true
+  },
+  "integrity_sweep": {
+    "single_handoff": "AGENT_HANDOFF.md only (no NEXT_AGENT_HANDOFF_*.md duplicates)",
+    "sealed_holdout_integrity": "research_state/sealed_holdout_integrity.md present",
+    "structural_closure_verdict": "research_state/structural_closure_verdict_heavy.md present",
+    "cross_track_firewall": "intact (Hyperliquid-only Track A; no Binance merge)",
+    "structural_closure": "Track C CLOSED NEGATIVE; Track A STRUCTURALLY BLOCKED; Track B CLOSED NEGATIVE; H001 NOT_SUPPORTED"
+  },
+  "machine_checkable_diff": {
+    "root_zips_total": 463,
+    "root_zips_2026_or_later": 0,
+    "root_zips_in_sealed_window": 0,
+    "root_zips_outside_sealed_window": 463,
+    "ironflow_latest_ym": "2026-10",
+    "ironflow_new_months_found": 0
+  }
+}

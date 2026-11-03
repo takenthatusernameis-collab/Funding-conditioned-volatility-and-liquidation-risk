@@ -39,12 +39,13 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - Trigger detection coverage: Must enumerate full file inventory (not just spot checks) to avoid missing late-arriving data.
 
 ## 3) Verified state (tests/evidence)
-- tests (unittest): 117 ran, 0 errors, 0 failures (2026-11-03T17:51:16Z)
+- tests (unittest): 117 ran, 0 errors, 0 failures (2026-11-03T17:53:30Z)
 - Harness: FCLR010Harness loads frozen config from research_state/run_manifest.json OK
-- Track A latest: research_state/data_cache/ironflow_events/2026-10.parquet (no >2026-10-31)
-- Track V sealed: 2026-05-08..2026-08-06 only (root contains 2024 zips only)
-- Structural closure verdict: research_state/structural_closure_verdict_heavy.md present
-- Ironflow probe: no resume trigger (latest probe 2026-11-03T17:51:16Z)
+- Prereg gating proven: evaluate_forward() without pre_reg_path -> BLOCKED explicit error; with pre_reg but no data -> BLOCKED explicit error (gating enforced)
+- Track A latest: research_state/data_cache/ironflow_events/2026-10.parquet (no >2026-10-31); probed 2026-11, 2026-12, 2027-01, 2027-02 -> none found
+- Track V sealed: 2026-05-08..2026-08-06 only; root contains 463 zips ALL 2024 (2024-01-01..2024-03-30), no 2026 files beyond sealed window
+- Structural closure verdict: research_state/structural_closure_verdict_heavy.md present, unchanged
+- Ironflow probe: no resume trigger (latest probe 2026-11-03T17:53:30Z)
 
 ## 4) Key artifacts
 - research_state/run_manifest.json (valid JSON; frozen)
@@ -55,6 +56,8 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - research_state/blockers_FCLR-012_20261103T140313Z.md
 - research_state/sealed_holdout_integrity.md
 - research_state/experiment_frontier.json
+- research_state/watch/trigger_harden_20261103T175500Z.json (machine-checkable diff: inventory, sealed-window diff, trigger status, gating proof)
+- research_state/watch/trigger_watch_20261103T175500Z.md (session artifact)
 
 ## 5) Frozen rules (immutable)
 - Pre-register before inspecting outcomes
@@ -65,11 +68,12 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - Overlay HYPOTHETICAL_ONLY, no live/paper trading
 - Heavy work only - no status-only files
 
-## 6) Next focus campaign (heavy work)
-Campaign: FCLR-NEXT-016-TRIGGER-HARDENING
-1) Harden trigger watch: full inventory of all Binance files vs sealed window with diffs (paths/sizes/mtimes); ironflow probe for >2026-10. Machine-checkable evidence required.
-2) Prereg gating proof: deterministic dry-run showing evaluate_forward blocked without preregistration; log exact error.
-3) Integrity sweep: re-verify seals/firewall/manifests unchanged.
-4) Ship heavy artifact per session: concrete diffs + proof + readiness. No status summaries alone.
+## 6) Next focus campaign (heavy work - CONTINUOUS)
+Campaign: FCLR-NEXT-016-TRIGGER-HARDENING (ongoing)
+1) Re-harden trigger watch each session: full Binance inventory vs sealed window diff; ironflow probe for >2026-10. Ship trigger_harden_<UTC>.json + trigger_watch_<UTC>.md.
+2) Re-verify prereg gating each session: dry-run evaluate_forward without prereg -> must fail with explicit error. Log exact error in artifact.
+3) Integrity sweep each session: seals/firewall/manifests unchanged.
+4) On trigger (ironflow > 2026-10-31 OR unsealed Binance panel beyond 2026-05-08..2026-08-06): pre-register BEFORE inspecting outcomes via scripts/fclr010_harness.py pre_register_forward_experiment(), then run FCLR-NEXT-012 forward validation with frozen config only.
+5) Ship ONE verifiable heavy artifact per session. No status-only files. No idle waiting.
 
-**NEXT AGENT: ALL CONFIRMATORY CAMPAIGNS CLOSED NEGATIVE. FCLR-NEXT-012 BLOCKED ON ADMISSIBLE DATA. DO NOT IDLE. HARDEN WATCH + PROVE PREREG GATING + SHIP HEAVY ARTIFACT. ACT IMMEDIATELY WITH PREREG-FIRST IF TRIGGER FIRES. NO DEVIATION.**
+**NEXT AGENT: ALL CONFIRMATORY CAMPAIGNS CLOSED NEGATIVE. FCLR-NEXT-012 BLOCKED ON ADMISSIBLE DATA. DO NOT IDLE. HARDEN WATCH + PROVE PREREG GATING + SHIP HEAVY ARTIFACT EACH SESSION. ACT IMMEDIATELY WITH PREREG-FIRST IF TRIGGER FIRES. NO DEVIATION.**
