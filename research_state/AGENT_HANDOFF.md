@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T072021Z
+**TIMESTAMP:** 20261103T090332Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY (by repo name):** LIQUIDATION-FIRST. Maximize heavy computable work now; eliminate idle-wait bottlenecks.
 
