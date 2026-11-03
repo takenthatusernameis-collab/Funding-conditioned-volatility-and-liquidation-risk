@@ -99,16 +99,85 @@ class FCLR010Harness:
         # Implementation follows frozen FCLR-010 methodology
         return results
 
-    def evaluate_forward(self, data_path: Path, output_dir: Path) -> Dict[str, Any]:
+    def pre_register_forward_experiment(self, output_dir: Path) -> Path:
         """
-        Evaluate forward validation on new data using frozen model.
-        MUST pre-register before calling this if inspecting new data.
+        Pre-register a forward validation experiment BEFORE inspecting any new outcomes.
+        Writes a locked preregistration record (frozen config, splits, metrics, gates,
+        embargo, UTC timestamp) to output_dir. Returns the written path.
+        Calling this does NOT inspect outcomes; it only freezes the design.
         """
-        results = {
-            "status": "NOT_EXECUTED",
-            "reason": "Must pre-register experiment before inspecting outcomes on new data"
+        import datetime
+        import json as _json
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prereg = {
+            "experiment_id": "FCLR-012",
+            "hypothesis": "FCLR-H004",
+            "track": "A",
+            "protocol_version": self.config.protocol_version,
+            "primary_contrast": self.config.primary_contrast,
+            "primary_metric": self.config.primary_metric,
+            "min_rel_reduction": self.config.min_rel_reduction,
+            "min_instruments": self.config.min_instruments,
+            "min_blocks": self.config.min_blocks,
+            "bootstrap_reps": self.config.bootstrap_reps,
+            "embargo_days": self.config.embargo_days,
+            "splits_frozen_before_outcomes": True,
+            "split_boundaries": self.split_boundaries,
+            "models": {
+                "B0": "persistence",
+                "B1": "RV-only (log RV1h, log RV24h, log RV168h) HAR-style",
+                "C1": "RV + funding (signed funding + abs funding percentile 90d)",
+                "C2": "RV + funding + price dislocation (mark/index premium + mark/EMA24)",
+            },
+            "rules": {
+                "no_retuning": True,
+                "frozen_config_only": True,
+                "no_holdout_reuse": True,
+                "embargo_enforced": True,
+                "block_bootstrap_uncertainty": True,
+                "firewall_intact": "Hyperliquid-only; no Binance merge",
+                "overlay_changes": "NONE",
+            },
+            "preregistered_at_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "status": "PREREGISTERED_OUTCOMES_NOT_INSPECTED",
         }
-        return results
+        path = output_dir / "experiment_prereg_fclr012_forward_validate.json"
+        with open(path, "w") as f:
+            _json.dump(prereg, f, indent=2)
+        return path
+
+    def evaluate_forward(self, data_path: Path, output_dir: Path, pre_reg_path: Optional[Path] = None) -> Dict[str, Any]:
+        """
+        Evaluate forward validation on new data using the FROZEN model.
+        MUST pre-register (pre_register_forward_experiment) before inspecting new outcomes.
+        No retuning: config, features, splits, metrics, and gates are frozen.
+        """
+        data_path = Path(data_path)
+        output_dir = Path(output_dir)
+        if pre_reg_path is not None:
+            pre_reg_path = Path(pre_reg_path)
+            if not pre_reg_path.exists():
+                return {
+                    "status": "BLOCKED",
+                    "reason": f"Pre-registration file not found: {pre_reg_path}. Pre-register before inspecting outcomes.",
+                }
+        else:
+            return {
+                "status": "BLOCKED",
+                "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.",
+            }
+        if not data_path.exists():
+            return {
+                "status": "BLOCKED",
+                "reason": f"Data path not found: {data_path}. No new data available for forward validation.",
+            }
+        return {
+            "status": "READY_FROZEN",
+            "reason": "Pre-registration present; data available; frozen config only, no retuning.",
+            "config": self.get_frozen_config(),
+            "data_path": str(data_path),
+        }
 
 
 def main():
