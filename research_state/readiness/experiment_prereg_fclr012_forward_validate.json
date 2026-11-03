@@ -1,0 +1,54 @@
+{
+  "experiment_id": "FCLR-012",
+  "hypothesis": "FCLR-H004",
+  "track": "A",
+  "protocol_version": "1.0",
+  "primary_contrast": "C2_vs_B1",
+  "primary_metric": "brier",
+  "min_rel_reduction": 0.0221,
+  "min_instruments": 5,
+  "min_blocks": 3,
+  "bootstrap_reps": 2000,
+  "embargo_days": 7,
+  "splits_frozen_before_outcomes": true,
+  "split_boundaries": {
+    "experiment_id": "FCLR-010",
+    "protocol_ref": "research_state/research_protocol_fclr010.md v1.0",
+    "frozen_before_outcomes": true,
+    "frozen_at": "2026-11-01T05:39:07Z",
+    "train": {
+      "start": "2025-11-01T00:00:00Z",
+      "end": "2026-03-06T23:00:00Z"
+    },
+    "validation": {
+      "start": "2026-03-14T00:00:00Z",
+      "end": "2026-05-20T23:00:00Z"
+    },
+    "test": {
+      "start": "2026-05-28T00:00:00Z",
+      "end": "2026-10-31T23:00:00Z"
+    },
+    "embargo_days": 7,
+    "purge_days": 7,
+    "boundary_basis": "unique UTC timestamps",
+    "split_ratio": "60/20/20 chronological",
+    "notes": "7-day purge/embargo at all boundaries; test window 2026-05-28..2026-10-31 = 157 days = 5 non-overlapping 30-day blocks (>=3 met); >=5 instruments (199) met"
+  },
+  "models": {
+    "B0": "persistence",
+    "B1": "RV-only (log RV1h, log RV24h, log RV168h) HAR-style",
+    "C1": "RV + funding (signed funding + abs funding percentile 90d)",
+    "C2": "RV + funding + price dislocation (mark/index premium + mark/EMA24)"
+  },
+  "rules": {
+    "no_retuning": true,
+    "frozen_config_only": true,
+    "no_holdout_reuse": true,
+    "embargo_enforced": true,
+    "block_bootstrap_uncertainty": true,
+    "firewall_intact": "Hyperliquid-only; no Binance merge",
+    "overlay_changes": "NONE"
+  },
+  "preregistered_at_utc": "2026-11-03T18:51:01Z",
+  "status": "PREREGISTERED_OUTCOMES_NOT_INSPECTED"
+}
