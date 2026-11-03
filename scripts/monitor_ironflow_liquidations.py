@@ -1193,6 +1193,56 @@ def main():
         res["probe_diff_summary"] = pd.get("summary", {})
         print(json.dumps(res, indent=2))
         return 0 if res["new_data_path"] else 1
+    if scan:
+        # --scan: fast resume scan (tree check + forward-edge probe) writing a
+        # standalone evidence artifact for handoff consumption.
+        ts_s = now_z()
+        state = load_state()
+        tree_etag = state.get("tree_etag")
+        etag_ref = [tree_etag]
+        tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
+        tree_info = {"status": tree_res.get("status"), "not_modified": tree_res.get("not_modified")}
+        if etag_ref[0]:
+            tree_info["etag"] = etag_ref[0]
+        rc = check_resume_condition(state)
+        tc = check_tree_change(state)
+        pd = compare_probes(state, rc)
+        bd = check_baseline_drift_probe(state)
+        reasons = []
+        if rc.get("triggered"):
+            reasons.append("forward_edge_200")
+        if pd.get("summary", {}).get("changed_count", 0) > 0:
+            reasons.append("probe_diff_404_to_200")
+        if tc.get("changed") and tc.get("added"):
+            reasons.append("tree_change_new_paths")
+        if bd.get("drifted"):
+            reasons.append("baseline_drift")
+        go = bool(reasons)
+        scan_res = {
+            "scan_ts": datetime.now(timezone.utc).isoformat(),
+            "go": go,
+            "reasons": reasons,
+            "data_through": state.get("data_through"),
+            "consecutive_absent": state.get("consecutive_absent"),
+            "tree": tree_info,
+            "resume_check": {"triggered": rc.get("triggered"), "months_probed": rc.get("months_probed"), "head_probes": rc.get("head_probes"), "get_requests": rc.get("get_requests"), "get_requests_skipped": rc.get("get_requests_skipped")},
+            "probe_diff": pd.get("summary", {}),
+            "tree_change": {"changed": tc.get("changed"), "added": tc.get("added"), "content_replaced": tc.get("content_replaced"), "tree_not_modified": tc.get("tree_not_modified")},
+            "baseline_drift": {"drifted": bd.get("drifted")},
+        }
+        outp = EVIDENCE_DIR / f"ironflow_resume_scan_{ts_s}.json"
+        with open(outp, "w") as f:
+            json.dump(scan_res, f, indent=2)
+        # Update persisted quick-like records
+        state["last_scan"] = {"timestamp_utc": scan_res["scan_ts"], "go": go, "reasons": reasons}
+        try:
+            compact_probe_history(state, max_history=10)
+        except Exception:
+            pass
+        with open(STATE_PATH, "w") as f:
+            json.dump(state, f, indent=2)
+        print(json.dumps(scan_res, indent=2))
+        return 0 if go else 1
     if verify:
         vr = verify_state()
         # Baseline-drift state check (no network) is part of verification: the
@@ -1812,6 +1862,22 @@ def simulate_resume(state=None, triggered_months=None, triggered_kinds=None):
     }
 
 
+
+
+def compact_probe_history(state, max_history: int = 10):
+    """Keep only last N probe evidence entries to avoid unbounded growth."""
+    changed = False
+    for key in ("probe_history",):
+        if key in state and isinstance(state[key], list):
+            if len(state[key]) > max_history:
+                state[key] = state[key][-max_history:]
+                changed = True
+    # Also compact quick probe history if present
+    if "last_quick_probe_history" in state and isinstance(state["last_quick_probe_history"], list):
+        if len(state["last_quick_probe_history"]) > max_history:
+            state["last_quick_probe_history"] = state["last_quick_probe_history"][-max_history:]
+            changed = True
+    return changed
 
 
 def write_blocker_snapshot(state_path: Optional[Path] = None, out_dir: Optional[Path] = None) -> Dict[str, Any]:
