@@ -803,25 +803,30 @@ def verify_state(state=None):
     return {"ok": len(errors) == 0, "checks": checks, "errors": errors, "data_through": data_through, "consecutive_absent": stored_absent, "content_hash_missing": missing_oids}
 
 
+def _head_content_length(headers):
+    """Extract Content-Length from a HEAD response header dict (int or None)."""
+    for k, v in (headers or {}).items():
+        if k.lower() == "content-length":
+            try:
+                return int(v)
+            except Exception:
+                return None
+    return None
+
+
 def check_baseline_drift(state):
-    """Detect silent archive regressions: a previously-available month disappearing.
+    """State-only baseline-drift check (no network).
 
-    The forward-edge probe only watches months AFTER data_through, so it cannot
-    notice if the archive regresses (a month that used to return 200 now returns
-    404, or its ETag/size changes without new forward-edge files). Such a change
-    would corrupt the frozen FCLR-010 baseline (which depends on the exact
-    2025-11..2026-10 panel) and must be surfaced immediately rather than silently
-    corrupting the next forward-validation run.
-
-    Compares the persisted file_cache (recorded on the last successful GET of each
-    known month) against the cached tree_parquet_paths. Returns a dict describing
-    every known month whose cached ETag/size is present (no network here; this is
-    a state-consistency check). The network-aware variant is check_baseline_drift_probe.
+    Confirms the frozen baseline's content-hash coverage is complete for every
+    known month: each (kind, month) present in ``tree_parquet_paths`` must have
+    a recorded LFS oid in ``tree_parquet_items``. A missing oid means silent file
+    replacement cannot be ruled out by the state-only check (the network-aware
+    ``check_baseline_drift_probe`` catches it live). Also flags cache corruption
+    (a file_cache entry missing its etag/sha256).
     """
-    cache = state.get("file_cache", {}) or {}
+    items = state.get("tree_parquet_items", {}) or {}
     known_paths = state.get("tree_parquet_paths", []) or []
     known_months = scan_events_fills_only(known_paths)
-    # Build set of (kind, month) that exist in tree
     tree_pairs = set()
     for p in known_paths:
         m = re.match(r"^(data/(events|fills)/)(\d{4}-\d{2})\.parquet$", p)
@@ -829,21 +834,25 @@ def check_baseline_drift(state):
             tree_pairs.add((m.group(2), m.group(3)))
     result = {
         "known_months": known_months,
-        "cached_months": sorted(cache.keys()),
+        "checked": len(known_months),
         "missing_cache_entries": [],
         "stale_cache_entries": [],
-        "checked": len(known_months),
+        "missing_oids": [],
     }
+    cache = state.get("file_cache", {}) or {}
     for ym in known_months:
         for kind in ("events", "fills"):
             if (kind, ym) not in tree_pairs:
-                continue  # Only check entries that exist in tree
+                continue
             key = f"{kind}:{ym}"
             c = cache.get(key)
             if not c:
                 result["missing_cache_entries"].append({"month": ym, "kind": kind, "cache_key": key})
             elif not c.get("etag") or not c.get("sha256"):
                 result["stale_cache_entries"].append({"month": ym, "kind": kind, "cache_key": key, "entry": c})
+            p = f"data/{kind}/{ym}.parquet"
+            if p not in items or not (items.get(p) or {}).get("oid"):
+                result["missing_oids"].append({"month": ym, "kind": kind, "path": p})
     # A missing cache entry means the file was never downloaded: there is no
     # baseline to drift from, so it is cache-incomplete, not drift. Real drift
     # (200 -> 404 or ETag/Last-Modified change) can only be observed against a
@@ -860,79 +869,119 @@ def check_baseline_drift(state):
     # state-only check (the network-aware --quick path catches it live via
     # last_tree_change.content_replaced). Flag this as content_hash_incomplete
     # so sessions do not mistake a path-only baseline for a content-verified one.
-    items = state.get("tree_parquet_items", {}) or {}
-    missing_oids = []
-    for ym in known_months:
-        for kind in ("events", "fills"):
-            p = f"data/{kind}/{ym}.parquet"
-            if p not in items or not (items.get(p) or {}).get("oid"):
-                missing_oids.append({"month": ym, "kind": kind, "path": p})
-    result["content_hash_missing"] = missing_oids
-    result["content_hash_incomplete"] = bool(missing_oids)
+    result["content_hash_missing"] = result["missing_oids"]
+    result["content_hash_incomplete"] = bool(result["missing_oids"])
     result["content_hash_complete"] = not result["content_hash_incomplete"]
     return result
+
+
+def _drift_pairs_from_state(state):
+    """Build the (kind, month, oid, size) baseline list for drift checking.
+
+    The authoritative content-hash baseline is ``tree_parquet_items`` (the LFS
+    oid recorded per parquet path from the HF tree listing). Previously this
+    function read ``file_cache``, which is populated only by full --force GETs
+    and was EMPTY in the persisted state — making every baseline-drift probe a
+    no-op that still burned a tree round-trip. Reading the tree items instead
+    gives a complete, bounded (36 pairs) baseline with no downloads needed.
+    """
+    items = state.get("tree_parquet_items", {}) or {}
+    pairs = []
+    for path, meta in sorted(items.items()):
+        if not isinstance(path, str) or not path.endswith(".parquet"):
+            continue
+        m = re.match(r"^data/(events|fills)/(\d{4}-\d{2})\.parquet$", path)
+        if not m:
+            continue
+        kind, ym = m.group(1), m.group(2)
+        meta = meta or {}
+        if not meta.get("oid"):
+            continue  # no content hash -> cannot detect silent replacement
+        pairs.append({
+            "kind": kind,
+            "month": ym,
+            "path": path,
+            "oid": meta.get("oid"),
+            "size": meta.get("size"),
+        })
+    return pairs
 
 
 def check_baseline_drift_probe(state, max_retries=MAX_RETRIES):
     """Network-aware baseline-drift check: re-HEAD every known available month.
 
-    Cheap HEAD requests (no body download) against every (kind, month) pair the
-    monitor has ever recorded as available. Any month that flips 200 -> 404, or
-    whose ETag changes, is a regression of the frozen baseline and is reported in
-    ``regressions``. Months that are 404 in the cache are skipped (they were never
-    part of the baseline). This is bounded: only previously-available months are
-    re-checked, and HEAD probes carry a retry budget of 1.
+    Cheap HEAD requests (no body download) against every (kind, month) pair that
+    has a recorded content hash in ``tree_parquet_items``. Any month that flips
+    to 404, or whose ETag/size changes, is a regression of the frozen baseline
+    and is reported in ``regressions`` / ``content_replaced``. This is bounded:
+    only tree-listed months with a recorded oid are re-checked, and HEAD probes
+    carry a retry budget of 1. A HEAD failure (HF sometimes rejects HEAD) falls
+    back to a conditional GET using the recorded oid as If-None-Match, so a 304
+    confirms the file is byte-identical without downloading it.
     """
-    cache = state.get("file_cache", {}) or {}
+    pairs = _drift_pairs_from_state(state)
     regressions = []
+    content_replaced = []
+    records = []
     checked = 0
-    changed_etags = []
-    for key, c in sorted(cache.items()):
-        if not c or not c.get("etag"):
-            continue
-        # cache keys are "kind:YYYY-MM"
-        if ":" not in key:
-            continue
-        kind, ym = key.split(":", 1)
+    head_failures = 0
+    for p in pairs:
+        kind, ym, path, oid, size = p["kind"], p["month"], p["path"], p["oid"], p["size"]
         url = (EVENTS_TEMPLATE if kind == "events" else FILLS_TEMPLATE) % ym
         head = head_probe(url)
         checked += 1
         rec = {
             "month": ym,
             "kind": kind,
+            "path": path,
             "url": url,
             "head_status": head["status"],
-            "cached_etag": c.get("etag"),
-            "cached_sha256": c.get("sha256"),
-            "cached_content_length": c.get("content_length"),
+            "cached_oid": oid,
+            "cached_size": size,
         }
+        records.append(rec)
         if head.get("head_ok") and head["status"] == 200:
             new_etag = head["headers"].get("ETag")
             new_lm = head["headers"].get("Last-Modified")
+            new_size = _head_content_length(head["headers"])
             rec["new_etag"] = new_etag
             rec["new_last_modified"] = new_lm
-            if new_etag and new_etag != c.get("etag"):
-                rec["reason"] = "etag_changed"
+            rec["new_size"] = new_size
+            # SILENT FILE REPLACEMENT: same path, different bytes. The tree oid is
+            # the LFS content hash; an ETag change (or size change) means the file
+            # at this path was overwritten, which would silently corrupt the frozen
+            # FCLR-010 baseline panel. Surface it as content_replaced.
+            if new_etag and new_etag != oid:
+                rec["reason"] = "content_replaced"
+                rec["replaced"] = True
+                content_replaced.append(rec)
                 regressions.append(rec)
-                changed_etags.append(rec)
-            elif c.get("last_modified") and new_lm and new_lm != c.get("last_modified"):
-                rec["reason"] = "last_modified_changed"
+            elif size is not None and new_size is not None and new_size != size:
+                rec["reason"] = "size_changed"
+                rec["replaced"] = True
+                content_replaced.append(rec)
                 regressions.append(rec)
             else:
                 rec["reason"] = "unchanged"
+                rec["replaced"] = False
         elif head.get("head_ok") and head["status"] == 404:
             rec["reason"] = "regressed_200_to_404"
+            rec["replaced"] = False
             regressions.append(rec)
         else:
-            rec["reason"] = f"head_failed_status_{head['status']}"
             # Head failure is not treated as a regression: HF sometimes rejects
-            # HEAD; fall back to a GET to classify definitively.
-            r = resolve_get(url, etag_ref=[c.get("etag")], max_retries=max_retries)
+            # HEAD; fall back to a conditional GET using the recorded oid as
+            # If-None-Match so a 304 confirms byte-identity without download.
+            head_failures += 1
+            r = resolve_get(url, etag_ref=[oid], max_retries=max_retries)
             rec["get_status"] = r["status"]
-            if r["ok"] and r["status"] == 200:
-                rec["reason"] = "unchanged_via_get"
+            if r.get("not_modified"):
+                rec["reason"] = "unchanged_via_get_304"
+            elif r["ok"] and r["status"] == 200:
+                rec["reason"] = "unchanged_via_get_200"
             elif r["status"] == 404:
                 rec["reason"] = "regressed_200_to_404"
+                rec["replaced"] = False
                 regressions.append(rec)
             else:
                 rec["reason"] = f"unclassified_status_{r['status']}"
@@ -942,9 +991,13 @@ def check_baseline_drift_probe(state, max_retries=MAX_RETRIES):
             time.sleep(sl)
     return {
         "checked": checked,
+        "pairs_checked": pairs,
+        "records": records,
         "regressions": regressions,
         "regression_count": len(regressions),
-        "changed_etags": changed_etags,
+        "content_replaced": content_replaced,
+        "content_replaced_count": len(content_replaced),
+        "head_failures": head_failures,
         "baseline_intact": len(regressions) == 0,
     }
 
@@ -1227,8 +1280,8 @@ def main():
             "tree": tree_info,
             "resume_check": {"triggered": rc.get("triggered"), "months_probed": rc.get("months_probed"), "head_probes": rc.get("head_probes"), "get_requests": rc.get("get_requests"), "get_requests_skipped": rc.get("get_requests_skipped")},
             "probe_diff": pd.get("summary", {}),
-            "tree_change": {"changed": tc.get("changed"), "added": tc.get("added"), "content_replaced": tc.get("content_replaced"), "tree_not_modified": tc.get("tree_not_modified")},
-            "baseline_drift": {"drifted": bd.get("drifted")},
+            "tree_change": {"changed": tc.get("changed"), "added": tc.get("added"), "removed": tc.get("removed"), "content_replaced": tc.get("content_replaced"), "tree_not_modified": tc.get("tree_not_modified")},
+            "baseline_drift": {"drifted": not bd.get("baseline_intact", True), "regression_count": bd.get("regression_count"), "content_replaced_count": bd.get("content_replaced_count"), "checked": bd.get("checked"), "content_replaced": bd.get("content_replaced")},
         }
         outp = EVIDENCE_DIR / f"ironflow_resume_scan_{ts_s}.json"
         with open(outp, "w") as f:
@@ -1254,14 +1307,16 @@ def main():
         vr = verify_state()
         # Baseline-drift state check (no network) is part of verification: the
         # frozen FCLR-010 baseline panel depends on every known month retaining a
-        # complete cache entry.
+        # complete cache entry and a recorded content hash.
         bd = check_baseline_drift(load_state())
         vr["baseline_drift"] = bd
-        vr["ok"] = vr["ok"] and not bd["drifted"]
+        vr["ok"] = vr["ok"] and not bd["drifted"] and bd["content_hash_complete"]
         if bd["drifted"]:
             vr["errors"].append(f"baseline drift detected: {bd['missing_cache_entries'] + bd['stale_cache_entries']}")
+        if not bd["content_hash_complete"]:
+            vr["errors"].append(f"content-hash baseline incomplete: {bd['content_hash_missing']}")
         print(json.dumps(vr, indent=2))
-        print(f"VERIFY ok={vr['ok']} data_through={vr['data_through']} consecutive_absent={vr['consecutive_absent']} baseline_drift={bd["drifted"]}")
+        print(f"VERIFY ok={vr['ok']} data_through={vr['data_through']} consecutive_absent={vr['consecutive_absent']} baseline_drift={bd['drifted']} content_hash_complete={bd['content_hash_complete']} known_months={bd['checked']}")
         return 0 if vr["ok"] else 1
     if drift:
         # --drift: state-only baseline-drift check (no network). Confirms the
@@ -1349,6 +1404,8 @@ def main():
         # silent archive regressions (200 -> 404 or ETag change) that the
         # forward-edge probe cannot see. A corrupted baseline would silently
         # invalidate the next forward-validation run, so this is checked here.
+        # Now driven by tree_parquet_items (LFS oids) so it is non-empty and can
+        # also detect SILENT FILE REPLACEMENT (same path, different bytes).
         evidence["baseline_drift"] = check_baseline_drift_probe(state)
         evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
         with open(evidence_path, "w") as f:
@@ -1406,7 +1463,7 @@ def main():
             pd = evidence.get("probe_diff", {}) or {}
             summary = pd.get("summary", {}) or {}
             bd = evidence.get("baseline_drift", {}) or {}
-            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd.get('baseline_intact')} regressions={bd.get('regression_count',0)})")
+            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd.get('baseline_intact')} regressions={bd.get('regression_count')} content_replaced={bd.get('content_replaced_count')} pairs_checked={bd.get('checked')})")
         return
 
     if "--report" in sys.argv:

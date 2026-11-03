@@ -1016,5 +1016,111 @@ class TestDownloadAccounting(unittest.TestCase):
         self.assertTrue(rc["triggered"])
 
 
+class TestBaselineDriftProbe(unittest.TestCase):
+    """Baseline-drift probe now reads tree_parquet_items (LFS oids), not the
+    empty file_cache, so it is a real regression/content-replacement detector
+    rather than a per-session no-op that still burned a tree round-trip."""
+
+    def _state_with_items(self, items):
+        return {
+            "tree_parquet_items": items,
+            "tree_parquet_paths": sorted(items.keys()),
+        }
+
+    def _oid(self, oid="deadbeef", size=1000):
+        return {"path": "data/events/2026-10.parquet", "oid": oid, "size": size, "type": "file"}
+
+    def test_no_pairs_when_items_empty(self):
+        # Regression guard: an empty tree_parquet_items must NOT silently check
+        # 36 phantom pairs. checked==0 means the baseline is incomplete, which
+        # the state-only check surfaces via content_hash_incomplete.
+        res = mon.check_baseline_drift_probe(self._state_with_items({}))
+        self.assertEqual(res["checked"], 0)
+        self.assertEqual(res["content_replaced_count"], 0)
+        self.assertTrue(res["baseline_intact"])
+
+    def test_pairs_checked_from_tree_items(self):
+        items = {
+            "data/events/2026-10.parquet": self._oid(oid="deadbeef", size=1000),
+            "data/fills/2026-10.parquet": self._oid(oid="cafebabe", size=2000),
+        }
+
+        def head_side(url, timeout=30):
+            # Return the recorded oid/size as ETag/Content-Length so the pair
+            # is confirmed unchanged. Fills URL carries the cafe oid.
+            if "fills" in url:
+                return {"ok": True, "status": 200,
+                        "headers": {"ETag": "cafebabe", "Content-Length": "2000"},
+                        "body": b"", "url": url, "head_ok": True}
+            return {"ok": True, "status": 200,
+                    "headers": {"ETag": "deadbeef", "Content-Length": "1000"},
+                    "body": b"", "url": url, "head_ok": True}
+
+        with patch("scripts.monitor_ironflow_liquidations.head_probe", side_effect=head_side) as mh:
+            res = mon.check_baseline_drift_probe(self._state_with_items(items))
+        self.assertEqual(res["checked"], 2)
+        self.assertEqual(len(res["pairs_checked"]), 2)
+        self.assertEqual(res["content_replaced_count"], 0)
+        self.assertTrue(res["baseline_intact"])
+
+    def test_silent_file_replacement_detected(self):
+        # Same path, different content hash (LFS oid) -> silent replacement of
+        # the frozen FCLR-010 baseline panel.
+        items = {"data/events/2026-10.parquet": self._oid(oid="original-oid", size=1000)}
+        with patch("scripts.monitor_ironflow_liquidations.head_probe") as mh:
+            mh.return_value = {
+                "ok": True, "status": 200,
+                "headers": {"ETag": "different-oid", "Content-Length": "1000"},
+                "body": b"", "url": "x", "head_ok": True,
+            }
+            res = mon.check_baseline_drift_probe(self._state_with_items(items))
+        self.assertEqual(res["content_replaced_count"], 1)
+        self.assertFalse(res["baseline_intact"])
+        self.assertEqual(res["content_replaced"][0]["reason"], "content_replaced")
+
+    def test_size_change_detected(self):
+        items = {"data/events/2026-10.parquet": self._oid(oid="same", size=1000)}
+        with patch("scripts.monitor_ironflow_liquidations.head_probe") as mh:
+            mh.return_value = {
+                "ok": True, "status": 200,
+                "headers": {"ETag": "same", "Content-Length": "99999"},
+                "body": b"", "url": "x", "head_ok": True,
+            }
+            res = mon.check_baseline_drift_probe(self._state_with_items(items))
+        self.assertEqual(res["content_replaced_count"], 1)
+        self.assertEqual(res["content_replaced"][0]["reason"], "size_changed")
+
+    def test_200_to_404_regression_detected(self):
+        items = {"data/events/2026-10.parquet": self._oid()}
+        with patch("scripts.monitor_ironflow_liquidations.head_probe") as mh:
+            mh.return_value = {
+                "ok": True, "status": 404, "headers": {}, "body": b"",
+                "url": "x", "head_ok": True,
+            }
+            res = mon.check_baseline_drift_probe(self._state_with_items(items))
+        self.assertEqual(res["regression_count"], 1)
+        self.assertFalse(res["baseline_intact"])
+        self.assertEqual(res["regressions"][0]["reason"], "regressed_200_to_404")
+
+    def test_head_failure_falls_back_to_get_304(self):
+        items = {"data/events/2026-10.parquet": self._oid(oid="abc")}
+        with patch("scripts.monitor_ironflow_liquidations.head_probe") as mh, \
+             patch("scripts.monitor_ironflow_liquidations.resolve_get") as mr:
+            mh.return_value = {
+                "ok": False, "status": None, "headers": {}, "body": b"",
+                "url": "x", "head_ok": False, "head_failed": True,
+            }
+            mr.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"",
+                               "url": "x", "method": "GET", "not_modified": True}
+            res = mon.check_baseline_drift_probe(self._state_with_items(items))
+        self.assertEqual(res["checked"], 1)
+        self.assertEqual(res["head_failures"], 1)
+        self.assertTrue(res["baseline_intact"])
+        # An unchanged pair is recorded in records, not regressions, so the
+        # reason is readable from the full record list.
+        self.assertEqual(res["records"][0]["reason"], "unchanged_via_get_304")
+        self.assertEqual(res["regression_count"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()

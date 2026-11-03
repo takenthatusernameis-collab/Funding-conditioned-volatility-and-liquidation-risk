@@ -178,14 +178,6 @@ def main():
     print(f"Wrote: {scan_path}")
 
 
-if __name__ == "__main__":
-    main()
-
-
-if __name__ == "__main__":
-    main()
-
-
 # Additional probe for common exchange liquidation endpoints (unauthenticated)
 EXTRA_PROBES = [
     ("bybit_public_instruments", ["https://api.bybit.com/v5/market/instruments-info?category=linear"]),
@@ -193,7 +185,9 @@ EXTRA_PROBES = [
 ]
 
 
-# HEAVY-004i enhancement: add more unauthenticated candidates
+# HEAVY-004i enhancement: add more unauthenticated candidates. These are merged
+# into the candidate list below so each hunt run probes them (previously they
+# were dead module-level data never passed to main()).
 ENHANCED_CANDIDATES = [
     {"name": "coinglass_public_liquidations", "urls": ["https://www.coinglass.com/api/liquidation/chart", "https://www.coinglass.com/LiquidationData"], "notes": "Coinglass public pages (often requires JS; probe for structure only)"},
     {"name": "coinank_public", "urls": ["https://www.coinank.com/"], "notes": "Public site probe"},
@@ -202,3 +196,7 @@ ENHANCED_CANDIDATES = [
     {"name": "paradigm_data_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
     {"name": "glassnode_public_docs", "urls": ["https://docs.glassnode.com/"], "notes": "Docs probe"},
 ]
+
+
+if __name__ == "__main__":
+    main()
