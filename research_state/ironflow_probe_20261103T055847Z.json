@@ -1,0 +1,1345 @@
+{
+  "probe_id": "ironflow_probe_20261103T055847Z",
+  "timestamp_utc": "2026-11-03T05:58:47.335624+00:00",
+  "dataset": "ironflow/hyperliquid-liquidations",
+  "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
+  "tree": {
+    "url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
+    "method": "GET",
+    "status": 304,
+    "headers": {
+      "Connection": "close",
+      "Date": "Tue, 03 Nov 2026 05:58:47 GMT",
+      "ETag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
+      "X-Powered-By": "huggingface-moon",
+      "X-Request-Id": "Root=1-6ae97817-110d5bb31425f45d1abd3a52",
+      "RateLimit": "\"api\";r=499;t=265",
+      "RateLimit-Policy": "\"fixed window\";\"api\";q=500;w=300",
+      "cross-origin-opener-policy": "same-origin",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Access-Control-Max-Age": "86400",
+      "Access-Control-Allow-Origin": "https://huggingface.co",
+      "Vary": "Origin",
+      "Access-Control-Expose-Headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
+      "X-Cache": "Miss from cloudfront",
+      "Via": "1.1 14c464a60d862f2ad5504818fc58f6fa.cloudfront.net (CloudFront)",
+      "X-Amz-Cf-Pop": "SFO5-P1",
+      "Alt-Svc": "h3=\":443\"; ma=86400",
+      "X-Amz-Cf-Id": "YjtuUFzRLwq-9PN9bL0DsR9sdY6QEW5pyQZl6P9xfyLVeKvoAmc-zw==",
+      "Strict-Transport-Security": "max-age=31536000"
+    },
+    "tree_etag_unchanged": true,
+    "skipped_full_parse": true,
+    "parquet_paths": [
+      "data/events/2025-05.parquet",
+      "data/events/2025-06.parquet",
+      "data/events/2025-07.parquet",
+      "data/events/2025-08.parquet",
+      "data/events/2025-09.parquet",
+      "data/events/2025-10.parquet",
+      "data/events/2025-11.parquet",
+      "data/events/2025-12.parquet",
+      "data/events/2026-01.parquet",
+      "data/events/2026-02.parquet",
+      "data/events/2026-03.parquet",
+      "data/events/2026-04.parquet",
+      "data/events/2026-05.parquet",
+      "data/events/2026-06.parquet",
+      "data/events/2026-07.parquet",
+      "data/events/2026-08.parquet",
+      "data/events/2026-09.parquet",
+      "data/events/2026-10.parquet",
+      "data/fills/2025-05.parquet",
+      "data/fills/2025-06.parquet",
+      "data/fills/2025-07.parquet",
+      "data/fills/2025-08.parquet",
+      "data/fills/2025-09.parquet",
+      "data/fills/2025-10.parquet",
+      "data/fills/2025-11.parquet",
+      "data/fills/2025-12.parquet",
+      "data/fills/2026-01.parquet",
+      "data/fills/2026-02.parquet",
+      "data/fills/2026-03.parquet",
+      "data/fills/2026-04.parquet",
+      "data/fills/2026-05.parquet",
+      "data/fills/2026-06.parquet",
+      "data/fills/2026-07.parquet",
+      "data/fills/2026-08.parquet",
+      "data/fills/2026-09.parquet",
+      "data/fills/2026-10.parquet"
+    ],
+    "etag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\""
+  },
+  "months_probed": [],
+  "new_files_found": [],
+  "data_through": "2026-10",
+  "consecutive_absent": 3,
+  "probe_window": {
+    "lookback_months": 6,
+    "lookahead_months": 6
+  },
+  "quick_resume_check": {
+    "data_through": "2026-10",
+    "months_probed": [
+      "2026-11",
+      "2026-12",
+      "2027-01",
+      "2027-02"
+    ],
+    "probes": [
+      {
+        "kind": "events",
+        "month": "2026-11",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2026-11",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "fills",
+        "month": "2026-11",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-11.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2026-11",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-11.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "events",
+        "month": "2026-12",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-12.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2026-12",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-12.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "fills",
+        "month": "2026-12",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-12.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2026-12",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-12.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "events",
+        "month": "2027-01",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-01.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2027-01",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-01.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "fills",
+        "month": "2027-01",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-01.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2027-01",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-01.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "events",
+        "month": "2027-02",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-02.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "events",
+          "month": "2027-02",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2027-02.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      },
+      {
+        "kind": "fills",
+        "month": "2027-02",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-02.parquet",
+        "status": 404,
+        "classification": "CONFIRMED_ABSENT",
+        "head_probe": {
+          "kind": "fills",
+          "month": "2027-02",
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2027-02.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "head_ok": false
+        },
+        "get_skipped": true
+      }
+    ],
+    "triggered": false,
+    "triggering_files": [],
+    "cached_hits": 0,
+    "head_probes": 8,
+    "head_requests": 8,
+    "get_requests": 0,
+    "get_requests_skipped": 8,
+    "bytes_downloaded": 0,
+    "kaggle_mirror": {
+      "ok": true,
+      "url": "https://www.kaggle.com/api/v1/datasets/list?search=ironflow%20hyperliquid-liquidations",
+      "status": 200,
+      "last_updated": "2026-11-01T06:18:48.21Z",
+      "last_updated_month": "2026-11",
+      "previous_last_updated": null,
+      "mirror_updated": false,
+      "triggered": false,
+      "download_auth_gated": true,
+      "body_preview": "[{\"subtitleNullable\":\"Every Hyperliquid liquidation since May 2025, from Ironflow\\u0027s own nodes\",\"creatorNameNullable\":\"Ironflow\",\"creatorUrlNullable\":\"ironflow\",\"totalBytesNullable\":288889360,\"url",
+      "error": null,
+      "license": "Attribution 4.0 International (CC BY 4.0)",
+      "total_bytes": 288889360
+    }
+  },
+  "mode": "quick",
+  "head_probes": 8,
+  "cached_hits": 0,
+  "tree_change": {
+    "tree_status": 304,
+    "tree_not_modified": true,
+    "tree_etag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
+    "changed": false,
+    "added": [],
+    "removed": [],
+    "changed_paths": [],
+    "content_replaced": [],
+    "current_count": 36,
+    "previous_count": 36,
+    "current_parquet_paths": [
+      "data/events/2025-05.parquet",
+      "data/events/2025-06.parquet",
+      "data/events/2025-07.parquet",
+      "data/events/2025-08.parquet",
+      "data/events/2025-09.parquet",
+      "data/events/2025-10.parquet",
+      "data/events/2025-11.parquet",
+      "data/events/2025-12.parquet",
+      "data/events/2026-01.parquet",
+      "data/events/2026-02.parquet",
+      "data/events/2026-03.parquet",
+      "data/events/2026-04.parquet",
+      "data/events/2026-05.parquet",
+      "data/events/2026-06.parquet",
+      "data/events/2026-07.parquet",
+      "data/events/2026-08.parquet",
+      "data/events/2026-09.parquet",
+      "data/events/2026-10.parquet",
+      "data/fills/2025-05.parquet",
+      "data/fills/2025-06.parquet",
+      "data/fills/2025-07.parquet",
+      "data/fills/2025-08.parquet",
+      "data/fills/2025-09.parquet",
+      "data/fills/2025-10.parquet",
+      "data/fills/2025-11.parquet",
+      "data/fills/2025-12.parquet",
+      "data/fills/2026-01.parquet",
+      "data/fills/2026-02.parquet",
+      "data/fills/2026-03.parquet",
+      "data/fills/2026-04.parquet",
+      "data/fills/2026-05.parquet",
+      "data/fills/2026-06.parquet",
+      "data/fills/2026-07.parquet",
+      "data/fills/2026-08.parquet",
+      "data/fills/2026-09.parquet",
+      "data/fills/2026-10.parquet"
+    ],
+    "current_parquet_items": {
+      "data/events/2025-05.parquet": {
+        "path": "data/events/2025-05.parquet",
+        "oid": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+        "size": 649175,
+        "type": "file"
+      },
+      "data/events/2025-06.parquet": {
+        "path": "data/events/2025-06.parquet",
+        "oid": "737908e4568ca903370e6bfc8bf9792d70102ddafa0161b48598dc3dd1b2e338",
+        "size": 2362144,
+        "type": "file"
+      },
+      "data/events/2025-07.parquet": {
+        "path": "data/events/2025-07.parquet",
+        "oid": "4ad6e10a5e34c329040a92d05942c8f0862ff97353120dba9efeed76429b4f22",
+        "size": 4397200,
+        "type": "file"
+      },
+      "data/events/2025-08.parquet": {
+        "path": "data/events/2025-08.parquet",
+        "oid": "b21bd8ce70fc9f8ef131afadef2185bcdf473e5df1f283f80e9dab5901ba8aac",
+        "size": 5254028,
+        "type": "file"
+      },
+      "data/events/2025-09.parquet": {
+        "path": "data/events/2025-09.parquet",
+        "oid": "63bfe5cc8f57176a7f0e5a91d990c224bbddb9e28854b6535b4e8cd2e72cb2bc",
+        "size": 4609620,
+        "type": "file"
+      },
+      "data/events/2025-10.parquet": {
+        "path": "data/events/2025-10.parquet",
+        "oid": "e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8",
+        "size": 9430899,
+        "type": "file"
+      },
+      "data/events/2025-11.parquet": {
+        "path": "data/events/2025-11.parquet",
+        "oid": "74313ae0f60750a880735d2a647ef4c115440d68c39b1df0be8baccecbc8f361",
+        "size": 7978181,
+        "type": "file"
+      },
+      "data/events/2025-12.parquet": {
+        "path": "data/events/2025-12.parquet",
+        "oid": "d536ca955e01e126eb4741548b64c90899a8c2e7118d422d00efc4a024e271ea",
+        "size": 4441584,
+        "type": "file"
+      },
+      "data/events/2026-01.parquet": {
+        "path": "data/events/2026-01.parquet",
+        "oid": "489f5d9d747c3d58f0af515c925c9d2625eafbfbc33570e1c8ba4c8ca7ce7248",
+        "size": 6116362,
+        "type": "file"
+      },
+      "data/events/2026-02.parquet": {
+        "path": "data/events/2026-02.parquet",
+        "oid": "8e27c2e1ca90baebbc768ea74a105f4547f85d2a85c81b67927f9c32d02ec18f",
+        "size": 6658690,
+        "type": "file"
+      },
+      "data/events/2026-03.parquet": {
+        "path": "data/events/2026-03.parquet",
+        "oid": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d",
+        "size": 6001329,
+        "type": "file"
+      },
+      "data/events/2026-04.parquet": {
+        "path": "data/events/2026-04.parquet",
+        "oid": "3d84969be4e65fea8abbc9c8b5950160e835c39ed0906d155cbefe46d23fd9b4",
+        "size": 5002960,
+        "type": "file"
+      },
+      "data/events/2026-05.parquet": {
+        "path": "data/events/2026-05.parquet",
+        "oid": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+        "size": 6007849,
+        "type": "file"
+      },
+      "data/events/2026-06.parquet": {
+        "path": "data/events/2026-06.parquet",
+        "oid": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+        "size": 10478045,
+        "type": "file"
+      },
+      "data/events/2026-07.parquet": {
+        "path": "data/events/2026-07.parquet",
+        "oid": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c",
+        "size": 8857812,
+        "type": "file"
+      },
+      "data/events/2026-08.parquet": {
+        "path": "data/events/2026-08.parquet",
+        "oid": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c",
+        "size": 8692716,
+        "type": "file"
+      },
+      "data/events/2026-09.parquet": {
+        "path": "data/events/2026-09.parquet",
+        "oid": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e",
+        "size": 8248237,
+        "type": "file"
+      },
+      "data/events/2026-10.parquet": {
+        "path": "data/events/2026-10.parquet",
+        "oid": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+        "size": 10347879,
+        "type": "file"
+      },
+      "data/fills/2025-05.parquet": {
+        "path": "data/fills/2025-05.parquet",
+        "oid": "9605090390bc8e2f81838366963574e3e9a96e3b8d8f05c8d25ac82515f74d5c",
+        "size": 1414659,
+        "type": "file"
+      },
+      "data/fills/2025-06.parquet": {
+        "path": "data/fills/2025-06.parquet",
+        "oid": "624fc79544fff80ef4a6918b0b8ddcaa89161f9f4dfd859450c3a05efa78877a",
+        "size": 4942779,
+        "type": "file"
+      },
+      "data/fills/2025-07.parquet": {
+        "path": "data/fills/2025-07.parquet",
+        "oid": "9b427a37057192d3f35c6d315ea9df70dc317f640d2cf18ffa566f5df0ecabec",
+        "size": 7894177,
+        "type": "file"
+      },
+      "data/fills/2025-08.parquet": {
+        "path": "data/fills/2025-08.parquet",
+        "oid": "b07bfb9732607f636c6a4fecdaf054f02d242846fc89a9deb833fc8b7ad19814",
+        "size": 9434540,
+        "type": "file"
+      },
+      "data/fills/2025-09.parquet": {
+        "path": "data/fills/2025-09.parquet",
+        "oid": "a562a4b0b5b2c23b43357cf762d89805d910ec4a7e24b40eced9349cff8691ad",
+        "size": 7672203,
+        "type": "file"
+      },
+      "data/fills/2025-10.parquet": {
+        "path": "data/fills/2025-10.parquet",
+        "oid": "e5f4057be309457207c93f7b67f7d5917f6bd983b9c6ca7308ca6c69fdf678f0",
+        "size": 15383543,
+        "type": "file"
+      },
+      "data/fills/2025-11.parquet": {
+        "path": "data/fills/2025-11.parquet",
+        "oid": "357a802aaa3ca5dee43510ca9ef944f4513c08642d799d2cf503e7340754ddf0",
+        "size": 12598122,
+        "type": "file"
+      },
+      "data/fills/2025-12.parquet": {
+        "path": "data/fills/2025-12.parquet",
+        "oid": "cdbc664dee9c84d5c58f9bb3845fd0461432553586591e94ea7ab45204de991b",
+        "size": 6912535,
+        "type": "file"
+      },
+      "data/fills/2026-01.parquet": {
+        "path": "data/fills/2026-01.parquet",
+        "oid": "b621b3b184ecad37d9c2aceeb0745e5865c7c9c08530a29238ddf354ccbaa092",
+        "size": 9596258,
+        "type": "file"
+      },
+      "data/fills/2026-02.parquet": {
+        "path": "data/fills/2026-02.parquet",
+        "oid": "857409b43b979d9398397ff75d20c1b2220272eb94a54f1214daae8fd9e6ad5c",
+        "size": 9451823,
+        "type": "file"
+      },
+      "data/fills/2026-03.parquet": {
+        "path": "data/fills/2026-03.parquet",
+        "oid": "d31ed607acd2f7d33727c6db1eafd7e3d602ae53f32d544638601fcd84dccd1f",
+        "size": 8893744,
+        "type": "file"
+      },
+      "data/fills/2026-04.parquet": {
+        "path": "data/fills/2026-04.parquet",
+        "oid": "4360d29e841ede24318f44f65dc979634129fbc5d1b681d722b87bd0df268756",
+        "size": 7018436,
+        "type": "file"
+      },
+      "data/fills/2026-05.parquet": {
+        "path": "data/fills/2026-05.parquet",
+        "oid": "24580f4114653a0413a871debf7363d87943d00b3c4647d8492cbb1e01d14d60",
+        "size": 8616839,
+        "type": "file"
+      },
+      "data/fills/2026-06.parquet": {
+        "path": "data/fills/2026-06.parquet",
+        "oid": "b1f8fdb79f3a81bdc1acfbbe9750748bebf7ecdad48a9f310fc58e22a3a3b86f",
+        "size": 14599541,
+        "type": "file"
+      },
+      "data/fills/2026-07.parquet": {
+        "path": "data/fills/2026-07.parquet",
+        "oid": "986431ddd3b5ec411408702e25096b04bd12f3c3070ab8bd4bdc231878b8029f",
+        "size": 11967495,
+        "type": "file"
+      },
+      "data/fills/2026-08.parquet": {
+        "path": "data/fills/2026-08.parquet",
+        "oid": "c9abd0aadbe9d435bedc42b67b4aa13f8f80c8ffafe5db4234c52c3946daefff",
+        "size": 11780904,
+        "type": "file"
+      },
+      "data/fills/2026-09.parquet": {
+        "path": "data/fills/2026-09.parquet",
+        "oid": "b0df4ce07c5600b1005aa59d6d318b3af7df56b31443027b36492eed182e7db0",
+        "size": 11249529,
+        "type": "file"
+      },
+      "data/fills/2026-10.parquet": {
+        "path": "data/fills/2026-10.parquet",
+        "oid": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
+        "size": 15004089,
+        "type": "file"
+      }
+    }
+  },
+  "probe_diff": {
+    "added": [],
+    "changed": [],
+    "removed": [],
+    "unchanged": [
+      {
+        "month": "2026-11",
+        "kind": "events",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2026-11",
+        "kind": "fills",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2026-12",
+        "kind": "events",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2026-12",
+        "kind": "fills",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2027-01",
+        "kind": "events",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2027-01",
+        "kind": "fills",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2027-02",
+        "kind": "events",
+        "prev": 404,
+        "curr": 404
+      },
+      {
+        "month": "2027-02",
+        "kind": "fills",
+        "prev": 404,
+        "curr": 404
+      }
+    ],
+    "summary": {
+      "added_count": 0,
+      "changed_count": 0,
+      "removed_count": 0,
+      "unchanged_count": 8,
+      "any_change": false
+    }
+  },
+  "baseline_drift": {
+    "checked": 36,
+    "pairs_checked": [
+      {
+        "kind": "events",
+        "month": "2025-05",
+        "path": "data/events/2025-05.parquet",
+        "oid": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+        "size": 649175
+      },
+      {
+        "kind": "events",
+        "month": "2025-06",
+        "path": "data/events/2025-06.parquet",
+        "oid": "737908e4568ca903370e6bfc8bf9792d70102ddafa0161b48598dc3dd1b2e338",
+        "size": 2362144
+      },
+      {
+        "kind": "events",
+        "month": "2025-07",
+        "path": "data/events/2025-07.parquet",
+        "oid": "4ad6e10a5e34c329040a92d05942c8f0862ff97353120dba9efeed76429b4f22",
+        "size": 4397200
+      },
+      {
+        "kind": "events",
+        "month": "2025-08",
+        "path": "data/events/2025-08.parquet",
+        "oid": "b21bd8ce70fc9f8ef131afadef2185bcdf473e5df1f283f80e9dab5901ba8aac",
+        "size": 5254028
+      },
+      {
+        "kind": "events",
+        "month": "2025-09",
+        "path": "data/events/2025-09.parquet",
+        "oid": "63bfe5cc8f57176a7f0e5a91d990c224bbddb9e28854b6535b4e8cd2e72cb2bc",
+        "size": 4609620
+      },
+      {
+        "kind": "events",
+        "month": "2025-10",
+        "path": "data/events/2025-10.parquet",
+        "oid": "e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8",
+        "size": 9430899
+      },
+      {
+        "kind": "events",
+        "month": "2025-11",
+        "path": "data/events/2025-11.parquet",
+        "oid": "74313ae0f60750a880735d2a647ef4c115440d68c39b1df0be8baccecbc8f361",
+        "size": 7978181
+      },
+      {
+        "kind": "events",
+        "month": "2025-12",
+        "path": "data/events/2025-12.parquet",
+        "oid": "d536ca955e01e126eb4741548b64c90899a8c2e7118d422d00efc4a024e271ea",
+        "size": 4441584
+      },
+      {
+        "kind": "events",
+        "month": "2026-01",
+        "path": "data/events/2026-01.parquet",
+        "oid": "489f5d9d747c3d58f0af515c925c9d2625eafbfbc33570e1c8ba4c8ca7ce7248",
+        "size": 6116362
+      },
+      {
+        "kind": "events",
+        "month": "2026-02",
+        "path": "data/events/2026-02.parquet",
+        "oid": "8e27c2e1ca90baebbc768ea74a105f4547f85d2a85c81b67927f9c32d02ec18f",
+        "size": 6658690
+      },
+      {
+        "kind": "events",
+        "month": "2026-03",
+        "path": "data/events/2026-03.parquet",
+        "oid": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d",
+        "size": 6001329
+      },
+      {
+        "kind": "events",
+        "month": "2026-04",
+        "path": "data/events/2026-04.parquet",
+        "oid": "3d84969be4e65fea8abbc9c8b5950160e835c39ed0906d155cbefe46d23fd9b4",
+        "size": 5002960
+      },
+      {
+        "kind": "events",
+        "month": "2026-05",
+        "path": "data/events/2026-05.parquet",
+        "oid": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+        "size": 6007849
+      },
+      {
+        "kind": "events",
+        "month": "2026-06",
+        "path": "data/events/2026-06.parquet",
+        "oid": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+        "size": 10478045
+      },
+      {
+        "kind": "events",
+        "month": "2026-07",
+        "path": "data/events/2026-07.parquet",
+        "oid": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c",
+        "size": 8857812
+      },
+      {
+        "kind": "events",
+        "month": "2026-08",
+        "path": "data/events/2026-08.parquet",
+        "oid": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c",
+        "size": 8692716
+      },
+      {
+        "kind": "events",
+        "month": "2026-09",
+        "path": "data/events/2026-09.parquet",
+        "oid": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e",
+        "size": 8248237
+      },
+      {
+        "kind": "events",
+        "month": "2026-10",
+        "path": "data/events/2026-10.parquet",
+        "oid": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+        "size": 10347879
+      },
+      {
+        "kind": "fills",
+        "month": "2025-05",
+        "path": "data/fills/2025-05.parquet",
+        "oid": "9605090390bc8e2f81838366963574e3e9a96e3b8d8f05c8d25ac82515f74d5c",
+        "size": 1414659
+      },
+      {
+        "kind": "fills",
+        "month": "2025-06",
+        "path": "data/fills/2025-06.parquet",
+        "oid": "624fc79544fff80ef4a6918b0b8ddcaa89161f9f4dfd859450c3a05efa78877a",
+        "size": 4942779
+      },
+      {
+        "kind": "fills",
+        "month": "2025-07",
+        "path": "data/fills/2025-07.parquet",
+        "oid": "9b427a37057192d3f35c6d315ea9df70dc317f640d2cf18ffa566f5df0ecabec",
+        "size": 7894177
+      },
+      {
+        "kind": "fills",
+        "month": "2025-08",
+        "path": "data/fills/2025-08.parquet",
+        "oid": "b07bfb9732607f636c6a4fecdaf054f02d242846fc89a9deb833fc8b7ad19814",
+        "size": 9434540
+      },
+      {
+        "kind": "fills",
+        "month": "2025-09",
+        "path": "data/fills/2025-09.parquet",
+        "oid": "a562a4b0b5b2c23b43357cf762d89805d910ec4a7e24b40eced9349cff8691ad",
+        "size": 7672203
+      },
+      {
+        "kind": "fills",
+        "month": "2025-10",
+        "path": "data/fills/2025-10.parquet",
+        "oid": "e5f4057be309457207c93f7b67f7d5917f6bd983b9c6ca7308ca6c69fdf678f0",
+        "size": 15383543
+      },
+      {
+        "kind": "fills",
+        "month": "2025-11",
+        "path": "data/fills/2025-11.parquet",
+        "oid": "357a802aaa3ca5dee43510ca9ef944f4513c08642d799d2cf503e7340754ddf0",
+        "size": 12598122
+      },
+      {
+        "kind": "fills",
+        "month": "2025-12",
+        "path": "data/fills/2025-12.parquet",
+        "oid": "cdbc664dee9c84d5c58f9bb3845fd0461432553586591e94ea7ab45204de991b",
+        "size": 6912535
+      },
+      {
+        "kind": "fills",
+        "month": "2026-01",
+        "path": "data/fills/2026-01.parquet",
+        "oid": "b621b3b184ecad37d9c2aceeb0745e5865c7c9c08530a29238ddf354ccbaa092",
+        "size": 9596258
+      },
+      {
+        "kind": "fills",
+        "month": "2026-02",
+        "path": "data/fills/2026-02.parquet",
+        "oid": "857409b43b979d9398397ff75d20c1b2220272eb94a54f1214daae8fd9e6ad5c",
+        "size": 9451823
+      },
+      {
+        "kind": "fills",
+        "month": "2026-03",
+        "path": "data/fills/2026-03.parquet",
+        "oid": "d31ed607acd2f7d33727c6db1eafd7e3d602ae53f32d544638601fcd84dccd1f",
+        "size": 8893744
+      },
+      {
+        "kind": "fills",
+        "month": "2026-04",
+        "path": "data/fills/2026-04.parquet",
+        "oid": "4360d29e841ede24318f44f65dc979634129fbc5d1b681d722b87bd0df268756",
+        "size": 7018436
+      },
+      {
+        "kind": "fills",
+        "month": "2026-05",
+        "path": "data/fills/2026-05.parquet",
+        "oid": "24580f4114653a0413a871debf7363d87943d00b3c4647d8492cbb1e01d14d60",
+        "size": 8616839
+      },
+      {
+        "kind": "fills",
+        "month": "2026-06",
+        "path": "data/fills/2026-06.parquet",
+        "oid": "b1f8fdb79f3a81bdc1acfbbe9750748bebf7ecdad48a9f310fc58e22a3a3b86f",
+        "size": 14599541
+      },
+      {
+        "kind": "fills",
+        "month": "2026-07",
+        "path": "data/fills/2026-07.parquet",
+        "oid": "986431ddd3b5ec411408702e25096b04bd12f3c3070ab8bd4bdc231878b8029f",
+        "size": 11967495
+      },
+      {
+        "kind": "fills",
+        "month": "2026-08",
+        "path": "data/fills/2026-08.parquet",
+        "oid": "c9abd0aadbe9d435bedc42b67b4aa13f8f80c8ffafe5db4234c52c3946daefff",
+        "size": 11780904
+      },
+      {
+        "kind": "fills",
+        "month": "2026-09",
+        "path": "data/fills/2026-09.parquet",
+        "oid": "b0df4ce07c5600b1005aa59d6d318b3af7df56b31443027b36492eed182e7db0",
+        "size": 11249529
+      },
+      {
+        "kind": "fills",
+        "month": "2026-10",
+        "path": "data/fills/2026-10.parquet",
+        "oid": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
+        "size": 15004089
+      }
+    ],
+    "records": [
+      {
+        "month": "2025-05",
+        "kind": "events",
+        "path": "data/events/2025-05.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-05.parquet",
+        "head_status": 200,
+        "cached_oid": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+        "cached_size": 649175,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 649175,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-06",
+        "kind": "events",
+        "path": "data/events/2025-06.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-06.parquet",
+        "head_status": 200,
+        "cached_oid": "737908e4568ca903370e6bfc8bf9792d70102ddafa0161b48598dc3dd1b2e338",
+        "cached_size": 2362144,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 2362144,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-07",
+        "kind": "events",
+        "path": "data/events/2025-07.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-07.parquet",
+        "head_status": 200,
+        "cached_oid": "4ad6e10a5e34c329040a92d05942c8f0862ff97353120dba9efeed76429b4f22",
+        "cached_size": 4397200,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 4397200,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-08",
+        "kind": "events",
+        "path": "data/events/2025-08.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-08.parquet",
+        "head_status": 200,
+        "cached_oid": "b21bd8ce70fc9f8ef131afadef2185bcdf473e5df1f283f80e9dab5901ba8aac",
+        "cached_size": 5254028,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 5254028,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-09",
+        "kind": "events",
+        "path": "data/events/2025-09.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-09.parquet",
+        "head_status": 200,
+        "cached_oid": "63bfe5cc8f57176a7f0e5a91d990c224bbddb9e28854b6535b4e8cd2e72cb2bc",
+        "cached_size": 4609620,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 4609620,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-10",
+        "kind": "events",
+        "path": "data/events/2025-10.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-10.parquet",
+        "head_status": 200,
+        "cached_oid": "e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8",
+        "cached_size": 9430899,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 9430899,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-11",
+        "kind": "events",
+        "path": "data/events/2025-11.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-11.parquet",
+        "head_status": 200,
+        "cached_oid": "74313ae0f60750a880735d2a647ef4c115440d68c39b1df0be8baccecbc8f361",
+        "cached_size": 7978181,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 7978181,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-12",
+        "kind": "events",
+        "path": "data/events/2025-12.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-12.parquet",
+        "head_status": 200,
+        "cached_oid": "d536ca955e01e126eb4741548b64c90899a8c2e7118d422d00efc4a024e271ea",
+        "cached_size": 4441584,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 4441584,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-01",
+        "kind": "events",
+        "path": "data/events/2026-01.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-01.parquet",
+        "head_status": 200,
+        "cached_oid": "489f5d9d747c3d58f0af515c925c9d2625eafbfbc33570e1c8ba4c8ca7ce7248",
+        "cached_size": 6116362,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 6116362,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-02",
+        "kind": "events",
+        "path": "data/events/2026-02.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-02.parquet",
+        "head_status": 200,
+        "cached_oid": "8e27c2e1ca90baebbc768ea74a105f4547f85d2a85c81b67927f9c32d02ec18f",
+        "cached_size": 6658690,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 6658690,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-03",
+        "kind": "events",
+        "path": "data/events/2026-03.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-03.parquet",
+        "head_status": 200,
+        "cached_oid": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d",
+        "cached_size": 6001329,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 6001329,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-04",
+        "kind": "events",
+        "path": "data/events/2026-04.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-04.parquet",
+        "head_status": 200,
+        "cached_oid": "3d84969be4e65fea8abbc9c8b5950160e835c39ed0906d155cbefe46d23fd9b4",
+        "cached_size": 5002960,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 5002960,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-05",
+        "kind": "events",
+        "path": "data/events/2026-05.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-05.parquet",
+        "head_status": 200,
+        "cached_oid": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+        "cached_size": 6007849,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 6007849,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-06",
+        "kind": "events",
+        "path": "data/events/2026-06.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-06.parquet",
+        "head_status": 200,
+        "cached_oid": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+        "cached_size": 10478045,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 10478045,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-07",
+        "kind": "events",
+        "path": "data/events/2026-07.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-07.parquet",
+        "head_status": 200,
+        "cached_oid": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c",
+        "cached_size": 8857812,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 8857812,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-08",
+        "kind": "events",
+        "path": "data/events/2026-08.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-08.parquet",
+        "head_status": 200,
+        "cached_oid": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c",
+        "cached_size": 8692716,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 8692716,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-09",
+        "kind": "events",
+        "path": "data/events/2026-09.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-09.parquet",
+        "head_status": 200,
+        "cached_oid": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e",
+        "cached_size": 8248237,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 8248237,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-10",
+        "kind": "events",
+        "path": "data/events/2026-10.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-10.parquet",
+        "head_status": 200,
+        "cached_oid": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+        "cached_size": 10347879,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 10347879,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-05",
+        "kind": "fills",
+        "path": "data/fills/2025-05.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-05.parquet",
+        "head_status": 200,
+        "cached_oid": "9605090390bc8e2f81838366963574e3e9a96e3b8d8f05c8d25ac82515f74d5c",
+        "cached_size": 1414659,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 1414659,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-06",
+        "kind": "fills",
+        "path": "data/fills/2025-06.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-06.parquet",
+        "head_status": 200,
+        "cached_oid": "624fc79544fff80ef4a6918b0b8ddcaa89161f9f4dfd859450c3a05efa78877a",
+        "cached_size": 4942779,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 4942779,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-07",
+        "kind": "fills",
+        "path": "data/fills/2025-07.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-07.parquet",
+        "head_status": 200,
+        "cached_oid": "9b427a37057192d3f35c6d315ea9df70dc317f640d2cf18ffa566f5df0ecabec",
+        "cached_size": 7894177,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 7894177,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-08",
+        "kind": "fills",
+        "path": "data/fills/2025-08.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-08.parquet",
+        "head_status": 200,
+        "cached_oid": "b07bfb9732607f636c6a4fecdaf054f02d242846fc89a9deb833fc8b7ad19814",
+        "cached_size": 9434540,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 9434540,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-09",
+        "kind": "fills",
+        "path": "data/fills/2025-09.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-09.parquet",
+        "head_status": 200,
+        "cached_oid": "a562a4b0b5b2c23b43357cf762d89805d910ec4a7e24b40eced9349cff8691ad",
+        "cached_size": 7672203,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 7672203,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-10",
+        "kind": "fills",
+        "path": "data/fills/2025-10.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-10.parquet",
+        "head_status": 200,
+        "cached_oid": "e5f4057be309457207c93f7b67f7d5917f6bd983b9c6ca7308ca6c69fdf678f0",
+        "cached_size": 15383543,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 15383543,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-11",
+        "kind": "fills",
+        "path": "data/fills/2025-11.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-11.parquet",
+        "head_status": 200,
+        "cached_oid": "357a802aaa3ca5dee43510ca9ef944f4513c08642d799d2cf503e7340754ddf0",
+        "cached_size": 12598122,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 12598122,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2025-12",
+        "kind": "fills",
+        "path": "data/fills/2025-12.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2025-12.parquet",
+        "head_status": 200,
+        "cached_oid": "cdbc664dee9c84d5c58f9bb3845fd0461432553586591e94ea7ab45204de991b",
+        "cached_size": 6912535,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 6912535,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-01",
+        "kind": "fills",
+        "path": "data/fills/2026-01.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-01.parquet",
+        "head_status": 200,
+        "cached_oid": "b621b3b184ecad37d9c2aceeb0745e5865c7c9c08530a29238ddf354ccbaa092",
+        "cached_size": 9596258,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 9596258,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-02",
+        "kind": "fills",
+        "path": "data/fills/2026-02.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-02.parquet",
+        "head_status": 200,
+        "cached_oid": "857409b43b979d9398397ff75d20c1b2220272eb94a54f1214daae8fd9e6ad5c",
+        "cached_size": 9451823,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 9451823,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-03",
+        "kind": "fills",
+        "path": "data/fills/2026-03.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-03.parquet",
+        "head_status": 200,
+        "cached_oid": "d31ed607acd2f7d33727c6db1eafd7e3d602ae53f32d544638601fcd84dccd1f",
+        "cached_size": 8893744,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 8893744,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-04",
+        "kind": "fills",
+        "path": "data/fills/2026-04.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-04.parquet",
+        "head_status": 200,
+        "cached_oid": "4360d29e841ede24318f44f65dc979634129fbc5d1b681d722b87bd0df268756",
+        "cached_size": 7018436,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 7018436,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-05",
+        "kind": "fills",
+        "path": "data/fills/2026-05.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-05.parquet",
+        "head_status": 200,
+        "cached_oid": "24580f4114653a0413a871debf7363d87943d00b3c4647d8492cbb1e01d14d60",
+        "cached_size": 8616839,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 8616839,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-06",
+        "kind": "fills",
+        "path": "data/fills/2026-06.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-06.parquet",
+        "head_status": 200,
+        "cached_oid": "b1f8fdb79f3a81bdc1acfbbe9750748bebf7ecdad48a9f310fc58e22a3a3b86f",
+        "cached_size": 14599541,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 14599541,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-07",
+        "kind": "fills",
+        "path": "data/fills/2026-07.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-07.parquet",
+        "head_status": 200,
+        "cached_oid": "986431ddd3b5ec411408702e25096b04bd12f3c3070ab8bd4bdc231878b8029f",
+        "cached_size": 11967495,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 11967495,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-08",
+        "kind": "fills",
+        "path": "data/fills/2026-08.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-08.parquet",
+        "head_status": 200,
+        "cached_oid": "c9abd0aadbe9d435bedc42b67b4aa13f8f80c8ffafe5db4234c52c3946daefff",
+        "cached_size": 11780904,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 11780904,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-09",
+        "kind": "fills",
+        "path": "data/fills/2026-09.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-09.parquet",
+        "head_status": 200,
+        "cached_oid": "b0df4ce07c5600b1005aa59d6d318b3af7df56b31443027b36492eed182e7db0",
+        "cached_size": 11249529,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 11249529,
+        "reason": "unchanged",
+        "replaced": false
+      },
+      {
+        "month": "2026-10",
+        "kind": "fills",
+        "path": "data/fills/2026-10.parquet",
+        "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-10.parquet",
+        "head_status": 200,
+        "cached_oid": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
+        "cached_size": 15004089,
+        "new_etag": null,
+        "new_last_modified": null,
+        "new_size": 15004089,
+        "reason": "unchanged",
+        "replaced": false
+      }
+    ],
+    "regressions": [],
+    "regression_count": 0,
+    "content_replaced": [],
+    "content_replaced_count": 0,
+    "head_failures": 0,
+    "baseline_intact": true
+  }
+}
