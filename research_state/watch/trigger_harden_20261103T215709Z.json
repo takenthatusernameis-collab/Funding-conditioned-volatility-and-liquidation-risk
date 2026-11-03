@@ -1,0 +1,85 @@
+{
+  "ts": "2026-11-03T21:57:09Z",
+  "binance_total_zips_1h": 448,
+  "binance_2026_count": 0,
+  "binance_2026_outside_sealed": [],
+  "sealed_window": {
+    "start": "2026-05-08",
+    "end": "2026-08-06"
+  },
+  "ironflow_events": [
+    {
+      "name": "2025-05.parquet",
+      "mtime": 1793724350.321669
+    },
+    {
+      "name": "2025-06.parquet",
+      "mtime": 1793724350.326669
+    },
+    {
+      "name": "2025-07.parquet",
+      "mtime": 1793724350.3346689
+    },
+    {
+      "name": "2025-08.parquet",
+      "mtime": 1793724350.343669
+    },
+    {
+      "name": "2025-09.parquet",
+      "mtime": 1793724350.3516688
+    },
+    {
+      "name": "2025-10.parquet",
+      "mtime": 1793724350.3686686
+    },
+    {
+      "name": "2025-11.parquet",
+      "mtime": 1793724350.3826685
+    },
+    {
+      "name": "2025-12.parquet",
+      "mtime": 1793724350.3906684
+    },
+    {
+      "name": "2026-01.parquet",
+      "mtime": 1793724350.3996685
+    },
+    {
+      "name": "2026-02.parquet",
+      "mtime": 1793724350.4106684
+    },
+    {
+      "name": "2026-03.parquet",
+      "mtime": 1793724350.421668
+    },
+    {
+      "name": "2026-04.parquet",
+      "mtime": 1793724350.4296682
+    },
+    {
+      "name": "2026-05.parquet",
+      "mtime": 1793724350.440668
+    },
+    {
+      "name": "2026-06.parquet",
+      "mtime": 1793724350.459668
+    },
+    {
+      "name": "2026-07.parquet",
+      "mtime": 1793724350.4756677
+    },
+    {
+      "name": "2026-08.parquet",
+      "mtime": 1793724350.4886677
+    },
+    {
+      "name": "2026-09.parquet",
+      "mtime": 1793724350.5016675
+    },
+    {
+      "name": "2026-10.parquet",
+      "mtime": 1793724350.5176673
+    }
+  ],
+  "trigger_fired": false
+}

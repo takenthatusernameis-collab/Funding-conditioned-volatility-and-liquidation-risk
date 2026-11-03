@@ -1,0 +1,11 @@
+{
+  "ts": "2026-11-03T21:57:51Z",
+  "prereg_required": {
+    "status": "BLOCKED",
+    "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists."
+  },
+  "prereg_missing_file": {
+    "status": "BLOCKED",
+    "reason": "Data path not found: /tmp/x. No new data available for forward validation."
+  }
+}
