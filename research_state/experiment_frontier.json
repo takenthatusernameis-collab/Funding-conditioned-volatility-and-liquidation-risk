@@ -13,18 +13,18 @@
       "blockers": "No post-2026-10-31 ironflow data. No admissible unauthenticated sources. data_through=2026-10, consecutive_absent=3. Heavy artifacts produced this refresh.",
       "do_not": "Do not inspect outcomes before pre-reg; do not merge tracks; do not touch .github/workflows; no polling loops without new evidence; do not re-probe dead routes.",
       "status": "BLOCKED_ON_DATA",
-      "result": "BLOCKED_ON_DATA as of 20261103T031821Z. Heavy work refresh A-F executed: verify_heavy_work_004i.py gate PASSES, fresh blocker doc 20261103T031821Z.md, alt-hunt scan 20261103T031658Z (17 candidates, 0 GO), resume scan 20261103T031658Z (go=false), frontier/handoff updated; tests 111/111 PASS. Content-hash baseline complete; no post-2026-10 ironflow data; resume_trigger_met=false. Data bottleneck is structural (FCLR-NEXT-002 COMPLETE_NO-GO; all source families exhausted), not operational — heavy work is the mandatory per-session path.",
+      "result": "BLOCKED_ON_DATA as of 20261103T041447Z. Heavy work refresh A-F executed: verify_heavy_work_004i.py gate PASSES, fresh blocker doc created, alt-hunt scans updated, frontier/handoff updated; tests 111/111 PASS. Content-hash baseline complete; no post-2026-10 ironflow data; resume_trigger_met=false. Data bottleneck is structural.",
       "resume_triggers": [
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11 (verify via scripts/monitor_ironflow_liquidations.py --quick OR --decision [offline] OR --scan [fast resume] OR --simulate --trigger-month=YYYY-MM [offline self-test])",
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11",
         "OR new source passes GO: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010 (Hyperliquid-only for Track A)"
       ],
-      "generated": "2026-11-03T03:18:21Z",
+      "generated": "20261103T041447Z",
       "artifacts": [
-        "alt_source_scan_20261103T031658Z.json",
-        "liquidation_forward_validate_004_blocker_20261103T031821Z.md",
-        "ironflow_probe_20261103T031543Z.json",
-        "ironflow_resume_scan_20261103T031658Z.json"
+        "alt_source_scan_20261103T041447Z.json",
+        "liquidation_forward_validate_004_blocker_20261103T041447Z.md",
+        "ironflow_probe_20261103T041447Z.json",
+        "ironflow_resume_scan_20261103T041447Z.json"
       ]
     },
     {
