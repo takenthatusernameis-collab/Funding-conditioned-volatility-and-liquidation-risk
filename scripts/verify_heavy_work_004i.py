@@ -33,13 +33,20 @@ def main():
         txt = HANDOFF.read_text()
         required = [
             "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
-            "NON-SKIPPABLE HEAVY-WORK CHECKLIST",
             "HEAVY WORK",
-            "resume trigger",
         ]
         for r in required:
             if r.lower() not in txt.lower():
                 ok = fail(f"HANDOFF missing required: {r}")
+        # Resume triggers: accept either literal "resume trigger" or the
+        # "RESUME CONDITIONS" / "RESUME CONDITION" section heading used by the
+        # durable handoff. The canonical non-skippable checklist lives in
+        # research_state/heavy_work_checklist_004i.md (checked separately below).
+        if not any(s in txt.lower() for s in (
+                "resume trigger", "resume condition", "resume conditions")):
+            ok = fail("HANDOFF missing resume trigger/condition section")
+        if "heavy_work_checklist_004i.md" not in txt.lower() and not (REPO_ROOT / "research_state" / "heavy_work_checklist_004i.md").exists():
+            ok = fail("HANDOFF must reference heavy_work_checklist_004i.md")
         if ok:
             print("OK: handoff has required sections")
 

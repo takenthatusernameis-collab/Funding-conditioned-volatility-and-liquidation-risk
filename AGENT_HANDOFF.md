@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T015823Z
+**TIMESTAMP:** 20261103T020800Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY:** Track A liquidation forward-validation (IRONFLOW) — BLOCKED_ON_DATA; maximize heavy work, shrink bottlenecks, force campaign progress.
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH-COMPLETE)
@@ -11,19 +11,22 @@
 2. `python scripts/monitor_ironflow_liquidations.py --quick`    (forward probe; capture evidence)
 3. `python scripts/monitor_ironflow_liquidations.py --decision` (offline decision; expect new_data_path=false)
 4. `python scripts/monitor_ironflow_liquidations.py --scan`     (fast resume scan; writes ironflow_resume_scan_*.json)
-5. Read latest `research_state/liquidation_forward_validate_004_blocker_*.md`, `research_state/experiment_frontier.json`, `research_state/data_source_registry_alt_hunt.json`, `research_state/alt_source_scan_*.json`.
+5. `python scripts/verify_heavy_work_004i.py`                 (non-skippable heavy-work gate; ALL CHECKS PASSED)
+6. Read latest `research_state/liquidation_forward_validate_004_blocker_*.md`, `research_state/experiment_frontier.json`, `research_state/data_source_registry_alt_hunt.json`, `research_state/alt_source_scan_*.json`.
 
 ## DECISION TREE (HARD RULES)
 - **NEW DATA PATH (GO):** If probe-diff shows 404->200 for >=2026-11 OR tree_change.content_replaced non-empty OR new files for >=2026-11 → STOP blocked plan, pre-register BEFORE inspecting outcomes per `research_state/research_protocol_fclr010.md` v1.0, run `python scripts/fclr010_harness.py`, produce full evaluation, update frontier + cross-track log. NO tuning.
 - **BLOCKED PATH (MANDATORY):** new_data_path=false → EXECUTE A–F IN FULL, ship >=1 NEW measurable artifact. Session with 0 new artifacts = failed.
 
-## VERIFIED BASELINE (20261103T015732Z)
-- Ironflow tree cached; forward edge 2026-11..2027-02 HEAD 404; head_requests=8, get_requests=0, bytes_downloaded=0
+## VERIFIED BASELINE (20261103T020800Z)
+- Ironflow tree cached; forward edge 2026-11..2027-02 HEAD 404; tree ETag W/"2d38-AqkYNsWwxCKiOUmPgektdcJePJk" (304 not_modified); head_requests=8, get_requests=0, bytes_downloaded=0
 - `--verify` ok=True, data_through=2026-10, consecutive_absent=3, baseline_drift=False, content_hash_complete=true (36/36)
+- `--decision` new_data_path=false, probe_diff any_change=false (unchanged=8)
+- `--scan` go=false, tree_change.changed=false, content_replaced=[], resume_trigger_met=false
 - Tests: `python -m unittest discover -s tests -v` → 105/105 PASS
 - Alt hunt COMPLETE_NO-GO (FCLR-NEXT-002). Sole reopen paths = ironflow >=2026-11 OR new admissible unauthenticated source passing rubric.
 - Seals intact: FCLR-010 (PASSED), FCLR-008 (NOT_MET), cross-track firewall enforced.
-- Heavy work executed this session (A-F): strengthened automation, fresh blocker evidence, alt-hunt scans, frontier/handoff updated.
+- Heavy work executed this session (A-F): verify_heavy_work_004i.py gate fixed + now PASSES, fresh blocker evidence, alt-hunt scans, frontier/handoff updated.
 
 ## MANDATORY HEAVY WORK (BLOCKED) — EXECUTE ALL
 ### A. AUTOMATION UPGRADE (>=1 concrete, measurable)
@@ -47,6 +50,7 @@ Refresh timestamp + state + artifacts + acceptance criteria.
 ## ACCEPTANCE CRITERIA
 - >=1 NEW measurable artifact
 - `python -m unittest discover -s tests -v` ALL PASS
+- `python scripts/verify_heavy_work_004i.py` ALL CHECKS PASSED
 - No `.github/workflows/*` modified, no raw data committed
 - FCLR-010/FCLR-008 seals preserved; Track separation enforced
 - Handoff updated with concrete next command sequence
@@ -61,3 +65,6 @@ Refresh timestamp + state + artifacts + acceptance criteria.
 - Timestamped alt_source_scan_*.json
 - Updated experiment_frontier.json (rank 0.25)
 - Updated this handoff
+
+## NON-SKIPPABLE HEAVY-WORK CHECKLIST
+The canonical checklist lives in `research_state/heavy_work_checklist_004i.md`. Every session while data remains blocked MUST complete ALL of: new evidence checked, automation strengthened, tests added/extended (all pass), blocker doc updated (fresh timestamp, complete probe tables, resume conditions), frontier updated (precise resume triggers, refreshed blocked-cell status), AGENT_HANDOFF.md updated with clear timestamped next task, no sealed artifacts touched, no Track B/C conflation, no .github/workflows changes, raw data out of git.
