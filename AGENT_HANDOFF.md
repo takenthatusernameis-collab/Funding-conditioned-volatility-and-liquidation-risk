@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T091500Z
+**TIMESTAMP:** 20261103T100321Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY (by repo name):** BOTH TRACKS ACTIVE. Track A (observed liquidations) = STRUCTURAL BLOCK (monitor-only, heavy automation complete). Track B (funding-conditioned volatility) = HEAVY CAMPAIGN READY (STREAM_B_ROBUSTNESS-002 complete with consistent gains).
 
@@ -35,7 +35,7 @@ python -m unittest discover -s tests -v | tail -2   # MUST stay >=117/117 PASS
 # Record key findings, next highest-value heavy task, bottlenecks removed/remaining
 ```
 
-## VERIFIED TRUTH (20261103T091500Z)
+## VERIFIED TRUTH (20261103T100321Z)
 - **Track A (observed liquidations):** BLOCKED_ON_DATA (STRUCTURAL). Ironflow cached through 2026-10 intact. Forward 2026-11,12,2027-01,02 all 404; resume_trigger_met=false. FCLR-010 COMPLETE/PASSED (sealed). No admissible unauthenticated source. Sole reopen = NEW rubric-GO source (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010).
 - **Track B (funding-conditioned volatility):** STREAM_B_HEAVY_FEATURE_EXTENSION-001: C2 vs B1 +4.588% rel QLIKE, CI [-0.044418,-0.017603] excludes zero (117/117 PASS). STREAM_B_ROBUSTNESS-002 (COMPLETED 20261103T090636Z): block sizes {12,24,48}, LOSO all symbols, scaling variants (robust/median-IQR/minmax), coef ±50% - ALL show consistent improvement with CIs excluding zero on frozen FCLR-002 splits. No sealed panels re-run.
 - **Overlay:** INELIGIBLE. Microstructure D1-D3 tested (FCLR-LIQMICRO-002/003) - no H001 reversal.
