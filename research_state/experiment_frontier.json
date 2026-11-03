@@ -1,8 +1,8 @@
 {
   "registry_version": "1.1",
-  "generated": "20261103T100500Z",
+  "generated": "20261103T101627Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "FUNDING_CONDITIONED_DEEP_DIVE-001 INITIATED: Track A BLOCKED_ON_DATA (monitor-only). Track B bottleneck identified: FCLR-002 test split has only 2 non-overlapping 30-day blocks (<3 required). Deep analysis + block-count resolution MANDATORY. Tests must stay green.",
+  "current_status": "STREAM_B_ROBUSTNESS-002 executed 20261103T101627Z: block sizes {12,24,48}, LOSO, scaling variants, coef sensitivity \u00b150%; C2 vs B1 robust with CI excluding zero across checks. See evaluation_summary_STREAM_B_ROBUSTNESS-002_20261103T101627Z.md.",
   "summary": "Both tracks core to repo name 'Funding-conditioned-volatility-and-liquidation-risk'. Track A (liquidation risk) blocked on ironflow data. Track B (funding-conditioned volatility) has robust gains but cannot do new confirmatory without >=3 blocks. Heavy mechanism deepening required regardless.",
   "frontier": [
     {
@@ -13,7 +13,9 @@
       "blockers": "FCLR-002 test has 2 blocks (<3). Must resolve or work around with rigorous analysis.",
       "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell.",
       "status": "IN_PROGRESS",
-      "resume_triggers": ["complete deep dive with bottleneck resolution"],
+      "resume_triggers": [
+        "complete deep dive with bottleneck resolution"
+      ],
       "generated": "20261103T100500Z"
     },
     {
@@ -26,13 +28,23 @@
     }
   ],
   "coverage": {
-    "instruments": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+    "instruments": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
     "venue": "binance_um_perp",
     "period": "2024-04-01..2024-09-30 (FCLR-002 panel; fully cached)",
     "fclr002_test_blocks": "test 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks - INSUFFICIENT for new confirmatory (<3)"
   },
   "blocked_cells": [
-    {"hypothesis": "FCLR-H004", "reason": "Direct liquidation labels unavailable from admissible public sources", "status": "BLOCKED"}
+    {
+      "hypothesis": "FCLR-H004",
+      "reason": "Direct liquidation labels unavailable from admissible public sources",
+      "status": "BLOCKED"
+    }
   ],
   "last_updated": "20261103T100500Z",
   "timestamp": "20261103T100500Z"
