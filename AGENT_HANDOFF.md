@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261103T224707Z
+Timestamp (UTC): 20261103T225024Z
 Git SHA (HEAD): 9e403b61223498d3419fcd077261fb0e6b9d2c7a
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261103T224707Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-TRIGGER-LOCKDOWN
+Handoff ID: FCLR-HANDOFF-20261103T225024Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-TRIGGER-LOCKDOWN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-021-TRACK-C-FUNDING-VOL-READINESS-LOCKDOWN
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting)
 CAMPAIGN: FCLR-NEXT-021-FUNDING-CONDITIONED-VOL-CONTINUOUS-EXECUTION-READINESS
 REPO-NAME PRIORITY ORDER: Track C (funding-conditioned volatility) >> Track A (liquidation risk observed labels) >> Track B (modeled boundary breaches) — per structural closure verdict HND-20261031-STRUCTURAL-CLOSEOUT-003
-TIMESTAMP (UTC): 20261103T224707Z
+TIMESTAMP (UTC): 20261103T225024Z
 OBJECTIVE: All confirmatory campaigns are STRUCTURALLY CLOSED NEGATIVE (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track C closed negative; Track A structurally blocked; Track B closed negative). Tests: 117/117 OK. FCLR-NEXT-012 forward validation remains BLOCKED pending admissible new data. Treat the repo name as directive: maximize Track C readiness and build an execution path that can fire the moment a trigger appears. Do NOT idle.
 HEAVY WORK MANDATE: (1) Full inventory hardening (ironflow >2026-10-31 at research_state/data_cache/ironflow_events/; full Binance inventory vs sealed window 2026-05-08..2026-08-06 across BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT klines/index/mark/premium/funding), (2) Prereg-first gating proof every session, (3) Track C prereg template draft/maintain (structure only, NO inspection of outcomes, NO tuning), (4) Immutable cross-track firewall + sealed holdout integrity sweep, (5) Ship ONE verifiable heavy artifact (diffs+inventory+gating+Track-C readiness). Every session must demonstrably increase execution readiness.
 HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Embargo >=7d. Block-bootstrap >=2000 reps. No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation. Do not fabricate data.
