@@ -1,10 +1,23 @@
 {
   "registry_version": "1.1",
-  "generated": "20261103T101627Z",
+  "generated": "20261103T110039Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "STREAM_B_ROBUSTNESS-002 executed 20261103T101627Z: block sizes {12,24,48}, LOSO, scaling variants, coef sensitivity \u00b150%; C2 vs B1 robust with CI excluding zero across checks. See evaluation_summary_STREAM_B_ROBUSTNESS-002_20261103T101627Z.md.",
-  "summary": "Both tracks core to repo name 'Funding-conditioned-volatility-and-liquidation-risk'. Track A (liquidation risk) blocked on ironflow data. Track B (funding-conditioned volatility) has robust gains but cannot do new confirmatory without >=3 blocks. Heavy mechanism deepening required regardless.",
+  "current_status": "STREAM_B_DEEP_ANALYSIS-001 executed 20261103T110039Z: ablations/interactions/regimes/cross-symbol on frozen FCLR-002. Block count audited - no ready >=3-block panel found (FCLR-008 needs panel build+prereg). Heavy mechanism work complete, continue deepening or build FCLR-008 panel.",
+  "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via investigation - no ready panel exists, FCLR-008 path requires heavy engineering+prereg.",
   "frontier": [
+    {
+      "rank": 0,
+      "task": "FUNDING_CONDITIONING_DEEPER_VALIDATION-002: Regime-stratified QLIKE by funding quartiles per symbol/time within test; interaction refinements on frozen FCLR-002 splits OR build FCLR-008 leakage-resistant panel with preregistration if pursuing new confirmatory",
+      "prerequisite": "Tests pass, Track A monitor. Work on frozen splits or build new panel only with full prereg.",
+      "acceptance": "evaluation_summary with regime stratification + evidence; if building FCLR-008: preregistration written before outcomes, new experiment ID, all criteria met.",
+      "blockers": "FCLR-002 <3 blocks; FCLR-008 needs panel construction from raw archives",
+      "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell.",
+      "status": "IN_PROGRESS",
+      "resume_triggers": [
+        "complete deeper validation or FCLR-008 prereg+panel plan"
+      ],
+      "generated": "20261103T110039Z"
+    },
     {
       "rank": 0,
       "task": "FUNDING_CONDITIONED_DEEP_DIVE-001: Mechanism ablations/interactions/regime conditioning on frozen FCLR-002 splits + BLOCK_COUNT_RESOLUTION (find >=3 blocks config or document impossibility)",
@@ -12,11 +25,11 @@
       "acceptance": "evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_<UTC>.md with ablations/interactions/regimes; block_count_resolution_001_<UTC>.md OR pre_registration_stream_b_funding_conditioned_<UTC>.md; AGENT_HANDOFF.md updated; tests >=117/117 PASS.",
       "blockers": "FCLR-002 test has 2 blocks (<3). Must resolve or work around with rigorous analysis.",
       "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell.",
-      "status": "IN_PROGRESS",
+      "status": "COMPLETE",
       "resume_triggers": [
         "complete deep dive with bottleneck resolution"
       ],
-      "generated": "20261103T100500Z"
+      "generated": "20261103T110039Z"
     },
     {
       "rank": 0.1,
@@ -46,6 +59,6 @@
       "status": "BLOCKED"
     }
   ],
-  "last_updated": "20261103T100500Z",
-  "timestamp": "20261103T100500Z"
+  "last_updated": "20261103T110039Z",
+  "timestamp": "20261103T110039Z"
 }

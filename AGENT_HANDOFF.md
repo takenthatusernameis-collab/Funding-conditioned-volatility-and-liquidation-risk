@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T100500Z
+**TIMESTAMP:** 20261103T110025Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY (by repo name):** BOTH TRACKS ACTIVE. Track A (observed liquidations, funding-conditioned liquidation risk) = STRUCTURAL BLOCK (monitor-only). Track B (funding-conditioned volatility) = UNBLOCKED HEAVY CAMPAIGN. BOTH are core to repo name - do not neglect either.
 
-## SESSION GOAL
-Remove bottlenecks. Track A cannot proceed without new rubric-GO data (ironflow forward 404 through 2027-02). The bottleneck preventing new confirmatory Track B work is the FCLR-002 test split only having 2 non-overlapping 30-day blocks (<3 required). **Do NOT wait for perfect conditions.** Convert exploratory capacity into heavy evidence that can either (1) justify a new confirmatory split if structure exists elsewhere, or (2) produce a concrete pre-registration that meets protocol requirements. Never idle. Never re-run sealed FCLR-001..008.
+## SESSION GOAL (UPDATED 20261103T110025Z)
+Remove bottlenecks. Track A cannot proceed without new rubric-GO data (ironflow forward 404 through 2027-02). The bottleneck preventing new confirmatory Track B work is the FCLR-002 test split only having 2 non-overlapping 30-day blocks (<3 required). **Executed heavy mechanism deepening on frozen FCLR-002 splits.** Scanned all cached panels - no structured panel JSON with >=3 blocks readily loadable; FCLR-008 has >=3 blocks structurally but requires building leakage-resistant panel from raw archives + preregistration before outcome peek (heavy engineering). Never idle. Never re-run sealed FCLR-001..008.
 
 ## CRYSTAL-CLEAR INITIAL TASK (EXECUTE IMMEDIATELY, IN THIS ORDER)
 
@@ -78,7 +78,20 @@ python -m unittest discover -s tests -v | tail -2   # MUST stay >=117/117 PASS
 ## FOCUS CAMPAIGN
 **FUNDING_CONDITIONED_DEEP_DIVE-001 (HEAVY, MANDATORY):** Deepen understanding of funding-conditioning mechanism. This is core to repo name. Ablations, interactions, regime conditioning on frozen FCLR-002 splits. Simultaneously hunt for any cached panel meeting >=3 blocks. If funding effect is robust and path to confirmatory cell exists, draft pre-reg. If not, produce mechanism paper-quality analysis. This work CANNOT be avoided.
 
-## MANDATORY DELIVERABLES THIS SESSION
+
+
+## SESSION RESULTS (20261103T110025Z)
+- **Tests:** `python -m unittest discover -s tests -v` -> OK (117/117 PASS)
+- **Track A:** monitor_ironflow_liquidations --quick/--verify run. No resume trigger (data_through 2026-10, forward 2026-11/12/2027-01/02 all 404). Evidence logged.
+- **Track B Deep Dive:** STREAM_B_DEEP_ANALYSIS-001 complete on frozen FCLR-002 splits.
+  - Ablations: A1_fundpctz (trailing fund pct/z) dominant (+4.051% rel QLIKE), A3_pricedisloc adds (+2.255%), C2_all +4.588% vs B1. CIs exclude zero for C1/A1/A3/C2.
+  - Interactions: fund×RV regime (+4.003%), fund×dislocation (+4.205%) show small additional gains.
+  - Regime conditioning (test only, descriptive): funding |abs| quartiles q1=9.28e-06, q2=3.471e-05, q3=7.221e-05.
+  - Cross-symbol: all 5 symbols improve (+4.02% to +4.99%), CIs mostly exclude zero (SOLUSDT borderline but direction positive).
+- **Bottleneck resolution:** Block count audited exhaustively. No cached structured panel with >=5 symbols and >=3 non-overlapping 30-day blocks found. FCLR-008 structurally has >=3 blocks but requires panel construction + preregistration (heavy). See block_count_resolution_20261103T102000Z.md, fclr002_block_audit context.
+- **Deliverables:** evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_20261103T110025Z.md written.
+
+## MANDATORY DELIVERABLES THIS SESSION (COMPLETED)
 - [ ] `python -m unittest discover -s tests -v` passes (117+)
 - [ ] Track A keep-alive evidence (monitor --quick + --verify, <2 min)
 - [ ] STREAM_B_DEEP_ANALYSIS-001 executed with ablations/interactions/regime analysis + cross-symbol stability
@@ -97,5 +110,9 @@ python -m unittest discover -s tests -v | tail -2   # MUST stay >=117/117 PASS
 - **HEAVY WORK ALWAYS WHEN BLOCKED. NEVER IDLE.** Both tracks matter - funding conditions both volatility and liquidation risk.
 - Do not peek at outcomes before pre-registration if creating new confirmatory cell.
 
-## NEXT SESSION'S SINGLE HIGHEST-VALUE TASK
-**HEAVY:** Based on this session's bottleneck report and deep analysis, either (a) execute pre-registered confirmatory cell if >=3 blocks found and pre-reg complete, OR (b) continue mechanism deepening with alternative validation approaches. Continue Track A monitor (<2 min). Keep all tests green. Focus relentlessly on funding-conditioning mechanism - it's the core of this repo. Do NOT do shallow analysis. Do NOT wait.
+## NEXT SESSION'S SINGLE HIGHEST-VALUE TASK (UPDATED 20261103T110025Z)
+**HEAVY - FUNDING CONDITIONING MECHANISM DEEPENING (CONTINUE):** Bottleneck report complete - no ready structured panel with >=3 blocks found. Two paths:
+1. **FCLR-008 path (high effort):** Build leakage-resistant panel from raw archives (Jan-Aug 2026) for 5 symbols with train/val/test splits meeting >=3 blocks. MUST write full pre-registration BEFORE any outcome inspection. New experiment ID required.
+2. **Alternative validation on FCLR-002 (immediate):** Deeper regime analysis (funding quartile stratified QLIKE per symbol, time-varying coefficients within test), interaction refinements, or bootstrap sensitivity. All on frozen splits.
+
+Continue Track A monitor (<2 min). Keep all tests green (117+). Focus on funding-conditioning mechanism. Do NOT re-run sealed FCLR-001..008. Do NOT peek at outcomes if building new confirmatory cell. This is the core of repo name - cannot avoid heavy work.
