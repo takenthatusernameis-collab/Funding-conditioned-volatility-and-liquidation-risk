@@ -1,0 +1,105 @@
+{
+  "ts": "20261103T224923Z",
+  "ironflow_files": [
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-05.parquet",
+      "size": 649175,
+      "mtime": 1793745331.5654738
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-06.parquet",
+      "size": 2362144,
+      "mtime": 1793745331.5704737
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-07.parquet",
+      "size": 4397200,
+      "mtime": 1793745331.5784738
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-08.parquet",
+      "size": 5254028,
+      "mtime": 1793745331.588474
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-09.parquet",
+      "size": 4609620,
+      "mtime": 1793745331.595474
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-10.parquet",
+      "size": 9430899,
+      "mtime": 1793745331.6134744
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-11.parquet",
+      "size": 7978181,
+      "mtime": 1793745331.6264744
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2025-12.parquet",
+      "size": 4441584,
+      "mtime": 1793745331.6344745
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-01.parquet",
+      "size": 6116362,
+      "mtime": 1793745331.6434746
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-02.parquet",
+      "size": 6658690,
+      "mtime": 1793745331.6534748
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-03.parquet",
+      "size": 6001329,
+      "mtime": 1793745331.6624749
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-04.parquet",
+      "size": 5002960,
+      "mtime": 1793745331.670475
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-05.parquet",
+      "size": 6007849,
+      "mtime": 1793745331.680475
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-06.parquet",
+      "size": 10478045,
+      "mtime": 1793745331.7014754
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-07.parquet",
+      "size": 8857812,
+      "mtime": 1793745331.7154756
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-08.parquet",
+      "size": 8692716,
+      "mtime": 1793745331.7284756
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-09.parquet",
+      "size": 8248237,
+      "mtime": 1793745331.740476
+    },
+    {
+      "path": "research_state/data_cache/ironflow_events/2026-10.parquet",
+      "size": 10347879,
+      "mtime": 1793745331.756476
+    }
+  ],
+  "binance_zip_count": 15,
+  "binance_2026_zips": [],
+  "sealed_window": {
+    "start": "2026-05-08",
+    "end": "2026-08-06"
+  },
+  "triggers_found": {
+    "ironflow_gt_20261031": false,
+    "unsealed_binance_panel": false
+  }
+}
