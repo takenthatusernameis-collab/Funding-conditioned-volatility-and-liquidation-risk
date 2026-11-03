@@ -1,18 +1,19 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T21:27:33Z
-Git SHA (HEAD): 0a1b8fae
+Timestamp (UTC): 2026-11-03T21:28:16Z
+Git SHA (HEAD): e5cc9acf
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261103T212733Z | Priority: HEAVY-WORK (do not do status-only) | Mode: TRIGGER-WATCH-HARDENED
+Handoff ID: FCLR-HANDOFF-20261103T212816Z | Priority: HEAVY-WORK (do not do status-only) | Mode: TRIGGER-WATCH-HARDENED
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
-TASK ID: FCLR-NEXT-016-WATCH-HARDEN
+TASK ID: FCLR-NEXT-017-WATCH-HARDEN-AND-EXECUTE-ON-TRIGGER
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting)
-CAMPAIGN: FCLR-NEXT-016-FUNDING-CONDITIONED-VOL-LIQ-RISK-TRIGGER-HARDENING
+CAMPAIGN: FCLR-NEXT-017-FUNDING-CONDITIONED-VOL-LIQ-RISK-TRIGGER-HARDENING
 REPO FOCUS: Funding-conditioned volatility and liquidation risk (Track A = Hyperliquid ironflow observed liquidation labels; Track C = funding-conditioned volatility on Binance perpetual panel; Track B = modeled boundary breaches)
-TIMESTAMP (UTC): 2026-11-03T21:27:33Z
-OBJECTIVE: All confirmatory campaigns STRUCTURALLY CLOSED NEGATIVE (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track A structurally blocked; Track B closed negative). Tests: 117/117 OK. FCLR-NEXT-012 forward validation BLOCKED pending admissible new data. DO NOT wait idly. Execute heavy work: (1) Harden continuous admissible-data trigger watch with concrete diffs (ironflow > 2026-10-31 at research_state/data_cache/ironflow_events/; new unsealed Binance panel beyond 2026-05-08..2026-08-06 for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT across klines/index/mark/premium/funding), (2) Stress-test prereg-first gating end-to-end (prove evaluate_forward() cannot run without preregistration), (3) Maintain immutable cross-track firewall and sealed holdout integrity, (4) Produce ONE verifiable heavy artifact per session (diffs + inventory + gating proof). Every session must increase readiness to run FCLR-012 the moment trigger appears.
+REPO-NAME PRIORITY ORDER: Track C (funding-conditioned volatility) > Track A (liquidation risk observed labels) > Track B (modeled boundary breaches) — per repo name and structural closure verdict HND-20261031-STRUCTURAL-CLOSEOUT-003
+TIMESTAMP (UTC): 2026-11-03T21:28:16Z
+OBJECTIVE: All confirmatory campaigns STRUCTURALLY CLOSED NEGATIVE (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track A structurally blocked; Track B closed negative). Tests: 117/117 OK. FCLR-NEXT-012 forward validation BLOCKED pending admissible new data. DO NOT wait idly. Execute heavy work: (1) Harden continuous admissible-data trigger watch with concrete diffs (ironflow > 2026-10-31 at research_state/data_cache/ironflow_events/; new unsealed Binance panel beyond 2026-05-08..2026-08-06 for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT across klines/index/mark/premium/funding), (2) Stress-test prereg-first gating end-to-end (prove evaluate_forward() cannot run without preregistration), (3) Maintain immutable cross-track firewall and sealed holdout integrity, (4) Produce ONE verifiable heavy artifact per session (diffs + inventory + gating proof). Every session must increase readiness to run FCLR-NEXT-012 the moment trigger appears.
 HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Embargo >=7d. Block-bootstrap >=2000 reps. No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation. Do not fabricate data.
 ADMISSIBLE TRIGGERS (forward FCLR-NEXT-012):
 - Track A (FCLR-012-A): new Hyperliquid ironflow monthly parquet > 2026-10-31 at research_state/data_cache/ironflow_events/*.parquet (latest observed: 2026-10.parquet)
@@ -32,6 +33,7 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - Stale handoffs: cleaned
 - FCLR-NEXT-013 heavy-work campaign: COMPLETE
 - Structural closure: COMPLETE (Track C CLOSED NEGATIVE, Track A STRUCTURALLY BLOCKED, Track B CLOSED NEGATIVE; H001 NOT_SUPPORTED)
+- Bottleneck review: NO remaining structural bottlenecks. The only blocker is absence of new admissible unauthenticated data for FCLR-NEXT-012 forward validation; this is a DATA blocker, not an engineering bottleneck. Heavy work (watch hardening, gating proof, integrity sweep) continues regardless.
 
 ## 2) Bottlenecks still open (must be addressed)
 - Forward validation FCLR-NEXT-012: BLOCKED on admissible data (no ironflow > 2026-10-31; no unsealed Binance panel beyond 2026-05-08..2026-08-06). Monitor continuously with hardened probes; act immediately on trigger with prereg-first discipline.
@@ -46,6 +48,7 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - Track V sealed: 2026-05-08..2026-08-06 only; root contains 463 zips ALL 2024 (2024-01-01..2024-03-30), no 2026 files beyond sealed window
 - Structural closure verdict: research_state/structural_closure_verdict_heavy.md present, unchanged
 - Ironflow probe: no resume trigger (latest probe 2026-11-03T17:53:30Z)
+- Cross-track firewall: IMMUTABLE, SEALED (research_state/cross_track_decision_firewall.md)
 
 ## 4) Key artifacts
 - research_state/run_manifest.json (valid JSON; frozen)
@@ -56,8 +59,9 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - research_state/blockers_FCLR-012_20261103T140313Z.md
 - research_state/sealed_holdout_integrity.md
 - research_state/experiment_frontier.json
-- research_state/watch/trigger_harden_20261103T175500Z.json (machine-checkable diff: inventory, sealed-window diff, trigger status, gating proof)
-- research_state/watch/trigger_watch_20261103T175500Z.md (session artifact)
+- research_state/watch/trigger_harden_20261103T211306Z.json (machine-checkable diff: inventory, sealed-window diff, trigger status, gating proof)
+- research_state/watch/trigger_watch_20261103T210920Z.md (session artifact)
+- research_state/cross_track_decision_firewall.md (immutable firewall, SEALED)
 
 ## 5) Frozen rules (immutable)
 - Pre-register before inspecting outcomes
@@ -69,7 +73,7 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - Heavy work only - no status-only files
 
 ## 6) Next focus campaign (heavy work - CONTINUOUS)
-Campaign: FCLR-NEXT-016-TRIGGER-HARDENING (ongoing)
+Campaign: FCLR-NEXT-017-TRIGGER-HARDENING (ongoing)
 1) Re-harden trigger watch each session: full Binance inventory vs sealed window diff; ironflow probe for >2026-10. Ship trigger_harden_<UTC>.json + trigger_watch_<UTC>.md.
 2) Re-verify prereg gating each session: dry-run evaluate_forward without prereg -> must fail with explicit error. Log exact error in artifact.
 3) Integrity sweep each session: seals/firewall/manifests unchanged.
