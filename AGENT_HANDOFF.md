@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T17:01:30Z
-Git SHA (HEAD): 27219c7b
+Timestamp (UTC): 2026-11-03T17:48:03Z
+Git SHA (HEAD): 3cb3d3cd
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261103T170130Z | Priority: HEAVY-WORK (do not do status-only) | Mode: DATA-TRIGGERED-REOPEN-WATCH
+Handoff ID: FCLR-HANDOFF-20261103T174803Z | Priority: HEAVY-WORK (do not do status-only) | Mode: DATA-TRIGGERED-REOPEN-WATCH
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-015-WATCH
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no waiting without shipping)
 CAMPAIGN: FCLR-NEXT-015-FUNDING-CONDITIONED-VOL-LIQ-RISK-TRIGGER-WATCH
 REPO FOCUS: Funding-conditioned volatility and liquidation risk (Track A = Hyperliquid ironflow observed liquidation labels; Track C = funding-conditioned volatility on Binance perpetual panel; Track B = modeled boundary breaches)
-TIMESTAMP (UTC): 2026-11-03T17:01:30Z
+TIMESTAMP (UTC): 2026-11-03T17:48:03Z
 OBJECTIVE: All confirmatory campaigns STRUCTURALLY CLOSED NEGATIVE (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track A structurally blocked; Track B closed negative). Tests: 117/117 OK (manifest LFS bottleneck RESOLVED). FCLR-NEXT-012 forward validation BLOCKED pending admissible new data. DO NOT wait idly. Execute heavy work: (1) Maintain continuous admissible-data trigger watch (ironflow > 2026-10-31 at research_state/data_cache/ironflow_events/; new unsealed Binance panel beyond 2026-05-08..2026-08-06 for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT), (2) Keep structural integrity (single handoff, sealed holdouts untouched, firewall intact), (3) Keep pre-registration machinery ready - scripts/fclr010_harness.py.pre_register_forward_experiment() must fire BEFORE inspecting outcomes if trigger appears, (4) Ship ONE verifiable artifact per session regardless of trigger state (probe evidence + integrity diff + concrete readiness check). Every session must produce measurable progress toward being able to run FCLR-012 immediately on trigger.
 HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Enforce embargoes (>=7d). Block-bootstrap (>=2000 reps). No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation. Do not fabricate data.
 ADMISSIBLE TRIGGERS (forward FCLR-NEXT-012):
