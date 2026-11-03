@@ -1075,6 +1075,92 @@ def check_tree_change(state, max_retries=MAX_RETRIES):
     return result
 
 
+def probe_kaggle_mirror(state=None, max_retries=MAX_RETRIES):
+    """Probe the Kaggle metadata mirror for the ironflow dataset (unauthenticated).
+
+    The Kaggle dataset-list endpoint is unauthenticated and returns HTTP 200 with
+    a ``lastUpdated`` timestamp. The Kaggle mirror has been observed updated AFTER
+    the HF resolve tree (e.g. 2026-11-01 vs HF's 2026-10-31 tree), so it is a
+    strictly wider resume signal than the HF tree alone.
+
+    Returns a dict:
+      ok, url, status, last_updated (ISO), last_updated_month (YYYY-MM),
+      previous_last_updated (from state), mirror_updated (bool),
+      triggered (bool -- mirror advanced past data_through), body_preview.
+
+    The Kaggle DOWNLOAD path is auth-gated (verified: returns a JS shell, not
+    parquet bytes), so this probe is metadata-only. It is a resume TRIGGER, not a
+    data source: when it fires the session must re-probe the HF resolve tree --
+    the only admissible data path -- before doing anything else. It must never
+    be recorded as a GO source or used to download liquidation bytes.
+    """
+    state = state if state is not None else load_state()
+    url = "https://www.kaggle.com/api/v1/datasets/list?search=ironflow%20hyperliquid-liquidations"
+    prev = (state.get("kaggle_mirror") or {}).get("last_updated")
+    res = {
+        "ok": False,
+        "url": url,
+        "status": None,
+        "last_updated": None,
+        "last_updated_month": None,
+        "previous_last_updated": prev,
+        "mirror_updated": False,
+        "triggered": False,
+        "download_auth_gated": True,
+        "body_preview": "",
+        "error": None,
+    }
+    r = http_get(url, max_retries=max_retries)
+    res["status"] = r.get("status")
+    if not r.get("ok") or r.get("status") != 200:
+        res["error"] = f"non-200 status {r.get('status')}"
+        return res
+    body = r.get("body", b"") or b""
+    try:
+        data = json.loads(body.decode("utf-8", errors="replace"))
+    except Exception as e:
+        res["error"] = f"non-JSON body: {e!r}"
+        res["body_preview"] = body[:200].decode("utf-8", errors="replace")
+        return res
+    # Find the ironflow/hyperliquid-liquidations entry specifically (search returns
+    # multiple datasets; the mirror watch must key on the exact dataset, not the
+    # first hit, otherwise a different dataset's update false-fires the trigger).
+    entry = None
+    for d in data:
+        if isinstance(d, dict) and d.get("ref") == "ironflow/hyperliquid-liquidations":
+            entry = d
+            break
+    if entry is None:
+        res["error"] = "ironflow/hyperliquid-liquidations not present in search results"
+        res["body_preview"] = body[:200].decode("utf-8", errors="replace")
+        return res
+    lu = entry.get("lastUpdated") or entry.get("last_updated")
+    res["last_updated"] = lu
+    if lu:
+        # Kaggle timestamps are ISO-8601 with a Z or offset; extract the month.
+        try:
+            dt = datetime.fromisoformat(str(lu).replace("Z", "+00:00"))
+            res["last_updated_month"] = dt.strftime("%Y-%m")
+        except Exception:
+            res["last_updated_month"] = str(lu)[:7]
+    res["ok"] = True
+    res["body_preview"] = body[:200].decode("utf-8", errors="replace")
+    res["license"] = entry.get("licenseNameNullable")
+    res["total_bytes"] = entry.get("totalBytesNullable")
+    # mirror_updated: the mirror timestamp advanced since the last observation.
+    if prev and lu and str(prev) != str(lu):
+        res["mirror_updated"] = True
+    elif not prev and lu:
+        # First observation: record it but do not fire -- no prior baseline to
+        # compare against, and a first-seen timestamp is not evidence of new data.
+        res["mirror_updated"] = False
+    # triggered: the mirror advanced PAST data_through (the forward edge).
+    dt = state.get("data_through")
+    if res["mirror_updated"] and res["last_updated_month"] and dt and res["last_updated_month"] > str(dt):
+        res["triggered"] = True
+    return res
+
+
 def check_resume_condition(state=None, max_retries=MAX_RETRIES):
     """Return (triggered: bool, details: dict) using ONLY the forward-edge months.
 
@@ -1167,6 +1253,40 @@ def check_resume_condition(state=None, max_retries=MAX_RETRIES):
                 details["triggered"] = True
                 details["triggering_files"].append(rec)
             details["probes"].append(rec)
+    # ---- Kaggle mirror watch ---------------------------------------------
+    # The HF tree listing is the primary resume signal, but it is not the only
+    # unauthenticated view of the same dataset. Kaggle mirrors ironflow's
+    # hyperliquid-liquidations dataset and exposes an UNAUTHENTICATED metadata
+    # endpoint (https://www.kaggle.com/api/vatasets/list?search=...) that returns
+    # HTTP 200 with a lastUpdated timestamp. The Kaggle mirror has been observed
+    # updated AFTER the HF tree (e.g. 2026-11-01 vs HF's 2026-10-31 tree), so it
+    # is a strictly wider resume signal: a lagged upload that has not yet
+    # propagated to the HF resolve tree can still be detected here.
+    #
+    # The Kaggle DOWNLOAD path is auth-gated (returns a JS shell, not data), so
+    # this probe is metadata-only and NEVER downloads liquidation bytes. It is
+    # a resume TRIGGER, not a data source: when it fires, the session re-probes
+    # the HF resolve tree (the only admissible data path) before doing anything
+    # else. It must not be treated as a GO source on its own.
+    try:
+        kaggle = probe_kaggle_mirror(state)
+    except Exception as e:
+        kaggle = {
+            "ok": False,
+            "error": f"probe_kaggle_mirror raised: {e!r}",
+            "mirror_updated": False,
+            "last_updated": None,
+            "triggered": False,
+        }
+    details["kaggle_mirror"] = kaggle
+    if kaggle.get("triggered"):
+        details["triggered"] = True
+        details["triggering_files"].append({
+            "kind": "kaggle_mirror",
+            "month": kaggle.get("last_updated_month"),
+            "url": kaggle.get("url"),
+            "note": "Kaggle mirror metadata advanced past data_through; re-probe HF resolve tree.",
+        })
     return details
 
 
@@ -1463,7 +1583,8 @@ def main():
             pd = evidence.get("probe_diff", {}) or {}
             summary = pd.get("summary", {}) or {}
             bd = evidence.get("baseline_drift", {}) or {}
-            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd.get('baseline_intact')} regressions={bd.get('regression_count')} content_replaced={bd.get('content_replaced_count')} pairs_checked={bd.get('checked')})")
+            km = rc.get("kaggle_mirror", {}) or {}
+            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd.get('baseline_intact')} regressions={bd.get('regression_count')} content_replaced={bd.get('content_replaced_count')} pairs_checked={bd.get('checked')}) kaggle_mirror(updated={km.get('mirror_updated')} last={km.get('last_updated')} triggered={km.get('triggered')})")
         return
 
     if "--report" in sys.argv:
