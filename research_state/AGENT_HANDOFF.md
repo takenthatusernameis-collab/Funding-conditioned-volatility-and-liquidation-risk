@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T110126Z
+**TIMESTAMP:** 20261103T110235Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY (by repo name):** LIQUIDATION-FIRST + FUNDING-CONDITIONED-VOLATILITY. Both tracks named in repo. Maximize heavy computable work; eliminate idle-wait bottlenecks.
 
@@ -17,32 +17,32 @@ Do NOT passively poll. Build a self-driven campaign that produces verifiable art
   - FCLR-008 (unsealed 2026 Jan-Aug, +4.30% but CI [-0.029938,0.000524] crosses zero) INCONCLUSIVE
 - H002 (funding-extreme correction replication): PARTIAL_REPLICATION (direction matches paper, p=0.0792 not significant, SSRN HTTP 403 blocks exact replication).
 - H004: SUPPORTED via FCLR-010 (Track A).
-- **BOTTLENECK: FCLR-002 test split has only 2 non-overlapping 30-day blocks (<3 required) despite -9.28% QLIKE with CI excluding zero. Block-count resolution MANDATORY (find >=3 blocks config or document impossibility).**
+- **BOTTLENECK: FCLR-002 test split has only 2 non-overlapping 30-day blocks (<3 required) despite -9.28% QLIKE with CI excluding zero. Block-count resolution MANDATORY: build FCLR-011 panel from raw 2026 archives (>=3 blocks structurally available) + pre-registration, OR produce machine-checkable impossibility proof.**
 - Tests: 117/117 PASS at HEAD (run `python -m unittest discover -s tests -v`). No workflow changes.
 - Data exhaustion claim retracted: 2026 Jan-Aug mark-price data fully cached (FCLR-008 panel: 218 days, 7 blocks, 5 symbols, 5232 common timestamps, hashes in fclr008_coverage_audit.json). 2024 Q1 Binance data present in root zips/dirs.
 
-## BOTTLENECK REMOVAL (executed this session; do not re-open)
+## BOTTLENECK REMOVAL (executed; do not re-open)
 - Track A forward-watch: ironflow returns 404 for >=2026-11. DO NOT poll. Probe once per session via --quick (<60s); resume only on HTTP 200 for YYYY-MM >= 2026-11.
 - Sealed experiments frozen: FCLR-001/002/003/005/006/007/008/009/H003-EXT. Analysis-only allowed; no re-runs.
-- FCLR-002 block-count bottleneck: not yet resolved. Must either find >=3 non-overlapping 30-day blocks on an unsealed panel or document structural impossibility with machine-checkable evidence.
+- FCLR-002 block-count bottleneck: convert to FCLR-011 panel build from raw archives OR impossibility proof.
 
 ## NEXT FOCUS CAMPAIGN (HEAVY WORK - execute in order, NO idle loops)
 
-### CAMPAIGN 1: FUNDING-CONDITIONED VOLATILITY DEEP DIVE (repo-name primary, HIGH)
-1. **BLOCK_COUNT_RESOLUTION**: Audit all available unsealed data windows for >=3 non-overlapping 30-day block configs on >=5 instruments. Check FCLR-002 test window extensions and any unsealed 2024 Q4/Q1 windows. Write `research_state/block_count_resolution_20261103T100705Z.md` with machine-checkable evidence (symbol counts, day counts, block counts, hash anchors). If impossible, document why with proof.
-2. **Mechanism ablations on frozen FCLR-002 splits**: Decompose C2 into funding-only / basis-premium-only / smoothing-only vs B1 using cached panels only. Identify which component drives the -9.28% QLIKE point estimate. Write `research_state/fclr002_ablation_deep_dive_20261103T100705Z.md`.
-3. **Regime-conditional analysis**: Vol regime x funding regime x cross-asset correlation on frozen FCLR-002 splits. Test if signal is regime-localized. Pre-register in note; do NOT change frozen protocols.
-4. **Interaction forensics**: Funding x RV interaction terms, turning-point detection, lead-lag with censoring. Use cached FCLR-002 panel only.
+### CAMPAIGN 1: FCLR-011 CONFIRMATORY CELL BUILD (repo-name primary, HIGH)
+1. **PRE-REGISTER FIRST** (before any outcome peek): `research_state/pre_registration_fclr011_<UTC>.md` using research_protocol_fclr008.md v1.0 as template (new version). Splits frozen BEFORE outcomes. Criteria: >=5 symbols, >=3 non-overlapping 30-day test blocks, block bootstrap 2000 reps, hypothesis FCLR-H001.
+2. **BUILD PANEL**: leakage-resistant panel from root raw archives (markPriceKlines, indexPriceKlines, premiumIndexKlines, fundingRate zips, 2026 Jan-Aug). Train-only normalization, trailing-only, chronological, purge/embargo. Output: `research_state/data_cache/fclr011_panel.json` + coverage audit.
+3. **EXECUTE** (if criteria met): FCLR-011 confirmatory run, `research_state/evaluation_summary_FCLR-011_<UTC>.md`, assess forecast gate (>=2% rel QLIKE + CI excludes zero).
+4. **IF INFEASIBLE**: `research_state/block_count_resolution_fclr011_<UTC>.md` with machine-checkable symbol/day/block counts + hash anchors.
 
 ### CAMPAIGN 2: TRACK A LIQUIDATION INTELLIGENCE (liquidation-first, HIGH - MONITOR ONLY)
-1. **Consolidate FCLR-010 evidence bundle**: `research_state/track_a_fclr010_consolidated.md` - full run_manifest entries, evaluation_summary_FCLR010.md, gate assessment, content hashes, provenance. Make reproducible from cache.
-2. **Build liquidation-feature pipeline**: Using cached ironflow data through 2026-10, construct funding-conditioned liquidation features (funding z-scores, funding-turning, basis/premium alignment, realized vol regimes) + leakage-audited feature table. Write `research_state/track_a_feature_build_20261103T100705Z.md` + cached parquet/npz.
-3. **Forward-watch automation**: Enhance `scripts/monitor_ironflow_liquidations.py` to log structured probes (content-length/hash) to `research_state/ironflow_watch_log.jsonl` (append-only). Keep --quick <60s. NO cron/polling loops, NO retry storms.
+1. Consolidate FCLR-010 evidence bundle: `research_state/track_a_fclr010_consolidated.md`.
+2. Build liquidation-feature pipeline from cached ironflow data through 2026-10.
+3. Forward-watch: `monitor_ironflow_liquidations.py --quick` (<60s), append-only log to `research_state/ironflow_watch_log.jsonl`. NO cron/polling loops.
 
 ### CAMPAIGN 3: INFRASTRUCTURE / BOTTLENECK REMOVAL (HIGH)
-1. **Test coverage hardening**: Focused tests for liquidation feature builder and ironflow monitor (fast). Keep all tests passing (target >=117/117).
-2. **Reproducibility**: Checksums, git SHA, timestamps on all heavy artifacts. Update run_manifest.json with campaign entries.
-3. **Documentation**: research_protocol.md - add "data-exhaustion for confirmatory" note; gates stay frozen.
+1. Test coverage hardening (fast). Keep all tests passing (>=117/117).
+2. Reproducibility: checksums, git SHA, timestamps on all heavy artifacts. Update run_manifest.json.
+3. Documentation: research_protocol.md data-exhaustion note; gates stay frozen.
 
 ## EXECUTION RULES (strict)
 - NO polling/waiting loops. Each action must produce a file/change.
@@ -56,19 +56,17 @@ Do NOT passively poll. Build a self-driven campaign that produces verifiable art
 ```bash
 # 1) Read truth
 cat research_state/AGENT_HANDOFF.md | head -80
-cat research_state/hypothesis_registry.json | grep -B2 -A30 '"FCLR-H001"' | head -40
-cat research_state/hypothesis_registry.json | grep -B2 -A40 '"FCLR-H004"' | head -50
 
 # 2) Quick health (non-polling)
 python scripts/monitor_ironflow_liquidations.py --quick
 python -m unittest discover -s tests -v 2>&1 | tail -3
 
-# 3) START HEAVY WORK IMMEDIATELY - Campaign 1, step 1: block_count_resolution
+# 3) START HEAVY WORK IMMEDIATELY - Campaign 1, step 1: pre-register FCLR-011
 # Do NOT wait. Produce artifacts.
 ```
 
 ## RESUME TRIGGERS (Track A only)
-- Ironflow events/fills YYYY-MM >= 2026-11 return HTTP 200 (monitor writes evidence). If true: pre-register FCLR-011, run frozen Track A harness on new window, update evaluation_summary/gate.
+- Ironflow events/fills YYYY-MM >= 2026-11 return HTTP 200 (monitor writes evidence). If true: pre-register FCLR-011-track-a, run frozen Track A harness on new window, update evaluation_summary/gate.
 - New admissible unauthenticated liquidation source passes full rubric (>=5 symbols, >=3x30d blocks OR complete month series, compatible schema) - document in blocker_evidence with evidence.
 
 **DEFAULT MODE:** HEAVY_ANALYSIS_CAMPAIGN. No idle time. Every turn produces durable artifacts.
