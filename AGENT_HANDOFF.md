@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T041447Z
+**TIMESTAMP:** 20261103T045659Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY:** Track A liquidation forward-validation (IRONFLOW) — BLOCKED_ON_DATA (STRUCTURAL); maximize heavy work, shrink bottlenecks, force campaign progress.
-**CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH-COMPLETE)
+**CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH-VERIFIED)
 
 ## SESSION GOAL FOR NEXT AGENT
 DO NOT COAST. Data path is structurally blocked: ironflow forward edge 2026-11..2027-02 all 404 (consecutive_absent=3, data_through=2026-10); all 8 source families previously NO-GO (FCLR-NEXT-002 COMPLETE_NO-GO); 17 additional candidates probed, 0 passed strict GO rubric; 12 sources flagged REVIEW_REQUIRED awaiting deeper verification (the only materially different route left). MANDATORY HEAVY WORK A-F this session. Verify fresh artifacts; continue shrinking bottlenecks; if new data appears follow the GO branch exactly.
@@ -22,7 +22,7 @@ DO NOT COAST. Data path is structurally blocked: ironflow forward edge 2026-11..
 - **NEW DATA PATH (GO):** If probe-diff shows 404->200 for >=2026-11 OR tree_change.content_replaced non-empty OR new files for >=2026-11 OR a REVIEW_REQUIRED alt source is confirmed GO (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010) → STOP blocked plan, pre-register BEFORE inspecting outcomes per `research_state/research_protocol_fclr010.md` v1.0, run `python scripts/fclr010_harness.py`, produce full evaluation, update frontier + cross-track log. NO tuning.
 - **BLOCKED PATH (MANDATORY):** new_data_path=false AND no GO source → EXECUTE A–F IN FULL, ship >=1 NEW measurable artifact. Session with 0 new artifacts = failed.
 
-## VERIFIED BASELINE (20261103T031821Z)
+## VERIFIED BASELINE (20261103T045659Z)
 - Ironflow tree cached; forward edge 2026-11..2027-02 HEAD 404; tree ETag W/"2d38-AqkYNsWwxCKiOUmPgektdcJePJk" (304 not_modified); head_requests=8, get_requests=0, bytes_downloaded=0
 - `--verify` ok=True, data_through=2026-10, consecutive_absent=3, baseline_drift=False, content_hash_complete=true (36/36)
 - `--decision` new_data_path=false, probe_diff any_change=false (unchanged=8)
