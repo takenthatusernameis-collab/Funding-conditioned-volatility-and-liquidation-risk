@@ -1,0 +1,81 @@
+{
+  "template_id": "track_c_prereg_template_fclr012",
+  "version": "2.0-harness-compatible",
+  "track": "C",
+  "repo_name_priority": "TRACK_C_FIRST",
+  "priority": "FIRST_ON_TRIGGER",
+  "created_utc": "20261103T235400Z",
+  "supersedes": "track_c_prereg_template_fclr012_draft.json (draft, structure-only)",
+  "status": "STRUCTURE_ONLY_NO_OUTCOME_INSPECTION",
+  "trigger": {
+    "id": "FCLR-012-V",
+    "definition": "NEW admissible unauthenticated 2026 Binance panel beyond sealed FCLR-011 test window 2026-05-08..2026-08-06, for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT (1h klines + markPriceKlines + indexPriceKlines + premiumIndexKlines + fundingRate).",
+    "admissibility_gate": "zips must have NON-ZERO volume/taker_buy fields (real market data). All current data_cache 2026 zips are zero-volume synthetic placeholders -> NOT admissible -> trigger NOT fired as of 20261103T235400Z.",
+    "current_state": "NOT_FIRED",
+    "verification_command": "python -c \"import zipfile; z=zipfile.ZipFile('research_state/data_cache/BTCUSDT_2026_09/BTCUSDT-1h-2026-09-15.zip'); rows=z.read(z.namelist()[0]).decode().split(chr(10))[1:]; print(all(float(r.split(',')[5])==0 for r in rows))\""
+  },
+  "rules": {
+    "pre_register_before_inspecting_outcomes": true,
+    "frozen_splits_metrics_gates_before_outcomes": true,
+    "embargo_days": 7,
+    "purge_days": 7,
+    "block_bootstrap_reps": 2000,
+    "block_bootstrap_seed": 12345,
+    "no_tuning": true,
+    "no_regularization": true,
+    "no_hyperparameter_search": true,
+    "separate_experiments": true,
+    "immutable_cross_track_firewall": true,
+    "no_binance_hyperliquid_merge": true,
+    "overlay_hypothetical_only": true,
+    "never_reuse_sealed_holdouts": true,
+    "no_threshold_shopping": true,
+    "no_forward_fill_zero_fill": true
+  },
+  "hypothesis": "FCLR-H001 (incremental 24h volatility forecasting from funding + price-dislocation features)",
+  "primary_target": {
+    "name": "next-24-hour realized variance of mark-price returns",
+    "definition": "sum of squared log mark-price returns over t+1..t+24 complete hourly intervals",
+    "horizon": "24h",
+    "metric": "paired_out_of_sample_QLIKE",
+    "materiality_floor_rel_reduction": 0.02
+  },
+  "secondary_targets": ["6h", "72h", "168h"],
+  "models_frozen": {
+    "B0": "persistence: forecast next-24h RV using preceding RV24h",
+    "B1": "HAR-style OLS log-linear: log(RV+1e-12) ~ log RV1h + log RV24h + log RV168h",
+    "C1": "B1 + signed funding + past-only 90-day absolute-funding percentile",
+    "C2": "C1 + mark/index premium + mark/EMA24 distance"
+  },
+  "primary_contrast": "C2_vs_B1",
+  "secondary_contrasts": ["C1_vs_B1", "C2_vs_C1"],
+  "features_frozen": {
+    "RV1h": "trailing 1h realized variance from hourly mark-price log returns",
+    "RV24h": "trailing 24h realized variance",
+    "RV168h": "trailing 168h (7d) realized variance",
+    "signed_funding": "latest funding observation available by t, sign retained",
+    "funding_percentile": "percentile of abs funding vs preceding 90 calendar days; require >=30 valid obs",
+    "mark_index_premium": "mark/index - 1, only when contemporaneous within frozen tolerance",
+    "mark_ema24_distance": "mark / EMA24 - 1, EMA from prior/current closed bars only"
+  },
+  "splits_frozen": {
+    "method": "chronological 60/20/20 on unique UTC timestamps",
+    "embargo_days": 7,
+    "purge_days": 7,
+    "boundary_basis": "unique UTC timestamps",
+    "min_instruments": 5,
+    "min_non_overlapping_30day_blocks": 3
+  },
+  "uncertainty": "block_bootstrap >=2000 deterministic-seed replicates, resample complete UTC blocks jointly across instruments",
+  "multiplicity": "Holm familywise correction across whole declared family (all targets/contrasts/models)",
+  "acceptance_test": "scripts/fclr010_harness.py pre_register_forward_experiment() writes locked prereg; evaluate_forward() BLOCKED without prereg with explicit error; READY_FROZEN with prereg + admissible data",
+  "overlay": "NOT_ELIGIBLE_UNLESS_GATE_PASSES; overlay remains HYPOTHETICAL_ONLY with separate forward/holdout evaluation",
+  "do_not": [
+    "do not inspect outcomes before pre-registration",
+    "do not relax the 2% materiality floor",
+    "do not reuse sealed FCLR-001/003/006/007/008/011 panels",
+    "do not merge Binance with Hyperliquid (Track A)",
+    "do not fabricate data or zero-fill missing features",
+    "do not run unless an admissible >2026-08-06 panel exists"
+  ]
+}
