@@ -653,17 +653,9 @@
   ],
   "tree_etag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
   "last_scan": {
-    "scan_id": "ironflow_scan_20261102T150101Z",
-    "timestamp_utc": "2026-11-02T15:01:03.263499+00:00",
-    "tree_status": 304,
-    "diff": {
-      "added": [],
-      "removed": [],
-      "changed": false,
-      "current_count": 36,
-      "previous_count": 36
-    },
-    "triggered": false
+    "timestamp_utc": "2026-11-03T01:04:13.120777+00:00",
+    "go": false,
+    "reasons": []
   },
   "resume_trigger": {
     "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
@@ -714,7 +706,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-03T00:55:49.592682+00:00",
+    "timestamp_utc": "2026-11-03T01:04:12.022113+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -728,7 +720,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-03T00:55:49.592697+00:00",
+    "timestamp_utc": "2026-11-03T01:04:12.022128+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
@@ -867,7 +859,7 @@
     ]
   },
   "last_tree_change": {
-    "timestamp_utc": "2026-11-03T00:55:49.592703+00:00",
+    "timestamp_utc": "2026-11-03T01:04:12.022173+00:00",
     "changed": false,
     "added": [],
     "removed": [],
@@ -1349,5 +1341,36 @@
       "size": 15004089,
       "type": "file"
     }
+  },
+  "probe_history": [
+    {
+      "timestamp_utc": "2026-11-03T01:04:12.022136+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "ece8ded773041478"
+    },
+    {
+      "timestamp_utc": "2026-11-03T01:04:13.121060+00:00",
+      "type": "scan",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "go": false,
+      "reasons": [],
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "hash": "91598ce3865c12ff"
+    }
+  ],
+  "consecutive_absent_trend": {
+    "first": 3,
+    "last": 3,
+    "delta": 0,
+    "history_len": 2
   }
 }

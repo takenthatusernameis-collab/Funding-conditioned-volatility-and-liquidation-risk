@@ -156,7 +156,9 @@ def main():
     for c in candidates:
         entry = {"name": c["name"], "notes": c["notes"], "probes": []}
         for url in c["urls"]:
-            entry["probes"].append(http_probe(url))
+            p = http_probe(url)
+            # Ensure we capture evidence per candidate
+            entry["probes"].append(p)
         entry["rubric_assessment"] = assess_rubric(entry)
         results["candidates"].append(entry)
     go_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "REVIEW_REQUIRED"]
@@ -165,9 +167,19 @@ def main():
         "go_or_review_sources": go_sources,
         "conclusion": "No NEW admissible unauthenticated Track A source beyond ironflow/hyperliquid-liquidations found" if not go_sources else f"Review required for: {go_sources}",
     }
+    # Write main registry
     with open(OUT_PATH, "w") as f:
         json.dump(results, f, indent=2)
+    # Write timestamped alt source scan artifact (required)
+    scan_path = REPO_ROOT / "research_state" / f"alt_source_scan_{ts}.json"
+    with open(scan_path, "w") as f:
+        json.dump(results, f, indent=2)
     print(f"Wrote: {OUT_PATH}")
+    print(f"Wrote: {scan_path}")
+
+
+if __name__ == "__main__":
+    main()
 
 
 if __name__ == "__main__":

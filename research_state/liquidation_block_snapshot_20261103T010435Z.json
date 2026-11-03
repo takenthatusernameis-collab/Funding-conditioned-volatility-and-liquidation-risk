@@ -1,0 +1,31 @@
+{
+  "snapshot_ts": "20261103T010435Z",
+  "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+  "status": "BLOCKED_ON_DATA",
+  "data_through": "2026-10",
+  "consecutive_absent": 3,
+  "verify_ok": true,
+  "baseline_drift": false,
+  "resume_trigger_met": false,
+  "new_data_path": false,
+  "probed_forward": [
+    "2026-11",
+    "2026-12",
+    "2027-01",
+    "2027-02"
+  ],
+  "automation_upgrades": [
+    "HEAD-404 fast path, probe history compaction with hashes, consecutive_absent trend",
+    "--scan with go/reasons, download accounting",
+    "content-hash baseline persistence, silent replacement detection"
+  ],
+  "resume_triggers": [
+    "ironflow: events/fills YYYY-MM >=2026-11 returns 200 (verify via --quick/--decision/--scan/--simulate)",
+    "OR new admissible unauthenticated source passing rubric"
+  ],
+  "seals_intact": [
+    "FCLR-010",
+    "FCLR-008"
+  ],
+  "tests": "105/105 PASS"
+}

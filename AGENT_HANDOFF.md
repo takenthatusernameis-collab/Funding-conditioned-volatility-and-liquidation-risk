@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T005454Z
+**TIMESTAMP:** 20261103T010511Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY:** Track A liquidation forward-validation (IRONFLOW) — BLOCKED_ON_DATA; maximize heavy work, shrink bottlenecks, force campaign progress.
-**CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA
+**CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH)
 **SESSION GOAL FOR NEXT AGENT:** DO NOT COAST. If no new data → execute MANDATORY HEAVY WORK A–F. Produce >=1 concrete measurable artifact. Leave this file as the ONLY actionable handoff.
 
 ## CLEAR INITIAL TASK (START NOW, IN ORDER)
@@ -66,7 +66,8 @@ Refresh timestamp + "NEXT AGENT INITIAL TASK", verified state, artifacts produce
 **ON TRIGGER:** Pre-register before outcomes; run `scripts/fclr010_harness.py`; full evaluation + gate. Update frontier/cross-track log.
 
 ## ARTIFACTS TO LEAVE BEHIND
-- New evidence JSON(s) from A/E
-- Fresh blocker doc (C)
+- New evidence JSON(s) from A/E (alt_source_scan_*.json, probe history in ironflow_monitor_state.json)
+- Fresh blocker doc (C): liquidation_forward_validate_004_blocker_20261103T010511Z.md
+- Fresh block snapshot: liquidation_block_snapshot_20261103T010511Z.json
 - Updated frontier (D)
-- Updated this handoff (F)
+- Updated this handoff (F) - timestamp 20261103T010511Z

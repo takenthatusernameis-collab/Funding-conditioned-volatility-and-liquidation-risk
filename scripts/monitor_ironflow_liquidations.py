@@ -1236,6 +1236,13 @@ def main():
         # Update persisted quick-like records
         state["last_scan"] = {"timestamp_utc": scan_res["scan_ts"], "go": go, "reasons": reasons}
         try:
+            state = record_probe_snapshot(state, probe_type="scan", extra={
+                "go": go,
+                "reasons": reasons,
+                "head_probes": rc.get("head_probes"),
+                "get_requests": rc.get("get_requests"),
+                "get_requests_skipped": rc.get("get_requests_skipped"),
+            })
             compact_probe_history(state, max_history=10)
         except Exception:
             pass
@@ -1346,9 +1353,7 @@ def main():
         evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
         with open(evidence_path, "w") as f:
             json.dump(evidence, f, indent=2)
-        # Persist a machine-readable record of this resume check so future
-        # sessions can confirm a state-aware check was performed without
-        # re-probing (avoids duplicate network calls between sessions).
+        # Persist machine-readable records and probe history
         state["last_quick_check"] = {
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
             "triggered": bool(rc["triggered"]),
@@ -1358,15 +1363,24 @@ def main():
             "cached_hits": rc.get("cached_hits"),
             "data_through": rc["data_through"],
         }
-        # Persist per-month per-kind forward-edge probe results so the probe-to-
-        # probe diff can detect a 404 -> 200 flip across consecutive quick runs.
+        # Persist per-month per-kind forward-edge probe results
         state["last_quick_probe"] = {
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
             "months_probed": rc["months_probed"],
             "probes": rc.get("probes", []),
         }
-        # Persist the tree-change evidence so --decision can apply the AGENT_HANDOFF
-        # decision tree without re-listing the tree (no network).
+        # Record probe snapshot with hash and compact history
+        try:
+            state = record_probe_snapshot(state, probe_type="quick", extra={
+                "head_probes": rc.get("head_probes"),
+                "get_requests": rc.get("get_requests"),
+                "get_requests_skipped": rc.get("get_requests_skipped"),
+                "triggered": bool(rc["triggered"]),
+            })
+            compact_probe_history(state, max_history=10)
+        except Exception:
+            pass
+        # Persist tree-change evidence
         _tc = evidence.get("tree_change", {}) or {}
         state["last_tree_change"] = {
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
@@ -1380,10 +1394,6 @@ def main():
             "current_parquet_items": _tc.get("current_parquet_items", {}),
             "current_parquet_paths": _tc.get("current_parquet_paths", []),
         }
-        # Persist the parsed content-hash map (LFS oids per parquet path) whenever
-        # we have it -- including the one-time capture on a 304 tree response -- so
-        # the offline content-hash baseline is complete and silent file replacement
-        # (same path, different bytes) is detectable without re-listing the tree.
         if _tc.get("current_parquet_items"):
             state["tree_parquet_items"] = _tc["current_parquet_items"]
             state["tree_parquet_paths"] = _tc.get("current_parquet_paths", state.get("tree_parquet_paths", []))
@@ -1878,6 +1888,43 @@ def compact_probe_history(state, max_history: int = 10):
             state["last_quick_probe_history"] = state["last_quick_probe_history"][-max_history:]
             changed = True
     return changed
+
+
+def record_probe_snapshot(state, probe_type="quick", extra=None):
+    """Record a probe snapshot with hash to track history and surface trends."""
+    if not isinstance(state, dict):
+        state = {}
+    ts = datetime.now(timezone.utc).isoformat()
+    snap = {
+        "timestamp_utc": ts,
+        "type": probe_type,
+        "data_through": state.get("data_through"),
+        "consecutive_absent": state.get("consecutive_absent"),
+    }
+    if extra:
+        snap.update(extra)
+    snap_str = json.dumps(snap, sort_keys=True)
+    snap["hash"] = hashlib.sha256(snap_str.encode("utf-8")).hexdigest()[:16]
+    hist = state.get("probe_history", [])
+    if not isinstance(hist, list):
+        hist = []
+    hist.append(snap)
+    # Keep last 10
+    if len(hist) > 10:
+        hist = hist[-10:]
+    state["probe_history"] = hist
+    # Compute trend
+    if len(hist) >= 2:
+        first_absent = hist[0].get("consecutive_absent")
+        last_absent = hist[-1].get("consecutive_absent")
+        if first_absent is not None and last_absent is not None:
+            state["consecutive_absent_trend"] = {
+                "first": first_absent,
+                "last": last_absent,
+                "delta": last_absent - first_absent,
+                "history_len": len(hist),
+            }
+    return state
 
 
 def write_blocker_snapshot(state_path: Optional[Path] = None, out_dir: Optional[Path] = None) -> Dict[str, Any]:
