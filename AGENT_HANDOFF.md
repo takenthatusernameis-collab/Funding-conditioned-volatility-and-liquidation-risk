@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T011100Z
+**TIMESTAMP:** 20261103T015732Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY:** Track A liquidation forward-validation (IRONFLOW) — BLOCKED_ON_DATA; maximize heavy work, shrink bottlenecks, force campaign progress.
-**CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH)
-**SESSION GOAL FOR NEXT AGENT:** DO NOT COAST. If no new data → execute MANDATORY HEAVY WORK A–F. Produce >=1 concrete measurable artifact. Leave this file as the ONLY actionable handoff.
+**CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH-COMPLETE)
+**SESSION GOAL FOR NEXT AGENT:** DO NOT COAST. No new data found (ironflow 2026-11+ absent). MANDATORY HEAVY WORK A-F COMPLETED this session. Verify fresh artifacts and continue to shrink bottlenecks; if new data appears follow GO branch exactly.
 
 ## CLEAR INITIAL TASK (START NOW, IN ORDER)
 1. `python scripts/monitor_ironflow_liquidations.py --verify`  (expect ok=True, data_through=2026-10, consecutive_absent>=3, baseline_drift=False, content_hash_baseline_complete=true)
@@ -17,7 +17,7 @@
 - **NEW DATA PATH (GO):** If probe-diff shows 404->200 for >=2026-11 OR tree_change.content_replaced non-empty OR new files for >=2026-11 → STOP blocked plan, pre-register BEFORE inspecting outcomes per `research_state/research_protocol_fclr010.md` v1.0, run `python scripts/fclr010_harness.py`, produce full evaluation, update frontier + cross-track log. NO tuning.
 - **BLOCKED PATH (MANDATORY):** new_data_path=false → EXECUTE A–F IN FULL, ship >=1 NEW measurable artifact. Session with 0 new artifacts = failed.
 
-## VERIFIED BASELINE (20261103T011100Z)
+## VERIFIED BASELINE (20261103T015732Z)
 - Ironflow tree cached; forward edge 2026-11..2027-02 HEAD 404; head_requests=8, get_requests=0, bytes_downloaded=0
 - `--verify` ok=True, data_through=2026-10, consecutive_absent=3, baseline_drift=False, content_hash_complete=true (36/36)
 - Tests: `python -m unittest discover -s tests -v` → 105/105 PASS

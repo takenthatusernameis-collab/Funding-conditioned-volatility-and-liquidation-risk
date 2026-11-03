@@ -1,8 +1,8 @@
 {
   "registry_version": "1.0",
-  "generated": "2026-11-03T01:11:00Z",
+  "generated": "2026-11-03T01:56:56Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "Track A FCLR-010 PASSED. LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i BLOCKED_ON_DATA as of 2026-11-03T01:11:00Z. Heavy work A-F executed; automation hardened; fresh evidence artifacts written; tests 105/105 PASS.",
+  "current_status": "Track A FCLR-010 PASSED. LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i BLOCKED_ON_DATA as of 20261103T015656Z. Heavy work A-F executed; fresh blocker evidence, strengthened automation/alt-hunt; tests 105/105 PASS.",
   "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE. FCLR-LIQMICRO-002 COMPLETE: real Hyperliquid funding (9 coins x 8668 records, fundingRate.std()>0) wired into features.py; D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs now non-zero (was degenerate 0.0 in FCLR-LIQMICRO-001); D3 clustering_by_decile now populated (was empty {}); BH FDR 4 significant; NO H001 reversal, NO H001 re-test opened. Automation strengthened (monitor --verify state-consistency check, --force guard on full probe, scan path rebuilds resume_trigger block, --quick now persists machine-readable last_quick_check + last_quick_probe records; probe-to-probe compare_probes diff detects 404->200 flips across quick runs; probe_diff block in --quick evidence); tests 75->81 PASS (added TestCompareProbes x6). Blocker doc: research_state/liquidation_forward_validate_004_blocker_20261102T155600Z.md. Focus on heavy evidence/automation until new data appears.",
   "frontier": [
     {
@@ -13,16 +13,17 @@
       "blockers": "No post-2026-10-31 ironflow data. No admissible unauthenticated sources. data_through=2026-10, consecutive_absent=3. Heavy artifacts produced this refresh.",
       "do_not": "Do not inspect outcomes before pre-reg; do not merge tracks; do not touch .github/workflows; no polling loops without new evidence; do not re-probe dead routes.",
       "status": "BLOCKED_ON_DATA",
-      "result": "BLOCKED_ON_DATA as of 2026-11-03T01:11:00Z. Heavy work refresh A-F executed: probe history compaction, --scan fast resume scan, strengthened alt-hunt with timestamped scans, fresh blocker doc + snapshots. Tests 105/105 PASS. Content-hash baseline complete; no post-2026-10 ironflow data; resume_trigger_met=false.",
+      "result": "BLOCKED_ON_DATA as of 20261103T015656Z. Heavy work refresh A-F executed: fresh blocker doc, probe history compaction/scan, alt-hunt strengthened; tests 105/105 PASS. Content-hash baseline complete; no post-2026-10 ironflow data; resume_trigger_met=false.",
       "resume_triggers": [
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11 (verify via scripts/monitor_ironflow_liquidations.py --quick OR --decision [offline] OR --simulate --trigger-month=YYYY-MM [offline self-test])",
         "ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/YYYY-MM.parquet returns 200 for YYYY-MM >= 2026-11",
         "OR new source passes GO: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010 (Hyperliquid-only for Track A)"
       ],
-      "generated": "2026-11-03T01:11:00Z",
+      "generated": "2026-11-03T01:56:56Z",
       "artifacts": [
+        "alt_source_scan_20261103T011046Z.json",
         "liquidation_forward_validate_004_blocker_20261103T011100Z.md",
-        "alt_source_scan_20261103T011046Z.json"
+        "liquidation_forward_validate_004_blocker_20261103T015656Z.md"
       ]
     },
     {
