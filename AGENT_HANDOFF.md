@@ -1,12 +1,26 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T12:05:45Z
+Timestamp (UTC): 2026-11-03T12:07:46Z
 Git SHA (HEAD): 2f21f5e7
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
+Handoff ID: FCLR-HANDOFF-20261103T120746Z | Priority: HEAVY-WORK (do not do status-only) | Mode: EXECUTION-ONLY-IF-DATA-ELSE-BLOCKER
 
-## 1) What changed / why (this session context)
-- Retired duplicate NEXT_AGENT_HANDOFF_2026-11-03T11-59-35Z.md (two competing "single durable handoffs" was a bottleneck); AGENT_HANDOFF.md is now the ONLY durable handoff.
-- This session: retired the competing duplicate research_state/AGENT_HANDOFF.md (stale, contradicted FCLR-011 gate state and directed re-execution of completed work); refreshed AGENT_HANDOFF.md header timestamp/git SHA to HEAD 2f21f5e7.
+## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
+```
+TASK ID: FCLR-NEXT-012-EXEC
+PRIORITY: P0 - EXECUTION PHASE (heavy work enforced)
+CAMPAIGN: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL
+OBJECTIVE: Execute forward validation ONLY if new admissible data exists for Track A (ironflow > 2026-10-31) or funding-conditioned volatility (new unsealed 2026 Binance panel beyond 2026-05-08..2026-08-06).
+HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Enforce embargoes (>=7d). Block-bootstrap. No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds.
+ACTION:
+1) Run verification: tests/test_fclr010_harness.py, frontier prereg presence, consolidated/synthesis files, ensure no NEXT_AGENT_HANDOFF_*.md duplicates.
+2) Scan for new admissible unauthenticated data: look for new ironflow monthly parquet (Track A) and new unsealed Binance 1h/funding/index/mark/premium CSV/zip beyond sealed ranges.
+3) IF new data found: pre-register fresh experiment IDs via scripts/fclr010_harness.py pre_register_forward_experiment() BEFORE any outcome inspection; run evaluate_forward() with frozen config only; write results to research_state/ with cross-links to manifest/frontier.
+4) IF NO new data: write a concrete BLOCKER report (data gaps, last checked paths, next admissible sources) to research_state/blockers_FCLR-012_YYYYMMDDTHHMMSSZ.md, DO NOT re-run sealed panels, DO NOT relax gates, preserve all states. Then STOP - do not fabricate status files.
+FAILURE CONDITION: any attempt to merge tracks, retune, or "backtest again" sealed data is a VIOLATION. No status-only progress.
+```
+- **BOTTLENECK REMOVAL (ENFORCED):** Retired duplicate NEXT_AGENT_HANDOFF_2026-11-03T11-59-35Z.md (two competing "single durable handoffs" was a bottleneck); AGENT_HANDOFF.md is now the ONLY durable handoff. Verified no remaining NEXT_AGENT_HANDOFF_*.md files.
+- **BOTTLENECK REMOVAL (ENFORCED):** This session: retired the competing duplicate research_state/AGENT_HANDOFF.md (stale, contradicted FCLR-011 gate state and directed re-execution of completed work); refreshed AGENT_HANDOFF.md header timestamp/git SHA to HEAD 2f21f5e7.
 - Campaign FCLR-NEXT-012 CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL executed: consolidation + synthesis artifacts written, forward harness hardened, manifest cross-links added, forward pre-registration written, experiment frontier updated.
 - Confirmed Track A (observed liquidations, Hyperliquid ironflow census) forecast gate passed: FCLR-010 C2 vs B1 +2.21% Brier rel (PASS). Overlay pre-registered + executed hypothetically (no trading).
 - Confirmed funding-conditioned volatility track passed gate: FCLR-011 C2 vs B1 +4.94% QLIKE rel (PASS) on 2026 panel (BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT).
@@ -35,15 +49,15 @@ Repo: Funding-conditioned-volatility-and-liquidation-risk
 - LIQMICRO-002/003: COMPLETE.
 - FCLR-NEXT-012: PREREGISTERED (forward validation gated on new admissible data only).
 
-## 5) SINGLE HIGHEST-VALUE NEXT TASK (must not avoid heavy work)
-**CAMPAIGN: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL (FCLR-NEXT-012)** — EXECUTION PHASE.
+## 5) SINGLE HIGHEST-VALUE NEXT TASK (must not avoid heavy work) — **EXECUTION MANDATE**
+**CAMPAIGN: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL (FCLR-NEXT-012)** — **EXECUTION PHASE (heavy work required).**
 
-The consolidation/synthesis/preregistration artifacts are written and the forward campaign is pre-registered. The heavy work remaining is EXECUTION, gated strictly on new admissible data:
-- FCLR-012-A (Track A): forward validation beyond 2026-10-31 ONLY if new monthly ironflow parquet appears. Execute pre-registered forward test via scripts/fclr010_harness.py (pre_register_forward_experiment() then evaluate_forward() with pre-reg + data). Frozen config, no retuning, no overlay changes, firewall intact.
-- FCLR-012-V (volatility): forward test on new unsealed 2026 Binance panel beyond FCLR-011 test (2026-05-08..2026-08-06). Only if new unsealed panel exists; otherwise NO run — do not relax thresholds, do not re-run sealed panels.
-- If neither new data source appears: log the blocker, preserve gate states, wait for new admissible unauthenticated data; then pre-register a fresh experiment ID before outcome inspection.
+The consolidation/synthesis/preregistration artifacts are written and the forward campaign is pre-registered. **This agent MUST perform HEAVY WORK, not status reporting.** The only admissible actions:
+- FCLR-012-A (Track A liquidation risk): **ONLY** forward validate beyond 2026-10-31 if new monthly ironflow parquet appears (unauthenticated, admissible). Execute pre-registered forward test via `scripts/fclr010_harness.py` (pre-register fresh ID BEFORE inspecting outcomes, or use existing prereg only if IDs match frozen campaign; never retune). Frozen config, no retuning, no overlay changes, firewall intact.
+- FCLR-012-V (funding-conditioned volatility): **ONLY** forward test on new unsealed 2026 Binance panel beyond FCLR-011 test window (2026-05-08..2026-08-06). Only if new unsealed panel exists; otherwise NO run — do not relax thresholds, do not re-run sealed panels, do not extend sealed windows.
+- **IF NO NEW ADMISSIBLE DATA:** You MUST write a concrete blocker report to `research_state/blockers_FCLR-012_<YYYYMMDDTHHMMSSZ>.md` documenting exact paths checked (ironflow/*, all zip/csv dirs), last timestamps, why insufficient, and recommended next discovery (unauthenticated sources only). **DO NOT create summary/status files**. Preserve all gate states. **DO NOT fabricate runs.**
 
-Concrete subtasks already DONE (do not repeat): consolidate, synthesize, unify handoff, harden harness, manifest hygiene, bottleneck removal (duplicate handoff retired), heavy-work enforcement (prereg written).
+Concrete subtasks already DONE (do not repeat): consolidate, synthesize, unify handoff, harden harness, manifest hygiene, bottleneck removal (duplicate handoffs retired), heavy-work enforcement (prereg written). **Remaining = execution or concrete blocker with evidence.**
 
 ## 6) Precise command/check to verify
 ```bash
