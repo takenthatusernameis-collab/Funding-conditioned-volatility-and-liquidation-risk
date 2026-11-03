@@ -1,94 +1,94 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T061422Z
+**TIMESTAMP:** 20261103T065901Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**PRIORITY:** FUNDING-CONDITIONED VOLATILITY FORECASTING (TRACK B) - MAXIMUM NOW | LIQUIDATION TRACK A - MONITOR-ONLY, NEVER IDLE-WAIT
-**CAMPAIGN:** FUNDING_CONDITIONED_FCVR_HEAVY-007 - TRACK-B HEAVY, UNSEALED-PANEL CONFIRMATORY
+**PRIORITY (by repo name):** LIQUIDATION REOPEN = MAXIMUM (Track A observed-liquidation labels are the single gating missing piece; H004 BLOCKED) | VOLATILITY H001 = MAINTAIN-GREEN-ONLY (INCONCLUSIVE on all exhausted confirmatory panels, CI crosses zero, overlay INELIGIBLE — do NOT re-run sealed panels)
+**CAMPAIGN:** LIQUIDATION_SOURCE_REOPEN_HEAVY-001 — deep rubric verification of every REVIEW_REQUIRED alt source until a GO source is found or the blocker is re-proven with evidence
 
-## IMMEDIATE MANDATE (DO THIS FIRST - IN THIS EXACT ORDER)
+## SESSION GOAL
+Remove the Track A idle-wait bottleneck. Ironflow forward months 2026-11,12,2027-01,02 all return 404 (consec_absent=3, data_through=2026-10, resume_trigger_met=false). Do NOT poll the blocked forward edge. Every session: <1 min monitor check, then 100% effort on deep-rubric verification of the 12 REVIEW_REQUIRED alternative liquidation sources. A GO source -> fresh pre-registered experiment ID -> confirmatory Track A run -> unblocks H004 / overlay eligibility. Heavy work is mandatory; no coasting.
 
-The repo name is "Funding-conditioned-volatility-and-liquidation-risk". Track A (observed liquidations) is STRUCTURALLY BLOCKED: Ironflow forward months 2026-11,12,2027-01,02 return 404; consec_absent=3; last data 2026-10; all 8 alt-source families probed COMPLETE_NO-GO; no admissible unauthenticated liquidation source exists. FCLR-010 (Hyperliquid census, 2025-11..2026-10) gate PASSED and is sealed. DO NOT wait on Track A. Every minute goes to measurable Track B progress.
-
-Track B is UNBLOCKED and has unsealed data verified present in research_state/data_cache/ (2026-01..2026-08, all 5 symbols BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, markPriceKlines + indexPriceKlines + fundingRate). All prior confirmatory panels (FCLR-001/002/003/006/007/008) are exhausted/sealed. H001 INCONCLUSIVE on FCLR-008 (+4.30% rel QLIKE, CI crosses zero). Overlay INELIGIBLE. No untested Track B cell remains under current admissible data WITHOUT a fresh pre-registered experiment ID on NEW unsealed data.
-
-The next session MUST run a fresh pre-registered Track B confirmatory experiment on the unsealed 2026 panel — frozen protocol BEFORE outcomes, train-only normalization, block bootstrap CIs, full ablations. This is heavy, non-optional work.
+## CRYSTAL-CLEAR INITIAL TASK (EXECUTE IMMEDIATELY, IN THIS ORDER)
 
 ```bash
-# PHASE 1: CONFIRM STATE (2 min)
-python scripts/monitor_ironflow_liquidations.py --verify
-python -m unittest discover -s tests -v | tail -5
-
-# PHASE 2: TRACK B HEAVY - PRE-REGISTER + EXECUTE ON UNSEALED 2026 PANEL (90%+ of effort)
-# Step A: coverage-only audit on unsealed 2026-01-01..2026-08-06 panel (>=5 symbols, >=3 non-overlapping 30-day blocks) - NO outcome inspection
-ls research_state/data_cache/ | grep -E '2026_(04|05|06|07|08)' | head
-# Step B: freeze protocol + splits BEFORE outcomes (research_protocol_fclr_next.md, frozen_before_outcomes=true)
-# Step C: extend features per RESEARCH_PROMPT §7 (trailing-only funding percentiles/zscore, RV ratios 6h/24h/7d, mark/index premium, mark/EMA24 distance)
-# Step D: train-only normalized OLS models B0/B1/C1/C2; block bootstrap CIs; full ablations C2 vs B1 on frozen test split
-# Step E: write research_state/evaluation_summary_VOLATILITY_YYYYMMDDTHHMMSSZ.md + gate assessment
-# Step F: update experiment_frontier.json + this AGENT_HANDOFF.md with successor task
-
-# PHASE 3: TRACK A KEEP-ALIVE (<1 min, monitor only)
+# PHASE 1: STATE VERIFY (< 2 min) — bounded, never idle-wait
 python scripts/monitor_ironflow_liquidations.py --quick
-python scripts/hunt_alternative_liquidation_sources.py 2>&1 | tail -15
+python scripts/monitor_ironflow_liquidations.py --verify
+python -m unittest discover -s tests -v | tail -3   # must stay 111/111 PASS
+
+# PHASE 2: HEAVY — DEEP RUBRIC VERIFICATION OF ALL REVIEW_REQUIRED SOURCES (this session's main work)
+python scripts/hunt_alternative_liquidation_sources.py   # refreshes research_state/data_source_registry_alt_hunt.json
+# Then, for EVERY candidate with rubric_assessment == REVIEW_REQUIRED, run a full FCLR rubric check:
+#   unauthenticated path? >=5 symbols OR >=1 complete month OR >=3 non-overlapping 30-day blocks?
+#   schema mappable to FCLR-010 liquidation events/fills? completeness documented? license OK? no keys/signed/requester-pays?
+# Write one evidence artifact per source: research_state/alt_source_deep_review_YYYYMMDDTHHMMSSZ.md
+#   with exact URL, method, status code, headers, body sample, rubric pass/fail, and verdict GO / NO-GO / REVIEW_REQUIRED.
+
+# PHASE 3: DECIDE & RECORD
+#   If ANY source = GO: create fresh pre-registration BEFORE outcome inspection (new experiment ID),
+#     freeze splits, run frozen harness, write evaluation_summary + gate assessment.
+#   If ALL = NO-GO: write fresh research_state/blocker_evidence_YYYYMMDDTHHMMSSZ.md (all commands, URLs, timestamps),
+#     update resume triggers, keep ironflow --quick as the sole <1 min keep-alive.
+#   Update experiment_frontier.json + this AGENT_HANDOFF.md with the successor's exact next task.
+#   Keep tests green (111+). Add tests for any new probe/rubric logic.
 ```
 
-## VERIFIED TRUTH (20261103T061422Z)
+## VERIFIED TRUTH (20261103T065901Z)
 
-- **Track A (liquidations):** BLOCKED_ON_DATA. Ironflow cached through 2026-10 intact. Forward months 404. consec_absent=3, baseline_drift=False, content_hash_complete=True, resume_trigger_met=false. Alt sources: 12 REVIEW_REQUIRED, 0 GO after deep review. No admissible unauthenticated source found. FCLR-010 COMPLETE, gate PASSED, sealed. MONITOR ONLY — never idle-wait.
-- **Track B (funding-conditioned volatility):** UNBLOCKED_HEAVY_EXECUTION. fclr002_panel.json has 19488 rows (5 symbols, 2024-04-01..2024-09-30). Unsealed 2026-01..2026-08 panel verified present in data_cache/ (~122 days = 4 non-overlapping 30-day blocks, >=5 instruments) — NOT yet used for a confirmatory Track B experiment. Infrastructure: src/volatility/features.py, features_ext.py, eval.py, splits.py; scripts/forecast_pipeline.py. All confirmatory panels exhausted; H001 INCONCLUSIVE; overlay INELIGIBLE. Fresh pre-registered experiment on unsealed 2026 data required for any further confirmatory Track B cell.
-- **Tests:** 111/111 PASS. Keep green.
-- **Repo state:** Clean, tons of data, automation ready. No credentials needed.
-
-## DUAL-TRACK WORKSTREAMS (RUN IN PARALLEL)
-
-### STREAM B: FUNDING-CONDITIONED VOLATILITY FORECASTING (PRIORITY #1 - HEAVY, NON-OPTIONAL)
-- [ ] **B1) Coverage-only audit on unsealed 2026 panel** - research_state/data_cache/ (2026-01..2026-08, 5 symbols). Confirm >=5 symbols, >=3 non-overlapping 30-day blocks, mark-price intersection. NO outcome/QLIKE inspection before pre-registration.
-- [ ] **B2) Fresh pre-registered protocol** - research_state/research_protocol_fclr_next.md v1.0 frozen BEFORE outcomes (FCLR-001/002 design: B0 persistence, B1 RV-HAR, C1 funding-augmented, C2 combined; primary contrast C2 vs B1 on QLIKE; >=2% relative QLIKE floor; Holm multiplicity; block bootstrap >=2000 replicates). Frozen splits + eligible panel hashed before outcomes.
-- [ ] **B3) Feature extension per RESEARCH_PROMPT §7** - trailing-only funding percentile/zscore (90-day, >=30 obs), signed funding separate, RV ratios 6h/24h/7d, mark/index premium, mark/EMA24 distance. All causal, trailing-only, no leakage. Extend src/volatility/features_ext.py as needed.
-- [ ] **B4) Train-only normalized OLS + block bootstrap** - standardization from training info only; purge/embargo by horizon; chronological walk-forward only; no random splits. QLIKE/MAE/RMSE + block-bootstrap CIs.
-- [ ] **B5) Full ablations on frozen test split** - B0 vs B1 vs C1 vs C2 vs B0; paired forecast origins; identical eligible rows; Holm across declared family.
-- [ ] **B6) Document everything** - research_state/evaluation_summary_VOLATILITY_YYYYMMDDTHHMMSSZ.md with full metrics, CI, ablations, gaps. Update run_manifest/hypothesis_registry/experiment_frontier.
-
-### STREAM A: LIQUIDATION ACQUISITION (KEEP ALIVE - MONITOR ONLY, NO IDLE)
-- [ ] **A1) Ironflow hardening** - monitor_ironflow_liquidations.py --quick at session start; track probe diffs; detect 404->200 flips.
-- [ ] **A2) Alt-source verification** - Re-probe REVIEW_REQUIRED only with new evidence; IPFS/Arweave/Zenodo/HF academic liquidation datasets. Document with full evidence.
-- [ ] **A3) Blocker evidence fresh** - research_state/blocker_evidence_*.md with timestamps/commands.
-
-### STREAM C: TESTS & INFRASTRUCTURE (PARALLEL)
-- [ ] **C1) Add tests** - Unit tests for new volatility features/eval/splits. Keep all 111+ passing.
-- [ ] **C2) Checkpointing/resume** - Everything idempotent; restartable from checkpoints.
-- [ ] **C3) Update manifests** - run_manifest.json, hypothesis_registry.json, experiment_frontier.json current.
+- **Track A (observed liquidations):** BLOCKED_ON_DATA (STRUCTURAL). Ironflow cached through 2026-10 intact (18 month pairs, content_hash_complete=True, baseline_drift=False). Forward months 2026-11,12,2027-01,02 all 404; consec_absent=3; resume_trigger_met=false. FCLR-010 (Hyperliquid census 2025-11..2026-10) COMPLETE, gate PASSED, sealed. Alt sources: 12 REVIEW_REQUIRED, 0 GO. No admissible unauthenticated liquidation source found. Sole reopen path = NEW admissible unauthenticated source passing FULL rubric (>=5 symbols or equivalent, >=1 complete month OR >=3 non-overlapping 30-day blocks, schema mappable to FCLR-010 events/fills, unauthenticated, no keys/signed/requester-pays, license OK, completeness documented).
+- **Track B (funding-conditioned volatility):** H001 INCONCLUSIVE on decisive unsealed panel FCLR-008 (2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). All confirmatory panels exhausted (FCLR-001/002/003/006/007/008). Overlay INELIGIBLE. No untested Track B confirmatory cell under current admissible data without NEW admissible data + fresh pre-registered experiment ID. Do NOT re-run sealed panels. Tests: 111/111 PASS. Keep green.
 
 ## BOTTLENECKS ELIMINATED NOW
-1. **Track A idle-wait removed** - Track A is structurally blocked; session starts with <1 min monitor check, then 100% Track B. No polling loops without new evidence.
-2. **Track B cell exhaustion addressed** - All prior confirmatory panels sealed/exhausted. Next heavy work = fresh pre-registered experiment on unsealed 2026 panel with new experiment ID. Do NOT re-run FCLR-001/002/003/006/007/008; do NOT threshold-shop; do NOT relax >=2% floor or CI criterion.
-3. **Shallow evaluation removed** - Follow RESEARCH_PROMPT gates religiously: freeze protocol before holdout, train-only normalization, purge/embargo, block bootstrap, Holm multiplicity, correct comparisons.
-4. **Missing feature coverage removed** - Implement ALL pre-registered §7 features before evaluation. No shortcuts, no zero-fill/forward-fill.
 
-## RESUME TRIGGERS
-- **Track A:** Ironflow returns 200 for >=2026-11 with liquidation events/fills matching FCLR-010 schema OR new unauthenticated source passes FULL rubric (>=5 symbols or equivalent, >=complete month/>=3 non-overlapping 30-day blocks, schema mappable, no keys/signed/requester-pays).
-- **Track B:** Runs whenever unblocked — it IS unblocked now. No gate blocking it. Fresh pre-registered experiment on unsealed 2026 panel is the next heavy task.
+1. **Idle-wait on Track A removed** — Session starts with <1 min `monitor --quick` / `--verify`; then 100% deep alt-source rubric verification. No polling loops, no repeated re-probes of dead routes (Binance 404/451, Bybit 404, OKX 403/404, Deribit connect-fail, GitHub 401, CCD, paywalled Tardis/CryptoHFT).
+2. **Shallow source review removed** — Every REVIEW_REQUIRED source gets a full FCLR rubric check with concrete evidence (URL, status, headers, body sample, pass/fail) in a timestamped `alt_source_deep_review_*.md`. No "REVIEW_REQUIRED" left unevaluated.
+3. **Track B sealed-panel re-run removed** — H001 INCONCLUSIVE; all confirmatory panels exhausted. No threshold-shopping, no relaxing the >=2% floor or CI criterion, no relabeling exploratory as confirmatory.
+4. **Unverifiable "GO" removed** — A source is GO only after full rubric evidence is written; HTTP 200 / green CI / model convergence is NOT acceptance.
+
+## FOCUS CAMPAIGN: LIQUIDATION_SOURCE_REOPEN_HEAVY-001 (NON-OPTIONAL, HEAVY)
+
+Objective: find a new admissible unauthenticated observed-liquidation source with a confirmatory-feasible window, or re-prove the structural blocker with complete evidence.
+
+REVIEW_REQUIRED candidates to deep-verify (from research_state/alt_source_scan_*.json and alt_source_deep_review_20261103T060340Z.md):
+- huggingface_other_datasets (ironflow/hyperliquid-liquidations metadata — already GO via FCLR-010, NOT new; check for additional liquidation datasets)
+- huggingface_liquidation_search_broad (Gopher-Lab/bankless..., ochinimus/crypto-liquidation-ticks exhausted 2026-07-08..2026-08-06)
+- zenodo (hyperliquid liquidations / crypto liquidation perpetual records)
+- osf (OSF API root)
+- arxiv (hyperliquid liquidations / crypto liquidation perpetual)
+- data_commoncrawl (index root probe)
+- kaggle (metadata-only mirror; download auth-gated — trigger only, not a data source)
+- github_code_search_unauth (401 — NO-GO, do not repeat)
+- github_repos_search (hyperliquid liquidations repos)
+- coinglass_public (LiquidationData HTML — no unauthenticated historical census)
+- hyblock_public, coinank_public, paradigm_research (public-site probes)
+
+Acceptance (one of):
+- GO source found: research_state/alt_source_deep_review_*.md with full rubric pass + evidence; fresh pre-registered experiment ID; frozen splits; evaluation_summary + gate assessment; tests green.
+- All NO-GO: research_state/blocker_evidence_YYYYMMDDTHHMMSSZ.md with every command/URL/timestamp; updated resume triggers; AGENT_HANDOFF.md successor task.
+
+Resume triggers (Track A):
+- Ironflow: GET https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/YYYY-MM.parquet and /data/fills/YYYY-MM.parquet return 200 for YYYY-MM >= 2026-11 (via `scripts/monitor_ironflow_liquidations.py --quick` / `--decision` / `--scan`).
+- OR new source passes GO: >=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage/license OK, unauthenticated only, schema compatible with frozen FCLR-010 (Hyperliquid-only for Track A).
 
 ## MANDATORY DELIVERABLES THIS SESSION
-- [ ] Coverage-only audit of unsealed 2026 panel (no outcome inspection)
-- [ ] Fresh pre-registered research_protocol_fclr_next.md frozen BEFORE outcomes
-- [ ] Feature extensions + train-only normalized models + block bootstrap CIs + full ablations
-- [ ] Concrete Track B evaluation run with numbers (QLIKE/MAE/RMSE, baselines+ablations, CIs)
-- [ ] Fresh research_state/evaluation_summary_VOLATILITY_YYYYMMDDTHHMMSSZ.md + gate assessment
-- [ ] Updated research_state/experiment_frontier.json reflecting Track B heavy + concrete next steps
-- [ ] Updated this AGENT_HANDOFF.md with successor's exact next task
-- [ ] All tests passing (111+)
-- [ ] Track A monitoring updated with fresh evidence (<1 min)
+
+- [ ] `research_state/data_source_registry_alt_hunt.json` refreshed (hunt script)
+- [ ] `research_state/alt_source_deep_review_YYYYMMDDTHHMMSSZ.md` — full rubric pass/fail + evidence for EVERY REVIEW_REQUIRED source
+- [ ] `research_state/blocker_evidence_YYYYMMDDTHHMMSSZ.md` if all NO-GO (or fresh pre-reg + evaluation if GO)
+- [ ] Updated `research_state/experiment_frontier.json` and this `AGENT_HANDOFF.md` with successor's exact next task
+- [ ] `python -m unittest discover -s tests -v` passes (111+); add tests for new probe/rubric logic
+- [ ] Track A keep-alive: `monitor_ironflow_liquidations.py --quick` evidence (< 1 min)
 
 ## CRITICAL RULES
-- **Research only. No trading/paper/live/API orders.**
-- **No credentials. Unauthenticated only.**
-- **No .github/workflows changes.**
-- **Leakage-resistant: chronological splits, train-only normalization, purge/embargo, freeze before holdout.**
-- **Separate tracks: modeled breaches != observed liquidations.**
-- **Heavy work always. If Track A blocked, 3x effort on Track B.**
-- **Evidence-based. Timestamp everything.**
-- **Never re-run sealed/exhausted confirmatory panels. Fresh experiment ID required for any new confirmatory cell.**
+
+- Research only. No trading / paper / live / API orders. No credentials. Unauthenticated sources only.
+- No .github/workflows changes (protected control plane).
+- Track separation: modeled boundary breaches != observed liquidations. Never label a modeled proxy as observed.
+- Leakage-resistant: chronological splits, train-only normalization, purge/embargo, freeze protocol before holdout.
+- Never re-run sealed/exhausted confirmatory panels (FCLR-001..008). Fresh experiment ID required for any new confirmatory cell.
+- Heavy work always. If Track A blocked, full effort on the reopen campaign. Never idle.
+- Evidence-based. Timestamp everything. No placeholder "REVIEW_REQUIRED" without a dated artifact.
 
 ## NEXT SESSION'S SINGLE HIGHEST-VALUE TASK
-Execute B1-B6 on the unsealed 2026 panel: coverage audit → frozen pre-registration → feature extension → train-only normalized OLS + block bootstrap → full ablations → evaluation summary + gate assessment. Verify command: `python -m unittest discover -s tests -v` (must pass 111+) and fresh `research_state/evaluation_summary_VOLATILITY_*.md` present with C2 vs B1 QLIKE + 95% CI.
+
+Complete LIQUIDATION_SOURCE_REOPEN_HEAVY-001 Phase 2: deep-rubric verify every REVIEW_REQUIRED alt source with timestamped evidence artifacts; if GO, pre-register + run confirmatory Track A; if NO-GO, write fresh blocker evidence and keep ironflow --quick as the sole keep-alive. Verify: `python -m unittest discover -s tests -v` (111+) and a dated `research_state/alt_source_deep_review_*.md` covering all REVIEW_REQUIRED sources.
