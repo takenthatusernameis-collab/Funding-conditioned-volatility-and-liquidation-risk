@@ -1,11 +1,12 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T12:00:41Z
-Git SHA (HEAD): 2f7e0584
+Timestamp (UTC): 2026-11-03T12:05:45Z
+Git SHA (HEAD): 2f21f5e7
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
 
 ## 1) What changed / why (this session context)
 - Retired duplicate NEXT_AGENT_HANDOFF_2026-11-03T11-59-35Z.md (two competing "single durable handoffs" was a bottleneck); AGENT_HANDOFF.md is now the ONLY durable handoff.
+- This session: retired the competing duplicate research_state/AGENT_HANDOFF.md (stale, contradicted FCLR-011 gate state and directed re-execution of completed work); refreshed AGENT_HANDOFF.md header timestamp/git SHA to HEAD 2f21f5e7.
 - Campaign FCLR-NEXT-012 CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL executed: consolidation + synthesis artifacts written, forward harness hardened, manifest cross-links added, forward pre-registration written, experiment frontier updated.
 - Confirmed Track A (observed liquidations, Hyperliquid ironflow census) forecast gate passed: FCLR-010 C2 vs B1 +2.21% Brier rel (PASS). Overlay pre-registered + executed hypothetically (no trading).
 - Confirmed funding-conditioned volatility track passed gate: FCLR-011 C2 vs B1 +4.94% QLIKE rel (PASS) on 2026 panel (BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT).
