@@ -1,34 +1,20 @@
 {
-  "template_id": "track_c_prereg_template_fclr012_draft",
+  "template_type": "TRACK_C_PREREG_DRAFT",
+  "status": "STRUCTURE_ONLY_NO_OUTCOME_INSPECTION",
+  "experiment_id": "FCLR-NEXT-012-TRACK-C",
+  "hypothesis": "FUNDING_CONDITIONED_VOLATILITY",
   "track": "C",
-  "priority": "FIRST_ON_TRIGGER",
-  "created_utc": "20261103T224633Z",
+  "priority": "P0",
+  "created_utc": "20261103T235858Z",
   "rules": {
     "pre_register_before_inspecting_outcomes": true,
-    "frozen_splits_metrics_gates": true,
+    "freeze_splits_metrics_gates": true,
     "embargo_days": 7,
-    "block_bootstrap_reps": 2000,
-    "no_tuning": true,
-    "separate_experiments": true,
-    "immutable_cross_track_firewall": true,
+    "bootstrap_reps": 2000,
+    "no_tuning_on_holdout": true,
+    "separate_from_tracks_a_b": true,
     "no_binance_hyperliquid_merge": true,
-    "overlay_hypothetical_only": true,
-    "never_reuse_sealed_holdouts": true
+    "hypothetical_only": true
   },
-  "target_horizons": [
-    "6h",
-    "24h",
-    "72h",
-    "7d"
-  ],
-  "baselines": [
-    "persistence",
-    "RV-only"
-  ],
-  "candidates": [
-    "RV+funding",
-    "RV+funding+price-dislocation"
-  ],
-  "primary_metric": "QLIKE",
-  "uncertainty": "block-bootstrap>=2000"
+  "notes": "Draft structure only. Do not fill outcome metrics. Ready to pre-register when Track C trigger/conditions met."
 }
