@@ -1,0 +1,34 @@
+{
+  "template_id": "track_c_prereg_template_fclr012_draft",
+  "track": "C",
+  "priority": "FIRST_ON_TRIGGER",
+  "created_utc": "20261103T224633Z",
+  "rules": {
+    "pre_register_before_inspecting_outcomes": true,
+    "frozen_splits_metrics_gates": true,
+    "embargo_days": 7,
+    "block_bootstrap_reps": 2000,
+    "no_tuning": true,
+    "separate_experiments": true,
+    "immutable_cross_track_firewall": true,
+    "no_binance_hyperliquid_merge": true,
+    "overlay_hypothetical_only": true,
+    "never_reuse_sealed_holdouts": true
+  },
+  "target_horizons": [
+    "6h",
+    "24h",
+    "72h",
+    "7d"
+  ],
+  "baselines": [
+    "persistence",
+    "RV-only"
+  ],
+  "candidates": [
+    "RV+funding",
+    "RV+funding+price-dislocation"
+  ],
+  "primary_metric": "QLIKE",
+  "uncertainty": "block-bootstrap>=2000"
+}
