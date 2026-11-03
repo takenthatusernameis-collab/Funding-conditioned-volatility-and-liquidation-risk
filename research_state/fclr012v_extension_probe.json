@@ -1,0 +1,276 @@
+{
+  "probes": [
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/BTCUSDT/1h/BTCUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BTCUSDT",
+      "day": "2026-11-03",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/BTCUSDT/1h/BTCUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BTCUSDT",
+      "day": "2026-11-03",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/BTCUSDT/1h/BTCUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BTCUSDT",
+      "day": "2026-11-03",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/BTCUSDT/1h/BTCUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BTCUSDT",
+      "day": "2026-11-04",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/BTCUSDT/1h/BTCUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BTCUSDT",
+      "day": "2026-11-04",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/BTCUSDT/1h/BTCUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BTCUSDT",
+      "day": "2026-11-04",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/ETHUSDT/1h/ETHUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "ETHUSDT",
+      "day": "2026-11-03",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/ETHUSDT/1h/ETHUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "ETHUSDT",
+      "day": "2026-11-03",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/ETHUSDT/1h/ETHUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "ETHUSDT",
+      "day": "2026-11-03",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/ETHUSDT/1h/ETHUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "ETHUSDT",
+      "day": "2026-11-04",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/ETHUSDT/1h/ETHUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "ETHUSDT",
+      "day": "2026-11-04",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/ETHUSDT/1h/ETHUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "ETHUSDT",
+      "day": "2026-11-04",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/BNBUSDT/1h/BNBUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BNBUSDT",
+      "day": "2026-11-03",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/BNBUSDT/1h/BNBUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BNBUSDT",
+      "day": "2026-11-03",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/BNBUSDT/1h/BNBUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BNBUSDT",
+      "day": "2026-11-03",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/BNBUSDT/1h/BNBUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BNBUSDT",
+      "day": "2026-11-04",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/BNBUSDT/1h/BNBUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BNBUSDT",
+      "day": "2026-11-04",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/BNBUSDT/1h/BNBUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "BNBUSDT",
+      "day": "2026-11-04",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/SOLUSDT/1h/SOLUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "SOLUSDT",
+      "day": "2026-11-03",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/SOLUSDT/1h/SOLUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "SOLUSDT",
+      "day": "2026-11-03",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/SOLUSDT/1h/SOLUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "SOLUSDT",
+      "day": "2026-11-03",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/SOLUSDT/1h/SOLUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "SOLUSDT",
+      "day": "2026-11-04",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/SOLUSDT/1h/SOLUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "SOLUSDT",
+      "day": "2026-11-04",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/SOLUSDT/1h/SOLUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "SOLUSDT",
+      "day": "2026-11-04",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/XRPUSDT/1h/XRPUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "XRPUSDT",
+      "day": "2026-11-03",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/XRPUSDT/1h/XRPUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "XRPUSDT",
+      "day": "2026-11-03",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/XRPUSDT/1h/XRPUSDT-1h-2026-11-03.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "XRPUSDT",
+      "day": "2026-11-03",
+      "kind": "premiumIndexKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/markPriceKlines/XRPUSDT/1h/XRPUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "XRPUSDT",
+      "day": "2026-11-04",
+      "kind": "markPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/indexPriceKlines/XRPUSDT/1h/XRPUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "XRPUSDT",
+      "day": "2026-11-04",
+      "kind": "indexPriceKlines"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/daily/premiumIndexKlines/XRPUSDT/1h/XRPUSDT-1h-2026-11-04.zip",
+      "status": 404,
+      "ok": false,
+      "reason": "HTTP Error 404: Not Found",
+      "symbol": "XRPUSDT",
+      "day": "2026-11-04",
+      "kind": "premiumIndexKlines"
+    }
+  ],
+  "downloads": {},
+  "extracts": {}
+}
