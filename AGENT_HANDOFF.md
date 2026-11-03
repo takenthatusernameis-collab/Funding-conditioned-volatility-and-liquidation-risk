@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T065901Z
+**TIMESTAMP:** 20261103T070210Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY (by repo name):** LIQUIDATION REOPEN = MAXIMUM (Track A observed-liquidation labels are the single gating missing piece; H004 BLOCKED) | VOLATILITY H001 = MAINTAIN-GREEN-ONLY (INCONCLUSIVE on all exhausted confirmatory panels, CI crosses zero, overlay INELIGIBLE — do NOT re-run sealed panels)
 **CAMPAIGN:** LIQUIDATION_SOURCE_REOPEN_HEAVY-001 — deep rubric verification of every REVIEW_REQUIRED alt source until a GO source is found or the blocker is re-proven with evidence
@@ -33,7 +33,7 @@ python scripts/hunt_alternative_liquidation_sources.py   # refreshes research_st
 #   Keep tests green (111+). Add tests for any new probe/rubric logic.
 ```
 
-## VERIFIED TRUTH (20261103T065901Z)
+## VERIFIED TRUTH (20261103T070210Z)
 
 - **Track A (observed liquidations):** BLOCKED_ON_DATA (STRUCTURAL). Ironflow cached through 2026-10 intact (18 month pairs, content_hash_complete=True, baseline_drift=False). Forward months 2026-11,12,2027-01,02 all 404; consec_absent=3; resume_trigger_met=false. FCLR-010 (Hyperliquid census 2025-11..2026-10) COMPLETE, gate PASSED, sealed. Alt sources: 12 REVIEW_REQUIRED, 0 GO. No admissible unauthenticated liquidation source found. Sole reopen path = NEW admissible unauthenticated source passing FULL rubric (>=5 symbols or equivalent, >=1 complete month OR >=3 non-overlapping 30-day blocks, schema mappable to FCLR-010 events/fills, unauthenticated, no keys/signed/requester-pays, license OK, completeness documented).
 - **Track B (funding-conditioned volatility):** H001 INCONCLUSIVE on decisive unsealed panel FCLR-008 (2026-01-01..2026-08-06, 5 symbols, 218 days, 7 blocks, n=10785; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). All confirmatory panels exhausted (FCLR-001/002/003/006/007/008). Overlay INELIGIBLE. No untested Track B confirmatory cell under current admissible data without NEW admissible data + fresh pre-registered experiment ID. Do NOT re-run sealed panels. Tests: 111/111 PASS. Keep green.
