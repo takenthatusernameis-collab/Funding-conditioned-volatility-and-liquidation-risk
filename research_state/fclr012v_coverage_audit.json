@@ -1,0 +1,203 @@
+{
+ "experiment": "FCLR-012-V",
+ "audit_type": "COVERAGE_ONLY_NO_OUTCOME_INSPECTION",
+ "generated": "2026-11-03T19:24:12Z",
+ "window": {
+  "start": "2026-08-07T00:00:00+00:00",
+  "end": "2026-11-02T23:00:00+00:00"
+ },
+ "symbols": [
+  "BTCUSDT",
+  "ETHUSDT",
+  "BNBUSDT",
+  "SOLUSDT",
+  "XRPUSDT"
+ ],
+ "per_symbol": {
+  "BTCUSDT": {
+   "mark_files": 86,
+   "funding_file_count": 3,
+   "missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "n_mark_timestamps": 2064,
+   "first_ts": 1786060800000,
+   "last_ts": 1793660400000
+  },
+  "ETHUSDT": {
+   "mark_files": 86,
+   "funding_file_count": 3,
+   "missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "n_mark_timestamps": 2064,
+   "first_ts": 1786060800000,
+   "last_ts": 1793660400000
+  },
+  "BNBUSDT": {
+   "mark_files": 86,
+   "funding_file_count": 3,
+   "missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "n_mark_timestamps": 2064,
+   "first_ts": 1786060800000,
+   "last_ts": 1793660400000
+  },
+  "SOLUSDT": {
+   "mark_files": 86,
+   "funding_file_count": 3,
+   "missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "n_mark_timestamps": 2064,
+   "first_ts": 1786060800000,
+   "last_ts": 1793660400000
+  },
+  "XRPUSDT": {
+   "mark_files": 86,
+   "funding_file_count": 3,
+   "missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "n_mark_timestamps": 2064,
+   "first_ts": 1786060800000,
+   "last_ts": 1793660400000
+  }
+ },
+ "common_timestamps": {
+  "count": 2064,
+  "first": 1786060800000,
+  "last": 1793660400000
+ },
+ "block_counts": {
+  "non_overlapping_30d": 2,
+  "remainder_days": 28
+ },
+ "hashes": {
+  "mark_2026-08-07": "c084991d328f41274b68fdf75a0721b0",
+  "mark_2026-08-08": "153972ba5aaf0652f72861a7a4754b86",
+  "mark_2026-08-09": "9f6196ea3d5b69e9107209239789f7c6",
+  "mark_2026-08-10": "d4e23f3c26776d0f1012e74a6e0c735e",
+  "mark_2026-08-11": "6bbaf4009bded929baf0962ddeb05b3a",
+  "mark_2026-08-12": "ae8c7902570f0000da71b26572248b35",
+  "mark_2026-08-13": "5843f5531521e4f86d7db5e2ef9348b7",
+  "mark_2026-08-14": "e61c38e0add5d0c126533c369a228934",
+  "mark_2026-08-15": "eb38b72d9445af8aa49adb616ceaee33",
+  "mark_2026-08-16": "3642e09b7724706b29afafc7e686dcfa",
+  "mark_2026-08-17": "5fd79efa0308894d2a10bcf622377eae",
+  "mark_2026-08-18": "e7df2912f386c42ad3ecec9f0ad7f6c6",
+  "mark_2026-08-19": "dfb7cca09a12325928b4ea2e649dd3b7",
+  "mark_2026-08-20": "99e1167c7bbf3a096eae7468bb33b0aa",
+  "mark_2026-08-21": "de1ee7258eb5dfb8ba1e26aa664e5a54",
+  "mark_2026-08-22": "d35750f85af395cf52e0759104181827",
+  "mark_2026-08-23": "89a47905ce5f1a686af38c6070d63b35",
+  "mark_2026-08-24": "2fe07edaa90be97e9adaeb2312ff4c33",
+  "mark_2026-08-25": "e33267df659dbf6194be375d38d87bae",
+  "mark_2026-08-26": "29b0b5022f5af97f33ab394c62383b63",
+  "mark_2026-08-27": "78081b816e623fb138de8b188a347184",
+  "mark_2026-08-28": "c7112c81bf053970a216595b2e96a0de",
+  "mark_2026-08-29": "c65a2232e264caa353929ac0f03bc5ca",
+  "mark_2026-08-30": "48ae88a3434b7bff9b2475b20c078c7e",
+  "mark_2026-08-31": "56b26804ab07ad25cf5bc6854f894a23",
+  "mark_2026-09-01": "b7876c2fe6d26965fecc3bdc3ff5b668",
+  "mark_2026-09-02": "3fedae655b58fa252edf44859b3d82f6",
+  "mark_2026-09-03": "dd3bb5ac8da5daec5d80c2a9be77bd95",
+  "mark_2026-09-04": "33a4d2105ec4e3383b81cc7e6b91ba73",
+  "mark_2026-09-05": "cfc85969e906de3795fe605a74a45d82",
+  "mark_2026-09-06": "64371037ce9691507da703e15557ef93",
+  "mark_2026-09-07": "6b8cbb29ad6dd19b211449398e4d13b2",
+  "mark_2026-09-08": "b3cd2ded2bc094d68c592ddf029a64a6",
+  "mark_2026-09-09": "2ebff85e79d6890d7ae59f296fed16ea",
+  "mark_2026-09-10": "1f747d64fcf2c69250c47098716a8515",
+  "mark_2026-09-11": "15b38ff4574578936456e7a114ea3227",
+  "mark_2026-09-12": "1d91fa8e9fac38c22e429802778e2d58",
+  "mark_2026-09-13": "b9d0629cdd2c63b6a4d94b2ef15b516a",
+  "mark_2026-09-14": "f3f48b627d7e5ea7cc171673d46538ae",
+  "mark_2026-09-15": "69902e565ecefe7665b749fecf7fb496",
+  "mark_2026-09-16": "fb39a9ac8d20ab46d86a0de9ab16e7e1",
+  "mark_2026-09-17": "1864b1ae29d2d3c1029784a5e6f6e92a",
+  "mark_2026-09-18": "5424ef9bf9060a656029b9b1e1b7f354",
+  "mark_2026-09-19": "c4a4f3e2174688381a95eab2d36d9005",
+  "mark_2026-09-20": "bff1ca65c2b04dacab4b737e096f5ab5",
+  "mark_2026-09-21": "3c170d382944f2a5e2399e8d918ac9f0",
+  "mark_2026-09-22": "ed0fbcf14c8602c2fc62b1f1500d0868",
+  "mark_2026-09-23": "700802cfd1d5cd042d68b5a826b4edd9",
+  "mark_2026-09-24": "95da3a658c4d5aa24e49224f51938426",
+  "mark_2026-09-25": "6e9c9a6accf964994379352d8c8407e2",
+  "mark_2026-09-26": "df328de8ada455a8cdbe914a50486acc",
+  "mark_2026-09-27": "90e774a4e0333b9e00e43732e480e190",
+  "mark_2026-09-28": "c87f0c9ca90c732c6881b2b3f53222af",
+  "mark_2026-09-29": "06c0baf94af0ecded9b8021a2355e8dc",
+  "mark_2026-09-30": "6a130cdcf320fc6431968a321d2de45c",
+  "mark_2026-10-01": "dce4817d00fc497e8df12c16e3160ad2",
+  "mark_2026-10-02": "89cdbf0de7db0844139756c77617d791",
+  "mark_2026-10-03": "ce9dc6298e77b474fde62e140ecaf693",
+  "mark_2026-10-04": "c835e16dff78e137240ff12dbfb64fcc",
+  "mark_2026-10-05": "fb87143d6a015bfb225cc784e6536b10",
+  "mark_2026-10-06": "4e58924f96de9f1e48e3a1b349e69da0",
+  "mark_2026-10-07": "bf93d9260ad3844d18a9eb4ff3cd3700",
+  "mark_2026-10-08": "18eeb3dcf12247addba5c71ef8d55b34",
+  "mark_2026-10-09": "15825cd9567c656dd848140e10ed2296",
+  "mark_2026-10-10": "2feef9683e625ca746320f5eedd032d1",
+  "mark_2026-10-11": "b5ba8ec738048e18690a72960bc84757",
+  "mark_2026-10-12": "94702a4ce22d9ccf751fb9cd7478989c",
+  "mark_2026-10-13": "7d9481c22a1d5f55416463a501736d81",
+  "mark_2026-10-14": "9bfb26372f622a3bd39dfd31c27e05cf",
+  "mark_2026-10-15": "4dcfd9bf5867190381d8ebdbb83841b4",
+  "mark_2026-10-16": "4c71e5c39dd60d3ee0be681b759742cd",
+  "mark_2026-10-17": "0eb16691f8e23e77c9ac1657b32ba1dc",
+  "mark_2026-10-18": "7daac1a896c9ec96ec8c4144fac1522c",
+  "mark_2026-10-19": "738d38ae70e4f5d820c390ca860bbe7e",
+  "mark_2026-10-20": "847f04eea4fa4c6ca9c8bcf9daf3a439",
+  "mark_2026-10-21": "9f9cb2f0c4c115bea6a9dd9f8347217b",
+  "mark_2026-10-22": "95443c0f2e8deeabeb38a5bae92840d4",
+  "mark_2026-10-23": "6321ec2821644473042bc276e29da659",
+  "mark_2026-10-24": "84995b1b84f06b9d213e43bda9c215bb",
+  "mark_2026-10-25": "d751e6ef824343a348567f12045e4d77",
+  "mark_2026-10-26": "e896a485862322c554f94d76b956ab0a",
+  "mark_2026-10-27": "e9123b3a3d58a799c44ea7bc039ea7e9",
+  "mark_2026-10-30": "78ac4203ea6fba7ce1232fe802a78e62",
+  "mark_2026-10-31": "1ec958613623ed48056e5181d9308776",
+  "mark_2026-11-01": "393a12fa168474e84a14a670fe77ac09",
+  "mark_2026-11-02": "00fa3b81d2b4e4744c238d4374279134",
+  "funding_2026-08": "470f4cd5a167afe7d91d7732806f9b9b",
+  "funding_2026-09": "666003a5ac1825ecb5d686ec3e9ddfa9",
+  "funding_2026-10": "eb2e47950069640a8c28b1020900789b"
+ },
+ "gaps": [],
+ "missing_days": {
+  "BTCUSDT": [
+   "2026-10-28",
+   "2026-10-29"
+  ],
+  "ETHUSDT": [
+   "2026-10-28",
+   "2026-10-29"
+  ],
+  "BNBUSDT": [
+   "2026-10-28",
+   "2026-10-29"
+  ],
+  "SOLUSDT": [
+   "2026-10-28",
+   "2026-10-29"
+  ],
+  "XRPUSDT": [
+   "2026-10-28",
+   "2026-10-29"
+  ]
+ },
+ "common_span_days": 88,
+ "timestamp_gaps": [
+  {
+   "after": "2026-10-27T23:00:00+00:00",
+   "before": "2026-10-30T00:00:00+00:00"
+  }
+ ]
+}
