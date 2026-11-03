@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T010511Z
+**TIMESTAMP:** 20261103T010819Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **PRIORITY:** Track A liquidation forward-validation (IRONFLOW) — BLOCKED_ON_DATA; maximize heavy work, shrink bottlenecks, force campaign progress.
 **CAMPAIGN:** LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i — BLOCKED_ON_DATA (HEAVY-WORK-REFRESH)
@@ -10,34 +10,37 @@
 1. `python scripts/monitor_ironflow_liquidations.py --verify`  (expect ok=True, data_through=2026-10, consecutive_absent>=3, baseline_drift=False, content_hash_baseline_complete=true)
 2. `python scripts/monitor_ironflow_liquidations.py --quick`    (forward probe; confirm head_requests>=8, get_requests==0 on blocked path; capture evidence)
 3. `python scripts/monitor_ironflow_liquidations.py --decision` (offline decision; expect new_data_path=false)
-4. Read `research_state/liquidation_block_snapshot_*` (latest), latest `liquidation_forward_validate_004_blocker_*.md`, `research_state/experiment_frontier.json`, `research_state/data_source_registry_alt_hunt.json`. Do NOT inspect label outcomes.
+4. `python scripts/monitor_ironflow_liquidations.py --scan`     (fast resume scan; writes ironflow_resume_scan_*.json, updates probe history/trends)
+5. Read `research_state/liquidation_block_snapshot_*` (latest), latest `liquidation_forward_validate_004_blocker_*.md`, `research_state/experiment_frontier.json`, `research_state/data_source_registry_alt_hunt.json`, `research_state/alt_source_scan_*.json`. Do NOT inspect label outcomes.
 
 ## DECISION TREE (HARD RULES)
-- **NEW DATA PATH (GO):** If `--quick`/`--decision` shows files for >=2026-11 OR probe_diff.changed_count>0 OR content replaced/new paths → **STOP** blocked plan, pre-register BEFORE inspecting outcomes per `research_state/research_protocol_fclr010.md` v1.0, run `python scripts/fclr010_harness.py`, produce full evaluation (calibration/LOO/concentration/block-bootstrap>=2000/Holm/gate), update frontier + cross-track log. NO tuning.
+- **NEW DATA PATH (GO):** If `--quick`/`--decision`/`--scan` shows files for >=2026-11 OR probe_diff.changed_count>0 OR tree_change.content_replaced non-empty OR forward_edge_added>=2026-11 → **STOP** blocked plan, pre-register BEFORE inspecting outcomes per `research_state/research_protocol_fclr010.md` v1.0, run `python scripts/fclr010_harness.py`, produce full evaluation (calibration/LOO/concentration/block-bootstrap>=2000/Holm/gate), update frontier + cross-track log. NO tuning.
 - **BLOCKED PATH (MANDATORY):** new_data_path=false → **EXECUTE A–F IN FULL**, ship >=1 NEW measurable artifact. Session with 0 new artifacts = failed.
 
-## VERIFIED BASELINE (20261103T000629Z / latest)
-- Ironflow tree 304, forward edge 2026-11..2027-02 all HEAD 404; head_requests=8, get_requests=0, get_requests_skipped=8, bytes_downloaded=0
-- `--verify` ok=True, data_through=2026-10, consecutive_absent=3, baseline_drift=False, content_hash_baseline_complete=true (36/36 LFS oids)
+## VERIFIED BASELINE (20261103T010819Z / latest)
+- Ironflow tree cached; forward edge 2026-11..2027-02 HEAD 404; head_requests=8, get_requests=0, get_requests_skipped=8, bytes_downloaded=0
+- `--verify` ok=True, data_through=2026-10, consecutive_absent=3, baseline_drift=False, content_hash_complete=true (36/36 LFS oids)
 - Tests: `python -m unittest discover -s tests -v` → 105/105 PASS
-- Alt hunt COMPLETE_NO-GO (FCLR-NEXT-002). Sole reopen path = ironflow >=2026-11 OR new admissible unauthenticated source passing rubric.
+- Alt hunt COMPLETE_NO-GO (FCLR-NEXT-002). Sole reopen paths = ironflow >=2026-11 OR new admissible unauthenticated source passing rubric.
 - Seals intact: FCLR-010 (PASSED), FCLR-008 (NOT_MET), cross-track firewall enforced.
+- New this session: `--scan` (fast resume scan), probe history compaction + trend tracking in ironflow_monitor_state.json, fresh blocker doc + updated frontier.
 
 ## BOTTLENECKS REMOVED (DO NOT REINTRODUCE)
 - HEAD-404 fast path + download accounting (no wasted GETs on blocked edge)
 - ETag tree caching, probe-diff, baseline drift, content-hash baseline (silent replacement detectable)
 - Offline `--decision`/`--simulate` (no HF dependency to confirm block)
-- Machine-readable state + snapshots
+- `--scan` for one-pass resume decision + artifact emission
+- Machine-readable state + snapshots + compact probe history
 
 ## MANDATORY HEAVY WORK (BLOCKED) — EXECUTE ALL
 ### A. AUTOMATION UPGRADE (>=1 concrete, measurable)
 Strengthen `scripts/monitor_ironflow_liquidations.py` OR `scripts/hunt_alternative_liquidation_sources.py`:
-- Add a **fast resume scan**: `--scan` that checks forward edge + tree in one pass, writes `research_state/ironflow_resume_scan_YYYYMMDDTHHMMSSZ.json` with `go: bool`, reasons, diff summary, timing.
-- Add **probe history compaction**: keep last N probe evidence (default 10) in `ironflow_monitor_state.json` with hashes (prevents unbounded growth), surface `consecutive_absent` trend.
-- Add **content-hash regression test coverage** if missing; ensure `verify_state` reports actionable reasons on failure.
+- Keep `--scan` fast/resumable; ensure `ironflow_resume_scan_*.json` emitted with go/reasons/diff/summary
+- Keep probe history compact (last 10) with hashes and `consecutive_absent_trend` surfaced
+- Ensure verify reports actionable reasons on failure
 
 ### B. TESTS (MUST STAY GREEN)
-Add >=1 focused test for new automation. Run `python -m unittest discover -s tests -v` until 105/105 PASS. Do not weaken assertions.
+Add >=1 focused test for new automation if behavior changed. Run `python -m unittest discover -s tests -v` until 105/105 PASS. Do not weaken assertions.
 
 ### C. BLOCKER EVIDENCE (FRESH)
 Write/update timestamped `research_state/liquidation_forward_validate_004_blocker_YYYYMMDDTHHMMSSZ.md` with: verified commands+outputs summary, probe table, tree status, download accounting, timeline of consecutive_absent, resume conditions, explicit "why blocked", evidence links.
@@ -60,14 +63,14 @@ Refresh timestamp + "NEXT AGENT INITIAL TASK", verified state, artifacts produce
 - Handoff updated with concrete next command sequence
 
 ## RESUME CONDITIONS (EXACT)
-1. Ironflow `data/events/YYYY-MM.parquet` OR `data/fills/YYYY-MM.parquet` returns 200 for YYYY-MM >= 2026-11 (detect via `--quick` tree/probe-diff or `--decision`)
-2. New admissible unauthenticated source passing rubric: >=5 symbols, >=3 non-overlapping 30-day blocks OR >=1 complete month, documented completeness/license, schema compatible with frozen FCLR-010
+1. Ironflow `data/events/YYYY-MM.parquet` OR `data/fills/YYYY-MM.parquet` returns 200 for YYYY-MM >= 2026-11 (detect via `--quick` tree/probe-diff or `--decision` or `--scan`)
+2. New admissible unauthenticated source passing rubric: >=5 symbols, >=3 non-overlapping 30-day blocks OR >=1 complete month, documented completeness/license, schema compatible with FCLR-010
 
 **ON TRIGGER:** Pre-register before outcomes; run `scripts/fclr010_harness.py`; full evaluation + gate. Update frontier/cross-track log.
 
 ## ARTIFACTS TO LEAVE BEHIND
-- New evidence JSON(s) from A/E (alt_source_scan_*.json, probe history in ironflow_monitor_state.json)
-- Fresh blocker doc (C): liquidation_forward_validate_004_blocker_20261103T010511Z.md
-- Fresh block snapshot: liquidation_block_snapshot_20261103T010511Z.json
-- Updated frontier (D)
-- Updated this handoff (F) - timestamp 20261103T010511Z
+- New evidence JSON(s): ironflow_resume_scan_20261103T010819Z.json, probe history updated in ironflow_monitor_state.json
+- Fresh blocker doc: liquidation_forward_validate_004_blocker_20261103T010800Z.md
+- Block snapshot: liquidation_block_snapshot_20261103T010511Z.json (refreshed via `--snapshot` if desired)
+- Updated frontier (rank 0.25) with concrete artifacts/triggers
+- Updated this handoff (timestamp 20261103T010819Z)
