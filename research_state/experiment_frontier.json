@@ -312,5 +312,29 @@
     "sealed_fclr010_untouched": true,
     "tests_pass": "27/27"
   },
-  "last_updated": "20261103T045659Z"
+  "last_updated": "20261103T045659Z",
+  "timestamp": "20261103T061338Z",
+  "campaign": "FUNDING_CONDITIONED_FCVR_HEAVY-006",
+  "priority": "BOTH_TRACKS_MANDATORY",
+  "tracks": {
+    "A_liquidation_ironflow": {
+      "status": "BLOCKED_ON_DATA",
+      "consec_absent": 3,
+      "data_through": "2026-10",
+      "resume_trigger_met": false,
+      "action": "monitor_only_deep_verify_alts"
+    },
+    "B_funding_conditioned_volatility": {
+      "status": "UNBLOCKED_HEAVY_EXECUTION",
+      "data_available": true,
+      "evaluation_run": true,
+      "action": "extend_features_leakage_resistant_hard_eval"
+    }
+  },
+  "next_actions": [
+    "Stream B: Extend features (funding percentiles/zscore trailing-only, RV ratios 6h/24h/7d, price-dislocation MA/EMA dev), build train-only normalized models, block bootstrap CIs, full ablations on frozen splits",
+    "Stream A: Keep ironflow monitoring + deep-probe REVIEW_REQUIRED alt sources with full rubric evidence",
+    "Add tests for new volatility modules, keep all green",
+    "Update AGENT_HANDOFF.md with crystal-clear successor task"
+  ]
 }
