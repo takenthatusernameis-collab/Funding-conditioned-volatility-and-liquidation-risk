@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T13:14:23Z
+Timestamp (UTC): 2026-11-03T13:15:24Z
 Git SHA (HEAD): 7436addd
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261103T121155Z | Priority: HEAVY-WORK (do not do status-only) | Mode: EXECUTION-ONLY-IF-DATA-ELSE-BLOCKER
+Handoff ID: FCLR-HANDOFF-20261103T131524Z | Priority: HEAVY-WORK (do not do status-only) | Mode: EXECUTION-ONLY-IF-DATA-ELSE-BLOCKER
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
