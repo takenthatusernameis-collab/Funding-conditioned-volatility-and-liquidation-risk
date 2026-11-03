@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE SOURCE OF TRUTH)
 
-**TIMESTAMP:** 20261103T071600Z
+**TIMESTAMP:** 20261103T090636Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**PRIORITY (by repo name):** LIQUIDATION REOPEN = MAINTAIN-ONLY (structural blocker CONFIRMED with evidence — all alt sources NO-GO, ironflow forward 404 through 2027-02, blocker_evidence_20261103T070800Z.md complete) | VOLATILITY H001 = STREAM_B_ROBUSTNESS-002 (NEXT CAMPAIGN — heavy robustness on frozen FCLR-002 splits)
+**PRIORITY (by repo name):** LIQUIDATION REOPEN = MAINTAIN-ONLY (structural blocker CONFIRMED with evidence — all alt sources NO-GO, ironflow forward 404 through 2027-02, blocker_evidence_20261103T070800Z.md complete) | VOLATILITY H001 = STREAM_B_ROBUSTNESS-002 (EXECUTED 20261103T090636Z) (NEXT CAMPAIGN — heavy robustness on frozen FCLR-002 splits)
 
 ## SESSION GOAL
-STREAM_B_HEAVY_FEATURE_EXTENSION-001 EXECUTED (20261103T071412Z): C2 vs B1 TEST +4.588% rel QLIKE, CI [-0.044418,-0.017603] excludes zero, 117/117 PASS. Track A <1 min monitor-only keep-alive performed (no resume trigger). Now launch STREAM_B_ROBUSTNESS-002 — heavy robustness campaign so future agents cannot avoid doing the work.
+STREAM_B_HEAVY_FEATURE_EXTENSION-001 EXECUTED (20261103T071412Z): C2 vs B1 TEST +4.588% rel QLIKE, CI [-0.044418,-0.017603] excludes zero, 117/117 PASS. Track A <1 min monitor-only keep-alive performed (no resume trigger). STREAM_B_ROBUSTNESS-002 EXECUTED 20261103T090636Z. — heavy robustness campaign so future agents cannot avoid doing the work.
 
 ## CRYSTAL-CLEAR INITIAL TASK (EXECUTE IMMEDIATELY, IN THIS ORDER)
 
@@ -15,7 +15,7 @@ python scripts/monitor_ironflow_liquidations.py --quick
 python scripts/monitor_ironflow_liquidations.py --verify
 python -m unittest discover -s tests -v | tail -2   # must stay 117+/117 PASS
 
-# PHASE 2: HEAVY — STREAM_B_ROBUSTNESS-002 (MANDATORY, this session)
+# PHASE 2: HEAVY — STREAM_B_ROBUSTNESS-002 (COMPLETED)
 # On frozen FCLR-002 splits with extended features (feature_engineering.py + block_bootstrap.py):
 # - Circular block bootstrap block sizes {12, 24, 48}
 # - Leave-one-symbol-out (5 symbols)
@@ -46,13 +46,13 @@ python -m unittest discover -s tests -v | tail -2   # must stay 117+/117 PASS
 4. Unverifiable GO eliminated — evidence required before any resume trigger.
 
 ## FOCUS CAMPAIGN
-**STREAM_B_ROBUSTNESS-002 (NEXT, heavy):** Robustness checks on extended Stream B features on frozen FCLR-002 splits: circular block bootstrap block sizes {12,24,48}, leave-one-symbol-out, train-only scaling variants, coefficient sensitivity (±50%). Compute C2 vs B1 QLIKE deltas/CI per test. Preserve leakage resistance. If results remain promising, consider pre-registration of a NEW confirmatory cell only if protocol criteria satisfied (>=5 symbols, >=3 blocks) without touching sealed panels. After robustness, next candidates: fresh pre-registered confirmatory cell on frozen FCLR-002 splits, or Track A reopen if ironflow 2026-11+ returns 200.
+**STREAM_B_ROBUSTNESS-002 (COMPLETED, heavy):** Robustness checks on extended Stream B features on frozen FCLR-002 splits: circular block bootstrap block sizes {12,24,48}, leave-one-symbol-out, train-only scaling variants, coefficient sensitivity (±50%). Compute C2 vs B1 QLIKE deltas/CI per test. Preserve leakage resistance. If results remain promising, consider pre-registration of a NEW confirmatory cell only if protocol criteria satisfied (>=5 symbols, >=3 blocks) without touching sealed panels. After robustness, next candidates: fresh pre-registered confirmatory cell on frozen FCLR-002 splits, or Track A reopen if ironflow 2026-11+ returns 200.
 
 ## MANDATORY DELIVERABLES THIS SESSION
 - [ ] `python -m unittest discover -s tests -v` passes (117+)
-- [ ] STREAM_B_ROBUSTNESS-002 executed: block sizes {12,24,48}, leave-one-symbol-out, coefficient sensitivity ±50%, train-only normalization, C2 vs B1 QLIKE deltas + CI per test
-- [ ] Track A keep-alive evidence (monitor --quick + --verify, < 1 min)
-- [ ] evaluation_summary_STREAM_B_ROBUSTNESS-002_<UTC>.md written
+- [x] STREAM_B_ROBUSTNESS-002 executed: block sizes {12,24,48}, leave-one-symbol-out, coefficient sensitivity ±50%, train-only normalization, C2 vs B1 QLIKE deltas + CI per test
+- [x] Track A keep-alive evidence (monitor --quick + --verify, < 1 min)
+- [x] evaluation_summary_STREAM_B_ROBUSTNESS-002_20261103T090636Z.md written
 - [ ] AGENT_HANDOFF.md and experiment_frontier.json updated with successor task
 
 ## CRITICAL RULES
@@ -64,4 +64,4 @@ python -m unittest discover -s tests -v | tail -2   # must stay 117+/117 PASS
 - Heavy work always when blocked.
 
 ## NEXT SESSION'S SINGLE HIGHEST-VALUE TASK
-**STREAM_B_ROBUSTNESS-002 (heavy):** Complete robustness campaign above. If ironflow 2026-11+ returns 200 OR rubric-GO source appears, pre-register before outcome inspection using frozen Track A harness. Keep tests green (117+). Do NOT re-run sealed FCLR-001..008.
+**NEXT (heavy if justified):** Consider pre-registering a new confirmatory cell on frozen FCLR-002 splits if protocol criteria satisfied (>=5 symbols, >=3 blocks). If ironflow 2026-11+ returns 200 OR rubric-GO source appears, pre-register before outcome inspection using frozen Track A harness. Keep tests green (117+). Do NOT re-run sealed FCLR-001..008. If ironflow 2026-11+ returns 200 OR rubric-GO source appears, pre-register before outcome inspection using frozen Track A harness. Keep tests green (117+). Do NOT re-run sealed FCLR-001..008.

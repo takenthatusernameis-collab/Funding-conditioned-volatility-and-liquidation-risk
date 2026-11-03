@@ -1,8 +1,8 @@
 {
   "registry_version": "1.0",
-  "generated": "20261103T071412Z",
+  "generated": "20261103T090810ZZ",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "Stream B feature extension executed 20261103T071412Z; extended features (fund pct/z, RV ratios, price disloc), train-only normalization, block-bootstrap CIs, ablations on frozen FCLR-002 splits. Tests status unchanged; see evaluation_summary_STREAM_B_FEATURE_EXTENSION_20261103T071412Z.md.",
+  "current_status": "STREAM_B_ROBUSTNESS-002 completed 20261103T090810Z: block sizes {12,24,48}, LOSO all symbols, scaling variants, coef \u00b150% all show C2 vs B1 QLIKE improvement with 95% CI excluding zero on frozen FCLR-002 splits. Tests 117/117 PASS. Track A monitor-only (no trigger).",
   "summary": "FCLR-008 COMPLETE gate NOT_MET (decisive unsealed powered panel 2026-01-01..2026-08-06; C2 vs B1 +4.30% rel QLIKE, CI [-0.029938, 0.000524] crosses zero). FCLR-009 COMPLETE gate NOT_MET (unsealed 2025 panel; C2 vs B1 -0.43%, CI crosses zero). All Binance confirmatory panels exhausted. TRACK A: STRUCTURAL BLOCK on Binance/Bybit/OKX/Deribit/HF-2026/Zenodo/GitHub/CryptoDataDownload routes SOLE REOPEN PATH SATISFIED by ironflow Hyperliquid census (admissible per rubric, registry v1.2). FCLR-010 pre-registered. TRACK B CLOSED_NEGATIVE (FCLR-H003-EXT-001). H002 PARTIAL/EXPLORATORY. Overlay INELIGIBLE. FCLR-LIQMICRO-002 COMPLETE: real Hyperliquid funding (9 coins x 8668 records, fundingRate.std()>0) wired into features.py; D1-D3 TESTED on 93,504 symbol-hour obs x 199 symbols; panel.funding_rate std 6.98e-06 > 0; D2 funding_abs now non-zero (was degenerate 0.0 in FCLR-LIQMICRO-001); D3 clustering_by_decile now populated (was empty {}); BH FDR 4 significant; NO H001 reversal, NO H001 re-test opened. Automation strengthened (monitor --verify state-consistency check, --force guard on full probe, scan path rebuilds resume_trigger block, --quick now persists machine-readable last_quick_check + last_quick_probe records; probe-to-probe compare_probes diff detects 404->200 flips across quick runs; probe_diff block in --quick evidence); tests 75->81 PASS (added TestCompareProbes x6). Blocker doc: research_state/liquidation_forward_validate_004_blocker_20261102T155600Z.md. Focus on heavy evidence/automation until new data appears.",
   "frontier": [
     {
@@ -332,9 +332,15 @@
     }
   },
   "next_actions": [
-    "Stream B: Extend features (funding percentiles/zscore trailing-only, RV ratios 6h/24h/7d, price-dislocation MA/EMA dev), build train-only normalized models, block bootstrap CIs, full ablations on frozen splits",
-    "Stream A: Keep ironflow monitoring + deep-probe REVIEW_REQUIRED alt sources with full rubric evidence",
-    "Add tests for new volatility modules, keep all green",
-    "Update AGENT_HANDOFF.md with crystal-clear successor task"
+    {
+      "priority": 1,
+      "task": "PRE-REGISTER_NEW_CONFIRMATORY_CELL_IF_JUSTIFIED",
+      "description": "If robustness warrants confirmatory testing on frozen FCLR-002 splits, pre-register new experiment ID (not FCLR-001..008), freeze protocol details before outcomes, use same leakage controls."
+    },
+    {
+      "priority": 2,
+      "task": "TRACK_A_MONITOR",
+      "description": "Keep monitor_ironflow_liquidations --quick/--verify <1 min; resume only if 2026-11+ returns 200 or rubric-GO unauthenticated source appears."
+    }
   ]
 }
