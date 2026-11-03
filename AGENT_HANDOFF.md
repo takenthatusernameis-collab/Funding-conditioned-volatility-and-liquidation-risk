@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T18:03:18Z
+Timestamp (UTC): 2026-11-03T18:04:19Z
 Git SHA (HEAD): 385a1073
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-016-WATCH-HARDEN
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting)
 CAMPAIGN: FCLR-NEXT-016-FUNDING-CONDITIONED-VOL-LIQ-RISK-TRIGGER-HARDENING
 REPO FOCUS: Funding-conditioned volatility and liquidation risk (Track A = Hyperliquid ironflow observed liquidation labels; Track C = funding-conditioned volatility on Binance perpetual panel; Track B = modeled boundary breaches)
-TIMESTAMP (UTC): 2026-11-03T18:03:18Z
+TIMESTAMP (UTC): 2026-11-03T18:04:19Z
 OBJECTIVE: All confirmatory campaigns STRUCTURALLY CLOSED NEGATIVE (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track A structurally blocked; Track B closed negative). Tests: 117/117 OK. FCLR-NEXT-012 forward validation BLOCKED pending admissible new data. DO NOT wait idly. Execute heavy work: (1) Harden continuous admissible-data trigger watch with concrete diffs (ironflow > 2026-10-31 at research_state/data_cache/ironflow_events/; new unsealed Binance panel beyond 2026-05-08..2026-08-06 for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT across klines/index/mark/premium/funding), (2) Stress-test prereg-first gating end-to-end (prove evaluate_forward() cannot run without preregistration), (3) Maintain immutable cross-track firewall and sealed holdout integrity, (4) Produce ONE verifiable heavy artifact per session (diffs + inventory + gating proof). Every session must increase readiness to run FCLR-012 the moment trigger appears.
 HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Embargo >=7d. Block-bootstrap >=2000 reps. No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation. Do not fabricate data.
 ADMISSIBLE TRIGGERS (forward FCLR-NEXT-012):
