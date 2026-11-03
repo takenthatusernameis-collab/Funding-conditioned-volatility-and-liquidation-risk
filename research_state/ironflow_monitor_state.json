@@ -653,7 +653,7 @@
   ],
   "tree_etag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
   "last_scan": {
-    "timestamp_utc": "2026-11-03T03:17:57.025092+00:00",
+    "timestamp_utc": "2026-11-03T03:59:57.146855+00:00",
     "go": false,
     "reasons": []
   },
@@ -706,7 +706,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-03T03:16:45.459734+00:00",
+    "timestamp_utc": "2026-11-03T03:58:49.246968+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -720,7 +720,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-03T03:16:45.459750+00:00",
+    "timestamp_utc": "2026-11-03T03:58:49.246984+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
@@ -859,7 +859,7 @@
     ]
   },
   "last_tree_change": {
-    "timestamp_utc": "2026-11-03T03:16:45.459827+00:00",
+    "timestamp_utc": "2026-11-03T03:58:49.247051+00:00",
     "changed": false,
     "added": [],
     "removed": [],
@@ -1344,29 +1344,6 @@
   },
   "probe_history": [
     {
-      "timestamp_utc": "2026-11-03T01:55:28.462165+00:00",
-      "type": "scan",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "go": false,
-      "reasons": [],
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "hash": "39f10ab5faa25db7"
-    },
-    {
-      "timestamp_utc": "2026-11-03T01:59:24.183089+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "00f274be9095456d"
-    },
-    {
       "timestamp_utc": "2026-11-03T01:59:28.403165+00:00",
       "type": "scan",
       "data_through": "2026-10",
@@ -1458,6 +1435,29 @@
       "get_requests": 0,
       "get_requests_skipped": 8,
       "hash": "218868f58581fb51"
+    },
+    {
+      "timestamp_utc": "2026-11-03T03:58:49.246997+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "6cec41dbf25be004"
+    },
+    {
+      "timestamp_utc": "2026-11-03T03:59:57.147256+00:00",
+      "type": "scan",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "go": false,
+      "reasons": [],
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "hash": "87989e64c3294ea8"
     }
   ],
   "consecutive_absent_trend": {

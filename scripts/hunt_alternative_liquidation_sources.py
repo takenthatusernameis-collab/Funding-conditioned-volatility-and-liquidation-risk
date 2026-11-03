@@ -46,7 +46,7 @@ def http_probe(url, max_retries=2, method="GET", timeout=30, body_preview_len=20
                 headers = dict(resp.headers.items())
                 body = resp.read()
                 preview = body[:body_preview_len].decode("latin-1", errors="replace")
-                return {
+                result = {
                     "url": url,
                     "method": method,
                     "status": status,
@@ -55,6 +55,21 @@ def http_probe(url, max_retries=2, method="GET", timeout=30, body_preview_len=20
                     "body_preview": preview,
                     "attempts": attempt + 1,
                 }
+                # content_kind guess (mirrors probe_directory_listing) so the
+                # merged evidence block can classify a response without a
+                # separate directory-style probe.
+                ct = (result["headers"].get("content-type") or "").lower()
+                if "parquet" in ct or preview.startswith("PAR1"):
+                    result["content_kind"] = "parquet"
+                elif "json" in ct:
+                    result["content_kind"] = "json"
+                elif "html" in ct:
+                    result["content_kind"] = "html"
+                elif status == 200:
+                    result["content_kind"] = "text"
+                else:
+                    result["content_kind"] = "error"
+                return result
         except HTTPError as e:
             try:
                 body = e.read()
@@ -120,14 +135,51 @@ def probe_directory_listing(url, max_retries=2):
 
 
 def assess_rubric(entry):
+    """Score a candidate against the strict Track A GO rubric.
+
+    Status-only scoring is insufficient: a 200 on a marketing page or a repo
+    README looks identical on the wire to a 200 on a real liquidation dataset.
+    This adds a content-signal pass so REVIEW_REQUIRED candidates can be
+    confirmed GO or closed with evidence instead of lingering forever.
+
+    GO requires ALL of:
+      1. at least one probe returned HTTP 200;
+      2. no 401/403 on any probe (auth wall);
+      3. the 200 response body actually looks like liquidation data (JSON with
+         liquidation/forceOrder/fills/event keywords, or a parquet blob), AND
+      4. the candidate explicitly advertises >=5 symbols and >=1 complete month
+         or >=3 non-overlapping 30-day blocks in its notes/preview.
+    """
     statuses = [p.get("status") for p in entry.get("probes", [])]
     any_200 = any(s == 200 for s in statuses if s is not None)
     any_403_or_401 = any(s in (401, 403) for s in statuses if s is not None)
-    all_absent_or_error = all(s in (404, None) for s in statuses if s is not None)
     if not any_200:
         return "NO-GO"
     if any_403_or_401:
         return "NO-GO"
+    # Content signal: scan body previews and content kinds for liquidation cues.
+    cues = ("liquidation", "forceorder", "force_order", "fill", "fills",
+            "event", "events", "parquet", "liquidations")
+    blob = " ".join(
+        (p.get("body_preview") or "").lower() + " " + str(p.get("content_kind") or "").lower()
+        for p in entry.get("probes", [])
+    )
+    looks_like_data = any(c in blob for c in cues)
+    # Coverage signal: the candidate notes must advertise the rubric minimums.
+    notes = (entry.get("notes") or "").lower()
+    coverage_ok = (">=5" in notes or "5 symbol" in notes or ">= 5" in notes) and (
+        "complete month" in notes or "30-day" in notes or "30 day" in notes
+    )
+    if looks_like_data and coverage_ok:
+        return "GO"
+    # Anything that returned 200 but failed the content/coverage gates stays in
+    # REVIEW_REQUIRED with the reason recorded, so it can be deep-verified or
+    # closed by a future session without re-probing.
+    entry["review_reason"] = {
+        "looks_like_data": looks_like_data,
+        "coverage_advertised": coverage_ok,
+        "statuses": statuses,
+    }
     return "REVIEW_REQUIRED"
 
 
@@ -152,6 +204,10 @@ def main():
         {"name": "paradigm_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
         {"name": "theblock_research", "urls": ["https://www.theblock.co/research"], "notes": "Research page probe"},
     ]
+    # ENHANCED_CANDIDATES were defined but never merged into the probe list,
+    # so every hunt run silently skipped them (dead code). Merge them here so
+    # each session probes the widened candidate set and records evidence.
+    candidates = candidates + ENHANCED_CANDIDATES
     results = {"hunt_id": f"alt_hunt_{ts}", "timestamp_utc": datetime.now(timezone.utc).isoformat(), "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i", "unauthenticated_only": True, "rubric": RUBRIC, "candidates": []}
     for c in candidates:
         entry = {"name": c["name"], "notes": c["notes"], "probes": []}
@@ -160,12 +216,33 @@ def main():
             # Ensure we capture evidence per candidate
             entry["probes"].append(p)
         entry["rubric_assessment"] = assess_rubric(entry)
+        # Detailed verdict: a REVIEW_REQUIRED candidate is only useful if the
+        # response actually looks like liquidation data. Record the body preview
+        # and content-kind so a future session can confirm or close it without
+        # re-probing the same URL.
+        entry["evidence"] = {
+            "statuses": [p.get("status") for p in entry["probes"]],
+            "body_previews": [p.get("body_preview", "")[:120] for p in entry["probes"]],
+            "content_kinds": [p.get("content_kind") for p in entry["probes"]],
+            "review_reason": entry.get("review_reason"),
+            "looks_like_liquidation_data": entry.get("review_reason", {}).get("looks_like_data", False),
+        }
         results["candidates"].append(entry)
-    go_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "REVIEW_REQUIRED"]
+    go_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "GO"]
+    review_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "REVIEW_REQUIRED"]
+    no_go_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "NO-GO"]
     results["summary"] = {
         "candidates_probed": len(results["candidates"]),
-        "go_or_review_sources": go_sources,
-        "conclusion": "No NEW admissible unauthenticated Track A source beyond ironflow/hyperliquid-liquidations found" if not go_sources else f"Review required for: {go_sources}",
+        "go_sources": go_sources,
+        "review_sources": review_sources,
+        "no_go_sources": no_go_sources,
+        "go_or_review_sources": go_sources + review_sources,
+        "conclusion": (
+            f"GO source(s) found: {go_sources}; pre-register FCLR-010 BEFORE outcome inspection and run scripts/fclr010_harness.py"
+            if go_sources else
+            f"No GO source. Review required for: {review_sources}" if review_sources else
+            "No NEW admissible unauthenticated Track A source beyond ironflow/hyperliquid-liquidations found"
+        ),
     }
     # Write main registry
     with open(OUT_PATH, "w") as f:
