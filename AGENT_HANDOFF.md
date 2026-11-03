@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T14:05:57Z
+Timestamp (UTC): 2026-11-03T14:10:21Z
 Git SHA (HEAD): a9794e7c
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-013-HEAVY
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no waiting)
 CAMPAIGN: FCLR-HEAVY-RESEARCH-013 (recomputation + adversarial audit + alternative Track A source discovery)
 REPO FOCUS: Funding-conditioned volatility and liquidation risk (Track A = Hyperliquid ironflow observed liquidation labels; Track V = funding-conditioned volatility on Binance perpetual panel)
-TIMESTAMP (UTC): 2026-11-03T14:05:57Z
+TIMESTAMP (UTC): 2026-11-03T14:10:21Z
 OBJECTIVE: Forward validation FCLR-NEXT-012 is BLOCKED on new admissible data (no ironflow parquet > 2026-10-31; no unsealed 2026 Binance panel beyond 2026-05-08..2026-08-06). Do NOT wait. Execute heavy work that requires NO new data: (1) independent recomputation of FCLR-010/FCLR-011 sealed results from stored hashes, (2) adversarial leakage audit on sealed panels, (3) alternative Track A liquidation-label source discovery without new ironflow data, (4) deepen funding-conditioning validation on frozen FCLR-002 splits. Every session must ship one verifiable artifact.
 HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Enforce embargoes (>=7d). Block-bootstrap (>=2000 reps). No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation.
 ADMISSIBLE TRIGGERS (forward FCLR-NEXT-012, monitor-only):
