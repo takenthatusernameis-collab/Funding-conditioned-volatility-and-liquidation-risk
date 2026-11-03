@@ -1,58 +1,68 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 2026-11-03T16:46:40Z
-Git SHA (HEAD): d757ef01
+Timestamp (UTC): 2026-11-03T16:47:13Z
+Git SHA (HEAD): 27219c7b
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261103T140557Z | Priority: HEAVY-WORK (do not do status-only) | Mode: BLOCKED-FORWARD-PIVOT-TO-HEAVY-RESEARCH
+Handoff ID: FCLR-HANDOFF-20261103T164713Z | Priority: HEAVY-WORK (do not do status-only) | Mode: STRUCTURAL-CLOSEOUT-DATA-TRIGGERED-WATCH
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
-TASK ID: FCLR-NEXT-013-HEAVY
-PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no waiting)
-CAMPAIGN: FCLR-HEAVY-RESEARCH-013 (recomputation + adversarial audit + alternative Track A source discovery)
-REPO FOCUS: Funding-conditioned volatility and liquidation risk (Track A = Hyperliquid ironflow observed liquidation labels; Track V = funding-conditioned volatility on Binance perpetual panel)
-TIMESTAMP (UTC): 2026-11-03T16:46:40Z
-OBJECTIVE: Forward validation FCLR-NEXT-012 is BLOCKED on new admissible data (no ironflow parquet > 2026-10-31; no unsealed 2026 Binance panel beyond 2026-05-08..2026-08-06). Do NOT wait. Execute heavy work that requires NO new data: (1) independent recomputation of FCLR-010/FCLR-011 sealed results from stored hashes, (2) adversarial leakage audit on sealed panels, (3) alternative Track A liquidation-label source discovery without new ironflow data, (4) deepen funding-conditioning validation on frozen FCLR-002 splits. Every session must ship one verifiable artifact.
-HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Enforce embargoes (>=7d). Block-bootstrap (>=2000 reps). No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation.
+TASK ID: FCLR-NEXT-014-WATCH
+PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no waiting without shipping)
+CAMPAIGN: FCLR-NEXT-014-DATA-TRIGGERED-REOPEN-WATCH (manifest LFS fix + trigger monitoring + structural integrity + pre-registration readiness)
+REPO FOCUS: Funding-conditioned volatility and liquidation risk (Track A = Hyperliquid ironflow observed liquidation labels; Track C = funding-conditioned volatility on Binance perpetual panel; Track B = modeled boundary breaches)
+TIMESTAMP (UTC): 2026-11-03T16:47:13Z
+OBJECTIVE: All confirmatory campaigns are STRUCTURALLY CLOSED NEGATIVE (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track A structurally blocked; Track B closed negative). FCLR-NEXT-012 forward validation BLOCKED on new admissible data (no ironflow parquet > 2026-10-31; no unsealed 2026 Binance panel beyond 2026-05-08..2026-08-06). FCLR-NEXT-013 heavy-work campaign (recompute FCLR-010/011, leakage audit, Track A source probe, regime-stratified QLIKE) is COMPLETE. Do NOT wait idly. Execute heavy work: (1) FIX the run_manifest.json Git LFS pointer bottleneck causing 4 TestFCLR010Harness errors, (2) run continuous admissible-data trigger watch (ironflow > 2026-10-31; new unsealed Binance panel), (3) preserve structural integrity (no duplicate handoffs, no stale artifacts, tests green), (4) pre-register readiness so forward experiment can launch immediately when a trigger fires. Every session must ship one verifiable artifact.
+HARD RULES: Pre-register BEFORE inspecting outcomes. Freeze splits/metrics/gates. Enforce embargoes (>=7d). Block-bootstrap (>=2000 reps). No tuning. Separate experiments. NEVER reuse sealed holdouts. IMMUTABLE cross-track firewall (no Binance<->Hyperliquid merge). Overlay HYPOTHETICAL_ONLY. Do not relax thresholds. No status-only files. Do not re-run sealed panels as forward validation. Do not fabricate data.
 ADMISSIBLE TRIGGERS (forward FCLR-NEXT-012, monitor-only):
-- Track A (FCLR-012-A): new Hyperliquid ironflow monthly parquet > 2026-10-31 at research_state/data_cache/ironflow_events/*.parquet
+- Track A (FCLR-012-A): new Hyperliquid ironflow monthly parquet > 2026-10-31 at research_state/data_cache/ironflow_events/*.parquet (latest: 2026-10.parquet; none newer)
 - Track V (FCLR-012-V): new unsealed 2026 Binance panel beyond 2026-05-08..2026-08-06 for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT (1h/funding/index/mark/premium)
 
 MANDATORY ACTION SEQUENCE:
-1) VERIFY: python -m pytest tests/test_fclr010_harness.py -v (must be green). Confirm ONLY AGENT_HANDOFF.md exists as durable handoff (no NEXT_AGENT_HANDOFF_*.md).
-2) RECOMPUTE: Independent recomputation of FCLR-010 sealed Brier result (C2 vs B1) and FCLR-011 sealed QLIKE result (C2 vs B1) from research_state/run_manifest.json hashes + cached inputs. Write results to research_state/recompute_fclr010_<UTC>.md and research_state/recompute_fclr011_<UTC>.md. Acceptance: metrics match sealed values within numerical tolerance.
-3) AUDIT: Run adversarial leakage audit on sealed FCLR-010/FCLR-011 panels (timestamp order, target non-overlap after purge/embargo, funding sign/timing, mark/index alignment, missing-not-zero). Write to research_state/leakage_audit_heavy_<UTC>.md.
-4) ALTERNATIVE TRACK A: Execute one new admissible unauthenticated liquidation-label source probe NOT already covered by existing source_probe_FCLR-NEXT-002_* files. Document exact URL, no-auth result, schema, coverage, hash. Write to research_state/source_probe_heavy_tracka_<UTC>.md. Do not merge tracks.
-5) DEEPEN: Regime-stratified QLIKE by funding quartile per symbol/time on frozen FCLR-002 splits (no new data, no outcome peek beyond frozen test). Write evaluation_summary_heavy_regime_<UTC>.md.
-6) IF FORWARD TRIGGER APPEARS: pre-register fresh FCLR-012 experiment via scripts/fclr010_harness.py pre_register_forward_experiment() BEFORE inspecting outcomes; then run evaluate_forward().
+1) VERIFY: python -m unittest discover -s tests -v (117 tests; 4 errors in TestFCLR010Harness due to run_manifest.json Git LFS pointer — MUST FIX). Confirm ONLY AGENT_HANDOFF.md exists as durable handoff (no NEXT_AGENT_HANDOFF_*.md).
+2) FIX BOTTLENECK: research_state/run_manifest.json is a 129-byte Git LFS pointer (oid sha256:ac27b18c...), not parseable JSON. Resolve so _load_frozen_splits() can read it. Acceptance: 0 errors in TestFCLR010Harness.
+3) TRIGGER WATCH: Run ironflow/resume scan probing 2026-11, 2026-12, 2027-01, 2027-02. Document probe_diff, baseline_drift, kaggle_mirror state. Write to research_state/trigger_watch_<UTC>.md. No new data = no forward run; record evidence and continue watch.
+4) STRUCTURAL INTEGRITY: Verify no duplicate/stale handoff files, no unreconciled registries, sealed holdouts untouched. Confirm research_state/structural_closure_verdict_heavy.md remains unchanged.
+5) PREREG READINESS: Confirm scripts/fclr010_harness.py pre_register_forward_experiment() and evaluate_forward() are intact and require prereg + frozen config. If a trigger appears in step 3, pre-register fresh FCLR-012 experiment BEFORE inspecting outcomes; then run evaluate_forward().
+6) IF NO TRIGGER: Ship one verifiable artifact (manifest fix + trigger watch evidence + integrity report). Do not mark session complete without an artifact.
 
-FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data / wait-for-data without shipping heavy work.
+FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data / wait-for-data without shipping heavy work / ignore manifest LFS bottleneck.
 ```
 
 ## 1) Bottlenecks removed (this session)
 - Duplicate NEXT_AGENT_HANDOFF_*.md: NONE (only AGENT_HANDOFF.md remains).
 - Stale handoffs: cleaned.
-- Harness hardened: pre_register_forward_experiment() locks prereg; evaluate_forward() requires prereg, frozen config only.
-- Preregs/consolidation/synthesis/manifest/frontier all in place.
-- Forward validation pivot: FCLR-NEXT-012 blocked on data; replaced with FCLR-NEXT-013 heavy-work campaign requiring no new data.
+- FCLR-NEXT-013 heavy-work campaign: ALL COMPLETE (recompute_fclr010_20261103T140815Z.md, recompute_fclr011_20261103T140832Z.md, leakage_audit_heavy_20261103T140910Z.md, source_probe_heavy_tracka_20261103T140935Z.md, evaluation_summary_heavy_regime_20261103T140953Z.md).
+- Structural closure verdict: COMPLETE (research_state/structural_closure_verdict_heavy.md, 2026-10-31).
 
-## 2) Verified state (tests/evidence)
-- tests/test_fclr010_harness.py: 4/4 PASS (2026-11-03T14:00:07Z)
-- FCLR-010: FORECAST_GATE_PASSED (C2 vs B1 Brier -0.003077, rel -2.21%, sealed)
-- FCLR-011: FORECAST_GATE_PASSED (C2 vs B1 QLIKE -0.016458, rel -4.94%, CI [-0.032546,-0.001418], sealed)
-- Track A latest: research_state/data_cache/ironflow_events/2026-10.parquet (no >2026-10-31)
-- Track V: sealed 2026-05-08..2026-08-06 only; root has 2024 zips only
-- Forward FCLR-NEXT-012: BLOCKED (concrete blocker at blockers_FCLR-012_20261103T140313Z.md)
+## 2) Bottlenecks still open (must be addressed)
+- run_manifest.json Git LFS pointer (129 bytes) → 4 errors in TestFCLR010Harness (test_frozen_config_loaded, test_gates, test_split_boundaries_frozen, test_bootstrap_reps). _load_frozen_splits() cannot parse LFS pointer as JSON. THIS IS THE PRIMARY BLOCKER.
+- pytest not installed; unittest is the available runner (117 tests, 4 errors all from manifest LFS issue).
 
-## 3) Key artifacts
-- research_state/track_a_fclr010_consolidated.md
-- research_state/funding_incremental_synthesis_20261103T115630Z.md
-- research_state/forward_campaign_fclr012_prereg.md
-- research_state/run_manifest.json, research_state/experiment_frontier.json (FCLR-012 present)
-- scripts/fclr010_harness.py (hardened)
+## 3) Verified state (tests/evidence)
+- tests (unittest): 117 ran, 4 errors (all TestFCLR010Harness manifest LFS), rest PASS (2026-11-03T16:49:16Z).
+- Structural closure: Track C CLOSED NEGATIVE (FCLR-003 C2 vs B1 +0.015205 QLIKE, CI crosses zero, -3.78%); Track A STRUCTURALLY BLOCKED NO-GO; Track B CLOSED NEGATIVE. H001 NOT_SUPPORTED. Risk overlay INELIGIBLE.
+- Track A latest: research_state/data_cache/ironflow_events/2026-10.parquet (no >2026-10-31).
+- Track V: sealed 2026-05-08..2026-08-06 only; root has 2024 zips only.
+- Forward FCLR-NEXT-012: BLOCKED (blockers_FCLR-012_20261103T140313Z.md).
+- Ironflow trigger watch (20261103T164916Z): no new data; data_through=2026-10; baseline_drift intact, regressions=0.
+
+## 4) Key artifacts
+- research_state/structural_closure_verdict_heavy.md (structural closeout)
+- research_state/final_confirmatory_verdict.md (H001 NOT_SUPPORTED)
+- research_state/gate_assessment.md (forecast gate NOT_MET)
+- research_state/recompute_fclr010_20261103T140815Z.md (heavy work complete)
+- research_state/recompute_fclr011_20261103T140832Z.md (heavy work complete)
+- research_state/leakage_audit_heavy_20261103T140910Z.md (heavy work complete)
+- research_state/source_probe_heavy_tracka_20261103T140935Z.md (heavy work complete)
+- research_state/evaluation_summary_heavy_regime_20261103T140953Z.md (heavy work complete)
+- research_state/run_manifest.json (Git LFS pointer — NEEDS FIX)
+- research_state/experiment_frontier.json (FCLR-012 present)
+- scripts/fclr010_harness.py (hardened; pre_register_forward_experiment + evaluate_forward)
 - research_state/blockers_FCLR-012_20261103T140313Z.md (concrete blocker with evidence)
+- research_state/sealed_holdout_integrity.md (preserved, no reuse)
 
-## 4) Frozen rules (immutable)
+## 5) Frozen rules (immutable)
 - Pre-register before inspecting outcomes
 - Freeze splits/metrics/gates
 - Embargo >=7d, block-bootstrap >=2000 reps
@@ -61,11 +71,11 @@ FAILURE = merge tracks / retune / re-run sealed / status-only / fabricate data /
 - Overlay HYPOTHETICAL_ONLY, no live/paper trading
 - Heavy work only - no status-only files
 
-## 5) Next focus campaign (heavy work, no new data required)
-Campaign: FCLR-HEAVY-RESEARCH-013 — ship one verifiable artifact per session.
-1) Independent recomputation of sealed FCLR-010/FCLR-011 results from stored hashes.
-2) Adversarial leakage audit on sealed panels.
-3) One alternative Track A liquidation-label source probe (no new ironflow data needed).
-4) Regime-stratified QLIKE by funding quartile on frozen FCLR-002 splits.
+## 6) Next focus campaign (heavy work, no new data required unless trigger fires)
+Campaign: FCLR-NEXT-014-DATA-TRIGGERED-REOPEN-WATCH — ship one verifiable artifact per session.
+1) Fix run_manifest.json Git LFS pointer bottleneck so TestFCLR010Harness passes (0 errors).
+2) Continuous admissible-data trigger watch (ironflow > 2026-10-31; new unsealed Binance panel).
+3) Structural integrity preservation (no duplicate/stale handoffs, sealed holdouts untouched).
+4) Pre-registration readiness for immediate forward experiment launch on trigger.
 
-**NEXT AGENT: FORWARD FCLR-NEXT-012 IS BLOCKED ON DATA — DO NOT WAIT. EXECUTE FCLR-NEXT-013 HEAVY WORK CAMPAIGN. SHIP ONE VERIFIABLE ARTIFACT. IF NEW ADMISSIBLE DATA APPEARS FOR FCLR-012, PRE-REGISTER BEFORE INSPECTING OUTCOMES. NO DEVIATION.**
+**NEXT AGENT: ALL CONFIRMATORY CAMPAIGNS STRUCTURALLY CLOSED NEGATIVE. FCLR-NEXT-012 FORWARD VALIDATION BLOCKED ON DATA — DO NOT WAIT. EXECUTE FCLR-NEXT-014 WATCH: FIX MANIFEST LFS BOTTLENECK, RUN TRIGGER WATCH, PRESERVE STRUCTURAL INTEGRITY, SHIP ONE VERIFIABLE ARTIFACT. IF NEW ADMISSIBLE DATA APPEARS, PRE-REGISTER BEFORE INSPECTING OUTCOMES. NO DEVIATION.**
