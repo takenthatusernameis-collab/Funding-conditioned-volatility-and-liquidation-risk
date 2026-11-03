@@ -460,24 +460,85 @@ def known_available(state):
     return available
 
 
-def tree_diff(current_paths, previous_paths):
-    """Compute added/removed parquet paths between two tree listings.
+def parse_tree_items(tree_data):
+    """Parse a HF tree listing into a dict of path -> content hash.
+
+    HF returns a list of items, each like:
+        {"type": "file", "path": "data/events/2026-10.parquet", "oid": "...",
+         "size": 10347879, "lfs": {"oid": "...", "size": 10347879, ...},
+         "xetHash": "..."}
+    The content hash is the LFS oid when present (the true blob hash), falling
+    back to the top-level oid, then xetHash. Directories have size 0 and are
+    skipped.
+    """
+    out = {}
+    items = tree_data if isinstance(tree_data, list) else tree_data.get("tree", [])
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        p = item.get("path") or item.get("name")
+        if not isinstance(p, str) or not p.endswith(".parquet"):
+            continue
+        lfs = item.get("lfs") or {}
+        oid = lfs.get("oid") or item.get("oid") or item.get("xetHash")
+        out[p] = {
+            "path": p,
+            "oid": oid,
+            "size": item.get("size") or lfs.get("size"),
+            "type": item.get("type"),
+        }
+    return out
+
+
+def tree_diff(current_paths, previous_paths, current_items=None, previous_items=None):
+    """Compute added/removed/changed parquet paths between two tree listings.
 
     Catches lagged uploads of OLDER months (not just the forward edge), which a
     forward-edge-only probe can miss: a dataset may backfill a missing month
-    weeks after its calendar date. Returns a dict with sorted added/removed lists
-    and a boolean indicating whether anything changed.
+    weeks after its calendar date. When content-hash dicts are supplied, also
+    detects SILENT FILE REPLACEMENT: a path present in both listings whose LFS
+    oid changed. Path-only diff cannot see this -- a file can be silently
+    overwritten with different bytes at the same path, which would corrupt the
+    frozen FCLR-010 baseline panel without any path-set change. Returns a dict
+    with sorted added/removed/changed lists and a boolean indicating whether
+    anything changed.
     """
     cur = set(current_paths or [])
     prev = set(previous_paths or [])
     added = sorted(cur - prev)
     removed = sorted(prev - cur)
+    changed = []
+    if current_items is not None and previous_items is not None:
+        for p in sorted(cur & prev):
+            ci = current_items.get(p)
+            pi = previous_items.get(p)
+            if ci is None or pi is None:
+                continue
+            if ci.get("oid") and pi.get("oid") and ci["oid"] != pi["oid"]:
+                changed.append({
+                    "path": p,
+                    "prev_oid": pi.get("oid"),
+                    "curr_oid": ci.get("oid"),
+                    "prev_size": pi.get("size"),
+                    "curr_size": ci.get("size"),
+                })
+            elif ci.get("size") is not None and pi.get("size") is not None and ci["size"] != pi["size"]:
+                changed.append({
+                    "path": p,
+                    "prev_oid": pi.get("oid"),
+                    "curr_oid": ci.get("oid"),
+                    "prev_size": pi.get("size"),
+                    "curr_size": ci.get("size"),
+                    "reason": "size_changed",
+                })
     return {
         "added": added,
         "removed": removed,
-        "changed": bool(added or removed),
+        "changed_paths": changed,
+        "changed": bool(added or removed or changed),
         "current_count": len(cur),
         "previous_count": len(prev),
+        "content_replaced": [c["path"] for c in changed],
     }
 
 
@@ -492,24 +553,25 @@ def scan_mode(state, max_retries=MAX_RETRIES):
     tree_etag = state.get("tree_etag")
     etag_ref = [tree_etag]
     prev_paths = state.get("tree_parquet_paths", [])
+    prev_items = state.get("tree_parquet_items", {})
     tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
     current_paths = []
+    current_items = {}
     tree_status = tree_res["status"]
     not_modified = bool(tree_res.get("not_modified"))
     if not_modified:
         current_paths = list(prev_paths)
+        current_items = dict(prev_items)
     elif tree_res["ok"] and tree_res["status"] == 200:
         try:
             tree_data = json.loads(tree_res["body"].decode("utf-8"))
-            for item in tree_data if isinstance(tree_data, list) else tree_data.get("tree", []):
-                p = item.get("path") if isinstance(item, dict) else str(item)
-                if isinstance(p, str) and p.endswith(".parquet"):
-                    current_paths.append(p)
-            current_paths = sorted(set(current_paths))
+            current_items = parse_tree_items(tree_data)
+            current_paths = sorted(current_items.keys())
         except Exception as e:
             current_paths = list(prev_paths)
+            current_items = dict(prev_items)
             tree_status = f"parse_error:{e}"
-    diff = tree_diff(current_paths, prev_paths)
+    diff = tree_diff(current_paths, prev_paths, current_items, prev_items)
     rc = check_resume_condition(state, max_retries=max_retries)
     return {
         "tree_status": tree_status,
@@ -517,6 +579,7 @@ def scan_mode(state, max_retries=MAX_RETRIES):
         "tree_etag": etag_ref[0],
         "current_parquet_count": len(current_paths),
         "current_parquet_paths": current_paths,
+        "current_parquet_items": current_items,
         "diff": diff,
         "resume_check": rc,
         "triggered": bool(rc["triggered"]) or diff["changed"],
@@ -714,7 +777,30 @@ def verify_state(state=None):
     if not state.get("tree_etag") and len((state.get("tree_parquet_paths") or [])) > 0:
         errors.append("tree_parquet_paths present without tree_etag")
 
-    return {"ok": len(errors) == 0, "checks": checks, "errors": errors, "data_through": data_through, "consecutive_absent": stored_absent}
+    # 6. CONTENT-HASH BASELINE: every known month must have a recorded LFS oid in
+    # tree_parquet_items. Without it the state-only check cannot rule out silent
+    # file replacement (same path, different bytes), which would corrupt the
+    # frozen FCLR-010 baseline panel. This is informational (not a hard failure)
+    # because the network-aware --quick path catches replacement live; it is
+    # surfaced so sessions know whether the offline baseline is content-verified.
+    items = state.get("tree_parquet_items", {}) or {}
+    known_paths = state.get("tree_parquet_paths", []) or []
+    known_months = scan_events_fills_only(known_paths)
+    missing_oids = []
+    for ym in known_months:
+        for kind in ("events", "fills"):
+            p = f"data/{kind}/{ym}.parquet"
+            if p not in items or not (items.get(p) or {}).get("oid"):
+                missing_oids.append({"month": ym, "kind": kind, "path": p})
+    checks.append({
+        "id": "content_hash_baseline_complete",
+        "description": "every known month has a recorded LFS content hash in tree_parquet_items",
+        "known_months": known_months,
+        "missing_oids": missing_oids,
+        "pass": not missing_oids,
+    })
+
+    return {"ok": len(errors) == 0, "checks": checks, "errors": errors, "data_through": data_through, "consecutive_absent": stored_absent, "content_hash_missing": missing_oids}
 
 
 def check_baseline_drift(state):
@@ -766,6 +852,24 @@ def check_baseline_drift(state):
     # cache corruption: a cached entry missing its etag/sha256.
     result["cache_incomplete"] = bool(result["missing_cache_entries"])
     result["drifted"] = bool(result["stale_cache_entries"])
+
+    # CONTENT-HASH BASELINE: the HF tree listing carries an LFS oid per file, a
+    # stable content hash. Every known month must have a recorded oid in
+    # tree_parquet_items; a missing oid means the content-hash baseline was
+    # never captured, so silent file replacement cannot be ruled out by the
+    # state-only check (the network-aware --quick path catches it live via
+    # last_tree_change.content_replaced). Flag this as content_hash_incomplete
+    # so sessions do not mistake a path-only baseline for a content-verified one.
+    items = state.get("tree_parquet_items", {}) or {}
+    missing_oids = []
+    for ym in known_months:
+        for kind in ("events", "fills"):
+            p = f"data/{kind}/{ym}.parquet"
+            if p not in items or not (items.get(p) or {}).get("oid"):
+                missing_oids.append({"month": ym, "kind": kind, "path": p})
+    result["content_hash_missing"] = missing_oids
+    result["content_hash_incomplete"] = bool(missing_oids)
+    result["content_hash_complete"] = not result["content_hash_incomplete"]
     return result
 
 
@@ -857,6 +961,7 @@ def check_tree_change(state, max_retries=MAX_RETRIES):
     """
     tree_etag = state.get("tree_etag")
     prev_paths = state.get("tree_parquet_paths", [])
+    prev_items = state.get("tree_parquet_items", {})
     etag_ref = [tree_etag]
     tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
     result = {
@@ -866,27 +971,52 @@ def check_tree_change(state, max_retries=MAX_RETRIES):
         "changed": False,
         "added": [],
         "removed": [],
+        "changed_paths": [],
+        "content_replaced": [],
         "current_count": len(prev_paths),
         "previous_count": len(prev_paths),
     }
     if tree_res.get("not_modified"):
-        result["current_parquet_paths"] = list(prev_paths)
+        if not prev_items and prev_paths:
+            # One-time bounded capture: the tree is unchanged (304) but we have
+            # never recorded per-file content hashes (LFS oids). Fetch the full
+            # listing once without If-None-Match so the offline content-hash
+            # baseline is complete and silent file replacement is detectable
+            # without re-listing on every session. Runs at most once because
+            # tree_parquet_items is persisted and reused thereafter.
+            _full = http_get(TREE_URL)
+            if _full["ok"] and _full["status"] == 200:
+                try:
+                    _full_data = json.loads(_full["body"].decode("utf-8"))
+                    _full_items = parse_tree_items(_full_data)
+                    current_items = _full_items
+                    current_paths = sorted(_full_items.keys())
+                except Exception:
+                    current_items = dict(prev_items)
+                    current_paths = list(prev_paths)
+            else:
+                current_items = dict(prev_items)
+                current_paths = list(prev_paths)
+        else:
+            current_paths = list(prev_paths)
+            current_items = dict(prev_items)
+        result["current_parquet_paths"] = current_paths
+        result["current_parquet_items"] = current_items
         return result
     if tree_res["ok"] and tree_res["status"] == 200:
         try:
             tree_data = json.loads(tree_res["body"].decode("utf-8"))
-            paths = []
-            for item in tree_data if isinstance(tree_data, list) else tree_data.get("tree", []):
-                p = item.get("path") if isinstance(item, dict) else str(item)
-                if isinstance(p, str) and p.endswith(".parquet"):
-                    paths.append(p)
-            current_paths = sorted(set(paths))
+            current_items = parse_tree_items(tree_data)
+            current_paths = sorted(current_items.keys())
             result["current_parquet_paths"] = current_paths
+            result["current_parquet_items"] = current_items
             result["current_count"] = len(current_paths)
-            diff = tree_diff(current_paths, prev_paths)
+            diff = tree_diff(current_paths, prev_paths, current_items, prev_items)
             result["changed"] = diff["changed"]
             result["added"] = diff["added"]
             result["removed"] = diff["removed"]
+            result["changed_paths"] = diff["changed_paths"]
+            result["content_replaced"] = diff["content_replaced"]
         except Exception as e:
             result["parse_error"] = str(e)
     return result
@@ -1193,9 +1323,20 @@ def main():
             "changed": bool(_tc.get("changed")),
             "added": _tc.get("added", []),
             "removed": _tc.get("removed", []),
+            "changed_paths": _tc.get("changed_paths", []),
+            "content_replaced": _tc.get("content_replaced", []),
             "tree_status": _tc.get("tree_status"),
             "tree_not_modified": bool(_tc.get("tree_not_modified")),
+            "current_parquet_items": _tc.get("current_parquet_items", {}),
+            "current_parquet_paths": _tc.get("current_parquet_paths", []),
         }
+        # Persist the parsed content-hash map (LFS oids per parquet path) whenever
+        # we have it -- including the one-time capture on a 304 tree response -- so
+        # the offline content-hash baseline is complete and silent file replacement
+        # (same path, different bytes) is detectable without re-listing the tree.
+        if _tc.get("current_parquet_items"):
+            state["tree_parquet_items"] = _tc["current_parquet_items"]
+            state["tree_parquet_paths"] = _tc.get("current_parquet_paths", state.get("tree_parquet_paths", []))
         with open(STATE_PATH, "w") as f:
             json.dump(state, f, indent=2)
         print(f"Wrote evidence: {evidence_path}")
@@ -1260,6 +1401,7 @@ def main():
         # Persist tree paths/etag for the next session's diff baseline.
         if scan_res["tree_not_modified"] is False and scan_res["tree_status"] == 200:
             state["tree_parquet_paths"] = current_paths
+            state["tree_parquet_items"] = scan_res.get("current_parquet_items", {})
         if scan_res.get("tree_etag"):
             state["tree_etag"] = scan_res["tree_etag"]
         state["last_scan"] = {
@@ -1390,8 +1532,6 @@ def main():
     print(f"Updated state: {STATE_PATH}")
 
     # Machine-readable resume_trigger block: the exact, checkable conditions
-    # under which the next session may proceed to forward validation. Written
-    # alongside the evidence so a future agent can parse it without reading prose.
     next_through = evidence["data_through"]
     fwd = forward_edge_months(next_through) if next_through else candidate_months()
     state["resume_trigger"] = {
@@ -1750,6 +1890,15 @@ def evaluate_resume_decision(state=None, rc=None, tree_change=None, new_files=No
         ]
         if forward_added:
             reasons.append(f"tree_change.changed=true forward_edge_added={len(forward_added)}")
+    # SILENT FILE REPLACEMENT: a path present in both listings whose content hash
+    # (LFS oid) changed. A path-only diff cannot see this, but it silently
+    # corrupts the frozen FCLR-010 baseline panel (different bytes at the same
+    # path = a different dataset than was pre-registered). Treat it as a NEW DATA
+    # PATH event so the session halts, re-freezes splits, and pre-registers fresh
+    # rather than running forward validation on a silently altered panel.
+    replaced = tree_change.get("content_replaced", []) or []
+    if replaced:
+        reasons.append(f"tree_content_replaced={len(replaced)} paths={replaced[:5]}")
     return {"new_data_path": bool(reasons), "reasons": reasons}
 
 

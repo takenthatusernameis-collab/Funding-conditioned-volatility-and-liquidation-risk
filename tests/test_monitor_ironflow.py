@@ -509,7 +509,11 @@ def _blocked_state():
         "data_through": "2026-10",
         "consecutive_absent": 3,
         "tree_etag": 'W/"abc"',
-        "tree_parquet_paths": ["data/events/2026-10.parquet"],
+        "tree_parquet_paths": ["data/events/2026-10.parquet", "data/fills/2026-10.parquet"],
+        "tree_parquet_items": {
+            "data/events/2026-10.parquet": {"path": "data/events/2026-10.parquet", "oid": "deadbeef", "size": 1000, "type": "file"},
+            "data/fills/2026-10.parquet": {"path": "data/fills/2026-10.parquet", "oid": "cafebabe", "size": 2000, "type": "file"},
+        },
         "resume_trigger": {
             "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
             "data_through": "2026-10",
