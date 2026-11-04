@@ -1,0 +1,123 @@
+{
+  "artifact_id": "trigger_harden_20261104T101946Z",
+  "timestamp_utc": "20261104T101946Z",
+  "git_sha_head": "789ae083afd09cdea6d8d8798bfddd9c0c42c5d0",
+  "branch": "main",
+  "handoff_id": "FCLR-HANDOFF-20261104T101707Z",
+  "campaign": "FCLR-NEXT-044-TRACK-C-FORWARD-REPLICATION-HEAVY",
+  "priority": "P0-HEAVY-WORK-FORCED",
+  "track": "C (volatility/stress forward replication)",
+  "schema_version": "1.0",
+
+  "inventory": {
+    "timestamp_utc": "20261104T101946Z",
+    "root_zips_count": 463,
+    "root_zips_by_year": {
+      "2024": 448
+    },
+    "root_zips_by_asset_month": {
+      "BNB/2024/01": 31, "BNB/2024/02": 29, "BNB/2024/03": 30,
+      "BTC/2024/01": 31, "BTC/2024/02": 29, "BTC/2024/03": 30,
+      "ETH/2024/01": 31, "ETH/2024/02": 29, "ETH/2024/03": 30,
+      "SOL/2024/01": 31, "SOL/2024/02": 29, "SOL/2024/03": 29,
+      "XRP/2024/01": 31, "XRP/2024/02": 29, "XRP/2024/03": 29
+    },
+    "placeholder_candidates": [
+      {"name": "BTCUSDT-1h-2024-01-01.zip", "size_bytes": 1006, "volume": 0.0, "reason": "zero-volume synthetic placeholder"},
+      {"name": "ETHUSDT-1h-2024-01-01.zip", "size_bytes": 981, "volume": 0.0, "reason": "zero-volume synthetic placeholder"}
+    ],
+    "placeholder_count": 2,
+    "ironflow_dir_exists": true,
+    "ironflow_latest": "2026-10.parquet",
+    "binance_root_contains_2025_2026": false,
+    "sealed_window": "2026-05-08..2026-08-06",
+    "track_c_priority": "FUNDING-CONDITIONED_VOLATILITY_FIRST",
+    "diff_vs_previous": {
+      "previous_snapshot": "research_state/watch/trigger_harden_20261104T093632Z.json",
+      "diffs": [
+        "test_count corrected FAILED_rc1 -> 117 green after git lfs pull materialized run_manifest.json",
+        "no new 2026 root zips beyond 2024 inventory; binance_root_contains_2025_2026 remains false"
+      ]
+    }
+  },
+
+  "tests": {
+    "count": 117,
+    "status": "GREEN",
+    "command": "python -m unittest discover -s tests -v",
+    "note": "4 harness errors pre-fix were caused by run_manifest.json being an unmaterialized Git LFS pointer; resolved via git lfs pull. All 117 now pass."
+  },
+
+  "prereg_enforcement": {
+    "fclr012v_prereg": "research_state/pre_registration_fclr012v_20261104T005000Z.md v1.0",
+    "frozen_before_outcomes": true,
+    "holdout_inspected_before_prereg": false,
+    "gate_status": "NOT_MET",
+    "proof": "tests/fclr010_harness enforces pre-reg path present before evaluate_forward inspects outcomes (BLOCKED if missing)"
+  },
+
+  "admissible_trigger_hunt": {
+    "hunt_target": "unauthenticated Binance public data beyond 2026-11-02 (1h klines, markPriceKlines, indexPriceKlines, premiumIndexKlines, fundingRate) for BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT",
+    "probes": [
+      {"method": "archive head probe", "paths": ["2026-11", "2026-12", "2027-01", "2027-02"], "result": "404 / absent", "auth": "none required", "admissible": false},
+      {"method": "live probe 2026-11-04T00:45Z", "result": "archive genuinely ends 2026-11-02; 2026-11-03/04 -> 404", "auth": "none required", "admissible": false}
+    ],
+    "auth_required_or_payment": "none accepted; all such sources rejected",
+    "manual_download_required": "rejected",
+    "finding": "NO admissible new Binance panel data beyond 2026-11-02; test window cannot be extended to >=3 non-overlapping 30d blocks from admissible data"
+  },
+
+  "gate_assessment_fclr012v": {
+    "primary_contrast": "C2_vs_B1",
+    "primary_metric": "QLIKE",
+    "mean_diff": -0.081929,
+    "relative_reduction": 0.1519,
+    "ci_95": [-0.360564, 0.059434],
+    "ci_spans_zero": true,
+    "instruments": 5,
+    "min_instruments_required": 5,
+    "test_blocks": 0,
+    "min_blocks_required": 3,
+    "test_window_days": 5,
+    "block_count_criterion": "NOT_MET (0x30d blocks)",
+    "forecast_gate": "NOT_MET",
+    "verdict": "INCONCLUSIVE / PILOT; do NOT promote to confirmatory; point estimate encouraging but not gate-passing"
+  },
+
+  "execution_decision": {
+    "admissible_extended_panel_found": false,
+    "action_taken": "document explicit admissible data gap; no forward replication executed (no outcomes without prereg + admissible panel)",
+    "data_fabricated": false,
+    "leakage": "none; 2026-10-28/29 mark days absent (404), not imputed"
+  },
+
+  "integrity_sweep": {
+    "sealed_experiments_untouched": ["FCLR-001","FCLR-002","FCLR-003","FCLR-006","FCLR-007","FCLR-008","FCLR-010","FCLR-011"],
+    "github_workflows_changed": false,
+    "command": "git diff --name-only .github/workflows (empty)",
+    "firewall_intact": true,
+    "firewall_rule": "Binance-only Track C; no Binance<->Hyperliquid merge; Track A (Hyperliquid/ironflow) isolated",
+    "hashes_match_manifests": true
+  },
+
+  "blocker": {
+    "type": "DATA_GAP",
+    "description": "FCLR-012-V forward replication blocked: test window 5 days (0 non-overlapping 30d blocks); CI spans zero; Binance archive probed as ending 2026-11-02 with no newer admissible unauthenticated panel",
+    "next_materially_different_free_route": "probe Binance public archive paths on a fresh cadence for any post-2026-11-02 klines/mark/index/premium/funding for required symbols; document each probe; if none, report INCONCLUSIVE with exact gap and next probe",
+    "next_runnable_commands": [
+      "python -m unittest discover -s tests -v",
+      "python scripts/track_c_inventory_harden.py",
+      "probe Binance public archive for dates > 2026-11-02 (required symbols/series), document method/result/auth/status",
+      "if new admissible panel found: create prereg BEFORE outcomes, run block bootstrap>=2000 seed12345, Holm across family",
+      "if none found: write gap analysis + next probe; report INCONCLUSIVE",
+      "git diff --name-only .github/workflows",
+      "write research_state/watch/trigger_harden_<UTC>.json; cleanup __pycache__/*.pyc/ironflow_probe_*"
+    ],
+    "if_trigger_fires_now": "any head probe returning 200 for a date > 2026-11-02 on an admissible unauthenticated path -> immediately create prereg (freeze splits/embargo/purge/metrics/gates) BEFORE inspecting outcomes, then run forward replication"
+  },
+
+  "cleanup_performed": [
+    "deleted scripts/__pycache__/*.pyc, tests/__pycache__/*.pyc, src/**/__pycache__/*.pyc",
+    "deleted research_state/ironflow_probe_20261104T101824Z.json, research_state/ironflow_probe_20261104T101845Z.json"
+  ]
+}
