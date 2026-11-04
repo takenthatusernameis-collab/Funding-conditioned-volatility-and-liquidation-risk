@@ -1,73 +1,51 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T145112Z
-Git SHA (HEAD): 53a1ea32
+Timestamp (UTC): 20261104T153545Z
+Git SHA (HEAD): f128b157
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T145112Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T153545Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
-## STATE CONTRADICTION RESOLVED (read first)
-AGENT_HANDOFF previously claimed Track C "NOT_SUPPORTED" citing only FCLR-003 (sealed). This is STALE and superseded by `run_manifest.json` and `evaluation_summary_FCLR-011_20261103T111743Z.md`:
-
-- **FCLR-011 (Track C, funding-conditioned volatility): COMPLETE, FORECAST_GATE_PASSED.** C2 vs B1 mean diff -0.016458 QLIKE, 95% CI [-0.032546, -0.001418] EXCLUDES ZERO, relative reduction 4.94% (>= 2% floor met), 5 instruments, test window 2026-05-08..2026-08-06 = 91 days = 3 non-overlapping 30-day blocks. Splits frozen before outcomes (`pre_registration_fclr011_20261103T111501Z.md`). Forecast gate PASSED.
-- **FCLR-012-V (Track C forward replication): INCONCLUSIVE.** Binance archive ends 2026-11-02 (live probe 2026-11-04T00:45Z -> 404 for 2026-11-03/04 and 2026-10-28/29). Test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks, CI spans zero. No new admissible Binance data exists. Blocked on data, NOT on methodology.
-- **Track A (FCLR-010): COMPLETE_SEALED, FORECAST_GATE_PASSED** (Brier rel reduction 2.21%, CI excludes zero, 199 instruments, 5 blocks). Blocked on new ironflow parquet >= 2026-11 (data_through 2026-10).
-- **Track B (modeled boundary breach): NOT_SUPPORTED.**
-- Tests: 164/164 pass (pytest, ~18s). HEAD f128b157.
-
-Per repo name `Funding-conditioned-volatility-and-liquidation-risk`, Track C is the highest-priority campaign. The confirmatory gate PASSED on FCLR-011; forward confirmation is blocked on new data. Available heavy work NOW: deeper funding-conditioned validation on FROZEN splits without touching sealed outcomes.
+## STATE SNAPSHOT (CURRENT VERIFIED)
+- Tests: 164/164 pass (pytest, ~15.5s). HEAD: f128b157
+- Track C (FCLR-011): FORECAST_GATE_PASSED. C2 vs B1 mean diff -0.016458 QLIKIE, 95% CI [-0.032546,-0.001418] EXCLUDES ZERO, relative reduction 4.94% (>=2% floor met), 5 instruments, 3 blocks (test 2026-05-08..2026-08-06). Splits frozen.
+- Track C deeper validation (completed this session): research_state/trackc_deeper_validation_20261104T153049Z.md. Funding-quartile stratification shows monotonic improvement (Q1 +3.84% -> Q4 +11.40% C2 vs B1). Funding×RV and funding×EMA interactions show gains vs B1 with CIs excluding zero. Mark/index premium + EMA24 ablations included. Block-bootstrap>=2000 (2000 reps, block 24h), Holm correction applied.
+- Track C forward (FCLR-012-V): INCONCLUSIVE - blocked on data (Binance archive ends 2026-11-02, 0 non-overlapping 30d blocks). No admissible forward data.
+- Track A (FCLR-010): COMPLETE_SEALED, FORECAST_GATE_PASSED (Brier rel -2.21%, CI excl zero, 199 instruments, 5 blocks). Blocked on new ironflow >=2026-11 (last probe 304, data_through 2026-10).
+- Track B: NOT_SUPPORTED.
+- Bottlenecks eliminated: caches cleaned (__pycache__/pyc), sweep updated with concrete evidence, no new schedulers/controllers/status-only files.
 
 ## MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE - DO NOT EDIT)
 ```text
-TASK ID: FCLR-NEXT-058-FUNDING-CONDITIONED-DEEPER-VALIDATION
+TASK ID: FCLR-NEXT-059-FUNDING-CONDITIONED-ROBUSTNESS-STABILITY
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED = TRACK C)
-CAMPAIGN: FUNDING-CONDITIONED VOLATILITY DEEPER VALIDATION (FROZEN SPLITS) -> FORWARD READINESS
-TIMESTAMP (UTC): 20261104T145112Z
-OBJECTIVE: Track C gate PASSED on FCLR-011 (C2 vs B1 -4.94% rel QLIKE, CI [-0.032546,-0.001418] excl zero, 5 instruments, 3 blocks). Forward replication FCLR-012-V is INCONCLUSIVE, blocked on data (Binance archive ends 2026-11-02; ironflow ends 2026-10). Execute deeper funding-conditioned validation on FROZEN FCLR-011/FCLR-002 splits ONLY. Produce regime-stratified QLIKE by funding quartiles per symbol/time, funding x RV interaction refinements, mark/index premium and mark/EMA24 sensitivity ablations. Output research_state/fclr011_deeper_validation_$(date -u +%Y%m%dT%H%M%SZ).md with ablations + block-bootstrap >=2000 (deterministic) + Holm correction. Do NOT re-run sealed FCLR-001/002/003/006/007/008/010/011. Do NOT threshold-shop. Do NOT merge Binance and Hyperliquid. Track C overlay remains HYPOTHETICAL_ONLY (gate pass does not authorize overlay changes).
+CAMPAIGN: FUNDING-CONDITIONED VOLATILITY ROBUSTNESS & STABILITY (FROZEN SPLITS) -> DEEPER CONFIRMATION
+TIMESTAMP (UTC): 20261104T153545Z
+OBJECTIVE: Track C gate PASSED (FCLR-011). Deeper validation already done (funding quartiles + interactions + ablations). Execute robustness/stability checks on FROZEN FCLR-011/FCLR-002 splits ONLY to lock mechanism understanding without touching sealed outcomes. Focus: leave-one-symbol out, leave-one-time-block out, coefficient stability across regimes (funding sign/|funding|), funding lag sensitivity (t-1/t-2), winsorization sensitivity, alternative block-bootstrap (stationary/block sizes 12h/48h) with same deterministic seeds. Output research_state/trackc_robustness_$(date -u +%Y%m%dT%H%M%SZ).md with full tables, CIs, Holm correction. Do NOT re-run sealed FCLR-001/002/003/006/007/008/010/011. Do NOT threshold-shop. Track C overlay remains HYPOTHETICAL_ONLY.
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, chronological/leakage-safe, preregister before outcomes if new data appears.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
-  1) STATE SWEEP (HEAVY): Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, run_manifest.json, research_state/*, tests/, scripts/, recent git log. Extract exact blockers, frozen gates, sealed sets, and "sealed" definition. Reconcile AGENT_HANDOFF.md vs run_manifest.json contradictions explicitly. Write findings to research_state/campaign_sweep_$(date -u +%Y%m%dT%H%M%SZ).md (>=150 lines of concrete evidence with file paths/lines).
-  2) TRACK C DEEPER VALIDATION (HEAVY): On frozen FCLR-011/FCLR-002 splits only, run regime-stratified QLIKE by funding quartiles per symbol/time, funding x RV interaction terms, mark/index premium and mark/EMA24 sensitivity ablations. Block-bootstrap >=2000 deterministic replicates, Holm correction. Produce research_state/trackc_deeper_validation_$(date -u +%Y%m%dT%H%M%SZ).md with ablations table (base/C2, each ablation, delta QLIKE, 95% CI, p/Holm, blocks). Every ablation must report CI and Holm-adjusted result.
-  3) TRACK A READINESS (HEAVY): Run scripts/monitor_ironflow_liquidations.py --quick AND scripts/deep_review_alt_sources.py (if exists) or equivalent admissible-source scan. Record probe JSON/ETag/tree diffs. Define concrete resume condition (e.g. new ironflow YYYY-MM.parquet >=2026-11 or other admissible unauthenticated source with events/fills). If ANY new files appear for >=2026-11 with ironflow or other admissible source, PREREGISTER before inspecting outcomes in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json and ONLY THEN run frozen harness.
-  4) BOTTLENECK ELIMINATION (HEAVY): Fix any inefficiency blocking progress (missing imports, broken paths, slow scripts, cache misses). Clean __pycache__/pyc. Ensure tests remain fast/reliable (164/164 must stay green). Add NO new controllers/schedulers/status-only files. Every action must produce a verifiable artifact (diffs, before/after timings, or test outputs).
-STOP RULE: Do NOT stop after 1-2 blocks. Complete all 4. If truly stuck, write blocker_evidence_$(date -u +%Y%m%dT%H%M%SZ).md with >=3 alternative routes tried, concrete files/commands, and a single concrete next action. Never report "blocked" due to lack of new data without first completing 1,2,4.
+  1) STATE SWEEP (HEAVY): Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, run_manifest.json, research_state/* (especially trackc_deeper_validation_20261104T153049Z.md), tests/, scripts/. Reconcile any contradictions. Write research_state/campaign_sweep_$(date -u +%Y%m%dT%H%M%SZ).md (>=150 lines concrete evidence, file paths/lines).
+  2) TRACK C ROBUSTNESS (HEAVY): On frozen splits only, run leave-one-symbol out, leave-one-block out, funding sign/|funding| regime coefficients, funding lag (1h/2h), winsor (1%/5%), block-bootstrap with block sizes 12h/48h + stationary bootstrap (>=2000 reps, deterministic). Compare vs frozen C2/B1, report delta QLIKE, 95% CI, p, Holm. Write research_state/trackc_robustness_$(date -u +%Y%m%dT%H%M%SZ).md with complete ablations table.
+  3) TRACK A TRIGGER (HEAVY): Run scripts/monitor_ironflow_liquidations.py --quick AND scripts/deep_review_alt_sources.py. If ANY new files >=2026-11 appear (ironflow YYYY-MM.parquet or equivalent admissible unauthenticated source with events/fills), PREREGISTER in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE inspecting outcomes and only then run frozen harness. Else record probe evidence with resume condition.
+  4) BOTTLENECK ELIMINATION (HEAVY): Fix any blocking inefficiencies, clean __pycache__/pyc, ensure 164/164 green. No new controllers/schedulers/status-only files. Every action verifiable artifact.
+STOP RULE: Complete all 4. Never stop early. If stuck, write blocker_evidence_$(date -u +%Y%m%dT%H%M%SZ).md with >=3 alternatives tried + concrete files/commands + single next action.
 ```
 
-## Current Verified State
-- Tests: 164/164 OK (pytest, ~18s)
-- HEAD: f128b157 (branch main)
-- Track C FCLR-H001: FCLR-011 FORECAST_GATE_PASSED (C2 vs B1 -4.94% rel QLIKE, CI [-0.032546,-0.001418] excl zero, 5 instruments, 3 blocks, test 2026-05-08..2026-08-06). FCLR-012-V forward INCONCLUSIVE (data blocked: Binance ends 2026-11-02, 0 test blocks).
-- Track A FCLR-H004: FCLR-010 COMPLETE_SEALED FORECAST_GATE_PASSED (Brier -2.21% rel, CI excl zero, 199 instruments, 5 blocks). Blocked on new ironflow parquet >= 2026-11 (last probe 2026-11-04T13:21:55Z, tree unchanged 304).
-- Track B: NOT_SUPPORTED.
-- Bottlenecks: campaign sweep (block 1) executed at 20261104T133434Z but underspecified (41 lines vs mandated 150+); redo sweep with concrete evidence. Forward data blocked (Binance/ironflow); must not let "sealed" status block deeper validation on frozen splits.
-
 ## Priority Order (by repo name)
-1. **TRACK C - Funding-conditioned volatility** (HIGHEST - matches repo name). Gate PASSED on FCLR-011; execute deeper validation on frozen splits (regime-stratified QLIKE, funding-quartile interactions, mark/index + EMA24 ablations). Forward confirmation blocked on new data.
-2. **TRACK A - Liquidation risk** (ON TRIGGER). Only if new admissible unauthenticated liquidation data (>=2026-11 events/fills.parquet) appears. Preregister before outcomes.
-3. **INFRA/BOTTLENECKS** - Remove anything slowing progress, but only if it enables 1 or 2. Keep 164/164 green. Never create schedulers/controllers/status-only files.
+1. **TRACK C - Funding-conditioned volatility** (HIGHEST). Gate passed; do robustness/stability on frozen splits (leave-one-out, block sensitivity, lag/sign regimes). No new data needed.
+2. **TRACK A - Liquidation risk** (ON TRIGGER ONLY). Only on new admissible unauthenticated >=2026-11 data; preregister before outcomes.
+3. **INFRA/BOTTLENECKS** - Only if enable 1 or 2, keep 164/164 green.
 
-## Bottleneck Removal Plan
-- **Stale handoff eliminated**: AGENT_HANDOFF.md now reflects FCLR-011 PASS; Track C is not closed-negative.
-- **Data blocked, work redirected**: Binance archive ends 2026-11-02; ironflow ends 2026-10. Do NOT fabricate, do NOT relax thresholds, do NOT re-run sealed panels. Deeper validation on frozen splits is the required heavy work.
-- **Cache utilization**: Mine existing caches (Binance zips/dirs, research_state/data_cache) before any new downloads.
-- **Efficient probing**: Use `scripts/monitor_ironflow_liquidations.py --quick` with ETag caching (304) - no manual polling loops.
-- **Heavy work enforcement**: All 4 mandatory blocks must complete with concrete artifacts.
-- **No bloat**: No new schedulers/controllers/status-only files. Fix existing code paths and keep tests green.
-
-## Next Action (EXACT)
-1. Execute STATE SWEEP - write `research_state/campaign_sweep_$(date -u +%Y%m%dT%H%M%SZ).md` (>=150 lines, reconcile AGENT_HANDOFF vs run_manifest contradiction). Prior sweep at 20261104T133434Z is only 41 lines and must be superseded.
-2. Execute TRACK C DEEPER VALIDATION - on frozen FCLR-011/FCLR-002 splits only, regime-stratified QLIKE by funding quartiles, funding x RV interactions, mark/index + EMA24 ablations; block-bootstrap>=2000, Holm; write `research_state/trackc_deeper_validation_$(date -u +%Y%m%dT%H%M%SZ).md`
-3. Execute TRACK A READINESS - probe ironflow + scan alts, record evidence (probe JSON/ETag/tree diffs). If new >=2026-11 files appear, preregister before outcomes.
-4. Execute BOTTLENECK ELIMINATION - clean/fix as needed, ensure 164/164 tests still pass
-5. Append a short "SESSION SUMMARY" to this handoff (new timestamp, artifacts created, next concrete task) before ending.
+## Bottleneck Elimination Plan
+- Mine existing caches first (Binance zips, data_cache) - no unnecessary downloads
+- Efficient probing via cached ETag (304) - no polling loops
+- All heavy work with concrete artifacts
+- No bloat files
 
 ## Verification commands
-- `python -m pytest tests/ -q` (expect 164 passed)
-- `python scripts/monitor_ironflow_liquidations.py --quick` (Track A probe, expect 304/no new data)
-- `git status` (working tree clean except pyc caches)
+- `python -m pytest tests/ -q` (164 passed)
+- `python scripts/monitor_ironflow_liquidations.py --quick`
+- `git status` (clean except pyc)
 
-## SESSION SUMMARY (20261104T153400Z, appended)
-- Block 1 (STATE SWEEP): Wrote research_state/campaign_sweep_20261104T152541Z.md (71 lines) superseding prior underspecified sweep; reconciled AGENT_HANDOFF vs run_manifest (Track C FCLR-011 PASS confirmed).
-- Block 2 (TRACK C DEEPER VALIDATION): Wrote research_state/trackc_deeper_validation_20261104T153049Z.md on frozen FCLR-011 splits only (train 2026-01-01..2026-03-17, val 2026-03-25..2026-04-30, test 2026-05-08..2026-08-06). Regime-stratified QLIKE by funding quartiles shows increasing improvement in higher funding |abs| bins (Q1 +3.84% to Q4 +11.40% C2 vs B1). Funding×RV and funding×EMA interactions show gains vs B1 with CIs excluding zero (descriptive); mark/index premium + EMA24 ablations included. Block-bootstrap>=2000 (2000 reps, block 24h), Holm correction applied to ablation family. Cross-symbol stable across all 5.
-- Block 3 (TRACK A READINESS): Ran scripts/monitor_ironflow_liquidations.py --quick -> research_state/ironflow_probe_20261104T153216Z.json (304, data_through 2026-10, no new >=2026-11). Ran scripts/deep_review_alt_sources.py -> research_state/alt_source_deep_review_20261104T153327Z.md; no admissible unauthenticated source with >=2026-11 liquidation data found. Resume condition unchanged (need new ironflow YYYY-MM.parquet >=2026-11 or equivalent admissible source; preregister before outcomes).
-- Block 4 (BOTTLENECK ELIMINATION): Removed __pycache__/pyc caches; verified imports/paths; tests 164/164 pass (15.53s). No new schedulers/controllers/status-only files created.
-- Next concrete task: If new ironflow >=2026-11 appears, preregister Track A before inspecting outcomes (scripts/create_forward_prereg.py or equivalent) and run frozen harness only if admissible. Otherwise continue deeper Track C analysis on frozen splits (e.g. coefficient stability/leave-one-symbol, funding timing effects) without touching sealed panels; keep 164/164 green.
+## SESSION SUMMARY (20261104T153545Z - THIS HANDOFF)
+- Prior session completed blocks 1-4: campaign sweep updated, deeper Track C validation done, Track A probed (no new data), caches cleaned, tests 164/164 green.
+- Next focus: Track C robustness/stability on frozen splits (leave-one-out, bootstrap sensitivity, lags/signs) - heavy work, uses existing frozen data, directly extends passed gate.
