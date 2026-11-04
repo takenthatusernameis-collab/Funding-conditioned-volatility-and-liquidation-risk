@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T015238Z
+Timestamp (UTC): 20261104T015438Z
 Git SHA (HEAD): 6b8751555fa94cbb84a3f1833a4a8598b817a8ba
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T015238Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-EXECUTION
+Handoff ID: FCLR-HANDOFF-20261104T015438Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-EXECUTION
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-024-TRACK-C-FUNDING-CONDITIONED-VOL-HARDENING
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting, no deferring)
 CAMPAIGN: FCLR-NEXT-024-FUNDING-CONDITIONED-VOL-CONTINUOUS-EXECUTION
 REPO-NAME PRIORITY ORDER: Track C (funding-conditioned volatility forecasting) >> Track B (modeled boundary breaches) >> Track A (observed liquidation labels)
-TIMESTAMP (UTC): 20261104T015238Z
+TIMESTAMP (UTC): 20261104T015438Z
 OBJECTIVE: Repo name is directive - focus on FUNDING-CONDITIONED VOLATILITY. Build hard execution path for Track C (incremental value of funding + price features over RV-only baseline). Forward validation FCLR-NEXT-012 blocked pending admissible triggers (ironflow > 2026-10-31 OR unsealed 2026 Binance panel beyond 2026-11-02; all current 2026 zips are zero-volume synthetic placeholders -> NOT admissible). Do NOT wait passively - harden everything so the moment trigger fires, we run pre-registered frozen config with zero latency.
 HEAVY WORK MANDATE (NON-NEGOTIABLE, ALL FIVE EACH SESSION):
 (1) FULL INVENTORY HARDENING: enumerate root zips (count by asset/month/year), research_state/data_cache/ironflow_events/* (>2026-10-31 explicitly checked), all Binance data_vision artifacts. Diff vs previous trigger_harden snapshot (trigger_harden_20261104T010253Z.json).
@@ -38,7 +38,7 @@ MANDATORY ACTION SEQUENCE (execute in order):
 ```
 
 ## 1) Bottlenecks removed (this session)
-- Handoff refreshed with repo-name-prioritized Track C focus (timestamp 20261104T015238Z)
+- Handoff refreshed with repo-name-prioritized Track C focus (timestamp 20261104T015438Z)
 - Clear heavy-work mandate enforced (all 5 required each session)
 - Fresh trigger harden artifacts shipped: research_state/watch/trigger_harden_20261104T015237Z.json (inventory) and trigger_harden_20261104T015238Z.json (successor with gating proof + track_c readiness + integrity hashes + next_action); diffs vs trigger_harden_20261104T010253Z.json show no change (ironflow still ends 2026-10, no > 2026-10-31; root zips all 2024, 463)
 - Prereg gating proof re-captured: evaluate_forward() BLOCKED without prereg with explicit reason "Pre-registration path required..." (returncode 0, status BLOCKED)
@@ -51,11 +51,11 @@ MANDATORY ACTION SEQUENCE (execute in order):
 - Forward validation FCLR-NEXT-012: BLOCKED on admissible data
   - Ironflow: latest 2026-10.parquet in research_state/data_cache/ironflow_events/ (no files > 2026-10-31); trigger_ironflow_gt_20261031=false
   - Binance: root zips 2024-01..2024-03 only; live probe 2026-11-04T00:45Z -> 404 for 2026-11-03/04 and 2026-10-28/29; archive genuinely ends 2026-11-02
-  - All current 2026 data_cache zips are zero-volume synthetic placeholders -> NOT admissible -> trigger NOT fired as of 20261104T015238Z
+  - All current 2026 data_cache zips are zero-volume synthetic placeholders -> NOT admissible -> trigger NOT fired as of 20261104T015438Z
   - Remedy: maintain trigger detection + Track C pre-registration readiness continuously so we execute pre-registered frozen config with zero latency on trigger arrival; do not idle waiting.
 
 ## 3) Verified state (this session)
-- Tests: 117/117 OK (verified 20261104T015238Z)
+- Tests: 117/117 OK (verified 20261104T015438Z)
 - Git HEAD: 6b8751555 (main)
 - Ironflow latest: 2026-10.parquet (coverage up to 2026-10-31 per registry); trigger_ironflow_gt_20261031=false
 - Root data zips: 463 root zips, all 2024 (01-01..03-30); no Binance data beyond 2026-11-02
