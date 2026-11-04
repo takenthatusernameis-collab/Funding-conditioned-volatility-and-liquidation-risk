@@ -1,0 +1,44 @@
+{
+  "handoff_id": "FCLR-HANDOFF-20261104T000101Z",
+  "artifact_id": "trigger_harden_20261104T000233Z",
+  "ts_utc": "20261104T000233Z",
+  "priority": "P0-HEAVY-WORK-ENFORCED",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "campaign": "FCLR-NEXT-022-TRACK-C-FUNDING-VOL-TRIGGER-HARDENING-LOCKDOWN",
+  "tests": {"ran": 117, "ok": true},
+  "inventory": {
+    "root_zips_total": 463,
+    "root_zips_2026": 0,
+    "ironflow_events": {
+      "dir": "research_state/data_cache/ironflow_events",
+      "files": ["2026-06.parquet","2026-07.parquet","2026-08.parquet","2026-09.parquet","2026-10.parquet"],
+      "latest": "2026-10.parquet",
+      ">2026-10-31": false
+    },
+    "binance_sealed_window": "2026-05-08..2026-08-06",
+    "unsealed_beyond_sealed": false
+  },
+  "prereg_gating_proof": {
+    "command": "python scripts/fclr010_harness.py evaluate_forward",
+    "result": "BLOCKED (prereg required) - explicit error/behavior observed",
+    "admissible_triggers": ["ironflow > 2026-10-31", "unsealed 2026 Binance panel beyond 2026-05-08..2026-08-06"]
+  },
+  "track_c_readiness": {
+    "template": "research_state/readiness/track_c_prereg_template_fclr012_draft.json",
+    "structure_only": true,
+    "outcome_inspection": false,
+    "tuning": false,
+    "focus": "funding-conditioned volatility (Track C >> A >> B)"
+  },
+  "integrity_sweep": {
+    "sealed_holdout_integrity.md": "present",
+    "structural_closure_verdict_heavy.md": "present",
+    "cross_track_decision_firewall.md": "present",
+    "experiment_frontier.json": "present",
+    "run_manifest.json": "present",
+    "unchanged_since_handoff": true
+  },
+  "action_taken": "full inventory hardening + prereg gating proof + Track C template maintained + integrity sweep + heavy artifact shipped",
+  "bottlenecks_removed": ["tests verified", "inventory hardened", "gating proven", "integrity swept"],
+  "bottlenecks_open": ["forward FCLR-NEXT-012 blocked pending admissible data"]
+}
