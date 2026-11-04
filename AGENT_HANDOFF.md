@@ -1,16 +1,16 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T123411Z
-Git SHA (HEAD): dd188ea1
+Timestamp (UTC): 20261104T123437Z
+Git SHA (HEAD): c37d7af0
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T123411Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: BLOCKED-BY-GAP
+Handoff ID: FCLR-HANDOFF-20261104T123437Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: BLOCKED-BY-GAP
 
 ## MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE)
 ```text
 TASK ID: FCLR-NEXT-053-BLOCKED-HEAVY-WORK
 PRIORITY: P0 - HEAVY WORK ENFORCED
 CAMPAIGN: MAINTAIN READINESS UNTIL NEW DATA
-TIMESTAMP (UTC): 20261104T123411Z
+TIMESTAMP (UTC): 20261104T123437Z
 OBJECTIVE: Program confirmatory execution is CLOSED until NEW admissible unauthenticated data. Execute ALL mandatory blocked-path heavy work every session (3A-3D). Do NOT re-run sealed cells, do NOT tune/threshold-shop, do NOT fabricate data, do NOT touch .github/workflows.
 RESUME ONLY IF: Track A gets data/events/YYYY-MM.parquet >=2026-11 on ironflow (unauthenticated) OR Track C gets admissible Binance mark/index/premium panel with >=3 non-overlapping 30-day blocks of real volume>0 beyond 2026-11-02. Preregister BEFORE outcomes.
 ```
