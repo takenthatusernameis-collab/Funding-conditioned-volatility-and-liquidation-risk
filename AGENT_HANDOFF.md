@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T024438Z
+Timestamp (UTC): 20261104T024634Z
 Git SHA (HEAD): 2d7245f1
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T024438Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-EXECUTION
+Handoff ID: FCLR-HANDOFF-20261104T024634Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-EXECUTION
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-025-TRACK-C-FUNDING-CONDITIONED-VOL-HARDENING
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting, no deferring)
 CAMPAIGN: FCLR-NEXT-025-FUNDING-CONDITIONED-VOL-CONTINUOUS-EXECUTION
 REPO-NAME PRIORITY ORDER: Track C (funding-conditioned volatility forecasting) >> Track B (modeled boundary breaches) >> Track A (observed liquidation labels)
-TIMESTAMP (UTC): 20261104T024438Z
+TIMESTAMP (UTC): 20261104T024634Z
 OBJECTIVE: Repo name is directive - focus on FUNDING-CONDITIONED VOLATILITY. Build hard execution path for Track C (incremental value of funding + price features over RV-only baseline). Forward validation FCLR-NEXT-012 blocked pending admissible triggers (ironflow > 2026-10-31 OR unsealed 2026 Binance panel beyond 2026-11-02; all current 2026 zips are zero-volume synthetic placeholders -> NOT admissible). Do NOT wait passively - harden everything so the moment trigger fires, we run pre-registered frozen config with zero latency.
 HEAVY WORK MANDATE (NON-NEGOTIABLE, ALL FIVE EACH SESSION):
 (1) FULL INVENTORY HARDENING: enumerate root zips (count by asset/month/year), research_state/data_cache/ironflow_events/* (>2026-10-31 explicitly checked), all Binance data_vision artifacts. Diff vs previous trigger_harden snapshot (trigger_harden_20261104T024354Z.json).
