@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T183000Z
-Git SHA (HEAD): 876838c2
+Timestamp (UTC): 20261104T183334Z
+Git SHA (HEAD): ade33dd0
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T183000Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T183334Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## STATE SNAPSHOT (CURRENT VERIFIED)
 - Tests: 164/164 pass (pytest). Working tree clean (pyc cleaned).
@@ -17,7 +17,7 @@ Handoff ID: FCLR-HANDOFF-20261104T183000Z | Priority: P0 - HEAVY WORK ENFORCED |
 TASK ID: FCLR-NEXT-070-TRACK-A-TRIGGER-MONITOR
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED: FUNDING-CONDITIONED VOLATILITY DONE; LIQUIDATION RISK NEXT)
 CAMPAIGN: TRACK A TRIGGER MONITORING + READINESS (PREREGISTER BEFORE INSPECTION IF NEW DATA)
-TIMESTAMP (UTC): 20261104T183000Z
+TIMESTAMP (UTC): 20261104T183334Z
 OBJECTIVE: Track C is LOCKED complete on frozen splits. Focus on Track A (liquidation risk). Monitor for new admissible unauthenticated ironflow/liquidation data >=2026-11. If ANY new files appear (>=2026-11), PREREGISTER in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE inspecting outcomes with full hypothesis/frozen splits/metrics/stop rule, then run ONLY the frozen FCLR-010 harness (scripts/fclr010_execute.py or scripts/fclr010_harness.py) on existing sealed configuration. Do NOT merge sources, do NOT widen scope, do NOT re-tune on new data. If no new data, produce heavy trigger audit with concrete resume conditions.
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, leakage-safe, preregister-before-outcomes strictly enforced. Track C remains LOCKED - no re-tuning on frozen splits.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
