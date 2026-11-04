@@ -1,19 +1,18 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T035501Z
+Timestamp (UTC): 20261104T035729Z
 Git SHA (HEAD): 3195771e8cf4f51d5b37ec513612d1d6a2b0a5bd
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T035501Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T035729Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
 ```text
-TASK ID: FCLR-NEXT-029-TRACK-C-ZERO-LATENCY-FORCED
+TASK ID: FCLR-NEXT-030-TRACK-C-ZERO-LATENCY-FORCED
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL)
-CAMPAIGN: FCLR-NEXT-029-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
-REPO-NAME PRIORITY ORDER (MANDATORY): TRACK C (Funding-Conditioned Volatility Forecasting) >> TRACK B (Modeled Boundary Breaches) >> TRACK A (Observed Liquidation Labels)
+CAMPAIGN: FCLR-NEXT-030-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
 
-TIMESTAMP (UTC): 20261104T035501Z
+TIMESTAMP (UTC): 20261104T035729Z
 
 OBJECTIVE: The repository name is the binding directive. All effort must go towards TRACK C. There are currently NO admissible triggers for forward validation (ironflow has 2026-10.parquet through 2026-10-31 but that is Track-A liquidation data, NOT a Track C trigger; Binance root only contains 2024 zips; all 2026 zips are zero-volume synthetic placeholders -> NOT admissible). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
 
@@ -82,7 +81,7 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 - Root data: 463 zips total, all 2024 (01-01..03-30). No 2025/2026 Binance archives in root. All 2026 zips are zero-volume synthetic placeholders -> NOT admissible.
 - Admissible trigger: NONE for Track C. `track_c_prereg_template_fclr012.json` trigger.current_state = NOT_FIRED.
 - Sealed window: 2026-05-08..2026-08-06 (frozen). DO NOT re-run sealed panels.
-- Prereg gating: ENFORCED (`evaluate_forward` BLOCKED without prereg with explicit reason)
+- Prereg gating: ENFORCED (`evaluate_forward` BLOCKED without prereg with explicit reason: "Pre-registration path required.")
 - Track C prereg template: `research_state/readiness/track_c_prereg_template_fclr012.json` exists (structure-only, v2.0-harness-compatible)
 - Gates: FCLR-010 PASSED (sealed) | FCLR-011 PASSED (sealed, +4.94% rel QLIKE, CI excludes zero) | FCLR-012-V INCONCLUSIVE (0 non-overlapping 30-day blocks, CI spans zero)
 - Overlay: INELIGIBLE per IMMUTABLE `cross_track_decision_firewall.md`
@@ -107,7 +106,7 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 
 ## 4) Files To Watch
 
-- `research_state/watch/trigger_harden_*.json` (latest: `trigger_harden_20261104T035455Z.json`)
+- `research_state/watch/trigger_harden_*.json` (latest: `trigger_harden_20261104T035729Z.json`)
 - `research_state/readiness/track_c_prereg_template_fclr012.json`
 - `scripts/fclr010_harness.py` (`pre_register_forward_experiment()`, `evaluate_forward()`)
 - `scripts/track_c_inventory_harden.py`
@@ -125,3 +124,4 @@ This session is NOT complete until:
 - No files under `.github/workflows/` were modified
 - No sealed experiments (FCLR-001/002/003/006/007/008/011) were touched
 - AGENT_HANDOFF.md has been updated to reflect the new timestamp and handoff ID
+- This session's heavy artifacts: research_state/watch/trigger_harden_20261104T035639Z.json (inventory) and research_state/watch/trigger_harden_20261104T035729Z.json (heavy successor with gating proof, track_c readiness, integrity hashes, IF-TRIGGER-FIRES-NOW checklist, next_runnable_commands)
