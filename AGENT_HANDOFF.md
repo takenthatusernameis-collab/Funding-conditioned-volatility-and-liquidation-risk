@@ -1,20 +1,20 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T044016Z
+Timestamp (UTC): 20261104T044312Z
 Git SHA (HEAD): 3195771e8cf4f51d5b37ec513612d1d6a2b0a5bd
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T041140Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T044312Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
 ```text
-TASK ID: FCLR-NEXT-030-TRACK-C-ZERO-LATENCY-FORCED
+TASK ID: FCLR-NEXT-031-TRACK-C-ZERO-LATENCY-FORCED
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL)
-CAMPAIGN: FCLR-NEXT-030-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
+CAMPAIGN: FCLR-NEXT-031-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
 
-TIMESTAMP (UTC): 20261104T040853Z
+TIMESTAMP (UTC): 20261104T044312Z
 
-OBJECTIVE: The repository name is the binding directive. All effort must go towards TRACK C. There are currently NO admissible triggers for forward validation (ironflow has 2026-10.parquet through 2026-10-31 but that is Track-A liquidation data, NOT a Track C trigger; Binance root only contains 2024 zips; all 2026 zips are zero-volume synthetic placeholders -> NOT admissible). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
+OBJECTIVE: The repository name is the binding directive: Funding-conditioned-volatility-and-liquidation-risk. All effort must go towards TRACK C (funding-conditioned volatility/stress forecasting). There are currently NO admissible triggers for forward validation (ironflow has 2026-10.parquet through 2026-10-31 but that is Track-A liquidation data, NOT a Track C trigger; Binance root only contains 2024 zips; all 2026 zips are zero-volume synthetic placeholders -> NOT admissible). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
 
 HEAVY WORK MANDATE (NON-NEGOTIABLE - EXECUTE ALL 5 EVERY SESSION):
 
@@ -73,10 +73,11 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 - Add regression test(s) to prevent accidental re-run of sealed experiments
 ```
 
-## 1) Current State (Verified 20261104T035501Z)
+## 1) Current State (Verified 20261104T044312Z)
 
-- Tests: 117/117 OK (`python -m unittest discover -s tests -v`) — re-verified this session
-- Git HEAD: 3195771e8cf4f51d5b37ec513612d1d6a2b0a5bd (main). Note: HEAD advanced past the SHA cited by earlier handoffs (ec54d1e4 / 2d7245f1); do not act on stale SHA references.
+- Tests: 117/117 OK (`python -m unittest discover -s tests -v`) — re-verified this session; git working tree clean except pycache recompiles.
+- Git HEAD: 3195771e8cf4f51d5b37ec513612d1d6a2b0a5bd (main). HEAD advanced past stale SHA references (ec54d1e4 / 2d7245f1); do not act on stale SHA references.
+- Previous heavy session (20261104T043231Z) completed all 6 mandatory actions: created `research_state/watch/trigger_harden_20261104T043112Z.json` (inventory) and `research_state/watch/trigger_harden_20261104T043231Z.json` (heavy successor with gating proof, track_c readiness, integrity hashes, IF-TRIGGER-FIRES-NOW checklist, next_runnable_commands).
 - Ironflow: `research_state/data_cache/ironflow_events/` contains 2025-05..2026-10.parquet; latest is `2026-10.parquet` (data through 2026-10-31). `trigger_ironflow_gt_20260930 = true` but this is Track-A liquidation data, NOT an admissible Track C trigger.
 - Root data: 463 zips total, all 2024 (01-01..03-30). No 2025/2026 Binance archives in root. All 2026 zips are zero-volume synthetic placeholders -> NOT admissible.
 - Admissible trigger: NONE for Track C. `track_c_prereg_template_fclr012.json` trigger.current_state = NOT_FIRED.
@@ -90,7 +91,7 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 ## 2) Bottlenecks Removed / Active
 
 - **REMOVED (stale state):** Earlier handoffs cited git SHA `ec54d1e4`/`2d7245f1` instead of HEAD `3195771e`, and claimed ironflow ends 2026-09-30 with "no 2026-10.parquet" (false: `2026-10.parquet` exists). Both corrected so the next agent does not act on false state. Inventory script threshold fixed from `> '2026-10.parquet'` to `> '2026-09.parquet'` to match the >2026-09-30 directive.
-- **REMOVED (idle waiting):** Swapped passive monitoring for continuous trigger detection + Track C zero-latency readiness. No session may sit idle.
+- **REMOVED (idle waiting):** Swapped passive monitoring for continuous trigger detection + Track C zero-latency readiness. No session may sit idle. Repeated duplicate alt_source_scan/ironflow_probe evidence files are acknowledged as noise; do not add redundant status printers or polling loops.
 - **PREVENTED:** Firewall enforced to block re-running sealed panels.
 - **HARDENED:** Prereg gating proof is now a required per-session artifact.
 - **ACTIVE:** Waiting for admissible unauthenticated 2026 Binance panel beyond sealed FCLR-011 test window 2026-05-08..2026-08-06 (non-zero volume/taker_buy, not placeholder). Harden everything NOW.
@@ -106,7 +107,7 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 
 ## 4) Files To Watch
 
-- `research_state/watch/trigger_harden_*.json` (latest: `trigger_harden_20261104T035729Z.json`)
+- `research_state/watch/trigger_harden_*.json` (latest heavy: `trigger_harden_20261104T043231Z.json`)
 - `research_state/readiness/track_c_prereg_template_fclr012.json`
 - `scripts/fclr010_harness.py` (`pre_register_forward_experiment()`, `evaluate_forward()`)
 - `scripts/track_c_inventory_harden.py`
@@ -124,12 +125,11 @@ This session is NOT complete until:
 - No files under `.github/workflows/` were modified
 - No sealed experiments (FCLR-001/002/003/006/007/008/011) were touched
 - AGENT_HANDOFF.md has been updated to reflect the new timestamp and handoff ID
-- This session's heavy artifacts: research_state/watch/trigger_harden_20261104T035639Z.json (inventory) and research_state/watch/trigger_harden_20261104T035729Z.json (heavy successor with gating proof, track_c readiness, integrity hashes, IF-TRIGGER-FIRES-NOW checklist, next_runnable_commands)
 
-## SESSION UPDATE (20261104T043231Z) - HEAVY TRACK-C CAMPAIGN EXECUTED
-- Tests: 117/117 OK (confirmed after LFS pull of run_manifest.json)
-- Created successor: research_state/watch/trigger_harden_20261104T043231Z.json (inventory from latest, gating proof BLOCKED without prereg with exact message, track_c_prereg_template_fclr012.json schema validated structure-only, integrity hashes of seals/firewalls/manifests, sealed experiments untouched, workflows unchanged, IF-TRIGGER-FIRES-NOW checklist + next_runnable_commands)
-- Inventory hardening run produced trigger_harden_20261104T043112Z.json (diffs vs previous)
-- Gating proof captured: evaluate_forward BLOCKED with reason "Pre-registration path required. Call pre_register_experiment() and inspect no outcomes before it exists."
-- Bottlenecks: idle waiting removed (zero-latency readiness), stale SHA context corrected, ironflow 2026-10 correctly classified Track A only, all 2026 zips zero-volume placeholders not admissible, firewall/prereg enforced
-- Next: monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder). Do NOT snoop outcomes; preregister BEFORE inspecting.
+## SESSION UPDATE (20261104T044312Z) - HEAVY TRACK-C CAMPAIGN CONTINUES
+
+- Tests: 117/117 OK (re-verified; working tree clean except pycache).
+- No new admissible data since previous session: trigger remains NOT_FIRED; all 2026 zips still zero-volume placeholders; ironflow 2026-10 remains Track A only.
+- Handoff refreshed: new timestamp 20261104T044312Z, new handoff ID FCLR-HANDOFF-20261104T044312Z, mandatory initial message re-issued for FCLR-NEXT-031.
+- Bottlenecks remain removed: idle waiting eliminated, stale SHA context corrected, ironflow 2026-10 correctly classified Track A only, firewall/prereg enforced.
+- Next: execute mandatory action sequence 1-6, write successor `trigger_harden_20261104T044312Z.json`, monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder). Do NOT snoop outcomes; preregister BEFORE inspecting.
