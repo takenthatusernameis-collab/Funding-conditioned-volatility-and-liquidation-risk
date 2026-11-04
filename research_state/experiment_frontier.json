@@ -7,7 +7,7 @@
   "frontier": [
     {
       "rank": 0,
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) — EXECUTED 2026-11-04T00:52Z",
+      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z",
       "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
       "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
       "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
@@ -90,8 +90,20 @@
       "hypothesis": "FCLR-H001 (forward, confirmatory)",
       "reason": "No admissible Binance data beyond 2026-11-02 (live probe 2026-11-04T00:45Z -> 404 for 2026-11-03/04 and 2026-10-28/29). FCLR-012-V executed on the last available panel and is INCONCLUSIVE (0 test blocks, CI spans zero).",
       "status": "INCONCLUSIVE"
+    },
+    {
+      "track": "TRACK_A",
+      "reason": "No ironflow month >=2026-11",
+      "resume_trigger": "data/events/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF)",
+      "last_checked": "2026-11-04T12:33:00Z"
+    },
+    {
+      "track": "TRACK_C",
+      "reason": "Binance mark/index/premium panel insufficient beyond 2026-11-02 (placeholders/ended); need >=3 non-overlapping 30-day blocks",
+      "resume_trigger": "New admissible Binance panel with real volume>0 across >=3 blocks",
+      "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "20261104T005200Z",
+  "last_updated": "2026-11-04T12:33:00Z",
   "timestamp": "20261104T005200Z"
 }
