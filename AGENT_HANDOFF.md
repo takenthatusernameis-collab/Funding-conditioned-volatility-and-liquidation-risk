@@ -1,16 +1,16 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T132606Z
+Timestamp (UTC): 20261104T132722Z
 Git SHA (HEAD): a98ec9b0
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T132606Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN
+Handoff ID: FCLR-HANDOFF-20261104T132722Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN
 
 ## MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE)
 ```text
 TASK ID: FCLR-NEXT-056-FUNDING-FIRST-HEAVY
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED)
 CAMPAIGN: FUNDING-CONDITIONED VOLATILITY FIRST → LIQUIDATION RISK ON TRIGGER
-TIMESTAMP (UTC): 20261104T132606Z
+TIMESTAMP (UTC): 20261104T132722Z
 OBJECTIVE: Per repo name "Funding-conditioned-volatility-and-liquidation-risk", PRIORITIZE Track C (funding-conditioned volatility) as the primary campaign. Track C is currently SEALED/NOT_SUPPORTED (FCLR-003: C2 vs B1 +0.015205 QLIKE, CI crosses zero, gate NOT_MET). You MUST do HEAVY re-examination work - do NOT accept "sealed" as terminal without executing ALL 4 mandatory blocks below. Track A remains the only reopen path if NEW admissible unauthenticated liquidation data appears.
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, chronological/leakage-safe, preregister before outcomes if new data appears.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER):
