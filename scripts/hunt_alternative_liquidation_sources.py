@@ -776,6 +776,18 @@ def main():
     scan_path = REPO_ROOT / "research_state" / f"alt_source_scan_{ts}.json"
     with open(scan_path, "w") as f:
         json.dump(results, f, indent=2)
+    # Consolidate: keep only latest alt_source_scan_*.json
+    try:
+        import glob, os
+        files = sorted(glob.glob(str(REPO_ROOT / "research_state" / "alt_source_scan_*.json")))
+        if len(files) > 1:
+            for fp in files[:-1]:
+                try:
+                    os.remove(fp)
+                except Exception:
+                    pass
+    except Exception:
+        pass
     print(f"Wrote: {OUT_PATH}")
     print(f"Wrote: {scan_path}")
 

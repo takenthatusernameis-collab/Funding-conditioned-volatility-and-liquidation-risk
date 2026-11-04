@@ -47,5 +47,12 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/hunt_alternative_liquidation_sources.py`
 - `python scripts/deep_review_alt_sources.py`
 
+## BOTTLENECK REMOVAL (THIS SESSION - FCLR-NEXT-078)
+- Consolidated alt_source_scan/deep_review to single latest (added auto-consolidation in hunt_alternative_liquidation_sources.py and deep_review_alt_sources.py)
+- Verified monitor/deep_review/hunt hardened (ETag/tree cache, HEAD-404 fast path, baseline-drift probe, per-file caching)
+- Created campaign_sweep_tracka_20261104T233054Z.md, liquidation_forward_validate_004_blocker_20261104T233200Z.md
+- Updated experiment_frontier.json (Track A monitor-only last_checked 20261104T233118Z/updated 20261104T233131Z)
+- Tests: pytest green (179 passed). No redundant status-only files/schedulers/pollers/wrappers added.
+
 ## NEXT TASK (TIMESTAMPED)
-20261104T232808Z: Execute campaign FCLR-NEXT-078 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
+20261104T233200Z: Continue Track A bottleneck removal while blocked on ironflow >=2026-11. If resume condition met, HALT and preregister FCLR-010 BEFORE inspecting outcomes. Do not touch sealed Track C. No .github/workflows changes. Keep artifacts consolidated.

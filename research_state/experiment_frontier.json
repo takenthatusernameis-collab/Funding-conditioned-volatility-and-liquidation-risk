@@ -66,10 +66,12 @@
       "blockers": "Structural - no data (2026-10 latest); monitor hardened in 004i",
       "status": "MONITOR_ONLY",
       "resume_triggers": [
-        "ironflow >=2026-11 parquet appears",
-        "rubric-GO alternative unauthenticated source"
+        "ironflow >=2026-11 parquet appears (events or fills HTTP 200 unauthenticated)",
+        "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
-      "generated": "20261104T192914Z"
+      "generated": "20261104T192914Z",
+      "last_checked": "2026-11-04T23:31:18Z",
+      "notes": "Hardened: ETag/tree cache, HEAD-404 fast path, baseline-drift probe, per-file ETag/LM caching, alt source consolidation automated"
     }
   ],
   "coverage": {
@@ -99,8 +101,8 @@
     {
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10)",
-      "resume_trigger": "data/events/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF) with HTTP 200; OR rubric-GO alternative source passes strict criteria",
-      "last_checked": "2026-11-04T21:32:54Z"
+      "resume_trigger": "data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF) with HTTP 200; OR rubric-GO alternative source passes strict criteria",
+      "last_checked": "2026-11-04T23:31:18Z"
     },
     {
       "track": "TRACK_C",
@@ -109,6 +111,6 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-04T21:32:54Z",
+  "last_updated": "2026-11-04T23:31:18Z",
   "timestamp": "20261104T005200Z"
 }

@@ -214,6 +214,18 @@ def main():
     lines.append(f"- Deep-review URLs are now folded into hunt_alternative_liquidation_sources.py's candidate set so each URL is probed exactly once per session.")
 
     out.write_text("\n".join(lines))
+    # Consolidate: keep only latest alt_source_deep_review_*.md
+    try:
+        import glob, os
+        files = sorted(glob.glob(str(RESEARCH / "alt_source_deep_review_*.md")))
+        if len(files) > 1:
+            for fp in files[:-1]:
+                try:
+                    os.remove(fp)
+                except Exception:
+                    pass
+    except Exception:
+        pass
     print(f"Wrote {out} (cache_hits={n_cache_hits} cache_misses={n_cache_misses})")
 
 if __name__ == "__main__":
