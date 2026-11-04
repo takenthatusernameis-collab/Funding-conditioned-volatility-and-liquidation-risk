@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T063512Z
-Git SHA (HEAD): fc9ed59167e9693a59edbd03b0da0c7961ff785e
+Timestamp (UTC): 20261104T064037Z
+Git SHA (HEAD): a5af5e4da144c809746560a24695f30b2736cfba
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T063512Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T064037Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
@@ -135,4 +135,4 @@ This session is NOT complete until:
 
 ## 6) Initial Task Message For Next Session (current, single)
 
-"2026-11-04T06:35:12Z — HEAVY TRACK-C CAMPAIGN (repository name is the binding directive: Funding-conditioned-volatility-and-liquidation-risk): read RESEARCH_PROMPT.md + AGENT_HANDOFF.md, verify HEAD (fc9ed591) + tests >=117/117 + manifests, run mandatory action sequence 1-6, write successor `research_state/watch/trigger_harden_<UTC>.json` with inventory diffs (root zips all-2024 vs any admissible 2026 panel), gating proof (evaluate_forward BLOCKED without prereg), Track C readiness validation (structure-only, NO outcome inspection), integrity hashes (firewall/seals/manifests/hypothesis_registry), IF-TRIGGER-FIRES-NOW checklist, and next_runnable_commands; keep >=117 tests green; do NOT modify .github/workflows or sealed FCLR-001/002/003/006/007/008/011; monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder, beyond sealed window 2026-05-08..2026-08-06); preregister BEFORE any outcome inspection; remove bottlenecks (idle waiting, stale SHA refs, misclassified Track A data, duplicate noise files: ironflow_probe_*.json + __pycache__) on sight so significant progress continues. Next actionable: run `python -m unittest discover -s tests -v`, verify HEAD (fc9ed591), re-read handoff, then write successor trigger_harden file."
+"2026-11-04T06:40:37Z — HEAVY TRACK-C CAMPAIGN (repository name is the binding directive: Funding-conditioned-volatility-and-liquidation-risk): read RESEARCH_PROMPT.md + AGENT_HANDOFF.md, verify HEAD (a5af5e4d) + tests >=117/117 + manifests, run mandatory action sequence 1-6, write successor `research_state/watch/trigger_harden_<UTC>.json` with inventory diffs (root zips all-2024 vs any admissible 2026 panel), gating proof (evaluate_forward BLOCKED without prereg), Track C readiness validation (structure-only, NO outcome inspection), integrity hashes (firewall/seals/manifests/hypothesis_registry), IF-TRIGGER-FIRES-NOW checklist, and next_runnable_commands; keep >=117 tests green; do NOT modify .github/workflows or sealed FCLR-001/002/003/006/007/008/011; monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder, beyond sealed window 2026-05-08..2026-08-06); preregister BEFORE any outcome inspection; remove bottlenecks (idle waiting, stale SHA refs, misclassified Track A data, duplicate noise files: ironflow_probe_*.json + __pycache__) on sight so significant progress continues. Next actionable: run `python -m unittest discover -s tests -v`, verify HEAD (a5af5e4d), re-read handoff, then write successor trigger_harden file."
