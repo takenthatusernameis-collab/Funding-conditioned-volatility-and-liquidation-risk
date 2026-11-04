@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T224803Z
-Git SHA (HEAD): 4e9a4334
+Timestamp (UTC): 20261104T232459Z
+Git SHA (HEAD): f15adc3f
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T224803Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECKS REMOVED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T232459Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECKS REMOVED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -22,7 +22,7 @@ Inference: volatility is done; liquidation risk is the repo-name's unfulfilled h
 ```text
 TASK ID: FCLR-NEXT-078-TRACK-A-FORCE-BOTTLENECKS-REMOVE-HEAVY
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Funding-conditioned volatility DONE/LOCKED; Liquidation risk NEXT - BLOCKED)
-TIMESTAMP (UTC): 20261104T224803Z
+TIMESTAMP (UTC): 20261104T232459Z
 CAMPAIGN: TRACK A LIQUIDATION-RISK BOTTLENECK REMOVAL + TRIGGER HARDENING (BLOCKED-DATA MODE - HEAVY WORK MANDATORY)
 
 OBJECTIVE (INFERRED FROM REPO NAME): Funding-conditioned volatility is complete and locked. Focus ALL effort on liquidation risk (Track A). Data is blocked (ironflow data_through=2026-10, no >=2026-11). You CANNOT conclude "no data" and stop. While blocked, you MUST aggressively remove bottlenecks and harden automation so future agents make immediate progress the moment data appears. Eliminate inefficiencies; do NOT add schedulers/pollers/status-only files/repeated wrappers. The prior session already removed 18 alt_source_scan + 12 alt_source_deep_review duplicates and added ETag/HEAD caches — start from that hardened baseline, do not regress it.
@@ -48,4 +48,4 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261104T224803Z: Execute campaign FCLR-NEXT-078 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
+20261104T232459Z: Execute campaign FCLR-NEXT-078 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
