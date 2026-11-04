@@ -1,12 +1,12 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T184150Z
-Git SHA (HEAD): 906f83ce
+Timestamp (UTC): 20261104T184248Z
+Git SHA (HEAD): 8c3ba301
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T184150Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T184248Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
-## STATE SNAPSHOT (CURRENT VERIFIED)
-- Tests: 164/164 pass (pytest). Working tree clean (pyc cleaned).
+## STATE SNAPSHOT (CURRENT VIFIED)
+- Tests: 164/164 pass (pytest). Working tree clean except untracked research probe artifacts (ironflow_probe_*.json, leave in place). __pycache__/*.pyc removed from git index and cleaned from disk.
 - Track C (FCLR-011) - FUNDING-CONDITIONED VOLATILITY: LOCKED. Gate PASSED, deeper validation + robustness complete on frozen splits. Independent recomputation confirms reproducibility (C2 vs B1 rel_imp ~+7.0%, CI excludes zero, monotonic funding-quartile effect). Final verdict: research_state/trackc_final_verdict_20261104T182830Z.md. Forward replication (FCLR-012-V) INCONCLUSIVE/blocked on data (Binance ends 2026-11-02, 0 non-overlapping 30d blocks). Overlay remains HYPOTHETICAL_ONLY.
 - Track A (FCLR-010) - LIQUIDATION RISK: COMPLETE_SEALED, FORECAST_GATE_PASSED (Brier rel -2.21%, CI excl zero). ON TRIGGER ONLY - monitor for new ironflow >=2026-11.
 - Track B: NOT_SUPPORTED.
@@ -22,7 +22,7 @@ Handoff ID: FCLR-HANDOFF-20261104T184150Z | Priority: P0 - HEAVY WORK ENFORCED |
 TASK ID: FCLR-NEXT-071-TRACK-A-TRIGGER-MONITOR
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED: FUNDING-CONDITIONED VOLATILITY DONE; LIQUIDATION RISK NEXT)
 CAMPAIGN: TRACK A TRIGGER MONITORING + READINESS (PREREGISTER BEFORE INSPECTION IF NEW DATA)
-TIMESTAMP (UTC): 20261104T184150Z
+TIMESTAMP (UTC): 20261104T184248Z
 OBJECTIVE: Track C is LOCKED complete on frozen splits. Focus on Track A (liquidation risk). Monitor for new admissible unauthenticated ironflow/liquidation data >=2026-11. If ANY new files appear (>=2026-11), PREREGISTER in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE inspecting outcomes with full hypothesis/frozen splits/metrics/stop rule, then run ONLY the frozen FCLR-010 harness (scripts/fclr010_execute.py or scripts/fclr010_harness.py) on existing sealed configuration. Do NOT merge sources, do NOT widen scope, do NOT re-tune on new data. If no new data, produce heavy trigger audit with concrete resume conditions.
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, leakage-safe, preregister-before-outcomes strictly enforced. Track C remains LOCKED - no re-tuning on frozen splits.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
@@ -34,10 +34,11 @@ MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
 STOP RULE: Complete all 5. Never stop early. If stuck, write blocker_evidence_$(date -u +%Y%m%dT%H%M%SZ).md with >=3 alternatives tried + concrete files/commands + single next action.
 ```
 
-## NEXT FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i
-Campaign generated: 2026-11-02T12:48:00Z | Data state: blocked (ironflow data_through=2026-10, consecutive_absent=3, no post-2026-10 data)
+## NEXT FOCUS CAMPAIGN: LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i (NON-SKIPPABLE, HEAVY WORK)
+Campaign regenerated: 2026-11-04T184248Z | Data state: blocked (ironflow data_through=2026-10, consecutive_absent=3, no post-2026-10 data)
 
-Every session while data remains blocked MUST complete ALL of the following before ending:
+Every session while data remains blocked MUST complete ALL of the following before ending. Unchecked = session FAILED. Future agents cannot avoid heavy work: each item produces a verifiable artifact and is re-checked at the start of the next session.
+
   4A. STRENGTHEN AUTOMATION: Improve scripts/monitor_ironflow_liquidations.py (skip re-listing when tree ETag unchanged, wider/faster lookahead, smarter failure classification) AND/OR scripts/hunt_alternative_liquidation_sources.py. Add retry/backoff robustness, broader unauthenticated probes, new detection logic. Evidence: modified script + fresh probe output.
   4B. ADD TESTS: Extend tests/test_monitor_ironflow.py or add new tests covering state-diff, ETag caching, month-window, classification. All must pass: python -m unittest discover -s tests -v. Evidence: new test methods + green test run.
   4C. UPDATE BLOCKER DOC: Write research_state/liquidation_forward_validate_004_blocker_<new_timestamp>.md with complete probe tables (all URLs tried, status codes, headers, body previews), explicit checkable resume conditions (exact paths/patterns/URLs/months to watch), concrete timestamps. Evidence: new blocker doc file.
@@ -53,7 +54,8 @@ NON-SKIPPABLE CHECKLIST (checked off in AGENT_HANDOFF.md at session end; uncheck
 - [ ] No sealed artifacts touched; no Track B/C conflation; no .github/workflows changes
 - [ ] Raw data out of git; only code/manifests/reports committed
 
-RESUME CONDITION (concrete, checkable - THE ONLY WAY TO UNBLOCK): Ironflow publishes data/events/YYYY-MM.parquet and/or data/fills/YYYY-MM.parquet for any month >= 2026-11 with HTTP 200 on unauthenticated GET (verify via scripts/monitor_ironflow_liquidations.py), OR a NEW admissible unauthenticated source passes strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, unauthenticated access no keys/signed/requester-pays, schema compatible with frozen FCLR-010). Hyperliquid-only for Track A.
+## RESUME CONDITION (concrete, checkable - THE ONLY WAY TO UNBLOCK)
+Ironflow publishes data/events/YYYY-MM.parquet and/or data/fills/YYYY-MM.parquet for any month >= 2026-11 with HTTP 200 on unauthenticated GET (verify via scripts/monitor_ironflow_liquidations.py), OR a NEW admissible unauthenticated source passes strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, unauthenticated access no keys/signed/requester-pays, schema compatible with frozen FCLR-010). Hyperliquid-only for Track A.
 
 ## Verification commands
 - `python -m pytest tests/ -q` (164 passed)
