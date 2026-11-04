@@ -1464,7 +1464,26 @@ def main():
         rc = check_resume_condition(state)
         tc = check_tree_change(state)
         pd = compare_probes(state, rc)
-        bd = check_baseline_drift_probe(state)
+        # Same bottleneck fix as --quick: the network drift probe re-HEADs every
+        # known month (~36 HEADs) and is redundant when the tree listing is
+        # provably unchanged (304, or 200 with an identical oid map and no
+        # added/removed/replaced paths). Use the state-only check in that case;
+        # fall back to the network probe when the tree changed or the offline
+        # content-hash baseline is incomplete.
+        _state_bd = check_baseline_drift(state)
+        _content_complete = bool(_state_bd.get("content_hash_complete"))
+        _tree_unchanged = bool(tc.get("tree_not_modified"))
+        _tree_no_change = (
+            not tc.get("changed")
+            and not tc.get("content_replaced")
+            and tc.get("current_parquet_items") == state.get("tree_parquet_items", {})
+        )
+        if (_tree_unchanged or _tree_no_change) and _content_complete:
+            bd = _state_bd
+            bd["method"] = "state_only_tree_unchanged"
+        else:
+            bd = check_baseline_drift_probe(state)
+            bd["method"] = "network_drift_probe_tree_changed"
         reasons = []
         if rc.get("triggered"):
             reasons.append("forward_edge_200")
@@ -1485,7 +1504,14 @@ def main():
             "resume_check": {"triggered": rc.get("triggered"), "months_probed": rc.get("months_probed"), "head_probes": rc.get("head_probes"), "get_requests": rc.get("get_requests"), "get_requests_skipped": rc.get("get_requests_skipped")},
             "probe_diff": pd.get("summary", {}),
             "tree_change": {"changed": tc.get("changed"), "added": tc.get("added"), "removed": tc.get("removed"), "content_replaced": tc.get("content_replaced"), "tree_not_modified": tc.get("tree_not_modified")},
-            "baseline_drift": {"drifted": not bd.get("baseline_intact", True), "regression_count": bd.get("regression_count"), "content_replaced_count": bd.get("content_replaced_count"), "checked": bd.get("checked"), "content_replaced": bd.get("content_replaced")},
+            "baseline_drift": {
+                "drifted": not (bd.get("baseline_intact", not bd.get("drifted", False))),
+                "regression_count": bd.get("regression_count", len(bd.get("stale_cache_entries", []) or [])),
+                "content_replaced_count": bd.get("content_replaced_count", len(bd.get("missing_oids", []) or [])),
+                "checked": bd.get("checked", len(bd.get("known_months", []) or [])),
+                "content_replaced": bd.get("content_replaced", bd.get("missing_oids", [])),
+                "method": bd.get("method"),
+            },
         }
         outp = EVIDENCE_DIR / f"ironflow_resume_scan_{ts_s}.json"
         with open(outp, "w") as f:
@@ -1610,7 +1636,47 @@ def main():
         # invalidate the next forward-validation run, so this is checked here.
         # Now driven by tree_parquet_items (LFS oids) so it is non-empty and can
         # also detect SILENT FILE REPLACEMENT (same path, different bytes).
-        evidence["baseline_drift"] = check_baseline_drift_probe(state)
+        #
+        # BOTTLENECK REMOVAL (004i, 2026-11-04T20:36Z): the network-aware
+        # check_baseline_drift_probe re-HEADs every known month on EVERY --quick
+        # run (~36 HEADs = the dominant cost of the blocked-path check, ~50s of
+        # the ~56s --quick runtime). It is redundant when the HF tree listing
+        # itself returned 304 Not Modified: the tree carries an LFS content hash
+        # (oid) per parquet path, so a 304 means NO file anywhere in the archive
+        # changed -- no silent replacement, no 200->404 regression is possible
+        # until the next tree change. In that case the state-only
+        # check_baseline_drift (which verifies cache completeness and recorded
+        # oids, no network) is strictly sufficient and the offline baseline is
+        # content-verified by the tree listing itself. When the tree HAS changed
+        # (200 with a diff, or any forward-edge 200), the full network drift
+        # probe runs so a regression still surfaces before the next run.
+        _tc0 = evidence.get("tree_change", {}) or {}
+        _tree_unchanged = bool(_tc0.get("tree_not_modified"))
+        _tree_no_change = (
+            not _tc0.get("changed")
+            and not _tc0.get("content_replaced")
+            and _tc0.get("current_parquet_items") == state.get("tree_parquet_items", {})
+        )
+        _state_bd = check_baseline_drift(state)
+        _content_complete = bool(_state_bd.get("content_hash_complete"))
+        # Skip the network drift probe when the tree listing is provably
+        # unchanged: either HF returned 304 Not Modified, or it returned 200
+        # with a diff that shows NO added/removed paths, NO content-replaced
+        # files, and an identical oid map to the previously persisted items.
+        # In that case no file anywhere in the archive changed, so re-HEADing
+        # every known month is redundant -- the state-only check (cache
+        # completeness + recorded oids) is strictly sufficient and the offline
+        # baseline is content-verified by the tree listing itself. This removes
+        # the dominant per-session cost (~36 HEADs, ~50s of a ~57s --quick) on
+        # the blocked path while keeping the full network probe whenever the
+        # tree actually changes (200 with a diff, or any forward-edge 200), so a
+        # regression still surfaces before the next run.
+        if (_tree_unchanged or _tree_no_change) and _content_complete:
+            evidence["baseline_drift"] = _state_bd
+            evidence["baseline_drift"]["method"] = "state_only_tree_unchanged"
+        else:
+            evidence["baseline_drift"] = check_baseline_drift_probe(state)
+            evidence["baseline_drift"]["method"] = "network_drift_probe_tree_changed"
         evidence_path = EVIDENCE_DIR / f"ironflow_probe_{ts}.json"
         with open(evidence_path, "w") as f:
             json.dump(evidence, f, indent=2)
@@ -1668,7 +1734,21 @@ def main():
             summary = pd.get("summary", {}) or {}
             bd = evidence.get("baseline_drift", {}) or {}
             km = rc.get("kaggle_mirror", {}) or {}
-            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd.get('baseline_intact')} regressions={bd.get('regression_count')} content_replaced={bd.get('content_replaced_count')} pairs_checked={bd.get('checked')}) kaggle_mirror(updated={km.get('mirror_updated')} last={km.get('last_updated')} triggered={km.get('triggered')})")
+            # Baseline-drift fields differ between the state-only check
+            # (drifted/content_hash_complete) and the network probe
+            # (baseline_intact/regression_count). Normalise so the summary line
+            # is stable regardless of which method ran (004i bottleneck fix).
+            bd_intact = bd.get("baseline_intact")
+            if bd_intact is None:
+                bd_intact = not bd.get("drifted", False)
+            bd_regressions = bd.get("regression_count")
+            if bd_regressions is None:
+                bd_regressions = len(bd.get("stale_cache_entries", []) or [])
+            bd_replaced = bd.get("content_replaced_count")
+            if bd_replaced is None:
+                bd_replaced = len(bd.get("missing_oids", []) or [])
+            bd_checked = bd.get("checked", len(bd.get("known_months", []) or []))
+            print(f"No resume trigger. data_through={rc['data_through']} probed={rc['months_probed']} head_probes={rc.get('head_probes')} cached_hits={rc.get('cached_hits')} probe_diff(added={summary.get('added_count',0)} changed={summary.get('changed_count',0)} removed={summary.get('removed_count',0)}) baseline_drift(intact={bd_intact} regressions={bd_regressions} content_replaced={bd_replaced} pairs_checked={bd_checked} method={bd.get('method')}) kaggle_mirror(updated={km.get('mirror_updated')} last={km.get('last_updated')} triggered={km.get('triggered')})")
         return
 
     if "--report" in sys.argv:
