@@ -1,42 +1,49 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T132236Z
+Timestamp (UTC): 20261104T132606Z
 Git SHA (HEAD): a98ec9b0
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T132236Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: BLOCKED-BY-GAP
+Handoff ID: FCLR-HANDOFF-20261104T132606Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN
 
 ## MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE)
 ```text
-TASK ID: FCLR-NEXT-055-BLOCKED-HEAVY-WORK
-PRIORITY: P0 - HEAVY WORK ENFORCED
-CAMPAIGN: MAINTAIN READINESS UNTIL NEW DATA
-TIMESTAMP (UTC): 20261104T132236Z
-OBJECTIVE: Program confirmatory execution is CLOSED until NEW admissible unauthenticated data. Execute ALL mandatory blocked-path heavy work every session (3A-3D). Do NOT re-run sealed cells, do NOT tune/threshold-shop, do NOT fabricate data, do NOT touch .github/workflows.
-RESUME ONLY IF: Track A gets data/events/YYYY-MM.parquet >=2026-11 on ironflow (unauthenticated) OR Track C gets admissible Binance mark/index/premium panel with >=3 non-overlapping 30-day blocks of real volume>0 beyond 2026-11-02. Preregister BEFORE outcomes.
+TASK ID: FCLR-NEXT-056-FUNDING-FIRST-HEAVY
+PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED)
+CAMPAIGN: FUNDING-CONDITIONED VOLATILITY FIRST → LIQUIDATION RISK ON TRIGGER
+TIMESTAMP (UTC): 20261104T132606Z
+OBJECTIVE: Per repo name "Funding-conditioned-volatility-and-liquidation-risk", PRIORITIZE Track C (funding-conditioned volatility) as the primary campaign. Track C is currently SEALED/NOT_SUPPORTED (FCLR-003: C2 vs B1 +0.015205 QLIKE, CI crosses zero, gate NOT_MET). You MUST do HEAVY re-examination work - do NOT accept "sealed" as terminal without executing ALL 4 mandatory blocks below. Track A remains the only reopen path if NEW admissible unauthenticated liquidation data appears.
+CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, chronological/leakage-safe, preregister before outcomes if new data appears.
+MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER):
+  1) STATE SWEEP (HEAVY): Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/*, tests/, scripts/, recent git log. Extract exact blockers, frozen gates, and what "sealed" means. Write findings to research_state/campaign_sweep_$(date -u +%Y%m%dT%H%M%SZ).md (>=150 lines of concrete evidence).
+  2) TRACK C DEEP DIVE (HEAVY): Re-audit funding-conditioned volatility from scratch. Mine existing caches (research_state/data_cache, repo root zips/dirs) for unused funding/mark/index/premium features. Test alternative funding normalizations (z-score vs rank vs sign-split vs time-to-funding), lag structures, interaction terms, regime splits. Run smallest verifiable harness against frozen splits. Produce research_state/trackc_deepdive_$(date -u +%Y%m%dT%H%M%SZ).md with ablations + block-bootstrap >=2000 + Holm correction.
+  3) TRACK A READINESS (HEAVY): Run scripts/monitor_ironflow_liquidations.py --quick AND scripts/deep_review_alt_sources.py (if exists) or equivalent. Record probe JSON, ETag/tree diffs, and concrete resume condition check. If ANY new files appear (events/fills YYYY-MM.parquet) for >=2026-11 with ironflow or other admissible source, PREREGISTER before inspecting outcomes in research_state/fclr010_prereg_*.json and ONLY THEN run frozen harness.
+  4) BOTTLENECK ELIMINATION (HEAVY): Fix any inefficiency blocking progress (missing imports, broken paths, slow scripts). Clean __pycache__/pyc, ensure tests fast/reliable. Add NO new controllers/schedulers. Every action must produce a verifiable artifact.
+STOP RULE: Do NOT stop after 1-2 blocks. Complete all 4. If truly stuck, write blocker_evidence with 3+ alternative routes tried and concrete next action.
 ```
 
 ## Current Verified State
 - Tests: 164/164 OK (pytest, 16.41s)
-- HEAD: a98ec9b0 (was b1e000dc at last handoff)
-- Track A (ironflow): data_through 2026-10; probe 2026-11-04T13:21:55Z - no trigger (tree 304, unchanged).
-- Track C: Binance panel ended/placeholders beyond 2026-11-02; inadmissible.
-- Track B: CLOSED_NEGATIVE. H002: PERMANENT_BLOCKED.
-- __pycache__/*.pyc cleaned (7 files modified, staged for cleanup).
+- HEAD: a98ec9b0
+- Track C: FCLR-003 SEALED/NOT_SUPPORTED (C2 vs B1 +0.015205 QLIKE, CI crosses zero) - BUT repo name prioritizes this; requires deep re-examination, not blind acceptance
+- Track A (ironflow Hyperliquid): data_through 2026-10, last probe 2026-11-04T13:21:55Z - tree unchanged (304), no trigger. Resume only on new admissible unauthenticated liquidation data (>=2026-11 events/fills.parquet)
+- Track B: CLOSED_NEGATIVE/PERMANENT_BLOCKED
+- Bottlenecks: accepting "sealed" without exhaustive alternatives; underutilized caches; need to force heavy work every session
 
-## Heavy Work Executed This Session (blocked-path)
-- 3A: Reviewed monitor_ironflow_liquidations.py; confirmed state-aware probing logic intact.
-- 3B: Tests green (164/164). __pycache__/pyc cleaned.
-- 3C: Probe recorded research_state/ironflow_probe_20261104T132155Z.json.
-- 3D: Handoff refreshed (this file).
+## Priority Order (by repo name)
+1. **TRACK C - Funding-conditioned volatility** (HIGHEST - matches repo name). Exhaust all interpretable funding/price features, interactions, regimes. Do not skip just because previous run was negative.
+2. **TRACK A - Liquidation risk** (ON TRIGGER). Only if new admissible unauthenticated data appears. Preregister before outcomes.
+3. **INFRA/BOTTLENECKS** - Remove anything slowing progress, but only if it enables 1 or 2.
 
-## Next Action
-Probe every 30-120 min. On new data -> prereg BEFORE outcomes, run frozen harness, write evaluation summary with block-bootstrap>=2000 and Holm, update frontier. No idle waiting without heavy work.
+## Bottleneck Removal Plan
+- **"Sealed" is not terminal**: Force mandatory deep dive every session until Track C is either re-gated to PASS with evidence, or exhaustively documented as negative with 5+ ablations tried.
+- **Cache utilization**: Mine all existing data caches (Binance zips/dirs, ironflow cache, research_state/data_cache) before considering new downloads.
+- **Efficient probing**: Use existing `monitor_ironflow_liquidations.py` with ETag caching (304) - no manual polling loops.
+- **Heavy work enforcement**: All 4 mandatory blocks must complete. Artifacts required: campaign sweep, trackc deepdive, ironflow probe + alt-source scan evidence, bottleneck fixes.
+- **No bloat**: No new schedulers/controllers/status-only files. Fix existing code paths.
 
-## Repo-Name-Prioritized Focus (Funding-conditioned-volatility-and-liquidation-risk)
-The repo name prioritizes Track C (funding-conditioned volatility) > Track A (liquidation risk). Track C is SEALED/NOT_SUPPORTED (FCLR-003: C2 vs B1 +0.015205 QLIKE, CI crosses zero, gate NOT_MET). Track A is the ONLY reopen path and requires NEW admissible unauthenticated liquidation data. All heavy work must preserve this priority: source discovery for Track A is the highest-value blocked-path task until data appears.
-
-## Bottleneck Removal (if multiple sessions blocked/inefficient)
-The single bottleneck is NEW admissible unauthenticated data. To prevent inefficient repeated probing:
-1. monitor_ironflow_liquidations.py already implements state-aware probing with ETag caching - USE IT, do not re-probe manually.
-2. hunt_alternative_liquidations_sources.py and deep_review_alt_sources.py cover 30+ source families with rubric scoring - run these periodically but only when new evidence is plausible.
-3. Do NOT create new polling loops, schedulers, or status files. Every session must produce a verifiable artifact (probe JSON, source scan, test result, or handoff update).
+## Next Action (EXACT)
+1. Execute STATE SWEEP - write campaign_sweep_*.md
+2. Execute TRACK C DEEP DIVE - mine caches, try funding normalizations/interactions/regimes, run frozen splits, block-bootstrap>=2000, Holm
+3. Execute TRACK A READINESS - probe ironflow + scan alts, record evidence
+4. Execute BOTTLENECK ELIMINATION - clean/fix as needed, ensure 164/164 tests still pass
+5. Update this handoff with new timestamp, artifacts created, next concrete task
