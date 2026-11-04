@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T173620Z
-Git SHA (HEAD): 876838c2
+Timestamp (UTC): 20261104T175747Z
+Git SHA (HEAD): ecbceedf
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T173620Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T175747Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## STATE SNAPSHOT (CURRENT VERIFIED)
 - Tests: 164/164 pass (pytest, ~16.6s). HEAD: 876838c2. Working tree clean except deleted __pycache__/*.pyc (bottleneck removed, not yet staged).
@@ -20,7 +20,7 @@ Handoff ID: FCLR-HANDOFF-20261104T173620Z | Priority: P0 - HEAVY WORK ENFORCED |
 TASK ID: FCLR-NEXT-060-TRACK-C-RECOMPUTE-FINALIZE-FROZEN-SPLITS
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED = TRACK C / FUNDING-CONDITIONED VOLATILITY)
 CAMPAIGN: TRACK C INDEPENDENT RECOMPUTATION + FINAL VERDICT (FROZEN FCLR-011/FCLR-002 SPLITS ONLY)
-TIMESTAMP (UTC): 20261104T173620Z
+TIMESTAMP (UTC): 20261104T175747Z
 OBJECTIVE: Track C gate PASSED (FCLR-011) and deeper validation + robustness already complete on frozen splits. Execute independent recomputation: re-run the robustness/deeper-validation pipeline from stored inputs + data hashes (research_state/data_cache/fclr011_panel.json, research_state/pre_registration_fclr011_20261103T111501Z.md, scripts/run_trackc_robustness_fclr011.py, scripts/run_trackc_deeper_validation_fclr011.py) to confirm reproducibility of C2 vs B1 QLIKE diff (-0.042908), rel reduction (~+7.0%), 95% CI exclusion of zero, Holm-adjusted ablations, funding-quartile monotonicity, and leave-one-out stability. Then write research_state/trackc_final_verdict_$(date -u +%Y%m%dT%H%M%SZ).md consolidating the complete Track C evidence base (gate result, deeper validation, robustness, recomputation audit, limitations, HYPOTHETICAL_ONLY overlay status). Do NOT re-run sealed FCLR-001/002/003/006/007/008/010/011 outcomes. Do NOT threshold-shop. Do NOT open sealed holdouts. Do NOT merge Binance and Hyperliquid. Track C overlay remains HYPOTHETICAL_ONLY.
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, chronological/leakage-safe, preregister before outcomes if new data appears. Use existing frozen data only (no new downloads needed).
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
