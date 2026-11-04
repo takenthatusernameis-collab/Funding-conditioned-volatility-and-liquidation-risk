@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T103933Z
-Git SHA (HEAD): 42dd83287
+Timestamp (UTC): 20261104T111843Z
+Git SHA (HEAD): 692f58589adc949cc92acc680de423a80483c805
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
 Handoff ID: FCLR-HANDOFF-20261104T103826Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-EXECUTION
@@ -11,7 +11,7 @@ Handoff ID: FCLR-HANDOFF-20261104T103826Z | Priority: P0 - HEAVY-WORK (FORCED) |
 TASK ID: FCLR-NEXT-047-TRACK-C-TRIGGER-READY-EXECUTE-ON-FIRE
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL | NO DOCUMENTATION-ONLY SESSION)
 CAMPAIGN: FCLR-NEXT-047-FUNDING-CONDITIONED-VOL-TRIGGER-CAMPAIGN
-TIMESTAMP (UTC): 20261104T103826Z
+TIMESTAMP (UTC): 20261104T111843Z
 REPO BINDING: Funding-conditioned-volatility-and-liquidation-risk (Track C volatility/stress FIRST per repo name)
 
 OBJECTIVE: Remain trigger-ready for Track C forward replication (FCLR-012 extension). Do NOT fabricate/admit zero-volume synthetic data. Execute ONLY if admissible unauthenticated Binance panel > 2026-11-02 exists.
