@@ -49,3 +49,11 @@ STOP RULE: Complete all 4. Never stop early. If stuck, write blocker_evidence_$(
 ## SESSION SUMMARY (20261104T153545Z - THIS HANDOFF)
 - Prior session completed blocks 1-4: campaign sweep updated, deeper Track C validation done, Track A probed (no new data), caches cleaned, tests 164/164 green.
 - Next focus: Track C robustness/stability on frozen splits (leave-one-out, bootstrap sensitivity, lags/signs) - heavy work, uses existing frozen data, directly extends passed gate.
+
+
+## SESSION SUMMARY (20261104T154810Z - robustness complete)
+- Campaign sweep written: research_state/campaign_sweep_20261104T154810Z.md (step 1 complete)
+- Track C robustness (frozen FCLR-011 splits only): research_state/trackc_robustness_20261104T154226Z.md written with leave-one-symbol out, leave-one-block out, funding sign/|funding| regimes, funding lags (t-1/t-2), winsorization (1%/5%), circular bootstrap block sizes 12h/24h/48h and stationary bootstrap (>=2000 reps, deterministic). C2 vs B1 remains positive across tested sensitivities on frozen splits.
+- Track A trigger probe: monitor_ironflow_liquidations.py --quick (ironflow_probe_20261104T154633Z.json), deep_review_alt_sources.py (alt_source_deep_review_20261104T154741Z.md). No new files >=2026-11 observed (cached_hits 0, added 0); remains ON TRIGGER ONLY with preregistration before outcomes if they appear.
+- Bottlenecks: __pycache__/pyc cleaned, tests 164/164 green. No new schedulers/controllers/status-only files.
+- Next: continue Track C robustness/extensions if warranted on frozen splits only, else Track A on trigger. Maintain leakage-safety, no threshold-shopping, overlay remains HYPOTHETICAL_ONLY.

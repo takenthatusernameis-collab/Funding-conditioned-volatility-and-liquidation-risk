@@ -66,3 +66,72 @@ def block_bootstrap_ci(
     lo = diffs_sorted[int(math.floor((alpha / 2.0) * len(diffs_sorted)))]
     hi = diffs_sorted[int(math.ceil((1.0 - alpha / 2.0) * len(diffs_sorted))) - 1]
     return (full_diff, lo, hi)
+
+
+def stationary_block_bootstrap_indices(n: int, mean_block_size: float, num_reps: int, seed: int = 12345) -> List[List[int]]:
+    """Stationary bootstrap (Politis & Romano). Block lengths ~ Geometric(p) with p=1/mean_block_size."""
+    rng = random.Random(seed)
+    if n == 0:
+        return []
+    if mean_block_size <= 0:
+        mean_block_size = 1.0
+    p = 1.0 / mean_block_size
+    reps = []
+    for _ in range(num_reps):
+        idx = []
+        while len(idx) < n:
+            start = rng.randint(0, n - 1)
+            # draw block length from geometric (number of trials until first success) on {1,2,...}
+            # geometric on {1,..} has mean 1/p
+            if p >= 1.0:
+                blen = 1
+            else:
+                # rng.geometric is not built-in same way; use inverse
+                u = rng.random()
+                blen = int(math.ceil(math.log(1.0 - u) / math.log(1.0 - p))) if (1.0 - p) > 0 else 1
+                if blen < 1:
+                    blen = 1
+            for j in range(blen):
+                idx.append((start + j) % n)
+                if len(idx) >= n:
+                    break
+        reps.append(idx[:n])
+    return reps
+
+
+def block_bootstrap_ci_stationary(
+    y: List[float],
+    yhat_base: List[float],
+    yhat_alt: List[float],
+    metric_fn: Callable[[List[float], List[float]], float],
+    mean_block_size: float = 24.0,
+    num_reps: int = 2000,
+    alpha: float = 0.05,
+    seed: int = 12345,
+) -> Tuple[float, float, float]:
+    diffs = []
+    n = len(y)
+    if n == 0:
+        return (0.0, 0.0, 0.0)
+    reps = stationary_block_bootstrap_indices(n, mean_block_size, num_reps, seed)
+    base_full = metric_fn(y, yhat_base)
+    alt_full = metric_fn(y, yhat_alt)
+    full_diff = alt_full - base_full
+    for rep_idx in reps:
+        y_r = [y[i] for i in rep_idx]
+        b_r = [yhat_base[i] for i in rep_idx]
+        a_r = [yhat_alt[i] for i in rep_idx]
+        try:
+            mb = metric_fn(y_r, b_r)
+            ma = metric_fn(y_r, a_r)
+            if mb is None or ma is None or (isinstance(mb, float) and (math.isnan(mb) or math.isinf(mb))) or (isinstance(ma, float) and (math.isnan(ma) or math.isinf(ma))):
+                continue
+            diffs.append(ma - mb)
+        except Exception:
+            continue
+    if not diffs:
+        return (full_diff, full_diff, full_diff)
+    diffs_sorted = sorted(diffs)
+    lo = diffs_sorted[int(math.floor((alpha / 2.0) * len(diffs_sorted)))]
+    hi = diffs_sorted[int(math.ceil((1.0 - alpha / 2.0) * len(diffs_sorted))) - 1]
+    return (full_diff, lo, hi)
