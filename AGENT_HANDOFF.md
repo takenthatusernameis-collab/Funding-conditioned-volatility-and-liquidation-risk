@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T083332Z
-Git SHA (HEAD): 5c0e03011367812619806acadd1274e56f0259fe
+Timestamp (UTC): 20261104T083427Z
+Git SHA (HEAD): 4b533594b990c5228437620f2a817bcd189fa897
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T083332Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T083427Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
@@ -11,7 +11,7 @@ Handoff ID: FCLR-HANDOFF-20261104T083332Z | Priority: P0 - HEAVY-WORK (FORCED) |
 TASK ID: FCLR-NEXT-040-TRACK-C-ZERO-LATENCY-FORCED
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL)
 CAMPAIGN: FCLR-NEXT-040-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
-TIMESTAMP (UTC): 20261104T083332Z
+TIMESTAMP (UTC): 20261104T083427Z
 
 OBJECTIVE: Repo name is binding directive (Funding-conditioned-volatility-and-liquidation-risk). Track C >> Track B >> Track A. Maintain zero-latency readiness for admissible Track C trigger. NO admissible triggers now (root all-2024 zips 463; all 2026 zips zero-volume synthetic placeholders; ironflow 2026-10.parquet is Track-A only).
 
@@ -25,10 +25,10 @@ HEAVY WORK MANDATE (EXECUTE ALL 5 EVERY SESSION):
 RULES: tests>=117 green; prereg BEFORE outcomes; block bootstrap>=2000 seed12345; Holm across family; no re-run sealed; structure-only for readiness; delete noise (__pycache__, ironflow_probe_*, duplicate trigger_harden_*, blocker files).
 ```
 
-## 1) Current State (Verified 20261104T083332Z)
+## 1) Current State (Verified 20261104T083427Z)
 - Tests: 117/117 OK
 - Git HEAD: 5c0e03011367812619806acadd1274e56f0259fe
-- Latest heavy artifact: research_state/watch/trigger_harden_20261104T083332Z.json
+- Latest heavy artifact: research_state/watch/trigger_harden_20261104T083427Z.json
 - Inventory: 463 root zips (all 2024). Ironflow has 2026-10.parquet (Track-A only). No admissible Track C trigger.
 - Prereg gating enforced (BLOCKED without prereg)
 - Track C template: research_state/readiness/track_c_prereg_template_fclr012.json (NOT_FIRED, structure-only)
