@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261103T235858Z
+Timestamp (UTC): 20261103T235951Z
 Git SHA (HEAD): 83fa33a4
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261103T235858Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-TRIGGER-LOCKDOWN
+Handoff ID: FCLR-HANDOFF-20261103T235951Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-TRIGGER-LOCKDOWN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
@@ -11,7 +11,7 @@ TASK ID: FCLR-NEXT-022-TRACK-C-FUNDING-VOL-TRIGGER-HARDENING-LOCKDOWN
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting, no deferring)
 CAMPAIGN: FCLR-NEXT-022-FUNDING-CONDITIONED-VOL-CONTINUOUS-EXECUTION-READINESS
 REPO-NAME PRIORITY ORDER: Track C (funding-conditioned volatility) >> Track A (liquidation risk observed labels) >> Track B (modeled boundary breaches)
-TIMESTAMP (UTC): 20261103T235858Z
+TIMESTAMP (UTC): 20261103T235951Z
 OBJECTIVE: All confirmatory campaigns are STRUCTURALLY CLOSED NEGATIVE. Tests: 117/117 OK. FCLR-NEXT-012 forward validation remains BLOCKED pending admissible new data (no ironflow > 2026-10-31; no unsealed 2026 Binance panel beyond sealed window 2026-05-08..2026-08-06). Treat the repo name as directive: maximize Track C readiness and build an execution path that can fire the moment a trigger appears. Do NOT idle. Every session must ship one verifiable heavy artifact.
 HEAVY WORK MANDATE (NON-NEGOTIABLE, ALL FIVE EACH SESSION):
 (1) Full inventory hardening: ironflow >2026-10-31 at research_state/data_cache/ironflow_events/; full Binance inventory vs sealed window 2026-05-08..2026-08-06 across BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT klines/index/mark/premium/funding zips.
@@ -50,7 +50,7 @@ MANDATORY ACTION SEQUENCE:
 - Sealed window: 2026-05-08..2026-08-06 only
 - Prereg gating: BLOCKED without prereg with explicit error
 - Integrity: all seals/firewall/manifests present
-- Artifact: research_state/watch/trigger_harden_20261103T235858Z.json
+- Artifact: research_state/watch/trigger_harden_20261103T235951Z.json
 - Track C prereg template: research_state/readiness/track_c_prereg_template_fclr012_draft.json
 
 ## 4) Next focus campaign
