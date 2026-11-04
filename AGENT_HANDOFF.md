@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T132835Z
+Timestamp (UTC): 20261104T133107Z
 Git SHA (HEAD): f128b157
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T132835Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN
+Handoff ID: FCLR-HANDOFF-20261104T133107Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN
 
 ## STATE CONTRADICTION RESOLVED (read first)
 AGENT_HANDOFF previously claimed Track C "NOT_SUPPORTED" citing only FCLR-003 (sealed 2024, C2 vs B1 +0.015205 QLIKE, CI crosses zero). That claim is STALE and superseded by run_manifest.json / evaluation_summary_FCLR-011_20261103T111743Z.md:
@@ -20,7 +20,7 @@ Per repo name "Funding-conditioned-volatility-and-liquidation-risk", Track C rem
 TASK ID: FCLR-NEXT-057-FUNDING-CONDITIONED-DEEPER-VALIDATION
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED = TRACK C)
 CAMPAIGN: FUNDING-CONDITIONED VOLATILITY DEEPER VALIDATION (FROZEN SPLITS) -> FORWARD READINESS
-TIMESTAMP (UTC): 20261104T132835Z
+TIMESTAMP (UTC): 20261104T133107Z
 OBJECTIVE: Track C gate PASSED on FCLR-011 (C2 vs B1 -4.94% rel QLIKE, CI excludes zero, 5 instruments, 3 blocks). Forward replication FCLR-012-V is INCONCLUSIVE, blocked on data (Binance archive ends 2026-11-02; ironflow ends 2026-10). Execute deeper funding-conditioned validation on FROZEN FCLR-011/FCLR-002 splits only: regime-stratified QLIKE by funding quartiles per symbol/time, funding x RV interaction refinements, mark/index premium and mark/EMA24 sensitivity ablations. Produce research_state/fclr011_deeper_validation_$(date -u +%Y%m%dT%H%M%SZ).md with ablations + block-bootstrap >=2000 + Holm correction. Do NOT re-run sealed FCLR-001/002/003/006/007/008/010/011. Do NOT threshold-shop. Do NOT merge Binance and Hyperliquid. Track C overlay remains HYPOTHETICAL_ONLY (gate pass does not authorize overlay changes).
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, chronological/leakage-safe, preregister before outcomes if new data appears.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER):
