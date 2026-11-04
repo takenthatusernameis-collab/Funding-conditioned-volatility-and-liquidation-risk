@@ -85,7 +85,7 @@ class TestUrlProbeCache(unittest.TestCase):
 
     def test_cache_get_returns_none_for_missing_and_bad(self):
         self.assertIsNone(hunt._url_cache_get({}, "missing"))
-        self.tmp.write_text("not json")
+        (self.tmp / "url_probe_cache.json").write_text("not json")
         self.assertIsNone(hunt._url_cache_get(hunt._url_cache_load(), "missing"))
 
 

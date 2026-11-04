@@ -100,7 +100,7 @@
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10)",
       "resume_trigger": "data/events/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF) with HTTP 200; OR rubric-GO alternative source passes strict criteria",
-      "last_checked": "2026-11-04T19:29:14Z"
+      "last_checked": "2026-11-04T21:32:54Z"
     },
     {
       "track": "TRACK_C",
@@ -109,6 +109,6 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-04T19:29:14Z",
+  "last_updated": "2026-11-04T21:32:54Z",
   "timestamp": "20261104T005200Z"
 }
