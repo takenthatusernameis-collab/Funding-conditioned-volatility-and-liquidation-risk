@@ -25,7 +25,14 @@ os.environ.setdefault("FCLR_EXPERIMENT", "FCLR-002")
 import run_evaluation as ev  # noqa: E402
 
 EXPERIMENT = os.environ.get("FCLR_EXPERIMENT", "FCLR-002")
-OUT = REPO / "research_state" / "data_cache" / "fclr002_panel.json"
+# Allow an explicit output path so the FCLR-011 (2026) panel does not clobber the
+# FCLR-002 (2024) panel cache that other analyses read.  Default preserves the
+# historical single-file behaviour.
+_OUT_ENV = os.environ.get("FCLR_PANEL_OUT")
+if _OUT_ENV:
+    OUT = Path(_OUT_ENV)
+else:
+    OUT = REPO / "research_state" / "data_cache" / "fclr002_panel.json"
 EPS = ev.EPS
 HORIZON = ev.HORIZON
 SYMBOLS = ev.SYMBOLS
