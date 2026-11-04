@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T223659Z
-Git SHA (HEAD): 37fa5290
+Timestamp (UTC): 20261104T223840Z
+Git SHA (HEAD): c8d078ed
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T223659Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T223840Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
