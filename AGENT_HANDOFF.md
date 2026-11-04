@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T025557Z
+Timestamp (UTC): 20261104T025718Z
 Git SHA (HEAD): 2d7245f1
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T025557Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T025718Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
@@ -13,7 +13,7 @@ PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERR
 CAMPAIGN: FCLR-NEXT-027-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
 REPO-NAME PRIORITY ORDER (MANDATORY): TRACK C (Funding-Conditioned Volatility Forecasting) >> TRACK B (Modeled Boundary Breaches) >> TRACK A (Observed Liquidation Labels)
 
-TIMESTAMP (UTC): 20261104T030000Z
+TIMESTAMP (UTC): 20261104T030200Z
 
 OBJECTIVE: The repository name is the binding directive. All effort must go towards TRACK C. There are currently NO admissible triggers for forward validation (ironflow ends at 2026-10-31, Binance root only contains 2024 zips, all 2026 zips found are zero-volume synthetic placeholders). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
 
