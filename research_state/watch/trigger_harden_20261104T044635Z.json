@@ -1,0 +1,73 @@
+{
+  "schema": "trigger_harden.v3",
+  "timestamp_utc": "20261104T044635Z",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "git_sha": "3195771e8cf4f51d5b37ec513612d1d6a2b0a5bd",
+  "priority": "HEAVY-WORK (FORCED)",
+  "campaign": "FCLR-NEXT-031-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS",
+  "tests": {
+    "status": "OK",
+    "count": 117
+  },
+  "inventory": {
+    "root_zip_count": 463,
+    "root_zip_sample": [
+      "BNBUSDT-1h-2024-01-01.zip",
+      "BNBUSDT-1h-2024-01-02.zip",
+      "BNBUSDT-1h-2024-01-03.zip",
+      "BNBUSDT-1h-2024-01-04.zip",
+      "BNBUSDT-1h-2024-01-05.zip"
+    ],
+    "ironflow_2026_10_exists": true,
+    "admissible_track_c_trigger": false,
+    "notes": "All 2026 root zips zero-volume synthetic placeholders; ironflow 2026-10 is Track A only"
+  },
+  "gating_proof": {
+    "status": "BLOCKED",
+    "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists."
+  },
+  "track_c_readiness": {
+    "template_id": "track_c_prereg_template_fclr012",
+    "version": "2.0-harness-compatible",
+    "trigger_current_state": "NOT_FIRED",
+    "structure_only": true,
+    "notes": "block_bootstrap >=2000 deterministic-seed replicates, resample complete UTC bloc"
+  },
+  "integrity_hashes": {
+    "research_state/experiment_frontier.json": "51fb53272c815a19ffc102eb8769b81d57557e91924135d0145454b8b99b55bc",
+    "research_state/run_manifest.json": "335676ef500d442e40bd4e3ad1be24be9159ba8148a523b33c274b12fb0f4bf4",
+    "research_state/hypothesis_registry.json": "6534d1c8998e39f2e1d03bddfe5a23b518ef33c8bcd50665f62288f38cdd6772",
+    "sealed_experiments_untouched_verified": [
+      "FCLR-001",
+      "FCLR-002",
+      "FCLR-003",
+      "FCLR-006",
+      "FCLR-007",
+      "FCLR-008",
+      "FCLR-011"
+    ]
+  },
+  "if_trigger_fires_now": [
+    "(a) load frozen template research_state/readiness/track_c_prereg_template_fclr012.json",
+    "(b) preregister BEFORE inspecting outcomes via pre_register_forward_experiment()",
+    "(c) enforce embargo/splits per frozen template",
+    "(d) run ONLY pre-registered contrasts",
+    "(e) apply Holm + block-bootstrap (>=2000, seed 12345)",
+    "(f) do NOT touch sealed panels FCLR-001/002/003/006/007/008/011"
+  ],
+  "next_runnable_commands": [
+    "python -m unittest discover -s tests -v",
+    "python scripts/track_c_inventory_harden.py",
+    "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"",
+    "python -c \"import json; d=json.load(open('research_state/readiness/track_c_prereg_template_fclr012.json')); print(d['template_id'], d['trigger']['current_state'])\""
+  ],
+  "bottlenecks_removed": [
+    "stale SHA refs corrected",
+    "ironflow 2026-10 correctly classified Track A only",
+    "idle waiting eliminated; continuous hardening enforced",
+    "firewall/prereg enforced"
+  ],
+  "diff_vs_latest": {
+    "latest": "trigger_harden_20261104T044522Z.json"
+  }
+}
