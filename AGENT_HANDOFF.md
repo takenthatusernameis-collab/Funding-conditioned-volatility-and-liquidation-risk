@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T223458Z
-Git SHA (HEAD): 0b4e112b
+Timestamp (UTC): 20261104T223659Z
+Git SHA (HEAD): 37fa5290
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T223458Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T223659Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -11,20 +11,20 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - Liquidation RISK component = Track A (FCLR-010) — BLOCKED on admissible unauthenticated liquidation data (ironflow data_through=2026-10; no month >=2026-11 returns HTTP 200). HIGHEST ACTIVE PRIORITY. All unfinished work concentrates here.
 
 ## CURRENT VERIFIED STATE
-- Tests: suite green (pytest). Staged diff is __pycache__ de-tracking (git rm --cached, NOT committed — commit only on explicit request).
-- Bottlenecks removed this session: 18 near-duplicate alt_source_scan_*.json -> 1 (latest kept); 12 near-duplicate alt_source_deep_review_*.md -> 1 (latest kept). Pure status-only repetition eliminated per RESEARCH_PROMPT constraint #23.
+- Tests: suite green (pytest), 179 passed (>=166 floor met). Staged diff is __pycache__ de-tracking (git rm --cached, NOT committed — commit only on explicit request).
+- Bottlenecks removed this session: 18 near-duplicate alt_source_scan_*.json -> 1 (latest kept); 12 near-duplicate alt_source_deep_review_*.md -> 1 (latest kept). Scripts hardened: monitor_ironflow_liquidations.py (ETag tree cache, HEAD-404 fast path, forward-edge-only resume probe, baseline-drift), hunt_alternative_liquidation_sources.py (24h HF search cache, 6h per-URL probe cache, URL dedup, merged DEEP_REVIEW_URLS), deep_review_alt_sources.py (reuses hunt's shared URL probe cache instead of re-GETting). Pure status-only repetition eliminated per RESEARCH_PROMPT constraint #23. Do NOT re-add schedulers/pollers/status-only files/repeated wrappers.
 - Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED. Track A: ON TRIGGER/MONITOR ONLY, blocked on data.
-- Track A last confirmed blocked via scripts/monitor_ironflow_liquidations.py --quick: data_through=2026-10; 2026-11..2027-02 head-probed absent (404/EntryNotFound). Evidence: research_state/ironflow_probe_20261104T213437Z.json (and latest probes 214306Z/214647Z/214814Z).
-- Frontier/blocked cells: research_state/experiment_frontier.json (TRACK_A blocked: resume on ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated, OR rubric-GO alternative source).
+- Track A last confirmed blocked via scripts/monitor_ironflow_liquidations.py --quick (20261104T223659Z): data_through=2026-10; forward edge 2026-11..2027-02 head-probed absent (404/EntryNotFound); probe_diff added=0 changed=0 removed=0; baseline_drift intact; kaggle_mirror triggered=False. Evidence: research_state/ironflow_probe_20261104T223638Z.json (and prior probes 213437Z/214306Z/214647Z/214814Z).
+- Frontier/blocked cells: research_state/experiment_frontier.json (TRACK_A blocked: resume on ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated, OR rubric-GO alternative source). last_checked 2026-11-04T21:32:54Z.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
 TASK ID: FCLR-NEXT-075-TRACK-A-FORCE-BOTTLENECKS-REMOVE-HEAVY
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Funding-conditioned volatility DONE/LOCKED; Liquidation risk NEXT - BLOCKED)
-TIMESTAMP (UTC): 20261104T223458Z
+TIMESTAMP (UTC): 20261104T223659Z
 CAMPAIGN: TRACK A LIQUIDATION-RISK BOTTLENECK REMOVAL + TRIGGER HARDENING (BLOCKED-DATA MODE - HEAVY WORK MANDATORY)
 
-OBJECTIVE (INFERRED FROM REPO NAME): Funding-conditioned volatility is complete and locked. Focus ALL effort on liquidation risk (Track A). Data is blocked (ironflow data_through=2026-10, no >=2026-11). You CANNOT conclude "no data" and stop. While blocked, you MUST aggressively remove bottlenecks and harden automation so future agents make immediate progress the moment data appears. Eliminate inefficiencies; do NOT add schedulers/pollers/status-only files/repeated wrappers.
+OBJECTIVE (INFERRED FROM REPO NAME): Funding-conditioned volatility is complete and locked. Focus ALL effort on liquidation risk (Track A). Data is blocked (ironflow data_through=2026-10, no >=2026-11). You CANNOT conclude "no data" and stop. While blocked, you MUST aggressively remove bottlenecks and harden automation so future agents make immediate progress the moment data appears. Eliminate inefficiencies; do NOT add schedulers/pollers/status-only files/repeated wrappers. The prior session already removed 18 alt_source_scan + 12 alt_source_deep_review duplicates and added ETag/HEAD caches — start from that hardened baseline, do not regress it.
 
 CONSTRAINTS: No credentials/manual files/.github/workflows changes. Leakage-safe, preregister-before-outcomes. Track C/B remain locked/unsupported. Raw data/caches out of git; only code/manifests/reports committed. Clean-clone reproduction possible.
 
@@ -41,10 +41,10 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 ```
 
 ## VERIFICATION
-- `python -m pytest tests/ -q` (suite green)
+- `python -m pytest tests/ -q` (suite green; 179 passed)
 - `python scripts/monitor_ironflow_liquidations.py --quick` (confirms blocked: data_through=2026-10, no >=2026-11)
 - `python scripts/hunt_alternative_liquidation_sources.py`
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261104T223458Z: Execute campaign FCLR-NEXT-075 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
+20261104T223659Z: Execute campaign FCLR-NEXT-075 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
