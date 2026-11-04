@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T232459Z
+Timestamp (UTC): 20261104T232808Z
 Git SHA (HEAD): f15adc3f
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T232459Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECKS REMOVED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T232808Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECKS REMOVED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -13,7 +13,7 @@ Inference: volatility is done; liquidation risk is the repo-name's unfulfilled h
 
 ## CURRENT VERIFIED STATE
 - Tests: suite green (pytest), 179 passed (>=166 floor met). Staged diff is __pycache__ de-tracking (git rm --cached, NOT committed — commit only on explicit request).
-- Bottlenecks removed (already done, do NOT regress): 18 near-duplicate alt_source_scan_*.json -> 1 (latest kept); 12 near-duplicate alt_source_deep_review_*.md -> 1 (latest kept). Scripts hardened: monitor_ironflow_liquidations.py (ETag tree cache, HEAD-404 fast path, forward-edge-only resume probe, baseline-drift state-only skip when tree 304, per-file ETag/LM caching), hunt_alternative_liquidation_sources.py (24h HF search cache, 6h per-URL probe cache, URL dedup, merged DEEP_REVIEW_URLS), deep_review_alt_sources.py (reuses hunt's shared URL probe cache instead of re-GETting). Pure status-only repetition eliminated per RESEARCH_PROMPT constraint #23. Do NOT re-add schedulers/pollers/status-only files/repeated wrappers.
+- Bottlenecks removed (already done, do NOT regress): 18 near-duplicate alt_source_scan_*.json -> 1 (latest kept); 12 near-duplicate alt_source_deep_review_*.md -> 1 (latest kept). Just now removed older alt_source_scan_20261104T232109Z.json and alt_source_deep_review_20261104T232118Z.md duplicates, leaving exactly 1 of each (latest 232648Z/232657Z). Scripts hardened: monitor_ironflow_liquidations.py (ETag tree cache, HEAD-404 fast path, forward-edge-only resume probe, baseline-drift state-only skip when tree 304, per-file ETag/LM caching), hunt_alternative_liquidation_sources.py (24h HF search cache, 6h per-URL probe cache, URL dedup, merged DEEP_REVIEW_URLS), deep_review_alt_sources.py (reuses hunt's shared URL probe cache instead of re-GETting). Pure status-only repetition eliminated per RESEARCH_PROMPT constraint #23. Do NOT re-add schedulers/pollers/status-only files/repeated wrappers.
 - Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED. Track A: ON TRIGGER/MONITOR ONLY, blocked on data.
 - Track A last confirmed blocked via scripts/monitor_ironflow_liquidations.py --quick (20261104T224115Z): data_through=2026-10; forward edge 2026-11..2027-02 head-probed absent (404/EntryNotFound); probe_diff added=0 changed=0 removed=0; baseline_drift intact; kaggle_mirror triggered=False. Evidence: research_state/ironflow_probe_20261104T224115Z.json (and prior probes 223638Z/223644Z/214814Z/214647Z/214306Z/213437Z).
 - Frontier/blocked cells: research_state/experiment_frontier.json (TRACK_A blocked: resume on ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated, OR rubric-GO alternative source). last_checked 2026-11-04T21:32:54Z.
@@ -48,4 +48,4 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261104T232459Z: Execute campaign FCLR-NEXT-078 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
+20261104T232808Z: Execute campaign FCLR-NEXT-078 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
