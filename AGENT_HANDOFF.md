@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T084000Z
+Timestamp (UTC): 20261104T084228Z
 Git SHA (HEAD): 789ae083afd09cdea6d8d8798bfddd9c0c42c5d0
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T084000Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-FORWARD-REPLICATION-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T084228Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-FORWARD-REPLICATION-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
@@ -11,7 +11,7 @@ Handoff ID: FCLR-HANDOFF-20261104T084000Z | Priority: P0 - HEAVY-WORK (FORCED) |
 TASK ID: FCLR-NEXT-043-TRACK-C-FORWARD-REPLICATION-HEAVY
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL | NO DOCUMENTATION-ONLY SESSION)
 CAMPAIGN: FCLR-NEXT-043-FUNDING-CONDITIONED-VOLATILITY-FORWARD-REPLICATION-CONTINUOUS
-TIMESTAMP (UTC): 20261104T084000Z
+TIMESTAMP (UTC): 20261104T084228Z
 REPO BINDING: Funding-conditioned-volatility-and-liquidation-risk (MUST prioritize per repo name)
 
 OBJECTIVE: Drive Track C (volatility/stress) forward replication to a confirmatory-capable state WITHOUT touching sealed experiments. FCLR-012-V showed +15.19% QLIKE vs B1 (C2) on 2026-10-29..2026-11-02 but test window only 5 days (0x30d blocks), CI [-0.360564, 0.059434] spans zero -> INCONCLUSIVE/PILOT. Need to (a) hunt for any admissible NEW unauthenticated Binance panel data (beyond sealed 2026-05-08..2026-08-06 for FCLR-011, beyond current 2026-08-07..2026-11-02 window already tested) that extends test window to >=3 non-overlapping 30d blocks, (b) if none exists, execute the preregistered "forward replication extension plan" with strict leakage control, expanding universe/time coverage ONLY if admissible, (c) do NOT relax block-count/gating. Track B modeled breach is secondary; Track A (observed liquidations, Hyperliquid ironflow) is separate and must remain firewall-isolated.
@@ -27,7 +27,7 @@ HEAVY WORK MANDATE (EXECUTE ALL 6 EVERY SESSION — NO EXCEPTION):
 RULES: tests>=117 green. Prereg BEFORE outcomes. Block bootstrap>=2000 seed12345. Holm correction across family. No re-run sealed experiments. No workflow changes. No live/paper trading. Track C priority over B over A. Keep tracks firewalled. Preserve negative/inconclusive results.
 ```
 
-## 1) Current State (Verified 20261104T084000Z)
+## 1) Current State (Verified 20261104T084228Z)
 - Tests: 117/117 OK (`python -m unittest discover -s tests -v`)
 - Git HEAD: 789ae083afd09cdea6d8d8798bfddd9c0c42c5d0 (main)
 - Latest heavy artifact: research_state/watch/trigger_harden_20261104T083332Z.json
