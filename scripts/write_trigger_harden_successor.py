@@ -54,6 +54,21 @@ try:
 except Exception as e:
     gating_proof = {'error': str(e)}
 
+# Parse the evaluate_forward result out of stdout for machine-readable gating proof
+parsed_status = None
+parsed_reason = None
+if gating_proof and gating_proof.get('stdout'):
+    try:
+        ev = eval(gating_proof['stdout'].strip())
+        if isinstance(ev, dict):
+            parsed_status = ev.get('status')
+            parsed_reason = ev.get('reason')
+    except Exception:
+        pass
+gating_proof['parsed_status'] = parsed_status
+gating_proof['parsed_reason'] = parsed_reason
+gating_proof['prereg_enforced'] = (parsed_status == 'BLOCKED' and bool(parsed_reason))
+
 # Track C readiness
 track_c_path = os.path.join(ROOT, 'research_state', 'readiness', 'track_c_prereg_template_fclr012.json')
 track_c = None
@@ -108,6 +123,11 @@ artifact = {
         "changes": "inventory refreshed; ironflow has 2026-10.parquet (through 2026-10-31) so trigger_ironflow_gt_20260930 is set, but this is Track-A liquidation data, NOT an admissible Track C trigger: root Binance zips remain all-2024 and all 2026 zips are zero-volume synthetic placeholders -> Track C trigger NOT_FIRED."
     },
     "gating_proof": gating_proof,
+    "gating_proof_machine_readable": {
+        "parsed_status": gating_proof.get('parsed_status'),
+        "parsed_reason": gating_proof.get('parsed_reason'),
+        "prereg_enforced": gating_proof.get('prereg_enforced')
+    },
     "track_c_readiness": {
         "template_path": track_c_path,
         "exists": track_c is not None,
@@ -126,13 +146,38 @@ artifact = {
         "forward_validation_FCLR_NEXT_012": "BLOCKED_on_admissible_data",
         "remedy": "continuous trigger detection + Track C pre-reg readiness for zero-latency execution on trigger arrival; do NOT idle waiting"
     },
+    "if_trigger_fires_now": {
+        "trigger_definition": track_c.get('trigger', {}).get('definition') if track_c else None,
+        "admissibility_gate": track_c.get('trigger', {}).get('admissibility_gate') if track_c else None,
+        "checklist": [
+            {"step": 1, "action": "Confirm admissible data: new Binance 2026 zips with NON-ZERO volume/taker_buy, schema valid, not zero-volume synthetic placeholders. Verify with a small zipfile read, NOT by snooping outcomes.", "gate": "admissible_data_confirmed"},
+            {"step": 2, "action": "Load frozen template research_state/readiness/track_c_prereg_template_fclr012.json (structure-only). DO NOT inspect any holdout/forecast outcomes yet.", "gate": "template_loaded"},
+            {"step": 3, "action": "Preregister BEFORE inspecting outcomes: python -c \"from scripts.fclr010_harness import FCLR010Harness; import pathlib; h=FCLR010Harness(); print(h.pre_register_forward_experiment(pathlib.Path('research_state/readiness/fclr012v_prereg_<UTC>.json')))\". This writes the locked prereg (splits/metrics/gates/embargo) and returns the path.", "gate": "preregistered_before_outcomes"},
+            {"step": 4, "action": "Freeze splits from data coverage ONLY (chronological 60/20/20 on unique UTC timestamps, 7-day purge/embargo, min 5 instruments, min 3 non-overlapping 30-day test blocks). Record boundaries + data hashes in run_manifest.json BEFORE computing any target.", "gate": "splits_frozen_from_coverage"},
+            {"step": 5, "action": "Enforce embargo: no target interval may overlap train/validation/test. Purge/embargo >= 7 days at every boundary because secondary horizon is 168h.", "gate": "embargo_enforced"},
+            {"step": 6, "action": "Run ONLY pre-registered contrasts on the frozen panel: B0 (persistence), B1 (HAR OLS log-linear), C1 (B1 + signed funding + 90-day abs-funding percentile), C2 (C1 + mark/index premium + mark/EMA24 distance). Primary contrast C2_vs_B1 on paired OOS QLIKE; secondary C1_vs_B1, C2_vs_C1.", "gate": "only_preregistered_contrasts"},
+            {"step": 7, "action": "Uncertainty: block bootstrap >=2000 deterministic-seed replicates (seed 12345), resampling complete UTC blocks jointly across instruments. Report sensitivity to instrument concentration + leave-one-instrument-out.", "gate": "block_bootstrap_done"},
+            {"step": 8, "action": "Multiplicity: Holm familywise correction across the WHOLE declared family (all targets/contrasts/models). Report raw AND adjusted.", "gate": "holm_applied"},
+            {"step": 9, "action": "Gate assessment: require >=2% relative QLIKE reduction on primary target, CI excludes zero after multiplicity, >=3 non-overlapping 30-day test blocks, >=5 instruments, acceptable calibration. If block-count fails a priori, verdict is PILOT/INCONCLUSIVE regardless of point estimate.", "gate": "gate_assessment"},
+            {"step": 10, "action": "DO NOT touch sealed experiments FCLR-001/002/003/006/007/008/011. DO NOT merge Binance with Hyperliquid (Track A). DO NOT threshold-shop or relax the 2% materiality floor. DO NOT build live/paper trading.", "gate": "firewall_intact"}
+        ],
+        "do_not": [
+            "do not inspect outcomes before pre-registration",
+            "do not relax the 2% materiality floor",
+            "do not reuse sealed FCLR-001/003/006/007/008/011 panels",
+            "do not merge Binance with Hyperliquid (Track A)",
+            "do not fabricate data or zero-fill missing features",
+            "do not run unless an admissible >2026-08-06 panel exists"
+        ]
+    },
     "next_action": {
         "campaign": "FCLR-NEXT-024-TRACK-C-FUNDING-CONDITIONED-VOL-HARDENING",
         "runnable_commands": [
             "python -m unittest discover -s tests -v  # expect 117 OK",
-            "python scripts/track_c_inventory_harden.py  # refresh inventory",
-            "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"  # expect BLOCKED explicit reason",
-            "python -m json.tool research_state/readiness/track_c_prereg_template_fclr012.json  # structure-only check",
+            "python scripts/track_c_inventory_harden.py  # refresh inventory + diff vs latest trigger_harden_*.json",
+            "python scripts/write_trigger_harden_successor.py  # write this heavy successor artifact with IF-TRIGGER-FIRES-NOW checklist",
+            "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"  # expect BLOCKED with explicit prereg reason",
+            "python -c \"import json; t=json.load(open('research_state/readiness/track_c_prereg_template_fclr012.json')); print('trigger_state=', t['trigger']['current_state'], 'status=', t['status'])\"  # structure-only, NOT_FIRED expected",
             "sha256sum research_state/cross_track_decision_firewall.md research_state/sealed_holdout_integrity.md research_state/structural_closure_verdict_heavy.md research_state/experiment_frontier.json research_state/run_manifest.json research_state/hypothesis_registry.json",
             "git status --short .github/workflows  # expect empty"
         ],
