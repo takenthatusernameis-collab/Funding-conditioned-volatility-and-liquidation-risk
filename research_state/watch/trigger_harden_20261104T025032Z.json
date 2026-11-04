@@ -1,0 +1,31 @@
+{
+  "timestamp_utc": "20261104T025032Z",
+  "root_zips_count": 463,
+  "root_zips_by_year": {
+    "2024": 463
+  },
+  "ironflow_dir_exists": true,
+  "ironflow_files": [
+    "2025-05.parquet",
+    "2025-06.parquet",
+    "2025-07.parquet",
+    "2025-08.parquet",
+    "2025-09.parquet",
+    "2025-10.parquet",
+    "2025-11.parquet",
+    "2025-12.parquet",
+    "2026-01.parquet",
+    "2026-02.parquet",
+    "2026-03.parquet",
+    "2026-04.parquet",
+    "2026-05.parquet",
+    "2026-06.parquet",
+    "2026-07.parquet",
+    "2026-08.parquet",
+    "2026-09.parquet",
+    "2026-10.parquet"
+  ],
+  "trigger_ironflow_gt_20261031": false,
+  "sealed_window": "2026-05-08..2026-08-06",
+  "track_c_priority": "FUNDING-CONDITIONED_VOLATILITY"
+}
