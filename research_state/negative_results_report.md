@@ -8,6 +8,33 @@ No result below was obtained by tuning, threshold-shopping, or reuse of the seal
 holdout for selection. All outcomes use the frozen train/val/test split with a
 7-calendar-day embargo.
 
+---
+## FCLR-012-V (FORWARD VOLATILITY, UNSEALED 2026 PANEL) — 2026-11-04T00:52Z
+
+- **Outcome:** INCONCLUSIVE (PILOT). Forecast gate NOT MET.
+- **Contrast:** C2 vs B1 on next-24-hour realized variance, out-of-sample QLIKE.
+- **Point estimate:** 15.19% relative QLIKE reduction (favors C2; direction
+  consistent with sealed FCLR-011's +4.94%).
+- **Uncertainty:** paired block bootstrap (2000 reps, ~24h blocks) 95% CI
+  [-0.360564, 0.059434] crosses zero.
+- **Block requirement:** NOT MET. Test window 2026-10-29..2026-11-02 = 5 days =
+  0 non-overlapping 30-day blocks, versus the protocol requirement of >=3
+  non-overlapping 30-day evaluation blocks across >=5 instruments.
+- **Data:** genuinely new unsealed Binance panel 2026-08-07..2026-11-02 (not a
+  reuse of any sealed holdout). 2026-10-28/29 mark days are genuinely absent from
+  the archive (HTTP 404 on live probe 2026-11-04T00:45Z) and were NOT imputed.
+- **Interpretation:** Encouraging forward signal on new data, but far too short an
+  evaluation window and too wide a dependence-aware CI to support a confirmatory
+  claim. Retain the null for confirmatory purposes. Do NOT promote.
+- **Artifact:** research_state/evaluation_summary_FCLR-012-V.md;
+  prereg research_state/pre_registration_fclr012v_20261104T005000Z.md;
+  coverage research_state/fclr012v_coverage_audit.json.
+
+Secondary contrasts (also CIs cross zero):
+- C1 vs B1: -1.31% (95% CI [-0.066153, 0.051887]).
+- C2 vs C1: 16.28% (95% CI [-0.294411, 0.019843]).
+
+---
 ## 1. Primary forecast test (FCLR-H001)
 
 - **Outcome:** INCONCLUSIVE (PILOT). Forecast gate NOT MET.

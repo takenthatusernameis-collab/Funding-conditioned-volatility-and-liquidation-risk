@@ -88,6 +88,15 @@ elif EXPERIMENT == "FCLR-011":
     DATA_END = "2026-08-06"
     SPLIT_KEY = "split_boundaries_fclr011"
     START_ALL = "2026-01-01"
+elif EXPERIMENT == "FCLR-012-V":
+    # Forward volatility validation on the unsealed 2026 panel 2026-08-07..2026-11-02.
+    # Data downloaded by scripts/fclr012_download.py and coverage-audited in
+    # research_state/fclr012v_coverage_audit.json. Pre-registered in
+    # research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
+    DATA_END = "2026-11-02"
+    SPLIT_KEY = "split_boundaries_fclr012v"
+    START_ALL = "2026-08-07"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
