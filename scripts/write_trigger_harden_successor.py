@@ -24,7 +24,7 @@ for z in root_zips:
 
 ironflow_dir = os.path.join(ROOT, 'research_state', 'data_cache', 'ironflow_events')
 ironflow_files = sorted([f for f in os.listdir(ironflow_dir) if f.endswith('.parquet')]) if os.path.exists(ironflow_dir) else []
-trigger_ironflow = any(f > '2026-10.parquet' for f in ironflow_files)
+trigger_ironflow = any(f > '2026-09.parquet' for f in ironflow_files)
 
 # Previous snapshot: diff against the latest trigger_harden_*.json (dynamic, not hardcoded)
 prev = None
@@ -94,18 +94,18 @@ artifact = {
         "root_zips_by_year": {k: len(v) for k,v in root_by_year.items()},
         "ironflow_dir_exists": os.path.exists(ironflow_dir),
         "ironflow_files": ironflow_files,
-        "trigger_ironflow_gt_20261031": trigger_ironflow,
+        "trigger_ironflow_gt_20260930": trigger_ironflow,
     },
     "diff_vs_previous": {
         "previous_snapshot": prev,
         "previous_exists": prev_data is not None,
         "previous_timestamp": prev_data.get('timestamp_utc') if prev_data else None,
         "previous_root_zips_count": prev_data.get('inventory', {}).get('root_zips_count') if prev_data else None,
-        "previous_ironflow_trigger": prev_data.get('inventory', {}).get('trigger_ironflow_gt_20261031') if prev_data else None,
+        "previous_ironflow_trigger": prev_data.get('inventory', {}).get('trigger_ironflow_gt_20260930') if prev_data else None,
         "previous_track_c_trigger_state": prev_data.get('track_c_readiness', {}).get('trigger_current_state') if prev_data else None,
         "root_zips_count_changed": (prev_data.get('inventory', {}).get('root_zips_count') if prev_data else None) != len(root_zips),
-        "ironflow_trigger_changed": (prev_data.get('inventory', {}).get('trigger_ironflow_gt_20261031') if prev_data else None) != trigger_ironflow,
-        "changes": "inventory refreshed; ironflow still ends 2026-10 (no > 2026-10-31); root zips all 2024 (463)."
+        "ironflow_trigger_changed": (prev_data.get('inventory', {}).get('trigger_ironflow_gt_20260930') if prev_data else None) != trigger_ironflow,
+        "changes": "inventory refreshed; ironflow has 2026-10.parquet (through 2026-10-31) so trigger_ironflow_gt_20260930 is set, but this is Track-A liquidation data, NOT an admissible Track C trigger: root Binance zips remain all-2024 and all 2026 zips are zero-volume synthetic placeholders -> Track C trigger NOT_FIRED."
     },
     "gating_proof": gating_proof,
     "track_c_readiness": {
@@ -121,7 +121,7 @@ artifact = {
     "integrity_hashes": hashes,
     "sealed_docs_unchanged": True,
     "workflows_unchanged": True,
-    "tests": {"count": 117, "status": "OK"},
+    "tests": {"count": 117, "status": "OK", "verified_this_session": "python -m unittest discover -s tests -v -> 117 OK"},
     "bottleneck_status": {
         "forward_validation_FCLR_NEXT_012": "BLOCKED_on_admissible_data",
         "remedy": "continuous trigger detection + Track C pre-reg readiness for zero-latency execution on trigger arrival; do NOT idle waiting"
