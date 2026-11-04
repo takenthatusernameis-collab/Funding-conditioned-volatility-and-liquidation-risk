@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T213254Z
+Timestamp (UTC): 20261104T214524Z
 Git SHA (HEAD): 0b4e112b
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T213254Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T214524Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -11,11 +11,11 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - Liquidation risk component: Track A (FCLR-010) — BLOCKED on admissible unauthenticated liquidation data (ironflow latest 2026-10; no >=2026-11). Highest active priority.
 
 ## CURRENT VERIFIED STATE
-- Tests: 175/175 pass (was 174 passed + 1 failing; fixed tests/test_alt_source_hunt_cache.py::TestUrlProbeCache::test_cache_get_returns_none_for_missing_and_bad — Path.write_text called on the mkdtemp dir instead of the cache file path; suite now fully green).
-- Working tree: tracked scripts/__pycache__/*.pyc and tests/__pycache__/*.pyc de-tracked via git rm --cached (staged, NOT committed — commit on explicit request only); remaining diff is staged pycache removal + test fix + monitor evidence artifacts.
+- Tests: 179/179 pass (suite fully green).
+- Working tree: 18 tracked __pycache__/*.pyc de-tracked via git rm --cached (staged, NOT committed — commit on explicit request only); remaining staged diff is pycache removal + test fix + monitor evidence artifacts.
 - Track C: SEALED/LOCKED (gate passed, robustness done). Track B: NOT_SUPPORTED.
 - Track A: ON TRIGGER ONLY. Re-confirmed blocked 20261104T213437Z via python scripts/monitor_ironflow_liquidations.py --quick: data_through=2026-10; 2026-11, 2026-12, 2027-01, 2027-02 all head-probed absent (404/EntryNotFound); baseline drift intact (regressions=0); Kaggle mirror not triggered. Evidence: research_state/ironflow_probe_20261104T213437Z.json.
-- Bottlenecks removed this session: (1) the one failing test (suite now 175/175 green); (2) noisy tracked __pycache__ de-tracked from git.
+- Bottlenecks removed this session: (1) the one failing test (suite now 175/175 green); (2) 18 tracked __pycache__/*.pyc de-tracked from git and staged for removal (binary cache noise eliminated).
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
@@ -41,10 +41,10 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 ```
 
 ## VERIFICATION
-- `python -m pytest tests/ -q` (175 passed)
+- `python -m pytest tests/ -q` (179 passed)
 - `python scripts/monitor_ironflow_liquidations.py --quick` (confirms blocked: data_through=2026-10, no >=2026-11)
 - `python scripts/hunt_alternative_liquidation_sources.py`
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261104T213254Z: Execute campaign above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
+20261104T214524Z: Execute campaign above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
