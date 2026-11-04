@@ -125,3 +125,11 @@ This session is NOT complete until:
 - No sealed experiments (FCLR-001/002/003/006/007/008/011) were touched
 - AGENT_HANDOFF.md has been updated to reflect the new timestamp and handoff ID
 - This session's heavy artifacts: research_state/watch/trigger_harden_20261104T035639Z.json (inventory) and research_state/watch/trigger_harden_20261104T035729Z.json (heavy successor with gating proof, track_c readiness, integrity hashes, IF-TRIGGER-FIRES-NOW checklist, next_runnable_commands)
+
+## SESSION UPDATE (20261104T043231Z) - HEAVY TRACK-C CAMPAIGN EXECUTED
+- Tests: 117/117 OK (confirmed after LFS pull of run_manifest.json)
+- Created successor: research_state/watch/trigger_harden_20261104T043231Z.json (inventory from latest, gating proof BLOCKED without prereg with exact message, track_c_prereg_template_fclr012.json schema validated structure-only, integrity hashes of seals/firewalls/manifests, sealed experiments untouched, workflows unchanged, IF-TRIGGER-FIRES-NOW checklist + next_runnable_commands)
+- Inventory hardening run produced trigger_harden_20261104T043112Z.json (diffs vs previous)
+- Gating proof captured: evaluate_forward BLOCKED with reason "Pre-registration path required. Call pre_register_experiment() and inspect no outcomes before it exists."
+- Bottlenecks: idle waiting removed (zero-latency readiness), stale SHA context corrected, ironflow 2026-10 correctly classified Track A only, all 2026 zips zero-volume placeholders not admissible, firewall/prereg enforced
+- Next: monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder). Do NOT snoop outcomes; preregister BEFORE inspecting.
