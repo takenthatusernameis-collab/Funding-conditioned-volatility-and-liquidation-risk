@@ -3,6 +3,7 @@ import json
 import os
 import glob
 import re
+import zipfile
 import subprocess
 from datetime import datetime, timezone
 
@@ -28,8 +29,21 @@ for z in root_zips:
         size = os.path.getsize(z)
     except OSError:
         size = -1
-    if 0 <= size < 50_000:  # structural heuristic: real kline zips are far larger
-        placeholder_candidates.append({'name': name, 'size_bytes': size})
+    # Admissibility gate is CONTENT-based (non-zero volume/taker_buy), NOT size-based.
+    # A size heuristic mislabels real 2024 kline zips (used by sealed FCLR-002) as placeholders.
+    vol = None
+    try:
+        if 'fundingRate' not in name:
+            with zipfile.ZipFile(z) as zf:
+                rows = zf.read(zf.namelist()[0]).decode().split('\n')
+                data = [r for r in rows[1:] if r.strip()]
+                if data:
+                    cols = data[0].split(',')
+                    vol = float(cols[5]) if len(cols) > 5 else None
+    except Exception:
+        vol = None
+    if vol is not None and vol == 0:
+        placeholder_candidates.append({'name': name, 'size_bytes': size, 'volume': vol, 'reason': 'zero-volume synthetic placeholder'})
 
 # --- Ironflow: scan for any file > 2026-09-30 (i.e. 2026-10 and later) ---
 ironflow_dir = os.path.join(ROOT, 'research_state', 'data_cache', 'ironflow_events')
