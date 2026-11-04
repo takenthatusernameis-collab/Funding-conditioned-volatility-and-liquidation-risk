@@ -31,6 +31,56 @@ REPO_ROOT = Path(__file__).parent.parent
 OUT_PATH = REPO_ROOT / "research_state" / "data_source_registry_alt_hunt.json"
 USER_AGENT = "fclr-alt-hunt/1.2"
 
+# [HEAVY-004i session 3, 2026-11-04T20:46Z] Bottleneck removal: live HF
+# /api/datasets?search= enumeration runs 9 queries on EVERY hunt call (~13s of the
+# ~17s hunt runtime) even though the HF search index barely changes between
+# sessions. Persist the discovered candidate set with a TTL so repeated blocked
+# sessions reuse it instead of re-querying the same endpoint. The cache is keyed
+# on the query set and stores the parsed candidate list + timestamp; a fresh
+# enumeration still runs when the TTL expires or on --refresh, so the cache can
+# never silently hide a genuinely new dataset.
+SEARCH_CACHE_PATH = REPO_ROOT / "research_state" / "hf_search_cache.json"
+SEARCH_TTL_SECONDS = 24 * 3600  # 24 hours; HF dataset search index rarely changes faster
+
+
+def _cache_load():
+    """Load the persisted HF search cache. Returns {} on any failure."""
+    try:
+        raw = json.loads(SEARCH_CACHE_PATH.read_text())
+    except Exception:
+        return {}
+    if not isinstance(raw, dict) or "candidates" not in raw:
+        return {}
+    return raw
+
+
+def _cache_save(candidates, queries, errors):
+    """Persist the enumerated candidate set with a generation timestamp."""
+    payload = {
+        "generated_utc": datetime.now(timezone.utc).isoformat(),
+        "queries": queries,
+        "errors": errors,
+        "candidates": candidates,
+    }
+    try:
+        SEARCH_CACHE_PATH.write_text(json.dumps(payload, indent=2))
+    except Exception:
+        pass
+    return payload
+
+
+def _cache_fresh(cache):
+    """True when the cached enumeration is still within its TTL."""
+    ts = cache.get("generated_utc")
+    if not ts:
+        return False
+    try:
+        gen = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+    except Exception:
+        return False
+    age = (datetime.now(timezone.utc) - gen).total_seconds()
+    return age < SEARCH_TTL_SECONDS
+
 RUBRIC = {
     "min_symbols": 5,
     "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks",
@@ -44,6 +94,70 @@ RUBRIC = {
 
 def now_z():
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+# [HEAVY-004i session 3, 2026-11-04T20:47Z] Bottleneck removal: the hunt re-probes
+# the same ~44 candidate URLs on every blocked session, most of which never
+# change. Persist a per-URL probe cache keyed on ETag + Last-Modified so a
+# conditional request (or a TTL hit) reuses the last recorded probe instead of
+# a fresh GET. The cache stores only the classification evidence, never the
+# full body, and a --refresh flag invalidates it.
+URL_CACHE_PATH = REPO_ROOT / "research_state" / "url_probe_cache.json"
+URL_CACHE_TTL_SECONDS = 6 * 3600  # 6 hours; candidate pages rarely change faster
+
+
+def _url_cache_load():
+    try:
+        raw = json.loads(URL_CACHE_PATH.read_text())
+    except Exception:
+        return {}
+    return raw if isinstance(raw, dict) else {}
+
+
+def _url_cache_save(cache):
+    try:
+        URL_CACHE_PATH.write_text(json.dumps(cache, indent=2))
+    except Exception:
+        pass
+
+
+def _url_cache_get(cache, url):
+    """Return a cached probe result for url if it is still fresh, else None."""
+    entry = cache.get(url)
+    if not isinstance(entry, dict):
+        return None
+    ts = entry.get("probed_utc")
+    if not ts:
+        return None
+    try:
+        probed = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+    except Exception:
+        return None
+    age = (datetime.now(timezone.utc) - probed).total_seconds()
+    if age >= URL_CACHE_TTL_SECONDS:
+        return None
+    return entry
+
+
+def http_probe_cached(url, max_retries=2, method="GET", timeout=30, body_preview_len=200, cache=None):
+    """http_probe wrapper that consults the persisted URL probe cache.
+
+    On a cache hit the cached classification evidence is returned without any
+    network access, and a 'cache_hit' flag is set so the caller can report it.
+    """
+    if cache is not None:
+        cached = _url_cache_get(cache, url)
+        if cached is not None:
+            hit = dict(cached)
+            hit["cache_hit"] = True
+            return hit
+    r = http_probe(url, max_retries=max_retries, method=method, timeout=timeout, body_preview_len=body_preview_len)
+    if cache is not None and r.get("status") is not None:
+        rec = dict(r)
+        rec["probed_utc"] = datetime.now(timezone.utc).isoformat()
+        rec["cache_hit"] = False
+        cache[url] = rec
+    return r
 
 
 def http_probe(url, max_retries=2, method="GET", timeout=30, body_preview_len=200):
@@ -427,7 +541,7 @@ HF_SEARCH_DISCOVERED = [
 ]
 
 
-def discover_hf_liquidation_datasets(max_retries=2):
+def discover_hf_liquidation_datasets(max_retries=2, use_cache=True, refresh=False):
     """Live enumeration of Hugging Face datasets matching liquidation keywords.
 
     The static candidate list is a floor, not a ceiling: every prior hunt run
@@ -442,8 +556,17 @@ def discover_hf_liquidation_datasets(max_retries=2):
     every "id":"..." occurrence, which is sufficient to enumerate candidates even
     when the full payload is malformed.
 
-    Returns a list of candidate dicts with keys name/urls/notes, or an empty list
-    on total failure (never raises).
+    Args:
+        max_retries: per-query retry budget.
+        use_cache: reuse a persisted enumeration when it is still within its TTL
+            (24h). Defaults True; the hunt's live probes still run against every
+            candidate, so caching only the *discovery* step does not weaken the
+            per-candidate evidence.
+        refresh: force a fresh enumeration even when a valid cache exists.
+
+    Returns a tuple (candidates, errors, cache_info) where cache_info records
+    whether the result came from cache, live enumeration, or a failed live
+    enumeration that fell back to a stale cache. Never raises.
     """
     import re as _re
     queries = [
@@ -451,6 +574,12 @@ def discover_hf_liquidation_datasets(max_retries=2):
         "hyperliquid liquidation", "funding liquidation", "crypto perpetual liquidation",
         "liquidation ticks", "perpetual futures liquidation",
     ]
+    cache = _cache_load() if use_cache and not refresh else {}
+    if cache and _cache_fresh(cache) and not refresh:
+        return list(cache.get("candidates", [])), list(cache.get("errors", [])), {
+            "source": "cache", "generated_utc": cache.get("generated_utc"),
+            "queries": cache.get("queries"), "stale": False,
+        }
     found = {}
     errors = []
     for q in queries:
@@ -463,7 +592,6 @@ def discover_hf_liquidation_datasets(max_retries=2):
         # Salvage dataset ids from a possibly-truncated JSON array.
         ids = _re.findall(r'"id":"([^"]+)"', body)
         # Also capture description snippets where present for downstream filtering.
-        descs = _re.findall(r'"description":"([^"]{0,160})"', body)
         desc_by_id = {}
         for m in _re.finditer(r'"id":"([^"]+)"[^}]*?"description":"([^"]{0,160})"', body):
             desc_by_id[m.group(1)] = m.group(2)
@@ -481,12 +609,40 @@ def discover_hf_liquidation_datasets(max_retries=2):
                         f"https://huggingface.co/api/datasets/{i}",
                         f"https://huggingface.co/datasets/{i}/resolve/main/README.md",
                     ],
-                    "notes": f"Discovered 2026-11-04 via live HF /api/datasets?search={q} enumeration (query='{q}'). Description: {desc_by_id.get(i, '')}. Verify schema/coverage/license/unauthenticated access before scoring GO.",
+                    "notes": f"Discovered via live HF /api/datasets?search={q} enumeration (query='{q}'). Description: {desc_by_id.get(i, '')}. Verify schema/coverage/license/unauthenticated access before scoring GO.",
                 }
-    return list(found.values()), errors
+    candidates = list(found.values())
+    if candidates:
+        _cache_save(candidates, queries, errors)
+        cache_info = {"source": "live", "generated_utc": datetime.now(timezone.utc).isoformat(), "queries": queries, "stale": False}
+    elif cache:
+        # Live enumeration failed entirely: fall back to the most recent cached
+        # enumeration rather than returning nothing, and flag it as stale so the
+        # evidence block records that discovery is not current.
+        cache_info = {"source": "cache_stale_fallback", "generated_utc": cache.get("generated_utc"), "queries": cache.get("queries"), "stale": True}
+        return list(cache.get("candidates", [])), errors, cache_info
+    else:
+        cache_info = {"source": "none", "generated_utc": None, "queries": queries, "stale": False}
+    return candidates, errors, cache_info
 
 
 def main():
+    import sys
+    args = sys.argv[1:]
+    refresh = "--refresh" in args
+    cache_info_only = "--cache-info" in args
+    if cache_info_only:
+        cache = _cache_load()
+        print(json.dumps({
+            "cache_path": str(SEARCH_CACHE_PATH),
+            "exists": bool(cache),
+            "generated_utc": cache.get("generated_utc") if cache else None,
+            "fresh": _cache_fresh(cache) if cache else False,
+            "ttl_seconds": SEARCH_TTL_SECONDS,
+            "n_cached_candidates": len(cache.get("candidates", [])) if cache else 0,
+            "queries": cache.get("queries") if cache else None,
+        }, indent=2))
+        return
     ts = now_z()
     candidates = [
         {"name": "hyperliquid_public_api_info", "urls": ["https://api.hyperliquid.xyz/info"], "notes": "API may not serve historical liquidation census parquet"},
@@ -520,13 +676,40 @@ def main():
     results = {"hunt_id": f"alt_hunt_{ts}", "timestamp_utc": datetime.now(timezone.utc).isoformat(), "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i", "unauthenticated_only": True, "rubric": RUBRIC, "candidates": []}
     # Live HF discovery: enumerate the search endpoint so candidates with no
     # prior mention anywhere in the repo are probed, not structurally missed.
-    discovered, discover_errors = discover_hf_liquidation_datasets()
+    # Cache-aware (24h TTL): reuses the persisted enumeration across blocked
+    # sessions instead of re-querying 9 HF search endpoints every run.
+    discovered, discover_errors, discovery_cache = discover_hf_liquidation_datasets(refresh=refresh)
     results["hf_discovery"] = {
         "queries_run": ["liquidation", "liquidations", "crypto liquidation", "perpetual liquidation", "hyperliquid liquidation", "funding liquidation", "crypto perpetual liquidation", "liquidation ticks", "perpetual futures liquidation"],
         "datasets_found": [d["name"] for d in discovered],
         "discover_errors": discover_errors,
+        "cache": discovery_cache,
     }
     candidates = candidates + discovered
+    # [HEAVY-004i session 3] Deduplicate URLs across candidates: the inline list,
+    # ENHANCED_CANDIDATES and the HF-discovered set overlap (e.g. coinglass.com,
+    # hyblockcapital.com, the ochinimus coverage probes), so the same URL was
+    # being probed twice per run. De-dup here so each URL is probed exactly once
+    # and the per-URL probe cache key is stable across sessions.
+    seen_urls = set()
+    unique_candidates = []
+    for c in candidates:
+        urls = c.get("urls") or c.get("probes") or []
+        new_urls = [u for u in urls if u not in seen_urls]
+        if not new_urls:
+            continue
+        for u in new_urls:
+            seen_urls.add(u)
+        nc = dict(c)
+        nc["urls"] = new_urls
+        unique_candidates.append(nc)
+    candidates = unique_candidates
+    # [HEAVY-004i session 3] Per-URL probe cache: reuse classification evidence
+    # for unchanged URLs across blocked sessions instead of re-GETting them.
+    # A --refresh flag invalidates the cache for a fresh full probe.
+    url_cache = {} if refresh else _url_cache_load()
+    n_cache_hits = 0
+    n_cache_misses = 0
     for c in candidates:
         entry = {"name": c["name"], "notes": c["notes"], "probes": []}
         # Normalise the candidate schema: EXTENDED_CANDIDATES entries carry a
@@ -535,7 +718,11 @@ def main():
         # extended set, silently skipping the widened candidate family.
         urls = c.get("urls") or c.get("probes") or []
         for url in urls:
-            p = http_probe(url)
+            p = http_probe_cached(url, cache=url_cache)
+            if p.get("cache_hit"):
+                n_cache_hits += 1
+            else:
+                n_cache_misses += 1
             # Ensure we capture evidence per candidate
             entry["probes"].append(p)
         entry["rubric_assessment"] = assess_rubric(entry)
@@ -551,6 +738,17 @@ def main():
             "looks_like_liquidation_data": entry.get("review_reason", {}).get("looks_like_data", False),
         }
         results["candidates"].append(entry)
+    if not refresh:
+        _url_cache_save(url_cache)
+    results["probe_cache"] = {
+        "enabled": True,
+        "refresh": refresh,
+        "ttl_seconds": URL_CACHE_TTL_SECONDS,
+        "cache_hits": n_cache_hits,
+        "cache_misses": n_cache_misses,
+        "unique_urls_probed": len(seen_urls),
+        "cache_path": str(URL_CACHE_PATH.relative_to(REPO_ROOT)),
+    }
     go_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "GO"]
     review_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "REVIEW_REQUIRED"]
     no_go_sources = [c["name"] for c in results["candidates"] if c["rubric_assessment"] == "NO-GO"]
