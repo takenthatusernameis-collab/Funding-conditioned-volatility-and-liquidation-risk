@@ -1,116 +1,78 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T024634Z
+Timestamp (UTC): 20261104T024900Z
 Git SHA (HEAD): 2d7245f1
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T024634Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-EXECUTION
+Handoff ID: FCLR-HANDOFF-20261104T024900Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-PRIORITIZED-CONTINUOUS-HARDENING
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (copy/paste as first action)
 ```
-TASK ID: FCLR-NEXT-025-TRACK-C-FUNDING-CONDITIONED-VOL-HARDENING
+TASK ID: FCLR-NEXT-026-TRACK-C-ZERO-LATENCY-READY
 PRIORITY: P0 - HEAVY WORK ENFORCED (no status-only, no idle waiting, no deferring)
-CAMPAIGN: FCLR-NEXT-025-FUNDING-CONDITIONED-VOL-CONTINUOUS-EXECUTION
+CAMPAIGN: FCLR-NEXT-026-FUNDING-CONDITIONED-VOL-HEAVY-CONTINUOUS
 REPO-NAME PRIORITY ORDER: Track C (funding-conditioned volatility forecasting) >> Track B (modeled boundary breaches) >> Track A (observed liquidation labels)
-TIMESTAMP (UTC): 20261104T024634Z
-OBJECTIVE: Repo name is directive - focus on FUNDING-CONDITIONED VOLATILITY. Build hard execution path for Track C (incremental value of funding + price features over RV-only baseline). Forward validation FCLR-NEXT-012 blocked pending admissible triggers (ironflow > 2026-10-31 OR unsealed 2026 Binance panel beyond 2026-11-02; all current 2026 zips are zero-volume synthetic placeholders -> NOT admissible). Do NOT wait passively - harden everything so the moment trigger fires, we run pre-registered frozen config with zero latency.
-HEAVY WORK MANDATE (NON-NEGOTIABLE, ALL FIVE EACH SESSION):
-(1) FULL INVENTORY HARDENING: enumerate root zips (count by asset/month/year), research_state/data_cache/ironflow_events/* (>2026-10-31 explicitly checked), all Binance data_vision artifacts. Diff vs previous trigger_harden snapshot (trigger_harden_20261104T024354Z.json).
-(2) PREREG GATING PROOF: python -c "from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))" OR run dry-run of evaluate_forward without prereg -> MUST fail with explicit prereg error. Capture exact traceback/message.
-(3) TRACK C READINESS (structure-only, NO outcome inspection/tuning): maintain/validate research_state/readiness/track_c_prereg_template_fclr012.json. Ensure frozen features (funding signed/abs, trailing RV6/RV24/RV168, premium/index-basis/mark-to-index, lags), targets (horizons 6h/24h/72h/7d), baselines (HAR/RV-only), ablations, CV/walk-forward, sealed holdout, correction for multiple comparisons.
-(4) INTEGRITY SWEEP: verify cross_track_decision_firewall.md, sealed_holdout_integrity.md, structural_closure_verdict_heavy.md, experiment_frontier.json, run_manifest.json, hypothesis_registry.json unchanged. Verify no workflow files modified.
-(5) SHIP HEAVY ARTIFACT: write research_state/watch/trigger_harden_<ts>.json successor with full diffs/inventory/gating_proof/track_c_readiness/integrity_hashes/next_action. MUST include concrete runnable commands for next session.
+TIMESTAMP (UTC): 20261104T024900Z
+OBJECTIVE: Repository name is MANDATORY - focus on FUNDING-CONDITIONED VOLATILITY. Build zero-latency execution path for Track C. Forward validation FCLR-NEXT-012 BLOCKED pending admissible triggers (ironflow > 2026-10-31 OR unsealed 2026 Binance panel beyond 2026-11-02; all current 2026 zips zero-volume synthetic placeholders -> NOT admissible). DO NOT WAIT PASSIVELY - every session MUST do heavy hardening so the INSTANT trigger fires, we pre-register frozen config and execute with zero latency.
+HEAVY WORK MANDATE (NON-NEGOTIABLE - ALL FIVE EACH SESSION):
+(1) FULL INVENTORY HARDENING: enumerate root zips (by asset/month/year), research_state/data_cache/ironflow_events/* (>2026-10-31 checked), all Binance data_vision artifacts. Diff vs LATEST trigger_harden_*.json. Must write successor with concrete diffs.
+(2) PREREG GATING PROOF: python -c "from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))" -> MUST return BLOCKED with explicit prereg error. Capture exact output.
+(3) TRACK C READINESS VALIDATION: load and validate research_state/readiness/track_c_prereg_template_fclr012.json schema (frozen features/funding/RV/premium/targets/baselines/ablations/CV/walk-forward/sealed holdout/multiplicity). STRUCTURE-ONLY - never inspect outcomes. Ensure pre_register_forward_experiment() path is testable.
+(4) INTEGRITY SWEEP: hash-check cross_track_decision_firewall.md (IMMUTABLE/SEALED), sealed_holdout_integrity.md, structural_closure_verdict_heavy.md, experiment_frontier.json, run_manifest.json, hypothesis_registry.json. Verify NO .github/workflows modified. Confirm sealed FCLR-001/002/003/006/007/008/011 untouched.
+(5) TRIGGER ALERTING + ACTIONABLE ARTIFACT: write research_state/watch/trigger_harden_<ts>.json with inventory/gating_proof/track_c_readiness/integrity_hashes/diffs/next_runnable_commands AND a concrete "IF TRIGGER FIRES NOW" checklist (pre-register before inspecting outcomes, load frozen template, run only pre-registered contrasts).
 
 BOTTLENECK REMOVAL RULES:
-- If any check takes >30s, parallelize or optimize; if blocking on download, use cache; if tests fail, fix immediately.
-- No "status only" files. Every artifact must enable action.
-- If data missing, harden detection/triggers and pre-reg readiness - do not idle.
-- Tests must stay >=117 passing; run them first if anything changed.
-- Do NOT re-run sealed FCLR-001/002/003/006/007/008/011 (firewall-sealed; would violate pre-registration/holdout discipline).
-- Forward validation FCLR-NEXT-012 is BLOCKED on admissible data (Binance archive ends 2026-11-02; live probe 404 for 2026-11-03/04 and 2026-10-28/29; all current 2026 zips zero-volume synthetic placeholders -> NOT admissible). BOTTLENECK REMOVED: do not idle waiting. Continuously maintain trigger detection + Track C pre-registration readiness so we execute pre-registered frozen config with zero latency on trigger arrival.
+- If any check >30s, parallelize/optimize; use cache if blocking on download.
+- No status-only files. Every artifact MUST enable immediate action.
+- Tests MUST stay >=117 passing. Run `python -m unittest discover -s tests -v` first if anything touched.
+- NEVER re-run sealed FCLR-001/002/003/006/007/008/011 (firewall-sealed - would violate prereg/holdout discipline).
+- FCLR-NEXT-012 BLOCKED on admissible data -> REMEDY: continuous trigger detection + Track C zero-latency readiness. Do NOT idle.
+- All current 2026 zips are zero-volume synthetic placeholders -> NOT admissible. Ironflow ends 2026-10 (no >2026-10-31). Binance root only 2024.
+- Pre-register BEFORE inspecting holdout outcomes. Frozen config only. Block bootstrap >=2000 with seed 12345. Holm correction across declared family.
 
 MANDATORY ACTION SEQUENCE (execute in order):
-1) VERIFY: python -m unittest discover -s tests -v (expect 117 OK). If fail -> fix before proceeding.
-2) INVENTORY: python scripts/track_c_inventory_harden.py (diff vs trigger_harden_20261104T024354Z.json).
-3) GATING: prove prereg required with explicit error capture (harness BLOCKED without pre_reg_path).
-4) TRACK-C: validate prereg template schema + frozen structure only (no outcome inspection).
-5) INTEGRITY: hash-check critical seals/firewalls/manifests.
-6) ARTIFACT: generate timestamped heavy artifact with actionable next steps.
+1) TESTS: python -m unittest discover -s tests -v (expect 117 OK). Fix immediately if fail.
+2) INVENTORY: python scripts/track_c_inventory_harden.py (diff vs LATEST trigger_harden_*.json) -> successor artifact
+3) GATING_PROOF: capture evaluate_forward BLOCKED without prereg with exact traceback/message
+4) TRACK_C_VALIDATE: validate track_c_prereg_template_fclr012.json schema completeness
+5) INTEGRITY: verify seals/firewalls/manifests unchanged + hashes
+6) HEAVY_ARTIFACT: write timestamped successor with full diffs, gating proof, readiness, integrity hashes, IF-TRIGGER-FIRES-NOW checklist, next_runnable_commands
+
+NEXT RANKED HEAVY TASKS (if time remains after above):
+- Harden trigger detection script to exit 0/1 with machine-readable alert on admissible data
+- Ensure FCLR010Harness.pre_register_forward_experiment() is ready to consume frozen template with no outcome inspection
+- Add quick admissibility check for any new zip (non-zero volume/taker_buy) - structure only, no data snooping
+- Keep experiment_frontier.json/hypothesis_registry.json current without expanding scope
 ```
 
-## 1) Bottlenecks removed (this session)
-- Handoff refreshed with repo-name-prioritized Track C focus (timestamp 20261104T024438Z)
-- Clear heavy-work mandate enforced (all 5 required each session)
-- Fresh trigger harden artifacts shipped: research_state/watch/trigger_harden_20261104T024354Z.json (inventory) and trigger_harden_20261104T024438Z.json (successor with gating proof + track_c readiness + integrity hashes + next_action); diffs vs trigger_harden_20261104T024354Z.json show no change (ironflow still ends 2026-10, no > 2026-10-31; root zips all 2024, 463)
-- Prereg gating proof re-captured: evaluate_forward() BLOCKED without prereg with explicit reason "Pre-registration path required..." (returncode 0, status BLOCKED)
-- Explicit bottleneck removal rules present
-- Forward validation bottleneck REMOVED (no idle waiting): FCLR-NEXT-012 blocked on admissible data -> remedy is continuous trigger detection + Track C pre-registration readiness for zero-latency execution on trigger arrival
-- Firewall rule enforced: do NOT re-run sealed FCLR-001/002/003/006/007/008/011 (removes session inefficiency from re-running exhausted confirmatory panels)
-- Trigger definition locked: NEW admissible unauthenticated 2026 Binance panel beyond sealed FCLR-011 test window 2026-05-08..2026-08-06 for BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT (1h klines + markPriceKlines + indexPriceKlines + premiumIndexKlines + fundingRate)
-- scripts/write_trigger_harden_successor.py hardened: previous-snapshot diff now resolves the LATEST trigger_harden_*.json dynamically instead of a hardcoded path, so diffs never silently compare against a stale baseline
+## 1) Current State (verified 20261104T024900Z)
+- Tests: 117/117 OK
+- Git HEAD: 2d7245f1 (main, clean)
+- Ironflow: latest 2026-10.parquet in research_state/data_cache/ironflow_events/ (ends 2026-10-31). trigger_ironflow_gt_20261031=false
+- Root data zips: 463 total, all 2024 (01-01..03-30). No 2025/2026 Binance archives in root.
+- Admissible trigger: NONE. All current 2026 zips are zero-volume synthetic placeholders -> NOT admissible.
+- Sealed window: 2026-05-08..2026-08-06 (frozen). Do NOT re-run sealed panels.
+- Prereg gating: ENFORCED (evaluate_forward BLOCKED without prereg with explicit reason)
+- Track C prereg template: research_state/readiness/track_c_prereg_template_fclr012.json exists (structure-only, v2.0-harness-compatible)
+- Gates: FCLR-010 PASSED (sealed), FCLR-011 PASSED (sealed, +4.94% rel QLIKE, CI excludes zero), FCLR-012-V INCONCLUSIVE
+- Overlay: INELIGIBLE per IMMUTABLE cross_track_decision_firewall.md
+- H001: NOT_SUPPORTED on widest unsealed powered panel (FCLR-008)
 
-## 2) Bottlenecks still open
-- Forward validation FCLR-NEXT-012: BLOCKED on admissible data
-  - Ironflow: latest 2026-10.parquet in research_state/data_cache/ironflow_events/ (no files > 2026-10-31); trigger_ironflow_gt_20261031=false
-  - Binance: root zips 2024-01..2024-03 only; live probe 2026-11-04T00:45Z -> 404 for 2026-11-03/04 and 2026-10-28/29; archive genuinely ends 2026-11-02
-  - All current 2026 data_cache zips are zero-volume synthetic placeholders -> NOT admissible -> trigger NOT fired as of 20261104T024438Z
-  - Remedy: maintain trigger detection + Track C pre-registration readiness continuously so we execute pre-registered frozen config with zero latency on trigger arrival; do not idle waiting.
+## 2) Bottlenecks Removed / Active
+- Bottleneck REMOVED (idle waiting): Continuous trigger detection + Track C zero-latency readiness. No passive polling.
+- Bottleneck PREVENTED: Firewall enforced to block re-running sealed panels.
+- Bottleneck ADDRESSED: Gating proof automated/capturable.
+- Active: Waiting for admissible unauthenticated 2026 Binance panel beyond 2026-08-06 (or ironflow>2026-10-31). Harden everything now.
 
-## 3) Verified state (this session)
-- Tests: 117/117 OK (verified 20261104T024438Z)
-- Git HEAD: 2d7245f1 (main)
-- Ironflow latest: 2026-10.parquet (coverage up to 2026-10-31 per registry); trigger_ironflow_gt_20261031=false
-- Root data zips: 463 root zips, all 2024 (01-01..03-30); no Binance data beyond 2026-11-02
-- Sealed window: 2026-05-08..2026-08-06 (frozen)
-- Prereg gating: evaluate_forward requires prereg (enforced; BLOCKED without it, explicit reason captured)
-- Integrity seals present and unchanged (cross_track_decision_firewall.md IMMUTABLE/SEALED)
-- Track C prereg template: research_state/readiness/track_c_prereg_template_fclr012.json exists (structure-only, no outcome inspection)
-- FCLR-010 (Track A) gate PASSED (sealed, FORECAST_GATE_PASSED); FCLR-011 (Track C) gate PASSED (sealed, FORECAST_GATE_PASSED, +4.94% rel QLIKE, CI [-0.032546, -0.001418] excludes zero); FCLR-012-V forward INCONCLUSIVE (5 days, 0 blocks, CI spans zero)
-- Overlay INELIGIBLE per cross-track firewall (IMMUTABLE); cross-track firewall IMMUTABLE
-- H001 status: NOT_SUPPORTED on widest unsealed powered panel (FCLR-008 CI crosses zero); all confirmatory panels exhausted
+## 3) Immediate Next Actions (MANDATORY)
+1. `python -m unittest discover -s tests -v` (confirm 117 OK)
+2. `python scripts/track_c_inventory_harden.py` (diff vs latest trigger_harden)
+3. Prove gating: capture BLOCKED without prereg
+4. Validate track_c prereg template schema
+5. Integrity sweep + write heavy successor artifact in research_state/watch/
 
-## 4) Next focus campaign (FCLR-NEXT-025)
-**TRACK C - FUNDING-CONDITIONED VOLATILITY HARDENING** (repo-name driven priority)
-
-Focus: Make Track C execution-ready so that on trigger arrival, we pre-register BEFORE inspecting holdout outcomes and execute frozen walk-forward against RV-only HAR baseline with full ablations. Repo name = Funding-conditioned-volatility-and-liquidation-risk -> Track C first, always.
-
-Concrete heavy tasks for next session:
-1. Run `python scripts/track_c_inventory_harden.py` - fast inventory with diffs vs trigger_harden_20261104T024354Z.json
-2. Validate Track C prereg template has all required frozen elements (no outcomes inspected)
-3. Maintain trigger detection helper that exits non-zero or writes alert on trigger
-4. Prove gating repeatedly with captured proof (evaluate_forward MUST fail without prereg)
-5. Ship successor `trigger_harden_<ts>.json` with hashes + runnable commands
-
-**RULE:** Never idle. If no trigger, HARDEN. Every session must produce a verifiable heavy artifact.
-
-## 5) Concrete runnable commands for next session
-```
-# 1) Verify tests first (gate before anything else)
-python -m unittest discover -s tests -v   # expect 117 OK
-
-# 2) Inventory hardening (full diff vs previous snapshot)
-python scripts/track_c_inventory_harden.py   # writes research_state/watch/trigger_harden_<ts>.json
-
-# 3) Prereg gating proof (MUST fail with explicit prereg error without prereg)
-python -c "from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))"   # expect BLOCKED explicit reason
-python scripts/fclr010_harness.py   # prints frozen config
-
-# 4) Track C readiness (structure-only, no outcome inspection)
-python -m json.tool research_state/readiness/track_c_prereg_template_fclr012.json
-
-# 5) Integrity sweep (verify sealed docs unchanged)
-sha256sum research_state/cross_track_decision_firewall.md research_state/sealed_holdout_integrity.md research_state/structural_closure_verdict_heavy.md research_state/experiment_frontier.json research_state/run_manifest.json research_state/hypothesis_registry.json
-git status --short .github/workflows   # expect empty (workflow protected)
-
-# 6) Ship heavy successor artifact
-python scripts/write_trigger_harden_successor.py   # writes research_state/watch/trigger_harden_<ts>.json
-```
-
-## 6) Acceptance criteria (session done)
-- 117 tests OK
-- New timestamped trigger_harden artifact in research_state/watch/ with inventory + gating proof + track_c_readiness + integrity hashes + next_action
-- Prereg gating proof captured (explicit BLOCKED error without prereg)
-- Track C prereg template validated structure-only
-- No workflow files modified; sealed docs unchanged
-- AGENT_HANDOFF.md updated with new timestamp and next task
-
-(End of file)
+## 4) Files to Watch
+- research_state/watch/trigger_harden_*.json (latest)
+- research_state/readiness/track_c_prereg_template_fclr012.json
+- scripts/fclr010_harness.py (pre_register_forward_experiment, evaluate_forward)
+- cross_track_decision_firewall.md (IMMUTABLE)
+- scripts/track_c_inventory_harden.py
