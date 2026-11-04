@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T200000Z
+Timestamp (UTC): 20261104T203124Z
 Git SHA (HEAD): 346e063b
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T200000Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T203124Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## STATE SNAPSHOT (CURRENT VERIFIED)
 - Tests: 166/166 pass (pytest/unittest). Working tree clean except untracked research probe artifacts (ironflow_probe_*.json, leave in place). __pycache__/*.pyc cleaned from git index and disk.
@@ -22,7 +22,7 @@ Handoff ID: FCLR-HANDOFF-20261104T200000Z | Priority: P0 - HEAVY WORK ENFORCED |
 TASK ID: FCLR-NEXT-073-TRACK-A-TRIGGER-HARDEN-004i-FORCE-HEAVY
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED: FUNDING-CONDITIONED VOLATILITY DONE; LIQUIDATION RISK BLOCKED -> FORCE HEAVY HARDENING)
 CAMPAIGN: TRACK A TRIGGER DETECTION HARDENING + PREREG DISCIPLINE (BLOCKED-DATA MODE)
-TIMESTAMP (UTC): 20261104T200000Z
+TIMESTAMP (UTC): 20261104T203124Z
 OBJECTIVE: Track C is LOCKED complete on frozen splits. Focus on Track A (liquidation risk). Data is blocked (ironflow data_through=2026-10, no >=2026-11 observed). You CANNOT stop for "no data" - you MUST harden detection, expand alternative sources, add tests, and produce verifiable blocker/frontier evidence every session. If ANY new admissible unauthenticated ironflow/liquidation data >=2026-11 appears OR a rubric-GO alternative source is found -> HALT inspection, PREREGISTER in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE inspecting outcomes with full hypothesis/frozen splits/metrics/stop rule, then run ONLY the frozen FCLR-010 harness (scripts/fclr010_execute.py or scripts/fclr010_harness.py) on existing sealed configuration. Do NOT merge sources, do NOT widen scope, do NOT re-tune on new data.
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, leakage-safe, preregister-before-outcomes strictly enforced. Track C remains LOCKED - no re-tuning on frozen splits. Raw data out of git; only code/manifests/reports committed.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
@@ -59,7 +59,7 @@ Ironflow publishes data/events/YYYY-MM.parquet and/or data/fills/YYYY-MM.parquet
 - `python scripts/hunt_alternative_liquidation_sources.py`
 - `git status`
 
-## SESSION UPDATE (20261104T200000Z) - FCLR-NEXT-073 CAMPAIGN LOADED (FORCE HEAVY)
+## SESSION UPDATE (20261104T203124Z) - FCLR-NEXT-073 CAMPAIGN LOADED (FORCE HEAVY)
 - Handoff regenerated to enforce heavy work while Track A blocked. Track C remains LOCKED.
 - Priority locked by repo name: Funding-conditioned volatility complete -> Liquidation risk next (blocked).
 - Bottleneck removal + test hardening + fresh blocker/frontier updates are mandatory every session.
@@ -68,7 +68,7 @@ Ironflow publishes data/events/YYYY-MM.parquet and/or data/fills/YYYY-MM.parquet
 ```text
 TASK ID: FCLR-NEXT-073-TRACK-A-TRIGGER-HARDEN-004i-FORCE-HEAVY
 PRIORITY: P0 - HEAVY WORK ENFORCED
-TIMESTAMP (UTC): 20261104T200000Z
+TIMESTAMP (UTC): 20261104T203124Z
 OBJECTIVE: Track C LOCKED. Track A ON TRIGGER ONLY (ironflow 2026-10 latest, no 2026-11+). Blocked-data mode: CANNOT stop for absence of data - MUST harden detection (monitor/hunt), remove bottlenecks, extend tests, write fresh blocker+frontier. If ANY >=2026-11 ironflow appears OR rubric-GO alternative found -> HALT, PREREGISTER in research_state/fclr010_prereg_*.json BEFORE inspection, run ONLY frozen FCLR-010 harness. Never re-tune sealed tracks.
 MANDATORY: 1) State sweep >=200 lines (diff) 2) Run monitor quick + deep_review_alt_sources + hunt_alternative_liquidation_sources with full tables 3) Concrete bottleneck removal in scripts 4) Add/extend tests, all green 5) Fresh blocker doc + frontier update + handoff update. Stop only after all artifacts written. No .github/workflows changes.
 RESUME: ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 unauthenticated 200, OR rubric-GO alternative.
