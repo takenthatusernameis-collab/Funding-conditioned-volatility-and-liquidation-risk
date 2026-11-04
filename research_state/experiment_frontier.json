@@ -62,9 +62,14 @@
       "rank": 0.1,
       "task": "TRACK_A_LIQUIDATION_RISK_MONITOR: Keep alive until rubric-GO data appears",
       "prerequisite": "monitor_ironflow_liquidations --quick/--verify",
-      "acceptance": "Evidence logged, automation hardened if improved, resume only on 200 for 2026-11+ or rubric-GO source",
-      "blockers": "Structural - no data",
-      "status": "MONITOR_ONLY"
+      "acceptance": "Evidence logged each session, automation hardened, resume only on rubric-GO data with preregistration",
+      "blockers": "Structural - no data (2026-10 latest); monitor hardened in 004i",
+      "status": "MONITOR_ONLY",
+      "resume_triggers": [
+        "ironflow >=2026-11 parquet appears",
+        "rubric-GO alternative unauthenticated source"
+      ],
+      "generated": "20261104T192914Z"
     }
   ],
   "coverage": {
@@ -93,9 +98,9 @@
     },
     {
       "track": "TRACK_A",
-      "reason": "No ironflow month >=2026-11",
-      "resume_trigger": "data/events/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF)",
-      "last_checked": "2026-11-04T12:33:00Z"
+      "reason": "No ironflow month >=2026-11 (data_through=2026-10)",
+      "resume_trigger": "data/events/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF) with HTTP 200; OR rubric-GO alternative source passes strict criteria",
+      "last_checked": "2026-11-04T19:29:14Z"
     },
     {
       "track": "TRACK_C",
@@ -104,6 +109,6 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-04T12:33:00Z",
+  "last_updated": "2026-11-04T19:29:14Z",
   "timestamp": "20261104T005200Z"
 }

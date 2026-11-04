@@ -1,3 +1,17 @@
+
+
+# Extended candidate set for 004i
+EXTENDED_CANDIDATES = [
+    {"name": "coinapi_free_liquidations", "type": "api_docs", "url": "https://docs.coinapi.io/", "notes": "Check unauthenticated history; many require keys - treat as NO-GO unless explicit unauthenticated historical download exists with >=5 symbols and >=1 complete month.", "probes": ["https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_BTC_USDT/latest?period_id=1DAY&limit=1"]},
+    {"name": "cryptofeed_docs", "type": "docs", "url": "https://github.com/bmoscon/cryptofeed", "notes": "Library not a dataset host; NO-GO as data source.", "probes": []},
+    {"name": "tardis_dev_docs", "type": "docs", "url": "https://tardis.dev/", "notes": "Commercial/requires access in general; check unauthenticated download paths. Likely NO-GO unless explicit free historical download exists.", "probes": ["https://api.tardis.dev/v1/"]},
+    {"name": "kaiko_docs", "type": "docs", "url": "https://www.kaiko.com/", "notes": "Paid; NO-GO.", "probes": []},
+    {"name": "glassnode_docs", "type": "docs", "url": "https://docs.glassnode.com/", "notes": "Paid/auth; NO-GO.", "probes": []},
+    {"name": "coinglass_public_pages", "type": "web", "url": "https://www.coinglass.com/", "notes": "Check for downloadable historical liquidation data without login/payment; often requires signup/API - probe cautiously.", "probes": ["https://www.coinglass.com/"]},
+    {"name": "bybit_public_archive_check", "type": "exchange", "url": "https://public.bybit.com/", "notes": "Bybit public data archive exists but check liquidation data specifically; unauthenticated downloads possible for some datasets.", "probes": ["https://public.bybit.com/"]},
+    {"name": "okx_public_data", "type": "exchange", "url": "https://www.okx.com/", "notes": "Check public historical data; liquidation history may require specific endpoints - probe.", "probes": ["https://www.okx.com/"]},
+]
+
 #!/usr/bin/env python3
 """
 Exhaustive alternative source hunt for Track A observed liquidations (unauthenticated only)
@@ -265,7 +279,7 @@ EXTRA_PROBES = [
 # HEAVY-004i enhancement: add more unauthenticated candidates. These are merged
 # into the candidate list below so each hunt run probes them (previously they
 # were dead module-level data never passed to main()).
-ENHANCED_CANDIDATES = [
+ENHANCED_CANDIDATES = EXTENDED_CANDIDATES + [
     {"name": "coinglass_public_liquidations", "urls": ["https://www.coinglass.com/api/liquidation/chart", "https://www.coinglass.com/LiquidationData"], "notes": "Coinglass public pages (often requires JS; probe for structure only)"},
     {"name": "coinank_public", "urls": ["https://www.coinank.com/"], "notes": "Public site probe"},
     {"name": "laevitas_public", "urls": ["https://laevitas.ch/"], "notes": "Public site probe"},

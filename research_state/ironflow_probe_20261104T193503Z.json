@@ -1,0 +1,79 @@
+{
+  "probe_id": "ironflow_probe_20261104T193503Z",
+  "timestamp_utc": "2026-11-04T19:35:03.497874+00:00",
+  "dataset": "ironflow/hyperliquid-liquidations",
+  "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
+  "tree": {
+    "url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
+    "method": "GET",
+    "status": 304,
+    "headers": {},
+    "tree_etag_unchanged": true,
+    "skipped_full_parse": true,
+    "parquet_paths": [],
+    "etag": "W/\"x\""
+  },
+  "months_probed": [],
+  "new_files_found": [],
+  "data_through": "2026-10",
+  "consecutive_absent": 0,
+  "probe_window": {
+    "lookback_months": 6,
+    "lookahead_months": 6
+  },
+  "quick_resume_check": {
+    "triggered": false,
+    "triggering_files": [],
+    "months_probed": [
+      "2026-11",
+      "2026-12",
+      "2027-01",
+      "2027-02"
+    ],
+    "head_probes": 8,
+    "cached_hits": 0,
+    "data_through": "2026-10",
+    "probes": []
+  },
+  "mode": "quick",
+  "head_probes": 8,
+  "cached_hits": 0,
+  "tree_change": {
+    "tree_status": 304,
+    "tree_not_modified": true,
+    "tree_etag": "W/\"x\"",
+    "changed": false,
+    "added": [],
+    "removed": [],
+    "changed_paths": [],
+    "content_replaced": [],
+    "current_count": 0,
+    "previous_count": 0,
+    "current_parquet_paths": [],
+    "current_parquet_items": {}
+  },
+  "probe_diff": {
+    "added": [],
+    "changed": [],
+    "removed": [],
+    "unchanged": [],
+    "summary": {
+      "added_count": 0,
+      "changed_count": 0,
+      "removed_count": 0,
+      "unchanged_count": 0,
+      "any_change": false
+    }
+  },
+  "baseline_drift": {
+    "checked": 0,
+    "pairs_checked": [],
+    "records": [],
+    "regressions": [],
+    "regression_count": 0,
+    "content_replaced": [],
+    "content_replaced_count": 0,
+    "head_failures": 0,
+    "baseline_intact": true
+  }
+}

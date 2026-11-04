@@ -1124,3 +1124,34 @@ class TestBaselineDriftProbe(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestFastPathEnhancements(unittest.TestCase):
+    def test_fastpath_cache_load_save(self):
+        import tempfile, os
+        from pathlib import Path
+        import json
+        # Test with temp state
+        orig = mon.FAST_PATH_STATE
+        try:
+            td = Path(tempfile.mkdtemp())
+            mon.FAST_PATH_STATE = td / "cache.json"
+            cache = mon.load_fastpath_cache()
+            self.assertIsInstance(cache, dict)
+            cache['test'] = 123
+            mon.save_fastpath_cache(cache)
+            cache2 = mon.load_fastpath_cache()
+            self.assertEqual(cache2.get('test'), 123)
+        finally:
+            mon.FAST_PATH_STATE = orig
+
+    @patch("scripts.monitor_ironflow_liquidations.urlopen")
+    def test_tree_get_cached_handles_304(self, mock_urlopen):
+        from urllib.error import HTTPError
+        import io
+        hdrs = {"ETag": 'W/"test"'}
+        e = HTTPError(mon.TREE_URL, 304, "Not Modified", hdrs, io.BytesIO(b""))
+        mock_urlopen.side_effect = e
+        r = mon.tree_get_cached(use_cache=False)
+        self.assertEqual(r["status"], 304)
+        self.assertTrue(r.get("not_modified"))

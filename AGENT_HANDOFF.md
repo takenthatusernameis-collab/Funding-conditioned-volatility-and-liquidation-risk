@@ -65,3 +65,22 @@ Ironflow publishes data/events/YYYY-MM.parquet and/or data/fills/YYYY-MM.parquet
 ## Next Focus
 - Maintain readiness for Track A trigger with strict preregistration discipline.
 - Track C remains locked; forward replication blocked pending admissible new data.
+
+## SESSION UPDATE (20261104T192914Z) - FCLR-NEXT-071 EXECUTED (HEAVY WORK)
+- Campaign sweep: research_state/campaign_sweep_tracka_20261104T192914Z.md
+- Trigger probe: monitor quick ran, ironflow_probe_20261104T192914Z.json written. NO NEW DATA - ON HOLD (data_through=2026-10).
+- Automation strengthened: monitor_ironflow_liquidations.py (tree_get_cached + TTL/ETag), hunt_alternative_liquidation_sources.py (EXTENDED_CANDIDATES)
+- Tests: added fast-path tests, all 166 passed (82 in monitor suite)
+- Blocker doc: research_state/liquidation_forward_validate_004_blocker_20261104T192914Z.md
+- Frontier updated: experiment_frontier.json (Track A monitor hardened, last_checked 2026-11-04T19:29:14Z)
+- Track C remains LOCKED; Track A sealed/passed ON TRIGGER ONLY with preregistration-before-outcomes.
+
+### NEXT TASK (COPY/PASTE FOR NEXT AGENT)
+```text
+TASK ID: FCLR-NEXT-072-TRACK-A-TRIGGER-MONITOR-004i-CONT
+PRIORITY: P0 - HEAVY WORK ENFORCED
+TIMESTAMP (UTC): 20261104T192914Z
+OBJECTIVE: Track C LOCKED. Track A ON TRIGGER ONLY (ironflow 2026-10 latest, no 2026-11+). Every session MUST complete heavy work: strengthen automation (monitor/hunt), extend tests, update blocker doc with fresh probe evidence, update frontier. If ANY new ironflow month >=2026-11 appears OR rubric-GO alternative source found -> HALT, PREREGISTER in research_state/fclr010_prereg_*.json BEFORE inspecting outcomes, run ONLY frozen FCLR-010 harness. Never re-tune sealed tracks.
+MANDATORY: 1) Read handoff+sweep+blocker+frontier 2) Run monitor quick + hunt evidence 3) Improve automation/tests if gaps 4) Write fresh blocker/frontier updates with evidence 5) Update AGENT_HANDOFF with timestamped next task. Stop only after all artifacts written. No .github/workflows changes.
+RESUME: ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 unauthenticated 200, OR rubric-GO alternative.
+```
