@@ -10,6 +10,7 @@ OUT = os.path.join(ROOT, 'research_state', 'watch')
 os.makedirs(OUT, exist_ok=True)
 
 ts = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+out_path = os.path.join(OUT, f'trigger_harden_{ts}.json')
 
 # Inventory
 root_zips = sorted(glob.glob(os.path.join(ROOT, '*.zip')))
@@ -25,10 +26,15 @@ ironflow_dir = os.path.join(ROOT, 'research_state', 'data_cache', 'ironflow_even
 ironflow_files = sorted([f for f in os.listdir(ironflow_dir) if f.endswith('.parquet')]) if os.path.exists(ironflow_dir) else []
 trigger_ironflow = any(f > '2026-10.parquet' for f in ironflow_files)
 
-# Previous snapshot
-prev = os.path.join(OUT, 'trigger_harden_20261104T010253Z.json')
+# Previous snapshot: diff against the latest trigger_harden_*.json (dynamic, not hardcoded)
+prev = None
 prev_data = None
-if os.path.exists(prev):
+candidates = sorted(glob.glob(os.path.join(OUT, 'trigger_harden_*.json')))
+for c in reversed(candidates):
+    if os.path.basename(c) != os.path.basename(out_path if 'out_path' in dir() else ''):
+        prev = c
+        break
+if prev and os.path.exists(prev):
     with open(prev) as f:
         prev_data = json.load(f)
 
@@ -93,6 +99,12 @@ artifact = {
     "diff_vs_previous": {
         "previous_snapshot": prev,
         "previous_exists": prev_data is not None,
+        "previous_timestamp": prev_data.get('timestamp_utc') if prev_data else None,
+        "previous_root_zips_count": prev_data.get('inventory', {}).get('root_zips_count') if prev_data else None,
+        "previous_ironflow_trigger": prev_data.get('inventory', {}).get('trigger_ironflow_gt_20261031') if prev_data else None,
+        "previous_track_c_trigger_state": prev_data.get('track_c_readiness', {}).get('trigger_current_state') if prev_data else None,
+        "root_zips_count_changed": (prev_data.get('inventory', {}).get('root_zips_count') if prev_data else None) != len(root_zips),
+        "ironflow_trigger_changed": (prev_data.get('inventory', {}).get('trigger_ironflow_gt_20261031') if prev_data else None) != trigger_ironflow,
         "changes": "inventory refreshed; ironflow still ends 2026-10 (no > 2026-10-31); root zips all 2024 (463)."
     },
     "gating_proof": gating_proof,
