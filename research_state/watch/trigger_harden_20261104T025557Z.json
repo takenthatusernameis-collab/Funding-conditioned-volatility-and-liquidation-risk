@@ -1,0 +1,119 @@
+{
+  "timestamp_utc": "20261104T025557Z",
+  "handoff_id": "FCLR-HANDOFF-20261104T025557Z",
+  "git_sha": "2d7245f1",
+  "branch": "main",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "priority": "P0-HEAVY-WORK-TRACK-C",
+  "mode": "TRACK-C-ZERO-LATENCY-CAMPAIGN",
+
+  "tests": {
+    "status": "OK",
+    "count": 117,
+    "command": "python -m unittest discover -s tests -v"
+  },
+
+  "inventory_hardening": {
+    "action": "scripts/track_c_inventory_harden.py executed",
+    "root_zips_count": 463,
+    "root_zips_by_year": {"2024": 463},
+    "ironflow_dir_exists": true,
+    "ironflow_files": ["2025-05.parquet", "2025-06.parquet", "2025-07.parquet", "2025-08.parquet", "2025-09.parquet", "2025-10.parquet", "2025-11.parquet", "2025-12.parquet", "2026-01.parquet", "2026-02.parquet", "2026-03.parquet", "2026-04.parquet", "2026-05.parquet", "2026-06.parquet", "2026-07.parquet", "2026-08.parquet", "2026-09.parquet", "2026-10.parquet"],
+    "trigger_ironflow_gt_20261031": false,
+    "latest_ironflow": "2026-10.parquet (ends 2026-10-31)",
+    "binance_root_only_2024": true,
+    "current_2026_zips": "present in data_cache as zero-volume synthetic placeholders (NOT admissible)",
+    "diff_vs_previous": "Same state as prior trigger_harden_20261104T025520Z.json - no new admissible data"
+  },
+
+  "prereg_gating_proof": {
+    "command": "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"",
+    "result": {"status": "BLOCKED", "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists."},
+    "enforced": true,
+    "pre_register_forward_experiment_importable": true
+  },
+
+  "track_c_readiness_validation": {
+    "template": "research_state/readiness/track_c_prereg_template_fclr012.json",
+    "template_id": "track_c_prereg_template_fclr012",
+    "version": "2.0-harness-compatible",
+    "status": "STRUCTURE_ONLY_NO_OUTCOME_INSPECTION",
+    "schema_valid": true,
+    "frozen_components_verified": {
+      "features": ["funding", "RV", "premium/EMA"],
+      "targets": {"primary": "24h", "secondary": ["6h", "72h", "168h"]},
+      "baselines": ["B0", "B1"],
+      "ablations": ["C1", "C2"],
+      "cv_walkforward": true,
+      "embargo_purge": {"embargo_days": 7, "purge_days": 7},
+      "sealed_holdout": true,
+      "multiplicity": {"holm": true, "family_declared": true},
+      "block_bootstrap": {"reps": 2000, "seed": 12345}
+    },
+    "consumable_by_preregister": true,
+    "outcome_snooping": false
+  },
+
+  "integrity_sweep": {
+    "sealed_experiments_untouched": ["FCLR-001", "FCLR-002", "FCLR-003", "FCLR-006", "FCLR-007", "FCLR-008", "FCLR-011"],
+    "hashes": {
+      "research_state/cross_track_decision_firewall.md": "a8736824516dee68201b8e909268cf863c03dff003050f9130c26ac07ebb4288",
+      "research_state/sealed_holdout_integrity.md": "0ee93506c8dca85ab85925d36ebe0d5584b5355c5ebb12d3d75f931ccbc29a5f",
+      "research_state/structural_closure_verdict_heavy.md": "a2abd6b42d29e75ae250693c963443e79ea5cfe3e57941be0133cffaa62f9b21"
+    },
+    "manifests_checked": ["research_state/experiment_frontier.json", "research_state/run_manifest.json", "research_state/hypothesis_registry.json"],
+    "workflows_modified": false,
+    "firewall_immutable": true
+  },
+
+  "admissibility_status": {
+    "trigger_fired": false,
+    "admissible_trigger": "NONE",
+    "reason": "Ironflow ends 2026-10-31 (no >2026-10-31). Root has only 2024 zips. Current 2026 zips in data_cache are zero-volume synthetic placeholders (not real market data). No unauthenticated 2026 Binance panel beyond sealed window exists.",
+    "sealed_window": "2026-05-08..2026-08-06",
+    "waiting_for": ["Unauthenticated 2026 Binance panel with non-zero volume/taker_buy beyond 2026-08-06 OR ironflow > 2026-10-31"]
+  },
+
+  "IF_TRIGGER_FIRES_NOW": {
+    "checklist": [
+      "(a) Load frozen template: research_state/readiness/track_c_prereg_template_fclr012.json",
+      "(b) Preregister BEFORE inspecting outcomes via scripts/fclr010_harness.py pre_register_forward_experiment() with frozen config",
+      "(c) Enforce embargo/splits (7d embargo/purge), chronological 60/20/20, min instruments/blocks",
+      "(d) Run ONLY pre-registered contrasts (C2_vs_B1 primary, C1_vs_B1, C2_vs_C1 secondary)",
+      "(e) Apply Holm correction across declared family + block bootstrap >=2000 (seed 12345)",
+      "(f) Do NOT touch sealed panels (FCLR-001/002/003/006/007/008/011). Respect cross-track firewall (overlay not eligible)."
+    ],
+    "hard_rules": [
+      "Preregister BEFORE inspecting holdout outcomes",
+      "Structure-only readiness; no outcome snooping",
+      "All 2026 zips must have non-zero volume/taker_buy (reject synthetic placeholders)",
+      "Never reuse sealed holdouts",
+      "Block bootstrap >=2000 with seed 12345, Holm across family"
+    ]
+  },
+
+  "next_runnable_commands": [
+    "python -m unittest discover -s tests -v",
+    "python scripts/track_c_inventory_harden.py",
+    "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"",
+    "python -c \"import json; d=json.load(open('research_state/readiness/track_c_prereg_template_fclr012.json')); print('ok', d['template_id'], d['version'])\"",
+    "sha256sum research_state/cross_track_decision_firewall.md research_state/sealed_holdout_integrity.md research_state/structural_closure_verdict_heavy.md",
+    "ls -lh research_state/watch/trigger_harden_*.json | tail -3"
+  ],
+
+  "bottlenecks_removed": [
+    "Swapped passive monitoring for continuous trigger detection + Track C zero-latency readiness",
+    "Prereg gating proof is required per-session artifact",
+    "Firewall enforced to block re-running sealed panels",
+    "No session may idle - heavy work mandate executed every session"
+  ],
+
+  "definition_of_done": {
+    "all_mandatory_executed": true,
+    "successor_artifact_written": true,
+    "tests_passing": "117/117",
+    "no_workflows_modified": true,
+    "sealed_untouched": true,
+    "handoff_updated": false
+  }
+}
