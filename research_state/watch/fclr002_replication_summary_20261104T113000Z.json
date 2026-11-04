@@ -1,0 +1,80 @@
+{
+  "experiment": "FCLR-002",
+  "hypothesis": "FCLR-H002",
+  "status": "PARTIAL",
+  "total_events": 88,
+  "corrected_count": 84,
+  "censored_count": 4,
+  "median_correction_hours_all": 8.000000277777778,
+  "median_all_ci": {
+    "lo": 8.0,
+    "hi": 16.0,
+    "n_boot": 2000
+  },
+  "log_rank_high_vs_low": {
+    "status": "computed",
+    "high_n": 31,
+    "low_n": 31,
+    "chi2": 3.081471201569095,
+    "p_two_sided": 0.07918886524072533,
+    "high_median_hours": 16.0,
+    "low_median_hours": 8.000000277777778,
+    "direction_lower_hazard_high_rv": true
+  },
+  "median_by_volatility_tercile": {
+    "low": {
+      "n": 31,
+      "corrected": 30,
+      "censored": 1,
+      "median_correction_hours": 8.000000277777778,
+      "median_ci": {
+        "lo": 8.0,
+        "hi": 16.0
+      },
+      "correction_rate": 0.967741935483871
+    },
+    "middle": {
+      "n": 26,
+      "corrected": 25,
+      "censored": 1,
+      "median_correction_hours": 8.0,
+      "median_ci": {
+        "lo": 8.0,
+        "hi": 8.000000277777778
+      },
+      "correction_rate": 0.9615384615384616
+    },
+    "high": {
+      "n": 31,
+      "corrected": 29,
+      "censored": 2,
+      "median_correction_hours": 16.0,
+      "median_ci": {
+        "lo": 8.000000277777778,
+        "hi": 16.000000555555555
+      },
+      "correction_rate": 0.9354838709677419
+    }
+  },
+  "paper_claim": {
+    "events": 1696,
+    "contracts": 18,
+    "median_high_rv_hours": 27.0,
+    "median_low_rv_hours": 3.0,
+    "claim": "lower correction hazard with higher realized volatility"
+  },
+  "note": "Partial replication; full Shek methodology (SSRN 7529458) not independently reconstructible (SSRN 403 in this environment). Correction time is separate from volatility-forecast and liquidation outcomes.",
+  "generated_utc": "20261104T113000Z",
+  "data_months": [
+    "2024-01",
+    "2024-02",
+    "2024-03"
+  ],
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ]
+}
