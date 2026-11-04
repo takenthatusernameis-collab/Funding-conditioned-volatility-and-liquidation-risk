@@ -1,0 +1,76 @@
+{
+  "schema": "fclr.trigger_harden.v2",
+  "timestamp_utc": "20261104T063307Z",
+  "git_head": "fc9ed59167e9693a59edbd03b0da0c7961ff785e",
+  "branch": "main",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "priority": "P0 - HEAVY-WORK (FORCED)",
+  "campaign": "FCLR-NEXT-037-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS",
+  "tests": {
+    "ok": 117,
+    "ran": 117
+  },
+  "inventory": {
+    "root_zips_total": 463,
+    "years": {
+      "2024": "majority/all observed"
+    },
+    "seventy_twenty_twenty_six_zips": "zero-volume synthetic placeholders -> NOT admissible",
+    "ironflow_latest": "research_state/data_cache/ironflow_events/2026-10.parquet (Track A only; not Track C trigger)"
+  },
+  "gating_proof": {
+    "command": "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"",
+    "result": {
+      "status": "BLOCKED",
+      "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists."
+    },
+    "enforced": true
+  },
+  "track_c_readiness": {
+    "template": "research_state/readiness/track_c_prereg_template_fclr012.json",
+    "trigger_current_state": "NOT_FIRED",
+    "frozen_components_verified": true,
+    "structure_only": true,
+    "no_outcome_snooping": true,
+    "notes": "Template consumable by pre_register_forward_experiment(); readiness validated structure-only"
+  },
+  "integrity_hashes": {
+    "cross_track_decision_firewall.md": "a8736824516dee68201b8e909268cf863c03dff003050f9130c26ac07ebb4288",
+    "sealed_holdout_integrity.md": "0ee93506c8dca85ab85925d36ebe0d5584b5355c5ebb12d3d75f931ccbc29a5f",
+    "structural_closure_verdict_heavy.md": "a2abd6b42d29e75ae250693c963443e79ea5cfe3e57941be0133cffaa62f9b21",
+    "experiment_frontier.json": "51fb53272c815a19ffc102eb8769b81d57557e91924135d0145454b8b99b55bc",
+    "run_manifest.json": "335676ef500d442e40bd4e3ad1be24be9159ba8148a523b33c274b12fb0f4bf4",
+    "hypothesis_registry.json": "6534d1c8998e39f2e1d03bddfe5a23b518ef33c8bcd50665f62288f38cdd6772"
+  },
+  "sealed_experiments_untouched": [
+    "FCLR-001",
+    "FCLR-002",
+    "FCLR-003",
+    "FCLR-006",
+    "FCLR-007",
+    "FCLR-008",
+    "FCLR-011"
+  ],
+  "no_workflows_modified": true,
+  "IF_TRIGGER_FIRES_NOW": [
+    "(a) load frozen template research_state/readiness/track_c_prereg_template_fclr012.json",
+    "(b) preregister BEFORE inspecting outcomes via pre_register_forward_experiment()",
+    "(c) enforce embargo/splits per frozen config",
+    "(d) run ONLY pre-registered contrasts",
+    "(e) apply Holm + block-bootstrap (>=2000, seed 12345)",
+    "(f) do NOT touch sealed panels (firewall immutable)"
+  ],
+  "next_runnable_commands": [
+    "python -m unittest discover -s tests -v",
+    "python scripts/track_c_inventory_harden.py",
+    "python -c \"from scripts.fclr010_harness import FCLR010Harness; h=FCLR010Harness(); print(h.evaluate_forward(data_path='/tmp/no_data_x.zip', output_dir='/tmp/x'))\"",
+    "python -m json.tool research_state/readiness/track_c_prereg_template_fclr012.json >/dev/null && echo OK",
+    "sha256sum research_state/cross_track_decision_firewall.md research_state/sealed_holdout_integrity.md research_state/structural_closure_verdict_heavy.md research_state/experiment_frontier.json research_state/run_manifest.json research_state/hypothesis_registry.json"
+  ],
+  "bottlenecks_removed": [
+    "duplicate ironflow_probe noise files deleted on sight",
+    "consolidated handoff",
+    "idle waiting eliminated - continuous hardening"
+  ],
+  "admissible_trigger": false
+}
