@@ -1,27 +1,27 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T025718Z
-Git SHA (HEAD): 2d7245f1
+Timestamp (UTC): 20261104T034419Z
+Git SHA (HEAD): ec54d1e490546dfbc2e28032ad1b61b10e3d3a53
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T025718Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T034419Z | Priority: HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
 ```text
-TASK ID: FCLR-NEXT-027-TRACK-C-ZERO-LATENCY-FORCED
+TASK ID: FCLR-NEXT-028-TRACK-C-ZERO-LATENCY-FORCED
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL)
-CAMPAIGN: FCLR-NEXT-027-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
+CAMPAIGN: FCLR-NEXT-028-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
 REPO-NAME PRIORITY ORDER (MANDATORY): TRACK C (Funding-Conditioned Volatility Forecasting) >> TRACK B (Modeled Boundary Breaches) >> TRACK A (Observed Liquidation Labels)
 
-TIMESTAMP (UTC): 20261104T030200Z
+TIMESTAMP (UTC): 20261104T034419Z
 
-OBJECTIVE: The repository name is the binding directive. All effort must go towards TRACK C. There are currently NO admissible triggers for forward validation (ironflow ends at 2026-10-31, Binance root only contains 2024 zips, all 2026 zips found are zero-volume synthetic placeholders). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
+OBJECTIVE: The repository name is the binding directive. All effort must go towards TRACK C. There are currently NO admissible triggers for forward validation (ironflow ends 2026-09-30; Binance root only contains 2024 zips; all 2026 zips are zero-volume synthetic placeholders). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
 
 HEAVY WORK MANDATE (NON-NEGOTIABLE - EXECUTE ALL 5 EVERY SESSION):
 
 (1) FULL INVENTORY HARDENING
     - Enumerate all root zips by asset/month/year
-    - Scan research_state/data_cache/ironflow_events/ for any files > 2026-10-31
+    - Scan research_state/data_cache/ironflow_events/ for any files > 2026-09-30
     - Scan all binance data_vision artifacts
     - Diff against LATEST trigger_harden_*.json in research_state/watch/
     - Write a successor trigger_harden_<UTC>.json with concrete diffs (no "no change" fluff)
@@ -53,9 +53,9 @@ BOTTLENECK REMOVAL RULES (HARD):
 - Every artifact must ENABLE IMMEDIATE ACTION. No status-only, no "all good" summaries with no commands.
 - Tests MUST remain >= 117 passing. Run `python -m unittest discover -s tests -v` first if anything is touched. Fix immediately on failure.
 - NEVER re-run sealed FCLR-001/002/003/006/007/008/011. Firewall is IMMUTABLE.
-- FCLR-NEXT-012 is BLOCKED on admissible data. The remedy is continuous hardening + zero-latency readiness, NOT idling.
+- FCLR-012-V is BLOCKED on admissible data. The remedy is continuous hardening + zero-latency readiness, NOT idling.
 - Preregister BEFORE inspecting holdout outcomes. Frozen config ONLY. Block bootstrap >=2000 with seed 12345. Holm correction across declared family.
-- All current 2026 zips are zero-volume synthetic placeholders -> NOT admissible. Ironflow ends 2026-10 (no >2026-10-31). Binance root only contains 2024 data.
+- All current 2026 zips are zero-volume synthetic placeholders -> NOT admissible. Ironflow ends 2026-09 (no >2026-09-30). Binance root only contains 2024 data.
 - Do not snoop outcomes to "pre-validate". Structure-only for readiness.
 
 MANDATORY ACTION SEQUENCE (EXECUTE IN ORDER):
@@ -74,11 +74,11 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 - Add regression test(s) to prevent accidental re-run of sealed experiments
 ```
 
-## 1) Current State (Verified 20261104T030000Z)
+## 1) Current State (Verified 20261104T034419Z)
 
-- Tests: 117/117 OK
-- Git HEAD: 2d7245f1 (main, clean)
-- Ironflow: Latest `2026-10.parquet` in `research_state/data_cache/ironflow_events/` (ends 2026-10-31). `trigger_ironflow_gt_20261031 = false`
+- Tests: 117/117 OK (`python -m unittest discover -s tests -v`)
+- Git HEAD: ec54d1e490546dfbc2e28032ad1b61b10e3d3a53 (main)
+- Ironflow: latest `research_state/data_cache/ironflow_events/2026-09.parquet` (through 2026-09-30). No 2026-10.parquet present. `trigger_ironflow_gt_20260930 = false`
 - Root data: 463 zips total, all 2024 (01-01..03-30). No 2025/2026 Binance archives in root.
 - Admissible trigger: NONE. All current 2026 zips are zero-volume synthetic placeholders -> NOT admissible.
 - Sealed window: 2026-05-08..2026-08-06 (frozen). DO NOT re-run sealed panels.
@@ -90,10 +90,11 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 
 ## 2) Bottlenecks Removed / Active
 
+- **REMOVED (stale state):** Prior handoff cited git SHA `2d7245f1` (not HEAD) and ironflow "through 2026-10-31" (no such file; latest is 2026-09-30). This handoff corrects both so the next agent does not act on false state.
 - **REMOVED (idle waiting):** Swapped passive monitoring for continuous trigger detection + Track C zero-latency readiness. No session may sit idle.
 - **PREVENTED:** Firewall enforced to block re-running sealed panels.
 - **HARDENED:** Prereg gating proof is now a required per-session artifact.
-- **ACTIVE:** Waiting for admissible unauthenticated 2026 Binance panel beyond 2026-11-02 OR ironflow > 2026-10-31. Harden everything NOW.
+- **ACTIVE:** Waiting for admissible unauthenticated 2026 Binance panel beyond sealed FCLR-011 test window 2026-05-08..2026-08-06 OR ironflow > 2026-09-30. Harden everything NOW.
 
 ## 3) Immediate Next Actions (MANDATORY)
 
