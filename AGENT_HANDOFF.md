@@ -1,18 +1,18 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T062918Z
+Timestamp (UTC): 20261104T063512Z
 Git SHA (HEAD): fc9ed59167e9693a59edbd03b0da0c7961ff785e
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T062918Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
+Handoff ID: FCLR-HANDOFF-20261104T063512Z | Priority: P0 - HEAVY-WORK (FORCED) | Mode: TRACK-C-ZERO-LATENCY-CAMPAIGN
 
 ## 0) MANDATORY INITIAL MESSAGE FOR NEXT AGENT (COPY/PASTE AS FIRST ACTION)
 
 ```text
-TASK ID: FCLR-NEXT-037-TRACK-C-ZERO-LATENCY-FORCED
+TASK ID: FCLR-NEXT-038-TRACK-C-ZERO-LATENCY-FORCED
 PRIORITY: P0 - HEAVY WORK ENFORCED (NO STATUS-ONLY | NO IDLE WAITING | NO DEFERRAL | NO PASSIVE MONITORING)
-CAMPAIGN: FCLR-NEXT-037-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
+CAMPAIGN: FCLR-NEXT-038-FUNDING-CONDITIONED-VOLATILITY-HEAVY-CONTINUOUS
 
-TIMESTAMP (UTC): 20261104T062918Z
+TIMESTAMP (UTC): 20261104T063512Z
 
 OBJECTIVE: The repository name is the binding directive: Funding-conditioned-volatility-and-liquidation-risk. All effort must go towards TRACK C (funding-conditioned volatility/stress forecasting). There are currently NO admissible triggers for forward validation (ironflow has 2026-10.parquet through 2026-10-31 but that is Track-A liquidation data, NOT a Track C trigger; Binance root only contains 2024 zips; all 2026 zips are zero-volume synthetic placeholders -> NOT admissible). DO NOT WAIT PASSIVELY. Every single session MUST execute the heavy work mandate below to achieve zero-latency execution the INSTANT an admissible trigger appears.
 
@@ -74,26 +74,28 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 - Add regression test(s) to prevent accidental re-run of sealed experiments
 ```
 
-## 1) Current State (Verified 20261104T062918Z)
+## 1) Current State (Verified 20261104T063512Z)
 
 - Tests: 117/117 OK (`python -m unittest discover -s tests -v`) — re-verified this session; git working tree clean except pycache recompiles (cleaned this session).
 - Git HEAD: fc9ed59167e9693a59edbd03b0da0c7961ff785e (main). Verify before acting; do not act on stale SHA references.
-- Previous heavy session (20261104T053520Z) completed all 6 mandatory actions; this session wrote successor artifacts `trigger_harden_20261104T062854Z.json` (inventory-only) and `trigger_harden_20261104T062914Z.json` (full heavy artifact) in research_state/watch/.
-- Bottleneck removal this session: deleted `research_state/ironflow_probe_20261104T062839Z.json` and `research_state/ironflow_probe_20261104T062909Z.json` (noise written by test run) and all `__pycache__` directories; no research-critical artifacts removed.
+- Previous heavy session (20261104T062918Z) completed all 6 mandatory actions; this session wrote successor artifacts `trigger_harden_20261104T063422Z.json` (inventory-only) and `trigger_harden_20261104T063512Z.json` (full heavy artifact) in research_state/watch/.
+- Bottleneck removal this session: deleted `research_state/ironflow_probe_20261104T063414Z.json` (noise written by test run) and all `__pycache__` directories; no research-critical artifacts removed.
 - Ironflow: `research_state/data_cache/ironflow_events/` contains 2025-05..2026-10.parquet; latest is `2026-10.parquet` (data through 2026-10-31). `trigger_ironflow_gt_20260930 = true` but this is Track-A liquidation data, NOT an admissible Track C trigger.
 - Root data: 463 zips total, all 2024 (01-01..03-30). No 2025/2026 Binance archives in root. All 2026 zips are zero-volume synthetic placeholders -> NOT admissible.
 - Admissible trigger: NONE for Track C. `track_c_prereg_template_fclr012.json` trigger.current_state = NOT_FIRED.
 - Sealed window: 2026-05-08..2026-08-06 (frozen). DO NOT re-run sealed panels.
-- Prereg gating: ENFORCED (`evaluate_forward` BLOCKED without prereg with explicit reason: "Pre-registration path required.")
-- Track C prereg template: `research_state/readiness/track_c_prereg_template_fclr012.json` exists (structure-only, v2.0-harness-compatible)
+- Prereg gating: ENFORCED (`evaluate_forward` BLOCKED without prereg with explicit reason: "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.")
+- Track C prereg template: `research_state/readiness/track_c_prereg_template_fclr012.json` exists (structure-only, v2.0-harness-compatible, verified this session)
 - Gates: FCLR-010 PASSED (sealed) | FCLR-011 PASSED (sealed, +4.94% rel QLIKE, CI excludes zero) | FCLR-012-V INCONCLUSIVE (0 non-overlapping 30-day blocks, CI spans zero)
 - Overlay: INELIGIBLE per IMMUTABLE `cross_track_decision_firewall.md`
 - H001: NOT_SUPPORTED on widest unsealed powered panel (FCLR-008)
+- Integrity hashes this session: firewall a8736824..., holdout 0ee93506..., closure a2abd6b4..., frontier 51fb5327..., manifest 335676ef..., registry 6534d1c8...
+- .github/workflows/ untouched (git status empty for that path)
 
 ## 2) Bottlenecks Removed / Active
 
-- **REMOVED (noise this session):** `research_state/ironflow_probe_20261104T054054Z.json` (written by test run — duplicate polling evidence, delete on sight) + all `__pycache__` directories.
-- **REMOVED (handoff inefficiency):** Consolidated stacked session-update sections (053520Z, 053902Z, 053933Z) into one current initial task message so the next agent navigates one durable handoff, not duplicate status layers.
+- **REMOVED (noise this session):** `research_state/ironflow_probe_20261104T063414Z.json` (written by test run — duplicate polling evidence, delete on sight) + all `__pycache__` directories.
+- **REMOVED (handoff inefficiency):** Consolidated stacked session-update sections (062918Z) into one current initial task message so the next agent navigates one durable handoff, not duplicate status layers.
 - **REMOVED (idle waiting):** Swapped passive monitoring for continuous trigger detection + Track C zero-latency readiness. No session may sit idle. Repeated duplicate alt_source_scan/ironflow_probe evidence files are acknowledged as noise; do not add redundant status printers or polling loops.
 - **PREVENTED:** Firewall enforced to block re-running sealed panels.
 - **HARDENED:** Prereg gating proof is now a required per-session artifact.
@@ -111,7 +113,7 @@ RANKED HEAVY TASKS (IF TIME REMAINS AFTER 1-6):
 
 ## 4) Files To Watch
 
-- `research_state/watch/trigger_harden_*.json` (latest present: `trigger_harden_20261104T062914Z.json`; kept: 052815Z, 053119Z, 053140Z, 062854Z, 062914Z) — write a successor this session
+- `research_state/watch/trigger_harden_*.json` (latest present: `trigger_harden_20261104T063512Z.json`; kept: 052815Z, 053119Z, 053140Z, 062854Z, 062914Z, 063307Z, 063422Z, 063512Z) — write a successor this session
 - `research_state/readiness/track_c_prereg_template_fclr012.json`
 - `scripts/fclr010_harness.py` (`pre_register_forward_experiment()`, `evaluate_forward()`)
 - `scripts/track_c_inventory_harden.py`
@@ -128,9 +130,9 @@ This session is NOT complete until:
 - Tests are still >=117 passing
 - No files under `.github/workflows/` were modified
 - No sealed experiments (FCLR-001/002/003/006/007/008/011) were touched
-- AGENT_HANDOFF.md reflects the new timestamp and handoff ID (this session: 20261104T062918Z)
+- AGENT_HANDOFF.md reflects the new timestamp and handoff ID (this session: 20261104T063512Z)
 - No new duplicate/noise files (ironflow_probe, alt_source_scan, trigger_harden duplicates, blocker files, __pycache__) were added; any found were deleted
 
 ## 6) Initial Task Message For Next Session (current, single)
 
-"2026-11-04T06:29:18Z — HEAVY TRACK-C CAMPAIGN (repository name is the binding directive: Funding-conditioned-volatility-and-liquidation-risk): read RESEARCH_PROMPT.md + AGENT_HANDOFF.md, verify HEAD (fc9ed591) + tests >=117/117 + manifests, run mandatory action sequence 1-6, write successor `research_state/watch/trigger_harden_<UTC>.json` with inventory diffs (root zips all-2024 vs any admissible 2026 panel), gating proof (evaluate_forward BLOCKED without prereg), Track C readiness validation (structure-only, NO outcome inspection), integrity hashes (firewall/seals/manifests/hypothesis_registry), IF-TRIGGER-FIRES-NOW checklist, and next_runnable_commands; keep >=117 tests green; do NOT modify .github/workflows or sealed FCLR-001/002/003/006/007/008/011; monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder, beyond sealed window 2026-05-08..2026-08-06); preregister BEFORE any outcome inspection; remove bottlenecks (idle waiting, stale SHA refs, misclassified Track A data, duplicate noise files: ironflow_probe_*.json + __pycache__) on sight so significant progress continues. Next actionable: run `python -m unittest discover -s tests -v`, verify HEAD (fc9ed591), re-read handoff, then write successor trigger_harden file."
+"2026-11-04T06:35:12Z — HEAVY TRACK-C CAMPAIGN (repository name is the binding directive: Funding-conditioned-volatility-and-liquidation-risk): read RESEARCH_PROMPT.md + AGENT_HANDOFF.md, verify HEAD (fc9ed591) + tests >=117/117 + manifests, run mandatory action sequence 1-6, write successor `research_state/watch/trigger_harden_<UTC>.json` with inventory diffs (root zips all-2024 vs any admissible 2026 panel), gating proof (evaluate_forward BLOCKED without prereg), Track C readiness validation (structure-only, NO outcome inspection), integrity hashes (firewall/seals/manifests/hypothesis_registry), IF-TRIGGER-FIRES-NOW checklist, and next_runnable_commands; keep >=117 tests green; do NOT modify .github/workflows or sealed FCLR-001/002/003/006/007/008/011; monitor for admissible unauthenticated 2026 Binance panel (non-zero volume/taker_buy, schema valid, not placeholder, beyond sealed window 2026-05-08..2026-08-06); preregister BEFORE any outcome inspection; remove bottlenecks (idle waiting, stale SHA refs, misclassified Track A data, duplicate noise files: ironflow_probe_*.json + __pycache__) on sight so significant progress continues. Next actionable: run `python -m unittest discover -s tests -v`, verify HEAD (fc9ed591), re-read handoff, then write successor trigger_harden file."
