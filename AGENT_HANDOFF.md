@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T133800Z
+Timestamp (UTC): 20261104T143510Z
 Git SHA (HEAD): f128b157
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T133800Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T143510Z | Priority: P0 - HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## STATE CONTRADICTION RESOLVED (read first)
 AGENT_HANDOFF previously claimed Track C "NOT_SUPPORTED" citing only FCLR-003 (sealed). This is STALE and superseded by `run_manifest.json` and `evaluation_summary_FCLR-011_20261103T111743Z.md`:
@@ -21,7 +21,7 @@ Per repo name `Funding-conditioned-volatility-and-liquidation-risk`, Track C is 
 TASK ID: FCLR-NEXT-058-FUNDING-CONDITIONED-DEEPER-VALIDATION
 PRIORITY: P0 - HEAVY WORK ENFORCED (REPO-NAME PRIORITIZED = TRACK C)
 CAMPAIGN: FUNDING-CONDITIONED VOLATILITY DEEPER VALIDATION (FROZEN SPLITS) -> FORWARD READINESS
-TIMESTAMP (UTC): 20261104T133800Z
+TIMESTAMP (UTC): 20261104T143510Z
 OBJECTIVE: Track C gate PASSED on FCLR-011 (C2 vs B1 -4.94% rel QLIKE, CI [-0.032546,-0.001418] excl zero, 5 instruments, 3 blocks). Forward replication FCLR-012-V is INCONCLUSIVE, blocked on data (Binance archive ends 2026-11-02; ironflow ends 2026-10). Execute deeper funding-conditioned validation on FROZEN FCLR-011/FCLR-002 splits ONLY. Produce regime-stratified QLIKE by funding quartiles per symbol/time, funding x RV interaction refinements, mark/index premium and mark/EMA24 sensitivity ablations. Output research_state/fclr011_deeper_validation_$(date -u +%Y%m%dT%H%M%SZ).md with ablations + block-bootstrap >=2000 (deterministic) + Holm correction. Do NOT re-run sealed FCLR-001/002/003/006/007/008/010/011. Do NOT threshold-shop. Do NOT merge Binance and Hyperliquid. Track C overlay remains HYPOTHETICAL_ONLY (gate pass does not authorize overlay changes).
 CONSTRAINTS: No credentials, no manual files, no .github/workflows changes, no polling loops/schedulers/status-only files, no data fabrication, chronological/leakage-safe, preregister before outcomes if new data appears.
 MANDATORY EVERY SESSION (EXECUTE ALL, IN ORDER - NO SKIPPING):
@@ -38,7 +38,7 @@ STOP RULE: Do NOT stop after 1-2 blocks. Complete all 4. If truly stuck, write b
 - Track C FCLR-H001: FCLR-011 FORECAST_GATE_PASSED (C2 vs B1 -4.94% rel QLIKE, CI [-0.032546,-0.001418] excl zero, 5 instruments, 3 blocks, test 2026-05-08..2026-08-06). FCLR-012-V forward INCONCLUSIVE (data blocked: Binance ends 2026-11-02, 0 test blocks).
 - Track A FCLR-H004: FCLR-010 COMPLETE_SEALED FORECAST_GATE_PASSED (Brier -2.21% rel, CI excl zero, 199 instruments, 5 blocks). Blocked on new ironflow parquet >= 2026-11 (last probe 2026-11-04T13:21:55Z, tree unchanged 304).
 - Track B: NOT_SUPPORTED.
-- Bottlenecks: stale AGENT_HANDOFF claiming Track C NOT_SUPPORTED (superseded by FCLR-011 PASS); forward data blocked (Binance/ironflow); must not let "sealed" status block deeper validation on frozen splits.
+- Bottlenecks: campaign sweep (block 1) executed at 20261104T133434Z but underspecified (41 lines vs mandated 150+); redo sweep with concrete evidence. Forward data blocked (Binance/ironflow); must not let "sealed" status block deeper validation on frozen splits.
 
 ## Priority Order (by repo name)
 1. **TRACK C - Funding-conditioned volatility** (HIGHEST - matches repo name). Gate PASSED on FCLR-011; execute deeper validation on frozen splits (regime-stratified QLIKE, funding-quartile interactions, mark/index + EMA24 ablations). Forward confirmation blocked on new data.
@@ -54,7 +54,7 @@ STOP RULE: Do NOT stop after 1-2 blocks. Complete all 4. If truly stuck, write b
 - **No bloat**: No new schedulers/controllers/status-only files. Fix existing code paths and keep tests green.
 
 ## Next Action (EXACT)
-1. Execute STATE SWEEP - write `research_state/campaign_sweep_$(date -u +%Y%m%dT%H%M%SZ).md` (>=150 lines, reconcile AGENT_HANDOFF vs run_manifest contradiction)
+1. Execute STATE SWEEP - write `research_state/campaign_sweep_$(date -u +%Y%m%dT%H%M%SZ).md` (>=150 lines, reconcile AGENT_HANDOFF vs run_manifest contradiction). Prior sweep at 20261104T133434Z is only 41 lines and must be superseded.
 2. Execute TRACK C DEEPER VALIDATION - on frozen FCLR-011/FCLR-002 splits only, regime-stratified QLIKE by funding quartiles, funding x RV interactions, mark/index + EMA24 ablations; block-bootstrap>=2000, Holm; write `research_state/trackc_deeper_validation_$(date -u +%Y%m%dT%H%M%SZ).md`
 3. Execute TRACK A READINESS - probe ironflow + scan alts, record evidence (probe JSON/ETag/tree diffs). If new >=2026-11 files appear, preregister before outcomes.
 4. Execute BOTTLENECK ELIMINATION - clean/fix as needed, ensure 164/164 tests still pass
