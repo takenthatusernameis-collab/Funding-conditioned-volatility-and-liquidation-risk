@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T041140Z
+Timestamp (UTC): 20261104T044016Z
 Git SHA (HEAD): 3195771e8cf4f51d5b37ec513612d1d6a2b0a5bd
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
