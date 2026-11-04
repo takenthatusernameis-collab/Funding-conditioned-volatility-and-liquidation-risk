@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261104T223200Z
+Timestamp (UTC): 20261104T223458Z
 Git SHA (HEAD): 0b4e112b
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261104T223200Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261104T223458Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECK REMOVAL FORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -21,7 +21,7 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 ```text
 TASK ID: FCLR-NEXT-075-TRACK-A-FORCE-BOTTLENECKS-REMOVE-HEAVY
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Funding-conditioned volatility DONE/LOCKED; Liquidation risk NEXT - BLOCKED)
-TIMESTAMP (UTC): 20261104T223200Z
+TIMESTAMP (UTC): 20261104T223458Z
 CAMPAIGN: TRACK A LIQUIDATION-RISK BOTTLENECK REMOVAL + TRIGGER HARDENING (BLOCKED-DATA MODE - HEAVY WORK MANDATORY)
 
 OBJECTIVE (INFERRED FROM REPO NAME): Funding-conditioned volatility is complete and locked. Focus ALL effort on liquidation risk (Track A). Data is blocked (ironflow data_through=2026-10, no >=2026-11). You CANNOT conclude "no data" and stop. While blocked, you MUST aggressively remove bottlenecks and harden automation so future agents make immediate progress the moment data appears. Eliminate inefficiencies; do NOT add schedulers/pollers/status-only files/repeated wrappers.
@@ -47,4 +47,4 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261104T223200Z: Execute campaign FCLR-NEXT-075 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
+20261104T223458Z: Execute campaign FCLR-NEXT-075 above. Remove bottlenecks while blocked; harden triggers so unblocking is instantaneous and correct.
