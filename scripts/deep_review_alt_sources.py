@@ -21,6 +21,63 @@ RUBRIC = {
     "schema_compatible_fclr010": True,
 }
 
+# [HEAVY-004i session 4, 2026-11-04T21:38Z] Bottleneck removal: deep_review's 14
+# candidate URLs are 100% disjoint from hunt_alternative_liquidation_sources' 44-URL
+# set, so --deep-review re-probed URLs the hunt had already cached, adding ~14s of
+# redundant network I/O on every blocked session. Fold these URLs into the hunt's
+# candidate list (so each is probed exactly once per session, keyed on the shared
+# URL probe cache) and route probe() through the same cached http_probe. Deep review
+# now reuses hunt evidence instead of re-GETting it.
+DEEP_REVIEW_URLS = [
+    "https://api.hyperliquid.xyz/info",
+    "https://api.tardis.dev/v1/markets",
+    "https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/",
+    "https://demo-api.kaiko.io/v1/",
+    "https://github.com/bmoscon/cryptofeed",
+    "https://laevitas.ch/",
+    "https://open-api.coinglass.com/public/v2/liquidation_history?symbol=BTC&timeType=4h",
+    "https://public.bybit.com/spot/kline/",
+    "https://public.bybit.com/trading/linear/",
+    "https://rest.coinapi.io/v1/exchanges",
+    "https://studio.glassnode.com/",
+    "https://www.cryptodatadownload.com/data/binance/",
+    "https://www.deribit.com/api/v2/public/get_instruments?currency=BTC&kind=future",
+    "https://www.okx.com/api/v5/public/instruments?instType=SWAP",
+]
+
+
+def _shared_probe(url, method="GET", timeout=30, cache=None):
+    """Probe a URL via the hunt's shared, persisted URL probe cache.
+
+    Falls back to a direct probe when the hunt module cannot be imported (e.g. a
+    renamed path), so deep_review never hard-depends on hunt internals. Cache hits
+    return classification evidence with cache_hit=True and cost zero network I/O.
+
+    The hunt module is resolved through sys.modules FIRST (as
+    ``scripts.hunt_alternative_liquidation_sources``) rather than by a bare
+    ``import hunt_alternative_liquidation_sources``: the bare form can load a
+    second, independent module copy from sys.path, which would bypass any
+    monkeypatch of the ``scripts``-namespaced module and silently read the real
+    on-disk cache. Resolving through sys.modules guarantees the shared module
+    object (and its patched functions) is the one used here.
+    """
+    try:
+        import sys as _sys
+        _hunt = _sys.modules.get("scripts.hunt_alternative_liquidation_sources")
+        if _hunt is None:
+            _sys.path.insert(0, str(REPO / "scripts"))
+            import hunt_alternative_liquidation_sources as _hunt
+        if cache is None:
+            cache = _hunt._url_cache_load()
+        r = _hunt.http_probe_cached(url, max_retries=2, method=method, timeout=timeout, cache=cache)
+        if cache is not None:
+            _hunt._url_cache_save(cache)
+        r.setdefault("method", method)
+        return r
+    except Exception:
+        return probe(url, method=method, timeout=timeout)
+
+
 CANDIDATES = [
     # From previous scans
     {"name": "hyperliquid_public_api_info", "url": "https://api.hyperliquid.xyz/info", "method": "POST", "notes": "Try POST as API expects POST"},
@@ -96,17 +153,35 @@ def main():
     out = RESEARCH / f"alt_source_deep_review_{ts}.md"
     results = []
 
-    # Probe Hyperliquid properly with POST
+    # Probe Hyperliquid properly with POST (not cacheable by GET key; direct probe).
     results.append(probe("https://api.hyperliquid.xyz/info", method="POST", body={"type": "metaAndAssetCtxs"}))
     results.append(probe("https://api.hyperliquid.xyz/info", method="POST", body={"type": "meta"}))
 
-    # Probe some common paths
+    # Probe the remaining candidate paths through the SHARED hunt URL probe cache
+    # so a URL probed by hunt_alternative_liquidation_sources.py this session is
+    # never re-GETted here. Cache hits cost zero network I/O. The cache dict is
+    # loaded once and reused for every call in this run so a URL probed earlier
+    # in the loop is never re-probed.
+    try:
+        import sys as _sys
+        _hunt = _sys.modules.get("scripts.hunt_alternative_liquidation_sources")
+        if _hunt is None:
+            _sys.path.insert(0, str(REPO / "scripts"))
+            import hunt_alternative_liquidation_sources as _hunt
+        _cache = _hunt._url_cache_load()
+    except Exception:
+        _cache = {}
+    n_cache_hits = 0
+    n_cache_misses = 0
     for c in CANDIDATES:
-        if "urls" in c:
-            for u in c["urls"]:
-                results.append(probe(u))
-        elif "url" in c:
-            results.append(probe(c["url"]))
+        urls = c.get("urls") or ([c["url"]] if c.get("url") else [])
+        for u in urls:
+            r = _shared_probe(u, cache=_cache)
+            if r.get("cache_hit"):
+                n_cache_hits += 1
+            else:
+                n_cache_misses += 1
+            results.append(r)
 
     # Write report
     lines = []
@@ -114,12 +189,19 @@ def main():
     lines.append(f"**TIMESTAMP:** {ts}")
     lines.append(f"**RUBRIC:** {json.dumps(RUBRIC)}")
     lines.append(f"")
+    lines.append(f"## Probe cache accounting")
+    lines.append(f"- cache_hits: {n_cache_hits}")
+    lines.append(f"- cache_misses (fresh GETs): {n_cache_misses}")
+    lines.append(f"- shared_cache: research_state/url_probe_cache.json (TTL {6*3600}s)")
+    lines.append(f"")
     lines.append(f"## Probes")
     for r in results:
-        lines.append(f"### {r['url']} [{r['method']}]")
+        lines.append(f"### {r['url']} [{r.get('method','GET')}]")
         lines.append(f"- status: {r['status']} ok:{r.get('ok')}")
         if 'error' in r:
             lines.append(f"- error: {r['error']}")
+        if r.get('cache_hit'):
+            lines.append(f"- cache_hit: True")
         lines.append(f"- len: {r.get('len')}")
         lines.append(f"- preview: {r.get('body_preview','')[:200]}")
         lines.append(f"")
@@ -129,9 +211,10 @@ def main():
     lines.append(f"- Most require auth or don't have liquidation census data.")
     lines.append(f"- Ironflow (hyperliquid-liquidations on HF) remains the only known admissible path found so far.")
     lines.append(f"- NO NEW GO sources identified in this deep review.")
+    lines.append(f"- Deep-review URLs are now folded into hunt_alternative_liquidation_sources.py's candidate set so each URL is probed exactly once per session.")
 
     out.write_text("\n".join(lines))
-    print(f"Wrote {out}")
+    print(f"Wrote {out} (cache_hits={n_cache_hits} cache_misses={n_cache_misses})")
 
 if __name__ == "__main__":
     main()

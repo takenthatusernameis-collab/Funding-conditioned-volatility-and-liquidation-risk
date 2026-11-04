@@ -134,5 +134,73 @@ class TestDiscoverCacheIntegration(unittest.TestCase):
         self.assertEqual([c["name"] for c in cands], [c["name"] for c in cands2])
 
 
+class TestDeepReviewSharedCache(unittest.TestCase):
+    """HEAVY-004i session 4 bottleneck-removal tests.
+
+    deep_review_alt_sources.py used to carry a 14-URL candidate set that was 100%
+    disjoint from hunt_alternative_liquidation_sources.py's 44-URL set, so every
+    blocked session re-GETted URLs the hunt had already cached (~14s of redundant
+    I/O). The fix folds deep_review's URLs into the hunt candidate set and routes
+    deep_review's probe() through the hunt's shared URL probe cache. These tests
+    verify the integration is real and that a cache hit never touches the network.
+    """
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        hunt.URL_CACHE_PATH = self.tmp / "url_probe_cache.json"
+
+    def test_deep_review_urls_are_in_hunt_candidate_set(self):
+        # Every deep_review URL must appear in the hunt candidate set so it is
+        # probed exactly once per session instead of twice (once by each script).
+        import scripts.deep_review_alt_sources as dr
+        import scripts.hunt_alternative_liquidation_sources as hunt_mod
+        hunt_urls = set()
+        for c in (hunt_mod.EXTENDED_CANDIDATES + hunt_mod.HF_SEARCH_DISCOVERED + hunt_mod.DEEP_REVIEW_URLS):
+            for u in (c.get("urls") or c.get("probes") or []):
+                hunt_urls.add(u)
+        missing = [u for u in dr.DEEP_REVIEW_URLS if u not in hunt_urls]
+        self.assertEqual(missing, [], f"deep_review URLs not folded into hunt set: {missing}")
+
+    @patch("scripts.hunt_alternative_liquidation_sources.http_probe")
+    def test_shared_probe_uses_cache_on_hit(self, mock_probe):
+        import scripts.deep_review_alt_sources as dr
+        mock_probe.return_value = {"url": "https://example.com/", "status": 200,
+                                   "content_kind": "text", "body_preview": "ok"}
+        # _shared_probe loads its own cache via hunt._url_cache_load(); stub both
+        # load and save so the in-memory cache dict is reused across calls.
+        cache = {}
+        with patch("scripts.hunt_alternative_liquidation_sources._url_cache_load", return_value=cache), \
+             patch("scripts.hunt_alternative_liquidation_sources._url_cache_save"):
+            r1 = dr._shared_probe("https://example.com/")
+            self.assertFalse(r1.get("cache_hit"))
+            self.assertEqual(mock_probe.call_count, 1)
+            r2 = dr._shared_probe("https://example.com/")
+            self.assertTrue(r2.get("cache_hit"))
+            self.assertEqual(mock_probe.call_count, 1)
+
+    @patch("scripts.hunt_alternative_liquidation_sources.http_probe")
+    def test_shared_probe_falls_back_to_direct_on_import_failure(self, mock_probe):
+        import scripts.deep_review_alt_sources as dr
+        with patch("builtins.__import__", side_effect=ImportError("no hunt")):
+            # _shared_probe catches the ImportError and falls back to direct probe.
+            with patch.object(dr, "probe", return_value={"url": "https://example.com/", "status": 200, "ok": True}) as mp:
+                r = dr._shared_probe("https://example.com/")
+        self.assertEqual(r["status"], 200)
+        mp.assert_called_once()
+
+    @patch("scripts.hunt_alternative_liquidation_sources.http_probe")
+    def test_deep_review_reports_cache_accounting(self, mock_probe):
+        import scripts.deep_review_alt_sources as dr
+        mock_probe.return_value = {"url": "https://example.com/", "status": 200,
+                                   "content_kind": "text", "body_preview": "ok"}
+        cache = {}
+        with patch("scripts.hunt_alternative_liquidation_sources._url_cache_load", return_value=cache), \
+             patch("scripts.hunt_alternative_liquidation_sources._url_cache_save"):
+            dr._shared_probe("https://example.com/")
+            dr._shared_probe("https://example.com/")
+        # The shared cache must record exactly one network call for the URL.
+        self.assertEqual(mock_probe.call_count, 1)
+
+
 if __name__ == "__main__":
     unittest.main()

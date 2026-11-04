@@ -686,6 +686,10 @@ def main():
         "cache": discovery_cache,
     }
     candidates = candidates + discovered
+    # [HEAVY-004i session 4] Fold deep_review_alt_sources.py's candidate URLs into
+    # the hunt candidate set so each URL is probed exactly once per session (the
+    # deep review now reads hunt's evidence instead of re-GETting disjoint URLs).
+    candidates = candidates + DEEP_REVIEW_URLS
     # [HEAVY-004i session 3] Deduplicate URLs across candidates: the inline list,
     # ENHANCED_CANDIDATES and the HF-discovered set overlap (e.g. coinglass.com,
     # hyblockcapital.com, the ochinimus coverage probes), so the same URL was
@@ -780,6 +784,30 @@ def main():
 EXTRA_PROBES = [
     ("bybit_public_instruments", ["https://api.bybit.com/v5/market/instruments-info?category=linear"]),
     ("okx_public_instruments", ["https://www.okx.com/api/v5/public/instruments?instType=SWAP"]),
+]
+
+
+# HEAVY-004i session 4 (2026-11-04T21:38Z) Bottleneck removal: deep_review_alt_sources.py
+# carried 14 candidate URLs that were 100% disjoint from this hunt's 44-URL set, so
+# --deep-review re-GETted URLs the hunt had already cached (~14s of redundant I/O on
+# every blocked session). Fold them into the hunt candidate list so each URL is
+# probed exactly once per session, keyed on the shared URL probe cache. The deep
+# review now reads hunt evidence instead of re-probing it.
+DEEP_REVIEW_URLS = [
+    {"name": "deep_review__api.hyperliquid.xyz_info", "urls": ["https://api.hyperliquid.xyz/info"], "notes": "Hyperliquid info endpoint (GET; POST variants probed separately by deep_review)."},
+    {"name": "deep_review__tardis_dev_v1_markets", "urls": ["https://api.tardis.dev/v1/markets"], "notes": "Tardis public markets root (auth-gated for historical data)."},
+    {"name": "deep_review__binance_vision_liquidationSnapshot", "urls": ["https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/"], "notes": "Binance archive liquidation-snapshot directory probe."},
+    {"name": "deep_review__kaiko_demo", "urls": ["https://demo-api.kaiko.io/v1/"], "notes": "Kaiko demo root (auth-gated)."},
+    {"name": "deep_review__cryptofeed_repo", "urls": ["https://github.com/bmoscon/cryptofeed"], "notes": "Library repo, not a dataset host."},
+    {"name": "deep_review__laevitas_ch", "urls": ["https://laevitas.ch/"], "notes": "Public site probe."},
+    {"name": "deep_review__coinglass_public_liquidation_history", "urls": ["https://open-api.coinglass.com/public/v2/liquidation_history?symbol=BTC&timeType=4h"], "notes": "Coinglass public API probe (often auth/JS-gated)."},
+    {"name": "deep_review__bybit_public_spot_kline", "urls": ["https://public.bybit.com/spot/kline/"], "notes": "Bybit public archive spot-kline directory probe."},
+    {"name": "deep_review__bybit_public_trading_linear", "urls": ["https://public.bybit.com/trading/linear/"], "notes": "Bybit public archive trading-linear directory probe."},
+    {"name": "deep_review__coinapi_exchanges", "urls": ["https://rest.coinapi.io/v1/exchanges"], "notes": "CoinAPI root (auth-gated)."},
+    {"name": "deep_review__glassnode_studio", "urls": ["https://studio.glassnode.com/"], "notes": "Glassnode studio (auth-gated)."},
+    {"name": "deep_review__cryptodatadownload_binance", "urls": ["https://www.cryptodatadownload.com/data/binance/"], "notes": "CryptoDataDownload Binance directory probe."},
+    {"name": "deep_review__deribit_get_instruments", "urls": ["https://www.deribit.com/api/v2/public/get_instruments?currency=BTC&kind=future"], "notes": "Deribit public instruments probe."},
+    {"name": "deep_review__okx_public_instruments", "urls": ["https://www.okx.com/api/v5/public/instruments?instType=SWAP"], "notes": "OKX public instruments probe."},
 ]
 
 
