@@ -1,14 +1,13 @@
 {
   "registry_version": "1.1",
-  "generated": "20261105T222100Z",
+  "generated": "20261105T223500Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "VERIFIED 20261105T222100Z (FCLR-NEXT-108 complete, no trigger): Track C (funding-conditioned VOLATILITY) SEALED/LOCKED, forecast gate PASSED — no retune/rerun/conflate. Track B NOT_SUPPORTED. Track A (LIQUIDATION RISK) = ONLY UNFINISHED/ACTIVE repo-name objective, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; latest probe research_state/ironflow_probe_20261105T200406Z.json + digest, NO TRIGGER). 108 measurable delta: wired src/analysis/tracka_admissible.py seam into NAMED FAIL-CLOSED resume/operator decision path (manifest-only, no network, no parquet/outcome inspection, tmp-isolated). resume_check PASS 17 checks (added `admissible_seam_wired`, preserves 105 semantics); gate accepts `--admissible-manifest` and fails closed with `ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG`/`drift_preflight->admissible_seam->manifest_prereg` or continues to stable PREREG block on GO-shaped seam (outcomes_inspected:false); operator exposes `admissible_seam_wired`/state. 340 tests OK (+9). resume_check PASS 17; gate BLOCKED drift_preflight.pass:true + PREREG/ADMISSIBLE stable reason/order; operator PASS exit 0. Root md+json 142 (<=163); probes==2. Next FCLR-NEXT-109. No re-probe absent months. PREREG BEFORE INSPECTING OUTCOMES on trigger. NO COASTING.",
-
+  "current_status": "VERIFIED 20261105T223500Z (FCLR-NEXT-109 complete, no trigger): Track C (funding-conditioned VOLATILITY) SEALED/LOCKED, forecast gate PASSED \u2014 no retune/rerun/conflate. Track B NOT_SUPPORTED. Track A (LIQUIDATION RISK) = ONLY UNFINISHED/ACTIVE repo-name objective, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; latest probe research_state/ironflow_probe_20261105T200406Z.json + digest, NO TRIGGER). 109 measurable delta: end-to-end trigger-consumer contract hardened manifest-only/no-network/no-parquet/no-outcome-reads/no-real-RS-writes. gate GO seam + missing prereg/data => BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight->admissible_seam->manifest_prereg, outcomes_inspected:false; NO-GO => ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG. harness evaluate_forward consumes seam and refuses outcome_loader on blocked/NO-GO branches (ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG/ADMISSIBLE_SEAM_NOGO_BEFORE_OUTCOMES, outcomes_inspected:false); GO seam+prereg+data => READY_FROZEN, loader only after gates. resume_check/operator expose stable pending/GO/NO-GO seam fields (optional candidate path). 352 tests OK (+12). resume_check PASS 17; gate/operator stable (operator fail_closed_order stable, exit 0). Root md+json 142 (<=163); probes==2. Next FCLR-NEXT-110: fail-close actual harness parquet/outcome data-load execution path + explicit ADMISSIBLE_SEAM_GO_PREREG_REQUIRED reason-code surface + matrix tests. No re-probe absent months. PREREG BEFORE INSPECTING OUTCOMES on trigger. NO COASTING.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
       "rank": 0,
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) — EXECUTED 2026-11-04T00:52Z",
+      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z",
       "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
       "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
       "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
@@ -21,7 +20,7 @@
     },
     {
       "rank": 0,
-      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL — forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
+      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL \u2014 forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
       "prerequisite": "tests/test_fclr010_harness.py passes; fclr010_harness.py pre_register_forward_experiment() + evaluate_forward() hardened; run_manifest.json experiments map updated; consolidated + synthesis artifacts written.",
       "acceptance": "experiment_frontier.json contains FCLR-012; track_a_fclr010_consolidated.md and funding_incremental_synthesis_20261103T115630Z.md and forward_campaign_fclr012_prereg.md present; AGENT_HANDOFF.md single durable handoff with FORWARD CAMPAIGN; pytest green.",
       "blockers": "Forward runs blocked unless NEW admissible unauthenticated data appears (new ironflow monthly parquet >2026-10-31 for Track A; new unsealed 2026 Binance panel beyond 2026-11-02 for volatility). Do not relax thresholds or re-run sealed panels.",
@@ -71,10 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T212539Z",
-      "notes": "FCLR-NEXT-108 20261105T222100Z: NO DATA/TRIGGER (data_through=2026-10; 2026-11..2027-02 absent; probe ironflow_probe_20261105T200406Z.json + digest). Measurable code+test hardening delta (no new research_state report/probe families; no network; no parquet/outcome inspection): wired src/analysis/tracka_admissible.py into named fail-closed resume/operator decision path. scripts/tracka_resume_check.py +admissible_seam_check() + named `admissible_seam_wired` (PASS 17 checks total, stable existing names/semantics preserved incl. probe_invariant_runtime_named). scripts/tracka_resume_gate.py +`--admissible-manifest`/`admissible_manifest_path`: drift->admissible_seam(manifest-only)->manifest_prereg; NO-GO => BLOCKED `ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG`, outcomes_inspected:false; GO-shaped seam still prereg-blocked (`PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, outcomes_inspected:false). operator exposes admissible_seam_wired/state; stable pass/fail_closed_order preserved. tests/test_tracka_hardening_107.py (9, tmp-isolated). 340 tests OK (+9). resume_check 17 PASS ~0.62s; gate stable; operator PASS exit 0. Root 142 (<=163), probes 2. Next FCLR-NEXT-109: end-to-end harness resume-trigger consume of admissible seam on real trigger path (tmp/manifest fixtures) + stable gate/operator reason-code surfaces for seam pass-through + any unwired manifest-field/leakage checks. PREREG BEFORE OUTCOMES on trigger.",
-      "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-109",
-
+      "last_checked": "20261105T223500Z",
+      "notes": "FCLR-NEXT-109 20261105T223500Z: NO DATA/TRIGGER (data_through=2026-10; 2026-11..2027-02 absent; probe ironflow_probe_20261105T200406Z.json + digest). Measurable code+test hardening delta (+12 => 352 tests OK), no new research_state report/probe families, no network/parquet/outcome reads, no real RS writes. End-to-end trigger-consumer contract: gate/harness/resume_check/operator consume admissible seam manifest-only with stable fail-closed codes. Gate: GO seam+missing prereg/data => BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight->admissible_seam->manifest_prereg, outcomes_inspected:false; NO-GO => ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG. Harness evaluate_forward consumes seam (admissible_manifest/_path) and refuses outcome_loader on blocked/NO-GO branches (ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG, ADMISSIBLE_SEAM_NOGO_BEFORE_OUTCOMES, outcomes_inspected:false); GO seam+prereg+data => READY_FROZEN, loader only after gates. resume_check/operator expose stable pending/GO/NO-GO fields (optional candidate path). 17 checks PASS; operator PASS exit 0, fail_closed_order stable. Root 142 (<=163), probes 2. Next FCLR-NEXT-110: fail-close actual harness parquet/outcome data-load execution path + explicit ADMISSIBLE_SEAM_GO_PREREG_REQUIRED surface + matrix tests. PREREG BEFORE OUTCOMES on trigger.",
+      "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-110",
       "artifact_churn_098": {
         "research_state_mdjson_root": 161,
         "ironflow_probe_files": 2,
@@ -171,7 +169,7 @@
         "blocker": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
         "sweep": "research_state/campaign_sweep_tracka_20261105T122444Z.md"
       },
-      "evidence": "research_state/ironflow_probe_20261105T162945Z.json; research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
+      "evidence": "research_state/ironflow_probe_20261105T200406Z.json; tests/test_tracka_hardening_108.py",
       "artifact_churn_101": {
         "research_state_mdjson_root": 161,
         "ironflow_probes": 2,
@@ -266,7 +264,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-103 (root-bound consolidation + gate reason/order hardening + monitor evidence-field tests)",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-110",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -293,12 +291,11 @@
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
   },
-  "last_updated": "2026-11-05T22:21:00Z",
-  "timestamp": "20261105T222100Z",
-  "last_checked": "2026-11-05T22:21:00Z",
-  "last_checked_utc": "20261105T222100Z",
+  "last_updated": "2026-11-05T22:35:00Z",
+  "timestamp": "20261105T223500Z",
+  "last_checked": "2026-11-05T22:35:00Z",
+  "last_checked_utc": "20261105T223500Z",
   "track_a_blocker_latest": "research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md",
-
   "artifact_churn_101": {
     "research_state_mdjson_root": 161,
     "ironflow_probes": 2,
@@ -354,7 +351,6 @@
     "bound": 163
   },
   "artifact_churn_105": {
-
     "research_state_mdjson_root": 142,
     "ironflow_probe_files": 2,
     "tests_total": 322,
@@ -364,5 +360,28 @@
     "operator_cli_exit_code": 0,
     "bound": 163,
     "consolidated_files_105": 13
+  },
+  "artifact_churn_109": {
+    "research_state_mdjson_root": 142,
+    "ironflow_probe_files": 2,
+    "tests_total": 352,
+    "tests_delta_from_108": 12,
+    "resume_check_pass": true,
+    "resume_check_nchecks": 17,
+    "operator_cli_pass": true,
+    "operator_cli_exit_code": 0,
+    "harness_outcome_loader_refused_before_gates": true,
+    "harness_seam_nogo_before_outcomes_reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_OUTCOMES",
+    "gate_seam_nogo_reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG",
+    "gate_seam_go_prereg_reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+    "manifest_only_no_network_no_outcomes_no_parquet": true,
+    "changed_files": [
+      "scripts/fclr010_harness.py",
+      "scripts/tracka_resume_check.py",
+      "tests/test_tracka_hardening_108.py",
+      "AGENT_HANDOFF.md",
+      "research_state/experiment_frontier.json"
+    ],
+    "bound": 163
   }
 }

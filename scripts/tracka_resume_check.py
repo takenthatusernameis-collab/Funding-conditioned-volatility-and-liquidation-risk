@@ -155,7 +155,7 @@ def drift_preflight(repo_root: Path = None, research_state_dir: Path = None) -> 
         return {"pass": False, "checks": {}, "error": repr(e), "elapsed_s": round(time.time() - t0, 6), "network": False, "read_only": True}
 
 
-def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
+def run(repo_root: Path = None, research_state_dir: Path = None, admissible_candidate_path=None) -> dict:
     t0 = time.time()
     root = Path(repo_root) if repo_root is not None else ROOT
     checks = {}
@@ -227,10 +227,10 @@ def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
         }
     except Exception as e:
         checks["probe_invariant_runtime_named"] = {"pass": False, "error": repr(e)}
-    # 7) 108 named admissible-seam guard (fail-closed, manifest-only, no network/no parquet/no outcomes)
+    # 7) 108/109 named admissible-seam guard (fail-closed, manifest-only, no network/no parquet/no outcomes)
     try:
-        asc = admissible_seam_check(candidate_path=None, repo_root=root)
-        checks["admissible_seam_wired"] = {
+        asc = admissible_seam_check(candidate_path=admissible_candidate_path, repo_root=root)
+        wired = {
             "pass": asc.get("pass") is True,
             "status": asc.get("status"),
             "reason_code": asc.get("reason_code"),
@@ -240,6 +240,11 @@ def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
             "reads_parquet": asc.get("reads_parquet"),
             "seam": asc.get("seam"),
         }
+        if admissible_candidate_path is not None:
+            wired["candidate_path"] = str(admissible_candidate_path)
+            wired["month"] = asc.get("month")
+            wired["failures"] = asc.get("failures", [])
+        checks["admissible_seam_wired"] = wired
     except Exception as e:
         checks["admissible_seam_wired"] = {"pass": False, "error": repr(e), "fail_closed": True}
     dt = time.time() - t0
@@ -379,10 +384,13 @@ def probe_invariant_state(repo_root: Path = None, research_state_dir: Path = Non
 
 def compose_operator_report(repo_root: Path = None, research_state_dir: Path = None,
                             data_path: str = "/nonexistent_tracka_resume", prereg: str = None,
-                            harness_repo_root: Path = None) -> dict:
+                            harness_repo_root: Path = None,
+                            admissible_candidate_path=None) -> dict:
     """104 bounded top-level operator compose/report: drift preflight + gate decision + probe invariant state.
 
     Read-only, <5s target, no network regression, fail-closed. No real research_state writes.
+    109: optional admissible_candidate_path enables manifest-only GO/NO-GO/pending seam exposure
+    without changing stable 104/105 pass/fail_closed_order semantics.
     """
     t0 = time.time()
     root = Path(repo_root) if repo_root is not None else ROOT
@@ -401,7 +409,8 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
             report["gate_decision"] = trg.decide(
                 data_path=data_path, output_dir=td, pre_reg_path=prereg, source_manifest=None,
                 compat_fixture=False, repo_root=root, research_state_dir=rs,
-                harness_repo_root=hrr, skip_drift_preflight=True)
+                harness_repo_root=hrr, skip_drift_preflight=True,
+                admissible_manifest_path=admissible_candidate_path)
         # avoid duplicating full nested preflight object bloat in compose output
         if "drift_preflight" in report["gate_decision"]:
             report["gate_decision"]["drift_preflight_nested"] = "see report.drift_preflight"
@@ -420,11 +429,11 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
         "probe_invariant_runtime_shape_valid": pis.get("probe_invariant_runtime_validation", {}).get("shape_valid"),
         "latest_live_probe": pis.get("latest_live_probe"),
     }
-    # 108 named admissible-seam guard at operator level (manifest-only, fail-closed; no network/no outcomes)
+    # 108/109 named admissible-seam guard at operator level (manifest-only, fail-closed; no network/no outcomes)
     # Exposed as named surface; does not alter stable 104/105 pass/fail_closed_order semantics.
-    asc = admissible_seam_check(candidate_path=None, repo_root=root)
+    asc = admissible_seam_check(candidate_path=admissible_candidate_path, repo_root=root)
     report["admissible_seam_state"] = asc
-    report["admissible_seam_wired"] = {
+    wired = {
         "pass": asc.get("pass") is True,
         "status": asc.get("status"),
         "reason_code": asc.get("reason_code"),
@@ -433,6 +442,11 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
         "reads_outcomes": asc.get("reads_outcomes"),
         "reads_parquet": asc.get("reads_parquet"),
     }
+    if admissible_candidate_path is not None:
+        wired["candidate_path"] = str(admissible_candidate_path)
+        wired["month"] = asc.get("month")
+        wired["failures"] = asc.get("failures", [])
+    report["admissible_seam_wired"] = wired
     report["elapsed_s"] = round(time.time() - t0, 6)
     # fail-closed overall (stable 104/105 semantics preserved)
     drift_ok = report["drift_preflight"].get("pass") is True

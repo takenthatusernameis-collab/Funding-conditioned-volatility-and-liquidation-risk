@@ -9,7 +9,7 @@ import json
 import hashlib
 from pathlib import Path
 from dataclasses import dataclass
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Callable
 
 
 @dataclass
@@ -172,10 +172,29 @@ class FCLR010Harness:
         return {"status": "GO" if r.get("go") else "NO-GO", "go": bool(r.get("go")),
                 "failures": r.get("failures", []), "strict_gate": bool(strict), "rubric": r}
 
+    def _evaluate_admissible_seam(self, admissible_manifest: Optional[Dict[str, Any]], admissible_manifest_path: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """109: named admissible-seam guard for harness trigger-consumer path.
+
+        Manifest-only, fail-closed, no network, no parquet/outcome reads. Used to refuse
+        outcome inspection when an explicit candidate is present but not admissible.
+        """
+        if admissible_manifest is None and admissible_manifest_path is None:
+            return None
+        try:
+            from scripts.tracka_resume_check import admissible_seam_check
+            asc = admissible_seam_check(candidate_path=admissible_manifest_path, candidate_manifest=admissible_manifest, repo_root=self.repo_root)
+        except Exception as e:
+            asc = {"pass": False, "status": "NO-GO", "reason_code": "ADMISSIBLE_SEAM_EXCEPTION",
+                   "failures": ["seam_exception"], "error": repr(e),
+                   "fail_closed": True, "network": False, "reads_outcomes": False, "reads_parquet": False}
+        return {k: asc.get(k) for k in ("pass", "status", "reason_code", "failures", "month", "fail_closed", "network", "reads_outcomes", "reads_parquet", "guards", "seam") if k in asc}
+
     def evaluate_forward(self, data_path: Path, output_dir: Path, pre_reg_path: Optional[Path] = None,
                          source_manifest: Optional[Dict[str, Any]] = None,
                          strict_manifest_gate: Optional[bool] = None,
-                         outcome_loader=None) -> Dict[str, Any]:
+                         outcome_loader=None,
+                         admissible_manifest: Optional[Dict[str, Any]] = None,
+                         admissible_manifest_path: Optional[str] = None) -> Dict[str, Any]:
         """
         Evaluate forward validation on new data using the FROZEN model.
         098 hardening: (1) PREREG-BEFORE-OUTCOMES always enforced first (blocked until
@@ -185,7 +204,10 @@ class FCLR010Harness:
         minimal-only GO-shaped manifests). (3) Explicit compat fixture/test path:
         strict_manifest_gate=False with a manifest uses assess_minimal_fixture.
         (4) Frozen config only. No retuning. No network.
-        Legacy callers (no source_manifest) preserve prior prereg/data gate behavior.
+        109 hardening: optional admissible_manifest/_path consumed fail-closed (manifest-only,
+        no network, no parquet/outcome reads). If an explicit admissible candidate is NO-GO,
+        outcome inspection is refused before data/prereg success paths can load outcomes.
+        Legacy callers preserve prior behavior.
         """
         data_path = Path(data_path)
         output_dir = Path(output_dir)
@@ -199,6 +221,9 @@ class FCLR010Harness:
             except Exception as e:  # pragma: no cover - defensive
                 return {"error": repr(e)}
 
+        # 109: seam check is manifest-only and never inspects outcomes/data/parquet.
+        seam = self._evaluate_admissible_seam(admissible_manifest, admissible_manifest_path)
+
         # PREREG-BEFORE-OUTCOMES: enforced before any data/outcome inspection.
         if pre_reg_path is not None:
             pre_reg_path = Path(pre_reg_path)
@@ -206,24 +231,36 @@ class FCLR010Harness:
                 gate = None
                 if source_manifest is not None:
                     gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
-                return {
+                res = {
                     "status": "BLOCKED",
                     "reason": f"Pre-registration file not found: {pre_reg_path}. Pre-register before inspecting outcomes.",
                     **({"manifest_gate": gate} if gate is not None else {}),
+                    **({"admissible_seam_wired": seam} if seam is not None else {}),
                     "outcomes_inspected": False,
                     "prereg_required": True,
                 }
+                if seam is not None and not seam.get("pass"):
+                    res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
+                    res["fail_closed_order"] = "admissible_seam->manifest_prereg"
+                    res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
+                return res
         else:
             gate = None
             if source_manifest is not None:
                 gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
-            return {
+            res = {
                 "status": "BLOCKED",
                 "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.",
                 **({"manifest_gate": gate} if gate is not None else {}),
+                **({"admissible_seam_wired": seam} if seam is not None else {}),
                 "outcomes_inspected": False,
                 "prereg_required": True,
             }
+            if seam is not None and not seam.get("pass"):
+                res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
+                res["fail_closed_order"] = "admissible_seam->manifest_prereg"
+                res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
+            return res
         # Manifest gate: strict by default when manifest is provided (098 resume/GO path).
         gate = None
         if source_manifest is not None:
@@ -234,21 +271,35 @@ class FCLR010Harness:
                     "status": "BLOCKED",
                     "reason": "Track A strict manifest gate NO-GO. Manifest must pass assess_strict_manifest for GO-shaped observed Hyperliquid claims (machine-verifiable provenance/label/coverage/block evidence required). Compat fixture path requires explicit strict_manifest_gate=False.",
                     "manifest_gate": gate,
+                    **({"admissible_seam_wired": seam} if seam is not None else {}),
                     "outcomes_inspected": False,
                     "prereg_required": False,
                 }
+        # 109: explicit admissible candidate must pass before any outcome/data load path is allowed.
+        if seam is not None and not seam.get("pass"):
+            return {
+                "status": "BLOCKED",
+                "reason": "Admissible seam NO-GO (manifest-only, fail-closed); prereg exists but outcomes refused until seam passes.",
+                "reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_OUTCOMES",
+                **({"manifest_gate": gate} if gate is not None else {}),
+                "admissible_seam_wired": seam,
+                "outcomes_inspected": False,
+                "prereg_required": False,
+            }
         if not data_path.exists():
             return {
                 "status": "BLOCKED",
                 "reason": f"Data path not found: {data_path}. No new data available for forward validation.",
                 **({"manifest_gate": gate} if gate is not None else {}),
+                **({"admissible_seam_wired": seam} if seam is not None else {}),
                 "outcomes_inspected": False,
                 "prereg_required": False,
             }
         return {
             "status": "READY_FROZEN",
-            "reason": ("Strict manifest GO; " if gate is not None else "") + "Pre-registration present; data available; frozen config only, no retuning.",
+            "reason": ("Strict manifest GO; " if gate is not None else "") + ("Admissible seam GO (manifest-only); " if seam is not None and seam.get("pass") else "") + "Pre-registration present; data available; frozen config only, no retuning.",
             **({"manifest_gate": gate} if gate is not None else {}),
+            **({"admissible_seam_wired": seam} if seam is not None else {}),
             "config": self.get_frozen_config(),
             "data_path": str(data_path),
             "outcomes_inspected": False,
