@@ -1,59 +1,52 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T011841Z
+Timestamp (UTC): 20261105T014500Z
 Git SHA (HEAD): 5f475208064b8281924d0542fd4801f71adc38fc
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T011841Z | Priority: P0 - REPO-NAME PRIORITIZED + BOTTLENECKS REMOVED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261105T014500Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
-- Funding-conditioned VOLATILITY component = Track C (FCLR-011) — COMPLETE/SEALED/LOCKED. Forecast gate PASSED on frozen splits. DO NOT retune/re-run sealed cells.
-- Liquidation RISK component = Track A (FCLR-010) — BLOCKED on admissible unauthenticated liquidation data (ironflow data_through=2026-10; no month >=2026-11 returns HTTP 200). THIS IS THE UNFULFILLED HALF - HIGHEST ACTIVE PRIORITY.
-Inference: Volatility done; liquidation risk is the repo's unfulfilled half and must be the sole focus.
+- Funding-conditioned VOLATILITY component = Track C (FCLR-011) — SEALED/LOCKED. Forecast gate PASSED. DO NOT retune, re-run sealed cells, or conflate.
+- Liquidation RISK component = Track A (FCLR-010) — UNFULFILLED HALF. THIS IS THE ONLY ACTIVE FOCUS. Currently BLOCKED on admissible unauthenticated liquidation data.
+Inference: Volatility is complete. Liquidation risk is the repo's unfulfilled objective and must receive 100% of session effort until a valid resume condition is met.
 
 ## CURRENT VERIFIED STATE
-- Tests: suite green (pytest), 179 passed (>=166 floor met). REGRESSION FIXED this session: commits after f15adc3f gutted scripts/hunt_alternative_liquidation_sources.py (34 stub lines, dropped _cache_save/_cache_load/_cache_fresh/http_probe/http_probe_cached/SEARCH_TTL_SECONDS/etc.) and scripts/monitor_ironflow_liquidations.py (dropped FAST_PATH_STATE/load_fastpath_cache/save_fastpath_cache/tree_get_cached), dropping the suite to 165 passed / 14 failed. Restored the cache API to both scripts; suite back to 179 passed. Do NOT regress.
-- Bottlenecks removed (hardened baseline, DO NOT regress): consolidated alt_source_scan_*.json to single latest; consolidated alt_source_deep_review_*.md to single latest. monitor_ironflow_liquidations.py has ETag/tree cache, HEAD-404 fast path, forward-edge-only resume probe, baseline-drift state-only skip on 304, per-file ETag/LM caching, fastpath cache. hunt_alternative_liquidation_sources.py has 24h HF search cache, 6h per-URL probe cache, URL dedup, merged DEEP_REVIEW_URLS. deep_review_alt_sources.py reuses hunt's shared URL probe cache. No schedulers/pollers/status-only files/repeated wrappers.
-- Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED. Track A: ON TRIGGER/MONITOR ONLY, blocked on data.
-- Last confirmed blocked via scripts/monitor_ironflow_liquidations.py --quick (20261104T233118Z context): data_through=2026-10; forward edge 2026-11..2027-02 head-probed absent; probe_diff added=0 changed=0 removed=0; baseline_drift intact.
-- experiment_frontier.json (20261104T233118Z last_checked): TRACK_A blocked, resume on ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative source. Track C blocked past 2026-11-02 (Binance archive ends). FCLR-010 gate PASSED (sealed), FCLR-011 gate PASSED (sealed), FCLR-012-V INCONCLUSIVE (0 test blocks, CI spans zero).
+- Tests: suite green (pytest), 180 passed (>=166 floor met). DO NOT regress.
+- Bottlenecks already removed (consolidated alt-source artifacts, hardened caches/ETags/fast-paths, state-diffing). Treat these as hardened baselines, not finished work.
+- Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED. Track A: ON-TRIGGER/MONITOR ONLY, blocked on data.
+- Last confirmed blocked (scripts/monitor_ironflow_liquidations.py --quick ~20261104T233118Z): data_through=2026-10; forward edge 2026-11..2027-02 head-probed absent; probe_diff added=0 changed=0 removed=0; baseline_drift intact.
+- experiment_frontier.json: TRACK_A blocked, resume on ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative source. Track C blocked past 2026-11-02.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
-TASK ID: FCLR-NEXT-079-TRACK-A-HEAVY-BOTTLENECK-CAMPAIGN
-PRIORITY: P0 - REPO-NAME PRIORITIZED (Funding-conditioned volatility DONE/LOCKED; Liquidation risk ONLY ACTIVE FOCUS - BLOCKED ON DATA)
-TIMESTAMP (UTC): 20261105T011841Z
-CAMPAIGN: TRACK A LIQUIDATION-RISK - FORCE HEAVY BOTTLENECK REMOVAL WHILE BLOCKED, HARDEN TRIGGERS, NEVER CONCLUDE "NO DATA"
+TASK ID: FCLR-NEXT-080-TRACK-A-FORCE-HEAVY-PROGRESS-WHILE-BLOCKED
+PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility DONE/LOCKED; Liquidation Risk ONLY)
+TIMESTAMP (UTC): 20261105T014500Z
+CAMPAIGN: TRACK A LIQUIDATION-RISK - GENERATE IRREFUTABLE PROGRESS WHILE DATA-BLOCKED. DO NOT COAST.
+ENFORCEMENT: ALL STEPS MANDATORY. SESSION INCOMPLETE IF ANY SKIPPED.
 
-OBJECTIVE (INFERRED FROM REPO NAME): Funding-conditioned volatility is complete/locked. ALL effort must go to liquidation risk (Track A). Data blocked (ironflow data_through=2026-10, no >=2026-11). You CANNOT stop because "no data". While blocked, you MUST aggressively find and remove real bottlenecks, harden automation/triggers/caches/classification so the moment data appears, an agent can resume FCLR-010 with zero wasted time. Eliminate inefficiencies. Do NOT add schedulers/pollers/status-only files/repeated wrappers.
+OBJECTIVE (INFERRED FROM REPO NAME): With funding-conditioned volatility sealed, the liquidation-risk half is the sole unfinished objective. Data is currently blocked. You CANNOT conclude "no data" and stop. While blocked, you MUST force heavy, measurable work: expand admissible source coverage, harden triggers/classification/schema mapping, build a fixture-driven dry-run of the frozen FCLR-010 harness, and eliminate any remaining bottlenecks/duplication. Make it impossible for a future agent to avoid doing heavy work by leaving concrete, executable artifacts.
 
-CONSTRAINTS: No credentials/manual files/.github/workflows changes. Leakage-safe, preregister-before-outcomes. Track C/B remain locked/unsupported. Raw data/caches out of git. Clean-clone reproducible.
+CONSTRAINTS: No credentials/manual files/.github/workflows changes. Leakage-safe, preregister-before-outcomes. Track C/B remain locked/unsupported. Raw data/caches out of git. Clean-clone reproducible. No schedulers/pollers/status-only files/repeated wrappers/agent-controllers.
 
-MANDATORY EXECUTION (IN ORDER - ALL REQUIRED, SESSION INCOMPLETE IF ANY SKIPPED):
-1) STATE SWEEP (>=200 lines): Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/experiment_frontier.json, research_state/run_manifest.json, scripts/monitor_ironflow_liquidations.py, scripts/hunt_alternative_liquidation_sources.py, scripts/deep_review_alt_sources.py. Write research_state/campaign_sweep_tracka_$(date -u +%Y%m%dT%H%M%SZ).md with concrete evidence, diff vs latest sweep, confirm no new redundant status-only artifacts added.
-2) TRIGGER PROBE (FULL TABLES): Run scripts/monitor_ironflow_liquidations.py --quick, scripts/deep_review_alt_sources.py, scripts/hunt_alternative_liquidation_sources.py. Log EVERY checked URL/path/pattern, status/headers/mtime/body previews, ETag/TTL, cached hits, baseline-drift. If >=2026-11 ironflow OR rubric-GO alternative appears -> HALT inspection, PREREGISTER in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE inspecting outcomes (hypothesis/frozen splits/metrics/stop rule), run ONLY frozen FCLR-010 harness. Else write "NO NEW DATA - ON HOLD" with complete tables.
-3) BOTTLENECK REMOVAL (CONCRETE, >=1 REAL FIX): Find real bottlenecks (duplication, slow probes, missing cache, weak classification, retry/backoff, I/O, redundant artifact churn). Fix in scripts/ (prefer monitor_ironflow_liquidations.py, hunt_alternative_liquidation_sources.py, deep_review_alt_sources.py). Provide before/after evidence (diff + timing/behavior). Consolidate duplicates keeping latest. Remove wasteful patterns.
-4) TEST HARDENING: Add/extend targeted tests in tests/test_monitor_ironflow.py or new tests (ETag/TTL, state-diff, month-windowing, candidate classification, failure modes, baseline-drift). Run python -m pytest tests/ -q (must remain green; >=166 passing).
-5) BLOCKER+FRONTIER+HANDOFF: Write fresh research_state/liquidation_forward_validate_005_blocker_$(date -u +%Y%m%dT%H%M%SZ).md (full probe tables, ETag/cache, exact checkable resume conditions). Update/create research_state/experiment_frontier.json with precise resume triggers, last_checked UTC, blocked status. Update AGENT_HANDOFF.md with timestamped next task.
+MANDATORY EXECUTION (IN ORDER - ALL REQUIRED):
+1) STATE SWEEP (>=250 lines): Read RESEARCH_PROMPT.md, AGENT_HANDOFF.md, research_state/experiment_frontier.json, research_state/run_manifest.json, scripts/monitor_ironflow_liquidations.py, scripts/hunt_alternative_liquidation_sources.py, scripts/deep_review_alt_sources.py, tests/test_monitor_ironflow.py. Write research_state/campaign_sweep_tracka_$(date -u +%Y%m%dT%H%M%SZ).md with concrete evidence, diff vs latest sweep, artifact count (ensure no new redundant status-only artifacts), and a "bottlenecks found" list with measurable fixes.
+2) TRIGGER PROBE (FULL TABLES): Run scripts/monitor_ironflow_liquidations.py --quick, scripts/deep_review_alt_sources.py, scripts/hunt_alternative_liquidation_sources.py. Log EVERY checked URL/path/pattern, method, status/headers/ETag/Last-Modified/mtime, body preview, cache hit/miss/TTL, baseline-drift, probe_diff. If >=2026-11 ironflow OR rubric-GO alternative appears -> HALT inspection, PREREGISTER in research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE inspecting outcomes (hypothesis, frozen splits, features/targets, metrics, stop rule, data hashes) and run ONLY the frozen FCLR-010 harness. Else write "NO NEW DATA - ON HOLD" with complete tables in research_state/trigger_probe_tracka_$(date -u +%Y%m%dT%H%M%SZ).md.
+3) SOURCE EXPANSION + CLASSIFICATION HARDENING (HEAVY): Extend scripts/hunt_alternative_liquidation_sources.py to probe additional unauthenticated candidates with strict dedup, per-URL probe cache, and a hardened GO rubric (>=5 symbols OR >=1 complete month OR >=3x30d blocks, documented coverage/completeness, permissive/license-safe, no keys/signed/requester-pays, schema compatible with frozen FCLR-010; prefer Hyperliquid/venue-native public archives). Harden candidate classification (liquidation vs fills vs trades vs funding) with fixtures. Add/extend tests for rubric edge cases. Every new probe must be cached.
+4) FIXTURE-DRIVEN DRY-RUN OF FCLR-010 (IRREFUTABLE PROGRESS): Create fixtures under tests/fixtures/tracka/ (minimal synthetic parquet/csv with required schema) and add a dry-run test path (or script) that validates: preregistration loading, frozen splits, feature computation with train-only normalization, leakage guards, and metric computation. Ensure the frozen harness can be invoked against fixtures without network. Document in research_state/tracka_fclr010_dryrun_$(date -u +%Y%m%dT%H%M%SZ).md with exact commands + pass/fail.
+5) BOTTLENECK REMOVAL + TIMING (CONCRETE): Profile monitor/hunt/deep_review (timing before/after). Remove remaining duplication (URL lists, consolidation), unify caches, tighten backoff/retries, reduce redundant I/O. Fix at least ONE real bottleneck with before/after diff + timing/behavior evidence.
+6) TEST HARDENING + EVIDENCE: Extend tests/test_monitor_ironflow.py and/or add targeted tests for rubric/classification/dry-run. Run python -m pytest tests/ -q (must remain >=180 passing; do NOT drop). Write research_state/liquidation_forward_validate_006_blocker_$(date -u +%Y%m%dT%H%M%SZ).md (full probe tables, caches/ETags, resume conditions, GO rubric, dry-run results). Update research_state/experiment_frontier.json with precise resume triggers, last_checked UTC, blocked status, and "next_action_heavy" pointing to artifacts. Update AGENT_HANDOFF.md with timestamped next task.
 
-RESUME CONDITION (ONLY UNBLOCK): ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for any month >=2026-11 returns HTTP 200 unauthenticated (via monitor) OR new admissible unauthenticated source passes strict GO rubric (>=5 symbols, >=1 complete month OR >=3x30d blocks, documented coverage/completeness, permissive license, no keys/signed/requester-pays, schema compatible with frozen FCLR-010). Hyperliquid-only for Track A.
-STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Track C locked. No conflation of tracks. No schedulers/pollers/status-only files/wrappers/workflow changes.
+RESUME CONDITION (ONLY UNBLOCK): ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for any month >=2026-11 returns HTTP 200 unauthenticated (via monitor) OR new admissible unauthenticated source passes strict GO rubric. Hyperliquid-only for Track A.
+STOP RULE: Complete ALL 6 steps + artifacts. Never stop early for "no data". Track C locked. No conflation. No schedulers/pollers/status-only files/wrappers/workflow changes. Preregister BEFORE inspecting outcomes if triggered.
 ```
 
 ## VERIFICATION
-- `python -m pytest tests/ -q` (179 passed)
+- `python -m pytest tests/ -q` (180 passed)
 - `python scripts/monitor_ironflow_liquidations.py --quick` (blocked: data_through 2026-10)
 - `python scripts/hunt_alternative_liquidation_sources.py`
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T011841Z: Execute FCLR-NEXT-079 above in full. Prioritize liquidation risk (Track A). Remove bottlenecks while blocked, harden triggers, keep artifacts consolidated. Do not touch Track C. If resume conditions met at any point, preregister before inspecting outcomes. Confirm tests stay green (>=166) before ending the session.
-
-## CAMPAIGN UPDATE (FCLR-NEXT-079) - 20261105T013144Z
-- Step 1 (sweep): research_state/campaign_sweep_tracka_20261105T012634Z.md
-- Step 2 (probe): research_state/trigger_probe_tracka_20261105T012702Z.md — NO NEW DATA - ON HOLD (ironflow data_through 2026-10, forward edge 2026-11..2027-02 absent; alt sources scanned/deep-reviewed; no rubric-GO)
-- Step 3 (bottleneck removal): research_state/bottleneck_removal_tracka_20261105T013144Z.md — Added probe/trend consolidation in monitor_ironflow_liquidations.py; added test; tests 180 passed (>=166). No schedulers/pollers/status-only/wrappers/workflow changes.
-- Step 4 (test hardening): Extended tests/test_monitor_ironflow.py (consolidation) — all 180 passed.
-- Step 5 (blocker/frontier/handoff): research_state/liquidation_forward_validate_005_blocker_20261105T013144Z.md written; experiment_frontier.json updated with precise resume triggers/last_checked.
-
-NEXT TASK (IMMEDIATE): Remain on Track A monitor. If ironflow >=2026-11 appears OR rubric-GO alternative passes strict criteria, preregister fclr010_prereg_*.json BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness. Continue bottleneck removal/hardening while blocked. Do NOT touch Track C. Keep artifacts consolidated.
+20261105T014500Z: Execute FCLR-NEXT-080 above in full. Prioritize liquidation risk (Track A) exclusively. Force heavy progress while blocked (source expansion + classification hardening + fixture-driven FCLR-010 dry-run + bottleneck removal). Keep artifacts consolidated. Do not touch Track C. If resume conditions met at any point, preregister BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness. Keep tests green (>=180). Leave concrete, executable evidence for the next session.
