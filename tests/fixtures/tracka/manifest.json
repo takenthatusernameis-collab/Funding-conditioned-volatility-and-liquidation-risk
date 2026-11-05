@@ -1,0 +1,49 @@
+{
+  "generated_utc": "2026-11-05T03:23:28Z",
+  "seed": 20261105,
+  "schema_contract": "tests/fixtures/tracka/README.md",
+  "splits": {
+    "train": {
+      "start": "2025-11-01T00:00:00Z",
+      "end": "2026-03-06T23:00:00Z"
+    },
+    "validation": {
+      "start": "2026-03-14T00:00:00Z",
+      "end": "2026-05-20T23:00:00Z"
+    },
+    "test": {
+      "start": "2026-05-28T00:00:00Z",
+      "end": "2026-10-31T23:00:00Z"
+    },
+    "embargo_days": 7,
+    "frozen_before_outcomes": true
+  },
+  "symbols": [
+    "BTC-PERP",
+    "ETH-PERP",
+    "SOL-PERP",
+    "AVAX-PERP",
+    "ARB-PERP",
+    "DOGE-PERP"
+  ],
+  "files": {
+    "train": {
+      "path": "tests/fixtures/tracka/panel_train.jsonl",
+      "rows": 18144,
+      "hours": 3024,
+      "symbols": 6
+    },
+    "validation": {
+      "path": "tests/fixtures/tracka/panel_validation.jsonl",
+      "rows": 9792,
+      "hours": 1632,
+      "symbols": 6
+    },
+    "test": {
+      "path": "tests/fixtures/tracka/panel_test.jsonl",
+      "rows": 22608,
+      "hours": 3768,
+      "symbols": 6
+    }
+  }
+}

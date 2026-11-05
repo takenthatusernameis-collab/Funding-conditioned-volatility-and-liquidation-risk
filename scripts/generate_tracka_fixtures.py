@@ -105,9 +105,13 @@ def main():
         "symbols": SYMBOLS,
         "files": {},
     }
-    for name, (s, e) in SPLITS.items():
+    for name, bounds in SPLITS.items():
         if name in ("embargo_days", "frozen_before_outcomes"):
             continue
+        # bounds is a dict {"start": ..., "end": ...}; unpacking a dict yields its
+        # KEYS, so `s, e = bounds` would silently give ('start', 'end') and fail in
+        # parse_z. Read the named fields explicitly.
+        s, e = bounds["start"], bounds["end"]
         rows = build_split(name, s, e)
         path = OUT / f"panel_{name}.jsonl"
         with open(path, "w") as f:
