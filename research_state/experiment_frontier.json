@@ -113,5 +113,9 @@
     }
   ],
   "last_updated": "2026-11-05T05:17:23Z",
-  "timestamp": "20261104T005200Z"
+  "timestamp": "20261104T005200Z",
+  "last_checked": "2026-11-05T06:19:30Z",
+  "track_a_blocked": true,
+  "next_action_heavy": true,
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_009_blocker_20261105T061930Z.md"
 }
