@@ -43,6 +43,23 @@ def _has_required_schema(fields: List[str]) -> bool:
     return REQUIRED_FCLR010_SCHEMA.issubset(s)
 
 
+_NORMALIZED_HYPERLIQUID = {"hyperliquid", "hl", "hyperliquid_perp", "hyperliquid-perp"}
+
+
+def _norm_symbols(candidate: Dict[str, Any]) -> List[str]:
+    raw = candidate.get("symbols") or []
+    if not isinstance(raw, list):
+        return []
+    out = []
+    for s in raw:
+        if s is None:
+            continue
+        n = str(s).strip().upper()
+        if n:
+            out.append(n)
+    return out
+
+
 def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
     """Assess a candidate source dict against the strict Track A rubric.
 
@@ -61,10 +78,16 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
       - license_ok: bool
       - schema_fields: list[str]
       - coverage_months: int (optional, informational)
+      - partial_month_coverage: bool (optional, fail if true)
+      - schema_conflicts: bool/list (optional, fail if truthy)
+      - row_mix_observed_modeled: bool (optional, fail if true)
+      - timestamp_normalized_utc: bool (optional, fail if false when schema present)
+      - coverage_complete_months: int (optional; if provided must be >=1 when months claimed)
     """
     failures: List[str] = []
-    venue = (candidate.get("venue") or "").strip().lower()
-    if venue != "hyperliquid":
+    venue_raw = (candidate.get("venue") or "").strip()
+    venue = venue_raw.lower()
+    if venue not in _NORMALIZED_HYPERLIQUID or candidate.get("venue_alias_spoof"):
         failures.append("non_hyperliquid_venue")
     if candidate.get("merges_non_hyperliquid"):
         failures.append("non_hyperliquid_merge")
@@ -80,8 +103,37 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
         failures.append("not_observed_liquidations")
     if candidate.get("modeled_or_proxy"):
         failures.append("modeled_or_proxy")
-    sym_n = int(candidate.get("symbol_count") or len(candidate.get("symbols") or []) or 0)
-    if sym_n < RUBRIC["min_symbols"]:
+    if candidate.get("row_mix_observed_modeled"):
+        failures.append("mixed_observed_modeled_rows")
+    if candidate.get("partial_month_coverage"):
+        failures.append("partial_month_coverage")
+    ccm = candidate.get("coverage_complete_months")
+    if ccm is not None:
+        try:
+            if int(ccm) < 1 and (candidate.get("coverage_months") or 0):
+                failures.append("partial_month_coverage")
+        except Exception:
+            failures.append("partial_month_coverage")
+    sc = candidate.get("schema_conflicts")
+    if sc:
+        failures.append("schema_conflicts")
+    # timestamp normalization: fail-closed when schema claims present but not normalized
+    if candidate.get("schema_fields") and candidate.get("timestamp_normalized_utc") is False:
+        failures.append("timestamp_not_normalized")
+    norm_syms = _norm_symbols(candidate)
+    sym_n = int(candidate.get("symbol_count") or len(norm_syms) or 0)
+    if norm_syms and len(set(norm_syms)) != len(norm_syms):
+        failures.append("duplicate_symbols")
+    unique_n = len(set(norm_syms)) if norm_syms else sym_n
+    if norm_syms and candidate.get("symbol_count") is not None:
+        # conflicting count claim
+        try:
+            claim = int(candidate.get("symbol_count"))
+        except Exception:
+            claim = -1
+        if claim != unique_n:
+            failures.append("incomplete_symbol_coverage")
+    if unique_n < RUBRIC["min_symbols"]:
         failures.append("incomplete_symbol_coverage")
     if not candidate.get("completeness_documented", False):
         failures.append("completeness_not_documented")
@@ -90,6 +142,7 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
     if not _has_required_schema(candidate.get("schema_fields") or []):
         failures.append("schema_mismatch")
 
+    failures = sorted(set(failures))
     go = len(failures) == 0
     return {
         "go": go,
@@ -97,7 +150,8 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
         "failures": failures,
         "rubric": {k: v for k, v in RUBRIC.items() if k != "required_schema_fields_any"},
         "venue": venue,
-        "symbol_count": sym_n,
+        "venue_raw": venue_raw,
+        "symbol_count": len(set(norm_syms)) if norm_syms else sym_n,
     }
 
 

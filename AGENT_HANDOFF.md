@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T101059Z
-Git SHA (HEAD): c628e94c (working tree modified by FCLR-NEXT-093 hardening + cache timestamp touch; pycache uncommitted)
+Timestamp (UTC): 20261105T101957Z
+Git SHA (HEAD, baseline): c628e94c (working tree modified by FCLR-NEXT-094 hardening; not committed)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T101059Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-095
+Handoff ID: FCLR-HANDOFF-20261105T101957Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-095
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -12,46 +12,34 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - BOTH components are core to repo identity. While volatility is sealed, liquidation risk MUST be driven to completion via admissible data or hardened to resume instantly on trigger. NO SCOPE DRIFT TO SEALED TRACKS.
 
 ## CURRENT VERIFIED STATE (CLEANER/STRICTER BASELINE)
-- Tests: `python -m unittest discover tests` — **173 tests OK** (green; ~14.8s). MUST remain green (>=173).
+- Tests: `python -m unittest discover tests` — **190 tests OK** (green). MUST remain green (>=190).
 - Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED.
-- Track A: ON-TRIGGER/MONITOR ONLY. Latest blocker: `research_state/liquidation_forward_validate_013_blocker_20261105T092616Z.md`. `experiment_frontier.json` updated (last_checked 20261105T092616Z; track_a_blocked true).
-- Artifact churn (093): **improved**. research_state root md+json = **169** (was 185 entry snapshot). Ironflow probe artifacts == **2** (`ironflow_probe_20261105T091733Z.json` + `ironflow_probe_digest_latest.json`). Canonical alt outputs only: `alt_source_scan_latest.json`, `alt_source_deep_review_latest.md`. Unreferenced 20261105 Track A timestamped families (072416/081715/033013), old root `ironflow_scan`/`trigger_watch`, 0616xx source/bottleneck/alt chain consolidated into `tracka_bottleneck_history_090.md` (SHA256+excerpts preserved). 5 unreferenced `watch/trigger_harden_20261104T*` removed (hash/sample recorded). No new recurring timestamped probe/scan families.
-- Harness: FCLR-010 fixtures frozen (6 symbols); `FCLR010Harness` cold ~0.015s; `pre_register_forward_experiment`/`evaluate_forward` enforce PREREG-BEFORE-OUTCOMES and block without prereg.
-- Rubric hardening (093): `scripts/tracka_rubric.py` deterministic fail-closed Hyperliquid-only/observed-only rubric; `tests/test_tracka_adversarial_rubric_093.py` adds 17 explicit edge-fail fixtures (auth/key/signature/requester-pays, <5 symbols/zero, non-Hyperliquid venue/merge, modeled-as-observed/proxy, schema mismatch, missing completeness/license, multi-failure). Hyperliquid-only firewall enforced.
-- THIS SESSION (20261105T093531Z): verified baseline/tests 173 OK; monitor --quick NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); FCLR-NEXT-093 Steps 3-6 already complete (1-2 done prior). No outcome inspection, no prereg created. No new bottlenecks; ironflow_fastpath_cache.json timestamp touched only.
+- Track A: ON-TRIGGER/MONITOR ONLY. Latest blocker: `research_state/liquidation_forward_validate_014_blocker_20261105T101957Z.md`. `experiment_frontier.json` updated (last_checked 20261105T101957Z; track_a_blocked true).
+- Artifact churn (094): root `research_state/*.md+*.json` = **155** (session pre-artifact count 153; +2 required evidence artifacts only). **18 unreferenced timestamped families removed** with sha256/bytes/excerpt provenance in `research_state/tracka_bottleneck_history_090.md` §094 (2 old Track A sweeps, 3 liquidation block snapshots, 1 heavy leakage audit transient, 2 coupled integration syntheses, 1 stale coupled prereg, 4 stream-B eval summaries, 2 volatility eval summaries, 2 unreferenced Track C timestamped summaries). Ironflow probes == **2** (`research_state/ironflow_probe_20261105T101210Z.json` + `research_state/ironflow_probe_digest_latest.json`). Canonical alt outputs only: `alt_source_scan_latest.json`, `alt_source_deep_review_latest.md`. No new recurring timestamped probe/scan families.
+- Harness: FCLR-010 fixtures frozen (6 symbols); `FCLR010Harness` cold/prereg-block enforced; offline resume proof (rubric+harness+manifest+prereg-block) **~0.040s real <10s**, test-enforced.
+- Rubric hardening (094, additive fail-closed): `scripts/tracka_rubric.py` now rejects partial-month/coverage claims, schema conflicts, duplicate/conflicting symbols, mixed observed+modeled rows, `timestamp_normalized_utc=false` when schema present, venue alias spoof/unknown aliases (allows normalized Hyperliquid/HL aliases), deterministic sorted failures. Adversarial tests: 093 (17) + 094 (17) = **34 rubric adversarial tests** green.
+- Monitor side-effect isolation: `TestQuickPathPersistence` + `TestProbeArtifactSafety` green (temp dirs; **no real `research_state/ironflow_probe_*` leakage**; real probe artifacts remain 2).
+- Trigger probe (20261105T101957Z): `monitor --quick` **NO RESUME TRIGGER** (`data_through=2026-10`; probed 2026-11..2027-02; probe_diff no change; baseline drift intact; kaggle mirror unchanged/triggered false). `deep_review`/`hunt` refreshed canonical latest outputs; **no rubric-GO source**. No prereg created; no outcome inspection.
 - **NO COASTING ALLOWED.** "Monitor only / no data / blocked" is NOT a valid session outcome unless accompanied by measurable new bottleneck reduction, stricter tests, reduced churn, or irrefutable new evidence. If a step cannot reduce churn, it MUST add adversarial coverage, faster resume proof, or stronger provenance/rubric enforcement with concrete metrics.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
-TASK ID: FCLR-NEXT-094-TRACK-A-NO-COAST-HEAVY-STRICTER
+TASK ID: FCLR-NEXT-095-TRACK-A-NO-COAST-HEAVY-STRICTER-RESUME-SCRIPT
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T093531Z
+TIMESTAMP (UTC): 20261105T101957Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE DELTA REQUIRED. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION IS A FAILURE IF IT ONLY REPEATS PROBES/REPORTS WITHOUT NEW HARDENING DELTA. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO "MONITOR ONLY" STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES. NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES.
 
-OBJECTIVE (INFERRED): Complete liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked (Hyperliquid data_through 2026-10; 2026-11.. absent). While blocked you MUST produce measurable hardening delta: (A) keep research_state root md+json <=169 and ironflow probes == 2, (B) consolidate/remove any unreferenced timestamped/ref-free families found (hashes/excerpts preserved) or prove none exist with explicit inventory, (C) strengthen `scripts/tracka_rubric.py`/tests for additional adversarial cases (partial month coverage claims, conflicting schema fields, symbol aliases/duplicates, mixed observed+modeled rows, missing timestamp normalization, venue casing/alias spoofing) with explicit fixtures, (D) prove harness+rubric+fixture resume path with a single offline command/script or documented command block completing <10s and enforce by test if missing, (E) reduce monitor/test side-effect churn safely with tests proving no real `research_state/ironflow_probe_*` artifacts created outside tmp dirs, (F) re-run exhaustive trigger probes and record irrefutable evidence in a single canonical blocker/update. Never stop for "no data". Do not repeat work already proven unless extending it.
+OBJECTIVE (INFERRED): Complete liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked (Hyperliquid data_through 2026-10; 2026-11.. absent). While blocked you MUST produce measurable hardening delta against the 094 baseline (root 155, probes 2, tests 190, rubric adversarial 34, resume proof 0.040s): (A) keep root md+json <=155 and ironflow probes == 2; add only required evidence artifacts and count them explicitly, (B) consolidate/remove any unreferenced timestamped/ref-free families found (including watch/trigger_harden_20261104T* ONLY if a safe, tested, generator-compatible consolidation path exists; if not safe, record explicit zero-safe-removable inventory with file count/hash sample) — do not break generator scripts, (C) extend `scripts/tracka_rubric.py` + additive tests for UNCOVERED gaps: timestamp unit ambiguity (epoch ms vs s) fail-closed unless explicitly normalized, license provenance/URL or SPDX-style evidence field required when `license_ok=true` claims are made, schema superset containing modeled/proxy/liquidation-estimate columns rejected, partial-row coverage claims / `row_count_claim` conflicts rejected, and symbol normalization proof when a canonical symbol map is supplied (deterministic), (D) create a single offline bounded resume script `scripts/tracka_resume_check.py` (no network, no real research_state writes) that runs rubric self-check + fixture manifest + harness cold + prereg-block and prints machine-readable pass/fail/timing; prove <5s by test and document the exact command, (E) prove monitor `--verify`/`--drift`-adjacent state-only paths do not mutate real `research_state` in tests (use existing isolation patterns; add tests if missing), (F) re-run exhaustive trigger probes and record irrefutable evidence in one canonical blocker/update. Never stop for "no data". Do not repeat work already proven unless extending it.
 
 CONSTRAINTS: No credentials/manual files/.github/workflows changes. Leakage-safe, preregister-before-outcomes. Track C/B locked/unsupported. Raw data/caches out of git. Clean-clone reproducible. Hyperliquid-only for Track A. Never conflate observed/modeled liquidations. No threshold-shopping. No scope drift. Canonical outputs only (`ironflow_probe_digest_latest.json` + 1 live probe; `alt_source_scan_latest.json`; `alt_source_deep_review_latest.md`). If triggered, freeze prereg before reading outcomes.
 
 MANDATORY EXECUTION (ALL REQUIRED; PRODUCE CONCRETE METRICS):
-
-1) ENTRY VERIFY + EVIDENCE
-   - Run: python -m unittest discover tests (must be >=173 green). Run monitor --quick, deep_review, hunt. Record exact counts (root md+json, ironflow probes, tests, runtime). If NO NEW DATA, continue immediately to hardening.
-
-2) CHURN/ARTIFACT AUDIT (MEASURABLE)
-   - Inventory timestamped/unreferenced families under research_state (root + watch) and scripts/test-generated outputs. For each removable family: verify no refs in AGENT_HANDOFF.md, experiment_frontier.json, run_manifest.json, scripts, tests, canonical histories; consolidate hashes/excerpts into `tracka_bottleneck_history_090.md` (or a canonical history) and remove files. If none removable, write an explicit zero-removable inventory with metrics in the campaign sweep. Keep ironflow probes == 2. Root md+json must not increase.
-
-3) STRICTER ADVERSARIAL RUBRIC + RESUME PROOF
-   - Extend `scripts/tracka_rubric.py`/`tests/test_tracka_adversarial_rubric_093.py` (or additive 094 test file) with explicit fail fixtures for additional conflation/quality gaps not yet covered. Every new case must be deterministic.
-   - Prove offline resume path <10s (rubric import/assess, fixture manifest load, harness cold load, prereg block without prereg). Add/keep an enforcing test with a tight bound.
-
-4) SAFE SIDE-EFFECT CHURN REDUCTION
-   - Ensure monitor/test entrypoints can run without creating non-canonical timestamped artifacts in real `research_state` when invoked in tests/isolated mode (use existing tmp isolation patterns; add only safe, tested changes). Prove with tests.
-
-5) EVIDENCE, FRONTIER, HANDOFF (MANDATORY - STRICTER THAN FOUND)
-   - Write `research_state/campaign_sweep_tracka_$(date -u +%Y%m%dT%H%M%SZ).md` and `research_state/liquidation_forward_validate_014_blocker_$(date -u +%Y%m%dT%H%M%SZ).md` with full before/after metrics, families removed/proven zero, probe evidence, rubric cases added, resume proof timing, and concrete resume instructions.
-   - Update `research_state/experiment_frontier.json` (last_checked now, track_a_blocked true, pointer to new blocker, artifact_churn_094 metrics).
-   - Update `AGENT_HANDOFF.md` with a NEW stricter timestamped task (FCLR-NEXT-095) that cannot be satisfied by status reporting; require measurable deltas and name the exact uncovered gaps.
+1) ENTRY VERIFY + EVIDENCE: `python -m unittest discover tests` (>=190 green). Run `monitor --quick`, `deep_review`, `hunt`. Record exact root md+json, ironflow probes, tests, runtimes. If NO NEW DATA, continue immediately to hardening.
+2) CHURN/ARTIFACT AUDIT (MEASURABLE): Inventory timestamped/unreferenced families under `research_state` (root+watch) and scripts/test-generated outputs. For each removable family verify no refs in AGENT_HANDOFF/frontier/manifest/scripts/tests/canonical histories; consolidate hashes/excerpts into `tracka_bottleneck_history_090.md` and remove. For watch `trigger_harden_20261104T*` produce a safe consolidation/removal plan with tests OR explicit zero-safe-removable inventory+hash sample. Keep ironflow probes == 2; root md+json must not increase except required evidence (counted).
+3) STRICTER ADVERSARIAL RUBRIC + RESUME PROOF: Add deterministic fail fixtures for timestamp unit ambiguity, license provenance requirement, modeled/proxy/estimate schema columns, row-count/coverage conflicts, and canonical symbol-map normalization when supplied. Add `scripts/tracka_resume_check.py` (offline, bounded, no real-state writes) and enforce <5s by test; document exact command.
+4) SAFE SIDE-EFFECT CHURN REDUCTION: Prove monitor `--verify`/state-only and resume-check script paths do not create/mutate real `research_state` artifacts in tests (tmp isolation). Add/keep tests.
+5) EVIDENCE, FRONTIER, HANDOFF (MANDATORY - STRICTER THAN FOUND): Write `research_state/campaign_sweep_tracka_$(date -u +%Y%m%dT%H%M%SZ).md` and `research_state/liquidation_forward_validate_015_blocker_$(date -u +%Y%m%dT%H%M%SZ).md` with full before/after metrics, families removed/proven zero-safe, probe evidence, rubric cases added, resume-check script timing/output contract, and concrete resume instructions. Update `research_state/experiment_frontier.json` (last_checked now, track_a_blocked true, pointer to new blocker, artifact_churn_095 metrics). Update `AGENT_HANDOFF.md` with a NEW stricter timestamped task (FCLR-NEXT-096) that cannot be satisfied by status reporting and names exact uncovered gaps.
 
 RESUME CONDITION (only): ironflow `data/events/YYYY-MM.parquet` or `data/fills/YYYY-MM.parquet` for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only. PREREGISTER BEFORE INSPECTING OUTCOMES.
 
@@ -59,12 +47,12 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 ```
 
 ## VERIFICATION COMMANDS (RUN ON ENTRY)
-- `python -m unittest discover tests` (must be >=173, green)
+- `python -m unittest discover tests` (must be >=190, green)
 - `python scripts/monitor_ironflow_liquidations.py --quick`
 - `python scripts/deep_review_alt_sources.py`
 - `python scripts/hunt_alternative_liquidation_sources.py`
 - `python scripts/fclr010_harness.py`
-- `python scripts/generate_tracka_fixtures.py` (fixtures present)
+- `python -c "from scripts.tracka_rubric import assess_candidate; from scripts.fclr010_harness import FCLR010Harness; import json,tempfile; from pathlib import Path; assess_candidate({'venue':'hyperliquid','unauthenticated':True,'requires_api_key':False,'requires_signature':False,'requester_pays':False,'observed_liquidations':True,'modeled_or_proxy':False,'merges_non_hyperliquid':False,'symbol_count':6,'completeness_documented':True,'license_ok':True,'schema_fields':['timestamp','symbol','liquidation_notional'],'timestamp_normalized_utc':True}); json.load(open('tests/fixtures/tracka/manifest.json')); h=FCLR010Harness(); assert h.evaluate_forward(Path('/nonexistent'),Path(tempfile.mkdtemp()),pre_reg_path=None)['status']=='BLOCKED'; print('ok')"` (offline resume proof, <10s)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T101059Z: Execute FCLR-NEXT-095 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 093 completed Steps 3-6: churn reduced (root md+json 185->169), unreferenced families consolidated to history, adversarial rubric module+17 fixtures added, harness 0.015s/prereg enforced, tests 173 OK, probes==2, canonical alt outputs only, trigger still NO DATA. No new bottlenecks since 093. Next session must produce NEW measurable hardening delta (stricter adversarial cases, proven <10s resume command/test, safe side-effect isolation proof, or further verified churn reduction) — not status-only repetition. PREREG BEFORE OUTCOMES if triggered.
+20261105T101957Z: Execute FCLR-NEXT-095 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 094 delivered measurable delta: 18 unreferenced timestamped families consolidated/removed (provenance preserved), root 153->155 (2 required artifacts), probes==2, rubric hardened +17 adversarial tests (34 total), full suite 190 OK, offline resume proof 0.040s enforced, monitor side-effect isolation proven, trigger NO DATA. Next session must produce NEW measurable hardening delta (resume script `<5s` + tests, uncovered rubric gaps named in 095, `--verify`/state-only isolation proof, safe watch-family consolidation or explicit zero-safe inventory) — not status-only repetition. PREREG BEFORE OUTCOMES if triggered.
