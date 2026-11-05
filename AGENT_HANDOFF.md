@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T210758Z
-Git SHA (HEAD, baseline): 02471d56 (working tree modified by FCLR-NEXT-105 hardening; uncommitted)
+Timestamp (UTC): 20261105T211731Z
+Git SHA (HEAD, baseline): ae657994 (working tree: only untracked __pycache__ drift; source state unchanged since 210758Z; entry verify passed 211731Z)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T210758Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: IRONFLOW-PROBING-EXHAUSTED/ROOT-BOUND-142/PROBES-2/GATE-REASON-CODES-PRESENT/OPERATOR-CLI-ENTRYPOINT-PASS/PROBE-INVARIANT-RUNTIME-NAMED-GUARD-WIRED/PYCACHE-UNTRACKED
+Handoff ID: FCLR-HANDOFF-20261105T211731Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: IRONFLOW-PROBING-EXHAUSTED/ROOT-BOUND-142/PROBES-2/GATE-REASON-CODES-PRESENT/OPERATOR-CLI-ENTRYPOINT-PASS/PROBE-INVARIANT-RUNTIME-NAMED-GUARD-WIRED/PYCACHE-UNTRACKED
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -27,7 +27,7 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 ```text
 TASK ID: FCLR-NEXT-106-TRACK-A-ENTRY-VERIFY-ONLY-TRIGGER-PREREG-ROOT-BOUND-CONSOLIDATE-NO-COAST
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T210758Z
+TIMESTAMP (UTC): 20261105T211731Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE DELTA REQUIRED ONLY IF A TRIGGER APPEARS. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
 ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES UNLESS STRICTLY NECESSARY AND ROOT BOUND PRESERVED. NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS (PROBING EXHAUSTED). PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED.
 OBJECTIVE (INFERRED): Complete liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked (Hyperliquid data_through 2026-10; 2026-11..2027-02 absent). 105 delivered: consolidated 13 unreferenced root artifacts with provenance (root 155->142 pre-evidence), added scripts/tracka_operator_report.py (exit 0 PASS / 1 BLOCKED, stable JSON, bounded read-only/no-network/fail-closed) + named probe_invariant_runtime guard in resume_check/compose_operator_report; tests 322 OK; resume_check PASS 16 (0.62s); gate prereg-block shows drift_preflight.pass + PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS + fail_closed_order=drift_preflight->manifest_prereg; operator CLI PASS exit 0 (0.60s). ROOT MD+JSON = 142 (<=163); probes==2. 106 MUST: (A) Run entry verify ONLY (tests, resume_check, gate, operator CLI) and record exact metrics. DO NOT write new root evidence unless a RESUME CONDITION trigger appears. (B) If a trigger appears (ironflow data/events|data/fills YYYY-MM.parquet month>=2026-11 HTTP 200 unauthenticated, OR admissible unauthenticated Hyperliquid source passes strict full-manifest GO gate), PREREGISTER BEFORE INSPECTING OUTCOMES, then execute forward validation. (C) If root-bound pressure returns (>163 risk), consolidate >=1 unreferenced non-canonical root artifact with sha256/bytes/excerpt provenance into an existing consolidated history BEFORE any evidence write; keep probes==2 and no recurring families. (D) If (B)/(C) produce changes, update frontier/handoff with full before/after metrics and NEW stricter timestamped task FCLR-NEXT-107 naming exact uncovered gaps.
