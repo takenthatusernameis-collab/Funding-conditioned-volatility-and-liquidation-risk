@@ -24,6 +24,9 @@ RUBRIC: Dict[str, Any] = {
     "license_ok_required": True,
     "license_provenance_required_when_claimed": True,
     "timestamp_unit_explicit_required": True,
+    "observed_access_provenance_required": True,
+    "label_definition_required_when_observed": True,
+    "coverage_evidence_required_for_block_claims": True,
     "schema_compatible_fclr010": True,
     "required_schema_fields_any": [
         ["timestamp", "symbol", "liquidation_notional"],
@@ -208,6 +211,57 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
             failures.append("license_provenance_missing")
     if not _has_required_schema(candidate.get("schema_fields") or []):
         failures.append("schema_mismatch")
+    # 096: access/provenance required for any candidate claiming observed Hyperliquid data
+    # Fail-closed when source/dataset/access provenance fields are present-in-manifest but empty,
+    # or when access_provenance_required=true (full admissibility manifest mode).
+    if candidate.get("access_provenance_required"):
+        has_access = any(str(candidate.get(k) or "").strip() for k in ("source_url", "dataset_id", "access_provenance", "download_path", "repo_url"))
+        if not has_access:
+            failures.append("observed_access_provenance_missing")
+        if not str(candidate.get("label_definition") or "").strip():
+            failures.append("label_definition_missing")
+    if candidate.get("label_definition_required") and not str(candidate.get("label_definition") or "").strip():
+        failures.append("label_definition_missing")
+    # if candidate supplies observed label claim but leaves definition ambiguous in strict mode
+    if candidate.get("observed_liquidations", False) and candidate.get("strict_observed_semantics") and not str(candidate.get("label_definition") or "").strip():
+        failures.append("label_definition_missing")
+
+    # 096: coverage claims require machine-verifiable block/month evidence when explicitly asserted
+    cm = candidate.get("coverage_months")
+    if candidate.get("coverage_evidence_required") and cm is not None:
+        try:
+            if int(cm) >= 1 and not (isinstance(candidate.get("complete_months_list"), list) and len(candidate.get("complete_months_list")) >= 1):
+                failures.append("coverage_month_evidence_missing")
+        except Exception:
+            failures.append("coverage_month_evidence_missing")
+    if candidate.get("claims_3x30d_blocks"):
+        try:
+            bc = int(candidate.get("block_count") or 0)
+            if bc < 3:
+                failures.append("block_count_evidence_insufficient")
+            if not isinstance(candidate.get("block_evidence"), list) or len(candidate.get("block_evidence")) < 3:
+                failures.append("block_count_evidence_insufficient")
+        except Exception:
+            failures.append("block_count_evidence_insufficient")
+
+    # 096: symbol-map proof must cover every claimed symbol (opt-in strict manifest mode)
+    if candidate.get("symbol_proof_covers_claimed_required") and isinstance(sym_map, dict) and sym_map:
+        try:
+            norm_map = {str(k).strip().upper(): str(v).strip().upper() for k, v in sym_map.items()}
+            proof = candidate.get("symbol_normalization_proof")
+            proof_map = (proof.get("normalized_map") if isinstance(proof, dict) else {}) or {}
+            if norm_syms:
+                missing = [s for s in set(norm_syms) if s not in set(norm_map.values()) and s not in set(proof_map.keys()) and s not in set(proof_map.values())]
+                if missing:
+                    failures.append("symbol_normalization_proof_incomplete")
+        except Exception:
+            failures.append("symbol_normalization_proof_incomplete")
+
+    # 096: raw epoch fields claimed require explicit timestamp unit/normalization evidence
+    raw_epoch = candidate.get("raw_epoch_fields") or candidate.get("epoch_timestamp_fields")
+    if raw_epoch and candidate.get("schema_fields") and not candidate.get("timestamp_normalized_utc"):
+        failures.append("timestamp_unit_ambiguous")
+
 
     failures = sorted(set(failures))
     go = len(failures) == 0

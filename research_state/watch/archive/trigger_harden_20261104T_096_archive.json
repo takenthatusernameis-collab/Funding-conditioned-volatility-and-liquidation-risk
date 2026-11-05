@@ -1,0 +1,171 @@
+{
+  "consolidated_utc": "20261105T120200Z",
+  "generator_compat": "kept latest trigger_harden_20261104T113550Z.json in watch/ so write_trigger_harden_successor.py and track_c_inventory_harden.py previous-snapshot glob behavior unchanged (tested conceptually; glob non-recursive). Archive moved to watch/archive/ (non-matching glob path).",
+  "kept_live": "trigger_harden_20261104T113550Z.json",
+  "archived_count": 27,
+  "archived_total_bytes": 142159,
+  "items": [
+    {
+      "file": "trigger_harden_20261104T052815Z.json",
+      "bytes": 9977,
+      "sha256": "fb061668c549e5b83ecca845a9164daeeac77b9ce90b23ce2c40087864618d75",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T052815Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T053119Z.json",
+      "bytes": 2117,
+      "sha256": "16e94a398c057fae81a5fff5bc7e24e5c809fa911db4dc044ed99dfc1fb07fed",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T053140Z.json",
+      "bytes": 9977,
+      "sha256": "4f15ea4051de52e870d6b99e518383c833d944c0a0625aef2f827a87c78145a9",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T053140Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T062854Z.json",
+      "bytes": 2117,
+      "sha256": "391631ee7e465cdc7f04d5c93608c3c68b79875327f7158b9f8bfdda02f5035b",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T062914Z.json",
+      "bytes": 9977,
+      "sha256": "f2fc7914ab526afdf3c7ddf3f98453facfb9685c5a257f030cf205687c280e6f",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T062914Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T063307Z.json",
+      "bytes": 3636,
+      "sha256": "cbb20241d81cbb4660051d6a6ff1bf270ef916a89cb63990ed20cc7a02740d7c",
+      "excerpt": "{\"IF_TRIGGER_FIRES_NOW\": [\"(a) load frozen template research_state/readiness/track_c_prereg_template_fclr012.json\", \"(b) preregister BEFORE inspecting outcomes via pre_register_forward_experiment()\", \"(c) enforce embargo/splits per frozen c"
+    },
+    {
+      "file": "trigger_harden_20261104T063422Z.json",
+      "bytes": 2156,
+      "sha256": "c5775274aac3a7c9fdef0e43be1d53f06654256301467774f91220178313bafb",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"root_zips_count None -> 463\", \"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-v"
+    },
+    {
+      "file": "trigger_harden_20261104T063512Z.json",
+      "bytes": 9977,
+      "sha256": "e595bcc0cfc47f1ab304e9a818875a5964a29738d2056b123face95ad00bb232",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T063512Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T064239Z.json",
+      "bytes": 2117,
+      "sha256": "5491f3c4e51fa9dd6d379919dc77bfeaff24215185fc42ea15e95923f81d2779",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T064254Z.json",
+      "bytes": 9977,
+      "sha256": "7b28bfb3b321568cd2e7c652c66772ce8685393cebc245049dbc3802154876d6",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T064254Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T073457Z.json",
+      "bytes": 2117,
+      "sha256": "ecaf0c46666b99c3cfc4dcb8016d98121ecbe65b79a2f6ebc6fb4459ab7bb1ad",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T073935Z.json",
+      "bytes": 9977,
+      "sha256": "44372a7164e39758a4a4dfc96fec9d5185c1d91f6cad772b55e02e3abcfebc89",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T073935Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T074338Z.json",
+      "bytes": 2117,
+      "sha256": "5e2dbb4022648c10a088f983c5242d927c961b129cb68d3aba51f186b7d7f3df",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T074404Z.json",
+      "bytes": 9977,
+      "sha256": "1617a5f2f57db5034a059a82a64400ad814bb76c00321dbcb80b36f5c00ebd37",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T074404Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T083223Z.json",
+      "bytes": 2117,
+      "sha256": "d213e4350079c2c715889fce76e4e252c60c5e61f4df77d7ad025a6e39574523",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T083332Z.json",
+      "bytes": 6546,
+      "sha256": "9f20ecc301581ef0ffbdc4ec1b28a56a28856de9595498c15465c9d9f32d6ee5",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T083332Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T093632Z.json",
+      "bytes": 2117,
+      "sha256": "fb6acbadd2219972694e98e53e9d2aa1b7e095240f6c8abf456c4d5586e977e8",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T101946Z.json",
+      "bytes": 6300,
+      "sha256": "cdc57327a5128b298c32a40f5814d74e88667d9d3df809b39ad2b76205d60e46",
+      "excerpt": "{\"admissible_trigger_hunt\": {\"auth_required_or_payment\": \"none accepted; all such sources rejected\", \"finding\": \"NO admissible new Binance panel data beyond 2026-11-02; test window cannot be extended to >=3 non-overlapping 30d blocks from a"
+    },
+    {
+      "file": "trigger_harden_20261104T102454Z.json",
+      "bytes": 2076,
+      "sha256": "769c2c9ea27e14e3bb2aab6a7392be6feceeca23857b46e464783307d915af00",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-an"
+    },
+    {
+      "file": "trigger_harden_20261104T102758Z.json",
+      "bytes": 2076,
+      "sha256": "108ce1731e4fb961f5d02f64b410cd0a2060d66bf13d2deb7504cb1964cc2c88",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-an"
+    },
+    {
+      "file": "trigger_harden_20261104T103753Z.json",
+      "bytes": 2076,
+      "sha256": "ed802603d5dd29f17a0a1e46fc5eaa75a4edc6e80c1267458f2cff1164dd109d",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-an"
+    },
+    {
+      "file": "trigger_harden_20261104T103826Z.json",
+      "bytes": 9977,
+      "sha256": "a2e2c07b9574bd8e7b311add0065d5a4232bf139a2be79d2a63909fd34437d1d",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T103826Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T112007Z.json",
+      "bytes": 2117,
+      "sha256": "a8e7069bc11fb72fa5258309419f21d91d11a9648d8fbea06ad7aea00d43e7b3",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T112028Z.json",
+      "bytes": 9977,
+      "sha256": "91e5df044929548e045866a0e4d4136ca741c5872fe7e8413a3710a7ac4a8b49",
+      "excerpt": "{\"artifact_id\": \"trigger_harden_20261104T112028Z\", \"bottleneck_status\": {\"forward_validation_FCLR_NEXT_012\": \"BLOCKED_on_admissible_data\", \"remedy\": \"continuous trigger detection + Track C pre-reg readiness for zero-latency execution on tri"
+    },
+    {
+      "file": "trigger_harden_20261104T112529Z.json",
+      "bytes": 2117,
+      "sha256": "3c114344f20785bb443094d1408b1842ace21eed5adc9848c348876e9d4ac64d",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"placeholder_candidates 0 -> 2\", \"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/"
+    },
+    {
+      "file": "trigger_harden_20261104T112833Z.json",
+      "bytes": 2076,
+      "sha256": "8d1d167b810844544d5b1825b023a60f29758d822e8116b17ecdc049dd476245",
+      "excerpt": "{\"inventory\": {\"binance_root_contains_2025_2026\": false, \"diff_vs_previous\": {\"diffs\": [\"test_count None -> 117\"], \"previous_snapshot\": \"/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-an"
+    },
+    {
+      "file": "trigger_harden_20261104T113000Z.json",
+      "bytes": 6371,
+      "sha256": "4da026a33e979354377b6b748003e1405ddf1385996d27a75958eaf3008f9d27",
+      "excerpt": "{\"alternative_heavy_work_executed\": {\"data\": \"frozen 2024-01..2024-03 funding + mark prices (5 symbols)\", \"experiment\": \"FCLR-002 / FCLR-H002 funding-correction survival replication\", \"results_file\": \"research_state/watch/fclr002_replicatio"
+    }
+  ]
+}

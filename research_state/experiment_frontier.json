@@ -2,12 +2,12 @@
   "registry_version": "1.1",
   "generated": "20261105T101957Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-095 EXECUTED (2026-11-05T11:04:45Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: tracka_rubric.py extended (+18 adversarial, 52 rubric total) for timestamp unit ambiguity, license provenance required when claimed, modeled/proxy/estimate schema columns, row-count conflicts, canonical symbol-map proof. scripts/tracka_resume_check.py added (offline, no network, no real research_state writes) PASS <5s by test. Monitor/resume side-effect isolation tests green. Trigger probes NO DATA (monitor quick, deep_review, hunt; no rubric-GO). Root md+json 155 (094 sweep/014 blocker consolidated to history §095; 095 sweep/015 blocker added). Ironflow probes==2. Watch trigger_harden_20261104T* zero-safe-removable=0 (28 files, generator refs). PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-096.",
+  "current_status": "CAMPAIGN FCLR-NEXT-095 EXECUTED (2026-11-05T11:04:45Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: tracka_rubric.py extended (+18 adversarial, 52 rubric total) for timestamp unit ambiguity, license provenance required when claimed, modeled/proxy/estimate schema columns, row-count conflicts, canonical symbol-map proof. scripts/tracka_resume_check.py added (offline, no network, no real research_state writes) PASS <5s by test. Monitor/resume side-effect isolation tests green. Trigger probes NO DATA (monitor quick, deep_review, hunt; no rubric-GO). Root md+json 155 (094 sweep/014 blocker consolidated to history \u00a7095; 095 sweep/015 blocker added). Ironflow probes==2. Watch trigger_harden_20261104T* zero-safe-removable=0 (28 files, generator refs). PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-096.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
       "rank": 0,
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) — EXECUTED 2026-11-04T00:52Z",
+      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z",
       "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
       "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
       "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
@@ -20,7 +20,7 @@
     },
     {
       "rank": 0,
-      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL — forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
+      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL \u2014 forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
       "prerequisite": "tests/test_fclr010_harness.py passes; fclr010_harness.py pre_register_forward_experiment() + evaluate_forward() hardened; run_manifest.json experiments map updated; consolidated + synthesis artifacts written.",
       "acceptance": "experiment_frontier.json contains FCLR-012; track_a_fclr010_consolidated.md and funding_incremental_synthesis_20261103T115630Z.md and forward_campaign_fclr012_prereg.md present; AGENT_HANDOFF.md single durable handoff with FORWARD CAMPAIGN; pytest green.",
       "blockers": "Forward runs blocked unless NEW admissible unauthenticated data appears (new ironflow monthly parquet >2026-10-31 for Track A; new unsealed 2026 Binance panel beyond 2026-11-02 for volatility). Do not relax thresholds or re-run sealed panels.",
@@ -239,5 +239,18 @@
     "consolidated_superseded_094_artifacts": 2,
     "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md"
+  },
+  "last_checked_utc": "20261105T120604Z",
+  "track_a_blocker_latest": "research_state/liquidation_forward_validate_016_blocker_20261105T120604Z.md",
+  "artifact_churn_096": {
+    "root_md_json": 157,
+    "ironflow_probes": 2,
+    "tests_ok": 226,
+    "rubric_adversarial_093_094_095_096": 67,
+    "resume_check_pass_under_5s": true,
+    "watch_trigger_harden_20261104T_live": 1,
+    "watch_trigger_harden_20261104T_archived": 27,
+    "watch_archive": "research_state/watch/archive/trigger_harden_20261104T_096_archive.json",
+    "no_new_recurring_probe_scan_families": true
   }
 }
