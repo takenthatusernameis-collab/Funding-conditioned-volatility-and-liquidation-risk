@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T061930Z
+Timestamp (UTC): 20261105T062040Z
 Git SHA (HEAD): f936bc00
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T061930Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: CONSOLIDATED
+Handoff ID: FCLR-HANDOFF-20261105T062040Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: CONSOLIDATED
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -19,9 +19,9 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
-TASK ID: FCLR-NEXT-087-TRACK-A-HEAVY-WHILE-BLOCKED-CONSOLIDATE
+TASK ID: FCLR-NEXT-088-TRACK-A-HEAVY-WHILE-BLOCKED-CONSOLIDATE
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T061930Z
+TIMESTAMP (UTC): 20261105T062040Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - HEAVY PROGRESS WHILE BLOCKED. NO COASTING. ELIMINATE BOTTLENECKS.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION INCOMPLETE IF ANY SKIPPED. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED.
 
@@ -70,4 +70,4 @@ STOP RULE: Complete ALL steps + artifacts. Track C locked. Track B unsupported. 
 - `python scripts/generate_tracka_fixtures.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T061930Z: Execute FCLR-NEXT-087 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Consolidate aggressively, probe exhaustively, harden rubric/fixtures/tests, keep harness offline-ready and tests green, write liquidation_forward_validate_010_blocker_*.md, update experiment_frontier.json and this handoff.
+20261105T062040Z: Execute FCLR-NEXT-088 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Consolidate aggressively, probe exhaustively, harden rubric/fixtures/tests, keep harness offline-ready and tests green, write liquidation_forward_validate_010_blocker_*.md, update experiment_frontier.json and this handoff.
