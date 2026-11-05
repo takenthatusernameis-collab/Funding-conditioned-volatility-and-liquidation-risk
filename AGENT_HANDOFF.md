@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T014500Z
+Timestamp (UTC): 20261105T022734Z
 Git SHA (HEAD): 5f475208064b8281924d0542fd4801f71adc38fc
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T014500Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261105T022734Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -22,7 +22,7 @@ Inference: Volatility is complete. Liquidation risk is the repo's unfulfilled ob
 ```text
 TASK ID: FCLR-NEXT-080-TRACK-A-FORCE-HEAVY-PROGRESS-WHILE-BLOCKED
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility DONE/LOCKED; Liquidation Risk ONLY)
-TIMESTAMP (UTC): 20261105T014500Z
+TIMESTAMP (UTC): 20261105T022734Z
 CAMPAIGN: TRACK A LIQUIDATION-RISK - GENERATE IRREFUTABLE PROGRESS WHILE DATA-BLOCKED. DO NOT COAST.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION INCOMPLETE IF ANY SKIPPED.
 
@@ -49,4 +49,4 @@ STOP RULE: Complete ALL 6 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/deep_review_alt_sources.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T014500Z: Execute FCLR-NEXT-080 above in full. Prioritize liquidation risk (Track A) exclusively. Force heavy progress while blocked (source expansion + classification hardening + fixture-driven FCLR-010 dry-run + bottleneck removal). Keep artifacts consolidated. Do not touch Track C. If resume conditions met at any point, preregister BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness. Keep tests green (>=180). Leave concrete, executable evidence for the next session.
+20261105T022734Z: Execute FCLR-NEXT-080 above in full. Prioritize liquidation risk (Track A) exclusively. Force heavy progress while blocked (source expansion + classification hardening + fixture-driven FCLR-010 dry-run + bottleneck removal). Keep artifacts consolidated. Do not touch Track C. If resume conditions met at any point, preregister BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness. Keep tests green (>=180). Leave concrete, executable evidence for the next session.
