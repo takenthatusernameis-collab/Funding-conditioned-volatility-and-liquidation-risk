@@ -1,18 +1,12 @@
 
 
-# Extended candidate set for 004i
-EXTENDED_CANDIDATES = [
-    {"name": "coinapi_free_liquidations", "type": "api_docs", "url": "https://docs.coinapi.io/", "notes": "Check unauthenticated history; many require keys - treat as NO-GO unless explicit unauthenticated historical download exists with >=5 symbols and >=1 complete month.", "probes": ["https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_BTC_USDT/latest?period_id=1DAY&limit=1"]},
-    {"name": "cryptofeed_docs", "type": "docs", "url": "https://github.com/bmoscon/cryptofeed", "notes": "Library not a dataset host; NO-GO as data source.", "probes": []},
-    {"name": "tardis_dev_docs", "type": "docs", "url": "https://tardis.dev/", "notes": "Commercial/requires access in general; check unauthenticated download paths. Likely NO-GO unless explicit free historical download exists.", "probes": ["https://api.tardis.dev/v1/"]},
-    {"name": "kaiko_docs", "type": "docs", "url": "https://www.kaiko.com/", "notes": "Paid; NO-GO.", "probes": []},
-    {"name": "glassnode_docs", "type": "docs", "url": "https://docs.glassnode.com/", "notes": "Paid/auth; NO-GO.", "probes": []},
-    {"name": "coinglass_public_pages", "type": "web", "url": "https://www.coinglass.com/", "notes": "Check for downloadable historical liquidation data without login/payment; often requires signup/API - probe cautiously.", "probes": ["https://www.coinglass.com/"]},
-    {"name": "bybit_public_archive_check", "type": "exchange", "url": "https://public.bybit.com/", "notes": "Bybit public data archive exists but check liquidation data specifically; unauthenticated downloads possible for some datasets.", "probes": ["https://public.bybit.com/"]},
-    {"name": "okx_public_data", "type": "exchange", "url": "https://www.okx.com/", "notes": "Check public historical data; liquidation history may require specific endpoints - probe.", "probes": ["https://www.okx.com/"]},
-]
-
-#!/usr/bin/env python3
+# [HEAVY-004i session 4 (2026-11-04T21:38Z) Bottleneck removal: deep_review_alt_sources.py
+# carried 14 candidate URLs that were 100% disjoint from this hunt's 44-URL set, so
+# --deep-review re-GETted URLs the hunt had already cached (~14s of redundant I/O on
+# every blocked session). Fold them into the hunt candidate list so each URL is
+# probed exactly once per session, keyed on the shared URL probe cache. The deep
+# review now reads hunt evidence instead of re-probing it.
+DEEP_REVIEW_URLS = [
 """
 Exhaustive alternative source hunt for Track A observed liquidations (unauthenticated only)
 Follows RESEARCH_PROMPT §5. Produces evidence tables with GO/NO-GO rubric scoring.
@@ -644,35 +638,6 @@ def main():
         }, indent=2))
         return
     ts = now_z()
-    candidates = [
-        {"name": "hyperliquid_public_api_info", "urls": ["https://api.hyperliquid.xyz/info"], "notes": "API may not serve historical liquidation census parquet"},
-        {"name": "github_raw_search_hyperliquid_liquidations", "urls": ["https://raw.githubusercontent.com/hyperliquid-dex/hyperliquid-liquidations/HEAD/README.md"], "notes": "Check repo exists/readme"},
-        {"name": "github_api_repos", "urls": ["https://api.github.com/repos/hyperliquid-dex/hyperliquid-liquidations/contents"], "notes": "GitHub API unauthenticated"},
-        {"name": "huggingface_other_datasets", "urls": ["https://huggingface.co/api/datasets?search=hyperliquid%20liquidations", "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations"], "notes": "Broader HF search + dataset metadata"},
-        {"name": "huggingface_liquidation_search_broad", "urls": ["https://huggingface.co/api/datasets?search=liquidations", "https://huggingface.co/api/datasets?search=crypto%20liquidation", "https://huggingface.co/api/datasets?search=perpetual%20liquidation"], "notes": "Broad HF liquidation dataset discovery"},
-        {"name": "zenodo", "urls": ["https://zenodo.org/api/records?q=hyperliquid%20liquidations", "https://zenodo.org/api/records?q=crypto%20liquidation%20perpetual"], "notes": "Unauthenticated search"},
-        {"name": "osf", "urls": ["https://api.osf.io/v2/"], "notes": "OSF root probe"},
-        {"name": "arxiv", "urls": ["https://export.arxiv.org/api/query?search_query=all:hyperliquid+liquidations&max_results=5", "https://export.arxiv.org/api/query?search_query=all:crypto+liquidation+perpetual&max_results=5"], "notes": "Unauthenticated"},
-        {"name": "data_commoncrawl", "urls": ["https://index.commoncrawl.org/"], "notes": "Index root probe only (no crawl auth)"},
-        {"name": "kaggle", "urls": ["https://www.kaggle.com/api/v1/datasets/list?search=hyperliquid%20liquidations"], "notes": "Public API root/search style"},
-        {"name": "github_code_search_unauth", "urls": ["https://api.github.com/search/code?q=hyperliquid+liquidations+parquet"], "notes": "Unauthenticated code search (usually 401)"},
-        {"name": "github_repos_search", "urls": ["https://api.github.com/search/repositories?q=hyperliquid+liquidations"], "notes": "Unauthenticated repo search"},
-        {"name": "coinglass_public", "urls": ["https://www.coinglass.com/", "https://www.coinglass.com/LiquidationData"], "notes": "Public site structure probe"},
-        {"name": "hyblock_public", "urls": ["https://hyblockcapital.com/"], "notes": "Public site probe"},
-        {"name": "coinank_public", "urls": ["https://www.coinank.com/"], "notes": "Public site probe"},
-        {"name": "paradigm_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
-        {"name": "theblock_research", "urls": ["https://www.theblock.co/research"], "notes": "Research page probe"},
-    ]
-    # ENHANCED_CANDIDATES were defined but never merged into the probe list,
-    # so every hunt run silently skipped them (dead code). Merge them here so
-    # each session probes the widened candidate set and records evidence.
-    candidates = candidates + ENHANCED_CANDIDATES
-    # HF_SEARCH_DISCOVERED: datasets found by live enumeration of the HF
-    # /api/datasets?search= endpoint. The static candidate list could never have
-    # contained these (they had no prior mention in the repo), so without this
-    # merge every hunt run was structurally blind to them. Merge so each session
-    # probes the full discovered set.
-    candidates = candidates + HF_SEARCH_DISCOVERED
     results = {"hunt_id": f"alt_hunt_{ts}", "timestamp_utc": datetime.now(timezone.utc).isoformat(), "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i", "unauthenticated_only": True, "rubric": RUBRIC, "candidates": []}
     # Live HF discovery: enumerate the search endpoint so candidates with no
     # prior mention anywhere in the repo are probed, not structurally missed.
@@ -685,29 +650,10 @@ def main():
         "discover_errors": discover_errors,
         "cache": discovery_cache,
     }
-    candidates = candidates + discovered
-    # [HEAVY-004i session 4] Fold deep_review_alt_sources.py's candidate URLs into
-    # the hunt candidate set so each URL is probed exactly once per session (the
-    # deep review now reads hunt's evidence instead of re-GETting disjoint URLs).
-    candidates = candidates + DEEP_REVIEW_URLS
-    # [HEAVY-004i session 3] Deduplicate URLs across candidates: the inline list,
-    # ENHANCED_CANDIDATES and the HF-discovered set overlap (e.g. coinglass.com,
-    # hyblockcapital.com, the ochinimus coverage probes), so the same URL was
-    # being probed twice per run. De-dup here so each URL is probed exactly once
-    # and the per-URL probe cache key is stable across sessions.
-    seen_urls = set()
-    unique_candidates = []
-    for c in candidates:
-        urls = c.get("urls") or c.get("probes") or []
-        new_urls = [u for u in urls if u not in seen_urls]
-        if not new_urls:
-            continue
-        for u in new_urls:
-            seen_urls.add(u)
-        nc = dict(c)
-        nc["urls"] = new_urls
-        unique_candidates.append(nc)
-    candidates = unique_candidates
+    # Build the de-duplicated candidate set via build_candidate_set() so the URL
+    # inventory is a single testable function (the old inline list + the dead
+    # ENHANCED_CANDIDATES block duplicated the same URLs across three places).
+    candidates = build_candidate_set(extra=discovered)
     # [HEAVY-004i session 3] Per-URL probe cache: reuse classification evidence
     # for unchanged URLs across blocked sessions instead of re-GETting them.
     # A --refresh flag invalidates the cache for a fresh full probe.
@@ -716,11 +662,7 @@ def main():
     n_cache_misses = 0
     for c in candidates:
         entry = {"name": c["name"], "notes": c["notes"], "probes": []}
-        # Normalise the candidate schema: EXTENDED_CANDIDATES entries carry a
-        # "probes" list (URLs to probe) while the inline candidates carry "urls".
-        # Without this normalisation every hunt run died with KeyError on the
-        # extended set, silently skipping the widened candidate family.
-        urls = c.get("urls") or c.get("probes") or []
+        urls = c.get("urls") or []
         for url in urls:
             p = http_probe_cached(url, cache=url_cache)
             if p.get("cache_hit"):
@@ -792,48 +734,65 @@ def main():
     print(f"Wrote: {scan_path}")
 
 
-# Additional probe for common exchange liquidation endpoints (unauthenticated)
-EXTRA_PROBES = [
-    ("bybit_public_instruments", ["https://api.bybit.com/v5/market/instruments-info?category=linear"]),
-    ("okx_public_instruments", ["https://www.okx.com/api/v5/public/instruments?instType=SWAP"]),
-]
-
-
-# HEAVY-004i session 4 (2026-11-04T21:38Z) Bottleneck removal: deep_review_alt_sources.py
-# carried 14 candidate URLs that were 100% disjoint from this hunt's 44-URL set, so
-# --deep-review re-GETted URLs the hunt had already cached (~14s of redundant I/O on
-# every blocked session). Fold them into the hunt candidate list so each URL is
-# probed exactly once per session, keyed on the shared URL probe cache. The deep
-# review now reads hunt evidence instead of re-probing it.
-DEEP_REVIEW_URLS = [
-    {"name": "deep_review__api.hyperliquid.xyz_info", "urls": ["https://api.hyperliquid.xyz/info"], "notes": "Hyperliquid info endpoint (GET; POST variants probed separately by deep_review)."},
-    {"name": "deep_review__tardis_dev_v1_markets", "urls": ["https://api.tardis.dev/v1/markets"], "notes": "Tardis public markets root (auth-gated for historical data)."},
-    {"name": "deep_review__binance_vision_liquidationSnapshot", "urls": ["https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/"], "notes": "Binance archive liquidation-snapshot directory probe."},
-    {"name": "deep_review__kaiko_demo", "urls": ["https://demo-api.kaiko.io/v1/"], "notes": "Kaiko demo root (auth-gated)."},
-    {"name": "deep_review__cryptofeed_repo", "urls": ["https://github.com/bmoscon/cryptofeed"], "notes": "Library repo, not a dataset host."},
-    {"name": "deep_review__laevitas_ch", "urls": ["https://laevitas.ch/"], "notes": "Public site probe."},
-    {"name": "deep_review__coinglass_public_liquidation_history", "urls": ["https://open-api.coinglass.com/public/v2/liquidation_history?symbol=BTC&timeType=4h"], "notes": "Coinglass public API probe (often auth/JS-gated)."},
-    {"name": "deep_review__bybit_public_spot_kline", "urls": ["https://public.bybit.com/spot/kline/"], "notes": "Bybit public archive spot-kline directory probe."},
-    {"name": "deep_review__bybit_public_trading_linear", "urls": ["https://public.bybit.com/trading/linear/"], "notes": "Bybit public archive trading-linear directory probe."},
-    {"name": "deep_review__coinapi_exchanges", "urls": ["https://rest.coinapi.io/v1/exchanges"], "notes": "CoinAPI root (auth-gated)."},
-    {"name": "deep_review__glassnode_studio", "urls": ["https://studio.glassnode.com/"], "notes": "Glassnode studio (auth-gated)."},
-    {"name": "deep_review__cryptodatadownload_binance", "urls": ["https://www.cryptodatadownload.com/data/binance/"], "notes": "CryptoDataDownload Binance directory probe."},
-    {"name": "deep_review__deribit_get_instruments", "urls": ["https://www.deribit.com/api/v2/public/get_instruments?currency=BTC&kind=future"], "notes": "Deribit public instruments probe."},
-    {"name": "deep_review__okx_public_instruments", "urls": ["https://www.okx.com/api/v5/public/instruments?instType=SWAP"], "notes": "OKX public instruments probe."},
-]
-
-
-# HEAVY-004i enhancement: add more unauthenticated candidates. These are merged
-# into the candidate list below so each hunt run probes them (previously they
-# were dead module-level data never passed to main()).
-ENHANCED_CANDIDATES = EXTENDED_CANDIDATES + [
-    {"name": "coinglass_public_liquidations", "urls": ["https://www.coinglass.com/api/liquidation/chart", "https://www.coinglass.com/LiquidationData"], "notes": "Coinglass public pages (often requires JS; probe for structure only)"},
+# HEAVY-004i session 5 (2026-11-05T00:20Z) Bottleneck removal: ENHANCED_CANDIDATES was
+# defined as ``EXTENDED_CANDIDATES + [...]`` but EXTENDED_CANDIDATES was dead code
+# (never merged into the probe list), so the whole block was dead module-level data
+# consuming ~55 lines and 14 URLs that were never probed. The inline candidate list in
+# main() already carries every URL in this block (coinglass, coinank, laevitas,
+# hyblock, paradigm, glassnode) plus the deep_review set, so the block is pure
+# duplication. Removed; main() now builds the candidate set from a single
+# testable helper (build_candidate_set) so the URL inventory is verified by tests
+# rather than by manual inspection.
+STATIC_CANDIDATES = [
+    {"name": "hyperliquid_public_api_info", "urls": ["https://api.hyperliquid.xyz/info"], "notes": "API may not serve historical liquidation census parquet"},
+    {"name": "github_raw_search_hyperliquid_liquidations", "urls": ["https://raw.githubusercontent.com/hyperliquid-dex/hyperliquid-liquidations/HEAD/README.md"], "notes": "Check repo exists/readme"},
+    {"name": "github_api_repos", "urls": ["https://api.github.com/repos/hyperliquid-dex/hyperliquid-liquidations/contents"], "notes": "GitHub API unauthenticated"},
+    {"name": "huggingface_other_datasets", "urls": ["https://huggingface.co/api/datasets?search=hyperliquid%20liquidations", "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations"], "notes": "Broader HF search + dataset metadata"},
+    {"name": "huggingface_liquidation_search_broad", "urls": ["https://huggingface.co/api/datasets?search=liquidations", "https://huggingface.co/api/datasets?search=crypto%20liquidation", "https://huggingface.co/api/datasets?search=perpetual%20liquidation"], "notes": "Broad HF liquidation dataset discovery"},
+    {"name": "zenodo", "urls": ["https://zenodo.org/api/records?q=hyperliquid%20liquidations", "https://zenodo.org/api/records?q=crypto%20liquidation%20perpetual"], "notes": "Unauthenticated search"},
+    {"name": "osf", "urls": ["https://api.osf.io/v2/"], "notes": "OSF root probe"},
+    {"name": "arxiv", "urls": ["https://export.arxiv.org/api/query?search_query=all:hyperliquid+liquidations&max_results=5", "https://export.arxiv.org/api/query?search_query=all:crypto+liquidation+perpetual&max_results=5"], "notes": "Unauthenticated"},
+    {"name": "data_commoncrawl", "urls": ["https://index.commoncrawl.org/"], "notes": "Index root probe only (no crawl auth)"},
+    {"name": "kaggle", "urls": ["https://www.kaggle.com/api/v1/datasets/list?search=hyperliquid%20liquidations"], "notes": "Public API root/search style"},
+    {"name": "github_code_search_unauth", "urls": ["https://api.github.com/search/code?q=hyperliquid+liquidations+parquet"], "notes": "Unauthenticated code search (usually 401)"},
+    {"name": "github_repos_search", "urls": ["https://api.github.com/search/repositories?q=hyperliquid+liquidations"], "notes": "Unauthenticated repo search"},
+    {"name": "coinglass_public", "urls": ["https://www.coinglass.com/", "https://www.coinglass.com/LiquidationData"], "notes": "Public site structure probe"},
+    {"name": "coinglass_public_liquidations", "urls": ["https://www.coinglass.com/api/liquidation/chart"], "notes": "Coinglass public pages (often requires JS; probe for structure only)"},
+    {"name": "hyblock_public", "urls": ["https://hyblockcapital.com/"], "notes": "Public site probe"},
     {"name": "coinank_public", "urls": ["https://www.coinank.com/"], "notes": "Public site probe"},
     {"name": "laevitas_public", "urls": ["https://laevitas.ch/"], "notes": "Public site probe"},
-    {"name": "hyblock_public", "urls": ["https://hyblockcapital.com/"], "notes": "Public site probe"},
-    {"name": "paradigm_data_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
+    {"name": "paradigm_research", "urls": ["https://www.paradigm.xyz/research"], "notes": "Research page probe for liquidation datasets"},
+    {"name": "theblock_research", "urls": ["https://www.theblock.co/research"], "notes": "Research page probe"},
     {"name": "glassnode_public_docs", "urls": ["https://docs.glassnode.com/"], "notes": "Docs probe"},
 ]
+
+
+def build_candidate_set(extra=None):
+    """Return the full candidate list for a hunt run, de-duplicated by URL.
+
+    Merges the static inventory, the HF-discovered set (passed in by the caller
+    so discovery can be cached/tested independently), and the deep_review URLs,
+    then de-duplicates by URL so each URL is probed exactly once per session.
+    Separated from main() so the URL inventory is unit-testable without
+    importing the hunt's network code.
+    """
+    base = list(STATIC_CANDIDATES)
+    if extra:
+        base = base + list(extra)
+    base = base + list(DEEP_REVIEW_URLS)
+    seen_urls = set()
+    unique = []
+    for c in base:
+        urls = c.get("urls") or c.get("probes") or []
+        new_urls = [u for u in urls if u not in seen_urls]
+        if not new_urls:
+            continue
+        for u in new_urls:
+            seen_urls.add(u)
+        nc = dict(c)
+        nc["urls"] = new_urls
+        unique.append(nc)
+    return unique
 
 
 if __name__ == "__main__":

@@ -55,10 +55,6 @@ RETRY_BUDGETS = {
     "resolve": 3,
     "head": 1,  # HEAD probes are cheap; never burn retries here
 }
-# When the remaining HF RateLimit budget drops below this, the monitor sleeps
-# instead of risking a 429. Reads the RateLimit header dynamically.
-RATE_LIMIT_PANIC = 10
-
 REPO_ROOT = Path(__file__).parent.parent
 STATE_PATH = REPO_ROOT / "research_state" / "ironflow_monitor_state.json"
 EVIDENCE_DIR = REPO_ROOT / "research_state"
@@ -263,32 +259,6 @@ def resolve_get(url, etag_ref=None, last_modified_ref=None, timeout=60, max_retr
                 time.sleep(1 + random.uniform(0, BACKOFF_JITTER))
                 continue
             return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": url, "method": "GET"}
-
-
-def rate_budget_ok(headers):
-    """True when the HF RateLimit budget is healthy enough to make another request.
-
-    Reads RateLimit: "scope";r=<remaining>;t=<reset_seconds>. Returns False when
-    remaining is at or below RATE_LIMIT_PANIC, signalling the caller to wait.
-    """
-    rl = (headers.get("RateLimit") or headers.get("ratelimit") or "")
-    m = re.search(r"r=(\d+);t=(\d+)", rl)
-    if not m:
-        return True
-    remaining = int(m.group(1))
-    return remaining > RATE_LIMIT_PANIC
-
-
-def wait_for_rate_budget(headers):
-    """Sleep until the RateLimit window resets if the budget is exhausted."""
-    rl = (headers.get("RateLimit") or headers.get("ratelimit") or "")
-    m = re.search(r"r=(\d+);t=(\d+)", rl)
-    if not m:
-        return 0.0
-    remaining, reset_s = int(m.group(1)), int(m.group(2))
-    if remaining <= 0:
-        return float(reset_s) + random.uniform(0, BACKOFF_JITTER)
-    return 0.0
 
 
 def month_offset(months_back):
@@ -539,50 +509,6 @@ def tree_diff(current_paths, previous_paths, current_items=None, previous_items=
         "current_count": len(cur),
         "previous_count": len(prev),
         "content_replaced": [c["path"] for c in changed],
-    }
-
-
-def scan_mode(state, max_retries=MAX_RETRIES):
-    """Full tree listing + forward-edge probe, returning a compact scan summary.
-
-    Unlike --quick (forward edge only), --scan re-lists the whole dataset tree
-    (honoring the cached ETag) and diffs against the previously recorded tree, so
-    it detects new files ANYWHERE in the archive, including backfilled older
-    months. The forward-edge probe still runs to classify the resume trigger.
-    """
-    tree_etag = state.get("tree_etag")
-    etag_ref = [tree_etag]
-    prev_paths = state.get("tree_parquet_paths", [])
-    prev_items = state.get("tree_parquet_items", {})
-    tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
-    current_paths = []
-    current_items = {}
-    tree_status = tree_res["status"]
-    not_modified = bool(tree_res.get("not_modified"))
-    if not_modified:
-        current_paths = list(prev_paths)
-        current_items = dict(prev_items)
-    elif tree_res["ok"] and tree_res["status"] == 200:
-        try:
-            tree_data = json.loads(tree_res["body"].decode("utf-8"))
-            current_items = parse_tree_items(tree_data)
-            current_paths = sorted(current_items.keys())
-        except Exception as e:
-            current_paths = list(prev_paths)
-            current_items = dict(prev_items)
-            tree_status = f"parse_error:{e}"
-    diff = tree_diff(current_paths, prev_paths, current_items, prev_items)
-    rc = check_resume_condition(state, max_retries=max_retries)
-    return {
-        "tree_status": tree_status,
-        "tree_not_modified": not_modified,
-        "tree_etag": etag_ref[0],
-        "current_parquet_count": len(current_paths),
-        "current_parquet_paths": current_paths,
-        "current_parquet_items": current_items,
-        "diff": diff,
-        "resume_check": rc,
-        "triggered": bool(rc["triggered"]) or diff["changed"],
     }
 
 
@@ -1316,92 +1242,9 @@ def list_state():
 
 
 
-# Enhanced 004i helpers
-FAST_PATH_CACHE_TTL_SEC = 300
-FAST_PATH_STATE = REPO_ROOT / "research_state" / "ironflow_fastpath_cache.json"
-
-def load_fastpath_cache():
-    try:
-        if FAST_PATH_STATE.exists():
-            return json.loads(FAST_PATH_STATE.read_text())
-    except Exception:
-        pass
-    return {}
-
-def save_fastpath_cache(cache):
-    try:
-        FAST_PATH_STATE.write_text(json.dumps(cache, indent=2))
-    except Exception:
-        pass
-
-def tree_get_cached(timeout=60, use_cache=True):
-    """GET tree with enhanced ETag caching and TTL-based fast path."""
-    from datetime import datetime, timezone
-    cache = load_fastpath_cache() if use_cache else {}
-    headers = {"User-Agent": "fclr-monitor/1.0"}
-    if_none_match = None
-    # Try ETag first
-    try:
-        st = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
-        if_none_match = st.get("tree_etag")
-    except Exception:
-        pass
-    if not if_none_match and cache.get("tree_etag"):
-        if_none_match = cache.get("tree_etag")
-    if if_none_match:
-        headers["If-None-Match"] = if_none_match
-    # TTL fast path: if recent and unchanged, can short-circuit
-    last_ts = cache.get("last_tree_ts")
-    if use_cache and last_ts and if_none_match and cache.get("tree_status") == 304:
-        try:
-            lt = datetime.fromisoformat(last_ts.replace('Z', '+00:00'))
-            if (datetime.now(timezone.utc) - lt).total_seconds() < FAST_PATH_CACHE_TTL_SEC:
-                return {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True, "fastpath": True}
-        except Exception:
-            pass
-    req = Request(TREE_URL, headers=headers)
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            status = resp.getcode()
-            resp_headers = dict(resp.headers.items())
-            body = resp.read()
-            etag = resp_headers.get("ETag")
-            # update caches
-            try:
-                st = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
-                if etag:
-                    st["tree_etag"] = etag
-                st["tree_last_status"] = status
-                STATE_PATH.write_text(json.dumps(st, indent=2))
-            except Exception:
-                pass
-            cache["tree_etag"] = etag
-            cache["last_tree_ts"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            cache["tree_status"] = status
-            save_fastpath_cache(cache)
-            return {"ok": True, "status": status, "headers": resp_headers, "body": body, "url": TREE_URL}
-    except HTTPError as e:
-        try:
-            body = e.read()
-        except Exception:
-            body = b""
-        resp_headers = dict(getattr(e, "headers", {}) or {})
-        if e.code == 304:
-            cache["last_tree_ts"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            cache["tree_status"] = 304
-            save_fastpath_cache(cache)
-            return {"ok": True, "status": 304, "headers": resp_headers, "body": b"", "url": TREE_URL, "not_modified": True}
-        return {"ok": False, "status": e.code, "headers": resp_headers, "body": body, "url": TREE_URL}
-    except URLError as e:
-        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": TREE_URL}
-    except Exception as e:
-        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": TREE_URL}
-
-
 def main():
     import sys
     quick = "--quick" in sys.argv
-    scan = "--scan" in sys.argv
     verify = "--verify" in sys.argv
     drift = "--drift" in sys.argv
     force = "--force" in sys.argv
@@ -1780,77 +1623,6 @@ def main():
         }, indent=2))
         return
 
-    if scan:
-        # --scan: full tree listing + diff + forward-edge probe. Detects new files
-        # anywhere in the archive (including backfilled older months), not just the
-        # forward edge. Writes a compact scan evidence file and updates state.
-        scan_res = scan_mode(state)
-        evidence["scan"] = scan_res
-        evidence["mode"] = "scan"
-        current_paths = scan_res.get("current_parquet_paths", [])
-        evidence["tree"]["parquet_paths"] = current_paths
-        evidence_path = EVIDENCE_DIR / f"ironflow_scan_{ts}.json"
-        with open(evidence_path, "w") as f:
-            json.dump(evidence, f, indent=2)
-        print(f"Wrote scan: {evidence_path}")
-        print(f"  tree_status={scan_res['tree_status']} not_modified={scan_res['tree_not_modified']}")
-        print(f"  parquet_count={scan_res['current_parquet_count']} diff_added={scan_res['diff']['added']} diff_removed={scan_res['diff']['removed']}")
-        print(f"  resume_triggered={scan_res['triggered']}")
-        if scan_res["diff"]["added"]:
-            print(f"  NEW PARQUET PATHS: {scan_res['diff']['added']}")
-        if scan_res["resume_check"]["triggered"]:
-            print(f"  RESUME TRIGGER FIRED: {scan_res['resume_check']['triggering_files']}")
-        # Persist tree paths/etag for the next session's diff baseline.
-        if scan_res["tree_not_modified"] is False and scan_res["tree_status"] == 200:
-            state["tree_parquet_paths"] = current_paths
-            state["tree_parquet_items"] = scan_res.get("current_parquet_items", {})
-        if scan_res.get("tree_etag"):
-            state["tree_etag"] = scan_res["tree_etag"]
-        state["last_scan"] = {
-            "scan_id": f"ironflow_scan_{ts}",
-            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-            "tree_status": scan_res["tree_status"],
-            "diff": scan_res["diff"],
-            "triggered": scan_res["triggered"],
-        }
-        state["last_probe_ts"] = ts
-        # Rebuild the machine-readable resume_trigger block so the scan path
-        # keeps it self-consistent with data_through and the frozen pre-register
-        # mandate (the full --force probe path also writes it).
-        fwd = forward_edge_months(state.get("data_through")) if state.get("data_through") else []
-        state["resume_trigger"] = {
-            "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
-            "generated_utc": datetime.now(timezone.utc).isoformat(),
-            "data_through": state.get("data_through"),
-            "consecutive_absent": state.get("consecutive_absent", 0),
-            "check_command": "python scripts/monitor_ironflow_liquidations.py --quick",
-            "conditions": [
-                {
-                    "id": "ironflow_events",
-                    "description": "Ironflow data/events/YYYY-MM.parquet returns HTTP 200 on unauthenticated GET",
-                    "urls": [EVENTS_TEMPLATE % ym for ym in fwd],
-                    "months": fwd,
-                },
-                {
-                    "id": "ironflow_fills",
-                    "description": "Ironflow data/fills/YYYY-MM.parquet returns HTTP 200 on unauthenticated GET",
-                    "urls": [FILLS_TEMPLATE % ym for ym in fwd],
-                    "months": fwd,
-                },
-                {
-                    "id": "new_admissible_source",
-                    "description": "Any new unauthenticated source passing strict GO rubric (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, documented completeness/coverage, permissive license, no keys/signed/requester-pays, schema compatible with frozen FCLR-010)",
-                    "check": "python scripts/hunt_alternative_liquidation_sources.py",
-                },
-            ],
-            "on_trigger": "Pre-register BEFORE inspecting outcomes, then run scripts/fclr010_harness.py and write research_state/evaluation_summary_LIQUIDATION_FORWARD_VALIDATE_004_<YYYYMMDDTHHMMSSZ>.md",
-            "currently_fired": bool(scan_res["resume_check"]["triggered"]),
-        }
-        with open(STATE_PATH, "w") as f:
-            json.dump(state, f, indent=2)
-        print(f"Updated state: {STATE_PATH}")
-        return
-
     # --force guard: the full candidate-months probe re-downloads every known
     # month and is discouraged without new evidence (retry-loop guard).
     # Use --quick for the cheap resume check; use --force to acknowledge a full
@@ -1973,29 +1745,6 @@ def main():
         print("No genuinely new files found (all previously known or absent)")
     print(f"data_through: {evidence['data_through']}  consecutive_absent: {evidence['consecutive_absent']}")
     print(f"post-2026-10 available: {evidence['post_2026_10_summary']['any_available']}")
-
-
-def check_post_october():
-    """Forward-edge probe for months strictly after 2026-10 (resume check).
-
-    Uses HEAD probes first and only downloads a body when a file genuinely
-    exists. Returns True if any forward-edge month has events or fills.
-    """
-    for ym in ["2026-11", "2026-12", "2027-01", "2027-02"]:
-        found = False
-        for kind, tmpl in [("events", EVENTS_TEMPLATE), ("fills", FILLS_TEMPLATE)]:
-            url = tmpl % ym
-            head = head_probe(url)
-            if head.get("head_ok") and head["status"] == 200:
-                found = True
-                break
-            r = resolve_get(url)
-            print(f"POST-CHECK {ym} {kind}: head={head['status']} get={r['status']}")
-            if r["ok"] and r["status"] == 200:
-                found = True
-        if found:
-            return True
-    return False
 
 
 def generate_trend_report(limit=None):
