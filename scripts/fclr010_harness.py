@@ -42,11 +42,22 @@ class FCLR010Harness:
         self.config = FCLR010Config()
         self._load_frozen_splits()
 
+    @staticmethod
+    def _load_json_lfs_aware(path):
+        """Load JSON, transparently smudging Git LFS pointers from local cache (no network)."""
+        import subprocess
+        raw = Path(path).read_bytes()
+        if raw.startswith(b"version https://git-lfs.github.com/spec/v1"):
+            r = subprocess.run(["git", "lfs", "smudge", "--"], input=raw, capture_output=True)
+            if r.returncode != 0 or not r.stdout:
+                raise RuntimeError(f"LFS smudge failed for {path}: {r.stderr[:120]!r}")
+            raw = r.stdout
+        return json.loads(raw)
+
     def _load_frozen_splits(self):
-        """Load frozen splits from run_manifest"""
+        """Load frozen splits from run_manifest (LFS-pointer aware, local cache only)."""
         manifest_path = self.repo_root / "research_state" / "run_manifest.json"
-        with open(manifest_path) as f:
-            manifest = json.load(f)
+        manifest = self._load_json_lfs_aware(manifest_path)
         self.split_boundaries = manifest.get("split_boundaries_fclr010", {})
         assert self.split_boundaries.get("frozen_before_outcomes") is True
         assert self.split_boundaries.get("protocol_ref") == "research_state/research_protocol_fclr010.md v1.0"

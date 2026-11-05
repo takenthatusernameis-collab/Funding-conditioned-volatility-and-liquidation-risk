@@ -411,3 +411,12 @@ Consolidated unreferenced timestamped Track A blocker/sweep files (verified no r
 | `liquidation_forward_validate_016_blocker_20261105T120604Z.md` | `88c2c22f84768bbd5d613b8f53fcb8434512369cb02a0d760a1a23c088416ed5` | 3912 | # Track A Forward Validation Blocker — 016 (FCLR-NEXT-096)  **Timestamp (UTC):** 20261105T120604Z **Task:** FCLR-NEXT-096-TRACK-A-NO-COAST-WATCH-CONSOLIDATION-RUBRIC-PROVENANCE **Status:** **BLOCKED (data-gated, no rub |
 | `campaign_sweep_tracka_20261105T120604Z.md` | `1edbf7dbfd4e38daec59309f9b84181fecf5d5e23e2102c65ccfd9747c155873` | 7889 | # Track A Campaign Sweep — FCLR-NEXT-096 (No-Coast Watch Consolidation + Rubric Provenance)  **Timestamp (UTC):** 20261105T120604Z **HEAD (baseline):** fe487722 (working tree modified by 096 hardening; not committed) * |
 Removed: 4 files.
+
+
+## 103 consolidation (20261105T180046Z, FCLR-NEXT-103 root-bound+gate-reason+monitor-evidence)
+Consolidated unreferenced superseded Track A monitoring artifacts (verified no refs in AGENT_HANDOFF/frontier/scripts/tests at removal time). Provenance preserved; removed to regain root md+json slack (bound <=163) before 103 evidence.
+| file | sha256 | bytes | excerpt |
+|---|---|---:|---|
+| `ironflow_trend_digest_20261102T220326Z.json` | `3b3e3f383ff5c6b85197ac98927b32c4f694198e2f4a137ed7e423201a44bb29` | 729 | {   "digest_ts": "2026-11-05T05:15:44.872158+00:00",   "latest": "ironflow_trend_report_20261102T220326Z.json",   "removed_count": 3,   "ent |
+| `ironflow_trend_report_20261102T220326Z.json` | `291af415643bba485b87867af1cf581f489ef44f8fec727f587b17862d15e14a` | 65914 | {   "report_id": "ironflow_trend_report_20261102T220326Z",   "generated_utc": "2026-11-02T22:03:26.159024+00:00",   "campaign": "LIQUIDATION |
+Removed: 2 files.

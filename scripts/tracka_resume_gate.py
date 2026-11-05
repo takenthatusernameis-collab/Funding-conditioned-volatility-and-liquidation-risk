@@ -51,7 +51,14 @@ def _load_manifest(path: Optional[str]) -> Optional[Dict[str, Any]]:
     p = Path(path)
     if not p.exists() or not p.is_file():
         raise FileNotFoundError(f"manifest not found: {p}")
-    return json.loads(p.read_text(encoding="utf-8"))
+    raw = p.read_bytes()
+    if raw.startswith(b"version https://git-lfs.github.com/spec/v1"):
+        import subprocess
+        r = subprocess.run(["git", "lfs", "smudge", "--"], input=raw, capture_output=True)
+        if r.returncode != 0 or not r.stdout:
+            raise RuntimeError(f"LFS smudge failed for {p}: {r.stderr[:120]!r}")
+        raw = r.stdout
+    return json.loads(raw)
 
 
 def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
@@ -78,6 +85,8 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
         return {
             "status": "BLOCKED",
             "reason": "drift preflight failed (fail-closed before manifest/prereg decision)",
+            "reason_code": "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
+            "fail_closed_order": "drift_preflight->manifest_prereg",
             "outcomes_inspected": False,
             "prereg_required": True,
             "gate_script": "tracka_resume_gate",
@@ -110,6 +119,13 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
     result["gate_script"] = "tracka_resume_gate"
     result["compat_fixture"] = bool(compat_fixture)
     result["drift_preflight"] = pre
+    # 103: machine-stable ordering/reason markers (semantics unchanged)
+    if result.get("status") == "BLOCKED" and pre.get("pass"):
+        result.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
+        result.setdefault("fail_closed_order", "drift_preflight->manifest_prereg")
+    elif result.get("status") in ("READY_FROZEN", "GO", "COMPLETE"):
+        result.setdefault("reason_code", "RESUME_READY_AFTER_DRIFT_PASS")
+        result.setdefault("fail_closed_order", "drift_preflight->manifest_prereg")
     result["elapsed_s"] = round(time.time() - t0, 6)
     result["network"] = False
     result["writes_real_research_state"] = False
