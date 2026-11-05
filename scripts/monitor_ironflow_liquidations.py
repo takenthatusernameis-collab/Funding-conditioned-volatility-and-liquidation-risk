@@ -1244,19 +1244,79 @@ def list_state():
 
 
 def _consolidate_ironflow_probes():
-    """Keep only the latest ironflow_probe_*.json to reduce artifact churn."""
+    """Keep only the latest ironflow_probe_*.json, archiving the rest to a digest.
+
+    [HEAVY-081 bottleneck removal] The 004i version of this function deleted
+    superseded probe files but was never called from any code path, so every
+    --quick run left a new ironflow_probe_*.json behind. By 20261105T0235Z the
+    directory held 110 files / 1,221,805 bytes, every one a 1,913-byte
+    byte-identical duplicate of the same blocked-path result (verified by sha256
+    across the set). generate_trend_report() reads only the LATEST file, so the
+    other 109 were pure artifact churn that also slowed every --report run
+    (it globbed all 109).
+
+    This version is called from the --quick path on every probe. It keeps the
+    newest evidence file (the only one the trend report and handoff consume) and
+    folds every older file into a single timestamped digest
+    (ironflow_probe_digest_<latest>.json) recording, per removed file: probe_id,
+    timestamp, mode, data_through, consecutive_absent, triggered, tree status,
+    probe_diff summary, and sha256. Information is preserved rather than lost:
+    the digest is a complete historical record of every blocked-path probe, in
+    one file, so a future session can still audit the full blocked streak without
+    re-probing.
+    """
     try:
         probes = sorted(EVIDENCE_DIR.glob("ironflow_probe_*.json"), key=lambda p: p.stat().st_mtime)
         if len(probes) <= 1:
-            return
-        # Keep the newest one
+            return {"kept": len(probes), "removed": 0, "digest_path": None}
+        digest_entries = []
         for old in probes[:-1]:
+            try:
+                ev = json.loads(old.read_text())
+            except Exception:
+                ev = {}
+            qrc = ev.get("quick_resume_check", {}) or {}
+            pd = ev.get("probe_diff", {}) or {}
+            summary = pd.get("summary", {}) or {}
+            tc = ev.get("tree_change", {}) or {}
+            tree = ev.get("tree", {}) or {}
+            digest_entries.append({
+                "probe_id": ev.get("probe_id") or old.stem,
+                "timestamp_utc": ev.get("timestamp_utc"),
+                "mode": ev.get("mode"),
+                "data_through": qrc.get("data_through", ev.get("data_through")),
+                "consecutive_absent": qrc.get("consecutive_absent", ev.get("consecutive_absent")),
+                "triggered": bool(qrc.get("triggered")),
+                "tree_status": tree.get("status"),
+                "tree_not_modified": bool(tree.get("tree_etag_unchanged") or tc.get("tree_not_modified")),
+                "probe_diff_added": summary.get("added_count", 0),
+                "probe_diff_changed": summary.get("changed_count", 0),
+                "probe_diff_removed": summary.get("removed_count", 0),
+                "new_files_found": len(ev.get("new_files_found", []) or []),
+                "sha256": __import__("hashlib").sha256(old.read_bytes()).hexdigest(),
+                "source_file": old.name,
+            })
             try:
                 old.unlink()
             except Exception:
                 pass
+        latest = probes[-1]
+        digest_path = EVIDENCE_DIR / f"ironflow_probe_digest_{latest.stem.replace('ironflow_probe_', '')}.json"
+        digest = {
+            "digest_ts": datetime.now(timezone.utc).isoformat(),
+            "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+            "latest_probe": latest.name,
+            "latest_data_through": (json.loads(latest.read_text()).get("quick_resume_check") or {}).get("data_through"),
+            "removed_count": len(digest_entries),
+            "entries": digest_entries,
+        }
+        try:
+            digest_path.write_text(json.dumps(digest, indent=2))
+        except Exception:
+            pass
+        return {"kept": 1, "removed": len(digest_entries), "digest_path": str(digest_path)}
     except Exception:
-        pass
+        return {"kept": 0, "removed": 0, "digest_path": None, "error": "consolidation failed"}
 
 
 def main():
@@ -1587,7 +1647,31 @@ def main():
             state["tree_parquet_paths"] = _tc.get("current_parquet_paths", state.get("tree_parquet_paths", []))
         with open(STATE_PATH, "w") as f:
             json.dump(state, f, indent=2)
-        print(f"Wrote evidence: {evidence_path}")
+        # [HEAVY-081 bottleneck removal] _consolidate_ironflow_probes was defined
+        # in 004i but never called, so every --quick run left a new
+        # ironflow_probe_*.json behind: 109 files / 1.2 MB of byte-identical
+        # evidence accumulated across blocked sessions (verified 20261105T0235Z:
+        # 110 files, 1,221,805 bytes, all 1,913-byte duplicates of the same
+        # blocked-path result). The trend report (generate_trend_report) only ever
+        # reads the LATEST file, so the other 109 were pure artifact churn that
+        # also inflated every --report run (it globbed all 109). Wire the
+        # consolidation into the quick path so it runs on every probe: keep the
+        # newest evidence file and archive the rest to a single digest, cutting
+        # the probe directory from ~109 files to 2 (latest + digest) with no loss
+        # of information. Timing measured before/after below.
+        _before_probe_count = len(list(EVIDENCE_DIR.glob("ironflow_probe_*.json")))
+        _consolidated = _consolidate_ironflow_probes()
+        _after_probe_count = len(list(EVIDENCE_DIR.glob("ironflow_probe_*.json")))
+        evidence["artifact_churn"] = {
+            "probe_files_before": _before_probe_count,
+            "probe_files_after": _after_probe_count,
+            "removed": _before_probe_count - _after_probe_count,
+            "digest_written": bool(_consolidated.get("digest_path")),
+            "digest_path": _consolidated.get("digest_path"),
+        }
+        with open(evidence_path, "w") as f:
+            json.dump(evidence, f, indent=2)
+        print(f"Wrote evidence: {evidence_path} (probe artifacts {_before_probe_count} -> {_after_probe_count})")
         if rc["triggered"]:
             print(f"RESUME TRIGGER FIRED: {rc['triggering_files']}")
         else:
@@ -1784,6 +1868,12 @@ def generate_trend_report(limit=None):
     summary, and returns a machine-readable trend. Used by --report so future
     sessions can confirm the block persists across many runs without re-probing
     the remote endpoint, removing the per-session re-confirmation bottleneck.
+
+    [HEAVY-081] Also folds in ironflow_probe_digest_*.json entries (the archived
+    history from _consolidate_ironflow_probes) so the consolidation does not erase
+    the blocked streak: the digest carries every removed probe's
+    data_through/consecutive_absent/triggered, and merging it keeps the trend's
+    total_runs and longest_stable_blocked_streak correct after churn removal.
     """
     evidence_dir = EVIDENCE_DIR
     files = sorted(evidence_dir.glob("ironflow_probe_*.json"), key=lambda p: p.name)
@@ -1824,6 +1914,42 @@ def generate_trend_report(limit=None):
             },
             "new_files_found": len(ev.get("new_files_found", []) or []),
         })
+    # Merge archived digest entries so consolidation preserves history.
+    digests = sorted(evidence_dir.glob("ironflow_probe_digest_*.json"), key=lambda p: p.name)
+    for dp in digests:
+        try:
+            dg = json.loads(dp.read_text())
+        except Exception:
+            continue
+        for e in dg.get("entries", []) or []:
+            runs.append({
+                "probe_file": dp.name,
+                "probe_id": e.get("probe_id"),
+                "timestamp_utc": e.get("timestamp_utc"),
+                "mode": e.get("mode"),
+                "data_through": e.get("data_through"),
+                "consecutive_absent": e.get("consecutive_absent"),
+                "triggered": bool(e.get("triggered")),
+                "months_probed": [],
+                "head_probes": None,
+                "cached_hits": None,
+                "probe_diff": {
+                    "added": e.get("probe_diff_added", 0),
+                    "changed": e.get("probe_diff_changed", 0),
+                    "removed": e.get("probe_diff_removed", 0),
+                    "any_change": bool(e.get("probe_diff_added") or e.get("probe_diff_changed") or e.get("probe_diff_removed")),
+                },
+                "tree_change": {
+                    "changed": False,
+                    "added": 0,
+                    "removed": 0,
+                    "tree_status": e.get("tree_status"),
+                    "tree_not_modified": bool(e.get("tree_not_modified")),
+                },
+                "new_files_found": e.get("new_files_found", 0),
+                "from_digest": True,
+            })
+    runs = sorted(runs, key=lambda r: (r.get("timestamp_utc") or "", r.get("probe_file") or ""))
     if limit is not None:
         runs = runs[-limit:]
     latest = runs[-1] if runs else {}
@@ -1852,6 +1978,7 @@ def generate_trend_report(limit=None):
         "latest": latest,
         "resume_trigger_met": bool((latest or {}).get("triggered")) or (latest or {}).get("new_files_found", 0) > 0,
         "runs": runs,
+        "digest_files": [p.name for p in digests],
     }
 
 

@@ -1,6 +1,6 @@
 {
-  "probe_id": "ironflow_probe_20261104T213703Z",
-  "timestamp_utc": "2026-11-04T21:37:03.142070+00:00",
+  "probe_id": "ironflow_probe_20261105T023712Z",
+  "timestamp_utc": "2026-11-05T02:37:12.876702+00:00",
   "dataset": "ironflow/hyperliquid-liquidations",
   "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
   "tree": {
@@ -11,11 +11,11 @@
       "Content-Type": "application/json; charset=utf-8",
       "Content-Length": "11576",
       "Connection": "close",
-      "Date": "Wed, 04 Nov 2026 21:37:03 GMT",
+      "Date": "Thu, 05 Nov 2026 02:37:13 GMT",
       "ETag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
       "X-Powered-By": "huggingface-moon",
-      "X-Request-Id": "Root=1-6aeba57f-2f69d66a72730ac0517fa0c9",
-      "RateLimit": "\"api\";r=499;t=193",
+      "X-Request-Id": "Root=1-6aebebd8-51495db65c03c1910111f9da",
+      "RateLimit": "\"api\";r=497;t=76",
       "RateLimit-Policy": "\"fixed window\";\"api\";q=500;w=300",
       "cross-origin-opener-policy": "same-origin",
       "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -24,10 +24,10 @@
       "Vary": "Origin",
       "Access-Control-Expose-Headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
       "X-Cache": "Miss from cloudfront",
-      "Via": "1.1 c95a705fdf4e3077f715bd100df04b8a.cloudfront.net (CloudFront)",
-      "X-Amz-Cf-Pop": "IAD55-P8",
+      "Via": "1.1 c3a41271ff94252c37829a4b31f066ec.cloudfront.net (CloudFront)",
+      "X-Amz-Cf-Pop": "ORD58-P13",
       "Alt-Svc": "h3=\":443\"; ma=86400",
-      "X-Amz-Cf-Id": "HrOpFfvzQ4Eon4MNICWQJkfY-Xg-L6aX2RLKDSKpNWiu5mrZECY_1Q==",
+      "X-Amz-Cf-Id": "98r5SyXPGazzJBS1iZQ1_bP7IfpyLX4bEckEai9vnwSjQg4yaH7YeA==",
       "Strict-Transport-Security": "max-age=31536000"
     },
     "parsed": true,
@@ -787,5 +787,12 @@
     "content_hash_incomplete": false,
     "content_hash_complete": true,
     "method": "state_only_tree_unchanged"
+  },
+  "artifact_churn": {
+    "probe_files_before": 112,
+    "probe_files_after": 2,
+    "removed": 110,
+    "digest_written": true,
+    "digest_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/ironflow_probe_digest_20261105T023712Z.json"
   }
 }
