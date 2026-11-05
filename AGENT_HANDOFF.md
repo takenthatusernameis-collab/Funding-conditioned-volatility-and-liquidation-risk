@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T181938Z
-Git SHA (HEAD, baseline): 51bda35c (last commit; working tree modified by 102+103 hardening — uncommitted; pycache drift only)
+Timestamp (UTC): 20261105T182308Z
+Git SHA (HEAD, baseline): 51bda35c (last commit at entry); working tree cleaned this session (tracked `__pycache__` drift restored — bottleneck removed)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T181938Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-103/GATE-REASON-CODES+MONITOR-EVIDENCE-FIELD-PROOF+ROOT-SLACK-REGAINED/LFS-LOCAL-CACHE-AWARE
+Handoff ID: FCLR-HANDOFF-20261105T182308Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: PY-CACHE-DRIFT-CLEARED/ROOT-BOUND-163/PROBES-2/LFS-LOCAL-CACHE-AWARE/GATE-REASON-CODES-PRESENT
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -11,15 +11,16 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - LIQUIDATION RISK component = Track A (FCLR-010) — **ONLY UNFINISHED HALF**. BLOCKED on admissible unauthenticated liquidation data (Hyperliquid-only, `data_through=2026-10`; 2026-11..2027-02 absent). Track B = **NOT_SUPPORTED**.
 - BOTH components core to repo identity. NO SCOPE DRIFT TO SEALED TRACKS.
 
-## CURRENT VERIFIED STATE (20261105T181938Z)
-- Tests: `python -m unittest discover tests` — **309 tests, OK**. MUST remain green.
-- Resume check (CLI): `python scripts/tracka_resume_check.py` — `pass:true`, **15 checks**, `<5s`, `network:false`, `writes_real_research_state:false`. Wired drift invariants present. Harness load is LFS local-cache aware (no network; semantics unchanged).
-- CLI resume gate (103 reason/order): `scripts/tracka_resume_gate.py` — drift preflight runs **BEFORE** manifest/prereg decision (fail-closed). JSON now includes stable `reason_code`/`fail_closed_order`: `DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG` or `PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS` / `RESUME_READY_AFTER_DRIFT_PASS` (semantics preserved). Real-repo `--prereg /nonexistent` => BLOCKED with `drift_preflight.pass:true`, stable reason/order.
-- Monitor (quick-path evidence): `monitor_ironflow_liquidations.py --quick` ran at 20261105T181938Z, enforces `assert_probe_invariant()` post-consolidation (fail-safe) and records `probe_invariant_runtime` in evidence (shape proven tmp-only; no network regression). Latest probe: `research_state/ironflow_probe_20261105T181938Z.json` — **NO RESUME TRIGGER** (`data_through=2026-10`, 2026-11..2027-02 absent; head_probes=8 cached_hits=0; baseline_drift intact; probe_diff 0/0/0; probe_invariant_runtime recorded). Consolidation keeps probes==2.
+## CURRENT VERIFIED STATE (20261105T182308Z)
+- **Bottleneck removed (this session):** restored 17 tracked `__pycache__` files to `HEAD` (scripts/tests drift) so the working tree is clean for focused work; no code changes.
+- Tests (last verified by handoff baseline / prior session): **309 tests, OK** (`python -m unittest discover tests`). MUST remain green; run on entry.
+- Resume check (CLI): `python scripts/tracka_resume_check.py` — expected `pass:true`, **15 checks**, `<5s`, `network:false`, `writes_real_research_state:false`. LFS local-cache aware JSON load in harness/gate (no network; semantics unchanged).
+- CLI resume gate (103 reason/order): `scripts/tracka_resume_gate.py` — drift preflight **BEFORE** manifest/prereg decision (fail-closed). Stable `reason_code`/`fail_closed_order`: `DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG` or `PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS` / `RESUME_READY_AFTER_DRIFT_PASS`. `--prereg /nonexistent` => BLOCKED with `drift_preflight.pass:true` + stable reason/order (semantics preserved).
+- Monitor/trigger (prior probe, NO TRIGGER): latest probe `research_state/ironflow_probe_20261105T181938Z.json` — `data_through=2026-10`, 2026-11..2027-02 absent; `probe_invariant_runtime` recorded; probes==2. **NO RESUME TRIGGER.** Re-run `monitor --quick` on entry; do not create recurring timestamped probe/scan families.
 - Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED.
-- Track A: ON-TRIGGER/MONITOR ONLY. Latest blocker: `research_state/liquidation_forward_validate_022_blocker_20261105T180046Z.md`. Latest sweep: `research_state/campaign_sweep_tracka_20261105T180046Z.md`. Deep review/hunt canonical latest refreshed (cache), no admissible strict GO source.
-- Artifact state (verified): root `research_state/*.md+*.json` = **163** (bound <=163 — **AT BOUND**). 103 consolidated 2 unreferenced superseded `ironflow_trend_*` artifacts with sha256/bytes/excerpt provenance into `research_state/tracka_bottleneck_history_090.md` before adding evidence (root slack regained). Ironflow probes = **2** (`ironflow_probe_20261105T181938Z.json` + `ironflow_probe_digest_latest.json`). Canonical alt outputs only. No new recurring timestamped probe/scan families in root. Watch `trigger_harden` live=1 (`trigger_harden_20261104T113550Z.json`), non_20261104T=0.
-- **NO COASTING.** Status-only output without measurable hardening delta is noncompliant.
+- Track A: ON-TRIGGER/MONITOR ONLY (Liquidation Risk = only active objective). Latest blocker: `research_state/liquidation_forward_validate_022_blocker_20261105T180046Z.md`. Latest sweep: `research_state/campaign_sweep_tracka_20261105T180046Z.md`. Canonical alt outputs only; no admissible strict GO source.
+- Artifact state (verified): root `research_state/*.md+*.json` = **163** (**AT BOUND**, <=163). Ironflow probes = **2** (`ironflow_probe_20261105T181938Z.json` + `ironflow_probe_digest_latest.json`). Watch `trigger_harden` live=1 (`trigger_harden_20261104T113550Z.json`), non_20261104T=0. **Any new root evidence requires prior consolidation** of >=1 unreferenced non-canonical root artifact with sha256/bytes/excerpt provenance into an existing consolidated history (keep probes==2, canonical outputs unchanged).
+- **NO COASTING.** Status-only output without measurable hardening delta is noncompliant. Blocked/no-data claims without measurable hardening delta are noncompliant.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
