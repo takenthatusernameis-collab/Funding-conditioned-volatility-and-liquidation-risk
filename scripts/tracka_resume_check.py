@@ -21,6 +21,11 @@ if str(ROOT) not in sys.path:
 
 from scripts.tracka_rubric import assess_candidate, assess_strict_manifest, assess_minimal_fixture
 from scripts.fclr010_harness import FCLR010Harness
+# 108: admissible seam (manifest-only, no network, no parquet/outcome reads)
+try:
+    from src.analysis.tracka_admissible import assess_ironflow_month_admissibility
+except Exception:  # pragma: no cover
+    assess_ironflow_month_admissibility = None
 
 
 def _valid_go():
@@ -222,6 +227,21 @@ def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
         }
     except Exception as e:
         checks["probe_invariant_runtime_named"] = {"pass": False, "error": repr(e)}
+    # 7) 108 named admissible-seam guard (fail-closed, manifest-only, no network/no parquet/no outcomes)
+    try:
+        asc = admissible_seam_check(candidate_path=None, repo_root=root)
+        checks["admissible_seam_wired"] = {
+            "pass": asc.get("pass") is True,
+            "status": asc.get("status"),
+            "reason_code": asc.get("reason_code"),
+            "fail_closed": asc.get("fail_closed"),
+            "network": asc.get("network"),
+            "reads_outcomes": asc.get("reads_outcomes"),
+            "reads_parquet": asc.get("reads_parquet"),
+            "seam": asc.get("seam"),
+        }
+    except Exception as e:
+        checks["admissible_seam_wired"] = {"pass": False, "error": repr(e), "fail_closed": True}
     dt = time.time() - t0
     all_pass = all(v.get("pass") is True for v in checks.values())
     return {
@@ -232,6 +252,86 @@ def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
         "network": False,
         "writes_real_research_state": False,
     }
+
+
+def admissible_seam_check(candidate_path=None, candidate_manifest=None, repo_root=None) -> dict:
+    """108 named fail-closed Track A admissible-seam decision check.
+
+    Validates a candidate Ironflow month manifest/prereg shape via
+    src.analysis.tracka_admissible (Hyperliquid-only, month>=2026-11 trigger,
+    events+fills roles, observed-only, no modeled/proxy conflation, fail-closed
+    schema/leakage/auth/provenance/timestamp/URL guards). MANIFEST-ONLY: does not
+    read parquet contents, does not inspect outcomes, no network, no real
+    research_state writes. Path reads are caller-controlled (tests use tmp).
+
+    - no candidate => pass=True, status=NO_CANDIDATE_PENDING (seam wired, blocked
+      state preserved; does not break existing offline semantics)
+    - candidate provided => fail-closed GO/NO-GO from seam
+    """
+    t0 = time.time()
+    base = {
+        "check": "admissible_seam_wired",
+        "script": "tracka_resume_check.admissible_seam_check",
+        "fail_closed": True,
+        "network": False,
+        "reads_outcomes": False,
+        "reads_parquet": False,
+        "writes_real_research_state": False,
+        "seam": "src.analysis.tracka_admissible.assess_ironflow_month_admissibility",
+    }
+    if assess_ironflow_month_admissibility is None:
+        out = {**base, "pass": False, "status": "SEAM_IMPORT_ERROR", "reason_code": "ADMISSIBLE_SEAM_UNAVAILABLE"}
+        out["elapsed_s"] = round(time.time() - t0, 6)
+        return out
+    manifest = candidate_manifest
+    src_path = None
+    if manifest is None and candidate_path is not None:
+        src_path = str(candidate_path)
+        try:
+            p = Path(candidate_path)
+            if not p.exists() or not p.is_file():
+                out = {**base, "pass": False, "status": "NO-GO", "candidate_path": src_path,
+                       "reason_code": "ADMISSIBLE_CANDIDATE_PATH_MISSING", "failures": ["candidate_path_missing_or_not_file"]}
+                out["elapsed_s"] = round(time.time() - t0, 6)
+                return out
+            manifest = json.loads(p.read_text(encoding="utf-8"))
+        except Exception as e:
+            out = {**base, "pass": False, "status": "NO-GO", "candidate_path": src_path,
+                   "reason_code": "ADMISSIBLE_CANDIDATE_LOAD_ERROR", "failures": ["candidate_load_error"], "error": repr(e)}
+            out["elapsed_s"] = round(time.time() - t0, 6)
+            return out
+    if manifest is None:
+        out = {**base, "pass": True, "status": "NO_CANDIDATE_PENDING",
+               "reason_code": "ADMISSIBLE_SEAM_WIRED_AWAITING_CANDIDATE",
+               "note": "Seam wired; no candidate manifest/prereg path provided. Track A remains blocked on admissible liquidation data trigger."}
+        out["elapsed_s"] = round(time.time() - t0, 6)
+        return out
+    if not isinstance(manifest, dict):
+        out = {**base, "pass": False, "status": "NO-GO", "candidate_path": src_path,
+               "reason_code": "ADMISSIBLE_CANDIDATE_NOT_OBJECT", "failures": ["candidate_not_json_object"]}
+        out["elapsed_s"] = round(time.time() - t0, 6)
+        return out
+    try:
+        res = assess_ironflow_month_admissibility(manifest, for_resume_trigger=True)
+    except Exception as e:
+        out = {**base, "pass": False, "status": "NO-GO", "candidate_path": src_path,
+               "reason_code": "ADMISSIBLE_SEAM_EXCEPTION", "failures": ["seam_exception"], "error": repr(e)}
+        out["elapsed_s"] = round(time.time() - t0, 6)
+        return out
+    ok = res.get("pass") is True and res.get("verdict") == "GO"
+    out = {
+        **base,
+        "pass": ok,
+        "status": "GO" if ok else "NO-GO",
+        "candidate_path": src_path,
+        "reason_code": "ADMISSIBLE_SEAM_GO" if ok else "ADMISSIBLE_SEAM_NOGO",
+        "month": res.get("month"),
+        "failures": res.get("failures", []),
+        "guards": res.get("guards", {}),
+        "seam_result": {k: res.get(k) for k in ("track", "verdict", "fail_closed", "month", "min_trigger_month")},
+    }
+    out["elapsed_s"] = round(time.time() - t0, 6)
+    return out
 
 
 def _validate_probe_invariant_runtime_shape(obj) -> dict:
@@ -320,8 +420,21 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
         "probe_invariant_runtime_shape_valid": pis.get("probe_invariant_runtime_validation", {}).get("shape_valid"),
         "latest_live_probe": pis.get("latest_live_probe"),
     }
+    # 108 named admissible-seam guard at operator level (manifest-only, fail-closed; no network/no outcomes)
+    # Exposed as named surface; does not alter stable 104/105 pass/fail_closed_order semantics.
+    asc = admissible_seam_check(candidate_path=None, repo_root=root)
+    report["admissible_seam_state"] = asc
+    report["admissible_seam_wired"] = {
+        "pass": asc.get("pass") is True,
+        "status": asc.get("status"),
+        "reason_code": asc.get("reason_code"),
+        "fail_closed": asc.get("fail_closed"),
+        "network": asc.get("network"),
+        "reads_outcomes": asc.get("reads_outcomes"),
+        "reads_parquet": asc.get("reads_parquet"),
+    }
     report["elapsed_s"] = round(time.time() - t0, 6)
-    # fail-closed overall
+    # fail-closed overall (stable 104/105 semantics preserved)
     drift_ok = report["drift_preflight"].get("pass") is True
     gate_blocked_expected = report["gate_decision"].get("status") == "BLOCKED" and report["gate_decision"].get("outcomes_inspected") is False
     probe_ok = report["probe_invariant_state"].get("pass") is True

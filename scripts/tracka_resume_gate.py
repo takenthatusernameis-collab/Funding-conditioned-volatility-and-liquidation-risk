@@ -68,7 +68,8 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
            repo_root: Optional[Path] = None,
            research_state_dir: Optional[Path] = None,
            harness_repo_root: Optional[Path] = None,
-           skip_drift_preflight: bool = False) -> Dict[str, Any]:
+           skip_drift_preflight: bool = False,
+           admissible_manifest_path: Optional[str] = None) -> Dict[str, Any]:
     """Single operator resume decision. No network, no real research_state writes.
 
     102: Runs drift preflight BEFORE manifest/prereg decision logic (fail-closed).
@@ -96,6 +97,32 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
             "network": False,
             "writes_real_research_state": False,
         }
+    # 108: named admissible-seam check (manifest-only, no network/no parquet/no outcomes, fail-closed)
+    admissible_seam = None
+    if admissible_manifest_path is not None:
+        try:
+            from scripts.tracka_resume_check import admissible_seam_check
+            admissible_seam = admissible_seam_check(candidate_path=admissible_manifest_path, repo_root=rr)
+        except Exception as e:
+            admissible_seam = {"pass": False, "status": "NO-GO", "reason_code": "ADMISSIBLE_SEAM_EXCEPTION",
+                               "failures": ["seam_exception"], "error": repr(e),
+                               "fail_closed": True, "network": False, "reads_outcomes": False, "reads_parquet": False}
+        if not (admissible_seam or {}).get("pass"):
+            return {
+                "status": "BLOCKED",
+                "reason": "admissible seam validation failed (manifest-only, fail-closed, no outcomes inspected)",
+                "reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG",
+                "fail_closed_order": "drift_preflight->admissible_seam->manifest_prereg",
+                "outcomes_inspected": False,
+                "prereg_required": True,
+                "gate_script": "tracka_resume_gate",
+                "compat_fixture": bool(compat_fixture),
+                "drift_preflight": pre,
+                "admissible_seam_wired": {k: admissible_seam.get(k) for k in ("pass","status","reason_code","failures","month","fail_closed","network","reads_outcomes","reads_parquet") if k in admissible_seam},
+                "elapsed_s": round(time.time() - t0, 6),
+                "network": False,
+                "writes_real_research_state": False,
+            }
     h = FCLR010Harness(repo_root=hrr)
     data_path = Path(data_path)
     if output_dir is None:
@@ -119,13 +146,16 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
     result["gate_script"] = "tracka_resume_gate"
     result["compat_fixture"] = bool(compat_fixture)
     result["drift_preflight"] = pre
-    # 103: machine-stable ordering/reason markers (semantics unchanged)
+    if admissible_seam is not None:
+        result["admissible_seam_wired"] = {k: admissible_seam.get(k) for k in ("pass","status","reason_code","failures","month","fail_closed","network","reads_outcomes","reads_parquet") if k in admissible_seam}
+    # 103/108: machine-stable ordering/reason markers (semantics unchanged when no seam candidate)
+    _order = "drift_preflight->admissible_seam->manifest_prereg" if admissible_seam is not None else "drift_preflight->manifest_prereg"
     if result.get("status") == "BLOCKED" and pre.get("pass"):
         result.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
-        result.setdefault("fail_closed_order", "drift_preflight->manifest_prereg")
+        result.setdefault("fail_closed_order", _order)
     elif result.get("status") in ("READY_FROZEN", "GO", "COMPLETE"):
         result.setdefault("reason_code", "RESUME_READY_AFTER_DRIFT_PASS")
-        result.setdefault("fail_closed_order", "drift_preflight->manifest_prereg")
+        result.setdefault("fail_closed_order", _order)
     result["elapsed_s"] = round(time.time() - t0, 6)
     result["network"] = False
     result["writes_real_research_state"] = False
@@ -138,6 +168,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--output-dir", required=False, default=None, help="Output directory (tmp if omitted)")
     p.add_argument("--prereg", required=False, default=None, help="Pre-registration record path")
     p.add_argument("--manifest", required=False, default=None, help="Track A source manifest JSON path")
+    p.add_argument("--admissible-manifest", required=False, default=None, dest="admissible_manifest",
+                   help="108: candidate Ironflow month manifest/prereg JSON for named admissible-seam fail-closed check (manifest-only, no network/no parquet/no outcomes)")
     p.add_argument("--compat-fixture", action="store_true",
                    help="Explicit compat/test-fixture flag: preserve legacy minimal-fixture gate")
     p.add_argument("--skip-drift-preflight", action="store_true",
@@ -164,6 +196,7 @@ def main(argv=None) -> int:
         source_manifest=manifest,
         compat_fixture=args.compat_fixture,
         skip_drift_preflight=args.skip_drift_preflight,
+        admissible_manifest_path=args.admissible_manifest,
     )
     print(json.dumps(res, indent=2, sort_keys=True))
     return 0 if res["status"] == "READY_FROZEN" else 1
