@@ -400,3 +400,14 @@ Superseded 094 sweep/014 blocker consolidated here after frontier/handoff update
 | `campaign_sweep_tracka_20261105T101957Z.md` | `6917f0d387db83fc75d6c124e89dc064665506558172658d75ba0ed97eb299b5` | 8195 | # Track A Campaign Sweep (FCLR-NEXT-094, no-coast heavy) TIMESTAMP (UTC): 20261105T101957Z HEAD (baseline): c628e94c (working tree modified by 094 hardening; not committed here) RE |
 | `liquidation_forward_validate_014_blocker_20261105T101957Z.md` | `4eb2b84a8b565a5612b15106061d256e09c368e074488f67a88b18822bafa0ae` | 6362 | # LIQUIDATION_FORWARD_VALIDATE_014_BLOCKER (FCLR-NEXT-094) Timestamp (UTC): 20261105T101957Z Git SHA (baseline): c628e94c (working tree modified by 094 hardening; uncommitted) Bran |
 Removed: 2 files. Replaced by 015 blocker/095 sweep evidence.
+
+
+## 101 consolidation (20261105T161005Z, FCLR-NEXT-101 no-coast)
+Consolidated unreferenced timestamped Track A blocker/sweep files (verified no refs in AGENT_HANDOFF/frontier at removal time). Provenance preserved; files removed to maintain root md+json bound while wiring CLI drift invariants.
+| file | sha256 | bytes | excerpt |
+|---|---|---:|---|
+| `liquidation_forward_validate_012_blocker_20261105T082547Z.md` | `14d1271e97d59b7d6116c46e1ab488ea1caf770760e5bbacb80ed1f3e36520fa` | 5326 | # LIQUIDATION_FORWARD_VALIDATE_012_BLOCKER Timestamp (UTC): 20261105T082547Z Git SHA (HEAD): 69d08ad5 (working tree modified by FCLR-NEXT-092 hardening; pycache churn uncommitted) Branch: main Campaign: FCLR-NEXT-092-TRA |
+| `liquidation_forward_validate_013_blocker_20261105T092616Z.md` | `e58aff18dfe0341c30851d16c202092b5a0ed290fab59b4dddd769734464e498` | 5912 | # LIQUIDATION_FORWARD_VALIDATE_013_BLOCKER Timestamp (UTC): 20261105T092616Z Git SHA (HEAD): c628e94c (working tree modified by FCLR-NEXT-093 hardening; pycache churn pre-existing/uncommitted) Branch: main Campaign: FCLR |
+| `liquidation_forward_validate_016_blocker_20261105T120604Z.md` | `88c2c22f84768bbd5d613b8f53fcb8434512369cb02a0d760a1a23c088416ed5` | 3912 | # Track A Forward Validation Blocker — 016 (FCLR-NEXT-096)  **Timestamp (UTC):** 20261105T120604Z **Task:** FCLR-NEXT-096-TRACK-A-NO-COAST-WATCH-CONSOLIDATION-RUBRIC-PROVENANCE **Status:** **BLOCKED (data-gated, no rub |
+| `campaign_sweep_tracka_20261105T120604Z.md` | `1edbf7dbfd4e38daec59309f9b84181fecf5d5e23e2102c65ccfd9747c155873` | 7889 | # Track A Campaign Sweep — FCLR-NEXT-096 (No-Coast Watch Consolidation + Rubric Provenance)  **Timestamp (UTC):** 20261105T120604Z **HEAD (baseline):** fe487722 (working tree modified by 096 hardening; not committed) * |
+Removed: 4 files.

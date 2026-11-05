@@ -6,22 +6,22 @@
     "headers": {
       "content-length": "0",
       "connection": "close",
-      "server": "nginx/1.30.3",
-      "date": "Thu, 05 Nov 2026 09:26:03 GMT",
+      "server": "nginx/1.22.1",
+      "date": "Thu, 05 Nov 2026 16:06:38 GMT",
       "allow": "POST",
       "access-control-allow-origin": "*",
       "vary": "origin",
       "access-control-expose-headers": "*",
       "x-cache": "Error from cloudfront",
-      "via": "1.1 6470e4f88846ccba23ac958d39cf56d0.cloudfront.net (CloudFront)",
-      "x-amz-cf-pop": "IAD61-P5",
-      "x-amz-cf-id": "bmS6yIPLvJt8Vzab1xN4Mh328FuoLHZUM5eJds4s8WIA7bdiPmdbxQ=="
+      "via": "1.1 4a3e2659c603376048c0d381d7aee6f2.cloudfront.net (CloudFront)",
+      "x-amz-cf-pop": "SFO53-P11",
+      "x-amz-cf-id": "gFlEGZX9y74HdyAQXc543-bxIar2TfVotpdbStQmAZ-stspoWyCFdw=="
     },
     "body_len": 0,
     "body_preview": "",
     "error": true,
     "attempts": 1,
-    "probed_utc": "2026-11-05T09:26:03.090374+00:00",
+    "probed_utc": "2026-11-05T16:06:38.062388+00:00",
     "cache_hit": false
   },
   "https://raw.githubusercontent.com/hyperliquid-dex/hyperliquid-liquidations/HEAD/README.md": {
@@ -879,27 +879,27 @@
     "method": "GET",
     "status": 200,
     "headers": {
-      "date": "Thu, 05 Nov 2026 09:26:07 GMT",
+      "date": "Thu, 05 Nov 2026 16:06:41 GMT",
       "content-type": "text/html; charset=utf-8",
       "transfer-encoding": "chunked",
       "connection": "close",
       "x-content-type-options": "nosniff",
-      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=oACNk%2BwBHxwS2oOxr3HIE7b5aBbLBhdKaRsNRv1dK6kiZ8Jmx6Pe6pBiHE1K4E3EYM8TcysbpWTwR1%2FoSjGK0rx1IKZnx%2BPdRild%2BIj9pAp614hdkrs73ZXfBe6RaNbFih8%3D\"}]}",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=utVTL30IdgaM2qbHWmsLxZlkLOMkcsb7c1Ww9dEomVrD1yc7U4eH6mcT%2BQQPdKi7t%2FkPrYG9N%2Foa%2FVFYezYJM5SszFuNHDovbWjDY%2Bpmnoalgy%2Buq7XrJG7BfJjxBdNGJfE%3D\"}]}",
       "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
       "access-control-allow-origin": "*",
       "cache-control": "public, max-age=0, must-revalidate",
       "referrer-policy": "strict-origin-when-cross-origin",
       "link": "<https://fonts.googleapis.com>; rel=\"preconnect\"",
-      "server-timing": "cfEdge;dur=21,cfOrigin;dur=37",
+      "server-timing": "cfEdge;dur=33,cfOrigin;dur=154",
       "server": "cloudflare",
       "cf-cache-status": "DYNAMIC",
-      "cf-ray": "a55ad0a64b8a2c24-IAD"
+      "cf-ray": "a55d1b6defb0ebf1-SJC"
     },
     "body_len": 90996,
     "body_preview": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>Laevitas - Derivatives Data Without The S",
     "attempts": 1,
     "content_kind": "html",
-    "probed_utc": "2026-11-05T09:26:07.149680+00:00",
+    "probed_utc": "2026-11-05T16:06:41.779268+00:00",
     "cache_hit": false
   },
   "https://docs.glassnode.com/": {
