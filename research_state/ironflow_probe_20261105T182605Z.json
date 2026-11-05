@@ -1,6 +1,6 @@
 {
-  "probe_id": "ironflow_probe_20261105T181938Z",
-  "timestamp_utc": "2026-11-05T18:19:38.490157+00:00",
+  "probe_id": "ironflow_probe_20261105T182605Z",
+  "timestamp_utc": "2026-11-05T18:26:05.410553+00:00",
   "dataset": "ironflow/hyperliquid-liquidations",
   "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
   "tree": {
@@ -11,11 +11,11 @@
       "Content-Type": "application/json; charset=utf-8",
       "Content-Length": "11576",
       "Connection": "close",
-      "Date": "Thu, 05 Nov 2026 18:19:38 GMT",
+      "Date": "Thu, 05 Nov 2026 18:26:05 GMT",
       "ETag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
       "X-Powered-By": "huggingface-moon",
-      "X-Request-Id": "Root=1-6aecc8ba-1f3be1dd42e07224361c4ae9",
-      "RateLimit": "\"api\";r=499;t=102",
+      "X-Request-Id": "Root=1-6aecca3d-2609d3f279da67de22d88f8b",
+      "RateLimit": "\"api\";r=499;t=15",
       "RateLimit-Policy": "\"fixed window\";\"api\";q=500;w=300",
       "cross-origin-opener-policy": "same-origin",
       "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -27,7 +27,7 @@
       "Via": "1.1 5130f24afa7aed6f49e6e72496306d12.cloudfront.net (CloudFront)",
       "X-Amz-Cf-Pop": "IAD55-P8",
       "Alt-Svc": "h3=\":443\"; ma=86400",
-      "X-Amz-Cf-Id": "HdrvG4eP2UcTbS4Xvzj0ghXsMYpSpB1pQsImO92fMZU3KNlbq5Sh6w==",
+      "X-Amz-Cf-Id": "_PXT7OWiotiAgxyLbFTTzjAB_fgveWQ5uF8VlinVxIaTCkTcy4sqXA==",
       "Strict-Transport-Security": "max-age=31536000"
     },
     "parsed": true,
@@ -798,7 +798,7 @@
   "probe_invariant_runtime": {
     "pass": true,
     "live_probes": [
-      "ironflow_probe_20261105T181938Z.json"
+      "ironflow_probe_20261105T182605Z.json"
     ],
     "digests": [
       "ironflow_probe_digest_latest.json"
