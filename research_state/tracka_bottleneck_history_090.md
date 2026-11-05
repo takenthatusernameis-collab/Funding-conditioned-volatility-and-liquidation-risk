@@ -1,3 +1,9 @@
+# Track A Bottleneck Removal History (090)
+Generated 20261105T081200Z.
+
+
+## bottleneck_removal_tracka_20261105T033038Z.md (17 lines)
+```
 # BOTTLENECK REMOVAL + TIMING (STEP 5)
 Timestamp (UTC): __TS__
 Git SHA (HEAD): 83e151d03dc1046b9af405e8c26f2c6b94c7614b
@@ -15,3 +21,4 @@ Git SHA (HEAD): 83e151d03dc1046b9af405e8c26f2c6b94c7614b
 
 ## Remaining opportunities
 - Further unify cache formats, tighten backoff, profile hot paths if needed
+```

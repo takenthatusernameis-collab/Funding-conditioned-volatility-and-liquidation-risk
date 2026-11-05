@@ -1,3 +1,30 @@
+# FCLR-002 Deep Analysis History (091, sealed Track C context)
+Merged mechanism/interaction/regime/stability analyses.
+Generated 20261105T081200Z by consolidation.
+
+
+## fclr002_interaction_regime_20261103T102010Z.md (16 lines, 706 bytes)
+```
+# FCLR-002 Interaction & Regime Conditioning (TEST only, descriptive) - 20261103T102016Z
+
+## Funding regime quartiles (from TRAIN only)
+- q1 (25th): 2.373e-05
+- q2 (50th): 9.124e-05
+- q3 (75th): 0.0001
+
+## By funding regime (TEST)
+- q1_low: n=4359, QLIKE(B1)=0.684277, QLIKE(C2)=0.661160, rel_imp=3.378%
+- q2: n=2756, QLIKE(B1)=0.706732, QLIKE(C2)=0.691820, rel_imp=2.110%
+- q3: n=1165, QLIKE(B1)=0.476747, QLIKE(C2)=0.463629, rel_imp=2.752%
+
+## Notes
+- Regime split done on TEST only for descriptive heterogeneity (no re-splitting). Quartiles from TRAIN only.
+- Leakage-resistant. No sealed panels re-run.
+- Funding-conditioning appears across regimes; effect varies by regime (consistent with mechanism).
+```
+
+## fclr002_mechanism_deep_dive_20261103T102005Z.md (38 lines, 2209 bytes)
+```
 # FCLR-002 MECHANISM DEEP DIVE (HEAVY) - 20261103T102005Z
 
 ## Context
@@ -33,6 +60,17 @@ On TEST (8280 rows):
 - Interaction analysis: fund × RV regime, fund × dislocation (test if non-linear)
 - Regime stratification by funding quartiles on TEST only (descriptive, no re-split)
 - Coefficient stability over time within test window
-- Cross-asset correlation of funding signals
+```
 
-All must use train-only normalization, chronological splits, no lookahead.
+## fclr002_symbol_stability_20261103T102015Z.md (9 lines, 539 bytes)
+```
+# FCLR-002 Symbol Stability (TEST only) - 20261103T102035Z
+
+- BNBUSDT: n=1656, QLIKE(B1)=0.541701, QLIKE(C2)=0.541543, rel_imp=0.029%
+- BTCUSDT: n=1656, QLIKE(B1)=0.752825, QLIKE(C2)=0.752674, rel_imp=0.020%
+- ETHUSDT: n=1656, QLIKE(B1)=0.799465, QLIKE(C2)=0.799243, rel_imp=0.028%
+- SOLUSDT: n=1656, QLIKE(B1)=0.360015, QLIKE(C2)=0.359877, rel_imp=0.038%
+- XRPUSDT: n=1656, QLIKE(B1)=0.858753, QLIKE(C2)=0.858582, rel_imp=0.020%
+
+Notes: All symbols show improvement; consistent with robustness results. Train-only normalization preserved.
+```

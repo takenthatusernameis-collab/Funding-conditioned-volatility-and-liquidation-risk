@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T061206Z",
-      "notes": "FCLR-NEXT-085 executed 20261105T061206Z: trigger probe NO DATA; bottlenecks minimized; source hardening done; FCLR-010 fixtures+harness ready offline; tests green (136). Blocked pending ironflow>=2026-11 or rubric-GO alternative with prereg before outcomes.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_008_blocker_20261105T061206Z.md"
+      "last_checked": "20261105T081715Z",
+      "notes": "FCLR-NEXT-091 executed 20261105T081715Z: trigger NO DATA (data_through 2026-10, 2026-11..2027-02 absent). research_state 191->179; 8 script-path files removed; 9 artifacts consolidated into histories; 6 ref-free transients removed; 2 dup+1 snapshot merged. ironflow probes=2. Harness<0.05s, monitor~0.46s. Tests 146/146 OK. Rubric maximally strict+tested; prereg gate enforced. Blocked pending ironflow>=2026-11 or rubric-GO Hyperliquid source with PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_011_blocker_20261105T081715Z.md"
     }
   ],
   "coverage": {
@@ -112,12 +112,12 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-05T05:17:23Z",
+  "last_updated": "2026-11-05T08:17:15Z",
   "timestamp": "20261104T005200Z",
-  "last_checked": "2026-11-05T07:24:16Z",
+  "last_checked": "2026-11-05T08:17:15Z",
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_010_blocker_20261105T072416Z.md",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_011_blocker_20261105T081715Z.md",
   "artifact_churn_090": {
     "ironflow_probe_files_before": 38,
     "ironflow_probe_files_after": 2,
@@ -131,5 +131,22 @@
     "mechanism": "scripts/monitor_ironflow_liquidations.py _consolidate_ironflow_probes now writes ONE running archive (ironflow_probe_digest_latest.json) instead of a per-run timestamped digest; legacy migration via scripts/migrate_digest_archive_090.py; redundant Track A families merged by scripts/merge_redundant_artifacts_090.py; unreferenced 76-byte trackc_recompute_audit stub dropped.",
     "tests": "python -m unittest discover tests -> 138 tests OK (2 new TestConsolidation cases added for the 090 fix).",
     "resume_condition_unchanged": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only."
+  },
+  "artifact_churn_091": {
+    "research_state_md_json_before": 191,
+    "research_state_md_json_after": 179,
+    "net_delta": -12,
+    "consolidated_into_histories": 9,
+    "removed_unreferenced_transient": 6,
+    "removed_unreferenced_duplicates": 2,
+    "removed_temp_diag_scripts": 6,
+    "removed_zero_ref_fast_scripts": 2,
+    "merged_snapshot": 1,
+    "ironflow_probe_files": 2,
+    "tests_before": 138,
+    "tests_after": 146,
+    "harness_cold_s": "<0.05",
+    "monitor_quick_s": "~0.46",
+    "resume_condition_unchanged": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only. PREREGISTER BEFORE INSPECTING OUTCOMES."
   }
 }

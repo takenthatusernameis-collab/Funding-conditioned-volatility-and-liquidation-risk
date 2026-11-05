@@ -40,7 +40,7 @@ FAMILIES = [
     ("tracka_dryrun_history_090.md",
      "tracka_fclr010_dryrun_hardened_*.md", None, "archive"),
     ("tracka_campaign_sweep_history_090.md",
-     "campaign_sweep_*.md", "campaign_sweep_tracka_20261105T061550Z.md", "archive"),
+     "campaign_sweep_*.md", "(archived)", "archive"),
     # [HEAVY-090] trackc_recompute_audit_20261104T175619Z_20261104T175619Z.md is a
     # 76-byte stub containing only its own title, a duplicate of the canonical
     # trackc_recompute_audit_20261104T175643Z.md (3,857 bytes, full audit).

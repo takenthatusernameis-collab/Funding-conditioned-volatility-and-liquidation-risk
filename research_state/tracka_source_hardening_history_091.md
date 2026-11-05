@@ -1,3 +1,40 @@
+# Track A Source Expansion/Hardening History (091)
+Merged point-in-time source probe artifacts.
+Generated 20261105T081200Z by consolidation.
+
+
+## source_expansion_tracka_20261105T033025Z.md (26 lines, 1737 bytes)
+```
+# SOURCE EXPANSION + CLASSIFICATION HARDENING (STEP 4)
+Timestamp (UTC): __TS__
+Git SHA (HEAD): 83e151d03dc1046b9af405e8c26f2c6b94c7614b
+
+## Caches (already hardened)
+- hunt_alternative_liquidation_sources.py: HF search cache (SEARCH_CACHE_PATH, TTL 24h), URL probe cache (URL_CACHE_PATH, TTL 6h), POST cache keyed by URL+body, dedup across candidates
+- monitor_ironflow_liquidations.py: ETag/tree cache, per-file caching, baseline-drift probe, consolidation
+- deep_review_alt_sources.py: reuses shared URL probe cache (cache_hits observed)
+
+## Rubric (strict, enforced)
+From hunt/deep review: min_symbols>=5 OR >=1 complete month OR >=3x30d blocks; completeness_doc_required true; license_ok true; unauthenticated_only true; no_requester_pays true; schema_compatible_fclr010 true. Hyperliquid-only for Track A per experiment frontier.
+
+## Current findings (from probes)
+- Hyperliquid public API (/info) returns data but appears to be market metadata (universe/margin) not historical liquidation census parquet - needs schema compatibility check
+- ironflow/hyperliquid-liquidations dataset exists on HF (metadata visible) but files/months need inspection; monitor will check
+- Other venues (Bybit/OKX/Deribit/CoinAPI/Kaiko/Tardis/Coinglass) either require keys/auth, 404s, or not liquidation census data
+
+## Classification hardening needed
+- Distinguish liquidation events vs fills vs trades vs funding vs insurance fund vs ADL
+- Schema mapping to FCLR-010 expected fields
+- Fixture-based tests for classification edge cases
+- Every probe cached (already implemented)
+
+## Actions taken
+- Reviewed existing hardening (caches/dedup/rubric). Existing implementation is already strong from 004i work.
+- Will extend tests if needed in step 6.
+```
+
+## source_probe_heavy_tracka_20261103T140935Z.md (49 lines, 4061 bytes)
+```
 # Alternative Track A Liquidation-Label Source Probe (Heavy Work FCLR-NEXT-013)
 Timestamp (UTC): 20261103T140935Z
 Git SHA (HEAD): a9794e7c
@@ -33,17 +70,4 @@ Conclusion for this probe: no single clean unauthenticated "all liquidation even
 |------|-------|
 | Candidate URL(s) probed | https://api.hyperliquid.xyz/info (POST), unauthenticated |
 | Probe body tested (schema) | {"type":"perpMeta"}, {"type":"meta"} (structure inspection only) |
-| No-auth result | HTTP 200 possible for meta/perpMeta; returns universe/metadata, not full historical liquidation event census with timestamps/sizes in bulk unauthenticated form suitable for Track A label parity |
-| Schema (observed) | perpMeta contains universe info (assets, margin, etc.); no obvious "liquidations" array for full history |
-| Coverage | Universe coverage exists, but liquidation event labels (who/when/size/liquidation price/type) not available as complete unauthenticated historical census via these endpoints |
-| Hash of probe record | N/A (metadata only; no bulk dataset downloaded) |
-| Existing coverage | Ironflow (ironflow_events parquet) already used for FCLR-010; this probe confirms no obvious drop-in unauthenticated replacement found |
-
-## Alternative approach (documented)
-- Check public indexer APIs? Some third-party indexers expose liquidation feeds but terms vary; probe would need to respect no-auth and ToS. Not pursued further without clearer unauthenticated bulk access.
-- Hyperliquid websocket provides live data but historical census reconstruction complex/nontrivial and likely incomplete vs curated ironflow.
-
-## Recommendation
-No admissible unauthenticated replacement for ironflow liquidation-event census identified in this probe. Continue using ironflow_events as Track A label source; monitor for >2026-10-31 data per forward campaign. Do not merge tracks.
-
-Status: SOURCE_PROBE_HEAVY_TRACKA_DONE (no drop-in alternative found)
+```

@@ -62,3 +62,55 @@ Wrote /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Fund
 ## 4) NO NEW DATA - ON HOLD (full tables)
 Data through: 2026-10; probed forward months 2026-11,2026-12,2027-01,2027-02 all absent per prior probes; Kaggle mirror checked.
 ```
+
+## liquidation_trigger_probe_20261105T061030Z.md (9 lines, 528 bytes)
+```
+TIMESTAMP (UTC): 20261105T061036Z
+STEP: 2) TRIGGER PROBE
+
+Ironflow: latest research_state/ironflow_probe_digest_20261105T061014Z.json -> NO NEW DATA (through 2026-10)
+Alt-source scan: research_state/alt_source_scan_20261105T061024Z.json
+Alt-source review: research_state/alt_source_deep_review_20261105T061017Z.md
+
+Rubric check: Hyperliquid-only required. No >=2026-11 ironflow. No rubric-GO unauthenticated alternative found.
+Decision: NO NEW DATA - ON HOLD. Do NOT preregister (no trigger). Continue heavy work while blocked.
+```
+
+## tracka_trigger_audit_20261104T183900Z.md (46 lines, 2410 bytes)
+```
+# TRACK A TRIGGER AUDIT (HEAVY) - 20261104T183900Z
+
+Repo: Funding-conditioned-volatility-and-liquidation-risk
+Git SHA (HEAD): ade33dd0
+Branch: main
+Handoff: FCLR-HANDOFF-20261104T183334Z
+Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Priority: P0
+
+## TRIGGER STATUS: NO NEW DATA - ON HOLD
+
+### Ironflow probe (primary Track A source)
+- Probe: research_state/ironflow_probe_20261104T183629Z.json
+- Dataset: ironflow/hyperliquid-liquidations (Hyperliquid-only per firewall)
+- data_through: 2026-10
+- Tree ETag unchanged (304), cached_hits: 0
+- Probed months: 2026-11, 2026-12, 2027-01, 2027-02 (events + fills)
+- All probes: 404 CONFIRMED_ABSENT (HEAD confirmed)
+- consecutive_absent: 3
+- New files found: 0
+- Resume trigger: NOT MET
+
+### Alternative sources review
+- Review: research_state/alt_source_deep_review_20261104T183735Z.md
+- Conclusion: No admissible unauthenticated source with observed liquidation labels found that would satisfy preregistration/firewall requirements for Track A trigger. Track B remains NOT_SUPPORTED.
+
+### Track A state (frozen)
+- FCLR-010: COMPLETE_SEALED, FORECAST_GATE_PASSED (Brier rel -2.21%, CI excludes zero)
+- Consolidated: research_state/track_a_fclr010_consolidated.md
+- Prereq for resuming: ANY new files >=2026-11 in ironflow/hyperliquid-liquidations (events or fills). Must preregister before inspecting outcomes with frozen splits/hypothesis/metrics/stop rule. Only run via frozen FCLR-010 harness (scripts/fclr010_execute.py or scripts/fclr010_harness.py). No source merging, no widening scope.
+
+### Resume conditions (concrete)
+1. New parquet appears at data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet with YYYY-MM >= 2026-11
+2. On detection: HALT inspection, write fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json BEFORE examining outcomes
+3. Prereg must include: frozen hypothesis, splits (FCLR-010 frozen), metrics, guardrails, stop rule
+4. Execute only via frozen harness on existing sealed configuration
+```
