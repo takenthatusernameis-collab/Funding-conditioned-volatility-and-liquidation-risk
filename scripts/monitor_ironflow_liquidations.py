@@ -2107,5 +2107,92 @@ def evaluate_resume_decision(state=None, rc=None, tree_change=None, new_files=No
     return {"new_data_path": bool(reasons), "reasons": reasons}
 
 
+# Enhanced 004i fast-path cache (restored for test compatibility + offline
+# resume simulation). TTL-bounded so a stale fastpath never hides a new month.
+FAST_PATH_CACHE_TTL_SEC = 300
+FAST_PATH_STATE = REPO_ROOT / "research_state" / "ironflow_fastpath_cache.json"
+
+
+def load_fastpath_cache():
+    try:
+        if FAST_PATH_STATE.exists():
+            return json.loads(FAST_PATH_STATE.read_text())
+    except Exception:
+        pass
+    return {}
+
+
+def save_fastpath_cache(cache):
+    try:
+        FAST_PATH_STATE.write_text(json.dumps(cache, indent=2))
+    except Exception:
+        pass
+
+
+def tree_get_cached(timeout=60, use_cache=True):
+    """GET tree with enhanced ETag caching and TTL-based fast path."""
+    from datetime import datetime, timezone
+
+    cache = load_fastpath_cache() if use_cache else {}
+    headers = {"User-Agent": "fclr-monitor/1.0"}
+    if_none_match = None
+    # Try ETag first
+    try:
+        st = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
+        if_none_match = st.get("tree_etag")
+    except Exception:
+        pass
+    if not if_none_match and cache.get("tree_etag"):
+        if_none_match = cache.get("tree_etag")
+    if if_none_match:
+        headers["If-None-Match"] = if_none_match
+    # TTL fast path: if recent and unchanged, can short-circuit
+    last_ts = cache.get("last_tree_ts")
+    if use_cache and last_ts and if_none_match and cache.get("tree_status") == 304:
+        try:
+            lt = datetime.fromisoformat(last_ts.replace('Z', '+00:00'))
+            if (datetime.now(timezone.utc) - lt).total_seconds() < FAST_PATH_CACHE_TTL_SEC:
+                return {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True, "fastpath": True}
+        except Exception:
+            pass
+    req = Request(TREE_URL, headers=headers)
+    try:
+        with urlopen(req, timeout=timeout) as resp:
+            status = resp.getcode()
+            resp_headers = dict(resp.headers.items())
+            body = resp.read()
+            etag = resp_headers.get("ETag")
+            # update caches
+            try:
+                st = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
+                if etag:
+                    st["tree_etag"] = etag
+                st["tree_last_status"] = status
+                STATE_PATH.write_text(json.dumps(st, indent=2))
+            except Exception:
+                pass
+            cache["tree_etag"] = etag
+            cache["last_tree_ts"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            cache["tree_status"] = status
+            save_fastpath_cache(cache)
+            return {"ok": True, "status": status, "headers": resp_headers, "body": body, "url": TREE_URL}
+    except HTTPError as e:
+        try:
+            body = e.read()
+        except Exception:
+            body = b""
+        resp_headers = dict(getattr(e, "headers", {}) or {})
+        if e.code == 304:
+            cache["last_tree_ts"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            cache["tree_status"] = 304
+            save_fastpath_cache(cache)
+            return {"ok": True, "status": 304, "headers": resp_headers, "body": b"", "url": TREE_URL, "not_modified": True}
+        return {"ok": False, "status": e.code, "headers": resp_headers, "body": body, "url": TREE_URL}
+    except URLError as e:
+        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": TREE_URL}
+    except Exception as e:
+        return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": TREE_URL}
+
+
 if __name__ == "__main__":
     main()
