@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.tracka_rubric import assess_candidate
+from scripts.tracka_rubric import assess_candidate, assess_strict_manifest, assess_minimal_fixture
 from scripts.fclr010_harness import FCLR010Harness
 
 
@@ -43,14 +43,52 @@ def _valid_go():
     }
 
 
+def _valid_strict_manifest_go():
+    """097: full manifest with machine-verifiable provenance/label/coverage evidence."""
+    c = _valid_go()
+    c.update({
+        "source_url": "https://example.invalid/hyperliquid/observed_liquidations",
+        "dataset_id": "hl-observed-liquidations-v1",
+        "access_provenance": "unauthenticated public dataset; Hyperliquid-only; observed fills",
+        "label_definition": "exchange_observed_liquidation_fill_notional",
+        "coverage_months": 1,
+        "coverage_evidence_required": True,
+        "complete_months_list": ["2026-11"],
+        "claims_3x30d_blocks": True,
+        "block_count": 3,
+        "block_evidence": [
+            {"start": "2026-11-01", "end": "2026-11-30", "days": 30},
+            {"start": "2026-12-01", "end": "2026-12-30", "days": 30},
+            {"start": "2027-01-01", "end": "2027-01-30", "days": 30},
+        ],
+        "canonical_symbol_map": {"BTC": "BTC", "ETH": "ETH", "SOL": "SOL", "AVAX": "AVAX", "ARB": "ARB", "DOGE": "DOGE"},
+        "symbol_normalization_proof": {"normalized_map": {"BTC": "BTC", "ETH": "ETH", "SOL": "SOL", "AVAX": "AVAX", "ARB": "ARB", "DOGE": "DOGE"}},
+        "symbol_proof_covers_claimed_required": True,
+    })
+    return c
+
+
 def run() -> dict:
     t0 = time.time()
     checks = {}
-    # 1) rubric
+    # 1) rubric (097: strict-manifest default path + compat)
     r_go = assess_candidate(_valid_go())
     checks["rubric_go"] = {"pass": r_go["go"] is True and r_go["verdict"] == "GO", "failures": r_go["failures"]}
     r_no = assess_candidate({})
     checks["rubric_fail_closed"] = {"pass": r_no["go"] is False and len(r_no["failures"]) >= 3, "n_failures": len(r_no["failures"])}
+    # strict mode rejects minimal-only GO-shaped candidate lacking machine-verifiable evidence
+    r_strict_min = assess_strict_manifest(_valid_go())
+    checks["rubric_strict_rejects_minimal_go_shaped"] = {
+        "pass": r_strict_min["go"] is False and any(f in r_strict_min["failures"] for f in
+                ("observed_access_provenance_missing", "label_definition_missing")),
+        "failures": r_strict_min["failures"], "mode": "strict_tracka_manifest",
+    }
+    # compat path preserves legacy minimal behavior
+    r_compat = assess_minimal_fixture(_valid_go())
+    checks["rubric_minimal_fixture_compat_preserved"] = {"pass": r_compat["go"] is True, "failures": r_compat["failures"]}
+    # strict mode accepts full manifest with machine-verifiable evidence
+    r_strict_full = assess_strict_manifest(_valid_strict_manifest_go())
+    checks["rubric_strict_accepts_full_manifest"] = {"pass": r_strict_full["go"] is True, "failures": r_strict_full["failures"]}
     # 2) fixture manifest
     fx = ROOT / "tests" / "fixtures" / "tracka" / "manifest.json"
     if fx.exists():

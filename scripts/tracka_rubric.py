@@ -81,29 +81,47 @@ def _norm_symbols(candidate: Dict[str, Any]) -> List[str]:
     return out
 
 
-def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
-    """Assess a candidate source dict against the strict Track A rubric.
+def _is_go_shaped_observed_hl(candidate: Dict[str, Any], norm_syms: List[str]) -> bool:
+    """Heuristic: candidate claims/looks like an observed Hyperliquid GO attempt.
+    Used to apply strict full-manifest defaults only where meaningful (097)."""
+    venue = str(candidate.get("venue") or "").strip().lower()
+    unique_n = len(set(norm_syms)) if norm_syms else int(candidate.get("symbol_count") or 0)
+    return (
+        venue in _NORMALIZED_HYPERLIQUID
+        and bool(candidate.get("unauthenticated", False))
+        and not candidate.get("requires_api_key")
+        and not candidate.get("requires_signature")
+        and not candidate.get("requester_pays")
+        and bool(candidate.get("observed_liquidations", False))
+        and not candidate.get("modeled_or_proxy")
+        and not candidate.get("merges_non_hyperliquid")
+        and unique_n >= RUBRIC["min_symbols"]
+        and _has_required_schema(candidate.get("schema_fields") or [])
+    )
+
+
+def assess_candidate(candidate: Dict[str, Any], *, strict_tracka_manifest: bool = False,
+                     minimal_fixture_compat: bool = False) -> Dict[str, Any]:
+    """Assess a candidate source dict against the Track A rubric.
+
+    Modes (097):
+      - strict_tracka_manifest=True: strict full-manifest default path. For GO-shaped
+        observed Hyperliquid claims, fail-closes on missing machine-verifiable
+        provenance/label/coverage/block/raw-epoch evidence by default (converts 096
+        opt-in flags to defaults for that path).
+      - minimal_fixture_compat=True: preserves legacy 093-096 minimal fixture behavior;
+        strict defaults are not auto-applied.
+      - default (both False): backward-compatible legacy behavior preserved exactly.
 
     Expected candidate keys (all explicit; missing = fail-closed):
-      - venue: str
-      - unauthenticated: bool
-      - requires_api_key: bool
-      - requires_signature: bool
-      - requester_pays: bool
-      - observed_liquidations: bool
-      - modeled_or_proxy: bool
-      - merges_non_hyperliquid: bool
-      - symbol_count: int
-      - symbols: list[str] (optional)
-      - completeness_documented: bool
-      - license_ok: bool
-      - schema_fields: list[str]
-      - coverage_months: int (optional, informational)
-      - partial_month_coverage: bool (optional, fail if true)
-      - schema_conflicts: bool/list (optional, fail if truthy)
-      - row_mix_observed_modeled: bool (optional, fail if true)
-      - timestamp_normalized_utc: bool (optional, fail if false when schema present)
-      - coverage_complete_months: int (optional; if provided must be >=1 when months claimed)
+      - venue, unauthenticated, requires_api_key, requires_signature, requester_pays,
+        observed_liquidations, modeled_or_proxy, merges_non_hyperliquid, symbol_count,
+        symbols (optional), completeness_documented, license_ok, schema_fields,
+        coverage_months/coverage_complete_months/partial_month_coverage (optional),
+        schema_conflicts/row_mix_observed_modeled/timestamp_normalized_utc (optional).
+    Strict-manifest evidence keys (097): source_url/dataset_id/access_provenance/download_path/repo_url,
+      label_definition, complete_months_list, block_count+block_evidence (when claiming blocks),
+      timestamp_unit+timestamp_normalized_utc for raw epochs.
     """
     failures: List[str] = []
     venue_raw = (candidate.get("venue") or "").strip()
@@ -211,9 +229,31 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
             failures.append("license_provenance_missing")
     if not _has_required_schema(candidate.get("schema_fields") or []):
         failures.append("schema_mismatch")
+    # 097: strict full-manifest default path for GO-shaped observed Hyperliquid claims.
+    # Converts 096 opt-in flags to defaults on this path; minimal_fixture_compat preserves legacy.
+    go_shaped_strict = (strict_tracka_manifest and not minimal_fixture_compat and
+                        _is_go_shaped_observed_hl(candidate, _norm_symbols(candidate)))
+    strict_mode = strict_tracka_manifest and not minimal_fixture_compat
+    if go_shaped_strict:
+        candidate = dict(candidate)
+        candidate.setdefault("access_provenance_required", True)
+        candidate.setdefault("label_definition_required", True)
+        candidate.setdefault("strict_observed_semantics", True)
+        # coverage/block evidence required when months/blocks are claimed
+        if candidate.get("coverage_months") is not None:
+            try:
+                if int(candidate.get("coverage_months") or 0) >= 1:
+                    candidate.setdefault("coverage_evidence_required", True)
+            except Exception:
+                candidate.setdefault("coverage_evidence_required", True)
+        if candidate.get("claims_3x30d_blocks") or candidate.get("block_count") is not None:
+            candidate.setdefault("claims_3x30d_blocks", True)
+        if candidate.get("canonical_symbol_map") and candidate.get("symbol_proof_covers_claimed_required") is None:
+            candidate.setdefault("symbol_proof_covers_claimed_required", True)
+
     # 096: access/provenance required for any candidate claiming observed Hyperliquid data
     # Fail-closed when source/dataset/access provenance fields are present-in-manifest but empty,
-    # or when access_provenance_required=true (full admissibility manifest mode).
+    # or when access_provenance_required=true (full admissibility manifest mode / 097 strict path).
     if candidate.get("access_provenance_required"):
         has_access = any(str(candidate.get(k) or "").strip() for k in ("source_url", "dataset_id", "access_provenance", "download_path", "repo_url"))
         if not has_access:
@@ -257,10 +297,15 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
         except Exception:
             failures.append("symbol_normalization_proof_incomplete")
 
-    # 096: raw epoch fields claimed require explicit timestamp unit/normalization evidence
+    # 096/097: raw epoch fields claimed require explicit timestamp unit/normalization evidence
     raw_epoch = candidate.get("raw_epoch_fields") or candidate.get("epoch_timestamp_fields")
     if raw_epoch and candidate.get("schema_fields") and not candidate.get("timestamp_normalized_utc"):
         failures.append("timestamp_unit_ambiguous")
+    # 097 strict: if schema has timestamp but normalization is not explicitly true for GO-shaped observed HL, fail-closed
+    if strict_mode and _is_go_shaped_observed_hl(candidate, _norm_symbols(candidate)) and candidate.get("schema_fields"):
+        if candidate.get("timestamp_normalized_utc") is not True:
+            if "timestamp_not_normalized" not in failures and "timestamp_unit_ambiguous" not in failures:
+                failures.append("timestamp_not_normalized")
 
 
     failures = sorted(set(failures))
@@ -273,6 +318,8 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
         "venue": venue,
         "venue_raw": venue_raw,
         "symbol_count": len(set(norm_syms)) if norm_syms else sym_n,
+        "strict_tracka_manifest": bool(strict_tracka_manifest and not minimal_fixture_compat),
+        "minimal_fixture_compat": bool(minimal_fixture_compat),
     }
 
 
@@ -280,3 +327,13 @@ if __name__ == "__main__":
     import json, sys
     sample = json.loads(sys.stdin.read() or "{}")
     print(json.dumps(assess_candidate(sample), indent=2))
+
+
+def assess_strict_manifest(candidate: Dict[str, Any]) -> Dict[str, Any]:
+    """097: strict full-manifest default path (no compat)."""
+    return assess_candidate(candidate, strict_tracka_manifest=True, minimal_fixture_compat=False)
+
+
+def assess_minimal_fixture(candidate: Dict[str, Any]) -> Dict[str, Any]:
+    """097: explicit legacy/minimal fixture compat path (preserves 093-096 behavior)."""
+    return assess_candidate(candidate, strict_tracka_manifest=False, minimal_fixture_compat=True)

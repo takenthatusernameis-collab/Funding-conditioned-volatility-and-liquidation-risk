@@ -2,7 +2,7 @@
   "registry_version": "1.1",
   "generated": "20261105T101957Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-095 EXECUTED (2026-11-05T11:04:45Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: tracka_rubric.py extended (+18 adversarial, 52 rubric total) for timestamp unit ambiguity, license provenance required when claimed, modeled/proxy/estimate schema columns, row-count conflicts, canonical symbol-map proof. scripts/tracka_resume_check.py added (offline, no network, no real research_state writes) PASS <5s by test. Monitor/resume side-effect isolation tests green. Trigger probes NO DATA (monitor quick, deep_review, hunt; no rubric-GO). Root md+json 155 (094 sweep/014 blocker consolidated to history \u00a7095; 095 sweep/015 blocker added). Ironflow probes==2. Watch trigger_harden_20261104T* zero-safe-removable=0 (28 files, generator refs). PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-096.",
+  "current_status": "CAMPAIGN FCLR-NEXT-097 EXECUTED (2026-11-05T12:24:44Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: tracka_rubric.py strict full-manifest default path + minimal_fixture_compat (097, 093-096 preserved); resume check validates strict rejects minimal-only GO-shaped + compat preserved + strict accepts full manifest (PASS <5s, offline/no-network/no-real-writes). Monitor network-isolation proofs added (6 tests: state-only/decision/simulate/--verify/--decision tmp-isolated, patched network asserts-not-called, real research_state unchanged). Watch trigger_harden residue audited: live 1, non-20261104T 0; generator-compatible (non-recursive root glob) proof; no unsafe moves. Trigger probes NO DATA (quick/deep_review/hunt; no rubric-GO strict/legacy). Root md+json 159 (+2 required evidence). Ironflow probes==2. Tests 244 OK; rubric adversarial 093-097=79. PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-098.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T110445Z",
-      "notes": "FCLR-NEXT-095 20261105T110445Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent). Rubric hardened (timestamp unit ambiguity, license provenance, modeled/proxy/estimate schema cols, row-count conflicts, canonical symbol-map proof) +18 (52 total). tracka_resume_check.py PASS <5s, offline/no network/no real research_state writes. Root 155; probes==2; watch trigger_harden zero-safe-removable=0 (28 files, generators refs). PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
+      "last_checked": "20261105T122444Z",
+      "notes": "FCLR-NEXT-097 20261105T122444Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent). Strict full-manifest rubric defaults+compat added (097, 093-096 preserved); minimal GO-shaped NO-GO in strict, GO in compat; resume check 8 checks PASS <5s offline/no-network/no-real-writes. Monitor state-only/decision/verify network-isolation proofs (+6) green. Root 159; probes==2; watch trigger_harden live 1, non-20261104T 0, generator-compatible audit. PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
       "artifact_churn_092": {
         "research_state_mdjson_root": 184,
         "ironflow_probe_files": 2,
@@ -137,6 +137,25 @@
         "consolidated_superseded_094_artifacts": 2,
         "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
         "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md"
+      },
+      "artifact_churn_097": {
+        "research_state_mdjson_root": 159,
+        "ironflow_probe_files": 2,
+        "tests_total": 244,
+        "rubric_adversarial_093_097": 79,
+        "rubric_adversarial_added_097": 12,
+        "offline_resume_script": "scripts/tracka_resume_check.py",
+        "offline_resume_checks": 8,
+        "offline_resume_pass_under_5s": true,
+        "strict_manifest_default_path": true,
+        "minimal_fixture_compat_preserved": true,
+        "monitor_network_isolation_tests_added": 6,
+        "watch_trigger_harden_live": 1,
+        "watch_trigger_harden_non_20261104T_live": 0,
+        "watch_generator_compatible_audit": true,
+        "new_recurring_probe_scan_families": 0,
+        "blocker": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
+        "sweep": "research_state/campaign_sweep_tracka_20261105T122444Z.md"
       }
     }
   ],
@@ -178,12 +197,12 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-05T11:04:45Z",
-  "timestamp": "20261105T110445Z",
-  "last_checked": "2026-11-05T11:04:45Z",
+  "last_updated": "2026-11-05T12:24:44Z",
+  "timestamp": "20261105T122444Z",
+  "last_checked": "2026-11-05T12:24:44Z",
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
   "artifact_churn_090": {
     "ironflow_probe_files_before": 38,
     "ironflow_probe_files_after": 2,
@@ -240,7 +259,7 @@
     "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md"
   },
-  "last_checked_utc": "20261105T120604Z",
+  "last_checked_utc": "20261105T122444:44Z",
   "track_a_blocker_latest": "research_state/liquidation_forward_validate_016_blocker_20261105T120604Z.md",
   "artifact_churn_096": {
     "root_md_json": 157,
@@ -251,6 +270,21 @@
     "watch_trigger_harden_20261104T_live": 1,
     "watch_trigger_harden_20261104T_archived": 27,
     "watch_archive": "research_state/watch/archive/trigger_harden_20261104T_096_archive.json",
+    "no_new_recurring_probe_scan_families": true
+  },
+  "artifact_churn_097": {
+    "root_md_json": 159,
+    "ironflow_probes": 2,
+    "tests_ok": 244,
+    "rubric_adversarial_093_097": 79,
+    "resume_check_pass_under_5s": true,
+    "resume_checks": 8,
+    "strict_manifest_default_path": true,
+    "minimal_fixture_compat_preserved": true,
+    "monitor_network_isolation_tests_added": 6,
+    "watch_trigger_harden_live": 1,
+    "watch_trigger_harden_non_20261104T_live": 0,
+    "watch_generator_compatible_audit": true,
     "no_new_recurring_probe_scan_families": true
   }
 }
