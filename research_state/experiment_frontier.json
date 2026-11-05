@@ -1,8 +1,8 @@
 {
   "registry_version": "1.1",
-  "generated": "20261103T120041Z",
+  "generated": "20261105T092616Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-012-V EXECUTED (2026-11-04T00:52Z): forward volatility validation on unsealed 2026 panel 2026-08-07..2026-11-02 pre-registered and run. Verdict INCONCLUSIVE/PILOT: C2 vs B1 +15.19% rel QLIKE but 95% CI spans zero and test window is 5 days = 0 non-overlapping 30-day blocks -> gate NOT_MET, block-count criterion fails a priori. Track A FCLR-010 gate PASSED (sealed); funding-conditioned volatility FCLR-011 gate PASSED (sealed). Track A forward still blocked on ironflow (latest 2026-10.parquet). Binance archive genuinely ends 2026-11-02 (live probe 2026-11-04T00:45Z -> 404 for 2026-11-03/04 and 2026-10-28/29). Duplicate NEXT_AGENT_HANDOFF retired; AGENT_HANDOFF.md is the single durable handoff.",
+  "current_status": "CAMPAIGN FCLR-NEXT-093 EXECUTED (2026-11-05T09:26:16Z): Track C volatility SEALED/LOCKED. Track A liquidation risk ONLY ACTIVE; BLOCKED on admissible unauthenticated Hyperliquid liquidation data (data_through 2026-10). Steps 3-6 heavy bottleneck demolition completed: consolidated unreferenced timestamped families (history hashes/excerpts), root md+json 185->169, ironflow probes==2, canonical alt outputs only. Added deterministic adversarial rubric module + 17 edge-fail fixtures (auth/requester-pays/non-Hyperliquid/merge/modeled-as-observed/schema/<5 symbols). Harness dry-run 0.015s/prereg enforced. Tests 173/173 OK. PREREG BEFORE OUTCOMES on trigger. AGENT_HANDOFF.md single durable handoff.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T082640Z",
-      "notes": "FCLR-NEXT-092 executed 20261105T082547Z: trigger NO DATA (data_through 2026-10, 2026-11..2027-02 absent). Eliminated recurring timestamped alt-source probe families (canonical alt_source_scan_latest.json + alt_source_deep_review_latest.md). ironflow probes enforced==2. monitor~0.50s, harness~0.04s. Added adversarial rubric edge + dry-run bound tests; tests 155/155 OK. Rubric strict/aligned Hyperliquid-only; prereg gate enforced. Blocked pending ironflow>=2026-11 or rubric-GO Hyperliquid source with PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md",
+      "last_checked": "20261105T092616Z",
+      "notes": "FCLR-NEXT-093 executed 20261105T092616Z Steps 3-6 (1-2 already done prior): trigger NO DATA (data_through 2026-10, 2026-11..2027-02 absent). Consolidated unreferenced timestamped families into tracka_bottleneck_history_090.md (hashes/excerpts): 072416/081715/033013 chain, old root ironflow_scan/trigger_watch, 0616xx source/bottleneck/alt chain; removed 5 unreferenced watch trigger_harden 20261104 files. Ironflow probes enforced==2. Added scripts/tracka_rubric.py + 17 adversarial edge-fail fixtures (test_tracka_adversarial_rubric_093.py): auth/key/signature/requester-pays, <5 symbols, non-Hyperliquid merge/venue, modeled-as-observed/proxy, schema mismatch, completeness/license. Harness dry-run <10s (0.015s cold), prereg gate enforced. Tests 173/173 OK. Rubric Hyperliquid-only/observed-only, fail-closed. Blocked pending ironflow>=2026-11 or rubric-GO Hyperliquid source with PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_013_blocker_20261105T092616Z.md",
       "artifact_churn_092": {
         "research_state_mdjson_root": 184,
         "ironflow_probe_files": 2,
@@ -81,6 +81,19 @@
           "alt_source_scan",
           "alt_source_deep_review"
         ]
+      },
+      "artifact_churn_093": {
+        "research_state_mdjson_root": 169,
+        "ironflow_probe_files": 2,
+        "tests": 173,
+        "root_mdjson_before": 185,
+        "consolidated_unreferenced_families": true,
+        "canonical_alt_outputs": [
+          "alt_source_scan_latest.json",
+          "alt_source_deep_review_latest.md"
+        ],
+        "adversarial_rubric_module": "scripts/tracka_rubric.py",
+        "adversarial_tests": 17
       }
     }
   ],
@@ -112,8 +125,8 @@
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
       "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative (>=5 symbols OR >=1 complete month OR >=3x30d blocks, schema compatible with frozen FCLR-010, unauthenticated/no keys/requester-pays)",
-      "last_checked": "2026-11-05T08:26:40Z",
-      "evidence": "research_state/ironflow_probe_20261105T082334Z.json; research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md"
+      "last_checked": "2026-11-05T09:26:16Z",
+      "evidence": "research_state/ironflow_probe_20261105T091733Z.json; research_state/liquidation_forward_validate_013_blocker_20261105T092616Z.md"
     },
     {
       "track": "TRACK_C",
