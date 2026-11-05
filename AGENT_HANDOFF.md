@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T212035Z
-Git SHA (HEAD, verified this session): 40ff836f (working tree may contain only untracked `__pycache__`; source unchanged by entry verify)
+Timestamp (UTC): 20261105T212539Z
+Git SHA (HEAD, verified this session): 40ff836f (tracked hardening delta from FCLR-NEXT-107: `src/analysis/tracka_admissible.py`, `tests/test_tracka_hardening_106.py`, handoff/frontier updates; dirty/modified `__pycache__` and `research_state/ironflow_fastpath_cache.json` not to commit)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T212035Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: IRONFLOW-PROBING-EXHAUSTED-90PLUS-ABSENT/ROOT-142/PROBES-2/GATE-REASON-CODES+FAIL-CLOSED-ORDER/OPERATOR-CLI-PASS-EXIT0/PROBE-INVARIANT-RUNTIME-NAMED-GUARD-WIRED/TESTS-322-OK/NO-TRIGGER-202610/NO-COAST
+Handoff ID: FCLR-HANDOFF-20261105T212539Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: IRONFLOW-PROBING-EXHAUSTED-90PLUS-ABSENT/ROOT-142/PROBES-2/GATE-REASON-CODES+FAIL-CLOSED-ORDER/OPERATOR-CLI-PASS-EXIT0/PROBE-INVARIANT-RUNTIME-NAMED-GUARD-WIRED/TRACKA-ADMISSIBLE-INGESTION-SEAM-WIRED/TESTS-331-OK(+9)/NO-TRIGGER-202610/NO-COAST
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -11,18 +11,19 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - LIQUIDATION RISK component = Track A (FCLR-010) — **ONLY UNFINISHED HALF / ONLY ACTIVE OBJECTIVE**. BLOCKED on admissible unauthenticated liquidation data (Hyperliquid-only, `data_through=2026-10`; 2026-11..2027-02 absent). Track B = **NOT_SUPPORTED**.
 - BOTH components core to repo identity. NO SCOPE DRIFT TO SEALED TRACKS.
 
-## CURRENT VERIFIED STATE (2026-11-05T21:20:35Z / 20261105T212035Z, entry-verified this session)
-- **322 tests, OK** (`python -m unittest discover tests`). MUST remain green; run on entry.
-- Resume check (CLI): `python scripts/tracka_resume_check.py` — `pass:true`, **16 checks** (incl. named `probe_invariant_runtime_named`), `<5s` (~0.75s this run), `network:false`, `writes_real_research_state:false`.
+## CURRENT VERIFIED STATE (20261105T212539Z, entry-verified this session)
+- **331 tests, OK (+9 FCLR-NEXT-107 hardening)** (`python -m unittest discover tests`). MUST remain green; run on entry.
+- Resume check (CLI): `python scripts/tracka_resume_check.py` — `pass:true`, **16 checks** (incl. named `probe_invariant_runtime_named`), `<5s` (~0.609s this run), `network:false`, `writes_real_research_state:false`.
 - CLI resume gate: `python scripts/tracka_resume_gate.py --prereg /nonexistent` — `drift_preflight.pass:true`, `reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `fail_closed_order=drift_preflight->manifest_prereg`, `status=BLOCKED`, `outcomes_inspected:false`.
-- **Operator CLI entrypoint:** `python scripts/tracka_operator_report.py` — **PASS, exit 0**, stable machine-readable JSON, `fail_closed_order=drift_preflight->gate_decision->probe_invariant_state`, `probe_invariant_runtime_named.pass:true`, `probe_invariant_runtime_valid:true`, ~0.67s, `network:false`, `writes_real_research_state:false`, `read_only:true`. Fail-closed: drift/probe violation => exit 1.
+- **Operator CLI entrypoint:** `python scripts/tracka_operator_report.py` — **PASS, exit 0**, stable machine-readable JSON, `fail_closed_order=drift_preflight->gate_decision->probe_invariant_state`, `probe_invariant_runtime_named.pass:true`, `probe_invariant_runtime_valid:true`, ~0.609s, `network:false`, `writes_real_research_state:false`, `read_only:true`. Fail-closed: drift/probe violation => exit 1.
 - Monitor/trigger (latest probe, **NO TRIGGER**): `research_state/ironflow_probe_20261105T200406Z.json` (+ digest `ironflow_probe_digest_latest.json`) — `data_through=2026-10`, 2026-11..2027-02 absent; `consecutive_absent=3`; `triggered=false`; `probe_invariant_runtime` recorded/present+shape-valid; probes==2.
-- **BOTTLENECK REMOVED — IRONFLOW PROBING EXHAUSTED:** 90+ probe digest entries across 2026-11..02 all `CONFIRMED_ABSENT` (404). Repeated timestamped probe/scan families are churn, not progress. No new recurring probe families. No re-probing of absent ironflow months. Redirect all measurable effort to Track A hardening/trigger-only validation.
+- **FCLR-NEXT-107 HARDENING DELTA (measurable, no trigger):** added stdlib-only Track A admissible Ironflow ingestion/manifest seam `src/analysis/tracka_admissible.py` (Hyperliquid-only, observed-only, month>=2026-11 trigger gate, required events+fills roles/URLs/paths, UTC normalization required, fail-closed schema/leakage/auth/provenance guards, explicit no observed/modeled conflation, no network/IO). Added `tests/test_tracka_hardening_106.py` (9 tmp-isolated deterministic tests, green). **322->331 tests OK.** Root/probes unchanged (142/2).
 - Track C (Funding-conditioned **volatility**): SEALED/LOCKED. Forecast gate PASSED. DO NOT retune/re-run sealed cells/conflate.
 - Track B: NOT_SUPPORTED.
 - Track A (**liquidation risk**, only unfinished/active repo-name objective): ON-TRIGGER/MONITOR ONLY. BLOCKED on admissible unauthenticated liquidation data (Hyperliquid-only, `data_through=2026-10`; 2026-11..2027-02 absent). Latest blocker: `research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md`. Latest sweep: `research_state/campaign_sweep_tracka_20261105T191803Z.md`. Canonical alt outputs only; no admissible strict GO source.
 - Artifact state (verified): root `research_state/*.md+*.json` = **142** (<=163). Ironflow probes = **2** (1 live + 1 canonical digest). **Any new root evidence requires prior consolidation** of >=1 unreferenced non-canonical root artifact with sha256/bytes/excerpt provenance into an existing consolidated history (keep probes==2, canonical outputs unchanged).
-- **NO COASTING.** Status-only output without measurable hardening delta is noncompliant. Blocked/no-data claims without measurable hardening delta are noncompliant.
+- **BOTTLENECK:** IRONFLOW PROBING EXHAUSTED (90+ CONFIRMED_ABSENT); no re-probe. Next gap: wire admissible seam into harness/monitor/resume decision path and expose named fail-closed operator/resume check for admissible-month manifest/prereg schema (no network, tmp-isolated).
+- **NO COASTING.** Status-only output without measurable hardening delta is noncompliant.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
@@ -45,14 +46,33 @@ STOP RULE: Complete ALL steps with concrete metrics. Track C locked. Track B uns
 ```
 
 
+## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM) — FCLR-NEXT-108
+```text
+TASK ID: FCLR-NEXT-108-TRACK-A-WIRE-ADMISSIBLE-SEAM-INTO-RESUME-DECISION-PATH-NAMED-GUARD-NO-COAST
+PRIORITY: P0 - REPO-NAME PRIORITIZED (Funding-conditioned VOLATILITY sealed/locked Track C; LIQUIDATION RISK = ONLY ACTIVE OBJECTIVE Track A)
+TIMESTAMP (UTC): 20261105T212539Z
+CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE CODE/TEST HARDENING DELTA REQUIRED WHEN NO TRIGGER. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
+ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES IN RESEARCH_STATE UNLESS A STRICTLY ADMISSIBLE TRIGGER APPEARS (THEN: PREREG BEFORE OUTCOMES; blocker/prereg+result evidence only, ROOT BOUND PRESERVED). NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS (PROBING EXHAUSTED; 90+ CONFIRMED_ABSENT). Hyperliquid-only. NEVER conflate observed vs modeled liquidations.
+OBJECTIVE (INFERRED): Complete liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked (Hyperliquid-only, data_through=2026-10; 2026-11..2027-02 absent). 107 entry-verified (no trigger): 331 tests OK (+9); resume_check PASS 16 (~0.609s); gate prereg-block drift_preflight.pass:true + PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS + drift_preflight->manifest_prereg; operator_report PASS exit 0 with fail_closed_order=drift_preflight->gate_decision->probe_invariant_state; root md+json=142 (<=163); probes==2. 107 added stdlib seam src/analysis/tracka_admissible.py (Hyperliquid-only, observed-only, month>=2026-11, events+fills, fail-closed, no observed/modeled conflation, no network/IO) + tests/test_tracka_hardening_106.py (9). 108 MUST: (A) Entry verify and record exact metrics. (B) If NO TRIGGER, implement >=1 measurable hardening delta that WIRES the admissible seam into a real resume/decision path (e.g., named fail-closed check in tracka_resume_check/operator_report/gate or harness helper that validates a candidate Ironflow month manifest path/shape without inspecting outcomes or network) + tmp-isolated deterministic tests; keep all prior 16 check names/semantics stable unless explicitly extended fail-closed with a new named check. (C) ONLY IF trigger appears (ironflow events|fills YYYY-MM.parquet month>=2026-11 HTTP 200 unauthenticated, OR admissible unauthenticated Hyperliquid source passes strict full-manifest GO gate), PREREGISTER BEFORE INSPECTING OUTCOMES and execute forward validation; Hyperliquid-only; separate observed vs modeled; canonical outputs; respect root bound. (D) If root-bound pressure (>163) or trigger forces evidence, consolidate >=1 unreferenced non-canonical root artifact with sha256/bytes/excerpt provenance BEFORE evidence; keep probes==2, canonical outputs unchanged.
+CONSTRAINTS: No credentials/manual files/.github/workflows changes. Leakage-safe, preregister-before-outcomes. Track C/B locked/unsupported. Raw data/caches out of git. Clean-clone reproducible. No threshold-shopping. Keep root md+json <=163 and probes==2. Prefer code+tests over reports while blocked.
+MANDATORY EXECUTION (ALL REQUIRED; CONCRETE METRICS):
+1) ENTRY VERIFY (record exact): `python -m unittest discover tests` (>=331 green). `python scripts/tracka_resume_check.py` (>=16 checks incl. probe_invariant_runtime_named, <5s). `python scripts/tracka_resume_gate.py --prereg /nonexistent`. `python scripts/tracka_operator_report.py; echo $?` (exit 0). Record root md+json and probes. Do NOT re-probe ironflow absent months.
+2) TRIGGER CHECK (bounded, no new families): inspect latest monitor/probe state only (`research_state/ironflow_probe_20261105T200406Z.json`/digest). No new recurring probe/scan files.
+3) NO-TRIGGER HARDENING DELTA (required if no trigger): wire src/analysis/tracka_admissible.py into a named fail-closed resume/operator decision seam with tmp-isolated tests; preserve existing semantics; report before/after test count/check count and changed files.
+4) TRIGGER PATH (only if appears): PREREG BEFORE OUTCOMES; execute forward validation per manifest/rubric; Hyperliquid-only; separate observed vs modeled; canonical outputs; respect root bound.
+5) HANDOFF/FRONTIER (only with real delta or trigger): update with concrete metrics and emit FCLR-NEXT-109 stricter task.
+RESUME CONDITION (only): ironflow `data/events/YYYY-MM.parquet` or `data/fills/YYYY-MM.parquet` month>=2026-11 HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict full-manifest GO gate. Hyperliquid-only. PREREGISTER BEFORE INSPECTING OUTCOMES.
+STOP RULE: Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found.
+```
+
 ## VERIFICATION COMMANDS (RUN ON ENTRY)
-- `python -m unittest discover tests` (must be >=322, green)
-- `python scripts/tracka_resume_check.py` (must pass, 16 checks incl. `probe_invariant_runtime_named`, <5s)
+- `python -m unittest discover tests` (must be >=331, green)
+- `python scripts/tracka_resume_check.py` (must pass, >=16 checks incl. `probe_invariant_runtime_named`, <5s)
 - `python scripts/tracka_resume_gate.py --prereg /nonexistent` (must show `drift_preflight.pass:true` + `reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS` + `fail_closed_order=drift_preflight->manifest_prereg`)
 - `python scripts/tracka_operator_report.py; echo $?` (must print `pass:true` JSON and exit `0`)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T212035Z: Execute **FCLR-NEXT-107** (verbatim above). Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. Root md+json **142** (<=163). probes==2. Latest probe 20261105T200406Z shows **NO TRIGGER** (`data_through=2026-10`; 2026-11..2027-02 absent). **Entry-verify-only is insufficient:** if no trigger, produce measurable Track A code+test hardening delta (tmp-isolated, deterministic, no network, Hyperliquid-only admissibility/leakage/conflation guards). PREREG BEFORE OUTCOMES if triggered. IRONFLOW PROBING EXHAUSTED — do not re-probe absent months.
+20261105T212539Z: Execute **FCLR-NEXT-108** (verbatim above). Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. Root md+json **142** (<=163). probes==2. Latest probe 20261105T200406Z shows **NO TRIGGER** (`data_through=2026-10`; 2026-11..2027-02 absent). **107 measurable delta delivered (no trigger):** stdlib admissible Ironflow month>=2026-11 ingestion/manifest seam `src/analysis/tracka_admissible.py` + 9 tmp-isolated tests `tests/test_tracka_hardening_106.py`; **322->331 tests OK**; resume_check/gate/operator pass unchanged (16 checks). **108 must wire seam into named fail-closed resume/operator decision path with tests (no network, no outcome inspection).** PREREG BEFORE OUTCOMES if triggered. IRONFLOW PROBING EXHAUSTED — do not re-probe absent months.
 
 ---
 ## SESSION ENTRY (2026-11-05T21:20:35Z) — FCLR-NEXT-106 ENTRY VERIFY COMPLETE (no trigger; coasting bottleneck removed)
@@ -121,3 +141,14 @@ STOP RULE: Complete ALL steps with concrete metrics. Track C locked. Track B uns
 ```
 RESUME CONDITION (only): ironflow `data/events/YYYY-MM.parquet` or `data/fills/YYYY-MM.parquet` month>=2026-11 HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict full-manifest GO gate (`assess_strict_manifest`/harness default). Hyperliquid-only. PREREGISTER BEFORE INSPECTING OUTCOMES.
 STOP RULE: Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found.
+
+---
+## SESSION ENTRY (2026-11-05T21:25:39Z) — FCLR-NEXT-107 COMPLETE (no trigger; measurable Track A admissible-seam hardening)
+Timestamp (UTC): 20261105T212539Z
+Git SHA (baseline): 40ff836f
+Task: FCLR-NEXT-107 (Track A liquidation risk only; Track C sealed; Track B unsupported). No trigger.
+- **Entry verify (measured):** `python -m unittest discover tests` — **322 OK -> 331 OK (+9)**. `python scripts/tracka_resume_check.py` — `pass:true`, **16 checks** (incl. `probe_invariant_runtime_named`), ~0.609s, `network:false`, `writes_real_research_state:false`. `python scripts/tracka_resume_gate.py --prereg /nonexistent` — `drift_preflight.pass:true`, `reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `fail_closed_order=drift_preflight->manifest_prereg`, `status=BLOCKED`, `outcomes_inspected:false`. `python scripts/tracka_operator_report.py` — **exit 0**, `pass:true`, `fail_closed_order=drift_preflight->gate_decision->probe_invariant_state`, `probe_invariant_runtime_named.pass:true`, `probe_invariant_runtime_valid:true`, ~0.609s.
+- **Trigger/bound (measured, no new families):** latest probe `research_state/ironflow_probe_20261105T200406Z.json` / `ironflow_probe_digest_latest.json` — `data_through=2026-10`, 2026-11..2027-02 absent, `consecutive_absent=3`, **NO TRIGGER**. Root md+json **142** (<=163). Probes **2**. No re-probe (probing exhausted).
+- **Measurable hardening delta (code+tests, tmp-isolated, deterministic, no network):** added `src/analysis/tracka_admissible.py` (stdlib-only Track A Ironflow month>=2026-11 ingestion/manifest seam): Hyperliquid-only venue/source, unauthenticated/no-key/no-signature, observed-liquidation required, modeled/proxy/merge blocked, fail-closed label/schema/timestamp/provenance guards, required events+fills roles with admissible URL/role/month checks, explicit no observed/modeled conflation, no parquet/network IO. Added `tests/test_tracka_hardening_106.py` (9 tests: month trigger gate, valid GO seam, venue/merge/source, observed-modeled conflation/forbidden columns, role/artifact mismatch, leakage/timestamp/value-field, auth/provenance, deterministic path helpers, JSON roundtrip).
+- **Metrics before/after:** tests **322 -> 331** (+9). resume_check **16 PASS** stable. gate/operator stable PASS/BLOCKED semantics. root **142**, probes **2**. Changed files: `src/analysis/tracka_admissible.py` (new), `tests/test_tracka_hardening_106.py` (new), `AGENT_HANDOFF.md`, `research_state/experiment_frontier.json`. No new research_state root evidence files; no recurring probe/scan families; no workflow/scheduler/poller changes.
+- **Next task:** **FCLR-NEXT-108** (verbatim above) — wire admissible seam into named fail-closed resume/operator decision path with tmp-isolated tests. PREREG BEFORE OUTCOMES if triggered.
