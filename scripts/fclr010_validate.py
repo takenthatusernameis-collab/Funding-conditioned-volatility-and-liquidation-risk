@@ -8,7 +8,9 @@ import sys
 import json
 import argparse
 from pathlib import Path
-from scripts.fclr010_harness import FCLR010Harness
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from fclr010_harness import FCLR010Harness
 
 
 def main():
