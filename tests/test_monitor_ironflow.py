@@ -1155,3 +1155,28 @@ class TestFastPathEnhancements(unittest.TestCase):
         r = mon.tree_get_cached(use_cache=False)
         self.assertEqual(r["status"], 304)
         self.assertTrue(r.get("not_modified"))
+
+
+class TestConsolidation(unittest.TestCase):
+    def test_consolidate_ironflow_probes_keeps_latest(self):
+        import tempfile
+        from pathlib import Path
+        import os, time
+        # Use temp dir
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            orig = mon.EVIDENCE_DIR
+            try:
+                mon.EVIDENCE_DIR = td
+                # Create old files
+                f1 = td / "ironflow_probe_20261101T000000Z.json"
+                f2 = td / "ironflow_probe_20261105T000000Z.json"
+                f1.write_text("{}")
+                time.sleep(0.01)
+                f2.write_text("{}")
+                mon._consolidate_ironflow_probes()
+                files = list(td.glob("ironflow_probe_*.json"))
+                self.assertEqual(len(files), 1)
+                self.assertEqual(files[0].name, f2.name)
+            finally:
+                mon.EVIDENCE_DIR = orig

@@ -1,0 +1,212 @@
+{
+  "generated_utc": "20261105T012649Z",
+  "cache_info": {
+    "source": "cache",
+    "generated_utc": "2026-11-04T20:47:35.774882+00:00",
+    "queries": [
+      "liquidation",
+      "liquidations",
+      "crypto liquidation",
+      "perpetual liquidation",
+      "hyperliquid liquidation",
+      "funding liquidation",
+      "crypto perpetual liquidation",
+      "liquidation ticks",
+      "perpetual futures liquidation"
+    ],
+    "stale": false
+  },
+  "errors": [],
+  "candidates": [
+    {
+      "name": "coinapi_free_liquidations",
+      "type": "api_docs",
+      "url": "https://docs.coinapi.io/",
+      "notes": "Check unauthenticated history; many require keys - treat as NO-GO unless explicit unauthenticated historical download exists with >=5 symbols and >=1 complete month.",
+      "probes": [
+        "https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_BTC_USDT/latest?period_id=1DAY&limit=1"
+      ]
+    },
+    {
+      "name": "cryptofeed_docs",
+      "type": "docs",
+      "url": "https://github.com/bmoscon/cryptofeed",
+      "notes": "Library not a dataset host; NO-GO as data source.",
+      "probes": []
+    },
+    {
+      "name": "tardis_dev_docs",
+      "type": "docs",
+      "url": "https://tardis.dev/",
+      "notes": "Commercial/requires access in general; check unauthenticated download paths. Likely NO-GO unless explicit free historical download exists.",
+      "probes": [
+        "https://api.tardis.dev/v1/"
+      ]
+    },
+    {
+      "name": "kaiko_docs",
+      "type": "docs",
+      "url": "https://www.kaiko.com/",
+      "notes": "Paid; NO-GO.",
+      "probes": []
+    },
+    {
+      "name": "glassnode_docs",
+      "type": "docs",
+      "url": "https://docs.glassnode.com/",
+      "notes": "Paid/auth; NO-GO.",
+      "probes": []
+    },
+    {
+      "name": "coinglass_public_pages",
+      "type": "web",
+      "url": "https://www.coinglass.com/",
+      "notes": "Check for downloadable historical liquidation data without login/payment; often requires signup/API - probe cautiously.",
+      "probes": [
+        "https://www.coinglass.com/"
+      ]
+    },
+    {
+      "name": "bybit_public_archive_check",
+      "type": "exchange",
+      "url": "https://public.bybit.com/",
+      "notes": "Bybit public data archive exists but check liquidation data specifically; unauthenticated downloads possible for some datasets.",
+      "probes": [
+        "https://public.bybit.com/"
+      ]
+    },
+    {
+      "name": "okx_public_data",
+      "type": "exchange",
+      "url": "https://www.okx.com/",
+      "notes": "Check public historical data; liquidation history may require specific endpoints - probe.",
+      "probes": [
+        "https://www.okx.com/"
+      ]
+    },
+    {
+      "name": "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
+      "urls": [
+        "https://huggingface.co/api/datasets/Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
+        "https://huggingface.co/datasets/Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__ochinimus_crypto-liquidation-ticks",
+      "urls": [
+        "https://huggingface.co/api/datasets/ochinimus/crypto-liquidation-ticks",
+        "https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=crypto liquidation enumeration (query='crypto liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__craftify2221_hyperliquid-builder-liquidation-panel",
+      "urls": [
+        "https://huggingface.co/api/datasets/craftify2221/hyperliquid-builder-liquidation-panel",
+        "https://huggingface.co/datasets/craftify2221/hyperliquid-builder-liquidation-panel/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=hyperliquid liquidation enumeration (query='hyperliquid liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    }
+  ],
+  "deep_review_urls": [
+    {
+      "name": "deep_review__api.hyperliquid.xyz_info",
+      "urls": [
+        "https://api.hyperliquid.xyz/info"
+      ],
+      "notes": "Hyperliquid info endpoint (GET; POST variants probed separately by deep_review)."
+    },
+    {
+      "name": "deep_review__tardis_dev_v1_markets",
+      "urls": [
+        "https://api.tardis.dev/v1/markets"
+      ],
+      "notes": "Tardis public markets root (auth-gated for historical data)."
+    },
+    {
+      "name": "deep_review__binance_vision_liquidationSnapshot",
+      "urls": [
+        "https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/"
+      ],
+      "notes": "Binance archive liquidation-snapshot directory probe."
+    },
+    {
+      "name": "deep_review__kaiko_demo",
+      "urls": [
+        "https://demo-api.kaiko.io/v1/"
+      ],
+      "notes": "Kaiko demo root (auth-gated)."
+    },
+    {
+      "name": "deep_review__cryptofeed_repo",
+      "urls": [
+        "https://github.com/bmoscon/cryptofeed"
+      ],
+      "notes": "Library repo, not a dataset host."
+    },
+    {
+      "name": "deep_review__laevitas_ch",
+      "urls": [
+        "https://laevitas.ch/"
+      ],
+      "notes": "Public site probe."
+    },
+    {
+      "name": "deep_review__coinglass_public_liquidation_history",
+      "urls": [
+        "https://open-api.coinglass.com/public/v2/liquidation_history?symbol=BTC&timeType=4h"
+      ],
+      "notes": "Coinglass public API probe (often auth/JS-gated)."
+    },
+    {
+      "name": "deep_review__bybit_public_spot_kline",
+      "urls": [
+        "https://public.bybit.com/spot/kline/"
+      ],
+      "notes": "Bybit public archive spot-kline directory probe."
+    },
+    {
+      "name": "deep_review__bybit_public_trading_linear",
+      "urls": [
+        "https://public.bybit.com/trading/linear/"
+      ],
+      "notes": "Bybit public archive trading-linear directory probe."
+    },
+    {
+      "name": "deep_review__coinapi_exchanges",
+      "urls": [
+        "https://rest.coinapi.io/v1/exchanges"
+      ],
+      "notes": "CoinAPI root (auth-gated)."
+    },
+    {
+      "name": "deep_review__glassnode_studio",
+      "urls": [
+        "https://studio.glassnode.com/"
+      ],
+      "notes": "Glassnode studio (auth-gated)."
+    },
+    {
+      "name": "deep_review__cryptodatadownload_binance",
+      "urls": [
+        "https://www.cryptodatadownload.com/data/binance/"
+      ],
+      "notes": "CryptoDataDownload Binance directory probe."
+    },
+    {
+      "name": "deep_review__deribit_get_instruments",
+      "urls": [
+        "https://www.deribit.com/api/v2/public/get_instruments?currency=BTC&kind=future"
+      ],
+      "notes": "Deribit public instruments probe."
+    },
+    {
+      "name": "deep_review__okx_public_instruments",
+      "urls": [
+        "https://www.okx.com/api/v5/public/instruments?instType=SWAP"
+      ],
+      "notes": "OKX public instruments probe."
+    }
+  ]
+}

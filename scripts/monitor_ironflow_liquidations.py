@@ -1242,6 +1242,23 @@ def list_state():
 
 
 
+
+def _consolidate_ironflow_probes():
+    """Keep only the latest ironflow_probe_*.json to reduce artifact churn."""
+    try:
+        probes = sorted(EVIDENCE_DIR.glob("ironflow_probe_*.json"), key=lambda p: p.stat().st_mtime)
+        if len(probes) <= 1:
+            return
+        # Keep the newest one
+        for old in probes[:-1]:
+            try:
+                old.unlink()
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+
 def main():
     import sys
     quick = "--quick" in sys.argv
@@ -1611,6 +1628,17 @@ def main():
         report_path = EVIDENCE_DIR / f"ironflow_trend_report_{now_z()}.json"
         with open(report_path, "w") as f:
             json.dump(report, f, indent=2)
+        # Consolidate trend reports - keep latest
+        try:
+            trend_reports = sorted(EVIDENCE_DIR.glob("ironflow_trend_report_*.json"), key=lambda p: p.stat().st_mtime)
+            if len(trend_reports) > 1:
+                for old_t in trend_reports[:-1]:
+                    try:
+                        old_t.unlink()
+                    except Exception:
+                        pass
+        except Exception:
+            pass
         latest = report.get("latest") or {}
         print(json.dumps({
             "report": report_path.name,

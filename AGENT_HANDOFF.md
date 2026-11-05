@@ -48,3 +48,12 @@ STOP RULE: Complete ALL 5 steps + artifacts. Never stop early for "no data". Tra
 
 ## NEXT TASK (TIMESTAMPED)
 20261105T011841Z: Execute FCLR-NEXT-079 above in full. Prioritize liquidation risk (Track A). Remove bottlenecks while blocked, harden triggers, keep artifacts consolidated. Do not touch Track C. If resume conditions met at any point, preregister before inspecting outcomes. Confirm tests stay green (>=166) before ending the session.
+
+## CAMPAIGN UPDATE (FCLR-NEXT-079) - 20261105T013144Z
+- Step 1 (sweep): research_state/campaign_sweep_tracka_20261105T012634Z.md
+- Step 2 (probe): research_state/trigger_probe_tracka_20261105T012702Z.md — NO NEW DATA - ON HOLD (ironflow data_through 2026-10, forward edge 2026-11..2027-02 absent; alt sources scanned/deep-reviewed; no rubric-GO)
+- Step 3 (bottleneck removal): research_state/bottleneck_removal_tracka_20261105T013144Z.md — Added probe/trend consolidation in monitor_ironflow_liquidations.py; added test; tests 180 passed (>=166). No schedulers/pollers/status-only/wrappers/workflow changes.
+- Step 4 (test hardening): Extended tests/test_monitor_ironflow.py (consolidation) — all 180 passed.
+- Step 5 (blocker/frontier/handoff): research_state/liquidation_forward_validate_005_blocker_20261105T013144Z.md written; experiment_frontier.json updated with precise resume triggers/last_checked.
+
+NEXT TASK (IMMEDIATE): Remain on Track A monitor. If ironflow >=2026-11 appears OR rubric-GO alternative passes strict criteria, preregister fclr010_prereg_*.json BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness. Continue bottleneck removal/hardening while blocked. Do NOT touch Track C. Keep artifacts consolidated.
