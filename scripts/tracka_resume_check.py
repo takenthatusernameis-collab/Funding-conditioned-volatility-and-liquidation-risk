@@ -222,6 +222,94 @@ def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
     }
 
 
+def _validate_probe_invariant_runtime_shape(obj) -> dict:
+    """104: machine-validate monitor probe_invariant_runtime evidence-field shape."""
+    if not isinstance(obj, dict):
+        return {"pass": False, "reason": "not_dict", "shape_valid": False}
+    required = ("pass", "total", "invariant")
+    missing = [k for k in required if k not in obj]
+    types_ok = isinstance(obj.get("pass"), bool) and isinstance(obj.get("total"), int) and isinstance(obj.get("invariant"), str)
+    lists_ok = (("live_probes" not in obj) or isinstance(obj.get("live_probes"), list)) and (("digests" not in obj) or isinstance(obj.get("digests"), list))
+    ok = (not missing) and types_ok and lists_ok
+    return {"pass": ok, "shape_valid": ok, "missing": missing, "types_ok": types_ok, "lists_ok": lists_ok,
+            "pass_value": obj.get("pass"), "total": obj.get("total")}
+
+
+def probe_invariant_state(repo_root: Path = None, research_state_dir: Path = None) -> dict:
+    """104: read-only probe invariant state + machine validation of probe_invariant_runtime field."""
+    root = Path(repo_root) if repo_root is not None else ROOT
+    rs = Path(research_state_dir) if research_state_dir is not None else (root / "research_state")
+    out = {"read_only": True, "network": False}
+    try:
+        import scripts.monitor_ironflow_liquidations as mon
+        out["assert_probe_invariant"] = mon.assert_probe_invariant(rs, raise_on_violation=False)
+    except Exception as e:
+        out["assert_probe_invariant"] = {"pass": False, "error": repr(e)}
+    # validate runtime field in latest live probe if present
+    try:
+        live = sorted(p for p in rs.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_"))
+        if live:
+            latest = live[-1]
+            out["latest_live_probe"] = latest.name
+            d = json.loads(latest.read_text(encoding="utf-8", errors="ignore"))
+            pir = d.get("probe_invariant_runtime")
+            out["probe_invariant_runtime_present"] = pir is not None
+            out["probe_invariant_runtime_validation"] = _validate_probe_invariant_runtime_shape(pir) if pir is not None else {"pass": False, "shape_valid": False, "reason": "missing"}
+        else:
+            out["latest_live_probe"] = None
+            out["probe_invariant_runtime_present"] = False
+            out["probe_invariant_runtime_validation"] = {"pass": False, "shape_valid": False, "reason": "no_live_probe"}
+    except Exception as e:
+        out["probe_invariant_runtime_validation"] = {"pass": False, "shape_valid": False, "error": repr(e)}
+    out["pass"] = out.get("assert_probe_invariant", {}).get("pass") is True and out.get("probe_invariant_runtime_validation", {}).get("pass") is True
+    return out
+
+
+def compose_operator_report(repo_root: Path = None, research_state_dir: Path = None,
+                            data_path: str = "/nonexistent_tracka_resume", prereg: str = None,
+                            harness_repo_root: Path = None) -> dict:
+    """104 bounded top-level operator compose/report: drift preflight + gate decision + probe invariant state.
+
+    Read-only, <5s target, no network regression, fail-closed. No real research_state writes.
+    """
+    t0 = time.time()
+    root = Path(repo_root) if repo_root is not None else ROOT
+    rs = Path(research_state_dir) if research_state_dir is not None else (root / "research_state")
+    hrr = Path(harness_repo_root) if harness_repo_root is not None else root
+    report = {"script": "tracka_operator_report", "network": False, "writes_real_research_state": False, "read_only": True}
+    # 1) drift preflight (read-only, fail-closed)
+    try:
+        report["drift_preflight"] = drift_preflight(root, research_state_dir=rs)
+    except Exception as e:
+        report["drift_preflight"] = {"pass": False, "error": repr(e), "read_only": True, "network": False}
+    # 2) gate decision (tmp output; prereg-before-outcomes enforced; drift already reflected)
+    try:
+        import scripts.tracka_resume_gate as trg
+        with tempfile.TemporaryDirectory() as td:
+            report["gate_decision"] = trg.decide(
+                data_path=data_path, output_dir=td, pre_reg_path=prereg, source_manifest=None,
+                compat_fixture=False, repo_root=root, research_state_dir=rs,
+                harness_repo_root=hrr, skip_drift_preflight=True)
+        # avoid duplicating full nested preflight object bloat in compose output
+        if "drift_preflight" in report["gate_decision"]:
+            report["gate_decision"]["drift_preflight_nested"] = "see report.drift_preflight"
+            report["gate_decision"].pop("drift_preflight", None)
+    except Exception as e:
+        report["gate_decision"] = {"pass": False, "status": "BLOCKED", "error": repr(e), "outcomes_inspected": False}
+    # 3) probe invariant state + probe_invariant_runtime validation
+    report["probe_invariant_state"] = probe_invariant_state(root, research_state_dir=rs)
+    report["probe_invariant_runtime_valid"] = report["probe_invariant_state"].get("probe_invariant_runtime_validation", {}).get("pass") is True
+    report["elapsed_s"] = round(time.time() - t0, 6)
+    # fail-closed overall
+    drift_ok = report["drift_preflight"].get("pass") is True
+    gate_blocked_expected = report["gate_decision"].get("status") == "BLOCKED" and report["gate_decision"].get("outcomes_inspected") is False
+    probe_ok = report["probe_invariant_state"].get("pass") is True
+    report["pass"] = drift_ok and gate_blocked_expected and probe_ok
+    report["fail_closed_order"] = "drift_preflight->gate_decision->probe_invariant_state"
+    return report
+
+
+
 if __name__ == "__main__":
     out = run()
     print(json.dumps(out, indent=2, sort_keys=True))

@@ -420,3 +420,11 @@ Consolidated unreferenced superseded Track A monitoring artifacts (verified no r
 | `ironflow_trend_digest_20261102T220326Z.json` | `3b3e3f383ff5c6b85197ac98927b32c4f694198e2f4a137ed7e423201a44bb29` | 729 | {   "digest_ts": "2026-11-05T05:15:44.872158+00:00",   "latest": "ironflow_trend_report_20261102T220326Z.json",   "removed_count": 3,   "ent |
 | `ironflow_trend_report_20261102T220326Z.json` | `291af415643bba485b87867af1cf581f489ef44f8fec727f587b17862d15e14a` | 65914 | {   "report_id": "ironflow_trend_report_20261102T220326Z",   "generated_utc": "2026-11-02T22:03:26.159024+00:00",   "campaign": "LIQUIDATION |
 Removed: 2 files.
+
+## 104 consolidation (20261105T191803Z, FCLR-NEXT-104 root-bound preconsolidation + operator compose/probe-invariant validation)
+Consolidated unreferenced non-canonical root artifacts (verified no refs in AGENT_HANDOFF.md, research_state/experiment_frontier.json, scripts/, tests/ at removal time). Provenance preserved; removed to regain root md+json slack before 104 evidence writes. Historical Track C/H002 context preserved in referenced artifacts (h002_replication_report.md, hypothesis_registry.json, workflow_run_diagnostics.jsonl as historical log).
+| file | sha256 | bytes | excerpt |
+|---|---|---:|---|
+| `handoff_hardening_audit.md` | `3f37db1371a5fd43890517345268a6117dc96fcc40b1909bbc2702297a1372ed` | 2326 | # Handoff Hardening Audit  **Generated:** 2026-10-31T22:54:20Z **HEAD:** 9b2b9335 **Task ID:** HND-20261031-225247-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V23 **Status:** COMPLETE (heavy evidence campaign)  ## Actions taken (in order) |
+| `shek_methodology_availability.md` | `30734a901de013e522f379929d34f312611a5b7929b961123558506ef73c0a05` | 2700 | # Shek (SSRN, posted 29 Sep 2026) methodology — availability record  Source requested: Helvin Shek, "Limits to Coordination: Funding Drag in Crypto Perpetual Funding Rates," SSRN, posted 29 September 2026. URL: https://p |
+Removed: 2 files. Root md+json before consolidation: 155; expected after deletion: 153; after 104 evidence (023 blocker + 104 sweep + frontier/handoff edits in-place): bounded <=163 verified post-write.
