@@ -1,19 +1,9 @@
 {
-  "generated_utc": "20261105T122912Z",
+  "generated_utc": "20261105T131058Z",
   "cache_info": {
     "source": "cache",
-    "generated_utc": "2026-11-04T20:47:35.774882+00:00",
-    "queries": [
-      "liquidation",
-      "liquidations",
-      "crypto liquidation",
-      "perpetual liquidation",
-      "hyperliquid liquidation",
-      "funding liquidation",
-      "crypto perpetual liquidation",
-      "liquidation ticks",
-      "perpetual futures liquidation"
-    ],
+    "generated_utc": "2099-01-01T00:00:00+00:00",
+    "queries": [],
     "stale": false
   },
   "errors": [],
@@ -83,30 +73,6 @@
       "probes": [
         "https://www.okx.com/"
       ]
-    },
-    {
-      "name": "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
-      "urls": [
-        "https://huggingface.co/api/datasets/Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
-        "https://huggingface.co/datasets/Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations/resolve/main/README.md"
-      ],
-      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
-    },
-    {
-      "name": "hf_discovered__ochinimus_crypto-liquidation-ticks",
-      "urls": [
-        "https://huggingface.co/api/datasets/ochinimus/crypto-liquidation-ticks",
-        "https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks/resolve/main/README.md"
-      ],
-      "notes": "Discovered via live HF /api/datasets?search=crypto liquidation enumeration (query='crypto liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
-    },
-    {
-      "name": "hf_discovered__craftify2221_hyperliquid-builder-liquidation-panel",
-      "urls": [
-        "https://huggingface.co/api/datasets/craftify2221/hyperliquid-builder-liquidation-panel",
-        "https://huggingface.co/datasets/craftify2221/hyperliquid-builder-liquidation-panel/resolve/main/README.md"
-      ],
-      "notes": "Discovered via live HF /api/datasets?search=hyperliquid liquidation enumeration (query='hyperliquid liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
     }
   ],
   "deep_review_urls": [

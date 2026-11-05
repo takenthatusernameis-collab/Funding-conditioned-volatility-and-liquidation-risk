@@ -147,36 +147,89 @@ class FCLR010Harness:
             _json.dump(prereg, f, indent=2)
         return path
 
-    def evaluate_forward(self, data_path: Path, output_dir: Path, pre_reg_path: Optional[Path] = None) -> Dict[str, Any]:
+    def evaluate_source_manifest(self, manifest: Optional[Dict[str, Any]], *, strict: bool = True) -> Dict[str, Any]:
+        """097/098: evaluate a Track A candidate manifest against the rubric gate.
+        Default strict uses assess_strict_manifest (GO-shaped observed HL claims must
+        include machine-verifiable provenance/label/coverage/block evidence).
+        strict=False uses assess_minimal_fixture compat (legacy/test-fixture path only).
+        No network, no file writes.
+        """
+        from scripts.tracka_rubric import assess_strict_manifest, assess_minimal_fixture
+        if manifest is None:
+            return {"status": "NO-GO", "go": False, "failures": ["manifest_missing"], "strict_gate": bool(strict)}
+        r = assess_strict_manifest(manifest) if strict else assess_minimal_fixture(manifest)
+        return {"status": "GO" if r.get("go") else "NO-GO", "go": bool(r.get("go")),
+                "failures": r.get("failures", []), "strict_gate": bool(strict), "rubric": r}
+
+    def evaluate_forward(self, data_path: Path, output_dir: Path, pre_reg_path: Optional[Path] = None,
+                         source_manifest: Optional[Dict[str, Any]] = None,
+                         strict_manifest_gate: Optional[bool] = None) -> Dict[str, Any]:
         """
         Evaluate forward validation on new data using the FROZEN model.
-        MUST pre-register (pre_register_forward_experiment) before inspecting new outcomes.
-        No retuning: config, features, splits, metrics, and gates are frozen.
+        098 hardening: (1) PREREG-BEFORE-OUTCOMES always enforced first (blocked until
+        prereg exists; no outcome inspection when blocked). (2) When source_manifest is
+        provided, strict Track A manifest GO gate is enforced by default
+        (strict_manifest_gate defaults True for manifest-bearing decisions; rejects
+        minimal-only GO-shaped manifests). (3) Explicit compat fixture/test path:
+        strict_manifest_gate=False with a manifest uses assess_minimal_fixture.
+        (4) Frozen config only. No retuning. No network.
+        Legacy callers (no source_manifest) preserve prior prereg/data gate behavior.
         """
         data_path = Path(data_path)
         output_dir = Path(output_dir)
+        # PREREG-BEFORE-OUTCOMES: enforced before any data/outcome inspection.
         if pre_reg_path is not None:
             pre_reg_path = Path(pre_reg_path)
             if not pre_reg_path.exists():
+                gate = None
+                if source_manifest is not None:
+                    gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
                 return {
                     "status": "BLOCKED",
                     "reason": f"Pre-registration file not found: {pre_reg_path}. Pre-register before inspecting outcomes.",
+                    **({"manifest_gate": gate} if gate is not None else {}),
+                    "outcomes_inspected": False,
+                    "prereg_required": True,
                 }
         else:
+            gate = None
+            if source_manifest is not None:
+                gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
             return {
                 "status": "BLOCKED",
                 "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.",
+                **({"manifest_gate": gate} if gate is not None else {}),
+                "outcomes_inspected": False,
+                "prereg_required": True,
             }
+        # Manifest gate: strict by default when manifest is provided (098 resume/GO path).
+        gate = None
+        if source_manifest is not None:
+            strict = strict_manifest_gate is not False  # default True for GO decisions
+            gate = self.evaluate_source_manifest(source_manifest, strict=strict)
+            if not gate.get("go"):
+                return {
+                    "status": "BLOCKED",
+                    "reason": "Track A strict manifest gate NO-GO. Manifest must pass assess_strict_manifest for GO-shaped observed Hyperliquid claims (machine-verifiable provenance/label/coverage/block evidence required). Compat fixture path requires explicit strict_manifest_gate=False.",
+                    "manifest_gate": gate,
+                    "outcomes_inspected": False,
+                    "prereg_required": False,
+                }
         if not data_path.exists():
             return {
                 "status": "BLOCKED",
                 "reason": f"Data path not found: {data_path}. No new data available for forward validation.",
+                **({"manifest_gate": gate} if gate is not None else {}),
+                "outcomes_inspected": False,
+                "prereg_required": False,
             }
         return {
             "status": "READY_FROZEN",
-            "reason": "Pre-registration present; data available; frozen config only, no retuning.",
+            "reason": ("Strict manifest GO; " if gate is not None else "") + "Pre-registration present; data available; frozen config only, no retuning.",
+            **({"manifest_gate": gate} if gate is not None else {}),
             "config": self.get_frozen_config(),
             "data_path": str(data_path),
+            "outcomes_inspected": False,
         }
 
 

@@ -1,8 +1,8 @@
 {
   "registry_version": "1.1",
-  "generated": "20261105T101957Z",
+  "generated": "20261105T131205Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-097 EXECUTED (2026-11-05T12:24:44Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: tracka_rubric.py strict full-manifest default path + minimal_fixture_compat (097, 093-096 preserved); resume check validates strict rejects minimal-only GO-shaped + compat preserved + strict accepts full manifest (PASS <5s, offline/no-network/no-real-writes). Monitor network-isolation proofs added (6 tests: state-only/decision/simulate/--verify/--decision tmp-isolated, patched network asserts-not-called, real research_state unchanged). Watch trigger_harden residue audited: live 1, non-20261104T 0; generator-compatible (non-recursive root glob) proof; no unsafe moves. Trigger probes NO DATA (quick/deep_review/hunt; no rubric-GO strict/legacy). Root md+json 159 (+2 required evidence). Ironflow probes==2. Tests 244 OK; rubric adversarial 093-097=79. PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-098.",
+  "current_status": "CAMPAIGN FCLR-NEXT-098 EXECUTED (2026-11-05T13:12:05Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: strict manifest GO gate integrated into fclr010_harness (evaluate_source_manifest + evaluate_forward default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path strict=False; legacy no-manifest prereg/data behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only, no network, real research_state unchanged). Alt/cache churn safety proofs (deep_review/hunt tmp-isolated, canonical latest only, no recurring timestamped families, no real url_probe_cache mutation). Handoff drift audited: single durable root AGENT_HANDOFF.md. Trigger probes NO DATA (quick/deep_review/hunt; no rubric-GO strict). Root md+json 161 (<=161). Ironflow probes==2. Tests 261 OK. PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-099.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -70,11 +70,23 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T122444Z",
-      "notes": "FCLR-NEXT-097 20261105T122444Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent). Strict full-manifest rubric defaults+compat added (097, 093-096 preserved); minimal GO-shaped NO-GO in strict, GO in compat; resume check 8 checks PASS <5s offline/no-network/no-real-writes. Monitor state-only/decision/verify network-isolation proofs (+6) green. Root 159; probes==2; watch trigger_harden live 1, non-20261104T 0, generator-compatible audit. PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
+      "last_checked": "20261105T131205Z",
+      "notes": "FCLR-NEXT-098 20261105T131205Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T130449Z.json). Strict manifest gate integrated into fclr010_harness resume/evaluate_forward path (default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path; legacy no-manifest behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only/no network/real research_state unchanged). Alt/cache churn safety proofs (tmp-isolated, canonical latest only, no recurring families, no real cache mutation). Handoff drift audited: single root AGENT_HANDOFF.md. Root 161 (<=161); probes==2; tests 261 OK. PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
+      "artifact_churn_098": {
+        "research_state_mdjson_root": 161,
+        "ironflow_probe_files": 2,
+        "tests_total": 261,
+        "strict_gate_integrated_in_harness": true,
+        "legacy_no_manifest_behavior_preserved": true,
+        "offline_prereg_before_outcomes_branches": 4,
+        "alt_cache_churn_tmp_isolated_proof": true,
+        "handoff_single_durable_root": "AGENT_HANDOFF.md",
+        "new_recurring_probe_scan_families": 0,
+        "blocker": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
+        "sweep": "research_state/campaign_sweep_tracka_20261105T131205Z.md"
+      },
       "artifact_churn_092": {
-        "research_state_mdjson_root": 184,
         "ironflow_probe_files": 2,
         "tests": 155,
         "alt_timestamped_families_eliminated": [
@@ -186,9 +198,9 @@
     {
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
-      "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative (>=5 symbols OR >=1 complete month OR >=3x30d blocks, schema compatible with frozen FCLR-010, unauthenticated/no keys/requester-pays)",
-      "last_checked": "2026-11-05T11:04:45Z",
-      "evidence": "research_state/ironflow_probe_20261105T105910Z.json; research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md"
+      "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid observed-liquidation source passes strict full-manifest GO rubric/gate (machine-verifiable provenance/label/coverage/block evidence). Hyperliquid-only.",
+      "last_checked": "2026-11-05T13:04:49Z",
+      "evidence": "research_state/ironflow_probe_20261105T130449Z.json; research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md"
     },
     {
       "track": "TRACK_C",
@@ -197,94 +209,24 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-05T12:24:44Z",
-  "timestamp": "20261105T122444Z",
-  "last_checked": "2026-11-05T12:24:44Z",
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
-  "artifact_churn_090": {
-    "ironflow_probe_files_before": 38,
-    "ironflow_probe_files_after": 2,
-    "digest_files_before": 37,
-    "digest_files_after": 1,
-    "canonical_digest": "research_state/ironflow_probe_digest_latest.json",
-    "entries_archived": 38,
-    "research_state_files_before": 241,
-    "research_state_files_after": 189,
-    "removed": 52,
-    "mechanism": "scripts/monitor_ironflow_liquidations.py _consolidate_ironflow_probes now writes ONE running archive (ironflow_probe_digest_latest.json) instead of a per-run timestamped digest; legacy migration via scripts/migrate_digest_archive_090.py; redundant Track A families merged by scripts/merge_redundant_artifacts_090.py; unreferenced 76-byte trackc_recompute_audit stub dropped.",
-    "tests": "python -m unittest discover tests -> 138 tests OK (2 new TestConsolidation cases added for the 090 fix).",
-    "resume_condition_unchanged": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only."
-  },
-  "artifact_churn_091": {
-    "research_state_md_json_before": 191,
-    "research_state_md_json_after": 179,
-    "net_delta": -12,
-    "consolidated_into_histories": 9,
-    "removed_unreferenced_transient": 6,
-    "removed_unreferenced_duplicates": 2,
-    "removed_temp_diag_scripts": 6,
-    "removed_zero_ref_fast_scripts": 2,
-    "merged_snapshot": 1,
-    "ironflow_probe_files": 2,
-    "tests_before": 138,
-    "tests_after": 146,
-    "harness_cold_s": "<0.05",
-    "monitor_quick_s": "~0.46",
-    "resume_condition_unchanged": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only. PREREGISTER BEFORE INSPECTING OUTCOMES."
-  },
-  "artifact_churn_095": {
-    "research_state_mdjson_root": 155,
-    "ironflow_probe_files": 2,
-    "tests_total": 208,
-    "rubric_adversarial_tests_total": 52,
-    "rubric_adversarial_added_095": 18,
-    "offline_resume_script": "scripts/tracka_resume_check.py",
-    "offline_resume_script_pass": true,
-    "offline_resume_script_under_5s_test_enforced": true,
-    "canonical_alt_outputs": [
-      "alt_source_scan_latest.json",
-      "alt_source_deep_review_latest.md"
-    ],
-    "watch_trigger_harden_zero_safe_removable": 0,
-    "watch_trigger_harden_files": 28,
-    "watch_trigger_harden_bytes": 74890,
-    "watch_trigger_harden_generators": [
-      "scripts/write_trigger_harden_successor.py",
-      "scripts/trackc_inventory_harden.py"
-    ],
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
+  "artifact_churn_098": {
+    "research_state_mdjson_root": 161,
+    "ironflow_probes": 2,
+    "tests_total": 261,
+    "strict_gate_integrated_in_harness": true,
+    "offline_prereg_before_outcomes_branches": 4,
+    "alt_cache_churn_tmp_isolated_proof": true,
+    "handoff_single_durable_root": "AGENT_HANDOFF.md",
     "new_recurring_probe_scan_families": 0,
-    "consolidated_superseded_094_artifacts": 2,
-    "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
-    "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md"
+    "blocker": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
+    "sweep": "research_state/campaign_sweep_tracka_20261105T131205Z.md"
   },
-  "last_checked_utc": "20261105T122444:44Z",
-  "track_a_blocker_latest": "research_state/liquidation_forward_validate_016_blocker_20261105T120604Z.md",
-  "artifact_churn_096": {
-    "root_md_json": 157,
-    "ironflow_probes": 2,
-    "tests_ok": 226,
-    "rubric_adversarial_093_094_095_096": 67,
-    "resume_check_pass_under_5s": true,
-    "watch_trigger_harden_20261104T_live": 1,
-    "watch_trigger_harden_20261104T_archived": 27,
-    "watch_archive": "research_state/watch/archive/trigger_harden_20261104T_096_archive.json",
-    "no_new_recurring_probe_scan_families": true
-  },
-  "artifact_churn_097": {
-    "root_md_json": 159,
-    "ironflow_probes": 2,
-    "tests_ok": 244,
-    "rubric_adversarial_093_097": 79,
-    "resume_check_pass_under_5s": true,
-    "resume_checks": 8,
-    "strict_manifest_default_path": true,
-    "minimal_fixture_compat_preserved": true,
-    "monitor_network_isolation_tests_added": 6,
-    "watch_trigger_harden_live": 1,
-    "watch_trigger_harden_non_20261104T_live": 0,
-    "watch_generator_compatible_audit": true,
-    "no_new_recurring_probe_scan_families": true
-  }
+  "last_updated": "2026-11-05T13:12:05Z",
+  "timestamp": "20261105T131205Z",
+  "last_checked": "2026-11-05T13:12:05Z",
+  "last_checked_utc": "20261105T131205Z",
+  "track_a_blocker_latest": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md"
 }
