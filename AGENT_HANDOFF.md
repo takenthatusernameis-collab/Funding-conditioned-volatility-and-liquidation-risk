@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T083124Z
-Git SHA (HEAD): 3dd6bf14 (working tree clean: pycache untracked per .gitignore; ironflow probe rotated to exactly 2 artifacts)
+Timestamp (UTC): 20261105T091423Z
+Git SHA (HEAD): 9688419d (working tree: pycache + ironflow_fastpath_cache cache refresh only; research_state root 185 md+json; ironflow probe artifacts == 2)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T083124Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-093
+Handoff ID: FCLR-HANDOFF-20261105T091423Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-093
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -12,12 +12,12 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - BOTH components are core to repo identity. While volatility is sealed, liquidation risk MUST be driven to completion via admissible data or hardened to resume instantly on trigger. NO SCOPE DRIFT TO SEALED TRACKS.
 
 ## CURRENT VERIFIED STATE (CLEAN BASELINE)
-- Tests: `python -m unittest discover tests` — **155 tests OK** (green; runtime ~15.5s; includes 091+092+093 adversarial rubric/dry-run/canonical-output hardening). MUST remain green.
+- Tests: `python -m unittest discover tests` — **156 tests OK** (green; runtime ~13.7s; includes 091+092+093 adversarial rubric/dry-run/canonical-output hardening). MUST remain green (>=155).
 - Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED.
 - Track A: ON-TRIGGER/MONITOR ONLY. Latest blocker: `research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md`. `experiment_frontier.json` updated (last_checked 2026-11-05T08:26:40Z; track_a_blocked true).
 - Artifact churn (092→093): flat/net-negative — no new recurring timestamped families; `scripts/hunt_alternative_liquidation_sources.py` writes `research_state/alt_source_scan_latest.json`; `scripts/deep_review_alt_sources.py` writes `research_state/alt_source_deep_review_latest.md`. Ironflow probe family **exactly 2 files** (1 live + `ironflow_probe_digest_latest.json`). No new recurring timestamped probe/scan families. research_state root md+json = 185 (stable).
 - Harness: FCLR-010 fixtures exist (`tests/fixtures/tracka`, frozen manifest, 6 symbols); `FCLR010Harness` cold <0.05s; `pre_register_forward_experiment`/`evaluate_forward` enforce PREREG-BEFORE-OUTCOMES and block without prereg. Monitor quick ~0.50s cached.
-- THIS SESSION (20261105T083124Z) EXECUTED FCLR-NEXT-093 STEPS 1-2: Step 1 entry metrics baseline recorded (tests 155 green; research_state root 185 md+json; ironflow probes 2; monitor --quick ~0.50s cached; harness cold <0.05s; churn sources identified). Step 2 trigger probe executed: `monitor_ironflow_liquidations.py --quick` → NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); `deep_review_alt_sources.py` → canonical; `hunt_alternative_liquidation_sources.py` → canonical. Decision: **NO NEW DATA - ON HOLD**. No prereg created; no harness outcome inspection. Steps 1-2 COMPLETE — DO NOT RE-EXECUTE. Proceed immediately to Step 3 bottleneck demolition.
+- THIS SESSION (20261105T091423Z) VERIFIED BASELINE: tests 156 OK green; research_state root 185 md+json (stable); ironflow probes == 2 enforced; monitor --quick NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); alt_source_scan/deep_review canonical. FCLR-NEXT-093 STEPS 1-2 ALREADY COMPLETE (prior session: entry metrics baseline + trigger probe NO NEW DATA - on hold) — DO NOT RE-EXECUTE. Proceed immediately to Step 3 bottleneck demolition.
 - NO COASTING ALLOWED. Every session must produce measurable bottleneck reduction or hardness improvements with irrefutable metrics.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
@@ -67,4 +67,4 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 - `python scripts/fclr010_harness.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T083124Z: Execute FCLR-NEXT-093 Steps 3-6 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Steps 1-2 DONE this session (baseline recorded; trigger probe NO NEW DATA - on hold). Remaining mandatory: Steps 3-6 — bottleneck demolition (merge timestamped families into canonical histories, ironflow probes == 2, reduce test/monitor side-effect churn, document before/after in `research_state/campaign_sweep_tracka_*.md`), source hardening + maximally strict adversarial rubric edge tests, harness offline dry-run <10s with enforced tests, tests >=155 green, write `research_state/liquidation_forward_validate_013_blocker_*.md` with full evidence/metrics/bottlenecks/resume instructions, update `experiment_frontier.json` (last_checked now, track_a_blocked true, pointer to new blocker, artifact_churn_093 metrics), update this handoff STRICTER with a new timestamped next task that cannot be coasted. PREREG BEFORE OUTCOMES if triggered. NO COASTING.
+20261105T091423Z: Execute FCLR-NEXT-093 Steps 3-6 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. Steps 1-2 DONE prior session (baseline recorded; trigger probe NO NEW DATA - on hold). Remaining mandatory: Steps 3-6 — bottleneck demolition (merge timestamped families into canonical histories, enforce ironflow probes == 2, reduce test/monitor side-effect churn with safety tests, document before/after in `research_state/campaign_sweep_tracka_*.md`), source hardening + maximally strict adversarial rubric edge tests, harness offline dry-run <10s with enforced tests, tests >=155 green, write `research_state/liquidation_forward_validate_013_blocker_*.md` with full evidence/metrics/bottlenecks/resume instructions, update `experiment_frontier.json` (last_checked now, track_a_blocked true, pointer to new blocker, artifact_churn_093 metrics), update this handoff STRICTER with a new timestamped next task that cannot be coasted. PREREG BEFORE OUTCOMES if triggered. NO COASTING. HEAVY WORK MANDATORY WHILE BLOCKED.
