@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T201400Z
+Timestamp (UTC): 20261105T210643Z
 Git SHA (HEAD, baseline): 02471d56 (working tree modified by FCLR-NEXT-105 hardening; uncommitted)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T201400Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: IRONFLOW-PROBING-EXHAUSTED/ROOT-BOUND-PRECONSOLIDATED-142/PROBES-2/LFS-LOCAL-CACHE-AWARE/GATE-REASON-CODES-PRESENT/OPERATOR-CLI-ENTRYPOINT-ADDED+PROBE-INVARIANT-RUNTIME-NAMED-GUARD-WIRED
+Handoff ID: FCLR-HANDOFF-20261105T210643Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: IRONFLOW-PROBING-EXHAUSTED/ROOT-BOUND-PRECONSOLIDATED-142/PROBES-2/LFS-LOCAL-CACHE-AWARE/GATE-REASON-CODES-PRESENT/OPERATOR-CLI-ENTRYPOINT-ADDED+PROBE-INVARIANT-RUNTIME-NAMED-GUARD-WIRED
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -27,7 +27,7 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 ```text
 TASK ID: FCLR-NEXT-106-TRACK-A-ENTRY-VERIFY-ONLY-NO-COAST-NO-NEW-EVIDENCE-UNLESS-TRIGGERED
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T201400Z
+TIMESTAMP (UTC): 20261105T210643Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE DELTA REQUIRED ONLY IF A TRIGGER APPEARS. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION FAILS IF ONLY REPORTS/PROBES OR IF IT REPEATS 105 WITHOUT EXTENDING IT. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES. NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS (PROBING EXHAUSTED).
 OBJECTIVE (INFERRED): Complete liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked (Hyperliquid data_through 2026-10; 2026-11..2027-02 absent). 105 delivered: (A) consolidated 13 unreferenced non-canonical root artifacts with sha256/bytes/excerpt provenance into tracka_bottleneck_history_090.md#105 BEFORE any evidence write (root 155->142 pre-evidence, probes==2 unchanged, no recurring families); (B) added scripts/tracka_operator_report.py operator CLI entrypoint (bounded read-only/no-network/fail-closed, stable JSON, exit 0 PASS / 1 BLOCKED) with tmp-isolated deterministic tests; (C) wired probe_invariant_runtime validation as a NAMED check `probe_invariant_runtime_named` in tracka_resume_check.run() and compose_operator_report() (fail-closed, preserves existing check names/semantics). 322 tests green; resume_check PASS 16 (0.62s); gate prereg-block shows drift_preflight.pass + stable reason/order; operator CLI PASS exit 0 (0.60s). ROOT MD+JSON = 142 (<=163) — 106 MUST: (A) Run entry verify ONLY (tests, resume_check, gate, operator CLI, compose smoke) and record exact metrics. DO NOT write new root evidence unless a RESUME CONDITION trigger appears. (B) If a trigger appears (ironflow data/events|data/fills YYYY-MM.parquet month>=2026-11 HTTP 200 unauthenticated, OR admissible unauthenticated Hyperliquid source passes strict full-manifest GO gate), PREREGISTER BEFORE INSPECTING OUTCOMES, then execute the forward validation campaign. (C) If root-bound pressure returns (would exceed <=163), consolidate >=1 unreferenced non-canonical root artifact with sha256/bytes/excerpt provenance into an existing consolidated history BEFORE any evidence write; keep probes==2 and no recurring families. (D) Update frontier/handoff with full before/after metrics and NEW stricter timestamped task FCLR-NEXT-107 naming exact uncovered gaps.
