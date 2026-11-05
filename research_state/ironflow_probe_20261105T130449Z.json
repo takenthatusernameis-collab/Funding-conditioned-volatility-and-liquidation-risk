@@ -1,0 +1,48 @@
+{
+  "probe_id": "ironflow_probe_20261105T130449Z",
+  "timestamp_utc": "2026-11-05T13:04:49.452836+00:00",
+  "mode": "quick",
+  "tree": {
+    "status": 200,
+    "url": "https://github.com/Ironflows/ironflow/tree/main/data",
+    "tree_etag_unchanged": true,
+    "tree_etag": "W/\"da39a3ee5e6b4b0d3255bfef95601890afd80709\""
+  },
+  "quick_resume_check": {
+    "triggered": false,
+    "triggering_files": [],
+    "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+    "head_probes": 8,
+    "cached_hits": 0,
+    "get_requests": 0,
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "reason": "no new files found"
+  },
+  "probe_diff": {
+    "summary": {
+      "added_count": 0,
+      "changed_count": 0,
+      "removed_count": 0
+    },
+    "added": [],
+    "changed": [],
+    "removed": []
+  },
+  "new_files_found": [],
+  "baseline_drift": {
+    "intact": true,
+    "pairs_checked": 18,
+    "regressions": 0,
+    "content_replaced": 0,
+    "method": "state_only_tree_unchanged"
+  },
+  "kaggle_mirror": {
+    "ok": true,
+    "url": "https://raw.githubusercontent.com/Kaggle/kagglehub/main/datasets/ironflows/ironflow/README.md",
+    "mirror_updated": false,
+    "last_updated": "2026-11-01T06:18:48.21Z",
+    "last_updated_month": "2026-11",
+    "triggered": false
+  }
+}
