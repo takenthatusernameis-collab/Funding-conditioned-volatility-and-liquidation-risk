@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T122444Z
+Timestamp (UTC): 20261105T130036Z
 Git SHA (HEAD, baseline): c1a6cbf3 (working tree modified by 097 hardening; not committed)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T122444Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-097-COMPLETE
+Handoff ID: FCLR-HANDOFF-20261105T130036Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-097-COMPLETE
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -25,9 +25,9 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
-TASK ID: FCLR-NEXT-098-TRACK-A-NO-COAST-STRICT-GATE-HARNESS-INTEGRATION-AND-TRIGGER-PATH-PROOF
+TASK ID: FCLR-NEXT-099-TRACK-A-NO-COAST-STRICT-GATE-HARNESS-INTEGRATION-AND-TRIGGER-PATH-PROOF
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T122444Z
+TIMESTAMP (UTC): 20261105T130036Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE DELTA REQUIRED. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION FAILS IF ONLY REPORTS/PROBES OR IF IT REPEATS 097 WITHOUT EXTENDING IT. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES. NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES.
 
@@ -57,4 +57,4 @@ STOP RULE: Complete ALL steps + artifacts with concrete metrics. Track C locked.
 - `python scripts/fclr010_harness.py` (frozen config, offline)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T122444Z: Execute FCLR-NEXT-098. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 097 delivered: 244 tests green (+18); rubric 093-097=79 (+12) with strict full-manifest defaults + minimal_fixture_compat (093-096 preserved); resume 8 checks PASS <5s/offline/no-network/no-real-writes proving strict rejects minimal-only GO-shaped, compat preserved, strict accepts full manifest; monitor network-isolation proofs +6 (state-only/decision/simulate/--verify/--decision tmp-isolated, network mocked not called, real `research_state` unchanged); watch live 1/non-20261104T 0 with generator-compatible audit; root md+json 159, probes 2, no new recurring families. Trigger NO DATA. PREREG BEFORE OUTCOMES if triggered. 098 must integrate strict gate into harness/resume path, add offline prereg-before-outcomes trigger simulation, and prove alt/cache churn safety + handoff-drift audit/cleanup with concrete metrics.
+20261105T130036Z: Execute FCLR-NEXT-098. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 097 delivered: 244 tests green (+18); rubric 093-097=79 (+12) with strict full-manifest defaults + minimal_fixture_compat (093-096 preserved); resume 8 checks PASS <5s/offline/no-network/no-real-writes proving strict rejects minimal-only GO-shaped, compat preserved, strict accepts full manifest; monitor network-isolation proofs +6 (state-only/decision/simulate/--verify/--decision tmp-isolated, network mocked not called, real `research_state` unchanged); watch live 1/non-20261104T 0 with generator-compatible audit; root md+json 159, probes 2, no new recurring families. Trigger NO DATA. PREREG BEFORE OUTCOMES if triggered. 098 must integrate strict gate into harness/resume path, add offline prereg-before-outcomes trigger simulation, and prove alt/cache churn safety + handoff-drift audit/cleanup with concrete metrics.
