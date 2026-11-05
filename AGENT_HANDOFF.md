@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T060839Z
+Timestamp (UTC): 20261105T061238Z
 Git SHA (HEAD): 8e8b7e9091b1d89b1020761ffa0423b3d19983ef
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
@@ -49,4 +49,4 @@ STOP RULE: Complete ALL 6 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/generate_tracka_fixtures.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T061213Z: Execute FCLR-NEXT-085 (already executed this session) - MAINTAIN HEAVY PROGRESS WHILE BLOCKED. Track A ONLY. Trigger probe done (NO DATA). Bottlenecks demolished/minimized. Source discovery hardened. FCLR-010 fixtures+dry-run ready offline (prereg-before-outcomes enforced). Tests green (136). If trigger appears (ironflow>=2026-11 or rubric-GO alternative unauthenticated) -> HALT and PREREGISTER BEFORE inspecting outcomes, run ONLY frozen FCLR-010 harness. Do not touch Track C/B. No schedulers/pollers/status-only files/wrappers/workflow changes. Leave concrete metrics/evidence.
+20261105T061238Z: Execute FCLR-NEXT-086 (Track A liquidation-risk heavy maintenance while blocked). Volatility SEALED/LOCKED; Liquidation Risk sole active focus. NO NEW DATA expected. Run monitor_ironflow_liquidations.py --quick + deep_review + hunt; if trigger (ironflow>=2026-11 OR rubric-GO unauthenticated source) HALT + PREREGISTER before outcomes + run ONLY frozen FCLR-010 harness. Else consolidate artifacts (>=40% reduction), harden source rubric + fixtures, dry-run FCLR-010 offline, add tests, run unittest (stay green), write liquidation_forward_validate_009_blocker_$(date).md + update experiment_frontier.json + this handoff. Track C/B locked. No schedulers/pollers/status-only files/wrappers/workflow changes. Hyperliquid-only.
