@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "2026-11-05T05:17:23Z",
-      "notes": "FCLR-NEXT-084 executed: full trigger probe, bottlenecks demolished (ironflow_probe non-digest kept 1, trends consolidated), source/hunt/deep_review hardened, FCLR-010 harness dry-run OK, adversarial tests added, tests green (133). Blocked pending ironflow>=2026-11 or rubric-GO alternative with prereg before outcomes.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_007_blocker_20261105T051723Z.md"
+      "last_checked": "20261105T061206Z",
+      "notes": "FCLR-NEXT-085 executed 20261105T061206Z: trigger probe NO DATA; bottlenecks minimized; source hardening done; FCLR-010 fixtures+harness ready offline; tests green (136). Blocked pending ironflow>=2026-11 or rubric-GO alternative with prereg before outcomes.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_008_blocker_20261105T061206Z.md"
     }
   ],
   "coverage": {

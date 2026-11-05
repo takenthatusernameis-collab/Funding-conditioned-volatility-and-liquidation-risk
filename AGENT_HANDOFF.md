@@ -49,4 +49,4 @@ STOP RULE: Complete ALL 6 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/generate_tracka_fixtures.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T060839Z: Execute FCLR-NEXT-085 above in full. Liquidation risk (Track A) ONLY. Keep churn minimal, exhaust source discovery, keep FCLR-010 harness zero-latency offline, add tests as needed, keep tests green. Leave concrete metrics and executable evidence. Do not touch Track C/B. Preregister BEFORE inspecting outcomes if triggered.
+20261105T061213Z: Execute FCLR-NEXT-085 (already executed this session) - MAINTAIN HEAVY PROGRESS WHILE BLOCKED. Track A ONLY. Trigger probe done (NO DATA). Bottlenecks demolished/minimized. Source discovery hardened. FCLR-010 fixtures+dry-run ready offline (prereg-before-outcomes enforced). Tests green (136). If trigger appears (ironflow>=2026-11 or rubric-GO alternative unauthenticated) -> HALT and PREREGISTER BEFORE inspecting outcomes, run ONLY frozen FCLR-010 harness. Do not touch Track C/B. No schedulers/pollers/status-only files/wrappers/workflow changes. Leave concrete metrics/evidence.

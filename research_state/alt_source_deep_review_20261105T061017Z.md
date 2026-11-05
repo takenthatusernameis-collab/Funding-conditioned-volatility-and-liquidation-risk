@@ -1,5 +1,5 @@
 # DEEP REVIEW OF ALTERNATIVE LIQUIDATION SOURCES
-**TIMESTAMP:** 20261105T051902Z
+**TIMESTAMP:** 20261105T061017Z
 **RUBRIC:** {"min_symbols": 5, "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks", "completeness_doc_required": true, "license_ok": true, "unauthenticated_only": true, "no_requester_pays": true, "schema_compatible_fclr010": true}
 
 ## Probe cache accounting
