@@ -1181,3 +1181,29 @@ class TestConsolidation(unittest.TestCase):
                 self.assertEqual(files[0].name, f2.name)
             finally:
                 mon.EVIDENCE_DIR = orig
+
+
+class TestBottleneckConsolidation(unittest.TestCase):
+    def test_consolidation_does_not_delete_latest(self):
+        import tempfile
+        from pathlib import Path
+        import os, time
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            orig = mon.EVIDENCE_DIR
+            try:
+                mon.EVIDENCE_DIR = td
+                f1 = td / "ironflow_probe_20261101T000001Z.json"
+                f2 = td / "ironflow_probe_20261105T000002Z.json"
+                f1.write_text("{}")
+                time.sleep(0.01)
+                f2.write_text("{}")
+                res = mon._consolidate_ironflow_probes()
+                files = list(td.glob("ironflow_probe_*.json"))
+                live = [p for p in files if not p.name.startswith("ironflow_probe_digest_")]
+                self.assertEqual(len(live), 1)
+                self.assertEqual(live[0].name, f2.name)
+                digests = list(td.glob("ironflow_probe_digest_*.json"))
+                self.assertEqual(len(digests), 1)
+            finally:
+                mon.EVIDENCE_DIR = orig

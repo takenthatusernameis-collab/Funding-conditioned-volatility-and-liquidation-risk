@@ -706,7 +706,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-05T04:31:11.836374+00:00",
+    "timestamp_utc": "2026-11-05T05:12:41.783760+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -720,7 +720,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-05T04:31:11.836386+00:00",
+    "timestamp_utc": "2026-11-05T05:12:41.783772+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
@@ -859,7 +859,7 @@
     ]
   },
   "last_tree_change": {
-    "timestamp_utc": "2026-11-05T04:31:11.836431+00:00",
+    "timestamp_utc": "2026-11-05T05:12:41.783815+00:00",
     "changed": false,
     "added": [],
     "removed": [],
@@ -1344,28 +1344,6 @@
   },
   "probe_history": [
     {
-      "timestamp_utc": "2026-11-05T02:21:07.392891+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "8866e29503a905f6"
-    },
-    {
-      "timestamp_utc": "2026-11-05T02:28:42.633797+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "b1eb0c188e108159"
-    },
-    {
       "timestamp_utc": "2026-11-05T02:35:49.113737+00:00",
       "type": "quick",
       "data_through": "2026-10",
@@ -1452,6 +1430,28 @@
       "get_requests_skipped": 8,
       "triggered": false,
       "hash": "33f7a16e6f3f4ab3"
+    },
+    {
+      "timestamp_utc": "2026-11-05T05:09:47.523887+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "e61002587a3bd21e"
+    },
+    {
+      "timestamp_utc": "2026-11-05T05:12:41.783780+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "5c979326a66035de"
     }
   ],
   "consecutive_absent_trend": {

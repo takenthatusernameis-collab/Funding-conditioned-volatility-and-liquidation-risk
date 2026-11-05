@@ -1,0 +1,22 @@
+{
+  "digest_ts": "2026-11-05T05:15:44.872158+00:00",
+  "latest": "ironflow_trend_report_20261102T220326Z.json",
+  "removed_count": 3,
+  "entries": [
+    {
+      "name": "ironflow_trend_report_20261102T215727Z.json",
+      "sha256": "08d99fdce0e9487ff3f3bff3d9a0d6e4d81142d8841d13bffa4991d3ba6614c9",
+      "mtime": 1793855190.0436304
+    },
+    {
+      "name": "ironflow_trend_report_20261102T205857Z.json",
+      "sha256": "ee2718cf10378be064f761b4af893a376668b598d350ca3af1f1a875123cabd8",
+      "mtime": 1793855190.0436304
+    },
+    {
+      "name": "ironflow_trend_report_20261102T195805Z.json",
+      "sha256": "8d4fc5eee44a4b71c3bb03c8827bc8a4998f16da7500fe7b12a92a400c95a38e",
+      "mtime": 1793855190.0436304
+    }
+  ]
+}
