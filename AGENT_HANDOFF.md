@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T051806Z
+Timestamp (UTC): 20261105T060839Z
 Git SHA (HEAD): 8e8b7e9091b1d89b1020761ffa0423b3d19983ef
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
@@ -49,4 +49,4 @@ STOP RULE: Complete ALL 6 steps + artifacts. Never stop early for "no data". Tra
 - `python scripts/generate_tracka_fixtures.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T051723Z: Execute FCLR-NEXT-085 above in full. Liquidation risk (Track A) ONLY. Keep churn minimal, exhaust source discovery, keep FCLR-010 harness zero-latency offline, add tests as needed, keep tests green. Leave concrete metrics and executable evidence. Do not touch Track C/B. Preregister BEFORE inspecting outcomes if triggered.
+20261105T060839Z: Execute FCLR-NEXT-085 above in full. Liquidation risk (Track A) ONLY. Keep churn minimal, exhaust source discovery, keep FCLR-010 harness zero-latency offline, add tests as needed, keep tests green. Leave concrete metrics and executable evidence. Do not touch Track C/B. Preregister BEFORE inspecting outcomes if triggered.
