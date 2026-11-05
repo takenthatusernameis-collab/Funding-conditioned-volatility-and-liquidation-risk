@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T110445Z
+Timestamp (UTC): 20261105T112810Z
 Git SHA (HEAD, baseline): fe487722 (working tree modified by FCLR-NEXT-095 hardening; not committed)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T110445Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-096-READY
+Handoff ID: FCLR-HANDOFF-20261105T112810Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-096-READY
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -27,7 +27,7 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 ```text
 TASK ID: FCLR-NEXT-096-TRACK-A-NO-COAST-WATCH-CONSOLIDATION-RUBRIC-PROVENANCE
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T110445Z
+TIMESTAMP (UTC): 20261105T112810Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE DELTA REQUIRED. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION IS A FAILURE IF IT ONLY REPEATS PROBES/REPORTS WITHOUT NEW HARDENING DELTA. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO "MONITOR ONLY" STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES. NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES.
 
@@ -56,4 +56,4 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 - `python scripts/fclr010_harness.py` (frozen config, offline)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T110445Z: Execute FCLR-NEXT-096 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 095 delivered measurable delta: rubric hardened for timestamp-unit ambiguity/license provenance/modeled-proxy-estimate schema/row-count conflicts/canonical symbol-map proof (+18 adversarial, 52 total); `scripts/tracka_resume_check.py` added (offline, no network, no real writes, PASS <5s, test-enforced); resume-script no-real-writes test added; monitor isolation tests green; root md+json held at 155 via §095 consolidation (094 sweep/014 blocker superseded with provenance); probes==2; watch `trigger_harden_20261104T*` inventory proven (28 files, 74,890 bytes, generators identified) — **zero-safe-removable now 0, but 096 must deliver tested generator-compatible consolidation or tested incompatibility proof+compensating delta**. Trigger NO DATA. PREREG BEFORE OUTCOMES if triggered.
+20261105T112810Z: Execute FCLR-NEXT-096 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 095 delivered measurable delta: rubric hardened for timestamp-unit ambiguity/license provenance/modeled-proxy-estimate schema/row-count conflicts/canonical symbol-map proof (+18 adversarial, 52 total); `scripts/tracka_resume_check.py` added (offline, no network, no real writes, PASS <5s, test-enforced); resume-script no-real-writes test added; monitor isolation tests green; root md+json held at 155 via §095 consolidation (094 sweep/014 blocker superseded with provenance); probes==2; watch `trigger_harden_20261104T*` inventory proven (28 files, 74,890 bytes, generators identified) — **zero-safe-removable now 0, but 096 must deliver tested generator-compatible consolidation or tested incompatibility proof+compensating delta**. Trigger NO DATA. PREREG BEFORE OUTCOMES if triggered.
