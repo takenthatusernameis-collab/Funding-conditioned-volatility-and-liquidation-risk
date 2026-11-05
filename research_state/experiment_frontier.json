@@ -1,13 +1,13 @@
 {
   "registry_version": "1.1",
-  "generated": "20261105T231733Z",
+  "generated": "20261105T233053Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "VERIFIED 20261105T231733Z (FCLR-NEXT-110 complete, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest NO TRIGGER). 110: guarded harness execute_ready_data_load (no implicit parquet/outcome reads; explicit loader only after READY_FROZEN) + explicit ADMISSIBLE_SEAM_GO_PREREG_REQUIRED/seam_go_prereg_required detail preserving 108 stable blocked codes/order (outcomes_inspected:false). 363 tests OK, resume_check 17 PASS, operator exit 0, root md+json 142, probes 2. SINGLE ACTIVE NEXT = FCLR-NEXT-111 (AGENT_HANDOFF.md): wire guarded data-load into real execution entrypoint(s) + E2E trigger-artifact fixture matrix, no bypass/no network/parquet/outcome reads. PREREG BEFORE OUTCOMES on trigger. No re-probe absent months. NO COASTING.",
+  "current_status": "VERIFIED 20261105T233053Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest NO TRIGGER; IRONFLOW PROBING EXHAUSTED 90+). 110 complete: guarded execute_ready_data_load + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED detail preserving 108 codes/order (outcomes_inspected:false). 363 tests OK, resume_check 17 PASS (probe_invariant_runtime_named+admissible_seam_wired), operator exit 0, root md+json 142, probes 2. 111 NOT STARTED (real bottleneck): fclr010_execute.py/fclr010_execute_fast.py unguarded parquet/outcome paths bypass guarded load. SINGLE ACTIVE NEXT = FCLR-NEXT-111 (AGENT_HANDOFF.md): wire guarded data-load into real execution entrypoints + E2E trigger-artifact matrix; no bypass/no network/parquet/outcome reads/no real research_state writes. PREREG BEFORE OUTCOMES on trigger. NO COASTING.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
       "rank": 0,
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z",
+      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) — EXECUTED 2026-11-04T00:52Z",
       "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
       "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
       "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
@@ -19,8 +19,21 @@
       "generated": "20261104T005200Z"
     },
     {
+      "rank": 0.05,
+      "id": "FCLR-NEXT-111",
+      "task": "FCLR-NEXT-111: WIRE GUARDED DATA-LOAD INTO REAL EXECUTION ENTRYPOINTS + E2E TRIGGER-ARTIFACT MATRIX (NO COAST)",
+      "status": "NOT_STARTED_HEAVY_WORK_REQUIRED",
+      "acceptance": "Real entrypoints fclr010_execute.py/main and fclr010_execute_fast.py/main enforce guarded seam+prereg+manifest before any parquet/outcome/canonical write; tests/test_tracka_hardening_111.py E2E matrix green; full suite >=364 green; stable 108/110 semantics preserved; root<=163 probes==2.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
+      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
+      "resume_triggers": [
+        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
+      ],
+      "generated": "20261105T233053Z"
+    },
+    {
       "rank": 0,
-      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL \u2014 forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
+      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL — forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
       "prerequisite": "tests/test_fclr010_harness.py passes; fclr010_harness.py pre_register_forward_experiment() + evaluate_forward() hardened; run_manifest.json experiments map updated; consolidated + synthesis artifacts written.",
       "acceptance": "experiment_frontier.json contains FCLR-012; track_a_fclr010_consolidated.md and funding_incremental_synthesis_20261103T115630Z.md and forward_campaign_fclr012_prereg.md present; AGENT_HANDOFF.md single durable handoff with FORWARD CAMPAIGN; pytest green.",
       "blockers": "Forward runs blocked unless NEW admissible unauthenticated data appears (new ironflow monthly parquet >2026-10-31 for Track A; new unsealed 2026 Binance panel beyond 2026-11-02 for volatility). Do not relax thresholds or re-run sealed panels.",
