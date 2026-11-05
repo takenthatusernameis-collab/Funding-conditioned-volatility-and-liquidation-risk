@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T092616Z
-Git SHA (HEAD): c628e94c (working tree modified by FCLR-NEXT-093 hardening; research_state + scripts/tracka_rubric.py + tests/test_tracka_adversarial_rubric_093.py added/modified; pycache uncommitted)
+Timestamp (UTC): 20261105T093531Z
+Git SHA (HEAD): c628e94c (working tree modified by FCLR-NEXT-093 hardening + cache timestamp touch; pycache uncommitted)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T092616Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-094
+Handoff ID: FCLR-HANDOFF-20261105T093531Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-094
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -18,14 +18,14 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - Artifact churn (093): **improved**. research_state root md+json = **169** (was 185 entry snapshot). Ironflow probe artifacts == **2** (`ironflow_probe_20261105T091733Z.json` + `ironflow_probe_digest_latest.json`). Canonical alt outputs only: `alt_source_scan_latest.json`, `alt_source_deep_review_latest.md`. Unreferenced 20261105 Track A timestamped families (072416/081715/033013), old root `ironflow_scan`/`trigger_watch`, 0616xx source/bottleneck/alt chain consolidated into `tracka_bottleneck_history_090.md` (SHA256+excerpts preserved). 5 unreferenced `watch/trigger_harden_20261104T*` removed (hash/sample recorded). No new recurring timestamped probe/scan families.
 - Harness: FCLR-010 fixtures frozen (6 symbols); `FCLR010Harness` cold ~0.015s; `pre_register_forward_experiment`/`evaluate_forward` enforce PREREG-BEFORE-OUTCOMES and block without prereg.
 - Rubric hardening (093): `scripts/tracka_rubric.py` deterministic fail-closed Hyperliquid-only/observed-only rubric; `tests/test_tracka_adversarial_rubric_093.py` adds 17 explicit edge-fail fixtures (auth/key/signature/requester-pays, <5 symbols/zero, non-Hyperliquid venue/merge, modeled-as-observed/proxy, schema mismatch, missing completeness/license, multi-failure). Hyperliquid-only firewall enforced.
-- THIS SESSION (20261105T092616Z): verified baseline/tests 173 OK; monitor --quick NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); executed FCLR-NEXT-093 Steps 3-6 (1-2 already done). No outcome inspection, no prereg created.
+- THIS SESSION (20261105T093531Z): verified baseline/tests 173 OK; monitor --quick NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); FCLR-NEXT-093 Steps 3-6 already complete (1-2 done prior). No outcome inspection, no prereg created. No new bottlenecks; ironflow_fastpath_cache.json timestamp touched only.
 - **NO COASTING ALLOWED.** "Monitor only / no data / blocked" is NOT a valid session outcome unless accompanied by measurable new bottleneck reduction, stricter tests, reduced churn, or irrefutable new evidence. If a step cannot reduce churn, it MUST add adversarial coverage, faster resume proof, or stronger provenance/rubric enforcement with concrete metrics.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
 TASK ID: FCLR-NEXT-094-TRACK-A-NO-COAST-HEAVY-STRICTER
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T092616Z
+TIMESTAMP (UTC): 20261105T093531Z
 CAMPAIGN: TRACK A LIQUIDATION RISK - IMPOSSIBLE-TO-COAST WHILE BLOCKED. MEASURABLE DELTA REQUIRED. ZERO CHURN. INSTANT IRREFUTABLE RESUME.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION IS A FAILURE IF IT ONLY REPEATS PROBES/REPORTS WITHOUT NEW HARDENING DELTA. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO "MONITOR ONLY" STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES. NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO WORKFLOW CHANGES.
 
@@ -67,4 +67,4 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 - `python scripts/generate_tracka_fixtures.py` (fixtures present)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T092616Z: Execute FCLR-NEXT-094 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 093 completed Steps 3-6: churn reduced (root md+json 185->169), unreferenced families consolidated to history, adversarial rubric module+17 fixtures added, harness 0.015s/prereg enforced, tests 173 OK, probes==2, canonical alt outputs only, trigger still NO DATA. Next session must produce NEW measurable hardening delta (stricter adversarial cases, proven <10s resume command/test, safe side-effect isolation proof, or further verified churn reduction) — not status-only repetition. PREREG BEFORE OUTCOMES if triggered.
+20261105T093531Z: Execute FCLR-NEXT-094 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 093 completed Steps 3-6: churn reduced (root md+json 185->169), unreferenced families consolidated to history, adversarial rubric module+17 fixtures added, harness 0.015s/prereg enforced, tests 173 OK, probes==2, canonical alt outputs only, trigger still NO DATA. No new bottlenecks since 093. Next session must produce NEW measurable hardening delta (stricter adversarial cases, proven <10s resume command/test, safe side-effect isolation proof, or further verified churn reduction) — not status-only repetition. PREREG BEFORE OUTCOMES if triggered.
