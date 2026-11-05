@@ -338,41 +338,32 @@ class TestCandidateMonthsStability(unittest.TestCase):
 
 
 class TestQuickPathPersistence(unittest.TestCase):
-    @patch("scripts.monitor_ironflow_liquidations.http_get")
-    @patch("scripts.monitor_ironflow_liquidations.check_resume_condition")
-    def test_quick_persists_last_quick_check(self, mock_rc, mock_get):
-        mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
-        mock_rc.return_value = {
-            "triggered": False,
-            "triggering_files": [],
-            "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
-            "head_probes": 8,
-            "cached_hits": 0,
-            "data_through": "2026-10",
-            "probes": [],
+    """Isolated quick-path runs: a --quick probe must never leave real timestamped
+    probe artifacts in research_state (Step-3 side-effect-churn removal)."""
+
+    def _isolated(self, tmp):
+        ev_dir = tmp / "evidence"
+        ev_dir.mkdir(parents=True, exist_ok=True)
+        state_path = tmp / "ironflow_monitor_state.json"
+        state_path.write_text(json.dumps({"data_through": "2026-10", "tree_etag": 'W/"x"'}))
+        real_evidence_dir, real_state_path = mon.EVIDENCE_DIR, mon.STATE_PATH
+        mon.EVIDENCE_DIR, mon.STATE_PATH = ev_dir, state_path
+        return ev_dir, state_path, real_evidence_dir, real_state_path
+
+    def _restore(self, real_evidence_dir, real_state_path):
+        mon.EVIDENCE_DIR, mon.STATE_PATH = real_evidence_dir, real_state_path
+
+    def _real_probe_names(self):
+        evidence_dir = Path(mon.REPO_ROOT) / "research_state"
+        return {
+            p.name
+            for p in evidence_dir.glob("ironflow_probe_*.json")
+            if not p.name.startswith("ironflow_probe_digest_")
         }
-        old_argv = sys.argv
-        sys.argv = ["monitor_ironflow_liquidations.py", "--quick"]
-        state_path = Path(mon.REPO_ROOT) / "research_state" / "ironflow_monitor_state.json"
-        _tmp = state_path.read_text() if state_path.exists() else "{}"
-        try:
-            state_path.write_text(json.dumps({"data_through": "2026-10", "tree_etag": 'W/"x"'}))
-            mon.main()
-            state = json.loads(state_path.read_text())
-            lqc = state.get("last_quick_check")
-            self.assertIsNotNone(lqc)
-            self.assertFalse(lqc["triggered"])
-            self.assertEqual(lqc["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
-            self.assertEqual(lqc["head_probes"], 8)
-            self.assertEqual(lqc["cached_hits"], 0)
-            self.assertEqual(lqc["data_through"], "2026-10")
-        finally:
-            state_path.write_text(_tmp)
-            sys.argv = old_argv
 
     @patch("scripts.monitor_ironflow_liquidations.http_get")
     @patch("scripts.monitor_ironflow_liquidations.check_resume_condition")
-    def test_quick_evidence_records_mode_and_post_2026_10_summary(self, mock_rc, mock_get):
+    def test_quick_persists_last_quick_check_isolated(self, mock_rc, mock_get):
         mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
         mock_rc.return_value = {
             "triggered": False,
@@ -385,25 +376,113 @@ class TestQuickPathPersistence(unittest.TestCase):
         }
         old_argv = sys.argv
         sys.argv = ["monitor_ironflow_liquidations.py", "--quick"]
-        state_path = Path(mon.REPO_ROOT) / "research_state" / "ironflow_monitor_state.json"
-        evidence_dir = Path(mon.EVIDENCE_DIR)
-        _tmp = state_path.read_text() if state_path.exists() else "{}"
-        before = {p.name for p in evidence_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")}
-        try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            ev_dir, state_path, real_evidence_dir, real_state_path = self._isolated(tmp)
+            before_real = self._real_probe_names()
+            try:
+                mon.main()
+                state = json.loads(state_path.read_text())
+                lqc = state.get("last_quick_check")
+                self.assertIsNotNone(lqc)
+                self.assertFalse(lqc["triggered"])
+                self.assertEqual(lqc["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
+                self.assertEqual(lqc["head_probes"], 8)
+                self.assertEqual(lqc["cached_hits"], 0)
+                self.assertEqual(lqc["data_through"], "2026-10")
+                probes = [p for p in ev_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")]
+                self.assertEqual(len(probes), 1)
+                ev = json.loads(probes[0].read_text())
+                self.assertEqual(ev["mode"], "quick")
+                self.assertIn("quick_resume_check", ev)
+                self.assertEqual(ev["quick_resume_check"]["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
+                self.assertEqual(ev["head_probes"], 8)
+                self.assertEqual(ev["cached_hits"], 0)
+            finally:
+                self._restore(real_evidence_dir, real_state_path)
+                sys.argv = old_argv
+        after_real = self._real_probe_names()
+        self.assertEqual(before_real, after_real, "quick path leaked a probe artifact into research_state")
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    @patch("scripts.monitor_ironflow_liquidations.check_resume_condition")
+    def test_quick_evidence_records_mode_and_post_2026_10_summary_isolated(self, mock_rc, mock_get):
+        mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
+        mock_rc.return_value = {
+            "triggered": False,
+            "triggering_files": [],
+            "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+            "head_probes": 8,
+            "cached_hits": 0,
+            "data_through": "2026-10",
+            "probes": [],
+        }
+        old_argv = sys.argv
+        sys.argv = ["monitor_ironflow_liquidations.py", "--quick"]
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            ev_dir, state_path, real_evidence_dir, real_state_path = self._isolated(tmp)
+            before_real = self._real_probe_names()
+            try:
+                mon.main()
+                probes = [p for p in ev_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")]
+                self.assertEqual(len(probes), 1, f"expected exactly one isolated probe file, got {probes}")
+                ev = json.loads(probes[0].read_text())
+                self.assertEqual(ev["mode"], "quick")
+                self.assertIn("quick_resume_check", ev)
+                self.assertEqual(ev["quick_resume_check"]["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
+                self.assertEqual(ev["head_probes"], 8)
+                self.assertEqual(ev["cached_hits"], 0)
+            finally:
+                self._restore(real_evidence_dir, real_state_path)
+                sys.argv = old_argv
+        after_real = self._real_probe_names()
+        self.assertEqual(before_real, after_real, "quick path leaked a probe artifact into research_state")
+
+
+class TestProbeArtifactSafety(unittest.TestCase):
+    """Safety proof for the Step-3 side-effect-churn fix: the quick path must
+    never leave timestamped probe artifacts in research_state, and the live
+    probe + canonical digest contract stays at exactly 2 artifacts."""
+
+    def _real_artifact_count(self):
+        evidence_dir = Path(mon.REPO_ROOT) / "research_state"
+        return len(list(evidence_dir.glob("ironflow_probe_*.json")))
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    @patch("scripts.monitor_ironflow_liquidations.check_resume_condition")
+    def test_quick_run_leaves_real_research_state_untouched(self, mock_rc, mock_get):
+        mock_get.return_value = {"ok": True, "status": 304, "headers": {}, "body": b"", "url": TREE_URL, "not_modified": True}
+        mock_rc.return_value = {
+            "triggered": False,
+            "triggering_files": [],
+            "months_probed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+            "head_probes": 8,
+            "cached_hits": 0,
+            "data_through": "2026-10",
+            "probes": [],
+        }
+        old_argv = sys.argv
+        sys.argv = ["monitor_ironflow_liquidations.py", "--quick"]
+        before = self._real_artifact_count()
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            ev_dir = tmp / "evidence"
+            ev_dir.mkdir()
+            state_path = tmp / "ironflow_monitor_state.json"
             state_path.write_text(json.dumps({"data_through": "2026-10", "tree_etag": 'W/"x"'}))
-            mon.main()
-            after = {p.name for p in evidence_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")}
-            new_files = sorted(after - before)
-            self.assertEqual(len(new_files), 1, f"expected exactly one new probe file, got {new_files}")
-            ev = json.loads((evidence_dir / new_files[0]).read_text())
-            self.assertEqual(ev["mode"], "quick")
-            self.assertIn("quick_resume_check", ev)
-            self.assertEqual(ev["quick_resume_check"]["months_probed"], ["2026-11", "2026-12", "2027-01", "2027-02"])
-            self.assertEqual(ev["head_probes"], 8)
-            self.assertEqual(ev["cached_hits"], 0)
-        finally:
-            state_path.write_text(_tmp)
-            sys.argv = old_argv
+            real_evidence_dir, real_state_path = mon.EVIDENCE_DIR, mon.STATE_PATH
+            mon.EVIDENCE_DIR, mon.STATE_PATH = ev_dir, state_path
+            try:
+                mon.main()
+                probes = [p for p in ev_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")]
+                self.assertEqual(len(probes), 1)
+            finally:
+                mon.EVIDENCE_DIR, mon.STATE_PATH = real_evidence_dir, real_state_path
+                sys.argv = old_argv
+        after = self._real_artifact_count()
+        self.assertEqual(after, before, "real research_state probe artifacts changed")
+        self.assertEqual(after, 2, "ironflow probe artifacts must stay exactly 2 (single live probe + canonical digest)")
 
 
 class TestTrendReport(unittest.TestCase):
