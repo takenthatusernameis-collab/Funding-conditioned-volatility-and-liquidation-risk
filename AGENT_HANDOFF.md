@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T093531Z
+Timestamp (UTC): 20261105T101059Z
 Git SHA (HEAD): c628e94c (working tree modified by FCLR-NEXT-093 hardening + cache timestamp touch; pycache uncommitted)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T093531Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-094
+Handoff ID: FCLR-HANDOFF-20261105T101059Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-095
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -67,4 +67,4 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 - `python scripts/generate_tracka_fixtures.py` (fixtures present)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T093531Z: Execute FCLR-NEXT-094 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 093 completed Steps 3-6: churn reduced (root md+json 185->169), unreferenced families consolidated to history, adversarial rubric module+17 fixtures added, harness 0.015s/prereg enforced, tests 173 OK, probes==2, canonical alt outputs only, trigger still NO DATA. No new bottlenecks since 093. Next session must produce NEW measurable hardening delta (stricter adversarial cases, proven <10s resume command/test, safe side-effect isolation proof, or further verified churn reduction) — not status-only repetition. PREREG BEFORE OUTCOMES if triggered.
+20261105T101059Z: Execute FCLR-NEXT-095 as above. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 093 completed Steps 3-6: churn reduced (root md+json 185->169), unreferenced families consolidated to history, adversarial rubric module+17 fixtures added, harness 0.015s/prereg enforced, tests 173 OK, probes==2, canonical alt outputs only, trigger still NO DATA. No new bottlenecks since 093. Next session must produce NEW measurable hardening delta (stricter adversarial cases, proven <10s resume command/test, safe side-effect isolation proof, or further verified churn reduction) — not status-only repetition. PREREG BEFORE OUTCOMES if triggered.
