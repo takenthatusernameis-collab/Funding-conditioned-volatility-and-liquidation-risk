@@ -163,7 +163,8 @@ class FCLR010Harness:
 
     def evaluate_forward(self, data_path: Path, output_dir: Path, pre_reg_path: Optional[Path] = None,
                          source_manifest: Optional[Dict[str, Any]] = None,
-                         strict_manifest_gate: Optional[bool] = None) -> Dict[str, Any]:
+                         strict_manifest_gate: Optional[bool] = None,
+                         outcome_loader=None) -> Dict[str, Any]:
         """
         Evaluate forward validation on new data using the FROZEN model.
         098 hardening: (1) PREREG-BEFORE-OUTCOMES always enforced first (blocked until
@@ -177,6 +178,16 @@ class FCLR010Harness:
         """
         data_path = Path(data_path)
         output_dir = Path(output_dir)
+        # 099 OUTCOME-ISOLATION: the outcome loader (if supplied) is only invoked
+        # after every gate has passed. Any blocked branch below must NOT call it.
+        def _load_outcomes():
+            if outcome_loader is None:
+                return None
+            try:
+                return outcome_loader(data_path)
+            except Exception as e:  # pragma: no cover - defensive
+                return {"error": repr(e)}
+
         # PREREG-BEFORE-OUTCOMES: enforced before any data/outcome inspection.
         if pre_reg_path is not None:
             pre_reg_path = Path(pre_reg_path)
@@ -230,6 +241,7 @@ class FCLR010Harness:
             "config": self.get_frozen_config(),
             "data_path": str(data_path),
             "outcomes_inspected": False,
+            "outcomes_loaded": _load_outcomes() if outcome_loader is not None else None,
         }
 
 
