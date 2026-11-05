@@ -32,6 +32,7 @@ def valid_hyperliquid():
         "symbols": ["BTC", "ETH", "SOL", "AVAX", "ARB", "DOGE"],
         "completeness_documented": True,
         "license_ok": True,
+        "license_spdx": "CC-BY-4.0",
         "schema_fields": ["timestamp", "symbol", "liquidation_notional", "mark_price"],
         "timestamp_normalized_utc": True,
     }

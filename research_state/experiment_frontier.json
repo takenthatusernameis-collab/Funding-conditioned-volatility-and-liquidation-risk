@@ -2,7 +2,7 @@
   "registry_version": "1.1",
   "generated": "20261105T101957Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-094 EXECUTED (2026-11-05T10:19:57Z): Track C volatility SEALED/LOCKED. Track A liquidation risk ONLY ACTIVE; BLOCKED (Hyperliquid data_through 2026-10; 2026-11..2027-02 absent). Measurable no-coast delta: removed 18 unreferenced timestamped families (sha256/excerpt provenance in tracka_bottleneck_history_090.md §094), root md+json 153->155 (2 required evidence artifacts only), ironflow probes==2, canonical alt outputs only. tracka_rubric.py hardened (venue alias/spoof, duplicate/conflicting symbols, partial-month/coverage claims, schema conflicts, mixed observed+modeled rows, timestamp normalization; deterministic sorted failures). +17 adversarial tests (094) => 34 rubric adversarial tests; full suite 190/190 OK. Offline resume proof (rubric+harness+manifest+prereg-block) ~0.040s <10s, test-enforced. Monitor quick side-effect isolation proven (no real research_state probe leakage). NO DATA / PREREG BEFORE OUTCOMES on trigger. Single durable handoff updated to FCLR-NEXT-095.",
+  "current_status": "CAMPAIGN FCLR-NEXT-095 EXECUTED (2026-11-05T11:04:45Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: tracka_rubric.py extended (+18 adversarial, 52 rubric total) for timestamp unit ambiguity, license provenance required when claimed, modeled/proxy/estimate schema columns, row-count conflicts, canonical symbol-map proof. scripts/tracka_resume_check.py added (offline, no network, no real research_state writes) PASS <5s by test. Monitor/resume side-effect isolation tests green. Trigger probes NO DATA (monitor quick, deep_review, hunt; no rubric-GO). Root md+json 155 (094 sweep/014 blocker consolidated to history §095; 095 sweep/015 blocker added). Ironflow probes==2. Watch trigger_harden_20261104T* zero-safe-removable=0 (28 files, generator refs). PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-096.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T101957Z",
-      "notes": "FCLR-NEXT-094 executed 20261105T101957Z (no-coast heavy): trigger NO DATA (monitor --quick, data_through=2026-10, 2026-11..2027-02 absent, probe_diff no change, baseline drift intact, kaggle mirror unchanged/triggered false). Deep review/hunt canonical latest outputs refreshed; no rubric-GO Hyperliquid observed source. Removed 18 unreferenced timestamped families (sha256+excerpt in tracka_bottleneck_history_090.md §094). Root md+json 153->155 (+2 required evidence only). Ironflow probes==2. Hardened tracka_rubric.py (venue alias/spoof, duplicate/conflicting symbols, partial-month/coverage claims, schema conflicts, mixed observed+modeled rows, timestamp normalization, deterministic failures) + tests/test_tracka_adversarial_rubric_094.py (17). Rubric adversarial total 34; full suite 190/190 OK. Offline resume proof ~0.040s <10s enforced. Monitor side-effect isolation proven (TestQuickPathPersistence/TestProbeArtifactSafety). Blocked pending ironflow>=2026-11 or rubric-GO Hyperliquid source with PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_014_blocker_20261105T101957Z.md",
+      "last_checked": "20261105T110445Z",
+      "notes": "FCLR-NEXT-095 20261105T110445Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent). Rubric hardened (timestamp unit ambiguity, license provenance, modeled/proxy/estimate schema cols, row-count conflicts, canonical symbol-map proof) +18 (52 total). tracka_resume_check.py PASS <5s, offline/no network/no real research_state writes. Root 155; probes==2; watch trigger_harden zero-safe-removable=0 (28 files, generators refs). PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
       "artifact_churn_092": {
         "research_state_mdjson_root": 184,
         "ironflow_probe_files": 2,
@@ -112,6 +112,31 @@
         "offline_resume_proof_s": 0.04,
         "monitor_side_effect_isolation_proven": true,
         "new_recurring_probe_scan_families": 0
+      },
+      "artifact_churn_095": {
+        "research_state_mdjson_root": 155,
+        "ironflow_probe_files": 2,
+        "tests_total": 208,
+        "rubric_adversarial_tests_total": 52,
+        "rubric_adversarial_added_095": 18,
+        "offline_resume_script": "scripts/tracka_resume_check.py",
+        "offline_resume_script_pass": true,
+        "offline_resume_script_under_5s_test_enforced": true,
+        "canonical_alt_outputs": [
+          "alt_source_scan_latest.json",
+          "alt_source_deep_review_latest.md"
+        ],
+        "watch_trigger_harden_zero_safe_removable": 0,
+        "watch_trigger_harden_files": 28,
+        "watch_trigger_harden_bytes": 74890,
+        "watch_trigger_harden_generators": [
+          "scripts/write_trigger_harden_successor.py",
+          "scripts/trackc_inventory_harden.py"
+        ],
+        "new_recurring_probe_scan_families": 0,
+        "consolidated_superseded_094_artifacts": 2,
+        "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
+        "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md"
       }
     }
   ],
@@ -143,8 +168,8 @@
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
       "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative (>=5 symbols OR >=1 complete month OR >=3x30d blocks, schema compatible with frozen FCLR-010, unauthenticated/no keys/requester-pays)",
-      "last_checked": "2026-11-05T10:19:57Z",
-      "evidence": "research_state/ironflow_probe_20261105T101210Z.json; research_state/liquidation_forward_validate_014_blocker_20261105T101957Z.md"
+      "last_checked": "2026-11-05T11:04:45Z",
+      "evidence": "research_state/ironflow_probe_20261105T105910Z.json; research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md"
     },
     {
       "track": "TRACK_C",
@@ -153,12 +178,12 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-05T10:19:57Z",
-  "timestamp": "20261105T101957Z",
-  "last_checked": "2026-11-05T10:19:57Z",
+  "last_updated": "2026-11-05T11:04:45Z",
+  "timestamp": "20261105T110445Z",
+  "last_checked": "2026-11-05T11:04:45Z",
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_014_blocker_20261105T101957Z.md",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
   "artifact_churn_090": {
     "ironflow_probe_files_before": 38,
     "ironflow_probe_files_after": 2,
@@ -189,5 +214,30 @@
     "harness_cold_s": "<0.05",
     "monitor_quick_s": "~0.46",
     "resume_condition_unchanged": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only. PREREGISTER BEFORE INSPECTING OUTCOMES."
+  },
+  "artifact_churn_095": {
+    "research_state_mdjson_root": 155,
+    "ironflow_probe_files": 2,
+    "tests_total": 208,
+    "rubric_adversarial_tests_total": 52,
+    "rubric_adversarial_added_095": 18,
+    "offline_resume_script": "scripts/tracka_resume_check.py",
+    "offline_resume_script_pass": true,
+    "offline_resume_script_under_5s_test_enforced": true,
+    "canonical_alt_outputs": [
+      "alt_source_scan_latest.json",
+      "alt_source_deep_review_latest.md"
+    ],
+    "watch_trigger_harden_zero_safe_removable": 0,
+    "watch_trigger_harden_files": 28,
+    "watch_trigger_harden_bytes": 74890,
+    "watch_trigger_harden_generators": [
+      "scripts/write_trigger_harden_successor.py",
+      "scripts/trackc_inventory_harden.py"
+    ],
+    "new_recurring_probe_scan_families": 0,
+    "consolidated_superseded_094_artifacts": 2,
+    "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
+    "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md"
   }
 }

@@ -706,7 +706,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-05T10:34:45.058040+00:00",
+    "timestamp_utc": "2026-11-05T10:59:11.277861+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -720,7 +720,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-05T10:34:45.058052+00:00",
+    "timestamp_utc": "2026-11-05T10:59:11.277876+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
@@ -859,7 +859,7 @@
     ]
   },
   "last_tree_change": {
-    "timestamp_utc": "2026-11-05T10:34:45.058097+00:00",
+    "timestamp_utc": "2026-11-05T10:59:11.277927+00:00",
     "changed": false,
     "added": [],
     "removed": [],
@@ -1344,17 +1344,6 @@
   },
   "probe_history": [
     {
-      "timestamp_utc": "2026-11-05T08:16:42.876252+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "6277333de0887735"
-    },
-    {
       "timestamp_utc": "2026-11-05T08:17:39.694037+00:00",
       "type": "quick",
       "data_through": "2026-10",
@@ -1452,6 +1441,17 @@
       "get_requests_skipped": 8,
       "triggered": false,
       "hash": "b0170d346f9e0636"
+    },
+    {
+      "timestamp_utc": "2026-11-05T10:59:11.277885+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "d570356999998e59"
     }
   ],
   "consecutive_absent_trend": {

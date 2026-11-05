@@ -26,6 +26,7 @@ def valid_hyperliquid():
         "symbol_count": 6,
         "completeness_documented": True,
         "license_ok": True,
+        "license_spdx": "CC-BY-4.0",
         "schema_fields": ["timestamp", "symbol", "liquidation_notional", "mark_price"],
     }
 

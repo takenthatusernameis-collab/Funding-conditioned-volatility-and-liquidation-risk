@@ -391,3 +391,12 @@ Consolidated unreferenced timestamped/ref-free families (verified no refs in AGE
 | `trackc_robustness_20261104T174444Z.md` | `3f24ac7db119db6f2896d0e88ff09c88d5b1732be5914b78aa6f505e68de830b` | 12382 | # TRACK C ROBUSTNESS (FCLR-011, frozen splits only) - 20261104T174452Z  ## Context - Panel: /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/fclr011_panel.json (FCLR-011) - Splits: {'train': ['2026-01- |
 
 Removed: 18 files. Root md+json expected delta -18 (subject to probe/sweep writes).
+
+
+## 095 consolidation (20261105T110445Z, FCLR-NEXT-095 no-coast heavy)
+Superseded 094 sweep/014 blocker consolidated here after frontier/handoff updated to 015 artifacts. Provenance preserved; files removed to keep root md+json <=155 while adding 095 evidence.
+| file | sha256 | bytes | excerpt |
+|---|---|---:|---|
+| `campaign_sweep_tracka_20261105T101957Z.md` | `6917f0d387db83fc75d6c124e89dc064665506558172658d75ba0ed97eb299b5` | 8195 | # Track A Campaign Sweep (FCLR-NEXT-094, no-coast heavy) TIMESTAMP (UTC): 20261105T101957Z HEAD (baseline): c628e94c (working tree modified by 094 hardening; not committed here) RE |
+| `liquidation_forward_validate_014_blocker_20261105T101957Z.md` | `4eb2b84a8b565a5612b15106061d256e09c368e074488f67a88b18822bafa0ae` | 6362 | # LIQUIDATION_FORWARD_VALIDATE_014_BLOCKER (FCLR-NEXT-094) Timestamp (UTC): 20261105T101957Z Git SHA (baseline): c628e94c (working tree modified by 094 hardening; uncommitted) Bran |
+Removed: 2 files. Replaced by 015 blocker/095 sweep evidence.

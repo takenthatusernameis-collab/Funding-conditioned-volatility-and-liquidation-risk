@@ -22,6 +22,8 @@ RUBRIC: Dict[str, Any] = {
     "min_symbols": 5,
     "completeness_doc_required": True,
     "license_ok_required": True,
+    "license_provenance_required_when_claimed": True,
+    "timestamp_unit_explicit_required": True,
     "schema_compatible_fclr010": True,
     "required_schema_fields_any": [
         ["timestamp", "symbol", "liquidation_notional"],
@@ -32,15 +34,31 @@ RUBRIC: Dict[str, Any] = {
         "non_hyperliquid_merge",
         "proxy_without_observed_label",
         "synthetic_liquidations",
+        "modeled_proxy_estimate_columns",
+    ],
+    "forbidden_schema_columns": [
+        "modeled", "proxy", "liquidation_estimate", "estimated_liquidation",
+        "synthetic_liquidation", "simulated_liquidation", "model_liquidation",
+        "is_modeled", "is_proxy", "is_estimate",
     ],
 }
 
 REQUIRED_FCLR010_SCHEMA = {"timestamp", "symbol", "liquidation_notional"}
+FORBIDDEN_SCHEMA_COLUMNS = {
+    "modeled", "proxy", "liquidation_estimate", "estimated_liquidation",
+    "synthetic_liquidation", "simulated_liquidation", "model_liquidation",
+    "is_modeled", "is_proxy", "is_estimate", "liquidation_proxy", "breach_proxy",
+}
 
 
 def _has_required_schema(fields: List[str]) -> bool:
     s = set(fields or [])
     return REQUIRED_FCLR010_SCHEMA.issubset(s)
+
+
+def _forbidden_schema_hits(fields: List[str]) -> List[str]:
+    s = {str(f).strip().lower() for f in (fields or []) if f is not None}
+    return sorted([c for c in FORBIDDEN_SCHEMA_COLUMNS if c in s])
 
 
 _NORMALIZED_HYPERLIQUID = {"hyperliquid", "hl", "hyperliquid_perp", "hyperliquid-perp"}
@@ -120,6 +138,17 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
     # timestamp normalization: fail-closed when schema claims present but not normalized
     if candidate.get("schema_fields") and candidate.get("timestamp_normalized_utc") is False:
         failures.append("timestamp_not_normalized")
+    # timestamp unit ambiguity: epoch ms vs s is fail-closed unless explicitly normalized+declared
+    if candidate.get("schema_fields") and not candidate.get("timestamp_normalized_utc"):
+        tu = candidate.get("timestamp_unit")
+        if tu in ("epoch_ms", "epoch_s", "milliseconds", "seconds", "ms", "s"):
+            failures.append("timestamp_unit_ambiguous")
+        elif candidate.get("timestamp_unit_ambiguous"):
+            failures.append("timestamp_unit_ambiguous")
+    # forbidden modeled/proxy/estimate schema columns
+    hits = _forbidden_schema_hits(candidate.get("schema_fields") or [])
+    if hits:
+        failures.append("modeled_proxy_estimate_columns")
     norm_syms = _norm_symbols(candidate)
     sym_n = int(candidate.get("symbol_count") or len(norm_syms) or 0)
     if norm_syms and len(set(norm_syms)) != len(norm_syms):
@@ -133,12 +162,50 @@ def assess_candidate(candidate: Dict[str, Any]) -> Dict[str, Any]:
             claim = -1
         if claim != unique_n:
             failures.append("incomplete_symbol_coverage")
+    # row_count_claim conflicts / partial-row coverage claims
+    rc = candidate.get("row_count_claim")
+    ar = candidate.get("actual_row_count")
+    if rc is not None and ar is not None:
+        try:
+            if int(rc) != int(ar):
+                failures.append("row_count_claim_conflict")
+        except Exception:
+            failures.append("row_count_claim_conflict")
+    if candidate.get("partial_row_coverage"):
+        failures.append("row_count_claim_conflict")
+    # canonical symbol map normalization proof when supplied
+    sym_map = candidate.get("canonical_symbol_map")
+    if isinstance(sym_map, dict) and sym_map:
+        try:
+            norm_map = {str(k).strip().upper(): str(v).strip().upper() for k, v in sym_map.items()}
+            if not candidate.get("symbol_normalization_proof"):
+                failures.append("symbol_normalization_proof_missing")
+            else:
+                # deterministic proof: normalized keys/values match supplied map normalization
+                proof = candidate.get("symbol_normalization_proof")
+                if isinstance(proof, dict) and proof.get("normalized_map") != norm_map:
+                    failures.append("symbol_normalization_proof_missing")
+        except Exception:
+            failures.append("symbol_normalization_proof_missing")
     if unique_n < RUBRIC["min_symbols"]:
         failures.append("incomplete_symbol_coverage")
     if not candidate.get("completeness_documented", False):
         failures.append("completeness_not_documented")
     if not candidate.get("license_ok", False):
         failures.append("license_not_ok")
+    else:
+        # license provenance/URL or SPDX-style evidence required when license_ok claimed
+        lic = candidate.get("license")
+        prov = candidate.get("license_provenance") or candidate.get("license_url") or candidate.get("license_spdx")
+        has_prov = False
+        if isinstance(prov, str) and prov.strip():
+            has_prov = True
+        elif isinstance(lic, dict) and any(str(lic.get(k) or "").strip() for k in ("url", "spdx", "id", "provenance", "name")):
+            has_prov = True
+        elif isinstance(lic, str) and lic.strip() and ("http" in lic or lic.upper() in ("MIT", "APACHE-2.0", "CC-BY-4.0", "CC0-1.0", "BSD-3-CLAUSE", "ODC-BY-1.0")):
+            has_prov = True
+        if not has_prov:
+            failures.append("license_provenance_missing")
     if not _has_required_schema(candidate.get("schema_fields") or []):
         failures.append("schema_mismatch")
 

@@ -1,10 +1,10 @@
 {
-  "digest_ts": "2026-11-05T10:34:45.060571+00:00",
+  "digest_ts": "2026-11-05T10:59:11.280903+00:00",
   "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
-  "latest_probe": "ironflow_probe_20261105T103444Z.json",
+  "latest_probe": "ironflow_probe_20261105T105910Z.json",
   "latest_data_through": "2026-10",
   "removed_count": 1,
-  "total_entries": 69,
+  "total_entries": 70,
   "entries": [
     {
       "probe_id": "ironflow_probe_20261105T024001Z",
@@ -1109,6 +1109,22 @@
       "new_files_found": 0,
       "sha256": "0f7c40179d1b44e2ffd17fe5ee669cb9044a06cf234e50857143c6ccf75d9418",
       "source_file": "ironflow_probe_20261105T102906Z.json"
+    },
+    {
+      "probe_id": "ironflow_probe_20261105T103444Z",
+      "timestamp_utc": "2026-11-05T10:34:44.634606+00:00",
+      "mode": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "triggered": false,
+      "tree_status": 200,
+      "tree_not_modified": false,
+      "probe_diff_added": 0,
+      "probe_diff_changed": 0,
+      "probe_diff_removed": 0,
+      "new_files_found": 0,
+      "sha256": "808f0484fd8e58dd310d80292319a83df7bcbf1ba67ce608030340fabc00a606",
+      "source_file": "ironflow_probe_20261105T103444Z.json"
     }
   ]
 }
