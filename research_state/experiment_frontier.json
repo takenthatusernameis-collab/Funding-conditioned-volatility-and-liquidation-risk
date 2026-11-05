@@ -1,8 +1,8 @@
 {
   "registry_version": "1.1",
-  "generated": "20261105T131205Z",
+  "generated": "20261105T152256Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-100 EXECUTED (2026-11-05T15:08:04Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: ROOT-CAUSE FIX of the 098 probe-count invariant — `_consolidate_ironflow_probes` dedup skipped the unlink (re-archived already-digested live probes forever) and churn was written after consolidation (re-created the file it had removed); fixed (split dedup, single pre-consolidation write). Directory provably ==2 (1 live + 1 digest), second pass idempotent (removed=0). +2 deterministic tmp-only tests (276 OK). Root md+json 163 (<=163). Ironflow probes==2. PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-101.",
+  "current_status": "CAMPAIGN FCLR-NEXT-101 PENDING (2026-11-05T15:22:56Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). 099/100 delivered: strict gate+prereg in CLI/operator path, outcome-isolation proof, 099 drift invariants as unittest, 100 root-cause fix for monitor consolidation (probe count==2, idempotent). 276 tests OK; resume_check pass. REMAINING BOTTLENECK (unwired): probe-count==2/root-md+json/watch/canonical-alt/no-recurring-families invariants are enforced only in unittest (test_tracka_hardening_099), NOT in scripts/tracka_resume_check.py operator CLI. 101 must wire these as machine-checkable checks in tracka_resume_check.py (and resume gate as appropriate) with deterministic tests, keeping root md+json <=163, probes==2. PREREG BEFORE OUTCOMES on trigger.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T131205Z",
-      "notes": "FCLR-NEXT-098 20261105T131205Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T130449Z.json). Strict manifest gate integrated into fclr010_harness resume/evaluate_forward path (default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path; legacy no-manifest behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only/no network/real research_state unchanged). Alt/cache churn safety proofs (tmp-isolated, canonical latest only, no recurring families, no real cache mutation). Handoff drift audited: single root AGENT_HANDOFF.md. Root 161 (<=161); probes==2; tests 261 OK. PREREG BEFORE OUTCOMES. FCLR-NEXT-100 20261105T150804Z: ROOT-CAUSE FIX — the 098 probe-count invariant was NOT maintained by the monitor itself: `_consolidate_ironflow_probes` dedup skipped the unlink (re-archived already-digested live probes forever; verified 3 files / removed 0) and churn was measured+written AFTER consolidation (re-created the file it had removed). Fixed: split dedup (skip append, always unlink non-latest), single pre-consolidation churn write. Directory provably ==2 (1 live + 1 digest), second pass idempotent (removed=0). +2 deterministic tmp-only tests (276 OK). Root 163 (<=163). Ironflow probes==2. Trigger NO DATA. PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
+      "last_checked": "20261105T152256Z",
+      "notes": "FCLR-NEXT-098 20261105T131205Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T130449Z.json). Strict manifest gate integrated into fclr010_harness resume/evaluate_forward path (default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path; legacy no-manifest behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only/no network/real research_state unchanged). Alt/cache churn safety proofs (tmp-isolated, canonical latest only, no recurring families, no real cache mutation). Handoff drift audited: single root AGENT_HANDOFF.md. Root 161 (<=161); probes==2; tests 261 OK. PREREG BEFORE OUTCOMES. FCLR-NEXT-100 20261105T150804Z: ROOT-CAUSE FIX \u2014 the 098 probe-count invariant was NOT maintained by the monitor itself: `_consolidate_ironflow_probes` dedup skipped the unlink (re-archived already-digested live probes forever; verified 3 files / removed 0) and churn was measured+written AFTER consolidation (re-created the file it had removed). Fixed: split dedup (skip append, always unlink non-latest), single pre-consolidation churn write. Directory provably ==2 (1 live + 1 digest), second pass idempotent (removed=0). +2 deterministic tmp-only tests (276 OK). Root 163 (<=163). Ironflow probes==2. Trigger NO DATA. PREREG BEFORE OUTCOMES. FCLR-NEXT-101 PENDING 20261105T152256Z: probe-count/root/watch/canonical invariants not wired into tracka_resume_check.py CLI (only unittest). 101 must wire + test. Trigger NO DATA (data_through=2026-10). PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-101 (wire drift invariants into CLI resume path)",
       "artifact_churn_098": {
         "research_state_mdjson_root": 161,
         "ironflow_probe_files": 2,
@@ -237,9 +237,9 @@
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
   },
-  "last_updated": "2026-11-05T15:08:04Z",
-  "timestamp": "20261105T150804Z",
-  "last_checked": "2026-11-05T15:08:04Z",
-  "last_checked_utc": "20261105T150804Z",
+  "last_updated": "2026-11-05T15:22:56Z",
+  "timestamp": "20261105T152256Z",
+  "last_checked": "2026-11-05T15:22:56Z",
+  "last_checked_utc": "20261105T152256Z",
   "track_a_blocker_latest": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md"
 }
