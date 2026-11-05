@@ -148,11 +148,15 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
     result["drift_preflight"] = pre
     if admissible_seam is not None:
         result["admissible_seam_wired"] = {k: admissible_seam.get(k) for k in ("pass","status","reason_code","failures","month","fail_closed","network","reads_outcomes","reads_parquet") if k in admissible_seam}
-    # 103/108: machine-stable ordering/reason markers (semantics unchanged when no seam candidate)
+    # 103/108/110: machine-stable ordering/reason markers (semantics unchanged when no seam candidate)
     _order = "drift_preflight->admissible_seam->manifest_prereg" if admissible_seam is not None else "drift_preflight->manifest_prereg"
     if result.get("status") == "BLOCKED" and pre.get("pass"):
         result.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
         result.setdefault("fail_closed_order", _order)
+        # 110 explicit surface: seam GO but prereg/data blocked => clear GO+prereg-required detail
+        if admissible_seam is not None and admissible_seam.get("pass") and result.get("reason_code") == "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS":
+            result.setdefault("seam_go_prereg_required", True)
+            result.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
     elif result.get("status") in ("READY_FROZEN", "GO", "COMPLETE"):
         result.setdefault("reason_code", "RESUME_READY_AFTER_DRIFT_PASS")
         result.setdefault("fail_closed_order", _order)

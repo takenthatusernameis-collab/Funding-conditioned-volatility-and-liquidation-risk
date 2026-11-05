@@ -7,6 +7,7 @@ on new post-2026-10-31 data without retuning.
 
 import json
 import hashlib
+import tempfile
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Dict, Any, List, Optional, Callable
@@ -243,6 +244,10 @@ class FCLR010Harness:
                     res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
                     res["fail_closed_order"] = "admissible_seam->manifest_prereg"
                     res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
+                elif seam is not None and seam.get("pass"):
+                    # 110 explicit surface (preserve 108 blocked semantics: no new reason_code override here)
+                    res["seam_go_prereg_required"] = True
+                    res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED"
                 return res
         else:
             gate = None
@@ -260,6 +265,10 @@ class FCLR010Harness:
                 res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
                 res["fail_closed_order"] = "admissible_seam->manifest_prereg"
                 res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
+            elif seam is not None and seam.get("pass"):
+                # 110 explicit surface (preserve 108 blocked semantics)
+                res["seam_go_prereg_required"] = True
+                res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED"
             return res
         # Manifest gate: strict by default when manifest is provided (098 resume/GO path).
         gate = None
@@ -305,6 +314,49 @@ class FCLR010Harness:
             "outcomes_inspected": False,
             "outcomes_loaded": _load_outcomes() if outcome_loader is not None else None,
         }
+
+
+    def execute_ready_data_load(self, data_path: Path, pre_reg_path: Optional[Path],
+                                source_manifest: Optional[Dict[str, Any]] = None,
+                                strict_manifest_gate: Optional[bool] = None,
+                                outcome_loader=None,
+                                admissible_manifest: Optional[Dict[str, Any]] = None,
+                                admissible_manifest_path: Optional[str] = None) -> Dict[str, Any]:
+        """110: guarded actual harness data-load/execution path (fail-closed).
+
+        Consumes admissible seam manifest-only + prereg + manifest/data gates before any
+        parquet/outcome load. No implicit parquet reads. outcome_loader (if provided) is
+        invoked only after READY_FROZEN gates pass. Deterministic/offline-safe by design.
+        """
+        res = self.evaluate_forward(
+            data_path, output_dir=Path(tempfile.gettempdir()) / "fclr010_guarded_unused",
+            pre_reg_path=pre_reg_path, source_manifest=source_manifest,
+            strict_manifest_gate=strict_manifest_gate,
+            outcome_loader=None,  # never load in pre-check
+            admissible_manifest=admissible_manifest,
+            admissible_manifest_path=admissible_manifest_path,
+        )
+        if res.get("status") != "READY_FROZEN":
+            # normalize explicit reason for guarded execution path
+            if res.get("seam_go_prereg_required") and not res.get("reason_code"):
+                res["reason_code"] = "PREREG_REQUIRED_BEFORE_DATA_LOAD"
+            elif res.get("seam_go_prereg_required") and res.get("reason_code") == "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS":
+                # preserve 108 code for compatibility; 110 detail remains
+                pass
+            return res
+        # READY_FROZEN: no implicit parquet/outcome load. Only explicit loader after gates.
+        if outcome_loader is None:
+            res["data_loaded_implicitly"] = False
+            res["data_load_mode"] = "EXPLICIT_LOADER_REQUIRED_NO_IMPLICIT_PARQUET_READ"
+            return res
+        try:
+            res["outcomes_loaded"] = outcome_loader(Path(data_path))
+            res["data_loaded_implicitly"] = False
+            res["data_load_mode"] = "EXPLICIT_LOADER_AFTER_GATES"
+        except Exception as e:  # pragma: no cover
+            return {"status": "BLOCKED", "reason": f"outcome_loader failed: {e!r}",
+                    "outcomes_inspected": False, "admissible_seam_wired": res.get("admissible_seam_wired")}
+        return res
 
 
 def main():
