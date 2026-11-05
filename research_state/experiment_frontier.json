@@ -7,7 +7,7 @@
   "frontier": [
     {
       "rank": 0,
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z",
+      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) — EXECUTED 2026-11-04T00:52Z",
       "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
       "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
       "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
@@ -20,7 +20,7 @@
     },
     {
       "rank": 0,
-      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL \u2014 forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
+      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL — forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
       "prerequisite": "tests/test_fclr010_harness.py passes; fclr010_harness.py pre_register_forward_experiment() + evaluate_forward() hardened; run_manifest.json experiments map updated; consolidated + synthesis artifacts written.",
       "acceptance": "experiment_frontier.json contains FCLR-012; track_a_fclr010_consolidated.md and funding_incremental_synthesis_20261103T115630Z.md and forward_campaign_fclr012_prereg.md present; AGENT_HANDOFF.md single durable handoff with FORWARD CAMPAIGN; pytest green.",
       "blockers": "Forward runs blocked unless NEW admissible unauthenticated data appears (new ironflow monthly parquet >2026-10-31 for Track A; new unsealed 2026 Binance panel beyond 2026-11-02 for volatility). Do not relax thresholds or re-run sealed panels.",
@@ -70,9 +70,18 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T081715Z",
-      "notes": "FCLR-NEXT-091 executed 20261105T081715Z: trigger NO DATA (data_through 2026-10, 2026-11..2027-02 absent). research_state 191->179; 8 script-path files removed; 9 artifacts consolidated into histories; 6 ref-free transients removed; 2 dup+1 snapshot merged. ironflow probes=2. Harness<0.05s, monitor~0.46s. Tests 146/146 OK. Rubric maximally strict+tested; prereg gate enforced. Blocked pending ironflow>=2026-11 or rubric-GO Hyperliquid source with PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_011_blocker_20261105T081715Z.md"
+      "last_checked": "20261105T082640Z",
+      "notes": "FCLR-NEXT-092 executed 20261105T082547Z: trigger NO DATA (data_through 2026-10, 2026-11..2027-02 absent). Eliminated recurring timestamped alt-source probe families (canonical alt_source_scan_latest.json + alt_source_deep_review_latest.md). ironflow probes enforced==2. monitor~0.50s, harness~0.04s. Added adversarial rubric edge + dry-run bound tests; tests 155/155 OK. Rubric strict/aligned Hyperliquid-only; prereg gate enforced. Blocked pending ironflow>=2026-11 or rubric-GO Hyperliquid source with PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md",
+      "artifact_churn_092": {
+        "research_state_mdjson_root": 184,
+        "ironflow_probe_files": 2,
+        "tests": 155,
+        "alt_timestamped_families_eliminated": [
+          "alt_source_scan",
+          "alt_source_deep_review"
+        ]
+      }
     }
   ],
   "coverage": {
@@ -103,7 +112,8 @@
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
       "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative (>=5 symbols OR >=1 complete month OR >=3x30d blocks, schema compatible with frozen FCLR-010, unauthenticated/no keys/requester-pays)",
-      "last_checked": "2026-11-05T05:17:23Z"
+      "last_checked": "2026-11-05T08:26:40Z",
+      "evidence": "research_state/ironflow_probe_20261105T082334Z.json; research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md"
     },
     {
       "track": "TRACK_C",
@@ -112,12 +122,12 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-05T08:17:15Z",
+  "last_updated": "2026-11-05T08:26:40Z",
   "timestamp": "20261104T005200Z",
-  "last_checked": "2026-11-05T08:17:15Z",
+  "last_checked": "2026-11-05T08:26:40Z",
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_011_blocker_20261105T081715Z.md",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md",
   "artifact_churn_090": {
     "ironflow_probe_files_before": 38,
     "ironflow_probe_files_after": 2,

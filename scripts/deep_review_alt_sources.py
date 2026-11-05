@@ -149,8 +149,7 @@ def probe(url, method="GET", body=None, timeout=10):
         return {"url": url, "method": method, "status": None, "ok": False, "error": str(e)}
 
 def main():
-    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out = RESEARCH / f"alt_source_deep_review_{ts}.md"
+    out = RESEARCH / "alt_source_deep_review_latest.md"
     results = []
 
     # Probe Hyperliquid properly with POST (not cacheable by GET key; direct probe).
@@ -203,7 +202,7 @@ def main():
     # Write report
     lines = []
     lines.append(f"# DEEP REVIEW OF ALTERNATIVE LIQUIDATION SOURCES")
-    lines.append(f"**TIMESTAMP:** {ts}")
+    lines.append(f"**TIMESTAMP:** {datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}")
     lines.append(f"**RUBRIC:** {json.dumps(RUBRIC)}")
     lines.append(f"")
     lines.append(f"## Probe cache accounting")

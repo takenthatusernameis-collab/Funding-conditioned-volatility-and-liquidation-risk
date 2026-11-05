@@ -410,14 +410,14 @@ def discover_hf_liquidation_datasets(max_retries=2, use_cache=True, refresh=Fals
 
 def main():
     ts = now_z()
-    out = REPO_ROOT / "research_state" / f"alt_source_scan_{ts}.json"
+    out = REPO_ROOT / "research_state" / "alt_source_scan_latest.json"
     candidates, errors, cache_info = discover_hf_liquidation_datasets()
     static = list(EXTENDED_CANDIDATES)
     for c in candidates:
         if c not in static:
             static.append(c)
     payload = {
-        "generated_utc": ts,
+        "generated_utc": datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
         "cache_info": cache_info,
         "errors": errors,
         "candidates": static,
