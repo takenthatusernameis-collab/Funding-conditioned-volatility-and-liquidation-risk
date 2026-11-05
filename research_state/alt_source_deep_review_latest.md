@@ -1,10 +1,10 @@
 # DEEP REVIEW OF ALTERNATIVE LIQUIDATION SOURCES
-**TIMESTAMP:** 20261105T102927Z
+**TIMESTAMP:** 20261105T103502Z
 **RUBRIC:** {"min_symbols": 5, "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks", "completeness_doc_required": true, "license_ok": true, "unauthenticated_only": true, "no_requester_pays": true, "schema_compatible_fclr010": true}
 
 ## Probe cache accounting
-- cache_hits: 2
-- cache_misses (fresh GETs): 12
+- cache_hits: 13
+- cache_misses (fresh GETs): 1
 - shared_cache: research_state/url_probe_cache.json (TTL 21600s)
 
 ## Probes
@@ -28,6 +28,7 @@
 ### https://public.bybit.com/spot/kline/ [GET]
 - status: 404 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview: <html>
 <head><title>404 Not Found</title></head>
@@ -42,6 +43,7 @@
 ### https://public.bybit.com/trading/linear/ [GET]
 - status: 404 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview: <html>
 <head><title>404 Not Found</title></head>
@@ -54,21 +56,25 @@
 
 ### https://www.okx.com/api/v5/public/instruments?instType=SWAP [GET]
 - status: 200 ok:None
+- cache_hit: True
 - len: None
 - preview: {"code":"0","data":[{"alias":"","auctionEndTime":"","baseCcy":"","category":"1","contTdSwTime":"1611916860000","ctMult":"1","ctType":"inverse","ctVal":"100","ctValCcy":"USD","expTime":"","floatPxLmtPc
 
 ### https://www.deribit.com/api/v2/public/get_instruments?currency=BTC&kind=future [GET]
 - status: 200 ok:None
+- cache_hit: True
 - len: None
 - preview: {"jsonrpc":"2.0","result":[{"product_group":"BTC","kind":"future","max_leverage":50,"min_trade_amount":10.0,"base_currency_uuid":"5b71fc48-3dd3-540c-809b-f8c94d0e68b5","maker_commission":1.5e-4,"tick_
 
 ### https://open-api.coinglass.com/public/v2/liquidation_history?symbol=BTC&timeType=4h [GET]
 - status: 200 ok:None
+- cache_hit: True
 - len: None
 - preview: {"code":"30001","msg":"API key missing.","success":false}
 
 ### https://github.com/bmoscon/cryptofeed [GET]
 - status: 200 ok:None
+- cache_hit: True
 - len: None
 - preview:
 
@@ -87,6 +93,7 @@
 ### https://api.tardis.dev/v1/markets [GET]
 - status: 404 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview: {
   "code": 1,
@@ -102,6 +109,7 @@
 ### https://rest.coinapi.io/v1/exchanges [GET]
 - status: 401 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview: {
   "error": "You did not provided API Key or it is incorrectly formatted. You should do it in: query string parameter [apikey], in http header named [X-CoinAPI-Key], [X-APIBricks-Key], [X-APIKey], in
@@ -120,11 +128,13 @@
 ### https://studio.glassnode.com/ [GET]
 - status: 403 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview: <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta nam
 
 ### https://www.cryptodatadownload.com/data/binance/ [GET]
 - status: 200 ok:None
+- cache_hit: True
 - len: None
 - preview: <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
@@ -138,6 +148,7 @@
 ### https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/ [GET]
 - status: 404 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview: <?xml version="1.0" encoding="UTF-8"?>
 <Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>data/futures/um/daily/liquidationSnapshot/</Key><RequestId>71GN1GFMHZJF2A6X
