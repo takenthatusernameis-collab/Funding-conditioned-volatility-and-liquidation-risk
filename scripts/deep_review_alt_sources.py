@@ -154,8 +154,25 @@ def main():
     results = []
 
     # Probe Hyperliquid properly with POST (not cacheable by GET key; direct probe).
-    results.append(probe("https://api.hyperliquid.xyz/info", method="POST", body={"type": "metaAndAssetCtxs"}))
-    results.append(probe("https://api.hyperliquid.xyz/info", method="POST", body={"type": "meta"}))
+    # [HEAVY-080 bottleneck fix] POST probes are now cached via hunt's
+    # http_probe_cached_post, keyed on URL + sha256(body). The two Hyperliquid
+    # POSTs (metaAndAssetCtxs, meta) cost ~3.7s combined on every prior session
+    # because the URL-only GET cache could not distinguish them. They are now
+    # cached for 6h and cost zero on repeat runs.
+    try:
+        import sys as _sys
+        _hunt = _sys.modules.get("scripts.hunt_alternative_liquidation_sources")
+        if _hunt is None:
+            _sys.path.insert(0, str(REPO / "scripts"))
+            import hunt_alternative_liquidation_sources as _hunt
+        _cache = _hunt._url_cache_load()
+        for _body in ({"type": "metaAndAssetCtxs"}, {"type": "meta"}):
+            _r = _hunt.http_probe_cached_post("https://api.hyperliquid.xyz/info", _body, cache=_cache)
+            _hunt._url_cache_save(_cache)
+            results.append(_r)
+    except Exception:
+        results.append(probe("https://api.hyperliquid.xyz/info", method="POST", body={"type": "metaAndAssetCtxs"}))
+        results.append(probe("https://api.hyperliquid.xyz/info", method="POST", body={"type": "meta"}))
 
     # Probe the remaining candidate paths through the SHARED hunt URL probe cache
     # so a URL probed by hunt_alternative_liquidation_sources.py this session is

@@ -146,15 +146,62 @@ def http_probe_cached(url, max_retries=2, method="GET", timeout=30, body_preview
     return r
 
 
-def http_probe(url, max_retries=2, method="GET", timeout=30, body_preview_len=200):
+def _post_cache_key(url, body):
+    """Cache key for POST probes: URL + sha256 of the serialized body.
+
+    POST bodies differ (e.g. Hyperliquid info {"type":"metaAndAssetCtxs"} vs
+    {"type":"meta"}), so a URL-only key would miss and re-POST every session,
+    burning ~3.7s of the blocked-path deep-review cost on every run.
+    """
+    if body is None:
+        b = b""
+    elif isinstance(body, (bytes, bytearray)):
+        b = bytes(body)
+    else:
+        b = json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return url + "#" + hashlib.sha256(b).hexdigest()
+
+
+def http_probe_cached_post(url, body, max_retries=2, timeout=30, body_preview_len=200, cache=None):
+    """POST probe via the shared, persisted URL probe cache (keyed on URL+body).
+
+    On a cache hit the cached classification evidence is returned without any
+    network access and a 'cache_hit' flag is set. Falls back to a direct POST
+    when the hunt module cannot be imported.
+    """
+    if cache is not None:
+        key = _post_cache_key(url, body)
+        cached = _url_cache_get(cache, key)
+        if cached is not None:
+            hit = dict(cached)
+            hit["cache_hit"] = True
+            hit["method"] = "POST"
+            return hit
+    r = http_probe(url, max_retries=max_retries, method="POST", timeout=timeout, body_preview_len=body_preview_len, body=body)
+    if cache is not None and r.get("status") is not None:
+        rec = dict(r)
+        rec["probed_utc"] = datetime.now(timezone.utc).isoformat()
+        rec["cache_hit"] = False
+        rec["method"] = "POST"
+        cache[_post_cache_key(url, body)] = rec
+    return r
+
+
+def http_probe(url, max_retries=2, method="GET", timeout=30, body_preview_len=200, body=None):
     """HTTP probe with retry/backoff and body preview capture.
 
-    method may be "GET" or "HEAD". A body preview (first body_preview_len bytes,
+    method may be "GET", "HEAD", or "POST". A body may be supplied for POST
+    requests (serialized as JSON). A body preview (first body_preview_len bytes,
     decoded as latin-1 for binary-safety) is captured so error pages and small
     JSON responses can be classified by content, not just status code.
     """
     for attempt in range(max_retries + 1):
-        req = Request(url, headers={"User-Agent": USER_AGENT}, method=method)
+        data = None
+        headers = {"User-Agent": USER_AGENT}
+        if body is not None and method in ("POST", "PUT"):
+            data = json.dumps(body).encode("utf-8")
+            headers["Content-Type"] = "application/json"
+        req = Request(url, headers=headers, method=method, data=data)
         try:
             with urlopen(req, timeout=timeout) as resp:
                 status = resp.getcode()
