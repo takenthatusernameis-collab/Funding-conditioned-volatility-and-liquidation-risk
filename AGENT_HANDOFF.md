@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T032100Z
+Timestamp (UTC): 20261105T032708Z
 Git SHA (HEAD): 83e151d03dc1046b9af405e8c26f2c6b94c7614b
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T032100Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
+Handoff ID: FCLR-HANDOFF-20261105T032708Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK ENFORCED | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -23,7 +23,7 @@ Inference: Volatility is complete. Liquidation risk is the repo's unfulfilled ob
 ```text
 TASK ID: FCLR-NEXT-082-TRACK-A-VERIFY-AND-HOLD-WHILE-BLOCKED
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility DONE/LOCKED; Liquidation Risk ONLY)
-TIMESTAMP (UTC): 20261105T032100Z
+TIMESTAMP (UTC): 20261105T032708Z
 CAMPAIGN: TRACK A LIQUIDATION-RISK - VERIFY PRIOR HEAVY WORK + KEEP FCLR-010 HARNESS READY; FORCE HEAVY, MEASURABLE PROGRESS WHILE DATA-BLOCKED. DO NOT COAST.
 ENFORCEMENT: ALL STEPS MANDATORY. SESSION INCOMPLETE IF ANY SKIPPED.
 
@@ -51,4 +51,4 @@ STOP RULE: Complete ALL 6 steps + artifacts. Never stop early for "no data". Tra
 - Dry-run offline: scripts/generate_tracka_fixtures.py against tests/fixtures/tracka/ (no network)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T032100Z: Execute FCLR-NEXT-082 above in full. Prioritize liquidation risk (Track A) exclusively. Verify prior heavy work (FCLR-NEXT-080 complete), run full trigger probe, keep FCLR-010 harness invocation-ready offline, extend rubric/source coverage, remove artifact-churn bottleneck (ironflow_probe_*.json), keep tests green (>=180). Leave concrete, executable evidence for the next session. Do not touch Track C. If resume conditions met at any point, preregister BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness.
+20261105T032708Z: Execute FCLR-NEXT-082 above in full. Prioritize liquidation risk (Track A) exclusively. Verify prior heavy work (FCLR-NEXT-080 complete), run full trigger probe, keep FCLR-010 harness invocation-ready offline, extend rubric/source coverage, remove artifact-churn bottleneck (ironflow_probe_*.json), keep tests green (>=180). Leave concrete, executable evidence for the next session. Do not touch Track C. If resume conditions met at any point, preregister BEFORE inspecting outcomes and run ONLY frozen FCLR-010 harness.
