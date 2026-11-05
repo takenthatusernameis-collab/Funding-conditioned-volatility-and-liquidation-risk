@@ -1,10 +1,10 @@
 # DEEP REVIEW OF ALTERNATIVE LIQUIDATION SOURCES
-**TIMESTAMP:** 20261105T160641Z
+**TIMESTAMP:** 20261105T162544Z
 **RUBRIC:** {"min_symbols": 5, "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks", "completeness_doc_required": true, "license_ok": true, "unauthenticated_only": true, "no_requester_pays": true, "schema_compatible_fclr010": true}
 
 ## Probe cache accounting
-- cache_hits: 11
-- cache_misses (fresh GETs): 3
+- cache_hits: 13
+- cache_misses (fresh GETs): 1
 - shared_cache: research_state/url_probe_cache.json (TTL 21600s)
 
 ## Probes
@@ -21,6 +21,7 @@
 ### https://api.hyperliquid.xyz/info [GET]
 - status: 405 ok:None
 - error: True
+- cache_hit: True
 - len: None
 - preview:
 
@@ -115,6 +116,7 @@
 
 ### https://laevitas.ch/ [GET]
 - status: 200 ok:None
+- cache_hit: True
 - len: None
 - preview: <!DOCTYPE html>
 <html lang="en">

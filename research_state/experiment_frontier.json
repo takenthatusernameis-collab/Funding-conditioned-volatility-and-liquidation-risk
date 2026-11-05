@@ -1,8 +1,8 @@
 {
   "registry_version": "1.1",
-  "generated": "20261105T160711Z",
+  "generated": "20261105T162400Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-102 PENDING (2026-11-05T16:07:11Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). 101 delivered: 099/100 drift invariants WIRED into scripts/tracka_resume_check.py operator CLI (fail-closed, JSON, <5s, network:false, writes_real_research_state:false) + 16 deterministic tmp-only tests (CLI wiring + consolidation regression/idempotency guard). 292 tests OK; resume_check PASS (15 checks incl wired invariants). Root md+json 161 (<=163); probes==2; watch trigger_harden live=1 non_20261104T=0; no recurring timestamped families. REMAINING GAPS: drift invariants not yet in tracka_resume_gate.py operator decision path as a single bundled preflight (gate still focuses on manifest/prereg decision); monitor quick-path consolidation post-condition not asserted in monitor runtime return (only unittest/tmp guard) — 102 must close without breaking bounds. PREREG BEFORE OUTCOMES on trigger.",
+  "current_status": "CAMPAIGN FCLR-NEXT-103 PENDING (2026-11-05T16:24:00Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent; probe 20261105T161729Z). 102 delivered: drift preflight BUNDLED into scripts/tracka_resume_gate.py operator decision (fail-closed BEFORE manifest/prereg, JSON exposes drift_preflight, <5s/no-network/no-real-writes; strict/prereg/compat/outcome-isolation preserved; --skip-drift-preflight controlled tests only) + monitor runtime assert_probe_invariant post-condition in quick path. 303 tests OK; resume_check PASS (15 wired checks); gate real-repo prereg-block shows drift_preflight.pass. Root md+json 163 (<=163); probes==2; watch trigger_harden live=1 non_20261104T=0; no recurring timestamped families. REMAINING GAPS: drift preflight not yet consumed by any single top-level operator command that also runs quick monitor/gate/manifest-path smoke in one bounded invocation (optional) — but 103 must target exact uncovered hardening gap: (1) gate JSON/reason should be machine-stable for drift-fail vs prereg-fail ordering audit; (2) monitor quick path should include assert_probe_invariant result in evidence JSON deterministically (already added) and tests should cover runtime evidence field; (3) root bound is at 163 — 103 MUST consolidate >=2 unreferenced superseded blocker/sweep artifacts with provenance before adding evidence, keeping <=163 and preserving metrics. PREREG BEFORE OUTCOMES on trigger.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -70,9 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "20261105T160711Z",
-      "notes": "FCLR-NEXT-098 20261105T131205Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T130449Z.json). Strict manifest gate integrated into fclr010_harness resume/evaluate_forward path (default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path; legacy no-manifest behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only/no network/real research_state unchanged). Alt/cache churn safety proofs (tmp-isolated, canonical latest only, no recurring families, no real cache mutation). Handoff drift audited: single root AGENT_HANDOFF.md. Root 161 (<=161); probes==2; tests 261 OK. PREREG BEFORE OUTCOMES. FCLR-NEXT-100 20261105T150804Z: ROOT-CAUSE FIX — the 098 probe-count invariant was NOT maintained by the monitor itself: `_consolidate_ironflow_probes` dedup skipped the unlink (re-archived already-digested live probes forever; verified 3 files / removed 0) and churn was measured+written AFTER consolidation (re-created the file it had removed). Fixed: split dedup (skip append, always unlink non-latest), single pre-consolidation churn write. Directory provably ==2 (1 live + 1 digest), second pass idempotent (removed=0). +2 deterministic tmp-only tests (276 OK). Root 163 (<=163). Ironflow probes==2. Trigger NO DATA. PREREG BEFORE OUTCOMES. FCLR-NEXT-101 PENDING 20261105T152256Z: probe-count/root/watch/canonical invariants not wired into tracka_resume_check.py CLI (only unittest). 101 must wire + test. Trigger NO DATA (data_through=2026-10). PREREG BEFORE OUTCOMES. FCLR-NEXT-101 20261105T160711Z: WIRED 099/100 drift invariants into scripts/tracka_resume_check.py operator CLI (fail-closed/read-only/<5s/no-network/no-real-writes; JSON includes handoff_single_root, probe_count_exactly_two, root_md_json_bounded<=163, canonical_alt_outputs_only, no_recurring_timestamped_probe_scan_families, watch_trigger_harden_invariant live<=1 non_20261104T==0, no_root_trigger_harden_files). +16 deterministic tmp-only tests (CLI fail-closed/pass + monitor consolidation regression/idempotency guard). 292 tests OK; resume_check PASS (15 checks). Consolidated 4 unreferenced old artifacts with provenance. Root 161<=163, probes==2, no recurring families. Trigger NO DATA (data_through=2026-10, 2026-11..2027-02 absent). PREREG BEFORE OUTCOMES. FCLR-NEXT-102 PENDING: wire drift preflight into tracka_resume_gate decision path + runtime consolidation post-condition assertion, keep bounds.",
-      "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-102",
+      "last_checked": "20261105T162400Z",
+      "notes": "FCLR-NEXT-102 20261105T162400Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T162945Z.json). BUNDLED drift preflight into tracka_resume_gate.py (fail-closed before manifest/prereg; drift_preflight in JSON; <5s/no-network/no-real-writes; strict/prereg/compat/outcome-isolation preserved). Added monitor assert_probe_invariant() runtime post-condition in quick path (fail-safe + evidence field); tmp-isolated proofs. 303 tests OK; resume_check PASS 15 wired checks; gate prereg-block shows drift_preflight.pass. Root md+json 163 (<=163, at bound); probes==2; canonical outputs only. PREREG BEFORE OUTCOMES. FCLR-NEXT-103: consolidate unreferenced blocker/sweep history to regain root slack before adding evidence; harden machine-stable gate reason codes/order tests; ensure monitor evidence always contains probe_invariant_runtime field (tested). Trigger NO DATA.",
+      "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-103",
       "artifact_churn_098": {
         "research_state_mdjson_root": 161,
         "ironflow_probe_files": 2,
@@ -169,7 +169,7 @@
         "blocker": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
         "sweep": "research_state/campaign_sweep_tracka_20261105T122444Z.md"
       },
-      "evidence": "research_state/ironflow_probe_20261105T160637Z.json; research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
+      "evidence": "research_state/ironflow_probe_20261105T162945Z.json; research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
       "artifact_churn_101": {
         "research_state_mdjson_root": 161,
         "ironflow_probes": 2,
@@ -192,6 +192,18 @@
         "new_recurring_probe_scan_families": 0,
         "blocker": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
         "sweep": "research_state/campaign_sweep_tracka_20261105T160711Z.md"
+      },
+      "artifact_churn_102": {
+        "research_state_mdjson_root": 163,
+        "ironflow_probes": 2,
+        "tests_total": 303,
+        "drift_preflight_bundled_in_resume_gate": true,
+        "gate_exposes_drift_preflight_json": true,
+        "runtime_probe_invariant_assert_in_monitor_quick": true,
+        "hardening_tests_added": 11,
+        "new_recurring_probe_scan_families": 0,
+        "blocker": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
+        "sweep": "research_state/campaign_sweep_tracka_20261105T162400Z.md"
       }
     }
   ],
@@ -223,8 +235,8 @@
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
       "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid observed-liquidation source passes strict full-manifest GO rubric/gate (machine-verifiable provenance/label/coverage/block evidence). Hyperliquid-only.",
-      "last_checked": "2026-11-05T16:07:11Z",
-      "evidence": "research_state/ironflow_probe_20261105T160637Z.json; research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md"
+      "last_checked": "2026-11-05T16:24:00Z",
+      "evidence": "research_state/ironflow_probe_20261105T162945Z.json; research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md"
     },
     {
       "track": "TRACK_C",
@@ -234,8 +246,8 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-102 (wire drift preflight into resume gate + runtime consolidation assertion + keep bounds)",
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-103 (root-bound consolidation + gate reason/order hardening + monitor evidence-field tests)",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
     "ironflow_probes": 2,
@@ -261,10 +273,10 @@
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
   },
-  "last_updated": "2026-11-05T16:07:11Z",
-  "timestamp": "20261105T160711Z",
-  "last_checked": "2026-11-05T16:07:11Z",
-  "last_checked_utc": "20261105T160711Z",
+  "last_updated": "2026-11-05T16:24:00Z",
+  "timestamp": "20261105T162400Z",
+  "last_checked": "2026-11-05T16:24:00Z",
+  "last_checked_utc": "20261105T162400Z",
   "track_a_blocker_latest": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
   "artifact_churn_101": {
     "research_state_mdjson_root": 161,
@@ -288,5 +300,15 @@
     "new_recurring_probe_scan_families": 0,
     "blocker": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T160711Z.md"
+  },
+  "artifact_churn_102": {
+    "research_state_mdjson_root": 163,
+    "ironflow_probes": 2,
+    "tests_total": 303,
+    "drift_preflight_bundled_in_resume_gate": true,
+    "runtime_probe_invariant_assert_in_monitor_quick": true,
+    "new_recurring_probe_scan_families": 0,
+    "blocker": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
+    "sweep": "research_state/campaign_sweep_tracka_20261105T162400Z.md"
   }
 }

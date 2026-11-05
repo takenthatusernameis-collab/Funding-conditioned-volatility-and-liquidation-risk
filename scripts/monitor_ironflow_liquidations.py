@@ -1767,6 +1767,18 @@ def main():
         }
         with open(evidence_path, "w") as f:
             json.dump(evidence, f, indent=2)
+        # [HEAVY-102] runtime post-condition: fail-safe if consolidation/invariant drifted
+        try:
+            _pinv = assert_probe_invariant(EVIDENCE_DIR, raise_on_violation=True)
+            evidence["probe_invariant_runtime"] = _pinv
+        except Exception as _pinv_e:
+            evidence["probe_invariant_runtime"] = {"pass": False, "error": str(_pinv_e)}
+            with open(evidence_path, "w") as _f:
+                json.dump(evidence, _f, indent=2)
+            print(f"PROBE_INVARIANT_VIOLATION: {_pinv_e}")
+            raise
+        with open(evidence_path, "w") as f:
+            json.dump(evidence, f, indent=2)
         print(f"Wrote evidence: {evidence_path} (probe artifacts {_before_probe_count} -> {_after_probe_count})")
         if rc["triggered"]:
             print(f"RESUME TRIGGER FIRED: {rc['triggering_files']}")
@@ -1775,10 +1787,6 @@ def main():
             summary = pd.get("summary", {}) or {}
             bd = evidence.get("baseline_drift", {}) or {}
             km = rc.get("kaggle_mirror", {}) or {}
-            # Baseline-drift fields differ between the state-only check
-            # (drifted/content_hash_complete) and the network probe
-            # (baseline_intact/regression_count). Normalise so the summary line
-            # is stable regardless of which method ran (004i bottleneck fix).
             bd_intact = bd.get("baseline_intact")
             if bd_intact is None:
                 bd_intact = not bd.get("drifted", False)
@@ -2448,6 +2456,20 @@ def tree_get_cached(timeout=60, use_cache=True):
     except Exception as e:
         return {"ok": False, "status": None, "headers": {}, "body": str(e).encode("utf-8"), "url": TREE_URL}
 
+
+
+def assert_probe_invariant(evidence_dir: Path = None, raise_on_violation: bool = True) -> dict:
+    """102 runtime post-condition: 1 live probe + 1 canonical digest (total 2). Read-only, no network."""
+    ev = Path(evidence_dir) if evidence_dir is not None else EVIDENCE_DIR
+    live = [p for p in ev.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")]
+    digests = list(ev.glob("ironflow_probe_digest_*.json"))
+    canonical = ev / "ironflow_probe_digest_latest.json"
+    ok = len(live) == 1 and len(digests) == 1 and canonical.exists() and canonical in digests
+    res = {"pass": ok, "live_probes": sorted(p.name for p in live), "digests": sorted(p.name for p in digests),
+           "total": len(live)+len(digests), "invariant": "live==1 and canonical_digest_latest==1 and total==2"}
+    if not ok and raise_on_violation:
+        raise ValueError(f"probe invariant violated: {res}")
+    return res
 
 if __name__ == "__main__":
     main()

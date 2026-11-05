@@ -1,6 +1,6 @@
 {
-  "probe_id": "ironflow_probe_20261105T160637Z",
-  "timestamp_utc": "2026-11-05T16:06:37.037965+00:00",
+  "probe_id": "ironflow_probe_20261105T162945Z",
+  "timestamp_utc": "2026-11-05T16:29:45.500395+00:00",
   "dataset": "ironflow/hyperliquid-liquidations",
   "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
   "tree": {
@@ -11,11 +11,11 @@
       "Content-Type": "application/json; charset=utf-8",
       "Content-Length": "11576",
       "Connection": "close",
-      "Date": "Thu, 05 Nov 2026 16:06:37 GMT",
+      "Date": "Thu, 05 Nov 2026 16:29:45 GMT",
       "ETag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
       "X-Powered-By": "huggingface-moon",
-      "X-Request-Id": "Root=1-6aeca98d-2986d16223cf2ada666e356f",
-      "RateLimit": "\"api\";r=499;t=75",
+      "X-Request-Id": "Root=1-6aecaef9-06ae0fc152e699e856e003d5",
+      "RateLimit": "\"api\";r=499;t=187",
       "RateLimit-Policy": "\"fixed window\";\"api\";q=500;w=300",
       "cross-origin-opener-policy": "same-origin",
       "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -24,10 +24,10 @@
       "Vary": "Origin",
       "Access-Control-Expose-Headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
       "X-Cache": "Miss from cloudfront",
-      "Via": "1.1 fde752a2d4e95c2353cf5fc17ef7bf2a.cloudfront.net (CloudFront)",
+      "Via": "1.1 e2d7efb4a6fe4a49c212c47079f43f9c.cloudfront.net (CloudFront)",
       "X-Amz-Cf-Pop": "SFO5-P1",
       "Alt-Svc": "h3=\":443\"; ma=86400",
-      "X-Amz-Cf-Id": "p6qls_i8qxNdKZ_ScBaxAJtn9_Ag60u8N_NII7rDXgfh1Lbwpsk62w==",
+      "X-Amz-Cf-Id": "CJIif4puVSkMd4teCGAF2Wm48mJPQX_C-JE-ZTVBmRptYoNjPzSWbQ==",
       "Strict-Transport-Security": "max-age=31536000"
     },
     "parsed": true,
@@ -794,5 +794,16 @@
     "removed": 1,
     "digest_written": true,
     "digest_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/ironflow_probe_digest_latest.json"
+  },
+  "probe_invariant_runtime": {
+    "pass": true,
+    "live_probes": [
+      "ironflow_probe_20261105T162945Z.json"
+    ],
+    "digests": [
+      "ironflow_probe_digest_latest.json"
+    ],
+    "total": 2,
+    "invariant": "live==1 and canonical_digest_latest==1 and total==2"
   }
 }

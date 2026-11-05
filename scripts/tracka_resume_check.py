@@ -133,6 +133,23 @@ def drift_invariants(repo_root: Path, research_state_dir: Path = None) -> dict:
     return checks
 
 
+def drift_preflight(repo_root: Path = None, research_state_dir: Path = None) -> dict:
+    """Bundled 102 preflight: drift invariants as a single operator decision gate.
+
+    Returns {"pass": bool, "checks": {...}, "elapsed_s": float, "network": False}.
+    Read-only, fail-closed, no real research_state writes. Intended to run BEFORE
+    manifest/prereg decision logic so drift cannot be misread as GO-ready state.
+    """
+    t0 = time.time()
+    root = Path(repo_root) if repo_root is not None else ROOT
+    try:
+        checks = drift_invariants(root, research_state_dir=research_state_dir)
+        ok = all(v.get("pass") is True for v in checks.values())
+        return {"pass": ok, "checks": checks, "elapsed_s": round(time.time() - t0, 6), "network": False, "read_only": True}
+    except Exception as e:
+        return {"pass": False, "checks": {}, "error": repr(e), "elapsed_s": round(time.time() - t0, 6), "network": False, "read_only": True}
+
+
 def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
     t0 = time.time()
     root = Path(repo_root) if repo_root is not None else ROOT
