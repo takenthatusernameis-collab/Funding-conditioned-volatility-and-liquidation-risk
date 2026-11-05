@@ -1277,54 +1277,119 @@ def _consolidate_ironflow_probes():
              if not p.name.startswith("ironflow_probe_digest_")),
             key=lambda p: p.stat().st_mtime,
         )
-        if len(probes) <= 1:
-            return {"kept": len(probes), "removed": 0, "digest_path": None}
-        digest_entries = []
-        for old in probes[:-1]:
+        latest = probes[-1] if probes else None
+
+        # [HEAVY-090] The digest is a SINGLE running archive, not a per-run
+        # snapshot. The previous version named the digest after the current
+        # latest probe (ironflow_probe_digest_<latest_ts>.json), so every --quick
+        # run wrote a NEW digest file and never removed the prior one: by
+        # 20261105T0714Z the directory held 37 digest files (verified: 38
+        # *ironflow*probe* files, 37 of them digest_*, each a 1-entry archive of
+        # the immediately-removed probe, all carrying data_through=2026-10 and
+        # triggered=false). generate_trend_report() merges every one of them, so
+        # the 36 stale digests were pure artifact churn inflating every --report
+        # run. Fix: load the existing canonical digest (if any), merge the newly
+        # removed probes' entries into it, and rewrite ONE file. Old digest
+        # files outside the canonical path are deleted so the count is
+        # provably 1 after every run.
+        canonical = EVIDENCE_DIR / "ironflow_probe_digest_latest.json"
+        existing_entries = []
+        existing_paths = []
+        for dp in sorted(EVIDENCE_DIR.glob("ironflow_probe_digest_*.json"),
+                         key=lambda p: p.name):
+            if dp == canonical:
+                continue
+            existing_paths.append(dp.name)
             try:
-                ev = json.loads(old.read_text())
-            except Exception:
-                ev = {}
-            qrc = ev.get("quick_resume_check", {}) or {}
-            pd = ev.get("probe_diff", {}) or {}
-            summary = pd.get("summary", {}) or {}
-            tc = ev.get("tree_change", {}) or {}
-            tree = ev.get("tree", {}) or {}
-            digest_entries.append({
-                "probe_id": ev.get("probe_id") or old.stem,
-                "timestamp_utc": ev.get("timestamp_utc"),
-                "mode": ev.get("mode"),
-                "data_through": qrc.get("data_through", ev.get("data_through")),
-                "consecutive_absent": qrc.get("consecutive_absent", ev.get("consecutive_absent")),
-                "triggered": bool(qrc.get("triggered")),
-                "tree_status": tree.get("status"),
-                "tree_not_modified": bool(tree.get("tree_etag_unchanged") or tc.get("tree_not_modified")),
-                "probe_diff_added": summary.get("added_count", 0),
-                "probe_diff_changed": summary.get("changed_count", 0),
-                "probe_diff_removed": summary.get("removed_count", 0),
-                "new_files_found": len(ev.get("new_files_found", []) or []),
-                "sha256": __import__("hashlib").sha256(old.read_bytes()).hexdigest(),
-                "source_file": old.name,
-            })
-            try:
-                old.unlink()
+                dg = json.loads(dp.read_text())
+                for e in dg.get("entries", []) or []:
+                    existing_entries.append(e)
             except Exception:
                 pass
-        latest = probes[-1]
-        digest_path = EVIDENCE_DIR / f"ironflow_probe_digest_{latest.stem.replace('ironflow_probe_', '')}.json"
+        try:
+            if canonical.exists():
+                dg = json.loads(canonical.read_text())
+                for e in dg.get("entries", []) or []:
+                    existing_entries.append(e)
+        except Exception:
+            pass
+
+        # De-duplicate by probe_id: a probe archived in a prior digest must not
+        # be re-archived (its file is gone, but the entry would otherwise be
+        # merged twice across digest files).
+        seen = set()
+        merged = []
+        for e in existing_entries:
+            pid = e.get("probe_id") or e.get("source_file")
+            if pid and pid in seen:
+                continue
+            if pid:
+                seen.add(pid)
+            merged.append(e)
+
+        digest_entries = []
+        if latest is not None and len(probes) > 1:
+            for old in probes[:-1]:
+                try:
+                    ev = json.loads(old.read_text())
+                except Exception:
+                    ev = {}
+                qrc = ev.get("quick_resume_check", {}) or {}
+                pd = ev.get("probe_diff", {}) or {}
+                summary = pd.get("summary", {}) or {}
+                tc = ev.get("tree_change", {}) or {}
+                tree = ev.get("tree", {}) or {}
+                pid = ev.get("probe_id") or old.stem
+                entry = {
+                    "probe_id": pid,
+                    "timestamp_utc": ev.get("timestamp_utc"),
+                    "mode": ev.get("mode"),
+                    "data_through": qrc.get("data_through", ev.get("data_through")),
+                    "consecutive_absent": qrc.get("consecutive_absent", ev.get("consecutive_absent")),
+                    "triggered": bool(qrc.get("triggered")),
+                    "tree_status": tree.get("status"),
+                    "tree_not_modified": bool(tree.get("tree_etag_unchanged") or tc.get("tree_not_modified")),
+                    "probe_diff_added": summary.get("added_count", 0),
+                    "probe_diff_changed": summary.get("changed_count", 0),
+                    "probe_diff_removed": summary.get("removed_count", 0),
+                    "new_files_found": len(ev.get("new_files_found", []) or []),
+                    "sha256": __import__("hashlib").sha256(old.read_bytes()).hexdigest(),
+                    "source_file": old.name,
+                }
+                if pid in seen:
+                    continue
+                seen.add(pid)
+                digest_entries.append(entry)
+                merged.append(entry)
+                try:
+                    old.unlink()
+                except Exception:
+                    pass
+
+            # Remove stale digest files (the per-run snapshots this replaces).
+            for dp in existing_paths:
+                try:
+                    (EVIDENCE_DIR / dp).unlink()
+                except Exception:
+                    pass
+
+        if latest is None and not existing_entries:
+            return {"kept": 0, "removed": 0, "digest_path": None, "error": "no probes found"}
+
         digest = {
             "digest_ts": datetime.now(timezone.utc).isoformat(),
             "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
-            "latest_probe": latest.name,
-            "latest_data_through": (json.loads(latest.read_text()).get("quick_resume_check") or {}).get("data_through"),
+            "latest_probe": latest.name if latest else (existing_entries[-1].get("source_file") if existing_entries else None),
+            "latest_data_through": ((json.loads(latest.read_text()).get("quick_resume_check") or {}).get("data_through") if latest else None),
             "removed_count": len(digest_entries),
-            "entries": digest_entries,
+            "total_entries": len(merged),
+            "entries": merged,
         }
         try:
-            digest_path.write_text(json.dumps(digest, indent=2))
+            canonical.write_text(json.dumps(digest, indent=2))
         except Exception:
             pass
-        return {"kept": 1, "removed": len(digest_entries), "digest_path": str(digest_path)}
+        return {"kept": 1 if latest else 0, "removed": len(digest_entries), "digest_path": str(canonical), "stale_digests_removed": len(existing_paths), "total_entries": len(merged)}
     except Exception:
         return {"kept": 0, "removed": 0, "digest_path": None, "error": "consolidation failed"}
 
@@ -1925,6 +1990,10 @@ def generate_trend_report(limit=None):
             "new_files_found": len(ev.get("new_files_found", []) or []),
         })
     # Merge archived digest entries so consolidation preserves history.
+    # [HEAVY-090] The canonical digest is now a single running archive at
+    # ironflow_probe_digest_latest.json; the glob below still matches it (it
+    # starts with ironflow_probe_digest_) and also catches any legacy
+    # per-run digest_*.json files left over from the pre-090 naming scheme.
     digests = sorted(evidence_dir.glob("ironflow_probe_digest_*.json"), key=lambda p: p.name)
     for dp in digests:
         try:

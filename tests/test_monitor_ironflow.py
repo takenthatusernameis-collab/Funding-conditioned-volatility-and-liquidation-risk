@@ -1182,6 +1182,79 @@ class TestConsolidation(unittest.TestCase):
             finally:
                 mon.EVIDENCE_DIR = orig
 
+    def test_consolidation_single_canonical_digest(self):
+        """[HEAVY-090] The digest is ONE running archive, not one per run.
+
+        The pre-090 implementation named the digest after the current latest
+        probe, so every --quick run wrote a new digest file and never removed
+        the prior one: 37 digest files accumulated (all 1-entry, all
+        data_through=2026-10, all triggered=false). After consolidation there
+        must be exactly ONE digest file, named ironflow_probe_digest_latest.json,
+        and running consolidation a second time must not create a second file.
+        """
+        import tempfile
+        from pathlib import Path
+        import time
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            orig = mon.EVIDENCE_DIR
+            try:
+                mon.EVIDENCE_DIR = td
+                f1 = td / "ironflow_probe_20261101T000000Z.json"
+                f2 = td / "ironflow_probe_20261105T000000Z.json"
+                f1.write_text("{}")
+                time.sleep(0.01)
+                f2.write_text("{}")
+                mon._consolidate_ironflow_probes()
+                digests1 = list(td.glob("ironflow_probe_digest_*.json"))
+                self.assertEqual(len(digests1), 1)
+                self.assertEqual(digests1[0].name, "ironflow_probe_digest_latest.json")
+                # A second run with a newer probe must still leave exactly one
+                # digest and must MERGE (not duplicate) the archived entry.
+                f3 = td / "ironflow_probe_20261106T000000Z.json"
+                time.sleep(0.01)
+                f3.write_text("{}")
+                mon._consolidate_ironflow_probes()
+                digests2 = list(td.glob("ironflow_probe_digest_*.json"))
+                self.assertEqual(len(digests2), 1)
+                self.assertEqual(digests2[0].name, "ironflow_probe_digest_latest.json")
+                import json
+                dg = json.loads(digests2[0].read_text())
+                ids = [e.get("probe_id") for e in dg.get("entries", []) or []]
+                self.assertEqual(len(ids), len(set(ids)), "duplicate archived probe entries")
+                self.assertEqual(dg.get("total_entries"), len(ids))
+            finally:
+                mon.EVIDENCE_DIR = orig
+
+    def test_consolidation_merges_prior_canonical_digest(self):
+        """[HEAVY-090] Entries already in the canonical digest are preserved
+        across runs, so the blocked streak is not erased by churn removal."""
+        import tempfile
+        from pathlib import Path
+        import time, json
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            orig = mon.EVIDENCE_DIR
+            try:
+                mon.EVIDENCE_DIR = td
+                canonical = td / "ironflow_probe_digest_latest.json"
+                canonical.write_text(json.dumps({
+                    "entries": [{"probe_id": "ironflow_probe_20261101T000000Z",
+                                 "data_through": "2026-10", "triggered": False}],
+                    "total_entries": 1,
+                }))
+                f2 = td / "ironflow_probe_20261105T000000Z.json"
+                f2.write_text("{}")
+                time.sleep(0.01)
+                res = mon._consolidate_ironflow_probes()
+                dg = json.loads(canonical.read_text())
+                ids = [e.get("probe_id") for e in dg.get("entries", []) or []]
+                self.assertIn("ironflow_probe_20261101T000000Z", ids)
+                self.assertEqual(dg.get("total_entries"), len(ids))
+                self.assertEqual(res.get("total_entries"), len(ids))
+            finally:
+                mon.EVIDENCE_DIR = orig
+
 
 class TestBottleneckConsolidation(unittest.TestCase):
     def test_consolidation_does_not_delete_latest(self):

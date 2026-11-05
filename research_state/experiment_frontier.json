@@ -114,8 +114,22 @@
   ],
   "last_updated": "2026-11-05T05:17:23Z",
   "timestamp": "20261104T005200Z",
-  "last_checked": "2026-11-05T06:19:30Z",
+  "last_checked": "2026-11-05T07:24:16Z",
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_009_blocker_20261105T061930Z.md"
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_010_blocker_20261105T072416Z.md",
+  "artifact_churn_090": {
+    "ironflow_probe_files_before": 38,
+    "ironflow_probe_files_after": 2,
+    "digest_files_before": 37,
+    "digest_files_after": 1,
+    "canonical_digest": "research_state/ironflow_probe_digest_latest.json",
+    "entries_archived": 38,
+    "research_state_files_before": 241,
+    "research_state_files_after": 189,
+    "removed": 52,
+    "mechanism": "scripts/monitor_ironflow_liquidations.py _consolidate_ironflow_probes now writes ONE running archive (ironflow_probe_digest_latest.json) instead of a per-run timestamped digest; legacy migration via scripts/migrate_digest_archive_090.py; redundant Track A families merged by scripts/merge_redundant_artifacts_090.py; unreferenced 76-byte trackc_recompute_audit stub dropped.",
+    "tests": "python -m unittest discover tests -> 138 tests OK (2 new TestConsolidation cases added for the 090 fix).",
+    "resume_condition_unchanged": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet for month>=2026-11 returns HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid source passes strict GO rubric. Hyperliquid-only."
+  }
 }

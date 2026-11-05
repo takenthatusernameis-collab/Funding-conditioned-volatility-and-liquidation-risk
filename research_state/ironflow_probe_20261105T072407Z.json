@@ -1,6 +1,6 @@
 {
-  "probe_id": "ironflow_probe_20261105T071308Z",
-  "timestamp_utc": "2026-11-05T07:13:08.772568+00:00",
+  "probe_id": "ironflow_probe_20261105T072407Z",
+  "timestamp_utc": "2026-11-05T07:24:07.713763+00:00",
   "dataset": "ironflow/hyperliquid-liquidations",
   "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
   "tree": {
@@ -79,10 +79,10 @@
     "method": "state_only_tree_unchanged"
   },
   "artifact_churn": {
-    "probe_files_before": 38,
-    "probe_files_after": 38,
+    "probe_files_before": 2,
+    "probe_files_after": 2,
     "removed": 0,
-    "digest_written": false,
-    "digest_path": null
+    "digest_written": true,
+    "digest_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/ironflow_probe_digest_latest.json"
   }
 }
