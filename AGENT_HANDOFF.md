@@ -12,37 +12,27 @@ Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
 - BOTH components are core to repo identity. While volatility is sealed, liquidation risk MUST be driven to completion via admissible data or hardened to resume instantly on trigger. NO SCOPE DRIFT TO SEALED TRACKS.
 
 ## CURRENT VERIFIED STATE (CLEAN BASELINE)
-- Tests: `python -m unittest discover tests` — **155 tests OK** (includes 091+092+093 adversarial rubric/dry-run/canonical-output hardening). MUST remain green. Runtime ~13.6s.
+- Tests: `python -m unittest discover tests` — **155 tests OK** (green; runtime ~15.5s; includes 091+092+093 adversarial rubric/dry-run/canonical-output hardening). MUST remain green.
 - Track C: SEALED/LOCKED. Track B: NOT_SUPPORTED.
 - Track A: ON-TRIGGER/MONITOR ONLY. Latest blocker: `research_state/liquidation_forward_validate_012_blocker_20261105T082547Z.md`. `experiment_frontier.json` updated (last_checked 2026-11-05T08:26:40Z; track_a_blocked true).
 - Artifact churn (092→093): flat/net-negative — no new recurring timestamped families; `scripts/hunt_alternative_liquidation_sources.py` writes `research_state/alt_source_scan_latest.json`; `scripts/deep_review_alt_sources.py` writes `research_state/alt_source_deep_review_latest.md`. Ironflow probe family **exactly 2 files** (1 live + `ironflow_probe_digest_latest.json`). No new recurring timestamped probe/scan families. research_state root md+json = 185 (stable).
 - Harness: FCLR-010 fixtures exist (`tests/fixtures/tracka`, frozen manifest, 6 symbols); `FCLR010Harness` cold <0.05s; `pre_register_forward_experiment`/`evaluate_forward` enforce PREREG-BEFORE-OUTCOMES and block without prereg. Monitor quick ~0.50s cached.
-- THIS SESSION (20261105T083124Z) EXECUTED FCLR-NEXT-093 STEPS 1-2: Step 1 entry metrics baseline recorded (tests 155 green; research_state root 185 md+json; ironflow probes 2; monitor --quick ~0.50s cached; harness cold <0.05s; churn sources identified). Step 2 trigger probe executed: `monitor_ironflow_liquidations.py --quick` → NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); `deep_review_alt_sources.py` → canonical; `hunt_alternative_liquidation_sources.py` → canonical. Decision: **NO NEW DATA - ON HOLD**. No prereg created; no harness outcome inspection. Proceed immediately to Step 3 bottleneck demolition.
+- THIS SESSION (20261105T083124Z) EXECUTED FCLR-NEXT-093 STEPS 1-2: Step 1 entry metrics baseline recorded (tests 155 green; research_state root 185 md+json; ironflow probes 2; monitor --quick ~0.50s cached; harness cold <0.05s; churn sources identified). Step 2 trigger probe executed: `monitor_ironflow_liquidations.py --quick` → NO RESUME TRIGGER (data_through=2026-10; 2026-11..2027-02 absent); `deep_review_alt_sources.py` → canonical; `hunt_alternative_liquidation_sources.py` → canonical. Decision: **NO NEW DATA - ON HOLD**. No prereg created; no harness outcome inspection. Steps 1-2 COMPLETE — DO NOT RE-EXECUTE. Proceed immediately to Step 3 bottleneck demolition.
 - NO COASTING ALLOWED. Every session must produce measurable bottleneck reduction or hardness improvements with irrefutable metrics.
 
 ## SINGLE INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (COPY/PASTE VERBATIM)
 ```text
-TASK ID: FCLR-NEXT-093-TRACK-A-HEAVY-WHILE-BLOCKED-ZERO-CHURN-RESUME
+TASK ID: FCLR-NEXT-093-TRACK-A-STEPS3-6-BOTTLENECK-DEMOLITION-HEAVY
 PRIORITY: P0 - REPO-NAME PRIORITIZED (Volatility SEALED/LOCKED; Liquidation Risk = ONLY ACTIVE OBJECTIVE)
-TIMESTAMP (UTC): 20261105T082547Z
-CAMPAIGN: TRACK A LIQUIDATION RISK - MAXIMUM HEAVY PROGRESS WHILE BLOCKED. NO COASTING. ZERO CHURN. MAKE RESUME INSTANT AND IRREFUTABLE.
-ENFORCEMENT: ALL STEPS MANDATORY. SESSION INCOMPLETE IF ANY SKIPPED. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO "MONITOR ONLY" WITHOUT CONCRETE HARDENING. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES.
+TIMESTAMP (UTC): 20261105T083124Z
+CAMPAIGN: TRACK A LIQUIDATION RISK - STEPS 3-6 HEAVY BOTTLENECK DEMOLITION WHILE BLOCKED. NO COASTING. ZERO CHURN. MAKE RESUME INSTANT AND IRREFUTABLE.
+ENFORCEMENT: ALL STEPS MANDATORY. STEPS 1-2 ALREADY COMPLETE (DO NOT RE-EXECUTE). SESSION INCOMPLETE IF ANY STEP 3-6 SKIPPED. PREREGISTER BEFORE INSPECTING OUTCOMES IF TRIGGERED. NO IDLE TURNS. NO "MONITOR ONLY" WITHOUT CONCRETE HARDENING. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN FAMILIES.
 
-OBJECTIVE (INFERRED): Complete the liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked. While blocked you MUST create unavoidable heavy progress: (A) keep research_state churn flat or net-negative (no new recurring timestamped families; consolidate any ref-free families found), (B) keep ironflow probe files == 2, (C) exhaust unauthenticated Hyperliquid-only discovery and log irrefutable evidence, (D) strengthen GO rubric adversarial tests for modeled-as-observed conflation / schema mismatch / incomplete symbol coverage / non-Hyperliquid merge cases with explicit fail fixtures, (E) prove FCLR-010 offline dry-run end-to-end on fixtures in <10s and keep enforced test, (F) reduce test/runtime side-effects that create probe churn (without breaking monitor correctness), (G) leave state STRICTER. Never stop for "no data". Future agents must NOT be able to coast.
+OBJECTIVE (INFERRED): Complete the liquidation-risk half of "Funding-conditioned-volatility-and-liquidation-risk". Data blocked (no Hyperliquid month >=2026-11). While blocked you MUST create unavoidable heavy progress: (A) keep research_state churn flat or net-negative (no new recurring timestamped families; consolidate any ref-free families found), (B) keep ironflow probe files == 2, (C) exhaust unauthenticated Hyperliquid-only discovery and log irrefutable evidence, (D) strengthen GO rubric adversarial tests for modeled-as-observed conflation / schema mismatch / incomplete symbol coverage / non-Hyperliquid merge cases with explicit fail fixtures, (E) prove FCLR-010 offline dry-run end-to-end on fixtures in <10s and keep enforced test, (F) reduce test/runtime side-effects that create probe churn (without breaking monitor correctness), (G) leave state STRICTER. Never stop for "no data". Future agents must NOT be able to coast.
 
 CONSTRAINTS: No credentials/manual files/.github/workflows changes. Leakage-safe, preregister-before-outcomes. Track C/B locked/unsupported. Raw data/caches out of git. Clean-clone reproducible. No schedulers/pollers/status-only files/repeated wrappers/agent-controllers. Hyperliquid-only for Track A. Do not conflate observed/modeled liquidations. No threshold-shopping. No scope drift. Canonical outputs only for recurring probes/scans (`ironflow_probe_digest_latest.json` + 1 live probe; `alt_source_scan_latest.json`; `alt_source_deep_review_latest.md`).
 
-MANDATORY EXECUTION (IN ORDER - ALL REQUIRED):
-
-1) ENTRY METRICS & BOTTLENECK BASELINE (IRREFUTABLE)
-   - Record: research_state md+json count, ironflow probe file count/names, timestamped-family count, tests count, monitor --quick time, harness time.
-   - Identify remaining churn sources (timestamped families, test side-effects, wrappers). Set measurable targets: no new recurring families; ironflow probes == 2; tests >=155 and green.
-
-2) TRIGGER PROBE (EXHAUSTIVE, HYPERLIQUID-ONLY - FAST PATH)
-   - Run: python scripts/monitor_ironflow_liquidations.py --quick
-   - Run: python scripts/deep_review_alt_sources.py
-   - Run: python scripts/hunt_alternative_liquidation_sources.py
-   - Log every URL/status/ETag/last-modified/classification. IF trigger -> HALT outcome inspection; PREREGISTER BEFORE reading outcomes in `research_state/fclr010_prereg_$(date -u +%Y%m%dT%H%M%SZ).json` with frozen hypothesis/splits/features/targets/metrics/gates/stop rule/data hashes; run ONLY frozen FCLR-010 harness. ELSE write "NO NEW DATA - ON HOLD" with irrefutable evidence and IMMEDIATELY proceed to demolition.
+MANDATORY EXECUTION (IN ORDER - ALL REQUIRED; STEPS 1-2 ALREADY DONE THIS SESSION):
 
 3) BOTTLENECK DEMOLITION (AGGRESSIVE - MANDATORY)
    - Merge any remaining timestamped families into canonical histories (refs-checked). Remove only files verified unreferenced by canonical docs/code/tests/frontier/manifest/handoff. Preserve excerpts/hashes/paths in history.
@@ -77,4 +67,4 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 - `python scripts/fclr010_harness.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T083124Z: Execute FCLR-NEXT-093 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Steps 1-2 DONE this session (baseline recorded; trigger probe NO NEW DATA - on hold). Remaining mandatory: Steps 3-6 — bottleneck demolition (merge timestamped families into canonical histories, ironflow probes == 2, reduce test/monitor side-effect churn, document before/after in `research_state/campaign_sweep_tracka_*.md`), source hardening + maximally strict adversarial rubric edge tests, harness offline dry-run <10s with enforced tests, tests >=155 green, write `research_state/liquidation_forward_validate_013_blocker_*.md` with full evidence/metrics/bottlenecks/resume instructions, update `experiment_frontier.json` (last_checked now, track_a_blocked true, pointer to new blocker, artifact_churn_093 metrics), update this handoff STRICTER with a new timestamped next task that cannot be coasted. PREREG BEFORE OUTCOMES if triggered. NO COASTING.
+20261105T083124Z: Execute FCLR-NEXT-093 Steps 3-6 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Steps 1-2 DONE this session (baseline recorded; trigger probe NO NEW DATA - on hold). Remaining mandatory: Steps 3-6 — bottleneck demolition (merge timestamped families into canonical histories, ironflow probes == 2, reduce test/monitor side-effect churn, document before/after in `research_state/campaign_sweep_tracka_*.md`), source hardening + maximally strict adversarial rubric edge tests, harness offline dry-run <10s with enforced tests, tests >=155 green, write `research_state/liquidation_forward_validate_013_blocker_*.md` with full evidence/metrics/bottlenecks/resume instructions, update `experiment_frontier.json` (last_checked now, track_a_blocked true, pointer to new blocker, artifact_churn_093 metrics), update this handoff STRICTER with a new timestamped next task that cannot be coasted. PREREG BEFORE OUTCOMES if triggered. NO COASTING.
