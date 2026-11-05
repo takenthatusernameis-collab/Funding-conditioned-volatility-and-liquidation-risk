@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T182308Z
+Timestamp (UTC): 20261105T191232Z
 Git SHA (HEAD, baseline): 51bda35c (last commit at entry); working tree cleaned this session (tracked `__pycache__` drift restored — bottleneck removed)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
@@ -56,3 +56,8 @@ STOP RULE: Complete ALL steps with concrete metrics. Track C locked. Track B uns
 Timestamp (UTC): 20261105T190648Z
 Git SHA: 2c59a1cd
 Next task (unchanged, inferred): FCLR-NEXT-104 (Track A liquidation risk only; Track C sealed; Track B unsupported). Root bound 163; probes==2. Run entry verification commands first.
+
+## SESSION ENTRY (2026-11-05T19:12:32Z)
+Timestamp (UTC): 20261105T191232Z
+Git SHA: 3bcb07c9
+Next task (unchanged, inferred): FCLR-NEXT-104 (Track A liquidation risk only; Track C sealed; Track B unsupported). Root bound 163; probes==2. Bottleneck cleared: tracked __pycache__ drift restored. Run entry verification commands first.
