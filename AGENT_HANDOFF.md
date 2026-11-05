@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T140235Z
-Git SHA (HEAD, baseline): c1a6cbf3 (working tree modified by 098 hardening; not committed)
+Timestamp (UTC): 20261105T140314Z
+Git SHA (HEAD, baseline): 8d90cbdd (098 hardening committed in HEAD; working tree clean apart from __pycache__)
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T140235Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-098-COMPLETE
+Handoff ID: FCLR-HANDOFF-20261105T140314Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: HARDENED-HEAVY-098-COMPLETE
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -57,4 +57,4 @@ STOP RULE: Complete ALL steps + artifacts with concrete metrics. Track C locked.
 - `python scripts/fclr010_harness.py` (frozen config, offline)
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T140235Z: Execute FCLR-NEXT-099. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 098 delivered: 261 tests green (+17); strict manifest gate integrated into `fclr010_harness` default manifest-bearing path (minimal-only rejected, full manifest accepted) with explicit compat/legacy preservation; offline prereg-before-outcomes trigger simulation proved 4 branches (tmp-only/no network/no real `research_state` mutation); alt/cache churn safety proved (tmp-isolated canonical outputs, no recurring families, no real cache mutation); handoff drift audited (single root `AGENT_HANDOFF.md`). Trigger NO DATA (probe 20261105T130449Z). PREREG BEFORE OUTCOMES if triggered. 099 must wire strict gate+prereg into CLI/operator resume path, add outcome-isolation proof (no outcome reads before prereg/GO), and add machine-checkable drift-invariant test with concrete metrics.
+20261105T140314Z: Execute FCLR-NEXT-099. Volatility (Track C) SEALED/LOCKED. Liquidation Risk (Track A) = ONLY ACTIVE OBJECTIVE. 098 delivered: 261 tests green (+17); strict manifest gate integrated into `fclr010_harness` default manifest-bearing path (minimal-only rejected, full manifest accepted) with explicit compat/legacy preservation; offline prereg-before-outcomes trigger simulation proved 4 branches (tmp-only/no network/no real `research_state` mutation); alt/cache churn safety proved (tmp-isolated canonical outputs, no recurring families, no real cache mutation); handoff drift audited (single root `AGENT_HANDOFF.md`). Trigger NO DATA (probe 20261105T130449Z). PREREG BEFORE OUTCOMES if triggered. 099 must wire strict gate+prereg into CLI/operator resume path, add outcome-isolation proof (no outcome reads before prereg/GO), and add machine-checkable drift-invariant test with concrete metrics.
