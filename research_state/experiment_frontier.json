@@ -70,8 +70,9 @@
         "rubric-GO alternative unauthenticated source passes strict criteria"
       ],
       "generated": "20261104T192914Z",
-      "last_checked": "2026-11-04T23:31:18Z",
-      "notes": "Hardened: ETag/tree cache, HEAD-404 fast path, baseline-drift probe, per-file ETag/LM caching, alt source consolidation automated"
+      "last_checked": "2026-11-05T03:33:18Z",
+      "notes": "FCLR-NEXT-082 executed: full trigger probe done, caches hardened, consolidation verified, FCLR-010 harness dry-run ready offline, tests green (180). Blocked pending ironflow>=2026-11 or rubric-GO alternative with prereg before outcomes.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_006_blocker_.md"
     }
   ],
   "coverage": {
@@ -101,8 +102,8 @@
     {
       "track": "TRACK_A",
       "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
-      "resume_trigger": "data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 appears (unauthenticated HF) with HTTP 200 OR rubric-GO alternative unauthenticated source passes strict criteria",
-      "last_checked": "2026-11-05T01:31:34Z"
+      "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR rubric-GO alternative (>=5 symbols OR >=1 complete month OR >=3x30d blocks, schema compatible with frozen FCLR-010, unauthenticated/no keys/requester-pays)",
+      "last_checked": "2026-11-05T03:33:18Z"
     },
     {
       "track": "TRACK_C",
@@ -111,6 +112,6 @@
       "last_checked": "2026-11-04T12:33:00Z"
     }
   ],
-  "last_updated": "2026-11-05T01:31:34Z",
+  "last_updated": "2026-11-05T03:33:18Z",
   "timestamp": "20261104T005200Z"
 }

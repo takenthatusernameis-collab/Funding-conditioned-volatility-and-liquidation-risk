@@ -388,11 +388,11 @@ class TestQuickPathPersistence(unittest.TestCase):
         state_path = Path(mon.REPO_ROOT) / "research_state" / "ironflow_monitor_state.json"
         evidence_dir = Path(mon.EVIDENCE_DIR)
         _tmp = state_path.read_text() if state_path.exists() else "{}"
-        before = {p.name for p in evidence_dir.glob("ironflow_probe_*.json")}
+        before = {p.name for p in evidence_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")}
         try:
             state_path.write_text(json.dumps({"data_through": "2026-10", "tree_etag": 'W/"x"'}))
             mon.main()
-            after = {p.name for p in evidence_dir.glob("ironflow_probe_*.json")}
+            after = {p.name for p in evidence_dir.glob("ironflow_probe_*.json") if not p.name.startswith("ironflow_probe_digest_")}
             new_files = sorted(after - before)
             self.assertEqual(len(new_files), 1, f"expected exactly one new probe file, got {new_files}")
             ev = json.loads((evidence_dir / new_files[0]).read_text())
@@ -1176,6 +1176,7 @@ class TestConsolidation(unittest.TestCase):
                 f2.write_text("{}")
                 mon._consolidate_ironflow_probes()
                 files = list(td.glob("ironflow_probe_*.json"))
+                files = [p for p in files if not p.name.startswith("ironflow_probe_digest_")]
                 self.assertEqual(len(files), 1)
                 self.assertEqual(files[0].name, f2.name)
             finally:
