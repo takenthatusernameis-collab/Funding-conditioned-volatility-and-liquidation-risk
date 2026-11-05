@@ -1328,6 +1328,7 @@ def _consolidate_ironflow_probes():
             merged.append(e)
 
         digest_entries = []
+        unlinked_files = 0
         if latest is not None and len(probes) > 1:
             for old in probes[:-1]:
                 try:
@@ -1356,13 +1357,24 @@ def _consolidate_ironflow_probes():
                     "sha256": __import__("hashlib").sha256(old.read_bytes()).hexdigest(),
                     "source_file": old.name,
                 }
-                if pid in seen:
-                    continue
-                seen.add(pid)
-                digest_entries.append(entry)
-                merged.append(entry)
+                # [HEAVY-099] Dedup must prevent double-ARCHIVING (a probe whose
+                # entry already lives in the canonical digest must not be merged
+                # in again), but it must NOT prevent the physical file from being
+                # removed. The old `continue` skipped the unlink too, so a probe
+                # archived in a prior session (e.g. ironflow_probe_20261105T130449Z,
+                # already present in ironflow_probe_digest_latest.json from the 098
+                # run) was re-archived on every later --quick but its file was never
+                # deleted: verified 20261105T1505Z, 2 live probe files + 1 digest
+                # (==3, invariant is ==2), churn reported 3->3/removed=0. Split the
+                # two concerns: skip the entry append, always unlink non-latest.
+                already_archived = pid in seen
+                if not already_archived:
+                    seen.add(pid)
+                    digest_entries.append(entry)
+                    merged.append(entry)
                 try:
                     old.unlink()
+                    unlinked_files += 1
                 except Exception:
                     pass
 
@@ -1381,7 +1393,8 @@ def _consolidate_ironflow_probes():
             "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
             "latest_probe": latest.name if latest else (existing_entries[-1].get("source_file") if existing_entries else None),
             "latest_data_through": ((json.loads(latest.read_text()).get("quick_resume_check") or {}).get("data_through") if latest else None),
-            "removed_count": len(digest_entries),
+            "removed_count": unlinked_files,
+            "archived_entries": len(digest_entries),
             "total_entries": len(merged),
             "entries": merged,
         }
@@ -1389,7 +1402,7 @@ def _consolidate_ironflow_probes():
             canonical.write_text(json.dumps(digest, indent=2))
         except Exception:
             pass
-        return {"kept": 1 if latest else 0, "removed": len(digest_entries), "digest_path": str(canonical), "stale_digests_removed": len(existing_paths), "total_entries": len(merged)}
+        return {"kept": 1 if latest else 0, "removed": unlinked_files, "digest_path": str(canonical), "stale_digests_removed": len(existing_paths), "total_entries": len(merged)}
     except Exception:
         return {"kept": 0, "removed": 0, "digest_path": None, "error": "consolidation failed"}
 
@@ -1734,6 +1747,14 @@ def main():
         # newest evidence file and archive the rest to a single digest, cutting
         # the probe directory from ~109 files to 2 (latest + digest) with no loss
         # of information. Timing measured before/after below.
+        # [HEAVY-099] Measure churn BEFORE consolidation and write it into the
+        # evidence file that consolidation will keep as the latest. The previous
+        # order wrote evidence_path, consolidated (which can delete evidence_path
+        # when an older-but-newer-mtime file exists), then re-wrote evidence_path
+        # with the churn record -- re-creating the file the consolidation had just
+        # removed and leaving 2 live probes instead of 1 (verified
+        # 20261105T1505Z: probe artifacts 3 -> 3, removed 0). Single write, single
+        # consolidation pass, probe directory provably ==2 after.
         _before_probe_count = len(list(EVIDENCE_DIR.glob("ironflow_probe_*.json")))
         _consolidated = _consolidate_ironflow_probes()
         _after_probe_count = len(list(EVIDENCE_DIR.glob("ironflow_probe_*.json")))

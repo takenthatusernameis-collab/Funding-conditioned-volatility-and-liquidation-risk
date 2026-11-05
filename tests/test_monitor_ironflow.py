@@ -1334,6 +1334,84 @@ class TestConsolidation(unittest.TestCase):
             finally:
                 mon.EVIDENCE_DIR = orig
 
+    def test_consolidation_deletes_previously_archived_live_probe(self):
+        """[HEAVY-099] A live probe whose entry is ALREADY in the canonical digest
+        must still be physically removed, not re-archived forever.
+
+        Pre-fix the dedup `continue` skipped the unlink, so a probe archived in a
+        prior session (e.g. ironflow_probe_20261105T130449Z, already present in
+        ironflow_probe_digest_latest.json) survived every later --quick run: verified
+        20261105T1505Z with 3 ironflow_probe_* files (invariant is ==2) and churn
+        reporting 3 -> 3 / removed 0. After the fix the directory must hold exactly
+        one live probe + one digest, and the archived entry must not be duplicated.
+        """
+        import tempfile
+        from pathlib import Path
+        import time, json
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            orig = mon.EVIDENCE_DIR
+            try:
+                mon.EVIDENCE_DIR = td
+                canonical = td / "ironflow_probe_digest_latest.json"
+                stale_id = "ironflow_probe_20261105T130449Z"
+                canonical.write_text(json.dumps({
+                    "entries": [{"probe_id": stale_id, "data_through": "2026-10",
+                                 "triggered": False, "source_file": stale_id + ".json"}],
+                    "total_entries": 1,
+                }))
+                # The stale live probe is still on disk (a prior run that failed to
+                # delete it), plus a newer probe written by the current run.
+                stale = td / (stale_id + ".json")
+                stale.write_text(json.dumps({"probe_id": stale_id}))
+                time.sleep(0.01)
+                newest = td / "ironflow_probe_20261105T150804Z.json"
+                newest.write_text(json.dumps({"probe_id": "ironflow_probe_20261105T150804Z"}))
+                res = mon._consolidate_ironflow_probes()
+                live = [p for p in td.glob("ironflow_probe_*.json")
+                        if not p.name.startswith("ironflow_probe_digest_")]
+                self.assertEqual(len(live), 1, f"live probes: {[p.name for p in live]}")
+                self.assertEqual(live[0].name, newest.name)
+                self.assertFalse(stale.exists(), "previously-archived live probe not deleted")
+                self.assertEqual(len(list(td.glob("ironflow_probe_digest_*.json"))), 1)
+                dg = json.loads(canonical.read_text())
+                ids = [e.get("probe_id") for e in dg.get("entries", []) or []]
+                self.assertEqual(len(ids), len(set(ids)), "duplicate archived entries")
+                self.assertEqual(dg.get("total_entries"), len(ids))
+                self.assertEqual(res.get("removed"), 1)
+            finally:
+                mon.EVIDENCE_DIR = orig
+
+    def test_consolidation_idempotent_probe_count_stays_two(self):
+        """[HEAVY-099] Running consolidation twice must not grow the artifact set.
+
+        The whole point of consolidation is a provably bounded directory: one live
+        probe + one digest. A second pass must remove nothing (no new file, no
+        re-archive), so the invariant is stable across repeated --quick runs.
+        """
+        import tempfile
+        from pathlib import Path
+        import time
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            orig = mon.EVIDENCE_DIR
+            try:
+                mon.EVIDENCE_DIR = td
+                f1 = td / "ironflow_probe_20261101T000000Z.json"
+                f2 = td / "ironflow_probe_20261105T000000Z.json"
+                f1.write_text("{}")
+                time.sleep(0.01)
+                f2.write_text("{}")
+                mon._consolidate_ironflow_probes()
+                n1 = len(list(td.glob("ironflow_probe_*.json")))
+                r2 = mon._consolidate_ironflow_probes()
+                n2 = len(list(td.glob("ironflow_probe_*.json")))
+                self.assertEqual(n1, 2, f"first pass count {n1}")
+                self.assertEqual(n2, 2, f"second pass count {n2}")
+                self.assertEqual(r2.get("removed"), 0, "second pass removed files")
+            finally:
+                mon.EVIDENCE_DIR = orig
+
 
 class TestBottleneckConsolidation(unittest.TestCase):
     def test_consolidation_does_not_delete_latest(self):

@@ -706,7 +706,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-05T13:26:34.633818+00:00",
+    "timestamp_utc": "2026-11-05T15:08:05.903755+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -720,7 +720,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-05T13:26:34.633831+00:00",
+    "timestamp_utc": "2026-11-05T15:08:05.903770+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
@@ -859,7 +859,7 @@
     ]
   },
   "last_tree_change": {
-    "timestamp_utc": "2026-11-05T13:26:34.633879+00:00",
+    "timestamp_utc": "2026-11-05T15:08:05.903820+00:00",
     "changed": false,
     "added": [],
     "removed": [],
@@ -1344,39 +1344,6 @@
   },
   "probe_history": [
     {
-      "timestamp_utc": "2026-11-05T10:12:10.455643+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "500e8ae12ae2bc63"
-    },
-    {
-      "timestamp_utc": "2026-11-05T10:29:06.805313+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "ab71176ae229c67e"
-    },
-    {
-      "timestamp_utc": "2026-11-05T10:34:45.058059+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "b0170d346f9e0636"
-    },
-    {
       "timestamp_utc": "2026-11-05T10:59:11.277885+00:00",
       "type": "quick",
       "data_through": "2026-10",
@@ -1452,6 +1419,39 @@
       "get_requests_skipped": 8,
       "triggered": false,
       "hash": "59b559afc3c0c9fe"
+    },
+    {
+      "timestamp_utc": "2026-11-05T15:05:05.510160+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "192422b3f15f04af"
+    },
+    {
+      "timestamp_utc": "2026-11-05T15:07:54.299714+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "6588efb51b179f18"
+    },
+    {
+      "timestamp_utc": "2026-11-05T15:08:05.903778+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "2533dc17f866c51d"
     }
   ],
   "consecutive_absent_trend": {

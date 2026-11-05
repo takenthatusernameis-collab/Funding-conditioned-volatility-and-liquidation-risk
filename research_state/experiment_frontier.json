@@ -2,7 +2,7 @@
   "registry_version": "1.1",
   "generated": "20261105T131205Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "CAMPAIGN FCLR-NEXT-098 EXECUTED (2026-11-05T13:12:05Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: strict manifest GO gate integrated into fclr010_harness (evaluate_source_manifest + evaluate_forward default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path strict=False; legacy no-manifest prereg/data behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only, no network, real research_state unchanged). Alt/cache churn safety proofs (deep_review/hunt tmp-isolated, canonical latest only, no recurring timestamped families, no real url_probe_cache mutation). Handoff drift audited: single durable root AGENT_HANDOFF.md. Trigger probes NO DATA (quick/deep_review/hunt; no rubric-GO strict). Root md+json 161 (<=161). Ironflow probes==2. Tests 261 OK. PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-099.",
+  "current_status": "CAMPAIGN FCLR-NEXT-100 EXECUTED (2026-11-05T15:08:04Z): Track C SEALED/LOCKED; Track B NOT_SUPPORTED. Track A liquidation risk ONLY ACTIVE, BLOCKED (Hyperliquid data_through 2026-10; 2026-11.. absent). No-coast delta: ROOT-CAUSE FIX of the 098 probe-count invariant — `_consolidate_ironflow_probes` dedup skipped the unlink (re-archived already-digested live probes forever) and churn was written after consolidation (re-created the file it had removed); fixed (split dedup, single pre-consolidation write). Directory provably ==2 (1 live + 1 digest), second pass idempotent (removed=0). +2 deterministic tmp-only tests (276 OK). Root md+json 163 (<=163). Ironflow probes==2. PREREG BEFORE OUTCOMES on trigger. Handoff FCLR-NEXT-101.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -71,8 +71,8 @@
       ],
       "generated": "20261104T192914Z",
       "last_checked": "20261105T131205Z",
-      "notes": "FCLR-NEXT-098 20261105T131205Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T130449Z.json). Strict manifest gate integrated into fclr010_harness resume/evaluate_forward path (default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path; legacy no-manifest behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only/no network/real research_state unchanged). Alt/cache churn safety proofs (tmp-isolated, canonical latest only, no recurring families, no real cache mutation). Handoff drift audited: single root AGENT_HANDOFF.md. Root 161 (<=161); probes==2; tests 261 OK. PREREG BEFORE OUTCOMES.",
-      "next_action_heavy": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
+      "notes": "FCLR-NEXT-098 20261105T131205Z: NO DATA (data_through=2026-10, 2026-11..2027-02 absent, probe ironflow_probe_20261105T130449Z.json). Strict manifest gate integrated into fclr010_harness resume/evaluate_forward path (default strict when manifest provided; rejects minimal-only, accepts full; explicit compat fixture path; legacy no-manifest behavior preserved). Offline prereg-before-outcomes trigger simulation (4 branches, tmp-only/no network/real research_state unchanged). Alt/cache churn safety proofs (tmp-isolated, canonical latest only, no recurring families, no real cache mutation). Handoff drift audited: single root AGENT_HANDOFF.md. Root 161 (<=161); probes==2; tests 261 OK. PREREG BEFORE OUTCOMES. FCLR-NEXT-100 20261105T150804Z: ROOT-CAUSE FIX — the 098 probe-count invariant was NOT maintained by the monitor itself: `_consolidate_ironflow_probes` dedup skipped the unlink (re-archived already-digested live probes forever; verified 3 files / removed 0) and churn was measured+written AFTER consolidation (re-created the file it had removed). Fixed: split dedup (skip append, always unlink non-latest), single pre-consolidation churn write. Directory provably ==2 (1 live + 1 digest), second pass idempotent (removed=0). +2 deterministic tmp-only tests (276 OK). Root 163 (<=163). Ironflow probes==2. Trigger NO DATA. PREREG BEFORE OUTCOMES.",
+      "next_action_heavy": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
       "artifact_churn_098": {
         "research_state_mdjson_root": 161,
         "ironflow_probe_files": 2,
@@ -211,7 +211,7 @@
   ],
   "track_a_blocked": true,
   "next_action_heavy": true,
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
     "ironflow_probes": 2,
@@ -224,9 +224,22 @@
     "blocker": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T131205Z.md"
   },
-  "last_updated": "2026-11-05T13:12:05Z",
-  "timestamp": "20261105T131205Z",
-  "last_checked": "2026-11-05T13:12:05Z",
-  "last_checked_utc": "20261105T131205Z",
-  "track_a_blocker_latest": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md"
+  "artifact_churn_100": {
+    "research_state_mdjson_root": 163,
+    "ironflow_probes": 2,
+    "tests_total": 276,
+    "root_cause_fix": "_consolidate_ironflow_probes dedup skipped unlink + churn written after consolidation",
+    "probe_files_before_fix": 3,
+    "probe_files_after_fix": 2,
+    "second_pass_removed": 0,
+    "idempotent": true,
+    "new_recurring_probe_scan_families": 0,
+    "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
+    "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
+  },
+  "last_updated": "2026-11-05T15:08:04Z",
+  "timestamp": "20261105T150804Z",
+  "last_checked": "2026-11-05T15:08:04Z",
+  "last_checked_utc": "20261105T150804Z",
+  "track_a_blocker_latest": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md"
 }

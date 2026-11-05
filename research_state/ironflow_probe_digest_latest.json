@@ -1,10 +1,10 @@
 {
-  "digest_ts": "2026-11-05T13:26:34.636899+00:00",
+  "digest_ts": "2026-11-05T15:08:05.906781+00:00",
   "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
-  "latest_probe": "ironflow_probe_20261105T132633Z.json",
+  "latest_probe": "ironflow_probe_20261105T150804Z.json",
   "latest_data_through": "2026-10",
   "removed_count": 1,
-  "total_entries": 76,
+  "total_entries": 78,
   "entries": [
     {
       "probe_id": "ironflow_probe_20261105T024001Z",
@@ -1221,6 +1221,38 @@
       "new_files_found": 0,
       "sha256": "563f0de6a1a15dd3c27f1461761381a18d4dd14489835fe29902d8ba4c2890d4",
       "source_file": "ironflow_probe_20261105T131953Z.json"
+    },
+    {
+      "probe_id": "ironflow_probe_20261105T150504Z",
+      "timestamp_utc": "2026-11-05T15:05:04.470185+00:00",
+      "mode": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "triggered": false,
+      "tree_status": 200,
+      "tree_not_modified": false,
+      "probe_diff_added": 0,
+      "probe_diff_changed": 0,
+      "probe_diff_removed": 0,
+      "new_files_found": 0,
+      "sha256": "c1f0b193a7dd065cec8a537f5e5319265509db6a9767547f6fbe70ab96c49d73",
+      "source_file": "ironflow_probe_20261105T150504Z.json"
+    },
+    {
+      "probe_id": "ironflow_probe_20261105T150753Z",
+      "timestamp_utc": "2026-11-05T15:07:53.333855+00:00",
+      "mode": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "triggered": false,
+      "tree_status": 200,
+      "tree_not_modified": false,
+      "probe_diff_added": 0,
+      "probe_diff_changed": 0,
+      "probe_diff_removed": 0,
+      "new_files_found": 0,
+      "sha256": "b78a53994c03c860900e09611d95c4e52cec6d4ae27252637c1b589a30ac9a29",
+      "source_file": "ironflow_probe_20261105T150753Z.json"
     }
   ]
 }
