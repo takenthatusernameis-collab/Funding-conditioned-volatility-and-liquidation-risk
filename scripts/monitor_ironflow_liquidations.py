@@ -1266,7 +1266,17 @@ def _consolidate_ironflow_probes():
     re-probing.
     """
     try:
-        probes = sorted(EVIDENCE_DIR.glob("ironflow_probe_*.json"), key=lambda p: p.stat().st_mtime)
+        # [HEAVY-081] Exclude ironflow_probe_digest_*.json: the glob pattern
+        # "ironflow_probe_*.json" matches both the live probe and the digest it
+        # writes, so without this filter the digest was treated as a probe and
+        # re-archived every run, leaving 2 files instead of 1 (verified
+        # 20261105T0240Z: test_consolidate_ironflow_probes_keeps_latest failed
+        # 2 != 1). Digests are terminal archives, not live probes.
+        probes = sorted(
+            (p for p in EVIDENCE_DIR.glob("ironflow_probe_*.json")
+             if not p.name.startswith("ironflow_probe_digest_")),
+            key=lambda p: p.stat().st_mtime,
+        )
         if len(probes) <= 1:
             return {"kept": len(probes), "removed": 0, "digest_path": None}
         digest_entries = []
