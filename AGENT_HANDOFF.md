@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF)
-Timestamp (UTC): 20261105T071103Z
+Timestamp (UTC): 20261105T071232Z
 Git SHA (HEAD): 69d08ad5
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261105T071103Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: MAXIMALLY-CONSOLIDATED-HEAVY
+Handoff ID: FCLR-HANDOFF-20261105T071232Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP | Bottleneck-State: MAXIMALLY-CONSOLIDATED-HEAVY
 
 ## REPO-NAME PRIORITIZATION (INFERRED)
 Repository name: "Funding-conditioned-volatility-and-liquidation-risk"
@@ -78,4 +78,4 @@ STOP RULE: Complete ALL steps + ALL artifacts with concrete metrics. Track C loc
 - `python scripts/generate_tracka_fixtures.py`
 
 ## NEXT TASK (TIMESTAMPED)
-20261105T071103Z: Execute FCLR-NEXT-090 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Demolish ALL bottlenecks (net -15 files OR >=60% consolidated), probe exhaustively, harden rubric/fixtures/tests to MAXIMUM strictness, keep harness offline-ready zero-latency (<10s), tests green, write liquidation_forward_validate_010_blocker_*.md, update experiment_frontier.json and this handoff to be STRICTER. NO COASTING.
+20261105T071232Z: Execute FCLR-NEXT-090 as above. Volatility SEALED/LOCKED. Liquidation Risk ONLY focus. Demolish ALL bottlenecks (net -15 files OR >=60% consolidated), probe exhaustively, harden rubric/fixtures/tests to MAXIMUM strictness, keep harness offline-ready zero-latency (<10s), tests green, write liquidation_forward_validate_010_blocker_*.md, update experiment_frontier.json and this handoff to be STRICTER. NO COASTING.

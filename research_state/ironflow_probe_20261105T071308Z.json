@@ -1,6 +1,6 @@
 {
-  "probe_id": "ironflow_probe_20261105T071204Z",
-  "timestamp_utc": "2026-11-05T07:12:04.882833+00:00",
+  "probe_id": "ironflow_probe_20261105T071308Z",
+  "timestamp_utc": "2026-11-05T07:13:08.772568+00:00",
   "dataset": "ironflow/hyperliquid-liquidations",
   "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
   "tree": {
@@ -79,8 +79,8 @@
     "method": "state_only_tree_unchanged"
   },
   "artifact_churn": {
-    "probe_files_before": 37,
-    "probe_files_after": 37,
+    "probe_files_before": 38,
+    "probe_files_after": 38,
     "removed": 0,
     "digest_written": false,
     "digest_path": null
