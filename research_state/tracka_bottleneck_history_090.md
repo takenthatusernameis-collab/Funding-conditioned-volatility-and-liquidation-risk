@@ -428,3 +428,23 @@ Consolidated unreferenced non-canonical root artifacts (verified no refs in AGEN
 | `handoff_hardening_audit.md` | `3f37db1371a5fd43890517345268a6117dc96fcc40b1909bbc2702297a1372ed` | 2326 | # Handoff Hardening Audit  **Generated:** 2026-10-31T22:54:20Z **HEAD:** 9b2b9335 **Task ID:** HND-20261031-225247-FORCED_HEAVY_EVIDENCE_CAMPAIGN-V23 **Status:** COMPLETE (heavy evidence campaign)  ## Actions taken (in order) |
 | `shek_methodology_availability.md` | `30734a901de013e522f379929d34f312611a5b7929b961123558506ef73c0a05` | 2700 | # Shek (SSRN, posted 29 Sep 2026) methodology — availability record  Source requested: Helvin Shek, "Limits to Coordination: Funding Drag in Crypto Perpetual Funding Rates," SSRN, posted 29 September 2026. URL: https://p |
 Removed: 2 files. Root md+json before consolidation: 155; expected after deletion: 153; after 104 evidence (023 blocker + 104 sweep + frontier/handoff edits in-place): bounded <=163 verified post-write.
+
+## 105 consolidation (20261105T201400Z, FCLR-NEXT-105 root-bound preconsolidation before evidence)
+Consolidated 13 unreferenced non-canonical root artifacts (verified no refs in AGENT_HANDOFF.md, research_state/experiment_frontier.json, scripts/, tests/, and all other research_state files at removal time). Provenance preserved as sha256+bytes+excerpt; files removed to regain root md+json slack (bound <=163) before 105 evidence writes. Historical Track C/H002/registry context preserved in referenced canonical artifacts (trackc_final_synthesis_dossier.md, trackc_traceability_matrix.md, h002_replication_report.md, hypothesis_registry.json, structural_closure_verdict_heavy.md, registry_reconciliation.md).
+| file | sha256 | bytes | excerpt |
+|---|---|---:|---|
+| `coverage_audit_h003ext_2026.md` | `09b9aa9475dcbec0df24f507bd10046f5b924d20400244f30b28390113241ea9` | 3214 | # Coverage audit FCLR-H003-EXT-001 (unsealed 2026) |
+| `evaluation_summary_FCLR002_PRE_RECOMPUTE_SNAPSHOT.md` | `37c23d57223ac0924c3ec712b1cdeca582ada70de97c0c4dcda27b47150536dd` | 1593 | # Evaluation Summary (FCLR-002) |
+| `evaluation_summary_FCLR004_BLOCKED.md` | `157016256bb8954d23f4e934f607f7598057b17fa7aa94cc829ffa72c6621734` | 1592 | # Evaluation Summary (FCLR-004) — BLOCKED |
+| `evaluation_summary_FCLR009.md` | `e453bcf94bfebc18cebac3224c6df1021ff3b7c920bffbedf41bcb8d7a087ae5` | 1848 | # Evaluation Summary (FCLR-009) |
+| `h003_extension_feasibility.md` | `23cf3cea3cfde76f5559e3b910ed3105972af69eedd96b822a9e8df6dbd41fc1` | 1318 | # H003 Extension Feasibility — Hypothetical Boundary-Breach Forecast |
+| `independent_recompute_audit_FCLR010.md` | `649c9bcd25586f58609f025c7b05aca524d70ea265c3f5dc26d8e4a13a1dab48` | 2307 | # Independent recompute audit (FCLR-010) — cached inputs only |
+| `registry_reconciliation_audit.md` | `acf1dbbfcfdb86c17b1cf7acda777fa45b30369ca5c829c1cfeafd523576e036` | 703 | # Registry Reconciliation Audit (Heavy Evidence) |
+| `track_a_final_block_proof.md` | `17a8a933cc1db2a7479e47c6c5d66b78f1f754bda478ac6b55a924db29fd0127` | 7496 | # Track A Final Block Proof — Machine-Checkable (Observed Liquidations) |
+| `track_a_rubric_enforcement_matrix.md` | `c8fe3e9d3d76367fe00c0e4ac8a99667dd9588f255809c35a5fd0d692221daee` | 4059 | # Track A Rubric Enforcement Matrix — ACTIVE SWEEP (HARDENED) |
+| `track_b_codepath_separation_matrix.md` | `c3712105fee31ed29a2964aa16ab42398952adad468ee308b1916411964b07de` | 2837 | # Track B Codepath Separation Matrix — HARDENED |
+| `track_c_final_synthesis_dossier.md` | `32b906550981af5557ec4f6b88a5c196eb53b1c05324e01c8214bf5b250c2ac4` | 8771 | # Track C Final Synthesis Dossier — Funding-Conditioned Volatility Forecasting (H001) |
+| `track_c_traceability_matrix.md` | `bd028c94f7d4eb72a573266c6e9e61d471236f0df10f88546d3d79d16700a4d5` | 2828 | # Track C Traceability Matrix (H001) — Byte-Level Decomposition & Evidence |
+| `volatility_baseline_recheck_20261030.md` | `fa8515b80c11e6bc569012afaa4c40d9dd51f18ab0a508babb2d9779ce5d4cef` | 1084 | # Volatility baseline recheck 2026-10-30 |
+
+Removed: 13 files. Root md+json expected delta -13 (155 -> 142 pre-evidence; probes==2 unchanged; no recurring families introduced).

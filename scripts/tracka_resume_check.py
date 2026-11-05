@@ -210,6 +210,18 @@ def run(repo_root: Path = None, research_state_dir: Path = None) -> dict:
             checks[k] = v
     except Exception as e:
         checks["drift_invariants_error"] = {"pass": False, "error": repr(e)}
+    # 6) 105 named probe_invariant_runtime guard (fail-closed, read-only, preserves semantics)
+    try:
+        pis = probe_invariant_state(root, research_state_dir=research_state_dir)
+        checks["probe_invariant_runtime_named"] = {
+            "pass": pis.get("pass") is True,
+            "assert_probe_invariant_pass": pis.get("assert_probe_invariant", {}).get("pass"),
+            "probe_invariant_runtime_present": pis.get("probe_invariant_runtime_present"),
+            "probe_invariant_runtime_shape_valid": pis.get("probe_invariant_runtime_validation", {}).get("shape_valid"),
+            "latest_live_probe": pis.get("latest_live_probe"),
+        }
+    except Exception as e:
+        checks["probe_invariant_runtime_named"] = {"pass": False, "error": repr(e)}
     dt = time.time() - t0
     all_pass = all(v.get("pass") is True for v in checks.values())
     return {
@@ -299,6 +311,15 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
     # 3) probe invariant state + probe_invariant_runtime validation
     report["probe_invariant_state"] = probe_invariant_state(root, research_state_dir=rs)
     report["probe_invariant_runtime_valid"] = report["probe_invariant_state"].get("probe_invariant_runtime_validation", {}).get("pass") is True
+    # 105 named probe_invariant_runtime guard at operator level (fail-closed)
+    pis = report["probe_invariant_state"]
+    report["probe_invariant_runtime_named"] = {
+        "pass": pis.get("pass") is True,
+        "assert_probe_invariant_pass": pis.get("assert_probe_invariant", {}).get("pass"),
+        "probe_invariant_runtime_present": pis.get("probe_invariant_runtime_present"),
+        "probe_invariant_runtime_shape_valid": pis.get("probe_invariant_runtime_validation", {}).get("shape_valid"),
+        "latest_live_probe": pis.get("latest_live_probe"),
+    }
     report["elapsed_s"] = round(time.time() - t0, 6)
     # fail-closed overall
     drift_ok = report["drift_preflight"].get("pass") is True
