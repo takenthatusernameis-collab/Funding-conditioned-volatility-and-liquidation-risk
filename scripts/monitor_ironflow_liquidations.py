@@ -1250,6 +1250,7 @@ def main():
     force = "--force" in sys.argv
     simulate = "--simulate" in sys.argv
     decision = "--decision" in sys.argv
+    scan = "--scan" in sys.argv or "--resume-scan" in sys.argv
     if "--list" in sys.argv:
         list_state()
         return
