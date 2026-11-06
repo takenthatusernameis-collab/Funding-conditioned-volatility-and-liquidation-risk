@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md
 
-**TIMESTAMP (UTC):** 2026-11-06T21:56:01Z
+**TIMESTAMP (UTC):** 2026-11-06T22:24:55Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **SESSION GOAL:** UNBLOCK DATA → BUILD MINIMAL PIPELINE → RUN RV-ONLY OOS BASELINE (GATE 3)
 
 **LAST COMPLETED:** Phase 0.1 — inventory (463 zips), sample extraction (BTC/ETH klines+funding), fixtures, test_timestamp_parsing OK.
-**NEXT TASK:** Phase 0.2 — Build src/ingest/loader.py normalization + data_source_registry entries.
+**NEXT TASK:** Phase 1→2 — `scripts/run_rv_baseline.py` missing; build minimal ingest/features/baselines/walkforward + run RV-only OOS baseline gate.
 
 ---
 
@@ -58,8 +58,8 @@ Everything else is noise until Gate 3 is satisfied.
 ---
 
 ## NEXT SINGLE TASK (START HERE - DO NOT DEVIATE)
-Timestamp: 2026-11-06T21:56:01Z
-**TASK:** `PHASE 2.0 - Run RV-only baseline gate (BTC/ETH/SOL/XRP, Jan-Mar 2024)`
+Timestamp: 2026-11-06T22:24:55Z
+**TASK:** `PHASE 1→2 - Build missing RV baseline pipeline and run RV-only OOS gate (BTC/ETH/SOL/XRP, Jan-Mar 2024)`
 
 **IMMEDIATE ACTIONS:**
 1. Run `scripts/run_rv_baseline.py` (or `python -m scripts.run_rv_baseline`) end-to-end on extracted universe.
