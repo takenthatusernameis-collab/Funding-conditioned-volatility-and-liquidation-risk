@@ -1,91 +1,341 @@
 {
   "registry_version": "1.0",
-  "generated": "20261106T035900Z",
+  "generated": "20261106T045619Z",
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)",
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION.",
   "scripts": {
-    "cache_panel.py": {"class": "repo_maintenance_utility", "reason": "cache_panel.py: panel cache helper; no Track A liquidation outcome claim production."},
-    "campaign_resume.py": {"class": "repo_maintenance_utility", "reason": "campaign_resume.py: campaign resume/maintenance orchestration; no Track A liquidation outcome claims/canonical liquidation mutation."},
-    "consolidate_source_probe_fclr_next_002_104.py": {"class": "repo_maintenance_utility", "reason": "consolidate_source_probe_fclr_next_002_104.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."},
-    "controller_progress.py": {"class": "repo_maintenance_utility", "reason": "controller_progress.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."},
-    "coupled_build_panel.py": {"class": "guarded_tracka", "reason": "G1 machine-refuse without loader; no unguarded parquet."},
-    "coupled_robust_eval.py": {"class": "guarded_tracka_ready_writing", "reason": "Guarded + coupled loader; READY writes summary only; blocked refuses (G1/G4)."},
-    "coverage_audit.py": {"class": "track_c_or_aux_audit_utility", "reason": "coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "coverage_audit_fclr007.py": {"class": "track_c_or_aux_audit_utility", "reason": "coverage_audit_fclr007.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "create_blocker_evidence.py": {"class": "prereg_utility", "reason": "Emits blocker/prereg-evidence artifacts; no liquidation outcome reads/claims."},
-    "create_forward_prereg.py": {"class": "prereg_utility", "reason": "Writes prereg records only; no outcome reads."},
-    "deep_review_alt_sources.py": {"class": "raw_fetch_monitor_provenance", "reason": "Alt-source review/provenance; no guarded liquidation outcome claims."},
-    "diagnostics_scanner.py": {"class": "repo_maintenance_utility", "reason": "diagnostics_scanner.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."},
-    "download_extended.py": {"class": "raw_fetch_monitor_provenance", "reason": "download_extended.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "download_fclr012v_premium_index.py": {"class": "raw_fetch_monitor_provenance", "reason": "download_fclr012v_premium_index.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "exhaustive_binance_probe.py": {"class": "raw_fetch_monitor_provenance", "reason": "exhaustive_binance_probe.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."},
-    "extract_cache.py": {"class": "raw_fetch_monitor_provenance", "reason": "extract_cache.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "extract_fclr012v_klines.py": {"class": "raw_fetch_monitor_provenance", "reason": "extract_fclr012v_klines.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr002_coverage_audit.py": {"class": "track_c_or_aux_audit_utility", "reason": "fclr002_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "fclr002_download.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr002_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr002_gapfill.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr002_gapfill.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr003_download.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr003_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr003_extract.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr003_extract.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr004_download.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr004_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr006_block_audit.py": {"class": "unclassified_auxiliary", "reason": "fclr006_block_audit.py: auxiliary script with no detected Track A liquidation claim/eval/canonical mutation pattern; no guarded Hyperliquid liquidation outcome path detected."},
-    "fclr007_download.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr007_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr008_coverage_audit.py": {"class": "track_c_or_aux_audit_utility", "reason": "fclr008_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "fclr009_coverage_audit.py": {"class": "track_c_or_aux_audit_utility", "reason": "fclr009_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "fclr010_coverage_audit.py": {"class": "guarded_tracka_audit_ready_writing", "reason": "Guarded coverage audit; blocked main refuses/no canonical JSON write (G2)."},
-    "fclr010_execute.py": {"class": "guarded_tracka_ready_writing", "reason": "Guarded execute + READY-only canonical summary/manifest mutation; blocked refuses before writes (G1/G4)."},
-    "fclr010_execute_fast.py": {"class": "guarded_tracka", "reason": "Fast refusal/no-op unless explicit READY_FROZEN+loader."},
-    "fclr010_guarded_entry.py": {"class": "guarded_tracka", "reason": "Single guarded execution entry; refuses blocked before outcome load."},
-    "fclr010_harness.py": {"class": "harness_core", "reason": "Defines FCLR010Harness/guarded execute_ready_data_load contract."},
-    "fclr010_validate.py": {"class": "prereg_utility", "reason": "Validation/prereg helper; no guarded outcome claim reads."},
-    "fclr012_download.py": {"class": "raw_fetch_monitor_provenance", "reason": "fclr012_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "fclr012v_coverage_audit.py": {"class": "track_c_or_aux_audit_utility", "reason": "fclr012v_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "fclr013_coverage_audit.py": {"class": "track_c_or_aux_audit_utility", "reason": "fclr013_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."},
-    "forecast_pipeline.py": {"class": "track_c_sealed_volatility", "reason": "forecast_pipeline.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "freeze_fclr009_splits.py": {"class": "track_c_sealed_volatility", "reason": "freeze_fclr009_splits.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "funding_correction_replication.py": {"class": "track_c_sealed_volatility", "reason": "FCLR-H002 funding-correction replication (volatility/correction-time context); explicitly distinct from liquidation outcomes; no Track A guarded liquidation reads."},
-    "funding_interaction_analysis.py": {"class": "track_c_sealed_volatility", "reason": "funding_interaction_analysis.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "funding_interaction_analysis_fast.py": {"class": "track_c_sealed_volatility", "reason": "funding_interaction_analysis_fast.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "generate_tracka_fixtures.py": {"class": "test_fixture_utility", "reason": "Generates synthetic Track A fixtures for tests; no real outcome reads/canonical claims."},
-    "h002_download_2024_q1.py": {"class": "raw_fetch_monitor_provenance", "reason": "h002_download_2024_q1.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."},
-    "h004_audit.py": {"class": "out_of_scope_historical_tracka_pilot", "reason": "Audit helper for historical h004/FCLR-005 pilot artifacts; not guarded fclr010 outcome path."},
-    "h004_complete_cache.py": {"class": "raw_fetch_monitor_provenance", "reason": "h004_complete_cache.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."},
-    "h004_download_2026.py": {"class": "raw_fetch_monitor_provenance", "reason": "Download/provenance helper for 2026 h004 data; not a liquidation-risk claim producer."},
-    "h004_fclr005_pipeline.py": {"class": "out_of_scope_historical_tracka_pilot", "reason": "Historical Track A observed-label pilot using Bybit 2026 liquidation census (LIQ constant, fixed local path) + Binance features; NOT Hyperliquid ironflow and NOT routed through FCLR010Harness guarded outcome-loader seam. Produces pilot evaluation summary; out of guarded fclr010 outcome contract by design (distinct experiment/protocol). Must not be conflated with Hyperliquid observed-liquidation gate."},
-    "hl_coverage_probe.py": {"class": "raw_fetch_monitor_provenance", "reason": "Coverage probe/provenance; no guarded outcome claims."},
-    "hunt_alternative_liquidation_sources.py": {"class": "raw_fetch_monitor_provenance", "reason": "Source-hunt/provenance; no guarded outcome claims."},
-    "hyperliquid_funding_fetch.py": {"class": "raw_fetch_monitor_provenance", "reason": "Funding fetch/provenance utility; no liquidation outcome claim production."},
-    "liqmicro_audit.py": {"class": "guarded_tracka_audit_ready_writing", "reason": "Guarded liqmicro audit; blocked main refuses/no canonical md write (G2)."},
-    "merge_redundant_artifacts_090.py": {"class": "repo_maintenance_utility", "reason": "Artifact maintenance; no liquidation outcome reads/claims."},
-    "migrate_digest_archive_090.py": {"class": "repo_maintenance_utility", "reason": "Digest/archive maintenance; no liquidation outcome reads/claims."},
-    "monitor_ironflow_liquidations.py": {"class": "raw_fetch_monitor_provenance", "reason": "HTTP probe/provenance ingestion; not liquidation-risk claim producer."},
-    "nonfinite_serialization.py": {"class": "track_c_or_aux_utility", "reason": "nonfinite_serialization.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "overlay_quick.py": {"class": "guarded_tracka_ready_writing", "reason": "Guarded + coupled loader; READY writes summary/frontier/cross-track; blocked refuses (G1/G4)."},
-    "overlay_tracka_execute.py": {"class": "guarded_tracka_ready_writing", "reason": "Guarded + coupled loader; READY writes summary/frontier/cross-track; blocked refuses (G1/G4)."},
-    "probe_fclr012v_extend.py": {"class": "raw_fetch_monitor_provenance", "reason": "probe_fclr012v_extend.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."},
-    "run_evaluation.py": {"class": "track_c_sealed_volatility", "reason": "Track C/FCLR volatility evaluation path (sealed); liquidation terms absent as claim target; no Track A guarded liquidation outcome reads."},
-    "run_evaluation_fixed.py": {"class": "track_c_sealed_volatility", "reason": "run_evaluation_fixed.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_fi_quick.py": {"class": "track_c_or_aux_utility", "reason": "run_fi_quick.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_h003.py": {"class": "track_b_modeled_boundary", "reason": "Track B/FCLR-H003 modeled boundary-breach labels (synthetic); explicitly modeled != observed liquidations; out of Track A observed outcome contract."},
-    "run_h003_ext.py": {"class": "track_b_modeled_boundary", "reason": "Track B modeled boundary extension; modeled != observed."},
-    "run_h003_ext_fast.py": {"class": "track_b_modeled_boundary", "reason": "Track B modeled boundary extension (fast); modeled != observed."},
-    "run_h003_ext_inference.py": {"class": "track_b_modeled_boundary", "reason": "Track B modeled boundary inference; modeled != observed."},
-    "run_liqmicro.py": {"class": "guarded_tracka", "reason": "Guarded; blocked no loader/canonical/frontier mutation (115 G2)."},
-    "run_liqmicro_v2.py": {"class": "guarded_tracka", "reason": "Guarded; blocked no loader/canonical/frontier mutation (115 G2)."},
-    "run_stream_b_deep_analysis_001.py": {"class": "track_c_sealed_volatility", "reason": "run_stream_b_deep_analysis_001.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_stream_b_feature_extension.py": {"class": "track_c_sealed_volatility", "reason": "run_stream_b_feature_extension.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_stream_b_robustness_002.py": {"class": "track_c_sealed_volatility", "reason": "run_stream_b_robustness_002.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_trackc_deeper_validation_fclr011.py": {"class": "track_c_sealed_volatility", "reason": "run_trackc_deeper_validation_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_trackc_robustness_fclr011.py": {"class": "track_c_sealed_volatility", "reason": "run_trackc_robustness_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "run_volatility_funding_eval.py": {"class": "track_c_sealed_volatility", "reason": "run_volatility_funding_eval.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."},
-    "synthetic_boundary_labels.py": {"class": "track_b_modeled_boundary", "reason": "Synthetic/modeled boundary label construction; modeled != observed, no observed liquidation claims."},
-    "track_c_inventory_harden.py": {"class": "repo_maintenance_utility", "reason": "track_c_inventory_harden.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."},
-    "tracka_operator_report.py": {"class": "resume_gate_infra", "reason": "Read-only operator report composition."},
-    "tracka_resume_check.py": {"class": "resume_gate_infra", "reason": "Read-only checks; seam wiring only; no outcome reads/claims."},
-    "tracka_resume_gate.py": {"class": "resume_gate_infra", "reason": "Read-only fail-closed gate; no outcome reads/canonical mutation."},
-    "tracka_rubric.py": {"class": "resume_gate_infra", "reason": "Track A admissibility rubric/GO-NO-GO logic; pure assessment, no outcome parquet reads or canonical claim mutation."},
-    "verify_heavy_work_004i.py": {"class": "repo_maintenance_utility", "reason": "Historical campaign checklist verifier; no liquidation outcome reads/claims."},
-    "volatility_track_progress.py": {"class": "track_c_sealed_volatility", "reason": "Track C progress/report utility (volatility); no Track A guarded liquidation outcome reads."},
-    "write_trigger_harden_successor.py": {"class": "prereg_utility", "reason": "Trigger-hardening artifacts; no outcome reads."}
+    "cache_panel.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "cache_panel.py: panel cache helper; no Track A liquidation outcome claim production."
+    },
+    "campaign_resume.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "campaign_resume.py: campaign resume/maintenance orchestration; no Track A liquidation outcome claims/canonical liquidation mutation."
+    },
+    "consolidate_source_probe_fclr_next_002_104.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "consolidate_source_probe_fclr_next_002_104.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."
+    },
+    "controller_progress.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "controller_progress.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."
+    },
+    "coupled_build_panel.py": {
+      "class": "guarded_tracka",
+      "reason": "G1 machine-refuse without loader; no unguarded parquet."
+    },
+    "coupled_robust_eval.py": {
+      "class": "guarded_tracka_ready_writing",
+      "reason": "Guarded + coupled loader; READY writes summary only; blocked refuses (G1/G4)."
+    },
+    "coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "coverage_audit_fclr007.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "coverage_audit_fclr007.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "create_blocker_evidence.py": {
+      "class": "prereg_utility",
+      "reason": "Emits blocker/prereg-evidence artifacts; no liquidation outcome reads/claims."
+    },
+    "create_forward_prereg.py": {
+      "class": "prereg_utility",
+      "reason": "Writes prereg records only; no outcome reads."
+    },
+    "deep_review_alt_sources.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "Alt-source review/provenance; no guarded liquidation outcome claims."
+    },
+    "diagnostics_scanner.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "diagnostics_scanner.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."
+    },
+    "download_extended.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "download_extended.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "download_fclr012v_premium_index.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "download_fclr012v_premium_index.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "exhaustive_binance_probe.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "exhaustive_binance_probe.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."
+    },
+    "extract_cache.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "extract_cache.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "extract_fclr012v_klines.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "extract_fclr012v_klines.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr002_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr002_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "fclr002_download.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr002_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr002_gapfill.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr002_gapfill.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr003_download.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr003_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr003_extract.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr003_extract.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr004_download.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr004_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr006_block_audit.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "fclr006_block_audit.py: auxiliary script with no detected Track A liquidation claim/eval/canonical mutation pattern; no guarded Hyperliquid liquidation outcome path detected."
+    },
+    "fclr007_download.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr007_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr008_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr008_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "fclr009_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr009_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "fclr010_coverage_audit.py": {
+      "class": "guarded_tracka_audit_ready_writing",
+      "reason": "Guarded coverage audit; blocked main refuses/no canonical JSON write (G2)."
+    },
+    "fclr010_execute.py": {
+      "class": "guarded_tracka_ready_writing",
+      "reason": "Guarded execute + READY-only canonical summary/manifest mutation; blocked refuses before writes (G1/G4)."
+    },
+    "fclr010_execute_fast.py": {
+      "class": "guarded_tracka",
+      "reason": "Fast refusal/no-op unless explicit READY_FROZEN+loader."
+    },
+    "fclr010_guarded_entry.py": {
+      "class": "guarded_tracka",
+      "reason": "Single guarded execution entry; refuses blocked before outcome load."
+    },
+    "fclr010_harness.py": {
+      "class": "harness_core",
+      "reason": "Defines FCLR010Harness/guarded execute_ready_data_load contract."
+    },
+    "fclr010_validate.py": {
+      "class": "prereg_utility",
+      "reason": "Validation/prereg helper; no guarded outcome claim reads."
+    },
+    "fclr012_download.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr012_download.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "fclr012v_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr012v_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "fclr013_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr013_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "forecast_pipeline.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "forecast_pipeline.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "freeze_fclr009_splits.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "freeze_fclr009_splits.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "funding_correction_replication.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "FCLR-H002 funding-correction replication (volatility/correction-time context); explicitly distinct from liquidation outcomes; no Track A guarded liquidation reads."
+    },
+    "funding_interaction_analysis.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "funding_interaction_analysis.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "funding_interaction_analysis_fast.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "funding_interaction_analysis_fast.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "generate_tracka_fixtures.py": {
+      "class": "test_fixture_utility",
+      "reason": "Generates synthetic Track A fixtures for tests; no real outcome reads/canonical claims."
+    },
+    "h002_download_2024_q1.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "h002_download_2024_q1.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."
+    },
+    "h004_audit.py": {
+      "class": "out_of_scope_historical_tracka_pilot",
+      "reason": "Audit helper for historical h004/FCLR-005 pilot artifacts; not guarded fclr010 outcome path."
+    },
+    "h004_complete_cache.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "h004_complete_cache.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "h004_download_2026.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "Download/provenance helper for 2026 h004 data; not a liquidation-risk claim producer."
+    },
+    "h004_fclr005_pipeline.py": {
+      "class": "out_of_scope_historical_tracka_pilot",
+      "reason": "Historical Track A observed-label pilot using Bybit 2026 liquidation census (LIQ constant, fixed local path) + Binance features; NOT Hyperliquid ironflow and NOT routed through FCLR010Harness guarded outcome-loader seam. Produces pilot evaluation summary; out of guarded fclr010 outcome contract by design (distinct experiment/protocol). Must not be conflated with Hyperliquid observed-liquidation gate."
+    },
+    "hl_coverage_probe.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "Coverage probe/provenance; no guarded outcome claims."
+    },
+    "hunt_alternative_liquidation_sources.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "Source-hunt/provenance; no guarded outcome claims."
+    },
+    "hyperliquid_funding_fetch.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "Funding fetch/provenance utility; no liquidation outcome claim production."
+    },
+    "liqmicro_audit.py": {
+      "class": "guarded_tracka_audit_ready_writing",
+      "reason": "Guarded liqmicro audit; blocked main refuses/no canonical md write (G2)."
+    },
+    "merge_redundant_artifacts_090.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "Artifact maintenance; no liquidation outcome reads/claims."
+    },
+    "migrate_digest_archive_090.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "Digest/archive maintenance; no liquidation outcome reads/claims."
+    },
+    "monitor_ironflow_liquidations.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "HTTP probe/provenance ingestion; not liquidation-risk claim producer."
+    },
+    "nonfinite_serialization.py": {
+      "class": "track_c_or_aux_utility",
+      "reason": "nonfinite_serialization.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "overlay_quick.py": {
+      "class": "guarded_tracka_ready_writing",
+      "reason": "Guarded + coupled loader; READY writes summary/frontier/cross-track; blocked refuses (G1/G4)."
+    },
+    "overlay_tracka_execute.py": {
+      "class": "guarded_tracka_ready_writing",
+      "reason": "Guarded + coupled loader; READY writes summary/frontier/cross-track; blocked refuses (G1/G4)."
+    },
+    "probe_fclr012v_extend.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "probe_fclr012v_extend.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."
+    },
+    "run_evaluation.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "Track C/FCLR volatility evaluation path (sealed); liquidation terms absent as claim target; no Track A guarded liquidation outcome reads."
+    },
+    "run_evaluation_fixed.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_evaluation_fixed.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_fi_quick.py": {
+      "class": "track_c_or_aux_utility",
+      "reason": "run_fi_quick.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_h003.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "Track B/FCLR-H003 modeled boundary-breach labels (synthetic); explicitly modeled != observed liquidations; out of Track A observed outcome contract."
+    },
+    "run_h003_ext.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "Track B modeled boundary extension; modeled != observed."
+    },
+    "run_h003_ext_fast.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "Track B modeled boundary extension (fast); modeled != observed."
+    },
+    "run_h003_ext_inference.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "Track B modeled boundary inference; modeled != observed."
+    },
+    "run_liqmicro.py": {
+      "class": "guarded_tracka",
+      "reason": "Guarded; blocked no loader/canonical/frontier mutation (115 G2)."
+    },
+    "run_liqmicro_v2.py": {
+      "class": "guarded_tracka",
+      "reason": "Guarded; blocked no loader/canonical/frontier mutation (115 G2)."
+    },
+    "run_stream_b_deep_analysis_001.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_stream_b_deep_analysis_001.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_stream_b_feature_extension.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_stream_b_feature_extension.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_stream_b_robustness_002.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_stream_b_robustness_002.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_trackc_deeper_validation_fclr011.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_trackc_deeper_validation_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_trackc_robustness_fclr011.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_trackc_robustness_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_volatility_funding_eval.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_volatility_funding_eval.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "synthetic_boundary_labels.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "Synthetic/modeled boundary label construction; modeled != observed, no observed liquidation claims."
+    },
+    "track_c_inventory_harden.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "track_c_inventory_harden.py: repo/diagnostic/maintenance utility; no Track A liquidation outcome claims or guarded canonical liquidation mutation."
+    },
+    "tracka_operator_report.py": {
+      "class": "resume_gate_infra",
+      "reason": "Read-only operator report composition."
+    },
+    "tracka_resume_check.py": {
+      "class": "resume_gate_infra",
+      "reason": "Read-only checks; seam wiring only; no outcome reads/claims."
+    },
+    "tracka_resume_gate.py": {
+      "class": "resume_gate_infra",
+      "reason": "Read-only fail-closed gate; no outcome reads/canonical mutation."
+    },
+    "tracka_rubric.py": {
+      "class": "resume_gate_infra",
+      "reason": "Track A admissibility rubric/GO-NO-GO logic; pure assessment, no outcome parquet reads or canonical claim mutation."
+    },
+    "verify_heavy_work_004i.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "Historical campaign checklist verifier; no liquidation outcome reads/claims."
+    },
+    "volatility_track_progress.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "Track C progress/report utility (volatility); no Track A guarded liquidation outcome reads."
+    },
+    "write_trigger_harden_successor.py": {
+      "class": "prereg_utility",
+      "reason": "Trigger-hardening artifacts; no outcome reads."
+    },
+    "check_tracka_scope_registry_drift.py": {
+      "class": "resume_gate_infra",
+      "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes, no Track A liquidation outcome claims."
+    }
   },
   "allowed_classes": [
     "guarded_tracka",
@@ -104,5 +354,5 @@
     "out_of_scope_historical_tracka_pilot",
     "unclassified_auxiliary"
   ],
-  "script_count": 82
+  "script_count": 83
 }

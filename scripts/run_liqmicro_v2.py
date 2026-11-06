@@ -25,8 +25,6 @@ if str(REPO / 'src') not in sys.path:
 
 from analysis.liqmicro.ingest import GuardedReadRefused, HyperliquidFundingIngestor, IronflowIngestor
 from analysis.liqmicro.features import LiqMicroFeatures
-from analysis.liqmicro.models import LiqMicroModels
-from analysis.liqmicro.stats import LiqMicroStats
 
 RESULTS_DIR = REPO / "results" / "liqmicro_v2"
 RESEARCH_STATE = REPO / "research_state"
@@ -57,6 +55,8 @@ def _run_pipeline(raw_df: pd.DataFrame, hourly: pd.DataFrame, funding_df: pd.Dat
     Only reached on the guarded READY_FROZEN path; never executed on a blocked
     branch (no data read, no canonical output mutation, no research_state write).
     """
+    from analysis.liqmicro.models import LiqMicroModels
+    from analysis.liqmicro.stats import LiqMicroStats
     print("\n2. Ingesting Hyperliquid funding...")
     print(f"   Loaded {len(funding_df):,} funding rows")
     if not funding_df.empty:

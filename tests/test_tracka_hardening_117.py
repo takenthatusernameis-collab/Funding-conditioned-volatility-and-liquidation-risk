@@ -45,6 +45,10 @@ BLOCKED_PAYLOAD = {
 }
 
 SCRIPT_REGISTRY = {
+  "check_tracka_scope_registry_drift.py": {
+    "class": "resume_gate_infra",
+    "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes."
+  },
   "cache_panel.py": {
     "class": "repo_maintenance_utility",
     "reason": "cache_panel.py: panel cache helper; no Track A liquidation outcome claim production."
