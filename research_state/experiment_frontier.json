@@ -452,7 +452,7 @@
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
   },
-  "last_updated": "20261106T035500Z",
+  "last_updated": "20261106T035900Z",
   "timestamp": "20261106T015401Z",
   "last_checked": "2026-11-06T01:54:01Z",
   "last_checked_utc": "2026-11-06T02:17:00Z",
@@ -747,5 +747,5 @@
     "ironflow_probing_exhausted": true,
     "bound": 163
   },
-  "last_updated": "20261106T035900Z"
+  "handoff_refreshed_utc": "20261106T041556Z"
 }
