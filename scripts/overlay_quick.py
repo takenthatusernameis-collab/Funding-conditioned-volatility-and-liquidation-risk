@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
+IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 RUN_MANIFEST = REPO / "research_state/run_manifest.json"
 OUT_SUM = REPO / "research_state" / "evaluation_summary_tracka_overlay_001.md"
 COUPLED_CACHE = REPO / "research_state" / ".cache" / "fclr_coupled_panel.parquet"
@@ -67,6 +68,32 @@ def predict(w,X):
 
 
 def main():
+    # FCLR-NEXT-112: gate through guarded_execute before any parquet/outcome read
+    # or canonical output mutation. Blocked branches refuse before touching COUPLED_CACHE
+    # or any research_state output.
+    from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
+
+    guard = guarded_execute(
+        data_path=IRONFLOW,
+        pre_reg_path=None,
+        repo_root=REPO,
+        source_manifest=None,
+        admissible_manifest=None,
+        admissible_manifest_path=None,
+        outcome_loader=None,
+        allow_default_loader=False,
+    )
+    if guard.get("status") != "READY_FROZEN":
+        payload = refusal_payload(
+            reason="overlay_quick refused: no guarded READY_FROZEN contract. Direct parquet/coupled-cache reads and canonical output mutations bypassed on blocked branch.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="overlay_quick",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== OVERLAY_QUICK BLOCKED {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
+        return 1
+
     with open(RUN_MANIFEST) as f:
         m = json.load(f)
     splits = m['split_boundaries_fclr010']

@@ -4,24 +4,29 @@
 Vectorized pandas construction. Caches to research_state/.cache/fclr_coupled_panel.parquet
 so the experiment is restartable without re-reading 2.17M raw rows.
 
+FCLR-NEXT-112: routed through guarded_execute contract. No direct parquet/outcome
+reads on blocked branches. The actual ironflow parquet load is an explicit
+outcome_loader invoked ONLY after guarded_execute returns READY_FROZEN.
+
 Labels only. Features are computed later from label history (decision-time, causal).
 Cross-track firewall: Hyperliquid native perps ONLY. No Binance data.
 """
 from __future__ import annotations
 
+import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Callable, Dict, Optional
 
 import numpy as np
 import pandas as pd
-import pyarrow.parquet as pq
 
 REPO = Path(__file__).resolve().parents[1]
 IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 CACHE = REPO / "research_state" / ".cache" / "fclr_coupled_panel.parquet"
 MANIFEST = REPO / "research_state" / "run_manifest.json"
-import json
+
 with open(MANIFEST) as _f:
     _M = json.load(_f)
 _S = _M["split_boundaries_fclr010"]
@@ -29,19 +34,26 @@ WIN_START = pd.Timestamp(_S["data_window"]["start"])
 WIN_END = pd.Timestamp(_S["data_window"]["end"])
 
 
-def build(force: bool = False) -> pd.DataFrame:
-    if CACHE.exists() and not force:
-        return pd.read_parquet(CACHE)
+def _load_coupled_outcomes(data_path: Path, context: Optional[Dict] = None) -> Dict:
+    """Explicit outcome/parquet loader for coupled panel build.
 
-    files = sorted(f for f in os.listdir(IRONFLOW) if f.endswith(".parquet"))
+    Invoked ONLY after guarded_execute returns READY_FROZEN. Blocked branches
+    never reach this function; no pyarrow/pandas parquet import on blocked paths.
+    """
+    import pyarrow.parquet as pq
+
+    force = (context or {}).get("force", False)
+    if CACHE.exists() and not force:
+        return {"panel_cached": True, "cache": str(CACHE)}
+
+    files = sorted(f for f in os.listdir(data_path) if f.endswith(".parquet"))
     frames = []
     for fname in files:
         t = pq.read_table(
-            IRONFLOW / fname,
+            data_path / fname,
             columns=["timestamp", "market", "position_side", "notional_usd"],
         )
         df = t.to_pandas()
-        # keep native perps only
         m = df["market"].astype(str).str.endswith("-PERP") & ~df["market"].astype(str).str.contains(":")
         df = df.loc[m].copy()
         df["hour"] = df["timestamp"].dt.floor("h")
@@ -63,7 +75,6 @@ def build(force: bool = False) -> pd.DataFrame:
             usd=("notional_usd", "sum"),
         )
     )
-    # complete hourly grid per symbol so zero-liquidation hours are explicit rows
     symbols = sorted(g["market"].unique().tolist())
     hours = pd.date_range(WIN_START, WIN_END, freq="h", inclusive="left")
     idx = pd.MultiIndex.from_product([symbols, hours], names=["market", "hour"])
@@ -76,11 +87,59 @@ def build(force: bool = False) -> pd.DataFrame:
     panel = panel.sort_values(["market", "hour"]).reset_index(drop=True)
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     panel.to_parquet(CACHE, index=False)
-    return panel
+    return {"panel_cached": False, "rows": len(panel), "symbols": panel["market"].nunique(), "hours": panel["hour"].nunique(), "cache": str(CACHE)}
 
 
-if __name__ == "__main__":
-    p = build(force=True)
+def build(force: bool = False, outcome_loader: Optional[Callable] = None) -> pd.DataFrame:
+    """Build coupled panel.
+
+    If outcome_loader is supplied (guarded READY_FROZEN path), it is used to
+    load/construct the panel data. Otherwise reads from cache only (no direct
+    parquet reads on non-guarded paths).
+    """
+    if outcome_loader is not None:
+        loaded = outcome_loader(CACHE, {"force": force})
+        if loaded.get("panel_cached"):
+            return pd.read_parquet(CACHE)
+        return pd.read_parquet(CACHE)
+    if CACHE.exists():
+        return pd.read_parquet(CACHE)
+    raise RuntimeError("coupled_build_panel: no cached panel and no explicit outcome_loader; refused outside guarded contract")
+
+
+def main():
+    from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
+
+    guard = guarded_execute(
+        data_path=IRONFLOW,
+        pre_reg_path=None,
+        repo_root=REPO,
+        source_manifest=None,
+        admissible_manifest=None,
+        admissible_manifest_path=None,
+        outcome_loader=_load_coupled_outcomes,
+        loader_context={"force": True},
+        allow_default_loader=False,
+    )
+    if guard.get("status") != "READY_FROZEN":
+        payload = refusal_payload(
+            reason="coupled_build_panel refused: no guarded READY_FROZEN contract (admissible seam + prereg + manifest/data gates). Direct parquet reads bypassed.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="coupled_build_panel",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== COUPLED_BUILD_PANEL BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
+        return 1
+
+    loaded = guard.get("outcomes_loaded")
+    p = build(force=True, outcome_loader=_load_coupled_outcomes)
     print(f"Panel: {p.shape}  symbols={p['market'].nunique()}  hours={p['hour'].nunique()}")
     print("occurrence rate:", p['y_occ'].mean().round(6))
     print(p.head())
+    return 0
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(main())

@@ -20,7 +20,7 @@ import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
 IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
-RUN_MANIFEST = REPO / "research_state" / "run_manifest.json"
+RUN_MANIFEST = REPO / "research_state/run_manifest.json"
 OUT_SUM = REPO / "research_state" / "evaluation_summary_FCLR-COUPLED-001-ROBUST.md"
 COUPLED_CACHE = REPO / "research_state" / ".cache" / "fclr_coupled_panel.parquet"
 HL_CACHE_DIR = REPO / "research_state" / "hyperliquid_cache"
@@ -250,6 +250,32 @@ def block_bootstrap_compare(rows_a_b1, rows_a_c, n_boot=2000, seed=12345):
 def main():
     start_time = datetime.now(timezone.utc)
     print(f"=== FCLR-COUPLED-ROBUST START {dt_to_iso_z(start_time)} ===", flush=True)
+
+    # FCLR-NEXT-112: gate through guarded_execute before any parquet/outcome read
+    # or canonical output mutation. Blocked branches refuse before touching COUPLED_CACHE
+    # or any research_state output.
+    from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
+
+    guard = guarded_execute(
+        data_path=IRONFLOW,
+        pre_reg_path=None,
+        repo_root=REPO,
+        source_manifest=None,
+        admissible_manifest=None,
+        admissible_manifest_path=None,
+        outcome_loader=None,
+        allow_default_loader=False,
+    )
+    if guard.get("status") != "READY_FROZEN":
+        payload = refusal_payload(
+            reason="coupled_robust_eval refused: no guarded READY_FROZEN contract. Direct parquet/coupled-cache reads and canonical output mutations bypassed on blocked branch.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="coupled_robust_eval",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== COUPLED_ROBUST_EVAL BLOCKED {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
+        return 1
 
     with open(RUN_MANIFEST) as f:
         m = json.load(f)

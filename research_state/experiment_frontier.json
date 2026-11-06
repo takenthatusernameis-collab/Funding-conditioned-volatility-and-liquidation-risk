@@ -1,8 +1,8 @@
 {
   "registry_version": "1.1",
-  "generated": "20261105T233053Z",
+  "generated": "20261106T005200Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "VERIFIED 20261105T233053Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest NO TRIGGER; IRONFLOW PROBING EXHAUSTED 90+). 110 complete: guarded execute_ready_data_load + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED detail preserving 108 codes/order (outcomes_inspected:false). 363 tests OK, resume_check 17 PASS (probe_invariant_runtime_named+admissible_seam_wired), operator exit 0, root md+json 142, probes 2. 111 NOT STARTED (real bottleneck): fclr010_execute.py/fclr010_execute_fast.py unguarded parquet/outcome paths bypass guarded load. SINGLE ACTIVE NEXT = FCLR-NEXT-111 (AGENT_HANDOFF.md): wire guarded data-load into real execution entrypoints + E2E trigger-artifact matrix; no bypass/no network/parquet/outcome reads/no real research_state writes. PREREG BEFORE OUTCOMES on trigger. NO COASTING.",
+  "current_status": "VERIFIED 20261106T005200Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest NO TRIGGER; IRONFLOW PROBING EXHAUSTED 90+). 110 complete: guarded execute_ready_data_load + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED detail preserving 108 codes/order (outcomes_inspected:false). 111 COMPLETE: both real execution entrypoints wired into guarded execute_ready_data_load contract (fixed import sys bottleneck in fclr010_execute.py:532), tests/test_tracka_hardening_111.py (+8 E2E fixture matrix tests), 371 tests OK, resume_check 17 PASS (probe_invariant_runtime_named+admissible_seam_wired), operator exit 0, root md+json 142, probes 2. 112 COMPLETE: entrypoint audit of all scripts/*.py for direct parquet/outcome reads bypassing guarded contract; 6 scripts wired (coupled_build_panel, fclr010_coverage_audit, liqmicro_audit, overlay_tracka_execute, overlay_quick, coupled_robust_eval) + 2 already wired in 111 (fclr010_execute, fclr010_execute_fast) = 8 total; 0 direct-parquet-reads remaining outside guarded contract; tests/test_tracka_hardening_112.py (+9 fail-closed matrix tests), 380 tests OK, resume_check 17 PASS, operator exit 0, root md+json 142, probes 2.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap: data was downloaded and audited 2026-11-03 but never executed. Fixed by adding FCLR-012-V branch + prereg + frozen splits.",
   "frontier": [
     {
@@ -22,14 +22,31 @@
       "rank": 0.05,
       "id": "FCLR-NEXT-111",
       "task": "FCLR-NEXT-111: WIRE GUARDED DATA-LOAD INTO REAL EXECUTION ENTRYPOINTS + E2E TRIGGER-ARTIFACT MATRIX (NO COAST)",
-      "status": "NOT_STARTED_HEAVY_WORK_REQUIRED",
+      "status": "COMPLETE",
       "acceptance": "Real entrypoints fclr010_execute.py/main and fclr010_execute_fast.py/main enforce guarded seam+prereg+manifest before any parquet/outcome/canonical write; tests/test_tracka_hardening_111.py E2E matrix green; full suite >=364 green; stable 108/110 semantics preserved; root<=163 probes==2.",
       "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
       ],
-      "generated": "20261105T233053Z"
+      "generated": "20261105T233053Z",
+      "completed": "20261106T005200Z",
+      "delta": "tests 363->371 (+8 via test_tracka_hardening_111.py), entrypoints wired 0->2 (fclr010_execute.py:main + fclr010_execute_fast.py:main), guarded_entry module scripts/fclr010_guarded_entry.py added",
+    },
+    {
+      "rank": 0.02,
+      "id": "FCLR-NEXT-112",
+      "task": "FCLR-NEXT-112: ENTRYPOINT AUDIT + WIRE ALL REMAINING SCRIPTS/*.py DIRECT-PARQUET READS THROUGH GUARDED CONTRACT + FAIL-CLOSED MATRIX TESTS (NO COAST)",
+      "status": "COMPLETE",
+      "acceptance": "All scripts/*.py with direct parquet/outcome reads outside fclr010_guarded_entry._default_outcome_loader or fclr010_execute._load_outcomes wired through guarded_execute or made pure refusal: coupled_build_panel.py:main, fclr010_coverage_audit.py:main, liqmicro_audit.py:main, overlay_tracka_execute.py:main, overlay_quick.py:main, coupled_robust_eval.py:main (6 newly wired); fclr010_execute.py:main + fclr010_execute_fast.py:main already wired (111). Direct-parquet-reads found: 6 before / 0 after. Entrypoints wired: 2 before / 8 after. tests/test_tracka_hardening_112.py (+9 fail-closed matrix tests, tmp-isolated, no network/parquet/outcome/real research_state writes). Full suite 380 OK. Stable 108/110/111 reason codes/order/fields preserved. Root md+json 142 (<=163), probes==2.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
+      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
+      "resume_triggers": [
+        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
+      ],
+      "generated": "20261106T005200Z",
+      "completed": "20261106T005200Z",
+      "delta": "direct-parquet-reads 6->0, entrypoints wired 2->8, tests 371->380 (+9 via test_tracka_hardening_112.py), changed_files: scripts/coupled_build_panel.py, scripts/fclr010_coverage_audit.py, scripts/liqmicro_audit.py, scripts/overlay_tracka_execute.py, scripts/overlay_quick.py, scripts/coupled_robust_eval.py, tests/test_tracka_hardening_112.py",
     },
     {
       "rank": 0,
