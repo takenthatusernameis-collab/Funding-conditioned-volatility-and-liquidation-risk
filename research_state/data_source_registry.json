@@ -1,88 +1,29 @@
 {
-  "registry_version": "1.2",
-  "updated_at": "2026-11-01T04:52:00Z",
   "sources": [
     {
-      "source_id": "binance_data_vision_funding",
-      "type": "funding_rate_monthly",
-      "venues": ["BINANCE"],
-      "status": "admissible",
-      "unauthenticated": true,
-      "endpoints": ["https://data.binance.vision/data/futures/um/monthly/fundingRate/"],
-      "coverage": {"symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"], "months": ["2024-01", "2024-02", "2024-03"]},
-      "notes": "Used for FCLR-H002 replication; cached in repo root and research_state/data_cache"
-    },
-    {
-      "source_id": "binance_data_vision_klines",
-      "type": "klines_1h",
-      "venues": ["BINANCE"],
-      "status": "admissible",
-      "unauthenticated": true,
-      "endpoints": ["https://data.binance.vision/data/futures/um/daily/klines/"],
-      "coverage": {"symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"], "dates": "2024-01-01..2024-09-30 (cached)"},
-      "notes": "Used for forecast evaluation panels"
-    },
-    {
-      "source_id": "binance_liquidation_snapshot",
-      "type": "liquidation_census",
-      "venues": ["BINANCE"],
-      "status": "inadmissible",
-      "unauthenticated": false,
-      "endpoints": ["https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/", "https://fapi.binance.com/fapi/v1/forceOrders"],
-      "rejection_reasons": ["HTTP 404 for liquidationSnapshot paths", "HTTP 451 for fapi forceOrders (restricted location)", "no unauthenticated complete census"],
-      "notes": "Structural blocker per liquidation_sources_enumeration.md"
-    },
-    {
-      "source_id": "bybit_public",
-      "type": "trades_and_misc",
-      "venues": ["BYBIT"],
-      "status": "inadmissible_for_census",
-      "unauthenticated": true,
-      "endpoints": ["https://public.bybit.com/"],
-      "rejection_reasons": ["no unauthenticated complete liquidation event census archive surfaced"],
-      "notes": "Trades exist but cannot satisfy complete census requirement"
-    },
-    {
-      "source_id": "okx_public",
-      "type": "market_data",
-      "venues": ["OKX"],
-      "status": "inadmissible_for_census",
-      "unauthenticated": true,
-      "endpoints": ["https://www.okx.com/"],
-      "rejection_reasons": ["no unauthenticated complete historical liquidation census found"],
-      "notes": "No admissible complete liquidation census"
-    },
-    {
-      "source_id": "huggingface_ochinimus_liquidation_ticks",
-      "type": "liquidation_ticks",
-      "venues": ["BINANCE", "BYBIT", "OKX"],
-      "status": "admissible_for_exploratory_only",
-      "unauthenticated": true,
-      "license": "CC BY 4.0",
-      "endpoints": ["https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks"],
-      "coverage": {"window": "2026-07-08T16:42:32Z..2026-08-06T23:59:42Z", "symbols": 800},
-      "completeness_notes": "Bybit complete, Binance undercounts (1 order per symbol per 1000ms), OKX undercounts (1 update/sec)",
-      "rejection_reasons_for_confirmatory_2024": ["does not cover 2024 frozen windows", "single ~30-day window yielding 0 non-overlapping 30-day blocks"],
-      "notes": "Used for FCLR-005 pilot only; not usable for frozen 2024 confirmatory tests"
-    },
-    {
-      "source_id": "ironflow_hyperliquid_liquidation_events",
-      "type": "liquidation_census",
-      "venues": ["HYPERLIQUID"],
-      "status": "admissible_pending_fclr010_preregistration",
-      "unauthenticated": true,
-      "no_keys": true,
-      "endpoints": ["https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/YYYY-MM.parquet"],
-      "coverage": {"window": "2025-11-01..2026-10-31", "months": 12, "symbols": "185 native perpetual markets observed in 2025-11 (199 total incl. HIP-3 builder markets)", "native_perp_rows_2025_11": 211097, "total_rows_2025_11": 214559},
-      "completeness_doc": true,
-      "completeness_basis": "Dataset card: 'Every liquidation on Hyperliquid perpetuals from 1 November 2025 to 30 October 2026: 2,167,823 liquidated positions across 460 markets and 422,181 wallets, $29.9 billion in liquidated notional... It is not a heuristic: each row is a fill Hyperliquid itself marked as a liquidation.' Source: Ironflow nodes reading Hyperliquid liquidation fill field.",
-      "license_ok": true,
-      "license": "CC BY 4.0",
-      "census_or_defensible": true,
-      "rubric": {"unauthenticated": true, "no_keys": true, "symbols_ge_5": true, "blocks_ge_3": true, "completeness_doc": true, "license_ok": true, "census_or_defensible": true},
-      "file_hashes_sha256": {"2025-11": "4c424ff8fa16f73ce242bf2eb8eb10b457fb9283d1504c1523f947a439d6e412", "2025-12": "c45243ec60d7e251b4210574807b0e56afcbf3b8ffdeb12e6b012c82bf03ba4b", "2026-01": "90328bb62510ed65e79e8e7a226ac885061672604ec0b146808d115583d246ea", "2026-02": "43c0821e26a8900212768a075ccb285c2a2c83228c1122b78d4b9402", "2026-03": "a7f2e64be0d15ff4091430e24621ed5bc2c403e002bd18698f50585a4aef2045", "2026-04": "22fc72c2bc0b37741c69b0ab28ec3124b7cf3e9670749e10540de4624fb631bc", "2026-05": "8fafbd22baa6d522e8a7c611c7da4e9586b6bacd2a2c83228c1122b78d4b9402", "2026-06": "e703fd7ed6ca7fbc2240fea114b1ed6022e66bf91a25a497a7ec2030e134f9a8", "2026-07": "3f941b96308b7a5593c7263e9a3a06a41c8a15be1fe45524e623cbcd8d92fa02", "2026-08": "6b67b5d0248af8a64de50a3ebf0549bb5b70eeff599ead6457fa94dc3e000dd9", "2026-09": "80fd5915b0d5a76f467cabfdf2e73b3b83ab18ebffd336e5dd5c4f68c878d6ca", "2026-10": "1c274b465244727bae94d3d7c7feed27c38aa592319f2fee91b62fb2abde9f84"},
-      "cached_at": "research_state/data_cache/ironflow_events/YYYY-MM.parquet",
-      "notes": "NEW admissible unauthenticated liquidation source NOT enumerated in track_a_deadend_map. Passes ALL rubric items. Reopens Track A / FCLR-H004. Venue is Hyperliquid (NOT Binance) -> new experiment FCLR-010 with pre-registration BEFORE outcome inspection; do NOT merge with Binance panels (cross-track firewall). Funding/mark prices to be sourced from Hyperliquid public unauthenticated API (api.hyperliquid.xyz/info) pending coverage audit before outcomes."
+      "id": "binance-public-archive",
+      "type": "archive",
+      "url": "https://github.com/binance/binance-public-data",
+      "access": "unauthenticated",
+      "tested": true,
+      "description": "Local zips present in repo root (Binance USD-M perpetual klines/index/mark/premium/funding).",
+      "coverage": {
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT",
+          "XRPUSDT"
+        ],
+        "period": "2024-01 to 2024-03",
+        "klines": "1h daily zips present",
+        "funding": "monthly fundingRate zips present"
+      },
+      "gaps": [
+        "indexPriceKlines/markPriceKlines/premiumIndexKlines present as dirs with daily zips; need to inventory contents"
+      ],
+      "terms": "Binance public data terms apply; local copies present",
+      "acceptance_status": "accepted_local_archive",
+      "notes": "Extracted samples show ms timestamps for klines, ms calc_time for funding."
     }
   ]
 }
