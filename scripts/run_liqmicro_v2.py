@@ -60,9 +60,17 @@ def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
     allowed_resolved = [str(Path(p).resolve()) for p in LIQMICRO_V2_ALLOWED_WRITE_ROOTS]
     # fail-closed if the resolved roots escape the repo or overlap canonical RS roots
     repo_resolved = str(REPO.resolve())
+    research_state_resolved = str(RESEARCH_STATE.resolve())
     for root in allowed_resolved:
         if not root.startswith(repo_resolved):
             failures.append("allowed_write_root_escapes_repo")
+        # G3 (122): research_state directory-wide and repo root are never allowed
+        # write roots (only specific liqmicro-v2 canonical artifacts).
+        if Path(root) == RESEARCH_STATE.resolve() or Path(root) == REPO.resolve():
+            failures.append("research_state_directory_wide_root_not_allowed")
+        # root-wildcard / glob patterns never allowed.
+        if any(ch in root for ch in "*?["):
+            failures.append("root_wildcard_not_allowed")
     denied = list(_LIQMICRO_V2_DENIED_WRITE_TARGETS)
     # ensure no denied target name can appear under the allowed roots
     for target in denied:

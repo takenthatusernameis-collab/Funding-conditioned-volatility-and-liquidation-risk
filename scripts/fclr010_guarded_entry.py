@@ -108,6 +108,14 @@ def guarded_execute(
         admissible_manifest=admissible_manifest,
         admissible_manifest_path=admissible_manifest_path,
     )
+    # G1 (122): when the admissible seam is GO but prereg/data is missing/blocked,
+    # the stable contract reason_code is PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS
+    # (consistent with the operator gate), with seam_go_prereg_required and
+    # reason_code_detail preserved where the contract emits them.
+    if res.get("seam_go_prereg_required") is True:
+        res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
+        res["seam_go_prereg_required"] = True
+        res.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
     # Normalise: never claim outcomes were inspected on a blocked branch.
     res.setdefault("outcomes_inspected", False)
     res.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")

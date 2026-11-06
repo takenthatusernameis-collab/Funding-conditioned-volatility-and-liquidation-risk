@@ -255,6 +255,7 @@ def main():
         allow_default_loader=False,
     )
     if guard.get("status") != "READY_FROZEN":
+        guard.setdefault("script", "fclr010_execute")
         print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
         print(f"=== FCLR-010 BLOCKED {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
         return 1
@@ -521,6 +522,7 @@ def main():
     # 111: canonical output mutation ONLY on the guarded READY_FROZEN path.
     # Blocked branches return before reaching here and never mutate OUT_SUM or the manifest.
     if guard.get("status") != "READY_FROZEN":
+        guard.setdefault("script", "fclr010_execute")
         print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
         print(f"=== FCLR-010 BLOCKED (no canonical output mutation) {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
         return 1

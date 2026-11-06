@@ -119,6 +119,70 @@ def _ast_guard_structure(name: str, cls: str, src: str) -> list[str]:
     return errs
 
 
+def _ast_nonready_refusal_path(name: str, src: str) -> list[str]:
+    """G2 (122): require a non-READY refusal return/exit path in main-reachable flow.
+
+    AST: an ``If`` comparing a status to ``READY_FROZEN``/``blocked`` (e.g.
+    ``guard.get("status") != "READY_FROZEN"``), whose body contains an early
+    ``return`` / ``sys.exit`` call or ``print`` + refusal-payload return.
+    """
+    errs: list[str] = []
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return [f"{name}:nonready_refusal_syntax_error"]
+    main_nodes = [
+        n for n in ast.walk(tree)
+        if isinstance(n, ast.FunctionDef) and n.name == "main"
+    ] or [tree]
+    found = False
+    for root in main_nodes:
+        for node in ast.walk(root):
+            if not isinstance(node, ast.If):
+                continue
+            if not _is_nonready_status_cmp(node.test):
+                continue
+            for stmt in node.body:
+                if isinstance(stmt, ast.Return):
+                    found = True
+                    break
+                if isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.Call):
+                    fn = stmt.value.func
+                    fname = (fn.attr if isinstance(fn, ast.Attribute)
+                             else (fn.id if isinstance(fn, ast.Name) else None))
+                    if fname in ("sys.exit", "print", "refusal_payload"):
+                        found = True
+                        break
+            if found:
+                break
+        if found:
+            break
+    if not found:
+        errs.append(f"{name}:missing_nonready_refusal_return_exit_path")
+    return errs
+
+
+def _is_nonready_status_cmp(test) -> bool:
+    """True when an ``If`` test compares a status to a non-READY value
+    (``status != "READY_FROZEN"`` or ``status == "BLOCKED"``), i.e. a refusal
+    trigger rather than the happy ``== "READY_FROZEN"`` proceed path."""
+    if not isinstance(test, ast.Compare):
+        return False
+    left = test.left
+    if not ((isinstance(left, ast.Call) and isinstance(left.func, ast.Attribute)
+             and left.func.attr == "get") or isinstance(left, ast.Name)):
+        return False
+    for op, comp in zip(test.ops, test.comparators):
+        if not (isinstance(comp, ast.Constant) and isinstance(comp.value, str)
+                and comp.value in ("READY_FROZEN", "BLOCKED")):
+            continue
+        if comp.value == "READY_FROZEN" and isinstance(op, ast.NotEq):
+            return True
+        if comp.value == "BLOCKED" and isinstance(op, ast.Eq):
+            return True
+    return False
+
+
 def _semantic_consistency(name: str, meta: dict, src: str) -> list[str]:
     """G2 (120): cheap deterministic source heuristics for guarded/liquidation classes.
 
@@ -213,6 +277,12 @@ def check_drift(repo: Path = REPO) -> dict:
             astc = _ast_guard_structure(name, cls, src)
             if astc:
                 payload["bad_entries"].extend(astc)
+            # G2 (122): stronger non-READY refusal return/exit path in main-reachable
+            # flow for guarded ready-writing / audit entrypoints.
+            if cls in ("guarded_tracka_ready_writing", "guarded_tracka_audit_ready_writing"):
+                nrp = _ast_nonready_refusal_path(name, src)
+                if nrp:
+                    payload["bad_entries"].extend(nrp)
     if payload["bad_entries"]:
         payload["failures"].append(f"BAD_ENTRIES:{payload['bad_entries'][:12]}")
     payload["pass"] = not payload["failures"]

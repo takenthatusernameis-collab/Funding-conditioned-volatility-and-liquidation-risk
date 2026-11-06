@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Dict, Optional
@@ -33,8 +34,18 @@ IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 CACHE = REPO / "research_state" / ".cache" / "fclr_coupled_panel.parquet"
 MANIFEST = REPO / "research_state" / "run_manifest.json"
 
-with open(MANIFEST) as _f:
-    _M = json.load(_f)
+
+def _load_run_manifest_lfs_aware() -> dict:
+    """Read run_manifest.json, transparently smudging Git LFS pointers (no network)."""
+    raw = Path(MANIFEST).read_bytes()
+    if raw.startswith(b"version https://git-lfs.github.com/spec/v1"):
+        r = subprocess.run(["git", "lfs", "smudge", "--"], input=raw, capture_output=True)
+        if r.returncode == 0 and r.stdout:
+            raw = r.stdout
+    return json.loads(raw)
+
+
+_M = _load_run_manifest_lfs_aware()
 _S = _M["split_boundaries_fclr010"]
 # FCLR-010 (Track A) manifest carries train/validation/test blocks, NOT a data_window
 # key (data_window is a FCLR-009/Track C field). Derive the panel window from the

@@ -50,6 +50,7 @@ def main():
         payload = refusal_payload(
             reason="FCLR-010-FAST refused: no guarded READY_FROZEN contract (admissible seam + prereg + manifest/data gates) with an explicit outcome_loader. Fast path is a pure no-op and mutates no canonical outputs.",
             reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="fclr010_execute_fast",
             fast_path=True,
             guard=guard,
         )
@@ -62,6 +63,7 @@ def main():
     payload = refusal_payload(
         reason="FCLR-010-FAST refused: READY_FROZEN but no explicit outcome_loader supplied.",
         reason_code="NO_EXPLICIT_LOADER",
+        script="fclr010_execute_fast",
         fast_path=True,
         guard=guard,
     )
