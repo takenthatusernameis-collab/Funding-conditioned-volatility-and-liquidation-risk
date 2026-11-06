@@ -115,6 +115,15 @@ def guarded_execute(
         res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
         res["seam_go_prereg_required"] = True
         res.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
+    # G2 (124): seam GO + prereg present + data_path missing => same stable reason_code/parity.
+    if res.get("seam_go_data_missing") is True or res.get("reason_code_detail") == "ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING":
+        res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
+        res["seam_go_data_missing"] = True
+        res.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING")
+        res.setdefault("reads_parquet", False)
+        res.setdefault("reads_outcomes", False)
+        res.setdefault("outcomes_loaded", None)
+        res.setdefault("data_loaded_implicitly", False)
     # Normalise: never claim outcomes were inspected on a blocked branch.
     res.setdefault("outcomes_inspected", False)
     if res.get("status") == "BLOCKED" and not res.get("reason_code"):

@@ -298,15 +298,29 @@ class FCLR010Harness:
                 "outcomes_inspected": False,
                 "prereg_required": False,
             }
+        # G2 (124): seam GO + prereg present but data_path missing => stable BLOCKED
+        # payload parity (no outcomes inspected, no loader). Fail-closed before any
+        # parquet/outcome read; consistent with guarded/execute_ready_data_load surfaces.
         if not data_path.exists():
-            return {
+            seam_go = bool(seam is not None and seam.get("pass"))
+            res = {
                 "status": "BLOCKED",
                 "reason": f"Data path not found: {data_path}. No new data available for forward validation.",
                 **({"manifest_gate": gate} if gate is not None else {}),
                 **({"admissible_seam_wired": seam} if seam is not None else {}),
                 "outcomes_inspected": False,
                 "prereg_required": False,
+                "outcomes_loaded": None,
+                "data_loaded_implicitly": False,
+                "reads_parquet": False,
+                "reads_outcomes": False,
+                "network": False,
             }
+            if seam_go:
+                res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
+                res["seam_go_data_missing"] = True
+                res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING"
+            return res
         return {
             "status": "READY_FROZEN",
             "reason": ("Strict manifest GO; " if gate is not None else "") + ("Admissible seam GO (manifest-only); " if seam is not None and seam.get("pass") else "") + "Pre-registration present; data available; frozen config only, no retuning.",

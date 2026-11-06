@@ -34,6 +34,65 @@ IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 CACHE = REPO / "research_state" / ".cache" / "fclr_coupled_panel.parquet"
 MANIFEST = REPO / "research_state" / "run_manifest.json"
 
+# FCLR-NEXT-124 G1: canonical cache write-scope allowlist for coupled_build_panel.
+# READY-path writes may only target the specific cache parquet artifact
+# RESEARCH_STATE/.cache/fclr_coupled_panel.parquet (no dir-wide research_state/
+# repo-root/wildcards, no Hyperliquid canonical output mutation). Fail-closed
+# before any cache write on READY path violations; blocked NO-READY path must
+# not invoke cache writes.
+_COUPLED_CACHE_ALLOWED_ARTIFACT = (REPO / "research_state" / ".cache" / "fclr_coupled_panel.parquet").resolve()
+_COUPLED_DENIED_CANONICAL_MARKERS = (
+    "experiment" + "_" + "frontier.json",
+    "run" + "_" + "manifest.json",
+    "cross" + "_" + "track" + "_" + "decision_log.md",
+    "evaluation_summary_FCLR010.md",
+)
+
+
+def _guard_coupled_cache_write_target(target: Path, *, repo: Path = REPO) -> dict:
+    """Machine-enforced write-scope allowlist for coupled panel cache artifacts.
+
+    Returns {pass, failures, reason_code, allowed_artifact, target, network, writes_real_research_state}.
+    Deterministic; no IO, no network. Validates target is exactly the allowed
+    cache parquet artifact (not dir-wide, not repo root, not wildcard, not a
+    Hyperliquid canonical output, not escaping repo).
+    """
+    failures: list[str] = []
+    repo_r = Path(repo).resolve()
+    rs_r = (repo_r / "research_state").resolve()
+    try:
+        t = Path(target).resolve()
+    except Exception:
+        failures.append("target_unresolvable")
+        t = Path(str(target))
+    allowed = _COUPLED_CACHE_ALLOWED_ARTIFACT
+    if str(t) != str(allowed):
+        failures.append("target_not_allowed_cache_artifact")
+    if not str(t).startswith(str(repo_r)):
+        failures.append("target_escapes_repo")
+    if any(ch in str(target) for ch in "*?["):
+        failures.append("wildcard_not_allowed")
+    if str(t) == str(rs_r) or str(t) == str(repo_r):
+        failures.append("dir_wide_or_repo_root_not_allowed")
+    for m in _COUPLED_DENIED_CANONICAL_MARKERS:
+        if m in str(t):
+            failures.append(f"denied_canonical_target:{m}")
+    # target must be the specific .cache parquet (not an arbitrary research_state path)
+    if str(t).startswith(str(rs_r)) and str(t) != str(allowed):
+        # allow only the exact cache artifact
+        if not failures or failures == ["target_not_allowed_cache_artifact"]:
+            failures.append("research_state_non_cache_artifact_not_allowed")
+    return {
+        "pass": not failures,
+        "failures": failures,
+        "reason_code": "OK" if not failures else "COUPLED_CACHE_WRITE_SCOPE_VIOLATION",
+        "allowed_artifact": str(allowed),
+        "target": str(t),
+        "script": "coupled_build_panel",
+        "network": False,
+        "writes_real_research_state": False,
+    }
+
 
 def _load_run_manifest_lfs_aware() -> dict:
     """Read run_manifest.json, transparently smudging Git LFS pointers (no network)."""
@@ -59,6 +118,7 @@ def _load_coupled_outcomes(data_path: Path, context: Optional[Dict] = None) -> D
 
     Invoked ONLY after guarded_execute returns READY_FROZEN. Blocked branches
     never reach this function; no pyarrow/pandas parquet import on blocked paths.
+    FCLR-NEXT-124 G1: fail-closed cache write-scope guard before any READY-path write.
     """
     import pyarrow.parquet as pq
 
@@ -105,6 +165,12 @@ def _load_coupled_outcomes(data_path: Path, context: Optional[Dict] = None) -> D
     panel["y_occ"] = (panel["cnt"] > 0).astype(np.int64)
     panel["y_int"] = np.log1p(panel["usd"])
     panel = panel.sort_values(["market", "hour"]).reset_index(drop=True)
+    # FCLR-NEXT-124 G1: fail closed before any READY-path cache write.
+    wg = _guard_coupled_cache_write_target(CACHE)
+    if not wg.get("pass"):
+        raise GuardedReadRefused(
+            f"coupled_build_panel cache write refused: {wg.get('reason_code')} failures={wg.get('failures')}"
+        )
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     panel.to_parquet(CACHE, index=False)
     return {"panel_cached": False, "rows": len(panel), "symbols": panel["market"].nunique(), "hours": panel["hour"].nunique(), "cache": str(CACHE)}

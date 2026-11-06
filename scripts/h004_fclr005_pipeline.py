@@ -145,6 +145,60 @@ def _h004_required_input_files(repo: Path = REPO) -> list[Path]:
     ]
 
 
+def _h004_path_traversal_or_symlink_escape_guard(paths: list[Path], *, sandbox_root: Optional[Path]) -> Optional[dict]:
+    """G3 (124): fail-closed on path traversal (..) and symlink targets escaping sandbox/root policy.
+
+    Deterministic, no heavy work, no real research_state writes. Checked before
+    census/heavy work in the allowed sandbox path.
+    """
+    base = {
+        "script": "h004_fclr005_pipeline",
+        "status": "BLOCKED",
+        "outcomes_inspected": False,
+        "canonical_outputs_mutated": False,
+        "network": False,
+        "writes_real_research_state": False,
+        "reason_code": "H004_CENSUS_INPUT_PATH_TRAVERSAL_OR_SYMLINK_ESCAPE",
+    }
+    if sandbox_root is None:
+        return None
+    sb = Path(sandbox_root).resolve()
+    for p in paths:
+        raw = str(p)
+        # traversal tokens in the constructed/raw path (fail closed; no normalization bypass)
+        if ".." in Path(raw).parts or ".." in raw.replace("\\", "/").split("/"):
+            return {**base, "reason": "Path traversal (..) detected in required census/input path; refusing before heavy work.",
+                    "offending_path": raw, "sandbox_root": str(sb)}
+        try:
+            resolved = Path(p).resolve(strict=False)
+        except Exception:
+            return {**base, "reason": "Required census/input path could not be resolved; refusing (fail-closed).",
+                    "offending_path": raw, "sandbox_root": str(sb)}
+        if not str(resolved).startswith(str(sb)):
+            return {**base, "reason": "Required census/input path resolves outside sandbox/root policy; refusing before heavy work.",
+                    "offending_path": raw, "resolved_path": str(resolved), "sandbox_root": str(sb)}
+        # symlink escape: if any component is a symlink whose resolved target escapes sandbox
+        try:
+            cur = Path(p)
+            # walk from sandbox down to target; if target or ancestors under sandbox are symlinks escaping, refuse
+            if cur.exists() or cur.is_symlink():
+                probe = cur
+                while str(probe) != str(sb) and str(probe).startswith(str(sb)):
+                    if probe.is_symlink():
+                        tgt = probe.resolve()
+                        if not str(tgt).startswith(str(sb)):
+                            return {**base, "reason": "Symlink in census/input path escapes sandbox/root policy; refusing before heavy work.",
+                                    "offending_path": raw, "symlink_target": str(tgt), "sandbox_root": str(sb)}
+                    parent = probe.parent
+                    if parent == probe:
+                        break
+                    probe = parent
+        except Exception:
+            return {**base, "reason": "Symlink/traversal policy check failed (fail-closed).",
+                    "offending_path": raw, "sandbox_root": str(sb)}
+    return None
+
+
 def _h004_census_absent_guard(repo: Path = REPO, sandbox_root: Optional[Path] = None,
                               pilot_targets: Optional[dict] = None) -> Optional[dict]:
     """G5 (121): fail-closed on absent required census/input files in the allowed path.
@@ -583,6 +637,29 @@ def main():
         return 1
     sb = _h004_sandbox_resolve(REPO)
     pilot_targets = resolve_h004_pilot_targets(sandbox_root=sb, repo=REPO)
+
+    # G3 (124): traversal/symlink-escape fail-closed before census/heavy work.
+    try:
+        repo_resolved = Path(REPO).resolve()
+        sb_resolved = Path(sb).resolve() if sb is not None else None
+        _req = []
+        for p in _h004_required_input_files(repo_resolved):
+            try:
+                rel = p.relative_to(repo_resolved)
+            except Exception:
+                rel = Path(p.name)
+            _req.append((sb_resolved / rel) if sb_resolved is not None else p)
+        trav_guard = _h004_path_traversal_or_symlink_escape_guard(_req, sandbox_root=sb_resolved)
+        if trav_guard is not None:
+            print(json.dumps(trav_guard, indent=2, sort_keys=True), flush=True)
+            return 1
+    except Exception as e:
+        print(json.dumps({"status": "BLOCKED", "reason_code": "H004_CENSUS_INPUT_PATH_TRAVERSAL_OR_SYMLINK_ESCAPE",
+                          "reason": f"traversal/symlink guard exception (fail-closed): {e!r}",
+                          "script": "h004_fclr005_pipeline", "outcomes_inspected": False,
+                          "canonical_outputs_mutated": False, "network": False, "writes_real_research_state": False},
+                         indent=2, sort_keys=True), flush=True)
+        return 1
 
     # G5 (121): allowed mode + valid sandbox must fail-closed if required census/input
     # files are absent in the sandbox. Refuses before any heavy pipeline/data-read
