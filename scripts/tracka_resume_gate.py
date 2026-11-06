@@ -97,8 +97,14 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
             "network": False,
             "writes_real_research_state": False,
         }
-    # 108: named admissible-seam check (manifest-only, no network/no parquet/no outcomes, fail-closed)
+    # 108: named admissible-seam check (manifest-only, no network/no parquet/no outcomes, fail-closed).
+    # The gate runs the seam check first so a NO-GO candidate refuses early, but for a GO
+    # candidate the SAME seam result is passed into the harness so the harness's seam logic
+    # is the single source of truth for the downstream prereg/data-missing branches. This
+    # preserves contract parity: harness, gate, operator and check all observe identical
+    # reason_code_detail (ADMISSIBLE_SEAM_GO_PREREG_REQUIRED vs ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING).
     admissible_seam = None
+    admissible_manifest_dict = None
     if admissible_manifest_path is not None:
         try:
             from scripts.tracka_resume_check import admissible_seam_check
@@ -107,6 +113,11 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
             admissible_seam = {"pass": False, "status": "NO-GO", "reason_code": "ADMISSIBLE_SEAM_EXCEPTION",
                                "failures": ["seam_exception"], "error": repr(e),
                                "fail_closed": True, "network": False, "reads_outcomes": False, "reads_parquet": False}
+        if admissible_seam.get("pass"):
+            try:
+                admissible_manifest_dict = _load_manifest(admissible_manifest_path)
+            except Exception:
+                admissible_manifest_dict = None
         if not (admissible_seam or {}).get("pass"):
             return {
                 "status": "BLOCKED",
@@ -128,7 +139,6 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
             }
     h = FCLR010Harness(repo_root=hrr)
     data_path = Path(data_path)
-    # 132 G3: output_dir must resolve to a usable directory before any decision logic.
     # A pre-existing regular file (bad temp-path edge case) is fail-closed as a stable
     # JSON refusal (no traceback contract, no outcomes inspected).
     try:
@@ -181,7 +191,12 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
     if result.get("status") == "BLOCKED" and pre.get("pass"):
         result.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
         result.setdefault("fail_closed_order", _order)
-        # 110 explicit surface: seam GO but prereg/data blocked => clear GO+prereg-required detail
+        # 110 explicit surface: seam GO but prereg/data blocked => preserve the harness's
+        # specific detail rather than overwriting it. The harness already emits the
+        # precise reason_code_detail (ADMISSIBLE_SEAM_GO_PREREG_REQUIRED when prereg is
+        # missing, ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING when data path is missing) and only
+        # sets seam_go_prereg_required in the prereg-missing branch. setdefault keeps the
+        # more specific value and never conflates data-missing with prereg-missing.
         if admissible_seam is not None and admissible_seam.get("pass") and result.get("reason_code") == "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS":
             result.setdefault("seam_go_prereg_required", True)
             result.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
