@@ -815,25 +815,64 @@
     "ironflow_probing_exhausted": true,
     "bound": 163
   },
-  "handoff_refreshed_utc": "20261106T051039Z",
+  "handoff_refreshed_utc": "20261106T114421Z",
   "fclr_next_120": {
     "task_id": "FCLR-NEXT-120",
-    "status": "PENDING",
+    "status": "COMPLETE",
     "issued_utc": "20261106T051039Z",
+    "completed_utc": "20261106T113316Z",
     "baseline_tests": 484,
     "resume_checks": 17,
     "operator_pass": true,
     "drift_pass": true,
-    "root_md_json": 143,
-    "probes": 2,
-    "trigger": "NONE (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted)",
-    "heavy_work_required": "G1-G5 code+test hardening mandatory when no trigger; blocked/no-data claims without measurable delta noncompliant",
-    "gaps": [
-      "harness explicit seam GO manifest READY_FROZEN not end-to-end exercised",
-      "drift semantic class/source heuristics missing",
-      "audit-ready-writing NO-READY refusal matrix missing",
-      "run_liqmicro_v2 sandboxed READY _run_pipeline contract missing",
-      "h004 allowed-pilot sandbox-root enforcement missing"
-    ]
-  }
+      "root_md_json": 143,
+      "probes": 2,
+      "trigger": "NONE (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted)",
+      "heavy_work_required": "G1-G5 code+test hardening mandatory when no trigger; blocked/no-data claims without measurable delta noncompliant",
+      "gaps": [
+        "harness explicit seam GO manifest READY_FROZEN not end-to-end exercised",
+        "drift semantic class/source heuristics missing",
+        "audit-ready-writing NO-READY refusal matrix missing",
+        "run_liqmicro_v2 sandboxed READY _run_pipeline contract missing",
+        "h004 allowed-pilot sandbox-root enforcement missing"
+      ]
+  },
+  "fclr_next_127": {
+    "task_id": "FCLR-NEXT-127",
+    "status": "COMPLETE",
+    "completed_utc": "20261106T113316Z",
+    "delta": {
+      "hardening_tests_added": "tests/test_tracka_hardening_127.py (+17: 6 G1 seam+CLI parity, 5 G2 guarded_entry refusal parity, 3 G3 blocked no-loader + 1 G3 READY_FROZEN no-canonical-mutation)",
+      "regression": "154 OK (120-127 + fclr010_harness, tmp-isolated)",
+      "resume_check": "17 PASS",
+      "root_md_json": 143,
+      "probes": 2
+    },
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "fclr_next_128": {
+    "task_id": "FCLR-NEXT-128",
+    "status": "COMPLETE",
+    "completed_utc": "20261106T114421Z",
+    "delta": {
+      "hardening_tests_added": "tests/test_tracka_hardening_128.py (+7: 2 G1 coupled_build_panel blocked-refusal parity incl. loader-never-called, 3 G2 tracka_operator_report seam-wired fields + drift-first fail-closed, 2 G3 refusal-matrix extension coupled_build_panel+fclr010_execute_fast)",
+      "regression": "161 OK (120-128 + fclr010_harness, tmp-isolated)",
+      "entry_verify": "resume 17 PASS; gate BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS outcomes_inspected:false; drift 83/83 pass",
+      "root_md_json": 143,
+      "probes": 2
+    },
+    "changed_files": [
+      "tests/test_tracka_hardening_128.py",
+      "AGENT_HANDOFF.md",
+      "research_state/experiment_frontier.json"
+    ],
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-129 (20261106T114421Z) mandatory heavy-work campaign: fused Track A blocked-branch refusal matrix + operator CLI parity + registry drift fails-closed in tests/test_tracka_hardening_129.py; do not re-probe absent ironflow months; PREREG before outcomes if trigger appears."
 }
