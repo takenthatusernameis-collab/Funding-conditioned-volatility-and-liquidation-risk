@@ -550,10 +550,26 @@ def main(argv=None) -> int:
     ap.add_argument("--admissible-manifest", required=False, default=None, dest="admissible_manifest",
                     help="127 G1: candidate Ironflow month manifest JSON for named admissible-seam fail-closed check (manifest-only, no network/no parquet/no outcomes)")
     args = ap.parse_args(argv)
-    if args.admissible_manifest is not None:
-        out = check(admissible_candidate_path=args.admissible_manifest)
-    else:
-        out = run()
+    try:
+        if args.admissible_manifest is not None:
+            out = check(admissible_candidate_path=args.admissible_manifest)
+        else:
+            out = run()
+    except Exception as e:  # G2/131: unexpected resume-check errors must refuse as JSON, never traceback-as-contract
+        out = {
+            "script": "tracka_resume_check",
+            "pass": False,
+            "status": "BLOCKED",
+            "reason": f"resume check failed (fail-closed, no outcomes): {e!r}",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "fail_closed_order": "drift_preflight->admissible_seam",
+            "outcomes_inspected": False,
+            "network": False,
+            "writes_real_research_state": False,
+            "reads_outcomes": False,
+            "reads_parquet": False,
+            "elapsed_s": 0.0,
+        }
     print(json.dumps(out, indent=2, sort_keys=True))
     return 0 if out["pass"] else 1
 

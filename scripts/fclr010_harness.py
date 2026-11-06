@@ -164,12 +164,25 @@ class FCLR010Harness:
         Default strict uses assess_strict_manifest (GO-shaped observed HL claims must
         include machine-verifiable provenance/label/coverage/block evidence).
         strict=False uses assess_minimal_fixture compat (legacy/test-fixture path only).
-        No network, no file writes.
+        No network, no file writes. Fail-closed: rubric exceptions produce a stable
+        BLOCKED refusal (no traceback contract, no outcome inspection).
         """
         from scripts.tracka_rubric import assess_strict_manifest, assess_minimal_fixture
         if manifest is None:
             return {"status": "NO-GO", "go": False, "failures": ["manifest_missing"], "strict_gate": bool(strict)}
-        r = assess_strict_manifest(manifest) if strict else assess_minimal_fixture(manifest)
+        try:
+            r = assess_strict_manifest(manifest) if strict else assess_minimal_fixture(manifest)
+        except Exception as e:  # pragma: no cover - defensive fail-closed on rubric exception
+            return {
+                "status": "NO-GO",
+                "go": False,
+                "failures": ["rubric_exception"],
+                "strict_gate": bool(strict),
+                "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                "reason": f"manifest evaluation failed (fail-closed, no outcomes): {e!r}",
+                "network": False, "reads_parquet": False, "reads_outcomes": False,
+                "writes_real_research_state": False, "canonical_outputs_mutated": False,
+            }
         return {"status": "GO" if r.get("go") else "NO-GO", "go": bool(r.get("go")),
                 "failures": r.get("failures", []), "strict_gate": bool(strict), "rubric": r}
 

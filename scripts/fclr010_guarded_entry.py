@@ -132,6 +132,17 @@ def guarded_execute(
     res["canonical_outputs_mutated"] = False
     res["network"] = False
     res["writes_real_research_state"] = False
+    # G3 (131): on BLOCKED, normalize absent booleans to safe defaults so no caller
+    # can observe a truthy/outcome-read flag on a refused branch. Type-stable booleans.
+    if res.get("status") == "BLOCKED":
+        res["outcomes_inspected"] = False
+        res["canonical_outputs_mutated"] = False
+        res["network"] = False
+        res["writes_real_research_state"] = False
+        res["reads_parquet"] = False
+        res["reads_outcomes"] = False
+        res["data_loaded_implicitly"] = False
+        res["outcomes_loaded"] = None
     return res
 
 
@@ -166,6 +177,13 @@ def refusal_payload(**extra: Any) -> Dict[str, Any]:
     return payload
 
 
+def _as_bool(value: Any) -> Any:
+    """G3: coerce a guard field to a strict bool when present, else None (type-stable)."""
+    if value is None:
+        return None
+    return bool(value)
+
+
 def _guard_snapshot(guard: Dict[str, Any]) -> Dict[str, Any]:
     """G3 (121): stable guard snapshot shape for refusal payloads.
 
@@ -177,18 +195,18 @@ def _guard_snapshot(guard: Dict[str, Any]) -> Dict[str, Any]:
         "status": guard.get("status"),
         "reason_code": guard.get("reason_code"),
         "reason_code_detail": guard.get("reason_code_detail"),
-        "outcomes_inspected": guard.get("outcomes_inspected"),
-        "canonical_outputs_mutated": guard.get("canonical_outputs_mutated"),
-        "network": guard.get("network"),
-        "writes_real_research_state": guard.get("writes_real_research_state"),
-        "reads_parquet": guard.get("reads_parquet"),
-        "reads_outcomes": guard.get("reads_outcomes"),
-        "fail_closed": guard.get("fail_closed"),
+        "outcomes_inspected": _as_bool(guard.get("outcomes_inspected")),
+        "canonical_outputs_mutated": _as_bool(guard.get("canonical_outputs_mutated")),
+        "network": _as_bool(guard.get("network")),
+        "writes_real_research_state": _as_bool(guard.get("writes_real_research_state")),
+        "reads_parquet": _as_bool(guard.get("reads_parquet")),
+        "reads_outcomes": _as_bool(guard.get("reads_outcomes")),
+        "fail_closed": _as_bool(guard.get("fail_closed")),
         "seam": guard.get("seam"),
-        "seam_go_prereg_required": guard.get("seam_go_prereg_required"),
+        "seam_go_prereg_required": _as_bool(guard.get("seam_go_prereg_required")),
         "admissible_seam_wired": guard.get("admissible_seam_wired"),
         "manifest_gate": guard.get("manifest_gate"),
-        "prereg_required": guard.get("prereg_required"),
+        "prereg_required": _as_bool(guard.get("prereg_required")),
     }
     return {k: v for k, v in snap.items() if v is not None}
 

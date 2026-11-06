@@ -38,14 +38,29 @@ def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
     rs = Path(args.research_state_dir) if args.research_state_dir else None
     hrr = Path(args.harness_repo_root) if args.harness_repo_root else None
-    report = compose_operator_report(
-        repo_root=Path(args.repo_root),
-        research_state_dir=rs,
-        data_path=args.data_path,
-        prereg=args.pre_reg,
-        harness_repo_root=hrr,
-        admissible_candidate_path=getattr(args, "admissible_manifest", None),
-    )
+    try:
+        report = compose_operator_report(
+            repo_root=Path(args.repo_root),
+            research_state_dir=rs,
+            data_path=args.data_path,
+            prereg=args.pre_reg,
+            harness_repo_root=hrr,
+            admissible_candidate_path=getattr(args, "admissible_manifest", None),
+        )
+    except Exception as e:  # G2/131: unexpected operator errors must refuse as JSON, never traceback-as-contract
+        report = {
+            "script": "tracka_operator_report",
+            "status": "BLOCKED",
+            "reason": f"operator report failed (fail-closed, no outcomes): {e!r}",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "fail_closed_order": "drift_preflight->gate_decision->probe_invariant_state",
+            "outcomes_inspected": False,
+            "network": False,
+            "writes_real_research_state": False,
+            "canonical_outputs_mutated": False,
+            "reads_parquet": False,
+            "reads_outcomes": False,
+        }
     # G2/129: normalize stable seam-wired fields for CLI parity.
     seam = report.get("admissible_seam_wired")
     if isinstance(seam, dict):
