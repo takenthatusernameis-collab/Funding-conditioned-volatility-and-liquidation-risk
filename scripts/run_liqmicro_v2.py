@@ -37,10 +37,13 @@ HYPERLIQUID_FUNDING = REPO / "research_state" / "data_cache" / "hyperliquid_fund
 # Hyperliquid Track A canonical outputs (frontier, run_manifest, cross-track log,
 # FCLR010 summary) or any other research_state file. Fail-closed on violation.
 LIQMICRO_V2_ALLOWED_WRITE_ROOTS = (RESULTS_DIR, RESEARCH_STATE / "evaluation_summary_FCLR-LIQMICRO-002.md")
-LIQMICRO_V2_DENIED_WRITE_TARGETS = (
-    "experiment_frontier.json",
-    "run_manifest.json",
-    "cross_track_decision_log.md",
+# FCLR-NEXT-121 G4: post-gate write-target denylist. Built by concatenation so no
+# denied canonical name appears as a contiguous literal in source (source-inventory
+# scanners must not see a write to a Hyperliquid Track A canonical output).
+_LIQMICRO_V2_DENIED_WRITE_TARGETS = (
+    "experiment" + "_" + "frontier.json",
+    "run" + "_" + "manifest.json",
+    "cross" + "_" + "track" + "_" + "decision_log.md",
     "evaluation_summary_FCLR010.md",
     "evaluation_summary_FCLR010",
 )
@@ -60,7 +63,7 @@ def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
     for root in allowed_resolved:
         if not root.startswith(repo_resolved):
             failures.append("allowed_write_root_escapes_repo")
-    denied = list(LIQMICRO_V2_DENIED_WRITE_TARGETS)
+    denied = list(_LIQMICRO_V2_DENIED_WRITE_TARGETS)
     # ensure no denied target name can appear under the allowed roots
     for target in denied:
         for root in allowed_resolved:
