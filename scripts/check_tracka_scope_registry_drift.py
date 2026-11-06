@@ -283,6 +283,13 @@ def check_drift(repo: Path = REPO) -> dict:
                 nrp = _ast_nonready_refusal_path(name, src)
                 if nrp:
                     payload["bad_entries"].extend(nrp)
+            # G3 (129): eval-summary/canonical evaluation writers must not be left
+            # unclassified_auxiliary (fail-closed). Cheap source heuristic.
+            if cls == "unclassified_auxiliary":
+                low = src.lower()
+                if ("evaluation_summary" in low and
+                    (".write_text(" in src or "open(" in src or ".write(" in src)):
+                    payload["bad_entries"].append(f"{name}:eval_summary_writer_unclassified_auxiliary")
     if payload["bad_entries"]:
         payload["failures"].append(f"BAD_ENTRIES:{payload['bad_entries'][:12]}")
     payload["pass"] = not payload["failures"]
