@@ -61,7 +61,7 @@ def load_funding_panel(symbols: List[str], start: str, end: str) -> pd.DataFrame
         if not flist:
             continue
         fdf = pd.concat(flist).sort_index()
-        fdf = fdf.loc[(fdf.index >= pd.Timestamp(start, tz="UTC")) & (fdf.index <= pd.Timestamp(end, tz="UTC") + timedelta(days=1))]
+        fdf = fdf.loc[(fdf.index >= pd.Timestamp(start, tz="UTC")) & (fdf.index <= pd.Timestamp(end, tz="UTC") + pd.Timedelta(days=1))]
         fdf = fdf.reset_index().rename(columns={"calc_time": "timestamp"})
         fdf["symbol"] = sym
         frames.append(fdf)
@@ -100,17 +100,32 @@ def load_kline_panel(symbols: List[str], start: str, end: str, horizon: int = 24
 
 
 def add_funding_to_panel(kpanel: pd.DataFrame, fpanel: pd.DataFrame) -> pd.DataFrame:
+    """Merge funding features onto the kline panel by (symbol, timestamp).
+
+    Funding features are aligned to each contract's kline index via last-known
+    value at/before each hour (forward-fill). Missing history stays NaN; the
+    merge never zero-fills. Rows without a kline timestamp are dropped.
+    """
     out = kpanel.copy()
+    feat_frames = []
     for sym in out.index.get_level_values("symbol").unique():
         kidx = out.xs(sym, level="symbol").index
         try:
             fdf = fpanel.xs(sym, level="symbol")
-        except Exception:
+        except KeyError:
             continue
         ffeat = ff.add_funding_features(kidx, fdf)
-        for c in ffeat.columns:
-            out.loc[(sym,), c] = ffeat[c].values
-    return out
+        ffeat = ffeat.reset_index()
+        ffeat["symbol"] = sym
+        ffeat = ffeat.set_index(["symbol", "timestamp"]).sort_index()
+        feat_frames.append(ffeat)
+    if not feat_frames:
+        return out
+    feats = pd.concat(feat_frames, axis=1)
+    # Avoid column collisions with existing kline columns.
+    new_cols = [c for c in feats.columns if c not in out.columns]
+    merged = out.join(feats[new_cols], how="left")
+    return merged
 
 
 def ridge_fit(X: np.ndarray, y: np.ndarray, lam: float) -> Tuple[np.ndarray, float]:
@@ -216,7 +231,7 @@ def main() -> int:
     summary = {
         "generated_at": now_iso(), "git_sha": git_sha(), "symbols": symbols,
         "period": {"start": start, "end": end}, "horizon": horizon, "ridge_lambda": lam,
-        "model": "log-target ridge HAR (exp back; no clipping needed for positivity in most cases)",
+        "model": "log-target ridge HAR (exp back; target = forward realized VARIANCE, non-negative by construction)",
         "aggregate": {k: {"qlike": agg(k, "qlike"), "mae": agg(k, "mae"), "rmse": agg(k, "rmse"), "neg_pred": agg(k, "neg_pred")} for k in ablations.keys()},
         "splits_detail": all_results,
     }

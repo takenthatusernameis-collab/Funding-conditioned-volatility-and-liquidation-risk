@@ -1,26 +1,26 @@
 # Evaluation Summary - Funding Ablations (Gate 4, pilot)
 
-**Generated:** 2026-11-06T23:17:27Z
-**Git SHA:** 89bf8584ee4b922f0b22f666ee72588373ee0c16
+**Generated:** 2026-11-06T23:31:49Z
+**Git SHA:** e8af3abbb48d93dd63b02b2c72da99392d51720e
 **Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 1 walk-forward split
 **Model:** log-target ridge HAR (λ=0.001), predictions exp-transformed (positive). Train-only normalization, chronological splits, 7d purge/embargo.
 
 ## Aggregate (mean across splits)
 | Ablation | QLIKE | MAE | RMSE | ΔQLIKE vs A | neg_pred |
 |---|---|---|---|---|---|
-| A_rv_only | 2.5828046574874402e+25 | 2.3755417897490293e+30 | 1.123812195759099e+32 | 0.0 | 0.0 |
-| B_rv_signed | 6.221739678582001e+38 | 6.121341638641806e+26 | 3.616865432852027e+28 | 6.221739678581742e+38 | 0.0 |
-| C_rv_abs | 6.221739678582001e+38 | 6.121341638641806e+26 | 3.616865432852027e+28 | 6.221739678581742e+38 | 0.0 |
-| D_rv_signed_abs | 6.221835275107524e+38 | 6.121321098222818e+26 | 3.6168532926070587e+28 | 6.221835275107265e+38 | 0.0 |
-| E_rv_funding_trails | 2.510636950488436e+154 | 1.811528758046905e+248 | None | 2.510636950488436e+154 | 0.0 |
+| A_rv_only | 333293.42171793274 | 255952842.6442126 | 8236954326.141345 | 0.0 | 0.0 |
+| B_rv_signed | None | None | None | None | None |
+| C_rv_abs | None | None | None | None | None |
+| D_rv_signed_abs | None | None | None | None | None |
+| E_rv_funding_trails | None | None | None | None | None |
 
 ## Split Details
 - Split 0: test 2024-02-22..2024-03-31
-  - A_rv_only: qlike=2.5828046574874402e+25, mae=2.3755417897490293e+30, rmse=1.123812195759099e+32, n_feat=3, valid_n=1990, neg_pred=0
-  - B_rv_signed: qlike=6.221739678582001e+38, mae=6.121341638641806e+26, rmse=3.616865432852027e+28, n_feat=4, valid_n=1990, neg_pred=0
-  - C_rv_abs: qlike=6.221739678582001e+38, mae=6.121341638641806e+26, rmse=3.616865432852027e+28, n_feat=4, valid_n=1990, neg_pred=0
-  - D_rv_signed_abs: qlike=6.221835275107524e+38, mae=6.121321098222818e+26, rmse=3.6168532926070587e+28, n_feat=5, valid_n=1990, neg_pred=0
-  - E_rv_funding_trails: qlike=2.510636950488436e+154, mae=1.811528758046905e+248, rmse=None, n_feat=11, valid_n=1990, neg_pred=0
+  - A_rv_only: qlike=333293.42171793274, mae=255952842.6442126, rmse=8236954326.141345, n_feat=3, valid_n=3508, neg_pred=0
+  - B_rv_signed: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+  - C_rv_abs: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+  - D_rv_signed_abs: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+  - E_rv_funding_trails: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
 
 ## Leakage/Alignment Notes
 - Funding (8h) aligned to 1h via last-known value at/before each hour (ffill). NaN if missing.

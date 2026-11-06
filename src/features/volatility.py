@@ -68,13 +68,18 @@ def forward_rv(
 ) -> pd.Series:
     """Forward realized variance over the next `horizon` bars.
 
-    Returns a Series aligned to the forecast origin index. Values are NaN where
-    the forward window is not fully observed (no leakage: future bars required).
+    Returns a Series aligned to the forecast-origin index. The value at origin t
+    is the sum of squared log returns over the forward window [t+1 .. t+horizon].
+    Values are NaN where the forward window is not fully observed (no leakage:
+    future bars are required). The sum is of *squared* returns, so the result is
+    non-negative; a prior signed-return variant produced negative targets and
+    invalid log-target regressions and has been removed.
     """
     rets = log_returns(close)
-    # forward variance = sum of squared returns over [t+1 .. t+horizon]
-    fwd = rets.shift(-1).rolling(window=horizon, min_periods=horizon).sum()
-    fwd = fwd.shift(-horizon + 1)  # align to origin t
+    sq = rets ** 2
+    # rolling sum over the window ending at t+horizon-1 covers rets[t+1..t+horizon];
+    # shift it back by (horizon-1) so the value lands on the origin t.
+    fwd = sq.rolling(window=horizon, min_periods=horizon).sum().shift(-(horizon - 1))
     if annualize:
         fwd = fwd * (bars_per_year / horizon)
     return fwd
