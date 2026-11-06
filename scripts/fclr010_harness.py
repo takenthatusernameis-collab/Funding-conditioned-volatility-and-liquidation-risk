@@ -159,6 +159,46 @@ class FCLR010Harness:
             _json.dump(prereg, f, indent=2)
         return path
 
+    @staticmethod
+    def _load_prereg_content(pre_reg_path: Path) -> Optional[Dict[str, Any]]:
+        """132 G1: load prereg JSON content (LFS-pointer aware). Returns None on any
+        parse/decode failure so callers can fail-closed without inspecting outcomes.
+        Never reads parquet/outcomes; file reads are caller-controlled (tests use tmp)."""
+        try:
+            raw = pre_reg_path.read_bytes()
+            if raw.startswith(b"version https://git-lfs.github.com/spec/v1"):
+                import subprocess
+                r = subprocess.run(["git", "lfs", "smudge", "--"], input=raw, capture_output=True)
+                if r.returncode != 0 or not r.stdout:
+                    return None
+                raw = r.stdout
+            return json.loads(raw)
+        except Exception:
+            return None
+
+    def _prereg_content_block(self, pre_reg_path: Path, gate: Optional[Dict[str, Any]],
+                              seam: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        """132 G1: stable BLOCKED payload when prereg path exists but content is
+        malformed/unreadable. No outcome inspection, no implicit parquet read,
+        reason_code PREREG_CONTENT_INVALID_FAIL_CLOSED. Preserves READY+valid-prereg
+        behavior (only the malformed-content branch is affected)."""
+        return {
+            "status": "BLOCKED",
+            "reason": f"Pre-registration file exists but content is malformed/unreadable: {pre_reg_path}. Pre-register valid JSON before inspecting outcomes.",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "reason_code_detail": "PREREG_CONTENT_INVALID_FAIL_CLOSED",
+            "prereg_path": str(pre_reg_path),
+            **({"manifest_gate": gate} if gate is not None else {}),
+            **({"admissible_seam_wired": seam} if seam is not None else {}),
+            "outcomes_inspected": False,
+            "prereg_required": True,
+            "canonical_outputs_mutated": False,
+            "network": False,
+            "writes_real_research_state": False,
+            "reads_parquet": False,
+            "reads_outcomes": False,
+        }
+
     def evaluate_source_manifest(self, manifest: Optional[Dict[str, Any]], *, strict: bool = True) -> Dict[str, Any]:
         """097/098: evaluate a Track A candidate manifest against the rubric gate.
         Default strict uses assess_strict_manifest (GO-shaped observed HL claims must
@@ -264,6 +304,13 @@ class FCLR010Harness:
                     res["seam_go_prereg_required"] = True
                     res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED"
                 return res
+            # 132 G1: prereg path exists but content malformed/unreadable => fail-closed
+            # before any outcome/data inspection. Explicit loader never invoked.
+            if self._load_prereg_content(pre_reg_path) is None:
+                gate = None
+                if source_manifest is not None:
+                    gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
+                return self._prereg_content_block(pre_reg_path, gate, seam)
         else:
             gate = None
             if source_manifest is not None:

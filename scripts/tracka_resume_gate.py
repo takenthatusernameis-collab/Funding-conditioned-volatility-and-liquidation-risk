@@ -125,11 +125,36 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
             }
     h = FCLR010Harness(repo_root=hrr)
     data_path = Path(data_path)
-    if output_dir is None:
-        output_dir = Path(tempfile.mkdtemp(prefix="tracka_gate_"))
-    else:
-        output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
+    # 132 G3: output_dir must resolve to a usable directory before any decision logic.
+    # A pre-existing regular file (bad temp-path edge case) is fail-closed as a stable
+    # JSON refusal (no traceback contract, no outcomes inspected).
+    try:
+        if output_dir is None:
+            output_dir = Path(tempfile.mkdtemp(prefix="tracka_gate_"))
+        else:
+            output_dir = Path(output_dir)
+            if output_dir.exists() and not output_dir.is_dir():
+                raise NotADirectoryError(f"output_dir is not a directory: {output_dir}")
+            output_dir.mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        return {
+            "status": "BLOCKED",
+            "reason": f"output_dir unusable (fail-closed, no outcomes): {e!r}",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "reason_code_detail": "OUTPUT_DIR_UNUSABLE_FAIL_CLOSED",
+            "fail_closed_order": "drift_preflight->manifest_prereg",
+            "outcomes_inspected": False,
+            "prereg_required": True,
+            "gate_script": "tracka_resume_gate",
+            "compat_fixture": bool(compat_fixture),
+            "drift_preflight": pre,
+            "elapsed_s": round(time.time() - t0, 6),
+            "network": False,
+            "writes_real_research_state": False,
+            "canonical_outputs_mutated": False,
+            "reads_parquet": False,
+            "reads_outcomes": False,
+        }
 
     # Resolve strict gate default: default True for manifest-bearing GO decisions,
     # unless compat_fixture explicitly opts into the legacy minimal path.
@@ -184,8 +209,28 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
-    output_dir = Path(args.output_dir) if args.output_dir else Path(tempfile.mkdtemp(prefix="tracka_gate_"))
-    output_dir.mkdir(parents=True, exist_ok=True)
+    # 132 G3: resolve output_dir fail-closed before decide(); a pre-existing regular
+    # file (bad temp-path edge case) must refuse as JSON, never traceback.
+    try:
+        if args.output_dir:
+            output_dir = Path(args.output_dir)
+            if output_dir.exists() and not output_dir.is_dir():
+                raise NotADirectoryError(f"output_dir is not a directory: {output_dir}")
+            output_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            output_dir = Path(tempfile.mkdtemp(prefix="tracka_gate_"))
+    except Exception as e:
+        print(json.dumps({"status": "BLOCKED",
+                          "reason": f"output_dir unusable (fail-closed, no outcomes): {e!r}",
+                          "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                          "reason_code_detail": "OUTPUT_DIR_UNUSABLE_FAIL_CLOSED",
+                          "fail_closed_order": "drift_preflight->manifest_prereg",
+                          "outcomes_inspected": False, "network": False,
+                          "writes_real_research_state": False,
+                          "canonical_outputs_mutated": False,
+                          "reads_parquet": False, "reads_outcomes": False,
+                          "gate_script": "tracka_resume_gate", "drift_preflight": None}))
+        return 1
 
     try:
         manifest = _load_manifest(args.manifest)
