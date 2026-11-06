@@ -79,18 +79,34 @@ Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. N
 Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found.
 
 
-## FCLR-NEXT-138 DELIVERABLES (PENDING — 2026-11-06T20:16:49Z)
-INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T20:16:49Z
-Execute FCLR-NEXT-138. Track A liquidation risk ONLY active objective. Heavy working required; measurable hardening+lockdown when no trigger appears.
-TASK ID: FCLR-NEXT-138-TRACK-A-TRIGGER-READINESS+CONTRACT-INTEGRITY-HARDEN
-PRIORITY: P0. Track A DATA_BLOCKED (data_through=2026-10; 2026-11..2027-02 absent; probes==2; do not re-probe). Track B NOT_SUPPORTED. Track C sealed.
-ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES UNLESS ADMISSIBLE TRIGGER. NO SCHEDULERS/POLLERS/STATUS FILES.
-DELIVERABLES:
-1. Clean-clone regression: pip install -r requirements.txt then unittest discover tests => 709 OK (or higher via legitimate hardening).
-2. Extend synthetic admissible-seam coverage: valid prereg + data path missing already covered; add GO seam + valid prereg + data path present-but-empty / unreadable must remain BLOCKED with stable `ADMISSIBLE_SEAM_GO_DATA_PATH_EMPTY`/`seam_go_data_empty` parity; malformed candidate + missing manifest fields fail-closed JSON refusals with canonical outputs byte-identical.
-3. CLI contract integrity preserved on all 3 Track A CLIs; --help exit 0.
-4. Canonical-output integrity SHA256 unchanged.
-5. Drift/state invariants: pass:true 17/17, root md+json<=163, probes==2, no new timestamped families, no workflows, no root trigger_harden.
-6. Evidence record commands/exit codes/counts.
-CURRENT VERIFIED STATE: regression 709 OK; data_through=2026-10; probes==2; root bound 143.
-STOP RULE: complete all steps with concrete metrics; leave state STRICTER.
+## FCLR-NEXT-139 DELIVERABLES (PENDING — 2026-11-06T20:27:26Z)
+INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T20:27:26Z
+Execute FCLR-NEXT-139. Track A liquidation risk ONLY active objective. Heavy working required; measurable hardening+lockdown when no trigger appears. **REMOVE BOTTLENECKS** - no status-only loops, build actionable campaigns.
+
+TASK ID: FCLR-NEXT-139-TRACK-A-CAMPAIGN-HARDEN-LOCKDOWN
+PRIORITY: P0 — LIQUIDATION RISK (Track A) is the ONLY unfinished/active repo objective. Track A DATA_BLOCKED (data_through=2026-10; 2026-11..2027-02 absent; probes==2; do NOT re-probe). Track B NOT_SUPPORTED. Track C sealed/locked.
+ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES IN RESEARCH_STATE UNLESS STRICTLY ADMISSIBLE TRIGGER APPEARS (THEN: PREREG BEFORE INSPECTING OUTCOMES; blocker/prereg+result evidence only, ROOT BOUND PRESERVED). NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO `.github/workflows` CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS. Hyperliquid-only. NEVER conflate observed vs modeled. No threshold-shopping.
+
+### MANDATORY DELIVERABLES (ALL REQUIRED - HEAVY WORK)
+1. **Clean-clone regression preserved:** `pip install -r requirements.txt && python -m unittest discover tests` must run **709 OK, 0 failures, 0 errors** or higher ONLY via legitimate new hardening tests. No missing imports. Add regression guard if gaps found.
+2. **Trigger-readiness hardening (MEASURABLE):** Extend synthetic admissible-seam coverage to lock all fail-closed branches. Test: GO seam + valid prereg + data path present-but-empty/unreadable must BLOCK with stable `ADMISSIBLE_SEAM_GO_DATA_PATH_EMPTY`/`ADMISSIBLE_SEAM_GO_DATA_PATH_UNREADABLE` and corresponding `seam_go_data_empty:true`/`seam_go_data_unreadable:true`. Test malformed candidate + missing required manifest fields (prereg, admissible_seam) produce parseable JSON refusals with canonical outputs byte-identical. All paths must assert IO invariants (`outcomes_inspected:false`, `reads_outcomes:false`, `reads_parquet:false`, `network:false`, `writes_real_research_state:false`, `canonical_outputs_mutated:false`).
+3. **CLI contract hardening:** All 3 Track A CLIs must have bulletproof argparse contract-lock. Add tests for edge cases (--json with malformed, positional garbage) ensuring parseable JSON refusals, no tracebacks, exit!=0, stable `reason_code_detail:ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED`. --help must exit 0.
+4. **Cross-CLI parity:** gate/check/operator must have identical fail-closed behavior on shared refusal classes. Canonical outputs byte-identical before/after all exercised paths.
+5. **State lockdown:** Re-verify drift preflight `pass:true` (17/17), root `research_state/*.md+*.json` <=163, probes==2, no new timestamped families, no root trigger_harden. Ironflow fastpath cache timestamp drift is non-canonical and must not bloat root bound.
+6. **Campaign planning (build for future agents):** Create/update `research_state/FCLR_CAMPAIGN_NEXT.md` with concrete, executable next steps assuming trigger appears OR remains blocked - prioritized list with verification commands, acceptance criteria, estimated complexity. Must be actionable with no ambiguity.
+7. **Evidence:** Record exact commands, exit codes, test counts, SHA256 of canonical outputs, and issues in AGENT_HANDOFF.md. Commit nothing unless asked.
+
+### CURRENT VERIFIED STATE (2026-11-06T20:27:26Z)
+- **Trigger:** NO TRIGGER. `data_through=2026-10`; 2026-11..2027-02 absent. Probes==2. **Do not re-probe.**
+- **Regression:** `python -m unittest discover tests` => **709 OK, 0 failures, 0 errors** (added test_tracka_hardening_137.py)
+- **Resume check:** `python scripts/tracka_resume_check.py` => `{"pass":true,"network":false,"writes_real_research_state":false}` (17/17)
+- **Root bound:** md+json = 143/163. Probes: ironflow_probe_20261105T200406Z.json, ironflow_probe_digest_latest.json
+- **Canonical outputs:** frontier SHA `57fb9a3e03f6f6b4ccd9eb1e7a7f159a74597494a3b0f59aad6834658245a114`, manifest `05c1cdeb5e102aa5a999560af444fea0d7f255c714b57028201f802190ece9f5`, eval `8b7773b2d7eff3663be4fa975e75095c5406f27c5bcf096988935fad0871a334`
+
+### BOTTLENECKS TO REMOVE (HEAVY WORK REQUIRED)
+- **Seam coverage gaps:** empty/unreadable data path under valid prereg not fully locked - add tests + harden if missing
+- **CLI edge cases:** need bulletproof contract on all refusal classes
+- **Campaign clarity:** future agents need zero-ambiguity executable plan
+
+### STOP RULE
+Complete ALL 7 deliverables with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found. Make future sessions unable to coast or avoid heavy work.
