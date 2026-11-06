@@ -102,13 +102,27 @@ def resolve_h004_pilot_targets(*, sandbox_root: Optional[Path] = None, repo: Pat
 
 
 def _h004_sandbox_guard(repo: Path = REPO) -> Optional[dict]:
-    """G5 (120): allowed mode requires explicit sandbox root; refuse writes to real RS."""
+    """G3/G5 (123): allowed mode requires explicit sandbox root directory; refuse
+    writes to real RS and fail closed on nondir/unusable roots before census/heavy work."""
     sb = _h004_sandbox_resolve(repo)
     real_rs = (repo / "research_state").resolve()
     if sb is None:
         return _h004_refusal(
             reason="Allowed historical pilot requires explicit sandbox root via FCLR_H004_SANDBOX_ROOT env; no accidental real research_state writes."
         ) | {"reason_code": "H004_ALLOWED_MODE_REQUIRES_SANDBOX_ROOT"}
+    # G3 (123): sandbox root must be an existing directory (not file, not unusable/missing).
+    if sb.exists() and not sb.is_dir():
+        return _h004_refusal(
+            reason="Allowed historical pilot sandbox root exists but is not a directory (file-not-dir). Refusing before census/heavy work."
+        ) | {"reason_code": "H004_SANDBOX_ROOT_NOT_DIRECTORY", "sandbox_root": str(sb)}
+    if not sb.exists():
+        return _h004_refusal(
+            reason="Allowed historical pilot sandbox root does not exist (unusable/nonexistent). Refusing before census/heavy work."
+        ) | {"reason_code": "H004_SANDBOX_ROOT_UNUSABLE", "sandbox_root": str(sb)}
+    if sb == real_rs:
+        return _h004_refusal(
+            reason="Sandbox root must not be the real research_state directory."
+        ) | {"reason_code": "H004_ALLOWED_MODE_REQUIRES_SANDBOX_ROOT", "sandbox_root": str(sb)}
     targets = resolve_h004_pilot_targets(sandbox_root=sb, repo=repo)
     # refuse if sandbox resolves to real research_state or targets overlap canonical RS roots
     for k in ("out_sum", "liq_enum", "ckpt_panel"):
@@ -117,10 +131,6 @@ def _h004_sandbox_guard(repo: Path = REPO) -> Optional[dict]:
             return _h004_refusal(
                 reason=f"Sandbox target {k} resolves under real research_state; refused."
             ) | {"reason_code": "H004_ALLOWED_SANDBOX_TARGETS_REAL_RS", "sandbox_root": str(sb)}
-    if sb == real_rs:
-        return _h004_refusal(
-            reason="Sandbox root must not be the real research_state directory."
-        ) | {"reason_code": "H004_ALLOWED_MODE_REQUIRES_SANDBOX_ROOT", "sandbox_root": str(sb)}
     return None
 
 

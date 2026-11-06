@@ -245,7 +245,9 @@ class FCLR010Harness:
                     res["fail_closed_order"] = "admissible_seam->manifest_prereg"
                     res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
                 elif seam is not None and seam.get("pass"):
-                    # 110 explicit surface (preserve 108 blocked semantics: no new reason_code override here)
+                    # G1 (123): seam GO + prereg missing => stable parity with
+                    # execute_ready_data_load/guarded_execute (contract-emittable).
+                    res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
                     res["seam_go_prereg_required"] = True
                     res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED"
                 return res
@@ -266,7 +268,8 @@ class FCLR010Harness:
                 res["fail_closed_order"] = "admissible_seam->manifest_prereg"
                 res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
             elif seam is not None and seam.get("pass"):
-                # 110 explicit surface (preserve 108 blocked semantics)
+                # G1 (123): seam GO + prereg missing => stable parity.
+                res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
                 res["seam_go_prereg_required"] = True
                 res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED"
             return res

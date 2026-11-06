@@ -149,6 +149,9 @@ def main():
             script="coupled_build_panel",
             guard=guard,
         )
+        payload.setdefault("network", False)
+        payload.setdefault("writes_real_research_state", False)
+        payload.setdefault("canonical_outputs_mutated", False)
         print(json.dumps(payload, indent=2, sort_keys=True))
         print(f"=== COUPLED_BUILD_PANEL BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
         return 1

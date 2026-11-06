@@ -50,24 +50,41 @@ _LIQMICRO_V2_DENIED_WRITE_TARGETS = (
 
 
 def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
-                                     research_state: Path = RESEARCH_STATE) -> dict:
+                                     research_state: Path = RESEARCH_STATE,
+                                     allowed_write_roots: Optional[tuple] = None) -> dict:
     """Machine-enforced write-target allowlist/denylist for the READY pipeline path.
 
     Returns a dict {pass, failures, reason_code, allowed_roots, denied_targets}.
     Deterministic; no IO, no network. Used before _run_pipeline writes anything.
-    G3 (122): RESEARCH_STATE directory-wide and repo-root/wildcard roots are never
-    allowed; only specific liqmicro-v2 canonical artifact roots pass.
+    G2 (123): validate the EFFECTIVE allowed roots (args or monkeypatched constant)
+    and fail closed if they diverge from LIQMICRO_V2_ALLOWED_WRITE_ROOTS policy or
+    introduce RESEARCH_STATE dir-wide / repo-root / wildcards. RESULTS_DIR remains
+    allowed only as the specific liqmicro_v2 results root (not an arbitrary repo dir).
+    Backward compat: LIQMICRO_V2_ALLOWED_WRITE_ROOTS monkeypatches are treated as
+    effective roots and validated (121/122 tests).
     """
     failures: list[str] = []
-    allowed_resolved = [str(Path(p).resolve()) for p in LIQMICRO_V2_ALLOWED_WRITE_ROOTS]
+    policy_roots = (RESULTS_DIR, RESEARCH_STATE / "evaluation_summary_FCLR-LIQMICRO-002.md")
+    # Effective roots: explicit arg > module constant (supports 121/122 monkeypatch) > policy.
+    if allowed_write_roots is not None:
+        effective = tuple(allowed_write_roots)
+    else:
+        effective = tuple(LIQMICRO_V2_ALLOWED_WRITE_ROOTS)
+    policy_resolved = [str(Path(p).resolve()) for p in policy_roots]
+    effective_resolved = [str(Path(p).resolve()) for p in effective]
+    # G2 (123): if arg/constant diverges from policy, fail closed (scope/bypass proof).
+    if effective_resolved != policy_resolved:
+        failures.append("allowed_write_roots_diverge_from_policy")
+    allowed_resolved = effective_resolved
     # fail-closed if the resolved roots escape the repo or overlap canonical RS roots
     repo_resolved = str(REPO.resolve())
     research_state_resolved = str(RESEARCH_STATE.resolve())
+    results_dir_resolved = str(RESULTS_DIR.resolve())
     for root in allowed_resolved:
         rp = Path(root)
         if not root.startswith(repo_resolved):
             failures.append("allowed_write_root_escapes_repo")
-        # G3 (122): research_state directory-wide and repo root are never allowed
+        # G2/G3: research_state directory-wide and repo root are never allowed
         # write roots (only specific liqmicro-v2 canonical artifacts).
         if rp == Path(research_state_resolved) or rp == Path(repo_resolved):
             failures.append("research_state_or_repo_root_not_allowed")
@@ -76,8 +93,14 @@ def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
             failures.append("root_wildcard_not_allowed")
         # explicit directory-wide research_state prefix is never allowed as a root
         # unless the root is exactly an allowed specific artifact path.
-        if rp.is_dir() and root.startswith(research_state_resolved):
-            failures.append("research_state_directory_wide_root_not_allowed")
+        try:
+            if rp.exists() and rp.is_dir() and root.startswith(research_state_resolved) and root not in policy_resolved:
+                failures.append("research_state_directory_wide_root_not_allowed")
+        except Exception:
+            pass
+        # G2 (123): arbitrary repo dir outside policy => fail closed.
+        if root not in policy_resolved and not root.startswith(results_dir_resolved + os.sep) and root != results_dir_resolved:
+            failures.append("arbitrary_repo_dir_not_allowed")
     denied = list(_LIQMICRO_V2_DENIED_WRITE_TARGETS)
     # ensure no denied target name can appear under the allowed roots
     for target in denied:
