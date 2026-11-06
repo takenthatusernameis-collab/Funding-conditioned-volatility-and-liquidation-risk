@@ -292,6 +292,16 @@ class FCLR010Harness:
                     **({"admissible_seam_wired": seam} if seam is not None else {}),
                     "outcomes_inspected": False,
                     "prereg_required": True,
+                    # 132 G2: stable machine safety fields on every blocked branch so
+                    # harness/gate/operator/check payloads are schema-parity comparable
+                    # (no traceback contract, no outcome/parquet inspection implied).
+                    "canonical_outputs_mutated": False,
+                    "network": False,
+                    "writes_real_research_state": False,
+                    "reads_parquet": False,
+                    "reads_outcomes": False,
+                    "outcomes_loaded": None,
+                    "data_loaded_implicitly": False,
                 }
                 if seam is not None and not seam.get("pass"):
                     res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
@@ -315,15 +325,23 @@ class FCLR010Harness:
             gate = None
             if source_manifest is not None:
                 gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
-            res = {
-                "status": "BLOCKED",
-                "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.",
-                **({"manifest_gate": gate} if gate is not None else {}),
-                **({"admissible_seam_wired": seam} if seam is not None else {}),
-                "outcomes_inspected": False,
-                "prereg_required": True,
-            }
-            if seam is not None and not seam.get("pass"):
+res = {
+                    "status": "BLOCKED",
+                    "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.",
+                    **({"manifest_gate": gate} if gate is not None else {}),
+                    **({"admissible_seam_wired": seam} if seam is not None else {}),
+                    "outcomes_inspected": False,
+                    "prereg_required": True,
+                    # 132 G2: stable machine safety fields (schema parity with other blocked branches).
+                    "canonical_outputs_mutated": False,
+                    "network": False,
+                    "writes_real_research_state": False,
+                    "reads_parquet": False,
+                    "reads_outcomes": False,
+                    "outcomes_loaded": None,
+                    "data_loaded_implicitly": False,
+                }
+                if seam is not None and not seam.get("pass"):
                 res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
                 res["fail_closed_order"] = "admissible_seam->manifest_prereg"
                 res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
@@ -364,11 +382,14 @@ class FCLR010Harness:
                 "admissible_seam_wired": seam,
                 "outcomes_inspected": False,
                 "prereg_required": False,
+                # 132 G2: stable machine safety fields (schema parity with other blocked branches).
                 "canonical_outputs_mutated": False,
                 "network": False,
                 "writes_real_research_state": False,
                 "reads_parquet": False,
                 "reads_outcomes": False,
+                "outcomes_loaded": None,
+                "data_loaded_implicitly": False,
             }
         # G2 (124): seam GO + prereg present but data_path missing => stable BLOCKED
         # payload parity (no outcomes inspected, no loader). Fail-closed before any
