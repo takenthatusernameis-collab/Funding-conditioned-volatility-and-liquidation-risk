@@ -1,21 +1,21 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 20261106T051000Z
-Handoff ID: FCLR-HANDOFF-20261106T051000Z
-Baseline (prior session): FCLR-NEXT-118 COMPLETE (20261106T035900Z). **This session (20261106T045619Z, FCLR-NEXT-119) delivered measurable code+test hardening (G1-G5, no trigger).** No new probes/families. Working tree may contain local modified `__pycache__` and `research_state/ironflow_fastpath_cache.json` — **do not commit**.
+Timestamp (UTC): 20261106T051039Z
+Handoff ID: FCLR-HANDOFF-20261106T051039Z
+Baseline (prior session): FCLR-NEXT-119 COMPLETE (20261106T045619Z, G1-G5, no trigger). This handoff session (20261106T051039Z) performed mandatory entry verification, removed tracked pycache/fastpath-cache modification bottlenecks, and leaves **FCLR-NEXT-120** as the ONLY active objective. No new probes/families; no outcomes inspected.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
 Priority: P0 — REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
-Bottlenecks removed this session (measurable): (1) READY_FROZEN end-to-end testability added without real outcomes/network (G1). (2) h004 allowed-path Hyperliquid Track A canonical-target boundary machine-asserted (G2). (3) Repo-local script-scope registry drift check added + registry/117 reconciled incl. new script (G3). (4) `run_liqmicro_v2` top-level statsmodels import deferred to post-gate `_run_pipeline` (blocked/testable without statsmodels) + no-frontier-mutation parity asserted (G4). (5) Experiment-frontier mutation audit across blocked `run_liqmicro_v2` and all `guarded_tracka_ready_writing` scripts (G5). **Data bottleneck unchanged:** IRONFLOW PROBING EXHAUSTED (90+ CONFIRMED_ABSENT), `data_through=2026-10`, 2026-11..2027-02 absent. Do NOT re-probe absent months.
+Bottlenecks removed this session (measurable): (1) Restored modified tracked `scripts/__pycache__` + `tests/__pycache__` artifacts (17 files) and `research_state/ironflow_fastpath_cache.json` drift; working tree clean after remediation. (2) Re-verified full test/gate/operator/drift/probe/root state with concrete metrics. **Data bottleneck unchanged:** IRONFLOW PROBING EXHAUSTED (90+ CONFIRMED_ABSENT), `data_through=2026-10`, 2026-11..2027-02 absent. **DO NOT re-probe absent months.**
 
-## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 20261106T045619Z
-**Execute FCLR-NEXT-120.** This is the ONLY active objective. Do not run status-only loops. Do not re-probe absent ironflow months (exhausted, 90+ CONFIRMED_ABSENT). Do not touch sealed Track C/B. Deliver measurable **code+test** hardening when no trigger appears. Blocked/no-data claims without measurable hardening delta are noncompliant.
+## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 20261106T051039Z
+**Execute FCLR-NEXT-120.** This is the ONLY active objective. **Heavy working is required:** deliver measurable **code+test** hardening when no trigger appears (G1-G5 below). Blocked/no-data claims without measurable hardening delta are noncompliant. Do not run status-only loops. Do not re-probe absent ironflow months. Do not touch sealed Track C/B. Future agents cannot avoid this work: if no trigger, complete G1-G5; if trigger appears, follow the strict trigger path with prereg-before-outcomes.
 
 TASK ID: FCLR-NEXT-120-HARNESS-EXPLICIT-SEAM-GO-MANIFEST-ONLY-READY-FROZEN-MATRIX + TRACKA-SCRIPT-REGISTRY-AUTO-DISCOVERY-GUARD-FROM-CODE + GUARDED-AUDIT-READY-WRITING-NO-READY-MATRIX + RUN_LIQMICRO_V2-READY-PIPELINE-CANONICAL-SURFACE-INVENTORY + H004-ALLOWED-PILOT-SANDBOX-PATH-ENFORCEMENT
 PRIORITY: P0 — LIQUIDATION RISK (Track A) is the ONLY unfinished/active repo objective (Funding-conditioned VOLATILITY Track C sealed/locked).
-TIMESTAMP (UTC): 20261106T045619Z
+TIMESTAMP (UTC): 20261106T051039Z
 ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. ENTRY VERIFY IS MANDATORY BUT INSUFFICIENT ALONE. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES IN RESEARCH_STATE UNLESS A STRICTLY ADMISSIBLE TRIGGER APPEARS (THEN: PREREG BEFORE INSPECTING OUTCOMES; blocker/prereg+result evidence only, ROOT BOUND PRESERVED). NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO `.github/workflows` CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS. Hyperliquid-only for Track A observed-liquidation gate. NEVER conflate observed vs modeled liquidations. No threshold-shopping. Track C/B locked/unsupported.
 
 ### MANDATORY DELIVERABLES (G1-G5, ALL REQUIRED when no trigger)
-1. **G1 (harness READY_FROZEN with explicit admissible seam GO, manifest-only, tmp-isolated):** Add deterministic tmp-isolated tests that construct the *smallest* machine-verifiable manifest-only admissible candidate accepted by `tracka_resume_check.admissible_seam_check` / `fclr010_harness._evaluate_admissible_seam` (no network, no parquet/outcome reads) so `FCLR010Harness.execute_ready_data_load` reaches `READY_FROZEN` with an explicit outcome_loader and returns `data_loaded_implicitly:false`, `EXPLICIT_LOADER_AFTER_GATES`; assert no canonical `evaluation_summary*FCLR010`/`run_manifest.json`/`experiment_frontier.json`/`cross_track_decision_log.md` mutation. Also assert NO-GO seam refuses before loader. No real trigger data; use synthetic manifest fixtures only.
+1. **G1 (harness READY_FROZEN with explicit admissible seam GO, manifest-only, tmp-isolated):** Add deterministic tmp-isolated tests that construct the *smallest* machine-verifiable manifest-only admissible candidate accepted by `tracka_resume_check.admissible_seam_check` / `fclr010_harness._evaluate_admissible_seam` (no network, no parquet/outcome reads) so `FCLR010Harness.execute_ready_data_load` reaches `READY_FROZEN` with an explicit outcome_loader and returns `data_loaded_implicitly:false`, `EXPLICIT_LOADER_AFTER_GATES`; assert no canonical `evaluation_summary*FCLR010`/`run_manifest.json`/`experiment_frontier.json`/`cross_track_decision_log.md` mutation. Also assert NO-GO seam refuses before loader. No real trigger data; use synthetic manifest fixtures only. (Feasible seam GO fixture: `src.analysis.tracka_admissible.build_ironflow_month_manifest(month='2026-11')` passes manifest-only seam checks.)
 2. **G2 (scope registry auto-discovery guard from code, repo-local):** Strengthen `scripts/check_tracka_scope_registry_drift.py` and tests so drift fails not only on filename set mismatch but also when a registered class is inconsistent with cheap source heuristics for *guarded/liquidation-risk* classes (e.g., scripts classified `guarded_tracka*` must reference `guarded_execute`/`FCLR010Harness`/explicit refusal contract tokens; `raw_fetch_monitor_provenance` must not be `guarded_tracka_ready_writing`; `track_c_*`/`track_b_*` must not be labeled guarded Track A). Keep deterministic, no network, no imports that execute heavy deps. Preserve root<=163/probes==2.
 3. **G3 (guarded_tracka_audit_ready_writing NO-READY refusal matrix):** Extend the 119/118-style matrix to `fclr010_coverage_audit.py` and `liqmicro_audit.py` (audit-ready-writing class) across missing prereg, NOGO seam, modeled/proxy, wrong venue states with tmp-isolated canonical target snapshots proving no canonical mutation and stable refusal payload/rc where applicable. No network/parquet/outcome reads.
 4. **G4 (run_liqmicro_v2 READY-pipeline canonical-surface inventory, source + tmp contract):** Without executing real outcomes, add tests that inventory every `RESEARCH_STATE`/`RESULTS_DIR`/`evaluation_summary_FCLR-LIQMICRO-002` write in `_run_pipeline` and assert `_run_pipeline` is unreachable on all blocked guard states; add a READY-branch contract test that monkeypatches `guarded_execute` to return READY_FROZEN with synthetic loader outputs but patches/mocks downstream heavy deps (`LiqMicroFeatures/Models/Stats`, file writes) so the READY branch reaches `_run_pipeline` in a fully sandboxed temp dir (no real `research_state`/`results` writes) and no `experiment_frontier.json` mutation occurs. Document that v2 has no frontier writer by contract.
@@ -41,40 +41,31 @@ Repository: `Funding-conditioned-volatility-and-liquidation-risk`
 - **Funding-conditioned VOLATILITY** = Track C (FCLR-011) — **SEALED/LOCKED**. Forecast gate PASSED. DO NOT retune/re-run/conflate.
 - **LIQUIDATION RISK** = Track A (FCLR-010) — **ONLY UNFINISHED / ONLY ACTIVE OBJECTIVE**. BLOCKED on admissible unauthenticated liquidation data (Hyperliquid-only, `data_through=2026-10`; 2026-11..2027-02 absent). Track B = **NOT_SUPPORTED**.
 
-## CURRENT VERIFIED STATE (entry verify + 119 completion, 20261106T045619Z)
-- Tests: **484/484 OK** (`Ran 484 tests in 44.999s`, `OK`) — was 469 before 119.
+## CURRENT VERIFIED STATE (entry verify this session, 20261106T051039Z)
+- Tests: **484/484 OK** (`Ran 484 tests in 44.999s`, `OK`).
 - Resume: **17 checks PASS** (`tracka_resume_check`, incl. `probe_invariant_runtime_named` + `admissible_seam_wired`, `network:false`, `writes_real_research_state:false`).
 - Gate: `drift_preflight.pass:true`, `status=BLOCKED`, `reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `fail_closed_order=drift_preflight->manifest_prereg`, `outcomes_inspected:false`.
 - Operator: `pass:true`, exit `0`, `network:false`, `read_only:true`, `writes_real_research_state:false`.
-- Scope drift check (new): `scripts/check_tracka_scope_registry_drift.py --json` `pass:true`, `scripts=83 registry=83 reason=OK`.
+- Scope drift check: `scripts/check_tracka_scope_registry_drift.py --json` `pass:true`, `scripts=83 registry=83 reason=OK`.
 - Monitor/trigger: **NO TRIGGER**. `ironflow_probe_20261105T200406Z.json` (+ digest) — `data_through=2026-10`, 2026-11..2027-02 absent. **IRONFLOW PROBING EXHAUSTED (90+ CONFIRMED_ABSENT) — do not re-probe.**
 - Artifacts: root `research_state/*.md+*.json` = **143** (<=163). Ironflow probes = **2**.
-- Working-tree hygiene: local modified `__pycache__` and `research_state/ironflow_fastpath_cache.json` — **never commit**.
+- Working-tree hygiene (after this session): **clean** (tracked pycache/fastpath-cache modifications restored). Do not commit `__pycache__`/`ironflow_fastpath_cache.json`.
 
-## FCLR-NEXT-119 DELIVERABLES (20261106T045619Z, COMPLETE, NO TRIGGER)
+## FCLR-NEXT-119 BASELINE (COMPLETE, NO TRIGGER)
 | Gap | Deliverable | Status | Evidence |
 |---|---|---|---|
-| G1 | READY_FROZEN end-to-end testability (no real outcomes/network): explicit loader invoked once only after gates; blocked never calls loader; source-order invariant (`evaluate_forward` precheck `outcome_loader=None`, `READY_FROZEN` gate before loader) | COMPLETE | `tests/test_tracka_hardening_119.py::Test119G1ReadyFrozenEndToEnd` (3 tests) |
-| G2 | h004 allowed-path Hyperliquid Track A canonical-target boundary; default refused/no canonical mutation; allowed mode refuses if seam flag flipped; no `FCLR010Harness`/`fclr010_guarded_entry`/`guarded_execute(` tokens; canonical-target quarantine declared | COMPLETE | `Test119G2H004AllowedPathBoundary` (4 tests) |
-| G3 | Repo-local scope-registry drift enforcement + reconciliation | COMPLETE | `scripts/check_tracka_scope_registry_drift.py` (new, read-only/deterministic), `research_state/tracka_script_scope_registry.json` (+`check_tracka_scope_registry_drift.py` entry, 83 scripts), `tests/test_tracka_hardening_117.py` SCRIPT_REGISTRY reconciled (83), `Test119G3ScopeRegistryDriftEnforcement` (4 tests) |
-| G4 | `run_liqmicro_v2` no-frontier-mutation surface + blocked isolation | COMPLETE | deferred `models/stats` imports to post-gate `_run_pipeline` in `scripts/run_liqmicro_v2.py` (testable blocked path without statsmodels); source asserts no `experiment_frontier`/frontier writer and pipeline only after READY guard; `Test119G4RunLiqmicroV2NoFrontierMutation` (2 tests) |
-| G5 | `experiment_frontier.json` mutation audit (blocked v2 + all `guarded_tracka_ready_writing`) | COMPLETE | `Test119G5ExperimentFrontierMutationAudit` (2 tests; audited 4 guarded ready-writing scripts: `coupled_robust_eval.py`, `fclr010_execute.py`, `overlay_quick.py`, `overlay_tracka_execute.py`) |
-
-## CHANGED FILES (119)
-- `scripts/check_tracka_scope_registry_drift.py` (new)
-- `scripts/run_liqmicro_v2.py` (deferred heavy `liqmicro.models/stats` imports to post-gate `_run_pipeline`)
-- `research_state/tracka_script_scope_registry.json` (+`check_tracka_scope_registry_drift.py`, count 83, generated 20261106T045619Z)
-- `tests/test_tracka_hardening_117.py` (SCRIPT_REGISTRY reconciled +1)
-- `tests/test_tracka_hardening_119.py` (new, 15 tests, tmp-isolated)
-- `AGENT_HANDOFF.md` (this file)
-- `research_state/experiment_frontier.json` (119/120 frontier update)
+| G1 | READY_FROZEN end-to-end testability (explicit loader after gates; blocked never calls loader; source-order invariant) | COMPLETE | `tests/test_tracka_hardening_119.py::Test119G1ReadyFrozenEndToEnd` (3) |
+| G2 | h004 allowed-path Hyperliquid Track A canonical-target boundary; default refused/no canonical mutation; no FCLR010Harness/fclr010_guarded_entry tokens | COMPLETE | `Test119G2H004AllowedPathBoundary` (4) |
+| G3 | Repo-local scope-registry drift enforcement + reconciliation | COMPLETE | `scripts/check_tracka_scope_registry_drift.py`, registry/117 reconciled (83), `Test119G3ScopeRegistryDriftEnforcement` (4) |
+| G4 | `run_liqmicro_v2` no-frontier-mutation surface + blocked isolation (deferred heavy imports to post-gate) | COMPLETE | `scripts/run_liqmicro_v2.py`, `Test119G4RunLiqmicroV2NoFrontierMutation` (2) |
+| G5 | `experiment_frontier.json` mutation audit (blocked v2 + all guarded ready-writing) | COMPLETE | `Test119G5ExperimentFrontierMutationAudit` (2) |
 
 ## 120 UNCOVERED GAPS (exact, code+tests required)
-- Harness `READY_FROZEN` with an *explicit admissible seam GO* manifest (not legacy `seam=None`) is not yet exercised end-to-end with a machine-accepted minimal manifest fixture; current 119 G1 proves READY_FROZEN via `source_manifest=None/admissible_manifest=None`. Add manifest-only minimal GO fixture proving seam pass -> prereg/data -> explicit loader, and seam NO-GO -> refusal before loader.
-- Drift check validates filename set + entry shape but not class/source semantic consistency (e.g., a guarded class missing `guarded_execute` tokens, or wrong track labels). Add cheap deterministic source-heuristic consistency checks for guarded/liquidation classes.
-- `guarded_tracka_audit_ready_writing` scripts (`fclr010_coverage_audit.py`, `liqmicro_audit.py`) not covered by the 119 G5 frontier/writer refusal matrix across all non-READY states (missing prereg/NOGO seam/modeled/proxy/wrong venue).
-- `run_liqmicro_v2` READY-pipeline canonical write surface (`_run_pipeline` writes to `RESEARCH_STATE`/`RESULTS_DIR`/`evaluation_summary_FCLR-LIQMICRO-002.md`) is only source-inventoried/blocked-proven; no sandboxed READY-branch contract test exercises `_run_pipeline` reachability with mocked heavy deps and temp write roots (cannot use real outcomes).
-- `h004_fclr005_pipeline.py` allowed mode (`H004_ALLOW_FLAG`/env) has machine refusal/flag guards but no sandbox-root enforcement for pilot artifact constants/write targets; allowed mode could still target real `research_state/` paths if ever invoked with real data. Add smallest guard requiring explicit sandbox root (or test hook redirect) before allowed-mode writes, without running real census.
+- Harness `READY_FROZEN` with an *explicit admissible seam GO* manifest (not legacy `seam=None`) not yet exercised end-to-end with a machine-accepted minimal manifest fixture; 119 G1 proves READY_FROZEN via `source_manifest=None/admissible_manifest=None`. Add manifest-only minimal GO fixture proving seam pass -> prereg/data -> explicit loader, and seam NO-GO -> refusal before loader.
+- Drift check validates filename set + entry shape but not class/source semantic consistency. Add cheap deterministic source-heuristic consistency checks for guarded/liquidation classes.
+- `guarded_tracka_audit_ready_writing` scripts (`fclr010_coverage_audit.py`, `liqmicro_audit.py`) not covered by a full NO-READY refusal matrix across missing prereg/NOGO seam/modeled/proxy/wrong venue states.
+- `run_liqmicro_v2` READY-pipeline canonical write surface only source-inventoried/blocked-proven; no sandboxed READY-branch contract test exercises `_run_pipeline` reachability with mocked heavy deps and temp write roots.
+- `h004_fclr005_pipeline.py` allowed mode has machine refusal/flag guards but no sandbox-root enforcement for pilot artifact constants/write targets. Add smallest guard requiring explicit sandbox root (or test hook redirect) before allowed-mode writes.
 
 ## VERIFICATION COMMANDS (RUN ON ENTRY)
 - `python -m unittest discover tests` (>=484, green)

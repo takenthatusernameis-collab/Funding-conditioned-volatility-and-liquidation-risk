@@ -10,13 +10,22 @@
       "id": "FCLR-NEXT-120",
       "task": "FCLR-NEXT-120: HARNESS EXPLICIT SEAM-GO MANIFEST-ONLY READY_FROZEN MATRIX + TRACKA REGISTRY SEMANTIC CONSISTENCY DRIFT + GUARDED AUDIT-READY-WRITING NO-READY MATRIX + RUN_LIQMICRO_V2 SANDBOXED READY-PIPELINE CONTRACT + H004 ALLOWED-PILOT SANDBOX-ROOT ENFORCEMENT",
       "status": "PENDING",
-      "acceptance": "G1-G5 delivered with tmp-isolated deterministic tests; full suite >=484 green; resume 17 PASS; gate pass; operator exit 0; drift check pass; root<=163 probes==2; no trigger side effects.",
+      "acceptance": "G1-G5 delivered with tmp-isolated deterministic tests (no network/parquet/outcome reads, no real research_state writes); suite >=484 green (report after); resume 17 PASS; gate stable; operator pass exit 0; drift pass; root<=163 probes==2; no workflows/cache/pycache committed; emit FCLR-NEXT-121 naming exact uncovered gaps.",
       "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path; Hyperliquid-only; modeled!=observed"
       ],
-      "generated": "20261106T045619Z"
+      "generated": "20261106T045619Z",
+      "priority": "P0",
+      "timestamp_utc": "20261106T051039Z",
+      "gaps": [
+        "G1 explicit admissible seam GO minimal manifest -> READY_FROZEN + NO-GO refuses before loader",
+        "G2 drift class/source semantic consistency heuristics",
+        "G3 fclr010_coverage_audit+liqmicro_audit NO-READY refusal matrix",
+        "G4 run_liqmicro_v2 sandboxed READY-branch _run_pipeline contract + write inventory",
+        "G5 h004 allowed-pilot sandbox-root enforcement for pilot write targets"
+      ]
     },
     {
       "rank": 0.005,
@@ -438,7 +447,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-119",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-120 (20261106T051039Z) mandatory heavy-work campaign: deliver G1-G5 code+test hardening; do not re-probe absent ironflow months; PREREG before outcomes if trigger.",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -465,7 +474,7 @@
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
   },
-  "last_updated": "20261106T035900Z",
+  "last_updated": "20261106T051039Z",
   "timestamp": "20261106T015401Z",
   "last_checked": "2026-11-06T01:54:01Z",
   "last_checked_utc": "2026-11-06T02:17:00Z",
@@ -760,5 +769,25 @@
     "ironflow_probing_exhausted": true,
     "bound": 163
   },
-  "handoff_refreshed_utc": "20261106T041556Z"
+  "handoff_refreshed_utc": "20261106T051039Z",
+  "fclr_next_120": {
+    "task_id": "FCLR-NEXT-120",
+    "status": "PENDING",
+    "issued_utc": "20261106T051039Z",
+    "baseline_tests": 484,
+    "resume_checks": 17,
+    "operator_pass": true,
+    "drift_pass": true,
+    "root_md_json": 143,
+    "probes": 2,
+    "trigger": "NONE (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted)",
+    "heavy_work_required": "G1-G5 code+test hardening mandatory when no trigger; blocked/no-data claims without measurable delta noncompliant",
+    "gaps": [
+      "harness explicit seam GO manifest READY_FROZEN not end-to-end exercised",
+      "drift semantic class/source heuristics missing",
+      "audit-ready-writing NO-READY refusal matrix missing",
+      "run_liqmicro_v2 sandboxed READY _run_pipeline contract missing",
+      "h004 allowed-pilot sandbox-root enforcement missing"
+    ]
+  }
 }
