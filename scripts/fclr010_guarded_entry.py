@@ -108,17 +108,17 @@ def guarded_execute(
         admissible_manifest=admissible_manifest,
         admissible_manifest_path=admissible_manifest_path,
     )
-    # G1 (122): when the admissible seam is GO but prereg/data is missing/blocked,
-    # the stable contract reason_code is PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS
-    # (consistent with the operator gate), with seam_go_prereg_required and
-    # reason_code_detail preserved where the contract emits them.
-    if res.get("seam_go_prereg_required") is True:
+    # G1 (122): seam GO + prereg/data missing => stable operator/gate-aligned
+    # reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, with seam detail
+    # preserved. Fail-closed; no loader invoked, no outcomes inspected.
+    if res.get("seam_go_prereg_required") is True or res.get("reason_code_detail") == "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED":
         res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
         res["seam_go_prereg_required"] = True
         res.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
     # Normalise: never claim outcomes were inspected on a blocked branch.
     res.setdefault("outcomes_inspected", False)
-    res.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
+    if res.get("status") == "BLOCKED" and not res.get("reason_code"):
+        res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
     res["guarded_execution_contract"] = "fclr_next_111"
     res["canonical_outputs_mutated"] = False
     res["network"] = False
@@ -167,6 +167,7 @@ def _guard_snapshot(guard: Dict[str, Any]) -> Dict[str, Any]:
     snap = {
         "status": guard.get("status"),
         "reason_code": guard.get("reason_code"),
+        "reason_code_detail": guard.get("reason_code_detail"),
         "outcomes_inspected": guard.get("outcomes_inspected"),
         "canonical_outputs_mutated": guard.get("canonical_outputs_mutated"),
         "network": guard.get("network"),

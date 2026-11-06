@@ -55,6 +55,8 @@ def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
 
     Returns a dict {pass, failures, reason_code, allowed_roots, denied_targets}.
     Deterministic; no IO, no network. Used before _run_pipeline writes anything.
+    G3 (122): RESEARCH_STATE directory-wide and repo-root/wildcard roots are never
+    allowed; only specific liqmicro-v2 canonical artifact roots pass.
     """
     failures: list[str] = []
     allowed_resolved = [str(Path(p).resolve()) for p in LIQMICRO_V2_ALLOWED_WRITE_ROOTS]
@@ -62,15 +64,20 @@ def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
     repo_resolved = str(REPO.resolve())
     research_state_resolved = str(RESEARCH_STATE.resolve())
     for root in allowed_resolved:
+        rp = Path(root)
         if not root.startswith(repo_resolved):
             failures.append("allowed_write_root_escapes_repo")
         # G3 (122): research_state directory-wide and repo root are never allowed
         # write roots (only specific liqmicro-v2 canonical artifacts).
-        if Path(root) == RESEARCH_STATE.resolve() or Path(root) == REPO.resolve():
-            failures.append("research_state_directory_wide_root_not_allowed")
+        if rp == Path(research_state_resolved) or rp == Path(repo_resolved):
+            failures.append("research_state_or_repo_root_not_allowed")
         # root-wildcard / glob patterns never allowed.
         if any(ch in root for ch in "*?["):
             failures.append("root_wildcard_not_allowed")
+        # explicit directory-wide research_state prefix is never allowed as a root
+        # unless the root is exactly an allowed specific artifact path.
+        if rp.is_dir() and root.startswith(research_state_resolved):
+            failures.append("research_state_directory_wide_root_not_allowed")
     denied = list(_LIQMICRO_V2_DENIED_WRITE_TARGETS)
     # ensure no denied target name can appear under the allowed roots
     for target in denied:
@@ -252,6 +259,8 @@ def main() -> int:
         )
         print(json.dumps(payload, indent=2, sort_keys=True))
         print(f"=== RUN_LIQMICRO_V2 BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
+        # G3 (122): blocked path must never invoke _run_pipeline or
+        # _guard_liqmicro_v2_write_targets; refusal is emitted before any write.
         return 1
 
     loaded = guard.get("outcomes_loaded") or {}

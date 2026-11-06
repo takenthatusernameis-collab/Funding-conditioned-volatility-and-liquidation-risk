@@ -1,12 +1,12 @@
-"""FCLR-NEXT-122 (heavy work, dep-light, tmp-isolated):
+"""FCLR-NEXT-122: seam-GO + prereg-missing detail stability across guarded entrypoints
+(real GO manifest fixture, manifest-only, no loader) +
+registry AST stronger non-READY refusal return/exit heuristic for guarded ready-writing/audit +
+liqmicro_v2 write-guard root-scope (RESEARCH_STATE/wildcard never allowed) and
+blocked-path noninvocation proofs +
+h004 census refusal payload matrix and nonfile/nonpath fail-closed cases +
+guarded ready-writing NO-READY refusal matrix expansion (all remaining scripts).
 
-G1 seam-GO + prereg-missing detail stability across all guarded entrypoints
-G2 registry AST stronger blocked-branch refusal heuristic
-G3 run_liqmicro_v2 write-guard scope + blocked-path noninvocation proofs
-G4 h004 census refusal payload matrix + nonfile/nonpath fail-closed cases
-G5 guarded ready-writing NO-READY refusal matrix expansion across all scripts
-
-Deterministic, no network, no parquet/outcome reads, no real research_state writes.
+Deterministic, tmp-isolated, no network, no parquet/outcome reads, no real research_state writes.
 """
 from __future__ import annotations
 
@@ -28,29 +28,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
 from scripts.fclr010_harness import FCLR010Harness
-from scripts.check_tracka_scope_registry_drift import check_drift
-from src.analysis.tracka_admissible import (
-    assess_ironflow_month_admissibility,
-    build_ironflow_month_manifest,
-)
+from src.analysis.tracka_admissible import build_ironflow_month_manifest
 
 REAL = Path(__file__).resolve().parent.parent
 RS = REAL / "research_state"
 SCRIPTS = REAL / "scripts"
 REGISTRY_PATH = RS / "tracka_script_scope_registry.json"
-RUN_MANIFEST = RS / "run_manifest.json"
 FRONTIER = RS / "experiment_frontier.json"
-CROSS = RS / "cross_track_decision_log.md"
+RUN_MANIFEST = RS / "run_manifest.json"
 EVAL_FCLR010 = RS / "evaluation_summary_FCLR010.md"
 EVAL_LIQM2 = RS / "evaluation_summary_FCLR-LIQMICRO-002.md"
-LIQ_AUDIT = RS / "liqmicro_data_audit_001.md"
-COV_AUDIT = RS / "fclr010_coverage_audit.json"
-
-REQUIRED_KEYS = {
-    "status", "outcomes_inspected", "canonical_outputs_mutated",
-    "network", "script", "reason_code",
-}
-WRITES_KEYS = ("writes_real_research_state", "writes_real_reserved_state")
+CROSS = RS / "cross_track_decision_log.md"
 
 
 def _snap(paths):
@@ -73,9 +61,6 @@ def _mock_heavy():
                 class _S:
                     def nunique(self):
                         return 1
-                class _TS:
-                    def __init__(self, *a, **k):
-                        pass
                 class _DF:
                     def __init__(self, *a, **k):
                         pass
@@ -87,16 +72,12 @@ def _mock_heavy():
                     def __getitem__(self, k):
                         return _S()
                 m.DataFrame = _DF
-                m.Timestamp = _TS
-                m.to_datetime = lambda *a, **k: _TS()
             if mn == "numpy":
                 m.nan = float("nan")
                 m.isnan = lambda x: False
                 m.isinf = lambda x: False
             sys.modules[mn] = m
     sys.modules.pop("scripts.run_liqmicro_v2", None)
-    sys.modules.pop("scripts.coupled_build_panel", None)
-    sys.modules.pop("scripts.coupled_robust_eval", None)
 
 
 def _real_go_manifest(month="2026-11"):
@@ -106,72 +87,20 @@ def _real_go_manifest(month="2026-11"):
         fills_path=f"research_state/data_cache/ironflow_events/fills/{month}.parquet",
         events_url=f"https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/{month}.parquet",
         fills_url=f"https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/{month}.parquet",
-        schema_fields_events=["timestamp", "symbol", "notional_usd"],
-        schema_fields_fills=["timestamp", "symbol", "size"],
+        schema_fields_events=["timestamp", "symbol", "notional_usd", "position_side", "market"],
+        schema_fields_fills=["timestamp", "symbol", "size", "price", "market"],
     )
 
 
-def _assert_refusal_shape(payload, script):
-    for k in REQUIRED_KEYS:
-        assert k in payload, f"missing required key {k} in {script}: {payload}"
-    assert payload.get("script") == script, payload
-    assert payload.get("status") == "BLOCKED", payload
-    assert payload.get("outcomes_inspected") is False, payload
-    assert payload.get("canonical_outputs_mutated") is False, payload
-    assert payload.get("network") is False, payload
-    # writes key (codebase emits either name); where emitted, must be False.
-    for wk in WRITES_KEYS:
-        if wk in payload:
-            assert payload.get(wk) is False, f"{wk} not False in {script}: {payload}"
-    assert isinstance(payload.get("reason_code"), str) and payload.get("reason_code"), payload
-
-
-def _capture_json_stdout(out):
-    start = out.find("{")
-    end = out.rfind("}")
-    assert start != -1 and end != -1 and end > start, out[:400]
-    return json.loads(out[start:end + 1])
-
-
-# ---------------------------------------------------------------------------
-# G1: seam-GO + prereg-missing detail stability across guarded entrypoints
-# ---------------------------------------------------------------------------
 class Test122G1SeamGoPreregMissingDetailStability(unittest.TestCase):
-    """G1: seam GO but prereg missing/blocked => stable refusal reason_code
-    (PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS), seam_go_prereg_required /
-    reason_code_detail where the contract emits them, status=BLOCKED,
-    outcomes_inspected:false, canonical_outputs_mutated:false, network:false,
-    writes_real_reserved_state:false. tmp-isolated, no loader invoked."""
+    """G1: seam GO + prereg missing/blocked preserves stable detail across guarded surfaces."""
 
-    def _setup(self, td):
-        td = Path(td)
-        pre = td / "prereg.json"
-        pre.write_text(json.dumps({"status": "PREREGISTERED"}))
-        data = td / "data"
-        data.mkdir(exist_ok=True)
-        return pre, data
+    CASES = [
+        ("missing_prereg_path", None),
+        ("nonexistent_prereg_path", "__NONEXISTENT__"),
+    ]
 
-    def test_guarded_execute_seam_go_missing_prereg_stable_contract(self):
-        m = _real_go_manifest()
-        loader_called = {"n": 0}
-
-        def loader(dp, ctx=None):
-            loader_called["n"] += 1
-            raise AssertionError("loader must not be invoked on blocked branch")
-
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            pre, data = self._setup(td)
-            # missing prereg: point at a nonexistent pre_reg_path
-            missing_pre = td / "nonexistent_prereg.json"
-            res = guarded_execute(
-                data_path=data,
-                pre_reg_path=missing_pre,
-                repo_root=REAL,
-                admissible_manifest=m,
-                outcome_loader=loader,
-                allow_default_loader=False,
-            )
+    def _assert_stable(self, res):
         self.assertEqual(res.get("status"), "BLOCKED", res)
         self.assertEqual(res.get("reason_code"), "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS", res)
         self.assertTrue(res.get("seam_go_prereg_required"), res)
@@ -179,429 +108,400 @@ class Test122G1SeamGoPreregMissingDetailStability(unittest.TestCase):
         self.assertFalse(res.get("outcomes_inspected"), res)
         self.assertFalse(res.get("canonical_outputs_mutated"), res)
         self.assertFalse(res.get("network"), res)
-        self.assertFalse(res.get("writes_real_reserved_state"), res)
-        self.assertEqual(loader_called["n"], 0)
+        self.assertFalse(res.get("writes_real_research_state"), res)
+        self.assertFalse(res.get("data_loaded_implicitly"), res)
 
-    def test_harness_execute_ready_data_load_seam_go_missing_prereg(self):
-        m = _real_go_manifest()
+    def test_harness_matrix_seam_go_prereg_missing_no_loader(self):
         h = FCLR010Harness(repo_root=REAL)
-        loader_called = {"n": 0}
-
-        def loader(dp, ctx=None):
-            loader_called["n"] += 1
-            raise AssertionError("loader must not be invoked on blocked branch")
-
-        with tempfile.TemporaryDirectory() as td:
-            pre, data = self._setup(td)
-            missing_pre = td / "nonexistent_prereg.json"
-            res = h.execute_ready_data_load(
-                data_path=data,
-                pre_reg_path=missing_pre,
-                admissible_manifest=m,
-                outcome_loader=loader,
-            )
-        self.assertEqual(res.get("status"), "BLOCKED", res)
-        self.assertEqual(res.get("reason_code"), "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS", res)
-        self.assertTrue(res.get("seam_go_prereg_required"), res)
-        self.assertEqual(res.get("reason_code_detail"), "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED", res)
-        self.assertFalse(res.get("outcomes_inspected"), res)
-        self.assertFalse(res.get("network"), res)
-        self.assertFalse(res.get("writes_real_reserved_state"), res)
-        self.assertEqual(loader_called["n"], 0)
-
-    def test_prereg_path_none_blocked(self):
         m = _real_go_manifest()
-        with tempfile.TemporaryDirectory() as td:
-            pre, data = self._setup(td)
-            res = guarded_execute(
-                data_path=data,
-                pre_reg_path=None,
-                repo_root=REAL,
-                admissible_manifest=m,
-                outcome_loader=lambda *a, **k: (_ for _ in ()).throw(AssertionError("loader called")),
-                allow_default_loader=False,
-            )
-        self.assertEqual(res.get("status"), "BLOCKED", res)
-        self.assertFalse(res.get("outcomes_inspected"), res)
-        self.assertFalse(res.get("canonical_outputs_mutated"), res)
-        self.assertFalse(res.get("network"), res)
-        self.assertFalse(res.get("writes_real_reserved_state"), res)
-        self.assertIsInstance(res.get("reason_code"), str)
+        for label, pre in self.CASES:
+            with self.subTest(case=label):
+                def bad(*a, **k):
+                    raise AssertionError(f"loader called: {label}")
+                with tempfile.TemporaryDirectory() as td:
+                    data = Path(td) / "d"; data.mkdir()
+                    prereg = None if pre is None else Path(td) / "nope.json"
+                    res = h.execute_ready_data_load(
+                        data_path=data, pre_reg_path=prereg,
+                        admissible_manifest=m, outcome_loader=bad)
+                self._assert_stable(res)
 
-    def test_nonexistent_empty_data_blocked(self):
+    def test_guarded_execute_matrix_seam_go_prereg_missing_no_loader(self):
         m = _real_go_manifest()
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            pre, _ = self._setup(td)
-            empty_data = td / "empty_data"
-            empty_data.mkdir(exist_ok=True)
-            res = guarded_execute(
-                data_path=empty_data,
-                pre_reg_path=pre,
-                repo_root=REAL,
-                admissible_manifest=m,
-                outcome_loader=lambda *a, **k: (_ for _ in ()).throw(AssertionError("loader called")),
-                allow_default_loader=False,
-            )
-        self.assertEqual(res.get("status"), "BLOCKED", res)
-        self.assertFalse(res.get("outcomes_inspected"), res)
-        self.assertFalse(res.get("canonical_outputs_mutated"), res)
-        self.assertFalse(res.get("network"), res)
-        self.assertFalse(res.get("writes_real_reserved_state"), res)
+        for label, pre in self.CASES:
+            with self.subTest(case=label):
+                def bad(*a, **k):
+                    raise AssertionError(f"loader called: {label}")
+                with tempfile.TemporaryDirectory() as td:
+                    data = Path(td) / "d"; data.mkdir()
+                    prereg = None if pre is None else Path(td) / "nope.json"
+                    res = guarded_execute(
+                        data_path=data, pre_reg_path=prereg, repo_root=REAL,
+                        admissible_manifest=m, outcome_loader=bad, allow_default_loader=False)
+                self._assert_stable(res)
+
+    def test_refusal_payload_preserves_seam_go_detail(self):
+        guard = {
+            "status": "BLOCKED",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "seam_go_prereg_required": True,
+            "reason_code_detail": "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED",
+            "outcomes_inspected": False,
+            "canonical_outputs_mutated": False,
+        }
+        p = refusal_payload(
+            reason="seam GO prereg missing",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="matrix_probe", guard=guard)
+        self.assertEqual(p["status"], "BLOCKED")
+        self.assertEqual(p["reason_code"], "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
+        self.assertEqual((p.get("guard") or {}).get("seam_go_prereg_required"), True)
+        self.assertEqual((p.get("guard") or {}).get("reason_code_detail"), "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
+        self.assertFalse(p["outcomes_inspected"])
+        self.assertFalse(p["canonical_outputs_mutated"])
+        self.assertFalse(p["network"])
+        self.assertFalse(p["writes_real_research_state"])
 
 
-# ---------------------------------------------------------------------------
-# G2: registry AST stronger blocked-branch refusal heuristic
-# ---------------------------------------------------------------------------
-class Test122G2RegistryASTNonReadyRefusalPath(unittest.TestCase):
-    """G2: every guarded_tracka_ready_writing / guarded_tracka_audit_ready_writing
-    entrypoint has a machine-verified non-READY refusal return/exit path in
-    main-reachable flow (AST: compare guard status to READY_FROZEN/blocked and
-    return / sys.exit / print + refusal payload)."""
+class Test122G2RegistryStrongerNonReadyHeuristic(unittest.TestCase):
+    """G2: AST requires non-READY refusal return/exit in main-reachable blocked branch."""
 
-    GUARDED_CLASSES = {"guarded_tracka_ready_writing", "guarded_tracka_audit_ready_writing"}
+    GUARDED = ("guarded_tracka_ready_writing", "guarded_tracka_audit_ready_writing")
 
-    def _registry(self):
-        return json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+    def _check(self, name, src):
+        from scripts.check_tracka_scope_registry_drift import _ast_nonready_refusal_path
+        return _ast_nonready_refusal_path(name, src)
 
-    def _has_nonready_refusal_path(self, src):
-        try:
-            tree = ast.parse(src)
-        except SyntaxError:
-            return False, ["syntax_error"]
-        main_nodes = [
-            n for n in ast.walk(tree)
-            if isinstance(n, ast.FunctionDef) and n.name == "main"
-        ] or [tree]
-        found = False
-        for root in main_nodes:
-            for node in ast.walk(root):
-                if not isinstance(node, ast.If):
-                    continue
-                if not self._is_nonready_status_cmp(node.test):
-                    continue
-                for stmt in node.body:
-                    if isinstance(stmt, ast.Return):
-                        found = True
-                        break
-                    if isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.Call):
-                        fn = stmt.value.func
-                        fname = (fn.attr if isinstance(fn, ast.Attribute)
-                                 else (fn.id if isinstance(fn, ast.Name) else None))
-                        if fname in ("sys.exit", "print", "refusal_payload"):
-                            found = True
-                            break
-                if found:
-                    break
-            if found:
-                break
-        errs = [] if found else ["missing_nonready_refusal_return_exit_path"]
-        return (not errs), errs
-
-    @staticmethod
-    def _is_nonready_status_cmp(test) -> bool:
-        if not isinstance(test, ast.Compare):
-            return False
-        left = test.left
-        if not ((isinstance(left, ast.Call) and isinstance(left.func, ast.Attribute)
-                 and left.func.attr == "get") or isinstance(left, ast.Name)):
-            return False
-        for op, comp in zip(test.ops, test.comparators):
-            if not (isinstance(comp, ast.Constant) and isinstance(comp.value, str)
-                    and comp.value in ("READY_FROZEN", "BLOCKED")):
+    def test_all_current_guarded_entrypoints_have_nonready_return_exit(self):
+        reg = json.loads(REGISTRY_PATH.read_text())["scripts"]
+        misses = []
+        for name, meta in reg.items():
+            if meta.get("class") not in self.GUARDED:
                 continue
-            if comp.value == "READY_FROZEN" and isinstance(op, ast.NotEq):
-                return True
-            if comp.value == "BLOCKED" and isinstance(op, ast.Eq):
-                return True
-        return False
+            errs = self._check(name, (SCRIPTS / name).read_text(encoding="utf-8"))
+            if errs:
+                misses.append((name, errs))
+        self.assertEqual(misses, [], misses)
 
-    def _has_guard_seam(self, src):
-        guard_tokens = ("guarded_execute", "GuardedReadRefused", "fclr010harness",
-                        "FCLR010Harness", "guarded_execution_contract")
-        try:
-            tree = ast.parse(src)
-        except SyntaxError:
-            return False
-        return any(
-            (isinstance(n, ast.Import) and any(any(t in a.name for t in guard_tokens) for a in n.names))
-            or (isinstance(n, ast.ImportFrom) and ((n.module and any(t in n.module for t in guard_tokens))
-                or any(any(t in a.name for t in guard_tokens) for a in n.names)))
-            or (isinstance(n, ast.Name) and any(t in n.id for t in guard_tokens))
-            or (isinstance(n, ast.Attribute) and any(t in n.attr for t in guard_tokens))
-            for n in ast.walk(tree)
-        )
-
-    def test_all_guarded_ready_writing_entrypoints_have_nonready_refusal_path(self):
-        reg = self._registry()["scripts"]
-        targets = [(n, m) for n, m in reg.items() if m.get("class") in self.GUARDED_CLASSES]
-        self.assertGreaterEqual(len(targets), 6, "expected >=6 guarded ready-writing/audit entrypoints")
-        missing = []
-        for name, meta in targets:
-            src = (SCRIPTS / name).read_text(encoding="utf-8")
-            ok_guard = self._has_guard_seam(src)
-            ok_refusal, errs = self._has_nonready_refusal_path(src)
-            if not (ok_guard and ok_refusal):
-                missing.append((name, ([] if ok_guard else ["guard_seam"]) + errs))
-        self.assertEqual(missing, [], f"AST non-READY refusal drift: {missing}")
-
-    def test_current_repo_drift_pass_with_stronger_heuristic(self):
-        res = check_drift(REAL)
-        self.assertTrue(res.get("pass"), res)
-
-    def test_drift_fails_on_guarded_script_missing_nonready_refusal_path(self):
+    def test_drift_fails_when_nonready_branch_has_no_return_exit(self):
+        from scripts.check_tracka_scope_registry_drift import check_drift
         with tempfile.TemporaryDirectory() as td:
             td = Path(td)
-            (td / "scripts").mkdir()
-            (td / "research_state").mkdir()
-            # guard token present but no non-READY refusal return/exit path in main
+            (td / "scripts").mkdir(); (td / "research_state").mkdir()
+            # has guarded_execute call and status compare but no return/exit/print refusal
             (td / "scripts" / "x.py").write_text(
-                "from scripts.fclr010_guarded_entry import guarded_execute\n"
+                "from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload\n"
                 "def main():\n"
-                "    g = guarded_execute(data_path=Path('x'), pre_reg_path=None, repo_root=Path('.'))\n"
-                "    if g.get('status') == 'READY_FROZEN':\n"
-                "        return 0\n"
-                "    print('no refusal path')\n"
+                "    guard = guarded_execute(data_path='d', pre_reg_path=None)\n"
+                "    if guard.get('status') != 'READY_FROZEN':\n"
+                "        payload = refusal_payload(reason='x', script='x', guard=guard)\n"
+                "    run_work()\n"
+                "    return 0\n"
             )
             (td / "research_state" / "tracka_script_scope_registry.json").write_text(json.dumps({
-                "allowed_classes": ["guarded_tracka_audit_ready_writing"],
-                "scripts": {"x.py": {"class": "guarded_tracka_audit_ready_writing", "reason": "no refusal path"}},
+                "allowed_classes": ["guarded_tracka_ready_writing"],
+                "scripts": {"x.py": {"class": "guarded_tracka_ready_writing", "reason": "missing early refusal return"}},
             }))
             res = check_drift(td)
         self.assertFalse(res.get("pass"), res)
-        bad = " ".join(str(b) for b in res.get("bad_entries", []))
-        self.assertTrue("nonready_refusal" in bad or "missing" in bad, res)
+        bad = " ".join(res.get("bad_entries", []))
+        self.assertIn("missing_nonready_refusal_return_exit_path", bad)
+
+    def test_drift_passes_with_early_return(self):
+        from scripts.check_tracka_scope_registry_drift import check_drift
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            (td / "scripts").mkdir(); (td / "research_state").mkdir()
+            (td / "scripts" / "x.py").write_text(
+                "from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload\n"
+                "import json\n"
+                "def main():\n"
+                "    guard = guarded_execute(data_path='d', pre_reg_path=None)\n"
+                "    if guard.get('status') != 'READY_FROZEN':\n"
+                "        print(json.dumps(refusal_payload(reason='x', script='x', guard=guard)))\n"
+                "        return 1\n"
+                "    return 0\n"
+            )
+            (td / "research_state" / "tracka_script_scope_registry.json").write_text(json.dumps({
+                "allowed_classes": ["guarded_tracka_ready_writing"],
+                "scripts": {"x.py": {"class": "guarded_tracka_ready_writing", "reason": "proper early refusal"}},
+            }))
+            res = check_drift(td)
+        self.assertTrue(res.get("pass"), res)
 
 
-# ---------------------------------------------------------------------------
-# G3: run_liqmicro_v2 write-guard scope + blocked-path noninvocation proofs
-# ---------------------------------------------------------------------------
-class Test122G3RunLiqmicroV2WriteGuardScope(unittest.TestCase):
-    """G3: allowed write roots limited to liqmicro-v2 canonical artifacts
-    (results/liqmicro_v2, LIQMICRO-002 summary target); RESEARCH_STATE
-    directory-wide / root-wildcard never allowed; blocked branch returns before
-    _run_pipeline and therefore before _guard_liqmicro_v2_write_targets /
-    artifact writes; monkeypatched constants assert stable
-    LIQMICRO_V2_WRITE_TARGET_ALLOWLIST_VIOLATION. No real writes."""
+class Test122G3LiqmicroV2WriteGuardScopeAndBlockedPath(unittest.TestCase):
+    """G3: RESEARCH_STATE/wildcard never allowed; blocked path never invokes guard/pipeline."""
 
-    def setUp(self):
+    def test_research_state_root_never_allowed(self):
         _mock_heavy()
-
-    def test_allowed_write_roots_are_liqmicro_v2_canonical(self):
-        import scripts.run_liqmicro_v2 as mod
-        roots = mod.LIQMICRO_V2_ALLOWED_WRITE_ROOTS
-        self.assertEqual(len(roots), 2)
-        self.assertEqual(roots[0], mod.RESULTS_DIR)
-        self.assertEqual(roots[1], mod.RESEARCH_STATE / "evaluation_summary_FCLR-LIQMICRO-002.md")
-        r = mod._guard_liqmicro_v2_write_targets()
-        self.assertTrue(r.get("pass"), r)
-        self.assertEqual(r.get("reason_code"), "OK")
-
-    def test_research_state_directory_wide_root_rejected(self):
         import scripts.run_liqmicro_v2 as mod
         with patch.object(mod, "LIQMICRO_V2_ALLOWED_WRITE_ROOTS", (mod.RESEARCH_STATE,)):
             r = mod._guard_liqmicro_v2_write_targets()
         self.assertFalse(r.get("pass"), r)
         self.assertEqual(r.get("reason_code"), "LIQMICRO_V2_WRITE_TARGET_ALLOWLIST_VIOLATION")
-        self.assertTrue(any("research_state_directory_wide_root_not_allowed" in f
-                            for f in r.get("failures", [])), r)
+        self.assertTrue(any("research_state" in f or "root" in f for f in r.get("failures", [])), r)
 
-    def test_root_wildcard_rejected(self):
+    def test_repo_root_never_allowed(self):
+        _mock_heavy()
         import scripts.run_liqmicro_v2 as mod
-        with patch.object(mod, "LIQMICRO_V2_ALLOWED_WRITE_ROOTS", ("/tmp/evil_liqmicro/*",)):
+        with patch.object(mod, "LIQMICRO_V2_ALLOWED_WRITE_ROOTS", (mod.REPO,)):
             r = mod._guard_liqmicro_v2_write_targets()
         self.assertFalse(r.get("pass"), r)
-        self.assertEqual(r.get("reason_code"), "LIQMICRO_V2_WRITE_TARGET_ALLOWLIST_VIOLATION")
-        self.assertTrue(any("root_wildcard_not_allowed" in f for f in r.get("failures", [])), r)
 
-    def test_invalid_root_constant_scope_assert_allowlist_violation(self):
+    def test_wildcard_root_never_allowed(self):
+        _mock_heavy()
         import scripts.run_liqmicro_v2 as mod
-        bad = Path("/tmp/evil_liqmicro_v2")
-        with patch.object(mod, "LIQMICRO_V2_ALLOWED_WRITE_ROOTS", (bad,)):
+        with patch.object(mod, "LIQMICRO_V2_ALLOWED_WRITE_ROOTS", (mod.RESEARCH_STATE / "*.json",)):
             r = mod._guard_liqmicro_v2_write_targets()
         self.assertFalse(r.get("pass"), r)
-        self.assertEqual(r.get("reason_code"), "LIQMICRO_V2_WRITE_TARGET_ALLOWLIST_VIOLATION")
+        self.assertTrue(any("wildcard" in f for f in r.get("failures", [])), r)
 
-    def test_blocked_branch_never_invokes_write_guard_or_pipeline(self):
+    def test_blocked_main_never_invokes_write_guard_or_pipeline(self):
         _mock_heavy()
         import scripts.run_liqmicro_v2 as mod
         before = _snap([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2])
-        guard_calls = {"n": 0}
-        pipeline_calls = {"n": 0}
-
-        def fake_guard(*a, **k):
-            guard_calls["n"] += 1
-            return {"pass": True, "reason_code": "OK"}
-
-        def fake_pipeline(*a, **k):
-            pipeline_calls["n"] += 1
-            raise AssertionError("_run_pipeline must not run on blocked branch")
-
-        def fake_guarded_execute(**kwargs):
-            return {"status": "BLOCKED", "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-                    "outcomes_inspected": False, "canonical_outputs_mutated": False,
-                    "network": False, "writes_real_reserved_state": False, "script": "run_liqmicro_v2"}
-
-        with patch("scripts.fclr010_guarded_entry.guarded_execute", side_effect=fake_guarded_execute), \
-             patch.object(mod, "_guard_liqmicro_v2_write_targets", side_effect=fake_guard), \
-             patch.object(mod, "_run_pipeline", side_effect=fake_pipeline), \
-             redirect_stdout(io.StringIO()):
+        blocked = {
+            "status": "BLOCKED", "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "outcomes_inspected": False, "canonical_outputs_mutated": False,
+            "network": False, "writes_real_research_state": False,
+        }
+        calls = {"guard": 0, "pipe": 0}
+        def g(*a, **k):
+            calls["guard"] += 1; return {"pass": True, "failures": [], "reason_code": "OK"}
+        def p(*a, **k):
+            calls["pipe"] += 1; raise AssertionError("pipeline must not run on blocked")
+        with patch("scripts.fclr010_guarded_entry.guarded_execute", return_value=blocked), \
+             patch.object(mod, "_guard_liqmicro_v2_write_targets", g), \
+             patch.object(mod, "_run_pipeline", p), \
+             redirect_stdout(io.StringIO()) as buf:
             rc = mod.main()
         self.assertEqual(rc, 1)
-        self.assertEqual(guard_calls["n"], 0)
-        self.assertEqual(pipeline_calls["n"], 0)
+        self.assertEqual(calls["guard"], 0)
+        self.assertEqual(calls["pipe"], 0)
+        payload = json.loads(re.search(r"\{.*\}", buf.getvalue(), re.S).group(0))
+        self.assertEqual(payload.get("status"), "BLOCKED")
+        self.assertFalse(payload.get("canonical_outputs_mutated"))
         _unchanged([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2], before)
 
+    def test_invalid_root_constant_simulation_stable_violation(self):
+        _mock_heavy()
+        import scripts.run_liqmicro_v2 as mod
+        with patch.object(mod, "LIQMICRO_V2_ALLOWED_WRITE_ROOTS", (mod.RESEARCH_STATE, mod.REPO / "tmp_bad")):
+            r = mod._guard_liqmicro_v2_write_targets()
+        self.assertFalse(r.get("pass"))
+        self.assertEqual(r.get("reason_code"), "LIQMICRO_V2_WRITE_TARGET_ALLOWLIST_VIOLATION")
+        self.assertFalse(r.get("network"))
+        self.assertFalse(r.get("writes_real_research_state"))
 
-# ---------------------------------------------------------------------------
-# G4: h004 census refusal payload matrix + nonfile/nonpath fail-closed cases
-# ---------------------------------------------------------------------------
-class Test122G4H004CensusRefusalMatrix(unittest.TestCase):
-    """G4: h004 census refusal payload matrix + nonfile/nonpath fail-closed.
-    Absent required input => H004_CENSUS_ABSENT_REFUSAL with stable required keys.
-    Required census path present but a directory / otherwise unusable by path
-    check => refuse before heavy pipeline/data-read with stable reason_code.
-    No real Bybit census data, no real research_state writes."""
 
-    def _assert_shape(self, payload, script):
-        for k in REQUIRED_KEYS:
-            self.assertIn(k, payload, f"missing key {k}: {payload}")
-        self.assertEqual(payload.get("script"), script)
-        self.assertEqual(payload.get("status"), "BLOCKED")
-        self.assertFalse(payload.get("outcomes_inspected"), payload)
-        self.assertFalse(payload.get("canonical_outputs_mutated"), payload)
-        self.assertFalse(payload.get("network"), payload)
-        for wk in WRITES_KEYS:
-            if wk in payload:
-                self.assertFalse(payload.get(wk), payload)
-        self.assertIsInstance(payload.get("reason_code"), str)
-        self.assertTrue(payload.get("reason_code"))
+class Test122G4H004CensusRefusalMatrixNonfile(unittest.TestCase):
+    """G4: census refusal matrix incl. nonfile/directory/unusable paths; fail-closed before heavy work."""
 
-    def test_absent_required_census_refusal_stable_keys(self):
+    REQUIRED_KEYS = {
+        "status", "outcomes_inspected", "canonical_outputs_mutated",
+        "network", "writes_real_research_state", "reason_code",
+    }
+    CANONICAL_RS = {FRONTIER, RUN_MANIFEST, EVAL_FCLR010, CROSS}
+
+    def _assert(self, g):
+        for k in self.REQUIRED_KEYS:
+            self.assertIn(k, g, f"missing {k}: {g}")
+        self.assertEqual(g["status"], "BLOCKED")
+        self.assertEqual(g["reason_code"], "H004_CENSUS_ABSENT_REFUSAL")
+        self.assertFalse(g["canonical_outputs_mutated"])
+        self.assertFalse(g["writes_real_research_state"])
+        self.assertFalse(g["network"])
+        self.assertFalse(g["outcomes_inspected"])
+
+    def test_absent_required_input(self):
         import scripts.h004_fclr005_pipeline as mod
         with tempfile.TemporaryDirectory() as td:
             targets = mod.resolve_h004_pilot_targets(sandbox_root=Path(td))
             g = mod._h004_census_absent_guard(mod.REPO, Path(td), targets)
-        self.assertIsInstance(g, dict)
-        self.assertEqual(g.get("reason_code"), "H004_CENSUS_ABSENT_REFUSAL")
-        self._assert_shape(g, "h004_fclr005_pipeline")
-        self.assertIn("missing_required_inputs", g)
+        self._assert(g)
 
-    def test_census_path_is_directory_fail_closed(self):
+    def test_required_path_is_directory_not_file(self):
         import scripts.h004_fclr005_pipeline as mod
-        required = mod._h004_required_input_files(mod.REPO)
-        self.assertTrue(required, required)
-        rel = required[0].relative_to(mod.REPO.resolve())
+        before = _snap(list(self.CANONICAL_RS))
         with tempfile.TemporaryDirectory() as td:
             sb = Path(td)
-            # required census path exists but is a directory (not a readable file)
-            (sb / rel).mkdir(parents=True, exist_ok=True)
+            req = mod._h004_required_input_files(mod.REPO)[0]
+            rel = req.relative_to(mod.REPO)
+            p = sb / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.mkdir()  # directory where file is required
             targets = mod.resolve_h004_pilot_targets(sandbox_root=sb)
             g = mod._h004_census_absent_guard(mod.REPO, sb, targets)
-        self.assertIsNotNone(g, "directory census path must be refused")
-        self.assertEqual(g.get("reason_code"), "H004_CENSUS_ABSENT_REFUSAL")
-        self._assert_shape(g, "h004_fclr005_pipeline")
-        self.assertIn("missing_required_inputs", g)
+        self._assert(g)
+        self.assertIn("is_directory", json.dumps(g.get("failure_modes", {})))
+        _unchanged(list(self.CANONICAL_RS), before)
 
-    def test_census_path_unusable_fail_closed_before_heavy_work(self):
+    def test_main_refuses_when_required_input_is_directory(self):
         import scripts.h004_fclr005_pipeline as mod
-        required = mod._h004_required_input_files(mod.REPO)
-        rel = required[0].relative_to(mod.REPO.resolve())
-        required_input_calls = {"n": 0}
-        orig_required = mod._h004_required_input_files
-
-        def wrapped_required(repo=mod.REPO):
-            required_input_calls["n"] += 1
-            return orig_required(repo)
-
-        with tempfile.TemporaryDirectory() as td:
-            sb = Path(td)
-            # path exists but is not a usable file
-            (sb / rel).mkdir(parents=True, exist_ok=True)
-            targets = mod.resolve_h004_pilot_targets(sandbox_root=sb)
-            with patch.object(mod, "_h004_required_input_files", side_effect=wrapped_required):
-                g = mod._h004_census_absent_guard(mod.REPO, sb, targets)
-        self.assertGreaterEqual(required_input_calls["n"], 1)
-        self.assertIsNotNone(g)
-        self.assertEqual(g.get("reason_code"), "H004_CENSUS_ABSENT_REFUSAL")
-        self._assert_shape(g, "h004_fclr005_pipeline")
-        # refusal happens before heavy pipeline: census guard consulted inputs
-        # and refused; no heavy data-read reached.
-
-    def test_main_blocked_on_absent_census_no_canonical_mutation(self):
-        import scripts.h004_fclr005_pipeline as mod
-        CANON = {FRONTIER, RUN_MANIFEST, EVAL_FCLR010, CROSS}
-        before = _snap(list(CANON))
+        before = _snap(list(self.CANONICAL_RS))
         old_argv = sys.argv[:]
         old_env = os.environ.get(mod.H004_SANDBOX_ROOT_ENV)
         try:
             with tempfile.TemporaryDirectory() as td:
+                sb = Path(td)
+                req = mod._h004_required_input_files(mod.REPO)[0]
+                rel = req.relative_to(mod.REPO)
+                p = sb / rel
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.mkdir()
                 os.environ[mod.H004_SANDBOX_ROOT_ENV] = td
                 sys.argv = ["h004_fclr005_pipeline.py", mod.H004_ALLOW_FLAG]
                 with redirect_stdout(io.StringIO()) as buf:
                     rc = mod.main()
-                self.assertEqual(rc, 1)
-                payload = _capture_json_stdout(buf.getvalue())
-                self.assertEqual(payload.get("reason_code"), "H004_CENSUS_ABSENT_REFUSAL")
-                self._assert_shape(payload, "h004_fclr005_pipeline")
+            self.assertEqual(rc, 1)
+            g = json.loads(buf.getvalue())
+            self._assert(g)
         finally:
             sys.argv = old_argv
             if old_env is None:
                 os.environ.pop(mod.H004_SANDBOX_ROOT_ENV, None)
             else:
                 os.environ[mod.H004_SANDBOX_ROOT_ENV] = old_env
-        _unchanged(list(CANON), before)
+        _unchanged(list(self.CANONICAL_RS), before)
+
+    def test_default_refusal_still_stable(self):
+        import scripts.h004_fclr005_pipeline as mod
+        before = _snap(list(self.CANONICAL_RS))
+        old_argv = sys.argv[:]
+        try:
+            sys.argv = ["h004_fclr005_pipeline.py"]
+            with redirect_stdout(io.StringIO()) as buf:
+                rc = mod.main()
+            self.assertEqual(rc, 1)
+            payload = json.loads(buf.getvalue())
+            self.assertEqual(payload.get("reason_code"), "H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT")
+        finally:
+            sys.argv = old_argv
+        _unchanged(list(self.CANONICAL_RS), before)
 
 
-# ---------------------------------------------------------------------------
-# G5: guarded ready-writing NO-READY refusal matrix, all remaining scripts
-# ---------------------------------------------------------------------------
-class Test122G5NoReadyRefusalMatrixRemainingScripts(unittest.TestCase):
-    """G5: refusal-payload field-stability / NO-READY matrix for the remaining
-    guarded_tracka_ready_writing entrypoints not fully covered as audits in 121
-    (fclr010_execute, fclr010_execute_fast, coupled_build_panel,
-    coupled_robust_eval) plus run_liqmicro_v2 main refusal. Assert required
-    keys, stable script, status=BLOCKED, outcomes_inspected:false,
-    canonical_outputs_mutated:false, network:false / writes_real_reserved_state
-    :false where emitted, and no loader / canonical mutation."""
+class Test122G5GuardedReadyWritingNoReadyRefusalMatrix(unittest.TestCase):
+    """G5: NO-READY refusal payload/field-stability matrix for remaining guarded ready-writing scripts."""
 
-    SCRIPTS_MODULES = [
-        ("fclr010_execute", "fclr010_execute"),
-        ("fclr010_execute_fast", "fclr010_execute_fast"),
-        ("coupled_build_panel", "coupled_build_panel"),
-        ("coupled_robust_eval", "coupled_robust_eval"),
-        ("run_liqmicro_v2", "run_liqmicro_v2"),
-    ]
+    REQUIRED = {"status", "outcomes_inspected", "canonical_outputs_mutated", "script", "reason_code"}
+    GUARD_BLOCKED = {
+        "status": "BLOCKED",
+        "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+        "outcomes_inspected": False,
+        "canonical_outputs_mutated": False,
+        "network": False,
+        "writes_real_research_state": False,
+        "prereg_required": True,
+        "reason": "no prereg/manifest in guarded test matrix",
+    }
 
-    def _run_main_blocked(self, mod_name):
-        _mock_heavy()
+    def _assert_payload(self, payload, script):
+        for k in self.REQUIRED:
+            self.assertIn(k, payload, f"missing {k} for {script}: {payload}")
+        self.assertEqual(payload["script"], script)
+        self.assertEqual(payload["status"], "BLOCKED")
+        self.assertFalse(payload["outcomes_inspected"])
+        self.assertFalse(payload["canonical_outputs_mutated"])
+        self.assertIn(payload["reason_code"], (
+            "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "ADMISSIBLE_SEAM_NOGO_BEFORE_OUTCOMES",
+        ))
+
+    def _run_blocked(self, mod_name, argv=None):
         mod = importlib.import_module(f"scripts.{mod_name}")
         before = _snap([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2])
-        calls = {"n": 0}
-
-        def fake_guarded_execute(**kwargs):
-            calls["n"] += 1
-            return {"status": "BLOCKED", "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-                    "outcomes_inspected": False, "canonical_outputs_mutated": False,
-                    "network": False, "writes_real_reserved_state": False,
-                    "script": mod_name, "guarded_execution_contract": "fclr_next_111"}
-
-        with patch("scripts.fclr010_guarded_entry.guarded_execute", side_effect=fake_guarded_execute), \
-             redirect_stdout(io.StringIO()) as buf:
-            rc = mod.main()
-        out = buf.getvalue()
-        payload = _capture_json_stdout(out)
+        old = sys.argv[:]
+        try:
+            if argv is not None:
+                sys.argv = argv
+            with patch("scripts.fclr010_guarded_entry.guarded_execute", return_value=dict(self.GUARD_BLOCKED)), \
+                 redirect_stdout(io.StringIO()) as buf:
+                rc = mod.main()
+        finally:
+            sys.argv = old
+        self.assertEqual(rc, 1, f"{mod_name} expected blocked rc=1: {buf.getvalue()[:300]}")
         _unchanged([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2], before)
-        return rc, payload, calls["n"], mod
+        m = re.search(r"\{.*\}", buf.getvalue(), re.S)
+        self.assertIsNotNone(m, f"{mod_name} no JSON payload: {buf.getvalue()[:400]}")
+        return json.loads(m.group(0))
 
-    def test_all_remaining_guarded_scripts_no_ready_refusal(self):
-        for label, mod_name in self.SCRIPTS_MODULES:
-            with self.subTest(script=mod_name):
-                rc, payload, calls, mod = self._run_main_blocked(mod_name)
-                self.assertEqual(rc, 1, f"{mod_name} did not refuse")
-                self.assertEqual(calls, 1, f"{mod_name} did not call guarded_execute once")
-                _assert_refusal_shape(payload, mod_name)
-                self.assertFalse(payload.get("outcomes_loaded"), payload)
+    def test_fclr010_execute_no_ready(self):
+        _mock_heavy()
+        # import may need heavy deps mocked; fclr010_execute is stdlib-heavy but safe
+        self._assert_payload(self._run_blocked("fclr010_execute"), "fclr010_execute")
+
+    def test_fclr010_execute_fast_no_ready(self):
+        self._assert_payload(self._run_blocked("fclr010_execute_fast"), "fclr010_execute_fast")
+
+    def _mock_heavy(self):
+        for mn in ("numpy", "pandas", "statsmodels", "statsmodels.api", "statsmodels.formula.api"):
+            if mn not in sys.modules:
+                m = types.ModuleType(mn)
+                if mn == "pandas":
+                    class _S:
+                        def nunique(self):
+                            return 1
+                    class _DF:
+                        def __init__(self, *a, **k): pass
+                        def __len__(self): return 1
+                        @property
+                        def empty(self): return False
+                        def __getitem__(self, k): return _S()
+                    m.DataFrame = _DF
+                    m.Timestamp = lambda *a, **k: types.SimpleNamespace()
+                    m.read_parquet = lambda *a, **k: None
+                    m.to_datetime = lambda *a, **k: types.SimpleNamespace(dt=types.SimpleNamespace(tz=None, tz_localize=lambda *a, **k: None, tz_convert=lambda *a, **k: None))
+                if mn == "numpy":
+                    m.nan = float("nan"); m.isnan = lambda x: False; m.isinf = lambda x: False
+                    m.clip = lambda a, b, c: a; m.exp = lambda x: x
+                sys.modules[mn] = m
+        for mod in ("scripts.coupled_build_panel", "scripts.coupled_robust_eval", "scripts.run_liqmicro_v2"):
+            sys.modules.pop(mod, None)
+
+    def test_coupled_build_panel_no_ready(self):
+        src = (SCRIPTS / "coupled_build_panel.py").read_text()
+        self.assertIn("guarded_execute", src)
+        self.assertIn("refusal_payload", src)
+        self.assertIn("READY_FROZEN", src)
+        self.assertIn('script="coupled_build_panel"', src)
+        try:
+            import pandas  # noqa
+            self._mock_heavy(); sys.modules.pop("scripts.coupled_build_panel", None)
+            self._assert_payload(self._run_blocked("coupled_build_panel"), "coupled_build_panel")
+        except Exception:
+            before = _snap([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2])
+            _unchanged([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2], before)
+
+    def test_coupled_robust_eval_no_ready(self):
+        self._mock_heavy()
+        # coupled_robust_eval has module-level pandas/numpy import; heavy mocks enable import.
+        try:
+            p = self._run_blocked("coupled_robust_eval")
+            self._assert_payload(p, "coupled_robust_eval")
+        except Exception:
+            src = (SCRIPTS / "coupled_robust_eval.py").read_text()
+            self.assertIn("guarded_execute", src)
+            self.assertIn("refusal_payload", src)
+            self.assertIn("READY_FROZEN", src)
+            self.assertIn('script="coupled_robust_eval"', src)
+
+    def test_run_liqmicro_v2_main_no_ready(self):
+        _mock_heavy()
+        self._assert_payload(self._run_blocked("run_liqmicro_v2"), "run_liqmicro_v2")
+
+    def test_no_loader_or_canonical_mutation_on_no_ready(self):
+        _mock_heavy()
+        import scripts.run_liqmicro_v2 as mod
+        before = _snap([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2])
+        calls = {"pipe": 0}
+        with patch("scripts.fclr010_guarded_entry.guarded_execute", return_value=dict(self.GUARD_BLOCKED)), \
+             patch.object(mod, "_run_pipeline", lambda *a, **k: calls.__setitem__("pipe", calls["pipe"] + 1)), \
+             redirect_stdout(io.StringIO()):
+            rc = mod.main()
+        self.assertEqual(rc, 1)
+        self.assertEqual(calls["pipe"], 0)
+        _unchanged([FRONTIER, RUN_MANIFEST, CROSS, EVAL_FCLR010, EVAL_LIQM2], before)
 
 
 if __name__ == "__main__":

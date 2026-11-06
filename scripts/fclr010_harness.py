@@ -337,12 +337,13 @@ class FCLR010Harness:
             admissible_manifest_path=admissible_manifest_path,
         )
         if res.get("status") != "READY_FROZEN":
-            # normalize explicit reason for guarded execution path
-            if res.get("seam_go_prereg_required") and not res.get("reason_code"):
-                res["reason_code"] = "PREREG_REQUIRED_BEFORE_DATA_LOAD"
-            elif res.get("seam_go_prereg_required") and res.get("reason_code") == "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS":
-                # preserve 108 code for compatibility; 110 detail remains
-                pass
+            # G1 (122): seam GO + prereg/data missing => stable operator/gate-aligned
+            # reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, with seam detail
+            # preserved. Fail-closed; no loader invoked, no outcomes inspected.
+            if res.get("seam_go_prereg_required"):
+                res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
+                res["seam_go_prereg_required"] = True
+                res.setdefault("reason_code_detail", "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
             return res
         # READY_FROZEN: no implicit parquet/outcome load. Only explicit loader after gates.
         if outcome_loader is None:

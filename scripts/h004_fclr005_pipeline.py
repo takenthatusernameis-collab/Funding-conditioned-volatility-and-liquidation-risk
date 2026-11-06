@@ -169,7 +169,14 @@ def _h004_census_absent_guard(repo: Path = REPO, sandbox_root: Optional[Path] = 
     # or otherwise non-file path). Refuses before heavy pipeline/data-read work.
     missing_or_unusable = [str(p) for p in required if not p.is_file()]
     if missing_or_unusable:
+        modes = {}
+        for p in required:
+            if p.is_file():
+                continue
+            modes[str(p)] = "is_directory" if p.exists() else "absent_or_unreadable"
         return {**base, "reason_code": "H004_CENSUS_ABSENT_REFUSAL",
+                "reason_code_detail": "H004_CENSUS_INPUT_ABSENT_OR_NOT_FILE",
+                "failure_modes": modes,
                 "missing_required_inputs": missing_or_unusable,
                 "sandbox_root": str(sb),
                 "reason": "Required census/input files absent or unusable in sandbox; refusing before heavy pipeline work (fail-closed)."}
