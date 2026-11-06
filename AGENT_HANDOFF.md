@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 20261106T005200Z
+Timestamp (UTC): 20261106T011157Z
 Git SHA (HEAD baseline before this session's commit): f91598a8 (prior). This session delivers measurable Track A hardening delta (112): entrypoint audit of all scripts/*.py for direct parquet/outcome reads bypassing guarded contract — 6 newly wired (coupled_build_panel.py, fclr010_coverage_audit.py, liqmicro_audit.py, overlay_tracka_execute.py, overlay_quick.py, coupled_robust_eval.py) + 2 already wired in 111 (fclr010_execute.py, fclr010_execute_fast.py) = 8 total entrypoints routed through guarded `execute_ready_data_load` contract; 0 direct-parquet-reads remaining outside `fclr010_guarded_entry._default_outcome_loader` or `fclr010_execute._load_outcomes`; `tests/test_tracka_hardening_112.py` (+9 fail-closed fixture matrix tests); full suite 380 OK. Working tree may have local modified `__pycache__` + `research_state/ironflow_fastpath_cache.json` — **do not commit**. Commit only meaningful research/code/test/handoff/frontier deltas.
 Branch: main
 Repo: Funding-conditioned-volatility-and-liquidation-risk
-Handoff ID: FCLR-HANDOFF-20261106T005200Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST | Bottleneck-State: NO-TRIGGER/DATA_THROUGH-2026-10/2026-11..2026-11..2027-02-ABSENT/IRONFLOW-PROBING-EXHAUSTED-90PLUS/ROOT-142/PROBES-2/380-TESTS-OK/RESUME-17-PASS/OPERATOR-EXIT0/GATE+HARNESS-FAIL-CLOSED-NO-NETWORK-NO-OUTCOMES-NO-IMPLICIT-PARQUET-LOAD/112-COMPLETE/ALL-SCRIPTS-PARQUET-READS-WIRED-8-ENTRYPOINTS/0-DIRECT-PARQUET-READS-REMAINING/NEXT-113-REQUIRED
+Handoff ID: FCLR-HANDOFF-20261106T011157Z | Priority: P0 - REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST | Bottleneck-State: NO-TRIGGER/DATA_THROUGH-2026-10/2026-11..2026-11..2027-02-ABSENT/IRONFLOW-PROBING-EXHAUSTED-90PLUS/ROOT-142/PROBES-2/380-TESTS-OK/RESUME-17-PASS/OPERATOR-EXIT0/GATE+HARNESS-FAIL-CLOSED-NO-NETWORK-NO-OUTCOMES-NO-IMPLICIT-PARQUET-LOAD/112-COMPLETE/ALL-SCRIPTS-PARQUET-READS-WIRED-8-ENTRYPOINTS/0-DIRECT-PARQUET-READS-REMAINING/NEXT-113-REQUIRED
 
 ## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY)
 
