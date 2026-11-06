@@ -1,16 +1,16 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 2026-11-06T20:21:59Z
-Handoff ID: FCLR-HANDOFF-20261106T165711Z
+Timestamp (UTC): 2026-11-06T20:22:39Z
+Handoff ID: FCLR-HANDOFF-20261106T202239Z
 Baseline (prior): FCLR-NEXT-136 COMPLETE (heavy trigger-readiness + contract-integrity hardening). Full regression `python -m unittest discover tests` = **703 OK, 0 failures, 0 errors** (`Ran 703 tests in 56.791s`; +11 tests vs 692). Synthetic admissible GO-seam + missing/invalid prereg proven BLOCKED with stable fields across harness/gate/check/operator + CLIs. Argparse contract-lock preserved on all 3 Track A CLIs. Drift preflight `pass:true` (17/17 checks), `network:false`, `writes_real_research_state:false`. No trigger. No `.github/workflows` changes. No new timestamped probe/sweep/scan/wrapper/report families.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
 Priority: P0 — REPO-NAME PRIORITIZED (Track A liquidation risk is the ONLY active objective) | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
 
-## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T16:57:11Z
-**Execute FCLR-NEXT-137.** ONLY active objective. **Heavy working required:** measurable hardening+lockdown when no trigger appears. Blocked/no-data claims without measurable hardening delta are noncompliant. No status-only loops. No re-probe absent months. No sealed Track C/B mutation.
+## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T20:22:39Z
+**Execute FCLR-NEXT-138.** ONLY active objective. **Heavy working required:** measurable hardening+lockdown when no trigger appears. Blocked/no-data claims without measurable hardening delta are noncompliant. No status-only loops. No re-probe absent months. No sealed Track C/B mutation.
 
-TASK ID: FCLR-NEXT-137-TRACK-A-TRIGGER-READINESS+CONTRACT-INTEGRITY-HARDEN
+TASK ID: FCLR-NEXT-138-TRACK-A-TRIGGER-READINESS+CONTRACT-INTEGRITY-HARDEN
 PRIORITY: P0 — LIQUIDATION RISK (Track A) is the ONLY unfinished/active repo objective. Track A is DATA_BLOCKED: no admissible Hyperliquid liquidation trigger (`data_through=2026-10`; 2026-11..2027-02 absent; probes==2; do not re-probe). Track B NOT_SUPPORTED. Track C sealed/locked.
-TIMESTAMP (UTC): 2026-11-06T16:57:11Z
+TIMESTAMP (UTC): 2026-11-06T20:22:39Z
 ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES IN RESEARCH_STATE UNLESS STRICTLY ADMISSIBLE TRIGGER APPEARS (THEN: PREREG BEFORE INSPECTING OUTCOMES; blocker/prereg+result evidence only, ROOT BOUND PRESERVED). NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO `.github/workflows` CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS. Hyperliquid-only. NEVER conflate observed vs modeled. No threshold-shopping. Track C/B locked/unsupported.
 
 ### MANDATORY DELIVERABLES (ALL REQUIRED)
