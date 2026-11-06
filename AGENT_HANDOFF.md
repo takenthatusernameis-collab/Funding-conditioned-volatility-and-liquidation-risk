@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 2026-11-06T20:16:49Z
+Timestamp (UTC): 2026-11-06T20:21:59Z
 Handoff ID: FCLR-HANDOFF-20261106T165711Z
 Baseline (prior): FCLR-NEXT-136 COMPLETE (heavy trigger-readiness + contract-integrity hardening). Full regression `python -m unittest discover tests` = **703 OK, 0 failures, 0 errors** (`Ran 703 tests in 56.791s`; +11 tests vs 692). Synthetic admissible GO-seam + missing/invalid prereg proven BLOCKED with stable fields across harness/gate/check/operator + CLIs. Argparse contract-lock preserved on all 3 Track A CLIs. Drift preflight `pass:true` (17/17 checks), `network:false`, `writes_real_research_state:false`. No trigger. No `.github/workflows` changes. No new timestamped probe/sweep/scan/wrapper/report families.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
