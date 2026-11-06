@@ -44,6 +44,27 @@ def _snap(paths):
     return {str(p): (p.read_bytes() if p.exists() else None) for p in paths}
 
 
+
+def _mock_heavy():
+    import types, sys
+    for mn in ("numpy","pandas","statsmodels","statsmodels.api","statsmodels.formula.api"):
+        if mn not in sys.modules:
+            m=types.ModuleType(mn)
+            if mn=="pandas":
+                class _S:
+                    def nunique(self): return 1
+                class _DF:
+                    def __init__(self,*a,**k): pass
+                    def __len__(self): return 1
+                    @property
+                    def empty(self): return False
+                    def __getitem__(self,k): return _S()
+                m.DataFrame=_DF
+            if mn=="numpy":
+                m.nan=float("nan"); m.isnan=lambda x:False; m.isinf=lambda x:False
+            sys.modules[mn]=m
+    sys.modules.pop("scripts.run_liqmicro_v2", None)
+
 def _unchanged(paths, before):
     for s, b in before.items():
         p = Path(s)
@@ -337,6 +358,7 @@ class Test120G4RunLiqmicroV2ReadyPipelineCanonicalSurface(unittest.TestCase):
         self.assertRegex(src, r'if\s+guard\.get\("status"\)\s*!=\s*"READY_FROZEN"[\s\S]*?return\s+1[\s\S]*?_run_pipeline')
 
     def test_blocked_never_reaches_pipeline(self):
+        _mock_heavy()
         import scripts.run_liqmicro_v2 as mod
 
         calls = {"n": 0}
@@ -357,8 +379,9 @@ class Test120G4RunLiqmicroV2ReadyPipelineCanonicalSurface(unittest.TestCase):
         _unchanged([FRONTIER, EVAL_LIQM2, RUN_MANIFEST, CROSS], before)
 
     def test_ready_branch_reaches_pipeline_sandboxed(self):
+        _mock_heavy()
         import scripts.run_liqmicro_v2 as mod
-        import pandas as pd
+        # heavy deps mocked by _mock_heavy
 
         before = _snap([FRONTIER, RUN_MANIFEST, CROSS, EVAL_LIQM2])
         reached = {"n": 0, "args": None}
@@ -382,9 +405,9 @@ class Test120G4RunLiqmicroV2ReadyPipelineCanonicalSurface(unittest.TestCase):
             "network": False,
             "writes_real_research_state": False,
             "outcomes_loaded": {
-                "raw_df": pd.DataFrame({"x": [1]}),
-                "hourly": pd.DataFrame({"symbol": ["BTC"], "hour": ["h"]}),
-                "funding_df": pd.DataFrame({"symbol_hl": ["BTC"], "funding_rate": [0.01]}),
+                "raw_df": type("DF", (), {"__len__": lambda self: 3})(),
+                "hourly": type("H", (), {"__len__": lambda self: 2, "empty": False, "__getitem__": lambda self,k: type("S",(),{"nunique":lambda self:1})()})(),
+                "funding_df": type("F", (), {"__len__": lambda self: 4})(),
             },
         }
         with patch("scripts.fclr010_guarded_entry.guarded_execute", return_value=ready), \
