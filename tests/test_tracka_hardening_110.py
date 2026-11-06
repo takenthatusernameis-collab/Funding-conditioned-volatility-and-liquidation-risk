@@ -111,7 +111,11 @@ class TestHarnessActualDataLoadRefusal110(unittest.TestCase):
             self.assertEqual(r["status"], "BLOCKED")
             self.assertFalse(r["outcomes_inspected"])
             self.assertFalse(r.get("data_loaded") is True)
-            self.assertIn(r.get("reason_code"), ("ADMISSIBLE_SEAM_GO_PREREG_REQUIRED", "PREREG_REQUIRED_BEFORE_DATA_LOAD"))
+            # 132 G2 schema parity with gate/operator: seam GO + missing prereg =>
+            # PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS with ADMISSIBLE_SEAM_GO_PREREG_REQUIRED detail.
+            self.assertEqual(r.get("reason_code"), "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
+            self.assertEqual(r.get("reason_code_detail"), "ADMISSIBLE_SEAM_GO_PREREG_REQUIRED")
+            self.assertTrue(r.get("seam_go_prereg_required") is True)
 
     def test_guarded_data_load_refuses_nogo_seam_with_prereg(self):
         h = self._h()

@@ -83,6 +83,7 @@ HARNESS_CALLER_REGISTRY = {
     "tracka_resume_check.py": ("resume_gate_infra", "Read-only drift/resume checks; imports harness for admissible seam wiring checks only; no outcome reads, no claims."),
     "tracka_resume_gate.py": ("resume_gate_infra", "Read-only fail-closed gate decision; uses harness; no outcome reads, no canonical output mutation."),
     "tracka_operator_report.py": ("resume_gate_infra", "Read-only operator report composition; no outcome reads."),
+    "check_tracka_scope_registry_drift.py": ("resume_gate_infra", "Read-only scope/drift scanner that audits guard-seam presence across scripts; references harness tokens only in AST matching, no harness import, no outcome reads, no liquidation-risk claims."),
     "create_forward_prereg.py": ("prereg_utility", "Writes forward preregistration records only; no outcome inspection/reads."),
     "fclr010_validate.py": ("prereg_utility", "Validation/prereg helper using harness config; no outcome data reads in guarded claim path."),
     "write_trigger_harden_successor.py": ("prereg_utility", "Emits trigger-hardening successor artifacts; references harness; no outcome reads."),

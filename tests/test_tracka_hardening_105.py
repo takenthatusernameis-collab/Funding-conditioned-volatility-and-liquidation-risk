@@ -24,12 +24,15 @@ def _mk_repo(root):
 
 class TestOperatorCLIEntrypoint105(unittest.TestCase):
     def test_cli_exit_zero_on_pass_real_repo(self):
-        # End-to-end on the real, complete repository: PASS => exit 0, stable JSON, fail-closed order.
+        # End-to-end on the real, complete repository: no admissible Track A trigger => gate BLOCKED fail-closed,
+        # exit != 0, stable JSON, fail-closed order; drift preflight still passes.
         r = subprocess.run([sys.executable, "scripts/tracka_operator_report.py"],
                            capture_output=True, text=True, cwd=str(REAL))
-        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertNotEqual(r.returncode, 0, r.stdout)
         data = json.loads(r.stdout)
         self.assertTrue(data["pass"])
+        self.assertEqual(data["gate_decision"]["status"], "BLOCKED")
+        self.assertEqual(data["gate_decision"]["reason_code"], "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
         self.assertEqual(data["fail_closed_order"], "drift_preflight->gate_decision->probe_invariant_state")
         self.assertTrue(data["probe_invariant_runtime_named"]["pass"])
         self.assertLess(data["elapsed_s"], 30)
@@ -55,7 +58,8 @@ class TestOperatorCLIEntrypoint105(unittest.TestCase):
         before = set(p.name for p in real.iterdir()) if real.exists() else set()
         r = subprocess.run([sys.executable, "scripts/tracka_operator_report.py", "--json"],
                            capture_output=True, text=True, cwd=str(REAL))
-        self.assertEqual(r.returncode, 0)
+        # No trigger on real repo => fail-closed BLOCKED => exit != 0; no research_state writes either way.
+        self.assertNotEqual(r.returncode, 0)
         after = set(p.name for p in real.iterdir()) if real.exists() else set()
         self.assertEqual(before, after)
         data = json.loads(r.stdout)

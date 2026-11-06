@@ -102,6 +102,7 @@ EXTENDED_CLASSIFICATION = {
     "tracka_resume_check.py": ("resume_gate_infra", "Read-only checks; seam wiring only; no outcome reads/claims."),
     "tracka_resume_gate.py": ("resume_gate_infra", "Read-only fail-closed gate; no outcome reads/canonical mutation."),
     "tracka_operator_report.py": ("resume_gate_infra", "Read-only operator report composition."),
+    "check_tracka_scope_registry_drift.py": ("resume_gate_infra", "Read-only scope/drift scanner; references harness tokens only in AST matching, no harness import, no outcome reads, no liquidation-risk claims."),
     "create_forward_prereg.py": ("prereg_utility", "Writes prereg records only; no outcome reads."),
     "fclr010_validate.py": ("prereg_utility", "Validation/prereg helper; no guarded outcome claim reads."),
     "write_trigger_harden_successor.py": ("prereg_utility", "Trigger-hardening artifacts; no outcome reads."),
