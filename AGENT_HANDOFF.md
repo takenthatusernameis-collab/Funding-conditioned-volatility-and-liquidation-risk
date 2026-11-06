@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md
 
-**TIMESTAMP (UTC):** 2026-11-06T21:55:00Z
+**TIMESTAMP (UTC):** 2026-11-06T21:56:01Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **SESSION GOAL:** UNBLOCK DATA → BUILD MINIMAL PIPELINE → RUN RV-ONLY OOS BASELINE (GATE 3)
 
@@ -58,7 +58,7 @@ Everything else is noise until Gate 3 is satisfied.
 ---
 
 ## NEXT SINGLE TASK (START HERE - DO NOT DEVIATE)
-Timestamp: 2026-11-06T21:55:13Z
+Timestamp: 2026-11-06T21:56:01Z
 **TASK:** `PHASE 2.0 - Run RV-only baseline gate (BTC/ETH/SOL/XRP, Jan-Mar 2024)`
 
 **IMMEDIATE ACTIONS:**
