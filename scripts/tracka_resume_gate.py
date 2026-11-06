@@ -190,18 +190,45 @@ def main(argv=None) -> int:
     try:
         manifest = _load_manifest(args.manifest)
     except FileNotFoundError as e:
-        print(json.dumps({"status": "BLOCKED", "reason": str(e), "outcomes_inspected": False, "drift_preflight": None}))
+        print(json.dumps({"status": "BLOCKED", "reason": str(e), "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                          "fail_closed_order": "drift_preflight->manifest_prereg",
+                          "outcomes_inspected": False, "network": False, "writes_real_research_state": False,
+                          "canonical_outputs_mutated": False, "reads_parquet": False, "reads_outcomes": False,
+                          "gate_script": "tracka_resume_gate", "drift_preflight": None}))
+        return 1
+    except Exception as e:
+        # G2 (130): malformed manifest/prereg-adjacent CLI inputs must fail closed
+        # with stable machine-readable refusal (no traceback contract, no outcomes).
+        print(json.dumps({"status": "BLOCKED",
+                          "reason": f"manifest parse/load failed (fail-closed, no outcomes): {e!r}",
+                          "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                          "fail_closed_order": "drift_preflight->manifest_prereg",
+                          "outcomes_inspected": False, "network": False,
+                          "writes_real_research_state": False, "canonical_outputs_mutated": False,
+                          "reads_parquet": False, "reads_outcomes": False,
+                          "gate_script": "tracka_resume_gate", "drift_preflight": None}))
         return 1
 
-    res = decide(
-        data_path=args.data,
-        output_dir=str(output_dir),
-        pre_reg_path=args.prereg,
-        source_manifest=manifest,
-        compat_fixture=args.compat_fixture,
-        skip_drift_preflight=args.skip_drift_preflight,
-        admissible_manifest_path=args.admissible_manifest,
-    )
+    try:
+        res = decide(
+            data_path=args.data,
+            output_dir=str(output_dir),
+            pre_reg_path=args.prereg,
+            source_manifest=manifest,
+            compat_fixture=args.compat_fixture,
+            skip_drift_preflight=args.skip_drift_preflight,
+            admissible_manifest_path=args.admissible_manifest,
+        )
+    except Exception as e:
+        # Fail-closed on unexpected decision errors: never inspect outcomes.
+        res = {"status": "BLOCKED",
+               "reason": f"gate decision failed (fail-closed, no outcomes): {e!r}",
+               "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+               "fail_closed_order": "drift_preflight->manifest_prereg",
+               "outcomes_inspected": False, "network": False,
+               "writes_real_research_state": False, "canonical_outputs_mutated": False,
+               "reads_parquet": False, "reads_outcomes": False,
+               "gate_script": "tracka_resume_gate"}
     print(json.dumps(res, indent=2, sort_keys=True))
     return 0 if res["status"] == "READY_FROZEN" else 1
 

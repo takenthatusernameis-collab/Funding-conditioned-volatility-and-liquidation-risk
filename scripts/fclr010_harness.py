@@ -373,7 +373,13 @@ class FCLR010Harness:
             res["data_load_mode"] = "EXPLICIT_LOADER_AFTER_GATES"
         except Exception as e:  # pragma: no cover
             return {"status": "BLOCKED", "reason": f"outcome_loader failed: {e!r}",
-                    "outcomes_inspected": False, "admissible_seam_wired": res.get("admissible_seam_wired")}
+                    "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                    "reason_code_detail": "OUTCOME_LOADER_FAILED_FAIL_CLOSED",
+                    "outcomes_inspected": False, "canonical_outputs_mutated": False,
+                    "network": False, "writes_real_research_state": False,
+                    "reads_parquet": False, "reads_outcomes": False,
+                    "outcomes_loaded": None, "data_loaded_implicitly": False,
+                    "admissible_seam_wired": res.get("admissible_seam_wired")}
         return res
 
 
