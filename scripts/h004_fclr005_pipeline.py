@@ -396,12 +396,49 @@ def _h004_refusal(reason="h004_fclr005_pipeline is out-of-scope for Hyperliquid 
     }
 
 
+# FCLR-NEXT-118 G2: allowed-path machine guard.
+# The historical Bybit pilot may write only its own pilot artifacts
+# (evaluation_summary_FCLR005.md, LIQ_ENUM, CKPT_PANEL). It MUST NOT target
+# Hyperliquid Track A canonical outputs (experiment_frontier.json frontier /
+# cross-track fields, run_manifest.json liquidation gate fields,
+# evaluation_summary_FCLR010.md) and MUST NOT be routed through the guarded
+# Track A execution seam. h004 imports no guarded-entry symbols by construction;
+# the boolean flag below is the machine-enforced seam marker that must remain
+# False for the historical Bybit pilot.
+H004_HYPERLIQUID_CANONICAL_TARGETS = (
+    "experiment_frontier.json",
+    "run_manifest.json",
+    "evaluation_summary_FCLR010.md",
+    "cross_track_decision_log.md",
+)
+
+
+def _h004_allowed_path_guard():
+    """Machine-enforced guard for the allowed historical-pilot path.
+
+    Refuses if H004_HYPERLIQUID_FCLR010_GUARDED_SEAM is True (would conflate
+    the historical Bybit pilot with the Hyperliquid Track A guarded seam).
+    Called at the start of the allowed branch so the pilot can never masquerade
+    as the Hyperliquid observed-liquidation Track A gate.
+    """
+    if H004_HYPERLIQUID_FCLR010_GUARDED_SEAM:
+        return _h004_refusal(
+            reason="H004_HYPERLIQUID_FCLR010_GUARDED_SEAM must remain False for the historical Bybit pilot."
+        )
+    return None
+
+
 def main():
     import os, sys
     allowed = (H004_ALLOW_FLAG in sys.argv) or (os.environ.get(H004_ALLOW_ENV) == "1")
     if not allowed:
         payload = _h004_refusal()
         print(json.dumps(payload, indent=2, sort_keys=True), flush=True)
+        return 1
+    # G2 allowed-path quarantine: machine guard before any pilot write.
+    guard = _h004_allowed_path_guard()
+    if guard is not None:
+        print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
         return 1
     start_time = datetime.now(timezone.utc)
     print("FCLR-005 pipeline starting (EXPLICITLY ALLOWED historical Bybit pilot; NOT Hyperliquid FCLR010 guarded seam)", flush=True)

@@ -110,6 +110,7 @@ def guarded_execute(
     )
     # Normalise: never claim outcomes were inspected on a blocked branch.
     res.setdefault("outcomes_inspected", False)
+    res.setdefault("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS")
     res["guarded_execution_contract"] = "fclr_next_111"
     res["canonical_outputs_mutated"] = False
     res["network"] = False

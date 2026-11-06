@@ -2,7 +2,7 @@
   "registry_version": "1.1",
   "generated": "20261106T035500Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "VERIFIED 20261106T035500Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; IRONFLOW PROBING EXHAUSTED 90+; probes==2). 117 COMPLETE (no trigger): G1 fclr010_execute manifest/split context deferred behind guarded READY outcome loader (blocked main: no pre-guard manifest read, no split print, no canonical mutation); G2 h004_fclr005_pipeline default-refused with H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT (Bybit 2026 historical pilot, NOT Hyperliquid FCLR010 guarded seam), explicit allow flag/env quarantined; G3 full scripts/* registry sweep 82/82 classified in tests (no missing/unclassified/manual-review), risk scripts scope/guard asserted; G4 run_liqmicro frontier mutation extracted to explicit post-gate writer _write_experiment_frontier_ready(), blocked isolation asserted. tests 436->451 (+15) OK, resume 17 PASS, gate pass, operator exit 0, root 142, probes 2.",
+  "current_status": "VERIFIED 20261106T035900Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; IRONFLOW PROBING EXHAUSTED 90+; probes==2). 118 COMPLETE (no trigger): G1 fclr010_execute post-READY loader controlled refusal with stable reason_code + canonical_outputs_mutated:false (no canonical mutation); G2 h004_fclr005_pipeline allowed-path machine guard (H004_HYPERLIQUID_FCLR010_GUARDED_SEAM False, no FCLR010Harness tokens, canonical-target quarantine); G3 canonical script-scope registry artifact research_state/tracka_script_scope_registry.json (82 scripts, drift check, synced with 117); G4 run_liqmicro_v2 blocked isolation + frontier parity; G5 guarded ready-writing NO-READY refusal matrix for 6 scripts x 4 non-READY states. tests 451->469 (+18) OK, resume 17 PASS, gate pass, operator exit 0, root 143, probes 2.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap. 113 delivered measurable Track A hardening (non-parquet audit + source-based tests) while blocked; no trigger, no status-only churn.",
   "frontier": [
     {
@@ -52,14 +52,44 @@
       "rank": 0.004,
       "id": "FCLR-NEXT-118",
       "task": "FCLR-NEXT-118: FCLR010 POST-GATE MANIFEST-LOAD CONTROLLED REFUSAL + H004 ALLOWED-PATH CANONICAL-TARGET QUARANTINE (SANDBOXED) + CANONICAL SCRIPT-SCOPE REGISTRY/DRIFT CHECK + RUN_LIQMICRO_V2 FRONTIER PARITY + GUARDED READY-WRITING NO-READY REFUSAL MATRIX",
-      "status": "OPEN",
+      "status": "COMPLETE",
       "acceptance": "117 uncovered_gaps_for_118 closed with code+tests where refusal/guard is machine-enforceable; full suite >=451 green; stable contracts preserved; root<=163 probes==2; no trigger side effects.",
       "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
       ],
-      "generated": "20261106T035500Z"
+      "generated": "20261106T035500Z",
+      "completed": "20261106T035900Z",
+      "delta": {
+        "full_suite_before": 451,
+        "full_suite_after": 469,
+        "delta_tests": "+18 (tests/test_tracka_hardening_118.py)",
+        "resume_check": "17 PASS",
+        "resume_gate": "drift_preflight.pass:true, BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false",
+        "operator": "pass:true exit 0",
+        "root_md_json": 143,
+        "probes": 2,
+        "g1": "fclr010_execute post-READY loader failure yields controlled refusal with stable reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, canonical_outputs_mutated:false, no evaluation_summary_FCLR010.md/run_manifest.json mutation (tmp-isolated tests).",
+        "g2": "h004_fclr005_pipeline allowed-path machine guard: H004_HYPERLIQUID_FCLR010_GUARDED_SEAM must remain False; no FCLR010Harness/fclr010_guarded_entry tokens in source; allowed path cannot target Hyperliquid Track A canonical targets (experiment_frontier.json, run_manifest.json, evaluation_summary_FCLR010.md, cross_track_decision_log.md); tmp-isolated refusal + default-refusal tests.",
+        "g3": "research_state/tracka_script_scope_registry.json canonical machine-readable registry (82 scripts, reconciled with test_tracka_hardening_117.SCRIPT_REGISTRY); drift check: scripts/*.py filenames == registry keys, valid classes/reasons, synced with 117, no unclassified eval-summary writers.",
+        "g4": "run_liqmicro_v2 blocked: _run_pipeline never called, no canonical summary/frontier/results mutation, experiment_frontier.json unchanged; _run_pipeline only reached after READY_FROZEN guard (source order asserted).",
+        "g5": "guarded ready-writing NO-READY refusal matrix for 6 scripts (coupled_robust_eval, fclr010_execute, fclr010_coverage_audit, liqmicro_audit, overlay_quick, overlay_tracka_execute): 4 non-READY states (missing prereg, NOGO seam, modeled/proxy, wrong venue) all refuse rc=1 with canonical_outputs_mutated:false, no canonical target mutation (tmp snapshot).",
+        "changed_files": [
+          "scripts/fclr010_guarded_entry.py",
+          "scripts/h004_fclr005_pipeline.py",
+          "research_state/tracka_script_scope_registry.json",
+          "tests/test_tracka_hardening_118.py",
+          "research_state/experiment_frontier.json",
+          "AGENT_HANDOFF.md"
+        ],
+        "uncovered_gaps_for_119": [
+          "READY_FROZEN path cannot be exercised end-to-end without admissible trigger data (post-guard loader success path, canonical summary/manifest/frontier writes on real outcomes).",
+          "h004 allowed path still writes its own pilot artifacts (evaluation_summary_FCLR005.md, LIQ_ENUM, CKPT_PANEL) by design; no test can assert allowed-path writes are blocked without executing the pilot (requires real Bybit census data files).",
+          "Registry drift check is static (test-time); consider CI-enforced drift check on script additions/removals.",
+          "run_liqmicro_v2 does not write experiment_frontier.json (by design; only run_liqmicro v1 does); confirm no future v2 frontier mutation surface is added unguarded."
+        ]
+      }
     },
     {
       "rank": 0.01,
@@ -395,7 +425,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-117",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-119",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -684,5 +714,38 @@
       "Classify/audit any remaining scripts not in EXTENDED_CLASSIFICATION that produce evaluation_summary* or mutate canonical Track A frontier/manifest outside guarded READY (full scripts/* sweep with machine-readable registry diff vs EXTENDED_CLASSIFICATION) and add blocked-behavior tests where executable.",
       "run_liqmicro._run_pipeline mutates experiment_frontier.json on READY path (gate-protected). Add explicit READY-only mutation test isolation proving blocked never reaches pipeline (already asserted) and document/optionally gate frontier mutation behind an explicit post-gate writer for clearer auditability."
     ]
-  }
+  },
+  "fclr_next_118": {
+    "task_id": "FCLR-NEXT-118",
+    "status": "COMPLETE",
+    "completed_utc": "20261106T035900Z",
+    "full_suite_before": 451,
+    "full_suite_after": 469,
+    "delta_tests": "+18",
+    "resume_check_pass": true,
+    "resume_check_nchecks": 17,
+    "operator_cli_pass": true,
+    "operator_cli_exit_code": 0,
+    "root_md_json": 143,
+    "ironflow_probe_files": 2,
+    "tests_total": 469,
+    "g1": "fclr010_guarded_entry.py: loader-failure refusal now carries stable reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS; canonical_outputs_mutated:false, no eval_summary_FCLR010.md/run_manifest.json mutation.",
+    "g2": "h004_fclr005_pipeline.py: allowed-path machine guard added; H004_HYPERLIQUID_FCLR010_GUARDED_SEAM must remain False; no FCLR010Harness/fclr010_guarded_entry tokens; canonical Hyperliquid Track A targets quarantined from allowed path.",
+    "g3": "research_state/tracka_script_scope_registry.json: canonical machine-readable registry (82 scripts) reconciled with test_tracka_hardening_117.SCRIPT_REGISTRY; drift check enforces scripts/*.py == registry keys, valid classes/reasons, synced with 117.",
+    "g4": "run_liqmicro_v2.py: blocked isolation + frontier parity asserted (_run_pipeline never called on blocked, no canonical/frontier mutation, READY-only source order).",
+    "g5": "tests/test_tracka_hardening_118.py: NO-READY refusal matrix for 6 guarded_tracka_ready_writing scripts x 4 non-READY states (missing prereg, NOGO seam, modeled/proxy, wrong venue); all refuse rc=1, canonical_outputs_mutated:false, no canonical target mutation.",
+    "changed_files": [
+      "scripts/fclr010_guarded_entry.py",
+      "scripts/h004_fclr005_pipeline.py",
+      "research_state/tracka_script_scope_registry.json",
+      "tests/test_tracka_hardening_118.py",
+      "research_state/experiment_frontier.json",
+      "AGENT_HANDOFF.md"
+    ],
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "last_updated": "20261106T035900Z"
 }
