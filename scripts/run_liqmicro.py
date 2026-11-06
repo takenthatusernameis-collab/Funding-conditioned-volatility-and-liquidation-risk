@@ -1,39 +1,55 @@
 #!/usr/bin/env python3
+"""FCLR-LIQMICRO-001 execution (ironflow Hyperliquid liquidation events only).
+
+FCLR-NEXT-114: routed through guarded_execute contract. The ironflow parquet read
+(``IronflowIngestor.load_all``) is an explicit outcome loader invoked ONLY after
+``guarded_execute`` returns READY_FROZEN. Blocked branches refuse before any parquet
+read and before any canonical output / research_state mutation.
+"""
 import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 import numpy as np
 import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
 import sys
-sys.path.insert(0, str(REPO / 'src'))
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+if str(REPO / 'src') not in sys.path:
+    sys.path.insert(0, str(REPO / 'src'))
 
-from analysis.liqmicro.ingest import IronflowIngestor
+from analysis.liqmicro.ingest import GuardedReadRefused, IronflowIngestor
 from analysis.liqmicro.features import LiqMicroFeatures
 from analysis.liqmicro.models import LiqMicroModels
 from analysis.liqmicro.stats import LiqMicroStats
 
 RESULTS_DIR = REPO / "results" / "liqmicro"
 RESEARCH_STATE = REPO / "research_state"
+IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 
-def main():
-    print("=== FCLR-LIQMICRO-001 EXECUTION ===")
-    print(f"Start: {datetime.now(timezone.utc).isoformat()}")
 
-    # Step 1: Ingest
-    print("\n1. Ingesting ironflow data...")
-    ingestor = IronflowIngestor()
-    raw_df = ingestor.load_all()
-    print(f"   Loaded {len(raw_df):,} raw events")
+def _load_liqmicro_outcomes(data_path: Path, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Explicit outcome/parquet loader for run_liqmicro.
 
+    Invoked ONLY after guarded_execute returns READY_FROZEN. Reads the ironflow
+    parquet census through the guarded src contract (load_all(guarded=True)).
+    """
+    ingestor = IronflowIngestor(data_dir=data_path)
+    raw_df = ingestor.load_all(guarded=True)
     hourly = ingestor.aggregate_hourly(raw_df)
-    print(f"   Aggregated to {len(hourly):,} symbol-hour observations")
-    print(f"   Symbols: {hourly['symbol'].nunique() if not hourly.empty else 0}")
+    return {"raw_df": raw_df, "hourly": hourly}
 
-    # Step 2: Features
+
+def _run_pipeline(raw_df: pd.DataFrame, hourly: pd.DataFrame) -> None:
+    """Existing FCLR-LIQMICRO-001 pipeline (features, models, artifacts, summary).
+
+    Only reached on the guarded READY_FROZEN path; never executed on a blocked
+    branch (no parquet read, no canonical output mutation, no research_state write).
+    """
     print("\n2. Building features...")
     feat = LiqMicroFeatures()
     panel = feat.add_funding_features(hourly)
@@ -42,7 +58,6 @@ def main():
     panel = feat.add_clustering_features(panel)
     print(f"   Panel shape: {panel.shape}")
 
-    # Step 3: Models
     print("\n3. Running pre-registered tests D1-D3...")
     models = LiqMicroModels()
     stats_tool = LiqMicroStats()
@@ -60,17 +75,13 @@ def main():
     print("\n4. Saving artifacts...")
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Save panel
     panel.to_csv(RESULTS_DIR / "panel_liqmicro.csv")
     panel.to_parquet(RESULTS_DIR / "panel_liqmicro.parquet")
 
-    # Save tables
     if not panel.empty:
         panel.describe().to_csv(RESULTS_DIR / "descriptive_stats.csv")
 
-    # Collect all p-values for FDR
     pvals = []
-    # Extract p-values from results
     for res in [d1_results, d2_results]:
         if isinstance(res, dict):
             for k, v in res.items():
@@ -84,14 +95,13 @@ def main():
     else:
         qvals, reject = [], []
 
-    # Write evaluation summary
     summary_path = RESEARCH_STATE / "evaluation_summary_FCLR-LIQMICRO-001.md"
     lines = []
     lines.append("# EVALUATION SUMMARY: FCLR-LIQMICRO-001")
     lines.append(f"**TIMESTAMP (UTC):** {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}")
-    lines.append(f"**CAMPAIGN:** Track D: Liquidation Microstructure (funding-conditioned)")
-    lines.append(f"**DATA:** ironflow Hyperliquid ONLY (admissible)")
-    lines.append(f"**FIREWALLS:** NO Binance merge, NO H001 re-test, NO FCLR-003 re-opening")
+    lines.append("**CAMPAIGN:** Track D: Liquidation Microstructure (funding-conditioned)")
+    lines.append("**DATA:** ironflow Hyperliquid ONLY (admissible)")
+    lines.append("**FIREWALLS:** NO Binance merge, NO H001 re-test, NO FCLR-003 re-opening")
     lines.append("")
     lines.append("## Data summary")
     lines.append(f"- Raw events: {len(raw_df):,}")
@@ -127,7 +137,6 @@ def main():
     lines.append("- Clustering: by symbol")
     lines.append("")
     lines.append("## Verdict")
-    # Determine verdict
     any_sig = sum(reject) if reject else 0
     if any_sig > 0:
         lines.append("**MECHANISM FOUND (preliminary)** - Some effects survive FDR correction.")
@@ -150,7 +159,6 @@ def main():
     summary_path.write_text("\n".join(lines))
     print(f"   Wrote {summary_path}")
 
-    # Update experiment frontier
     try:
         frontier_path = RESEARCH_STATE / "experiment_frontier.json"
         with open(frontier_path) as f:
@@ -175,9 +183,61 @@ def main():
     except Exception as e:
         print(f"   Error updating frontier: {e}")
 
+
+def main() -> int:
+    print("=== FCLR-LIQMICRO-001 EXECUTION ===")
+    print(f"Start: {datetime.now(timezone.utc).isoformat()}")
+
+    from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
+
+    # Step 1: Ingest (guarded - parquet read only after READY_FROZEN)
+    print("\n1. Ingesting ironflow data...")
+    guard = guarded_execute(
+        data_path=IRONFLOW,
+        pre_reg_path=None,
+        repo_root=REPO,
+        source_manifest=None,
+        admissible_manifest=None,
+        admissible_manifest_path=None,
+        outcome_loader=_load_liqmicro_outcomes,
+        loader_context=None,
+        allow_default_loader=False,
+    )
+    if guard.get("status") != "READY_FROZEN":
+        payload = refusal_payload(
+            reason="run_liqmicro refused: no guarded READY_FROZEN contract (admissible seam + prereg + manifest/data gates). Direct parquet reads bypassed.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="run_liqmicro",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== RUN_LIQMICRO BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
+        return 1
+
+    loaded = guard.get("outcomes_loaded") or {}
+    raw_df = loaded.get("raw_df")
+    hourly = loaded.get("hourly")
+    if raw_df is None or hourly is None:
+        payload = refusal_payload(
+            reason="run_liqmicro refused: guarded loader did not return raw_df/hourly outcomes.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="run_liqmicro",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== RUN_LIQMICRO BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
+        return 1
+
+    print(f"   Loaded {len(raw_df):,} raw events (guarded loader, after gates)")
+    print(f"   Aggregated to {len(hourly):,} symbol-hour observations")
+    print(f"   Symbols: {hourly['symbol'].nunique() if not hourly.empty else 0}")
+
+    _run_pipeline(raw_df, hourly)
+
     print(f"\n=== COMPLETE ===")
     print(f"End: {datetime.now(timezone.utc).isoformat()}")
-    print(f"Verdict: {'NO MECHANISM FOUND' if any_sig == 0 else 'MECHANISM FOUND (preliminary)'}")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

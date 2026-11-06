@@ -1,48 +1,69 @@
 #!/usr/bin/env python3
+"""FCLR-LIQMICRO-002 execution (real funding integration, ironflow Hyperliquid only).
+
+FCLR-NEXT-114: routed through guarded_execute contract. The ironflow parquet read
+(``IronflowIngestor.load_all``) and the Hyperliquid funding json/open read
+(``HyperliquidFundingIngestor.load_all``) are explicit outcome loaders invoked ONLY
+after ``guarded_execute`` returns READY_FROZEN. Blocked branches refuse before any
+data read and before any canonical output mutation.
+"""
 import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 import numpy as np
 import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
 import sys
-sys.path.insert(0, str(REPO / 'src'))
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+if str(REPO / 'src') not in sys.path:
+    sys.path.insert(0, str(REPO / 'src'))
 
-from analysis.liqmicro.ingest import IronflowIngestor, HyperliquidFundingIngestor
+from analysis.liqmicro.ingest import GuardedReadRefused, HyperliquidFundingIngestor, IronflowIngestor
 from analysis.liqmicro.features import LiqMicroFeatures
 from analysis.liqmicro.models import LiqMicroModels
 from analysis.liqmicro.stats import LiqMicroStats
 
 RESULTS_DIR = REPO / "results" / "liqmicro_v2"
 RESEARCH_STATE = REPO / "research_state"
+IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
+HYPERLIQUID_FUNDING = REPO / "research_state" / "data_cache" / "hyperliquid_funding"
 
-def main():
-    print("=== FCLR-LIQMICRO-002 EXECUTION (REAL FUNDING) ===")
-    print(f"Start: {datetime.now(timezone.utc).isoformat()}")
 
-    # Ingest
-    print("\n1. Ingesting ironflow data...")
-    ingestor = IronflowIngestor()
-    raw_df = ingestor.load_all()
-    print(f"   Loaded {len(raw_df):,} raw events")
+def _load_liqmicro_v2_outcomes(data_path: Path, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Explicit outcome loader for run_liqmicro_v2.
 
+    Invoked ONLY after guarded_execute returns READY_FROZEN. Reads ironflow liquidation
+    parquet and Hyperliquid funding json through the guarded src contract
+    (load_all(guarded=True)).
+    """
+    ingestor = IronflowIngestor(data_dir=data_path)
+    raw_df = ingestor.load_all(guarded=True)
     hourly = ingestor.aggregate_hourly(raw_df)
-    print(f"   Aggregated to {len(hourly):,} symbol-hour observations")
-    print(f"   Symbols: {hourly['symbol'].nunique() if not hourly.empty else 0}")
 
-    # Ingest funding
+    fund_ing = HyperliquidFundingIngestor(data_dir=HYPERLIQUID_FUNDING)
+    funding_df = fund_ing.load_all(guarded=True)
+
+    return {"raw_df": raw_df, "hourly": hourly, "funding_df": funding_df}
+
+
+def _run_pipeline(raw_df: pd.DataFrame, hourly: pd.DataFrame, funding_df: pd.DataFrame) -> None:
+    """Existing FCLR-LIQMICRO-002 pipeline (features, models, artifacts, summary).
+
+    Only reached on the guarded READY_FROZEN path; never executed on a blocked
+    branch (no data read, no canonical output mutation, no research_state write).
+    """
     print("\n2. Ingesting Hyperliquid funding...")
-    fund_ing = HyperliquidFundingIngestor()
-    funding_df = fund_ing.load_all()
     print(f"   Loaded {len(funding_df):,} funding rows")
     if not funding_df.empty:
-        print(f"   Funding symbols: {funding_df['symbol_hl'].nunique() if 'symbol_hl' in funding_df.columns else funding_df['coin'].nunique()}")
+        sym_col = 'symbol_hl' if 'symbol_hl' in funding_df.columns else ('coin' if 'coin' in funding_df.columns else None)
+        print(f"   Funding symbols: {funding_df[sym_col].nunique() if sym_col else funding_df.shape[0]}")
         print(f"   funding_rate std: {funding_df['funding_rate'].std():.10e}")
 
-    # Features
     print("\n3. Building features...")
     feat = LiqMicroFeatures()
     panel = feat.add_funding_features(hourly, funding_df)
@@ -52,7 +73,6 @@ def main():
     print(f"   Panel shape: {panel.shape}")
     print(f"   panel.funding_rate std: {panel['funding_rate'].std():.10e}, non-nan: {panel['funding_rate'].notna().sum()}")
 
-    # Models
     print("\n4. Running pre-registered tests D1-D3...")
     models = LiqMicroModels()
     stats_tool = LiqMicroStats()
@@ -64,7 +84,6 @@ def main():
     d3_results = models.d3_clustering(panel)
     print(f"   D3 complete")
 
-    # Save
     print("\n5. Saving artifacts...")
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     panel.to_csv(RESULTS_DIR / "panel_liqmicro_v2.csv")
@@ -72,7 +91,6 @@ def main():
     if not panel.empty:
         panel.describe().to_csv(RESULTS_DIR / "descriptive_stats_v2.csv")
 
-    # FDR
     pvals = []
     for res in [d1_results, d2_results]:
         if isinstance(res, dict):
@@ -90,9 +108,9 @@ def main():
     lines = []
     lines.append("# EVALUATION SUMMARY: FCLR-LIQMICRO-002")
     lines.append(f"**TIMESTAMP (UTC):** {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}")
-    lines.append(f"**CAMPAIGN:** Track D: Liquidation Microstructure (funding-conditioned) - REAL FUNDING INTEGRATION")
-    lines.append(f"**DATA:** ironflow Hyperliquid liquidations ONLY + Hyperliquid fundingHistory API (unauthenticated)")
-    lines.append(f"**FIREWALLS:** NO Binance merge, NO H001 re-test, NO FCLR-003 re-opening")
+    lines.append("**CAMPAIGN:** Track D: Liquidation Microstructure (funding-conditioned) - REAL FUNDING INTEGRATION")
+    lines.append("**DATA:** ironflow Hyperliquid liquidations ONLY + Hyperliquid fundingHistory API (unauthenticated)")
+    lines.append("**FIREWALLS:** NO Binance merge, NO H001 re-test, NO FCLR-003 re-opening")
     lines.append("")
     lines.append("## Data summary")
     lines.append(f"- Raw events: {len(raw_df):,}")
@@ -135,11 +153,68 @@ def main():
     lines.append(f"- Tables: {RESULTS_DIR / 'descriptive_stats_v2.csv'}")
     lines.append(f"- Modules: {REPO / 'src/analysis/liqmicro/'} (updated)")
     lines.append(f"- Funding audit: {RESEARCH_STATE / 'liqmicro_funding_audit_002.md'}")
-    lines.append(f"- Pre-registration note: This is a funding-integration fix to FCLR-LIQMICRO-001 (same D1-D3).")
+    lines.append("## Pre-registration note: This is a funding-integration fix to FCLR-LIQMICRO-001 (same D1-D3).")
     lines.append("")
 
     summary_path.write_text("\n".join(lines))
     print(f"Wrote {summary_path}")
 
+
+def main() -> int:
+    print("=== FCLR-LIQMICRO-002 EXECUTION (REAL FUNDING) ===")
+    print(f"Start: {datetime.now(timezone.utc).isoformat()}")
+
+    from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
+
+    # Ingest (guarded - data reads only after READY_FROZEN)
+    print("\n1. Ingesting ironflow data...")
+    guard = guarded_execute(
+        data_path=IRONFLOW,
+        pre_reg_path=None,
+        repo_root=REPO,
+        source_manifest=None,
+        admissible_manifest=None,
+        admissible_manifest_path=None,
+        outcome_loader=_load_liqmicro_v2_outcomes,
+        loader_context=None,
+        allow_default_loader=False,
+    )
+    if guard.get("status") != "READY_FROZEN":
+        payload = refusal_payload(
+            reason="run_liqmicro_v2 refused: no guarded READY_FROZEN contract (admissible seam + prereg + manifest/data gates). Direct data reads bypassed.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="run_liqmicro_v2",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== RUN_LIQMICRO_V2 BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
+        return 1
+
+    loaded = guard.get("outcomes_loaded") or {}
+    raw_df = loaded.get("raw_df")
+    hourly = loaded.get("hourly")
+    funding_df = loaded.get("funding_df")
+    if raw_df is None or hourly is None or funding_df is None:
+        payload = refusal_payload(
+            reason="run_liqmicro_v2 refused: guarded loader did not return raw_df/hourly/funding_df outcomes.",
+            reason_code="PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            script="run_liqmicro_v2",
+            guard=guard,
+        )
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        print(f"=== RUN_LIQMICRO_V2 BLOCKED {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} ===", flush=True)
+        return 1
+
+    print(f"   Loaded {len(raw_df):,} raw events (guarded loader, after gates)")
+    print(f"   Aggregated to {len(hourly):,} symbol-hour observations")
+    print(f"   Symbols: {hourly['symbol'].nunique() if not hourly.empty else 0}")
+
+    _run_pipeline(raw_df, hourly, funding_df)
+
+    print(f"\n=== COMPLETE ===")
+    print(f"End: {datetime.now(timezone.utc).isoformat()}")
+    return 0
+
+
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

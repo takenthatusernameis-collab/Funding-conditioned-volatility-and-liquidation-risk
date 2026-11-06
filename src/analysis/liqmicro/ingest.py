@@ -12,16 +12,31 @@ REPO = Path(__file__).resolve().parents[3]
 IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 
 # 113 src audit: top-level `import pyarrow.parquet as pq` removed. No parquet/outcome/data
-# read happens at module import; lazy pd.read_parquet()/open() reads occur only inside
-# explicit method calls (load_all / HyperliquidFundingIngestor.load_all) and are flagged as
-# a FCLR-NEXT-114 gap (callers reading outcomes must route through guarded_execute).
+# read happens at module import.
+# 114 src guard: lazy pd.read_parquet()/open() reads in load_all() now require an explicit
+# guarded contract (guarded=True). Without it, GuardedReadRefused is raised before any disk
+# read, so no implicit outcome/data load executes on blocked or misconfigured branches.
+# Callers (run_liqmicro.py, run_liqmicro_v2.py) route load_all(guarded=True) through
+# scripts.fclr010_guarded_entry.guarded_execute and only pass guarded=True after
+# READY_FROZEN.
+
+class GuardedReadRefused(RuntimeError):
+    """Raised when a src/ method-level data read is attempted without passing the guarded contract."""
+
+    pass
+
 
 class IronflowIngestor:
     def __init__(self, data_dir: Path = IRONFLOW):
         self.data_dir = data_dir
         self.files = sorted([f for f in os.listdir(data_dir) if f.endswith('.parquet')]) if data_dir.exists() else []
 
-    def load_all(self) -> pd.DataFrame:
+    def load_all(self, *, guarded: bool = False) -> pd.DataFrame:
+        if not guarded:
+            raise GuardedReadRefused(
+                "IronflowIngestor.load_all: parquet read refused; guarded contract not satisfied "
+                "(pass guarded=True only after guarded_execute returns READY_FROZEN)."
+            )
         dfs = []
         for fname in self.files:
             try:
@@ -90,7 +105,12 @@ class HyperliquidFundingIngestor:
         self.data_dir = data_dir
         self.files = sorted([f for f in os.listdir(data_dir) if f.endswith('.json')]) if data_dir.exists() else []
 
-    def load_all(self) -> pd.DataFrame:
+    def load_all(self, *, guarded: bool = False) -> pd.DataFrame:
+        if not guarded:
+            raise GuardedReadRefused(
+                "HyperliquidFundingIngestor.load_all: json/open read refused; guarded contract not satisfied "
+                "(pass guarded=True only after guarded_execute returns READY_FROZEN)."
+            )
         import json
         dfs = []
         for fname in self.files:
