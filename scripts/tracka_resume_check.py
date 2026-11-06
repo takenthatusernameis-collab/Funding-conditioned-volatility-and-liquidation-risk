@@ -405,6 +405,8 @@ def check(repo_root: Path = None, research_state_dir: Path = None, admissible_ca
             out["reason_code"] = asc.get("reason_code", "ADMISSIBLE_SEAM_NOGO")
             out["fail_closed_order"] = "drift_preflight->admissible_seam"
             out["elapsed_s"] = round(time.time() - t0, 6)
+            out.setdefault("canonical_outputs_mutated", False)
+            out.setdefault("outcomes_inspected", False)
             return out
         out["pass"] = True
         out["status"] = "GO" if admissible_candidate_path is not None else "SEAM_WIRED_AWAITING_CANDIDATE"
@@ -535,6 +537,9 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
     probe_ok = report["probe_invariant_state"].get("pass") is True
     report["pass"] = drift_ok and gate_blocked_expected and probe_ok
     report["fail_closed_order"] = "drift_preflight->gate_decision->probe_invariant_state"
+    if not report["pass"]:
+        report.setdefault("reason_code", report.get("gate_decision", {}).get("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"))
+        report.setdefault("outcomes_inspected", False)
     return report
 
 

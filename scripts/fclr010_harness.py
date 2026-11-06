@@ -325,7 +325,7 @@ class FCLR010Harness:
             gate = None
             if source_manifest is not None:
                 gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
-res = {
+            res = {
                     "status": "BLOCKED",
                     "reason": "Pre-registration path required. Call pre_register_forward_experiment() and inspect no outcomes before it exists.",
                     **({"manifest_gate": gate} if gate is not None else {}),
@@ -340,8 +340,8 @@ res = {
                     "reads_outcomes": False,
                     "outcomes_loaded": None,
                     "data_loaded_implicitly": False,
-                }
-                if seam is not None and not seam.get("pass"):
+            }
+            if seam is not None and not seam.get("pass"):
                 res["reason_code"] = "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG"
                 res["fail_closed_order"] = "admissible_seam->manifest_prereg"
                 res["reason"] = "Admissible seam NO-GO (manifest-only, fail-closed) and prereg missing; outcomes not inspected."
