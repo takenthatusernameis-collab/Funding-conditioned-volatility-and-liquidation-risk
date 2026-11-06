@@ -1,0 +1,27 @@
+{
+  "track": "A",
+  "source_family": "ironflow_hyperliquid_liquidations",
+  "venue": "hyperliquid",
+  "source": "ironflow/hyperliquid-liquidations",
+  "month": "2026-11",
+  "unauthenticated": true,
+  "requires_api_key": false,
+  "requires_signature": false,
+  "observed_liquidations": true,
+  "modeled_or_proxy": false,
+  "merges_non_hyperliquid": false,
+  "label_definition": "observed_hyperliquid_liquidation_event_rows_from_ironflow",
+  "timestamp_normalized_utc": true,
+  "artifacts": {
+    "events": {
+      "path": "data/events/2026-11.parquet",
+      "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+      "schema_fields": ["timestamp", "symbol", "liquidation_notional"]
+    },
+    "fills": {
+      "path": "data/fills/2026-11.parquet",
+      "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-11.parquet",
+      "schema_fields": ["timestamp", "symbol", "side", "notional_usd"]
+    }
+  }
+}
