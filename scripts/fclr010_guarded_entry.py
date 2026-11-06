@@ -119,7 +119,14 @@ def guarded_execute(
 
 
 def refusal_payload(**extra: Any) -> Dict[str, Any]:
-    """Build a stable machine-readable refusal payload for blocked entrypoints."""
+    """Build a stable machine-readable refusal payload for blocked entrypoints.
+
+    G3 (121): every payload is normalized to a stable field set so callers can
+    assert on the exact refusal shape without network/parquet/outcome reads.
+    Required keys: status, outcomes_inspected, canonical_outputs_mutated,
+    network, writes_real_research_state, guarded_execution_contract, script,
+    reason_code, reason. Optional guard snapshot: guard.
+    """
     payload: Dict[str, Any] = {
         "status": "BLOCKED",
         "outcomes_inspected": False,
@@ -128,9 +135,44 @@ def refusal_payload(**extra: Any) -> Dict[str, Any]:
         "network": False,
         "writes_real_research_state": False,
         "guarded_execution_contract": "fclr_next_111",
+        "script": extra.pop("script", None),
+        "reason_code": extra.pop("reason_code", "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"),
+        "reason": extra.pop("reason", "Blocked by guarded execution contract."),
+        "outcomes_loaded": None,
+        "reads_parquet": False,
+        "reads_outcomes": False,
     }
+    guard = extra.pop("guard", None)
+    if guard is not None:
+        payload["guard"] = _guard_snapshot(guard)
     payload.update(extra)
     return payload
+
+
+def _guard_snapshot(guard: Dict[str, Any]) -> Dict[str, Any]:
+    """G3 (121): stable guard snapshot shape for refusal payloads.
+
+    Captures the machine-representable guard states that surfaced during the
+    blocked decision (prereg-required / missing manifest / modeled conflation /
+    wrong venue / seam NO-GO) without inspecting outcomes.
+    """
+    snap = {
+        "status": guard.get("status"),
+        "reason_code": guard.get("reason_code"),
+        "outcomes_inspected": guard.get("outcomes_inspected"),
+        "canonical_outputs_mutated": guard.get("canonical_outputs_mutated"),
+        "network": guard.get("network"),
+        "writes_real_research_state": guard.get("writes_real_research_state"),
+        "reads_parquet": guard.get("reads_parquet"),
+        "reads_outcomes": guard.get("reads_outcomes"),
+        "fail_closed": guard.get("fail_closed"),
+        "seam": guard.get("seam"),
+        "seam_go_prereg_required": guard.get("seam_go_prereg_required"),
+        "admissible_seam_wired": guard.get("admissible_seam_wired"),
+        "manifest_gate": guard.get("manifest_gate"),
+        "prereg_required": guard.get("prereg_required"),
+    }
+    return {k: v for k, v in snap.items() if v is not None}
 
 
 def assert_loader_never_called(*_args, **_kwargs):  # pragma: no cover - test helper

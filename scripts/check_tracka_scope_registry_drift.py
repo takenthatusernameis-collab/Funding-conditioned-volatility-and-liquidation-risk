@@ -12,6 +12,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import sys
 from pathlib import Path
@@ -45,6 +46,77 @@ def _read_source(repo: Path, name: str) -> str:
         return p.read_text(encoding="utf-8", errors="ignore")
     except Exception:
         return ""
+
+
+def _ast_guard_structure(name: str, cls: str, src: str) -> list[str]:
+    """G2 (121): AST-lite structural check for guarded ready-writing/audit classes.
+
+    Requires a reachable guarded-execution seam in the source body:
+      * an import/usage of ``guarded_execute`` or ``GuardedReadRefused`` or
+        ``fclr010harness``; and
+      * a blocked ``main`` refusal path (early ``return`` after a guarded check,
+        or a ``guarded_execute`` call whose result is tested before pipeline work).
+
+    Cheap and deterministic; no heavy imports, no network, no outcome reads.
+    """
+    errs: list[str] = []
+    if cls not in ("guarded_tracka_ready_writing", "guarded_tracka_audit_ready_writing",
+                   "guarded_tracka", "harness_core"):
+        return errs
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        errs.append(f"{name}:guarded_class_syntax_error")
+        return errs
+
+    guard_tokens = ("guarded_execute", "GuardedReadRefused", "fclr010harness",
+                    "FCLR010Harness", "guarded_execution_contract")
+    has_guard = False
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for al in node.names:
+                if any(t in al.name for t in guard_tokens):
+                    has_guard = True
+        elif isinstance(node, ast.ImportFrom):
+            if node.module and any(t in node.module for t in guard_tokens):
+                has_guard = True
+            for al in node.names:
+                if any(t in al.name for t in guard_tokens):
+                    has_guard = True
+        elif isinstance(node, ast.Name):
+            if any(t in node.id for t in guard_tokens):
+                has_guard = True
+        elif isinstance(node, ast.Attribute):
+            if any(t in node.attr for t in guard_tokens):
+                has_guard = True
+    if not has_guard:
+        errs.append(f"{name}:guarded_class_missing_guard_seam")
+        return errs
+
+    # harness_core *provides* the seam (FCLR010Harness.execute_ready_data_load);
+    # it does not call guarded_execute, so it is exempt from the refusal-path rule.
+    if cls == "harness_core":
+        return errs
+
+    # Require a blocked refusal path: a guarded_execute(...) call whose return is
+    # compared to a status string, followed by an early return, OR a refusal_payload
+    # construction followed by a return.
+    has_refusal_path = False
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            fn = node.func
+            fname = None
+            if isinstance(fn, ast.Name):
+                fname = fn.id
+            elif isinstance(fn, ast.Attribute):
+                fname = fn.attr
+            if fname in ("guarded_execute", "execute_ready_data_load"):
+                has_refusal_path = True
+        if isinstance(node, ast.Name) and node.id == "refusal_payload":
+            has_refusal_path = True
+    if not has_refusal_path:
+        errs.append(f"{name}:guarded_class_missing_blocked_refusal_path")
+    return errs
 
 
 def _semantic_consistency(name: str, meta: dict, src: str) -> list[str]:
@@ -137,6 +209,10 @@ def check_drift(repo: Path = REPO) -> dict:
             sem = _semantic_consistency(name, meta if isinstance(meta, dict) else {}, src)
             if sem:
                 payload["bad_entries"].extend(sem)
+            # G2 (121): AST-lite structural guard check for guarded classes.
+            astc = _ast_guard_structure(name, cls, src)
+            if astc:
+                payload["bad_entries"].extend(astc)
     if payload["bad_entries"]:
         payload["failures"].append(f"BAD_ENTRIES:{payload['bad_entries'][:12]}")
     payload["pass"] = not payload["failures"]

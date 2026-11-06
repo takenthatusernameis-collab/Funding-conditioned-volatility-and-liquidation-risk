@@ -124,6 +124,56 @@ def _h004_sandbox_guard(repo: Path = REPO) -> Optional[dict]:
     return None
 
 
+def _h004_required_input_files(repo: Path = REPO) -> list[Path]:
+    """Files the allowed historical-pilot path requires before heavy work.
+
+    Returns the absolute paths that must exist in the sandbox for the pilot to
+    proceed. Deterministic; no IO.
+    """
+    return [
+        repo / "research_state" / "data_cache" / "liquidations_full_20260807.csv",
+    ]
+
+
+def _h004_census_absent_guard(repo: Path = REPO, sandbox_root: Optional[Path] = None,
+                              pilot_targets: Optional[dict] = None) -> Optional[dict]:
+    """G5 (121): fail-closed on absent required census/input files in the allowed path.
+
+    Even when an allow flag/env is set and a valid sandbox root is provided, the
+    pilot must refuse before any heavy pipeline/data-read work if the required
+    census file is absent in the resolved sandbox. Returns a refusal dict or None
+    when the guard passes (files present). No real research_state writes.
+    """
+    base = {
+        "script": "h004_fclr005_pipeline",
+        "status": "BLOCKED",
+        "outcomes_inspected": False,
+        "canonical_outputs_mutated": False,
+        "network": False,
+        "writes_real_research_state": False,
+    }
+    if sandbox_root is None:
+        return {**base, "reason_code": "H004_CENSUS_ABSENT_REFUSAL",
+                "reason": "Allowed pilot requires required census/input files in sandbox; no sandbox root resolved."}
+    sb = Path(sandbox_root).resolve()
+    repo_resolved = Path(repo).resolve()
+    # required input files resolve under the sandbox (mirrors resolve_h004_pilot_targets)
+    required = []
+    for p in _h004_required_input_files(repo_resolved):
+        try:
+            rel = p.relative_to(repo_resolved)
+        except Exception:
+            rel = Path(p.name)
+        required.append(sb / rel)
+    missing = [str(p) for p in required if not p.exists()]
+    if missing:
+        return {**base, "reason_code": "H004_CENSUS_ABSENT_REFUSAL",
+                "missing_required_inputs": missing,
+                "sandbox_root": str(sb),
+                "reason": "Required census/input files absent in sandbox; refusing before heavy pipeline work (fail-closed)."}
+    return None
+
+
 def ts_to_dt(ts_ms):
     return datetime.fromtimestamp(int(ts_ms) / 1000, tz=timezone.utc)
 
@@ -514,6 +564,15 @@ def main():
         return 1
     sb = _h004_sandbox_resolve(REPO)
     pilot_targets = resolve_h004_pilot_targets(sandbox_root=sb, repo=REPO)
+
+    # G5 (121): allowed mode + valid sandbox must fail-closed if required census/input
+    # files are absent in the sandbox. Refuses before any heavy pipeline/data-read
+    # work, with a stable reason_code. No real research_state writes.
+    census_guard = _h004_census_absent_guard(REPO, sb, pilot_targets)
+    if census_guard is not None:
+        print(json.dumps(census_guard, indent=2, sort_keys=True), flush=True)
+        return 1
+
     global OUT_SUM, LIQ_ENUM, CKPT_DIR, CKPT_PANEL, RUN_MANIFEST, HYP
     OUT_SUM = pilot_targets["out_sum"]
     LIQ_ENUM = pilot_targets["liq_enum"]

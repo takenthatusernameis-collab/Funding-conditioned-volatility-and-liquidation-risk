@@ -31,6 +31,52 @@ RESEARCH_STATE = REPO / "research_state"
 IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
 HYPERLIQUID_FUNDING = REPO / "research_state" / "data_cache" / "hyperliquid_funding"
 
+# FCLR-NEXT-121 G4: post-gate write-target allowlist/denylist for _run_pipeline.
+# The guarded READY_FROZEN path may only write canonical FCLR-LIQMICRO-002 artifacts
+# under RESULTS_DIR or the LIQMICRO-002 evaluation summary. It MUST NOT touch
+# Hyperliquid Track A canonical outputs (frontier, run_manifest, cross-track log,
+# FCLR010 summary) or any other research_state file. Fail-closed on violation.
+LIQMICRO_V2_ALLOWED_WRITE_ROOTS = (RESULTS_DIR, RESEARCH_STATE / "evaluation_summary_FCLR-LIQMICRO-002.md")
+LIQMICRO_V2_DENIED_WRITE_TARGETS = (
+    "experiment_frontier.json",
+    "run_manifest.json",
+    "cross_track_decision_log.md",
+    "evaluation_summary_FCLR010.md",
+    "evaluation_summary_FCLR010",
+)
+
+
+def _guard_liqmicro_v2_write_targets(*, results_dir: Path = RESULTS_DIR,
+                                     research_state: Path = RESEARCH_STATE) -> dict:
+    """Machine-enforced write-target allowlist/denylist for the READY pipeline path.
+
+    Returns a dict {pass, failures, reason_code, allowed_roots, denied_targets}.
+    Deterministic; no IO, no network. Used before _run_pipeline writes anything.
+    """
+    failures: list[str] = []
+    allowed_resolved = [str(Path(p).resolve()) for p in LIQMICRO_V2_ALLOWED_WRITE_ROOTS]
+    # fail-closed if the resolved roots escape the repo or overlap canonical RS roots
+    repo_resolved = str(REPO.resolve())
+    for root in allowed_resolved:
+        if not root.startswith(repo_resolved):
+            failures.append("allowed_write_root_escapes_repo")
+    denied = list(LIQMICRO_V2_DENIED_WRITE_TARGETS)
+    # ensure no denied target name can appear under the allowed roots
+    for target in denied:
+        for root in allowed_resolved:
+            if target in root:
+                failures.append(f"denied_write_target_in_allowed_root:{target}")
+    return {
+        "pass": not failures,
+        "failures": failures,
+        "reason_code": "OK" if not failures else "LIQMICRO_V2_WRITE_TARGET_ALLOWLIST_VIOLATION",
+        "allowed_roots": allowed_resolved,
+        "denied_targets": denied,
+        "script": "run_liqmicro_v2",
+        "network": False,
+        "writes_real_research_state": False,
+    }
+
 
 def _load_liqmicro_v2_outcomes(data_path: Path, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Explicit outcome loader for run_liqmicro_v2.
@@ -55,6 +101,13 @@ def _run_pipeline(raw_df: pd.DataFrame, hourly: pd.DataFrame, funding_df: pd.Dat
     Only reached on the guarded READY_FROZEN path; never executed on a blocked
     branch (no data read, no canonical output mutation, no research_state write).
     """
+    # G4 (121): enforce write-target allowlist/denylist before any artifact write.
+    write_guard = _guard_liqmicro_v2_write_targets()
+    if not write_guard.get("pass"):
+        raise RuntimeError(
+            "run_liqmicro_v2 write-target allowlist guard refused: "
+            f"{write_guard.get('failures')} (reason_code={write_guard.get('reason_code')})"
+        )
     from analysis.liqmicro.models import LiqMicroModels
     from analysis.liqmicro.stats import LiqMicroStats
     print("\n2. Ingesting Hyperliquid funding...")
