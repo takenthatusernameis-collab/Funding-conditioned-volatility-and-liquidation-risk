@@ -180,6 +180,8 @@ def decide(data_path: str, output_dir: str, pre_reg_path: Optional[str],
         pre_reg_path=Path(pre_reg_path) if pre_reg_path else None,
         source_manifest=source_manifest,
         strict_manifest_gate=strict_manifest_gate,
+        admissible_manifest=admissible_manifest_dict,
+        admissible_manifest_path=admissible_manifest_path,
     )
     result["gate_script"] = "tracka_resume_gate"
     result["compat_fixture"] = bool(compat_fixture)

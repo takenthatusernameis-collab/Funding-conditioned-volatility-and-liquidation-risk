@@ -59,3 +59,21 @@ ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROB
 
 ## STOP RULE
 Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found.
+
+
+## FCLR-NEXT-137 DELIVERABLES (COMPLETE — 2026-11-06T19:07:00Z)
+| Gap | Deliverable | Status | Evidence |
+|---|---|---|---|
+| 137-1 | Clean-clone regression preserved (>=703 -> 709 OK) | COMPLETE | `python -m unittest discover tests` => `Ran 709 tests in 87.096s`, `OK` (0 failures, 0 errors). Added `tests/test_tracka_hardening_137.py` (+6 tests). |
+| 137-2 | GO seam + valid prereg present + data path missing/nonexistent => BLOCKED stable fields (harness/gate); parity ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING / seam_go_data_missing, no IO | COMPLETE | Harness/gate: `PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS` + `ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING` + `seam_go_data_missing:true` + `fail_closed_order:drift_preflight->admissible_seam->manifest_prereg` + `admissible_seam_wired.pass:true` + `outcomes_inspected:false, reads_outcomes:false, reads_parquet:false, network:false, writes_real_research_state:false, canonical_outputs_mutated:false`. Gate passes admissible manifest dict/path to harness for precise reason_code_detail parity. |
+| 137-3 | Malformed admissible-manifest JSON via --admissible-manifest on gate/operator/check => stable fail-closed JSON refusals, no tracebacks-as-contract | COMPLETE | gate/check/operator with broken JSON produce parseable JSON refusals, exit!=0, `network:false`, `writes_real_research_state:false`, `outcomes_inspected:false`, `reads_parquet:false`, `reads_outcomes:false`, `canonical_outputs_mutated:false`; no traceback contract leakage. |
+| 137-4 | CLI contract integrity preserved (3 Track A CLIs) | COMPLETE | `tracka_resume_gate.py --bogus --json` => parseable JSON refusal with `ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED`, exit 1, no tracebacks-as-contract. `--help` exit 0. |
+| 137-5 | Canonical-output integrity | COMPLETE | SHA256 unchanged for `experiment_frontier.json`, `run_manifest.json`, `evaluation_summary_FCLR010.md` across all refusal/exercise paths in new tests. |
+| 137-6 | Drift/state invariants 17/17 pass, bounds/probes/writes | COMPLETE | `tracka_resume_check.py` => `pass:true` (17/17 checks), root md+json 143 (<=163), probes==2, no new timestamped families, no workflow changes. |
+
+## BOTTLENECKS REMOVED / STILL HARD (updated)
+- **Removed (137 verified):** GO-seam + valid prereg + missing data path now proven BLOCKED with stable `ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING`/`seam_go_data_missing` across harness/gate with full IO-invariant parity; malformed admissible-manifest JSON refusal paths hardened for gate/check/operator with no tracebacks-as-contract; regression 709 OK.
+- **Still hard:** post-2026-10 admissible Hyperliquid Track A liquidation data absent. Only strictly admissible trigger permits prereg->inspect path. Root bound preserved (md+json<=163, probes==2). No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families.
+
+## STOP RULE (unchanged)
+Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found.
