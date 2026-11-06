@@ -30,8 +30,11 @@ MANIFEST = REPO / "research_state" / "run_manifest.json"
 with open(MANIFEST) as _f:
     _M = json.load(_f)
 _S = _M["split_boundaries_fclr010"]
-WIN_START = pd.Timestamp(_S["data_window"]["start"])
-WIN_END = pd.Timestamp(_S["data_window"]["end"])
+# FCLR-010 (Track A) manifest carries train/validation/test blocks, NOT a data_window
+# key (data_window is a FCLR-009/Track C field). Derive the panel window from the
+# frozen FCLR-010 split boundaries: train.start .. test.end.
+WIN_START = pd.Timestamp(_S["train"]["start"])
+WIN_END = pd.Timestamp(_S["test"]["end"])
 
 
 def _load_coupled_outcomes(data_path: Path, context: Optional[Dict] = None) -> Dict:

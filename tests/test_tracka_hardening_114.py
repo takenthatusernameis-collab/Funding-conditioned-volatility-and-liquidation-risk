@@ -178,7 +178,11 @@ class Test114TrackAScriptScope(unittest.TestCase):
             self.assertIn("from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload", source,
                           f"{script.name} must import guarded_execute")
             self.assertIn("load_all(guarded=True)", source, f"{script.name} must route load through guarded=True")
-            self.assertIn('status != "READY_FROZEN"', source, f"{script.name} must refuse before READY_FROZEN")
+            # Guarded refusal: the READY_FROZEN check must appear on the guard status, not a
+            # bare literal substring. Accept the actual call-site pattern used by both scripts
+            # (guard.get("status") != "READY_FROZEN") so the refusal contract is enforced.
+            self.assertIn('!= "READY_FROZEN"', source, f"{script.name} must refuse before READY_FROZEN")
+            self.assertIn("refusal_payload(", source, f"{script.name} must emit a refusal payload on blocked branch")
 
     def test_run_h003_excluded_track_c_b_recorded(self):
         """run_h003* read mark/funding price CSVs (Track C sealed / Track B modeled boundary),
