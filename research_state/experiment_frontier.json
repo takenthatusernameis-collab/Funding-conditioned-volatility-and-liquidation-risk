@@ -515,7 +515,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-129 (20261106T114421Z) mandatory heavy-work campaign: fused Track A blocked-branch refusal matrix + operator CLI parity + registry drift fails-closed in tests/test_tracka_hardening_129.py; do not re-probe absent ironflow months; PREREG before outcomes if trigger appears.",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-132 (20261106T133740Z) mandatory heavy-work: evaluate_forward prereg-content fail-closed contract + admissible-seam exception reason-code parity + CLI malformed-manifest schema stability (tests/test_tracka_hardening_132.py). No re-probe absent months. PREREG before outcomes if trigger appears.",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -837,7 +837,7 @@
     "ironflow_probing_exhausted": true,
     "bound": 163
   },
-  "handoff_refreshed_utc": "20261106T114421Z",
+  "handoff_refreshed_utc": "20261106T133740Z",
   "fclr_next_120": {
     "task_id": "FCLR-NEXT-120",
     "status": "COMPLETE",
@@ -888,6 +888,31 @@
     },
     "changed_files": [
       "tests/test_tracka_hardening_128.py",
+      "AGENT_HANDOFF.md",
+      "research_state/experiment_frontier.json"
+    ],
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "fclr_next_131": {
+    "task_id": "FCLR-NEXT-131",
+    "status": "COMPLETE",
+    "completed_utc": "20261106T133740Z",
+    "delta": {
+      "hardening_tests_added": "tests/test_tracka_hardening_131.py (+15: G1 harness/guarded seam+manifest-evaluator+prereg-no-outcome matrix, G2 operator/gate/check malformed admissible-manifest JSON refusals, G3 refusal_payload/guard stability + guarded BLOCKED boolean normalization)",
+      "code_hardened": "scripts/fclr010_harness.py (evaluate_forward/execute_ready_data_load stable fail-closed refusal fields on manifest-gate NO-GO, seam NO-GO before outcomes, data-missing, precheck/seam exceptions)",
+      "regression": "193 OK (120-131 + fclr010_harness, tmp-isolated)",
+      "resume_check": "17 PASS",
+      "gate": "BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS fail_closed_order=drift_preflight->manifest_prereg outcomes_inspected:false",
+      "scope_drift": "pass:true 83/83",
+      "root_md_json": 2,
+      "probes": 2
+    },
+    "changed_files": [
+      "scripts/fclr010_harness.py",
+      "tests/test_tracka_hardening_131.py",
       "AGENT_HANDOFF.md",
       "research_state/experiment_frontier.json"
     ],

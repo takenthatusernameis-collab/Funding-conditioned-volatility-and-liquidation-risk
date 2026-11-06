@@ -292,14 +292,21 @@ class FCLR010Harness:
             strict = strict_manifest_gate is not False  # default True for GO decisions
             gate = self.evaluate_source_manifest(source_manifest, strict=strict)
             if not gate.get("go"):
-                return {
+                res = {
                     "status": "BLOCKED",
                     "reason": "Track A strict manifest gate NO-GO. Manifest must pass assess_strict_manifest for GO-shaped observed Hyperliquid claims (machine-verifiable provenance/label/coverage/block evidence required). Compat fixture path requires explicit strict_manifest_gate=False.",
+                    "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
                     "manifest_gate": gate,
                     **({"admissible_seam_wired": seam} if seam is not None else {}),
                     "outcomes_inspected": False,
                     "prereg_required": False,
+                    "canonical_outputs_mutated": False,
+                    "network": False,
+                    "writes_real_research_state": False,
+                    "reads_parquet": False,
+                    "reads_outcomes": False,
                 }
+                return res
         # 109: explicit admissible candidate must pass before any outcome/data load path is allowed.
         if seam is not None and not seam.get("pass"):
             return {
@@ -310,6 +317,11 @@ class FCLR010Harness:
                 "admissible_seam_wired": seam,
                 "outcomes_inspected": False,
                 "prereg_required": False,
+                "canonical_outputs_mutated": False,
+                "network": False,
+                "writes_real_research_state": False,
+                "reads_parquet": False,
+                "reads_outcomes": False,
             }
         # G2 (124): seam GO + prereg present but data_path missing => stable BLOCKED
         # payload parity (no outcomes inspected, no loader). Fail-closed before any
@@ -328,6 +340,8 @@ class FCLR010Harness:
                 "reads_parquet": False,
                 "reads_outcomes": False,
                 "network": False,
+                "canonical_outputs_mutated": False,
+                "writes_real_research_state": False,
             }
             if seam_go:
                 res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
@@ -358,14 +372,24 @@ class FCLR010Harness:
         parquet/outcome load. No implicit parquet reads. outcome_loader (if provided) is
         invoked only after READY_FROZEN gates pass. Deterministic/offline-safe by design.
         """
-        res = self.evaluate_forward(
-            data_path, output_dir=Path(tempfile.gettempdir()) / "fclr010_guarded_unused",
-            pre_reg_path=pre_reg_path, source_manifest=source_manifest,
-            strict_manifest_gate=strict_manifest_gate,
-            outcome_loader=None,  # never load in pre-check
-            admissible_manifest=admissible_manifest,
-            admissible_manifest_path=admissible_manifest_path,
-        )
+        try:
+            res = self.evaluate_forward(
+                data_path, output_dir=Path(tempfile.gettempdir()) / "fclr010_guarded_unused",
+                pre_reg_path=pre_reg_path, source_manifest=source_manifest,
+                strict_manifest_gate=strict_manifest_gate,
+                outcome_loader=None,  # never load in pre-check
+                admissible_manifest=admissible_manifest,
+                admissible_manifest_path=admissible_manifest_path,
+            )
+        except Exception as e:
+            return {"status": "BLOCKED",
+                    "reason": f"precheck/seam evaluation failed (fail-closed, no outcomes): {e!r}",
+                    "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                    "reason_code_detail": "SEAM_OR_PRECHECK_EXCEPTION_FAIL_CLOSED",
+                    "outcomes_inspected": False, "canonical_outputs_mutated": False,
+                    "network": False, "writes_real_research_state": False,
+                    "reads_parquet": False, "reads_outcomes": False,
+                    "outcomes_loaded": None, "data_loaded_implicitly": False}
         if res.get("status") != "READY_FROZEN":
             # G1 (122): seam GO + prereg/data missing => stable operator/gate-aligned
             # reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, with seam detail
