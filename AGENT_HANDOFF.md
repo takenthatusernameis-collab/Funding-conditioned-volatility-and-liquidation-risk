@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 2026-11-06T15:59:01Z
-Handoff ID: FCLR-HANDOFF-20261106T155901Z
+Timestamp (UTC): 2026-11-06T16:38:11Z
+Handoff ID: FCLR-HANDOFF-20261106T163811Z
 Baseline (prior): FCLR-NEXT-134 COMPLETE (20261106T155000Z; 687->692 OK). FCLR-NEXT-135 VERIFIED COMPLETE — full regression `python -m unittest discover tests` = **692 OK, 0 failures, 0 errors** (`Ran 692 tests in 53.652s`). Contract-lock phase 2 re-verified on all 3 Track A CLIs. Drift preflight `pass:true` (17/17 checks), `network:false`, `writes_real_research_state:false`, `elapsed_s`~0.37. No trigger. No `.github/workflows` changes. No new timestamped probe/sweep/scan/wrapper/report families.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
 Priority: P0 — REPO-NAME PRIORITIZED (Track A liquidation risk is the ONLY active objective) | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
 
-## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T15:59:01Z
+## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T16:38:11Z
 **Execute FCLR-NEXT-136.** ONLY active objective. **Heavy working required:** measurable hardening+lockdown when no trigger appears. Blocked/no-data claims without measurable hardening delta are noncompliant. No status-only loops. No re-probe absent months. No sealed Track C/B mutation.
 
 TASK ID: FCLR-NEXT-136-TRACK-A-TRIGGER-READINESS+CONTRACT-INTEGRITY-HARDEN
