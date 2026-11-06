@@ -554,7 +554,35 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Offline bounded Track A resume check (FCLR-NEXT-095 / 127 G1)")
     ap.add_argument("--admissible-manifest", required=False, default=None, dest="admissible_manifest",
                     help="127 G1: candidate Ironflow month manifest JSON for named admissible-seam fail-closed check (manifest-only, no network/no parquet/no outcomes)")
-    args = ap.parse_args(argv)
+    # G3/134: argparse contract violations (unknown flags, malformed CLI args) must
+    # refuse as parseable JSON, never as an uncaught usage/traceback exit. --help is
+    # allowed to exit 0 normally; any other SystemExit is a fail-closed JSON refusal.
+    try:
+        args = ap.parse_args(argv)
+    except SystemExit as se:
+        code = getattr(se, "code", 2)
+        if code == 0:
+            return 0
+        out = {
+            "script": "tracka_resume_check",
+            "gate_script": "tracka_resume_check",
+            "pass": False,
+            "status": "BLOCKED",
+            "reason": "argparse contract violation (fail-closed, no outcomes): invalid CLI arguments",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "reason_code_detail": "ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED",
+            "fail_closed_order": "drift_preflight->admissible_seam",
+            "outcomes_inspected": False,
+            "network": False,
+            "writes_real_research_state": False,
+            "canonical_outputs_mutated": False,
+            "reads_outcomes": False,
+            "reads_parquet": False,
+            "elapsed_s": 0.0,
+            "exit_code": int(code) if isinstance(code, int) else 2,
+        }
+        print(json.dumps(out, indent=2, sort_keys=True))
+        return 1
     try:
         if args.admissible_manifest is not None:
             out = check(admissible_candidate_path=args.admissible_manifest)

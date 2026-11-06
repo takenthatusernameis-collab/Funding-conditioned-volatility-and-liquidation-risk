@@ -280,6 +280,62 @@ class Test132G3CLIRefusalSchemaStability(unittest.TestCase):
         self.assertFalse(seam.get("pass", True))
         self.assertIsInstance(seam.get("failures"), list)
 
+    def test_cli_argparse_contract_violation_refuses_as_json_all_clis(self):
+        # G3/134: argparse contract violations (unknown flags, bad --output-dir) must
+        # refuse as parseable JSON on every Track A CLI, never as an uncaught
+        # usage/traceback exit. --help is the only allowed exit-0 non-JSON path.
+        REQ = {"status", "reason_code", "outcomes_inspected", "network",
+               "writes_real_research_state", "canonical_outputs_mutated",
+               "reads_parquet", "reads_outcomes", "fail_closed_order"}
+        cases = [
+            (["scripts/tracka_resume_gate.py", "--bogus", "--json"], "tracka_resume_gate",
+             "drift_preflight->manifest_prereg"),
+            (["scripts/tracka_resume_check.py", "--bogus"], "tracka_resume_check",
+             "drift_preflight->admissible_seam"),
+            (["scripts/tracka_operator_report.py", "--bogus", "--json"], "tracka_operator_report",
+             "drift_preflight->gate_decision->probe_invariant_state"),
+            (["scripts/tracka_operator_report.py", "--output-dir", "/nonexistent/zzz", "--json"],
+             "tracka_operator_report", "drift_preflight->gate_decision->probe_invariant_state"),
+        ]
+        for cmd, script, order in cases:
+            r = self._run([sys.executable] + cmd)
+            self.assertNotEqual(r.returncode, 0, f"{cmd}: {r.stdout}")
+            self.assertNotIn("Traceback", r.stderr, f"{cmd}: {r.stderr}")
+            self.assertNotIn("usage:", r.stdout, f"{cmd}: {r.stdout}")
+            d = json.loads(r.stdout)
+            for k in REQ:
+                self.assertIn(k, d, f"{cmd} missing {k}: {d}")
+            # gate uses gate_script; check/operator use script — accept either.
+            self.assertIn(d.get("script") or d.get("gate_script"), (script, None), f"{cmd}: {d}")
+            self.assertEqual(d.get("status"), "BLOCKED", f"{cmd}: {d}")
+            self.assertEqual(d.get("reason_code"), BLOCKED_RC, f"{cmd}: {d}")
+            self.assertEqual(d.get("reason_code_detail"), "ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED", f"{cmd}: {d}")
+            self.assertEqual(d.get("fail_closed_order"), order, f"{cmd}: {d}")
+            for k in ("outcomes_inspected", "canonical_outputs_mutated", "network",
+                      "writes_real_research_state", "reads_parquet", "reads_outcomes"):
+                self.assertIs(d.get(k), False, f"{cmd} {k}: {d.get(k)}")
+        # --help must still exit 0 (the only non-refusal exit).
+        r = self._run([sys.executable, "scripts/tracka_operator_report.py", "--help"])
+        self.assertEqual(r.returncode, 0)
+
+    def test_operator_cli_bad_output_dir_refuses_as_json(self):
+        # G3/134: bad --output-dir on the operator CLI (previously a traceback) now
+        # refuses as parseable JSON with the stable seam-wired refusal shape.
+        r = self._run([sys.executable, "scripts/tracka_operator_report.py",
+                       "--output-dir", "/nonexistent/zzz", "--json"])
+        self.assertNotEqual(r.returncode, 0)
+        self.assertNotIn("Traceback", r.stderr)
+        d = json.loads(r.stdout)
+        self._assert_refusal_shape(d)
+        self.assertEqual(d.get("reason_code_detail"), "ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED", d)
+
+    def test_canonical_outputs_not_mutated_on_argparse_refusal(self):
+        before = _snap([FRONTIER, RUN_MANIFEST, EVAL_FCLR010])
+        self._run([sys.executable, "scripts/tracka_resume_gate.py", "--bogus", "--json"])
+        self._run([sys.executable, "scripts/tracka_resume_check.py", "--bogus"])
+        self._run([sys.executable, "scripts/tracka_operator_report.py", "--bogus", "--json"])
+        _unchanged([FRONTIER, RUN_MANIFEST, EVAL_FCLR010], before)
+
     def test_canonical_outputs_not_mutated_on_refusal(self):
         before = _snap([FRONTIER, RUN_MANIFEST, EVAL_FCLR010])
         with tempfile.NamedTemporaryFile(suffix=".json", delete=False, mode="w") as f:

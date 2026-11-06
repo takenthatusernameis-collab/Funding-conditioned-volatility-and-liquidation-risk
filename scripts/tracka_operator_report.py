@@ -35,7 +35,33 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv=None) -> int:
-    args = build_parser().parse_args(argv)
+    # G3/134: argparse contract violations (bad --output-dir, unknown flags, malformed
+    # paths) must refuse as parseable JSON, never as an uncaught traceback. --help is
+    # allowed to exit 0 normally; any other SystemExit is a fail-closed JSON refusal.
+    try:
+        args = build_parser().parse_args(argv)
+    except SystemExit as se:
+        code = getattr(se, "code", 2)
+        if code == 0:
+            return 0
+        report = {
+            "script": "tracka_operator_report",
+            "gate_script": "tracka_operator_report",
+            "status": "BLOCKED",
+            "reason": "argparse contract violation (fail-closed, no outcomes): invalid CLI arguments",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "reason_code_detail": "ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED",
+            "fail_closed_order": "drift_preflight->gate_decision->probe_invariant_state",
+            "outcomes_inspected": False,
+            "network": False,
+            "writes_real_research_state": False,
+            "canonical_outputs_mutated": False,
+            "reads_parquet": False,
+            "reads_outcomes": False,
+            "exit_code": int(code) if isinstance(code, int) else 2,
+        }
+        print(json.dumps(report, indent=2, sort_keys=True))
+        return 1
     rs = Path(args.research_state_dir) if args.research_state_dir else None
     hrr = Path(args.harness_repo_root) if args.harness_repo_root else None
     try:

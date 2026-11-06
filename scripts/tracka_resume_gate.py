@@ -211,7 +211,27 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv=None) -> int:
-    args = build_parser().parse_args(argv)
+    # G3/134: argparse contract violations (unknown flags, malformed CLI args) must
+    # refuse as parseable JSON, never as an uncaught usage/traceback exit. --help is
+    # allowed to exit 0 normally; any other SystemExit is a fail-closed JSON refusal.
+    try:
+        args = build_parser().parse_args(argv)
+    except SystemExit as se:
+        code = getattr(se, "code", 2)
+        if code == 0:
+            return 0
+        print(json.dumps({"status": "BLOCKED",
+                          "reason": "argparse contract violation (fail-closed, no outcomes): invalid CLI arguments",
+                          "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+                          "reason_code_detail": "ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED",
+                          "fail_closed_order": "drift_preflight->manifest_prereg",
+                          "outcomes_inspected": False, "network": False,
+                          "writes_real_research_state": False,
+                          "canonical_outputs_mutated": False, "reads_parquet": False,
+                          "reads_outcomes": False, "gate_script": "tracka_resume_gate",
+                          "script": "tracka_resume_gate",
+                          "drift_preflight": None, "exit_code": int(code) if isinstance(code, int) else 2}))
+        return 1
     # 132 G3: resolve output_dir fail-closed before decide(); a pre-existing regular
     # file (bad temp-path edge case) must refuse as JSON, never traceback.
     try:

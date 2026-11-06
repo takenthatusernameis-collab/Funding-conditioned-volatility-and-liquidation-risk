@@ -66,6 +66,50 @@ class TestOperatorCLIEntrypoint105(unittest.TestCase):
         self.assertFalse(data["network"])
         self.assertFalse(data["writes_real_research_state"])
 
+    def test_cli_argparse_contract_violation_refuses_as_json(self):
+        # G3/134: malformed --output-dir / unknown flags must NOT traceback; must emit
+        # parseable JSON refusal, fail-closed, exit != 0, no outcomes/parquet inspection.
+        for argv in (["--output-dir", "/nonexistent/zzz", "--json"],
+                     ["--bogus-flag", "--json"],
+                     ["--json", "--no-such-opt"]):
+            r = subprocess.run([sys.executable, "scripts/tracka_operator_report.py"] + argv,
+                               capture_output=True, text=True, cwd=str(REAL))
+            self.assertNotEqual(r.returncode, 0, f"argv={argv}: {r.stdout}")
+            self.assertNotIn("Traceback", r.stderr, f"argv={argv}: {r.stderr}")
+            data = json.loads(r.stdout)
+            self.assertEqual(data["status"], "BLOCKED", f"argv={argv}: {data}")
+            self.assertEqual(data["reason_code"], "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS", f"argv={argv}: {data}")
+            self.assertEqual(data["reason_code_detail"], "ARGPARSE_CONTRACT_VIOLATION_FAIL_CLOSED", f"argv={argv}: {data}")
+            self.assertEqual(data["fail_closed_order"], "drift_preflight->gate_decision->probe_invariant_state", f"argv={argv}: {data}")
+            self.assertFalse(data["reads_parquet"], f"argv={argv}: {data}")
+            self.assertFalse(data["reads_outcomes"], f"argv={argv}: {data}")
+            self.assertFalse(data["outcomes_inspected"], f"argv={argv}: {data}")
+            self.assertFalse(data["canonical_outputs_mutated"], f"argv={argv}: {data}")
+            self.assertFalse(data["network"], f"argv={argv}: {data}")
+            self.assertFalse(data["writes_real_research_state"], f"argv={argv}: {data}")
+
+    def test_cli_malformed_admissible_manifest_refuses_as_json(self):
+        # G3/134: malformed admissible manifest must refuse as parseable JSON at the
+        # operator level (nested gate_decision carries the seam reason code), never traceback.
+        bad = json.dumps({"wrong": "shape", "missing": "required_fields"})
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            f.write(bad); path = f.name
+        try:
+            r = subprocess.run([sys.executable, "scripts/tracka_operator_report.py",
+                                "--admissible-manifest", path, "--json"],
+                               capture_output=True, text=True, cwd=str(REAL))
+            self.assertNotEqual(r.returncode, 0)
+            self.assertNotIn("Traceback", r.stderr)
+            data = json.loads(r.stdout)
+            gd = data.get("gate_decision") or {}
+            self.assertEqual(gd.get("status"), "BLOCKED")
+            self.assertEqual(gd.get("reason_code"), "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG")
+            self.assertFalse(gd.get("reads_parquet", True))
+            self.assertFalse(gd.get("reads_outcomes", True))
+            self.assertFalse(gd.get("outcomes_inspected", True))
+        finally:
+            os.unlink(path)
+
     def test_named_probe_runtime_guard_in_resume_check_real_repo(self):
         # Named probe_invariant_runtime guard wired into run() on the real repo (fail-closed).
         r = rc.run(repo_root=REAL, research_state_dir=REAL/'research_state')
