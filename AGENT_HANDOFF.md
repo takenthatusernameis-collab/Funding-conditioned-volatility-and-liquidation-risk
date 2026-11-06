@@ -58,19 +58,17 @@ Everything else is noise until Gate 3 is satisfied.
 ---
 
 ## NEXT SINGLE TASK (START HERE - DO NOT DEVIATE)
-**TASK:** `PHASE 0.1 - Inventory + Sample Extraction + Fixture Test`
+Timestamp: 2026-11-06T21:55:13Z
+**TASK:** `PHASE 2.0 - Run RV-only baseline gate (BTC/ETH/SOL/XRP, Jan-Mar 2024)`
 
 **IMMEDIATE ACTIONS:**
-1. Run inventory of all `*.zip` at repo root → write `research_state/data_inventory.json`
-2. Extract 1 day of klines + funding for BTCUSDT and ETHUSDT into `data/raw/`
-3. Create `data/raw/` if missing (add to `.gitignore` if not present)
-4. Write `research_state/data_source_registry.json` entries for those extractions (tested, unauthenticated, coverage)
-5. Add `tests/test_timestamp_parsing.py` that loads fixtures and asserts normalized UTC timestamps
-6. Run the test - if it passes, you've unblocked data loading
+1. Run `scripts/run_rv_baseline.py` (or `python -m scripts.run_rv_baseline`) end-to-end on extracted universe.
+2. Compute QLIKE (primary), MAE/RMSE on log/level RV, block-aware CIs where feasible.
+3. Write full `research_state/evaluation_summary.md` with sample sizes, coverage by asset/period, exclusions, metrics, CIs, sanity checks.
+4. Update `research_state/run_manifest.json` with git SHA, timestamps, config, data hashes, counts, versions, status=rv_baseline_complete.
+5. Update `research_state/leakage_audit.md` verifying train-only normalization, purge/embargo.
 
-**SUCCESS CRITERIA:** Can load extracted samples into DataFrames with normalized UTC timestamps, column semantics known, fixtures exist, inventory written. No modeling yet.
-
----
+**SUCCESS CRITERIA:** RV-only baseline metrics recorded; funding ablations remain blocked until this gate passes.
 
 ## CONSTRAINTS (NON-NEGOTIABLE)
 - **NO TRADING**: No live/paper trading, orders, API keys, credentials, paid data
