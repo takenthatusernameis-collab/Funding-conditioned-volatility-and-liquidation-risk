@@ -7,6 +7,8 @@ so the experiment is restartable without re-reading 2.17M raw rows.
 FCLR-NEXT-112: routed through guarded_execute contract. No direct parquet/outcome
 reads on blocked branches. The actual ironflow parquet load is an explicit
 outcome_loader invoked ONLY after guarded_execute returns READY_FROZEN.
+FCLR-NEXT-115 (G1): build() machine-refuses without an explicit outcome_loader;
+no direct parquet read exists outside the guarded contract.
 
 Labels only. Features are computed later from label history (decision-time, causal).
 Cross-track firewall: Hyperliquid native perps ONLY. No Binance data.
@@ -21,6 +23,10 @@ from typing import Callable, Dict, Optional
 
 import numpy as np
 import pandas as pd
+
+# Guarded-read refusal (machine-refuse; no implicit parquet read).
+class GuardedReadRefused(RuntimeError):
+    pass
 
 REPO = Path(__file__).resolve().parents[1]
 IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
@@ -96,18 +102,19 @@ def _load_coupled_outcomes(data_path: Path, context: Optional[Dict] = None) -> D
 def build(force: bool = False, outcome_loader: Optional[Callable] = None) -> pd.DataFrame:
     """Build coupled panel.
 
-    If outcome_loader is supplied (guarded READY_FROZEN path), it is used to
-    load/construct the panel data. Otherwise reads from cache only (no direct
-    parquet reads on non-guarded paths).
+    FCLR-NEXT-115 (G1): machine-refuses unless an explicit outcome_loader is
+    supplied (the guarded READY_FROZEN contract). No direct parquet read exists
+    outside the guarded contract — even when a cache file is present.
     """
-    if outcome_loader is not None:
-        loaded = outcome_loader(CACHE, {"force": force})
-        if loaded.get("panel_cached"):
-            return pd.read_parquet(CACHE)
+    if outcome_loader is None:
+        raise GuardedReadRefused(
+            "coupled_build_panel.build refused: explicit outcome_loader required "
+            "(guarded READY_FROZEN contract). No direct parquet read outside guarded contract."
+        )
+    loaded = outcome_loader(CACHE, {"force": force})
+    if loaded.get("panel_cached"):
         return pd.read_parquet(CACHE)
-    if CACHE.exists():
-        return pd.read_parquet(CACHE)
-    raise RuntimeError("coupled_build_panel: no cached panel and no explicit outcome_loader; refused outside guarded contract")
+    return pd.read_parquet(CACHE)
 
 
 def main():

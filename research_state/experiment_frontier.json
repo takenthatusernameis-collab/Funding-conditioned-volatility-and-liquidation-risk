@@ -339,7 +339,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-115",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-116",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -500,5 +500,82 @@
     "operator_cli_exit_code": 0,
     "research_state_mdjson_root": 142,
     "ironflow_probe_files": 2
+  },
+  "artifact_churn_114": {
+    "timestamp_utc": "20261106T021700Z",
+    "research_state_mdjson_root": 142,
+    "ironflow_probe_files": 2,
+    "tests_total": 402,
+    "tests_before_113": 390,
+    "tests_after_114": 402,
+    "tests_delta_114": 12,
+    "resume_check_pass": true,
+    "resume_check_nchecks": 17,
+    "operator_cli_pass": true,
+    "operator_cli_exit_code": 0,
+    "src_method_level_reads_before": 2,
+    "src_method_level_reads_after_unguarded": 0,
+    "src_modules_method_reads_guarded_after": 1,
+    "tracka_adjacent_guarded": 2,
+    "tracka_adjacent_excluded_track_cb": 4,
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "artifact_churn_115": {
+    "timestamp_utc": "20261106T031300Z",
+    "research_state_mdjson_root": 142,
+    "ironflow_probe_files": 2,
+    "tests_total": 418,
+    "tests_before_114": 402,
+    "tests_after_115": 418,
+    "tests_delta_115": 16,
+    "resume_check_pass": true,
+    "resume_check_nchecks": 17,
+    "operator_cli_pass": true,
+    "operator_cli_exit_code": 0,
+    "g1_coupled_build_direct_parquet_outside_loader_before": 1,
+    "g1_coupled_build_direct_parquet_outside_loader_after": 0,
+    "g1_build_refuses_without_loader": true,
+    "g1_callers_routed_through_explicit_loader": [
+      "coupled_robust_eval.py",
+      "overlay_tracka_execute.py",
+      "overlay_quick.py"
+    ],
+    "g2_run_liqmicro_blocked_canonical_mutation_asserted": true,
+    "g2_run_liqmicro_blocked_frontier_mutation_asserted": true,
+    "g2_run_liqmicro_blocked_pipeline_never_called": true,
+    "g2_run_liqmicro_ready_frozen_loader_once_pipeline_runs": true,
+    "g3_harness_callers_classified": 19,
+    "g3_unclassified_harness_callers": 0,
+    "g3_registry_file": "tests/test_tracka_hardening_115.py::HARNESS_CALLER_REGISTRY",
+    "changed_files": [
+      "scripts/coupled_build_panel.py",
+      "scripts/coupled_robust_eval.py",
+      "scripts/overlay_quick.py",
+      "scripts/overlay_tracka_execute.py",
+      "tests/test_tracka_hardening_115.py",
+      "research_state/experiment_frontier.json",
+      "AGENT_HANDOFF.md"
+    ],
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "fclr_next_115": {
+    "task_id": "FCLR-NEXT-115",
+    "status": "COMPLETE",
+    "completed_utc": "20261106T031300Z",
+    "g1": "coupled_build_panel.build() GuardedReadRefused without outcome_loader; no pd.read_parquet outside guarded loader; coupled_robust_eval/overlay_tracka_execute/overlay_quick routed through explicit coupled panel loader",
+    "g2": "run_liqmicro/run_liqmicro_v2 blocked matrix+main(): loader/pipeline never run, canonical outputs/frontier not mutated; READY_FROZEN loader-once->pipeline runs (tmp/mocked)",
+    "g3": "19 harness callers/outcome-adjacent scripts classified (guarded_tracka, harness_core, resume_gate_infra, prereg_utility, raw_fetch_monitor_provenance) with reason+test",
+    "uncovered_gaps_for_116": [
+      "overlay_quick.py / overlay_tracka_execute.py / coupled_robust_eval.py / fclr010_execute.py write canonical evaluation summaries and some mutate experiment_frontier.json on READY_FROZEN paths, but no module-level blocked-branch test asserts main() never writes those canonical outputs or mutates frontier when guarded_execute returns BLOCKED (add fail-closed no-canonical-mutation matrix for these READY-writing Track A scripts).",
+      "liqmicro_audit.py and fclr010_coverage_audit.py are guarded (loader after READY) but their main() blocked-branch no-canonical-output/no-real-research_state-write behavior is not asserted by a dedicated 115-style matrix (add explicit blocked main() assertions).",
+      "h004_fclr005_pipeline.py and any other scripts reading liquidation/outcome parquet/csv or producing liquidation-risk claims without FCLR010Harness import are not in HARNESS_CALLER_REGISTRY; audit+classify all remaining scripts/* for liquidation-risk outcome reads/claim production (guarded/refused vs explicitly out-of-scope with reason) and add source+blocked-behavior tests.",
+      "run_liqmicro_v1 mutates experiment_frontier.json only in READY _run_pipeline (gate-protected) \u2014 acceptable; confirm no other blocked-path frontier mutation surfaces remain untested among classified guarded_tracka scripts."
+    ]
   }
 }

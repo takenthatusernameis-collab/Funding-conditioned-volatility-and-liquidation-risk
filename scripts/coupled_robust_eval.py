@@ -247,13 +247,21 @@ def block_bootstrap_compare(rows_a_b1, rows_a_c, n_boot=2000, seed=12345):
     }
 
 
+def _load_coupled_panel_outcomes(data_path: Path, context: Optional[Dict] = None) -> Dict:
+    """Explicit outcome loader: build/load coupled panel only after READY_FROZEN (FCLR-NEXT-115 G1)."""
+    from scripts import coupled_build_panel
+    panel = coupled_build_panel.build(force=bool((context or {}).get("force", False)),
+                                      outcome_loader=coupled_build_panel._load_coupled_outcomes)
+    return {"panel": panel}
+
+
 def main():
     start_time = datetime.now(timezone.utc)
     print(f"=== FCLR-COUPLED-ROBUST START {dt_to_iso_z(start_time)} ===", flush=True)
 
-    # FCLR-NEXT-112: gate through guarded_execute before any parquet/outcome read
+    # FCLR-NEXT-112/115: gate through guarded_execute before any parquet/outcome read
     # or canonical output mutation. Blocked branches refuse before touching COUPLED_CACHE
-    # or any research_state output.
+    # or any research_state output. Explicit outcome_loader required (no direct parquet).
     from scripts.fclr010_guarded_entry import guarded_execute, refusal_payload
 
     guard = guarded_execute(
@@ -263,7 +271,8 @@ def main():
         source_manifest=None,
         admissible_manifest=None,
         admissible_manifest_path=None,
-        outcome_loader=None,
+        outcome_loader=_load_coupled_panel_outcomes,
+        loader_context={"force": False},
         allow_default_loader=False,
     )
     if guard.get("status") != "READY_FROZEN":
@@ -285,13 +294,12 @@ def main():
     test_start = splits['test']['start']
     test_end = splits['test']['end']
 
-    # load panel
-    if COUPLED_CACHE.exists():
-        panel = pd.read_parquet(COUPLED_CACHE)
-    else:
-        # build it
+    # load panel via explicit guarded loader result (FCLR-NEXT-115 G1: no direct parquet)
+    loaded = guard.get("outcomes_loaded") or {}
+    panel = loaded.get("panel")
+    if panel is None:
         from scripts import coupled_build_panel
-        panel = coupled_build_panel.build(force=True)
+        panel = coupled_build_panel.build(force=False, outcome_loader=coupled_build_panel._load_coupled_outcomes)
 
     panel['hour'] = pd.to_datetime(panel['hour'])
     if panel['hour'].dt.tz is None:
