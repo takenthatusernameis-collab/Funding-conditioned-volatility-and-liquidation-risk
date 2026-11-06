@@ -2,7 +2,7 @@
   "registry_version": "1.1",
   "generated": "20261106T015401Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "VERIFIED 20261106T015401Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest NO TRIGGER; IRONFLOW PROBING EXHAUSTED 90+). 110 complete: guarded execute_ready_data_load + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED (108/110 codes/order preserved). 111 COMPLETE: 2 entrypoints wired, +8 tests (363->371), operator exit 0. 112 COMPLETE: 8 scripts/*.py entrypoints wired for direct parquet/outcome reads, direct-parquet-reads 6->0, tests/test_tracka_hardening_112.py (+9), full suite 380 OK. 113 COMPLETE: non-parquet data-access audit of all scripts/*.py real execution entrypoints + src/ package prologues; dead `import requests` removed from scripts/fclr010_execute.py; unused top-level `import pyarrow.parquet as pq` removed from src/analysis/liqmicro/ingest.py prologue; audited entrypoint non-parquet data-access imports 1->0; src prologue data-access imports 1->0; 0 unwired scripts/*.py with def main + parquet/outcome reads (source audit); tests/test_tracka_hardening_113.py (+10 fail-closed matrix, source-based, tmp-isolated, no network/parquet/outcome/real research_state writes); full suite 371->390 OK (+19 vs 371 baseline; 380->390 vs 112), resume_check 17 PASS, operator exit 0, root md+json 142, probes 2. 114 NEXT: wire/guard src/analysis/liqmicro/ingest.py lazy pd.read_parquet/open() reads behind guarded contract or explicit refusal; extend matrix to method-level src data access; classify any remaining Track-A-adjacent scripts that read JSON/CSV outcomes (e.g. run_liqmicro family, fclr010_harness callers) with explicit guarded/refused scope.",
+  "current_status": "VERIFIED 20261106T035500Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; IRONFLOW PROBING EXHAUSTED 90+; probes==2). 116 COMPLETE: G1 overlay*/coupled_robust_eval/fclr010_execute blocked main no-canonical/frontier/manifest mutation asserted; G2 liqmicro_audit/fclr010_coverage_audit blocked mains asserted; G3 remaining liquidation/risk scripts classified incl h004_fclr005_pipeline out-of-scope historical pilot (not FCLR010 guarded seam); G4 guarded blocked frontier surfaces reviewed. tests 418->436 (+18) OK, resume 17 PASS, operator exit 0, root 142, probes 2.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap. 113 delivered measurable Track A hardening (non-parquet audit + source-based tests) while blocked; no trigger, no status-only churn.",
   "frontier": [
     {
@@ -11,7 +11,7 @@
       "task": "FCLR-NEXT-113: NON-PARQUET DATA-ACCESS AUDIT (scripts/*.py entrypoints + src/ prologues) + FAIL-CLOSED SOURCE MATRIX (NO COAST)",
       "status": "COMPLETE",
       "acceptance": "All audited Track A execution entrypoints have 0 non-parquet data-access imports (requests/urllib/httpx/aiohttp/read_csv/json/excel/sqlite/duckdb) outside guarded loaders; src/ prologues have 0 data-access imports (incl. pyarrow/pd.read_parquet/pq.read_table); 0 unwired scripts/*.py with def main + parquet/outcome reads (source audit); tests/test_tracka_hardening_113.py source-based matrix green; full suite 390 OK; stable 108/110/111/112 semantics preserved; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
@@ -26,7 +26,7 @@
       "task": "FCLR-NEXT-114: SRC METHOD-LEVEL DATA-READ GUARDING + TRACK-A-ADJACENT SCRIPT SCOPE/REFUSAL MATRIX (STRICTER, NO COAST)",
       "status": "COMPLETE 20261106T021700Z",
       "acceptance": "src/analysis/liqmicro/ingest.py lazy pd.read_parquet()/open() reads wired behind guarded contract or explicit refusal with tmp-isolated tests proving no implicit load on blocked/misconfigured branches; classify Track-A-adjacent scripts that read outcome JSON/CSV (run_liqmicro*, fclr010_harness* callers, any producing liquidation-risk claims) with guarded/refused scope or explicit Track-A exclusion documented + tested; full suite >=390 green; stable reason codes/order preserved; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
@@ -52,7 +52,7 @@
     },
     {
       "rank": 0,
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z",
+      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) — EXECUTED 2026-11-04T00:52Z",
       "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
       "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
       "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
@@ -69,7 +69,7 @@
       "task": "FCLR-NEXT-111: WIRE GUARDED DATA-LOAD INTO REAL EXECUTION ENTRYPOINTS + E2E TRIGGER-ARTIFACT MATRIX (NO COAST)",
       "status": "COMPLETE",
       "acceptance": "Real entrypoints fclr010_execute.py/main and fclr010_execute_fast.py/main enforce guarded seam+prereg+manifest before any parquet/outcome/canonical write; tests/test_tracka_hardening_111.py E2E matrix green; full suite >=364 green; stable 108/110 semantics preserved; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
@@ -84,7 +84,7 @@
       "task": "FCLR-NEXT-112: ENTRYPOINT AUDIT + WIRE ALL REMAINING SCRIPTS/*.py DIRECT-PARQUET READS THROUGH GUARDED CONTRACT + FAIL-CLOSED MATRIX TESTS (NO COAST)",
       "status": "COMPLETE",
       "acceptance": "All scripts/*.py with direct parquet/outcome reads outside fclr010_guarded_entry._default_outcome_loader or fclr010_execute._load_outcomes wired through guarded_execute or made pure refusal: coupled_build_panel.py:main, fclr010_coverage_audit.py:main, liqmicro_audit.py:main, overlay_tracka_execute.py:main, overlay_quick.py:main, coupled_robust_eval.py:main (6 newly wired); fclr010_execute.py:main + fclr010_execute_fast.py:main already wired (111). Direct-parquet-reads found: 6 before / 0 after. Entrypoints wired: 2 before / 8 after. tests/test_tracka_hardening_112.py (+9 fail-closed matrix tests, tmp-isolated, no network/parquet/outcome/real research_state writes). Full suite 380 OK. Stable 108/110/111 reason codes/order/fields preserved. Root md+json 142 (<=163), probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
       "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
       "resume_triggers": [
         "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
@@ -95,7 +95,7 @@
     },
     {
       "rank": 0,
-      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL \u2014 forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
+      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL — forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes.",
       "prerequisite": "tests/test_fclr010_harness.py passes; fclr010_harness.py pre_register_forward_experiment() + evaluate_forward() hardened; run_manifest.json experiments map updated; consolidated + synthesis artifacts written.",
       "acceptance": "experiment_frontier.json contains FCLR-012; track_a_fclr010_consolidated.md and funding_incremental_synthesis_20261103T115630Z.md and forward_campaign_fclr012_prereg.md present; AGENT_HANDOFF.md single durable handoff with FORWARD CAMPAIGN; pytest green.",
       "blockers": "Forward runs blocked unless NEW admissible unauthenticated data appears (new ironflow monthly parquet >2026-10-31 for Track A; new unsealed 2026 Binance panel beyond 2026-11-02 for volatility). Do not relax thresholds or re-run sealed panels.",
@@ -339,7 +339,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-116",
+  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-117",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -366,7 +366,7 @@
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md"
   },
-  "last_updated": "2026-11-06T02:17:00Z",
+  "last_updated": "20261106T035500Z",
   "timestamp": "20261106T015401Z",
   "last_checked": "2026-11-06T01:54:01Z",
   "last_checked_utc": "2026-11-06T02:17:00Z",
@@ -575,7 +575,58 @@
       "overlay_quick.py / overlay_tracka_execute.py / coupled_robust_eval.py / fclr010_execute.py write canonical evaluation summaries and some mutate experiment_frontier.json on READY_FROZEN paths, but no module-level blocked-branch test asserts main() never writes those canonical outputs or mutates frontier when guarded_execute returns BLOCKED (add fail-closed no-canonical-mutation matrix for these READY-writing Track A scripts).",
       "liqmicro_audit.py and fclr010_coverage_audit.py are guarded (loader after READY) but their main() blocked-branch no-canonical-output/no-real-research_state-write behavior is not asserted by a dedicated 115-style matrix (add explicit blocked main() assertions).",
       "h004_fclr005_pipeline.py and any other scripts reading liquidation/outcome parquet/csv or producing liquidation-risk claims without FCLR010Harness import are not in HARNESS_CALLER_REGISTRY; audit+classify all remaining scripts/* for liquidation-risk outcome reads/claim production (guarded/refused vs explicitly out-of-scope with reason) and add source+blocked-behavior tests.",
-      "run_liqmicro_v1 mutates experiment_frontier.json only in READY _run_pipeline (gate-protected) \u2014 acceptable; confirm no other blocked-path frontier mutation surfaces remain untested among classified guarded_tracka scripts."
+      "run_liqmicro_v1 mutates experiment_frontier.json only in READY _run_pipeline (gate-protected) — acceptable; confirm no other blocked-path frontier mutation surfaces remain untested among classified guarded_tracka scripts."
+    ]
+  },
+  "updated_at": "20261106T035500Z",
+  "artifact_churn_116": {
+    "timestamp_utc": "20261106T035500Z",
+    "research_state_mdjson_root": 142,
+    "ironflow_probe_files": 2,
+    "tests_total": 436,
+    "tests_before_115": 418,
+    "tests_after_116": 436,
+    "tests_delta_116": 18,
+    "resume_check_pass": true,
+    "resume_check_nchecks": 17,
+    "operator_cli_pass": true,
+    "operator_cli_exit_code": 0,
+    "g1_ready_writing_blocked_main_no_canonical_frontier_manifest_asserted": [
+      "overlay_quick.py",
+      "overlay_tracka_execute.py",
+      "coupled_robust_eval.py",
+      "fclr010_execute.py"
+    ],
+    "g2_audit_blocked_main_no_loader_no_canonical_asserted": [
+      "liqmicro_audit.py",
+      "fclr010_coverage_audit.py"
+    ],
+    "g3_extended_classified": 40,
+    "g3_h004_fclr005_pipeline_class": "out_of_scope_historical_tracka_pilot (Bybit 2026 census, fixed local path; NOT Hyperliquid ironflow FCLR010Harness guarded seam; explicit reason, must not conflate with Hyperliquid observed-liquidation gate)",
+    "g4_guarded_blocked_frontier_surfaces_reviewed": true,
+    "changed_files": [
+      "tests/test_tracka_hardening_116.py",
+      "research_state/experiment_frontier.json",
+      "AGENT_HANDOFF.md"
+    ],
+    "no_trigger": true,
+    "data_through": "2026-10",
+    "ironflow_probing_exhausted": true,
+    "bound": 163
+  },
+  "fclr_next_116": {
+    "task_id": "FCLR-NEXT-116",
+    "status": "COMPLETE",
+    "completed_utc": "20261106T035500Z",
+    "g1": "overlay_quick/overlay_tracka_execute/coupled_robust_eval/fclr010_execute blocked guarded_execute->BLOCKED main(): no loader, no canonical summary/frontier/cross-track/run_manifest mutation (tmp snapshot). fclr010_execute canonical writes placed only after READY guards (source+branch-order asserted); read-only manifest/split read may occur before guard in current impl but no canonical mutation.",
+    "g2": "liqmicro_audit/fclr010_coverage_audit blocked main() asserted: no outcome loader, no canonical audit JSON/md mutation, refusal path only.",
+    "g3": "Extended liquidation/risk script classification registry covers 115 callers + remaining risk/outcome/claim scripts (40 total) incl h004_fclr005_pipeline classified out_of_scope_historical_tracka_pilot (Bybit 2026 census, fixed local path, no FCLR010Harness, not Hyperliquid ironflow guarded seam) with explicit reason; Track B modeled != observed; Track C sealed; provenance/fetch/maintenance utilities classified.",
+    "g4": "Guarded Track A ready-writing scripts mutate frontier/cross-track/manifest/summary only on READY paths (source order asserted) or only in gate-protected pipeline (run_liqmicro frontier mutation remains in READY _run_pipeline, 115/116 confirmed). No untested blocked frontier mutation surface identified among classified guarded_tracka* scripts.",
+    "uncovered_gaps_for_117": [
+      "fclr010_execute.py reads run_manifest/splits (LFS-aware) before guarded_execute to build loader context; blocked branches still perform that read-only manifest access and can raise if manifest unavailable/corrupt. Refactor to defer manifest/split context construction behind guard or into a guard-safe/read-only preflight that cannot trigger non-canonical mutation and has explicit blocked-path tests (no real manifest mutation).",
+      "h004_fclr005_pipeline.py (historical Track A pilot, Bybit 2026 census) is out of FCLR010 guarded seam but still reads local liquidation/outcome CSV and can write evaluation_summary_FCLR005.md/run_manifest/hypothesis registries when executed; add explicit execution-guard/refusal or quarantine marker so it cannot be mistaken for Hyperliquid observed-liquidation Track A gate execution (clear script-level guard/marker + test).",
+      "Classify/audit any remaining scripts not in EXTENDED_CLASSIFICATION that produce evaluation_summary* or mutate canonical Track A frontier/manifest outside guarded READY (full scripts/* sweep with machine-readable registry diff vs EXTENDED_CLASSIFICATION) and add blocked-behavior tests where executable.",
+      "run_liqmicro._run_pipeline mutates experiment_frontier.json on READY path (gate-protected). Add explicit READY-only mutation test isolation proving blocked never reaches pipeline (already asserted) and document/optionally gate frontier mutation behind an explicit post-gate writer for clearer auditability."
     ]
   }
 }
