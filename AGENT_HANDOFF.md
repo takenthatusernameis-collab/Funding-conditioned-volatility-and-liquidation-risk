@@ -1,17 +1,17 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 20261106T064312Z
+Timestamp (UTC): 20261106T064345Z
 Handoff ID: FCLR-HANDOFF-20261106T060120Z
-Baseline (prior session): FCLR-NEXT-119 COMPLETE (20261106T045619Z). This session (20261106T055542Z) performed mandatory entry verify, confirmed NO TRIGGER (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted 90+; probes==2), and delivered **FCLR-NEXT-120 measurable hardening (G1-G5)** with tmp-isolated deterministic tests. No new probes/families; no outcomes inspected; no real research_state writes in tests.
+Baseline (prior session): FCLR-NEXT-119 COMPLETE (20261106T045619Z). Prior session (20261106T055542Z) performed mandatory entry verify, confirmed NO TRIGGER (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted 90+; probes==2), and delivered **FCLR-NEXT-120 measurable hardening (G1-G5)** with tmp-isolated deterministic tests. No new probes/families; no outcomes inspected; no real research_state writes in tests.
+This session (20261106T064345Z): entry verify re-confirmed; NO TRIGGER; IRONFLOW PROBING EXHAUSTED (90+ CONFIRMED_ABSENT, data_through=2026-10, 2026-11..2027-02 absent); probes==2; research_state root md+json=143 (<=163). **Bottleneck removed:** absent post-2026-10 Track A data is a hard stop — NO re-probing of absent months; all sessions redirect to dep-light, deterministic FCLR-NEXT-121 G1-G5 hardening (no network/parquet/outcome/real-research_state reads). No new timestamped probe/sweep/scan/wrapper/report families in research_state unless a strict admissible trigger appears (then PREREG before inspecting outcomes; blocker/prereg+result evidence only; root bound preserved). No schedulers/pollers/status files/repeated wrappers/agent-controllers. NO `.github/workflows` changes.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
-Priority: P0 — REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
-Bottlenecks removed/unchanged: tracked pycache/fastpath-cache restored on each git operation (kept clean in index). **Data bottleneck unchanged:** IRONFLOW PROBING EXHAUSTED (90+ CONFIRMED_ABSENT), `data_through=2026-10`, 2026-11..2027-02 absent. **DO NOT re-probe absent months.**
+Priority: P0 — REPO-NAME PRIORITIZED (Track A liquidation risk) + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
 
-## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 20261106T055542Z
+## INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 20261106T064345Z
 **Execute FCLR-NEXT-121.** ONLY active objective. **Heavy working required:** measurable **code+test** hardening when no trigger appears (G1-G5 below). Blocked/no-data claims without measurable hardening delta are noncompliant. No status-only loops. No re-probe absent months. No sealed Track C/B mutation.
 
 TASK ID: FCLR-NEXT-121-HARNESS-REAL-SEAM-GO-MANIFEST-PATH-MINIMAL-FIXTURE-ACCEPTANCE-PROOF + REGISTRY-HEURISTICS-AST/SOURCE-TOKEN-COVERAGE-FOR-ALL-GUARDED-READY-WRITING-ENTRYPOINTS + GUARDED-AUDIT-READY-WRITING-RC/REASON-CODE-STABILITY-MATRIX-EXPANSION + RUN_LIQMICRO_V2-READY-PIPELINE-POST-GATE-WRITE-PATH-ALLOWLIST-GUARD + H004-SANDBOX-ENFORCEMENT-CODE-PATH-NON-TEST-ONLY-AND-ALLOWED-MODE-CENSUS-ABSENT-REFUSAL
 PRIORITY: P0 — LIQUIDATION RISK (Track A) is the ONLY unfinished/active repo objective (Funding-conditioned VOLATILITY Track C sealed/locked).
-TIMESTAMP (UTC): 20261106T055542Z
+TIMESTAMP (UTC): 20261106T064345Z
 ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY OUTPUT. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES IN RESEARCH_STATE UNLESS STRICTLY ADMISSIBLE TRIGGER APPEARS (THEN: PREREG BEFORE INSPECTING OUTCOMES; blocker/prereg+result evidence only, ROOT BOUND PRESERVED). NO SCHEDULERS/POLLERS/STATUS FILES/REPEATED WRAPPERS/AGENT-CONTROLLERS. NO `.github/workflows` CHANGES. NO RE-IRONFLOW-PROBE OF ABSENT MONTHS. Hyperliquid-only for Track A observed-liquidation gate. NEVER conflate observed vs modeled liquidations. No threshold-shopping. Track C/B locked/unsupported.
 
 ### MANDATORY DELIVERABLES (G1-G5, ALL REQUIRED when no trigger)
