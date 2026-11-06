@@ -1,10 +1,66 @@
 {
   "registry_version": "1.1",
-  "generated": "20261106T015401Z",
+  "generated": "20261106T035500Z",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "current_status": "VERIFIED 20261106T035500Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; IRONFLOW PROBING EXHAUSTED 90+; probes==2). 116 COMPLETE: G1 overlay*/coupled_robust_eval/fclr010_execute blocked main no-canonical/frontier/manifest mutation asserted; G2 liqmicro_audit/fclr010_coverage_audit blocked mains asserted; G3 remaining liquidation/risk scripts classified incl h004_fclr005_pipeline out-of-scope historical pilot (not FCLR010 guarded seam); G4 guarded blocked frontier surfaces reviewed. tests 418->436 (+18) OK, resume 17 PASS, operator exit 0, root 142, probes 2.",
+  "current_status": "VERIFIED 20261106T035500Z (read-only entry verify, no trigger): Track C VOLATILITY SEALED/LOCKED forecast gate PASSED. Track B NOT_SUPPORTED. Track A LIQUIDATION RISK = ONLY UNFINISHED/ACTIVE, BLOCKED (Hyperliquid-only; data_through=2026-10; 2026-11..2027-02 absent; IRONFLOW PROBING EXHAUSTED 90+; probes==2). 117 COMPLETE (no trigger): G1 fclr010_execute manifest/split context deferred behind guarded READY outcome loader (blocked main: no pre-guard manifest read, no split print, no canonical mutation); G2 h004_fclr005_pipeline default-refused with H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT (Bybit 2026 historical pilot, NOT Hyperliquid FCLR010 guarded seam), explicit allow flag/env quarantined; G3 full scripts/* registry sweep 82/82 classified in tests (no missing/unclassified/manual-review), risk scripts scope/guard asserted; G4 run_liqmicro frontier mutation extracted to explicit post-gate writer _write_experiment_frontier_ready(), blocked isolation asserted. tests 436->451 (+15) OK, resume 17 PASS, gate pass, operator exit 0, root 142, probes 2.",
   "summary": "Both tracks core to repo name. Track A blocked on ironflow data (monitor-only). Track B mechanism robustly shows funding-conditioning benefit on frozen splits; bottleneck of <3 blocks in FCLR-002 test resolved via FCLR-011 (PASSED) and FCLR-012-V forward replication (INCONCLUSIVE, direction consistent, underpowered). FCLR-012-V was stalled by an ENGINEERING gap (no experiment branch + no prereg), not a data gap. 113 delivered measurable Track A hardening (non-parquet audit + source-based tests) while blocked; no trigger, no status-only churn.",
   "frontier": [
+    {
+      "rank": 0.005,
+      "id": "FCLR-NEXT-117",
+      "task": "FCLR-NEXT-117: FCLR010-EXECUTE DEFER MANIFEST/SPLIT CONTEXT BEHIND GUARD + H004 HISTORICAL-PILOT EXECUTION GUARD/MARKER + FULL SCRIPTS EVAL/CANONICAL-MUTATION REGISTRY SWEEP + RUN-LIQMICRO READY FRONTIER-WRITER AUDITABILITY",
+      "status": "COMPLETE",
+      "acceptance": "fclr010_execute blocked main performs no pre-guard manifest/split read or split print and no canonical mutation (manifest context resolved only inside explicit post-READY outcome loader); h004_fclr005_pipeline default-refused (rc=1, H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT, canonical_outputs_mutated:false, hyperliquid_fclr010_guarded_seam:false, not FCLR010Harness/fclr010_guarded_entry) with explicit allow flag/env quarantine; full scripts/*.py registry 82/82 classified in tests/test_tracka_hardening_117.py (diff fails on missing/unclassified/manual-review) with risk-scope assertions; run_liqmicro frontier mutation via explicit post-gate _write_experiment_frontier_ready() and blocked never reaches pipeline/writer/frontier; full suite 451 OK; resume 17 PASS; gate pass; operator exit 0; root<=163 probes==2.",
+      "blockers": "Data blocked (no trigger, Hyperliquid ironflow 2026-11.. absent; probing exhausted 90+) — NOT a code blocker.",
+      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
+      "resume_triggers": [
+        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path; Hyperliquid-only; modeled!=observed"
+      ],
+      "generated": "20261106T035500Z",
+      "completed": "20261106T035500Z",
+      "delta": {
+        "full_suite_before": 436,
+        "full_suite_after": 451,
+        "delta_tests": "+15 (tests/test_tracka_hardening_117.py)",
+        "resume_check": "17 PASS",
+        "resume_gate": "drift_preflight.pass:true, BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false",
+        "operator": "pass:true exit 0",
+        "root_md_json": 142,
+        "probes": 2,
+        "g1": "fclr010_execute: _load_outcomes_guarded/_frozen_split_context post-READY only; blocked main asserts no _frozen_split_context/_load_json_lfs_aware pre-guard call, no 'Splits:' print, no eval_summary/run_manifest mutation.",
+        "g2": "h004_fclr005_pipeline: H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT=True, H004_HYPERLIQUID_FCLR010_GUARDED_SEAM=False, default main() refuses (rc=1, stable JSON payload, no canonical mutation/network/real RS writes); allow requires --allow-historical-bybit-pilot or FCLR_ALLOW_H004_HISTORICAL_PILOT=1; no FCLR010Harness/fclr010_guarded_entry tokens.",
+        "g3": "scripts/*.py registry sweep 82 scripts classified (guarded_tracka*/harness/resume/prereg/fetch/track_b_modeled/track_c_sealed/maintenance/h004 out-of-scope/aux audit/aux); diff tests enforce coverage+valid classes+no manual-review; eval_summary writers cannot be unclassified_auxiliary.",
+        "g4": "run_liqmicro: _write_experiment_frontier_ready() extracted (post-gate READY pipeline only); blocked main asserts no _run_pipeline/_write_experiment_frontier_ready, no frontier mutation (real RS snapshot).",
+        "changed_files": [
+          "scripts/fclr010_execute.py",
+          "scripts/h004_fclr005_pipeline.py",
+          "scripts/run_liqmicro.py",
+          "tests/test_tracka_hardening_117.py",
+          "research_state/experiment_frontier.json",
+          "AGENT_HANDOFF.md"
+        ],
+        "uncovered_gaps_for_118": [
+          "fclr010_execute post-READY loader path: if manifest unavailable/corrupt/LFS-unmaterialized, _frozen_split_context raises inside explicit loader after guard passed; ensure this yields a controlled refusal payload with no canonical summary/manifest mutation and add tmp-isolated tests (no real RS mutation).",
+          "h004 allowed path (--allow-historical-bybit-pilot / env): can still write evaluation_summary_FCLR005.md, append LIQ_ENUM, write CKPT_PANEL in allowed historical mode; add explicit machine guard that allowed mode cannot target Hyperliquid Track A canonical outputs/frontier/cross-track/run_manifest liquidation gate fields and cannot be invoked from/through FCLR010 guarded seam; add tmp-isolated proof (sandboxed paths).",
+          "G3 registry currently lives in tests/test_tracka_hardening_117.py (static snapshot). Add canonical machine-readable registry artifact (e.g. research_state/tracka_script_scope_registry.json or scripts-emitted read-only check) or a deterministic discovery diff script that fails on drift; reconcile with 116 EXTENDED_CLASSIFICATION and remove duplicate authority risk while preserving root<=163/probes==2.",
+          "run_liqmicro_v2 frontier/canonical mutation parity: confirm _run_pipeline/canonical writes are post-gate only with explicit blocked+ready-branch auditability (parallel to run_liqmicro G4) and add missing assertions if any canonical mutation remains unisolated.",
+          "READY-path non-execution proof gap (cannot run real outcomes while blocked): for guarded_tracka_ready_writing scripts, add manifest/prereg refusal matrix proving no canonical output mutation when guard is not READY (missing prereg, NOGO seam, modeled/proxy, wrong venue) using tmp isolated canonical path overrides where feasible; keep no-network/no-outcome-reads."
+        ]
+      }
+    },
+    {
+      "rank": 0.004,
+      "id": "FCLR-NEXT-118",
+      "task": "FCLR-NEXT-118: FCLR010 POST-GATE MANIFEST-LOAD CONTROLLED REFUSAL + H004 ALLOWED-PATH CANONICAL-TARGET QUARANTINE (SANDBOXED) + CANONICAL SCRIPT-SCOPE REGISTRY/DRIFT CHECK + RUN_LIQMICRO_V2 FRONTIER PARITY + GUARDED READY-WRITING NO-READY REFUSAL MATRIX",
+      "status": "OPEN",
+      "acceptance": "117 uncovered_gaps_for_118 closed with code+tests where refusal/guard is machine-enforceable; full suite >=451 green; stable contracts preserved; root<=163 probes==2; no trigger side effects.",
+      "blockers": "Data blocked (no trigger) — NOT a code blocker.",
+      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
+      "resume_triggers": [
+        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
+      ],
+      "generated": "20261106T035500Z"
+    },
     {
       "rank": 0.01,
       "id": "FCLR-NEXT-113",

@@ -194,11 +194,14 @@ def _load_outcomes(data_path: Path, context: Optional[Dict[str, Any]] = None) ->
     return {"panel": panel, "native": sorted(list(native_set)), "files": files, "data_path": str(data_path)}
 
 
-def main():
-    start_time = datetime.now(timezone.utc)
-    print(f"=== FCLR-010 START {dt_to_iso_z(start_time)} ===", flush=True)
+def _frozen_split_context():
+    """Read frozen FCLR-010 split windows from run_manifest (LFS-aware, read-only).
 
-    # Load splits from manifest (LFS-aware, read-only)
+    Invoked ONLY from the explicit outcome loader, which itself runs ONLY after
+    guarded_execute returns READY_FROZEN. Blocked branches never reach this
+    function and therefore never perform manifest/split reads or print split
+    metadata (FCLR-NEXT-117 G1: defer manifest context behind guard).
+    """
     manifest = FCLR010Harness._load_json_lfs_aware(RUN_MANIFEST)
     splits = manifest.get('split_boundaries_fclr010')
     if not splits or not splits.get('frozen_before_outcomes'):
@@ -206,8 +209,33 @@ def main():
     train = (iso_to_dt(splits['train']['start']), iso_to_dt(splits['train']['end']))
     val = (iso_to_dt(splits['validation']['start']), iso_to_dt(splits['validation']['end']))
     test = (iso_to_dt(splits['test']['start']), iso_to_dt(splits['test']['end']))
-    print(f"Splits: train {dt_to_iso_z(train[0])}..{dt_to_iso_z(train[1])}, val {dt_to_iso_z(val[0])}..{dt_to_iso_z(val[1])}, test {dt_to_iso_z(test[0])}..{dt_to_iso_z(test[1])}", flush=True)
+    return {"splits": splits, "train": train, "val": val, "test": test}
 
+
+def _load_outcomes_guarded(data_path: Path, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Explicit outcome/parquet loader with post-guard split context.
+
+    Runs ONLY after guarded_execute returns READY_FROZEN. Reads frozen splits
+    from the manifest read-only at this point (never on blocked branches), then
+    delegates to the parquet loader. Returned payload includes split metadata so
+    main() can compute evaluation windows without any pre-guard manifest access.
+    """
+    split_ctx = _frozen_split_context()
+    train, val, test = split_ctx["train"], split_ctx["val"], split_ctx["test"]
+    print(f"Splits: train {dt_to_iso_z(train[0])}..{dt_to_iso_z(train[1])}, val {dt_to_iso_z(val[0])}..{dt_to_iso_z(val[1])}, test {dt_to_iso_z(test[0])}..{dt_to_iso_z(test[1])}", flush=True)
+    loaded = _load_outcomes(data_path, {"train": train, "test": test})
+    loaded["split_context"] = split_ctx
+    return loaded
+
+
+def main():
+    start_time = datetime.now(timezone.utc)
+    print(f"=== FCLR-010 START {dt_to_iso_z(start_time)} ===", flush=True)
+
+    # 117 G1: do NOT read manifest/splits or print split metadata before the
+    # guarded seam returns READY_FROZEN. Blocked branches must not require
+    # manifest read/write side effects beyond read-only refusal-safe behavior;
+    # split context is resolved only inside the explicit outcome loader.
     CKPT_DIR.mkdir(parents=True, exist_ok=True)
 
     # 111: single guarded execution contract. The actual ironflow parquet load is an
@@ -222,8 +250,8 @@ def main():
         source_manifest=None,
         admissible_manifest=None,
         admissible_manifest_path=None,
-        outcome_loader=_load_outcomes,
-        loader_context={"train": train, "test": test},
+        outcome_loader=_load_outcomes_guarded,
+        loader_context=None,
         allow_default_loader=False,
     )
     if guard.get("status") != "READY_FROZEN":
@@ -236,6 +264,10 @@ def main():
         print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
         print(f"=== FCLR-010 BLOCKED (no outcomes loaded) {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
         return 1
+
+    split_ctx = loaded.get("split_context") or _frozen_split_context()
+    splits = split_ctx["splits"]
+    train, val, test = split_ctx["train"], split_ctx["val"], split_ctx["test"]
 
     files = loaded["files"]
     print(f"Ironflow files: {files}", flush=True)

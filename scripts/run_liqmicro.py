@@ -159,6 +159,18 @@ def _run_pipeline(raw_df: pd.DataFrame, hourly: pd.DataFrame) -> None:
     summary_path.write_text("\n".join(lines))
     print(f"   Wrote {summary_path}")
 
+    _write_experiment_frontier_ready(any_sig, summary_path)
+
+
+
+
+def _write_experiment_frontier_ready(any_sig: int, summary_path: Path) -> None:
+    """Explicit post-gate frontier mutation (FCLR-NEXT-117 G4 auditability).
+
+    MUST only be called from the READY_FROZEN pipeline path (_run_pipeline), which is
+    reached only after guarded_execute returns READY_FROZEN. Blocked branches must
+    never reach this function and must never mutate experiment_frontier.json.
+    """
     try:
         frontier_path = RESEARCH_STATE / "experiment_frontier.json"
         with open(frontier_path) as f:
@@ -182,7 +194,6 @@ def _run_pipeline(raw_df: pd.DataFrame, hourly: pd.DataFrame) -> None:
         print(f"   Updated experiment_frontier.json")
     except Exception as e:
         print(f"   Error updating frontier: {e}")
-
 
 def main() -> int:
     print("=== FCLR-LIQMICRO-001 EXECUTION ===")

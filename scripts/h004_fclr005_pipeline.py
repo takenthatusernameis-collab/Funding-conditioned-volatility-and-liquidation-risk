@@ -44,6 +44,18 @@ EPS = 1e-12
 BOOTSTRAP_REPLICATES = 1000
 BOOTSTRAP_SEED = SEED + 1
 
+# FCLR-NEXT-117 G2: EXPLICIT OUT-OF-SCOPE / QUARANTINE MARKER
+# This script is a HISTORICAL TRACK A PILOT (Bybit 2026 liquidation census,
+# LIQ local path) + Binance features. It is NOT Hyperliquid ironflow, NOT
+# routed through the guarded FCLR010 execution seam (harness/guarded_entry modules), and NOT an admissible
+# observed-liquidation Track A gate execution for the Hyperliquid-only seam.
+# Modeled != observed; any execution is historical/pilot context only.
+# Default execution is REFUSED to prevent confusion with Hyperliquid Track A.
+H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT = True
+H004_HYPERLIQUID_FCLR010_GUARDED_SEAM = False
+H004_ALLOW_ENV = "FCLR_ALLOW_H004_HISTORICAL_PILOT"
+H004_ALLOW_FLAG = "--allow-historical-bybit-pilot"
+
 
 def ts_to_dt(ts_ms):
     return datetime.fromtimestamp(int(ts_ms) / 1000, tz=timezone.utc)
@@ -366,9 +378,33 @@ def fit_predict(train_rows, test_rows, model, yname):
     return [predict_logistic(w, model_feature_row(r, model)) for r in test_rows]
 
 
+def _h004_refusal(reason="h004_fclr005_pipeline is out-of-scope for Hyperliquid Track A observed-liquidation gate (FCLR010 guarded seam). Historical Bybit 2026 pilot only; modeled/venue context must not be conflated with Hyperliquid observed liquidation gate."):
+    return {
+        "status": "BLOCKED",
+        "script": "h004_fclr005_pipeline",
+        "reason_code": "H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT",
+        "out_of_scope_historical_tracka_pilot": True,
+        "hyperliquid_fclr010_guarded_seam": False,
+        "observed_vs_modeled_conflation": False,
+        "venue": "bybit_historical_pilot_not_hyperliquid_gate",
+        "canonical_outputs_mutated": False,
+        "network": False,
+        "writes_real_research_state": False,
+        "allow_flag": H004_ALLOW_FLAG,
+        "allow_env": H004_ALLOW_ENV,
+        "reason": reason,
+    }
+
+
 def main():
+    import os, sys
+    allowed = (H004_ALLOW_FLAG in sys.argv) or (os.environ.get(H004_ALLOW_ENV) == "1")
+    if not allowed:
+        payload = _h004_refusal()
+        print(json.dumps(payload, indent=2, sort_keys=True), flush=True)
+        return 1
     start_time = datetime.now(timezone.utc)
-    print("FCLR-005 pipeline starting", flush=True)
+    print("FCLR-005 pipeline starting (EXPLICITLY ALLOWED historical Bybit pilot; NOT Hyperliquid FCLR010 guarded seam)", flush=True)
     CKPT_DIR.mkdir(parents=True, exist_ok=True)
 
     # ---- 1. Load Bybit liquidation census (label side) ----
