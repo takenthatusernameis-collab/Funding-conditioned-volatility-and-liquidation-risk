@@ -9,6 +9,7 @@ No network. No writes to real research_state. Runs:
 Prints machine-readable JSON with pass/fail/timing.
 """
 from __future__ import annotations
+import argparse
 import json
 import sys
 import tempfile
@@ -339,6 +340,86 @@ def admissible_seam_check(candidate_path=None, candidate_manifest=None, repo_roo
     return out
 
 
+def check(repo_root: Path = None, research_state_dir: Path = None, admissible_candidate_path=None) -> dict:
+    """127 G1: focused Track A seam + drift check (machine-readable, dep-light).
+
+    Drift preflight runs first (fail-closed). When `admissible_candidate_path` is
+    supplied, the named admissible seam is evaluated manifest-only (no network, no
+    parquet/outcome reads, no real research_state writes) and its stable machine
+    fields are exposed under `admissible_seam`: pass/status/reason_code/failures/
+    month/fail_closed/network/reads_outcomes/reads_parquet. Missing/bad candidate
+    => fail-closed NO-GO with stable reason codes. Never mutates canonical state.
+
+    Returns {"script": "tracka_resume_check.check", "pass": bool, "drift_preflight",
+    "admissible_seam", "network", "writes_real_research_state", "reads_outcomes",
+    "reads_parquet", "elapsed_s"}.
+    """
+    t0 = time.time()
+    root = Path(repo_root) if repo_root is not None else ROOT
+    rs = Path(research_state_dir) if research_state_dir is not None else (root / "research_state")
+    out = {
+        "script": "tracka_resume_check.check",
+        "network": False,
+        "writes_real_research_state": False,
+        "reads_outcomes": False,
+        "reads_parquet": False,
+        "elapsed_s": 0.0,
+    }
+    # Drift preflight first: fail-closed before any seam/manifest decision.
+    try:
+        pre = drift_preflight(root, research_state_dir=rs)
+        out["drift_preflight"] = pre
+        if pre.get("pass") is not True:
+            out["pass"] = False
+            out["status"] = "BLOCKED"
+            out["reason_code"] = "DRIFT_PREFLIGHT_FAIL_BEFORE_SEAM"
+            out["fail_closed_order"] = "drift_preflight->admissible_seam"
+            out["elapsed_s"] = round(time.time() - t0, 6)
+            return out
+    except Exception as e:
+        out["pass"] = False
+        out["status"] = "BLOCKED"
+        out["reason_code"] = "DRIFT_PREFLIGHT_EXCEPTION"
+        out["failures"] = [f"drift_preflight_exception:{repr(e)}"]
+        out["fail_closed_order"] = "drift_preflight->admissible_seam"
+        out["elapsed_s"] = round(time.time() - t0, 6)
+        return out
+    out["drift_preflight_pass"] = True
+    # Admissible seam check (manifest-only, fail-closed; optional candidate).
+    try:
+        asc = admissible_seam_check(candidate_path=admissible_candidate_path, repo_root=root)
+        out["admissible_seam"] = {
+            k: asc.get(k) for k in
+            ("pass", "status", "reason_code", "failures", "month", "fail_closed",
+             "network", "reads_outcomes", "reads_parquet", "candidate_path")
+            if k in asc
+        }
+        out["network"] = asc.get("network", False)
+        out["reads_outcomes"] = asc.get("reads_outcomes", False)
+        out["reads_parquet"] = asc.get("reads_parquet", False)
+        out["writes_real_research_state"] = asc.get("writes_real_research_state", False)
+        seam_ok = asc.get("pass") is True
+        if admissible_candidate_path is not None and not seam_ok:
+            out["pass"] = False
+            out["status"] = "NO-GO"
+            out["reason_code"] = asc.get("reason_code", "ADMISSIBLE_SEAM_NOGO")
+            out["fail_closed_order"] = "drift_preflight->admissible_seam"
+            out["elapsed_s"] = round(time.time() - t0, 6)
+            return out
+        out["pass"] = True
+        out["status"] = "GO" if admissible_candidate_path is not None else "SEAM_WIRED_AWAITING_CANDIDATE"
+        out["reason_code"] = asc.get("reason_code", "ADMISSIBLE_SEAM_WIRED_AWAITING_CANDIDATE")
+        out["fail_closed_order"] = "drift_preflight->admissible_seam"
+    except Exception as e:
+        out["pass"] = False
+        out["status"] = "BLOCKED"
+        out["reason_code"] = "ADMISSIBLE_SEAM_EXCEPTION"
+        out["failures"] = [f"seam_exception:{repr(e)}"]
+        out["fail_closed_order"] = "drift_preflight->admissible_seam"
+    out["elapsed_s"] = round(time.time() - t0, 6)
+    return out
+
+
 def _validate_probe_invariant_runtime_shape(obj) -> dict:
     """104: machine-validate monitor probe_invariant_runtime evidence-field shape."""
     if not isinstance(obj, dict):
@@ -458,7 +539,24 @@ def compose_operator_report(repo_root: Path = None, research_state_dir: Path = N
 
 
 
-if __name__ == "__main__":
-    out = run()
+def main(argv=None) -> int:
+    """CLI entrypoint for tracka_resume_check.
+
+    Without --admissible-manifest runs the full 17-check offline resume check
+    (run()). With --admissible-manifest runs the focused seam+drift check (check()).
+    Exit 0 => pass, Exit 1 => BLOCKED/NO-GO.
+    """
+    ap = argparse.ArgumentParser(description="Offline bounded Track A resume check (FCLR-NEXT-095 / 127 G1)")
+    ap.add_argument("--admissible-manifest", required=False, default=None, dest="admissible_manifest",
+                    help="127 G1: candidate Ironflow month manifest JSON for named admissible-seam fail-closed check (manifest-only, no network/no parquet/no outcomes)")
+    args = ap.parse_args(argv)
+    if args.admissible_manifest is not None:
+        out = check(admissible_candidate_path=args.admissible_manifest)
+    else:
+        out = run()
     print(json.dumps(out, indent=2, sort_keys=True))
-    sys.exit(0 if out["pass"] else 1)
+    return 0 if out["pass"] else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
