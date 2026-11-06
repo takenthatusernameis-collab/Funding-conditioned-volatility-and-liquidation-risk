@@ -35,6 +35,12 @@ BOOTSTRAP_REPLICATES = 10  # reduced for speed
 BOOTSTRAP_SEED = SEED + 1
 EPS = 1e-12
 
+# 111: single guarded execution entry. The actual ironflow parquet load is an
+# EXPLICIT outcome_loader invoked ONLY after the harness guarded seam/prereg/
+# manifest/data gates return READY_FROZEN. No implicit parquet reads anywhere in
+# the entrypoint: every blocked branch refuses before any pyarrow import is used.
+from scripts.fclr010_harness import FCLR010Harness
+
 
 def git_sha():
     try:
