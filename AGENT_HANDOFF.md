@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 20261106T045619Z
-Handoff ID: FCLR-HANDOFF-20261106T045619Z
+Timestamp (UTC): 20261106T051000Z
+Handoff ID: FCLR-HANDOFF-20261106T051000Z
 Baseline (prior session): FCLR-NEXT-118 COMPLETE (20261106T035900Z). **This session (20261106T045619Z, FCLR-NEXT-119) delivered measurable code+test hardening (G1-G5, no trigger).** No new probes/families. Working tree may contain local modified `__pycache__` and `research_state/ironflow_fastpath_cache.json` — **do not commit**.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
 Priority: P0 — REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
