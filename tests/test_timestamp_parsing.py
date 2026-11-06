@@ -1,16 +1,22 @@
+import unittest
 import pandas as pd
 from pathlib import Path
 
-def test_klines_timestamp_normalized():
-    p = Path('data/raw/BTCUSDT-1h-2024-01-02.csv')
-    df = pd.read_csv(p)
-    # open_time is ms
-    ts = pd.to_datetime(df['open_time'], unit='ms', utc=True)
-    assert ts.is_monotonic_increasing
-    assert str(ts.iloc[0])[:4] == '2024'
+FIX = Path(__file__).resolve().parent / "fixtures"
 
-def test_funding_timestamp_normalized():
-    p = Path('data/raw/BTCUSDT-fundingRate-2024-01.csv')
-    df = pd.read_csv(p)
-    ts = pd.to_datetime(df['calc_time'], unit='ms', utc=True)
-    assert len(ts) > 0
+class TestTimestampParsing(unittest.TestCase):
+    def test_klines_utc(self):
+        df = pd.read_csv(FIX / "BTCUSDT-1h-2024-01-02.csv")
+        ts = pd.to_datetime(df["open_time"], unit="ms", utc=True)
+        self.assertEqual(str(ts.dt.tz), "UTC")
+        self.assertTrue(ts.is_monotonic_increasing)
+        self.assertGreater(len(df), 0)
+
+    def test_funding_utc(self):
+        df = pd.read_csv(FIX / "BTCUSDT-fundingRate-2024-01.csv")
+        ts = pd.to_datetime(df["calc_time"], unit="ms", utc=True)
+        self.assertEqual(str(ts.dt.tz), "UTC")
+        self.assertTrue(ts.is_monotonic_increasing)
+
+if __name__ == "__main__":
+    unittest.main()

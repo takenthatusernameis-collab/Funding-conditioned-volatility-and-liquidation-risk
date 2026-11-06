@@ -1,8 +1,11 @@
 # AGENT_HANDOFF.md
 
-**TIMESTAMP (UTC):** 2026-11-06T21:40:32Z
+**TIMESTAMP (UTC):** 2026-11-06T21:55:00Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **SESSION GOAL:** UNBLOCK DATA → BUILD MINIMAL PIPELINE → RUN RV-ONLY OOS BASELINE (GATE 3)
+
+**LAST COMPLETED:** Phase 0.1 — inventory (463 zips), sample extraction (BTC/ETH klines+funding), fixtures, test_timestamp_parsing OK.
+**NEXT TASK:** Phase 0.2 — Build src/ingest/loader.py normalization + data_source_registry entries.
 
 ---
 
