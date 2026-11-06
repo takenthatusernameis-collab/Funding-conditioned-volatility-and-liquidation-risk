@@ -1,29 +1,16 @@
 {
   "sources": [
     {
-      "id": "binance-public-archive",
-      "type": "archive",
-      "url": "https://github.com/binance/binance-public-data",
-      "access": "unauthenticated",
-      "tested": true,
-      "description": "Local zips present in repo root (Binance USD-M perpetual klines/index/mark/premium/funding).",
-      "coverage": {
-        "symbols": [
-          "BTCUSDT",
-          "ETHUSDT",
-          "SOLUSDT",
-          "XRPUSDT"
-        ],
-        "period": "2024-01 to 2024-03",
-        "klines": "1h daily zips present",
-        "funding": "monthly fundingRate zips present"
-      },
-      "gaps": [
-        "indexPriceKlines/markPriceKlines/premiumIndexKlines present as dirs with daily zips; need to inventory contents"
+      "type": "binance_public_archive",
+      "paths": [
+        "BTCUSDT-1h-2024-01-01.zip",
+        "BTCUSDT-fundingRate-2024-01.zip"
       ],
-      "terms": "Binance public data terms apply; local copies present",
-      "acceptance_status": "accepted_local_archive",
-      "notes": "Extracted samples show ms timestamps for klines, ms calc_time for funding."
+      "unauthenticated": true,
+      "tested_extraction": true,
+      "coverage_notes": "sample only",
+      "license": "public",
+      "acceptance_status": "PROBED"
     }
   ]
 }
