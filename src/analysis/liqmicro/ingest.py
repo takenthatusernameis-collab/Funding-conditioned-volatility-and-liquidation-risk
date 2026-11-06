@@ -7,10 +7,14 @@ from typing import Dict, List, Tuple
 
 import numpy as np
 import pandas as pd
-import pyarrow.parquet as pq
 
 REPO = Path(__file__).resolve().parents[3]
 IRONFLOW = REPO / "research_state" / "data_cache" / "ironflow_events"
+
+# 113 src audit: top-level `import pyarrow.parquet as pq` removed. No parquet/outcome/data
+# read happens at module import; lazy pd.read_parquet()/open() reads occur only inside
+# explicit method calls (load_all / HyperliquidFundingIngestor.load_all) and are flagged as
+# a FCLR-NEXT-114 gap (callers reading outcomes must route through guarded_execute).
 
 class IronflowIngestor:
     def __init__(self, data_dir: Path = IRONFLOW):

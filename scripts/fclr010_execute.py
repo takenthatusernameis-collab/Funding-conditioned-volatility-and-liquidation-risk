@@ -295,13 +295,11 @@ def main():
     test_rows = [r for r in panel_rows if r['split'] == 'test']
     print(f"Splits rows: train={len(train_rows)}, val={len(val_rows)}, test={len(test_rows)}", flush=True)
 
-    # Try to fetch Hyperliquid funding/mark for a few symbols to add real features (causal)
-    try:
-        import requests
-        # fetch funding for BTC
-        pass
-    except Exception:
-        pass
+    # 113: no non-parquet data-access imports remain in this guarded entrypoint.
+    # The dead `import requests` no-op block (previously lines here) was removed so that
+    # no execution entrypoint carries `import requests`/`import urllib`/urllib.request
+    # outside fclr010_guarded_entry._default_outcome_loader / fclr010_execute._load_outcomes.
+    # Funding/mark features are causal placeholders only; no live fetch is performed here.
 
     # Fit simple logistic regression (fixed form)
     def sigmoid(x):
