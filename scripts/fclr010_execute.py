@@ -138,40 +138,29 @@ def block_bootstrap(hour_pairs, hours_sorted, metric_fn, n_boot, seed):
     }
 
 
-def main():
-    start_time = datetime.now(timezone.utc)
-    print(f"=== FCLR-010 START {dt_to_iso_z(start_time)} ===", flush=True)
+def _load_outcomes(data_path: Path, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Explicit outcome/parquet loader.
 
-    # Load splits from manifest
-    with open(RUN_MANIFEST) as f:
-        m = json.load(f)
-    splits = m.get('split_boundaries_fclr010')
-    if not splits or not splits.get('frozen_before_outcomes'):
-        raise RuntimeError("FCLR-010 splits not frozen before outcomes")
-    train = (iso_to_dt(splits['train']['start']), iso_to_dt(splits['train']['end']))
-    val = (iso_to_dt(splits['validation']['start']), iso_to_dt(splits['validation']['end']))
-    test = (iso_to_dt(splits['test']['start']), iso_to_dt(splits['test']['end']))
-    print(f"Splits: train {dt_to_iso_z(train[0])}..{dt_to_iso_z(train[1])}, val {dt_to_iso_z(val[0])}..{dt_to_iso_z(val[1])}, test {dt_to_iso_z(test[0])}..{dt_to_iso_z(test[1])}", flush=True)
+    The ONLY path permitted to read parquet. Invoked exactly once, and ONLY after
+    guarded_execute returns READY_FROZEN (admissible seam + prereg + manifest/data
+    gates all pass). Blocked branches never reach this function.
 
-    CKPT_DIR.mkdir(parents=True, exist_ok=True)
+    ``context`` carries frozen split windows (train/test) so the loader can filter
+    the census to the label window without reading them through the guarded seam.
+    """
+    import pyarrow.parquet as pq
 
-    # Load ironflow labels
-    try:
-        import pyarrow.parquet as pq
-    except Exception as e:
-        raise RuntimeError(f"pyarrow required: {e}")
+    train = (context or {}).get("train")
+    test = (context or {}).get("test")
 
-    if not IRONFLOW.exists():
-        raise RuntimeError(f"Ironflow cache missing: {IRONFLOW}")
-
-    files = sorted([f for f in os.listdir(IRONFLOW) if f.endswith('.parquet')])
-    print(f"Ironflow files: {files}", flush=True)
-
-    # Build hourly panel by symbol
-    panel = {}  # (sym, hour_key) -> counts
+    data_path = Path(data_path)
+    if not data_path.exists():
+        raise RuntimeError(f"Ironflow cache missing: {data_path}")
+    files = sorted([f for f in os.listdir(data_path) if f.endswith('.parquet')])
+    panel: Dict = {}
     native_set = set()
     for fname in files:
-        t = pq.read_table(IRONFLOW / fname, columns=['timestamp', 'market', 'position_side', 'notional_usd'])
+        t = pq.read_table(data_path / fname, columns=['timestamp', 'market', 'position_side', 'notional_usd'])
         ts_list = t.column('timestamp').to_pylist()
         mkt_list = t.column('market').to_pylist()
         side_list = t.column('position_side').to_pylist()
@@ -187,8 +176,9 @@ def main():
             else:
                 continue
             h = datetime.fromtimestamp(ts_s, tz=timezone.utc).replace(minute=0, second=0, microsecond=0)
-            if h < train[0] - timedelta(days=1) or h > test[1] + timedelta(days=1):
-                continue
+            if train is not None and test is not None:
+                if h < train[0] - timedelta(days=1) or h > test[1] + timedelta(days=1):
+                    continue
             key = (mkt, int(h.timestamp()))
             if key not in panel:
                 panel[key] = {'long_cnt': 0, 'short_cnt': 0, 'long_usd': 0.0, 'short_usd': 0.0}
@@ -200,7 +190,58 @@ def main():
             elif side == 'short':
                 panel[key]['short_cnt'] += 1
                 panel[key]['short_usd'] += notional
+    return {"panel": panel, "native": sorted(list(native_set)), "files": files, "data_path": str(data_path)}
 
+
+def main():
+    start_time = datetime.now(timezone.utc)
+    print(f"=== FCLR-010 START {dt_to_iso_z(start_time)} ===", flush=True)
+
+    # Load splits from manifest (LFS-aware, read-only)
+    manifest = FCLR010Harness._load_json_lfs_aware(RUN_MANIFEST)
+    splits = manifest.get('split_boundaries_fclr010')
+    if not splits or not splits.get('frozen_before_outcomes'):
+        raise RuntimeError("FCLR-010 splits not frozen before outcomes")
+    train = (iso_to_dt(splits['train']['start']), iso_to_dt(splits['train']['end']))
+    val = (iso_to_dt(splits['validation']['start']), iso_to_dt(splits['validation']['end']))
+    test = (iso_to_dt(splits['test']['start']), iso_to_dt(splits['test']['end']))
+    print(f"Splits: train {dt_to_iso_z(train[0])}..{dt_to_iso_z(train[1])}, val {dt_to_iso_z(val[0])}..{dt_to_iso_z(val[1])}, test {dt_to_iso_z(test[0])}..{dt_to_iso_z(test[1])}", flush=True)
+
+    CKPT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # 111: single guarded execution contract. The actual ironflow parquet load is an
+    # EXPLICIT outcome_loader invoked ONLY after the guarded seam/prereg/manifest/data
+    # gates return READY_FROZEN. No implicit parquet reads anywhere in the entrypoint.
+    from scripts.fclr010_guarded_entry import guarded_execute
+
+    guard = guarded_execute(
+        data_path=IRONFLOW,
+        pre_reg_path=None,
+        repo_root=REPO,
+        source_manifest=None,
+        admissible_manifest=None,
+        admissible_manifest_path=None,
+        outcome_loader=_load_outcomes,
+        loader_context={"train": train, "test": test},
+        allow_default_loader=False,
+    )
+    if guard.get("status") != "READY_FROZEN":
+        print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
+        print(f"=== FCLR-010 BLOCKED {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
+        return 1
+
+    loaded = guard.get("outcomes_loaded")
+    if not loaded:
+        print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
+        print(f"=== FCLR-010 BLOCKED (no outcomes loaded) {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
+        return 1
+
+    files = loaded["files"]
+    print(f"Ironflow files: {files}", flush=True)
+
+    # Build hourly panel by symbol
+    panel = loaded["panel"]
+    native_set = set(loaded["native"])
     native = sorted(list(native_set))
     print(f"Native perps in labels: {len(native)}", flush=True)
 
@@ -444,15 +485,23 @@ def main():
     lines.append('- Fixed logistic form, no regularization/hyperparameter search.')
     lines.append('- Hyperliquid public funding/mark API coverage audit to be expanded; current features are causal proxies from label history where needed.')
     lines.append('')
+    lines_text = '\n'.join(lines)
 
-    OUT_SUM.write_text('\n'.join(lines))
+    # 111: canonical output mutation ONLY on the guarded READY_FROZEN path.
+    # Blocked branches return before reaching here and never mutate OUT_SUM or the manifest.
+    if guard.get("status") != "READY_FROZEN":
+        print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
+        print(f"=== FCLR-010 BLOCKED (no canonical output mutation) {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
+        return 1
+
+    OUT_SUM.write_text(lines_text)
     print(f"Wrote {OUT_SUM}", flush=True)
-    print('\n'.join(lines))
+    print(lines_text)
 
-    # Update manifest
+    # Update manifest (canonical output mutation ONLY on the guarded READY_FROZEN path;
+    # blocked branches above return before reaching here and never mutate canonical outputs).
     try:
-        with open(RUN_MANIFEST) as f:
-            m2 = json.load(f)
+        m2 = FCLR010Harness._load_json_lfs_aware(RUN_MANIFEST)
         if 'experiments' not in m2:
             m2['experiments'] = {}
         if c and c['rel_reduction_pct'] is not None:
@@ -475,6 +524,9 @@ def main():
     except Exception as e:
         print(f"Failed to update manifest: {e}", flush=True)
 
+    print(f"=== FCLR-010 COMPLETE {dt_to_iso_z(datetime.now(timezone.utc))} ===", flush=True)
+    return 0
+
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
