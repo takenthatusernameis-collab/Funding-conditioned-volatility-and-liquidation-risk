@@ -1,5 +1,5 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 2026-11-06T16:57:11Z
+Timestamp (UTC): 2026-11-06T20:16:49Z
 Handoff ID: FCLR-HANDOFF-20261106T165711Z
 Baseline (prior): FCLR-NEXT-136 COMPLETE (heavy trigger-readiness + contract-integrity hardening). Full regression `python -m unittest discover tests` = **703 OK, 0 failures, 0 errors** (`Ran 703 tests in 56.791s`; +11 tests vs 692). Synthetic admissible GO-seam + missing/invalid prereg proven BLOCKED with stable fields across harness/gate/check/operator + CLIs. Argparse contract-lock preserved on all 3 Track A CLIs. Drift preflight `pass:true` (17/17 checks), `network:false`, `writes_real_research_state:false`. No trigger. No `.github/workflows` changes. No new timestamped probe/sweep/scan/wrapper/report families.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
@@ -77,3 +77,20 @@ Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. N
 
 ## STOP RULE (unchanged)
 Complete ALL steps with concrete metrics. Track C locked. Track B unsupported. No conflation. No workflow/scheduler/poller/status-only/repeated wrappers/agent-controllers/new recurring families. Blocked/no-data claims without measurable hardening delta are noncompliant. Keep root md+json <=163 and probes==2. Leave state STRICTER than found.
+
+
+## FCLR-NEXT-138 DELIVERABLES (PENDING — 2026-11-06T20:16:49Z)
+INITIAL TASK FOR NEXT AGENTIC SESSION (SINGLE, TIMESTAMPED, MANDATORY) — 2026-11-06T20:16:49Z
+Execute FCLR-NEXT-138. Track A liquidation risk ONLY active objective. Heavy working required; measurable hardening+lockdown when no trigger appears.
+TASK ID: FCLR-NEXT-138-TRACK-A-TRIGGER-READINESS+CONTRACT-INTEGRITY-HARDEN
+PRIORITY: P0. Track A DATA_BLOCKED (data_through=2026-10; 2026-11..2027-02 absent; probes==2; do not re-probe). Track B NOT_SUPPORTED. Track C sealed.
+ENFORCEMENT: ALL STEPS MANDATORY. NO STATUS-ONLY. NO NEW TIMESTAMPED PROBE/SWEEP/SCAN/WRAPPER/REPORT FAMILIES UNLESS ADMISSIBLE TRIGGER. NO SCHEDULERS/POLLERS/STATUS FILES.
+DELIVERABLES:
+1. Clean-clone regression: pip install -r requirements.txt then unittest discover tests => 709 OK (or higher via legitimate hardening).
+2. Extend synthetic admissible-seam coverage: valid prereg + data path missing already covered; add GO seam + valid prereg + data path present-but-empty / unreadable must remain BLOCKED with stable `ADMISSIBLE_SEAM_GO_DATA_PATH_EMPTY`/`seam_go_data_empty` parity; malformed candidate + missing manifest fields fail-closed JSON refusals with canonical outputs byte-identical.
+3. CLI contract integrity preserved on all 3 Track A CLIs; --help exit 0.
+4. Canonical-output integrity SHA256 unchanged.
+5. Drift/state invariants: pass:true 17/17, root md+json<=163, probes==2, no new timestamped families, no workflows, no root trigger_harden.
+6. Evidence record commands/exit codes/counts.
+CURRENT VERIFIED STATE: regression 709 OK; data_through=2026-10; probes==2; root bound 143.
+STOP RULE: complete all steps with concrete metrics; leave state STRICTER.
