@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md
 
-**TIMESTAMP (UTC):** 2026-11-06T20:36:32Z
+**TIMESTAMP (UTC):** 2026-11-06T21:01:12Z
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
 **SESSION GOAL:** Unblock ingestion → freeze protocol → establish RV-only OOS baseline before adding funding features
 
