@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 20261106T051039Z
-Handoff ID: FCLR-HANDOFF-20261106T051039Z
+Timestamp (UTC): 20261106T051657Z
+Handoff ID: FCLR-HANDOFF-20261106T051657Z
 Baseline (prior session): FCLR-NEXT-119 COMPLETE (20261106T045619Z, G1-G5, no trigger). This handoff session (20261106T051039Z) performed mandatory entry verification, removed tracked pycache/fastpath-cache modification bottlenecks, and leaves **FCLR-NEXT-120** as the ONLY active objective. No new probes/families; no outcomes inspected.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
 Priority: P0 — REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
