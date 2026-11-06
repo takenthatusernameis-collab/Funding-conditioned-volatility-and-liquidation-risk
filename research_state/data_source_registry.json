@@ -1,16 +1,32 @@
 {
+  "generated_at": "2026-11-06T21:40:45Z",
   "sources": [
     {
-      "type": "binance_public_archive",
+      "id": "binance_public_archive_zips",
+      "type": "market_data_archive",
+      "venue": "binance",
+      "access": "unauthenticated",
+      "tested": true,
       "paths": [
-        "BTCUSDT-1h-2024-01-01.zip",
-        "BTCUSDT-fundingRate-2024-01.zip"
+        "*.zip at repo root"
       ],
-      "unauthenticated": true,
-      "tested_extraction": true,
-      "coverage_notes": "sample only",
-      "license": "public",
-      "acceptance_status": "PROBED"
+      "notes": "Local zips present; extraction tested on samples",
+      "coverage": {
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT",
+          "XRPUSDT"
+        ],
+        "types": [
+          "klines",
+          "fundingRate",
+          "indexPriceKlines",
+          "markPriceKlines",
+          "premiumIndexKlines"
+        ],
+        "period": "2024-01 to 2024-03"
+      }
     }
   ]
 }

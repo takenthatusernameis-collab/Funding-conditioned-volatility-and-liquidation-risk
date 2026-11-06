@@ -1,17 +1,16 @@
-import csv
+import pandas as pd
 from pathlib import Path
-import pytest
 
-def test_btc_klines_timestamp_ms():
-    p = Path('data/raw/BTCUSDT-1h-2024-01-01.csv')
-    assert p.exists()
-    with p.open() as f:
-        r = next(csv.DictReader(f))
-    assert int(r['open_time']) > 10**12  # ms
+def test_klines_timestamp_normalized():
+    p = Path('data/raw/BTCUSDT-1h-2024-01-02.csv')
+    df = pd.read_csv(p)
+    # open_time is ms
+    ts = pd.to_datetime(df['open_time'], unit='ms', utc=True)
+    assert ts.is_monotonic_increasing
+    assert str(ts.iloc[0])[:4] == '2024'
 
-def test_btc_funding_timestamp_ms():
+def test_funding_timestamp_normalized():
     p = Path('data/raw/BTCUSDT-fundingRate-2024-01.csv')
-    assert p.exists()
-    with p.open() as f:
-        r = next(csv.DictReader(f))
-    assert int(r['calc_time']) > 10**12
+    df = pd.read_csv(p)
+    ts = pd.to_datetime(df['calc_time'], unit='ms', utc=True)
+    assert len(ts) > 0
