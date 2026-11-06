@@ -15,6 +15,7 @@ from __future__ import annotations
 import csv
 import json
 import math
+import os
 import random
 import subprocess
 from collections import Counter, defaultdict
@@ -55,6 +56,72 @@ H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT = True
 H004_HYPERLIQUID_FCLR010_GUARDED_SEAM = False
 H004_ALLOW_ENV = "FCLR_ALLOW_H004_HISTORICAL_PILOT"
 H004_ALLOW_FLAG = "--allow-historical-bybit-pilot"
+H004_SANDBOX_ROOT_ENV = "FCLR_H004_SANDBOX_ROOT"
+
+
+def _h004_sandbox_resolve(repo: Path = REPO):
+    """Return absolute sandbox root Path or None. Env only (no CLI parsing of data)."""
+    raw = os.environ.get(H004_SANDBOX_ROOT_ENV)
+    if not raw or not str(raw).strip():
+        return None
+    try:
+        return Path(str(raw)).expanduser().resolve()
+    except Exception:
+        return None
+
+
+def resolve_h004_pilot_targets(*, sandbox_root: Optional[Path] = None, repo: Path = REPO) -> dict:
+    """Resolve pilot artifact write targets.
+
+    If sandbox_root is provided, all pilot outputs go under it (no real research_state writes).
+    Used for G5 machine enforcement and tests; does not touch filesystem.
+    """
+    if sandbox_root is not None:
+        sb = Path(sandbox_root).resolve()
+        ckpt_dir = sb / "research_state" / ".cache"
+        return {
+            "run_manifest": sb / "research_state" / "run_manifest.json",
+            "hyp": sb / "research_state" / "hypothesis_registry.json",
+            "out_sum": sb / "research_state" / "evaluation_summary_FCLR005.md",
+            "liq_enum": sb / "research_state" / "liquidation_sources_enumeration.md",
+            "ckpt_dir": ckpt_dir,
+            "ckpt_panel": ckpt_dir / "fclr005_panel.json",
+            "sandbox_root": sb,
+        }
+    cache = repo / "research_state" / "data_cache"
+    ckpt_dir = repo / "research_state" / ".cache"
+    return {
+        "run_manifest": repo / "research_state" / "run_manifest.json",
+        "hyp": repo / "research_state" / "hypothesis_registry.json",
+        "out_sum": repo / "research_state" / "evaluation_summary_FCLR005.md",
+        "liq_enum": repo / "research_state" / "liquidation_sources_enumeration.md",
+        "ckpt_dir": ckpt_dir,
+        "ckpt_panel": ckpt_dir / "fclr005_panel.json",
+        "sandbox_root": None,
+    }
+
+
+def _h004_sandbox_guard(repo: Path = REPO) -> Optional[dict]:
+    """G5 (120): allowed mode requires explicit sandbox root; refuse writes to real RS."""
+    sb = _h004_sandbox_resolve(repo)
+    real_rs = (repo / "research_state").resolve()
+    if sb is None:
+        return _h004_refusal(
+            reason="Allowed historical pilot requires explicit sandbox root via FCLR_H004_SANDBOX_ROOT env; no accidental real research_state writes."
+        ) | {"reason_code": "H004_ALLOWED_MODE_REQUIRES_SANDBOX_ROOT"}
+    targets = resolve_h004_pilot_targets(sandbox_root=sb, repo=repo)
+    # refuse if sandbox resolves to real research_state or targets overlap canonical RS roots
+    for k in ("out_sum", "liq_enum", "ckpt_panel"):
+        p = Path(targets[k]).resolve()
+        if str(p).startswith(str(real_rs)) and sb != real_rs:
+            return _h004_refusal(
+                reason=f"Sandbox target {k} resolves under real research_state; refused."
+            ) | {"reason_code": "H004_ALLOWED_SANDBOX_TARGETS_REAL_RS", "sandbox_root": str(sb)}
+    if sb == real_rs:
+        return _h004_refusal(
+            reason="Sandbox root must not be the real research_state directory."
+        ) | {"reason_code": "H004_ALLOWED_MODE_REQUIRES_SANDBOX_ROOT", "sandbox_root": str(sb)}
+    return None
 
 
 def ts_to_dt(ts_ms):
@@ -440,8 +507,22 @@ def main():
     if guard is not None:
         print(json.dumps(guard, indent=2, sort_keys=True), flush=True)
         return 1
+    # G5 (120): allowed mode requires explicit sandbox root; refuse real research_state writes.
+    sb_guard = _h004_sandbox_guard(REPO)
+    if sb_guard is not None:
+        print(json.dumps(sb_guard, indent=2, sort_keys=True), flush=True)
+        return 1
+    sb = _h004_sandbox_resolve(REPO)
+    pilot_targets = resolve_h004_pilot_targets(sandbox_root=sb, repo=REPO)
+    global OUT_SUM, LIQ_ENUM, CKPT_DIR, CKPT_PANEL, RUN_MANIFEST, HYP
+    OUT_SUM = pilot_targets["out_sum"]
+    LIQ_ENUM = pilot_targets["liq_enum"]
+    CKPT_DIR = pilot_targets["ckpt_dir"]
+    CKPT_PANEL = pilot_targets["ckpt_panel"]
+    RUN_MANIFEST = pilot_targets["run_manifest"]
+    HYP = pilot_targets["hyp"]
     start_time = datetime.now(timezone.utc)
-    print("FCLR-005 pipeline starting (EXPLICITLY ALLOWED historical Bybit pilot; NOT Hyperliquid FCLR010 guarded seam)", flush=True)
+    print("FCLR-005 pipeline starting (EXPLICITLY ALLOWED historical Bybit pilot; SANDBOXED; NOT Hyperliquid FCLR010 guarded seam)", flush=True)
     CKPT_DIR.mkdir(parents=True, exist_ok=True)
 
     # ---- 1. Load Bybit liquidation census (label side) ----

@@ -39,6 +39,54 @@ ALLOWED_CLASSES = {
 }
 
 
+def _read_source(repo: Path, name: str) -> str:
+    p = repo / "scripts" / name
+    try:
+        return p.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return ""
+
+
+def _semantic_consistency(name: str, meta: dict, src: str) -> list[str]:
+    """G2 (120): cheap deterministic source heuristics for guarded/liquidation classes.
+
+    Fails when registered class is inconsistent with source tokens. No network,
+    no imports that execute heavy deps.
+    """
+    errs = []
+    cls = (meta or {}).get("class", "")
+    low = src.lower()
+    if cls.startswith("guarded_tracka"):
+        if "guarded_execute" not in src and "fclr010harness" not in low and "guardedreadrefused" not in low and "_h004_refusal" not in low and "guarded" not in low:
+            errs.append(f"{name}:guarded_class_missing_guard_tokens")
+        if "track_c_" in name or "track_b_" in name:
+            errs.append(f"{name}:track_cb_named_as_guarded_tracka")
+    if cls == "guarded_tracka_ready_writing":
+        if "guarded_execute" not in src and "fclr010harness" not in low and "guardedreadrefused" not in low:
+            errs.append(f"{name}:ready_writing_missing_guard_tokens")
+    if cls == "guarded_tracka_audit_ready_writing":
+        if "guarded_execute" not in src and "guardedreadrefused" not in low and "fclr010harness" not in low:
+            errs.append(f"{name}:audit_ready_writing_missing_guard_tokens")
+    if cls == "raw_fetch_monitor_provenance":
+        # must not be labeled guarded Track A ready-writing
+        if cls == "guarded_tracka_ready_writing":
+            errs.append(f"{name}:raw_fetch_labeled_guarded_ready_writing")
+        # cheap sanity: provenance/fetch scripts should not claim guarded Track A execution seam
+        if "hyperliquid_fclr010_guarded_seam = true" in low:
+            errs.append(f"{name}:raw_fetch_claims_hyperliquid_guarded_seam")
+    if cls.startswith("track_c_") and cls != "track_c_sealed_volatility" and False:
+        pass
+    if name.startswith("track_c_") and "guarded_tracka" in cls:
+        errs.append(f"{name}:track_c_labeled_guarded_tracka")
+    if name.startswith("track_b_") and "guarded_tracka" in cls:
+        errs.append(f"{name}:track_b_labeled_guarded_tracka")
+    if cls.startswith("track_b_") and "guarded_tracka" in cls:
+        errs.append(f"{name}:track_b_class_labeled_guarded_tracka")
+    if cls.startswith("track_c_") and "guarded_tracka" in cls:
+        errs.append(f"{name}:track_c_class_labeled_guarded_tracka")
+    return errs
+
+
 def check_drift(repo: Path = REPO) -> dict:
     scripts_dir = repo / "scripts"
     reg_path = repo / "research_state" / "tracka_script_scope_registry.json"
@@ -83,6 +131,12 @@ def check_drift(repo: Path = REPO) -> dict:
             payload["bad_entries"].append(f"{name}:bad_class:{cls}")
         if not isinstance(reason, str) or len(reason.strip()) < 10:
             payload["bad_entries"].append(f"{name}:bad_reason")
+        # G2 semantic consistency (cheap source heuristics)
+        src = _read_source(repo, name)
+        if src or (repo / "scripts" / name).exists():
+            sem = _semantic_consistency(name, meta if isinstance(meta, dict) else {}, src)
+            if sem:
+                payload["bad_entries"].extend(sem)
     if payload["bad_entries"]:
         payload["failures"].append(f"BAD_ENTRIES:{payload['bad_entries'][:12]}")
     payload["pass"] = not payload["failures"]
