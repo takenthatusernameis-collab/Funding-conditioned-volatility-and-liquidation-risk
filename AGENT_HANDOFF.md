@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md (SINGLE DURABLE HANDOFF) — READ THIS FILE FIRST
-Timestamp (UTC): 20261106T055542Z
-Handoff ID: FCLR-HANDOFF-20261106T055542Z
+Timestamp (UTC): 20261106T060120Z
+Handoff ID: FCLR-HANDOFF-20261106T060120Z
 Baseline (prior session): FCLR-NEXT-119 COMPLETE (20261106T045619Z). This session (20261106T055542Z) performed mandatory entry verify, confirmed NO TRIGGER (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted 90+; probes==2), and delivered **FCLR-NEXT-120 measurable hardening (G1-G5)** with tmp-isolated deterministic tests. No new probes/families; no outcomes inspected; no real research_state writes in tests.
 Branch: main | Repo: Funding-conditioned-volatility-and-liquidation-risk
 Priority: P0 — REPO-NAME PRIORITIZED + HEAVY WORK MANDATORY | Mode: CAMPAIGN-DRIVEN | Enforcement: NO-SKIP/NO-COAST
