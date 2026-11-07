@@ -587,7 +587,7 @@ def _blocked_state():
         "last_probe": {"months_probed": months_probed},
         "data_through": "2026-10",
         "consecutive_absent": 3,
-        "tree_etag": 'W/"abc"',
+        "tree_etag": 'W/"deadbeef1234abcdef5678"',
         "tree_parquet_paths": ["data/events/2026-10.parquet", "data/fills/2026-10.parquet"],
         "tree_parquet_items": {
             "data/events/2026-10.parquet": {"path": "data/events/2026-10.parquet", "oid": "deadbeef", "size": 1000, "type": "file"},
