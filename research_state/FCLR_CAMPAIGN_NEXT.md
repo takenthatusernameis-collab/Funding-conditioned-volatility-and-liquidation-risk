@@ -1,7 +1,9 @@
-# FCLR CAMPAIGN NEXT (EXECUTABLE) — 2026-11-06T20:27:26Z
-Handoff: FCLR-HANDOFF-20261106T202239Z | Next: FCLR-NEXT-139 | Priority: P0 Track A only
+# FCLR CAMPAIGN NEXT (EXECUTABLE) — 2026-11-06T20:27:26Z (Track A lockdown reference)
+**RECONCILED 2026-11-07T00:15:23Z:** Root durable handoff `AGENT_HANDOFF.md` is authoritative. Repo-priority P0 = **Phase 3 funding-conditioned volatility ablations (Gate 4)** using local data (measurable, unblocked). Track A remains **blocked/no trigger** (no re-probe); follow Track A guarded protocol below **only** if trigger appears or a specific gap is hardened with tmp-isolated tests. `FCLR-NEXT-139` numbering retained as Track A campaign marker; do not create status-only churn.
 
-## CURRENT STATE (VERIFIED)
+Handoff: `AGENT_HANDOFF.md` (single durable) | Track A ref: FCLR-NEXT-139 | Repo P0: Phase 3/Gate 4
+
+## CURRENT STATE (VERIFIED, Track A guard)
 - Trigger: NO TRIGGER (data_through 2026-10; 2026-11..2027-02 absent). Probes==2. Do NOT re-probe.
 - Regression: 709 OK, 0 failures, 0 errors
 - Drift: pass:true (17/17), network:false, writes_real_research_state:false

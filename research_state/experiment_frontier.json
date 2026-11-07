@@ -9,7 +9,7 @@
       "rank": 0.0,
       "id": "FCLR-NEXT-131",
       "priority": "P0",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "timestamp_utc": "20261106T133530Z",
       "generated": "20261106T133530Z",
       "task": "HARNESS-SEAM-EXCEPTION-MATRIX + OPERATOR/CLI-JSON-REFUSAL-PARITY + GUARD-SNAPSHOT-FIELD-STABILITY",
@@ -23,7 +23,8 @@
         "G2 operator_report/resume_gate/(resume_check blocked JSON if applicable) parseable JSON refusal on malformed admissible-manifest contracts, stable fields/exit!=0, semantics preserved",
         "G3 refusal_payload + guard snapshots required bool/type-stable fields, tolerate missing/extra keys, normalize absent booleans to safe defaults on BLOCKED"
       ],
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json."
+      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
+      "completed_utc": "20261106T133740Z"
     },
     {
       "rank": 0.001,
@@ -515,7 +516,7 @@
     }
   ],
   "track_a_blocked": true,
-  "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-132 (20261106T133740Z) mandatory heavy-work: evaluate_forward prereg-content fail-closed contract + admissible-seam exception reason-code parity + CLI malformed-manifest schema stability (tests/test_tracka_hardening_132.py). No re-probe absent months. PREREG before outcomes if trigger appears.",
+  "next_action_heavy": "AGENT_HANDOFF.md — resolve FCLR-NEXT-132/139 ambiguity; if no trigger, continue Track A heavy guard hardening (next measurable G* with tmp-isolated tests) per FCLR_CAMPAIGN_NEXT.md; PREREG before outcomes if trigger appears.",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "artifact_churn_098": {
     "research_state_mdjson_root": 161,
@@ -837,7 +838,7 @@
     "ironflow_probing_exhausted": true,
     "bound": 163
   },
-  "handoff_refreshed_utc": "20261106T133740Z",
+  "handoff_refreshed_utc": "20261107T001523Z",
   "fclr_next_120": {
     "task_id": "FCLR-NEXT-120",
     "status": "COMPLETE",
