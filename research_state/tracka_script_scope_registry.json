@@ -1,8 +1,25 @@
 {
+  "allowed_classes": [
+    "guarded_tracka",
+    "guarded_tracka_ready_writing",
+    "guarded_tracka_audit_ready_writing",
+    "harness_core",
+    "resume_gate_infra",
+    "prereg_utility",
+    "raw_fetch_monitor_provenance",
+    "track_b_modeled_boundary",
+    "track_c_sealed_volatility",
+    "track_c_or_aux_audit_utility",
+    "track_c_or_aux_utility",
+    "test_fixture_utility",
+    "repo_maintenance_utility",
+    "out_of_scope_historical_tracka_pilot",
+    "unclassified_auxiliary"
+  ],
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition.",
+  "generated": "20261107T165800Z",
   "registry_version": "1.0",
-  "generated": "20261107T024237Z",
-  "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)",
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION.",
+  "script_count": 94,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -175,6 +192,10 @@
     "fclr013_coverage_audit.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr013_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
+    },
+    "fclr015_verify_cache_provenance_2024q2q3.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr015_verify_cache_provenance_2024q2q3.py: bounded unauthenticated Binance Vision provenance verification for cached 2024-04..09 files (sha256/ETag/Last-Modified GET); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path."
     },
     "fclr_h001_extract.py": {
       "class": "raw_fetch_monitor_provenance",
@@ -377,22 +398,5 @@
       "reason": "Trigger-hardening artifacts; no outcome reads."
     }
   },
-  "allowed_classes": [
-    "guarded_tracka",
-    "guarded_tracka_ready_writing",
-    "guarded_tracka_audit_ready_writing",
-    "harness_core",
-    "resume_gate_infra",
-    "prereg_utility",
-    "raw_fetch_monitor_provenance",
-    "track_b_modeled_boundary",
-    "track_c_sealed_volatility",
-    "track_c_or_aux_audit_utility",
-    "track_c_or_aux_utility",
-    "test_fixture_utility",
-    "repo_maintenance_utility",
-    "out_of_scope_historical_tracka_pilot",
-    "unclassified_auxiliary"
-  ],
-  "script_count": 93
+  "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"
 }

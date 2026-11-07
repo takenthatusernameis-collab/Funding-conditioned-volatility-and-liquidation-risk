@@ -193,6 +193,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr013_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
   },
+  "fclr015_verify_cache_provenance_2024q2q3.py": {
+    "class": "raw_fetch_monitor_provenance",
+    "reason": "fclr015_verify_cache_provenance_2024q2q3.py: bounded unauthenticated Binance Vision provenance verification for cached 2024-04..09 files (sha256/ETag/Last-Modified GET); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path."
+  },
   "forecast_pipeline.py": {
     "class": "track_c_sealed_volatility",
     "reason": "forecast_pipeline.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
