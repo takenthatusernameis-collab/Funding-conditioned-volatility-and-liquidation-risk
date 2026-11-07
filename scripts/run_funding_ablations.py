@@ -121,7 +121,12 @@ def add_funding_to_panel(kpanel: pd.DataFrame, fpanel: pd.DataFrame) -> pd.DataF
         feat_frames.append(ffeat)
     if not feat_frames:
         return out
-    feats = pd.concat(feat_frames, axis=1)
+    # Concatenate per-symbol frames along axis=0 (rows), not axis=1.
+    # axis=1 would stack identical column names from each symbol and produce
+    # duplicated columns across the multi-symbol panel, which then breaks
+    # downstream numpy array construction.
+    feats = pd.concat(feat_frames, axis=0)
+    feats = feats[~feats.index.duplicated(keep="last")].sort_index()
     # Avoid column collisions with existing kline columns.
     new_cols = [c for c in feats.columns if c not in out.columns]
     merged = out.join(feats[new_cols], how="left")

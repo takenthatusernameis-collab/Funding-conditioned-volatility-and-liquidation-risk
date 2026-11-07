@@ -1,14 +1,14 @@
 # Evaluation Summary - Funding Ablations (Gate 4, pilot)
 
-**Generated:** 2026-11-06T23:31:49Z
-**Git SHA:** e8af3abbb48d93dd63b02b2c72da99392d51720e
+**Generated:** 2026-11-07T00:25:47Z
+**Git SHA:** 9cf0778bdf591789b9df096115e17a4863d93481
 **Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 1 walk-forward split
 **Model:** log-target ridge HAR (λ=0.001), predictions exp-transformed (positive). Train-only normalization, chronological splits, 7d purge/embargo.
 
 ## Aggregate (mean across splits)
 | Ablation | QLIKE | MAE | RMSE | ΔQLIKE vs A | neg_pred |
 |---|---|---|---|---|---|
-| A_rv_only | 333293.42171793274 | 255952842.6442126 | 8236954326.141345 | 0.0 | 0.0 |
+| A_rv_only | 333293.4217179353 | 255952842.64419475 | 8236954326.140707 | 0.0 | 0.0 |
 | B_rv_signed | None | None | None | None | None |
 | C_rv_abs | None | None | None | None | None |
 | D_rv_signed_abs | None | None | None | None | None |
@@ -16,7 +16,7 @@
 
 ## Split Details
 - Split 0: test 2024-02-22..2024-03-31
-  - A_rv_only: qlike=333293.42171793274, mae=255952842.6442126, rmse=8236954326.141345, n_feat=3, valid_n=3508, neg_pred=0
+  - A_rv_only: qlike=333293.4217179353, mae=255952842.64419475, rmse=8236954326.140707, n_feat=3, valid_n=3508, neg_pred=0
   - B_rv_signed: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
   - C_rv_abs: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
   - D_rv_signed_abs: ERR The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
