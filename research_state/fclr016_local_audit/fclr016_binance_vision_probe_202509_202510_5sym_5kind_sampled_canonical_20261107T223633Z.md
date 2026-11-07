@@ -1,0 +1,1 @@
+- ETHUSDT 2025-10 2025-10-31: top-level placeholder sha256=ea2d30dfa70ec7d7 (canonical kind subdir missing/unmatched)
