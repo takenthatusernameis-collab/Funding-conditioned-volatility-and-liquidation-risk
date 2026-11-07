@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-07T22:50:37Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
+## Initial Task Message (2026-11-07T22:53:46Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
 
 **Repo priority (Funding-conditioned-volatility-and-liquidation-risk):** (1) **Track C funding-conditioned volatility forecasting** — primary; H001 NOT_SUPPORTED, forecast gate NOT MET. (2) **Gate 4 v5 confirmatory path** — sampled 2025-08..10 canonical identity/provenance is **GO_PARTIAL_BOUNDED** after FCLR-016 repair+quarantine; **full canonical completeness + license/terms + leakage/prereg/freeze still required before any confirmatory outcomes** (FCLR-014 guard remains fail-closed). (3) **Track A observed liquidation risk** — DATA_BLOCKED/no trigger (Hyperliquid ironflow data_through 2026-10; 2026-11..2027-02 absent); **NO re-probe**. (4) **Track B modeled boundary breach** — CLOSED_NEGATIVE.
 
@@ -8,16 +8,14 @@
 2. **Assemble Gate 4 v5 admissibility evidence package** (still NO confirmatory run): (a) full identity probe GO (match>0, mismatch/missing/remote_error/placeholder==0 on frozen scope), (b) explicit Binance Vision/data-use license/terms evidence recorded as machine-readable provenance manifest referenced by `--provenance-manifest` path, (c) completeness/leakage checks (no overlap vs consumed/confounded/guard windows; full symbol×kind×day coverage), (d) if all pass, draft a **preregistered confirmatory design doc** (frozen splits/features/targets/metrics/stop rule, data hashes, provenance manifest hash) but keep `confirmatory_claim_go=NO_GO` until manifest is committed/frozen and FCLR-014 guard accepts it. If any fail, keep v5 `NOT_READY/NO_GO` and ship ≥1 substantive hardening/test/guardrail with green gates.
 3. **Track A:** only on genuinely new unauthenticated admissible Hyperliquid-only source passing strict rubric + prereg before outcome inspection; otherwise skip re-probe entirely.
 
-### Current gate state (evidence-backed, 2026-11-07T22:50:37Z)
+### Current gate state (evidence-backed, re-verified 2026-11-07T22:53:46Z)
 - Track A = `DATA_BLOCKED` (no trigger). Track B = `CLOSED_NEGATIVE`. Track C/H001 = `NOT_SUPPORTED` (forecast gate NOT MET).
 - Gate 4 v4 = `EXPLORATORY_INCONCLUSIVE` (confounded 2024-04..09; not promotable).
-- Gate 4 v5 sampled identity (this session): `GO_PARTIAL_BOUNDED` for 2025-08..10, 5 symbols, 5 kinds, sample days 1,15,28+last — `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_5sym_5kind_sampled_canonical_postrepair_postquarantine_v4_20261107T224842Z.json` (summary: match=255 mismatch=0 missing_local=0 missing_remote=0 remote_error=0 placeholder_duplicate_files=0). **Partial only; full-day not yet verified; confirmatory_claim_go remains NO_GO.**
+- Gate 4 v5 sampled identity (last session): `GO_PARTIAL_BOUNDED` for 2025-08..10, 5 symbols, 5 kinds, sample days 1,15,28+last — `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_5sym_5kind_sampled_canonical_postrepair_postquarantine_v4_20261107T224842Z.json` (summary: match=255 mismatch=0 missing_local=0 missing_remote=0 remote_error=0 placeholder_duplicate_files=0). **Partial only; full-day not yet verified; confirmatory_claim_go remains NO_GO.**
 - Repair/quarantine evidence: `fclr016_canonical_repair_202508_202510_bnb_sol_xrp_sampled_canonical_repair_20261107T224555Z.json` (DOWNLOADED 144, sha256_mismatch_after_download=0, repair_identity_ok=true); `fclr016_quarantine_top_level_placeholders_20261107T224836Z.json` (220 moves, reversible, audited). 2025-01 BTC/ETH canonical sampled remains GO_PARTIAL_BOUNDED (`*_202501_bounded_canonical_20261107T210801Z.*`).
 
 ### Bottlenecks removed this session (measurable)
-- Removed BNB/SOL/XRP 2025-08..10 canonical sampled-identity blocker: downloaded missing canonical Binance Vision daily zips (144) with deterministic sha256 manifests; quarantined conflicting top-level placeholders (220) with reversible manifest. Reran FCLR-016: **NO_GO -> GO_PARTIAL_BOUNDED** on sampled scope.
-- Added `scripts/fclr016_repair_canonical_cache.py` (bounded, unauthenticated, no overwrite, fail-closed sha256 check).
-- Preserved guards: FCLR-014 confirmatory 2025+ fail-closed (10 tests green); FCLR-016 canonical-path tests (3 green); `tracka_resume_check` pass (network=false, writes_real_research_state=false).
+- None carried into this session: tree clean, state re-verified green (py_compile OK; 6/6 fclr014/fclr016 tests OK; tracka_resume_check pass=true). Prior session's bottlenecks already removed: BNB/SOL/XRP 2025-08..10 canonical sampled-identity blocker (144 downloads, sha256 manifests); 220 top-level placeholders quarantined reversibly; `scripts/fclr016_repair_canonical_cache.py` added; guards preserved (FCLR-014 10 tests green; FCLR-016 canonical-path tests 3 green; tracka_resume_check pass).
 
 ### Verification commands
 ```bash
@@ -38,11 +36,12 @@ python3 scripts/tracka_resume_check.py
 ### Do NOT
 - Re-probe exhausted Track A months/windows; reopen sealed FCLR-001/002/003/006/007/008; threshold-shop; merge tracks; claim economic value/overlay; treat v4/exploratory/sampled-only identity as confirmatory GO; run confirmatory outcomes on unprovenanced 2025+; edit `.github/workflows`; add status-only families.
 
-**Focus campaign (mandatory, no opt-out):** Every session until Track C/H001 forecast gate passes must either (a) advance FCLR-016 bounded/full canonical identity+provenance/admissibility with green gates and no outcomes, or (b) ship ≥1 substantive hardening/test/guardrail with green gates if blocked. Track A re-probe and confirmatory outcomes on unprovenanced 2025+ are prohibited. No status-only sessions.
+### Focus campaign (mandatory, no opt-out)
+Every session until Track C/H001 forecast gate passes must either (a) advance FCLR-016 bounded/full canonical identity+provenance/admissibility with green gates and no outcomes, or (b) ship ≥1 substantive hardening/test/guardrail with green gates if blocked. Track A re-probe and confirmatory outcomes on unprovenanced 2025+ are prohibited. No status-only sessions. A session that ends without (a) or (b) plus an updated AGENT_HANDOFF.md is incomplete.
 
 ---
 
-## 2026-11-07T22:50:37Z — FCLR-016 sampled canonical repair + placeholder quarantine (NO OUTCOMES)
+## 2026-11-07T22:50:37Z — FCLR-016 sampled canonical repair + placeholder quarantine (NO OUTCOMES) [re-verified 2026-11-07T22:53:46Z]
 
 **Focus:** (a) advanced FCLR-016 bounded identity/admissibility for 2025-08..10 with green gates.
 
