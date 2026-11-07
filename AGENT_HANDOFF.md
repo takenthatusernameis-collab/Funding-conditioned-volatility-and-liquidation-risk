@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE HANDOFF
 
-**INITIAL TASK MESSAGE (2026-11-07T16:12:00Z, git `a4bf1454`, gates verified): FCLR-015 provenance bottleneck PARTIALLY REMOVED (cache identity).** Repo **Funding-conditioned-volatility-and-liquidation-risk** (priority: funding-conditioned volatility & liquidation risk; Track A/B/C separated).
+**INITIAL TASK MESSAGE (2026-11-07T16:20:59Z, git `a4bf1454`, gates verified): Next focus = execute FCLR-015 full 2024-04..09 provenance manifest + Gate 4 prereg before outcomes; Track A/B unchanged (blocked/closed), Track C enabled but confirmatory still gated.** Repo **Funding-conditioned-volatility-and-liquidation-risk** (priority: funding-conditioned volatility & liquidation risk; Track A/B/C separated).
 
 ## Verified baseline (this session)
 - `python -B -m unittest discover -s tests -t .` → **751/751 OK**.
