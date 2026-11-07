@@ -115,8 +115,9 @@ class HyperliquidFundingIngestor:
         dfs = []
         for fname in self.files:
             try:
-                coin = fname.replace('.json', '')
-                with open(self.data_dir / fname) as f:
+                fname_str = str(fname)
+                coin = fname_str.replace('.json', '')
+                with open(self.data_dir / fname_str) as f:
                     data = json.load(f)
                 rows = []
                 for rec in data:
