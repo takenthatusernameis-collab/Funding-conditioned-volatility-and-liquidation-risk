@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-07T23:43:02Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
+## Initial Task Message (2026-11-07T23:45:25Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
 
 **Repo priority (Funding-conditioned-volatility-and-liquidation-risk):** (1) **Track C funding-conditioned volatility forecasting** — primary; H001 NOT_SUPPORTED, forecast gate NOT MET. (2) **Gate 4 v5 confirmatory path** — 2025-08..10 canonical cache for BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT now has full daily kind coverage locally (repair chunks completed, sha256_mismatch_after_download=0); **full-day Binance Vision identity probe + placeholder quarantine check + license/terms/completeness/leakage/prereg/freeze evidence still required before any confirmatory outcomes** (FCLR-014 guard fail-closed). (3) **Track A observed liquidation risk** — DATA_BLOCKED/no trigger (Hyperliquid ironflow data_through 2026-10; 2026-11..2027-02 absent); **NO re-probe**. (4) **Track B modeled boundary breach** — CLOSED_NEGATIVE.
 
