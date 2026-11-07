@@ -97,6 +97,15 @@ elif EXPERIMENT == "FCLR-012-V":
     DATA_END = "2026-11-02"
     SPLIT_KEY = "split_boundaries_fclr012v"
     START_ALL = "2026-08-07"
+elif EXPERIMENT == "FCLR-013":
+    # Confirmatory reopen on the GO-candidate 2026 Q3 5-symbol panel
+    # (2026-07-01..2026-09-30, 92 days, 3x30d blocks). Coverage-audited in
+    # research_state/fclr013_coverage_audit_20261107T0936Z.json. Pre-registered in
+    # research_state/pre_registration_fclr013_20261107T094132Z.md BEFORE outcomes.
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
+    DATA_END = "2026-09-30"
+    SPLIT_KEY = "split_boundaries_fclr013"
+    START_ALL = "2026-07-01"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"

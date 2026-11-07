@@ -281,6 +281,10 @@ SCRIPT_REGISTRY = {
     "class": "raw_fetch_monitor_provenance",
     "reason": "probe_fclr012v_extend.py: bounded fetch/probe/provenance utility; no Track A liquidation outcome claim production."
   },
+  "probe_fclr012v_extend2.py": {
+    "class": "raw_fetch_monitor_provenance",
+    "reason": "probe_fclr012v_extend2.py: bounded fetch/probe/provenance utility (FCLR-012-V forward extension); no Track A liquidation outcome claim production."
+  },
   "run_evaluation.py": {
     "class": "track_c_sealed_volatility",
     "reason": "Track C/FCLR volatility evaluation path (sealed); liquidation terms absent as claim target; no Track A guarded liquidation outcome reads."
