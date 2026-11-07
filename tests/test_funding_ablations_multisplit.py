@@ -73,7 +73,7 @@ class TestFundingMultisplit(unittest.TestCase):
     def test_multisplit_runs_and_reports_per_split(self):
         panel = self.panel
         ablations = {"A_rv_only": BASE, "B_rv_signed": BASE + ["funding_signed"]}
-        res, pooled = run_multisplit(panel, ablations)
+        res, pooled, split_paired = run_multisplit(panel, ablations)
         ok = [r for r in res if r.get("status") == "OK"]
         self.assertEqual(len(ok), 3)
         for r in ok:
@@ -84,6 +84,8 @@ class TestFundingMultisplit(unittest.TestCase):
                 self.assertIsNotNone(r["ablations"][ab]["qlike"])
         self.assertIn("B_rv_signed", pooled)
         self.assertGreater(len(pooled["B_rv_signed"]), 0)
+        self.assertIn("B_rv_signed", split_paired)
+        self.assertEqual(len(split_paired["B_rv_signed"]), 3)
 
     def test_a_rv_only_legacy_gate3_regression_stable(self):
         panel = self.panel

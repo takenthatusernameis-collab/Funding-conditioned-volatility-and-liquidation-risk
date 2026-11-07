@@ -1,7 +1,7 @@
 # Evaluation Summary - Funding Ablations (Gate 4, multi-split pilot)
 
-**Generated:** 2026-11-07T02:35:06Z
-**Git SHA:** 3aa41592dd20cebc22497c8a6d4a0ce2ff2da6f7
+**Generated:** 2026-11-07T03:21:33Z
+**Git SHA:** 97dbc2add1a0441f49b1d901e4aae546a1282a37
 **Pre-registration:** `research_state/pre_registration_gate4_funding_multisplit_20261107.md` (frozen before outcomes)
 **Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 3 pre-registered walk-forward splits
 **Model:** direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)
@@ -22,6 +22,23 @@
 | C_rv_abs | 16.987894189880944 | 0.0016771724880907523 | 0.0024518364960988983 | 8.4009401155691 | [-0.12384387819312244, 24.20983559161728] | 2605/42 |
 | D_rv_signed_abs | 16.987894191103717 | 0.0016771724880907841 | 0.0024518364960989243 | 8.400940116333015 | [-0.12384387813653992, 24.20983559418449] | 2605/42 |
 | E_rv_funding_trails | 5.543607735488995 | 0.002022002371623597 | 0.0031514411874857535 | 4.6124034791315704 | [-0.1288482496015316, 13.12243540310433] | 1819/41 |
+
+## Per-Split Paired ΔQLIKE vs A (instability visibility)
+| Contrast | Split 0 | Split 1 | Split 2 | n_obs (0/1/2) |
+|---|---:|---:|---:|---|
+| B_rv_signed vs A | 2.7635981789135937 | -0.8255528770159717 | 39.773530160111854 | 1267/858/480 |
+| C_rv_abs vs A | 2.7635981789135937 | -0.8255528770159717 | 39.773530160111854 | 1267/858/480 |
+| D_rv_signed_abs vs A | 2.7635981789484814 | -0.8255528769363978 | 39.77353016402335 | 1267/858/480 |
+| E_rv_funding_trails vs A | 7.225674132309532 | 1.6403717659065886 | -0.14518458575410795 | 1091/343/385 |
+
+## Exploratory Sensitivity (NOT confirmatory; do not promote if unstable)
+> Block-bootstrap block size sensitivity for paired ΔQLIKE vs A. Pre-registered primary remains block=24h, seed=12345, reps=2000.
+| Contrast | block=12h CI | block=24h CI (primary) | block=48h CI |
+|---|---|---|---|
+| B_rv_signed vs A | [0.03167097314299948, 24.113780756864745] (pt=8.4009401155691) | [-0.12384387819312244, 24.20983559161728] (pt=8.4009401155691) | [-0.4346861087795748, 24.013335755917687] (pt=8.4009401155691) |
+| C_rv_abs vs A | [0.03167097314299948, 24.113780756864745] (pt=8.4009401155691) | [-0.12384387819312244, 24.20983559161728] (pt=8.4009401155691) | [-0.4346861087795748, 24.013335755917687] (pt=8.4009401155691) |
+| D_rv_signed_abs vs A | [0.03167097320054052, 24.11378075932841] (pt=8.400940116333015) | [-0.12384387813653992, 24.20983559418449] (pt=8.400940116333015) | [-0.43468610877481667, 24.013335758234238] (pt=8.400940116333015) |
+| E_rv_funding_trails vs A | [-0.09514734553306818, 13.357421456355203] (pt=4.6124034791315704) | [-0.1288482496015316, 13.12243540310433] (pt=4.6124034791315704) | [-0.11736393727590867, 12.703398803633622] (pt=4.6124034791315704) |
 
 ## Per-Split Details
 - Split 0: train ('2024-01-01T00:00:00+00:00', '2024-01-28T23:59:59+00:00') | test ('2024-02-05T00:00:00+00:00', '2024-02-18T23:59:59+00:00') | purge/embargo=7d | n_train=2688 n_test=1344

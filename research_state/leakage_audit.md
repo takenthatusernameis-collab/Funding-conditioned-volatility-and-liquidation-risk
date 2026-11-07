@@ -11,7 +11,7 @@
 - [x] Missing data treated as NaN (not imputed as zero)
 
 ## Funding ablations (Gate 4, multi-split pilot, direct-variance OLS)
-- **Updated:** 2026-11-07T02:35:06Z
+- **Updated:** 2026-11-07T03:21:33Z
 - [x] Funding ffill last-known at/before hour (no future).
 - [x] Trailing funding stats past-only on aligned series.
 - [x] Chronological multi-split walk-forward, purge/embargo=7d.

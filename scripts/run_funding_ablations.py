@@ -246,11 +246,12 @@ def build_prereg_splits() -> List[SplitBounds]:
     ]
 
 
-def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]]) -> Tuple[List[Dict[str, object]], Dict[str, pd.DataFrame]]:
+def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]]) -> Tuple[List[Dict[str, object]], Dict[str, pd.DataFrame], Dict[str, List[pd.DataFrame]]]:
     splits = build_prereg_splits()
     idx = panel.index.get_level_values("timestamp")
     all_results: List[Dict[str, object]] = []
-    pooled_paired: Dict[str, pd.DataFrame] = {k: [] for k in ablations.keys() if k != "A_rv_only"}
+    pooled_paired: Dict[str, List[pd.DataFrame]] = {k: [] for k in ablations.keys() if k != "A_rv_only"}
+    split_paired: Dict[str, List[pd.DataFrame]] = {k: [] for k in ablations.keys() if k != "A_rv_only"}
     for i, sp in enumerate(splits):
         meta = PRE_REG_SPLITS[i]
         split_res: Dict[str, object] = {"split_id": i, "train": meta["train"], "test": meta["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS, "ablations": {}}
@@ -260,6 +261,8 @@ def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]]) -> Tupl
             split_res["status"] = "INSUFFICIENT_DATA"
             split_res["n_train"] = int(len(train)); split_res["n_test"] = int(len(test))
             all_results.append(split_res)
+            for k in split_paired:
+                split_paired[k].append(pd.DataFrame(columns=["timestamp", "ql_base", "ql_alt", "diff"]))
             continue
         preds_map: Dict[str, np.ndarray] = {}
         y_test: Optional[np.ndarray] = None
@@ -280,15 +283,19 @@ def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]]) -> Tupl
                 split_res["ablations"][ab_name] = {"err": str(e)}
         if y_test is not None and ts_test is not None and "A_rv_only" in preds_map:
             for ab_name in pooled_paired.keys():
-                if ab_name in preds_map:
-                    pooled_paired[ab_name].append(paired_qlike_by_time(y_test, preds_map["A_rv_only"], preds_map[ab_name], ts_test))
+                dfp = paired_qlike_by_time(y_test, preds_map["A_rv_only"], preds_map[ab_name], ts_test) if ab_name in preds_map else pd.DataFrame(columns=["timestamp", "ql_base", "ql_alt", "diff"])
+                pooled_paired[ab_name].append(dfp)
+                split_paired[ab_name].append(dfp)
+        else:
+            for ab_name in split_paired:
+                split_paired[ab_name].append(pd.DataFrame(columns=["timestamp", "ql_base", "ql_alt", "diff"]))
         split_res["status"] = "OK"
         split_res["n_train"] = int(len(train)); split_res["n_test"] = int(len(test))
         all_results.append(split_res)
     pooled = {}
     for k, parts in pooled_paired.items():
         pooled[k] = pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=["timestamp", "ql_base", "ql_alt", "diff"])
-    return all_results, pooled
+    return all_results, pooled, split_paired
 
 
 def data_sufficiency(symbols: List[str], all_results: List[Dict[str, object]]) -> Dict[str, object]:
@@ -366,7 +373,7 @@ def main() -> int:
         "E_rv_funding_trails": base + ["funding_signed", "funding_abs"] + trail,
     }
 
-    all_results, pooled = run_multisplit(panel, ablations)
+    all_results, pooled, split_paired = run_multisplit(panel, ablations)
 
     def agg(ab_name: str, key: str = "qlike") -> Optional[float]:
         vals = [r["ablations"][ab_name][key] for r in all_results if r.get("status") == "OK" and ab_name in r.get("ablations", {}) and isinstance(r["ablations"][ab_name].get(key), (int, float)) and np.isfinite(r["ablations"][ab_name].get(key))]
@@ -375,6 +382,17 @@ def main() -> int:
     ci_results = {}
     for ab_name, df in pooled.items():
         ci_results[ab_name] = block_bootstrap_delta_ci(df)
+    # per-split paired deltas (primary E vs A and secondaries) — instability visibility
+    per_split_deltas = {}
+    for ab_name, parts in split_paired.items():
+        per_split_deltas[ab_name] = []
+        for i, df in enumerate(parts):
+            point = float(df["diff"].mean()) if df is not None and not df.empty else None
+            per_split_deltas[ab_name].append({"split_id": i, "delta_qlike_vs_A": point, "n_obs": int(len(df)) if df is not None else 0})
+    # EXPLORATORY sensitivity (pre-registered as exploratory in this addendum; not confirmatory, not claim-bearing)
+    exploratory_sensitivity = {"label": "EXPLORATORY — not pre-registered primary; do not promote if unstable", "block_hours": {}}
+    for bh in [12, 24, 48]:
+        exploratory_sensitivity["block_hours"][str(bh)] = {ab: block_bootstrap_delta_ci(df, block_hours=bh) for ab, df in pooled.items()}
 
     suff = data_sufficiency(symbols, all_results)
     verdict = "PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)"
@@ -387,6 +405,8 @@ def main() -> int:
         "splits": [{"id": s["id"], "train": s["train"], "test": s["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS} for s in PRE_REG_SPLITS],
         "aggregate": {k: {"qlike": agg(k, "qlike"), "mae": agg(k, "mae"), "rmse": agg(k, "rmse")} for k in ablations.keys()},
         "contrasts_vs_A": ci_results,
+        "per_split_paired_delta_vs_A": per_split_deltas,
+        "exploratory_sensitivity_block_hours": exploratory_sensitivity,
         "splits_detail": all_results,
         "data_sufficiency": suff,
         "bootstrap": {"seed": BOOTSTRAP_SEED, "reps": BOOTSTRAP_REPS, "block_hours": BOOTSTRAP_BLOCK_HOURS, "alpha": BOOTSTRAP_ALPHA, "joint_across_instruments": True, "resamples_time_blocks": True},
@@ -424,6 +444,21 @@ def main() -> int:
             cistr = f"[{ci['ci_low']}, {ci['ci_high']}]" if ci.get('ci_low') is not None else "NA"
             nstr = f"{ci.get('n_obs',0)}/{ci.get('n_blocks',0)}"
         lines.append(f"| {k} | {a['qlike']} | {a['mae']} | {a['rmse']} | {dstr} | {cistr} | {nstr} |")
+    lines += ["", "## Per-Split Paired ΔQLIKE vs A (instability visibility)"]
+    lines.append("| Contrast | Split 0 | Split 1 | Split 2 | n_obs (0/1/2) |")
+    lines.append("|---|---:|---:|---:|---|")
+    for ab in [k for k in ablations.keys() if k != "A_rv_only"]:
+        rows = per_split_deltas.get(ab, [])
+        vals = [(str(r["delta_qlike_vs_A"]) if r.get("delta_qlike_vs_A") is not None else "NA") for r in rows]
+        ns = "/".join(str(r.get("n_obs",0)) for r in rows)
+        while len(vals) < 3: vals.append("NA")
+        lines.append(f"| {ab} vs A | {vals[0]} | {vals[1]} | {vals[2]} | {ns} |")
+    lines += ["", "## Exploratory Sensitivity (NOT confirmatory; do not promote if unstable)", "> Block-bootstrap block size sensitivity for paired ΔQLIKE vs A. Pre-registered primary remains block=24h, seed=12345, reps=2000.", "| Contrast | block=12h CI | block=24h CI (primary) | block=48h CI |", "|---|---|---|---|"]
+    for ab in [k for k in ablations.keys() if k != "A_rv_only"]:
+        def _ci(bh):
+            c = exploratory_sensitivity["block_hours"][str(bh)].get(ab, {})
+            return f"[{c.get('ci_low')}, {c.get('ci_high')}] (pt={c.get('point')})" if c.get('ci_low') is not None else "NA"
+        lines.append(f"| {ab} vs A | {_ci(12)} | {_ci(24)} | {_ci(48)} |")
     lines += ["", "## Per-Split Details"]
     for r in all_results:
         if r.get("status") != "OK":
@@ -477,6 +512,8 @@ def main() -> int:
     manifest["funding_ablations_splits"] = summary["splits"]
     manifest["funding_ablations_bootstrap"] = summary["bootstrap"]
     manifest["funding_ablations_data_sufficiency"] = suff
+    manifest["funding_ablations_per_split_paired_delta_vs_A"] = per_split_deltas
+    manifest["funding_ablations_exploratory_sensitivity_block_hours"] = exploratory_sensitivity
     manifest["funding_ablations_verdict"] = verdict
     manifest["funding_ablations_pre_registration"] = summary["pre_registration"]
     (RES / "run_manifest.json").write_text(json.dumps(manifest, indent=2, default=str) + "\n")
