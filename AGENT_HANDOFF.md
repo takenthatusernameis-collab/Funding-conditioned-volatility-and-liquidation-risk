@@ -1,78 +1,64 @@
-## Initial Task Message (2026-11-07T22:40:31Z) — Next Agentic Session
+## Initial Task Message (2026-11-07T22:50:37Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
 
-**Repo priority (by name: Funding-conditioned-volatility-and-liquidation-risk):** (1) **Track C funding-conditioned volatility forecasting** — primary; forecast gate NOT MET (H001 NOT_SUPPORTED). (2) **Gate 4 v5 confirmatory path** — NOT_READY/NO_GO until 2025+ canonical identity + license/terms + completeness + freeze/prereg proven; **no confirmatory outcomes on unprovenanced/incomplete 2025+ cache** (FCLR-014 guard active). (3) **Track A observed liquidation risk** — DATA_BLOCKED, no trigger (data_through 2026-10; 2026-11..2027-02 absent; Hyperliquid-only); **NO re-probe**. (4) **Track B modeled boundary breach** — CLOSED_NEGATIVE.
+**Repo priority (Funding-conditioned-volatility-and-liquidation-risk):** (1) **Track C funding-conditioned volatility forecasting** — primary; H001 NOT_SUPPORTED, forecast gate NOT MET. (2) **Gate 4 v5 confirmatory path** — sampled 2025-08..10 canonical identity/provenance is **GO_PARTIAL_BOUNDED** after FCLR-016 repair+quarantine; **full canonical completeness + license/terms + leakage/prereg/freeze still required before any confirmatory outcomes** (FCLR-014 guard remains fail-closed). (3) **Track A observed liquidation risk** — DATA_BLOCKED/no trigger (Hyperliquid ironflow data_through 2026-10; 2026-11..2027-02 absent); **NO re-probe**. (4) **Track B modeled boundary breach** — CLOSED_NEGATIVE.
 
 ### Single highest-value next task (heavy, measurable, unblocked)
-**P0 — Make 2025-08..10 a v5-candidate only by completing canonical identity+provenance; do NOT run outcomes.**
-1. **Repair canonical cache completeness** for `BNBUSDT,SOLUSDT,XRPUSDT` across `2025-08,2025-09,2025-10` (all 5 kinds: `fundingRate,klines,markPriceKlines,indexPriceKlines,premiumIndexKlines`; daily kinds require `<kind>-YYYY-MM-DD>/<SYM>-1h-YYYY-MM-DD.zip`). Evidence from this session: BTC/ETH sampled canonical files MATCH Binance Vision (34/34 for 2025-09+10; BTC/ETH 2025-08 canonical present where matched), but BNB/SOL/XRP are missing sampled daily canonical subdirs (BNB 2025-09 also missing `klines-*` subdirs). If admissible local source bytes already exist, promote only with verifiable sha256 lineage; otherwise perform bounded unauthenticated Binance Vision acquisition with deterministic manifest + remote sha256/etag/last-modified + license/terms evidence recorded in `research_state/fclr016_local_audit/` (no outcomes, no auth/paid/manual/key bypass).
-2. **Rerun bounded FCLR-016 probe** (sample days 1,15,28 minimum; expand to `full` only if bounded/justified) for the repaired months/symbols; require for any v5 GO_PARTIAL/GO claim: `mismatch==0, missing_local==0, missing_remote==0, remote_error==0, placeholder_duplicate_files==0` on the frozen sampled/full scope, plus explicit `confirmatory_claim_go` remains NO_GO until license/completeness/leakage/prereg/freeze are satisfied.
-3. **If identity cannot be completed admissibly:** keep Gate 4 v5 `NOT_READY/NO_GO`; ship ≥1 substantive hardening/test/guardrail with green gates (e.g., completeness-threshold guard refusing confirmatory manifests whose canonical cache coverage is below required symbol×kind×day set; fixture test) and record evidence. Do not draft a confirmatory prereg claiming GO for 2025-08..10.
-4. **Track A:** only on genuinely new unauthenticated admissible source passing strict rubric; otherwise skip re-probe.
+**P0 — Complete Gate 4 v5 admissibility for 2025-08..10 without running outcomes.**
+1. **Expand FCLR-016 from sampled (days 1,15,28+last) to full-day canonical identity verification** for `BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT` × `2025-08,2025-09,2025-10` × all 5 kinds, using bounded unauthenticated Binance Vision checks with deterministic manifests (`--sample-days full` or bounded chunked runs with `--resume`/`--checkpoint-every`; record sha256/etag/last-modified). Repair/quarantine any missing canonical or placeholder conflicts with audited, reversible actions (see `scripts/fclr016_repair_canonical_cache.py`, `research_state/fclr016_local_audit/fclr016_quarantine_top_level_placeholders_20261107T224836Z.json`). **Do not inspect/run confirmatory outcomes.**
+2. **Assemble Gate 4 v5 admissibility evidence package** (still NO confirmatory run): (a) full identity probe GO (match>0, mismatch/missing/remote_error/placeholder==0 on frozen scope), (b) explicit Binance Vision/data-use license/terms evidence recorded as machine-readable provenance manifest referenced by `--provenance-manifest` path, (c) completeness/leakage checks (no overlap vs consumed/confounded/guard windows; full symbol×kind×day coverage), (d) if all pass, draft a **preregistered confirmatory design doc** (frozen splits/features/targets/metrics/stop rule, data hashes, provenance manifest hash) but keep `confirmatory_claim_go=NO_GO` until manifest is committed/frozen and FCLR-014 guard accepts it. If any fail, keep v5 `NOT_READY/NO_GO` and ship ≥1 substantive hardening/test/guardrail with green gates.
+3. **Track A:** only on genuinely new unauthenticated admissible Hyperliquid-only source passing strict rubric + prereg before outcome inspection; otherwise skip re-probe entirely.
 
-### Current gate state (evidence-backed)
-- Track A = `DATA_BLOCKED` (no trigger; monitor-only).
-- Track B = `CLOSED_NEGATIVE`.
-- Track C/H001 = `NOT_SUPPORTED` (forecast gate NOT MET).
+### Current gate state (evidence-backed, 2026-11-07T22:50:37Z)
+- Track A = `DATA_BLOCKED` (no trigger). Track B = `CLOSED_NEGATIVE`. Track C/H001 = `NOT_SUPPORTED` (forecast gate NOT MET).
 - Gate 4 v4 = `EXPLORATORY_INCONCLUSIVE` (confounded 2024-04..09; not promotable).
-- Gate 4 v5 = `NOT_READY` / confirmatory `NO_GO`.
-  - 2025-01 BTC/ETH canonical sampled: `GO_PARTIAL_BOUNDED` match=6 mismatch=0 (`fclr016_binance_vision_probe_202501_bounded_canonical_20261107T210801Z.*`).
-  - 2025-08 canonical v2 sampled: match=37 mismatch=0 **missing_local=48** placeholder_duplicate_files=32 => `NO_GO` (`*_202508_*canonical_v2_20261107T223731Z.*`).
-  - 2025-09..10 canonical sampled: match=74 mismatch=0 **missing_local=96** placeholder_duplicate_files=64 => `NO_GO` (`*_202509_202510_*canonical_20261107T223633Z.*`). BTC/ETH matched 34/34; BNB/SOL/XRP lacked canonical daily coverage.
-  - Non-overlap proof for 2025-08-01..2025-10-29 vs consumed/confounded/guard windows (FCLR-002/003/013 committed 2024 ranges, v3 2024-01..03-30, v4 2024-04..09-29, guard 2024-01..12, 2026-07..09): **no overlap** (necessary only).
+- Gate 4 v5 sampled identity (this session): `GO_PARTIAL_BOUNDED` for 2025-08..10, 5 symbols, 5 kinds, sample days 1,15,28+last — `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_5sym_5kind_sampled_canonical_postrepair_postquarantine_v4_20261107T224842Z.json` (summary: match=255 mismatch=0 missing_local=0 missing_remote=0 remote_error=0 placeholder_duplicate_files=0). **Partial only; full-day not yet verified; confirmatory_claim_go remains NO_GO.**
+- Repair/quarantine evidence: `fclr016_canonical_repair_202508_202510_bnb_sol_xrp_sampled_canonical_repair_20261107T224555Z.json` (DOWNLOADED 144, sha256_mismatch_after_download=0, repair_identity_ok=true); `fclr016_quarantine_top_level_placeholders_20261107T224836Z.json` (220 moves, reversible, audited). 2025-01 BTC/ETH canonical sampled remains GO_PARTIAL_BOUNDED (`*_202501_bounded_canonical_20261107T210801Z.*`).
 
-### Bottlenecks removed / guardrails active
-- FCLR-014 confirmatory provenance guard in `scripts/run_funding_ablations.py`: confirmatory 2025+ runs fail closed (rc=2, JSON `REFUSED`) without `--provenance-manifest` / verified evidence; exploratory/pilot unaffected. Guarded by `tests/test_fclr014*.py` (10 tests).
-- FCLR-016 canonical-path guardrails (no network): `tests/test_fclr016_provenance_probe.py` (3 tests) — top-level same-name daily zips are **not** canonical identity evidence; placeholders flagged.
-- Track A inefficiency removed: no re-probe of exhausted/absent months/windows; monitor-only.
-- Superseded/misleading evidence control: 2025-08 non-canonical probe comparing top-level placeholders is superseded by `*_canonical_v2_*`; do not cite as identity evidence.
+### Bottlenecks removed this session (measurable)
+- Removed BNB/SOL/XRP 2025-08..10 canonical sampled-identity blocker: downloaded missing canonical Binance Vision daily zips (144) with deterministic sha256 manifests; quarantined conflicting top-level placeholders (220) with reversible manifest. Reran FCLR-016: **NO_GO -> GO_PARTIAL_BOUNDED** on sampled scope.
+- Added `scripts/fclr016_repair_canonical_cache.py` (bounded, unauthenticated, no overwrite, fail-closed sha256 check).
+- Preserved guards: FCLR-014 confirmatory 2025+ fail-closed (10 tests green); FCLR-016 canonical-path tests (3 green); `tracka_resume_check` pass (network=false, writes_real_research_state=false).
 
 ### Verification commands
 ```bash
-python3 -m py_compile scripts/fclr016_verify_cache_provenance_2025plus.py scripts/run_funding_ablations.py
+python3 -m py_compile scripts/fclr016_verify_cache_provenance_2025plus.py scripts/fclr016_repair_canonical_cache.py scripts/run_funding_ablations.py
 python3 -m unittest tests.test_fclr014_anchor_integrity tests.test_fclr016_provenance_probe -v
 python3 -m unittest discover -s tests -p 'test_fclr014*.py' -v
-python3 scripts/fclr016_verify_cache_provenance_2025plus.py --symbols BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT --months 2025-08,2025-09,2025-10 --kinds fundingRate,klines,markPriceKlines,indexPriceKlines,premiumIndexKlines --sample-days 1,15,28 --out-tag <tag>
+python3 scripts/fclr016_verify_cache_provenance_2025plus.py --symbols BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT --months 2025-08,2025-09,2025-10 --kinds fundingRate,klines,markPriceKlines,indexPriceKlines,premiumIndexKlines --sample-days full --resume <checkpoint.json> --checkpoint-every 50 --out-tag 202508_202510_5sym_5kind_full_canonical_v5
 python3 scripts/tracka_resume_check.py
-python3 -m unittest tests.test_funding_ablations -v  # requires numpy; run in project env
-python3 -m unittest discover -s tests -q
 ```
 
 ### Acceptance criteria
-- Deterministic JSON+MD probe artifacts under `research_state/fclr016_local_audit/` with explicit `cache_identity_vs_binance_vision` and `confirmatory_claim_go` fields.
-- No confirmatory outcomes on unprovenanced/incomplete 2025+ cache; FCLR-014 guard remains fail-closed.
-- Refusals parseable JSON, no tracebacks, exit!=0, canonical outputs unchanged.
+- Deterministic JSON+MD probe artifacts with explicit `cache_identity_vs_binance_vision` and `confirmatory_claim_go`; full-scope GO requires mismatch/missing/remote_error/placeholder==0.
+- No confirmatory outcomes on unprovenanced/incomplete 2025+ cache; FCLR-014 guard fail-closed.
+- Refusals parseable JSON, no tracebacks, exit!=0, canonical outputs unchanged on blocked paths.
 - No sealed FCLR artifacts reopened; no threshold-shopping; no track conflation; no economic/overlay claims.
-- Root md+json bound respected; no `.github/workflows` edits; no status-only/poller/wrapper/scheduler families.
+- Root md+json bound respected (2); no `.github/workflows` edits; no status-only/poller/wrapper/scheduler families.
 
 ### Do NOT
-- Re-probe exhausted Track A months/windows; reopen sealed FCLR-001/002/003/006/007/008; threshold-shop; merge tracks; claim economic value/overlay; treat v4/exploratory as confirmatory; run confirmatory outcomes on unprovenanced 2025+; edit `.github/workflows`; add status-only families.
+- Re-probe exhausted Track A months/windows; reopen sealed FCLR-001/002/003/006/007/008; threshold-shop; merge tracks; claim economic value/overlay; treat v4/exploratory/sampled-only identity as confirmatory GO; run confirmatory outcomes on unprovenanced 2025+; edit `.github/workflows`; add status-only families.
 
-**Focus campaign (mandatory, no opt-out):** Every session until Track C/H001 forecast gate passes must either (a) advance FCLR-016 bounded canonical identity/provenance verification with green gates, or (b) ship ≥1 substantive hardening/test/guardrail with green gates if blocked on NO-GO. Track A re-probe and confirmatory outcomes on unprovenanced 2025+ are prohibited. No status-only sessions.
+**Focus campaign (mandatory, no opt-out):** Every session until Track C/H001 forecast gate passes must either (a) advance FCLR-016 bounded/full canonical identity+provenance/admissibility with green gates and no outcomes, or (b) ship ≥1 substantive hardening/test/guardrail with green gates if blocked. Track A re-probe and confirmatory outcomes on unprovenanced 2025+ are prohibited. No status-only sessions.
 
 ---
 
-## 2026-11-07T22:37:31Z — FCLR-016 bounded 2025-08..10 canonical identity probe (NO OUTCOMES)
+## 2026-11-07T22:50:37Z — FCLR-016 sampled canonical repair + placeholder quarantine (NO OUTCOMES)
 
-**Focus (mandatory):** (a) advanced FCLR-016 bounded identity verification across symbols×months with green gates.
+**Focus:** (a) advanced FCLR-016 bounded identity/admissibility for 2025-08..10 with green gates.
 
 ### Work done
-- Bounded unauthenticated Binance Vision probes (sample days 1,15,28; BTC/ETH/BNB/SOL/XRP; `fundingRate,klines,markPriceKlines,indexPriceKlines,premiumIndexKlines`; canonical). No confirmatory outcomes.
-  - `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_5sym_5kind_sampled_canonical_v2_20261107T223731Z.json|.md`: match=37 mismatch=0 missing_local=48 missing_remote=0 remote_error=0 placeholder_duplicate_files=32 => `cache_identity_vs_binance_vision=NO_GO` (canonical subdirs incomplete).
-  - `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202509_202510_5sym_5kind_sampled_canonical_20261107T223633Z.json|.md`: match=74 mismatch=0 missing_local=96 missing_remote=0 remote_error=0 placeholder_duplicate_files=64 => `NO_GO`. BTC/ETH sampled MATCH 34/34 for 2025-09+10; BNB/SOL/XRP missing daily canonical coverage (BNB 2025-09 missing `klines-*` subdirs).
-- 2025-01 BTC/ETH canonical sampled retained as `GO_PARTIAL_BOUNDED` match=6 mismatch=0 (`*_202501_bounded_canonical_20261107T210801Z.*`). Earlier 2025-08 top-level-placeholder probe superseded by `*_canonical_v2_*`.
-- Added `tests/test_fclr016_provenance_probe.py` (3 tests, green, no network): top-level placeholder not canonical/flagged; canonical subdir selected; fundingRate monthly path.
+- **Repair:** `scripts/fclr016_repair_canonical_cache.py` downloaded 144 missing canonical Binance Vision daily zips for BNBUSDT/SOLUSDT/XRPUSDT × 2025-08..10 × 4 daily kinds × sample days {1,15,28,last} into `<kind>-<day>/` canonical subdirs. Report: `research_state/fclr016_local_audit/fclr016_canonical_repair_202508_202510_bnb_sol_xrp_sampled_canonical_repair_20261107T224555Z.json` — DOWNLOADED 144, sha256_mismatch_after_download=0, remote errors/missing 0, `repair_identity_ok=true`. Source: `https://data.binance.vision/` unauthenticated public archive; no auth/paid/manual/key bypass; no outcomes.
+- **Quarantine (bottleneck removal):** moved 220 top-level same-name daily placeholder zips (BTC/ETH/BNB/SOL/XRP × 2025-08..10, sampled+present days) to audited per-month `__top_level_placeholders_quarantined_fclr016_20261107T224836Z/` dirs; reversible manifest `research_state/fclr016_local_audit/fclr016_quarantine_top_level_placeholders_20261107T224836Z.json`. Reason: top-level duplicates conflicted with canonical kind subdirs and caused `placeholder_duplicate_files` NO_GO; FCLR-016 `local_zip` ignores top-level for daily kinds.
+- **Identity re-probe:** `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_5sym_5kind_sampled_canonical_postrepair_postquarantine_v4_20261107T224842Z.json` — match=255, mismatch=0, missing_local=0, missing_remote=0, remote_error=0, placeholder_duplicate_files=0, `cache_identity_vs_binance_vision=GO_PARTIAL_BOUNDED`, `confirmatory_claim_go=NO_GO`. Scope is sampled only (1,15,28,last) × 5 symbols × 3 months × 5 kinds; full-day identity NOT yet verified.
 
-### Non-overlap (necessary only)
-2025-08-01..2025-10-29 candidate: no overlap vs FCLR-002/003/013 2024 committed ranges, Gate4 v3 2024-01..03-30, v4 2024-04..09-29, guards 2024-01..12 and 2026-07..09. Still `confirmatory_claim_go=NO_GO` until full canonical identity+license/terms+completeness+leakage/prereg+freeze.
+### Cache/git note
+`research_state/data_cache` is tracked in this repo; quarantine moved tracked top-level files (git shows deletions) and repair created untracked canonical subdir files. **Bulky cache zip churn is intentionally not staged in this handoff commit** (durable artifacts committed: repair script + FCLR-016 manifests/MD + handoff). Local cache state is auditable/reversible via quarantine manifest.
 
 ### Verification
+- `python3 -m py_compile scripts/fclr016_verify_cache_provenance_2025plus.py scripts/fclr016_repair_canonical_cache.py scripts/run_funding_ablations.py` — OK
 - `python3 -m unittest tests.test_fclr014_anchor_integrity tests.test_fclr016_provenance_probe -v` — 6 OK
 - `python3 -m unittest discover -s tests -p 'test_fclr014*.py' -v` — 10 OK
-- `python3 -m py_compile scripts/fclr016_verify_cache_provenance_2025plus.py scripts/run_funding_ablations.py` — OK
-- `python3 scripts/tracka_resume_check.py` — pass=true, network=false
-- `python3 -m unittest tests.test_funding_ablations -v` — env-blocked (`numpy` missing); no funding-ablation logic changed.
+- `python3 scripts/tracka_resume_check.py` — pass=true, network=false, writes_real_research_state=false
 
-### Next
-P0: complete/verify admissible canonical daily subdirs for BNB/SOL/XRP 2025-08..10 with deterministic sha256+license evidence (no outcomes), rerun FCLR-016; if not admissible/complete keep v5 `NOT_READY/NO_GO` and ship completeness-threshold confirmatory guard + tests. Track A monitor-only.
-
-**Focus campaign (mandatory, no opt-out):** Every session until Track C/H001 forecast gate passes must either (a) advance FCLR-016 bounded identity verification across symbols×months with green gates, or (b) ship ≥1 substantive hardening/test/guardrail with green gates if blocked on NO-GO. Track A re-probe and confirmatory outcomes on unprovenanced 2025+ are prohibited. No status-only sessions.
+### Next (P0)
+Expand to `--sample-days full` bounded/chunked identity probe for 2025-08..10 (5 symbols × 5 kinds), repair/quarantine any new conflicts with audited manifests, assemble license/terms+completeness+leakage/prereg evidence package, keep confirmatory `NO_GO` until frozen/admissible; ship hardening guardrails if blocked. Track A monitor-only.
