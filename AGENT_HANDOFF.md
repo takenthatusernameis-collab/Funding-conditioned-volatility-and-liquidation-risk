@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE INITIAL TASK (NEXT SESSION)
 
-**TIMESTAMP (UTC):** 2026-11-07T00:20:54Z (refreshed; supersedes conflicting prior handoff text)
+**TIMESTAMP (UTC):** 2026-11-07T00:32:30Z (refreshed; supersedes conflicting prior handoff text)
 **REPO (priority):** Funding-conditioned-volatility-and-liquidation-risk — focus on **funding-conditioned volatility** (Gate 4) first; **liquidation risk** remains blocked/guarded (no trigger).
 **AUTHORITY:** This file is the single durable handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md` or frontier entries conflict, follow this file; record reconciliation in artifacts.
 
-## VERIFIED STATE (this session, 2026-11-07T00:20:54Z)
+## VERIFIED STATE (this session, 2026-11-07T00:32:30Z)
 - Git: clean `main` @ `8e0d7aee` (HEAD). No workflow changes.
 - `scripts/tracka_resume_check.py`: **pass:true**, 17/17 checks, `network:false`, `writes_real_research_state:false`.
 - `scripts/tracka_resume_gate.py`: **BLOCKED** `PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `fail_closed_order=drift_preflight->manifest_prereg`, `outcomes_inspected:false`.
@@ -15,7 +15,7 @@
 - Track C/B context preserved in frontier/gate artifacts (sealed/NOT_SUPPORTED as recorded). Do not reopen sealed claims.
 
 ## BOTTLENECKS REMOVED / AMBIGUITIES RESOLVED
-- Normalized `research_state/experiment_frontier.json`: `FCLR-NEXT-131` frontier-list status corrected to `COMPLETE`; stale `next_action_heavy` pointing to missing `FCLR-NEXT-132` replaced with handoff-directed instruction. `handoff_refreshed_utc=20261107T002054Z`.
+- Normalized `research_state/experiment_frontier.json`: `FCLR-NEXT-131` frontier-list status corrected to `COMPLETE`; stale `next_action_heavy` pointing to missing `FCLR-NEXT-132` replaced with handoff-directed instruction. `handoff_refreshed_utc=20261107T003230Z`.
 - `AGENT_HANDOFF.md` (root) vs `FCLR_CAMPAIGN_NEXT.md` (Track A lockdown, FCLR-NEXT-139) conflict: **resolved by prioritizing repo name** — Gate 4 funding ablations are the highest-value *unblocked* heavy work with local data; Track A remains blocked and guarded (hardening continues only when naming a specific uncovered gap with measurable tmp-isolated tests, no status-only churn).
 
 ## SINGLE MANDATORY HEAVY-WORK CAMPAIGN (NO COASTING)
