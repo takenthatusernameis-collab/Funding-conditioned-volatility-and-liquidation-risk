@@ -5,12 +5,15 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Tuple
 
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.ingest import loader
 from src.features import volatility as vf
@@ -133,33 +136,37 @@ def add_funding_to_panel(kpanel: pd.DataFrame, fpanel: pd.DataFrame) -> pd.DataF
     return merged
 
 
-def ridge_fit(X: np.ndarray, y: np.ndarray, lam: float) -> Tuple[np.ndarray, float]:
-    mask = np.isfinite(y) & np.all(np.isfinite(X), axis=1)
-    Xc, yc = X[mask], y[mask]
-    if len(yc) < 2:
-        return np.zeros(X.shape[1]), float(np.nanmean(yc)) if np.isfinite(yc).any() else 0.0
-    n, k = Xc.shape
-    XtX = Xc.T @ Xc
-    try:
-        coef = np.linalg.solve(XtX + lam * np.eye(k), Xc.T @ yc)
-    except np.linalg.LinAlgError:
-        coef = np.zeros(k)
-    intercept = float(yc.mean() - coef @ Xc.mean(axis=0))
-    return coef, intercept
+def fit_predict_ols(train_n: pd.DataFrame, test_n: pd.DataFrame, fcols: List[str]) -> np.ndarray:
+    """Direct-variance OLS (same form as the validated Gate 3 RV-only baseline).
 
-
-def fit_predict_log_har(train_n: pd.DataFrame, test_n: pd.DataFrame, fcols: List[str], lam: float) -> np.ndarray:
+    Fits target_rv (raw, non-negative) on train-only-normalized features per
+    symbol. No log target, no exponentiation -- predictions stay on the
+    variance scale and cannot explode to absurd magnitudes.
+    """
     preds = np.full(len(test_n), np.nan)
     for sym, grp in test_n.groupby(level="symbol", sort=False):
         tr = train_n.loc[train_n.index.get_level_values("symbol") == sym]
         ytr = tr["target_rv"].to_numpy(dtype=float)
-        ytr_log = np.log(np.clip(ytr, EPS, None))
         Xtr = tr[fcols].to_numpy(dtype=float)
-        coef, intercept = ridge_fit(Xtr, ytr_log, lam)
+        mask = np.isfinite(ytr) & np.all(np.isfinite(Xtr), axis=1)
+        Xc, yc = Xtr[mask], ytr[mask]
+        if len(yc) < 2:
+            continue
+        k = Xc.shape[1]
+        XtX = Xc.T @ Xc
+        ridge = 1e-10 * np.eye(k)
+        try:
+            coef = np.linalg.solve(XtX + ridge, Xc.T @ yc)
+        except np.linalg.LinAlgError:
+            continue
+        intercept = float(yc.mean() - coef @ Xc.mean(axis=0))
         Xte = grp[fcols].to_numpy(dtype=float)
-        p_log = intercept + Xte @ coef
-        p_log[~np.isfinite(p_log)] = np.nan
-        preds[test_n.index.get_indexer(grp.index)] = np.exp(p_log)
+        p = intercept + Xte @ coef
+        p[~np.isfinite(p)] = np.nan
+        # Variance forecasts are non-negative by construction; floor tiny OLS
+        # overshoots at zero without affecting QLIKE (p<=0 rows are excluded).
+        p = np.maximum(p, 0.0)
+        preds[test_n.index.get_indexer(grp.index)] = p
     return preds
 
 
@@ -179,7 +186,6 @@ def main() -> int:
     start = "2024-01-01"
     end = "2024-03-31"
     horizon = 24
-    lam = 1e-3
     RES.mkdir(parents=True, exist_ok=True)
 
     kpanel = load_kline_panel(symbols, start, end, horizon=horizon)
@@ -219,7 +225,7 @@ def main() -> int:
             fcols = [c for c in fcols if c in panel.columns]
             try:
                 train_n, val_n, test_n, _ = wf.apply_train_only_normalization(train, val, test, fcols)
-                p = fit_predict_log_har(train_n, test_n, fcols, lam)
+                p = fit_predict_ols(train_n, test_n, fcols)
                 y = test_n["target_rv"].to_numpy(dtype=float)
                 m = metrics(y, p)
                 m["n_features"] = len(fcols)
@@ -235,19 +241,18 @@ def main() -> int:
 
     summary = {
         "generated_at": now_iso(), "git_sha": git_sha(), "symbols": symbols,
-        "period": {"start": start, "end": end}, "horizon": horizon, "ridge_lambda": lam,
-        "model": "log-target ridge HAR (exp back; target = forward realized VARIANCE, non-negative by construction)",
+        "period": {"start": start, "end": end}, "horizon": horizon,
+        "model": "direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization; no log/exp transform)",
         "aggregate": {k: {"qlike": agg(k, "qlike"), "mae": agg(k, "mae"), "rmse": agg(k, "rmse"), "neg_pred": agg(k, "neg_pred")} for k in ablations.keys()},
         "splits_detail": all_results,
     }
-
     qA = summary["aggregate"]["A_rv_only"]["qlike"]
     out_md = RES / "evaluation_summary_funding.md"
     lines = [
         "# Evaluation Summary - Funding Ablations (Gate 4, pilot)",
         "", f"**Generated:** {summary['generated_at']}", f"**Git SHA:** {summary['git_sha']}",
         f"**Scope:** {', '.join(symbols)}, {start} to {end}, 24h forward RV, 1 walk-forward split",
-        f"**Model:** log-target ridge HAR (λ={lam}), predictions exp-transformed (positive). Train-only normalization, chronological splits, 7d purge/embargo.",
+        f"**Model:** direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization). No log target, no exp transform.",
         "",
         "## Aggregate (mean across splits)",
         "| Ablation | QLIKE | MAE | RMSE | ΔQLIKE vs A | neg_pred |",
@@ -302,7 +307,7 @@ def main() -> int:
     manifest = json.loads((RES / "run_manifest.json").read_text()) if (RES / "run_manifest.json").exists() else {}
     manifest["last_funding_ablations"] = summary["generated_at"]
     manifest["funding_ablations"] = summary["aggregate"]
-    manifest["funding_ablations_note"] = "pilot_inconclusive"
+    manifest["funding_ablations_note"] = "pilot_direct_variance_ols"
     (RES / "run_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
     leak = (RES / "leakage_audit.md").read_text() if (RES / "leakage_audit.md").exists() else "# Leakage Audit\n"

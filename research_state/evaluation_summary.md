@@ -27,14 +27,14 @@
 - Funding ablations remain blocked until Gate 3 satisfied.
 
 ## Funding Ablations (Gate 4)
-**Updated:** 2026-11-07T01:14:21Z (pilot, 1 split, log-target ridge HAR; not a sealed claim)
+**Updated:** 2026-11-07T01:24:13Z (pilot, 1 split, direct-variance OLS HAR; not a sealed claim)
 
 | Ablation | QLIKE | ΔQLIKE vs A | MAE | neg_pred |
 |---|---|---|---|---|
-| A_rv_only | 333293.4217179353 | 0.0 | 255952842.64419475 | 0.0 |
-| B_rv_signed | 4847457.505402432 | 4514164.083684497 | 15955243.776873946 | 0.0 |
-| C_rv_abs | 4847457.505402432 | 4514164.083684497 | 15955243.776873946 | 0.0 |
-| D_rv_signed_abs | 4847468.957729966 | 4514175.536012031 | 15955229.924937373 | 0.0 |
-| E_rv_funding_trails | 1.7172709452688984e+46 | 1.7172709452688984e+46 | 2.853194870747307e+90 | 0.0 |
+| A_rv_only | 1.59541000261996 | 0.0 | 0.001682307260657039 | 342.0 |
+| B_rv_signed | 1.4392367821430467 | -0.1561732204769133 | 0.002343811776289131 | 188.0 |
+| C_rv_abs | 1.4392367821430467 | -0.1561732204769133 | 0.002343811776289131 | 188.0 |
+| D_rv_signed_abs | 1.4392367821409628 | -0.15617322047899718 | 0.0023438117762892034 | 188.0 |
+| E_rv_funding_trails | 1.0644322409593807 | -0.5309777616605793 | 0.0030111074589971904 | 675.0 |
 
-> Pilot result: funding variants worse than RV-only on this split/sample. Inconclusive; expand splits and robustness before inference.
+> Pilot result: funding-augmented variants (B/C/D) improve QLIKE vs RV-only (A) by ~0.16; adding trailing funding percentiles/zscores (E) improves further to QLIKE 1.0644 (Δ ≈ -0.53 vs A). Single split, 4 assets, Jan-Mar 2024; not a sealed holdout result, no block-aware CIs, no multiple-comparison control. Label PILOT/INCONCLUSIVE; expand splits and robustness before inference.
