@@ -653,7 +653,7 @@
   ],
   "tree_etag": "W/\"test\"",
   "last_scan": {
-    "timestamp_utc": "2026-11-04T20:40:37.413273+00:00",
+    "timestamp_utc": "2026-11-07T06:15:55.165990+00:00",
     "go": false,
     "reasons": []
   },
@@ -1344,17 +1344,6 @@
   },
   "probe_history": [
     {
-      "timestamp_utc": "2026-11-05T16:17:30.341129+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "dd3879f6a01513b5"
-    },
-    {
       "timestamp_utc": "2026-11-05T16:29:46.468142+00:00",
       "type": "quick",
       "data_through": "2026-10",
@@ -1452,6 +1441,18 @@
       "get_requests_skipped": 8,
       "triggered": false,
       "hash": "0a02e0ec6f052e48"
+    },
+    {
+      "timestamp_utc": "2026-11-07T06:15:55.166189+00:00",
+      "type": "scan",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "go": false,
+      "reasons": [],
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "hash": "92b52f960beb2526"
     }
   ],
   "consecutive_absent_trend": {

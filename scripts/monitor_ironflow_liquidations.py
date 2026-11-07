@@ -615,6 +615,65 @@ def compare_probes(prev_state, curr_rc):
     }
 
 
+def _etag_well_formed(raw_etag):
+    """Validate that a recorded tree ETag is a real, non-placeholder HTTP ETag.
+
+    [HEAVY-139] Returns (ok, reason). Accepts weak (W/"...") and strong ("...")
+    quoted pairs per RFC 7232 with a non-empty opaque value. Rejects None,
+    empty strings, unquoted values, and literal placeholder opaques such as
+    "test", "x", "abc", "def", "stub", "placeholder", "example", "dummy",
+    "mock", "fake", "sample" (case-insensitive) that a test fixture could
+    otherwise write into the tracked production state and pass every
+    presence-only consistency check.
+    """
+    if raw_etag is None:
+        return False, "missing"
+    if not isinstance(raw_etag, str):
+        return False, f"not a string ({type(raw_etag).__name__})"
+    s = raw_etag.strip()
+    if not s:
+        return False, "empty"
+    weak = False
+    opaque = s
+    if s.startswith("W/"):
+        weak = True
+        opaque = s[2:]
+    if not (opaque.startswith('"') and opaque.endswith('"') and len(opaque) >= 2):
+        return False, "opaque value is not a quoted pair"
+    value = opaque[1:-1]
+    if value == "":
+        return False, "opaque value is empty"
+    if not _etag_opaque_is_hex_or_alnum(value):
+        return False, f"opaque value {value!r} is not a plausible content hash"
+    if value.lower() in _ETAG_PLACEHOLDER_OPAQUES:
+        return False, f"opaque value {value!r} is a known test placeholder"
+    return True, "ok"
+
+
+_ETAG_PLACEHOLDER_OPAQUES = frozenset({
+    "test", "x", "abc", "def", "stub", "placeholder", "example",
+    "dummy", "mock", "fake", "sample", "abcd", "1234", "test123",
+})
+
+
+def _etag_opaque_is_hex_or_alnum(value):
+    """A recorded HF tree ETag opaque is an opaque token, not arbitrary prose.
+
+    Real HF etags are short hex digests (e.g. 2d38-AqkYNsWwxCKiOUmPgektdcJePJk)
+    or git-sha-like tokens. Reject values containing whitespace, control
+    characters, or punctuation other than the common digest alphabets so a
+    prose placeholder cannot masquerade as a recorded ETag.
+    """
+    if len(value) > 128:
+        return False
+    for ch in value:
+        if ch.isspace() or ord(ch) < 32 or ord(ch) > 126:
+            return False
+        if not (ch.isalnum() or ch in "-_"):
+            return False
+    return True
+
+
 def verify_state(state=None):
     """Machine-readable state-consistency verification (no network).
 
@@ -702,6 +761,29 @@ def verify_state(state=None):
     })
     if not state.get("tree_etag") and len((state.get("tree_parquet_paths") or [])) > 0:
         errors.append("tree_parquet_paths present without tree_etag")
+
+    # 5b. tree_etag must be a well-formed, non-stub HTTP ETag.
+    #
+    # [HEAVY-139] A presence-only check is not enough: a test fixture wrote the
+    # literal stub 'W/"test"' into the tracked production state, which then
+    # satisfied every consistency check while silently disabling ETag-based
+    # tree caching (every --quick run re-listed the full tree instead of
+    # short-circuiting on 304 Not Modified). A recorded ETag must therefore
+    # match the RFC 7232 grammar (a weak or strong quoted pair) AND carry a
+    # non-empty, non-placeholder opaque value. This is a hard failure so a
+    # future session cannot inherit a poisoned state and mistake it for a
+    # verified baseline.
+    raw_etag = state.get("tree_etag")
+    etag_ok, etag_reason = _etag_well_formed(raw_etag)
+    checks.append({
+        "id": "tree_etag_well_formed",
+        "description": "tree_etag is a real, non-placeholder HTTP ETag (W/\"<opaque>\")",
+        "tree_etag": raw_etag,
+        "reason": etag_reason,
+        "pass": etag_ok,
+    })
+    if not etag_ok:
+        errors.append(f"tree_etag not well-formed: {etag_reason} (raw={raw_etag!r})")
 
     # 6. CONTENT-HASH BASELINE: every known month must have a recorded LFS oid in
     # tree_parquet_items. Without it the state-only check cannot rule out silent
