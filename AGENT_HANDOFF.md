@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-07T22:37:31Z) — Next Agentic Session
+## Initial Task Message (2026-11-07T22:40:09Z) — Next Agentic Session
 
 **Repo priority (by name: Funding-conditioned-volatility-and-liquidation-risk):** (1) **Track C funding-conditioned volatility forecasting** — primary; forecast gate NOT MET (H001 NOT_SUPPORTED). (2) **Gate 4 v5 confirmatory path** — NOT_READY/NO_GO until 2025+ canonical identity + license/terms + completeness + freeze/prereg proven; **no confirmatory outcomes on unprovenanced/incomplete 2025+ cache** (FCLR-014 guard active). (3) **Track A observed liquidation risk** — DATA_BLOCKED, no trigger (data_through 2026-10; 2026-11..2027-02 absent; Hyperliquid-only); **NO re-probe**. (4) **Track B modeled boundary breach** — CLOSED_NEGATIVE.
 
