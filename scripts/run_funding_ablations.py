@@ -83,8 +83,18 @@ def ensure_extracted(symbols: List[str]) -> None:
             continue
 
 
-def _iter_readable_sources(patterns: List[str], prefer_csv: bool = True, include_cache: bool = False) -> List[Path]:
-    """Deterministic local sources (CSV/ZIP). RAW primary; cache opt-in to preserve v1 behavior."""
+def _iter_readable_sources(patterns: List[str], prefer_csv: bool = True, include_cache: bool = False,
+                           dedupe_by_stem: bool = True, canonical_sub: str = "klines-") -> List[Path]:
+    """Deterministic local sources (CSV/ZIP). RAW primary; cache opt-in to preserve v1 behavior.
+
+    When ``dedupe_by_stem`` is set, files sharing a stem (e.g. the same contract-day) are
+    collapsed to one representative. Canonical contract-kline archives live under a
+    ``<SYM>_<YYYY_MM>/klines-<YYYY-MM-DD>/`` directory; the same date also appears as a
+    top-level placeholder zip and inside mark/index/premium directories. The canonical
+    copy carries real volume; the placeholders are zero-volume stubs. Keep only the
+    canonical copy to avoid duplicate (symbol, timestamp) rows and the downstream
+    "cannot reindex on duplicate labels" failure in the funding merge.
+    """
     seen = set()
     out: List[Path] = []
     roots = [RAW]
@@ -106,6 +116,18 @@ def _iter_readable_sources(patterns: List[str], prefer_csv: bool = True, include
         stems = {p.stem for p in csvs}
         zips = [z for z in zips if z.stem not in stems]
         out = sorted(csvs) + sorted(zips)
+    if dedupe_by_stem:
+        by_stem: Dict[str, List[Path]] = {}
+        for p in out:
+            by_stem.setdefault(p.stem, []).append(p)
+        out = []
+        for stem, cands in by_stem.items():
+            if len(cands) == 1:
+                out.append(cands[0])
+                continue
+            # Prefer a path that lives under the canonical klines- directory.
+            canon = [c for c in cands if canonical_sub in c.parent.name]
+            out.append(canon[0] if canon else sorted(cands, key=lambda x: str(x))[0])
     return sorted(out, key=lambda x: (x.suffix != '.csv', str(x)))
 
 
