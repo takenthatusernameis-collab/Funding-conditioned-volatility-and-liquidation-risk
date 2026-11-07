@@ -352,11 +352,24 @@ def update_leakage_audit(path: Path, ts: str) -> None:
     path.write_text(txt2)
 
 
-def main() -> int:
-    symbols = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT"]
-    start = "2024-01-01"
-    end = "2024-03-31"
-    horizon = 24
+def main(argv: Optional[List[str]] = None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser(description="Gate 4 funding ablations (pre-registered). Defaults = v1 behavior.")
+    ap.add_argument("--symbols", default="BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT")
+    ap.add_argument("--start", default="2024-01-01")
+    ap.add_argument("--end", default="2024-03-31")
+    ap.add_argument("--horizon", type=int, default=24)
+    ap.add_argument("--pre-registration", default="research_state/pre_registration_gate4_funding_multisplit_20261107.md")
+    ap.add_argument("--out-suffix", default="", help="Suffix for versioned outputs, e.g. _v2_5sym; empty preserves v1 paths.")
+    ap.add_argument("--experiment-id", default="GATE4-FUND-VOL-ABLATIONS-MSPLIT")
+    ap.add_argument("--skip-main-summary", action="store_true")
+    args = ap.parse_args(argv)
+
+    symbols = [x.strip() for x in args.symbols.split(",") if x.strip()]
+    start, end, horizon = args.start, args.end, args.horizon
+    pre_reg_path = args.pre_registration
+    out_suffix = args.out_suffix
+    experiment_id = args.experiment_id
     RES.mkdir(parents=True, exist_ok=True)
 
     kpanel = load_kline_panel(symbols, start, end, horizon=horizon)
@@ -389,7 +402,7 @@ def main() -> int:
         for i, df in enumerate(parts):
             point = float(df["diff"].mean()) if df is not None and not df.empty else None
             per_split_deltas[ab_name].append({"split_id": i, "delta_qlike_vs_A": point, "n_obs": int(len(df)) if df is not None else 0})
-    # EXPLORATORY sensitivity (pre-registered as exploratory in this addendum; not confirmatory, not claim-bearing)
+    # EXPLORATORY sensitivity (addendum where applicable; not confirmatory, not claim-bearing)
     exploratory_sensitivity = {"label": "EXPLORATORY — not pre-registered primary; do not promote if unstable", "block_hours": {}}
     for bh in [12, 24, 48]:
         exploratory_sensitivity["block_hours"][str(bh)] = {ab: block_bootstrap_delta_ci(df, block_hours=bh) for ab, df in pooled.items()}
@@ -399,9 +412,10 @@ def main() -> int:
 
     summary = {
         "generated_at": now_iso(), "git_sha": git_sha(), "symbols": symbols,
+        "experiment_id": experiment_id,
         "period": {"start": start, "end": end}, "horizon": horizon,
         "model": "direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)",
-        "pre_registration": "research_state/pre_registration_gate4_funding_multisplit_20261107.md",
+        "pre_registration": pre_reg_path,
         "splits": [{"id": s["id"], "train": s["train"], "test": s["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS} for s in PRE_REG_SPLITS],
         "aggregate": {k: {"qlike": agg(k, "qlike"), "mae": agg(k, "mae"), "rmse": agg(k, "rmse")} for k in ablations.keys()},
         "contrasts_vs_A": ci_results,
@@ -414,7 +428,7 @@ def main() -> int:
     }
     qA = summary["aggregate"]["A_rv_only"]["qlike"]
 
-    out_md = RES / "evaluation_summary_funding.md"
+    out_md = RES / f"evaluation_summary_funding{out_suffix}.md"
     lines = [
         "# Evaluation Summary - Funding Ablations (Gate 4, multi-split pilot)",
         "", f"**Generated:** {summary['generated_at']}", f"**Git SHA:** {summary['git_sha']}",
@@ -470,6 +484,8 @@ def main() -> int:
                 lines.append(f"  - {k}: ERR {v['err']}")
             else:
                 lines.append(f"  - {k}: qlike={v['qlike']}, mae={v['mae']}, rmse={v['rmse']}, n_feat={v['n_features']}, valid_n={v['valid_n']}")
+    inst_ok = suff.get("instruments", 0) >= suff.get("instruments_required", 5)
+    inst_note = f"instruments={suff.get('instruments')} ({'MET' if inst_ok else f'NOT MET; required >={suff.get("instruments_required",5)}'})"
     lines += [
         "", "## Bootstrap (pre-registered)",
         f"- Paired ΔQLIKE (alt-base; negative = better for QLIKE) with circular block bootstrap on whole UTC time blocks, jointly across instruments.",
@@ -480,35 +496,38 @@ def main() -> int:
         "- Chronological splits, 7d purge/embargo, train-only normalization per split.",
         "- Basis/premium not included (no aligned admissible local series verified); missing treated as NaN per policy.",
         "", "## Caveats (non-negotiable)",
-        "- **Pilot/inconclusive:** 4 instruments (<5), Q1-2024-only local data, 14-day test windows — does not satisfy FCLR-001 claim-worthy criteria (>=5 instruments, >=3 non-overlapping 30-day blocks, robust uncertainty).",
+        f"- **Pilot/inconclusive:** {inst_note}; Q1-2024-only local data and 14-day test windows do not satisfy FCLR-001 claim-worthy criteria (>=3 non-overlapping 30-day blocks, robust uncertainty under sufficient data coverage).",
         "- **Do NOT promote to confirmatory, do NOT claim economic value, do NOT build any overlay.** Point estimates/CIs are pilot evidence only.",
         "- Direction/magnitude can change with more data, more splits, and claim-worthy instrument/block coverage.",
     ]
     out_md.write_text("\n".join(lines) + "\n")
 
-    main_sum = RES / "evaluation_summary.md"
-    txt = main_sum.read_text() if main_sum.exists() else ""
-    addition = [
-        f"**Updated:** {summary['generated_at']} (multi-split pilot, {len(PRE_REG_SPLITS)} splits, direct-variance OLS HAR; NOT claim-worthy)",
-        f"**Verdict:** {verdict}",
-        "", "| Ablation | QLIKE (mean) | ΔQLIKE vs A (pooled) | 95% block-bootstrap CI |", "|---|---|---|---|",
-    ]
-    for k in ablations.keys():
-        a = summary["aggregate"][k]
-        ci = ci_results.get(k)
-        if k == "A_rv_only" or not ci:
-            addition.append(f"| {k} | {a['qlike']} | — | — |")
-        else:
-            addition.append(f"| {k} | {a['qlike']} | {ci.get('point')} | [{ci.get('ci_low')}, {ci.get('ci_high')}] |")
-    addition.append("")
-    addition.append(f"> Shortfalls: {'; '.join(suff['shortfalls'])}. No confirmatory claim; no economic value claim.")
-    main_sum.write_text(replace_section(txt, "## Funding Ablations (Gate 4)", "\n".join(addition)))
+    if not args.skip_main_summary and not out_suffix:
+        main_sum = RES / "evaluation_summary.md"
+        txt = main_sum.read_text() if main_sum.exists() else ""
+        addition = [
+            f"**Updated:** {summary['generated_at']} (multi-split pilot, {len(PRE_REG_SPLITS)} splits, direct-variance OLS HAR; NOT claim-worthy)",
+            f"**Verdict:** {verdict}",
+            "", "| Ablation | QLIKE (mean) | ΔQLIKE vs A (pooled) | 95% block-bootstrap CI |", "|---|---|---|---|",
+        ]
+        for k in ablations.keys():
+            a = summary["aggregate"][k]
+            ci = ci_results.get(k)
+            if k == "A_rv_only" or not ci:
+                addition.append(f"| {k} | {a['qlike']} | — | — |")
+            else:
+                addition.append(f"| {k} | {a['qlike']} | {ci.get('point')} | [{ci.get('ci_low')}, {ci.get('ci_high')}] |")
+        addition.append("")
+        addition.append(f"> Shortfalls: {'; '.join(suff['shortfalls'])}. No confirmatory claim; no economic value claim.")
+        main_sum.write_text(replace_section(txt, "## Funding Ablations (Gate 4)", "\n".join(addition)))
 
-    manifest = json.loads((RES / "run_manifest.json").read_text()) if (RES / "run_manifest.json").exists() else {}
+    manifest_path = RES / (f"run_manifest_funding{out_suffix}.json" if out_suffix else "run_manifest.json")
+    manifest = {} if out_suffix else (json.loads((RES / "run_manifest.json").read_text()) if (RES / "run_manifest.json").exists() else {})
     manifest["last_funding_ablations"] = summary["generated_at"]
+    manifest["funding_ablations_experiment_id"] = experiment_id
     manifest["funding_ablations"] = summary["aggregate"]
     manifest["funding_ablations_contrasts_vs_A"] = ci_results
-    manifest["funding_ablations_note"] = "pilot_multisplit_direct_variance_ols_inconclusive"
+    manifest["funding_ablations_note"] = f"pilot_multisplit_direct_variance_ols_inconclusive{out_suffix}"
     manifest["funding_ablations_splits"] = summary["splits"]
     manifest["funding_ablations_bootstrap"] = summary["bootstrap"]
     manifest["funding_ablations_data_sufficiency"] = suff
@@ -516,7 +535,7 @@ def main() -> int:
     manifest["funding_ablations_exploratory_sensitivity_block_hours"] = exploratory_sensitivity
     manifest["funding_ablations_verdict"] = verdict
     manifest["funding_ablations_pre_registration"] = summary["pre_registration"]
-    (RES / "run_manifest.json").write_text(json.dumps(manifest, indent=2, default=str) + "\n")
+    manifest_path.write_text(json.dumps(manifest, indent=2, default=str) + "\n")
 
     update_leakage_audit(RES / "leakage_audit.md", summary["generated_at"])
 
