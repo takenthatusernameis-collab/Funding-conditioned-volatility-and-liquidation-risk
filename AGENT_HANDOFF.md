@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE INITIAL TASK (NEXT SESSION)
 
-**TIMESTAMP (UTC):** 2026-11-07T01:27:01Z (refreshed; supersedes conflicting prior handoff text)
+**TIMESTAMP (UTC):** 2026-11-07T01:35:07Z (refreshed; supersedes conflicting prior handoff text)
 **REPO (priority):** Funding-conditioned-volatility-and-liquidation-risk — focus on **funding-conditioned volatility** (Gate 4) first; **liquidation risk** (Track A) remains blocked/guarded (no trigger).
 **AUTHORITY:** This file is the single durable handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md` or frontier entries conflict, follow this file; record reconciliation in artifacts.
 
-## VERIFIED STATE (this session, 2026-11-07T01:27:01Z)
+## VERIFIED STATE (this session, 2026-11-07T01:35:07Z)
 - Git: clean `main` @ `e15e77b8` (HEAD). Working tree: modified `scripts/run_funding_ablations.py`, new `tests/__init__.py`, rewritten `tests/test_funding_ablations.py`; pyc caches modified (untracked/ignored, do not commit).
 - `scripts/tracka_resume_check.py`: **pass:true**, 17/17 checks, `network:false`, `writes_real_research_state:false`.
 - Full suite `python -m unittest discover -s tests -t .`: **717 tests**, **8 failures**, all pre-existing Track A scope/registry-drift hardening tests (`test_tracka_hardening_114`–`129`, unregistered `_debug_*.py` scripts vs `tracka_script_scope_registry.json`). **None caused by this session; Track A is blocked/guarded — do not resume Track A hardening.** All other tests pass, including the 6 new/rewritten `tests.test_funding_ablations` tests.
