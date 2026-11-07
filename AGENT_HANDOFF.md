@@ -57,3 +57,17 @@ Write the v4 boundary/admissibility evidence record (P0-1) and then execute a bo
 AGENT_HANDOFF.md states: (1) what changed and why; (2) what was actually tested, with exact outcomes; (3) what evidence was added and where; (4) current state of each research gate; (5) the single highest-value next task; (6) the precise command or check that verifies it (`python3 scripts/tracka_resume_check.py` for resume gate; `pytest tests/` in deps env for suite); (7) any source/engineering blocker with evidence and the next materially different free route.
 
 **Authority:** this file is the only root durable handoff.
+
+## Update (2026-11-07T19:17Z) — P0-1 and P0-2
+- **P0-1 COMPLETE:** Created `research_state/gate4_v4_boundary_admissibility_20261107T1845Z.md` documenting GO for exploratory-only on 2024-04..09 slice; NO-GO for confirmatory on this slice (confounded with sealed anchors FCLR-002/v3). Conditional path for confirmatory requires distinct non-confounded boundary with v5 prereg.
+- **P0-2 EXECUTED (EXPLORATORY ONLY):** Ran bounded deterministic exploratory smoke with v4 prereg frozen before outcomes.
+  - Command (v3 split structure via script): `python3 scripts/run_funding_ablations.py --symbols BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT,BNBUSDT --start 2024-04-01 --end 2024-09-30 --horizon 24 --pre-registration research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.md --out-suffix _v3_30d_exploratory_v4 --experiment-id GATE4-FUND-VOL-ABLATIONS-MSPLIT-V4-30D --include-cache`
+  - **Outputs (isolated, labeled EXPLORATORY):** `research_state/evaluation_summary_funding_v3_30d_exploratory_v4.md`, `research_state/run_manifest_funding_v3_30d_exploratory_v4.json`
+  - **Verdict:** `DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (pre-registered 30-day blocks met; E vs A CI spans 0; no improvement claim)`
+  - **Primary E vs A (pooled):** ΔQLIKE=+0.488, 95% block-bootstrap CI [-0.042, 1.197] (spans 0). No improvement claim. Highly unstable across splits (Split 0 small positive, Split 2 large positive, others mixed).
+  - **Leakage checks:** chronological splits, 7d purge/embargo, train-only normalization, funding last-known at/before hour, no overwrite of sealed anchors.
+- **Git SHA at run:** cec2d5ca3c5537c3c9a7977e4c795d10f466a762
+- **Manifest sha256 referenced:** 3e6ac26ce645b8b2f0c2fb495288c4880aa74b5b7e457e1e7c88fb7eb3f5406c (FCLR-015)
+
+**Label:** All v4 exploratory outputs are **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE**. No promotion to confirmatory, no overlay eligibility.
+---
