@@ -35,6 +35,17 @@ Secondary contrasts (also CIs cross zero):
 - C2 vs C1: 16.28% (95% CI [-0.294411, 0.019843]).
 
 ---
+
+## GATE4-FUND-VOL-ABLATIONS-MSPLIT-V3-30D (Track C, funding-conditioned volatility) — 2026-11-07T03:45:53Z (repro verified 2026-11-07T04:35Z)
+- **Type:** Pre-registered multi-split ablation (PILOT/data-sufficiency target met; forecast skill NOT demonstrated). Local admissible data only; no credentials/paid/auth-bypass/manual/network in run.
+- **Pre-registration (frozen before outcomes):** `research_state/pre_registration_gate4_funding_multisplit_v3_30d_20261107T033500Z.md` (2026-11-07T03:35:00Z).
+- **Data sufficiency (MET):** instruments=5 (BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, BNBUSDT); `ok_30day_splits=4` (required >=3), 7d purge/embargo; 2024-04-01..2024-09-30 local panel; 4 non-overlapping 30-day walk-forward test blocks.
+- **Method:** Direct-variance OLS HAR RV-only baseline (A) vs funding-augmented ablations B/C/D/E; primary contrast E_rv_funding_trails vs A; ΔQLIKE block bootstrap, seed=12345, reps=2000, block=24h (joint time blocks), alpha=0.05.
+- **Result (null preserved; no incremental forecast skill):** Aggregate QLIKE A_rv_only=0.798319018412711 (best). B_rv_signed=12.183624184348375, CI(B-A)=[0.4805228898986025, 32.31258288091912] entirely positive (funding harmful). C_rv_abs CI(C-A)=[-0.37159501419674296, 0.2707987870777943] spans 0. D_rv_signed_abs CI=[-0.25396005567122193, 7.512202577246805] spans 0. **Primary E vs A:** point +0.4879023125556385, 95% CI [-0.042160777324701186, 1.1973379300276015], n_obs=12969, n_blocks=120 — spans 0. Per-split deltas unstable in sign/scale.
+- **Verdict:** DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (claim-worthy data-sufficiency met; no improvement claim). H001 (funding-conditioned volatility forecast vs RV-only) remains **NOT_SUPPORTED** across all claim-worthy panels (FCLR-003, FCLR-008, v3). Risk overlay **INELIGIBLE** (gate not met). No economic value claim, no overlay, no Track A linkage.
+- **Artifacts:** `research_state/evaluation_summary_funding_v3_30d.md`, `research_state/run_manifest_funding_v3_30d.json` (sha256 774e4a9f85205116cbdab4e3bfa71d57e84f07e8d2bd21fc31056c4e080573f5 / 9fd540bd5391f59ad8d3f8e7c9cd48aa6c542e400d3284d4ed2f33217a48c56e). Reproduction `--start 2024-04-01 --end 2024-09-30 --include-cache` (implicit via v3) matched key metrics; wrote `research_state/run_manifest_funding_repro_20261107.json` (non-overwriting). v1/v2 preserved.
+- **Leakage/alignment:** clean per v3 manifest/audit traceability (chronological, 7d purge/embargo, train-only normalization per split, last-known funding at/before hour; missing!=0). Do not re-run v1/v2 variants chasing significance (threshold shopping).
+
 ## 1. Primary forecast test (FCLR-H001)
 
 - **Outcome:** INCONCLUSIVE (PILOT). Forecast gate NOT MET.
