@@ -27,7 +27,7 @@
 - Funding ablations remain blocked until Gate 3 satisfied.
 
 ## Funding Ablations (Gate 4)
-**Updated:** 2026-11-07T01:24:13Z (pilot, 1 split, direct-variance OLS HAR; not a sealed claim)
+**Updated:** 2026-11-07T02:22:15Z (pilot, 1 split, log-target ridge HAR; not a sealed claim)
 
 | Ablation | QLIKE | ΔQLIKE vs A | MAE | neg_pred |
 |---|---|---|---|---|
@@ -37,4 +37,4 @@
 | D_rv_signed_abs | 1.4392367821409628 | -0.15617322047899718 | 0.0023438117762892034 | 188.0 |
 | E_rv_funding_trails | 1.0644322409593807 | -0.5309777616605793 | 0.0030111074589971904 | 675.0 |
 
-> Pilot result: funding-augmented variants (B/C/D) improve QLIKE vs RV-only (A) by ~0.16; adding trailing funding percentiles/zscores (E) improves further to QLIKE 1.0644 (Δ ≈ -0.53 vs A). Single split, 4 assets, Jan-Mar 2024; not a sealed holdout result, no block-aware CIs, no multiple-comparison control. Label PILOT/INCONCLUSIVE; expand splits and robustness before inference.
+> Pilot result: funding variants worse than RV-only on this split/sample. Inconclusive; expand splits and robustness before inference.

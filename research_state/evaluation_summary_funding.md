@@ -1,7 +1,7 @@
 # Evaluation Summary - Funding Ablations (Gate 4, pilot)
 
-**Generated:** 2026-11-07T01:24:13Z
-**Git SHA:** e15e77b8e3aa15f979c5812ec68e1ea44f631d70
+**Generated:** 2026-11-07T02:22:15Z
+**Git SHA:** ba03242224fa7bf1ada80211211e72324c899327
 **Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 1 walk-forward split
 **Model:** direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization). No log target, no exp transform.
 
