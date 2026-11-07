@@ -1,0 +1,191 @@
+{
+  "audit_id": "FCLR-013-COVERAGE-20261107T0936Z",
+  "window": "2026-07-01..2026-09-30",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "expected_days": 92,
+  "coverage_only": true,
+  "outcomes_inspected": false,
+  "network_in_audit": false,
+  "sources": {
+    "BTCUSDT": {
+      "funding_months": {
+        "2026-07": {
+          "present": true
+        },
+        "2026-08": {
+          "present": true
+        },
+        "2026-09": {
+          "present": true
+        }
+      },
+      "series": {
+        "markPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "indexPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "premiumIndexKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "klines": {
+          "present_days": 92,
+          "gap_days": 0,
+          "zip_days": 98,
+          "note": "counted from extracted CSVs or daily zip artifacts"
+        }
+      }
+    },
+    "ETHUSDT": {
+      "funding_months": {
+        "2026-07": {
+          "present": true
+        },
+        "2026-08": {
+          "present": true
+        },
+        "2026-09": {
+          "present": true
+        }
+      },
+      "series": {
+        "markPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "indexPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "premiumIndexKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "klines": {
+          "present_days": 92,
+          "gap_days": 0,
+          "zip_days": 98,
+          "note": "counted from extracted CSVs or daily zip artifacts"
+        }
+      }
+    },
+    "BNBUSDT": {
+      "funding_months": {
+        "2026-07": {
+          "present": true
+        },
+        "2026-08": {
+          "present": true
+        },
+        "2026-09": {
+          "present": true
+        }
+      },
+      "series": {
+        "markPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "indexPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "premiumIndexKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "klines": {
+          "present_days": 92,
+          "gap_days": 0,
+          "zip_days": 98,
+          "note": "counted from extracted CSVs or daily zip artifacts"
+        }
+      }
+    },
+    "SOLUSDT": {
+      "funding_months": {
+        "2026-07": {
+          "present": true
+        },
+        "2026-08": {
+          "present": true
+        },
+        "2026-09": {
+          "present": true
+        }
+      },
+      "series": {
+        "markPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "indexPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "premiumIndexKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "klines": {
+          "present_days": 92,
+          "gap_days": 0,
+          "zip_days": 98,
+          "note": "counted from extracted CSVs or daily zip artifacts"
+        }
+      }
+    },
+    "XRPUSDT": {
+      "funding_months": {
+        "2026-07": {
+          "present": true
+        },
+        "2026-08": {
+          "present": true
+        },
+        "2026-09": {
+          "present": true
+        }
+      },
+      "series": {
+        "markPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "indexPriceKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "premiumIndexKlines": {
+          "present_days": 92,
+          "gap_days": 0
+        },
+        "klines": {
+          "present_days": 92,
+          "gap_days": 0,
+          "zip_days": 98,
+          "note": "counted from extracted CSVs or daily zip artifacts"
+        }
+      }
+    }
+  },
+  "summary": {
+    "all_required_series_complete": true,
+    "symbols_ge_5": true,
+    "days": 92,
+    "non_overlapping_30d_blocks_ge_3": true,
+    "provenance": "Binance data.binance.vision unauthenticated archive (local cache; coverage audit only, no network)",
+    "go_status": "GO_CANDIDATE_PREREG_REQUIRED_BEFORE_OUTCOMES",
+    "note": "Coverage-only audit. 5 symbols x 2026-07-01..2026-09-30 (92 days, 3x30d blocks possible). Funding+mark+index+premium+klines artifacts checked. No outcomes inspected. Confirmatory use requires PREREG BEFORE outcome inspection, license/terms verification per registry, leakage-resistant splits/purge/embargo, and frozen protocol; no overlay/holdout reuse."
+  }
+}
