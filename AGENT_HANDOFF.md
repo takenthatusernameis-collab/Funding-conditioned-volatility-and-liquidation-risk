@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE INITIAL TASK (NEXT SESSION)
 
-**TIMESTAMP (UTC):** 2026-11-07T02:50:00Z
+**TIMESTAMP (UTC):** 2026-11-07T03:15:17Z
 **REPO (priority):** `Funding-conditioned-volatility-and-liquidation-risk` — **P0 = funding-conditioned volatility (Gate 4)** using local admissible data. **Liquidation risk (Track A) = BLOCKED/GUARDED, no trigger** — do not resume Track A probing/outcome inspection.
 **AUTHORITY:** This file is the **only** durable session handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md`, frontier entries, or stale notes conflict, follow this file and record reconciliation in durable artifacts (not status-only files).
 
