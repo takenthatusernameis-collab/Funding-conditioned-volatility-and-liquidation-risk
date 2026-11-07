@@ -1,60 +1,37 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE INITIAL TASK (NEXT SESSION)
 
-**TIMESTAMP (UTC):** 2026-11-07T02:23:49Z
+**TIMESTAMP (UTC):** 2026-11-07T02:37:08Z
 **REPO (priority):** `Funding-conditioned-volatility-and-liquidation-risk` — **P0 = funding-conditioned volatility (Gate 4)** using local admissible data. **Liquidation risk (Track A) = BLOCKED/GUARDED, no trigger** — do not resume Track A probing/outcome inspection.
 **AUTHORITY:** This file is the **only** durable session handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md`, frontier entries, or stale notes conflict, follow this file and record reconciliation in durable artifacts (not status-only files).
 
-## VERIFIED STATE (2026-11-07T02:23:49Z)
-- Git HEAD: `97d76554` (`chore(kilo): checkpoint agent session`) on `main`. Working tree has local changes: `scripts/run_funding_ablations.py` (fixed, direct-variance OLS), `tests/test_funding_ablations.py` (rewritten, 6 tests), `tests/__init__.py` (new), `__pycache__/*.pyc` removed from index (`.gitignore` already ignores `__pycache__/`/`*.pyc`), plus minor artifact timestamp churn. **No workflow changes.**
-- `python -m unittest tests.test_funding_ablations -v`: **6/6 OK** (no-duplicate-merge-columns, Gate 3 A_rv_only QLIKE reproduces 1.5954100026198477, all ablations finite, bounded predictions, funding alignment no-future-leakage, trailing pct past-only).
-- `python scripts/run_funding_ablations.py` (reproducible): `{"A_rv_only":1.59541000261996,"B_rv_signed":1.4392367821430467,"C_rv_abs":1.4392367821430467,"D_rv_signed_abs":1.4392367821409628,"E_rv_funding_trails":1.0644322409593807}`
-- Full suite baseline (prior verified run this cycle): **717 tests, 8 pre-existing failures** — all Track A scope/registry-drift hardening (`test_tracka_hardening_114`–`129`, unregistered `_debug_*.py` vs `tracka_script_scope_registry.json`). **Unrelated to Gate 4; Track A is blocked — do not "fix" by resuming Track A.** Expect the same 8 unless intentionally addressed as a separate, evidence-backed Track A hardening task under lockdown rules.
-- Deps: `pip install -r requirements.txt` (numpy/pandas/scipy). Data: **local only** — BTC/ETH/SOL/XRP 1h klines + fundingRate, 2024-01..03 under `data/raw` (372 CSV). Missing = NaN, never zero. **No creds, no paid data, no bypass, no re-probe of absent months.**
-- Bounds/invariants: research_state root file count maintained; ironflow probes == 2; no new probe/scan families.
+## VERIFIED STATE (2026-11-07T02:37:08Z)
+- Git base HEAD: `3aa41592` (`chore(kilo): checkpoint agent session`) on `main`. Working tree (this session, measurable Gate 4 delta): `scripts/run_funding_ablations.py` (multi-split pre-reg pilot + block-bootstrap CIs), `tests/test_funding_ablations_multisplit.py` (new, 5 tests), `research_state/evaluation_summary.md`, `research_state/evaluation_summary_funding.md`, `research_state/run_manifest.json`, `research_state/leakage_audit.md`. `__pycache__`/`ironflow_fastpath_cache.json` restored to HEAD in working tree where touched; **do not commit `__pycache__`/cache churn**. **No workflow changes.**
+- `python scripts/run_funding_ablations.py` (reproducible, local data only): 3 pre-registered walk-forward splits (14-day tests: 2024-02-05..02-18, 02-19..03-03, 03-04..03-17; train-only normalization; purge/embargo=7d). Aggregate QLIKE (mean): A=7.4632551696362475, B=16.987894189880944, C=16.987894189880944, D=16.987894191103717, E=5.543607735488995. **Primary E vs A (pre-reg): ΔQLIKE=4.6124034791315704, 95% block-bootstrap CI [-0.1288482496015316, 13.12243540310433], n_obs=1819, n_blocks=41, seed=12345, reps=2000, block=24h, jointly across instruments.** (CI spans 0.)
+- `python -m unittest tests.test_funding_ablations tests.test_funding_ablations_multisplit -v`: **11/11 OK** (Gate 3 A_rv_only regression 1.5954100026198477, multi-split embargo/purge, block-bootstrap determinism/joint time-block resampling).
+- Full-suite baseline concern: pre-existing **8 Track A scope-registry hardening failures** (`test_tracka_hardening_114/117/118/119/120/121/123/129`) unrelated to Gate 4 (Track A blocked). Gate 4 tests pass; verify full suite in your run and report the same 8 if unchanged. **Do not "fix" by resuming Track A.**
+- `python scripts/tracka_resume_check.py`: **pass:true, 17/17**.
+- Deps: `pip install -r requirements.txt`. Data: **local only** BTC/ETH/SOL/XRP 1h klines + fundingRate 2024-01..03. Missing = NaN, never zero. Basis/premium **not added** (no aligned admissible local series verified) — NaN-omitted, never zero-filled. **No creds, no paid data, no bypass, no re-probe.**
+- Bounds: `research_state` root md+json = **147** (<=163). Probes == 2. No new probe/scan families. No workflow changes.
 
-## GATE 4 (funding-conditioned volatility) — HONEST PILOT STATUS
-- **Gate 3 (RV-only baseline): COMPLETE** — A_rv_only QLIKE 1.59541000261996 reproduced.
-- **Gate 4 pilot: COMPLETE but PILOT/INCONCLUSIVE** — fixed invalid log-target/exponentiated ridge (root cause of absurd prior metrics) to **direct-variance OLS HAR** matching Gate 3, train-only normalization, 7d purge/embargo, funding last-known-at/before-hour (no lookahead), trailing pct/z past-only.
-- Single walk-forward split (test 2024-02-22..2024-03-31), 4 assets, Q1 2024 only. Funding variants improve QLIKE vs A in this pilot (B/C/D Δ≈-0.156, E Δ≈-0.531) **but**: 1 split, no block-aware CIs, no multiple-comparison control, Q1-2024-only cannot satisfy FCLR-001 claim-worthy criteria (need **≥3 non-overlapping 30-day test blocks** and robust uncertainty). **Do NOT promote to confirmatory, do NOT claim economic value, do NOT build any overlay.**
-- Pre-registration exists: `research_state/pre_registration_gate4_funding_multisplit_20261107.md` (frozen 2026-11-07T01:36:11Z, before outcomes). Primary contrast E vs A; secondary B/C/D vs A; block bootstrap seed=12345, B=2000, block_size=24h; honest verdict PILOT/INCONCLUSIVE (4 instruments <5 required, no 30-day non-overlapping test blocks).
+## GATE 4 STATUS — HONEST (PILOT/INCONCLUSIVE)
+- Pre-registration frozen before outcomes: `research_state/pre_registration_gate4_funding_multisplit_20261107.md`. **Do not change contrasts/metrics/splits after computing results.**
+- Multi-split evaluation implemented with leakage controls: chronological splits, purge/embargo 7d, train-only normalization, funding last-known at/before hour, trailing stats past-only, direct-variance OLS (no log/exp), block-bootstrap CIs.
+- **Verdict: PILOT/INCONCLUSIVE.** Data-sufficiency shortfalls: `instruments=4 < 5`, `no_30day_non_overlapping_test_blocks` (14-day windows; Q1 2024 local data insufficient for >=3×30-day), `q1_2024_only_local_data`. Primary CI spans 0. **Do NOT promote to confirmatory, do NOT claim economic value, do NOT build any overlay.**
 
-## NEXT HEAVY-WORK CAMPAIGN (MANDATORY — P0, no coasting)
-**Objective:** Turn the single-split Gate 4 pilot into a **defensible multi-split, pre-registered, uncertainty-quantified** evaluation within local 2024-01..03 data. Every session must produce a **measurable delta** (code + tests + run + durable artifact) or an evidence-backed blocker + next materially different route. **Do not stop after reading.**
+## NEXT HEAVY-WORK CAMPAIGN (MANDATORY — P0)
+Every session must produce a **measurable delta** (code + tests + run + durable artifact) or an evidence-backed blocker + next materially different route. **Do not stop after reading.**
 
-### 1) Pre-registration already frozen (do not re-open outcomes)
-`research_state/pre_registration_gate4_funding_multisplit_20261107.md` is frozen before outcomes. Do not change contrasts/metrics/splits after computing results. If you must adjust, version+timestamp the change and re-freeze before running.
+1. **Report full-suite status honestly** (run `python -m unittest discover -s tests -t .`; expect 8 pre-existing Track A scope-registry failures unless addressed as a separate evidence-backed Track A lockdown task under P2/guarded rules). Do not let them block Gate 4 P0.
+2. **Strengthen Gate 4 pilot rigor (local-data feasible):**
+   - Add **per-contrast secondary CIs** reporting consistency checks (already computed for B/C/D vs A — verify reporting clarity) and a compact **per-split paired ΔQLIKE** table (E vs A) to make instability visible.
+   - **Sensitivity (pre-registered as exploratory, label clearly):** block size {12h,24h,48h} and B sensitivity; report whether CI/sign stability changes. Do not promote if unstable.
+   - **Regularization/tuning only on train (or train/val within split) — never test:** if ridge/feature-selection explored, preregister as a versioned addendum before running; record in manifest/leakage audit.
+3. **Data-sufficiency blocker (evidence-backed):** FCLR-001 claim-worthy needs >=5 instruments and >=3 non-overlapping 30-day test blocks. Local admissible Q1 2024 cannot satisfy this. Record the blocker; next materially different route (only if/when admissible local data expands): add instruments/months from local admissible sources with verified alignment, **preregister** 30-day non-overlapping blocks, re-run. **No creds/paid data/manual downloads/re-probe.**
+4. **Basis/premium:** include only with verified aligned admissible local coverage and no lookahead; otherwise keep omitted/NaN and state explicitly.
+5. **Durable artifacts:** keep `evaluation_summary.md`, `evaluation_summary_funding.md`, `run_manifest.json`, `leakage_audit.md` synchronized with actual runs (no status-only churn). `leakage_audit.md` must remain clean (no stale log-ridge entry).
 
-### 2) Implement multi-split walk-forward evaluation (code)
-Extend `scripts/run_funding_ablations.py` (or add a focused companion script, tested) to:
-- Build **multiple chronological walk-forward splits** over 2024-01..03 using `src/eval.walkforward.build_walkforward_splits` (or equivalent) with **purge/embargo ≥7d**, train-only normalization, no random splits. Pre-registered splits: test windows 2024-02-05..02-18, 2024-02-19..03-03, 2024-03-04..03-17 (14-day each, step 14d).
-- Report **per-split and aggregate** QLIKE/MAE/RMSE for A..E and **ΔQLIKE vs A**. Keep the direct-variance OLS form; A_rv_only must still reproduce Gate 3 on comparable setup (add regression assertion in tests if split logic changes).
-- **Block-aware uncertainty:** paired ΔQLIKE (primary E vs A, and secondaries) via **block bootstrap** resampling whole UTC time blocks jointly across instruments (deterministic seed `np.random.default_rng(12345)`; **≥2000 replicates** where sample permits; document if fewer). Report point estimate + CI (95% percentile/basic) per contrast.
-- **Data-sufficiency gate (honest):** Q1 2024 is ~90 days — explicitly test/report whether **≥3 non-overlapping 30-day test blocks** and instrument coverage criteria (≥5 instruments) are met. If not met, verdict remains **PILOT/INCONCLUSIVE** with the exact shortfall stated; **do not relax thresholds**.
-
-### 3) Basis/premium (only if real aligned coverage exists)
-Include basis/premium/mark-index dislocation features **only** with verified, aligned, admissible local coverage and no lookahead. Otherwise omit and state "basis/premium unavailable/misaligned → NaN-omitted, never zero-filled".
-
-### 4) Tests (required)
-Add/extend `tests/test_funding_ablations.py` (or new focused test module): multi-split embargo/purge correctness, block-bootstrap determinism (seeded), and A_rv_only regression stability. Keep tests fast/fixture-friendly; no network.
-
-### 5) Durable artifacts (update, not status-only)
-- `research_state/evaluation_summary.md` — Gate 4 table with per-split + aggregate + CIs + honest verdict.
-- `research_state/evaluation_summary_funding.md` — full detail.
-- `research_state/run_manifest.json` — run id, git SHA, UTC, config/params, split boundaries, sample counts, bootstrap seed/replicates, CIs, status.
-- `research_state/leakage_audit.md` — confirm chronological splits, purge/embargo, train-only normalization, no-lookahead funding alignment, bootstrap resamples blocks (no leakage). **Remove the stale "log-ridge" entry; current model is direct-variance OLS.**
-
-### Acceptance commands (report actual results)
-```bash
-pip install -r requirements.txt
-python scripts/run_funding_ablations.py
-python -m unittest tests.test_funding_ablations -v
-python -m unittest discover -s tests -t .   # expect 717 + new tests; 8 pre-existing Track A scope-registry failures unrelated
-python scripts/tracka_resume_check.py      # expect pass:true, 17/17
-```
-
-## TRACK A (liquidation risk) — GUARDED, NO TRIGGER (BOTTLECK REMOVED)
-- Trigger: **NO** (data_through 2026-10; 2026-11..2027-02 absent). Probes == 2. **Do not re-probe, do not inspect outcomes, do not resume 131/132/139 numbering without coherent artifacts.** Maintain invariants (17/17, bounds, no new probe families). If trigger ever appears: **PREREG BEFORE INSPECTING OUTCOMES**, Hyperliquid-only, observed ≠ modeled, fail-closed.
-- The 8 pre-existing full-suite failures are Track A scope-registry hardening drift — **do not let them block Gate 4 P0**; address only as a separate, evidence-backed Track A lockdown task if chosen.
+## TRACK A — GUARDED, NO TRIGGER (BOTTLECK REMOVED)
+Trigger **NO** (data_through 2026-10; 2026-11..2027-02 absent). Probes == 2. **Do not re-probe, do not inspect outcomes, do not resume 131/132/139 without coherent artifacts.** Maintain invariants (17/17, bounds, no new probe families). If trigger appears: **PREREG BEFORE INSPECTING OUTCOMES**, Hyperliquid-only, observed ≠ modeled, fail-closed.
 
 ## CONSTRAINTS (NON-NEGOTIABLE)
 - **No trading, no creds/API keys, no paid data, no auth bypass, no manual downloads.** Local admissible files only.
@@ -63,5 +40,3 @@ python scripts/tracka_resume_check.py      # expect pass:true, 17/17
 - **Missing != 0. Observed liquidations ≠ modeled boundary breaches ≠ volatility/stress.** Never merge tracks.
 - **PREREG BEFORE OUTCOMES** for confirmatory/trigger evaluation.
 - **Heavy work required:** measurable delta or evidence-backed blocker + materially different next route. No status-only churn.
-
-**START NOW (P0):** implement multi-split + block-bootstrap CIs in `scripts/run_funding_ablations.py` with tests, run, update `research_state/` artifacts with an honest PILOT/INCONCLUSIVE verdict if data-sufficiency criteria are not met.
