@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE INITIAL TASK (NEXT SESSION)
 
-**TIMESTAMP (UTC):** 2026-11-07T01:35:39Z (refreshed; supersedes conflicting prior handoff text)
+**TIMESTAMP (UTC):** 2026-11-07T02:14:03Z (refreshed; supersedes conflicting prior handoff text)
 **REPO (priority):** Funding-conditioned-volatility-and-liquidation-risk — focus on **funding-conditioned volatility** (Gate 4) first; **liquidation risk** (Track A) remains blocked/guarded (no trigger).
 **AUTHORITY:** This file is the single durable handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md` or frontier entries conflict, follow this file; record reconciliation in artifacts.
 
