@@ -1,5 +1,6 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE HANDOFF (NEXT SESSION)
 
+**INITIAL TASK MESSAGE (UTC 2026-11-07T04:33:17Z):** Start immediately with campaign step 1 — reproduce canonical null FCLR-003 (`FCLR_EXPERIMENT=FCLR-003 timeout 1800 python scripts/run_evaluation.py`), record git SHA + output hash. Then execute steps 2-5 in order; no status-only churn. Track A stays blocked/no trigger; do not re-probe. Final: dated session note + close negative unless new admissible data appears.
 **TIMESTAMP (UTC):** 2026-11-07T04:28:41Z
 **REPO (priority):** `Funding-conditioned-volatility-and-liquidation-risk` — priority per repo name: **Track C funding-conditioned volatility (P0) > Track B modeled boundary breach > Track A observed liquidations (BLOCKED, no trigger)**.
 **AUTHORITY:** This file is the **only** durable session handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md`, frontier entries, or stale notes conflict, follow this file and record reconciliation in durable artifacts (not status-only files).
