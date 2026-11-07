@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE INITIAL TASK (NEXT SESSION)
 
-**TIMESTAMP (UTC):** 2026-11-07T03:32:30Z (updated; v2 5-symbol pilot run recorded; v1 unchanged)
+**TIMESTAMP (UTC):** 2026-11-07T03:34:26Z (handoff refreshed; v2 5-symbol pilot recorded; v1 unchanged)
 **REPO (priority):** `Funding-conditioned-volatility-and-liquidation-risk` — **P0 = funding-conditioned volatility (Gate 4, Track C)** using local admissible data. **Liquidation risk (Track A) = BLOCKED/GUARDED, no trigger** — do not resume Track A probing/outcome inspection.
 **AUTHORITY:** This file is the **only** durable session handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md`, frontier entries, or stale notes conflict, follow this file and record reconciliation in durable artifacts (not status-only files).
 
