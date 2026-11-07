@@ -1,0 +1,49 @@
+{
+  "experiment_id": "GATE4-FUND-VOL-ABLATIONS-MSPLIT-V4-30D",
+  "version": "v4",
+  "status": "FROZEN_BEFORE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "frozen_at_utc": "2026-11-07T18:45:00Z",
+  "git_sha": "1ddb7d6c57e2cf10ace9fb11b9ddda26a6bcb428",
+  "confirmatory_claim_go": "NO_GO",
+  "exploratory_smoke_authorized_after_freeze": true,
+  "exploratory_label_required": "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
+  "input_manifest": {
+    "path": "research_state/fclr015_local_audit/fclr015_input_manifest_2024_04_09_20261107T180626Z.json",
+    "sha256": "3e6ac26ce645b8b2f0c2fb495288c4880aa74b5b7e457e1e7c88fb7eb3f5406c",
+    "bytes": 2842335,
+    "files_checked": 3690,
+    "identity_match": 3690,
+    "mismatch": 0,
+    "missing_local": 0,
+    "missing_remote": 0,
+    "remote_error": 0
+  },
+  "data_slice": {
+    "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+    "start_date": "2024-04-01",
+    "end_date": "2024-09-30",
+    "cache_root": "research_state/data_cache"
+  },
+  "sealed_anchor_conflict_rationale": {
+    "FCLR002_test": "2024-07-23T00:00:00Z/2024-09-30T23:00:00Z",
+    "FCLR003_test": "2024-10-02T00:00:00Z/2024-12-31T23:00:00Z",
+    "FCLR003_sha256": "a623d098caaa01404dcef22bd703eb2476a63f4602b789c81c4d56fa688f9ec2",
+    "FCLR013_test": "2026-08-26/2026-09-30",
+    "FCLR013_sha256": "107bc981ebb6f519205b42f94ce778e14b445036f4758995914dabb0ef6bd08a",
+    "v4_decision": "2024-04..09 slice overlaps domain family of sealed 2024 panels; v4 runs on this slice are EXPLORATORY/NOT CONFIRMATORY/NOT PROMOTABLE unless a distinct non-confounded boundary is preregistered before outcomes"
+  },
+  "splits": [
+    {"id": 0, "train_start": "2024-04-01", "train_end": "2024-05-07", "purge_gap_days": 7, "test_start": "2024-05-15", "test_end": "2024-06-13", "test_days": 30},
+    {"id": 1, "train_start": "2024-04-01", "train_end": "2024-06-06", "purge_gap_days": 7, "test_start": "2024-06-14", "test_end": "2024-07-13", "test_days": 30},
+    {"id": 2, "train_start": "2024-04-01", "train_end": "2024-07-06", "purge_gap_days": 7, "test_start": "2024-07-14", "test_end": "2024-08-12", "test_days": 30},
+    {"id": 3, "train_start": "2024-04-01", "train_end": "2024-08-05", "purge_gap_days": 7, "test_start": "2024-08-13", "test_end": "2024-09-11", "test_days": 30}
+  ],
+  "ablations": ["A_rv_only", "B_rv_signed", "C_rv_abs", "D_rv_signed_abs", "E_rv_signed_abs_roll"],
+  "primary_metric": "QLIKE",
+  "secondary_metrics": ["MAE", "RMSE"],
+  "primary_contrast": "E_vs_A",
+  "uncertainty": "block_bootstrap_24h_utc_joint",
+  "leakage_controls": ["chronological_splits", "purge_embargo_ge_7d", "train_only_normalization", "funding_last_known_at_or_before_hour", "no_random_splits", "no_test_tuning", "no_outcome_inspection_before_freeze"],
+  "outcome_metrics_present": false
+}
