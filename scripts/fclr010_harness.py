@@ -7,6 +7,7 @@ on new post-2026-10-31 data without retuning.
 
 import json
 import hashlib
+import os
 import tempfile
 from pathlib import Path
 from dataclasses import dataclass
@@ -391,14 +392,19 @@ class FCLR010Harness:
                 "outcomes_loaded": None,
                 "data_loaded_implicitly": False,
             }
-        # G2 (124): seam GO + prereg present but data_path missing => stable BLOCKED
+        # G2 (124): seam GO + prereg present but data_path missing/unreadable => stable BLOCKED
         # payload parity (no outcomes inspected, no loader). Fail-closed before any
         # parquet/outcome read; consistent with guarded/execute_ready_data_load surfaces.
-        if not data_path.exists():
+        try:
+            if not data_path.exists():
+                raise FileNotFoundError(f"Data path not found: {data_path}")
+            if not os.access(data_path, os.R_OK):
+                raise PermissionError(f"Data path not readable: {data_path}")
+        except (FileNotFoundError, PermissionError) as e:
             seam_go = bool(seam is not None and seam.get("pass"))
             res = {
                 "status": "BLOCKED",
-                "reason": f"Data path not found: {data_path}. No new data available for forward validation.",
+                "reason": f"{e}. No new data available for forward validation.",
                 **({"manifest_gate": gate} if gate is not None else {}),
                 **({"admissible_seam_wired": seam} if seam is not None else {}),
                 "outcomes_inspected": False,
@@ -413,8 +419,12 @@ class FCLR010Harness:
             }
             if seam_go:
                 res["reason_code"] = "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS"
-                res["seam_go_data_missing"] = True
-                res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING"
+                if isinstance(e, FileNotFoundError):
+                    res["seam_go_data_missing"] = True
+                    res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_DATA_PATH_MISSING"
+                else:
+                    res["seam_go_data_unreadable"] = True
+                    res["reason_code_detail"] = "ADMISSIBLE_SEAM_GO_DATA_PATH_UNREADABLE"
             return res
         return {
             "status": "READY_FROZEN",
