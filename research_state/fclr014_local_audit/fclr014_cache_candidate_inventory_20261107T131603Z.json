@@ -1,0 +1,592 @@
+{
+  "generated_utc": "2026-11-07T13:16:03Z",
+  "consumed_windows": {
+    "FCLR-002": "2024-01-01..2024-09-30",
+    "FCLR-003": "2024-01-01..2024-12-31",
+    "FCLR-013": "2026-Q3(07-09) consumed/test context"
+  },
+  "months": [
+    {
+      "month": "2024_01",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h"
+      ],
+      "zips": 155,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_02",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h"
+      ],
+      "zips": 145,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_03",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h"
+      ],
+      "zips": 155,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_04",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_05",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_06",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_07",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_08",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_09",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_10",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_11",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2024_12",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "fundingRate"
+      ],
+      "zips": 5,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": false
+    },
+    {
+      "month": "2025_01",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_02",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 145,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_03",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_04",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_05",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_06",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_07",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_08",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_09",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_10",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_11",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2025_12",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_01",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_02",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 145,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_03",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_04",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_05",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_06",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_07",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 195,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_08",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 160,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_09",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 155,
+      "status": "CONSUMED/EXCLUDED",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_10",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h",
+        "fundingRate"
+      ],
+      "zips": 150,
+      "status": "GO_CANDIDATE_LOCAL",
+      "ok5_both": true
+    },
+    {
+      "month": "2026_11",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ],
+      "kinds": [
+        "1h"
+      ],
+      "zips": 15,
+      "status": "PARTIAL",
+      "ok5_both": false
+    }
+  ]
+}
