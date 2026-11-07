@@ -44,28 +44,35 @@ def fetch(url: str):
         return {"status": None, "bytes": 0, "etag": None, "last_modified": None, "sha256": None, "error": str(e)}
 
 def local_zip(sym: str, ym: str, kind: str, day: str | None):
-    """Select canonical cached zip for Binance Vision comparison.
-    Prefer kind-specific subdir (e.g. klines-YYYY-MM-DD/, markPriceKlines-...);
-    avoid top-level placeholder duplicates that can share filenames but differ."""
+    """Select the canonical cached zip for Binance Vision comparison.
+
+    Only the kind-specific subdirectory `<kind>-<YYYY>-<MM>-<DD>/<sym>-1h-...zip`
+    is admissible for daily kinds. A same-named top-level placeholder (a stale
+    or merged duplicate) is NOT a substitute: it is reported as MISSING so the
+    caller records a coverage gap instead of a false identity verdict.
+    """
     d = CACHE / f"{sym}_{ym.replace('-', '_')}"
     if not d.exists(): return None
     if kind == "fundingRate":
         p = d / f"{sym}-fundingRate-{ym}.zip"; return p if p.exists() else None
     name = f"{sym}-1h-{day}.zip"
-    # canonical: <kind>-<day>/<name>
     canon = d / f"{kind}-{day}" / name
-    if canon.exists(): return canon
-    # fallback: any path containing /{kind}-{day}/
-    needle = f"{os.sep}{kind}-{day}{os.sep}"
-    cands = [q for q in d.rglob(name) if needle in str(q)]
-    if cands: return sorted(cands)[0]
-    # last resort (not preferred): any rglob match, but filter conflicting kind dirs for plain klines
-    cands = list(d.rglob(name))
-    if kind == "klines":
-        cands = [q for q in cands if "markPriceKlines" not in str(q) and "indexPriceKlines" not in str(q) and "premiumIndexKlines" not in str(q)]
-    # prefer deeper canonical-looking paths over top-level placeholders
-    cands = sorted(cands, key=lambda q: (0 if f"{kind}-" in str(q.parent.name) else 1, len(str(q))))
-    return cands[0] if cands else None
+    return canon if canon.exists() else None
+
+
+def placeholder_duplicate_paths(sym: str, ym: str, day: str) -> list[Path]:
+    """Return same-named files sitting at the month-dir top level (potential placeholders).
+
+    A top-level `<sym>-1h-<day>.zip` that duplicates a canonical kind subdir is a
+    provenance hazard: one file cannot be the archive for klines, markPriceKlines,
+    indexPriceKlines and premiumIndexKlines simultaneously. Flag them for the audit
+    report so the NO_GO/INCOMPLETE verdict names the offending cache rather than
+    silently trusting the wrong file.
+    """
+    d = CACHE / f"{sym}_{ym.replace('-', '_')}"
+    if not d.exists(): return []
+    name = f"{sym}-1h-{day}.zip"
+    return [q for q in d.glob(name) if q.is_file() and q.parent == d]
 
 def _ck(rec): return (rec.get("symbol"), rec.get("month"), rec.get("kind"), rec.get("day"))
 
@@ -89,7 +96,7 @@ def main(argv=None):
         try:
             for c in json.loads(Path(args.resume).read_text()).get("checks", []): done[_ck(c)] = c
         except Exception: pass
-    results = {"timestamp_utc": ts, "method": "bounded unauthenticated GET vs local cached zip sha256/etag (FCLR-016, 2025+ probe)", "source_base": BASE, "symbols": symbols, "months": months, "kinds": kinds, "checks": list(done.values()), "summary": {}, "confirmatory_claim_go": "NO_GO", "fclr014_context": "2025+ cache provenance UNVERIFIED per fclr014_provenance_decision_20261107T133102Z.md; identity match is necessary but not sufficient (license/terms/completeness/leakage/prereg still required)."}
+    results = {"timestamp_utc": ts, "method": "bounded unauthenticated GET vs local cached zip sha256/etag (FCLR-016, 2025+ probe)", "source_base": BASE, "symbols": symbols, "months": months, "kinds": kinds, "checks": list(done.values()), "summary": {}, "confirmatory_claim_go": "NO_GO", "fclr014_context": "2025+ cache provenance UNVERIFIED per fclr014_provenance_decision_20261107T133102Z.md; identity match is necessary but not sufficient (license/terms/completeness/leakage/prereg still required).", "placeholder_duplicate_files": [], "placeholder_duplicate_note": "Daily kinds require a kind-specific subdir (<kind>-<day>/<sym>-1h-<day>.zip). A same-named top-level placeholder is not admissible for non-canonical kinds and is reported, never substituted."}
     pending = []
     for sym in symbols:
         for ym in months:
@@ -116,6 +123,14 @@ def main(argv=None):
         rec = {"symbol": sym, "month": ym, "kind": kind, "day": day, "url": url, "local_path": str(lp.relative_to(REPO)) if lp else None}
         if not lp:
             rec.update({"result": "MISSING_LOCAL"}); results["checks"].append(rec); n += 1; continue
+        # Flag top-level placeholder duplicates for the same day (provenance hazard).
+        if day and kind != "fundingRate":
+            for q in placeholder_duplicate_paths(sym, ym, day):
+                results["placeholder_duplicate_files"].append({
+                    "symbol": sym, "month": ym, "day": day, "path": str(q.relative_to(REPO)),
+                    "sha256": sha256(q.read_bytes()),
+                    "canonical_kind_subdir": f"{kind}-{day}",
+                })
         lb = lp.read_bytes(); lsha = sha256(lb)
         r = fetch(url); time.sleep(SLEEP)
         rec.update({"local_bytes": len(lb), "local_sha256": lsha, "remote_status": r["status"], "remote_bytes": r["bytes"], "remote_etag": r["etag"], "remote_last_modified": r["last_modified"], "remote_sha256": r["sha256"], "remote_error": r["error"]})
@@ -131,9 +146,9 @@ def main(argv=None):
             print(f"ckpt {n}/{len(results['checks'])} {by}", file=sys.stderr)
     by = {}
     for c in results["checks"]: by[c["result"]] = by.get(c["result"], 0) + 1
-    results["summary"] = {"match": by.get("MATCH",0), "mismatch": by.get("MISMATCH",0), "missing_local": by.get("MISSING_LOCAL",0), "missing_remote": by.get("MISSING_REMOTE",0), "remote_error": by.get("REMOTE_ERROR",0), "total": len(results["checks"]), "new_this_run": n}
-    identity_go = results["summary"]["match"] > 0 and results["summary"]["mismatch"] == 0 and results["summary"]["missing_remote"] == 0 and results["summary"]["remote_error"] == 0 and results["summary"]["missing_local"] == 0
-    results["cache_identity_vs_binance_vision"] = "GO_PARTIAL_BOUNDED" if identity_go else ("NO_GO" if (results["summary"]["mismatch"] or results["summary"]["remote_error"]) else "INCOMPLETE")
+    results["summary"] = {"match": by.get("MATCH",0), "mismatch": by.get("MISMATCH",0), "missing_local": by.get("MISSING_LOCAL",0), "missing_remote": by.get("MISSING_REMOTE",0), "remote_error": by.get("REMOTE_ERROR",0), "total": len(results["checks"]), "new_this_run": n, "placeholder_duplicate_files": len(results["placeholder_duplicate_files"])}
+    identity_go = results["summary"]["match"] > 0 and results["summary"]["mismatch"] == 0 and results["summary"]["missing_remote"] == 0 and results["summary"]["remote_error"] == 0 and results["summary"]["missing_local"] == 0 and results["summary"]["placeholder_duplicate_files"] == 0
+    results["cache_identity_vs_binance_vision"] = "GO_PARTIAL_BOUNDED" if identity_go else ("NO_GO" if (results["summary"]["mismatch"] or results["summary"]["remote_error"] or results["summary"]["placeholder_duplicate_files"]) else "INCOMPLETE")
     OUT.mkdir(parents=True, exist_ok=True)
     tag = ("_" + args.out_tag) if args.out_tag else ""
     jp = OUT / f"fclr016_binance_vision_probe{tag}_{ts}.json"
@@ -145,6 +160,13 @@ def main(argv=None):
         for c in [x for x in results["checks"] if x["result"]!="MATCH"][:60]:
             lines.append(f"- {c['result']} {c['symbol']} {c['month']} {c['kind']} {c.get('day')} local={c.get('local_sha256','')[:16]} remote={c.get('remote_sha256','')[:16] if c.get('remote_sha256') else c.get('remote_status')}")
     mp.write_text("\n".join(lines) + "\n")
+    if results["placeholder_duplicate_files"]:
+        mp.write_text("\n## Placeholder duplicate files (provenance hazard)\n")
+        seen = {}
+        for p in results["placeholder_duplicate_files"]:
+            seen.setdefault((p["symbol"], p["month"], p["day"]), []).append(p["sha256"][:16])
+        for (sym, ym, day), hashes in sorted(seen.items()):
+            mp.write_text(f"- {sym} {ym} {day}: top-level placeholder sha256={hashes[0]} (canonical kind subdir missing/unmatched)\n")
     print(json.dumps({"json": str(jp.relative_to(REPO)), "md": str(mp.relative_to(REPO)), "summary": results["summary"], "cache_identity_vs_binance_vision": results["cache_identity_vs_binance_vision"]}, indent=2))
     return 0
 
