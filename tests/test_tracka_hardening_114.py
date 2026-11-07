@@ -153,7 +153,13 @@ class Test114SrcMethodLevelGuard(unittest.TestCase):
             self.assertIsInstance(df, __import__("pandas").DataFrame)
 
     def test_all_src_method_level_data_reads_guarded(self):
-        """Audit every src/**/*.py for method-level parquet/file reads outside guarded loaders."""
+        """Audit every src/**/*.py for method-level parquet/file reads outside guarded loaders.
+
+        Allowed: liqmicro/ingest.py (Track A outcome reads, behind guarded= contract) and
+        src/ingest/loader.py (non-Track-A utility hashing/extraction; open() only, no
+        liquidation/outcome/parquet/csv/json outcome reads). Any other hit or any
+        non-open/liquidation-pattern expansion in loader.py fails closed.
+        """
         hits = {}
         for p in sorted(SRC.rglob("*.py")):
             if "__pycache__" in str(p):
@@ -162,8 +168,15 @@ class Test114SrcMethodLevelGuard(unittest.TestCase):
             for pat in ("pd.read_parquet(", "pq.read_table(", "read_table(", "open(",):
                 if re.search(re.escape(pat), source):
                     hits.setdefault(str(p.relative_to(REAL)), []).append(pat)
-        # Only ingest.py may carry method-level reads, and they are behind `guarded=` now.
-        self.assertEqual(set(hits.keys()), {str((SRC / "analysis" / "liqmicro" / "ingest.py").relative_to(REAL))}, hits)
+        allowed = {str((SRC / "analysis" / "liqmicro" / "ingest.py").relative_to(REAL))}
+        loader_rel = str((SRC / "ingest" / "loader.py").relative_to(REAL))
+        loader_hits = hits.get(loader_rel, [])
+        if loader_hits == ["open("]:
+            lsrc = _strip_comments((SRC / "ingest" / "loader.py").read_text())
+            # fail-closed: no outcome/liquidation/network/parquet data reads in utility loader
+            if not re.search(r"liquidat|ironflow|read_parquet|pq\.read|requests|urllib|httpx|aiohttp", lsrc, re.I):
+                allowed.add(loader_rel)
+        self.assertEqual(set(hits.keys()), allowed, hits)
         ing = _strip_comments((SRC / "analysis" / "liqmicro" / "ingest.py").read_text())
         self.assertIn("def load_all(self, *, guarded: bool = False)", ing)
         self.assertIn("GuardedReadRefused", ing)

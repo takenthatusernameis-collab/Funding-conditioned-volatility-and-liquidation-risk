@@ -377,6 +377,43 @@ SCRIPT_REGISTRY = {
     "class": "prereg_utility",
     "reason": "Trigger-hardening artifacts; no outcome reads."
   }
+,
+  "_debug_abl.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "_debug_abl.py: local debug/inspection utility for ablation pipeline magnitudes; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+  },
+  "_debug_ablations.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "_debug_ablations.py: local debug utility for funding ablation pipeline; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+  },
+  "_debug_dup.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "_debug_dup.py: local debug utility for duplicate-column checks; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+  },
+  "_debug_funding.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "_debug_funding.py: local debug utility for funding ablation panel/prediction inspection; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+  },
+  "_debug_loghar.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "_debug_loghar.py: local debug utility comparing log-HAR vs OLS; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+  },
+  "_debug_logridge.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "_debug_logridge.py: local debug utility comparing log-ridge vs OLS HAR predictions; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+  },
+  "fclr_h001_extract.py": {
+    "class": "raw_fetch_monitor_provenance",
+    "reason": "fclr_h001_extract.py: local zip extraction/provenance helper for Binance public-archive data into data/raw; restartable/idempotent, no network required by design, no Track A liquidation outcome claim producer."
+  },
+  "run_funding_ablations.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "run_funding_ablations.py: Gate 4 funding-conditioned volatility ablations (Track C), leakage-resistant multi-split pilot, local admissible Binance data only; writes evaluation/manifest/leakage summaries as non-confirmatory pilot evidence; no Track A Hyperliquid guarded liquidation outcome reads/claims."
+  },
+  "run_rv_baseline.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "run_rv_baseline.py: RV-only OOS baseline (Gate 3, Track C), leakage-resistant walk-forward on local Binance data; writes evaluation/manifest summaries; no Track A Hyperliquid guarded liquidation outcome reads/claims."
+  },
 }
 
 ALLOWED_CLASSES = {

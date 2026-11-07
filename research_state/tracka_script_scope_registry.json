@@ -1,9 +1,33 @@
 {
   "registry_version": "1.0",
-  "generated": "20261106T045619Z",
+  "generated": "20261107T024237Z",
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)",
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION.",
   "scripts": {
+    "_debug_abl.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_abl.py: local debug/inspection utility for ablation pipeline magnitudes; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_ablations.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_ablations.py: local debug utility for funding ablation pipeline; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_dup.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_dup.py: local debug utility for duplicate-column checks; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_funding.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_funding.py: local debug utility for funding ablation panel/prediction inspection; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_loghar.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_loghar.py: local debug utility comparing log-HAR vs OLS; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_logridge.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_logridge.py: local debug utility comparing log-ridge vs OLS HAR predictions; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
     "cache_panel.py": {
       "class": "repo_maintenance_utility",
       "reason": "cache_panel.py: panel cache helper; no Track A liquidation outcome claim production."
@@ -11,6 +35,10 @@
     "campaign_resume.py": {
       "class": "repo_maintenance_utility",
       "reason": "campaign_resume.py: campaign resume/maintenance orchestration; no Track A liquidation outcome claims/canonical liquidation mutation."
+    },
+    "check_tracka_scope_registry_drift.py": {
+      "class": "resume_gate_infra",
+      "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes, no Track A liquidation outcome claims."
     },
     "consolidate_source_probe_fclr_next_002_104.py": {
       "class": "repo_maintenance_utility",
@@ -148,6 +176,10 @@
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr013_coverage_audit.py: coverage/audit utility (Track C/FCLR or auxiliary); no Hyperliquid guarded liquidation outcome claim path unless separately wired."
     },
+    "fclr_h001_extract.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr_h001_extract.py: local zip extraction/provenance helper for Binance public-archive data into data/raw; restartable/idempotent, no network required by design, no Track A liquidation outcome claim producer."
+    },
     "forecast_pipeline.py": {
       "class": "track_c_sealed_volatility",
       "reason": "forecast_pipeline.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
@@ -248,6 +280,10 @@
       "class": "track_c_or_aux_utility",
       "reason": "run_fi_quick.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
     },
+    "run_funding_ablations.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_funding_ablations.py: Gate 4 funding-conditioned volatility ablations (Track C), leakage-resistant multi-split pilot, local admissible Binance data only; writes evaluation/manifest/leakage summaries as non-confirmatory pilot evidence; no Track A Hyperliquid guarded liquidation outcome reads/claims."
+    },
     "run_h003.py": {
       "class": "track_b_modeled_boundary",
       "reason": "Track B/FCLR-H003 modeled boundary-breach labels (synthetic); explicitly modeled != observed liquidations; out of Track A observed outcome contract."
@@ -271,6 +307,10 @@
     "run_liqmicro_v2.py": {
       "class": "guarded_tracka",
       "reason": "Guarded; blocked no loader/canonical/frontier mutation (115 G2)."
+    },
+    "run_rv_baseline.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_rv_baseline.py: RV-only OOS baseline (Gate 3, Track C), leakage-resistant walk-forward on local Binance data; writes evaluation/manifest summaries; no Track A Hyperliquid guarded liquidation outcome reads/claims."
     },
     "run_stream_b_deep_analysis_001.py": {
       "class": "track_c_sealed_volatility",
@@ -331,10 +371,6 @@
     "write_trigger_harden_successor.py": {
       "class": "prereg_utility",
       "reason": "Trigger-hardening artifacts; no outcome reads."
-    },
-    "check_tracka_scope_registry_drift.py": {
-      "class": "resume_gate_infra",
-      "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes, no Track A liquidation outcome claims."
     }
   },
   "allowed_classes": [
@@ -354,5 +390,5 @@
     "out_of_scope_historical_tracka_pilot",
     "unclassified_auxiliary"
   ],
-  "script_count": 83
+  "script_count": 92
 }
