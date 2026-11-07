@@ -1,8 +1,8 @@
 # Evaluation Summary
 
 **Status:** rv_baseline_complete
-**Last Updated:** 2026-11-07T00:30:45Z
-**Git SHA:** 9cf0778bdf591789b9df096115e17a4863d93481
+**Last Updated:** 2026-11-07T01:14:16Z
+**Git SHA:** 9ce75ad4fcd82fcff42950d1bfe85922019cb6e6
 
 ## Scope
 - Symbols: BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT
@@ -25,3 +25,16 @@
 - Leakage-resistant: chronological splits only, purge/embargo applied, normalization fit on train only.
 - Missing basis/spot treated as NaN (not zero).
 - Funding ablations remain blocked until Gate 3 satisfied.
+
+## Funding Ablations (Gate 4)
+**Updated:** 2026-11-07T01:14:21Z (pilot, 1 split, log-target ridge HAR; not a sealed claim)
+
+| Ablation | QLIKE | ΔQLIKE vs A | MAE | neg_pred |
+|---|---|---|---|---|
+| A_rv_only | 333293.4217179353 | 0.0 | 255952842.64419475 | 0.0 |
+| B_rv_signed | 4847457.505402432 | 4514164.083684497 | 15955243.776873946 | 0.0 |
+| C_rv_abs | 4847457.505402432 | 4514164.083684497 | 15955243.776873946 | 0.0 |
+| D_rv_signed_abs | 4847468.957729966 | 4514175.536012031 | 15955229.924937373 | 0.0 |
+| E_rv_funding_trails | 1.7172709452688984e+46 | 1.7172709452688984e+46 | 2.853194870747307e+90 | 0.0 |
+
+> Pilot result: funding variants worse than RV-only on this split/sample. Inconclusive; expand splits and robustness before inference.
