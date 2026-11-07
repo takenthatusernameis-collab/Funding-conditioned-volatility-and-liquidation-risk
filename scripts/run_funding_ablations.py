@@ -519,10 +519,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     out_suffix = args.out_suffix
     experiment_id = args.experiment_id
     RES.mkdir(parents=True, exist_ok=True)
-    # select split defs: v3 when out_suffix indicates v3_30d or prereg name contains v3_30d
-    use_v3 = ('v3' in (out_suffix or '').lower() or 'v3_30d' in (pre_reg_path or '').lower())
-    split_defs = PRE_REG_SPLITS_V3_30D if use_v3 else PRE_REG_SPLITS
-    include_cache = bool(use_v3 or getattr(args, 'include_cache', False))
+    # select split defs: v3/v4 30-day 2024-04..09 design when indicated; v4 is exploratory on confounded slice (per prereg)
+    _low = ((out_suffix or '') + ' ' + (pre_reg_path or '')).lower()
+    use_30d_0409 = ('v3' in _low and '30d' in _low) or ('v4' in _low)
+    split_defs = PRE_REG_SPLITS_V3_30D if use_30d_0409 else PRE_REG_SPLITS
+    include_cache = bool(use_30d_0409 or getattr(args, 'include_cache', False))
 
     kpanel = load_kline_panel(symbols, start, end, horizon=horizon, include_cache=include_cache)
     fpanel = load_funding_panel(symbols, start, end, include_cache=include_cache)
