@@ -1,0 +1,2179 @@
+{
+  "action": "quarantine_top_level_placeholders",
+  "moves": [
+    {
+      "bytes": 834,
+      "day": "2025-08-19",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-19.zip",
+      "month": "2025-08",
+      "sha256": "e85595cf0ad34e56d50337357efe24d4c87aea60a7e7dfc52112fcb128d9e3a0",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-19.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1062,
+      "day": "2025-08-03",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-03.zip",
+      "month": "2025-08",
+      "sha256": "312d2e60b1031cd6164b5cda788d384c0bb264360af0c5894f32e3e1f190dc9b",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-03.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 876,
+      "day": "2025-08-24",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-24.zip",
+      "month": "2025-08",
+      "sha256": "80bdaf2989c7c589398d406f0969534479812ddf06128ec24db3a5c573c4385a",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-24.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 826,
+      "day": "2025-08-05",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-05.zip",
+      "month": "2025-08",
+      "sha256": "78fceb453f86f71058c0dc2f32eee127610f59edf5d6b3536f766bdfe8b5e98f",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-05.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-08",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-08.zip",
+      "month": "2025-08",
+      "sha256": "a5c71269dbf5c36a8b65106c4fc6967c55affcfd0767429b703febfa45e67210",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-08.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-07",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-07.zip",
+      "month": "2025-08",
+      "sha256": "490e489fbaea3e3942e65eb14534218eca915cbea0a0e51d2b23742588026385",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-07.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-08-04",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-04.zip",
+      "month": "2025-08",
+      "sha256": "0e698d1bbc7916bdd0783104008ff41ddecc6b218e3d340a4310c67965f4bcc9",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-04.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 853,
+      "day": "2025-08-23",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-23.zip",
+      "month": "2025-08",
+      "sha256": "27b171db742464c15f2488289a466337804fb61015aea36bffaa418ff43590ac",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-23.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1067,
+      "day": "2025-08-18",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-18.zip",
+      "month": "2025-08",
+      "sha256": "21e8a7991c920dd94d4a75648c5cd7795f165751e97ab0a7db351e6ebd2a107d",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-18.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1071,
+      "day": "2025-08-06",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-06.zip",
+      "month": "2025-08",
+      "sha256": "d1d7b1962dbac60d71e9b738609d9a48510dfa546f74f66461bd4c04892b97d1",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-06.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1059,
+      "day": "2025-08-29",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-29.zip",
+      "month": "2025-08",
+      "sha256": "9c4e925d6b99a3217e3d771d5a7b01e7e617e1086e9350c830b5e941558ef7b9",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-29.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 995,
+      "day": "2025-08-11",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-11.zip",
+      "month": "2025-08",
+      "sha256": "ea0dcbec79470af9a36cf599091cace9a1b9ed5d198fef1ef9501a9428917818",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-11.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 832,
+      "day": "2025-08-25",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-25.zip",
+      "month": "2025-08",
+      "sha256": "e2edce0e0d4bb3b21a4cc80cf4dd5d70698ce64498c08eea2067b379029f5f8e",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-25.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-08-22",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-22.zip",
+      "month": "2025-08",
+      "sha256": "c15fd5483b268a860c2241ccdd05c97f8b10c3ccc30468e53d149becefbd6a33",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-22.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-08-17",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-17.zip",
+      "month": "2025-08",
+      "sha256": "52b0bbaa6afd2e8e3ba04ed26336791fb58818aae170ec970de366efbc4a16bf",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-17.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-21",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-21.zip",
+      "month": "2025-08",
+      "sha256": "68995ab017336400e54120be92817001c68127d6234a08ea16991d22467feb6e",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-21.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 866,
+      "day": "2025-08-13",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-13.zip",
+      "month": "2025-08",
+      "sha256": "9878f5ceb9bc5c55987e063605fcba4f6ff4e5e8ed981cb4103d506c1045126e",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-13.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-08-27",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-27.zip",
+      "month": "2025-08",
+      "sha256": "9c0b75210b484de34b44a36c488cdbee8dc63436998a683ef493cda078880ab7",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-27.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1073,
+      "day": "2025-08-02",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-02.zip",
+      "month": "2025-08",
+      "sha256": "96f928b181114a4082b0d14bb9882c212ad9a116bb470b920b6c229c4b87cf62",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-02.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1038,
+      "day": "2025-08-30",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-30.zip",
+      "month": "2025-08",
+      "sha256": "9d74d9f37a89002e4bfad0763e91356b59a1737523b14548aeb0f70e7b50664c",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-30.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-08-14",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-14.zip",
+      "month": "2025-08",
+      "sha256": "dc3d6c01630d99d327575730db3ad47c7a7d7b2b44d418646b6e32a3ccf2d3dc",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-14.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-08-12",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-12.zip",
+      "month": "2025-08",
+      "sha256": "2a30b4a34d7210983773731ae942d05a9555a68493ff9642f9b2a4fe4da64ea9",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-12.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 851,
+      "day": "2025-08-09",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-09.zip",
+      "month": "2025-08",
+      "sha256": "13b4000753674e3bf753a38ee21fa9c822e9a691ba55232c9ae405d2637a8467",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-09.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 823,
+      "day": "2025-08-16",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-16.zip",
+      "month": "2025-08",
+      "sha256": "3585940667d3913e9a994319d8fe5a45fd51454914f080af22961331be4eacf5",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-16.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 910,
+      "day": "2025-08-26",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-26.zip",
+      "month": "2025-08",
+      "sha256": "8a281859a9b015f7ce71c4161d5f69962e04b95f321f616039399bfb7263333c",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-26.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-08-20",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-20.zip",
+      "month": "2025-08",
+      "sha256": "7a7b58448a7e8156b78628d4e4ec75a068eb7e199d563e3571d77a46816cdeb3",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-20.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 909,
+      "day": "2025-08-10",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-08-10.zip",
+      "month": "2025-08",
+      "sha256": "01bc75c4a6c98a58521eece1c674d1158f17041d33f23ee13cc399fc5c9258bf",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-10.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-09-17",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-17.zip",
+      "month": "2025-09",
+      "sha256": "d3d0d694c86b98cecc4b216e42394bdbed1b8410cd6472f13abbae438adf12da",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-17.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 830,
+      "day": "2025-09-05",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-05.zip",
+      "month": "2025-09",
+      "sha256": "dc9cd5b955ff2efbfa6f9c45329d68a37c6b82811ae72ce09b315277bbc4d6a3",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-05.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1070,
+      "day": "2025-09-20",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-20.zip",
+      "month": "2025-09",
+      "sha256": "b9fc371740b5c19a285a494de225662367c4b810f5dfd508e721c450237f2f12",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-20.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 968,
+      "day": "2025-09-29",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-29.zip",
+      "month": "2025-09",
+      "sha256": "797a659be7fc5a8e01c1775f337dfd7c14cd3971628715f4e1340d17707cac0a",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-29.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-09-13",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-13.zip",
+      "month": "2025-09",
+      "sha256": "a8c333e73c6607203e7691133787f1bcf8c11c5942a28c3bc9b2086dc0270969",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-13.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1048,
+      "day": "2025-09-03",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-03.zip",
+      "month": "2025-09",
+      "sha256": "e6aa88af3f18e871c103700194188eb9cb693a0349678cabdb20425644f40b59",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-03.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1043,
+      "day": "2025-09-04",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-04.zip",
+      "month": "2025-09",
+      "sha256": "dae50dd7588cfc5d7edd4c941cdbde4125b0bdd352c5355b5ccf1cd05521fde8",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-04.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 863,
+      "day": "2025-09-18",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-18.zip",
+      "month": "2025-09",
+      "sha256": "83018c93f7aaece6376f713ef98945279ea81323e6066ca228ad593409775b88",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-18.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 971,
+      "day": "2025-09-19",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-19.zip",
+      "month": "2025-09",
+      "sha256": "d00d48f5c8157bae6ba94832c5f981a7b4a9b0469143f6aba04498632db1d84a",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-19.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 860,
+      "day": "2025-09-22",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-22.zip",
+      "month": "2025-09",
+      "sha256": "088fdfea403bde73f04ac5a92edc4a2c83cd8294efdc4e28fce7972fb7d6fc3c",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-22.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-09-12",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-12.zip",
+      "month": "2025-09",
+      "sha256": "c72a3a5a6301acd7498801060647b7e382560336d938732466a34055e5bdd02b",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-12.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 838,
+      "day": "2025-09-26",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-26.zip",
+      "month": "2025-09",
+      "sha256": "6fd228fcbe05c463875f0207635bb8a09ae6521fa6a88966f27dd903f48f998f",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-26.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 853,
+      "day": "2025-09-11",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-11.zip",
+      "month": "2025-09",
+      "sha256": "b573ee3df7a58124e5d825a2e5203f2bd4834964303175a4a65e808175d76c6e",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-11.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-09-16",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-16.zip",
+      "month": "2025-09",
+      "sha256": "1bf2a20041f19c8bde7ec2b86dfea1d08308084d4b6a0d11d0289209f0d3112c",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-16.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-09-21",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-21.zip",
+      "month": "2025-09",
+      "sha256": "921d39fe50a97b3d4f97442daf95cf590e281abd91e66b0d285622a7e40010ea",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-21.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-09-14",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-14.zip",
+      "month": "2025-09",
+      "sha256": "750820fe3c62ebdc8046fc4623ede7831e44d687cfc7fdee664ac070126b4e23",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-14.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1114,
+      "day": "2025-09-23",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-23.zip",
+      "month": "2025-09",
+      "sha256": "f62226e6e3e90a3e79d664e641b841ee0ee6c7bf3bccf155915411d88f5e045a",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-23.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1048,
+      "day": "2025-09-09",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-09.zip",
+      "month": "2025-09",
+      "sha256": "5c330a251debea64477d42523f54b9e80abd15dc6ca76cafae5690ac1bdc116d",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-09.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-09-24",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-24.zip",
+      "month": "2025-09",
+      "sha256": "3c03fcdc06a49db3e481aea26f243606d2e2b07a31456c858c1124d19aebcefd",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-24.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-09-07",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-07.zip",
+      "month": "2025-09",
+      "sha256": "b32b4edc24faeb72fb54cc764532f4c740c49b74fc0fa3dd4821447947ba0a5e",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-07.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1061,
+      "day": "2025-09-10",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-10.zip",
+      "month": "2025-09",
+      "sha256": "587f6e576c9001b4fc6c52d6f4f3f37d011de8b1ef0a38a259f29ee32c3b401d",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-10.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 899,
+      "day": "2025-09-02",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-02.zip",
+      "month": "2025-09",
+      "sha256": "0d47c9499941cced95dccd111731f2b33ca6ca8432f0e81f2743def691ed88a4",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-02.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 923,
+      "day": "2025-09-06",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-06.zip",
+      "month": "2025-09",
+      "sha256": "d0122c723956850b1fea8fd2b60f6a45460f14b0244e87d08f112b42e65ad171",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-06.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-09-27",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-27.zip",
+      "month": "2025-09",
+      "sha256": "c9cf0dcd56d1d975a06b6534646eb47fc8f33d9790c262fdb9ada7bf6000fce9",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-27.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-09-25",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-25.zip",
+      "month": "2025-09",
+      "sha256": "6510a92fbb2b321e0afa9e652b300e6703013a92b7f63b1aef93eda2cdad2d04",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-25.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 855,
+      "day": "2025-09-08",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-09-08.zip",
+      "month": "2025-09",
+      "sha256": "e2aefb1a794b331dd98311ddde6a5df981258fae3c1f002d638cd861e582455a",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-08.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1143,
+      "day": "2025-10-17",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-17.zip",
+      "month": "2025-10",
+      "sha256": "23bff3e5d0c279808216349e8642c8a9d96fccb8496a032b24e1e93c3ae55d9e",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-17.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 862,
+      "day": "2025-10-08",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-08.zip",
+      "month": "2025-10",
+      "sha256": "448f02e8e7bc9afa8eb2b749c7fa7c696e671962da499777a8a4163ae41f5e3e",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-08.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 906,
+      "day": "2025-10-04",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-04.zip",
+      "month": "2025-10",
+      "sha256": "2850ae645da22d5e266dd4058d9e222aece488bc2744200f09a51cb8582e4d5a",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-04.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1111,
+      "day": "2025-10-21",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-21.zip",
+      "month": "2025-10",
+      "sha256": "379a033ef2c6ccff36589c06c685f4012a6cd29f5240ea1ee0bcf6b59d302d23",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-21.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1108,
+      "day": "2025-10-29",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-29.zip",
+      "month": "2025-10",
+      "sha256": "a753758a41a72f5177a7a4d664497ffaaf76c910a95054446edbcf5faaeca2ac",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-29.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 847,
+      "day": "2025-10-20",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-20.zip",
+      "month": "2025-10",
+      "sha256": "44c8cb9fdc1fed9f7fde7fc285728a9133a94e188968462b06cc3eaa02576728",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-20.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-10-03",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-03.zip",
+      "month": "2025-10",
+      "sha256": "55c75e4c021872b71a5c473b988678b387429c5ff212da04fb2026d09ada0a29",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-03.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 873,
+      "day": "2025-10-30",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-30.zip",
+      "month": "2025-10",
+      "sha256": "7787b4159171126b6ecc6698aa77c457cebba54a2e788e708bbbdb95e14c831a",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-30.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 875,
+      "day": "2025-10-12",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-12.zip",
+      "month": "2025-10",
+      "sha256": "4de33513772817b6874cf1a4b96d91976739fb979d6645007066c3ff9293bebc",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-12.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-10-22",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-22.zip",
+      "month": "2025-10",
+      "sha256": "13bdbe413fe1f08ced26c27d1ecac882ffcacbd132e6506babe07116e22b5b58",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-22.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 967,
+      "day": "2025-10-23",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-23.zip",
+      "month": "2025-10",
+      "sha256": "135806b333faba476a5658adc427222a5d53562758984ed2c65a9bc1617e7a6e",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-23.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1030,
+      "day": "2025-10-14",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-14.zip",
+      "month": "2025-10",
+      "sha256": "605bd593b450e4215a50af14795fbf351927fb3b10f6decae04fc91cb5319c98",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-14.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1111,
+      "day": "2025-10-24",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-24.zip",
+      "month": "2025-10",
+      "sha256": "075cc758b3ccb18d3884091450bee7eb196df24b2a97457178c001b3f7f7069a",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-24.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1018,
+      "day": "2025-10-18",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-18.zip",
+      "month": "2025-10",
+      "sha256": "ee565db0cffb83aacdda61a3325682dd8ef6ddcde4a1c54ed20c82e267186012",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-18.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-10-26",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-26.zip",
+      "month": "2025-10",
+      "sha256": "be1495f1220e5985d47206b28990b2deb3b1dbaa6b63e020f067e02b948fc89c",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-26.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 884,
+      "day": "2025-10-13",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-13.zip",
+      "month": "2025-10",
+      "sha256": "324e357013fba3d838502bff7ffa0bdb2ec653018b2d3b122c9868c3542db7d1",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-13.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 968,
+      "day": "2025-10-02",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-02.zip",
+      "month": "2025-10",
+      "sha256": "c5660abfd4dcd6a3fc85386119120ef57ad8b271c264a333339f3c21f18386ad",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-02.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1140,
+      "day": "2025-10-11",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-11.zip",
+      "month": "2025-10",
+      "sha256": "613e7ac55bb41f118e21d9338ebe7fffc6cce47af1b5d15be640374e08081686",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-11.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 874,
+      "day": "2025-10-07",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-07.zip",
+      "month": "2025-10",
+      "sha256": "6ba0ce6f6e1b784b548e4ca434d261c8a324e6e6c9693dc7f17263bfa1fe64a9",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-07.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-10-27",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-27.zip",
+      "month": "2025-10",
+      "sha256": "e0eba5a01bf7618c59eab836f4d8b357aaf24e0995c604a52a3154fdbd2c8207",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-27.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-10-06",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-06.zip",
+      "month": "2025-10",
+      "sha256": "a8e502fc79f2254aa42cf4e3e8d8591e6412e7afe3fd17876bb3b7aeadd51e92",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-06.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1077,
+      "day": "2025-10-25",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-25.zip",
+      "month": "2025-10",
+      "sha256": "af2b720d9c07d480071eae60c78800247cad7e15f0e7de9cc872b893a857caf8",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-25.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 960,
+      "day": "2025-10-19",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-19.zip",
+      "month": "2025-10",
+      "sha256": "0fb9fc441afa3f63f23206888521beea293dded1f58011ca27f36e3de75058d9",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-19.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 864,
+      "day": "2025-10-09",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-09.zip",
+      "month": "2025-10",
+      "sha256": "b14ca2e94d85051c14e3c7fe4056a6422dffa4be8143a823a4911cde8a70b277",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-09.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1093,
+      "day": "2025-10-05",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-05.zip",
+      "month": "2025-10",
+      "sha256": "2cf9955943894afdf5f9c8db1215a7ea10436e6b427ce66f33a2ae9de22babde",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-05.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 870,
+      "day": "2025-10-10",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-10.zip",
+      "month": "2025-10",
+      "sha256": "faf4bd2b13a2ccb41e125a81aa37fd06a7545b36c8f275308cdf75d7d06f59d0",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-10.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 875,
+      "day": "2025-10-16",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/BNBUSDT-1h-2025-10-16.zip",
+      "month": "2025-10",
+      "sha256": "4b1e8a4155fc2b5f007b7c114ad1588dd6bb58afe0129f437794c5d1cdd091e0",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-16.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 883,
+      "day": "2025-08-07",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-07.zip",
+      "month": "2025-08",
+      "sha256": "8e0c3646f9f6b7ccfa2a5642a518758f51cfb96cfa5c40d0caadccfec3701735",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-07.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-12",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-12.zip",
+      "month": "2025-08",
+      "sha256": "4eeecd7dcec93e1fea4e937cda6d11337e35ec531edb882a923159e3315e4bcc",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-12.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 908,
+      "day": "2025-08-21",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-21.zip",
+      "month": "2025-08",
+      "sha256": "42b3a8fe2ee374355f463adf4b9283d4298969f42ee2dab0d2adbec4a78ad60a",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-21.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 851,
+      "day": "2025-08-18",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-18.zip",
+      "month": "2025-08",
+      "sha256": "4d4194308b57d5a222b772e78dadc825b417e9155c0b0704e08044dd7be63041",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-18.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 912,
+      "day": "2025-08-25",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-25.zip",
+      "month": "2025-08",
+      "sha256": "8f23ef7ad4439646702a37493e6e2035493dd0bfd13d8cdc984e6a5b1d8459a7",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-25.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-08-13",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-13.zip",
+      "month": "2025-08",
+      "sha256": "de6a4e952634007b9f655ae0fd1705af8aa5dd55ace151cd28ef99f690103b9e",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-13.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 906,
+      "day": "2025-08-24",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-24.zip",
+      "month": "2025-08",
+      "sha256": "365a7967dec4f9742fb6303e17cc26f69d981a25bf357c6e6c1549bf12f6144f",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-24.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 885,
+      "day": "2025-08-05",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-05.zip",
+      "month": "2025-08",
+      "sha256": "886abed4411d15c6e62c913819fec58969cbc944d10ec2fac5b9c67de6269616",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-05.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 835,
+      "day": "2025-08-02",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-02.zip",
+      "month": "2025-08",
+      "sha256": "3fbde0472407bdf09cb07258dc80fa233d6229cbfb9e61e53af5be4029cdbe84",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-02.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 846,
+      "day": "2025-08-16",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-16.zip",
+      "month": "2025-08",
+      "sha256": "8038bcdb962b282ee60a6b9020bf0fc3b3ddc99868fa22c7923d5bb90da57f4f",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-16.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 874,
+      "day": "2025-08-17",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-17.zip",
+      "month": "2025-08",
+      "sha256": "894404320c8afa58f15009948ec20fb88ef718515a84a3c576b1e96146138a01",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-17.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 921,
+      "day": "2025-08-03",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-03.zip",
+      "month": "2025-08",
+      "sha256": "0573d4cb7d57164d245c60ebfa01d725b3bbe82acf8c34d62c012d613b2be476",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-03.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-08-23",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-23.zip",
+      "month": "2025-08",
+      "sha256": "f6efae1642124796fcd2e05a507a47fe68b15c389fdea70e743914bc9253ab28",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-23.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-08-09",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-09.zip",
+      "month": "2025-08",
+      "sha256": "e290e458dcb8bf32492dfb1e89784d6dc5aa08b21ae8c43cc14cb02ba5480a83",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-09.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-10",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-10.zip",
+      "month": "2025-08",
+      "sha256": "f7d901624bb3544293fca1255758318c2e4ce9ac1d71b90f30fc0d924a866891",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-10.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-08-04",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-04.zip",
+      "month": "2025-08",
+      "sha256": "973e3a830f5bed5702667b3816e7c86c9d693b58ba99a8acaa3be2a58378228d",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-04.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 907,
+      "day": "2025-08-20",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-20.zip",
+      "month": "2025-08",
+      "sha256": "6fc753123029150f41202689a4c570e2f092fad913128de481d79cd5742bfde2",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-20.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 931,
+      "day": "2025-08-27",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-27.zip",
+      "month": "2025-08",
+      "sha256": "42a97d5d1917bd29ef047908884983b4a7517e72e64c4ce50ee674595d5973e4",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-27.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 879,
+      "day": "2025-08-06",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-06.zip",
+      "month": "2025-08",
+      "sha256": "3a3b7c49fd45726bd238ba2fc2dcd86919991329d3c6e62db8dab91f5ad7edce",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-06.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-08",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-08.zip",
+      "month": "2025-08",
+      "sha256": "b35b01b415c2a1583f2b3895f0739fb95953c4a0dbb6a11be63a32bd9264620d",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-08.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 838,
+      "day": "2025-08-19",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-19.zip",
+      "month": "2025-08",
+      "sha256": "74ba96aa46d95c22e8d6a20f2c95523a96d7cff1c1aad85f06099d9cbe51c505",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-19.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-30",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-30.zip",
+      "month": "2025-08",
+      "sha256": "49b92e66113dfe6215f609f50b5ce4a42f77471ea3eb83f49b9636c406c3998e",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-30.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 880,
+      "day": "2025-08-14",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-14.zip",
+      "month": "2025-08",
+      "sha256": "f37d647dc1b60308599d985814ae9efe1d9bcb9004e8dec3958c88bc8b996283",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-14.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 870,
+      "day": "2025-08-29",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-29.zip",
+      "month": "2025-08",
+      "sha256": "db101fd43c913388de1413110c06d6373debe14ff922fad9bd346992af93b304",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-29.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-08-11",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-11.zip",
+      "month": "2025-08",
+      "sha256": "5b7576a818a559eb47f8dc25010f786ab33f275288be2cfb9e48e7c62c8302e1",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-11.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 922,
+      "day": "2025-08-26",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-26.zip",
+      "month": "2025-08",
+      "sha256": "85fdc7a65c03ffa95e7f5bf3ab0aab1486bb63914fe3986b5a62166e5fcc108f",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-26.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 925,
+      "day": "2025-08-22",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-08-22.zip",
+      "month": "2025-08",
+      "sha256": "b39ce73f086930d01a719e807dc8d9cf7fd077efca37605b7469e61c53f75724",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-22.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 903,
+      "day": "2025-09-03",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-03.zip",
+      "month": "2025-09",
+      "sha256": "2ebbb90d4fe8a4935745cfb244843bf3072b759d6a9a9c4fc300baa63502ba51",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-03.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 879,
+      "day": "2025-09-02",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-02.zip",
+      "month": "2025-09",
+      "sha256": "db16c90ad8f0627067cfdbdca27410385f1e2e1e7d47748911ae08c237a30272",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-02.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-09-08",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-08.zip",
+      "month": "2025-09",
+      "sha256": "b1aefb9ebe7f225fe85612ea061b0e2862de211fe3a697afa9ad556873a4c1cc",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-08.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 944,
+      "day": "2025-09-25",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-25.zip",
+      "month": "2025-09",
+      "sha256": "9eb0bf84101ed4d9ca50768666626d683cff56a2ac1d39b8d168a8dc17bc917c",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-25.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 896,
+      "day": "2025-09-13",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-13.zip",
+      "month": "2025-09",
+      "sha256": "8cfb55267e49dc1d57faf69bcd0204d440c24b4ddab5e32cac750b44eb64c4ba",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-13.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 882,
+      "day": "2025-09-14",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-14.zip",
+      "month": "2025-09",
+      "sha256": "78cd97e4a970108d878221ad94aa31df1ea58a627a690e1abdd1a4c9510b1706",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-14.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 922,
+      "day": "2025-09-29",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-29.zip",
+      "month": "2025-09",
+      "sha256": "eca8d2ac235dac924f50d14d2d3eaa6d867ba86dea5696f82feda95e6f389e36",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-29.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 833,
+      "day": "2025-09-20",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-20.zip",
+      "month": "2025-09",
+      "sha256": "8e90e8a6b76e942bbec88543ff00909e7b7bf3050f2362c3f84a1d80c6327e4b",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-20.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 878,
+      "day": "2025-09-16",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-16.zip",
+      "month": "2025-09",
+      "sha256": "bcde6a5e883a46022923a267a893a2482c38519d0f91028394fadc36d4f860ec",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-16.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 832,
+      "day": "2025-09-27",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-27.zip",
+      "month": "2025-09",
+      "sha256": "e6e53cbd33d12190fcf43dd8b218011340676c897b4a56a801f7d12f2cff8e17",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-27.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 909,
+      "day": "2025-09-12",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-12.zip",
+      "month": "2025-09",
+      "sha256": "4ad2646b36a981085ebd49c715d0357c78d3544cfc6c00772b1d67ed456bfe6e",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-12.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-09-11",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-11.zip",
+      "month": "2025-09",
+      "sha256": "cebde3f10817a74eebff78027365badad2f1eee355f4987d5418c2c5fe6edc4f",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-11.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 918,
+      "day": "2025-09-26",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-26.zip",
+      "month": "2025-09",
+      "sha256": "fd4d0e40ca57263c0b06c5d549323e232034a34659f56aad55755fef4e07ffef",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-26.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-09-10",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-10.zip",
+      "month": "2025-09",
+      "sha256": "88bfd874f46ba40e9eccaaa9028a80ec94e0dcd196849223c1926ad74e0aa8ef",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-10.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-09-06",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-06.zip",
+      "month": "2025-09",
+      "sha256": "2bba1fca6ffdaae5190903d0ef37a18f1c490f216d3381e34d3808267e85ab73",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-06.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 912,
+      "day": "2025-09-23",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-23.zip",
+      "month": "2025-09",
+      "sha256": "3c5208cb1fd23bbd6c9cc9c7f5e49452618f6d63c96dff5231c4756f8754a181",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-23.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-09-17",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-17.zip",
+      "month": "2025-09",
+      "sha256": "39750a26f7c82f5245c8b6eb7dca7fdbd8a53fdb8a040eccc6b4f94b9690e115",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-17.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 887,
+      "day": "2025-09-04",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-04.zip",
+      "month": "2025-09",
+      "sha256": "60f31dc9edab8d15dcc42038d40ede62d7e0496cc758ea9299d25f05ace50bfe",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-04.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-09-19",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-19.zip",
+      "month": "2025-09",
+      "sha256": "88c81608e410c206e6c7476c97ab9fc176f6ce2fb1b548bae725d5c964e12ab6",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-19.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 882,
+      "day": "2025-09-21",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-21.zip",
+      "month": "2025-09",
+      "sha256": "7f9360c9f731a5eec76fe4a0da6d7797407d4d40ddc9d3945836b972edfb30bb",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-21.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 854,
+      "day": "2025-09-05",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-05.zip",
+      "month": "2025-09",
+      "sha256": "f2ecb01c304e84167f9da5a4c4577c3b34cb26052af6f83052eb73320fce0e3f",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-05.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 908,
+      "day": "2025-09-22",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-22.zip",
+      "month": "2025-09",
+      "sha256": "872a0d1282e389d82277540e87f722b123020ac8debf8ef3cf8507f055903600",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-22.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 909,
+      "day": "2025-09-09",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-09.zip",
+      "month": "2025-09",
+      "sha256": "59fde3677a4eac09718a1a2f573cc2d3220447b1a713f11fb658dda5d1b4e8b7",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-09.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 860,
+      "day": "2025-09-18",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-18.zip",
+      "month": "2025-09",
+      "sha256": "218ca1d0a80c6f9439732e14207b3e63c4441ec90d3ae4e4098ccbb99c8491be",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-18.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 898,
+      "day": "2025-09-24",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-24.zip",
+      "month": "2025-09",
+      "sha256": "153b18a3888ccd31e0f4ddb00c098ad0826a121b9b8e0696d8ecf71c48af2bbe",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-24.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 862,
+      "day": "2025-09-07",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-09-07.zip",
+      "month": "2025-09",
+      "sha256": "9468c11fdd4b60b8a06f54db67f77f61a5f228748a2877d853dbe23d92d77786",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-07.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 920,
+      "day": "2025-10-12",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-12.zip",
+      "month": "2025-10",
+      "sha256": "2c5d03e0e660863e47eda292614b9a981e2000225c8f3a46f2fef5378e9ea7fa",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-12.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 833,
+      "day": "2025-10-25",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-25.zip",
+      "month": "2025-10",
+      "sha256": "d439245276a68133744552fc232c6013a35bdfe97578b258db0d320ccc6acb87",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-25.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 923,
+      "day": "2025-10-09",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-09.zip",
+      "month": "2025-10",
+      "sha256": "7b4053d935d32bc76452e8f2c476f7a36949e0f5a4127c4675aef14e6f59d532",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-09.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-10-14",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-14.zip",
+      "month": "2025-10",
+      "sha256": "2660eb608f74c969ebc5bae3d4acea0e7dcdf854971dadbbbb62a9848bde4f16",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-14.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 893,
+      "day": "2025-10-11",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-11.zip",
+      "month": "2025-10",
+      "sha256": "e2947a22e8ff961b3bf9ec47deecb098aa339256c21a53948b2653fb567d2bf5",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-11.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 906,
+      "day": "2025-10-29",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-29.zip",
+      "month": "2025-10",
+      "sha256": "c7a92fc7dcc711100af3365e38af543f0ae3e1686ea12a9155ed3936f814faef",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-29.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-10-21",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-21.zip",
+      "month": "2025-10",
+      "sha256": "42f0f1869e87ff5d8e66c150ac4d42d33ec0411c931200dcfd8e3f0a0d021a7e",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-21.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 877,
+      "day": "2025-10-08",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-08.zip",
+      "month": "2025-10",
+      "sha256": "413c31aac7eba810d6b5afd21cf4831ff22170c6463fad2df268b5358e72f28b",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-08.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-10-20",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-20.zip",
+      "month": "2025-10",
+      "sha256": "323a7d63a0b8f2d5518604f320ef5b473bd27def10ea355fb73ba73e863ee23e",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-20.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-10-03",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-03.zip",
+      "month": "2025-10",
+      "sha256": "3a7208f625d1018c86f68d48182f80aad0a47ec140fed19927fc3be2bebce513",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-03.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 847,
+      "day": "2025-10-05",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-05.zip",
+      "month": "2025-10",
+      "sha256": "76f472fa7781ce72477d7c801267e52682875d3860df6777044c572a952ffe35",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-05.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-10-23",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-23.zip",
+      "month": "2025-10",
+      "sha256": "fe859990c47b4a1861156e4d308a8238927293ed5312f351273d57832701e151",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-23.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-10-04",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-04.zip",
+      "month": "2025-10",
+      "sha256": "b69ec1bbc882e3e997491ab120306add0655ca98b80b4c211eb77015fd1ab5bd",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-04.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 866,
+      "day": "2025-10-30",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-30.zip",
+      "month": "2025-10",
+      "sha256": "d80f5c2b4c6ef5cc987ca936772f511e8ac1905b9a265fa55118aba7a0bf771a",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-30.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-10-06",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-06.zip",
+      "month": "2025-10",
+      "sha256": "884e54e3615d844fe6a89bf389fa346c6cca1ebdf7d95d5f6092b07461f25068",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-06.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 906,
+      "day": "2025-10-22",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-22.zip",
+      "month": "2025-10",
+      "sha256": "1be6a040495a6cf15ea9b60e707dbd76f1e16f606ab10b5fed2882f5543e9c87",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-22.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 900,
+      "day": "2025-10-16",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-16.zip",
+      "month": "2025-10",
+      "sha256": "492943ce02d3c623bb9ee7afad53a5f504ca1f0c4a517351451831b978e70099",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-16.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-10-19",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-19.zip",
+      "month": "2025-10",
+      "sha256": "87da4b4bc2aeec52db92ae132c251662c75acefac6db13d5810fa3edb2c1c256",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-19.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-10-26",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-26.zip",
+      "month": "2025-10",
+      "sha256": "7bb5738b9262dec1eb4f9ecd53a45579b087a9ad156aa744846b75b550f2286c",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-26.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-10-13",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-13.zip",
+      "month": "2025-10",
+      "sha256": "fd76344a3d4b991b9e2a20e46d71b68efdcb04cbdbdcd5a8f9d16527dd0f090a",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-13.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 918,
+      "day": "2025-10-07",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-07.zip",
+      "month": "2025-10",
+      "sha256": "ddba923ba02cbf4000503b9ad834172aa0910629afdb2cd4d4e02dd2ad1af07e",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-07.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 851,
+      "day": "2025-10-24",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-24.zip",
+      "month": "2025-10",
+      "sha256": "73c10969199ecb212f341f91c4f1ba3e42e7440d0d7b04aade6bc9a02ca87e32",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-24.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 911,
+      "day": "2025-10-27",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-27.zip",
+      "month": "2025-10",
+      "sha256": "0d87269e84f21a1edf262f342856a77e1203cb5993a2d860715e85bbad14100b",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-27.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-10-18",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-18.zip",
+      "month": "2025-10",
+      "sha256": "cfbaa53394577e2ce5ad7d0b062ea60e447df4f179f628469be37392bdbee345",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-18.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 946,
+      "day": "2025-10-17",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-17.zip",
+      "month": "2025-10",
+      "sha256": "ae207b600bff633469a7a7785ce4b0c47b6872faa98664bc60c6cf3ac93003ca",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-17.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 866,
+      "day": "2025-10-02",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-02.zip",
+      "month": "2025-10",
+      "sha256": "f203332e64e7dd5dda2c3925a315d6a3e35d18bfc49b69795da4759b4bdf7fee",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-02.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 937,
+      "day": "2025-10-10",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/SOLUSDT-1h-2025-10-10.zip",
+      "month": "2025-10",
+      "sha256": "363cdcf31485e053bf8479cbe238907268204576e789aaf0b9a923f6a113019d",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-10.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 831,
+      "day": "2025-08-27",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-27.zip",
+      "month": "2025-08",
+      "sha256": "f8212f4dd2f84ed1dcd15875d2c7afb66ae63c338141b3ec58fdbdd41c025b36",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-27.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 860,
+      "day": "2025-08-06",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-06.zip",
+      "month": "2025-08",
+      "sha256": "61974fc95047612c808f954d2dd2aa0da780b41a8592885b9f26e34bd38072ad",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-06.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 868,
+      "day": "2025-08-20",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-20.zip",
+      "month": "2025-08",
+      "sha256": "9a652e9428c62a98fd43663f73bb57d40f5a20411388c48bf1d26ce9f27cc047",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-20.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-29",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-29.zip",
+      "month": "2025-08",
+      "sha256": "88b61a5ddbb66c285c7f8874c36b0787af3224c5678bed77ffffc97866bda5da",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-29.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-08-18",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-18.zip",
+      "month": "2025-08",
+      "sha256": "2a1d67d4d92b32cade3de96ef30f7531579645a7b7aa19be6281f7af47bf9c83",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-18.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 862,
+      "day": "2025-08-14",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-14.zip",
+      "month": "2025-08",
+      "sha256": "1f6185a20e9c19bfceb38f59c30ca789f12473a1b2ab7fb4e97bc0205781fcae",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-14.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 846,
+      "day": "2025-08-16",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-16.zip",
+      "month": "2025-08",
+      "sha256": "427ffa547186a5242a0f74f0402d6431d1af167644a22088d4e1ed4472613942",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-16.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 857,
+      "day": "2025-08-25",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-25.zip",
+      "month": "2025-08",
+      "sha256": "495189aaf7c5d7cc0a7479e9231e951b9d5a92fc5c742679cab502dd64a95ee4",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-25.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 851,
+      "day": "2025-08-19",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-19.zip",
+      "month": "2025-08",
+      "sha256": "093ccd9031b95bc7d231062c57b18d6c195dd61ac1e01fc5d4760db5d4934639",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-19.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 887,
+      "day": "2025-08-04",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-04.zip",
+      "month": "2025-08",
+      "sha256": "5e8c76e5a6af80c8c0b633eeb83e12db26daa4ac904abc8fb8dcdb4e2d7eb272",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-04.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-08-22",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-22.zip",
+      "month": "2025-08",
+      "sha256": "578e8e20f2d21970d5714d10638ca15f1d0ac2e7c3129361fa07b23a6442ba99",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-22.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-08-17",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-17.zip",
+      "month": "2025-08",
+      "sha256": "1faa37d63d0417f6f99d8197ccd43296c57330165181631294d4b5e86a120618",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-17.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-08-26",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-26.zip",
+      "month": "2025-08",
+      "sha256": "041f6115bf091e6aa52d0ed2458cb996cbc1bf03deb6665fdfb21bd64c343591",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-26.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-08-02",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-02.zip",
+      "month": "2025-08",
+      "sha256": "8e64f9a046ff2b46e59ee25a4a0754206db44a10b7c7cad2c37a771f2cdeb41e",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-02.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-30",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-30.zip",
+      "month": "2025-08",
+      "sha256": "5c653828e856fd6632af1eebdfdf6ec13440381d8c8369586305940f82b6dddd",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-30.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-10",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-10.zip",
+      "month": "2025-08",
+      "sha256": "e12c4830a6726caa2e57de0a0b71851fa6e53688853261f47f3225d148b58bce",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-10.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-08-23",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-23.zip",
+      "month": "2025-08",
+      "sha256": "dc00a274d5c1b30e2696240407392deba4fb54e8d67158f1ba2b40b2a33e1b91",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-23.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-08-07",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-07.zip",
+      "month": "2025-08",
+      "sha256": "dc03657081f2c29231e4b0581c7cc5eaf094dab33996f85072dfe64f0fda36de",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-07.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-08-12",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-12.zip",
+      "month": "2025-08",
+      "sha256": "7a04a3a811a089faeed410463ff89a09c1461f53968c1d1d4398b7b103d91d2e",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-12.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-08-08",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-08.zip",
+      "month": "2025-08",
+      "sha256": "22323c5756880bb7dd43ca7c4a89ef5fecaa18cc4d6665f50109a4d62c22e5b7",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-08.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-08-13",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-13.zip",
+      "month": "2025-08",
+      "sha256": "79191ba2ed46c51a3fef623da29c464865327ff24cd993957f6506639147a783",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-13.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 847,
+      "day": "2025-08-05",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-05.zip",
+      "month": "2025-08",
+      "sha256": "8c01693aa54ac977069dd5d9154a2743be8b87e82439d4fad4d394769e9e9090",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-05.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 838,
+      "day": "2025-08-21",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-21.zip",
+      "month": "2025-08",
+      "sha256": "d5bfa45814cb01e88395d1038954f18865fa2a8bc2c9c18cb5d006bcdc024320",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-21.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 833,
+      "day": "2025-08-03",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-03.zip",
+      "month": "2025-08",
+      "sha256": "602e5c5b6058c78e1842925ca53906490e945b4a0ba316625d258151e33c8c5c",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-03.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 869,
+      "day": "2025-08-24",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-24.zip",
+      "month": "2025-08",
+      "sha256": "b015d2f50f2633dde3c235b90981641ee872756c922ebe2e188c52d77fafd996",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-24.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-09",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-09.zip",
+      "month": "2025-08",
+      "sha256": "1f451bded233c719303800f16a6e9f3a6169e28c2ca852524a0b4e405d845033",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-09.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-08-11",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-08-11.zip",
+      "month": "2025-08",
+      "sha256": "7677d9dac800b9c5cb2ee6e61234a156df9b92386aa3df9aa423682230f0eb4e",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-11.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 832,
+      "day": "2025-09-20",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-20.zip",
+      "month": "2025-09",
+      "sha256": "d993d1e7d1ceb7c8663698dfeb639dbb30f8b140e66e2e8cf4fdc9a31797ec6f",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-20.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 824,
+      "day": "2025-09-11",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-11.zip",
+      "month": "2025-09",
+      "sha256": "0d6be179a7616b0018fc3fe26f5c54f2e770ee9d97beb207c59d4579614dc62d",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-11.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 824,
+      "day": "2025-09-14",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-14.zip",
+      "month": "2025-09",
+      "sha256": "01c6fd34b479210da3cc1e4484d6d97dd62f8ea7f5432d9a0e6ee0446e9f4121",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-14.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 857,
+      "day": "2025-09-05",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-05.zip",
+      "month": "2025-09",
+      "sha256": "5442934096a41ec9caf2a82f7dad3e6b2fabd9ac35a9843acc7108fee1c00b4b",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-05.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 853,
+      "day": "2025-09-19",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-19.zip",
+      "month": "2025-09",
+      "sha256": "22d57929acdb95f30569051359123b461767ee02aaa8c021f5aea69e0e7bc52b",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-19.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-09-18",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-18.zip",
+      "month": "2025-09",
+      "sha256": "a85473dc63db4ac4f3ec2416078617c7443edf6892585896108797343693c0b4",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-18.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 867,
+      "day": "2025-09-25",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-25.zip",
+      "month": "2025-09",
+      "sha256": "a1e7d70835744e833a3ba174bf71727bc2faf91cf1d43ec5b1c466094549a594",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-25.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-09-22",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-22.zip",
+      "month": "2025-09",
+      "sha256": "198286c4919a6b52b4ff4b07d7c741d3d2496d02bd36c00843dcde29a2261ded",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-22.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-09-09",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-09.zip",
+      "month": "2025-09",
+      "sha256": "b3c972aa9769c9a4b0588d7bf8ee9cf06e725b66975a4b820c71449bc61bb7de",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-09.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 821,
+      "day": "2025-09-27",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-27.zip",
+      "month": "2025-09",
+      "sha256": "e319f8e997e40f400e32c1b02b1085fb8152e837403672f66841dbdc003cd887",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-27.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 847,
+      "day": "2025-09-17",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-17.zip",
+      "month": "2025-09",
+      "sha256": "c3720ab4ec5edbece1a9eee7c7a73e85083e8f3d0c320c287021bd9d5ab4ed21",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-17.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 832,
+      "day": "2025-09-29",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-29.zip",
+      "month": "2025-09",
+      "sha256": "df24108744b4e3ae895e05e4336642997a698a7e4f6cd63f4046209175dfe35a",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-29.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 872,
+      "day": "2025-09-02",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-02.zip",
+      "month": "2025-09",
+      "sha256": "033b375251353840ff408a0f198c0574f6e0099f0230fc4882292dd9f03086aa",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-02.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-09-13",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-13.zip",
+      "month": "2025-09",
+      "sha256": "94f7d0f686600af9a4fe88af350f16bc5beee4f02842ea704cb59a7aca1a2fb9",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-13.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 846,
+      "day": "2025-09-26",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-26.zip",
+      "month": "2025-09",
+      "sha256": "4961e536857148656cc9b0e2ea6062f65adca010ab4caf632beefc81a0ebd873",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-26.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 846,
+      "day": "2025-09-07",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-07.zip",
+      "month": "2025-09",
+      "sha256": "b9840ee11bd8407d1726abb4612d913c230c41560842774b9a2c790fe60156bb",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-07.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 835,
+      "day": "2025-09-10",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-10.zip",
+      "month": "2025-09",
+      "sha256": "b4bb95b77764d3694d030c138981ff80d70ea7290252d13c47f5ccb853d21554",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-10.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 827,
+      "day": "2025-09-06",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-06.zip",
+      "month": "2025-09",
+      "sha256": "407d9083be19b4fe3824b2b29a5fb4af13b115f5d4a79b4b4a869af78b85d447",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-06.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 857,
+      "day": "2025-09-04",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-04.zip",
+      "month": "2025-09",
+      "sha256": "df0dd807b9256b7feecd33d03d3c3fe5927a1fe5d0ee1b512b4fb01908300a5b",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-04.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-09-16",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-16.zip",
+      "month": "2025-09",
+      "sha256": "0102667accdf41c4d6281b52a727606e96b87091f6cf84208e57fb3226f2f46e",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-16.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 828,
+      "day": "2025-09-24",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-24.zip",
+      "month": "2025-09",
+      "sha256": "92955f86464233cc34f10c01a5e45b011dd973a9e692c7b6448f539604e90302",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-24.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-09-12",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-12.zip",
+      "month": "2025-09",
+      "sha256": "32eafb0a789ae872d65c85282fc7aa7bbb85c5b1fdd4cb5b9a913a5f0f899819",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-12.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 862,
+      "day": "2025-09-23",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-23.zip",
+      "month": "2025-09",
+      "sha256": "6ed8f22c08dfb3300810f41cb1d57799e311559f77cca54a916b072e0f3cdaac",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-23.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 867,
+      "day": "2025-09-08",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-08.zip",
+      "month": "2025-09",
+      "sha256": "c056ca274cbd5527f47da844af94a6ce410ae523a7e8ae3049593b71061bddfe",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-08.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 860,
+      "day": "2025-09-21",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-21.zip",
+      "month": "2025-09",
+      "sha256": "9f9fcebf285c7dfbb858a30da2136b246518a89f8afe8583301847c04b92c478",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-21.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-09-03",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-09-03.zip",
+      "month": "2025-09",
+      "sha256": "05716e2a2b58686059ea8c54c5e32c7e5f415ac71a61969e9dc8aed08892174b",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-03.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-10-22",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-22.zip",
+      "month": "2025-10",
+      "sha256": "e65102b1ce14dac15e4705ebff360f889c57d70538e3c20673986682c806896e",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-22.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 870,
+      "day": "2025-10-11",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-11.zip",
+      "month": "2025-10",
+      "sha256": "e156f6f80cee2b358f4ba19845af0f250b3663cd84bd2aa4a56a398b6e210a9a",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-11.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 890,
+      "day": "2025-10-16",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-16.zip",
+      "month": "2025-10",
+      "sha256": "6f0a9cb01ffeb77398c642cb86edd2243cf866616715b7c10b805bd3bfb340d2",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-16.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 847,
+      "day": "2025-10-04",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-04.zip",
+      "month": "2025-10",
+      "sha256": "2f6f2f217d6d4cdd4917be262d7a69da069ef24cd954ab1703ab2faf9655fe91",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-04.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 854,
+      "day": "2025-10-14",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-14.zip",
+      "month": "2025-10",
+      "sha256": "72e3d45d2db42e05c335c5356641ed26be650904a65237b7ecf746bef4c0fc3a",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-14.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 835,
+      "day": "2025-10-19",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-19.zip",
+      "month": "2025-10",
+      "sha256": "6c09a69dd93acc8755250eede6b6ce8fba8dc7e904d6cec0fcf2ff95397816d0",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-19.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-10-05",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-05.zip",
+      "month": "2025-10",
+      "sha256": "2f10aaa983627d2a454512765ae86d1a7edb0b7ac3a682de3988e5fbb000f710",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-05.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 862,
+      "day": "2025-10-30",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-30.zip",
+      "month": "2025-10",
+      "sha256": "416cc738f9da32b3995e5146f30aab0eaadffbc62b074be8e9c9c8fd4ad22a68",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-30.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 819,
+      "day": "2025-10-08",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-08.zip",
+      "month": "2025-10",
+      "sha256": "02b6e9576ae62ab26edd2fec66079009eaab2db2a81d465593572c26967774b3",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-08.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 893,
+      "day": "2025-10-12",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-12.zip",
+      "month": "2025-10",
+      "sha256": "7bb2e2544f0b09ef6c7955f504afa4425910aa840b931671d6493486e17d3b51",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-12.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 824,
+      "day": "2025-10-26",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-26.zip",
+      "month": "2025-10",
+      "sha256": "b24d21f070188760edd836fd3dbb55ba51fb448c33d294f4fed465a4185b83bc",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-26.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 870,
+      "day": "2025-10-10",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-10.zip",
+      "month": "2025-10",
+      "sha256": "ff1f9f4b60ce77db1a0a7b389259f79998f6c32131733301f1ca02262b3d7ab8",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-10.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-10-25",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-25.zip",
+      "month": "2025-10",
+      "sha256": "a274c63a44a049db60f0564e6b861f37cd32646eee6ed42c74c4f1eccb8e3536",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-25.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-10-09",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-09.zip",
+      "month": "2025-10",
+      "sha256": "625814a25e6237e2ce5002850f5766978ac4d97c73585cc9838c096693dd551f",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-09.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 893,
+      "day": "2025-10-17",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-17.zip",
+      "month": "2025-10",
+      "sha256": "6aa97affe704f051427c062dcdeaca3a7db0ee087d3b7e8aba905b70f8d52c9d",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-17.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 854,
+      "day": "2025-10-13",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-13.zip",
+      "month": "2025-10",
+      "sha256": "162662a3494caeb8d36024a108b6d088715839472c520e8fb6fdd284716c19ec",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-13.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 869,
+      "day": "2025-10-03",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-03.zip",
+      "month": "2025-10",
+      "sha256": "cc413a73223125f33f2ca4238a88c53bd1fc855979b0ea317f6a3f44baedb581",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-03.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 846,
+      "day": "2025-10-27",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-27.zip",
+      "month": "2025-10",
+      "sha256": "e3debb4c15f3a3c026a91fe3a9d778d94d24e3b41f4a13dc13397879bf4bca52",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-27.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 869,
+      "day": "2025-10-29",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-29.zip",
+      "month": "2025-10",
+      "sha256": "ab0c99c2d2808f77d535fd1aacdab00497780f4850af47fc67aa7fd3bb6f165a",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-29.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 835,
+      "day": "2025-10-06",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-06.zip",
+      "month": "2025-10",
+      "sha256": "ba6da3a0451afb67742dd507a1eeeed1ae670c733ee68ae54afcbe655663bdfc",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-06.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 857,
+      "day": "2025-10-24",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-24.zip",
+      "month": "2025-10",
+      "sha256": "e38cbcb742dd70fcd7f39b20eb88fc76e2da234c47234cb69d3b323317a57662",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-24.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-10-02",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-02.zip",
+      "month": "2025-10",
+      "sha256": "2fc4c4d3e9996ce89a8ab552eaacb85365c757e76dd087987e6646d8c9bc5a41",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-02.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-10-20",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-20.zip",
+      "month": "2025-10",
+      "sha256": "b452008fbc596fce9e1cc4f99aeba51f1bba1b60d38b8b20d755dcfb1566ae8b",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-20.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 833,
+      "day": "2025-10-18",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-18.zip",
+      "month": "2025-10",
+      "sha256": "ac0de15a407ba71b05b44f609d6c14c0b316a9f67fb69ee9cf1501f9c50cc3eb",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-18.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 857,
+      "day": "2025-10-07",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-07.zip",
+      "month": "2025-10",
+      "sha256": "a87e4d4cd22310ff5ed39995df663e5b40a29dd1a9a32a91bf7f6518ec70ca72",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-07.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-10-23",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-23.zip",
+      "month": "2025-10",
+      "sha256": "46f678af251b14d3dbb53748f3e4284319f03bb1c630e31ccefe1be5e9e04f12",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-23.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-10-21",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T235600Z/XRPUSDT-1h-2025-10-21.zip",
+      "month": "2025-10",
+      "sha256": "5f50cc6d067b1ecd0135d69001afd11ee296fba200cddda48512363d72703495",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-21.zip",
+      "symbol": "XRPUSDT"
+    }
+  ],
+  "reversible": true,
+  "scope": {
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "symbols": [
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "timestamp_utc": "20261107T235600Z"
+}

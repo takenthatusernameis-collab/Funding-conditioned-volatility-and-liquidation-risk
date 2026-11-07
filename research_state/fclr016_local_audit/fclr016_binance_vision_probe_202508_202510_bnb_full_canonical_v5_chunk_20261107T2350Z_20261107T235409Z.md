@@ -1,0 +1,1 @@
+- BNBUSDT 2025-10 2025-10-30: top-level placeholder sha256=7787b4159171126b (canonical kind subdir missing/unmatched)

@@ -1,0 +1,1 @@
+- SOLUSDT 2025-08 2025-08-30: top-level placeholder sha256=49b92e66113dfe62 (canonical kind subdir missing/unmatched)
