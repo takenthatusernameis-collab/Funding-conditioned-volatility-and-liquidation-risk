@@ -27,7 +27,7 @@
 - Funding ablations remain blocked until Gate 3 satisfied.
 
 ## Funding Ablations (Gate 4)
-**Updated:** 2026-11-07T02:22:15Z (pilot, 1 split, log-target ridge HAR; not a sealed claim)
+**Updated:** 2026-11-07T02:24:57Z (pilot, 1 split, direct-variance OLS HAR; not a sealed claim)
 
 | Ablation | QLIKE | ΔQLIKE vs A | MAE | neg_pred |
 |---|---|---|---|---|

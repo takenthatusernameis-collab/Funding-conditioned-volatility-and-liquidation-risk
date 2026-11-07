@@ -293,7 +293,7 @@ def main() -> int:
         txt = txt.split(marker)[0].rstrip()
     addition = [
         "", "", marker,
-        f"**Updated:** {summary['generated_at']} (pilot, 1 split, log-target ridge HAR; not a sealed claim)",
+        f"**Updated:** {summary['generated_at']} (pilot, 1 split, direct-variance OLS HAR; not a sealed claim)",
         "", "| Ablation | QLIKE | ΔQLIKE vs A | MAE | neg_pred |", "|---|---|---|---|---|",
     ]
     for k in ablations.keys():

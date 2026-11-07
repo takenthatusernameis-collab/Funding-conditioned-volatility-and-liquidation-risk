@@ -17,7 +17,14 @@
 - [x] Train-only normalization.
 - [x] Direct-variance OLS fit on train only; predictions floored at zero; no log/exp transform; no test leakage.
 
-## Funding ablations (Gate 4, pilot log-ridge) - 2026-11-07T02:22:15Z
+## Funding ablations (Gate 4, pilot direct-variance OLS) - 2026-11-07T02:23:49Z
+- [x] Funding ffill last-known at/before hour (no future).
+- [x] Trailing funding stats past-only on aligned series.
+- [x] Chronological splits, purge/embargo=7d.
+- [x] Train-only normalization.
+- [x] Direct-variance OLS fit on train only; predictions floored at zero; no log/exp transform; no test leakage.
+
+## Funding ablations (Gate 4, pilot log-ridge) - 2026-11-07T02:24:57Z
 - [x] Funding ffill last-known at/before hour (no future).
 - [x] Trailing funding stats past-only on aligned series.
 - [x] Chronological splits, purge/embargo=7d.
