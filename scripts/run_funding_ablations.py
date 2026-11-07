@@ -13,6 +13,7 @@ Leakage-resistant, pre-registered (research_state/pre_registration_gate4_funding
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
@@ -38,6 +39,80 @@ ZIPS_DIR = REPO
 EPS = 1e-12
 
 CACHE = RES / "data_cache"
+
+
+# --- Confirmatory provenance guard (FCLR-014/FCLR-016) ---
+# 2025+ cache windows lack admissible confirmatory provenance (FCLR-014 NO-GO).
+# Fail-closed: confirmatory-labeled runs touching unprovenanced 2025+ data must refuse.
+PROVENANCED_CONFIRMATORY_RANGES = [
+    # (start_inclusive, end_inclusive) — 2024-04..09 identity-verified vs Binance Vision (FCLR-015)
+    ("2024-04-01", "2024-09-30"),
+]
+UNPROVENANCED_CONFIRMATORY_PREFIXES = ("2025", "2026")  # 2025+ cache; 2026-01..06/10 candidates NO-GO per FCLR-014
+
+def _range_overlaps_unprovenanced(start: str, end: str) -> bool:
+    try:
+        s = str(start)[:10]; e = str(end)[:10]
+    except Exception:
+        return True  # fail closed
+    # any 2025+ year in range
+    for pref in UNPROVENANCED_CONFIRMATORY_PREFIXES:
+        if s[:4] <= pref <= e[:4] or s.startswith(pref) or e.startswith(pref):
+            # 2024 is partially provenanced; 2025+ is not
+            if pref >= "2025":
+                return True
+    return False
+
+def _is_confirmatory_intent(experiment_id: str, pre_registration: str, out_suffix: str, confirmatory_flag: bool) -> bool:
+    if confirmatory_flag:
+        return True
+    blob = f"{experiment_id} {pre_registration} {out_suffix}".lower()
+    if "exploratory" in blob or "pilot" in blob:
+        return False
+    # v5+ confirmatory preregs / explicit confirmatory naming
+    if "confirmatory" in blob or re.search(r"\bv[5-9]\b", blob):
+        return True
+    return False
+
+def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_registration: str,
+                                  out_suffix: str, confirmatory_flag: bool = False,
+                                  provenance_manifest: Optional[str] = None) -> Optional[str]:
+    """Return error message if confirmatory run is inadmissible; else None."""
+    if not _is_confirmatory_intent(experiment_id, pre_registration, out_suffix, confirmatory_flag):
+        return None
+    if provenance_manifest:
+        mp = Path(provenance_manifest)
+        if not mp.exists():
+            return f"CONFIRMATORY PROVENANCE GUARD: --provenance-manifest not found: {mp}"
+        try:
+            m = json.loads(mp.read_text())
+        except Exception as e:
+            return f"CONFIRMATORY PROVENANCE GUARD: cannot read provenance manifest: {e}"
+        if not m.get("cache_identity_vs_binance_vision", "").startswith("GO") and not m.get("confirmatory_provenance_go"):
+            return f"CONFIRMATORY PROVENANCE GUARD: manifest not GO: {mp}"
+        # manifest accepted - caller responsible for scope match; record in run
+        return None
+    if _range_overlaps_unprovenanced(start, end):
+        return (
+            "CONFIRMATORY PROVENANCE GUARD (FCLR-014 NO-GO): Refusing confirmatory-labeled run on "
+            f"unprovenanced 2025+ cache window {start}..{end} (experiment={experiment_id}). "
+            "2025-01..2025-12,2026-01..06,2026-10 cache months lack admissible confirmatory provenance/license evidence "
+            "(research_state/fclr014_local_audit/fclr014_provenance_decision_20261107T133102Z.md). "
+            "Provide --provenance-manifest with verified Binance Vision identity+licensing evidence, or run as exploratory/pilot. "
+            "Do NOT run claim outcomes on unprovenanced data."
+        )
+    # 2024 ranges outside FCLR-015 verified slice: fail closed for confirmatory
+    s, e = str(start)[:10], str(end)[:10]
+    in_proven = any(s >= a and e <= b for a, b in PROVENANCED_CONFIRMATORY_RANGES)
+    if not in_proven and not (s < "2025" and e < "2025"):
+        pass
+    elif not in_proven and s.startswith("2024"):
+        # 2024 but outside verified 04-09: advisory but allow only if not overlapping consumed? fail closed
+        return (
+            f"CONFIRMATORY PROVENANCE GUARD: 2024 range {start}..{end} outside FCLR-015 identity-verified slice "
+            f"{PROVENANCED_CONFIRMATORY_RANGES} and may overlap consumed/confounded windows; provide --provenance-manifest or use exploratory."
+        )
+    return None
 
 PRE_REG_SPLITS_V1 = [
     {"id": 0, "train": ("2024-01-01T00:00:00+00:00", "2024-01-28T23:59:59+00:00"), "test": ("2024-02-05T00:00:00+00:00", "2024-02-18T23:59:59+00:00")},
@@ -511,7 +586,18 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--experiment-id", default="GATE4-FUND-VOL-ABLATIONS-MSPLIT")
     ap.add_argument("--skip-main-summary", action="store_true")
     ap.add_argument("--include-cache", action="store_true", help="Search research_state/data_cache for local admissible files (v3/extended runs).")
+    ap.add_argument("--confirmatory", action="store_true", help="Assert confirmatory intent; triggers provenance guard (fail-closed on unprovenanced 2025+).")
+    ap.add_argument("--provenance-manifest", default=None, help="Path to verified provenance manifest for confirmatory runs.")
     args = ap.parse_args(argv)
+
+    prov_err = check_confirmatory_provenance(
+        args.start, args.end, args.experiment_id, args.pre_registration, args.out_suffix,
+        confirmatory_flag=bool(getattr(args, "confirmatory", False)),
+        provenance_manifest=getattr(args, "provenance_manifest", None),
+    )
+    if prov_err:
+        print(json.dumps({"status": "REFUSED", "guard": "confirmatory_provenance_fclr014", "error": prov_err, "start": args.start, "end": args.end}, indent=2), file=sys.stderr)
+        return 2
 
     symbols = [x.strip() for x in args.symbols.split(",") if x.strip()]
     start, end, horizon = args.start, args.end, args.horizon

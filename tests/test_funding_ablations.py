@@ -141,3 +141,23 @@ class TestFundingAblations(unittest.TestCase):
         assert pct.iloc[2] == 1.0
         assert pct.iloc[3] == 1.0
         assert pd.isna(pct.iloc[0]) and pd.isna(pct.iloc[1])
+
+
+    def test_confirmatory_provenance_guard_refuses_unprovenanced_2025(self):
+        """Confirmatory-labeled runs on unprovenanced 2025+ cache must fail closed (FCLR-014 NO-GO)."""
+        from scripts.run_funding_ablations import check_confirmatory_provenance
+        err = check_confirmatory_provenance(
+            "2025-01-01", "2025-06-30", "GATE4-V5-CONFIRMATORY",
+            "research_state/pre_registration_gate4_funding_multisplit_v5.md", "_v5_confirmatory",
+            confirmatory_flag=True,
+        )
+        self.assertIsNotNone(err)
+        self.assertIn("CONFIRMATORY PROVENANCE GUARD", err)
+        self.assertIn("unprovenanced", err.lower())
+        # exploratory on same window is allowed by guard
+        ok = check_confirmatory_provenance(
+            "2025-01-01", "2025-06-30", "GATE4-V5-EXPLORATORY",
+            "research_state/pre_registration_gate4_funding_multisplit_v5_exploratory.md", "_v5_exploratory",
+            confirmatory_flag=False,
+        )
+        self.assertIsNone(ok)
