@@ -409,7 +409,7 @@ class Test125G3RunLiqmicroV1FrontierWriteParity(unittest.TestCase):
 
 
 class Test125G4CanonicalAltOutputsRootBoundRegression(unittest.TestCase):
-    """G4: deterministic read-only regression: research_state root md+json <=163,
+    """G4: deterministic read-only regression: research_state root md+json <=165,
     ironflow_probe* == 2 (1 live + 1 digest), no new recurring timestamped
     campaign_sweep_tracka_*/liquidation_forward_validate_* families beyond archived
     20261105 policy, canonical alt outputs (latest pointers) present. No writes."""
@@ -417,7 +417,9 @@ class Test125G4CanonicalAltOutputsRootBoundRegression(unittest.TestCase):
     def test_root_md_json_bounded(self):
         md_json = [p for p in RS.glob("*.md")] + [p for p in RS.glob("*.json")]
         count = len(md_json)
-        self.assertLessEqual(count, 163, f"root md+json count {count} exceeds bound 163")
+        # 2026-11-07T18:55Z: bound 163->165 to admit the durable Gate 4 v4 preregistration
+        # freeze pair (pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.md|json).
+        self.assertLessEqual(count, 165, f"root md+json count {count} exceeds bound 165")
 
     def test_probe_count_exactly_two(self):
         live = [p for p in RS.glob("ironflow_probe_*.json")
