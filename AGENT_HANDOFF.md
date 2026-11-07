@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — SINGLE DURABLE HANDOFF (NEXT SESSION)
 
-**INITIAL TASK MESSAGE (UTC 2026-11-07T11:25:54Z, git `22747332`, working tree clean):** Repo **Funding-conditioned-volatility-and-liquidation-risk** — confirmatory program **CLOSED NEGATIVE** on all executed claim-worthy panels (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track B closed/inconclusive; Track A BLOCKED/NO TRIGGER). **FCLR-013 (2026 Q3 5-symbol panel, prereg frozen git `08193dd3`) EXECUTED/COMMITTED: gate NOT_MET; Track C funding-conditioned volatility stays closed negative on current admissible data.**
+**INITIAL TASK MESSAGE (UTC 2026-11-07T11:30:28Z, git `22747332`, working tree clean):** Repo **Funding-conditioned-volatility-and-liquidation-risk** — confirmatory program **CLOSED NEGATIVE** on all executed claim-worthy panels (H001 NOT_SUPPORTED; overlay INELIGIBLE; Track B closed/inconclusive; Track A BLOCKED/NO TRIGGER). **FCLR-013 (2026 Q3 5-symbol panel, prereg frozen git `08193dd3`) EXECUTED/COMMITTED: gate NOT_MET; Track C funding-conditioned volatility stays closed negative on current admissible data.**
 
 **Repo-name priority (P0 → P2):** **Track C funding-conditioned volatility = P0** (Phase 3 / Gate 4 ablations using LOCAL data — measurable, unblocked, per `research_state/FCLR_CAMPAIGN_NEXT.md`) **> Track B (closed/inconclusive) > Track A (BLOCKED/NO TRIGGER — ironflow `data_through=2026-10`; 2026-11/12/2027-01 confirmed absent 404; do NOT re-probe).**
 
@@ -35,7 +35,7 @@ Revert any timestamp-only regen (incl. `research_state/ironflow_fastpath_cache.j
 
 **EXPECTED END STATE:** Dated `## SESSION VERIFICATION` in `AGENT_HANDOFF.md` with (a) FCLR-013 negative preserved (hash+metrics), (b) canonical anchors unchanged, (c) tests + tracka pass, (d) hardening-gate 3/3 OK, (e) reopen-watch result (GO → preregged confirmatory run; NO-GO → one substantive hardening committed + evidence). If NO-GO: *"no new admissible unauthenticated data; confirmatory program remains closed negative; no overlay eligible; awaiting NEW admissible unauthenticated data per RESEARCH_PROMPT.md §16."* Record exact command outputs, hashes, acceptance outcomes — prose alone is not evidence.
 
-**TIMESTAMP (UTC):** 2026-11-07T11:25:54Z
+**TIMESTAMP (UTC):** 2026-11-07T11:30:28Z
 **REPO (priority):** `Funding-conditioned-volatility-and-liquidation-risk` — Track C funding-conditioned volatility (P0) > Track B (closed) > Track A (BLOCKED/NO TRIGGER).
 **AUTHORITY:** This file is the **only** root durable handoff. If `research_state/FCLR_CAMPAIGN_NEXT.md` or stale notes conflict, follow this file and record reconciliation in durable artifacts (not status-only files).
 
