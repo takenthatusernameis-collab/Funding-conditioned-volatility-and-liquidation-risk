@@ -1,6 +1,6 @@
 {
-  "probe_id": "ironflow_probe_20261105T200406Z",
-  "timestamp_utc": "2026-11-05T20:04:06.684524+00:00",
+  "probe_id": "ironflow_probe_20261107T080839Z",
+  "timestamp_utc": "2026-11-07T08:08:39.654836+00:00",
   "dataset": "ironflow/hyperliquid-liquidations",
   "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
   "tree": {
@@ -11,11 +11,11 @@
       "Content-Type": "application/json; charset=utf-8",
       "Content-Length": "11576",
       "Connection": "close",
-      "Date": "Thu, 05 Nov 2026 20:04:06 GMT",
+      "Date": "Sat, 07 Nov 2026 08:08:39 GMT",
       "ETag": "W/\"2d38-AqkYNsWwxCKiOUmPgektdcJePJk\"",
       "X-Powered-By": "huggingface-moon",
-      "X-Request-Id": "Root=1-6aece136-68f57d15676cac0d27f7a13b",
-      "RateLimit": "\"api\";r=499;t=134",
+      "X-Request-Id": "Root=1-6aeedc87-6df2ebd0103c610c388434a5",
+      "RateLimit": "\"api\";r=498;t=105",
       "RateLimit-Policy": "\"fixed window\";\"api\";q=500;w=300",
       "cross-origin-opener-policy": "same-origin",
       "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -24,10 +24,10 @@
       "Vary": "Origin",
       "Access-Control-Expose-Headers": "X-Repo-Commit,X-HF-Warning,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash,RateLimit,RateLimit-Policy",
       "X-Cache": "Miss from cloudfront",
-      "Via": "1.1 232d9e401eb3600ef80d948c2dc546b8.cloudfront.net (CloudFront)",
-      "X-Amz-Cf-Pop": "IAD55-P8",
+      "Via": "1.1 0f70e5eaca4dd7c42bcbb3d7bfe22c0e.cloudfront.net (CloudFront)",
+      "X-Amz-Cf-Pop": "PHX52-P3",
       "Alt-Svc": "h3=\":443\"; ma=86400",
-      "X-Amz-Cf-Id": "nwOgCUU58g22n8ZQVRELdp0bVBstzv_EA_drGHoQC071h5KHD8w6QQ==",
+      "X-Amz-Cf-Id": "v457KYrfTxfniYWLmM529igDquqaPSh2VRqKE7HOzCTzTDd-bPx1RA==",
       "Strict-Transport-Security": "max-age=31536000"
     },
     "parsed": true,
@@ -798,7 +798,7 @@
   "probe_invariant_runtime": {
     "pass": true,
     "live_probes": [
-      "ironflow_probe_20261105T200406Z.json"
+      "ironflow_probe_20261107T080839Z.json"
     ],
     "digests": [
       "ironflow_probe_digest_latest.json"

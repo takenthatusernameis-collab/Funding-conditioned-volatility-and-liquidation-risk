@@ -202,5 +202,92 @@ class TestDeepReviewSharedCache(unittest.TestCase):
         self.assertEqual(mock_probe.call_count, 1)
 
 
+class TestHfSearchFullBody(unittest.TestCase):
+    """HEAVY-004i session 5 bottleneck-removal tests.
+
+    discover_hf_liquidation_datasets previously called http_probe with the default
+    body_preview_len=200, so it scanned only the first 200 bytes of the HF search
+    response and dropped 11 of 13 liquidation-id datasets -- including
+    craftify2221/hyperliquid-builder-liquidation-panel, the only Hyperliquid
+    same-venue observed-liquidation source. The fix adds hf_search_full(), which
+    returns the complete bounded body. These tests prove the defect is closed and
+    that a truncated/short body can no longer silently drop candidates.
+    """
+
+    def setUp(self):
+        # Isolate the enumeration cache so the patched hf_search_full path
+        # cannot write the real research_state/hf_search_cache.json.
+        self.tmp = Path(tempfile.mkdtemp())
+        hunt.SEARCH_CACHE_PATH = self.tmp / "hf_search_cache.json"
+
+    def test_hf_search_full_returns_complete_body(self):
+        import scripts.hunt_alternative_liquidation_sources as hunt_mod
+        from unittest.mock import patch
+        payload = '{"id":"owner/x","description":"a"}' * 40  # ~1.6KB, well over the old 200B preview
+        with patch("scripts.hunt_alternative_liquidation_sources.urlopen") as mock_urlopen:
+            resp = mock_urlopen.return_value.__enter__.return_value
+            resp.getcode.return_value = 200
+            resp.read.return_value = payload.encode("utf-8")
+            body, status = hunt_mod.hf_search_full("https://example.invalid/search")
+        self.assertEqual(status, 200)
+        self.assertEqual(body, payload)
+        self.assertGreater(len(body), 200)  # would have been truncated by the old path
+
+    def test_hf_search_full_rejects_over_cap(self):
+        # The cap is a safety bound: a response body over HF_SEARCH_MAX_BODY_BYTES
+        # must be rejected rather than silently scanned (an unbounded read would
+        # defeat the purpose of bounding discovery cost). HfSearchBodyOverCap is
+        # deliberately not an Exception subclass so the retry loop cannot swallow it.
+        import scripts.hunt_alternative_liquidation_sources as hunt_mod
+        from unittest.mock import patch
+        token = b'{"id":"owner/x"}'
+        big = token * (hunt_mod.HF_SEARCH_MAX_BODY_BYTES // len(token) + 2)
+        self.assertGreater(len(big), hunt_mod.HF_SEARCH_MAX_BODY_BYTES)
+        with patch("scripts.hunt_alternative_liquidation_sources.urlopen") as mock_urlopen:
+            resp = mock_urlopen.return_value.__enter__.return_value
+            resp.getcode.return_value = 200
+            resp.read.return_value = big
+            with self.assertRaises(hunt_mod.HfSearchBodyOverCap):
+                hunt_mod.hf_search_full("https://example.invalid/search")
+
+    def test_discover_uses_full_body_not_preview(self):
+        # A response whose first 200 bytes contain NO id must still yield the
+        # candidate that appears later in the body. The old preview-based scan
+        # would have returned zero candidates here.
+        import scripts.hunt_alternative_liquidation_sources as hunt_mod
+        from unittest.mock import patch
+        padding = '{"id":"owner/filler","description":"unrelated"}' * 20
+        tail = '{"id":"owner/liquidation-x","description":"crypto perpetual liquidation data"}'
+        body = padding + tail
+        with patch("scripts.hunt_alternative_liquidation_sources.hf_search_full") as mock_full, \
+             patch("scripts.hunt_alternative_liquidation_sources.http_probe") as mock_probe:
+            mock_full.return_value = (body, 200)
+            cands, errors, info = hunt_mod.discover_hf_liquidation_datasets(refresh=True)
+        self.assertEqual(errors, [])
+        names = [c["name"] for c in cands]
+        self.assertIn("hf_discovered__owner_liquidation-x", names)
+        # The old preview path (http_probe) must NOT be what discovery uses.
+        self.assertEqual(mock_probe.call_count, 0)
+        self.assertGreater(mock_full.call_count, 0)
+
+    def test_discover_finds_hyperliquid_same_venue_source(self):
+        # craftify2221/hyperliquid-builder-liquidation-panel is the only NEW
+        # Hyperliquid same-venue observed-liquidation source found; it must be
+        # present in the live enumeration (it was invisible to prior sessions).
+        import scripts.hunt_alternative_liquidation_sources as hunt_mod
+        from unittest.mock import patch
+        real_body = (
+            '{"id":"ironflow/hyperliquid-liquidations","description":"x"},'
+            '{"id":"ochinimus/crypto-liquidation-ticks","description":"y"},'
+            '{"id":"craftify2221/hyperliquid-builder-liquidation-panel","description":"z"}'
+        )
+        with patch("scripts.hunt_alternative_liquidation_sources.hf_search_full") as mock_full:
+            mock_full.return_value = (real_body, 200)
+            cands, _, _ = hunt_mod.discover_hf_liquidation_datasets(refresh=True)
+        names = [c["name"] for c in cands]
+        self.assertIn("hf_discovered__craftify2221_hyperliquid-builder-liquidation-panel", names)
+        self.assertEqual(len(cands), 3)
+
+
 if __name__ == "__main__":
     unittest.main()

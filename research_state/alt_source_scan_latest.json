@@ -1,8 +1,8 @@
 {
-  "generated_utc": "20261105T200436Z",
+  "generated_utc": "20261107T081847Z",
   "cache_info": {
     "source": "cache",
-    "generated_utc": "2026-11-04T20:47:35.774882+00:00",
+    "generated_utc": "2026-11-07T08:14:52.638493+00:00",
     "queries": [
       "liquidation",
       "liquidations",
@@ -85,10 +85,74 @@
       ]
     },
     {
+      "name": "hf_discovered__ironflow_hyperliquid-liquidations",
+      "urls": [
+        "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations",
+        "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
       "name": "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
       "urls": [
         "https://huggingface.co/api/datasets/Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
         "https://huggingface.co/datasets/Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__french-open-data_caracteristiques-des-retraites-age-de-liquidation",
+      "urls": [
+        "https://huggingface.co/api/datasets/french-open-data/caracteristiques-des-retraites-age-de-liquidation",
+        "https://huggingface.co/datasets/french-open-data/caracteristiques-des-retraites-age-de-liquidation/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__french-open-data_caracteristiques-des-retraites-conditions-de-liquidation",
+      "urls": [
+        "https://huggingface.co/api/datasets/french-open-data/caracteristiques-des-retraites-conditions-de-liquidation",
+        "https://huggingface.co/datasets/french-open-data/caracteristiques-des-retraites-conditions-de-liquidation/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__PhysiAI_Bitcoin-Liquidation-Heatmapping",
+      "urls": [
+        "https://huggingface.co/api/datasets/PhysiAI/Bitcoin-Liquidation-Heatmapping",
+        "https://huggingface.co/datasets/PhysiAI/Bitcoin-Liquidation-Heatmapping/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__carrierone_verilex-defi-liquidations",
+      "urls": [
+        "https://huggingface.co/api/datasets/carrierone/verilex-defi-liquidations",
+        "https://huggingface.co/datasets/carrierone/verilex-defi-liquidations/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__Chainticks_defi-liquidations",
+      "urls": [
+        "https://huggingface.co/api/datasets/Chainticks/defi-liquidations",
+        "https://huggingface.co/datasets/Chainticks/defi-liquidations/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__PhysiAI_Bitcoin-Liquidation-Heatmapping-5m",
+      "urls": [
+        "https://huggingface.co/api/datasets/PhysiAI/Bitcoin-Liquidation-Heatmapping-5m",
+        "https://huggingface.co/datasets/PhysiAI/Bitcoin-Liquidation-Heatmapping-5m/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__PhysiAI_Bitcoin-Liquidation-Heatmapping-1h",
+      "urls": [
+        "https://huggingface.co/api/datasets/PhysiAI/Bitcoin-Liquidation-Heatmapping-1h",
+        "https://huggingface.co/datasets/PhysiAI/Bitcoin-Liquidation-Heatmapping-1h/resolve/main/README.md"
       ],
       "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
     },
@@ -98,7 +162,7 @@
         "https://huggingface.co/api/datasets/ochinimus/crypto-liquidation-ticks",
         "https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks/resolve/main/README.md"
       ],
-      "notes": "Discovered via live HF /api/datasets?search=crypto liquidation enumeration (query='crypto liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
     },
     {
       "name": "hf_discovered__craftify2221_hyperliquid-builder-liquidation-panel",
@@ -106,7 +170,23 @@
         "https://huggingface.co/api/datasets/craftify2221/hyperliquid-builder-liquidation-panel",
         "https://huggingface.co/datasets/craftify2221/hyperliquid-builder-liquidation-panel/resolve/main/README.md"
       ],
-      "notes": "Discovered via live HF /api/datasets?search=hyperliquid liquidation enumeration (query='hyperliquid liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__nick128373_crypto-liquidation-ticks",
+      "urls": [
+        "https://huggingface.co/api/datasets/nick128373/crypto-liquidation-ticks",
+        "https://huggingface.co/datasets/nick128373/crypto-liquidation-ticks/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__pCwOrM_werracle-oev-liquidation-dataset-2026",
+      "urls": [
+        "https://huggingface.co/api/datasets/pCwOrM/werracle-oev-liquidation-dataset-2026",
+        "https://huggingface.co/datasets/pCwOrM/werracle-oev-liquidation-dataset-2026/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
     }
   ],
   "deep_review_urls": [

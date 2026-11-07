@@ -331,6 +331,81 @@ DEEP_REVIEW_URLS = [
 ]
 
 
+# Bounded full-body cap for HF dataset-search enumeration. The search endpoint
+# returns ~11KB per query; this cap is a safety bound, not a truncation point,
+# and is deliberately far above observed payloads so the parser sees the whole
+# array (the previous 200-byte http_probe preview silently dropped 11 of 13
+# liquidation datasets, including the only Hyperliquid same-venue source).
+HF_SEARCH_MAX_BODY_BYTES = 2_000_000
+
+
+# Bounded full-body cap for HF dataset-search enumeration. The search endpoint
+# returns ~11KB per query; this cap is a safety bound, not a truncation point,
+# and is deliberately far above observed payloads so the parser sees the whole
+# array (the previous 200-byte http_probe preview silently dropped 11 of 13
+# liquidation datasets, including the only Hyperliquid same-venue source).
+HF_SEARCH_MAX_BODY_BYTES = 2_000_000
+
+
+class HfSearchBodyOverCap(Exception):
+    """Raised when an HF dataset-search response exceeds HF_SEARCH_MAX_BODY_BYTES.
+
+    Deliberately NOT a subclass of ValueError: the caller's broad retry handler
+    catches Exception and would otherwise swallow it, retry, and return an empty
+    body -- silently turning a safety-bound violation into a dropped enumeration.
+    """
+
+
+def hf_search_full(url, max_retries=2, timeout=30):
+    """GET an HF search URL and return the COMPLETE body as text.
+
+    Unlike http_probe, this never truncates to a 200-byte preview: dataset
+    enumeration needs every "id" in the response, and a preview-length scan is
+    the exact defect that hid craftify2221/hyperliquid-builder-liquidation-panel
+    from every prior hunt. Bounded by HF_SEARCH_MAX_BODY_BYTES; raises
+    HfSearchBodyOverCap (which the retry loop does NOT catch) on over-cap.
+
+    Args:
+        url: HF search URL.
+        max_retries: per-query retry budget for transient failures only.
+        timeout: per-request timeout in seconds.
+
+    Returns:
+        (body_text, status_code). status_code is None only on a hard network
+        failure after the retry budget is exhausted.
+    """
+    import re as _re  # noqa: F401  (kept for parity with discovery callers)
+    for attempt in range(max_retries + 1):
+        req = Request(url, headers={"User-Agent": USER_AGENT})
+        try:
+            with urlopen(req, timeout=timeout) as resp:
+                body = resp.read()
+                if len(body) > HF_SEARCH_MAX_BODY_BYTES:
+                    raise HfSearchBodyOverCap(
+                        "HF search body %d bytes exceeds cap %d" % (len(body), HF_SEARCH_MAX_BODY_BYTES)
+                    )
+                return body.decode("utf-8", errors="replace"), resp.getcode()
+        except HfSearchBodyOverCap:
+            # Safety bound: fail loudly, never retry, never silently drop.
+            raise
+        except HTTPError as e:
+            if e.code == 429 and attempt < max_retries:
+                time.sleep(2 ** attempt + random.random())
+                continue
+            if 500 <= e.code < 600 and attempt < max_retries:
+                time.sleep(1 + random.random())
+                continue
+            try:
+                return e.read().decode("utf-8", errors="replace"), e.code
+            except Exception:
+                return "", e.code
+        except Exception:
+            if attempt < max_retries:
+                time.sleep(1 + random.random())
+                continue
+            return "", None
+
+
 def discover_hf_liquidation_datasets(max_retries=2, use_cache=True, refresh=False):
     """Live enumeration of Hugging Face datasets matching liquidation keywords.
 
@@ -340,7 +415,10 @@ def discover_hf_liquidation_datasets(max_retries=2, use_cache=True, refresh=Fals
     querying the unauthenticated HF search endpoint and returning every dataset
     whose id/description looks like a perpetual-futures liquidation source.
 
-    HF's /api/datasets?search= endpoint returns a JSON array that is frequently
+    The full response body is scanned (hf_search_full), NOT a 200-byte preview:
+    the preview-length scan previously dropped 11 of 13 liquidation-id datasets,
+    including the only Hyperliquid same-venue observed-liquidation source. HF's
+    /api/datasets?search= endpoint returns a JSON array that is frequently
     truncated mid-string (observed: "Unterminated string starting at ..."), so a
     strict json.loads fails. This parser salvages partial arrays by scanning for
     every "id":"..." occurrence, which is sufficient to enumerate candidates even
@@ -374,11 +452,16 @@ def discover_hf_liquidation_datasets(max_retries=2, use_cache=True, refresh=Fals
     errors = []
     for q in queries:
         url = "https://huggingface.co/api/datasets?search=" + urllib.parse.quote(q) + "&limit=40"
-        r = http_probe(url, max_retries=max_retries)
-        if r.get("status") != 200 or not r.get("body_preview"):
-            errors.append({"query": q, "status": r.get("status")})
+        try:
+            body, status = hf_search_full(url, max_retries=max_retries)
+        except HfSearchBodyOverCap as e:
+            # Safety bound: propagate so the caller sees the enumeration is
+            # untrustworthy rather than recording it as a soft per-query error
+            # and silently returning a partial candidate set.
+            raise
+        if status != 200 or not body:
+            errors.append({"query": q, "status": status})
             continue
-        body = r["body_preview"]
         ids = _re.findall(r'"id":"([^"]+)"', body)
         desc_by_id = {}
         for m in _re.finditer(r'"id":"([^"]+)"[^}]*?"description":"([^"]{0,160})"', body):
