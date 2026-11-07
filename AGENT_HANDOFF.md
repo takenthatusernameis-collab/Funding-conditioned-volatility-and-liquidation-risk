@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-07T22:53:46Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
+## Initial Task Message (2026-11-07T23:28:22Z) — Next Agentic Session (SINGLE DURABLE HANDOFF)
 
 **Repo priority (Funding-conditioned-volatility-and-liquidation-risk):** (1) **Track C funding-conditioned volatility forecasting** — primary; H001 NOT_SUPPORTED, forecast gate NOT MET. (2) **Gate 4 v5 confirmatory path** — sampled 2025-08..10 canonical identity/provenance is **GO_PARTIAL_BOUNDED** after FCLR-016 repair+quarantine; **full canonical completeness + license/terms + leakage/prereg/freeze still required before any confirmatory outcomes** (FCLR-014 guard remains fail-closed). (3) **Track A observed liquidation risk** — DATA_BLOCKED/no trigger (Hyperliquid ironflow data_through 2026-10; 2026-11..2027-02 absent); **NO re-probe**. (4) **Track B modeled boundary breach** — CLOSED_NEGATIVE.
 
@@ -8,7 +8,7 @@
 2. **Assemble Gate 4 v5 admissibility evidence package** (still NO confirmatory run): (a) full identity probe GO (match>0, mismatch/missing/remote_error/placeholder==0 on frozen scope), (b) explicit Binance Vision/data-use license/terms evidence recorded as machine-readable provenance manifest referenced by `--provenance-manifest` path, (c) completeness/leakage checks (no overlap vs consumed/confounded/guard windows; full symbol×kind×day coverage), (d) if all pass, draft a **preregistered confirmatory design doc** (frozen splits/features/targets/metrics/stop rule, data hashes, provenance manifest hash) but keep `confirmatory_claim_go=NO_GO` until manifest is committed/frozen and FCLR-014 guard accepts it. If any fail, keep v5 `NOT_READY/NO_GO` and ship ≥1 substantive hardening/test/guardrail with green gates.
 3. **Track A:** only on genuinely new unauthenticated admissible Hyperliquid-only source passing strict rubric + prereg before outcome inspection; otherwise skip re-probe entirely.
 
-### Current gate state (evidence-backed, re-verified 2026-11-07T22:53:46Z)
+### Current gate state (evidence-backed, re-verified 2026-11-07T23:28:22Z)
 - Track A = `DATA_BLOCKED` (no trigger). Track B = `CLOSED_NEGATIVE`. Track C/H001 = `NOT_SUPPORTED` (forecast gate NOT MET).
 - Gate 4 v4 = `EXPLORATORY_INCONCLUSIVE` (confounded 2024-04..09; not promotable).
 - Gate 4 v5 sampled identity (last session): `GO_PARTIAL_BOUNDED` for 2025-08..10, 5 symbols, 5 kinds, sample days 1,15,28+last — `research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_5sym_5kind_sampled_canonical_postrepair_postquarantine_v4_20261107T224842Z.json` (summary: match=255 mismatch=0 missing_local=0 missing_remote=0 remote_error=0 placeholder_duplicate_files=0). **Partial only; full-day not yet verified; confirmatory_claim_go remains NO_GO.**
