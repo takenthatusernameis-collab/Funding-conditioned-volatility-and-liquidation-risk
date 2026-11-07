@@ -1,0 +1,2001 @@
+{
+  "action": "quarantine_top_level_daily_placeholders",
+  "moves": [
+    {
+      "bytes": 1086,
+      "day": "2025-08-01",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-08-01.zip",
+      "month": "2025-08",
+      "sha256": "72f4e3cde1c2808d25e35204b6649832068b0de574d2d440e87297a4ad26252e",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-01.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-15",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-08-15.zip",
+      "month": "2025-08",
+      "sha256": "e86b1fcc5520ef368e4ee7b889dfdf8c94c8ec116cbb0ac989affe8a64b20e3e",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-15.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1055,
+      "day": "2025-08-28",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-08-28.zip",
+      "month": "2025-08",
+      "sha256": "de86d0ca6f011e2996affb9d2f84f91ab4dba900d448b68dc09c44710248d021",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-28.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 911,
+      "day": "2025-08-31",
+      "dest": "research_state/data_cache/BNBUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-08-31.zip",
+      "month": "2025-08",
+      "sha256": "2cdba848a4f43401042fba7cda4817ec84742b08f987b1c78fe6fd1a2135bdd7",
+      "src": "research_state/data_cache/BNBUSDT_2025_08/BNBUSDT-1h-2025-08-31.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1070,
+      "day": "2025-09-01",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-09-01.zip",
+      "month": "2025-09",
+      "sha256": "bfb72f51602ec8e3f7e1d3194ae7493eebfa62975c234ff82afa381afdaa7f4a",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-01.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 903,
+      "day": "2025-09-15",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-09-15.zip",
+      "month": "2025-09",
+      "sha256": "d3ad4240f40a430b248130a96e18d1d003ecc5cd9f6fc7456e723d1a3e1fe105",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-15.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 830,
+      "day": "2025-09-28",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-09-28.zip",
+      "month": "2025-09",
+      "sha256": "81f4f0b28a92eda29a631fd3afe275800783aa62b40ea8bb8f5d43d355093d72",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-28.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 851,
+      "day": "2025-09-30",
+      "dest": "research_state/data_cache/BNBUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-09-30.zip",
+      "month": "2025-09",
+      "sha256": "e3a899068d8efce52d1d84b3b92d3b641eb22cce3bef7cc7bd8512159538fa2e",
+      "src": "research_state/data_cache/BNBUSDT_2025_09/BNBUSDT-1h-2025-09-30.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 840,
+      "day": "2025-10-01",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-10-01.zip",
+      "month": "2025-10",
+      "sha256": "abae7492387356a47f211c5c24e5720c65936126216c4e3bc7492d6898411e20",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-01.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 872,
+      "day": "2025-10-15",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-10-15.zip",
+      "month": "2025-10",
+      "sha256": "be4081a64620f77b359b2985e7020ec5800643fc902728987587df5a3bd089ab",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-15.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 1088,
+      "day": "2025-10-28",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-10-28.zip",
+      "month": "2025-10",
+      "sha256": "c87c56b0c0d1fc8fbef7a4fbea09a0d06a2ba7b9f2d95ae0bdb906c1a13ce51a",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-28.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 863,
+      "day": "2025-10-31",
+      "dest": "research_state/data_cache/BNBUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BNBUSDT-1h-2025-10-31.zip",
+      "month": "2025-10",
+      "sha256": "9093e8acf0224960c56ddab43b94deb997c5fb120f93ab3bc0d36438e1521b90",
+      "src": "research_state/data_cache/BNBUSDT_2025_10/BNBUSDT-1h-2025-10-31.zip",
+      "symbol": "BNBUSDT"
+    },
+    {
+      "bytes": 904,
+      "day": "2025-08-01",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-08-01.zip",
+      "month": "2025-08",
+      "sha256": "d6eb6eb1aa37cde9c1ace8da8cd9d9b811902eebda0f9ae7dcb1a723a1bd97fd",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-01.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 842,
+      "day": "2025-08-15",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-08-15.zip",
+      "month": "2025-08",
+      "sha256": "c8b60141ef9b048e5b3cd46d18d4d0521980f16f4e1f4a7c2b297ed768a0bf38",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-15.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-08-28",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-08-28.zip",
+      "month": "2025-08",
+      "sha256": "42dcae69c5fc923560bf95a9e935d4242d8159816024bc5f63bdf815b60e2001",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-28.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 906,
+      "day": "2025-08-31",
+      "dest": "research_state/data_cache/SOLUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-08-31.zip",
+      "month": "2025-08",
+      "sha256": "fd2be2bc2146c9f30a51baa67769b22d03d73478b29bb4df86464e2521a25fb9",
+      "src": "research_state/data_cache/SOLUSDT_2025_08/SOLUSDT-1h-2025-08-31.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 840,
+      "day": "2025-09-01",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-09-01.zip",
+      "month": "2025-09",
+      "sha256": "dd0b88eb8c1368054d263898399edf99d10be0b6bd64ec9463c290dbb75ca71e",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-01.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 842,
+      "day": "2025-09-15",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-09-15.zip",
+      "month": "2025-09",
+      "sha256": "189ff7cc956a87dcf497221a0ccb5278a7722c041707256fbebebb275ef365c3",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-15.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 893,
+      "day": "2025-09-28",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-09-28.zip",
+      "month": "2025-09",
+      "sha256": "421e942e31b23578aea00d2417aa590c15cda252f0e5c8d3908b884c9c4825e3",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-28.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 912,
+      "day": "2025-09-30",
+      "dest": "research_state/data_cache/SOLUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-09-30.zip",
+      "month": "2025-09",
+      "sha256": "d57dffb7176ae81bf1339f32ce651a7aa39ef459c1b119e8f99327e2056a33ba",
+      "src": "research_state/data_cache/SOLUSDT_2025_09/SOLUSDT-1h-2025-09-30.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 914,
+      "day": "2025-10-01",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-10-01.zip",
+      "month": "2025-10",
+      "sha256": "083d60647237f0b828fc382ee80e0d4d552fb9244fdd3cf5e8a6ff3b6c6a4e77",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-01.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 895,
+      "day": "2025-10-15",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-10-15.zip",
+      "month": "2025-10",
+      "sha256": "19829de206929abc0b956374458f85a39f0f80d08016dbc4200302a960307b54",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-15.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 847,
+      "day": "2025-10-28",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-10-28.zip",
+      "month": "2025-10",
+      "sha256": "51e578eafcc1d37a2460689034d76b8820e6d056282dfd30c05dd42508c238f3",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-28.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 854,
+      "day": "2025-10-31",
+      "dest": "research_state/data_cache/SOLUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/SOLUSDT-1h-2025-10-31.zip",
+      "month": "2025-10",
+      "sha256": "ffb98cfbf993531b0c72c984aebd9e9308e3fc593edc2cd1e59b6c284fb3fc31",
+      "src": "research_state/data_cache/SOLUSDT_2025_10/SOLUSDT-1h-2025-10-31.zip",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "bytes": 854,
+      "day": "2025-08-01",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-08-01.zip",
+      "month": "2025-08",
+      "sha256": "01ee1e93387c2102f3ba4c106e4443465d35a00a2b764dfb0712161ec8c3904a",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-01.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-08-15",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-08-15.zip",
+      "month": "2025-08",
+      "sha256": "ea5d5311956a7c5153c56fd014cf874de4e255f7986bd95b81a4ee9e6fb7e623",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-15.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 874,
+      "day": "2025-08-28",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-08-28.zip",
+      "month": "2025-08",
+      "sha256": "7d5cd512dbadb57891707fec10df55095f3ec0531b907dcd020da54ac640aea9",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-28.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 828,
+      "day": "2025-08-31",
+      "dest": "research_state/data_cache/XRPUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-08-31.zip",
+      "month": "2025-08",
+      "sha256": "7e9287396fa9697c8b1f80f5608dfba3936bf20df67b52c79e8e3ec8cf899f58",
+      "src": "research_state/data_cache/XRPUSDT_2025_08/XRPUSDT-1h-2025-08-31.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-09-01",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-09-01.zip",
+      "month": "2025-09",
+      "sha256": "1846a2f51240a8352201c7f0b7dbdcdd16787b68bd6b0f335cce85343ab6ed09",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-01.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-09-15",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-09-15.zip",
+      "month": "2025-09",
+      "sha256": "e1a8a3fbdd211fbb74f6f99d81fdc794cdc9c2e191bffcd1c50d1c752c8b6f14",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-15.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 866,
+      "day": "2025-09-28",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-09-28.zip",
+      "month": "2025-09",
+      "sha256": "de3d0d36b6cfc9a7ef64e4b71d23d7cc70ae11c7b37c220f2c1c9c21c1462647",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-28.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 854,
+      "day": "2025-09-30",
+      "dest": "research_state/data_cache/XRPUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-09-30.zip",
+      "month": "2025-09",
+      "sha256": "6b8bea111f130d51717c8d9170d35d6f76321d0946bf56a49fab6586d0ef6687",
+      "src": "research_state/data_cache/XRPUSDT_2025_09/XRPUSDT-1h-2025-09-30.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-10-01",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-10-01.zip",
+      "month": "2025-10",
+      "sha256": "77eedbf6fdd41f9733538f49ddede51163e17cda3b205937b57f9cae3011fbb5",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-01.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 876,
+      "day": "2025-10-15",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-10-15.zip",
+      "month": "2025-10",
+      "sha256": "2a4789069b539bdfde52aaba3469df94ad1eb3fe4659706e4b0d70ea0e12b29e",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-15.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 872,
+      "day": "2025-10-28",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-10-28.zip",
+      "month": "2025-10",
+      "sha256": "efc96c5f88157591bf7752ff330b5e4e958facc4f95b6d2588e307caa51c4a4f",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-28.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-10-31",
+      "dest": "research_state/data_cache/XRPUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/XRPUSDT-1h-2025-10-31.zip",
+      "month": "2025-10",
+      "sha256": "da1880f622c7be989ec04c5c91b9c2312d0d23e259ae3de59980bf233783fec5",
+      "src": "research_state/data_cache/XRPUSDT_2025_10/XRPUSDT-1h-2025-10-31.zip",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-08-01",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-01.zip",
+      "month": "2025-08",
+      "sha256": "7850b1e3132988734dd7a87d69778d8e0f9f1251fee499c884d8249c40210fd6",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-01.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 989,
+      "day": "2025-08-02",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-02.zip",
+      "month": "2025-08",
+      "sha256": "f4ea2a913ca786df87d06093ef7baebbc5e4b391592abc5cf9752e28b759a7d4",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-02.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1055,
+      "day": "2025-08-03",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-03.zip",
+      "month": "2025-08",
+      "sha256": "6441960fdaca32582361a102b48b55f34bcf3b57817133303afa7e68bbe6637e",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-03.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-08-04",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-04.zip",
+      "month": "2025-08",
+      "sha256": "7b4bef0a3be6233197c756519c2e05edfdeae4b788a9dc8bbabeb624e80b941d",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-04.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 845,
+      "day": "2025-08-05",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-05.zip",
+      "month": "2025-08",
+      "sha256": "b1494c666c9a80900d3dea91a6fe8b63fc88e6e4351ab71894e2b54bc2682552",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-05.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1106,
+      "day": "2025-08-06",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-06.zip",
+      "month": "2025-08",
+      "sha256": "7484533915466b39421f586dfeb97859dd5432d7b22755f579a57fa28fcea01a",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-06.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1006,
+      "day": "2025-08-07",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-07.zip",
+      "month": "2025-08",
+      "sha256": "7dfdfcc5d11d5fe04d45021366da3658e4c76ccfd17563e1816e3857e4d0dfde",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-07.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 979,
+      "day": "2025-08-08",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-08.zip",
+      "month": "2025-08",
+      "sha256": "8a0c8e62d6b3cb337e38220a7da5b288627513d7dbd9ab4a7584562251f98e34",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-08.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 998,
+      "day": "2025-08-09",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-09.zip",
+      "month": "2025-08",
+      "sha256": "df5fe003b59c7683490ca79e371edeb873c2dc3efd0b033fd128f623d86dfcaa",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-09.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1004,
+      "day": "2025-08-10",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-10.zip",
+      "month": "2025-08",
+      "sha256": "e7e0e71acd0e6d3cc41396fa3fff670f3a1751ab49ea0c931d2a784d16c8c515",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-10.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1056,
+      "day": "2025-08-11",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-11.zip",
+      "month": "2025-08",
+      "sha256": "56b9f009ed41775ee6e2894215a11b99eb615ba8b00989370f8fc5683701bf35",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-11.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-08-12",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-12.zip",
+      "month": "2025-08",
+      "sha256": "8b5c80b0353773019aeca8520b3decf45068ad35404f3e32c5df5c7db4d10f90",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-12.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 870,
+      "day": "2025-08-13",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-13.zip",
+      "month": "2025-08",
+      "sha256": "f2a169e7ee64785c07532a8da6547e169d34899b3ca63bf61c3d2ccebe8dd50e",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-13.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1090,
+      "day": "2025-08-14",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-14.zip",
+      "month": "2025-08",
+      "sha256": "9cb8006fd3a98b3e18bdbbdaf4596a02f22dea3629b2d6efab3197046849bd94",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-14.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-08-15",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-15.zip",
+      "month": "2025-08",
+      "sha256": "257d22bfb224b09f33538670b15a7fac2cc0bafb8bd347a601db310e7a517e6f",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-15.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 961,
+      "day": "2025-08-16",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-16.zip",
+      "month": "2025-08",
+      "sha256": "cee5c4f186f6b440f8b61b96b901a5b451a99feb341256ec70873a48fb9681a3",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-16.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 833,
+      "day": "2025-08-17",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-17.zip",
+      "month": "2025-08",
+      "sha256": "c9064fd3e8d953f2464c2034480349cd7b1835cb4c72248ec5fc5bcb08852a69",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-17.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-08-18",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-18.zip",
+      "month": "2025-08",
+      "sha256": "b259bc1eb1fd8e0c0b8dfde735409c99be7343013caa5a6d241d1911569b86a9",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-18.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1083,
+      "day": "2025-08-19",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-19.zip",
+      "month": "2025-08",
+      "sha256": "4b302e0397404aeb618dca32b4595e64599c99f07000543fa9cbfdf093f3f18e",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-19.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 852,
+      "day": "2025-08-20",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-20.zip",
+      "month": "2025-08",
+      "sha256": "2e9db7a04d7278057a394de7973da88e400590a1bada3e04c0e879dabb66a99a",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-20.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-08-21",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-21.zip",
+      "month": "2025-08",
+      "sha256": "1fddec2c5c82bd97ead04d0fd933d3ac0577aaf55bebaa6894039336719aad92",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-21.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1045,
+      "day": "2025-08-22",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-22.zip",
+      "month": "2025-08",
+      "sha256": "e0f33e1101f842e0915a6e0e6db1dcc8f30d128dc60dbeff3aad1f3c1db5d628",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-22.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1050,
+      "day": "2025-08-23",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-23.zip",
+      "month": "2025-08",
+      "sha256": "79f801b4c2b50d306e01350949e6455a2d6950fed4fe4f0aedfa8a2ed0b0ae52",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-23.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1051,
+      "day": "2025-08-24",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-24.zip",
+      "month": "2025-08",
+      "sha256": "8b7cc9fb1410d5f91e62831b5d93ab1d3ba9c913011208378cacec05e1dd937e",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-24.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1084,
+      "day": "2025-08-25",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-25.zip",
+      "month": "2025-08",
+      "sha256": "fca6860ab405bbb5538e861daa8d88bcc04825c31e5e1d204f278d774204e1e8",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-25.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1051,
+      "day": "2025-08-26",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-26.zip",
+      "month": "2025-08",
+      "sha256": "6d9c710d4bf65e37ba1241d7303719e16ad1d71be7c526fe0855f09de2a1a3ce",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-26.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-08-27",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-27.zip",
+      "month": "2025-08",
+      "sha256": "69ba7407bfaf96bde238fb648c611f92a69a8681d6916ca0288432443d24b0c9",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-27.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1071,
+      "day": "2025-08-28",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-28.zip",
+      "month": "2025-08",
+      "sha256": "b92897fb834c19ced1f38e3a94638c27ade4fbd033dbf42290d21e94c2e432b3",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-28.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 864,
+      "day": "2025-08-29",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-29.zip",
+      "month": "2025-08",
+      "sha256": "af9595565db8d24ffff5c7793f99c161e5cb4be52a654c0362ed9cbcb4508609",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-29.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 830,
+      "day": "2025-08-30",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-30.zip",
+      "month": "2025-08",
+      "sha256": "6810b6772542c3bfb9fa025b0f4bdfa96ef28f30d0241066f1459fa59a722694",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-30.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1032,
+      "day": "2025-08-31",
+      "dest": "research_state/data_cache/BTCUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-08-31.zip",
+      "month": "2025-08",
+      "sha256": "5c444d131077eef94bf9bf3772f553a54290f2ea35edb99d3c46f488f59a78a5",
+      "src": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-1h-2025-08-31.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-09-01",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-01.zip",
+      "month": "2025-09",
+      "sha256": "b933f662ad3d28b4827a7b9e530093652d721bcb272ca2c5bb70d4ab0fd6766c",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-01.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1080,
+      "day": "2025-09-02",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-02.zip",
+      "month": "2025-09",
+      "sha256": "189cce63b3622b615042c0580c4bc8fab56cf039f37e27c59ac5c2b7cec7427b",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-02.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 855,
+      "day": "2025-09-03",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-03.zip",
+      "month": "2025-09",
+      "sha256": "65781db3bb8be2be7a9669f91169423b3fb1be85d1961d4576e7a5913b2619a6",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-03.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 853,
+      "day": "2025-09-04",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-04.zip",
+      "month": "2025-09",
+      "sha256": "4a67831a5ba7f609fffcd1e2a03b77d4a3fef6dad88e0a82c9c147861c0f7627",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-04.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1053,
+      "day": "2025-09-05",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-05.zip",
+      "month": "2025-09",
+      "sha256": "485d630cc1757e7c61e0d001ca0ad425aa8874fdeab734e3b61034f3125181c3",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-05.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 829,
+      "day": "2025-09-06",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-06.zip",
+      "month": "2025-09",
+      "sha256": "34032f5e4e1dc507abea88727605b7a63221304d6832341a2bb35cffd40b93ee",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-06.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 831,
+      "day": "2025-09-07",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-07.zip",
+      "month": "2025-09",
+      "sha256": "2d351b890fd830717b29e297551a133edfde1fee02a32c7821d6a1537903f722",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-07.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1053,
+      "day": "2025-09-08",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-08.zip",
+      "month": "2025-09",
+      "sha256": "a58dc34f630e8018aa7bee5f0be5ee7b452d3a4a9f698c03baa681bc2979b646",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-08.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1035,
+      "day": "2025-09-09",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-09.zip",
+      "month": "2025-09",
+      "sha256": "8d186f5b4f47a107f461b8b78a7b243ab5dac840b3db5d3b7d202d4a65e0b6df",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-09.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 853,
+      "day": "2025-09-10",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-10.zip",
+      "month": "2025-09",
+      "sha256": "d7548225bdcfef3bf5461d9631710ab74527a27076a9eeafe21ae4383c1ccdf1",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-10.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1079,
+      "day": "2025-09-11",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-11.zip",
+      "month": "2025-09",
+      "sha256": "159bada53f5d578920dbc671c964939ddfda1a85dc57dc426f274f4341fd444c",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-11.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1063,
+      "day": "2025-09-12",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-12.zip",
+      "month": "2025-09",
+      "sha256": "c5d0ade2f68ae1b4a43d6117b2e32aa8bc1b96136e4c44a61012718a57af3cbd",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-12.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 824,
+      "day": "2025-09-13",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-13.zip",
+      "month": "2025-09",
+      "sha256": "9427c760d96c56c163d31c7b6a11e638fd85921729e528a3376cc2f1e531b9a9",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-13.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1022,
+      "day": "2025-09-14",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-14.zip",
+      "month": "2025-09",
+      "sha256": "d754335cc2bab44cfbbb1be4107d0c3b04279d81be34a972cd41e99d504a2e26",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-14.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1073,
+      "day": "2025-09-15",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-15.zip",
+      "month": "2025-09",
+      "sha256": "1186f2ac0862593f47e3326c2a7d316f98e229b986464eab9bd32328549e4eb7",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-15.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1064,
+      "day": "2025-09-16",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-16.zip",
+      "month": "2025-09",
+      "sha256": "3053449a0d6604711f034aaca4488416e00f5b8eea697c9cedfafd6db85ce732",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-16.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 860,
+      "day": "2025-09-17",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-17.zip",
+      "month": "2025-09",
+      "sha256": "fd522ab16ade0f5318031838c52ee19af25da7496f9c35e0ffe04a6b735e19cc",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-17.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1050,
+      "day": "2025-09-18",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-18.zip",
+      "month": "2025-09",
+      "sha256": "7647615012a9e8a59a4ada8c2e8f8beccb03d2783c0bb43b2a8453a8885666c1",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-18.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1039,
+      "day": "2025-09-19",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-19.zip",
+      "month": "2025-09",
+      "sha256": "81d5b06468b6cfc0401ea0668a7d0365534656d08921845b2748a4b3a2aeac55",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-19.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1018,
+      "day": "2025-09-20",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-20.zip",
+      "month": "2025-09",
+      "sha256": "5a72231289e8f03abc547088cf23425742beb2958f1a83a48dbf97393ac1545c",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-20.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 829,
+      "day": "2025-09-21",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-21.zip",
+      "month": "2025-09",
+      "sha256": "5243909c4e3d459e4b7a32068993e92ffe13699f544bbbad9efa15b1f15d2acf",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-21.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 966,
+      "day": "2025-09-22",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-22.zip",
+      "month": "2025-09",
+      "sha256": "54642d1bdefa6d847ad72528ee9887a5c886fbf116c31db9a2952e662cafba20",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-22.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1012,
+      "day": "2025-09-23",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-23.zip",
+      "month": "2025-09",
+      "sha256": "ed3be4a2d87fea381e6b00242f13b319fd5aa724c323e247f54392164479cb07",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-23.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 837,
+      "day": "2025-09-24",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-24.zip",
+      "month": "2025-09",
+      "sha256": "67ddf23eaf12d783c62dc8b16f396dbb6a571e36afb141b704ba2736d0879db4",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-24.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1053,
+      "day": "2025-09-25",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-25.zip",
+      "month": "2025-09",
+      "sha256": "24dfda78f3c91935a4318f77d4047e7246085c405540f7ac51950cc93caf62df",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-25.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-09-26",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-26.zip",
+      "month": "2025-09",
+      "sha256": "3f263dff3a8bd2c819dab961cd43bef5a5dc5568b1406a8f11cf2dca1e366af9",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-26.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-09-27",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-27.zip",
+      "month": "2025-09",
+      "sha256": "afbdc9860fea134c92ecbbc82043c9f8b7c082686cb853440bb057634bc912ad",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-27.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 830,
+      "day": "2025-09-28",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-28.zip",
+      "month": "2025-09",
+      "sha256": "0a0117adeae78d92db31f5c3f14d9def75ebd89e284c16e6ced12e0ea3f2a083",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-28.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 838,
+      "day": "2025-09-29",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-29.zip",
+      "month": "2025-09",
+      "sha256": "1db8456db36bc13114da5c13d34b2a7547321b945e7f869c3ad56c8e90bd2248",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-29.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-09-30",
+      "dest": "research_state/data_cache/BTCUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-09-30.zip",
+      "month": "2025-09",
+      "sha256": "180956efc74b0c907866b65a1aedc8f615db37490e9609f574254d09b5883596",
+      "src": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-1h-2025-09-30.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 857,
+      "day": "2025-10-01",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-01.zip",
+      "month": "2025-10",
+      "sha256": "f59570f49968b34025a2e26a1d3f1e1acb6a640c6321d35bc009c0aae47a10d6",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-01.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 846,
+      "day": "2025-10-02",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-02.zip",
+      "month": "2025-10",
+      "sha256": "e4a202a706552214802603ed1842516d0364b16c62bcef3e7f1434db081e7a76",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-02.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1016,
+      "day": "2025-10-03",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-03.zip",
+      "month": "2025-10",
+      "sha256": "84bfdaf6a742fda8df8ea52926578fc5dddb5c4935a1aefb3e20835f1db3ab79",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-03.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 839,
+      "day": "2025-10-04",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-04.zip",
+      "month": "2025-10",
+      "sha256": "6ce5f1d8efd081550f17db1d7d10e086d43e2a566edc49b8a9db25777f3406dd",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-04.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-10-05",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-05.zip",
+      "month": "2025-10",
+      "sha256": "2d33ec50f176bff4cbb066b9ee8ed2fae18e6504e4c7427673e6fd88cb5da71d",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-05.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1059,
+      "day": "2025-10-06",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-06.zip",
+      "month": "2025-10",
+      "sha256": "9138c75ba1489bd77061c0283212a049fdcb0b293424f69f9ab313c66ebca7b3",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-06.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1011,
+      "day": "2025-10-07",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-07.zip",
+      "month": "2025-10",
+      "sha256": "29fea67c321199c6eecc484c0a9e9be5f21bdafa81d84b4d56fb4c96efac9c93",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-07.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 848,
+      "day": "2025-10-08",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-08.zip",
+      "month": "2025-10",
+      "sha256": "4a90dfb28f64f14a0c2e591ac22d1448a52864e57bf5329d3320b8e8e7f19b3c",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-08.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-10-09",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-09.zip",
+      "month": "2025-10",
+      "sha256": "4a15609dc2e528cfabec772584c22e8df08b697c3bc879167d79488339d7f105",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-09.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 869,
+      "day": "2025-10-10",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-10.zip",
+      "month": "2025-10",
+      "sha256": "046119d120757ecea5e5f32e00984f5c7b9acdbd71583dcd5a929d81a984cca4",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-10.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1082,
+      "day": "2025-10-11",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-11.zip",
+      "month": "2025-10",
+      "sha256": "90d61f7479908b8d82c35835c273ba8957ba6b388c3492d96827641229644f8e",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-11.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 988,
+      "day": "2025-10-12",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-12.zip",
+      "month": "2025-10",
+      "sha256": "50c144273d7c3ccf9b06bc1c6f4c8a6f51d3310b4b0e92ba6bde5b0b9209761c",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-12.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 862,
+      "day": "2025-10-13",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-13.zip",
+      "month": "2025-10",
+      "sha256": "f188f51e4e033bc725986e0ccd3afc999530a429ff19d984cf25131e036947be",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-13.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1073,
+      "day": "2025-10-14",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-14.zip",
+      "month": "2025-10",
+      "sha256": "6f654a8673e0815ead44b3efd3d0613cac9e11daba78a3d981f86d07560d644b",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-14.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 842,
+      "day": "2025-10-15",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-15.zip",
+      "month": "2025-10",
+      "sha256": "3f1d625aa9ae99030c38c3a490303721c10c473e57c59ee74a05644cf1e72373",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-15.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1040,
+      "day": "2025-10-16",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-16.zip",
+      "month": "2025-10",
+      "sha256": "c4e7b1439c46f0a9a9eb3bbd4dfca85e53010ad28330a221f4cc6e43385bd922",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-16.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1109,
+      "day": "2025-10-17",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-17.zip",
+      "month": "2025-10",
+      "sha256": "2931508caff574142565dc3786c1c451a5b3736bcefc5d0ef1e16bcf7a053590",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-17.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-10-18",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-18.zip",
+      "month": "2025-10",
+      "sha256": "286e88e63c9f0cd1f4e49a48b32d4c299f106735e1bdc23734116d0f4449678e",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-18.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1068,
+      "day": "2025-10-19",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-19.zip",
+      "month": "2025-10",
+      "sha256": "940355b0b7658bf0683a13724a041b6674016b05969d4a0525843afe146c6461",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-19.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1087,
+      "day": "2025-10-20",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-20.zip",
+      "month": "2025-10",
+      "sha256": "d7e12d38de511b9c0927c12a70a4a8514c5f43b4202cdaee70283c62bcf636f3",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-20.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1091,
+      "day": "2025-10-21",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-21.zip",
+      "month": "2025-10",
+      "sha256": "1d7101f073ef859eb08442ddd5f87e662a6edf85729d021614ab50a8e8822b01",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-21.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1062,
+      "day": "2025-10-22",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-22.zip",
+      "month": "2025-10",
+      "sha256": "fc4ac5626aceac7f028660238d3b5a8ae235444c23edd5e4fe80faf3a4b147ed",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-22.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1090,
+      "day": "2025-10-23",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-23.zip",
+      "month": "2025-10",
+      "sha256": "14387cb4178b7184033e424b46ee07bd49e7555ce858569aa3b3c28c8e8d608a",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-23.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 863,
+      "day": "2025-10-24",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-24.zip",
+      "month": "2025-10",
+      "sha256": "2a876a06841c6b83e6db56ae4c99c110211c2ddcd5e02a0c209705c8e5c73399",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-24.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 840,
+      "day": "2025-10-25",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-25.zip",
+      "month": "2025-10",
+      "sha256": "2c46d7605d640835aaaf5c0d1e2ae5c7b3565b330b2bb3e1c435a8f02253881f",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-25.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1053,
+      "day": "2025-10-26",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-26.zip",
+      "month": "2025-10",
+      "sha256": "025f47c7ad4830ba1ab2bb6de5cbe0979ac8f0f9d9f228b186c5686ae0ced7ff",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-26.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 1065,
+      "day": "2025-10-27",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-27.zip",
+      "month": "2025-10",
+      "sha256": "42e00dde38c75d251b268dfdfd6c2882a88922257dc19417db4b3118c7a17070",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-27.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 978,
+      "day": "2025-10-28",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-28.zip",
+      "month": "2025-10",
+      "sha256": "cdc780d4c27f4328d7acda8d66fbeb7b788ae77fe517c0fcadac8d6025501e40",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-28.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-10-29",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-29.zip",
+      "month": "2025-10",
+      "sha256": "02f2314d3f9fcf2d145fe3c25510a96bfc5574b62d00db8fed9331f811d04f81",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-29.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-10-30",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-30.zip",
+      "month": "2025-10",
+      "sha256": "cd82b3c4427c8f5019bebb2b3c9b0986c967418f060cfce4910f9e37c83e1f72",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-30.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-10-31",
+      "dest": "research_state/data_cache/BTCUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/BTCUSDT-1h-2025-10-31.zip",
+      "month": "2025-10",
+      "sha256": "dce7606495e2fafdf34a62ba0f7d3f756243833c5cf80d594c015b8a55023081",
+      "src": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-1h-2025-10-31.zip",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 860,
+      "day": "2025-08-01",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-01.zip",
+      "month": "2025-08",
+      "sha256": "6a17a59ad7f1717027541c823dd32be2e7e63e64162ea48c8d203f840e75f4bc",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-01.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1021,
+      "day": "2025-08-02",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-02.zip",
+      "month": "2025-08",
+      "sha256": "f26168fefd3b67ae84957aa80df22aa0ea018a9d46ae688beb5d8f7ea619105f",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-02.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 988,
+      "day": "2025-08-03",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-03.zip",
+      "month": "2025-08",
+      "sha256": "cb379ba15adb1fe41f2aa640b8b05398b46ba17e9e0b2afc10d028c0d0e56862",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-03.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-08-04",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-04.zip",
+      "month": "2025-08",
+      "sha256": "7c022a1ab6bc438a678a1605d354f417fd2335a16de4936113a45121fe810311",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-04.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1024,
+      "day": "2025-08-05",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-05.zip",
+      "month": "2025-08",
+      "sha256": "435d70bb5d24960cf88fa1940068f99828af8a7319f238c95ccb634bb7d16330",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-05.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 864,
+      "day": "2025-08-06",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-06.zip",
+      "month": "2025-08",
+      "sha256": "09a86b48371a8effc45c9883ea3ccb9f280eb6f8e3b338bf3595ec21e92d1d73",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-06.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 855,
+      "day": "2025-08-07",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-07.zip",
+      "month": "2025-08",
+      "sha256": "bf0e122f1a8648304063ab33db67eebc35b368c99f76d0f6c1243cf09e35a3fb",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-07.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 865,
+      "day": "2025-08-08",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-08.zip",
+      "month": "2025-08",
+      "sha256": "7cce59dd3f6550ffd9481b2f2cd85de43c2b6be851ebf8cb032b679b24c541b5",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-08.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 869,
+      "day": "2025-08-09",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-09.zip",
+      "month": "2025-08",
+      "sha256": "681e13a03a6aaa1c2b17b7a741c90f2d2d885667bd558ea687fef5a012f8e78c",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-09.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 868,
+      "day": "2025-08-10",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-10.zip",
+      "month": "2025-08",
+      "sha256": "30e1addf19c00a6fb7c0d0dbf14367afdfeeb30a666b8dd86da3d4fa87151395",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-10.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1030,
+      "day": "2025-08-11",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-11.zip",
+      "month": "2025-08",
+      "sha256": "e42b6501a9f35e3c100c0c2d319f7b0d783a7045a6ceb8b0e9e59b55f380b4ac",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-11.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 876,
+      "day": "2025-08-12",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-12.zip",
+      "month": "2025-08",
+      "sha256": "837d33dfa77693cf339424591a65d3d84aa34a44d961a2ce08b3ac7a49eedab0",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-12.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 883,
+      "day": "2025-08-13",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-13.zip",
+      "month": "2025-08",
+      "sha256": "cf0c56cb9d42a0ad97393b3bf9482346e968cf898baf3674365455b0a2922f56",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-13.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1044,
+      "day": "2025-08-14",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-14.zip",
+      "month": "2025-08",
+      "sha256": "2efc94f90efa15cc284a6729bc68b3ea92175a1a5edf18dcfed4c493c412e08a",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-14.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 864,
+      "day": "2025-08-15",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-15.zip",
+      "month": "2025-08",
+      "sha256": "faa5d032aad63f65ffc18fbcf907323bd3284920ccda929f7eac66efab054a3b",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-15.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 841,
+      "day": "2025-08-16",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-16.zip",
+      "month": "2025-08",
+      "sha256": "f9376cd852757388d969c2b1f0321b1b1fd3484de1bae63c47e31e74ef9a516b",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-16.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 992,
+      "day": "2025-08-17",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-17.zip",
+      "month": "2025-08",
+      "sha256": "554b5de096f1226011720a50ec9b9cd3d24fbf962d79773d9be9b4967480817d",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-17.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 864,
+      "day": "2025-08-18",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-18.zip",
+      "month": "2025-08",
+      "sha256": "0a4699e4e22b7f1a2591a3578f6891a80ca6ae3368717947ff8de9938c9dded6",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-18.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 863,
+      "day": "2025-08-19",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-19.zip",
+      "month": "2025-08",
+      "sha256": "cc852cd71b8fdff15d96b38230fa11acec540d9c69aec845dc962afbfee8dd29",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-19.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 867,
+      "day": "2025-08-20",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-20.zip",
+      "month": "2025-08",
+      "sha256": "426dc4a825beb222198add2d3b0f13249cdb8288e9d4d3526b162476a99752cc",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-20.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-08-21",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-21.zip",
+      "month": "2025-08",
+      "sha256": "baaebb280b35bf250dd74debcca898a7dc1f24646fa225b27a2cb5d0e9988d6c",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-21.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 991,
+      "day": "2025-08-22",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-22.zip",
+      "month": "2025-08",
+      "sha256": "d91451f1ed50e5e1ab369085e0893d4521bec031e09aa993b7badae5e5b7f470",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-22.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1011,
+      "day": "2025-08-23",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-23.zip",
+      "month": "2025-08",
+      "sha256": "e7e1390b4e0ea8b46611866cd84fab98ba7989bc3b37e88909e0172786766b83",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-23.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-08-24",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-24.zip",
+      "month": "2025-08",
+      "sha256": "95f72be7f6e9d488cb01835992452c6ffd1ac2cee1d00e6d809b2f390c3a7a4b",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-24.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1011,
+      "day": "2025-08-25",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-25.zip",
+      "month": "2025-08",
+      "sha256": "721f0d475443bcc7510934affa204da5a06da8604551f45f906f3ad60670d4ac",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-25.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-08-26",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-26.zip",
+      "month": "2025-08",
+      "sha256": "4b9d367f8abab0b4cd1f41294cac598a782d21bef4d3f4fe42ee953674e67003",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-26.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1009,
+      "day": "2025-08-27",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-27.zip",
+      "month": "2025-08",
+      "sha256": "e7e2110bcaee279b73efbf98981483b348fab7885b76f495065d3f66c1df4b68",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-27.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-08-28",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-28.zip",
+      "month": "2025-08",
+      "sha256": "d43c8e2a0e58bb61bbfc3b0913d696a627dbd273f5764e0258690375ca138c54",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-28.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 876,
+      "day": "2025-08-29",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-29.zip",
+      "month": "2025-08",
+      "sha256": "65278ecbc8eaee67e0c5b722ea95c8b03465a8a6842ee9488eeed44e60f9bbca",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-29.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 962,
+      "day": "2025-08-30",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-30.zip",
+      "month": "2025-08",
+      "sha256": "18bfd6db63537d42040427da398928c37f71594028360b2ea2b8c0b34cb2df74",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-30.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 946,
+      "day": "2025-08-31",
+      "dest": "research_state/data_cache/ETHUSDT_2025_08/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-08-31.zip",
+      "month": "2025-08",
+      "sha256": "4adf7f2e96399e7f72605d76bae70bdfdfc419ecc3d15d71a3568244e113e6c7",
+      "src": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-1h-2025-08-31.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-09-01",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-01.zip",
+      "month": "2025-09",
+      "sha256": "debd637a1a9504a439c5af56a69cb570d90e09bebbace6d8384d2007b3a153b8",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-01.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-09-02",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-02.zip",
+      "month": "2025-09",
+      "sha256": "9d51b4074857912178d3ebd1ac2f84526c3a006c4a2a21b6077b2cb9120ffd38",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-02.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 883,
+      "day": "2025-09-03",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-03.zip",
+      "month": "2025-09",
+      "sha256": "ba7601db710623764e0c7b171b3e369ab113a329c47188fbf7964618f13ea7cd",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-03.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1009,
+      "day": "2025-09-04",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-04.zip",
+      "month": "2025-09",
+      "sha256": "9776daa564729ad55e9b7018e2d57d23f650c80c26fd8e4c9e04600404714743",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-04.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-09-05",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-05.zip",
+      "month": "2025-09",
+      "sha256": "20c24b6a5ce5cde65be40c0519f00db58a98c7e0bb6759ae54ab51e9e530d637",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-05.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 849,
+      "day": "2025-09-06",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-06.zip",
+      "month": "2025-09",
+      "sha256": "66cd0b741a0dba91af96d34ca0fa9446762d3c834c595c17ef47901d36ce985c",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-06.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 840,
+      "day": "2025-09-07",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-07.zip",
+      "month": "2025-09",
+      "sha256": "00da32c646e894cc134c8c7af57c5a2cadabd2e8bb7a191b9c2324e85aa12cf0",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-07.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 843,
+      "day": "2025-09-08",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-08.zip",
+      "month": "2025-09",
+      "sha256": "0f84c10810b1077550a9e3983df0f633abed18cff05497e7fdde36da50e4e5d8",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-08.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1020,
+      "day": "2025-09-09",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-09.zip",
+      "month": "2025-09",
+      "sha256": "394c66752704f49327b525890fb3cbaa214b038c30bc7fea62fae5ab4f4187d0",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-09.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 965,
+      "day": "2025-09-10",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-10.zip",
+      "month": "2025-09",
+      "sha256": "0b98c57db779d9ffd80b278ee3fcea0a7117a93c67879dbf7a82de1b35354bcf",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-10.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-09-11",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-11.zip",
+      "month": "2025-09",
+      "sha256": "da70c6290372adf4cfb654ed78c452c5c4fa4fcf0a1e99794ef8b8473c51e890",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-11.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1014,
+      "day": "2025-09-12",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-12.zip",
+      "month": "2025-09",
+      "sha256": "a5cbf00bbfadee4319e180f460f2dfd9b0a2fab3e9c883b2867ef752538a4032",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-12.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 838,
+      "day": "2025-09-13",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-13.zip",
+      "month": "2025-09",
+      "sha256": "24c4b19fd9bfe926e10ae01ba63dde9c0e51742ee953fa47b2528efd7b09013d",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-13.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 978,
+      "day": "2025-09-14",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-14.zip",
+      "month": "2025-09",
+      "sha256": "579608928358cdccd093716a3f5e49e699a5f228639d3a20aa5152d7243e4b23",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-14.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 855,
+      "day": "2025-09-15",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-15.zip",
+      "month": "2025-09",
+      "sha256": "739addc7d65be3c5ffc99b6f4e2c9f4b7461022a3385093ec80b1ff0eee95433",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-15.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 949,
+      "day": "2025-09-16",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-16.zip",
+      "month": "2025-09",
+      "sha256": "d47beb7608d4db09eeda341dd124279978f254b711d4dc2f6e796bf253f12faf",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-16.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 970,
+      "day": "2025-09-17",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-17.zip",
+      "month": "2025-09",
+      "sha256": "ba6df54b8afedd333d13af9db5a4646f6247a00ede21b2bc9fa87c327686b716",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-17.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 981,
+      "day": "2025-09-18",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-18.zip",
+      "month": "2025-09",
+      "sha256": "5b32f654377a5078cf6972e925d9222aa818be7c52e8827004c983f122ba6b87",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-18.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 949,
+      "day": "2025-09-19",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-19.zip",
+      "month": "2025-09",
+      "sha256": "c0eb27368c1d7c6aa548d3e488c9907ad9098ae35d1533ef64151085ce394089",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-19.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 850,
+      "day": "2025-09-20",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-20.zip",
+      "month": "2025-09",
+      "sha256": "2d5d92d738c974429d45dbe965dcb1028a1e8c8635bd9a376466f7c6ccf337ee",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-20.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 844,
+      "day": "2025-09-21",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-21.zip",
+      "month": "2025-09",
+      "sha256": "284aeeb98c693a5e0a056b2bb61d2656e5f634eeddaeb9d8e080790916d93672",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-21.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 863,
+      "day": "2025-09-22",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-22.zip",
+      "month": "2025-09",
+      "sha256": "6c09cc0cbf24759b6bcea11bd9c4b6e05661e254bcef17bc400463a669469a0f",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-22.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1010,
+      "day": "2025-09-23",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-23.zip",
+      "month": "2025-09",
+      "sha256": "c74e398316af23e8d628478b12281d5c714d82d5250270cedd591ad9d14c203a",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-23.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 953,
+      "day": "2025-09-24",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-24.zip",
+      "month": "2025-09",
+      "sha256": "324758b97be4b6ef708b75de36ecb66100b9f3b6c55dcd8218ed52bd61f29b37",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-24.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1051,
+      "day": "2025-09-25",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-25.zip",
+      "month": "2025-09",
+      "sha256": "17f15909e6dfd103f9e86b21352da890d10bb29893db0ff150f0e129ce2b3281",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-25.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 864,
+      "day": "2025-09-26",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-26.zip",
+      "month": "2025-09",
+      "sha256": "4dbc02ca635b7bdfd831cc3dc062df5a8c832b30429f019b19b9c68290697509",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-26.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-09-27",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-27.zip",
+      "month": "2025-09",
+      "sha256": "db47c7c0f70e8b81524aceb9bd134bfaae5c30094e852b5f38951e7d0a05fb7b",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-27.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 992,
+      "day": "2025-09-28",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-28.zip",
+      "month": "2025-09",
+      "sha256": "21d1e212010d64be3054c08673c77f8fdc9998eba5e4559df9699c2a37f97f3c",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-28.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 963,
+      "day": "2025-09-29",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-29.zip",
+      "month": "2025-09",
+      "sha256": "02a28d1a2ab274933e1880b2437dabe8742a0f67f7ac14875ad63bc250f1d4a0",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-29.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-09-30",
+      "dest": "research_state/data_cache/ETHUSDT_2025_09/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-09-30.zip",
+      "month": "2025-09",
+      "sha256": "6746e91d9ac67e53a87644e4b3f0fbbdfd03ce903a2c2758cb138d1c4966365e",
+      "src": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-1h-2025-09-30.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-10-01",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-01.zip",
+      "month": "2025-10",
+      "sha256": "59996b4c9feae1c93a007fb34f69cbf855f3bcce01e295d4a21b7d26f8a26876",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-01.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 999,
+      "day": "2025-10-02",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-02.zip",
+      "month": "2025-10",
+      "sha256": "3512ef2627922813a7bdf99ef02f81a4fb0e762d589fc4ca008fba5e42941852",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-02.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 855,
+      "day": "2025-10-03",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-03.zip",
+      "month": "2025-10",
+      "sha256": "4bb545df1babd7fac727da66f039993c372bf277e16162ac53a8e9b0f01e7315",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-03.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 853,
+      "day": "2025-10-04",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-04.zip",
+      "month": "2025-10",
+      "sha256": "cc130339dcea0bd282b033ae6e3a50ca735422d28866e43c091834484d198602",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-04.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1016,
+      "day": "2025-10-05",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-05.zip",
+      "month": "2025-10",
+      "sha256": "2860a9984c59e416c040999a05b16c190f5765469ee9f8b7f1c07f4239dfed35",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-05.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 859,
+      "day": "2025-10-06",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-06.zip",
+      "month": "2025-10",
+      "sha256": "93a089476f87b74e9bd3f9980a6c87f78f67589c39aac092bdf0f5c73d66df27",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-06.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1026,
+      "day": "2025-10-07",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-07.zip",
+      "month": "2025-10",
+      "sha256": "7250d2eb55120da64175b33a734179a520dbf87be61d39360baf947532d84227",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-07.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 948,
+      "day": "2025-10-08",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-08.zip",
+      "month": "2025-10",
+      "sha256": "d3c912f879fa63157a490cfafa9954280243fa40d918711bc8c0ca9b70474604",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-08.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1034,
+      "day": "2025-10-09",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-09.zip",
+      "month": "2025-10",
+      "sha256": "cafd7628324ac5d76aa1c2e7b319e6141a96891d080b31bb528e2d6ac4e45c10",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-09.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1006,
+      "day": "2025-10-10",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-10.zip",
+      "month": "2025-10",
+      "sha256": "a95e5babb33bdf1b845bdd3e4f298cd44bbf1ba02c2117207416368f58933c70",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-10.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 883,
+      "day": "2025-10-11",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-11.zip",
+      "month": "2025-10",
+      "sha256": "44dfac035c09aa49a4af684d5bf60404d2e9430f484079bcffd0bfea8e719ad7",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-11.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1037,
+      "day": "2025-10-12",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-12.zip",
+      "month": "2025-10",
+      "sha256": "eeafe794cf031d3dad8617b5101be08f2e177f7a2fed4ab1fe09d78a5ebdc9ec",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-12.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 858,
+      "day": "2025-10-13",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-13.zip",
+      "month": "2025-10",
+      "sha256": "5e438b81df7d18657ffc501594e254d6124fb56853a09229335d3b4dcce6d3a6",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-13.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1008,
+      "day": "2025-10-14",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-14.zip",
+      "month": "2025-10",
+      "sha256": "97306dff8687c729e65e40144ae5da4c47c79e2b1f2967c29aacf809a99eb5fa",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-14.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1020,
+      "day": "2025-10-15",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-15.zip",
+      "month": "2025-10",
+      "sha256": "3cc926c15ffb5816db4dd11f90f0c3389f21d94598586257fb22d4fe3e68992d",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-15.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-10-16",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-16.zip",
+      "month": "2025-10",
+      "sha256": "04e131ba699703e227b1018d6e82514465b94f8cf6a31256ed9242e01d9da63a",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-16.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1023,
+      "day": "2025-10-17",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-17.zip",
+      "month": "2025-10",
+      "sha256": "815692b11ee222d8b53f0d8987a036aefcf5dcb43290e0a8253ae06244a154c8",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-17.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 866,
+      "day": "2025-10-18",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-18.zip",
+      "month": "2025-10",
+      "sha256": "25a57d7f4b12c57aeb79374ea8aaaaf0cebc3dbae3a524dd7bdfd80e488783b6",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-18.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 856,
+      "day": "2025-10-19",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-19.zip",
+      "month": "2025-10",
+      "sha256": "be2a4105e9393463c46645d6512c2b111d17a889676138b3fb8f460a47d97810",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-19.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 871,
+      "day": "2025-10-20",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-20.zip",
+      "month": "2025-10",
+      "sha256": "342933360a032645ba547b2dacbfa03a3792d7953850d311a43c3c1c1a5107d7",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-20.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1016,
+      "day": "2025-10-21",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-21.zip",
+      "month": "2025-10",
+      "sha256": "c4e9c8bde257498aec838f0aa093b4bf2a18cc113d186e9c01ca0ddffebdd456",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-21.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1009,
+      "day": "2025-10-22",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-22.zip",
+      "month": "2025-10",
+      "sha256": "19849aef0eb6e594f82a02d754204159e9e38c86880186d4bd1795f1034784e3",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-22.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1011,
+      "day": "2025-10-23",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-23.zip",
+      "month": "2025-10",
+      "sha256": "2a4177a4c0dd51c57a68681202c1ff668d4bc3b946e00b02a3a60bd329f95782",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-23.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1007,
+      "day": "2025-10-24",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-24.zip",
+      "month": "2025-10",
+      "sha256": "5e5629bd9d45edac09d3c6f35a3d18331866e1f1064633a5a677368eb0aaa5bf",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-24.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 935,
+      "day": "2025-10-25",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-25.zip",
+      "month": "2025-10",
+      "sha256": "10465a18e056bb424aa50c029a8dda0f9ceabf8cab8e2570f382ad108366b056",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-25.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 861,
+      "day": "2025-10-26",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-26.zip",
+      "month": "2025-10",
+      "sha256": "fd1bb15a0ff094614232af55de089cf285ea04ddca704b7d8bada11d7f854be5",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-26.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 944,
+      "day": "2025-10-27",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-27.zip",
+      "month": "2025-10",
+      "sha256": "28abccc8995bf743c2faa6a181b15fb2bb4f2e307abf0b6fea36809cd294df28",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-27.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1019,
+      "day": "2025-10-28",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-28.zip",
+      "month": "2025-10",
+      "sha256": "255e932ee363d7c845e603cc4f58a145bc3ac1d8ff3c8acc220c74f46c6856ca",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-28.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1012,
+      "day": "2025-10-29",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-29.zip",
+      "month": "2025-10",
+      "sha256": "92d85f914f00e4e86042fb564fb4622ccc64dc1115a260c6242630473963a137",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-29.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 966,
+      "day": "2025-10-30",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-30.zip",
+      "month": "2025-10",
+      "sha256": "2df9dcf3fdf4dc6dc7bad2632f70180cf11e496423629b0e9848099068b4e459",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-30.zip",
+      "symbol": "ETHUSDT"
+    },
+    {
+      "bytes": 1020,
+      "day": "2025-10-31",
+      "dest": "research_state/data_cache/ETHUSDT_2025_10/__top_level_placeholders_quarantined_fclr016_20261107T224836Z/ETHUSDT-1h-2025-10-31.zip",
+      "month": "2025-10",
+      "sha256": "ea2d30dfa70ec7d708f540a15f38d2d92b115f6472bf0b3cbc093a451a94dfb6",
+      "src": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-1h-2025-10-31.zip",
+      "symbol": "ETHUSDT"
+    }
+  ],
+  "reason": "top-level same-name daily zip cannot be canonical for multiple kind subdirs; FCLR-016 local_zip ignores top-level for daily kinds; moved (not deleted) for auditability. No outcomes.",
+  "scope": {
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "symbols": [
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT",
+      "BTCUSDT",
+      "ETHUSDT"
+    ]
+  },
+  "timestamp_utc": "20261107T224836Z"
+}
