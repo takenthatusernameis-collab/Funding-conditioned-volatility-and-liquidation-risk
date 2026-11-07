@@ -28,6 +28,10 @@
 
 **AUTHORITY:** This file is the **only** root durable handoff. Reconcile conflicts in durable artifacts.
 
+## SESSION VERIFICATION (2026-11-07T14:06:10Z, git `e3c115b7`; deterministic local work, no network/claim runs)
+- (a) Heavy task executed (step 5 fallback): created `tests/test_fclr014_guardrails.py` (7 tests, all OK) encoding FCLR-014 manifest guardrails: blocks consumed/confounded windows, requires provenance, requires >=3 non-overlapping 30-day test blocks, requires committed exclusions, fail-closed claim outcomes. `python -B -m unittest tests.test_fclr014_guardrails -v` → 7/7 OK. `python -B scripts/tracka_resume_check.py` → pass:true, network:false, writes_real_research_state:false. No `.github/workflows` edits; `__pycache__` untracked.
+- (b) Immutable anchors unchanged; no outcome runs; confirmatory status remains CLOSED NEGATIVE; no overlay eligible. **Do NOT re-probe Track A.**
+- (c) Bottleneck unchanged: provenance UNVERIFIED for cached 2025-01..2026-10; step 2 still required before any confirmatory claim. Guardrails now enforce fail-closed behavior.
 ---
 
 ## SESSION VERIFICATION (2026-11-07T14:01:28Z, git `e3c115b7`; deterministic local work, no network/claim runs)
