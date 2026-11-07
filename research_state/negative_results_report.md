@@ -199,3 +199,16 @@ holdout reuse, no split changes.
 - Exhaustive timestamp audit of 5-symbol common panel shows all partitions consumed; only 2024-10-01 unused (1 day). No >=30-day contiguous window outside sealed partitions.
 - Cannot satisfy >=3 non-overlapping 30-day blocks without reusing sealed holdouts -> forbidden.
 - Result: BLOCKED with full evidence; gate remains not met.
+
+## FCLR-013 (2026-11-07T11:07:34Z) — Track C funding-conditioned volatility confirmatory reopen — gate NOT_MET (negative, preserved)
+- **Outcome:** NOT_SUPPORTED (forecast gate NOT_MET). Confirmatory reopen on the frozen GO-candidate 2026 Q3 5-symbol panel (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT; 2026-07-01..2026-09-30, 92 days). Prereg frozen before outcomes: `research_state/pre_registration_fclr013_20261107T094132Z.md` v1.0 (git af8c2eb2). Splits registered frozen_before_outcomes=true in `research_state/run_manifest.json` under `split_boundaries_fclr013`. No outcomes inspected before registration; no tuning on sealed test; no overlay; no threshold shopping; no credentials/paid/manual/network in claim run.
+- **Primary contrast C2 vs B1 (next-24h RV QLIKE, lower better):** paired block bootstrap (24h blocks, 2000 reps, deterministic seed), paired n=4199.
+  - Mean diff (C2 - B1): +0.005953 (C2 higher QLIKE = worse).
+  - 95% CI [-0.011716, 0.022101] — crosses zero -> uncertainty does NOT support improvement.
+  - Relative QLIKE reduction: -1.32% -> below the frozen >=2% materiality floor.
+  - Gate criterion "CI supports improvement AND relative reduction >= 2%": NOT_MET.
+- **Claim-worthiness:** instruments=5 (PASS >=5). Test window 2026-08-26..2026-09-30 = 36 days = 1 non-overlapping 30-day block -> >=3: NOT_MET (only 1 block; equivalent coverage not satisfied).
+- **Secondary contrasts:** C1 vs B1 -0.015018 (CI [-0.030304,-0.003729], excludes zero, 3.32% improvement — secondary only, not the primary); C2 vs C1 +0.020971 (CI [0.003206,0.039391], C2 measurably WORSE than C1; price-dislocation/EMA features degrade the forecast).
+- **Interpretation:** C2 (RV+funding+dislocation) is dominated by C1 (RV+funding) on this panel; dislocation features add no incremental value and actively hurt. H001 (funding-conditioned volatility forecast vs RV-only) remains NOT_SUPPORTED on every claim-worthy panel executed (FCLR-003, FCLR-008, v3 30d/5sym, FCLR-013). Risk overlay INELIGIBLE (gate not met). Preserve the null; do not promote; do not relabel as positive.
+- **Artifact:** `research_state/evaluation_summary_FCLR-013.md` sha256 `107bc981ebb6f519205b42f94ce778e14b445036f4758995914dabb0ef6bd08a` (generated 2026-11-07T11:07:34Z). No `run_manifest_fclr013_*.json` emitted by `scripts/run_evaluation.py`; split key already present in `run_manifest.json`.
+- **What must not be repeated:** do not relax block/multiplicity/materiality gates after seeing outcomes; do not chase the C1-vs-B1 secondary as a primary pass; do not build/tune an overlay on this sealed holdout.
