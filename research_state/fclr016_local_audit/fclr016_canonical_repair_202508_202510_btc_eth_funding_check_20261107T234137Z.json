@@ -1,0 +1,93 @@
+{
+  "action": "bounded_canonical_repair_download",
+  "kinds": [
+    "fundingRate"
+  ],
+  "months": [
+    "2025-08",
+    "2025-09",
+    "2025-10"
+  ],
+  "records": [
+    {
+      "action": "SKIP_EXISTS",
+      "canonical_path": "research_state/data_cache/BTCUSDT_2025_08/BTCUSDT-fundingRate-2025-08.zip",
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 927,
+      "local_sha256": "1180129860b6e196e8d70bb9719e81573aa6b4acb423ba5ee7f82f10c836f7ab",
+      "month": "2025-08",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-08.zip"
+    },
+    {
+      "action": "SKIP_EXISTS",
+      "canonical_path": "research_state/data_cache/BTCUSDT_2025_09/BTCUSDT-fundingRate-2025-09.zip",
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 941,
+      "local_sha256": "21dc6570fc6bffad0e7b5f9e99211b82ad07c95ab4f18c3a2daa3b95ec98344c",
+      "month": "2025-09",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-09.zip"
+    },
+    {
+      "action": "SKIP_EXISTS",
+      "canonical_path": "research_state/data_cache/BTCUSDT_2025_10/BTCUSDT-fundingRate-2025-10.zip",
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 944,
+      "local_sha256": "9ecdedab6344fc4cdb154763266b8e09627a71c3cc5574cf868158b541c259c2",
+      "month": "2025-10",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-10.zip"
+    },
+    {
+      "action": "SKIP_EXISTS",
+      "canonical_path": "research_state/data_cache/ETHUSDT_2025_08/ETHUSDT-fundingRate-2025-08.zip",
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 922,
+      "local_sha256": "c3fca21c71afb4962e89f8e3d84afe5832019ed8f570ee7c7c299f2436a28b62",
+      "month": "2025-08",
+      "symbol": "ETHUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2025-08.zip"
+    },
+    {
+      "action": "SKIP_EXISTS",
+      "canonical_path": "research_state/data_cache/ETHUSDT_2025_09/ETHUSDT-fundingRate-2025-09.zip",
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 934,
+      "local_sha256": "2fa09df245aadc73cf43f837a72c3009fcd7d10c8c4e3db48b2d1021c331841a",
+      "month": "2025-09",
+      "symbol": "ETHUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2025-09.zip"
+    },
+    {
+      "action": "SKIP_EXISTS",
+      "canonical_path": "research_state/data_cache/ETHUSDT_2025_10/ETHUSDT-fundingRate-2025-10.zip",
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 953,
+      "local_sha256": "1ae86c5fb1f15d8792906b746cc7598ebe7e6e7194b74501db79c874e37d7e14",
+      "month": "2025-10",
+      "symbol": "ETHUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2025-10.zip"
+    }
+  ],
+  "repair_identity_ok": true,
+  "sample_days_arg": "full",
+  "source_base": "https://data.binance.vision/",
+  "source_note": "Binance Vision public unauthenticated archive; no auth/paid/manual/key bypass; license/terms: record source URL+access time+remote metadata; confirmatory use still requires explicit license/terms/completeness/leakage/prereg verification per FCLR-014.",
+  "summary": {
+    "SKIP_EXISTS": 6,
+    "sha256_mismatch_after_download": 0,
+    "total": 6
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "timestamp_utc": "20261107T234137Z"
+}

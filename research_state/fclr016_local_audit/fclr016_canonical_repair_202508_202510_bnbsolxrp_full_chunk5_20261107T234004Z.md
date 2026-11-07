@@ -1,0 +1,90 @@
+# FCLR-016 canonical cache repair (20261107T234004Z_202508_202510_bnbsolxrp_full_chunk5)
+
+- source_base: https://data.binance.vision/
+- repair_identity_ok: **True** (bounded repair; not confirmatory GO)
+- summary: `{"DOWNLOADED": 150, "SKIP_EXISTS": 902, "sha256_mismatch_after_download": 0, "total": 1052}`
+
+## Source/terms note
+Binance Vision public unauthenticated archive; no auth/paid/manual/key bypass; license/terms: record source URL+access time+remote metadata; confirmatory use still requires explicit license/terms/completeness/leakage/prereg verification per FCLR-014.
+
+## Non-skip records (first 80)
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-20 status=200 local=1641ad178c8a63e2 remote=1641ad178c8a63e2
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-21 status=200 local=fe8c12e6b8658a81 remote=fe8c12e6b8658a81
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-22 status=200 local=0b3397ff024c00c0 remote=0b3397ff024c00c0
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-23 status=200 local=a84d20fdbb8954a9 remote=a84d20fdbb8954a9
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-24 status=200 local=84240f73ba0868a2 remote=84240f73ba0868a2
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-25 status=200 local=f4325b2b7c5b9087 remote=f4325b2b7c5b9087
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-26 status=200 local=c359073a60c3d3d4 remote=c359073a60c3d3d4
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-27 status=200 local=76ecfc7d57ba9b6b remote=76ecfc7d57ba9b6b
+- DOWNLOADED XRPUSDT 2025-09 klines 2025-09-29 status=200 local=332f09e0c6a6b770 remote=332f09e0c6a6b770
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-02 status=200 local=2055d80bb80c2a0e remote=2055d80bb80c2a0e
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-03 status=200 local=d1eccab4f4c2008c remote=d1eccab4f4c2008c
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-04 status=200 local=0f70faee02b150b2 remote=0f70faee02b150b2
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-05 status=200 local=7be8b7d03046d0dc remote=7be8b7d03046d0dc
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-06 status=200 local=6a8aa4ae942c1815 remote=6a8aa4ae942c1815
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-07 status=200 local=c8867fa8ecec7af2 remote=c8867fa8ecec7af2
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-08 status=200 local=db8566f2fe36c4c7 remote=db8566f2fe36c4c7
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-09 status=200 local=ebacef2f10b185f8 remote=ebacef2f10b185f8
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-10 status=200 local=1c5f520a3b7e8744 remote=1c5f520a3b7e8744
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-11 status=200 local=0a40c7300b3efbdb remote=0a40c7300b3efbdb
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-12 status=200 local=f2d6f100e42c2494 remote=f2d6f100e42c2494
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-13 status=200 local=51db023136edc576 remote=51db023136edc576
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-14 status=200 local=93dc0675484e6543 remote=93dc0675484e6543
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-16 status=200 local=9bc3a682f35d25bb remote=9bc3a682f35d25bb
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-17 status=200 local=840b500568f774a4 remote=840b500568f774a4
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-18 status=200 local=1bb6191984d73c74 remote=1bb6191984d73c74
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-19 status=200 local=811f71c667133557 remote=811f71c667133557
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-20 status=200 local=b7dadd89769cc606 remote=b7dadd89769cc606
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-21 status=200 local=8f50b3b33037a644 remote=8f50b3b33037a644
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-22 status=200 local=3ed3cd3003f32be0 remote=3ed3cd3003f32be0
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-23 status=200 local=63735aee2b258777 remote=63735aee2b258777
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-24 status=200 local=92955f86464233cc remote=92955f86464233cc
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-25 status=200 local=a1e7d70835744e83 remote=a1e7d70835744e83
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-26 status=200 local=4961e53685714865 remote=4961e53685714865
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-27 status=200 local=e319f8e997e40f40 remote=e319f8e997e40f40
+- DOWNLOADED XRPUSDT 2025-09 markPriceKlines 2025-09-29 status=200 local=ba911751e97bc578 remote=ba911751e97bc578
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-02 status=200 local=033b375251353840 remote=033b375251353840
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-03 status=200 local=9aaee9e812de6329 remote=9aaee9e812de6329
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-04 status=200 local=f5412d1ed2740e26 remote=f5412d1ed2740e26
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-05 status=200 local=97ee2dc8c6c8caf2 remote=97ee2dc8c6c8caf2
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-06 status=200 local=407d9083be19b4fe remote=407d9083be19b4fe
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-07 status=200 local=a44c4b7c05d7e7cf remote=a44c4b7c05d7e7cf
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-08 status=200 local=c056ca274cbd5527 remote=c056ca274cbd5527
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-09 status=200 local=486500acc79e847c remote=486500acc79e847c
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-10 status=200 local=e39b3d0a20e6637a remote=e39b3d0a20e6637a
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-11 status=200 local=64608fc9830989dc remote=64608fc9830989dc
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-12 status=200 local=32eafb0a789ae872 remote=32eafb0a789ae872
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-13 status=200 local=8ebf7ab770d20593 remote=8ebf7ab770d20593
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-14 status=200 local=520f03bfacf3a37b remote=520f03bfacf3a37b
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-16 status=200 local=eee546518c17dc16 remote=eee546518c17dc16
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-17 status=200 local=a0ee2e5072eb26b0 remote=a0ee2e5072eb26b0
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-18 status=200 local=a85473dc63db4ac4 remote=a85473dc63db4ac4
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-19 status=200 local=22d57929acdb95f3 remote=22d57929acdb95f3
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-20 status=200 local=4555e671638d1aaa remote=4555e671638d1aaa
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-21 status=200 local=9f9fcebf285c7dfb remote=9f9fcebf285c7dfb
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-22 status=200 local=fa0f7e5eac195014 remote=fa0f7e5eac195014
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-23 status=200 local=6ed8f22c08dfb330 remote=6ed8f22c08dfb330
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-24 status=200 local=0ffe6d69e5c83296 remote=0ffe6d69e5c83296
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-25 status=200 local=9a107a496462d438 remote=9a107a496462d438
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-26 status=200 local=9cea3961e818caed remote=9cea3961e818caed
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-27 status=200 local=79cd0f916ff85577 remote=79cd0f916ff85577
+- DOWNLOADED XRPUSDT 2025-09 indexPriceKlines 2025-09-29 status=200 local=0f46aeb6774f5092 remote=0f46aeb6774f5092
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-02 status=200 local=cd0ca5ab10cb2bc5 remote=cd0ca5ab10cb2bc5
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-03 status=200 local=05716e2a2b586860 remote=05716e2a2b586860
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-04 status=200 local=df0dd807b9256b7f remote=df0dd807b9256b7f
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-05 status=200 local=5442934096a41ec9 remote=5442934096a41ec9
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-06 status=200 local=3e1e05eb2781c165 remote=3e1e05eb2781c165
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-07 status=200 local=b9840ee11bd8407d remote=b9840ee11bd8407d
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-08 status=200 local=a6febf8554a1773b remote=a6febf8554a1773b
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-09 status=200 local=b3c972aa9769c9a4 remote=b3c972aa9769c9a4
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-10 status=200 local=b4bb95b77764d369 remote=b4bb95b77764d369
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-11 status=200 local=0d6be179a7616b00 remote=0d6be179a7616b00
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-12 status=200 local=623e54894a6ff737 remote=623e54894a6ff737
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-13 status=200 local=94f7d0f686600af9 remote=94f7d0f686600af9
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-14 status=200 local=01c6fd34b479210d remote=01c6fd34b479210d
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-16 status=200 local=0102667accdf41c4 remote=0102667accdf41c4
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-17 status=200 local=c3720ab4ec5edbec remote=c3720ab4ec5edbec
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-18 status=200 local=35996d07a1524af6 remote=35996d07a1524af6
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-19 status=200 local=6910326deebf2960 remote=6910326deebf2960
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-20 status=200 local=d993d1e7d1ceb7c8 remote=d993d1e7d1ceb7c8
+- DOWNLOADED XRPUSDT 2025-09 premiumIndexKlines 2025-09-21 status=200 local=757f237a9a0c098a remote=757f237a9a0c098a

@@ -1,0 +1,90 @@
+# FCLR-016 canonical cache repair (20261107T233634Z_202508_202510_bnbsolxrp_full_chunk3)
+
+- source_base: https://data.binance.vision/
+- repair_identity_ok: **True** (bounded repair; not confirmatory GO)
+- summary: `{"DOWNLOADED": 150, "SKIP_EXISTS": 558, "sha256_mismatch_after_download": 0, "total": 708}`
+
+## Source/terms note
+Binance Vision public unauthenticated archive; no auth/paid/manual/key bypass; license/terms: record source URL+access time+remote metadata; confirmatory use still requires explicit license/terms/completeness/leakage/prereg verification per FCLR-014.
+
+## Non-skip records (first 80)
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-13 status=200 local=8cfb55267e49dc1d remote=8cfb55267e49dc1d
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-14 status=200 local=78cd97e4a970108d remote=78cd97e4a970108d
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-16 status=200 local=bcde6a5e883a4602 remote=bcde6a5e883a4602
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-17 status=200 local=32596ae9218e756f remote=32596ae9218e756f
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-18 status=200 local=e524d094cd90ebbc remote=e524d094cd90ebbc
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-19 status=200 local=131321f392b0ef7c remote=131321f392b0ef7c
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-20 status=200 local=8e90e8a6b76e942b remote=8e90e8a6b76e942b
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-21 status=200 local=7c2ebf1514e44ea7 remote=7c2ebf1514e44ea7
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-22 status=200 local=ecf85beca609f998 remote=ecf85beca609f998
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-23 status=200 local=01505f83d29b0504 remote=01505f83d29b0504
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-24 status=200 local=4f12e59dfca337c0 remote=4f12e59dfca337c0
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-25 status=200 local=9eb0bf84101ed4d9 remote=9eb0bf84101ed4d9
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-26 status=200 local=23a29b3b987e9efb remote=23a29b3b987e9efb
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-27 status=200 local=5eb60459e290a644 remote=5eb60459e290a644
+- DOWNLOADED SOLUSDT 2025-09 markPriceKlines 2025-09-29 status=200 local=eeb08d57465541d7 remote=eeb08d57465541d7
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-02 status=200 local=b0c0e58557bf4012 remote=b0c0e58557bf4012
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-03 status=200 local=2ebbb90d4fe8a493 remote=2ebbb90d4fe8a493
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-04 status=200 local=14a2f126e48cca45 remote=14a2f126e48cca45
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-05 status=200 local=637ea46f250555fa remote=637ea46f250555fa
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-06 status=200 local=e60e2a1b2d856217 remote=e60e2a1b2d856217
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-07 status=200 local=42fb359e0ee576e5 remote=42fb359e0ee576e5
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-08 status=200 local=9a3c455331f6e77d remote=9a3c455331f6e77d
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-09 status=200 local=59fde3677a4eac09 remote=59fde3677a4eac09
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-10 status=200 local=52061a1ba40c0fee remote=52061a1ba40c0fee
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-11 status=200 local=76c4737148db4666 remote=76c4737148db4666
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-12 status=200 local=4ad2646b36a98108 remote=4ad2646b36a98108
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-13 status=200 local=8e466e811f2da0d3 remote=8e466e811f2da0d3
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-14 status=200 local=3d1b379c5221f727 remote=3d1b379c5221f727
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-16 status=200 local=c36fb273f1602c32 remote=c36fb273f1602c32
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-17 status=200 local=693196d5accdadc8 remote=693196d5accdadc8
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-18 status=200 local=0e4322a19ac3611b remote=0e4322a19ac3611b
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-19 status=200 local=b4eccdbc15a75eb6 remote=b4eccdbc15a75eb6
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-20 status=200 local=0cfa57cb80df8cc2 remote=0cfa57cb80df8cc2
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-21 status=200 local=7f9360c9f731a5ee remote=7f9360c9f731a5ee
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-22 status=200 local=872a0d1282e389d8 remote=872a0d1282e389d8
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-23 status=200 local=3c5208cb1fd23bbd remote=3c5208cb1fd23bbd
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-24 status=200 local=153b18a3888ccd31 remote=153b18a3888ccd31
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-25 status=200 local=21be77bf3ce65bcc remote=21be77bf3ce65bcc
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-26 status=200 local=fd4d0e40ca57263c remote=fd4d0e40ca57263c
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-27 status=200 local=d7490a5dbefe6af9 remote=d7490a5dbefe6af9
+- DOWNLOADED SOLUSDT 2025-09 indexPriceKlines 2025-09-29 status=200 local=eca8d2ac235dac92 remote=eca8d2ac235dac92
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-02 status=200 local=efe8b1e24bcae671 remote=efe8b1e24bcae671
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-03 status=200 local=db452c1e9ac3994d remote=db452c1e9ac3994d
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-04 status=200 local=ea82951238f772ef remote=ea82951238f772ef
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-05 status=200 local=66817bf05cc582fe remote=66817bf05cc582fe
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-06 status=200 local=2bba1fca6ffdaae5 remote=2bba1fca6ffdaae5
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-07 status=200 local=e7021960217be0fe remote=e7021960217be0fe
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-08 status=200 local=b1aefb9ebe7f225f remote=b1aefb9ebe7f225f
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-09 status=200 local=8745c8caddb6d7ba remote=8745c8caddb6d7ba
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-10 status=200 local=88bfd874f46ba40e remote=88bfd874f46ba40e
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-11 status=200 local=cebde3f10817a74e remote=cebde3f10817a74e
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-12 status=200 local=ae10a1be47f6f3c8 remote=ae10a1be47f6f3c8
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-13 status=200 local=edcd14191c0bd091 remote=edcd14191c0bd091
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-14 status=200 local=817252cecf989f8f remote=817252cecf989f8f
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-16 status=200 local=3f78ced5e45665a8 remote=3f78ced5e45665a8
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-17 status=200 local=39750a26f7c82f52 remote=39750a26f7c82f52
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-18 status=200 local=218ca1d0a80c6f94 remote=218ca1d0a80c6f94
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-19 status=200 local=88c81608e410c206 remote=88c81608e410c206
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-20 status=200 local=b8927c770c1e3ed6 remote=b8927c770c1e3ed6
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-21 status=200 local=47b613802110b8a3 remote=47b613802110b8a3
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-22 status=200 local=3ff86ec97ed54884 remote=3ff86ec97ed54884
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-23 status=200 local=2433e6bb148c3bc4 remote=2433e6bb148c3bc4
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-24 status=200 local=8e40b4f317133f8a remote=8e40b4f317133f8a
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-25 status=200 local=9d05ddbe0b0c5f41 remote=9d05ddbe0b0c5f41
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-26 status=200 local=8ebac3c642c2ab7f remote=8ebac3c642c2ab7f
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-27 status=200 local=e6e53cbd33d12190 remote=e6e53cbd33d12190
+- DOWNLOADED SOLUSDT 2025-09 premiumIndexKlines 2025-09-29 status=200 local=7f31eb9354be4cef remote=7f31eb9354be4cef
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-02 status=200 local=986b3859c860aab8 remote=986b3859c860aab8
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-03 status=200 local=a328ad3d09bfbe2c remote=a328ad3d09bfbe2c
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-04 status=200 local=8f3d018b294eb284 remote=8f3d018b294eb284
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-05 status=200 local=dd3232e6a62ae552 remote=dd3232e6a62ae552
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-06 status=200 local=bf5e4a11cc0b8b6e remote=bf5e4a11cc0b8b6e
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-07 status=200 local=766ef74126244604 remote=766ef74126244604
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-08 status=200 local=2ef798328cef7c8a remote=2ef798328cef7c8a
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-09 status=200 local=fe72767b3f8d7a0b remote=fe72767b3f8d7a0b
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-10 status=200 local=1e0da4a4c649bc36 remote=1e0da4a4c649bc36
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-11 status=200 local=4fb19d91560d571a remote=4fb19d91560d571a
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-12 status=200 local=8a047dafff75d654 remote=8a047dafff75d654
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-13 status=200 local=d67cec0ec7d48c95 remote=d67cec0ec7d48c95
+- DOWNLOADED SOLUSDT 2025-10 klines 2025-10-14 status=200 local=b714b354124804e6 remote=b714b354124804e6
