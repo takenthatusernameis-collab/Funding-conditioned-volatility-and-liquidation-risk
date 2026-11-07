@@ -11,8 +11,7 @@
 - [x] Missing data treated as NaN (not imputed as zero)
 
 ## Funding ablations (Gate 4, multi-split pilot, direct-variance OLS)
-- **Updated:** 2026-11-07T03:29:01Z (latest run: v2 5-symbol side run; v1 4-symbol outputs preserved separately)
-- **v1 prereg:** `research_state/pre_registration_gate4_funding_multisplit_20261107.md` (unchanged). **v2 prereg (frozen before outcomes):** `research_state/pre_registration_gate4_funding_multisplit_v2_5sym_20261107T032439Z.md`.
+- **Updated:** 2026-11-07T03:45:53Z
 - [x] Funding ffill last-known at/before hour (no future).
 - [x] Trailing funding stats past-only on aligned series.
 - [x] Chronological multi-split walk-forward, purge/embargo=7d.

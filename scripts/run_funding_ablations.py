@@ -37,11 +37,20 @@ RES = REPO / "research_state"
 ZIPS_DIR = REPO
 EPS = 1e-12
 
-PRE_REG_SPLITS = [
+CACHE = RES / "data_cache"
+
+PRE_REG_SPLITS_V1 = [
     {"id": 0, "train": ("2024-01-01T00:00:00+00:00", "2024-01-28T23:59:59+00:00"), "test": ("2024-02-05T00:00:00+00:00", "2024-02-18T23:59:59+00:00")},
     {"id": 1, "train": ("2024-01-15T00:00:00+00:00", "2024-02-11T23:59:59+00:00"), "test": ("2024-02-19T00:00:00+00:00", "2024-03-03T23:59:59+00:00")},
     {"id": 2, "train": ("2024-01-29T00:00:00+00:00", "2024-02-25T23:59:59+00:00"), "test": ("2024-03-04T00:00:00+00:00", "2024-03-17T23:59:59+00:00")},
 ]
+PRE_REG_SPLITS_V3_30D = [
+    {"id": 0, "train": ("2024-04-01T00:00:00+00:00", "2024-05-07T23:59:59+00:00"), "test": ("2024-05-15T00:00:00+00:00", "2024-06-13T23:59:59+00:00")},
+    {"id": 1, "train": ("2024-04-01T00:00:00+00:00", "2024-06-06T23:59:59+00:00"), "test": ("2024-06-14T00:00:00+00:00", "2024-07-13T23:59:59+00:00")},
+    {"id": 2, "train": ("2024-04-01T00:00:00+00:00", "2024-07-06T23:59:59+00:00"), "test": ("2024-07-14T00:00:00+00:00", "2024-08-12T23:59:59+00:00")},
+    {"id": 3, "train": ("2024-04-01T00:00:00+00:00", "2024-08-05T23:59:59+00:00"), "test": ("2024-08-13T00:00:00+00:00", "2024-09-11T23:59:59+00:00")},
+]
+PRE_REG_SPLITS = PRE_REG_SPLITS_V1  # default/v1; tests import this name
 PURGE_DAYS = 7
 EMBARGO_DAYS = 7
 BOOTSTRAP_SEED = 12345
@@ -74,55 +83,152 @@ def ensure_extracted(symbols: List[str]) -> None:
             continue
 
 
-def load_funding_panel(symbols: List[str], start: str, end: str) -> pd.DataFrame:
+def _iter_readable_sources(patterns: List[str], prefer_csv: bool = True, include_cache: bool = False) -> List[Path]:
+    """Deterministic local sources (CSV/ZIP). RAW primary; cache opt-in to preserve v1 behavior."""
+    seen = set()
+    out: List[Path] = []
+    roots = [RAW]
+    if include_cache and CACHE.exists():
+        roots.append(CACHE)
+    for root in roots:
+        for pat in patterns:
+            for fp in sorted(root.glob(pat)):
+                if not fp.is_file():
+                    continue
+                key = fp.resolve()
+                if key in seen:
+                    continue
+                seen.add(key)
+                out.append(fp)
+    if prefer_csv:
+        csvs = [p for p in out if p.suffix.lower() == '.csv']
+        zips = [p for p in out if p.suffix.lower() == '.zip']
+        stems = {p.stem for p in csvs}
+        zips = [z for z in zips if z.stem not in stems]
+        out = sorted(csvs) + sorted(zips)
+    return sorted(out, key=lambda x: (x.suffix != '.csv', str(x)))
+
+
+def _load_table(path: Path) -> pd.DataFrame:
+    if path.suffix.lower() == '.zip':
+        import zipfile
+        with zipfile.ZipFile(path) as zf:
+            names = [n for n in zf.namelist() if n.lower().endswith('.csv')]
+            if not names:
+                raise ValueError(f'no csv in {path}')
+            # deterministic: first csv
+            with zf.open(sorted(names)[0]) as f:
+                return pd.read_csv(f)
+    return pd.read_csv(path)
+
+
+def load_funding_series(symbols: List[str], start: str, end: str, include_cache: bool = False) -> pd.DataFrame:
     ensure_extracted(symbols)
     frames = []
     for sym in symbols:
         flist = []
-        for fp in sorted(RAW.glob(f"{sym}-fundingRate-*.csv")):
+        pats = [f"{sym}-fundingRate-*.csv", f"{sym}-fundingRate-*.zip",
+                f"{sym}_*/{sym}-fundingRate-*.csv", f"{sym}_*/{sym}-fundingRate-*.zip",
+                f"{sym}_*/*/{sym}-fundingRate-*.csv", f"{sym}_*/*/{sym}-fundingRate-*.zip"]
+        for fp in _iter_readable_sources(pats, include_cache=include_cache):
+            if sym not in fp.name or 'fundingRate' not in fp.name:
+                continue
             try:
-                flist.append(loader.load_funding(fp))
+                df = _load_table(fp)
+                df = df.rename(columns={c: c.strip() for c in df.columns})
+                if 'calc_time' not in df.columns:
+                    continue
+                df['calc_time'] = loader._to_utc_ms(df['calc_time'])
+                df = df.sort_values('calc_time').drop_duplicates('calc_time', keep='last').set_index('calc_time')
+                if 'last_funding_rate' in df.columns:
+                    df['last_funding_rate'] = pd.to_numeric(df['last_funding_rate'], errors='coerce')
+                if 'funding_interval_hours' in df.columns:
+                    df['funding_interval_hours'] = pd.to_numeric(df['funding_interval_hours'], errors='coerce').astype('Int64')
+                flist.append(df)
             except Exception:
                 continue
         if not flist:
             continue
         fdf = pd.concat(flist).sort_index()
-        fdf = fdf.loc[(fdf.index >= pd.Timestamp(start, tz="UTC")) & (fdf.index <= pd.Timestamp(end, tz="UTC") + pd.Timedelta(days=1))]
-        fdf = fdf.reset_index().rename(columns={"calc_time": "timestamp"})
-        fdf["symbol"] = sym
+        fdf = fdf.loc[(fdf.index >= pd.Timestamp(start, tz='UTC')) & (fdf.index <= pd.Timestamp(end, tz='UTC') + pd.Timedelta(days=1))]
+        fdf = fdf.reset_index().rename(columns={'calc_time': 'timestamp'})
+        fdf['symbol'] = sym
         frames.append(fdf)
     if not frames:
-        raise RuntimeError("No funding data loaded")
+        raise RuntimeError('No funding data loaded')
     panel = pd.concat(frames, ignore_index=True)
-    panel["timestamp"] = pd.to_datetime(panel["timestamp"], utc=True)
-    return panel.set_index(["symbol", "timestamp"]).sort_index()
+    panel['timestamp'] = pd.to_datetime(panel['timestamp'], utc=True)
+    return panel.set_index(['symbol', 'timestamp']).sort_index()
 
 
-def load_kline_panel(symbols: List[str], start: str, end: str, horizon: int = 24) -> pd.DataFrame:
+def load_kline_series(symbols: List[str], start: str, end: str, horizon: int = 24, include_cache: bool = False) -> pd.DataFrame:
     ensure_extracted(symbols)
     frames = []
     for sym in symbols:
         klist = []
-        for kf in sorted(RAW.glob(f"{sym}-1h-*.csv")):
+        pats = [f"{sym}-1h-*.csv", f"{sym}-1h-*.zip",
+                f"{sym}_*/{sym}-1h-*.csv", f"{sym}_*/{sym}-1h-*.zip",
+                f"{sym}_*/klines-*/{sym}-1h-*.csv", f"{sym}_*/klines-*/{sym}-1h-*.zip"]
+        for fp in _iter_readable_sources(pats, include_cache=include_cache):
+            if sym not in fp.name or '1h' not in fp.name or 'fundingRate' in fp.name:
+                continue
+            # skip mark/index/premium kline variants
+            if any(x in str(fp) for x in ('indexPriceKlines', 'markPriceKlines', 'premiumIndexKlines')):
+                continue
             try:
-                klist.append(loader.load_klines(kf))
+                df = _load_table(fp)
+                df = df.rename(columns={c: c.strip() for c in df.columns})
+                if 'open_time' not in df.columns:
+                    continue
+                df['open_time'] = loader._to_utc_ms(df['open_time'])
+                df = df.sort_values('open_time').drop_duplicates('open_time', keep='last').set_index('open_time')
+                for col in ['open', 'high', 'low', 'close', 'volume']:
+                    if col in df.columns:
+                        df[col] = pd.to_numeric(df[col], errors='coerce')
+                c = pd.to_numeric(df.get('close'), errors='coerce')
+                if c is None or len(c) == 0:
+                    continue
+                pos = c[c > 0]
+                if len(pos) == 0 or (c <= 0).mean() > 0.2:
+                    continue
+                df.loc[c <= 0, 'close'] = np.nan
+                df['_file_med_close'] = float(pos.median())
+                klist.append(df)
             except Exception:
                 continue
         if not klist:
             continue
         kdf = pd.concat(klist).sort_index()
-        kdf = kdf.loc[(kdf.index >= pd.Timestamp(start, tz="UTC")) & (kdf.index <= pd.Timestamp(end, tz="UTC") + timedelta(days=1))]
+        # deterministic integrity: drop file-slices whose median close is wildly inconsistent
+        # with symbol's robust center (catches corrupt local cache artifacts, e.g. BTC close ~1e-3).
+        # This is a data-quality guard, not outcome tuning; threshold is scale-ratio only.
+        if '_file_med_close' in kdf.columns:
+            ref = pd.to_numeric(kdf['_file_med_close'], errors='coerce')
+            center = float(ref[ref > 0].median()) if (ref > 0).any() else None
+            if center and center > 0:
+                bad = (ref <= 0) | (ref < center / 500.0) | (ref > center * 500.0)
+                kdf = kdf.loc[~bad].copy()
+            kdf = kdf.drop(columns=['_file_med_close'], errors='ignore')
+        kdf = kdf.loc[(kdf.index >= pd.Timestamp(start, tz='UTC')) & (kdf.index <= pd.Timestamp(end, tz='UTC') + timedelta(days=1))]
         kdf = vf.add_rv_features(kdf, short_windows=[6, 24], long_windows=[168])
-        kdf["target_rv"] = vf.forward_rv(kdf["close"], horizon=horizon)
-        kdf["rv_lag"] = kdf["rv_trail_24"].shift(1)
-        kdf = kdf.reset_index().rename(columns={"open_time": "timestamp"})
-        kdf["symbol"] = sym
+        kdf['target_rv'] = vf.forward_rv(kdf['close'], horizon=horizon)
+        kdf['rv_lag'] = kdf['rv_trail_24'].shift(1)
+        kdf = kdf.reset_index().rename(columns={'open_time': 'timestamp'})
+        kdf['symbol'] = sym
         frames.append(kdf)
     if not frames:
-        raise RuntimeError("No kline data loaded")
+        raise RuntimeError('No kline data loaded')
     panel = pd.concat(frames, ignore_index=True)
-    panel["timestamp"] = pd.to_datetime(panel["timestamp"], utc=True)
-    return panel.set_index(["symbol", "timestamp"]).sort_index()
+    panel['timestamp'] = pd.to_datetime(panel['timestamp'], utc=True)
+    return panel.set_index(['symbol', 'timestamp']).sort_index()
+
+
+def load_funding_panel(symbols: List[str], start: str, end: str, include_cache: bool = False) -> pd.DataFrame:
+    return load_funding_series(symbols, start, end, include_cache=include_cache)
+
+
+def load_kline_panel(symbols: List[str], start: str, end: str, horizon: int = 24, include_cache: bool = False) -> pd.DataFrame:
+    return load_kline_series(symbols, start, end, horizon=horizon, include_cache=include_cache)
 
 
 def add_funding_to_panel(kpanel: pd.DataFrame, fpanel: pd.DataFrame) -> pd.DataFrame:
@@ -236,24 +342,26 @@ def block_bootstrap_delta_ci(paired: pd.DataFrame, block_hours: int = BOOTSTRAP_
     return {"point": point, "ci_low": float(diffs_sorted[lo_i]), "ci_high": float(diffs_sorted[hi_i]), "n_obs": int(len(paired)), "n_blocks": n_blocks, "n_reps": int(len(diffs)), "seed": seed, "block_hours": block_hours, "alpha": alpha}
 
 
-def build_prereg_splits() -> List[SplitBounds]:
+def build_prereg_splits(splits: Optional[List[Dict[str, object]]] = None) -> List[wf.SplitBounds]:
+    src = PRE_REG_SPLITS if splits is None else splits
     return [
         wf.SplitBounds(
             train=s["train"], validation=s["test"], test=s["test"],
             purge_days=PURGE_DAYS, embargo_days=EMBARGO_DAYS,
         )
-        for s in PRE_REG_SPLITS
+        for s in src
     ]
 
 
-def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]]) -> Tuple[List[Dict[str, object]], Dict[str, pd.DataFrame], Dict[str, List[pd.DataFrame]]]:
-    splits = build_prereg_splits()
+def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]], split_defs: Optional[List[Dict[str, object]]] = None) -> Tuple[List[Dict[str, object]], Dict[str, pd.DataFrame], Dict[str, List[pd.DataFrame]]]:
+    split_defs = PRE_REG_SPLITS if split_defs is None else split_defs
+    splits = build_prereg_splits(split_defs)
     idx = panel.index.get_level_values("timestamp")
     all_results: List[Dict[str, object]] = []
     pooled_paired: Dict[str, List[pd.DataFrame]] = {k: [] for k in ablations.keys() if k != "A_rv_only"}
     split_paired: Dict[str, List[pd.DataFrame]] = {k: [] for k in ablations.keys() if k != "A_rv_only"}
     for i, sp in enumerate(splits):
-        meta = PRE_REG_SPLITS[i]
+        meta = split_defs[i]
         split_res: Dict[str, object] = {"split_id": i, "train": meta["train"], "test": meta["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS, "ablations": {}}
         train = panel.loc[wf._in_window(idx, sp.train)]
         test = panel.loc[wf._in_window(idx, sp.test)]
@@ -298,21 +406,38 @@ def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]]) -> Tupl
     return all_results, pooled, split_paired
 
 
-def data_sufficiency(symbols: List[str], all_results: List[Dict[str, object]]) -> Dict[str, object]:
+def _test_days(win) -> Optional[int]:
+    try:
+        a = pd.Timestamp(win[0]); b = pd.Timestamp(win[1])
+        return int((b.normalize() - a.normalize()).days) + 1
+    except Exception:
+        return None
+
+def data_sufficiency(symbols: List[str], all_results: List[Dict[str, object]], split_defs: Optional[List[Dict[str, object]]] = None) -> Dict[str, object]:
+    split_defs = PRE_REG_SPLITS if split_defs is None else split_defs
     ok_splits = [r for r in all_results if r.get("status") == "OK"]
     test_windows = [r.get("test") for r in ok_splits]
-    # 30-day non-overlapping blocks (FCLR-001 claim-worthy) not met by 14-day pre-reg design
+    ok_30 = [w for w in test_windows if _test_days(w) is not None and _test_days(w) >= 30]
     shortfalls = []
     if len(symbols) < 5:
         shortfalls.append(f"instruments={len(symbols)} < 5")
-    shortfalls.append("no_30day_non_overlapping_test_blocks (pre-reg uses 14-day windows; Q1 2024 local data insufficient for >=3 x 30-day)")
-    shortfalls.append("q1_2024_only_local_data")
+    if len(ok_30) < 3:
+        # honest about actual design
+        td = [_test_days(s.get('test')) for s in split_defs]
+        shortfalls.append(f"insufficient_30day_non_overlapping_test_blocks (ok_30d={len(ok_30)}, required>=3, split_test_days={td})")
+    # local admissible cache span note (not a hard fail by itself, but material)
+    span_note = 'local_admissible_cache_data_only'
+    meets = len(symbols) >= 5 and len(ok_30) >= 3 and len(ok_splits) == len(split_defs)
     return {
         "instruments": len(symbols),
         "instruments_required": 5,
         "ok_splits": len(ok_splits),
+        "ok_30day_splits": len(ok_30),
         "test_windows": test_windows,
-        "meets_claim_worthy": False,
+        "split_test_days": [_test_days(s.get('test')) for s in split_defs],
+        "span_note": span_note,
+        "meets_claim_worthy_data_sufficiency": meets,
+        "meets_claim_worthy": meets,
         "shortfalls": shortfalls,
     }
 
@@ -363,6 +488,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--out-suffix", default="", help="Suffix for versioned outputs, e.g. _v2_5sym; empty preserves v1 paths.")
     ap.add_argument("--experiment-id", default="GATE4-FUND-VOL-ABLATIONS-MSPLIT")
     ap.add_argument("--skip-main-summary", action="store_true")
+    ap.add_argument("--include-cache", action="store_true", help="Search research_state/data_cache for local admissible files (v3/extended runs).")
     args = ap.parse_args(argv)
 
     symbols = [x.strip() for x in args.symbols.split(",") if x.strip()]
@@ -371,9 +497,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     out_suffix = args.out_suffix
     experiment_id = args.experiment_id
     RES.mkdir(parents=True, exist_ok=True)
+    # select split defs: v3 when out_suffix indicates v3_30d or prereg name contains v3_30d
+    use_v3 = ('v3' in (out_suffix or '').lower() or 'v3_30d' in (pre_reg_path or '').lower())
+    split_defs = PRE_REG_SPLITS_V3_30D if use_v3 else PRE_REG_SPLITS
+    include_cache = bool(use_v3 or getattr(args, 'include_cache', False))
 
-    kpanel = load_kline_panel(symbols, start, end, horizon=horizon)
-    fpanel = load_funding_panel(symbols, start, end)
+    kpanel = load_kline_panel(symbols, start, end, horizon=horizon, include_cache=include_cache)
+    fpanel = load_funding_panel(symbols, start, end, include_cache=include_cache)
     panel = add_funding_to_panel(kpanel, fpanel)
 
     base = [c for c in ["rv_trail_24", "rv_trail_168", "rv_trail_6"] if c in panel.columns]
@@ -386,7 +516,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "E_rv_funding_trails": base + ["funding_signed", "funding_abs"] + trail,
     }
 
-    all_results, pooled, split_paired = run_multisplit(panel, ablations)
+    all_results, pooled, split_paired = run_multisplit(panel, ablations, split_defs=split_defs)
 
     def agg(ab_name: str, key: str = "qlike") -> Optional[float]:
         vals = [r["ablations"][ab_name][key] for r in all_results if r.get("status") == "OK" and ab_name in r.get("ablations", {}) and isinstance(r["ablations"][ab_name].get(key), (int, float)) and np.isfinite(r["ablations"][ab_name].get(key))]
@@ -407,8 +537,15 @@ def main(argv: Optional[List[str]] = None) -> int:
     for bh in [12, 24, 48]:
         exploratory_sensitivity["block_hours"][str(bh)] = {ab: block_bootstrap_delta_ci(df, block_hours=bh) for ab, df in pooled.items()}
 
-    suff = data_sufficiency(symbols, all_results)
-    verdict = "PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)"
+    suff = data_sufficiency(symbols, all_results, split_defs=split_defs)
+    primary_ci = ci_results.get("E_rv_funding_trails") or {}
+    ci_spans_0 = (primary_ci.get("ci_low") is not None and primary_ci.get("ci_high") is not None and primary_ci["ci_low"] <= 0 <= primary_ci["ci_high"])
+    if not suff.get("meets_claim_worthy_data_sufficiency"):
+        verdict = "PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)"
+    elif ci_spans_0:
+        verdict = "DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (pre-registered 30-day blocks met; E vs A CI spans 0; no improvement claim)"
+    else:
+        verdict = "DATA-SUFFICIENT (30-day blocks met) — primary E vs A CI excludes 0 in observed run; requires robustness/leakage review before confirmatory claim; no economic value/overlay claim"
 
     summary = {
         "generated_at": now_iso(), "git_sha": git_sha(), "symbols": symbols,
@@ -416,7 +553,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "period": {"start": start, "end": end}, "horizon": horizon,
         "model": "direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)",
         "pre_registration": pre_reg_path,
-        "splits": [{"id": s["id"], "train": s["train"], "test": s["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS} for s in PRE_REG_SPLITS],
+        "splits": [{"id": s["id"], "train": s["train"], "test": s["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS} for s in split_defs],
         "aggregate": {k: {"qlike": agg(k, "qlike"), "mae": agg(k, "mae"), "rmse": agg(k, "rmse")} for k in ablations.keys()},
         "contrasts_vs_A": ci_results,
         "per_split_paired_delta_vs_A": per_split_deltas,
@@ -425,6 +562,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "data_sufficiency": suff,
         "bootstrap": {"seed": BOOTSTRAP_SEED, "reps": BOOTSTRAP_REPS, "block_hours": BOOTSTRAP_BLOCK_HOURS, "alpha": BOOTSTRAP_ALPHA, "joint_across_instruments": True, "resamples_time_blocks": True},
         "verdict": verdict,
+        "primary_contrast_inconclusive_ci_spans_zero": ( (ci_results.get("E_rv_funding_trails") or {}).get("ci_low") is not None and (ci_results.get("E_rv_funding_trails") or {}).get("ci_high") is not None and (ci_results.get("E_rv_funding_trails") or {})["ci_low"] <= 0 <= (ci_results.get("E_rv_funding_trails") or {})["ci_high"] ),
     }
     qA = summary["aggregate"]["A_rv_only"]["qlike"]
 
@@ -433,7 +571,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "# Evaluation Summary - Funding Ablations (Gate 4, multi-split pilot)",
         "", f"**Generated:** {summary['generated_at']}", f"**Git SHA:** {summary['git_sha']}",
         f"**Pre-registration:** `{summary['pre_registration']}` (frozen before outcomes)",
-        f"**Scope:** {', '.join(symbols)}, {start} to {end}, 24h forward RV, {len(PRE_REG_SPLITS)} pre-registered walk-forward splits",
+        f"**Scope:** {', '.join(symbols)}, {start} to {end}, 24h forward RV, {len(split_defs)} pre-registered walk-forward splits",
         f"**Model:** {summary['model']}",
         f"**Verdict:** **{verdict}**",
         "",
@@ -459,14 +597,14 @@ def main(argv: Optional[List[str]] = None) -> int:
             nstr = f"{ci.get('n_obs',0)}/{ci.get('n_blocks',0)}"
         lines.append(f"| {k} | {a['qlike']} | {a['mae']} | {a['rmse']} | {dstr} | {cistr} | {nstr} |")
     lines += ["", "## Per-Split Paired ΔQLIKE vs A (instability visibility)"]
-    lines.append("| Contrast | Split 0 | Split 1 | Split 2 | n_obs (0/1/2) |")
-    lines.append("|---|---:|---:|---:|---|")
+    nsp=len(split_defs); header = "| Contrast | " + " | ".join([f"Split {i}" for i in range(nsp)]) + f" | n_obs ({'/'.join(str(i) for i in range(nsp))}) |"; lines.append(header)
+    lines.append("|---|" + "|".join(["---:"]*nsp) + "|---|")
     for ab in [k for k in ablations.keys() if k != "A_rv_only"]:
         rows = per_split_deltas.get(ab, [])
         vals = [(str(r["delta_qlike_vs_A"]) if r.get("delta_qlike_vs_A") is not None else "NA") for r in rows]
         ns = "/".join(str(r.get("n_obs",0)) for r in rows)
-        while len(vals) < 3: vals.append("NA")
-        lines.append(f"| {ab} vs A | {vals[0]} | {vals[1]} | {vals[2]} | {ns} |")
+        while len(vals) < nsp: vals.append("NA")
+        lines.append(f"| {ab} vs A | " + " | ".join(vals[:nsp]) + f" | {ns} |")
     lines += ["", "## Exploratory Sensitivity (NOT confirmatory; do not promote if unstable)", "> Block-bootstrap block size sensitivity for paired ΔQLIKE vs A. Pre-registered primary remains block=24h, seed=12345, reps=2000.", "| Contrast | block=12h CI | block=24h CI (primary) | block=48h CI |", "|---|---|---|---|"]
     for ab in [k for k in ablations.keys() if k != "A_rv_only"]:
         def _ci(bh):
@@ -485,6 +623,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             else:
                 lines.append(f"  - {k}: qlike={v['qlike']}, mae={v['mae']}, rmse={v['rmse']}, n_feat={v['n_features']}, valid_n={v['valid_n']}")
     inst_ok = suff.get("instruments", 0) >= suff.get("instruments_required", 5)
+    ds_ok = suff.get("meets_claim_worthy_data_sufficiency")
     inst_note = f"instruments={suff.get('instruments')} ({'MET' if inst_ok else f'NOT MET; required >={suff.get("instruments_required",5)}'})"
     lines += [
         "", "## Bootstrap (pre-registered)",
@@ -496,9 +635,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         "- Chronological splits, 7d purge/embargo, train-only normalization per split.",
         "- Basis/premium not included (no aligned admissible local series verified); missing treated as NaN per policy.",
         "", "## Caveats (non-negotiable)",
-        f"- **Pilot/inconclusive:** {inst_note}; Q1-2024-only local data and 14-day test windows do not satisfy FCLR-001 claim-worthy criteria (>=3 non-overlapping 30-day blocks, robust uncertainty under sufficient data coverage).",
-        "- **Do NOT promote to confirmatory, do NOT claim economic value, do NOT build any overlay.** Point estimates/CIs are pilot evidence only.",
-        "- Direction/magnitude can change with more data, more splits, and claim-worthy instrument/block coverage.",
+        f"- **Verdict:** {verdict}",
+        f"- **Data sufficiency:** {inst_note}; ok_30day_splits={suff.get('ok_30day_splits')} (required>=3) => meets_claim_worthy_data_sufficiency={ds_ok}.",
+        "- **No economic value claim, no overlay, no Track A linkage.** Observed metrics are out-of-sample forecast evidence under pre-registered design; instability across splits/instrument sets must be reported honestly.",
+        "- If any leakage/alignment doubt exists, treat as non-confirmatory.",
     ]
     out_md.write_text("\n".join(lines) + "\n")
 
@@ -506,7 +646,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         main_sum = RES / "evaluation_summary.md"
         txt = main_sum.read_text() if main_sum.exists() else ""
         addition = [
-            f"**Updated:** {summary['generated_at']} (multi-split pilot, {len(PRE_REG_SPLITS)} splits, direct-variance OLS HAR; NOT claim-worthy)",
+            f"**Updated:** {summary['generated_at']} (multi-split, {len(split_defs)} splits, direct-variance OLS HAR; verdict={verdict})",
             f"**Verdict:** {verdict}",
             "", "| Ablation | QLIKE (mean) | ΔQLIKE vs A (pooled) | 95% block-bootstrap CI |", "|---|---|---|---|",
         ]
