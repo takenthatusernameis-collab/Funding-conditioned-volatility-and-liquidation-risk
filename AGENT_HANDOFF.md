@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-08T03:53:28Z, git HEAD; session verified) — SINGLE DURABLE HANDOFF / Next Agentic Session
+## Initial Task Message (2026-11-08T04:22:34Z, git e6dc0ce/HEAD; session verified) — SINGLE DURABLE HANDOFF / Next Agentic Session
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility forecasting + liquidation risk). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff.**
 
@@ -7,29 +7,37 @@
 - **Track C history:** FCLR-H001 `NOT_SUPPORTED`; forecast gate NOT MET (FCLR-003 -3.78%, FCLR-006 -69.90%, FCLR-007 -3.42%, FCLR-008 +4.30% CI crosses zero). Gate 4 v4 `EXPLORATORY_INCONCLUSIVE` (confounded). No threshold-shopping; no sealed anchor reopen.
 - **Track A (observed liquidation risk):** `DATA_BLOCKED` (Hyperliquid ironflow `data_through=2026-10`; 2026-11..2027-02 absent). **NO re-probe.** Trigger-only guarded protocol if admissible unauthenticated Hyperliquid data appears + rubric passes; preregister before outcome inspection.
 - **Track B (modeled boundary breach):** `CLOSED_NEGATIVE`. Never conflate modeled vs observed.
-- **Regression (last recorded):** 709 OK, 0 failures, 0 errors. Drift 17/17 pass; network false; bounds 143/163 root md+json.
+- **Track A drift guard (this session):** `scripts/tracka_resume_check.py` PASS, network=false, writes_real_research_state=false.
 
-### Session (2026-11-08T03:53Z) — verification / no bottleneck-removal changes needed
-v5 hardening artifacts present and green: `fclr016_v5_admissibility_report.py` + `fclr016_v5_terms_evidence_template.py` + validator/guard/CLI refuse-paths + tests. **Verified this session (read-only, no canonical mutation):**
+### Session (2026-11-08T04:22Z) — bottleneck cleared (v5 report) + lazy-import hardening
+- **Cleared prior “next task”:** `scripts/fclr016_v5_admissibility_report.py` + `tests/test_fclr016_v5_admissibility_report.py` exist and are green (read-only, no outcomes/network/data loaders, cannot claim GO, refuses missing/fabricated/malformed inputs, no canonical mutation). Verified:
 ```bash
-python3 -m py_compile scripts/fclr016_v5_admissibility_report.py tests/test_fclr016_v5_admissibility_report.py  # OK
+python3 -m py_compile scripts/run_funding_ablations.py scripts/fclr016_v5_admissibility_report.py tests/test_fclr016_v5_admissibility_report.py  # OK
 python3 -m unittest tests.test_fclr016_v5_admissibility_report -q  # 8/8 OK
+python3 -m unittest tests.test_fclr016_v5_admissibility_report tests.test_fclr016_v5_terms_evidence_template tests.test_fclr016_v5_admissibility_hardening tests.test_fclr016_v5_admissibility_guard tests.test_fclr016_v5_admissibility_validator tests.test_fclr016_v5_confirmatory_cli_refusal_e2e -q  # 63/63 OK
 python3 -m unittest discover -s tests -p 'test_fclr016*' -q  # 85/85 OK
 python3 scripts/fclr016_v5_admissibility_report.py research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # all_go=false, confirmatory_outcomes_permitted=false, blockers=[terms_resolved_verified,provenance_manifest_go,completeness_leakage_pass,prereg_frozen_non_draft,prereg_claim_go]
 python3 scripts/fclr016_validate_v5_admissibility.py --provenance-manifest research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json --completeness-audit research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json --terms-evidence research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json --prereg-draft research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # all_go=false, confirmatory_outcomes_permitted=false
-git diff --name-only -- research_state/experiment_frontier.json research_state/run_manifest.json research_state/evaluation_summary.md  # (no output)
+git diff --name-only -- research_state/experiment_frontier.json research_state/run_manifest.json research_state/evaluation_summary.md AGENT_HANDOFF.md  # (no output before handoff edit)
 ```
+- **Bottleneck removal (code):** `scripts/run_funding_ablations.py` — heavy deps (`numpy/pandas/src.*`) made lazy-imported inside data-loading/eval paths so `check_admissibility_package`/`check_confirmatory_provenance` and v5 report/guard/validator package checks remain usable without numpy/pandas (prevents environment fragility blocking admissibility refusal tooling). No confirmatory outcomes run; no data loaded by guard paths.
 
 ### Current blocker (explicit)
-No in-repo **human-verified** Binance Vision/data-use terms evidence (`EXPLICIT_BLOCKER_UNRESOLVED`). Automated agent cannot fabricate/review legal terms. Confirmatory 2025+ outcomes remain prohibited until all admissibility gates green with real evidence.
+No in-repo **human-verified** Binance Vision/data-use terms evidence (`EXPLICIT_BLOCKER_UNRESOLVED`). Automated agent cannot fabricate/review legal terms. Confirmatory 2025+ outcomes remain prohibited until all admissibility gates green with real, human-verified evidence.
 
-### Next single highest-value task
-**Default (no human terms evidence; heavy bounded fail-closed work):** implement deterministic read-only `scripts/fclr016_v5_preflight_summary.py` + `tests/test_fclr016_v5_preflight_summary.py` (no outcomes, no network, no canonical mutation). Accept the 4 package artifact paths + optional human terms-evidence path; run validator/package/report parity checks; emit one machine-readable + markdown "human action checklist" + refusal matrix: exact missing/blocked gates, required human terms fields with source/fill guidance, exact promotion sequence, and explicit refusal reasons for every attempted shortcut (template-as-evidence, draft->frozen, RESOLVED without human fields, confirmatory with `--expect-go`/missing refs). Tests must prove: never claims GO on blocked/template/malformed inputs, refuses missing/fabricated/resolved-without-human-fields, cannot mutate canonicals, no data/network loaders, `--expect-go` contract stable. Respect root bounds (single script + single test file).
+### Next single highest-value task (heavy, measurable, no human terms evidence)
+Implement deterministic read-only `scripts/fclr016_v5_preflight_summary.py` + `tests/test_fclr016_v5_preflight_summary.py` (no outcomes, no network, no canonical mutation, no kline/funding/outcome loaders). Inputs: 4 package artifact paths + optional human terms-evidence path. Must run validator/package/report parity, emit machine-readable JSON + markdown **human action checklist** + **refusal matrix** with:
+- exact missing/blocked gates and artifact hashes/paths;
+- required human terms fields with fill guidance and explicit forbidden values (`fabricated!=false`, agent-only reviewer, template-as-evidence, unresolved status);
+- exact promotion sequence (human terms RESOLVED -> reconcile `admissibility_refs_sha256`/paths -> promote prereg frozen only after all guards green -> `--check-admissibility-package --expect-go` -> confirmatory guard refuses-until-GO and must not load data on refusal);
+- explicit refusal reasons for shortcut attempts (draft->frozen, RESOLVED without human fields, GO/admissible while terms unresolved, confirmatory `--expect-go`/missing refs, data loading on refusal).
+Tests (tmp-isolated): never claims GO on blocked/template/malformed inputs; refuses missing/fabricated/resolved-without-human-fields/agent-only reviewer; cannot mutate canonicals; no data/network loaders; `--expect-go` contract stable. Respect root bounds (1 script + 1 test file).
 ```bash
 python3 -m py_compile scripts/fclr016_v5_preflight_summary.py tests/test_fclr016_v5_preflight_summary.py
 python3 scripts/fclr016_v5_preflight_summary.py research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json
 python3 -m unittest tests.test_fclr016_v5_preflight_summary tests.test_fclr016_v5_terms_evidence_template tests.test_fclr016_v5_admissibility_report tests.test_fclr016_v5_admissibility_hardening tests.test_fclr016_v5_admissibility_guard tests.test_fclr016_v5_admissibility_validator tests.test_fclr016_v5_confirmatory_cli_refusal_e2e -q
 ```
+
 **If real human-verified terms review appears (only then):** create `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with verifiable facts only (`terms_url_reviewed`, `access_date_utc`, `terms_version_or_snapshot_id` or justified `not_provided_by_source`, `relevant_clause_summary`, human/legal `reviewer_role`, `conclusion`, `conditions_or_restrictions`, `evidence_artifacts`/hashes, `fabricated=false`, `status=RESOLVED_VERIFIED`, matching frozen scope). Reconcile `admissibility_refs_sha256`/paths. Promote prereg to frozen **only after** all guards green. Run package check + confirmatory guard/report (must refuse until frozen+all GO; must not load data on refusal). Do not compute outcomes until `all_go=true` and frozen prereg hashes recorded.
 
 ### Do-NOT

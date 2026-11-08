@@ -19,19 +19,11 @@ import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
-import numpy as np
-import pandas as pd
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
-from src.ingest import loader
-from src.features import volatility as vf
-from src.features import funding as ff
-from src.eval import walkforward as wf
-from src.volatility import block_bootstrap as bb
-from src.volatility import eval as veval
+# Heavy deps (numpy/pandas/src.*) are lazy-imported inside data-loading/eval
+# functions so check_admissibility_package/check_confirmatory_provenance and
+# the v5 admissibility guard/report paths remain usable without numpy/pandas.
 
 REPO = Path(__file__).resolve().parents[1]
 RAW = REPO / "data" / "raw"
