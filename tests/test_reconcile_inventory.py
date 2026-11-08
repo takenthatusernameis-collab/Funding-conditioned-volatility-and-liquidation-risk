@@ -58,3 +58,24 @@ class TestReconcileInventory(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_gate_input_summary_present_and_read_only_contract(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            cache = td / "data_cache"
+            inv = td / "data_inventory.json"
+            cdir = cache / "BTCUSDT_2024_04"
+            cdir.mkdir(parents=True)
+            (cdir / "sample.csv").write_text("x,y\n1,2\n")
+            inv.write_text(json.dumps([]))
+            res = reconcile_inventory.reconcile(str(cache), str(inv))
+            self.assertIn("gate_input_summary", res)
+            g = res["gate_input_summary"]
+            self.assertEqual(g["totals"]["missing_in_inventory_months"], 1)
+            self.assertTrue(g["gaps_present"])
+            self.assertIn("BTCUSDT", g["by_symbol"])
+            self.assertEqual(g["by_symbol"]["BTCUSDT"]["cache_months"], 1)
+            self.assertIn("read-only", g["scope_note"])
+            self.assertIn("not confirmatory GO", g["scope_note"])
+            # never fabricates/overwrites
+            self.assertFalse(res["reconciled"])

@@ -119,9 +119,36 @@ def reconcile(cache_dir=CACHE, inventory_path=INVENTORY, out_path=None):
         else:
             continue
 
+    # gate_input_summary: read-only, deterministic summary consumable by Gate 4/v5 tooling.
+    # Counts, sha256-verified local coverage, gaps vs inventory for data_cache/{SYM}_YYYY_MM.
+    # Never fabricates refs; never overwrites unverified entries.
+    by_sym = defaultdict(lambda: {"cache_months": 0, "inventory_months": 0, "cache_files": 0,
+                                   "missing_in_inventory_months": 0, "stale_in_inventory_months": 0})
+    for (sym, year, month), files in scanned.items():
+        by_sym[sym]["cache_months"] += 1
+        by_sym[sym]["cache_files"] += len(files)
+    for (sym, year, month), entries in inv_idx.items():
+        by_sym[sym]["inventory_months"] += len(set() or [1])  # month bucket present
+    for r in missing_in_inventory:
+        by_sym[r["symbol"]]["missing_in_inventory_months"] += 1
+    for r in stale_in_inventory:
+        by_sym[r["symbol"]]["stale_in_inventory_months"] += 1
+    gate_input_summary = {
+        "scope_note": "read-only local coverage/gap summary; not confirmatory GO, not provenance/license/terms resolution",
+        "by_symbol": {k: v for k, v in sorted(by_sym.items())},
+        "totals": {
+            "cache_month_dirs": len(scanned),
+            "cache_files_sha256_verified": sum(len(v) for v in scanned.values()),
+            "inventory_entries": len(inv) if inv else 0,
+            "matched_months": len(matched),
+            "missing_in_inventory_months": len(missing_in_inventory),
+            "stale_in_inventory_months": len(stale_in_inventory),
+        },
+        "gaps_present": bool(missing_in_inventory or stale_in_inventory),
+    }
     result = {
         "artifact": "fclr_inventory_reconciliation",
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_utc": None,
         "cache_dir": os.path.relpath(cache_dir, ROOT),
         "inventory_path": os.path.relpath(inventory_path, ROOT),
@@ -134,6 +161,7 @@ def reconcile(cache_dir=CACHE, inventory_path=INVENTORY, out_path=None):
         "stale_in_inventory": stale_in_inventory,
         "matched": matched,
         "reconciled": len(missing_in_inventory) == 0 and len(stale_in_inventory) == 0,
+        "gate_input_summary": gate_input_summary,
         "note": "Read-only. Computes sha256 from local files only. Does not modify data_inventory.json.",
     }
     return result

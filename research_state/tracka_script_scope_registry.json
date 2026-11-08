@@ -32,12 +32,19 @@
       "id": "fclr_next_163_registry_sync",
       "action": "sync",
       "summary": "FCLR-NEXT-163: reconcile test_tracka_hardening_117.SCRIPT_REGISTRY with canonical JSON registry. Added reconcile_inventory.py and build_fclr002_panel_local.py to the Python source-of-record so all three registries (117, 118, 119, JSON) agree on the full scripts/*.py set."
+    },
+    {
+      "id": "fclr024_scope_coherence",
+      "action": "add",
+      "script": "fclr024_v5_scope_coherence_report.py",
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "Register read-only scope-coherence/blocker-matrix diagnostic."
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py).",
   "generated": "20261108T221500Z",
   "registry_version": "1.1",
-  "script_count": 110,
+  "script_count": 111,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -478,6 +485,10 @@
     "reconcile_inventory.py": {
       "class": "repo_maintenance_utility",
       "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
+    },
+    "fclr024_v5_scope_coherence_report.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "Read-only Gate 4 v5 scope-coherence/blocker-matrix report; deterministic tmp-testable; no outcomes/network/data loading; never claims GO or creates/satisfies evidence."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)",
