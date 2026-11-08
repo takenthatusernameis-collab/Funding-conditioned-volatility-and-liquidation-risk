@@ -787,6 +787,57 @@ def build_prereg_splits(splits: Optional[List[Dict[str, object]]] = None) -> Lis
     ]
 
 
+def _split_design_for_range(start: str, end: str) -> Optional[str]:
+    """Infer pre-registered split design from requested [start,end] (deterministic, no filename coupling).
+
+    Returns 'v3_30d' when the range matches/encompasses the 4×30-day 2024-04..09 walk-forward
+    design (frozen in PRE_REG_SPLITS_V3_30D), else None. Fail-closed to v1 for ambiguous ranges.
+    """
+    try:
+        s = pd.Timestamp(start, tz="UTC").normalize()
+        e = pd.Timestamp(end, tz="UTC").normalize()
+    except Exception:
+        return None
+    # Exact/covering match for the pre-registered Apr–Sep 30d design.
+    # v3_30d spans train anchor 2024-04-01 through final test end 2024-09-11; requested end 2024-09-30 is fine.
+    if s <= pd.Timestamp("2024-04-01", tz="UTC") and e >= pd.Timestamp("2024-09-11", tz="UTC") and e <= pd.Timestamp("2024-12-31", tz="UTC") and s >= pd.Timestamp("2024-03-01", tz="UTC"):
+        # Guard: don't steal the v1 Jan-Mar default pilot range.
+        v1_end = pd.Timestamp(PRE_REG_SPLITS_V1[-1]["test"][1]).normalize()
+        if e <= v1_end:
+            return None
+        # All v3 test windows must fit inside the requested range.
+        fits = all(
+            pd.Timestamp(sp["test"][0], tz="UTC").normalize() >= s
+            and pd.Timestamp(sp["test"][1], tz="UTC").normalize() <= e
+            for sp in PRE_REG_SPLITS_V3_30D
+        )
+        return "v3_30d" if fits else None
+    return None
+
+
+def select_split_defs(start: str, end: str, out_suffix: str = "", pre_reg_path: str = "",
+                      split_design: str = "auto") -> tuple[List[Dict[str, object]], str, str]:
+    """Select split definitions deterministically.
+
+    Priority: explicit split_design (v1/v3_30d) > date-range inference (auto) > legacy
+    out_suffix/pre_registration name coupling (backward compat). Returns (split_defs, design, source).
+    """
+    sd = (split_design or "auto").strip().lower()
+    if sd in ("v3_30d", "v3-30d", "v3", "30d"):
+        return PRE_REG_SPLITS_V3_30D, "v3_30d", "explicit_split_design"
+    if sd in ("v1", "default"):
+        return PRE_REG_SPLITS_V1, "v1", "explicit_split_design"
+    # auto: deterministic date-range inference first (no filename coupling)
+    by_range = _split_design_for_range(start, end)
+    if by_range == "v3_30d":
+        return PRE_REG_SPLITS_V3_30D, "v3_30d", "date_range"
+    # legacy backward compat: suffix/prereg naming (preserve existing behavior)
+    _low = ((out_suffix or "") + " " + (pre_reg_path or "")).lower()
+    if ("v3" in _low and "30d" in _low) or ("v4" in _low):
+        return PRE_REG_SPLITS_V3_30D, "v3_30d", "legacy_name_coupling"
+    return PRE_REG_SPLITS_V1, "v1", "default"
+
+
 def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]], split_defs: Optional[List[Dict[str, object]]] = None) -> Tuple[List[Dict[str, object]], Dict[str, pd.DataFrame], Dict[str, List[pd.DataFrame]]]:
     from src.eval import walkforward as wf
     split_defs = PRE_REG_SPLITS if split_defs is None else split_defs
@@ -924,6 +975,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--experiment-id", default="GATE4-FUND-VOL-ABLATIONS-MSPLIT")
     ap.add_argument("--skip-main-summary", action="store_true")
     ap.add_argument("--include-cache", action="store_true", help="Search research_state/data_cache for local admissible files (v3/extended runs).")
+    ap.add_argument("--split-design", default="auto", choices=["auto", "v1", "v3_30d"], help="Split design: auto infers deterministically from --start/--end (no filename coupling); v3_30d selects the 4x30-day 2024-04..09 walk-forward design (PRE_REG_SPLITS_V3_30D, 7d purge/embargo). Legacy out_suffix/pre_registration naming remains backward-compatible.")
     ap.add_argument("--confirmatory", action="store_true", help="Assert confirmatory intent; triggers provenance guard (fail-closed on unprovenanced 2025+).")
     ap.add_argument("--provenance-manifest", default=None, help="Path to verified provenance manifest for confirmatory runs.")
     ap.add_argument("--terms-evidence", default=None, help="Path to terms evidence artifact; cross-checked fail-closed (RESOLVED requires human fields, fabricated=false).")
@@ -961,10 +1013,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     out_suffix = args.out_suffix
     experiment_id = args.experiment_id
     RES.mkdir(parents=True, exist_ok=True)
-    # select split defs: v3/v4 30-day 2024-04..09 design when indicated; v4 is exploratory on confounded slice (per prereg)
-    _low = ((out_suffix or '') + ' ' + (pre_reg_path or '')).lower()
-    use_30d_0409 = ('v3' in _low and '30d' in _low) or ('v4' in _low)
-    split_defs = PRE_REG_SPLITS_V3_30D if use_30d_0409 else PRE_REG_SPLITS
+    # select split defs deterministically: explicit flag > date-range inference (no filename coupling) > legacy naming (backward compat)
+    split_defs, split_design_resolved, split_design_source = select_split_defs(
+        start, end, out_suffix=out_suffix, pre_reg_path=pre_reg_path,
+        split_design=getattr(args, "split_design", "auto"),
+    )
+    use_30d_0409 = split_design_resolved == "v3_30d"
     include_cache = bool(use_30d_0409 or getattr(args, 'include_cache', False))
 
     # Confirmatory/expect-go-admissible paths must refuse before any data/outcome
@@ -1035,6 +1089,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         "model": "direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)",
         "pre_registration": pre_reg_path,
         "splits": [{"id": s["id"], "train": s["train"], "test": s["test"], "purge_days": PURGE_DAYS, "embargo_days": EMBARGO_DAYS} for s in split_defs],
+        "split_design": {"resolved": split_design_resolved, "source": split_design_source, "arg": getattr(args, "split_design", "auto")},
+        "include_cache": bool(include_cache),
         "aggregate": {k: {"qlike": agg(k, "qlike"), "mae": agg(k, "mae"), "rmse": agg(k, "rmse")} for k in ablations.keys()},
         "contrasts_vs_A": ci_results,
         "per_split_paired_delta_vs_A": per_split_deltas,
@@ -1150,6 +1206,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     manifest["funding_ablations_contrasts_vs_A"] = ci_results
     manifest["funding_ablations_note"] = f"pilot_multisplit_direct_variance_ols_inconclusive{out_suffix}"
     manifest["funding_ablations_splits"] = summary["splits"]
+    manifest["funding_ablations_split_design"] = summary.get("split_design")
+    manifest["funding_ablations_include_cache"] = summary.get("include_cache")
     manifest["funding_ablations_bootstrap"] = summary["bootstrap"]
     manifest["funding_ablations_data_sufficiency"] = suff
     manifest["funding_ablations_per_split_paired_delta_vs_A"] = per_split_deltas
@@ -1160,7 +1218,7 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     update_leakage_audit(RES / "leakage_audit.md", summary["generated_at"])
 
-    print(json.dumps({"verdict": verdict, "aggregate": {k: v["qlike"] for k, v in summary["aggregate"].items()}, "primary_E_vs_A": ci_results.get("E_rv_funding_trails")}, indent=2, default=str))
+    print(json.dumps({"verdict": verdict, "split_design": summary.get("split_design"), "include_cache": summary.get("include_cache"), "aggregate": {k: v["qlike"] for k, v in summary["aggregate"].items()}, "primary_E_vs_A": ci_results.get("E_rv_funding_trails")}, indent=2, default=str))
     return 0
 
 
