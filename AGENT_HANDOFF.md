@@ -69,7 +69,44 @@ Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenan
 
 ---
 
----
+## INITIAL TASK MESSAGE (next session) — 2026-11-08T13:57:23Z (SINGLE DURABLE HANDOFF)
+**Repo priority (name-driven, enforced):** (1) **Funding-conditioned volatility forecasting** — Gate 4/Track C on local admissible data (measurable, unblocked, heavy). (2) **Liquidation risk** — Track A observed / Track B modeled (**never conflated**); **Track A BLOCKED/NO TRIGGER** (`data_through=2026-10`, 2026-11 absent; do **NOT** re-probe absent months in a loop). Empirical research only — **no trading/orders**, no fabricated data/terms/reviews, chronological leakage-resistant OOS only, sealed holdouts/anchors untouched, **no `.github/workflows` edits**, no credentials/paid/manual/API-key/bypass sources. **This file is the only durable handoff.**
 
-## INITIAL TASK MESSAGE (next session) — 2026-11-08T13:54:51Z
-P0: Phase 3 funding-conditioned volatility ablations (Gate 4) on local data. Execute full ablation sweep per pre_registration_gate4_funding_multisplit_v4; report metrics + leakage audit; do not re-probe Track A. Heavy work required: extend seam/CLI parity tests, keep regression >=709 OK, drift 17/17.
+### Bottlenecks removed / clarified (do not reintroduce)
+- Removed duplicate/conflicting 13:54:51Z tail that pointed at executing `pre_registration_gate4_funding_multisplit_v4` as P0. **v4 is `FROZEN_BEFORE_OUTCOMES` but `confirmatory_claim_go=NO_GO` and EXPLORATORY/NOT PROMOTABLE on a sealed-anchor-confounded 2024-04..09 slice** (per v4 prereg). Do **not** run v4 as confirmatory or present it as a claim. v3 30-day exploratory result is sealed/preserved (**E vs A +0.488, 95% CI [-0.042,1.197] spans 0; PILOT/INCONCLUSIVE; H001 NOT_SUPPORTED; overlay INELIGIBLE**).
+- **No competing handoff files.** No status-only/poller/wrapper/scheduler families. No re-probing absent Track A months.
+
+### P0 — FCLR-NEXT-142 (HEAVY, mandatory, unblocked, measurable): deterministic Gate 4 readiness/action matrix from FCLR-019
+Build `scripts/fclr020_gate4_readiness_action_matrix.py` (read-only, **no network, no model-outcome computation, no freeze/promotion, no sealed overwrite**). Consumes `research_state/fclr019_local_audit/fclr019_gate4_evidence_bundle_index_latest.json` (and only local refs it already cites as needed). For **each candidate window and each prerequisite/checklist item** emit a deterministic action matrix row: `current_state` (`present_unverified|present_blocker|missing|unavailable_pointer` as evidenced), `blocker_or_missing_reason` (from index; never invented), `action_required` (concrete class: human/legal terms evidence resolution; provenance/manifest/terms/admissibility artifact; completeness/leakage/admissibility evidence; **fresh frozen prereg before outcomes**; bounded provenance range evidence), `verification_command_or_check` (read-only deterministic local checks only — e.g. file-exists+sha256, JSON field presence, `fclr016_v5_admissibility_report.py` / `fclr016_v5_promotion_dryrun.py` refusal expectations, scope-drift/resume checks — **never execute confirmatory outcomes**), and `authorizes_confirmatory_outcomes=false`. **Never mark satisfied, never infer satisfaction from absence of a blocker string, never fabricate paths/evidence as present.** Write JSON+MD under `research_state/fclr020_local_audit/` (timestamped + `*_latest.*`) with `draft_only=true, no_confirmatory_outcomes=true, exploratory_only=true, no_network=true, not_go_for_confirmatory_outcomes=true, confirmatory_ready_now=false, confirmatory_outcomes_go=false`.
+
+**Tests (deterministic, tmp fixtures, no network):** add `tests/test_fclr020_gate4_readiness_action_matrix.py` covering state→action mapping; fresh-frozen-prereg-missing action present; v5 blocker propagation; LFS/unreadable/missing input handling; draft-only/no-confirmatory/no-satisfied metadata; no sealed overwrite.
+
+**Registration/drift:** register `fclr020_gate4_readiness_action_matrix.py` in `research_state/tracka_script_scope_registry.json` and reconcile `tests/test_tracka_hardening_117.py` `SCRIPT_REGISTRY` so 117/118/119/drift sync remain green (104/104 → 105/105 expected).
+
+**Acceptance (must all hold):** reproducible per-window action matrix from local FCLR-019 evidence; every blocker/action/verifier explicit; `python -m unittest discover tests -q` → **>=906 OK, 0 failures** (higher with new tests); `check_tracka_scope_registry_drift.py` PASS (105/105 after registration); `tracka_resume_check.py` 17/17 pass, `network:false`; v5 `--bogus` refusals parseable/exit!=0/no traceback; `run_funding_ablations.py` baseline still runs with honest verdict. **Planning evidence only — does not authorize confirmatory outcomes, freeze/promote, overlay, or H001/Track A status change.**
+
+### P1 — only if P0 is fully complete and green in the same session (still heavy)
+Add/extend Track A seam/CLI parity hardening tests (tmp-isolated, no network, no real outcome reads) per `FCLR_CAMPAIGN_NEXT.md` where there is a measurable gap — but **do not re-probe ironflow** and **do not** create status-only artifacts. Keep regression green.
+
+### Verification commands (run before/after; future agents must not skip heavy work)
+```bash
+pip install -r requirements.txt
+python -m unittest discover tests -q
+python scripts/check_tracka_scope_registry_drift.py
+python scripts/tracka_resume_check.py | python3 -c "import sys,json; d=json.load(sys.stdin); print('tracka pass', d['pass'], 'checks', len(d['checks']), 'network', d['network'])"
+python scripts/fclr016_v5_admissibility_report.py --bogus 2>&1 | tail -1
+python scripts/fclr016_v5_promotion_dryrun.py --bogus 2>&1 | tail -1
+python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200
+python scripts/tracka_resume_gate.py --bogus --json 2>&1 | head -c 200
+python scripts/tracka_operator_report.py --bogus --json 2>&1 | head -c 200
+python scripts/run_funding_ablations.py   # Gate 4 baseline pilot (must run clean, honest verdict)
+# After P0: python scripts/fclr020_gate4_readiness_action_matrix.py && inspect latest JSON/MD for draft-only/no-confirmatory flags
+```
+
+### Resume triggers (only then — fresh prereg BEFORE outcomes)
+1. **Track A/H004:** unauthenticated Hyperliquid `data/events|fills` YYYY-MM >=2026-11 **HTTP 200 + verified content** (specific months only) OR admissible unauthenticated observed-liquidation source passing full-manifest GO. Fresh experiment ID + prereg before outcomes; modeled!=observed.
+2. **v5 terms resolved (human/legal):** `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`fabricated=false`, `status=RESOLVED_VERIFIED`, frozen scope, verifiable facts). Reconcile refs/hashes; freeze/promote only after guards green; real package `all_go=true` required for confirmatory outcomes.
+3. **New claim-worthy Track C confirmatory:** loader-compatible admissible local panel, >=5 sym & >=3 non-overlapping 30-day blocks, **fresh frozen prereg before outcomes**; 2024-04..09 confirmatory bounded by `PROVENANCED_CONFIRMATORY_RANGES` + manifest/terms/admissibility guards. DRAFT prereg skeletons / evidence bundle indices / action matrices are **not** sufficient.
+
+### Do-NOT
+Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop/relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
