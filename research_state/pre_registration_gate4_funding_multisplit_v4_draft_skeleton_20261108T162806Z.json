@@ -1,0 +1,41 @@
+{
+  "artifact": "GATE4-FUND-VOL-MSPLIT-V4-DRAFT-SKELETON",
+  "blockers_before_freeze": [
+    "v5 terms EXPLICIT_BLOCKER_UNRESOLVED (human/legal) \u2014 no freeze/promotion",
+    "fresh frozen prereg hash required before any confirmatory outcomes",
+    "admissibility package/manifest/terms evidence must be in-repo and all_go where confirmatory",
+    "Track A unrelated; modeled!=observed"
+  ],
+  "confirmatory_claim_go": "NOT_PERMITTED_UNTIL_FROZEN_AND_BLOCKERS_RESOLVED",
+  "confirmatory_outcomes_permitted": false,
+  "created_utc": "20261108T162806Z",
+  "evaluation": "chronological walk-forward, train-only normalization, no random split, block-aware CIs, Holm across preregistered family",
+  "exploratory_only_default": true,
+  "frozen_before_outcomes": false,
+  "hard_stops": [
+    "no outcomes before freeze",
+    "no sealed overwrite",
+    "no workflow edits",
+    "no fabricated terms/data"
+  ],
+  "scope": {
+    "alpha": 0.05,
+    "block_hours": 24,
+    "bootstrap_reps": 2000,
+    "data_sources": "Binance public archive cache (unauthenticated provenance verification required); no credentials/paid/manual.",
+    "horizon": "24h forward realized variance/volatility (primary)",
+    "min_nonoverlapping_30d_blocks": 3,
+    "min_symbols": 5,
+    "period": "2024-04-01..2024-09-30 (candidate; confirmatory only within PROVENANCED_CONFIRMATORY_RANGES with manifest/terms/admissibility evidence)",
+    "purge_embargo_days": 7,
+    "seed": 12345,
+    "universe": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "status": "DRAFT_NOT_FROZEN"
+}

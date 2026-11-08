@@ -1,0 +1,69 @@
+{
+  "cache_identity_vs_binance_vision": "GO_SAMPLED_OR_PARTIAL",
+  "checks": [
+    {
+      "day": "2024-04-01",
+      "kind": "klines",
+      "local_bytes": 1588,
+      "local_path": "research_state/data_cache/BTCUSDT_2024_04/klines-2024-04-01/BTCUSDT-1h-2024-04-01.zip",
+      "local_sha256": "a62f4db317810aaf8e1391be7f219e684cb220e31e1b47b507d9adfb9d06b01d",
+      "month": "2024-04",
+      "remote_bytes": 1588,
+      "remote_error": null,
+      "remote_etag": "\"1194cc04e0c6ebebaef5828805a86cfd\"",
+      "remote_last_modified": "Tue, 02 Apr 2024 07:43:42 GMT",
+      "remote_sha256": "a62f4db317810aaf8e1391be7f219e684cb220e31e1b47b507d9adfb9d06b01d",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2024-04-01.zip"
+    },
+    {
+      "day": "2024-04-15",
+      "kind": "klines",
+      "local_bytes": 1602,
+      "local_path": "research_state/data_cache/BTCUSDT_2024_04/klines-2024-04-15/BTCUSDT-1h-2024-04-15.zip",
+      "local_sha256": "08dee55bd2860362e687e16305e0cef7b47676994b181a2a22452d5a7d728b01",
+      "month": "2024-04",
+      "remote_bytes": 1602,
+      "remote_error": null,
+      "remote_etag": "\"7536fc61e48504b0fa2b7abbd6bef675\"",
+      "remote_last_modified": "Tue, 16 Apr 2024 07:22:43 GMT",
+      "remote_sha256": "08dee55bd2860362e687e16305e0cef7b47676994b181a2a22452d5a7d728b01",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2024-04-15.zip"
+    }
+  ],
+  "confirmatory_claim_go": "NO_GO",
+  "license_terms_note": "Binance Vision public historical market data; accessed unauthenticated via HTTPS. Verify Binance Vision/market-data terms before redistribution; checksums/provenance evidence only.",
+  "method": "bounded unauthenticated GET vs local cached zip sha256/etag (sampled days)",
+  "months": [
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09"
+  ],
+  "resumed_from": null,
+  "source_base": "https://data.binance.vision/",
+  "summary": {
+    "match": 2,
+    "mismatch": 0,
+    "missing_local": 0,
+    "missing_remote": 0,
+    "new_checks_this_run": 2,
+    "remote_error": 0,
+    "total": 2
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "timestamp_utc": "20261108T162716Z"
+}

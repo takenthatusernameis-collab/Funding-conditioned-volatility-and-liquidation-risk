@@ -1199,7 +1199,17 @@ def main(argv: Optional[List[str]] = None) -> int:
         main_sum.write_text(replace_section(txt, "## Funding Ablations (Gate 4)", "\n".join(addition)))
 
     manifest_path = RES / (f"run_manifest_funding{out_suffix}.json" if out_suffix else "run_manifest.json")
-    manifest = {} if out_suffix else (json.loads((RES / "run_manifest.json").read_text()) if (RES / "run_manifest.json").exists() else {})
+    def _load_manifest_json(p):
+        if not p.exists():
+            return {}
+        try:
+            txt = p.read_text()
+            if txt.lstrip().startswith("version https://git-lfs.github.com/spec/v1"):
+                return {}
+            return json.loads(txt)
+        except Exception:
+            return {}
+    manifest = {} if out_suffix else _load_manifest_json(RES / "run_manifest.json")
     manifest["last_funding_ablations"] = summary["generated_at"]
     manifest["funding_ablations_experiment_id"] = experiment_id
     manifest["funding_ablations"] = summary["aggregate"]

@@ -1,0 +1,48 @@
+{
+  "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+  "checks": [
+    {
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 825,
+      "local_path": "research_state/data_cache/BTCUSDT_2025_01/BTCUSDT-fundingRate-2025-01.zip",
+      "local_sha256": "df725010d55458866eb5a47e9ee708c6796c9d7e77b14c38342cea11f381815e",
+      "month": "2025-01",
+      "remote_bytes": 825,
+      "remote_error": null,
+      "remote_etag": "\"4fd4114380875c1ea8a32019977f951a\"",
+      "remote_last_modified": "Sun, 16 Feb 2025 12:52:38 GMT",
+      "remote_sha256": "df725010d55458866eb5a47e9ee708c6796c9d7e77b14c38342cea11f381815e",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-01.zip"
+    }
+  ],
+  "confirmatory_claim_go": "NO_GO",
+  "fclr014_context": "2025+ cache provenance UNVERIFIED per fclr014_provenance_decision_20261107T133102Z.md; identity match is necessary but not sufficient (license/terms/completeness/leakage/prereg still required).",
+  "kinds": [
+    "fundingRate"
+  ],
+  "method": "bounded unauthenticated GET vs local cached zip sha256/etag (FCLR-016, 2025+ probe)",
+  "months": [
+    "2025-01"
+  ],
+  "placeholder_duplicate_files": [],
+  "placeholder_duplicate_note": "Daily kinds require a kind-specific subdir (<kind>-<day>/<sym>-1h-<day>.zip). A same-named top-level placeholder is not admissible for non-canonical kinds and is reported, never substituted.",
+  "source_base": "https://data.binance.vision/",
+  "summary": {
+    "match": 1,
+    "mismatch": 0,
+    "missing_local": 0,
+    "missing_remote": 0,
+    "new_this_run": 1,
+    "placeholder_duplicate_files": 0,
+    "remote_error": 0,
+    "total": 1
+  },
+  "symbols": [
+    "BTCUSDT"
+  ],
+  "timestamp_utc": "20261108T162625Z"
+}
