@@ -17,26 +17,42 @@ def _sha(p: Path) -> str:
 
 
 def build_report(pm_p, ca_p, te_p, pr_p) -> dict:
+    """Build read-only admissibility report. Never loads outcomes/data/network."""
+    pm_p, ca_p, te_p, pr_p = Path(pm_p), Path(ca_p), Path(te_p), Path(pr_p)
     res = rfa.check_admissibility_package(str(pm_p), str(ca_p), str(te_p), str(pr_p), expect_go=True)
     pm = json.loads(pm_p.read_text(encoding="utf-8"))
     ca = json.loads(ca_p.read_text(encoding="utf-8"))
     te = json.loads(te_p.read_text(encoding="utf-8"))
     pr = json.loads(pr_p.read_text(encoding="utf-8"))
-    gates = res.get("gates", {})
+    gates = res.get("gates", {}) if isinstance(res.get("gates"), dict) else {}
     blockers = [k for k, v in gates.items() if not v]
+    errors = res.get("errors", []) or []
+    pkg_ok = bool(res.get("ok", False))
+    all_go = bool(res.get("all_go", False)) and pkg_ok and not errors
     report = {
         "validator": "fclr016_v5_admissibility_report",
-        "ok": bool(res.get("ok", False)),
-        "all_go": bool(res.get("all_go", False)),
-        "confirmatory_outcomes_permitted": bool(res.get("confirmatory_outcomes_permitted", False)),
+        "ok": pkg_ok,
+        "all_go": all_go,
+        "confirmatory_outcomes_permitted": bool(res.get("confirmatory_outcomes_permitted", False)) and all_go,
         "gates": gates,
         "blockers": blockers,
-        "errors": res.get("errors", []) or [],
+        "errors": errors,
         "artifacts": {
             "provenance_license_manifest": {"path": str(pm_p), "sha256": _sha(pm_p)},
             "completeness_leakage_audit": {"path": str(ca_p), "sha256": _sha(ca_p)},
             "terms_evidence": {"path": str(te_p), "sha256": _sha(te_p)},
             "confirmatory_prereg": {"path": str(pr_p), "sha256": _sha(pr_p)},
+        },
+        "artifact_claims_summary": {
+            "provenance.confirmatory_provenance_go": pm.get("confirmatory_provenance_go"),
+            "provenance.admissibility_complete": pm.get("admissibility_complete"),
+            "completeness.verdict": ca.get("verdict"),
+            "completeness.admissibility_complete": ca.get("admissibility_complete"),
+            "terms.status": te.get("status"),
+            "terms.fabricated": te.get("fabricated"),
+            "prereg.draft": pr.get("draft"),
+            "prereg.confirmatory_claim_go": pr.get("confirmatory_claim_go"),
+            "prereg.admissibility_complete": pr.get("admissibility_complete"),
         },
         "required_human_terms_fields": [
             "terms_url_reviewed",
@@ -57,6 +73,9 @@ def build_report(pm_p, ca_p, te_p, pr_p) -> dict:
             "all guards green -> run package check + confirmatory guard "
             "(must refuse until frozen+all GO; must not load data on refusal)."
         ),
+        "no_confirmatory_outcomes": True,
+        "no_network": True,
+        "no_data_loading": True,
     }
     return report
 
