@@ -27,7 +27,7 @@
 - Funding ablations remain blocked until Gate 3 satisfied.
 
 ## Funding Ablations (Gate 4)
-**Updated:** 2026-11-08T11:15:16Z (multi-split, 3 splits, direct-variance OLS HAR; verdict=PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference))
+**Updated:** 2026-11-08T12:29:02Z (multi-split, 3 splits, direct-variance OLS HAR; verdict=PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference))
 **Verdict:** PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)
 
 | Ablation | QLIKE (mean) | ΔQLIKE vs A (pooled) | 95% block-bootstrap CI |
