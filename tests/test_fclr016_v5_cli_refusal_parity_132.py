@@ -313,9 +313,10 @@ class TestCrossCLIParity(unittest.TestCase):
         self.assertTrue(dr.get("ok"))
         self.assertFalse(dr.get("all_go"))
         self.assertFalse(dr.get("confirmatory_outcomes_permitted"))
-        # all real scenarios refuse
+        # all real/non-synthetic scenarios refuse (synthetic GO fixture is expected NOT refused)
+        non_synth = [s for s in dr.get("scenarios", []) if not s.get("synthetic_test_fixture")]
         self.assertTrue(all(s.get("expected_refused") and s.get("actual_refused") and s.get("status", "").startswith("PASS")
-                            for s in dr.get("scenarios", [])))
+                            for s in non_synth))
 
         # CLI subprocess parity (machine-readable blocked contracts)
         for name, cmd in CLIS:
@@ -370,7 +371,7 @@ class TestCrossCLIParity(unittest.TestCase):
             j = next(x for x in dr["scenarios"] if x.get("scenario_id") == "j_synthetic_go_fixture_only")
             self.assertTrue(j.get("status", "").startswith("PASS"), j)
             self.assertFalse(j.get("actual_refused"), j)  # synthetic fixture accepted by guard logic
-            self.assertTrue(j.get("result", {}).get("all_go"), j)
+            self.assertTrue(j.get("result_summary", {}).get("all_go"), j)  # synthetic fixture GO only
 
         self.assertEqual(before, self._canon_hashes(), "canonical real inputs mutated by synthetic fixture run")
 

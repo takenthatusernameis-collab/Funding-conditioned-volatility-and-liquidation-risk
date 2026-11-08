@@ -92,3 +92,91 @@ class TestFclr016V5Validator(unittest.TestCase):
                 "--prereg-draft", str(td/"fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json")], capture_output=True, text=True)
             self.assertNotEqual(p.returncode, 0)
             self.assertIn("terms_evidence", p.stdout)
+
+
+class TestCliRefusalHardening(unittest.TestCase):
+    """Validator CLI hardening: unknown args, malformed JSON top-level types,
+    unreadable/nonexistent paths. Stable machine-readable refusals, no GO claim."""
+
+    def _run(self, *args):
+        p = subprocess.run([sys.executable, str(VALIDATOR), *args], capture_output=True, text=True)
+        return p.returncode, p.stdout, p.stderr
+
+    def _real(self):
+        return [str(AUDIT / "fclr016_v5_provenance_license_manifest_20261108T014405Z.json"),
+                str(AUDIT / "fclr016_v5_completeness_leakage_audit_20261108T014405Z.json"),
+                str(AUDIT / "fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json"),
+                str(AUDIT / "fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json")]
+
+    def _assert_refusal(self, rc, out):
+        self.assertNotEqual(rc, 0, out)
+        obj = json.loads(out)
+        self.assertFalse(obj.get("ok"), obj)
+        self.assertFalse(obj.get("all_go", False), obj)
+        self.assertFalse(obj.get("confirmatory_outcomes_permitted", False), obj)
+        text = json.dumps(obj, sort_keys=True).upper().replace(" ", "")
+        self.assertNotIn('"CONFIRMATORY_CLAIM_GO": "GO"', text, obj)
+        self.assertNotIn('"ALL_GO": TRUE', text, obj)
+        return obj
+
+    def test_unknown_args_bogus_refused(self):
+        rc, out, _ = self._run("--bogus", "x", *self._real())
+        self._assert_refusal(rc, out)
+
+    def test_missing_required_arg_refused(self):
+        rc, out, _ = self._run("--provenance-manifest", self._real()[0],
+                               "--completeness-audit", self._real()[1],
+                               "--terms-evidence", self._real()[2])
+        self._assert_refusal(rc, out)
+
+    def _write_top(self, td: Path, text: str) -> Path:
+        p = td / "top.json"
+        p.write_text(text, encoding="utf-8")
+        return p
+
+    def test_top_level_array_refused(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            top = self._write_top(td, "[1, 2, 3]")
+            rc, out, _ = self._run("--provenance-manifest", str(top), *self._real()[1:])
+            self._assert_refusal(rc, out)
+
+    def test_top_level_string_refused(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            top = self._write_top(td, '"hello"')
+            rc, out, _ = self._run("--provenance-manifest", str(top), *self._real()[1:])
+            self._assert_refusal(rc, out)
+
+    def test_top_level_number_refused(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            top = self._write_top(td, "42")
+            rc, out, _ = self._run("--provenance-manifest", str(top), *self._real()[1:])
+            self._assert_refusal(rc, out)
+
+    def test_top_level_null_refused(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            top = self._write_top(td, "null")
+            rc, out, _ = self._run("--provenance-manifest", str(top), *self._real()[1:])
+            self._assert_refusal(rc, out)
+
+    def test_malformed_syntax_refused(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            top = self._write_top(td, "{not json")
+            rc, out, _ = self._run("--provenance-manifest", str(top), *self._real()[1:])
+            self._assert_refusal(rc, out)
+
+    def test_directory_path_refused(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            d = td / "adir"
+            d.mkdir()
+            rc, out, _ = self._run("--provenance-manifest", str(d), *self._real()[1:])
+            self._assert_refusal(rc, out)
+
+    def test_nonexistent_path_refused(self):
+        rc, out, _ = self._run("--provenance-manifest", "/nonexistent/fclr016_v5_missing_133.json", *self._real()[1:])
+        self._assert_refusal(rc, out)
