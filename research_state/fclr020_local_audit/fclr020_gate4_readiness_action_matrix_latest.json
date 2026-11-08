@@ -1,0 +1,1528 @@
+{
+  "artifact": "fclr020_gate4_readiness_action_matrix",
+  "caveats": {
+    "draft_only_not_frozen_not_promoted": true,
+    "lfs_pointer_treated_as_unavailable": true,
+    "no_confirmatory_outcomes_computed": true,
+    "no_prerequisite_marked_satisfied": true,
+    "no_satisfaction_inferred_from_absent_blocker": true,
+    "states_used": [
+      "present_unverified",
+      "present_blocker",
+      "missing"
+    ]
+  },
+  "confirmatory_outcomes_go": false,
+  "confirmatory_ready_now": false,
+  "decision": {
+    "confirmatory_outcomes_go": false,
+    "confirmatory_ready_now": false,
+    "reason": "draft_action_matrix_only_from_fclr019_no_confirmatory_authorization"
+  },
+  "draft_only": true,
+  "exploratory_only": true,
+  "global_actions": [
+    {
+      "action_required": [
+        "Keep v5 terms/admissibility fail-closed until verifiable human/legal evidence resolves blockers and package is GO.",
+        "Track A/H004 remains blocked; do not re-probe absent Hyperliquid months in a loop.",
+        "No .github/workflows edits; no sealed holdout/anchor overwrites; no competing handoff files."
+      ],
+      "authorizes_confirmatory_outcomes": false,
+      "scope": "global",
+      "verification_command_or_check": [
+        "python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200",
+        "python scripts/tracka_resume_check.py | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d['pass'], d['network'])\""
+      ]
+    }
+  ],
+  "input_fclr019": {
+    "path": "research_state/fclr019_local_audit/fclr019_gate4_evidence_bundle_index_latest.json",
+    "read_state": "ok",
+    "sha256": "d8f8080463f7f56277102287be662db79b1361714ebe0f6d2c6d473cb61c431f"
+  },
+  "no_confirmatory_outcomes": true,
+  "no_network": true,
+  "not_go_for_confirmatory_outcomes": true,
+  "purpose": "deterministic read-only per-window action matrix from FCLR-019; explicit blockers/actions/verifiers only; never authorizes confirmatory outcomes",
+  "report_sha256": "bc6169702e64100cdfb1f98427ebcd5cf768980b9408812cc810c38866ed7b73",
+  "timestamp_utc": "20261108T142025Z",
+  "version": 1,
+  "window_action_matrices": [
+    {
+      "action_rows": [
+        {
+          "action_required": [
+            "Human review required: verify cited provenance artifact is authentic, bounded, and sufficient for the intended confirmatory range.",
+            "Confirm 2024-04..09 confirmatory use remains bounded by PROVENANCED_CONFIRMATORY_RANGES + manifest/terms/admissibility guards.",
+            "Present-unverified is not satisfied; do not compute confirmatory outcomes on this basis alone."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "IDENTITY_VERIFIED_BOUNDED_FCLR015 for window per fclr018; confirmatory still bounded by ranges/manifest/terms/fresh-frozen-prereg",
+          "current_state": "present_unverified",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.provenance_status",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "identity_provenance_range",
+          "prerequisite_label": "Identity/provenance range evidence (bounded)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr015_gate4_cache_input_manifest.py --help >/dev/null 2>&1 || true  # read-only capability check (no confirmatory outcomes)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Resolve manifest and terms evidence blockers before any confirmatory use (human/legal review required for terms).",
+            "For v5 terms: produce verifiable RESOLVED_VERIFIED evidence only with fabricated=false and frozen scope; reconcile refs/hashes.",
+            "Never fabricate terms/license/reviews or mark terms resolved without verifiable facts."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_manifest=present_blocker, terms_evidence=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "manifest_terms_evidence",
+          "prerequisite_label": "Manifest/terms evidence package",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected",
+            "python scripts/fclr016_v5_promotion_dryrun.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Ensure provenance manifest exists, is readable, and states confirmatory_provenance_go/admissibility_complete/license_terms status with verifiable facts.",
+            "Reconcile manifest refs/hashes after any legitimate evidence update; do not overwrite sealed artifacts.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "confirmatory_provenance_go_false_or_missing",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 6709,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346"
+          },
+          "prerequisite_id": "manifest_terms_evidence.provenance_manifest",
+          "prerequisite_label": "Provenance/license manifest artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Human/legal action required: resolve EXPLICIT_BLOCKER_UNRESOLVED with verifiable evidence (fabricated=false).",
+            "Do not create RESOLVED_VERIFIED without frozen scope and reconciled refs/hashes; do not edit .github/workflows.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 3325,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+          },
+          "prerequisite_id": "manifest_terms_evidence.terms_evidence",
+          "prerequisite_label": "Terms/license evidence artifact (human/legal)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Resolve completeness/leakage/admissibility blockers with verifiable local artifacts; keep v5 all_go=false handling fail-closed until resolved.",
+            "Any confirmatory outcomes require real package all_go=true and fresh frozen prereg before outcomes."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "completeness=present_blocker, prereg_draft=None, v5_window=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "admissibility_package_status",
+          "prerequisite_label": "Admissibility package status",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Address listed completeness/leakage blockers with verifiable evidence before confirmatory use."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "blockers_remaining_count=2",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 4099,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8"
+          },
+          "prerequisite_id": "admissibility_package_status.completeness_leakage_audit",
+          "prerequisite_label": "Completeness/leakage audit artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "A DRAFT prereg skeleton/ref is not sufficient for confirmatory outcomes; fresh frozen prereg before outcomes is required."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "prereg_draft_or_not_frozen_before_outcomes",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 4193,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f"
+          },
+          "prerequisite_id": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "prerequisite_label": "Confirmatory prereg draft/ref artifact (not fresh frozen prereg)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Do not compute confirmatory outcomes while v5/window blocker state denies permission."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "prerequisite_label": "v5 window terms/admissibility state (from FCLR-018)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Create/freeze a fresh confirmatory preregistration BEFORE any confirmatory outcomes are computed (mandatory).",
+            "Record frozen prereg hash/ref and ensure all admissibility/provenance/terms/leakage guards are green before outcomes.",
+            "DRAFT prereg skeletons, FCLR-018 matrices, FCLR-019 indices, and FCLR-020 action matrices are NOT sufficient.",
+            "Do not run or present v4/exploratory/confounded analyses as confirmatory claims."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "current_state": "missing",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "fresh_frozen_prereg_before_outcomes_required",
+          "prerequisite_label": "Fresh frozen prereg before outcomes (required)",
+          "read_state": "policy_check",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "test ! -f research_state/NO_SUCH_FRESH_FROZEN_PREREG  # placeholder reminder: a concrete frozen prereg artifact path must be supplied and verified before outcomes"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        },
+        {
+          "action_required": [
+            "Verify chronological leakage controls, purge/embargo as preregistered, and >=3 non-overlapping 30-day blocks / >=5 symbols for claim-worthy Gate 4 runs.",
+            "Use only loader-compatible admissible local panel; do not threshold-shop or relax gates post-hoc.",
+            "Local coverage/block feasibility is not a substitute for admissibility package GO + fresh frozen prereg."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "local coverage/block-count feasibility fields present; leakage audit for any confirmatory run still requires fresh frozen prereg + admissibility package",
+          "current_state": "present_unverified",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.coverage/block_fields",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "leakage_sufficiency_gates",
+          "prerequisite_label": "Leakage controls and data sufficiency gates",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/run_funding_ablations.py  # baseline pilot must run clean with honest verdict (no confirmatory claim from this command alone)"
+          ],
+          "window_id": "cand_2024_04_09_evidenced"
+        }
+      ],
+      "basis": "fclr015_evidenced_bounded",
+      "confirmatory_outcomes_go": false,
+      "end": "2024-09-30",
+      "fclr019_index_summary_state": "present_blocker",
+      "start": "2024-04-01",
+      "window_id": "cand_2024_04_09_evidenced"
+    },
+    {
+      "action_rows": [
+        {
+          "action_required": [
+            "Provide verifiable bounded provenance/identity-range evidence for the candidate window (human/legal/repository evidence as applicable).",
+            "Do not run confirmatory outcomes until provenance is identity-verified for bounded confirmatory ranges and all other guards pass.",
+            "If FCLR-015 bounded context is claimed, ensure a readable local FCLR-015 artifact exists and is cited with hash/provenance facts (no fabrication)."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified', 'block_count_gate_lt_3']",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.provenance_status",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "identity_provenance_range",
+          "prerequisite_label": "Identity/provenance range evidence (bounded)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr015_gate4_cache_input_manifest.py --help >/dev/null 2>&1 || true  # read-only capability check (no confirmatory outcomes)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Resolve manifest and terms evidence blockers before any confirmatory use (human/legal review required for terms).",
+            "For v5 terms: produce verifiable RESOLVED_VERIFIED evidence only with fabricated=false and frozen scope; reconcile refs/hashes.",
+            "Never fabricate terms/license/reviews or mark terms resolved without verifiable facts."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_manifest=present_blocker, terms_evidence=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "manifest_terms_evidence",
+          "prerequisite_label": "Manifest/terms evidence package",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected",
+            "python scripts/fclr016_v5_promotion_dryrun.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Ensure provenance manifest exists, is readable, and states confirmatory_provenance_go/admissibility_complete/license_terms status with verifiable facts.",
+            "Reconcile manifest refs/hashes after any legitimate evidence update; do not overwrite sealed artifacts.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "confirmatory_provenance_go_false_or_missing",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 6709,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346"
+          },
+          "prerequisite_id": "manifest_terms_evidence.provenance_manifest",
+          "prerequisite_label": "Provenance/license manifest artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Human/legal action required: resolve EXPLICIT_BLOCKER_UNRESOLVED with verifiable evidence (fabricated=false).",
+            "Do not create RESOLVED_VERIFIED without frozen scope and reconciled refs/hashes; do not edit .github/workflows.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 3325,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+          },
+          "prerequisite_id": "manifest_terms_evidence.terms_evidence",
+          "prerequisite_label": "Terms/license evidence artifact (human/legal)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Resolve completeness/leakage/admissibility blockers with verifiable local artifacts; keep v5 all_go=false handling fail-closed until resolved.",
+            "Any confirmatory outcomes require real package all_go=true and fresh frozen prereg before outcomes."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "completeness=present_blocker, prereg_draft=None, v5_window=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "admissibility_package_status",
+          "prerequisite_label": "Admissibility package status",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Address listed completeness/leakage blockers with verifiable evidence before confirmatory use."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "blockers_remaining_count=2",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 4099,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8"
+          },
+          "prerequisite_id": "admissibility_package_status.completeness_leakage_audit",
+          "prerequisite_label": "Completeness/leakage audit artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "A DRAFT prereg skeleton/ref is not sufficient for confirmatory outcomes; fresh frozen prereg before outcomes is required."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "prereg_draft_or_not_frozen_before_outcomes",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 4193,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f"
+          },
+          "prerequisite_id": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "prerequisite_label": "Confirmatory prereg draft/ref artifact (not fresh frozen prereg)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Do not compute confirmatory outcomes while v5/window blocker state denies permission."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "prerequisite_label": "v5 window terms/admissibility state (from FCLR-018)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Create/freeze a fresh confirmatory preregistration BEFORE any confirmatory outcomes are computed (mandatory).",
+            "Record frozen prereg hash/ref and ensure all admissibility/provenance/terms/leakage guards are green before outcomes.",
+            "DRAFT prereg skeletons, FCLR-018 matrices, FCLR-019 indices, and FCLR-020 action matrices are NOT sufficient.",
+            "Do not run or present v4/exploratory/confounded analyses as confirmatory claims."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "current_state": "missing",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "fresh_frozen_prereg_before_outcomes_required",
+          "prerequisite_label": "Fresh frozen prereg before outcomes (required)",
+          "read_state": "policy_check",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "test ! -f research_state/NO_SUCH_FRESH_FROZEN_PREREG  # placeholder reminder: a concrete frozen prereg artifact path must be supplied and verified before outcomes"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Verify chronological leakage controls, purge/embargo as preregistered, and >=3 non-overlapping 30-day blocks / >=5 symbols for claim-worthy Gate 4 runs.",
+            "Use only loader-compatible admissible local panel; do not threshold-shop or relax gates post-hoc.",
+            "Local coverage/block feasibility is not a substitute for admissibility package GO + fresh frozen prereg."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "calendar_coverage_incomplete_or_unverified;block_count_gate_lt_3",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.coverage/block_fields",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "leakage_sufficiency_gates",
+          "prerequisite_label": "Leakage controls and data sufficiency gates",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/run_funding_ablations.py  # baseline pilot must run clean with honest verdict (no confirmatory claim from this command alone)"
+          ],
+          "window_id": "cand_2024_10_12_local_exploratory"
+        }
+      ],
+      "basis": "local_cache_contiguous_unprovenanced",
+      "confirmatory_outcomes_go": false,
+      "end": "2024-12-31",
+      "fclr019_index_summary_state": "present_blocker",
+      "start": "2024-10-01",
+      "window_id": "cand_2024_10_12_local_exploratory"
+    },
+    {
+      "action_rows": [
+        {
+          "action_required": [
+            "Provide verifiable bounded provenance/identity-range evidence for the candidate window (human/legal/repository evidence as applicable).",
+            "Do not run confirmatory outcomes until provenance is identity-verified for bounded confirmatory ranges and all other guards pass.",
+            "If FCLR-015 bounded context is claimed, ensure a readable local FCLR-015 artifact exists and is cited with hash/provenance facts (no fabrication)."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified']",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.provenance_status",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "identity_provenance_range",
+          "prerequisite_label": "Identity/provenance range evidence (bounded)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr015_gate4_cache_input_manifest.py --help >/dev/null 2>&1 || true  # read-only capability check (no confirmatory outcomes)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Resolve manifest and terms evidence blockers before any confirmatory use (human/legal review required for terms).",
+            "For v5 terms: produce verifiable RESOLVED_VERIFIED evidence only with fabricated=false and frozen scope; reconcile refs/hashes.",
+            "Never fabricate terms/license/reviews or mark terms resolved without verifiable facts."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_manifest=present_blocker, terms_evidence=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "manifest_terms_evidence",
+          "prerequisite_label": "Manifest/terms evidence package",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected",
+            "python scripts/fclr016_v5_promotion_dryrun.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Ensure provenance manifest exists, is readable, and states confirmatory_provenance_go/admissibility_complete/license_terms status with verifiable facts.",
+            "Reconcile manifest refs/hashes after any legitimate evidence update; do not overwrite sealed artifacts.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "confirmatory_provenance_go_false_or_missing",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 6709,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346"
+          },
+          "prerequisite_id": "manifest_terms_evidence.provenance_manifest",
+          "prerequisite_label": "Provenance/license manifest artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Human/legal action required: resolve EXPLICIT_BLOCKER_UNRESOLVED with verifiable evidence (fabricated=false).",
+            "Do not create RESOLVED_VERIFIED without frozen scope and reconciled refs/hashes; do not edit .github/workflows.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 3325,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+          },
+          "prerequisite_id": "manifest_terms_evidence.terms_evidence",
+          "prerequisite_label": "Terms/license evidence artifact (human/legal)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Resolve completeness/leakage/admissibility blockers with verifiable local artifacts; keep v5 all_go=false handling fail-closed until resolved.",
+            "Any confirmatory outcomes require real package all_go=true and fresh frozen prereg before outcomes."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "completeness=present_blocker, prereg_draft=None, v5_window=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "admissibility_package_status",
+          "prerequisite_label": "Admissibility package status",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Address listed completeness/leakage blockers with verifiable evidence before confirmatory use."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "blockers_remaining_count=2",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 4099,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8"
+          },
+          "prerequisite_id": "admissibility_package_status.completeness_leakage_audit",
+          "prerequisite_label": "Completeness/leakage audit artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "A DRAFT prereg skeleton/ref is not sufficient for confirmatory outcomes; fresh frozen prereg before outcomes is required."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "prereg_draft_or_not_frozen_before_outcomes",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 4193,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f"
+          },
+          "prerequisite_id": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "prerequisite_label": "Confirmatory prereg draft/ref artifact (not fresh frozen prereg)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Do not compute confirmatory outcomes while v5/window blocker state denies permission."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "prerequisite_label": "v5 window terms/admissibility state (from FCLR-018)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Create/freeze a fresh confirmatory preregistration BEFORE any confirmatory outcomes are computed (mandatory).",
+            "Record frozen prereg hash/ref and ensure all admissibility/provenance/terms/leakage guards are green before outcomes.",
+            "DRAFT prereg skeletons, FCLR-018 matrices, FCLR-019 indices, and FCLR-020 action matrices are NOT sufficient.",
+            "Do not run or present v4/exploratory/confounded analyses as confirmatory claims."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "current_state": "missing",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "fresh_frozen_prereg_before_outcomes_required",
+          "prerequisite_label": "Fresh frozen prereg before outcomes (required)",
+          "read_state": "policy_check",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "test ! -f research_state/NO_SUCH_FRESH_FROZEN_PREREG  # placeholder reminder: a concrete frozen prereg artifact path must be supplied and verified before outcomes"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        },
+        {
+          "action_required": [
+            "Verify chronological leakage controls, purge/embargo as preregistered, and >=3 non-overlapping 30-day blocks / >=5 symbols for claim-worthy Gate 4 runs.",
+            "Use only loader-compatible admissible local panel; do not threshold-shop or relax gates post-hoc.",
+            "Local coverage/block feasibility is not a substitute for admissibility package GO + fresh frozen prereg."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "calendar_coverage_incomplete_or_unverified",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.coverage/block_fields",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "leakage_sufficiency_gates",
+          "prerequisite_label": "Leakage controls and data sufficiency gates",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/run_funding_ablations.py  # baseline pilot must run clean with honest verdict (no confirmatory claim from this command alone)"
+          ],
+          "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+        }
+      ],
+      "basis": "local_cache_mixed_evidenced_prefix_unprovenanced_suffix",
+      "confirmatory_outcomes_go": false,
+      "end": "2024-12-31",
+      "fclr019_index_summary_state": "present_blocker",
+      "start": "2024-04-01",
+      "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+    },
+    {
+      "action_rows": [
+        {
+          "action_required": [
+            "Provide verifiable bounded provenance/identity-range evidence for the candidate window (human/legal/repository evidence as applicable).",
+            "Do not run confirmatory outcomes until provenance is identity-verified for bounded confirmatory ranges and all other guards pass.",
+            "If FCLR-015 bounded context is claimed, ensure a readable local FCLR-015 artifact exists and is cited with hash/provenance facts (no fabrication)."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified']",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.provenance_status",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "identity_provenance_range",
+          "prerequisite_label": "Identity/provenance range evidence (bounded)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr015_gate4_cache_input_manifest.py --help >/dev/null 2>&1 || true  # read-only capability check (no confirmatory outcomes)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Resolve manifest and terms evidence blockers before any confirmatory use (human/legal review required for terms).",
+            "For v5 terms: produce verifiable RESOLVED_VERIFIED evidence only with fabricated=false and frozen scope; reconcile refs/hashes.",
+            "Never fabricate terms/license/reviews or mark terms resolved without verifiable facts."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_manifest=present_blocker, terms_evidence=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "manifest_terms_evidence",
+          "prerequisite_label": "Manifest/terms evidence package",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected",
+            "python scripts/fclr016_v5_promotion_dryrun.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Ensure provenance manifest exists, is readable, and states confirmatory_provenance_go/admissibility_complete/license_terms status with verifiable facts.",
+            "Reconcile manifest refs/hashes after any legitimate evidence update; do not overwrite sealed artifacts.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "confirmatory_provenance_go_false_or_missing",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 6709,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346"
+          },
+          "prerequisite_id": "manifest_terms_evidence.provenance_manifest",
+          "prerequisite_label": "Provenance/license manifest artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Human/legal action required: resolve EXPLICIT_BLOCKER_UNRESOLVED with verifiable evidence (fabricated=false).",
+            "Do not create RESOLVED_VERIFIED without frozen scope and reconciled refs/hashes; do not edit .github/workflows.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 3325,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+          },
+          "prerequisite_id": "manifest_terms_evidence.terms_evidence",
+          "prerequisite_label": "Terms/license evidence artifact (human/legal)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Resolve completeness/leakage/admissibility blockers with verifiable local artifacts; keep v5 all_go=false handling fail-closed until resolved.",
+            "Any confirmatory outcomes require real package all_go=true and fresh frozen prereg before outcomes."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "completeness=present_blocker, prereg_draft=None, v5_window=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "admissibility_package_status",
+          "prerequisite_label": "Admissibility package status",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Address listed completeness/leakage blockers with verifiable evidence before confirmatory use."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "blockers_remaining_count=2",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 4099,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8"
+          },
+          "prerequisite_id": "admissibility_package_status.completeness_leakage_audit",
+          "prerequisite_label": "Completeness/leakage audit artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "A DRAFT prereg skeleton/ref is not sufficient for confirmatory outcomes; fresh frozen prereg before outcomes is required."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "prereg_draft_or_not_frozen_before_outcomes",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 4193,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f"
+          },
+          "prerequisite_id": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "prerequisite_label": "Confirmatory prereg draft/ref artifact (not fresh frozen prereg)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Do not compute confirmatory outcomes while v5/window blocker state denies permission."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "prerequisite_label": "v5 window terms/admissibility state (from FCLR-018)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Create/freeze a fresh confirmatory preregistration BEFORE any confirmatory outcomes are computed (mandatory).",
+            "Record frozen prereg hash/ref and ensure all admissibility/provenance/terms/leakage guards are green before outcomes.",
+            "DRAFT prereg skeletons, FCLR-018 matrices, FCLR-019 indices, and FCLR-020 action matrices are NOT sufficient.",
+            "Do not run or present v4/exploratory/confounded analyses as confirmatory claims."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "current_state": "missing",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "fresh_frozen_prereg_before_outcomes_required",
+          "prerequisite_label": "Fresh frozen prereg before outcomes (required)",
+          "read_state": "policy_check",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "test ! -f research_state/NO_SUCH_FRESH_FROZEN_PREREG  # placeholder reminder: a concrete frozen prereg artifact path must be supplied and verified before outcomes"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Verify chronological leakage controls, purge/embargo as preregistered, and >=3 non-overlapping 30-day blocks / >=5 symbols for claim-worthy Gate 4 runs.",
+            "Use only loader-compatible admissible local panel; do not threshold-shop or relax gates post-hoc.",
+            "Local coverage/block feasibility is not a substitute for admissibility package GO + fresh frozen prereg."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "calendar_coverage_incomplete_or_unverified",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.coverage/block_fields",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "leakage_sufficiency_gates",
+          "prerequisite_label": "Leakage controls and data sufficiency gates",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/run_funding_ablations.py  # baseline pilot must run clean with honest verdict (no confirmatory claim from this command alone)"
+          ],
+          "window_id": "cand_2025_01_12_local_exploratory"
+        }
+      ],
+      "basis": "local_cache_contiguous_unprovenanced",
+      "confirmatory_outcomes_go": false,
+      "end": "2025-12-31",
+      "fclr019_index_summary_state": "present_blocker",
+      "start": "2025-01-01",
+      "window_id": "cand_2025_01_12_local_exploratory"
+    },
+    {
+      "action_rows": [
+        {
+          "action_required": [
+            "Provide verifiable bounded provenance/identity-range evidence for the candidate window (human/legal/repository evidence as applicable).",
+            "Do not run confirmatory outcomes until provenance is identity-verified for bounded confirmatory ranges and all other guards pass.",
+            "If FCLR-015 bounded context is claimed, ensure a readable local FCLR-015 artifact exists and is cited with hash/provenance facts (no fabrication)."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified']",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.provenance_status",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "identity_provenance_range",
+          "prerequisite_label": "Identity/provenance range evidence (bounded)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr015_gate4_cache_input_manifest.py --help >/dev/null 2>&1 || true  # read-only capability check (no confirmatory outcomes)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Resolve manifest and terms evidence blockers before any confirmatory use (human/legal review required for terms).",
+            "For v5 terms: produce verifiable RESOLVED_VERIFIED evidence only with fabricated=false and frozen scope; reconcile refs/hashes.",
+            "Never fabricate terms/license/reviews or mark terms resolved without verifiable facts."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "provenance_manifest=present_blocker, terms_evidence=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "manifest_terms_evidence",
+          "prerequisite_label": "Manifest/terms evidence package",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected",
+            "python scripts/fclr016_v5_promotion_dryrun.py --bogus --json 2>&1 | head -c 200  # refusal path must be parseable, exit!=0 expected"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Ensure provenance manifest exists, is readable, and states confirmatory_provenance_go/admissibility_complete/license_terms status with verifiable facts.",
+            "Reconcile manifest refs/hashes after any legitimate evidence update; do not overwrite sealed artifacts.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "confirmatory_provenance_go_false_or_missing",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 6709,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346"
+          },
+          "prerequisite_id": "manifest_terms_evidence.provenance_manifest",
+          "prerequisite_label": "Provenance/license manifest artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Human/legal action required: resolve EXPLICIT_BLOCKER_UNRESOLVED with verifiable evidence (fabricated=false).",
+            "Do not create RESOLVED_VERIFIED without frozen scope and reconciled refs/hashes; do not edit .github/workflows.",
+            "No confirmatory outcomes/freeze/promotion while this prerequisite is not concretely satisfied by verifiable evidence."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 3325,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+          },
+          "prerequisite_id": "manifest_terms_evidence.terms_evidence",
+          "prerequisite_label": "Terms/license evidence artifact (human/legal)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Resolve completeness/leakage/admissibility blockers with verifiable local artifacts; keep v5 all_go=false handling fail-closed until resolved.",
+            "Any confirmatory outcomes require real package all_go=true and fresh frozen prereg before outcomes."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "completeness=present_blocker, prereg_draft=None, v5_window=present_blocker",
+          "current_state": "present_blocker",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "admissibility_package_status",
+          "prerequisite_label": "Admissibility package status",
+          "read_state": "from_fclr019_summary",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Address listed completeness/leakage blockers with verifiable evidence before confirmatory use."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "blockers_remaining_count=2",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+          "evidence_snapshot": {
+            "bytes": 4099,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "read_state": "readable",
+            "sha256": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8"
+          },
+          "prerequisite_id": "admissibility_package_status.completeness_leakage_audit",
+          "prerequisite_label": "Completeness/leakage audit artifact",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "A DRAFT prereg skeleton/ref is not sufficient for confirmatory outcomes; fresh frozen prereg before outcomes is required."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "prereg_draft_or_not_frozen_before_outcomes",
+          "current_state": "present_blocker",
+          "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+          "evidence_snapshot": {
+            "bytes": 4193,
+            "exists": true,
+            "path": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "read_state": "readable",
+            "sha256": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f"
+          },
+          "prerequisite_id": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "prerequisite_label": "Confirmatory prereg draft/ref artifact (not fresh frozen prereg)",
+          "read_state": "ok",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "test -f research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json && sha256sum research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # read-only existence/hash check",
+            "python3 -c \"import json; json.load(open('research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json')); print('json_ok')\"  # read-only parse check",
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Do not compute confirmatory outcomes while v5/window blocker state denies permission."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "prerequisite_label": "v5 window terms/admissibility state (from FCLR-018)",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Create/freeze a fresh confirmatory preregistration BEFORE any confirmatory outcomes are computed (mandatory).",
+            "Record frozen prereg hash/ref and ensure all admissibility/provenance/terms/leakage guards are green before outcomes.",
+            "DRAFT prereg skeletons, FCLR-018 matrices, FCLR-019 indices, and FCLR-020 action matrices are NOT sufficient.",
+            "Do not run or present v4/exploratory/confounded analyses as confirmatory claims."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "current_state": "missing",
+          "evidence_ref": null,
+          "evidence_snapshot": {
+            "exists": false,
+            "path": null,
+            "read_state": "no_path_cited"
+          },
+          "prerequisite_id": "fresh_frozen_prereg_before_outcomes_required",
+          "prerequisite_label": "Fresh frozen prereg before outcomes (required)",
+          "read_state": "policy_check",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "test ! -f research_state/NO_SUCH_FRESH_FROZEN_PREREG  # placeholder reminder: a concrete frozen prereg artifact path must be supplied and verified before outcomes"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        },
+        {
+          "action_required": [
+            "Verify chronological leakage controls, purge/embargo as preregistered, and >=3 non-overlapping 30-day blocks / >=5 symbols for claim-worthy Gate 4 runs.",
+            "Use only loader-compatible admissible local panel; do not threshold-shop or relax gates post-hoc.",
+            "Local coverage/block feasibility is not a substitute for admissibility package GO + fresh frozen prereg."
+          ],
+          "authorizes_confirmatory_outcomes": false,
+          "blocker_or_missing_reason": "calendar_coverage_incomplete_or_unverified",
+          "current_state": "present_blocker",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "evidence_snapshot": {
+            "exists": false,
+            "path": "fclr018.window.coverage/block_fields",
+            "read_state": "missing"
+          },
+          "prerequisite_id": "leakage_sufficiency_gates",
+          "prerequisite_label": "Leakage controls and data sufficiency gates",
+          "read_state": "from_fclr018",
+          "satisfaction_inferred": false,
+          "satisfied": false,
+          "verification_command_or_check": [
+            "python -m unittest discover tests -q  # baseline regression (no confirmatory outcomes)",
+            "python scripts/check_tracka_scope_registry_drift.py  # read-only drift check",
+            "python scripts/tracka_resume_check.py  # read-only resume check (network:false)",
+            "python scripts/run_funding_ablations.py  # baseline pilot must run clean with honest verdict (no confirmatory claim from this command alone)"
+          ],
+          "window_id": "cand_2024_01_12_local_exploratory"
+        }
+      ],
+      "basis": "local_cache_contains_evidenced_but_entire_window_not_verified",
+      "confirmatory_outcomes_go": false,
+      "end": "2024-12-31",
+      "fclr019_index_summary_state": "present_blocker",
+      "start": "2024-01-01",
+      "window_id": "cand_2024_01_12_local_exploratory"
+    }
+  ]
+}
