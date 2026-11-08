@@ -213,6 +213,18 @@ SCRIPT_REGISTRY = {
     "class": "prereg_utility",
     "reason": "fclr016_v5_promotion_dryrun.py: read-only Gate 4 v5 promotion dry-run harness; evaluates real blocked package plus synthetic-fixture-only GO matrix in tmp copies, never writes real terms evidence or canonical artifacts; no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
   },
+  "fclr017_gate4_cache_coverage_audit.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr017_gate4_cache_coverage_audit.py: deterministic read-only local cache coverage/integrity/planning audit for Gate 4 2024-04..09/12 5-symbol kline+funding data; planning evidence only, no outcome computation, no network, no freeze/promotion, no Track A claims, no canonical/sealed overwrite."
+  },
+  "fclr018_gate4_prereg_readiness_matrix.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr018_gate4_prereg_readiness_matrix.py: deterministic read-only Gate 4 prereg-readiness/draft design matrix from local evidence; enumerates candidate windows and emits DRAFT_NOT_FROZEN skeleton (no_confirmatory_outcomes/exploratory_only/no_network/not_go). Planning/draft only; no outcome computation, no freeze/promotion, no network, no Track A claims, no sealed overwrite."
+  },
+  "fclr019_gate4_evidence_bundle_index.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr019_gate4_evidence_bundle_index.py: deterministic read-only Gate 4 evidence-bundle index from fclr018+local provenance/admissibility refs; maps confirmatory prerequisites per candidate window to present_unverified/present_blocker/missing. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+  },
   "fclr016_v5_terms_evidence_template.py": {
     "class": "prereg_utility",
     "reason": "fclr016_v5_terms_evidence_template.py: deterministic non-evidentiary terms-evidence TEMPLATE generator; writes only a clearly non-evidentiary template to an explicit user path, never creates RESOLVED_VERIFIED status, no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."

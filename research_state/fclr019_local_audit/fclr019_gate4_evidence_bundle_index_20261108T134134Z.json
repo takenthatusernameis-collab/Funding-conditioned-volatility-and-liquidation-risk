@@ -1,0 +1,441 @@
+{
+  "artifact": "fclr019_gate4_evidence_bundle_index",
+  "candidate_indices": [
+    {
+      "basis": "fclr015_evidenced_bounded",
+      "checklist": {
+        "admissibility_package_status": {
+          "completeness_leakage_audit": {
+            "blocker_note": "blockers_remaining_count=2",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "confirmatory_prereg_draft_ref": {
+            "blocker_note": "prereg_draft_or_not_frozen_before_outcomes",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "v5_window_terms_state_from_fclr018": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+            "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "from_fclr018",
+            "state": "present_blocker"
+          }
+        },
+        "fresh_frozen_prereg_before_outcomes_required": {
+          "evidence_ref": null,
+          "note": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "read_state": "policy_check",
+          "state": "missing"
+        },
+        "identity_provenance_range": {
+          "blocker_note": null,
+          "evidence_ref": "fclr018.window.provenance_status",
+          "fclr015_evidence_artifact": {
+            "path": "research_state/fclr015_local_audit/fclr015_binance_vision_2024_04_09_probe_sampled_partial8_20261107T171925Z.json",
+            "read_state": "ok"
+          },
+          "read_state": "from_fclr018",
+          "state": "present_unverified",
+          "verification_note": "IDENTITY_VERIFIED_BOUNDED_FCLR015 for window per fclr018; confirmatory still bounded by ranges/manifest/terms/fresh-frozen-prereg"
+        },
+        "leakage_sufficiency_gates": {
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "read_state": "from_fclr018",
+          "state": "present_unverified",
+          "verification_note": "local coverage/block-count feasibility fields present; leakage audit for any confirmatory run still requires fresh frozen prereg + admissibility package"
+        },
+        "manifest_terms_evidence": {
+          "provenance_manifest": {
+            "blocker_note": "confirmatory_provenance_go_false_or_missing",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "terms_evidence": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          }
+        }
+      },
+      "confirmatory_outcomes_go": false,
+      "end": "2024-09-30",
+      "fclr018_confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "fclr018_provenance_status": "IDENTITY_VERIFIED_BOUNDED_FCLR015",
+      "index_summary_state": "present_blocker",
+      "start": "2024-04-01",
+      "window_id": "cand_2024_04_09_evidenced"
+    },
+    {
+      "basis": "local_cache_contiguous_unprovenanced",
+      "checklist": {
+        "admissibility_package_status": {
+          "completeness_leakage_audit": {
+            "blocker_note": "blockers_remaining_count=2",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "confirmatory_prereg_draft_ref": {
+            "blocker_note": "prereg_draft_or_not_frozen_before_outcomes",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "v5_window_terms_state_from_fclr018": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+            "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "from_fclr018",
+            "state": "present_blocker"
+          }
+        },
+        "fresh_frozen_prereg_before_outcomes_required": {
+          "evidence_ref": null,
+          "note": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "read_state": "policy_check",
+          "state": "missing"
+        },
+        "identity_provenance_range": {
+          "blocker_note": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified', 'block_count_gate_lt_3']",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "leakage_sufficiency_gates": {
+          "blocker_note": "calendar_coverage_incomplete_or_unverified;block_count_gate_lt_3",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "manifest_terms_evidence": {
+          "provenance_manifest": {
+            "blocker_note": "confirmatory_provenance_go_false_or_missing",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "terms_evidence": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          }
+        }
+      },
+      "confirmatory_outcomes_go": false,
+      "end": "2024-12-31",
+      "fclr018_confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "fclr018_provenance_status": "UNVERIFIED",
+      "index_summary_state": "present_blocker",
+      "start": "2024-10-01",
+      "window_id": "cand_2024_10_12_local_exploratory"
+    },
+    {
+      "basis": "local_cache_mixed_evidenced_prefix_unprovenanced_suffix",
+      "checklist": {
+        "admissibility_package_status": {
+          "completeness_leakage_audit": {
+            "blocker_note": "blockers_remaining_count=2",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "confirmatory_prereg_draft_ref": {
+            "blocker_note": "prereg_draft_or_not_frozen_before_outcomes",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "v5_window_terms_state_from_fclr018": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+            "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "from_fclr018",
+            "state": "present_blocker"
+          }
+        },
+        "fresh_frozen_prereg_before_outcomes_required": {
+          "evidence_ref": null,
+          "note": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "read_state": "policy_check",
+          "state": "missing"
+        },
+        "identity_provenance_range": {
+          "blocker_note": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified']",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "leakage_sufficiency_gates": {
+          "blocker_note": "calendar_coverage_incomplete_or_unverified",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "manifest_terms_evidence": {
+          "provenance_manifest": {
+            "blocker_note": "confirmatory_provenance_go_false_or_missing",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "terms_evidence": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          }
+        }
+      },
+      "confirmatory_outcomes_go": false,
+      "end": "2024-12-31",
+      "fclr018_confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "fclr018_provenance_status": "UNVERIFIED",
+      "index_summary_state": "present_blocker",
+      "start": "2024-04-01",
+      "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+    },
+    {
+      "basis": "local_cache_contiguous_unprovenanced",
+      "checklist": {
+        "admissibility_package_status": {
+          "completeness_leakage_audit": {
+            "blocker_note": "blockers_remaining_count=2",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "confirmatory_prereg_draft_ref": {
+            "blocker_note": "prereg_draft_or_not_frozen_before_outcomes",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "v5_window_terms_state_from_fclr018": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+            "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "from_fclr018",
+            "state": "present_blocker"
+          }
+        },
+        "fresh_frozen_prereg_before_outcomes_required": {
+          "evidence_ref": null,
+          "note": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "read_state": "policy_check",
+          "state": "missing"
+        },
+        "identity_provenance_range": {
+          "blocker_note": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified']",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "leakage_sufficiency_gates": {
+          "blocker_note": "calendar_coverage_incomplete_or_unverified",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "manifest_terms_evidence": {
+          "provenance_manifest": {
+            "blocker_note": "confirmatory_provenance_go_false_or_missing",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "terms_evidence": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          }
+        }
+      },
+      "confirmatory_outcomes_go": false,
+      "end": "2025-12-31",
+      "fclr018_confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "fclr018_provenance_status": "UNVERIFIED",
+      "index_summary_state": "present_blocker",
+      "start": "2025-01-01",
+      "window_id": "cand_2025_01_12_local_exploratory"
+    },
+    {
+      "basis": "local_cache_contains_evidenced_but_entire_window_not_verified",
+      "checklist": {
+        "admissibility_package_status": {
+          "completeness_leakage_audit": {
+            "blocker_note": "blockers_remaining_count=2",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "confirmatory_prereg_draft_ref": {
+            "blocker_note": "prereg_draft_or_not_frozen_before_outcomes",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "v5_window_terms_state_from_fclr018": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED all_go=False confirmatory_outcomes_permitted=False",
+            "evidence_ref": "fclr018.window.v5_terms_blocker_state",
+            "read_state": "from_fclr018",
+            "state": "present_blocker"
+          }
+        },
+        "fresh_frozen_prereg_before_outcomes_required": {
+          "evidence_ref": null,
+          "note": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+          "read_state": "policy_check",
+          "state": "missing"
+        },
+        "identity_provenance_range": {
+          "blocker_note": "provenance_status=UNVERIFIED; reasons=['v5_terms_blocker_unresolved_all_go_false', 'provenance_not_identity_verified_bounded_fclr015', 'calendar_coverage_incomplete_or_unverified']",
+          "evidence_ref": "fclr018.window.provenance_status",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "leakage_sufficiency_gates": {
+          "blocker_note": "calendar_coverage_incomplete_or_unverified",
+          "evidence_ref": "fclr018.window.coverage/block_fields",
+          "read_state": "from_fclr018",
+          "state": "present_blocker"
+        },
+        "manifest_terms_evidence": {
+          "provenance_manifest": {
+            "blocker_note": "confirmatory_provenance_go_false_or_missing",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          },
+          "summary_state": "present_blocker",
+          "terms_evidence": {
+            "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+            "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+            "note": null,
+            "read_state": "ok",
+            "state": "present_blocker"
+          }
+        }
+      },
+      "confirmatory_outcomes_go": false,
+      "end": "2024-12-31",
+      "fclr018_confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "fclr018_provenance_status": "UNVERIFIED",
+      "index_summary_state": "present_blocker",
+      "start": "2024-01-01",
+      "window_id": "cand_2024_01_12_local_exploratory"
+    }
+  ],
+  "caveats": {
+    "draft_only_not_frozen_not_promoted": true,
+    "lfs_pointer_treated_as_unavailable_pointer_missing_state": true,
+    "no_confirmatory_outcomes_computed": true,
+    "no_prerequisite_marked_satisfied": true,
+    "states_used": [
+      "present_unverified",
+      "present_blocker",
+      "missing"
+    ],
+    "v5_all_go_false_terms_explicit_blocker_unresolved_expected": true
+  },
+  "decision": {
+    "confirmatory_outcomes_go": false,
+    "confirmatory_ready_now": false,
+    "reason": "draft_evidence_index_only_v5_terms_blocker_and_fresh_frozen_prereg_missing"
+  },
+  "draft_only": true,
+  "exploratory_only": true,
+  "fresh_frozen_prereg_before_outcomes_required": {
+    "evidence_ref": null,
+    "note": "fresh frozen prereg before outcomes required = missing/not frozen (no concrete local frozen prereg artifact confirmed by this index)",
+    "read_state": "policy_check",
+    "state": "missing"
+  },
+  "global_v5_evidence": {
+    "completeness_leakage_audit": {
+      "blocker_note": "blockers_remaining_count=2",
+      "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+      "note": null,
+      "read_state": "ok",
+      "state": "present_blocker"
+    },
+    "confirmatory_prereg_draft": {
+      "blocker_note": "prereg_draft_or_not_frozen_before_outcomes",
+      "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+      "note": null,
+      "read_state": "ok",
+      "state": "present_blocker"
+    },
+    "provenance_manifest": {
+      "blocker_note": "confirmatory_provenance_go_false_or_missing",
+      "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+      "note": null,
+      "read_state": "ok",
+      "state": "present_blocker"
+    },
+    "terms_evidence": {
+      "blocker_note": "terms_status=EXPLICIT_BLOCKER_UNRESOLVED",
+      "evidence_ref": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+      "note": null,
+      "read_state": "ok",
+      "state": "present_blocker"
+    }
+  },
+  "inputs": {
+    "fclr015_dir": "research_state/fclr015_local_audit",
+    "fclr015_evidence_scan": {
+      "path": "research_state/fclr015_local_audit/fclr015_binance_vision_2024_04_09_probe_sampled_partial8_20261107T171925Z.json",
+      "read_state": "ok"
+    },
+    "fclr016_dir": "research_state/fclr016_local_audit",
+    "fclr018_latest": {
+      "path": "research_state/fclr018_local_audit/fclr018_gate4_prereg_readiness_latest.json",
+      "read_state": "ok",
+      "sha256": "98823eb613a8c4949cf0ff2d79fe54fa61f09569d1ce810c47bfc9236d23f266"
+    },
+    "v5_refs": {
+      "completeness_leakage_audit": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+      "confirmatory_prereg_draft": "research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json",
+      "provenance_manifest": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+      "terms_evidence": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json"
+    }
+  },
+  "no_confirmatory_outcomes": true,
+  "no_network": true,
+  "not_go_for_confirmatory_outcomes": true,
+  "purpose": "deterministic read-only evidence-bundle index per candidate window; maps confirmatory prerequisites to present_unverified/present_blocker/missing from local files/fields only",
+  "report_sha256": "aa0ab9fc361c312796e09ad94ed74a6c1847fe716c3440e1cbe3035c6992b4c8",
+  "timestamp_utc": "20261108T134134Z",
+  "version": 1
+}
