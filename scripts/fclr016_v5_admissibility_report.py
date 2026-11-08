@@ -132,9 +132,11 @@ def main(argv=None) -> int:
         try:
             args = ap.parse_args(argv)
         except SystemExit as e:
-            # argparse already printed usage; keep stable exit code.
             code = e.code if isinstance(e.code, int) else 2
-            return code if code != 0 else 0
+            if code == 0:
+                return 0
+            print(json.dumps(_refusal(f"argparse error: {e}"), sort_keys=True))
+            return code
         pm_p = Path(args.provenance_manifest)
         ca_p = Path(args.completeness_audit)
         te_p = Path(args.terms_evidence_override or args.terms_evidence)

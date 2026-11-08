@@ -483,7 +483,10 @@ def main(argv: list[str] | None = None) -> int:
             args = ap.parse_args(argv)
         except SystemExit as e:
             code = e.code if isinstance(e.code, int) else 2
-            return code if code != 0 else 0
+            if code == 0:
+                return 0
+            print(json.dumps(_cli_refusal(f"argparse error: {e}"), sort_keys=True))
+            return code
         paths = [Path(args.provenance_manifest), Path(args.completeness_audit),
                  Path(args.terms_evidence), Path(args.prereg_draft)]
         for p in paths:
