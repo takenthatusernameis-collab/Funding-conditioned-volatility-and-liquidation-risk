@@ -1,4 +1,4 @@
-# FCLR-017 Gate 4 cache coverage audit (20261108T124022Z)
+# FCLR-017 Gate 4 cache coverage audit (20261108T200626Z)
 
 - method: deterministic local filesystem inventory; read-only; no network; no model-outcome computation
 - cache_root: `research_state/data_cache`
