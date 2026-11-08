@@ -1,0 +1,61 @@
+{
+  "artifact_kind": "fclr016_bnb_postquarantine_reconciliation",
+  "cache_identity_vs_binance_vision": "GO",
+  "caveat": "Reconciliation binds prior 371/371 MATCH remote checks to post-quarantine filesystem state (0 BNB top-level placeholders) plus bounded post-quarantine recheck; not a single monolithic fresh full probe artifact. FCLR-014 guard/provenance manifest/completeness/leakage/prereg still required before any confirmatory outcomes.",
+  "confirmatory_claim_go": "NO_GO",
+  "evidence": {
+    "full_match_chunk": {
+      "checks_total_including_resumed": 371,
+      "note": "371/371 MATCH; chunk self-reported placeholder_duplicate_files at run time due to stale top-level BNB zips later quarantined.",
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_bnb_full_canonical_v5_chunk_20261107T2350Z_20261107T235409Z.json",
+      "summary": {
+        "match": 371,
+        "mismatch": 0,
+        "missing_local": 0,
+        "missing_remote": 0,
+        "new_this_run": 71,
+        "placeholder_duplicate_files": 61,
+        "remote_error": 0,
+        "total": 371
+      }
+    },
+    "postquarantine_recheck": {
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_bnb_full_canonical_v5_postquarantine_recheck_20261107T2356Z_20261107T235610Z.json",
+      "summary": {
+        "match": 20,
+        "mismatch": 0,
+        "missing_local": 0,
+        "missing_remote": 0,
+        "new_this_run": 20,
+        "placeholder_duplicate_files": 0,
+        "remote_error": 0,
+        "total": 20
+      },
+      "verdict": "GO_PARTIAL_BOUNDED"
+    },
+    "quarantine_manifest": {
+      "bnb_moves": 80,
+      "path": "research_state/fclr016_local_audit/fclr016_quarantine_top_level_placeholders_bnbsolxrp_full_20261107T235600Z.json"
+    }
+  },
+  "postquarantine_top_level_bnb_daily_zips_remaining": 0,
+  "scope": {
+    "kinds": [
+      "fundingRate",
+      "klines",
+      "markPriceKlines",
+      "indexPriceKlines",
+      "premiumIndexKlines"
+    ],
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "sample_days": "full",
+    "symbols": [
+      "BNBUSDT"
+    ]
+  },
+  "ts_utc": "2026-11-07T23:58:30Z"
+}
