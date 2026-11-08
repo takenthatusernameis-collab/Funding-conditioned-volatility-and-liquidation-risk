@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-08T09:47:18Z, git HEAD `b3392ac4e` local + this session's uncommitted heavy delta) — SINGLE DURABLE HANDOFF / Next Agentic Session
+## Initial Task Message (2026-11-08T10:24:50Z, git HEAD `120e4321f` local + this session's uncommitted heavy delta) — SINGLE DURABLE HANDOFF / Next Agentic Session
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`. **Repo-name priority (enforced):** (1) **funding-conditioned volatility forecasting** (Track C / Gate 4, local admissible Binance kline+funding data — measurable, unblocked, heavy) → (2) **liquidation risk** (Track A observed / Track B modeled — **never conflated**; Track A blocked, no trigger). **Mission:** empirical/research only; **no trading/orders**; no fabricated data/terms/reviews; chronological leakage-resistant OOS only; sealed holdouts untouched; **no `.github/workflows` edits**; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff — do not create competing handoff/status files.**
 
