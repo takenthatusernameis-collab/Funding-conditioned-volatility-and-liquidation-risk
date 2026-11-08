@@ -1,7 +1,7 @@
 # Evaluation Summary - Funding Ablations (Gate 4, multi-split pilot)
 
-**Generated:** 2026-11-07T03:21:33Z
-**Git SHA:** 97dbc2add1a0441f49b1d901e4aae546a1282a37
+**Generated:** 2026-11-08T08:55:08Z
+**Git SHA:** f258f7bde1f7b715244bc73ee6db1fd2ad558a70
 **Pre-registration:** `research_state/pre_registration_gate4_funding_multisplit_20261107.md` (frozen before outcomes)
 **Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 3 pre-registered walk-forward splits
 **Model:** direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)
@@ -11,8 +11,7 @@
 - instruments=4 (required >=5): NOT MET
 - claim-worthy: False
 - shortfall: instruments=4 < 5
-- shortfall: no_30day_non_overlapping_test_blocks (pre-reg uses 14-day windows; Q1 2024 local data insufficient for >=3 x 30-day)
-- shortfall: q1_2024_only_local_data
+- shortfall: insufficient_30day_non_overlapping_test_blocks (ok_30d=0, required>=3, split_test_days=[14, 14, 14])
 
 ## Aggregate (mean across OK splits)
 | Ablation | QLIKE | MAE | RMSE | ΔQLIKE vs A (pooled paired) | 95% block-bootstrap CI | n_obs/n_blocks |
@@ -71,6 +70,7 @@
 - Basis/premium not included (no aligned admissible local series verified); missing treated as NaN per policy.
 
 ## Caveats (non-negotiable)
-- **Pilot/inconclusive:** 4 instruments (<5), Q1-2024-only local data, 14-day test windows — does not satisfy FCLR-001 claim-worthy criteria (>=5 instruments, >=3 non-overlapping 30-day blocks, robust uncertainty).
-- **Do NOT promote to confirmatory, do NOT claim economic value, do NOT build any overlay.** Point estimates/CIs are pilot evidence only.
-- Direction/magnitude can change with more data, more splits, and claim-worthy instrument/block coverage.
+- **Verdict:** PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)
+- **Data sufficiency:** instruments=4 (NOT MET; required >=5); ok_30day_splits=0 (required>=3) => meets_claim_worthy_data_sufficiency=False.
+- **No economic value claim, no overlay, no Track A linkage.** Observed metrics are out-of-sample forecast evidence under pre-registered design; instability across splits/instrument sets must be reported honestly.
+- If any leakage/alignment doubt exists, treat as non-confirmatory.

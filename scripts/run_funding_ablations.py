@@ -33,6 +33,8 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 # import time.
 
 REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
 RAW = REPO / "data" / "raw"
 RES = REPO / "research_state"
 ZIPS_DIR = REPO

@@ -27,7 +27,7 @@
 - Funding ablations remain blocked until Gate 3 satisfied.
 
 ## Funding Ablations (Gate 4)
-**Updated:** 2026-11-07T03:21:33Z (multi-split pilot, 3 splits, direct-variance OLS HAR; NOT claim-worthy)
+**Updated:** 2026-11-08T08:55:08Z (multi-split, 3 splits, direct-variance OLS HAR; verdict=PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference))
 **Verdict:** PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)
 
 | Ablation | QLIKE (mean) | ΔQLIKE vs A (pooled) | 95% block-bootstrap CI |
@@ -38,4 +38,4 @@
 | D_rv_signed_abs | 16.987894191103717 | 8.400940116333015 | [-0.12384387813653992, 24.20983559418449] |
 | E_rv_funding_trails | 5.543607735488995 | 4.6124034791315704 | [-0.1288482496015316, 13.12243540310433] |
 
-> Shortfalls: instruments=4 < 5; no_30day_non_overlapping_test_blocks (pre-reg uses 14-day windows; Q1 2024 local data insufficient for >=3 x 30-day); q1_2024_only_local_data. No confirmatory claim; no economic value claim.
+> Shortfalls: instruments=4 < 5; insufficient_30day_non_overlapping_test_blocks (ok_30d=0, required>=3, split_test_days=[14, 14, 14]). No confirmatory claim; no economic value claim.

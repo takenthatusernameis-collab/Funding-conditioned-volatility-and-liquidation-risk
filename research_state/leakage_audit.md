@@ -19,7 +19,7 @@
 - **Verdict:** no unresolved leakage/label issue capable of reversing the conclusion. Gate NOT_MET on outcome criteria (CI crosses zero, relative reduction -1.32% < 2% floor, only 1 non-overlapping 30-day test block < 3), not on leakage.
 
 ## Funding ablations (Gate 4, multi-split pilot, direct-variance OLS)
-- **Updated:** 2026-11-07T20:54:37Z
+- **Updated:** 2026-11-08T08:55:08Z
 - [x] Funding ffill last-known at/before hour (no future).
 - [x] Trailing funding stats past-only on aligned series.
 - [x] Chronological multi-split walk-forward, purge/embargo=7d.
