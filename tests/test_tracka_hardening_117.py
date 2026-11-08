@@ -201,6 +201,26 @@ SCRIPT_REGISTRY = {
     "class": "raw_fetch_monitor_provenance",
     "reason": "fclr016_repair_canonical_cache.py: bounded unauthenticated Binance Vision canonical cache repair for 2025+ (downloads missing canonical daily zips into kind-specific subdirs; no overwrites; sha256/ETag/Last-Modified recorded); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
   },
+  "fclr016_v5_admissibility_report.py": {
+    "class": "prereg_utility",
+    "reason": "fclr016_v5_admissibility_report.py: read-only Gate 4 v5 admissibility report; reads 4 package artifacts (provenance manifest, completeness/leakage audit, terms evidence, prereg draft) and emits a stable JSON refusal verdict; no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
+  },
+  "fclr016_v5_preflight_summary.py": {
+    "class": "prereg_utility",
+    "reason": "fclr016_v5_preflight_summary.py: read-only Gate 4 v5 preflight summary; runs fail-closed admissibility package check and emits JSON + markdown refusal matrix; no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
+  },
+  "fclr016_v5_promotion_dryrun.py": {
+    "class": "prereg_utility",
+    "reason": "fclr016_v5_promotion_dryrun.py: read-only Gate 4 v5 promotion dry-run harness; evaluates real blocked package plus synthetic-fixture-only GO matrix in tmp copies, never writes real terms evidence or canonical artifacts; no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
+  },
+  "fclr016_v5_terms_evidence_template.py": {
+    "class": "prereg_utility",
+    "reason": "fclr016_v5_terms_evidence_template.py: deterministic non-evidentiary terms-evidence TEMPLATE generator; writes only a clearly non-evidentiary template to an explicit user path, never creates RESOLVED_VERIFIED status, no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
+  },
+  "fclr016_validate_v5_admissibility.py": {
+    "class": "prereg_utility",
+    "reason": "fclr016_validate_v5_admissibility.py: deterministic read-only Gate 4 v5 admissibility validator; fail-closed on the 4-artifact package, exits 0 for consistent blocked/non-GO package and 2 with --expect-go unless full confirmatory GO; no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
+  },
   "fclr016_verify_cache_provenance_2025plus.py": {
     "class": "raw_fetch_monitor_provenance",
     "reason": "fclr016_verify_cache_provenance_2025plus.py: bounded unauthenticated Binance Vision provenance verification for cached 2025+ files (sha256/ETag/Last-Modified GET vs local canonical zips, placeholder-duplicate hazard detection); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
