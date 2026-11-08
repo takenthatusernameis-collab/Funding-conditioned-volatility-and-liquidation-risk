@@ -22,6 +22,14 @@
 - Gate 4 baseline `run_funding_ablations.py` → clean honest verdict (**PILOT/INCONCLUSIVE**, data-sufficiency criteria not met, primary CI spans 0). Direct-variance OLS HAR pilot: n_obs=1819, n_blocks=41, CI [-0.129, 13.122] spans 0.
 - `python scripts/fclr023_gate4_blocker_resolution_action_plan.py` → smoke OK; 45 groups / 45 packets / 45 warnings; draft-only flags as required.
 
+### State re-verified 2026-11-08T16:15Z (local; numpy/pandas/scipy installed from requirements.txt — prior env blocker cleared)
+- `python -m unittest discover tests -q` → **exit 0, OK, Ran 928 tests** (0 failures).
+- `check_tracka_scope_registry_drift.py` → **108/108 PASS** (script_count 108/108 incl. fclr022/fclr023).
+- `tracka_resume_check.py` → **pass:true, 17 checks, network:false**.
+- `--bogus` refusals → parseable JSON / argparse exit!=0 (2), no traceback (fclr016 v5 report + promotion dryrun; tracka resume gate + operator report print usage, exit 2).
+- `python scripts/fclr023_gate4_blocker_resolution_action_plan.py` → smoke OK; 45 groups / 45 packets / 45 warnings; all draft-only/non-confirmatory; `packet_ready_for_human_or_prereg_action=false`.
+- FCLR-NEXT-146 prerequisites green: state verified, Track C/Gate 4 unblocked and measurable; Track A remains BLOCKED/no trigger (2026-11 = 404, no re-probe).
+
 ### Working-tree note (not committed)
 - Untracked planning/draft artifacts from prior sessions remain: `scripts/fclr020_gate4_readiness_action_matrix.py`, `tests/test_fclr020_gate4_readiness_action_matrix.py`, `research_state/fclr020_local_audit/`, `scripts/fclr021_gate4_blocker_resolution_checklist_validator.py`, `tests/test_fclr021_gate4_blocker_resolution_checklist_validator.py`, `research_state/fclr021_local_audit/` (**draft/planning evidence only, not GO, not frozen**).
 - FCLR-022/FCLR-023 artifacts present in working tree (tracked in git index per current state): `scripts/fclr022...`, `scripts/fclr023...`, `research_state/fclr022_local_audit/`, `research_state/fclr023_local_audit/` outputs; `tests/test_fclr022...`, `tests/test_fclr023...` added this session (verify tracked/untracked before commit). Tracked modified vs HEAD at session start included `research_state/tracka_script_scope_registry.json` (+fclr022/+fclr023) and restored run side effects — confirm final diff before commit.
@@ -43,8 +51,8 @@
 
 ---
 
-## NEXT SESSION INITIAL TASK — 2026-11-08T15:47Z (SINGLE DURABLE HANDOFF)
-**Task ID:** FCLR-NEXT-146 (P0, heavy, unblocked, measurable) — repo-name priority: Track C / Gate 4 funding-conditioned volatility forecasting FIRST; Track A liquidation risk BLOCKED/no trigger (2026-11 = 404, no re-probe loop), never conflated with modeled Track B.
+## NEXT SESSION INITIAL TASK — 2026-11-08T16:15Z (SINGLE DURABLE HANDOFF)
+**Task ID:** FCLR-NEXT-146 (P0, heavy, unblocked, measurable) — repo-name priority: Track C / Gate 4 funding-conditioned volatility forecasting FIRST; Track A liquidation risk BLOCKED/no trigger (2026-11 = 404, no re-probe loop), never conflated with modeled Track B. State re-verified green 2026-11-08T16:15Z (928 tests OK, drift 108/108, refusals parseable, fclr023 draft-only intact). FCLR-NEXT-146 has NOT been executed yet — this session's deliverable is to run its acceptance and deliver measurable Track C/Gate 4 heavy delta.
 **Objective:** Verify FCLR-NEXT-145 delivery is intact, then execute the unblocked Track C / Gate 4 heavy work: (a) re-run the focus campaign acceptance below and confirm `research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_latest.{json,md}` exists with `packet_ready_for_human_or_prereg_action=false`, `human_legal_required=true` on 15 terms/legal rows, `fresh_frozen_prereg_required=true` on 10 prereg rows, all global flags draft-only/non-confirmatory; (b) extend the admissible local Track C evidence base without network where possible — run `scripts/fclr016_verify_cache_provenance_2025plus.py` and `scripts/fclr016_verify_cache_provenance_2024q2q3.py` (bounded unauthenticated Binance Vision provenance GETs only; admissibility evidence, no outcomes) and inspect `research_state/data_inventory.json`/`cached_inputs_hashes.json` for gaps across the 5-symbol 2024-04..09 panel and any 2025+ cache; (c) draft (not freeze) the next prereg skeleton for a **new claim-worthy Track C run** per resume trigger #3: loader-compatible admissible local panel, ≥5 sym, ≥3 non-overlapping 30-day blocks, fresh frozen prereg **before** outcomes; confirmatory only within `PROVENANCED_CONFIRMATORY_RANGES` 2024-04..09 with manifest/terms/admissibility evidence, else exploratory. **No confirmatory outcomes without frozen prereg; no Track A re-probe; no overlay claims.**
 
 ### Focus campaign (run every session — future agents must do heavy work; do not skip)
