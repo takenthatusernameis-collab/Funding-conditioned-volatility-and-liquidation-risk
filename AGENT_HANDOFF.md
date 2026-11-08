@@ -1,53 +1,50 @@
-## Initial Task Message (2026-11-08T09:23:42Z, git HEAD `a438a3aeb`) — SINGLE DURABLE HANDOFF / Next Agentic Session
+## Initial Task Message (2026-11-08T09:32:30Z, git HEAD `0077e4129`) — SINGLE DURABLE HANDOFF / Next Agentic Session
 
-**Repo:** `Funding-conditioned-volatility-and-liquidation-risk`. **Repo-name priority:** (1) funding-conditioned volatility forecasting (Track C / Gate 4, local data — measurable, unblocked, heavy), (2) liquidation risk (Track A observed / Track B modeled — never conflated; Track A blocked/no trigger). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff — do not create competing handoff files.**
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk`. **Repo-name priority (enforced):** (1) **funding-conditioned volatility forecasting** (Track C / Gate 4, local admissible Binance kline+funding data — measurable, unblocked, heavy) → (2) **liquidation risk** (Track A observed / Track B modeled — **never conflated**; Track A blocked, no trigger). **Mission:** empirical/research only; **no trading/orders**; no fabricated data/terms/reviews; chronological leakage-resistant OOS only; sealed holdouts untouched; **no `.github/workflows` edits**; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff — do not create competing handoff/status files.**
 
-### Bottlenecks removed this session (delivered before this message)
+### Bottlenecks removed (do not redo)
+1. Env deps installed (`numpy/pandas/scipy`) — removed 21 pre-existing `ModuleNotFoundError` collection failures.
+2. `scripts/run_funding_ablations.py` (Gate 4) fixed: lazy `loader`/`np`/`pd`/feature/eval/volatility imports — pipeline runs end-to-end with honest verdicts.
+3. **Verified 2026-11-08T09:32Z (local, no network):** `python -m unittest discover tests -q` → **883 tests, 0 failures, OK**; `scripts/check_tracka_scope_registry_drift.py` → **101/101 PASS**; `scripts/tracka_resume_check.py` → `pass:true, 17 checks, network:false`; v5 CLI refusal parity (`--bogus` on `fclr016_v5_admissibility_report/promotion_dryrun`, `tracka_resume_gate/operator_report --bogus --json`) → parseable JSON/usage, exit!=0, no tracebacks, canonical outputs unchanged. `run_funding_ablations` (default 4-sym 2024-01..03 pilot) runs clean → `PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)`.
 
-1. Environment: `pip install -r requirements.txt` (numpy, pandas, scipy) — removed 21 pre-existing `ModuleNotFoundError` env/import errors that failed collection across 7 test modules.
-2. `scripts/run_funding_ablations.py` (Gate 4 pipeline): fixed undefined names blocking every data-loading path — lazy `from src.ingest import loader` in `ensure_extracted`/`load_funding_series`/`load_kline_series`; module-level `import numpy as np` + `import pandas as pd`; lazy feature/eval/volatility imports at each use site.
-3. Verification (re-confirmed this session): `python -m unittest discover tests` → **883 tests, 0 failures, OK**; `scripts/run_funding_ablations.py` → runs clean end-to-end, honest `PILOT/INCONCLUSIVE` verdict (data-sufficiency criteria not met; no claim-worthy inference); `check_tracka_scope_registry_drift.py` → **101/101 pass**; `tracka_resume_check.py` → `pass:true, 17 checks, network False`; v5 CLI refusal parity (`--bogus` JSON refusal on report/promotion-dryrun/validator) preserved.
+### Current evidence state (honest; preserve nulls)
+- **Gate 4 delivered (pre-registered, claim-worthy data-sufficiency MET, forecast skill NOT demonstrated):** `GATE4-FUND-VOL-ABLATIONS-MSPLIT-V3-30D` (5 sym BTC/ETH/SOL/XRP/BNB, 2024-04-01..2024-09-30, 4×30-day walk-forward test blocks, 7d purge/embargo, block bootstrap seed=12345 reps=2000 block=24h). Primary **E (RV+funding trails) vs A (RV-only): point +0.488, 95% CI [-0.042, 1.197] spans 0 (n_obs=12969, n_blocks=120)**. A_rv_only best aggregate QLIKE (0.798). **Verdict: PILOT/INCONCLUSIVE on primary; no incremental forecast skill; H001 NOT_SUPPORTED; risk overlay INELIGIBLE.** Artifacts: `research_state/evaluation_summary_funding_v3_30d.md`, `research_state/run_manifest_funding_v3_30d.json`, prereg `research_state/pre_registration_gate4_funding_multisplit_v3_30d_20261107T033500Z.md`. Do **not** re-run variants chasing significance (threshold shopping).
+- **Track C FCLR-013 (2026 Q3, 5 sym, 1×30d block):** primary C2 vs B1 -1.32%, CI crosses 0, <2% floor, block-count NOT_MET → **NOT_SUPPORTED/gate NOT_MET**. FCLR-011 sealed PASS is preserved as recorded; no reopen/holdout reuse.
+- **Data ceiling (local, admissible, unauthenticated):** raw repo zips cover Jan–Mar 2024; `research_state/data_cache` has BTC/ETH/SOL/XRP/BNB 2024-01..12 (+ extended 2025/2026 months for some syms) in monthly cache layout. A 5-sym/2024-04..09 run via the ablation CLI over the cache dir layout returned `n_obs=0` (loader/cache-layout mismatch for that path) — **do not claim inference from it**. Claim-worthy Gate 4 (>=5 sym, >=3 non-overlapping 30-day blocks) is already satisfied and recorded by v3-30d on 2024-04..09; extending beyond that requires a loader-compatible admissible local panel and a **fresh frozen prereg before outcomes**.
 
-### Sessions / tracks blocked (honest hard blocks — do not loop, do not fabricate a way around)
-
-- **Track A / H004 (liquidation labels):** Hyperliquid `data/events/YYYY-MM.parquet` and `data/fills/YYYY-MM.parquet` for 2026-11 both **404** as of 2026-11-08T07:28Z/07:30Z; `data_through=2026-10`. **NO re-probe absent months in a loop.** Resume only on a verified HTTP 200 month + fresh pre-registration (see Resume triggers).
+### Blocked sessions / hard stops (do not loop; do not fabricate)
+- **Track A / H004 (observed liquidation labels):** Hyperliquid `data/events/YYYY-MM.parquet` & `data/fills/YYYY-MM.parquet` for **2026-11 = 404** (probed 2026-11-08T07:28Z/07:30Z); `data_through=2026-10`. **NO re-probe absent months in a loop.** Resume only on verified HTTP 200 month + fresh pre-registration (modeled!=observed).
 - **v5 confirmatory package:** `all_go=false`, `confirmatory_outcomes_permitted=false`; terms blocker `EXPLICIT_BLOCKER_UNRESOLVED` (`fabricated=false`). **No fabricated terms/reviews; no freeze/promote while blocked; no confirmatory outcomes on refusal.**
-- **Gate 4 data sufficiency (claim-worthiness hard limit):** local admissible cache holds **4 symbols** (BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01..2024-03) < 5 required; test windows 14/14/14 days = 0 non-overlapping 30-day blocks (>=3 required). This is a genuine local data ceiling, not a code bug. The ablation runs and reports an honest PILOT/INCONCLUSIVE verdict; do not threshold-shop or claim inference.
+- **Economic/overlay claims:** INELIGIBLE (no gate pass with incremental skill). No threshold-shopping, no relaxed gates post-hoc, no Track A/B/C conflation.
 
-### Single highest-value next task (heavy, measurable — do not coast)
+### Single highest-value next task (heavy, measurable, unblocked — no coasting)
+**FCLR-NEXT-138 (P0 — heavy Track C engineering, no new claims): make the Gate 4 ablation loader consume the existing 2024-04..09 (and beyond) monthly `data_cache` layout so a pre-registered, claim-worthy extension can run locally; harden/verify.** This directly advances repo-name priority (funding-conditioned volatility) without needing network or blocked sources.
 
-**FCLR-NEXT-137 (P0 — execute Gate 4 funding-conditioned volatility ablation end-to-end):** Per repo-name priority, funding-conditioned volatility is the unblocked heavy work. Run locally, no network:
+1. **Reproduce baseline (no network):** run the full campaign block (below) — all must pass as recorded (883 tests OK; 101/101 drift; 17/17 resume; 3 CLI refusals clean).
+2. **Heavy code work:** In `scripts/run_funding_ablations.py` (and minimal `src/ingest/loader.py` changes only if required), add/repair cache-path resolution so `--include-cache --symbols BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT,BNBUSDT --start 2024-04-01 --end 2024-09-30` loads from the existing `research_state/data_cache/{SYMBOL}_{YYYY_MM}/` dirs (daily `indexPriceKlines-*`/mark/klines/funding zips/dirs as present) — **same leakage rules** (last-known funding at/before hour; no future; chronological splits; 7d purge/embargo; train-only normalization; no zero-fill). Keep behavior backward-compatible for the default 4-sym/2024-01..03 pilot.
+3. **Measurable acceptance (no claims):** the 5-sym/2024-04..09 cache run produces `n_obs>0`, `ok_30day_splits>=3`, a parseable verdict/manifest consistent with v3-30d structure, and **does not overwrite** sealed v3/v4 artifacts (write to a new timestamped manifest/summary or a clearly non-canonical pilot path). Re-run `python -m unittest discover tests -q` → **>=883 OK, 0 failures**. If adding tests, add focused deterministic unit tests (tmp fixtures, no network) for cache-path resolution — count them in the delta.
+4. **Gate discipline:** Treat any extension as **exploratory/pilot until a fresh prereg is frozen before outcomes** (`--exploratory` or explicit new prereg; respect confirmatory provenance guards — 2024-04..09 is the FCLR-015 identity-verified slice per `PROVENANCED_CONFIRMATORY_RANGES`). No confirmatory outcomes, no freeze/promote, no overlay, no H001 status change, while v5 terms blocker unresolved and/or without fresh prereg.
+5. **No** new status-only/poller/wrapper/scheduler families, no competing handoff files, no `.github/workflows` edits, no `research_state` writes beyond clearly labeled pilot outputs.
 
-1. Run the pre-registered Gate 4 pipeline: `python scripts/run_funding_ablations.py` (multisplit walk-forward, purge/embargo >= 7d, train-only normalization, last-known funding at/before hour, block-bootstrap ΔQLIKE CIs, honest PILOT/INCONCLUSIVE verdict when data-sufficiency criteria unmet). Confirm it runs cleanly and writes only its own pre-registered pilot outputs under research_state/ — non-confirmatory evidence only.
-2. Re-run full suite: `python -m unittest discover tests -q` → must stay **>=883 OK, 0 failures**.
-3. Apply `FCLR_CAMPAIGN_NEXT.md` lockdown hardening only: seam tests (empty/unreadable data path under valid prereg -> blocked with stable reason codes); CLI argparse contract edge cases on the 3 CLIs; cross-CLI parity + canonical output integrity. **No** new status-only/poller/wrapper/scheduler families, no competing handoff files, no research_state writes beyond the ablation's own pre-registered outputs, no `.github/workflows` edits.
-4. Gate discipline: no confirmatory outcomes, no freeze/promote while the v5 terms blocker is unresolved; no Track A outcomes without a resume trigger + fresh pre-registration.
-
-### Focus campaign (future agents cannot avoid the heavy work)
-
-Run this campaign every session until a resume trigger fires; it is the only permitted forward path:
-
-```
+### Focus campaign (run every session; future agents must do the heavy work)
+```bash
 pip install -r requirements.txt
 python -m unittest discover tests -q
 python scripts/check_tracka_scope_registry_drift.py
-python scripts/tracka_resume_check.py | python3 -c "import sys,json; d=json.load(sys.stdin); print('tracka pass',d['pass'],'checks',len(d['checks']))"
+python scripts/tracka_resume_check.py | python3 -c "import sys,json; d=json.load(sys.stdin); print('tracka pass',d['pass'],'checks',len(d['checks']),'network',d['network']))"
 python scripts/fclr016_v5_admissibility_report.py --bogus 2>&1 | tail -1
 python scripts/fclr016_v5_promotion_dryrun.py --bogus 2>&1 | tail -1
-python scripts/run_funding_ablations.py   # Gate 4 funding-conditioned volatility ablation (P0 heavy work)
+python scripts/run_funding_ablations.py   # Gate 4 baseline pilot (must run clean, honest verdict)
 python scripts/fclr016_v5_admissibility_report.py --bogus --json 2>&1 | head -c 200
 python scripts/tracka_resume_gate.py --bogus --json 2>&1 | head -c 200
 python scripts/tracka_operator_report.py --bogus --json 2>&1 | head -c 200
 ```
-
-Acceptance: all tests pass (>=883 OK); refusals parseable JSON, no tracebacks, exit!=0, canonical outputs unchanged; drift 17/17 pass; bounds respected, no new families; ablation verdict honestly PILOT/INCONCLUSIVE (no claim-worthy inference claimed).
+Acceptance: >=883 tests OK (or higher with added deterministic tests); refusals parseable/exit!=0/no traceback; drift 101/101; resume 17/17 pass; ablation honest verdict; bounds respected; **measurable heavy delta delivered** (no status-only).
 
 ### Resume triggers (only then — preregister BEFORE outcomes)
-
-1. **Track A/H004:** unauthenticated Hyperliquid `data/events/YYYY-MM.parquet` or `data/fills/YYYY-MM.parquet` >=2026-11 with **HTTP 200, verified content** (probe only specific months; no loop) OR admissible unauthenticated observed-liquidation source passing full-manifest GO rubric. Fresh experiment ID, prereg before outcomes, modeled!=observed.
-2. **v5 terms resolved by human/legal review:** create `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with verifiable facts only; `fabricated=false`, `status=RESOLVED_VERIFIED`, matching frozen scope. Reconcile refs/hashes; promote prereg to frozen only after all guards green; run package/validator/report/preflight/promotion-dryrun with `--expect-go` as applicable (no data load on refusal). Compute confirmatory outcomes only when real package `all_go=true` and frozen prereg hashes recorded.
-3. **New admissible Track C data:** >=5 symbols, >=3 non-overlapping 30-day blocks, unauthenticated/admissible, fresh prereg before outcomes.
+1. **Track A/H004:** unauthenticated Hyperliquid `data/events` or `data/fills` YYYY-MM >=2026-11 with **HTTP 200 + verified content** (probe specific months only; no loop) OR admissible unauthenticated observed-liquidation source passing full-manifest GO. Fresh experiment ID + prereg before outcomes; modeled!=observed.
+2. **v5 terms resolved (human/legal):** add `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (verifiable facts only; `fabricated=false`, `status=RESOLVED_VERIFIED`, frozen scope). Reconcile refs/hashes; promote prereg to frozen only after all guards green; run package/validator/report/preflight/promotion-dryrun `--expect-go` as applicable (no data load on refusal). Confirmatory outcomes only when real package `all_go=true` and frozen prereg hashes recorded.
+3. **New claim-worthy Track C run:** loader-compatible admissible local panel, >=5 sym & >=3 non-overlapping 30-day blocks, **fresh frozen prereg before outcomes** (confirmatory within `PROVENANCED_CONFIRMATORY_RANGES` 2024-04..09 with manifest/terms evidence as required; else exploratory).
 
 ### Do-NOT
-
-Fabricate terms/license/reviews; run confirmatory outcomes on unprovenanced/incomplete/blocked data; freeze/promote prereg while blockers exist; reopen sealed anchors; threshold-shop; merge Track A/B/C semantics; claim economic/overlay value; re-probe absent months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files; run confirmation without fresh pre-registration + new admissible data.
+Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop or relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
