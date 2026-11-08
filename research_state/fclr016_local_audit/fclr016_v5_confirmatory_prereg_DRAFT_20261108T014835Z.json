@@ -1,0 +1,51 @@
+{
+  "artifact": "fclr016_v5_confirmatory_prereg_DRAFT",
+  "schema_version": 1,
+  "draft": true,
+  "frozen_before_outcomes": false,
+  "promotable_to_frozen": false,
+  "confirmatory_claim_go": "NO_GO",
+  "admissibility_complete": false,
+  "license_terms_resolved": false,
+  "no_confirmatory_outcomes": true,
+  "generated_utc": "20261108T014835Z",
+  "git_sha_recorded": "691d693b6e25779df2db55d29b4e32e618f32c78",
+  "frozen_scope": {"window": "2025-08-01..2025-10-31", "months": ["2025-08","2025-09","2025-10"], "symbols": ["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT"], "kinds": ["fundingRate","klines","markPriceKlines","indexPriceKlines","premiumIndexKlines"], "sample_days": "full"},
+  "design_freeze": {
+    "status": "DRAFT_BLOCKED_AWARE",
+    "splits": "TO_FREEZE_BEFORE_OUTCOMES: chronological walk-forward or fixed train/val/test boundaries determined by coverage-only audit; purge/embargo >= max forward horizon (>=168h per FCLR-001 context) or explicitly justified; no holdout outcome inspection.",
+    "features": "TO_FREEZE_BEFORE_OUTCOMES: Gate 4 ablations A_rv_only/B_rv_signed/C_rv_abs/D_rv_signed_abs/E_rv_funding_trails; training-only normalization; funding availability/last-known at/before hour; no lookahead.",
+    "targets": "TO_FREEZE_BEFORE_OUTCOMES: primary/secondary realized-volatility horizons and exact mark-price fields/units as per frozen protocol; FCLR-001/FCLR-003 anchors unchanged.",
+    "metrics": "TO_FREEZE_BEFORE_OUTCOMES: paired ΔQLIKE primary where applicable, MAE/RMSE, block bootstrap CIs, DM/HAC as preregistered; claim-worthiness/inference thresholds explicit.",
+    "stop_rule": "TO_FREEZE_BEFORE_OUTCOMES: stop on any unresolved leakage/provenance/license defect, failed guard, insufficient sample/blocks/instruments, or failed completeness audit; preserve NOT_SUPPORTED/INCONCLUSIVE/NO_GO; no threshold shopping."
+  },
+  "admissibility_refs_sha256": {
+    "identity_consolidation": "f73610420932ed1c9072c447b2b537ebf73f0ba5380b1374bd3640acbb143985",
+    "provenance_license_manifest": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346",
+    "completeness_leakage_audit": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8",
+    "probe_btc_eth": "6816660d5ab5877deea084c3289373fb5d028caf6a3c9c8ee9ff8015b96f593e",
+    "probe_bnb": "42c51270c4c14b80e79a6d98776ece6ba4b8b28480c80d71a67ad3f61a410135",
+    "probe_sol_xrp": "f5a0522886fbb4e1226fe37595411772c813249454cfaffd4d3706b59ed2dfd8"
+  },
+  "admissibility_refs_paths": {
+    "terms_evidence_blocked": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+    "provenance_license_manifest": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+    "completeness_leakage_audit": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json",
+    "identity_consolidation": "research_state/fclr016_local_audit/fclr016_v5_identity_consolidation_20261108T003908Z.json"
+  },
+  "gates": {
+    "identity_cache_vs_binance_vision_hazards_zero": true,
+    "completeness_leakage_deterministic_pass": true,
+    "license_terms_resolved_verified": false,
+    "prereg_frozen_before_outcomes": false,
+    "fclr014_v5_guard_accepts": false,
+    "confirmatory_outcomes_permitted": false
+  },
+  "promotion_requirements": [
+    "Populate/resolve terms evidence with verifiable facts only (no fabrication); set license_terms_resolved=true only with RESOLVED_VERIFIED evidence.",
+    "Finalize exact splits/features/targets/metrics/stop rule and freeze before any outcome inspection; set frozen_before_outcomes=true, draft=false, promotable_to_frozen true only after freeze commit.",
+    "Ensure provenance manifest becomes v5 GO (confirmatory_provenance_go=true, admissibility_complete=true, license_terms RESOLVED_VERIFIED, no fabricated markers) and scope covers requested range.",
+    "Obtain FCLR-014/v5 guard acceptance evidence (run_funding_ablations check path / validator) with green tests; record command+result hashes.",
+    "Keep confirmatory_claim_go=NO_GO until every gate passes; no confirmatory outcomes on unprovenanced/incomplete 2025+."
+  ]
+}
