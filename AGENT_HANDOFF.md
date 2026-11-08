@@ -1,3 +1,31 @@
+## Initial Task Message (2026-11-08T03:50:32Z, git HEAD; verified clean before edits) — SINGLE DURABLE HANDOFF / Next Agentic Session
+
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility forecasting + liquidation risk). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources. This file remains the single durable handoff.
+
+### Verified current state (do not re-litigate without new evidence)
+- P0 Track C / Gate 4 v5 confirmatory: NOT_READY / confirmatory_claim_go=NO_GO / admissibility_complete=false / confirmatory_outcomes_permitted=false. Identity consolidated (1855/1855 MATCH, hazards 0). Completeness/leakage deterministic PASS but package blocked (artifact 32dfcdd...). Hard blocker: Binance Vision/data-use license/terms NOT human-verified (EXPLICIT_BLOCKER_UNRESOLVED, 8128c1d...). Provenance manifest blocked (6888116...). Prereg DRAFT/not frozen (8bf5e7f...). Validator + package check + provenance guard + --terms-evidence cross-check + confirmatory CLI refuse; no data/outcome loading on confirmatory 2025+.
+- Track C history: FCLR-H001 NOT_SUPPORTED; forecast gate NOT MET (FCLR-003 -3.78%, FCLR-006 -69.90%, FCLR-007 -3.42%, FCLR-008 +4.30% CI crosses zero). Gate 4 v4 EXPLORATORY_INCONCLUSIVE (confounded). No threshold-shopping; no sealed anchor reopen.
+- Track A (observed liquidation risk): DATA_BLOCKED (Hyperliquid ironflow data_through=2026-10; 2026-11..2027-02 absent). NO re-probe.
+- Track B (modeled boundary breach): CLOSED_NEGATIVE. Never conflate modeled vs observed.
+
+### Session log (2026-11-08T03:50Z, P0 v5 heavy bounded work — no confirmatory outcomes)
+**Heavy mandatory work for this session (cannot be skipped):** implement read-only `scripts/fclr016_v5_admissibility_report.py` + focused tests, plus run existing v5 suites. No network, no outcomes, no canonical mutation.
+- Script (read-only): load 4 real package artifacts + optional terms-evidence path; run check_admissibility_package/validator logic parity; emit machine-readable JSON + markdown blocker summary with hashes, gate states, exact required human fields, and "next materially different route" (human terms review).
+- Tests (tmp-isolated, no network): prove it cannot claim GO; cannot mutate canonicals (experiment_frontier.json, run_manifest.json, evaluation_summary.md byte-identical); refuses malformed/fabricated inputs; refuses fabricated=true / agent-only reviewer / missing human fields; exit codes stable.
+- Then run: `python3 -m py_compile ...`; `python3 -m unittest tests.test_fclr016* -q`; package check on real blocked artifacts (must refuse, exit 2, parseable NO_GO); confirmatory CLI refusal E2E (17/17).
+- Update AGENT_HANDOFF.md with exact commands/results and next task.
+
+### Blocker (current)
+No in-repo human-verified Binance Vision/data-use terms evidence (EXPLICIT_BLOCKER_UNRESOLVED). Automated agent cannot fabricate/review legal terms. Confirmatory 2025+ outcomes prohibited until all admissibility gates green with real evidence.
+
+### Next single highest-value task
+**If real human-verified terms review appears in-repo (only then):** create `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with verifiable facts only (terms_url_reviewed, access_date_utc, terms_version_or_snapshot_id or justified not_provided_by_source, relevant_clause_summary, human/legal reviewer_role, conclusion, conditions_or_restrictions, evidence_artifacts/hashes, fabricated=false, status=RESOLVED_VERIFIED, matching frozen scope). Reconcile admissibility_refs_sha256/paths. Promote prereg to frozen only after all guards green. Run validator + package check + confirmatory guard (must refuse until frozen+all GO; must not load data on refusal). Do not compute outcomes until all_go=true and frozen prereg hashes recorded.
+**If no human terms evidence appears (default, heavy bounded work):** complete the admissibility report script + tests above; then next heavy bounded route = extend fail-closed hardening with a deterministic `scripts/fclr016_v5_preflight_summary.py`-style artifact generator that bundles hashes/gates into a single read-only preflight bundle (no outcomes, no network) and tests proving no GO claim and no canonical mutation. Keep root bounds respected.
+
+### Do-NOT
+Fabricate terms/license/reviews; run confirmatory outcomes on unprovenanced/incomplete 2025+; freeze/promote prereg while blockers exist; reopen sealed FCLR anchors; threshold-shop; merge Track A/B/C semantics; claim economic/overlay value; re-probe Track A; edit .github/workflows; add status-only/poller/wrapper/scheduler families; create competing handoff files. This file is the single durable handoff.
+
+---
 ## Initial Task Message (2026-11-08T03:45Z, git 80f53504 context; bounded v5 template hardening added; verify before commit) — SINGLE DURABLE HANDOFF / Next Agentic Session
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility forecasting + liquidation risk). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources.
