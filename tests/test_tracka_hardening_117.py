@@ -482,6 +482,10 @@ SCRIPT_REGISTRY = {
     "class": "unclassified_auxiliary",
     "reason": "build_fclr002_panel_local.py: local/offline panel builder for FCLR002 Track C volatility research from admissible local cache; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network/confirmatory outcome promotion."
   },
+  "reconcile_inventory.py": {
+    "class": "repo_maintenance_utility",
+    "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
+  },
 }
 
 ALLOWED_CLASSES = {

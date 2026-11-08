@@ -22,21 +22,20 @@
       "summary": "register fclr019_gate4_evidence_bundle_index.py as track_c_or_aux_audit_utility read-only draft audit"
     },
     {
-      "action": "add",
-      "script": "build_fclr002_panel_local.py",
-      "class": "unclassified_auxiliary",
-      "reason": "FCLR-NEXT-157: register local FCLR002 Track C panel builder (no Track A seam/canonical writes)."
-    },
-    {
       "id": "fclr_next_162_inventory_recon",
       "action": "add",
       "script": "reconcile_inventory.py",
       "class": "repo_maintenance_utility",
       "reason": "FCLR-NEXT-162: register read-only inventory reconciliation utility."
+    },
+    {
+      "id": "fclr_next_163_registry_sync",
+      "action": "sync",
+      "summary": "FCLR-NEXT-163: reconcile test_tracka_hardening_117.SCRIPT_REGISTRY with canonical JSON registry. Added reconcile_inventory.py and build_fclr002_panel_local.py to the Python source-of-record so all three registries (117, 118, 119, JSON) agree on the full scripts/*.py set."
     }
   ],
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition.",
-  "generated": "20261108T073500Z",
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py).",
+  "generated": "20261108T221500Z",
   "registry_version": "1.1",
   "script_count": 110,
   "scripts": {
