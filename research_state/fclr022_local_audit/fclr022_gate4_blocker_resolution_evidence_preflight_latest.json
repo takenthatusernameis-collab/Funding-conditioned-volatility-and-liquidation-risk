@@ -1,0 +1,921 @@
+{
+  "script": "fclr022_gate4_blocker_resolution_evidence_preflight.py",
+  "generated_at_utc": "20261108T145343Z",
+  "input": "research_state/fclr021_local_audit/fclr021_gate4_blocker_resolution_checklist_validator_latest.json",
+  "input_state": "ok",
+  "row_count": 45,
+  "resolution_readiness_rows": [
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "identity_provenance_range",
+      "current_state": "present_unverified",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "current_state": "present_blocker",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+      "missing_action_class": "admissibility_completeness_leakage_evidence"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "current_state": "present_blocker",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "current_state": "missing",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "leakage_sufficiency_gates",
+      "current_state": "present_unverified",
+      "gate_class": "leakage_sufficiency_gates",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "leakage_sufficiency_gates",
+      "missing_action_class": "leakage_sufficiency_gates"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "current_state": "present_blocker",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+      "missing_action_class": "admissibility_completeness_leakage_evidence"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "current_state": "present_blocker",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "current_state": "missing",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "current_state": "present_blocker",
+      "gate_class": "leakage_sufficiency_gates",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "leakage_sufficiency_gates",
+      "missing_action_class": "leakage_sufficiency_gates"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "identity_provenance_range",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "current_state": "present_blocker",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+      "missing_action_class": "admissibility_completeness_leakage_evidence"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "current_state": "present_blocker",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "current_state": "missing",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "leakage_sufficiency_gates",
+      "current_state": "present_blocker",
+      "gate_class": "leakage_sufficiency_gates",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "leakage_sufficiency_gates",
+      "missing_action_class": "leakage_sufficiency_gates"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "current_state": "present_blocker",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+      "missing_action_class": "admissibility_completeness_leakage_evidence"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "current_state": "present_blocker",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "current_state": "missing",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "current_state": "present_blocker",
+      "gate_class": "leakage_sufficiency_gates",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "leakage_sufficiency_gates",
+      "missing_action_class": "leakage_sufficiency_gates"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "current_state": "present_blocker",
+      "gate_class": "provenance_manifest_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "provenance_manifest_evidence",
+      "missing_action_class": "provenance_manifest_evidence"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "current_state": "present_blocker",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+      "missing_action_class": "admissibility_completeness_leakage_evidence"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "current_state": "present_blocker",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "current_state": "present_blocker",
+      "gate_class": "terms_legal_evidence_resolution",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "terms_legal_evidence_resolution",
+      "missing_action_class": "terms_legal_evidence_resolution"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "current_state": "missing",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+      "missing_action_class": "fresh_frozen_prereg_before_outcomes"
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "current_state": "present_blocker",
+      "gate_class": "leakage_sufficiency_gates",
+      "evidence_ref": null,
+      "evidence_present": false,
+      "read_state": "no_path_cited",
+      "sha256": null,
+      "bytes": 0,
+      "resolution_ready": false,
+      "reason_copied_from_index": "leakage_sufficiency_gates",
+      "missing_action_class": "leakage_sufficiency_gates"
+    }
+  ],
+  "resolution_readiness_warnings": [
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "identity_provenance_range",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "leakage_sufficiency_gates",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "identity_provenance_range",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "leakage_sufficiency_gates",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "detail": "no_path_cited"
+    },
+    {
+      "type": "resolution_readiness_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "detail": "no_path_cited"
+    }
+  ],
+  "draft_only": true,
+  "no_confirmatory_outcomes": true,
+  "exploratory_only": true,
+  "no_network": true,
+  "not_go_for_confirmatory_outcomes": true,
+  "confirmatory_ready_now": false,
+  "confirmatory_outcomes_go": false,
+  "authorizes_confirmatory_outcomes": false,
+  "satisfied": false,
+  "satisfaction_inferred": false
+}
