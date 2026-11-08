@@ -1,63 +1,67 @@
 # Evaluation Summary - Funding Ablations (Gate 4, multi-split pilot)
 
-**Generated:** 2026-11-08T19:23:32Z
-**Git SHA:** d8e0147af45382e1e771f0fc92ae0aa41e459688
+**Generated:** 2026-11-08T20:25:00Z
+**Git SHA:** d03ee2b764920f4854fc38011e7a1a5afed537bb
 **Pre-registration:** `research_state/pre_registration_gate4_funding_multisplit_20261107.md` (frozen before outcomes)
-**Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 3 pre-registered walk-forward splits
+**Scope:** BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, 2024-04-01 to 2024-09-30, 24h forward RV, 4 pre-registered walk-forward splits
 **Model:** direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)
-**Verdict:** **PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)**
+**Verdict:** **DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (pre-registered 30-day blocks met; E vs A CI spans 0; no improvement claim)**
 
 ## Data Sufficiency (honest)
-- instruments=4 (required >=5): NOT MET
-- claim-worthy: False
-- shortfall: instruments=4 < 5
-- shortfall: insufficient_30day_non_overlapping_test_blocks (ok_30d=0, required>=3, split_test_days=[14, 14, 14])
+- instruments=5 (required >=5): MET
+- claim-worthy: True
 
 ## Aggregate (mean across OK splits)
 | Ablation | QLIKE | MAE | RMSE | ΔQLIKE vs A (pooled paired) | 95% block-bootstrap CI | n_obs/n_blocks |
 |---|---|---|---|---|---|---|
-| A_rv_only | 7.463255169636498 | 0.0015752458198443093 | 0.0022791173527878517 | — | — | — |
-| B_rv_signed | 16.987894189915938 | 0.0016771724880907514 | 0.0024518364960988983 | 8.400940115566256 | [-0.12384387819379696, 24.209835591605284] | 2605/42 |
-| C_rv_abs | 16.987894189915938 | 0.0016771724880907514 | 0.0024518364960988983 | 8.400940115566256 | [-0.12384387819379696, 24.209835591605284] | 2605/42 |
-| D_rv_signed_abs | 16.98789419113723 | 0.0016771724880907833 | 0.0024518364960989234 | 8.40094011632883 | [-0.12384387813694987, 24.209835594169473] | 2605/42 |
-| E_rv_funding_trails | 5.543607735698287 | 0.0020220023716236127 | 0.0031514411874857488 | 4.612403479236548 | [-0.1288482496006673, 13.122435403144543] | 1819/41 |
+| A_rv_only | 0.7983190184126631 | 0.0010925475062619158 | 0.0018204745158497855 | — | — | — |
+| B_rv_signed | 12.183624182224962 | 0.0010651273940529746 | 0.0018516401463693957 | 11.110522836791604 | [0.48052288989834724, 32.31258287470994] | 13620/120 |
+| C_rv_abs | 0.8459619410133684 | 0.0010629048565582036 | 0.0018097508718590374 | -0.024710146016296737 | [-0.37159501419659596, 0.2707987870777838] | 13985/120 |
+| D_rv_signed_abs | 3.4492894624624917 | 0.0010503733522264959 | 0.0018152243676412916 | 2.421918112567877 | [-0.2539600556711275, 7.512202570277498] | 13269/120 |
+| E_rv_funding_trails | 1.241701795957689 | 0.0011413909374884345 | 0.0020142809604019557 | 0.48790231255595967 | [-0.04216077732537772, 1.1973379300280491] | 12969/120 |
 
 ## Per-Split Paired ΔQLIKE vs A (instability visibility)
-| Contrast | Split 0 | Split 1 | Split 2 | n_obs (0/1/2) |
-|---|---:|---:|---:|---|
-| B_rv_signed vs A | 2.763598178916185 | -0.8255528770169275 | 39.77353016009128 | 1267/858/480 |
-| C_rv_abs vs A | 2.763598178916185 | -0.8255528770169275 | 39.77353016009128 | 1267/858/480 |
-| D_rv_signed_abs vs A | 2.7635981789493456 | -0.8255528769369784 | 39.77353016399939 | 1267/858/480 |
-| E_rv_funding_trails vs A | 7.225674132254077 | 1.6403717666397328 | -0.1451845857541486 | 1091/343/385 |
+| Contrast | Split 0 | Split 1 | Split 2 | Split 3 | n_obs (0/1/2/3) |
+|---|---:|---:|---:|---:|---|
+| B_rv_signed vs A | -0.061106742794619445 | 0.2534944648015296 | 1.1548593949122556 | 44.687585170146406 | 3600/3508/3224/3288 |
+| C_rv_abs vs A | 0.17994478420127102 | 0.4717573751136753 | -0.1323545464968529 | -0.622380302508106 | 3600/3534/3272/3579 |
+| D_rv_signed_abs vs A | -0.15012945352330412 | 0.3434145020268775 | 0.11962413470115817 | 10.334492145185333 | 3600/3502/3158/3009 |
+| E_rv_funding_trails vs A | 0.03833219431819898 | 0.30916469880312913 | 1.0915632305047063 | 0.5675604567128726 | 3417/3422/3167/2963 |
 
 ## Exploratory Sensitivity (NOT confirmatory; do not promote if unstable)
 > Block-bootstrap block size sensitivity for paired ΔQLIKE vs A. Pre-registered primary remains block=24h, seed=12345, reps=2000.
 | Contrast | block=12h CI | block=24h CI (primary) | block=48h CI |
 |---|---|---|---|
-| B_rv_signed vs A | [0.031670973142356305, 24.113780756853075] (pt=8.400940115566256) | [-0.12384387819379696, 24.209835591605284] (pt=8.400940115566256) | [-0.43468610877959035, 24.013335755908027] (pt=8.400940115566256) |
-| C_rv_abs vs A | [0.031670973142356305, 24.113780756853075] (pt=8.400940115566256) | [-0.12384387819379696, 24.209835591605284] (pt=8.400940115566256) | [-0.43468610877959035, 24.013335755908027] (pt=8.400940115566256) |
-| D_rv_signed_abs vs A | [0.0316709732001089, 24.113780759314004] (pt=8.40094011632883) | [-0.12384387813694987, 24.209835594169473] (pt=8.40094011632883) | [-0.43468610877488, 24.01333575822119] (pt=8.40094011632883) |
-| E_rv_funding_trails vs A | [-0.09514734553286228, 13.357421456243788] (pt=4.612403479236548) | [-0.1288482496006673, 13.122435403144543] (pt=4.612403479236548) | [-0.11736393726757173, 12.70339880368411] (pt=4.612403479236548) |
+| B_rv_signed vs A | [0.5266085816589288, 32.188403734167316] (pt=11.110522836791604) | [0.48052288989834724, 32.31258287470994] (pt=11.110522836791604) | [0.40586566533389123, 32.60508040300046] (pt=11.110522836791604) |
+| C_rv_abs vs A | [-0.3605794889358921, 0.22571589591221194] (pt=-0.024710146016296737) | [-0.37159501419659596, 0.2707987870777838] (pt=-0.024710146016296737) | [-0.4008861533477015, 0.3360803634981003] (pt=-0.024710146016296737) |
+| D_rv_signed_abs vs A | [-0.23556234454215058, 7.487533309366848] (pt=2.421918112567877) | [-0.2539600556711275, 7.512202570277498] (pt=2.421918112567877) | [-0.25466038038354727, 7.504380732871568] (pt=2.421918112567877) |
+| E_rv_funding_trails vs A | [-0.060998468201006344, 1.1937063856735863] (pt=0.48790231255595967) | [-0.04216077732537772, 1.1973379300280491] (pt=0.48790231255595967) | [-0.057616502333888174, 1.1925841627453069] (pt=0.48790231255595967) |
 
 ## Per-Split Details
-- Split 0: train ('2024-01-01T00:00:00+00:00', '2024-01-28T23:59:59+00:00') | test ('2024-02-05T00:00:00+00:00', '2024-02-18T23:59:59+00:00') | purge/embargo=7d | n_train=2688 n_test=1344
-  - A_rv_only: qlike=0.6883380538890281, mae=0.0008245528915028976, rmse=0.0009221269311027606, n_feat=3, valid_n=1344
-  - B_rv_signed: qlike=3.2430660310459682, mae=0.0009131619934817241, rmse=0.001049343122924403, n_feat=4, valid_n=1267
-  - C_rv_abs: qlike=3.2430660310459682, mae=0.0009131619934817241, rmse=0.001049343122924403, n_feat=4, valid_n=1267
-  - D_rv_signed_abs: qlike=3.2430660310791284, mae=0.0009131619934817306, rmse=0.0010493431229244155, n_feat=5, valid_n=1267
-  - E_rv_funding_trails: qlike=7.908036493435277, mae=0.0016748163359833687, rmse=0.0029411807736853565, n_feat=11, valid_n=1091
-- Split 1: train ('2024-01-15T00:00:00+00:00', '2024-02-11T23:59:59+00:00') | test ('2024-02-19T00:00:00+00:00', '2024-03-03T23:59:59+00:00') | purge/embargo=7d | n_train=2688 n_test=1344
-  - A_rv_only: qlike=2.583368890233034, mae=0.0011163836239120016, rmse=0.0016972839145703964, n_feat=3, valid_n=1139
-  - B_rv_signed: qlike=2.102867852631954, mae=0.0013002584302867618, rmse=0.0020938464960688456, n_feat=4, valid_n=1059
-  - C_rv_abs: qlike=2.102867852631954, mae=0.0013002584302867618, rmse=0.0020938464960688456, n_feat=4, valid_n=1059
-  - D_rv_signed_abs: qlike=2.1028678526966598, mae=0.001300258430286844, rmse=0.002093846496068907, n_feat=5, valid_n=1059
-  - E_rv_funding_trails: qlike=3.8525439486119373, mae=0.0014289206635841527, rmse=0.002208061259587419, n_feat=11, valid_n=374
-- Split 2: train ('2024-01-29T00:00:00+00:00', '2024-02-25T23:59:59+00:00') | test ('2024-03-04T00:00:00+00:00', '2024-03-17T23:59:59+00:00') | purge/embargo=7d | n_train=2688 n_test=1344
-  - A_rv_only: qlike=19.118058564787432, mae=0.002784800944118029, rmse=0.0042179412126903985, n_feat=3, valid_n=558
-  - B_rv_signed: qlike=45.617748686069895, mae=0.0028180970405037686, rmse=0.004212319869303446, n_feat=4, valid_n=506
-  - C_rv_abs: qlike=45.617748686069895, mae=0.0028180970405037686, rmse=0.004212319869303446, n_feat=4, valid_n=506
-  - D_rv_signed_abs: qlike=45.6177486896359, mae=0.002818097040503775, rmse=0.004212319869303448, n_feat=5, valid_n=506
-  - E_rv_funding_trails: qlike=4.870242765047645, mae=0.0029622701153033167, rmse=0.004305081529184471, n_feat=11, valid_n=418
+- Split 0: train ('2024-04-01T00:00:00+00:00', '2024-05-07T23:59:59+00:00') | test ('2024-05-15T00:00:00+00:00', '2024-06-13T23:59:59+00:00') | purge/embargo=7d | n_train=4440 n_test=3600
+  - A_rv_only: qlike=0.8626811370032509, mae=0.001274635820460764, rmse=0.001514421741992777, n_feat=3, valid_n=3600
+  - B_rv_signed: qlike=0.8015743942086314, mae=0.0011996210577740172, rmse=0.001514744530760591, n_feat=4, valid_n=3600
+  - C_rv_abs: qlike=1.0426259212045217, mae=0.001149124685705412, rmse=0.0014248825564873993, n_feat=4, valid_n=3600
+  - D_rv_signed_abs: qlike=0.7125516834799468, mae=0.0011395718194704885, rmse=0.0014748793200375031, n_feat=5, valid_n=3600
+  - E_rv_funding_trails: qlike=0.9076205756285542, mae=0.001419013053974758, rmse=0.002076266483152447, n_feat=11, valid_n=3417
+- Split 1: train ('2024-04-01T00:00:00+00:00', '2024-06-06T23:59:59+00:00') | test ('2024-06-14T00:00:00+00:00', '2024-07-13T23:59:59+00:00') | purge/embargo=7d | n_train=8040 n_test=3600
+  - A_rv_only: qlike=0.5659745411011431, mae=0.0009511824412033422, rmse=0.001400211363165027, n_feat=3, valid_n=3534
+  - B_rv_signed: qlike=0.8234824385538575, mae=0.0009049818039712994, rmse=0.0013974288794576547, n_feat=4, valid_n=3508
+  - C_rv_abs: qlike=1.0377319162148184, mae=0.0009415837676613193, rmse=0.001413867909140677, n_feat=4, valid_n=3534
+  - D_rv_signed_abs: qlike=0.9107351246480376, mae=0.000882121061905631, rmse=0.0013529741673883847, n_feat=5, valid_n=3502
+  - E_rv_funding_trails: qlike=0.8440924294300697, mae=0.0009571337453320289, rmse=0.00150149986875602, n_feat=11, valid_n=3422
+- Split 2: train ('2024-04-01T00:00:00+00:00', '2024-07-06T23:59:59+00:00') | test ('2024-07-14T00:00:00+00:00', '2024-08-12T23:59:59+00:00') | purge/embargo=7d | n_train=11640 n_test=3600
+  - A_rv_only: qlike=0.7899274264265418, mae=0.0015537095817841624, rmse=0.0035934330265396785, n_feat=3, valid_n=3274
+  - B_rv_signed: qlike=2.1090667062586594, mae=0.0015637439207339715, rmse=0.0036666937168248403, n_feat=4, valid_n=3252
+  - C_rv_abs: qlike=0.9182121380529361, mae=0.001539815849595868, rmse=0.0035924230585261865, n_feat=4, valid_n=3302
+  - D_rv_signed_abs: qlike=0.8885053521462225, mae=0.0014997875132487651, rmse=0.003567300662072274, n_feat=5, valid_n=3329
+  - E_rv_funding_trails: qlike=1.713050622843014, mae=0.001518139369657435, rmse=0.0035906090639651767, n_feat=11, valid_n=3338
+- Split 3: train ('2024-04-01T00:00:00+00:00', '2024-08-05T23:59:59+00:00') | test ('2024-08-13T00:00:00+00:00', '2024-09-11T23:59:59+00:00') | purge/embargo=7d | n_train=15240 n_test=3600
+  - A_rv_only: qlike=0.9746929691197167, mae=0.0005906621815993943, rmse=0.0007738319317016595, n_feat=3, valid_n=3579
+  - B_rv_signed: qlike=45.0003731898787, mae=0.0005921627937326104, rmse=0.0008276934584344959, n_feat=4, valid_n=3288
+  - C_rv_abs: qlike=0.38527778858119693, mae=0.0006210951232702149, rmse=0.0008078299632818871, n_feat=4, valid_n=3594
+  - D_rv_signed_abs: qlike=11.285365689575759, mae=0.0006800130142810992, rmse=0.0008657433210670041, n_feat=5, valid_n=3024
+  - E_rv_funding_trails: qlike=1.502043555929118, mae=0.0006712775809895154, rmse=0.000888748425734179, n_feat=11, valid_n=2978
 
 ## Bootstrap (pre-registered)
 - Paired ΔQLIKE (alt-base; negative = better for QLIKE) with circular block bootstrap on whole UTC time blocks, jointly across instruments.
@@ -70,7 +74,7 @@
 - Basis/premium not included (no aligned admissible local series verified); missing treated as NaN per policy.
 
 ## Caveats (non-negotiable)
-- **Verdict:** PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)
-- **Data sufficiency:** instruments=4 (NOT MET; required >=5); ok_30day_splits=0 (required>=3) => meets_claim_worthy_data_sufficiency=False.
+- **Verdict:** DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (pre-registered 30-day blocks met; E vs A CI spans 0; no improvement claim)
+- **Data sufficiency:** instruments=5 (MET); ok_30day_splits=4 (required>=3) => meets_claim_worthy_data_sufficiency=True.
 - **No economic value claim, no overlay, no Track A linkage.** Observed metrics are out-of-sample forecast evidence under pre-registered design; instability across splits/instrument sets must be reported honestly.
 - If any leakage/alignment doubt exists, treat as non-confirmatory.

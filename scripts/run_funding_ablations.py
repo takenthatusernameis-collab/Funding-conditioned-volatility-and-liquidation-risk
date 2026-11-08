@@ -979,7 +979,11 @@ def update_leakage_audit(path: Path, ts: str) -> None:
 def main(argv: Optional[List[str]] = None) -> int:
     import argparse
     ap = argparse.ArgumentParser(description="Gate 4 funding ablations (pre-registered). Defaults = v1 behavior.")
-    ap.add_argument("--symbols", default="BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT")
+    # Default symbol set matches the admissible 5-symbol local cache panel
+    # (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT). The previous 4-symbol
+    # default silently excluded BNBUSDT, which is present in the cache and is
+    # required to meet the >=5-instrument claim-worthy data-sufficiency gate.
+    ap.add_argument("--symbols", default="BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT")
     ap.add_argument("--start", default="2024-01-01")
     ap.add_argument("--end", default="2024-03-31")
     ap.add_argument("--horizon", type=int, default=24)

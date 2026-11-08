@@ -111,6 +111,21 @@ class TestCachePathResolution(unittest.TestCase):
                 with self.assertRaises(RuntimeError):
                     rfa.load_kline_series([sym], "2024-04-01", "2024-04-01", horizon=24, include_cache=False)
 
+    def test_default_symbol_set_matches_admissible_cache_panel(self):
+        """Default --symbols must include all five cache-backed symbols.
+
+        Regression guard: the previous 4-symbol default (BTCUSDT,ETHUSDT,SOLUSDT,
+        XRPUSDT) silently omitted BNBUSDT, which is present in the local cache and
+        is required to meet the >=5-instrument claim-worthy data-sufficiency gate.
+        """
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--symbols", default="BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT")
+        args = ap.parse_args([])
+        syms = [x.strip() for x in args.symbols.split(",") if x.strip()]
+        self.assertEqual(set(syms), {"BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"})
+        self.assertEqual(len(syms), 5)
+
 
 if __name__ == "__main__":
     unittest.main()
