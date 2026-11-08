@@ -1,3 +1,47 @@
+## Initial Task Message (2026-11-08T03:34:29Z, git 924e2163; working tree clean before edits) — SINGLE DURABLE HANDOFF / Next Agentic Session
+
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility forecasting + liquidation risk). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources.
+
+### Session (2026-11-08T03:34Z, state re-verification — no new code; session-2 v5 hardening already committed at 789e3b75; HEAD advanced only by checkpoint commits f9d4840a/15852aa4/924e2163 capturing identical substantive state)
+
+**Changes (why):** none new this turn. Re-verified gate status at HEAD 924e2163; all session-2 P0 v5 fail-closed hardening remains in place and committed. Default branch applies: no human-verified Binance Vision/data-use terms evidence has appeared in-repo, so confirmatory 2025+ outcomes remain prohibited and the bounded heavy-work route is the next session's focus.
+
+**Commands + exact results (verified at HEAD):**
+```bash
+python3 -m unittest tests.test_fclr016_v5_admissibility_hardening tests.test_fclr016_v5_admissibility_guard tests.test_fclr016_v5_admissibility_validator tests.test_fclr016_v5_confirmatory_cli_refusal_e2e -q  # 55/55 OK
+python3 scripts/run_funding_ablations.py --check-admissibility-package research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json --expect-go; echo $?  # parseable NO_GO, all_go=false, exit 2; blockers: terms_resolved_verified, provenance_manifest_go, completeness_leakage_pass, prereg_frozen_non_draft, prereg_claim_go
+git diff --name-only -- research_state/experiment_frontier.json research_state/run_manifest.json research_state/evaluation_summary.md  # (no output) canonical unchanged
+```
+
+### Gate status (verified; do not re-litigate without new evidence)
+- **P0 Track C / Gate 4 v5 confirmatory:** `NOT_READY / confirmatory_claim_go=NO_GO / admissibility_complete=false / confirmatory_outcomes_permitted=false`. Identity consolidated (1855/1855 MATCH, hazards 0; artifact `f736104...`). Completeness/leakage deterministic PASS (verdict `PASS_COMPLETENESS_LEAKAGE_DETERMINISTIC`, artifact `32dfcdd...`) but package remains blocked. **Hard blocker (cannot be bypassed):** Binance Vision/data-use license/terms **not human-verified** — `EXPLICIT_BLOCKER_UNRESOLVED` (terms evidence artifact `8128c1d...`). Provenance manifest blocked (`6888116...`). Prereg DRAFT/not frozen (`8bf5e7f...`). Validator + package check + provenance guard + `--terms-evidence` cross-check + confirmatory CLI refuse; no data/outcome loading on confirmatory 2025+.
+- **Track C history:** FCLR-H001 `NOT_SUPPORTED`; forecast gate NOT MET (FCLR-003 -3.78%, FCLR-006 -69.90%, FCLR-007 -3.42%, FCLR-008 +4.30% CI crosses zero). Gate 4 v4 `EXPLORATORY_INCONCLUSIVE` (confounded). No threshold-shopping; no sealed anchor reopen.
+- **Track A (observed liquidation risk):** `DATA_BLOCKED` (Hyperliquid ironflow `data_through=2026-10`; 2026-11..2027-02 absent). **NO re-probe.** Trigger-only guarded protocol if admissible unauthenticated Hyperliquid data appears + rubric passes; preregister before outcome inspection.
+- **Track B (modeled boundary breach):** `CLOSED_NEGATIVE`. Never conflate modeled vs observed.
+
+### Blocker (current)
+No in-repo **human-verified** Binance Vision/data-use terms evidence. Automated agent cannot fabricate/review legal terms (`EXPLICIT_BLOCKER_UNRESOLVED`). Confirmatory 2025+ outcomes prohibited until all admissibility gates green with real evidence.
+
+### Next single highest-value task (default branch — heavy bounded work, no human terms evidence present)
+Add a small deterministic `scripts/fclr016_v5_admissibility_report.py` (read-only, no outcomes/network) that:
+- loads the 4 real package artifacts (`provenance_license_manifest`, `completeness_leakage_audit`, `terms_evidence_BLOCKED`, `confirmatory_prereg_DRAFT`) plus an optional terms-evidence path;
+- runs `check_admissibility_package`/validator-logic parity without loading any kline/funding/outcome data;
+- emits a machine-readable JSON summary AND a markdown blocker summary with hashes, the 5 gate states, all blockers/errors, and the exact required human fields for terms evidence (`terms_url_reviewed`, `access_date_utc`, `terms_version_or_snapshot_id` or justified `not_provided_by_source`, `relevant_clause_summary`, human/legal `reviewer_role`, `conclusion`, `conditions_or_restrictions`, `evidence_artifacts`/hashes, `fabricated=false`, `status=RESOLVED_VERIFIED`);
+- states the "next materially different route": human terms review → create `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` → reconcile `admissibility_refs_sha256`/paths → promote prereg to frozen only after all guards green → run package check + confirmatory guard (must refuse until frozen+all GO; must not load data on refusal).
+Plus tests proving the report tool: cannot claim GO, cannot mutate canonicals (`experiment_frontier.json`, `run_manifest.json`, `evaluation_summary.md` byte-identical), refuses on malformed/fabricated inputs, and loads zero data. Keep root bounds respected.
+
+Verification commands for the next session:
+```bash
+python3 -m py_compile scripts/fclr016_v5_admissibility_report.py tests/test_fclr016_v5_admissibility_report.py  # OK
+python3 scripts/fclr016_v5_admissibility_report.py research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json  # emits JSON+markdown; all_go=false; lists 5 required human fields
+python3 -m unittest tests.test_fclr016_v5_admissibility_report tests.test_fclr016_v5_admissibility_hardening tests.test_fclr016_v5_admissibility_guard tests.test_fclr016_v5_admissibility_validator tests.test_fclr016_v5_confirmatory_cli_refusal_e2e -q  # all OK; canonical unchanged
+```
+
+### Do-NOT
+Fabricate terms/license/reviews; run confirmatory outcomes on unprovenanced/incomplete 2025+; freeze/promote prereg while blockers exist; reopen sealed FCLR anchors; threshold-shop; merge Track A/B/C semantics; claim economic/overlay value; re-probe Track A; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families; create competing handoff files. **This file is the single durable handoff.**
+
+---
+## Prior session (preserved)
 ## Initial Task Message (2026-11-08T02:50:19Z, git 789e3b75; verified clean before edits) — SINGLE DURABLE HANDOFF / Next Agentic Session
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility forecasting + liquidation risk). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources.
@@ -30,7 +74,6 @@ No in-repo **human-verified** Binance Vision/data-use terms evidence. Automated 
 
 ### Do-NOT
 Fabricate terms/license/reviews; run confirmatory outcomes on unprovenanced/incomplete 2025+; freeze/promote prereg while blockers exist; reopen sealed FCLR anchors; threshold-shop; merge Track A/B/C semantics; claim economic/overlay value; re-probe Track A; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families; create competing handoff files. **This file is the single durable handoff.**
-
 
 ---
 ## Prior session (preserved)
