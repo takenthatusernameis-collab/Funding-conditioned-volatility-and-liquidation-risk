@@ -1,0 +1,1349 @@
+{
+  "artifact": "fclr018_gate4_prereg_readiness_matrix",
+  "best_candidate_planning_reference": "cand_2024_04_09_evidenced",
+  "candidate_windows": [
+    {
+      "basis": "fclr015_evidenced_bounded",
+      "block_count_gate_ge_3": true,
+      "block_days": 30,
+      "calendar_coverage_all_symbols_complete": true,
+      "confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "confirmatory_eligible_now": false,
+      "confirmatory_ineligibility_reasons": [
+        "v5_terms_blocker_unresolved_all_go_false"
+      ],
+      "coverage_by_symbol": {
+        "BNBUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        },
+        "BTCUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        },
+        "ETHUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        },
+        "SOLUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        },
+        "XRPUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        }
+      },
+      "end": "2024-09-30",
+      "fclr017_reference_global_ok_for_default_scope": true,
+      "max_non_overlapping_30d_blocks_with_7d_purge": 5,
+      "months": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09"
+      ],
+      "provenance_status": "IDENTITY_VERIFIED_BOUNDED_FCLR015",
+      "purge_embargo_days": 7,
+      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
+      "span_days": 183,
+      "start": "2024-04-01",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "v5_terms_blocker_state": {
+        "all_go": false,
+        "confirmatory_outcomes_permitted": false,
+        "fabricated": false,
+        "terms_status": "EXPLICIT_BLOCKER_UNRESOLVED"
+      },
+      "window_id": "cand_2024_04_09_evidenced"
+    },
+    {
+      "basis": "local_cache_contiguous_unprovenanced",
+      "block_count_gate_ge_3": false,
+      "block_days": 30,
+      "calendar_coverage_all_symbols_complete": false,
+      "confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "confirmatory_eligible_now": false,
+      "confirmatory_ineligibility_reasons": [
+        "v5_terms_blocker_unresolved_all_go_false",
+        "provenance_not_identity_verified_bounded_fclr015",
+        "calendar_coverage_incomplete_or_unverified",
+        "block_count_gate_lt_3"
+      ],
+      "coverage_by_symbol": {
+        "BNBUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "BTCUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-11": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "ETHUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:16"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "SOLUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "XRPUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        }
+      },
+      "end": "2024-12-31",
+      "fclr017_reference_global_ok_for_default_scope": true,
+      "max_non_overlapping_30d_blocks_with_7d_purge": 2,
+      "months": [
+        "2024-10",
+        "2024-11",
+        "2024-12"
+      ],
+      "provenance_status": "UNVERIFIED",
+      "purge_embargo_days": 7,
+      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
+      "span_days": 92,
+      "start": "2024-10-01",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "v5_terms_blocker_state": {
+        "all_go": false,
+        "confirmatory_outcomes_permitted": false,
+        "fabricated": false,
+        "terms_status": "EXPLICIT_BLOCKER_UNRESOLVED"
+      },
+      "window_id": "cand_2024_10_12_local_exploratory"
+    },
+    {
+      "basis": "local_cache_mixed_evidenced_prefix_unprovenanced_suffix",
+      "block_count_gate_ge_3": true,
+      "block_days": 30,
+      "calendar_coverage_all_symbols_complete": false,
+      "confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "confirmatory_eligible_now": false,
+      "confirmatory_ineligibility_reasons": [
+        "v5_terms_blocker_unresolved_all_go_false",
+        "provenance_not_identity_verified_bounded_fclr015",
+        "calendar_coverage_incomplete_or_unverified"
+      ],
+      "coverage_by_symbol": {
+        "BNBUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "BTCUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-11": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "ETHUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:16"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "SOLUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "XRPUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        }
+      },
+      "end": "2024-12-31",
+      "fclr017_reference_global_ok_for_default_scope": true,
+      "max_non_overlapping_30d_blocks_with_7d_purge": 7,
+      "months": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12"
+      ],
+      "provenance_status": "UNVERIFIED",
+      "purge_embargo_days": 7,
+      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
+      "span_days": 275,
+      "start": "2024-04-01",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "v5_terms_blocker_state": {
+        "all_go": false,
+        "confirmatory_outcomes_permitted": false,
+        "fabricated": false,
+        "terms_status": "EXPLICIT_BLOCKER_UNRESOLVED"
+      },
+      "window_id": "cand_2024_04_12_mixed_evidenced_prefix"
+    },
+    {
+      "basis": "local_cache_contiguous_unprovenanced",
+      "block_count_gate_ge_3": true,
+      "block_days": 30,
+      "calendar_coverage_all_symbols_complete": false,
+      "confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "confirmatory_eligible_now": false,
+      "confirmatory_ineligibility_reasons": [
+        "v5_terms_blocker_unresolved_all_go_false",
+        "provenance_not_identity_verified_bounded_fclr015",
+        "calendar_coverage_incomplete_or_unverified"
+      ],
+      "coverage_by_symbol": {
+        "BNBUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2025-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-02": {
+              "complete": false,
+              "reason": "missing_days:klines:28"
+            },
+            "2025-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-04": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-05": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-06": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-07": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "BTCUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2025-01": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-02": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-03": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-11": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-12": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        },
+        "ETHUSDT": {
+          "all_months_complete": true,
+          "months": {
+            "2025-01": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-02": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-03": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-11": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-12": {
+              "complete": true,
+              "reason": "ok"
+            }
+          }
+        },
+        "SOLUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2025-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-02": {
+              "complete": false,
+              "reason": "missing_days:klines:28"
+            },
+            "2025-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-04": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-05": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-06": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-07": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "XRPUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2025-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-02": {
+              "complete": false,
+              "reason": "missing_days:klines:28"
+            },
+            "2025-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-04": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-05": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-06": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-07": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2025-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2025-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2025-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        }
+      },
+      "end": "2025-12-31",
+      "fclr017_reference_global_ok_for_default_scope": true,
+      "max_non_overlapping_30d_blocks_with_7d_purge": 10,
+      "months": [
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12"
+      ],
+      "provenance_status": "UNVERIFIED",
+      "purge_embargo_days": 7,
+      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
+      "span_days": 365,
+      "start": "2025-01-01",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "v5_terms_blocker_state": {
+        "all_go": false,
+        "confirmatory_outcomes_permitted": false,
+        "fabricated": false,
+        "terms_status": "EXPLICIT_BLOCKER_UNRESOLVED"
+      },
+      "window_id": "cand_2025_01_12_local_exploratory"
+    },
+    {
+      "basis": "local_cache_contains_evidenced_but_entire_window_not_verified",
+      "block_count_gate_ge_3": true,
+      "block_days": 30,
+      "calendar_coverage_all_symbols_complete": false,
+      "confirmatory_eligibility": "INELIGIBLE_EXPLORATORY",
+      "confirmatory_eligible_now": false,
+      "confirmatory_ineligibility_reasons": [
+        "v5_terms_blocker_unresolved_all_go_false",
+        "provenance_not_identity_verified_bounded_fclr015",
+        "calendar_coverage_incomplete_or_unverified"
+      ],
+      "coverage_by_symbol": {
+        "BNBUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-02": {
+              "complete": false,
+              "reason": "missing_days:klines:29"
+            },
+            "2024-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "BTCUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-02": {
+              "complete": false,
+              "reason": "missing_days:klines:29"
+            },
+            "2024-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-11": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "ETHUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-02": {
+              "complete": false,
+              "reason": "missing_days:klines:29"
+            },
+            "2024-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:16"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "SOLUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-02": {
+              "complete": false,
+              "reason": "missing_days:klines:29"
+            },
+            "2024-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        },
+        "XRPUSDT": {
+          "all_months_complete": false,
+          "months": {
+            "2024-01": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-02": {
+              "complete": false,
+              "reason": "missing_days:klines:29"
+            },
+            "2024-03": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-04": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-05": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-06": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-07": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-08": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-09": {
+              "complete": true,
+              "reason": "ok"
+            },
+            "2024-10": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            },
+            "2024-11": {
+              "complete": false,
+              "reason": "missing_days:klines:30"
+            },
+            "2024-12": {
+              "complete": false,
+              "reason": "missing_days:klines:31"
+            }
+          }
+        }
+      },
+      "end": "2024-12-31",
+      "fclr017_reference_global_ok_for_default_scope": true,
+      "max_non_overlapping_30d_blocks_with_7d_purge": 10,
+      "months": [
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12"
+      ],
+      "provenance_status": "UNVERIFIED",
+      "purge_embargo_days": 7,
+      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
+      "span_days": 366,
+      "start": "2024-01-01",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "v5_terms_blocker_state": {
+        "all_go": false,
+        "confirmatory_outcomes_permitted": false,
+        "fabricated": false,
+        "terms_status": "EXPLICIT_BLOCKER_UNRESOLVED"
+      },
+      "window_id": "cand_2024_01_12_local_exploratory"
+    }
+  ],
+  "caveats": {
+    "confirmatory_requires_fresh_frozen_prereg_before_outcomes": true,
+    "draft_only_not_frozen_not_promoted": true,
+    "fclr015_identity_verified_slice_only_where_evidenced": "2024-04..09",
+    "no_confirmatory_outcomes_computed": true,
+    "sealed_artifacts_untouched": [
+      "research_state/evaluation_summary_funding_v3_30d.md",
+      "research_state/run_manifest_funding_v3_30d.json",
+      "research_state/pre_registration_gate4_funding_multisplit_v3_30d_20261107T033500Z.md"
+    ],
+    "unprovenanced_windows_are_exploratory": true,
+    "v5_terms_explicit_blocker_unresolved": true
+  },
+  "decision": {
+    "confirmatory_ready_now": false,
+    "next_claimworthy_gate": "fresh frozen prereg before outcomes + admissibility/terms/provenance gates green + bounded confirmatory range evidence",
+    "reason": "draft_planning_only_and_v5_terms_blocker_unresolved"
+  },
+  "draft_prereg_skeleton": {
+    "acceptance_stop_rules_draft": [
+      "Claim-worthy only if fresh frozen prereg before outcomes, admissibility gates green, provenance/terms resolved as required, >=5 instruments, >=3 non-overlapping 30d blocks, leakage audit clean, stable pre-registered uncertainty.",
+      "If any sufficiency/coverage/leakage/provenance/terms criterion fails: PILOT/INCONCLUSIVE or INELIGIBLE; no confirmatory claim.",
+      "No threshold shopping; no H001/economic/overlay/Track A status change without separate evidence."
+    ],
+    "based_on_candidate": "cand_2024_04_09_evidenced",
+    "confirmatory_gate_note": "2024-04..09 confirmatory bounded by PROVENANCED_CONFIRMATORY_RANGES + manifest/terms evidence + admissibility guards; v5 terms EXPLICIT_BLOCKER_UNRESOLVED/all_go=false blocks confirmatory outcomes.",
+    "freeze_promotion_authorized": false,
+    "hypotheses": {
+      "H0": "DRAFT: No incremental forecast skill beyond RV-only baseline.",
+      "H1_primary": "DRAFT: RV+funding features vs RV-only baseline improve 24h forward realized-variance forecast loss (QLIKE) out-of-sample; direction/magnitude not pre-claimed."
+    },
+    "not_executable_as_confirmatory": true,
+    "primary_contrast_candidates": [
+      "E_rv_signed_abs_roll vs A_rv_only (candidate, subject to frozen prereg)",
+      "D/B/C vs A secondary/reporting-only unless separately frozen"
+    ],
+    "requires_fresh_frozen_prereg_before_outcomes": true,
+    "split_block_bootstrap_params_draft": {
+      "block_days": 30,
+      "bootstrap": "block bootstrap over UTC day blocks (draft; seed/reps fixed only at freeze)",
+      "chronological": true,
+      "leakage_controls": [
+        "chronological splits",
+        "train-only normalization",
+        "funding merge last-known<=hour",
+        "forward targets not used in train",
+        "no random splits",
+        "no test tuning"
+      ],
+      "min_non_overlapping_blocks": 3,
+      "purge_embargo_days": 7,
+      "walk_forward_non_overlapping_test_blocks": true
+    },
+    "status": "DRAFT_NOT_FROZEN"
+  },
+  "exploratory_only": true,
+  "inputs": {
+    "cache_root": "research_state/data_cache",
+    "fclr017_latest": {
+      "note": null,
+      "path": "research_state/fclr017_local_audit/fclr017_gate4_cache_audit_latest.json",
+      "readable": true
+    },
+    "local_cache_months_detected": [
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10",
+      "2026-11"
+    ],
+    "v3_eval": {
+      "exists": true,
+      "path": "research_state/evaluation_summary_funding_v3_30d.md"
+    },
+    "v3_manifest": {
+      "note": null,
+      "path": "research_state/run_manifest_funding_v3_30d.json",
+      "readable": true,
+      "sealed_ref_only": true
+    },
+    "v3_prereg": {
+      "exists": true,
+      "path": "research_state/pre_registration_gate4_funding_multisplit_v3_30d_20261107T033500Z.md"
+    }
+  },
+  "no_confirmatory_outcomes": true,
+  "no_network": true,
+  "not_go_for_confirmatory_outcomes": true,
+  "prereg_status": "DRAFT_NOT_FROZEN",
+  "provenanced_confirmatory_ranges_note": "2024-04-01..2024-09-30 identity-verified bounded (FCLR-015 context) only; confirmatory bounded by PROVENANCED_CONFIRMATORY_RANGES + manifest/terms evidence + admissibility guards.",
+  "purpose": "deterministic read-only Gate 4 prereg-readiness/draft design matrix from local evidence; planning/draft only",
+  "report_sha256": "033c33e8259c706acc3202a36de5c1c93c1a9e0a15599de6b9194554e86cc062",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "timestamp_utc": "20261108T132537Z",
+  "v5_terms_blocker_state": {
+    "all_go": false,
+    "confirmatory_outcomes_permitted": false,
+    "fabricated": false,
+    "terms_status": "EXPLICIT_BLOCKER_UNRESOLVED"
+  },
+  "version": 1
+}
