@@ -96,16 +96,40 @@ def _manifest_scope_covers(manifest: dict, start: str, end: str) -> Optional[str
 
 def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_registration: str,
                                   out_suffix: str, confirmatory_flag: bool = False,
-                                  provenance_manifest: Optional[str] = None) -> Optional[str]:
+                                  provenance_manifest: Optional[str] = None,
+                                  terms_evidence: Optional[str] = None) -> Optional[str]:
     """Return error message if confirmatory run is inadmissible; else None.
 
     Fail-closed. Legacy manifests require identity GO; v5+ manifests (artifact
     fclr016_v5_provenance_license_manifest / schema_version>=5 / explicit fields)
     additionally require confirmatory_provenance_go, resolved license/terms,
     admissibility_complete, no_confirmatory_outcomes, and scope coverage.
+
+    If terms_evidence is provided (path to terms evidence artifact), it is
+    cross-checked fail-closed: RESOLVED_VERIFIED requires required human fields
+    (terms_url_reviewed, access_date_utc, reviewer_role, conclusion),
+    fabricated=false, and non-agent-only reviewer_role. A manifest claiming GO
+    cannot be accepted when cross-checked terms evidence is unresolved/missing
+    required fields (no false-accept).
     """
     if not _is_confirmatory_intent(experiment_id, pre_registration, out_suffix, confirmatory_flag):
         return None
+    te_obj = None
+    if terms_evidence is not None:
+        tep = Path(terms_evidence)
+        if not tep.exists():
+            return f"CONFIRMATORY PROVENANCE GUARD: --terms-evidence not found: {tep}"
+        try:
+            te_obj = json.loads(tep.read_text(encoding="utf-8"))
+        except Exception as e:
+            return f"CONFIRMATORY PROVENANCE GUARD: cannot read terms evidence: {e}"
+        # Always validate required fields/markers when a RESOLVED claim is present;
+        # also refuse fabricated=true regardless of status.
+        te_err = _check_resolved_terms_evidence_package(te_obj)
+        if te_err:
+            return f"CONFIRMATORY PROVENANCE GUARD: terms evidence cross-check failed: {te_err}"
+        if te_obj.get("fabricated") is True:
+            return "CONFIRMATORY PROVENANCE GUARD: terms evidence fabricated marker present"
     if provenance_manifest:
         mp = Path(provenance_manifest)
         if not mp.exists():
@@ -114,6 +138,11 @@ def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_
             m = json.loads(mp.read_text())
         except Exception as e:
             return f"CONFIRMATORY PROVENANCE GUARD: cannot read provenance manifest: {e}"
+        # If terms evidence provided and unresolved, no manifest can pass confirmatory GO.
+        if te_obj is not None:
+            te_resolved = te_obj.get("status") == RESOLVED_TERMS and te_obj.get("fabricated") is False
+            if not te_resolved:
+                return f"CONFIRMATORY PROVENANCE GUARD: terms evidence not RESOLVED_VERIFIED (status={te_obj.get('status')!r}); confirmatory GO refused"
         identity = str(m.get("cache_identity_vs_binance_vision", ""))
         identity_go = identity.startswith("GO") and "IDENTITY_ONLY" not in identity.upper()
         # detect v5/strict schema
@@ -140,6 +169,8 @@ def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_
                 return f"CONFIRMATORY PROVENANCE GUARD: v5 identity evidence not GO: {identity!r}: {mp}"
             return None
         # legacy behavior
+        if te_obj is not None and te_obj.get("status") != RESOLVED_TERMS:
+            return f"CONFIRMATORY PROVENANCE GUARD: terms evidence cross-check requires RESOLVED_VERIFIED for legacy confirmatory path (status={te_obj.get('status')!r})"
         if not identity_go and not m.get("confirmatory_provenance_go"):
             return f"CONFIRMATORY PROVENANCE GUARD: manifest not GO: {mp}"
         return None
@@ -808,6 +839,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--include-cache", action="store_true", help="Search research_state/data_cache for local admissible files (v3/extended runs).")
     ap.add_argument("--confirmatory", action="store_true", help="Assert confirmatory intent; triggers provenance guard (fail-closed on unprovenanced 2025+).")
     ap.add_argument("--provenance-manifest", default=None, help="Path to verified provenance manifest for confirmatory runs.")
+    ap.add_argument("--terms-evidence", default=None, help="Path to terms evidence artifact; cross-checked fail-closed (RESOLVED requires human fields, fabricated=false).")
     ap.add_argument("--check-admissibility-package", nargs=4, metavar=("PROVENANCE", "COMPLETENESS", "TERMS", "PREREG"),
                     help="Run Gate 4 v5 admissibility package check on four artifacts; emit canonical JSON summary; no kline/funding/outcome data loaded.")
     ap.add_argument("--dry-run-admissibility", nargs=4, metavar=("PROVENANCE", "COMPLETENESS", "TERMS", "PREREG"),
@@ -830,6 +862,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         args.start, args.end, args.experiment_id, args.pre_registration, args.out_suffix,
         confirmatory_flag=bool(getattr(args, "confirmatory", False)),
         provenance_manifest=getattr(args, "provenance_manifest", None),
+        terms_evidence=getattr(args, "terms_evidence", None),
     )
     if prov_err:
         print(json.dumps({"status": "REFUSED", "guard": "confirmatory_provenance_fclr014", "error": prov_err, "start": args.start, "end": args.end}, indent=2), file=sys.stderr)
