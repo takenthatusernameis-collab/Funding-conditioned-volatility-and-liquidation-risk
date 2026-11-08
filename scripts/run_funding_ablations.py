@@ -20,12 +20,17 @@ import sys
 from datetime import datetime, timezone, timedelta
 import os
 
+import numpy as np
+import pandas as pd
+
 from pathlib import Path
 from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
-# Heavy deps (numpy/pandas/src.*) are lazy-imported inside data-loading/eval
-# functions so check_admissibility_package/check_confirmatory_provenance and
-# the v5 admissibility guard/report paths remain usable without numpy/pandas.
+# numpy/pandas are imported at module top (installed via requirements.txt);
+# src.* ingestion helpers stay lazy inside data-loading functions so the v5
+# admissibility guard/report/preflight/promotion-dryrun paths import cleanly
+# under the frozen Gate 4 protocol without pulling the full src graph at module
+# import time.
 
 REPO = Path(__file__).resolve().parents[1]
 RAW = REPO / "data" / "raw"
@@ -470,6 +475,7 @@ def now_iso() -> str:
 
 def ensure_extracted(symbols: List[str]) -> None:
     RAW.mkdir(parents=True, exist_ok=True)
+    from src.ingest import loader
     zips = loader.discover_zips(ZIPS_DIR)
     for zp in zips:
         if not any(s in zp.name for s in symbols):
@@ -543,6 +549,7 @@ def _load_table(path: Path) -> pd.DataFrame:
 
 def load_funding_series(symbols: List[str], start: str, end: str, include_cache: bool = False) -> pd.DataFrame:
     ensure_extracted(symbols)
+    from src.ingest import loader
     frames = []
     for sym in symbols:
         flist = []
@@ -582,6 +589,8 @@ def load_funding_series(symbols: List[str], start: str, end: str, include_cache:
 
 def load_kline_series(symbols: List[str], start: str, end: str, horizon: int = 24, include_cache: bool = False) -> pd.DataFrame:
     ensure_extracted(symbols)
+    from src.ingest import loader
+    from src.features import volatility as vf
     frames = []
     for sym in symbols:
         klist = []
@@ -651,6 +660,7 @@ def load_kline_panel(symbols: List[str], start: str, end: str, horizon: int = 24
 
 
 def add_funding_to_panel(kpanel: pd.DataFrame, fpanel: pd.DataFrame) -> pd.DataFrame:
+    from src.features import funding as ff
     """Merge funding features onto the kline panel by (symbol, timestamp).
 
     Funding features are aligned to each contract's kline index via last-known
@@ -706,6 +716,7 @@ def fit_predict_ols(train_n: pd.DataFrame, test_n: pd.DataFrame, fcols: List[str
 
 
 def metrics(y: np.ndarray, p: np.ndarray) -> Dict[str, object]:
+    from src.volatility import eval as veval
     mask = np.isfinite(y) & np.isfinite(p) & (y > 0) & (p > 0)
     ql = veval.qlike(y.tolist(), p.tolist())
     ma = veval.mae(y.tolist(), p.tolist())
@@ -734,6 +745,7 @@ def paired_qlike_by_time(y: np.ndarray, p_base: np.ndarray, p_alt: np.ndarray, t
 
 def block_bootstrap_delta_ci(paired: pd.DataFrame, block_hours: int = BOOTSTRAP_BLOCK_HOURS, n_reps: int = BOOTSTRAP_REPS, seed: int = BOOTSTRAP_SEED, alpha: float = BOOTSTRAP_ALPHA) -> Dict[str, object]:
     """Block bootstrap CI for mean ΔQLIKE (alt-base), resampling whole UTC time blocks jointly across instruments."""
+    from src.volatility import block_bootstrap as bb
     if paired.empty:
         return {"point": None, "ci_low": None, "ci_high": None, "n_obs": 0, "n_blocks": 0, "n_reps": 0, "seed": seed, "block_hours": block_hours}
     paired = paired.copy()
@@ -762,6 +774,7 @@ def block_bootstrap_delta_ci(paired: pd.DataFrame, block_hours: int = BOOTSTRAP_
 
 
 def build_prereg_splits(splits: Optional[List[Dict[str, object]]] = None) -> List[wf.SplitBounds]:
+    from src.eval import walkforward as wf
     src = PRE_REG_SPLITS if splits is None else splits
     return [
         wf.SplitBounds(
@@ -773,6 +786,7 @@ def build_prereg_splits(splits: Optional[List[Dict[str, object]]] = None) -> Lis
 
 
 def run_multisplit(panel: pd.DataFrame, ablations: Dict[str, List[str]], split_defs: Optional[List[Dict[str, object]]] = None) -> Tuple[List[Dict[str, object]], Dict[str, pd.DataFrame], Dict[str, List[pd.DataFrame]]]:
+    from src.eval import walkforward as wf
     split_defs = PRE_REG_SPLITS if split_defs is None else split_defs
     splits = build_prereg_splits(split_defs)
     idx = panel.index.get_level_values("timestamp")
