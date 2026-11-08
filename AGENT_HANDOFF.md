@@ -4,20 +4,24 @@ Archived. State at archive (verified 2026-11-08T19:45Z, HEAD context): 935 tests
 ## FCLR-NEXT-158 (archived) — 2026-11-08T19:46:00Z
 Archived. Session entry verified; drift 109/109 PASS; tests 935 OK; fclr023 45/45 draft-only (confirmatory_outcomes_go=false, packet_ready=false, satisfied=false); v5 terms EXPLICIT_BLOCKER_UNRESOLVED; Track A blocked/no trigger; fclr015 MATCH 6/6 GO_SAMPLED_OR_PARTIAL; fclr016 MATCH 1/1 GO_PARTIAL_BOUNDED; `run_funding_ablations.py` PILOT/INCONCLUSIVE (CI spans 0). `scripts/build_fclr002_panel_local.py` added to registry (109/109). No `.github/workflows` edits; no data fabrication; sealed anchors untouched.
 
+## FCLR-NEXT-159 (archived/superseded) — 2026-11-08T20:06:00Z
+Planned next-session task carried forward into FCLR-NEXT-160. Verified state at 2026-11-08T20:06Z: 935 tests OK, drift 109/109 PASS, resume 17 pass, fclr017 Gate 4 cache coverage audit DONE (2024-04..09, 5 symbols, global_all_months_ok=true, CONSISTENT), ablations PILOT/INCONCLUSIVE, v5 terms EXPLICIT_BLOCKER_UNRESOLVED, Track A blocked/no trigger, data_inventory.json lacks 2024-04..09 refs.
+
 ---
 
-## NEXT SESSION INITIAL TASK — 2026-11-08T20:06:00Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-159)
-**SESSION ENTRY VERIFIED 2026-11-08T20:06:00Z:** `AGENT_HANDOFF.md` is the sole durable handoff (`./AGENT_HANDOFF.md` only). **No status-only work allowed next session.**
+## NEXT SESSION INITIAL TASK — 2026-11-08T20:11:44Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-160)
+**SESSION ENTRY VERIFIED 2026-11-08T20:11:44Z:** `AGENT_HANDOFF.md` is the sole durable handoff (`./AGENT_HANDOFF.md` only). **No status-only work allowed next session.** Working tree clean (test side effect on `research_state/ironflow_fastpath_cache.json` reverted).
 
-**Task ID:** FCLR-NEXT-159 (P0, heavy, unblocked, measurable) — repo-name priority: **Track C / Gate 4 funding-conditioned volatility forecasting FIRST** (local admissible Binance kline+funding cache; leakage-resistant OOS only). **Track A liquidation risk BLOCKED/no trigger** (Hyperliquid `data/events|fills` 2026-11 = 404, `data_through=2026-10`; do **NOT** re-probe absent months in a loop). **Never conflate observed vs modeled (Track B).** No trading/orders; no fabricated data/terms/reviews; chronological walk-forward, train-only normalization, purge/embargo; sealed holdouts untouched; no credentials/paid/manual/API-key/bypass sources.
+**Task ID:** FCLR-NEXT-160 (P0, heavy, unblocked, measurable) — repo-name priority: **Track C / Gate 4 funding-conditioned volatility forecasting FIRST** (local admissible Binance kline+funding cache; leakage-resistant OOS only). **Track A liquidation risk BLOCKED/no trigger** (Hyperliquid `data/events|fills` 2026-11 = 404, `data_through=2026-10`; do **NOT** re-probe absent Track A months in a loop — bottleneck removed). **Never conflate observed vs modeled (Track B).** No trading/orders; no fabricated data/terms/reviews; chronological walk-forward, train-only normalization, purge/embargo; sealed holdouts untouched; no credentials/paid/manual/API-key/bypass sources.
 
-### Verified state (2026-11-08T20:06Z, local, no network; timestamp-only side effects restored)
+### Verified state (2026-11-08T20:11Z, local, no network; timestamp-only side effects restored)
 - `python -m unittest discover tests -q` → **OK, Ran 935 tests** (exit 0). `check_tracka_scope_registry_drift.py` → **109/109 PASS**. `tracka_resume_check.py` → **pass:true, 17 checks, network:false**. `--bogus`/`--bogus --json` refusals parseable JSON, exit!=0, no traceback.
 - `run_funding_ablations.py` → clean, honest **PILOT/INCONCLUSIVE** (primary E vs A **+4.612, 95% CI [-0.129, 13.122] spans 0**, n_obs=1819, n_blocks=41, n_reps=2000, seed=12345, block_hours=24). **No incremental forecast skill; H001 NOT_SUPPORTED; risk overlay INELIGIBLE.** Sealed `GATE4-FUND-VOL-ABLATIONS-MSPLIT-V3-30D` anchors untouched.
 - **fclr023 latest:** 45/45 draft-only/non-confirmatory; `confirmatory_outcomes_go=false, packet_ready_for_human_or_prereg_action=false, satisfied=false`. **Not GO, not frozen, not confirmatory.**
 - **Provenance identity:** fclr015 → **MATCH 6/6, `GO_SAMPLED_OR_PARTIAL`**. fclr016 → **MATCH 1/1, `GO_PARTIAL_BOUNDED`**, `placeholder_duplicate_files=0`. Identity evidence only (necessary, not sufficient); v5 terms **EXPLICIT_BLOCKER_UNRESOLVED** (`fabricated=false`); `all_go=false`.
 - **fclr017 Gate 4 cache coverage audit (2024-04..09, 5 symbols, `--no-content-hash`):** `global_all_months_ok=true`, `v3_30d_calendar_consistency=CONSISTENT`, `exploratory_only=true`, `no_confirmatory_outcomes=true`, `no_network=true`. Artifacts: `research_state/fclr017_local_audit/fclr017_gate4_cache_audit_latest.json|md`. **All 5 symbols × 6 months fully covered** (klines, markPriceKlines, indexPriceKlines, premiumIndexKlines daily dirs + fundingRate; no quarantine/placeholder anomalies). **Objective 2 (coverage audit) DONE.**
 - **Cache layout:** `research_state/data_cache/{SYM}_2024_{MM}/` daily-extracted layout exists for all 5 symbols × 6 months. `run_funding_ablations.py` globs find 2024-04..09 sources. `data_inventory.json` lacks 2024-04..09 refs. **Loader/layout + inventory compatibility still to be verified end-to-end.**
+- Focus campaign scripts compile clean: run_funding_ablations, fclr017_gate4_cache_coverage_audit, fclr016_v5_admissibility_report, fclr016_v5_promotion_dryrun, fclr023_gate4_blocker_resolution_action_plan, check_tracka_scope_registry_drift, tracka_resume_check.
 
 ### Objective (heavy, no status-only) — measurable deltas required
 1. **Integrity gate (every session):** focus campaign below; restore timestamp-only side effects; remove verify outputs. Keep `tests` OK, drift 109/109, resume 17 pass.
