@@ -475,6 +475,19 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _load_manifest_json(p: Path) -> dict:
+    """LFS-tolerant manifest read: missing/pointer/unreadable/invalid -> {}."""
+    if not p.exists():
+        return {}
+    try:
+        txt = p.read_text()
+        if txt.lstrip().startswith("version https://git-lfs.github.com/spec/v1"):
+            return {}
+        return json.loads(txt)
+    except Exception:
+        return {}
+
+
 def ensure_extracted(symbols: List[str]) -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     from src.ingest import loader
@@ -1199,16 +1212,6 @@ def main(argv: Optional[List[str]] = None) -> int:
         main_sum.write_text(replace_section(txt, "## Funding Ablations (Gate 4)", "\n".join(addition)))
 
     manifest_path = RES / (f"run_manifest_funding{out_suffix}.json" if out_suffix else "run_manifest.json")
-    def _load_manifest_json(p):
-        if not p.exists():
-            return {}
-        try:
-            txt = p.read_text()
-            if txt.lstrip().startswith("version https://git-lfs.github.com/spec/v1"):
-                return {}
-            return json.loads(txt)
-        except Exception:
-            return {}
     manifest = {} if out_suffix else _load_manifest_json(RES / "run_manifest.json")
     manifest["last_funding_ablations"] = summary["generated_at"]
     manifest["funding_ablations_experiment_id"] = experiment_id

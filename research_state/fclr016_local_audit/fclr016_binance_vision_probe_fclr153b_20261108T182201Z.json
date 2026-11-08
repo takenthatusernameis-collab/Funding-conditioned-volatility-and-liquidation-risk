@@ -1,0 +1,82 @@
+{
+  "cache_identity_vs_binance_vision": "NO_GO",
+  "checks": [
+    {
+      "day": "2025-02-01",
+      "kind": "klines",
+      "local_bytes": 1550,
+      "local_path": "research_state/data_cache/BTCUSDT_2025_02/klines-2025-02-01/BTCUSDT-1h-2025-02-01.zip",
+      "local_sha256": "ecdabacf994fd152a1c54e01f8560ab859aad21df6a457e03e5a0f454ee8f663",
+      "month": "2025-02",
+      "remote_bytes": 1550,
+      "remote_error": null,
+      "remote_etag": "\"73f7fc617bb77a7214debe5ef39e9ee1\"",
+      "remote_last_modified": "Sun, 02 Feb 2025 08:37:13 GMT",
+      "remote_sha256": "ecdabacf994fd152a1c54e01f8560ab859aad21df6a457e03e5a0f454ee8f663",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2025-02-01.zip"
+    },
+    {
+      "day": "2025-02-28",
+      "kind": "klines",
+      "local_bytes": 1609,
+      "local_path": "research_state/data_cache/BTCUSDT_2025_02/klines-2025-02-28/BTCUSDT-1h-2025-02-28.zip",
+      "local_sha256": "4ea555ee127027ba9e065c0adb9e37898ea8c9d1f194cf9e58821fc9e3911ddc",
+      "month": "2025-02",
+      "remote_bytes": 1609,
+      "remote_error": null,
+      "remote_etag": "\"4906b3c969f1a565c470f952f01edd45\"",
+      "remote_last_modified": "Sat, 01 Mar 2025 07:37:47 GMT",
+      "remote_sha256": "4ea555ee127027ba9e065c0adb9e37898ea8c9d1f194cf9e58821fc9e3911ddc",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2025-02-28.zip"
+    }
+  ],
+  "confirmatory_claim_go": "NO_GO",
+  "fclr014_context": "2025+ cache provenance UNVERIFIED per fclr014_provenance_decision_20261107T133102Z.md; identity match is necessary but not sufficient (license/terms/completeness/leakage/prereg still required).",
+  "kinds": [
+    "klines"
+  ],
+  "method": "bounded unauthenticated GET vs local cached zip sha256/etag (FCLR-016, 2025+ probe)",
+  "months": [
+    "2025-02"
+  ],
+  "placeholder_duplicate_files": [
+    {
+      "canonical_kind_subdir": "klines-2025-02-01",
+      "day": "2025-02-01",
+      "month": "2025-02",
+      "path": "research_state/data_cache/BTCUSDT_2025_02/BTCUSDT-1h-2025-02-01.zip",
+      "sha256": "b2f5544c072d05c1b6f7773a3d13fc146b1a0b0cd9e773db8ce1ce1ba49f7cb3",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "canonical_kind_subdir": "klines-2025-02-28",
+      "day": "2025-02-28",
+      "month": "2025-02",
+      "path": "research_state/data_cache/BTCUSDT_2025_02/BTCUSDT-1h-2025-02-28.zip",
+      "sha256": "59033427b849a3da832179dca5626f6b8bccf8ec66d83368a356e95ac04b434d",
+      "symbol": "BTCUSDT"
+    }
+  ],
+  "placeholder_duplicate_note": "Daily kinds require a kind-specific subdir (<kind>-<day>/<sym>-1h-<day>.zip). A same-named top-level placeholder is not admissible for non-canonical kinds and is reported, never substituted.",
+  "source_base": "https://data.binance.vision/",
+  "summary": {
+    "match": 2,
+    "mismatch": 0,
+    "missing_local": 0,
+    "missing_remote": 0,
+    "new_this_run": 2,
+    "placeholder_duplicate_files": 2,
+    "remote_error": 0,
+    "total": 2
+  },
+  "symbols": [
+    "BTCUSDT"
+  ],
+  "timestamp_utc": "20261108T182201Z"
+}

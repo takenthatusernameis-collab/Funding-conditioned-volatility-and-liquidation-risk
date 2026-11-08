@@ -1,0 +1,121 @@
+{
+  "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+  "checks": [
+    {
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 825,
+      "local_path": "research_state/data_cache/BTCUSDT_2025_01/BTCUSDT-fundingRate-2025-01.zip",
+      "local_sha256": "df725010d55458866eb5a47e9ee708c6796c9d7e77b14c38342cea11f381815e",
+      "month": "2025-01",
+      "remote_bytes": 825,
+      "remote_error": null,
+      "remote_etag": "\"4fd4114380875c1ea8a32019977f951a\"",
+      "remote_last_modified": "Sun, 16 Feb 2025 12:52:38 GMT",
+      "remote_sha256": "df725010d55458866eb5a47e9ee708c6796c9d7e77b14c38342cea11f381815e",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-01.zip"
+    },
+    {
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 854,
+      "local_path": "research_state/data_cache/BTCUSDT_2025_02/BTCUSDT-fundingRate-2025-02.zip",
+      "local_sha256": "e918b90fb33df3a3317feea13807a892047f1ec86eeac100bdb7b3dd83285d46",
+      "month": "2025-02",
+      "remote_bytes": 854,
+      "remote_error": null,
+      "remote_etag": "\"06bac48505803ab88917dcf439c81464\"",
+      "remote_last_modified": "Sun, 16 Mar 2025 13:03:19 GMT",
+      "remote_sha256": "e918b90fb33df3a3317feea13807a892047f1ec86eeac100bdb7b3dd83285d46",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "BTCUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-02.zip"
+    },
+    {
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 768,
+      "local_path": "research_state/data_cache/ETHUSDT_2025_01/ETHUSDT-fundingRate-2025-01.zip",
+      "local_sha256": "88c95b99d2784a7baac529fe578563d7e05038a1b8a498b2f59bf81b216fee20",
+      "month": "2025-01",
+      "remote_bytes": 768,
+      "remote_error": null,
+      "remote_etag": "\"12095cff98c7ce97d27b5a5aadc2ed2e\"",
+      "remote_last_modified": "Sun, 16 Feb 2025 12:52:38 GMT",
+      "remote_sha256": "88c95b99d2784a7baac529fe578563d7e05038a1b8a498b2f59bf81b216fee20",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "ETHUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2025-01.zip"
+    },
+    {
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 868,
+      "local_path": "research_state/data_cache/ETHUSDT_2025_02/ETHUSDT-fundingRate-2025-02.zip",
+      "local_sha256": "9e116dd6754484a19ecc41ced40b8dfa7f62c33d41cdc3317336b1e1f043767f",
+      "month": "2025-02",
+      "remote_bytes": 868,
+      "remote_error": null,
+      "remote_etag": "\"02c01d5639542550179985b3a052526c\"",
+      "remote_last_modified": "Sun, 16 Mar 2025 13:03:19 GMT",
+      "remote_sha256": "9e116dd6754484a19ecc41ced40b8dfa7f62c33d41cdc3317336b1e1f043767f",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "ETHUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2025-02.zip"
+    },
+    {
+      "day": null,
+      "kind": "fundingRate",
+      "local_bytes": 916,
+      "local_path": "research_state/data_cache/SOLUSDT_2025_01/SOLUSDT-fundingRate-2025-01.zip",
+      "local_sha256": "314888152c16bc2d846f9aaa9ea3ebeec7c67d235ef2671f1a5e6fe0a8b4dbf2",
+      "month": "2025-01",
+      "remote_bytes": 916,
+      "remote_error": null,
+      "remote_etag": "\"2b902d03da962de04d44088dcda1c4da\"",
+      "remote_last_modified": "Sun, 16 Feb 2025 12:52:40 GMT",
+      "remote_sha256": "314888152c16bc2d846f9aaa9ea3ebeec7c67d235ef2671f1a5e6fe0a8b4dbf2",
+      "remote_status": 200,
+      "result": "MATCH",
+      "symbol": "SOLUSDT",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2025-01.zip"
+    }
+  ],
+  "confirmatory_claim_go": "NO_GO",
+  "fclr014_context": "2025+ cache provenance UNVERIFIED per fclr014_provenance_decision_20261107T133102Z.md; identity match is necessary but not sufficient (license/terms/completeness/leakage/prereg still required).",
+  "kinds": [
+    "fundingRate"
+  ],
+  "method": "bounded unauthenticated GET vs local cached zip sha256/etag (FCLR-016, 2025+ probe)",
+  "months": [
+    "2025-01",
+    "2025-02"
+  ],
+  "placeholder_duplicate_files": [],
+  "placeholder_duplicate_note": "Daily kinds require a kind-specific subdir (<kind>-<day>/<sym>-1h-<day>.zip). A same-named top-level placeholder is not admissible for non-canonical kinds and is reported, never substituted.",
+  "source_base": "https://data.binance.vision/",
+  "summary": {
+    "match": 5,
+    "mismatch": 0,
+    "missing_local": 0,
+    "missing_remote": 0,
+    "new_this_run": 5,
+    "placeholder_duplicate_files": 0,
+    "remote_error": 0,
+    "total": 5
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT"
+  ],
+  "timestamp_utc": "20261108T182136Z"
+}

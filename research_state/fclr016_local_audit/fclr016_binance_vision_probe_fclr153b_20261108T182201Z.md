@@ -1,0 +1,1 @@
+- BTCUSDT 2025-02 2025-02-28: top-level placeholder sha256=59033427b849a3da (canonical kind subdir missing/unmatched)
