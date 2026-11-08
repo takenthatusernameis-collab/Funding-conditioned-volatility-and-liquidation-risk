@@ -25,7 +25,7 @@
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition.",
   "generated": "20261108T073500Z",
   "registry_version": "1.1",
-  "script_count": 106,
+  "script_count": 107,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -450,6 +450,10 @@
     "fclr021_gate4_blocker_resolution_checklist_validator.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr021_gate4_blocker_resolution_checklist_validator.py: deterministic read-only Gate 4 blocker-resolution checklist validator consuming fclr020 latest; validates per-window prerequisite action/check text coverage of the Gate 4 gate set (terms/legal, provenance/manifest, admissibility/completeness/leakage, fresh frozen prereg before outcomes, leakage/sufficiency) and emits a machine-checkable coverage matrix plus missing-action warnings with authorizes_confirmatory_outcomes=false and no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go_for_confirmatory_outcomes under research_state/fclr021_local_audit/. No outcome computation, no freeze/promotion, no prerequisite satisfied, no network, no Track A claims, no sealed artifact overwrite."
+    },
+    "fclr022_gate4_blocker_resolution_evidence_preflight.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr022_gate4_blocker_resolution_evidence_preflight.py: deterministic read-only Gate 4 blocker-resolution evidence preflight consuming fclr021 latest; checks read-only whether prerequisite evidence_ref paths exist/readable locally (exists/read_state/sha256/bytes), never fabricates evidence as present, emits resolution_readiness rows with resolution_ready=false and resolution_readiness_warnings for gaps. Draft-only/no_confirmatory_outcomes/no_network/not_go_for_confirmatory_outcomes under research_state/fclr022_local_audit/. No outcome computation, no freeze/promotion, no prerequisite satisfied, no network, no Track A claims, no sealed artifact overwrite."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)",
