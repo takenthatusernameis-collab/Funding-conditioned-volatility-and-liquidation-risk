@@ -110,3 +110,10 @@ python scripts/run_funding_ablations.py   # Gate 4 baseline pilot (must run clea
 
 ### Do-NOT
 Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop/relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
+
+---
+
+## NEXT SESSION INITIAL TASK — 2026-11-08T14:05:34Z
+**Task ID:** FCLR-NEXT-142 (P0, heavy, unblocked, measurable)
+**Objective:** Build `scripts/fclr020_gate4_readiness_action_matrix.py` (read-only, no network, no model-outcome computation, no freeze/promotion, no sealed overwrite) plus `tests/test_fclr020_gate4_readiness_action_matrix.py`, register in `research_state/tracka_script_scope_registry.json`, reconcile `tests/test_tracka_hardening_117.py` SCRIPT_REGISTRY (104/104→105/105). Consume FCLR-019 evidence bundle index only. Output JSON+MD under `research_state/fclr020_local_audit/` with all draft-only/no-confirmatory flags false-for-go. Acceptance: >=906 tests OK, drift PASS 105/105, resume 17/17 network:false, v5 bogus refusals parseable, funding ablations baseline runs clean.
+**Do NOT:** run v4 as confirmatory, re-probe absent Track A months, fabricate terms/data, or touch .github/workflows.
