@@ -424,6 +424,10 @@
     "write_trigger_harden_successor.py": {
       "class": "prereg_utility",
       "reason": "Trigger-hardening artifacts; no outcome reads."
+    },
+    "fclr017_gate4_cache_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr017_gate4_cache_coverage_audit.py: deterministic read-only Gate 4 cache coverage/lineage/integrity audit for local data_cache (default 2024-04..09, 5 symbols; inventories daily 1h klines/mark/index/premium + funding, records file counts + metadata/content hashes, flags missing months/days/quarantine/placeholder anomalies, emits JSON+MD with no_confirmatory_outcomes/exploratory_only/no_network). Planning evidence only; no outcome computation, no network, no Track A liquidation claims, no canonical eval/cross-track writes, no sealed artifact overwrite."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"
