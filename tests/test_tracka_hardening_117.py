@@ -229,6 +229,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr020_gate4_readiness_action_matrix.py: deterministic read-only Gate 4 readiness/action matrix from fclr019; per-window actions/blockers/verification checks, authorizes_confirmatory_outcomes=false, no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
   },
+  "fclr021_gate4_blocker_resolution_checklist_validator.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr021_gate4_blocker_resolution_checklist_validator.py: deterministic read-only Gate 4 blocker-resolution checklist validator from fclr020; validates per-window prerequisite action/check text coverage of the Gate 4 gate set (terms/legal, provenance/manifest, admissibility/completeness/leakage, fresh frozen prereg before outcomes, leakage/sufficiency) and emits a machine-checkable coverage matrix plus missing-action warnings with authorizes_confirmatory_outcomes=false and no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+  },
   "fclr016_v5_terms_evidence_template.py": {
     "class": "prereg_utility",
     "reason": "fclr016_v5_terms_evidence_template.py: deterministic non-evidentiary terms-evidence TEMPLATE generator; writes only a clearly non-evidentiary template to an explicit user path, never creates RESOLVED_VERIFIED status, no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
