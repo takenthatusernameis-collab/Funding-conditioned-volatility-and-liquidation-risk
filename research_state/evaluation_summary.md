@@ -27,15 +27,15 @@
 - Funding ablations remain blocked until Gate 3 satisfied.
 
 ## Funding Ablations (Gate 4)
-**Updated:** 2026-11-08T15:46:03Z (multi-split, 3 splits, direct-variance OLS HAR; verdict=PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference))
+**Updated:** 2026-11-08T16:37:31Z (multi-split, 3 splits, direct-variance OLS HAR; verdict=PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference))
 **Verdict:** PILOT/INCONCLUSIVE (data-sufficiency criteria not met; no claim-worthy inference)
 
 | Ablation | QLIKE (mean) | ΔQLIKE vs A (pooled) | 95% block-bootstrap CI |
 |---|---|---|---|
-| A_rv_only | 7.4632551696362475 | — | — |
-| B_rv_signed | 16.987894189880944 | 8.4009401155691 | [-0.12384387819312244, 24.20983559161728] |
-| C_rv_abs | 16.987894189880944 | 8.4009401155691 | [-0.12384387819312244, 24.20983559161728] |
-| D_rv_signed_abs | 16.987894191103717 | 8.400940116333015 | [-0.12384387813653992, 24.20983559418449] |
-| E_rv_funding_trails | 5.543607735488995 | 4.6124034791315704 | [-0.1288482496015316, 13.12243540310433] |
+| A_rv_only | 7.463255169636498 | — | — |
+| B_rv_signed | 16.987894189915938 | 8.400940115566256 | [-0.12384387819379696, 24.209835591605284] |
+| C_rv_abs | 16.987894189915938 | 8.400940115566256 | [-0.12384387819379696, 24.209835591605284] |
+| D_rv_signed_abs | 16.98789419113723 | 8.40094011632883 | [-0.12384387813694987, 24.209835594169473] |
+| E_rv_funding_trails | 5.543607735698287 | 4.612403479236548 | [-0.1288482496006673, 13.122435403144543] |
 
 > Shortfalls: instruments=4 < 5; insufficient_30day_non_overlapping_test_blocks (ok_30d=0, required>=3, split_test_days=[14, 14, 14]). No confirmatory claim; no economic value claim.
