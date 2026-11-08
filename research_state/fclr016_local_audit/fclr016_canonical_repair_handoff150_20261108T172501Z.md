@@ -1,0 +1,90 @@
+# FCLR-016 canonical cache repair (20261108T172501Z_handoff150)
+
+- source_base: https://data.binance.vision/
+- repair_identity_ok: **False** (bounded repair; not confirmatory GO)
+- summary: `{"DOWNLOADED": 140, "MISSING_REMOTE": 460, "sha256_mismatch_after_download": 0, "total": 600}`
+
+## Source/terms note
+Binance Vision public unauthenticated archive; no auth/paid/manual/key bypass; license/terms: record source URL+access time+remote metadata; confirmatory use still requires explicit license/terms/completeness/leakage/prereg verification per FCLR-014.
+
+## Non-skip records (first 80)
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-01 status=200 local=f01880922915ec6d remote=f01880922915ec6d
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-02 status=200 local=787798e65210de5a remote=787798e65210de5a
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-03 status=200 local=d62cfdb2d8c25f25 remote=d62cfdb2d8c25f25
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-04 status=200 local=232fd0e5d746194c remote=232fd0e5d746194c
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-05 status=200 local=44df260b8ad3cafb remote=44df260b8ad3cafb
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-06 status=200 local=79a893dca04b146d remote=79a893dca04b146d
+- DOWNLOADED BTCUSDT 2026-11 klines 2026-11-07 status=200 local=e74e7262fb3981e1 remote=e74e7262fb3981e1
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-08 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-09 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-10 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-11 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-12 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-13 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-14 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-15 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-16 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-17 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-18 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-19 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-20 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-21 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-22 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-23 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-24 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-25 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-26 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-27 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-28 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-29 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 klines 2026-11-30 status=404 local= remote=None
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-01 status=200 local=af84fca54d4ba53d remote=af84fca54d4ba53d
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-02 status=200 local=d482e479e227de81 remote=d482e479e227de81
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-03 status=200 local=a3b1b6e369030ed8 remote=a3b1b6e369030ed8
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-04 status=200 local=f3195293cf9a1dbf remote=f3195293cf9a1dbf
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-05 status=200 local=6b1d8c487bc717e8 remote=6b1d8c487bc717e8
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-06 status=200 local=07483c5684a08633 remote=07483c5684a08633
+- DOWNLOADED BTCUSDT 2026-11 markPriceKlines 2026-11-07 status=200 local=af0f59feed541cc8 remote=af0f59feed541cc8
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-08 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-09 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-10 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-11 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-12 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-13 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-14 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-15 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-16 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-17 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-18 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-19 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-20 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-21 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-22 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-23 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-24 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-25 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-26 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-27 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-28 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-29 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 markPriceKlines 2026-11-30 status=404 local= remote=None
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-01 status=200 local=ab1fca4b9f4111a4 remote=ab1fca4b9f4111a4
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-02 status=200 local=65296402ef9c1b6f remote=65296402ef9c1b6f
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-03 status=200 local=8dd275dc52c0f25d remote=8dd275dc52c0f25d
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-04 status=200 local=eb9fa20ba7720af6 remote=eb9fa20ba7720af6
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-05 status=200 local=7b51e14c49398171 remote=7b51e14c49398171
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-06 status=200 local=c997800a4c7bd9d1 remote=c997800a4c7bd9d1
+- DOWNLOADED BTCUSDT 2026-11 indexPriceKlines 2026-11-07 status=200 local=1526857de8c3b90d remote=1526857de8c3b90d
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-08 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-09 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-10 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-11 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-12 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-13 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-14 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-15 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-16 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-17 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-18 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-19 status=404 local= remote=None
+- MISSING_REMOTE BTCUSDT 2026-11 indexPriceKlines 2026-11-20 status=404 local= remote=None

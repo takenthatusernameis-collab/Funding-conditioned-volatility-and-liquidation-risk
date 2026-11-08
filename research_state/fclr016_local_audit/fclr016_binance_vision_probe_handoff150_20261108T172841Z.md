@@ -1,0 +1,1 @@
+- XRPUSDT 2026-11 2026-11-06: top-level placeholder sha256=47d424ae85bffc10 (canonical kind subdir missing/unmatched)
