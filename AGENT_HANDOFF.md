@@ -226,3 +226,44 @@ Acceptance: **>=928 tests OK** (higher with added deterministic tests); refusals
 
 ### Do-NOT
 Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop or relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files; run v4 as confirmatory.
+
+---
+
+## NEXT SESSION INITIAL TASK — 2026-11-08T18:17:19Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-153)
+**Task ID:** FCLR-NEXT-153 (P0, heavy, unblocked, measurable) — repo-name priority: **Track C / Gate 4 funding-conditioned volatility forecasting FIRST** (local admissible Binance kline+funding cache; measurable, unblocked, heavy). **Track A liquidation risk BLOCKED/no trigger** (Hyperliquid `data/events|fills` 2026-11 = 404, `data_through=2026-10`; do **NOT** re-probe absent months in a loop) — **never conflate observed vs modeled (Track B)**. No trading/orders; no fabricated data/terms/reviews; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff — no competing handoff/status files.**
+
+### Verified state (2026-11-08T18:17:19Z, git HEAD `97c85770f`; local, no network; working tree clean)
+- `python -m unittest discover tests -q` → **exit 0, OK, Ran 928 tests**. `check_tracka_scope_registry_drift.py` → **108/108 PASS**. `tracka_resume_check.py` → **pass:true, 17 checks, network:false**. `--bogus` refusals parseable JSON/exit!=0/no traceback.
+- `run_funding_ablations.py` → clean, honest **PILOT/INCONCLUSIVE**; primary E vs A **+4.612, 95% CI [-0.129, 13.122] spans 0** (n_obs=1819, n_blocks=41, n_reps=2000, seed=12345, block_hours=24). **No incremental forecast skill; H001 NOT_SUPPORTED; risk overlay INELIGIBLE.**
+- **FCLR-023 latest:** 45 groups / 45 rows / 45 packets; 15 `human_legal_required`, 10 `fresh_frozen_prereg_required`, 0 ready; `draft_only=true,no_confirmatory_outcomes=true,confirmatory_outcomes_go=false,packet_ready_for_human_or_prereg_action=false,satisfied=false`. **Not GO, not frozen, not confirmatory.**
+- **Bottlenecks cleared:** fclr020/fclr021 registered (108/108, no drift); working tree clean; no untracked churn. Direct heavy work unblocked.
+- **Provenance identity evidence (NO outcomes):** fclr015 MATCH 12/12 `GO_SAMPLED_OR_PARTIAL`; fclr016 MATCH 1/1 `GO_PARTIAL_BOUNDED`. Identity only, not sufficient. v5 terms **EXPLICIT_BLOCKER_UNRESOLVED** (`fabricated=false`); `all_go=false`.
+- **Local cache coverage:** 5-symbol panel has 2024-04..09 + 2024-10..12 + 2025-01..08 month dirs present.
+
+### Objective (heavy, no status-only) — deliver measurable deltas
+1. **Integrity gate (must run):** focus campaign acceptance; confirm fclr023 latest 45/45/45, 15 human-legal, 10 fresh-prereg, all `packet_ready_for_human_or_prereg_action=false`, draft-only/non-confirmatory; ablations baseline clean/honest (CI spans 0). Restore timestamp-only side effects to HEAD.
+2. **Commit hygiene (safe):** verify fclr020/021 planning artifacts pass full tests+drift, draft-only/non-authorizing, coherently registered (108/108); prepare reviewable commits (no verify outputs / timestamp-only churn / `__pycache__` / sealed side effects).
+3. **Extend provenance/admissibility evidence (bounded, NO outcomes):** resume/expand fclr015/fclr016 with bounded `--max-checks`/`--checkpoint-every` across 5-symbol panel, prioritizing 2024-04..09 and present 2025+ months; record MATCH/MISMATCH/MISSING/INCOMPLETE + placeholder-duplicate hazards. Identity only.
+4. **Draft (NOT freeze) loader-compatible Gate 4 prereg v4 candidate (no outcomes):** DRAFT prereg keyed to verified local cache (>=5 sym, >=3 non-overlapping 30-day blocks, explicit horizons, 7d purge/embargo, chronological walk-forward, train-only normalization, leakage guards, fixed seeds/bootstrap/block-aware CIs/Holm family) + admissibility-evidence checklist mapping to v5 blockers. Mark `DRAFT_NOT_FROZEN`.
+5. **Safe deterministic test delta:** add regression coverage for `run_funding_ablations.py` LFS-tolerant manifest read and/or deterministic `--out-suffix`/output-isolation path (tmp dir, no sealed overwrite). Target >928 tests.
+
+### Focus campaign (run every session — future agents must do heavy work; do not skip)
+```bash
+pip install -r requirements.txt
+python -m unittest discover tests -q
+python scripts/check_tracka_scope_registry_drift.py
+python scripts/tracka_resume_check.py | python3 -c "import sys,json; d=json.load(sys.stdin); print('tracka pass', d['pass'], 'checks', len(d['checks']), 'network', d['network'])"
+python scripts/fclr016_v5_admissibility_report.py --bogus 2>&1 | tail -1
+python scripts/fclr016_v5_promotion_dryrun.py --bogus 2>&1 | tail -1
+python scripts/run_funding_ablations.py
+python scripts/fclr023_gate4_blocker_resolution_action_plan.py
+```
+Acceptance: **>=928 tests OK** (higher with added deterministic tests); refusals parseable/exit!=0/no traceback; drift **108/108** (or higher if legitimately registered with tests); resume **17/17**; ablations honest verdict (CI spans 0 unless evidence changes, do not force); **measurable heavy delta delivered** (no status-only). Restore timestamp-only side effects; remove verify outputs.
+
+### Resume triggers (only then — fresh prereg BEFORE outcomes)
+1. **Track A/H004:** unauthenticated Hyperliquid `data/events|fills` YYYY-MM >=2026-11 **HTTP 200 + verified content** OR admissible unauthenticated observed-liquidation source passing full-manifest GO. Fresh experiment ID + prereg before outcomes; modeled!=observed.
+2. **v5 terms resolved (human/legal):** add `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (verifiable facts only; `fabricated=false`, `status=RESOLVED_VERIFIED`, frozen scope). Reconcile refs/hashes; promote prereg to frozen only after all guards green.
+3. **New claim-worthy Track C run:** loader-compatible admissible local panel, >=5 sym & >=3 non-overlapping 30-day blocks, **fresh frozen prereg before outcomes**. DRAFT skeletons/evidence indices/action matrices/validators/preflights/action plans/provenance probes are **not** sufficient.
+
+### Do-NOT
+Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop or relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files; run v4 as confirmatory.
