@@ -69,5 +69,5 @@ Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenan
 
 ---
 
-## INITIAL TASK MESSAGE — 2026-11-08T13:13:46Z (next session entry point)
+## INITIAL TASK MESSAGE — 2026-11-08T13:14:16Z (next session entry point)
 **Next task:** FCLR-NEXT-140 — build `scripts/fclr018_gate4_prereg_readiness_matrix.py` (read-only, no network, no confirmatory outcomes) + tests, emitting a DRAFT (not frozen) prereg skeleton under `research_state/fclr018_local_audit/`. Run the focus campaign block first; preserve sealed artifacts; do not promote/freeze. Track A remains blocked (no re-probe); v5 terms unresolved.
