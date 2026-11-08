@@ -38,7 +38,7 @@
 
 ---
 
-## NEXT SESSION INITIAL TASK — 2026-11-08T15:21Z (SINGLE DURABLE HANDOFF)
+## NEXT SESSION INITIAL TASK — 2026-11-08T15:27Z (SINGLE DURABLE HANDOFF)
 **Task ID:** FCLR-NEXT-145 (P0, heavy, unblocked, measurable)
 **Objective:** Build `scripts/fclr023_gate4_blocker_resolution_action_plan.py` (read-only, **no network, no model-outcome computation, no freeze/promotion, no sealed overwrite**) plus `tests/test_fclr023_gate4_blocker_resolution_action_plan.py`, register in `research_state/tracka_script_scope_registry.json` (107→108, add `fclr023_register` change), reconcile `tests/test_tracka_hardening_117.py` `SCRIPT_REGISTRY` (107→108).
 **Input:** `research_state/fclr022_local_audit/fclr022_gate4_blocker_resolution_evidence_preflight_latest.json` (and only local metadata it already contains/cites; do not re-fetch or compute outcomes).
