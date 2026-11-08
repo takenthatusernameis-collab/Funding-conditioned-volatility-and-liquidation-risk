@@ -1,0 +1,150 @@
+{
+  "admissibility_blockers_remaining": [
+    "Machine-readable Binance Vision/data-use license/terms/provenance manifest for frozen scope (verifiable facts only; no fabricated permissions)",
+    "Deterministic completeness/leakage audit vs frozen scope and Gate 4/v4/FCLR-014 window constraints, referencing quarantine artifacts",
+    "Preregistered confirmatory design freeze (splits/features/targets/metrics/stop rule, data hashes, provenance manifest hash) + FCLR-014 guard acceptance; keep confirmatory_claim_go=NO_GO until all pass"
+  ],
+  "admissibility_complete": false,
+  "aggregate": {
+    "cache_identity_vs_binance_vision_hazards_zero": true,
+    "hazards": 0,
+    "total_checks": 1855
+  },
+  "artifact": "fclr016_v5_identity_consolidation",
+  "confirmatory_claim_go": "NO_GO",
+  "frozen_scope": {
+    "kinds": [
+      "fundingRate",
+      "klines",
+      "markPriceKlines",
+      "indexPriceKlines",
+      "premiumIndexKlines"
+    ],
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "sample_days": "full",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "window": "2025-08-01..2025-10-31"
+  },
+  "generated_utc": "2026-11-08T00:39:08Z",
+  "no_confirmatory_outcomes": true,
+  "probe_artifacts": [
+    {
+      "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+      "confirmatory_claim_go": "NO_GO",
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_btc_eth_full_canonical_v5_20261108T003047Z.json",
+      "scope": {
+        "kinds": [
+          "fundingRate",
+          "klines",
+          "markPriceKlines",
+          "indexPriceKlines",
+          "premiumIndexKlines"
+        ],
+        "months": [
+          "2025-08",
+          "2025-09",
+          "2025-10"
+        ],
+        "root": null,
+        "sample_days": null,
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT"
+        ]
+      },
+      "sha256": "6816660d5ab5877deea084c3289373fb5d028caf6a3c9c8ee9ff8015b96f593e",
+      "summary": {
+        "match": 742,
+        "mismatch": 0,
+        "missing_local": 0,
+        "missing_remote": 0,
+        "new_this_run": 192,
+        "placeholder_duplicate_files": 0,
+        "remote_error": 0,
+        "total": 742
+      }
+    },
+    {
+      "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+      "confirmatory_claim_go": "NO_GO",
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_bnb_full_canonical_v5_postquarantine_fresh_20261108T003159Z.json",
+      "scope": {
+        "kinds": [
+          "fundingRate",
+          "klines",
+          "markPriceKlines",
+          "indexPriceKlines",
+          "premiumIndexKlines"
+        ],
+        "months": [
+          "2025-08",
+          "2025-09",
+          "2025-10"
+        ],
+        "root": null,
+        "sample_days": null,
+        "symbols": [
+          "BNBUSDT"
+        ]
+      },
+      "sha256": "42c51270c4c14b80e79a6d98776ece6ba4b8b28480c80d71a67ad3f61a410135",
+      "summary": {
+        "match": 371,
+        "mismatch": 0,
+        "missing_local": 0,
+        "missing_remote": 0,
+        "new_this_run": 371,
+        "placeholder_duplicate_files": 0,
+        "remote_error": 0,
+        "total": 371
+      }
+    },
+    {
+      "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+      "confirmatory_claim_go": "NO_GO",
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_sol_xrp_full_canonical_v5_postquarantine_20261108T003159Z.json",
+      "scope": {
+        "kinds": [
+          "fundingRate",
+          "klines",
+          "markPriceKlines",
+          "indexPriceKlines",
+          "premiumIndexKlines"
+        ],
+        "months": [
+          "2025-08",
+          "2025-09",
+          "2025-10"
+        ],
+        "root": null,
+        "sample_days": null,
+        "symbols": [
+          "SOLUSDT",
+          "XRPUSDT"
+        ]
+      },
+      "sha256": "f5a0522886fbb4e1226fe37595411772c813249454cfaffd4d3706b59ed2dfd8",
+      "summary": {
+        "match": 742,
+        "mismatch": 0,
+        "missing_local": 0,
+        "missing_remote": 0,
+        "new_this_run": 742,
+        "placeholder_duplicate_files": 0,
+        "remote_error": 0,
+        "total": 742
+      }
+    }
+  ],
+  "purpose": "Consolidate full-scope Binance Vision remote identity evidence for Gate 4 v5 frozen window; identity only, necessary not sufficient for confirmatory admissibility."
+}
