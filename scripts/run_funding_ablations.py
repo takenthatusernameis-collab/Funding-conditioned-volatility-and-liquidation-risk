@@ -193,6 +193,22 @@ def _admissibility_scope_window(d: dict) -> Optional[str]:
     return (d.get("frozen_scope") or {}).get("window")
 
 
+def _check_resolved_terms_evidence_package(te: dict) -> Optional[str]:
+    """Fail-closed checks when terms evidence claims RESOLVED_VERIFIED (aligned with validator)."""
+    if te.get("status") != RESOLVED_TERMS:
+        return None
+    if te.get("fabricated") is not False:
+        return "RESOLVED_VERIFIED terms evidence must set fabricated=false"
+    for k in ("terms_url_reviewed", "access_date_utc", "reviewer_role", "conclusion"):
+        v = te.get(k)
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return f"RESOLVED_VERIFIED terms evidence missing required field: {k}"
+    rr = str(te.get("reviewer_role", "")).lower()
+    if "agent" in rr and "human" not in rr and "legal" not in rr and "maintainer" not in rr:
+        return "RESOLVED_VERIFIED terms evidence reviewer_role appears agent-only (human/legal review required)"
+    return None
+
+
 def check_admissibility_package(provenance_manifest_path: str, completeness_audit_path: str,
                                 terms_evidence_path: str, prereg_draft_path: str,
                                 expect_go: bool = False) -> dict:
@@ -216,6 +232,8 @@ def check_admissibility_package(provenance_manifest_path: str, completeness_audi
         errors.append("provenance.license_terms.fabricated must not be true")
     if te.get("fabricated") is True:
         errors.append("terms evidence fabricated marker inconsistent")
+    if te.get("status") == RESOLVED_TERMS and te.get("fabricated") is not False:
+        errors.append("terms evidence fabricated marker inconsistent with resolved status")
     scope = pm.get("frozen_scope") or {}
     if not scope:
         errors.append("provenance manifest missing frozen_scope")
@@ -232,7 +250,10 @@ def check_admissibility_package(provenance_manifest_path: str, completeness_audi
             errors.append("draft prereg must keep confirmatory_claim_go=NO_GO")
         if (pr.get("gates") or {}).get("confirmatory_outcomes_permitted") is True:
             errors.append("draft prereg gates.confirmatory_outcomes_permitted must be false")
-    terms_resolved = te.get("status") == RESOLVED_TERMS and te.get("fabricated") is False
+    terms_err = _check_resolved_terms_evidence_package(te)
+    if terms_err:
+        errors.append(terms_err)
+    terms_resolved = te.get("status") == RESOLVED_TERMS and te.get("fabricated") is False and terms_err is None
     if te.get("status") in ("EXPLICIT_BLOCKER_UNRESOLVED", "UNRESOLVED", "BLOCKED") and (
         pm.get("confirmatory_provenance_go") is True or pm.get("admissibility_complete") is True
     ):
@@ -245,6 +266,12 @@ def check_admissibility_package(provenance_manifest_path: str, completeness_audi
         errors.append(f"admissibility/expect-go requires completeness verdict {PASS_COMPLETENESS}")
     if (ca.get("completeness") or {}).get("ok") is False and ca.get("verdict") == PASS_COMPLETENESS:
         errors.append("completeness verdict PASS but completeness.ok is false")
+    # non-draft prereg claiming GO/admissible without terms resolved/provenance is refused
+    if pr.get("draft") is False and (pr.get("confirmatory_claim_go") == "GO" or pr.get("admissibility_complete") is True):
+        if not terms_resolved:
+            errors.append("non-draft GO/admissible prereg requires RESOLVED_VERIFIED terms evidence")
+        if pm.get("confirmatory_provenance_go") is not True or pm.get("admissibility_complete") is not True:
+            errors.append("non-draft GO/admissible prereg requires provenance manifest GO+admissibility_complete")
     refs = (pr.get("admissibility_refs_sha256") or {})
     expected = {
         "provenance_license_manifest": admissibility_sha256(pm_p),
@@ -263,7 +290,7 @@ def check_admissibility_package(provenance_manifest_path: str, completeness_audi
         "prereg_claim_go": bool(pr.get("confirmatory_claim_go") == "GO"),
     }
     blockers = [k for k, v in gates.items() if not v]
-    all_go = not blockers and all([
+    all_go = not blockers and not errors and all([
         pm.get("no_confirmatory_outcomes") is True,
         ca.get("no_confirmatory_outcomes") is True,
         te.get("no_confirmatory_outcomes") is True,
@@ -271,6 +298,24 @@ def check_admissibility_package(provenance_manifest_path: str, completeness_audi
         pm.get("fabricated") is not True,
         te.get("fabricated") is False,
     ])
+    if expect_go and not all_go:
+        return {
+            "validator": "run_funding_ablations.admissibility_package",
+            "ok": True,  # package parsed/validated; expect-go refusal is structured non-GO
+            "expect_go": True,
+            "expect_go_refused": True,
+            "all_go": False,
+            "confirmatory_outcomes_permitted": False,
+            "gates": gates,
+            "blockers": blockers,
+            "errors": errors,
+            "hashes": {
+                "provenance_manifest": admissibility_sha256(pm_p),
+                "completeness_audit": admissibility_sha256(ca_p),
+                "terms_evidence": admissibility_sha256(te_p),
+                "prereg_draft": admissibility_sha256(pr_p),
+            },
+        }
     return {
         "validator": "run_funding_ablations.admissibility_package",
         "ok": True,

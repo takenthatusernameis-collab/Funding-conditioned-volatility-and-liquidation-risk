@@ -126,6 +126,12 @@ def main(argv=None):
         return fail(f"admissibility/expect-go requires completeness verdict {PASS_COMPLETENESS}")
     if (ca.get("completeness") or {}).get("ok") is False and ca.get("verdict") == PASS_COMPLETENESS:
         return fail("completeness verdict PASS but completeness.ok is false")
+    # non-draft prereg claiming GO/admissible without terms resolved/provenance is refused
+    if pr.get("draft") is False and (pr.get("confirmatory_claim_go") == "GO" or pr.get("admissibility_complete") is True):
+        if not terms_resolved:
+            return fail("non-draft GO/admissible prereg requires RESOLVED_VERIFIED terms evidence")
+        if pm.get("confirmatory_provenance_go") is not True or pm.get("admissibility_complete") is not True:
+            return fail("non-draft GO/admissible prereg requires provenance manifest GO+admissibility_complete")
     # refs integrity (if present)
     refs = (pr.get("admissibility_refs_sha256") or {})
     expected = {
