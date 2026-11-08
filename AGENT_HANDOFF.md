@@ -68,3 +68,8 @@ Acceptance: >=906 tests OK (higher with added deterministic tests); refusals par
 Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop or relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
 
 ---
+
+---
+
+## INITIAL TASK MESSAGE (next session) — 2026-11-08T13:54:51Z
+P0: Phase 3 funding-conditioned volatility ablations (Gate 4) on local data. Execute full ablation sweep per pre_registration_gate4_funding_multisplit_v4; report metrics + leakage audit; do not re-probe Track A. Heavy work required: extend seam/CLI parity tests, keep regression >=709 OK, drift 17/17.
