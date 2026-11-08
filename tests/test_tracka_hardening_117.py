@@ -237,6 +237,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr022_gate4_blocker_resolution_evidence_preflight.py: deterministic read-only Gate 4 blocker-resolution evidence preflight consuming fclr021 latest; checks read-only whether prerequisite evidence_ref paths exist/readable locally (exists/read_state/sha256/bytes), never fabricates evidence as present, emits resolution_readiness rows with resolution_ready=false and resolution_readiness_warnings for gaps. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
   },
+  "fclr023_gate4_blocker_resolution_action_plan.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr023_gate4_blocker_resolution_action_plan.py: deterministic read-only Gate 4 blocker-resolution action plan consuming fclr022 latest; emits per-gap action-plan packets grouped by (window, gate_class, prerequisite) with evidence snapshot fields, human_legal_required (terms/legal only), fresh_frozen_prereg_required (prereg only), read-only local_verification_commands, non-evidentiary artifact_target_hint, packet_ready_for_human_or_prereg_action=false. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+  },
   "fclr016_v5_terms_evidence_template.py": {
     "class": "prereg_utility",
     "reason": "fclr016_v5_terms_evidence_template.py: deterministic non-evidentiary terms-evidence TEMPLATE generator; writes only a clearly non-evidentiary template to an explicit user path, never creates RESOLVED_VERIFIED status, no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
