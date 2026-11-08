@@ -19,7 +19,7 @@
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition.",
   "generated": "20261107T165800Z",
   "registry_version": "1.0",
-  "script_count": 94,
+  "script_count": 96,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -196,6 +196,14 @@
     "fclr015_verify_cache_provenance_2024q2q3.py": {
       "class": "raw_fetch_monitor_provenance",
       "reason": "fclr015_verify_cache_provenance_2024q2q3.py: bounded unauthenticated Binance Vision provenance verification for cached 2024-04..09 files (sha256/ETag/Last-Modified GET); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path."
+    },
+    "fclr016_repair_canonical_cache.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr016_repair_canonical_cache.py: bounded unauthenticated Binance Vision canonical cache repair for 2025+ (downloads missing canonical daily zips into kind-specific subdirs; no overwrites; sha256/ETag/Last-Modified recorded); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
+    },
+    "fclr016_verify_cache_provenance_2025plus.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr016_verify_cache_provenance_2025plus.py: bounded unauthenticated Binance Vision provenance verification for cached 2025+ files (sha256/ETag/Last-Modified GET vs local canonical zips, placeholder-duplicate hazard detection); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
     },
     "fclr_h001_extract.py": {
       "class": "raw_fetch_monitor_provenance",

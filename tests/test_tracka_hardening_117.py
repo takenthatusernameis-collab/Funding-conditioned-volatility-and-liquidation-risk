@@ -197,6 +197,14 @@ SCRIPT_REGISTRY = {
     "class": "raw_fetch_monitor_provenance",
     "reason": "fclr015_verify_cache_provenance_2024q2q3.py: bounded unauthenticated Binance Vision provenance verification for cached 2024-04..09 files (sha256/ETag/Last-Modified GET); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path."
   },
+  "fclr016_repair_canonical_cache.py": {
+    "class": "raw_fetch_monitor_provenance",
+    "reason": "fclr016_repair_canonical_cache.py: bounded unauthenticated Binance Vision canonical cache repair for 2025+ (downloads missing canonical daily zips into kind-specific subdirs; no overwrites; sha256/ETag/Last-Modified recorded); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
+  },
+  "fclr016_verify_cache_provenance_2025plus.py": {
+    "class": "raw_fetch_monitor_provenance",
+    "reason": "fclr016_verify_cache_provenance_2025plus.py: bounded unauthenticated Binance Vision provenance verification for cached 2025+ files (sha256/ETag/Last-Modified GET vs local canonical zips, placeholder-duplicate hazard detection); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
+  },
   "forecast_pipeline.py": {
     "class": "track_c_sealed_volatility",
     "reason": "forecast_pipeline.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
