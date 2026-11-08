@@ -52,3 +52,32 @@ Acceptance: **>=935 tests OK**, refusals parseable/exit!=0/no traceback, drift *
 
 ### Do-NOT
 Fabricate terms/license/reviews or data; run confirmatory outcomes on unprovenanced/incomplete/blocked data or without frozen prereg; freeze/promote while blockers exist; reopen sealed anchors/holdouts; threshold-shop or relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
+
+---
+
+## NEXT SESSION INITIAL TASK — 2026-11-08T20:17:43Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-161)
+**SESSION ENTRY VERIFIED 2026-11-08T20:17:43Z:** `AGENT_HANDOFF.md` sole durable handoff. No status-only work. Working tree clean.
+
+**Task ID:** FCLR-NEXT-161 (P0, heavy, unblocked, measurable) — repo-name priority: **Track C / Gate 4 funding-conditioned volatility FIRST** (local admissible Binance kline+funding cache; leakage-resistant OOS only). Track A liquidation risk BLOCKED/no trigger (Hyperliquid 2026-11 = 404; data_through=2026-10; do NOT re-probe absent months — bottleneck removed). Track B modeled != observed, never conflate. No trading/orders; no fabricated data/terms/reviews; chronological walk-forward, train-only normalization, purge/embargo; sealed holdouts untouched.
+
+### Verified state (2026-11-08T20:17Z)
+- Tests 935 OK; drift 109/109 PASS; resume 17 pass; refusals parseable/exit!=0/no traceback.
+- Abations PILOT/INCONCLUSIVE (E vs A +4.612, CI [-0.129,13.122] spans 0); H001 NOT_SUPPORTED; overlay INELIGIBLE.
+- fclr023 45/45 draft-only (confirmatory_outcomes_go=false, packet_ready=false, satisfied=false).
+- fclr017 Gate 4 cache coverage 2024-04..09, 5 symbols, global_all_months_ok=true, CONSISTENT.
+- Loader/layout + inventory compatibility still to verify end-to-end (data_inventory.json lacks 2024-04..09 refs).
+
+### Heavy focus campaign (mandatory every session)
+```bash
+pip install -r requirements.txt
+python -m unittest discover tests -q
+python scripts/check_tracka_scope_registry_drift.py
+python scripts/tracka_resume_check.py
+python scripts/run_funding_ablations.py
+python scripts/fclr023_gate4_blocker_resolution_action_plan.py
+python scripts/fclr017_gate4_cache_coverage_audit.py
+```
+Deliver measurable deltas: end-to-end loader/layout compatibility audit for `research_state/data_cache/{SYM}_2024_{MM}/` (5 symbols × 6 months) with tmp-fixture tests; reconcile `data_inventory.json`/manifest refs from local files only; extend provenance identity (fclr015/fclr016 bounded runs) identity-only; draft (NOT freeze) Gate 4 prereg v4 candidate `DRAFT_NOT_FROZEN` (confirmatory_outcomes_permitted=false); deterministic test delta >935. Restore timestamp-only side effects; remove verify outputs. Acceptance: >=935 tests OK, drift 109/109+, resume 17/17, ablations honest, measurable heavy delta.
+
+### Do-NOT
+Fabricate terms/license/reviews/data; confirmatory outcomes without frozen prereg; freeze/promote while blockers; reopen sealed anchors/holdouts; threshold-shop; merge Track A/B/C; claim economic value; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
