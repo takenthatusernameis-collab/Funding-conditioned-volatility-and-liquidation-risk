@@ -1,7 +1,8 @@
-"""FCLR-NEXT-162: deterministic tests for read-only inventory reconciliation."""
+"""FCLR-NEXT-162/165: deterministic tests for read-only inventory reconciliation."""
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -12,15 +13,19 @@ sys.path.insert(0, str(REPO / "scripts"))
 import reconcile_inventory
 
 
+def _make_cache(cache: Path, sym_month: str, content: str = "x,y\n1,2\n"):
+    cdir = cache / sym_month
+    cdir.mkdir(parents=True, exist_ok=True)
+    (cdir / "sample.csv").write_text(content)
+
+
 class TestReconcileInventory(unittest.TestCase):
     def test_reconcile_missing_in_inventory_detected(self):
         with tempfile.TemporaryDirectory() as td:
             td = Path(td)
             cache = td / "data_cache"
             inv = td / "data_inventory.json"
-            cdir = cache / "BTCUSDT_2024_04"
-            cdir.mkdir(parents=True)
-            (cdir / "sample.csv").write_text("x,y\n1,2\n")
+            _make_cache(cache, "BTCUSDT_2024_04")
             inv.write_text(json.dumps([]))
             res = reconcile_inventory.reconcile(str(cache), str(inv))
             self.assertFalse(res["reconciled"])
@@ -55,18 +60,12 @@ class TestReconcileInventory(unittest.TestCase):
             self.assertIn("missing_in_inventory", res)
             self.assertIn("stale_in_inventory", res)
 
-
-if __name__ == "__main__":
-    unittest.main()
-
     def test_gate_input_summary_present_and_read_only_contract(self):
         with tempfile.TemporaryDirectory() as td:
             td = Path(td)
             cache = td / "data_cache"
             inv = td / "data_inventory.json"
-            cdir = cache / "BTCUSDT_2024_04"
-            cdir.mkdir(parents=True)
-            (cdir / "sample.csv").write_text("x,y\n1,2\n")
+            _make_cache(cache, "BTCUSDT_2024_04")
             inv.write_text(json.dumps([]))
             res = reconcile_inventory.reconcile(str(cache), str(inv))
             self.assertIn("gate_input_summary", res)
@@ -77,5 +76,46 @@ if __name__ == "__main__":
             self.assertEqual(g["by_symbol"]["BTCUSDT"]["cache_months"], 1)
             self.assertIn("read-only", g["scope_note"])
             self.assertIn("not confirmatory GO", g["scope_note"])
-            # never fabricates/overwrites
             self.assertFalse(res["reconciled"])
+
+    def test_gate_input_summary_cli_flag_emits_minimal_payload(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            cache = td / "data_cache"
+            inv = td / "data_inventory.json"
+            _make_cache(cache, "ETHUSDT_2024_05")
+            inv.write_text(json.dumps([]))
+            out = subprocess.run(
+                [sys.executable, str(REPO / "scripts" / "reconcile_inventory.py"),
+                 "--cache-dir", str(cache), "--inventory", str(inv),
+                 "--gate-input-summary", "--json"],
+                capture_output=True, text=True, check=True,
+            )
+            payload = json.loads(out.stdout)
+            self.assertIn("by_symbol", payload)
+            self.assertIn("totals", payload)
+            self.assertIn("scope_note", payload)
+            self.assertEqual(payload["totals"]["missing_in_inventory_months"], 1)
+            self.assertEqual(payload["by_symbol"]["ETHUSDT"]["cache_months"], 1)
+            # scope_note must never claim confirmatory GO or provenance/license/terms resolution
+            self.assertIn("not confirmatory GO", payload["scope_note"])
+
+    def test_gate_input_summary_cli_is_read_only_no_inventory_write(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            cache = td / "data_cache"
+            inv = td / "data_inventory.json"
+            _make_cache(cache, "SOLUSDT_2024_06")
+            inv.write_text(json.dumps([]))
+            before = inv.read_text()
+            subprocess.run(
+                [sys.executable, str(REPO / "scripts" / "reconcile_inventory.py"),
+                 "--cache-dir", str(cache), "--inventory", str(inv),
+                 "--gate-input-summary"],
+                capture_output=True, text=True, check=True,
+            )
+            self.assertEqual(inv.read_text(), before)
+
+
+if __name__ == "__main__":
+    unittest.main()

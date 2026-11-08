@@ -133,5 +133,50 @@ class TestScopeCoherenceNoDataLoading(unittest.TestCase):
         self.assertFalse(report["confirmatory_outcomes_permitted"])
 
 
+class TestScopeCoherenceGateInputConsumption(unittest.TestCase):
+    def test_gate_input_summary_consumed_read_only_alongside_blocker(self):
+        before = _canonical_bytes()
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            cache = td / "data_cache"
+            cdir = cache / "BTCUSDT_2024_04"
+            cdir.mkdir(parents=True)
+            (cdir / "sample.csv").write_text("x,y\n1,2\n")
+            inv = td / "data_inventory.json"
+            inv.write_text(json.dumps([]))
+            gis = td / "gate_input_summary.json"
+            subprocess.run([sys.executable, str(REPO / "scripts" / "reconcile_inventory.py"),
+                            "--cache-dir", str(cache), "--inventory", str(inv),
+                            "--gate-input-summary", "--out", str(gis)], capture_output=True, text=True, check=True)
+            p = _run_cli([str(PM_REAL), str(CA_REAL), str(TE_REAL), str(PR_2024),
+                          "--gate-input-summary", str(gis), "--json-only"])
+        self.assertEqual(before, _canonical_bytes())
+        self.assertEqual(p.returncode, 0)
+        out = json.loads(p.stdout)
+        self.assertIn("gate_input_consumption", out)
+        gic = out["gate_input_consumption"]
+        self.assertTrue(gic["present"])
+        self.assertEqual(gic["read_state"], "ok")
+        self.assertEqual(gic["totals"]["missing_in_inventory_months"], 1)
+        self.assertEqual(gic["by_symbol"]["BTCUSDT"]["cache_months"], 1)
+        self.assertIn("not confirmatory GO", gic["consumed_as"])
+        # consumption never unblocks any gate
+        self.assertFalse(out["all_go"])
+        self.assertFalse(out["confirmatory_outcomes_permitted"])
+        self.assertTrue(out["gate_input_consumption"]["present"])
+
+    def test_missing_gate_input_summary_reported_present_false_not_error(self):
+        before = _canonical_bytes()
+        p = _run_cli([str(PM_REAL), str(CA_REAL), str(TE_REAL), str(PR_2024),
+                      "--gate-input-summary", "/nonexistent/gis.json", "--json-only"])
+        self.assertEqual(before, _canonical_bytes())
+        self.assertEqual(p.returncode, 0)
+        out = json.loads(p.stdout)
+        self.assertIn("gate_input_consumption", out)
+        self.assertFalse(out["gate_input_consumption"]["present"])
+        self.assertEqual(out["gate_input_consumption"]["read_state"], "missing")
+        self.assertFalse(out["all_go"])
+
+
 if __name__ == "__main__":
     unittest.main()

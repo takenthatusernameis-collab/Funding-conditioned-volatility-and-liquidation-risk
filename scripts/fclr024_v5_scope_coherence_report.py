@@ -111,7 +111,7 @@ def _local_evidence_refs() -> list[dict]:
     return out
 
 
-def build_scope_coherence_report(pm_p, ca_p, te_p, pr_p) -> dict:
+def build_scope_coherence_report(pm_p, ca_p, te_p, pr_p, gate_input_summary_p=None) -> dict:
     pm_p, ca_p, te_p, pr_p = map(Path, (pm_p, ca_p, te_p, pr_p))
     pkg = rfa.check_admissibility_package(str(pm_p), str(ca_p), str(te_p), str(pr_p), expect_go=True)
     pm, ca, te, pr = _load(pm_p), _load(ca_p), _load(te_p), _load(pr_p)
@@ -137,6 +137,10 @@ def build_scope_coherence_report(pm_p, ca_p, te_p, pr_p) -> dict:
         "reason_class": "scope_alignment",
         "detail": scope_matrix["scope_windows"],
     })
+    # Gate-input consumption (item 3): read-only per-symbol gap status alongside the v5
+    # blocker matrix. Consumes reconcile_inventory gate_input_summary; never fabricates,
+    # never resolves terms, never claims GO. Missing input -> present=false, not an error.
+    gate_input_consumption = _consume_gate_input_summary(gate_input_summary_p)
     return {
         "validator": "fclr024_v5_scope_coherence_report",
         "ok": bool(pkg.get("ok", False)),
@@ -150,11 +154,13 @@ def build_scope_coherence_report(pm_p, ca_p, te_p, pr_p) -> dict:
         "gate_blocker_matrix": gate_blocker_matrix,
         "scope_coherence": scope_matrix,
         "local_2024_04_09_evidence_refs": local_refs,
+        "gate_input_consumption": gate_input_consumption,
         "artifacts": {
             "provenance_license_manifest": {"path": str(pm_p.resolve()), "sha256": _sha(pm_p), "scope_window": _scope_window(pm)},
             "completeness_leakage_audit": {"path": str(ca_p.resolve()), "sha256": _sha(ca_p), "scope_window": _scope_window(ca)},
             "terms_evidence": {"path": str(te_p.resolve()), "sha256": _sha(te_p), "scope_window": _scope_window(te), "status": te.get("status"), "fabricated": te.get("fabricated")},
             "confirmatory_prereg": {"path": str(pr_p.resolve()), "sha256": _sha(pr_p), "scope_window": _scope_window(pr), "draft": pr.get("draft")},
+            "gate_input_summary": gate_input_consumption["artifact"],
         },
         "no_confirmatory_outcomes": True,
         "no_network": True,
@@ -162,6 +168,39 @@ def build_scope_coherence_report(pm_p, ca_p, te_p, pr_p) -> dict:
         "creates_or_satisfies_evidence": False,
         "fabricates_provenance_completeness_license": False,
     }
+
+
+def _consume_gate_input_summary(p) -> dict:
+    """Read-only consumption of reconcile_inventory gate_input_summary for a scope window."""
+    base = {
+        "present": False,
+        "path": str(p) if p else None,
+        "by_symbol": {},
+        "totals": {},
+        "gaps_present": None,
+        "consumed_as": "read-only per-symbol gap status alongside v5 blocker matrix; not confirmatory GO, not provenance/license/terms resolution",
+        "note": "Missing gate_input_summary input is reported as present=false; it does not create evidence and does not unblock any gate.",
+    }
+    if not p:
+        return base
+    p = Path(p)
+    if not p.exists() or not p.is_file():
+        base["read_state"] = "missing"
+        return base
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        base["read_state"] = f"read_error:{type(e).__name__}"
+        return base
+    base["present"] = True
+    base["read_state"] = "ok"
+    base["sha256"] = _sha(p)
+    base["bytes"] = p.stat().st_size
+    base["by_symbol"] = dict(d.get("by_symbol", {}))
+    base["totals"] = dict(d.get("totals", {}))
+    base["gaps_present"] = d.get("gaps_present")
+    base["scope_note"] = d.get("scope_note")
+    return base
 
 
 def render_markdown(r: dict) -> str:
@@ -214,6 +253,8 @@ def main(argv=None) -> int:
         ap.add_argument("terms_evidence")
         ap.add_argument("prereg_draft")
         ap.add_argument("terms_evidence_override", nargs="?")
+        ap.add_argument("--gate-input-summary", default=None,
+                        help="optional reconcile_inventory gate_input_summary JSON to consume read-only alongside the blocker matrix")
         ap.add_argument("--json-only", action="store_true")
         try:
             args = ap.parse_args(argv)
@@ -223,14 +264,16 @@ def main(argv=None) -> int:
                 return 0
             print(json.dumps(_refusal(f"argparse error: {e}"), sort_keys=True))
             return code
-        pm_p = Path(args.provenance_manifest); ca_p = Path(args.completeness_audit)
-        te_p = Path(args.terms_evidence_override or args.terms_evidence); pr_p = Path(args.prereg_draft)
+        pm_p = Path(args.provenance_manifest)
+        ca_p = Path(args.completeness_audit)
+        te_p = Path(args.terms_evidence_override or args.terms_evidence)
+        pr_p = Path(args.prereg_draft)
         for p in (pm_p, ca_p, te_p, pr_p):
             if not p.exists() or not p.is_file():
                 print(json.dumps(_refusal(f"missing/not-file: {p}"), sort_keys=True))
                 return 2
         try:
-            report = build_scope_coherence_report(pm_p, ca_p, te_p, pr_p)
+            report = build_scope_coherence_report(pm_p, ca_p, te_p, pr_p, args.gate_input_summary)
         except Exception as e:
             print(json.dumps(_refusal(f"cannot build report: {e}"), sort_keys=True))
             return 2

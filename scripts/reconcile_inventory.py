@@ -173,6 +173,8 @@ def main():
     ap.add_argument("--inventory", default=INVENTORY)
     ap.add_argument("--out", default=None)
     ap.add_argument("--json", action="store_true", help="emit JSON to stdout")
+    ap.add_argument("--gate-input-summary", action="store_true",
+                    help="emit only the read-only gate_input_summary (per-symbol gap status) consumable by Gate 4/v5 tooling")
     args = ap.parse_args()
 
     import datetime
@@ -183,6 +185,11 @@ def main():
         os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
         with open(args.out, "w") as f:
             json.dump(res, f, indent=1)
+
+    if args.gate_input_summary:
+        # Deterministic, minimal gap-status payload for downstream Gate 4/v5 consumption.
+        print(json.dumps(res["gate_input_summary"], indent=1, sort_keys=True))
+        return 0 if res["gate_input_summary"]["gaps_present"] else 0
 
     print(json.dumps(res, indent=1))
     return 0 if res["reconciled"] else 1
