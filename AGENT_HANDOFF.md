@@ -167,3 +167,29 @@ Respect root bounds (no new timestamped probe/sweep/scan/wrapper/report families
 
 ### Do-NOT
 Fabricate terms/license/reviews; run confirmatory outcomes on unprovenanced/incomplete 2025+; freeze/promote prereg while blockers exist; reopen sealed FCLR anchors; threshold-shop; merge Track A/B/C semantics; claim economic/overlay value; re-probe Track A; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families; create competing handoff files. This file remains the single durable handoff.
+
+---
+## Initial Task Message (2026-11-08T04:24:18Z, git HEAD clean) — SINGLE DURABLE HANDOFF / Next Agentic Session
+
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility forecasting + liquidation risk). Mission: empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources.
+
+### Verified current state (do not re-litigate without new evidence)
+- **P0 Track C / Gate 4 v5 confirmatory:** `NOT_READY / confirmatory_claim_go=NO_GO`, `admissibility_complete=false`, `confirmatory_outcomes_permitted=false`. Identity consolidated (1855/1855 MATCH, hazards 0; `f73610420932ed1c9072c447b2b537ebf73f0ba5380b1374bd3640acbb143985`). Completeness/leakage deterministic PASS; package blocked (`32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8`). Hard blocker: Binance Vision/data-use terms **not human-verified** (`EXPLICIT_BLOCKER_UNRESOLVED`, `8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923`). Provenance manifest blocked (`6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346`). Prereg DRAFT/not frozen (`8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f`). Validator + package check refuse; `--expect-go` exits 2.
+- **Track A (observed liquidation risk):** `DATA_BLOCKED` (Hyperliquid ironflow `data_through=2026-10`; 2026-11..2027-02 absent). NO re-probe. Trigger-only guarded protocol.
+- **Track B (modeled boundary breach):** `CLOSED_NEGATIVE`. Never conflate.
+- **Historical signal:** FCLR-H001 `NOT_SUPPORTED`; forecast gate NOT MET (FCLR-003 -3.78%, FCLR-006 -69.90%, FCLR-007 -3.42%, FCLR-008 +4.30% CI crosses zero). Gate 4 v4 `EXPLORATORY_INCONCLUSIVE`. No threshold-shopping; no sealed anchor reopen.
+- **Regression:** 709 OK, 0 failures, 0 errors (Track A guard). Drift 17/17 pass; network false; bounds 143/163 root md+json.
+
+### Bottlenecks removed this session
+- None new; confirmatory 2025+ outcomes remain prohibited by hard human-terms blocker. Heavy bounded hardening continues.
+
+### Next single highest-value task (heavy, default path — no human terms evidence)
+Implement read-only `scripts/fclr016_v5_admissibility_report.py` + tests:
+1. Load the 4 real package artifacts (provenance manifest, completeness/leakage audit, terms evidence, prereg draft) with optional `--terms-evidence` path.
+2. Run `check_admissibility_package`/validator logic parity (no outcomes, no network, no data loading).
+3. Emit machine-readable + markdown blocker summary: artifact hashes, gate states, exact required human fields, and "next materially different route" (human terms review).
+4. Tests prove it cannot claim GO, cannot mutate canonicals (`experiment_frontier.json`, `run_manifest.json`, `evaluation_summary.md` byte-identical), refuses malformed/fabricated inputs.
+Respect root bounds (no new timestamped probe/sweep/scan/wrapper/report families beyond this single script).
+
+### Do-NOT
+Fabricate terms/license/reviews; run confirmatory outcomes on unprovenanced/incomplete 2025+; freeze/promote prereg while blockers exist; reopen sealed FCLR anchors; threshold-shop; merge Track A/B/C semantics; claim economic/overlay value; re-probe Track A; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families; create competing handoff files. This file remains the single durable handoff.
