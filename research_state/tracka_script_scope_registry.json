@@ -465,6 +465,10 @@
     {
       "id": "fclr021_register",
       "summary": "register fclr021_gate4_blocker_resolution_checklist_validator.py as track_c_or_aux_audit_utility read-only blocker-resolution checklist validator"
+    },
+    {
+      "id": "fclr022_register",
+      "summary": "register fclr022_gate4_blocker_resolution_evidence_preflight.py as track_c_or_aux_audit_utility read-only blocker-resolution evidence preflight (resolution_ready=false, no satisfaction inference, no fabrication)"
     }
   ]
 }
