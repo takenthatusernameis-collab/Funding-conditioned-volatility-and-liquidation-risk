@@ -43,8 +43,8 @@
 
 ---
 
-## NEXT SESSION INITIAL TASK — 2026-11-08T15:35Z (SINGLE DURABLE HANDOFF)
-**Task ID:** FCLR-NEXT-146 (P0, heavy, unblocked, measurable)
+## NEXT SESSION INITIAL TASK — 2026-11-08T15:47Z (SINGLE DURABLE HANDOFF)
+**Task ID:** FCLR-NEXT-146 (P0, heavy, unblocked, measurable) — repo-name priority: Track C / Gate 4 funding-conditioned volatility forecasting FIRST; Track A liquidation risk BLOCKED/no trigger (2026-11 = 404, no re-probe loop), never conflated with modeled Track B.
 **Objective:** Verify FCLR-NEXT-145 delivery is intact, then execute the unblocked Track C / Gate 4 heavy work: (a) re-run the focus campaign acceptance below and confirm `research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_latest.{json,md}` exists with `packet_ready_for_human_or_prereg_action=false`, `human_legal_required=true` on 15 terms/legal rows, `fresh_frozen_prereg_required=true` on 10 prereg rows, all global flags draft-only/non-confirmatory; (b) extend the admissible local Track C evidence base without network where possible — run `scripts/fclr016_verify_cache_provenance_2025plus.py` and `scripts/fclr016_verify_cache_provenance_2024q2q3.py` (bounded unauthenticated Binance Vision provenance GETs only; admissibility evidence, no outcomes) and inspect `research_state/data_inventory.json`/`cached_inputs_hashes.json` for gaps across the 5-symbol 2024-04..09 panel and any 2025+ cache; (c) draft (not freeze) the next prereg skeleton for a **new claim-worthy Track C run** per resume trigger #3: loader-compatible admissible local panel, ≥5 sym, ≥3 non-overlapping 30-day blocks, fresh frozen prereg **before** outcomes; confirmatory only within `PROVENANCED_CONFIRMATORY_RANGES` 2024-04..09 with manifest/terms/admissibility evidence, else exploratory. **No confirmatory outcomes without frozen prereg; no Track A re-probe; no overlay claims.**
 
 ### Focus campaign (run every session — future agents must do heavy work; do not skip)
