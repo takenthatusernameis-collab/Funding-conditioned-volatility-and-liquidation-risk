@@ -4,7 +4,13 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts"))
-from run_funding_ablations import check_confirmatory_provenance
+from run_funding_ablations import check_confirmatory_provenance, check_admissibility_package
+
+AUDIT = REPO / "research_state/fclr016_local_audit"
+PM = AUDIT / "fclr016_v5_provenance_license_manifest_20261108T014405Z.json"
+CA = AUDIT / "fclr016_v5_completeness_leakage_audit_20261108T014405Z.json"
+TE = AUDIT / "fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json"
+PR = AUDIT / "fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json"
 
 
 def _base_v5(**overrides):
@@ -81,6 +87,59 @@ class TestFclr016V5Guard(unittest.TestCase):
         err = check_confirmatory_provenance("2025-08-01", "2025-10-31", "G4V5", "prereg", "v5", confirmatory_flag=True, provenance_manifest=str(mp))
         self.assertIsNotNone(err)
         self.assertIn("NO_GO", err)
+
+
+class TestFclr016V5AdmissibilityPackage(unittest.TestCase):
+    """check_admissibility_package(): read-only package check, no outcomes/data loaded."""
+
+    def test_current_blocked_package_ok_not_go(self):
+        result = check_admissibility_package(str(PM), str(CA), str(TE), str(PR))
+        self.assertTrue(result["ok"])
+        self.assertFalse(result["all_go"])
+        self.assertFalse(result["confirmatory_outcomes_permitted"])
+        self.assertEqual(result["blockers"], ["terms_resolved_verified", "provenance_manifest_go",
+                                              "completeness_leakage_pass", "prereg_frozen_non_draft", "prereg_claim_go"])
+        self.assertEqual(set(result["hashes"].keys()), {"provenance_manifest", "completeness_audit", "terms_evidence", "prereg_draft"})
+        self.assertEqual(result["hashes"]["completeness_audit"], "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8")
+        self.assertEqual(result["hashes"]["provenance_manifest"], "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346")
+
+    def test_expect_go_refused_on_blocked_package(self):
+        result = check_admissibility_package(str(PM), str(CA), str(TE), str(PR), expect_go=True)
+        self.assertTrue(result["ok"])
+        self.assertFalse(result["all_go"])
+        self.assertTrue(result["expect_go"])
+
+    def test_missing_file_returns_error(self):
+        result = check_admissibility_package(str(PM), str(CA), str(TE), "/nonexistent/prereg.json")
+        self.assertFalse(result.get("ok", False))
+        self.assertIn("missing", result.get("error", ""))
+
+    def test_draft_cannot_claim_frozen(self):
+        import tempfile
+        td = Path(tempfile.mkdtemp())
+        for src, name in [(PM, "pm.json"), (CA, "ca.json"), (TE, "te.json"), (PR, "pr.json")]:
+            (td / name).write_bytes(Path(src).read_bytes())
+        pr = json.loads((td / "pr.json").read_text())
+        pr["frozen_before_outcomes"] = True
+        (td / "pr.json").write_text(json.dumps(pr))
+        result = check_admissibility_package(str(td / "pm.json"), str(td / "ca.json"), str(td / "te.json"), str(td / "pr.json"))
+        self.assertTrue(result["ok"])
+        self.assertFalse(result["all_go"])
+        self.assertIn("prereg_frozen_non_draft", result["blockers"])
+        self.assertIn("draft prereg cannot set frozen_before_outcomes=true", result["errors"])
+
+    def test_terms_hash_ref_mismatch_refused_when_present(self):
+        import tempfile
+        td = Path(tempfile.mkdtemp())
+        for src, name in [(PM, "pm.json"), (CA, "ca.json"), (TE, "te.json"), (PR, "pr.json")]:
+            (td / name).write_bytes(Path(src).read_bytes())
+        pr = json.loads((td / "pr.json").read_text())
+        pr.setdefault("admissibility_refs_sha256", {})["terms_evidence"] = "0" * 64
+        (td / "pr.json").write_text(json.dumps(pr))
+        result = check_admissibility_package(str(td / "pm.json"), str(td / "ca.json"), str(td / "te.json"), str(td / "pr.json"))
+        self.assertTrue(result["ok"])
+        self.assertFalse(result["all_go"])
+        self.assertIn("terms_evidence", result["errors"][0])
 
 
 if __name__ == "__main__":

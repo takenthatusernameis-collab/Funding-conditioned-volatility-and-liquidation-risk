@@ -13,6 +13,7 @@ Leakage-resistant, pre-registered (research_state/pre_registration_gate4_funding
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 import subprocess
 import sys
@@ -163,6 +164,130 @@ def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_
             f"{PROVENANCED_CONFIRMATORY_RANGES} and may overlap consumed/confounded windows; provide --provenance-manifest or use exploratory."
         )
     return None
+
+# --- Admissibility package check (FCLR-016 v5) ---
+# Library-callable, read-only: validates provenance/license manifest, completeness/leakage
+# audit, terms evidence, and prereg draft as a coherent fail-closed package without loading
+# any kline/funding/outcome data. Emits canonical JSON summary for guard acceptance evidence.
+# Mirrors scripts/fclr016_validate_v5_admissibility.py gate logic as a callable check.
+
+RESOLVED_TERMS = "RESOLVED_VERIFIED"
+PASS_COMPLETENESS = "PASS_COMPLETENESS_LEAKAGE_DETERMINISTIC"
+
+
+def admissibility_sha256(p: Path) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def _admissibility_artifact_common(name: str, d: dict) -> Optional[str]:
+    if d.get("no_confirmatory_outcomes") is not True:
+        return f"{name}.no_confirmatory_outcomes must be true"
+    if d.get("fabricated") is True:
+        return f"{name}.fabricated must not be true"
+    if str(d.get("confirmatory_claim_go", "")).upper() not in ("NO_GO", "GO", ""):
+        return f"{name}.confirmatory_claim_go has unexpected value"
+    return None
+
+
+def _admissibility_scope_window(d: dict) -> Optional[str]:
+    return (d.get("frozen_scope") or {}).get("window")
+
+
+def check_admissibility_package(provenance_manifest_path: str, completeness_audit_path: str,
+                                terms_evidence_path: str, prereg_draft_path: str,
+                                expect_go: bool = False) -> dict:
+    """Fail-closed Gate 4 v5 admissibility package check. No outcomes/data loaded."""
+    pm_p, ca_p, te_p, pr_p = map(Path, [provenance_manifest_path, completeness_audit_path,
+                                        terms_evidence_path, prereg_draft_path])
+    for p in (pm_p, ca_p, te_p, pr_p):
+        if not p.exists():
+            return {"ok": False, "error": f"missing: {p}"}
+    try:
+        pm, ca, te, pr = (json.loads(p.read_text(encoding="utf-8")) for p in (pm_p, ca_p, te_p, pr_p))
+    except Exception as e:
+        return {"ok": False, "error": f"cannot parse artifact: {e}"}
+    errors: List[str] = []
+    for name, d in [("provenance", pm), ("completeness", ca), ("terms", te), ("prereg", pr)]:
+        err = _admissibility_artifact_common(name, d)
+        if err:
+            errors.append(err)
+    lt = pm.get("license_terms") or {}
+    if lt.get("fabricated") is True:
+        errors.append("provenance.license_terms.fabricated must not be true")
+    if te.get("fabricated") is True:
+        errors.append("terms evidence fabricated marker inconsistent")
+    scope = pm.get("frozen_scope") or {}
+    if not scope:
+        errors.append("provenance manifest missing frozen_scope")
+    scope_window = _admissibility_scope_window(pm)
+    for name, d in [("completeness", ca), ("terms", te), ("prereg", pr)]:
+        dw = _admissibility_scope_window(d)
+        if dw and scope_window and dw != scope_window:
+            errors.append(f"{name} scope window mismatch vs provenance manifest")
+    if pr.get("draft") is True:
+        for k in ("frozen_before_outcomes", "promotable_to_frozen", "admissibility_complete", "license_terms_resolved"):
+            if pr.get(k) is True:
+                errors.append(f"draft prereg cannot set {k}=true")
+        if pr.get("confirmatory_claim_go") != "NO_GO":
+            errors.append("draft prereg must keep confirmatory_claim_go=NO_GO")
+        if (pr.get("gates") or {}).get("confirmatory_outcomes_permitted") is True:
+            errors.append("draft prereg gates.confirmatory_outcomes_permitted must be false")
+    terms_resolved = te.get("status") == RESOLVED_TERMS and te.get("fabricated") is False
+    if te.get("status") in ("EXPLICIT_BLOCKER_UNRESOLVED", "UNRESOLVED", "BLOCKED") and (
+        pm.get("confirmatory_provenance_go") is True or pm.get("admissibility_complete") is True
+    ):
+        errors.append("provenance manifest cannot be GO while terms evidence is unresolved")
+    if pm.get("confirmatory_provenance_go") is True and not terms_resolved:
+        errors.append("provenance confirmatory_provenance_go=true requires RESOLVED_VERIFIED terms evidence")
+    if (pm.get("license_terms") or {}).get("status") == "RESOLVED_VERIFIED" and not terms_resolved:
+        errors.append("provenance manifest claims RESOLVED_VERIFIED license_terms but terms evidence artifact is not resolved")
+    if ca.get("verdict") != PASS_COMPLETENESS and (pm.get("admissibility_complete") is True or expect_go):
+        errors.append(f"admissibility/expect-go requires completeness verdict {PASS_COMPLETENESS}")
+    if (ca.get("completeness") or {}).get("ok") is False and ca.get("verdict") == PASS_COMPLETENESS:
+        errors.append("completeness verdict PASS but completeness.ok is false")
+    refs = (pr.get("admissibility_refs_sha256") or {})
+    expected = {
+        "provenance_license_manifest": admissibility_sha256(pm_p),
+        "completeness_leakage_audit": admissibility_sha256(ca_p),
+    }
+    for k, v in expected.items():
+        if refs.get(k) and refs.get(k) != v:
+            errors.append(f"prereg refs sha256 mismatch for {k}: {refs.get(k)} != {v}")
+    if refs.get("terms_evidence") and refs.get("terms_evidence") != admissibility_sha256(te_p):
+        errors.append(f"prereg refs sha256 mismatch for terms_evidence: {refs.get('terms_evidence')} != {admissibility_sha256(te_p)}")
+    gates = {
+        "terms_resolved_verified": bool(terms_resolved),
+        "provenance_manifest_go": bool(pm.get("confirmatory_provenance_go") is True and pm.get("admissibility_complete") is True),
+        "completeness_leakage_pass": bool(ca.get("verdict") == PASS_COMPLETENESS and ca.get("admissibility_complete") is True),
+        "prereg_frozen_non_draft": bool(pr.get("draft") is False and pr.get("frozen_before_outcomes") is True and pr.get("admissibility_complete") is True),
+        "prereg_claim_go": bool(pr.get("confirmatory_claim_go") == "GO"),
+    }
+    blockers = [k for k, v in gates.items() if not v]
+    all_go = not blockers and all([
+        pm.get("no_confirmatory_outcomes") is True,
+        ca.get("no_confirmatory_outcomes") is True,
+        te.get("no_confirmatory_outcomes") is True,
+        pr.get("no_confirmatory_outcomes") is True,
+        pm.get("fabricated") is not True,
+        te.get("fabricated") is False,
+    ])
+    return {
+        "validator": "run_funding_ablations.admissibility_package",
+        "ok": True,
+        "expect_go": bool(expect_go),
+        "all_go": bool(all_go),
+        "confirmatory_outcomes_permitted": bool(all_go),
+        "gates": gates,
+        "blockers": blockers,
+        "errors": errors,
+        "hashes": {
+            "provenance_manifest": admissibility_sha256(pm_p),
+            "completeness_audit": admissibility_sha256(ca_p),
+            "terms_evidence": admissibility_sha256(te_p),
+            "prereg_draft": admissibility_sha256(pr_p),
+        },
+    }
+
 
 PRE_REG_SPLITS_V1 = [
     {"id": 0, "train": ("2024-01-01T00:00:00+00:00", "2024-01-28T23:59:59+00:00"), "test": ("2024-02-05T00:00:00+00:00", "2024-02-18T23:59:59+00:00")},
@@ -638,7 +763,23 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--include-cache", action="store_true", help="Search research_state/data_cache for local admissible files (v3/extended runs).")
     ap.add_argument("--confirmatory", action="store_true", help="Assert confirmatory intent; triggers provenance guard (fail-closed on unprovenanced 2025+).")
     ap.add_argument("--provenance-manifest", default=None, help="Path to verified provenance manifest for confirmatory runs.")
+    ap.add_argument("--check-admissibility-package", nargs=4, metavar=("PROVENANCE", "COMPLETENESS", "TERMS", "PREREG"),
+                    help="Run Gate 4 v5 admissibility package check on four artifacts; emit canonical JSON summary; no kline/funding/outcome data loaded.")
+    ap.add_argument("--dry-run-admissibility", nargs=4, metavar=("PROVENANCE", "COMPLETENESS", "TERMS", "PREREG"),
+                    help="Alias for --check-admissibility-package.")
+    ap.add_argument("--expect-go", action="store_true", help="With --check-admissibility-package/--dry-run-admissibility, require full confirmatory GO; exit 2 otherwise.")
     args = ap.parse_args(argv)
+
+    # --- Admissibility package check mode (read-only, no outcomes/data loaded) ---
+    check_paths = getattr(args, "check_admissibility_package", None) or getattr(args, "dry_run_admissibility", None)
+    if check_paths:
+        result = check_admissibility_package(*check_paths, expect_go=bool(getattr(args, "expect_go", False)))
+        print(json.dumps(result, indent=2, sort_keys=True))
+        if not result.get("ok", False):
+            return 2
+        if getattr(args, "expect_go", False) and not result["all_go"]:
+            return 2
+        return 0
 
     prov_err = check_confirmatory_provenance(
         args.start, args.end, args.experiment_id, args.pre_registration, args.out_suffix,
