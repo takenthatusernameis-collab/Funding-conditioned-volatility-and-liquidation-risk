@@ -1,0 +1,43 @@
+{
+  "artifact": "fclr016_v5_terms_evidence",
+  "schema_version": 1,
+  "generated_utc": "20261108T204000Z",
+  "git_sha_recorded": "800f5fa5f",
+  "confirmatory_claim_go": "NO_GO",
+  "confirmatory_provenance_go": false,
+  "admissibility_complete": false,
+  "no_confirmatory_outcomes": true,
+  "fabricated": false,
+  "status": "UNRESOLVED",
+  "reviewer_role": "pending_human_legal_maintainer",
+  "terms_url_reviewed": "not_reviewed_by_agent_pending_human_legal_review",
+  "access_date_utc": "not_applicable_no_review_performed",
+  "terms_version_or_snapshot_id": "not_provided_by_source_pending_review",
+  "relevant_clause_summary": "Not reviewed. Agent environment cannot perform verifiable human/legal review of external Binance Vision / Binance market-data terms. No clauses summarized; recording permissions without verifiable review evidence would constitute fabrication, which is forbidden.",
+  "conclusion": "pending",
+  "conditions_or_restrictions": [],
+  "evidence_artifacts": [],
+  "structural_blocker": {
+    "reason": "Automated agent environment cannot perform verifiable human/legal review of external Binance Vision/Binance market-data terms. Recording permissions without verifiable review evidence would be fabrication (forbidden).",
+    "blocked_by": "requires human-maintainer/legal review with verifiable evidence capture",
+    "environment_can_verify_externally": false
+  },
+  "required_verifiable_evidence_fields": [
+    {"field": "terms_url_reviewed", "requirement": "Exact URL of terms page reviewed (e.g., Binance Vision/data-use/market-data terms).", "status": "pending"},
+    {"field": "access_date_utc", "requirement": "UTC date/time the reviewer accessed the terms.", "status": "pending"},
+    {"field": "terms_version_or_snapshot_id", "requirement": "Version identifier, effective date, or archived/snapshot identifier if available; otherwise 'not_provided_by_source' with explanation.", "status": "pending"},
+    {"field": "relevant_clause_summary", "requirement": "Factual summary of clauses relevant to: research use of historical market data, retention/redistribution of derived checksums/manifests in a public repository, and any attribution/restriction requirements.", "status": "pending"},
+    {"field": "reviewer_role", "requirement": "Human maintainer/legal reviewer role; agent-only review is insufficient.", "status": "pending"},
+    {"field": "conclusion", "requirement": "One of PERMITTED_WITH_CONDITIONS|PERMITTED|RESTRICTED|PROHIBITED|UNCLEAR with factual basis.", "status": "pending"},
+    {"field": "conditions_or_restrictions", "requirement": "List conditions/restrictions or empty list with justification.", "status": "pending"},
+    {"field": "evidence_artifacts", "requirement": "Optional archived snapshot paths/hashes/URLs; no fabricated artifacts.", "status": "pending"}
+  ],
+  "scope_refs": {
+    "frozen_scope": {"window": "2025-08-01..2025-10-31", "months": ["2025-08","2025-09","2025-10"], "symbols": ["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT"], "kinds": ["fundingRate","klines","markPriceKlines","indexPriceKlines","premiumIndexKlines"]},
+    "provenance_manifest": {"path": "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json", "sha256": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346"},
+    "completeness_leakage_audit": {"path": "research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json", "sha256": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8"},
+    "identity_consolidation": {"path": "research_state/fclr016_local_audit/fclr016_v5_identity_consolidation_20261108T003908Z.json", "sha256": "f73610420932ed1c9072c447b2b537ebf73f0ba5380b1374bd3640acbb143985"}
+  },
+  "resolution_rule": "Do NOT set status=RESOLVED_VERIFIED or confirmatory_provenance_go/admissibility_complete true until all required fields are populated with verifiable facts, fabricated=false, human review recorded, and FCLR-014/v5 guard+validator accept. Any confirmatory outcomes on unprovenanced/incomplete 2025+ remain prohibited.",
+  "agent_note": "Drafted by automated agent session 2026-11-08T20:40Z. No human/legal review performed. Status deliberately UNRESOLVED (not RESOLVED_VERIFIED). All human-facing fields left pending. This artifact records the blocker; it does not resolve it."
+}
