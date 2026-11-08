@@ -18,6 +18,8 @@ import re
 import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
+import os
+
 from pathlib import Path
 from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
@@ -66,6 +68,68 @@ def _is_confirmatory_intent(experiment_id: str, pre_registration: str, out_suffi
     if "confirmatory" in blob or re.search(r"\bv[5-9]\b", blob):
         return True
     return False
+
+
+def _confirmatory_data_path_seam_error(symbols: List[str], start: str, end: str, include_cache: bool) -> Optional[str]:
+    """Fail-closed pre-load seam for confirmatory/expect-go paths.
+
+    Returns a stable machine-readable reason string when required local data
+    sources are missing/unreadable/nonexistent for the requested range, so
+    confirmatory paths refuse before any kline/funding/outcome loader is called.
+    Exploratory/non-confirmatory callers must not use this guard.
+    """
+    problems: List[str] = []
+    for root in ([RAW] + ([CACHE] if include_cache else [])):
+        try:
+            root_p = Path(root)
+        except Exception:
+            problems.append(f"invalid_data_root:{root}")
+            continue
+        if not root_p.exists():
+            problems.append(f"missing_data_root:{root_p}")
+            continue
+        if not root_p.is_dir():
+            problems.append(f"data_root_not_directory:{root_p}")
+            continue
+        try:
+            if not os.access(root_p, os.R_OK):
+                problems.append(f"unreadable_data_root:{root_p}")
+        except Exception:
+            problems.append(f"unreadable_data_root:{root_p}")
+    found_k = False
+    found_f = False
+    for sym in symbols:
+        kpats = [f"{sym}-1h-*.csv", f"{sym}-1h-*.zip", f"{sym}_*/{sym}-1h-*.csv", f"{sym}_*/{sym}-1h-*.zip",
+                 f"{sym}_*/klines-*/{sym}-1h-*.csv", f"{sym}_*/klines-*/{sym}-1h-*.zip"]
+        fpats = [f"{sym}-fundingRate-*.csv", f"{sym}-fundingRate-*.zip",
+                 f"{sym}_*/{sym}-fundingRate-*.csv", f"{sym}_*/{sym}-fundingRate-*.zip",
+                 f"{sym}_*/*/{sym}-fundingRate-*.csv", f"{sym}_*/*/{sym}-fundingRate-*.zip"]
+        try:
+            ksrc = [p for p in _iter_readable_sources(kpats, include_cache=include_cache)
+                    if p.is_file() and sym in p.name and '1h' in p.name and 'fundingRate' not in p.name
+                    and not any(x in str(p) for x in ('indexPriceKlines', 'markPriceKlines', 'premiumIndexKlines'))]
+        except Exception as e:
+            problems.append(f"unreadable_kline_source_probe:{sym}:{type(e).__name__}")
+            ksrc = []
+        try:
+            fsrc = [p for p in _iter_readable_sources(fpats, include_cache=include_cache)
+                    if p.is_file() and sym in p.name and 'fundingRate' in p.name]
+        except Exception as e:
+            problems.append(f"unreadable_funding_source_probe:{sym}:{type(e).__name__}")
+            fsrc = []
+        if not ksrc:
+            problems.append(f"missing_kline_sources:{sym}:{start}..{end}")
+        else:
+            found_k = True
+        if not fsrc:
+            problems.append(f"missing_funding_sources:{sym}:{start}..{end}")
+        else:
+            found_f = True
+    if not found_k and not found_f and problems:
+        return "confirmatory_data_path_seam_blocked:" + "|".join(sorted(set(problems)))[:2000]
+    if problems and (not found_k or not found_f):
+        return "confirmatory_data_path_seam_blocked:" + "|".join(sorted(set(problems)))[:2000]
+    return None
 
 def _manifest_scope_covers(manifest: dict, start: str, end: str) -> Optional[str]:
     """Return error if manifest declares frozen_scope/window that does not cover [start,end]."""
@@ -238,13 +302,28 @@ def check_admissibility_package(provenance_manifest_path: str, completeness_audi
     """Fail-closed Gate 4 v5 admissibility package check. No outcomes/data loaded."""
     pm_p, ca_p, te_p, pr_p = map(Path, [provenance_manifest_path, completeness_audit_path,
                                         terms_evidence_path, prereg_draft_path])
-    for p in (pm_p, ca_p, te_p, pr_p):
+    hashes = {"provenance_manifest": None, "completeness_audit": None, "terms_evidence": None, "prereg_draft": None}
+    for key, p in [("provenance_manifest", pm_p), ("completeness_audit", ca_p), ("terms_evidence", te_p), ("prereg_draft", pr_p)]:
         if not p.exists():
-            return {"ok": False, "error": f"missing: {p}"}
+            return {"validator": "run_funding_ablations.admissibility_package", "ok": False, "expect_go": bool(expect_go),
+                    "all_go": False, "confirmatory_outcomes_permitted": False, "expect_go_refused": bool(expect_go),
+                    "gates": {}, "blockers": ["missing_artifact"], "errors": [f"missing: {p}"], "error": f"missing: {p}", "hashes": hashes}
+        if not p.is_file():
+            return {"validator": "run_funding_ablations.admissibility_package", "ok": False, "expect_go": bool(expect_go),
+                    "all_go": False, "confirmatory_outcomes_permitted": False, "expect_go_refused": bool(expect_go),
+                    "gates": {}, "blockers": ["invalid_artifact_path"], "errors": [f"not a file: {p}"], "error": f"not a file: {p}", "hashes": hashes}
+        try:
+            hashes[key] = admissibility_sha256(p)
+        except Exception as e:
+            return {"validator": "run_funding_ablations.admissibility_package", "ok": False, "expect_go": bool(expect_go),
+                    "all_go": False, "confirmatory_outcomes_permitted": False, "expect_go_refused": bool(expect_go),
+                    "gates": {}, "blockers": ["unreadable_artifact"], "errors": [f"cannot hash {p}: {e}"], "error": f"cannot hash {p}: {e}", "hashes": hashes}
     try:
         pm, ca, te, pr = (json.loads(p.read_text(encoding="utf-8")) for p in (pm_p, ca_p, te_p, pr_p))
     except Exception as e:
-        return {"ok": False, "error": f"cannot parse artifact: {e}"}
+        return {"validator": "run_funding_ablations.admissibility_package", "ok": False, "expect_go": bool(expect_go),
+                "all_go": False, "confirmatory_outcomes_permitted": False, "expect_go_refused": bool(expect_go),
+                "gates": {}, "blockers": ["parse_error"], "errors": [f"cannot parse artifact: {e}"], "error": f"cannot parse artifact: {e}", "hashes": hashes}
     errors: List[str] = []
     for name, d in [("provenance", pm), ("completeness", ca), ("terms", te), ("prereg", pr)]:
         err = _admissibility_artifact_common(name, d)
@@ -871,6 +950,22 @@ def main(argv: Optional[List[str]] = None) -> int:
     use_30d_0409 = ('v3' in _low and '30d' in _low) or ('v4' in _low)
     split_defs = PRE_REG_SPLITS_V3_30D if use_30d_0409 else PRE_REG_SPLITS
     include_cache = bool(use_30d_0409 or getattr(args, 'include_cache', False))
+
+    # Confirmatory/expect-go-admissible paths must refuse before any data/outcome
+    # loader when local data seams are missing/unreadable/nonexistent.
+    if _is_confirmatory_intent(args.experiment_id, args.pre_registration, args.out_suffix, bool(getattr(args, 'confirmatory', False))):
+        seam_err = _confirmatory_data_path_seam_error(symbols, start, end, include_cache)
+        if seam_err:
+            print(json.dumps({
+                "status": "REFUSED",
+                "guard": "confirmatory_data_path_seam",
+                "error": seam_err,
+                "reason_codes": [p for p in seam_err.split(":", 1)[1].split("|") if p],
+                "start": start, "end": end, "symbols": symbols,
+                "no_data_loaded": True, "no_outcomes_computed": True,
+                "confirmatory_outcomes_permitted": False,
+            }, indent=2, sort_keys=True), file=sys.stderr)
+            return 2
 
     kpanel = load_kline_panel(symbols, start, end, horizon=horizon, include_cache=include_cache)
     fpanel = load_funding_panel(symbols, start, end, include_cache=include_cache)

@@ -104,27 +104,69 @@ def render_markdown(report: dict) -> str:
     return "\n".join(lines)
 
 
+def _refusal(error: str) -> dict:
+    return {
+        "ok": False,
+        "all_go": False,
+        "confirmatory_outcomes_permitted": False,
+        "expect_go_refused": True,
+        "gates": {},
+        "blockers": ["refusal"],
+        "errors": [error],
+        "error": error,
+        "validator": "fclr016_v5_admissibility_report",
+        "no_confirmatory_outcomes": True,
+        "no_network": True,
+        "no_data_loading": True,
+    }
+
+
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Read-only FCLR-016 v5 admissibility report")
-    ap.add_argument("provenance_manifest")
-    ap.add_argument("completeness_audit")
-    ap.add_argument("terms_evidence")
-    ap.add_argument("prereg_draft")
-    ap.add_argument("terms_evidence_override", nargs="?")
-    args = ap.parse_args(argv)
-    pm_p = Path(args.provenance_manifest)
-    ca_p = Path(args.completeness_audit)
-    te_p = Path(args.terms_evidence_override or args.terms_evidence)
-    pr_p = Path(args.prereg_draft)
-    for p in (pm_p, ca_p, te_p, pr_p):
-        if not p.exists():
-            print(json.dumps({"ok": False, "error": f"missing: {p}"}))
+    try:
+        ap = argparse.ArgumentParser(description="Read-only FCLR-016 v5 admissibility report")
+        ap.add_argument("provenance_manifest")
+        ap.add_argument("completeness_audit")
+        ap.add_argument("terms_evidence")
+        ap.add_argument("prereg_draft")
+        ap.add_argument("terms_evidence_override", nargs="?")
+        try:
+            args = ap.parse_args(argv)
+        except SystemExit as e:
+            # argparse already printed usage; keep stable exit code.
+            code = e.code if isinstance(e.code, int) else 2
+            return code if code != 0 else 0
+        pm_p = Path(args.provenance_manifest)
+        ca_p = Path(args.completeness_audit)
+        te_p = Path(args.terms_evidence_override or args.terms_evidence)
+        pr_p = Path(args.prereg_draft)
+        for p in (pm_p, ca_p, te_p, pr_p):
+            if not p.exists():
+                print(json.dumps(_refusal(f"missing: {p}"), sort_keys=True))
+                return 2
+            if not p.is_file():
+                print(json.dumps(_refusal(f"not a file: {p}"), sort_keys=True))
+                return 2
+        try:
+            report = build_report(pm_p, ca_p, te_p, pr_p)
+        except Exception as e:
+            print(json.dumps(_refusal(f"cannot build admissibility report: {e}"), sort_keys=True))
             return 2
-    report = build_report(pm_p, ca_p, te_p, pr_p)
-    print(json.dumps(report, indent=2, sort_keys=True))
-    print("---MARKDOWN---")
-    print(render_markdown(report))
-    return 0 if report["ok"] else 2
+        if not isinstance(report, dict):
+            print(json.dumps(_refusal("invalid report payload"), sort_keys=True))
+            return 2
+        report.setdefault("ok", False)
+        report.setdefault("all_go", False)
+        report.setdefault("confirmatory_outcomes_permitted", False)
+        report.setdefault("no_confirmatory_outcomes", True)
+        report.setdefault("no_network", True)
+        report.setdefault("no_data_loading", True)
+        print(json.dumps(report, indent=2, sort_keys=True))
+        print("---MARKDOWN---")
+        print(render_markdown(report))
+        return 0 if report.get("ok") else 2
+    except Exception as e:
+        print(json.dumps(_refusal(f"internal refusal: {e}"), sort_keys=True))
+        return 2
 
 
 if __name__ == "__main__":

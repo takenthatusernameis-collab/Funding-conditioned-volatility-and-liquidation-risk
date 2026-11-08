@@ -190,31 +190,68 @@ def render_markdown(summary: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _cli_refusal(error: str) -> dict:
+    return {
+        "ok": False,
+        "all_go": False,
+        "confirmatory_outcomes_permitted": False,
+        "expect_go_refused": True,
+        "error": error,
+        "errors": [error],
+        "blockers": ["refusal"],
+        "gates": {},
+        "validator": "fclr016_v5_preflight_summary",
+        "no_confirmatory_outcomes": True,
+        "no_network": True,
+        "no_data_loading": True,
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="Read-only FCLR-016 v5 preflight summary")
-    ap.add_argument("provenance_manifest")
-    ap.add_argument("completeness_audit")
-    ap.add_argument("terms_evidence")
-    ap.add_argument("prereg_draft")
-    ap.add_argument("terms_evidence_override", nargs="?")
-    args = ap.parse_args(argv)
-    pm_p = Path(args.provenance_manifest)
-    ca_p = Path(args.completeness_audit)
-    te_p = Path(args.terms_evidence_override or args.terms_evidence)
-    pr_p = Path(args.prereg_draft)
-    for p in (pm_p, ca_p, te_p, pr_p):
-        if not p.exists():
-            print(json.dumps({"ok": False, "all_go": False, "confirmatory_outcomes_permitted": False, "error": f"missing: {p}", "validator": "fclr016_v5_preflight_summary"}, sort_keys=True))
-            return 2
     try:
-        summary = build_preflight_summary(pm_p, ca_p, te_p, pr_p)
+        ap = argparse.ArgumentParser(description="Read-only FCLR-016 v5 preflight summary")
+        ap.add_argument("provenance_manifest")
+        ap.add_argument("completeness_audit")
+        ap.add_argument("terms_evidence")
+        ap.add_argument("prereg_draft")
+        ap.add_argument("terms_evidence_override", nargs="?")
+        try:
+            args = ap.parse_args(argv)
+        except SystemExit as e:
+            code = e.code if isinstance(e.code, int) else 2
+            return code if code != 0 else 0
+        pm_p = Path(args.provenance_manifest)
+        ca_p = Path(args.completeness_audit)
+        te_p = Path(args.terms_evidence_override or args.terms_evidence)
+        pr_p = Path(args.prereg_draft)
+        for p in (pm_p, ca_p, te_p, pr_p):
+            if not p.exists():
+                print(json.dumps(_cli_refusal(f"missing: {p}"), sort_keys=True))
+                return 2
+            if not p.is_file():
+                print(json.dumps(_cli_refusal(f"not a file: {p}"), sort_keys=True))
+                return 2
+        try:
+            summary = build_preflight_summary(pm_p, ca_p, te_p, pr_p)
+        except Exception as e:
+            print(json.dumps(_cli_refusal(f"cannot build preflight summary: {e}"), sort_keys=True))
+            return 2
+        if not isinstance(summary, dict):
+            print(json.dumps(_cli_refusal("invalid summary payload"), sort_keys=True))
+            return 2
+        summary.setdefault("ok", False)
+        summary.setdefault("all_go", False)
+        summary.setdefault("confirmatory_outcomes_permitted", False)
+        summary.setdefault("no_confirmatory_outcomes", True)
+        summary.setdefault("no_network", True)
+        summary.setdefault("no_data_loading", True)
+        print(json.dumps(summary, indent=2, sort_keys=True))
+        print("---MARKDOWN---")
+        print(render_markdown(summary), end="")
+        return 0
     except Exception as e:
-        print(json.dumps({"ok": False, "all_go": False, "confirmatory_outcomes_permitted": False, "error": f"cannot build preflight summary: {e}", "validator": "fclr016_v5_preflight_summary"}, sort_keys=True))
+        print(json.dumps(_cli_refusal(f"internal refusal: {e}"), sort_keys=True))
         return 2
-    print(json.dumps(summary, indent=2, sort_keys=True))
-    print("---MARKDOWN---")
-    print(render_markdown(summary), end="")
-    return 0
 
 
 if __name__ == "__main__":

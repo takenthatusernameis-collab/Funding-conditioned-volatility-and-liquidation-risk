@@ -451,41 +451,78 @@ def render_markdown(report: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _cli_refusal(error: str) -> dict:
+    return {
+        "ok": False,
+        "all_go": False,
+        "confirmatory_outcomes_permitted": False,
+        "expect_go_refused": True,
+        "error": error,
+        "errors": [error],
+        "blockers": ["refusal"],
+        "validator": VALIDATOR_NAME,
+        "no_confirmatory_outcomes": True,
+        "no_confirmatory_outcomes_statement": NO_CONFIRMATORY_OUTCOMES_STATEMENT,
+        "no_network": True,
+        "no_data_loading": True,
+        "canonical_mutation": False,
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="Read-only FCLR-016 v5 promotion dry-run harness")
-    ap.add_argument("provenance_manifest")
-    ap.add_argument("completeness_audit")
-    ap.add_argument("terms_evidence")
-    ap.add_argument("prereg_draft")
-    ap.add_argument("--candidate-terms-evidence", default=None)
-    ap.add_argument("--candidate-prereg", default=None)
-    ap.add_argument("--json-only", action="store_true")
-    args = ap.parse_args(argv)
-    paths = [Path(args.provenance_manifest), Path(args.completeness_audit),
-             Path(args.terms_evidence), Path(args.prereg_draft)]
-    for p in paths:
-        if not p.exists():
-            print(json.dumps({"ok": False, "all_go": False, "confirmatory_outcomes_permitted": False,
-                              "error": f"missing: {p}", "validator": VALIDATOR_NAME}, sort_keys=True))
-            return 2
-    cte = Path(args.candidate_terms_evidence) if args.candidate_terms_evidence else None
-    cpr = Path(args.candidate_prereg) if args.candidate_prereg else None
-    for p in (cte, cpr):
-        if p and not p.exists():
-            print(json.dumps({"ok": False, "all_go": False, "confirmatory_outcomes_permitted": False,
-                              "error": f"missing candidate: {p}", "validator": VALIDATOR_NAME}, sort_keys=True))
-            return 2
     try:
-        report = run_dryrun(*paths, candidate_terms=cte, candidate_prereg=cpr)
+        ap = argparse.ArgumentParser(description="Read-only FCLR-016 v5 promotion dry-run harness")
+        ap.add_argument("provenance_manifest")
+        ap.add_argument("completeness_audit")
+        ap.add_argument("terms_evidence")
+        ap.add_argument("prereg_draft")
+        ap.add_argument("--candidate-terms-evidence", default=None)
+        ap.add_argument("--candidate-prereg", default=None)
+        ap.add_argument("--json-only", action="store_true")
+        try:
+            args = ap.parse_args(argv)
+        except SystemExit as e:
+            code = e.code if isinstance(e.code, int) else 2
+            return code if code != 0 else 0
+        paths = [Path(args.provenance_manifest), Path(args.completeness_audit),
+                 Path(args.terms_evidence), Path(args.prereg_draft)]
+        for p in paths:
+            if not p.exists():
+                print(json.dumps(_cli_refusal(f"missing: {p}"), sort_keys=True))
+                return 2
+            if not p.is_file():
+                print(json.dumps(_cli_refusal(f"not a file: {p}"), sort_keys=True))
+                return 2
+        cte = Path(args.candidate_terms_evidence) if args.candidate_terms_evidence else None
+        cpr = Path(args.candidate_prereg) if args.candidate_prereg else None
+        for p in (cte, cpr):
+            if p and not p.exists():
+                print(json.dumps(_cli_refusal(f"missing candidate: {p}"), sort_keys=True))
+                return 2
+            if p and not p.is_file():
+                print(json.dumps(_cli_refusal(f"candidate not a file: {p}"), sort_keys=True))
+                return 2
+        try:
+            report = run_dryrun(*paths, candidate_terms=cte, candidate_prereg=cpr)
+        except Exception as e:
+            print(json.dumps(_cli_refusal(f"cannot build promotion dry-run: {e}"), sort_keys=True))
+            return 2
+        if not isinstance(report, dict):
+            print(json.dumps(_cli_refusal("invalid report payload"), sort_keys=True))
+            return 2
+        report.setdefault("all_go", False)
+        report.setdefault("confirmatory_outcomes_permitted", False)
+        report.setdefault("no_confirmatory_outcomes", True)
+        report.setdefault("no_network", True)
+        report.setdefault("no_data_loading", True)
+        print(json.dumps(report, indent=2, sort_keys=True))
+        if not args.json_only:
+            print("---MARKDOWN---")
+            print(render_markdown(report), end="")
+        return 0 if report.get("ok") else 2
     except Exception as e:
-        print(json.dumps({"ok": False, "all_go": False, "confirmatory_outcomes_permitted": False,
-                          "error": f"cannot build promotion dry-run: {e}", "validator": VALIDATOR_NAME}, sort_keys=True))
+        print(json.dumps(_cli_refusal(f"internal refusal: {e}"), sort_keys=True))
         return 2
-    print(json.dumps(report, indent=2, sort_keys=True))
-    if not args.json_only:
-        print("---MARKDOWN---")
-        print(render_markdown(report), end="")
-    return 0 if report["ok"] else 2
 
 
 if __name__ == "__main__":
