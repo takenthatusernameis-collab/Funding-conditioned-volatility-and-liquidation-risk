@@ -74,10 +74,35 @@ def _is_confirmatory_intent(experiment_id: str, pre_registration: str, out_suffi
         return True
     return False
 
+def _manifest_scope_covers(manifest: dict, start: str, end: str) -> Optional[str]:
+    """Return error if manifest declares frozen_scope/window that does not cover [start,end]."""
+    scope = manifest.get("frozen_scope") or {}
+    window = scope.get("window")
+    if isinstance(window, str) and ".." in window:
+        ws, we = [x.strip()[:10] for x in window.split("..", 1)]
+        if str(start)[:10] < ws or str(end)[:10] > we:
+            return f"manifest frozen_scope.window {window} does not cover requested {start}..{end}"
+    # month-based scope
+    months = scope.get("months") or []
+    if months and isinstance(months, list):
+        ms, me = min(months) + "-01", max(months) + "-31"
+        if str(start)[:10] < ms[:10] or str(end)[:10] > me[:10]:
+            # approximate; only fail on clear mismatch
+            if str(end)[:7] > max(months) or str(start)[:7] < min(months):
+                return f"manifest frozen_scope.months {months} does not cover requested {start}..{end}"
+    return None
+
+
 def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_registration: str,
                                   out_suffix: str, confirmatory_flag: bool = False,
                                   provenance_manifest: Optional[str] = None) -> Optional[str]:
-    """Return error message if confirmatory run is inadmissible; else None."""
+    """Return error message if confirmatory run is inadmissible; else None.
+
+    Fail-closed. Legacy manifests require identity GO; v5+ manifests (artifact
+    fclr016_v5_provenance_license_manifest / schema_version>=5 / explicit fields)
+    additionally require confirmatory_provenance_go, resolved license/terms,
+    admissibility_complete, no_confirmatory_outcomes, and scope coverage.
+    """
     if not _is_confirmatory_intent(experiment_id, pre_registration, out_suffix, confirmatory_flag):
         return None
     if provenance_manifest:
@@ -88,9 +113,34 @@ def check_confirmatory_provenance(start: str, end: str, experiment_id: str, pre_
             m = json.loads(mp.read_text())
         except Exception as e:
             return f"CONFIRMATORY PROVENANCE GUARD: cannot read provenance manifest: {e}"
-        if not m.get("cache_identity_vs_binance_vision", "").startswith("GO") and not m.get("confirmatory_provenance_go"):
+        identity = str(m.get("cache_identity_vs_binance_vision", ""))
+        identity_go = identity.startswith("GO") and "IDENTITY_ONLY" not in identity.upper()
+        # detect v5/strict schema
+        is_v5 = (
+            str(m.get("artifact", "")).startswith("fclr016_v5_provenance_license_manifest")
+            or int(m.get("schema_version", 0) or 0) >= 5
+            or "license_terms" in m
+            or "admissibility_complete" in m
+        )
+        if is_v5:
+            if m.get("confirmatory_provenance_go") is not True:
+                return f"CONFIRMATORY PROVENANCE GUARD: v5 manifest confirmatory_provenance_go!=true (NO_GO): {mp}"
+            if m.get("admissibility_complete") is not True:
+                return f"CONFIRMATORY PROVENANCE GUARD: v5 manifest admissibility_complete!=true: {mp}"
+            if m.get("no_confirmatory_outcomes") is not True:
+                return f"CONFIRMATORY PROVENANCE GUARD: v5 manifest must set no_confirmatory_outcomes=true (admissibility artifact): {mp}"
+            lt = m.get("license_terms") or {}
+            if lt.get("status") != "RESOLVED_VERIFIED" or lt.get("fabricated") is True:
+                return f"CONFIRMATORY PROVENANCE GUARD: v5 license_terms unresolved/unverified or fabricated marker present: {mp}"
+            scope_err = _manifest_scope_covers(m, start, end)
+            if scope_err:
+                return f"CONFIRMATORY PROVENANCE GUARD: {scope_err}: {mp}"
+            if not identity.startswith("GO"):
+                return f"CONFIRMATORY PROVENANCE GUARD: v5 identity evidence not GO: {identity!r}: {mp}"
+            return None
+        # legacy behavior
+        if not identity_go and not m.get("confirmatory_provenance_go"):
             return f"CONFIRMATORY PROVENANCE GUARD: manifest not GO: {mp}"
-        # manifest accepted - caller responsible for scope match; record in run
         return None
     if _range_overlaps_unprovenanced(start, end):
         return (

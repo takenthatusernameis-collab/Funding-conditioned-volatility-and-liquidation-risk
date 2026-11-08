@@ -1,0 +1,115 @@
+{
+  "admissibility_complete": false,
+  "artifact": "fclr016_v5_completeness_leakage_audit",
+  "blockers_remaining": [
+    "License/terms/provenance manifest has explicit unresolved terms blocker; confirmatory_provenance_go must remain false.",
+    "Preregistered confirmatory design freeze and FCLR-014 guard acceptance pending."
+  ],
+  "completeness": {
+    "cache_canonical_path_gaps_count": 0,
+    "cache_canonical_path_gaps_sample": [],
+    "extra_actual_count": 0,
+    "missing_expected_count": 0,
+    "missing_expected_sample": [],
+    "ok": true
+  },
+  "confirmatory_claim_go": "NO_GO",
+  "expected": {
+    "calendar_days": 92,
+    "formula": "symbols*months*1(fundingRate monthly) + symbols*calendar_days*4(daily kinds)=5*3 + 5*92*4=1855",
+    "kinds": 5,
+    "months": 3,
+    "symbols": 5,
+    "total": 1855
+  },
+  "frozen_scope": {
+    "kinds": [
+      "fundingRate",
+      "klines",
+      "markPriceKlines",
+      "indexPriceKlines",
+      "premiumIndexKlines"
+    ],
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "sample_days": "full",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "window": "2025-08-01..2025-10-31"
+  },
+  "generated_utc": "20261108T014405Z",
+  "identity_consolidation_ref": {
+    "path": "research_state/fclr016_local_audit/fclr016_v5_identity_consolidation_20261108T003908Z.json",
+    "sha256": "f73610420932ed1c9072c447b2b537ebf73f0ba5380b1374bd3640acbb143985"
+  },
+  "leakage_window_checks": {
+    "confounded_exploratory_v4_window": {
+      "end": "2024-09-30",
+      "note": "Gate 4 v4 confounded/exploratory slice; v5 frozen window 2025-08..10 does not overlap.",
+      "start": "2024-04-01"
+    },
+    "frozen_window": {
+      "end": "2025-10-31",
+      "start": "2025-08-01"
+    },
+    "note": "Deterministic window non-overlap check only; no outcomes. Any additional sealed/guard window constraint must be added before confirmatory GO.",
+    "ok": true,
+    "overlaps_confounded_v4_window": false,
+    "sealed_anchor_refs_v4_prereg": {
+      "FCLR002_test": "2024-07-23T00:00:00Z/2024-09-30T23:00:00Z",
+      "FCLR003_sha256": "a623d098caaa01404dcef22bd703eb2476a63f4602b789c81c4d56fa688f9ec2",
+      "FCLR003_test": "2024-10-02T00:00:00Z/2024-12-31T23:00:00Z",
+      "FCLR013_sha256": "107bc981ebb6f519205b42f94ce778e14b445036f4758995914dabb0ef6bd08a",
+      "FCLR013_test": "2026-08-26/2026-09-30"
+    }
+  },
+  "no_confirmatory_outcomes": true,
+  "observed": {
+    "by_kind": {
+      "fundingRate": 15,
+      "indexPriceKlines": 460,
+      "klines": 460,
+      "markPriceKlines": 460,
+      "premiumIndexKlines": 460
+    },
+    "by_result": {
+      "MATCH": 1855
+    },
+    "hazards_non_match": 0,
+    "placeholder_duplicate_files": 0,
+    "total_checks": 1855
+  },
+  "probe_refs": [
+    {
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_btc_eth_full_canonical_v5_20261108T003047Z.json",
+      "sha256": "6816660d5ab5877deea084c3289373fb5d028caf6a3c9c8ee9ff8015b96f593e"
+    },
+    {
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_bnb_full_canonical_v5_postquarantine_fresh_20261108T003159Z.json",
+      "sha256": "42c51270c4c14b80e79a6d98776ece6ba4b8b28480c80d71a67ad3f61a410135"
+    },
+    {
+      "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_sol_xrp_full_canonical_v5_postquarantine_20261108T003159Z.json",
+      "sha256": "f5a0522886fbb4e1226fe37595411772c813249454cfaffd4d3706b59ed2dfd8"
+    }
+  ],
+  "quarantine_refs": [
+    {
+      "path": "research_state/fclr016_local_audit/fclr016_quarantine_top_level_placeholders_bnbsolxrp_full_20261107T235600Z.json",
+      "sha256": "61483eca0dadb513ab2f1ee88a007a370e28d0cdbd8db1d1be7caef27454e52c"
+    },
+    {
+      "path": "research_state/fclr016_local_audit/fclr016_quarantine_top_level_placeholders_20261107T224836Z.json",
+      "sha256": "9b95ba8789921851b0c227e8e21f9db94c77a3c47ed9cd326e7b6a1410c42d01"
+    }
+  ],
+  "verdict": "PASS_COMPLETENESS_LEAKAGE_DETERMINISTIC"
+}

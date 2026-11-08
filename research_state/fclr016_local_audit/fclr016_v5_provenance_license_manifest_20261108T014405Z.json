@@ -1,0 +1,151 @@
+{
+  "admissibility_blockers_remaining": [
+    "license_terms.status is EXPLICIT_BLOCKER_UNRESOLVED: verifiable terms/license review evidence required (not fabricated).",
+    "Completeness/leakage audit must pass for frozen scope and window constraints.",
+    "Preregistered confirmatory design freeze required (splits/features/targets/metrics/stop rule, hashes).",
+    "FCLR-014 guard acceptance evidence required with v5-aware schema validation/hardening."
+  ],
+  "admissibility_complete": false,
+  "artifact": "fclr016_v5_provenance_license_manifest",
+  "confirmatory_claim_go": "NO_GO",
+  "frozen_scope": {
+    "kinds": [
+      "fundingRate",
+      "klines",
+      "markPriceKlines",
+      "indexPriceKlines",
+      "premiumIndexKlines"
+    ],
+    "months": [
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "sample_days": "full",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "window": "2025-08-01..2025-10-31"
+  },
+  "generated_utc": "20261108T014405Z",
+  "guard_acceptance": {
+    "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED_IDENTITY_ONLY",
+    "confirmatory_provenance_go": false,
+    "current_run_funding_ablations_behavior": "Accepts --provenance-manifest if JSON has cache_identity_vs_binance_vision starting 'GO' OR confirmatory_provenance_go truthy; does NOT yet validate scope/license/terms/completeness/leakage fields for v5 manifests (hardening needed).",
+    "fclr014_guard_required": true
+  },
+  "identity_evidence": {
+    "aggregate": {
+      "cache_identity_vs_binance_vision_hazards_zero": true,
+      "hazards": 0,
+      "total_checks": 1855
+    },
+    "consolidation_artifact": "research_state/fclr016_local_audit/fclr016_v5_identity_consolidation_20261108T003908Z.json",
+    "consolidation_sha256": "f73610420932ed1c9072c447b2b537ebf73f0ba5380b1374bd3640acbb143985",
+    "probe_artifacts": [
+      {
+        "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+        "confirmatory_claim_go": "NO_GO",
+        "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_btc_eth_full_canonical_v5_20261108T003047Z.json",
+        "sha256": "6816660d5ab5877deea084c3289373fb5d028caf6a3c9c8ee9ff8015b96f593e",
+        "summary": {
+          "match": 742,
+          "mismatch": 0,
+          "missing_local": 0,
+          "missing_remote": 0,
+          "new_this_run": 192,
+          "placeholder_duplicate_files": 0,
+          "remote_error": 0,
+          "total": 742
+        }
+      },
+      {
+        "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+        "confirmatory_claim_go": "NO_GO",
+        "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_bnb_full_canonical_v5_postquarantine_fresh_20261108T003159Z.json",
+        "sha256": "42c51270c4c14b80e79a6d98776ece6ba4b8b28480c80d71a67ad3f61a410135",
+        "summary": {
+          "match": 371,
+          "mismatch": 0,
+          "missing_local": 0,
+          "missing_remote": 0,
+          "new_this_run": 371,
+          "placeholder_duplicate_files": 0,
+          "remote_error": 0,
+          "total": 371
+        }
+      },
+      {
+        "cache_identity_vs_binance_vision": "GO_PARTIAL_BOUNDED",
+        "confirmatory_claim_go": "NO_GO",
+        "path": "research_state/fclr016_local_audit/fclr016_binance_vision_probe_202508_202510_sol_xrp_full_canonical_v5_postquarantine_20261108T003159Z.json",
+        "sha256": "f5a0522886fbb4e1226fe37595411772c813249454cfaffd4d3706b59ed2dfd8",
+        "summary": {
+          "match": 742,
+          "mismatch": 0,
+          "missing_local": 0,
+          "missing_remote": 0,
+          "new_this_run": 742,
+          "placeholder_duplicate_files": 0,
+          "remote_error": 0,
+          "total": 742
+        }
+      }
+    ]
+  },
+  "license_terms": {
+    "fabricated": false,
+    "required_before_confirmatory_go": "Human-maintainer/legal/terms review evidence recorded as verifiable facts (URL, access date, relevant clauses summary, conclusion). Automated agent must not fabricate permissions.",
+    "status": "EXPLICIT_BLOCKER_UNRESOLVED",
+    "unresolved_questions": [
+      "Confirm current Binance Vision / Binance market-data terms of use permit this research use and any required redistribution/retention of derived checksums/manifests in a public repository.",
+      "Record the exact terms URL/version/date reviewed and the specific permission/restriction conclusions as verifiable facts before confirmatory GO."
+    ],
+    "verifiable_facts": [
+      "Data accessed via unauthenticated public HTTPS endpoints at data.binance.vision for identity/checksum comparison only.",
+      "FCLR-015 manifest note (2024-04..09): 'Binance Vision public historical market data; accessed unauthenticated via HTTPS. Verify Binance Vision/market-data terms before redistribution; checksums/provenance evidence only.'",
+      "No paid plan, trial, account registration, personal API key, manual download, user-provided file, or auth bypass used in probe scripts."
+    ]
+  },
+  "no_confirmatory_outcomes": true,
+  "purpose": "Machine-readable provenance/license/terms manifest for Gate 4 v5 frozen scope (2025-08..2025-10; 5 symbols x 5 kinds). Identity evidence consolidated; license/terms require explicit verification - not fabricated.",
+  "quarantine_refs": [
+    {
+      "path": "research_state/fclr016_local_audit/fclr016_quarantine_top_level_placeholders_bnbsolxrp_full_20261107T235600Z.json",
+      "quarantined_count": 0,
+      "scope": {
+        "months": [
+          "2025-08",
+          "2025-09",
+          "2025-10"
+        ],
+        "symbols": [
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT"
+        ]
+      },
+      "sha256": "61483eca0dadb513ab2f1ee88a007a370e28d0cdbd8db1d1be7caef27454e52c"
+    }
+  ],
+  "source": {
+    "access_method": "unauthenticated HTTPS GET for checksum/identity verification; bounded; no credentials/API keys/auth bypass/payment/manual download",
+    "base_url": "https://data.binance.vision/",
+    "name": "Binance Vision (public historical market data)",
+    "probe_access_dates_utc": [
+      "2026-11-08T00:30:47Z",
+      "2026-11-08T00:31:59Z"
+    ],
+    "url_templates_verified_by_probes": {
+      "fundingRate": "data/futures/um/monthly/fundingRate/{sym}/{sym}-fundingRate-{ym}.zip",
+      "indexPriceKlines": "data/futures/um/daily/indexPriceKlines/{sym}/1h/{sym}-1h-{day}.zip",
+      "klines": "data/futures/um/daily/klines/{sym}/1h/{sym}-1h-{day}.zip",
+      "markPriceKlines": "data/futures/um/daily/markPriceKlines/{sym}/1h/{sym}-1h-{day}.zip",
+      "premiumIndexKlines": "data/futures/um/daily/premiumIndexKlines/{sym}/1h/{sym}-1h-{day}.zip"
+    }
+  }
+}
