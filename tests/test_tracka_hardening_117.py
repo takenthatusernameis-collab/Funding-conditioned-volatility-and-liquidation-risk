@@ -478,6 +478,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_sealed_volatility",
     "reason": "run_rv_baseline.py: RV-only OOS baseline (Gate 3, Track C), leakage-resistant walk-forward on local Binance data; writes evaluation/manifest summaries; no Track A Hyperliquid guarded liquidation outcome reads/claims."
   },
+  "build_fclr002_panel_local.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "build_fclr002_panel_local.py: local/offline panel builder for FCLR002 Track C volatility research from admissible local cache; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network/confirmatory outcome promotion."
+  },
 }
 
 ALLOWED_CLASSES = {
