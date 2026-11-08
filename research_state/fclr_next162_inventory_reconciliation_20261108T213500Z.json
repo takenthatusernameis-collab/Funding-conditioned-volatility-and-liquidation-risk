@@ -1,0 +1,1879 @@
+{
+ "artifact": "fclr_inventory_reconciliation",
+ "schema_version": 1,
+ "generated_utc": "20261108T214018Z",
+ "cache_dir": "research_state/data_cache",
+ "inventory_path": "research_state/data_inventory.json",
+ "inventory_present": true,
+ "inventory_entry_count": 463,
+ "cache_month_dirs": 170,
+ "cache_files_total": 3520,
+ "matched_months": 15,
+ "missing_in_inventory": [
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 4,
+   "month_label": "BNBUSDT_2024_04",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "97e66b580deae706cbf1b56b21a71668d5587a7db68bf69d01ef1db5045125bd"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 5,
+   "month_label": "BNBUSDT_2024_05",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "4ebe1a295be42c705739ff3717b113661513eee0560a17936697568cd2c06ae0"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 6,
+   "month_label": "BNBUSDT_2024_06",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "bc5d4b47ffa9c6e6b30147dbb3c93f63a27b071428445ed6e57339a86745a9e0"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 7,
+   "month_label": "BNBUSDT_2024_07",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "ba2e909430ca421202cc86b658d242bdcb03cf15f729fd5bdaf6b11bc7117243"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 8,
+   "month_label": "BNBUSDT_2024_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "5b1c28afa6becb9c4303fb2438c39461b199a48a0992bccb5e1e4be344b7a931"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 9,
+   "month_label": "BNBUSDT_2024_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "2c9e13fa39b3956ea76d29074e26e0ccc6abbd3e235d752aa63b383de29a4d80"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 10,
+   "month_label": "BNBUSDT_2024_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "ac53012800835002672b559455766f73eb30cce3b4b75a30e8d834f03cc3ba1c"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 11,
+   "month_label": "BNBUSDT_2024_11",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "ca02937135f8d51991e96290cd527ba8cfba3e6ca6bdf08247c88bdc88fdfc09"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 12,
+   "month_label": "BNBUSDT_2024_12",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "9bad523573121ac9a255adac4574e4ea8545ab77807d6ccd8ac132771b6f0c7b"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 1,
+   "month_label": "BNBUSDT_2025_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "d6bec18752e361f94f76958d9f584cfe2f3136ebdde3aa79a228f96a6861ba85",
+    "0c44288cf8fa32885d0c0e86b7fea47eae78821354fdfe2231bacaf138577758",
+    "734954c5c13324db809ae01d571fa23d51b7f7fe7610405fb6192a0671507dcb"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 2,
+   "month_label": "BNBUSDT_2025_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "8b5f8587afee2478dcd1f8d140f5f91c8fbfe6349bec28b9036513787e17a528",
+    "4dfafb64d3741b6fd2508e7ce5b77034b0ae63d61df39266d585b538788aa65d",
+    "c4ffcc5c6e76babd6858a4c4c97bc3c610fca78aba91021e45d38d07ba72e9f9"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 3,
+   "month_label": "BNBUSDT_2025_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "2436ff4c399aded5fa64cbe9f705d32b28649ddc4a475aa0823fd7b0123b7544",
+    "bbd0faefa6ac1660ffa2ebe9891b7c4586330ab29aee327e0c7e16179ad83075",
+    "02f4fa9417ca0d86e08a3e259a92f2b20884457fe53e964034a4b721d6be2e34"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 4,
+   "month_label": "BNBUSDT_2025_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "a63989f430b27010cd3fdb377e950144ff5179865879187034229187baa4a306",
+    "9eb796d3ddac95a43967cf9eb9b4d92653199d55fa9372a9cdebbc7ff58747df",
+    "cca091d64dae20ad7b2f6f01245fb07d4c97ce265438289a603751e849b7755b"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 5,
+   "month_label": "BNBUSDT_2025_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "9d3cfaf4f7ba95ab7ee15f18d67e6335d2d91d66171abff7d23b9e42ac2a04a2",
+    "fe731fde814f9a5447f73eeaa65fcc24cf850fb7884a416f5538fd835fe6d4ab",
+    "f3198d8b069e555ac35e9bd473d0cb2bdca121a31fe22ae10dd77fc360ee2ee5"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 6,
+   "month_label": "BNBUSDT_2025_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "8cd9c740dc48ea46c1fff95f9a0f5e2e15b8dacf513978bbee3f71357eb9090c",
+    "e2886f4c7186993927957d05286cdc55ce8735b0f5bc64697e2c50c43fc8fbac",
+    "2c790b29afb60d7983672649414f5115b5db5316a01a50bbf7a8c67225e23038"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 7,
+   "month_label": "BNBUSDT_2025_07",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "64434dba206baec1dfd9e386ee3f40d197f90b2581fb2fe6652f40261da8d3e7",
+    "5544bdac43a79fee7460a16696f263f2c752bea1739a919f15264edb88863a7d",
+    "4e36ed8d99c89c3e73aad7e2018a6bd18b124d03f098bd86e0cb7e6921e2e0ce"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 8,
+   "month_label": "BNBUSDT_2025_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "1ca07a28c070cd092a04c4e002f5d7ae123c45a149f385c3b316ba1b9cd0a7b6"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 9,
+   "month_label": "BNBUSDT_2025_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "e87adf5d21d31f7c49739eb0cffb7347284bdb2d981d4ab8d2cde6cdfe94d4af"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 10,
+   "month_label": "BNBUSDT_2025_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "6c45db6d53c47e1413c842bffba176aa58d8fe5bef0b1326ce5a4acb5b9abaef"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 11,
+   "month_label": "BNBUSDT_2025_11",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "e3ad17dd7c31004ec9555e63ee3d3a34029504a0b1262c58ec6f438fdf35a057",
+    "724a05e0ec6b16a9101ff712a302e7be1fcc755323749a14f6734fcb4343cb77",
+    "26561ca49702d80bc7f0ae6fd6706045719b0060be1cb2ab984effcb65fc92f7"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2025,
+   "month": 12,
+   "month_label": "BNBUSDT_2025_12",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "5a8f9423693e82bd80bc5b3e6697aededd27359e14640fb0fecc7a454f6e449e",
+    "25272f43ff8fbe2fa4636d1de7e628dd087f9305c3b815b7afc0867625fc77c9",
+    "d3c91cf8ca9e5f160f75764ea5d255f1945dfbf7af5f3d4cafeffa04cdcbb1d9"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 1,
+   "month_label": "BNBUSDT_2026_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "945078fd8906afa08486eeccf2adb4522be17ccd31aa624ba3801b5170fb9812",
+    "460698229eeda9dd3a7ff78cf3a417c5647a642acfc0f4ec6fe5d6e27fe5f506",
+    "83e94bf7cf9a9ad1e8a3c019e90f6176886f183d1c434609539874918bb14ded"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 2,
+   "month_label": "BNBUSDT_2026_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "68b867d9349d62ea31ab32393566911a24c285bf139ec1b42b9595e3e1696d45",
+    "d4e41133501eca8fe8cecce6c25066e7fd4bc952495217b21bccd50304758e99",
+    "8f63681d5a1c86796db1cbb42c52e95af1b4c36d3daa2cac80ca8ed4a5350d04"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 3,
+   "month_label": "BNBUSDT_2026_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "cec130b3006d7b060d043267e557bf2bd6dacf103b17febead5f5a68487c14a0",
+    "c076761b76e5717957932bcea75214101e7827b9f9abed0a733bbacebd9a5828",
+    "7ee8352f3be9cb44191e0006d3f2028489f48334995d9912fea7322e2d3a8d42"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 4,
+   "month_label": "BNBUSDT_2026_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "81c9edc93ecf4add49099d7c41c55876f9aac0cafeb8e8bc7ba2fadb5c3a841f",
+    "379debf752d121595ffad328178e0eecc4cefff227a4ab564e0ee1465d78cdbb",
+    "849b614733d64912cbe2df7187662e28ca8de0d97522747f914f3f96b718f2b8"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 5,
+   "month_label": "BNBUSDT_2026_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "10cb9a141b8afadeaaa995f327c8a5a707057c73af1f7257f7af167418e51b44",
+    "04a8351eb8cf73410d18c79fc7601bab1290529f79339290a2738a904236117d",
+    "46208e7338b8b9e437f04d3b6bac96fb9860f12250ef80e69fb19778bbe12fde"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 6,
+   "month_label": "BNBUSDT_2026_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "cffce3e8875972f44cc5b8ba612a411a11d3b20328b77fa96a68b0383e3cc096",
+    "40d9fcc2e6e5717dd2bacc2eec6a88c36193f0f6033e8473b70a44ac08e46843",
+    "ca48b5247827fd4f57b1b89c8a52c5e28160048781433ad74d9b84392b94d8e0"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 7,
+   "month_label": "BNBUSDT_2026_07",
+   "cache_files": 39,
+   "cache_sha256_sample": [
+    "a4d797025ae16e75c6a5406c889c4ebdb5c3e5fb5a64d0d6148d97ce2a620ed8",
+    "804791f238715c019d001dd5af81d5b5421715b2626f32bb6a1bc004884df198",
+    "77b139a17165d70387e339888a9ea39ea8e6550c45ba9a98fec56fae583ccf02"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 8,
+   "month_label": "BNBUSDT_2026_08",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "a0929e0be86ca149b851024c944b3188c5170376a07490d2587ebe78bcde7c62",
+    "b0dcdf99ae573d9bb88fc334c2ea533cd18c70504a397880fb0e8c0b24218541",
+    "888edb2af1ac4e4e2af33b9c2fbbeae6f2ac70962e67bef43539f4ce24f6c0b4"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 9,
+   "month_label": "BNBUSDT_2026_09",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "d06170beffd113f23a772b9613f5df51e4a98bfa1bdd9d25ff1b4e0e257af989",
+    "90252319c23e9cdc58597199318ec4dd1868a4a757828f45e6a56fdf3eea4d2e",
+    "c40ccef4614b16f3b1fa96aff0dc6f7211686b3001512e74887a7f29237103bd"
+   ]
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2026,
+   "month": 10,
+   "month_label": "BNBUSDT_2026_10",
+   "cache_files": 30,
+   "cache_sha256_sample": [
+    "6737a0ec665a0edd9e6f00d2ceb76f9d7b71e0cb5bfc839bc5025f5db4e795e0",
+    "c687fc97567e5614d46455018abd3291d5e2df0c23687bbe786046f0b3568dde",
+    "13acecb9c572e2630df0f4a551608c7daf3c6dc5c18579e0dc3b13afad4aecac"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 4,
+   "month_label": "BTCUSDT_2024_04",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "6d220b8e2815362a11d294d35dbca28568370d8295351937eceec10f2b359b85"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 5,
+   "month_label": "BTCUSDT_2024_05",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "aef8c5fdce1493fd570b5829a72f2f17c7e459483390f25544d16c2a30be592e"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 6,
+   "month_label": "BTCUSDT_2024_06",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "43fc4473820d1fb4fe340d1b1951a87555f6841aa352e684fa95d6adffce04c6"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 7,
+   "month_label": "BTCUSDT_2024_07",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "acab0593c1452660ce74a6c239fb215c1192b0a9c6e8c1689e6495de40a0174b"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 8,
+   "month_label": "BTCUSDT_2024_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "7003d29a43dd5f9357f838da8766834954939e22c1d80af682d9f33984f67b71"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 9,
+   "month_label": "BTCUSDT_2024_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "6ef23b02392b481ef9c3855434bf3644289fb6e228b4f7d9a0dfc6d3cdff1116"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 10,
+   "month_label": "BTCUSDT_2024_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "26db65ac8020d80ece35df79c254c5f7e24427529bcceeb2972748c4fe2d2707"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 11,
+   "month_label": "BTCUSDT_2024_11",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "e1b19cccfe2cdcba48b022790789b7b01edd86c075f39bc152e44c267d43bd51"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 12,
+   "month_label": "BTCUSDT_2024_12",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "069409f525ebf6370ee1c7defe475167de4b97284c5ac8e68768652968cd3dc9"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 1,
+   "month_label": "BTCUSDT_2025_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "1ab87f7ca2a54d08fac637f25c8be4418921e4af9403f87c7b4fddd4458ec86d",
+    "78e6c027c9a0997a380139d9146d1a370d0a42382a1ae1814f42f60bf9129167",
+    "4e2a91535291d76077f111214406d976f391ffcc33b749a7f62f6d3238bac3ad"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 2,
+   "month_label": "BTCUSDT_2025_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "b2f5544c072d05c1b6f7773a3d13fc146b1a0b0cd9e773db8ce1ce1ba49f7cb3",
+    "bb7f4efab9ac2a69dac3dbee409b0aff079a47d3187ff9df4c98310db480720b",
+    "9cc0b94b04109522826f720dbd23233902c7d130944f4597de752389edb80582"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 3,
+   "month_label": "BTCUSDT_2025_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "93a384c68b68fb41e872462f68be94f81f2d982ab43fc73b70c43ec516c82053",
+    "387da0b923171fd1b37f4bd2a6d717799f3cf73673c6e0d1472ebf7ee0c65df6",
+    "d37618d5e4388d8bba3a243113e03bc974bfbcf4ee3b2c299db0adf8245e395b"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 4,
+   "month_label": "BTCUSDT_2025_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "67d27547002c7ddec435997bb928d3bfd193d7a96a5f1d38551921a5dc8ac684",
+    "e1772a1754082fea02eb4b2b9b70e85a7ecf86235ca43990173003a6ae78396b",
+    "3db26ce8822ac95f0811fce661b50124ff0de69f797ff6fc0b9c097c406aeb5d"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 5,
+   "month_label": "BTCUSDT_2025_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "87e11c25d3e7853292b29e71b3cd58f762f188614626d4baa9e61351b1eb0195",
+    "925390365e98b24694314bd8456ef2b0d0d93a8162b341985a2ca361cd80e803",
+    "362c36f78a78d77997ce4a2dece5ff67bc424868d04e17344062aa378678c1bc"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 6,
+   "month_label": "BTCUSDT_2025_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "9b766748cb2480eda528489ecb5e0bec7e93e95a150f1558b7e2f4fd2d9b81c1",
+    "27117873b91d47dea1fd6f506aae3a2c8e6c061afa4d1c69bbc2cc3b34bbb510",
+    "4c355be2b66ee0c3697f14e771c64968f583fe8c5c365534df8ccae656d45089"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 7,
+   "month_label": "BTCUSDT_2025_07",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "5ec2ad9054cacddc23c3b06ebc87ef6f9d2b970203e27dc390743026d1c41b6f",
+    "02369245503f2f2e38ecb79a5b3996931fc21b0ef62e93f457909ad314d78596",
+    "8176a0d6ef838752b3b9e6b963666b5b5afe8cb36e11775c8b352b89ccd4efc1"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 8,
+   "month_label": "BTCUSDT_2025_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "1180129860b6e196e8d70bb9719e81573aa6b4acb423ba5ee7f82f10c836f7ab"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 9,
+   "month_label": "BTCUSDT_2025_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "21dc6570fc6bffad0e7b5f9e99211b82ad07c95ab4f18c3a2daa3b95ec98344c"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 10,
+   "month_label": "BTCUSDT_2025_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "9ecdedab6344fc4cdb154763266b8e09627a71c3cc5574cf868158b541c259c2"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 11,
+   "month_label": "BTCUSDT_2025_11",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "295909a9cfe89d7f3c6afbe9ced1b3fc171ae864782da506335d41fcf8e287ad",
+    "2863c74acb918f1fd82fc0a7ebaf6126455b969725844a99fae6a6bb4eda9068",
+    "71290efea29ced9a7331028d1210c2d415a5fff19c4d3613227b79cf1764613c"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2025,
+   "month": 12,
+   "month_label": "BTCUSDT_2025_12",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "703244bf91b0338cd8c4040a639aa030e8fec9d39c65213db3aeff90c7352596",
+    "d73a2e5fffb3c8313738fda003658728aca5ecf356087d3f67dba2b10268de82",
+    "736edc88b2aea4330cdf360be0fe141373f3be872d2724dfa4a359a668a902c0"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 1,
+   "month_label": "BTCUSDT_2026_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "165eae3e897d355b3dc3bb2499f9830e9ee2f4d8b2d86b3292cc92701ccded60",
+    "d57d719be51747be5a8ee27e54446b626cd6c9819f3f7e5feba1e821d524d2a9",
+    "46d684abf658569177ccff39ad1e3c1bf1ad7a646814142c731e49f8259ea358"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 2,
+   "month_label": "BTCUSDT_2026_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "53878f6da896731f925ef5a7d9d283fced0d480b69003592117f59320713964b",
+    "baa2c19521ebe93f62248f119bae597d9622b8a8952c3616483c8858450af0c6",
+    "af68c030ef69dc6b8293c65d4532b6cdc6be37b2983737735567ba0ca286d3e4"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 3,
+   "month_label": "BTCUSDT_2026_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "c0675506d79f5ebd0b8fffa934f66ca53599ddc15792d24baa42e9a09b154b43",
+    "f59c22eaf07c4b76d5084a7f2ac86c7ba36b873808b03b9efced8f2c2ddf8b1a",
+    "e921096a26ef93f028e3bf5aecba29011345cc3f90c7a92f04fb2b3ff7c1e2fb"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 4,
+   "month_label": "BTCUSDT_2026_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "e695376cb8ff43f71a27f78a0b6bce671430eb2e42cb991b213c394521cd393d",
+    "90a445f703514fb9fd2101ec21b0d1343e44e3d47f66f731bcf14d6c49ba88d8",
+    "40431eb8fc4b5f65029cd89cfb30770ac778240ea2affd384dac327c7c6ba296"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 5,
+   "month_label": "BTCUSDT_2026_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "ed94beb2e90a39d85a1ce7d2fc5cd08569d3483d01d33f05607b766b586db1f8",
+    "0cbd5568612f290160fce2df4d8ebe923d2a451d1d60f949367f80494a905919",
+    "6cd11e36dbdaf7ffdd98dec6971639a69f6fca8f851dc317e60145df34d28580"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 6,
+   "month_label": "BTCUSDT_2026_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "a94a23d5f93ff8a5e80533c493c6c90b2713ec4cfe942bb6a1881c813a29ca6e",
+    "f435ce75f653fa64eb980227625aeaa924920e059a1d4996797580c7d4d5cf05",
+    "e9420f1783700ae1a0e76b9053f3ead0c0a1f4266a5e8175ecd02f7c9bc134ca"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 7,
+   "month_label": "BTCUSDT_2026_07",
+   "cache_files": 39,
+   "cache_sha256_sample": [
+    "a438d4594b802b2ad90f358ae5b9d8bf3840cfd5ccf67fa174b2759497d61d00",
+    "4c413af281fac8ea6c45e4503764261e5ba9062a02248ae9d409c0285d47d7f2",
+    "d0e5ff69c23c76bd1eb01c208fdf19596763f9f198c2e902e22e036d539b3726"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 8,
+   "month_label": "BTCUSDT_2026_08",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "144e87d8c970861cc45043a3c6d1664ff9b72b87d3a9ea111c6503e44668b862",
+    "0e30ad418df5518a5509cbb92816b572933d633a713e73eb63c51ecaaae85a8d",
+    "680c0bb67d8899b3e1ded8778f16620c8eca2136f3c7e6aff6e882e725d1b703"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 9,
+   "month_label": "BTCUSDT_2026_09",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "adc12f8952bf42f7b83cb4e8a809ac402c3a41ebd9ab4a96e0ecf34fcf79da92",
+    "f2c8bf04c354e3561aab4b3c2ee8a5f8981654b84f9f380cc626d94864632a89",
+    "b154f9d55a9d17fff82bf27d9c2f082360f224499fa3eb7285b6bc17cbd0c858"
+   ]
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2026,
+   "month": 10,
+   "month_label": "BTCUSDT_2026_10",
+   "cache_files": 30,
+   "cache_sha256_sample": [
+    "14d58d098c470fa6853cacc9cad4c2c7fef4021afbe348103319397cb9367d05",
+    "587fa82f87cf421f2f752e784feddbad82dcc6cd1aedcb3eac993aa5c9b735b7",
+    "3ebf19fd6e1d4ca842691a5d3ef0d80aaacafb00143b5628556a0e9fd92c4a4e"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 4,
+   "month_label": "ETHUSDT_2024_04",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "b54c9f05af116ccd921b32b25960ae26954c4983992d44f2390bf1de08b2c724"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 5,
+   "month_label": "ETHUSDT_2024_05",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "8350ab4d61b12ec61539611e30809039f54814213bc4c937609360b1ff28b5e0"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 6,
+   "month_label": "ETHUSDT_2024_06",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "def13f4a478c28b0111fb24c57f95fcee80e71982ed74f12e465d20d328e2275"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 7,
+   "month_label": "ETHUSDT_2024_07",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "9d236281ab6430250ad2b472cbbf03812a40aed42e73c8339fc6be55a2417a82"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 8,
+   "month_label": "ETHUSDT_2024_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "e17684bc761924eb5e1912c52cfa997eddeb99da303e68e28f6f37369f672b9d"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 9,
+   "month_label": "ETHUSDT_2024_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "ffb6e7441053137cb7ca81cc83bcdd996612f7dbb15aa2e168a7ee521f8cbbca"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 10,
+   "month_label": "ETHUSDT_2024_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "2124978c335473a5d9c0f0e9f238193d56c21ac7e250e065a36e9d1201beb049"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 11,
+   "month_label": "ETHUSDT_2024_11",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "636a4c7c86445c2774b4eae8598c480fcbc57de7dde5d40f6937c7fac510797c"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 12,
+   "month_label": "ETHUSDT_2024_12",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "11a0847e8aacb32eeb725611fda4fe6a8419c03eb0c16e14dfc3b9287e78ecc9"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 1,
+   "month_label": "ETHUSDT_2025_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "dac481802308a61e928e8f7b496b9846d601419ec9b1f0e1ddf9f3f77811c76a",
+    "5e185744fb043485c4400a9774895ab74ffc21ef625d33ac8d68f19f2fa2e2a6",
+    "91ca97683d3cdc3d4f6833f53a6ec520c3c4584fd3e070b76c9c922b7e7d2f22"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 2,
+   "month_label": "ETHUSDT_2025_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "b8f72e6c4efe040cafb02ba6ceee84271bccda105b330f9c35bae0c01a0edfaa",
+    "ab739835268f22ac2e8cceea30142ae66fb6f70f0ac79e475708e8d7fa6ce802",
+    "f776a93fe19e8a66078024c9b461765410d80b135f01e28608d3d2e0346801ff"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 3,
+   "month_label": "ETHUSDT_2025_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "7981acf625df5b32083c10f582d23b4b019fa2e44e1fa9b6cd15fb1057722327",
+    "2cbbcca5e44cd3b8f661a636433ae144ef60cdf5d1c2761d2e19c6893de73637",
+    "e254dfe7ef5f19e43dcd3318b1145c8f2e62a1d22247a5b7fc097f7582026df0"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 4,
+   "month_label": "ETHUSDT_2025_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "f02099efabc3c9cd8a650ea1e3cc9fdda7c5d2c45197e22cc82bd2e20d717001",
+    "c638fc66b9001acebb30b2056880f827bb1888f5bb18d5abe5f7f4b69dcf228f",
+    "2ab74bfc74ea903b2e830add5521b69ba8e7a4bb108f6d5edd9edeaa37063309"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 5,
+   "month_label": "ETHUSDT_2025_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "3ed6be5ba1f5c46fd72e7e9df4465be935e85647867b5f06050a521124a51b2b",
+    "0304da30acf6889835372b057a0bdfe560c0458d4e51735925cd849f36210354",
+    "7410e27544281dbf5efa028471a7fe00af7449978439866cf7e982ac11356d63"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 6,
+   "month_label": "ETHUSDT_2025_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "2b1f39e5bd18263684d4f1f023f6bee311ce645c450fd7581733ec2118dfb362",
+    "6b9e9483acb126f680e665761744c2e848a549f879749a854f8d7e3a8fecbf03",
+    "018a463b2ab3601ee0d2c215cf655ba4ca529023d92b560b2515863c8b0cd41e"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 7,
+   "month_label": "ETHUSDT_2025_07",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "e3814546c3da0643b32eba8517a77e8a3d930ee1ec9384133bf55089eb879015",
+    "071e0599dd47f1a8247e7291cb803f9139e8e8c833cdf8162ef39bbec6413dbc",
+    "b8007fa373023d079e8f088233f0acfbed449d0ee9b28fdd6d59d51666b0f3a8"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 8,
+   "month_label": "ETHUSDT_2025_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "c3fca21c71afb4962e89f8e3d84afe5832019ed8f570ee7c7c299f2436a28b62"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 9,
+   "month_label": "ETHUSDT_2025_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "2fa09df245aadc73cf43f837a72c3009fcd7d10c8c4e3db48b2d1021c331841a"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 10,
+   "month_label": "ETHUSDT_2025_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "1ae86c5fb1f15d8792906b746cc7598ebe7e6e7194b74501db79c874e37d7e14"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 11,
+   "month_label": "ETHUSDT_2025_11",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "574d4a2b2248720018ca0d0486f49fa48bd0fcfbfb16304d9b7306e2a2034248",
+    "50ba4a2c3134d2232cc623f18bf9c99939871804ffa5a2850587d3c4b7ac3c4b",
+    "3bef10df404d875314996a3fc77778e761b96919c938a049adb83462d844dfa2"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2025,
+   "month": 12,
+   "month_label": "ETHUSDT_2025_12",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "4e0d67345f131635e6e64ec2f31db716be408c72fd3b4666f5e30dc8624035c3",
+    "cdce872b2d3782ec9dde748ef3c98f41d6390de4b9a8f1e66f8f50489b2e083c",
+    "ee042402815b51bf8189f97af1b1e632d7b29ab9f28c02cc7efc14d2475ad2af"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 1,
+   "month_label": "ETHUSDT_2026_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "16b55a2b1be35928152fe4f06c6f2af181a7c8c3331be7faba0fcbde99f005f7",
+    "5c7c02f12ecb8925a300bbf993fb6ca43ba50741a8cf892d8e56916072e7cc76",
+    "228ba20fcfb735745225c8a4e09e03ccb034da7f3bcae64f1638116307368b4d"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 2,
+   "month_label": "ETHUSDT_2026_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "8607e21577c4991344d40d2ae16c9bd984305e7661551ca05548eb94544a1450",
+    "fff46b338da08299e53077f753b14ecae62e7ec129f59c0a678d720fa792c20c",
+    "bf1ecd15bd434e9cd8c4f40217592a0569e0ce175d25d4c1e8c422249984766d"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 3,
+   "month_label": "ETHUSDT_2026_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "82943a89f8182124f89c1e2ef69f1ab0c420f3a3b5b34c3db93b0d41fffc63f5",
+    "5c20b52bc2c7cb7060bd8c7277e401bbb3166d8b00b63a4428d35be3d4f226b7",
+    "3b198bb99d89d66dca3f754b7bbd2c8eedb229c03472e001bd574c4d87bf0771"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 4,
+   "month_label": "ETHUSDT_2026_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "ce779e58e10074b169874fb03a22519846fc0e6592309b0a6cb4ecd42ba5b632",
+    "fa18174f597a21c0378b72ddfda94578a05ac05f2c94500d820e82255a4ef7e6",
+    "7156c8c5dbcbe3f81879f98028e13a0b273a9ec655815e3255b90d56fb3a1607"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 5,
+   "month_label": "ETHUSDT_2026_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "d54a5dfcb4a545b55106a2818b3560f74fd06cd4db4b1fcd54ae9300d80439a5",
+    "5eb6a591241a2882e7bea80f8887306306e09685cd647290a2ced7222eca4357",
+    "3d11a082450ed588ad14e48ad99a90935dec7009103742adfb5b26e7fc3b640d"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 6,
+   "month_label": "ETHUSDT_2026_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "81ae29be8f58bc76672c59be3845fdd3bfea58cee65de3f0091e74ca0918f0e8",
+    "1984aca9c55e66d8dfc98da1699d2b0ed16e0b41abe093a9d4576d9821273f61",
+    "94d573e4ba34035b37084ad6be06e4dcd6ddb11df35790f50bf358e9c106ed07"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 7,
+   "month_label": "ETHUSDT_2026_07",
+   "cache_files": 39,
+   "cache_sha256_sample": [
+    "a1e7d13948c4e683fc156e2a7b0f53fa28655a7f5632bf2af52a456ea4472a70",
+    "861d4dc8dd5a7269aa2b0c71a71cef537b7954362d084fb8ecbfa9a44864f64f",
+    "3d3e2592dc268f002e0b690b1addc9e1012e297c4f85d8dfab8cbaaed6d97fb5"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 8,
+   "month_label": "ETHUSDT_2026_08",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "0e301a6b77da7f9df0220dac10da6591df57f8e962cc21102b19632dacc6224e",
+    "c2dc64b718d2a15966e4ab061902ef6da0f7cc00f9fda0176920b0e551657da5",
+    "15c67c43142ae4a67399bb6edfc71cb1640277c27c84748373e2ea23f1ff4458"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 9,
+   "month_label": "ETHUSDT_2026_09",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "810a2804e3993dc761e3cefcbcd88e51acdddad102cb2c430c499bd8cd750986",
+    "7487962cc6cdd8ee8276ebb5e8929cf9ea08e9f30e65429f9a704c9d83e88fab",
+    "dc50ba5b74a9be51f115015d011c7e9573687686b4028c455dc9100a8ca8a304"
+   ]
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2026,
+   "month": 10,
+   "month_label": "ETHUSDT_2026_10",
+   "cache_files": 30,
+   "cache_sha256_sample": [
+    "9e1977a1fc950ebf8f9ad4ff8ec727bb2ec51be5e2736feede53a357fe2619ed",
+    "a62bfe5663ebab64f48d7f488e75b26209a1c7ebd810a531fcb80184a869197f",
+    "c1287f5fd87b74dde0d98c3ed72d4fb15e256965863d08b5d135c7b578eb4c11"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 4,
+   "month_label": "SOLUSDT_2024_04",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "591e7c4993e59b60966213efd938f48420cd9b63db815240ffc070ec40470e53"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 5,
+   "month_label": "SOLUSDT_2024_05",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "cdd788722e8b85fd6c9d992e7c1c767be87afc91db5b8c07751f898b373cbf29"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 6,
+   "month_label": "SOLUSDT_2024_06",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "8da6c97d67718422a5df9a0d50e37849521fb54de87cbb3b3397e441439dfcc9"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 7,
+   "month_label": "SOLUSDT_2024_07",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "2585a0db933c70b62c87cac509de42ac09b98d370238c0d8c68249a20bd2b9a3"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 8,
+   "month_label": "SOLUSDT_2024_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "ef076200aab768d33f71449957f6cd9c96c0da696708a5f561b97e7a0995e8d2"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 9,
+   "month_label": "SOLUSDT_2024_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "7666e4d3e6ea6dd28011c508cf01421007521e98e96ea551f809836441b43ca0"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 10,
+   "month_label": "SOLUSDT_2024_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "dbece64e8c5bc69c487cc03c00f6a4d4da2cad9152c73860386fcdc7d2ec9d05"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 11,
+   "month_label": "SOLUSDT_2024_11",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "f53a9b637d695a251200e48929a573b4bf04cc2d99d5a3a09fe7bdca622918aa"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 12,
+   "month_label": "SOLUSDT_2024_12",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "bae83020ac2ccfa6dd8d1362d373a92b4d5a7e396cef52e78dc2e7d81e63f621"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 1,
+   "month_label": "SOLUSDT_2025_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "3a6ffcf838b65ae1e75b8a083534d2064916f185070ba9d9d2a35ec05388097b",
+    "290957199530c31ea31b1f8ae1dbc072a8ea358ecb08e375c3353058cf6a3382",
+    "ddf8b2b62aca3920361392be63e3796f86437ce36c9a7e5cca5d3e0a1cb04f64"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 2,
+   "month_label": "SOLUSDT_2025_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "42b98db28656def1edbce1d5624f606052204a11a6caf880cd56c0893e62fb41",
+    "57c4f8a849bb82061fe9e2e0640b400981edcd92a476ad5f3c3eac6cf84e5544",
+    "fe5006227ec7392d41f5ca1ac516e31aa7cf012bfefe0f29c12dd80a1b785dce"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 3,
+   "month_label": "SOLUSDT_2025_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "f1a5eb11b9ccdf2844268f4702cd9f88556d36f910342c8091809ad670f3bb1c",
+    "579f855c4ad25436f5babe22cb820debcaa8545bf0a922ee11d0d8eff8e272b5",
+    "271f9bc6cfeb2d3fa9f5e17e4a7cbbd964335ae9387c8767a34c8659717f3876"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 4,
+   "month_label": "SOLUSDT_2025_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "d7eb2c260d460b362f4ee316941f1196a050d1df0bb6a3b32b859afbe396e140",
+    "38ccf97d35424328f59ccdfc4589ed33f0874e5270b29a76b2764b0a4d89b565",
+    "10d44991c8dfe2841311e10dbff053c6262353d78d22935eb0719752078e7d4d"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 5,
+   "month_label": "SOLUSDT_2025_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "2bd37b4239f643b8c8fbe565ab4f60c9d0c0a553b09e6227ca7f179d904e4f0d",
+    "27557bfa6b74e86a2eccafed2e4df5fbf634afe4d78114569684305176e0a8ef",
+    "8865a8e54ea3b013ef82e04d6509d02a393edbc781cb2fbc719b069912abe852"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 6,
+   "month_label": "SOLUSDT_2025_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "a0f20ac042e6a2e39c2528437ef7e868ae73142bc49cb5840775aeeedb66af98",
+    "3a420b2574758c45466060ef6d93fe15882d44397acfa7409c79a558d73e9821",
+    "465c9425d7938d0ee08566dc4decb349a869530d9e9a2f0f847d24be71594ec3"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 7,
+   "month_label": "SOLUSDT_2025_07",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "4ed7edee7045250df7d016017f810cf0e4807096e37afa0fe1826ab968dc7bfb",
+    "296ed86fad1a56057998418f857a95a1d5bec4b69de7ae0f3ec636f48c22e712",
+    "c81626425e8636b5c0092a25d2d0250853ecda3bd7650ecc0979b8663ee71fe0"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 8,
+   "month_label": "SOLUSDT_2025_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "fe9efc3abe1e4be2a2fa9a4008e6957856387f6783a06b97cac3ee271746915f"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 9,
+   "month_label": "SOLUSDT_2025_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "f953315124d20dab98ba710d108103fb4cf054d1535787fd76d35d6b9c18e534"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 10,
+   "month_label": "SOLUSDT_2025_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "d80c5be7660a950ad673a0e82488877c6ca0eb81f084d4c844320f892ad2c020"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 11,
+   "month_label": "SOLUSDT_2025_11",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "47d09d0abeb9819514c7e3b2a6a6ce6631cabd0d7f8bf531eec3fe9cd03a2383",
+    "b8b0b0dc1bbce63855012cd196a6b1246a32925ae3ff1af3665075af6cbaf5b2",
+    "8416c7a9ab2289673670ab60dfc19c70a1e9e07b957e947884a0cd6589b17d8e"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2025,
+   "month": 12,
+   "month_label": "SOLUSDT_2025_12",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "0c599848c9c1384d0b4ebdc712235811d68ee423934b69f9791852799bd95f85",
+    "ccb666550d7b3350a4505f3af31206e7bf97748a0f75772e05b6f1942cecd49b",
+    "84078123661320be1ffc39c3e1eb7fcf1833ff2cbf26971927ad613b632cadf9"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 1,
+   "month_label": "SOLUSDT_2026_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "a79b4f0c98c2136d1b1d3f09411b60f988f547d3f743dbcbf792e88b33903f3b",
+    "1e3d969d2a60389d1ae9289ffc66fc50c4c3e870d4f3afca90956fe5ac3674a1",
+    "b58cb2f764e529eb093ce3a1a17b1290aea89256d4f0946ae0733c122c2601bd"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 2,
+   "month_label": "SOLUSDT_2026_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "3c81f29a88b36e984529627fb20ad8ca52fa9f027b4a4a5a58eaead5f57dd953",
+    "1d4dbe6e657277a734a7864acc32a2f211c2d60792ce1258b21be14a35e333cb",
+    "966ca914362f30216b653d3ba05c6416caca2683bd80168a32e8787f3776000c"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 3,
+   "month_label": "SOLUSDT_2026_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "1b3eeef1edf88d4e07d4e30d4f707983586d2d5deaad859c1c7e58467df772a2",
+    "f7019e44cb5b454624ae583c4f175c80cf22eb518581300f9c0552018766e52c",
+    "cde2209c1052c5cded580dcc65af6bba85526f165b24145da6467fb058572195"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 4,
+   "month_label": "SOLUSDT_2026_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "d4b01fc2cf68f372f22d8eb74635c6d5eadc34adb5c92a9598e8e5fd14d3ce91",
+    "f078fba4b8e26796c0d345e01e9d93ae9537b136b7914c39623217039e454fd7",
+    "e9bbf087913c5f6a365bdb6d57849e49c00c491da179e7d04db246652863fbfc"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 5,
+   "month_label": "SOLUSDT_2026_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "7add2ba49b43c493a522b5ff56d2d465be5b2f11ccc84a1084c9d324bcde6110",
+    "1198cccf646781af0cba22187812f52285437b685485ee91d18eed6a467addd8",
+    "47c33d09e78452c3d1a73384d3eeb0c8ee04730c7fad0d34cc3e61cde2ca5a83"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 6,
+   "month_label": "SOLUSDT_2026_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "4176b8c76ae29f34ea3d0ca45df066bc7b626bc23ccb5b233fa82b993bbe20f2",
+    "301a2e65f323da9fe1c5d3d54d5544162089587879c36e8d8120570b4faa9cb3",
+    "69263f13c8ac788e1145fb9b3ff592578354e651db0523ca578e63f7f458e19f"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 7,
+   "month_label": "SOLUSDT_2026_07",
+   "cache_files": 39,
+   "cache_sha256_sample": [
+    "fcb221c3ffa940f0877996427fcf9004d9e840b6f3f5c63c39741e944db344b8",
+    "b474ae21f73eec5e575b30ffbaf3b377397e75f8ad3f8d279fb7cbf7123402d6",
+    "afcbe61fab6094c6d383018f5e765d241a2c459a37a050ada2fca736f4fdf019"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 8,
+   "month_label": "SOLUSDT_2026_08",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "c2a21c06991770da49b51bf2f4be3dd305f6717c436914b9893032e385aaf8b3",
+    "bd8149da1cc13fa5df8b463e5b966b633732f12e25e177520b44a6f47a3d8ad7",
+    "3373cc23f3aaef60d2eef1b907c7f55116d9660894b664262226d862faf16d38"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 9,
+   "month_label": "SOLUSDT_2026_09",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "323dde1ec5d5212e3349fa5c2adb6a61dea911ae0f3e2709a14fecea359d6117",
+    "590e0dc3a8ff624915abdbae3cfbddc21845152ba81ca4cd084b5144c056294f",
+    "2f511216de98a776e6553b24c86317a136ef46fa7f295e202f173981eca0f63b"
+   ]
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2026,
+   "month": 10,
+   "month_label": "SOLUSDT_2026_10",
+   "cache_files": 30,
+   "cache_sha256_sample": [
+    "631f23ffafb969e15c221c47cdb93310cc513945cb76e11390b09cc106fce8bd",
+    "482a8f2402ecb7cb0d79e8e5573fbfa2c283571bd8ef4862dc5925dccf6677a9",
+    "29a014ba006cb7aaaa56a855a58d16bd4eaec35ddd4245f4e7edbb9e9c21c240"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 4,
+   "month_label": "XRPUSDT_2024_04",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "d7586ec30b20ca06772ac7fb52dd027e913ce0a26a93669e3a4276522bff9ab5"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 5,
+   "month_label": "XRPUSDT_2024_05",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "4ca09712c976062effee663d005c27420089003ed5a1c95d8c2b4937fe05fa01"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 6,
+   "month_label": "XRPUSDT_2024_06",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "fd9055cb8a05ce268c24b91800682091232f0dc285b1240f57e2d66396eb6a5f"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 7,
+   "month_label": "XRPUSDT_2024_07",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "68c8ac31b16c4b1f81a3b70860175e5163e76652ddea9ef1bb6e6f01a369a33e"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 8,
+   "month_label": "XRPUSDT_2024_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "fa1318b6213cae7ff5ead4110c4d7c97c3103203b56b2607678e4527dd8ad906"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 9,
+   "month_label": "XRPUSDT_2024_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "69faf312921ce5c88092d8c328b04dc006ea42dabfe68ad5fee542d28c0ae2ca"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 10,
+   "month_label": "XRPUSDT_2024_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "f9d62565da4bf7d1caddc9cb09b1a73a4a312a7419c5c0439c662fc3f58dd993"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 11,
+   "month_label": "XRPUSDT_2024_11",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "95c733e5ad58f4c26c75b71a2081de8f692a4ce271006b7f5b3c87854a848c70"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 12,
+   "month_label": "XRPUSDT_2024_12",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "be526ba15c6c4c3ae8cddda1411a13f665f635be444c992efd2f66e6bbfa37d8"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 1,
+   "month_label": "XRPUSDT_2025_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "375e7212f7110381b97e326f486035ca92e299eb366c71fe9133d6db4aa6efd7",
+    "f8036b0905d38a0115c6f7ac3c0988c4cd1877b1fb50562577f7f1e4f68d8221",
+    "04f268fb4f115712c00e1bff46ee7141d0ea4382ced48adfd7bae2860e612e99"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 2,
+   "month_label": "XRPUSDT_2025_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "6d67fffc4f403f461c825590efb57bd8ca4bc0549cfb046dd577e6907d084ba2",
+    "60324b95beb90d35f7c66e8f0296535ede1d21ba147cae674519a469e39a5209",
+    "7948b885df86776f9aaeffb3946ed3a41428488802992b4afb25518187132983"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 3,
+   "month_label": "XRPUSDT_2025_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "4bb29f679cd300f5e00e2549a877b8c30c81e6d1ee2b1db73745af48becd7782",
+    "9e99e5f7836a78c3fd94ebf6f8d57b911c98bd882c967dd2e0b2090e757eb245",
+    "1692496cd6435b498916dd442d93361a2ff41d04b3d99301e8bc9eb1a7d449d8"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 4,
+   "month_label": "XRPUSDT_2025_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "37f8e12e15906250e3b6b5b39265f653bcd5d8ca2803b46fc5434b88e71f406c",
+    "06725426127cfa5ff72791b9e36d2b237e0900ab43cf9377a8ca2d6dfb5a6622",
+    "85119f8cf8eb5290a565ca62885472de448e6388d9a8efe473eff9d0f8a91ce4"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 5,
+   "month_label": "XRPUSDT_2025_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "b99c455270027fede7301bfab6995acac2d5dcc96fb5161f73cfa9e8b7dd390b",
+    "07ea3e1e317c125145ac7acb28d7533a915306e785edbcb01ababa52baf4bc3d",
+    "a2e819a8d9dda4c74776f929d2fd16bbdb660220ed14a1f87e7707a803830a53"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 6,
+   "month_label": "XRPUSDT_2025_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "8b69fc9e3e73cf29483adfff717cb9ce028ff91e6890a062cf77a63c53f3b621",
+    "9b9247a70f492e422a4f31b7cb38c653f23622657562325462938e672b77fbd4",
+    "6e70859396c8b162b1668bb53fd53f48b704075e0cce8a897e606f8cde5f466b"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 7,
+   "month_label": "XRPUSDT_2025_07",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "806582800a5988b6770f3f55c4d25d0988cbf473b6c76881e75917349d0e4eb3",
+    "7840fca716f7ddc05d488eadd484c173d7e224bd4cd874c7bd4884a65d6b58c7",
+    "ded8da766f591cfea34e078cf9ed733bc4e31b69a67552a93bd6e9a50af1a170"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 8,
+   "month_label": "XRPUSDT_2025_08",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "07a8182394836928094bb6b476fef9e8858e234d0ff05ef41114ff25bab923ba"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 9,
+   "month_label": "XRPUSDT_2025_09",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "1f09cb45eadb64731acaaae997167c54b76c3a08b367cd5acbd89f8562593ee3"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 10,
+   "month_label": "XRPUSDT_2025_10",
+   "cache_files": 1,
+   "cache_sha256_sample": [
+    "3fc5b1bcac5579e6cc49e17457282c6bfb970932d2aefcbc0c896d660b81a939"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 11,
+   "month_label": "XRPUSDT_2025_11",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "71255797f601fe0d32e7c8bcd4f424437441233a13f7b92fb4bdf9818de5eac7",
+    "d2ef36ce4678c2ad5e6771ae7116d281b26646abb3852d0f3f26f35c2800256f",
+    "116f4f7fa215f08ade7ddcf7d7961934788bb219265b1ac0949bc3965d9d7802"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2025,
+   "month": 12,
+   "month_label": "XRPUSDT_2025_12",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "36ba718a3936a39b45315d704669be3692516f50b3743dfb043632cdabcbc439",
+    "5e6a2082dabde295c27fe8e03eab06ffb2ffdc5fda3decf67a5ff9b0526f310f",
+    "fb2c1760ac8d0a8242bed3351fe88e00e7c6daf5afc44dbe89cb2d8e85407f96"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 1,
+   "month_label": "XRPUSDT_2026_01",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "73963ba5b567149367ece351b620cdc87ebe4701b0f76f95a14284e76e945b12",
+    "29a0de43d0f9aebfee337c4e10a64e25bca32f0e668ed68355d39d8c343017f3",
+    "6316fec07548c0dde9e4a47f78d426e38ba517ae5b1172080e8403ac2b8acc50"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 2,
+   "month_label": "XRPUSDT_2026_02",
+   "cache_files": 29,
+   "cache_sha256_sample": [
+    "a857fd5835311affe712052bd915082bb2551c9f5015ded7555288029dd79443",
+    "a89a71977149fbd57223904092caa5f073c7648eb3ca36f5199d17fffea73c37",
+    "d98eb68be6118818c45f4768b7fb89f454fff1a04613501614c112628598e7a9"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 3,
+   "month_label": "XRPUSDT_2026_03",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "9ed8dee1bb3569626325eecd1f35c493b7e480406ae3269efe195a2218e67823",
+    "1cc436fbbc4dd33d62485a880cbb7309e5762d4ba295a9e1eefb6b0b6d9aaf2c",
+    "a1aed729923274487f13aa29a7a324b27e8e7cb50c1896503a558ca1a4c9c177"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 4,
+   "month_label": "XRPUSDT_2026_04",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "890fa65a3d8d852ee9125d0910a963db71bccc28abeed3efca1b5d34c2ed4526",
+    "835c63ac792260a1ea4faf979350b698d2eb6b531ee59c2c8e6af20de74dceb7",
+    "a23e56d9d86df539ba6232ef346726733bcfb147bbc39dfa8d393cb0a34b2034"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 5,
+   "month_label": "XRPUSDT_2026_05",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "efe053ce3a7583a1d64d330d5148eb422228a382f6b0cd21cefa927b32f41be6",
+    "9d576153a66ad7a1d9c9a195d5167ca1ce6bae7fa99aaccdd7e094cb59471f54",
+    "2dd6ecd4a03665f9934c82704ef9b114be2d0a5b997f258a5bb7ee7b80f2ce0a"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 6,
+   "month_label": "XRPUSDT_2026_06",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "696381f1b7ac87abafa8c9422393cc2740fabb7565f51587255bba96370a49a5",
+    "a393091446cb93a17510a7f1a5a377fab0401d5916977441a56e00bccd92182a",
+    "f09ac1a01f06f52023109db4d730394b94e0b3ea9fdef936fa42fa4622993bc0"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 7,
+   "month_label": "XRPUSDT_2026_07",
+   "cache_files": 39,
+   "cache_sha256_sample": [
+    "5960e26df4de901ebe1a85203fcc54f134d8d742cb87d63384df061ad710fd08",
+    "111d87a5331cb353a9755845985a48289c178d8e6efb661f56e9ac9e4becc1a2",
+    "45e65c3173c3af5b6862340dfec38af4a52e7714f6e9b7d5b71c243b29ac4f37"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 8,
+   "month_label": "XRPUSDT_2026_08",
+   "cache_files": 32,
+   "cache_sha256_sample": [
+    "d91e5d3b7dfa84e1307050e1754098b5f953e73817310c5f7a22af41686267e4",
+    "90d14d21daece95d120cdb85ca2b6005fc9260c6e80998b035d504810f75cf70",
+    "3404199e04db8feacdf63ec316f3b0bfbc0e48c67b5b4956d5ecdfe9c81a977a"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 9,
+   "month_label": "XRPUSDT_2026_09",
+   "cache_files": 31,
+   "cache_sha256_sample": [
+    "7d7adb046ac4ec2864368bc2f01b8640928817a6f3a7aa4aca0b7b1279e467c3",
+    "147cbeb1125c326f43d423782983e88fc0f33d02a707e9e515f03179de6c2d22",
+    "0006231e20e9988252b1fe0b18c509ecece319592e0a8e418913ab6ad632b979"
+   ]
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2026,
+   "month": 10,
+   "month_label": "XRPUSDT_2026_10",
+   "cache_files": 30,
+   "cache_sha256_sample": [
+    "e0ecc92c0bcee1b65a26546768cc83fd9fab016577ce5a1418817f0bda72d16f",
+    "0b635f7e354d581a59fcb7a321bce7154baac133539739c1d7e28abc8fd226ac",
+    "b960928bd0f84928c4dc48caac50a0056bb19c70c72ab373c6676362f2b5749e"
+   ]
+  }
+ ],
+ "stale_in_inventory": [],
+ "matched": [
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 1,
+   "month_label": "BNBUSDT_2024_01",
+   "cache_files": 31,
+   "inventory_entries": 31
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 2,
+   "month_label": "BNBUSDT_2024_02",
+   "cache_files": 29,
+   "inventory_entries": 29
+  },
+  {
+   "symbol": "BNBUSDT",
+   "year": 2024,
+   "month": 3,
+   "month_label": "BNBUSDT_2024_03",
+   "cache_files": 31,
+   "inventory_entries": 30
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 1,
+   "month_label": "BTCUSDT_2024_01",
+   "cache_files": 31,
+   "inventory_entries": 31
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 2,
+   "month_label": "BTCUSDT_2024_02",
+   "cache_files": 29,
+   "inventory_entries": 29
+  },
+  {
+   "symbol": "BTCUSDT",
+   "year": 2024,
+   "month": 3,
+   "month_label": "BTCUSDT_2024_03",
+   "cache_files": 31,
+   "inventory_entries": 30
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 1,
+   "month_label": "ETHUSDT_2024_01",
+   "cache_files": 31,
+   "inventory_entries": 31
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 2,
+   "month_label": "ETHUSDT_2024_02",
+   "cache_files": 29,
+   "inventory_entries": 29
+  },
+  {
+   "symbol": "ETHUSDT",
+   "year": 2024,
+   "month": 3,
+   "month_label": "ETHUSDT_2024_03",
+   "cache_files": 31,
+   "inventory_entries": 30
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 1,
+   "month_label": "SOLUSDT_2024_01",
+   "cache_files": 31,
+   "inventory_entries": 31
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 2,
+   "month_label": "SOLUSDT_2024_02",
+   "cache_files": 29,
+   "inventory_entries": 29
+  },
+  {
+   "symbol": "SOLUSDT",
+   "year": 2024,
+   "month": 3,
+   "month_label": "SOLUSDT_2024_03",
+   "cache_files": 31,
+   "inventory_entries": 29
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 1,
+   "month_label": "XRPUSDT_2024_01",
+   "cache_files": 31,
+   "inventory_entries": 31
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 2,
+   "month_label": "XRPUSDT_2024_02",
+   "cache_files": 29,
+   "inventory_entries": 29
+  },
+  {
+   "symbol": "XRPUSDT",
+   "year": 2024,
+   "month": 3,
+   "month_label": "XRPUSDT_2024_03",
+   "cache_files": 31,
+   "inventory_entries": 29
+  }
+ ],
+ "reconciled": false,
+ "note": "Read-only. Computes sha256 from local files only. Does not modify data_inventory.json."
+}

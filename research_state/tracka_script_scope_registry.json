@@ -26,12 +26,19 @@
       "script": "build_fclr002_panel_local.py",
       "class": "unclassified_auxiliary",
       "reason": "FCLR-NEXT-157: register local FCLR002 Track C panel builder (no Track A seam/canonical writes)."
+    },
+    {
+      "id": "fclr_next_162_inventory_recon",
+      "action": "add",
+      "script": "reconcile_inventory.py",
+      "class": "repo_maintenance_utility",
+      "reason": "FCLR-NEXT-162: register read-only inventory reconciliation utility."
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition.",
   "generated": "20261108T073500Z",
   "registry_version": "1.1",
-  "script_count": 109,
+  "script_count": 110,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -468,6 +475,10 @@
     "write_trigger_harden_successor.py": {
       "class": "prereg_utility",
       "reason": "Trigger-hardening artifacts; no outcome reads."
+    },
+    "reconcile_inventory.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)",

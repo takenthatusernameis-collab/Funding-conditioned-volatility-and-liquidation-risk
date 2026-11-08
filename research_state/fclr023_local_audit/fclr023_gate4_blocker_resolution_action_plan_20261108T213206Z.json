@@ -1,0 +1,2273 @@
+{
+  "script": "fclr023_gate4_blocker_resolution_action_plan.py",
+  "generated_at_utc": "20261108T213206Z",
+  "input": "research_state/fclr022_local_audit/fclr022_gate4_blocker_resolution_evidence_preflight_latest.json",
+  "input_state": "ok",
+  "row_count": 45,
+  "group_count": 45,
+  "action_plan_packets": [
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "identity_provenance_range",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "identity_provenance_range",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "identity_provenance_range",
+            "current_state": "present_unverified",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_unverified",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "manifest_terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "manifest_terms_evidence.provenance_manifest",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "manifest_terms_evidence.provenance_manifest",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence.terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "manifest_terms_evidence.terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "admissibility_completeness_leakage_evidence",
+          "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+            "current_state": "present_blocker",
+            "gate_class": "admissibility_completeness_leakage_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+            "missing_action_class": "admissibility_completeness_leakage_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "admissibility_completeness_leakage_evidence",
+          "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+            "current_state": "present_blocker",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+            "current_state": "missing",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "missing",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_09_evidenced",
+      "gate_class": "leakage_sufficiency_gates",
+      "prerequisite": "leakage_sufficiency_gates",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_09_evidenced",
+          "gate_class": "leakage_sufficiency_gates",
+          "prerequisite": "leakage_sufficiency_gates",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_09_evidenced",
+            "prerequisite": "leakage_sufficiency_gates",
+            "current_state": "present_unverified",
+            "gate_class": "leakage_sufficiency_gates",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "leakage_sufficiency_gates",
+            "missing_action_class": "leakage_sufficiency_gates",
+            "resolution_ready": false
+          },
+          "current_state": "present_unverified",
+          "missing_action_class": "leakage_sufficiency_gates",
+          "reason_copied_from_index": "leakage_sufficiency_gates",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "identity_provenance_range",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "identity_provenance_range",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "identity_provenance_range",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "manifest_terms_evidence.provenance_manifest",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence.provenance_manifest",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence.terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence.terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "admissibility_completeness_leakage_evidence",
+          "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+            "current_state": "present_blocker",
+            "gate_class": "admissibility_completeness_leakage_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+            "missing_action_class": "admissibility_completeness_leakage_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "admissibility_completeness_leakage_evidence",
+          "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+            "current_state": "present_blocker",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+            "current_state": "missing",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "missing",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_10_12_local_exploratory",
+      "gate_class": "leakage_sufficiency_gates",
+      "prerequisite": "leakage_sufficiency_gates",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_10_12_local_exploratory",
+          "gate_class": "leakage_sufficiency_gates",
+          "prerequisite": "leakage_sufficiency_gates",
+          "evidence_snapshot": {
+            "window": "cand_2024_10_12_local_exploratory",
+            "prerequisite": "leakage_sufficiency_gates",
+            "current_state": "present_blocker",
+            "gate_class": "leakage_sufficiency_gates",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "leakage_sufficiency_gates",
+            "missing_action_class": "leakage_sufficiency_gates",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "leakage_sufficiency_gates",
+          "reason_copied_from_index": "leakage_sufficiency_gates",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "identity_provenance_range",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "identity_provenance_range",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "identity_provenance_range",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "manifest_terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "manifest_terms_evidence.provenance_manifest",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "manifest_terms_evidence.provenance_manifest",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence.terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "manifest_terms_evidence.terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "admissibility_completeness_leakage_evidence",
+          "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+            "current_state": "present_blocker",
+            "gate_class": "admissibility_completeness_leakage_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+            "missing_action_class": "admissibility_completeness_leakage_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "admissibility_completeness_leakage_evidence",
+          "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+            "current_state": "present_blocker",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+            "current_state": "missing",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "missing",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "gate_class": "leakage_sufficiency_gates",
+      "prerequisite": "leakage_sufficiency_gates",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_04_12_mixed_evidenced_prefix",
+          "gate_class": "leakage_sufficiency_gates",
+          "prerequisite": "leakage_sufficiency_gates",
+          "evidence_snapshot": {
+            "window": "cand_2024_04_12_mixed_evidenced_prefix",
+            "prerequisite": "leakage_sufficiency_gates",
+            "current_state": "present_blocker",
+            "gate_class": "leakage_sufficiency_gates",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "leakage_sufficiency_gates",
+            "missing_action_class": "leakage_sufficiency_gates",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "leakage_sufficiency_gates",
+          "reason_copied_from_index": "leakage_sufficiency_gates",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "identity_provenance_range",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "identity_provenance_range",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "identity_provenance_range",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "manifest_terms_evidence.provenance_manifest",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence.provenance_manifest",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence.terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence.terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "admissibility_completeness_leakage_evidence",
+          "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+            "current_state": "present_blocker",
+            "gate_class": "admissibility_completeness_leakage_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+            "missing_action_class": "admissibility_completeness_leakage_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "admissibility_completeness_leakage_evidence",
+          "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+            "current_state": "present_blocker",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+            "current_state": "missing",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "missing",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2025_01_12_local_exploratory",
+      "gate_class": "leakage_sufficiency_gates",
+      "prerequisite": "leakage_sufficiency_gates",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2025_01_12_local_exploratory",
+          "gate_class": "leakage_sufficiency_gates",
+          "prerequisite": "leakage_sufficiency_gates",
+          "evidence_snapshot": {
+            "window": "cand_2025_01_12_local_exploratory",
+            "prerequisite": "leakage_sufficiency_gates",
+            "current_state": "present_blocker",
+            "gate_class": "leakage_sufficiency_gates",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "leakage_sufficiency_gates",
+            "missing_action_class": "leakage_sufficiency_gates",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "leakage_sufficiency_gates",
+          "reason_copied_from_index": "leakage_sufficiency_gates",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "identity_provenance_range",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "identity_provenance_range",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "identity_provenance_range",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "provenance_manifest_evidence",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "provenance_manifest_evidence",
+          "prerequisite": "manifest_terms_evidence.provenance_manifest",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence.provenance_manifest",
+            "current_state": "present_blocker",
+            "gate_class": "provenance_manifest_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "provenance_manifest_evidence",
+            "missing_action_class": "provenance_manifest_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "provenance_manifest_evidence",
+          "reason_copied_from_index": "provenance_manifest_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "manifest_terms_evidence.terms_evidence",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "manifest_terms_evidence.terms_evidence",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "admissibility_completeness_leakage_evidence",
+          "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+            "current_state": "present_blocker",
+            "gate_class": "admissibility_completeness_leakage_evidence",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+            "missing_action_class": "admissibility_completeness_leakage_evidence",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "admissibility_completeness_leakage_evidence",
+          "reason_copied_from_index": "admissibility_completeness_leakage_evidence",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+            "current_state": "present_blocker",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "terms_legal_evidence_resolution",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "terms_legal_evidence_resolution",
+          "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+            "current_state": "present_blocker",
+            "gate_class": "terms_legal_evidence_resolution",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "terms_legal_evidence_resolution",
+            "missing_action_class": "terms_legal_evidence_resolution",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "terms_legal_evidence_resolution",
+          "reason_copied_from_index": "terms_legal_evidence_resolution",
+          "human_legal_required": true,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "fresh_frozen_prereg_before_outcomes",
+          "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+            "current_state": "missing",
+            "gate_class": "fresh_frozen_prereg_before_outcomes",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+            "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+            "resolution_ready": false
+          },
+          "current_state": "missing",
+          "missing_action_class": "fresh_frozen_prereg_before_outcomes",
+          "reason_copied_from_index": "fresh_frozen_prereg_before_outcomes",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": true,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    },
+    {
+      "window": "cand_2024_01_12_local_exploratory",
+      "gate_class": "leakage_sufficiency_gates",
+      "prerequisite": "leakage_sufficiency_gates",
+      "group_packet_count": 1,
+      "packets": [
+        {
+          "window": "cand_2024_01_12_local_exploratory",
+          "gate_class": "leakage_sufficiency_gates",
+          "prerequisite": "leakage_sufficiency_gates",
+          "evidence_snapshot": {
+            "window": "cand_2024_01_12_local_exploratory",
+            "prerequisite": "leakage_sufficiency_gates",
+            "current_state": "present_blocker",
+            "gate_class": "leakage_sufficiency_gates",
+            "evidence_ref": null,
+            "evidence_present": false,
+            "read_state": "no_path_cited",
+            "sha256": null,
+            "bytes": 0,
+            "reason_copied_from_index": "leakage_sufficiency_gates",
+            "missing_action_class": "leakage_sufficiency_gates",
+            "resolution_ready": false
+          },
+          "current_state": "present_blocker",
+          "missing_action_class": "leakage_sufficiency_gates",
+          "reason_copied_from_index": "leakage_sufficiency_gates",
+          "human_legal_required": false,
+          "fresh_frozen_prereg_required": false,
+          "local_verification_commands": [
+            "python scripts/check_tracka_scope_registry_drift.py",
+            "python scripts/tracka_resume_check.py",
+            "python -m unittest discover tests -q",
+            "git status --short",
+            "git diff -- research_state/fclr023_local_audit scripts/fclr023_gate4_blocker_resolution_action_plan.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py"
+          ],
+          "artifact_target_hint": "research_state/fclr023_local_audit/fclr023_gate4_blocker_resolution_action_plan_<UTC>.json (planning packet only; the hinted artifact is not created or marked present by this script)",
+          "packet_ready_for_human_or_prereg_action": false
+        }
+      ],
+      "group_all_packet_ready_false": true,
+      "group_ready_for_action": false
+    }
+  ],
+  "action_plan_warnings": [
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "identity_provenance_range",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_09_evidenced",
+      "prerequisite": "leakage_sufficiency_gates",
+      "gate_class": "leakage_sufficiency_gates",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_10_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "gate_class": "leakage_sufficiency_gates",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "identity_provenance_range",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_04_12_mixed_evidenced_prefix",
+      "prerequisite": "leakage_sufficiency_gates",
+      "gate_class": "leakage_sufficiency_gates",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2025_01_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "gate_class": "leakage_sufficiency_gates",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "identity_provenance_range",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.provenance_manifest",
+      "gate_class": "provenance_manifest_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "manifest_terms_evidence.terms_evidence",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.completeness_leakage_audit",
+      "gate_class": "admissibility_completeness_leakage_evidence",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.confirmatory_prereg_draft_ref",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "admissibility_package_status.v5_window_terms_state_from_fclr018",
+      "gate_class": "terms_legal_evidence_resolution",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "fresh_frozen_prereg_before_outcomes_required",
+      "gate_class": "fresh_frozen_prereg_before_outcomes",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    },
+    {
+      "type": "action_plan_warning",
+      "window": "cand_2024_01_12_local_exploratory",
+      "prerequisite": "leakage_sufficiency_gates",
+      "gate_class": "leakage_sufficiency_gates",
+      "detail": "no local resolution evidence (read_state=no_path_cited); human/prereg action required per packet"
+    }
+  ],
+  "draft_only": true,
+  "no_confirmatory_outcomes": true,
+  "exploratory_only": true,
+  "no_network": true,
+  "not_go_for_confirmatory_outcomes": true,
+  "confirmatory_ready_now": false,
+  "confirmatory_outcomes_go": false,
+  "authorizes_confirmatory_outcomes": false,
+  "satisfied": false,
+  "satisfaction_inferred": false,
+  "packet_ready_for_human_or_prereg_action": false
+}

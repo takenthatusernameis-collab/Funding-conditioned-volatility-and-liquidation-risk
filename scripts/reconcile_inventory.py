@@ -73,7 +73,7 @@ def inventory_index(inv):
         m = SYM_MONTH_RE.match(base)
         if not m:
             # try date-stamped file names like BTCUSDT-1h-2024-01-01.zip
-            dm = re.search(r"(?P<sym>[A-Z0-9]+USDT)-1h-(?P<year>20[0-9][0-9])-(?P<month>0[1-9]|1[0-2})-([0-9][0-9])\.zip", base)
+            dm = re.search(r"(?P<sym>[A-Z0-9]+USDT)-1h-(?P<year>20[0-9][0-9])-(?P<month>0[1-9]|1[0-2])-([0-9][0-9])\.zip", base)
             if not dm:
                 continue
             key = (dm.group("sym"), int(dm.group("year")), int(dm.group("month")))
@@ -109,13 +109,15 @@ def reconcile(cache_dir=CACHE, inventory_path=INVENTORY, out_path=None):
                 "month_label": f"{sym}_{year}_{month:02d}",
                 "inventory_entries": len(entries),
             })
-        else:
+        elif files and entries:
             matched.append({
                 "symbol": sym, "year": year, "month": month,
                 "month_label": f"{sym}_{year}_{month:02d}",
                 "cache_files": len(files),
                 "inventory_entries": len(entries),
             })
+        else:
+            continue
 
     result = {
         "artifact": "fclr_inventory_reconciliation",

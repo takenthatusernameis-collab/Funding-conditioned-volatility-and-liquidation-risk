@@ -1,0 +1,52 @@
+{
+  "artifact": "fclr016_v5_confirmatory_prereg_DRAFT",
+  "schema_version": 5,
+  "draft": true,
+  "frozen_before_outcomes": false,
+  "frozen": false,
+  "status": "DRAFT_NOT_FROZEN",
+  "promotable_to_frozen": false,
+  "confirmatory_claim_go": "NO_GO",
+  "confirmatory_outcomes_permitted": false,
+  "admissibility_complete": false,
+  "license_terms_resolved": false,
+  "no_confirmatory_outcomes": true,
+  "generated_utc": "20261108T213600Z",
+  "git_sha_recorded": "800f5fa5f",
+  "scope_basis": "verified local admissible cache 2024-04..09 (>=5 sym, >=3 non-overlapping 30d blocks)",
+  "frozen_scope": {
+    "window": "2024-04-01..2024-09-30",
+    "months": ["2024-04","2024-05","2024-06","2024-07","2024-08","2024-09"],
+    "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+    "kinds": ["fundingRate", "klines", "markPriceKlines", "indexPriceKlines", "premiumIndexKlines"],
+    "sample_days": "full"
+  },
+  "design_freeze": {
+    "status": "DRAFT_BLOCKED_AWARE",
+    "splits": "chronological walk-forward or fixed train/val/test boundaries by coverage; purge/embargo >= max forward horizon (>=168h); train-only normalization; no holdout outcome inspection.",
+    "features": "Gate 4 ablations A_rv_only/B_rv_signed/C_rv_abs/D_rv_signed_abs/E_rv_funding_trails; funding at/before prediction time; training-only normalization.",
+    "targets": "primary forward realized volatility/variance per frozen definition; secondary horizons pre-registered",
+    "metrics": "QLIKE primary; MAE/RMSE; block bootstrap CIs; Holm correction across pre-registered family",
+    "leakage_guards": ["purge_embargo", "train_only_normalization", "chronological_split", "no_future_leak"],
+    "stop_rule": "stop on unresolved leakage/provenance/license defect, failed guard, insufficient sample/blocks/instruments, or failed completeness audit; preserve NOT_SUPPORTED/INCONCLUSIVE/NO_GO; no threshold shopping."
+  },
+  "gates": {
+    "identity_cache_vs_binance_vision_hazards_zero": true,
+    "completeness_leakage_deterministic_pass": "PENDING",
+    "license_terms_resolved_verified": false,
+    "prereg_frozen_before_outcomes": false,
+    "fclr014_v5_guard_accepts": false,
+    "confirmatory_outcomes_permitted": false
+  },
+  "hard_blockers": ["human/legal terms unresolved (v5) - do not freeze/promote while all_go=false"],
+  "promotion_requirements": [
+    "human/legal reviewer provides verifiable resolved terms evidence (RESOLVED_VERIFIED, fabricated=false)",
+    "freeze before any outcome inspection with explicit freeze commit hash",
+    "pass all v5 admissibility guards (all_go=true)",
+    "fresh frozen prereg ID before confirmatory outcomes"
+  ],
+  "admissibility_refs_sha256": {},
+  "admissibility_refs_paths": {
+    "terms_evidence_unresolved": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_UNRESOLVED_20261108T204000Z.json"
+  }
+}
