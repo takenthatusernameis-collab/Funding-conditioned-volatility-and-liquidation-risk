@@ -10,13 +10,12 @@
 5. **Verified 2026-11-08T09:47Z (local, no network):** `python -m unittest discover tests -q` → **890 tests, 0 failures, OK**; `scripts/check_tracka_scope_registry_drift.py` → **101/101 PASS**; `scripts/tracka_resume_check.py` → `pass:true, 17 checks, network:false`; v5 CLI refusal parity (`--bogus` on `fclr016_v5_admissibility_report/promotion_dryrun`, `tracka_resume_gate/operator_report --bogus --json`) → parseable JSON/usage, exit!=0, no tracebacks, canonical outputs unchanged.
 6. **Measurable acceptance (no claims, no overwrite):** `python scripts/run_funding_ablations.py --include-cache --symbols BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT,BNBUSDT --start 2024-04-01 --end 2024-09-30 --out-suffix _v3_30d_verify` (no `_v3_30d` naming dependency needed for split selection; verify suffix only to avoid sealed overwrite) → **n_obs=12969, n_blocks=120, ok_30day_splits=4, E vs A point +0.488, 95% CI [-0.042, 1.197] spans 0, A_rv_only QLIKE 0.798, verdict DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST**. `_v3_30d_verify` outputs removed after verification. **Sealed artifacts unchanged** (SHA-256 verified): `run_manifest_funding_v3_30d.json=9fd540bd…`, `evaluation_summary_funding_v3_30d.md=774e4a9f…`.
 
-### Session checkpoint (2026-11-08T10:25:20Z — this session)
-- Verified baseline clean, no network: `python -m unittest discover tests -q` → **890 tests, 0 failures, OK**.
+### Session checkpoint (2026-11-08T10:31:00Z — verified this session, handoff refresh)
+- Verified baseline clean, no network: `python -m unittest discover tests -q` → **890 tests, 0 failures, OK** (ran 2026-11-08T10:31Z).
 - `scripts/check_tracka_scope_registry_drift.py` → **101/101 PASS**.
 - `scripts/tracka_resume_check.py` → `pass:true, 17 checks, network:false`.
-- v5 CLI refusal parity (`--bogus` on admissibility report + promotion dryrun, tracka resume gate / operator report --bogus --json) → parseable JSON/usage, exit!=0, no tracebacks, canonical outputs unchanged.
-- `run_funding_ablations.py --include-cache ... --start 2024-04-01 --end 2024-09-30 --out-suffix _v3_30d_verify` → n_obs=12969, n_blocks=120, E vs A point +0.488, 95% CI [-0.042, 1.197] spans 0, A_rv_only QLIKE 0.798, verdict DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST. Verify outputs removed; sealed artifacts unchanged.
-- Working tree clean after revert of incidental timestamp churn (no code delta this session; handoff refresh only).
+- Prior session (2026-11-08T10:25Z) verified v5 CLI refusal parity (`--bogus`) parseable/exit!=0/no traceback and Gate 4 v3_30d_verify: n_obs=12969, n_blocks=120, E vs A +0.488, 95% CI [-0.042,1.197] spans 0, A_rv_only QLIKE 0.798, PILOT/INCONCLUSIVE. `_v3_30d_verify` outputs removed; sealed artifacts SHA-256 unchanged.
+- Working tree clean at session start; **no code delta this session — durable handoff verified/currentized only**.
 - Bottlenecks confirmed as genuine hard stops (not inefficient loops): Track A/H004 2026-11 = 404 (no re-probe loop); v5 `all_go=false`, terms `EXPLICIT_BLOCKER_UNRESOLVED` (no fabricated terms, no confirmatory outcomes while blocked). Resume triggers only (see below).
 
 ### Current evidence state (honest; preserve nulls)
