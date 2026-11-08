@@ -1,7 +1,7 @@
 # Evaluation Summary - Funding Ablations (Gate 4, multi-split pilot)
 
-**Generated:** 2026-11-08T08:55:08Z
-**Git SHA:** f258f7bde1f7b715244bc73ee6db1fd2ad558a70
+**Generated:** 2026-11-08T09:27:24Z
+**Git SHA:** a438a3aebf82945a8afc2e6c98ba4ae673a11e41
 **Pre-registration:** `research_state/pre_registration_gate4_funding_multisplit_20261107.md` (frozen before outcomes)
 **Scope:** BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, 2024-01-01 to 2024-03-31, 24h forward RV, 3 pre-registered walk-forward splits
 **Model:** direct-variance OLS HAR (target = forward realized VARIANCE; train-only normalization per split; no log/exp transform)
