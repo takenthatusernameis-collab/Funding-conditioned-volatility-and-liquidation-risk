@@ -3,8 +3,8 @@ Archived. State at archive: 935 tests OK, 108/108 drift, resume pass 17, fclr023
 
 ---
 
-## NEXT SESSION INITIAL TASK — 2026-11-08T18:46:33Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-157)
-**SESSION ENTRY VERIFIED 2026-11-08T18:46:33Z (Glyph Cluster, automated audit):** `AGENT_HANDOFF.md` confirmed as sole durable handoff (`./AGENT_HANDOFF.md` only; no competing root/plan files). Working tree clean after restoring `research_state/ironflow_fastpath_cache.json` test side effect. No blockers to heavy Track C work; Track A remains blocked/no trigger (do not re-probe absent months). Execute P0 heavy objectives below — **no status-only sessions**.
+## NEXT SESSION INITIAL TASK — 2026-11-08T18:55:54Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-157)
+**SESSION ENTRY VERIFIED 2026-11-08T18:55:54Z (Glyph Cluster, automated audit):** `AGENT_HANDOFF.md` confirmed as sole durable handoff (`./AGENT_HANDOFF.md` only; no competing root/plan files). Working tree clean after restoring `research_state/ironflow_fastpath_cache.json` test side effect. No blockers to heavy Track C work; Track A remains blocked/no trigger (do not re-probe absent months). Execute P0 heavy objectives below — **no status-only sessions**.
 
 **Task ID:** FCLR-NEXT-157 (P0, heavy, unblocked, measurable) — repo-name priority: **Track C / Gate 4 funding-conditioned volatility forecasting FIRST** (local admissible Binance kline+funding cache; measurable, unblocked, heavy). **Track A liquidation risk BLOCKED/no trigger** (Hyperliquid `data/events|fills` 2026-11 = 404, `data_through=2026-10`; do **NOT** re-probe absent months in a loop) — **never conflate observed vs modeled (Track B)**. No trading/orders; no fabricated data/terms/reviews; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff — no competing handoff/status files.**
 
