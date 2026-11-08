@@ -1,4 +1,4 @@
-## Initial Task Message (2026-11-08T07:32Z, git HEAD `5c3010bc6`) — SINGLE DURABLE HANDOFF / Next Agentic Session
+## Initial Task Message (2026-11-08T07:33Z, git HEAD `1b857882c`) — SINGLE DURABLE HANDOFF / Next Agentic Session
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`. **Repo-name priority:** (1) funding-conditioned volatility forecasting, (2) liquidation risk (Track A observed / Track B modeled — never conflated). **Mission:** empirical/research only; no trading; no fabricated data/terms; chronological leakage-resistant OOS only; sealed holdouts untouched; no `.github/workflows` edits; no credentials/paid/manual/API-key/bypass sources. **This file is the single durable handoff — do not create competing handoff files.**
 
