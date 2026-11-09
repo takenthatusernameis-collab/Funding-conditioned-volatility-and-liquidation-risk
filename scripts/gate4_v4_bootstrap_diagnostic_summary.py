@@ -337,7 +337,14 @@ def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any
         "enrichment_meta": enrich_meta,
     }
     if backfill_trace:
-        row["backfill_trace"] = backfill_trace
+        rid = f"{source}::{section}::{name}"
+        stamped = []
+        for e in backfill_trace:
+            if isinstance(e, dict) and not e.get("row_id"):
+                e = dict(e)
+                e["row_id"] = rid
+            stamped.append(e)
+        row["backfill_trace"] = stamped
     return row
 
 

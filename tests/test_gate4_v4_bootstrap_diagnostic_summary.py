@@ -431,6 +431,98 @@ class TestBootstrapDiagnosticSummary(unittest.TestCase):
             rs_files = sorted(p.relative_to(root).as_posix() for p in (root / "research_state").rglob("*") if p.is_file())
             self.assertEqual(rs_files, ["research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_x.json"])
 
+    def test_backfill_coverage_summary_counts_and_refusal_first(self):
+        # Row missing degenerate/inference_ok -> backfill can derive eff_blocks/ci_valid but must refuse gates
+        ci_missing = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci_missing)
+        row = s.extract_contrast_row("a.json", "sec", "c1", out, backfill_trace=trace)
+        # Row with explicit gates already present -> complete
+        ci_ok = {"point": 0.1, "ci_low": -0.2, "ci_high": 0.4, "n_obs": 50, "n_blocks": 5,
+                 "degenerate": False, "ci_valid": True, "inference_ok": True, "effective_block_count": 5}
+        row_ok = s.extract_contrast_row("a.json", "sec", "c2", ci_ok)
+        coverage = s.backfill_coverage_summary([row, row_ok])  # uses per-row stamped trace
+        self.assertEqual(coverage["rows_total"], 2)
+        self.assertEqual(coverage["rows_already_complete"], 1)
+        self.assertEqual(coverage["rows_missing_diagnostic_fields"], 1)
+        self.assertEqual(coverage["rows_still_missing_after_backfill"], 1)
+        self.assertEqual(coverage["rows_with_backfilled_fields"], 1)
+        self.assertIn("effective_block_count", coverage["derivable_fields"])
+        self.assertIn("ci_valid", coverage["derivable_fields"])
+        self.assertIn("degenerate", coverage["never_inferrable_fields"])
+        self.assertIn("inference_ok", coverage["never_inferrable_fields"])
+        self.assertGreaterEqual(coverage["refused_field_counts"].get("degenerate", 0), 1)
+        self.assertGreaterEqual(coverage["refused_field_counts"].get("inference_ok", 0), 1)
+        rr = coverage["residual_rows"][0]
+        self.assertEqual(rr["row_id"], "a.json::sec::c1")
+        self.assertIn("degenerate", rr["still_missing_fields"])
+        self.assertIn("inference_ok", rr["still_missing_fields"])
+        self.assertFalse(rr["claimable_excludes_zero"])
+
+    def test_strict_remediation_list_never_infers_gates_and_cites_reasons(self):
+        ci_missing = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci_missing)
+        row = s.extract_contrast_row("b.json", "sec", "c", out, backfill_trace=trace)
+        coverage = s.backfill_coverage_summary([row])  # uses per-row stamped trace
+        rem = s.strict_remediation_list(coverage, source_artifacts=[Path("b.json")])
+        self.assertTrue(rem)
+        fields = {e["field"] for e in rem}
+        self.assertIn("degenerate", fields)
+        self.assertIn("inference_ok", fields)
+        for e in rem:
+            if e["field"] in ("degenerate", "inference_ok"):
+                self.assertIn("not inferrable from CI width", e["reason"])
+                self.assertIn("explicit saved diagnostic evidence", e["remediation"])
+                self.assertFalse(e["claimable_excludes_zero"])
+                self.assertTrue(e["ci_excludes_zero"])
+                self.assertIn("b.json", e["source_artifacts"])
+
+    def test_backfill_strict_cli_emits_remediation_and_machine_json_no_source_mutation(self):
+        stab = {
+            "label": s.LABEL,
+            "variants": {"V1_primary": {"contrasts_vs_A": {"E_rv_funding_trails": {
+                "point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 12,
+            }}}},
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "research_state" / "gate4_v4_exploratory_stab").mkdir(parents=True)
+            art = root / "research_state" / "gate4_v4_exploratory_stab" / "gate4_v4_exploratory_stab_x.json"
+            art.write_text(json.dumps(stab), encoding="utf-8")
+            before = art.read_text("utf-8")
+            outp = root / "results" / "strict.md"
+            rc = s.main(["--repo-root", str(root), "--backfill-strict", "--out", str(outp)])
+            self.assertEqual(rc, 0)
+            self.assertEqual(art.read_text("utf-8"), before)
+            txt = outp.read_text("utf-8")
+            self.assertIn("Backfill coverage summary (machine-checkable)", txt)
+            self.assertIn(f"backfill_coverage_rules_version: `{s.BACKFILL_COVERAGE_RULES_VERSION}`", txt)
+            self.assertIn("MISSING_DIAGNOSTIC_FIELDS remediation list", txt)
+            self.assertIn(f"backfill_strict_rules_version: `{s.BACKFILL_STRICT_RULES_VERSION}`", txt)
+            self.assertIn("degenerate is not inferrable from CI width", txt)
+            self.assertIn("inference_ok is not inferrable from CI width", txt)
+            self.assertIn("never infers degenerate/inference_ok" if False else "refusal-first", txt)
+            rem_path = outp.with_name(outp.name.replace("_backfill_strict_", "_missing_diagnostic_fields_") + ".json")
+            self.assertTrue(rem_path.exists(), f"machine-readable remediation JSON missing: {rem_path}")
+            rem = json.loads(rem_path.read_text("utf-8"))
+            self.assertTrue(isinstance(rem, list) and len(rem) >= 2)
+            self.assertTrue(all(e.get("field") in ("degenerate", "inference_ok", "diagnostic_gates_residual") for e in rem))
+            self.assertTrue(all(e.get("claimable_excludes_zero") is False for e in rem if e.get("ci_excludes_zero") is True))
+            rs_files = sorted(p.relative_to(root).as_posix() for p in (root / "research_state").rglob("*") if p.is_file())
+            self.assertEqual(rs_files, ["research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_x.json"])
+
+    def test_backfill_strict_preserves_claimability_never_fabricates(self):
+        ci = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci)
+        row = s.extract_contrast_row("s.json", "sec", "c", out, backfill_trace=trace)
+        coverage = s.backfill_coverage_summary([row])  # uses per-row stamped trace
+        rem = s.strict_remediation_list(coverage)
+        self.assertTrue(row["ci_excludes_zero"])
+        self.assertFalse(row["non_degenerate_excludes_zero_claimable"])
+        self.assertTrue(row["missing_diagnostic_fields"])
+        self.assertEqual(coverage["rows_missing_diagnostic_fields"], 1)
+        self.assertTrue(any(e["field"] == "degenerate" for e in rem))
+        self.assertTrue(any(e["field"] == "inference_ok" for e in rem))
+
 
 if __name__ == "__main__":
     unittest.main()
