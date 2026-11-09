@@ -37,8 +37,11 @@ def _toy():
         }, index=pd.MultiIndex.from_product([[sym], idx], names=["symbol", "timestamp"]))
         parts.append(df)
     panel = pd.concat(parts).sort_index()
-    n = len(panel) // 2
-    return panel.iloc[:n], panel.iloc[n:]
+    # Split by time (first 40 hours for train, last 40 for test) for each symbol
+    split_ts = idx[40]
+    train = panel.loc[panel.index.get_level_values("timestamp") < split_ts]
+    test = panel.loc[panel.index.get_level_values("timestamp") >= split_ts]
+    return train, test
 
 
 class TestGate4V4ExploratoryStab(unittest.TestCase):
@@ -50,7 +53,7 @@ class TestGate4V4ExploratoryStab(unittest.TestCase):
     def test_train_only_winsor_uses_train_bounds(self):
         rng = np.random.default_rng(0)
         Xtr = rng.normal(0, 1, (200, 3))
-        Xte = rng.normal(0, 5, (50, 3))  # outliers in test must be clipped to train bounds
+        Xte = rng.normal(0, 5, (50, 3))
         Xtrw, Xtew, meta = train_only_winsor(Xtr, Xte, 0.05, 0.95)
         self.assertEqual(meta["bounds_from"], "train_only")
         lo = np.nanquantile(Xtr, 0.05, axis=0)
@@ -73,7 +76,7 @@ class TestGate4V4ExploratoryStab(unittest.TestCase):
         fcols = ["rv_trail_24", "rv_trail_168", "rv_trail_6", "funding_signed"]
         p, diags = fit_predict_variant(train, test, fcols, "V3_scale_ridge_target_floor")
         fin = p[np.isfinite(p)]
-        self.assertTrue((fin > 0).all())  # target-scale floor > 0 on this toy
+        self.assertTrue((fin > 0).all())
         ok = [d for d in diags if d["status"] == "OK"][0]
         self.assertIn("train_target_median", ok["floor_rule"])
         self.assertIn("trace(XtX)/k", ok["ridge_rule"])
@@ -90,14 +93,13 @@ class TestGate4V4ExploratoryStab(unittest.TestCase):
         payload = {
             "variants": {
                 "V1_primary": {"contrasts_vs_A": {"E_rv_funding_trails": {"point": 0.5, "ci_low": -0.1, "ci_high": 1.0}, "B_rv_signed": {"point": 10, "ci_low": 1, "ci_high": 20}}, "split_results": [{"split_id": 3, "ablations": {"B_rv_signed": {"metrics": {"qlike": 45.0}}}}]},
-                "V3_scale_ridge_target_floor": {"contrasts_vs_A": {"E_rv_funding_trails": {"point": 0.4, "ci_low": -0.2, "ci_high": 0.9}, "B_rv_signed": {"point": 2.0, "ci_low": -1, "ci_high": 5}}}, "split_results": [{"split_id": 3, "ablations": {"B_rv_signed": {"metrics": {"qlike": 3.0}}}}]},
+                "V3_scale_ridge_target_floor": {"contrasts_vs_A": {"E_rv_funding_trails": {"point": 0.4, "ci_low": -0.2, "ci_high": 0.9}, "B_rv_signed": {"point": 2.0, "ci_low": -1, "ci_high": 5}}, "split_results": [{"split_id": 3, "ablations": {"B_rv_signed": {"metrics": {"qlike": 3.0}}}}]},
             },
             "loo_e_vs_a_v3": {"all": {"point": 0.4, "ci_low": -0.2, "ci_high": 0.9}, "drop_BTCUSDT": {"point": 0.1, "ci_low": -0.1, "ci_high": 0.3}},
         }
         txt = make_interpretation(payload)
         self.assertIn("EXPLORATORY", txt)
         self.assertIn("not confirmatory", txt.lower())
-
 
 
 if __name__ == "__main__":
