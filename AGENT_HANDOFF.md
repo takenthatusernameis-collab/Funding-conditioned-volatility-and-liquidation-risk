@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated:** 2026-11-09T01:37:01Z
+**Generated:** 2026-11-09T02:37:42Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Priority (reconciled):** Repo P0 = Phase 3 Gate 4 funding-conditioned volatility ablations using local data (measurable, unblocked). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn.**
-**Verified this session (baseline):** git clean at start (758eee502 HEAD); Gate 4 v4 EXPLORATORY ablation executed previously (exit 0, NOT CONFIRMATORY/NOT PROMOTABLE) on local 2024-04..09 cache with versioned artifacts under `research_state/gate4_v4_exploratory_exec/` satisfying Track A root bound (172) — no check weakened; `python -m unittest discover tests` → Ran 950 tests OK; `tracka_resume_check.py` → pass:true, 17/17 checks, root_md_json_bounded 171/172 pass, probes==2, network:false, writes_real_research_state:false; `tracka_resume_gate.py --json` → drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false. Local 2024-04..09 cache present; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
+**Priority (reconciled):** Repo P0 = Phase 3 Gate 4 funding-conditioned volatility work using local admissible data (measurable, unblocked). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn.**
+**Verified this session (baseline/evidence):** Gate 4 v4 EXPLORATORY diagnostic executed (exit 0) with versioned artifacts explaining B/D split-3 instability + E vs A LOO/robustness (all **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE**). `python -m unittest discover tests` → **Ran 954 tests in ~111s — OK** (includes 3 new diagnostic tests). `tracka_resume_check.py` → **pass:true, 17/17 checks, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)**. `tracka_resume_gate.py --json` → **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false**. Scope-registry drift fixed for added diagnostic script (registered as `track_c_sealed_volatility`; no Track A outcome reads/claims, no network). Local 2024-04..09 cache used; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
 
 ---
 
@@ -11,75 +11,78 @@
 
 **You MUST execute measurable research/engineering progress in this session. Do not probe absent Track A months (2026-11..2027-02). Do not add workflows/schedulers/pollers/wrappers/controllers. Do not touch `.github/workflows`.**
 
-### Campaign: Gate 4 v4 EXPLORATORY follow-up — diagnose instability + prereg-scoped robustness (local 2024-04..09) — produce versioned, auditable artifacts
+### Campaign: Gate 4 v4 follow-through — decide/execute next prereg-scoped EXPLORATORY modeling fix OR formalize NO-GO (local 2024-04..09) — produce versioned, auditable artifacts
 
-**Intent (per frozen prereg):** `research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` is `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true`. **All outputs MUST be labeled EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE** (sealed-anchor conflict with FCLR002/003/013 domain family). Never claim confirmatory GO or economic value.
+**Intent/constraints (binding):** `research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` is `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true`. Sealed-anchor conflict with FCLR002/003/013 domain family applies. **All outputs MUST be labeled EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.** Never claim confirmatory GO, economic value, or promotion. **Do not replace prereg A–E contrasts or change confirmatory estimands.** Any modeling variant is an EXPLORATORY comparison only, versioned separately.
 
-**Completed this session (do not rerun identically; build on it):** `GATE4-FUND-VOL-ABLATIONS-MSPLIT-V4-30D-EXPLORATORY-20261109T004003Z` (SHA 2f21b1dd4, 2026-11-09T00:40:03Z). Exit 0. Primary E vs A ΔQLIKE (alt−base; negative=better) **+0.4879, 95% block CI [-0.04216, 1.19734] (spans 0, n_obs=12969, n_blocks=120)** — **INCONCLUSIVE, no improvement claim**. Data sufficiency met (5 instruments, 4×30d splits). B/D show extreme split instability (split 3 B vs A Δ=44.69, D vs A Δ=10.33); E vs A inconclusive across block 12/24/48h. Artifacts: `results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md`, `research_state/gate4_v4_exploratory_exec/evaluation_summary_funding_v4_exploratory_exec_20261109T004003Z.md`, `research_state/gate4_v4_exploratory_exec/run_manifest_funding_v4_exploratory_exec_20261109T004003Z.json`, `research_state/gate4_v4_exploratory_exec/gate4_v4_exploratory_exec_20261109T004003Z.log`. FCLR-015 manifest SHA256 `3e6ac26ce645b8b2f0c2fb495288c4880aa74b5b7e457e1e7c88fb7eb3f5406c`.
+**Completed (do not rerun identically; build on it):**
+- Exec `20261109T004003Z` (SHA `2f21b1dd4`): E vs A ΔQLIKE +0.4879, 95% block CI [-0.04216,1.19734] (spans 0, n=12969, 120 blocks) — **INCONCLUSIVE**. B/D unstable (split 3 B vs A Δ=44.69, D vs A Δ=10.33). Artifacts: `results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md`, `research_state/gate4_v4_exploratory_exec/*`.
+- Diag `20261109T021456Z` (SHA `2f21b1dd4`): reproduced E vs A +0.487902 CI [-0.042161,1.197338]. **Root-cause evidence (split 3, 2024-08-13..2024-09-11):** funding-augmented direct-variance OLS extrapolates to negative/near-zero variance under small target scale + tiny ridge (`1e-10*I`) + train-only standardization; floor-at-zero removes invalids but remaining near-zero positives and concentrated blowups dominate QLIKE. B BTC QLIKE mean 225.80 (raw_neg 89/720, raw_min -0.000527); D SOL 56.34 / BTC 1.68 with many raw negatives and larger `coef_l2`. E has no catastrophic single-instrument blowup but many raw negatives (622) and is worse than A. **E vs A LOO (EXPLORATORY):** all +0.488 inconclusive; drop XRP attenuates to +0.111 CI [-0.129,0.358] (inconclusive); other drops make harm CI>0; no LOO shows improvement. **Naive stabilized comparison (strong ridge + pred_floor=1e-8, EXPLORATORY only, NOT a prereg replacement) catastrophically worse** (Δ +9213.35) — do not use. Artifacts: `results/fclr_heavy001/gate4_v4_exploratory_diag_20261109T021456Z.md`, `research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json`, `scripts/run_gate4_v4_exploratory_diag.py`, `tests/test_gate4_v4_exploratory_diag.py`.
 
-**Execute (versioned suffix, e.g. `_v4_exploratory_diag_20261109T####Z`; do not overwrite prior exec outputs):**
-1. **Read** prior run manifest/evaluation + `scripts/run_funding_ablations.py` and src (e.g., `src/features/funding.py`, `src/models/baselines.py`) to understand B/D/E feature construction, direct-variance OLS HAR, clipping/bounds, and why B/D explode on split 3.
-2. **Diagnose instability deterministically (no fake data):** inspect per-split/per-instrument predictions/loss contributions if supported; otherwise add a small, tested diagnostic path (versioned script or flag) that emits EXPLORATORY diagnostics (coefficient magnitudes, prediction bounds, NaN/inf counts, per-instrument ΔQLIKE) without changing primary estimands. Run targeted unit tests for any new code.
-3. **Run prereg-scoped exploratory robustness only if cheap and justified:** instrument leave-one-out for E vs A; confirm train-only normalization/last-known funding alignment; optionally stabilized variant comparison labeled EXPLORATORY (do NOT replace A–E prereg contrasts; do NOT claim confirmatory improvement).
-4. **Write a concise versioned diagnostic note** (`results/fclr_heavy001/gate4_v4_exploratory_diag_<ts>.md` or `research_state/...`) with: commands, git SHA, tables, root-cause hypotheses for B/D split-3 blowup, E vs A interpretation, and explicit NOT CONFIRMATORY/NOT PROMOTABLE verdict.
-5. **Tests:** `python -m unittest discover tests` must remain **>=950 OK** (fix regressions you introduce). Re-run `python scripts/tracka_resume_check.py` and `python scripts/tracka_resume_gate.py --json` — Track A invariants must hold (17/17 pass, probes==2, root bound satisfied, BLOCKED expected, `outcomes_inspected:false`).
-6. **Root-bound bottleneck:** `tracka_resume_check` enforces `root_md_json_bounded <= 172`. Place new Gate 4 exploratory artifacts under subdirs (e.g., `research_state/gate4_v4_exploratory_exec/`, `research_state/gate4_v4_exploratory_diag/`, `results/fclr_heavy001/`) rather than adding root md/json files. **Do not weaken the bound/check.**
-7. **Update this handoff** (§1–§10) with exact changes, commands, results, uncovered issues, and the next actionable task.
+**Execute next (versioned suffix, e.g. `_v4_exploratory_stab_20261109T####Z`; do not overwrite prior exec/diag outputs):**
+1. **Read** `scripts/run_funding_ablations.py`, `scripts/run_gate4_v4_exploratory_diag.py`, diag JSON, `src/eval/walkforward.py`, and `src/volatility/eval.py`. Confirm E spec columns match prereg intent (`funding_signed, funding_abs, funding_pct_{24,72,168}, funding_z_{24,72,168}` + RV trails) and that no target leakage exists.
+2. **Implement a principled EXPLORATORY stabilized comparison (not replacing A–E):** candidates to evaluate deterministically, each labeled EXPLORATORY and compared against original A/E only as diagnostics — e.g. (a) larger *scale-aware* ridge (calibrated to `trace(X'X)/k` or train-target variance, fixed rule prereg-scoped for this exploratory branch), (b) prediction floor at a small fraction of train target mean/variance scale (not 1e-8 absolute) with QLIKE-valid handling documented, (c) coefficient/fit diagnostics by split/instrument, (d) optional winsorization of standardized funding features using **train-only** quantiles if and only if leakage-safe and reported. **Do not claim improvement; report per-split, pooled CI, LOO, and any remaining blowups.**
+3. **Run targeted unit tests** for any new code (synthetic, no network, no real research_state writes), then `python -m unittest discover tests` must remain **>=954 OK** (fix regressions you introduce).
+4. **Write versioned artifacts** under subdirs (`research_state/gate4_v4_exploratory_diag/` or a new `..._stab/`, `results/fclr_heavy001/`) with commands, git SHA, tables, explicit NOT CONFIRMATORY/NOT PROMOTABLE verdict. **Do not weaken `tracka_resume_check` root md+json bound (172) or any Track A invariant.**
+5. **Re-run** `python scripts/tracka_resume_check.py` and `python scripts/tracka_resume_gate.py --json` — expect 17/17 pass, probes==2, root bound satisfied, BLOCKED with `outcomes_inspected:false`.
+6. **If stabilized exploratory comparison still shows no credible improvement / remains unstable:** produce a concise versioned **EXPLORATORY NO-GO note** for funding ablations on this local slice (not a confirmatory claim; no sealed-anchor reuse) and pivot to the most measurable open Gate 4/Track C-adjacent local engineering task supported by tests. **Do not start Track A probing or Track C/B sealed work.**
+7. **Update this handoff** (§1–§10) with exact changes, commands, results, artifact paths, uncovered issues, and the next unfinished task.
 
-**If Gate 4 is blocked by real code/data issues:** document with evidence, then pivot to **Track A G1-G3 hardening gaps**: add next hardening tests (tmp-isolated, no network/parquet/outcome reads, no real research_state writes) covering edge cases across resume_check/gate/operator; keep invariants green.
-
-**Acceptance for next session:** at least one of (A) versioned Gate 4 v4 exploratory diagnostic/robustness artifacts explaining B/D instability and E vs A with NOT CONFIRMATORY labeling, OR (B) new hardening tests merged-in-repo with full suite green and Track A invariants green — with exact evidence in this handoff.
+**Acceptance for next session:** at least one of (A) versioned EXPLORATORY stabilized-comparison artifacts with full diagnostics and NOT CONFIRMATORY labeling, (B) versioned EXPLORATORY NO-GO note with evidence, or (C) new tested hardening/engineering work with suite green and Track A invariants green — with exact evidence in this handoff.
 
 ---
 
 ## 1. WHAT CHANGED AND WHY (this session)
-- **Executed Gate 4 v4 EXPLORATORY ablation (measurable progress):** ran `scripts/run_funding_ablations.py` (exit 0) for 2024-04-01..2024-09-30, 5 symbols, `--include-cache --split-design v3_30d`, v4 prereg `research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json`. Produced versioned run manifest/evaluation/log + results note, all labeled NOT CONFIRMATORY/NOT PROMOTABLE. Primary E vs A ΔQLIKE +0.4879, 95% CI [-0.04216,1.19734] (spans 0) — inconclusive. Data sufficiency met (4×30d splits). B/D unstable (split 3 blowups); flagged honestly.
-- **Bottleneck removed (root bound, no weakening):** `tracka_resume_check.root_md_json_bounded` cap is 172 and new exec artifacts initially made root count 173 (failing check). Moved exec run manifest/evaluation/log into `research_state/gate4_v4_exploratory_exec/` (kept results note in `results/fclr_heavy001/`); updated paths in results note. `resume_check` now passes; `resume_gate` remains BLOCKED/expected. **Did not change bound or checks.**
-- **Verified invariants after changes:** full suite 950/950 OK; Track A 17/17, probes==2, network:false, writes_real_research_state:false; gate BLOCKED, `outcomes_inspected:false`.
-- **No Track A re-probing, no workflows/controllers added, no Track C/B scope change.**
+- **Executed Gate 4 v4 EXPLORATORY diagnostic/robustness (measurable):** added `scripts/run_gate4_v4_exploratory_diag.py` + `tests/test_gate4_v4_exploratory_diag.py`; ran diag on local 2024-04..09 cache (`v3_30d`, 5 symbols, FCLR-015-verified slice context per v4 prereg). Produced versioned JSON + note explaining B/D split-3 instability (negative/near-zero variance extrapolation, QLIKE sensitivity, instrument blowups) and E vs A LOO/alignments — all labeled **NOT CONFIRMATORY/NOT PROMOTABLE**.
+- **Fixed scope-registry drift introduced by new script:** registered `run_gate4_v4_exploratory_diag.py` in `research_state/tracka_script_scope_registry.json` and `tests/test_tracka_hardening_117.py` embedded registry as `track_c_sealed_volatility` (no Track A Hyperliquid guarded liquidation outcome reads/claims, no network). Fixed `script_count` metadata in canonical registry. Removed an accidentally-created duplicate `scripts/gate4_v4_exploratory_diag.py` that caused registry ambiguity.
+- **Bottlenecks avoided (no weakening):** placed diag artifacts under `research_state/gate4_v4_exploratory_diag/` and `results/fclr_heavy001/`; root md+json remains 2 files / bound satisfied (171/172 via `tracka_resume_check`).
+- **No Track A re-probing, no workflows/controllers added, no Track C/B scope change, no `.github/workflows` edits.**
 
 ## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES
 | Check | Command | Result |
 |---|---|---|
-| Deps sanity | `python -c "import pandas,numpy,scipy; print('deps ok')"` | `deps ok` |
-| Ablation tests | `python -m unittest tests.test_funding_ablations -v` | **7 tests OK** |
-| **Gate 4 v4 exploratory exec** | `python scripts/run_funding_ablations.py --symbols BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT,BNBUSDT --start 2024-04-01 --end 2024-09-30 --include-cache --split-design v3_30d --out-suffix _v4_exploratory_exec_20261109T004003Z --experiment-id GATE4-FUND-VOL-ABLATIONS-MSPLIT-V4-30D-EXPLORATORY-20261109T004003Z --pre-registration research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` (tee log) | **Exit 0**. `DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (E vs A CI spans 0)`. Aggregate QLIKE A=0.7983,B=12.1836,C=0.8460,D=3.4493,E=1.2417. E vs A Δ=+0.4879 CI [-0.04216,1.19734], n=12969, blocks=120. |
-| Full suite (final) | `python -m unittest discover tests` | **Ran 950 tests in ~99s — OK** |
-| Track A resume check | `python scripts/tracka_resume_check.py` | `pass:true`, 17/17 checks, `network:false`, `probes==2`, `writes_real_research_state:false`, `root_md_json_bounded` pass (171/172) |
-| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | `drift_preflight.pass:true`, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
+| New diag tests | `python -m unittest tests.test_gate4_v4_exploratory_diag -v` | **3 tests OK** |
+| **Gate 4 v4 exploratory diag** | `python scripts/run_gate4_v4_exploratory_diag.py --out-suffix 20261109T021456Z --git-sha 2f21b1dd4` | **Exit 0**. E vs A Δ=+0.487902 CI [-0.042161,1.197338], n=12969. LOO all/drop_BTC/drop_ETH/drop_SOL/drop_XRP/drop_BNB points +0.488/+0.634/+0.504/+1.136/+0.111/+1.938 (no improvement). Naive stabilized comparison catastrophically worse (+9213.35, EXPLORATORY only). |
+| Scope registry drift (intermediate fix) | `python scripts/check_tracka_scope_registry_drift.py` | **PASS** after registering new script |
+| Full suite (final) | `python -m unittest discover tests` | **Ran 954 tests in ~111s — OK** |
+| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true**, 17/17 checks, `network:false`, `probes==2`, `writes_real_research_state:false`, `root_md_json_bounded` pass (171/172) |
+| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **drift_preflight.pass:true**, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
 | Path | Change |
 |---|---|
-| `results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md` | **Added.** EXPLORATORY exec note (command, SHA, manifest SHA256, splits/samples, metrics/CIs, instability, NOT CONFIRMATORY verdict). |
-| `research_state/gate4_v4_exploratory_exec/evaluation_summary_funding_v4_exploratory_exec_20261109T004003Z.md` | **Added (moved under subdir for root-bound).** Script-generated evaluation summary. |
-| `research_state/gate4_v4_exploratory_exec/run_manifest_funding_v4_exploratory_exec_20261109T004003Z.json` | **Added (moved under subdir for root-bound).** Machine-readable manifest (splits, metrics, CIs, sensitivity, per-split deltas, sufficiency). |
-| `research_state/gate4_v4_exploratory_exec/gate4_v4_exploratory_exec_20261109T004003Z.log` | **Added (moved under subdir for root-bound).** Full stdout log. |
-| `research_state/ironflow_fastpath_cache.json` | Modified by local tooling during checks; **do not commit** (cache). |
+| `scripts/run_gate4_v4_exploratory_diag.py` | **Added.** EXPLORATORY diagnostic/robustness runner (local cache only; per-split/instrument diags, B/D instability evidence, E vs A LOO, alignment checks). |
+| `tests/test_gate4_v4_exploratory_diag.py` | **Added.** 3 synthetic, no-network unit tests for diag helpers. |
+| `research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json` | **Added.** Machine-readable diagnostics (EXPLORATORY). |
+| `results/fclr_heavy001/gate4_v4_exploratory_diag_20261109T021456Z.md` | **Added.** Versioned diagnostic note with commands, tables, root-cause hypotheses, LOO, NOT CONFIRMATORY verdict. |
+| `research_state/tracka_script_scope_registry.json` | **Modified.** Registered `run_gate4_v4_exploratory_diag.py` as `track_c_sealed_volatility`; updated `script_count`. |
+| `tests/test_tracka_hardening_117.py` | **Modified.** Embedded registry entry added for `run_gate4_v4_exploratory_diag.py` to keep sweep/reconciliation tests consistent. |
+| `scripts/gate4_v4_exploratory_diag.py` | **Deleted (cleanup).** Accidental duplicate removed; canonical is `run_gate4_v4_exploratory_diag.py`. |
+| `research_state/ironflow_fastpath_cache.json` | Modified by local tooling/checks; **do not commit** (cache). |
 | `AGENT_HANDOFF.md` | Replaced with this single durable, timestamped handoff + mandatory heavy next-task campaign. |
 
 ## 4. CURRENT STATE OF EACH RESEARCH GATE
 | Gate | Status | Evidence / Notes |
 |---|---|---|
-| **Gate 1 (Data Loadable)** | Track A: **BLOCKED** (no admissible unauth liquidation labels). Track C: PASSED (historical) / sealed. Gate 4 exploratory: local 2024-04..09 cache present (FCLR-015). | `track_a_deadend_map.md`; `fclr015_input_manifest_2024_04_09...` SHA256 `3e6ac26c...5406c`; `research_state/data_cache/*_2024_04..09` |
+| **Gate 1 (Data Loadable)** | Track A: **BLOCKED** (no admissible unauth liquidation labels). Track C: PASSED (historical) / sealed. Gate 4 exploratory: local 2024-04..09 cache present (FCLR-015). | `track_a_deadend_map.md`; FCLR-015 manifest SHA256 `3e6ac26c...5406c`; `research_state/data_cache/*_2024_04..09` |
 | **Gate 2 (Protocol Frozen)** | PASSED (Track C FCLR-001 context); Gate 4 v4 prereg **FROZEN_BEFORE_OUTCOMES** but `confirmatory_claim_go=NO_GO`, exploratory-only on 2024-04..09 due to sealed-anchor conflict. | `pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` |
 | **Gate 3 (RV-only Baseline)** | Track C: PASSED historical / **INCONCLUSIVE forward** (5-day test window, 0 non-overlapping 30d blocks). | `evaluation_summary_FCLR-012-V.md` |
-| **Gate 4 (Incremental Funding/Price)** | **EXPLORATORY EXECUTED (INCONCLUSIVE, NOT CONFIRMATORY)** — v4 20261109T004003Z: E vs A ΔQLIKE +0.488 CI [-0.042,1.197] spans 0; B/D unstable (split-3 blowups). **Next:** diagnose instability / prereg-scoped robustness (EXPLORATORY), versioned artifacts. | `results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md`; `research_state/gate4_v4_exploratory_exec/*` |
-| **Forecast Gate** | **NOT ELIGIBLE** (Track C forward Gate 3 inconclusive; Track A blocked). No confirmatory promotion from v4 exploratory run. | frontier/negative results |
+| **Gate 4 (Incremental Funding/Price)** | **EXPLORATORY EXEC+DIAG (INCONCLUSIVE, NOT CONFIRMATORY/NOT PROMOTABLE)** — E vs A CI spans 0 and instrument-sensitive (no LOO improvement). B/D split-3 instability diagnosed (negative/near-zero extrapolation, QLIKE sensitivity; BTC/SOL blowups). Naive floor+strong ridge made it catastrophically worse. **Next:** principled EXPLORATORY stabilized comparison (scale-aware, leakage-safe) or formal EXPLORATORY NO-GO note. | `results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md`; `research_state/gate4_v4_exploratory_exec/*`; `results/fclr_heavy001/gate4_v4_exploratory_diag_20261109T021456Z.md`; `research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json` |
+| **Forecast Gate** | **NOT ELIGIBLE** (Track C forward Gate 3 inconclusive; Track A blocked). No confirmatory promotion from v4 exploratory exec/diag. | frontier/negative results |
 
 ## 5. SINGLE HIGHEST-VALUE NEXT TASK
-Execute **§0 Campaign**: diagnose B/D split-3 instability and produce prereg-scoped exploratory robustness/diagnostics for Gate 4 v4 (instrument LOO for E vs A, coefficient/prediction bounds, alignment checks) with versioned artifacts labeled **NOT CONFIRMATORY/NOT PROMOTABLE**; keep tests/Track A invariants green and root bound satisfied. If blocked, pivot to measurable Track A G1-G3 hardening with new tests.
+Execute **§0 Campaign**: implement and evaluate a **principled, leakage-safe EXPLORATORY stabilized comparison** (scale-aware ridge and/or train-only target-scale floor; no prereg A–E replacement), report pooled/LOO/per-split diagnostics with NOT CONFIRMATORY labeling, or produce a versioned EXPLORATORY NO-GO note if no credible improvement is supported. Keep suite + Track A invariants green and root bound satisfied.
 
 ## 6. PRECISE VERIFICATION COMMANDS
 ```bash
 git --no-pager status --short
-python -m unittest discover tests                         # expect >=950 OK
+python -m unittest discover tests                         # expect >=954 OK
 python scripts/tracka_resume_check.py                    # expect pass:true, 17/17, probes==2, network:false, root_md_json_bounded pass
 python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift_preflight.pass:true, outcomes_inspected:false
-python scripts/run_funding_ablations.py --help
-# exec artifacts (completed 20261109T004003Z)
-ls results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md
-ls research_state/gate4_v4_exploratory_exec/
+python scripts/check_tracka_scope_registry_drift.py      # expect PASS
+python scripts/run_gate4_v4_exploratory_diag.py --help
+ls results/fclr_heavy001/gate4_v4_exploratory_diag_20261109T021456Z.md
+ls research_state/gate4_v4_exploratory_diag/
 ```
 
 ## 7. BLOCKERS / CONSTRAINTS
@@ -88,7 +91,7 @@ ls research_state/gate4_v4_exploratory_exec/
 | Track A: no admissible liquidation labels | `track_a_deadend_map.md`, rubric NO-GO all 8 candidates; probes==2; 2026-11..2027-02 absent | **Only** if a genuinely new unauth source meets full rubric; else guard hardening only. No re-probe absent months. |
 | Track C: forward panel ends 2026-11-02, 0 non-overlapping 30d test blocks | `fclr012v_coverage_audit.json`, FCLR-012-V inconclusive | New admissible panel with real volume, ≥3 non-overlapping 30d blocks; do not relax criteria. |
 | Gate 4 v4: sealed-anchor conflict on 2024 slice | v4 prereg `confirmatory_claim_go:NO_GO` | Run as **EXPLORATORY only**, explicit labeling, no promotion. |
-| Gate 4 v4 B/D instability | v4 exec 20261109T004003Z: split 3 B/D ΔQLIKE blowups | Diagnose with deterministic, versioned EXPLORATORY analysis; do not claim improvement. |
+| Gate 4 v4 B/D instability / E sensitivity | exec `20261109T004003Z`, diag `20261109T021456Z` | Diagnose/fix only as **EXPLORATORY comparisons** with versioned artifacts; do not claim improvement or replace prereg A–E. |
 | Track A root md+json bound | `scripts/tracka_resume_check.py` cap 172 | Put new exploratory artifacts in subdirs/results; **do not weaken bound/check**. |
 | Protected control plane | repo instructions | **No `.github/workflows` edits** without explicit maintainer authorization. |
 
@@ -99,16 +102,17 @@ ls research_state/gate4_v4_exploratory_exec/
 - ❌ Conflate observed/modeled/synthetic labels; no threshold-shopping/holdout reuse
 - ❌ Commit `__pycache__/`, `research_state/ironflow_fastpath_cache.json`, large raw caches
 - ❌ Weaken `root_md_json_bounded` or Track A invariants to accommodate artifacts
+- ❌ Claim confirmatory GO/promotion from v4 exploratory runs
 - ❌ Live/paper trading, order endpoints, credentials, bypassing access controls
 
 ## 9. SESSION START PROTOCOL (mandatory)
 1. `git pull` + `git status`; read **this file** + `RESEARCH_PROMPT.md`.
-2. Inspect `research_state/experiment_frontier.json`, latest manifests, tests, data cache state, and `research_state/gate4_v4_exploratory_exec/`.
+2. Inspect `research_state/experiment_frontier.json`, latest manifests, tests, data cache state, `research_state/gate4_v4_exploratory_exec/`, and `research_state/gate4_v4_exploratory_diag/`.
 3. Execute §0 (highest-value measurable task). Run cheapest checks first.
 4. Update **this file** with exact changes/commands/results/evidence/gates/next task + blockers.
 
 ## 10. NEXT SESSION DELIVERABLE
-Updated `AGENT_HANDOFF.md` with Gate 4 v4 exploratory diagnostic/robustness evidence (or hardening evidence), full suite + Track A invariant outcomes, artifact paths, root-bound compliance, and the next unfinished task. **Repo state must remain continuable without user repeating instructions.**
+Updated `AGENT_HANDOFF.md` with Gate 4 v4 principled EXPLORATORY stabilized-comparison evidence or EXPLORATORY NO-GO note, full suite + Track A invariant outcomes, artifact paths, root-bound compliance, and the next unfinished task. **Repo state must remain continuable without user repeating instructions.**
 
 ---
 **END OF SINGLE DURABLE HANDOFF.**
