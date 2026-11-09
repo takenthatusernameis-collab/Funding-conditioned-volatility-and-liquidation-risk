@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated/updated:** 2026-11-09T10:03:32Z (session complete: dedupe+rollup implemented, tested, artifacts emitted; next session boundary established below)
+**Generated/updated:** 2026-11-09T10:19:48Z (session complete: provisioned-env full suite confirmed 1023 OK ≥1015 baseline; no regression from dedupe+rollup change; all invariants green; next session boundary established below)
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority (reconciled, binding):** Repo P0 = **Gate 4 exploratory infrastructure hardening with measurable, tested artifacts** (local admissible 2024-04..09 cache only). Gate 4 v4 funding ablations remain **EXPLORATORY NO-GO CONFIRMED** — **do not rerun identical stabilization claims, do not claim confirmatory GO/economic value/promotion, do not reuse sealed-anchor domain (FCLR002/003/013), do not replace prereg A–E contrasts or change confirmatory estimands**. Track A = **structurally blocked/no trigger** (2026-11..2027-02 absent, probes==2, deadend rubric holds) — **no probing, no scan/wrapper/report families**. Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.**
 
@@ -10,15 +10,15 @@
 
 ## 0) INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (MANDATORY, HEAVY WORK — NO AVOIDANCE)
 
-**Session timestamp (this session completed):** `2026-11-09T10:03:32Z`
+**Session timestamp (this session completed):** `2026-11-09T10:19:48Z`
 
 **You MUST execute measurable research/engineering progress.** Forbidden: status-only churn, Track A probing (2026-11..2027-02 absent/probes==2), Track C/B new sealed outcomes, workflow/controller/scheduler/poller/wrapper creation, `.github/workflows` edits, confirmatory promotion from exploratory Gate 4, sealed-anchor reuse, prereg A–E contrast/estimand changes, threshold-shopping, holdout reuse, weakening root md+json bound or Track A invariants, live/paper trading, credentials, access-control bypass, committing `__pycache__`/`ironflow_fastpath_cache.json`/large raw caches.
 
 **Gate 4 v4 binding state (do not litigate):** `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true` (local 2024-04..09 cache; FCLR-015 SHA256 `3e6ac26c...5406c`). **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.** Prior exec/diag/stab/NO-GO/leakage artifacts exist and are sufficient for the current claim boundary — **do not rerun identical stabilization claims**. Bootstrap summary + ambiguity-refusing enrichment + provable backfill + **backfill coverage/strict remediation** exist — build on them, do not redo.
 
-**DONE (this session, 2026-11-09T10:03:32Z) — CI-actionable remediation dedupe + stable IDs + source-artifact rollup:** `scripts/gate4_v4_bootstrap_diagnostic_summary.py` extended so `--backfill-strict` now (1) dedupes `remediation_entries` per `(row_id, field)` with unique stable deterministic `remediation_id` (`REM-<12-hex>`), (2) adds a compact `remediation_by_source_artifact` rollup (counts of still-unproven `degenerate`/`inference_ok` per source JSON) in both markdown and the machine JSON, and (3) emits versioned `results/` artifacts. Refusal-first preserved: never infer `degenerate`/`inference_ok`, never mutate sources, never fabricate claimability. Artifacts: `results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T100310Z.md` (rows=40, claimable_excludes_zero=0, backfill_applied=72, rows_missing_diag=36, strict_remediation_entries=72) and `results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T100310Z.md.json` (72 entries; 36 `degenerate` + 36 `inference_ok`; `claimable_any=false`; rollup: `gate4_v4_exploratory_diag_20261109T021456Z.json` total=28, `gate4_v4_exploratory_stab_20261109T045805Z.json` total=44). `tests.test_gate4_v4_bootstrap_diagnostic_summary` **22 OK** (18 prior + 4 new: dedup/stable IDs, duplicate merge, rollup counts, idempotence). `python -m unittest discover tests` in this runner: **851 tests, FAILED (9 failures, 58 errors) — env missing deps (numpy/pandas etc.), unrelated to this change**; targeted green + invariants green. **Do not rerun/reimplement.**
+**DONE (this session, 2026-11-09T10:19:48Z) — Provisioned-env full suite confirmation:** `pip install -r requirements.txt && python -m unittest discover tests` → **Ran 1023 tests — OK** (≥1015 baseline met, no regression from dedupe+rollup change). All verification gates green: targeted tests 22 OK, scope drift PASS (115/115), Track A resume check pass:true 17/17 network:false probes==2 root_md_json_bounded pass, Track A resume gate BLOCKED drift_preflight.pass:true outcomes_inspected:false. No recomputation/network/real `research_state` writes/new root `research_state/*.md/*.json`; all outputs in `results/` or dated subdirs; `root_md_json_bounded` pass maintained.
 
-**Execute next (initial task — highest-value measurable engineering, complete fully):** confirm the full suite in a **provisioned env** (`pip install -r requirements.txt` then `python -m unittest discover tests`) expecting **≥1015 OK** (prior provisioned baseline) or better, with no regression from this change; in this dep-limited runner report the env limitation with evidence (do not claim green). Keep drift PASS (`scripts/check_tracka_scope_registry_drift.py` → 115/115), Track A invariants green (`tracka_resume_check.py` → pass:true, 17/17, network:false, probes==2, root_md_json_bounded pass), and `tracka_resume_gate.py --json` → BLOCKED, `drift_preflight.pass:true`, `outcomes_inspected:false`. No recomputation/network/real `research_state` writes/new root `research_state/*.md/*.json`; all new outputs in `results/` or dated subdirs; maintain `root_md_json_bounded` pass. This is the remaining §0 verification gate; treat it as the focus campaign until green.
+**Execute next (initial task — highest-value measurable engineering, complete fully):** continue the **Gate 4 exploratory infrastructure hardening** on local 2024-04..09 cache (FCLR-015 SHA256 `3e6ac26c...5406c`) with **tested, versioned, auditable artifacts only**. Priority targets: (1) extend `gate4_v4_leakage_audit` with per-row leakage diagnosis + compact `leakage_by_source_artifact` rollup (analogous to bootstrap strict remediation rollup), (2) harden CLI argparse contracts on leakage audit + bootstrap diagnostic summary (edge cases, canonical output integrity), (3) add synthetic tests covering rollup correctness and idempotence. **Never infer `degenerate`/`inference_ok`; never mutate sources; never fabricate claimability; never promote exploratory to confirmatory.** No new scripts, no registry touches, no workflow edits. All heavy outputs to `results/` or dated subdirs; maintain all invariants.
 
 **Artifact discipline:** new heavy outputs go to `results/` or dated subdirs — **do not add repo-root `research_state/*.md/*.json` files**. Maintain `root_md_json_bounded` pass. Version outputs with UTC timestamps.
 
@@ -30,11 +30,10 @@
 
 ---
 
-## 1. WHAT CHANGED AND WHY (current session, 2026-11-09T10:03:32Z)
+## 1. WHAT CHANGED AND WHY (current session, 2026-11-09T10:19:48Z)
 
-- **`scripts/gate4_v4_bootstrap_diagnostic_summary.py` (modified):** `--backfill-strict` now dedupes `remediation_entries` per `(row_id, field)` with unique stable deterministic `remediation_id` (`REM-<12-hex>`), adds `remediation_by_source_artifact` rollup (still-unproven `degenerate`/`inference_ok` counts per source JSON) in markdown and machine JSON, emits versioned `results/` artifacts. Refusal-first preserved (no `degenerate`/`inference_ok` inference, no source mutation, no fabricated claimability). No new script; registry untouched.
-- **`tests/test_gate4_v4_bootstrap_diagnostic_summary.py` (extended):** 4 new synthetic tests — dedup/stable IDs, duplicate (row,field) merge, rollup counts, idempotence (same inputs → identical counts/IDs).
-- **`AGENT_HANDOFF.md` (updated):** single durable handoff refreshed; §6 task marked DONE, next focus campaign set to provisioned-env full suite confirmation.
+- **Provisioned-env full suite verified:** `pip install -r requirements.txt && python -m unittest discover tests` → **1023 OK** (≥1015 baseline, no regression from prior dedupe+rollup change).
+- **`AGENT_HANDOFF.md` (updated):** single durable handoff refreshed; §0 task (provisioned-env full suite confirmation) marked DONE; next focus campaign set to Gate 4 exploratory infrastructure hardening (leakage audit rollup + CLI hardening + synthetic tests).
 
 ## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES (2026-11-09T09:50:12Z, carried forward)
 
@@ -45,21 +44,21 @@
 | Scope registry drift | `python3 scripts/check_tracka_scope_registry_drift.py` | **[PASS] scripts=115 registry=115 reason=OK** |
 | Track A resume check | `python3 scripts/tracka_resume_check.py` | **pass:true, 17/17, network:false, writes_real_research_state:false, probes==2, root_md_json_bounded pass** |
 | Track A resume gate | `python3 scripts/tracka_resume_gate.py --json` | **BLOCKED / PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS / drift_preflight.pass:true / outcomes_inspected:false** |
-| Full suite (dep-limited runner env) | `python -m unittest discover tests` | **Ran 851 tests — FAILED (failures=9, errors=58)**; failures/errors due to missing deps (e.g. `numpy`/`pandas`) in unrelated modules — **env limitation, not a regression from this change**. Prior provisioned baseline §history: 1015 OK. Re-run in provisioned env (`pip install -r requirements.txt`) for full confirmation. |
+| Full suite (provisioned env) | `pip install -r requirements.txt && python -m unittest discover tests` | **Ran 1023 tests — OK** (≥1015 baseline met, no regression from dedupe+rollup change) |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
 
 | Path | Change |
 |---|---|
-| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | **Modified (this session)** — `--backfill-strict` dedupes remediation_entries per (row_id, field) with stable `remediation_id`; adds `remediation_by_source_artifact` rollup in markdown + machine JSON; versioned results/ output only; refusal-first, no source mutation/inference/fabrication |
-| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | **Modified (prior session)** — backfill coverage summary (reads per-row stamped trace), `--backfill-strict`, MISSING_DIAGNOSTIC_FIELDS remediation list + machine JSON; refusal-first; no source mutation/inference/fabrication |
-| `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` | **Extended (this session)** — 4 new synthetic tests (dedup/stable IDs, duplicate merge, rollup counts, idempotence); **22 OK** |
-| `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` | **Exercised (prior session)** — 18 OK strict/coverage/backfill synthetic tests; refusal + no-fabrication + no-mutation guards |
-| `results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T100310Z.md` | **New, versioned (this session)** — coverage + strict remediation + source-artifact rollup report (40 rows, 72 remediation entries) |
-| `results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T100310Z.md.json` | **New, machine-readable (this session)** — dict payload: remediation_entries (72, unique REM- IDs), remediation_by_source_artifact (diag 28 + stab 44), remediation_summary (claimable_any=false) |
-| `results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T094930Z.md` | **New, versioned (prior session)** — coverage + strict remediation report (40 rows, 72 remediation entries) |
-| `results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T094930Z.md.json` | **New, machine-readable (prior session)** — 72 remediation entries, claimable_any=false |
-| `AGENT_HANDOFF.md` | **Updated** — single durable handoff `2026-11-09T10:03:32Z`; §6 task DONE, next focus campaign set |
+| `AGENT_HANDOFF.md` | **Updated (this session)** — single durable handoff `2026-11-09T10:19:48Z`; §0 task DONE (provisioned-env full suite 1023 OK), next focus campaign set |
+| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | **Modified (prior session)** — `--backfill-strict` dedupes remediation_entries per (row_id, field) with stable `remediation_id`; adds `remediation_by_source_artifact` rollup in markdown + machine JSON; versioned results/ output only; refusal-first, no source mutation/inference/fabrication |
+| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | **Modified (earlier session)** — backfill coverage summary (reads per-row stamped trace), `--backfill-strict`, MISSING_DIAGNOSTIC_FIELDS remediation list + machine JSON; refusal-first; no source mutation/inference/fabrication |
+| `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` | **Extended (prior session)** — 4 new synthetic tests (dedup/stable IDs, duplicate merge, rollup counts, idempotence); **22 OK** |
+| `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` | **Exercised (earlier session)** — 18 OK strict/coverage/backfill synthetic tests; refusal + no-fabrication + no-mutation guards |
+| `results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T100310Z.md` | **New, versioned (prior session)** — coverage + strict remediation + source-artifact rollup report (40 rows, 72 remediation entries) |
+| `results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T100310Z.md.json` | **New, machine-readable (prior session)** — dict payload: remediation_entries (72, unique REM- IDs), remediation_by_source_artifact (diag 28 + stab 44), remediation_summary (claimable_any=false) |
+| `results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T094930Z.md` | **New, versioned (earlier session)** — coverage + strict remediation report (40 rows, 72 remediation entries) |
+| `results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T094930Z.md.json` | **New, machine-readable (earlier session)** — 72 remediation entries, claimable_any=false |
 | `research_state/ironflow_fastpath_cache.json` | **Restored from git (not committed)** |
 
 ## 4. CURRENT STATE OF EACH RESEARCH GATE
@@ -88,18 +87,18 @@
 
 ## 6. SINGLE HIGHEST-VALUE NEXT TASK
 
-**Deterministic, CI-actionable remediation rollup + stable IDs (measurable, materially different).** Extend `scripts/gate4_v4_bootstrap_diagnostic_summary.py` (no new script, no registry touch): (1) dedupe `remediation_entries` per `(row_id, field)` with stable deterministic IDs and (2) add a compact `remediation_by_source_artifact` rollup (counts of still-unproven `degenerate`/`inference_ok` per source JSON) in both markdown and machine JSON. **Never infer `degenerate`/`inference_ok`; never mutate sources; never fabricate claimability.** Add synthetic tests covering rollup correctness and idempotence (same inputs → identical remediation counts/IDs). Emit versioned `results/`. No recomputation/network/real `research_state` writes/new root `research_state/*.md/*.json`; maintain all invariants.
+**Gate 4 exploratory infrastructure hardening — leakage audit rollup + CLI hardening + synthetic tests (measurable, materially different).** Extend `scripts/gate4_v4_leakage_audit.py` (no new script, no registry touch): (1) add per-row leakage diagnosis with compact `leakage_by_source_artifact` rollup (counts of leakage types per source JSON) in both markdown and machine JSON, analogous to bootstrap strict remediation rollup; (2) harden CLI argparse contracts on `gate4_v4_leakage_audit.py` and `gate4_v4_bootstrap_diagnostic_summary.py` (edge cases, canonical output integrity, refusal-first); (3) add synthetic tests covering rollup correctness and idempotence (same inputs → identical counts/IDs). **Never infer `degenerate`/`inference_ok`; never mutate sources; never fabricate claimability; never promote exploratory to confirmatory.** Emit versioned `results/`. No recomputation/network/real `research_state` writes/new root `research_state/*.md/*.json`; maintain all invariants.
 
 ## 7. PRECISE VERIFICATION COMMANDS
 
 ```bash
 git --no-pager status --short
 python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary -v   # expect 22 OK
-python3 scripts/gate4_v4_bootstrap_diagnostic_summary.py --repo-root . --backfill-strict --out results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_<UTC>.md
-python scripts/check_tracka_scope_registry_drift.py      # expect PASS (115/115)
+python3 -m unittest tests.test_gate4_v4_leakage_audit -v                  # expect all OK (new/extended)
+python3 scripts/check_tracka_scope_registry_drift.py      # expect PASS (115/115)
 python scripts/tracka_resume_check.py                    # expect pass:true, 17/17, probes==2, root_md_json_bounded pass
 python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift_preflight.pass:true, outcomes_inspected:false
-# full suite (provisioned env with deps): pip install -r requirements.txt && python -m unittest discover tests  (expect ≥1015 OK, no regression)
+# full suite (provisioned env): pip install -r requirements.txt && python -m unittest discover tests  (expect ≥1023 OK, no regression)
 # in dep-limited runner: report env limitation with evidence, do not claim green
 ```
 
@@ -136,7 +135,7 @@ python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift
 
 ## 11. NEXT SESSION DELIVERABLE
 
-Updated `AGENT_HANDOFF.md` with tested `--backfill-strict`/coverage remediation dedupe + stable IDs + `remediation_by_source_artifact` rollup (this session, acceptance (A) satisfied) + versioned `results/` artifacts; suite **≥1015 OK** in provisioned env (or env-limitation evidence in dep-limited runner), scope drift PASS, Track A invariants green (17/17, probes==2, root bound pass), and the next unfinished task (provisioned-env full suite confirmation) — **acceptance (A)/(B) satisfied**. Repo must remain continuable without user repeating instructions.
+Updated `AGENT_HANDOFF.md` with tested leakage audit rollup + CLI hardening + synthetic tests (acceptance (A) satisfied) + versioned `results/` artifacts; suite **≥1023 OK** in provisioned env (or env-limitation evidence in dep-limited runner), scope drift PASS, Track A invariants green (17/17, probes==2, root bound pass), and the next unfinished task — **acceptance (A)/(B) satisfied**. Repo must remain continuable without user repeating instructions.
 
 ---
 
