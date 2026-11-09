@@ -457,6 +457,7 @@ def backfill_coverage_summary(
     many were provably derived by the backfill, and how many remain unproven
     (with explicit refusal reasons). Never infers `degenerate`/`inference_ok`
     from CI geometry; only explicit saved diagnostic evidence counts.
+    Reads per-row stamped `backfill_trace` when the global trace is absent.
     """
     trace_by_row: Dict[str, List[Dict[str, Any]]] = {}
     if backfill_trace:
@@ -474,18 +475,23 @@ def backfill_coverage_summary(
 
     for r in rows:
         rid = _row_id(r)
-        trace = trace_by_row.get(rid, [])
-        applied_fields = sorted({e.get("field") for e in trace if e.get("applied")})
-        refused_fields = sorted({e.get("field") for e in trace if not e.get("applied")})
-        refused_reasons = sorted({e.get("refusal_reason") for e in trace if not e.get("applied") and e.get("refusal_reason")})
+        trace = trace_by_row.get(rid) or r.get("backfill_trace") or []
+        applied_fields = sorted({e.get("field") for e in trace if e.get("applied") and e.get("field") != "diagnostic_gates_residual"})
+        # "still missing" = diagnostic-gate fields the backfill could not/ did not prove
+        refused_gate_fields = sorted({e.get("field") for e in trace
+                                      if not e.get("applied") and e.get("field") in _NEVER_INFERRABLE_FIELDS})
+        # if row still missing diagnostics but no trace, infer unproven gate fields
         missing = bool(r.get("missing_diagnostic_fields"))
+        if missing and not refused_gate_fields and not trace:
+            refused_gate_fields = sorted(f for f in _NEVER_INFERRABLE_FIELDS if r.get(f) is None)
+        refused_reasons = sorted({e.get("refusal_reason") for e in trace if not e.get("applied") and e.get("refusal_reason")})
         if not missing:
             already_complete += 1
             continue
         residual_missing += 1
         if applied_fields:
             backfilled_any += 1
-        for f in refused_fields:
+        for f in refused_gate_fields:
             refused_counts[f] = refused_counts.get(f, 0) + 1
         residual_rows.append({
             "row_id": rid,
@@ -493,7 +499,7 @@ def backfill_coverage_summary(
             "section": r.get("section"),
             "contrast": r.get("contrast"),
             "backfilled_fields": applied_fields,
-            "still_missing_fields": refused_fields,
+            "still_missing_fields": refused_gate_fields,
             "refusal_reasons": refused_reasons,
             "claimable_excludes_zero": bool(r.get("non_degenerate_excludes_zero_claimable")),
             "ci_excludes_zero": r.get("ci_excludes_zero"),
