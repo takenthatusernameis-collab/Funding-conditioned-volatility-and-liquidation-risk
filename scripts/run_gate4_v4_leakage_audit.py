@@ -190,6 +190,37 @@ def audit_block_bootstrap_reproducibility(panel: pd.DataFrame, split_defs) -> Di
     return {"run1": reps[0], "run2": reps[1], "seed": 20261109, "identical_on_rerun": identical}
 
 
+def _diag_field(ci: Dict[str, object], key: str, fallback: object = None) -> object:
+    """Read additive bootstrap diagnostic field with legacy fallback tolerance.
+
+    New delegates (src.eval.inference.block_bootstrap_delta_ci_diagnostic) emit
+    `effective_block_count`, `regime_flags`, `ci_accounting_valid`; older CI dicts
+    omit them. Never raise on a malformed/legacy payload.
+    """
+    if ci is None:
+        return fallback
+    if key == "effective_block_count":
+        v = ci.get("effective_block_count", ci.get("n_blocks"))
+        return v if v is not None else fallback
+    if key == "ci_accounting_valid":
+        v = ci.get("ci_accounting_valid")
+        return v if v is not None else fallback
+    if key == "regime_flags":
+        v = ci.get("regime_flags")
+        if v is None:
+            return fallback
+        return list(v) if not isinstance(v, list) else v
+    return ci.get(key, fallback)
+
+
+def _flags_str(flags: object) -> str:
+    if not flags:
+        return "ok"
+    if isinstance(flags, (list, tuple)):
+        return ";".join(str(f) for f in flags)
+    return str(flags)
+
+
 def write_md(path: Path, payload: Dict[str, object]) -> None:
     lines = [
         f"# Gate 4 v4 EXPLORATORY leakage audit — {payload['ts']}",
@@ -214,14 +245,30 @@ def write_md(path: Path, payload: Dict[str, object]) -> None:
               f"**All train-derived parameters invariant to test perturbation: {payload['leakage_invariance_all']}**",
               "",
               "## Block-bootstrap reproducibility (fixed seed 20261109, two independent runs)",
-              "| Metric | Run 1 | Run 2 | Identical |",
-              "|---|---:|---:|---:|",
+              "| Metric | Run 1 | Run 2 | Identical | eff_blocks | ci_valid | regime_flags |",
+              "|---|---:|---:|---:|---:|---:|---|",
     ]
     bb = payload["block_bootstrap_reproducibility"]
+    run1, run2 = bb.get("run1", {}), bb.get("run2", {})
     for k in ("point", "ci_low", "ci_high", "n_obs", "n_blocks"):
-        lines.append(f"| {k} | {bb['run1'].get(k)} | {bb['run2'].get(k)} | {bb['run1'].get(k) == bb['run2'].get(k)} |")
+        lines.append(
+            f"| {k} | {run1.get(k)} | {run2.get(k)} | {run1.get(k) == run2.get(k)} "
+            f"| {_diag_field(run1, 'effective_block_count')} | {_diag_field(run1, 'ci_accounting_valid')} "
+            f"| {_flags_str(_diag_field(run1, 'regime_flags', []))} |"
+        )
+    # Additive diagnostic rows: effective block count, CI accounting validity, regime flags.
+    for k in ("effective_block_count", "ci_accounting_valid", "regime_flags"):
+        v1, v2 = _diag_field(run1, k), _diag_field(run2, k)
+        if k == "regime_flags":
+            v1s, v2s = _flags_str(v1), _flags_str(v2)
+            lines.append(f"| {k} | {v1s} | {v2s} | {v1s == v2s} | - | - | - |")
+        else:
+            lines.append(f"| {k} | {v1} | {v2} | {v1 == v2} | - | - | - |")
     lines += ["",
               f"**Block-bootstrap CI identical on rerun: {bb['identical_on_rerun']}**",
+              f"**CI accounting valid: {_diag_field(run1, 'ci_accounting_valid')}**",
+              f"**Effective blocks: {_diag_field(run1, 'effective_block_count')}**",
+              f"**Regime flags: {_flags_str(_diag_field(run1, 'regime_flags', []))}**",
               "",
               "## Interpretation (EXPLORATORY ONLY — NOT CONFIRMATORY)",
               payload.get("interpretation", ""),
