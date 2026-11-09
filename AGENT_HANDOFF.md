@@ -1,125 +1,86 @@
-# AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
+# AGENT_HANDOFF.md — Single Durable Handoff (next session MUST continue from here)
 
-**Generated/updated:** 2026-11-09T14:19:53Z (session complete: FCLR-NEXT-142 hardening campaign executed — `tests/test_tracka_hardening_142.py` added, **9 tmp-isolated tests OK** covering cluster (a) guarded/operator/CLI refusal-field parity matrix across NOGO/GO/malformed-prereg/missing-data inputs, cluster (b) canonical output + real-research-state mutation proofs (byte snapshots of FRONTIER/RUN_MANIFEST/EVAL_FCLR010 unchanged; `writes_real_research_state:false`; tmp output_dir only), cluster (c) admissible seam wired-field type stability across missing/corrupt/NOGO/GO cases, cluster (d) CLI `--json` determinism under mixed flag order/duplicate-safe refusals (bogus + valid-looking combos, missing required-like paths, no traceback-as-first-line); full suite **1068 OK ~140s** (0 failures/0 errors); targeted Gate4+140+141 **76 OK** (48 Gate4/leakage/bootstrap+md + 17 `test_tracka_hardening_140` + 11 `test_tracka_hardening_141`); drift **PASS 115/115**; resume_check **pass:true** probes==2 root_md_json_bounded **pass 171/172** network:false writes_real_research_state:false; resume_gate **BLOCKED by design** `PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS` drift_preflight.pass:true outcomes_inspected:false reads_outcomes:false reads_parquet:false; `research_state/ironflow_fastpath_cache.json` restored; local `__pycache__` removed; **new untracked:** `tests/test_tracka_hardening_142.py`; no tracked source modifications; no `.github/workflows` edits; no new repo-root `research_state/*.md/*.json` files)
-**Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Priority (reconciled, binding):** Repo P0 = regression guard + Track A monitor readiness + **FCLR-NEXT-143 hardening campaign (next measurable seam/CLI/parity/schema cluster, tmp-isolated tests — future agents must not skip)**. FCLR-NEXT-140 **DONE** (17 tests). FCLR-NEXT-141 **DONE** (11 tests). FCLR-NEXT-142 **DONE** (9 tests). Gate 4 v4 funding ablations remain **EXPLORATORY NO-GO CONFIRMED** — **do not rerun identical stabilization claims, do not claim confirmatory GO/economic value/promotion, do not reuse sealed-anchor domain (FCLR002/003/013), do not replace prereg A–E contrasts or change confirmatory estimands**. Track A = **structurally blocked/no trigger** (2026-11..2027-02 absent, probes==2, deadend rubric holds) — **no probing, no scan/wrapper/report families**. Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.**
-
----
-
-## 0) INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (MANDATORY, HEAVY WORK — NO AVOIDANCE)
-
-**Session timestamp (this session completed):** `2026-11-09T14:19:53Z`
-
-**Repo-name priority (binding):** Funding-conditioned-volatility-and-liquidation-risk → active mission is (1) funding-conditioned volatility forecasting and (2) liquidation-risk labeling. Both gated: Track A (observed liquidation labels) structurally BLOCKED (no admissible unauthenticated liquidation source; 2026-11..2027-02 absent, probes==2 exhausted); Track C forward sealed/locked INCONCLUSIVE (0 non-overlapping 30-day blocks); Gate 4 v4 exploratory on local 2024-04..09 cache is NO-GO CONFIRMED, exploratory-only, not promotable. The only non-avoidable, heavy, in-repo work is **regression guard + Track A monitor readiness + FCLR-NEXT-143 hardening campaign**. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.
-
-**You MUST execute measurable research/engineering progress.** Forbidden: status-only churn, Track A probing (2026-11..2027-02 absent/probes==2), Track C/B new sealed outcomes, workflow/controller/scheduler/poller/wrapper creation, `.github/workflows` edits, confirmatory promotion from exploratory Gate 4, sealed-anchor reuse (FCLR002/003/013), prereg A–E contrast/estimand changes, threshold-shopping, holdout reuse, weakening root md+json bound or Track A invariants, live/paper trading, credentials, access-control bypass, committing `__pycache__`/`ironflow_fastpath_cache.json`/large raw caches.
-
-**Gate 4 v4 binding state (do not litigate):** `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true` (local 2024-04..09 cache; FCLR-015 SHA256 `3e6ac26c...5406c`). **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.** Prior exec/diag/stab/NO-GO/leakage artifacts exist — **do not rerun identical stabilization claims**.
-
-**FCLR-NEXT-140 DONE:** `tests/test_tracka_hardening_140.py` (17 tmp-isolated tests) — seam empty/unreadable data path refusal, CLI argparse contract all 3 CLIs, cross-CLI parity + canonical output byte-integrity, guarded refuse-before-load on malformed admissible manifests.
-**FCLR-NEXT-141 DONE (2026-11-09T14:15:58Z):** `tests/test_tracka_hardening_141.py` (11 tmp-isolated tests) — admissible seam manifest schema matrix (missing/extra/wrong-type/unknown/conflicting shapes, corrupt/missing candidate paths) with stable refusals and no outcome/parquet reads; prereg contract edge cases (corrupt JSON -> `PREREG_CONTENT_INVALID_FAIL_CLOSED`, semantic mismatches/unfrozen/path-traversal-ish refs -> `PREREG_SEMANTIC_CONTRACT_FAIL_CLOSED`, legacy prereg compatibility preserved) with no canonical writes; NOGO/GO seam matrix (NOGO refuses before load, loader spy never called; GO without trigger data refuses on data-path, no fabrication, `outcomes_loaded` null); CLI bogus-flag refusal extraction deterministic + malformed admissible/prereg refusals safe, canonical outputs byte-identical. Minimal compatibility fix: harness semantic prereg check accepts frozen Track A `FCLR-010`/`FCLR-012` (matches `pre_register_forward_experiment`); preserves 099/102/103.
-
-**FCLR-NEXT-142 DONE (2026-11-09T14:19:53Z):** `tests/test_tracka_hardening_142.py` (9 tmp-isolated tests) — cluster (a) guarded/operator/CLI refusal-field parity matrix (guarded_execute vs tracka_resume_gate.decide vs operator/gate CLI JSON across NOGO/GO/malformed-prereg/missing-data inputs; stable status/reason_code/reason_code_detail/outcomes_inspected/reads_*/network/writes booleans); cluster (b) canonical output + real-research-state mutation proofs across refusal matrix (byte snapshots of `FRONTIER`/`RUN_MANIFEST`/`EVAL_FCLR010` unchanged; `writes_real_research_state:false`; tmp `output_dir` only); cluster (c) admissible seam wired-field type stability (pass/status/reason_code/failures/month/fail_closed/network/reads_outcomes/reads_parquet types stable across missing/corrupt/NOGO/GO cases); cluster (d) CLI `--json` determinism under mixed flag order/duplicate-safe refusals (bogus + valid-looking combos, missing required-like paths; parseable refusal or stable stderr+JSON contract; no traceback-as-first-line contract; exit behavior documented by assertion). No network, no parquet/outcome reads, no real `research_state` writes.
-
-**FCLR-NEXT-143 HARDENING CAMPAIGN (heavy, unavoidable, next session):** Targets the legacy/bypass entrypoints named in `scripts/fclr010_guarded_entry.py` (`fclr010_execute.py:main` which imported pyarrow and called `pq.read_table` directly with no admissible seam/prereg/manifest guard; `fclr010_execute_fast.py:main` which wrote a hardcoded evaluation summary with no guard at all / fabricated metrics). Add tmp-isolated tests in `tests/test_tracka_hardening_143.py` (create) covering ≥1 cluster: (a) **bypass-entrypoint refusal proof** — `fclr010_execute`/`fclr010_execute_fast` entrypoints cannot load outcomes or mutate canonical outputs without passing the guarded seam (refuse-before-load, loader spy never called, `outcomes_inspected:false`, no parquet read); (b) **guarded_execute vs legacy-entrypoint parity** — same NOGO/GO/malformed-prereg/missing-data inputs produce stable comparable refusal fields across `guarded_execute`, `tracka_resume_gate.decide`, operator/gate CLIs, and any reachable legacy entrypoint; (c) **canonical output + real-research-state mutation proofs** across the bypass-entrypoint refusal matrix (byte snapshots of `FRONTIER`/`RUN_MANIFEST`/`EVAL_FCLR010` unchanged; `writes_real_research_state:false`; tmp output_dir only); (d) **CLI `--json` determinism under mixed flag order/duplicate-safe refusals for legacy entrypoints** (bogus + valid-looking combos, missing required-like paths) — parseable refusal or stable stderr+JSON contract, no traceback-as-first-line contract. No network, no parquet/outcome reads, no real `research_state` writes.
-
-**Execute next (initial task — regression guard + Track A monitor readiness + FCLR-NEXT-143, heavy and unavoidable):** Re-run the full verification loop every session (**cannot skip**). (1) `python -m unittest discover tests` → expect ≥1068 OK, no regression. (2) `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics tests.test_tracka_hardening_140 tests.test_tracka_hardening_141 tests.test_tracka_hardening_142` → 85 OK. (3) `python3 scripts/check_tracka_scope_registry_drift.py` → PASS (115/115). (4) `python scripts/tracka_resume_check.py` → pass:true, network:false, probes==2, root_md_json_bounded pass. (5) `python scripts/tracka_resume_gate.py --json` → BLOCKED, `drift_preflight.pass:true`, `outcomes_inspected:false`. (6) **FCLR-NEXT-143:** add tmp-isolated tests in `tests/test_tracka_hardening_143.py` covering ≥1 cluster above (a–d). (7) Maintain Track A monitor readiness: watch for ironflow >=2026-11 unauthenticated data trigger; if it appears, **PREREG BEFORE OUTCOMES** then execute FCLR-012-A. All heavy outputs to `results/` or dated subdirs — **do not add repo-root `research_state/*.md/*.json` files**. Maintain `root_md_json_bounded` pass.
-
-**Acceptance (mandatory):** (A) full suite green (≥1068 OK or better) + all invariants green + **≥1 new tmp-isolated hardening test added in `tests/test_tracka_hardening_143.py` with versioned evidence in this handoff/artifacts**, **or** (B) a materially different tested engineering task with versioned evidence and same green gates. **Anything less is failure.**
+**Updated:** 2026-11-09T14:36:50Z (session: reconciled durable handoff + verified guard invariants; FCLR-NEXT-140/141/142 green; **FCLR-NEXT-143 is the mandatory next heavy task**)
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (git `97c561f5c`, clean at read except no tracked edits this session)
+**Binding priority:** P0 = **regression guard + Track A monitor readiness + FCLR-NEXT-143 tmp-isolated hardening campaign**. Gate 4 v4 = **EXPLORATORY NO-GO CONFIRMED, NOT CONFIRMATORY, NOT PROMOTABLE** (do not rerun identical stabilization claims; no sealed-anchor FCLR002/003/013 reuse; no prereg A–E contrast/estimand changes; no threshold-shopping/holdout reuse). Track A = **STRUCTURALLY BLOCKED / NO TRIGGER** (2026-11..2027-02 absent, ironflow probes==2, deadend rubric) — **no probing, no scan/wrapper/report families**. Track C forward sealed INCONCLUSIVE (0 non-overlapping 30d blocks); Track B NOT_SUPPORTED (modeled ≠ observed). **No status-only churn. No `.github/workflows` edits. Every session must produce versioned, auditable artifacts and/or tested code.**
 
 ---
 
-## 1. WHAT CHANGED AND WHY
+## 0) INITIAL TASK MESSAGE — MANDATORY HEAVY WORK (2026-11-09T14:36:50Z) — DO NOT AVOID
 
-- **Prior session (2026-11-09T13:44:11Z) — FCLR-NEXT-140 verified green:** 17 tmp-isolated hardening tests present; full suite 1048 OK at that checkpoint.
-- **This session (2026-11-09T14:15:58Z) — FCLR-NEXT-141 hardening campaign executed + compatibility fix:**
-  - `tests/test_tracka_hardening_141.py` — **New (untracked)**, 11 tmp-isolated tests, all OK: (a) admissible seam manifest schema matrix — empty/missing/wrong-type/wrong-venue/modeled-conflation/unknown-conflicting shapes all NOGO with stable refusal surface and no outcome/parquet reads; corrupt/missing candidate manifest paths -> `ADMISSIBLE_CANDIDATE_LOAD_ERROR`/`ADMISSIBLE_CANDIDATE_PATH_MISSING`. (b) prereg contract edge cases — corrupt prereg JSON -> `PREREG_CONTENT_INVALID_FAIL_CLOSED`; semantic refusals (mismatched experiment ID, `frozen:false`, path-traversal-ish refs) -> `PREREG_SEMANTIC_CONTRACT_FAIL_CLOSED` with `prereg_semantic_failures`; legacy prereg without `experiment_id` remains compatible (backward-compatible semantic check). (c) NOGO/GO seam matrix — NOGO refuses before load, loader spy never called, safety booleans false; GO without trigger data refuses on data-path, loader never called, no fabricated outcomes. (d) CLI `--json`/field/exit determinism — bogus-flag refusals yield machine-detectable refusal payload extraction (accounting for argparse usage + JSON contract variations across CLIs), safety booleans stable; malformed admissible/prereg CLI inputs refuse safely; canonical outputs byte-identical after refusals.
-  - `scripts/fclr010_harness.py` — **Modified (tracked)**: `_prereg_semantic_block` accepts frozen Track A experiment IDs `FCLR-010` and `FCLR-012` (not only `FCLR-010`) to align with `pre_register_forward_experiment()` output (`FCLR-012`) and preserve existing hardening tests (099/102/103); semantic refusals remain fail-closed for unknown IDs, `frozen:false`, and unsafe path refs. No network, no parquet/outcome reads added.
-  - `scripts/fclr010_guarded_entry.py` — **Modified (tracked)**: `prereg_semantic_block` docstring aligned to allowed Track A ID set; behavior unchanged (delegates to harness). No network/parquet reads.
-- **This session (2026-11-09T14:19:53Z) — FCLR-NEXT-142 hardening campaign executed:**
-  - `tests/test_tracka_hardening_142.py` — **New (untracked)**, 9 tmp-isolated tests, all OK: cluster (a) guarded/operator/CLI refusal-field parity matrix across NOGO/GO/malformed-prereg/missing-data inputs; cluster (b) canonical output + real-research-state mutation proofs (byte snapshots of FRONTIER/RUN_MANIFEST/EVAL_FCLR010 unchanged; `writes_real_research_state:false`; tmp output_dir only); cluster (c) admissible seam wired-field type stability across missing/corrupt/NOGO/GO cases; cluster (d) CLI `--json` determinism under mixed flag order/duplicate-safe refusals (no traceback-as-first-line contract).
-  - No tracked source modifications; `research_state/ironflow_fastpath_cache.json` restored; local `__pycache__` removed.
-  - Verification: full suite **1068 OK ~140s**; targeted **85 OK** (48 Gate4/leakage/bootstrap+md + 17 `test_tracka_hardening_140` + 11 `test_tracka_hardening_141` + 9 `test_tracka_hardening_142`); drift PASS 115/115; resume_check pass:true; resume_gate BLOCKED by design.
+**You MUST execute measurable research/engineering progress this session.** Forbidden: status-only churn; Track A probing/re-probe; Track C/B new sealed outcomes; workflow/controller/scheduler/poller/wrapper creation; `.github/workflows` edits; confirmatory promotion from exploratory Gate 4; sealed-anchor reuse; prereg A–E/estimand changes; weakening `root_md_json_bounded` or Track A invariants; fabricating outcomes/`claimable_excludes_zero`/degenerate/inference_ok; live/paper trading; credentials; access-control bypass; committing `__pycache__`/`research_state/ironflow_fastpath_cache.json`/large raw caches.
 
-## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES (2026-11-09T14:19:53Z)
+### FCLR-NEXT-143 HARDENING CAMPAIGN (next unavoidable, heavy)
+Targets legacy/bypass entrypoints called out in `scripts/fclr010_guarded_entry.py`: `fclr010_execute.py:main` (historically imported pyarrow and called `pq.read_table` directly with no admissible seam/prereg/manifest guard) and `fclr010_execute_fast.py:main` (historically wrote hardcoded/fabricated metrics with no guard). **Add `tests/test_tracka_hardening_143.py` (new, tmp-isolated) covering ≥1 cluster:**
+- **(a) Bypass-entrypoint refusal proof:** `fclr010_execute` / `fclr010_execute_fast` cannot load outcomes or mutate canonical outputs without passing the guarded seam (refuse-before-load; loader spy never called; `outcomes_inspected:false`; no parquet read; canonical `research_state/evaluation_summary_FCLR010.md`, `research_state/run_manifest.json`, `research_state/experiment_frontier.json` byte-identical).
+- **(b) Guard/CLI/entrypoint parity:** same NOGO/GO/malformed-prereg/missing-data inputs → stable comparable refusal fields across `guarded_execute`, `tracka_resume_gate.decide`, operator/gate CLIs, and reachable legacy entrypoints.
+- **(c) Canonical + real-state mutation proofs:** refusal matrix leaves real `research_state` unchanged (`writes_real_research_state:false`); tmp `output_dir` only.
+- **(d) CLI `--json` determinism:** mixed flag order / bogus / valid-looking combos / missing required-like paths → parseable refusal or stable stderr+JSON contract; **no traceback-as-first-line** contract; exit behavior asserted.
 
-| Check | Command | Result |
-|---|---|---|
-| Full suite (deps installed) | `python -m unittest discover tests` | **Ran 1068 tests in ~140s — OK** (0 failures, 0 errors) |
-| Targeted Gate4 + 140 + 141 + 142 | `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics tests.test_tracka_hardening_140 tests.test_tracka_hardening_141 tests.test_tracka_hardening_142` | **85 tests — OK** (48 + 17 + 11 + 9) |
-| Scope registry drift | `python3 scripts/check_tracka_scope_registry_drift.py` | **[PASS] scripts=115 registry=115 reason=OK** |
-| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true, network:false, writes_real_research_state:false, ironflow_future_probes count==2 (pass), root_md_json_bounded pass (171/172)** |
-| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **status=BLOCKED, reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight.pass:true, outcomes_inspected:false, reads_outcomes:false, reads_parquet:false, writes_real_research_state:false** (by design) |
-| FCLR-NEXT-141 hardening | `python -m unittest tests.test_tracka_hardening_141 -v` | **11 tests — OK** (tmp-isolated, no network/parquet/outcome reads, no real `research_state` writes) |
-| FCLR-NEXT-142 hardening | `python -m unittest tests.test_tracka_hardening_142 -v` | **9 tests — OK** (tmp-isolated, no network/parquet/outcome reads, no real `research_state` writes) |
-| Working tree / hygiene | `git --no-pager status --short` | **`?? tests/test_tracka_hardening_142.py`**; `research_state/ironflow_fastpath_cache.json` restored; local `__pycache__` removed |
+No network, no parquet/outcome reads, no real `research_state` writes. If a cluster reveals a real bypass/regression, fix it **fail-closed** with minimal scoped change + tests (preserve 099/102/103/140/141/142 semantics).
 
-## 3. EVIDENCE ADDED / MODIFIED (paths)
+### Execute now (cannot skip)
+1. `git status --short` (restore `research_state/ironflow_fastpath_cache.json` if dirty; remove local `__pycache__`).
+2. `python -m unittest discover tests` → expect **≥1068 OK, 0 failures/errors** (re-run to verify; report exact count).
+3. `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics tests.test_tracka_hardening_140 tests.test_tracka_hardening_141 tests.test_tracka_hardening_142` → expect **85 OK**.
+4. `python3 scripts/check_tracka_scope_registry_drift.py` → **PASS (115/115)**.
+5. `python scripts/tracka_resume_check.py` → **pass:true, network:false, writes_real_research_state:false, probes==2, root_md_json_bounded pass**.
+6. `python scripts/tracka_resume_gate.py --json` → **BLOCKED, reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight.pass:true, outcomes_inspected:false, reads_outcomes:false, reads_parquet:false** (by design).
+7. **Implement FCLR-NEXT-143** (`tests/test_tracka_hardening_143.py`, ≥1 cluster). Run it + targeted + (if feasible) full suite. Record exact results.
+8. **Track A monitor readiness:** if ironflow >=2026-11 unauthenticated data trigger appears, **PREREG BEFORE OUTCOMES** then execute FCLR-012-A. No re-probe of 2026-11..2027-02.
+9. Put heavy outputs in `results/` or dated subdirs — **do not add repo-root `research_state/*.md/*.json` files**. Keep `root_md_json_bounded` pass.
 
-| Path | Change |
+**Acceptance (mandatory):** (A) full suite green + all invariants green + **≥1 new tmp-isolated hardening test in `tests/test_tracka_hardening_143.py`** with versioned evidence here, **or** (B) a materially different tested engineering task with same green gates and versioned evidence. **Anything less is failure.**
+
+---
+
+## 1) VERIFIED THIS SESSION (2026-11-09T14:36:50Z)
+
+| Check | Result |
 |---|---|
-| `AGENT_HANDOFF.md` | **Updated this session (2026-11-09T14:19:53Z)** — FCLR-NEXT-142 evidence, FCLR-NEXT-143 next campaign defined, all gates green |
-| `tests/test_tracka_hardening_141.py` | **New (untracked), verified** — 11 tmp-isolated tests OK (clusters a–d as implemented above) |
-| `tests/test_tracka_hardening_142.py` | **New (untracked), verified** — 9 tmp-isolated tests OK (clusters a–d: guarded/operator/CLI parity, canonical state mutation proofs, seam field-type stability, CLI `--json` determinism) |
-| `scripts/fclr010_harness.py` | **Modified (tracked), tested** — prereg semantic allowlist `FCLR-010`/`FCLR-012`; fail-closed behavior preserved for invalid IDs/frozen:false/unsafe path refs |
-| `scripts/fclr010_guarded_entry.py` | **Modified (tracked), tested** — docstring aligned to harness semantic contract |
+| `git --no-pager status --short` | clean (no output) |
+| `python3 -m unittest tests.test_tracka_hardening_140/141/142` | **37 tests — OK** (18.6s) |
+| `python3 scripts/check_tracka_scope_registry_drift.py` | **[PASS] scripts=115 registry=115 reason=OK** |
+| `python scripts/tracka_resume_check.py` | **pass:true, network:false, writes_real_research_state:false, probes count==2 pass, root_md_json_bounded pass (171/172)** |
+| `python scripts/tracka_resume_gate.py --json` | **BLOCKED, PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight.pass:true, outcomes_inspected:false, reads_parquet:false, network:false, writes_real_research_state:false** |
 
-*Prior-session evidence (unchanged, carried forward):* `tests/test_tracka_hardening_140.py`, `tests/test_tracka_hardening_141.py`, `tests/test_tracka_hardening_142.py`, Gate4 bootstrap/leakage scripts+tests+artifacts under `results/fclr_heavy001/` and `results/gate4_v4_bootstrap_diagnostic_summary*.md`, leakage audit dated artifacts. No new `research_state` root files added.
+*Prior session (2026-11-09T14:19:53Z) reported full suite **1068 OK** and 85 targeted OK incl. 140-142; 140/141/142 = 37 OK were re-verified now. Next session must re-run full suite and report exact count.*
 
-## 4. CURRENT STATE OF EACH RESEARCH GATE
+## 2) DONE (carry forward)
+- **FCLR-NEXT-140:** `tests/test_tracka_hardening_140.py` — 17 tmp-isolated tests (seam empty/unreadable refusals; CLI argparse all 3 CLIs; cross-CLI parity + canonical byte-integrity; guarded refuse-before-load on malformed manifests).
+- **FCLR-NEXT-141:** `tests/test_tracka_hardening_141.py` — 11 tests (manifest schema matrix/corrupt paths; prereg contract edge cases incl. `FCLR-010`/`FCLR-012` compatibility; NOGO/GO seam matrix; CLI refusal determinism/canonical byte-identical). Minimal compatibility fix in `scripts/fclr010_harness.py`/`scripts/fclr010_guarded_entry.py` preserved 099/102/103 semantics (fail-closed).
+- **FCLR-NEXT-142:** `tests/test_tracka_hardening_142.py` — 9 tests (guarded/operator/CLI parity matrix; canonical+real-state mutation proofs; seam field-type stability; CLI `--json` determinism/mixed flags/no-traceback-first-line contract).
 
-| Gate | Status | Evidence / Notes |
+## 3) GATE STATE (binding)
+| Gate | Status |
+|---|---|
+| Gate 1 (data loadable) | Track A **BLOCKED** (no admissible unauth liquidation labels). Gate 4 exploratory local 2024-04..09 cache present. |
+| Gate 2 (protocol frozen) | Gate 4 v4 **FROZEN_BEFORE_OUTCOMES**, `confirmatory_claim_go=NO_GO`, exploratory-only. |
+| Gate 3 (RV-only baseline) | Track C forward **INCONCLUSIVE** (0 non-overlapping 30d blocks). |
+| Gate 4 (incremental funding/price) | **EXPLORATORY NO-GO CONFIRMED** on local 2024-04..09. **NOT CONFIRMATORY/NOT PROMOTABLE.** 140/141/142 hardening green. |
+| Forecast Gate | **NOT ELIGIBLE** (no confirmatory promotion). |
+
+## 4) BOTTLENECKS (remove what is removable)
+| Bottleneck | Removable? | Action |
 |---|---|---|
-| **Gate 1 (Data Loadable)** | Track A **BLOCKED** (no admissible unauth liquidation labels). Gate 4 exploratory local 2024-04..09 cache present. | `track_a_deadend_map.md`; `data_cache/*_2024_04..09` |
-| **Gate 2 (Protocol Frozen)** | Gate 4 v4 **FROZEN_BEFORE_OUTCOMES**, `confirmatory_claim_go=NO_GO`, exploratory-only. | `pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` |
-| **Gate 3 (RV-only Baseline)** | Track C forward **INCONCLUSIVE** (0 non-overlapping 30d blocks). | `evaluation_summary_FCLR-012-V.md` |
-| **Gate 4 (Incremental Funding/Price)** | **EXPLORATORY NO-GO CONFIRMED** on local 2024-04..09. Infrastructure hardening 140/141 complete and green. **NOT CONFIRMATORY / NOT PROMOTABLE.** | `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T105800Z.md`, bootstrap summaries |
-| **Forecast Gate** | **NOT ELIGIBLE**. No confirmatory promotion. | frontier/negative results |
+| Track A: no admissible liquidation labels / 2026-11..2027-02 absent, probes==2 | **No (structural)** | **No re-probe.** Harden guards (FCLR-NEXT-143). Monitor ironflow >=2026-11 trigger → **PREREG BEFORE OUTCOMES** → FCLR-012-A. |
+| Track C forward inconclusive / Gate 4 confirmatory NO_GO / sealed-anchor conflict | **No (structural)** | Do not relax. Exploratory only, explicit labels, no promotion. |
+| Agents avoiding heavy work / status churn | **YES** | §0 acceptance requires **≥1 new tmp-isolated hardening test in `tests/test_tracka_hardening_143.py`** + all gates green (or materially different tested task). |
+| `root_md_json_bounded` tight (171/172) | N/A (constraint) | New artifacts to `results/` or dated subdirs only. **Do not weaken.** |
+| `ironflow_fastpath_cache.json` dirtied by tests | **Yes (hygiene)** | Restore after runs; do not commit. Remove `__pycache__`. |
 
-## 5. BOTTLENECK / BLOCKED-SESSION RECONCILIATION
+## 5) KEY EVIDENCE PATHS
+- Handoff (single durable): `AGENT_HANDOFF.md`
+- Research prompt: `RESEARCH_PROMPT.md`
+- Campaign ref (Track A guard): `research_state/FCLR_CAMPAIGN_NEXT.md`
+- Track A deadend / guard: `research_state/track_a_deadend_map.md`, `scripts/tracka_resume_check.py`, `scripts/tracka_resume_gate.py`, `scripts/fclr010_guarded_entry.py`, `scripts/fclr010_harness.py`
+- Hardening tests done: `tests/test_tracka_hardening_140.py`, `tests/test_tracka_hardening_141.py`, `tests/test_tracka_hardening_142.py`
+- Next hardening target: `tests/test_tracka_hardening_143.py` (**create**)
+- Gate 4 v4 exploratory artifacts (read-only context): `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T105800Z.md`, `research_state/gate4_v4_*`, `results/gate4_v4_bootstrap_diagnostic_summary*.md`
 
-| Item | State | Removable? | Allowed route |
-|---|---|---|---|
-| Track A: no admissible liquidation labels (2026-11..2027-02 absent, probes==2) | Structural deadend | **NO** | Guard hardening only; **no** re-probe; monitor ironflow >=2026-11 trigger |
-| Track C forward inconclusive | Structural | **NO** | New admissible panel meeting criteria; do not relax |
-| Gate 4 v4 confirmatory NO_GO / sealed-anchor conflict | Structural | **NO** | **EXPLORATORY only**; no promotion/sealed-anchor reuse; no identical reruns |
-| `tracka_resume_gate.py --json` → BLOCKED | By design | **NO** | Maintain `drift_preflight.pass:true`, `outcomes_inspected:false` |
-| Full `unittest discover` | Green | **Resolved (re-verify)** | **1068 OK this session** |
-| Prereg semantic/harness compatibility regression (FCLR-012 vs FCLR-010) | Fixed/tested this session | **Resolved** | Keep allowlist minimal/frozen; do not weaken refusals |
-
-**Conclusion:** no structural gate removable. Full suite green (1068 OK), targeted 85 OK, drift 115/115 PASS, resume_check pass:true, resume_gate BLOCKED-by-design. FCLR-NEXT-140/141/142 DONE. Next unavoidable heavy path is §0: regression-guard verification each session + Track A monitor readiness (trigger -> **PREREG BEFORE OUTCOMES** -> FCLR-012-A) + **FCLR-NEXT-143** tmp-isolated hardening.
-
-## 6. SINGLE HIGHEST-VALUE NEXT TASK
-
-**FCLR-NEXT-143 hardening (tmp-isolated tests) + regression guard + Track A monitor readiness.** (1) Re-run full verification loop (full ≥1068 OK; 85 targeted OK; drift 115/115; resume_check pass:true probes==2 root 171/172; resume_gate BLOCKED by design). (2) Add `tests/test_tracka_hardening_143.py` covering ≥1 cluster a–d in §0 with stable reason codes, loader-spy/no-canonical-write assertions, and tmp isolation. (3) Keep outputs in `results/` or dated subdirs; **no repo-root `research_state/*.md/*.json`**. (4) Ironflow >=2026-11 trigger: **PREREG BEFORE OUTCOMES** → FCLR-012-A. Never re-run sealed panels, never promote exploratory, never infer `degenerate`/`inference_ok`, never fabricate claimability, never re-probe 2026-11..2027-02. No workflow edits.
-
-## 7. PRECISE VERIFICATION COMMANDS
-
-```bash
-git --no-pager status --short
-python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics tests.test_tracka_hardening_140 tests.test_tracka_hardening_141 tests.test_tracka_hardening_142  # expect 85 OK
-python -m unittest discover tests                                              # expect ≥1068 OK, 0 failures/errors
-python3 scripts/check_tracka_scope_registry_drift.py                           # expect PASS (115/115)
-python scripts/tracka_resume_check.py                                          # expect pass:true, probes==2, root_md_json_bounded pass
-python scripts/tracka_resume_gate.py --json                                    # expect BLOCKED, drift_preflight.pass:true, outcomes_inspected:false
-```
-
-## 8. BLOCKERS / CONSTRAINTS
-
-| Blocker | Evidence | Allowed next route |
-|---|---|---|
-| Track A: no admissible liquidation labels | `track_a_deadend_map.md`, probes==2, 2026-11..2027-02 absent | Guard hardening; **no** re-probe; monitor ironflow >=2026-11 trigger |
-| Track C: forward inconclusive | FCLR-012-V | New admissible panel meeting criteria; do not relax |
-| Gate 4 v4: confirmatory NO_GO / sealed-anchor conflict | v4 prereg | **EXPLORATORY only**, explicit labels, no promotion |
-| Gate 4 v4: funding ablations NO-GO on 2024-04..09 | stab/nogo artifacts | No improvement claim; diagnostics/hardening only |
-| Root md+json bound tight | resume_check (171/172) | New artifacts in `results/` or dated subdirs; **do not weaken** |
-| Protected control plane | repo rules | **No `.github/workflows` edits** |
-| `ironflow_fastpath_cache.json` dirty-by-tests | harness behavior | **Do not commit** (restore after runs) |
-
-## 9. DO NOT DO
-
+## 6) DO NOT DO
 - ❌ Re-probe 2026-11..2027-02 / create Track A probe/scan/wrapper/report families
-- ❌ Workflows/schedulers/pollers/status-only files/controllers
+- ❌ Workflows/schedulers/pollers/status-only files/controllers; **no `.github/workflows` edits**
 - ❌ Track C/B new sealed outcomes or conflate observed/modeled/synthetic labels
 - ❌ Threshold-shopping, holdout reuse, confirmatory/promotion claims from exploratory runs
 - ❌ Mutate saved exploratory JSON artifacts or fabricate `claimable_excludes_zero`
@@ -128,15 +89,10 @@ python scripts/tracka_resume_gate.py --json                                    #
 - ❌ Weaken `root_md_json_bounded` or Track A invariants
 - ❌ Live/paper trading, order endpoints, credentials, access-control bypass
 
-## 10. SESSION START PROTOCOL (mandatory)
-
+## 7) SESSION START (mandatory)
 1. `git pull` + `git status`; read **this file** + `RESEARCH_PROMPT.md`.
-2. Inspect `research_state/experiment_frontier.json`, latest manifests/tests/cache, Gate4 exploratory artifacts.
-3. Execute §0 (measurable task). Cheapest checks first. Update **this file** with exact evidence + current session timestamp.
-
-## 11. NEXT SESSION DELIVERABLE
-
-Updated `AGENT_HANDOFF.md` with regression-guard run evidence (full suite **≥1068 OK**, **85 targeted OK incl. 140/141/142**, drift **115/115 PASS**, resume_check **pass:true probes==2 root_md_json_bounded 171/172 network:false**, resume_gate **BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS drift_preflight.pass:true outcomes_inspected:false**), FCLR-NEXT-142 DONE (9 tmp-isolated tests, clusters a–d), FCLR-NEXT-141/140 status, `ironflow_fastpath_cache.json`/`__pycache__` hygiene, Track A monitor readiness, and the next unfinished **FCLR-NEXT-143** task — acceptance (A) requires **≥1 new tmp-isolated hardening test in `tests/test_tracka_hardening_143.py`** with versioned evidence and all gates green.
+2. Run §0 verification loop (1–6). Fix hygiene only (`ironflow_fastpath_cache.json`/`__pycache__`) — do not commit.
+3. Execute **FCLR-NEXT-143** (measurable). Cheapest checks first. Update **this file** with exact evidence, exact test counts, timestamps, and next unfinished task (FCLR-NEXT-144 if 143 completes).
 
 ---
-**END OF SINGLE DURABLE HANDOFF.**
+**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED.**
