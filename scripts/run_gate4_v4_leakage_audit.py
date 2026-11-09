@@ -163,8 +163,27 @@ def audit_variant_leakage(panel: pd.DataFrame, variant: str, split_defs) -> Dict
     return {"variant": variant, "all_train_params_test_invariant": all_unchanged, "splits": split_audits}
 
 
+def extract_additive_diag(ci: Dict[str, object]) -> Dict[str, object]:
+    """Pull additive bootstrap diagnostics out of a CI dict (legacy-tolerant) so the
+    serialized JSON payload carries them explicitly alongside the raw CI dicts."""
+    return {
+        "effective_block_count": _diag_field(ci, "effective_block_count"),
+        "ci_accounting_valid": _diag_field(ci, "ci_accounting_valid"),
+        "regime_flags": _diag_field(ci, "regime_flags", []),
+        "degenerate": _diag_field(ci, "degenerate"),
+        "inference_ok": _diag_field(ci, "inference_ok"),
+        "n_reps_effective": _diag_field(ci, "n_reps_effective"),
+        "n_obs_finite": _diag_field(ci, "n_obs_finite"),
+    }
+
+
 def audit_block_bootstrap_reproducibility(panel: pd.DataFrame, split_defs) -> Dict[str, object]:
-    """Same deterministic seed must produce identical block-bootstrap CIs across runs."""
+    """Same deterministic seed must produce identical block-bootstrap CIs across runs.
+
+    Returns the raw CI dicts for both runs (legacy shape preserved) plus explicitly
+    serialized additive diagnostics (`effective_block_count`, `regime_flags`,
+    `ci_accounting_valid`, ...) so the persisted JSON carries them for leakage audit.
+    """
     idx = panel.index.get_level_values("timestamp")
     reps = []
     for run in range(2):
@@ -187,7 +206,12 @@ def audit_block_bootstrap_reproducibility(panel: pd.DataFrame, split_defs) -> Di
         df = pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=["timestamp", "ql_base", "ql_alt", "diff"])
         reps.append(block_bootstrap_delta_ci(df, seed=20261109))
     identical = all(reps[0].get(k) == reps[1].get(k) for k in ("point", "ci_low", "ci_high", "n_obs", "n_blocks"))
-    return {"run1": reps[0], "run2": reps[1], "seed": 20261109, "identical_on_rerun": identical}
+    diag1, diag2 = extract_additive_diag(reps[0]), extract_additive_diag(reps[1])
+    return {
+        "run1": reps[0], "run2": reps[1], "seed": 20261109, "identical_on_rerun": identical,
+        "run1_diagnostics": diag1, "run2_diagnostics": diag2,
+        "diagnostics_identical_on_rerun": diag1 == diag2,
+    }
 
 
 def _diag_field(ci: Dict[str, object], key: str, fallback: object = None) -> object:
@@ -266,10 +290,23 @@ def write_md(path: Path, payload: Dict[str, object]) -> None:
             lines.append(f"| {k} | {v1} | {v2} | {v1 == v2} | - | - | - |")
     lines += ["",
               f"**Block-bootstrap CI identical on rerun: {bb['identical_on_rerun']}**",
+              f"**Additive diagnostics identical on rerun: {bb.get('diagnostics_identical_on_rerun')}**",
               f"**CI accounting valid: {_diag_field(run1, 'ci_accounting_valid')}**",
               f"**Effective blocks: {_diag_field(run1, 'effective_block_count')}**",
               f"**Regime flags: {_flags_str(_diag_field(run1, 'regime_flags', []))}**",
               "",
+              "## Additive bootstrap diagnostics (serialized for leakage audit)",
+              "| Diagnostic | Run 1 | Run 2 | Identical |",
+              "|---|---:|---:|---:|",
+    ]
+    d1, d2 = bb.get("run1_diagnostics", {}), bb.get("run2_diagnostics", {})
+    for k in ("effective_block_count", "ci_accounting_valid", "degenerate", "inference_ok",
+              "n_reps_effective", "n_obs_finite"):
+        v1, v2 = d1.get(k), d2.get(k)
+        lines.append(f"| {k} | {v1} | {v2} | {v1 == v2} |")
+    flags1, flags2 = _flags_str(d1.get("regime_flags", [])), _flags_str(d2.get("regime_flags", []))
+    lines.append(f"| regime_flags | {flags1} | {flags2} | {flags1 == flags2} |")
+    lines += ["",
               "## Interpretation (EXPLORATORY ONLY — NOT CONFIRMATORY)",
               payload.get("interpretation", ""),
               "",
@@ -285,6 +322,8 @@ def make_interpretation(payload: Dict[str, object]) -> str:
                  "is perturbed; no test-derived statistic enters training parameters.")
     parts.append(f"Block-bootstrap reproducibility: {payload['block_bootstrap_reproducibility']['identical_on_rerun']} — "
                  "fixed seed yields identical CIs across independent runs (deterministic inference).")
+    parts.append(f"Additive diagnostics reproducible: {payload['block_bootstrap_reproducibility'].get('diagnostics_identical_on_rerun')} — "
+                 "effective_block_count/regime_flags/ci_accounting_valid are serialized in JSON+MD and identical on rerun.")
     if payload["leakage_invariance_all"] and payload["block_bootstrap_reproducibility"]["identical_on_rerun"]:
         parts.append("**Leakage audit PASS (EXPLORATORY diagnostic, not confirmatory):** Gate 4 v4 leakage controls "
                      "hold on the local 2024-04..09 slice; block-bootstrap inference is deterministic and reproducible.")
