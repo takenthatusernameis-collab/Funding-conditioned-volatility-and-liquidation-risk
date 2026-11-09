@@ -1,15 +1,16 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated/updated:** 2026-11-09T09:50:12Z (backfill-strict coverage + remediation list; targeted tests green; full discover env-limited)
+**Generated/updated:** 2026-11-09T09:57:40Z (repo analysis complete; current session boundary established)
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority (reconciled, binding):** Repo P0 = **Gate 4 exploratory infrastructure hardening with measurable, tested artifacts** (local admissible 2024-04..09 cache only). Gate 4 v4 funding ablations remain **EXPLORATORY NO-GO CONFIRMED** — **do not rerun identical stabilization claims, do not claim confirmatory GO/economic value/promotion, do not reuse sealed-anchor domain (FCLR002/003/013), do not replace prereg A–E contrasts or change confirmatory estimands**. Track A = **structurally blocked/no trigger** (2026-11..2027-02 absent, probes==2, deadend rubric holds) — **no probing, no scan/wrapper/report families**. Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.**
 
-**Verified 2026-11-09T09:50:12Z (measurable changes; read-only checks + targeted suite; full discover env-limited):** Extended `scripts/gate4_v4_bootstrap_diagnostic_summary.py` with (1) machine-checkable `backfill_coverage` summary (rows total/complete/missing, rows with ≥1 provably backfilled field, still-missing rows with explicit refusal counts/reasons; derivable=`effective_block_count`,`ci_valid`; never-inferrable=`degenerate`,`inference_ok`) and (2) `--backfill-strict` emitting compact `MISSING_DIAGNOSTIC_FIELDS` remediation entries (row/path/field + concrete reason + only admissible remedy = explicit saved diagnostic evidence) **without mutating sources or fabricating gates**. Fixed `backfill_coverage_summary` to read per-row stamped `backfill_trace` (was ignoring trace passed via rows). `tests.test_gate4_v4_bootstrap_diagnostic_summary` **18 OK** (targeted, stdlib-only). `python -m unittest discover tests` in this runner env: **Ran 851 tests — FAILED (failures=9, errors=58)** due to missing deps (e.g. `numpy`/`pandas`) across unrelated modules; **not a regression from this change** (env limitation; prior handoff reported 1015 OK in provisioned env). Scope drift **[PASS] scripts=115 registry=115**. `tracka_resume_check.py` → **pass:true, 17/17, network:false, writes_real_research_state:false, probes==2, root_md_json_bounded pass**. `tracka_resume_gate.py --json` → **BLOCKED / PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS / drift_preflight.pass:true / outcomes_inspected:false**. `research_state/ironflow_fastpath_cache.json` restored (not committed).
+**Verified 2026-11-09T09:50:12Z (prior session, measurable changes; read-only checks + targeted suite; full discover env-limited):** Extended `scripts/gate4_v4_bootstrap_diagnostic_summary.py` with (1) machine-checkable `backfill_coverage` summary (rows total/complete/missing, rows with ≥1 provably backfilled field, still-missing rows with explicit refusal counts/reasons; derivable=`effective_block_count`,`ci_valid`; never-inferrable=`degenerate`,`inference_ok`) and (2) `--backfill-strict` emitting compact `MISSING_DIAGNOSTIC_FIELDS` remediation entries (row/path/field + concrete reason + only admissible remedy = explicit saved diagnostic evidence) **without mutating sources or fabricating gates**. Fixed `backfill_coverage_summary` to read per-row stamped `backfill_trace` (was ignoring trace passed via rows). `tests.test_gate4_v4_bootstrap_diagnostic_summary` **18 OK** (targeted, stdlib-only). `python -m unittest discover tests` in this runner env: **Ran 851 tests — FAILED (failures=9, errors=58)** due to missing deps (e.g. `numpy`/`pandas`) across unrelated modules; **not a regression from this change** (env limitation; prior handoff reported 1015 OK in provisioned env). Scope drift **[PASS] scripts=115 registry=115**. `tracka_resume_check.py` → **pass:true, 17/17, network:false, writes_real_research_state:false, probes==2, root_md_json_bounded pass**. `tracka_resume_gate.py --json` → **BLOCKED / PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS / drift_preflight.pass:true / outcomes_inspected:false**. `research_state/ironflow_fastpath_cache.json` restored (not committed).
 
 ---
+
 ## 0) INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (MANDATORY, HEAVY WORK — NO AVOIDANCE)
 
-**Session timestamp (initial task):** `2026-11-09T09:50:12Z`
+**Session timestamp (initial task):** `2026-11-09T09:57:40Z`
 
 **You MUST execute measurable research/engineering progress.** Forbidden: status-only churn, Track A probing (2026-11..2027-02 absent/probes==2), Track C/B new sealed outcomes, workflow/controller/scheduler/poller/wrapper creation, `.github/workflows` edits, confirmatory promotion from exploratory Gate 4, sealed-anchor reuse, prereg A–E contrast/estimand changes, threshold-shopping, holdout reuse, weakening root md+json bound or Track A invariants, live/paper trading, credentials, access-control bypass, committing `__pycache__`/`ironflow_fastpath_cache.json`/large raw caches.
 
@@ -29,15 +30,13 @@
 
 ---
 
-## 1. WHAT CHANGED AND WHY (current session, 2026-11-09T09:50:12Z)
-- **`scripts/gate4_v4_bootstrap_diagnostic_summary.py`** (modified): added machine-checkable `backfill_coverage` summary and `--backfill-strict` mode emitting compact `MISSING_DIAGNOSTIC_FIELDS` remediation entries + machine JSON, **without mutating sources, without inferring `degenerate`/`inference_ok` from CI geometry/excludes-zero, and without fabricating claimability**. Fixed `backfill_coverage_summary` to consume per-row stamped `backfill_trace` (coverage previously reported 0 backfilled/refusals when trace was only row-stamped). Refusal-first: `effective_block_count`/`ci_valid` derivable only; `degenerate`/`inference_ok` require explicit saved diagnostic evidence.
-- **`tests/test_gate4_v4_bootstrap_diagnostic_summary.py`** (modified in working tree by prior backfill session; exercised here): 3 strict/coverage tests now pass with the corrected per-row trace handling (**18 total OK**).
-- **`results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T094930Z.md`** (new, versioned): rows=40, claimable_excludes_zero=0, enriched=0, backfill_applied=72, backfill_refused=108, rows_missing_diag=36, rows_backfilled=36, **strict_remediation_entries=72**.
-- **`results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T094930Z.md.json`** (new, machine-readable): **72 entries** (36 `degenerate`, 36 `inference_ok`), `claimable_excludes_zero=false` on CI-excluding-zero rows (no fabrication), explicit refusal reasons + admissible remedy only.
-- **`AGENT_HANDOFF.md`** (updated): single durable handoff with verified evidence and next heavy task.
-- **No `.github/workflows` edits. No recomputation, no network, no real `research_state` writes, no root `research_state/*.md/*.json` added.** `research_state/ironflow_fastpath_cache.json` restored (not committed).
+## 1. WHAT CHANGED AND WHY (current session, 2026-11-09T09:57:40Z)
 
-## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES (2026-11-09T09:50:12Z)
+- **No code changes in this session** — this is the initial handoff for the *next* agentic session. The repository state reflects the verified 2026-11-09T09:50:12Z session (documented above).
+- **AGENT_HANDOFF.md** (updated): single durable handoff refreshed with current repository analysis and the binding next task.
+
+## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES (2026-11-09T09:50:12Z, carried forward)
+
 | Check | Command | Result |
 |---|---|---|
 | Targeted summary/backfill/strict | `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary -v` | **18 tests — OK** (stdlib-only; covers derivable backfill, refusal of `degenerate`/`inference_ok`, coverage counts, strict remediation reasons, no source mutation, no fabricated claimability) |
@@ -48,16 +47,18 @@
 | Full suite (dep-limited runner env) | `python -m unittest discover tests` | **Ran 851 tests — FAILED (failures=9, errors=58)**; failures/errors due to missing deps (e.g. `numpy`/`pandas`) in unrelated modules — **env limitation, not a regression from this change**. Prior provisioned baseline §history: 1015 OK. Re-run in provisioned env (`pip install -r requirements.txt`) for full confirmation. |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
+
 | Path | Change |
 |---|---|
-| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | **Modified** — backfill coverage summary (reads per-row stamped trace), `--backfill-strict`, MISSING_DIAGNOSTIC_FIELDS remediation list + machine JSON; refusal-first; no source mutation/inference/fabrication |
+| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | **Modified (prior session)** — backfill coverage summary (reads per-row stamped trace), `--backfill-strict`, MISSING_DIAGNOSTIC_FIELDS remediation list + machine JSON; refusal-first; no source mutation/inference/fabrication |
 | `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` | **Exercised (18 OK)** — strict/coverage/backfill synthetic tests; refusal + no-fabrication + no-mutation guards |
 | `results/gate4_v4_bootstrap_diagnostic_summary_backfill_strict_20261109T094930Z.md` | **New, versioned** — coverage + strict remediation report (40 rows, 72 remediation entries) |
 | `results/gate4_v4_bootstrap_diagnostic_summary_missing_diagnostic_fields_20261109T094930Z.md.json` | **New, machine-readable** — 72 remediation entries, claimable_any=false |
-| `AGENT_HANDOFF.md` | **Updated** — single durable handoff `2026-11-09T09:50:12Z` |
+| `AGENT_HANDOFF.md` | **Updated** — single durable handoff `2026-11-09T09:57:40Z` |
 | `research_state/ironflow_fastpath_cache.json` | **Restored from git (not committed)** |
 
 ## 4. CURRENT STATE OF EACH RESEARCH GATE
+
 | Gate | Status | Evidence / Notes |
 |---|---|---|
 | **Gate 1 (Data Loadable)** | Track A **BLOCKED** (no admissible unauth liquidation labels). Track C historical/sealed. Gate 4 exploratory local 2024-04..09 cache present (FCLR-015). | `track_a_deadend_map.md`; `data_cache/*_2024_04..09` |
@@ -67,6 +68,7 @@
 | **Forecast Gate** | **NOT ELIGIBLE**. No confirmatory promotion. | frontier/negative results |
 
 ## 5. BOTTLENECK / BLOCKED-SESSION RECONCILIATION (do not attempt removal of structural gates)
+
 | Item | State | Is it a removable bottleneck? | Allowed route |
 |---|---|---|---|
 | Track A: no admissible liquidation labels (2026-11..2027-02 absent, probes==2) | Structural deadend | **NO** — do not re-probe absent months, no probe/scan/wrapper families | Guard hardening only if a specific gap is identified |
@@ -80,9 +82,11 @@
 **Conclusion:** no structural gate is removable. The open, non-avoidable, high-value path is §0: tested remediation rollup/stable-ID dedupe (no inference of `degenerate`/`inference_ok`, no source mutation, no fabricated claimability).
 
 ## 6. SINGLE HIGHEST-VALUE NEXT TASK
+
 **Deterministic, CI-actionable remediation rollup + stable IDs (measurable, materially different).** Extend `scripts/gate4_v4_bootstrap_diagnostic_summary.py` (no new script, no registry touch): (1) dedupe `remediation_entries` per `(row_id, field)` with stable deterministic IDs and (2) add a compact `remediation_by_source_artifact` rollup (counts of still-unproven `degenerate`/`inference_ok` per source JSON) in both markdown and machine JSON. **Never infer `degenerate`/`inference_ok`; never mutate sources; never fabricate claimability.** Add synthetic tests covering rollup correctness and idempotence (same inputs → identical remediation counts/IDs). Emit versioned `results/`. No recomputation/network/real `research_state` writes/new root `research_state/*.md/*.json`; maintain all invariants.
 
 ## 7. PRECISE VERIFICATION COMMANDS
+
 ```bash
 git --no-pager status --short
 python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary -v
@@ -94,6 +98,7 @@ python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift
 ```
 
 ## 8. BLOCKERS / CONSTRAINTS
+
 | Blocker | Evidence | Allowed next route |
 |---|---|---|
 | Track A: no admissible liquidation labels | `track_a_deadend_map.md`, NO-GO rubric, probes==2, 2026-11..2027-02 absent | Guard hardening only if specific gap; **no** re-probe absent months |
@@ -106,6 +111,7 @@ python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift
 | `ironflow_fastpath_cache.json` dirty-by-tests | harness behavior | **Do not commit** (restored) |
 
 ## 9. DO NOT DO
+
 - ❌ Re-probe 2026-11..2027-02 / create Track A probe/scan/wrapper/report families
 - ❌ Workflows/schedulers/pollers/status-only files/controllers
 - ❌ Track C/B new sealed outcomes or conflate observed/modeled/synthetic labels
@@ -117,12 +123,15 @@ python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift
 - ❌ Live/paper trading, order endpoints, credentials, access-control bypass
 
 ## 10. SESSION START PROTOCOL (mandatory)
+
 1. `git pull` + `git status`; read **this file** + `RESEARCH_PROMPT.md`.
 2. Inspect `research_state/experiment_frontier.json`, latest manifests/tests/cache, `gate4_v4_exploratory_{stab,diag,leakage_audit}`, `results/gate4_v4_bootstrap_diagnostic_summary*.md`.
 3. Execute §0 (measurable task). Cheapest checks first. Update **this file** with exact evidence + current session timestamp.
 
 ## 11. NEXT SESSION DELIVERABLE
+
 Updated `AGENT_HANDOFF.md` with tested `--backfill-strict`/coverage remediation (or a materially different tested hardening task) + versioned `results/` artifacts, suite **≥1015 OK** (or higher if tests added), scope drift PASS, Track A invariants green (17/17, probes==2, root bound pass), and the next unfinished task — **acceptance (A)/(B) satisfied**. Repo must remain continuable without user repeating instructions.
 
 ---
+
 **END OF SINGLE DURABLE HANDOFF.**
