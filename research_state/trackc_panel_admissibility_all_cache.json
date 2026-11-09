@@ -1,6 +1,6 @@
 {
   "cache": "research_state/data_cache",
-  "generated_utc": "2026-11-09T19:44:22Z",
+  "generated_utc": "2026-11-09T19:50:24Z",
   "min_complete_symbol_days": 0,
   "network_used": false,
   "next_action_if_met": "freeze new prereg version before any outcome inspection; verify funding/provenance/checksums; materialize splits/manifest; run confirmatory pipeline with block-bootstrap/Holm per protocol",

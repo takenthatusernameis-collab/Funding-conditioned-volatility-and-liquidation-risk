@@ -1,7 +1,7 @@
 {
   "cache": "research_state/data_cache",
-  "generated_utc": "2026-11-09T19:47:49Z",
-  "min_complete_symbol_days": 0,
+  "generated_utc": "2026-11-09T19:44:20Z",
+  "min_complete_symbol_days": 8,
   "network_used": false,
   "next_action_if_met": "freeze new prereg version before any outcome inspection; verify funding/provenance/checksums; materialize splits/manifest; run confirmatory pipeline with block-bootstrap/Holm per protocol",
   "next_action_if_not_met": "no confirmatory outcomes; continue resume-trigger watch (no default probing); keep dep-light gates green",
@@ -9,88 +9,88 @@
   "panel_non_overlapping_30d_blocks_estimate": 0,
   "per_symbol": {
     "BNBUSDT": {
-      "days": 1041,
+      "days": 8,
       "has_1h_klines_zip_detected": true,
-      "has_funding_files_detected": true,
-      "non_overlapping_30d_blocks": 34,
+      "has_funding_files_detected": false,
+      "non_overlapping_30d_blocks": 0,
       "range": [
-        "2024-01-01",
+        "2026-11-01",
         "2026-11-08"
       ],
-      "required_series_complete": false,
-      "resume_trigger_symbol_ok": false,
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
       "series_day_counts": {
-        "indexPriceKlines": 949,
-        "markPriceKlines": 1041,
-        "premiumIndexKlines": 949
+        "indexPriceKlines": 8,
+        "markPriceKlines": 8,
+        "premiumIndexKlines": 8
       }
     },
     "BTCUSDT": {
-      "days": 1041,
+      "days": 8,
       "has_1h_klines_zip_detected": true,
-      "has_funding_files_detected": true,
-      "non_overlapping_30d_blocks": 34,
+      "has_funding_files_detected": false,
+      "non_overlapping_30d_blocks": 0,
       "range": [
-        "2024-01-01",
+        "2026-11-01",
         "2026-11-08"
       ],
-      "required_series_complete": false,
-      "resume_trigger_symbol_ok": false,
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
       "series_day_counts": {
-        "indexPriceKlines": 1010,
-        "markPriceKlines": 1041,
-        "premiumIndexKlines": 1009
+        "indexPriceKlines": 8,
+        "markPriceKlines": 8,
+        "premiumIndexKlines": 8
       }
     },
     "ETHUSDT": {
-      "days": 1041,
+      "days": 8,
       "has_1h_klines_zip_detected": true,
-      "has_funding_files_detected": true,
-      "non_overlapping_30d_blocks": 34,
+      "has_funding_files_detected": false,
+      "non_overlapping_30d_blocks": 0,
       "range": [
-        "2024-01-01",
+        "2026-11-01",
         "2026-11-08"
       ],
-      "required_series_complete": false,
-      "resume_trigger_symbol_ok": false,
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
       "series_day_counts": {
-        "indexPriceKlines": 980,
-        "markPriceKlines": 1041,
-        "premiumIndexKlines": 980
+        "indexPriceKlines": 8,
+        "markPriceKlines": 8,
+        "premiumIndexKlines": 8
       }
     },
     "SOLUSDT": {
-      "days": 1041,
+      "days": 8,
       "has_1h_klines_zip_detected": true,
-      "has_funding_files_detected": true,
-      "non_overlapping_30d_blocks": 34,
+      "has_funding_files_detected": false,
+      "non_overlapping_30d_blocks": 0,
       "range": [
-        "2024-01-01",
+        "2026-11-01",
         "2026-11-08"
       ],
-      "required_series_complete": false,
-      "resume_trigger_symbol_ok": false,
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
       "series_day_counts": {
-        "indexPriceKlines": 949,
-        "markPriceKlines": 1041,
-        "premiumIndexKlines": 949
+        "indexPriceKlines": 8,
+        "markPriceKlines": 8,
+        "premiumIndexKlines": 8
       }
     },
     "XRPUSDT": {
-      "days": 1041,
+      "days": 8,
       "has_1h_klines_zip_detected": true,
-      "has_funding_files_detected": true,
-      "non_overlapping_30d_blocks": 34,
+      "has_funding_files_detected": false,
+      "non_overlapping_30d_blocks": 0,
       "range": [
-        "2024-01-01",
+        "2026-11-01",
         "2026-11-08"
       ],
-      "required_series_complete": false,
-      "resume_trigger_symbol_ok": false,
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
       "series_day_counts": {
-        "indexPriceKlines": 949,
-        "markPriceKlines": 1041,
-        "premiumIndexKlines": 949
+        "indexPriceKlines": 8,
+        "markPriceKlines": 8,
+        "premiumIndexKlines": 8
       }
     }
   },
@@ -103,6 +103,6 @@
     "SOLUSDT",
     "XRPUSDT"
   ],
-  "symbols_with_required_series": 0,
-  "window_hint": null
+  "symbols_with_required_series": 5,
+  "window_hint": "2026_11"
 }
