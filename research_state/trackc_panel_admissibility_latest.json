@@ -1,0 +1,108 @@
+{
+  "cache": "research_state/data_cache",
+  "generated_utc": "2026-11-09T19:47:49Z",
+  "min_complete_symbol_days": 0,
+  "network_used": false,
+  "next_action_if_met": "freeze new prereg version before any outcome inspection; verify funding/provenance/checksums; materialize splits/manifest; run confirmatory pipeline with block-bootstrap/Holm per protocol",
+  "next_action_if_not_met": "no confirmatory outcomes; continue resume-trigger watch (no default probing); keep dep-light gates green",
+  "outcomes_computed": false,
+  "panel_non_overlapping_30d_blocks_estimate": 0,
+  "per_symbol": {
+    "BNBUSDT": {
+      "days": 1041,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 34,
+      "range": [
+        "2024-01-01",
+        "2026-11-08"
+      ],
+      "required_series_complete": false,
+      "resume_trigger_symbol_ok": false,
+      "series_day_counts": {
+        "indexPriceKlines": 949,
+        "markPriceKlines": 1041,
+        "premiumIndexKlines": 949
+      }
+    },
+    "BTCUSDT": {
+      "days": 1041,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 34,
+      "range": [
+        "2024-01-01",
+        "2026-11-08"
+      ],
+      "required_series_complete": false,
+      "resume_trigger_symbol_ok": false,
+      "series_day_counts": {
+        "indexPriceKlines": 1010,
+        "markPriceKlines": 1041,
+        "premiumIndexKlines": 1009
+      }
+    },
+    "ETHUSDT": {
+      "days": 1041,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 34,
+      "range": [
+        "2024-01-01",
+        "2026-11-08"
+      ],
+      "required_series_complete": false,
+      "resume_trigger_symbol_ok": false,
+      "series_day_counts": {
+        "indexPriceKlines": 980,
+        "markPriceKlines": 1041,
+        "premiumIndexKlines": 980
+      }
+    },
+    "SOLUSDT": {
+      "days": 1041,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 34,
+      "range": [
+        "2024-01-01",
+        "2026-11-08"
+      ],
+      "required_series_complete": false,
+      "resume_trigger_symbol_ok": false,
+      "series_day_counts": {
+        "indexPriceKlines": 949,
+        "markPriceKlines": 1041,
+        "premiumIndexKlines": 949
+      }
+    },
+    "XRPUSDT": {
+      "days": 1041,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 34,
+      "range": [
+        "2024-01-01",
+        "2026-11-08"
+      ],
+      "required_series_complete": false,
+      "resume_trigger_symbol_ok": false,
+      "series_day_counts": {
+        "indexPriceKlines": 949,
+        "markPriceKlines": 1041,
+        "premiumIndexKlines": 949
+      }
+    }
+  },
+  "resume_trigger_met": false,
+  "resume_trigger_rule": ">=5 symbols with required series AND >=3 non-overlapping 30d blocks (estimate; funding/provenance/prereg still required before outcomes)",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "symbols_with_required_series": 0,
+  "window_hint": null
+}
