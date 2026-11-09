@@ -143,6 +143,45 @@ class TestFundingAblations(unittest.TestCase):
         assert pd.isna(pct.iloc[0]) and pd.isna(pct.iloc[1])
 
 
+    def test_funding_augmented_fit_does_not_numerically_collapse_on_q1_fixture(self):
+        """EXPLORATORY regression guard for the FCLR-015 split-3 instability mechanism.
+
+        The pre-registered 2024-04..09 v3_30d run showed B/D QLIKE blowing up on
+        the Aug-Sep test split (B=45.0 vs A=0.97) driven by near-zero forecasts
+        after standardizing a narrow funding distribution alongside wide RV
+        features, then flooring predictions at 0.0. This test pins the
+        *detection* contract on the canonical 2024-Q1 fixture used elsewhere in
+        this suite: a funding-augmented direct-variance OLS fit must not
+        numerically collapse (QLIKE many times the RV-only baseline) on that
+        fixture. It does NOT assert any research improvement; it only guards
+        against silent numerical failure and against a "fix" that regresses the
+        standard fixture.
+        """
+        panel = self.__class__.panel
+        train, test = _split(panel)
+        fcols_a = BASE[:]
+        fcols_b = BASE + ["funding_signed"]
+        train_n, _, test_n, _ = apply_train_only_normalization(train, test, test, fcols_b)
+        p_a = fit_predict_ols(train_n, test_n, fcols_a)
+        p_b = fit_predict_ols(train_n, test_n, fcols_b)
+        y = test_n["target_rv"].to_numpy(dtype=float)
+        ql_a = veval.qlike(y.tolist(), p_a.tolist())
+        ql_b = veval.qlike(y.tolist(), p_b.tolist())
+        assert ql_a is not None and np.isfinite(ql_a), "RV-only QLIKE must be finite on Q1 fixture"
+        assert ql_b is not None and np.isfinite(ql_b), "funding-augmented QLIKE must be finite on Q1 fixture"
+        # Detection contract: no order-of-magnitude collapse on the standard fixture.
+        assert ql_b < 10.0 * ql_a, (
+            f"funding-augmented fit collapsed on Q1 fixture: B QLIKE={ql_b} vs A QLIKE={ql_a}"
+        )
+        # Record the near-zero inflation measurement for the EXPLORATORY diagnostic note.
+        eps = 1e-5
+        self.__class__._nearzero_inflation = {
+            "near_a": float(np.mean(p_a < eps)),
+            "near_b": float(np.mean(p_b < eps)),
+            "ql_a": float(ql_a),
+            "ql_b": float(ql_b),
+        }
+
     def test_confirmatory_provenance_guard_refuses_unprovenanced_2025(self):
         """Confirmatory-labeled runs on unprovenanced 2025+ cache must fail closed (FCLR-014 NO-GO)."""
         from scripts.run_funding_ablations import check_confirmatory_provenance
