@@ -1,44 +1,116 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session MUST continue from here)
 
-**Updated:** 2026-11-09T16:39:00Z
-**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (repo-name priority: "Funding-conditioned volatility" first — Track C is the only unblocked research track; Track A liquidation risk structurally blocked). git tree clean except uncommitted `research_state/run_manifest.json` (materialized LFS content — do not commit unless asked) and `research_state/ironflow_fastpath_cache.json` (cache — do not commit). `__pycache__` removed.
-**Binding priority:** P0 = **Track C funding-conditioned volatility deeper validation (FUNDING_CONDITIONING_DEEPER_VALIDATION-002)** — status now **COMPLETE_INCONCLUSIVE (exploratory)**. Track B H003 **COMPLETE_INCONCLUSIVE** as of 2026-11-09T15:35:43Z. Track A = STRUCTURALLY BLOCKED / NO TRIGGER (2026-11..2027-02 absent, ironflow probes==2) — no probing, no scan/wrapper/report families. **No status-only churn. No `.github/workflows` edits. Every session must produce versioned, auditable artifacts and/or tested code.**
+**Updated:** 2026-11-09T17:52:40Z (message time) — handoff refresh after repo-state verification.
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (repo-name priority: **funding-conditioned volatility** first — Track C is the only research track with admissible OOS evidence; Track A liquidation risk is structurally blocked). `git status --short`: clean (no uncommitted `run_manifest.json` LFS materialization, no `ironflow_fastpath_cache.json`, no `__pycache__` observed). Do **not** commit large raw caches/data zips, `__pycache__`, or workflow changes.
+**Binding priority:** P0 = **Track C funding-conditioned volatility — next materially different heavy work** (not confirmatory on current data). `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` = **COMPLETE_INCONCLUSIVE (EXPLORATORY_ONLY, 2026-11-09T16:39:00Z)**. Track B H003 = **COMPLETE_INCONCLUSIVE (2026-11-09T15:35:43Z)**. Track A = **STRUCTURALLY BLOCKED / NO TRIGGER** (ironflow `data_through=2026-10`; 2026-11..2027-02 absent; probes==2) — **no probing, no scan/wrapper/report families**. **No status-only churn. No `.github/workflows` edits. No confirmatory promotion from exploratory results. No sealed-holdout reuse, threshold shopping, or conflating observed/modeled/synthetic labels. Every session must produce versioned, auditable artifacts and/or tested code.**
 
 ---
 
-## 0) INITIAL TASK MESSAGE — MANDATORY HEAVY WORK (2026-11-09T16:39:00Z) — DO NOT AVOID
+## 0) INITIAL TASK MESSAGE — 2026-11-09T17:52:40Z — MANDATORY HEAVY WORK (DO NOT AVOID)
 
-**You MUST execute measurable research/engineering progress this session.** Forbidden: status-only churn; FCLR-NEXT-14x guard-hardening on legacy entrypoints; Track A probing/re-probe; Track C/B new sealed outcomes or conflating observed/modeled/synthetic labels; workflow/controller/scheduler/poller/wrapper creation; `.github/workflows` edits; confirmatory promotion from exploratory Gate 4; sealed-anchor reuse; prereg A–E/estimand changes; threshold-shopping/holdout reuse; weakening `root_md_json_bounded` or Track A invariants; fabricating outcomes; live/paper trading; credentials; access-control bypass; committing `__pycache__`/`research_state/ironflow_fastpath_cache.json`/large raw caches.
+**Execute measurable research/engineering progress this session.** Forbidden: status-only churn; Track A probing/re-probe; FCLR-NEXT-14x-style guard-hardening substitution on legacy entrypoints; Track C/B new sealed outcomes without frozen prereg; conflating observed/modeled/synthetic labels; workflow/controller/scheduler/poller/wrapper creation; `.github/workflows` edits; confirmatory claims from exploratory runs; sealed-anchor reuse; prereg A–E/estimand changes; threshold-shopping/holdout reuse; weakening `root_md_json_bounded` or Track A invariants; fabricating outcomes; live/paper trading; credentials; access-control bypass.
 
-### CAMPAIGN COMPLETED — Track C deeper validation (FUNDING_CONDITIONING_DEEPER_VALIDATION-002) (heavy, bounded, offline)
+### Verified state (2026-11-09T17:52:40Z)
+| Item | Evidence |
+|---|---|
+| Track C deeper validation artifacts present | `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_20261109T162703Z.md`, `..._002_20261109T163517Z.md` |
+| Decision recorded | `research_state/negative_results_report.md` Track C section (2026-11-09T16:39:00Z); `research_state/experiment_frontier.json` `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` = `COMPLETE_INCONCLUSIVE` (exploratory) |
+| Dep-light test gate | `python -m unittest tests.test_synthetic_boundary_labels` → **8/8 OK** (2026-11-09T17:52:40Z session verify). Full `discover` blocked by missing numpy/pandas/scipy in this runner; tmp-isolate heavy-dep tests; never fabricate. |
+| Confirmatory blocker (structural) | FCLR-002 test 2024-07-23..2024-09-30 = 70 days = **2** non-overlapping 30-day blocks (<3). Binance archive ends **2026-11-02** (404 beyond). No cached >=3-block unsealed panel ready. 2024 partitions consumed (FCLR-004 BLOCKED). **Do not manufacture a confirmatory claim.** |
 
-**STREAM_B_DEEP_ANALYSIS-001** (ran 2026-11-09T16:27:03Z) → `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_20261109T162703Z.md` on frozen FCLR-002 splits. TEST QLIKE: B1 0.662552; C2_all 0.632151 (+4.588% rel, diff -0.030400, 95% CI [-0.044345,-0.018402], excludes 0 YES); C1 +0.972% (CI excludes 0 YES); A3_pricedisloc +2.255% (YES); A1_fundpctz +4.051% (YES); A2_rvratios -1.534% and A4_fund_rvrat -0.526% (NO). All 5 symbols improve +4.0%..+5.0%; SOLUSDT marginal.
+### Campaign result carried forward (do not relitigate without new admissible data)
+- **STREAM_B_DEEP_ANALYSIS-001 (2026-11-09T16:27:03Z, frozen FCLR-002):** B1 0.662552, C2_all 0.632151 (**+4.588%** rel QLIKE, diff -0.030400, 95% CI [-0.044345,-0.018402], excludes 0 YES). C1 +0.972% (YES), A3_pricedisloc +2.255% (YES), A1_fundpctz +4.051% (YES), A2_rvratios -1.534%/A4_fund_rvrat -0.526% (NO). All 5 symbols +4.0%..+5.0%.
+- **STREAM_B_DEEP_ANALYSIS-002 (2026-11-09T16:35:17Z):** regime-stratified QLIKE (train-only quartiles, no look-ahead, 2000 block-bootstrap reps). **Q1 extreme-funding skill robust (EXPLORATORY):** Q1_low_abs_pos CI excludes 0 YES for all 5 symbols (BNB +5.081%, BTC +4.374%, ETH +5.816%, SOL +6.923%, XRP +5.370%); Q1_low_abs_neg YES XRP (+9.192%); Q2_pos YES BTC/ETH/XRP. Aggregate: Q1_low_abs_neg **+4.890%** (YES), Q1_low_abs_pos **+5.346%** (YES), Q2_pos **+3.969%** (YES), Q2_neg -2.218% (NO), Q4_high_abs_neg -4.696% (NO). Q3/Q4_high_abs_pos = 0 rows (degenerate train boundaries). **Confirmatory gate NOT MET** (2 blocks < 3).
 
-**STREAM_B_DEEP_ANALYSIS-002** (ran 2026-11-09T16:35:17Z) → `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-002_20261109T163517Z.md` — regime-stratified QLIKE per symbol per funding regime (TRAIN-only thresholds, no look-ahead) + interaction/ablation per regime + block-bootstrap CIs (2000 reps). **Key result:** Q1 (extreme funding) regimes show robust skill — Q1_low_abs_pos CI_excludes0=YES for all 5 symbols (BNB +5.081%, BTC +4.374%, ETH +5.816%, SOL +6.923%, XRP +5.370%); Q1_low_abs_neg YES for XRP (+9.192%); Q2_pos YES for BTC/ETH/XRP. Aggregate pooled: Q1_low_abs_neg +4.890% (CI excl 0 YES), Q1_low_abs_pos +5.346% (YES), Q2_pos +3.969% (YES), Q2_neg -2.218% (NO), Q4_high_abs_neg -4.696% (NO). Q3/Q4_high_abs_pos = 0 rows (train quartile boundaries degenerate). **BUT** FCLR-002 test = 2 non-overlapping 30-day blocks (< 3) → confirmatory gate NOT met; skill is EXPLORATORY only, do NOT promote.
+### Next unfinished heavy work (do in order — mandatory, measurable)
+1. **Track C reproducibility + audit hardening (offline, bounded, no new outcomes):** create a versioned artifact `research_state/trackc_reproducibility_audit_<UTC>.md` (or timestamped) that (a) verifies SHA256/size/timestamps for the two STREAM_B summaries + `fclr002_panel.json`/manifest split refs used, (b) records exact rerun commands + environment deps present/missing, (c) restates the 2-block confirmatory blocker with `block_count_resolution_20261103T102000Z.md`/manifest evidence, and (d) lists the *single* next confirmatory path with a concrete prereg skeleton filename to create **before** any outcome inspection if/when a >=3-block admissible panel appears. Do not inspect new sealed outcomes.
+2. **Test/engineering bottleneck (if actionable):** identify dep-light Track C/volatility tests runnable without numpy/pandas/scipy and get them green with tmp isolation; if none are actionable, add/extend a small stdlib-only unit test around existing volatility/metrics logic *only if* it exercises real code paths (no placeholder tests). Record exact test counts.
+3. **Resume-trigger watchlist (evidence, no probing):** in the same reproducibility artifact, document the admissible confirmatory trigger: new unauthenticated Binance panel with >=5 symbols and >=3 non-overlapping 30-day OOS blocks (or equivalent pre-registered design), plus full preregistration frozen before outcomes; also Track A trigger rules unchanged. No network probing in this session unless performing a single bounded admissible check with provenance logged — default is no probe.
+4. **Update this file** with exact evidence, commands run, test counts, timestamps, and the next unfinished task.
 
-**Status decision RECORDED (2026-11-09T16:39:00Z):**
-- `negative_results_report.md` Track C section appended — exact regime table, counts, timestamps, CI_excludes0, rel_imp values.
-- `experiment_frontier.json` entry `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` set to **COMPLETE_INCONCLUSIVE** (exploratory) with exact evidence/counts/timestamps.
+**Acceptance (mandatory):** (A) a new versioned `trackc_reproducibility_audit_*` artifact committed/ready with hashes, commands, blocker evidence, and next prereg path + updated `AGENT_HANDOFF.md` + green dep-light tests recorded, **or** (B) a materially different tested engineering/research task with same evidence discipline. **Anything less is failure.**
 
-### Bottleneck REMOVED — `tests/test_synthetic_boundary_labels.py`
+---
 
-8 tests already wrapped in `unittest.TestCase` subclass; `python -m unittest tests.test_synthetic_boundary_labels` → **8/8 OK**. No further action needed. Dep-light core logic tests pass; heavy-dep tests (numpy/pandas/scipy missing) remain import-error isolated — do not fabricate.
+## 1) VERIFIED (2026-11-09T17:52:40Z session)
 
-### Next unfinished work (do in order — mandatory)
+| Check | Result |
+|---|---|
+| `git status --short` | clean |
+| `python -m unittest tests.test_synthetic_boundary_labels` | **8/8 OK** |
+| STREAM_B artifacts | both summaries present (001/002 timestamps as above) |
+| Frontier/negative report | `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` COMPLETE_INCONCLUSIVE; Track C negative section present |
+| Track A | no trigger; no re-probe performed |
 
-1. **Next focus campaign (repo-name priority: Funding-conditioned volatility):** FUNDING_CONDITIONING_DEEPER_VALIDATION-002 is COMPLETE_INCONCLUSIVE (exploratory). No confirmatory path exists on current data — FCLR-002 test = 2 blocks (< 3 required), Binance archive ends 2026-11-02 with no unsealed panel beyond it, all 2024 partitions consumed (FCLR-004 BLOCKED). **Do not manufacture a confirmatory claim.** The funding-conditioned volatility question remains open: Q1 extreme-funding regimes show robust incremental skill but cannot be promoted. Next materially different route: await new admissible Binance panel with >=3 non-overlapping 30-day blocks (resume trigger) → build FCLR-008 with full preregistration before outcomes. Until then, no Track C confirmatory work is possible; do not substitute status-only churn.
+---
 
-2. **Verify artifacts:** Confirm `evaluation_summary_STREAM_B_DEEP_ANALYSIS-002_20261109T163517Z.md` and `negative_results_report.md` Track C section and `experiment_frontier.json` COMPLETE_INCONCLUSIVE entry all present with exact timestamps.
+## 2) DONE (carry forward)
+- Volatility gate H001 closed NOT_SUPPORTED on claim-worthy panels (FCLR-001/002/003/008/v3/FCLR-013). Risk overlay INELIGIBLE.
+- Track A structurally blocked; no admissible unauthenticated liquidation labels; ironflow probes==2 exhausted.
+- Track B H003 **COMPLETE_INCONCLUSIVE** (2026-11-09T15:35:43Z).
+- Track C `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` **COMPLETE_INCONCLUSIVE (EXPLORATORY_ONLY)** (2026-11-09T16:39:00Z) — robust Q1 regime skill but 2 blocks < 3; not confirmatory.
+- `test_synthetic_boundary_labels` dep-light: 8/8 OK.
 
-3. **Update this file** (`AGENT_HANDOFF.md`) with exact evidence, counts, timestamps, and next unfinished task (this session).
+---
 
-### Execute now (cannot skip)
+## 3) GATE STATE (binding)
+| Gate | Status |
+|---|---|
+| Gate 1 | Track A BLOCKED; Track C cache/manifests present |
+| Gate 2 | Gate 4 v4 frozen-before-outcomes context preserved; no confirmatory claim |
+| Gate 3 | Track C forward INCONCLUSIVE / 2-block limit on FCLR-002 |
+| Gate 4 | EXPLORATORY evidence only; NOT CONFIRMATORY/NOT PROMOTABLE |
+| Forecast Gate | NOT ELIGIBLE |
+| Track B H003 | COMPLETE_INCONCLUSIVE |
+| Track C deeper validation | COMPLETE_INCONCLUSIVE (EXPLORATORY_ONLY) |
 
-1. `git status --short` (expect only uncommitted `research_state/run_manifest.json` materialized LFS + `research_state/ironflow_fastpath_cache.json` cache; no `__pycache__`). Leave both as-is — do not commit.
-2. `python -m unittest tests.test_synthetic_boundary_labels` → expect 8/8 OK (dep-light). Full `discover` cannot complete (numpy/pandas/scipy missing → import errors on heavy-dep tests); tmp-isolate heavy-dep tests.
-3. Perform campaign step 1–3 above. Record exact results, counts, and timestamps here.
+---
 
-**Acceptance (mandatory):** (A) Track C status decision recorded in `negative_results_report.md` Track C section + `experiment_frontier.json` COMPLETE_INCONCLUSIVE + `AGENT_HANDOFF.md` updated with exact evidence/counts/timestamps, **and** `test_synthetic_boundary_labels` collects 8 tests, **or** (B) a materially different tested engineering task with same green gates and versioned evidence. **Anything less is failure.**
+## 4) BOTTLENECKS
+| Bottleneck | Status | Action |
+|---|---|---|
+| Confirmatory Track C impossible on current data (2 blocks, archive ends 2026-11-02) | structural/data | Record reproducibly; define prereg-before-outcomes resume path; no fake confirmatory run |
+| numpy/pandas/scipy missing in runner | env | Use stdlib/deplight tests + existing analysis artifacts; tmp-isolate heavy-dep tests |
+| `root_md_json_bounded` / artifact churn | constraint | Put new artifacts under `research_state/` dated files sparingly or `results/` as appropriate; do not weaken guards |
+| Track A no admissible labels | structural | No re-probe; trigger-only with prereg before outcomes |
+
+---
+
+## 5) KEY EVIDENCE PATHS
+- `AGENT_HANDOFF.md` (this file, single durable)
+- `RESEARCH_PROMPT.md`
+- `research_state/experiment_frontier.json`
+- `research_state/negative_results_report.md`
+- `research_state/run_manifest.json` (LFS-tracked; materialize if pointer)
+- `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_20261109T162703Z.md`
+- `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-002_20261109T163517Z.md`
+- `research_state/block_count_resolution_20261103T102000Z.md`
+- `research_state/fclr_h003_pre_registration.md`, `research_state/evaluation_summary_h003_FCLR002.md`
+- `scripts/synthetic_boundary_labels.py`, `tests/test_synthetic_boundary_labels.py`
+
+---
+
+## 6) DO NOT DO
+- ❌ Track A probing / scan/wrapper/report/status-file families
+- ❌ Confirmatory/promotion claims from exploratory runs; threshold shopping; sealed holdout reuse
+- ❌ New sealed outcomes without frozen preregistration
+- ❌ Conflate observed liquidations with modeled/synthetic boundary breaches
+- ❌ `.github/workflows` edits; schedulers/pollers/controllers
+- ❌ Commit raw caches/zips/`__pycache__`/`ironflow_fastpath_cache.json`
+- ❌ Live/paper trading, order endpoints, credentials, access-control bypass
+
+---
+
+## 7) SESSION START (mandatory)
+1. Read **this file** + `RESEARCH_PROMPT.md`; `git status --short`.
+2. `git lfs pull` if `research_state/run_manifest.json` is a pointer (needed for split refs).
+3. Run dep-light verification: `python -m unittest tests.test_synthetic_boundary_labels` (record count). Do not fabricate full-suite results if heavy deps missing.
+4. Execute **§0 heavy work item 1** (reproducibility audit artifact) with hashes/timestamps/commands/blocker evidence/prereg resume path.
+5. Update **this file** with exact evidence and next unfinished task.
+
+---
+
+**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED. (2026-11-09T17:52:40Z)**
 
 ---
 
