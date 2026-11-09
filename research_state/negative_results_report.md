@@ -232,3 +232,19 @@ holdout reuse, no split changes.
 - **Interpretation:** No consistent incremental forecast skill of C2 over B0 across leverage/side scenarios. Differences are marginal and directionally inconsistent. Null result preserved. Does not satisfy any forecast gate; risk overlay remains INELIGIBLE.
 - **Artifact:** `research_state/evaluation_summary_h003_FCLR002.md` (regenerated 2026-11-09T15:27:50Z via `H003_EXPERIMENT=FCLR-002 python scripts/run_h003.py`; perf fix: single mark-price index vs per-day rglob).
 - **Cell registered:** `research_state/experiment_frontier.json` entry `FCLR-H003-FCLR-002` (status COMPLETE_INCONCLUSIVE).
+
+---
+## Track C — Funding-conditioned volatility deeper validation (FUNDING_CONDITIONING_DEEPER_VALIDATION-002) — 2026-11-09T16:39:00Z
+
+- **Outcome:** COMPLETE_INCONCLUSIVE (EXPLORATORY_ONLY). Forecast gate NOT MET — not confirmatory, not promotable.
+- **Contrast:** C2 (RV + funding + price-dislocation/EMA) vs B1 (HAR-style RV-only) on next-24-hour realized variance, out-of-sample QLIKE, frozen FCLR-002 splits (train 2024-04-01..2024-06-08, val 2024-06-16..2024-07-15, test 2024-07-23..2024-09-30; 5 symbols BTC/ETH/BNB/SOL/XRP).
+- **Aggregate test (STREAM_B_DEEP_ANALYSIS-001):** C2 vs B1 +4.588% relative QLIKE reduction; 95% CI [-0.044345, -0.018402] excludes 0 (YES). All 5 symbols improve +4.0%..+5.0%; SOLUSDT marginal.
+- **Regime-stratified test (STREAM_B_DEEP_ANALYSIS-002, train-only quartile thresholds, no look-ahead):** Q1 extreme-funding regimes show robust funding-conditioned volatility skill (CI excludes 0 YES):
+  - Q1_low_abs_pos: CI excludes 0 YES for all 5 symbols (BNB +5.081%, BTC +4.374%, ETH +5.816%, SOL +6.923%, XRP +5.370%); aggregate +5.346% (CI [-0.057688,-0.023675], YES).
+  - Q1_low_abs_neg: CI excludes 0 YES for XRP (+9.192%); aggregate +4.890% (CI [-0.080391,-0.003577], YES).
+  - Q2_pos: CI excludes 0 YES for BTC/ETH/XRP; aggregate +3.969% (CI [-0.037703,-0.009791], YES).
+  - Q2_neg: aggregate -2.218% (NO). Q4_high_abs_neg: aggregate -4.696% (NO). Q3/Q4_high_abs_pos: 0 rows (train quartile boundaries degenerate).
+- **Block requirement:** NOT MET. FCLR-002 test window 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks; protocol requires >=3. Confirmatory gate not met.
+- **Interpretation:** Q1 extreme-funding regimes show robust incremental skill of funding + price features over RV-only baseline (CI excludes 0, rel_imp > 0 consistently), but with only 2 test blocks the result is EXPLORATORY only. Do NOT promote to confirmatory. Do NOT relax the block-count criterion. No threshold shopping. No conflation with observed liquidations — Track C is volatility/stress outcomes only.
+- **Artifacts:** `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_20261109T162703Z.md` (ran 2026-11-09T16:27:03Z); `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-002_20261109T163517Z.md` (ran 2026-11-09T16:35:17Z).
+- **Cell registered:** `research_state/experiment_frontier.json` entry `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` set to COMPLETE_INCONCLUSIVE (exploratory) 2026-11-09T16:39:00Z.

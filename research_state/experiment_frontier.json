@@ -286,16 +286,18 @@
     },
     {
       "rank": 0,
-      "task": "FUNDING_CONDITIONING_DEEPER_VALIDATION-002: Regime-stratified QLIKE by funding quartiles per symbol/time within test; interaction refinements on frozen FCLR-002 splits OR build FCLR-008 leakage-resistant panel with preregistration if pursuing new confirmatory",
-      "prerequisite": "Tests pass, Track A monitor. Work on frozen splits or build new panel only with full prereg.",
-      "acceptance": "evaluation_summary with regime stratification + evidence; if building FCLR-008: preregistration written before outcomes, new experiment ID, all criteria met.",
-      "blockers": "FCLR-002 <3 blocks; FCLR-008 needs panel construction from raw archives",
-      "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell.",
-      "status": "IN_PROGRESS",
+      "task": "FUNDING_CONDITIONING_DEEPER_VALIDATION-002: Regime-stratified QLIKE by funding quartiles per symbol/time within test; interaction refinements on frozen FCLR-002 splits. COMPLETE_INCONCLUSIVE (exploratory) — Q1 extreme-funding regimes show robust skill (CI excludes 0 YES, rel_imp +4.374%..+9.192% per symbol) but FCLR-002 test = 2 non-overlapping 30-day blocks (< 3) → not confirmatory, not promotable. Negative result recorded in negative_results_report.md Track C section 2026-11-09T16:39:00Z.",
+      "prerequisite": "Tests pass, Track A monitor. Work on frozen splits only; no new confirmatory cell without full preregistration.",
+      "acceptance": "evaluation_summary with regime stratification + evidence written (STREAM_B_DEEP_ANALYSIS-001 + STREAM_B_DEEP_ANALYSIS-002); status COMPLETE_INCONCLUSIVE recorded in negative_results_report.md Track C section and experiment_frontier.json; AGENT_HANDOFF.md updated with exact evidence/counts/timestamps.",
+      "blockers": "FCLR-002 test = 2 blocks (< 3 required) → confirmatory gate not met; exploratory only. FCLR-008 would need panel construction from raw archives + new preregistration if pursuing confirmatory.",
+      "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell. Do not promote exploratory result to confirmatory. Do not threshold-shop.",
+      "status": "COMPLETE_INCONCLUSIVE",
+      "timestamp_utc": "20261109T163900Z",
+      "generated": "20261109T163900Z",
+      "completed_utc": "20261109T163900Z",
       "resume_triggers": [
-        "complete deeper validation or FCLR-008 prereg+panel plan"
-      ],
-      "generated": "20261103T110039Z"
+        "new admissible Binance panel with >=3 non-overlapping 30-day blocks for FCLR-008 confirmatory"
+      ]
     },
     {
       "rank": 0,
