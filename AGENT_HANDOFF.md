@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated:** 2026-11-09T00:42:00Z
+**Generated:** 2026-11-09T01:09:49Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority (reconciled):** Repo P0 = Phase 3 Gate 4 funding-conditioned volatility ablations using local data (measurable, unblocked). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn.**
-**Verified this session:** git clean at start (2f21b1dd4); Gate 4 v4 EXPLORATORY ablation executed (exit 0, NOT CONFIRMATORY/NOT PROMOTABLE) on local 2024-04..09 cache with versioned artifacts; exec artifacts placed under `research_state/gate4_v4_exploratory_exec/` to satisfy Track A root bound (172) — no check weakened; `python -m unittest discover tests` → Ran 950 tests OK; `tracka_resume_check.py` → pass:true, 17/17, probes==2, network:false, writes_real_research_state:false; `tracka_resume_gate.py --json` → drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false. Local 2024-04..09 cache present; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
+**Verified this session (baseline):** git clean at start (758eee502 HEAD); Gate 4 v4 EXPLORATORY ablation executed previously (exit 0, NOT CONFIRMATORY/NOT PROMOTABLE) on local 2024-04..09 cache with versioned artifacts under `research_state/gate4_v4_exploratory_exec/` satisfying Track A root bound (172) — no check weakened; `python -m unittest discover tests` → Ran 950 tests OK; `tracka_resume_check.py` → pass:true, 17/17 checks, root_md_json_bounded 171/172 pass, probes==2, network:false, writes_real_research_state:false; `tracka_resume_gate.py --json` → drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false. Local 2024-04..09 cache present; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
 
 ---
 
