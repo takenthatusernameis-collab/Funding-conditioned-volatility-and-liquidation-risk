@@ -175,15 +175,22 @@ def _consume_gate_input_summary(p) -> dict:
     base = {
         "present": False,
         "path": str(p) if p else None,
+        "artifact": str(p) if p else None,
+        "read_state": "not_provided",
+        "sha256": None,
+        "bytes": None,
         "by_symbol": {},
         "totals": {},
         "gaps_present": None,
+        "scope_note": None,
         "consumed_as": "read-only per-symbol gap status alongside v5 blocker matrix; not confirmatory GO, not provenance/license/terms resolution",
         "note": "Missing gate_input_summary input is reported as present=false; it does not create evidence and does not unblock any gate.",
     }
     if not p:
         return base
     p = Path(p)
+    base["path"] = str(p)
+    base["artifact"] = str(p)
     if not p.exists() or not p.is_file():
         base["read_state"] = "missing"
         return base
@@ -196,10 +203,14 @@ def _consume_gate_input_summary(p) -> dict:
     base["read_state"] = "ok"
     base["sha256"] = _sha(p)
     base["bytes"] = p.stat().st_size
-    base["by_symbol"] = dict(d.get("by_symbol", {}))
-    base["totals"] = dict(d.get("totals", {}))
-    base["gaps_present"] = d.get("gaps_present")
-    base["scope_note"] = d.get("scope_note")
+    # tolerate full reconcile output (nested gate_input_summary) or summary object
+    src = d.get("gate_input_summary") if isinstance(d.get("gate_input_summary"), dict) else d
+    if not isinstance(src, dict):
+        src = d if isinstance(d, dict) else {}
+    base["by_symbol"] = dict(src.get("by_symbol", {}))
+    base["totals"] = dict(src.get("totals", {}))
+    base["gaps_present"] = src.get("gaps_present")
+    base["scope_note"] = src.get("scope_note")
     return base
 
 
