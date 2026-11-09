@@ -334,6 +334,103 @@ class TestBootstrapDiagnosticSummary(unittest.TestCase):
             rs_files = sorted(p.relative_to(root).as_posix() for p in (root / "research_state").rglob("*") if p.is_file())
             self.assertEqual(rs_files, ["research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_x.json"])
 
+    def test_backfill_derivable_diagnostics_exact_and_refuses_inference(self):
+        # Row missing degenerate/inference_ok but has n_blocks and finite ordered CI+point+n_obs
+        ci = {
+            "point": 0.5, "ci_low": -0.1, "ci_high": 0.9,
+            "n_obs": 100, "n_blocks": 12,
+        }
+        out, trace = s.backfill_derivable_diagnostics(ci)
+        # effective_block_count derived
+        self.assertEqual(out.get("effective_block_count"), 12)
+        # ci_valid derived
+        self.assertTrue(out.get("ci_valid"))
+        # degenerate/inference_ok NOT inferred
+        self.assertNotIn("degenerate", out)
+        self.assertNotIn("inference_ok", out)
+        # trace has applied/refused entries
+        applied = [e for e in trace if e.get("applied")]
+        refused = [e for e in trace if not e.get("applied")]
+        self.assertTrue(any(e.get("field") == "effective_block_count" for e in applied))
+        self.assertTrue(any(e.get("field") == "ci_valid" for e in applied))
+        self.assertTrue(any(e.get("field") == "degenerate" and not e.get("applied") for e in refused))
+        self.assertTrue(any(e.get("field") == "inference_ok" and not e.get("applied") for e in refused))
+        self.assertTrue(any(e.get("rule") == "effective_block_count_from_n_blocks" for e in applied))
+        self.assertTrue(any(e.get("rule") == "ci_valid_from_finite_ordered_ci" for e in applied))
+
+    def test_backfill_refuses_ci_valid_when_unordered_or_nonfinite(self):
+        # unordered
+        ci1 = {"point": 0.5, "ci_low": 0.9, "ci_high": -0.1, "n_obs": 100, "n_blocks": 5}
+        out1, trace1 = s.backfill_derivable_diagnostics(ci1)
+        self.assertNotIn("ci_valid", out1)
+        self.assertTrue(any(e.get("field") == "ci_valid" and not e.get("applied") for e in trace1))
+        # non-finite
+        ci2 = {"point": 0.5, "ci_low": float("nan"), "ci_high": 0.9, "n_obs": 100, "n_blocks": 5}
+        out2, trace2 = s.backfill_derivable_diagnostics(ci2)
+        self.assertNotIn("ci_valid", out2)
+        self.assertTrue(any(e.get("field") == "ci_valid" and not e.get("applied") for e in trace2))
+
+    def test_backfill_never_fabricates_claimable_when_ci_excludes_zero_but_gates_unproven(self):
+        ci = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci)
+        self.assertTrue(out.get("ci_valid"))
+        self.assertEqual(out.get("effective_block_count"), 10)
+        self.assertNotIn("degenerate", out)
+        self.assertNotIn("inference_ok", out)
+        row = s.extract_contrast_row("s.json", "sec", "c", out, backfill_trace=trace)
+        self.assertTrue(row["ci_excludes_zero"])
+        self.assertFalse(row["non_degenerate_excludes_zero_claimable"])
+        self.assertTrue(row["missing_diagnostic_fields"])
+        self.assertIn("MISSING_DIAGNOSTIC_FIELDS", row["regime_flags"])
+        self.assertIn("EXCLUDES_ZERO_NOT_CLAIMABLE", row["regime_flags"])
+
+    def test_backfill_no_source_mutation_via_summarize(self):
+        stab = {
+            "label": s.LABEL,
+            "variants": {"V1_primary": {"contrasts_vs_A": {"BAD_missing_diag": {
+                "point": 0.2, "ci_low": -0.2, "ci_high": 0.8, "n_obs": 50, "n_blocks": 4,
+            }}}},
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            td = Path(tmp)
+            sp = self._write(td, "gate4_v4_exploratory_stab_x.json", stab)
+            before = sp.read_text(encoding="utf-8")
+            rows = s.summarize_artifacts([sp], backfill=True)
+            self.assertEqual(sp.read_text(encoding="utf-8"), before)
+        r = rows[0]
+        self.assertTrue(r.get("backfill_trace"))
+        self.assertTrue(r.get("ci_valid"))
+        self.assertEqual(r.get("eff_blocks"), 4)
+        self.assertFalse(r["non_degenerate_excludes_zero_claimable"])
+        self.assertTrue(r["missing_diagnostic_fields"])
+
+    def test_main_backfill_cli_writes_results_with_trace_no_source_mutation(self):
+        stab = {
+            "label": s.LABEL,
+            "variants": {"V1_primary": {"contrasts_vs_A": {"E_rv_funding_trails": {
+                "point": 0.5, "ci_low": -0.1, "ci_high": 0.9, "n_obs": 100, "n_blocks": 12,
+            }}}},
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "research_state" / "gate4_v4_exploratory_stab").mkdir(parents=True)
+            art = root / "research_state" / "gate4_v4_exploratory_stab" / "gate4_v4_exploratory_stab_x.json"
+            art.write_text(json.dumps(stab), encoding="utf-8")
+            before = art.read_text("utf-8")
+            outp = root / "results" / "backfill.md"
+            rc = s.main(["--repo-root", str(root), "--backfill-derivable-diagnostics", "--out", str(outp)])
+            self.assertEqual(rc, 0)
+            self.assertEqual(art.read_text("utf-8"), before)
+            txt = outp.read_text("utf-8")
+            self.assertIn("Diagnostic backfill audit trace", txt)
+            self.assertIn(f"backfill_rules_version: `{s.BACKFILL_RULES_VERSION}`", txt)
+            self.assertIn("effective_block_count", txt)
+            self.assertIn("ci_valid", txt)
+            self.assertIn("degenerate", txt)  # refused entries appear
+            self.assertIn("backfilled fields alone never make a row claimable", txt)
+            rs_files = sorted(p.relative_to(root).as_posix() for p in (root / "research_state").rglob("*") if p.is_file())
+            self.assertEqual(rs_files, ["research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_x.json"])
+
 
 if __name__ == "__main__":
     unittest.main()
