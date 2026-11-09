@@ -704,7 +704,17 @@ def add_funding_to_panel(kpanel: pd.DataFrame, fpanel: pd.DataFrame) -> pd.DataF
 
 
 def fit_predict_ols(train_n: pd.DataFrame, test_n: pd.DataFrame, fcols: List[str]) -> np.ndarray:
-    """Direct-variance OLS (same form as the validated Gate 3 RV-only baseline)."""
+    """Direct-variance OLS (same form as the validated Gate 3 RV-only baseline).
+
+    Degenerate inputs are handled explicitly instead of silently inflating
+    coefficients: missing required columns fail closed; zero-variance /
+    non-finite predictor columns are dropped before the solve (coefficient
+    effectively 0); symbols with too few usable rows or no usable predictors
+    produce NaN predictions (never spurious forecasts).
+    """
+    missing = [c for c in fcols if c not in train_n.columns or c not in test_n.columns]
+    if missing:
+        raise ValueError(f"fit_predict_ols: required feature column(s) missing: {missing}")
     preds = np.full(len(test_n), np.nan)
     for sym, grp in test_n.groupby(level="symbol", sort=False):
         tr = train_n.loc[train_n.index.get_level_values("symbol") == sym]
@@ -714,6 +724,12 @@ def fit_predict_ols(train_n: pd.DataFrame, test_n: pd.DataFrame, fcols: List[str
         Xc, yc = Xtr[mask], ytr[mask]
         if len(yc) < 2:
             continue
+        col_std = Xc.std(axis=0)
+        keep = np.isfinite(col_std) & (col_std > 0.0)
+        if not bool(np.any(keep)):
+            continue
+        kept_cols = [c for c, k in zip(fcols, keep.tolist()) if k]
+        Xc = Xc[:, keep]
         k = Xc.shape[1]
         XtX = Xc.T @ Xc
         ridge = 1e-10 * np.eye(k)
@@ -722,7 +738,7 @@ def fit_predict_ols(train_n: pd.DataFrame, test_n: pd.DataFrame, fcols: List[str
         except np.linalg.LinAlgError:
             continue
         intercept = float(yc.mean() - coef @ Xc.mean(axis=0))
-        Xte = grp[fcols].to_numpy(dtype=float)
+        Xte = grp[kept_cols].to_numpy(dtype=float)
         p = intercept + Xte @ coef
         p[~np.isfinite(p)] = np.nan
         p = np.maximum(p, 0.0)
