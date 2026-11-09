@@ -1,0 +1,108 @@
+{
+  "blockers_global": [
+    "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS",
+    "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+    "MISSING_LOCAL_FUNDING_MONTH_FILES"
+  ],
+  "cache": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache",
+  "generated_utc": "2026-11-09T21:21:55Z",
+  "months": [
+    "2026-11"
+  ],
+  "next_action": "resolve missing/schema issues only from admissible local sources with provenance lineage; this audit is local-only and does not authorize outcomes",
+  "per_symbol": {
+    "BNBUSDT": {
+      "months": {
+        "2026-11": {
+          "blockers": [
+            "MISSING_LOCAL_FUNDING_MONTH_FILE"
+          ],
+          "files": [],
+          "local_present": false,
+          "provenance_verified": false,
+          "required_local_action": "obtain admissible unauthenticated source with provenance (URL/ETag/checksum) and place verified local month file; this tool does not download; do not compute outcomes",
+          "schema_ok": false
+        }
+      }
+    },
+    "BTCUSDT": {
+      "months": {
+        "2026-11": {
+          "blockers": [
+            "MISSING_LOCAL_FUNDING_MONTH_FILE"
+          ],
+          "files": [],
+          "local_present": false,
+          "provenance_verified": false,
+          "required_local_action": "obtain admissible unauthenticated source with provenance (URL/ETag/checksum) and place verified local month file; this tool does not download; do not compute outcomes",
+          "schema_ok": false
+        }
+      }
+    },
+    "ETHUSDT": {
+      "months": {
+        "2026-11": {
+          "blockers": [
+            "MISSING_LOCAL_FUNDING_MONTH_FILE"
+          ],
+          "files": [],
+          "local_present": false,
+          "provenance_verified": false,
+          "required_local_action": "obtain admissible unauthenticated source with provenance (URL/ETag/checksum) and place verified local month file; this tool does not download; do not compute outcomes",
+          "schema_ok": false
+        }
+      }
+    },
+    "SOLUSDT": {
+      "months": {
+        "2026-11": {
+          "blockers": [
+            "MISSING_LOCAL_FUNDING_MONTH_FILE"
+          ],
+          "files": [],
+          "local_present": false,
+          "provenance_verified": false,
+          "required_local_action": "obtain admissible unauthenticated source with provenance (URL/ETag/checksum) and place verified local month file; this tool does not download; do not compute outcomes",
+          "schema_ok": false
+        }
+      }
+    },
+    "XRPUSDT": {
+      "months": {
+        "2026-11": {
+          "blockers": [
+            "MISSING_LOCAL_FUNDING_MONTH_FILE"
+          ],
+          "files": [],
+          "local_present": false,
+          "provenance_verified": false,
+          "required_local_action": "obtain admissible unauthenticated source with provenance (URL/ETag/checksum) and place verified local month file; this tool does not download; do not compute outcomes",
+          "schema_ok": false
+        }
+      }
+    }
+  },
+  "repo_root": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk",
+  "summary": {
+    "all_requested_present_and_schema_ok": false,
+    "confirmatory_resume_ready": false,
+    "missing_symbol_months": [
+      "BTCUSDT:2026-11",
+      "ETHUSDT:2026-11",
+      "BNBUSDT:2026-11",
+      "SOLUSDT:2026-11",
+      "XRPUSDT:2026-11"
+    ],
+    "network_used": false,
+    "outcomes_computed": false,
+    "provenance_verified": false,
+    "schema_bad_symbol_months": []
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ]
+}
