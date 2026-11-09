@@ -224,17 +224,21 @@ def write_md(path: Path, payload: Dict[str, object]) -> None:
         "- V4_winsor_train: V3 + train-only standardized-feature winsor q0.5/q99.5 (train bounds applied to train/test).",
         "",
         "## Pooled ΔQLIKE vs A (alt-base; negative better for alt), 95% block bootstrap CI",
-        "| Variant | Contrast | Point | CI low | CI high | n_obs | n_blocks | Verdict (EXPLORATORY) |",
-        "|---|---|---:|---:|---:|---:|---:|---|",
+        "| Variant | Contrast | Point | CI low | CI high | n_obs | n_blocks | eff_blocks | ci_valid | regime_flags | Verdict (EXPLORATORY) |",
+        "|---|---|---:|---:|---:|---:|---:|---:|:---:|---|---|",
     ]
     for vname, vres in payload["variants"].items():
         for c, ci in vres["contrasts_vs_A"].items():
             pt = ci.get("point"); lo = ci.get("ci_low"); hi = ci.get("ci_high")
             verdict = "inconclusive (CI spans 0)" if (lo is not None and hi is not None and lo <= 0 <= hi) else ("alt worse (CI>0)" if (lo is not None and lo > 0) else ("alt better (CI<0)" if (hi is not None and hi < 0) else "unknown"))
-            lines.append(f"| {vname} | {c} | {pt} | {lo} | {hi} | {ci.get('n_obs')} | {ci.get('n_blocks')} | {verdict} |")
-    lines += ["", "## E vs A instrument LOO (V3, EXPLORATORY)", "| LOO | Point | CI low | CI high | n_obs |", "|---|---:|---:|---:|---:|"]
+            eff = ci.get("effective_block_count", ci.get("n_blocks"))
+            flags = ",".join(ci.get("regime_flags") or []) or "ok"
+            acc = ci.get("ci_accounting_valid")
+            lines.append(f"| {vname} | {c} | {pt} | {lo} | {hi} | {ci.get('n_obs')} | {ci.get('n_blocks')} | {eff} | {acc} | {flags} | {verdict} |")
+    lines += ["", "## E vs A instrument LOO (V3, EXPLORATORY)", "| LOO | Point | CI low | CI high | n_obs | eff_blocks | ci_valid | regime_flags |", "|---|---:|---:|---:|---:|---:|:---:|---|"]
     for k, ci in payload.get("loo_e_vs_a_v3", {}).items():
-        lines.append(f"| {k} | {ci.get('point')} | {ci.get('ci_low')} | {ci.get('ci_high')} | {ci.get('n_obs')} |")
+        flags = ",".join(ci.get("regime_flags") or []) or "ok"
+        lines.append(f"| {k} | {ci.get('point')} | {ci.get('ci_low')} | {ci.get('ci_high')} | {ci.get('n_obs')} | {ci.get('effective_block_count', ci.get('n_blocks'))} | {ci.get('ci_accounting_valid')} | {flags} |")
     lines += ["", "## Split-3 B/D/E diagnostics (V1 vs V3, selected)", ""]
     for vname in ["V1_primary", "V3_scale_ridge_target_floor"]:
         vres = payload["variants"][vname]

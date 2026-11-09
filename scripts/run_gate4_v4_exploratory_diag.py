@@ -296,7 +296,8 @@ def main():
     print(f"WROTE {out}")
     # concise stdout
     e = diag["pooled_contrasts_vs_A_primary_fit"].get("E_rv_funding_trails", {})
-    print(f"E_vs_A primary point={e.get('point')} ci=[{e.get('ci_low')},{e.get('ci_high')}] n={e.get('n_obs')}")
+    flags = ",".join(e.get("regime_flags") or []) or "ok"
+    print(f"E_vs_A primary point={e.get('point')} ci=[{e.get('ci_low')},{e.get('ci_high')}] n={e.get('n_obs')} eff_blocks={e.get('effective_block_count', e.get('n_blocks'))} ci_valid={e.get('ci_accounting_valid')} flags={flags}")
     loo = diag["instrument_loo_E_vs_A_exploratory"]
     print("LOO E_vs_A:", {k: v.get("point") for k, v in loo.items()})
     return 0
