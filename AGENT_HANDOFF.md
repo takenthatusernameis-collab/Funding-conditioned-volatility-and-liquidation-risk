@@ -1,9 +1,9 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated:** 2026-11-09T03:00:25Z
+**Generated:** 2026-11-09T03:13:54Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority (reconciled):** Repo P0 = Gate 4 funding-conditioned volatility work on local admissible 2024-04..09 data (measurable, unblocked, EXPLORATORY only). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. No avoiding heavy work — every session must produce versioned, auditable artifacts.**
-**Verified this session (baseline/evidence):** Gate 4 v4 EXPLORATORY diagnostic executed (exit 0) with versioned artifacts explaining B/D split-3 instability + E vs A LOO/robustness (all **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE**). `python -m unittest discover tests` → **Ran 954 tests in ~111s — OK** (includes 3 new diagnostic tests). `tracka_resume_check.py` → **pass:true, 17/17 checks, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)**. `tracka_resume_gate.py --json` → **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false**. Scope-registry drift fixed for added diagnostic script (registered as `track_c_sealed_volatility`; no Track A outcome reads/claims, no network). Local 2024-04..09 cache used; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
+**Verified this session (baseline/evidence):** Gate 4 v4 EXPLORATORY diagnostic artifacts exist and are versioned explaining B/D split-3 instability + E vs A LOO/robustness (all **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE**). `python -m unittest discover tests` → **Ran 954 tests in 112.066s — OK**. `tracka_resume_check.py` → **pass:true, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)**. `tracka_resume_gate.py --json` → **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false**. `check_tracka_scope_registry_drift.py` → **[PASS] scope-registry drift: scripts=112 registry=112 reason=OK**. Local 2024-04..09 cache used; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true. Git status clean at SHA `6a97185ade7938f86585e2c80c6a406f1fa2b588`.
 
 ---
 
@@ -11,7 +11,7 @@
 
 **You MUST execute measurable research/engineering progress in this session. Do not probe absent Track A months (2026-11..2027-02). Do not add workflows/schedulers/pollers/wrappers/controllers. Do not touch `.github/workflows`. Status-only probing, blocker-memos without execution, and waiting on user instructions are not acceptable — produce versioned artifacts.**
 
-**Session timestamp (initial task):** `2026-11-09T03:00:25Z`
+**Session timestamp (initial task):** `2026-11-09T03:13:54Z`
 
 ### Campaign: Gate 4 v4 follow-through — decide/execute next prereg-scoped EXPLORATORY modeling fix OR formalize NO-GO (local 2024-04..09) — produce versioned, auditable artifacts
 
@@ -30,7 +30,7 @@
 6. **If stabilized exploratory comparison still shows no credible improvement / remains unstable:** produce a concise versioned **EXPLORATORY NO-GO note** for funding ablations on this local slice (not a confirmatory claim; no sealed-anchor reuse) and pivot to the most measurable open Gate 4/Track C-adjacent local engineering task supported by tests. **Do not start Track A probing or Track C/B sealed work.**
 7. **Update this handoff** (§1–§10) with exact changes, commands, results, artifact paths, uncovered issues, and the next unfinished task.
 
-**Acceptance for next session (heavy work — at least one required):** (A) versioned EXPLORATORY stabilized-comparison artifacts with full diagnostics and NOT CONFIRMATORY labeling, (B) versioned EXPLORATORY NO-GO note with evidence, or (C) new tested hardening/engineering work with suite green and Track A invariants green — with exact evidence and the session timestamp `2026-11-09T03:00:25Z` recorded in this handoff. A session that ends without one of (A)/(B)/(C) has not satisfied the heavy-work mandate.
+**Acceptance for next session (heavy work — at least one required):** (A) versioned EXPLORATORY stabilized-comparison artifacts with full diagnostics and NOT CONFIRMATORY labeling, (B) versioned EXPLORATORY NO-GO note with evidence, or (C) new tested hardening/engineering work with suite green and Track A invariants green — with exact evidence and the session timestamp `2026-11-09T03:13:54Z` recorded in this handoff. A session that ends without one of (A)/(B)/(C) has not satisfied the heavy-work mandate.
 
 ---
 
@@ -46,9 +46,10 @@
 | New diag tests | `python -m unittest tests.test_gate4_v4_exploratory_diag -v` | **3 tests OK** |
 | **Gate 4 v4 exploratory diag** | `python scripts/run_gate4_v4_exploratory_diag.py --out-suffix 20261109T021456Z --git-sha 2f21b1dd4` | **Exit 0**. E vs A Δ=+0.487902 CI [-0.042161,1.197338], n=12969. LOO all/drop_BTC/drop_ETH/drop_SOL/drop_XRP/drop_BNB points +0.488/+0.634/+0.504/+1.136/+0.111/+1.938 (no improvement). Naive stabilized comparison catastrophically worse (+9213.35, EXPLORATORY only). |
 | Scope registry drift (intermediate fix) | `python scripts/check_tracka_scope_registry_drift.py` | **PASS** after registering new script |
-| Full suite (final) | `python -m unittest discover tests` | **Ran 954 tests in ~111s — OK** |
-| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true**, 17/17 checks, `network:false`, `probes==2`, `writes_real_research_state:false`, `root_md_json_bounded` pass (171/172) |
+| Full suite (final) | `python -m unittest discover tests` | **Ran 954 tests in 112.066s — OK** |
+| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true**, network:false, probes==2, `writes_real_research_state:false`, `root_md_json_bounded` pass (171/172) |
 | Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **drift_preflight.pass:true**, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
+| Scope registry drift | `python scripts/check_tracka_scope_registry_drift.py` | **[PASS] scope-registry drift: scripts=112 registry=112 reason=OK** |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
 | Path | Change |
@@ -114,7 +115,7 @@ ls research_state/gate4_v4_exploratory_diag/
 4. Update **this file** with exact changes/commands/results/evidence/gates/next task + blockers.
 
 ## 10. NEXT SESSION DELIVERABLE
-Updated `AGENT_HANDOFF.md` with Gate 4 v4 principled EXPLORATORY stabilized-comparison evidence or EXPLORATORY NO-GO note, full suite + Track A invariant outcomes, artifact paths, root-bound compliance, and the next unfinished task — **session timestamp `2026-11-09T03:00:25Z` recorded, at least one of acceptance (A)/(B)/(C) produced**. **Repo state must remain continuable without user repeating instructions.**
+Updated `AGENT_HANDOFF.md` with Gate 4 v4 principled EXPLORATORY stabilized-comparison evidence or EXPLORATORY NO-GO note, full suite + Track A invariant outcomes, artifact paths, root-bound compliance, and the next unfinished task — **session timestamp `2026-11-09T03:13:54Z` recorded, at least one of acceptance (A)/(B)/(C) produced**. **Repo state must remain continuable without user repeating instructions.**
 
 ---
 **END OF SINGLE DURABLE HANDOFF.**
