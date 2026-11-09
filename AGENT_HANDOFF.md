@@ -1,117 +1,115 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated:** 2026-11-09T04:58:05Z
+**Generated:** 2026-11-09T06:05:59Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Priority (reconciled):** Repo P0 = Gate 4 funding-conditioned volatility work on local admissible 2024-04..09 data (measurable, unblocked, EXPLORATORY only). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. No avoiding heavy work — every session must produce versioned, auditable artifacts.**
-**Verified this session (baseline/evidence):** Gate 4 v4 EXPLORATORY stabilized comparison executed (V1/V2/V3/V4 variants). **EXPLORATORY NO-GO signal confirmed**: principled stabilization (scale-aware ridge + train-only target-scale floor) made E vs A ΔQLIKE catastrophically worse (V1: +0.488 CI [-0.042,1.197] inconclusive → V3: +1096 CI [331,2104] significantly worse). B vs A blowup amplified (V1 split 3 B QLIKE 45 → V3 1029). Test suite **960 OK**. `tracka_resume_check.py` → **pass:true, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)**. `tracka_resume_gate.py --json` → **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false**. `check_tracka_scope_registry_drift.py` → **[PASS] scope-registry drift: scripts=112 registry=112 reason=OK**. Local 2024-04..09 cache used; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true. Git status clean at SHA `d7a764b9e9411f58b8dca3abe8251f6780c5d6d4` (modified: `research_state/ironflow_fastpath_cache.json` — cache, do not commit).
+**Priority (reconciled):** Repo P0 = Gate 4 funding-conditioned volatility on local admissible 2024-04..09 cache remains **EXPLORATORY NO-GO CONFIRMED** (do not re-run identical stabilization claims). Next heavy work = measurable local engineering/hardening on Gate 4/Track C-adjacent infrastructure with versioned evidence and tests (no Track A probing, no sealed C/B new outcomes, no confirmatory promotion). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. Every session must produce versioned, auditable artifacts.**
+**Verified this session (2026-11-09T06:05:59Z, baseline SHA `14f08775e`):** Gate 4 v4 EXPLORATORY **leakage audit PASS** (train-only provenance of ridge scale, winsor bounds, target floor, normalization mean/std invariant to test-fold perturbation across V1–V4, 4 prereg v3_30d splits × 5 symbols; block-bootstrap CI deterministic/reproducible with fixed seed 20261109). New artifacts: `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T055837Z.{json,md}`, `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T055837Z.md` (EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE). New/updated code (registered, tested): `scripts/run_gate4_v4_leakage_audit.py`, `tests/test_gate4_v4_leakage_audit.py` (6 synthetic tests OK), `research_state/tracka_script_scope_registry.json` (+`run_gate4_v4_leakage_audit.py`, `script_count` 114, scope drift PASS). Full suite: **960 tests in 120.0s — OK** (ran after stash/restore of `ironflow_fastpath_cache.json`). `tracka_resume_check.py` → **pass:true, 17/17, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)**. `tracka_resume_gate.py --json` → **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false**. `check_tracka_scope_registry_drift.py` → **[PASS] scripts=114 registry=114**. NO-GO formalization present: `research_state/gate4_v4_exploratory_nogo/gate4_v4_exploratory_nogo_20261109T053308Z.{json,md}`, `results/fclr_heavy001/gate4_v4_exploratory_nogo_20261109T053308Z.md`. `research_state/ironflow_fastpath_cache.json` is a local cache mutation — **do not commit**.
 
 ---
 
 ## 0) INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (MANDATORY, HEAVY WORK)
 
-**You MUST execute measurable research/engineering progress in this session. Do not probe absent Track A months (2026-11..2027-02). Do not add workflows/schedulers/pollers/wrappers/controllers. Do not touch `.github/workflows`. Status-only probing, blocker-memos without execution, and waiting on user instructions are not acceptable — produce versioned artifacts.**
+**Session timestamp (initial task):** `2026-11-09T06:05:59Z`
 
-**Session timestamp (initial task):** `2026-11-09T04:58:05Z`
+**You MUST execute measurable research/engineering progress. No Track A probing (2026-11..2027-02 absent, probes==2, deadend rubric holds). No new Track C/B sealed outcomes. No workflows/schedulers/pollers/wrappers/controllers. No `.github/workflows` edits. No status-only churn. Every action must produce versioned, auditable artifacts and/or tested code.**
 
-### Campaign: Gate 4 v4 EXPLORATORY NO-GO formalization + pivot to measurable local engineering task (Track C-adjacent or hardening)
+**Campaign (binding constraints):** Gate 4 v4 is `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true` (local 2024-04..09 cache; FCLR-015 SHA256 `3e6ac26c...5406c`). **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.** Never claim confirmatory GO, economic value, or promotion. Never reuse sealed-anchor domain (FCLR002/003/013). Never replace prereg A–E contrasts or change confirmatory estimands.
 
-**Intent/constraints (binding):** `research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` is `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true`. Sealed-anchor conflict with FCLR002/003/013 domain family applies. **All outputs MUST be labeled EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.** Never claim confirmatory GO, economic value, or promotion. **Do not replace prereg A–E contrasts or change confirmatory estimands.**
+**Completed — do not rerun identically:** v4 exec `20261109T004003Z` (inconclusive E vs A, split-3 B/D blowup), diag `20261109T021456Z` (root cause), stab `20261109T045805Z` (**NO-GO**: V3 E vs A +1096 CI [331,2104] worse; B amplified 45→1029; V4 worse; no LOO improvement), NO-GO note `20261109T053308Z`, leakage audit `20261109T055837Z` (**PASS**: train-only provenance invariant, bootstrap deterministic). Artifacts in `research_state/gate4_v4_exploratory_{exec,diag,stab,nogo}/`, `research_state/gate4_v4_leakage_audit/`, `results/fclr_heavy001/`.
 
-**Completed (do not rerun identically; build on it):**
-- Exec `20261109T004003Z` (SHA `2f21b1dd4`): E vs A ΔQLIKE +0.4879, 95% block CI [-0.04216,1.19734] (spans 0, n=12969, 120 blocks) — **INCONCLUSIVE**. B/D unstable (split 3 B vs A Δ=44.69, D vs A Δ=10.33). Artifacts: `results/fclr_heavy001/gate4_v4_exploratory_exec_20261109T004003Z.md`, `research_state/gate4_v4_exploratory_exec/*`.
-- Diag `20261109T021456Z` (SHA `2f21b1dd4`): reproduced E vs A +0.487902 CI [-0.042161,1.197338]. **Root-cause evidence (split 3, 2024-08-13..2024-09-11):** funding-augmented direct-variance OLS extrapolates to negative/near-zero variance under small target scale + tiny ridge (`1e-10*I`) + train-only standardization; floor-at-zero removes invalids but remaining near-zero positives and concentrated blowups dominate QLIKE. B BTC QLIKE mean 225.80 (raw_neg 89/720, raw_min -0.000527); D SOL 56.34 / BTC 1.68 with many raw negatives and larger `coef_l2`. E has no catastrophic single-instrument blowup but many raw negatives (622) and is worse than A. **E vs A LOO (EXPLORATORY):** all +0.488 inconclusive; drop XRP attenuates to +0.111 CI [-0.129,0.358] (inconclusive); other drops make harm CI>0; no LOO shows improvement. **Naive stabilized comparison (strong ridge + pred_floor=1e-8, EXPLORATORY only, NOT a prereg replacement) catastrophically worse** (Δ +9213.35) — do not use. Artifacts: `results/fclr_heavy001/gate4_v4_exploratory_diag_20261109T021456Z.md`, `research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json`, `scripts/run_gate4_v4_exploratory_diag.py`, `tests/test_gate4_v4_exploratory_diag.py`.
-- **Stabilized comparison `20261109T045805Z` (SHA `d7a764b9e`):** **EXPLORATORY NO-GO CONFIRMED**. Four variants evaluated (V1_primary, V2_scale_ridge, V3_scale_ridge_target_floor, V4_winsor_train) on 4×30-day splits (2024-04..09, 5 symbols). **Key result:** V3 (scale-aware ridge `1e-8*max(trace(X'X)/k,1)` + train-only floor `1e-4*train_target_median`) made E vs A ΔQLIKE **+1096** (CI [331,2104], significantly worse) vs V1 +0.488 (inconclusive). B vs A amplified from 45 to 1029 (split 3). V2 similar to V1 (ridge alone insufficient). V4 (winsor) even worse. **No variant shows improvement; all funding ablations (B/C/D/E) worse or inconclusive vs A.** LOO (V3) confirms no instrument drop yields improvement. Artifacts: `results/fclr_heavy001/gate4_v4_exploratory_stab_20261109T045805Z.md`, `research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json`, `scripts/run_gate4_v4_exploratory_stab.py`, `tests/test_gate4_v4_exploratory_stab.py` (6 tests added, all passing).
+**Execute next (highest-value measurable engineering, not more status memos):**
+1. **Harden block-bootstrap / inference diagnostics** as tested library code (synthetic only): add explicit checks/tests that CI accounting rejects non-finite diffs, reports effective block count, and flags degenerate/too-few-block regimes — integrate into `scripts/run_funding_ablations.py` helpers or a small `src/eval/` utility with unit tests (no network, no real `research_state` writes). Keep behavior compatible with existing callers.
+2. **Add a versioned EXPLORATORY “diagnostic bundle index”** (single markdown under `results/fclr_heavy001/`) that cross-links v4 exec/diag/stab/nogo/leakage artifacts, commands, SHAs, and the explicit no-promotion verdict — **not** a new root `research_state/*.md/json` file if it would pressure the 172 bound (use `results/` or dated subdir only).
+3. **Targeted tests first**, then `python -m unittest discover tests` must remain **>=960 OK**. Register any new `scripts/*.py` in `research_state/tracka_script_scope_registry.json` and pass `check_tracka_scope_registry_drift.py`.
+4. **Verify invariants:** `python scripts/tracka_resume_check.py` (17/17 pass, probes==2, network:false, root_md_json_bounded pass), `python scripts/tracka_resume_gate.py --json` (BLOCKED, drift_preflight.pass:true, outcomes_inspected:false). **Do not weaken root md+json bound (172).**
+5. **Update this handoff** (§1–§10) with exact changes/commands/results/artifact paths/issues/next task. Record session timestamp `2026-11-09T06:05:59Z`.
 
-**Execute next (versioned suffix, do not overwrite prior outputs):**
-1. **Formalize EXPLORATORY NO-GO note** for funding ablations on local 2024-04..09 slice (concise, versioned, NOT confirmatory, no sealed-anchor reuse). Document that principled leakage-safe stabilization (scale-aware ridge, train-only target-scale floor, train-only winsor) fails to improve and catastrophically degrades out-of-sample QLIKE vs RV-only baseline.
-2. **Pivot to most measurable open Gate 4/Track C-adjacent local engineering task** supported by tests (e.g., leakage audit hardening, walkforward infrastructure, block bootstrap diagnostics, feature engineering robustness). No Track A probing. No Track C/B sealed work.
-3. **Run targeted unit tests** for any new code (synthetic, no network, no real research_state writes), then `python -m unittest discover tests` must remain **>=960 OK** (fix regressions you introduce).
-4. **Write versioned artifacts** under subdirs (`research_state/gate4_v4_exploratory_nogo/`, `results/fclr_heavy001/`) with commands, git SHA, tables, explicit NOT CONFIRMATORY/NOT PROMOTABLE verdict. **Do not weaken `tracka_resume_check` root md+json bound (172) or any Track A invariant.**
-5. **Re-run** `python scripts/tracka_resume_check.py` and `python scripts/tracka_resume_gate.py --json` — expect 17/17 pass, probes==2, root bound satisfied, BLOCKED with `outcomes_inspected:false`.
-6. **Update this handoff** (§1–§10) with exact changes, commands, results, artifact paths, uncovered issues, and the next unfinished task.
-
-**Acceptance for next session (heavy work — at least one required):** (A) versioned EXPLORATORY NO-GO note with evidence, (B) new tested hardening/engineering work with suite green and Track A invariants green — with exact evidence and the session timestamp `2026-11-09T04:58:05Z` recorded in this handoff. A session that ends without one of (A)/(B) has not satisfied the heavy-work mandate.
+**Acceptance (heavy work — at least one required):** (A) tested inference/diagnostic hardening merged as code + tests green + invariants green, or (B) a materially different tested engineering task with versioned evidence and suite/invariants green. Sessions without (A)/(B) fail the mandate.
 
 ---
 
-## 1. WHAT CHANGED AND WHY (this session)
-- **Executed Gate 4 v4 EXPLORATORY stabilized comparison** (V1/V2/V3/V4) on local 2024-04..09 cache per §0 campaign.
-- **EXPLORATORY NO-GO CONFIRMED**: Principled stabilization (scale-aware ridge + train-only target-scale floor + optional train-only winsor) catastrophically degrades out-of-sample QLIKE vs RV-only baseline (A). E vs A ΔQLIKE V1=+0.488 (inconclusive) → V3=+1096 (significantly worse, CI entirely >0). B vs A split 3 QLIKE 45 → 1029.
-- **Fixed test file indentation bug** in `tests/test_gate4_v4_exploratory_stab.py` (dict structure corrected) and updated `_toy()` split to use time-based split for proper symbol coverage.
-- **Test suite expanded**: 960 tests OK (954 baseline + 6 new stab tests).
-- **All verification invariants green**: tracka_resume_check 17/17 pass, tracka_resume_gate BLOCKED (prereg required), scope registry drift PASS (112/112), root_md_json_bounded 171/172.
-- **Artifacts produced**: JSON + markdown in `research_state/gate4_v4_exploratory_stab/` and `results/fclr_heavy001/` with versioned suffix `20261109T045805Z`.
+## 1. WHAT CHANGED AND WHY (this session, 2026-11-09T06:05:59Z)
+- **Added Gate 4 v4 EXPLORATORY leakage audit** (measurable hardening, not status-only): `scripts/run_gate4_v4_leakage_audit.py` verifies train-only provenance of ridge scale, winsor bounds, target floor, and normalization mean/std by perturbing test-fold targets and asserting train-derived params unchanged; also checks block-bootstrap CI reproducibility with fixed deterministic seed (20261109). **All EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.**
+- **Executed audit** on local 2024-04..09 cache (FCLR-015, 5 symbols, prereg v3_30d 4 splits, V1–V4): **leakage_invariance_all=true, bootstrap_reproducible=true**. Versioned artifacts: `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T055837Z.{json,md}`, `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T055837Z.md`.
+- **Added/validated tests**: `tests/test_gate4_v4_leakage_audit.py` (6 synthetic, no network, no real `research_state` writes) — covers label guard, train-only params, test perturbation invariance on normalized-train path, normalization stats, fixed-seed bootstrap reproducibility, all-variant invariance.
+- **Scope registry updated**: registered `run_gate4_v4_leakage_audit.py` as `track_c_sealed_volatility` in `research_state/tracka_script_scope_registry.json` (script_count 114); `check_tracka_scope_registry_drift.py` PASS.
+- **NO-GO formalization confirmed present** (from prior work, not rerun): `research_state/gate4_v4_exploratory_nogo/gate4_v4_exploratory_nogo_20261109T053308Z.{json,md}`, `results/fclr_heavy001/gate4_v4_exploratory_nogo_20261109T053308Z.md`.
+- **Cache hygiene**: `research_state/ironflow_fastpath_cache.json` mutated by test discovery side effects during checks; restored/stashed during verification — **do not commit**.
 
 ## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES
 | Check | Command | Result |
 |---|---|---|
-| Full suite | `python -m unittest discover tests` | **Ran 960 tests in 120.195s — OK** |
-| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true**, network:false, probes==2, `writes_real_research_state:false`, `root_md_json_bounded` pass (171/172) |
-| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **drift_preflight.pass:true**, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
-| Scope registry drift | `python scripts/check_tracka_scope_registry_drift.py` | **[PASS] scope-registry drift: scripts=112 registry=112 reason=OK** |
-| Gate 4 v4 stab variants | `python scripts/run_gate4_v4_exploratory_stab.py --out-suffix 20261109T045805Z` | **EXPLORATORY NO-GO**: V3 E vs A ΔQLIKE +1096 CI [331,2104] (worse), B vs A 45→1029 (split 3), no LOO improvement |
+| Targeted leakage audit | `python -m unittest tests.test_gate4_v4_leakage_audit -v` | **6 tests OK** |
+| Targeted Gate 4 v4 suite | `python -m unittest tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_exploratory_stab tests.test_gate4_v4_exploratory_diag -v` | **15 tests OK** |
+| Full suite | `python -m unittest discover tests` | **Ran 960 tests in 120.0s — OK** |
+| Leakage audit execution | `python scripts/run_gate4_v4_leakage_audit.py --out-suffix 20261109T055837Z` | **EXPLORATORY; leakage_invariance_all:true; bootstrap_reproducible:true** |
+| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true, 17/17, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)** |
+| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false** |
+| Scope registry drift | `python scripts/check_tracka_scope_registry_drift.py` | **[PASS] scripts=114 registry=114 reason=OK** |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
 | Path | Change |
 |---|---|
-| `scripts/run_gate4_v4_exploratory_stab.py` | **Created** — Gate 4 v4 EXPLORATORY stabilized comparison (V1/V2/V3/V4 variants, leakage-safe, versioned outputs) |
-| `tests/test_gate4_v4_exploratory_stab.py` | **Fixed** — indentation bug in test payload dict, time-based split in `_toy()`, all 6 tests passing |
-| `research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json` | **Created** — full diagnostic JSON with variants, contrasts, LOO, per-split diagnostics |
-| `research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.md` | **Created** — markdown report with tables, interpretation, EXPLORATORY NO-GO signal |
-| `results/fclr_heavy001/gate4_v4_exploratory_stab_20261109T045805Z.md` | **Created** — copy in results directory for audit trail |
-| `AGENT_HANDOFF.md` | **Updated** — session timestamp `2026-11-09T04:58:05Z`, NO-GO evidence, updated gates, next campaign |
+| `scripts/run_gate4_v4_leakage_audit.py` | **Created** — EXPLORATORY leakage-audit harness (train-only provenance + bootstrap reproducibility, versioned outputs) |
+| `tests/test_gate4_v4_leakage_audit.py` | **Created** — 6 synthetic tests (no network, no real research_state writes) |
+| `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T055837Z.json` | **Created** — full audit JSON (all V1–V4 × 4 splits × 5 symbols invariant) |
+| `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T055837Z.md` | **Created** — markdown audit report |
+| `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T055837Z.md` | **Created** — results copy for audit trail |
+| `research_state/tracka_script_scope_registry.json` | **Modified** — registered `run_gate4_v4_leakage_audit.py` (`track_c_sealed_volatility`, script_count 114) |
+| `AGENT_HANDOFF.md` | **Updated** — session `2026-11-09T06:05:59Z`, evidence, gates, next campaign |
+| `research_state/gate4_v4_exploratory_nogo/gate4_v4_exploratory_nogo_20261109T053308Z.{json,md}` | **Present (prior)** — EXPLORATORY NO-GO formalization (not rerun) |
+| `research_state/ironflow_fastpath_cache.json` | **Cache mutation observed during checks; do not commit** |
 
 ## 4. CURRENT STATE OF EACH RESEARCH GATE
 | Gate | Status | Evidence / Notes |
 |---|---|---|
-| **Gate 1 (Data Loadable)** | Track A: **BLOCKED** (no admissible unauth liquidation labels). Track C: PASSED (historical) / sealed. Gate 4 exploratory: local 2024-04..09 cache present (FCLR-015). | `track_a_deadend_map.md`; FCLR-015 manifest SHA256 `3e6ac26c...5406c`; `research_state/data_cache/*_2024_04..09` |
-| **Gate 2 (Protocol Frozen)** | PASSED (Track C FCLR-001 context); Gate 4 v4 prereg **FROZEN_BEFORE_OUTCOMES** but `confirmatory_claim_go=NO_GO`, exploratory-only on 2024-04..09 due to sealed-anchor conflict. | `pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` |
-| **Gate 3 (RV-only Baseline)** | Track C: PASSED historical / **INCONCLUSIVE forward** (5-day test window, 0 non-overlapping 30d blocks). | `evaluation_summary_FCLR-012-V.md` |
-| **Gate 4 (Incremental Funding/Price)** | **EXPLORATORY NO-GO CONFIRMED** — V1 E vs A inconclusive (CI spans 0); V2 (scale ridge) ≈ V1; V3 (scale ridge + train-only target floor) catastrophically worse (+1096, CI>0); V4 (winsor) worse. B/D blowups amplified. No variant improves vs A. All EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE. | `results/fclr_heavy001/gate4_v4_exploratory_stab_20261109T045805Z.md`; `research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json` |
-| **Forecast Gate** | **NOT ELIGIBLE** (Track C forward Gate 3 inconclusive; Track A blocked). No confirmatory promotion from v4 exploratory runs. | frontier/negative results |
+| **Gate 1 (Data Loadable)** | Track A **BLOCKED** (no admissible unauth liquidation labels). Track C historical/sealed. Gate 4 exploratory local 2024-04..09 cache present (FCLR-015). | `track_a_deadend_map.md`; `data_cache/*_2024_04..09` |
+| **Gate 2 (Protocol Frozen)** | PASSED Track C context; Gate 4 v4 **FROZEN_BEFORE_OUTCOMES**, `confirmatory_claim_go=NO_GO`, exploratory-only on 2024-04..09 (sealed-anchor conflict). | `pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` |
+| **Gate 3 (RV-only Baseline)** | Track C historical PASSED / **forward INCONCLUSIVE** (0 non-overlapping 30d blocks). | `evaluation_summary_FCLR-012-V.md` |
+| **Gate 4 (Incremental Funding/Price)** | **EXPLORATORY NO-GO CONFIRMED** on local 2024-04..09 (stab `20261109T045805Z`: V3 E vs A +1096 CI [331,2104] worse; B amplified; V4 worse; no LOO improvement). **Leakage controls audited PASS (EXPLORATORY diagnostic)** — leakage audit `20261109T055837Z`. All **NOT CONFIRMATORY / NOT PROMOTABLE**. | `research_state/gate4_v4_exploratory_stab/*`, `research_state/gate4_v4_exploratory_nogo/*`, `research_state/gate4_v4_leakage_audit/*` |
+| **Forecast Gate** | **NOT ELIGIBLE**. No confirmatory promotion. | frontier/negative results |
 
 ## 5. SINGLE HIGHEST-VALUE NEXT TASK
-**Formalize EXPLORATORY NO-GO note** for Gate 4 funding ablations on local 2024-04..09 slice (concise, versioned, explicit NOT CONFIRMATORY labeling), then **pivot to measurable local engineering task** (leakage audit hardening, walkforward diagnostics, block bootstrap robustness, or feature engineering tests) with suite ≥960 OK and Track A invariants green. No Track A probing. No Track C/B sealed work.
+**Harden block-bootstrap/inference diagnostics as tested code** (synthetic, no network, no real `research_state` writes): make `block_bootstrap_delta_ci`/paired helpers explicitly reject non-finite diffs, surface effective block count, and flag degenerate/too-few-block regimes with unit tests; keep existing-caller behavior compatible. Add a **versioned diagnostic bundle index** in `results/fclr_heavy001/` (no root `research_state` md/json pressure). Register any new script, keep suite **>=960 OK**, and keep all Track A/root-bound invariants green.
 
 ## 6. PRECISE VERIFICATION COMMANDS
 ```bash
 git --no-pager status --short
+python -m unittest tests.test_gate4_v4_leakage_audit -v
 python -m unittest discover tests                         # expect >=960 OK
-python scripts/tracka_resume_check.py                    # expect pass:true, 17/17, probes==2, network:false, root_md_json_bounded pass
+python scripts/run_gate4_v4_leakage_audit.py --out-suffix <TS>  # EXPLORATORY; expect leakage_invariance_all true, bootstrap_reproducible true
+python scripts/tracka_resume_check.py                    # expect pass:true, 17/17, probes==2, root_md_json_bounded pass (<=172)
 python scripts/tracka_resume_gate.py --json              # expect BLOCKED, drift_preflight.pass:true, outcomes_inspected:false
 python scripts/check_tracka_scope_registry_drift.py      # expect PASS
-ls results/fclr_heavy001/gate4_v4_exploratory_stab_20261109T045805Z.md
-ls research_state/gate4_v4_exploratory_stab/
+ls research_state/gate4_v4_leakage_audit/ results/fclr_heavy001/gate4_v4_leakage_audit_*.md
 ```
 
 ## 7. BLOCKERS / CONSTRAINTS
 | Blocker | Evidence | Allowed next route |
 |---|---|---|
-| Track A: no admissible liquidation labels | `track_a_deadend_map.md`, rubric NO-GO all 8 candidates; probes==2; 2026-11..2027-02 absent | **Only** if a genuinely new unauth source meets full rubric; else guard hardening only. No re-probe absent months. |
-| Track C: forward panel ends 2026-11-02, 0 non-overlapping 30d test blocks | `fclr012v_coverage_audit.json`, FCLR-012-V inconclusive | New admissible panel with real volume, ≥3 non-overlapping 30d blocks; do not relax criteria. |
-| Gate 4 v4: sealed-anchor conflict on 2024 slice | v4 prereg `confirmatory_claim_go:NO_GO` | Run as **EXPLORATORY only**, explicit labeling, no promotion. |
-| Gate 4 v4: NO-GO confirmed for funding ablations | stab `20261109T045805Z`: V3 E vs A +1096 CI>0, B vs A amplified | Formalize NO-GO note; pivot to engineering hardening. Do not claim improvement. |
-| Track A root md+json bound | `scripts/tracka_resume_check.py` cap 172 | Put new exploratory artifacts in subdirs/results; **do not weaken bound/check**. |
-| Protected control plane | repo instructions | **No `.github/workflows` edits** without explicit maintainer authorization. |
+| Track A: no admissible liquidation labels | `track_a_deadend_map.md`, NO-GO rubric, probes==2, 2026-11..2027-02 absent | Guard hardening only if specific gap; **no** re-probe absent months |
+| Track C: forward inconclusive (0 non-overlapping 30d blocks) | FCLR-012-V | New admissible panel meeting criteria; do not relax |
+| Gate 4 v4: sealed-anchor conflict; confirmatory_claim_go NO_GO | v4 prereg | **EXPLORATORY only**, explicit labels, no promotion/sealed-anchor reuse |
+| Gate 4 v4: funding ablations NO-GO on 2024-04..09 | stab `20261109T045805Z`, nogo `20261109T053308Z` | No improvement claim; pivot to tested engineering/diagnostics |
+| Root md+json bound 172 | `tracka_resume_check.py` | Put new artifacts in `results/` or dated subdirs; **do not weaken** |
+| Protected control plane | repo rules | **No `.github/workflows` edits** |
 
 ## 8. DO NOT DO
-- ❌ Re-probe 2026-11..2027-02 / create new probe/scan/wrapper/report families for Track A
+- ❌ Re-probe 2026-11..2027-02 / create Track A probe/scan/wrapper/report families
 - ❌ Workflows/schedulers/pollers/status-only files/controllers
-- ❌ Track C/B new work (sealed/NOT_SUPPORTED) except documenting hard blockers
-- ❌ Conflate observed/modeled/synthetic labels; no threshold-shopping/holdout reuse
+- ❌ Track C/B new sealed outcomes or conflate observed/modeled/synthetic labels
+- ❌ Threshold-shopping, holdout reuse, confirmatory/promotion claims from exploratory runs
 - ❌ Commit `__pycache__/`, `research_state/ironflow_fastpath_cache.json`, large raw caches
-- ❌ Weaken `root_md_json_bounded` or Track A invariants to accommodate artifacts
-- ❌ Claim confirmatory GO/promotion from v4 exploratory runs
-- ❌ Live/paper trading, order endpoints, credentials, bypassing access controls
+- ❌ Weaken `root_md_json_bounded` or Track A invariants
+- ❌ Live/paper trading, order endpoints, credentials, access-control bypass
 
 ## 9. SESSION START PROTOCOL (mandatory)
 1. `git pull` + `git status`; read **this file** + `RESEARCH_PROMPT.md`.
-2. Inspect `research_state/experiment_frontier.json`, latest manifests, tests, data cache state, `research_state/gate4_v4_exploratory_stab/`.
-3. Execute §0 (highest-value measurable task). Run cheapest checks first.
-4. Update **this file** with exact changes/commands/results/evidence/gates/next task + blockers.
+2. Inspect `research_state/experiment_frontier.json`, latest manifests/tests/cache, `gate4_v4_exploratory_{stab,nogo}`, `gate4_v4_leakage_audit`.
+3. Execute §0 (measurable task). Cheapest checks first. Update **this file** with exact evidence + session timestamp `2026-11-09T06:05:59Z`.
 
 ## 10. NEXT SESSION DELIVERABLE
-Updated `AGENT_HANDOFF.md` with Gate 4 v4 EXPLORATORY NO-GO note formalized, new tested hardening/engineering work with suite ≥960 OK and Track A invariants green, artifact paths, root-bound compliance, and the next unfinished task — **session timestamp `2026-11-09T04:58:05Z` recorded, at least one of acceptance (A)/(B) produced**. **Repo state must remain continuable without user repeating instructions.**
+Updated `AGENT_HANDOFF.md` with tested inference/diagnostic hardening (or materially different tested engineering) + versioned artifacts, suite **>=960 OK**, scope drift PASS, Track A invariants green (17/17, probes==2, root bound <=172), and the next unfinished task — **session timestamp `2026-11-09T06:05:59Z` recorded, acceptance (A)/(B) satisfied**. Repo must remain continuable without user repeating instructions.
 
 ---
 **END OF SINGLE DURABLE HANDOFF.**

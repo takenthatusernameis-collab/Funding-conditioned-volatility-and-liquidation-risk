@@ -1,0 +1,3143 @@
+{
+  "label": "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
+  "ts": "20261109T055837Z",
+  "git_sha": "14f08775eecb06902a73f3c5737eb0053a43abf2",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "start": "2024-04-01",
+  "end": "2024-09-30",
+  "include_cache": true,
+  "prereg_v4": "research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json",
+  "confirmatory_claim_go": "NO_GO",
+  "command": "python scripts/run_gate4_v4_leakage_audit.py --out-suffix 20261109T055837Z",
+  "variant_audits": [
+    {
+      "variant": "V1_primary",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.9999999999997,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.322332200984234e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321436,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.664334336014649e-15,
+                    "std": 0.9004503377814957,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.840369698477737e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -5.12102872619892e-16,
+                    "std": 0.9966158955401239,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 2.1691842775138482e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.200642953874325e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2642539667803583e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.16163953237953e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000005,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.56051436309946e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 7.648086187801522e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0804179200183113e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 0.0,
+                    "std": 0.9925092578236601,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000018,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0339987572628324e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.2372634702290302e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0326471296619783e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000002,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 1.5437744601625754e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.828030789094926e-16,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2726138550927167e-15,
+                    "std": 0.9463204468147665,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.307340442966345e-16,
+                    "std": 0.9981325847383298,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 5.065550953166258e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.5350384863686576e-17,
+                    "std": 0.9925092578236597,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -7.423580821374181e-16,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.767519243184329e-16,
+                    "std": 0.9981325847383276,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.209282135543186e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9925092578236575,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.651278864776493e-16,
+                    "std": 0.9981325847383284,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.639282467162166e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.4184186600142278e-15,
+                    "std": 0.9632419486019033,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.1975548528662893e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 7.325182842887631e-17,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5382883970064025e-15,
+                    "std": 0.9632419486019026,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8690299467976556e-16,
+                    "std": 0.9987105088124242,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.000000000003,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 1.466784289348026e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2208638071479385e-15,
+                    "std": 0.9948320067476152,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.002216643722619e-15,
+                    "std": 0.9987105088124248,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.7943680404984617e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.028850563588197e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.235289088942037e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 5.6879690938471455e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.5638139950106705e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -6.714750939313661e-17,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.8231302055333474e-16,
+                    "std": 0.9960552114476225,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.009624361900828e-15,
+                    "std": 0.9720503535125001,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 1.6784474073073233e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.1189649382048822e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.462172345174421e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000002,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.0630166912946382e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.4360050040295989e-15,
+                    "std": 0.9990152631781933,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000005,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.111909994395477e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.3568948146146465e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2495108476621185e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.610918189144725e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 5.591520137820372e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.620542551045553e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7765066664414776e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "V2_scale_ridge",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.9999999999997,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 6.322332200984234e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.32233e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321436,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.664334336014649e-15,
+                    "std": 0.9004503377814957,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.840369698477737e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=9.12003e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -5.12102872619892e-16,
+                    "std": 0.9966158955401239,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 2.1691842775138482e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=2.16918e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.200642953874325e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2642539667803583e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.16163953237953e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000005,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.76831e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.56051436309946e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.648086187801522e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.64809e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0804179200183113e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.84989e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 0.0,
+                    "std": 0.9925092578236601,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000018,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.20434e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0339987572628324e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.2372634702290302e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0326471296619783e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000002,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 1.5437744601625754e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.54377e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.828030789094926e-16,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2726138550927167e-15,
+                    "std": 0.9463204468147665,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.307340442966345e-16,
+                    "std": 0.9981325847383298,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 5.065550953166258e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.06555e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.5350384863686576e-17,
+                    "std": 0.9925092578236597,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -7.423580821374181e-16,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.767519243184329e-16,
+                    "std": 0.9981325847383276,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 6.209282135543186e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.20928e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9925092578236575,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.651278864776493e-16,
+                    "std": 0.9981325847383284,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.26666e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.639282467162166e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.4184186600142278e-15,
+                    "std": 0.9632419486019033,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.1975548528662893e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.26679e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 7.325182842887631e-17,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5382883970064025e-15,
+                    "std": 0.9632419486019026,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8690299467976556e-16,
+                    "std": 0.9987105088124242,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.000000000003,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 1.466784289348026e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.46678e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2208638071479385e-15,
+                    "std": 0.9948320067476152,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.002216643722619e-15,
+                    "std": 0.9987105088124248,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.7943680404984617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.79437e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.028850563588197e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.235289088942037e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 5.6879690938471455e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.68797e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.5638139950106705e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -6.714750939313661e-17,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.81847e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.8231302055333474e-16,
+                    "std": 0.9960552114476225,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.009624361900828e-15,
+                    "std": 0.9720503535125001,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 1.6784474073073233e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.46763e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.1189649382048822e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.462172345174421e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000002,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.47154e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.0630166912946382e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.4360050040295989e-15,
+                    "std": 0.9990152631781933,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.111909994395477e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.11191e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.3568948146146465e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2495108476621185e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.610918189144725e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 5.591520137820372e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.59152e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.620542551045553e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7765066664414776e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "V3_scale_ridge_target_floor",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.9999999999997,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 6.322332200984234e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.32233e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321436,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.664334336014649e-15,
+                    "std": 0.9004503377814957,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.840369698477737e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=9.12003e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -5.12102872619892e-16,
+                    "std": 0.9966158955401239,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 2.1691842775138482e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=2.16918e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.200642953874325e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2642539667803583e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.16163953237953e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000005,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.76831e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.56051436309946e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.648086187801522e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.64809e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0804179200183113e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.84989e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 0.0,
+                    "std": 0.9925092578236601,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000018,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.20434e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0339987572628324e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.2372634702290302e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0326471296619783e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000002,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 1.5437744601625754e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.54377e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.828030789094926e-16,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2726138550927167e-15,
+                    "std": 0.9463204468147665,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.307340442966345e-16,
+                    "std": 0.9981325847383298,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 5.065550953166258e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.06555e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.5350384863686576e-17,
+                    "std": 0.9925092578236597,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -7.423580821374181e-16,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.767519243184329e-16,
+                    "std": 0.9981325847383276,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 6.209282135543186e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.20928e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9925092578236575,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.651278864776493e-16,
+                    "std": 0.9981325847383284,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.26666e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.639282467162166e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.4184186600142278e-15,
+                    "std": 0.9632419486019033,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.1975548528662893e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.26679e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 7.325182842887631e-17,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5382883970064025e-15,
+                    "std": 0.9632419486019026,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8690299467976556e-16,
+                    "std": 0.9987105088124242,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.000000000003,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 1.466784289348026e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.46678e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2208638071479385e-15,
+                    "std": 0.9948320067476152,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.002216643722619e-15,
+                    "std": 0.9987105088124248,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.7943680404984617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.79437e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.028850563588197e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.235289088942037e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 5.6879690938471455e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.68797e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.5638139950106705e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -6.714750939313661e-17,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.81847e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.8231302055333474e-16,
+                    "std": 0.9960552114476225,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.009624361900828e-15,
+                    "std": 0.9720503535125001,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 1.6784474073073233e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.46763e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.1189649382048822e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.462172345174421e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000002,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.47154e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.0630166912946382e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.4360050040295989e-15,
+                    "std": 0.9990152631781933,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.111909994395477e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.11191e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.3568948146146465e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2495108476621185e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.610918189144725e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 5.591520137820372e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.59152e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.620542551045553e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7765066664414776e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "V4_winsor_train",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.9999999999997,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 6.322332200984234e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.32233e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321436,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.664334336014649e-15,
+                    "std": 0.9004503377814957,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.840369698477737e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.9023183633802846,
+                  -1.3908892925819505,
+                  -0.5469290159300463
+                ],
+                "winsor_hi": [
+                  4.036898402264588,
+                  2.3334901195666427,
+                  7.138519041223097
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=9.12003e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -5.12102872619892e-16,
+                    "std": 0.9966158955401239,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.905085922662494,
+                  -1.185066440510925,
+                  -0.5572128036236172
+                ],
+                "winsor_hi": [
+                  5.0516129765477515,
+                  2.2807631401392117,
+                  8.253086751271708
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 2.1691842775138482e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=2.16918e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.200642953874325e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2642539667803583e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.16163953237953e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.7514750379210694,
+                  -1.0024606156587845,
+                  -0.4883565809481696
+                ],
+                "winsor_hi": [
+                  5.258914269862821,
+                  2.386597555997418,
+                  7.390951296470242
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000005,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.76831e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.56051436309946e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.39665859592002917,
+                  -0.6852540124717984,
+                  -0.22437814990687574
+                ],
+                "winsor_hi": [
+                  5.747239182279132,
+                  2.058656613011952,
+                  9.845778941495016
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.648086187801522e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.64809e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0804179200183113e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.7204689260559032,
+                  -0.9419082448781357,
+                  -0.46662275931304315
+                ],
+                "winsor_hi": [
+                  5.126697977719951,
+                  2.167843015418549,
+                  8.535365110502763
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.84989e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 0.0,
+                    "std": 0.9925092578236601,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.8861094434015767,
+                  -1.0261486665526611,
+                  -0.5181925775472208
+                ],
+                "winsor_hi": [
+                  5.12847233113096,
+                  3.048254738870431,
+                  5.166585303970754
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000018,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.20434e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0339987572628324e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.2372634702290302e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.0326471296619783e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.646441767035839,
+                  -1.1573388022767188,
+                  -0.3877398269265165
+                ],
+                "winsor_hi": [
+                  6.041653759253848,
+                  2.446046749296299,
+                  8.277729645048918
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000002,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 1.5437744601625754e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.54377e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.828030789094926e-16,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2726138550927167e-15,
+                    "std": 0.9463204468147665,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.307340442966345e-16,
+                    "std": 0.9981325847383298,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.7124349455914324,
+                  -0.9886473051972163,
+                  -0.4634672349266076
+                ],
+                "winsor_hi": [
+                  6.663660967665726,
+                  3.3374640412873937,
+                  5.000455844200992
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 5.065550953166258e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.06555e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.5350384863686576e-17,
+                    "std": 0.9925092578236597,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -7.423580821374181e-16,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.767519243184329e-16,
+                    "std": 0.9981325847383276,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.334630694413024,
+                  -0.6024191849574778,
+                  -0.1894105107886145
+                ],
+                "winsor_hi": [
+                  7.686749554252362,
+                  3.02822980369785,
+                  4.700390026156935
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 6.209282135543186e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.20928e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9925092578236575,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.651278864776493e-16,
+                    "std": 0.9981325847383284,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.7045282220099169,
+                  -0.9983247027667536,
+                  -0.46165526241935745
+                ],
+                "winsor_hi": [
+                  6.538437320399926,
+                  2.9920886872337737,
+                  3.57214571483106
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.26666e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.639282467162166e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.4184186600142278e-15,
+                    "std": 0.9632419486019033,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.1975548528662893e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.8605916062460527,
+                  -0.9912884845182774,
+                  -0.5230796136739642
+                ],
+                "winsor_hi": [
+                  5.583594324144817,
+                  3.5076207626371345,
+                  5.504592991270645
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.26679e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 7.325182842887631e-17,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5382883970064025e-15,
+                    "std": 0.9632419486019026,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8690299467976556e-16,
+                    "std": 0.9987105088124242,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.668089278775278,
+                  -1.0256748251259111,
+                  -0.386602582472086
+                ],
+                "winsor_hi": [
+                  6.801311689310939,
+                  2.7586674947125984,
+                  6.011304424013771
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.000000000003,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 1.466784289348026e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.46678e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2208638071479385e-15,
+                    "std": 0.9948320067476152,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.002216643722619e-15,
+                    "std": 0.9987105088124248,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.7360748552897187,
+                  -0.9578792135985185,
+                  -0.47906739117222413
+                ],
+                "winsor_hi": [
+                  7.598119763285556,
+                  3.9777196286758003,
+                  5.359034681753807
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.7943680404984617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.79437e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.028850563588197e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.235289088942037e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.34942629582895174,
+                  -0.5834001791673614,
+                  -0.19997079108982133
+                ],
+                "winsor_hi": [
+                  9.008367217739762,
+                  3.6861739649842,
+                  4.552512462126026
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 5.6879690938471455e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.68797e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.5638139950106705e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -6.714750939313661e-17,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.6674510938624524,
+                  -1.039384013418458,
+                  -0.4481710639687812
+                ],
+                "winsor_hi": [
+                  6.1433209762028165,
+                  3.437737350431136,
+                  6.812615312243367
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.81847e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.8231302055333474e-16,
+                    "std": 0.9960552114476225,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.009624361900828e-15,
+                    "std": 0.9720503535125001,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 1.6784474073073233e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.7664792017755662,
+                  -1.121396910576536,
+                  -0.49604282736117455
+                ],
+                "winsor_hi": [
+                  4.7168648469939125,
+                  3.7608256116637446,
+                  6.460436359975995
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.46763e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.1189649382048822e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.462172345174421e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.5342024594668977,
+                  -1.0507876851532743,
+                  -0.3536308097638206
+                ],
+                "winsor_hi": [
+                  7.659732566633935,
+                  3.144379864672535,
+                  7.381126240868528
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000002,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.47154e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.0630166912946382e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.4360050040295989e-15,
+                    "std": 0.9990152631781933,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.7134406082631609,
+                  -1.0261213559938103,
+                  -0.4767266656065383
+                ],
+                "winsor_hi": [
+                  7.388737632301336,
+                  4.329048304887038,
+                  5.380708500377499
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.111909994395477e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.11191e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -3.3568948146146465e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2495108476621185e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.610918189144725e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.4508354214746607,
+                  -0.7739103585486447,
+                  -0.2679877877465485
+                ],
+                "winsor_hi": [
+                  9.515063812079154,
+                  3.8862714759272157,
+                  3.9025245184030357
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 5.591520137820372e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.59152e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.620542551045553e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7765066664414776e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.5643971831241811,
+                  -1.0449876004911784,
+                  -0.4042450276178608
+                ],
+                "winsor_hi": [
+                  5.7423252422402165,
+                  3.396285340955301,
+                  7.477406643113079
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "leakage_invariance_all": true,
+  "block_bootstrap_reproducibility": {
+    "run1": {
+      "point": 0.4879023125557301,
+      "ci_low": -0.05470664399824281,
+      "ci_high": 1.1856151857495267,
+      "n_obs": 12969,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 20261109,
+      "block_hours": 24,
+      "alpha": 0.05
+    },
+    "run2": {
+      "point": 0.4879023125557301,
+      "ci_low": -0.05470664399824281,
+      "ci_high": 1.1856151857495267,
+      "n_obs": 12969,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 20261109,
+      "block_hours": 24,
+      "alpha": 0.05
+    },
+    "seed": 20261109,
+    "identical_on_rerun": true
+  },
+  "interpretation": "Train-only provenance: True \u2014 every train-derived parameter (ridge scale, winsor bounds, target floor, normalization mean/std) is unchanged when the test fold is perturbed; no test-derived statistic enters training parameters. Block-bootstrap reproducibility: True \u2014 fixed seed yields identical CIs across independent runs (deterministic inference). **Leakage audit PASS (EXPLORATORY diagnostic, not confirmatory):** Gate 4 v4 leakage controls hold on the local 2024-04..09 slice; block-bootstrap inference is deterministic and reproducible.",
+  "json_path": "research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T055837Z.json",
+  "md_state_path": "research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T055837Z.md",
+  "md_results_path": "results/fclr_heavy001/gate4_v4_leakage_audit_20261109T055837Z.md"
+}

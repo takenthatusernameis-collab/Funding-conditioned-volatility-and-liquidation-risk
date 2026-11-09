@@ -108,8 +108,11 @@ def train_derived_params(train_n: pd.DataFrame, fcols: List[str], variant: str) 
 
 
 def audit_variant_leakage(panel: pd.DataFrame, variant: str, split_defs) -> Dict[str, object]:
-    """For each split/symbol: recompute train-only params; perturb test targets and confirm
-    train-derived params are unchanged (no leakage from test into train parameters)."""
+    """For each split/symbol: compute train-only params under (a) original test and (b)
+    perturbed test targets. Both runs use the same training fold through
+    wf.apply_train_only_normalization; train-derived params must be identical —
+    no leakage from test into ridge scale, winsor bounds, target floor, or
+    normalization stats."""
     idx = panel.index.get_level_values("timestamp")
     split_audits = []
     for i, meta in enumerate(split_defs):
@@ -125,7 +128,8 @@ def audit_variant_leakage(panel: pd.DataFrame, variant: str, split_defs) -> Dict
                 symbol_rows.append({"symbol": sym, "status": "INSUFFICIENT_DATA", "n_train": int(len(tr_s)), "n_test": int(len(te_s))})
                 continue
             fcols = [c for c in ABLATIONS["A_rv_only"] if c in panel.columns]
-            base = train_derived_params(tr_s, fcols, variant)
+            tr_norm_base, _, te_norm_base, _ = wf.apply_train_only_normalization(tr_s, te_s, te_s, fcols)
+            base = train_derived_params(tr_norm_base, fcols, variant)
             # Perturb test targets (scale by 2.0): train-derived params must be byte-identical.
             te_perturbed = te_s.copy()
             te_perturbed["target_rv"] = te_s["target_rv"].to_numpy(dtype=float) * 2.0

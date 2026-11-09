@@ -58,7 +58,7 @@ class TestLeakageAuditTrainOnly(unittest.TestCase):
         # Train-derived params must differ between train-only and test-only folds
         # (they are computed from different data), and train floor must be > 0.
         self.assertGreater(tr_b["target_floor"], 0.0)
-        self.assertIn("trace_over_k", tr_b["ridge_rule"])
+        self.assertIn("1e-8*max(", tr_b["ridge_rule"])
         self.assertIn("train_target_median", tr_b["target_floor_rule"])
         self.assertEqual(tr_b["normalization"]["rv_trail_24"]["n"], len(train))
 
@@ -69,7 +69,8 @@ class TestLeakageAuditTrainOnly(unittest.TestCase):
         train = panel.loc[idx < split_ts]
         test = panel.loc[idx >= split_ts]
         fcols = ["rv_trail_24", "rv_trail_168", "rv_trail_6", "funding_signed"]
-        base = train_derived_params(train, fcols, "V4_winsor_train")
+        tr_norm_base, _, _, _ = wf.apply_train_only_normalization(train, test, test, fcols)
+        base = train_derived_params(tr_norm_base, fcols, "V4_winsor_train")
         te_perturbed = test.copy()
         te_perturbed["target_rv"] = test["target_rv"].to_numpy(dtype=float) * 100.0
         tr_norm, _, te_norm, _ = wf.apply_train_only_normalization(
