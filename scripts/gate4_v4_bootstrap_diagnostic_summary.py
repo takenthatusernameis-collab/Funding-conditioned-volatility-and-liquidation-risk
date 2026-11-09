@@ -15,6 +15,19 @@ summary-row computation ONLY for rows that can be unambiguously mapped by exact
 context (point, ci_low, ci_high, n_obs, n_blocks/effective basis, block_hours,
 seed when present). Ambiguous mappings preserve MISSING_DIAGNOSTIC_FIELDS and
 claimable_excludes_zero=false. Source JSONs are never mutated.
+
+Optional --backfill-derivable-diagnostics: read-only. Derives CI-gate diagnostics
+from fields already present in each saved contrast row where mathematically and
+audibly derivable, and refuses otherwise:
+  - effective_block_count := n_blocks (when n_blocks is present and > 0)
+  - ci_valid := True (when ci_low, ci_high, point, n_obs are all finite and
+    ci_low <= ci_high)
+Never infers degenerate / inference_ok from CI width, point, or excludes-zero
+alone; those require explicit saved diagnostic evidence. Rows that remain
+unproven keep MISSING_DIAGNOSTIC_FIELDS and claimable_excludes_zero=false.
+Emits a versioned per-row audit trace (derivation rule, source field path,
+applied/refused, refusal reason) and a backfill_rules_version. No source
+mutation, no recomputation, no network, no real research_state writes.
 """
 from __future__ import annotations
 
@@ -28,6 +41,8 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 LABEL = "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE"
 RESULTS_DIR = Path("results")
+
+BACKFILL_RULES_VERSION = "1.0"
 
 
 def _ts() -> str:
@@ -115,6 +130,103 @@ def _enrich_context_match(row_ci: Dict[str, Any], cand: Dict[str, Any]) -> bool:
     return compared >= 4
 
 
+def backfill_derivable_diagnostics(ci: Dict[str, Any]) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+    """Derive only provably-deducible CI-gate diagnostics from fields already in the row.
+
+    Derivable (never mutates `ci`):
+      - effective_block_count := n_blocks  when n_blocks present and > 0
+      - ci_valid := True                   when ci_low, ci_high, point, n_obs are all
+                                            finite and ci_low <= ci_high
+    Never infers:
+      - degenerate / inference_ok from CI width, point, or excludes-zero alone;
+        those require explicit saved diagnostic evidence in the same artifact.
+    Returns (copy, trace_entries). Each trace entry has keys:
+      field, rule, source_field, applied, value, refusal_reason.
+    """
+    out = dict(ci)
+    trace: List[Dict[str, Any]] = []
+
+    def entry(field: str, rule: str, source_field: Optional[str], applied: bool,
+              value: Any = None, refusal_reason: Optional[str] = None) -> None:
+        trace.append({
+            "field": field,
+            "rule": rule,
+            "source_field": source_field,
+            "applied": bool(applied),
+            "value": value,
+            "refusal_reason": refusal_reason,
+        })
+
+    missing_diag = any(k not in ci for k in ("degenerate", "inference_ok")) or (
+        "ci_accounting_valid" not in ci and "ci_valid" not in ci
+    )
+
+    if "effective_block_count" not in ci:
+        nb = ci.get("n_blocks")
+        if nb is None:
+            entry("effective_block_count", "effective_block_count_from_n_blocks", "n_blocks", False,
+                  refusal_reason="n_blocks_missing")
+        else:
+            try:
+                nbi = int(nb)
+            except Exception:
+                entry("effective_block_count", "effective_block_count_from_n_blocks", "n_blocks", False,
+                      refusal_reason="n_blocks_not_integer")
+            else:
+                if nbi > 0:
+                    out["effective_block_count"] = nbi
+                    entry("effective_block_count", "effective_block_count_from_n_blocks", "n_blocks", True, value=nbi)
+                else:
+                    entry("effective_block_count", "effective_block_count_from_n_blocks", "n_blocks", False,
+                          refusal_reason="n_blocks_not_positive")
+
+    if "ci_accounting_valid" not in ci and "ci_valid" not in ci:
+        lo, hi = ci.get("ci_low"), ci.get("ci_high")
+        pt = ci.get("point")
+        nobs = ci.get("n_obs")
+        finite = _is_finite_number(lo) and _is_finite_number(hi) and _is_finite_number(pt) and _is_finite_number(nobs)
+        if not finite:
+            entry("ci_valid", "ci_valid_from_finite_ordered_ci", "ci_low,ci_high,point,n_obs", False,
+                  refusal_reason="ci_or_point_or_n_obs_not_finite")
+        else:
+            lo_f, hi_f = float(lo), float(hi)
+            if lo_f <= hi_f:
+                out["ci_valid"] = True
+                entry("ci_valid", "ci_valid_from_finite_ordered_ci", "ci_low,ci_high,point,n_obs", True, value=True)
+            else:
+                entry("ci_valid", "ci_valid_from_finite_ordered_ci", "ci_low,ci_high,point,n_obs", False,
+                      refusal_reason="ci_low_exceeds_ci_high")
+
+    # degenerate / inference_ok are never inferred from CI geometry
+    if "degenerate" not in ci:
+        entry("degenerate", "degenerate_from_ci_width", None, False,
+              refusal_reason="degenerate_not_inferrable_from_ci_width_or_point")
+    if "inference_ok" not in ci:
+        entry("inference_ok", "inference_ok_from_explicit_evidence", None, False,
+              refusal_reason="inference_ok_not_inferrable_without_explicit_diagnostic_field")
+
+    still_missing = any(k not in out for k in ("degenerate", "inference_ok")) or (
+        "ci_accounting_valid" not in out and "ci_valid" not in out
+    )
+    entry("diagnostic_gates_residual", "residual_missing_diagnostic_fields", None, not still_missing,
+          value=not still_missing,
+          refusal_reason=None if not still_missing else "degenerate_or_inference_ok_unproven")
+
+    # Only attach trace when the row actually lacked diagnostics; otherwise it is a
+    # no-op pass-through with a residual "already_complete" note.
+    if not missing_diag:
+        trace.insert(0, {
+            "field": "diagnostic_gates_residual",
+            "rule": "residual_missing_diagnostic_fields",
+            "source_field": None,
+            "applied": True,
+            "value": True,
+            "refusal_reason": None,
+        })
+
+    return out, trace
+
+
 def build_enrichment_candidates(leakage_obj: Dict[str, Any], source_name: str) -> List[Dict[str, Any]]:
     rep = leakage_obj.get("block_bootstrap_reproducibility") or {}
     if not isinstance(rep, dict):
@@ -171,7 +283,9 @@ def enrich_contrast_ci(
     return out, {"applied": True, "reason": "UNAMBIGUOUS_MATCH", "matches": 1, "source": c.get("_source"), "run": c.get("_run")}
 
 
-def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any], *, enrich_meta: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any], *,
+                         enrich_meta: Optional[Dict[str, Any]] = None,
+                         backfill_trace: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
     eff = ci.get("effective_block_count", ci.get("n_blocks"))
     ci_valid = ci.get("ci_accounting_valid", ci.get("ci_valid"))
     deg = ci.get("degenerate")
@@ -193,7 +307,7 @@ def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any
         flags = flags + ["EXCLUDES_ZERO_NOT_CLAIMABLE"]
     if deg is True or ci_valid is False or inf is False:
         flags = flags + ["NO_CLAIMABLE_IMPROVEMENT"]
-    return {
+    row = {
         "source": source,
         "section": section,
         "contrast": name,
@@ -212,37 +326,53 @@ def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any
         "enrichment_applied": bool(enrich_meta.get("applied")) if enrich_meta else False,
         "enrichment_meta": enrich_meta,
     }
+    if backfill_trace:
+        row["backfill_trace"] = backfill_trace
+    return row
 
 
-def _iter_contrast_dict(container: Any, source: str, section: str, *, candidates: Optional[Sequence[Dict[str, Any]]] = None) -> Iterable[Dict[str, Any]]:
+def _iter_contrast_dict(container: Any, source: str, section: str, *,
+                        candidates: Optional[Sequence[Dict[str, Any]]] = None,
+                        backfill: bool = False) -> Iterable[Dict[str, Any]]:
     if not isinstance(container, dict):
         return []
     out = []
     for name, ci in container.items():
         if isinstance(ci, dict) and ("ci_low" in ci or "point" in ci):
-            eff_ci, meta = enrich_contrast_ci(ci, candidates)
-            out.append(extract_contrast_row(source, section, str(name), eff_ci, enrich_meta=meta))
+            proc_ci: Dict[str, Any] = ci
+            btrace: List[Dict[str, Any]] = []
+            if backfill:
+                proc_ci, btrace = backfill_derivable_diagnostics(ci)
+                for e in btrace:
+                    e["row_id"] = f"{source}::{section}::{name}"
+            eff_ci, meta = enrich_contrast_ci(proc_ci, candidates)
+            out.append(extract_contrast_row(source, section, str(name), eff_ci,
+                                            enrich_meta=meta, backfill_trace=btrace or None))
     return out
 
 
-def summarize_stab(path: Path, obj: Dict[str, Any], *, candidates: Optional[Sequence[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
+def summarize_stab(path: Path, obj: Dict[str, Any], *, candidates: Optional[Sequence[Dict[str, Any]]] = None,
+                   backfill: bool = False) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     variants = obj.get("variants") or {}
     if isinstance(variants, dict):
         for vname, vobj in variants.items():
             if not isinstance(vobj, dict):
                 continue
-            rows.extend(_iter_contrast_dict(vobj.get("contrasts_vs_A") or {}, path.name, f"{vname}.contrasts_vs_A", candidates=candidates))
-    rows.extend(_iter_contrast_dict(obj.get("loo_e_vs_a_v3") or {}, path.name, "loo_e_vs_a_v3", candidates=candidates))
+            rows.extend(_iter_contrast_dict(vobj.get("contrasts_vs_A") or {}, path.name, f"{vname}.contrasts_vs_A",
+                                            candidates=candidates, backfill=backfill))
+    rows.extend(_iter_contrast_dict(obj.get("loo_e_vs_a_v3") or {}, path.name, "loo_e_vs_a_v3",
+                                    candidates=candidates, backfill=backfill))
     return rows
 
 
-def summarize_diag(path: Path, obj: Dict[str, Any], *, candidates: Optional[Sequence[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
+def summarize_diag(path: Path, obj: Dict[str, Any], *, candidates: Optional[Sequence[Dict[str, Any]]] = None,
+                   backfill: bool = False) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     for key in ("pooled_contrasts_vs_A_primary_fit", "pooled_contrasts_vs_A_stabilized_exploratory"):
-        rows.extend(_iter_contrast_dict(obj.get(key) or {}, path.name, key, candidates=candidates))
+        rows.extend(_iter_contrast_dict(obj.get(key) or {}, path.name, key, candidates=candidates, backfill=backfill))
     loo = obj.get("instrument_loo_E_vs_A_exploratory")
-    rows.extend(_iter_contrast_dict(loo or {}, path.name, "instrument_loo_E_vs_A_exploratory", candidates=candidates))
+    rows.extend(_iter_contrast_dict(loo or {}, path.name, "instrument_loo_E_vs_A_exploratory", candidates=candidates, backfill=backfill))
     return rows
 
 
@@ -277,21 +407,22 @@ def summarize_leakage_audit(path: Path, obj: Dict[str, Any]) -> List[Dict[str, A
     return rows
 
 
-def summarize_artifacts(paths: Sequence[Path], *, enrichment_candidates: Optional[Sequence[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
+def summarize_artifacts(paths: Sequence[Path], *, enrichment_candidates: Optional[Sequence[Dict[str, Any]]] = None,
+                        backfill: bool = False) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     for path in paths:
         obj = _load_json(path)
         name = path.name
         if "gate4_v4_exploratory_stab" in name or "variants" in obj and "loo_e_vs_a_v3" in obj:
-            rows.extend(summarize_stab(path, obj, candidates=enrichment_candidates))
+            rows.extend(summarize_stab(path, obj, candidates=enrichment_candidates, backfill=backfill))
         elif "gate4_v4_exploratory_diag" in name or "pooled_contrasts_vs_A_primary_fit" in obj:
-            rows.extend(summarize_diag(path, obj, candidates=enrichment_candidates))
+            rows.extend(summarize_diag(path, obj, candidates=enrichment_candidates, backfill=backfill))
         elif "gate4_v4_leakage_audit" in name or "block_bootstrap_reproducibility" in obj:
             rows.extend(summarize_leakage_audit(path, obj))
         else:
             # best-effort: scan for contrast-like dicts at top-level
             for k, v in obj.items():
-                rows.extend(_iter_contrast_dict(v, name, k, candidates=enrichment_candidates))
+                rows.extend(_iter_contrast_dict(v, name, k, candidates=enrichment_candidates, backfill=backfill))
     return rows
 
 
@@ -314,6 +445,8 @@ def render_markdown(
     *,
     enrichment_source: Optional[Path] = None,
     enrichment_candidates: Optional[Sequence[Dict[str, Any]]] = None,
+    backfill_trace: Optional[Sequence[Dict[str, Any]]] = None,
+    backfill_mode: bool = False,
 ) -> str:
     ts = ts or _ts()
     claimable = [r for r in rows if r.get("non_degenerate_excludes_zero_claimable")]
@@ -338,6 +471,41 @@ def render_markdown(
             f"- rows enriched by unambiguous exact-context match: **{len(enriched)}**",
             f"- rows with enrichment refused/ambiguous (kept MISSING_DIAGNOSTIC_FIELDS, not claimable): **{len(enrich_refused)}**",
             "- Enrichment copies CI-gate fields only for unambiguous matches; it never recomputes outcomes and never fabricates improvement.",
+            "",
+        ]
+    if backfill_mode and backfill_trace is not None:
+        applied = [e for e in backfill_trace if e.get("applied")]
+        refused = [e for e in backfill_trace if not e.get("applied")]
+        lines += [
+            "",
+            "## Diagnostic backfill audit trace (read-only; no source mutation)",
+            "",
+            f"- backfill_rules_version: `{BACKFILL_RULES_VERSION}`",
+            "- derivable fields only: `effective_block_count` (from `n_blocks` > 0), `ci_valid` (from finite ordered "
+            "CI `ci_low <= ci_high` + finite `point`/`n_obs`)",
+            "- never inferred: `degenerate`, `inference_ok` (require explicit saved diagnostic evidence); "
+            "backfilled fields alone never make a row claimable",
+            f"- trace entries: **{len(backfill_trace)}** | fields backfilled (applied): **{len(applied)}** | "
+            f"fields refused (not derivable): **{len(refused)}**",
+            "",
+        ]
+        shown = 0
+        for e in backfill_trace:
+            if shown >= 200:
+                lines.append(f"- ... ({len(backfill_trace) - shown} further trace entries omitted for brevity)")
+                break
+            lines.append(
+                f"- `{e.get('row_id')}` | field={e.get('field')} | rule={e.get('rule')} | "
+                f"applied={_fmt(e.get('applied'))} | source={_fmt(e.get('source_field'))} | "
+                f"value={_fmt(e.get('value'))} | refusal={_fmt(e.get('refusal_reason'))}"
+            )
+            shown += 1
+        lines += [
+            "",
+            "Claimability remains governed by degenerate==false, ci_valid==true, inference_ok==true and a finite CI "
+            "excluding zero. Backfilled `ci_valid`/`effective_block_count` alone never make a row claimable while "
+            "`degenerate`/`inference_ok` are unproven; such rows keep MISSING_DIAGNOSTIC_FIELDS and "
+            "claimable_excludes_zero=false.",
             "",
         ]
     lines += [
@@ -403,6 +571,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "--enrich-diagnostics-from-leakage",
         help="Read-only leakage audit JSON path; copies CI-gate fields only for unambiguous exact-context matches (never mutates source artifacts).",
     )
+    ap.add_argument(
+        "--backfill-derivable-diagnostics",
+        action="store_true",
+        help="Derive CI-gate diagnostics from fields already present in each saved contrast row where provably "
+        "derivable (effective_block_count from n_blocks>0; ci_valid from finite ordered CI + finite point/n_obs). "
+        "Never infers degenerate/inference_ok. Emits a versioned per-row audit trace; results/ output only.",
+    )
+    ap.add_argument(
+        "--audit-trace",
+        action="store_true",
+        help="Include the full per-row diagnostic backfill audit trace section in the report (implied by "
+        "--backfill-derivable-diagnostics).",
+    )
     args = ap.parse_args(argv)
     root = Path(args.repo_root).resolve()
     artifacts = [Path(p) if Path(p).is_absolute() else (root / p) for p in (args.artifacts or [])]
@@ -422,13 +603,29 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return 2
         candidates = build_enrichment_candidates(_load_json(enrich_path), enrich_path.name)
     ts = _ts()
-    rows = summarize_artifacts(artifacts, enrichment_candidates=candidates)
-    md = render_markdown(rows, artifacts, ts=ts, enrichment_source=enrich_path, enrichment_candidates=candidates)
-    out = Path(args.out) if args.out else (root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_{ts}.md")
+    backfill_mode = bool(args.backfill_derivable_diagnostics)
+    rows = summarize_artifacts(artifacts, enrichment_candidates=candidates, backfill=backfill_mode)
+    backfill_trace: List[Dict[str, Any]] = []
+    for r in rows:
+        bt = r.get("backfill_trace")
+        if isinstance(bt, list):
+            backfill_trace.extend(bt)
+    md = render_markdown(rows, artifacts, ts=ts, enrichment_source=enrich_path,
+                         enrichment_candidates=candidates, backfill_trace=backfill_trace,
+                         backfill_mode=(backfill_mode or args.audit_trace))
+    if args.out:
+        out = Path(args.out)
+    elif backfill_mode:
+        out = root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_backfill_{ts}.md"
+    else:
+        out = root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_{ts}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(md, encoding="utf-8")
     enriched_n = sum(1 for r in rows if r.get("enrichment_applied"))
-    print(f"wrote {out} rows={len(rows)} claimable_excludes_zero={sum(1 for r in rows if r.get('non_degenerate_excludes_zero_claimable'))} enriched={enriched_n}")
+    bf_applied = sum(1 for e in backfill_trace if e.get("applied"))
+    bf_refused = sum(1 for e in backfill_trace if not e.get("applied"))
+    print(f"wrote {out} rows={len(rows)} claimable_excludes_zero={sum(1 for r in rows if r.get('non_degenerate_excludes_zero_claimable'))} "
+          f"enriched={enriched_n} backfill_applied={bf_applied} backfill_refused={bf_refused}")
     return 0
 
 
