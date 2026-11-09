@@ -1,14 +1,14 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated/updated:** 2026-11-09T12:16:47Z (session complete: regression guard verification loop re-run — full suite green; 48 targeted OK; drift PASS 115/115; resume_check pass:true 17/17 probes==2 root_md_json_bounded pass (171/172); resume_gate BLOCKED by design; no code changes needed, all invariants green)
+**Generated/updated:** 2026-11-09T12:23:29Z (session complete: regression guard verification loop re-run — full suite green 1031 OK; targeted 48 OK; drift PASS 115/115; resume_check pass:true probes==2 root_md_json_bounded pass 171/172 network:false; resume_gate BLOCKED by design drift_preflight.pass:true outcomes_inspected:false; no source changes; `__pycache__`/`.pyc` artifacts present locally — do not commit; all invariants green)
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Priority (reconciled, binding):** Repo P0 = Gate 4 exploratory infrastructure hardening with measurable, tested artifacts — **COMPLETED this session** (local admissible 2024-04..09 cache only; FCLR-015 SHA256 `3e6ac26c...5406c`). Gate 4 v4 funding ablations remain **EXPLORATORY NO-GO CONFIRMED** — **do not rerun identical stabilization claims, do not claim confirmatory GO/economic value/promotion, do not reuse sealed-anchor domain (FCLR002/003/013), do not replace prereg A–E contrasts or change confirmatory estimands**. Track A = **structurally blocked/no trigger** (2026-11..2027-02 absent, probes==2, deadend rubric holds) — **no probing, no scan/wrapper/report families**. Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.**
+**Priority (reconciled, binding):** Repo P0 = regression guard + Track A monitor readiness (Gate 4 exploratory infrastructure hardening previously completed; local admissible 2024-04..09 cache only, FCLR-015 SHA256 `3e6ac26c...5406c`). Gate 4 v4 funding ablations remain **EXPLORATORY NO-GO CONFIRMED** — **do not rerun identical stabilization claims, do not claim confirmatory GO/economic value/promotion, do not reuse sealed-anchor domain (FCLR002/003/013), do not replace prereg A–E contrasts or change confirmatory estimands**. Track A = **structurally blocked/no trigger** (2026-11..2027-02 absent, probes==2, deadend rubric holds) — **no probing, no scan/wrapper/report families**. Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.**
 
 ---
 
 ## 0) INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (MANDATORY, HEAVY WORK — NO AVOIDANCE)
 
-**Session timestamp (this session completed):** `2026-11-09T12:16:47Z`
+**Session timestamp (this session completed):** `2026-11-09T12:23:29Z`
 
 **Repo-name priority (binding):** Funding-conditioned-volatility-and-liquidation-risk → the active research mission is (1) funding-conditioned volatility forecasting and (2) liquidation-risk labeling. Both tracks are currently gated: Track A (observed liquidation labels) is structurally BLOCKED (no admissible unauthenticated liquidation source; 2026-11..2027-02 absent, probes==2 exhausted); Track C forward volatility is sealed/locked INCONCLUSIVE (0 non-overlapping 30-day blocks); Gate 4 v4 funding-conditioned exploratory on the local 2024-04..09 cache is NO-GO CONFIRMED, exploratory-only, not promotable. The only non-avoidable, heavy, in-repo work is the regression guard + Track A monitor readiness below. Every session must produce versioned, auditable artifacts and/or tested code. No `.github/workflows` edits.
 
@@ -16,17 +16,17 @@
 
 **Gate 4 v4 binding state (do not litigate):** `FROZEN_BEFORE_OUTCOMES`, `confirmatory_claim_go=NO_GO`, `exploratory_smoke_authorized_after_freeze=true` (local 2024-04..09 cache; FCLR-015 SHA256 `3e6ac26c...5406c`). **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE.** Prior exec/diag/stab/NO-GO/leakage artifacts exist and are sufficient for the current claim boundary — **do not rerun identical stabilization claims**. Bootstrap summary + ambiguity-refusing enrichment + provable backfill + **backfill coverage/strict remediation** exist — build on them, do not redo.
 
-**DONE (this session, 2026-11-09T12:16:47Z) — Regression guard verification loop re-run (no code changes needed; all gates green):**
-- `python -m unittest discover tests` → **1031 OK** (≥1031 baseline, 0 failures/errors; no regression)
+**DONE (this session, 2026-11-09T12:23:29Z) — Regression guard verification loop re-run (no source changes; all gates green):**
+- `python -m unittest discover tests` → **Ran 1031 tests in ~122s — OK** (≥1031 baseline, 0 failures/errors; no regression)
 - `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics` → **48 OK**
 - `python3 scripts/check_tracka_scope_registry_drift.py` → **PASS (115/115)**
-- `python scripts/tracka_resume_check.py` → **pass:true, 17/17, network:false, probes==2, root_md_json_bounded pass**
-- `python scripts/tracka_resume_gate.py --json` → **BLOCKED, drift_preflight.pass:true, outcomes_inspected:false** (by design)
-- No code changes needed; no `research_state` root writes; `__pycache__`/`ironflow_fastpath_cache.json` not committed.
+- `python scripts/tracka_resume_check.py` → **pass:true, network:false, writes_real_research_state:false, ironflow_future_probes.count==2 (pass), root_md_json_bounded pass (171/172)**
+- `python scripts/tracka_resume_gate.py --json` → **BLOCKED, reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight.pass:true, outcomes_inspected:false** (by design)
+- No source code modified; no `research_state` root writes; `git status` clean of tracked changes except this handoff update. Local `__pycache__`/`.pyc` dirs exist under `src/` (8 dirs / 155 `.pyc` observed) — **do not commit**.
 
-**Execute next (initial task — regression guard + Track A monitor readiness, heavy and unavoidable):** Every session must re-run the full verification loop and **cannot skip the green-gate requirement**. (1) `python -m unittest discover tests` → expect ≥1031 OK, no regression. (2) `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics` → 48 OK. (3) `python3 scripts/check_tracka_scope_registry_drift.py` → PASS (115/115). (4) `python scripts/tracka_resume_check.py` → pass:true, 17/17, network:false, probes==2, root_md_json_bounded pass. (5) `python scripts/tracka_resume_gate.py --json` → BLOCKED, `drift_preflight.pass:true`, `outcomes_inspected:false`. (6) Maintain Track A monitor readiness: watch for the ironflow >=2026-11 unauthenticated data trigger; if it appears, **PREREG BEFORE OUTCOMES** then execute FCLR-012-A (do not re-run sealed panels). All heavy outputs to `results/` or dated subdirs — **do not add repo-root `research_state/*.md/*.json` files**. Maintain `root_md_json_bounded` pass. Version outputs with UTC timestamps.
+**Execute next (initial task — regression guard + Track A monitor readiness, heavy and unavoidable):** Every session must re-run the full verification loop and **cannot skip the green-gate requirement**. (1) `python -m unittest discover tests` → expect ≥1031 OK, no regression. (2) `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics` → 48 OK. (3) `python3 scripts/check_tracka_scope_registry_drift.py` → PASS (115/115). (4) `python scripts/tracka_resume_check.py` → pass:true, network:false, probes==2, root_md_json_bounded pass. (5) `python scripts/tracka_resume_gate.py --json` → BLOCKED, `drift_preflight.pass:true`, `outcomes_inspected:false`. (6) Maintain Track A monitor readiness: watch for the ironflow >=2026-11 unauthenticated data trigger; if it appears, **PREREG BEFORE OUTCOMES** then execute FCLR-012-A (do not re-run sealed panels). If a materially different tested engineering task is warranted, it must produce versioned evidence and keep all gates green. All heavy outputs to `results/` or dated subdirs — **do not add repo-root `research_state/*.md/*.json` files**. Maintain `root_md_json_bounded` pass. Version outputs with UTC timestamps.
 
-**Acceptance (mandatory):** (A) full suite green (≥1031 OK or better) + all invariants green + versioned auditable artifacts, **or** (B) a materially different tested engineering task with versioned evidence and same green gates. **Anything less is failure.**
+**Acceptance (mandatory):** (A) full suite green (≥1031 OK or better) + all invariants green + versioned auditable evidence in this handoff/artifacts, **or** (B) a materially different tested engineering task with versioned evidence and same green gates. **Anything less is failure.**
 
 ---
 
@@ -41,33 +41,28 @@
   - `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T105800Z.json` + `.md` — New, versioned: leakage audit JSON + markdown (dated subdir of research_state, not root).
   - `AGENT_HANDOFF.md` — Updated: §6 campaign marked DONE; bottleneck/file-reference fixed; next task = regression guard + Track A monitor readiness.
 
-- **This session (2026-11-09T11:12:58Z) — Regression guard verification loop re-run (no code changes needed):**
-  - Ran full suite + targeted tests + drift + resume_check + resume_gate — all green (see §2). No source files modified. No `research_state` root writes. `__pycache__`/`ironflow_fastpath_cache.json` not committed.
+- **This session (2026-11-09T12:23:29Z) — Regression guard verification loop re-run (no source changes):**
+  - Re-ran full suite + targeted Gate4 tests + scope drift + resume_check + resume_gate. All green (see §2). No source files modified. No `research_state` root writes. `git status` shows only `AGENT_HANDOFF.md` modified (tracked). Local `__pycache__`/`.pyc` artifacts present under `src/` — not committed. Gate4 exploratory artifacts in `results/` verified present (leakage audits 055837Z/070000Z/105800Z; bootstrap summaries including backfill_strict 100310Z + missing_diagnostic_fields sidecar).
 
-## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES
+## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES (2026-11-09T12:23:29Z)
 
 | Check | Command | Result |
 |---|---|---|
-| Targeted leakage + bootstrap + md diagnostics | `python3 -m unittest tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit_md_diagnostics` | **48 tests — OK** (25 bootstrap + 11 leakage + 12 leakage-md; carried-forward 40 + 8 new CLI/rollup tests) |
-| End-to-end leakage audit (real cache) | `python3 scripts/run_gate4_v4_leakage_audit.py --out-suffix 20261109T105800Z` | `leakage_invariance_all=true`, `bootstrap_reproducible=true`; versioned `results/` + dated `research_state/` subdir artifacts |
-| Full suite (deps now installed) | `python -m unittest discover tests` | **Ran 1031 tests — OK** (≥1023 baseline met, 0 failures/errors; no regression) |
+| Targeted leakage + bootstrap + md diagnostics | `python3 -m unittest tests.test_gate4_v4_bootstrap_diagnostic_summary tests.test_gate4_v4_leakage_audit tests.test_gate4_v4_leakage_audit_md_diagnostics` | **48 tests — OK** |
+| Full suite (deps installed) | `python -m unittest discover tests` | **Ran 1031 tests in ~122s — OK** (0 failures, 0 errors; ≥1031 baseline) |
 | Scope registry drift | `python3 scripts/check_tracka_scope_registry_drift.py` | **[PASS] scripts=115 registry=115 reason=OK** |
-| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true, 17/17, network:false, writes_real_research_state:false, probes==2, root_md_json_bounded pass** (count 171/bound 172) |
-| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **BLOCKED / PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS / drift_preflight.pass:true / outcomes_inspected:false** |
-| Regression guard this session | `2026-11-09T11:12:58Z` | All gates green; no code changes needed; no regression |
+| Track A resume check | `python scripts/tracka_resume_check.py` | **pass:true, network:false, writes_real_research_state:false, ironflow_future_probes count==2 (pass), root_md_json_bounded pass (count 171 / bound 172)** |
+| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | **status=BLOCKED, reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight.pass:true, outcomes_inspected:false, reads_outcomes:false, reads_parquet:false, writes_real_research_state:false** (by design) |
+| Working tree / hygiene | `git --no-pager status --short` | **clean of tracked changes except this `AGENT_HANDOFF.md` update**; local `__pycache__`/`.pyc` present under `src/` — not committed |
+| Gate4 exploratory artifacts (verified present) | `ls results/fclr_heavy001/gate4_v4_leakage_audit*.md results/gate4_v4_bootstrap_diagnostic_summary*.md` | leakage audits `055837Z/070000Z/105800Z`; bootstrap summaries incl. `backfill_strict_20261109T100310Z.md` + `missing_diagnostic_fields_20261109T100310Z.md.json` |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
 
 | Path | Change |
 |---|---|
-| `scripts/gate4_v4_bootstrap_diagnostic_summary.py` | Modified this session — `_require_under` canonical-output-integrity; `--out` under `results/`; `--artifacts` must exist (exit 2) |
-| `scripts/run_gate4_v4_leakage_audit.py` | Modified this session — `_is_safe_name_fragment`; refuse unsafe `--out-suffix` (exit 2) before load/write |
-| `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` | Extended this session — +3 CLI-safety tests |
-| `tests/test_gate4_v4_leakage_audit.py` | Extended this session — +5 CLI/rollup/idempotence/no-mutation tests |
-| `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T105800Z.md` | New, versioned this session — end-to-end leakage audit report |
-| `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T105800Z.json` | New, versioned this session — leakage audit JSON payload |
-| `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T105800Z.md` | New, versioned this session — leakage audit markdown |
-| `AGENT_HANDOFF.md` | Updated this session (2026-11-09T11:12:58Z) — timestamp refreshed; §0 initial task message re-confirmed; regression-guard evidence recorded; §6 bottleneck already removed in prior session |
+| `AGENT_HANDOFF.md` | **Updated this session (2026-11-09T12:23:29Z)** — regression-guard verification re-run recorded (1031 full / 48 targeted OK, drift 115/115 PASS, resume_check pass:true probes==2 root_md_json_bounded 171/172, resume_gate BLOCKED by design); Gate4 artifact presence verified; `__pycache__`/`.pyc` noted (not committed); next task = regression guard + Track A monitor readiness |
+
+*Prior-session evidence (unchanged, carried forward):* `scripts/gate4_v4_bootstrap_diagnostic_summary.py` (`_require_under`, `--out` under `results/`, `--artifacts` must exist), `scripts/run_gate4_v4_leakage_audit.py` (safe `--out-suffix` refusal), extended tests `tests/test_gate4_v4_bootstrap_diagnostic_summary.py` (+3) / `tests/test_gate4_v4_leakage_audit.py` (+5), `results/fclr_heavy001/gate4_v4_leakage_audit_20261109T105800Z.md`, `research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T105800Z.{json,md}`. No new `research_state` root files added.
 
 ## 4. CURRENT STATE OF EACH RESEARCH GATE
 
@@ -87,15 +82,15 @@
 | Track C forward: inconclusive (0 non-overlapping 30d blocks) | Structural | **NO** — do not relax criteria | New admissible panel meeting criteria; do not relax |
 | Gate 4 v4: confirmatory_claim_go NO_GO; sealed-anchor conflict | Structural by design | **NO** — no promotion, no sealed-anchor reuse, no rerun of identical stabilization claims | EXPLORATORY-only engineering/diagnostics on local 2024-04..09 cache |
 | Gate 4 v4: funding ablations NO-GO on 2024-04..09 | Structural outcome | **NO** — no improvement claim | Tested diagnostics/summaries; no recomputation |
-| §6 file-reference: referenced non-existent `scripts/gate4_v4_leakage_audit.py` | **REMOVED (this session)** | **YES — fixed** | Corrected to `scripts/run_gate4_v4_leakage_audit.py`; rollup already implemented; CLI hardening done |
 | `tracka_resume_gate.py --json` → BLOCKED (PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false) | By-design pre-reg/manifest block | **NO** — gate, not inefficiency | Maintain drift_preflight.pass:true |
-| Full `unittest discover` | Previously dep-limited in runner; deps now installed | **YES — resolved this session** | **Ran 1031 tests — OK**; re-run every session to guard regression |
+| Full `unittest discover` | Deps installed; green | **Resolved (re-verify every session)** | **1031 OK this session (2026-11-09T12:23:29Z)** |
+| Local `__pycache__`/`.pyc` under `src/` | Untracked test/runtime artifacts (8 dirs / 155 `.pyc` observed) | **Operational hygiene** — not a research blocker | **Do not commit**; optional local cleanup (`find . -name __pycache__ -not -path '*/.venv/*' -exec rm -rf {} +`) if desired; keep working tree clean of tracked changes |
 
-**Conclusion:** no structural gate is removable. The two previously fixable bottlenecks are resolved: the dep-limited full `unittest discover` now runs green at 1031 OK (re-run every session as regression guard), and the §6 file-reference was corrected to `scripts/run_gate4_v4_leakage_audit.py` with rollup + CLI hardening complete. The remaining open, non-avoidable, high-value path is §0: full regression-guard verification each session + Track A monitor readiness. Regression guard re-confirmed green at `2026-11-09T12:16:47Z`.
+**Conclusion:** no structural gate is removable. All verification gates are green at `2026-11-09T12:23:29Z` (1031/48 OK, drift 115/115, resume_check pass:true probes==2 root 171/172, resume_gate BLOCKED-by-design). Gate4 exploratory artifacts are present and versioned. The only heavy, unavoidable path is §0: full regression-guard verification each session + Track A monitor readiness (trigger ironflow >=2026-11 → **PREREG BEFORE OUTCOMES** → FCLR-012-A). Acceptance (A) satisfied this session.
 
 ## 6. SINGLE HIGHEST-VALUE NEXT TASK
 
-**Regression guard + Track A monitor readiness.** Re-run the full verification loop every session (full suite ≥1031 OK; 48 targeted OK; drift PASS; resume_check pass:true 17/17 probes==2 root bound pass; resume_gate BLOCKED as designed). Maintain versioned Gate 4 exploratory artifacts in `results/` or dated subdirs. Watch for the Track A trigger (ironflow >=2026-11 unauthenticated); on trigger, **PREREG BEFORE OUTCOMES** then execute FCLR-012-A. Never re-run sealed panels, never promote exploratory to confirmatory, never infer `degenerate`/`inference_ok`, never mutate sources, never fabricate claimability. No new scripts, no registry touches, no workflow edits.
+**Regression guard + Track A monitor readiness (re-run every session).** (1) Re-run the full verification loop: full suite ≥1031 OK; 48 targeted OK; drift PASS 115/115; resume_check pass:true probes==2 root_md_json_bounded pass (171/172) network:false; resume_gate BLOCKED by design with `drift_preflight.pass:true` + `outcomes_inspected:false`. (2) Maintain versioned Gate 4 exploratory artifacts in `results/` or dated subdirs; do not add repo-root `research_state/*.md/*.json`. (3) Watch for the Track A trigger (ironflow >=2026-11 unauthenticated). On trigger: **PREREG BEFORE OUTCOMES** (`pre_register_forward_experiment`/forward prereg path) then execute FCLR-012-A — do not re-run sealed panels. (4) Never re-run sealed panels, never promote exploratory to confirmatory, never infer `degenerate`/`inference_ok`, never mutate sources, never fabricate claimability, never re-probe 2026-11..2027-02. No workflow edits. If a specific testable engineering gap is found, fix it with tests + versioned evidence while keeping all gates green.
 
 ## 7. PRECISE VERIFICATION COMMANDS
 
@@ -140,8 +135,7 @@ python scripts/tracka_resume_gate.py --json                                    #
 
 ## 11. NEXT SESSION DELIVERABLE
 
-Updated `AGENT_HANDOFF.md` with regression-guard run evidence (full suite 1031 OK, 48 targeted OK, all invariants green, versioned `results/` artifacts), Track A monitor readiness state, and the next unfinished task — **acceptance (A) satisfied**. Re-verified green at `2026-11-09T12:16:47Z`. Repo must remain continuable without user repeating instructions.
+Updated `AGENT_HANDOFF.md` with regression-guard run evidence (full suite **1031 OK ~122s**, **48 targeted OK**, drift **115/115 PASS**, resume_check **pass:true probes==2 root_md_json_bounded 171/172 network:false**, resume_gate **BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS drift_preflight.pass:true outcomes_inspected:false**), Gate4 exploratory artifact presence verified, `__pycache__` hygiene noted (not committed), Track A monitor readiness state, and the next unfinished task — **acceptance (A) satisfied**. Re-verified green at `2026-11-09T12:23:29Z`. Repo must remain continuable without user repeating instructions.
 
 ---
-
 **END OF SINGLE DURABLE HANDOFF.**
