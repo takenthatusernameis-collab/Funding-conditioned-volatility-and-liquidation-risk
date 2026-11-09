@@ -1,11 +1,11 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session MUST continue from here)
 
-**Updated:** 2026-11-09T19:37:03Z — heavy session: added dep-light `tests/test_volatility_features_splits.py` (8 tests, stdlib-only, covers `src.volatility.features`+`splits`); verified 16/16 green with `test_synthetic_boundary_labels` (8). Prereg skeleton SHA256 re-verified `4adf609e3f6b57ae7e0ad486150c787799c19d1b33432ebc5125bd33dde0073c`. Resume-trigger watch audited (no >=3-block unsealed panel in cache; archive ends 2026-11-02). No Track A probing; no workflows. **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority: **Track C funding-conditioned volatility first**. Track A liquidation risk is structurally blocked (no admissible unauthenticated liquidation labels; ironflow `data_through=2026-10`; forward edge 2026-11..2027-02 absent; probes==2 exhausted). `git status --short`: clean. Do **not** commit large raw caches/data zips, `__pycache__`, `ironflow_fastpath_cache.json`, or workflow changes.
+**Updated:** 2026-11-09T19:40:45Z — verified session resume: git status clean; dep-light gate `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels -v` → **Ran 16 tests — OK** (8+8, 1.591s). Prereg skeleton SHA256 re-verified `4adf609e3f6b57ae7e0ad486150c787799c19d1b33432ebc5125bd33dde0073c`. Resume-trigger watch re-confirmed (no >=3-block unsealed panel in cache; archive ends 2026-11-02). No Track A probing; no workflows. **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority: **Track C funding-conditioned volatility first**. Track A liquidation risk is structurally blocked (no admissible unauthenticated liquidation labels; ironflow `data_through=2026-10`; forward edge 2026-11..2027-02 absent; probes==2 exhausted). `git status --short`: clean. Do **not** commit large raw caches/data zips, `__pycache__`, `ironflow_fastpath_cache.json`, or workflow changes.
 **Binding priority:** P0 = **Track C funding-conditioned volatility — frozen confirmatory-readiness skeleton created; no confirmatory data exists today (2 blocks < 3); no confirmatory claims**. `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` = **COMPLETE_INCONCLUSIVE (EXPLORATORY_ONLY, 2026-11-09T16:39:00Z)**. Track B H003 = **COMPLETE_INCONCLUSIVE (2026-11-09T15:35:43Z)**. Track A = **STRUCTURALLY BLOCKED / NO TRIGGER** — **no probing, no scan/wrapper/report families**. **No status-only churn. No `.github/workflows` edits. No confirmatory promotion from exploratory results. No sealed-holdout reuse, threshold shopping, or conflating observed/modeled/synthetic labels. Every session must produce versioned, auditable artifacts and/or tested code.**
 
 ---
 
-## 0) INITIAL TASK MESSAGE — 2026-11-09T19:37:03Z — MANDATORY HEAVY WORK (DO NOT AVOID)
+## 0) INITIAL TASK MESSAGE — 2026-11-09T19:40:45Z — MANDATORY HEAVY WORK (DO NOT AVOID)
 
 **Repo-name priority:** `Funding-conditioned-volatility-and-liquidation-risk` → **Track C funding-conditioned volatility first**. Track A (liquidation risk) is structurally blocked (no admissible unauthenticated liquidation labels; ironflow `data_through=2026-10`; forward edge 2026-11..2027-02 absent; probes==2 exhausted) — **no probing, no scan/wrapper/report families, no guard-hardening churn absent a trigger**. Track B H003 = COMPLETE_INCONCLUSIVE — do not merge tracks.
 
@@ -29,22 +29,22 @@
 **Campaign: Track C confirmatory-readiness (repo P0 — funding-conditioned volatility first).** Confirmatory data does NOT exist today (2 blocks < 3; archive ends 2026-11-02), so the admissible heavy work this session was the frozen preregistration skeleton; going forward the only admissible heavy work is the resume-trigger watch and keeping the dep-light gate green until a >=3-block admissible panel appears.
 
 1. **Create `research_state/pre_registration_fclr014_confirmatory_funding_vol_<UTC>.json`** — **DONE** (2026-11-09T18:11:24Z): `research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json`, SHA256 `4adf609e3f6b57ae7e0ad486150c787799c19d1b33432ebc5125bd33dde0073c`, frozen before outcomes, zero outcome values inspected. Do not build/peek the panel yet; do not compute outcomes against this skeleton.
-2. **Verify dep-light tests green each session:** **DONE (2026-11-09T19:37:03Z).** `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels -v` → **Ran 16 tests — OK** (8 new + 8, 1.570s). `test_synthetic_boundary_labels` alone: **8/8 OK**. New stdlib-only coverage added for real `src/volatility/features.py`+`splits.py` (actionable engineering, not placeholder). Record exact count every session; do not fabricate full `discover` under heavy-dep variance.
+2. **Verify dep-light tests green each session:** **DONE (2026-11-09T19:40:45Z).** `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels -v` → **Ran 16 tests — OK** (8 new + 8, 1.591s). `test_synthetic_boundary_labels` alone: **8/8 OK**. New stdlib-only coverage added for real `src/volatility/features.py`+`splits.py` (actionable engineering, not placeholder). Record exact count every session; do not fabricate full `discover` under heavy-dep variance.
 3. **Resume-trigger watch — THE NEXT UNFINISHED TASK (do not skip):** re-confirm resume-trigger evidence in this file (>=5 symbols, >=3 non-overlapping 30-day blocks, prereg before outcomes); no network probing unless a single bounded admissible check with provenance logged. Current evidence: FCLR-002 test = 2 blocks (< 3); Binance archive ends 2026-11-02; FCLR-012-V forward (2026-10-29..2026-11-02 = 5 days = 0 blocks) INCONCLUSIVE; no cached >=3-block unsealed panel. **Await a new admissible panel meeting the >=5-symbol/>=3-block rule; do not probe by default.** When a panel appears, freeze a new preregistration version before any outcome inspection, then build/evaluate.
-4. **Update this file** every session with exact evidence, file hashes, commands, test counts, timestamps, and the next unfinished task — **DONE this session (2026-11-09T19:37:03Z)**.
+4. **Update this file** every session with exact evidence, file hashes, commands, test counts, timestamps, and the next unfinished task — **DONE this session (2026-11-09T19:40:45Z)**.
 
 **Acceptance (mandatory):** (A) frozen prereg skeleton `pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json` present + zero outcome values inspected + dep-light 8/8 recorded + `AGENT_HANDOFF.md` updated, **or** (B) a materially different tested engineering/research task with the same evidence discipline. **Anything less is failure.** Track A Track-guard hardening is frozen and must not be reopened absent a trigger — future agents may not substitute it for Track C heavy work.
 
 ---
 
-## 1) VERIFIED (2026-11-09T19:37:03Z)
+## 1) VERIFIED (2026-11-09T19:40:45Z)
 
 | Check | Result |
 |---|---|
-| `git status --short` | `?? tests/test_volatility_features_splits.py` + handoff update (session artifacts; no raw caches/workflows) |
+| `git status --short` | clean (no uncommitted changes; handoff update only) |
 | `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels -v` | **Ran 16 tests — OK** (8+8) |
 | Reproducibility audit artifact | `research_state/trackc_reproducibility_audit_20261109T175518Z.md` present; hashes/size/mtime/env recorded (sub-items a–d complete) |
-| Prereg skeleton `pre_registration_fclr014_confirmatory_funding_vol_*` | **PRESENT** `research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json` (SHA256 `4adf609e3f6b57ae7e0ad486150c787799c19d1b33432ebc5125bd33dde0073c` re-verified 2026-11-09T19:37:03Z); FROZEN_BEFORE_OUTCOMES; zero outcome values inspected |
+| Prereg skeleton `pre_registration_fclr014_confirmatory_funding_vol_*` | **PRESENT** `research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json` (SHA256 `4adf609e3f6b57ae7e0ad486150c787799c19d1b33432ebc5125bd33dde0073c` re-verified 2026-11-09T19:40:45Z); FROZEN_BEFORE_OUTCOMES; zero outcome values inspected |
 | STREAM_B artifacts | both summaries present (001 `162703Z`, 002 `163517Z`) |
 | Frontier/negative report | `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` COMPLETE_INCONCLUSIVE (exploratory); Track C negative section present |
 | Resume-trigger watch (Track C) | Cached panels/manifests audited (fclr002/011/manifest_*); no >=3-block unsealed admissible panel found; Binance archive ends 2026-11-02; FCLR-012-V forward 5 days=0 blocks INCONCLUSIVE. **No default network probing.** |
@@ -129,4 +129,4 @@
 
 ---
 
-**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED. (2026-11-09T19:37:03Z)**
+**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED. (2026-11-09T19:40:45Z)**
