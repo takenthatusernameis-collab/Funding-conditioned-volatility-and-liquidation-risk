@@ -15,12 +15,13 @@ research_state/gate4_v4_leakage_audit/ and results/fclr_heavy001/.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
@@ -51,6 +52,8 @@ SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"]
 START = "2024-04-01"
 END = "2024-09-30"
 
+LEAKAGE_ROLLUP_RULES_VERSION = "1.0"
+
 
 def _ts() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -63,9 +66,75 @@ def _git_sha() -> str:
         return "UNKNOWN"
 
 
-def train_normalization_stats(train_n: pd.DataFrame, fcols: List[str]) -> Dict[str, object]:
+def _stable_diagnosis_id(*parts: object) -> str:
+    raw = "::".join(str(p) for p in parts)
+    return "LDIAG-" + hashlib.sha256(raw.encode("utf-8")).hexdigest()[:12]
+
+
+def leakage_diagnosis_for_row(row: Dict[str, Any], *, variant: str, split_id: Any, source_artifact: str) -> Dict[str, Any]:
+    """Per-row leakage diagnosis (refusal-first, never fabricates claimability).
+
+    Derived only from explicit saved/computed audit fields (test_perturbation_unchanged,
+    changed_keys, status). Never infers degenerate/inference_ok.
+    """
+    status = row.get("status")
+    unchanged = row.get("test_perturbation_unchanged")
+    changed = row.get("changed_keys") or []
+    if status != "OK":
+        diagnosis = "INSUFFICIENT_DATA"
+        leakage_detected = None
+        refusal_reason = f"status={status}"
+    elif unchanged is True and not changed:
+        diagnosis = "TRAIN_PARAMS_INVARIANT"
+        leakage_detected = False
+        refusal_reason = None
+    elif unchanged is False or changed:
+        diagnosis = "LEAKAGE_SIGNAL"
+        leakage_detected = True
+        refusal_reason = None
+    else:
+        diagnosis = "INDETERMINATE"
+        leakage_detected = None
+        refusal_reason = "test_perturbation_unchanged_missing_or_invalid"
+    return {
+        "diagnosis_id": _stable_diagnosis_id(source_artifact, variant, split_id, row.get("symbol")),
+        "source_artifact": source_artifact,
+        "variant": variant,
+        "split_id": split_id,
+        "symbol": row.get("symbol"),
+        "diagnosis": diagnosis,
+        "leakage_detected": leakage_detected,
+        "changed_keys": list(changed),
+        "refusal_reason": refusal_reason,
+        "n_train": row.get("n_train"),
+        "n_test": row.get("n_test"),
+    }
+
+
+def annotate_variant_audits(variant_audits: Sequence[Dict[str, Any]], *, source_artifact: str) -> List[Dict[str, Any]]:
+    """Add per-row leakage_diagnosis (idempotent) and return new list; never mutates rows in place."""
+    out: List[Dict[str, Any]] = []
+    for v in variant_audits or []:
+        v2 = dict(v)
+        splits2 = []
+        for sp in v.get("splits") or []:
+            sp2 = dict(sp)
+            syms2 = []
+            for s in sp.get("symbols") or []:
+                s2 = dict(s)
+                s2["leakage_diagnosis"] = leakage_diagnosis_for_row(
+                    s2, variant=v.get("variant", ""), split_id=sp.get("split_id"), source_artifact=source_artifact)
+                syms2.append(s2)
+            sp2["symbols"] = syms2
+            splits2.append(sp2)
+        v2["splits"] = splits2
+        out.append(v2)
+    return out
+
+
+def train_normalization_stats(train_n: pd.DataFrame, fcols: List[str]) -> Dict[str, Any]:
     """Train-only mean/std used by wf.apply_train_only_normalization (recomputed for audit)."""
-    stats = {}
+    stats: Dict[str, Any] = {}
     for c in fcols:
         col = train_n[c].to_numpy(dtype=float)
         m = col[np.isfinite(col)]
@@ -77,7 +146,55 @@ def train_normalization_stats(train_n: pd.DataFrame, fcols: List[str]) -> Dict[s
     return stats
 
 
-def train_derived_params(train_n: pd.DataFrame, fcols: List[str], variant: str) -> Dict[str, object]:
+def leakage_by_source_artifact(variant_audits: Sequence[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+    """Compact rollup of leakage diagnoses per source artifact.
+
+    Deterministic, idempotent over annotated variant_audits. Counts leakage
+    types/diagnoses per source JSON (never infers degenerate/inference_ok).
+    """
+    rollup: Dict[str, Dict[str, Any]] = {}
+    for v in variant_audits or []:
+        for sp in v.get("splits") or []:
+            for s in sp.get("symbols") or []:
+                d = s.get("leakage_diagnosis") or leakage_diagnosis_for_row(
+                    s, variant=v.get("variant", ""), split_id=sp.get("split_id"), source_artifact="unknown")
+                src = d.get("source_artifact") or "unknown"
+                b = rollup.setdefault(src, {
+                    "total_rows": 0, "train_params_invariant": 0, "leakage_signal": 0,
+                    "insufficient_data": 0, "indeterminate": 0, "leakage_detected": 0,
+                    "leakage_detection_refused": 0, "by_variant": {},
+                })
+                b["total_rows"] += 1
+                diag = d.get("diagnosis")
+                if diag == "TRAIN_PARAMS_INVARIANT":
+                    b["train_params_invariant"] += 1
+                elif diag == "LEAKAGE_SIGNAL":
+                    b["leakage_signal"] += 1
+                    b["leakage_detected"] += 1
+                elif diag == "INSUFFICIENT_DATA":
+                    b["insufficient_data"] += 1
+                    b["leakage_detection_refused"] += 1
+                else:
+                    b["indeterminate"] += 1
+                    b["leakage_detection_refused"] += 1
+                vn = d.get("variant") or "unknown"
+                vb = b["by_variant"].setdefault(vn, {"total": 0, "invariant": 0, "leakage_signal": 0, "refused": 0})
+                vb["total"] += 1
+                if diag == "TRAIN_PARAMS_INVARIANT":
+                    vb["invariant"] += 1
+                elif diag == "LEAKAGE_SIGNAL":
+                    vb["leakage_signal"] += 1
+                else:
+                    vb["refused"] += 1
+    ordered: Dict[str, Dict[str, Any]] = {}
+    for src in sorted(rollup):
+        b = rollup[src]
+        b["by_variant"] = {k: b["by_variant"][k] for k in sorted(b["by_variant"])}
+        ordered[src] = b
+    return ordered
+
+
+def train_derived_params(train_n: pd.DataFrame, fcols: List[str], variant: str) -> Dict[str, Any]:
     """Recompute all train-only parameters for one symbol/train fold (leakage boundary)."""
     X = train_n[fcols].to_numpy(dtype=float)
     y = train_n["target_rv"].to_numpy(dtype=float)
@@ -89,7 +206,7 @@ def train_derived_params(train_n: pd.DataFrame, fcols: List[str], variant: str) 
     ypos = yc[np.isfinite(yc) & (yc > 0)]
     ymed = float(np.median(ypos)) if ypos.size else 0.0
     floor = max(0.0, 1e-4 * ymed)
-    out = {
+    out: Dict[str, Any] = {
         "n_train_valid": int(mask.sum()),
         "n_train_total": int(len(train_n)),
         "ridge_scale_diag_trace_over_k": diag_scale,
@@ -267,7 +384,25 @@ def write_md(path: Path, payload: Dict[str, object]) -> None:
                     lines.append(f"| {v['variant']} | {sp['split_id']} | {s['symbol']} | {s['n_train']} | {s['test_perturbation_unchanged']} | {','.join(s.get('changed_keys', [])) or '-'} |")
     lines += ["",
               f"**All train-derived parameters invariant to test perturbation: {payload['leakage_invariance_all']}**",
-              "",
+              ""]
+    rollup = payload.get("leakage_by_source_artifact") or {}
+    if rollup:
+        lines += [
+            "## Per-row leakage diagnosis rollup by source artifact (refusal-first)",
+            "",
+            f"- leakage_rollup_rules_version: `{LEAKAGE_ROLLUP_RULES_VERSION}`",
+            "- Per-row diagnosis derived only from explicit saved/computed audit fields (test_perturbation_unchanged, changed_keys, status). "
+              "Never infers degenerate/inference_ok; never fabricates claimability.",
+            "| source_artifact | total_rows | train_params_invariant | leakage_signal | insufficient_data | indeterminate | leakage_detected | detection_refused |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+        for src, b in sorted(rollup.items()):
+            lines.append(
+                f"| {src} | {b.get('total_rows')} | {b.get('train_params_invariant')} | {b.get('leakage_signal')} | "
+                f"{b.get('insufficient_data')} | {b.get('indeterminate')} | {b.get('leakage_detected')} | {b.get('leakage_detection_refused')} |"
+            )
+        lines.append("")
+    lines += [
               "## Block-bootstrap reproducibility (fixed seed 20261109, two independent runs)",
               "| Metric | Run 1 | Run 2 | Identical | eff_blocks | ci_valid | regime_flags |",
               "|---|---:|---:|---:|---:|---:|---|",
@@ -363,6 +498,11 @@ def main(argv=None) -> int:
         v["all_train_params_test_invariant"] for v in payload["variant_audits"]
     )
     payload["block_bootstrap_reproducibility"] = audit_block_bootstrap_reproducibility(panel, PRE_REG_SPLITS_V3_30D)
+    # Per-row leakage diagnosis + by-source rollup (refusal-first, idempotent)
+    source_name = f"gate4_v4_leakage_audit_{ts}.json"
+    payload["variant_audits"] = annotate_variant_audits(payload["variant_audits"], source_artifact=source_name)
+    payload["leakage_rollup_rules_version"] = LEAKAGE_ROLLUP_RULES_VERSION
+    payload["leakage_by_source_artifact"] = leakage_by_source_artifact(payload["variant_audits"])
     payload["interpretation"] = make_interpretation(payload)
     json_path = state_dir / f"gate4_v4_leakage_audit_{ts}.json"
     md_state = state_dir / f"gate4_v4_leakage_audit_{ts}.md"
