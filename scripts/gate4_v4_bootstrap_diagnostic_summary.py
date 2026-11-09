@@ -43,6 +43,16 @@ LABEL = "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE"
 RESULTS_DIR = Path("results")
 
 BACKFILL_RULES_VERSION = "1.0"
+BACKFILL_COVERAGE_RULES_VERSION = "1.0"
+BACKFILL_STRICT_RULES_VERSION = "1.0"
+
+# Fields the provable backfill is permitted to derive. Anything outside this set
+# is never inferred (requires explicit saved diagnostic evidence).
+_DERIVABLE_FIELDS = ("effective_block_count", "ci_valid")
+# Fields that are part of the diagnostic gate but are NEVER inferrable from CI
+# geometry / point / excludes-zero alone.
+_NEVER_INFERRABLE_FIELDS = ("degenerate", "inference_ok")
+_DIAG_GATE_FIELDS = ("degenerate", "inference_ok", "ci_valid", "ci_accounting_valid")
 
 
 def _ts() -> str:
@@ -426,6 +436,124 @@ def summarize_artifacts(paths: Sequence[Path], *, enrichment_candidates: Optiona
     return rows
 
 
+def _row_id(r: Dict[str, Any]) -> str:
+    return f"{r.get('source')}::{r.get('section')}::{r.get('contrast')}"
+
+
+def backfill_coverage_summary(
+    rows: Sequence[Dict[str, Any]],
+    backfill_trace: Optional[Sequence[Dict[str, Any]]] = None,
+) -> Dict[str, Any]:
+    """Machine-checkable summary of provably-derivable backfill coverage.
+
+    Counts, per row, how many diagnostic-gate fields were already present, how
+    many were provably derived by the backfill, and how many remain unproven
+    (with explicit refusal reasons). Never infers `degenerate`/`inference_ok`
+    from CI geometry; only explicit saved diagnostic evidence counts.
+    """
+    trace_by_row: Dict[str, List[Dict[str, Any]]] = {}
+    if backfill_trace:
+        for e in backfill_trace:
+            rid = e.get("row_id")
+            if rid:
+                trace_by_row.setdefault(rid, []).append(e)
+
+    total = len(rows)
+    already_complete = 0
+    backfilled_any = 0
+    residual_missing = 0
+    refused_counts: Dict[str, int] = {}
+    residual_rows: List[Dict[str, Any]] = []
+
+    for r in rows:
+        rid = _row_id(r)
+        trace = trace_by_row.get(rid, [])
+        applied_fields = sorted({e.get("field") for e in trace if e.get("applied")})
+        refused_fields = sorted({e.get("field") for e in trace if not e.get("applied")})
+        refused_reasons = sorted({e.get("refusal_reason") for e in trace if not e.get("applied") and e.get("refusal_reason")})
+        missing = bool(r.get("missing_diagnostic_fields"))
+        if not missing:
+            already_complete += 1
+            continue
+        residual_missing += 1
+        if applied_fields:
+            backfilled_any += 1
+        for f in refused_fields:
+            refused_counts[f] = refused_counts.get(f, 0) + 1
+        residual_rows.append({
+            "row_id": rid,
+            "source": r.get("source"),
+            "section": r.get("section"),
+            "contrast": r.get("contrast"),
+            "backfilled_fields": applied_fields,
+            "still_missing_fields": refused_fields,
+            "refusal_reasons": refused_reasons,
+            "claimable_excludes_zero": bool(r.get("non_degenerate_excludes_zero_claimable")),
+            "ci_excludes_zero": r.get("ci_excludes_zero"),
+        })
+
+    return {
+        "backfill_coverage_rules_version": BACKFILL_COVERAGE_RULES_VERSION,
+        "rows_total": total,
+        "rows_already_complete": already_complete,
+        "rows_missing_diagnostic_fields": residual_missing,
+        "rows_with_backfilled_fields": backfilled_any,
+        "rows_still_missing_after_backfill": residual_missing,
+        "refused_field_counts": refused_counts,
+        "residual_rows": residual_rows,
+        "derivable_fields": list(_DERIVABLE_FIELDS),
+        "never_inferrable_fields": list(_NEVER_INFERRABLE_FIELDS),
+    }
+
+
+def strict_remediation_list(
+    coverage: Dict[str, Any],
+    *,
+    source_artifacts: Optional[Sequence[Path]] = None,
+) -> List[Dict[str, Any]]:
+    """Compact MISSING_DIAGNOSTIC_FIELDS remediation list (refusal-first).
+
+    Each entry names the row, the still-missing fields, the concrete reason the
+    field cannot be derived from saved CI geometry, and the only admissible
+    remedy (explicit saved diagnostic evidence in a source artifact). Never
+    mutates sources, never fabricates gates, never infers degenerate/inference_ok.
+    """
+    out: List[Dict[str, Any]] = []
+    for rr in coverage.get("residual_rows", []):
+        missing = rr.get("still_missing_fields", [])
+        reasons = rr.get("refusal_reasons", [])
+        for field in missing:
+            if field in _NEVER_INFERRABLE_FIELDS:
+                reason = (
+                    f"{field} is not inferrable from CI width, point estimate, or "
+                    "excludes-zero geometry; it requires explicit saved diagnostic "
+                    "evidence in a source artifact."
+                )
+            elif field in _DERIVABLE_FIELDS:
+                reason = (
+                    f"{field} was not derivable from the saved row fields; the "
+                    "backfill rule refused it (see refusal_reasons)."
+                )
+            else:
+                reason = f"{field} has no provable derivation rule and no explicit saved evidence."
+            out.append({
+                "row_id": rr.get("row_id"),
+                "field": field,
+                "remediation": (
+                    "Supply explicit saved diagnostic evidence for this field in a "
+                    "source artifact (e.g. a block_bootstrap_reproducibility "
+                    "diagnostics record with exact context), or leave the row "
+                    "unproven and not claimable."
+                ),
+                "reason": reason,
+                "refusal_reasons": reasons,
+                "claimable_excludes_zero": bool(rr.get("claimable_excludes_zero")),
+                "ci_excludes_zero": rr.get("ci_excludes_zero"),
+                "source_artifacts": [p.as_posix() for p in (source_artifacts or [])],
+            })
+    return out
+
+
 def _fmt(v: Any) -> str:
     if v is None:
         return "—"
@@ -447,6 +575,9 @@ def render_markdown(
     enrichment_candidates: Optional[Sequence[Dict[str, Any]]] = None,
     backfill_trace: Optional[Sequence[Dict[str, Any]]] = None,
     backfill_mode: bool = False,
+    coverage: Optional[Dict[str, Any]] = None,
+    strict_remediation: Optional[Sequence[Dict[str, Any]]] = None,
+    strict_mode: bool = False,
 ) -> str:
     ts = ts or _ts()
     claimable = [r for r in rows if r.get("non_degenerate_excludes_zero_claimable")]
@@ -506,6 +637,51 @@ def render_markdown(
             "excluding zero. Backfilled `ci_valid`/`effective_block_count` alone never make a row claimable while "
             "`degenerate`/`inference_ok` are unproven; such rows keep MISSING_DIAGNOSTIC_FIELDS and "
             "claimable_excludes_zero=false.",
+            "",
+        ]
+    if coverage is not None:
+        lines += [
+            "## Backfill coverage summary (machine-checkable)",
+            "",
+            f"- backfill_coverage_rules_version: `{coverage.get('backfill_coverage_rules_version')}`",
+            f"- rows total: **{coverage.get('rows_total')}**",
+            f"- rows already complete (no missing diagnostic fields): **{coverage.get('rows_already_complete')}**",
+            f"- rows missing diagnostic fields after backfill: **{coverage.get('rows_still_missing_after_backfill')}**",
+            f"- rows with at least one provably backfilled field: **{coverage.get('rows_with_backfilled_fields')}**",
+            f"- derivable fields: `{coverage.get('derivable_fields')}`",
+            f"- never-inferrable fields: `{coverage.get('never_inferrable_fields')}`",
+            "- refused field counts (field -> number of rows where the backfill refused to derive it):",
+        ]
+        for f, c in sorted((coverage.get("refused_field_counts") or {}).items()):
+            lines.append(f"  - `{f}`: **{c}**")
+        lines += [
+            "- A row is claimable only when `degenerate=false`, `ci_valid=true`, `inference_ok=true` and the CI excludes zero. "
+            "Backfill coverage never changes claimability for rows with unproven `degenerate`/`inference_ok`.",
+            "",
+        ]
+    if strict_mode and strict_remediation is not None:
+        lines += [
+            "## MISSING_DIAGNOSTIC_FIELDS remediation list (refusal-first; no source mutation)",
+            "",
+            f"- backfill_strict_rules_version: `{BACKFILL_STRICT_RULES_VERSION}`",
+            f"- remediation entries: **{len(strict_remediation)}**",
+            "- Each entry names the row, the still-missing field, the concrete reason the field cannot be derived from "
+            "saved CI geometry, and the only admissible remedy (explicit saved diagnostic evidence in a source "
+            "artifact). No field is inferred; no gate is fabricated.",
+            "",
+        ]
+        for e in strict_remediation:
+            lines.append(
+                f"- `{e.get('row_id')}` | field={e.get('field')} | claimable_excludes_zero={_fmt(e.get('claimable_excludes_zero'))} | "
+                f"ci_excludes_zero={_fmt(e.get('ci_excludes_zero'))}"
+            )
+            lines.append(f"  - reason: {e.get('reason')}")
+            lines.append(f"  - remediation: {e.get('remediation')}")
+            if e.get("refusal_reasons"):
+                lines.append(f"  - refusal_reasons: {', '.join(str(x) for x in e.get('refusal_reasons'))}")
+        lines += [
+            "",
+            "Machine-readable remediation list emitted as `missing_diagnostic_fields_<UTC>.json` alongside this report.",
             "",
         ]
     lines += [
@@ -584,6 +760,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         help="Include the full per-row diagnostic backfill audit trace section in the report (implied by "
         "--backfill-derivable-diagnostics).",
     )
+    ap.add_argument(
+        "--backfill-strict",
+        action="store_true",
+        help="Emit a compact MISSING_DIAGNOSTIC_FIELDS remediation list (rows/fields + concrete reason) for "
+        "fields that remain unproven after the provable backfill. Refusal-first: never infers "
+        "degenerate/inference_ok; never mutates sources or fabricates gates. Implies "
+        "--backfill-derivable-diagnostics.",
+    )
     args = ap.parse_args(argv)
     root = Path(args.repo_root).resolve()
     artifacts = [Path(p) if Path(p).is_absolute() else (root / p) for p in (args.artifacts or [])]
@@ -603,29 +787,40 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return 2
         candidates = build_enrichment_candidates(_load_json(enrich_path), enrich_path.name)
     ts = _ts()
-    backfill_mode = bool(args.backfill_derivable_diagnostics)
+    backfill_mode = bool(args.backfill_derivable_diagnostics or args.backfill_strict)
     rows = summarize_artifacts(artifacts, enrichment_candidates=candidates, backfill=backfill_mode)
     backfill_trace: List[Dict[str, Any]] = []
     for r in rows:
         bt = r.get("backfill_trace")
         if isinstance(bt, list):
             backfill_trace.extend(bt)
+    coverage = backfill_coverage_summary(rows, backfill_trace=backfill_trace)
+    strict_list = strict_remediation_list(coverage, source_artifacts=artifacts) if args.backfill_strict else []
     md = render_markdown(rows, artifacts, ts=ts, enrichment_source=enrich_path,
                          enrichment_candidates=candidates, backfill_trace=backfill_trace,
-                         backfill_mode=(backfill_mode or args.audit_trace))
+                         backfill_mode=(backfill_mode or args.audit_trace),
+                         coverage=coverage, strict_remediation=strict_list,
+                         strict_mode=bool(args.backfill_strict))
     if args.out:
         out = Path(args.out)
+    elif args.backfill_strict:
+        out = root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_backfill_strict_{ts}.md"
     elif backfill_mode:
         out = root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_backfill_{ts}.md"
     else:
         out = root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_{ts}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(md, encoding="utf-8")
+    if args.backfill_strict:
+        rem_out = out.with_name(out.name.replace("_backfill_strict_", "_missing_diagnostic_fields_") + ".json")
+        rem_out.write_text(json.dumps(strict_list, indent=2), encoding="utf-8")
     enriched_n = sum(1 for r in rows if r.get("enrichment_applied"))
     bf_applied = sum(1 for e in backfill_trace if e.get("applied"))
     bf_refused = sum(1 for e in backfill_trace if not e.get("applied"))
     print(f"wrote {out} rows={len(rows)} claimable_excludes_zero={sum(1 for r in rows if r.get('non_degenerate_excludes_zero_claimable'))} "
-          f"enriched={enriched_n} backfill_applied={bf_applied} backfill_refused={bf_refused}")
+          f"enriched={enriched_n} backfill_applied={bf_applied} backfill_refused={bf_refused} "
+          f"rows_missing_diag={coverage['rows_missing_diagnostic_fields']} rows_backfilled={coverage['rows_with_backfilled_fields']} "
+          f"strict_remediation_entries={len(strict_list)}")
     return 0
 
 
