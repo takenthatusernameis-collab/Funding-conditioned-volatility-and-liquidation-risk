@@ -1,8 +1,9 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated:** 2026-11-09T00:28:13Z
+**Generated:** 2026-11-09T00:33:47Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Priority (reconciled):** Repo P0 = Phase 3 Gate 4 funding-conditioned volatility ablations using local data (measurable, unblocked). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn.**
+**Verified this session:** git clean (f59b4ad3a); `python -m unittest discover tests` → Ran 950 tests OK; `tracka_resume_check.py` → pass:true, 17/17, probes==2, network:false, writes_real_research_state:false; `tracka_resume_gate.py --json` → drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false; `tracka_operator_report.py` → pass:true. Local 2024-04..09 cache present; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
 
 ---
 
@@ -33,18 +34,22 @@
 ---
 
 ## 1. WHAT CHANGED AND WHY (this session)
-- **Bottleneck removed:** Fixed `scripts/fclr024_v5_scope_coherence_report.py` (`_consume_gate_input_summary` / artifact schema). Bug: missing `artifact`/`read_state` keys and totals parsing for nested reconcile output caused `KeyError('artifact')` and CLI rc=2, failing 3 tests + 2 errors in `tests/test_fclr024_v5_scope_coherence_report.py`. Fix is read-only/deterministic; tolerates missing, file-missing, error, and nested/full reconcile shapes; never claims GO or unblocks gates.
+- **Verified preconditions for Gate 4 v4 campaign:** git tree clean at f59b4ad3a; full suite 950/950 OK; Track A invariants all green (17/17, probes==2, BLOCKED expected, outcomes_inspected:false); local 2024-04..09 cache present per FCLR-015 manifest; v4 prereg FROZEN_BEFORE_OUTCOMES with confirmatory_claim_go=NO_GO and exploratory_smoke_authorized_after_freeze=true. No code changes; state unchanged from prior session. Campaign §0 is ready to execute.
 - **No Track A re-probing, no workflows/controllers added, no Track C/B scope change.**
 
 ## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES
 | Check | Command | Result |
 |---|---|---|
-| Baseline (before fix) | `python -m unittest discover tests` | 950 ran, 3 failures, 2 errors (all `test_fclr024_v5_scope_coherence_report`) |
-| Targeted fix verify | `python -m unittest tests.test_fclr024_v5_scope_coherence_report -v` | 8 tests OK |
-| Full suite (after fix) | `python -m unittest discover tests` | **Ran 950 tests in 108.634s — OK** |
-| Track A resume check | `python scripts/tracka_resume_check.py` | `pass:true`, 17/17 checks, `network:false`, `probes==2`, `writes_real_research_state:false` |
-| Track A resume gate | `python scripts/tracka_resume_gate.py --json` | `drift_preflight.pass:true`, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
-| Track A operator report | `python scripts/tracka_operator_report.py` | `pass:true`, exit 0 |
+| Full suite (this session) | `python -m unittest discover tests` | **Ran 950 tests in 110.145s — OK** |
+| Track A resume check (this session) | `python scripts/tracka_resume_check.py` | `pass:true`, 17/17 checks, `network:false`, `probes==2`, `writes_real_research_state:false` |
+| Track A resume gate (this session) | `python scripts/tracka_resume_gate.py --json` | `drift_preflight.pass:true`, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
+| Track A operator report (this session) | `python scripts/tracka_operator_report.py` | `pass:true` |
+| Baseline (prior session, before fclr024 fix) | `python -m unittest discover tests` | 950 ran, 3 failures, 2 errors (all `test_fclr024_v5_scope_coherence_report`) |
+| Targeted fix verify (prior session) | `python -m unittest tests.test_fclr024_v5_scope_coherence_report -v` | 8 tests OK |
+| Full suite (prior session, after fix) | `python -m unittest discover tests` | **Ran 950 tests in 108.634s — OK** |
+| Track A resume check (prior session) | `python scripts/tracka_resume_check.py` | `pass:true`, 17/17 checks, `network:false`, `probes==2`, `writes_real_research_state:false` |
+| Track A resume gate (prior session) | `python scripts/tracka_resume_gate.py --json` | `drift_preflight.pass:true`, `status:BLOCKED`, `reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` |
+| Track A operator report (prior session) | `python scripts/tracka_operator_report.py` | `pass:true`, exit 0 |
 | Latest hardening pattern sanity | `python -m unittest tests.test_tracka_hardening_138 -v` | 9 tests OK |
 
 ## 3. EVIDENCE ADDED / MODIFIED (paths)
