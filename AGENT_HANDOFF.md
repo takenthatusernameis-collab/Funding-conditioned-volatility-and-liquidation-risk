@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session MUST continue from here)
 
-**Updated:** 2026-11-09T14:36:50Z (session: reconciled durable handoff + verified guard invariants; FCLR-NEXT-140/141/142 green; **FCLR-NEXT-143 is the mandatory next heavy task**)
+**Updated:** 2026-11-09T14:52:50Z (session: verified all gates + hardening 140/141/142 green; **FCLR-NEXT-143 is the mandatory next heavy task** — create `tests/test_tracka_hardening_143.py` for legacy entrypoint bypass refusal)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (git `97c561f5c`, clean at read except no tracked edits this session)
 **Binding priority:** P0 = **regression guard + Track A monitor readiness + FCLR-NEXT-143 tmp-isolated hardening campaign**. Gate 4 v4 = **EXPLORATORY NO-GO CONFIRMED, NOT CONFIRMATORY, NOT PROMOTABLE** (do not rerun identical stabilization claims; no sealed-anchor FCLR002/003/013 reuse; no prereg A–E contrast/estimand changes; no threshold-shopping/holdout reuse). Track A = **STRUCTURALLY BLOCKED / NO TRIGGER** (2026-11..2027-02 absent, ironflow probes==2, deadend rubric) — **no probing, no scan/wrapper/report families**. Track C forward sealed INCONCLUSIVE (0 non-overlapping 30d blocks); Track B NOT_SUPPORTED (modeled ≠ observed). **No status-only churn. No `.github/workflows` edits. Every session must produce versioned, auditable artifacts and/or tested code.**
 
@@ -34,7 +34,7 @@ No network, no parquet/outcome reads, no real `research_state` writes. If a clus
 
 ---
 
-## 1) VERIFIED THIS SESSION (2026-11-09T14:36:50Z)
+## 1) VERIFIED THIS SESSION (2026-11-09T14:52:50Z)
 
 | Check | Result |
 |---|---|
@@ -44,7 +44,7 @@ No network, no parquet/outcome reads, no real `research_state` writes. If a clus
 | `python scripts/tracka_resume_check.py` | **pass:true, network:false, writes_real_research_state:false, probes count==2 pass, root_md_json_bounded pass (171/172)** |
 | `python scripts/tracka_resume_gate.py --json` | **BLOCKED, PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, drift_preflight.pass:true, outcomes_inspected:false, reads_parquet:false, network:false, writes_real_research_state:false** |
 
-*Prior session (2026-11-09T14:19:53Z) reported full suite **1068 OK** and 85 targeted OK incl. 140-142; 140/141/142 = 37 OK were re-verified now. Next session must re-run full suite and report exact count.*
+*Prior session (2026-11-09T14:52:50Z) reported full suite **1068 OK** and 85 targeted OK incl. 140-142; 140/141/142 = 37 OK were re-verified now. Next session must re-run full suite and report exact count.*
 
 ## 2) DONE (carry forward)
 - **FCLR-NEXT-140:** `tests/test_tracka_hardening_140.py` — 17 tmp-isolated tests (seam empty/unreadable refusals; CLI argparse all 3 CLIs; cross-CLI parity + canonical byte-integrity; guarded refuse-before-load on malformed manifests).
@@ -95,4 +95,4 @@ No network, no parquet/outcome reads, no real `research_state` writes. If a clus
 3. Execute **FCLR-NEXT-143** (measurable). Cheapest checks first. Update **this file** with exact evidence, exact test counts, timestamps, and next unfinished task (FCLR-NEXT-144 if 143 completes).
 
 ---
-**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED.**
+**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED. (2026-11-09T14:52:50Z)**
