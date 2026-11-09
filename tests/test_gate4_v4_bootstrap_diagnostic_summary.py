@@ -504,9 +504,21 @@ class TestBootstrapDiagnosticSummary(unittest.TestCase):
             rem_path = outp.with_name(outp.name.replace("_backfill_strict_", "_missing_diagnostic_fields_") + ".json")
             self.assertTrue(rem_path.exists(), f"machine-readable remediation JSON missing: {rem_path}")
             rem = json.loads(rem_path.read_text("utf-8"))
-            self.assertTrue(isinstance(rem, list) and len(rem) >= 2)
-            self.assertTrue(all(e.get("field") in ("degenerate", "inference_ok", "diagnostic_gates_residual") for e in rem))
-            self.assertTrue(all(e.get("claimable_excludes_zero") is False for e in rem if e.get("ci_excludes_zero") is True))
+            self.assertTrue(isinstance(rem, dict))
+            entries = rem["remediation_entries"]
+            self.assertTrue(isinstance(entries, list) and len(entries) >= 2)
+            self.assertTrue(all(e.get("field") in ("degenerate", "inference_ok", "diagnostic_gates_residual") for e in entries))
+            self.assertTrue(all("remediation_id" in e for e in entries))
+            ids = [e["remediation_id"] for e in entries]
+            self.assertEqual(len(ids), len(set(ids)), "remediation IDs must be unique")
+            self.assertTrue(all(e.get("claimable_excludes_zero") is False for e in entries if e.get("ci_excludes_zero") is True))
+            rollup = rem["remediation_by_source_artifact"]
+            self.assertTrue(isinstance(rollup, dict))
+            self.assertTrue(all(set(b) == {"degenerate", "inference_ok", "total"} for b in rollup.values()))
+            self.assertEqual(
+                sum(b["total"] for b in rollup.values()),
+                sum(1 for e in entries if e.get("field") in ("degenerate", "inference_ok")),
+            )
             rs_files = sorted(p.relative_to(root).as_posix() for p in (root / "research_state").rglob("*") if p.is_file())
             self.assertEqual(rs_files, ["research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_x.json"])
 
@@ -522,6 +534,61 @@ class TestBootstrapDiagnosticSummary(unittest.TestCase):
         self.assertEqual(coverage["rows_missing_diagnostic_fields"], 1)
         self.assertTrue(any(e["field"] == "degenerate" for e in rem))
         self.assertTrue(any(e["field"] == "inference_ok" for e in rem))
+
+    def test_strict_remediation_dedupes_per_row_field_with_stable_ids(self):
+        ci_missing = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci_missing)
+        row = s.extract_contrast_row("b.json", "sec", "c", out, backfill_trace=trace)
+        coverage = s.backfill_coverage_summary([row])
+        rem = s.strict_remediation_list(coverage)
+        fields = {e["field"] for e in rem}
+        self.assertIn("degenerate", fields)
+        self.assertIn("inference_ok", fields)
+        # deduped per (row_id, field): one entry each, stable unique IDs
+        keys = [(e["row_id"], e["field"]) for e in rem]
+        self.assertEqual(len(keys), len(set(keys)))
+        ids = [e["remediation_id"] for e in rem]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertTrue(all(e["remediation_id"].startswith("REM-") and len(e["remediation_id"]) == 16 for e in rem))
+        # IDs deterministic across calls on the same inputs
+        rem2 = s.strict_remediation_list(coverage)
+        self.assertEqual([e["remediation_id"] for e in rem2], ids)
+
+    def test_strict_remediation_merges_duplicate_row_field_entries(self):
+        ci_missing = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci_missing)
+        row = s.extract_contrast_row("b.json", "sec", "c", out, backfill_trace=trace)
+        coverage = s.backfill_coverage_summary([row, dict(row)])
+        rem = s.strict_remediation_list(coverage)
+        # same (row_id, field) collapses to a single entry each
+        self.assertEqual(len(rem), 2)
+        keys = [(e["row_id"], e["field"]) for e in rem]
+        self.assertEqual(len(keys), len(set(keys)))
+
+    def test_remediation_by_source_artifact_rollup_counts(self):
+        entries = [
+            {"row_id": "a.json::sec::c1", "field": "degenerate"},
+            {"row_id": "a.json::sec::c1", "field": "inference_ok"},
+            {"row_id": "b.json::sec::c2", "field": "degenerate"},
+            {"row_id": "b.json::sec::c2", "field": "degenerate"},
+            {"row_id": "c.json::sec::c3", "field": "inference_ok"},
+            {"row_id": "ci_excludes_zero_only.json::sec::c4", "field": "ci_valid"},
+        ]
+        rollup = s.remediation_by_source_artifact(entries)
+        self.assertEqual(rollup["a.json"], {"degenerate": 1, "inference_ok": 1, "total": 2})
+        self.assertEqual(rollup["b.json"], {"degenerate": 2, "inference_ok": 0, "total": 2})
+        self.assertEqual(rollup["c.json"], {"degenerate": 0, "inference_ok": 1, "total": 1})
+        self.assertNotIn("ci_excludes_zero_only.json", rollup)
+
+    def test_strict_remediation_idempotent_same_inputs_identical_output(self):
+        ci_missing = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10}
+        out, trace = s.backfill_derivable_diagnostics(ci_missing)
+        row = s.extract_contrast_row("b.json", "sec", "c", out, backfill_trace=trace)
+        coverage = s.backfill_coverage_summary([row])
+        r1 = s.strict_remediation_list(coverage)
+        r2 = s.strict_remediation_list(coverage)
+        self.assertEqual(r1, r2)
+        self.assertEqual(s.remediation_by_source_artifact(r1), s.remediation_by_source_artifact(r2))
 
 
 if __name__ == "__main__":

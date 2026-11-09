@@ -1,0 +1,1390 @@
+{
+  "remediation_strict_rules_version": "1.0",
+  "remediation_entries": [
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::B_rv_signed",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-2ee0aeddb193"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::B_rv_signed",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-3a9b17423763"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::C_rv_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-66256cd0386e"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::C_rv_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-d9c50db25a12"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::D_rv_signed_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-6e32bb75c4d6"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::D_rv_signed_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-b51fdcff97d5"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::E_rv_funding_trails",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-5f81febf27b2"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_primary_fit::E_rv_funding_trails",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-f396291df186"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::B_rv_signed",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-d06aacd5a840"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::B_rv_signed",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-9cb70ee15324"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::C_rv_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-03cd3961f8da"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::C_rv_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-35350b7a5702"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::D_rv_signed_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-4f86494cb67b"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::D_rv_signed_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-c51364e3523e"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::E_rv_funding_trails",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-6496d50174b6"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::pooled_contrasts_vs_A_stabilized_exploratory::E_rv_funding_trails",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-d80d5c4189b8"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::all",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-6a132d598f8c"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::all",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-2df6a1eaa301"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_BTCUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-dba43f8c1330"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_BTCUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-4f9b7134ca72"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_ETHUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-849e1f4480eb"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_ETHUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-9de04c3b9a41"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_SOLUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-8d8395e0e122"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_SOLUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-99068611d745"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_XRPUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-fec695e05b75"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_XRPUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-203df17866f4"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_BNBUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-bd1f977fb5e8"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_diag_20261109T021456Z.json::instrument_loo_E_vs_A_exploratory::drop_BNBUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-cc9baefca609"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::B_rv_signed",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-6178803fdc04"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::B_rv_signed",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-cb5e1e6ffa37"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::C_rv_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-8b9eadab2725"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::C_rv_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-997f0c9054ee"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::D_rv_signed_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-24ad97e500c8"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::D_rv_signed_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-57aafbbd1cb1"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::E_rv_funding_trails",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-eb1d31f672bb"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V1_primary.contrasts_vs_A::E_rv_funding_trails",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-816ed0a45679"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::B_rv_signed",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-89b03296e7e8"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::B_rv_signed",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-2f6014a5e733"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::C_rv_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-b7035db37d84"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::C_rv_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-3d4189c56e01"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::D_rv_signed_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-319ab907725a"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::D_rv_signed_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-157700e8a637"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::E_rv_funding_trails",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-07d13037c1ab"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V2_scale_ridge.contrasts_vs_A::E_rv_funding_trails",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-38fa5680ee96"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::B_rv_signed",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-d914b545e6cf"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::B_rv_signed",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-07970ffb67a2"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::C_rv_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-74e9123e488a"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::C_rv_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-78970cc002bd"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::D_rv_signed_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-32b1984d9dea"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::D_rv_signed_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-e31c195e66b4"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::E_rv_funding_trails",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-ef0c80e41dcf"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V3_scale_ridge_target_floor.contrasts_vs_A::E_rv_funding_trails",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-c38a6d020e77"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::B_rv_signed",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-c8f99baa38f6"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::B_rv_signed",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-7bc2f76f1204"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::C_rv_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-3582fd2954f3"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::C_rv_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-240ed73ada06"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::D_rv_signed_abs",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-cd4e74c5c9be"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::D_rv_signed_abs",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-2e6fd8e3fd07"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::E_rv_funding_trails",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-f42d4afc9839"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::V4_winsor_train.contrasts_vs_A::E_rv_funding_trails",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-40e139fa2f84"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::all",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-fa2bca9d3e3f"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::all",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-38b3395268f5"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_BTCUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-cfe28cd55873"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_BTCUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-aa469caa8555"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_ETHUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-4d79a4b8f4e5"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_ETHUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-47c9a9f0981f"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_SOLUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-477f77987f3c"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_SOLUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-4daf642f2e44"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_XRPUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-04307babee60"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_XRPUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": false,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-6c81fe050493"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_BNBUSDT",
+      "field": "degenerate",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "degenerate is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-fe646bc62e58"
+    },
+    {
+      "row_id": "gate4_v4_exploratory_stab_20261109T045805Z.json::loo_e_vs_a_v3::drop_BNBUSDT",
+      "field": "inference_ok",
+      "remediation": "Supply explicit saved diagnostic evidence for this field in a source artifact (e.g. a block_bootstrap_reproducibility diagnostics record with exact context), or leave the row unproven and not claimable.",
+      "reason": "inference_ok is not inferrable from CI width, point estimate, or excludes-zero geometry; it requires explicit saved diagnostic evidence in a source artifact.",
+      "refusal_reasons": [
+        "degenerate_not_inferrable_from_ci_width_or_point",
+        "degenerate_or_inference_ok_unproven",
+        "inference_ok_not_inferrable_without_explicit_diagnostic_field"
+      ],
+      "claimable_excludes_zero": false,
+      "ci_excludes_zero": true,
+      "source_artifacts": [
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_diag/gate4_v4_exploratory_diag_20261109T021456Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+        "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit_20261109T070000Z.json"
+      ],
+      "remediation_id": "REM-b3d9dba6fd32"
+    }
+  ],
+  "remediation_by_source_artifact": {
+    "gate4_v4_exploratory_diag_20261109T021456Z.json": {
+      "degenerate": 14,
+      "inference_ok": 14,
+      "total": 28
+    },
+    "gate4_v4_exploratory_stab_20261109T045805Z.json": {
+      "degenerate": 22,
+      "inference_ok": 22,
+      "total": 44
+    }
+  },
+  "remediation_summary": {
+    "total_entries": 72,
+    "source_artifacts": 2,
+    "claimable_any": false
+  }
+}

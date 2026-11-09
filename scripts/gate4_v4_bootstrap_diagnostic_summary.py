@@ -32,6 +32,7 @@ mutation, no recomputation, no network, no real research_state writes.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from dataclasses import dataclass
@@ -519,6 +520,19 @@ def backfill_coverage_summary(
     }
 
 
+def _source_artifact_from_row_id(row_id: str) -> str:
+    """Extract the source artifact filename from a `source::section::contrast` row_id."""
+    if not row_id or "::" not in row_id:
+        return "unknown"
+    return row_id.split("::", 1)[0]
+
+
+def _stable_remediation_id(row_id: str, field: str) -> str:
+    """Deterministic stable ID for a (row_id, field) remediation entry."""
+    digest = hashlib.sha256(f"{row_id}::{field}".encode("utf-8")).hexdigest()
+    return f"REM-{digest[:12]}"
+
+
 def strict_remediation_list(
     coverage: Dict[str, Any],
     *,
@@ -526,45 +540,87 @@ def strict_remediation_list(
 ) -> List[Dict[str, Any]]:
     """Compact MISSING_DIAGNOSTIC_FIELDS remediation list (refusal-first).
 
-    Each entry names the row, the still-missing fields, the concrete reason the
-    field cannot be derived from saved CI geometry, and the only admissible
-    remedy (explicit saved diagnostic evidence in a source artifact). Never
-    mutates sources, never fabricates gates, never infers degenerate/inference_ok.
+    Dedupes entries per (row_id, field) so a diagnostic-producer targets each
+    still-unproven field exactly once. Each entry carries a stable deterministic
+    `remediation_id`. Never mutates sources, never fabricates gates, never
+    infers `degenerate`/`inference_ok`.
     """
-    out: List[Dict[str, Any]] = []
+    merged: Dict[Tuple[Optional[str], str], Dict[str, Any]] = {}
+    order: List[Tuple[Optional[str], str]] = []
     for rr in coverage.get("residual_rows", []):
+        row_id = rr.get("row_id")
         missing = rr.get("still_missing_fields", [])
         reasons = rr.get("refusal_reasons", [])
         for field in missing:
-            if field in _NEVER_INFERRABLE_FIELDS:
-                reason = (
-                    f"{field} is not inferrable from CI width, point estimate, or "
-                    "excludes-zero geometry; it requires explicit saved diagnostic "
-                    "evidence in a source artifact."
-                )
-            elif field in _DERIVABLE_FIELDS:
-                reason = (
-                    f"{field} was not derivable from the saved row fields; the "
-                    "backfill rule refused it (see refusal_reasons)."
-                )
+            key = (row_id, field)
+            if key not in merged:
+                if field in _NEVER_INFERRABLE_FIELDS:
+                    reason = (
+                        f"{field} is not inferrable from CI width, point estimate, or "
+                        "excludes-zero geometry; it requires explicit saved diagnostic "
+                        "evidence in a source artifact."
+                    )
+                elif field in _DERIVABLE_FIELDS:
+                    reason = (
+                        f"{field} was not derivable from the saved row fields; the "
+                        "backfill rule refused it (see refusal_reasons)."
+                    )
+                else:
+                    reason = f"{field} has no provable derivation rule and no explicit saved evidence."
+                merged[key] = {
+                    "row_id": row_id,
+                    "field": field,
+                    "remediation": (
+                        "Supply explicit saved diagnostic evidence for this field in a "
+                        "source artifact (e.g. a block_bootstrap_reproducibility "
+                        "diagnostics record with exact context), or leave the row "
+                        "unproven and not claimable."
+                    ),
+                    "reason": reason,
+                    "refusal_reasons": list(reasons),
+                    "claimable_excludes_zero": bool(rr.get("claimable_excludes_zero")),
+                    "ci_excludes_zero": rr.get("ci_excludes_zero"),
+                    "source_artifacts": [p.as_posix() for p in (source_artifacts or [])],
+                }
+                order.append(key)
             else:
-                reason = f"{field} has no provable derivation rule and no explicit saved evidence."
-            out.append({
-                "row_id": rr.get("row_id"),
-                "field": field,
-                "remediation": (
-                    "Supply explicit saved diagnostic evidence for this field in a "
-                    "source artifact (e.g. a block_bootstrap_reproducibility "
-                    "diagnostics record with exact context), or leave the row "
-                    "unproven and not claimable."
-                ),
-                "reason": reason,
-                "refusal_reasons": reasons,
-                "claimable_excludes_zero": bool(rr.get("claimable_excludes_zero")),
-                "ci_excludes_zero": rr.get("ci_excludes_zero"),
-                "source_artifacts": [p.as_posix() for p in (source_artifacts or [])],
-            })
+                existing = merged[key]
+                for r in reasons:
+                    if r not in existing["refusal_reasons"]:
+                        existing["refusal_reasons"].append(r)
+
+    out: List[Dict[str, Any]] = []
+    for row_id, field in order:
+        e = merged[(row_id, field)]
+        e = dict(e)
+        e["remediation_id"] = _stable_remediation_id(row_id, field)
+        out.append(e)
     return out
+
+
+def remediation_by_source_artifact(
+    entries: Sequence[Dict[str, Any]],
+) -> Dict[str, Dict[str, int]]:
+    """Rollup of still-unproven `degenerate`/`inference_ok` counts per source artifact.
+
+    Groups deduped remediation entries by the source artifact encoded in each
+    row_id (`source::section::contrast`). Returns counts keyed by source filename
+    with stable key ordering for deterministic output.
+    """
+    rollup: Dict[str, Dict[str, int]] = {}
+    for e in entries:
+        field = e.get("field")
+        if field not in ("degenerate", "inference_ok"):
+            continue
+        src = _source_artifact_from_row_id(e.get("row_id", "") or "")
+        bucket = rollup.setdefault(src, {"degenerate": 0, "inference_ok": 0, "total": 0})
+        bucket[field] += 1
+        bucket["total"] += 1
+    ordered: Dict[str, Dict[str, int]] = {}
+    for src in sorted(rollup):
+        b = rollup[src]
+        ordered[src] = {"degenerate": b["degenerate"], "inference_ok": b["inference_ok"], "total": b["total"]}
+    return ordered
 
 
 def _fmt(v: Any) -> str:
@@ -692,6 +748,26 @@ def render_markdown(
             lines.append(f"  - remediation: {e.get('remediation')}")
             if e.get("refusal_reasons"):
                 lines.append(f"  - refusal_reasons: {', '.join(str(x) for x in e.get('refusal_reasons'))}")
+        rollup = remediation_by_source_artifact(strict_remediation)
+        if rollup:
+            lines += [
+                "",
+                "## Remediation by source artifact (still-unproven degenerate/inference_ok counts)",
+                "",
+                f"- deduped remediation entries: **{len(strict_remediation)}** per (row_id, field) with stable deterministic `remediation_id`",
+                f"- source artifacts with unproven gate fields: **{len(rollup)}**",
+                "- Counts reflect still-unproven `degenerate`/`inference_ok` fields only (never inferred; refusal-first).",
+                "",
+            ]
+            for src, bucket in sorted(rollup.items()):
+                lines.append(
+                    f"  - `{src}`: degenerate={bucket['degenerate']}, inference_ok={bucket['inference_ok']}, total={bucket['total']}"
+                )
+            lines += [
+                "",
+                "A future diagnostic-producer can target these exact source artifacts rather than scanning the flat entry list.",
+                "",
+            ]
         lines += [
             "",
             "Machine-readable remediation list emitted as `missing_diagnostic_fields_<UTC>.json` alongside this report.",
@@ -826,7 +902,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     out.write_text(md, encoding="utf-8")
     if args.backfill_strict:
         rem_out = out.with_name(out.name.replace("_backfill_strict_", "_missing_diagnostic_fields_") + ".json")
-        rem_out.write_text(json.dumps(strict_list, indent=2), encoding="utf-8")
+        rollup = remediation_by_source_artifact(strict_list)
+        rem_payload = {
+            "remediation_strict_rules_version": BACKFILL_STRICT_RULES_VERSION,
+            "remediation_entries": strict_list,
+            "remediation_by_source_artifact": rollup,
+            "remediation_summary": {
+                "total_entries": len(strict_list),
+                "source_artifacts": len(rollup),
+                "claimable_any": bool(any(e.get("claimable_excludes_zero") for e in strict_list)),
+            },
+        }
+        rem_out.write_text(json.dumps(rem_payload, indent=2), encoding="utf-8")
     enriched_n = sum(1 for r in rows if r.get("enrichment_applied"))
     bf_applied = sum(1 for e in backfill_trace if e.get("applied"))
     bf_refused = sum(1 for e in backfill_trace if not e.get("applied"))
