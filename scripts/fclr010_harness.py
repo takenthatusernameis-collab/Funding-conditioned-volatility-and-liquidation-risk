@@ -208,7 +208,7 @@ class FCLR010Harness:
         contract violations refuse.
 
         Refused shapes (fail-closed, no outcome inspection, no parquet read):
-          - experiment_id present but != FCLR-010 (mismatched experiment)
+          - experiment_id present but not in the frozen Track A set (mismatched)
           - frozen explicitly False
           - a path-ref field resolves outside the repo root (path-traversal-ish)
 
@@ -218,7 +218,8 @@ class FCLR010Harness:
             return None
         failures: List[str] = []
         eid = content.get("experiment_id")
-        if eid is not None and str(eid) != "FCLR-010":
+        _ALLOWED_EIDS = {"FCLR-010", "FCLR-012"}
+        if eid is not None and str(eid) not in _ALLOWED_EIDS:
             failures.append("experiment_id_mismatch")
         if content.get("frozen") is False:
             failures.append("frozen_false")
