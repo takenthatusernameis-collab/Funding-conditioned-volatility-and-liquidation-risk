@@ -1,6 +1,6 @@
 # Evaluation Summary (FCLR-H003)
 
-Generated: 2026-10-28T22:53:27Z
+Generated: 2026-11-09T15:27:50Z
 Experiment: FCLR-002
 Horizon: 24h | MMR: 0.005 | Leverages: [3.0, 5.0, 10.0, 20.0] | Sides: ['long', 'short'] (separate)
 Panel: FCLR-002 test block 2024-07-23T00:00:00Z .. 2024-09-30T23:00:00Z
@@ -9,56 +9,56 @@ Notes: Labels are synthetic modeled boundary breaches (not observed liquidations
 
 ## lev3.0_long
 
-- B0: n=8280, base_rate=0.0000, Brier=0.000020, log-loss=0.002557, AUPRC=0.000000
+- B0: n=8280, base_rate=0.0000, Brier=0.000020, log-loss=0.002550, AUPRC=0.000000
   best F1 @ thresh 0.00: prec=0.000 rec=0.000 (TP=0 FP=8280 TN=0 FN=0)
-- C2: n=8274, base_rate=0.0000, Brier=0.000002, log-loss=0.000644, AUPRC=0.000000
+- C2: n=8274, base_rate=0.0000, Brier=0.000002, log-loss=0.000641, AUPRC=0.000000
   best F1 @ thresh 0.00: prec=0.000 rec=0.000 (TP=0 FP=8274 TN=0 FN=0)
 
 ## lev3.0_short
 
-- B0: n=8280, base_rate=0.0000, Brier=0.000020, log-loss=0.002557, AUPRC=0.000000
+- B0: n=8280, base_rate=0.0000, Brier=0.000020, log-loss=0.002550, AUPRC=0.000000
   best F1 @ thresh 0.00: prec=0.000 rec=0.000 (TP=0 FP=8280 TN=0 FN=0)
-- C2: n=8274, base_rate=0.0000, Brier=0.000002, log-loss=0.000644, AUPRC=0.000000
+- C2: n=8274, base_rate=0.0000, Brier=0.000002, log-loss=0.000641, AUPRC=0.000000
   best F1 @ thresh 0.00: prec=0.000 rec=0.000 (TP=0 FP=8274 TN=0 FN=0)
 
 ## lev5.0_long
 
-- B0: n=8280, base_rate=0.0036, Brier=0.003625, log-loss=0.024065, AUPRC=0.008473
-  best F1 @ thresh 0.01: prec=0.014 rec=0.167 (TP=5 FP=354 TN=7896 FN=25)
-- C2: n=8274, base_rate=0.0036, Brier=0.003615, log-loss=0.024166, AUPRC=0.008949
-  best F1 @ thresh 0.01: prec=0.015 rec=0.100 (TP=3 FP=202 TN=8042 FN=27)
+- B0: n=8280, base_rate=0.0036, Brier=0.003625, log-loss=0.024076, AUPRC=0.008798
+  best F1 @ thresh 0.01: prec=0.015 rec=0.167 (TP=5 FP=338 TN=7912 FN=25)
+- C2: n=8274, base_rate=0.0036, Brier=0.003615, log-loss=0.024281, AUPRC=0.009965
+  best F1 @ thresh 0.01: prec=0.017 rec=0.100 (TP=3 FP=177 TN=8067 FN=27)
 
 ## lev5.0_short
 
-- B0: n=8280, base_rate=0.0033, Brier=0.003240, log-loss=0.020246, AUPRC=0.012571
-  best F1 @ thresh 0.02: prec=0.031 rec=0.185 (TP=5 FP=155 TN=8098 FN=22)
-- C2: n=8274, base_rate=0.0033, Brier=0.003244, log-loss=0.021994, AUPRC=0.040594
-  best F1 @ thresh 0.02: prec=0.086 rec=0.111 (TP=3 FP=32 TN=8215 FN=24)
+- B0: n=8280, base_rate=0.0033, Brier=0.003239, log-loss=0.020226, AUPRC=0.011412
+  best F1 @ thresh 0.02: prec=0.032 rec=0.185 (TP=5 FP=149 TN=8104 FN=22)
+- C2: n=8274, base_rate=0.0033, Brier=0.003244, log-loss=0.022088, AUPRC=0.015339
+  best F1 @ thresh 0.02: prec=0.071 rec=0.074 (TP=2 FP=26 TN=8221 FN=25)
 
 ## lev10.0_long
 
-- B0: n=8280, base_rate=0.0169, Brier=0.016589, log-loss=0.082749, AUPRC=0.029867
-  best F1 @ thresh 0.03: prec=0.039 rec=0.321 (TP=45 FP=1116 TN=7024 FN=95)
-- C2: n=8274, base_rate=0.0169, Brier=0.016517, log-loss=0.082601, AUPRC=0.037114
-  best F1 @ thresh 0.04: prec=0.052 rec=0.200 (TP=28 FP=514 TN=7620 FN=112)
+- B0: n=8280, base_rate=0.0169, Brier=0.016577, log-loss=0.082507, AUPRC=0.032137
+  best F1 @ thresh 0.03: prec=0.044 rec=0.300 (TP=42 FP=908 TN=7232 FN=98)
+- C2: n=8274, base_rate=0.0169, Brier=0.016504, log-loss=0.082259, AUPRC=0.037993
+  best F1 @ thresh 0.03: prec=0.049 rec=0.414 (TP=58 FP=1115 TN=7019 FN=82)
 
 ## lev10.0_short
 
-- B0: n=8280, base_rate=0.0153, Brier=0.014434, log-loss=0.066644, AUPRC=0.152279
-  best F1 @ thresh 0.04: prec=0.240 rec=0.441 (TP=56 FP=177 TN=7976 FN=71)
-- C2: n=8274, base_rate=0.0153, Brier=0.014613, log-loss=0.069495, AUPRC=0.169984
-  best F1 @ thresh 0.04: prec=0.241 rec=0.323 (TP=41 FP=129 TN=8018 FN=86)
+- B0: n=8280, base_rate=0.0153, Brier=0.014464, log-loss=0.066615, AUPRC=0.152351
+  best F1 @ thresh 0.04: prec=0.276 rec=0.433 (TP=55 FP=144 TN=8009 FN=72)
+- C2: n=8274, base_rate=0.0153, Brier=0.014639, log-loss=0.069548, AUPRC=0.170915
+  best F1 @ thresh 0.04: prec=0.280 rec=0.291 (TP=37 FP=95 TN=8052 FN=90)
 
 ## lev20.0_long
 
-- B0: n=8280, base_rate=0.1249, Brier=0.108023, log-loss=0.371285, AUPRC=0.188117
-  best F1 @ thresh 0.12: prec=0.213 rec=0.404 (TP=418 FP=1543 TN=5703 FN=616)
-- C2: n=8274, base_rate=0.1250, Brier=0.107891, log-loss=0.370437, AUPRC=0.190336
-  best F1 @ thresh 0.12: prec=0.207 rec=0.440 (TP=455 FP=1739 TN=5501 FN=579)
+- B0: n=8280, base_rate=0.1249, Brier=0.107878, log-loss=0.370613, AUPRC=0.184587
+  best F1 @ thresh 0.13: prec=0.223 rec=0.352 (TP=364 FP=1271 TN=5975 FN=670)
+- C2: n=8274, base_rate=0.1250, Brier=0.107764, log-loss=0.369912, AUPRC=0.190695
+  best F1 @ thresh 0.13: prec=0.223 rec=0.378 (TP=391 FP=1365 TN=5875 FN=643)
 
 ## lev20.0_short
 
-- B0: n=8280, base_rate=0.1025, Brier=0.088904, log-loss=0.316916, AUPRC=0.242194
-  best F1 @ thresh 0.15: prec=0.356 rec=0.211 (TP=179 FP=324 TN=7107 FN=670)
-- C2: n=8274, base_rate=0.1026, Brier=0.089042, log-loss=0.317273, AUPRC=0.243350
-  best F1 @ thresh 0.13: prec=0.257 rec=0.371 (TP=315 FP=912 TN=6513 FN=534)
+- B0: n=8280, base_rate=0.1025, Brier=0.088912, log-loss=0.316933, AUPRC=0.241277
+  best F1 @ thresh 0.14: prec=0.268 rec=0.257 (TP=218 FP=595 TN=6836 FN=631)
+- C2: n=8274, base_rate=0.1026, Brier=0.089074, log-loss=0.317375, AUPRC=0.245475
+  best F1 @ thresh 0.13: prec=0.256 rec=0.365 (TP=310 FP=899 TN=6526 FN=539)

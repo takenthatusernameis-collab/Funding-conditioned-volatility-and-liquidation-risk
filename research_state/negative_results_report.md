@@ -212,3 +212,23 @@ holdout reuse, no split changes.
 - **Interpretation:** C2 (RV+funding+dislocation) is dominated by C1 (RV+funding) on this panel; dislocation features add no incremental value and actively hurt. H001 (funding-conditioned volatility forecast vs RV-only) remains NOT_SUPPORTED on every claim-worthy panel executed (FCLR-003, FCLR-008, v3 30d/5sym, FCLR-013). Risk overlay INELIGIBLE (gate not met). Preserve the null; do not promote; do not relabel as positive.
 - **Artifact:** `research_state/evaluation_summary_FCLR-013.md` sha256 `107bc981ebb6f519205b42f94ce778e14b445036f4758995914dabb0ef6bd08a` (generated 2026-11-07T11:07:34Z). No `run_manifest_fclr013_*.json` emitted by `scripts/run_evaluation.py`; split key already present in `run_manifest.json`.
 - **What must not be repeated:** do not relax block/multiplicity/materiality gates after seeing outcomes; do not chase the C1-vs-B1 secondary as a primary pass; do not build/tune an overlay on this sealed holdout.
+
+---
+## Track B — Hypothetical boundary-breach forecast (FCLR-H003, FCLR-002) — 2026-11-09T15:27:50Z
+
+- **Outcome:** COMPLETE_INCONCLUSIVE. Out-of-sample evaluation completed; null preserved. Not a gate pass; not promotable.
+- **Contrast:** C2 (RV + funding + price-dislocation/EMA) vs B0 (persistence, lagged RV24) on synthetic modeled boundary-breach labels, out-of-sample test block 2024-07-23..2024-09-30.
+- **Scenarios:** 4 leverages (3x, 5x, 10x, 20x) × 2 sides (long, short), evaluated separately. MMR=0.005, horizon=24h, zero-cost boundary, entry = mark close at decision time t.
+- **Panel:** 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT); test n=8274 paired rows per scenario (B0 n=8280 includes origins without feature coverage).
+- **Labels:** synthetic modeled boundary breaches from `scripts/synthetic_boundary_labels.py` (8/8 tests pass). NOT observed liquidations, NOT account margin, NOT exchange execution. Long/short kept separate.
+- **Results (representative):**
+  - lev3 long/short: base_rate=0.0000 — no events; B0 and C2 both NOT_EVALUABLE for meaningful discrimination.
+  - lev5 long: B0 base_rate=0.0036, Brier=0.003625; C2 base_rate=0.0036, Brier=0.003615 — C2 negligibly lower Brier but AUPRC unchanged (0.008473 vs 0.008949), best-F1 precision/recall lower (TP=5→3).
+  - lev5 short: B0 Brier=0.003240, AUPRC=0.012571; C2 Brier=0.003244, AUPRC=0.015339 — mixed, no consistent direction.
+  - lev10 long: B0 Brier=0.016589, AUPRC=0.029867; C2 Brier=0.016517, AUPRC=0.037114 — C2 slightly better Brier/AUPRC but lower recall at best F1.
+  - lev10 short: B0 Brier=0.014434, AUPRC=0.152279; C2 Brier=0.014613, AUPRC=0.169984 — mixed.
+  - lev20 long: B0 Brier=0.108023, AUPRC=0.188117; C2 Brier=0.107891, AUPRC=0.190336 — marginal, no consistent skill.
+  - lev20 short: B0 Brier=0.088904, AUPRC=0.242194; C2 Brier=0.089042, AUPRC=0.243350 — C2 slightly worse Brier, marginally better AUPRC.
+- **Interpretation:** No consistent incremental forecast skill of C2 over B0 across leverage/side scenarios. Differences are marginal and directionally inconsistent. Null result preserved. Does not satisfy any forecast gate; risk overlay remains INELIGIBLE.
+- **Artifact:** `research_state/evaluation_summary_h003_FCLR002.md` (regenerated 2026-11-09T15:27:50Z via `H003_EXPERIMENT=FCLR-002 python scripts/run_h003.py`; perf fix: single mark-price index vs per-day rglob).
+- **Cell registered:** `research_state/experiment_frontier.json` entry `FCLR-H003-FCLR-002` (status COMPLETE_INCONCLUSIVE).

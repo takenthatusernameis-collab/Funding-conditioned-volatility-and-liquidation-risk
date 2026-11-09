@@ -48,7 +48,36 @@ def parse_iso(s):
         dt = dt.replace(tzinfo=timezone.utc)
     return dt
 
-def find_mark_csv(sym, date_str):
+def build_mark_index(root=None):
+    """One-time index of mark price CSVs by (symbol, date_str).
+
+    Replaces per-day rglob scans (450+ across the whole repo) with a single
+    deterministic pass. Causal/no-leakage semantics are unchanged: the same
+    file is returned for the same (symbol, date) key.
+    """
+    scan_root = root if root is not None else REPO
+    index = {}
+    for p in scan_root.rglob("*-1h-*.csv"):
+        sp = str(p)
+        if 'markPrice' not in sp:
+            continue
+        name = p.name
+        if not name.endswith('.csv'):
+            continue
+        stem = name[:-4]
+        parts = stem.split('-1h-')
+        if len(parts) != 2:
+            continue
+        sym, date_str = parts
+        key = (sym, date_str)
+        if key not in index:
+            index[key] = p.resolve()
+    return index
+
+
+def find_mark_csv(sym, date_str, mark_index=None):
+    if mark_index is not None:
+        return mark_index.get((sym, date_str))
     candidates = []
     for p in REPO.rglob(f"{sym}-1h-{date_str}.csv"):
         sp = str(p)
@@ -83,13 +112,13 @@ def funding_months(end_ym: str) -> list[str]:
     out.append(f"{cur_y}-{cur_m:02d}")
     return out
 
-def load_mark_series(sym, start_dt, end_dt):
+def load_mark_series(sym, start_dt, end_dt, mark_index=None):
     series = []
     cur = start_dt.replace(hour=0, minute=0, second=0, microsecond=0)
     end_day = end_dt.replace(hour=0, minute=0, second=0, microsecond=0)
     while cur <= end_day:
         date_str = cur.strftime("%Y-%m-%d")
-        csvp = find_mark_csv(sym, date_str)
+        csvp = find_mark_csv(sym, date_str, mark_index)
         if csvp and csvp.exists():
             try:
                 with csvp.open() as f:
@@ -321,10 +350,12 @@ def main():
     test = (parse_iso(splits['test']['start']), parse_iso(splits['test']['end']))
 
     months = funding_months(DATA_END)
+    mark_index = build_mark_index()
+    print(f"Mark index: {len(mark_index)} (symbol,date) entries", flush=True)
     data = {}
     for sym in SYMBOLS:
         data[sym] = {
-            'mark': load_mark_series(sym, parse_iso("2024-01-01T00:00:00Z"), parse_iso(f"{DATA_END}T23:00:00Z")),
+            'mark': load_mark_series(sym, parse_iso("2024-01-01T00:00:00Z"), parse_iso(f"{DATA_END}T23:00:00Z"), mark_index),
             'funding': load_funding_series_all(sym, months)
         }
 
