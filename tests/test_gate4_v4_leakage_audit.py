@@ -1,6 +1,7 @@
 """Tests for Gate 4 v4 EXPLORATORY leakage audit (synthetic, no network)."""
 from __future__ import annotations
 
+import copy
 import sys
 import unittest
 from pathlib import Path
@@ -14,8 +15,12 @@ sys.path.insert(0, str(REPO))
 from src.eval import walkforward as wf  # noqa: E402
 from scripts.run_gate4_v4_leakage_audit import (  # noqa: E402
     LABEL,
+    _is_safe_name_fragment,
+    annotate_variant_audits,
     audit_block_bootstrap_reproducibility,
     audit_variant_leakage,
+    leakage_by_source_artifact,
+    main,
     train_derived_params,
     train_normalization_stats,
 )
@@ -112,6 +117,73 @@ class TestLeakageAuditBlockBootstrapReproducibility(unittest.TestCase):
                 for s in sp["symbols"]:
                     if s.get("status") == "OK":
                         self.assertTrue(s["test_perturbation_unchanged"], (v, sp["split_id"], s["symbol"]))
+
+
+class TestLeakageAuditCLISafety(unittest.TestCase):
+    def test_is_safe_name_fragment_safe(self):
+        for name in ["20261109T100000Z", "safe_name", "a.b", "x-1", "run_01"]:
+            self.assertTrue(_is_safe_name_fragment(name), name)
+
+    def test_is_safe_name_fragment_unsafe(self):
+        for name in ["../../evil", "../x", "/abs/path", "a/b", "a\\\\b", ".", "..", "", "x/../y"]:
+            self.assertFalse(_is_safe_name_fragment(name), name)
+
+    def test_main_refuses_unsafe_out_suffix(self):
+        # Validation occurs before any data load or directory write, so this is fast and side-effect free.
+        self.assertEqual(main(["--out-suffix", "../../evil"]), 2)
+        self.assertEqual(main(["--out-suffix", "/abs/path"]), 2)
+        self.assertEqual(main(["--out-suffix", ".."]), 2)
+
+
+class TestLeakageAuditRollupIdempotence(unittest.TestCase):
+    def _variant_audits(self):
+        return [
+            {
+                "variant": "V1_primary",
+                "splits": [
+                    {
+                        "split_id": 0,
+                        "symbols": [
+                            {
+                                "symbol": "BTCUSDT",
+                                "status": "OK",
+                                "n_train": 40,
+                                "n_test": 20,
+                                "test_perturbation_unchanged": True,
+                                "changed_keys": [],
+                            },
+                            {
+                                "symbol": "ETHUSDT",
+                                "status": "OK",
+                                "n_train": 40,
+                                "n_test": 20,
+                                "test_perturbation_unchanged": True,
+                                "changed_keys": [],
+                            },
+                        ],
+                    }
+                ],
+            }
+        ]
+
+    def test_leakage_by_source_artifact_idempotent(self):
+        audits = self._variant_audits()
+        r1 = leakage_by_source_artifact(audits)
+        r2 = leakage_by_source_artifact(audits)
+        self.assertEqual(r1, r2)
+        self.assertEqual(r1["unknown"]["total_rows"], 2)
+        self.assertEqual(r1["unknown"]["train_params_invariant"], 2)
+
+    def test_annotate_variant_audits_does_not_mutate(self):
+        audits = self._variant_audits()
+        before = copy.deepcopy(audits)
+        out = annotate_variant_audits(audits, source_artifact="gate4_v4_leakage_audit_x.json")
+        self.assertEqual(audits, before)
+        self.assertIsNot(out, audits)
+        self.assertEqual(out[0]["splits"][0]["symbols"][0]["leakage_diagnosis"]["source_artifact"],
+                         "gate4_v4_leakage_audit_x.json")
+        self.assertEqual(out[0]["splits"][0]["symbols"][0]["leakage_diagnosis"]["diagnosis"],
+                         "TRAIN_PARAMS_INVARIANT")
 
 
 if __name__ == "__main__":

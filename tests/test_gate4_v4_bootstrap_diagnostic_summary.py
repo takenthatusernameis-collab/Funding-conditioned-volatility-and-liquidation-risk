@@ -591,5 +591,28 @@ class TestBootstrapDiagnosticSummary(unittest.TestCase):
         self.assertEqual(s.remediation_by_source_artifact(r1), s.remediation_by_source_artifact(r2))
 
 
+class TestBootstrapDiagnosticSummaryCLISafety(unittest.TestCase):
+    def test_require_under(self):
+        base = Path("/base")
+        self.assertIsNone(s._require_under(Path("/base/child/deep"), base, "x"))
+        self.assertEqual(s._require_under(Path("/other/child"), base, "x"), 2)
+
+    def test_main_rejects_outside_results_out(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "research_state" / "gate4_v4_exploratory_stab").mkdir(parents=True)
+            art = root / "research_state" / "gate4_v4_exploratory_stab" / "gate4_v4_exploratory_stab_x.json"
+            art.write_text(json.dumps(_stab_artifact()), encoding="utf-8")
+            outside = Path(tmp) / "evil_outside_results.md"
+            self.assertEqual(s.main(["--repo-root", str(root), "--out", str(outside)]), 2)
+            inside = root / "results" / "inside.md"
+            self.assertEqual(s.main(["--repo-root", str(root), "--out", str(inside)]), 0)
+            self.assertTrue(inside.exists())
+            self.assertIn("EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE", inside.read_text(encoding="utf-8"))
+
+    def test_main_rejects_missing_artifact(self):
+        self.assertEqual(s.main(["--repo-root", ".", "--artifacts", "nonexistent_xyz_artifact.json"]), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

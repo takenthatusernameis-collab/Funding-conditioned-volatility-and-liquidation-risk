@@ -34,6 +34,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -46,6 +47,18 @@ RESULTS_DIR = Path("results")
 BACKFILL_RULES_VERSION = "1.0"
 BACKFILL_COVERAGE_RULES_VERSION = "1.0"
 BACKFILL_STRICT_RULES_VERSION = "1.0"
+
+
+def _require_under(child: Path, base: Path, label: str) -> Optional[int]:
+    """Canonical output integrity: return exit code 2 if child resolves outside base."""
+    base_r = base.resolve()
+    try:
+        child.resolve().relative_to(base_r)
+    except ValueError:
+        print(f"refusing {label} outside canonical output dir: {child}", file=sys.stderr)
+        return 2
+    return None
+
 
 # Fields the provable backfill is permitted to derive. Anything outside this set
 # is never inferred (requires explicit saved diagnostic evidence).
@@ -859,12 +872,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     args = ap.parse_args(argv)
     root = Path(args.repo_root).resolve()
+    results_root = root / RESULTS_DIR
+    if _require_under(results_root, root, "results root") is not None:
+        return 2
     artifacts = [Path(p) if Path(p).is_absolute() else (root / p) for p in (args.artifacts or [])]
     if not artifacts:
         artifacts = default_artifact_paths(root)
     if not artifacts:
         print("no Gate 4 v4 exploratory artifacts found", file=sys.stderr)
         return 2
+    for p in artifacts:
+        if not p.exists():
+            print(f"artifact not found: {p}", file=sys.stderr)
+            return 2
     enrich_path: Optional[Path] = None
     candidates: Optional[List[Dict[str, Any]]] = None
     if args.enrich_diagnostics_from_leakage:
@@ -892,6 +912,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                          strict_mode=bool(args.backfill_strict))
     if args.out:
         out = Path(args.out)
+        if not out.is_absolute():
+            out = root / out
+        if _require_under(out, results_root, "--out") is not None:
+            return 2
     elif args.backfill_strict:
         out = root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_backfill_strict_{ts}.md"
     elif backfill_mode:

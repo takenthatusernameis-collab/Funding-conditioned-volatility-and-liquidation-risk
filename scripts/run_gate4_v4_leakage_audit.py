@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -53,6 +54,23 @@ START = "2024-04-01"
 END = "2024-09-30"
 
 LEAKAGE_ROLLUP_RULES_VERSION = "1.0"
+
+
+def _is_safe_name_fragment(name: str) -> bool:
+    """True only for a single path component with no traversal or separators.
+
+    Used to gate `--out-suffix` so emitted artifact filenames cannot escape the
+    canonical output directories or perform path traversal."""
+    if not name or name in (".", ".."):
+        return False
+    if os.path.isabs(name) or "/" in name or "\\" in name:
+        return False
+    return ".." not in name.split("/")
+
+
+def _cli_refusal(message: str) -> int:
+    print(message, file=sys.stderr)
+    return 2
 
 
 def _ts() -> str:
@@ -476,6 +494,11 @@ def main(argv=None) -> int:
     ap.add_argument("--results-dir", default=RESULTS_DIR)
     args = ap.parse_args(argv)
     symbols = [s.strip() for s in args.symbols.split(",") if s.strip()]
+    if args.out_suffix is not None and not _is_safe_name_fragment(args.out_suffix):
+        return _cli_refusal(
+            "refusing unsafe --out-suffix (must be a single path component, no traversal or absolute path): "
+            + repr(args.out_suffix)
+        )
     ts = args.out_suffix or _ts()
     state_dir = REPO / args.state_dir
     results_dir = REPO / args.results_dir
