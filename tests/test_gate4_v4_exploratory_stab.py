@@ -92,7 +92,7 @@ class TestGate4V4ExploratoryStab(unittest.TestCase):
                 "V1_primary": {"contrasts_vs_A": {"E_rv_funding_trails": {"point": 0.5, "ci_low": -0.1, "ci_high": 1.0}, "B_rv_signed": {"point": 10, "ci_low": 1, "ci_high": 20}}, "split_results": [{"split_id": 3, "ablations": {"B_rv_signed": {"metrics": {"qlike": 45.0}}}}]},
                 "V3_scale_ridge_target_floor": {"contrasts_vs_A": {"E_rv_funding_trails": {"point": 0.4, "ci_low": -0.2, "ci_high": 0.9}, "B_rv_signed": {"point": 2.0, "ci_low": -1, "ci_high": 5}}}, "split_results": [{"split_id": 3, "ablations": {"B_rv_signed": {"metrics": {"qlike": 3.0}}}}]},
             },
-            "loo_e_vs_a_v3": {"all": {"point": 0.4, "ci_low": -0.2, "ci_high": 0.9}, "drop_BTCUSDT": {"point": 0.1, "ci_low": -0.1, "ci_high": 0.3}},
+    "loo_e_vs_a_v3": {"all": {"point": 0.4, "ci_low": -0.2, "ci_high": 0.9}, "drop_BTCUSDT": {"point": 0.1, "ci_low": -0.1, "ci_high": 0.3}},
         }
         txt = make_interpretation(payload)
         self.assertIn("EXPLORATORY", txt)
