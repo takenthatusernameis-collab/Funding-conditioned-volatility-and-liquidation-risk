@@ -220,4 +220,16 @@ __all__ = [
     "refusal_payload",
     "assert_loader_never_called",
     "DEFAULT_CANONICAL_OUTPUTS",
+    "prereg_semantic_block",
 ]
+
+
+def prereg_semantic_block(pre_reg_path: Path, content: Dict[str, Any], *, seam: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
+    """141 G1: stable BLOCKED refusal when prereg content is valid JSON but fails the
+    frozen semantic contract. Returns None when the prereg passes.
+
+    Refused shapes: experiment_id present but != FCLR-010; frozen explicitly False;
+    a path-ref field resolving outside the repo root. Backward compatible: a prereg
+    with no experiment_id / no frozen key passes (legacy fixtures).
+    """
+    return FCLR010Harness._prereg_semantic_block(Path(pre_reg_path), content, seam=seam)

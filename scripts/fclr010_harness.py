@@ -200,6 +200,64 @@ class FCLR010Harness:
             "reads_outcomes": False,
         }
 
+    @staticmethod
+    def _prereg_semantic_block(pre_reg_path: Path, content: Dict[str, Any], *, seam: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
+        """141 G1: stable BLOCKED refusal when prereg content is valid JSON but fails
+        the frozen semantic contract. Backward compatible: a prereg with no
+        experiment_id / no frozen key passes (legacy fixtures); only explicit
+        contract violations refuse.
+
+        Refused shapes (fail-closed, no outcome inspection, no parquet read):
+          - experiment_id present but != FCLR-010 (mismatched experiment)
+          - frozen explicitly False
+          - a path-ref field resolves outside the repo root (path-traversal-ish)
+
+        Returns None when the prereg passes the semantic contract.
+        """
+        if not isinstance(content, dict):
+            return None
+        failures: List[str] = []
+        eid = content.get("experiment_id")
+        if eid is not None and str(eid) != "FCLR-010":
+            failures.append("experiment_id_mismatch")
+        if content.get("frozen") is False:
+            failures.append("frozen_false")
+        # path-traversal-ish refs: any path field must resolve inside the repo root
+        try:
+            root = Path(__file__).resolve().parent.parent
+        except Exception:
+            root = Path.cwd()
+        for key in ("pre_reg_path", "prereg_path", "protocol_path", "split_path", "manifest_path"):
+            v = content.get(key)
+            if isinstance(v, str) and v.strip():
+                try:
+                    p = Path(v)
+                    if not p.is_absolute():
+                        p = (Path(__file__).resolve().parent / v)
+                    p_res = p.resolve()
+                    if root not in (p_res.parents or []) and p_res != root:
+                        failures.append(f"{key}_outside_repo_root")
+                except Exception:
+                    failures.append(f"{key}_unresolvable")
+        if not failures:
+            return None
+        return {
+            "status": "BLOCKED",
+            "reason": f"Pre-registration semantic contract failed: {', '.join(sorted(set(failures)))}. Pre-register a valid FCLR-010 frozen record before inspecting outcomes.",
+            "reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+            "reason_code_detail": "PREREG_SEMANTIC_CONTRACT_FAIL_CLOSED",
+            "prereg_path": str(pre_reg_path),
+            "prereg_semantic_failures": sorted(set(failures)),
+            **({"admissible_seam_wired": seam} if seam is not None else {}),
+            "outcomes_inspected": False,
+            "prereg_required": True,
+            "canonical_outputs_mutated": False,
+            "network": False,
+            "writes_real_research_state": False,
+            "reads_parquet": False,
+            "reads_outcomes": False,
+        }
+
     def evaluate_source_manifest(self, manifest: Optional[Dict[str, Any]], *, strict: bool = True) -> Dict[str, Any]:
         """097/098: evaluate a Track A candidate manifest against the rubric gate.
         Default strict uses assess_strict_manifest (GO-shaped observed HL claims must
@@ -317,11 +375,19 @@ class FCLR010Harness:
                 return res
             # 132 G1: prereg path exists but content malformed/unreadable => fail-closed
             # before any outcome/data inspection. Explicit loader never invoked.
-            if self._load_prereg_content(pre_reg_path) is None:
+            content = self._load_prereg_content(pre_reg_path)
+            if content is None:
                 gate = None
                 if source_manifest is not None:
                     gate = self.evaluate_source_manifest(source_manifest, strict=(strict_manifest_gate is not False))
                 return self._prereg_content_block(pre_reg_path, gate, seam)
+            # 141 G1: prereg content is valid JSON but fails the frozen semantic
+            # contract (experiment_id mismatch / explicitly unfrozen / unsafe path
+            # refs) => stable BLOCKED refusal before any outcome/data inspection.
+            # Backward compatible: absent experiment_id or frozen=true passes.
+            sem = self._prereg_semantic_block(pre_reg_path, content, seam=seam)
+            if sem is not None:
+                return sem
         else:
             gate = None
             if source_manifest is not None:
