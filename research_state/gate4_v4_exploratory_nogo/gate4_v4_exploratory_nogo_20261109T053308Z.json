@@ -1,0 +1,48 @@
+{
+  "label": "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
+  "ts": "20261109T053308Z",
+  "git_sha": "d7a764b9e9411f58b8dca3abe8251f6780c5d6d4",
+  "prereg": "research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json",
+  "prereg_status": "FROZEN_BEFORE_OUTCOMES",
+  "confirmatory_claim_go": "NO_GO",
+  "exploratory_smoke_authorized_after_freeze": true,
+  "sealed_anchor_conflict": "FCLR002/003/013 domain family applies; no sealed-anchor reuse",
+  "scope": {
+    "data": "local 2024-04..09 cache (FCLR-015)",
+    "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+    "splits": "4 chronological 30-day splits (prereg v3_30d), purge/embargo 7d",
+    "horizon": 24,
+    "baseline": "A_rv_only (RV-only)",
+    "contrasts": ["B_rv_signed", "C_rv_abs", "D_rv_signed_abs", "E_rv_funding_trails"]
+  },
+  "variants": {
+    "V1_primary": {"rule": "ridge=1e-10*I, floor-at-zero", "E_vs_A": {"point": 0.4879023125557301, "ci_low": -0.04216077732548571, "ci_high": 1.1973379300275868, "verdict": "inconclusive (CI spans 0)"}},
+    "V2_scale_ridge": {"rule": "ridge=1e-8*max(trace(X'X)/k,1)*I, floor-at-zero", "E_vs_A": {"point": 0.48785883377919703, "ci_low": -0.04217381127818388, "ci_high": 1.197250470465031, "verdict": "inconclusive (CI spans 0)"}},
+    "V3_scale_ridge_target_floor": {"rule": "V2 + train-only target-scale floor max(0,1e-4*train_target_median)", "E_vs_A": {"point": 1096.4323968982128, "ci_low": 330.8633563340269, "ci_high": 2103.866327919272, "verdict": "significantly worse (CI entirely >0)"}},
+    "V4_winsor_train": {"rule": "V3 + train-only winsor q0.5/q99.5 (train bounds applied to train/test)", "E_vs_A": {"point": 1421.4959744699004, "ci_low": 414.2215207833895, "ci_high": 2994.9173799203486, "verdict": "significantly worse (CI entirely >0)"}}
+  },
+  "all_contrasts_v1": {
+    "B_rv_signed": {"point": 11.110522836791604, "ci_low": 0.48052288989834724, "ci_high": 32.31258287470994, "verdict": "alt worse (CI>0)"},
+    "C_rv_abs": {"point": -0.024710146016296737, "ci_low": -0.37159501419659596, "ci_high": 0.2707987870777838, "verdict": "inconclusive (CI spans 0)"},
+    "D_rv_signed_abs": {"point": 2.421918112567877, "ci_low": -0.2539600556711275, "ci_high": 7.512202570277498, "verdict": "inconclusive (CI spans 0)"},
+    "E_rv_funding_trails": {"point": 0.4879023125557301, "ci_low": -0.04216077732548571, "ci_high": 1.1973379300275868, "verdict": "inconclusive (CI spans 0)"}
+  },
+  "split3_diagnostic": {"B_qlike_V1": 45.0003731898787, "B_qlike_V3": 1028.5751046076339, "note": "BTCUSDT dominates blowups (raw_neg 89/720, large coef_l2)"},
+  "loo_e_vs_a_v3": {
+    "all": {"point": 1096.4323968982128, "ci_low": 330.8633563340269, "ci_high": 2103.866327919272},
+    "drop_BTCUSDT": {"point": 1050.1403337194006, "ci_low": 166.76094884314833, "ci_high": 2255.2460936330053},
+    "drop_ETHUSDT": {"point": 1174.322082008321, "ci_low": 254.44746705753317, "ci_high": 2376.0695373494864},
+    "drop_SOLUSDT": {"point": 1272.0512066823098, "ci_low": 435.53886888215186, "ci_high": 2476.2219036782094},
+    "drop_XRPUSDT": {"point": 343.8127618423249, "ci_low": -131.78461150663372, "ci_high": 813.7731751336344, "verdict": "inconclusive"},
+    "drop_BNBUSDT": {"point": 2024.7789450151156, "ci_low": 813.6580273697282, "ci_high": 3946.1363525879116},
+    "improvement_found": false
+  },
+  "verdict": "EXPLORATORY NO-GO confirmed: principled leakage-safe stabilization does not improve OOS QLIKE vs RV-only baseline; V3 E vs A +1096 CI [331,2104] significantly worse; no variant/LOO improves vs A. NOT confirmatory, NOT promotable, no sealed-anchor reuse.",
+  "status": "EXPLORATORY_ONLY_NOGO",
+  "next": "Pivot to measurable local engineering task (leakage audit hardening / block-bootstrap diagnostics / walkforward robustness). No Track A probing. No Track C/B sealed work.",
+  "source_artifacts": [
+    "research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_20261109T045805Z.json",
+    "results/fclr_heavy001/gate4_v4_exploratory_stab_20261109T045805Z.md"
+  ],
+  "command": "python scripts/run_gate4_v4_exploratory_stab.py --out-suffix 20261109T045805Z"
+}
