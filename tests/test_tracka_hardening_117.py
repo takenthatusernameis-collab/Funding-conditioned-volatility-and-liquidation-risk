@@ -474,6 +474,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_sealed_volatility",
     "reason": "run_funding_ablations.py: Gate 4 funding-conditioned volatility ablations (Track C), leakage-resistant multi-split pilot, local admissible Binance data only; writes evaluation/manifest/leakage summaries as non-confirmatory pilot evidence; no Track A Hyperliquid guarded liquidation outcome reads/claims."
   },
+  "gate4_v4_bootstrap_diagnostic_summary.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "gate4_v4_bootstrap_diagnostic_summary.py: deterministic read-only EXPLORATORY summary of saved Gate 4 v4 exploratory JSON artifacts (stab/diag/leakage_audit); emits versioned markdown risk table under results/ (eff_blocks/ci_valid/regime_flags/degenerate/inference_ok, non-degenerate CI excluding zero only when gates pass). NOT CONFIRMATORY/NOT PROMOTABLE; no recomputation, no network, no real research_state writes, no Track A outcome reads/claims."
+  },
   "run_gate4_v4_exploratory_diag.py": {
     "class": "track_c_sealed_volatility",
     "reason": "run_gate4_v4_exploratory_diag.py: Gate 4 v4 EXPLORATORY diagnostic/robustness only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; computes per-split/instrument diagnostics, B/D instability evidence, E vs A LOO/alignment checks; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."

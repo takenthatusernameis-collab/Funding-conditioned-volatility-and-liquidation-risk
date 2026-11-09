@@ -76,7 +76,7 @@
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration.",
   "generated": "20261109T041000Z",
   "registry_version": "1.1",
-  "script_count": 114,
+  "script_count": 115,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -341,6 +341,10 @@
     "funding_interaction_analysis_fast.py": {
       "class": "track_c_sealed_volatility",
       "reason": "funding_interaction_analysis_fast.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "gate4_v4_bootstrap_diagnostic_summary.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "gate4_v4_bootstrap_diagnostic_summary.py: deterministic read-only EXPLORATORY summary of saved Gate 4 v4 exploratory JSON artifacts (stab/diag/leakage_audit); emits versioned markdown risk table under results/ (eff_blocks/ci_valid/regime_flags/degenerate/inference_ok, non-degenerate CI excluding zero only when gates pass). NOT CONFIRMATORY/NOT PROMOTABLE; no recomputation, no network, no real research_state writes, no Track A outcome reads/claims."
     },
     "generate_tracka_fixtures.py": {
       "class": "test_fixture_utility",
