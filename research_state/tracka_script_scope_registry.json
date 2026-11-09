@@ -39,12 +39,19 @@
       "script": "fclr024_v5_scope_coherence_report.py",
       "class": "track_c_or_aux_audit_utility",
       "reason": "Register read-only scope-coherence/blocker-matrix diagnostic."
+    },
+    {
+      "id": "fclr_gate4_v4_exploratory_stab_register",
+      "action": "add",
+      "script": "run_gate4_v4_exploratory_stab.py",
+      "class": "track_c_sealed_volatility",
+      "reason": "FCLR-NEXT-164: register Gate 4 v4 EXPLORATORY stabilized-comparison runner (NOT CONFIRMATORY/NOT PROMOTABLE, local 2024-04..09 admissible cache) alongside run_gate4_v4_exploratory_diag.py; never replaces prereg A-E contrasts or changes confirmatory estimands."
     }
   ],
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py).",
-  "generated": "20261108T221500Z",
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration.",
+  "generated": "20261109T041000Z",
   "registry_version": "1.1",
-  "script_count": 112,
+  "script_count": 113,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -405,6 +412,10 @@
     "run_gate4_v4_exploratory_diag.py": {
       "class": "track_c_sealed_volatility",
       "reason": "run_gate4_v4_exploratory_diag.py: Gate 4 v4 EXPLORATORY diagnostic/robustness only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; computes per-split/instrument diagnostics, B/D instability evidence, E vs A LOO/alignment checks; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
+    },
+    "run_gate4_v4_exploratory_stab.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_gate4_v4_exploratory_stab.py: Gate 4 v4 EXPLORATORY stabilized-comparison runner only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; evaluates principled leakage-safe modeling variants (V1-V4) as diagnostics for B/D split-3 instability and E sensitivity, never replacing prereg A-E contrasts or changing confirmatory estimands; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
     },
     "run_h003.py": {
       "class": "track_b_modeled_boundary",
