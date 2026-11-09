@@ -1,15 +1,17 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session must continue from here)
 
-**Generated:** 2026-11-09T02:37:42Z
+**Generated:** 2026-11-09T02:54:16Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Priority (reconciled):** Repo P0 = Phase 3 Gate 4 funding-conditioned volatility work using local admissible data (measurable, unblocked). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn.**
+**Priority (reconciled):** Repo P0 = Gate 4 funding-conditioned volatility work on local admissible 2024-04..09 data (measurable, unblocked, EXPLORATORY only). Track A = structurally blocked / no trigger (lockdown hardening only if specific gap); Track C sealed/inconclusive forward; Track B NOT_SUPPORTED. **No status-only churn. No avoiding heavy work — every session must produce versioned, auditable artifacts.**
 **Verified this session (baseline/evidence):** Gate 4 v4 EXPLORATORY diagnostic executed (exit 0) with versioned artifacts explaining B/D split-3 instability + E vs A LOO/robustness (all **EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE**). `python -m unittest discover tests` → **Ran 954 tests in ~111s — OK** (includes 3 new diagnostic tests). `tracka_resume_check.py` → **pass:true, 17/17 checks, network:false, probes==2, writes_real_research_state:false, root_md_json_bounded pass (171/172)**. `tracka_resume_gate.py --json` → **drift_preflight.pass:true, status:BLOCKED, reason_code:PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false**. Scope-registry drift fixed for added diagnostic script (registered as `track_c_sealed_volatility`; no Track A outcome reads/claims, no network). Local 2024-04..09 cache used; v4 prereg FROZEN_BEFORE_OUTCOMES, confirmatory_claim_go=NO_GO, exploratory_smoke_authorized_after_freeze=true.
 
 ---
 
 ## 0) INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION (MANDATORY, HEAVY WORK)
 
-**You MUST execute measurable research/engineering progress in this session. Do not probe absent Track A months (2026-11..2027-02). Do not add workflows/schedulers/pollers/wrappers/controllers. Do not touch `.github/workflows`.**
+**You MUST execute measurable research/engineering progress in this session. Do not probe absent Track A months (2026-11..2027-02). Do not add workflows/schedulers/pollers/wrappers/controllers. Do not touch `.github/workflows`. Status-only probing, blocker-memos without execution, and waiting on user instructions are not acceptable — produce versioned artifacts.**
+
+**Session timestamp (initial task):** `2026-11-09T02:54:16Z`
 
 ### Campaign: Gate 4 v4 follow-through — decide/execute next prereg-scoped EXPLORATORY modeling fix OR formalize NO-GO (local 2024-04..09) — produce versioned, auditable artifacts
 
@@ -28,7 +30,7 @@
 6. **If stabilized exploratory comparison still shows no credible improvement / remains unstable:** produce a concise versioned **EXPLORATORY NO-GO note** for funding ablations on this local slice (not a confirmatory claim; no sealed-anchor reuse) and pivot to the most measurable open Gate 4/Track C-adjacent local engineering task supported by tests. **Do not start Track A probing or Track C/B sealed work.**
 7. **Update this handoff** (§1–§10) with exact changes, commands, results, artifact paths, uncovered issues, and the next unfinished task.
 
-**Acceptance for next session:** at least one of (A) versioned EXPLORATORY stabilized-comparison artifacts with full diagnostics and NOT CONFIRMATORY labeling, (B) versioned EXPLORATORY NO-GO note with evidence, or (C) new tested hardening/engineering work with suite green and Track A invariants green — with exact evidence in this handoff.
+**Acceptance for next session (heavy work — at least one required):** (A) versioned EXPLORATORY stabilized-comparison artifacts with full diagnostics and NOT CONFIRMATORY labeling, (B) versioned EXPLORATORY NO-GO note with evidence, or (C) new tested hardening/engineering work with suite green and Track A invariants green — with exact evidence and the session timestamp `2026-11-09T02:54:16Z` recorded in this handoff. A session that ends without one of (A)/(B)/(C) has not satisfied the heavy-work mandate.
 
 ---
 
@@ -112,7 +114,7 @@ ls research_state/gate4_v4_exploratory_diag/
 4. Update **this file** with exact changes/commands/results/evidence/gates/next task + blockers.
 
 ## 10. NEXT SESSION DELIVERABLE
-Updated `AGENT_HANDOFF.md` with Gate 4 v4 principled EXPLORATORY stabilized-comparison evidence or EXPLORATORY NO-GO note, full suite + Track A invariant outcomes, artifact paths, root-bound compliance, and the next unfinished task. **Repo state must remain continuable without user repeating instructions.**
+Updated `AGENT_HANDOFF.md` with Gate 4 v4 principled EXPLORATORY stabilized-comparison evidence or EXPLORATORY NO-GO note, full suite + Track A invariant outcomes, artifact paths, root-bound compliance, and the next unfinished task — **session timestamp `2026-11-09T02:54:16Z` recorded, at least one of acceptance (A)/(B)/(C) produced**. **Repo state must remain continuable without user repeating instructions.**
 
 ---
 **END OF SINGLE DURABLE HANDOFF.**
