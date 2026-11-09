@@ -1,0 +1,118 @@
+{
+  "experiment_id": "FCLR-014-CONFIRMATORY-FUNDING-VOL",
+  "version": "v1",
+  "status": "FROZEN_BEFORE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "frozen_at_utc": "2026-11-09T18:11:24Z",
+  "git_sha": "6b1944866785eb08de1149f7a8b57fa12d3fc056",
+  "protocol_ref": "research_state/research_protocol.md FCLR-001 v1.0 (frozen 2026-11-06T20:36:32Z)",
+  "confirmatory_claim_go": "NO_GO",
+  "exploratory_label_required": "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
+  "purpose": "Frozen preregistration skeleton for the confirmatory funding-conditioned-volatility path (FCLR-014). Created and frozen BEFORE any outcome inspection. Zero outcome values inspected. A >=3-block admissible panel resume trigger is required before this skeleton can be materialized into a run.",
+  "repo_priority": "Track C funding-conditioned volatility first (repo name: Funding-conditioned-volatility-and-liquidation-risk). Track A structurally blocked — no probing/scans/wrappers. Track B H003 COMPLETE_INCONCLUSIVE — do not merge tracks.",
+  "hypotheses": [
+    {
+      "id": "FCLR-H001",
+      "type": "primary",
+      "description": "Funding extremes + realized volatility + pre-specified price-dislocation/smoothing features improve out-of-sample forecasts of future realized volatility/stress vs RV-only baseline",
+      "direction": "C2 vs B1: lower out-of-sample QLIKE on next-24-hour realized variance of mark-price returns",
+      "status": "PROPOSED_FROZEN",
+      "frozen_at_utc": "2026-11-09T18:11:24Z"
+    },
+    {
+      "id": "FCLR-H002",
+      "type": "secondary",
+      "description": "Independent reconstruction of Shek (2026) funding-correction pattern from admissible public data; correction time distinct from volatility forecast and from liquidation outcomes",
+      "status": "PROPOSED_FROZEN",
+      "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458"
+    }
+  ],
+  "universe": {
+    "venue": "binance_um_perp",
+    "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+    "min_symbols": 5,
+    "symbol_scope": "venue-native archival coverage from public local archives; current survivors alone are not a valid historical universe; no market-cap ranking dependency",
+    "period_source": "Binance public archive (data.binance.vision / binance-public-data), unauthenticated; klines 1h, fundingRate, indexPriceKlines, markPriceKlines, premiumIndexKlines"
+  },
+  "admissibility_source_rules": [
+    "No authentication, payment, paid trial/plan, account registration, personal API keys, manual downloads, user-provided files, or human approval for ordinary research.",
+    "No bypass of access controls, regional restrictions, rate limits, or usage terms; no requester-pays archive in core pipeline.",
+    "Provenance-auditable URLs/ETags/checksums; schema, license/terms, coverage, gaps recorded per source.",
+    "Separate Track A (observed liquidation labels), Track B (modeled hypothetical boundary breaches), Track C (volatility/stress outcomes); never merge or conflate; observed/modeled/synthetic labels kept distinct.",
+    "No live/paper trading, order endpoints, credentials, or account operations."
+  ],
+  "unit_timing": {
+    "unit": "one eligible linear perpetual contract x one fully closed UTC hourly timestamp",
+    "forecast_timestamp_t": "immediately after all data for closed hour t available; every input available by that instant",
+    "outcomes_begin": "next hourly interval t+1; no same-bar or future data in predictors",
+    "funding_availability": "latest funding observation with availability timestamp no later than t, retaining sign and source cadence"
+  },
+  "targets": {
+    "primary": "next-24-hour realized variance of mark-price returns: sum of squared log returns over next 24 complete hourly intervals, t+1 through t+24",
+    "primary_units": "squared log-return units (mark-price field)",
+    "secondary_horizons": ["6h", "72h", "168h"],
+    "secondary_note": "explicitly secondary; every tested horizon/model/feature comparison included in declared multiplicity family; no promotion of a secondary horizon because it performs better",
+    "boundary_breach_target": "Track B modeled hypothetical long/short liquidation boundary breach only under pre-registered margin/leverage assumptions; NOT observed liquidations; not used for Track C confirmatory claim"
+  },
+  "features": {
+    "causal_rule": "computed per contract from data ending no later than t; train-only normalization, quantile thresholds, standardization; missing features remain missing (no zero-fill/forward-fill)",
+    "funding": ["signed funding rate (retain sign separately)", "absolute funding rate |funding| as distinct feature", "trailing funding percentile vs preceding 90 calendar days (>=30 valid historical funding observations required; record actual count)", "time-to-next-funding only where knowable at prediction time"],
+    "realized_volatility": ["RV1h, RV24h, RV168h trailing realized variances from hourly mark-price log returns", "RV24/RV168 ratio where coverage valid", "lagged RV persistence feature"],
+    "price_dislocation_smoothing": ["perpetual premium vs index (mark/index - 1, valid contemporaneous alignment under frozen tolerance)", "mark-to-index difference", "mark/EMA24 distance (mark price / 24h EMA - 1; EMA from prior/current fully closed bars only)", "lagged price changes only if explicit and available at forecast time"],
+    "no_invented_delay": "no direct price-delay measurement; mark/index premium and EMA distance are observable dislocation proxies only"
+  },
+  "splits": {
+    "rule": "chronological train/validation/test partitions in time order; boundaries from data coverage only, frozen before outcomes; no random splits; unique UTC timestamps, not randomly sampled rows",
+    "purge_embargo_days": 7,
+    "purge_embargo_rationale": "registered secondary horizon extends to 168 hours; no target interval overlaps train/validation/test folds",
+    "candidate_frozen_splits_pending_panel": {
+      "train": "2024-04-01T00:00:00Z .. 2024-06-08T23:00:00Z (FCLR-002 frozen train window; reuse only if panel admissible and re-audited)",
+      "val": "2024-06-16T00:00:00Z .. 2024-07-15T23:00:00Z",
+      "test": "2024-07-23T00:00:00Z .. 2024-09-30T23:00:00Z (70 days = 2 non-overlapping 30-day blocks — INSUFFICIENT for confirmatory; DO NOT use for confirmatory until >=3 blocks verified)",
+      "note": "Split boundaries above are illustrative/copy of FCLR-002; they are NOT frozen for FCLR-014 until a new admissible panel with >=3 non-overlapping 30-day OOS blocks is verified and boundaries re-recorded here before outcomes."
+    },
+    "block_requirement": ">=3 non-overlapping 30-day OOS evaluation blocks (>=5 symbols paired panel); 70-day FCLR-002 test window = 2 blocks fails this rule"
+  },
+  "models_baselines": {
+    "B0": "persistence baseline: forecast next-24h realized variance using preceding RV24h",
+    "B1": "RV-only baseline: fixed-form HAR-style OLS on log RV1h, log RV24h, log RV168h predicting log next-24h realized variance",
+    "C1": "funding-augmented: B1 form + signed funding + past-only 90-day absolute-funding percentile",
+    "C2": "combined candidate: B1 form + C1 features + mark/index premium + mark/EMA24 distance",
+    "fitting": "OLS fixed-form log-linear regression; model log(RV + 1e-12) with epsilon fixed in advance; standardize predictor columns using training-only mean/std; zero-variance column handling frozen before outcomes; documented training-only smearing correction for back-transformation to strictly positive variance; no regularization, no model-family search, no hyperparameter tuning"
+  },
+  "primary_contrast": "C2 versus B1 on paired out-of-sample test QLIKE (absolute difference and relative reduction)",
+  "secondary_contrasts": ["C1 versus B1", "C2 versus C1"],
+  "uncertainty": {
+    "method": "block bootstrap resampling complete UTC time blocks jointly across instruments (preserves common market shocks and serial dependence)",
+    "replicates": 2000,
+    "seed": "deterministic seed frozen before outcomes",
+    "diagnostics": "instrument concentration sensitivity, leave-one-instrument-out, regime/time-block stability"
+  },
+  "multiplicity": {
+    "method": "Holm familywise-error correction across the whole declared family (all primary/secondary targets, feature ablations, thresholds, model versions, price-source arms, universe arms)",
+    "reporting": "raw and adjusted results; every failed/not-run cell with reasons"
+  },
+  "decision_gates": {
+    "data_gate": ">=5 instruments in paired out-of-sample panel; >=3 non-overlapping 30-day OOS blocks; valid uncertainty estimation",
+    "practical_materiality": "at least 2% relative reduction in primary QLIKE vs B1, pre-registered; smaller apparent gain does not pass unless a different justified threshold was frozen in advance",
+    "uncertainty_condition": "two-sided uncertainty interval for paired loss difference supports improvement",
+    "multiplicity_condition": "predeclared multiplicity rule passes after correction",
+    "concentration_condition": "skill not dominated by one coin, one venue, one brief crisis, or one time block",
+    "calibration_condition": "acceptable calibration for any event-probability forecast",
+    "leakage_condition": "no unresolved leakage, source, label, or timestamp defect",
+    "forecast_gate": "all conditions above required before any risk-overlay phase; otherwise retain NOT_SUPPORTED/INCONCLUSIVE/EXPLORATORY_ONLY"
+  },
+  "outcome_metrics_present": false,
+  "outcome_values_inspected": false,
+  "holdout_status": "sealed final holdout not opened; cannot be treated as untouched evidence once inspected",
+  "resume_trigger": "new unauthenticated, provenance-auditable Binance (or equivalently admissible public) panel with >=5 symbols and >=3 non-overlapping 30-day OOS blocks (or equivalent pre-registered design meeting claim-worthiness/block criteria), sufficient mark/index/funding/klines coverage and documented gaps; verify admissibility, freeze this preregistration, then build/evaluate; no sealed-holdout reuse, no threshold shopping",
+  "do_not": [
+    "Do not inspect zero outcome values before this freeze is recorded",
+    "Do not promote exploratory results (FCLR-002 C2-vs-B1 +4.588% rel QLIKE, 2 blocks) to confirmatory",
+    "Do not relax the >=3-block rule after seeing outcomes",
+    "Do not threshold-shop or reuse sealed holdouts",
+    "Do not conflate Track C volatility outcomes with observed liquidations (Track A) or modeled boundary breaches (Track B)",
+    "Do not modify .github/workflows; no schedulers/pollers/controllers/wrappers; no status-only churn"
+  ],
+  "next_action": "Session must verify dep-light tests green (python -m unittest tests.test_synthetic_boundary_labels -> 8/8), confirm this skeleton is frozen with no outcomes inspected, record evidence (SHA256, test count, timestamp) in AGENT_HANDOFF.md, and set the next unfinished task (resume trigger watch: >=3-block panel appearance)"
+}
