@@ -199,6 +199,141 @@ class TestBootstrapDiagnosticSummary(unittest.TestCase):
         self.assertIsNone(s._ci_excludes_zero({"ci_low": None, "ci_high": 0.1}))
         self.assertIsNone(s._ci_excludes_zero({"ci_low": "nan", "ci_high": 0.1}))
 
+    def test_enrichment_unambiguous_exact_match_applies_and_never_mutates_source(self):
+        # stab row missing diagnostics but with exact context matching leakage run1
+        stab = {
+            "label": s.LABEL,
+            "variants": {
+                "V1_primary": {
+                    "contrasts_vs_A": {
+                        "E_rv_funding_trails": {
+                            "point": 0.4879023125557301, "ci_low": -0.05470664399824281, "ci_high": 1.1856151857495267,
+                            "n_obs": 12969, "n_blocks": 120, "n_reps": 2000, "seed": 20261109, "block_hours": 24, "alpha": 0.05,
+                        }
+                    }
+                }
+            },
+        }
+        leakage = {
+            "label": s.LABEL,
+            "block_bootstrap_reproducibility": {
+                "run1": {
+                    "point": 0.4879023125557301, "ci_low": -0.05470664399824281, "ci_high": 1.1856151857495267,
+                    "n_obs": 12969, "n_blocks": 120, "seed": 20261109, "block_hours": 24, "n_reps": 2000,
+                    "ci_accounting_valid": True, "effective_block_count": 120, "degenerate": False, "inference_ok": True, "regime_flags": [],
+                },
+                "run2": {
+                    "point": 0.4879023125557301, "ci_low": -0.05470664399824281, "ci_high": 1.1856151857495267,
+                    "n_obs": 12969, "n_blocks": 120, "seed": 99999999, "block_hours": 24, "n_reps": 2000,
+                    "ci_accounting_valid": True, "effective_block_count": 120, "degenerate": False, "inference_ok": True, "regime_flags": [],
+                },
+            },
+        }
+        cands = s.build_enrichment_candidates(leakage, "leak.json")
+        self.assertEqual(len(cands), 2)
+        with tempfile.TemporaryDirectory() as tmp:
+            td = Path(tmp)
+            sp = self._write(td, "gate4_v4_exploratory_stab_x.json", stab)
+            lp = self._write(td, "leak.json", leakage)
+            stab_before = sp.read_text(encoding="utf-8")
+            leak_before = lp.read_text(encoding="utf-8")
+            rows = s.summarize_artifacts([sp], enrichment_candidates=cands)
+            self.assertEqual(sp.read_text(encoding="utf-8"), stab_before)
+            self.assertEqual(lp.read_text(encoding="utf-8"), leak_before)
+        self.assertEqual(len(rows), 1)
+        r = rows[0]
+        self.assertTrue(r["enrichment_applied"])
+        self.assertFalse(r["missing_diagnostic_fields"])
+        self.assertTrue(r["ci_valid"])
+        self.assertFalse(r["degenerate"])
+        self.assertTrue(r["inference_ok"])
+        self.assertIn("ENRICHED_FROM_LEAKAGE", r["regime_flags"])
+        # CI crosses zero in this probe => not claimable (no fabricated improvement)
+        self.assertFalse(r["ci_excludes_zero"])
+        self.assertFalse(r["non_degenerate_excludes_zero_claimable"])
+
+    def test_enrichment_ambiguous_refused_keeps_missing_diag(self):
+        base_ci = {
+            "point": 0.5, "ci_low": -0.1, "ci_high": 1.0,
+            "n_obs": 100, "n_blocks": 10, "seed": 7, "block_hours": 24, "n_reps": 20,
+        }
+        # two candidates match same context => ambiguous
+        leakage = {"block_bootstrap_reproducibility": {
+            "run1": {**base_ci, "ci_accounting_valid": True, "effective_block_count": 10, "degenerate": False, "inference_ok": True, "regime_flags": []},
+            "run2": {**base_ci, "ci_accounting_valid": True, "effective_block_count": 10, "degenerate": False, "inference_ok": True, "regime_flags": []},
+        }}
+        cands = s.build_enrichment_candidates(leakage, "l.json")
+        out, meta = s.enrich_contrast_ci(base_ci, cands)
+        self.assertFalse(meta["applied"])
+        self.assertEqual(meta["reason"], "AMBIGUOUS_MAPPING")
+        self.assertEqual(meta["matches"], 2)
+        self.assertTrue(any(k not in out for k in ("degenerate", "inference_ok")))
+        row = s.extract_contrast_row("s.json", "sec", "c", out, enrich_meta=meta)
+        self.assertTrue(row["missing_diagnostic_fields"])
+        self.assertFalse(row["non_degenerate_excludes_zero_claimable"])
+        self.assertIn("ENRICHMENT_AMBIGUOUS_MAPPING", row["regime_flags"])
+
+    def test_enrichment_refused_when_context_mismatch(self):
+        ci = {"point": 0.5, "ci_low": -0.1, "ci_high": 1.0, "n_obs": 100, "n_blocks": 10, "seed": 7, "block_hours": 24, "n_reps": 20}
+        leakage = {"block_bootstrap_reproducibility": {
+            "run1": {"point": 0.5, "ci_low": -0.1, "ci_high": 1.0, "n_obs": 999, "n_blocks": 10, "seed": 7, "block_hours": 24, "n_reps": 20,
+                     "ci_accounting_valid": True, "effective_block_count": 10, "degenerate": False, "inference_ok": True},
+        }}
+        cands = s.build_enrichment_candidates(leakage, "l.json")
+        _out, meta = s.enrich_contrast_ci(ci, cands)
+        self.assertFalse(meta["applied"])
+        self.assertEqual(meta["matches"], 0)
+        row = s.extract_contrast_row("s.json", "sec", "c", ci, enrich_meta=meta)
+        self.assertTrue(row["missing_diagnostic_fields"])
+        self.assertFalse(row["non_degenerate_excludes_zero_claimable"])
+
+    def test_enrichment_never_fabricates_claimable_even_if_ci_excludes_zero_and_enrichment_refused(self):
+        # CI excludes zero numerically but diagnostics missing and enrichment ambiguous => not claimable
+        ci = {"point": 5.0, "ci_low": 1.0, "ci_high": 9.0, "n_obs": 100, "n_blocks": 10, "seed": 1, "block_hours": 24, "n_reps": 20}
+        cand = {**ci, "ci_accounting_valid": True, "effective_block_count": 10, "degenerate": False, "inference_ok": True, "regime_flags": []}
+        leakage = {"block_bootstrap_reproducibility": {"run1": cand, "run2": cand}}
+        cands = s.build_enrichment_candidates(leakage, "l.json")
+        out, meta = s.enrich_contrast_ci(ci, cands)
+        row = s.extract_contrast_row("s", "sec", "c", out, enrich_meta=meta)
+        self.assertFalse(meta["applied"])
+        self.assertTrue(row["ci_excludes_zero"])
+        self.assertFalse(row["non_degenerate_excludes_zero_claimable"])
+        self.assertIn("EXCLUDES_ZERO_NOT_CLAIMABLE", row["regime_flags"])
+        self.assertIn("MISSING_DIAGNOSTIC_FIELDS", row["regime_flags"])
+
+    def test_main_enrich_cli_writes_results_reports_counts_no_source_mutation(self):
+        stab = {
+            "label": s.LABEL,
+            "variants": {"V1_primary": {"contrasts_vs_A": {"E_rv_funding_trails": {
+                "point": 0.4, "ci_low": -0.1, "ci_high": 1.0, "n_obs": 90, "n_blocks": 9, "seed": 5, "block_hours": 24, "n_reps": 10,
+            }}}},
+        }
+        leakage = {"block_bootstrap_reproducibility": {
+            "run1": {"point": 0.4, "ci_low": -0.1, "ci_high": 1.0, "n_obs": 90, "n_blocks": 9, "seed": 5, "block_hours": 24, "n_reps": 10,
+                     "ci_accounting_valid": True, "effective_block_count": 9, "degenerate": False, "inference_ok": True, "regime_flags": []},
+        }}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "research_state" / "gate4_v4_exploratory_stab").mkdir(parents=True)
+            art = root / "research_state" / "gate4_v4_exploratory_stab" / "gate4_v4_exploratory_stab_x.json"
+            art.write_text(json.dumps(stab), encoding="utf-8")
+            lp = root / "leak.json"
+            lp.write_text(json.dumps(leakage), encoding="utf-8")
+            stab_before = art.read_text("utf-8")
+            leak_before = lp.read_text("utf-8")
+            outp = root / "results" / "out.md"
+            rc = s.main(["--repo-root", str(root), "--enrich-diagnostics-from-leakage", str(lp), "--out", str(outp)])
+            self.assertEqual(rc, 0)
+            self.assertEqual(art.read_text("utf-8"), stab_before)
+            self.assertEqual(lp.read_text("utf-8"), leak_before)
+            txt = outp.read_text("utf-8")
+            self.assertIn("Diagnostic enrichment", txt)
+            self.assertIn("rows enriched by unambiguous exact-context match: **1**", txt)
+            self.assertIn("ENRICHED_FROM_LEAKAGE", txt)
+            self.assertIn("claimable): **0**", txt)  # CI crosses zero
+            rs_files = sorted(p.relative_to(root).as_posix() for p in (root / "research_state").rglob("*") if p.is_file())
+            self.assertEqual(rs_files, ["research_state/gate4_v4_exploratory_stab/gate4_v4_exploratory_stab_x.json"])
+
 
 if __name__ == "__main__":
     unittest.main()

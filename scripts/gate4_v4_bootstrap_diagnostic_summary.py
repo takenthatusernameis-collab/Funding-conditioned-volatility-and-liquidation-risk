@@ -8,6 +8,13 @@ research_state writes.
 No spurious improvement is claimable when CIs are degenerate/invalid or when a
 contrast lacks the required diagnostic gates (degenerate==False, ci_valid==True,
 inference_ok==True and a finite CI excluding zero).
+
+Optional --enrich-diagnostics-from-leakage <leakage_json>: read-only. Copies
+matching block_bootstrap_reproducibility run/run_diagnostics CI-gate fields into
+summary-row computation ONLY for rows that can be unambiguously mapped by exact
+context (point, ci_low, ci_high, n_obs, n_blocks/effective basis, block_hours,
+seed when present). Ambiguous mappings preserve MISSING_DIAGNOSTIC_FIELDS and
+claimable_excludes_zero=false. Source JSONs are never mutated.
 """
 from __future__ import annotations
 
@@ -63,7 +70,108 @@ def _as_flags(v: Any) -> List[str]:
     return [str(v)]
 
 
-def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any]) -> Dict[str, Any]:
+_ENRICH_FLOAT_KEYS = ("point", "ci_low", "ci_high")
+_ENRICH_INT_KEYS = ("n_obs", "n_blocks", "block_hours", "seed", "n_reps")
+_ENRICH_DIAG_KEYS = (
+    "ci_accounting_valid", "ci_valid", "effective_block_count",
+    "degenerate", "inference_ok", "regime_flags", "n_reps_effective", "n_obs_finite",
+)
+
+
+def _float_close(a: Any, b: Any, *, rel: float = 1e-12, abs_: float = 1e-15) -> bool:
+    if not _is_finite_number(a) or not _is_finite_number(b):
+        return False
+    af, bf = float(a), float(b)
+    scale = max(abs(af), abs(bf), 1.0)
+    return abs(af - bf) <= max(abs_, rel * scale)
+
+
+def _enrich_context_match(row_ci: Dict[str, Any], cand: Dict[str, Any]) -> bool:
+    """Unambiguous only when all comparable context keys match exactly (within float tol).
+
+    Requires candidate to have CI identity (point/ci_low/ci_high) so it can map to a
+    contrast CI row. Refuses (returns False) when no comparable key is shared or when
+    any shared comparable key disagrees.
+    """
+    if not all(k in cand for k in _ENRICH_FLOAT_KEYS):
+        return False
+    compared = 0
+    for k in _ENRICH_FLOAT_KEYS:
+        if k in row_ci and k in cand:
+            if not _float_close(row_ci[k], cand[k]):
+                return False
+            compared += 1
+    for k in _ENRICH_INT_KEYS:
+        if k in row_ci and k in cand and row_ci[k] is not None and cand[k] is not None:
+            try:
+                if int(row_ci[k]) != int(cand[k]):
+                    return False
+                compared += 1
+            except Exception:
+                if str(row_ci[k]) != str(cand[k]):
+                    return False
+                compared += 1
+    # require at least CI identity + one sizing key to avoid vacuous matches
+    return compared >= 4
+
+
+def build_enrichment_candidates(leakage_obj: Dict[str, Any], source_name: str) -> List[Dict[str, Any]]:
+    rep = leakage_obj.get("block_bootstrap_reproducibility") or {}
+    if not isinstance(rep, dict):
+        return []
+    cands: List[Dict[str, Any]] = []
+    for run_key in ("run1", "run2"):
+        run = rep.get(run_key)
+        if not isinstance(run, dict):
+            continue
+        diag = rep.get(f"{run_key}_diagnostics")
+        if not isinstance(diag, dict):
+            diag = {}
+        cand = {"_source": source_name, "_run": run_key}
+        for k in _ENRICH_FLOAT_KEYS + _ENRICH_INT_KEYS:
+            if k in run:
+                cand[k] = run[k]
+        for k in _ENRICH_DIAG_KEYS:
+            if k in run:
+                cand[k] = run[k]
+            elif k in diag:
+                cand[k] = diag[k]
+        cands.append(cand)
+    return cands
+
+
+def enrich_contrast_ci(
+    ci: Dict[str, Any],
+    candidates: Optional[Sequence[Dict[str, Any]]],
+) -> Tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+    """Return (possibly-enriched copy, meta). Never mutates source ci.
+
+    Enrichment applies only when ci is missing diagnostic fields. If 0 or >1 candidates
+    match (ambiguous), returns original copy with meta.reason and no diagnostic fill.
+    """
+    missing_diag = any(k not in ci for k in ("degenerate", "inference_ok")) or (
+        "ci_accounting_valid" not in ci and "ci_valid" not in ci
+    )
+    if not missing_diag or not candidates:
+        return dict(ci), None
+    matches = [c for c in candidates if _enrich_context_match(ci, c)]
+    if len(matches) != 1:
+        return dict(ci), {"applied": False, "reason": "AMBIGUOUS_MAPPING", "matches": len(matches)}
+    c = matches[0]
+    out = dict(ci)
+    for k in _ENRICH_DIAG_KEYS:
+        if k in c and c[k] is not None:
+            out[k] = c[k]
+    # verify enrichment actually resolved diagnostic gates; if not, refuse
+    still_missing = any(k not in out for k in ("degenerate", "inference_ok")) or (
+        "ci_accounting_valid" not in out and "ci_valid" not in out
+    )
+    if still_missing:
+        return dict(ci), {"applied": False, "reason": "AMBIGUOUS_MAPPING", "matches": 1, "insufficient_diag": True}
+    return out, {"applied": True, "reason": "UNAMBIGUOUS_MATCH", "matches": 1, "source": c.get("_source"), "run": c.get("_run")}
+
+
+def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any], *, enrich_meta: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     eff = ci.get("effective_block_count", ci.get("n_blocks"))
     ci_valid = ci.get("ci_accounting_valid", ci.get("ci_valid"))
     deg = ci.get("degenerate")
@@ -74,6 +182,10 @@ def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any
     )
     if missing_diag:
         flags = flags + ["MISSING_DIAGNOSTIC_FIELDS"]
+    if enrich_meta and enrich_meta.get("applied"):
+        flags = flags + ["ENRICHED_FROM_LEAKAGE"]
+    elif enrich_meta and not enrich_meta.get("applied"):
+        flags = flags + ["ENRICHMENT_" + str(enrich_meta.get("reason", "REFUSED"))]
     excludes = _ci_excludes_zero(ci)
     gates_ok = deg is False and ci_valid is True and inf is True and excludes is True
     claimable = bool(gates_ok)
@@ -97,37 +209,40 @@ def extract_contrast_row(source: str, section: str, name: str, ci: Dict[str, Any
         "ci_excludes_zero": excludes,
         "non_degenerate_excludes_zero_claimable": claimable,
         "missing_diagnostic_fields": missing_diag,
+        "enrichment_applied": bool(enrich_meta.get("applied")) if enrich_meta else False,
+        "enrichment_meta": enrich_meta,
     }
 
 
-def _iter_contrast_dict(container: Any, source: str, section: str) -> Iterable[Dict[str, Any]]:
+def _iter_contrast_dict(container: Any, source: str, section: str, *, candidates: Optional[Sequence[Dict[str, Any]]] = None) -> Iterable[Dict[str, Any]]:
     if not isinstance(container, dict):
         return []
     out = []
     for name, ci in container.items():
         if isinstance(ci, dict) and ("ci_low" in ci or "point" in ci):
-            out.append(extract_contrast_row(source, section, str(name), ci))
+            eff_ci, meta = enrich_contrast_ci(ci, candidates)
+            out.append(extract_contrast_row(source, section, str(name), eff_ci, enrich_meta=meta))
     return out
 
 
-def summarize_stab(path: Path, obj: Dict[str, Any]) -> List[Dict[str, Any]]:
+def summarize_stab(path: Path, obj: Dict[str, Any], *, candidates: Optional[Sequence[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     variants = obj.get("variants") or {}
     if isinstance(variants, dict):
         for vname, vobj in variants.items():
             if not isinstance(vobj, dict):
                 continue
-            rows.extend(_iter_contrast_dict(vobj.get("contrasts_vs_A") or {}, path.name, f"{vname}.contrasts_vs_A"))
-    rows.extend(_iter_contrast_dict(obj.get("loo_e_vs_a_v3") or {}, path.name, "loo_e_vs_a_v3"))
+            rows.extend(_iter_contrast_dict(vobj.get("contrasts_vs_A") or {}, path.name, f"{vname}.contrasts_vs_A", candidates=candidates))
+    rows.extend(_iter_contrast_dict(obj.get("loo_e_vs_a_v3") or {}, path.name, "loo_e_vs_a_v3", candidates=candidates))
     return rows
 
 
-def summarize_diag(path: Path, obj: Dict[str, Any]) -> List[Dict[str, Any]]:
+def summarize_diag(path: Path, obj: Dict[str, Any], *, candidates: Optional[Sequence[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     for key in ("pooled_contrasts_vs_A_primary_fit", "pooled_contrasts_vs_A_stabilized_exploratory"):
-        rows.extend(_iter_contrast_dict(obj.get(key) or {}, path.name, key))
+        rows.extend(_iter_contrast_dict(obj.get(key) or {}, path.name, key, candidates=candidates))
     loo = obj.get("instrument_loo_E_vs_A_exploratory")
-    rows.extend(_iter_contrast_dict(loo or {}, path.name, "instrument_loo_E_vs_A_exploratory"))
+    rows.extend(_iter_contrast_dict(loo or {}, path.name, "instrument_loo_E_vs_A_exploratory", candidates=candidates))
     return rows
 
 
@@ -162,21 +277,21 @@ def summarize_leakage_audit(path: Path, obj: Dict[str, Any]) -> List[Dict[str, A
     return rows
 
 
-def summarize_artifacts(paths: Sequence[Path]) -> List[Dict[str, Any]]:
+def summarize_artifacts(paths: Sequence[Path], *, enrichment_candidates: Optional[Sequence[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     for path in paths:
         obj = _load_json(path)
         name = path.name
         if "gate4_v4_exploratory_stab" in name or "variants" in obj and "loo_e_vs_a_v3" in obj:
-            rows.extend(summarize_stab(path, obj))
+            rows.extend(summarize_stab(path, obj, candidates=enrichment_candidates))
         elif "gate4_v4_exploratory_diag" in name or "pooled_contrasts_vs_A_primary_fit" in obj:
-            rows.extend(summarize_diag(path, obj))
+            rows.extend(summarize_diag(path, obj, candidates=enrichment_candidates))
         elif "gate4_v4_leakage_audit" in name or "block_bootstrap_reproducibility" in obj:
             rows.extend(summarize_leakage_audit(path, obj))
         else:
             # best-effort: scan for contrast-like dicts at top-level
             for k, v in obj.items():
-                rows.extend(_iter_contrast_dict(v, name, k))
+                rows.extend(_iter_contrast_dict(v, name, k, candidates=enrichment_candidates))
     return rows
 
 
@@ -192,11 +307,20 @@ def _fmt(v: Any) -> str:
     return str(v)
 
 
-def render_markdown(rows: Sequence[Dict[str, Any]], artifacts: Sequence[Path], ts: Optional[str] = None) -> str:
+def render_markdown(
+    rows: Sequence[Dict[str, Any]],
+    artifacts: Sequence[Path],
+    ts: Optional[str] = None,
+    *,
+    enrichment_source: Optional[Path] = None,
+    enrichment_candidates: Optional[Sequence[Dict[str, Any]]] = None,
+) -> str:
     ts = ts or _ts()
     claimable = [r for r in rows if r.get("non_degenerate_excludes_zero_claimable")]
     degenerate = [r for r in rows if r.get("degenerate") is True or r.get("ci_valid") is False or r.get("inference_ok") is False]
     missing = [r for r in rows if r.get("missing_diagnostic_fields")]
+    enriched = [r for r in rows if r.get("enrichment_applied")]
+    enrich_refused = [r for r in rows if r.get("enrichment_meta") and not r["enrichment_meta"].get("applied")]
     lines = [
         f"# Gate 4 v4 bootstrap diagnostic summary ({ts})",
         "",
@@ -205,6 +329,18 @@ def render_markdown(rows: Sequence[Dict[str, Any]], artifacts: Sequence[Path], t
         "Deterministic summary of saved exploratory JSON artifacts. No recomputation, no network, no confirmatory claim, no promotion.",
         "A non-degenerate CI excluding zero is claimable **only** when `degenerate=false`, `ci_valid=true`, and `inference_ok=true`.",
         "",
+    ]
+    if enrichment_source is not None:
+        lines += [
+            "## Diagnostic enrichment (read-only; does not mutate source artifacts)",
+            "",
+            f"- enrichment source: `{enrichment_source.as_posix()}` (block_bootstrap_reproducibility candidates: {len(enrichment_candidates or [])})",
+            f"- rows enriched by unambiguous exact-context match: **{len(enriched)}**",
+            f"- rows with enrichment refused/ambiguous (kept MISSING_DIAGNOSTIC_FIELDS, not claimable): **{len(enrich_refused)}**",
+            "- Enrichment copies CI-gate fields only for unambiguous matches; it never recomputes outcomes and never fabricates improvement.",
+            "",
+        ]
+    lines += [
         "## Artifacts consumed",
         "",
     ]
@@ -247,6 +383,7 @@ def default_artifact_paths(repo_root: Path) -> List[Path]:
     for pat in [
         "research_state/gate4_v4_exploratory_stab/*.json",
         "research_state/gate4_v4_exploratory_diag/*.json",
+        "research_state/gate4_v4_exploratory_leakage_audit/*.json",
         "research_state/gate4_v4_leakage_audit/*.json",
     ]:
         candidates.extend(sorted(repo_root.glob(pat)))
@@ -262,6 +399,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--artifacts", nargs="*", help="JSON artifact paths (default: latest stab/diag/leakage_audit)")
     ap.add_argument("--out", help="Output markdown path (default: results/gate4_v4_bootstrap_diagnostic_summary_<UTC>.md)")
     ap.add_argument("--repo-root", default=".", help="Repo root for default artifact discovery")
+    ap.add_argument(
+        "--enrich-diagnostics-from-leakage",
+        help="Read-only leakage audit JSON path; copies CI-gate fields only for unambiguous exact-context matches (never mutates source artifacts).",
+    )
     args = ap.parse_args(argv)
     root = Path(args.repo_root).resolve()
     artifacts = [Path(p) if Path(p).is_absolute() else (root / p) for p in (args.artifacts or [])]
@@ -270,13 +411,24 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if not artifacts:
         print("no Gate 4 v4 exploratory artifacts found", file=sys.stderr)
         return 2
+    enrich_path: Optional[Path] = None
+    candidates: Optional[List[Dict[str, Any]]] = None
+    if args.enrich_diagnostics_from_leakage:
+        enrich_path = Path(args.enrich_diagnostics_from_leakage)
+        if not enrich_path.is_absolute():
+            enrich_path = root / enrich_path
+        if not enrich_path.exists():
+            print(f"enrichment leakage JSON not found: {enrich_path}", file=sys.stderr)
+            return 2
+        candidates = build_enrichment_candidates(_load_json(enrich_path), enrich_path.name)
     ts = _ts()
-    rows = summarize_artifacts(artifacts)
-    md = render_markdown(rows, artifacts, ts=ts)
+    rows = summarize_artifacts(artifacts, enrichment_candidates=candidates)
+    md = render_markdown(rows, artifacts, ts=ts, enrichment_source=enrich_path, enrichment_candidates=candidates)
     out = Path(args.out) if args.out else (root / RESULTS_DIR / f"gate4_v4_bootstrap_diagnostic_summary_{ts}.md")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(md, encoding="utf-8")
-    print(f"wrote {out} rows={len(rows)} claimable_excludes_zero={sum(1 for r in rows if r.get('non_degenerate_excludes_zero_claimable'))}")
+    enriched_n = sum(1 for r in rows if r.get("enrichment_applied"))
+    print(f"wrote {out} rows={len(rows)} claimable_excludes_zero={sum(1 for r in rows if r.get('non_degenerate_excludes_zero_claimable'))} enriched={enriched_n}")
     return 0
 
 
