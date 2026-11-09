@@ -759,34 +759,17 @@ def paired_qlike_by_time(y: np.ndarray, p_base: np.ndarray, p_alt: np.ndarray, t
 
 
 def block_bootstrap_delta_ci(paired: pd.DataFrame, block_hours: int = BOOTSTRAP_BLOCK_HOURS, n_reps: int = BOOTSTRAP_REPS, seed: int = BOOTSTRAP_SEED, alpha: float = BOOTSTRAP_ALPHA) -> Dict[str, object]:
-    """Block bootstrap CI for mean ΔQLIKE (alt-base), resampling whole UTC time blocks jointly across instruments."""
-    from src.volatility import block_bootstrap as bb
-    if paired.empty:
-        return {"point": None, "ci_low": None, "ci_high": None, "n_obs": 0, "n_blocks": 0, "n_reps": 0, "seed": seed, "block_hours": block_hours}
-    paired = paired.copy()
-    paired["_block"] = paired["timestamp"].dt.floor(f"{int(block_hours)}h")
-    blocks = paired.groupby("_block", sort=True)["diff"].apply(lambda s: s.to_numpy(dtype=float)).to_dict()
-    keys = list(blocks.keys())
-    if not keys:
-        return {"point": None, "ci_low": None, "ci_high": None, "n_obs": int(len(paired)), "n_blocks": 0, "n_reps": 0, "seed": seed, "block_hours": block_hours}
-    point = float(paired["diff"].mean())
-    n_blocks = len(keys)
-    reps_idx = bb.circular_block_bootstrap_indices(n_blocks, 1, n_reps, seed=seed)
-    diffs = []
-    for ridx in reps_idx:
-        vals = []
-        for bi in ridx:
-            vals.append(blocks[keys[bi]])
-        arr = np.concatenate(vals)
-        if arr.size:
-            diffs.append(float(np.mean(arr)))
-    if not diffs:
-        return {"point": point, "ci_low": point, "ci_high": point, "n_obs": int(len(paired)), "n_blocks": n_blocks, "n_reps": 0, "seed": seed, "block_hours": block_hours}
-    diffs_sorted = sorted(diffs)
-    lo_i = max(0, min(len(diffs_sorted) - 1, int(np.floor((alpha / 2.0) * len(diffs_sorted)))))
-    hi_i = max(0, min(len(diffs_sorted) - 1, int(np.ceil((1.0 - alpha / 2.0) * len(diffs_sorted))) - 1))
-    return {"point": point, "ci_low": float(diffs_sorted[lo_i]), "ci_high": float(diffs_sorted[hi_i]), "n_obs": int(len(paired)), "n_blocks": n_blocks, "n_reps": int(len(diffs)), "seed": seed, "block_hours": block_hours, "alpha": alpha}
+    """Block bootstrap CI for mean ΔQLIKE (alt-base), resampling whole UTC time blocks jointly across instruments.
 
+    Delegates to hardened src.eval.inference diagnostics while preserving the
+    legacy return shape for existing callers (additive diagnostic fields only).
+    Non-finite diffs are excluded from inference accounting; effective block
+    count and degenerate/too-few-block regimes are reported.
+    """
+    from src.eval.inference import block_bootstrap_delta_ci_diagnostic
+    return block_bootstrap_delta_ci_diagnostic(
+        paired, block_hours=block_hours, n_reps=n_reps, seed=seed, alpha=alpha,
+    )
 
 def build_prereg_splits(splits: Optional[List[Dict[str, object]]] = None) -> List[wf.SplitBounds]:
     from src.eval import walkforward as wf

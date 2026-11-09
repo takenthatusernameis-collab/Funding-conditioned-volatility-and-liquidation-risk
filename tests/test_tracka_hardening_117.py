@@ -482,6 +482,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_sealed_volatility",
     "reason": "run_gate4_v4_exploratory_stab.py: Gate 4 v4 EXPLORATORY stabilized-comparison runner only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; evaluates principled leakage-safe modeling variants (V1-V4) as diagnostics for B/D split-3 instability and E sensitivity, never replacing prereg A-E contrasts or changing confirmatory estimands; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
   },
+  "run_gate4_v4_leakage_audit.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "run_gate4_v4_leakage_audit.py: Gate 4 v4 EXPLORATORY leakage-audit harness (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; verifies train-only provenance of ridge scale/winsor/target floor/normalization and bootstrap reproducibility; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
+  },
   "run_rv_baseline.py": {
     "class": "track_c_sealed_volatility",
     "reason": "run_rv_baseline.py: RV-only OOS baseline (Gate 3, Track C), leakage-resistant walk-forward on local Binance data; writes evaluation/manifest summaries; no Track A Hyperliquid guarded liquidation outcome reads/claims."
