@@ -1,12 +1,11 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session MUST continue from here)
 
-**Updated:** 2026-11-09T18:18:58Z — refreshed initial task message + bottleneck removal confirmation.
-**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority: **Track C funding-conditioned volatility first**. Track A liquidation risk is structurally blocked (no admissible unauthenticated liquidation labels; ironflow `data_through=2026-10`; forward edge 2026-11..2027-02 absent; probes==2 exhausted). `git status --short`: clean. Do **not** commit large raw caches/data zips, `__pycache__`, `ironflow_fastpath_cache.json`, or workflow changes.
+**Updated:** 2026-11-09T19:20:13Z — state re-verified; no new artifacts since 18:18:58Z checkpoint; handoff refreshed for next session. **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority: **Track C funding-conditioned volatility first**. Track A liquidation risk is structurally blocked (no admissible unauthenticated liquidation labels; ironflow `data_through=2026-10`; forward edge 2026-11..2027-02 absent; probes==2 exhausted). `git status --short`: clean. Do **not** commit large raw caches/data zips, `__pycache__`, `ironflow_fastpath_cache.json`, or workflow changes.
 **Binding priority:** P0 = **Track C funding-conditioned volatility — frozen confirmatory-readiness skeleton created; no confirmatory data exists today (2 blocks < 3); no confirmatory claims**. `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` = **COMPLETE_INCONCLUSIVE (EXPLORATORY_ONLY, 2026-11-09T16:39:00Z)**. Track B H003 = **COMPLETE_INCONCLUSIVE (2026-11-09T15:35:43Z)**. Track A = **STRUCTURALLY BLOCKED / NO TRIGGER** — **no probing, no scan/wrapper/report families**. **No status-only churn. No `.github/workflows` edits. No confirmatory promotion from exploratory results. No sealed-holdout reuse, threshold shopping, or conflating observed/modeled/synthetic labels. Every session must produce versioned, auditable artifacts and/or tested code.**
 
 ---
 
-## 0) INITIAL TASK MESSAGE — 2026-11-09T18:18:58Z — MANDATORY HEAVY WORK (DO NOT AVOID)
+## 0) INITIAL TASK MESSAGE — 2026-11-09T19:20:13Z — MANDATORY HEAVY WORK (DO NOT AVOID)
 
 **Repo-name priority:** `Funding-conditioned-volatility-and-liquidation-risk` → **Track C funding-conditioned volatility first**. Track A (liquidation risk) is structurally blocked (no admissible unauthenticated liquidation labels; ironflow `data_through=2026-10`; forward edge 2026-11..2027-02 absent; probes==2 exhausted) — **no probing, no scan/wrapper/report families, no guard-hardening churn absent a trigger**. Track B H003 = COMPLETE_INCONCLUSIVE — do not merge tracks.
 
@@ -127,4 +126,4 @@
 
 ---
 
-**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED. (2026-11-09T18:18:58Z)**
+**END OF SINGLE DURABLE HANDOFF. FUTURE AGENTS: START AT §0 — HEAVY WORK REQUIRED. (2026-11-09T19:20:13Z)**
