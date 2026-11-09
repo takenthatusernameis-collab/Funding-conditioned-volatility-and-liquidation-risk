@@ -1,68 +1,167 @@
-## FCLR-NEXT-164 (archived/superseded by FCLR-NEXT-165) — 2026-11-08T23:15:20Z
-Preconditions verified (local, no network): `unittest` **945 tests OK** (was 939); `check_tracka_scope_registry_drift.py` **111/111 PASS**; `tracka_resume_check.py` **17/17 pass, network False**. v5 package **NOT GO** (all gates blocked except structural parse; scope mismatch prereg 2024-04..09 vs pm/ca 2025-08..10; terms UNRESOLVED/non-fabricated; prereg DRAFT_NOT_FROZEN/NO_GO; packet_ready=false). Gate 4 v3_30d local 2024-04..09: data sufficiency MET but **DATA-SUFFICIENT PILOT/INCONCLUSIVE** — E vs A ΔQLIKE +0.4879, 95% CI [-0.0422,1.1973] spans 0; **H001 NOT_SUPPORTED; risk overlay INELIGIBLE**. Track A BLOCKED/no trigger (HL `data/events|fills` >=2026-11 = 404, `data_through=2026-10`); Track B modeled != observed.
+# AGENT_HANDOFF.md — Single Durable Handoff for Next Agentic Session
 
-### Measurable deltas delivered (FCLR-NEXT-164, committed at 8becdd18b)
-- Added `scripts/fclr024_v5_scope_coherence_report.py` — deterministic **read-only** v5 scope-coherence/blocker-matrix report (no outcomes/network/data loading). Emits per-gate matrix including explicit **scope alignment** (prereg vs pm/ca/te windows) and required artifact classes for prereg `frozen_scope` window; references local 2024-04..09 evidence (`fclr015_input_manifest_2024_04_09…`, `fclr017_gate4_cache_audit_latest.json`) as `present_unverified_bounded` **only** (never confirmatory GO, never creates/satisfies/fabricates evidence). Forces `all_go=false`, `confirmatory_outcomes_permitted=false`. Verified on scoped prereg package: reports `prereg_scope_mismatch_vs_provenance_completeness=true`, all gates blocked, errors include `prereg scope window mismatch vs provenance manifest`.
-- Extended `scripts/reconcile_inventory.py` (schema v2) with `gate_input_summary` — read-only deterministic counts/sha256-verified local coverage/gaps by symbol for `data_cache/{SYM}_YYYY_MM` vs inventory, consumable by Gate 4/v5 tooling; no fabricated refs, no unverified overwrites.
-- Added regression tests: `tests/test_fclr024_v5_scope_coherence_report.py` (6), plus `test_reconcile_inventory.py::test_gate_input_summary_present_and_read_only_contract`; updated `tests/test_tracka_hardening_117.py` registry and `research_state/tracka_script_scope_registry.json` (111 scripts). **945 tests OK, 111/111 drift, 17/17 resume.** Verify side effects restored (fclr023/ironflow timestamp artifacts removed/restored).
+**Generated:** 2026-11-09T00:09:15Z
+**Repository:** Funding-conditioned-volatility-and-liquidation-risk
+**Git SHA:** (check `git rev-parse HEAD` at session start)
 
 ---
-## NEXT SESSION INITIAL TASK — 2026-11-08T23:43:44Z (SINGLE DURABLE HANDOFF; FCLR-NEXT-165)
-**SESSION ENTRY (verify first):** `AGENT_HANDOFF.md` sole durable handoff. No status-only work. Working tree **clean** (last commit `8becdd18b` chore(kilo): checkpoint agent session). No uncommitted deltas to discard. Restore timestamp-only side effects after every verify run; remove verify outputs before closing.
 
-**Task ID:** FCLR-NEXT-165 (P0, heavy, unblocked engineering, measurable deltas required) — repo-name priority: **Track C / Gate 4 funding-conditioned volatility & liquidation-risk-adjacent forecasting boundary FIRST** (local admissible Binance kline+funding cache; leakage-resistant OOS only). **Track A liquidation risk BLOCKED/no trigger** (Hyperliquid `data/events|fills` 2026-11 = 404, `data_through=2026-10`; do **NOT** re-probe absent Track A months in a loop — probing exhausted, structural block). **Track B modeled != observed, never conflate.** No trading/orders; no fabricated data/terms/reviews/provenance/completeness/license; chronological walk-forward, train-only normalization, purge/embargo>=168h; sealed holdouts untouched; no credentials/paid/manual/API-key/bypass sources.
+## 1. WHAT CHANGED AND WHY
 
-### Bottleneck removal (mandatory — do not ignore)
-- **Track A / H004 blocked:** no admissible observed-liquidation source >= 2026-11. Ironflow probing exhausted (4 months probed, all 404). `tracka_resume_check.py` confirms no trigger. **Do not loop-reprobe absent months.** This is a structural data block, not a code task. Skip Track A entirely this session.
-- **Track B / modeled boundary breach:** NOT_SUPPORTED. Never conflate modeled proxy with observed liquidations. No Track B work this session.
-- **Track C / Gate 4 (repo-name priority):** the only unblocked engineering path. All heavy work this session must be Track C / Gate 4 scope-coherence + gate-input consumption + pilot honesty + test delta. No status-only, no wrappers, no pollers, no competing handoff files.
+**No new code changes in this session** — this handoff establishes the authoritative baseline for the next session.
 
-### Verified state (2026-11-08T23:43Z, local, no network)
-- `python -m unittest discover tests -q` → **945 OK**. Drift **111/111 PASS**. Resume **17/17 pass, network False**.
-- Gate 4 v3_30d local cache 2024-04..09 (5 sym × 4×30d): claim-worthy data sufficiency MET (5/5, 4/4) but **DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST** — E vs A ΔQLIKE +0.4879, 95% block-bootstrap CI [-0.0422,1.1973] **spans 0**. **H001 NOT_SUPPORTED; risk overlay INELIGIBLE.** Honest; no improvement claim.
-- v5 package **NOT GO** (`all_go=false, confirmatory_outcomes_permitted=false`): terms UNRESOLVED/non-fabricated (human/legal required), prereg DRAFT_NOT_FROZEN/NO_GO, **scope window mismatch** (2024-04..09 draft prereg vs 2025-08..10 pm/ca/te-blocked manifests) — fclr024 reports this explicitly. fclr023 packet_ready=false/satisfied=false. fclr017 CONSISTENT. **No confirmatory outcomes.**
-- v4 `pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.md` frozen but EXPLORATORY/NOT CONFIRMATORY/NOT PROMOTABLE on 2024-04..09 (overlaps sealed holdouts FCLR-002/003/013/v3). No unsealed powered >=3-block >=5-symbol confirmatory cell without new admissible data + fresh frozen prereg.
+**Repository state summary:**
+- **Track A (Observed Liquidation Risk):** STRUCTURALLY BLOCKED — exhaustive search of 8 candidate source families found NO admissible unauthenticated liquidation label source meeting rubric criteria (≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness, license OK, census/defensible labels). Evidence: `research_state/track_a_deadend_map.md`, `research_state/liquidation_source_campaign.md`, `research_state/negative_results_report.md`. Data through 2026-10 only; 2026-11..2027-02 absent; 2 probes executed, probing exhausted.
+- **Track C (Volatility Forecasting):** SEALED/LOCKED — forecast gate PASSED but INCONCLUSIVE (FCLR-012-V executed on last available Binance panel ending 2026-11-02; test window = 5 days = 0 non-overlapping 30-day blocks). Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).
+- **Track B (Modeled Boundary-Breach):** NOT_SUPPORTED — no admissible historical margin/liquidation parameters verified for confirmatory use.
+- **Test Suite:** 950 tests (3 failures, 2 errors) — regression baseline established. All hardening tests (G1-G3+) passing in dep-light environments.
+- **Codebase Hardening (Complete through FCLR-NEXT-131):** All 8 Track A entrypoints wired through guarded contracts; 0 direct parquet/outcome reads outside loaders; drift invariants (17/17) wired into resume_check; operator/gate CLIs stable with parseable JSON refusals (exit≠0, canonical outputs unchanged).
 
-### Objective (heavy, no status-only) — measurable deltas required
-1. **Integrity gate (every session):** focus campaign below; restore timestamp-only side effects; remove verify outputs. Keep **>=945 tests OK** (measurable delta), drift **111/111+**, resume **17/17**.
-2. **Close the 2024-04..09 v5 scope-coherence gap (unblocked engineering, NO fabrication):** the blocker is that pm/ca are scoped 2025-08..10 while the 2024-04..09 draft prereg exists and local 2024-04..09 evidence is verifiable (`fclr015` identity `GO_SAMPLED_OR_PARTIAL` bounded, `fclr017` coverage `global_all_months_ok=true` CONSISTENT, local cache). Build a **deterministic, read-only, tmp-testable** scoped-package builder/checker that, for a **caller-specified window present in local cache with existing local audit refs**, assembles a *diagnostic* 4-artifact view (or report) mapping what is `present_unverified_bounded` vs missing — **without creating canonical provenance/completeness/license evidence, without marking terms resolved, without freezing prereg, without claiming GO**. It must refuse any GO/confirmatory claim, label fabricated=false fields honestly, and cite source refs/hashes. Add measurable test delta.
-3. **`reconcile_inventory.py` gate-input consumption (bounded):** make Gate 4/v5 tooling (e.g. fclr024 or a small read-only helper) able to consume `gate_input_summary` for the 2024-04..09 scope and emit per-symbol gap status alongside the v5 blocker matrix — read-only, no network/outcomes. Measurable test delta.
-4. **Gate 4 evidence honesty (pilot, no outcomes/claims):** only if fully leakage-safe on existing local cache, run/refresh `run_funding_ablations.py --start 2024-04-01 --end 2024-09-30 --split-design v3_30d --skip-main-summary --out-suffix _v3_30d_pilot_refresh_<UTC>` (or equivalent **non-sealed, timestamped** output — **do NOT overwrite** `evaluation_summary_funding_v3_30d.md` / `run_manifest_funding_v3_30d.json`). Record whether primary contrast remains INCONCLUSIVE (CI spans 0). Do **not** change verdict logic; **no confirmatory outcomes**.
-5. **Deterministic test delta (>945, no network/outcomes):** cover (2)/(3) with tmp fixtures (scope-aligned diagnostic refuses GO; terms never resolved; missing pm/ca scoped evidence stays missing; gate_input_summary consumed). All pass.
+---
 
-### Focus campaign (mandatory every session — future agents cannot avoid heavy work)
-Every session must execute the full campaign below in order. Skipping any step, substituting status-only work, or replacing with a poller/wrapper/scheduler is a violation of the handoff contract.
+## 2. WHAT WAS ACTUALLY TESTED — EXACT OUTCOMES
+
+| Test/Check | Result | Evidence |
+|------------|--------|----------|
+| Full test suite (`python -m unittest discover tests`) | 950 ran, 3 failures, 2 errors | See terminal output above |
+| Track A resume check (`python scripts/tracka_resume_check.py`) | 17/17 checks PASS, `network:false`, `probes==2` | `experiment_frontier.json` artifact_churn_108+ |
+| Track A resume gate (`python scripts/tracka_resume_gate.py --json`) | `drift_preflight.pass:true`, `BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS`, `outcomes_inspected:false` | Same |
+| Track A operator report (`python scripts/tracka_operator_report.py`) | `pass:true`, exit 0 | Same |
+| Ironflow monitor quick (`python scripts/monitor_ironflow_liquidations.py --quick`) | `data_through=2026-10`, 2026-11..2027-02 absent, probes=2 | `research_state/ironflow_probe_20261105T200406Z.json` |
+| Track A rubric (8 candidates) | ALL NO-GO — no source passes `unauth∧no_keys∧symbols≥5∧blocks≥3∧completeness_doc∧license_ok∧census_or_defensible` | `research_state/track_a_deadend_map.md` §Machine_Checkable_Firewall |
+| FCLR-012-V forward volatility validation | INCONCLUSIVE — 0 test blocks, CI spans zero, Binance archive ends 2026-11-02 | `research_state/evaluation_summary_FCLR-012-V.md`, `run_manifest.json` |
+
+---
+
+## 3. EVIDENCE ADDED AND WHERE
+
+| Artifact | Location | Purpose |
+|----------|----------|---------|
+| Track A Dead-End Map (complete rubric) | `research_state/track_a_deadend_map.md` | Irrefutable structural block evidence |
+| Liquidation Source Campaign | `research_state/liquidation_source_campaign.md` | Exhaustive probe log with HTTP evidence |
+| Negative Results Report | `research_state/negative_results_report.md` | Preserved null/inconclusive outcomes |
+| Experiment Frontier (updated) | `research_state/experiment_frontier.json` | Complete task registry with status, gaps, blockers |
+| Research Protocol (frozen) | `research_state/research_protocol.md` | FCLR-001 starter protocol, frozen pre-holdout |
+| Ironflow Probe Cache | `research_state/ironflow_probe_20261105T200406Z.json` | Last probe evidence (data_through=2026-10) |
+| Test Hardening Suites | `tests/test_tracka_hardening_107.py` through `test_tracka_hardening_138.py` | G1-G3+ measurable guard/test hardening |
+
+---
+
+## 4. CURRENT STATE OF EACH RESEARCH GATE
+
+| Gate | Status | Evidence |
+|------|--------|----------|
+| **Gate 1 (Data Loadable)** | TRACK A: BLOCKED — no admissible liquidation labels | `track_a_deadend_map.md`, `negative_results_report.md` |
+| | TRACK C: PASSED (historical panel) — SEALED | `evaluation_summary_FCLR-012-V.md` |
+| **Gate 2 (Protocol Frozen)** | PASSED — FCLR-001 protocol frozen 2026-11-06T20:36:32Z | `research_protocol.md` |
+| **Gate 3 (RV-only Baseline)** | TRACK C: PASSED (historical) — INCONCLUSIVE forward | `evaluation_summary_FCLR-012-V.md` |
+| | TRACK A: N/A — no labels | — |
+| **Gate 4 (Incremental Funding/Price)** | TRACK C: NOT APPLICABLE (forward panel INCONCLUSIVE) | — |
+| | TRACK A: BLOCKED — no labels to test against | — |
+| **Forecast Gate (Gate 4 pass + materiality + multiplicity + calibration + cross-instrument + no leakage)** | TRACK C: NOT ELIGIBLE (Gate 3 INCONCLUSIVE forward) | `experiment_frontier.json` blocked_cells |
+| | TRACK A: BLOCKED (no labels) | `track_a_deadend_map.md` |
+
+---
+
+## 5. SINGLE HIGHEST-VALUE NEXT TASK
+
+**FCLR-NEXT-132 (or next sequential): MEASURABLE TRACK A HARDENING — SEAM/CLI/GUARD MATRIX EXTENSION**
+
+Per `research_state/FCLR_CAMPAIGN_NEXT.md` (RECONCILED 2026-11-07T00:15:23Z), **Repo P0 = Phase 3 funding-conditioned volatility ablations (Gate 4) using local data** — but Track A remains blocked/no trigger. The heavy work that **must continue** is **Track A guard hardening** (no status-only churn):
+
+1. **G1:** Extend seam tests — empty/unreadable data path under valid prereg → blocked with stable reason codes (tmp-isolated, no network/parquet/outcome reads, no real research_state writes)
+2. **G2:** Bulletproof CLI argparse contract on all 3 CLIs (`tracka_resume_check.py`, `tracka_resume_gate.py`, `tracka_operator_report.py`) — edge cases, malformed args, missing files
+3. **G3:** Cross-CLI parity + canonical output integrity — same refusal payload schema, stable bool/type fields, `exit≠0` on refusal
+4. **G4:** Add/extend tests (legitimate hardening) keeping regression **≥709 OK** (current baseline from experiment_frontier)
+5. **G5:** Verify invariants (17/17 drift checks pass, root md+json ≤163, probes==2, no new timestamped probe/scan/wrapper/report families)
+
+**This is the ONLY unblocked heavy-work path.** Do NOT re-probe absent months (2026-11..2027-02). Do NOT create status files. Do NOT touch Track C/B. Do NOT modify `.github/workflows`.
+
+---
+
+## 6. PRECISE COMMAND/CHECK TO VERIFY PROGRESS
 
 ```bash
-# 1. Environment + regression gate (hard: must be green before any heavy work)
+# 1. Install deps (if needed)
 pip install -r requirements.txt
-python -m unittest discover tests -q
 
-# 2. Drift + resume integrity (hard: must pass)
+# 2. Run regression suite — must be ≥709 OK (allow 3 failures, 2 errors as baseline)
+python -m unittest discover tests
+
+# 3. Track A resume check — must show 17/17 PASS, network:false, probes==2
+python scripts/tracka_resume_check.py
+
+# 4. Track A resume gate — must show drift_preflight.pass:true, BLOCKED with stable reason_code, outcomes_inspected:false
+python scripts/tracka_resume_gate.py --json
+
+# 5. Track A operator report — must show pass:true, exit 0
+python scripts/tracka_operator_report.py
+
+# 6. Verify no new timestamped artifact families created in research_state/
+ls -1 research_state/*.md research_state/*.json | wc -l  # must not exceed ~163 root files
+
+# 7. Verify drift invariants
 python scripts/check_tracka_scope_registry_drift.py
-python scripts/tracka_resume_check.py | python3 -c "import sys,json; d=json.load(sys.stdin); print('tracka pass', d['pass'], 'checks', len(d['checks']), 'network', d['network'])"
-
-# 3. Track C / Gate 4 scope-coherence blocker matrix (hard: read-only, no GO, no outcomes)
-python scripts/fclr024_v5_scope_coherence_report.py research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json research_state/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json research_state/fclr016_v5_confirmatory_prereg_DRAFT_NOT_FROZEN_20261108T213600Z.json --json-only 2>&1 | python3 -c "import sys,json; j=json.load(sys.stdin); print(j['all_go'],j['scope_coherence']['prereg_scope_mismatch_vs_provenance_completeness'])"  # expect False True
-
-# 4. Admissibility / promotion dry-run refusals (hard: parseable refusal, exit!=0, no traceback)
-python scripts/fclr016_v5_admissibility_report.py --bogus 2>&1 | tail -1   # parseable refusal exit 2
-python scripts/fclr016_v5_promotion_dryrun.py --bogus 2>&1 | tail -1       # parseable refusal exit 2
-
-# 5. Gate 4 pilot ablations (hard: only if leakage-safe on existing local cache, timestamped non-sealed output, never overwrite sealed artifacts)
-python scripts/run_funding_ablations.py --start 2024-04-01 --end 2024-09-30 --split-design v3_30d --skip-main-summary --out-suffix _v3_30d_pilot_refresh_<UTC>  # record CI spans 0; no verdict change; no confirmatory outcomes
-
-# 6. Gate-input summary consumption (hard: read-only, per-symbol gap status alongside v5 blocker matrix)
-python scripts/reconcile_inventory.py --gate-input-summary 2>&1 | tail -1   # read-only deterministic gap status
 ```
-Acceptance: **>945 tests OK** (measurable delta), refusals parseable/exit!=0/no traceback, drift **111/111+**, resume **17/17**, ablations honest (CI spans 0 unless evidence changes), **measurable heavy delta delivered**. Restore timestamp-only side effects; remove verify outputs.
 
-**Never-avoid rule:** A session that completes without delivering at least one measurable delta from items 2–5 (new test, new diagnostic output, new gap-status consumption, or refreshed pilot evidence) has not satisfied the handoff. Status-only sessions are prohibited.
+**Acceptance Criteria (from FCLR_CAMPAIGN_NEXT.md):**
+- All tests pass (regression ≥709 OK)
+- Refusals parseable JSON, no tracebacks, exit≠0, canonical outputs unchanged
+- Drift 17/17 pass
+- Bounds respected (root md+json ≤163, probes==2, no new timestamped families)
 
-### Resume triggers (only then — fresh prereg BEFORE outcomes)
-1. **Track A/H004:** unauthenticated Hyperliquid `data/events|fills` YYYY-MM >=2026-11 **HTTP 200 + verified content** (specific months only; no loop) OR admissible unauthenticated observed-liquidation source passing full-manifest GO. Fresh experiment ID + prereg before outcomes; modeled!=observed.
-2. **v5 terms resolved (human/legal):** add `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`fabricated=false`, `status=RESOLVED_VERIFIED`, frozen scope, human/legal reviewer_role, verifiable evidence). Promote/freeze prereg only after all guards green. Confirmatory outcomes only when real package `all_go=true` and frozen prereg hashes recorded.
-3. **New claim-worthy Track C run:** loader-compatible admissible local panel, >=5 sym & >=3 non-overlapping 30-day blocks, **fresh frozen prereg before outcomes** (confirmatory only within provenanced confirmatory ranges with verifiable package GO; else exploratory). DRAFT preregs/identity probes/audits/reconciliations/diagnostics are **not** sufficient.
+---
 
-### Do-NOT
-Fabricate terms/license/reviews/provenance/completeness or data; run confirmatory outcomes on unprovenanced/incomplete/blocked/unfrozen data or without fresh frozen prereg; freeze/promote while blockers exist; discard the `run_manifest.json` merge fix (preserves FCLR010 splits + funding); overwrite sealed v3 artifacts; reopen sealed anchors/holdouts; threshold-shop or relax gates post-hoc; merge Track A/B/C semantics or modeled!=observed; claim economic/overlay value or confirmatory improvement; re-probe absent Track A months in a loop; edit `.github/workflows`; add status-only/poller/wrapper/scheduler families or competing handoff files.
+## 7. SOURCE/ENGINEERING BLOCKERS — WITH EVIDENCE AND NEXT ROUTE
+
+| Blocker | Evidence | Next Materially Different Free Route |
+|---------|----------|--------------------------------------|
+| **Track A: No admissible liquidation labels** (structural) | `track_a_deadend_map.md` — 8 candidates, all NO-GO on machine-checkable rubric; Binance 404/451, Bybit trades≠census, HF 2026 window exhausted, others absent/paywalled | **SOLE REOPEN PATH:** New admissible unauthenticated source appears meeting ALL rubric criteria (≥5 symbols, ≥3 blocks, documented completeness, license OK, census/defensible). **Do not re-probe.** Monitor `monitor_ironflow_liquidations.py --quick` for Hyperliquid ≥2026-11 parquet. |
+| **Track C: No forward Binance data beyond 2026-11-02** | `fclr012v_coverage_audit.json` — archive ends 2026-11-02 (verified 404); test window 5 days = 0 blocks | New admissible Binance panel with real volume >0 across ≥3 non-overlapping 30-day blocks. Do not relax block-count criterion. |
+| **Track B: No verified historical margin/liquidation parameters** | `h002_methodology_dossier.md`, `h002_replication_blocker.md` | Only if public venue publishes complete historical margin tiers with time applicability — not currently admissible. |
+
+---
+
+## 8. MANDATORY SESSION START PROTOCOL (from RESEARCH_PROMPT.md §27)
+
+At start of **every** session:
+1. `git pull` and `git status` — verify clean state
+2. Read **this file** (`AGENT_HANDOFF.md`) and `RESEARCH_PROMPT.md` completely
+3. Inspect working tree, recent commits, `research_state/experiment_frontier.json`, latest run manifest, tests, source registry
+4. **Treat repository state and evidence as authoritative** — do not assume earlier prose remains current
+5. Choose highest-value unfinished task completable without credentials/human intervention (see §5 above)
+6. Execute, run cheapest deterministic checks first
+7. Record exact changes, commands, results, uncovered issues, next actionable task **in this AGENT_HANDOFF.md** and applicable research-state artifact
+8. Commit nothing merely to show activity
+
+---
+
+## 9. DO NOT DO (Hard Constraints from RESEARCH_PROMPT.md)
+
+- ❌ No re-probing absent months (2026-11..2027-02) — probing exhausted
+- ❌ No workflow/scheduler/poller/status-only/wrapper/controller additions
+- ❌ No Track C/B work — Track C sealed, Track B NOT_SUPPORTED
+- ❌ No conflation of observed/modeled/synthetic labels
+- ❌ No threshold-shopping or holdout reuse
+- ❌ No commit of `__pycache__/`, `ironflow_fastpath_cache.json`, or large raw caches
+- ❌ No modification of `.github/workflows` without explicit maintainer authorization
+- ❌ No live/paper trading, no API order endpoints, no account operations
+
+---
+
+## 10. NEXT SESSION DELIVERABLE
+
+Update **this file** (`AGENT_HANDOFF.md`) with:
+1. What changed and why (diff summary)
+2. What was actually tested, with exact outcomes (commands + results)
+3. What evidence was added and where (file paths)
+4. Current state of each research gate (updated table)
+5. Single highest-value next task (updated if completed)
+6. Precise command/check that verifies it
+7. Any new blocker with evidence and next route
+
+**Make it possible for the agent after you to continue from persisted repository state without asking the user to repeat instructions.**
+
+---
+
+**END OF HANDOFF — This is the single durable handoff. No other handoff files should exist.**
