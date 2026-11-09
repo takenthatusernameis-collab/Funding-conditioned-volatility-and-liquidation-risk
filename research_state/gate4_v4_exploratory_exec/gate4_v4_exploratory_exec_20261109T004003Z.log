@@ -1,0 +1,27 @@
+{
+  "verdict": "DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (pre-registered 30-day blocks met; E vs A CI spans 0; no improvement claim)",
+  "split_design": {
+    "resolved": "v3_30d",
+    "source": "explicit_split_design",
+    "arg": "v3_30d"
+  },
+  "include_cache": true,
+  "aggregate": {
+    "A_rv_only": 0.7983190184126631,
+    "B_rv_signed": 12.183624182224962,
+    "C_rv_abs": 0.8459619410133684,
+    "D_rv_signed_abs": 3.4492894624624917,
+    "E_rv_funding_trails": 1.241701795957689
+  },
+  "primary_E_vs_A": {
+    "point": 0.48790231255595967,
+    "ci_low": -0.04216077732537772,
+    "ci_high": 1.1973379300280491,
+    "n_obs": 12969,
+    "n_blocks": 120,
+    "n_reps": 2000,
+    "seed": 12345,
+    "block_hours": 24,
+    "alpha": 0.05
+  }
+}

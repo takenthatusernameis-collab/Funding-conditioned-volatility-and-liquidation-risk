@@ -1,0 +1,415 @@
+{
+  "last_funding_ablations": "2026-11-09T00:40:39Z",
+  "funding_ablations_experiment_id": "GATE4-FUND-VOL-ABLATIONS-MSPLIT-V4-30D-EXPLORATORY-20261109T004003Z",
+  "funding_ablations": {
+    "A_rv_only": {
+      "qlike": 0.7983190184126631,
+      "mae": 0.0010925475062619158,
+      "rmse": 0.0018204745158497855
+    },
+    "B_rv_signed": {
+      "qlike": 12.183624182224962,
+      "mae": 0.0010651273940529746,
+      "rmse": 0.0018516401463693957
+    },
+    "C_rv_abs": {
+      "qlike": 0.8459619410133684,
+      "mae": 0.0010629048565582036,
+      "rmse": 0.0018097508718590374
+    },
+    "D_rv_signed_abs": {
+      "qlike": 3.4492894624624917,
+      "mae": 0.0010503733522264959,
+      "rmse": 0.0018152243676412916
+    },
+    "E_rv_funding_trails": {
+      "qlike": 1.241701795957689,
+      "mae": 0.0011413909374884345,
+      "rmse": 0.0020142809604019557
+    }
+  },
+  "funding_ablations_contrasts_vs_A": {
+    "B_rv_signed": {
+      "point": 11.110522836791604,
+      "ci_low": 0.48052288989834724,
+      "ci_high": 32.31258287470994,
+      "n_obs": 13620,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 12345,
+      "block_hours": 24,
+      "alpha": 0.05
+    },
+    "C_rv_abs": {
+      "point": -0.024710146016296737,
+      "ci_low": -0.37159501419659596,
+      "ci_high": 0.2707987870777838,
+      "n_obs": 13985,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 12345,
+      "block_hours": 24,
+      "alpha": 0.05
+    },
+    "D_rv_signed_abs": {
+      "point": 2.421918112567877,
+      "ci_low": -0.2539600556711275,
+      "ci_high": 7.512202570277498,
+      "n_obs": 13269,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 12345,
+      "block_hours": 24,
+      "alpha": 0.05
+    },
+    "E_rv_funding_trails": {
+      "point": 0.48790231255595967,
+      "ci_low": -0.04216077732537772,
+      "ci_high": 1.1973379300280491,
+      "n_obs": 12969,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 12345,
+      "block_hours": 24,
+      "alpha": 0.05
+    }
+  },
+  "funding_ablations_note": "pilot_multisplit_direct_variance_ols_inconclusive_v4_exploratory_exec_20261109T004003Z",
+  "funding_ablations_splits": [
+    {
+      "id": 0,
+      "train": [
+        "2024-04-01T00:00:00+00:00",
+        "2024-05-07T23:59:59+00:00"
+      ],
+      "test": [
+        "2024-05-15T00:00:00+00:00",
+        "2024-06-13T23:59:59+00:00"
+      ],
+      "purge_days": 7,
+      "embargo_days": 7
+    },
+    {
+      "id": 1,
+      "train": [
+        "2024-04-01T00:00:00+00:00",
+        "2024-06-06T23:59:59+00:00"
+      ],
+      "test": [
+        "2024-06-14T00:00:00+00:00",
+        "2024-07-13T23:59:59+00:00"
+      ],
+      "purge_days": 7,
+      "embargo_days": 7
+    },
+    {
+      "id": 2,
+      "train": [
+        "2024-04-01T00:00:00+00:00",
+        "2024-07-06T23:59:59+00:00"
+      ],
+      "test": [
+        "2024-07-14T00:00:00+00:00",
+        "2024-08-12T23:59:59+00:00"
+      ],
+      "purge_days": 7,
+      "embargo_days": 7
+    },
+    {
+      "id": 3,
+      "train": [
+        "2024-04-01T00:00:00+00:00",
+        "2024-08-05T23:59:59+00:00"
+      ],
+      "test": [
+        "2024-08-13T00:00:00+00:00",
+        "2024-09-11T23:59:59+00:00"
+      ],
+      "purge_days": 7,
+      "embargo_days": 7
+    }
+  ],
+  "funding_ablations_split_design": {
+    "resolved": "v3_30d",
+    "source": "explicit_split_design",
+    "arg": "v3_30d"
+  },
+  "funding_ablations_include_cache": true,
+  "funding_ablations_bootstrap": {
+    "seed": 12345,
+    "reps": 2000,
+    "block_hours": 24,
+    "alpha": 0.05,
+    "joint_across_instruments": true,
+    "resamples_time_blocks": true
+  },
+  "funding_ablations_data_sufficiency": {
+    "instruments": 5,
+    "instruments_required": 5,
+    "ok_splits": 4,
+    "ok_30day_splits": 4,
+    "test_windows": [
+      [
+        "2024-05-15T00:00:00+00:00",
+        "2024-06-13T23:59:59+00:00"
+      ],
+      [
+        "2024-06-14T00:00:00+00:00",
+        "2024-07-13T23:59:59+00:00"
+      ],
+      [
+        "2024-07-14T00:00:00+00:00",
+        "2024-08-12T23:59:59+00:00"
+      ],
+      [
+        "2024-08-13T00:00:00+00:00",
+        "2024-09-11T23:59:59+00:00"
+      ]
+    ],
+    "split_test_days": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "span_note": "local_admissible_cache_data_only",
+    "meets_claim_worthy_data_sufficiency": true,
+    "meets_claim_worthy": true,
+    "shortfalls": []
+  },
+  "funding_ablations_per_split_paired_delta_vs_A": {
+    "B_rv_signed": [
+      {
+        "split_id": 0,
+        "delta_qlike_vs_A": -0.061106742794619445,
+        "n_obs": 3600
+      },
+      {
+        "split_id": 1,
+        "delta_qlike_vs_A": 0.2534944648015296,
+        "n_obs": 3508
+      },
+      {
+        "split_id": 2,
+        "delta_qlike_vs_A": 1.1548593949122556,
+        "n_obs": 3224
+      },
+      {
+        "split_id": 3,
+        "delta_qlike_vs_A": 44.687585170146406,
+        "n_obs": 3288
+      }
+    ],
+    "C_rv_abs": [
+      {
+        "split_id": 0,
+        "delta_qlike_vs_A": 0.17994478420127102,
+        "n_obs": 3600
+      },
+      {
+        "split_id": 1,
+        "delta_qlike_vs_A": 0.4717573751136753,
+        "n_obs": 3534
+      },
+      {
+        "split_id": 2,
+        "delta_qlike_vs_A": -0.1323545464968529,
+        "n_obs": 3272
+      },
+      {
+        "split_id": 3,
+        "delta_qlike_vs_A": -0.622380302508106,
+        "n_obs": 3579
+      }
+    ],
+    "D_rv_signed_abs": [
+      {
+        "split_id": 0,
+        "delta_qlike_vs_A": -0.15012945352330412,
+        "n_obs": 3600
+      },
+      {
+        "split_id": 1,
+        "delta_qlike_vs_A": 0.3434145020268775,
+        "n_obs": 3502
+      },
+      {
+        "split_id": 2,
+        "delta_qlike_vs_A": 0.11962413470115817,
+        "n_obs": 3158
+      },
+      {
+        "split_id": 3,
+        "delta_qlike_vs_A": 10.334492145185333,
+        "n_obs": 3009
+      }
+    ],
+    "E_rv_funding_trails": [
+      {
+        "split_id": 0,
+        "delta_qlike_vs_A": 0.03833219431819898,
+        "n_obs": 3417
+      },
+      {
+        "split_id": 1,
+        "delta_qlike_vs_A": 0.30916469880312913,
+        "n_obs": 3422
+      },
+      {
+        "split_id": 2,
+        "delta_qlike_vs_A": 1.0915632305047063,
+        "n_obs": 3167
+      },
+      {
+        "split_id": 3,
+        "delta_qlike_vs_A": 0.5675604567128726,
+        "n_obs": 2963
+      }
+    ]
+  },
+  "funding_ablations_exploratory_sensitivity_block_hours": {
+    "label": "EXPLORATORY \u2014 not pre-registered primary; do not promote if unstable",
+    "block_hours": {
+      "12": {
+        "B_rv_signed": {
+          "point": 11.110522836791604,
+          "ci_low": 0.5266085816589288,
+          "ci_high": 32.188403734167316,
+          "n_obs": 13620,
+          "n_blocks": 240,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 12,
+          "alpha": 0.05
+        },
+        "C_rv_abs": {
+          "point": -0.024710146016296737,
+          "ci_low": -0.3605794889358921,
+          "ci_high": 0.22571589591221194,
+          "n_obs": 13985,
+          "n_blocks": 240,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 12,
+          "alpha": 0.05
+        },
+        "D_rv_signed_abs": {
+          "point": 2.421918112567877,
+          "ci_low": -0.23556234454215058,
+          "ci_high": 7.487533309366848,
+          "n_obs": 13269,
+          "n_blocks": 240,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 12,
+          "alpha": 0.05
+        },
+        "E_rv_funding_trails": {
+          "point": 0.48790231255595967,
+          "ci_low": -0.060998468201006344,
+          "ci_high": 1.1937063856735863,
+          "n_obs": 12969,
+          "n_blocks": 240,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 12,
+          "alpha": 0.05
+        }
+      },
+      "24": {
+        "B_rv_signed": {
+          "point": 11.110522836791604,
+          "ci_low": 0.48052288989834724,
+          "ci_high": 32.31258287470994,
+          "n_obs": 13620,
+          "n_blocks": 120,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 24,
+          "alpha": 0.05
+        },
+        "C_rv_abs": {
+          "point": -0.024710146016296737,
+          "ci_low": -0.37159501419659596,
+          "ci_high": 0.2707987870777838,
+          "n_obs": 13985,
+          "n_blocks": 120,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 24,
+          "alpha": 0.05
+        },
+        "D_rv_signed_abs": {
+          "point": 2.421918112567877,
+          "ci_low": -0.2539600556711275,
+          "ci_high": 7.512202570277498,
+          "n_obs": 13269,
+          "n_blocks": 120,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 24,
+          "alpha": 0.05
+        },
+        "E_rv_funding_trails": {
+          "point": 0.48790231255595967,
+          "ci_low": -0.04216077732537772,
+          "ci_high": 1.1973379300280491,
+          "n_obs": 12969,
+          "n_blocks": 120,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 24,
+          "alpha": 0.05
+        }
+      },
+      "48": {
+        "B_rv_signed": {
+          "point": 11.110522836791604,
+          "ci_low": 0.40586566533389123,
+          "ci_high": 32.60508040300046,
+          "n_obs": 13620,
+          "n_blocks": 60,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 48,
+          "alpha": 0.05
+        },
+        "C_rv_abs": {
+          "point": -0.024710146016296737,
+          "ci_low": -0.4008861533477015,
+          "ci_high": 0.3360803634981003,
+          "n_obs": 13985,
+          "n_blocks": 60,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 48,
+          "alpha": 0.05
+        },
+        "D_rv_signed_abs": {
+          "point": 2.421918112567877,
+          "ci_low": -0.25466038038354727,
+          "ci_high": 7.504380732871568,
+          "n_obs": 13269,
+          "n_blocks": 60,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 48,
+          "alpha": 0.05
+        },
+        "E_rv_funding_trails": {
+          "point": 0.48790231255595967,
+          "ci_low": -0.057616502333888174,
+          "ci_high": 1.1925841627453069,
+          "n_obs": 12969,
+          "n_blocks": 60,
+          "n_reps": 2000,
+          "seed": 12345,
+          "block_hours": 48,
+          "alpha": 0.05
+        }
+      }
+    }
+  },
+  "funding_ablations_verdict": "DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST (pre-registered 30-day blocks met; E vs A CI spans 0; no improvement claim)",
+  "funding_ablations_pre_registration": "research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json"
+}
