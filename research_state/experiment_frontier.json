@@ -1,207 +1,59 @@
-{
-  "artifact_churn_098": {
-    "alt_cache_churn_tmp_isolated_proof": true,
-    "blocker": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
-    "handoff_single_durable_root": "AGENT_HANDOFF.md",
-    "ironflow_probes": 2,
-    "new_recurring_probe_scan_families": 0,
-    "offline_prereg_before_outcomes_branches": 4,
-    "research_state_mdjson_root": 161,
-    "strict_gate_integrated_in_harness": true,
-    "sweep": "research_state/campaign_sweep_tracka_20261105T131205Z.md",
-    "tests_total": 261
+[
+  {
+    "artifact_churn_note": "Frontier reconciled 2026-11-10T21:00:33Z to single durable handoff; prior file contained concatenated/corrupted JSON and stale TB1 routing.",
+    "blockers": "All admissible local routes exhausted under constraints: Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census); Track C/H1 concluded NOT_SUPPORTED (all claim-worthy local panels exhausted); Track B TB1 degenerate/inadmissible (zero test breaches) and TB2 confirmatory forecast gate NOT_MET (NOT_SUPPORTED, rel Log Loss +1.68% < 2%, CI crosses zero, Holm fails, 2 test blocks <3).",
+    "generated": "2026-11-10T21:00:33Z",
+    "last_checked": "2026-11-10T21:00:33Z",
+    "next_action_heavy": "NONE \u2014 program concluded under constraints pending a new admissible unauthenticated source. Future work requires: (a) a new admissible unauthenticated data source with evidence, (b) a new experiment ID, and (c) a new preregistration frozen BEFORE any outcome computation. Do not poll, threshold-shop, reuse sealed holdouts, relitigate concluded tracks, or produce status-only output.",
+    "next_unfinished_task": "NONE",
+    "program_status": "CONCLUDED_UNDER_CONSTRAINTS",
+    "rank": 0,
+    "resume_triggers": [
+      "New admissible unauthenticated observed-liquidation source appears (Track A) with verifiable provenance/coverage",
+      "New admissible unauthenticated data extends Track B/C to an untested claim-worthy panel passing pre-outcome admissibility+provenance checks",
+      "New admissible unauthenticated source enables an independent Shek (H2) reconstruction not feasible from current local data"
+    ],
+    "status": "CONCLUDED_UNDER_CONSTRAINTS",
+    "task": "NO_FURTHER_LOCAL_WORK_PENDING_NEW_ADMISSIBLE_SOURCE"
   },
-  "artifact_churn_099": {
-    "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
-    "idempotent": true,
-    "ironflow_probes": 2,
-    "new_recurring_probe_scan_families": 0,
-    "probe_files_after_fix": 2,
-    "probe_files_before_fix": 3,
-    "research_state_mdjson_root": 163,
-    "root_cause_fix": "_consolidate_ironflow_probes dedup skipped unlink + churn written after consolidation",
-    "second_pass_removed": 0,
-    "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md",
-    "tests_total": 276
-  },
-  "artifact_churn_100": {
-    "blocker": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
-    "consolidation_regression_guard_tmp_only": true,
-    "drift_invariants_wired_into_resume_check_cli": true,
-    "hardening_tests_added": 16,
-    "ironflow_probes": 2,
-    "new_recurring_probe_scan_families": 0,
-    "research_state_mdjson_root": 161,
-    "resume_check_elapsed_s_lt_5": true,
-    "resume_check_total_checks": 15,
-    "sweep": "research_state/campaign_sweep_tracka_20261105T160711Z.md",
-    "tests_total": 292,
-    "unreferenced_artifacts_consolidated_with_provenance": 4,
-    "wired_checks": [
-      "handoff_single_root",
-      "probe_count_exactly_two",
-      "root_md_json_bounded",
-      "canonical_alt_outputs_only",
-      "no_recurring_timestamped_probe_scan_families",
-      "watch_trigger_harden_invariant",
-      "no_root_trigger_harden_files"
-    ]
-  },
-  "artifact_churn_101": {
-    "blocker": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-    "consolidated_with_provenance": [
-      "ironflow_trend_digest_20261102T220326Z.json",
-      "ironflow_trend_report_20261102T220326Z.json"
-    ],
-    "gate_reason_codes": [
-      "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
-      "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-      "RESUME_READY_AFTER_DRIFT_PASS"
-    ],
-    "ironflow_probe_files": 2,
-    "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
-    "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
-    "research_state_mdjson_root": 163,
-    "sweep": "research_state/campaign_sweep_tracka_20261105T162400Z.md",
-    "tests_total": 303
-  },
-  "artifact_churn_102": {
-    "blocker": "research_state/liquidation_forward_validate_022_blocker_20261105T180046Z.md",
-    "consolidated_with_provenance": [
-      "ironflow_trend_digest_20261102T220326Z.json",
-      "ironflow_trend_report_20261102T220326Z.json"
-    ],
-    "gate_reason_codes": [
-      "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
-      "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-      "RESUME_READY_AFTER_DRIFT_PASS"
-    ],
-    "ironflow_probe_files": 2,
-    "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
-    "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
-    "research_state_mdjson_root": 163,
-    "sweep": "research_state/campaign_sweep_tracka_20261105T180046Z.md",
-    "tests_total": 309
-  },
-  "artifact_churn_103": {
-    "blocker": "research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md",
-    "consolidated_with_provenance": [
-      "ironflow_trend_digest_20261102T220326Z.json",
-      "ironflow_trend_report_20261102T220326Z.json"
-    ],
-    "gate_reason_codes": [
-      "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
-      "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-      "RESUME_READY_AFTER_DRIFT_PASS"
-    ],
-    "ironflow_probe_files": 2,
-    "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
-    "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
-    "research_state_mdjson_root": 163,
-    "sweep": "research_state/campaign_sweep_tracka_20261105T191803Z.md",
-    "tests_total": 309
-  },
-  "blockers": "Structural - no data (2026-10 latest); monitor hardened in 004i",
-  "evidence": "research_state/ironflow_probe_20261105T200406Z.json; tests/test_tracka_hardening_108.py",
-  "generated": "20261104T192914Z",
-  "last_checked": "20261105T231136Z",
-  "next_action_heavy": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-  "notes": "20261105T231136Z: Handoff/frontier refreshed as single durable initial task (FCLR-NEXT-110). NO DATA/TRIGGER unchanged (data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest). 352 tests OK, resume_check 17 PASS, operator exit 0, root 142, probes 2. 110 must fail-close actual harness parquet/outcome data-load path + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED surface + matrix tests. PREREG BEFORE OUTCOMES.",
-  "prerequisite": "monitor_ironflow_liquidations --quick/--verify",
-  "rank": 0.1,
-  "resume_triggers": [
-    "ironflow >=2026-11 parquet appears (events or fills HTTP 200 unauthenticated)",
-    "rubric-GO alternative unauthenticated source passes strict criteria"
-  ],
-  "status": "MONITOR_ONLY",
-  "task": "TRACK_A_LIQUIDATION_RISK_MONITOR: Keep alive until rubric-GO data appears"
-},
-{
-  "acceptance": "run_h003.py H003_EXPERIMENT=FCLR-002 completes < timeout (perf fix: day-indexed mark CSV load); evaluation_summary_h003_FCLR002.md rewritten with n=8274 test rows; test_synthetic_boundary_labels.py 8/8 OK; full suite 1068 OK.",
-  "artifact": "research_state/evaluation_summary_h003_FCLR002.md",
-  "blockers": "None for this cell. Result is null/inconclusive. Does not unblock risk-overlay phase (forecast gate not met for H001).",
-  "completed_utc": "20261109T153543Z",
-  "do_not": "Do not conflate modeled boundary breaches with observed liquidations. Do not promote to confirmatory. Do not threshold-shop.",
-  "gaps": [],
-  "generated": "20261109T153543Z",
-  "id": "FCLR-H003-FCLR-002",
-  "priority": "P0",
-  "rank": 0.001,
-  "resume_triggers": [],
-  "status": "COMPLETE_INCONCLUSIVE",
-  "task": "FCLR-H003 Track B hypothetical boundary-breach forecast on FCLR-002 panel (5 symbols BTC/ETH/BNB/SOL/XRP, 2024-07-23..2024-09-30, 24h horizon, MMR=0.005, lev 3/5/10/20 x long/short separate). Synthetic modeled boundary breach labels (NOT observed liquidations). Out-of-sample B0 vs C2 evaluation completed. Null/inconclusive: no consistent incremental forecast skill over B0 baseline; base rates near zero at lev3/5.",
-  "timestamp_utc": "20261109T153543Z"
-},
-{
-  "acceptance": "evaluation_summary_trackb_TB1_20261110T173838Z.md with gate verdict, CIs, block counts, and explicit degenerate-test-set finding",
-  "artifact": "research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md",
-  "blockers": "Frozen test split 2026-06-26..2026-10-31 has ZERO synthetic boundary breaches across all 5 symbols (leverage=5.0, long, H=24h, m=0.0). Test set inadmissible for confirmatory evaluation with this label definition.",
-  "completed_utc": "20261110T180500Z",
-  "do_not": "Do not conflate modeled boundary breaches with observed liquidations. Do not threshold-shop. Do not reuse this test split for confirmatory claims with 5x/24h long label.",
-  "gaps": ["Test window contains zero positive labels; label definition too conservative for this period"],
-  "generated": "20261110T180500Z",
-  "id": "trackb_TB1_20261110T173838Z",
-  "priority": "P0",
-  "rank": 0.01,
-  "resume_triggers": [],
-  "status": "COMPLETE_NOT_SUPPORTED_DEGENERATE_TEST",
-  "task": "Track B TB1 confirmatory on 2025-01-01..2026-10-31 (5 symbols, 60/20/20 with 7d purge/embargo). Frozen protocol trackb_TB1_20261110T173838Z. Primary target synthetic_boundary_breach_h24_long_5x_m0. Result: test split has zero events -> degenerate classification. Gate NOT_MET. Full-window breach rates: ETH 0.166%, XRP 0.303%, others <0.06%. This window INADMISSIBLE for confirmatory Track B with 5x/24h long label.",
-  "timestamp_utc": "20261110T180500Z"
-},
-  "generated": "2026-11-10T18:05:00Z",
-  "handoff_refreshed_utc": "2026-11-10T18:05:00Z",
-  "last_checked": "2026-11-06T01:54:01Z",
-  "last_checked_utc": "2026-11-10T18:05:00Z",
-  "last_updated": "20261110T180500Z",
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-  "next_action": "Track B: The TB1 window (2025-01-01..2026-10-31) is INADMISSIBLE for confirmatory evaluation with 5x/24h long label (test split has zero events). Remaining local Track B options: (1) Re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks, completeness 1.0) with deep admissibility + gap + funding-schema audit + provenance, then freeze NEW prereg + execute confirmatory; (2) Redesign label (different leverage/horizon/side) and select a test window with observed events, then freeze NEW prereg + execute confirmatory. No network/paid/manual/credentialed data. Track C H1_primary concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
-  "next_action_heavy": "Track B: The TB1 window (2025-01-01..2026-10-31) is INADMISSIBLE for confirmatory evaluation with 5x/24h long label (test split has zero events). Remaining local Track B options: (1) Re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks, completeness 1.0) with deep admissibility + gap + funding-schema audit + provenance, then freeze NEW prereg + execute confirmatory; (2) Redesign label (different leverage/horizon/side) and select a test window with observed events, then freeze NEW prereg + execute confirmatory. No network/paid/manual/credentialed data. Track C H1_primary concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
-  "next_unfinished_task": "NONE — program concluded under constraints pending a new admissible unauthenticated source. Evidence: Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census); Track C/H1 concluded NOT_SUPPORTED across all claim-worthy local panels; Track B TB2 confirmatory executed on frozen prereg trackb_TB2_20261110T190405Z and returned FORECAST_GATE_NOT_MET (rel Log Loss +1.68% < 2% materiality floor, 95% CI [-0.010997,0.003094] crosses zero, Holm FAILS p=0.488, 2 test blocks < 3 required); Track B TB1 degenerate/inadmissible (zero test breaches). No admissible uninspected local route remains; no threshold shopping or sealed-holdout reuse permitted. Overlay INELIGIBLE.",
-  "program_status": "CONCLUDED_UNDER_CONSTRAINTS",
-  "overlay_eligible": false,
-  "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "registry_version": "1.3",
-  "single_durable_handoff": "NEXT_SESSION_TASK.md",
-  "summary": "Track C/H1 concluded NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014); overlay INELIGIBLE. Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). Track B PARTIALLY TESTED: TRACKB-20251110T154307Z (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED (1.50% < 2%, CI crosses zero). TB1 (2025-01-01..2026-10-31) EXECUTED BUT DEGENERATE: frozen test split has ZERO synthetic boundary breaches (5x/24h long) -> confirmatory evaluation impossible. Full-window breach rates: ETH 0.166%, XRP 0.303%, others <0.06%. Remaining local Track B routes: (1) 2024-01-01..2024-09-30 panel (~9 blocks) requires deep re-audit before confirmatory; (2) label redesign with window having events. No network/paid/manual data. M5 repeat required on admissible route.",
-  "timestamp": "20261106T015401Z",
-  "track_a_blocked": true,
-  "track_a_blocker_latest": "research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md",
-  "track_b": {
-    "completed_windows": [
-      {
-        "experiment_id": "TRACKB-20251110T154307Z",
-        "gate": "NOT_MET",
-        "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005,0.035] crosses zero.",
-        "verdict": "NOT_SUPPORTED"
-      },
-      {
-        "experiment_id": "trackb_TB1_20261110T173838Z",
-        "gate": "NOT_MET",
-        "note": "Test split (2026-06-26..2026-10-31) has ZERO synthetic breaches across all 5 symbols (leverage=5.0, long, H=24h). Degenerate test set; confirmatory evaluation impossible. Full-window rates: ETH 0.166%, XRP 0.303%.",
-        "verdict": "NOT_SUPPORTED_DEGENERATE_TEST"
-      },
-      {
-        "experiment_id": "trackb_TB2_20261110T190405Z",
-        "gate": "NOT_MET",
-        "verdict": "NOT_SUPPORTED",
-        "note": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, h168_long_10x_m0 modeled proxy). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction (<2% materiality floor, NOT_MET). Block bootstrap 2000 reps/30-day blocks seed 20261110: Log Loss 95% CI [-0.010997,0.003094] crosses zero, p=0.488; Holm FAILS. Only 2 non-overlapping 30-day test blocks (<3, NOT_MET). Overall gate NOT_MET. Modeled proxy only, not observed liquidations. Overlay INELIGIBLE.",
-        "artifact": "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md",
-        "timestamp_utc": "2026-11-10T20:00:21Z"
-      }
-    ],
-    "fallback_window_candidate": {
-      "period": "2024-01-01..2024-09-30",
-      "status": "REQUIRES_DEEP_REAUDIT_BEFORE_CONFIRMATORY"
+  {
+    "track_a": {
+      "status": "STRUCTURALLY_BLOCKED",
+      "note": "No admissible unauthenticated observed-liquidation census available locally; not locally repairable. Modeled Track B breaches are not observed liquidations."
     },
-    "next_window_candidate": {
-      "admissibility_artifact": "research_state/trackb_TB1_admissibility.json",
-      "candidate_id": "TB1",
-      "estimated_non_overlapping_30d_blocks": 22,
-      "period": "2025-01-01..2026-10-31",
-      "prereg_required_before_outcomes": true,
-      "status": "EXECUTED_DEGENERATE_TEST_SET_INADMISSIBLE_FOR_THIS_LABEL"
+    "track_b": {
+      "status": "CONFIRMATORY_COMPLETE_TB2_GATE_NOT_MET_ALL_ADMISSIBLE_ROUTES_EXHAUSTED",
+      "completed_windows": [
+        {
+          "experiment_id": "TRACKB-20251110T154307Z",
+          "gate": "NOT_MET",
+          "verdict": "NOT_SUPPORTED",
+          "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI crosses zero."
+        },
+        {
+          "experiment_id": "trackb_TB1_20261110T173838Z",
+          "gate": "NOT_MET",
+          "verdict": "NOT_SUPPORTED_DEGENERATE_TEST_SET_INADMISSIBLE",
+          "note": "Frozen test split 2026-06-26..2026-10-31 had zero synthetic breaches (long 5x H=24h) across all 5 symbols; confirmatory evaluation impossible."
+        },
+        {
+          "experiment_id": "trackb_TB2_20261110T190405Z",
+          "gate": "NOT_MET",
+          "verdict": "NOT_SUPPORTED",
+          "artifact": "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md",
+          "timestamp_utc": "2026-11-10T20:00:21Z",
+          "note": "Event-adequate confirmatory on 2024-01-01..2024-09-30 (5 symbols, h168_long_10x_m0). Test positives 619/5040 (12.3%). Pooled Log Loss B1=0.292447->C2=0.287540 (+1.68% < 2% floor). 95% CI [-0.010997,0.003094] crosses zero, Holm fails, 2 test blocks <3. Overlay INELIGIBLE. Modeled proxy only."
+        }
+      ]
     },
-    "status": "CONFIRMATORY_COMPLETE_TB2_GATE_NOT_MET_ALL_ADMISSIBLE_ROUTES_EXHAUSTED"
-  },
-  "updated_at": "2026-11-10T18:05:00Z"
-}
+    "track_c_h1": {
+      "status": "CONCLUDED_NOT_SUPPORTED",
+      "note": "All claim-worthy local panels exhausted (FCLR-003/008/009/012-V/013/014). Overlay INELIGIBLE."
+    },
+    "canonical_verification": [
+      "python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v",
+      "python -c \"from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])\""
+    ],
+    "updated_at": "2026-11-10T21:00:33Z"
+  }
+]
