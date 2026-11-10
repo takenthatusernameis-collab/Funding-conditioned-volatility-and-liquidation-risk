@@ -15,108 +15,33 @@ Produce a reproducible, honest out-of-sample forecast test of whether funding ex
 
 ## MILESTONES (execute in order; do not skip)
 
-### M1 — Provenance & data admissibility lock (REQUIRED, unblocked)
+> **Status sync (2026-11-10T11:20:05Z):** Track C / H001 milestones M1–M4 **COMPLETE** (FCLR-014 frozen, executed, gate NOT_MET, overlay INELIGIBLE; Track C concluded under constraints). **M5/M6 now point to Track B heavy-work campaign** (repo-name liquidation leg) — untested, executable on verified local data with no network.
 
-**Goal:** Confirm all local data for the chosen confirmatory window has machine-verifiable sha256 provenance and passes funding schema audit.
+### M1 — Provenance & data admissibility lock — **COMPLETE (Track C / FCLR-014)**
+Provenance machine-verified (`provenance_verified=true`, `unmapped_count=0`, 36001 manifest records), funding schema/coverage OK for 2025 H1 and full 2025 panels, no required series gaps. Evidence: `research_state/trackc_deep_audit_2025_h1_check.json`, `research_state/trackc_deep_audit_2025_full_check.json`, `research_state/funding_schema_audit_2025_h1.json`.
 
-**Tasks:**
-1. Verify `scripts/repair_local_provenance.py` output: 36001 `.sha256` sidecars present, `manifest_extended.json` + `manifest_extract.json` are real JSON with 36001 records combined.
-2. Run `trackc_provenance_lineage.py` on every funding CSV + kline zip in the chosen window → `provenance_verified=true`, `unmapped_count=0`.
-3. Run `trackc_funding_schema_audit.py` for all 5 symbols × all months in the window → `all_ok=true`, `missing=0`, `schema_bad=0`.
-4. Run `trackc_gap_repair_manifest.py` → document any series gaps; confirm `any_required_series_gaps=false`.
+### M2 — Freeze protocol + prereg-before-outcomes — **COMPLETE (Track C / FCLR-014)**
+`research_state/research_protocol_fclr014.md` v2.0 FROZEN_BEFORE_OUTCOMES; `prereg_hash=8563163c62524605cbf7f11603759aee2210d133f82c3742319a6dd85dfca597`; `split_boundaries_fclr014.frozen_before_outcomes=true` in `run_manifest.json`; no outcome inspection before freeze.
 
-**Acceptance:** `provenance_verified=true` for all files in window; funding schema OK for all symbol-months; no required series gaps. Evidence written to `research_state/`.
+### M3 — Execute confirmatory Track C / H001 run — **COMPLETE (FCLR-014)**
+`FCLR_EXPERIMENT=FCLR-014 python scripts/run_evaluation.py` (2026-11-10T10:38:27Z). Results recorded in `research_state/evaluation_summary_FCLR-014.md`; registries updated.
 
-**Command:**
-```bash
-python scripts/trackc_funding_schema_audit.py --repo-root . --cache research_state/data_cache --symbols BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT --months <WINDOW_MONTHS> --out research_state/funding_schema_audit_<WINDOW>.json
-python scripts/trackc_panel_deep_audit_orchestrator.py --cache research_state/data_cache --repo-root . --symbols BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT --window-hint <WINDOW> --min-symbols 5 --min-blocks 3 --out research_state/trackc_deep_audit_<WINDOW>_check.json
-```
+### M4 — Gate verdict & overlay eligibility — **COMPLETE (FCLR-014)**
+C2 vs B1 rel QLIKE reduction **1.14%** (<2% floor), 95% CI **[-0.016361, 0.007728]** crosses zero, test window **17 days / 0 non-overlapping 30-day blocks** (<3). **Forecast gate: NOT_MET. Overlay: NOT ELIGIBLE.** H1_primary **NOT_SUPPORTED** across all claim-worthy local Track C panels.
 
----
+### M5 — Track B liquidation campaign (REQUIRED, next heavy work — local data only)
+**Goal:** Deliver a substantive, verifiable Track B result (modeled liquidation boundary breaches), UNTESTED and executable without network/new data.
 
-### M2 — Freeze protocol v2 + prereg-before-outcomes (REQUIRED)
+**Tasks (in order):**
+1. **Admissibility lock:** select verified local window with >=5 instruments and >=3 non-overlapping 30-day test blocks (distinct from sealed/reused windows). Prove `provenance_verified=true`, `unmapped_count=0`, schema/coverage OK, no required series gaps; record evidence in `research_state/`.
+2. **Preregister before outcomes:** define modeled breach target + leverage/margin assumptions (Track B only, NOT observed liquidations), predictors, 60/20/20 splits + 7-day purge/embargo, metrics/gates/multiplicity. Write `research_state/research_protocol_trackb_<ID>.md`; record `prereg_hash` and `frozen_before_outcomes=true` in `run_manifest.json`. **No outcome inspection before freeze.**
+3. **Execute confirmatory run:** produce `research_state/evaluation_summary_trackb_<ID>.md` with point estimate, 95% CI (block bootstrap), relative change, n_instruments, n_blocks, n_obs.
+4. **Verdict:** apply forecast gate; update `hypothesis_registry.json`, `experiment_frontier.json`, `negative_results_report.md`; state overlay eligibility (NOT ELIGIBLE unless all gate conditions pass). Track A remains STRUCTURALLY_BLOCKED; do not conflate tracks.
 
-**Goal:** Register a new protocol version (new ID, e.g. FCLR-014-v2) with frozen splits, features, models, metrics, gates, BEFORE any outcome inspection.
-
-**Tasks:**
-1. Select a local window with >=3 non-overlapping 30-day test blocks and >=5 instruments (candidate: 2024-10-02..2024-12-31 = 91 days = 3 blocks, used by FCLR-003; or 2025-01-01..2025-12-31 used by FCLR-009).
-2. Write `research_state/research_protocol_fclr014_v2.md` (or next available ID): unit, timing, universe, primary outcome (next-24h RV), predictors (B0/B1/C1/C2), splits (60/20/20 chronological, 7-day purge/embargo), metrics (QLIKE primary, block bootstrap 2000 reps), materiality floor (>=2% relative QLIKE reduction), multiplicity rule (Holm).
-3. Freeze splits via `scripts/freeze_fclr009_splits.py` pattern → record `split_boundaries_<id>` in `run_manifest.json` with `frozen_before_outcomes=true`.
-4. Record `prereg_hash` (sha256 of the prereg file) in the experiment registry.
-
-**Acceptance:** Protocol file exists with `frozen_before_outcomes=true`; split boundaries recorded in run_manifest before outcomes; prereg_hash recorded; NO outcome has been inspected for this window.
-
-**Non-negotiable:** If any outcome for this window was already inspected, choose a different window or register a new pilot ID. Do not reuse sealed holdouts.
-
----
-
-### M3 — Execute confirmatory Track C / H001 run (REQUIRED)
-
-**Goal:** Run the frozen C2 vs B1 contrast (and C1 vs B1, C2 vs C1 secondary) on the M2-frozen panel.
-
-**Tasks:**
-1. Execute `scripts/run_evaluation.py` with `FCLR_EXPERIMENT=<ID>` on the frozen panel.
-2. Record results: point estimate, 95% CI (block bootstrap), relative QLIKE reduction, n_instruments, n_blocks, n_obs.
-3. Write `research_state/evaluation_summary_<ID>.md` with full metrics and uncertainty.
-4. Update `research_state/hypothesis_registry.json` H1_primary status: NOT_SUPPORTED / INCONCLUSIVE / (gate pass only if all criteria met).
-5. Update `research_state/experiment_frontier.json` with terminal status for this cell.
-
-**Acceptance:** Run completes deterministically; summary written; registry updated; no threshold shopping; no holdout reuse.
-
-**Command:**
-```bash
-FCLR_EXPERIMENT=<ID> python scripts/run_evaluation.py
-# then verify summary file and registry
-```
-
----
-
-### M4 — Gate verdict & overlay eligibility (REQUIRED)
-
-**Goal:** Apply the forecast gate (research_protocol.md §9) and decide overlay eligibility.
-
-**Gate conditions (ALL must pass):**
-1. Meaningful OOS improvement over RV-only baseline on primary target (>=2% relative QLIKE reduction).
-2. Uncertainty supports improvement (CI supports direction) after multiplicity treatment.
-3. Acceptable calibration (if event probabilities).
-4. Evidence across multiple time blocks and >1 instrument.
-5. No unresolved leakage/source/label/timestamp defect.
-6. Practical relevance for decision horizon.
-
-**Tasks:**
-1. Check each gate condition against M3 results.
-2. Record verdict: FORECAST_GATE_PASSED or NOT_SUPPORTED / INCONCLUSIVE.
-3. Overlay eligibility: OVERLAY_ELIGIBLE only if gate passed; otherwise NOT ELIGIBLE.
-4. Write verdict to `research_state/negative_results_report.md` (if null) and update `AGENT_HANDOFF.md`.
-
-**Acceptance:** Explicit gate verdict recorded; overlay eligibility stated; no promotion without all 6 conditions.
-
----
-
-### M5 — Track A / Track B status confirmation (CONDITIONAL)
-
-**Goal:** Confirm liquidation tracks remain blocked/untested; do not conflate with Track C.
-
-**Tasks:**
-1. Verify Track A: no admissible unauthenticated historical liquidation source (already STRUCTURALLY_BLOCKED per `research_state/liquidation_sources_enumeration.md`).
-2. Verify Track B: no margin/leverage scenario registered before outcome inspection (UNTESTED — do not report as null).
-3. Document that Track C results are volatility/stress only, NOT observed-liquidation validation.
-
-**Acceptance:** Track A = STRUCTURALLY_BLOCKED (evidence cited); Track B = UNTESTED (scenario not registered); Track C results never described as liquidation validation.
-
----
+**Acceptance:** Prereg frozen before outcomes, deterministic run/evidence recorded, gate verdict explicit, registries/handoff updated.
 
 ### M6 — Handoff update & next-session task (REQUIRED, every session)
-
-**Goal:** Leave a clear, timestamped initial task message for the next agentic session.
-
-**Tasks:**
-1. Update `AGENT_HANDOFF.md`: what changed, what was tested with exact outcomes, evidence added, gate states, single highest-value next task, verification command, blockers.
-2. If M3/M4 complete, set `next_unfinished_task` to the next materially different route (e.g. new panel, new protocol version) or "NO CONFIRMATORY TASK — program concluded under constraints" if all local panels exhausted.
-3. Commit code + manifests + reports (not raw data/caches).
-
-**Acceptance:** AGENT_HANDOFF.md has a dated, actionable initial task message; next session can continue without user intervention.
+Update `AGENT_HANDOFF.md` and `NEXT_SESSION_TASK.md` with timestamped initial task, exact outcomes/evidence, gate states, blockers, and single highest-value next task/verification commands. If Track B yields no gate pass and no materially different local route remains, set `next_unfinished_task: NONE — program concluded under constraints` (pending new admissible unauthenticated source). Commit code + manifests + reports (not raw data/caches).
 
 ---
 
