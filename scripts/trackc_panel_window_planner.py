@@ -157,6 +157,8 @@ def rank_candidates(by_month_audits, symbols, min_symbols, min_blocks):
         all_funding_ok = True
         blockers = set()
         sym_rows = {}
+        n_sym_months = 0
+        n_complete_sym_months = 0
         for sym in symbols:
             rows = [by_month_audits[m][sym] for m in seq]
             # fast estimate: min series day dirs across required series, summed
@@ -164,6 +166,8 @@ def rank_candidates(by_month_audits, symbols, min_symbols, min_blocks):
             series_ok = all(r["required_series_complete_fast"] for r in rows)
             funding_ok = all(r["funding_month_file_present_locally"] for r in rows)
             total_days_min = day_est if total_days_min is None else min(total_days_min, day_est)
+            n_sym_months += len(rows)
+            n_complete_sym_months += sum(1 for r in rows if r["required_series_complete_fast"] and r["funding_month_file_present_locally"])
             if not series_ok:
                 all_series_ok = False
                 blockers.add("REQUIRED_SERIES_GAPS_IN_SEQUENCE")
@@ -179,21 +183,29 @@ def rank_candidates(by_month_audits, symbols, min_symbols, min_blocks):
         blockers.update(["PROVENANCE_NOT_MACHINE_VERIFIED", "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES", "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"])
         meets_structure = len(symbols) >= min_symbols and blocks_est >= min_blocks
         meets_local_data = meets_structure and all_series_ok and all_funding_ok
+        completeness_ratio = (n_complete_sym_months / n_sym_months) if n_sym_months else 0.0
         candidates.append({
             "months": seq, "month_count": len(seq), "symbols": symbols,
             "min_symbol_estimated_days_sum_fast": total_days_min or 0,
             "estimated_non_overlapping_30d_blocks_fast": blocks_est,
             "all_required_series_complete_fast": all_series_ok,
             "all_funding_month_ok": all_funding_ok,
+            "symbol_months_total_fast": n_sym_months,
+            "symbol_months_complete_fast": n_complete_sym_months,
+            "completeness_ratio_fast": round(completeness_ratio, 6),
             "meets_structural_thresholds_estimate_fast": meets_structure,
             "meets_local_data_signals_fast": meets_local_data,
             "confirmatory_resume_ready": False,
             "blockers": sorted(blockers),
             "per_symbol_summary": sym_rows,
         })
+    # Rank: completeness-first. A larger window that is incomplete must NOT outrank
+    # a smaller window that is complete; previously the tiebreak on raw block count
+    # promoted the biggest incomplete window to rank 1.
     candidates.sort(key=lambda c: (
         0 if c["meets_local_data_signals_fast"] else 1,
         0 if c["meets_structural_thresholds_estimate_fast"] else 1,
+        -c["completeness_ratio_fast"],
         -c["estimated_non_overlapping_30d_blocks_fast"],
         -c["min_symbol_estimated_days_sum_fast"],
         -c["month_count"], c["months"][0]))
@@ -237,6 +249,9 @@ def main():
         "summary": {
             "any_meets_local_data_signals_fast": any(c["meets_local_data_signals_fast"] for c in candidates),
             "best_candidate": candidates[0] if candidates else None,
+            "best_complete_candidate": next((c for c in candidates if c["meets_local_data_signals_fast"]), None),
+            "best_complete_candidate_months": (next((c for c in candidates if c["meets_local_data_signals_fast"]), None) or {}).get("months"),
+            "best_complete_candidate_blocks_estimate_fast": (next((c for c in candidates if c["meets_local_data_signals_fast"]), None) or {}).get("estimated_non_overlapping_30d_blocks_fast"),
             "confirmatory_resume_ready": False, "provenance_verified": False,
             "network_used": False, "outcomes_computed": False,
         },
