@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-10T19:04:05Z
+**Timestamp (UTC):** 2026-11-10T19:40:11Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — **execute immediately**.
 **Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded.
@@ -19,7 +19,9 @@
 - No polling/status-only work; no relitigation of concluded tracks.
 
 ## `next_unfinished_task` (singular)
-Execute Track B TB2 confirmatory evaluation on frozen panel 2024-01-01..2024-09-30 per `NEXT_SESSION_TASK.md`: run `scripts/run_trackb_evaluation.py` + `scripts/synthetic_boundary_labels.py` adapted to TB2 ID/window/label on the frozen splits (NO post-freeze tuning), write `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md` (point estimate, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, Holm, gate verdict, synthetic-proxy caveat), then propagate verdict to `hypothesis_registry.json`, `experiment_frontier.json`, `negative_results_report.md`, `AGENT_HANDOFF.md`, `NEXT_SESSION_TASK.md`; state overlay eligibility (NOT ELIGIBLE unless gate passes); set singular next task. Fallback only if 2024Q1-Q3 proven inadmissible with evidence (pivot to next locally admissible uninspected route, new ID/prereg).
+Execute Track B TB2 confirmatory evaluation on frozen panel 2024-01-01..2024-09-30 per `NEXT_SESSION_TASK.md`: run `scripts/run_trackb_evaluation.py` + `scripts/synthetic_boundary_labels.py` adapted to TB2 ID/window/label on the frozen splits (NO post-freeze tuning), write `research_state/evaluation_summary_trackb_TB2_20261110T190405.md` (point estimate, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, Holm, gate verdict, synthetic-proxy caveat), then propagate verdict to `hypothesis_registry.json`, `experiment_frontier.json`, `negative_results_report.md`, `AGENT_HANDOFF.md`, `NEXT_SESSION_TASK.md`; state overlay eligibility (NOT ELIGIBLE unless gate passes); set singular next task. Fallback only if 2024Q1-Q3 proven inadmissible with evidence (pivot to next locally admissible uninspected route, new ID/prereg).
 
 ## Constraints (NON-NEGOTIABLE)
 No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxies, never observed liquidations); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits. Heavy, verifiable progress only.
+
+(End of file - total 25 lines)
