@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: Track C / H001 first, then liquidation)
 
-**Updated:** 2026-11-10T11:20:05Z — **P0 ACTIVE (Track B).** Repo `Funding-conditioned-volatility-and-liquidation-risk` — Track C / H001 (funding-conditioned volatility) **CONCLUDED UNDER CONSTRAINTS** (all claim-worthy local panels tested, gate NOT_MET, `next_unfinished_task: NONE` pending new admissible source). Next mandatory heavy work is **Track B: modeled liquidation boundary-breach campaign** on verified local data (no network/new data required). Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
+**Updated:** 2026-11-10T11:22:49Z — **P0 ACTIVE (Track B).** Repo `Funding-conditioned-volatility-and-liquidation-risk` — Track C / H001 (funding-conditioned volatility) **CONCLUDED UNDER CONSTRAINTS** (all claim-worthy local panels tested, gate NOT_MET, `next_unfinished_task: NONE` pending new admissible source). Next mandatory heavy work is **Track B: modeled liquidation boundary-breach campaign** on verified local data (no network/new data required). Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:20:05Z
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:22:49Z
 
 **PRIMARY FOCUS (repo-name priority): Track C / H001 — funding-conditioned volatility forecast vs RV-only baseline.**
 Status: **CONCLUDED UNDER CONSTRAINTS** (exit criteria 2). Forecast gate NOT_MET on every claim-worthy local panel (FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014). `next_unfinished_task: NONE` for Track C pending a materially different, local/unauthenticated, verifiable data route.

@@ -1,5 +1,5 @@
 # NEXT_SESSION_TASK.md
-**Timestamp:** 2026-11-10T11:20:05Z
+**Timestamp:** 2026-11-10T11:22:49Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Status:** Track C / H001 concluded under constraints (exit criteria 2, forecast gate NOT_MET, `next_unfinished_task: NONE` pending new admissible unauthenticated source). **Next mandatory heavy work: Track B modeled liquidation boundary-breach campaign (UNTESTED, executable on verified local data only).**
 
