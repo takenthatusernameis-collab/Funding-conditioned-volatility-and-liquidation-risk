@@ -1,0 +1,1629 @@
+{
+  "blockers_global": [
+    "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+    "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS"
+  ],
+  "cache": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache",
+  "candidate": {
+    "all_funding_schema_ok": true,
+    "all_required_series_complete": true,
+    "any_funding_month_missing": false,
+    "blockers": [
+      "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+      "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS"
+    ],
+    "confirmatory_resume_ready": false,
+    "contiguous": true,
+    "min_complete_symbol_days": 274,
+    "month_count": 9,
+    "months": [
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09"
+    ],
+    "panel_non_overlapping_30d_blocks_estimate": 9,
+    "per_symbol": {
+      "BNBUSDT": {
+        "blockers": [],
+        "confirmatory_ready_symbol": false,
+        "days": 274,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 822,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 822,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 822,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-01": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/BNBUSDT-fundingRate-2024-01/BNBUSDT-fundingRate-2024-01.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "6c1143a88d67bbc56dcddfba49adcb1ffac5e8a54c06db442b11c6993855aac6"
+            ]
+          },
+          "2024-02": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/BNBUSDT-fundingRate-2024-02/BNBUSDT-fundingRate-2024-02.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "4cbad468d74c3d6efdafccbe7c989fd044fabd42ab2b5860f3f296591d59a82d"
+            ]
+          },
+          "2024-03": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/BNBUSDT-fundingRate-2024-03/BNBUSDT-fundingRate-2024-03.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "042ea1e2174eb97f47dd650d87f8f2b8d11c8e9b1287a2d4a0b287989942e227"
+            ]
+          },
+          "2024-04": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_04/BNBUSDT-fundingRate-2024-04/BNBUSDT-fundingRate-2024-04.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "4fe38a885df53a42da20684653049f1ebc3c8fe26436f8661d65f5b7af2fcafa"
+            ]
+          },
+          "2024-05": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_05/BNBUSDT-fundingRate-2024-05/BNBUSDT-fundingRate-2024-05.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "e59d3d2fd094d7b361493930eab8edb71e1f561e0f40a161fe5e23b0583c2778"
+            ]
+          },
+          "2024-06": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_06/BNBUSDT-fundingRate-2024-06/BNBUSDT-fundingRate-2024-06.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "35a44362d0735b607f98041a98605211a2bbb3f5f97bc8212c04b03bc83a4984"
+            ]
+          },
+          "2024-07": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_07/BNBUSDT-fundingRate-2024-07/BNBUSDT-fundingRate-2024-07.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "721fc4e4c327db63eeec6da7f48ec87f2fbf5e8e521a600219193696074c5842"
+            ]
+          },
+          "2024-08": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_08/BNBUSDT-fundingRate-2024-08/BNBUSDT-fundingRate-2024-08.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "c24baf18ac3eaf831a3cc05b05bbcdc234ccea4a8ef7f952d8ae615f3a19f633"
+            ]
+          },
+          "2024-09": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_09/BNBUSDT-fundingRate-2024-09/BNBUSDT-fundingRate-2024-09.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "6b99daf2c5923b73306d1545e9dcc6d91604d0f332a6b98d20bf6b87ab6682f8"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "non_overlapping_30d_blocks": 9,
+        "provenance": {
+          "checked_with_hash_source": 1385,
+          "files_considered": 1385,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 36001
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {
+            "adjacent_sidecar": 1385
+          },
+          "provenance_verified": true,
+          "unmapped_count": 0,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 1385,
+          "verified_samples": [
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-01/BNBUSDT-1h-2024-01-01.csv",
+              "sha256_prefix": "554c73acf7c7cfef",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-02/BNBUSDT-1h-2024-01-02.csv",
+              "sha256_prefix": "260bb0b3284c5b29",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-03/BNBUSDT-1h-2024-01-03.csv",
+              "sha256_prefix": "7f58abcd68ab6e29",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-04/BNBUSDT-1h-2024-01-04.csv",
+              "sha256_prefix": "14b5463077c432ec",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-05/BNBUSDT-1h-2024-01-05.csv",
+              "sha256_prefix": "dd7f5a950fb85e06",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-06/BNBUSDT-1h-2024-01-06.csv",
+              "sha256_prefix": "1ce8ebeb54467de2",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-07/BNBUSDT-1h-2024-01-07.csv",
+              "sha256_prefix": "442d0e46e096d224",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-08/BNBUSDT-1h-2024-01-08.csv",
+              "sha256_prefix": "6cbc27f6cb53c10e",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-09/BNBUSDT-1h-2024-01-09.csv",
+              "sha256_prefix": "fa2de61084800974",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_01/indexPriceKlines-2024-01-10/BNBUSDT-1h-2024-01-10.csv",
+              "sha256_prefix": "5532ef0a9c9607b5",
+              "source": "adjacent_sidecar"
+            }
+          ]
+        },
+        "provenance_checked": 1385,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 36001
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 1385,
+        "provenance_source": "adjacent_sidecar",
+        "provenance_source_counts": {
+          "adjacent_sidecar": 1385
+        },
+        "provenance_unmapped": 0,
+        "provenance_verified": true,
+        "range": [
+          "2024-01-01",
+          "2024-09-30"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 274,
+          "markPriceKlines": 274,
+          "premiumIndexKlines": 274
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          }
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [],
+        "confirmatory_ready_symbol": false,
+        "days": 274,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 1194,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 822,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 822,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-01": {
+            "adjacent_sha256_sidecar_present": [
+              false,
+              false,
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/BTCUSDT-fundingRate-2024-01/BTCUSDT-fundingRate-2024-01.csv",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/data/raw/BTCUSDT-fundingRate-2024-01.csv",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/btcusdt/fundingRate-2024-01/BTCUSDT-fundingRate-2024-01.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "232a13d92487efef8ce0d645301abe611f56eacb70023194b97c038d7a8a2c9b",
+              "232a13d92487efef8ce0d645301abe611f56eacb70023194b97c038d7a8a2c9b",
+              "232a13d92487efef8ce0d645301abe611f56eacb70023194b97c038d7a8a2c9b"
+            ]
+          },
+          "2024-02": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/BTCUSDT-fundingRate-2024-02/BTCUSDT-fundingRate-2024-02.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "e08c820f50196e3904917bbc90f785e5c49df0717e258d8b62e8926ad6328719"
+            ]
+          },
+          "2024-03": {
+            "adjacent_sha256_sidecar_present": [
+              false,
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/BTCUSDT-fundingRate-2024-03/BTCUSDT-fundingRate-2024-03.csv",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/data/raw/btc_funding/BTCUSDT-fundingRate-2024-03.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "1ac0fa4862ab12c59a4daefa330e0b0e23374feb86c5ca9a2733cd1fa1fe1c48",
+              "1ac0fa4862ab12c59a4daefa330e0b0e23374feb86c5ca9a2733cd1fa1fe1c48"
+            ]
+          },
+          "2024-04": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_04/BTCUSDT-fundingRate-2024-04/BTCUSDT-fundingRate-2024-04.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "a7dfc9321f2122d3d9a12cebfc82d9143999cc9153eee69fe159564f35bb3484"
+            ]
+          },
+          "2024-05": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_05/BTCUSDT-fundingRate-2024-05/BTCUSDT-fundingRate-2024-05.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "a34fabae463dec2ecc27f818d6d5b4dbc25219c91ffaddd977efe9059006e10c"
+            ]
+          },
+          "2024-06": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_06/BTCUSDT-fundingRate-2024-06/BTCUSDT-fundingRate-2024-06.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "7c470eeee3147e084d6f1fb2daa77b1fd81a3b3dc9c4cb803473e9eca7cacb91"
+            ]
+          },
+          "2024-07": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_07/BTCUSDT-fundingRate-2024-07/BTCUSDT-fundingRate-2024-07.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "60d8e545d10334fec77b28b698b694f5c2b968a1b37e68d0a909c5dd0417a138"
+            ]
+          },
+          "2024-08": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_08/BTCUSDT-fundingRate-2024-08/BTCUSDT-fundingRate-2024-08.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "5031f1d1dde94295b621afcd52b5c4bd5c93cebaadcc0a984c9c0ed0f1324367"
+            ]
+          },
+          "2024-09": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_09/BTCUSDT-fundingRate-2024-09/BTCUSDT-fundingRate-2024-09.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "5ba49e01519e554a26aa68bf57e94d745b504de738ff522cdd0781542efc626f"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "non_overlapping_30d_blocks": 9,
+        "provenance": {
+          "checked_with_hash_source": 1386,
+          "files_considered": 1386,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 36001
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {
+            "adjacent_sidecar": 1386
+          },
+          "provenance_verified": true,
+          "unmapped_count": 0,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 1386,
+          "verified_samples": [
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-01/BTCUSDT-1h-2024-01-01.csv",
+              "sha256_prefix": "eff69879f8d18eb4",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-02/BTCUSDT-1h-2024-01-02.csv",
+              "sha256_prefix": "a952918e0f8163f1",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-03/BTCUSDT-1h-2024-01-03.csv",
+              "sha256_prefix": "75745277274a8675",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-04/BTCUSDT-1h-2024-01-04.csv",
+              "sha256_prefix": "70b0c1133bb1eb3b",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-05/BTCUSDT-1h-2024-01-05.csv",
+              "sha256_prefix": "2dd80349dfe7949a",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-06/BTCUSDT-1h-2024-01-06.csv",
+              "sha256_prefix": "6e0ed7d891d36b95",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-07/BTCUSDT-1h-2024-01-07.csv",
+              "sha256_prefix": "d0d95b7df1714b3e",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-08/BTCUSDT-1h-2024-01-08.csv",
+              "sha256_prefix": "c82d78126c93021e",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-09/BTCUSDT-1h-2024-01-09.csv",
+              "sha256_prefix": "10001ea283028f4a",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_01/indexPriceKlines-2024-01-10/BTCUSDT-1h-2024-01-10.csv",
+              "sha256_prefix": "201e64eb4c0268d7",
+              "source": "adjacent_sidecar"
+            }
+          ]
+        },
+        "provenance_checked": 1386,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 36001
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 1386,
+        "provenance_source": "adjacent_sidecar",
+        "provenance_source_counts": {
+          "adjacent_sidecar": 1386
+        },
+        "provenance_unmapped": 0,
+        "provenance_verified": true,
+        "range": [
+          "2024-01-01",
+          "2024-09-30"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 274,
+          "markPriceKlines": 274,
+          "premiumIndexKlines": 274
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          }
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [],
+        "confirmatory_ready_symbol": false,
+        "days": 274,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 915,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 822,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 822,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-01": {
+            "adjacent_sha256_sidecar_present": [
+              false,
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/ETHUSDT-fundingRate-2024-01/ETHUSDT-fundingRate-2024-01.csv",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/data/raw/ETHUSDT-fundingRate-2024-01.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "90e05d0f18178405391dc095e8d6e5f0a3f8fc4b46683a39855540181496f7f3",
+              "90e05d0f18178405391dc095e8d6e5f0a3f8fc4b46683a39855540181496f7f3"
+            ]
+          },
+          "2024-02": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/ETHUSDT-fundingRate-2024-02/ETHUSDT-fundingRate-2024-02.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "ca12396a277087c418119dcacd2ece226aa746facda0f2efbeeffb60f7527190"
+            ]
+          },
+          "2024-03": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/ETHUSDT-fundingRate-2024-03/ETHUSDT-fundingRate-2024-03.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "6252325ab0a6b08886c6d90c3573e27cdd35be690c1598301a403c023db6c8d5"
+            ]
+          },
+          "2024-04": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_04/ETHUSDT-fundingRate-2024-04/ETHUSDT-fundingRate-2024-04.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "df9f269a972874c9db4405596abb5e26d3cb6cbf62fc77e22f89a3310d3082b6"
+            ]
+          },
+          "2024-05": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_05/ETHUSDT-fundingRate-2024-05/ETHUSDT-fundingRate-2024-05.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "24c95ca7ba4b988ef32ec0630a8a45d65f2e8950562d319db9918872b05ae307"
+            ]
+          },
+          "2024-06": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_06/ETHUSDT-fundingRate-2024-06/ETHUSDT-fundingRate-2024-06.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "fb54578bc02f43acd34cf6675217b6a663effd31bf8a434b9495ef6da34a87e1"
+            ]
+          },
+          "2024-07": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_07/ETHUSDT-fundingRate-2024-07/ETHUSDT-fundingRate-2024-07.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "32bdbd3ea7c5b67adb052a55461e683cd9fc8b0b6183243897dd397f10a6a655"
+            ]
+          },
+          "2024-08": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_08/ETHUSDT-fundingRate-2024-08/ETHUSDT-fundingRate-2024-08.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "69f71f0c8a87d5bda2e1810c3757fe6a40be2cb5243883ec27442ce9a78f43ae"
+            ]
+          },
+          "2024-09": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_09/ETHUSDT-fundingRate-2024-09/ETHUSDT-fundingRate-2024-09.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "fd880d5b9364768b9b3772d1608bae4890246d036ec0a01a9236b8937ab650b6"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "non_overlapping_30d_blocks": 9,
+        "provenance": {
+          "checked_with_hash_source": 1385,
+          "files_considered": 1385,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 36001
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {
+            "adjacent_sidecar": 1385
+          },
+          "provenance_verified": true,
+          "unmapped_count": 0,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 1385,
+          "verified_samples": [
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-01/ETHUSDT-1h-2024-01-01.csv",
+              "sha256_prefix": "d7649a2922b88112",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-02/ETHUSDT-1h-2024-01-02.csv",
+              "sha256_prefix": "b626e57a28b63af4",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-03/ETHUSDT-1h-2024-01-03.csv",
+              "sha256_prefix": "686945a3db9c30b4",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-04/ETHUSDT-1h-2024-01-04.csv",
+              "sha256_prefix": "98e768f57bbf8f2f",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-05/ETHUSDT-1h-2024-01-05.csv",
+              "sha256_prefix": "3c1ed7235ebb0bd9",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-06/ETHUSDT-1h-2024-01-06.csv",
+              "sha256_prefix": "9612f09b8c006b49",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-07/ETHUSDT-1h-2024-01-07.csv",
+              "sha256_prefix": "5e91bde64c72045f",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-08/ETHUSDT-1h-2024-01-08.csv",
+              "sha256_prefix": "9eeb03aac3617dbb",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-09/ETHUSDT-1h-2024-01-09.csv",
+              "sha256_prefix": "38bef2a50add1281",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_01/indexPriceKlines-2024-01-10/ETHUSDT-1h-2024-01-10.csv",
+              "sha256_prefix": "ab2bdd50b51a4a3a",
+              "source": "adjacent_sidecar"
+            }
+          ]
+        },
+        "provenance_checked": 1385,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 36001
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 1385,
+        "provenance_source": "adjacent_sidecar",
+        "provenance_source_counts": {
+          "adjacent_sidecar": 1385
+        },
+        "provenance_unmapped": 0,
+        "provenance_verified": true,
+        "range": [
+          "2024-01-01",
+          "2024-09-30"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 274,
+          "markPriceKlines": 274,
+          "premiumIndexKlines": 274
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          }
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [],
+        "confirmatory_ready_symbol": false,
+        "days": 274,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 822,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 822,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 822,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-01": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/SOLUSDT-fundingRate-2024-01/SOLUSDT-fundingRate-2024-01.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "c2ccd65ac061a20cd5ac7495fd78c71b2701eb0c377eafb124b8d920bcab4715"
+            ]
+          },
+          "2024-02": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/SOLUSDT-fundingRate-2024-02/SOLUSDT-fundingRate-2024-02.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "87dd2098918b21ce8838dd748db4bba22300678105d340e2f291197a69cb73da"
+            ]
+          },
+          "2024-03": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/SOLUSDT-fundingRate-2024-03/SOLUSDT-fundingRate-2024-03.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "5025fd2d73ab331793bafdee1c6f6bc91a5aea38ed1a03e16eb0acf03c7b9279"
+            ]
+          },
+          "2024-04": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_04/SOLUSDT-fundingRate-2024-04/SOLUSDT-fundingRate-2024-04.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "398c2c4d357ac0fe83ee5f05fb9be2f1019889b76d80f33f8b6ba18a754ded48"
+            ]
+          },
+          "2024-05": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_05/SOLUSDT-fundingRate-2024-05/SOLUSDT-fundingRate-2024-05.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "84603b203a1b752d92dd711e3dee1e017298ba0c251532046bdae4f166b07369"
+            ]
+          },
+          "2024-06": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_06/SOLUSDT-fundingRate-2024-06/SOLUSDT-fundingRate-2024-06.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "4eb1f03fd2dfd891197e9db64a191a3bdce05b9dcebdeb8f8fa7a3d552e7dbe1"
+            ]
+          },
+          "2024-07": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_07/SOLUSDT-fundingRate-2024-07/SOLUSDT-fundingRate-2024-07.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "0a7de0bd5ebff08f0f38d6076ddcbe55c80b48b91c4da745216ef89e30cefece"
+            ]
+          },
+          "2024-08": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_08/SOLUSDT-fundingRate-2024-08/SOLUSDT-fundingRate-2024-08.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "77dbd58ee7ed1935f724605a532d8cf65ca07baae31b665e8b4509adbdcb0b89"
+            ]
+          },
+          "2024-09": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_09/SOLUSDT-fundingRate-2024-09/SOLUSDT-fundingRate-2024-09.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "a765eaf7581492b7e6459ea9aa6771f73e6a22479eb113f2d50fb41be2506bac"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "non_overlapping_30d_blocks": 9,
+        "provenance": {
+          "checked_with_hash_source": 1385,
+          "files_considered": 1385,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 36001
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {
+            "adjacent_sidecar": 1385
+          },
+          "provenance_verified": true,
+          "unmapped_count": 0,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 1385,
+          "verified_samples": [
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-01/SOLUSDT-1h-2024-01-01.csv",
+              "sha256_prefix": "5be75f6a5da319b4",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-02/SOLUSDT-1h-2024-01-02.csv",
+              "sha256_prefix": "fd22b7984df45656",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-03/SOLUSDT-1h-2024-01-03.csv",
+              "sha256_prefix": "daa8d9986b054105",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-04/SOLUSDT-1h-2024-01-04.csv",
+              "sha256_prefix": "12bffd03a83f3111",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-05/SOLUSDT-1h-2024-01-05.csv",
+              "sha256_prefix": "7c6420ba0f75f181",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-06/SOLUSDT-1h-2024-01-06.csv",
+              "sha256_prefix": "8e20184b7589d644",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-07/SOLUSDT-1h-2024-01-07.csv",
+              "sha256_prefix": "06c52ad2c4ed9adf",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-08/SOLUSDT-1h-2024-01-08.csv",
+              "sha256_prefix": "4de9c00bf17ba05a",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-09/SOLUSDT-1h-2024-01-09.csv",
+              "sha256_prefix": "f9a0754f496ca138",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_01/indexPriceKlines-2024-01-10/SOLUSDT-1h-2024-01-10.csv",
+              "sha256_prefix": "685ce131662d3c8a",
+              "source": "adjacent_sidecar"
+            }
+          ]
+        },
+        "provenance_checked": 1385,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 36001
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 1385,
+        "provenance_source": "adjacent_sidecar",
+        "provenance_source_counts": {
+          "adjacent_sidecar": 1385
+        },
+        "provenance_unmapped": 0,
+        "provenance_verified": true,
+        "range": [
+          "2024-01-01",
+          "2024-09-30"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 274,
+          "markPriceKlines": 274,
+          "premiumIndexKlines": 274
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          }
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [],
+        "confirmatory_ready_symbol": false,
+        "days": 274,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 822,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 822,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 822,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-01",
+            "2024-02",
+            "2024-03",
+            "2024-04",
+            "2024-05",
+            "2024-06",
+            "2024-07",
+            "2024-08",
+            "2024-09"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-01": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/XRPUSDT-fundingRate-2024-01/XRPUSDT-fundingRate-2024-01.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "b72cc7f20eba0e130eff1df96162e0c4775c586331110620835a9a0e7f113574"
+            ]
+          },
+          "2024-02": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/XRPUSDT-fundingRate-2024-02/XRPUSDT-fundingRate-2024-02.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "aba3aa705e43a2e27f0d6eec695f58edc735f8d2d40efc0286e998d21c6bea1a"
+            ]
+          },
+          "2024-03": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/XRPUSDT-fundingRate-2024-03/XRPUSDT-fundingRate-2024-03.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "8afb1c2b8cd2c771ceeee854ded967c2d80ec731374934ce7b8f7e752b0c3b6c"
+            ]
+          },
+          "2024-04": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_04/XRPUSDT-fundingRate-2024-04/XRPUSDT-fundingRate-2024-04.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "7d0c5a478979326ef72a6f496ef8b8700bd144ca90fa24522d63bbed1ed02e15"
+            ]
+          },
+          "2024-05": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_05/XRPUSDT-fundingRate-2024-05/XRPUSDT-fundingRate-2024-05.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "29c1d9ac430999f51d58d3bdc744ad80c10d7a91687e399bfb869cd046ee0740"
+            ]
+          },
+          "2024-06": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_06/XRPUSDT-fundingRate-2024-06/XRPUSDT-fundingRate-2024-06.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "1f21f5521c370f2a6fd837cf65a053a8593ffaf88c5083c5a8e4a88f745bca23"
+            ]
+          },
+          "2024-07": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_07/XRPUSDT-fundingRate-2024-07/XRPUSDT-fundingRate-2024-07.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "8b3efe4f04dae008e985487267d51242c96b1361fb3261cee8000d67f70144a2"
+            ]
+          },
+          "2024-08": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_08/XRPUSDT-fundingRate-2024-08/XRPUSDT-fundingRate-2024-08.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "4a7f0eda6358f79f556b477347c6b8b8a6d036c59be6592d39d45e15e142224c"
+            ]
+          },
+          "2024-09": {
+            "adjacent_sha256_sidecar_present": [
+              true
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_09/XRPUSDT-fundingRate-2024-09/XRPUSDT-fundingRate-2024-09.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "746aded028e83d7e5f3c45fc0f010d90f3ccdfdfc04a49db86a4e4125f5c42b7"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "non_overlapping_30d_blocks": 9,
+        "provenance": {
+          "checked_with_hash_source": 1385,
+          "files_considered": 1385,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 36001
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {
+            "adjacent_sidecar": 1385
+          },
+          "provenance_verified": true,
+          "unmapped_count": 0,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 1385,
+          "verified_samples": [
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-01/XRPUSDT-1h-2024-01-01.csv",
+              "sha256_prefix": "5c6a9c74474adecc",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-02/XRPUSDT-1h-2024-01-02.csv",
+              "sha256_prefix": "ddec419babff7e9c",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-03/XRPUSDT-1h-2024-01-03.csv",
+              "sha256_prefix": "599540edffa4fbe6",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-04/XRPUSDT-1h-2024-01-04.csv",
+              "sha256_prefix": "3347a4cd55a26c91",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-05/XRPUSDT-1h-2024-01-05.csv",
+              "sha256_prefix": "0eea87275c425b10",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-06/XRPUSDT-1h-2024-01-06.csv",
+              "sha256_prefix": "59ff9d6d30755f7c",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-07/XRPUSDT-1h-2024-01-07.csv",
+              "sha256_prefix": "66f5f2ecff2e02ef",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-08/XRPUSDT-1h-2024-01-08.csv",
+              "sha256_prefix": "513f511abcd76ae0",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-09/XRPUSDT-1h-2024-01-09.csv",
+              "sha256_prefix": "3cdf3cc8fff97673",
+              "source": "adjacent_sidecar"
+            },
+            {
+              "file": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_01/indexPriceKlines-2024-01-10/XRPUSDT-1h-2024-01-10.csv",
+              "sha256_prefix": "b30061e1eb39cc96",
+              "source": "adjacent_sidecar"
+            }
+          ]
+        },
+        "provenance_checked": 1385,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 36001
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 1385,
+        "provenance_source": "adjacent_sidecar",
+        "provenance_source_counts": {
+          "adjacent_sidecar": 1385
+        },
+        "provenance_unmapped": 0,
+        "provenance_verified": true,
+        "range": [
+          "2024-01-01",
+          "2024-09-30"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 274,
+          "markPriceKlines": 274,
+          "premiumIndexKlines": 274
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 274
+          }
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "prereg_hash": null,
+    "provenance_verified": true,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "symbols_ok": 5
+  },
+  "candidate_months": [
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09"
+  ],
+  "generated_utc": "2026-11-10T18:53:18Z",
+  "min_blocks": 3,
+  "min_symbols": 5,
+  "mode": "local_only_scoped_deep_audit_no_outcomes_no_network",
+  "next_action": "freeze new prereg before outcomes; verify funding schema/coverage/provenance/checksums; repair/manifest series gaps deterministically from locally present admissible files; no confirmatory outcomes until confirmatory_resume_ready=true",
+  "prereg_hash": null,
+  "repo_root": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk",
+  "summary": {
+    "all_required_series_complete": true,
+    "any_funding_month_missing": false,
+    "candidates_evaluated": 1,
+    "confirmatory_resume_ready": false,
+    "locally_repairable_series_gaps_detected": false,
+    "network_used": false,
+    "outcomes_computed": false,
+    "panel_blocks_estimate": 9,
+    "provenance_verified": true,
+    "symbols_ok": 5
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "window_hints": "2024_01,2024_02,2024_03,2024_04,2024_05,2024_06,2024_07,2024_08,2024_09"
+}

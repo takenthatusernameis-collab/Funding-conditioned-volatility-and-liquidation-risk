@@ -1,0 +1,736 @@
+{
+  "cache": "research_state/data_cache",
+  "confirmatory_resume_ready": false,
+  "generated_utc": "2026-11-10T18:50:51Z",
+  "min_complete_symbol_days": 274,
+  "network_used": false,
+  "next_action_if_met": "freeze new prereg version before any outcome inspection; verify funding schema/coverage/provenance/checksums; repair/manifest any series gaps deterministically; materialize splits/manifest; run confirmatory pipeline with block-bootstrap/Holm per protocol",
+  "next_action_if_not_met": "no confirmatory outcomes; use series_gap_manifest/funding_coverage for deterministic local repair planning; continue resume-trigger watch (no default probing); keep dep-light gates green",
+  "outcomes_computed": false,
+  "panel_non_overlapping_30d_blocks_estimate": 9,
+  "per_symbol": {
+    "BNBUSDT": {
+      "confirmatory_ready_symbol": false,
+      "days": 274,
+      "funding_coverage": {
+        "funding_completeness_flag": "MONTH_FILES_PRESENT",
+        "funding_csv_files_found": 35,
+        "funding_csv_paths_sample": [
+          "BNBUSDT-fundingRate-2024-01/BNBUSDT-fundingRate-2024-01.csv",
+          "BNBUSDT-fundingRate-2024-02/BNBUSDT-fundingRate-2024-02.csv",
+          "BNBUSDT-fundingRate-2024-03/BNBUSDT-fundingRate-2024-03.csv",
+          "research_state/data_cache/BNBUSDT_2024_04/BNBUSDT-fundingRate-2024-04/BNBUSDT-fundingRate-2024-04.csv",
+          "research_state/data_cache/BNBUSDT_2024_05/BNBUSDT-fundingRate-2024-05/BNBUSDT-fundingRate-2024-05.csv",
+          "research_state/data_cache/BNBUSDT_2024_06/BNBUSDT-fundingRate-2024-06/BNBUSDT-fundingRate-2024-06.csv",
+          "research_state/data_cache/BNBUSDT_2024_07/BNBUSDT-fundingRate-2024-07/BNBUSDT-fundingRate-2024-07.csv",
+          "research_state/data_cache/BNBUSDT_2024_08/BNBUSDT-fundingRate-2024-08/BNBUSDT-fundingRate-2024-08.csv",
+          "research_state/data_cache/BNBUSDT_2024_09/BNBUSDT-fundingRate-2024-09/BNBUSDT-fundingRate-2024-09.csv",
+          "research_state/data_cache/BNBUSDT_2024_10/BNBUSDT-fundingRate-2024-10/BNBUSDT-fundingRate-2024-10.csv",
+          "research_state/data_cache/BNBUSDT_2024_11/BNBUSDT-fundingRate-2024-11/BNBUSDT-fundingRate-2024-11.csv",
+          "research_state/data_cache/BNBUSDT_2024_12/BNBUSDT-fundingRate-2024-12/BNBUSDT-fundingRate-2024-12.csv"
+        ],
+        "funding_distinct_days_detected": 1035,
+        "funding_months_expected_for_range": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_months_found": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "funding_months_overlap_expected": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_note": "Monthly funding files are 8h observations; MONTH_FILES_PRESENT means month coverage files exist for the day range, not day-level parity proof. funding_slot_coverage_diagnostic is heuristic only. Verify schema/provenance/checksums before confirmatory use.",
+        "funding_rows_in_day_range": 822,
+        "funding_slot_coverage_diagnostic": {
+          "coverage_ratio_heuristic": 1.0,
+          "expected_slots_heuristic": 822,
+          "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+          "slots_observed": 822,
+          "status": "HEURISTIC_DENSE"
+        }
+      },
+      "funding_month_files_complete_for_range": true,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 9,
+      "range": [
+        "2024-01-01",
+        "2024-09-30"
+      ],
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
+      "series_day_counts": {
+        "indexPriceKlines": 274,
+        "markPriceKlines": 274,
+        "premiumIndexKlines": 274
+      },
+      "series_gap_manifest": {
+        "indexPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "markPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "premiumIndexKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        }
+      }
+    },
+    "BTCUSDT": {
+      "confirmatory_ready_symbol": false,
+      "days": 274,
+      "funding_coverage": {
+        "funding_completeness_flag": "MONTH_FILES_PRESENT",
+        "funding_csv_files_found": 39,
+        "funding_csv_paths_sample": [
+          "BTCUSDT-fundingRate-2024-01/BTCUSDT-fundingRate-2024-01.csv",
+          "BTCUSDT-fundingRate-2024-02/BTCUSDT-fundingRate-2024-02.csv",
+          "BTCUSDT-fundingRate-2024-03/BTCUSDT-fundingRate-2024-03.csv",
+          "data/raw/BTCUSDT-fundingRate-2024-01.csv",
+          "data/raw/btc_funding/BTCUSDT-fundingRate-2024-03.csv",
+          "research_state/data_cache/BTCUSDT_2024_04/BTCUSDT-fundingRate-2024-04/BTCUSDT-fundingRate-2024-04.csv",
+          "research_state/data_cache/BTCUSDT_2024_05/BTCUSDT-fundingRate-2024-05/BTCUSDT-fundingRate-2024-05.csv",
+          "research_state/data_cache/BTCUSDT_2024_06/BTCUSDT-fundingRate-2024-06/BTCUSDT-fundingRate-2024-06.csv",
+          "research_state/data_cache/BTCUSDT_2024_07/BTCUSDT-fundingRate-2024-07/BTCUSDT-fundingRate-2024-07.csv",
+          "research_state/data_cache/BTCUSDT_2024_08/BTCUSDT-fundingRate-2024-08/BTCUSDT-fundingRate-2024-08.csv",
+          "research_state/data_cache/BTCUSDT_2024_09/BTCUSDT-fundingRate-2024-09/BTCUSDT-fundingRate-2024-09.csv",
+          "research_state/data_cache/BTCUSDT_2024_10/BTCUSDT-fundingRate-2024-10/BTCUSDT-fundingRate-2024-10.csv"
+        ],
+        "funding_distinct_days_detected": 1035,
+        "funding_months_expected_for_range": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_months_found": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "funding_months_overlap_expected": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_note": "Monthly funding files are 8h observations; MONTH_FILES_PRESENT means month coverage files exist for the day range, not day-level parity proof. funding_slot_coverage_diagnostic is heuristic only. Verify schema/provenance/checksums before confirmatory use.",
+        "funding_rows_in_day_range": 1194,
+        "funding_slot_coverage_diagnostic": {
+          "coverage_ratio_heuristic": 1.0,
+          "expected_slots_heuristic": 822,
+          "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+          "slots_observed": 822,
+          "status": "HEURISTIC_DENSE"
+        }
+      },
+      "funding_month_files_complete_for_range": true,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 9,
+      "range": [
+        "2024-01-01",
+        "2024-09-30"
+      ],
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
+      "series_day_counts": {
+        "indexPriceKlines": 274,
+        "markPriceKlines": 274,
+        "premiumIndexKlines": 274
+      },
+      "series_gap_manifest": {
+        "indexPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "markPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "premiumIndexKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        }
+      }
+    },
+    "ETHUSDT": {
+      "confirmatory_ready_symbol": false,
+      "days": 274,
+      "funding_coverage": {
+        "funding_completeness_flag": "MONTH_FILES_PRESENT",
+        "funding_csv_files_found": 36,
+        "funding_csv_paths_sample": [
+          "ETHUSDT-fundingRate-2024-01/ETHUSDT-fundingRate-2024-01.csv",
+          "ETHUSDT-fundingRate-2024-02/ETHUSDT-fundingRate-2024-02.csv",
+          "ETHUSDT-fundingRate-2024-03/ETHUSDT-fundingRate-2024-03.csv",
+          "data/raw/ETHUSDT-fundingRate-2024-01.csv",
+          "research_state/data_cache/ETHUSDT_2024_04/ETHUSDT-fundingRate-2024-04/ETHUSDT-fundingRate-2024-04.csv",
+          "research_state/data_cache/ETHUSDT_2024_05/ETHUSDT-fundingRate-2024-05/ETHUSDT-fundingRate-2024-05.csv",
+          "research_state/data_cache/ETHUSDT_2024_06/ETHUSDT-fundingRate-2024-06/ETHUSDT-fundingRate-2024-06.csv",
+          "research_state/data_cache/ETHUSDT_2024_07/ETHUSDT-fundingRate-2024-07/ETHUSDT-fundingRate-2024-07.csv",
+          "research_state/data_cache/ETHUSDT_2024_08/ETHUSDT-fundingRate-2024-08/ETHUSDT-fundingRate-2024-08.csv",
+          "research_state/data_cache/ETHUSDT_2024_09/ETHUSDT-fundingRate-2024-09/ETHUSDT-fundingRate-2024-09.csv",
+          "research_state/data_cache/ETHUSDT_2024_10/ETHUSDT-fundingRate-2024-10/ETHUSDT-fundingRate-2024-10.csv",
+          "research_state/data_cache/ETHUSDT_2024_11/ETHUSDT-fundingRate-2024-11/ETHUSDT-fundingRate-2024-11.csv"
+        ],
+        "funding_distinct_days_detected": 1035,
+        "funding_months_expected_for_range": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_months_found": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "funding_months_overlap_expected": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_note": "Monthly funding files are 8h observations; MONTH_FILES_PRESENT means month coverage files exist for the day range, not day-level parity proof. funding_slot_coverage_diagnostic is heuristic only. Verify schema/provenance/checksums before confirmatory use.",
+        "funding_rows_in_day_range": 915,
+        "funding_slot_coverage_diagnostic": {
+          "coverage_ratio_heuristic": 1.0,
+          "expected_slots_heuristic": 822,
+          "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+          "slots_observed": 822,
+          "status": "HEURISTIC_DENSE"
+        }
+      },
+      "funding_month_files_complete_for_range": true,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 9,
+      "range": [
+        "2024-01-01",
+        "2024-09-30"
+      ],
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
+      "series_day_counts": {
+        "indexPriceKlines": 274,
+        "markPriceKlines": 274,
+        "premiumIndexKlines": 274
+      },
+      "series_gap_manifest": {
+        "indexPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "markPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "premiumIndexKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        }
+      }
+    },
+    "SOLUSDT": {
+      "confirmatory_ready_symbol": false,
+      "days": 274,
+      "funding_coverage": {
+        "funding_completeness_flag": "MONTH_FILES_PRESENT",
+        "funding_csv_files_found": 35,
+        "funding_csv_paths_sample": [
+          "SOLUSDT-fundingRate-2024-01/SOLUSDT-fundingRate-2024-01.csv",
+          "SOLUSDT-fundingRate-2024-02/SOLUSDT-fundingRate-2024-02.csv",
+          "SOLUSDT-fundingRate-2024-03/SOLUSDT-fundingRate-2024-03.csv",
+          "research_state/data_cache/SOLUSDT_2024_04/SOLUSDT-fundingRate-2024-04/SOLUSDT-fundingRate-2024-04.csv",
+          "research_state/data_cache/SOLUSDT_2024_05/SOLUSDT-fundingRate-2024-05/SOLUSDT-fundingRate-2024-05.csv",
+          "research_state/data_cache/SOLUSDT_2024_06/SOLUSDT-fundingRate-2024-06/SOLUSDT-fundingRate-2024-06.csv",
+          "research_state/data_cache/SOLUSDT_2024_07/SOLUSDT-fundingRate-2024-07/SOLUSDT-fundingRate-2024-07.csv",
+          "research_state/data_cache/SOLUSDT_2024_08/SOLUSDT-fundingRate-2024-08/SOLUSDT-fundingRate-2024-08.csv",
+          "research_state/data_cache/SOLUSDT_2024_09/SOLUSDT-fundingRate-2024-09/SOLUSDT-fundingRate-2024-09.csv",
+          "research_state/data_cache/SOLUSDT_2024_10/SOLUSDT-fundingRate-2024-10/SOLUSDT-fundingRate-2024-10.csv",
+          "research_state/data_cache/SOLUSDT_2024_11/SOLUSDT-fundingRate-2024-11/SOLUSDT-fundingRate-2024-11.csv",
+          "research_state/data_cache/SOLUSDT_2024_12/SOLUSDT-fundingRate-2024-12/SOLUSDT-fundingRate-2024-12.csv"
+        ],
+        "funding_distinct_days_detected": 1035,
+        "funding_months_expected_for_range": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_months_found": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "funding_months_overlap_expected": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_note": "Monthly funding files are 8h observations; MONTH_FILES_PRESENT means month coverage files exist for the day range, not day-level parity proof. funding_slot_coverage_diagnostic is heuristic only. Verify schema/provenance/checksums before confirmatory use.",
+        "funding_rows_in_day_range": 822,
+        "funding_slot_coverage_diagnostic": {
+          "coverage_ratio_heuristic": 1.0,
+          "expected_slots_heuristic": 822,
+          "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+          "slots_observed": 822,
+          "status": "HEURISTIC_DENSE"
+        }
+      },
+      "funding_month_files_complete_for_range": true,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 9,
+      "range": [
+        "2024-01-01",
+        "2024-09-30"
+      ],
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
+      "series_day_counts": {
+        "indexPriceKlines": 274,
+        "markPriceKlines": 274,
+        "premiumIndexKlines": 274
+      },
+      "series_gap_manifest": {
+        "indexPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "markPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "premiumIndexKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        }
+      }
+    },
+    "XRPUSDT": {
+      "confirmatory_ready_symbol": false,
+      "days": 274,
+      "funding_coverage": {
+        "funding_completeness_flag": "MONTH_FILES_PRESENT",
+        "funding_csv_files_found": 35,
+        "funding_csv_paths_sample": [
+          "XRPUSDT-fundingRate-2024-01/XRPUSDT-fundingRate-2024-01.csv",
+          "XRPUSDT-fundingRate-2024-02/XRPUSDT-fundingRate-2024-02.csv",
+          "XRPUSDT-fundingRate-2024-03/XRPUSDT-fundingRate-2024-03.csv",
+          "research_state/data_cache/XRPUSDT_2024_04/XRPUSDT-fundingRate-2024-04/XRPUSDT-fundingRate-2024-04.csv",
+          "research_state/data_cache/XRPUSDT_2024_05/XRPUSDT-fundingRate-2024-05/XRPUSDT-fundingRate-2024-05.csv",
+          "research_state/data_cache/XRPUSDT_2024_06/XRPUSDT-fundingRate-2024-06/XRPUSDT-fundingRate-2024-06.csv",
+          "research_state/data_cache/XRPUSDT_2024_07/XRPUSDT-fundingRate-2024-07/XRPUSDT-fundingRate-2024-07.csv",
+          "research_state/data_cache/XRPUSDT_2024_08/XRPUSDT-fundingRate-2024-08/XRPUSDT-fundingRate-2024-08.csv",
+          "research_state/data_cache/XRPUSDT_2024_09/XRPUSDT-fundingRate-2024-09/XRPUSDT-fundingRate-2024-09.csv",
+          "research_state/data_cache/XRPUSDT_2024_10/XRPUSDT-fundingRate-2024-10/XRPUSDT-fundingRate-2024-10.csv",
+          "research_state/data_cache/XRPUSDT_2024_11/XRPUSDT-fundingRate-2024-11/XRPUSDT-fundingRate-2024-11.csv",
+          "research_state/data_cache/XRPUSDT_2024_12/XRPUSDT-fundingRate-2024-12/XRPUSDT-fundingRate-2024-12.csv"
+        ],
+        "funding_distinct_days_detected": 1035,
+        "funding_months_expected_for_range": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_months_found": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "funding_months_overlap_expected": [
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09"
+        ],
+        "funding_note": "Monthly funding files are 8h observations; MONTH_FILES_PRESENT means month coverage files exist for the day range, not day-level parity proof. funding_slot_coverage_diagnostic is heuristic only. Verify schema/provenance/checksums before confirmatory use.",
+        "funding_rows_in_day_range": 822,
+        "funding_slot_coverage_diagnostic": {
+          "coverage_ratio_heuristic": 1.0,
+          "expected_slots_heuristic": 822,
+          "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+          "slots_observed": 822,
+          "status": "HEURISTIC_DENSE"
+        }
+      },
+      "funding_month_files_complete_for_range": true,
+      "has_1h_klines_zip_detected": true,
+      "has_funding_files_detected": true,
+      "non_overlapping_30d_blocks": 9,
+      "range": [
+        "2024-01-01",
+        "2024-09-30"
+      ],
+      "required_series_complete": true,
+      "resume_trigger_symbol_ok": true,
+      "series_day_counts": {
+        "indexPriceKlines": 274,
+        "markPriceKlines": 274,
+        "premiumIndexKlines": 274
+      },
+      "series_gap_manifest": {
+        "indexPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "markPriceKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        },
+        "premiumIndexKlines": {
+          "complete_vs_mark_union": true,
+          "missing_day_ranges": [],
+          "missing_days_sample": [],
+          "missing_days_vs_mark_union": 0,
+          "present_days": 274
+        }
+      }
+    }
+  },
+  "provenance_audit": {
+    "adjacent_sha256_verification_sample": {
+      "files_considered": 25,
+      "files_without_adjacent_sha256_sidecar": 0,
+      "manifest_ingest": {
+        "manifests_loaded": [],
+        "manifests_missing": [],
+        "records_indexed": 0
+      },
+      "mismatch_samples": [],
+      "provenance_source": "adjacent_sidecar",
+      "provenance_source_counts": {
+        "adjacent_sidecar": 25
+      },
+      "provenance_verified": true,
+      "sidecars_checked": 25,
+      "sidecars_mismatch": 0,
+      "sidecars_ok": 25,
+      "verification_note": "Local deterministic check only for adjacent *.sha256 sidecars. No network. Does not prove provenance origin; only content hash match when sidecar exists."
+    },
+    "manifest_lineage_ingest": {
+      "manifests_loaded": [],
+      "manifests_missing": [],
+      "records_indexed": 0
+    },
+    "provenance_checked": 25,
+    "provenance_mismatch": 0,
+    "provenance_note": "Deterministic local detection: adjacent sidecars and/or unambiguous manifest path+sha256 lineage where content hash matches. No network. Presence/URLs alone do not prove provenance; absence of verifiable hash match means not machine-verified.",
+    "provenance_ok": 25,
+    "provenance_sidecars_present": true,
+    "provenance_source": "adjacent_sidecar",
+    "provenance_source_counts_sample": {
+      "adjacent_sidecar": 25
+    },
+    "provenance_unmapped": 0,
+    "provenance_verified_sample": true,
+    "run_manifest_has_hash_fields": true,
+    "sidecar_counts": {
+      "checksum": 0,
+      "etag": 0,
+      "provenance_json": 1,
+      "sha256": 40
+    },
+    "sidecar_paths_sample": {
+      "provenance_json": [
+        "research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json"
+      ],
+      "sha256": [
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-01.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-02.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-03.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-04.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-05.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-06.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-07.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-08.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-09.zip.sha256",
+        "research_state/data_cache/BNBUSDT_2024_01/BNBUSDT-1h-2024-01-10.zip.sha256"
+      ]
+    }
+  },
+  "resume_trigger_met": true,
+  "resume_trigger_rule": ">=5 symbols with required series complete vs mark-union days AND >=3 non-overlapping 30d blocks (estimate). Funding completeness/provenance/checksums + frozen prereg-before-outcomes still required before confirmatory resume.",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "symbols_with_required_series": 5,
+  "window_hint": "2024_01,2024_02,2024_03,2024_04,2024_05,2024_06,2024_07,2024_08,2024_09",
+  "window_hints_resolved": [
+    "2024_01",
+    "2024_02",
+    "2024_03",
+    "2024_04",
+    "2024_05",
+    "2024_06",
+    "2024_07",
+    "2024_08",
+    "2024_09"
+  ]
+}
