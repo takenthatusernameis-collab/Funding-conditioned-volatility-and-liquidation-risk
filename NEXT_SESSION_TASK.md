@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-10T18:55:10Z
+**Timestamp (UTC):** 2026-11-10T18:57:05Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded. This is the single durable handoff; execute this task before any other work.
 
@@ -11,23 +11,24 @@ Execute **Track B TB2 confirmatory attempt** on local panel **2024-01-01..2024-0
 
 ## Verified context (do not re-open concluded tracks)
 - **Track B prior:** `TRACKB-20251110T154307Z` (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED; TB1 above DEGENERATE/INADMISSIBLE. `research_state/research_protocol_trackb_TB1_20261110T173838Z.md`, manifest `split_boundaries_trackb_TB1_20261110T173838Z`.
-- **TB2 candidate panel (local, untested):** 2024-01-01..2024-09-30, 5 symbols, contiguous required series (mark/index/premium/klines + funding), ~9 non-overlapping 30d blocks est.; prior audits indicate schema OK and funding lineage `provenance_verified=true`/`unmapped_count=0` (PROVENANCE_OK 161). Evidence: `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`. **Re-verify for all inputs actually used.**
+- **TB2 candidate panel (local, untested):** 2024-01-01..2024-09-30, 5 symbols, contiguous required series (mark/index/premium/klines + funding), ~9 non-overlapping 30d blocks est.; prior audits indicate schema OK and funding lineage `provenance_verified=true`/`unmapped_count=0` (PROVENANCE_OK 161). **Re-verify for all inputs actually used.**
+- **Starting evidence (re-verify, do not trust blindly):** `research_state/trackb_TB2_admissibility.json`, `research_state/trackb_TB2_admissibility_2024q1q3.json`, `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`.
 - **Track C / H1:** concluded **NOT_SUPPORTED** on claim-worthy local panels; no untested claim-worthy Track C panels with >=3 blocks remain. `next_unfinished_task (Track C): NONE`.
 - **Track A:** **STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census; not locally repairable).
 - **Risk overlay:** **INELIGIBLE** until a forecast gate passes under frozen prereg.
 
 ## Bottlenecks removed (cleared for progress)
-- Multiple/ambiguous next steps collapsed to **one mandatory path:** TB2 on 2024-01-01..2024-09-30 (or evidence-backed inadmissibility of that route, then immediate pivot to next admissible local route with new ID/prereg).
+- Single mandatory path: TB2 on 2024-01-01..2024-09-30 (or evidence-backed inadmissibility of that route, then immediate pivot to next admissible local route with new ID/prereg).
 - TB1 reframed as label/test-event-adequacy failure: pre-freeze event-rate design with >0 frozen-test breaches is required.
-- `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, and this file synchronized as the canonical handoff set; no polling/status-only work.
+- Canonical handoff set synchronized (`AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, this file). No polling/status-only work.
 
 ## Execution steps (complete in order)
 
 ### 1) Re-verify admissibility + provenance (machine evidence)
 - Confirm 2024-01-01..2024-09-30 contiguous, required series complete, schema/coverage OK, >=3 non-overlapping 30d blocks in test split, no sealed/reused/outcome-inspected holdout for this design.
 - Verify `provenance_verified=true`, `unmapped_count=0` for every input used (funding lineage and other inputs as applicable). Record evidence.
-- Save `research_state/trackb_<ID>_admissibility.(json|md)`.
-- Tools: `scripts/trackc_panel_admissibility_audit.py`, `scripts/trackc_gap_repair_manifest.py`, `scripts/trackc_funding_schema_audit.py`, `scripts/trackc_provenance_lineage.py` (and relevant tests).
+- Save/refresh `research_state/trackb_<ID>_admissibility.(json|md)` with verified results.
+- Tools: `scripts/trackc_panel_admissibility_audit.py`, `scripts/trackc_gap_repair_manifest.py`, `scripts/trackc_funding_schema_audit.py`, `scripts/trackc_provenance_lineage.py`.
 
 ### 2) Pre-freeze label/split design (event-adequate, no threshold shopping)
 - Compute breach/event rates for candidate configs (e.g. leverage 5x/10x/20x, side long/short, horizon 24h/72h/168h) and candidate splits **from local data**; select config+split with **>0 positive synthetic breaches in the frozen test split** and defensible support (report counts per split/symbol/overall).

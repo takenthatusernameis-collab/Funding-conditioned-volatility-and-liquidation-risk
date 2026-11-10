@@ -1,12 +1,13 @@
 # AGENT_HANDOFF.md — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-10T18:55:10Z
+**Timestamp (UTC):** 2026-11-10T18:57:05Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative, execute immediately):** `NEXT_SESSION_TASK.md`
 **Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded.
 
 ## Current state (verified)
-- **Priority 1 — Track B (modeled liquidation boundary breaches): ACTIVE.** TB1 (`TRACKB-MODELED-BREACH-TB1-20261110T173838Z`, 2025-01-01..2026-10-31, 5x/24h long) **DEGENERATE/INADMISSIBLE** (frozen test split had 0 synthetic breaches; gate NOT_MET). Prior `TRACKB-20251110T154307Z` NOT_MET/NOT_SUPPORTED. **Next mandatory route:** TB2 on 2024-01-01..2024-09-30 with NEW pre-freeze label/split having >0 frozen-test breaches. Evidence: `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`, `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`.
+- **Priority 1 — Track B (modeled liquidation boundary breaches): ACTIVE.** TB1 (`TRACKB-MODELED-BREACH-TB1-20261110T173838Z`, 2025-01-01..2026-10-31, 5x/24h long) **DEGENERATE/INADMISSIBLE** (frozen test split had 0 synthetic breaches; gate NOT_MET). Prior `TRACKB-20251110T154307Z` NOT_MET/NOT_SUPPORTED. **Next mandatory route:** TB2 on 2024-01-01..2024-09-30 with NEW pre-freeze label+split having >0 frozen-test breaches.
+- **Starting evidence (re-verify):** `research_state/trackb_TB2_admissibility.json`, `research_state/trackb_TB2_admissibility_2024q1q3.json`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`.
 - **Priority 2 — Track C (funding-conditioned volatility):** concluded **NOT_SUPPORTED** on claim-worthy local panels; no untested claim-worthy panels with >=3 blocks remain. `next_unfinished_task (Track C): NONE`.
 - **Priority 3 — Track A (observed liquidations):** **STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census).
 - **Risk overlay:** **INELIGIBLE** until a forecast gate passes under frozen prereg.

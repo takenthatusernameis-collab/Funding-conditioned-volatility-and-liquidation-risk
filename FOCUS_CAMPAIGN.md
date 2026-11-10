@@ -2,7 +2,7 @@
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (per repo name):** 1) Track B liquidation boundary risk (modeled) — **ACTIVE/MANDATORY**, 2) Track C / H1 funding-conditioned volatility forecast — concluded NOT_SUPPORTED, 3) Track A observed liquidations — STRUCTURALLY_BLOCKED.
-**Campaign timestamp:** 2026-11-10T18:55:10Z (refreshed; program NOT concluded — TB1 degenerate; TB2 mandatory on 2024-01-01..2024-09-30)
+**Campaign timestamp:** 2026-11-10T18:57:05Z (refreshed; program NOT concluded — TB1 degenerate; TB2 mandatory on 2024-01-01..2024-09-30)
 **Single durable handoff (authoritative):** `NEXT_SESSION_TASK.md` (+ `AGENT_HANDOFF.md` pointer). Execute `NEXT_SESSION_TASK.md` as the initial task message.
 **Hard constraints (NON-NEGOTIABLE):** no network/paid/manual/credentialed data; no fabricated provenance/outcomes; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation; preregister before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 
@@ -15,7 +15,7 @@ Advance the repo's core question to a reproducible, auditable, out-of-sample ver
 - **Track B: PARTIALLY TESTED / ACTIVE**
   - `TRACKB-20251110T154307Z` (2025-01-01..2025-10-31): NOT_MET/NOT_SUPPORTED (modeled proxy).
   - `TRACKB-MODELED-BREACH-TB1-20261110T173838Z` (2025-01-01..2026-10-31): **DEGENERATE/INADMISSIBLE** for confirmatory 5x/24h long label — frozen test split 2026-06-26..2026-10-31 had ZERO synthetic breaches (all symbols). Gate NOT_MET; metrics uninterpretable. (`research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`)
-  - **Next local route (heavy, untested):** 2024-01-01..2024-09-30, 5 symbols (BTC/ETH/BNB/SOL/XRP), contiguous required series complete, funding schema OK, `provenance_verified=true`/`unmapped_count=0` (funding lineage PROVENANCE_OK 161), ~9 non-overlapping 30d blocks. Evidence: `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`.
+  - **Next local route (heavy, untested):** 2024-01-01..2024-09-30, 5 symbols (BTC/ETH/BNB/SOL/XRP), contiguous required series complete, funding schema OK, `provenance_verified=true`/`unmapped_count=0` (funding lineage PROVENANCE_OK 161), ~9 non-overlapping 30d blocks. Evidence: `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`. Starting TB2 audits (re-verify): `research_state/trackb_TB2_admissibility.json`, `research_state/trackb_TB2_admissibility_2024q1q3.json`.
 - **Bottlenecks removed:** stale "preferred TB1 window" replaced by TB1-degenerate finding; single mandatory TB2 path set; handoff consolidated in `NEXT_SESSION_TASK.md`/`AGENT_HANDOFF.md`; provenance + canonical tests re-verified (35 PASS, 2026-11-10T18:09Z).
 
 ## Execution milestones (execute in order; skipping is non-compliant)
