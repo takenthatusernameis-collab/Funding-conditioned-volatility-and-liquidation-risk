@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-10T22:34:37Z
+**Timestamp (UTC):** 2026-11-10T23:28:23Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation-risk research)
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. **No further initial task remains on current local data/design.**
 
@@ -50,10 +50,10 @@ No network/paid/manual/credentialed data; no fabricated data/provenance; no thre
 - Verdict/evidence: `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/experiment_frontier.json`
 - Handoffs: `AGENT_HANDOFF.md`, `NEXT_SESSION_TASK.md` (this file), `FOCUS_CAMPAIGN.md`
 
-## Canonical verification (green on current state)
+## Canonical verification (green on current state, re-run 2026-11-10T23:28Z)
 ```bash
-python -m unittest discover tests            # 1124 tests, OK
-python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v
-python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"
-python scripts/check_tracka_scope_registry_drift.py --json   # pass True
+python -m unittest discover tests            # 1124 tests, OK (exit 0, ~306s)
+python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
+python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
+python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
 ```

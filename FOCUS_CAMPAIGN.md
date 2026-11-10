@@ -2,7 +2,7 @@
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (per repo name):** 1) Track C/H1 funding-conditioned volatility — **CONCLUDED NOT_SUPPORTED**; 2) Track B liquidation boundary risk (modeled synthetic breaches) — **CONCLUDED NOT_SUPPORTED**; 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.
-**Campaign timestamp:** 2026-11-10T22:34:37Z
+**Campaign timestamp:** 2026-11-10T23:28:23Z
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — `next_unfinished_task: NONE` pending a new admissible unauthenticated source.
 
@@ -37,9 +37,10 @@ Preserve an auditable, reproducible terminal state and ensure future agents cann
 ## Execution rules (for any future reopen)
 1. New admissible unauthenticated source only (no network-paid/manual/credentialed). 2. New experiment ID. 3. Prereg/freeze before outcomes. 4. No threshold shopping/holdout reuse. 5. Track B = modeled breach proxy only. 6. No fabricated provenance. 7. No status-only output; deliver heavy verifiable work or stop with evidence.
 
-## Canonical verification
+## Canonical verification (re-run 2026-11-10T23:28Z, all green)
 ```bash
-python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v
-python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"
-python scripts/check_tracka_scope_registry_drift.py --json   # pass True
+python -m unittest discover tests            # 1124 tests, OK (exit 0)
+python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
+python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
+python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
 ```

@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-10T22:34:37Z
+**Timestamp (UTC):** 2026-11-10T23:28:23Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — **execute/read immediately**.
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence (not concluded by request).
@@ -17,18 +17,19 @@
 Reopen only with: (a) new admissible unauthenticated source + verifiable provenance/coverage/terms, (b) new experiment ID, (c) new prereg frozen **before** outcomes. No polling, status-only work, relitigation, threshold shopping, or sealed-holdout reuse.
 
 ## Bottlenecks addressed this session
-- Repaired consolidated durable handoffs (`NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`) to a single timestamped (2026-11-10T22:34:37Z) unambiguous initial task: `NONE` under constraints, with explicit reopen conditions, evidence pointers, and heavy-work mandate.
+- Repaired consolidated durable handoffs (`NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`) to a single timestamped (2026-11-10T23:28:23Z) unambiguous initial task: `NONE` under constraints, with explicit reopen conditions, evidence pointers, and heavy-work mandate.
 - Confirmed all prior bottleneck removals remain clean: registry drift (127==127, pass True), root md+json bound (211), environment (numpy/pandas/scipy installed), `experiment_frontier.json` valid concluded-state frontier.
+- Re-ran canonical verification at handoff time: full suite 1124 tests OK (exit 0), 35-test canonical subset OK, PROVENANCE_OK 161 (unmapped 0), registry drift pass True.
 
 ## Constraints (NON-NEGOTIABLE)
 No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 
-## Canonical verification (green)
+## Canonical verification (re-run 2026-11-10T23:28Z, all green)
 ```bash
-python -m unittest discover tests            # 1124 tests, OK
-python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v
-python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"
-python scripts/check_tracka_scope_registry_drift.py --json   # pass True
+python -m unittest discover tests            # 1124 tests, OK (exit 0)
+python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
+python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
+python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
 ```
 
 ## Heavy-work mandate (future agents cannot avoid heavy work)
