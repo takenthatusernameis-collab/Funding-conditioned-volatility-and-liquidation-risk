@@ -1,0 +1,1504 @@
+{
+  "blockers_global": [
+    "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+    "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS",
+    "INSUFFICIENT_30D_BLOCKS_FOR_CONFIRMATORY",
+    "INSUFFICIENT_SYMBOLS_FOR_CONFIRMATORY",
+    "PROVENANCE_NOT_MACHINE_VERIFIED",
+    "REQUIRED_SERIES_GAPS_OR_MISSING"
+  ],
+  "cache": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache",
+  "candidate": {
+    "all_funding_schema_ok": true,
+    "all_required_series_complete": false,
+    "any_funding_month_missing": false,
+    "blockers": [
+      "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+      "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS",
+      "INSUFFICIENT_30D_BLOCKS_FOR_CONFIRMATORY",
+      "INSUFFICIENT_SYMBOLS_FOR_CONFIRMATORY",
+      "PROVENANCE_NOT_MACHINE_VERIFIED",
+      "REQUIRED_SERIES_GAPS_OR_MISSING"
+    ],
+    "confirmatory_resume_ready": false,
+    "contiguous": true,
+    "min_complete_symbol_days": 0,
+    "month_count": 3,
+    "months": [
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ],
+    "panel_non_overlapping_30d_blocks_estimate": 0,
+    "per_symbol": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "REQUIRED_SERIES_GAPS_OR_MISSING"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 92,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 276,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 276,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 276,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-10": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_10/BNBUSDT-fundingRate-2024-10/BNBUSDT-fundingRate-2024-10.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "c15a07521111bba47fae1272051462dc54454a5ba36d6d91200f90cf7c04e9f0"
+            ]
+          },
+          "2024-11": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_11/BNBUSDT-fundingRate-2024-11/BNBUSDT-fundingRate-2024-11.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "d2d51d093db58bcc3c04e4d6345c4ec9de896e5cedd3d45e54ede110063e6e16"
+            ]
+          },
+          "2024-12": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BNBUSDT_2024_12/BNBUSDT-fundingRate-2024-12/BNBUSDT-fundingRate-2024-12.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "87d61aa84c003d83676b215683a0753fa53ba1b196be804f5ae7e7f95f980437"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12"
+        ],
+        "non_overlapping_30d_blocks": 3,
+        "provenance": {
+          "checked": 0,
+          "files_without_adjacent_sha256_sidecar": 98,
+          "mismatch": 0,
+          "mismatch_samples": [],
+          "ok": 0
+        },
+        "provenance_verified": false,
+        "range": [
+          "2024-10-01",
+          "2024-12-31"
+        ],
+        "required_series_complete": false,
+        "series_day_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 92,
+          "premiumIndexKlines": 0
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-10-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-10-01",
+              "2024-10-02",
+              "2024-10-03",
+              "2024-10-04",
+              "2024-10-05",
+              "2024-10-06",
+              "2024-10-07",
+              "2024-10-08",
+              "2024-10-09",
+              "2024-10-10",
+              "2024-10-11",
+              "2024-10-12",
+              "2024-10-13",
+              "2024-10-14",
+              "2024-10-15",
+              "2024-10-16",
+              "2024-10-17",
+              "2024-10-18",
+              "2024-10-19",
+              "2024-10-20",
+              "2024-10-21",
+              "2024-10-22",
+              "2024-10-23",
+              "2024-10-24",
+              "2024-10-25",
+              "2024-10-26",
+              "2024-10-27",
+              "2024-10-28",
+              "2024-10-29",
+              "2024-10-30",
+              "2024-10-31",
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 92,
+            "present_days": 0
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 92
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-10-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-10-01",
+              "2024-10-02",
+              "2024-10-03",
+              "2024-10-04",
+              "2024-10-05",
+              "2024-10-06",
+              "2024-10-07",
+              "2024-10-08",
+              "2024-10-09",
+              "2024-10-10",
+              "2024-10-11",
+              "2024-10-12",
+              "2024-10-13",
+              "2024-10-14",
+              "2024-10-15",
+              "2024-10-16",
+              "2024-10-17",
+              "2024-10-18",
+              "2024-10-19",
+              "2024-10-20",
+              "2024-10-21",
+              "2024-10-22",
+              "2024-10-23",
+              "2024-10-24",
+              "2024-10-25",
+              "2024-10-26",
+              "2024-10-27",
+              "2024-10-28",
+              "2024-10-29",
+              "2024-10-30",
+              "2024-10-31",
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 92,
+            "present_days": 0
+          }
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "REQUIRED_SERIES_GAPS_OR_MISSING"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 92,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 276,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 276,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 276,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-10": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_10/BTCUSDT-fundingRate-2024-10/BTCUSDT-fundingRate-2024-10.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "c20b8d0f12399686c16b880782a127e5c1b61fe11a6bcb118b210382a21cedb7"
+            ]
+          },
+          "2024-11": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_11/BTCUSDT-fundingRate-2024-11/BTCUSDT-fundingRate-2024-11.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "56722e25782b97b9130ad2971dd2cd052d937714f2ed466bcce5770ff18a0db6"
+            ]
+          },
+          "2024-12": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/BTCUSDT_2024_12/BTCUSDT-fundingRate-2024-12/BTCUSDT-fundingRate-2024-12.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "46bd01d8e090f03573663203739e94427c09ab56f733d653de79de89981d9c09"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12"
+        ],
+        "non_overlapping_30d_blocks": 3,
+        "provenance": {
+          "checked": 0,
+          "files_without_adjacent_sha256_sidecar": 281,
+          "mismatch": 0,
+          "mismatch_samples": [],
+          "ok": 0
+        },
+        "provenance_verified": false,
+        "range": [
+          "2024-10-01",
+          "2024-12-31"
+        ],
+        "required_series_complete": false,
+        "series_day_counts": {
+          "indexPriceKlines": 61,
+          "markPriceKlines": 92,
+          "premiumIndexKlines": 61
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-12-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 31,
+            "present_days": 61
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 92
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-12-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 31,
+            "present_days": 61
+          }
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "REQUIRED_SERIES_GAPS_OR_MISSING"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 92,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 276,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 276,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 276,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-10": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_10/ETHUSDT-fundingRate-2024-10/ETHUSDT-fundingRate-2024-10.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "a3ff5fbce1a09532223a2f973f8dd5840296227d3a61685ec7ca7060806496eb"
+            ]
+          },
+          "2024-11": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_11/ETHUSDT-fundingRate-2024-11/ETHUSDT-fundingRate-2024-11.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "387a4df66d50b4e52bc44df7c77dce0a24dae47d47eebb96e7431bbc3d70aa65"
+            ]
+          },
+          "2024-12": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/ETHUSDT_2024_12/ETHUSDT-fundingRate-2024-12/ETHUSDT-fundingRate-2024-12.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "b82d0aa980a52b37befdc1c9bf840712be0ecbb5ebe066eaefdffc36a479d39f"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12"
+        ],
+        "non_overlapping_30d_blocks": 3,
+        "provenance": {
+          "checked": 0,
+          "files_without_adjacent_sha256_sidecar": 175,
+          "mismatch": 0,
+          "mismatch_samples": [],
+          "ok": 0
+        },
+        "provenance_verified": false,
+        "range": [
+          "2024-10-01",
+          "2024-12-31"
+        ],
+        "required_series_complete": false,
+        "series_day_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 92,
+          "premiumIndexKlines": 31
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-11-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 61,
+            "present_days": 31
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 92
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-11-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 61,
+            "present_days": 31
+          }
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "REQUIRED_SERIES_GAPS_OR_MISSING"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 92,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 276,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 276,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 276,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-10": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_10/SOLUSDT-fundingRate-2024-10/SOLUSDT-fundingRate-2024-10.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "0d9786145434c88f68bb5435ce642202409d01aa3a0de97cd6987a187fe891fb"
+            ]
+          },
+          "2024-11": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_11/SOLUSDT-fundingRate-2024-11/SOLUSDT-fundingRate-2024-11.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "bd7f53227465d9fe9975a2b8f9ebbb6e4b556aba48688025291734d664349aa5"
+            ]
+          },
+          "2024-12": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/SOLUSDT_2024_12/SOLUSDT-fundingRate-2024-12/SOLUSDT-fundingRate-2024-12.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "f8c6d7ebbc227a3203c7f4a959320d48ffa0d84ca7fa3ab2e9d35dc529338814"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12"
+        ],
+        "non_overlapping_30d_blocks": 3,
+        "provenance": {
+          "checked": 0,
+          "files_without_adjacent_sha256_sidecar": 98,
+          "mismatch": 0,
+          "mismatch_samples": [],
+          "ok": 0
+        },
+        "provenance_verified": false,
+        "range": [
+          "2024-10-01",
+          "2024-12-31"
+        ],
+        "required_series_complete": false,
+        "series_day_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 92,
+          "premiumIndexKlines": 0
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-10-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-10-01",
+              "2024-10-02",
+              "2024-10-03",
+              "2024-10-04",
+              "2024-10-05",
+              "2024-10-06",
+              "2024-10-07",
+              "2024-10-08",
+              "2024-10-09",
+              "2024-10-10",
+              "2024-10-11",
+              "2024-10-12",
+              "2024-10-13",
+              "2024-10-14",
+              "2024-10-15",
+              "2024-10-16",
+              "2024-10-17",
+              "2024-10-18",
+              "2024-10-19",
+              "2024-10-20",
+              "2024-10-21",
+              "2024-10-22",
+              "2024-10-23",
+              "2024-10-24",
+              "2024-10-25",
+              "2024-10-26",
+              "2024-10-27",
+              "2024-10-28",
+              "2024-10-29",
+              "2024-10-30",
+              "2024-10-31",
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 92,
+            "present_days": 0
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 92
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-10-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-10-01",
+              "2024-10-02",
+              "2024-10-03",
+              "2024-10-04",
+              "2024-10-05",
+              "2024-10-06",
+              "2024-10-07",
+              "2024-10-08",
+              "2024-10-09",
+              "2024-10-10",
+              "2024-10-11",
+              "2024-10-12",
+              "2024-10-13",
+              "2024-10-14",
+              "2024-10-15",
+              "2024-10-16",
+              "2024-10-17",
+              "2024-10-18",
+              "2024-10-19",
+              "2024-10-20",
+              "2024-10-21",
+              "2024-10-22",
+              "2024-10-23",
+              "2024-10-24",
+              "2024-10-25",
+              "2024-10-26",
+              "2024-10-27",
+              "2024-10-28",
+              "2024-10-29",
+              "2024-10-30",
+              "2024-10-31",
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 92,
+            "present_days": 0
+          }
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "REQUIRED_SERIES_GAPS_OR_MISSING"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 92,
+        "funding": {
+          "flag": "MONTH_FILES_PRESENT",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 276,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 1.0,
+            "expected_slots_heuristic": 276,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 276,
+            "status": "HEURISTIC_DENSE"
+          },
+          "months_expected_for_range": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ],
+          "months_missing_for_range": [],
+          "months_overlap_expected": [
+            "2024-10",
+            "2024-11",
+            "2024-12"
+          ]
+        },
+        "funding_month_audits": {
+          "2024-10": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_10/XRPUSDT-fundingRate-2024-10/XRPUSDT-fundingRate-2024-10.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "6b68aa28339984479e97fe5012edc94467ee8edef2524b7d9af29e214de6c2cb"
+            ]
+          },
+          "2024-11": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_11/XRPUSDT-fundingRate-2024-11/XRPUSDT-fundingRate-2024-11.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "16d1bfe4aeeb1e946c3f6b339116a3a3e08f59335eec961beb98f6e76109c61f"
+            ]
+          },
+          "2024-12": {
+            "adjacent_sha256_sidecar_present": [
+              false
+            ],
+            "blockers": [],
+            "files": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/XRPUSDT_2024_12/XRPUSDT-fundingRate-2024-12/XRPUSDT-fundingRate-2024-12.csv"
+            ],
+            "local_present": true,
+            "schema_ok": true,
+            "sha256": [
+              "fe20e3212280b5c0f06dada3c1e6c9f62e61ad1f611369a745f927dbb6e9903a"
+            ]
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": true,
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12"
+        ],
+        "non_overlapping_30d_blocks": 3,
+        "provenance": {
+          "checked": 0,
+          "files_without_adjacent_sha256_sidecar": 98,
+          "mismatch": 0,
+          "mismatch_samples": [],
+          "ok": 0
+        },
+        "provenance_verified": false,
+        "range": [
+          "2024-10-01",
+          "2024-12-31"
+        ],
+        "required_series_complete": false,
+        "series_day_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 92,
+          "premiumIndexKlines": 0
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-10-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-10-01",
+              "2024-10-02",
+              "2024-10-03",
+              "2024-10-04",
+              "2024-10-05",
+              "2024-10-06",
+              "2024-10-07",
+              "2024-10-08",
+              "2024-10-09",
+              "2024-10-10",
+              "2024-10-11",
+              "2024-10-12",
+              "2024-10-13",
+              "2024-10-14",
+              "2024-10-15",
+              "2024-10-16",
+              "2024-10-17",
+              "2024-10-18",
+              "2024-10-19",
+              "2024-10-20",
+              "2024-10-21",
+              "2024-10-22",
+              "2024-10-23",
+              "2024-10-24",
+              "2024-10-25",
+              "2024-10-26",
+              "2024-10-27",
+              "2024-10-28",
+              "2024-10-29",
+              "2024-10-30",
+              "2024-10-31",
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 92,
+            "present_days": 0
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 92
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": false,
+            "missing_day_ranges": [
+              [
+                "2024-10-01",
+                "2024-12-31"
+              ]
+            ],
+            "missing_days_sample": [
+              "2024-10-01",
+              "2024-10-02",
+              "2024-10-03",
+              "2024-10-04",
+              "2024-10-05",
+              "2024-10-06",
+              "2024-10-07",
+              "2024-10-08",
+              "2024-10-09",
+              "2024-10-10",
+              "2024-10-11",
+              "2024-10-12",
+              "2024-10-13",
+              "2024-10-14",
+              "2024-10-15",
+              "2024-10-16",
+              "2024-10-17",
+              "2024-10-18",
+              "2024-10-19",
+              "2024-10-20",
+              "2024-10-21",
+              "2024-10-22",
+              "2024-10-23",
+              "2024-10-24",
+              "2024-10-25",
+              "2024-10-26",
+              "2024-10-27",
+              "2024-10-28",
+              "2024-10-29",
+              "2024-10-30",
+              "2024-10-31",
+              "2024-11-01",
+              "2024-11-02",
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05",
+              "2024-11-06",
+              "2024-11-07",
+              "2024-11-08",
+              "2024-11-09",
+              "2024-11-10",
+              "2024-11-11",
+              "2024-11-12",
+              "2024-11-13",
+              "2024-11-14",
+              "2024-11-15",
+              "2024-11-16",
+              "2024-11-17",
+              "2024-11-18",
+              "2024-11-19",
+              "2024-11-20",
+              "2024-11-21",
+              "2024-11-22",
+              "2024-11-23",
+              "2024-11-24",
+              "2024-11-25",
+              "2024-11-26",
+              "2024-11-27",
+              "2024-11-28",
+              "2024-11-29",
+              "2024-11-30",
+              "2024-12-01",
+              "2024-12-02",
+              "2024-12-03",
+              "2024-12-04",
+              "2024-12-05",
+              "2024-12-06",
+              "2024-12-07",
+              "2024-12-08",
+              "2024-12-09",
+              "2024-12-10",
+              "2024-12-11",
+              "2024-12-12",
+              "2024-12-13",
+              "2024-12-14",
+              "2024-12-15",
+              "2024-12-16",
+              "2024-12-17",
+              "2024-12-18",
+              "2024-12-19",
+              "2024-12-20",
+              "2024-12-21",
+              "2024-12-22",
+              "2024-12-23",
+              "2024-12-24",
+              "2024-12-25",
+              "2024-12-26",
+              "2024-12-27",
+              "2024-12-28",
+              "2024-12-29",
+              "2024-12-30",
+              "2024-12-31"
+            ],
+            "missing_days_vs_mark_union": 92,
+            "present_days": 0
+          }
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "prereg_hash": null,
+    "provenance_verified": false,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "symbols_ok": 0
+  },
+  "candidate_months": [
+    "2024-10",
+    "2024-11",
+    "2024-12"
+  ],
+  "generated_utc": "2026-11-10T03:15:27Z",
+  "min_blocks": 3,
+  "min_symbols": 5,
+  "mode": "local_only_scoped_deep_audit_no_outcomes_no_network",
+  "next_action": "freeze new prereg before outcomes; verify funding schema/coverage/provenance/checksums; repair/manifest series gaps deterministically from locally present admissible files; no confirmatory outcomes until confirmatory_resume_ready=true",
+  "prereg_hash": null,
+  "repo_root": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk",
+  "summary": {
+    "all_required_series_complete": false,
+    "any_funding_month_missing": false,
+    "candidates_evaluated": 1,
+    "confirmatory_resume_ready": false,
+    "locally_repairable_series_gaps_detected": false,
+    "network_used": false,
+    "outcomes_computed": false,
+    "panel_blocks_estimate": 0,
+    "provenance_verified": false,
+    "symbols_ok": 0
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "window_hints": "2024_10,2024_11,2024_12"
+}
