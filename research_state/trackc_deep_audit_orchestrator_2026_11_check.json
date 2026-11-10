@@ -1,0 +1,642 @@
+{
+  "blockers_global": [
+    "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+    "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS",
+    "INSUFFICIENT_30D_BLOCKS_FOR_CONFIRMATORY",
+    "MISSING_FUNDING_MONTH_FILE",
+    "PROVENANCE_NOT_MACHINE_VERIFIED"
+  ],
+  "cache": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache",
+  "candidate": {
+    "all_funding_schema_ok": true,
+    "all_required_series_complete": true,
+    "any_funding_month_missing": true,
+    "blockers": [
+      "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+      "CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS",
+      "INSUFFICIENT_30D_BLOCKS_FOR_CONFIRMATORY",
+      "MISSING_FUNDING_MONTH_FILE",
+      "PROVENANCE_NOT_MACHINE_VERIFIED"
+    ],
+    "confirmatory_resume_ready": false,
+    "contiguous": true,
+    "min_complete_symbol_days": 8,
+    "month_count": 1,
+    "months": [
+      "2026-11"
+    ],
+    "panel_non_overlapping_30d_blocks_estimate": 0,
+    "per_symbol": {
+      "BNBUSDT": {
+        "blockers": [
+          "FUNDING_MONTH_FILES_MISSING_FOR_RANGE",
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 8,
+        "funding": {
+          "flag": "NO_MONTH_FILES_FOR_RANGE",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 0,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 0.0,
+            "expected_slots_heuristic": 24,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 0,
+            "status": "NO_SLOTS_IN_RANGE"
+          },
+          "months_expected_for_range": [
+            "2026-11"
+          ],
+          "months_missing_for_range": [
+            "2026-11"
+          ],
+          "months_overlap_expected": []
+        },
+        "funding_month_audits": {
+          "2026-11": {
+            "blockers": [
+              "MISSING_LOCAL_FUNDING_MONTH_FILE"
+            ],
+            "files": [],
+            "local_present": false,
+            "schema_ok": false
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": false,
+        "months": [
+          "2026-11"
+        ],
+        "non_overlapping_30d_blocks": 0,
+        "provenance": {
+          "checked_with_hash_source": 0,
+          "files_considered": 25,
+          "manifest_ingest": {
+            "manifests_loaded": [],
+            "manifests_missing": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "records_indexed": 0
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 25,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
+        },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [],
+          "manifests_missing": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "records_indexed": 0
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 25,
+        "provenance_verified": false,
+        "range": [
+          "2026-11-01",
+          "2026-11-08"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          }
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "FUNDING_MONTH_FILES_MISSING_FOR_RANGE",
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 8,
+        "funding": {
+          "flag": "NO_MONTH_FILES_FOR_RANGE",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 0,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 0.0,
+            "expected_slots_heuristic": 24,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 0,
+            "status": "NO_SLOTS_IN_RANGE"
+          },
+          "months_expected_for_range": [
+            "2026-11"
+          ],
+          "months_missing_for_range": [
+            "2026-11"
+          ],
+          "months_overlap_expected": []
+        },
+        "funding_month_audits": {
+          "2026-11": {
+            "blockers": [
+              "MISSING_LOCAL_FUNDING_MONTH_FILE"
+            ],
+            "files": [],
+            "local_present": false,
+            "schema_ok": false
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": false,
+        "months": [
+          "2026-11"
+        ],
+        "non_overlapping_30d_blocks": 0,
+        "provenance": {
+          "checked_with_hash_source": 0,
+          "files_considered": 25,
+          "manifest_ingest": {
+            "manifests_loaded": [],
+            "manifests_missing": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "records_indexed": 0
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 25,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
+        },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [],
+          "manifests_missing": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "records_indexed": 0
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 25,
+        "provenance_verified": false,
+        "range": [
+          "2026-11-01",
+          "2026-11-08"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          }
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "FUNDING_MONTH_FILES_MISSING_FOR_RANGE",
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 8,
+        "funding": {
+          "flag": "NO_MONTH_FILES_FOR_RANGE",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 0,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 0.0,
+            "expected_slots_heuristic": 24,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 0,
+            "status": "NO_SLOTS_IN_RANGE"
+          },
+          "months_expected_for_range": [
+            "2026-11"
+          ],
+          "months_missing_for_range": [
+            "2026-11"
+          ],
+          "months_overlap_expected": []
+        },
+        "funding_month_audits": {
+          "2026-11": {
+            "blockers": [
+              "MISSING_LOCAL_FUNDING_MONTH_FILE"
+            ],
+            "files": [],
+            "local_present": false,
+            "schema_ok": false
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": false,
+        "months": [
+          "2026-11"
+        ],
+        "non_overlapping_30d_blocks": 0,
+        "provenance": {
+          "checked_with_hash_source": 0,
+          "files_considered": 25,
+          "manifest_ingest": {
+            "manifests_loaded": [],
+            "manifests_missing": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "records_indexed": 0
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 25,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
+        },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [],
+          "manifests_missing": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "records_indexed": 0
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 25,
+        "provenance_verified": false,
+        "range": [
+          "2026-11-01",
+          "2026-11-08"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          }
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "FUNDING_MONTH_FILES_MISSING_FOR_RANGE",
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 8,
+        "funding": {
+          "flag": "NO_MONTH_FILES_FOR_RANGE",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 0,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 0.0,
+            "expected_slots_heuristic": 24,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 0,
+            "status": "NO_SLOTS_IN_RANGE"
+          },
+          "months_expected_for_range": [
+            "2026-11"
+          ],
+          "months_missing_for_range": [
+            "2026-11"
+          ],
+          "months_overlap_expected": []
+        },
+        "funding_month_audits": {
+          "2026-11": {
+            "blockers": [
+              "MISSING_LOCAL_FUNDING_MONTH_FILE"
+            ],
+            "files": [],
+            "local_present": false,
+            "schema_ok": false
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": false,
+        "months": [
+          "2026-11"
+        ],
+        "non_overlapping_30d_blocks": 0,
+        "provenance": {
+          "checked_with_hash_source": 0,
+          "files_considered": 25,
+          "manifest_ingest": {
+            "manifests_loaded": [],
+            "manifests_missing": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "records_indexed": 0
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 25,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
+        },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [],
+          "manifests_missing": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "records_indexed": 0
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 25,
+        "provenance_verified": false,
+        "range": [
+          "2026-11-01",
+          "2026-11-08"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          }
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "FUNDING_MONTH_FILES_MISSING_FOR_RANGE",
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED"
+        ],
+        "confirmatory_ready_symbol": false,
+        "days": 8,
+        "funding": {
+          "flag": "NO_MONTH_FILES_FOR_RANGE",
+          "funding_distinct_days_detected": 1035,
+          "funding_rows_in_day_range": 0,
+          "funding_slot_coverage_diagnostic": {
+            "coverage_ratio_heuristic": 0.0,
+            "expected_slots_heuristic": 24,
+            "note": "Heuristic only (3x8h/day). Funding schedule/partial days/window edges can make this differ from true completeness. Use for gap planning, not confirmatory proof.",
+            "slots_observed": 0,
+            "status": "NO_SLOTS_IN_RANGE"
+          },
+          "months_expected_for_range": [
+            "2026-11"
+          ],
+          "months_missing_for_range": [
+            "2026-11"
+          ],
+          "months_overlap_expected": []
+        },
+        "funding_month_audits": {
+          "2026-11": {
+            "blockers": [
+              "MISSING_LOCAL_FUNDING_MONTH_FILE"
+            ],
+            "files": [],
+            "local_present": false,
+            "schema_ok": false
+          }
+        },
+        "funding_schema_ok": true,
+        "has_1h_klines_zip_detected": true,
+        "has_funding_files_detected": false,
+        "months": [
+          "2026-11"
+        ],
+        "non_overlapping_30d_blocks": 0,
+        "provenance": {
+          "checked_with_hash_source": 0,
+          "files_considered": 25,
+          "manifest_ingest": {
+            "manifests_loaded": [],
+            "manifests_missing": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "records_indexed": 0
+          },
+          "mismatch_count": 0,
+          "mismatch_samples": [],
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 25,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
+        },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [],
+          "manifests_missing": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "records_indexed": 0
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 25,
+        "provenance_verified": false,
+        "range": [
+          "2026-11-01",
+          "2026-11-08"
+        ],
+        "required_series_complete": true,
+        "series_day_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "series_gaps": {
+          "indexPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "markPriceKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          },
+          "premiumIndexKlines": {
+            "complete_vs_mark_union": true,
+            "missing_day_ranges": [],
+            "missing_days_sample": [],
+            "missing_days_vs_mark_union": 0,
+            "present_days": 8
+          }
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "prereg_hash": null,
+    "provenance_verified": false,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "symbols_ok": 5
+  },
+  "candidate_months": [
+    "2026-11"
+  ],
+  "generated_utc": "2026-11-10T08:37:41Z",
+  "min_blocks": 3,
+  "min_symbols": 5,
+  "mode": "local_only_scoped_deep_audit_no_outcomes_no_network",
+  "next_action": "freeze new prereg before outcomes; verify funding schema/coverage/provenance/checksums; repair/manifest series gaps deterministically from locally present admissible files; no confirmatory outcomes until confirmatory_resume_ready=true",
+  "prereg_hash": null,
+  "repo_root": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk",
+  "summary": {
+    "all_required_series_complete": true,
+    "any_funding_month_missing": true,
+    "candidates_evaluated": 1,
+    "confirmatory_resume_ready": false,
+    "locally_repairable_series_gaps_detected": false,
+    "network_used": false,
+    "outcomes_computed": false,
+    "panel_blocks_estimate": 0,
+    "provenance_verified": false,
+    "symbols_ok": 5
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "window_hints": "2026_11"
+}
