@@ -118,12 +118,12 @@
           "checked_with_hash_source": 0,
           "files_considered": 98,
           "manifest_ingest": {
-            "manifests_loaded": [
+            "manifests_loaded": [],
+            "manifests_missing": [
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
             ],
-            "manifests_missing": [],
-            "records_indexed": 3819
+            "records_indexed": 0
           },
           "mismatch_count": 0,
           "mismatch_samples": [],
@@ -136,12 +136,12 @@
         },
         "provenance_checked": 0,
         "provenance_manifest_ingest": {
-          "manifests_loaded": [
+          "manifests_loaded": [],
+          "manifests_missing": [
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
           ],
-          "manifests_missing": [],
-          "records_indexed": 3819
+          "records_indexed": 0
         },
         "provenance_mismatch": 0,
         "provenance_ok": 0,
@@ -467,12 +467,12 @@
           "checked_with_hash_source": 0,
           "files_considered": 281,
           "manifest_ingest": {
-            "manifests_loaded": [
+            "manifests_loaded": [],
+            "manifests_missing": [
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
             ],
-            "manifests_missing": [],
-            "records_indexed": 3819
+            "records_indexed": 0
           },
           "mismatch_count": 0,
           "mismatch_samples": [],
@@ -485,12 +485,12 @@
         },
         "provenance_checked": 0,
         "provenance_manifest_ingest": {
-          "manifests_loaded": [
+          "manifests_loaded": [],
+          "manifests_missing": [
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
           ],
-          "manifests_missing": [],
-          "records_indexed": 3819
+          "records_indexed": 0
         },
         "provenance_mismatch": 0,
         "provenance_ok": 0,
@@ -694,12 +694,12 @@
           "checked_with_hash_source": 0,
           "files_considered": 175,
           "manifest_ingest": {
-            "manifests_loaded": [
+            "manifests_loaded": [],
+            "manifests_missing": [
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
             ],
-            "manifests_missing": [],
-            "records_indexed": 3819
+            "records_indexed": 0
           },
           "mismatch_count": 0,
           "mismatch_samples": [],
@@ -712,12 +712,12 @@
         },
         "provenance_checked": 0,
         "provenance_manifest_ingest": {
-          "manifests_loaded": [
+          "manifests_loaded": [],
+          "manifests_missing": [
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
           ],
-          "manifests_missing": [],
-          "records_indexed": 3819
+          "records_indexed": 0
         },
         "provenance_mismatch": 0,
         "provenance_ok": 0,
@@ -981,12 +981,12 @@
           "checked_with_hash_source": 0,
           "files_considered": 98,
           "manifest_ingest": {
-            "manifests_loaded": [
+            "manifests_loaded": [],
+            "manifests_missing": [
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
             ],
-            "manifests_missing": [],
-            "records_indexed": 3819
+            "records_indexed": 0
           },
           "mismatch_count": 0,
           "mismatch_samples": [],
@@ -999,12 +999,12 @@
         },
         "provenance_checked": 0,
         "provenance_manifest_ingest": {
-          "manifests_loaded": [
+          "manifests_loaded": [],
+          "manifests_missing": [
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
           ],
-          "manifests_missing": [],
-          "records_indexed": 3819
+          "records_indexed": 0
         },
         "provenance_mismatch": 0,
         "provenance_ok": 0,
@@ -1330,12 +1330,12 @@
           "checked_with_hash_source": 0,
           "files_considered": 98,
           "manifest_ingest": {
-            "manifests_loaded": [
+            "manifests_loaded": [],
+            "manifests_missing": [
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
               "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
             ],
-            "manifests_missing": [],
-            "records_indexed": 3819
+            "records_indexed": 0
           },
           "mismatch_count": 0,
           "mismatch_samples": [],
@@ -1348,12 +1348,12 @@
         },
         "provenance_checked": 0,
         "provenance_manifest_ingest": {
-          "manifests_loaded": [
+          "manifests_loaded": [],
+          "manifests_missing": [
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
             "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
           ],
-          "manifests_missing": [],
-          "records_indexed": 3819
+          "records_indexed": 0
         },
         "provenance_mismatch": 0,
         "provenance_ok": 0,
@@ -1609,7 +1609,7 @@
     "2024-11",
     "2024-12"
   ],
-  "generated_utc": "2026-11-10T05:37:14Z",
+  "generated_utc": "2026-11-10T07:12:51Z",
   "min_blocks": 3,
   "min_symbols": 5,
   "mode": "local_only_scoped_deep_audit_no_outcomes_no_network",
