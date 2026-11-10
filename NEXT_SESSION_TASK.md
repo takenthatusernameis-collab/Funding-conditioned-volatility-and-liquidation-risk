@@ -1,8 +1,8 @@
 # NEXT_SESSION_TASK.md — Single Durable Initial Task for Next Agentic Session
-**Timestamp (UTC):** 2026-11-10T11:30:05Z
+**Timestamp (UTC):** 2026-11-10T11:36:37Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Project priority (by repo name):** 1) Funding-conditioned volatility (Track C), 2) liquidation risk (Track A/B).
-**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:24:53Z) — this file is the timestamped initial task message the next session must execute.
+**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:36:37Z) — this file is the timestamped initial task message the next session must execute.
 
 ## Current verdict (do not relitigate)
 - **Track C / H1_primary (funding-conditioned volatility forecast vs RV-only baseline): CONCLUDED UNDER CONSTRAINTS / NOT_SUPPORTED.** All locally available provenance-verified Track C panels with >=3 non-overlapping 30-day blocks tested (FCLR-003, FCLR-008, FCLR-009, FCLR-012-V, FCLR-013, FCLR-014). FCLR-014 (2025 H1, frozen prereg): C2 vs B1 rel QLIKE reduction **1.14%** (<2% floor), 95% CI **[-0.016361, 0.007728] crosses zero**, test window **17 days / 0 blocks** (<3). Forecast gate **NOT_MET**; overlay **INELIGIBLE**. `next_unfinished_task (Track C): NONE` pending a materially different, local, unauthenticated, provenance-verified data route.

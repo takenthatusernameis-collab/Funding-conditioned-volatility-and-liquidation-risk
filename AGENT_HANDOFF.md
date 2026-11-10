@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: Track C / H001 first, then liquidation)
 
-**Updated:** 2026-11-10T11:30:05Z — **P0 ACTIVE (Track B, MANDATORY).** Track C / H1 concluded NOT_SUPPORTED under constraints (`next_unfinished_task (Track C): NONE`). **Single durable initial task is `NEXT_SESSION_TASK.md` (2026-11-10T11:30:05Z): execute Track B modeled liquidation boundary-breach campaign on verified local data** (admissibility lock → prereg before outcomes → confirmatory eval → verdict/registry/handoff). Track A remains STRUCTURALLY_BLOCKED. No network/paid/manual/credentialed data; no fabricated provenance; no threshold shopping; no holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
+**Updated:** 2026-11-10T11:36:37Z — **P0 ACTIVE (Track B, MANDATORY).** Track C / H1 concluded NOT_SUPPORTED under constraints (`next_unfinished_task (Track C): NONE`). **Single durable initial task is `NEXT_SESSION_TASK.md` (2026-11-10T11:36:37Z): execute Track B modeled liquidation boundary-breach campaign on verified local data** (admissibility lock → prereg before outcomes → confirmatory eval → verdict/registry/handoff). Track A remains STRUCTURALLY_BLOCKED. No network/paid/manual/credentialed data; no fabricated provenance; no threshold shopping; no holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:30:05Z (see `NEXT_SESSION_TASK.md`)
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:36:37Z (see `NEXT_SESSION_TASK.md`)
 
 **PRIMARY FOCUS (repo-name priority): Track C / H001 — funding-conditioned volatility forecast vs RV-only baseline.**
 Status: **CONCLUDED UNDER CONSTRAINTS** (exit criteria 2). Forecast gate NOT_MET on every claim-worthy local panel (FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014). `next_unfinished_task: NONE` for Track C pending a materially different, local/unauthenticated, verifiable data route.
@@ -155,4 +155,4 @@ Non-negotiable execution rules in `FOCUS_CAMPAIGN.md` §NON-NEGOTIABLE EXECUTION
 
 ---
 
-**END OF SINGLE DURABLE HANDOFF. Updated: 2026-11-10T11:30:05Z. Track C concluded (NOT_SUPPORTED, `next_unfinished_task: NONE`). Track B UNTESTED and MANDATORY: execute `NEXT_SESSION_TASK.md` M5 campaign on verified local data (no new source required).**
+**END OF SINGLE DURABLE HANDOFF. Updated: 2026-11-10T11:36:37Z. Track C concluded (NOT_SUPPORTED, `next_unfinished_task: NONE`). Track B UNTESTED and MANDATORY: execute `NEXT_SESSION_TASK.md` M5 campaign on verified local data (no new source required).**
