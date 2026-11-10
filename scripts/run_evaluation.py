@@ -116,6 +116,17 @@ elif EXPERIMENT == "FCLR-013":
     DATA_END = "2026-09-30"
     SPLIT_KEY = "split_boundaries_fclr013"
     START_ALL = "2026-07-01"
+elif EXPERIMENT == "FCLR-014":
+    # Confirmatory Track C / H001 on the 2025 H1 panel 2025-01-01..2025-06-07.
+    # 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT), 158 days, 6
+    # non-overlapping 30-day blocks available. Pre-registered in
+    # research_state/research_protocol_fclr014.md BEFORE outcomes; splits frozen
+    # by M2 procedure BEFORE this run. Explicit OUT so this experiment can never
+    # silently fall through to the canonical evaluation_summary.md.
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
+    DATA_END = "2025-06-07"
+    SPLIT_KEY = "split_boundaries_fclr014"
+    START_ALL = "2025-01-01"
 else:
     OUT = REPO / "research_state" / "evaluation_summary.md"
     DATA_END = "2024-03-31"
