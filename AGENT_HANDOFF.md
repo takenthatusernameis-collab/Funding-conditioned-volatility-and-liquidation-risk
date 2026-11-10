@@ -1,18 +1,18 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: Track C / H001 first)
 
-**Updated:** 2026-11-10T10:14:18Z — **P0 ACTIVE.** Repo `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority = **Track C / H001 (funding-conditioned volatility forecast vs RV-only baseline)** first; Track A/B liquidation tracks secondary. Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
+**Updated:** 2026-11-10T10:23:42Z — **P0 ACTIVE.** Repo `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority = **Track C / H001 (funding-conditioned volatility forecast vs RV-only baseline)** first; Track A/B liquidation tracks secondary. Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T10:14:18Z
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T10:23:42Z
 
 **PRIMARY FOCUS (repo-name priority): Track C / H001 — funding-conditioned volatility forecast vs RV-only baseline.**
 
-**Current state (verified THIS session 2026-11-10T10:14:18Z):**
+**Current state (verified THIS session 2026-11-10T10:23:42Z):**
 - **Dep-light gate:** 48/48 tests PASS (Ran 48 tests in 76.6s — OK)
 - **Provenance machine-verified:** 161 funding CSV files, all with adjacent `.sha256` sidecars, `provenance_verified=true`, `unmapped_count=0`, 36001 manifest records indexed
 - **2025 H1 window (2025-01-01..2025-06-07) funding schema audit:** `all_ok=true`, `missing=0`, `schema_bad=0` for 5 symbols × 6 months
-- **Deep audit on 2025 H1 window:** `provenance_verified=true`, `symbols_ok=5`, `panel_blocks_estimate=6` (>=3 required), `confirmatory_resume_ready=false` (blockers: `CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES`, `CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS` — provenance IS verified, prereg needs finalization)
+- **Deep audit on 2025 H1 window:** `provenance_verified=true`, `symbols_ok=5`, `panel_blocks_estimate=6` (>=3 required), `confirmatory_resume_ready=false` (blockers: `CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES` — provenance IS verified, prereg needs finalization)
 - **2025 full panel (2025-01-01..2025-12-31) already verified:** 5 symbols × 365 days, 12 blocks each, all series complete (`research_state/trackc_deep_audit_2025_full_check.json`)
 
 **Already tested (preserved nulls, no re-use — DO NOT RE-INSPECT):**
@@ -132,4 +132,4 @@ Non-negotiable execution rules in `FOCUS_CAMPAIGN.md` §NON-NEGOTIABLE EXECUTION
 ---
 
 **END OF SINGLE DURABLE HANDOFF. next_unfinished_task: M2 — Create research_state/research_protocol_fclr014.md with frozen 2025 H1 splits (2025-01-01..2025-06-07, 60/20/20 chronological, 7-day purge/embargo, >=3 blocks), record prereg_hash + frozen_before_outcomes=true in run_manifest.json, THEN M3 — run FCLR_EXPERIMENT=FCLR-014 python scripts/run_evaluation.py BEFORE any outcome inspection.**
-**Updated: 2026-11-10T10:14:18Z**
+**Updated: 2026-11-10T10:23:42Z**
