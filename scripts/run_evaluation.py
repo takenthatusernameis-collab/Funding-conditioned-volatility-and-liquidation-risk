@@ -97,6 +97,16 @@ elif EXPERIMENT == "FCLR-012-V":
     DATA_END = "2026-11-02"
     SPLIT_KEY = "split_boundaries_fclr012v"
     START_ALL = "2026-08-07"
+elif EXPERIMENT == "FCLR-009":
+    # Confirmatory on the unsealed 2025-01-01..2025-12-31 panel (5 symbols, 365 days,
+    # 12 non-overlapping 30-day blocks; test window alone = 6 blocks). Pre-registered
+    # in research_state/research_protocol_fclr009.md BEFORE outcomes; splits frozen
+    # by scripts/freeze_fclr009_splits.py BEFORE this run. Explicit OUT so this
+    # experiment can never silently fall through to the canonical evaluation_summary.md.
+    OUT = REPO / "research_state" / f"evaluation_summary_{EXPERIMENT}.md"
+    DATA_END = "2025-12-31"
+    SPLIT_KEY = "split_boundaries_fclr009"
+    START_ALL = "2025-01-01"
 elif EXPERIMENT == "FCLR-013":
     # Confirmatory reopen on the GO-candidate 2026 Q3 5-symbol panel
     # (2026-07-01..2026-09-30, 92 days, 3x30d blocks). Coverage-audited in
@@ -111,6 +121,23 @@ else:
     DATA_END = "2024-03-31"
     SPLIT_KEY = "split_boundaries"
     START_ALL = "2024-01-01"
+
+# Fail-closed guard: only explicitly registered experiments may run. An unknown
+# FCLR_EXPERIMENT value must NOT fall through to the canonical evaluation_summary.md
+# (that silently overwrote the committed FCLR-001 summary and produced a 0-row
+# NOT_EVALUABLE report under a frozen-but-unmatched split set).
+_CANONICAL_SUMMARY = REPO / "research_state" / "evaluation_summary.md"
+if OUT == _CANONICAL_SUMMARY and EXPERIMENT != "FCLR-001":
+    raise SystemExit(
+        f"REFUSAL: FCLR_EXPERIMENT={EXPERIMENT!r} is not registered in run_evaluation.py "
+        f"and would overwrite the canonical {_CANONICAL_SUMMARY.name}. "
+        f"Register an explicit OUT/SPLIT_KEY/START_ALL/DATA_END branch first."
+    )
+if not OUT.exists():
+    raise SystemExit(
+        f"REFUSAL: OUT={OUT} does not exist. Refusing to create a new summary file "
+        f"from an unregistered experiment path."
+    )
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 EPS = 1e-12

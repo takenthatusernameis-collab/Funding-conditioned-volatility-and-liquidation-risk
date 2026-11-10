@@ -9,6 +9,46 @@ holdout for selection. All outcomes use the frozen train/val/test split with a
 7-calendar-day embargo.
 
 ---
+## FCLR-009 (CONFIRMATORY VOLATILITY, UNSEALED 2025 PANEL) — 2026-11-10T00:15:40Z
+
+- **Outcome:** NOT_MET (negative). Forecast gate NOT MET. Risk overlay INELIGIBLE.
+- **Contrast:** C2 vs B1 on next-24-hour realized variance of mark-price returns,
+  out-of-sample QLIKE. C2 = RV-HAR + signed funding + 90-day absolute-funding
+  percentile + mark/index premium + mark/EMA24 distance; B1 = RV-HAR only.
+- **Point estimate:** -0.43% relative QLIKE (negative diff = improvement, i.e. C2
+  marginally better on average but far below the pre-registered 2% materiality floor).
+- **Uncertainty:** paired block bootstrap (2000 reps, ~24h blocks across symbols)
+  95% CI [-0.003120, 0.006165] — **crosses zero**.
+- **Claim-worthiness minimums:** MET. Paired OOS instruments 5 (BNBUSDT, BTCUSDT,
+  ETHUSDT, SOLUSDT, XRPUSDT); test window 2025-06-08..2025-12-31 = 207 days =
+  **6 non-overlapping 30-day blocks** (>=3 required). This is the widest
+  claim-worthy panel evaluated to date (365 common days, 8760 hourly timestamps).
+- **Test-set QLIKE:** B0 0.367906 | B1 0.340756 | C1 0.339628 | C2 0.342205
+  (n=24495 paired for B1/C1/C2; B0 n=24648).
+- **Secondary contrasts (also cross zero):** C1 vs B1 +0.33% (CI [-0.004738, 0.002440]);
+  C2 vs C1 -0.76% (CI [-0.001426, 0.006739]).
+- **Data:** unauthenticated Binance public archive, cached locally under
+  research_state/data_cache. Coverage-only audit
+  research_state/fclr009_coverage_audit.json confirmed contiguous 2025-01-01..2025-12-31
+  across all 5 symbols (mark/index/premium/klines present; funding 12 month files).
+  No new downloads, no credentials, no network in the run.
+- **Protocol discipline:** pre-registered in research_state/research_protocol_fclr009.md
+  BEFORE outcomes; splits frozen by scripts/freeze_fclr009_splits.py BEFORE outcomes
+  (run_manifest.json#split_boundaries_fclr009, frozen_before_outcomes=true); no tuning
+  on the test window; no sealed-holdout reuse; no threshold shopping.
+- **Interpretation:** On the widest available claim-worthy panel, adding funding
+  extremes plus pre-specified price-dislocation/smoothing features to a realized-
+  volatility-only HAR baseline yields no out-of-sample QLIKE improvement over the
+  pre-registered 2% floor and a CI that crosses zero. Consistent with the negative
+  confirmatory verdicts of FCLR-003 (2024-12) and FCLR-013 (2026 Q3), and with the
+  directionally positive-but-inconclusive unsealed FCLR-008. H001 remains NOT_SUPPORTED
+  across every claim-worthy window tested. Retain the null; do NOT promote.
+- **Artifact:** research_state/evaluation_summary_FCLR009.md;
+  prereg research_state/research_protocol_fclr009.md;
+  coverage research_state/fclr009_coverage_audit.json;
+  splits run_manifest.json#split_boundaries_fclr009.
+
+---
 ## FCLR-012-V (FORWARD VOLATILITY, UNSEALED 2026 PANEL) — 2026-11-04T00:52Z
 
 - **Outcome:** INCONCLUSIVE (PILOT). Forecast gate NOT MET.
