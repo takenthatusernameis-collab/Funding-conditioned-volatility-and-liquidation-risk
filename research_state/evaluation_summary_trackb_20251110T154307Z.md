@@ -3,7 +3,7 @@
 Experiment: TRACKB-20251110T154307Z (Track B modeled boundary breaches)
 Campaign: TRACKB-MODELED-BREACH-20261110T154307Z
 Data range: 2025-01-01 .. 2025-10-31
-Generated: 2026-11-10T16:08:55Z
+Generated: 2026-11-10T17:43:47Z
 Proxy: synthetic boundary proxy ≠ observed liquidations
 
 ## Splits (frozen before outcomes)
