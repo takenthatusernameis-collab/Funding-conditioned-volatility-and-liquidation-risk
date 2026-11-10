@@ -1,16 +1,16 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: liquidation risk Track B first, then volatility Track C)
 
-**Updated:** 2026-11-10T11:39:30Z — **P0 ACTIVE (Track B, MANDATORY).** Track C / H1 concluded NOT_SUPPORTED under constraints (`next_unfinished_task (Track C): NONE`). **Single durable initial task is `NEXT_SESSION_TASK.md` (2026-11-10T11:39:30Z): execute Track B modeled liquidation boundary-breach campaign on verified local data** (admissibility lock → prereg before outcomes → confirmatory eval → verdict/registry/handoff). Track A remains STRUCTURALLY_BLOCKED. No network/paid/manual/credentialed data; no fabricated provenance; no threshold shopping; no holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
+**Updated:** 2026-11-10T15:37:06Z — **P0 ACTIVE (Track B, MANDATORY).** Track C / H1 concluded NOT_SUPPORTED under constraints (`next_unfinished_task (Track C): NONE`). **Single durable initial task is `NEXT_SESSION_TASK.md` (2026-11-10T15:37:06Z): execute Track B modeled liquidation boundary-breach campaign on verified local data** (admissibility lock → prereg before outcomes → confirmatory eval → verdict/registry/handoff). Track A remains STRUCTURALLY_BLOCKED. No network/paid/manual/credentialed data; no fabricated provenance; no threshold shopping; no holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:39:30Z (see `NEXT_SESSION_TASK.md`)
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T15:37:06Z (see `NEXT_SESSION_TASK.md`)
 
 **PRIMARY FOCUS (repo-name priority): Track B / liquidation-risk — modeled boundary-breach campaign.** Repo name `Funding-conditioned-volatility-and-liquidation-risk`: Track C (volatility) is concluded NOT_SUPPORTED; Track A (observed liquidations) is STRUCTURALLY_BLOCKED. The untested liquidation-risk leg — Track B modeled breach on local mark/index/premium/klines + funding — is the **only** heavy-work path that can advance repo-name scope without network/new data.
 
 Status: **UNTESTED** — no modeled liquidation boundary-breach scenario has been preregistered before outcome inspection on an admissible local panel with `frozen_before_outcomes=true`.
 
-### Session-start state (verified 2026-11-10T11:16:16Z; FCLR-014 outcomes INSPECTED)
+### Session-start state (verified 2026-11-10T15:37:06Z; FCLR-014 outcomes INSPECTED)
 - **M1/M2 COMPLETE & frozen:** `research_state/research_protocol_fclr014.md` v2.0 `FROZEN_BEFORE_OUTCOMES` (2025-01-01..2025-06-07, 5 symbols BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, 60/20/20 chronological, 7-day purge/embargo, Holm multiplicity, 2000-rep block bootstrap, 2% materiality floor). `prereg_hash=8563163c62524605cbf7f11603759aee2210d133f82c3742319a6dd85dfca597` and `split_boundaries_fclr014.frozen_before_outcomes=true` recorded in `research_state/run_manifest.json`.
 - **M3 COMPLETE — CONFIRMATORY RUN EXECUTED:** `FCLR_EXPERIMENT=FCLR-014 python scripts/run_evaluation.py` completed 2026-11-10T10:38:27Z. Wrote `research_state/evaluation_summary_FCLR-014.md`. Results: C2 vs B1 relative QLIKE reduction **1.14%** (<2% floor), 95% CI **[-0.016361, 0.007728] crosses zero**, test window 2025-05-22..2025-06-07 = **17 days = 0 non-overlapping 30-day blocks** (<3). **Forecast gate: NOT_MET**.
 - **Admissibility evidence (do not re-inspect FCLR-009 window):** dep-light gate 48/48 PASS; provenance machine-verified 161 funding CSVs, `provenance_verified=true`, `unmapped_count=0` (36001 manifest records); 2025 H1 funding schema `all_ok=true`, `missing=0`, `schema_bad=0` (5×6 months); `research_state/trackc_deep_audit_2025_h1_check.json` → `provenance_verified=true`, `symbols_ok=5`, `panel_blocks_estimate=6`, `all_required_series_complete=true`; 2025 full panel verified (`trackc_deep_audit_2025_full_check.json`).
@@ -41,7 +41,7 @@ Track C is concluded. Track A is STRUCTURALLY_BLOCKED (no admissible unauthentic
 
 ---
 
-## 🔧 BOTTLENECKS REMOVED (verified 2026-11-10T10:38:27Z; no remaining locally repairable Track C bottleneck)
+## 🔧 BOTTLENECKS REMOVED (verified 2026-11-10T15:37:06Z; no remaining locally repairable Track C bottleneck)
 
 | Bottleneck | Before | After | Evidence |
 |---|---|---|---|
@@ -111,7 +111,9 @@ grep -i "trackb\|track_b" research_state/hypothesis_registry.json research_state
 - `research_state/funding_schema_audit_2025_h1.json` — 2025 H1 funding schema (all_ok=true, missing=0)
 - `research_state/liquidation_sources_enumeration.md` — Track A structural block evidence
 - `research_state/track_a_structural_block.md` — Track A irrefutable structural block (2026-10-30)
+- `research_state/trackb_TB1_admissibility.json` — Track B 2025-2026 candidate panel (5 symbols, 22 months, 22 blocks estimate, provenance_verified=true, confirmatory_ready_symbol=false due to frozen-prereg blocker only)
 - `scripts/trackc_provenance_lineage.py`, `scripts/trackc_funding_schema_audit.py`, `scripts/trackc_gap_repair_manifest.py`, `scripts/trackc_panel_deep_audit_orchestrator.py`, `scripts/run_evaluation.py`, `scripts/freeze_fclr009_splits.py` — audit/repair/eval tooling
+- `scripts/synthetic_boundary_labels.py` — Track B modeled breach label primitive (tests in `tests/test_synthetic_boundary_labels.py`)
 
 ---
 
@@ -154,4 +156,4 @@ Non-negotiable execution rules in `FOCUS_CAMPAIGN.md` §NON-NEGOTIABLE EXECUTION
 
 ---
 
-**END OF SINGLE DURABLE HANDOFF. Updated: 2026-11-10T11:39:30Z. Track C concluded (NOT_SUPPORTED, `next_unfinished_task: NONE`). Track B UNTESTED and MANDATORY: execute `NEXT_SESSION_TASK.md` M5 campaign on verified local data (no new source required).**
+**END OF SINGLE DURABLE HANDOFF. Updated: 2026-11-10T15:37:06Z. Track C concluded (NOT_SUPPORTED, `next_unfinished_task: NONE`). Track B UNTESTED and MANDATORY: execute `NEXT_SESSION_TASK.md` M5 campaign on verified local data (no new source required).**

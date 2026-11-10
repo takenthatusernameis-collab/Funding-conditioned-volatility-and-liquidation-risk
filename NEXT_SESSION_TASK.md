@@ -1,11 +1,11 @@
 # NEXT_SESSION_TASK.md — Single Durable Initial Task for Next Agentic Session
-**Timestamp (UTC):** 2026-11-10T11:39:30Z
+**Timestamp (UTC):** 2026-11-10T15:37:06Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Project priority (by repo name):** 1) liquidation risk — Track B modeled boundary breaches (untested, executable locally), 2) funding-conditioned volatility — Track C (concluded NOT_SUPPORTED), 3) Track A observed liquidations (STRUCTURALLY_BLOCKED).
-**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:39:30Z) — this file is the timestamped initial task message the next session must execute.
+**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T15:37:06Z) — this file is the timestamped initial task message the next session must execute.
 
 ## Current verdict (do not relitigate)
-- **Track B (modeled liquidation boundary breaches): UNTESTED — MANDATORY NEXT.** Repo-name liquidation leg. No modeled breach scenario has been preregistered before outcome inspection on an admissible local panel. Executable now on local data (mark/index/premium/klines + funding already present and provenance-verified). **This is the only heavy-work path that can advance repo-name scope without network/new data.**
+- **Track B (modeled liquidation boundary breaches): UNTESTED — MANDATORY NEXT.** Repo-name liquidation leg. No modeled breach scenario has been preregistered before outcome inspection on an admissible local panel with `frozen_before_outcomes=true`. Executable now on local data (mark/index/premium/klines + funding already present and provenance-verified). **This is the only heavy-work path that can advance repo-name scope without network/new data.**
 - **Track C / H1_primary (funding-conditioned volatility forecast vs RV-only baseline): CONCLUDED UNDER CONSTRAINTS / NOT_SUPPORTED.** All locally available provenance-verified Track C panels with >=3 non-overlapping 30-day blocks tested (FCLR-003, FCLR-008, FCLR-009, FCLR-012-V, FCLR-013, FCLR-014). FCLR-014 (2025 H1, frozen prereg): C2 vs B1 rel QLIKE reduction **1.14%** (<2% floor), 95% CI **[-0.016361, 0.007728] crosses zero**, test window **17 days / 0 blocks** (<3). Forecast gate **NOT_MET**; overlay **INELIGIBLE**. `next_unfinished_task (Track C): NONE` pending a materially different, local, unauthenticated, provenance-verified data route.
 - **Track A (observed liquidations): STRUCTURALLY_BLOCKED** — no admissible unauthenticated historical liquidation census covering required windows (see `research_state/track_a_structural_block.md`, `research_state/liquidation_sources_enumeration.md`). Track A ≠ Track B ≠ Track C.
 
@@ -13,13 +13,13 @@
 - Local provenance machine-verified: `provenance_verified=true`, `unmapped_count=0` across local funding data (36001 manifest records); funding schema/coverage OK for 2024-2025 panels used.
 - Dep-light reproducibility gate: 48/48 PASS (`tests.test_volatility_features_splits`, `tests.test_synthetic_boundary_labels`, `tests.test_trackc_panel_admissibility_audit`, `tests.test_trackc_gap_repair_manifest`, `tests.test_trackc_funding_schema_audit`, `tests.test_trackc_panel_window_planner` selected, `tests.test_trackc_panel_deep_audit_orchestrator`, `tests.test_trackc_provenance_lineage`).
 - Track B labeling primitive exists: `scripts/synthetic_boundary_labels.py` (+ tests) — modeled/synthetic breach proxy only, not observed liquidations.
-- Local kline/price series present for BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT across 2024-01..2024-03 daily dirs and extensive 2024-2026 cache months; no network required.
+- Local kline/price series present for BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT across 2024-2026 cache months; no network required.
 
 ## Mandatory initial task (heavy work) — execute in this order, produce verifiable artifacts
 **Goal:** deliver one complete, evidence-backed Track B confirmatory cycle: admissibility-locked window → frozen prereg (before outcomes) → executed evaluation → gate verdict → registry/handoff update. A session that only documents status is non-compliant.
 
 ### Step 1 — Select & lock an admissible Track B panel (no outcome inspection)
-- Choose window with **>=5 instruments** and **>=3 non-overlapping 30-day test blocks** in the test split, **distinct from sealed/reused inspected windows** (DO NOT reuse FCLR-009 inspected 2025-06-08..2025-12-31; avoid windows whose outcomes were already inspected for Track B-like breach labels). Prefer a window fully covered by local mark/index/premium/klines + funding (e.g. 2024 Q2-Q3 or another verified contiguous span with complete series).
+- Choose window with **>=5 instruments** and **>=3 non-overlapping 30-day test blocks** in the test split, **distinct from sealed/reused inspected windows** (DO NOT reuse FCLR-009 inspected 2025-06-08..2025-12-31; avoid windows whose outcomes were already inspected for Track B-like breach labels). Prefer a window fully covered by local mark/index/premium/klines + funding (e.g. 2025 full year or another verified contiguous span with complete series).
 - Machine-verify and save evidence to `research_state/trackb_<ID>_admissibility.json` (and/or deep-audit JSON): provenance `provenance_verified=true`, `unmapped_count=0` (`scripts/trackc_provenance_lineage.py`); funding schema/coverage OK, no required series gaps, >=5 symbols, >=3 blocks (`scripts/trackc_funding_schema_audit.py`, `scripts/trackc_panel_deep_audit_orchestrator.py` or equivalent checks).
 - **Hard stop if not met:** record exact blocker evidence + next materially different local window; do not fabricate or relax thresholds.
 
