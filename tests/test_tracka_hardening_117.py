@@ -397,6 +397,18 @@ SCRIPT_REGISTRY = {
     "class": "track_c_sealed_volatility",
     "reason": "run_trackc_deeper_validation_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
   },
+  "run_trackb_evaluation.py": {
+    "class": "track_b_modeled_boundary",
+    "reason": "run_trackb_evaluation.py: Track B modeled synthetic boundary-breach evaluation (TRACKB-20251110T154307Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
+  },
+  "run_trackb_tb1_evaluation.py": {
+    "class": "track_b_modeled_boundary",
+    "reason": "run_trackb_tb1_evaluation.py: Track B TB1 confirmatory modeled boundary-breach evaluation (trackb_TB1_20261110T173838Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
+  },
+  "run_trackb_tb2_evaluation.py": {
+    "class": "track_b_modeled_boundary",
+    "reason": "run_trackb_tb2_evaluation.py: Track B TB2 confirmatory modeled boundary-breach evaluation (trackb_TB2_20261110T190405Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
+  },
   "run_trackc_robustness_fclr011.py": {
     "class": "track_c_sealed_volatility",
     "reason": "run_trackc_robustness_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
@@ -505,6 +517,10 @@ SCRIPT_REGISTRY = {
   "reconcile_inventory.py": {
     "class": "repo_maintenance_utility",
     "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
+  },
+  "repair_local_provenance.py": {
+    "class": "repo_maintenance_utility",
+    "reason": "repair_local_provenance.py: local-only provenance repair/maintenance utility (sha256 sidecars + JSON manifests for local Track C cache); no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network."
   },
   "extract_fclr012v_v2.py": {
     "class": "track_c_sealed_volatility",

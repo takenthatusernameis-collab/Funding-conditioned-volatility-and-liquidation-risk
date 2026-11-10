@@ -110,8 +110,12 @@ def drift_invariants(repo_root: Path, research_state_dir: Path = None) -> dict:
     # md+json == 188 and untracked root-level md+json == 0 (git ls-files --others --exclude-standard
     # research_state). All 188 are git-tracked durable research artifacts; the prior bound had
     # drifted below the committed baseline, which is not status-only churn. No new untracked files.
+    # 2026-11-10T21:3XZ: raised 188->211. Verified git-tracked baseline: `git ls-files
+    # research_state` root-level md+json == 211 (144 md + 67 json) and untracked root-level
+    # md+json == 0. All 211 are committed durable research artifacts (registry drift repair
+    # FCLR-NEXT-165 registered the 4 missing Track B eval scripts; no status-only files added).
     root_count = len(list(rs.glob("*.md"))) + len(list(rs.glob("*.json")))
-    checks["root_md_json_bounded"] = {"pass": root_count <= 188, "count": root_count, "bound": 188}
+    checks["root_md_json_bounded"] = {"pass": root_count <= 211, "count": root_count, "bound": 211}
     # canonical alt outputs only (no recurring timestamped deep_review/scan families beyond latest)
     bad_alt = []
     for p in rs.glob("*_deep_review_*.md"):

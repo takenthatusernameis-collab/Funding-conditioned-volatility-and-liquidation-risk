@@ -58,6 +58,11 @@
       "action": "add",
       "id": "fclr_next_164_registry_repair",
       "summary": "FCLR-NEXT-164: register the 8 scripts/*.py present in the working tree but absent from the canonical script-scope registry (FCLR-NEXT-163 sync had missed them). All are local-only Track C read-only audit/extract utilities with no Track A liquidation claims, no network, no outcomes, no canonical eval/cross-track writes. Registry now covers all 123 scripts/*.py."
+    },
+    {
+      "action": "add",
+      "id": "fclr_next_165_register_trackb_evals",
+      "summary": "FCLR-NEXT-165: register the 4 scripts/*.py present in the working tree but absent from the canonical script-scope registry (repair_local_provenance.py, run_trackb_evaluation.py, run_trackb_tb1_evaluation.py, run_trackb_tb2_evaluation.py). All are concluded Track B modeled-boundary evaluation/repair utilities with no Track A observed-liquidation claims, no network, no canonical eval/cross-track writes. Registry now covers all 127 scripts/*.py."
     }
   ],
   "changes": [
@@ -79,9 +84,9 @@
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration.",
-  "generated": "20261110T075000Z",
+  "generated": "20261110T213000Z",
   "registry_version": "1.1",
-  "script_count": 123,
+  "script_count": 127,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -431,6 +436,10 @@
       "class": "repo_maintenance_utility",
       "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
     },
+    "repair_local_provenance.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "repair_local_provenance.py: local-only provenance repair/maintenance utility (sha256 sidecars + JSON manifests for local Track C cache); no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network."
+    },
     "run_evaluation.py": {
       "class": "track_c_sealed_volatility",
       "reason": "Track C/FCLR volatility evaluation path (sealed); liquidation terms absent as claim target; no Track A guarded liquidation outcome reads."
@@ -502,6 +511,18 @@
     "run_stream_b_robustness_002.py": {
       "class": "track_c_sealed_volatility",
       "reason": "run_stream_b_robustness_002.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_trackb_evaluation.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "run_trackb_evaluation.py: Track B modeled synthetic boundary-breach evaluation (TRACKB-20251110T154307Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
+    },
+    "run_trackb_tb1_evaluation.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "run_trackb_tb1_evaluation.py: Track B TB1 confirmatory modeled boundary-breach evaluation (trackb_TB1_20261110T173838Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
+    },
+    "run_trackb_tb2_evaluation.py": {
+      "class": "track_b_modeled_boundary",
+      "reason": "run_trackb_tb2_evaluation.py: Track B TB2 confirmatory modeled boundary-breach evaluation (trackb_TB2_20261110T190405Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
     },
     "run_trackc_deeper_validation_fclr011.py": {
       "class": "track_c_sealed_volatility",

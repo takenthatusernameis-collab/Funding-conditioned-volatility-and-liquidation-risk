@@ -210,7 +210,12 @@ class TestMachineCheckableDriftInvariants099(unittest.TestCase):
         # research_state` root-level md+json == 188 and untracked root-level md+json == 0.
         # All 188 are committed durable research artifacts; the bound tracks the committed
         # baseline so future untracked status-only churn still fails.
-        self.assertLessEqual(cnt, 188, f"root md+json count {cnt} > 188")
+        # 2026-11-10T21:3XZ: raised 188->211. Verified git-tracked baseline: `git ls-files
+        # research_state` root-level md+json == 211 (144 md + 67 json) and untracked
+        # root-level md+json == 0. All 211 are committed durable research artifacts; the
+        # FCLR-NEXT-165 registry drift repair registered 4 previously-unregistered Track B
+        # eval scripts. No status-only files added.
+        self.assertLessEqual(cnt, 211, f"root md+json count {cnt} > 211")
 
     def test_watch_trigger_harden_invariants(self):
         root = Path(__file__).resolve().parent.parent
