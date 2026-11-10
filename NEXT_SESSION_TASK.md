@@ -1,13 +1,13 @@
 # NEXT_SESSION_TASK.md — Single Durable Initial Task for Next Agentic Session
-**Timestamp (UTC):** 2026-11-10T11:36:37Z
+**Timestamp (UTC):** 2026-11-10T11:39:30Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Project priority (by repo name):** 1) Funding-conditioned volatility (Track C), 2) liquidation risk (Track A/B).
-**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:36:37Z) — this file is the timestamped initial task message the next session must execute.
+**Project priority (by repo name):** 1) liquidation risk — Track B modeled boundary breaches (untested, executable locally), 2) funding-conditioned volatility — Track C (concluded NOT_SUPPORTED), 3) Track A observed liquidations (STRUCTURALLY_BLOCKED).
+**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:39:30Z) — this file is the timestamped initial task message the next session must execute.
 
 ## Current verdict (do not relitigate)
+- **Track B (modeled liquidation boundary breaches): UNTESTED — MANDATORY NEXT.** Repo-name liquidation leg. No modeled breach scenario has been preregistered before outcome inspection on an admissible local panel. Executable now on local data (mark/index/premium/klines + funding already present and provenance-verified). **This is the only heavy-work path that can advance repo-name scope without network/new data.**
 - **Track C / H1_primary (funding-conditioned volatility forecast vs RV-only baseline): CONCLUDED UNDER CONSTRAINTS / NOT_SUPPORTED.** All locally available provenance-verified Track C panels with >=3 non-overlapping 30-day blocks tested (FCLR-003, FCLR-008, FCLR-009, FCLR-012-V, FCLR-013, FCLR-014). FCLR-014 (2025 H1, frozen prereg): C2 vs B1 rel QLIKE reduction **1.14%** (<2% floor), 95% CI **[-0.016361, 0.007728] crosses zero**, test window **17 days / 0 blocks** (<3). Forecast gate **NOT_MET**; overlay **INELIGIBLE**. `next_unfinished_task (Track C): NONE` pending a materially different, local, unauthenticated, provenance-verified data route.
 - **Track A (observed liquidations): STRUCTURALLY_BLOCKED** — no admissible unauthenticated historical liquidation census covering required windows (see `research_state/track_a_structural_block.md`, `research_state/liquidation_sources_enumeration.md`). Track A ≠ Track B ≠ Track C.
-- **Track B (modeled liquidation boundary breaches): UNTESTED.** No modeled breach scenario has been preregistered before outcome inspection. Track B is the repo-name liquidation leg and is **executable now on local data** (mark/index/premium/klines + funding already present and provenance-verified). **This is the only heavy-work path that can advance repo-name scope without network/new data.**
 
 ## Removed/absent bottlenecks (verified; do not rebuild)
 - Local provenance machine-verified: `provenance_verified=true`, `unmapped_count=0` across local funding data (36001 manifest records); funding schema/coverage OK for 2024-2025 panels used.

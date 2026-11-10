@@ -1,15 +1,14 @@
-# AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: Track C / H001 first, then liquidation)
+# AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: liquidation risk Track B first, then volatility Track C)
 
-**Updated:** 2026-11-10T11:36:37Z — **P0 ACTIVE (Track B, MANDATORY).** Track C / H1 concluded NOT_SUPPORTED under constraints (`next_unfinished_task (Track C): NONE`). **Single durable initial task is `NEXT_SESSION_TASK.md` (2026-11-10T11:36:37Z): execute Track B modeled liquidation boundary-breach campaign on verified local data** (admissibility lock → prereg before outcomes → confirmatory eval → verdict/registry/handoff). Track A remains STRUCTURALLY_BLOCKED. No network/paid/manual/credentialed data; no fabricated provenance; no threshold shopping; no holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
+**Updated:** 2026-11-10T11:39:30Z — **P0 ACTIVE (Track B, MANDATORY).** Track C / H1 concluded NOT_SUPPORTED under constraints (`next_unfinished_task (Track C): NONE`). **Single durable initial task is `NEXT_SESSION_TASK.md` (2026-11-10T11:39:30Z): execute Track B modeled liquidation boundary-breach campaign on verified local data** (admissibility lock → prereg before outcomes → confirmatory eval → verdict/registry/handoff). Track A remains STRUCTURALLY_BLOCKED. No network/paid/manual/credentialed data; no fabricated provenance; no threshold shopping; no holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:36:37Z (see `NEXT_SESSION_TASK.md`)
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T11:39:30Z (see `NEXT_SESSION_TASK.md`)
 
-**PRIMARY FOCUS (repo-name priority): Track C / H001 — funding-conditioned volatility forecast vs RV-only baseline.**
-Status: **CONCLUDED UNDER CONSTRAINTS** (exit criteria 2). Forecast gate NOT_MET on every claim-worthy local panel (FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014). `next_unfinished_task: NONE` for Track C pending a materially different, local/unauthenticated, verifiable data route.
+**PRIMARY FOCUS (repo-name priority): Track B / liquidation-risk — modeled boundary-breach campaign.** Repo name `Funding-conditioned-volatility-and-liquidation-risk`: Track C (volatility) is concluded NOT_SUPPORTED; Track A (observed liquidations) is STRUCTURALLY_BLOCKED. The untested liquidation-risk leg — Track B modeled breach on local mark/index/premium/klines + funding — is the **only** heavy-work path that can advance repo-name scope without network/new data.
 
-**Mandatory heavy-work objective (do not replace with status/docs): Execute the Track B / liquidation-risk campaign — the repo-name mandate's untested leg — using ONLY local data (no new source required). Track B is UNTESTED: no modeled liquidation boundary-breach scenario has been preregistered before outcome inspection. This is the next session's substantive verifiable result.**
+Status: **UNTESTED** — no modeled liquidation boundary-breach scenario has been preregistered before outcome inspection on an admissible local panel with `frozen_before_outcomes=true`.
 
 ### Session-start state (verified 2026-11-10T11:16:16Z; FCLR-014 outcomes INSPECTED)
 - **M1/M2 COMPLETE & frozen:** `research_state/research_protocol_fclr014.md` v2.0 `FROZEN_BEFORE_OUTCOMES` (2025-01-01..2025-06-07, 5 symbols BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, 60/20/20 chronological, 7-day purge/embargo, Holm multiplicity, 2000-rep block bootstrap, 2% materiality floor). `prereg_hash=8563163c62524605cbf7f11603759aee2210d133f82c3742319a6dd85dfca597` and `split_boundaries_fclr014.frozen_before_outcomes=true` recorded in `research_state/run_manifest.json`.
@@ -149,10 +148,10 @@ Non-negotiable execution rules in `FOCUS_CAMPAIGN.md` §NON-NEGOTIABLE EXECUTION
 
 **Track C program concluded under constraints.** `next_unfinished_task: NONE` for Track C pending new admissible unauthenticated data source.
 
-**NEXT SESSION (heavy-work, Track B — NON-OPTIONAL):** Follow `NEXT_SESSION_TASK.md` / `FOCUS_CAMPAIGN.md` M5: lock admissible local panel (>=5 symbols, >=3 test blocks, provenance/schema verified, no reused inspected window) → freeze prereg + `prereg_hash` + `frozen_before_outcomes=true` in `run_manifest.json` BEFORE outcomes → execute confirmatory modeled-breach evaluation (synthetic proxy, not observed liquidations) → write `research_state/evaluation_summary_trackb_<ID>.md` with CI/blocks/materiality/gate → update registries/negative-results/AGENT_HANDOFF/NEXT_SESSION_TASK. Track C remains concluded until a materially different, local/unauthenticated, verifiable data route appears.
+**NEXT SESSION (heavy-work, Track B — NON-OPTIONAL):** Follow `NEXT_SESSION_TASK.md` / `FOCUS_CAMPAIGN.md` M5: lock admissible local panel (>=5 symbols, >=3 test blocks, provenance/schema verified, no reused inspected window) → freeze prereg + `prereg_hash` + `frozen_before_outcomes=true` in `run_manifest.json` BEFORE outcomes → execute confirmatory modeled-breach evaluation (synthetic proxy, not observed liquidations) → write `research_state/evaluation_summary_trackb_<ID>.md` with CI/blocks/materiality/gate → update registries/negative-results/AGENT_HANDOFF/NEXT_SESSION_TASK. Track C remains concluded until a materially different, verifiable data route appears.
 
 **IF A NEW ADMISSIBLE SOURCE APPEARS (Track C):** Re-evaluate per RESEARCH_PROMPT.md §16 adaptive feasibility policy. Any new source must pass provenance verification (sha256 sidecars + manifest), funding schema audit, and >=3-block panel coverage before a new confirmatory experiment can be registered. Do not resume Track C without a materially different, verifiable data route.
 
 ---
 
-**END OF SINGLE DURABLE HANDOFF. Updated: 2026-11-10T11:36:37Z. Track C concluded (NOT_SUPPORTED, `next_unfinished_task: NONE`). Track B UNTESTED and MANDATORY: execute `NEXT_SESSION_TASK.md` M5 campaign on verified local data (no new source required).**
+**END OF SINGLE DURABLE HANDOFF. Updated: 2026-11-10T11:39:30Z. Track C concluded (NOT_SUPPORTED, `next_unfinished_task: NONE`). Track B UNTESTED and MANDATORY: execute `NEXT_SESSION_TASK.md` M5 campaign on verified local data (no new source required).**
