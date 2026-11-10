@@ -29,6 +29,11 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from scripts.trackc_provenance_lineage import verify_paths_with_manifests
+except Exception:  # pragma: no cover
+    verify_paths_with_manifests = None
+
 SYMS_DEFAULT = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 REQUIRED_SERIES = ["markPriceKlines", "indexPriceKlines", "premiumIndexKlines"]
 MAX_MISSING_DAYS_LISTED = 120
@@ -165,12 +170,13 @@ def funding_coverage(cache: Path, sym: str, ref_days: list[str], window_hint: st
     }
 
 
-def detect_provenance(cache: Path):
+def detect_provenance(cache: Path, repo_root: Path | None = None):
+    root = (repo_root or cache.parent.parent).resolve()
     roots = [cache, cache.parent, cache.parent.parent]
     sidecars = {"sha256": [], "checksum": [], "etag": [], "provenance_json": []}
     seen = set()
-    for root in roots:
-        if not root.exists():
+    for r in roots:
+        if not r.exists():
             continue
         patterns = [
             ("sha256", "**/*.sha256"),
@@ -180,7 +186,7 @@ def detect_provenance(cache: Path):
             ("provenance_json", "**/*provenance*.json"),
         ]
         for kind, pat in patterns:
-            for p in root.glob(pat):
+            for p in r.glob(pat):
                 rp = str(p.resolve())
                 if rp in seen or ".git" in rp:
                     continue
@@ -189,7 +195,6 @@ def detect_provenance(cache: Path):
     for k in sidecars:
         sidecars[k] = sorted(sidecars[k])[:40]
     present = any(sidecars[k] for k in sidecars)
-    # verify adjacent sha256 sidecars for a bounded set of cached files (deterministic, local)
     sample_files = []
     for pat in ["**/*.csv", "**/*.zip"]:
         for fp in cache.glob(pat):
@@ -198,13 +203,13 @@ def detect_provenance(cache: Path):
                 break
         if len(sample_files) >= 40:
             break
-    sha_verify = verify_sha256_sidecars(sorted(set(sample_files)))
+    sha_verify = verify_sha256_sidecars(sorted(set(sample_files)), limit=25, repo_root=root)
     run_manifest = cache.parent / "run_manifest.json"
     manifest_has_hashes = False
     if run_manifest.exists():
         try:
-            txt = run_manifest.read_text(errors="ignore")
-            manifest_has_hashes = ("sha256" in txt.lower()) or ("checksum" in txt.lower()) or ("etag" in txt.lower())
+            mtxt = run_manifest.read_text(errors="ignore")
+            manifest_has_hashes = ("sha256" in mtxt.lower()) or ("checksum" in mtxt.lower()) or ("etag" in mtxt.lower())
         except Exception:
             pass
     return {
@@ -213,7 +218,10 @@ def detect_provenance(cache: Path):
         "sidecar_counts": {k: len(v) for k, v in sidecars.items()},
         "sidecar_paths_sample": {k: v[:10] for k, v in sidecars.items() if v},
         "adjacent_sha256_verification_sample": sha_verify,
-        "provenance_note": "Deterministic local detection only. FCLR-014 requires verified funding/provenance/checksums before confirmatory resume; absence of sidecars means provenance is not machine-verified here.",
+        "manifest_lineage_ingest": sha_verify.get("manifest_ingest", {}),
+        "provenance_verified_sample": sha_verify.get("provenance_verified", False),
+        "provenance_source_counts_sample": sha_verify.get("provenance_source_counts", {}),
+        "provenance_note": "Deterministic local detection: adjacent sidecars and/or unambiguous manifest path+sha256 lineage where content hash matches. No network. Presence/URLs alone do not prove provenance; absence of verifiable hash match means not machine-verified.",
     }
 
 
@@ -265,8 +273,26 @@ def funding_slot_coverage(files: list[Path], ref_days: list[str]):
     }
 
 
-def verify_sha256_sidecars(paths: list[Path], limit: int = 25):
-    """Deterministic local verification: for files with adjacent <name>.sha256, compute and compare."""
+def verify_sha256_sidecars(paths: list[Path], limit: int = 25, repo_root: Path | None = None):
+    """Deterministic local verification: adjacent *.sha256 sidecars and/or unambiguous
+    local manifest path+sha256 lineage (manifest_extended/manifest_extract). No network.
+    URL/manifest presence alone is not verification without content hash match."""
+    root = repo_root.resolve() if repo_root else Path(".").resolve()
+    if verify_paths_with_manifests is not None:
+        res = verify_paths_with_manifests(paths, repo_root=root, limit=limit)
+        # backward-compatible fields expected by prior consumers/tests
+        res.update({
+            "files_considered": res.get("files_considered", min(len(paths), limit)),
+            "sidecars_checked": res.get("checked_with_hash_source", 0),
+            "sidecars_ok": res.get("verified_count", 0),
+            "sidecars_mismatch": res.get("mismatch_count", 0),
+            "mismatch_samples": res.get("mismatch_samples", []),
+            "files_without_adjacent_sha256_sidecar": res.get("unmapped_count", 0),
+            "adjacent_or_manifest_verified": res.get("verified_count", 0),
+            "provenance_source": "mixed" if len(res.get("provenance_source_counts", {})) > 1 else (next(iter(res.get("provenance_source_counts", {})), "none")),
+        })
+        return res
+    # fallback: sidecar-only (legacy)
     checked = 0
     ok = 0
     mismatches = []
@@ -274,7 +300,6 @@ def verify_sha256_sidecars(paths: list[Path], limit: int = 25):
     for p in paths[:limit]:
         sc = Path(str(p) + ".sha256")
         if not sc.exists():
-            # also try sibling with same stem patterns occasionally not used; keep deterministic
             alt = p.with_suffix(p.suffix + ".sha256")
             sc = alt if alt.exists() else sc
         if not sc.exists():
@@ -301,6 +326,10 @@ def verify_sha256_sidecars(paths: list[Path], limit: int = 25):
         "sidecars_mismatch": len(mismatches),
         "mismatch_samples": mismatches[:10],
         "files_without_adjacent_sha256_sidecar": missing_hash_for_file,
+        "provenance_verified": ok > 0 and ok == min(len(paths), limit) and len(mismatches) == 0 and missing_hash_for_file == 0,
+        "provenance_source_counts": {"adjacent_sidecar": ok} if ok else {},
+        "provenance_source": "adjacent_sidecar" if ok else "none",
+        "manifest_ingest": {"manifests_loaded": [], "manifests_missing": [], "records_indexed": 0},
         "verification_note": "Local deterministic check only for adjacent *.sha256 sidecars. No network. Does not prove provenance origin; only content hash match when sidecar exists.",
     }
 
@@ -400,7 +429,7 @@ def main():
         }
     panel_blocks = non_overlapping_30d_blocks(min_days or 0)
     meets = all_ok_syms >= 5 and panel_blocks >= 3
-    provenance = detect_provenance(cache)
+    provenance = detect_provenance(cache, repo_root=cache.parent.parent)
     report = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "cache": str(cache),
