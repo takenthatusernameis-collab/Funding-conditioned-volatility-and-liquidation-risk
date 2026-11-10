@@ -69,13 +69,13 @@ class TestExperimentContract(unittest.TestCase):
         )
         # The guard also refuses to create a brand-new summary file, so every
         # registered experiment's expected OUT must pre-exist in the sandbox.
-        # OUT is built as f"evaluation_summary_{EXPERIMENT}.md", so the FCLR-009 and
+# OUT is built as f"evaluation_summary_{EXPERIMENT}.md", so the FCLR-009 and
         # FCLR-013 branches (which keep the dash in the experiment id) produce
-        # evaluation_summary_FCLR-009.md and evaluation_summary_FCLR-013.md.
+# evaluation_summary_FCLR-009.md and evaluation_summary_FCLR-013.md.
         for name in ("evaluation_summary_FCLR002.md", "evaluation_summary_FCLR003.md",
-                     "evaluation_summary_FCLR006.md", "evaluation_summary_FCLR007.md",
-                     "evaluation_summary_FCLR008.md", "evaluation_summary_FCLR-009.md",
-                     "evaluation_summary_FCLR011.md", "evaluation_summary_FCLR012-V.md",
+                     "evaluation_summary_FCLR006.md", "evaluation_summary_FCLR-007.md",
+                     "evaluation_summary_FCLR-008.md", "evaluation_summary_FCLR-009.md",
+                     "evaluation_summary_FCLR-011.md", "evaluation_summary_FCLR-012-V.md",
                      "evaluation_summary_FCLR-013.md"):
             (self.tmp / "research_state" / name).write_text("# existing\n")
 

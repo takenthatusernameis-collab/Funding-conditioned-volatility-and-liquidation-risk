@@ -53,6 +53,11 @@
       "id": "fclr_gate4_v4_leakage_audit_register",
       "reason": "Register EXPLORATORY leakage-audit harness for Gate 4 v4 local-slice work; read-only diagnostics, no confirmatory estimands changed.",
       "script": "run_gate4_v4_leakage_audit.py"
+    },
+    {
+      "action": "add",
+      "id": "fclr_next_164_registry_repair",
+      "summary": "FCLR-NEXT-164: register the 8 scripts/*.py present in the working tree but absent from the canonical script-scope registry (FCLR-NEXT-163 sync had missed them). All are local-only Track C read-only audit/extract utilities with no Track A liquidation claims, no network, no outcomes, no canonical eval/cross-track writes. Registry now covers all 123 scripts/*.py."
     }
   ],
   "changes": [
@@ -74,9 +79,9 @@
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration.",
-  "generated": "20261109T041000Z",
+  "generated": "20261110T075000Z",
   "registry_version": "1.1",
-  "script_count": 115,
+  "script_count": 123,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -177,6 +182,10 @@
     "extract_fclr012v_klines.py": {
       "class": "raw_fetch_monitor_provenance",
       "reason": "extract_fclr012v_klines.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
+    },
+    "extract_fclr012v_v2.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "extract_fclr012v_v2.py: FCLR-012-V v2 local CSV extractor for already-downloaded 2026-11 Binance zips; coverage-only, no outcome computation, no network after cache present, no Track A liquidation claims, no canonical eval/cross-track writes."
     },
     "fclr002_coverage_audit.py": {
       "class": "track_c_or_aux_audit_utility",
@@ -482,6 +491,10 @@
       "class": "track_c_sealed_volatility",
       "reason": "run_stream_b_deep_analysis_001.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
     },
+    "run_stream_b_deep_analysis_002.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_stream_b_deep_analysis_002.py: regime-stratified QLIKE ablation on frozen FCLR-002 splits (exploratory); train-only thresholds, block-bootstrap CIs, writes evaluation_summary_STREAM_B_DEEP_ANALYSIS-002 only, no holdout reuse, no Track A claims."
+    },
     "run_stream_b_feature_extension.py": {
       "class": "track_c_sealed_volatility",
       "reason": "run_stream_b_feature_extension.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
@@ -525,6 +538,30 @@
     "tracka_rubric.py": {
       "class": "resume_gate_infra",
       "reason": "Track A admissibility rubric/GO-NO-GO logic; pure assessment, no outcome parquet reads or canonical claim mutation."
+    },
+    "trackc_funding_schema_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "trackc_funding_schema_audit.py: local-only funding month-file schema/provenance checklist audit; stdlib-only, no network, no outcomes/features/models, emits machine-checkable blocker register only."
+    },
+    "trackc_gap_repair_manifest.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "trackc_gap_repair_manifest.py: local-only gap/repair manifest from panel admissibility audits; stdlib-only, no network, no outcomes, no downloads, no canonical eval/cross-track writes."
+    },
+    "trackc_panel_admissibility_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "trackc_panel_admissibility_audit.py: local-only panel admissibility + gap/provenance audit against FCLR-014 resume trigger; stdlib-only, no network, no outcomes/features/models, emits machine-checkable gap manifests only."
+    },
+    "trackc_panel_deep_audit_orchestrator.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "trackc_panel_deep_audit_orchestrator.py: local-only per-candidate deep-audit orchestrator; deterministic scoped window scan, no network, no outcomes, emits consolidated machine-checkable confirmatory_resume_ready blocker JSON only."
+    },
+    "trackc_panel_window_planner.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "trackc_panel_window_planner.py: local-only deterministic panel-window planner/ranker; fast cached SYMBOL_YYYY_MM existence signals, no network, no outcomes/features/models, emits ranked candidate table with explicit blockers only."
+    },
+    "trackc_provenance_lineage.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "trackc_provenance_lineage.py: local-only provenance lineage ingestion/verification; stdlib-only, no network, no outcomes, verifies content hashes from local manifests only, never fabricates provenance."
     },
     "verify_heavy_work_004i.py": {
       "class": "repo_maintenance_utility",

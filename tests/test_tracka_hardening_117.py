@@ -506,6 +506,38 @@ SCRIPT_REGISTRY = {
     "class": "repo_maintenance_utility",
     "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
   },
+  "extract_fclr012v_v2.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "extract_fclr012v_v2.py: FCLR-012-V v2 local CSV extractor for already-downloaded 2026-11 Binance zips; coverage-only, no outcome computation, no Track A liquidation claims, no canonical eval/cross-track writes."
+  },
+  "run_stream_b_deep_analysis_002.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "run_stream_b_deep_analysis_002.py: regime-stratified QLIKE ablation on frozen FCLR-002 splits (exploratory); train-only thresholds, block-bootstrap CIs, writes evaluation_summary_STREAM_B_DEEP_ANALYSIS-002 only, no holdout reuse, no Track A claims."
+  },
+  "trackc_funding_schema_audit.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "trackc_funding_schema_audit.py: local-only funding month-file schema/provenance checklist audit; stdlib-only, no network, no outcomes/features/models, emits machine-checkable blocker register only."
+  },
+  "trackc_gap_repair_manifest.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "trackc_gap_repair_manifest.py: local-only gap/repair manifest from panel admissibility audits; stdlib-only, no network, no outcomes, no downloads, no canonical eval/cross-track writes."
+  },
+  "trackc_panel_admissibility_audit.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "trackc_panel_admissibility_audit.py: local-only panel admissibility + gap/provenance audit against FCLR-014 resume trigger; stdlib-only, no network, no outcomes/features/models, emits machine-checkable gap manifests only."
+  },
+  "trackc_panel_deep_audit_orchestrator.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "trackc_panel_deep_audit_orchestrator.py: local-only per-candidate deep-audit orchestrator; deterministic scoped window scan, no network, no outcomes, emits consolidated machine-checkable confirmatory_resume_ready blocker JSON only."
+  },
+  "trackc_panel_window_planner.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "trackc_panel_window_planner.py: local-only deterministic panel-window planner/ranker; fast cached SYMBOL_YYYY_MM existence signals, no network, no outcomes/features/models, emits ranked candidate table with explicit blockers only."
+  },
+  "trackc_provenance_lineage.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "trackc_provenance_lineage.py: local-only provenance lineage ingestion/verification; stdlib-only, no network, no outcomes, verifies content hashes from local manifests only, never fabricates provenance."
+  },
 }
 
 ALLOWED_CLASSES = {

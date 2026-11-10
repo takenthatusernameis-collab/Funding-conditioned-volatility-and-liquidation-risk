@@ -150,8 +150,8 @@ def contiguous_sequences(months: list[str]):
 def rank_candidates(by_month_audits, symbols, min_symbols, min_blocks):
     full_months = [m for m, s in sorted(by_month_audits.items()) if all(sym in s for sym in symbols)]
     seqs = contiguous_sequences(full_months)
-    candidates = []
-    for seq in seqs:
+
+    def _build(seq):
         total_days_min = None
         all_series_ok = True
         all_funding_ok = True
@@ -184,7 +184,7 @@ def rank_candidates(by_month_audits, symbols, min_symbols, min_blocks):
         meets_structure = len(symbols) >= min_symbols and blocks_est >= min_blocks
         meets_local_data = meets_structure and all_series_ok and all_funding_ok
         completeness_ratio = (n_complete_sym_months / n_sym_months) if n_sym_months else 0.0
-        candidates.append({
+        return {
             "months": seq, "month_count": len(seq), "symbols": symbols,
             "min_symbol_estimated_days_sum_fast": total_days_min or 0,
             "estimated_non_overlapping_30d_blocks_fast": blocks_est,
@@ -198,7 +198,24 @@ def rank_candidates(by_month_audits, symbols, min_symbols, min_blocks):
             "confirmatory_resume_ready": False,
             "blockers": sorted(blockers),
             "per_symbol_summary": sym_rows,
-        })
+        }
+
+    candidates = []
+    # Emit every contiguous month-sequence, plus (for each sequence) its maximal
+    # complete prefix. Completeness-first ranking then guarantees a complete short
+    # window outranks a larger incomplete window that contains it (FCLR-NEXT-165).
+    for seq in seqs:
+        candidates.append(_build(seq))
+        complete_prefix = []
+        for m in seq:
+            if all(by_month_audits[m][sym]["required_series_complete_fast"]
+                   and by_month_audits[m][sym]["funding_month_file_present_locally"]
+                   for sym in symbols):
+                complete_prefix.append(m)
+            else:
+                break
+        if len(complete_prefix) >= 1 and complete_prefix != seq:
+            candidates.append(_build(complete_prefix))
     # Rank: completeness-first. A larger window that is incomplete must NOT outrank
     # a smaller window that is complete; previously the tiebreak on raw block count
     # promoted the biggest incomplete window to rank 1.
