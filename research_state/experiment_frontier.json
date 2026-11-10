@@ -156,8 +156,9 @@
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
   "next_action": "Track B: The TB1 window (2025-01-01..2026-10-31) is INADMISSIBLE for confirmatory evaluation with 5x/24h long label (test split has zero events). Remaining local Track B options: (1) Re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks, completeness 1.0) with deep admissibility + gap + funding-schema audit + provenance, then freeze NEW prereg + execute confirmatory; (2) Redesign label (different leverage/horizon/side) and select a test window with observed events, then freeze NEW prereg + execute confirmatory. No network/paid/manual/credentialed data. Track C H1_primary concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
   "next_action_heavy": "Track B: The TB1 window (2025-01-01..2026-10-31) is INADMISSIBLE for confirmatory evaluation with 5x/24h long label (test split has zero events). Remaining local Track B options: (1) Re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks, completeness 1.0) with deep admissibility + gap + funding-schema audit + provenance, then freeze NEW prereg + execute confirmatory; (2) Redesign label (different leverage/horizon/side) and select a test window with observed events, then freeze NEW prereg + execute confirmatory. No network/paid/manual/credentialed data. Track C H1_primary concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
-  "next_unfinished_task": "Track B: TB1 window INADMISSIBLE (zero test events with 5x/24h long). Options: (1) Deep re-audit 2024-01-01..2024-09-30 panel + NEW frozen prereg + confirmatory execution; (2) Redesign label (leverage/horizon/side) + select test window with events + NEW frozen prereg + confirmatory execution. Track C concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
-  "program_status": "ACTIVE_TRACKB_WINDOWS_REMAIN_AFTER_TB1_DEGENERATE",
+  "next_unfinished_task": "NONE — program concluded under constraints pending a new admissible unauthenticated source. Evidence: Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census); Track C/H1 concluded NOT_SUPPORTED across all claim-worthy local panels; Track B TB2 confirmatory executed on frozen prereg trackb_TB2_20261110T190405Z and returned FORECAST_GATE_NOT_MET (rel Log Loss +1.68% < 2% materiality floor, 95% CI [-0.010997,0.003094] crosses zero, Holm FAILS p=0.488, 2 test blocks < 3 required); Track B TB1 degenerate/inadmissible (zero test breaches). No admissible uninspected local route remains; no threshold shopping or sealed-holdout reuse permitted. Overlay INELIGIBLE.",
+  "program_status": "CONCLUDED_UNDER_CONSTRAINTS",
+  "overlay_eligible": false,
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
   "registry_version": "1.3",
   "single_durable_handoff": "NEXT_SESSION_TASK.md",
@@ -178,6 +179,14 @@
         "gate": "NOT_MET",
         "note": "Test split (2026-06-26..2026-10-31) has ZERO synthetic breaches across all 5 symbols (leverage=5.0, long, H=24h). Degenerate test set; confirmatory evaluation impossible. Full-window rates: ETH 0.166%, XRP 0.303%.",
         "verdict": "NOT_SUPPORTED_DEGENERATE_TEST"
+      },
+      {
+        "experiment_id": "trackb_TB2_20261110T190405Z",
+        "gate": "NOT_MET",
+        "verdict": "NOT_SUPPORTED",
+        "note": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, h168_long_10x_m0 modeled proxy). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction (<2% materiality floor, NOT_MET). Block bootstrap 2000 reps/30-day blocks seed 20261110: Log Loss 95% CI [-0.010997,0.003094] crosses zero, p=0.488; Holm FAILS. Only 2 non-overlapping 30-day test blocks (<3, NOT_MET). Overall gate NOT_MET. Modeled proxy only, not observed liquidations. Overlay INELIGIBLE.",
+        "artifact": "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md",
+        "timestamp_utc": "2026-11-10T20:00:21Z"
       }
     ],
     "fallback_window_candidate": {
@@ -192,7 +201,7 @@
       "prereg_required_before_outcomes": true,
       "status": "EXECUTED_DEGENERATE_TEST_SET_INADMISSIBLE_FOR_THIS_LABEL"
     },
-    "status": "PARTIALLY_TESTED_TB1_DEGENERATE_FALLBACK_REQUIRES_REAUDIT"
+    "status": "CONFIRMATORY_COMPLETE_TB2_GATE_NOT_MET_ALL_ADMISSIBLE_ROUTES_EXHAUSTED"
   },
   "updated_at": "2026-11-10T18:05:00Z"
 }
