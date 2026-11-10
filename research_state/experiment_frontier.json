@@ -277,6 +277,7 @@
       "track": "TRACK_C"
     }
   ],
+  "campaign_active": "TRACKB-MODELED-BREACH-NEXT-20261110T171313Z",
   "closure_evidence": {
     "deep_audit_2024_10_12": "research_state/trackc_deep_audit_orchestrator_latest.json",
     "deep_audit_2026_11": "research_state/trackc_deep_audit_orchestrator_2026_11.json",
@@ -445,14 +446,6 @@
   "final_synthesis_report": "research_state/final_synthesis_report.md",
   "frontier": [
     {
-      "id": "TRACKB-TB1-M5-20261110T165709Z",
-      "task": "Track B confirmatory on untested local window (TB1 2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 admissibility lock VERIFIED (research_state/trackb_TB1_admissibility.json, provenance machine-check required before freeze); M5.2 freeze research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen panel -> evaluation_summary_trackb_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. No Track A/B/C conflation; modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-      "status": "ACTIVE_NEXT",
-      "priority": "P0",
-      "rank": 0.0,
-      "generated": "2026-11-10T16:57:09Z",
-      "timestamp_utc": "2026-11-10T16:57:09Z",
-      "campaign": "TRACKB-MODELED-BREACH-NEXT-20261110T163807Z",
       "acceptance": [
         "TB1 provenance/admissibility re-verified (PROVENANCE_OK, unmapped_count==0, schema/coverage/contiguity/blocks as in trackb_TB1_admissibility.json)",
         "Frozen Track B prereg protocol written with explicit modeled-breach definition, splits 60/20/20 + 7d purge/embargo, metrics, 2% materiality, Holm, block bootstrap>=2000, synthetic-proxy disclaimer",
@@ -463,7 +456,7 @@
       "blockers": [
         "PROCEDURAL: frozen prereg/hash not yet recorded before outcomes for TB1 confirmatory run"
       ],
-      "resume_triggers": [],
+      "campaign": "TRACKB-MODELED-BREACH-NEXT-20261110T163807Z",
       "do_not": [
         "Do not relitigate Track C (NOT_SUPPORTED) or Track A (STRUCTURALLY_BLOCKED)",
         "No network/paid/manual/credentialed data, no fabricated provenance/data",
@@ -471,7 +464,15 @@
         "No Track A/B/C conflation; Track B outputs are modeled proxies only",
         "No risk overlay before forecast gate passes",
         "No .github/workflows edits"
-      ]
+      ],
+      "generated": "2026-11-10T16:57:09Z",
+      "id": "TRACKB-TB1-M5-20261110T165709Z",
+      "priority": "P0",
+      "rank": 0.0,
+      "resume_triggers": [],
+      "status": "ACTIVE_NEXT",
+      "task": "Track B confirmatory on untested local window (TB1 2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 admissibility lock VERIFIED (research_state/trackb_TB1_admissibility.json, provenance machine-check required before freeze); M5.2 freeze research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen panel -> evaluation_summary_trackb_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. No Track A/B/C conflation; modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
+      "timestamp_utc": "2026-11-10T16:57:09Z"
     },
     {
       "acceptance": "G1-G3 dep-light tmp-isolated tests in tests/test_tracka_hardening_131.py, no network/parquet/outcome reads, no real research_state writes; harden only where not already stable/fail-closed; regression 178+ green; resume 17 PASS; gate/operator/drift pass; root<=163 probes==2; no trigger side effects",
@@ -997,45 +998,44 @@
     }
   ],
   "generated": "2026-11-10T07:15:52Z",
-  "handoff_refreshed_utc": "2026-11-10T16:57:09Z",
+  "handoff_refreshed_utc": "2026-11-10T17:13:13Z",
   "last_checked": "2026-11-06T01:54:01Z",
-  "last_checked_utc": "2026-11-10T16:57:09Z",
+  "last_checked_utc": "2026-11-10T17:13:13Z",
   "last_updated": "20261110T075000Z",
   "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-  "next_action": "Track B confirmatory on untested local window (TB1 2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 admissibility lock VERIFIED (research_state/trackb_TB1_admissibility.json, provenance machine-check required before freeze); M5.2 freeze research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen panel -> evaluation_summary_trackb_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. No Track A/B/C conflation; modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-  "next_action_heavy": "Track B confirmatory on untested local window (TB1 2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 admissibility lock VERIFIED (research_state/trackb_TB1_admissibility.json, provenance machine-check required before freeze); M5.2 freeze research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen panel -> evaluation_summary_trackb_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. No Track A/B/C conflation; modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
+  "next_action": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
+  "next_action_heavy": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
+  "next_unfinished_task": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
   "program_status": "ACTIVE_TRACKB_UNTESTED_WINDOW_REMAINS",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
   "registry_version": "1.2",
+  "single_durable_handoff": "NEXT_SESSION_TASK.md",
   "summary": "Track C/H1 concluded NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014); overlay INELIGIBLE. Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). Track B PARTIALLY TESTED: TRACKB-20251110T154307Z (2025-01-01..2025-10-31, 4 symbols effective/5 panel) NOT_MET/NOT_SUPPORTED (C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005,0.035] crosses zero; modeled synthetic proxy). TB1 panel 2025-01-01..2026-10-31 is admissibility-verified locally and UNTESTED for this Track B confirmatory design (22 est. blocks) \u2014 M5.2 prereg freeze is mandatory next before outcomes. Fallback 2024-01-01..2024-09-30 requires deep re-audit before confirmatory.",
   "timestamp": "20261106T015401Z",
   "track_a_blocked": true,
   "track_a_blocker_latest": "research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md",
-  "updated_at": "2026-11-10T16:57:09Z",
   "track_b": {
-    "status": "PARTIALLY_TESTED_UNTESTED_ADMISSIBLE_WINDOW_REMAINS",
     "completed_windows": [
       {
         "experiment_id": "TRACKB-20251110T154307Z",
         "gate": "NOT_MET",
-        "verdict": "NOT_SUPPORTED",
-        "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005,0.035] crosses zero."
+        "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005,0.035] crosses zero.",
+        "verdict": "NOT_SUPPORTED"
       }
     ],
-    "next_window_candidate": {
-      "candidate_id": "TB1",
-      "period": "2025-01-01..2026-10-31",
-      "admissibility_artifact": "research_state/trackb_TB1_admissibility.json",
-      "estimated_non_overlapping_30d_blocks": 22,
-      "prereg_required_before_outcomes": true,
-      "status": "ADMISSIBILITY_VERIFIED_UNTESTED"
-    },
     "fallback_window_candidate": {
       "period": "2024-01-01..2024-09-30",
       "status": "REQUIRES_DEEP_REAUDIT_BEFORE_CONFIRMATORY"
-    }
+    },
+    "next_window_candidate": {
+      "admissibility_artifact": "research_state/trackb_TB1_admissibility.json",
+      "candidate_id": "TB1",
+      "estimated_non_overlapping_30d_blocks": 22,
+      "period": "2025-01-01..2026-10-31",
+      "prereg_required_before_outcomes": true,
+      "status": "ADMISSIBILITY_VERIFIED_UNTESTED"
+    },
+    "status": "PARTIALLY_TESTED_UNTESTED_ADMISSIBLE_WINDOW_REMAINS"
   },
-  "next_unfinished_task": "Track B confirmatory on untested local window (TB1 2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 admissibility lock VERIFIED (research_state/trackb_TB1_admissibility.json, provenance machine-check required before freeze); M5.2 freeze research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen panel -> evaluation_summary_trackb_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. No Track A/B/C conflation; modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-  "single_durable_handoff": "NEXT_SESSION_TASK.md",
-  "campaign_active": "TRACKB-MODELED-BREACH-NEXT-20261110T163807Z"
+  "updated_at": "2026-11-10T17:13:13Z"
 }

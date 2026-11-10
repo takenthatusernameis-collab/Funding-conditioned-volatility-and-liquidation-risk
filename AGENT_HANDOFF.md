@@ -1,8 +1,8 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: liquidation risk Track B first, then volatility Track C; Track A observed liquidations STRUCTURALLY_BLOCKED)
 
-**Updated:** 2026-11-10T17:00:22Z — **PROGRAM NOT CONCLUDED (TRACK B UNTESTED WINDOW REMAINS).** Track B tested on ONE window (TRACKB-20251110T154307Z, 2025-01-01..2025-10-31): gate NOT_MET / NOT_SUPPORTED (C2 vs B1 rel improvement 1.50% < 2% floor, CI [-0.005, 0.035] crosses zero; modeled synthetic proxy only). Track C / H1_primary: NOT_SUPPORTED across all claim-worthy panels (FCLR-003/008/009/012-V/013/014); risk overlay INELIGIBLE. Track A: STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). **Bottleneck removed this session:** `research_state/experiment_frontier.json` corrected from stale `program_status=CONCLUDED` / `next_unfinished_task=None` to `ACTIVE_TRACKB_UNTESTED_WINDOW_REMAINS` with singular Track B M5 task (TB1 untested, admissibility-verified). Single durable handoff: `NEXT_SESSION_TASK.md` ({ts}).
+**Updated:** 2026-11-10T17:13:13Z — **SINGLE DURABLE HANDOFF (PROGRAM NOT CONCLUDED).** Track B confirmatory on untested TB1 window (2025-01-01..2026-10-31, 5 symbols, ~22 blocks) is the mandatory next heavy task (M5.2 prereg freeze before outcomes → M5.3 execution → M5.4 verdict). Track C H1_primary NOT_SUPPORTED (all claim-worthy panels); Track A STRUCTURALLY_BLOCKED; risk overlay INELIGIBLE. Provenance re-verified: `PROVENANCE_OK 161`. See `NEXT_SESSION_TASK.md`.
 
-**Session preflight (last verified 2026-11-10T17:00:22Z):** numpy/pandas/scipy installed; `PROVENANCE_OK 161`; canonical 35-test suite OK. No environment/data bottleneck; remaining blocker to resume confirmatory is procedural M5.2 frozen prereg+hash before outcomes on TB1.
+**Session preflight (last verified 2026-11-10T17:13:13Z):** `PROVENANCE_OK 161` (funding CSV lineage, unmapped=0). Canonical Track B/C/provenance tests previously green in-session context; rerun verification commands before execution. No env/data bottleneck — blocker is procedural M5.2 frozen prereg+hash recorded before outcomes on TB1.
 
 **Correction vs prior handoff:** `next_unfinished_task` was incorrectly NONE. Untested admissible local Track B windows with >=3 non-overlapping 30-day blocks remain:
 - TB1 panel 2025-01-01..2026-10-31, 5 symbols, provenance_verified=true (2065 files verified, unmapped_count=0), 22 estimated non-overlapping 30-day blocks — fully verified locally, **untested** for Track B confirmatory. (`research_state/trackb_TB1_admissibility.json`)
@@ -12,9 +12,9 @@ The only blocker to confirmatory resume is the missing NEW frozen prereg (proced
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T17:00:22Z (supersedes prior; see NEXT_SESSION_TASK.md)
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T17:13:13Z (supersedes prior; see NEXT_SESSION_TASK.md)
 
-**Campaign:** `TRACKB-MODELED-BREACH-NEXT-20261110T170022Z` — Track B modeled liquidation boundary-breach confirmatory on an UNTESTED local window (repo-name priority #1: liquidation risk).
+**Campaign:** `TRACKB-MODELED-BREACH-NEXT-20261110T171313Z` — Track B modeled liquidation boundary-breach confirmatory on untested TB1 window (repo-name priority #1: liquidation risk). Execute M5 heavily; do not stop at planning.
 
 **Mandatory steps (in order; skipping is non-compliant):**
 
@@ -26,7 +26,7 @@ The only blocker to confirmatory resume is the missing NEW frozen prereg (proced
 
 **M5.4 Verdict & propagation:** Update `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/negative_results_report.md`, `AGENT_HANDOFF.md`, `NEXT_SESSION_TASK.md`. Risk overlay NOT ELIGIBLE unless all gates pass. Record exact `next_unfinished_task`.
 
-**Current state:** `next_unfinished_task: Track B confirmatory on untested local window — M5.2 frozen prereg on TB1 panel → M5.3 execution → M5.4 verdict.` Do not relitigate concluded tracks (Track C NOT_SUPPORTED, Track A STRUCTURALLY_BLOCKED). No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation; no risk overlay before gate pass; no `.github/workflows` edits.
+**Current state:** `next_unfinished_task` = Track B M5 on TB1 (2025-01-01..2026-10-31): freeze prereg+hash before outcomes → execute evaluation → verdict/propagation. TB1 admissibility verified (`research_state/trackb_TB1_admissibility.json`), provenance OK 161. Do not relitigate concluded tracks. No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (synthetic proxy ≠ observed liquidation); no risk overlay before gate pass; no `.github/workflows` edits.
 
 **Verification commands:**
 - `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v`
