@@ -1,7 +1,7 @@
-# NEXT_SESSION_TASK.md — Single Durable Initial Task (2026-11-10T16:57:09Z)
+# NEXT_SESSION_TASK.md — Single Durable Initial Task (2026-11-10T17:00:22Z)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority by name: 1) liquidation risk / Track B modeled boundary breaches, 2) funding-conditioned volatility / Track C concluded, 3) Track A observed liquidations structurally blocked)
-**Campaign:** `TRACKB-MODELED-BREACH-NEXT-20261110T163807Z`
-**State refreshed:** `research_state/experiment_frontier.json` updated 2026-11-10T16:57:09Z (`program_status=ACTIVE_TRACKB_UNTESTED_WINDOW_REMAINS`, `next_unfinished_task` set). TB1 admissibility evidence exists and is untested: `research_state/trackb_TB1_admissibility.json` (2025-01-01..2026-10-31, 5 symbols BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, 22 months contiguous, ~22 non-overlapping 30d blocks, all required series complete, funding schema OK). Prior executed Track B window `TRACKB-20251110T154307Z` is NOT_MET/NOT_SUPPORTED (C2 vs B1 +1.50% < 2% floor, CI [-0.005,0.035]; modeled proxy only).
+**Campaign:** `TRACKB-MODELED-BREACH-NEXT-20261110T170022Z`
+**State refreshed:** `research_state/experiment_frontier.json` updated 2026-11-10T17:00:22Z (`program_status=ACTIVE_TRACKB_UNTESTED_WINDOW_REMAINS`, `next_unfinished_task` set). TB1 admissibility evidence exists and is untested: `research_state/trackb_TB1_admissibility.json` (2025-01-01..2026-10-31, 5 symbols BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, 22 months contiguous, ~22 non-overlapping 30d blocks, all required series complete, funding schema OK). Prior executed Track B window `TRACKB-20251110T154307Z` is NOT_MET/NOT_SUPPORTED (C2 vs B1 +1.50% < 2% floor, CI [-0.005,0.035]; modeled proxy only).
 
 ## SINGLE MANDATORY TASK (heavy; do not stop at planning)
 **`next_unfinished_task` (execute in order): Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31).**
