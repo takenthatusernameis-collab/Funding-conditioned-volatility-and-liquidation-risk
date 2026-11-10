@@ -24,7 +24,6 @@ cleanly with evidence.
 """
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import re
@@ -41,6 +40,7 @@ from scripts.trackc_panel_admissibility_audit import (  # noqa: E402
     missing_day_ranges,
     non_overlapping_30d_blocks,
 )
+from scripts.trackc_provenance_lineage import verify_paths_with_manifests  # noqa: E402
 from scripts.trackc_funding_schema_audit import (  # noqa: E402
     audit_file,
     find_funding_file,
@@ -80,41 +80,6 @@ def _is_contiguous(months):
 
     idxs = sorted(to_idx(m) for m in months)
     return all(idxs[i] == idxs[i - 1] + 1 for i in range(1, len(idxs)))
-
-
-def _verify_adjacent_sha256(paths):
-    checked = 0
-    ok = 0
-    mismatches = []
-    missing = 0
-    for p in paths:
-        sc = Path(str(p) + ".sha256")
-        if not sc.exists():
-            missing += 1
-            continue
-        checked += 1
-        try:
-            expected = sc.read_text(errors="ignore").strip().split()[0].lower()
-            h = hashlib.sha256()
-            with p.open("rb") as f:
-                for chunk in iter(lambda: f.read(1024 * 1024), b""):
-                    h.update(chunk)
-            got = h.hexdigest()
-            if expected and got == expected:
-                ok += 1
-            else:
-                mismatches.append(
-                    {"file": str(p), "expected_prefix": expected[:16], "got_prefix": got[:16]}
-                )
-        except Exception as e:
-            mismatches.append({"file": str(p), "error": str(e)[:120]})
-    return {
-        "checked": checked,
-        "ok": ok,
-        "mismatch": len(mismatches),
-        "mismatch_samples": mismatches[:10],
-        "files_without_adjacent_sha256_sidecar": missing,
-    }
 
 
 def _audit_symbol_window(cache, repo_root, sym, months):
@@ -184,9 +149,10 @@ def _audit_symbol_window(cache, repo_root, sym, months):
             "blockers": [] if ok else ["SCHEMA_OR_ROW_SANITY_FAILED"],
         }
 
-    # Provenance: adjacent sha256 sidecars for cache-resident candidate files
-    # (series csvs + funding files under the local cache window). repo_root-located
-    # files are context for schema audit only and must not pollute provenance.
+    # Provenance: lineage ingestion from local manifests + adjacent sha256 sidecars
+    # for cache-resident candidate files (series csvs + funding files under the
+    # local cache window). repo_root-located files are context for schema audit only
+    # and must not pollute provenance.
     csv_paths = []
     for m in months:
         d = cache / f"{sym}_{m.replace('-', '_')}"
@@ -196,12 +162,19 @@ def _audit_symbol_window(cache, repo_root, sym, months):
     for m in months:
         found_funding.extend(find_funding_file(repo_root, cache, sym, m))
     provenance_paths = [p for p in (csv_paths + found_funding) if cache in p.parents]
-    provenance = _verify_adjacent_sha256(provenance_paths)
-    provenance_verified = (
-        provenance["mismatch"] == 0
-        and provenance["files_without_adjacent_sha256_sidecar"] == 0
-        and provenance["checked"] >= 1
-    )
+    provenance = verify_paths_with_manifests(provenance_paths, repo_root=repo_root)
+    p_counts = provenance.get("provenance_source_counts", {})
+    has_adj = any(k == "adjacent_sidecar" for k in p_counts)
+    has_man = any(str(k).startswith("manifest") for k in p_counts)
+    if has_adj and has_man:
+        provenance_source = "mixed"
+    elif has_adj:
+        provenance_source = "adjacent_sidecar"
+    elif has_man:
+        provenance_source = "manifest_record"
+    else:
+        provenance_source = "none"
+    provenance_verified = bool(provenance.get("provenance_verified"))
 
     blockers = []
     if not required_ok:
@@ -239,6 +212,13 @@ def _audit_symbol_window(cache, repo_root, sym, months):
         "funding_month_audits": funding_month_audits,
         "funding_schema_ok": funding_schema_ok,
         "provenance": provenance,
+        "provenance_checked": provenance.get("checked_with_hash_source", 0),
+        "provenance_ok": provenance.get("verified_count", 0),
+        "provenance_mismatch": provenance.get("mismatch_count", 0),
+        "provenance_unmapped": provenance.get("unmapped_count", 0),
+        "provenance_source": provenance_source,
+        "provenance_source_counts": p_counts,
+        "provenance_manifest_ingest": provenance.get("manifest_ingest", {}),
         "provenance_verified": provenance_verified,
         "blockers": sorted(set(blockers)),
         "confirmatory_ready_symbol": False,
@@ -269,7 +249,7 @@ def _assemble_candidate(cache, repo_root, symbols, months, min_symbols, min_bloc
             all_funding_schema_ok = False
         if not rep["provenance_verified"]:
             provenance_verified_all = False
-        if rep["provenance"]["checked"] >= 1:
+        if rep["provenance_checked"] >= 1:
             provenance_any_checked = True
 
     panel_blocks = non_overlapping_30d_blocks(min_days or 0)

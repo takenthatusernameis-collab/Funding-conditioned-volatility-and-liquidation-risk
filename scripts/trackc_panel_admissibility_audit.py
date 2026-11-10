@@ -221,6 +221,11 @@ def detect_provenance(cache: Path, repo_root: Path | None = None):
         "manifest_lineage_ingest": sha_verify.get("manifest_ingest", {}),
         "provenance_verified_sample": sha_verify.get("provenance_verified", False),
         "provenance_source_counts_sample": sha_verify.get("provenance_source_counts", {}),
+        "provenance_checked": sha_verify.get("checked_with_hash_source", sha_verify.get("sidecars_checked", 0)),
+        "provenance_ok": sha_verify.get("verified_count", sha_verify.get("sidecars_ok", 0)),
+        "provenance_mismatch": sha_verify.get("mismatch_count", sha_verify.get("sidecars_mismatch", 0)),
+        "provenance_unmapped": sha_verify.get("unmapped_count", sha_verify.get("files_without_adjacent_sha256_sidecar", 0)),
+        "provenance_source": sha_verify.get("provenance_source", "none"),
         "provenance_note": "Deterministic local detection: adjacent sidecars and/or unambiguous manifest path+sha256 lineage where content hash matches. No network. Presence/URLs alone do not prove provenance; absence of verifiable hash match means not machine-verified.",
     }
 

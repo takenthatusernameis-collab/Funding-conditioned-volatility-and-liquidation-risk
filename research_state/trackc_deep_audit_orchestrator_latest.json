@@ -115,12 +115,39 @@
         ],
         "non_overlapping_30d_blocks": 3,
         "provenance": {
-          "checked": 0,
-          "files_without_adjacent_sha256_sidecar": 98,
-          "mismatch": 0,
+          "checked_with_hash_source": 0,
+          "files_considered": 98,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 3819
+          },
+          "mismatch_count": 0,
           "mismatch_samples": [],
-          "ok": 0
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 98,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
         },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 3819
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 98,
         "provenance_verified": false,
         "range": [
           "2024-10-01",
@@ -437,12 +464,39 @@
         ],
         "non_overlapping_30d_blocks": 3,
         "provenance": {
-          "checked": 0,
-          "files_without_adjacent_sha256_sidecar": 281,
-          "mismatch": 0,
+          "checked_with_hash_source": 0,
+          "files_considered": 281,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 3819
+          },
+          "mismatch_count": 0,
           "mismatch_samples": [],
-          "ok": 0
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 281,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
         },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 3819
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 281,
         "provenance_verified": false,
         "range": [
           "2024-10-01",
@@ -637,12 +691,39 @@
         ],
         "non_overlapping_30d_blocks": 3,
         "provenance": {
-          "checked": 0,
-          "files_without_adjacent_sha256_sidecar": 175,
-          "mismatch": 0,
+          "checked_with_hash_source": 0,
+          "files_considered": 175,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 3819
+          },
+          "mismatch_count": 0,
           "mismatch_samples": [],
-          "ok": 0
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 175,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
         },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 3819
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 175,
         "provenance_verified": false,
         "range": [
           "2024-10-01",
@@ -897,12 +978,39 @@
         ],
         "non_overlapping_30d_blocks": 3,
         "provenance": {
-          "checked": 0,
-          "files_without_adjacent_sha256_sidecar": 98,
-          "mismatch": 0,
+          "checked_with_hash_source": 0,
+          "files_considered": 98,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 3819
+          },
+          "mismatch_count": 0,
           "mismatch_samples": [],
-          "ok": 0
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 98,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
         },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 3819
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 98,
         "provenance_verified": false,
         "range": [
           "2024-10-01",
@@ -1219,12 +1327,39 @@
         ],
         "non_overlapping_30d_blocks": 3,
         "provenance": {
-          "checked": 0,
-          "files_without_adjacent_sha256_sidecar": 98,
-          "mismatch": 0,
+          "checked_with_hash_source": 0,
+          "files_considered": 98,
+          "manifest_ingest": {
+            "manifests_loaded": [
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+              "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+            ],
+            "manifests_missing": [],
+            "records_indexed": 3819
+          },
+          "mismatch_count": 0,
           "mismatch_samples": [],
-          "ok": 0
+          "provenance_source_counts": {},
+          "provenance_verified": false,
+          "unmapped_count": 98,
+          "verification_note": "Deterministic local check: adjacent *.sha256 sidecars or unambiguous manifest path+sha256 matches (content hash recomputed). No network. URL/manifest presence alone is not treated as verification.",
+          "verified_count": 0,
+          "verified_samples": []
         },
+        "provenance_checked": 0,
+        "provenance_manifest_ingest": {
+          "manifests_loaded": [
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extended.json",
+            "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/data_cache/manifest_extract.json"
+          ],
+          "manifests_missing": [],
+          "records_indexed": 3819
+        },
+        "provenance_mismatch": 0,
+        "provenance_ok": 0,
+        "provenance_source": "none",
+        "provenance_source_counts": {},
+        "provenance_unmapped": 98,
         "provenance_verified": false,
         "range": [
           "2024-10-01",
@@ -1474,7 +1609,7 @@
     "2024-11",
     "2024-12"
   ],
-  "generated_utc": "2026-11-10T03:15:27Z",
+  "generated_utc": "2026-11-10T05:20:04Z",
   "min_blocks": 3,
   "min_symbols": 5,
   "mode": "local_only_scoped_deep_audit_no_outcomes_no_network",
