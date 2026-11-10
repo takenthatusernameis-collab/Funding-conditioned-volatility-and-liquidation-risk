@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-10T21:00:33Z
+**Timestamp (UTC):** 2026-11-10T21:04:08Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation-risk research)
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. **No further initial task remains on current local data/design.**
 

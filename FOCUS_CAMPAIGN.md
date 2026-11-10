@@ -2,7 +2,7 @@
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (per repo name):** 1) Track B liquidation boundary risk (modeled synthetic breaches) — **CONCLUDED NOT_SUPPORTED locally**; 2) Track C/H1 funding-conditioned volatility — **CONCLUDED NOT_SUPPORTED**; 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.
-**Campaign timestamp:** 2026-11-10T21:00:33Z
+**Campaign timestamp:** 2026-11-10T21:04:08Z
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — `next_unfinished_task: NONE`.
 
