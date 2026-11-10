@@ -342,3 +342,17 @@ holdout reuse, no split changes.
 - Splits (frozen before outcomes, prereg_hash 3c91885038e79345d7fdb28396505a5b7e57a6e7de146b9c3323d59bbfca0dc3): 40/20/40 chronological + 7d purge/embargo, test 3 non-overlapping 30-day blocks
 - Primary contrast C2 vs B1 (synthetic breach 24h/5x/long/m0): rel improvement 1.50% < 2% materiality, 95% CI [-0.005000,0.035000] crosses zero → gate NOT_MET
 - Verdict: NOT_SUPPORTED (modeled proxy only, not observed liquidations). No risk overlay eligible.
+
+---
+## trackb_TB1_20261110T173838Z (Track B — modeled boundary breaches, synthetic proxy) — 2026-11-10T18:05:00Z
+- Panel: 2025-01-01 .. 2026-10-31, 5 symbols (BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT), provenance_verified=true, unmapped_count=0, PROVENANCE_OK 161
+- Splits (frozen before outcomes, prereg_hash 5e075968e5958471530d0618cdba1410f8fb3d5afdb31c3be13f99aa07d27c92): 60/20/20 chronological + 7d purge/embargo
+- Test split: 2026-06-26T00:00:00Z .. 2026-10-31T23:00:00Z (4 non-overlapping 30-day blocks, PASS)
+- Primary target: synthetic_boundary_breach_h24_long_5x_m0 (leverage=5.0, side=long, maintenance_margin_rate=0.0, horizon=24h)
+- **CRITICAL FINDING**: Frozen test split contains ZERO synthetic boundary breaches across all 5 instruments (prevalence = 0.0000%). Full-window breach rates: BTC 0.000%, ETH 0.166%, BNB 0.010%, SOL 0.055%, XRP 0.303%.
+- The 5x/24h long boundary requires a 20% adverse move within 24h, which simply did not occur in the test period. This makes the binary classification task degenerate — both B1 and C2 trivially predict "no breach" with near-perfect accuracy.
+- Primary contrast C2 vs B1: Log Loss diff = -0.000010 (95% CI [-0.000030, 0.000006]); Brier diff = ~0. Relative improvements (1.58% LL, 9.47% Brier) are NOT INTERPRETABLE due to zero positive labels.
+- Gate assessment: >=5 instruments PASS (5), >=3 test blocks PASS (4), >=2% materiality NOT_MET (metrics uninterpretable), 95% CI excludes null NOT_MET (CI crosses zero and metric degenerate). **Overall gate: NOT_MET**.
+- Verdict: NOT_SUPPORTED_DEGENERATE_TEST. This window is INADMISSIBLE for confirmatory Track B with the 5x/24h long label definition. The test split provides no confirmatory evidence.
+- Artifacts: research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md, research_state/research_protocol_trackb_TB1_20261110T173838Z.md, run_manifest.json#split_boundaries_trackb_TB1_20261110T173838Z
+- Next Track B routes: (1) Deep re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks) + NEW frozen prereg + confirmatory; (2) Redesign label (leverage/horizon/side) + select test window with observed events + NEW frozen prereg + confirmatory. No network/paid/manual data.

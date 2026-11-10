@@ -11,7 +11,7 @@
     "sweep": "research_state/campaign_sweep_tracka_20261105T131205Z.md",
     "tests_total": 261
   },
-  "artifact_churn_100": {
+  "artifact_churn_099": {
     "blocker": "research_state/liquidation_forward_validate_019_blocker_20261105T150804Z.md",
     "idempotent": true,
     "ironflow_probes": 2,
@@ -24,7 +24,7 @@
     "sweep": "research_state/campaign_sweep_tracka_20261105T150804Z.md",
     "tests_total": 276
   },
-  "artifact_churn_101": {
+  "artifact_churn_100": {
     "blocker": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
     "consolidation_regression_guard_tmp_only": true,
     "drift_invariants_wired_into_resume_check_cli": true,
@@ -47,970 +47,121 @@
       "no_root_trigger_harden_files"
     ]
   },
-  "artifact_churn_102": {
+  "artifact_churn_101": {
     "blocker": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-    "drift_preflight_bundled_in_resume_gate": true,
-    "ironflow_probes": 2,
-    "new_recurring_probe_scan_families": 0,
+    "consolidated_with_provenance": [
+      "ironflow_trend_digest_20261102T220326Z.json",
+      "ironflow_trend_report_20261102T220326Z.json"
+    ],
+    "gate_reason_codes": [
+      "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
+      "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+      "RESUME_READY_AFTER_DRIFT_PASS"
+    ],
+    "ironflow_probe_files": 2,
+    "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
+    "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
     "research_state_mdjson_root": 163,
-    "runtime_probe_invariant_assert_in_monitor_quick": true,
     "sweep": "research_state/campaign_sweep_tracka_20261105T162400Z.md",
     "tests_total": 303
   },
-  "artifact_churn_105": {
-    "bound": 163,
-    "consolidated_files_105": 13,
+  "artifact_churn_102": {
+    "blocker": "research_state/liquidation_forward_validate_022_blocker_20261105T180046Z.md",
+    "consolidated_with_provenance": [
+      "ironflow_trend_digest_20261102T220326Z.json",
+      "ironflow_trend_report_20261102T220326Z.json"
+    ],
+    "gate_reason_codes": [
+      "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
+      "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+      "RESUME_READY_AFTER_DRIFT_PASS"
+    ],
     "ironflow_probe_files": 2,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 16,
-    "resume_check_pass": true,
-    "tests_total": 322
+    "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
+    "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
+    "research_state_mdjson_root": 163,
+    "sweep": "research_state/campaign_sweep_tracka_20261105T180046Z.md",
+    "tests_total": 309
   },
-  "artifact_churn_108": {
-    "bound": 163,
-    "changed_files": [
-      "scripts/tracka_resume_check.py",
-      "scripts/tracka_resume_gate.py",
-      "tests/test_tracka_hardening_107.py",
-      "AGENT_HANDOFF.md",
-      "research_state/experiment_frontier.json"
+  "artifact_churn_103": {
+    "blocker": "research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md",
+    "consolidated_with_provenance": [
+      "ironflow_trend_digest_20261102T220326Z.json",
+      "ironflow_trend_report_20261102T220326Z.json"
     ],
-    "gate_admissible_manifest_arg": true,
-    "gate_seam_go_prereg_reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-    "gate_seam_nogo_reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG",
+    "gate_reason_codes": [
+      "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
+      "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
+      "RESUME_READY_AFTER_DRIFT_PASS"
+    ],
     "ironflow_probe_files": 2,
-    "manifest_only_no_network_no_outcomes_no_parquet": true,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_added_check": "admissible_seam_wired",
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "tests_total": 340
+    "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
+    "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
+    "research_state_mdjson_root": 163,
+    "sweep": "research_state/campaign_sweep_tracka_20261105T191803Z.md",
+    "tests_total": 309
   },
-  "artifact_churn_109": {
-    "bound": 163,
-    "changed_files": [
-      "scripts/fclr010_harness.py",
-      "scripts/tracka_resume_check.py",
-      "tests/test_tracka_hardening_108.py",
-      "AGENT_HANDOFF.md",
-      "research_state/experiment_frontier.json"
-    ],
-    "gate_seam_go_prereg_reason_code": "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-    "gate_seam_nogo_reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_PREREG",
-    "harness_outcome_loader_refused_before_gates": true,
-    "harness_seam_nogo_before_outcomes_reason_code": "ADMISSIBLE_SEAM_NOGO_BEFORE_OUTCOMES",
-    "ironflow_probe_files": 2,
-    "manifest_only_no_network_no_outcomes_no_parquet": true,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "tests_delta_from_108": 12,
-    "tests_total": 352
-  },
-  "artifact_churn_112": {
-    "direct_parquet_reads_after": 0,
-    "direct_parquet_reads_before": 6,
-    "entrypoints_wired_after": 8,
-    "entrypoints_wired_before": 2,
-    "ironflow_probe_files": 2,
-    "operator_cli_exit_code": 0,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 17,
-    "tests_after": 380,
-    "tests_before": 371
-  },
-  "artifact_churn_113": {
-    "audit_method": "source-based (no module imports; avoids optional numpy/pyarrow deps)",
-    "bound": 163,
-    "changed_files": [
-      "scripts/fclr010_execute.py",
-      "src/analysis/liqmicro/ingest.py",
-      "tests/test_tracka_hardening_113.py",
-      "research_state/experiment_frontier.json",
-      "AGENT_HANDOFF.md"
-    ],
-    "data_through": "2026-10",
-    "entrypoint_non_parquet_data_access_imports_after": 0,
-    "entrypoint_non_parquet_data_access_imports_before": 1,
-    "entrypoints_wired_parquet": 8,
-    "ironflow_probe_files": 2,
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "src_prologue_data_access_imports_after": 0,
-    "src_prologue_data_access_imports_before": 1,
-    "tests_after_112": 380,
-    "tests_after_113": 390,
-    "tests_before_112": 371,
-    "tests_total": 390,
-    "unwired_def_main_parquet_scripts": 0
-  },
-  "artifact_churn_114": {
-    "bound": 163,
-    "data_through": "2026-10",
-    "ironflow_probe_files": 2,
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "src_method_level_reads_after_unguarded": 0,
-    "src_method_level_reads_before": 2,
-    "src_modules_method_reads_guarded_after": 1,
-    "tests_after_114": 402,
-    "tests_before_113": 390,
-    "tests_delta_114": 12,
-    "tests_total": 402,
-    "timestamp_utc": "20261106T021700Z",
-    "tracka_adjacent_excluded_track_cb": 4,
-    "tracka_adjacent_guarded": 2
-  },
-  "artifact_churn_115": {
-    "bound": 163,
-    "changed_files": [
-      "scripts/coupled_build_panel.py",
-      "scripts/coupled_robust_eval.py",
-      "scripts/overlay_quick.py",
-      "scripts/overlay_tracka_execute.py",
-      "tests/test_tracka_hardening_115.py",
-      "research_state/experiment_frontier.json",
-      "AGENT_HANDOFF.md"
-    ],
-    "data_through": "2026-10",
-    "g1_build_refuses_without_loader": true,
-    "g1_callers_routed_through_explicit_loader": [
-      "coupled_robust_eval.py",
-      "overlay_tracka_execute.py",
-      "overlay_quick.py"
-    ],
-    "g1_coupled_build_direct_parquet_outside_loader_after": 0,
-    "g1_coupled_build_direct_parquet_outside_loader_before": 1,
-    "g2_run_liqmicro_blocked_canonical_mutation_asserted": true,
-    "g2_run_liqmicro_blocked_frontier_mutation_asserted": true,
-    "g2_run_liqmicro_blocked_pipeline_never_called": true,
-    "g2_run_liqmicro_ready_frozen_loader_once_pipeline_runs": true,
-    "g3_harness_callers_classified": 19,
-    "g3_registry_file": "tests/test_tracka_hardening_115.py::HARNESS_CALLER_REGISTRY",
-    "g3_unclassified_harness_callers": 0,
-    "ironflow_probe_files": 2,
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "tests_after_115": 418,
-    "tests_before_114": 402,
-    "tests_delta_115": 16,
-    "tests_total": 418,
-    "timestamp_utc": "20261106T031300Z"
-  },
-  "artifact_churn_116": {
-    "bound": 163,
-    "changed_files": [
-      "tests/test_tracka_hardening_116.py",
-      "research_state/experiment_frontier.json",
-      "AGENT_HANDOFF.md"
-    ],
-    "data_through": "2026-10",
-    "g1_ready_writing_blocked_main_no_canonical_frontier_manifest_asserted": [
-      "overlay_quick.py",
-      "overlay_tracka_execute.py",
-      "coupled_robust_eval.py",
-      "fclr010_execute.py"
-    ],
-    "g2_audit_blocked_main_no_loader_no_canonical_asserted": [
-      "liqmicro_audit.py",
-      "fclr010_coverage_audit.py"
-    ],
-    "g3_extended_classified": 40,
-    "g3_h004_fclr005_pipeline_class": "out_of_scope_historical_tracka_pilot (Bybit 2026 census, fixed local path; NOT Hyperliquid ironflow FCLR010Harness guarded seam; explicit reason, must not conflate with Hyperliquid observed-liquidation gate)",
-    "g4_guarded_blocked_frontier_surfaces_reviewed": true,
-    "ironflow_probe_files": 2,
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "research_state_mdjson_root": 142,
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "tests_after_116": 436,
-    "tests_before_115": 418,
-    "tests_delta_116": 18,
-    "tests_total": 436,
-    "timestamp_utc": "20261106T035500Z"
-  },
-  "blocked_cells": [
-    {
-      "hypothesis": "FCLR-H004",
-      "reason": "Direct liquidation labels unavailable from admissible public sources",
-      "status": "BLOCKED"
-    },
-    {
-      "hypothesis": "FCLR-H001 (forward, confirmatory)",
-      "reason": "All locally available provenance-verified panels with >=3 non-overlapping 30-day blocks have been tested (FCLR-003, FCLR-009, FCLR-013) and H001 remains NOT_SUPPORTED. FCLR-014 confirmatory on 2025 H1 panel (only remaining untested local window) returned NOT_SUPPORTED: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), CI crosses zero, test window 17 days = 0 blocks (<3 required). FCLR-012-V forward panel (2026) has 0 test blocks (INCONCLUSIVE). No untested claim-worthy panels remain. Exit criteria 2 triggered: program concluded under constraints.",
-      "status": "NOT_SUPPORTED"
-    },
-    {
-      "evidence": "research_state/ironflow_probe_20261105T162945Z.json; research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-      "last_checked": "2026-11-05T16:24:00Z",
-      "reason": "No ironflow month >=2026-11 (data_through=2026-10); forward edge probed 2026-11..2027-02 all absent",
-      "resume_trigger": "ironflow data/events/YYYY-MM.parquet or data/fills/YYYY-MM.parquet >=2026-11 HTTP 200 unauthenticated OR admissible unauthenticated Hyperliquid observed-liquidation source passes strict full-manifest GO rubric/gate (machine-verifiable provenance/label/coverage/block evidence). Hyperliquid-only.",
-      "track": "TRACK_A"
-    },
-    {
-      "last_checked": "2026-11-04T12:33:00Z",
-      "reason": "Binance mark/index/premium panel insufficient beyond 2026-11-02 (placeholders/ended); need >=3 non-overlapping 30-day blocks",
-      "resume_trigger": "New admissible Binance panel with real volume>0 across >=3 blocks",
-      "track": "TRACK_C"
-    }
-  ],
-  "campaign_active": "TRACKB-MODELED-BREACH-NEXT-20261110T171313Z",
-  "closure_evidence": {
-    "deep_audit_2024_10_12": "research_state/trackc_deep_audit_orchestrator_latest.json",
-    "deep_audit_2026_11": "research_state/trackc_deep_audit_orchestrator_2026_11.json",
-    "dep_light_tests": "48/48 OK (tests.test_volatility_features_splits, tests.test_synthetic_boundary_labels, tests.test_trackc_panel_admissibility_audit, tests.test_trackc_gap_repair_manifest, tests.test_trackc_funding_schema_audit, tests.test_trackc_panel_window_planner selected, tests.test_trackc_panel_deep_audit_orchestrator, tests.test_trackc_provenance_lineage)",
-    "hypothesis_registry": "research_state/hypothesis_registry.json",
-    "negative_results": "research_state/negative_results_report.md"
-  },
-  "coverage": {
-    "fclr002_test_blocks": "test 2024-07-23..2024-09-30 = 70 days = 2 non-overlapping 30-day blocks - INSUFFICIENT for new confirmatory (<3)",
-    "fclr012v_forward": "2026-08-07..2026-11-02 = 88 common days; test 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks (INCONCLUSIVE). 2026-10-28/29 genuinely absent (HTTP 404). Archive ends 2026-11-02.",
-    "instruments": [
-      "BTCUSDT",
-      "ETHUSDT",
-      "BNBUSDT",
-      "SOLUSDT",
-      "XRPUSDT"
-    ],
-    "period": "2024-04-01..2024-09-30 (FCLR-002 panel; fully cached)",
-    "venue": "binance_um_perp"
-  },
-  "current_status": "CONCLUDED 2026-11-10T10:38:27Z: Confirmatory program complete under current constraints (no network/paid/manual). FCLR-014 executed on 2025 H1 panel (last untested local window): C2 vs B1 1.14% rel QLIKE reduction (<2% floor), CI crosses zero, 0 test blocks (<3). H001/Track C NOT_SUPPORTED across all claim-worthy panels (FCLR-003, FCLR-009, FCLR-013, FCLR-014); H002 PARTIAL_REPLICATION; H003/Track B NOT_SUPPORTED (Holm); Track A STRUCTURALLY_BLOCKED. FCLR-NEXT-165 engineering repair restored full test suite to 1124 OK. No outcomes recomputed except FCLR-014 per frozen protocol. Exit criteria 2: all local >=3-block panels exhausted, H001 NOT_SUPPORTED.",
-  "fclr_next_115": {
-    "completed_utc": "20261106T031300Z",
-    "g1": "coupled_build_panel.build() GuardedReadRefused without outcome_loader; no pd.read_parquet outside guarded loader; coupled_robust_eval/overlay_tracka_execute/overlay_quick routed through explicit coupled panel loader",
-    "g2": "run_liqmicro/run_liqmicro_v2 blocked matrix+main(): loader/pipeline never run, canonical outputs/frontier not mutated; READY_FROZEN loader-once->pipeline runs (tmp/mocked)",
-    "g3": "19 harness callers/outcome-adjacent scripts classified (guarded_tracka, harness_core, resume_gate_infra, prereg_utility, raw_fetch_monitor_provenance) with reason+test",
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-115",
-    "uncovered_gaps_for_116": [
-      "overlay_quick.py / overlay_tracka_execute.py / coupled_robust_eval.py / fclr010_execute.py write canonical evaluation summaries and some mutate experiment_frontier.json on READY_FROZEN paths, but no module-level blocked-branch test asserts main() never writes those canonical outputs or mutates frontier when guarded_execute returns BLOCKED (add fail-closed no-canonical-mutation matrix for these READY-writing Track A scripts).",
-      "liqmicro_audit.py and fclr010_coverage_audit.py are guarded (loader after READY) but their main() blocked-branch no-canonical-output/no-real-research_state-write behavior is not asserted by a dedicated 115-style matrix (add explicit blocked main() assertions).",
-      "h004_fclr005_pipeline.py and any other scripts reading liquidation/outcome parquet/csv or producing liquidation-risk claims without FCLR010Harness import are not in HARNESS_CALLER_REGISTRY; audit+classify all remaining scripts/* for liquidation-risk outcome reads/claim production (guarded/refused vs explicitly out-of-scope with reason) and add source+blocked-behavior tests.",
-      "run_liqmicro_v1 mutates experiment_frontier.json only in READY _run_pipeline (gate-protected) \u2014 acceptable; confirm no other blocked-path frontier mutation surfaces remain untested among classified guarded_tracka scripts."
-    ]
-  },
-  "fclr_next_116": {
-    "completed_utc": "20261106T035500Z",
-    "g1": "overlay_quick/overlay_tracka_execute/coupled_robust_eval/fclr010_execute blocked guarded_execute->BLOCKED main(): no loader, no canonical summary/frontier/cross-track/run_manifest mutation (tmp snapshot). fclr010_execute canonical writes placed only after READY guards (source+branch-order asserted); read-only manifest/split read may occur before guard in current impl but no canonical mutation.",
-    "g2": "liqmicro_audit/fclr010_coverage_audit blocked main() asserted: no outcome loader, no canonical audit JSON/md mutation, refusal path only.",
-    "g3": "Extended liquidation/risk script classification registry covers 115 callers + remaining risk/outcome/claim scripts (40 total) incl h004_fclr005_pipeline classified out_of_scope_historical_tracka_pilot (Bybit 2026 census, fixed local path, no FCLR010Harness, not Hyperliquid ironflow guarded seam) with explicit reason; Track B modeled != observed; Track C sealed; provenance/fetch/maintenance utilities classified.",
-    "g4": "Guarded Track A ready-writing scripts mutate frontier/cross-track/manifest/summary only on READY paths (source order asserted) or only in gate-protected pipeline (run_liqmicro frontier mutation remains in READY _run_pipeline, 115/116 confirmed). No untested blocked frontier mutation surface identified among classified guarded_tracka* scripts.",
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-116",
-    "uncovered_gaps_for_117": [
-      "fclr010_execute.py reads run_manifest/splits (LFS-aware) before guarded_execute to build loader context; blocked branches still perform that read-only manifest access and can raise if manifest unavailable/corrupt. Refactor to defer manifest/split context construction behind guard or into a guard-safe/read-only preflight that cannot trigger non-canonical mutation and has explicit blocked-path tests (no real manifest mutation).",
-      "h004_fclr005_pipeline.py (historical Track A pilot, Bybit 2026 census) is out of FCLR010 guarded seam but still reads local liquidation/outcome CSV and can write evaluation_summary_FCLR005.md/run_manifest/hypothesis registries when executed; add explicit execution-guard/refusal or quarantine marker so it cannot be mistaken for Hyperliquid observed-liquidation Track A gate execution (clear script-level guard/marker + test).",
-      "Classify/audit any remaining scripts not in EXTENDED_CLASSIFICATION that produce evaluation_summary* or mutate canonical Track A frontier/manifest outside guarded READY (full scripts/* sweep with machine-readable registry diff vs EXTENDED_CLASSIFICATION) and add blocked-behavior tests where executable.",
-      "run_liqmicro._run_pipeline mutates experiment_frontier.json on READY path (gate-protected). Add explicit READY-only mutation test isolation proving blocked never reaches pipeline (already asserted) and document/optionally gate frontier mutation behind an explicit post-gate writer for clearer auditability."
-    ]
-  },
-  "fclr_next_118": {
-    "bound": 163,
-    "changed_files": [
-      "scripts/fclr010_guarded_entry.py",
-      "scripts/h004_fclr005_pipeline.py",
-      "research_state/tracka_script_scope_registry.json",
-      "tests/test_tracka_hardening_118.py",
-      "research_state/experiment_frontier.json",
-      "AGENT_HANDOFF.md"
-    ],
-    "completed_utc": "20261106T035900Z",
-    "data_through": "2026-10",
-    "delta_tests": "+18",
-    "full_suite_after": 469,
-    "full_suite_before": 451,
-    "g1": "fclr010_guarded_entry.py: loader-failure refusal now carries stable reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS; canonical_outputs_mutated:false, no eval_summary_FCLR010.md/run_manifest.json mutation.",
-    "g2": "h004_fclr005_pipeline.py: allowed-path machine guard added; H004_HYPERLIQUID_FCLR010_GUARDED_SEAM must remain False; no FCLR010Harness/fclr010_guarded_entry tokens; canonical Hyperliquid Track A targets quarantined from allowed path.",
-    "g3": "research_state/tracka_script_scope_registry.json: canonical machine-readable registry (82 scripts) reconciled with test_tracka_hardening_117.SCRIPT_REGISTRY; drift check enforces scripts/*.py == registry keys, valid classes/reasons, synced with 117.",
-    "g4": "run_liqmicro_v2.py: blocked isolation + frontier parity asserted (_run_pipeline never called on blocked, no canonical/frontier mutation, READY-only source order).",
-    "g5": "tests/test_tracka_hardening_118.py: NO-READY refusal matrix for 6 guarded_tracka_ready_writing scripts x 4 non-READY states (missing prereg, NOGO seam, modeled/proxy, wrong venue); all refuse rc=1, canonical_outputs_mutated:false, no canonical target mutation.",
-    "ironflow_probe_files": 2,
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "operator_cli_exit_code": 0,
-    "operator_cli_pass": true,
-    "resume_check_nchecks": 17,
-    "resume_check_pass": true,
-    "root_md_json": 143,
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-118",
-    "tests_total": 469
-  },
-  "fclr_next_120": {
-    "baseline_tests": 484,
-    "completed_utc": "20261106T113316Z",
-    "drift_pass": true,
-    "gaps": [
-      "harness explicit seam GO manifest READY_FROZEN not end-to-end exercised",
-      "drift semantic class/source heuristics missing",
-      "audit-ready-writing NO-READY refusal matrix missing",
-      "run_liqmicro_v2 sandboxed READY _run_pipeline contract missing",
-      "h004 allowed-pilot sandbox-root enforcement missing"
-    ],
-    "heavy_work_required": "G1-G5 code+test hardening mandatory when no trigger; blocked/no-data claims without measurable delta noncompliant",
-    "issued_utc": "20261106T051039Z",
-    "operator_pass": true,
-    "probes": 2,
-    "resume_checks": 17,
-    "root_md_json": 143,
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-120",
-    "trigger": "NONE (ironflow data_through=2026-10; 2026-11..2027-02 absent; probing exhausted)"
-  },
-  "fclr_next_127": {
-    "bound": 163,
-    "completed_utc": "20261106T113316Z",
-    "data_through": "2026-10",
-    "delta": {
-      "hardening_tests_added": "tests/test_tracka_hardening_127.py (+17: 6 G1 seam+CLI parity, 5 G2 guarded_entry refusal parity, 3 G3 blocked no-loader + 1 G3 READY_FROZEN no-canonical-mutation)",
-      "probes": 2,
-      "regression": "154 OK (120-127 + fclr010_harness, tmp-isolated)",
-      "resume_check": "17 PASS",
-      "root_md_json": 143
-    },
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-127"
-  },
-  "fclr_next_128": {
-    "bound": 163,
-    "changed_files": [
-      "tests/test_tracka_hardening_128.py",
-      "AGENT_HANDOFF.md",
-      "research_state/experiment_frontier.json"
-    ],
-    "completed_utc": "20261106T114421Z",
-    "data_through": "2026-10",
-    "delta": {
-      "entry_verify": "resume 17 PASS; gate BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS outcomes_inspected:false; drift 83/83 pass",
-      "hardening_tests_added": "tests/test_tracka_hardening_128.py (+7: 2 G1 coupled_build_panel blocked-refusal parity incl. loader-never-called, 3 G2 tracka_operator_report seam-wired fields + drift-first fail-closed, 2 G3 refusal-matrix extension coupled_build_panel+fclr010_execute_fast)",
-      "probes": 2,
-      "regression": "161 OK (120-128 + fclr010_harness, tmp-isolated)",
-      "root_md_json": 143
-    },
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-128"
-  },
-  "fclr_next_131": {
-    "bound": 163,
-    "changed_files": [
-      "scripts/fclr010_harness.py",
-      "tests/test_tracka_hardening_131.py",
-      "AGENT_HANDOFF.md",
-      "research_state/experiment_frontier.json"
-    ],
-    "completed_utc": "20261106T133740Z",
-    "data_through": "2026-10",
-    "delta": {
-      "code_hardened": "scripts/fclr010_harness.py (evaluate_forward/execute_ready_data_load stable fail-closed refusal fields on manifest-gate NO-GO, seam NO-GO before outcomes, data-missing, precheck/seam exceptions)",
-      "gate": "BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS fail_closed_order=drift_preflight->manifest_prereg outcomes_inspected:false",
-      "hardening_tests_added": "tests/test_tracka_hardening_131.py (+15: G1 harness/guarded seam+manifest-evaluator+prereg-no-outcome matrix, G2 operator/gate/check malformed admissible-manifest JSON refusals, G3 refusal_payload/guard stability + guarded BLOCKED boolean normalization)",
-      "probes": 2,
-      "regression": "193 OK (120-131 + fclr010_harness, tmp-isolated)",
-      "resume_check": "17 PASS",
-      "root_md_json": 2,
-      "scope_drift": "pass:true 83/83"
-    },
-    "ironflow_probing_exhausted": true,
-    "no_trigger": true,
-    "status": "COMPLETE",
-    "task_id": "FCLR-NEXT-131"
-  },
-  "final_synthesis_report": "research_state/final_synthesis_report.md",
-  "frontier": [
-    {
-      "acceptance": [
-        "TB1 provenance/admissibility re-verified (PROVENANCE_OK, unmapped_count==0, schema/coverage/contiguity/blocks as in trackb_TB1_admissibility.json)",
-        "Frozen Track B prereg protocol written with explicit modeled-breach definition, splits 60/20/20 + 7d purge/embargo, metrics, 2% materiality, Holm, block bootstrap>=2000, synthetic-proxy disclaimer",
-        "prereg_hash (sha256 of frozen protocol) and split_boundaries_trackb_<ID>.frozen_before_outcomes=true recorded in research_state/run_manifest.json BEFORE any outcome computation",
-        "research_state/evaluation_summary_trackb_<ID>.md produced with point estimate, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, gate/materiality verdict",
-        "hypothesis_registry, experiment_frontier, negative_results_report, AGENT_HANDOFF.md, NEXT_SESSION_TASK.md updated with single next_unfinished_task"
-      ],
-      "blockers": [
-        "PROCEDURAL: frozen prereg/hash not yet recorded before outcomes for TB1 confirmatory run"
-      ],
-      "campaign": "TRACKB-MODELED-BREACH-NEXT-20261110T163807Z",
-      "do_not": [
-        "Do not relitigate Track C (NOT_SUPPORTED) or Track A (STRUCTURALLY_BLOCKED)",
-        "No network/paid/manual/credentialed data, no fabricated provenance/data",
-        "No threshold shopping, no sealed-holdout reuse",
-        "No Track A/B/C conflation; Track B outputs are modeled proxies only",
-        "No risk overlay before forecast gate passes",
-        "No .github/workflows edits"
-      ],
-      "generated": "2026-11-10T16:57:09Z",
-      "id": "TRACKB-TB1-M5-20261110T165709Z",
-      "priority": "P0",
-      "rank": 0.0,
-      "resume_triggers": [],
-      "status": "ACTIVE_NEXT",
-      "task": "Track B confirmatory on untested local window (TB1 2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 admissibility lock VERIFIED (research_state/trackb_TB1_admissibility.json, provenance machine-check required before freeze); M5.2 freeze research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen panel -> evaluation_summary_trackb_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. No Track A/B/C conflation; modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-      "timestamp_utc": "2026-11-10T16:57:09Z"
-    },
-    {
-      "acceptance": "G1-G3 dep-light tmp-isolated tests in tests/test_tracka_hardening_131.py, no network/parquet/outcome reads, no real research_state writes; harden only where not already stable/fail-closed; regression 178+ green; resume 17 PASS; gate/operator/drift pass; root<=163 probes==2; no trigger side effects",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed_utc": "20261106T133740Z",
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
-      "gaps": [
-        "G1 harness evaluate_forward/execute_ready_data_load/guarded_execute fail-closed on seam/manifest/prereg exception+malformed shapes with stable refusal fields, no outcomes/parquet reads/network/writes",
-        "G2 operator_report/resume_gate/(resume_check blocked JSON if applicable) parseable JSON refusal on malformed admissible-manifest contracts, stable fields/exit!=0, semantics preserved",
-        "G3 refusal_payload + guard snapshots required bool/type-stable fields, tolerate missing/extra keys, normalize absent booleans to safe defaults on BLOCKED"
-      ],
-      "generated": "20261106T133530Z",
-      "id": "FCLR-NEXT-131",
-      "priority": "P0",
-      "rank": 0.0,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path; Hyperliquid-only; modeled!=observed"
-      ],
-      "status": "COMPLETE",
-      "task": "HARNESS-SEAM-EXCEPTION-MATRIX + OPERATOR/CLI-JSON-REFUSAL-PARITY + GUARD-SNAPSHOT-FIELD-STABILITY",
-      "timestamp_utc": "20261106T133530Z"
-    },
-    {
-      "acceptance": "1124 tests OK, 0 failures, 0 errors; tracka_resume_check pass=True with all 18 checks true; check_tracka_scope_registry_drift PASS scripts=123 registry=123; trackc_panel_window_planner completeness-first ranking emits maximal complete prefix per contiguous sequence; run_evaluation experiment contract fixture list matches every registered OUT name.",
-      "blockers": "None \u2014 engineering-only repair; confirmatory research status unchanged (CONCLUDED, no outcomes recomputed, no network).",
-      "changed_files": [
-        "scripts/tracka_resume_check.py",
-        "scripts/trackc_panel_window_planner.py",
-        "research_state/tracka_script_scope_registry.json",
-        "tests/test_tracka_hardening_099.py",
-        "tests/test_tracka_hardening_117.py",
-        "tests/test_tracka_hardening_125.py",
-        "tests/test_run_evaluation_experiment_contract.py"
-      ],
-      "do_not": "No new experiments, no data probing, no outcome recomputation, no network, no .github/workflows changes, no threshold shopping, no sealed-holdout reuse.",
-      "evidence": [
-        "scripts/trackc_panel_window_planner.py",
-        "scripts/tracka_resume_check.py",
-        "research_state/tracka_script_scope_registry.json",
-        "tests/test_tracka_hardening_099.py",
-        "tests/test_tracka_hardening_117.py",
-        "tests/test_tracka_hardening_125.py",
-        "tests/test_run_evaluation_experiment_contract.py",
-        "tests/test_trackc_panel_window_planner.py"
-      ],
-      "gaps": [],
-      "generated": "20261110T075000Z",
-      "id": "FCLR-NEXT-165",
-      "priority": "P0",
-      "rank": 0.001,
-      "resume_triggers": [],
-      "status": "COMPLETE",
-      "task": "REPAIR TEST-SUITE REGRESSION BLOCKER (deps + stale invariants + registry drift + planner completeness) \u2014 restore full `python -m unittest discover tests` to green.",
-      "timestamp_utc": "20261110T075000Z"
-    },
-    {
-      "acceptance": "G1-G5 tmp-isolated deterministic tests, no network/parquet/outcome reads, no real research_state writes; suite green in deps env; resume 17 PASS; gate/operator/drift pass; root<=163 probes==2",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "gaps": [
-        "G1 real seam GO/NO-GO manifest fixtures through production path",
-        "G2 structural refusal-path heuristics for all guarded ready-writing/audit",
-        "G3 audit payload key/shape stability + extra guard states",
-        "G4 run_liqmicro_v2 write allowlist/denylist guard",
-        "G5 h004 allowed+valid sandbox census-absent fail-closed smoke"
-      ],
-      "generated": "20261106T055542Z",
-      "id": "FCLR-NEXT-121",
-      "priority": "P0",
-      "rank": 0.001,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path; Hyperliquid-only; modeled!=observed"
-      ],
-      "status": "SUPERSEDED_BY_FCLR-NEXT-131",
-      "superseded_at_utc": "20261106T133530Z",
-      "superseded_by": "FCLR-NEXT-131",
-      "task": "HARNESS REAL-SEAM GO MANIFEST ACCEPTANCE PROOF + REGISTRY STRUCTURAL REFUSAL-PATH DRIFT + AUDIT RC/SHAPE STABILITY MATRIX + RUN_LIQMICRO_V2 POST-GATE WRITE ALLOWLIST GUARD + H004 ALLOWED+SANDBOX CENSUS-ABSENT FAIL-CLOSED",
-      "timestamp_utc": "20261106T055542Z"
-    },
-    {
-      "acceptance": "G1-G5 delivered with tmp-isolated deterministic tests (no network/parquet/outcome reads, no real research_state writes); suite >=484 green (report after); resume 17 PASS; gate stable; operator pass exit 0; drift pass; root<=163 probes==2; no workflows/cache/pycache committed; emit FCLR-NEXT-121 naming exact uncovered gaps.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed": "20261106T055542Z",
-      "delta": {
-        "changed_files": [
-          "tests/test_tracka_hardening_120.py",
-          "scripts/check_tracka_scope_registry_drift.py (120 G2 semantic heuristics)",
-          "scripts/h004_fclr005_pipeline.py (120 G5 sandbox guard)",
-          "AGENT_HANDOFF.md"
-        ],
-        "drift_check": "pass:true 83/83 semantic checks",
-        "env_note": "numpy/pandas absent in this runner; full discover baseline 484 (deps env) not comparable; 120/FCLR010 harness/adversarial/subset harness tests verified green where dep-light",
-        "hardening_tests_120_result": "19 OK (tmp-isolated, no network, no parquet/outcome reads, no real research_state writes; heavy-dep mocks for run_liqmicro_v2 import path)",
-        "hardening_tests_added": "tests/test_tracka_hardening_120.py (+19, 4 classes G1-G5)",
-        "operator": "pass:true exit 0",
-        "probes": 2,
-        "resume_check": "17 PASS (18 pass:true fields), network:false",
-        "resume_gate": "drift_preflight.pass:true, BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false",
-        "root_md_json": 143
-      },
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
-      "gaps": [
-        "G1 explicit admissible seam GO minimal manifest -> READY_FROZEN + NO-GO refuses before loader",
-        "G2 drift class/source semantic consistency heuristics",
-        "G3 fclr010_coverage_audit+liqmicro_audit NO-READY refusal matrix",
-        "G4 run_liqmicro_v2 sandboxed READY-branch _run_pipeline contract + write inventory",
-        "G5 h004 allowed-pilot sandbox-root enforcement for pilot write targets"
-      ],
-      "generated": "20261106T045619Z",
-      "id": "FCLR-NEXT-120",
-      "priority": "P0",
-      "rank": 0.002,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path; Hyperliquid-only; modeled!=observed"
-      ],
-      "status": "COMPLETE",
-      "task": "FCLR-NEXT-120: HARNESS EXPLICIT SEAM-GO MANIFEST-ONLY READY_FROZEN MATRIX + TRACKA REGISTRY SEMANTIC CONSISTENCY DRIFT + GUARDED AUDIT-READY-WRITING NO-READY MATRIX + RUN_LIQMICRO_V2 SANDBOXED READY-PIPELINE CONTRACT + H004 ALLOWED-PILOT SANDBOX-ROOT ENFORCEMENT",
-      "timestamp_utc": "20261106T051039Z",
-      "uncovered_gaps_for_121": [
-        "G1: READY_FROZEN with real admissible seam GO manifest fixture accepted by production seam path (not seam=None) + paired NO-GO refused before loader",
-        "G2: structural refusal-path presence for all guarded ready-writing/audit classes; drift fails deterministically",
-        "G3: audit refusal payload key/shape stability + additional machine-representable guard states",
-        "G4: run_liqmicro_v2 post-gate write-target allowlist/denylist (frontier/run_manifest/cross-track/FCLR010 summary excluded) + sandbox-constant proof",
-        "G5: h004 allowed+valid sandbox fail-closed on absent census/input files with stable reason_code; tmp-sandbox smoke, no heavy pipeline"
-      ]
-    },
-    {
-      "acceptance": "fclr010_execute blocked main performs no pre-guard manifest/split read or split print and no canonical mutation (manifest context resolved only inside explicit post-READY outcome loader); h004_fclr005_pipeline default-refused (rc=1, H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT, canonical_outputs_mutated:false, hyperliquid_fclr010_guarded_seam:false, not FCLR010Harness/fclr010_guarded_entry) with explicit allow flag/env quarantine; full scripts/*.py registry 82/82 classified in tests/test_tracka_hardening_117.py (diff fails on missing/unclassified/manual-review) with risk-scope assertions; run_liqmicro frontier mutation via explicit post-gate _write_experiment_frontier_ready() and blocked never reaches pipeline/writer/frontier; full suite 451 OK; resume 17 PASS; gate pass; operator exit 0; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger, Hyperliquid ironflow 2026-11.. absent; probing exhausted 90+) \u2014 NOT a code blocker.",
-      "completed": "20261106T035500Z",
-      "delta": {
-        "changed_files": [
-          "scripts/fclr010_execute.py",
-          "scripts/h004_fclr005_pipeline.py",
-          "scripts/run_liqmicro.py",
-          "tests/test_tracka_hardening_117.py",
-          "research_state/experiment_frontier.json",
-          "AGENT_HANDOFF.md"
-        ],
-        "delta_tests": "+15 (tests/test_tracka_hardening_117.py)",
-        "full_suite_after": 451,
-        "full_suite_before": 436,
-        "g1": "fclr010_execute: _load_outcomes_guarded/_frozen_split_context post-READY only; blocked main asserts no _frozen_split_context/_load_json_lfs_aware pre-guard call, no 'Splits:' print, no eval_summary/run_manifest mutation.",
-        "g2": "h004_fclr005_pipeline: H004_OUT_OF_SCOPE_HISTORICAL_TRACKA_PILOT=True, H004_HYPERLIQUID_FCLR010_GUARDED_SEAM=False, default main() refuses (rc=1, stable JSON payload, no canonical mutation/network/real RS writes); allow requires --allow-historical-bybit-pilot or FCLR_ALLOW_H004_HISTORICAL_PILOT=1; no FCLR010Harness/fclr010_guarded_entry tokens.",
-        "g3": "scripts/*.py registry sweep 82 scripts classified (guarded_tracka*/harness/resume/prereg/fetch/track_b_modeled/track_c_sealed/maintenance/h004 out-of-scope/aux audit/aux); diff tests enforce coverage+valid classes+no manual-review; eval_summary writers cannot be unclassified_auxiliary.",
-        "g4": "run_liqmicro: _write_experiment_frontier_ready() extracted (post-gate READY pipeline only); blocked main asserts no _run_pipeline/_write_experiment_frontier_ready, no frontier mutation (real RS snapshot).",
-        "operator": "pass:true exit 0",
-        "probes": 2,
-        "resume_check": "17 PASS",
-        "resume_gate": "drift_preflight.pass:true, BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false",
-        "root_md_json": 142,
-        "uncovered_gaps_for_118": [
-          "fclr010_execute post-READY loader path: if manifest unavailable/corrupt/LFS-unmaterialized, _frozen_split_context raises inside explicit loader after guard passed; ensure this yields a controlled refusal payload with no canonical summary/manifest mutation and add tmp-isolated tests (no real RS mutation).",
-          "h004 allowed path (--allow-historical-bybit-pilot / env): can still write evaluation_summary_FCLR005.md, append LIQ_ENUM, write CKPT_PANEL in allowed historical mode; add explicit machine guard that allowed mode cannot target Hyperliquid Track A canonical outputs/frontier/cross-track/run_manifest liquidation gate fields and cannot be invoked from/through FCLR010 guarded seam; add tmp-isolated proof (sandboxed paths).",
-          "G3 registry currently lives in tests/test_tracka_hardening_117.py (static snapshot). Add canonical machine-readable registry artifact (e.g. research_state/tracka_script_scope_registry.json or scripts-emitted read-only check) or a deterministic discovery diff script that fails on drift; reconcile with 116 EXTENDED_CLASSIFICATION and remove duplicate authority risk while preserving root<=163/probes==2.",
-          "run_liqmicro_v2 frontier/canonical mutation parity: confirm _run_pipeline/canonical writes are post-gate only with explicit blocked+ready-branch auditability (parallel to run_liqmicro G4) and add missing assertions if any canonical mutation remains unisolated.",
-          "READY-path non-execution proof gap (cannot run real outcomes while blocked): for guarded_tracka_ready_writing scripts, add manifest/prereg refusal matrix proving no canonical output mutation when guard is not READY (missing prereg, NOGO seam, modeled/proxy, wrong venue) using tmp isolated canonical path overrides where feasible; keep no-network/no-outcome-reads."
-        ]
-      },
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
-      "generated": "20261106T035500Z",
-      "id": "FCLR-NEXT-117",
-      "rank": 0.005,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path; Hyperliquid-only; modeled!=observed"
-      ],
-      "status": "COMPLETE",
-      "task": "FCLR-NEXT-117: FCLR010-EXECUTE DEFER MANIFEST/SPLIT CONTEXT BEHIND GUARD + H004 HISTORICAL-PILOT EXECUTION GUARD/MARKER + FULL SCRIPTS EVAL/CANONICAL-MUTATION REGISTRY SWEEP + RUN-LIQMICRO READY FRONTIER-WRITER AUDITABILITY"
-    },
-    {
-      "acceptance": "117 uncovered_gaps_for_118 closed with code+tests where refusal/guard is machine-enforceable; full suite >=451 green; stable contracts preserved; root<=163 probes==2; no trigger side effects.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed": "20261106T035900Z",
-      "delta": {
-        "changed_files": [
-          "scripts/fclr010_guarded_entry.py",
-          "scripts/h004_fclr005_pipeline.py",
-          "research_state/tracka_script_scope_registry.json",
-          "tests/test_tracka_hardening_118.py",
-          "research_state/experiment_frontier.json",
-          "AGENT_HANDOFF.md"
-        ],
-        "delta_tests": "+18 (tests/test_tracka_hardening_118.py)",
-        "full_suite_after": 469,
-        "full_suite_before": 451,
-        "g1": "fclr010_execute post-READY loader failure yields controlled refusal with stable reason_code PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, canonical_outputs_mutated:false, no evaluation_summary_FCLR010.md/run_manifest.json mutation (tmp-isolated tests).",
-        "g2": "h004_fclr005_pipeline allowed-path machine guard: H004_HYPERLIQUID_FCLR010_GUARDED_SEAM must remain False; no FCLR010Harness/fclr010_guarded_entry tokens in source; allowed path cannot target Hyperliquid Track A canonical targets (experiment_frontier.json, run_manifest.json, evaluation_summary_FCLR010.md, cross_track_decision_log.md); tmp-isolated refusal + default-refusal tests.",
-        "g3": "research_state/tracka_script_scope_registry.json canonical machine-readable registry (82 scripts, reconciled with test_tracka_hardening_117.SCRIPT_REGISTRY); drift check: scripts/*.py filenames == registry keys, valid classes/reasons, synced with 117, no unclassified eval-summary writers.",
-        "g4": "run_liqmicro_v2 blocked: _run_pipeline never called, no canonical summary/frontier/results mutation, experiment_frontier.json unchanged; _run_pipeline only reached after READY_FROZEN guard (source order asserted).",
-        "g5": "guarded ready-writing NO-READY refusal matrix for 6 scripts (coupled_robust_eval, fclr010_execute, fclr010_coverage_audit, liqmicro_audit, overlay_quick, overlay_tracka_execute): 4 non-READY states (missing prereg, NOGO seam, modeled/proxy, wrong venue) all refuse rc=1 with canonical_outputs_mutated:false, no canonical target mutation (tmp snapshot).",
-        "operator": "pass:true exit 0",
-        "probes": 2,
-        "resume_check": "17 PASS",
-        "resume_gate": "drift_preflight.pass:true, BLOCKED PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false",
-        "root_md_json": 143,
-        "uncovered_gaps_for_119": [
-          "READY_FROZEN path cannot be exercised end-to-end without admissible trigger data (post-guard loader success path, canonical summary/manifest/frontier writes on real outcomes).",
-          "h004 allowed path still writes its own pilot artifacts (evaluation_summary_FCLR005.md, LIQ_ENUM, CKPT_PANEL) by design; no test can assert allowed-path writes are blocked without executing the pilot (requires real Bybit census data files).",
-          "Registry drift check is static (test-time); consider CI-enforced drift check on script additions/removals.",
-          "run_liqmicro_v2 does not write experiment_frontier.json (by design; only run_liqmicro v1 does); confirm no future v2 frontier mutation surface is added unguarded."
-        ]
-      },
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
-      "generated": "20261106T035500Z",
-      "id": "FCLR-NEXT-118",
-      "rank": 0.004,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
-      ],
-      "status": "COMPLETE",
-      "task": "FCLR-NEXT-118: FCLR010 POST-GATE MANIFEST-LOAD CONTROLLED REFUSAL + H004 ALLOWED-PATH CANONICAL-TARGET QUARANTINE (SANDBOXED) + CANONICAL SCRIPT-SCOPE REGISTRY/DRIFT CHECK + RUN_LIQMICRO_V2 FRONTIER PARITY + GUARDED READY-WRITING NO-READY REFUSAL MATRIX"
-    },
-    {
-      "acceptance": "All audited Track A execution entrypoints have 0 non-parquet data-access imports (requests/urllib/httpx/aiohttp/read_csv/json/excel/sqlite/duckdb) outside guarded loaders; src/ prologues have 0 data-access imports (incl. pyarrow/pd.read_parquet/pq.read_table); 0 unwired scripts/*.py with def main + parquet/outcome reads (source audit); tests/test_tracka_hardening_113.py source-based matrix green; full suite 390 OK; stable 108/110/111/112 semantics preserved; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed": "20261106T015401Z",
-      "delta": "entrypoint non-parquet data-access imports 1->0 (scripts/fclr010_execute.py dead import requests removed); src prologue data-access imports 1->0 (src/analysis/liqmicro/ingest.py unused top-level import pyarrow.parquet removed); unwired def-main+parquet scripts 0 (source audit, 8 wired); tests 371->390 (+19; includes test_tracka_hardening_113.py +10 source-based); changed_files: scripts/fclr010_execute.py, src/analysis/liqmicro/ingest.py, tests/test_tracka_hardening_113.py, research_state/experiment_frontier.json, AGENT_HANDOFF.md",
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
-      "generated": "20261106T015401Z",
-      "id": "FCLR-NEXT-113",
-      "rank": 0.01,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
-      ],
-      "status": "COMPLETE",
-      "task": "FCLR-NEXT-113: NON-PARQUET DATA-ACCESS AUDIT (scripts/*.py entrypoints + src/ prologues) + FAIL-CLOSED SOURCE MATRIX (NO COAST)"
-    },
-    {
-      "acceptance": "src/analysis/liqmicro/ingest.py lazy pd.read_parquet()/open() reads wired behind guarded contract or explicit refusal with tmp-isolated tests proving no implicit load on blocked/misconfigured branches; classify Track-A-adjacent scripts that read outcome JSON/CSV (run_liqmicro*, fclr010_harness* callers, any producing liquidation-risk claims) with guarded/refused scope or explicit Track-A exclusion documented + tested; full suite >=390 green; stable reason codes/order preserved; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed": "20261106T021700Z",
-      "completion_metrics": {
-        "full_suite": "402 OK (was 390 at entry; +12 vs 113 baseline: 390->402)",
-        "operator_report": "pass:true, exit 0",
-        "probes": 2,
-        "resume_check": "17 PASS (incl. probe_invariant_runtime_named + admissible_seam_wired)",
-        "resume_gate": "drift_preflight.pass:true, status=BLOCKED, reason_code=PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS, outcomes_inspected:false",
-        "root_md_json": 142,
-        "src_method_level_reads": "before=2 unguarded (ingest.py pd.read_parquet + open) -> after=0 unguarded; 1 module guarded (ingest.py)",
-        "tracka_adjacent_excluded_track_cb": 4,
-        "tracka_adjacent_guarded": 2,
-        "uncovered_gaps_for_115": [
-          "build() non-guarded fallback path in scripts/coupled_build_panel.py:100-107 still permits pd.read_parquet(CACHE) when outcome_loader is None and CACHE exists; guarded_execute READY_FROZEN path passes outcome_loader so this is unreachable on the guarded branch, but the unguarded branch is not machine-refused (FCLR-NEXT-115: make build() raise GuardedReadRefused when outcome_loader is None, or route all callers through guarded_execute exclusively).",
-          "run_liqmicro.py / run_liqmicro_v2.py _run_pipeline() write canonical outputs (panel_liqmicro.csv/parquet, evaluation_summary_FCLR-LIQMICRO-001.md) and mutate experiment_frontier.json only on the READY_FROZEN branch, but no test asserts canonical_outputs_mutated:false on blocked branches for these two scripts specifically (FCLR-NEXT-115: extend test_tracka_hardening_114 blocked-refusal matrix to assert no canonical output / frontier mutation for run_liqmicro* blocked paths).",
-          "fclr010_harness.py callers not re-classified in 114 (only run_liqmicro* + run_h003* audited); any future Track A claim producer must be added to the guarded/refused registry (FCLR-NEXT-115: audit remaining scripts/*.py that read outcome JSON/CSV for liquidation-risk claims and register each)."
-        ]
-      },
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping. No commit __pycache__/ironflow_fastpath_cache.json.",
-      "generated": "20261106T015401Z",
-      "id": "FCLR-NEXT-114",
-      "rank": 0.015,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
-      ],
-      "status": "COMPLETE 20261106T021700Z",
-      "task": "FCLR-NEXT-114: SRC METHOD-LEVEL DATA-READ GUARDING + TRACK-A-ADJACENT SCRIPT SCOPE/REFUSAL MATRIX (STRICTER, NO COAST)"
-    },
-    {
-      "acceptance": "FCLR_EXPERIMENT=FCLR-012-V python3 scripts/run_evaluation.py runs to completion; research_state/evaluation_summary_FCLR-012-V.md written; run_manifest.json experiments contains FCLR-012-V with status INCONCLUSIVE; pytest green.",
-      "blockers": "None remaining for this cell. Result is INCONCLUSIVE by frozen design: test window 2026-10-29..2026-11-02 = 5 days = 0 non-overlapping 30-day blocks; CI spans zero. Binance archive ends 2026-11-02 (verified 404 on 2026-11-03/04 and 2026-10-28/29).",
-      "do_not": "Do NOT promote to confirmatory. Do NOT relax the block-count criterion. Do NOT re-run sealed FCLR-001/002/003/006/007/008/011. Do NOT threshold-shop. Do NOT merge Binance and Hyperliquid.",
-      "generated": "20261104T005200Z",
-      "prerequisite": "Data already cached (scripts/fclr012_download.py, 2026-08-07..2026-11-02) and coverage-audited (research_state/fclr012v_coverage_audit.json). Added FCLR-012-V branch to scripts/run_evaluation.py + split_boundaries_fclr012v in run_manifest.json + prereg research_state/pre_registration_fclr012v_20261104T005000Z.md BEFORE outcomes.",
-      "rank": 0,
-      "resume_triggers": [
-        "new admissible Binance data beyond 2026-11-02 -> re-run with new frozen splits + new prereg version"
-      ],
-      "status": "COMPLETE_INCONCLUSIVE",
-      "task": "FCLR-012-V: FORWARD VOLATILITY VALIDATION (UNSEALED 2026 PANEL) \u2014 EXECUTED 2026-11-04T00:52Z"
-    },
-    {
-      "acceptance": "Real entrypoints fclr010_execute.py/main and fclr010_execute_fast.py/main enforce guarded seam+prereg+manifest before any parquet/outcome/canonical write; tests/test_tracka_hardening_111.py E2E matrix green; full suite >=364 green; stable 108/110 semantics preserved; root<=163 probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed": "20261106T005200Z",
-      "delta": "tests 363->371 (+8 via test_tracka_hardening_111.py), entrypoints wired 0->2 (fclr010_execute.py:main + fclr010_execute_fast.py:main), guarded_entry module scripts/fclr010_guarded_entry.py added",
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
-      "generated": "20261105T233053Z",
-      "id": "FCLR-NEXT-111",
-      "rank": 0.05,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
-      ],
-      "status": "COMPLETE",
-      "task": "FCLR-NEXT-111: WIRE GUARDED DATA-LOAD INTO REAL EXECUTION ENTRYPOINTS + E2E TRIGGER-ARTIFACT MATRIX (NO COAST)"
-    },
-    {
-      "acceptance": "All scripts/*.py with direct parquet/outcome reads outside fclr010_guarded_entry._default_outcome_loader or fclr010_execute._load_outcomes wired through guarded_execute or made pure refusal: coupled_build_panel.py:main, fclr010_coverage_audit.py:main, liqmicro_audit.py:main, overlay_tracka_execute.py:main, overlay_quick.py:main, coupled_robust_eval.py:main (6 newly wired); fclr010_execute.py:main + fclr010_execute_fast.py:main already wired (111). Direct-parquet-reads found: 6 before / 0 after. Entrypoints wired: 2 before / 8 after. tests/test_tracka_hardening_112.py (+9 fail-closed matrix tests, tmp-isolated, no network/parquet/outcome/real research_state writes). Full suite 380 OK. Stable 108/110/111 reason codes/order/fields preserved. Root md+json 142 (<=163), probes==2.",
-      "blockers": "Data blocked (no trigger) \u2014 NOT a code blocker.",
-      "completed": "20261106T015401Z",
-      "delta": "direct-parquet-reads 6->0, entrypoints wired 2->8, tests 371->380 (+9 via test_tracka_hardening_112.py), changed_files: scripts/coupled_build_panel.py, scripts/fclr010_coverage_audit.py, scripts/liqmicro_audit.py, scripts/overlay_tracka_execute.py, scripts/overlay_quick.py, scripts/coupled_robust_eval.py, tests/test_tracka_hardening_112.py",
-      "do_not": "No re-probe absent months. No workflows/schedulers/pollers/status-only/wrappers/controllers. No Track C/B. No conflation. No threshold-shopping.",
-      "generated": "20261106T005200Z",
-      "id": "FCLR-NEXT-112",
-      "rank": 0.02,
-      "resume_triggers": [
-        "trigger appears: PREREG BEFORE INSPECTING OUTCOMES via guarded path"
-      ],
-      "status": "COMPLETE",
-      "task": "FCLR-NEXT-112: ENTRYPOINT AUDIT + WIRE ALL REMAINING SCRIPTS/*.py DIRECT-PARQUET READS THROUGH GUARDED CONTRACT + FAIL-CLOSED MATRIX TESTS (NO COAST)"
-    },
-    {
-      "acceptance": "experiment_frontier.json contains FCLR-012; track_a_fclr010_consolidated.md and funding_incremental_synthesis_20261103T115630Z.md and forward_campaign_fclr012_prereg.md present; AGENT_HANDOFF.md single durable handoff with FORWARD CAMPAIGN; pytest green.",
-      "blockers": "Forward runs blocked unless NEW admissible unauthenticated data appears (new ironflow monthly parquet >2026-10-31 for Track A; new unsealed 2026 Binance panel beyond 2026-11-02 for volatility). Do not relax thresholds or re-run sealed panels.",
-      "do_not": "Do not re-run sealed FCLR-001/002/003/006/007/008/010/011. Do not threshold-shop. Do not merge tracks. Do not build live/paper trading.",
-      "generated": "20261103T120041Z",
-      "prerequisite": "tests/test_fclr010_harness.py passes; fclr010_harness.py pre_register_forward_experiment() + evaluate_forward() hardened; run_manifest.json experiments map updated; consolidated + synthesis artifacts written.",
-      "rank": 0,
-      "resume_triggers": [
-        "new ironflow parquet >2026-10-31 -> execute FCLR-012-A",
-        "new unsealed 2026 Binance panel >2026-11-02 -> execute FCLR-012-V v2"
-      ],
-      "status": "PREREGISTERED",
-      "task": "FCLR-NEXT-012: CONSOLIDATE-TRACKA-AND-FUNDING-INCREMENTAL \u2014 forward validation pre-registered (FCLR-012-A Track A ironflow beyond 2026-10-31; FCLR-012-V funding-conditioned volatility on new 2026 panel). Frozen splits/metrics/gates/embargo/block-bootstrap; no holdout reuse; NO overlay changes."
-    },
-    {
-      "acceptance": "evaluation_summary with regime stratification + evidence written (STREAM_B_DEEP_ANALYSIS-001 + STREAM_B_DEEP_ANALYSIS-002); status COMPLETE_INCONCLUSIVE recorded in negative_results_report.md Track C section and experiment_frontier.json; AGENT_HANDOFF.md updated with exact evidence/counts/timestamps.",
-      "blockers": "FCLR-002 test = 2 blocks (< 3 required) \u2192 confirmatory gate not met; exploratory only. FCLR-008 would need panel construction from raw archives + new preregistration if pursuing confirmatory.",
-      "completed_utc": "20261109T163900Z",
-      "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell. Do not promote exploratory result to confirmatory. Do not threshold-shop.",
-      "generated": "20261109T163900Z",
-      "prerequisite": "Tests pass, Track A monitor. Work on frozen splits only; no new confirmatory cell without full preregistration.",
-      "rank": 0,
-      "resume_triggers": [
-        "new admissible Binance panel with >=3 non-overlapping 30-day blocks for FCLR-008 confirmatory"
-      ],
-      "status": "COMPLETE_INCONCLUSIVE",
-      "task": "FUNDING_CONDITIONING_DEEPER_VALIDATION-002: Regime-stratified QLIKE by funding quartiles per symbol/time within test; interaction refinements on frozen FCLR-002 splits. COMPLETE_INCONCLUSIVE (exploratory) \u2014 Q1 extreme-funding regimes show robust skill (CI excludes 0 YES, rel_imp +4.374%..+9.192% per symbol) but FCLR-002 test = 2 non-overlapping 30-day blocks (< 3) \u2192 not confirmatory, not promotable. Negative result recorded in negative_results_report.md Track C section 2026-11-09T16:39:00Z.",
-      "timestamp_utc": "20261109T163900Z"
-    },
-    {
-      "acceptance": "evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_<UTC>.md with ablations/interactions/regimes; block_count_resolution_001_<UTC>.md OR pre_registration_stream_b_funding_conditioned_<UTC>.md; AGENT_HANDOFF.md updated; tests >=117/117 PASS.",
-      "blockers": "FCLR-002 test has 2 blocks (<3). Must resolve or work around with rigorous analysis.",
-      "do_not": "Do not re-run sealed FCLR-001..008. Do not peek outcomes if creating new confirmatory cell.",
-      "generated": "20261103T110039Z",
-      "prerequisite": "Verify tests pass, run Track A monitor. Work only on frozen splits.",
-      "rank": 0,
-      "resume_triggers": [
-        "complete deep dive with bottleneck resolution"
-      ],
-      "status": "COMPLETE",
-      "task": "FUNDING_CONDITIONED_DEEP_DIVE-001: Mechanism ablations/interactions/regime conditioning on frozen FCLR-002 splits + BLOCK_COUNT_RESOLUTION (find >=3 blocks config or document impossibility)"
-    },
-    {
-      "acceptance": "Evidence logged each session, automation hardened, resume only on rubric-GO data with preregistration",
-      "artifact_churn_092": {
-        "alt_timestamped_families_eliminated": [
-          "alt_source_scan",
-          "alt_source_deep_review"
-        ],
-        "ironflow_probe_files": 2,
-        "tests": 155
-      },
-      "artifact_churn_093": {
-        "adversarial_rubric_module": "scripts/tracka_rubric.py",
-        "adversarial_tests": 17,
-        "canonical_alt_outputs": [
-          "alt_source_scan_latest.json",
-          "alt_source_deep_review_latest.md"
-        ],
-        "consolidated_unreferenced_families": true,
-        "ironflow_probe_files": 2,
-        "research_state_mdjson_root": 169,
-        "root_mdjson_before": 185,
-        "tests": 173
-      },
-      "artifact_churn_094": {
-        "adversarial_rubric_tests_added_094": 17,
-        "adversarial_rubric_tests_total": 34,
-        "canonical_alt_outputs": [
-          "alt_source_scan_latest.json",
-          "alt_source_deep_review_latest.md"
-        ],
-        "ironflow_probe_files": 2,
-        "monitor_side_effect_isolation_proven": true,
-        "new_recurring_probe_scan_families": 0,
-        "offline_resume_proof_s": 0.04,
-        "provenance_history": "research_state/tracka_bottleneck_history_090.md#094",
-        "required_evidence_artifacts_added": 2,
-        "research_state_mdjson_root_after": 155,
-        "research_state_mdjson_root_before_session": 153,
-        "tests_total": 190,
-        "unreferenced_timestamped_families_removed": 18
-      },
-      "artifact_churn_095": {
-        "blocker": "research_state/liquidation_forward_validate_015_blocker_20261105T110445Z.md",
-        "canonical_alt_outputs": [
-          "alt_source_scan_latest.json",
-          "alt_source_deep_review_latest.md"
-        ],
-        "consolidated_superseded_094_artifacts": 2,
-        "ironflow_probe_files": 2,
-        "new_recurring_probe_scan_families": 0,
-        "offline_resume_script": "scripts/tracka_resume_check.py",
-        "offline_resume_script_pass": true,
-        "offline_resume_script_under_5s_test_enforced": true,
-        "research_state_mdjson_root": 155,
-        "rubric_adversarial_added_095": 18,
-        "rubric_adversarial_tests_total": 52,
-        "sweep": "research_state/campaign_sweep_tracka_20261105T110445Z.md",
-        "tests_total": 208,
-        "watch_trigger_harden_bytes": 74890,
-        "watch_trigger_harden_files": 28,
-        "watch_trigger_harden_generators": [
-          "scripts/write_trigger_harden_successor.py",
-          "scripts/trackc_inventory_harden.py"
-        ],
-        "watch_trigger_harden_zero_safe_removable": 0
-      },
-      "artifact_churn_097": {
-        "blocker": "research_state/liquidation_forward_validate_017_blocker_20261105T122444Z.md",
-        "ironflow_probe_files": 2,
-        "minimal_fixture_compat_preserved": true,
-        "monitor_network_isolation_tests_added": 6,
-        "new_recurring_probe_scan_families": 0,
-        "offline_resume_checks": 8,
-        "offline_resume_pass_under_5s": true,
-        "offline_resume_script": "scripts/tracka_resume_check.py",
-        "research_state_mdjson_root": 159,
-        "rubric_adversarial_093_097": 79,
-        "rubric_adversarial_added_097": 12,
-        "strict_manifest_default_path": true,
-        "sweep": "research_state/campaign_sweep_tracka_20261105T122444Z.md",
-        "tests_total": 244,
-        "watch_generator_compatible_audit": true,
-        "watch_trigger_harden_live": 1,
-        "watch_trigger_harden_non_20261104T_live": 0
-      },
-      "artifact_churn_098": {
-        "alt_cache_churn_tmp_isolated_proof": true,
-        "blocker": "research_state/liquidation_forward_validate_018_blocker_20261105T131205Z.md",
-        "handoff_single_durable_root": "AGENT_HANDOFF.md",
-        "ironflow_probe_files": 2,
-        "legacy_no_manifest_behavior_preserved": true,
-        "new_recurring_probe_scan_families": 0,
-        "offline_prereg_before_outcomes_branches": 4,
-        "research_state_mdjson_root": 161,
-        "strict_gate_integrated_in_harness": true,
-        "sweep": "research_state/campaign_sweep_tracka_20261105T131205Z.md",
-        "tests_total": 261
-      },
-      "artifact_churn_101": {
-        "blocker": "research_state/liquidation_forward_validate_020_blocker_20261105T160711Z.md",
-        "consolidation_regression_guard_tmp_only": true,
-        "drift_invariants_wired_into_resume_check_cli": true,
-        "hardening_tests_added": 16,
-        "ironflow_probes": 2,
-        "new_recurring_probe_scan_families": 0,
-        "research_state_mdjson_root": 161,
-        "resume_check_elapsed_s_lt_5": true,
-        "resume_check_total_checks": 15,
-        "sweep": "research_state/campaign_sweep_tracka_20261105T160711Z.md",
-        "tests_total": 292,
-        "unreferenced_artifacts_consolidated_with_provenance": 4,
-        "wired_checks": [
-          "handoff_single_root",
-          "probe_count_exactly_two",
-          "root_md_json_bounded",
-          "canonical_alt_outputs_only",
-          "no_recurring_timestamped_probe_scan_families",
-          "watch_trigger_harden_invariant",
-          "no_root_trigger_harden_files"
-        ]
-      },
-      "artifact_churn_102": {
-        "blocker": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-        "drift_preflight_bundled_in_resume_gate": true,
-        "gate_exposes_drift_preflight_json": true,
-        "hardening_tests_added": 11,
-        "ironflow_probes": 2,
-        "new_recurring_probe_scan_families": 0,
-        "research_state_mdjson_root": 163,
-        "runtime_probe_invariant_assert_in_monitor_quick": true,
-        "sweep": "research_state/campaign_sweep_tracka_20261105T162400Z.md",
-        "tests_total": 303
-      },
-      "artifact_churn_103": {
-        "blocker": "research_state/liquidation_forward_validate_022_blocker_20261105T180046Z.md",
-        "consolidated_with_provenance": [
-          "ironflow_trend_digest_20261102T220326Z.json",
-          "ironflow_trend_report_20261102T220326Z.json"
-        ],
-        "gate_reason_codes": [
-          "DRIFT_PREFLIGHT_FAIL_BEFORE_PREREG",
-          "PREREG_OR_MANIFEST_BLOCK_AFTER_DRIFT_PASS",
-          "RESUME_READY_AFTER_DRIFT_PASS"
-        ],
-        "ironflow_probe_files": 2,
-        "lfs_local_cache_load": "harness+gate (no network, semantics unchanged)",
-        "probe_invariant_runtime_evidence_field": "recorded+tmp_tested",
-        "research_state_mdjson_root": 163,
-        "sweep": "research_state/campaign_sweep_tracka_20261105T180046Z.md",
-        "tests_total": 309
-      },
-      "blockers": "Structural - no data (2026-10 latest); monitor hardened in 004i",
-      "evidence": "research_state/ironflow_probe_20261105T200406Z.json; tests/test_tracka_hardening_108.py",
-      "generated": "20261104T192914Z",
-      "last_checked": "20261105T231136Z",
-      "next_action_heavy": "AGENT_HANDOFF.md#FCLR-NEXT-110 (SINGLE ACTIVE TASK)",
-      "notes": "20261105T231136Z: Handoff/frontier refreshed as single durable initial task (FCLR-NEXT-110). NO DATA/TRIGGER unchanged (data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest). 352 tests OK, resume_check 17 PASS, operator exit 0, root 142, probes 2. 110 must fail-close actual harness parquet/outcome data-load path + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED surface + matrix tests. PREREG BEFORE OUTCOMES.",
-      "prerequisite": "monitor_ironflow_liquidations --quick/--verify",
-      "rank": 0.1,
-      "resume_triggers": [
-        "ironflow >=2026-11 parquet appears (events or fills HTTP 200 unauthenticated)",
-        "rubric-GO alternative unauthenticated source passes strict criteria"
-      ],
-      "status": "MONITOR_ONLY",
-      "task": "TRACK_A_LIQUIDATION_RISK_MONITOR: Keep alive until rubric-GO data appears"
-    },
-    {
-      "acceptance": "run_h003.py H003_EXPERIMENT=FCLR-002 completes < timeout (perf fix: day-indexed mark CSV load); evaluation_summary_h003_FCLR002.md rewritten with n=8274 test rows; test_synthetic_boundary_labels.py 8/8 OK; full suite 1068 OK.",
-      "artifact": "research_state/evaluation_summary_h003_FCLR002.md",
-      "blockers": "None for this cell. Result is null/inconclusive. Does not unblock risk-overlay phase (forecast gate not met for H001).",
-      "completed_utc": "20261109T153543Z",
-      "do_not": "Do not conflate modeled boundary breaches with observed liquidations. Do not promote to confirmatory. Do not threshold-shop.",
-      "gaps": [],
-      "generated": "20261109T153543Z",
-      "id": "FCLR-H003-FCLR-002",
-      "priority": "P0",
-      "rank": 0.001,
-      "resume_triggers": [],
-      "status": "COMPLETE_INCONCLUSIVE",
-      "task": "FCLR-H003 Track B hypothetical boundary-breach forecast on FCLR-002 panel (5 symbols BTC/ETH/BNB/SOL/XRP, 2024-07-23..2024-09-30, 24h horizon, MMR=0.005, lev 3/5/10/20 x long/short separate). Synthetic modeled boundary breach labels (NOT observed liquidations). Out-of-sample B0 vs C2 evaluation completed. Null/inconclusive: no consistent incremental forecast skill over B0 baseline; base rates near zero at lev3/5.",
-      "timestamp_utc": "20261109T153543Z"
-    }
-  ],
-  "generated": "2026-11-10T07:15:52Z",
-  "handoff_refreshed_utc": "2026-11-10T17:13:13Z",
-  "last_checked": "2026-11-06T01:54:01Z",
-  "last_checked_utc": "2026-11-10T17:13:13Z",
-  "last_updated": "20261110T075000Z",
-  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
-  "next_action": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
+  "blockers": "Structural - no data (2026-10 latest); monitor hardened in 004i",
+  "evidence": "research_state/ironflow_probe_20261105T200406Z.json; tests/test_tracka_hardening_108.py",
+  "generated": "20261104T192914Z",
+  "last_checked": "20261105T231136Z",
   "next_action_heavy": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-  "next_unfinished_task": "Track B confirmatory on untested local window TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks): M5.1 provenance/admissibility re-verified (PROVENANCE_OK 161, research_state/trackb_TB1_admissibility.json); M5.2 freeze NEW research_state/research_protocol_trackb_TB1_<UTC>.md + record prereg_hash and split_boundaries_trackb_* .frozen_before_outcomes=true in run_manifest.json BEFORE any outcome/label computation; M5.3 execute scripts/run_trackb_evaluation.py + scripts/synthetic_boundary_labels.py on frozen TB1 panel -> evaluation_summary_trackb_TB1_<ID>.md (CI, rel change, n_instruments/n_obs/n_test_blocks, gate, Holm); M5.4 propagate verdict to hypothesis_registry/experiment_frontier/negative_results_report/AGENT_HANDOFF/NEXT_SESSION_TASK; overlay ineligible unless all gates pass. Modeled proxy != observed liquidation; no network/paid/manual/credentials; no threshold shopping/holdout reuse; no .github/workflows edits.",
-  "program_status": "ACTIVE_TRACKB_UNTESTED_WINDOW_REMAINS",
+  "notes": "20261105T231136Z: Handoff/frontier refreshed as single durable initial task (FCLR-NEXT-110). NO DATA/TRIGGER unchanged (data_through=2026-10; 2026-11..2027-02 absent; probe 20261105T200406Z+digest). 352 tests OK, resume_check 17 PASS, operator exit 0, root 142, probes 2. 110 must fail-close actual harness parquet/outcome data-load path + ADMISSIBLE_SEAM_GO_PREREG_REQUIRED surface + matrix tests. PREREG BEFORE OUTCOMES.",
+  "prerequisite": "monitor_ironflow_liquidations --quick/--verify",
+  "rank": 0.1,
+  "resume_triggers": [
+    "ironflow >=2026-11 parquet appears (events or fills HTTP 200 unauthenticated)",
+    "rubric-GO alternative unauthenticated source passes strict criteria"
+  ],
+  "status": "MONITOR_ONLY",
+  "task": "TRACK_A_LIQUIDATION_RISK_MONITOR: Keep alive until rubric-GO data appears"
+},
+{
+  "acceptance": "run_h003.py H003_EXPERIMENT=FCLR-002 completes < timeout (perf fix: day-indexed mark CSV load); evaluation_summary_h003_FCLR002.md rewritten with n=8274 test rows; test_synthetic_boundary_labels.py 8/8 OK; full suite 1068 OK.",
+  "artifact": "research_state/evaluation_summary_h003_FCLR002.md",
+  "blockers": "None for this cell. Result is null/inconclusive. Does not unblock risk-overlay phase (forecast gate not met for H001).",
+  "completed_utc": "20261109T153543Z",
+  "do_not": "Do not conflate modeled boundary breaches with observed liquidations. Do not promote to confirmatory. Do not threshold-shop.",
+  "gaps": [],
+  "generated": "20261109T153543Z",
+  "id": "FCLR-H003-FCLR-002",
+  "priority": "P0",
+  "rank": 0.001,
+  "resume_triggers": [],
+  "status": "COMPLETE_INCONCLUSIVE",
+  "task": "FCLR-H003 Track B hypothetical boundary-breach forecast on FCLR-002 panel (5 symbols BTC/ETH/BNB/SOL/XRP, 2024-07-23..2024-09-30, 24h horizon, MMR=0.005, lev 3/5/10/20 x long/short separate). Synthetic modeled boundary breach labels (NOT observed liquidations). Out-of-sample B0 vs C2 evaluation completed. Null/inconclusive: no consistent incremental forecast skill over B0 baseline; base rates near zero at lev3/5.",
+  "timestamp_utc": "20261109T153543Z"
+},
+{
+  "acceptance": "evaluation_summary_trackb_TB1_20261110T173838Z.md with gate verdict, CIs, block counts, and explicit degenerate-test-set finding",
+  "artifact": "research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md",
+  "blockers": "Frozen test split 2026-06-26..2026-10-31 has ZERO synthetic boundary breaches across all 5 symbols (leverage=5.0, long, H=24h, m=0.0). Test set inadmissible for confirmatory evaluation with this label definition.",
+  "completed_utc": "20261110T180500Z",
+  "do_not": "Do not conflate modeled boundary breaches with observed liquidations. Do not threshold-shop. Do not reuse this test split for confirmatory claims with 5x/24h long label.",
+  "gaps": ["Test window contains zero positive labels; label definition too conservative for this period"],
+  "generated": "20261110T180500Z",
+  "id": "trackb_TB1_20261110T173838Z",
+  "priority": "P0",
+  "rank": 0.01,
+  "resume_triggers": [],
+  "status": "COMPLETE_NOT_SUPPORTED_DEGENERATE_TEST",
+  "task": "Track B TB1 confirmatory on 2025-01-01..2026-10-31 (5 symbols, 60/20/20 with 7d purge/embargo). Frozen protocol trackb_TB1_20261110T173838Z. Primary target synthetic_boundary_breach_h24_long_5x_m0. Result: test split has zero events -> degenerate classification. Gate NOT_MET. Full-window breach rates: ETH 0.166%, XRP 0.303%, others <0.06%. This window INADMISSIBLE for confirmatory Track B with 5x/24h long label.",
+  "timestamp_utc": "20261110T180500Z"
+},
+  "generated": "2026-11-10T18:05:00Z",
+  "handoff_refreshed_utc": "2026-11-10T18:05:00Z",
+  "last_checked": "2026-11-06T01:54:01Z",
+  "last_checked_utc": "2026-11-10T18:05:00Z",
+  "last_updated": "20261110T180500Z",
+  "liquidation_blocker_pointer": "research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
+  "next_action": "Track B: The TB1 window (2025-01-01..2026-10-31) is INADMISSIBLE for confirmatory evaluation with 5x/24h long label (test split has zero events). Remaining local Track B options: (1) Re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks, completeness 1.0) with deep admissibility + gap + funding-schema audit + provenance, then freeze NEW prereg + execute confirmatory; (2) Redesign label (different leverage/horizon/side) and select a test window with observed events, then freeze NEW prereg + execute confirmatory. No network/paid/manual/credentialed data. Track C H1_primary concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
+  "next_action_heavy": "Track B: The TB1 window (2025-01-01..2026-10-31) is INADMISSIBLE for confirmatory evaluation with 5x/24h long label (test split has zero events). Remaining local Track B options: (1) Re-audit 2024-01-01..2024-09-30 panel (~9 est. blocks, completeness 1.0) with deep admissibility + gap + funding-schema audit + provenance, then freeze NEW prereg + execute confirmatory; (2) Redesign label (different leverage/horizon/side) and select a test window with observed events, then freeze NEW prereg + execute confirmatory. No network/paid/manual/credentialed data. Track C H1_primary concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
+  "next_unfinished_task": "Track B: TB1 window INADMISSIBLE (zero test events with 5x/24h long). Options: (1) Deep re-audit 2024-01-01..2024-09-30 panel + NEW frozen prereg + confirmatory execution; (2) Redesign label (leverage/horizon/side) + select test window with events + NEW frozen prereg + confirmatory execution. Track C concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.",
+  "program_status": "ACTIVE_TRACKB_WINDOWS_REMAIN_AFTER_TB1_DEGENERATE",
   "protocol_ref": "research_state/research_protocol.md v1.0 (FCLR-001)",
-  "registry_version": "1.2",
+  "registry_version": "1.3",
   "single_durable_handoff": "NEXT_SESSION_TASK.md",
-  "summary": "Track C/H1 concluded NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014); overlay INELIGIBLE. Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). Track B PARTIALLY TESTED: TRACKB-20251110T154307Z (2025-01-01..2025-10-31, 4 symbols effective/5 panel) NOT_MET/NOT_SUPPORTED (C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005,0.035] crosses zero; modeled synthetic proxy). TB1 panel 2025-01-01..2026-10-31 is admissibility-verified locally and UNTESTED for this Track B confirmatory design (22 est. blocks) \u2014 M5.2 prereg freeze is mandatory next before outcomes. Fallback 2024-01-01..2024-09-30 requires deep re-audit before confirmatory.",
+  "summary": "Track C/H1 concluded NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014); overlay INELIGIBLE. Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). Track B PARTIALLY TESTED: TRACKB-20251110T154307Z (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED (1.50% < 2%, CI crosses zero). TB1 (2025-01-01..2026-10-31) EXECUTED BUT DEGENERATE: frozen test split has ZERO synthetic boundary breaches (5x/24h long) -> confirmatory evaluation impossible. Full-window breach rates: ETH 0.166%, XRP 0.303%, others <0.06%. Remaining local Track B routes: (1) 2024-01-01..2024-09-30 panel (~9 blocks) requires deep re-audit before confirmatory; (2) label redesign with window having events. No network/paid/manual data. M5 repeat required on admissible route.",
   "timestamp": "20261106T015401Z",
   "track_a_blocked": true,
   "track_a_blocker_latest": "research_state/liquidation_forward_validate_023_blocker_20261105T191803Z.md",
@@ -1021,6 +172,12 @@
         "gate": "NOT_MET",
         "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005,0.035] crosses zero.",
         "verdict": "NOT_SUPPORTED"
+      },
+      {
+        "experiment_id": "trackb_TB1_20261110T173838Z",
+        "gate": "NOT_MET",
+        "note": "Test split (2026-06-26..2026-10-31) has ZERO synthetic breaches across all 5 symbols (leverage=5.0, long, H=24h). Degenerate test set; confirmatory evaluation impossible. Full-window rates: ETH 0.166%, XRP 0.303%.",
+        "verdict": "NOT_SUPPORTED_DEGENERATE_TEST"
       }
     ],
     "fallback_window_candidate": {
@@ -1033,9 +190,9 @@
       "estimated_non_overlapping_30d_blocks": 22,
       "period": "2025-01-01..2026-10-31",
       "prereg_required_before_outcomes": true,
-      "status": "ADMISSIBILITY_VERIFIED_UNTESTED"
+      "status": "EXECUTED_DEGENERATE_TEST_SET_INADMISSIBLE_FOR_THIS_LABEL"
     },
-    "status": "PARTIALLY_TESTED_UNTESTED_ADMISSIBLE_WINDOW_REMAINS"
+    "status": "PARTIALLY_TESTED_TB1_DEGENERATE_FALLBACK_REQUIRES_REAUDIT"
   },
-  "updated_at": "2026-11-10T17:13:13Z"
+  "updated_at": "2026-11-10T18:05:00Z"
 }
