@@ -4,8 +4,12 @@
       "id": "H1_primary",
       "type": "primary",
       "description": "Funding extremes + RV + price dislocation improve OOS forecast of future RV/stress vs RV-only baseline",
-      "status": "proposed",
-      "frozen_at": "2026-11-06T20:36:32Z"
+      "status": "NOT_SUPPORTED",
+      "frozen_at": "2026-11-06T20:36:32Z",
+      "last_tested": "2026-11-10T10:38:27Z",
+      "last_experiment": "FCLR-014",
+      "last_verdict": "forecast_gate_NOT_MET",
+      "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED."
     },
     {
       "id": "H2_shek_replication",

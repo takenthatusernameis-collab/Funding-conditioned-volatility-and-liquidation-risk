@@ -260,8 +260,8 @@
     },
     {
       "hypothesis": "FCLR-H001 (forward, confirmatory)",
-      "reason": "No admissible Binance data beyond 2026-11-02 (live probe 2026-11-04T00:45Z -> 404 for 2026-11-03/04 and 2026-10-28/29). FCLR-012-V executed on the last available panel and is INCONCLUSIVE (0 test blocks, CI spans zero).",
-      "status": "INCONCLUSIVE"
+      "reason": "All locally available provenance-verified panels with >=3 non-overlapping 30-day blocks have been tested (FCLR-003, FCLR-009, FCLR-013) and H001 remains NOT_SUPPORTED. FCLR-014 confirmatory on 2025 H1 panel (only remaining untested local window) returned NOT_SUPPORTED: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), CI crosses zero, test window 17 days = 0 blocks (<3 required). FCLR-012-V forward panel (2026) has 0 test blocks (INCONCLUSIVE). No untested claim-worthy panels remain. Exit criteria 2 triggered: program concluded under constraints.",
+      "status": "NOT_SUPPORTED"
     },
     {
       "evidence": "research_state/ironflow_probe_20261105T162945Z.json; research_state/liquidation_forward_validate_021_blocker_20261105T162400Z.md",
@@ -297,7 +297,7 @@
     "period": "2024-04-01..2024-09-30 (FCLR-002 panel; fully cached)",
     "venue": "binance_um_perp"
   },
-  "current_status": "CONCLUDED 2026-11-10T07:50Z: Confirmatory program complete under current constraints (no network/paid/manual). H001/Track C NOT_SUPPORTED; H002 PARTIAL_REPLICATION (p=0.079, direction only); H003/Track B NOT_SUPPORTED (Holm); Track A STRUCTURALLY_BLOCKED. FCLR-NEXT-165 engineering repair restored full test suite to 1124 OK (was 77 FAIL/61 ERROR due to missing numpy/pandas in the runtime env + stale artifact-count bound + script-scope registry drift + planner completeness gap). No outcomes recomputed, no research status change.",
+  "current_status": "CONCLUDED 2026-11-10T10:38:27Z: Confirmatory program complete under current constraints (no network/paid/manual). FCLR-014 executed on 2025 H1 panel (last untested local window): C2 vs B1 1.14% rel QLIKE reduction (<2% floor), CI crosses zero, 0 test blocks (<3). H001/Track C NOT_SUPPORTED across all claim-worthy panels (FCLR-003, FCLR-009, FCLR-013, FCLR-014); H002 PARTIAL_REPLICATION; H003/Track B NOT_SUPPORTED (Holm); Track A STRUCTURALLY_BLOCKED. FCLR-NEXT-165 engineering repair restored full test suite to 1124 OK. No outcomes recomputed except FCLR-014 per frozen protocol. Exit criteria 2: all local >=3-block panels exhausted, H001 NOT_SUPPORTED.",
   "fclr_next_115": {
     "completed_utc": "20261106T031300Z",
     "g1": "coupled_build_panel.build() GuardedReadRefused without outcome_loader; no pd.read_parquet outside guarded loader; coupled_robust_eval/overlay_tracka_execute/overlay_quick routed through explicit coupled panel loader",

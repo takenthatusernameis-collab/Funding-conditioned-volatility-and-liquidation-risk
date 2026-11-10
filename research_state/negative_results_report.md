@@ -9,6 +9,54 @@ holdout for selection. All outcomes use the frozen train/val/test split with a
 7-calendar-day embargo.
 
 ---
+## FCLR-014 (CONFIRMATORY TRACK C / H001, 2025 H1 PANEL) — 2026-11-10T10:38:27Z
+
+- **Outcome:** NOT_SUPPORTED (forecast gate NOT_MET). Risk overlay INELIGIBLE.
+- **Contrast:** C2 vs B1 on next-24-hour realized variance of mark-price returns,
+  out-of-sample QLIKE. C2 = RV-HAR + signed funding + 90-day absolute-funding
+  percentile + mark/index premium + mark/EMA24 distance; B1 = RV-HAR only.
+- **Point estimate:** 1.14% relative QLIKE reduction (below the pre-registered 2%
+  materiality floor).
+- **Uncertainty:** paired block bootstrap (2000 reps, ~24h blocks across symbols)
+  95% CI [-0.016361, 0.007728] — **crosses zero**.
+- **Claim-worthiness minimums:** PARTIAL. Paired OOS instruments 5 (BNBUSDT, BTCUSDT,
+  ETHUSDT, SOLUSDT, XRPUSDT) MET; test window 2025-05-22..2025-06-07 = 17 days =
+  **0 non-overlapping 30-day blocks** (<3 required). The 2025 H1 panel provides
+  only 17 test days due to the 7-day embargo at split boundaries; the full 2025
+  panel (FCLR-009) had 207 test days and 6 blocks but was already inspected and
+  returned NOT_MET. Holdout-reuse constraint prevents re-evaluation of the FCLR-009
+  window.
+- **Test-set QLIKE:** B0 0.373927 | B1 0.338659 | C1 0.334505 | C2 0.334792
+  (n=1918 paired for B1/C1/C2; B0 n=1920).
+- **Secondary contrasts (also cross zero):** C1 vs B1 +1.23% (CI [-0.011299, 0.003046]);
+  C2 vs C1 -0.09% (CI [-0.007433, 0.008595]).
+- **Data:** unauthenticated Binance public archive, cached locally under
+  research_state/data_cache. Coverage-only audit
+  research_state/trackc_deep_audit_2025_h1_check.json confirmed provenance_verified=true,
+  5 symbols, 6 estimated blocks across 2025-01-01..2025-06-30; funding schema audit
+  all_ok=true, missing=0 for 5 symbols x 6 months 2025-01..2025-06. No new downloads,
+  no credentials, no network in the run.
+- **Protocol discipline:** pre-registered in research_state/research_protocol_fclr014.md
+  v2.0 BEFORE outcomes (prereg_hash=8563163c62524605cbf7f11603759aee2210d133f82c3742319a6dd85dfca597);
+  splits frozen in run_manifest.json#split_boundaries_fclr014 with frozen_before_outcomes=true;
+  no tuning on the test window; no sealed-holdout reuse; no threshold shopping.
+- **Interpretation:** On the 2025 H1 confirmatory window (the only remaining untested
+  local panel with provenance-verified data), adding funding extremes plus
+  pre-specified price-dislocation/smoothing features to a realized-volatility-only
+  HAR baseline yields no out-of-sample QLIKE improvement over the pre-registered 2%
+  floor, the CI crosses zero, and the test window provides 0 non-overlapping 30-day
+  blocks (protocol requires >=3). Consistent with the negative confirmatory verdicts
+  of FCLR-003 (2024-12), FCLR-013 (2026 Q3), and FCLR-009 (full 2025), and with
+  the directionally positive-but-inconclusive FCLR-012-V (2026 forward). H001 remains
+  NOT_SUPPORTED across every claim-worthy panel executed.
+- **Artifact:** research_state/evaluation_summary_FCLR-014.md;
+  prereg research_state/research_protocol_fclr014.md;
+  coverage research_state/trackc_deep_audit_2025_h1_check.json,
+  research_state/funding_schema_audit_2025_h1.json;
+  splits run_manifest.json#split_boundaries_fclr014.
+- **Overlay eligibility:** NOT ELIGIBLE (gate NOT_MET).
+
+---
 ## FCLR-009 (CONFIRMATORY VOLATILITY, UNSEALED 2025 PANEL) — 2026-11-10T00:15:40Z
 
 - **Outcome:** NOT_MET (negative). Forecast gate NOT MET. Risk overlay INELIGIBLE.
