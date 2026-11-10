@@ -1,0 +1,646 @@
+{
+  "generated_utc": "2026-11-10T19:05:39Z",
+  "window": [
+    "2024-01-01",
+    "2024-09-30"
+  ],
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "results": [
+    {
+      "leverage": 5.0,
+      "side": "long",
+      "horizon": 24,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4368,
+          "positives": 0,
+          "rate": 0.0
+        },
+        "ETHUSDT": {
+          "labeled": 4368,
+          "positives": 16,
+          "rate": 0.003663003663003663
+        },
+        "BNBUSDT": {
+          "labeled": 4368,
+          "positives": 2,
+          "rate": 0.0004578754578754579
+        },
+        "SOLUSDT": {
+          "labeled": 4368,
+          "positives": 30,
+          "rate": 0.006868131868131868
+        },
+        "XRPUSDT": {
+          "labeled": 4368,
+          "positives": 24,
+          "rate": 0.005494505494505495
+        }
+      },
+      "total_labeled": 21840,
+      "total_positives": 72,
+      "total_rate": 0.0032967032967032967
+    },
+    {
+      "leverage": 5.0,
+      "side": "long",
+      "horizon": 72,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4320,
+          "positives": 13,
+          "rate": 0.0030092592592592593
+        },
+        "ETHUSDT": {
+          "labeled": 4320,
+          "positives": 65,
+          "rate": 0.015046296296296295
+        },
+        "BNBUSDT": {
+          "labeled": 4320,
+          "positives": 80,
+          "rate": 0.018518518518518517
+        },
+        "SOLUSDT": {
+          "labeled": 4320,
+          "positives": 146,
+          "rate": 0.033796296296296297
+        },
+        "XRPUSDT": {
+          "labeled": 4320,
+          "positives": 117,
+          "rate": 0.027083333333333334
+        }
+      },
+      "total_labeled": 21600,
+      "total_positives": 421,
+      "total_rate": 0.01949074074074074
+    },
+    {
+      "leverage": 5.0,
+      "side": "long",
+      "horizon": 168,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4224,
+          "positives": 187,
+          "rate": 0.044270833333333336
+        },
+        "ETHUSDT": {
+          "labeled": 4224,
+          "positives": 221,
+          "rate": 0.05232007575757576
+        },
+        "BNBUSDT": {
+          "labeled": 4224,
+          "positives": 277,
+          "rate": 0.06557765151515152
+        },
+        "SOLUSDT": {
+          "labeled": 4224,
+          "positives": 418,
+          "rate": 0.09895833333333333
+        },
+        "XRPUSDT": {
+          "labeled": 4224,
+          "positives": 315,
+          "rate": 0.07457386363636363
+        }
+      },
+      "total_labeled": 21120,
+      "total_positives": 1418,
+      "total_rate": 0.06714015151515151
+    },
+    {
+      "leverage": 5.0,
+      "side": "short",
+      "horizon": 24,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4368,
+          "positives": 0,
+          "rate": 0.0
+        },
+        "ETHUSDT": {
+          "labeled": 4368,
+          "positives": 0,
+          "rate": 0.0
+        },
+        "BNBUSDT": {
+          "labeled": 4368,
+          "positives": 0,
+          "rate": 0.0
+        },
+        "SOLUSDT": {
+          "labeled": 4368,
+          "positives": 5,
+          "rate": 0.0011446886446886447
+        },
+        "XRPUSDT": {
+          "labeled": 4368,
+          "positives": 32,
+          "rate": 0.007326007326007326
+        }
+      },
+      "total_labeled": 21840,
+      "total_positives": 37,
+      "total_rate": 0.0016941391941391942
+    },
+    {
+      "leverage": 5.0,
+      "side": "short",
+      "horizon": 72,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4320,
+          "positives": 23,
+          "rate": 0.005324074074074074
+        },
+        "ETHUSDT": {
+          "labeled": 4320,
+          "positives": 2,
+          "rate": 0.000462962962962963
+        },
+        "BNBUSDT": {
+          "labeled": 4320,
+          "positives": 41,
+          "rate": 0.00949074074074074
+        },
+        "SOLUSDT": {
+          "labeled": 4320,
+          "positives": 140,
+          "rate": 0.032407407407407406
+        },
+        "XRPUSDT": {
+          "labeled": 4320,
+          "positives": 135,
+          "rate": 0.03125
+        }
+      },
+      "total_labeled": 21600,
+      "total_positives": 341,
+      "total_rate": 0.015787037037037037
+    },
+    {
+      "leverage": 5.0,
+      "side": "short",
+      "horizon": 168,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4224,
+          "positives": 168,
+          "rate": 0.03977272727272727
+        },
+        "ETHUSDT": {
+          "labeled": 4224,
+          "positives": 81,
+          "rate": 0.019176136363636364
+        },
+        "BNBUSDT": {
+          "labeled": 4224,
+          "positives": 231,
+          "rate": 0.0546875
+        },
+        "SOLUSDT": {
+          "labeled": 4224,
+          "positives": 588,
+          "rate": 0.13920454545454544
+        },
+        "XRPUSDT": {
+          "labeled": 4224,
+          "positives": 313,
+          "rate": 0.07410037878787878
+        }
+      },
+      "total_labeled": 21120,
+      "total_positives": 1381,
+      "total_rate": 0.06538825757575757
+    },
+    {
+      "leverage": 10.0,
+      "side": "long",
+      "horizon": 24,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4368,
+          "positives": 50,
+          "rate": 0.011446886446886446
+        },
+        "ETHUSDT": {
+          "labeled": 4368,
+          "positives": 38,
+          "rate": 0.0086996336996337
+        },
+        "BNBUSDT": {
+          "labeled": 4368,
+          "positives": 70,
+          "rate": 0.016025641025641024
+        },
+        "SOLUSDT": {
+          "labeled": 4368,
+          "positives": 118,
+          "rate": 0.027014652014652016
+        },
+        "XRPUSDT": {
+          "labeled": 4368,
+          "positives": 126,
+          "rate": 0.028846153846153848
+        }
+      },
+      "total_labeled": 21840,
+      "total_positives": 402,
+      "total_rate": 0.018406593406593407
+    },
+    {
+      "leverage": 10.0,
+      "side": "long",
+      "horizon": 72,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4320,
+          "positives": 214,
+          "rate": 0.04953703703703704
+        },
+        "ETHUSDT": {
+          "labeled": 4320,
+          "positives": 400,
+          "rate": 0.09259259259259259
+        },
+        "BNBUSDT": {
+          "labeled": 4320,
+          "positives": 251,
+          "rate": 0.05810185185185185
+        },
+        "SOLUSDT": {
+          "labeled": 4320,
+          "positives": 675,
+          "rate": 0.15625
+        },
+        "XRPUSDT": {
+          "labeled": 4320,
+          "positives": 452,
+          "rate": 0.10462962962962963
+        }
+      },
+      "total_labeled": 21600,
+      "total_positives": 1992,
+      "total_rate": 0.09222222222222222
+    },
+    {
+      "leverage": 10.0,
+      "side": "long",
+      "horizon": 168,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4224,
+          "positives": 675,
+          "rate": 0.15980113636363635
+        },
+        "ETHUSDT": {
+          "labeled": 4224,
+          "positives": 1033,
+          "rate": 0.24455492424242425
+        },
+        "BNBUSDT": {
+          "labeled": 4224,
+          "positives": 614,
+          "rate": 0.14535984848484848
+        },
+        "SOLUSDT": {
+          "labeled": 4224,
+          "positives": 1278,
+          "rate": 0.3025568181818182
+        },
+        "XRPUSDT": {
+          "labeled": 4224,
+          "positives": 820,
+          "rate": 0.19412878787878787
+        }
+      },
+      "total_labeled": 21120,
+      "total_positives": 4420,
+      "total_rate": 0.20928030303030304
+    },
+    {
+      "leverage": 10.0,
+      "side": "short",
+      "horizon": 24,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4368,
+          "positives": 18,
+          "rate": 0.004120879120879121
+        },
+        "ETHUSDT": {
+          "labeled": 4368,
+          "positives": 52,
+          "rate": 0.011904761904761904
+        },
+        "BNBUSDT": {
+          "labeled": 4368,
+          "positives": 72,
+          "rate": 0.016483516483516484
+        },
+        "SOLUSDT": {
+          "labeled": 4368,
+          "positives": 199,
+          "rate": 0.045558608058608056
+        },
+        "XRPUSDT": {
+          "labeled": 4368,
+          "positives": 104,
+          "rate": 0.023809523809523808
+        }
+      },
+      "total_labeled": 21840,
+      "total_positives": 445,
+      "total_rate": 0.020375457875457876
+    },
+    {
+      "leverage": 10.0,
+      "side": "short",
+      "horizon": 72,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4320,
+          "positives": 285,
+          "rate": 0.06597222222222222
+        },
+        "ETHUSDT": {
+          "labeled": 4320,
+          "positives": 334,
+          "rate": 0.07731481481481481
+        },
+        "BNBUSDT": {
+          "labeled": 4320,
+          "positives": 325,
+          "rate": 0.07523148148148148
+        },
+        "SOLUSDT": {
+          "labeled": 4320,
+          "positives": 921,
+          "rate": 0.21319444444444444
+        },
+        "XRPUSDT": {
+          "labeled": 4320,
+          "positives": 477,
+          "rate": 0.11041666666666666
+        }
+      },
+      "total_labeled": 21600,
+      "total_positives": 2342,
+      "total_rate": 0.10842592592592593
+    },
+    {
+      "leverage": 10.0,
+      "side": "short",
+      "horizon": 168,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4224,
+          "positives": 1038,
+          "rate": 0.24573863636363635
+        },
+        "ETHUSDT": {
+          "labeled": 4224,
+          "positives": 1111,
+          "rate": 0.2630208333333333
+        },
+        "BNBUSDT": {
+          "labeled": 4224,
+          "positives": 1202,
+          "rate": 0.2845643939393939
+        },
+        "SOLUSDT": {
+          "labeled": 4224,
+          "positives": 1922,
+          "rate": 0.4550189393939394
+        },
+        "XRPUSDT": {
+          "labeled": 4224,
+          "positives": 1137,
+          "rate": 0.26917613636363635
+        }
+      },
+      "total_labeled": 21120,
+      "total_positives": 6410,
+      "total_rate": 0.3035037878787879
+    },
+    {
+      "leverage": 20.0,
+      "side": "long",
+      "horizon": 24,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4368,
+          "positives": 299,
+          "rate": 0.06845238095238096
+        },
+        "ETHUSDT": {
+          "labeled": 4368,
+          "positives": 449,
+          "rate": 0.10279304029304029
+        },
+        "BNBUSDT": {
+          "labeled": 4368,
+          "positives": 319,
+          "rate": 0.07303113553113554
+        },
+        "SOLUSDT": {
+          "labeled": 4368,
+          "positives": 831,
+          "rate": 0.19024725274725274
+        },
+        "XRPUSDT": {
+          "labeled": 4368,
+          "positives": 437,
+          "rate": 0.10004578754578755
+        }
+      },
+      "total_labeled": 21840,
+      "total_positives": 2335,
+      "total_rate": 0.10691391941391941
+    },
+    {
+      "leverage": 20.0,
+      "side": "long",
+      "horizon": 72,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4320,
+          "positives": 984,
+          "rate": 0.22777777777777777
+        },
+        "ETHUSDT": {
+          "labeled": 4320,
+          "positives": 1119,
+          "rate": 0.2590277777777778
+        },
+        "BNBUSDT": {
+          "labeled": 4320,
+          "positives": 927,
+          "rate": 0.21458333333333332
+        },
+        "SOLUSDT": {
+          "labeled": 4320,
+          "positives": 1800,
+          "rate": 0.4166666666666667
+        },
+        "XRPUSDT": {
+          "labeled": 4320,
+          "positives": 1201,
+          "rate": 0.27800925925925923
+        }
+      },
+      "total_labeled": 21600,
+      "total_positives": 6031,
+      "total_rate": 0.27921296296296294
+    },
+    {
+      "leverage": 20.0,
+      "side": "long",
+      "horizon": 168,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4224,
+          "positives": 1604,
+          "rate": 0.3797348484848485
+        },
+        "ETHUSDT": {
+          "labeled": 4224,
+          "positives": 1813,
+          "rate": 0.42921401515151514
+        },
+        "BNBUSDT": {
+          "labeled": 4224,
+          "positives": 1603,
+          "rate": 0.3794981060606061
+        },
+        "SOLUSDT": {
+          "labeled": 4224,
+          "positives": 2323,
+          "rate": 0.5499526515151515
+        },
+        "XRPUSDT": {
+          "labeled": 4224,
+          "positives": 1880,
+          "rate": 0.44507575757575757
+        }
+      },
+      "total_labeled": 21120,
+      "total_positives": 9223,
+      "total_rate": 0.43669507575757577
+    },
+    {
+      "leverage": 20.0,
+      "side": "short",
+      "horizon": 24,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4368,
+          "positives": 366,
+          "rate": 0.08379120879120878
+        },
+        "ETHUSDT": {
+          "labeled": 4368,
+          "positives": 349,
+          "rate": 0.07989926739926739
+        },
+        "BNBUSDT": {
+          "labeled": 4368,
+          "positives": 437,
+          "rate": 0.10004578754578755
+        },
+        "SOLUSDT": {
+          "labeled": 4368,
+          "positives": 1003,
+          "rate": 0.2296245421245421
+        },
+        "XRPUSDT": {
+          "labeled": 4368,
+          "positives": 515,
+          "rate": 0.1179029304029304
+        }
+      },
+      "total_labeled": 21840,
+      "total_positives": 2670,
+      "total_rate": 0.12225274725274725
+    },
+    {
+      "leverage": 20.0,
+      "side": "short",
+      "horizon": 72,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4320,
+          "positives": 1272,
+          "rate": 0.29444444444444445
+        },
+        "ETHUSDT": {
+          "labeled": 4320,
+          "positives": 1226,
+          "rate": 0.28379629629629627
+        },
+        "BNBUSDT": {
+          "labeled": 4320,
+          "positives": 1502,
+          "rate": 0.3476851851851852
+        },
+        "SOLUSDT": {
+          "labeled": 4320,
+          "positives": 2198,
+          "rate": 0.5087962962962963
+        },
+        "XRPUSDT": {
+          "labeled": 4320,
+          "positives": 1282,
+          "rate": 0.2967592592592593
+        }
+      },
+      "total_labeled": 21600,
+      "total_positives": 7480,
+      "total_rate": 0.34629629629629627
+    },
+    {
+      "leverage": 20.0,
+      "side": "short",
+      "horizon": 168,
+      "per_sym": {
+        "BTCUSDT": {
+          "labeled": 4224,
+          "positives": 2233,
+          "rate": 0.5286458333333334
+        },
+        "ETHUSDT": {
+          "labeled": 4224,
+          "positives": 2203,
+          "rate": 0.5215435606060606
+        },
+        "BNBUSDT": {
+          "labeled": 4224,
+          "positives": 2499,
+          "rate": 0.5916193181818182
+        },
+        "SOLUSDT": {
+          "labeled": 4224,
+          "positives": 2924,
+          "rate": 0.6922348484848485
+        },
+        "XRPUSDT": {
+          "labeled": 4224,
+          "positives": 2203,
+          "rate": 0.5215435606060606
+        }
+      },
+      "total_labeled": 21120,
+      "total_positives": 12062,
+      "total_rate": 0.5711174242424243
+    }
+  ]
+}
