@@ -1,10 +1,10 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: Track C / H001 first)
 
-**Updated:** 2026-11-10T09:42:00Z — **P0 ACTIVE.** Repo `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority = **Track C / H001 (funding-conditioned volatility forecast vs RV-only baseline)** first; Track A/B liquidation tracks secondary. Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
+**Updated:** 2026-11-10T09:46:19Z — **P0 ACTIVE.** Repo `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority = **Track C / H001 (funding-conditioned volatility forecast vs RV-only baseline)** first; Track A/B liquidation tracks secondary. Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T09:42:00Z
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T09:46:19Z
 
 **PRIMARY FOCUS (repo-name priority): Track C / H001 — funding-conditioned volatility forecast vs RV-only baseline.**
 
@@ -110,4 +110,4 @@ Non-negotiable execution rules are in `FOCUS_CAMPAIGN.md` §NON-NEGOTIABLE EXECU
 ---
 
 **END OF SINGLE DURABLE HANDOFF. next_unfinished_task: FCLR-014 confirmatory on untested verified 2025 H1 window (2025-01-01..2025-06-07, 5 symbols, >=3 blocks) — finalize frozen prereg, record prereg_hash, then run C2 vs B1 BEFORE any outcome inspection.**
-**Updated: 2026-11-10T09:42:00Z**
+**Updated: 2026-11-10T09:46:19Z**
