@@ -1,61 +1,59 @@
-# NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (2026-11-10T18:40:04Z)
+# NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-> **IMMEDIATE MANDATORY TASK (heavy, verifiable — start here, no narration-only work):**
-> Execute **Track B TB2 confirmatory attempt** on local panel **2024-01-01..2024-09-30** (BTC/ETH/BNB/SOL/XRP, ~9 non-overlapping 30d blocks, deep-audited: contiguous required series, funding schema OK, `provenance_verified=true`, `unmapped_count=0` per `research_state/trackb_TB1_admissibility_2024q1q3.json`/`trackb_window_candidates_fast.json`).
-> TB1 (`2025-01-01..2026-10-31`, 5x/24h long) is **DEGENERATE/INADMISSIBLE** — frozen test split had **0 synthetic breaches** (see `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`). Do **not** rerun TB1 unchanged. TB2 must use a **NEW label+split design with >0 positive labels in the frozen test split** (report counts/evidence), defensible prereg rationale, and **no threshold shopping after freeze**.
+**Timestamp (UTC):** 2026-11-10T18:44:08Z
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
+**Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded. This is the single durable handoff; execute this task before any other work.
 
-**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority per name: 1. Track B liquidation risk, 2. Track C funding-conditioned volatility, 3. Track A observed liquidations)
-**Campaign:** `TRACKB-TB2-2024Q1Q3-<NEW_ID_ON_FREEZE>`
-**Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded.
+## IMMEDIATE MANDATORY TASK (heavy, verifiable — start now)
+Execute **Track B TB2 confirmatory attempt** on local panel **2024-01-01..2024-09-30** (BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT). TB1 (`2025-01-01..2026-10-31`, 5x/24h long) is **DEGENERATE/INADMISSIBLE** for confirmatory evaluation because the frozen test split (2026-06-26..2026-10-31) had **0 synthetic breaches** across all symbols (`research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`). **Do not rerun TB1 unchanged. Do not relitigate Track C or Track A.**
 
-## Verified state (2026-11-10T18:09–18:40Z context)
-- **Track B / TB1:** DEGENERATE/INADMISSIBLE for confirmatory 5x/24h long (zero test breaches). Evidence: `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`, `research_state/research_protocol_trackb_TB1_20261110T173838Z.md`, manifest `split_boundaries_trackb_TB1_20261110T173838Z`.
-- **Track B / prior:** `TRACKB-20251110T154307Z` (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED.
-- **Fallback local panel (untested, next route):** 2024-01-01..2024-09-30, 5 symbols, required series complete, schema/provenance OK. Evidence: `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`.
-- **Track C:** concluded NOT_SUPPORTED on claim-worthy local panels; `next_unfinished_task (Track C): NONE`.
-- **Track A:** STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census).
-- **Risk overlay:** INELIGIBLE (no gate-passing forecast).
-- **Provenance:** funding lineage `PROVENANCE_OK 161` in `research_state/data_cache` (unmapped=0) — re-verify for all inputs actually used in TB2.
-- **Canonical tests:** 35 PASS — `tests.test_volatility_features_splits`, `tests.test_synthetic_boundary_labels`, `tests.test_trackc_panel_admissibility_audit`, `tests.test_trackc_funding_schema_audit`, `tests.test_trackc_provenance_lineage`.
+**Objective:** produce a preregistered, leakage-resistant Track B verdict (or evidence-backed inadmissibility of this local route) using **modeled synthetic boundary breaches only** (never observed liquidations), with a NEW frozen design that has **>0 positive labels in the frozen test split** (counts reported with rationale) and no threshold shopping after freeze.
 
-## Bottlenecks removed (do not relitigate)
-- Stale/ambiguous "preferred TB1 window" and multi-path options collapsed to **one mandatory TB2 execution task** on 2024-01-01..2024-09-30. No relitigation of TB1/Track C/Track A.
-- TB1 failure framed as label/test-event-adequacy issue forcing pre-freeze event-rate design (>0 test breaches required before freeze).
-- Track C concluded NOT_SUPPORTED; Track A STRUCTURALLY_BLOCKED; overlay INELIGIBLE. Future agents must not idle on status docs, polling, or re-litigation of concluded tracks.
+## Verified context (do not re-open concluded tracks)
+- **Track B prior:** `TRACKB-20251110T154307Z` (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED; TB1 above DEGENERATE/INADMISSIBLE. `research_state/research_protocol_trackb_TB1_20261110T173838Z.md`, manifest `split_boundaries_trackb_TB1_20261110T173838Z`.
+- **TB2 candidate panel (local, untested):** 2024-01-01..2024-09-30, 5 symbols, contiguous required series (mark/index/premium/klines + funding), ~9 non-overlapping 30d blocks est.; prior audits indicate schema OK and funding lineage `provenance_verified=true`/`unmapped_count=0` (PROVENANCE_OK 161). Evidence: `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`. **Re-verify for all inputs actually used.**
+- **Track C / H1:** concluded **NOT_SUPPORTED** on claim-worthy local panels; no untested claim-worthy Track C panels with >=3 blocks remain. `next_unfinished_task (Track C): NONE`.
+- **Track A:** **STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census; not locally repairable).
+- **Risk overlay:** **INELIGIBLE** until a forecast gate passes under frozen prereg.
 
-## Concrete execution steps (complete in order)
+## Bottlenecks removed (cleared for progress)
+- Multiple/ambiguous next steps collapsed to **one mandatory path:** TB2 on 2024-01-01..2024-09-30 (or evidence-backed inadmissibility of that route, then immediate pivot to next admissible local route with new ID/prereg).
+- TB1 reframed as label/test-event-adequacy failure: pre-freeze event-rate design with >0 frozen-test breaches is required.
+- `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, and this file synchronized as the canonical handoff set; no polling/status-only work.
 
-### Step 1 — Re-verify admissibility + provenance (machine evidence)
-- Confirm 2024-01-01..2024-09-30 is contiguous, required series complete (mark/index/premium/klines + funding), schema OK, >=3 non-overlapping 30d test blocks, no sealed/reused/outcome-inspected holdout for this design, `provenance_verified=true`, `unmapped_count=0` for every input used.
+## Execution steps (complete in order)
+
+### 1) Re-verify admissibility + provenance (machine evidence)
+- Confirm 2024-01-01..2024-09-30 contiguous, required series complete, schema/coverage OK, >=3 non-overlapping 30d blocks in test split, no sealed/reused/outcome-inspected holdout for this design.
+- Verify `provenance_verified=true`, `unmapped_count=0` for every input used (funding lineage and other inputs as applicable). Record evidence.
 - Save `research_state/trackb_<ID>_admissibility.(json|md)`.
-- Verify via: `scripts/trackc_panel_admissibility_audit.py`, `scripts/trackc_gap_repair_manifest.py`, `scripts/trackc_funding_schema_audit.py`, `scripts/trackc_provenance_lineage.py`.
+- Tools: `scripts/trackc_panel_admissibility_audit.py`, `scripts/trackc_gap_repair_manifest.py`, `scripts/trackc_funding_schema_audit.py`, `scripts/trackc_provenance_lineage.py` (and relevant tests).
 
-### Step 2 — Label/window design (pre-freeze, event-adequate)
-- Compute breach/event rates for candidate configs (leverage 5x/10x/20x, side long/short, horizon 24h/72h/168h) and splits from local data; select config+split with **>0 positive synthetic breaches in frozen test split** and adequate support (report counts).
-- Document rationale in prereg. No threshold shopping after freeze.
+### 2) Pre-freeze label/split design (event-adequate, no threshold shopping)
+- Compute breach/event rates for candidate configs (e.g. leverage 5x/10x/20x, side long/short, horizon 24h/72h/168h) and candidate splits **from local data**; select config+split with **>0 positive synthetic breaches in the frozen test split** and defensible support (report counts per split/symbol/overall).
+- Fix all choices in prereg before outcomes; no post-freeze tuning/threshold shopping.
 
-### Step 3 — Freeze prereg BEFORE outcomes
-- Write `research_state/research_protocol_trackb_<ID>.md` (FROZEN_BEFORE_OUTCOMES): modeled breach definition (`scripts/synthetic_boundary_labels.py`), predictors (B1 vs C2), 60/20/20 chronological splits + 7-day purge/embargo, metrics (Log Loss / Brier), 2% materiality floor, Holm, block bootstrap 2000, explicit "synthetic proxy ≠ observed liquidation".
-- Record `prereg_hash` (sha256 of protocol bytes) and `split_boundaries_trackb_<ID>.frozen_before_outcomes=true` in `research_state/run_manifest.json` **prior to any confirmatory outcome computation**.
-- Manifest entry must include `outcome_values_inspected=false`.
+### 3) Freeze prereg BEFORE outcomes
+- Write `research_state/research_protocol_trackb_<ID>.md` (**FROZEN_BEFORE_OUTCOMES**): modeled breach definition (`scripts/synthetic_boundary_labels.py`), predictors B1 (RV/price-only) vs C2 (funding-conditioned), 60/20/20 chronological splits + 7-day purge/embargo, metrics (Log Loss/Brier), 2% materiality floor, Holm correction, block bootstrap 2000, explicit "synthetic proxy ≠ observed liquidation".
+- Compute `prereg_hash` (sha256 of protocol bytes) and record in `research_state/run_manifest.json` with `split_boundaries_trackb_<ID>.frozen_before_outcomes=true`, protocol ref, split boundaries, embargo/purge, timestamp, **`outcome_values_inspected=false` — before any confirmatory outcome computation**.
 
-### Step 4 — Run confirmatory evaluation (heavy)
-- Execute Track B pipeline on frozen panel (`scripts/run_trackb_evaluation.py` + `scripts/synthetic_boundary_labels.py`, adapted to the new ID/window/label).
-- Write `research_state/evaluation_summary_trackb_<ID>.md` with point estimate, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, materiality/gate decision, Holm-adjusted results.
+### 4) Run confirmatory evaluation (heavy)
+- Execute Track B pipeline on frozen panel (`scripts/run_trackb_evaluation.py` + `scripts/synthetic_boundary_labels.py`, adapted to new ID/window/label as needed).
+- Write `research_state/evaluation_summary_trackb_<ID>.md`: point estimate, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, materiality/gate decision, Holm-adjusted results, synthetic-proxy caveat.
 
-### Step 5 — Propagate verdict
+### 5) Propagate verdict and set singular next task
 - Update `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/negative_results_report.md`, `AGENT_HANDOFF.md`, and this file.
-- State overlay eligibility (NOT ELIGIBLE unless all gates pass).
-- Set one singular `next_unfinished_task`.
+- State overlay eligibility (**NOT ELIGIBLE unless all gates pass**).
+- Set one singular, evidence-backed `next_unfinished_task`.
 
-## Fallback only if 2024Q1-Q3 fails re-audit
-Pivot to the next locally admissible uninspected window/label design with evidence-backed inadmissibility for 2024Q1-Q3; new ID, new prereg, same rigor. Do not stop at planning. Track C concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Overlay INELIGIBLE.
+## Fallback (only with evidence)
+If 2024-01-01..2024-09-30 is proven inadmissible (e.g. cannot achieve >0 test breaches under any defensible local design, or provenance/schema/coverage fails): document evidence-backed inadmissibility and immediately pivot to the next locally admissible uninspected route with new ID and new prereg (do not stop at planning). Track C concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Overlay INELIGIBLE.
 
-## Acceptance (session incomplete without)
-- New frozen prereg with `prereg_hash` recorded in manifest before outcomes.
+## Acceptance (incomplete without all)
+- New frozen prereg + `prereg_hash` recorded in manifest **before outcomes**.
 - Machine-verified admissibility/provenance evidence for chosen window/inputs.
-- `evaluation_summary_trackb_<ID>.md` with CIs, blocks, and explicit gate verdict (or evidence-backed inadmissibility if no admissible local route remains).
-- Registries + `AGENT_HANDOFF.md` + `NEXT_SESSION_TASK.md` updated with singular, evidence-backed `next_unfinished_task`.
+- `evaluation_summary_trackb_<ID>.md` with CIs, blocks, explicit gate verdict (or evidence-backed inadmissibility).
+- Registries + `AGENT_HANDOFF.md` + `NEXT_SESSION_TASK.md` updated with singular `next_unfinished_task`.
 
 ## Verification commands
 ```bash
