@@ -1,0 +1,3167 @@
+{
+  "cache": "research_state/data_cache",
+  "candidate_count_total": 1,
+  "candidates_ranked": [
+    {
+      "all_funding_month_ok": false,
+      "all_required_series_complete_fast": false,
+      "blockers": [
+        "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+        "FUNDING_GAPS_IN_SEQUENCE",
+        "PROVENANCE_NOT_MACHINE_VERIFIED",
+        "REQUIRED_SERIES_GAPS_IN_SEQUENCE",
+        "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+      ],
+      "confirmatory_resume_ready": false,
+      "estimated_non_overlapping_30d_blocks_fast": 31,
+      "meets_local_data_signals_fast": false,
+      "meets_structural_thresholds_estimate_fast": true,
+      "min_symbol_estimated_days_sum_fast": 949,
+      "month_count": 35,
+      "months": [
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10",
+        "2026-11"
+      ],
+      "per_symbol_summary": {
+        "BNBUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 949
+        },
+        "BTCUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 1010
+        },
+        "ETHUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 980
+        },
+        "SOLUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 949
+        },
+        "XRPUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 949
+        }
+      },
+      "rank": 1,
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ]
+    }
+  ],
+  "caveats": [
+    "Fast glob/count signals only; not full CSV schema/provenance verification. Verify with deep audits+funding-schema+provenance lineage before confirmatory resume. Freeze NEW prereg before outcomes."
+  ],
+  "generated_utc": "2026-11-10T01:35:33Z",
+  "mode": "fast_targeted_glob_counts_no_csv_reads",
+  "months_discovered": [
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10",
+    "2026-11"
+  ],
+  "months_with_all_symbols_present": [
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10",
+    "2026-11"
+  ],
+  "next_action": "verify best fast candidate with deep admissibility+gap+funding-schema audits and provenance/checksum lineage; freeze NEW prereg before outcomes; no network/no outcomes",
+  "summary": {
+    "any_meets_local_data_signals_fast": false,
+    "best_candidate": {
+      "all_funding_month_ok": false,
+      "all_required_series_complete_fast": false,
+      "blockers": [
+        "CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES",
+        "FUNDING_GAPS_IN_SEQUENCE",
+        "PROVENANCE_NOT_MACHINE_VERIFIED",
+        "REQUIRED_SERIES_GAPS_IN_SEQUENCE",
+        "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+      ],
+      "confirmatory_resume_ready": false,
+      "estimated_non_overlapping_30d_blocks_fast": 31,
+      "meets_local_data_signals_fast": false,
+      "meets_structural_thresholds_estimate_fast": true,
+      "min_symbol_estimated_days_sum_fast": 949,
+      "month_count": 35,
+      "months": [
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10",
+        "2026-11"
+      ],
+      "per_symbol_summary": {
+        "BNBUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 949
+        },
+        "BTCUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 1010
+        },
+        "ETHUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 980
+        },
+        "SOLUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 949
+        },
+        "XRPUSDT": {
+          "all_funding_month_ok": false,
+          "all_required_series_complete_fast": false,
+          "estimated_days_sum_fast": 949
+        }
+      },
+      "rank": 1,
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "SOLUSDT",
+        "XRPUSDT"
+      ]
+    },
+    "confirmatory_resume_ready": false,
+    "network_used": false,
+    "outcomes_computed": false,
+    "provenance_verified": false
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "window_audits_fast": {
+    "2024-01": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-02": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-03": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-04": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-05": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-06": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-07": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-08": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-09": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-10": {
+      "BNBUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-10",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-10",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-10",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-11": {
+      "BNBUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-11",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-11",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-11",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-11",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2024-12": {
+      "BNBUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-12",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-12",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-12",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-12",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "REQUIRED_SERIES_GAPS_OR_MISSING",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2024-12",
+        "required_series_complete_fast": false,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 0,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 0
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-01": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-02": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-03": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-04": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-05": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-06": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-07": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-08": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-09": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-10": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-11": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2025-12": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-12",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-12",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-12",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-12",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2025-12",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-01": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-01",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-02": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-02",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 28,
+          "markPriceKlines": 28,
+          "premiumIndexKlines": 28
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-03": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-03",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-04": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-04",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-05": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-05",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-06": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-06",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-07": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-07",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-08": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-08",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 31,
+          "markPriceKlines": 31,
+          "premiumIndexKlines": 31
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-09": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-09",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 30,
+          "markPriceKlines": 30,
+          "premiumIndexKlines": 30
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-10": {
+      "BNBUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": true,
+        "month": "2026-10",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 29,
+          "markPriceKlines": 29,
+          "premiumIndexKlines": 29
+        },
+        "symbol": "XRPUSDT"
+      }
+    },
+    "2026-11": {
+      "BNBUSDT": {
+        "blockers": [
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": false,
+        "month": "2026-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "symbol": "BNBUSDT"
+      },
+      "BTCUSDT": {
+        "blockers": [
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": false,
+        "month": "2026-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "symbol": "BTCUSDT"
+      },
+      "ETHUSDT": {
+        "blockers": [
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": false,
+        "month": "2026-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "symbol": "ETHUSDT"
+      },
+      "SOLUSDT": {
+        "blockers": [
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": false,
+        "month": "2026-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "symbol": "SOLUSDT"
+      },
+      "XRPUSDT": {
+        "blockers": [
+          "MISSING_FUNDING_MONTH_FILE",
+          "PROVENANCE_NOT_MACHINE_VERIFIED",
+          "SCHEMA_NOT_VERIFIED_IN_FAST_MODE"
+        ],
+        "confirmatory_ready_symbol_window": false,
+        "funding_month_file_present_locally": false,
+        "month": "2026-11",
+        "required_series_complete_fast": true,
+        "series_day_dir_counts": {
+          "indexPriceKlines": 8,
+          "markPriceKlines": 8,
+          "premiumIndexKlines": 8
+        },
+        "symbol": "XRPUSDT"
+      }
+    }
+  }
+}
