@@ -1,0 +1,34 @@
+{
+  "id": "trackb_20251110T154307Z",
+  "timestamp_utc": "2026-11-10T15:43:07Z",
+  "campaign": "TRACKB-MODELED-BREACH-20261110T154307Z",
+  "track": "TrackB",
+  "description": "Admissibility lock for Track B modeled boundary breaches (synthetic proxy, NOT observed liquidations)",
+  "window": {
+    "start": "2025-01-01T00:00:00Z",
+    "end": "2025-10-31T23:59:59Z"
+  },
+  "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+  "provenance": {
+    "provenance_verified": true,
+    "unmapped_count": 0,
+    "verification_method": "scripts/trackc_provenance_lineage.py / adjacent sha256 sidecars",
+    "files_considered": 161
+  },
+  "splits": {
+    "rule": "chronological 60/20/20 with 7-day purge/embargo",
+    "embargo_days": 7,
+    "purge_days": 7,
+    "test_blocks_min_required": 3,
+    "rationale": "Use contiguous verified 2025-01..2025-10 panel with all required series and funding complete per trackb_TB1_admissibility.json"
+  },
+  "data_quality": {
+    "all_required_series_complete": true,
+    "all_funding_schema_ok": true,
+    "any_funding_month_missing": false,
+    "no_reused_sealed_holdout": true,
+    "distinct_from_fclr009_inspected": true
+  },
+  "blockers": [],
+  "confirmatory_ready": true
+}

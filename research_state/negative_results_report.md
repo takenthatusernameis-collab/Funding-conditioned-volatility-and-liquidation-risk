@@ -336,3 +336,9 @@ holdout reuse, no split changes.
 - **Interpretation:** Q1 extreme-funding regimes show robust incremental skill of funding + price features over RV-only baseline (CI excludes 0, rel_imp > 0 consistently), but with only 2 test blocks the result is EXPLORATORY only. Do NOT promote to confirmatory. Do NOT relax the block-count criterion. No threshold shopping. No conflation with observed liquidations — Track C is volatility/stress outcomes only.
 - **Artifacts:** `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-001_20261109T162703Z.md` (ran 2026-11-09T16:27:03Z); `research_state/evaluation_summary_STREAM_B_DEEP_ANALYSIS-002_20261109T163517Z.md` (ran 2026-11-09T16:35:17Z).
 - **Cell registered:** `research_state/experiment_frontier.json` entry `FUNDING_CONDITIONING_DEEPER_VALIDATION-002` set to COMPLETE_INCONCLUSIVE (exploratory) 2026-11-09T16:39:00Z.
+
+## TRACKB-20251110T154307Z (Track B — modeled boundary breaches, synthetic proxy) — 2026-11-10T16:06:03Z
+- Panel: 2025-01-01 .. 2025-10-31, 5 symbols (BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT), provenance_verified=true, unmapped_count=0
+- Splits (frozen before outcomes, prereg_hash 3c91885038e79345d7fdb28396505a5b7e57a6e7de146b9c3323d59bbfca0dc3): 40/20/40 chronological + 7d purge/embargo, test 3 non-overlapping 30-day blocks
+- Primary contrast C2 vs B1 (synthetic breach 24h/5x/long/m0): rel improvement 1.50% < 2% materiality, 95% CI [-0.005000,0.035000] crosses zero → gate NOT_MET
+- Verdict: NOT_SUPPORTED (modeled proxy only, not observed liquidations). No risk overlay eligible.
