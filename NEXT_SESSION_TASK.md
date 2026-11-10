@@ -1,8 +1,8 @@
 # NEXT_SESSION_TASK.md — Single Durable Initial Task for Next Agentic Session
-**Timestamp (UTC):** 2026-11-10T15:37:06Z
+**Timestamp (UTC):** 2026-11-10T15:43:07Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Project priority (by repo name):** 1) liquidation risk — Track B modeled boundary breaches (untested, executable locally), 2) funding-conditioned volatility — Track C (concluded NOT_SUPPORTED), 3) Track A observed liquidations (STRUCTURALLY_BLOCKED).
-**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T15:37:06Z) — this file is the timestamped initial task message the next session must execute.
+**Authoritative handoff:** `AGENT_HANDOFF.md` (2026-11-10T15:43:07Z) — this file is the timestamped initial task message the next session must execute.
 
 ## Current verdict (do not relitigate)
 - **Track B (modeled liquidation boundary breaches): UNTESTED — MANDATORY NEXT.** Repo-name liquidation leg. No modeled breach scenario has been preregistered before outcome inspection on an admissible local panel with `frozen_before_outcomes=true`. Executable now on local data (mark/index/premium/klines + funding already present and provenance-verified). **This is the only heavy-work path that can advance repo-name scope without network/new data.**
@@ -39,6 +39,15 @@
   - If Track B gate passes: `next_unfinished_task` = preregistered overlay/next confirmatory step per protocol (still no overlay before gate pass evidence recorded).
   - If Track B fails/inconclusive and no other uninspected admissible local Track B window with >=3 blocks remains: `next_unfinished_task: NONE — program concluded under constraints pending new admissible unauthenticated source`.
   - Otherwise: name the single next materially different Track B window/route.
+
+## Initial task message (execute now; heavy work, no status-only session)
+**Campaign:** `TRACKB-MODELED-BREACH-20261110T154307Z` (liquidation risk, modeled/synthetic boundary — NOT observed liquidations).
+1. **Admissibility lock (before outcomes):** use local verified panel `2025-01-01..2025-10-31`, symbols `BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT` (all required series + funding schema complete per `research_state/trackb_TB1_admissibility.json`; 2025-01..2025-10 contiguous). Derive 60/20/20 chronological splits with 7-day purge/embargo ensuring **test split contains >=3 non-overlapping 30-day blocks**; if not, choose the nearest earlier fully-verified local window that satisfies it and record rationale. Machine-verify provenance (`provenance_verified=true`, `unmapped_count==0`) and save `research_state/trackb_20251110T154307Z_admissibility.json`.
+2. **Preregister & freeze BEFORE any outcome/label inspection:** write `research_state/research_protocol_trackb_20251110T154307Z.md` (modeled breach scenarios e.g. 5x/10x long/short with explicit maintenance-margin assumption, horizon, predictors, metric, 2% materiality floor, Holm, block bootstrap 2000, "synthetic proxy ≠ observed liquidation"). Compute `prereg_hash` and set `split_boundaries_trackb_20251110T154307Z.frozen_before_outcomes=true` in `research_state/run_manifest.json` before computing labels/outcomes. Save split boundaries (UTC).
+3. **Execute confirmatory evaluation:** implement/run `scripts/` path using frozen panel + `scripts/synthetic_boundary_labels.py` logic; leakage-safe features (train-only transforms), baseline vs funding-conditioned; write `research_state/evaluation_summary_trackb_20251110T154307Z.md` with point estimate, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, gate/materiality, Holm, provenance refs.
+4. **Verdict & durable handoff:** update `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/negative_results_report.md` (preserve null/inconclusive), `AGENT_HANDOFF.md`, and this file with timestamped outcomes and single `next_unfinished_task` (gate-pass next prereg step, or `NONE — program concluded under constraints pending new admissible unauthenticated source` if no uninspected admissible local Track B window with >=3 blocks remains). Commit code/manifests/reports only.
+
+**Session is non-compliant if it only reports status.** If a hard stop is hit, record exact machine evidence and the next materially different local window/route in all handoff files.
 
 ## Verification commands (run at session start)
 ```bash
