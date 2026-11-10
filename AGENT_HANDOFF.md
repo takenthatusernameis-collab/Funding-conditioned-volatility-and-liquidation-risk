@@ -1,32 +1,45 @@
-# AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: liquidation risk Track B first, then volatility Track C; Track A observed liquidations STRUCTURALLY_BLOCKED)
+# AGENT_HANDOFF.md — Single Durable Handoff (Liquidation Risk Priority)
 
-**Updated:** 2026-11-10T18:05:00Z — **SINGLE DURABLE HANDOFF (PROGRAM NOT CONCLUDED).** TB1 (2025-01-01..2026-10-31, 5 symbols, 22 est. 30d blocks) **executed but DEGENERATE**: frozen test split 2026-06-26..2026-10-31 has ZERO synthetic boundary breaches across all 5 symbols (5x/24h long). Gate NOT_MET — test set inadmissible for confirmatory evaluation with this label definition. Track C H1_primary NOT_SUPPORTED (claim-worthy panels exhausted); Track A STRUCTURALLY_BLOCKED; risk overlay INELIGIBLE. Provenance `PROVENANCE_OK 161`.
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
+**Updated:** 2026-11-10T18:09:05Z
+**Priority (repo name):** 1) Track B liquidation risk (modeled boundary breaches) — **ACTIVE**, 2) Track C funding-conditioned volatility — **concluded NOT_SUPPORTED on claim-worthy local panels**, 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.
 
-**Session preflight (last verified 2026-11-10T18:05:00Z):** `PROVENANCE_OK 161` (funding CSV lineage, unmapped=0). TB1 evaluation complete with explicit degenerate-test-set finding. Remaining local Track B routes: (1) 2024-01-01..2024-09-30 panel (~9 est. blocks) requires deep re-audit + NEW frozen prereg + confirmatory; (2) redesign label + select window with events + NEW frozen prereg + confirmatory. No network/paid/manual/credentialed data required.
+## Session preflight (verified)
+- `PROVENANCE_OK 161` for funding CSV lineage in `research_state/data_cache` (2026-11-10T18:05Z, `provenance_verified=true`, `unmapped_count=0`).
+- Canonical tests: **35 PASS** — `tests.test_volatility_features_splits`, `tests.test_synthetic_boundary_labels`, `tests.test_trackc_panel_admissibility_audit`, `tests.test_trackc_funding_schema_audit`, `tests.test_trackc_provenance_lineage` (2026-11-10T18:09Z).
+- No network/paid/manual/credentialed data available or permitted for repair; no `.github/workflows` edits.
 
-**Correction vs prior handoff:** The TB1 window (2025-01-01..2026-10-31) was admissibility-verified but the frozen test split produces zero events for the 5x/24h long label. Full-window breach rates: ETH 0.166%, XRP 0.303%, others <0.06%. This is a label/window mismatch, not a data issue. The prior experiment TRACKB-20251110T154307Z (2025-01-01..2025-10-31) also NOT_MET (1.50% < 2%, CI crosses zero).
+## Current state
+- **Track B / TB1 (`TRACKB-MODELED-BREACH-TB1-20261110T173838Z`, 2025-01-01..2026-10-31, 5 symbols, ~22 est. 30d blocks):** admissibility locked and prereg frozen before outcomes, but confirmatory evaluation is **DEGENERATE/INADMISSIBLE for 5x/24h long label** — frozen test split 2026-06-26..2026-10-31 had **ZERO synthetic breaches** across all symbols. Gate NOT_MET; comparative metrics not interpretable. Evidence: `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`, `research_state/research_protocol_trackb_TB1_20261110T173838Z.md`, `research_state/trackb_TB1_admissibility.json`, `run_manifest.json` `split_boundaries_trackb_TB1_20261110T173838Z`.
+- **Track B / prior:** `TRACKB-20251110T154307Z` (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED (C2 vs B1 +1.50% < 2%, CI crosses zero; synthetic proxy only).
+- **Track B / next local route (heavy):** 2024-01-01..2024-09-30 panel (BTC/ETH/BNB/SOL/XRP) deep-audited contiguous, required series complete, funding schema OK, `provenance_verified=true`, `unmapped_count=0`, ~9 non-overlapping 30d blocks. Evidence: `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`. **Untested for confirmatory Track B with a new frozen design.**
+- **Track C (H1 volatility):** concluded **NOT_SUPPORTED** on claim-worthy local panels (FCLR-003/008/009/013/014 etc.); no untested claim-worthy panels with >=3 blocks remain locally.
+- **Track A (observed liquidations):** **STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census). Not locally repairable.
+- **Risk overlay:** **INELIGIBLE** until a forecast gate passes under frozen prereg.
 
----
+## Bottlenecks removed this handoff refresh
+- Replaced ambiguous dual-option next step with a **single mandatory TB2 execution task** on the 2024-01-01..2024-09-30 panel (fallback only if re-audit proves it inadmissible).
+- Made TB1's degenerate-test-set failure explicit as a label/window admissibility failure (not a data gap), preventing repeated idle relitigation.
+- Consolidated evidence pointers and verification commands into one durable handoff (`NEXT_SESSION_TASK.md` + this file).
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T18:05:00Z (supersedes prior; see NEXT_SESSION_TASK.md)
+## 🔴 INITIAL TASK FOR NEXT AGENTIC SESSION (2026-11-10T18:09:05Z)
+**Campaign:** Track B TB2 confirmatory (modeled boundary breaches, synthetic proxy ≠ observed liquidations).
 
-**Campaign:** `TRACKB-MODELED-BREACH-TB1-20261110T173838Z` — Track B modeled liquidation boundary-breach confirmatory (repo-name priority #1). **TB1 EXECUTED: DEGENERATE TEST SET (zero events).** M5.3 complete with explicit finding; M5.4 verdict propagated. Next: M5 repeat on admissible route.
+**Mandatory (heavy, verifiable):** Execute TB2 on **2024-01-01..2024-09-30** with a NEW label design chosen for **test-split event adequacy** (>0 breaches in frozen test). Steps (in order): (1) re-verify deep admissibility + provenance for all inputs used; save `research_state/trackb_<ID>_admissibility.(json|md)`; (2) compute candidate breach rates and select label/split with positive test events (documented, no post-freeze shopping); (3) write frozen prereg `research_state/research_protocol_trackb_<ID>.md` and record `prereg_hash` + `split_boundaries_trackb_<ID>.frozen_before_outcomes=true` in `run_manifest.json` **before confirmatory outcome computation**; (4) run confirmatory evaluation → `research_state/evaluation_summary_trackb_<ID>.md` with point estimates, 95% CI, relative change, n_instruments, n_obs, n_test_blocks, gate verdict; (5) update hypothesis/frontier/negative-results and handoff files with singular `next_unfinished_task`.
 
-**Completed (verified):**
-- Admissibility: `research_state/trackb_TB1_admissibility.json` (2025-01-01..2026-10-31, 5 symbols, contiguous, 22 est. 30d blocks, provenance OK).
-- Freeze-before-outcomes: `research_state/research_protocol_trackb_TB1_20261110T173838Z.md`; `run_manifest.json` `split_boundaries_trackb_TB1_20261110T173838Z` `frozen_before_outcomes=true`, `prereg_hash=5e075968e5958471530d0618cdba1410f8fb3d5afdb31c3be13f99aa07d27c92`.
-- **Execution (M5.3):** `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md` — frozen test split 2026-06-26..2026-10-31 has ZERO synthetic breaches (5x/24h long) across all 5 symbols. Classification degenerate. Gate NOT_MET.
-- **Verdict & propagation (M5.4):** hypothesis_registry, experiment_frontier, negative_results_report updated. Track B status: `PARTIALLY_TESTED_TB1_DEGENERATE_FALLBACK_REQUIRES_REAUDIT`.
+**Do not:** relitigate Track C/A, stop at planning/narration, reuse sealed holdouts, inspect outcomes before freeze, conflate synthetic proxy with observed liquidations, or fabricate provenance/data.
 
-**Mandatory next (in order, non-optional):**
-- **M5 repeat on next admissible route:** Choose ONE:
-  1. **Deep re-audit 2024-01-01..2024-09-30 panel** (~9 est. blocks, completeness 1.0 in `trackb_window_candidates_fast.json`): run full admissibility + gap + funding-schema audit + provenance lineage → if admissible, freeze NEW prereg (new ID) → execute confirmatory.
-  2. **Redesign label + select test window with events**: e.g., leverage=10x or 20x, or short side, or longer horizon; pick a test window (from full-window breach audit above) that has >0 events. Freeze NEW prereg → execute confirmatory.
-- **No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation; no `.github/workflows` edits.**
+## `next_unfinished_task`
+Track B TB2: re-verify admissibility/provenance for 2024-01-01..2024-09-30, select a NEW label+split with >0 frozen-test synthetic breaches, freeze NEW prereg+hash in manifest before outcomes, execute confirmatory evaluation, and propagate verdict/evidence to registries and handoff (fallback to next locally admissible uninspected route only if 2024Q1-Q3 is proven inadmissible). Track C concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.
 
-**Current `next_unfinished_task`:** Track B — TB1 window INADMISSIBLE (zero test events with 5x/24h long). Options: (1) Deep re-audit 2024-01-01..2024-09-30 panel + NEW frozen prereg + confirmatory execution; (2) Redesign label (leverage/horizon/side) + select test window with events + NEW frozen prereg + confirmatory execution. Track C concluded NOT_SUPPORTED. Track A STRUCTURALLY_BLOCKED. Risk overlay INELIGIBLE.
+## Key evidence
+- `NEXT_SESSION_TASK.md` (this handoff's operative task)
+- `FOCUS_CAMPAIGN.md`
+- `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`
+- `research_state/research_protocol_trackb_TB1_20261110T173838Z.md`
+- `research_state/trackb_TB1_admissibility.json`, `research_state/trackb_TB1_admissibility_2024q1q3.json`, `research_state/trackb_window_candidates_fast.json`
+- `research_state/run_manifest.json`
+- `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/negative_results_report.md`
 
-**Verification commands:**
-- `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v`
-- Provenance: `python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"`
-- Check breach rates by window: `python -c "from scripts.synthetic_boundary_labels import synthetic_boundary_label; ...` (see evaluation_summary for full-window rates)
+## Hard constraints (NON-NEGOTIABLE)
+No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation; preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits. Future agents must deliver heavy, verifiable progress.
