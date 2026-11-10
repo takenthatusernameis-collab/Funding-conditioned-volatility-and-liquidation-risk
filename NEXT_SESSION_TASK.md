@@ -1,7 +1,8 @@
 # NEXT_SESSION_TASK.md — Single Durable Initial Task for Next Agentic Session
-**Timestamp (UTC):** 2026-11-10T16:38:07Z
+**Timestamp (UTC):** 2026-11-10T16:41:28Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Project priority (by repo name):** 1) liquidation risk — Track B modeled boundary breaches, 2) funding-conditioned volatility — Track C (concluded NOT_SUPPORTED), 3) Track A observed liquidations (STRUCTURALLY_BLOCKED).
+**Session preflight (verified this session):** numpy/pandas/scipy installed; `PROVENANCE_OK 161`; canonical 35-test suite OK. Data path is clear — no environment or data bottleneck remains.
 
 ## Current verdicts (do not relitigate)
 - **Track C / H1_primary: NOT_SUPPORTED.** All claim-worthy local panels tested (FCLR-003/008/009/012-V/013/014); forecast gate NOT_MET everywhere; overlay INELIGIBLE. `next_unfinished_task (Track C): NONE`.

@@ -1,6 +1,7 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: liquidation risk Track B first, then volatility Track C; Track A observed liquidations STRUCTURALLY_BLOCKED)
 
-**Updated:** 2026-11-10T16:38:07Z — **PROGRAM NOT CONCLUDED.** Track B tested on ONE window (TRACKB-20251110T154307Z, 2025-01-01..2025-10-31): gate NOT_MET / NOT_SUPPORTED (C2 vs B1 rel improvement 1.50% < 2% floor, CI [-0.005, 0.035] crosses zero; modeled synthetic proxy only; 4/5 symbols had zero synthetic breaches). Track C / H1_primary: NOT_SUPPORTED across all claim-worthy panels (FCLR-003/008/009/012-V/013/014); risk overlay INELIGIBLE. Track A: STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census).
+**Updated:** 2026-11-10T16:41:28Z — **PROGRAM NOT CONCLUDED.** Track B tested on ONE window (TRACKB-20251110T154307Z, 2025-01-01..2025-10-31): gate NOT_MET / NOT_SUPPORTED (C2 vs B1 rel improvement 1.50% < 2% floor, CI [-0.005, 0.035] crosses zero; modeled synthetic proxy only; 4/5 symbols had zero synthetic breaches). Track C / H1_primary: NOT_SUPPORTED across all claim-worthy panels (FCLR-003/008/009/012-V/013/014); risk overlay INELIGIBLE. Track A: STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census).
+**Session preflight (verified this session):** numpy/pandas/scipy installed; `PROVENANCE_OK 161`; canonical 35-test suite OK. No environment or data bottleneck remains — the only blocker to confirmatory resume is the missing NEW frozen prereg (procedural), not data.
 
 **Correction vs prior handoff:** `next_unfinished_task` was incorrectly NONE. Untested admissible local Track B windows with >=3 non-overlapping 30-day blocks remain:
 - TB1 panel 2025-01-01..2026-10-31, 5 symbols, provenance_verified=true (2065 files verified, unmapped_count=0), 22 estimated non-overlapping 30-day blocks — fully verified locally, **untested** for Track B confirmatory. (`research_state/trackb_TB1_admissibility.json`)
@@ -10,7 +11,7 @@ The only blocker to confirmatory resume is the missing NEW frozen prereg (proced
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T16:38:07Z
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T16:41:28Z
 
 **Campaign:** `TRACKB-MODELED-BREACH-NEXT-20261110T163807Z` — Track B modeled liquidation boundary-breach confirmatory on an UNTESTED local window (repo-name priority #1: liquidation risk).
 
