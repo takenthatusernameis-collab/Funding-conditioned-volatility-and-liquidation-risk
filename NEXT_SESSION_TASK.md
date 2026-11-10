@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-10T18:58:30Z
+**Timestamp (UTC):** 2026-11-10T19:01:16Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded. This file is the **single authoritative initial task message** for the next agentic session. Execute it before any other work. Do not relitigate concluded tracks, do not poll, and do not produce status-only output.
 
