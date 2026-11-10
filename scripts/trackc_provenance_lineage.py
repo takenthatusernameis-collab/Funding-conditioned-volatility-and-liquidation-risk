@@ -19,6 +19,7 @@ MANIFEST_CANDIDATES = (
     Path("research_state/data_cache/manifest_extended.json"),
     Path("research_state/data_cache/manifest_extract.json"),
 )
+EXTRACT_MANIFEST = Path("research_state/data_cache/manifest_extract.json")
 
 
 def _sha256_file(p: Path) -> str:
