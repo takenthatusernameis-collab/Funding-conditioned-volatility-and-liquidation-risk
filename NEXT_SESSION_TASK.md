@@ -1,4 +1,6 @@
-# NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (2026-11-10T18:09:05Z)
+# NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (2026-11-10T18:09:05Z; refreshed 2026-11-10T18:13:13Z)
+
+> **IMMEDIATE MANDATORY TASK (do first, heavy):** Track B TB2 on **2024-01-01..2024-09-30** — re-verify admissibility+provenance, select NEW label+split with **>0 frozen-test synthetic breaches** (avoid TB1 degenerate 5x/24h/zero-test), freeze NEW prereg+`prereg_hash`+`split_boundaries_trackb_<ID>.frozen_before_outcomes=true` in manifest **before outcomes**, run confirmatory evaluation, and propagate verdict to registries/handoff. No narration-only work. No network/paid/manual data; no threshold shopping; synthetic proxy ≠ observed liquidations. See steps below.
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (repo-name):** 1) Track B liquidation risk (modeled boundary breaches) — **ACTIVE**, 2) Track C funding-conditioned volatility — **concluded NOT_SUPPORTED on claim-worthy local panels**, 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.

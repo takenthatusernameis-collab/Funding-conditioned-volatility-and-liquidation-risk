@@ -1,7 +1,8 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (Liquidation Risk Priority)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Updated:** 2026-11-10T18:09:05Z
+**Updated:** 2026-11-10T18:09:05Z (handoff refresh 2026-11-10T18:13:13Z; no new outcomes/run — state & mandatory task reconfirmed)
+**Authoritative initial task:** see `NEXT_SESSION_TASK.md` top banner + `next_unfinished_task` below.
 **Priority (repo name):** 1) Track B liquidation risk (modeled boundary breaches) — **ACTIVE**, 2) Track C funding-conditioned volatility — **concluded NOT_SUPPORTED on claim-worthy local panels**, 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.
 
 ## Session preflight (verified)
