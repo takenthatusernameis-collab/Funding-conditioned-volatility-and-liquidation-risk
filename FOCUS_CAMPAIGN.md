@@ -1,18 +1,18 @@
 # FOCUS_CAMPAIGN.md — Heavy-Work Execution Plan (Funding-conditioned Volatility & Liquidation Risk)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Priority (per repo name):** 1) Track C / H1 funding-conditioned volatility forecast, 2) Track B liquidation boundary risk (modeled), 3) Track A observed liquidations (blocked).
-**Campaign timestamp:** 2026-11-10T11:30:05Z
+**Priority (per repo name):** 1) Track B liquidation boundary risk (modeled) — liquidation risk first per repo name, 2) Track C / H1 funding-conditioned volatility forecast, 3) Track A observed liquidations (blocked).
+**Campaign timestamp:** 2026-11-10T16:16:08Z (refreshed; program NOT concluded — untested admissible Track B windows remain)
 **Hard constraints (NON-NEGOTIABLE):** no network/paid/manual/credentialed data; no fabricated provenance/outcomes; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation; preregister before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 
 ## Mission (non-optional)
-Advance the repo's core question to a reproducible, auditable, out-of-sample verdict using only local verified data: (a) funding-conditioned volatility vs RV-only baseline — **done/concluded NOT_SUPPORTED**, (b) liquidation risk via **Track B modeled boundary breaches** — **NEXT and MANDATORY**, or record evidence-backed structural conclusion if no admissible local route remains. Future agents must not idle on status docs, polling, or re-litigation.
+Advance the repo's core question to a reproducible, auditable, out-of-sample verdict using only local verified data: (a) funding-conditioned volatility vs RV-only baseline — **done/concluded NOT_SUPPORTED**, (b) liquidation risk via **Track B modeled boundary breaches** — **PARTIALLY TESTED (one window NOT_SUPPORTED); untested admissible local windows with >=3 blocks remain, so M5 is NEXT and MANDATORY**, or record evidence-backed inadmissibility if every local window is exhausted. Future agents must not idle on status docs, polling, or re-litigation of concluded tracks.
 
 ## Current state (verified 2026-11-10T11:30:05Z)
 - **Track C / H1_primary: CONCLUDED UNDER CONSTRAINTS, NOT_SUPPORTED.** Panels tested: FCLR-003, FCLR-008, FCLR-009 (NOT_MET), FCLR-012-V (INCONCLUSIVE, 0 blocks), FCLR-013 (NOT_SUPPORTED), FCLR-014 (NOT_MET: 1.14% < 2%, CI crosses zero, 17d/0 blocks). No untested claim-worthy Track C panels with >=3 blocks remain locally. `next_unfinished_task (Track C): NONE`.
 - **Track A: STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census). Not locally repairable.
-- **Track B: UNTESTED** — no preregistered modeled breach scenario evaluated. **Unblocked by local data** (verified provenance, mark/index/premium/klines+funding present, `scripts/synthetic_boundary_labels.py` available).
-- **Bottlenecks removed:** provenance machine-verified (`provenance_verified=true`, `unmapped_count=0`), funding schema/coverage audited, dep-light gate 48/48 PASS, Track B label primitive + tests present.
+- **Track B: PARTIALLY TESTED** — one confirmatory window executed (TRACKB-20251110T154307Z, 2025-01-01..2025-10-31): gate NOT_MET / NOT_SUPPORTED (C2 vs B1 rel improvement 1.50% < 2%, CI [-0.005, 0.035] crosses zero; modeled proxy only; 4/5 symbols had zero synthetic breaches). **Untested admissible local windows with >=3 blocks remain:** TB1 panel 2025-01-01..2026-10-31 (5 symbols, provenance_verified=true, 2065 files verified, unmapped_count=0, 22 estimated blocks) and 2024-01-01..2024-09-30 (~9 estimated blocks, completeness 1.0). Unblocked by local data (`scripts/synthetic_boundary_labels.py`, 8/8 tests present). **M5 active/mandatory next on an untested window.**
+- **Bottlenecks removed:** stale "program concluded / next_unfinished_task: NONE" declaration corrected (see `AGENT_HANDOFF.md`, `NEXT_SESSION_TASK.md`); provenance machine-verified (`provenance_verified=true`, `unmapped_count=0`); funding schema/coverage audited; dep-light gate 48/48 PASS; Track B label primitive + tests present.
 
 ## Execution milestones (execute in order; skipping is non-compliant)
 
@@ -29,7 +29,7 @@ Evidence: `research_state/trackc_deep_audit_2025_h1_check.json`, `research_state
 `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, `research_state/negative_results_report.md`, `AGENT_HANDOFF.md`, `NEXT_SESSION_TASK.md` updated. Overlay INELIGIBLE.
 
 ### M5 — Track B modeled liquidation boundary-breach campaign — **ACTIVE / MANDATORY NEXT**
-**Objective:** produce a confirmatory, preregistered Track B result (or evidence-backed inadmissibility on all local windows) with no network/new data.
+**Objective:** produce a confirmatory, preregistered Track B result (or evidence-backed inadmissibility on all local windows) with no network/new data. **Preferred window:** TB1 panel 2025-01-01..2026-10-31 (fully provenance-verified locally, untested, 22 estimated blocks). Fallback: re-audit 2024-01-01..2024-09-30 (~9 estimated blocks) via deep admissibility + gap + funding-schema audit before confirmatory.
 
 **M5.1 Admissibility lock (verifiable):**
 - Select local window: >=5 instruments, contiguous required series (mark/index/premium/klines + funding), **>=3 non-overlapping 30-day blocks in test split**, not sealed/reused/previously outcome-inspected for this Track B design.
