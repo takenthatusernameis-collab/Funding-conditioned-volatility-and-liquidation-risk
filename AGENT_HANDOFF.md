@@ -1,47 +1,42 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (REPO-NAME PRIORITY: Track C / H001 first)
 
-**Updated:** 2026-11-10T10:26:25Z — **P0 ACTIVE.** Repo `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority = **Track C / H001 (funding-conditioned volatility forecast vs RV-only baseline)** first; Track A/B liquidation tracks secondary. Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
+**Updated:** 2026-11-10T10:33:15Z — **P0 ACTIVE.** Repo `Funding-conditioned-volatility-and-liquidation-risk` — repo-name priority = **Track C / H001 (funding-conditioned volatility forecast vs RV-only baseline)** first; Track A/B liquidation tracks secondary. Work continues under RESEARCH_PROMPT.md hard constraints (no network/paid/manual/credentialed data, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no Track conflation, no risk overlay until forecast gate passes).
 
 ---
 
-## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T10:26:25Z
+## 🔴 INITIAL TASK MESSAGE FOR NEXT AGENTIC SESSION — 2026-11-10T10:33:15Z
 
 **PRIMARY FOCUS (repo-name priority): Track C / H001 — funding-conditioned volatility forecast vs RV-only baseline.**
 
-**Current state (verified THIS session 2026-11-10T10:26:25Z):**
-- **Dep-light gate:** 48/48 tests PASS (Ran 48 tests in 76.6s — OK)
-- **Provenance machine-verified:** 161 funding CSV files, all with adjacent `.sha256` sidecars, `provenance_verified=true`, `unmapped_count=0`, 36001 manifest records indexed
-- **2025 H1 window (2025-01-01..2025-06-07) funding schema audit:** `all_ok=true`, `missing=0`, `schema_bad=0` for 5 symbols × 6 months
-- **Deep audit on 2025 H1 window:** `provenance_verified=true`, `symbols_ok=5`, `panel_blocks_estimate=6` (>=3 required)
-- **M2 COMPLETE:** `research_state/research_protocol_fclr014.md` created (FROZEN_BEFORE_OUTCOMES, v2.0, frozen 2025-01-01..2025-06-07, 60/20/20 chronological, 7-day purge/embargo, Holm multiplicity, 2000-rep block bootstrap, deterministic seed, 2% materiality floor). `prereg_hash=8563163c62524605cbf7f11603759aee2210d133f82c3742319a6dd85dfca597` recorded in `run_manifest.json`. `split_boundaries_fclr014` with `frozen_before_outcomes=true` recorded in `run_manifest.json`. **No outcomes inspected for this window.**
-- **run_evaluation.py:** FCLR-014 branch registered (OUT=research_state/evaluation_summary_FCLR-014.md, DATA_END=2025-06-07, SPLIT_KEY=split_boundaries_fclr014, START_ALL=2025-01-01). Fail-closed guard satisfied — unknown experiments no longer fall through to canonical summary.
-- **2025 full panel (2025-01-01..2025-12-31) already verified:** 5 symbols × 365 days, 12 blocks each, all series complete (`research_state/trackc_deep_audit_2025_full_check.json`)
+**Mandatory heavy-work objective (do not replace with status/docs): execute M3 confirmatory run for FCLR-014 on the frozen, untested 2025 H1 panel, then M4→M6.**
 
-**Already tested (preserved nulls, no re-use — DO NOT RE-INSPECT):**
-- FCLR-009 on 2025-06-08..2025-12-31 (6 blocks) → **NOT_MET** (-0.43% QLIKE, CI crosses zero)
-- FCLR-003 on 2024-10-02..2024-12-31 (3 blocks) → **INCONCLUSIVE** (CI crosses zero)
-- FCLR-013 on 2026 Q3 (1 block) → **NOT_SUPPORTED**
-- FCLR-012-V on 2026-08-07..2026-11-02 (0 blocks) → **INCONCLUSIVE**
-- Gate4 v3 multisplit (2024-04..09, 4 blocks) → **INCONCLUSIVE** (CI crosses zero)
-- Deeper validation on FCLR-002 panel (2 blocks) → **EXPLORATORY_ONLY** (insufficient blocks)
-**H001 remains NOT_SUPPORTED across every claim-worthy panel executed.**
+### Session-start state (verified 2026-11-10T10:26:25Z; FCLR-014 outcomes NOT inspected)
+- **M1/M2 COMPLETE & frozen:** `research_state/research_protocol_fclr014.md` v2.0 `FROZEN_BEFORE_OUTCOMES` (2025-01-01..2025-06-07, 5 symbols BTCUSDT/ETHUSDT/BNBUSDT/SOLUSDT/XRPUSDT, 60/20/20 chronological, 7-day purge/embargo, Holm multiplicity, 2000-rep block bootstrap, 2% materiality floor). `prereg_hash=8563163c62524605cbf7f11603759aee2210d133f82c3742319a6dd85dfca597` and `split_boundaries_fclr014.frozen_before_outcomes=true` recorded in `research_state/run_manifest.json`.
+- **run_evaluation.py:** FCLR-014 branch registered (OUT=`research_state/evaluation_summary_FCLR-014.md`, DATA_END=2025-06-07, SPLIT_KEY=split_boundaries_fclr014, START_ALL=2025-01-01). `FCLR_EXPERIMENT=FCLR-014` fails closed if unknown; no outcomes produced yet (`evaluation_summary_FCLR-014.md` absent).
+- **Admissibility evidence (do not re-inspect FCLR-009 window):** dep-light gate 48/48 PASS; provenance machine-verified 161 funding CSVs, `provenance_verified=true`, `unmapped_count=0` (36001 manifest records); 2025 H1 funding schema `all_ok=true`, `missing=0`, `schema_bad=0` (5×6 months); `research_state/trackc_deep_audit_2025_h1_check.json` → `provenance_verified=true`, `symbols_ok=5`, `panel_blocks_estimate=6`, `all_required_series_complete=true`; 2025 full panel verified (`trackc_deep_audit_2025_full_check.json`).
 
-**Initial task — execute M3→M6 of FOCUS_CAMPAIGN.md in order (M2 complete):**
-1. **M3 (REQUIRED, THIS SESSION): Execute confirmatory FCLR-014 run**
-   - Run `FCLR_EXPERIMENT=FCLR-014 python scripts/run_evaluation.py` on the frozen panel
-   - Write `research_state/evaluation_summary_FCLR-014.md` with full metrics and uncertainty
-   - Update `research_state/hypothesis_registry.json` H1_primary status
-   - **DO NOT inspect outcomes before M3 run; the freeze at M2 is recorded and outcomes are sealed until this run**
-2. **M4 (REQUIRED): Gate verdict & overlay eligibility**
-   - Apply forecast gate (all 6 conditions) against M3 results; record verdict FORECAST_GATE_PASSED or NOT_SUPPORTED / INCONCLUSIVE
-   - Overlay eligibility: OVERLAY_ELIGIBLE only if gate passed; otherwise NOT ELIGIBLE
-   - Write verdict to `research_state/negative_results_report.md` (if null) and update `AGENT_HANDOFF.md`
-3. **M5 (CONDITIONAL): Track A/B status confirmation**
-4. **M6 (REQUIRED): Update AGENT_HANDOFF.md with next task**
+### Execute in order (FOCUS_CAMPAIGN.md M3→M6) — single highest-value path
+1. **M3 (REQUIRED, HEAVY): Run confirmatory evaluation**
+   - `FCLR_EXPERIMENT=FCLR-014 python scripts/run_evaluation.py`
+   - Expect: writes `research_state/evaluation_summary_FCLR-014.md` with paired OOS metrics/uncertainty (C2 vs B1 primary, C1 vs B1 & C2 vs C1 secondary), instrument/block counts, bootstrap CI. Do **not** tune thresholds/splits/models after seeing results.
+2. **M4 (REQUIRED): Forecast gate verdict & overlay eligibility**
+   - Apply all 6 gate conditions (RESEARCH_PROMPT §9 / protocol): meaningful OOS improvement over B1 on primary target (>=2% relative QLIKE reduction), uncertainty supports skill after Holm, calibration if event probs, evidence across multiple blocks & >1 instrument, no unresolved leakage/source/timestamp defect, practical relevance. Record verdict `FORECAST_GATE_PASSED` or `NOT_SUPPORTED`/`INCONCLUSIVE` in `research_state/negative_results_report.md` (if null/inconclusive) and `AGENT_HANDOFF.md`. `OVERLAY_ELIGIBLE` only if all pass; otherwise NOT ELIGIBLE. **No risk overlay.**
+3. **M5 (CONDITIONAL): Track A/B status confirmation (no conflation)**
+   - Track A = **STRUCTURALLY_BLOCKED** (no admissible unauthenticated historical liquidation source; cite `research_state/liquidation_sources_enumeration.md`). Track B = **UNTESTED** (no margin/leverage scenario registered before outcome inspection). Track C results = volatility/stress only, **never** observed-liquidation validation.
+4. **M6 (REQUIRED): Durable handoff update**
+   - Update `AGENT_HANDOFF.md` with exact commands/results, gate states, blockers, and the single next materially different unfinished task. If M3/M4 null/inconclusive and no other untested local panel with >=3 blocks remains claim-worthy, set next task to register/run next pilot on widest untested verified panel or conclude under constraints per exit criteria.
 
-**If M3/M4 result is NOT_SUPPORTED or INCONCLUSIVE:** preserve the null; do not promote; do not threshold-shop. If 2025 H1 window fails any admissibility check at M3: register new pilot protocol (new ID) on widest untested local panel with >=3 blocks + >=5 instruments, run as PILOT, report INCONCLUSIVE/NOT_SUPPORTED.
+### Preserved nulls / do-not-reuse (DO NOT RE-INSPECT)
+- FCLR-009 2025-06-08..2025-12-31 (6 blocks) → **NOT_MET**; holdout-reuse prohibited.
+- FCLR-003 2024-10-02..2024-12-31 → **INCONCLUSIVE**; Gate4 v3 2024-04..09 → **INCONCLUSIVE**; FCLR-013 2026 Q3 → **NOT_SUPPORTED**; FCLR-012-V 0 blocks → **INCONCLUSIVE**; deeper validation FCLR-002 (2 blocks) → **EXPLORATORY_ONLY**. **H001 remains NOT_SUPPORTED across every claim-worthy panel executed.**
 
-**Secondary (do not conflate):** Track A = STRUCTURALLY_BLOCKED (no admissible unauthenticated historical liquidation source). Track B = UNTESTED (no margin/leverage scenario registered before outcome inspection). Track C results = volatility/stress only, NEVER observed-liquidation validation.
+### Structural blockers (not locally repairable, no network)
+| Blocker | Detail | Route |
+|---|---|---|
+| MISSING_FUNDING_MONTH_FILE | `*-fundingRate-2026-11.csv` absent locally; no network | Use verified 2025 local panels |
+| HOLDOUT_REUSE_CONSTRAINT | FCLR-009 window inspected | Use untested 2025-01-01..2025-06-07 for FCLR-014 only |
+
+**Secondary (do not conflate):** Track A STRUCTURALLY_BLOCKED; Track B UNTESTED; Track C ≠ liquidation validation. No network/paid/manual, no fabricated provenance, no threshold shopping, no sealed-holdout reuse, no `.github/workflows` edits.
 
 ---
 
