@@ -2,7 +2,7 @@
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (per repo name):** 1) Track B liquidation boundary risk (modeled) — **ACTIVE/MANDATORY**, 2) Track C / H1 funding-conditioned volatility forecast — concluded NOT_SUPPORTED, 3) Track A observed liquidations — STRUCTURALLY_BLOCKED.
-**Campaign timestamp:** 2026-11-10T18:44:08Z (refreshed; program NOT concluded — TB1 degenerate; TB2 mandatory on 2024-01-01..2024-09-30)
+**Campaign timestamp:** 2026-11-10T18:55:10Z (refreshed; program NOT concluded — TB1 degenerate; TB2 mandatory on 2024-01-01..2024-09-30)
 **Single durable handoff (authoritative):** `NEXT_SESSION_TASK.md` (+ `AGENT_HANDOFF.md` pointer). Execute `NEXT_SESSION_TASK.md` as the initial task message.
 **Hard constraints (NON-NEGOTIABLE):** no network/paid/manual/credentialed data; no fabricated provenance/outcomes; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation; preregister before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 

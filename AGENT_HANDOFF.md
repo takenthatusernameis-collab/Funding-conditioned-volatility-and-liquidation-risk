@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-10T18:44:08Z
+**Timestamp (UTC):** 2026-11-10T18:55:10Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative, execute immediately):** `NEXT_SESSION_TASK.md`
 **Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded.

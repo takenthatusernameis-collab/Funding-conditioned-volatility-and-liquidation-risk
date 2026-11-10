@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-10T18:44:08Z
+**Timestamp (UTC):** 2026-11-10T18:55:10Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `ACTIVE_TRACKB_MANDATORY` — NOT concluded. This is the single durable handoff; execute this task before any other work.
 
