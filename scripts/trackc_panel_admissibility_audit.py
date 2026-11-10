@@ -305,7 +305,16 @@ def verify_sha256_sidecars(paths: list[Path], limit: int = 25):
     }
 
 
-def collect_days(cache: Path, sym: str, window_hint: str | None = None):
+def _hint_matches(name: str, window_hints: list[str] | str | None) -> bool:
+    """OR-semantics: a dir matches if any hint is a substring of its name. None/empty => match all."""
+    if not window_hints:
+        return True
+    if isinstance(window_hints, str):
+        window_hints = [window_hints]
+    return any(h and h in name for h in window_hints)
+
+
+def collect_days(cache: Path, sym: str, window_hints: list[str] | str | None = None):
     days = set()
     series = {k: set() for k in REQUIRED_SERIES}
     has_funding = False
@@ -313,7 +322,7 @@ def collect_days(cache: Path, sym: str, window_hint: str | None = None):
     for d in sorted(cache.glob(f"{sym}_*")):
         if not d.is_dir():
             continue
-        if window_hint and window_hint not in d.name:
+        if not _hint_matches(d.name, window_hints):
             continue
         for child in d.rglob("*.csv"):
             m = re.search(r"(\d{4}-\d{2}-\d{2})", child.as_posix())
@@ -343,16 +352,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cache", default="research_state/data_cache")
     ap.add_argument("--symbols", default=",".join(SYMS_DEFAULT))
-    ap.add_argument("--window-hint", default=None, help="substring filter for sym dirs, e.g. 2026_11")
+    ap.add_argument("--window-hint", default=None, help="substring filter for sym dirs, e.g. 2026_11. May be repeated/comma-separated for OR-semantics across a candidate window.")
     ap.add_argument("--out", default="research_state/trackc_panel_admissibility_latest.json")
     args = ap.parse_args()
     cache = Path(args.cache)
     syms = [s.strip() for s in args.symbols.split(",") if s.strip()]
+    hints = [h.strip() for h in args.window_hint.split(",") if h.strip()] if args.window_hint else None
     per = {}
     all_ok_syms = 0
     min_days = None
     for sym in syms:
-        days, series, has_funding, has_klines = collect_days(cache, sym, args.window_hint)
+        days, series, has_funding, has_klines = collect_days(cache, sym, hints)
         n = len(days)
         blocks = non_overlapping_30d_blocks(n)
         series_gaps = {}
@@ -395,6 +405,7 @@ def main():
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "cache": str(cache),
         "window_hint": args.window_hint,
+        "window_hints_resolved": hints,
         "symbols": syms,
         "per_symbol": per,
         "symbols_with_required_series": all_ok_syms,

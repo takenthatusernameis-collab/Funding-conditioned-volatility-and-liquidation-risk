@@ -81,6 +81,25 @@ class TestPanelAdmissibility(unittest.TestCase):
             self.assertIn("sidecar_counts", r["provenance_audit"])
             self.assertIn("adjacent_sha256_verification_sample", r["provenance_audit"])
 
+    def test_cli_multi_hint_or_semantics(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as td:
+            cache = Path(td) / "cache"
+            cache.mkdir()
+            _mk_series(cache, "BTCUSDT", "2024_01", "2024-01-01")
+            _mk_series(cache, "BTCUSDT", "2025_06", "2025-06-01")
+            out = Path(td) / "r.json"
+            cp = subprocess.run(
+                [sys.executable, str(root / "scripts/trackc_panel_admissibility_audit.py"),
+                 "--cache", str(cache), "--symbols", "BTCUSDT",
+                 "--window-hint", "2024_01,2025_06", "--out", str(out)],
+                cwd=root, capture_output=True, text=True, timeout=30)
+            self.assertEqual(cp.returncode, 0, cp.stderr + cp.stdout)
+            r = json.loads(out.read_text())
+            self.assertEqual(r["per_symbol"]["BTCUSDT"]["days"], 2)
+            self.assertEqual(r["per_symbol"]["BTCUSDT"]["range"], ["2024-01-01", "2025-06-01"])
+            self.assertEqual(r["window_hints_resolved"], ["2024_01", "2025_06"])
+
     def test_cli_no_outcomes_no_network_existing_cache(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as td:
