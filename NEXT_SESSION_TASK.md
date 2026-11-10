@@ -1,5 +1,5 @@
 # NEXT_SESSION_TASK.md
-**Timestamp:** 2026-11-10T11:22:49Z
+**Timestamp:** 2026-11-10T11:24:53Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Status:** Track C / H001 concluded under constraints (exit criteria 2, forecast gate NOT_MET, `next_unfinished_task: NONE` pending new admissible unauthenticated source). **Next mandatory heavy work: Track B modeled liquidation boundary-breach campaign (UNTESTED, executable on verified local data only).**
 
@@ -34,4 +34,4 @@ grep -n 'H1_primary' research_state/hypothesis_registry.json
 sed -n '1,40p' research_state/evaluation_summary_FCLR-014.md
 ```
 
-**Canonical handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:20:05Z). This file is the timestamped initial task message for the next session.
+**Canonical handoff:** `AGENT_HANDOFF.md` (2026-11-10T11:24:53Z). This file is the timestamped initial task message for the next session.
