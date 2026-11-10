@@ -1,8 +1,8 @@
-# NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (2026-11-10T17:14:34Z)
+# NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (2026-11-10T17:38:38Z)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (by repo name):** (1) Track B liquidation risk — modeled boundary breaches (**active, untested window remains**), (2) Track C funding-conditioned volatility (**concluded NOT_SUPPORTED on claim-worthy local panels**), (3) Track A observed liquidations (**STRUCTURALLY_BLOCKED**, no admissible unauthenticated census).
-**Campaign:** `TRACKB-MODELED-BREACH-TB1-20261110T171434Z`
+**Campaign:** `TRACKB-MODELED-BREACH-TB1-20261110T173838Z`
 **Program status:** `ACTIVE_TRACKB_UNTESTED_WINDOW_REMAINS` — not concluded. Prior Track B `TRACKB-20251110T154307Z` (2025-01-01..2025-10-31) NOT_MET/NOT_SUPPORTED (C2 vs B1 +1.50% < 2%, 95% CI [-0.005,0.035], synthetic proxy only). Track C H1_primary NOT_SUPPORTED on all claim-worthy local panels; risk overlay **NOT ELIGIBLE**.
 
 ## SINGLE MANDATORY TASK — HEAVY EXECUTION (no planning-only, no relitigation)
@@ -12,10 +12,10 @@
 - Reconfirm TB1 admissibility evidence (`research_state/trackb_TB1_admissibility.json`, contiguous series/funding schema/22 blocks). If re-verification fails, stop TB1 with evidence and deep-audit fallback window 2024-01-01..2024-09-30 before confirmatory.
 - **Machine-verify provenance now (record in artifacts):**
   `python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"`
-  (verified PASS at 2026-11-10T17:14Z: `PROVENANCE_OK 161`).
+  (verified PASS at 2026-11-10T17:38Z: `PROVENANCE_OK 161`).
 
 ### 2) Freeze prereg BEFORE any outcome/label computation (procedural blocker)
-- Write new frozen protocol `research_state/research_protocol_trackb_TB1_<UTC>.md`: modeled breach definition (leverage/margin/horizon/side), predictors incl. funding-conditioned features, 60/20/20 chronological splits + 7-day purge/embargo, metrics, **2% materiality floor**, Holm multiplicity, block bootstrap >=2000, window/symbols/blocks, explicit **“synthetic proxy ≠ observed liquidation”**.
+- Write new frozen protocol `research_state/research_protocol_trackb_TB1_<UTC>.md`: modeled breach definition (leverage/margin/horizon/side), predictors incl. funding-conditioned features, 60/20/20 chronological splits + 7-day purge/embargo, metrics, **2% materiality floor**, Holm multiplicity, block bootstrap >=2000, window/symbols/blocks, explicit **"synthetic proxy ≠ observed liquidation"**.
 - Compute `prereg_hash = sha256(frozen protocol bytes)`.
 - **Before running labels/evaluation/outcome inspection**, append/update `research_state/run_manifest.json` with `split_boundaries_trackb_TB1_<ID>` (or equivalent) containing `frozen_before_outcomes=true`, split boundaries, `prereg_hash`, `protocol_ref`, timestamp, `outcome_values_inspected=false`. Order must be provable.
 
