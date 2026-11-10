@@ -612,7 +612,7 @@
   "candidate_months": [
     "2026-11"
   ],
-  "generated_utc": "2026-11-10T07:13:08Z",
+  "generated_utc": "2026-11-10T07:16:04Z",
   "min_blocks": 3,
   "min_symbols": 5,
   "mode": "local_only_scoped_deep_audit_no_outcomes_no_network",
