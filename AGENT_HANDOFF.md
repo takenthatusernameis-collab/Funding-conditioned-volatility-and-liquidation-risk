@@ -1,8 +1,8 @@
 # AGENT_HANDOFF.md — Single Durable Handoff (next session MUST continue from here)
 
-**Updated:** 2026-11-10T03:33:55Z — **P0 = Track C funding-conditioned volatility heavy engineering (no outcomes, no network, no Track A probing).** Repository name `Funding-conditioned-volatility-and-liquidation-risk` resolves priority in favor of **Track C P0**. Track A (liquidation risk) is **STRUCTURALLY BLOCKED / NO TRIGGER** — frozen unless a rubric-GO unauthenticated liquidation trigger appears (then PREREG before outcomes). Dep-light gate **39/39 OK** (core 29 + planner smoke 2 + orchestrator 8, 53.542s). `confirmatory_resume_ready=false`, `provenance_verified=false` for all audited windows. **Data/provenance gap cannot be fabricated.**
+**Updated:** 2026-11-10T04:15:00Z — **P0 = Track C funding-conditioned volatility heavy engineering (no outcomes, no network, no Track A probing).** Repository name `Funding-conditioned-volatility-and-liquidation-risk` resolves priority in favor of **Track C P0**. Track A (liquidation risk) is **STRUCTURALLY BLOCKED / NO TRIGGER** — frozen unless a rubric-GO unauthenticated liquidation trigger appears (then PREREG before outcomes). Dep-light gate **39/39 OK** (core 29 + planner smoke 2 + orchestrator 8, 53.542s). `confirmatory_resume_ready=false`, `provenance_verified=false` for all audited windows. **Data/provenance gap cannot be fabricated.**
 
-## 0) INITIAL TASK MESSAGE — 2026-11-10T03:33:55Z — MANDATORY HEAVY WORK (NEXT SESSION, UNAVOIDABLE)
+## 0) INITIAL TASK MESSAGE — 2026-11-10T04:15:00Z — MANDATORY HEAVY WORK (NEXT SESSION, UNAVOIDABLE)
 
 **START HERE. P0 Track C. Track A frozen/blocked — do not touch.** No confirmatory trigger: scoped deep audits show `confirmatory_resume_ready=false` for `2024-10,2024-11,2024-12` (`symbols_ok=0/5`, `panel_blocks=0`, blockers: REQUIRED_SERIES_GAPS_OR_MISSING, MISSING_FUNDING_MONTH_FILE, PROVENANCE_NOT_MACHINE_VERIFIED, INSUFFICIENT_SYMBOLS/30D_BLOCKS_FOR_CONFIRMATORY, CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES, CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS; `trackc_deep_audit_orchestrator_latest.json` SHA256 `90d228b9…`) and for `2026-11` (`symbols_ok=5/5`, `panel_blocks=0`, blockers: MISSING_FUNDING_MONTH_FILE, PROVENANCE_NOT_MACHINE_VERIFIED, INSUFFICIENT_30D_BLOCKS_FOR_CONFIRMATORY, CONFIRMATORY_REQUIRES_FROZEN_PREREG_BEFORE_OUTCOMES, CONFIRMATORY_REQUIRES_VERIFIED_PROVENANCE_CHECKSUMS; `trackc_deep_audit_orchestrator_2026_11.json`). `trackc_panel_window_plan_latest.json` (SHA256 `3c2bae46…`, 2026-11-10T02:40:56Z) fast signals: contiguous 2024-01..2026-11, blocks_fast=31 but `series_fast=false`, `funding_ok=false`, `confirmatory_resume_ready=false`. Prior audits/manifests/schema audits remain binding (missing 2026-11 funding month files for 5 symbols; series gaps 2024-10/11/12; provenance unverified). **No network. No outcomes. No invented data/provenance.**
 
@@ -14,10 +14,10 @@
    `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_gap_repair_manifest tests.test_trackc_funding_schema_audit tests.test_trackc_panel_window_planner.TestPanelWindowPlanner.test_contiguous_sequences tests.test_trackc_panel_window_planner.TestPanelWindowPlanner.test_cli_smoke tests.test_trackc_panel_deep_audit_orchestrator -v` → expect **39/39 OK**.
 
 2. **G3 — provenance-lineage ingestion (code + tests, local-only):**
-   - Inventory local provenance/manifest sidecars: `research_state/data_cache/manifest_extended.json` (1835 records, has `path/url/sha256/size_bytes`, types incl funding_rate_monthly/klines/mark/index/premium; paths exist), `manifest_extract.json` (3819 zip records with `zip/zip_sha256/dest/members/status`), `manifest_fclr002.json`, `manifest_fclr003.json`, `fclr002_panel.json`, `fclr002_panel_local.json`, `fclr011_panel.json`, etc. **Observation (2026-11-10T03:33:55Z):** no adjacent `*.sha256` sidecar files found under `research_state/data_cache/` (glob count 0), so current adjacent-sidecar provenance checks correctly report unverified.
-   - Extend Track C provenance verification to deterministically ingest applicable local manifest metadata (map cache-resident files ↔ manifest sha256/lineage; verify content hash where mapping is unambiguous) and emit machine-checkable fields: `provenance_verified`, `provenance_source` (adjacent_sidecar|manifest_record|none), `provenance_checked/ok/mismatch/unmapped` counts, blockers unchanged unless truly verified. Do **not** fabricate provenance, do **not** treat URL/manifest presence alone as verified without hash match, do **not** use network.
-   - Add/extend tests (e.g. `tests/test_trackc_provenance_lineage.py` or extend existing Track C tests) covering: manifest-backed hash match -> verified signal; mismatch/unmapped -> not verified + blocker; deterministic/no-network/no-outcomes; compatibility with existing orchestrator/admissibility behavior.
-   - Run scoped deep audits for `2024-10,2024-11,2024-12` and `2026-11` after changes and record whether any blockers are removed by verified lineage (expected: series/funding-month structural blockers may remain).
+   - **Script exists:** `scripts/trackc_provenance_lineage.py` (182 lines, deterministic stdlib-only, NO NETWORK/NO OUTCOMES) — loads `manifest_extended.json` (1835 records with path/url/sha256/size_bytes) and `manifest_extract.json` (3819 zip records with zip_sha256/dest/members/status), builds hash index, verifies file content hashes where mapping is unambiguous. Adjacent `*.sha256` sidecars supported but **glob count = 0** under `research_state/data_cache/` (observed 2026-11-10T03:33:55Z).
+   - **Integrate into Track C audits/orchestrator:** Extend `scripts/trackc_panel_deep_audit_orchestrator.py` and `scripts/trackc_panel_admissibility_audit.py` to consume `trackc_provenance_lineage.verify_paths_with_manifests()` results and emit machine-checkable fields: `provenance_verified`, `provenance_source` (adjacent_sidecar|manifest_record|none), `provenance_checked/ok/mismatch/unmapped` counts. Blockers unchanged unless truly verified.
+   - **Add tests:** Create `tests/test_trackc_provenance_lineage.py` covering: manifest-backed hash match → verified signal; mismatch/unmapped → not verified + blocker; deterministic/no-network/no-outcomes; compatibility with existing orchestrator/admissibility behavior.
+   - **Run scoped deep audits** for `2024-10,2024-11,2024-12` and `2026-11` after integration and record whether any blockers are removed by verified lineage (expected: series/funding-month structural blockers may remain; B2/B3 are structural).
 
 3. **If `confirmatory_resume_ready` becomes true from verified local prerequisites (unlikely):** freeze a **NEW** prereg version **before any outcome inspection** (derive/bump from `pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json`, SHA256 `4adf609e…`; record hashes), materialize panel + chronological splits with 7-day purge/embargo (>=3 non-overlapping 30-day OOS blocks, >=5 symbols) and run manifest, then run confirmatory pipeline only after prereg frozen (B0/B1/C1/C2, primary C2 vs B1 test QLIKE, block-bootstrap 2000 joint, Holm, calibration/concentration/leakage checks). No sealed-holdout reuse, no threshold shopping, no tuning on test.
 
@@ -46,15 +46,16 @@
 5. **Funding month-file schema/provenance checklist audit — COMPLETE.** `trackc_funding_schema_audit_2026_11.json` (`da36865d…`), `trackc_funding_schema_audit_2024Q1.json` (`253c16cd…`).
 6. **Local-only panel-window planner/ranker — COMPLETE.** `scripts/trackc_panel_window_planner.py` (`895b7abc…`) + `tests/test_trackc_panel_window_planner.py` (`e4fe0502…`), artifact `research_state/trackc_panel_window_plan_latest.json` (`3c2bae46…`).
 7. **Per-candidate deep-audit orchestrator — COMPLETE (G1/G2).** `scripts/trackc_panel_deep_audit_orchestrator.py` (`0499f41c…`) + `tests/test_trackc_panel_deep_audit_orchestrator.py` (`ae45a716…`, 8/8). Scoped audits: `trackc_deep_audit_orchestrator_latest.json` (`90d228b9…`, 2024-10..12) and `trackc_deep_audit_orchestrator_2026_11.json` (2026-11) — both `confirmatory_resume_ready=false`, `network_used=false`, `outcomes_computed=false`.
+8. **Provenance-lineage ingestion script — EXISTING.** `scripts/trackc_provenance_lineage.py` (`deterministic, stdlib-only, NO NETWORK/NO OUTCOMES`). **Missing: tests + integration into Track C audits/orchestrator.**
 
 ### Next focus campaign
 **Campaign: Track C provenance-lineage ingestion (G3) + blocker reclassification (local-only, no outcomes/network).** Execute §0 until verified provenance allows confirmatory resume from local prerequisites (then freeze NEW prereg before outcomes) OR until blockers are machine-demonstrated as structural/unrepairable locally with evidence.
 - **G1 (entry): GREEN** — dep-light 39/39, planner/orchestrator artifacts present, scoped execution.
 - **G2 (orchestrator): COMPLETE** — scoped deep audits emitted for key windows.
-- **G3 (provenance lineage): NEXT** — ingest/verify from local manifest metadata with tests; no fabricated provenance.
+- **G3 (provenance lineage): NEXT** — integrate existing `trackc_provenance_lineage.py` into Track C audits/orchestrator; add tests; no fabricated provenance.
 - **Exit:** confirmatory prereqs met → prereg+outcomes path; else structural stop recorded with evidence.
 
-## 1) VERIFIED (2026-11-10T03:33:55Z)
+## 1) VERIFIED (2026-11-10T04:15:00Z)
 
 | Check | Result |
 |---|---|
@@ -63,6 +64,7 @@
 | Deep audit 2024-10..12 | `research_state/trackc_deep_audit_orchestrator_latest.json` SHA256 `90d228b9…` (2026-11-10T03:15:27Z): `symbols_ok=0/5`, `panel_blocks_estimate=0`, `confirmatory_resume_ready=false`, `provenance_verified=false` |
 | Deep audit 2026-11 | `research_state/trackc_deep_audit_orchestrator_2026_11.json` (2026-11-10T03:27:11Z): `symbols_ok=5/5`, `panel_blocks_estimate=0`, `confirmatory_resume_ready=false`, `provenance_verified=false`, missing 2026-11 funding month files for all 5 symbols |
 | Local provenance sidecars | Adjacent `*.sha256` under `research_state/data_cache/`: **0**. Manifest metadata present: `manifest_extended.json` (1835 records, sha256/url/path), `manifest_extract.json` (3819 zip records, zip_sha256/dest/status), plus fclr002/fclr003/fclr011 manifests |
+| Provenance script | `scripts/trackc_provenance_lineage.py` — deterministic, stdlib-only, loads manifests, verifies content hashes. **Tests missing. Integration into audits missing.** |
 | Binding prereg skeleton | `research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json` SHA256 `4adf609e…` (before outcomes) |
 
 **Admissibility conclusion:** NO confirmatory trigger. `confirmatory_resume_ready=false`, `provenance_verified=false`. Do not compute outcomes. No network. No Track A probing.
@@ -70,6 +72,7 @@
 ## 2) KEY ARTIFACTS (paths/hashes as recorded)
 - `scripts/trackc_panel_window_planner.py` `895b7abc…`, `tests/test_trackc_panel_window_planner.py` `e4fe0502…`, `research_state/trackc_panel_window_plan_latest.json` `3c2bae46…`
 - `scripts/trackc_panel_deep_audit_orchestrator.py` `0499f41c…`, `tests/test_trackc_panel_deep_audit_orchestrator.py` `ae45a716…`
+- `scripts/trackc_provenance_lineage.py` (existing, no tests, not integrated)
 - `research_state/trackc_deep_audit_orchestrator_latest.json` `90d228b9…`, `research_state/trackc_deep_audit_orchestrator_2026_11.json`
 - `scripts/trackc_panel_admissibility_audit.py` `966ce2cf…`, `scripts/trackc_gap_repair_manifest.py` `51fd6b72…`, `scripts/trackc_funding_schema_audit.py` `78cbcd00…`
 - Prior: `trackc_panel_admissibility_latest.json` `b84f3bbe…`, `trackc_panel_admissibility_all_cache.json` `7d74c0be…`, `trackc_gap_repair_manifest_2026_11.json` `fa153f5b…`, `trackc_gap_repair_manifest_all_cache.json` `13b4644b…`, `trackc_funding_schema_audit_2026_11.json` `da36865d…`, `trackc_funding_schema_audit_2024Q1.json` `253c16cd…`
@@ -81,15 +84,14 @@
 - ❌ Conflate observed liquidations with modeled/synthetic boundary breaches
 - ❌ `.github/workflows` edits; schedulers/pollers/controllers
 - ❌ Download/probe/network for missing Track C files; bypass access controls
-- ❌ Fabricate provenance/outcomes; commit raw caches/zips/`__pycache__`/`ironflow_fastpath_cache.json`
+- ❌ Fabricate provenance/outcomes. No full-cache planner scans (scope to candidate windows)
 - ❌ Live/paper trading, order endpoints, credentials
-- ❌ Full-cache planner scans (scope to candidate windows)
 
 ## 4) SESSION START (mandatory)
 1. Read this file + `RESEARCH_PROMPT.md`; `git status --short`.
 2. Run dep-light gate (39/39) and record counts.
-3. Execute **§0 G3** (provenance-lineage ingestion + tests + re-audit), then §0 item 3/4 as applicable.
+3. Execute **§0 G3** (integrate `trackc_provenance_lineage.py` into Track C audits/orchestrator + create `tests/test_trackc_provenance_lineage.py` + re-audit), then §0 item 3/4 as applicable.
 4. Update this file with exact evidence, hashes, commands, test counts, UTC timestamp, and next unfinished task.
 
 ---
-**END OF SINGLE DURABLE HANDOFF. START AT §0 — HEAVY WORK REQUIRED.** `confirmatory_resume_ready=false`, `provenance_verified=false`. **Updated: 2026-11-10T03:33:55Z**
+**END OF SINGLE DURABLE HANDOFF. START AT §0 — HEAVY WORK REQUIRED.** `confirmatory_resume_ready=false`, `provenance_verified=false`. **Updated: 2026-11-10T04:15:00Z**
