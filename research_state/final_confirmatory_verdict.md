@@ -91,3 +91,20 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Not acted on unless a valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears. Track B/C 2024 confirmatory closed & sealed (H001 NOT_SUPPORTED); not relitigated, not reused.
 
 **Historical record preserved:** 2024 H001 NOT_SUPPORTED record above is NOT erased; this Track A addendum is appended alongside it.
+
+
+---
+
+## Track A Addendum — 2026-11-11T16:02:32Z (Hyperliquid successor evaluation completed, RV bottleneck removed)
+
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`
+**Determination:** `NOT_MET` — pre-registered successor C2 vs B1 forecast gate not met on observed Hyperliquid liquidation intensity.
+
+**What was done (this session, after 13:34:30Z Path-c closure):**
+1. Removed binding bottleneck: performed bounded, unauthenticated, first-time acquisition (not redundant polling) of Hyperliquid `candleSnapshot` 1h for 2026-05-01..2026-10-31 across BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI. Cached under `research_state/data_cache/hyperliquid_candles/<COIN>/<YYYY-MM>.json` (fetch report: `research_state/tracka_hl_candle_fetch_report_20261111T160053Z.json`, 54 coin-months cached/fetched, 0 errors).
+2. Rebuilt RV-augmented aligned panel `research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet` (sha256 `503bda8c...`) joining ironflow observed labels + Hyperliquid funding + mark-price RV features (RV1h/RV24h/RV168h, ema_dist, abs_fund_pct), all causal. Report: `research_state/tracka_hl_panel_with_rv_build_report_20261111T160124Z.json` (1656 buckets, 1647 with RV24h, 1434 with label, 1385 complete label+funding+RV, 9 symbols).
+3. Executed pre-registered successor evaluation per `research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json` (TRACKA-HL-S-20261111T133430Z, frozen pre-outcomes): QLIKE on next-24h observed liquidation intensity, 7d embargo, 3 non-overlapping 30-day test blocks, block bootstrap 2000 reps seed 20261111.
+
+**Primary contrast (C2 vs B1):** B1 mean QLIKE 72.133883 (n=693), C2 274.514250 (n=693). Mean diff (C2-B1) +202.380367, 95% CI [15.418948, 443.775055], relative QLIKE reduction -280.56% (C2 worse). Gate: >=2% reduction NOT_MET, CI excludes zero in wrong direction NOT_MET, >=5 paired instruments PASS (9), >=3 test blocks PASS (3). **Forecast gate: NOT_MET.**
+
+**Compliance:** no outcome inspection before prereg freeze; Hyperliquid-only (no Binance/2024 conflation); observed ironflow labels only (no modeled/proxy/synthetic); no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; bounded first-time candle acquisition (not redundant polling). Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal, fabricated=false), not acted on. Historical 2024 H001 record and prior 13:34:30Z Track A terminal addendum preserved; this addendum supersedes the context-insufficiency determination with the completed evaluation outcome.

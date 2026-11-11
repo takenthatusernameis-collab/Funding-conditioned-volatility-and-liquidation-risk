@@ -1,0 +1,240 @@
+{
+  "generated_utc": "2026-11-11T16:00:49Z",
+  "coins": {
+    "BTC": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "ETH": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "BNB": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "SOL": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "XRP": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "AVAX": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "DOGE": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "LINK": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    },
+    "SUI": {
+      "2026-05": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-06": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-07": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-08": {
+        "status": "cached",
+        "n": 744
+      },
+      "2026-09": {
+        "status": "cached",
+        "n": 720
+      },
+      "2026-10": {
+        "status": "cached",
+        "n": 744
+      }
+    }
+  },
+  "errors": []
+}
