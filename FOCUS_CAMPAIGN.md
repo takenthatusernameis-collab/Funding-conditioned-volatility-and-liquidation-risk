@@ -1,6 +1,6 @@
 # FOCUS_CAMPAIGN — Heavy-Work Execution Plan
 
-**Timestamp (UTC):** 2026-11-11T02:55:57Z
+**Timestamp (UTC):** 2026-11-11T02:57:54Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` → **SINGULAR NEXT TASK: `NONE`** pending a new admissible unauthenticated source.
@@ -25,3 +25,17 @@ Execute only when **all** reopen conditions in `NEXT_SESSION_TASK.md` hold:
 **Forbidden:** status-only work, polling, relitigation, threshold shopping, sealed-holdout reuse, Track A/B/C conflation, fabricated provenance, network/paid/manual/credentialed/bypassed data, overlay before forecast gate, `.github/workflows` edits.
 
 If reopen conditions are not met: **stop with evidence (`NONE`).**
+
+## Heavy-work enforcement for future agents
+
+Any future agent that resumes this repo **must**:
+1. First read `NEXT_SESSION_TASK.md` and verify reopen conditions are met
+2. If not met: output evidence of why conditions are not met and stop — `NONE` is the only valid output
+3. If met: produce a new preregistration in `research_state/run_manifest.json` BEFORE any computation
+4. Execute the pre-registered evaluation end-to-end with full leakage/split/provenance audits
+5. Produce auditable verdict artifacts in `research_state/` with timestamps and hashes
+6. Update `experiment_frontier.json`, `hypothesis_registry.json`, and `run_manifest.json` atomically
+
+**No exceptions. No shortcuts. No status-only output. Heavy work or stop.**
+
+(End of file - total 27 lines)

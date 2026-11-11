@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK — Single Durable Handoff (Initial Task Message)
 
-**Timestamp (UTC):** 2026-11-11T02:55:57Z
+**Timestamp (UTC):** 2026-11-11T02:57:54Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. This is the **single durable handoff**; treat `AGENT_HANDOFF.md` and `FOCUS_CAMPAIGN.md` as pointers only.
 
@@ -15,7 +15,9 @@
 ## Repo-name-prioritized state (both legs exhausted)
 
 1. **Funding-conditioned volatility (Track C/H1):** **NOT_SUPPORTED** on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014). Overlay ineligible; C2 vs B1 fails pre-registered forecast gate. Evidence: `research_state/final_confirmatory_verdict.md`, `research_state/evaluation_summary_FCLR003.md`, `research_state/hypothesis_registry.json`.
+
 2. **Modeled liquidation boundary breaches (Track B, proxy only — not observed liquidations):** **CONFIRMATORY_COMPLETE, NOT_SUPPORTED.** TB1 degenerate/inadmissible (zero test breaches). TB2 frozen `trackb_TB2_20261110T190405Z` (2024-01-01..2024-09-30, BTC/ETH/BNB/SOL/XRP, `synthetic_boundary_breach_h168_long_10x_m0`): event-adequate (619/5040, 12.3%) but forecast gate NOT_MET (Log Loss B1=0.292447→C2=0.287540, +1.68% < 2%; 95% CI crosses zero, p=0.488; Holm fails; <3 test blocks). Overlay not eligible. Evidence: `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`.
+
 3. **Observed liquidations (Track A):** **STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census; Binance `liquidationSnapshot` 404, `fapi forceOrders` 451; no admissible unauthenticated census found). Not locally repairable. Evidence: `research_state/track_a_structural_block.md`, `research_state/liquidation_sources_enumeration.md`, `research_state/alt_source_scan_latest.json`.
 
 ## Bottlenecks
@@ -46,3 +48,5 @@ python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manif
 python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
 ```
 Full `unittest discover tests` exceeds practical timeout (>5 min) without failure output; targeted Track C provenance suite is green (35/35). No bottleneck remains blocking; program stays `CONCLUDED_UNDER_CONSTRAINTS`.
+
+(End of file - total 48 lines)
