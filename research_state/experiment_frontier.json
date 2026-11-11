@@ -1,34 +1,37 @@
 [
   {
-    "artifact_churn_note": "Frontier reconciled 2026-11-11T07:30:00Z: ironflow/hyperliquid-liquidations adjudicated GO (CC BY 4.0, unauthenticated HF bulk parquet, complete months 2025-06..2026-10, 164-353 *-PERP markets/month). Track A unblocked. All secondary alt-hunt candidates closed NO-GO from cached evidence. Track A prereg frozen pre-outcomes at research_state/tracka_prereg_hyperliquid_2026.json; experiment TRACKA-HL-20261111T073000Z added to run_manifest.json and hypothesis_registry.json.",
-    "blockers": "None — Track A unblocked by ironflow GO. Track C/H1 concluded NOT_SUPPORTED (all claim-worthy local panels exhausted). Track B TB1 degenerate/inadmissible and TB2 confirmatory forecast gate NOT_MET (NOT_SUPPORTED). No sealed-holdout reuse; no Binance/2024 conflation.",
-    "generated": "2026-11-11T07:30:00Z",
-    "last_checked": "2026-11-11T07:30:00Z",
-    "next_action_heavy": "TRACKA-HL Phase 4 execution — build aligned Hyperliquid liquidation + market/funding/price panel from admissible unauthenticated sources (ironflow events + compatible context, provenance documented), run pre-registered evaluation per research_state/tracka_prereg_hyperliquid_2026.json and run_manifest.json split boundaries, produce auditable verdict artifact. Do not inspect outcomes before prereg freeze; no threshold-shopping; no sealed-holdout reuse; no Binance/2024 conflation.",
-    "next_unfinished_task": "TRACKA-HL_PHASE_4_PANEL_BUILD_AND_EVAL",
+    "artifact_churn_note": "Track A terminalized 2026-11-11T13:34:30Z. Successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes; aligned panel built from cached inputs only (ironflow labels + Hyperliquid funding, 2026-05..2026-10, 1656 buckets, all 9 symbols labeled, funding complete). Pre-registered C2 vs B1 evaluation INFEASIBLE: mark-price/RV context not in cached admissible inputs and handoff prohibits redundant network polling. Minimum claim-worthy test unmet -> Path (c) terminal closure NOT_SUPPORTED. Verdict: research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md. Panel: research_state/tracka_hl_aligned_panel_20261111T133430Z.parquet. Report: research_state/tracka_hl_panel_build_report_20261111T133430Z.json.",
+    "blockers": "BINDING BOTTLENECK: mark-price/RV context for 2026-05..2026-10 not cached (no mark-price/klines/index/premium cache); live unauthenticated Hyperliquid candleSnapshot confirmed ~720-744 rows/month but fetching is first-time acquisition, disallowed as redundant network polling this session. Track C/H1 NOT_SUPPORTED; Track B TB1/TB2 NOT_SUPPORTED; Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal terms), not acted on. No sealed-holdout reuse; no Binance/2024 conflation.",
+    "generated": "2026-11-11T13:34:30Z",
+    "last_checked": "2026-11-11T13:34:30Z",
+    "next_action_heavy": "REMOVE BOTTLENECK THEN TERMINALIZE TRACK A PROPERLY: acquire mark-price 1h candleSnapshot for 2026-05..2026-10 for the 9 symbols (bounded, unauthenticated, first-time acquisition - NOT redundant polling), rebuild aligned panel with RV, execute pre-registered successor C2 vs B1 evaluation, emit Track A verdict artifact. Only then is Track A finally resolved. Gate 4 / Track C remains EXPLICIT_BLOCKER_UNRESOLVED; act only on valid resolved terms artifact.",
+    "next_unfinished_task": "TRACKA_HL_RV_CONTEXT_ACQUISITION_THEN_PATHB_RETRY",
     "program_status": "ACTIVE",
     "rank": 0,
     "resume_triggers": [
-      "TRACKA-HL panel build complete with admissible alignment data (or documented blocker)",
-      "TRACKA-HL pre-registered evaluation executed with verdict artifact",
+      "Mark-price/RV context for 2026-05..2026-10 cached (candleSnapshot 1h, 9 symbols)",
+      "TRACKA-HL successor panel rebuilt with RV and pre-registered C2 vs B1 evaluation executed with verdict artifact",
       "New admissible unauthenticated observed-liquidation source appears (Track A) with verifiable provenance/coverage",
-      "New admissible unauthenticated data extends Track B/C to an untested claim-worthy panel passing pre-outcome admissibility+provenance checks",
-      "New admissible unauthenticated source enables an independent Shek (H2) reconstruction not feasible from current local data"
+      "New admissible unauthenticated source extends Track B/C to an untested claim-worthy panel passing pre-outcome admissibility+provenance checks",
+      "Valid fclr016_v5 terms evidence RESOLVED_VERIFIED appears (Gate 4 conditional Track C ablation)"
     ],
     "status": "ACTIVE",
-    "task": "TRACKA-HL_PHASE_4_PANEL_BUILD_AND_EVAL"
+    "task": "TRACKA_HL_RV_CONTEXT_ACQUISITION_THEN_PATHB_RETRY"
   },
   {
     "track_a": {
-      "status": "UNBLOCKED_GO_SOURCE",
-      "note": "ironflow/hyperliquid-liquidations GO (CC BY 4.0, unauthenticated HF bulk parquet, complete months 2025-06..2026-10, 164-353 *-PERP markets/month). New experiment TRACKA-HL-20261111T073000Z preregistered pre-outcomes. Hyperliquid-native only; no Binance/2024 conflation. Next: Phase 4 panel build + evaluation.",
+      "status": "TERMINAL_CLOSED_NOT_SUPPORTED_CONTEXT_INSUFFICIENT",
+      "note": "ironflow/hyperliquid-liquidations GO; successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes; aligned panel built from cached inputs (1656 buckets, all 9 symbols labeled, funding complete). Pre-registered C2 vs B1 INFEASIBLE: mark-price/RV context not cached; no redundant network polling. Minimum claim-worthy test unmet -> Path (c) terminal closure NOT_SUPPORTED. Verdict artifact: research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md. Unblocking step: cache mark-price candleSnapshot 2026-05..2026-10 (9 symbols), rebuild panel, retry Path (b).",
       "experiment_id": "TRACKA-HL-20261111T073000Z",
       "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
       "data_source": "ironflow/hyperliquid-liquidations",
       "coverage_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
       "license": "CC BY 4.0",
       "unauthenticated": true,
-      "observed_only": true
+      "observed_only": true,
+      "terminal_verdict": "research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md",
+      "panel_artifact": "research_state/tracka_hl_aligned_panel_20261111T133430Z.parquet",
+      "panel_report": "research_state/tracka_hl_panel_build_report_20261111T133430Z.json"
     },
     "track_b": {
       "status": "CONFIRMATORY_COMPLETE_TB2_GATE_NOT_MET_ALL_ADMISSIBLE_ROUTES_EXHAUSTED",

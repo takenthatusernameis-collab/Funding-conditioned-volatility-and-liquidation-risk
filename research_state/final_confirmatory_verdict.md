@@ -70,3 +70,24 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 4. **Only if new admissible data appears** (unauthenticated, with provenance/licenses/coverage, >=5 symbols, >=3 non-overlapping 30-day blocks) should a new experiment be pre-registered before examining outcomes.
 
 **Conclusion:** H001 is NOT_SUPPORTED. Confirmatory program closed out as negative with no path forward on existing admissible data.
+
+---
+
+## Track A Addendum — 2026-11-11T13:34:30Z (Hyperliquid observed liquidations, ironflow CC BY 4.0)
+
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md`
+**Determination:** `NOT_SUPPORTED` — Track A terminally closed via Path (c); context insufficient / claim-worthy minima unmet on cached admissible inputs. No outcome computed.
+
+**What was done this session (pre-outcome, frozen):**
+1. Froze successor prereg `research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json` (TRACKA-HL-S-20261111T133430Z) before any outcome computation: Hyperliquid-only, observed ironflow labels, no Binance/2024 conflation, no modeled/proxy/synthetic labels, window `2026-05-01..2026-10-31` (maximal admissible overlap per `tracka_alignment_patha_audit_20261111T125022Z.md`), 9 *-PERP symbols, input SHA256 checksums recorded, 7-day embargo, 3 non-overlapping 30-day test blocks temporally feasible.
+2. Built aligned panel `research_state/tracka_hl_aligned_panel_20261111T133430Z.parquet` from cached admissible inputs only (ironflow events 2026-05..2026-10 + Hyperliquid fundingHistory 2026-05..2026-10, 9 coins): 1656 symbol×24h buckets, 1434 with label (86.6%), 1656 with funding (100%), all 9 symbols labeled. Report: `research_state/tracka_hl_panel_build_report_20261111T133430Z.json`.
+3. Pre-registered primary contrast C2 vs B1 (QLIKE on next-24h liquidation intensity vs RV-only baseline) is **infeasible**: mark-price/1h-candle/RV context is NOT present in cached admissible inputs, and the handoff prohibits redundant network polling. Minimum claim-worthy test unmet (RV baseline not computable).
+4. No threshold-shopping, no sealed-holdout reuse, no Binance/2024 conflation, no modeled labels, no `.github/workflows` edits, no redundant network polling, no status-only output.
+
+**Binding bottleneck:** mark-price/RV context for 2026-05..2026-10 not cached. Live unauthenticated Hyperliquid `candleSnapshot` confirmed ~720-744 hourly rows/month for 2026-05..2026-10 across the 9 coins, but fetching it is first-time acquisition (disallowed as redundant network polling in this session).
+
+**Next session (bottleneck removal + heavy work):** Acquire mark-price 1h candleSnapshot for 2026-05..2026-10 for the 9 symbols (bounded, unauthenticated, first-time acquisition — NOT redundant polling), rebuild the aligned panel with RV, execute the pre-registered successor C2 vs B1 evaluation, and emit the Track A verdict artifact. Only then is Track A finally resolved.
+
+**Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Not acted on unless a valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears. Track B/C 2024 confirmatory closed & sealed (H001 NOT_SUPPORTED); not relitigated, not reused.
+
+**Historical record preserved:** 2024 H001 NOT_SUPPORTED record above is NOT erased; this Track A addendum is appended alongside it.

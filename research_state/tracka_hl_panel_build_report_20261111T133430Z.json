@@ -1,0 +1,171 @@
+{
+  "track": "A",
+  "experiment_id": "TRACKA-HL-S-20261111T133430Z",
+  "prereg_document": "research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json",
+  "generated_utc": "2026-11-11T13:34:30Z",
+  "window_utc": "2026-05-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+  "symbols": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP",
+    "AVAX",
+    "DOGE",
+    "LINK",
+    "SUI"
+  ],
+  "n_symbols": 9,
+  "admissible_overlap": "2026-05-01..2026-10-31",
+  "inputs": {
+    "ironflow_labels": {
+      "ironflow_events_2026-05.parquet": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+      "ironflow_events_2026-06.parquet": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+      "ironflow_events_2026-07.parquet": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c",
+      "ironflow_events_2026-08.parquet": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c",
+      "ironflow_events_2026-09.parquet": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e",
+      "ironflow_events_2026-10.parquet": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+      "rows_total": 1264105,
+      "months": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ]
+    },
+    "hyperliquid_funding": {
+      "hyperliquid_funding_BTC.json": "1c7d2b5d8c40c7b9e3ba84264bce214bb0f694f78aa8623d0b04b336c6a7e430",
+      "hyperliquid_funding_ETH.json": "2e3851fa6c541fecf3bbf399e8b8b87ad483c876a8010fa66a0f15b628815c5c",
+      "hyperliquid_funding_BNB.json": "92c9c9221eb331e2450253d423be2cf37a70a0118961d998a931bed35c11321a",
+      "hyperliquid_funding_SOL.json": "5aba146a9a587e4770884b5cfc7a1212d06e161049ed20c33512bb4c5f6e0ee3",
+      "hyperliquid_funding_XRP.json": "95d980a1688ab5f98764fe9f46683c37f418f546d91b809dde147b5465cf4781",
+      "hyperliquid_funding_AVAX.json": "d420bc4efe8b284eb4b974babba1e650fa043dd470440d3ce95d475dec3e48f4",
+      "hyperliquid_funding_DOGE.json": "91d3882a699796c354f6aa8159f4a4fa3b61ea05b857f04ae6b10b9c40e42e3b",
+      "hyperliquid_funding_LINK.json": "0dec3eaf2667caa7aa9ac277836f22ade3b909ee1623aff3fe441d3973fc8ac2",
+      "hyperliquid_funding_SUI.json": "78bd52963727f5a71f36c5eead5ab31a9b2f41deca2aa2d19c61a486c2251fef",
+      "rows_per_coin": {
+        "BTC": 8668,
+        "ETH": 8668,
+        "BNB": 8668,
+        "SOL": 8668,
+        "XRP": 8668,
+        "AVAX": 8668,
+        "DOGE": 8668,
+        "LINK": 8668,
+        "SUI": 8668
+      },
+      "coverage_utc": "2026-05-01..2026-10-30 (hourly)"
+    }
+  },
+  "panel": {
+    "path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/tracka_hl_aligned_panel_20261111T133430Z.parquet",
+    "sha256": "7a7c431bfd9fc66d34e4a9306e06d5f4847249950c0496a768f7d0c987197eda",
+    "total_buckets": 1656,
+    "buckets_with_label": 1434,
+    "buckets_with_funding": 1656,
+    "buckets_complete_label_and_funding": 1434,
+    "symbols_with_any_label": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "n_symbols_with_label": 9,
+    "min_paired_instruments_required": 5,
+    "min_paired_instruments_met": true
+  },
+  "coverage_by_coin": [
+    {
+      "coin": "AVAX",
+      "buckets": 184,
+      "label_buckets": 148,
+      "funding_buckets": 184,
+      "total_notional": 13064137.167147,
+      "total_events": 3533
+    },
+    {
+      "coin": "BNB",
+      "buckets": 184,
+      "label_buckets": 118,
+      "funding_buckets": 184,
+      "total_notional": 5928470.8238,
+      "total_events": 1840
+    },
+    {
+      "coin": "BTC",
+      "buckets": 184,
+      "label_buckets": 183,
+      "funding_buckets": 184,
+      "total_notional": 5601807425.242623,
+      "total_events": 352619
+    },
+    {
+      "coin": "DOGE",
+      "buckets": 184,
+      "label_buckets": 146,
+      "funding_buckets": 184,
+      "total_notional": 25109157.168608002,
+      "total_events": 5830
+    },
+    {
+      "coin": "ETH",
+      "buckets": 184,
+      "label_buckets": 178,
+      "funding_buckets": 184,
+      "total_notional": 1569899101.8320131,
+      "total_events": 90756
+    },
+    {
+      "coin": "LINK",
+      "buckets": 184,
+      "label_buckets": 144,
+      "funding_buckets": 184,
+      "total_notional": 15946336.633720001,
+      "total_events": 4328
+    },
+    {
+      "coin": "SOL",
+      "buckets": 184,
+      "label_buckets": 180,
+      "funding_buckets": 184,
+      "total_notional": 425314850.35396504,
+      "total_events": 71178
+    },
+    {
+      "coin": "SUI",
+      "buckets": 184,
+      "label_buckets": 163,
+      "funding_buckets": 184,
+      "total_notional": 31417565.578911003,
+      "total_events": 8599
+    },
+    {
+      "coin": "XRP",
+      "buckets": 184,
+      "label_buckets": 174,
+      "funding_buckets": 184,
+      "total_notional": 227550597.07766998,
+      "total_events": 36893
+    }
+  ],
+  "missingness": {
+    "buckets_missing_label": 222,
+    "buckets_missing_funding": 0
+  },
+  "feasibility": {
+    "rv_mark_price_cached": false,
+    "rv_baseline_b1_computable": false,
+    "reason": "mark-price / 1h candle / RV context NOT present in cached admissible inputs; handoff prohibits redundant network polling. Pre-registered C2 vs B1 primary contrast infeasible.",
+    "min_test_blocks_temporally_feasible": true,
+    "min_test_blocks": 3,
+    "claim_worthy_on_cache": false,
+    "determination": "Path (c) terminal closure (NOT_SUPPORTED / context insufficient) \u2014 see evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md"
+  }
+}
