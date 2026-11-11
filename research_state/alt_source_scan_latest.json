@@ -1,8 +1,8 @@
 {
-  "generated_utc": "20261107T171222Z",
+  "generated_utc": "20261111T044041Z",
   "cache_info": {
-    "source": "cache",
-    "generated_utc": "2026-11-07T08:14:52.638493+00:00",
+    "source": "live",
+    "generated_utc": "2026-11-11T04:40:41.082002+00:00",
     "queries": [
       "liquidation",
       "liquidations",
@@ -185,6 +185,14 @@
       "urls": [
         "https://huggingface.co/api/datasets/pCwOrM/werracle-oev-liquidation-dataset-2026",
         "https://huggingface.co/datasets/pCwOrM/werracle-oev-liquidation-dataset-2026/resolve/main/README.md"
+      ],
+      "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
+    },
+    {
+      "name": "hf_discovered__tanod_base-lending-liquidations",
+      "urls": [
+        "https://huggingface.co/api/datasets/tanod/base-lending-liquidations",
+        "https://huggingface.co/datasets/tanod/base-lending-liquidations/resolve/main/README.md"
       ],
       "notes": "Discovered via live HF /api/datasets?search=liquidation enumeration (query='liquidation'). Description: . Verify schema/coverage/license/unauthenticated access before scoring GO."
     }
