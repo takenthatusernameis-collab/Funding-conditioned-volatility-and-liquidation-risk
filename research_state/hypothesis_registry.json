@@ -71,7 +71,22 @@
       "venue": "hyperliquid_perpetuals",
       "observed_only": true,
       "determination": "INADMISSIBLE \u2014 documented infeasibility; pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 under new prereg with frozen ex-ante symbol selection/event-adequacy rules."
+    },
+    {
+      "id": "H_tracka_hl_symbol_expansion_liquidation_forecast",
+      "type": "primary_tracka_expansion",
+      "description": "Funding-conditioned features (C2) improve OOS forecasting of observed Hyperliquid liquidation intensity vs RV-only baseline (B1) on expanded ex-ante-selected symbol panel 2026-05..2026-10.",
+      "status": "SUPPORTED_PASS_PRIMARY_GATE",
+      "preregistered_utc": "2026-11-11T19:55:00Z",
+      "prereg_document": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+      "last_experiment": "TRACKA-HL-EXPANSION-20261111T195500Z",
+      "last_verdict": "forecast_gate_PASS",
+      "last_tested": "2026-11-11T20:30:00Z",
+      "venue": "hyperliquid_perpetuals",
+      "data_source": "ironflow/hyperliquid-liquidations",
+      "observed_only": true,
+      "evidence": "TRACKA-HL-EXPANSION-20261111T195500Z PASS: C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks (2026-05..2026-10, ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH)."
     }
   ],
-  "updated_utc": "2026-11-11T19:45:00Z"
+  "updated_utc": "2026-11-11T20:30:00Z"
 }

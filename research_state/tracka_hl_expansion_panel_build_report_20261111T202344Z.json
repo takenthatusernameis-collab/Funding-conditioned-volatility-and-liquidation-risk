@@ -1,0 +1,208 @@
+{
+  "experiment_id": "TRACKA-HL-EXPANSION-20261111T195500Z",
+  "generated_utc": "2026-11-11T20:23:48Z",
+  "prereg": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+  "universe": "research_state/tracka_hl_expansion_universe_20261111T201958Z.json",
+  "acquisition": "research_state/tracka_hl_expansion_acquisition_report_20261111T201958Z.json",
+  "symbols": [
+    "ZEC",
+    "NEAR",
+    "UNI",
+    "AAVE",
+    "CRV",
+    "ADA",
+    "LTC",
+    "BCH"
+  ],
+  "n_symbols": 8,
+  "window_utc": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
+  "inputs": {
+    "ironflow_labels": {
+      "ironflow_events_2026-05.parquet": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+      "ironflow_events_2026-06.parquet": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+      "ironflow_events_2026-07.parquet": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c",
+      "ironflow_events_2026-08.parquet": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c",
+      "ironflow_events_2026-09.parquet": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e",
+      "ironflow_events_2026-10.parquet": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+      "rows_total": 1264105
+    },
+    "hyperliquid_funding": {
+      "hyperliquid_funding_ZEC.json": "74b6afa0bcc16da2a95fa56f37b3537b838ab0611a52dbad68f8a1b63c4d17cb",
+      "hyperliquid_funding_NEAR.json": "f72d3b82f0dca14b6375ed4bb4ad30da57960289ecfad33bcf64fee421746412",
+      "hyperliquid_funding_UNI.json": "f17120db00764a6f5d14d2254a905867e890a0fe6b2824887e8b5e9a11b20f13",
+      "hyperliquid_funding_AAVE.json": "257336d880d2b7917394cb216f784e5d9f7ec7faa986b79497b8d09bcd7c23fc",
+      "hyperliquid_funding_CRV.json": "3ddb6fcfaa40d82dd353f5c03758eb44e440ceca9c74304378ad7e06dcb6cf1e",
+      "hyperliquid_funding_ADA.json": "907256f7f160a488df815dc6b20fbfc7224ed67a2bafd8f1c296adb9316ecdfa",
+      "hyperliquid_funding_LTC.json": "a7b98a80ba1a31a1061fbe6b7dea032606bc3f70401b686456c546929488153a",
+      "hyperliquid_funding_BCH.json": "ff2b4099144a0f4594323c37414ddc12dceac3d10c1ee5f097b93889110e8f90",
+      "rows_per_coin": {
+        "ZEC": 4416,
+        "NEAR": 4416,
+        "UNI": 4416,
+        "AAVE": 4416,
+        "CRV": 4416,
+        "ADA": 4416,
+        "LTC": 4416,
+        "BCH": 4416
+      }
+    },
+    "hyperliquid_candles": {
+      "hyperliquid_candles_ZEC_2026-05.json": "c99ce71ed4449d4d42578e92f977182a5bdbb01515fb5d32ef5b994791d26c03",
+      "hyperliquid_candles_ZEC_2026-06.json": "669f7d949c77a2148f0267ee066d951f431d5767a2c023977df78d8849d3dd20",
+      "hyperliquid_candles_ZEC_2026-07.json": "d6291f5f7cc43e22a8c923a864b49f024451a16ce8ce9b17227d1ce3024f1302",
+      "hyperliquid_candles_ZEC_2026-08.json": "fdc116233931b28ba9cd85b382bf0d92a40667b904731e4038d641e55da01957",
+      "hyperliquid_candles_ZEC_2026-09.json": "63754fccc88ee49db2d0110122d08567cf7f8f9afca70e0d7fd455ea71e6ca2a",
+      "hyperliquid_candles_ZEC_2026-10.json": "11a88eb631cb18ae77bc9defdfde449727e8061a4077d8d4482d348800564a69",
+      "hyperliquid_candles_NEAR_2026-05.json": "0b4c0373b8252bf5ce74f646ff4e3d42d3023cbda0b6b2d66bbfff8903a6efea",
+      "hyperliquid_candles_NEAR_2026-06.json": "f5c8ab4f331fe240b42cdd71ce51abd71969f2d765c834f4487f165271d8d3c7",
+      "hyperliquid_candles_NEAR_2026-07.json": "3691667d2a386935a5ad16ae6a9cbe7d4846472cb28e320c69541d4d4ce1cf81",
+      "hyperliquid_candles_NEAR_2026-08.json": "e61e19248f87ceed625a07e3ababdcec0e7a0369ec7842ac109dfeeb3264cdc2",
+      "hyperliquid_candles_NEAR_2026-09.json": "2c993b04139f493c43b2119ecd515c419b507029677ae92b0fb626d7579170a7",
+      "hyperliquid_candles_NEAR_2026-10.json": "13c703ea2cb170caa90fe373b6da09bd311bf26cb2f204a4304a28a8f1312977",
+      "hyperliquid_candles_UNI_2026-05.json": "2c67fe9df7d4b10c349c0f7c3563d06cc679338893787247d5b1d15fd4248e71",
+      "hyperliquid_candles_UNI_2026-06.json": "4bf50e486b7c80e05201b4f87cd2c829c928944e2c21384d2e787599837de8ed",
+      "hyperliquid_candles_UNI_2026-07.json": "5b3d9940c14a222c1a3009c63346d0cded5653b8783edf00a71554e2f5b43efb",
+      "hyperliquid_candles_UNI_2026-08.json": "5d53d14203bb29368154c395768e666e62831736243384d7ab9becd29f558958",
+      "hyperliquid_candles_UNI_2026-09.json": "befba340f830f49f056d8d3cc56a877e53d4bb6bfc2ceb8a668e4c72345b1190",
+      "hyperliquid_candles_UNI_2026-10.json": "14d6ef624f630bcbe5360fc6704801417f7c23c589f4fca32e99bcfa294e5e34",
+      "hyperliquid_candles_AAVE_2026-05.json": "323f5bcfab92004d91ed23505096ab4d6ac6206a90e5e094dae8995507dd9c4b",
+      "hyperliquid_candles_AAVE_2026-06.json": "173234c6d91d9adb005b12d2435c7480dd808e213c9739f9e50f5da96ffc2546",
+      "hyperliquid_candles_AAVE_2026-07.json": "e16d69452f7f29a7e9e0d6860939793c7886d89e427f1e7ea6cf9ce4c4ce3d63",
+      "hyperliquid_candles_AAVE_2026-08.json": "b9a608a7258d144f52cd608c9ce41c3e7e69b060dce87da2386a60e3462e367b",
+      "hyperliquid_candles_AAVE_2026-09.json": "5cbfde7d393165a38edb8fd5a3300e11011a77486648f1a68bbe9de80dda6fb2",
+      "hyperliquid_candles_AAVE_2026-10.json": "fb0f5ec3dad68965815254f17c91c39bbf24143eab9894833f547f591675a829",
+      "hyperliquid_candles_CRV_2026-05.json": "1671d79d6d125dba3bcbb431cd45f7660a9c8036cca315d2d41184cfbae9888f",
+      "hyperliquid_candles_CRV_2026-06.json": "e818ec11480c3d2ee8c7cdaebffd0bbaefe7e6f8d2e72f72ad6cac976d91200b",
+      "hyperliquid_candles_CRV_2026-07.json": "6d0d67c9ee44d035585d085acaa8ddefc73b2541ee66bca9640e9bb194cfa0d2",
+      "hyperliquid_candles_CRV_2026-08.json": "85683e04574171b1f170ac621088fc121839ad5743586c1fc578e2b2babce0a8",
+      "hyperliquid_candles_CRV_2026-09.json": "79311065aa62b81225d2e350980bc6cbda66d9e872f946425a02d48ba85c3aad",
+      "hyperliquid_candles_CRV_2026-10.json": "d5306300f7450e82796f5b8441c99bec317e6a66e1e6b79071d91473fbc600c2",
+      "hyperliquid_candles_ADA_2026-05.json": "7da8a712998a42570e9eb189d0b711187d45b7cf90c48196060c08766407b117",
+      "hyperliquid_candles_ADA_2026-06.json": "a867155817cda6d6c0a3e0556f3adf9bb4fee9086723b41ecbfcdd8dd664eccc",
+      "hyperliquid_candles_ADA_2026-07.json": "bfdfb19dbc689609138936553ba8059102332906ce974907da19dedb902b5143",
+      "hyperliquid_candles_ADA_2026-08.json": "2af355459cc12581eb6d9eddce9f01c07b6d93054c615a15302a0222d75d9f16",
+      "hyperliquid_candles_ADA_2026-09.json": "bbe347c6136dbdeb55e17ff90d514d917ddb14d6a46dfc7bb478eca142b99988",
+      "hyperliquid_candles_ADA_2026-10.json": "476123918ed3706df484b7aff5f748caa73e14c11c1213edc6f90e4716136d18",
+      "hyperliquid_candles_LTC_2026-05.json": "d5fe7b1279a60661f4816b674e73f690f85b03203d9381b548f605a83a4d4882",
+      "hyperliquid_candles_LTC_2026-06.json": "60b9bf3a7e700e30bd8270559674b1d95923d6a87d41531a795a57a06d33d209",
+      "hyperliquid_candles_LTC_2026-07.json": "47d6c078893453787baaccb0b690c6a2f2ca1ca3d2e9f6c9bd588677715ee4a1",
+      "hyperliquid_candles_LTC_2026-08.json": "61b5fd631895c1d15c253d1b6250043bfd68b662c75dd8b85eda5b6085b8a5c8",
+      "hyperliquid_candles_LTC_2026-09.json": "cc2265694237bb0eaf560848ec06a9cf1f01437164f2ab8599b7b9b00287cab0",
+      "hyperliquid_candles_LTC_2026-10.json": "33114d6eb1219ad6d2299d51498340452f93af7807a5f1b8ac12a5faead6459c",
+      "hyperliquid_candles_BCH_2026-05.json": "25890363466da5673e4f9689210e061e071c68bd12b0ad2fc790a922957e53f0",
+      "hyperliquid_candles_BCH_2026-06.json": "efa1d41c63e143bc22544eab58d63fdd0ab8eeb729adbe943c7362ae1e1c4057",
+      "hyperliquid_candles_BCH_2026-07.json": "5942e7589c836ac4ef90d72fee89241caf2250b19bae7c4b0d75bc666be22365",
+      "hyperliquid_candles_BCH_2026-08.json": "e8bd6a484a8c5ad74a6b1c70ca87b501120685e59b511df21da64b4e97c80890",
+      "hyperliquid_candles_BCH_2026-09.json": "ed0b3497249f0b71b3b79a9067ca2cee6125182fae8e0f83d9faef4cc8e6eb1e",
+      "hyperliquid_candles_BCH_2026-10.json": "0add4f0a745c306a4318eb396075dfacd9ce773dd15a0c83464a64971219a4be",
+      "rows_per_coin": {
+        "ZEC": 4416,
+        "NEAR": 4416,
+        "UNI": 4416,
+        "AAVE": 4416,
+        "CRV": 4416,
+        "ADA": 4416,
+        "LTC": 4416,
+        "BCH": 4416
+      }
+    }
+  },
+  "panel": {
+    "path": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+    "sha256": "39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699",
+    "total_buckets": 1472,
+    "buckets_with_label": 1203,
+    "buckets_with_funding": 1472,
+    "buckets_with_rv24h": 1464,
+    "buckets_complete_label_funding_rv": 1168,
+    "symbols_with_any_label": [
+      "AAVE",
+      "ADA",
+      "BCH",
+      "CRV",
+      "LTC",
+      "NEAR",
+      "UNI",
+      "ZEC"
+    ],
+    "n_symbols_with_label": 8
+  },
+  "coverage_by_coin": [
+    {
+      "coin": "AAVE",
+      "buckets": 184,
+      "label_buckets": 157,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 19606071.398029998,
+      "total_events": 5252
+    },
+    {
+      "coin": "ADA",
+      "buckets": 184,
+      "label_buckets": 151,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 11001971.128300004,
+      "total_events": 4545
+    },
+    {
+      "coin": "BCH",
+      "buckets": 184,
+      "label_buckets": 129,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 4448231.092358001,
+      "total_events": 2042
+    },
+    {
+      "coin": "CRV",
+      "buckets": 184,
+      "label_buckets": 144,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 13270049.215122001,
+      "total_events": 2771
+    },
+    {
+      "coin": "LTC",
+      "buckets": 184,
+      "label_buckets": 110,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 9387976.66619,
+      "total_events": 2797
+    },
+    {
+      "coin": "NEAR",
+      "buckets": 184,
+      "label_buckets": 170,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 135384731.604511,
+      "total_events": 23575
+    },
+    {
+      "coin": "UNI",
+      "buckets": 184,
+      "label_buckets": 162,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 28603918.222760003,
+      "total_events": 6570
+    },
+    {
+      "coin": "ZEC",
+      "buckets": 184,
+      "label_buckets": 180,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "total_notional": 459575772.6896753,
+      "total_events": 48104
+    }
+  ],
+  "notes": [
+    "causal features via backward merge_asof; RV rolling past-only; abs_fund_pct strictly past 90d; embargo 7d per prereg",
+    "evaluation run after panel build complete in same preregistered execution"
+  ]
+}

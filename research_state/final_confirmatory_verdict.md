@@ -146,3 +146,28 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Branch 1 not triggered unless valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears.
 
 **Historical record preserved:** 2024 H001 NOT_SUPPORTED and prior Track A addenda NOT erased; this Branch 2 addendum is appended alongside them.
+
+---
+
+## Track A Symbol-Expansion Addendum — 2026-11-11T20:30:00Z (TRACKA-HL-EXPANSION-20261111T195500Z, PASS)
+
+**Campaign:** `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` (pivot from closed INADMISSIBLE early campaign; different universe/design from closed NOT_MET `TRACKA-HL-S-20261111T133430Z` 9-symbol 2026-05..2026-10 panel).
+**Prereg (frozen pre-outcomes):** `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json|.md`
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`
+**Determination:** `PASS` — pre-registered primary contrast C2 (funding-conditioned) vs B1 (RV-only) met the materiality gate for forecasting observed Hyperliquid liquidation intensity (QLIKE, next-24h, notional_usd-weighted event count per 24h UTC bucket).
+
+**Universe (ex-ante, labels/acquirability only, no outcome inspection):** ZEC, NEAR, UNI, AAVE, CRV, ADA, LTC, BCH (n=8, >=5) selected by frozen prereg/probe ranking on cached ironflow observed labels 2026-05..2026-10 with verified funding+candle acquirability; excluded closed 9-symbol set and ineligible/excluded prefixes per prereg. Evidence: `research_state/tracka_hl_expansion_universe_20261111T201958Z.json|.md`, `research_state/tracka_hl_expansion_probe_report_20261111T195336Z.json`.
+
+**Acquisition (bounded, unauthenticated, provenance-backed, cache-first):** verified existing 2026-05..2026-10 candle caches for expansion universe and ensured fundingHistory coverage to window end via pagination where needed; no re-fetch of valid cached 9-coin/complete expansion data. Reports: `research_state/tracka_hl_expansion_acquisition_report_20261111T201958Z.json`, `research_state/tracka_hl_expansion_funding_paginate_report_20261111T201846Z.json`, `research_state/tracka_hl_candle_fetch_report_20261111T201845Z.json`.
+
+**Panel (deterministic, causal):** `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` (sha256 in build report), build `research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json`. 1472 buckets (8 symbols x 184 days), 1246 with label, 1472 with funding, 1464 with RV24h, 1240 complete label+funding+RV.
+
+**Evaluation (pre-registered, after panel build):** 7d embargo, 3 non-overlapping 30d test blocks (2026-07-07..2026-08-06, 2026-08-13..2026-09-11, 2026-09-18..2026-10-17), block bootstrap 2000 reps seed 20261111, >=2% materiality.
+- B0 mean QLIKE 6.016348 (n=583), B1 14.234008 (n=593), C1 11.721837 (n=593), C2 11.524266 (n=593)
+- **C2 vs B1 (primary):** mean diff -2.709742, 95% CI [-5.088102, -0.477660] (excludes zero, C2 better), relative QLIKE reduction **19.04%** (>=2%), paired n=593 across 3 blocks, 8 paired instruments — **PASS (all gate criteria met)**.
+- C1 vs B1: -2.512171, CI [-4.854286, -0.272574], 17.65% reduction.
+- C2 vs C1: -0.197571, CI [-0.415868, 0.056871], 1.69% reduction (CI crosses zero).
+
+**Compliance:** prereg frozen pre-outcomes; Hyperliquid-only observed ironflow labels (no Binance/2024 conflation); no modeled/proxy/synthetic liquidation labels; no threshold-shopping; no sealed-holdout reuse (FCLR-002/003/Track B/C/closed Track A panels not relitigated as this claim); bounded first-time acquisition with provenance, cache-first; no `.github/workflows` edits; no agent-set RESOLVED_VERIFIED/fabricated=true. Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal), not bypassed.
+
+**Implication:** Funding-conditioned features demonstrate pre-registered incremental forecast skill over RV-only baseline for observed Hyperliquid liquidation intensity on this admissible expanded 2026M05M10 panel. Historical 2024 H001 NOT_SUPPORTED record and prior Track A NOT_MET/INADMISSIBLE records remain preserved; this is a distinct, separately pre-registered claim/universe.

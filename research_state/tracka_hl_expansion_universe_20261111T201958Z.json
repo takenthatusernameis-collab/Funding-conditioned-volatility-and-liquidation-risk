@@ -1,0 +1,397 @@
+{
+  "generated_utc": "2026-11-11T20:19:58Z",
+  "experiment_id": "TRACKA-HL-EXPANSION-20261111T195500Z",
+  "prereg": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+  "probe_report": "research_state/tracka_hl_expansion_probe_report_20261111T195336Z.json",
+  "selection_basis": "ex-ante observed ironflow label notional rank over 2026-05..2026-10 from probe (labels only), filtered by prereg eligibility (>=2 label months, *-PERP, not in closed 9/excluded prefixes) and verified acquirability of fundingHistory+candleSnapshot for 2026-05-01..2026-10-31",
+  "closed_excluded": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP",
+    "AVAX",
+    "DOGE",
+    "LINK",
+    "SUI"
+  ],
+  "selected_universe": [
+    "ZEC",
+    "NEAR",
+    "UNI",
+    "AAVE",
+    "CRV",
+    "ADA",
+    "LTC",
+    "BCH"
+  ],
+  "n_selected": 8,
+  "min_required": 5,
+  "meets_min": true,
+  "evidence": {
+    "ZEC": {
+      "label_notional_usd": 459575772.68967533,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "NEAR": {
+      "label_notional_usd": 135384731.60451102,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "UNI": {
+      "label_notional_usd": 28603918.22276,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "AAVE": {
+      "label_notional_usd": 19606071.398029998,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "CRV": {
+      "label_notional_usd": 13270049.215122,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "ADA": {
+      "label_notional_usd": 11001971.1283,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "LTC": {
+      "label_notional_usd": 9387976.666190002,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    },
+    "BCH": {
+      "label_notional_usd": 4448231.092358001,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible_by_labels": true,
+      "funding_rows": 4416,
+      "funding_first_ms": 1777593600045,
+      "funding_last_ms": 1793487600044,
+      "funding_covers_window_end": true,
+      "candles_months_cached": true
+    }
+  },
+  "not_selected": [
+    {
+      "coin": "DOT",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 3667410.8162089996
+    },
+    {
+      "coin": "HBAR",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 3478027.643734999
+    },
+    {
+      "coin": "FIL",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 2392052.3103019996
+    },
+    {
+      "coin": "TRX",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 2153687.8347
+    },
+    {
+      "coin": "ICP",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 1482147.22972
+    },
+    {
+      "coin": "ALGO",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 1365526.893947
+    },
+    {
+      "coin": "ETC",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 556167.307279
+    },
+    {
+      "coin": "ATOM",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 482338.92287799995
+    },
+    {
+      "coin": "COMP",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 163476.89424
+    },
+    {
+      "coin": "CELO",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 120050.99650299999
+    },
+    {
+      "coin": "SNX",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 116355.55006900002
+    },
+    {
+      "coin": "IOTA",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 110576.57617899997
+    },
+    {
+      "coin": "SUSHI",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 61735.064635
+    },
+    {
+      "coin": "RSR",
+      "reason": "eligible_by_labels_but_not_selected (rank/acquirability scope for this bounded run)",
+      "label_notional_usd": 41144.086563000004
+    },
+    {
+      "coin": "VET",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "FTM",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "MKR",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "1INCH",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "BAL",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "BNT",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "CTSI",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "ENJ",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "KSM",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "NU",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "OCEAN",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "OMG",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "ONT",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "QTUM",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "ZIL",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "CHZ",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "IOST",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "HOT",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "MTL",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "NEXO",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "PNT",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "REN",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "STMX",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "TROY",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "WAN",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    },
+    {
+      "coin": "WAVES",
+      "reason": "ineligible_by_prereg_label_rule",
+      "label_notional_usd": 0.0,
+      "months_with_event": []
+    }
+  ]
+}

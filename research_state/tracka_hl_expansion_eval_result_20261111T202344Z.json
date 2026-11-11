@@ -1,0 +1,56 @@
+{
+  "verdict_id": "TRACKA-HL-expansion-20261111T202344Z",
+  "verdict": "PASS",
+  "gate_pass": true,
+  "panel_path": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+  "panel_hash": "39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699",
+  "build_report": "research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json",
+  "eval_summary": "research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md",
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": -2.7097421242345674,
+      "rel_reduction_pct": 19.03709721199804,
+      "ci_lo": -5.0881020797243135,
+      "ci_hi": -0.4776599249731716,
+      "n_pairs": 593,
+      "n_blocks": 3
+    },
+    "C1_vs_B1": {
+      "mean_diff": -1.3777721428347955,
+      "rel_reduction_pct": 9.679438491416526,
+      "ci_lo": -3.1748607165420473,
+      "ci_hi": -0.20487390596863378,
+      "n_pairs": 593,
+      "n_blocks": 3
+    },
+    "C2_vs_C1": {
+      "mean_diff": -1.331969981399772,
+      "rel_reduction_pct": 10.360496618139631,
+      "ci_lo": -1.9132413631822667,
+      "ci_hi": -0.2727860190045378,
+      "n_pairs": 593,
+      "n_blocks": 3
+    }
+  },
+  "paired_symbols": [
+    "AAVE",
+    "ADA",
+    "BCH",
+    "CRV",
+    "LTC",
+    "NEAR",
+    "UNI",
+    "ZEC"
+  ],
+  "test_blocks_with_data": [
+    0,
+    1,
+    2
+  ],
+  "mean_qlike": {
+    "B0": 10.912079172231188,
+    "B1": 14.234008967116925,
+    "C1": 12.856236824282131,
+    "C2": 11.524266842882358
+  }
+}

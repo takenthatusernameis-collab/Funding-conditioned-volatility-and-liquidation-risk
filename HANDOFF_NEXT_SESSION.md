@@ -1,20 +1,19 @@
 # SINGLE DURABLE HANDOFF — NEXT AGENTIC WORK SESSION
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T20:07:07Z
+**Handoff timestamp (UTC):** 2026-11-11T20:30:00Z
 **Status:** AUTHORITATIVE. Execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are pointers. Ignore conflicting/stale docs.
 
 ## INITIAL TASK MESSAGE (EXECUTE NOW)
-**Mission (repo-prioritized):** Advance funding-conditioned **liquidation-risk forecasting** (co-equal with volatility forecasting) on admissible, unauthenticated, provenance-backed data. Do **not** idle, do **not** produce status-only output, and do **not** relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts plus consistent state updates.
+**Mission (repo-prioritized):** Advance funding-conditioned **liquidation-risk forecasting** and co-priority **volatility forecasting** on admissible, unauthenticated, provenance-backed data. Do **not** idle, do **not** produce status-only output, and do **not** relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts plus consistent state updates.
 
-**Verified entry state (2026-11-11):**
+**Verified entry state (2026-11-11T20:30Z):**
 - **Gate 4 / Branch 1:** BLOCKED (external, human/legal). `research_state/fclr016_local_audit/` contains no valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json`; blocker: `fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json` (`fabricated=false`). Do **not** set `RESOLVED_VERIFIED`/`fabricated=true` or bypass terms.
-- **Track A closed (do not relitigate):** `TRACKA-HL-S-20261111T133430Z` 2026-05..2026-10 9-symbol successor **NOT_MET** (`research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`). Early window `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` / `TRACKA-HL-EARLY-20261111T191958Z` **INADMISSIBLE** (`research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md`).
+- **Track A (closed records, do not relitigate):**
+  - `TRACKA-HL-S-20261111T133430Z` 2026-05..2026-10 9-symbol successor **NOT_MET** (`research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`).
+  - Early `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` / `TRACKA-HL-EARLY-20261111T191958Z` **INADMISSIBLE** (`research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md`).
+  - **Completed this session:** `TRACKA-HL-EXPANSION-20261111T195500Z` / `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` **PASS** on pre-registered primary gate (C2 vs B1, QLIKE next-24h observed Hyperliquid liquidation intensity, 2026-05..2026-10, ex-ante 8-symbol universe ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH; rel reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks). Artifacts: `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, `research_state/tracka_hl_expansion_eval_result_20261111T202344Z.json`, `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`, `research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json`, `research_state/tracka_hl_expansion_universe_20261111T201958Z.json|.md`, `research_state/tracka_hl_expansion_acquisition_report_20261111T201958Z.json`. State updated in `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md`. Treat as recorded; do not relitigate or retune.
 - **Track B/C (2024):** closed negative; sealed holds immutable.
-- **Active Branch 2 campaign (frozen prereg, in progress):** `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` / `TRACKA-HL-EXPANSION-20261111T195500Z`.
-  - Prereg (frozen pre-outcomes): `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json|.md`
-  - Ex-ante label probe (labels only): `research_state/tracka_hl_expansion_probe_report_20261111T195336Z.json`
-  - Cached inputs: ironflow labels `research_state/data_cache/ironflow_events/2025-05..2026-10.parquet`; HL funding/candles for original 9 coins; **partial expansion caches already present** for top candidates `ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH` (candles 2026-05..2026-10 under `hyperliquid_candles/<COIN>/`; funding files exist but may be incomplete/partial — verify coverage vs `2026-05-01..2026-10-31` before use). `DOT,HBAR,FIL,TRX,ICP,ALGO,ETC` have no caches.
-  - Scripts present: `scripts/tracka_hl_expansion_probe.py`, `scripts/tracka_hl_expansion_funding_paginate.py`, `scripts/tracka_hl_fetch_candles_successor.py`, `scripts/tracka_hl_build_panel_with_rv.py`, `scripts/tracka_hl_evaluate_successor.py` (verify/adapt parameters for expansion universe/window; do not guess).
+- **Cached admissible assets:** ironflow observed labels 2025-05..2026-10 (432 PERP markets), Hyperliquid funding/candles for 9 original + 8 expansion coins (and related caches) under `research_state/data_cache/` with provenance where recorded. Reuse cache-first; verify coverage before any fetch.
 
 ## REQUIRED HEAVY WORK — EXECUTE FIRST APPLICABLE BRANCH
 
@@ -23,35 +22,35 @@
 **Actions (deterministic, in order):** run promotion/admissibility validators (`scripts/fclr016_v5_promotion_dryrun.py`, `scripts/fclr016_validate_v5_admissibility.py`, `scripts/fclr016_v5_preflight_summary.py` or equivalents) with required `--expect-go`; only on all-green GO execute confirmatory Track C multi-split ablation on frozen 2025+ panel (>=7d purge/embargo, train-only normalization, block-bootstrap ΔQLIKE CIs, pre-registered contrasts/thresholds); emit verdict(s) and update `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md` atomically.
 **If absent (current):** proceed to Branch 2.
 
-### Branch 2 (DEFAULT, MANDATORY NOW): `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10`
-**Goal:** Execute pre-registered symbol-expansion Track A claim on `2026-05-01..2026-10-31` (or prereg subwindow): **C2 (funding-conditioned) vs B1 (RV-only)** forecasting **observed** Hyperliquid liquidation intensity on a NEW ex-ante-selected universe (not a rerun of closed 9-symbol NOT_MET panel). Prereg is frozen — **do not modify prereg/split/selection rules** and **do not inspect forecast outcomes before panel/build is complete** per prereg.
+### Branch 2 (DEFAULT, MANDATORY NOW): `GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS` (co-priority, pre-registered heavy work)
+**Goal:** Advance **funding-conditioned volatility forecasting** on an admissible, untested Hyperliquid/cache-backed panel (co-priority with liquidation risk). Expansion liquidation PASS is recorded; do not rerun/retune it. Pursue new confirmatory-quality or pre-registered exploratory evidence for volatility on data not sealed/closed by prior negative 2024 Track C claims, with no Binance/2024 conflation.
 
 **Execute in order (substantive artifacts required):**
-1. **Finalize ex-ante universe selection (labels/acquirability only).** Apply frozen rules from `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json` using cached ironflow labels and `research_state/tracka_hl_expansion_probe_report_20261111T195336Z.json`: confirm eligible `*-PERP` candidates (>=2 label months, exclude closed 9 + excluded prefixes/stables/fiat per prereg), choose target paired universe **>=5** by ex-ante notional rank subject to funding+candle acquirability, document final inclusion/exclusion with evidence in `research_state/tracka_hl_expansion_universe_<UTC>.json|.md`. **No cherry-picking, no test-set performance, no outcome inspection.**
-2. **Bounded first-time unauthenticated acquisition (missing inputs only).** For each selected symbol missing/partial funding or 1h candles for required 2026-05..2026-10 months, fetch Hyperliquid `fundingHistory` and/or `candleSnapshot` and cache with provenance (`.accessed.json` + `.sha256`) under `research_state/data_cache/hyperliquid_funding/` and `research_state/data_cache/hyperliquid_candles/<COIN>/`. **Do not re-fetch already-valid cached 9-coin 2026-05..2026-10 data or any already-complete expansion files; verify coverage before fetch.** Rate-limit responsibly, cache-first. Emit `research_state/tracka_hl_expansion_acquisition_report_<UTC>.json`.
-3. **Build deterministic RV-augmented expansion panel.** Join observed ironflow labels + funding + 1h candle-derived RV features (causal) per prereg for final universe; emit `research_state/tracka_hl_expansion_panel_<UTC>.parquet` and build report `..._build_report_<UTC>.json|.md` with hashes, coverage, leakage/embargo notes, symbol-month completeness, label/funding/RV availability, exact subwindow if narrowed by prereg rule.
-4. **Run pre-registered evaluation only after (1)-(3).** C2 vs B1 QLIKE on next-24h observed liquidation intensity, 7d embargo, >=3 non-overlapping 30d test blocks, >=5 paired instruments, block bootstrap CIs, >=2% materiality (per prereg). Emit `research_state/evaluation_summary_TRACKA-HL-expansion-<UTC>.md` with verdict **MET / NOT_MET / INADMISSIBLE** and full evidence.
-5. **Update state atomically.** Append/update `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json` (H_tracka_hl_symbol_expansion_liquidation_forecast), `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md` (addendum; preserve 2024 H001 and all prior Track A records). Keep sealed records immutable.
-6. **If infeasible under prereg minima/event-adequacy:** emit concrete infeasibility artifact with exact evidence (acquirability gaps, <5 paired instruments, <3 valid blocks, RV/label insufficiency), update state, then pivot to `GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS` (new prereg frozen before outcomes on admissible untested Hyperliquid data; no Track C/Gate 4/2024 Binance conflation) and execute prereg→build→eval discipline as far as possible in-session.
+1. **Select & preregister before outcomes (frozen).** Audit cached admissible inputs (Hyperliquid funding + candles + any admissible targets available locally) and define a NEW volatility-forecast claim on an untested panel/window/symbol set (distinct from sealed FCLR-002/003/Track B/C 2024 holds). Emit `research_state/tracka_prereg_volatility_<UTC>.json|.md` freezing: hypothesis/claim, venue/source, exact panel universe/window, target (e.g. next-period realized volatility derived causally from cached marks), features (RV-only baseline B1 vs funding-conditioned C2 as appropriate), splits/embargo (>=7d), test blocks/instruments minima, metric/materiality/CI, event/coverage adequacy, and infeasibility rule. **No outcome inspection before prereg freeze.**
+2. **Bounded acquisition only if needed.** If required Hyperliquid inputs are missing for the preregistered panel, perform bounded first-time unauthenticated fetches with provenance (`.accessed.json` + `.sha256`) and cache-first checks; do not re-fetch already-valid cached data. Emit acquisition/gap report.
+3. **Build deterministic panel.** Construct causal features/targets from admissible cached data; emit panel + build report with hashes, coverage, leakage/embargo notes, symbol-period completeness. **No outcome computation beyond what build requires; evaluation only after build complete per prereg.**
+4. **Run pre-registered evaluation.** B1 vs C2 (or prereg contrasts) on volatility target with block bootstrap CIs, embargo, and pre-registered minima/materiality. Emit `research_state/evaluation_summary_TRACKA-VOL-<UTC>.md` with verdict **MET / NOT_MET / INADMISSIBLE** and full evidence.
+5. **Update state atomically.** Append/update `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md` (addendum; preserve 2024 H001 and all prior Track A/B/C records, including expansion PASS). Keep sealed records immutable.
+6. **If infeasible under prereg minima:** emit concrete infeasibility artifact with exact evidence (coverage gaps, <min instruments/blocks, target not computable), update state, then preregister and attempt the next best admissible untested volatility/liquidation claim in-session (same discipline) so substantive progress continues.
 
 ## HARD BANS (BINDING)
-- No outcome inspection before freeze/prereg; expansion prereg already frozen — do not alter and do not run forecast eval before panel/build complete.
+- No outcome inspection before freeze/prereg; do not run forecast eval before panel/build complete per prereg.
 - No Binance/2024 conflation with Hyperliquid; venue/data-source claims must match artifacts.
 - No modeled/proxy/synthetic liquidation labels presented as observed.
 - No threshold-shopping; no sealed-holdout reuse (FCLR-002/003/Track B/C).
 - No `.github/workflows` edits.
 - No redundant network polling (bounded first-time acquisition with caching/provenance allowed where specified).
 - No agent-set `RESOLVED_VERIFIED` or `fabricated=true`; no Gate 4 human/legal bypass.
-- **No status-only output:** every session must leave a substantive artifact (universe/acquisition/panel/eval or documented infeasibility + state updates).
+- **No status-only output:** every session must leave a substantive artifact (prereg/acquisition/panel/eval or documented infeasibility + state updates).
 
 ## Key refs
 - Handoff (authoritative): `HANDOFF_NEXT_SESSION.md`
 - Pointers: `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`
-- Expansion prereg/probe: `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json|.md`, `research_state/tracka_hl_expansion_probe_report_20261111T195336Z.json`
-- Prior Track A: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`, `research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md`
-- Scripts: `scripts/tracka_hl_*` (probe, paginate/fetch, build, evaluate)
+- Completed expansion (PASS): `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`, `research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json`
+- Prior Track A: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md` (NOT_MET), `research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md` (INADMISSIBLE)
+- Scripts: `scripts/tracka_hl_*` (build/evaluate patterns), admissible data utilities under `scripts/`
 - Caches: `research_state/data_cache/ironflow_events/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/hyperliquid_candles/`
 - Gate 4: `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`, `scripts/fclr016_v5_preflight_summary.py`, `scripts/fclr016_validate_v5_admissibility.py`, `scripts/fclr016_v5_promotion_dryrun.py`
 - State: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md`
 
-**Execute now:** Branch 1 only if Gate 4 RESOLVED trigger is present now; otherwise Branch 2 (`GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10`) — start at universe finalization and bounded acquisition for missing/partial expansion inputs.
+**Execute now:** Branch 1 only if Gate 4 RESOLVED trigger is present now; otherwise Branch 2 (`GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS`) — start at frozen preregistration for an untested admissible volatility claim before any outcome inspection.

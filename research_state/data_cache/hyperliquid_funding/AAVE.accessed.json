@@ -1,8 +1,8 @@
 {
-  "fetched_utc": "2026-11-11T20:11:44Z",
+  "fetched_utc": "2026-11-11T20:18:42Z",
   "coin": "AAVE",
   "endpoint": "fundingHistory",
-  "paginated_chunks": 9,
+  "paginated_chunks": 1,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
   "rows": 4416,
