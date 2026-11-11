@@ -1,6 +1,6 @@
 # FOCUS_CAMPAIGN — Heavy-Work Execution Plan (Pointer)
 
-**Timestamp (UTC):** 2026-11-11T03:38:37Z (refreshed)
+**Timestamp (UTC):** 2026-11-11T04:33:39Z (refreshed)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` → **SINGULAR NEXT TASK: `NONE`** pending a new admissible unauthenticated source. Treat `AGENT_HANDOFF.md` and `HANDOFF_NEXT_SESSION.md` as pointers only.

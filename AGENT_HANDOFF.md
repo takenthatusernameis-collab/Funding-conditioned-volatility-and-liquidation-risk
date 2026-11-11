@@ -1,6 +1,6 @@
 # AGENT_HANDOFF — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-11T03:38:37Z (refreshed)
+**Timestamp (UTC):** 2026-11-11T04:33:39Z (refreshed)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — **execute/read immediately**.
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS`. Treat `FOCUS_CAMPAIGN.md` and `HANDOFF_NEXT_SESSION.md` as pointers only.
