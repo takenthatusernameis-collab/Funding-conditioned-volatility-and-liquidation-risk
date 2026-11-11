@@ -1,11 +1,11 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, this update):** 2026-11-11T13:04:48Z
+**Timestamp (UTC, this update):** 2026-11-11T13:06:42Z
 **Authoritative:** This file is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is superseded (redirect only). Read this entire file before any action. No status-only output.
 
-## INITIAL TASK MESSAGE (execute now) — 2026-11-11T13:02:23Z
+## INITIAL TASK MESSAGE (execute now) — 2026-11-11T13:06:42Z
 
-**Mission (repo-prioritized):** advance funding-conditioned **volatility** forecasting and **liquidation-risk** forecasting as co-equal objectives. The repo name makes liquidation-risk forecasting co-equal with volatility forecasting; Track A (observed Hyperliquid liquidations, ironflow CC BY 4.0) is the only path that is not externally blocked and is the heavy mandatory campaign this session. **Terminalize Track A this session; do not stall.**
+**Mission (repo-prioritized):** The repo name `Funding-conditioned-volatility-and-liquidation-risk` makes **liquidation-risk forecasting co-equal with volatility forecasting**. Track A (observed Hyperliquid liquidations via ironflow, CC BY 4.0) is the only path that is not externally blocked and is the **heavy mandatory campaign this session**. **Terminalize Track A this session; do not stall.**
 
 Track C / Gate 4 (Binance 2025+) is **EXPLICIT_BLOCKER_UNRESOLVED** on human/legal terms evidence; it cannot be automated or fabricated by agents. **Deprioritize it entirely this session** so the agent does not spin on an external dependency. Proceed to Track A as the computable campaign.
 
@@ -52,10 +52,12 @@ Keep explicitly BLOCKED; no bypass/fabrication/`RESOLVED_VERIFIED` by agents. If
 
 ---
 
-### Bottleneck removal
+### Bottleneck removal (explicit, already applied)
 
-- Track C/Gate 4 is externally blocked (human/legal terms; cannot be automated or fabricated). **Deprioritize it entirely this session** so the agent does not spin; proceed to Track A as the computable campaign.
-- Track A path (a) ambiguity is removed by the audit; the next agent must execute path (b) or (c) to a terminal state this session.
+- `AGENT_HANDOFF.md` retired/redirect to eliminate conflicting stale handoff (eliminates stale-session bottleneck).
+- Track C/Gate 4 explicitly BLOCKED and deprioritized this session (human/legal terms; cannot be automated or fabricated) so the agent does not spin; proceed to Track A as the computable campaign.
+- Track A path (a) ambiguity removed by the completed audit; maximal aligned overlap documented as `2026-05-01..2026-10-31`; next agent must execute path (b) or (c) to a terminal state this session.
+- No new sessions should re-open Track B/C 2024 (closed negative, sealed immutable) or re-probe path (a) (audit complete, closed with evidence).
 
 ---
 
