@@ -1,6 +1,6 @@
 # HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff / initial task message for next agentic work session**
-**Timestamp (UTC):** 2026-11-11T06:33:29Z
+**Timestamp (UTC):** 2026-11-11T07:26:05Z
 **Repo:** `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`
 
 ## Repo-priority state (evidence-backed, do not relitigate)
@@ -54,3 +54,5 @@ No polling, no status-only output, no HF re-enumeration within 24h TTL, no cache
 
 ## Canonical artifacts
 `HANDOFF_NEXT_SESSION.md` (this file), `NEXT_SESSION_TASK.md`, `FOCUS_CAMPAIGN.md`, `AGENT_HANDOFF.md`, `research_state/experiment_frontier.json`, `research_state/final_confirmatory_verdict.md`, `research_state/final_record_closure_audit.md`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/alt_source_scan_latest.json`, `research_state/data_source_registry_alt_hunt.json`, `research_state/url_probe_cache.json`, `research_state/hf_search_cache.json`.
+
+(End of file - total 56 lines)
