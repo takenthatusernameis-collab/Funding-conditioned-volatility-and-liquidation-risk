@@ -1,56 +1,58 @@
 # SINGLE DURABLE HANDOFF — NEXT AGENTIC WORK SESSION
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T21:06:15Z
-**Status:** AUTHORITATIVE. Execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are pointers/redirects. Ignore conflicting or stale docs.
+**Handoff timestamp (UTC):** 2026-11-11T21:10:42Z
+**Status:** AUTHORITATIVE. Execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are pointers/redirects. Ignore conflicting/stale docs.
 
-## INITIAL TASK MESSAGE (EXECUTE NOW)
-**Mission (repo-prioritized):** Advance funding-conditioned **liquidation-risk forecasting** and co-priority **volatility forecasting** on admissible, unauthenticated, provenance-backed data. Do **not** idle, do **not** produce status-only output, and do **not** relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts plus consistent state updates.
+## INITIAL TASK MESSAGE (EXECUTE NOW — NO STATUS-ONLY)
+**Mission (repo-prioritized):** Treat **funding-conditioned volatility forecasting** as the PRIMARY heavy-work target (repo name first). Co-priority: liquidation-risk where admissible. Do **not** idle, do **not** relitigate closed work (Track A 9-symbol NOT_MET, Track A early INADMISSIBLE, Track B/C negative/sealed). Produce substantive artifacts + atomic state updates every pass.
 
-**Verified entry state (2026-11-11T21:06:15Z):**
-- **Gate 4 / Branch 1:** BLOCKED (external, human/legal). `research_state/fclr016_local_audit/` contains no valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (present: `..._BLOCKED_20261108T014835Z.json`, `..._UNRESOLVED_20261108T204000Z.json`, `fabricated=false`). Do **not** set `RESOLVED_VERIFIED`/`fabricated=true` or bypass terms.
-- **Track A (closed/recorded, do not relitigate or retune):**
-  - `TRACKA-HL-S-20261111T133430Z` 2026-05..2026-10 9-symbol successor **NOT_MET** (`research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`).
-  - `TRACKA-HL-EARLY-20261111T191958Z` / `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` **INADMISSIBLE** (`research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md`).
-  - `TRACKA-HL-EXPANSION-20261111T195500Z` / `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` **PASS** on pre-registered primary gate (C2 vs B1, QLIKE next-24h observed Hyperliquid liquidation intensity, 2026-05..2026-10, ex-ante 8 symbols ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH; rel reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks). See `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md` and linked panel/build artifacts.
-- **Track B/C (2024):** closed negative; sealed holds immutable (H001 NOT_SUPPORTED and prior 2024 records preserved).
-- **Cached admissible assets:** ironflow observed labels 2025-05..2026-10 (432 PERP markets), Hyperliquid funding/candles for 9 original + 8 expansion coins and related caches under `research_state/data_cache/` with provenance where recorded. Reuse cache-first; verify coverage before any fetch.
+**Bottlenecks to remove now (concrete):**
+- **Gate 4 (external/legal):** BLOCKED. Do **not** guess/attest `RESOLVED_VERIFIED` or set `fabricated=true`. Only proceed if `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears with all 8 fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and human/legal attestation — then run Branch 1 deterministically. Otherwise skip.
+- **Volatility gap:** H1_primary NOT_SUPPORTED on sealed panels; Track B modeled only and exhausted. No frozen prereg for an **untested admissible** funding-conditioned volatility claim exists yet. This is the clearest path to real progress given expansion liquidation PASS is already recorded.
+- **Avoid redundant work:** reuse `research_state/data_cache/` (Hyperliquid funding/candles, ironflow). Only bounded first-time unauthenticated fetches with `.accessed.json` + `.sha256` if strictly required by a frozen prereg.
 
-## REQUIRED HEAVY WORK — EXECUTE FIRST APPLICABLE BRANCH
+## MANDATORY CAMPAIGN: `GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS` (START IMMEDIATELY)
+Execute in strict order. **No outcome inspection before prereg freeze.**
 
-### Branch 1 (CONDITIONAL — only if trigger appears now)
-**Trigger:** valid `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with all 8 verifiable fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, human/legal attestation.
-**Actions (deterministic, in order):** run promotion/admissibility validators (`scripts/fclr016_v5_promotion_dryrun.py`, `scripts/fclr016_validate_v5_admissibility.py`, `scripts/fclr016_v5_preflight_summary.py` or equivalents) with required `--expect-go`; only on all-green GO execute confirmatory Track C multi-split ablation on frozen 2025+ panel (>=7d purge/embargo, train-only normalization, block-bootstrap ΔQLIKE CIs, pre-registered contrasts/thresholds); emit verdict(s) and update `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md` atomically.
-**If absent (current):** proceed to Branch 2.
+### Step 1: Freeze volatility prereg (BEFORE outcomes) — REQUIRED ARTIFACT
+Create `research_state/tracka_prereg_volatility_<UTC>.json` and `.md` freezing:
+- **Claim/hypothesis:** new `H_tracka_hl_volatility_forecast_*` (distinct from sealed). Explicitly state "no Binance/2024 conflation", venue `hyperliquid_perpetuals`, observed-only where applicable.
+- **Panel:** choose **untested** universe/window using cached admissible data (Hyperliquid candles/funding). Prefer symbols not exhausted by closed liquidation campaigns or with clean coverage. If using liquidation labels, only use observed ironflow labels with provenance; do **not** fabricate/model labels.
+- **Target:** e.g. next-24h realized volatility (from cached 1h candles: RV over window derived causally; define formula, no leakage). State computability preconditions.
+- **Features/splits:** B1 (RV-only) vs C2 (funding-conditioned) or prereg contrast. Chrono splits with **>=7d embargo**. >=3 non-overlapping 30d test blocks, >=5 paired instruments if possible (or justify minima).
+- **Gates/materiality:** metric (e.g. QLIKE or pre-registered), min rel improvement/materiality, CI (block bootstrap), event/coverage adequacy, **hard infeasibility rule**.
+- **Forbidden:** threshold-shopping, sealed-holdout reuse, outcome peeking.
 
-### Branch 2 (DEFAULT, MANDATORY NOW): `GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS`
-**Goal:** Advance **funding-conditioned volatility forecasting** on an admissible, untested Hyperliquid/cache-backed panel (co-priority with liquidation risk). Expansion liquidation PASS is recorded; do not rerun/retune it. Pursue new pre-registered evidence for volatility on data not sealed/closed by prior negative 2024 Track B/C/FCLR-002/003 claims, with no Binance/2024 conflation.
+### Step 2: Bounded acquisition (only if gaps)
+Check caches first. If any required series missing for prereg panel, do bounded first-time unauthenticated fetches with provenance; log to acquisition report. Do not poll/re-fetch cached valid data.
 
-**Execute in order (substantive artifacts required):**
-1. **Select & preregister before outcomes (frozen).** Audit cached admissible inputs (Hyperliquid funding + candles + any admissible targets available locally) and define a NEW volatility-forecast claim on an untested panel/window/symbol set (distinct from sealed 2024 holds). Emit `research_state/tracka_prereg_volatility_<UTC>.json|.md` freezing: hypothesis/claim, venue/source, exact panel universe/window, target (e.g. next-period realized volatility derived causally from cached marks/candles), features (RV-only baseline B1 vs funding-conditioned C2 as appropriate), splits/embargo (>=7d), test blocks/instruments minima, metric/materiality/CI, event/coverage adequacy, and infeasibility rule. **No outcome inspection before prereg freeze.**
-2. **Bounded acquisition only if needed.** If required Hyperliquid inputs are missing for the preregistered panel, perform bounded first-time unauthenticated fetches with provenance (`.accessed.json` + `.sha256`) and cache-first checks; do not re-fetch already-valid cached data. Emit acquisition/gap report.
-3. **Build deterministic panel.** Construct causal features/targets from admissible cached data; emit panel + build report with hashes, coverage, leakage/embargo notes, symbol-period completeness. **No outcome computation beyond what build requires; evaluation only after build complete per prereg.**
-4. **Run pre-registered evaluation.** B1 vs C2 (or prereg contrasts) on volatility target with block bootstrap CIs, embargo, and pre-registered minima/materiality. Emit `research_state/evaluation_summary_TRACKA-VOL-<UTC>.md` with verdict **MET / NOT_MET / INADMISSIBLE** and full evidence.
-5. **Update state atomically.** Append/update `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md` (addendum; preserve 2024 H001 and all prior Track A/B/C records, including expansion PASS). Keep sealed records immutable.
-6. **If infeasible under prereg minima:** emit concrete infeasibility artifact with exact evidence (coverage gaps, <min instruments/blocks, target not computable), update state, then preregister and attempt the next best admissible untested volatility/liquidation claim in-session (same discipline) so substantive progress continues.
+### Step 3: Deterministic panel build
+Build causal features/targets from cached data. Emit `research_state/tracka_vol_panel_<UTC>.parquet` + `research_state/tracka_vol_panel_build_report_<UTC>.json` with hashes, coverage by symbol/period, embargo/leakage notes. **Do not run evaluation until build complete and matches prereg.**
+
+### Step 4: Pre-registered evaluation
+Run B1 vs C2 per prereg with block bootstrap CIs, embargo, minima. Emit `research_state/evaluation_summary_TRACKA-VOL-<UTC>.md` with verdict **MET/NOT_MET/INADMISSIBLE** and full evidence.
+
+### Step 5: Atomic state update (MANDATORY)
+Update atomically: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md` (addendum). Preserve all sealed records (H001, Track A NOT_MET, Track A early INADMISSIBLE, Track B/C). Never mutate closed verdicts.
+
+### Step 6: If INADMISSIBLE — do NOT stop
+If infeasible under prereg minima, emit concrete infeasibility artifact with exact evidence, update state, **immediately preregister next best admissible untested volatility (or liquidation) claim in-session** with same discipline and execute Steps 1-5. The goal is continuous heavy work, not a status report.
 
 ## HARD BANS (BINDING)
-- No outcome inspection before freeze/prereg; do not run forecast eval before panel/build complete per prereg.
-- No Binance/2024 conflation with Hyperliquid; venue/data-source claims must match artifacts.
-- No modeled/proxy/synthetic liquidation labels presented as observed.
-- No threshold-shopping; no sealed-holdout reuse (FCLR-002/003/Track B/C).
+- No outcome inspection before freeze/prereg.
+- No Binance/2024 conflation; venue/source must match artifacts.
+- No modeled/proxy/synthetic liquidation labels as observed.
+- No threshold-shopping; no sealed-holdout reuse.
 - No `.github/workflows` edits.
-- No redundant network polling (bounded first-time acquisition with caching/provenance allowed where specified).
-- No agent-set `RESOLVED_VERIFIED` or `fabricated=true`; no Gate 4 human/legal bypass.
-- **No status-only output:** every session must leave a substantive artifact (prereg/acquisition/panel/eval or documented infeasibility + state updates).
+- No redundant network polling.
+- No agent-set `RESOLVED_VERIFIED`/`fabricated=true`; no Gate 4 bypass.
+- **No status-only output.** Every session must leave substantive artifact(s) + consistent state updates.
 
-## Key refs
-- Handoff (authoritative): `HANDOFF_NEXT_SESSION.md`
-- Pointers: `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`
-- Expansion PASS: `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`, `research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json`
-- Prior Track A: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md` (NOT_MET), `research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md` (INADMISSIBLE)
-- Scripts: `scripts/tracka_hl_*`, admissible data utilities under `scripts/`
-- Caches: `research_state/data_cache/ironflow_events/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/hyperliquid_candles/`
-- Gate 4: `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`, `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_UNRESOLVED_20261108T204000Z.json`, `scripts/fclr016_v5_preflight_summary.py`, `scripts/fclr016_validate_v5_admissibility.py`, `scripts/fclr016_v5_promotion_dryrun.py`
+## KEY REFS
+- Expansion PASS (liquidation): `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, panel/build artifacts under `research_state/`
+- Closed Track A: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md` (NOT_MET), `research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md` (INADMISSIBLE)
+- Caches: `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/hyperliquid_candles/`, `research_state/data_cache/ironflow_events/`
+- Gate 4: `research_state/fclr016_local_audit/` (+ validators `scripts/fclr016_v5_*`)
 - State: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md`
 
-**Execute now:** Branch 1 only if Gate 4 RESOLVED trigger is present now; otherwise Branch 2 (`GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS`) — start at frozen preregistration for an untested admissible volatility claim before any outcome inspection.
+**EXECUTE NOW:** Branch 1 only if Gate 4 RESOLVED trigger present now; else **Branch 2** starting at Step 1 (frozen volatility prereg) before any outcome inspection. Force heavy work across the full campaign.
