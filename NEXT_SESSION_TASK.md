@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK — Single Durable Handoff (Initial Task Message)
 
-**Timestamp (UTC):** 2026-11-11T02:54:37Z
+**Timestamp (UTC):** 2026-11-11T02:55:57Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. This is the **single durable handoff**; treat `AGENT_HANDOFF.md` and `FOCUS_CAMPAIGN.md` as pointers only.
 
