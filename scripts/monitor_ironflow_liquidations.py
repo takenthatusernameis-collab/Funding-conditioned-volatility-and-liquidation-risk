@@ -659,17 +659,22 @@ _ETAG_PLACEHOLDER_OPAQUES = frozenset({
 def _etag_opaque_is_hex_or_alnum(value):
     """A recorded HF tree ETag opaque is an opaque token, not arbitrary prose.
 
-    Real HF etags are short hex digests (e.g. 2d38-AqkYNsWwxCKiOUmPgektdcJePJk)
-    or git-sha-like tokens. Reject values containing whitespace, control
-    characters, or punctuation other than the common digest alphabets so a
-    prose placeholder cannot masquerade as a recorded ETag.
+    Real HF etags are short tokens such as ``2d38-1SMR0rg9CO86I0iH/hn97Xzs5v8``
+    (observed live from the HF API): they contain alphanumerics, ``-``, ``_``,
+    and ``/``. Reject values containing whitespace, control characters, or
+    punctuation outside that alphabet so a prose placeholder cannot masquerade
+    as a recorded ETag. The ``/`` is explicitly allowed -- an earlier version of
+    this check rejected it and thereby rejected every REAL HF ETag, which is
+    worse than no validation at all: the legitimate value was then recorded as
+    ``tree_etag_poisoned`` and the state stayed hard-failing on
+    ``tree_etag_well_formed``.
     """
     if len(value) > 128:
         return False
     for ch in value:
         if ch.isspace() or ord(ch) < 32 or ord(ch) > 126:
             return False
-        if not (ch.isalnum() or ch in "-_"):
+        if not (ch.isalnum() or ch in "-_/"):
             return False
     return True
 
@@ -1010,6 +1015,25 @@ def check_baseline_drift_probe(state, max_retries=MAX_RETRIES):
     }
 
 
+def _cached_tree_etag_usable(state):
+    """Return the cached tree ETag only if it is well-formed and non-stub.
+
+    [HEAVY-103] The recorded ``tree_etag`` is the key that makes every --quick run
+    short-circuit on 304 Not Modified instead of re-listing the full tree. A
+    malformed or placeholder ETag (e.g. the test stub ``W/"test"`` that a fixture
+    once wrote into the tracked production state) is WORSE than no ETag at all:
+    with a stub in hand the monitor sends If-None-Match: W/"test", HF answers 200
+    (the stub never matches), the tree is re-parsed, and the stub is then
+    re-persisted by the --quick path -- so the poison never self-heals and every
+    verify_state() hard-fails on ``tree_etag_well_formed``. A usable ETag is therefore
+    gated here, not merely read: callers that need a cache key must get None back
+    from this function and drop the conditional request entirely.
+    """
+    raw = state.get("tree_etag")
+    ok, _reason = _etag_well_formed(raw)
+    return raw if ok else None
+
+
 def check_tree_change(state, max_retries=MAX_RETRIES):
     """Cheap tree ETag check to detect new parquet paths anywhere in the archive.
 
@@ -1019,8 +1043,13 @@ def check_tree_change(state, max_retries=MAX_RETRIES):
     against cached tree_parquet_paths to detect added/removed files. This closes
     the forward-edge-only gap: a backfilled older month would otherwise be invisible
     to --quick until it falls inside the forward-edge window.
+
+    [HEAVY-103] The cached ETag is gated through ``_cached_tree_etag_usable``: a
+    malformed/stub recorded ETag is treated as "no cache", so the listing is fetched
+    unconditionally and the REAL server ETag is captured. This both repairs a
+    poisoned state in place and prevents a stub from ever being re-persisted.
     """
-    tree_etag = state.get("tree_etag")
+    tree_etag = _cached_tree_etag_usable(state)
     prev_paths = state.get("tree_parquet_paths", [])
     prev_items = state.get("tree_parquet_items", {})
     etag_ref = [tree_etag]
@@ -1546,7 +1575,7 @@ def main():
         # standalone evidence artifact for handoff consumption.
         ts_s = now_z()
         state = load_state()
-        tree_etag = state.get("tree_etag")
+        tree_etag = _cached_tree_etag_usable(state)
         etag_ref = [tree_etag]
         tree_res = http_get(TREE_URL, if_none_match=tree_etag, etag_ref=etag_ref)
         tree_info = {"status": tree_res.get("status"), "not_modified": tree_res.get("not_modified")}
@@ -1622,6 +1651,26 @@ def main():
             pass
         with open(STATE_PATH, "w") as f:
             json.dump(state, f, indent=2)
+        # [HEAVY-103] Persist the real tree ETag (see --quick path). The --scan path
+        # also re-lists the tree and must capture the server ETag rather than
+        # leaving a poisoned/stub value in place.
+        _scan_tc = tc or {}
+        _scan_etag = _scan_tc.get("tree_etag")
+        _scan_etag_ok, _scan_etag_reason = _etag_well_formed(_scan_etag)
+        if _scan_etag_ok:
+            state["tree_etag"] = _scan_etag
+        elif _scan_etag is not None:
+            state["tree_etag_poisoned"] = {
+                "rejected_value": _scan_etag,
+                "reason": _scan_etag_reason,
+                "rejected_at": datetime.now(timezone.utc).isoformat(),
+            }
+            state.pop("tree_etag", None)
+        if _scan_tc.get("current_parquet_items"):
+            state["tree_parquet_items"] = _scan_tc["current_parquet_items"]
+            state["tree_parquet_paths"] = _scan_tc.get("current_parquet_paths", state.get("tree_parquet_paths", []))
+        with open(STATE_PATH, "w") as f:
+            json.dump(state, f, indent=2)
         print(json.dumps(scan_res, indent=2))
         return 0 if go else 1
     if verify:
@@ -1649,7 +1698,7 @@ def main():
     ts = now_z()
     state = load_state()
     previously_available = known_available(state)
-    tree_etag = state.get("tree_etag")
+    tree_etag = _cached_tree_etag_usable(state)
 
     evidence = {
         "probe_id": f"ironflow_probe_{ts}",
@@ -1815,6 +1864,24 @@ def main():
         if _tc.get("current_parquet_items"):
             state["tree_parquet_items"] = _tc["current_parquet_items"]
             state["tree_parquet_paths"] = _tc.get("current_parquet_paths", state.get("tree_parquet_paths", []))
+        # [HEAVY-103] Persist the REAL tree ETag returned by the server. The --quick
+        # path previously never wrote tree_etag back, so a poisoned/stub value
+        # (e.g. W/"test" from a test fixture) survived forever: every subsequent
+        # run re-listed the tree (stub never matches a 304) and re-persisted the
+        # stub, and verify_state() hard-failed on tree_etag_well_formed. Only a
+        # server-returned, well-formed ETag is written; an absent/invalid one is
+        # dropped so the next run fetches unconditionally and captures a real value.
+        _new_etag = _tc.get("tree_etag")
+        _etag_ok, _etag_reason = _etag_well_formed(_new_etag)
+        if _etag_ok:
+            state["tree_etag"] = _new_etag
+        elif _new_etag is not None:
+            state["tree_etag_poisoned"] = {
+                "rejected_value": _new_etag,
+                "reason": _etag_reason,
+                "rejected_at": datetime.now(timezone.utc).isoformat(),
+            }
+            state.pop("tree_etag", None)
         with open(STATE_PATH, "w") as f:
             json.dump(state, f, indent=2)
         # [HEAVY-081 bottleneck removal] _consolidate_ironflow_probes was defined

@@ -851,6 +851,93 @@ class TestTreeChange(unittest.TestCase):
         self.assertEqual(res["added"], [])
         self.assertEqual(res["removed"], [])
 
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_poisoned_stub_etag_is_rejected_and_real_captured(self, mock_get):
+        """[HEAVY-103] A malformed/stub recorded ETag must NOT be used as the
+        conditional cache key: it is treated as "no cache", the tree is fetched
+        unconditionally, and the server-returned ETag is captured in its place.
+
+        The regression this guards against: the literal stub W/"test" was once
+        written into the tracked production state by a test fixture. With a stub
+        in hand every --quick run sent If-None-Match: W/"test", HF answered 200
+        (the stub never matches), the tree was re-parsed, and the stub was
+        re-persisted -- so the poison never self-healed and verify_state() kept
+        hard-failing on tree_etag_well_formed.
+        """
+        body = '[{"path":"data/events/2026-10.parquet"}]'
+        captured = {}
+
+        def http_get_side(url, **kwargs):
+            # The stub must NOT be forwarded: assert no If-None-Match header was
+            # sent, proving the poisoned value was dropped before the request.
+            assert kwargs.get("if_none_match") is None, \
+                "poisoned stub ETag was forwarded as If-None-Match"
+            etag_ref = kwargs.get("etag_ref")
+            if etag_ref is not None:
+                etag_ref[0] = 'W/"real-server-etag"'
+            captured["etag_ref"] = etag_ref
+            return {
+                "ok": True, "status": 200, "headers": {"ETag": 'W/"real-server-etag"'},
+                "body": body.encode("utf-8"), "url": url,
+            }
+        mock_get.side_effect = http_get_side
+        state = self._tree_state('W/"test"', ["data/events/2026-10.parquet"])
+        res = mon.check_tree_change(state)
+        # The real server ETag is returned by check_tree_change so the caller
+        # can persist it; the stub is never echoed back.
+        self.assertEqual(res["tree_etag"], 'W/"real-server-etag"')
+        self.assertNotEqual(res["tree_etag"], 'W/"test"')
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_non_etag_value_treated_as_no_cache(self, mock_get):
+        body = '[{"path":"data/events/2026-10.parquet"}]'
+
+        def http_get_side(url, **kwargs):
+            # A bare unquoted string is not a valid ETag; must be dropped, not
+            # forwarded. The caller's etag_ref is updated with the real server
+            # ETag exactly as http_get does on a 200.
+            etag_ref = kwargs.get("etag_ref")
+            if etag_ref is not None:
+                etag_ref[0] = 'W/"abc"'
+            return {
+                "ok": True, "status": 200, "headers": {"ETag": 'W/"abc"'},
+                "body": body.encode("utf-8"), "url": url,
+            }
+        mock_get.side_effect = http_get_side
+        state = {"tree_etag": "not-an-etag", "tree_parquet_paths": ["data/events/2026-10.parquet"]}
+        res = mon.check_tree_change(state)
+        self.assertEqual(res["tree_etag"], 'W/"abc"')
+
+    @patch("scripts.monitor_ironflow_liquidations.http_get")
+    def test_real_hf_etag_with_slash_accepted(self, mock_get):
+        """[HEAVY-103] Real HF tree ETags contain a slash, e.g.
+        ``W/"2d38-Kc/F0W06axChmsstn8w/P5kA414"``. An over-strict validator that
+        rejected ``/`` rejected every live ETag, recorded it as
+        ``tree_etag_poisoned``, and left verify_state() hard-failing. The
+        validator must accept the live format while still rejecting prose.
+        """
+        body = '[{"path":"data/events/2026-10.parquet"}]'
+
+        def http_get_side(url, **kwargs):
+            etag_ref = kwargs.get("etag_ref")
+            if etag_ref is not None:
+                etag_ref[0] = 'W/"2d38-Kc/F0W06axChmsstn8w/P5kA414"'
+            return {
+                "ok": True, "status": 200,
+                "headers": {"ETag": 'W/"2d38-Kc/F0W06axChmsstn8w/P5kA414"'},
+                "body": body.encode("utf-8"), "url": url,
+            }
+        mock_get.side_effect = http_get_side
+        state = self._tree_state('W/"abc"', ["data/events/2026-10.parquet"])
+        res = mon.check_tree_change(state)
+        self.assertEqual(res["tree_etag"], 'W/"2d38-Kc/F0W06axChmsstn8w/P5kA414"')
+
+    def test_etag_opaque_rejects_prose_and_accepts_slash(self):
+        self.assertTrue(mon._etag_well_formed('W/"2d38-Kc/F0W06axChmsstn8w/P5kA414"')[0])
+        self.assertFalse(mon._etag_well_formed('W/"this is prose with spaces"')[0])
+        self.assertFalse(mon._etag_well_formed('W/"test"')[0])
+        self.assertFalse(mon._etag_well_formed('W/"hello, world!"')[0])
+
 
 class TestQuickDiffSummary(unittest.TestCase):
     """Tests for quick_diff_summary helper added in heavy work."""
