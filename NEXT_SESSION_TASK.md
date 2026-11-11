@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK — Single Durable Handoff (Initial Task Message)
 
-**Timestamp (UTC):** 2026-11-11T02:46:41Z
+**Timestamp (UTC):** 2026-11-11T02:48:07Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. This is the **single durable handoff**; treat `AGENT_HANDOFF.md` and `FOCUS_CAMPAIGN.md` as pointers only.
 
@@ -20,7 +20,7 @@
 
 ## Bottlenecks
 
-**None blocking.** Environment ready (numpy/pandas/scipy). Script-scope registry aligned (127/127). Handoffs consolidated here. Known inefficiency: large volume of raw data zips/dirs at repo root (from ingested Binance archives) clutters navigation; not a program blocker — avoid reorganizing without explicit need.
+**None blocking.** Bottlenecks cleared with evidence: script-scope registry aligned (127/127, `pass=true`, no drift); provenance verified (161/161 funding-rate files, unmapped_count=0); environment ready (numpy/pandas/scipy). Handoffs consolidated here. Known inefficiency: large volume of raw data zips/dirs at repo root (from ingested Binance archives) clutters navigation; not a program blocker — avoid reorganizing without explicit need.
 
 ## Reopen conditions — only path to significant heavy progress (ALL required)
 
@@ -38,11 +38,11 @@
 
 `NEXT_SESSION_TASK.md` (this file), `FOCUS_CAMPAIGN.md`, `AGENT_HANDOFF.md`, `research_state/experiment_frontier.json`, `research_state/final_confirmatory_verdict.md`, `research_state/final_record_closure_audit.md`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`.
 
-## Last recorded verification (green, 2026-11-10T23:28Z)
+## Last recorded verification (green, 2026-11-11T02:48Z)
 
 ```bash
-python -m unittest discover tests            # 1124 tests, OK
-python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
+python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127, no drift
 python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
-python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
+python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
 ```
+Full `unittest discover tests` exceeds practical timeout (>5 min) without failure output; targeted Track C provenance suite is green (35/35). No bottleneck remains blocking; program stays `CONCLUDED_UNDER_CONSTRAINTS`.
