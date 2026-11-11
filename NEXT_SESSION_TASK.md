@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-11T02:34:17Z
+**Timestamp (UTC):** 2026-11-11T02:35:10Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. **No further initial task remains on current local data/design.**
 
@@ -32,7 +32,7 @@ If no such source exists, stop cleanly with evidence (no fabricated progress). `
 No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only, never observed liquidations); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 
 ## Bottlenecks — current state
-**None blocking.** Environment ready (numpy/pandas/scipy installed). Script-scope registry aligned 127/127 (0 missing/extra/bad). Root md+json bound 211 (baseline 144 md + 67 json). `experiment_frontier.json` valid concluded-state. Handoffs consolidated.
+**None blocking.** Environment ready (numpy/pandas/scipy installed). Script-scope registry aligned 127/127 (0 missing/extra/bad). Root md+json bound 211 (baseline 144 md + 67 json). `experiment_frontier.json` valid concluded-state. Handoffs consolidated (this file is the single durable initial task).
 
 ## Canonical evidence/artifacts
 - Track B: `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`

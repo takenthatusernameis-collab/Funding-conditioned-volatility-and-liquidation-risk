@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-11T02:34:17Z
+**Timestamp (UTC):** 2026-11-11T02:35:10Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — **execute/read immediately**.
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence (not concluded by request).
@@ -17,8 +17,8 @@
 Reopen only with: (a) new admissible unauthenticated source + verifiable provenance/coverage/terms, (b) new experiment ID, (c) new prereg frozen **before** outcomes. No polling, status-only work, relitigation, threshold shopping, or sealed-holdout reuse.
 
 ## Bottlenecks addressed this session
-- Refreshed consolidated durable handoffs (`NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`) to a single timestamped (2026-11-11T02:34:17Z) unambiguous initial task: `NONE` under constraints, with explicit reopen conditions, evidence pointers, and heavy-work mandate.
-- Confirmed all prior bottleneck removals remain clean: registry drift (127==127, pass True), root md+json bound (211), environment (numpy/pandas/scipy installed), `experiment_frontier.json` valid concluded-state frontier.
+- Refreshed consolidated durable handoffs (`NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`) to a single timestamped (2026-11-11T02:35:10Z) unambiguous initial task: `NONE` under constraints, with explicit reopen conditions, evidence pointers, and heavy-work mandate.
+- Confirmed clean state: registry drift (127==127, pass True), root md+json bound (211), environment (numpy/pandas/scipy), `experiment_frontier.json` valid concluded-state. No blocking bottlenecks remain.
 
 ## Constraints (NON-NEGOTIABLE)
 No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
