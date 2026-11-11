@@ -1,8 +1,8 @@
 # AGENT_HANDOFF (superseded)
 
-**Timestamp (UTC):** 2026-11-11T18:46:47Z
+**Timestamp (UTC):** 2026-11-11T18:51:48Z
 
-This file is **not** the durable handoff (retired to prevent conflicting/stale sessions).
+This file is **not** the durable handoff.
 
 **Authoritative single durable handoff:** `HANDOFF_NEXT_SESSION.md` — read in full and execute it. Do not execute this file.
 
