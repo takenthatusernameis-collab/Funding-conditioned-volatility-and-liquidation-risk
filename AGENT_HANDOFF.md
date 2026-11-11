@@ -1,13 +1,15 @@
 # AGENT_HANDOFF — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-11T04:35:48Z (refreshed)
+**Timestamp (UTC):** 2026-11-11T05:23:17Z (refreshed)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — **execute/read immediately**.
-**Program status:** `CONCLUDED_UNDER_CONSTRAINTS`. Treat `FOCUS_CAMPAIGN.md` and `HANDOFF_NEXT_SESSION.md` as pointers only.
+**Program status:** `CONCLUDED_UNDER_CONSTRAINTS` for all three tracks. Treat `FOCUS_CAMPAIGN.md` and `HANDOFF_NEXT_SESSION.md` as pointers only.
 
 ## Initial message for next agentic work session
 
 **SINGULAR NEXT TASK: `SOURCE_UNBLOCK_CAMPAIGN` (remove the Track A structural block so heavy research can continue).** Read `NEXT_SESSION_TASK.md`; do not poll, relitigate, threshold-shop, reuse sealed holdouts, or fabricate data. Resume heavy confirmatory work only when all reopen conditions in `NEXT_SESSION_TASK.md` are satisfied.
+
+**Unblock candidate (GO-pending):** HF `ironflow/hyperliquid-liquidations` — CC BY 4.0, unauthenticated bulk parquet, coverage 25 May 2025–31 Oct 2026, 468 markets, documented completeness. HEAD probe confirmed unauthenticated CDN access (etag/xet-hash captured). Pending: empirical parquet inspection (≥5 symbols, complete month, schema) then Phase 4 preregistration if GO.
 
 ## State (evidence-backed)
 
@@ -17,7 +19,7 @@
 
 ## Bottleneck
 
-**Root bottleneck: no admissible unauthenticated observed-liquidation source.** Registry/provenance/environment green (127/127 scope registry pass, 161/161 provenance verified, 35/35 targeted tests green). Unblock path = `SOURCE_UNBLOCK_CAMPAIGN` in `NEXT_SESSION_TASK.md`.
+**Root bottleneck: no admissible unauthenticated observed-liquidation source.** Registry/provenance/environment green (127/127 scope registry pass, 161/161 provenance verified, 35/35 targeted tests green). Unblock path = `SOURCE_UNBLOCK_CAMPAIGN` in `NEXT_SESSION_TASK.md`; concrete removal candidate = `ironflow/hyperliquid-liquidations` (Phase 2 empirical parquet inspection pending).
 
 ## Constraints
 
