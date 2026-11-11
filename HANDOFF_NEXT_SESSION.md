@@ -1,13 +1,13 @@
 # SINGLE DURABLE HANDOFF — NEXT AGENTIC WORK SESSION (INITIAL TASK MESSAGE)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T21:24:44Z
+**Handoff timestamp (UTC):** 2026-11-11T21:31:07Z
 **Status:** AUTHORITATIVE. Execute this file only. Treat `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` as redirects.
 
 ## INITIAL TASK (EXECUTE IMMEDIATELY — HEAVY WORK, NO STATUS-ONLY)
 **Priority (inferred from repo name):** advance **funding-conditioned volatility forecasting** on an admissible, **untested** Hyperliquid panel (liquidation-risk co-priority only where admissible). Produce substantive artifacts + atomic state updates this session. Do **not** idle, do **not** relitigate closed/sealed results, do **not** output status-only.
 
 ### Bottleneck check (do first, then proceed)
-- **Gate 4 (external/legal, BLOCKED):** act only if `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with all 8 fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and human/legal attestation → run **Branch 1** deterministically (promotion + `--expect-go` validators → on all-green GO run confirmatory Track C multi-split ablation, emit verdict, atomic state updates). Verified absent now (only `_partial`/probe/BLOCKED/UNRESOLVED artifacts). **Never guess, never set `fabricated=true`, never bypass.**
+- **Gate 4 (external/legal, BLOCKED):** act only if `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with all 8 fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and human/legal attestation → run **Branch 1** deterministically (promotion + `--expect-go` validators → on all-green GO run confirmatory Track C multi-split ablation, emit verdict, atomic state updates). Verified absent now (only `_BLOCKED`/`_UNRESOLVED`/partial artifacts). **Never guess, never set `fabricated=true`, never bypass.**
 - **Primary progress blocker:** no frozen prereg for an **untested admissible funding-conditioned volatility** claim. **Default = Branch 2 now.**
 - **Avoid churn:** reuse `research_state/data_cache/` (Hyperliquid funding/candles, ironflow). Cache-first audit; no redundant polling. Bounded first-time unauthenticated fetches only if strictly required by frozen prereg, with `.accessed.json` + `.sha256`.
 
@@ -40,9 +40,10 @@ Execute in strict order. **No outcome inspection before prereg freeze.**
 - **No status-only output.**
 
 ## KEY REFS
-- Caches: `research_state/data_cache/hyperliquid_candles/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/ironflow_events/`
+- Caches: `research_state/data_cache/hyperliquid_candles/` (17 coins: BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI,AAVE,ADA,BCH,CRV,LTC,NEAR,UNI,ZEC covering 2026-05..2026-10), `research_state/data_cache/hyperliquid_funding/` (same 17 coins, ~2025-11..2026-10), `research_state/data_cache/ironflow_events/` (2025-05..2026-10, 468 markets)
 - State: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md`
-- Gate 4 audit dir: `research_state/fclr016_local_audit/`
-- Patterns/scripts: `scripts/tracka_hl_evaluate_successor.py`, `scripts/tracka_hl_build_panel_with_rv.py`, `scripts/run_volatility_funding_eval.py`, `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json`
+- Gate 4 audit dir: `research_state/fclr016_local_audit/` (only `_BLOCKED`/`_UNRESOLVED`/`_partial` artifacts present)
+- Patterns/scripts: `scripts/tracka_hl_build_panel_with_rv.py`, `scripts/tracka_hl_evaluate_successor.py`, `scripts/run_volatility_funding_eval.py`, `scripts/tracka_hl_expansion_probe.py`, `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json`
+- Volatility feature utilities: `src/volatility/features_ext.py`, `src/volatility/eval.py`, `src/volatility/block_bootstrap.py`
 
 **Execute now:** Branch 1 only if valid Gate 4 RESOLVED trigger present; else begin **Branch 2 Step 1 — freeze volatility prereg** immediately.
