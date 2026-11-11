@@ -1,9 +1,9 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, authoritative):** 2026-11-11T13:45:00Z
+**Timestamp (UTC, authoritative):** 2026-11-11T13:46:10Z
 **Status:** AUTHORITATIVE. This is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is a redirect only. Any other doc claiming Track A closed without a verdict artifact or conflicting with this handoff is stale. Read fully before acting. **No status-only output.**
 
-## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T13:45:00Z
+## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T13:46:10Z
 
 **Mission (repo-prioritized):** `Funding-conditioned-volatility-and-liquidation-risk` requires **liquidation-risk forecasting** co-equal with volatility forecasting, on admissible unauthenticated data with provenance. **Track A (observed Hyperliquid liquidations, ironflow CC BY 4.0, unauthenticated)** is the only computable Track A path.
 
@@ -34,8 +34,8 @@ If, after acquiring RV context, the pre-registered minima still cannot be met (�
 
 ---
 
-### Gate 4 / Track C (Binance 2025+ volatility extension): EXTERNAL BLOCKER
-**Status:** `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence). `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json` (`fabricated=false`).
+### Gate 4 / Track C volatility (EXTERNAL-BLOCKED)
+**Status:** `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence required). `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json` (`fabricated=false`).
 **Conditional rule ONLY:** if a valid `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears with all 8 verifiable fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and a human/legal reviewer attestation: run deterministic promotion then `--expect-go` validators; only on all-green GO execute confirmatory Track C multi-split ablation (≥7d purge/embargo, train-only normalization, block bootstrap ΔQLIKE CIs) with frozen artifacts. Otherwise **do not touch Gate 4**. Agents must NOT set `RESOLVED_VERIFIED` or `fabricated=true`.
 
 ---
