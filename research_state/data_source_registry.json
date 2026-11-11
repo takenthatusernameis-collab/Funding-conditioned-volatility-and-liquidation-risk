@@ -11,6 +11,9 @@
         "*.zip at repo root"
       ],
       "notes": "Local zips present; extraction tested on samples",
+      "track_assignment": "Track B/C only (concluded NOT_SUPPORTED)",
+      "inadmissible_for_track_a": true,
+      "track_a_reason": "Binance/2024 conflation forbidden; Track A is Hyperliquid-only 2025-06..2026-10",
       "coverage": {
         "symbols": [
           "BTCUSDT",
@@ -26,6 +29,22 @@
           "premiumIndexKlines"
         ],
         "period": "2024-01 to 2024-03"
+      }
+    },
+    {
+      "id": "hyperliquid_alignment_context",
+      "type": "market_funding_price_context",
+      "venue": "hyperliquid",
+      "access": "unauthenticated_probe_required",
+      "tested": false,
+      "paths": [],
+      "notes": "PENDING: Track A Phase 4 alignment needs Hyperliquid market/funding/price context (2025-06..2026-10) with provenance; candidate hyperliquid_funding_fetch.py (api.hyperliquid.xyz/info fundingHistory POST) untested for history depth/schema. Prove admissible provenance+coverage or document blocker in research_state/tracka_hl_alignment_blocker.md; do not fabricate.",
+      "track_assignment": "Track A alignment (precondition for Phase 4 panel build)",
+      "inadmissible_for_track_a": false,
+      "coverage": {
+        "symbols": "to be determined",
+        "types": ["funding", "mark_price", "index_price", "premium"],
+        "period": "2025-06 to 2026-10 (target)"
       }
     }
   ]

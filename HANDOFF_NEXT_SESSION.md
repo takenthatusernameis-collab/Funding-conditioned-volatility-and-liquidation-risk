@@ -1,6 +1,6 @@
 # HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff / initial task message for next agentic work session**
-**Timestamp (UTC):** 2026-11-11T07:30:00Z
+**Timestamp (UTC):** 2026-11-11T07:38:45Z
 **Repo:** `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`
 
 ## Repo-priority state (evidence-backed, do not relitigate)
@@ -8,6 +8,7 @@
 - **Track B — Modeled breach proxy:** CONFIRMATORY_COMPLETE, NOT_SUPPORTED (TB1 degenerate/zero test breaches; TB2 gate NOT_MET: LogLoss B1=0.292447→C2=0.287540 +1.68% <2%, 95% CI crosses zero, Holm fails, 2 test blocks <3). Not observed liquidations. `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`.
 - **Track C/H1 — Funding-conditioned volatility:** NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014). `research_state/final_confirmatory_verdict.md`, `research_state/hypothesis_registry.json`.
 - **Program:** `ACTIVE` (Track A unblocked by ironflow GO). Last recorded verification green: scope registry 127/127 pass, provenance 161/161 verified unmapped_count=0, targeted tests 35/35 OK.
+- **Bottlenecks cleared:** Tracks B/C concluded (NOT_SUPPORTED) — no active blocker; Track A unblocked (ironflow GO). Latent precondition: Track A alignment market/funding/price context requires an admissible unauthenticated Hyperliquid source — prove admissible provenance/coverage or document blocker in `research_state/tracka_hl_alignment_blocker.md`; Binance 2024 zips are inadmissible for Track A (no Binance/2024 conflation).
 
 ## Singular next task — TRACKA-HL Phase 4 (heavy, execute immediately)
 Objective: build aligned Hyperliquid liquidation + market/funding/price panel from admissible unauthenticated sources, run pre-registered evaluation per `research_state/tracka_prereg_hyperliquid_2026.json`, produce auditable verdict artifact.
