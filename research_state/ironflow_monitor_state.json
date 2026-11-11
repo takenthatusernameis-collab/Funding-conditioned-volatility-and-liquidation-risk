@@ -706,7 +706,7 @@
     "currently_fired": false
   },
   "last_quick_check": {
-    "timestamp_utc": "2026-11-07T08:08:40.638504+00:00",
+    "timestamp_utc": "2026-11-11T01:19:11.325513+00:00",
     "triggered": false,
     "triggering_files": [],
     "months_probed": [
@@ -720,7 +720,7 @@
     "data_through": "2026-10"
   },
   "last_quick_probe": {
-    "timestamp_utc": "2026-11-07T08:08:40.638513+00:00",
+    "timestamp_utc": "2026-11-11T01:19:11.325533+00:00",
     "months_probed": [
       "2026-11",
       "2026-12",
@@ -859,12 +859,62 @@
     ]
   },
   "last_tree_change": {
-    "timestamp_utc": "2026-11-07T08:08:40.638548+00:00",
-    "changed": false,
+    "timestamp_utc": "2026-11-11T01:19:11.325606+00:00",
+    "changed": true,
     "added": [],
     "removed": [],
-    "changed_paths": [],
-    "content_replaced": [],
+    "changed_paths": [
+      {
+        "path": "data/events/2026-05.parquet",
+        "prev_oid": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+        "curr_oid": "3ebbb27119bb0912f180a6c4ea8c70c5477706a21535f4452a3e0d1e2fdaa300",
+        "prev_size": 6007849,
+        "curr_size": 6027011
+      },
+      {
+        "path": "data/events/2026-06.parquet",
+        "prev_oid": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+        "curr_oid": "9e8e4469ff14b0f1c03fd4ce8dad5acfba41588bd8d2c5e6ee2ef1a1e5a02d1b",
+        "prev_size": 10478045,
+        "curr_size": 10511464
+      },
+      {
+        "path": "data/events/2026-10.parquet",
+        "prev_oid": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+        "curr_oid": "182e0e1dfea6c28955dde3da1f14c4473e16fbe6d4577fa1aa6bacad175a2c15",
+        "prev_size": 10347879,
+        "curr_size": 10347898
+      },
+      {
+        "path": "data/fills/2026-05.parquet",
+        "prev_oid": "24580f4114653a0413a871debf7363d87943d00b3c4647d8492cbb1e01d14d60",
+        "curr_oid": "f381123ebdaad8663173a57fa2ecd1b5b1a79067e7309f4fc73b4052c0957bf9",
+        "prev_size": 8616839,
+        "curr_size": 8646125
+      },
+      {
+        "path": "data/fills/2026-06.parquet",
+        "prev_oid": "b1f8fdb79f3a81bdc1acfbbe9750748bebf7ecdad48a9f310fc58e22a3a3b86f",
+        "curr_oid": "75cab71636b61720c39f22a32d3c96a838cf38e263d5ae980b124e99aa801a1b",
+        "prev_size": 14599541,
+        "curr_size": 14642480
+      },
+      {
+        "path": "data/fills/2026-10.parquet",
+        "prev_oid": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
+        "curr_oid": "5d9ffda25efba7ee80111c3c9dd6a6c1c4bd841bafac47162a14035f49d49ffa",
+        "prev_size": 15004089,
+        "curr_size": 15006163
+      }
+    ],
+    "content_replaced": [
+      "data/events/2026-05.parquet",
+      "data/events/2026-06.parquet",
+      "data/events/2026-10.parquet",
+      "data/fills/2026-05.parquet",
+      "data/fills/2026-06.parquet",
+      "data/fills/2026-10.parquet"
+    ],
     "tree_status": 200,
     "tree_not_modified": false,
     "current_parquet_items": {
@@ -942,14 +992,14 @@
       },
       "data/events/2026-05.parquet": {
         "path": "data/events/2026-05.parquet",
-        "oid": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
-        "size": 6007849,
+        "oid": "3ebbb27119bb0912f180a6c4ea8c70c5477706a21535f4452a3e0d1e2fdaa300",
+        "size": 6027011,
         "type": "file"
       },
       "data/events/2026-06.parquet": {
         "path": "data/events/2026-06.parquet",
-        "oid": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
-        "size": 10478045,
+        "oid": "9e8e4469ff14b0f1c03fd4ce8dad5acfba41588bd8d2c5e6ee2ef1a1e5a02d1b",
+        "size": 10511464,
         "type": "file"
       },
       "data/events/2026-07.parquet": {
@@ -972,8 +1022,8 @@
       },
       "data/events/2026-10.parquet": {
         "path": "data/events/2026-10.parquet",
-        "oid": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
-        "size": 10347879,
+        "oid": "182e0e1dfea6c28955dde3da1f14c4473e16fbe6d4577fa1aa6bacad175a2c15",
+        "size": 10347898,
         "type": "file"
       },
       "data/fills/2025-05.parquet": {
@@ -1050,14 +1100,14 @@
       },
       "data/fills/2026-05.parquet": {
         "path": "data/fills/2026-05.parquet",
-        "oid": "24580f4114653a0413a871debf7363d87943d00b3c4647d8492cbb1e01d14d60",
-        "size": 8616839,
+        "oid": "f381123ebdaad8663173a57fa2ecd1b5b1a79067e7309f4fc73b4052c0957bf9",
+        "size": 8646125,
         "type": "file"
       },
       "data/fills/2026-06.parquet": {
         "path": "data/fills/2026-06.parquet",
-        "oid": "b1f8fdb79f3a81bdc1acfbbe9750748bebf7ecdad48a9f310fc58e22a3a3b86f",
-        "size": 14599541,
+        "oid": "75cab71636b61720c39f22a32d3c96a838cf38e263d5ae980b124e99aa801a1b",
+        "size": 14642480,
         "type": "file"
       },
       "data/fills/2026-07.parquet": {
@@ -1080,8 +1130,8 @@
       },
       "data/fills/2026-10.parquet": {
         "path": "data/fills/2026-10.parquet",
-        "oid": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
-        "size": 15004089,
+        "oid": "5d9ffda25efba7ee80111c3c9dd6a6c1c4bd841bafac47162a14035f49d49ffa",
+        "size": 15006163,
         "type": "file"
       }
     },
@@ -1199,14 +1249,14 @@
     },
     "data/events/2026-05.parquet": {
       "path": "data/events/2026-05.parquet",
-      "oid": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
-      "size": 6007849,
+      "oid": "3ebbb27119bb0912f180a6c4ea8c70c5477706a21535f4452a3e0d1e2fdaa300",
+      "size": 6027011,
       "type": "file"
     },
     "data/events/2026-06.parquet": {
       "path": "data/events/2026-06.parquet",
-      "oid": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
-      "size": 10478045,
+      "oid": "9e8e4469ff14b0f1c03fd4ce8dad5acfba41588bd8d2c5e6ee2ef1a1e5a02d1b",
+      "size": 10511464,
       "type": "file"
     },
     "data/events/2026-07.parquet": {
@@ -1229,8 +1279,8 @@
     },
     "data/events/2026-10.parquet": {
       "path": "data/events/2026-10.parquet",
-      "oid": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
-      "size": 10347879,
+      "oid": "182e0e1dfea6c28955dde3da1f14c4473e16fbe6d4577fa1aa6bacad175a2c15",
+      "size": 10347898,
       "type": "file"
     },
     "data/fills/2025-05.parquet": {
@@ -1307,14 +1357,14 @@
     },
     "data/fills/2026-05.parquet": {
       "path": "data/fills/2026-05.parquet",
-      "oid": "24580f4114653a0413a871debf7363d87943d00b3c4647d8492cbb1e01d14d60",
-      "size": 8616839,
+      "oid": "f381123ebdaad8663173a57fa2ecd1b5b1a79067e7309f4fc73b4052c0957bf9",
+      "size": 8646125,
       "type": "file"
     },
     "data/fills/2026-06.parquet": {
       "path": "data/fills/2026-06.parquet",
-      "oid": "b1f8fdb79f3a81bdc1acfbbe9750748bebf7ecdad48a9f310fc58e22a3a3b86f",
-      "size": 14599541,
+      "oid": "75cab71636b61720c39f22a32d3c96a838cf38e263d5ae980b124e99aa801a1b",
+      "size": 14642480,
       "type": "file"
     },
     "data/fills/2026-07.parquet": {
@@ -1337,23 +1387,12 @@
     },
     "data/fills/2026-10.parquet": {
       "path": "data/fills/2026-10.parquet",
-      "oid": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
-      "size": 15004089,
+      "oid": "5d9ffda25efba7ee80111c3c9dd6a6c1c4bd841bafac47162a14035f49d49ffa",
+      "size": 15006163,
       "type": "file"
     }
   },
   "probe_history": [
-    {
-      "timestamp_utc": "2026-11-05T18:12:40.974731+00:00",
-      "type": "quick",
-      "data_through": "2026-10",
-      "consecutive_absent": 3,
-      "head_probes": 8,
-      "get_requests": 0,
-      "get_requests_skipped": 8,
-      "triggered": false,
-      "hash": "e7071a61e1f3f01e"
-    },
     {
       "timestamp_utc": "2026-11-05T18:19:38.942757+00:00",
       "type": "quick",
@@ -1453,6 +1492,17 @@
       "get_requests_skipped": 8,
       "triggered": false,
       "hash": "2d560bc759f1e160"
+    },
+    {
+      "timestamp_utc": "2026-11-11T01:19:11.325552+00:00",
+      "type": "quick",
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "head_probes": 8,
+      "get_requests": 0,
+      "get_requests_skipped": 8,
+      "triggered": false,
+      "hash": "412f0c52bae78bab"
     }
   ],
   "consecutive_absent_trend": {
