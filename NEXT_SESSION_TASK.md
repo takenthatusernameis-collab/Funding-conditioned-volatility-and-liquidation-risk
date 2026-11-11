@@ -1,4 +1,4 @@
-# NEXT_SESSION_TASK — 2026-11-11T20:30:00Z
+# NEXT_SESSION_TASK — 2026-11-11T21:06:15Z
 **Execute:** `HANDOFF_NEXT_SESSION.md` (single durable handoff, authoritative). Do not execute this file or `AGENT_HANDOFF.md`.
 
 ## Immediate objectives (heavy, no status-only)
@@ -11,8 +11,8 @@
   5. Update `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md` atomically.
   6. If infeasible, document with evidence, update state, prereg/attempt next best admissible untested claim in-session.
 
-## Known facts (verified 2026-11-11)
-- Gate 4 unresolved (no RESOLVED artifact).
+## Known facts (verified 2026-11-11T21:06:15Z)
+- Gate 4 unresolved (no RESOLVED artifact; BLOCKED/UNRESOLVED present).
 - Track A expansion `TRACKA-HL-EXPANSION-20261111T195500Z` **PASS** (recorded): C2 vs B1 19.04% QLIKE reduction, CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks, 2026-05..2026-10 (ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH). Do not rerun/retune.
 - Track A 9-symbol 2026-05..2026-10 **NOT_MET** (closed); early 2025-11..2026-04 **INADMISSIBLE**. Track B/C 2024 closed negative.
 
