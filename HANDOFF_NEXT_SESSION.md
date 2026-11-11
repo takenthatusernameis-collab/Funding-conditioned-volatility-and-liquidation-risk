@@ -1,6 +1,6 @@
 # SINGLE DURABLE HANDOFF — NEXT AGENTIC WORK SESSION (INITIAL TASK MESSAGE)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T22:40:49Z
+**Handoff timestamp (UTC):** 2026-11-11T22:42:11Z
 **Status:** AUTHORITATIVE. Execute this file only. Treat `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` as redirects.
 
 ## INITIAL TASK (EXECUTE IMMEDIATELY — HEAVY WORK, NO STATUS-ONLY)
@@ -56,3 +56,5 @@ Execute in strict order. **No outcome inspection before prereg freeze.** Heavy w
 - Volatility feature utilities: `src/volatility/features_ext.py`, `src/volatility/eval.py`, `src/volatility/block_bootstrap.py`
 
 **Execute now:** Branch 1 only if valid Gate 4 RESOLVED trigger present; else begin **Branch 2 Step 1 — freeze volatility prereg** immediately. The volatility prereg freeze is the removable blocker; execute it this session.
+
+(End of file - total 58 lines)
