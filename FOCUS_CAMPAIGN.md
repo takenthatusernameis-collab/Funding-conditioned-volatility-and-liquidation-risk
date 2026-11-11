@@ -1,14 +1,14 @@
 # FOCUS_CAMPAIGN — Heavy-Work Execution Plan
 
-**Timestamp (UTC):** 2026-11-11T02:57:54Z
+**Timestamp (UTC):** 2026-11-11T03:36:26Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` → **SINGULAR NEXT TASK: `NONE`** pending a new admissible unauthenticated source.
 
 ## Repo-name prioritized outcome (closed under constraints)
 
-1. **Funding-conditioned volatility (Track C/H1):** NOT_SUPPORTED (all claim-worthy local panels exhausted). `research_state/final_confirmatory_verdict.md`
-2. **Modeled liquidation boundary breaches (Track B, proxy only):** CONFIRMATORY_COMPLETE NOT_SUPPORTED (TB1 degenerate; TB2 gate NOT_MET). `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`
+1. **Funding-conditioned volatility (Track C/H1):** NOT_SUPPORTED (all claim-worthy local panels exhausted: FCLR-003/008/009/012-V/013/014). `research_state/final_confirmatory_verdict.md`
+2. **Modeled liquidation boundary breaches (Track B, proxy only):** CONFIRMATORY_COMPLETE NOT_SUPPORTED (TB1 degenerate; TB2 gate NOT_MET, Log Loss +1.68% < 2%, CI crosses zero, Holm fails, 2 test blocks < 3). `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`
 3. **Observed liquidations (Track A):** STRUCTURALLY_BLOCKED (no admissible unauthenticated census). `research_state/track_a_structural_block.md`
 
 ## Bottlenecks
