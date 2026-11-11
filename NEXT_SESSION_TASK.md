@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-11T02:43:25Z
+**Timestamp (UTC):** 2026-11-11T02:45:29Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. **No further initial task remains on current local data/design.**
 
@@ -25,15 +25,11 @@ Immediate actions:
 2. **New experiment ID** and a clear claim (Track A observed liquidations, Track B modeled breaches, Track C/H1 volatility, or H2 Shek replication) not already concluded on that panel.
 3. **New preregistration/protocol frozen BEFORE any outcome computation**, with hashes/boundaries recorded in `research_state/run_manifest.json`.
 
-## Heavy-work mandate (future agents cannot avoid heavy work)
+## Heavy-work mandate (non-optional if reopened)
 
 - Any resumed work must be **heavy, verifiable, pre-registered before outcomes**, and produce auditable artifacts/evidence.
-- No status-only output, no polling, no relitigation, no threshold shopping, no sealed-holdout reuse.
+- **Forbidden:** status-only output, polling, relitigation, threshold shopping, sealed-holdout reuse, Track A/B/C conflation, fabricated provenance, network/paid/manual/credentialed/bypassed data, overlay before forecast gate, `.github/workflows` edits.
 - Deliver verifiable evidence or stop with evidence. `NONE` until reopen conditions are satisfied.
-
-## Hard constraints (NON-NEGOTIABLE)
-
-No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only, never observed liquidations); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 
 ## Bottlenecks — current state
 
@@ -47,5 +43,3 @@ python -m unittest tests.test_volatility_features_splits tests.test_synthetic_bo
 python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
 python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
 ```
-
-(End of file - total 49 lines)

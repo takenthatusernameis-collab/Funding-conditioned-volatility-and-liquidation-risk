@@ -1,6 +1,6 @@
 # FOCUS_CAMPAIGN.md — Heavy-Work Execution Plan
 
-**Timestamp (UTC):** 2026-11-11T02:43:25Z
+**Timestamp (UTC):** 2026-11-11T02:45:29Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` → `next_unfinished_task: NONE` pending a new admissible unauthenticated source.
@@ -22,5 +22,3 @@ Execute only when ALL reopen conditions in `NEXT_SESSION_TASK.md` hold:
 - **Forbidden:** status-only work, polling, relitigation, threshold shopping, sealed-holdout reuse, Track conflation, fabricated provenance, network/paid/manual/credentialed data, overlay before forecast gate, `.github/workflows` edits.
 
 If reopen conditions are not met: **stop with evidence (`NONE`).**
-
-(End of file - total 21 lines)
