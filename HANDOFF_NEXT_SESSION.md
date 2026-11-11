@@ -1,6 +1,6 @@
 # HANDOFF_NEXT_SESSION — Pointer (Non-authoritative)
 
-**Timestamp (UTC):** 2026-11-11T04:33:39Z
+**Timestamp (UTC):** 2026-11-11T04:34:40Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 
 This file is **not** the durable handoff. The **single durable handoff and authoritative initial task message** for the next agentic work session is:

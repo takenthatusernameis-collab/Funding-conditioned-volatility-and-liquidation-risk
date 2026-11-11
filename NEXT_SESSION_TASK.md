@@ -1,8 +1,8 @@
 # NEXT_SESSION_TASK — Single Durable Handoff (Initial Task Message)
 
-**Timestamp (UTC):** 2026-11-11T04:33:39Z (refreshed; evidence/state unchanged)
+**Timestamp (UTC):** 2026-11-11T04:34:40Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. This is the **single durable handoff**; treat `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, and `HANDOFF_NEXT_SESSION.md` as pointers only.
+**Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. This is the **single durable handoff** and authoritative initial task message. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, and `HANDOFF_NEXT_SESSION.md` are pointers only.
 
 ## Initial message for the next agentic work session (execute first)
 
@@ -15,14 +15,12 @@
 ## Repo-name-prioritized state (both legs exhausted)
 
 1. **Funding-conditioned volatility (Track C/H1):** **NOT_SUPPORTED** on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014). Overlay ineligible; C2 vs B1 fails pre-registered forecast gate. Evidence: `research_state/final_confirmatory_verdict.md`, `research_state/evaluation_summary_FCLR003.md`, `research_state/hypothesis_registry.json`.
-
-2. **Modeled liquidation boundary breaches (Track B, proxy only — not observed liquidations):** **CONFIRMATORY_COMPLETE, NOT_SUPPORTED.** TB1 degenerate/inadmissible (zero test breaches). TB2 frozen `trackb_TB2_20261110T190405Z` (2024-01-01..2024-09-30, BTC/ETH/BNB/SOL/XRP, `synthetic_boundary_breach_h168_long_10x_m0`): event-adequate (619/5040, 12.3%) but forecast gate NOT_MET (Log Loss B1=0.292447→C2=0.287540, +1.68% < 2%; 95% CI crosses zero, p=0.488; Holm fails; <3 test blocks). Overlay not eligible. Evidence: `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`.
-
+2. **Modeled liquidation boundary breaches (Track B, proxy only — not observed liquidations):** **CONFIRMATORY_COMPLETE, NOT_SUPPORTED.** TB1 degenerate/inadmissible (zero test breaches). TB2 frozen `trackb_TB2_20261110T190405Z` (2024-01-01..2024-09-30, BTC/ETH/BNB/SOL/XRP, `synthetic_boundary_breach_h168_long_10x_m0`): event-adequate (619/5040, 12.3%) but forecast gate NOT_MET (Log Loss B1=0.292447→C2=0.287540, +1.68% < 2%; 95% CI crosses zero, p=0.488; Holm fails; <3 test blocks). Evidence: `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`.
 3. **Observed liquidations (Track A):** **STRUCTURALLY_BLOCKED** (no admissible unauthenticated observed-liquidation census; Binance `liquidationSnapshot` 404, `fapi forceOrders` 451; no admissible unauthenticated census found). Not locally repairable. Evidence: `research_state/track_a_structural_block.md`, `research_state/liquidation_sources_enumeration.md`, `research_state/alt_source_scan_latest.json`.
 
 ## Bottlenecks
 
-**None blocking.** Bottlenecks cleared with evidence: script-scope registry aligned (127/127, `pass=true`, no drift); provenance verified (161/161 funding-rate files, unmapped_count=0); environment ready (numpy/pandas/scipy). Handoffs consolidated here. Known inefficiency: large volume of raw data zips/dirs at repo root (from ingested Binance archives) clutters navigation; not a program blocker — avoid reorganizing without explicit need.
+**None blocking.** Script-scope registry aligned (127/127, `pass=true`); provenance verified (161/161 funding-rate files, unmapped_count=0); environment ready (numpy/pandas/scipy); handoffs consolidated here. Root-level raw archive clutter is a navigation inefficiency only — do not reorganize without explicit need.
 
 ## Reopen conditions — only path to significant heavy progress (ALL required)
 
@@ -33,8 +31,9 @@
 ## Heavy-work mandate (if reopened)
 
 - Work must be **heavy, verifiable, and pre-registered before outcomes**, producing auditable artifacts/evidence.
+- **Required flow:** verify admissibility/provenance → define experiment + claim → freeze preregistration/hashes → run pre-registered evaluation with leakage/split/integrity checks → record verdict artifacts; atomically update `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, and `research_state/run_manifest.json`.
 - **Forbidden:** status-only output, polling, relitigation, threshold shopping, sealed-holdout reuse, Track A/B/C conflation, fabricated provenance, network/paid/manual/credentialed/bypassed data, overlay before forecast gate, `.github/workflows` edits.
-- Deliver verifiable evidence or stop with evidence. **`NONE` until reopen conditions are satisfied.**
+- If reopen conditions are not met: **deliver evidence and stop with `NONE`. No exceptions.**
 
 ## Canonical artifacts
 
@@ -47,6 +46,4 @@ python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/12
 python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
 python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
 ```
-Full `unittest discover tests` exceeds practical timeout (>5 min) without failure output; targeted Track C provenance suite is green (35/35). No bottleneck remains blocking; program stays `CONCLUDED_UNDER_CONSTRAINTS`.
-
-(End of file - total 48 lines)
+Full `unittest discover tests` exceeds practical timeout (>5 min) without failure output; targeted Track C/provenance suite is green (35/35).
