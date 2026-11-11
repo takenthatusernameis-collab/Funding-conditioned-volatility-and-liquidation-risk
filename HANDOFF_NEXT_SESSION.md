@@ -1,14 +1,14 @@
 # SINGLE DURABLE HANDOFF — NEXT AGENTIC WORK SESSION (INITIAL TASK MESSAGE)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T21:37:38Z
+**Handoff timestamp (UTC):** 2026-11-11T22:40:49Z
 **Status:** AUTHORITATIVE. Execute this file only. Treat `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` as redirects.
 
 ## INITIAL TASK (EXECUTE IMMEDIATELY — HEAVY WORK, NO STATUS-ONLY)
-**Priority (inferred from repo name):** advance **funding-conditioned volatility forecasting** on an admissible, **untested** Hyperliquid panel (liquidation-risk co-priority only where admissible). Produce substantive artifacts + atomic state updates this session. Do **not** idle, do **not** relitigate closed/sealed results, do **not** output status-only.
+**Priority (inferred from repo name):** Advance **funding-conditioned volatility forecasting** on an admissible, **untested** Hyperliquid panel (liquidation-risk co-priority only where admissible). Produce substantive artifacts + atomic state updates this session. Do **not** idle, do **not** relitigate closed/sealed results, do **not** output status-only.
 
 ### Bottleneck check (do first, then proceed — removals listed)
-- **Gate 4 (external/legal, BLOCKED — NOT removable by this agent):** act only if `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with all 8 fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and human/legal attestation → run **Branch 1** deterministically (promotion + `--expect-go` validators → on all-green GO run confirmatory Track C multi-split ablation, emit verdict, atomic state updates). Verified absent now (only `_BLOCKED`/`_UNRESOLVED`/partial artifacts). **Never guess, never set `fabricated=true`, never bypass.** This is a human/legal external blocker; do not wait on it — default to Branch 2 below.
-- **Primary progress blocker (REMOVABLE NOW — remove it):** no frozen prereg for an **untested admissible funding-conditioned volatility** claim. **Default = Branch 2 now.** This session's job: freeze the volatility prereg before any outcome computation, then build + evaluate + update state in-session.
+- **Gate 4 (external/legal, BLOCKED — NOT removable by this agent):** Act only if `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with all 8 fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and human/legal attestation → run **Branch 1** deterministically (promotion + `--expect-go` validators → on all-green GO run confirmatory Track C multi-split ablation, emit verdict, atomic state updates). Verified absent now (only `_BLOCKED`/`_UNRESOLVED`/partial artifacts). **Never guess, never set `fabricated=true`, never bypass.** This is a human/legal external blocker; do not wait on it — default to Branch 2 below.
+- **Primary progress blocker (REMOVABLE NOW — remove it):** No frozen prereg for an **untested admissible funding-conditioned volatility** claim. **Default = Branch 2 now.** This session's job: freeze the volatility prereg before any outcome computation, then build + evaluate + update state in-session.
 - **Data bottleneck (REMOVED — cache available):** `research_state/data_cache/hyperliquid_candles/` (17 coins: BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI,AAVE,ADA,BCH,CRV,LTC,NEAR,UNI,ZEC covering 2026-05..2026-10) + `research_state/data_cache/hyperliquid_funding/` (same 17 coins, ~2025-11..2026-10) are fully cached. No network fetch required for the core volatility panel. Cache-first audit; no redundant polling. Bounded first-time unauthenticated fetches only if strictly required by frozen prereg, with `.accessed.json` + `.sha256`.
 
 ### Completed / sealed (do not reopen)
