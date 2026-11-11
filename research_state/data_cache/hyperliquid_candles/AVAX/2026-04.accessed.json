@@ -1,0 +1,1 @@
+{"fetched_utc":"2026-11-11T19:31:25Z","coin":"AVAX","month":"2026-04","endpoint":"candleSnapshot","interval":"1h","start_ms":1775001600000,"end_ms":1777593599999,"rows":328,"sha256":"4bce48c35e7bc55d07cbff48350f088b90465440dd85119ab7041a82a3096c9c","http_status":200,"api_key_required":false,"requester_pays":false,"signature_required":false,"unauthenticated":true}

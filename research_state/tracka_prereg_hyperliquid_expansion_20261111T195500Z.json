@@ -1,0 +1,108 @@
+{
+  "experiment_id": "TRACKA-HL-EXPANSION-20261111T195500Z",
+  "preregistered_utc": "2026-11-11T19:55:00Z",
+  "campaign": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
+  "track": "A",
+  "status": "PREREGISTERD_FROZEN_PRE_OUTCOMES",
+  "pivoted_from": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 (TRACKA-HL-EARLY-20261111T191958Z) closed INADMISSIBLE with documented evidence: research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md",
+  "claim": "Funding-conditioned features (C2) improve out-of-sample forecasting of observed Hyperliquid perpetual liquidation intensity vs realized-volatility-only baseline (B1) on an expanded-symbol panel over 2026-05-01..2026-10-31 (or prereg-specified subwindow), using a NEW symbol universe selected ex ante by frozen rules from cached ironflow observed labels, disjoint in design (not relitigation) from closed NOT_MET TRACKA-HL-S-20261111T133430Z (9 symbols, same window).",
+  "hypothesis_id": "H_tracka_hl_symbol_expansion_liquidation_forecast",
+  "hypothesis_type": "primary_tracka_expansion",
+  "venue": "hyperliquid_perpetuals",
+  "data_source": {
+    "name": "ironflow/hyperliquid-liquidations",
+    "license": "CC BY 4.0",
+    "access": "unauthenticated HF bulk parquet (resolve/main/data/events/YYYY-MM.parquet)",
+    "requester_pays": false,
+    "api_key_required": false,
+    "signature_required": false,
+    "coverage_window": "2025-05-25 .. 2026-10-31",
+    "observed_only": true,
+    "modeled_or_proxy": false,
+    "merges_non_hyperliquid": false
+  },
+  "context_sources": {
+    "hyperliquid_fundingHistory": {
+      "source": "https://api.hyperliquid.xyz/info (unauthenticated, type=fundingHistory)",
+      "cached_artifact": "research_state/data_cache/hyperliquid_funding/{COIN}.json (9 coins cached; candidates beyond 9 require bounded first-time fetch with provenance)",
+      "coverage_utc": "~2025-11-01T00:00:00Z .. 2026-10-30T23:00:00Z per coin",
+      "fields": ["coin","fundingRate","premium","time"],
+      "cadence": "hourly"
+    },
+    "hyperliquid_candleSnapshot": {
+      "source": "https://api.hyperliquid.xyz/info (unauthenticated, type=candleSnapshot)",
+      "cached_artifact": "research_state/data_cache/hyperliquid_candles/<COIN>/<YYYY-MM>.json + .accessed.json + .sha256 (9 coins cached for 2026-05..2026-10; candidates beyond 9 require bounded first-time fetch with provenance)",
+      "acquisition": "bounded first-time unauthenticated fetch for candidate-symbol months only; no re-fetch of already-cached 9-coin/2026-05..2026-10 data",
+      "interval": "1h",
+      "fields": ["t","c"]
+    }
+  },
+  "panel": {
+    "universe_selection_rule_ex_ante": {
+      "label_activity_source": "research_state/data_cache/ironflow_events/2026-05.parquet .. 2026-10.parquet (observed, notional_usd-weighted)",
+      "metric": "sum(notional_usd) of observed ironflow liquidation events per market over 2026-05-01..2026-10-31 (ex ante ranking, computed on cached labels only — NOT an outcome)",
+      "include_prefix": "market endswith '-PERP' and base symbol in {BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI,ADA,LTC,DOT,TRX,ATOM,LINK...} — see candidate list below (frozen ex ante)",
+      "exclude_prefixes": ["cash:","flx:","hyna:","io:","km:","mkts:","para:","vntl:","xyz:","kBONK","kFLOKI","kLUNC","kNEIRO","kPEPE","kSHIB"], "exclude_stablecoin_or_fiat": true,
+      "exclude_already_evaluated": ["BTC-PERP","ETH-PERP","BNB-PERP","SOL-PERP","XRP-PERP","AVAX-PERP","DOGE-PERP","LINK-PERP","SUI-PERP"],
+      "min_label_activity": "candidate must have >0 observed liquidation events in >=2 of the 6 cached label months and nonzero label variance across test blocks (event-adequacy, computed pre-outcomes on labels only)",
+      "selection": "top candidates by ex-ante label notional rank subject to funding+candle acquirability (bounded first-time acquisition); target final paired universe >=5 symbols incl. overlap with the 9 cached-symbol coins where funding+candles are already cached",
+      "no_cherry_picking": "symbol inclusion/exclusion fixed in this prereg before any forecast/QLIKE outcome computation; no selection based on test-set performance"
+    },
+    "candidate_symbols_frozen_ex_ante": ["ADA","LTC","DOT","TRX","ATOM","BCH","ETC","FIL","ICP","NEAR","ALGO","VET","HBAR","FTM","AAVE","UNI","CRV","SNX","COMP","MKR","SUSHI","1INCH","BAL","BNT","CTSI","ENJ","IOTA","KSM","NU","OCEAN","OMG","ONT","QTUM","ZEC","ZIL","CELO","CHZ","IOST","HOT","MTL","NEXO","PNT","REN","RSR","STMX","TROY","WAN","WAVES","ZRX"],
+    "coins": "determined by ex-ante rule above at build time (not cherry-picked post-outcomes)",
+    "min_symbols": 5,
+    "time_window": "2026-05-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+    "subwindow_rule": "if full-window coverage incomplete for selected symbols after bounded acquisition, use the largest contiguous subwindow within 2026-05..2026-10 satisfying minima; record exact subwindow in build report",
+    "label": "observed_hyperliquid_liquidation_event_intensity",
+    "label_definition": "notional_usd-weighted observed ironflow liquidation event count per symbol per 24h UTC bucket (observed liquidations, not modeled/proxy/synthetic)",
+    "target": "next-24h observed liquidation intensity per symbol per 24h UTC bucket",
+    "timestamp_normalized_utc": true,
+    "disjoint_from_closed_panel": "TRACKA-HL-S-20261111T133430Z (2026-05-01..2026-10-31, 9 symbols) remains closed NOT_MET; this expansion is a different universe/design with ex-ante symbol selection, not a re-run",
+    "input_checksums_sha256": {}
+  },
+  "split_boundaries": {
+    "status": "frozen_before_outcomes",
+    "rule": "Chronological splits by unique UTC timestamps across the common symbol panel; 7-day embargo between partitions",
+    "embargo_days": 7,
+    "train": {"start": "2026-05-01T00:00:00Z", "end": "2026-05-31T23:00:00Z"},
+    "validation": {"start": "2026-06-07T00:00:00Z", "end": "2026-06-30T23:00:00Z"},
+    "test_blocks": [
+      {"start": "2026-07-07T00:00:00Z", "end": "2026-08-06T23:00:00Z"},
+      {"start": "2026-08-13T00:00:00Z", "end": "2026-09-11T23:00:00Z"},
+      {"start": "2026-09-18T00:00:00Z", "end": "2026-10-17T23:00:00Z"}
+    ],
+    "n_test_blocks": 3,
+    "note": "Same split skeleton as closed NOT_MET successor (2026-05..2026-10) but on a possibly expanded symbol universe; splits frozen pre-outcomes and may be narrowed only by the subwindow_rule before outcomes."
+  },
+  "baselines": ["B1"],
+  "models": ["C2"],
+  "primary_contrast": "C2 vs B1",
+  "primary_target": "next-24h observed liquidation intensity (notional_usd-weighted event count per symbol per 24h UTC bucket)",
+  "metric": "QLIKE (lower is better) on observed liquidation intensity",
+  "materiality_gate": {
+    "min_relative_reduction_pct": 2.0,
+    "ci_excludes_zero": true,
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3,
+    "all_required": true
+  },
+  "event_adequacy_rule": "claim-worthy only if, after deterministic panel build: >=5 paired instruments with label coverage in test blocks, >=3 non-overlapping 30-day test blocks with data, RV24h/B1 computable for test blocks, and label variance >0 across test blocks; otherwise INADMISSIBLE -> emit documented infeasibility + state update -> pivot to GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS (or hold, no unsupported claim).",
+  "forbidden": [
+    "No outcome inspection before preregistration freeze",
+    "No threshold-shopping on test set",
+    "No sealed-holdout reuse (FCLR-002/FCLR-003/Track B/C test sets sealed)",
+    "No Binance/2024 conflation (Hyperliquid only, admissible overlap)",
+    "No modeled/proxy/synthetic liquidation labels (observed ironflow events only)",
+    "No redundant network polling (bounded first-time acquisition for candidate-symbol missing months only; no re-fetch cached 9-coin 2026-05..2026-10)",
+    "No post-hoc symbol selection based on outcomes/forecast results",
+    "No agent-set RESOLVED_VERIFIED/fabricated=true; no Gate 4 bypass"
+  ],
+  "next_steps": [
+    "1. Bounded first-time unauthenticated probe acquisition: fundingHistory (full coverage) + candleSnapshot 2026-05..2026-10 for top ex-ante candidate symbols (from candidate_symbols_frozen_ex_ante, excluding closed 9) to confirm admissibility/acquirability; record provenance (.accessed.json + .sha256); no redundant polling.",
+    "2. Apply ex-ante symbol selection rule on cached labels; constitute final universe; document inclusion/exclusion with evidence.",
+    "3. Build deterministic RV-augmented panel (symbols x 24h buckets: observed label intensity + funding + RV1h/RV24h/RV168h + ema_dist + abs_fund_pct), emit panel parquet + build report with hashes/coverage/leakage notes.",
+    "4. Run pre-registered C2 vs B1 evaluation (block bootstrap, >=3 test blocks, 7d embargo, >=2% materiality), emit evaluation_summary verdict (MET/NOT_MET/INADMISSIBLE per prereg).",
+    "5. Update state atomically: experiment_frontier.json, hypothesis_registry.json, run_manifest.json, final_confirmatory_verdict.md addendum; preserve sealed 2024 H001 and closed Track A NOT_MET records."
+  ],
+  "gate_4_note": "Branch 1 (Gate 4 / Track C confirmatory ablation) remains EXTERNAL_BLOCKED (no valid RESOLVED_VERIFIED terms evidence; human/legal review required; agent cannot set RESOLVED_VERIFIED). This prereg executes the symbol-expansion pivot only."
+}

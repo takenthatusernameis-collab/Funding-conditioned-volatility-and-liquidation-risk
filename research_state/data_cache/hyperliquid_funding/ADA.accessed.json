@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:54:08Z",
+  "coin": "ADA",
+  "month": null,
+  "endpoint": "fundingHistory",
+  "interval": null,
+  "start_ms": 1777593600000,
+  "end_ms": 1793491199999,
+  "rows": null,
+  "sha256": "e9034ee9e307c3b87e963aceffaa3ad65eb0b5f17645c5a1a0101155e2c21180",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

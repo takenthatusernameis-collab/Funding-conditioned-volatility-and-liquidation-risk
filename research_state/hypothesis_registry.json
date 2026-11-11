@@ -53,15 +53,25 @@
       "claim_worthy_on_cache": true,
       "determination": "Path (b) completed after bounded first-time candle acquisition; pre-registered C2 vs B1 evaluated on RV-augmented panel (2026-05-01..2026-10-31). Gate NOT_MET (C2 worse than B1).",
       "next_campaign": {
-        "id": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
-        "status": "AUDITED_PENDING_PREREG",
-        "audit_artifacts": [
-          "research_state/next_panel_gap_audit_20261111T163229Z.json",
-          "research_state/next_panel_gap_audit_20261111T163229Z.md"
-        ],
-        "note": "New disjoint prereg required before outcomes; earlier window candidate (~2025-11..2026-04 intersection TBD in prereg) with observed ironflow labels, cached funding, missing candles requiring bounded first-time acquisition."
+        "id": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
+        "status": "PREREG_PENDING_FROZEN_EX_ANTE_RULES",
+        "note": "Early campaign closed INADMISSIBLE. New prereg required BEFORE outcomes: symbol expansion on 2026-05..2026-10 with frozen ex-ante symbol selection (e.g., top label-activity markets from cached ironflow excluding closed 9-symbol panel) and event-adequacy minima (>=5 instruments, >=3 non-overlapping 30d test blocks, RV24h computable); bounded first-time acquisition of funding+candles for candidates as needed; no cherry-picking."
       }
+    },
+    {
+      "id": "H_tracka_hl_early_liquidation_forecast",
+      "type": "primary_tracka_early",
+      "description": "Funding-conditioned features improve OOS forecasting of observed Hyperliquid perpetual liquidation intensity vs RV-only baseline on early admissible window 2025-11-01..2026-04-30 (disjoint from closed NOT_MET 2026-05..2026-10).",
+      "status": "INADMISSIBLE",
+      "preregistered_utc": "2026-11-11T19:19:58Z",
+      "prereg_document": "research_state/tracka_prereg_hyperliquid_early_20261111T191958Z.json",
+      "last_verdict": "inadmissible_context_insufficient",
+      "evidence": "Bounded first-time unauthenticated Hyperliquid candleSnapshot acquisition 2025-11..2026-04 x 9 coins completed with provenance (report research_state/tracka_hl_early_candle_fetch_report_20261111T193140Z.json): candles empty for 2025-11..2026-03 all coins, partial 2026-04 (~327-328 rows); RV24h/B1 baseline not computable; pre-registered minima (<3 test blocks, baseline unavailable) unsatisfiable. No outcome computation performed (prereg frozen pre-outcomes). Verdict: research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md.",
+      "data_source": "ironflow/hyperliquid-liquidations",
+      "venue": "hyperliquid_perpetuals",
+      "observed_only": true,
+      "determination": "INADMISSIBLE \u2014 documented infeasibility; pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 under new prereg with frozen ex-ante symbol selection/event-adequacy rules."
     }
   ],
-  "updated_utc": "2026-11-11T16:32:29Z"
+  "updated_utc": "2026-11-11T19:45:00Z"
 }

@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:53:58Z",
+  "coin": "AAVE",
+  "month": "2026-07",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1782864000000,
+  "end_ms": 1785542399999,
+  "rows": null,
+  "sha256": "e16d69452f7f29a7e9e0d6860939793c7886d89e427f1e7ea6cf9ce4c4ce3d63",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

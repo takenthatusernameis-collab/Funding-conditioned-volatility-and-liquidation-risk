@@ -1,0 +1,351 @@
+{
+  "generated_utc": "2026-11-11T19:30:57Z",
+  "coins": {
+    "BTC": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:30:57Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:30:58Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:30:59Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:30:59Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:00Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 328,
+        "fetched_utc": "2026-11-11T19:31:01Z"
+      }
+    },
+    "ETH": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:02Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:03Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:04Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:04Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:05Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 328,
+        "fetched_utc": "2026-11-11T19:31:06Z"
+      }
+    },
+    "BNB": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:07Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:08Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:09Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:09Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:10Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 327,
+        "fetched_utc": "2026-11-11T19:31:11Z"
+      }
+    },
+    "SOL": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:12Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:13Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:13Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:14Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:15Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 328,
+        "fetched_utc": "2026-11-11T19:31:16Z"
+      }
+    },
+    "XRP": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:17Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:18Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:18Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:19Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:20Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 327,
+        "fetched_utc": "2026-11-11T19:31:20Z"
+      }
+    },
+    "AVAX": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:22Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:22Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:23Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:24Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:24Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 328,
+        "fetched_utc": "2026-11-11T19:31:25Z"
+      }
+    },
+    "DOGE": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:26Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:27Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:28Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:28Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:29Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 327,
+        "fetched_utc": "2026-11-11T19:31:30Z"
+      }
+    },
+    "LINK": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:31Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:32Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:33Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:33Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:34Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 327,
+        "fetched_utc": "2026-11-11T19:31:35Z"
+      }
+    },
+    "SUI": {
+      "2025-11": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:36Z"
+      },
+      "2025-12": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:37Z"
+      },
+      "2026-01": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:37Z"
+      },
+      "2026-02": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:38Z"
+      },
+      "2026-03": {
+        "status": "fetched",
+        "n": 0,
+        "fetched_utc": "2026-11-11T19:31:39Z"
+      },
+      "2026-04": {
+        "status": "fetched",
+        "n": 327,
+        "fetched_utc": "2026-11-11T19:31:39Z"
+      }
+    }
+  },
+  "errors": [],
+  "fetched": [
+    "BTC/2025-11",
+    "BTC/2025-12",
+    "BTC/2026-01",
+    "BTC/2026-02",
+    "BTC/2026-03",
+    "BTC/2026-04",
+    "ETH/2025-11",
+    "ETH/2025-12",
+    "ETH/2026-01",
+    "ETH/2026-02",
+    "ETH/2026-03",
+    "ETH/2026-04",
+    "BNB/2025-11",
+    "BNB/2025-12",
+    "BNB/2026-01",
+    "BNB/2026-02",
+    "BNB/2026-03",
+    "BNB/2026-04",
+    "SOL/2025-11",
+    "SOL/2025-12",
+    "SOL/2026-01",
+    "SOL/2026-02",
+    "SOL/2026-03",
+    "SOL/2026-04",
+    "XRP/2025-11",
+    "XRP/2025-12",
+    "XRP/2026-01",
+    "XRP/2026-02",
+    "XRP/2026-03",
+    "XRP/2026-04",
+    "AVAX/2025-11",
+    "AVAX/2025-12",
+    "AVAX/2026-01",
+    "AVAX/2026-02",
+    "AVAX/2026-03",
+    "AVAX/2026-04",
+    "DOGE/2025-11",
+    "DOGE/2025-12",
+    "DOGE/2026-01",
+    "DOGE/2026-02",
+    "DOGE/2026-03",
+    "DOGE/2026-04",
+    "LINK/2025-11",
+    "LINK/2025-12",
+    "LINK/2026-01",
+    "LINK/2026-02",
+    "LINK/2026-03",
+    "LINK/2026-04",
+    "SUI/2025-11",
+    "SUI/2025-12",
+    "SUI/2026-01",
+    "SUI/2026-02",
+    "SUI/2026-03",
+    "SUI/2026-04"
+  ],
+  "cached": []
+}

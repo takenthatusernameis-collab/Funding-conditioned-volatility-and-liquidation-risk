@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:54:21Z",
+  "coin": "BCH",
+  "month": "2026-05",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1777593600000,
+  "end_ms": 1780271999999,
+  "rows": null,
+  "sha256": "25890363466da5673e4f9689210e061e071c68bd12b0ad2fc790a922957e53f0",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

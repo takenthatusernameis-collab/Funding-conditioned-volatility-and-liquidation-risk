@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:53:40Z",
+  "coin": "ZEC",
+  "month": "2026-08",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1785542400000,
+  "end_ms": 1788220799999,
+  "rows": null,
+  "sha256": "fdc116233931b28ba9cd85b382bf0d92a40667b904731e4038d641e55da01957",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

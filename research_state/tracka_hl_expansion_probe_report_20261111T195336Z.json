@@ -1,0 +1,833 @@
+{
+  "generated_utc": "2026-11-11T19:53:36Z",
+  "prereg": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+  "ranking": [
+    {
+      "coin": "ZEC",
+      "label_notional_usd": 459575772.68967533,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "NEAR",
+      "label_notional_usd": 135384731.60451102,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "UNI",
+      "label_notional_usd": 28603918.22276,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "AAVE",
+      "label_notional_usd": 19606071.398029998,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "CRV",
+      "label_notional_usd": 13270049.215122,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "ADA",
+      "label_notional_usd": 11001971.1283,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "LTC",
+      "label_notional_usd": 9387976.666190002,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "BCH",
+      "label_notional_usd": 4448231.092358001,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "DOT",
+      "label_notional_usd": 3667410.8162089996,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "HBAR",
+      "label_notional_usd": 3478027.643734999,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "FIL",
+      "label_notional_usd": 2392052.3103019996,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "TRX",
+      "label_notional_usd": 2153687.8347,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "ICP",
+      "label_notional_usd": 1482147.22972,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "ALGO",
+      "label_notional_usd": 1365526.893947,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "ETC",
+      "label_notional_usd": 556167.307279,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "ATOM",
+      "label_notional_usd": 482338.92287799995,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "COMP",
+      "label_notional_usd": 163476.89424,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "CELO",
+      "label_notional_usd": 120050.99650299999,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "SNX",
+      "label_notional_usd": 116355.55006900002,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "IOTA",
+      "label_notional_usd": 110576.57617899997,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "SUSHI",
+      "label_notional_usd": 61735.064635,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "RSR",
+      "label_notional_usd": 41144.086563000004,
+      "months_with_event": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "eligible": true
+    },
+    {
+      "coin": "VET",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "FTM",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "MKR",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "1INCH",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "BAL",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "BNT",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "CTSI",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "ENJ",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "KSM",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "NU",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "OCEAN",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "OMG",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "ONT",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "QTUM",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "ZIL",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "CHZ",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "IOST",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "HOT",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "MTL",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "NEXO",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "PNT",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "REN",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "STMX",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "TROY",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "WAN",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "WAVES",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    },
+    {
+      "coin": "ZRX",
+      "label_notional_usd": 0.0,
+      "months_with_event": [],
+      "eligible": false
+    }
+  ],
+  "acquisition": {
+    "ZEC": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:53:37Z",
+        "sha256": "44c880d60a0913283b92d476f2d4633c8425f8904ba91e2ea8cea066a055bbb8"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:38Z",
+          "sha256": "c99ce71ed4449d4d42578e92f977182a5bdbb01515fb5d32ef5b994791d26c03"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:39Z",
+          "sha256": "669f7d949c77a2148f0267ee066d951f431d5767a2c023977df78d8849d3dd20"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:39Z",
+          "sha256": "d6291f5f7cc43e22a8c923a864b49f024451a16ce8ce9b17227d1ce3024f1302"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:40Z",
+          "sha256": "fdc116233931b28ba9cd85b382bf0d92a40667b904731e4038d641e55da01957"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:41Z",
+          "sha256": "63754fccc88ee49db2d0110122d08567cf7f8f9afca70e0d7fd455ea71e6ca2a"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:42Z",
+          "sha256": "11a88eb631cb18ae77bc9defdfde449727e8061a4077d8d4482d348800564a69"
+        }
+      }
+    },
+    "NEAR": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:53:43Z",
+        "sha256": "0a153533a6a37eeca3926816d3908b9e3ac571c5624202e13612db723202db92"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:44Z",
+          "sha256": "0b4c0373b8252bf5ce74f646ff4e3d42d3023cbda0b6b2d66bbfff8903a6efea"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:45Z",
+          "sha256": "f5c8ab4f331fe240b42cdd71ce51abd71969f2d765c834f4487f165271d8d3c7"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:46Z",
+          "sha256": "3691667d2a386935a5ad16ae6a9cbe7d4846472cb28e320c69541d4d4ce1cf81"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:47Z",
+          "sha256": "e61e19248f87ceed625a07e3ababdcec0e7a0369ec7842ac109dfeeb3264cdc2"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:47Z",
+          "sha256": "2c993b04139f493c43b2119ecd515c419b507029677ae92b0fb626d7579170a7"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:48Z",
+          "sha256": "13c703ea2cb170caa90fe373b6da09bd311bf26cb2f204a4304a28a8f1312977"
+        }
+      }
+    },
+    "UNI": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:53:49Z",
+        "sha256": "93b6b1d966b9b482bc656ba5427210fa611a2bebb3f0d2217ffd2ef8e3548569"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:50Z",
+          "sha256": "2c67fe9df7d4b10c349c0f7c3563d06cc679338893787247d5b1d15fd4248e71"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:51Z",
+          "sha256": "4bf50e486b7c80e05201b4f87cd2c829c928944e2c21384d2e787599837de8ed"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:52Z",
+          "sha256": "5b3d9940c14a222c1a3009c63346d0cded5653b8783edf00a71554e2f5b43efb"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:53Z",
+          "sha256": "5d53d14203bb29368154c395768e666e62831736243384d7ab9becd29f558958"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:54Z",
+          "sha256": "befba340f830f49f056d8d3cc56a877e53d4bb6bfc2ceb8a668e4c72345b1190"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:55Z",
+          "sha256": "14d6ef624f630bcbe5360fc6704801417f7c23c589f4fca32e99bcfa294e5e34"
+        }
+      }
+    },
+    "AAVE": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:53:56Z",
+        "sha256": "843b35f9b18f0ff552e42857854702aa3f27f720d0d5d95a6b201fcc1ac6b696"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:57Z",
+          "sha256": "323f5bcfab92004d91ed23505096ab4d6ac6206a90e5e094dae8995507dd9c4b"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:53:57Z",
+          "sha256": "173234c6d91d9adb005b12d2435c7480dd808e213c9739f9e50f5da96ffc2546"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:58Z",
+          "sha256": "e16d69452f7f29a7e9e0d6860939793c7886d89e427f1e7ea6cf9ce4c4ce3d63"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:53:59Z",
+          "sha256": "b9a608a7258d144f52cd608c9ce41c3e7e69b060dce87da2386a60e3462e367b"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:00Z",
+          "sha256": "5cbfde7d393165a38edb8fd5a3300e11011a77486648f1a68bbe9de80dda6fb2"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:01Z",
+          "sha256": "fb0f5ec3dad68965815254f17c91c39bbf24143eab9894833f547f591675a829"
+        }
+      }
+    },
+    "CRV": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:54:02Z",
+        "sha256": "18e7f4ca80e753d62cc7ad2509af34dd9191e0b503ccde305cedc76671757df4"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:03Z",
+          "sha256": "1671d79d6d125dba3bcbb431cd45f7660a9c8036cca315d2d41184cfbae9888f"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:04Z",
+          "sha256": "e818ec11480c3d2ee8c7cdaebffd0bbaefe7e6f8d2e72f72ad6cac976d91200b"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:04Z",
+          "sha256": "6d0d67c9ee44d035585d085acaa8ddefc73b2541ee66bca9640e9bb194cfa0d2"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:05Z",
+          "sha256": "85683e04574171b1f170ac621088fc121839ad5743586c1fc578e2b2babce0a8"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:06Z",
+          "sha256": "79311065aa62b81225d2e350980bc6cbda66d9e872f946425a02d48ba85c3aad"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:07Z",
+          "sha256": "d5306300f7450e82796f5b8441c99bec317e6a66e1e6b79071d91473fbc600c2"
+        }
+      }
+    },
+    "ADA": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:54:08Z",
+        "sha256": "e9034ee9e307c3b87e963aceffaa3ad65eb0b5f17645c5a1a0101155e2c21180"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:09Z",
+          "sha256": "7da8a712998a42570e9eb189d0b711187d45b7cf90c48196060c08766407b117"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:10Z",
+          "sha256": "a867155817cda6d6c0a3e0556f3adf9bb4fee9086723b41ecbfcdd8dd664eccc"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:11Z",
+          "sha256": "bfdfb19dbc689609138936553ba8059102332906ce974907da19dedb902b5143"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:11Z",
+          "sha256": "2af355459cc12581eb6d9eddce9f01c07b6d93054c615a15302a0222d75d9f16"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:12Z",
+          "sha256": "bbe347c6136dbdeb55e17ff90d514d917ddb14d6a46dfc7bb478eca142b99988"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:13Z",
+          "sha256": "476123918ed3706df484b7aff5f748caa73e14c11c1213edc6f90e4716136d18"
+        }
+      }
+    },
+    "LTC": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:54:14Z",
+        "sha256": "ce553410522b2553bc0a9751a93b51b8b66303523d5ea1692d187826cc591d60"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:15Z",
+          "sha256": "d5fe7b1279a60661f4816b674e73f690f85b03203d9381b548f605a83a4d4882"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:15Z",
+          "sha256": "60b9bf3a7e700e30bd8270559674b1d95923d6a87d41531a795a57a06d33d209"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:16Z",
+          "sha256": "47d6c078893453787baaccb0b690c6a2f2ca1ca3d2e9f6c9bd588677715ee4a1"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:17Z",
+          "sha256": "61b5fd631895c1d15c253d1b6250043bfd68b662c75dd8b85eda5b6085b8a5c8"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:18Z",
+          "sha256": "cc2265694237bb0eaf560848ec06a9cf1f01437164f2ab8599b7b9b00287cab0"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:19Z",
+          "sha256": "33114d6eb1219ad6d2299d51498340452f93af7807a5f1b8ac12a5faead6459c"
+        }
+      }
+    },
+    "BCH": {
+      "funding": {
+        "status": "fetched",
+        "n": 500,
+        "fetched_utc": "2026-11-11T19:54:20Z",
+        "sha256": "9470b5c3d092439413ff4beb44b93449749aec6f39c5bd8f1ec308dc3cec924d"
+      },
+      "candles": {
+        "2026-05": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:21Z",
+          "sha256": "25890363466da5673e4f9689210e061e071c68bd12b0ad2fc790a922957e53f0"
+        },
+        "2026-06": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:22Z",
+          "sha256": "efa1d41c63e143bc22544eab58d63fdd0ab8eeb729adbe943c7362ae1e1c4057"
+        },
+        "2026-07": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:23Z",
+          "sha256": "5942e7589c836ac4ef90d72fee89241caf2250b19bae7c4b0d75bc666be22365"
+        },
+        "2026-08": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:23Z",
+          "sha256": "e8bd6a484a8c5ad74a6b1c70ca87b501120685e59b511df21da64b4e97c80890"
+        },
+        "2026-09": {
+          "status": "fetched",
+          "n": 720,
+          "fetched_utc": "2026-11-11T19:54:24Z",
+          "sha256": "ed0b3497249f0b71b3b79a9067ca2cee6125182fae8e0f83d9faef4cc8e6eb1e"
+        },
+        "2026-10": {
+          "status": "fetched",
+          "n": 744,
+          "fetched_utc": "2026-11-11T19:54:25Z",
+          "sha256": "0add4f0a745c306a4318eb396075dfacd9ce773dd15a0c83464a64971219a4be"
+        }
+      }
+    }
+  },
+  "errors": [],
+  "selected": [
+    "ZEC",
+    "NEAR",
+    "UNI",
+    "AAVE",
+    "CRV",
+    "ADA",
+    "LTC",
+    "BCH"
+  ]
+}

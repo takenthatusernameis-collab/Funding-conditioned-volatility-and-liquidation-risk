@@ -1,0 +1,104 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY-20261111T191958Z",
+  "preregistered_utc": "2026-11-11T19:19:58Z",
+  "campaign": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
+  "track": "A",
+  "status": "PREREGISTERD_FROZEN_PRE_OUTCOMES",
+  "supersedes": null,
+  "supersedes_document": null,
+  "claim": "Funding-conditioned features (C2) improve out-of-sample forecasting of observed Hyperliquid perpetual liquidation intensity (notional_usd-weighted observed ironflow liquidation event count per symbol per 24h UTC bucket) vs realized-volatility-only baseline (B1) on a new pre-registered admissible early window 2025-11-01..2026-04-30, disjoint from closed NOT_MET Track A 2026-05..2026-10 holdout, frozen before any outcome computation.",
+  "hypothesis_id": "H_tracka_hl_early_liquidation_forecast",
+  "hypothesis_type": "primary_tracka_early",
+  "venue": "hyperliquid_perpetuals",
+  "data_source": {
+    "name": "ironflow/hyperliquid-liquidations",
+    "license": "CC BY 4.0",
+    "access": "unauthenticated HF bulk parquet (resolve/main/data/events/YYYY-MM.parquet)",
+    "requester_pays": false,
+    "api_key_required": false,
+    "signature_required": false,
+    "coverage_window": "2025-05-25 .. 2026-10-31",
+    "observed_only": true,
+    "modeled_or_proxy": false,
+    "merges_non_hyperliquid": false
+  },
+  "context_sources": {
+    "hyperliquid_fundingHistory": {
+      "source": "https://api.hyperliquid.xyz/info (unauthenticated, type=fundingHistory)",
+      "cached_artifact": "research_state/data_cache/hyperliquid_funding/{BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI}.json",
+      "coverage_utc": "~2025-11-01T00:00:00Z .. 2026-10-30T23:00:00Z per coin (confirm exact per-coin bounds in build)",
+      "fields": ["coin","fundingRate","premium","time"],
+      "rows_per_coin": 8668,
+      "cadence": "hourly"
+    },
+    "hyperliquid_candleSnapshot": {
+      "source": "https://api.hyperliquid.xyz/info (unauthenticated, type=candleSnapshot)",
+      "cached_artifact": "research_state/data_cache/hyperliquid_candles/<COIN>/<YYYY-MM>.json + .accessed.json + .sha256",
+      "acquisition": "bounded first-time unauthenticated fetch for missing months 2025-11..2026-04 only; no re-fetch of cached 2026-05..2026-10",
+      "interval": "1h",
+      "fields": ["t","c"]
+    }
+  },
+  "panel": {
+    "symbols": ["BTC-PERP","ETH-PERP","BNB-PERP","SOL-PERP","XRP-PERP","AVAX-PERP","DOGE-PERP","LINK-PERP","SUI-PERP"],
+    "coins": ["BTC","ETH","BNB","SOL","XRP","AVAX","DOGE","LINK","SUI"],
+    "min_symbols": 5,
+    "time_window": "2025-11-01T00:00:00Z .. 2026-04-30T23:59:59Z",
+    "label": "observed_hyperliquid_liquidation_event_intensity",
+    "label_definition": "notional_usd-weighted observed ironflow liquidation event count per symbol per 24h UTC bucket (observed liquidations, not modeled/proxy/synthetic), aggregated over label month parquets 2025-11..2026-04",
+    "target": "next-24h observed liquidation intensity per symbol per 24h UTC bucket",
+    "timestamp_normalized_utc": true,
+    "admissible_overlap": "2025-11-01..2026-04-30 (6 months) — maximal intersection of ironflow labels (2025-05..2026-10; 2025-05 partial from 2025-05-25) and cached HL funding (~2025-11-01..2026-10-30); mark-price/RV context acquired by bounded first-time candleSnapshot for 2025-11..2026-04 only",
+    "disjoint_from": ["TRACKA-HL-S-20261111T133430Z window 2026-05-01..2026-10-31 (closed NOT_MET)"],
+    "input_checksums_sha256": {}
+  },
+  "split_boundaries": {
+    "status": "frozen_before_outcomes",
+    "rule": "Chronological splits by unique UTC timestamps across the common symbol panel; 7-day embargo between partitions",
+    "embargo_days": 7,
+    "train": {"start": "2025-11-01T00:00:00Z", "end": "2025-11-30T23:00:00Z"},
+    "validation": {"start": "2025-12-08T00:00:00Z", "end": "2026-01-06T23:00:00Z"},
+    "test_blocks": [
+      {"start": "2026-01-14T00:00:00Z", "end": "2026-02-12T23:00:00Z"},
+      {"start": "2026-02-20T00:00:00Z", "end": "2026-03-21T23:00:00Z"},
+      {"start": "2026-03-29T00:00:00Z", "end": "2026-04-27T23:00:00Z"}
+    ],
+    "n_test_blocks": 3,
+    "note": "3 non-overlapping ~30-day test blocks fit within the 6-month admissible overlap with 7-day embargoes; total span 2025-11-01..2026-04-27 <= window end 2026-04-30"
+  },
+  "baselines": ["B1"],
+  "models": ["C2"],
+  "primary_contrast": "C2 vs B1",
+  "primary_target": "next-24h observed liquidation intensity (notional_usd-weighted event count per symbol per 24h UTC bucket)",
+  "metric": "QLIKE (lower is better) on observed liquidation intensity",
+  "materiality_gate": {
+    "min_relative_reduction_pct": 2.0,
+    "ci_excludes_zero": true,
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3,
+    "all_required": true
+  },
+  "infeasibility_rule": "If after deterministic panel build any of: <5 paired instruments with label coverage, <3 non-overlapping 30d test blocks with data, or RV24h/B1 baseline not computable from acquired candles, the claim is INADMISSIBLE; emit documented infeasibility artifact with exact evidence, update state, and pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 under a new prereg with frozen ex-ante symbol selection/event-adequacy rules.",
+  "forbidden": [
+    "No outcome inspection before preregistration freeze",
+    "No threshold-shopping on test set",
+    "No sealed-holdout reuse (FCLR-002/FCLR-003/Track B/C test sets are sealed)",
+    "No Binance/2024 conflation (Hyperliquid only, admissible overlap)",
+    "No modeled/proxy/synthetic liquidation labels (observed ironflow events only)",
+    "No redundant network polling (bounded first-time acquisition for missing months only; no re-fetch 2026-05..2026-10)",
+    "No agent-set RESOLVED_VERIFIED/fabricated=true; no Gate 4 bypass"
+  ],
+  "feasibility_assessment_pre_outcomes": {
+    "labels_available": true,
+    "label_window": "2025-11-01..2026-04-30 (complete months 2025-11,2025-12,2026-01,2026-02,2026-03,2026-04; cached ironflow_events parquets)",
+    "funding_available": true,
+    "funding_window": "~2025-11-01..2026-10-30 per coin (cached hyperliquid_funding JSONs; confirm exact per-coin bounds in build)",
+    "mark_price_rv_cached": false,
+    "mark_price_rv_note": "mark-price/1h-candle/RV context NOT cached for 2025-11..2026-04; fillable by bounded first-time unauthenticated Hyperliquid candleSnapshot acquisition for missing months only (acquisition permitted by handoff, not redundant polling)",
+    "claim_worthy": "undetermined_until_build",
+    "min_test_blocks_temporally_feasible": true,
+    "min_test_blocks": 3,
+    "min_paired_instruments": 5
+  },
+  "next_step_after_prereg_freeze": "Bounded first-time unauthenticated Hyperliquid candleSnapshot fetch for 2025-11..2026-04 x 9 coins with provenance (.accessed.json + .sha256), then deterministic RV-augmented panel build, then pre-registered C2 vs B1 evaluation, then verdict + atomic state updates (experiment_frontier.json, hypothesis_registry.json, run_manifest.json, final_confirmatory_verdict.md addendum)."
+}

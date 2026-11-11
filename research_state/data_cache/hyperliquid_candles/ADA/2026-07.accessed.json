@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:54:11Z",
+  "coin": "ADA",
+  "month": "2026-07",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1782864000000,
+  "end_ms": 1785542399999,
+  "rows": null,
+  "sha256": "bfdfb19dbc689609138936553ba8059102332906ce974907da19dedb902b5143",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

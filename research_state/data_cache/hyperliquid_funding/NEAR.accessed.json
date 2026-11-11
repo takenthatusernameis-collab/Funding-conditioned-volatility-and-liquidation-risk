@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:53:43Z",
+  "coin": "NEAR",
+  "month": null,
+  "endpoint": "fundingHistory",
+  "interval": null,
+  "start_ms": 1777593600000,
+  "end_ms": 1793491199999,
+  "rows": null,
+  "sha256": "0a153533a6a37eeca3926816d3908b9e3ac571c5624202e13612db723202db92",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

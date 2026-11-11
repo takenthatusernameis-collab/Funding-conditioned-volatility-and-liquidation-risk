@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:53:45Z",
+  "coin": "NEAR",
+  "month": "2026-06",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1780272000000,
+  "end_ms": 1782863999999,
+  "rows": null,
+  "sha256": "f5c8ab4f331fe240b42cdd71ce51abd71969f2d765c834f4487f165271d8d3c7",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:54:19Z",
+  "coin": "LTC",
+  "month": "2026-10",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1790812800000,
+  "end_ms": 1793491199999,
+  "rows": null,
+  "sha256": "33114d6eb1219ad6d2299d51498340452f93af7807a5f1b8ac12a5faead6459c",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

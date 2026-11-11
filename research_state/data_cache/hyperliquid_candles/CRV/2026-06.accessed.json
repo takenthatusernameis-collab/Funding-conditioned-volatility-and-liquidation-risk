@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:54:04Z",
+  "coin": "CRV",
+  "month": "2026-06",
+  "endpoint": "candleSnapshot",
+  "interval": "1h",
+  "start_ms": 1780272000000,
+  "end_ms": 1782863999999,
+  "rows": null,
+  "sha256": "e818ec11480c3d2ee8c7cdaebffd0bbaefe7e6f8d2e72f72ad6cac976d91200b",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

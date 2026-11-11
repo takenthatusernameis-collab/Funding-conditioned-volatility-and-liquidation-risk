@@ -1,0 +1,16 @@
+{
+  "fetched_utc": "2026-11-11T19:54:02Z",
+  "coin": "CRV",
+  "month": null,
+  "endpoint": "fundingHistory",
+  "interval": null,
+  "start_ms": 1777593600000,
+  "end_ms": 1793491199999,
+  "rows": null,
+  "sha256": "18e7f4ca80e753d62cc7ad2509af34dd9191e0b503ccde305cedc76671757df4",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true
+}

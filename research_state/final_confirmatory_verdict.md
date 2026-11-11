@@ -126,3 +126,23 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Selected next heavy campaign:** `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` (priority: observed liquidation-risk). Candidate: new pre-registered funding-conditioned vs RV-only forecast of observed Hyperliquid liquidation intensity on an earlier admissible window (ironflow labels + cached funding overlap) disjoint in design from NOT_MET 2026-05..2026-10, requiring bounded first-time unauthenticated candleSnapshot acquisition with provenance for missing months only (no re-fetch 2026-05..2026-10) and freeze BEFORE outcomes. If infeasible on documented minima/coverage, pivot to `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` with frozen ex-ante selection/event-adequacy rules.
 
 **Compliance:** no outcome inspection; no Binance/2024 conflation; no modeled/proxy labels presented as observed; no threshold-shopping/sealed-hold reuse; no `.github/workflows` edits; no redundant network polling; no Gate 4 bypass/fabrication. Historical 2024 H001 and prior Track A records preserved.
+
+---
+
+## Branch 2 Addendum — 2026-11-11T19:35:00Z (GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 closed INADMISSIBLE; pivot to symbol expansion)
+
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md`
+**Determination:** `INADMISSIBLE` — pre-registered claim-worthy minima unsatisfiable on audited cached + bounded first-time acquirable data; **no outcome computation performed** (prereg frozen pre-outcomes).
+
+**What was done (this session, pre-outcome then acquisition):**
+1. Froze prereg `research_state/tracka_prereg_hyperliquid_early_20261111T191958Z.json/.md` (TRACKA-HL-EARLY-20261111T191958Z) before any outcome computation: Hyperliquid-only, observed ironflow labels, window `2025-11-01..2026-04-30` disjoint from closed NOT_MET `2026-05..2026-10`, 9 *-PERP symbols, C2 vs B1 QLIKE, 7d embargo, >=3 non-overlapping 30-day test blocks, >=5 paired instruments, >=2% materiality (all required).
+2. Executed bounded first-time unauthenticated Hyperliquid `candleSnapshot` 1h acquisition for missing months 2025-11..2026-04 x 9 coins (54 calls, 0 errors, all HTTP 200): cached under `research_state/data_cache/hyperliquid_candles/<COIN>/<YYYY-MM>.json` with `.accessed.json` + `.sha256` provenance (raw hex); acquisition report `research_state/tracka_hl_early_candle_fetch_report_20261111T193140Z.json`.
+3. Coverage result (decisive): `2025-11..2026-03` returned empty list `[]` for all 9 coins — no candle data available from the exchange for that window; `2026-04` partial only (~327-328 rows/coin, ~45% of month hours). RV24h/B1 RV-only baseline not computable; >=3 test blocks unsatisfiable; B1 baseline unavailable -> pre-registered minima failed.
+4. Documented infeasibility artifact with exact evidence (above verdict); state updated atomically: `experiment_frontier.json`, `hypothesis_registry.json` (H_tracka_hl_early_liquidation_forecast = INADMISSIBLE), `run_manifest.json` (run GAP-EARLY-INFEASIBLE-20261111T193500Z).
+5. No Binance/2024 conflation; observed labels only; no modeled/proxy labels; no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; no redundant network polling; no Gate 4 bypass/fabrication.
+
+**Pivot (next heavy campaign):** `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` — expand symbol universe on `2026-05..2026-10` (or subwindow) for observed liquidation-intensity forecasting using additional liquid Hyperliquid markets in cached ironflow (432 PERP markets cached `2026-05..2026-10` vs 9 in closed NOT_MET panel) with matching funding+candle predictors. NEW prereg required BEFORE outcomes: frozen ex-ante symbol selection rule + event-adequacy minima (>=5 instruments, >=3 non-overlapping 30d test blocks with data, RV24h computable), bounded first-time unauthenticated fundingHistory+candleSnapshot acquisition for candidates as needed, no cherry-picking, closed NOT_MET 9-symbol panel NOT relitigated (different universe/design).
+
+**Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Branch 1 not triggered unless valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears.
+
+**Historical record preserved:** 2024 H001 NOT_SUPPORTED and prior Track A addenda NOT erased; this Branch 2 addendum is appended alongside them.
