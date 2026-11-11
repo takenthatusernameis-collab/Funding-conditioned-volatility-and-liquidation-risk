@@ -1,8 +1,8 @@
-# FOCUS_CAMPAIGN — 2026-11-11T12:50:22Z
+# FOCUS_CAMPAIGN — 2026-11-11T12:52:17Z
 **Single durable handoff:** `HANDOFF_NEXT_SESSION.md` (authoritative). Execute it.
 
 ## Active campaign (heavy, inescapable)
-1. **Track A liquidation-risk (primary computable):** Path (a) evidence audit complete (`research_state/tracka_alignment_patha_audit_20261111T125022Z.md`); full frozen prereg infeasible. **Terminalize:** (b) freeze successor prereg on 2026-05-01..2026-10-31 overlap (pre-outcomes, hashed inputs) → aligned panel → pre-registered eval → `evaluation_summary_TRACKA-HL-*` + atomic frontier/registry/manifest/verdict updates, OR (c) terminal NOT_SUPPORTED/BLOCKED closure with evidence.
+1. **Track A liquidation-risk (primary computable):** Path (a) audit complete (`research_state/tracka_alignment_patha_audit_20261111T125022Z.md`); full frozen prereg infeasible. **Terminalize now:** (b) freeze successor prereg on 2026-05-01..2026-10-31 overlap (pre-outcomes, hashed inputs) → aligned panel → pre-registered eval → `evaluation_summary_TRACKA-HL-*` + atomic frontier/registry/manifest/verdict updates, OR (c) terminal NOT_SUPPORTED/BLOCKED closure with evidence.
 2. **Gate 4 / Track C volatility (external-blocked):** human/legal Binance terms evidence required; document BLOCKED, no bypass. If resolved: deterministic reconcile → `--expect-go` validators → confirmatory multi-split ablation.
 
 ## Closed / do not relitigate
