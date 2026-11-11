@@ -1,21 +1,21 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, authoritative):** 2026-11-11T17:28:35Z
+**Timestamp (UTC, authoritative):** 2026-11-11T18:25:52Z
 **Status:** AUTHORITATIVE. This is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is a redirect only. Any doc conflicting with this handoff is stale. Read fully before acting. **No status-only output.**
 
-## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T17:28:35Z
+## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T18:25:52Z
 
 **Mission (repo-prioritized):** Advance `Funding-conditioned-volatility-and-liquidation-risk` on **liquidation-risk forecasting co-equal with volatility forecasting**, using admissible unauthenticated data with verifiable provenance. Track A successor (2026-05..2026-10, 9 symbols, observed ironflow) is evaluated **NOT_MET** (closed for that prereg). Track B/C (2024) are closed negative. Gate 4 is externally blocked. **Do not idle, do not report status only, do not relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts + consistent state updates.**
 
-### Bottleneck removed this session (2026-11-11T17:28:35Z)
-- Consolidated scattered root raw 2024 zips/folders into `data/raw_legacy_2024q1_scattered/` to declutter the repo root and reduce navigation/build friction for future agents.
+### Bottleneck removed this session (2026-11-11T18:25:52Z)
+- Consolidated scattered root raw 2024 zips/folders into `data/raw_legacy_2024q1_scattered/` to declutter the repo root and reduce navigation/build friction for future agents. (Already complete in prior session; confirmed no outstanding root clutter.)
 
 ### Completed (do not relitigate)
 - **Track A successor `TRACKA-HL-S-20261111T133430Z` (2026-05-01..2026-10-31):** RV bottleneck removed via bounded first-time unauthenticated Hyperliquid candleSnapshot acquisition (54 coin-months, cached), RV panel built/evaluated, **forecast gate NOT_MET** (C2 worse than B1). Verdict: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`. Panel: `research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet`. Prior context-insufficient closure superseded: `research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md`.
 - **Branch 2 gap audit completed (no outcomes computed):** `research_state/next_panel_gap_audit_20261111T163229Z.json`, `research_state/next_panel_gap_audit_20261111T163229Z.md`. Confirms cached admissible assets and fillable Track-A gaps.
 - **Closed negative / sealed:** Track B/C confirmatory (2024) NOT_SUPPORTED (H001/Track B). FCLR-002/003/Track B/C test sets immutable — **no reuse, no threshold-shopping**.
 
-### Current cached admissible inventory (verified 2026-11-11T17:28:35Z)
+### Current cached admissible inventory (verified 2026-11-11T18:25:52Z)
 - **Ironflow observed labels (Hyperliquid):** `research_state/data_cache/ironflow_events/` — 18 monthly parquets `2025-05..2026-10` (2025-05 partial from 2025-05-25; complete months 2025-06..2026-10), ~2.85M rows, 468 markets. Observed only.
 - **Hyperliquid funding (9 coins AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP):** `research_state/data_cache/hyperliquid_funding/*.json` — hourly records; sampled coverage `2025-11-01T00:00:00Z`..`2026-10-30T23:00:00Z` (8668 rows/coin). Confirm exact per-coin bounds in prereg/build.
 - **Hyperliquid 1h candles (9 coins):** `research_state/data_cache/hyperliquid_candles/<COIN>/2026-05..2026-10.json` (+ `.accessed.json`, `.sha256`) — **no candle cache for 2025-11..2026-04**. Do **NOT** re-fetch 2026-05..2026-10.

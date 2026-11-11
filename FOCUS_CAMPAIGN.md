@@ -1,4 +1,4 @@
-# FOCUS_CAMPAIGN — 2026-11-11T17:28:35Z
+# FOCUS_CAMPAIGN — 2026-11-11T18:25:52Z
 **Single durable handoff (authoritative):** `HANDOFF_NEXT_SESSION.md` — execute it. `AGENT_HANDOFF.md` is a redirect.
 
 ## Active campaign (heavy, inescapable)
