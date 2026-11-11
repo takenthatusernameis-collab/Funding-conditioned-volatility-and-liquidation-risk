@@ -1,9 +1,8 @@
-# NEXT_SESSION_TASK — Pointer (Authoritative Handoff)
+# NEXT_SESSION_TASK — 2026-11-11T12:00:00Z
+**Execute:** `HANDOFF_NEXT_SESSION.md` (single durable handoff, authoritative).
 
-**Timestamp (UTC):** 2026-11-11T09:23:05Z
-**Single durable handoff / execute first:** `HANDOFF_NEXT_SESSION.md`
+## Immediate objectives
+- **Track A:** resolve `tracka_hl_alignment_blocker.md` to a terminal state — path (a) evidence audit → (b) successor prereg (frozen before outcomes) + eval + verdict, or (c) auditable closure verdict. Produce artifacts in `research_state/` and update manifest/frontier/registry/final verdict atomically when terminal.
+- **Gate 4:** if verifiable human/legal terms evidence becomes available, run FCLR-016 v5 promotion + `--expect-go` validators + confirmatory ablation; otherwise keep explicitly BLOCKED (no bypass).
 
-## Immediate task
-**`TRACKA-HL_PHASE_4_ALIGNMENT_CLOSURE`** — verify prereg freeze, exhaust path (a) with local/admissible evidence, then execute a terminal path: **(b)** scoped re-prereg + aligned panel + pre-registered evaluation + verdict artifact, or **(c)** auditable closure `evaluation_summary_TRACKA-HL-20261111T073000Z.md` (alignment inadmissible). Update frontier/registry/manifest/final verdict atomically.
-
-Read and execute `HANDOFF_NEXT_SESSION.md`. No status-only output; no outcome inspection before (successor) prereg freeze; no Binance/2024 conflation; no modeled labels; no threshold-shopping; no sealed-holdout reuse.
+No status-only output. Obey all hard bans in the handoff.
