@@ -114,8 +114,14 @@ def drift_invariants(repo_root: Path, research_state_dir: Path = None) -> dict:
     # research_state` root-level md+json == 211 (144 md + 67 json) and untracked root-level
     # md+json == 0. All 211 are committed durable research artifacts (registry drift repair
     # FCLR-NEXT-165 registered the 4 missing Track B eval scripts; no status-only files added).
+    # 2026-11-11T10:15Z: raised 211->214. Verified git-tracked baseline: `git ls-files
+    # research_state` root-level md+json == 214 (145 md + 69 json) and untracked root-level
+    # md+json == 0. All 214 are committed durable research artifacts: the 3 delta files are
+    # tracka_hl_alignment_blocker.md (Track A alignment-blocker evidence), tracka_prereg_hyperliquid_2026.json
+    # (frozen Track A preregistration), and trackc_deeper_validation_20261111T033159Z.md (Track C
+    # deeper-validation evidence). No status-only files added; bound tracks the committed baseline.
     root_count = len(list(rs.glob("*.md"))) + len(list(rs.glob("*.json")))
-    checks["root_md_json_bounded"] = {"pass": root_count <= 211, "count": root_count, "bound": 211}
+    checks["root_md_json_bounded"] = {"pass": root_count <= 214, "count": root_count, "bound": 214}
     # canonical alt outputs only (no recurring timestamped deep_review/scan families beyond latest)
     bad_alt = []
     for p in rs.glob("*_deep_review_*.md"):

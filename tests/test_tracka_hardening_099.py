@@ -215,7 +215,12 @@ class TestMachineCheckableDriftInvariants099(unittest.TestCase):
         # root-level md+json == 0. All 211 are committed durable research artifacts; the
         # FCLR-NEXT-165 registry drift repair registered 4 previously-unregistered Track B
         # eval scripts. No status-only files added.
-        self.assertLessEqual(cnt, 211, f"root md+json count {cnt} > 211")
+        # 2026-11-11T10:15Z: raised 211->214. Verified git-tracked baseline: `git ls-files
+        # research_state` root-level md+json == 214 (145 md + 69 json) and untracked
+        # root-level md+json == 0. All 214 are committed durable research artifacts: the 3 delta
+        # files are tracka_hl_alignment_blocker.md, tracka_prereg_hyperliquid_2026.json, and
+        # trackc_deeper_validation_20261111T033159Z.md. No status-only files added.
+        self.assertLessEqual(cnt, 214, f"root md+json count {cnt} > 214")
 
     def test_watch_trigger_harden_invariants(self):
         root = Path(__file__).resolve().parent.parent

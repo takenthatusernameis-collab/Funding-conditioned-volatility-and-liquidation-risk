@@ -431,7 +431,12 @@ class Test125G4CanonicalAltOutputsRootBoundRegression(unittest.TestCase):
         # root-level md+json == 0. All 211 are committed durable research artifacts; the
         # FCLR-NEXT-165 registry drift repair registered 4 previously-unregistered Track B
         # eval scripts. No status-only files added.
-        self.assertLessEqual(count, 211, f"root md+json count {count} exceeds bound 211")
+        # 2026-11-11T10:15Z: raised 211->214. Verified git-tracked baseline: `git ls-files
+        # research_state` root-level md+json == 214 (145 md + 69 json) and untracked
+        # root-level md+json == 0. All 214 are committed durable research artifacts: the 3 delta
+        # files are tracka_hl_alignment_blocker.md, tracka_prereg_hyperliquid_2026.json, and
+        # trackc_deeper_validation_20261111T033159Z.md. No status-only files added.
+        self.assertLessEqual(count, 214, f"root md+json count {count} exceeds bound 214")
 
     def test_probe_count_exactly_two(self):
         live = [p for p in RS.glob("ironflow_probe_*.json")
