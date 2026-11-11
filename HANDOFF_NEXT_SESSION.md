@@ -1,9 +1,9 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, authoritative):** 2026-11-11T13:46:10Z
+**Timestamp (UTC, authoritative):** 2026-11-11T14:33:33Z
 **Status:** AUTHORITATIVE. This is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is a redirect only. Any other doc claiming Track A closed without a verdict artifact or conflicting with this handoff is stale. Read fully before acting. **No status-only output.**
 
-## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T13:46:10Z
+## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T14:33:33Z
 
 **Mission (repo-prioritized):** `Funding-conditioned-volatility-and-liquidation-risk` requires **liquidation-risk forecasting** co-equal with volatility forecasting, on admissible unauthenticated data with provenance. **Track A (observed Hyperliquid liquidations, ironflow CC BY 4.0, unauthenticated)** is the only computable Track A path.
 
@@ -21,7 +21,7 @@ Track A was terminally closed as `NOT_SUPPORTED` (context insufficient / claim-w
 
 ### REQUIRED HEAVY WORK THIS SESSION — Remove the binding bottleneck, then finish Track A
 
-**Binding bottleneck (remove it):** mark-price/RV context for `2026-05-01..2026-10-31` is not cached. It IS available via the live **unauthenticated** Hyperliquid `candleSnapshot` endpoint (probe `hl_pathb_probe_20261111T122801Z.json` confirmed ~720-744 hourly rows/month for 2026-05..2026-10 across BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI; minor gaps: AVAX 2026-09 429, BNB 2026-06 429, SUI funding 2026-07 429). Fetching it now is **first-time acquisition, not redundant polling**, and is the bottleneck-removal step.
+**Binding bottleneck (remove it now):** mark-price/RV context for `2026-05-01..2026-10-31` is not cached. It IS available via the live **unauthenticated** Hyperliquid `candleSnapshot` endpoint (probe `hl_pathb_probe_20261111T122801Z.json` confirmed ~720-744 hourly rows/month for 2026-05..2026-10 across BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI; minor gaps: AVAX 2026-09 429, BNB 2026-06 429, SUI funding 2026-07 429). Fetching it now is **first-time acquisition, not redundant polling**, and is the bottleneck-removal step.
 
 **Execute in order:**
 1. **Acquire mark-price 1h candleSnapshot** for `2026-05-01..2026-10-31` for the 9 symbols via `scripts/tracka_hl_pathb_probe.py` logic (or a dedicated bounded fetcher): `POST https://api.hyperliquid.xyz/info {"type":"candleSnapshot","req":{"coin":"<COIN>","interval":"1h","startTime":<ms>,"endTime":<ms>}}`. Save raw responses under `research_state/data_cache/hyperliquid_candles/<COIN>/<YYYY-MM>.json` (or parquet) with SHA256 checksums and access timestamps. Bounded: 9 coins × 6 months, ~182s probe baseline; use retries/backoff, honor 429s, stop on persistent errors. Do NOT re-fetch months already valid.
@@ -41,7 +41,7 @@ If, after acquiring RV context, the pre-registered minima still cannot be met (�
 ---
 
 ### Hard bans (unchanged)
-- No outcome inspection before prereg freeze; no Binance/2024 conflation (Hyperliquid only, Track A); no modeled/proxy/synthetic liquidation labels (observed ironflow only); no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; no redundant network polling beyond the bounded first-time candle acquisition above; no agent-set `RESOLVED_VERIFIED` / `fabricated=true`; no status-only output without a Track A verdict artifact (or newly valid resolved terms artifact + executed promotion chain).
+- No outcome inspection before freeze; no Binance/2024 conflation (Hyperliquid only, Track A); no modeled/proxy/synthetic liquidation labels (observed ironflow only); no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; no redundant network polling (bounded first-time candle acquisition excepted); no agent-set `RESOLVED_VERIFIED`/`fabricated=true`; no status-only output without a Track A verdict artifact (or valid resolved terms + executed promotion chain).
 
 ### Bottleneck removal (this session)
 - Binding bottleneck identified: missing cached mark-price/RV context for Track A overlap window.
@@ -50,7 +50,7 @@ If, after acquiring RV context, the pre-registered minima still cannot be met (�
 - Gate 4 isolated to prevent spin; Track B/C 2024 closed & sealed.
 
 ### Key refs
-- Track A: `research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json`, `research_state/tracka_prereg_hyperliquid_2026.json`, `research_state/tracka_alignment_patha_audit_20261111T125022Z.md`, `research_state/tracka_hl_alignment_blocker.md`, `research_state/hl_pathb_probe_20261111T122801Z.json`, `research_state/data_cache/ironflow_events/`, `research_state/data_cache/hyperliquid_funding/`, `scripts/tracka_hl_pathb_probe.py`, `scripts/hyperliquid_funding_fetch.py`, `src/analysis/tracka_admissible.py`
+- Track A: `research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json`, `research_state/tracka_prereg_hyperliquid_2026.json`, `research_state/tracka_alignment_patha_audit_20261111T125022Z.md`, `research_state/tracka_hl_alignment_blocker.md`, `research_state/hl_pathb_probe_20261111T122801Z.json`, `research_state/data_cache/ironflow_events/`, `research_state/data_cache/hyperliquid_funding/`, `scripts/tracka_hl_pathb_probe.py`, `scripts/tracka_hl_build_panel_cached.py`, `scripts/hyperliquid_funding_fetch.py`, `src/analysis/tracka_admissible.py`
 - Gate 4: `research_state/fclr016_local_audit/fclr016_v5_*`, `scripts/fclr016_v5_preflight_summary.py`, `scripts/fclr016_validate_v5_admissibility.py`
 - Baseline checks: `python -m unittest discover -s tests -v` (as relevant)
 
