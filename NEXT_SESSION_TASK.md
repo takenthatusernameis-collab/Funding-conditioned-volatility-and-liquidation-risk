@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK — Single Durable Handoff (Initial Task Message)
 
-**Timestamp (UTC):** 2026-11-11T02:48:07Z
+**Timestamp (UTC):** 2026-11-11T02:54:37Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. This is the **single durable handoff**; treat `AGENT_HANDOFF.md` and `FOCUS_CAMPAIGN.md` as pointers only.
 
@@ -38,7 +38,7 @@
 
 `NEXT_SESSION_TASK.md` (this file), `FOCUS_CAMPAIGN.md`, `AGENT_HANDOFF.md`, `research_state/experiment_frontier.json`, `research_state/final_confirmatory_verdict.md`, `research_state/final_record_closure_audit.md`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`.
 
-## Last recorded verification (green, 2026-11-11T02:48Z)
+## Last recorded verification (green, 2026-11-11T02:54Z)
 
 ```bash
 python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127, no drift
