@@ -2,19 +2,20 @@
   {
     "artifact_churn_note": "Frontier reconciled 2026-11-10T21:00:33Z to single durable handoff; prior file contained concatenated/corrupted JSON and stale TB1 routing.",
     "blockers": "All admissible local routes exhausted under constraints: Track A STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census); Track C/H1 concluded NOT_SUPPORTED (all claim-worthy local panels exhausted); Track B TB1 degenerate/inadmissible (zero test breaches) and TB2 confirmatory forecast gate NOT_MET (NOT_SUPPORTED, rel Log Loss +1.68% < 2%, CI crosses zero, Holm fails, 2 test blocks <3).",
-    "generated": "2026-11-10T21:00:33Z",
-    "last_checked": "2026-11-10T21:00:33Z",
-    "next_action_heavy": "NONE \u2014 program concluded under constraints pending a new admissible unauthenticated source. Future work requires: (a) a new admissible unauthenticated data source with evidence, (b) a new experiment ID, and (c) a new preregistration frozen BEFORE any outcome computation. Do not poll, threshold-shop, reuse sealed holdouts, relitigate concluded tracks, or produce status-only output.",
-    "next_unfinished_task": "NONE",
-    "program_status": "CONCLUDED_UNDER_CONSTRAINTS",
-    "rank": 0,
-    "resume_triggers": [
-      "New admissible unauthenticated observed-liquidation source appears (Track A) with verifiable provenance/coverage",
-      "New admissible unauthenticated data extends Track B/C to an untested claim-worthy panel passing pre-outcome admissibility+provenance checks",
-      "New admissible unauthenticated source enables an independent Shek (H2) reconstruction not feasible from current local data"
-    ],
-    "status": "CONCLUDED_UNDER_CONSTRAINTS",
-    "task": "NO_FURTHER_LOCAL_WORK_PENDING_NEW_ADMISSIBLE_SOURCE"
+  "generated": "2026-11-10T21:00:33Z",
+  "last_checked": "2026-11-11T04:35:48Z",
+  "next_action_heavy": "SOURCE_UNBLOCK_CAMPAIGN — remove the Track A structural block (no admissible unauthenticated observed-liquidation source: Binance liquidationSnapshot 404, forceOrders 451; Bybit/OKX/Deribit no complete unauthenticated census; HF/Zenodo/GitHub exhausted for frozen 2024 windows; only admissible source ochinimus/crypto-liquidation-ticks covers 2026-07..08 only, FCLR-005 exploratory, <3 blocks). Execute Phases 1-3 in NEXT_SESSION_TASK.md: enumerate/probe/rubric-score new admissible unauthenticated sources with persisted GO/NO-GO evidence; any GO candidate proceeds to Phase 4 (new experiment ID, preregistration frozen BEFORE outcomes, heavy pre-registered evaluation). Do not poll, threshold-shop, reuse sealed holdouts, relitigate concluded tracks, or produce status-only output. If no GO candidate after the campaign, stop cleanly with evidence: NONE.",
+  "next_unfinished_task": "SOURCE_UNBLOCK_CAMPAIGN",
+  "program_status": "CONCLUDED_UNDER_CONSTRAINTS",
+  "rank": 0,
+  "resume_triggers": [
+    "GO candidate from SOURCE_UNBLOCK_CAMPAIGN Phase 3 rubric with provenance/coverage/terms evidence in-repo",
+    "New admissible unauthenticated observed-liquidation source appears (Track A) with verifiable provenance/coverage",
+    "New admissible unauthenticated data extends Track B/C to an untested claim-worthy panel passing pre-outcome admissibility+provenance checks",
+    "New admissible unauthenticated source enables an independent Shek (H2) reconstruction not feasible from current local data"
+  ],
+  "status": "CONCLUDED_UNDER_CONSTRAINTS",
+  "task": "SOURCE_UNBLOCK_CAMPAIGN_PENDING_NEW_ADMISSIBLE_SOURCE"
   },
   {
     "track_a": {
