@@ -1,0 +1,741 @@
+{
+  "artifact": "next_panel_gap_audit",
+  "generated_utc": "20261111T163229Z",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "purpose": "Bounded inventory of cached admissible assets and unexploited gaps for new pre-registered liquidation-risk/volatility claims while Gate 4 (Track C) is externally blocked. No outcomes computed; no preregistration implied by this audit.",
+  "hard_bans_respected": [
+    "no outcome inspection before freeze/prereg",
+    "no Binance/2024 conflated with Hyperliquid",
+    "no modeled/proxy labels presented as observed",
+    "no threshold-shopping",
+    "no sealed-holdout reuse",
+    "no .github/workflows edits",
+    "no redundant network polling",
+    "no agent-set RESOLVED_VERIFIED/fabricated",
+    "no status-only output"
+  ],
+  "gate4_status": {
+    "status": "EXPLICIT_BLOCKER_UNRESOLVED",
+    "blocker_artifact": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+    "fabricated": false,
+    "note": "Human/legal Binance v5 terms evidence required. Branch 1 executes only on valid RESOLVED_VERIFIED artifact."
+  },
+  "cached_assets": {
+    "ironflow_events": {
+      "source": "ironflow/hyperliquid-liquidations",
+      "label_type": "observed_liquidations (Hyperliquid perpetuals)",
+      "license": "CC BY 4.0 (as recorded in prior state; verify before new claim packaging)",
+      "unauthenticated_access_assumed": true,
+      "files": [
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-05.parquet",
+          "file": "2025-05.parquet",
+          "bytes": 649175,
+          "sha256": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-06.parquet",
+          "file": "2025-06.parquet",
+          "bytes": 2362144,
+          "sha256": "737908e4568ca903370e6bfc8bf9792d70102ddafa0161b48598dc3dd1b2e338"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-07.parquet",
+          "file": "2025-07.parquet",
+          "bytes": 4397200,
+          "sha256": "4ad6e10a5e34c329040a92d05942c8f0862ff97353120dba9efeed76429b4f22"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-08.parquet",
+          "file": "2025-08.parquet",
+          "bytes": 5254028,
+          "sha256": "b21bd8ce70fc9f8ef131afadef2185bcdf473e5df1f283f80e9dab5901ba8aac"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-09.parquet",
+          "file": "2025-09.parquet",
+          "bytes": 4609620,
+          "sha256": "63bfe5cc8f57176a7f0e5a91d990c224bbddb9e28854b6535b4e8cd2e72cb2bc"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-10.parquet",
+          "file": "2025-10.parquet",
+          "bytes": 9430899,
+          "sha256": "e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-11.parquet",
+          "file": "2025-11.parquet",
+          "bytes": 7978181,
+          "sha256": "74313ae0f60750a880735d2a647ef4c115440d68c39b1df0be8baccecbc8f361"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2025-12.parquet",
+          "file": "2025-12.parquet",
+          "bytes": 4441584,
+          "sha256": "d536ca955e01e126eb4741548b64c90899a8c2e7118d422d00efc4a024e271ea"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-01.parquet",
+          "file": "2026-01.parquet",
+          "bytes": 6116362,
+          "sha256": "489f5d9d747c3d58f0af515c925c9d2625eafbfbc33570e1c8ba4c8ca7ce7248"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-02.parquet",
+          "file": "2026-02.parquet",
+          "bytes": 6658690,
+          "sha256": "8e27c2e1ca90baebbc768ea74a105f4547f85d2a85c81b67927f9c32d02ec18f"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-03.parquet",
+          "file": "2026-03.parquet",
+          "bytes": 6001329,
+          "sha256": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-04.parquet",
+          "file": "2026-04.parquet",
+          "bytes": 5002960,
+          "sha256": "3d84969be4e65fea8abbc9c8b5950160e835c39ed0906d155cbefe46d23fd9b4"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-05.parquet",
+          "file": "2026-05.parquet",
+          "bytes": 6007849,
+          "sha256": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-06.parquet",
+          "file": "2026-06.parquet",
+          "bytes": 10478045,
+          "sha256": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-07.parquet",
+          "file": "2026-07.parquet",
+          "bytes": 8857812,
+          "sha256": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-08.parquet",
+          "file": "2026-08.parquet",
+          "bytes": 8692716,
+          "sha256": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-09.parquet",
+          "file": "2026-09.parquet",
+          "bytes": 8248237,
+          "sha256": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e"
+        },
+        {
+          "path": "research_state/data_cache/ironflow_events/2026-10.parquet",
+          "file": "2026-10.parquet",
+          "bytes": 10347879,
+          "sha256": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42"
+        }
+      ],
+      "months": [
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ],
+      "coverage_window_cached": "2025-05 .. 2026-10 (18 monthly parquet files)",
+      "rows_total_cached": 2848413,
+      "unique_markets_count_cached": 468,
+      "notes": "Observed liquidation events with timestamp/market/notional_usd etc. Admissible precedent for Track A. Venue is Hyperliquid only; do not conflate with Binance."
+    },
+    "hyperliquid_funding": {
+      "source": "Hyperliquid funding history (unauthenticated API pattern, cached JSON)",
+      "coins": [
+        "AVAX",
+        "BNB",
+        "BTC",
+        "DOGE",
+        "ETH",
+        "LINK",
+        "SOL",
+        "SUI",
+        "XRP"
+      ],
+      "n_coins": 9,
+      "files": [
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/AVAX.json",
+          "file": "AVAX.json",
+          "coin": "AVAX",
+          "bytes": 852460,
+          "sha256": "d420bc4efe8b284eb4b974babba1e650fa043dd470440d3ce95d475dec3e48f4",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/BNB.json",
+          "file": "BNB.json",
+          "coin": "BNB",
+          "bytes": 842930,
+          "sha256": "92c9c9221eb331e2450253d423be2cf37a70a0118961d998a931bed35c11321a",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/BTC.json",
+          "file": "BTC.json",
+          "coin": "BTC",
+          "bytes": 845283,
+          "sha256": "1c7d2b5d8c40c7b9e3ba84264bce214bb0f694f78aa8623d0b04b336c6a7e430",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/DOGE.json",
+          "file": "DOGE.json",
+          "coin": "DOGE",
+          "bytes": 852918,
+          "sha256": "91d3882a699796c354f6aa8159f4a4fa3b61ea05b857f04ae6b10b9c40e42e3b",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/ETH.json",
+          "file": "ETH.json",
+          "coin": "ETH",
+          "bytes": 843252,
+          "sha256": "2e3851fa6c541fecf3bbf399e8b8b87ad483c876a8010fa66a0f15b628815c5c",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/LINK.json",
+          "file": "LINK.json",
+          "coin": "LINK",
+          "bytes": 845471,
+          "sha256": "0dec3eaf2667caa7aa9ac277836f22ade3b909ee1623aff3fe441d3973fc8ac2",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/SOL.json",
+          "file": "SOL.json",
+          "coin": "SOL",
+          "bytes": 849785,
+          "sha256": "5aba146a9a587e4770884b5cfc7a1212d06e161049ed20c33512bb4c5f6e0ee3",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/SUI.json",
+          "file": "SUI.json",
+          "coin": "SUI",
+          "bytes": 844055,
+          "sha256": "78bd52963727f5a71f36c5eead5ab31a9b2f41deca2aa2d19c61a486c2251fef",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        },
+        {
+          "path": "research_state/data_cache/hyperliquid_funding/XRP.json",
+          "file": "XRP.json",
+          "coin": "XRP",
+          "bytes": 847722,
+          "sha256": "95d980a1688ab5f98764fe9f46683c37f418f546d91b809dde147b5465cf4781",
+          "n_records": 8668,
+          "min_time_ms": 1761955200078,
+          "max_time_ms": 1793401200078
+        }
+      ],
+      "approx_coverage_ms_range": "1761955200078..1793401200078 (~2025-11-01T00:00:00Z..2026-10-31T23:00:00Z per samples; confirm per-coin in prereg/data build)",
+      "notes": "Cached for 9 coins only (AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP)."
+    },
+    "hyperliquid_candles": {
+      "source": "Hyperliquid candleSnapshot 1h (unauthenticated, cached JSON)",
+      "coins": [
+        "AVAX",
+        "BNB",
+        "BTC",
+        "DOGE",
+        "ETH",
+        "LINK",
+        "SOL",
+        "SUI",
+        "XRP"
+      ],
+      "n_coins": 9,
+      "months_per_coin": "2026-05..2026-10 (6 files per coin) for cached set",
+      "files_by_coin": {
+        "AVAX": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/AVAX/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 112914,
+            "sha256": "0b48d1aeadea2327167e7cc9b8fb0e55e42dce6f7bd6bc13658a3d2179b119a4"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/AVAX/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 109814,
+            "sha256": "3784e11b85ea7c6033f585b51d06ddced7f676673196a39ab857a5dfb1b8cae3"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/AVAX/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 113091,
+            "sha256": "5761899afea50f4f1a339a5f0c19042ea21c5299f88fca96c4365c253e64057e"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/AVAX/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 113146,
+            "sha256": "eae7cdb0ea9298f16e24e09bd18f190e9130cb4ef62599f583587f21f1baa9a8"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/AVAX/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 109772,
+            "sha256": "f3bfbb9308cd078af85f0bafda5b8d215a711b9a50f0effe7ddbf66145161096"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/AVAX/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 113318,
+            "sha256": "509168cfe56f5977c12b83688a74b17107b9dc76be4f4b43cf363dec885de7f3"
+          }
+        ],
+        "BNB": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BNB/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 111935,
+            "sha256": "f6ced725ef3b386296115268af71857a8224ae3591da7bdf8e45a2b63cb7b7a5"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BNB/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 108482,
+            "sha256": "98645e09e61b9f0215252abf7ca74f385cff2babf1fbf9b37446516d6d76f58b"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BNB/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 111782,
+            "sha256": "f8cbb8862230577b0ca851c61dea884e738623436b000bdeda5d08355ee019d7"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BNB/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 112039,
+            "sha256": "225fd7f930ee82e36ca1d2395f3544419a9ad89ee1892e05d467dffaa9a3d672"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BNB/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 108583,
+            "sha256": "7ede94c13e97e9195d78cfa627a3dcdca22430eea23c3454e456e7aaacec4707"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BNB/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 111996,
+            "sha256": "d330cd27376dc5a1a4b9316613a0ca33127180e6261c5dda6924056ae13039b3"
+          }
+        ],
+        "BTC": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BTC/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 118226,
+            "sha256": "7af48de925e19631925f5eba92f92ce137686f5789e0957467ebddeda9f66703"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BTC/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 114742,
+            "sha256": "211796a8ddfe6bb13b828947d6c37ae8284c5b5eb48d0822a3a8d0abd042afee"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BTC/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 118240,
+            "sha256": "adadd97ebd53f4e7105fd88ae11a93ade3897b58a32b12ba203bbfa028118850"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BTC/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 118118,
+            "sha256": "1850753fa9aee9715f986883cbf3e7e69a179d9381f4079fd23b961fe4b35fa3"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BTC/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 114335,
+            "sha256": "ec494803f170380f2966aad2dc1164b843464823e9f404ce8a8eeb663cc83562"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/BTC/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 118059,
+            "sha256": "a88a4a464c1535b99833e2a69502779b9d8edd290f8217ec0c7f5393bd349b1b"
+          }
+        ],
+        "DOGE": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/DOGE/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 117806,
+            "sha256": "a7079e29c69b891efcce060240daafc4064ab4455333d659d118cfee9bdc99fa"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/DOGE/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 116161,
+            "sha256": "6f174055ba8d7b8816683df92f356aa2599413cddf5ea2317eeadcf7ed170906"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/DOGE/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 120084,
+            "sha256": "655e357c60888592aa44a8c2317fe1b6de062a0b4eb9d5625783b61216cf7f41"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/DOGE/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 120355,
+            "sha256": "81f165be6f9352127a818b836cad357c0759efc366d6ac3a8d50ddcba538ea47"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/DOGE/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 116532,
+            "sha256": "209d289a9156727614b85a740fdc1e694a79d4499d1d2aca0ef33a095069a9fe"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/DOGE/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 120367,
+            "sha256": "46ee8b1413656a4cd1823bf3cb475b1892c7be35032976b2958336f62d5ce3f7"
+          }
+        ],
+        "ETH": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/ETH/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 114923,
+            "sha256": "aacf4334829d3666d118e9a0f3212af87a0378b74ec79157af15f58286b9e688"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/ETH/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 111476,
+            "sha256": "c9c8db39a099200805fd2c1eee786965b017d5cf87b12e1e94d50fcc5a3f5da1"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/ETH/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 115030,
+            "sha256": "d2204685020ced2f8f1a03fc0bba41d588db2ca54c71b98dd884285e77253f67"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/ETH/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 115056,
+            "sha256": "1530fcba746dd8cb6539333384ab878e0c5914beeaab729f2ca9b026e943aa6b"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/ETH/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 111366,
+            "sha256": "5078076832a337f65ddd7a81757e9f8b3113f7fcb1119a187901be846ebbc922"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/ETH/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 114963,
+            "sha256": "221b667b290826eabb47fd4f5c7149b7211205e068db190f4d119a9aafeac733"
+          }
+        ],
+        "LINK": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/LINK/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 112562,
+            "sha256": "819d9a93f6de145cf379fe696b2c9dc14bd23c4a597c827e60e9f888b934cf76"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/LINK/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 108660,
+            "sha256": "692326fa1bfdb1fc281182f68ee20690f65e5aa30b7ea2484707f864ae05b0ec"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/LINK/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 112314,
+            "sha256": "2c6da188f5ce75ccc70238e77a74b30bbf6a7813a600d8aa2972684d512491e0"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/LINK/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 112778,
+            "sha256": "aa9f81c15d87c96dfd016fbff706b676fcb622f50a4025630d9b04945dc0ee15"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/LINK/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 109368,
+            "sha256": "0a32dd56f48dfd8b3e1407929bcb3b024149e568b9a90b83f4661e3124faa465"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/LINK/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 112771,
+            "sha256": "98ed80eaceda35c33f491230beaf8e61806c73c88928a44df622657d93e4d8e2"
+          }
+        ],
+        "SOL": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SOL/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 113486,
+            "sha256": "ffd8fb699c1d26429e744d71e1885cfa5b3a10ec12e1665bb042b1aa5145f423"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SOL/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 110101,
+            "sha256": "e483d45b44ed9ef4bdf8fe86cd32e53009e5767e141c434fc339d9eb90313236"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SOL/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 113509,
+            "sha256": "8c996073660a1d5ad014c8cf319c1888e68a1d19e78fd3f411bb0c6eda37a0c1"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SOL/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 113645,
+            "sha256": "c6e8e0cb8818b7c1a975c66eac1f09b2eea13c65eebc14eec2dbe7ead07b37fb"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SOL/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 109952,
+            "sha256": "49f36012f6cccdba857c75291dc03532bbe382740086f27066403c7111fb2bb8"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SOL/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 113578,
+            "sha256": "c1c3a43748ec39e9396910934c524fecf4d72342ba44517be247035aa0b0e2fb"
+          }
+        ],
+        "SUI": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SUI/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 115568,
+            "sha256": "30d7447197fe991ba449dc1b65434eb3b2aa8ff85733a1e7ff5549ad973a90da"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SUI/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 113457,
+            "sha256": "a0cc749c4a8f57168cee3a71def78a56ad183ecdbdc49113a874ba91da999acf"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SUI/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 116096,
+            "sha256": "9118dfecd6174b1a739d362c4757b11c8f5fb921a9d2101aaef7136557e856f5"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SUI/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 116423,
+            "sha256": "57298dcbc0b3c1d38759e60ffbd0473813888a08555bfbfd9ee5473323809470"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SUI/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 112882,
+            "sha256": "f24f47b1e4daee3796ad0d76fe3fd77da0a797b19fb911aadc3fb53b9c2645c6"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/SUI/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 115223,
+            "sha256": "ffcc4b13f9bf3b3703ffc182b3a0ccee1042c4e05d8704c5c7ad5bb6a76be3c5"
+          }
+        ],
+        "XRP": [
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/XRP/2026-05.json",
+            "file": "2026-05.json",
+            "bytes": 113215,
+            "sha256": "d7ca5a7678c7a687a6f59ce321ab5e110c7b76fbe7263e4636fdd62677661437"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/XRP/2026-06.json",
+            "file": "2026-06.json",
+            "bytes": 109783,
+            "sha256": "09a2c69d6a9c1f9d12238a34de3a5870c9a7b5d913fd102c7b6864a29e5e6c48"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/XRP/2026-07.json",
+            "file": "2026-07.json",
+            "bytes": 113137,
+            "sha256": "157a4c155859a0e41fb7edb863f10804c902fc067196d217d55b2217cd660641"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/XRP/2026-08.json",
+            "file": "2026-08.json",
+            "bytes": 113709,
+            "sha256": "fc716657d6a538c0fa601b99d47d8678d08783732d8cf71d1257b4ca4f2f4776"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/XRP/2026-09.json",
+            "file": "2026-09.json",
+            "bytes": 110210,
+            "sha256": "4de8ef61a8ef5b10570f63709e7f89368faf201c370230fecd241370dee4b2d0"
+          },
+          {
+            "path": "research_state/data_cache/hyperliquid_candles/XRP/2026-10.json",
+            "file": "2026-10.json",
+            "bytes": 113555,
+            "sha256": "5c08e31b3af7f2af36652e0fac0b9649508cd1e507b680a197955d52c9a5576a"
+          }
+        ]
+      },
+      "notes": "RV/price context currently cached only for 2026-05..2026-10, 9 coins. No candle cache found for 2025-05..2026-04 in hyperliquid_candles/."
+    }
+  },
+  "evaluated_panels": [
+    {
+      "experiment_id": "TRACKA-HL-S-20261111T133430Z",
+      "window": "2026-05-01..2026-10-31",
+      "symbols": [
+        "AVAX",
+        "BNB",
+        "BTC",
+        "DOGE",
+        "ETH",
+        "LINK",
+        "SOL",
+        "SUI",
+        "XRP"
+      ],
+      "verdict": "NOT_MET",
+      "artifact": "research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md",
+      "panel": "research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet",
+      "note": "Completed; do not relitigate without new pre-registered design/data."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
+      "priority": "HIGH (Track A / observed liquidation-risk)",
+      "candidate_claim": "Funding-conditioned features vs RV-only baseline for next-24h observed Hyperliquid liquidation intensity on a new pre-registered panel/window disjoint from evaluated 2026-05..2026-10 holdout design, using ironflow observed labels.",
+      "cached_inputs_available": {
+        "observed_labels": "ironflow_events 2025-05..2026-04 present (months 2025-05..2026-04 unexploited for this specific RV-augmented forecast design)",
+        "funding": "hyperliquid_funding cached for 9 coins with coverage overlapping ~2025-11..2026-04 (confirm exact per-coin timestamps in prereg build)",
+        "rv_price_context": "NOT cached for 2025-05..2026-04 in hyperliquid_candles/ (gap)"
+      },
+      "fillable_by_admissible_acquisition": true,
+      "acquisition_needed": "Bounded first-time unauthenticated Hyperliquid candleSnapshot 1h fetch+cache with provenance (URL/access time/checksums/API-key/requester-pays/signature status) for required coins/months; no redundant polling of already-cached 2026-05..2026-10.",
+      "constraints": [
+        "Pre-register BEFORE any outcome computation/panel alignment for the new claim",
+        "Maintain >=5 paired instruments and >=3 non-overlapping 30d test blocks if design requires (specify in prereg); document if infeasible",
+        "Observed labels only; no modeled/proxy presented as observed",
+        "Hyperliquid only, no Binance/2024 conflation",
+        "No sealed-holdout reuse"
+      ],
+      "claim_worthy_if": "sufficient symbol-month overlap with complete funding+RV+label coverage and pre-registered minima/splits satisfied after deterministic build; otherwise document infeasibility."
+    },
+    {
+      "id": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
+      "priority": "MEDIUM-HIGH (Track A / observed liquidation-risk)",
+      "candidate_claim": "Expand symbol universe on 2026-05..2026-10 (or subwindow) for observed liquidation-intensity forecasting if additional liquid Hyperliquid markets have adequate label activity and matching predictors.",
+      "cached_inputs_available": {
+        "observed_labels": "ironflow_events 2026-05..2026-10 present (468 markets total in cache; prior panel used 9)",
+        "funding": "cached for 9 coins only",
+        "rv_price_context": "cached for 9 coins only (2026-05..2026-10)"
+      },
+      "fillable_by_admissible_acquisition": "POSSIBLY",
+      "acquisition_needed": "First-time unauthenticated Hyperliquid fundingHistory and/or candleSnapshot fetch+cache with provenance for candidate additional symbols present in ironflow with sufficient liquidation activity; must pass minima and avoid cherry-picking (pre-registered symbol selection rule).",
+      "constraints": [
+        "New prereg required (different universe/design than NOT_MET successor)",
+        "Pre-register symbol inclusion/exclusion and minima before outcomes",
+        "Beware sparse-liquidity/sparse-liquidation symbols; require event-adequacy checks as pre-registered",
+        "No outcome inspection before freeze"
+      ],
+      "claim_worthy_if": "pre-registered universe yields >=5 paired instruments and >=3 non-overlapping 30d test blocks with adequate label variance; requires evidence-driven selection rules frozen ex ante."
+    },
+    {
+      "id": "GAP-ALTERNATIVE-OBSERVED-LIQUIDATION-SOURCES",
+      "priority": "MEDIUM (Track A)",
+      "candidate_claim": "None identified in current cache without new admissible source verification.",
+      "cached_inputs_available": {
+        "notes": "No other verified observed-liquidation datasets with matching Hyperliquid decision-time predictors found in data_cache beyond ironflow. prior liquidation forward-validate notes are blockers; treat as historical unless revalidated with provenance."
+      },
+      "fillable_by_admissible_acquisition": "UNKNOWN",
+      "acquisition_needed": "Only if a verifiable unauthenticated observed-liquidation source with license/provenance and alignable predictors is found; requires pre-outcome admissibility review and prereg.",
+      "constraints": [
+        "Observed only, verifiable provenance, no requester-pays/auth ambiguity unresolved"
+      ]
+    },
+    {
+      "id": "GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS",
+      "priority": "LOWER than Track A while Gate 4 blocked",
+      "candidate_claim": "Volatility forecasting on admissible untested Hyperliquid (or other admissible unauthenticated) panels where funding+RV+targets can be constituted without Binance 2024/Track C conflation.",
+      "cached_inputs_available": {
+        "notes": "HL funding/candles overlap limited (candles 2026-05..2026-10 for 9 coins; funding to ~2026-10-31). Any volatility claim must be a new pre-registered design on an untested admissible panel and must not reuse sealed holds."
+      },
+      "fillable_by_admissible_acquisition": "POSSIBLY with candle/funding extension (see GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 acquisition pattern) but claim is secondary to liquidation-risk priority.",
+      "constraints": [
+        "No Track C/Gate 4 bypass",
+        "No 2024 Binance conflation",
+        "Pre-register before outcomes"
+      ]
+    }
+  ],
+  "recommended_next_heavy_work": {
+    "default_branch": "Branch 2 (Gate 4 trigger absent)",
+    "selected_candidate": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
+    "rationale": "Repo priority is liquidation-risk forecasting co-equal with volatility on observed admissible data. Ironflow observed labels already cached for 2025-05..2026-04 and HL funding appears cached into that range for 9 coins; primary missing input is RV/price context (candles) for an earlier window. This is potentially fillable by bounded first-time unauthenticated Hyperliquid candleSnapshot acquisition with provenance, enabling a genuinely new pre-registered Track A evaluation (not a relitigation of NOT_MET 2026-05..2026-10).",
+    "required_sequence": [
+      "1) Define frozen preregistration (JSON+md) BEFORE any outcome computation: hypothesis, exact window/symbols, observed label definition/aggregation horizon, feature set, splits/embargo (>=7d), baselines/contrasts (e.g. B1 RV-only vs C2 funding-conditioned), metric, materiality threshold, minima (>=5 instruments, >=3 non-overlapping 30d test blocks if feasible), symbol/data inclusion rules, and handling of missingness.",
+      "2) If candle gaps remain, perform bounded first-time unauthenticated Hyperliquid candleSnapshot fetch for prereg-specified coins/months only; cache under research_state/data_cache/hyperliquid_candles/ (or documented path) and record provenance manifest (endpoint, params, access time UTC, HTTP/status, checksums, unauthenticated/no-key/no-requester-pays/signature status). Do not re-fetch 2026-05..2026-10.",
+      "3) Build deterministic aligned panel from cached inputs; emit panel parquet/json + build report with hashes/coverage/leakage-guard notes.",
+      "4) Run pre-registered evaluation only after freeze artifacts exist; compute required splits/embargo and bootstrap CIs per prereg; emit evaluation_summary_<UTC>.md and verdict.",
+      "5) Update experiment_frontier.json, hypothesis_registry.json, run_manifest.json, final_confirmatory_verdict.md atomically to reflect new prereg/run/verdict; keep prior NOT_MET and sealed records intact.",
+      "6) If prereg minima cannot be satisfied on audited cached+acquirable data, emit a concrete infeasibility/exhaustion addendum (with evidence) rather than status-only output and select next candidate gap (symbol expansion) under same rules."
+    ],
+    "stop_conditions": [
+      "Valid Gate 4 RESOLVED_VERIFIED terms evidence appears -> switch to Branch 1 immediately",
+      "Any required source fails admissibility/provenance verification -> do not use; document and pivot"
+    ]
+  }
+}

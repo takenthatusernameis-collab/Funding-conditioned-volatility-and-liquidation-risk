@@ -51,7 +51,17 @@
       "modeled_or_proxy": false,
       "last_tested": "2026-11-11T16:02:32Z",
       "claim_worthy_on_cache": true,
-      "determination": "Path (b) completed after bounded first-time candle acquisition; pre-registered C2 vs B1 evaluated on RV-augmented panel (2026-05-01..2026-10-31). Gate NOT_MET (C2 worse than B1)."
+      "determination": "Path (b) completed after bounded first-time candle acquisition; pre-registered C2 vs B1 evaluated on RV-augmented panel (2026-05-01..2026-10-31). Gate NOT_MET (C2 worse than B1).",
+      "next_campaign": {
+        "id": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
+        "status": "AUDITED_PENDING_PREREG",
+        "audit_artifacts": [
+          "research_state/next_panel_gap_audit_20261111T163229Z.json",
+          "research_state/next_panel_gap_audit_20261111T163229Z.md"
+        ],
+        "note": "New disjoint prereg required before outcomes; earlier window candidate (~2025-11..2026-04 intersection TBD in prereg) with observed ironflow labels, cached funding, missing candles requiring bounded first-time acquisition."
+      }
     }
-  ]
+  ],
+  "updated_utc": "2026-11-11T16:32:29Z"
 }

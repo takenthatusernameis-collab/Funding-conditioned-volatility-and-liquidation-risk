@@ -1,27 +1,26 @@
 [
   {
-    "artifact_churn_note": "Track A RV-context bottleneck removed 2026-11-11T16:02:32Z: bounded unauthenticated Hyperliquid candleSnapshot (2026-05..2026-10, 9 symbols) fetched once and cached (no redundant polling). RV-augmented panel rebuilt and pre-registered successor C2 vs B1 evaluation executed. Verdict: NOT_MET (C2 worse than B1, QLIKE diff +202.38, 95% CI [15.42,443.78], rel reduction -280.56%; instruments/blocks met). Track A successor prereg evaluation complete on admissible observed Hyperliquid data. Gate 4 remains EXTERNAL_BLOCKED (human/legal).",
+    "artifact_churn_note": "2026-11-11T16:32:29Z: Branch 2 gap audit completed (no outcomes). Produced research_state/next_panel_gap_audit_20261111T163229Z.json/.md inventorying cached admissible assets (ironflow observed labels 2025-05..2026-10, HL funding 9 coins ~2025-11..2026-10, HL candles 9 coins 2026-05..2026-10) and selecting GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 as next heavy campaign (new prereg + bounded first-time candle acquisition for missing window, pre-outcome freeze required). Track A 2026-05..2026-10 remains NOT_MET/closed. Gate 4 external-blocked.",
     "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required, fabricated=false). Track C/H1 NOT_SUPPORTED; Track B TB1/TB2 NOT_SUPPORTED; Track A successor NOT_MET (forecast gate). No sealed-holdout reuse; no Binance/2024 conflation.",
-    "generated": "2026-11-11T16:02:32Z",
-    "last_checked": "2026-11-11T16:02:32Z",
-    "next_action_heavy": "Track A fully evaluated (verdict NOT_MET). Next heavy work is blocked on external Gate 4 terms resolution: only if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (human/legal, fabricated=false, all 8 verifiable fields) run deterministic promotion then --expect-go validators and, if all-green GO, execute confirmatory Track C multi-split ablation on the frozen 2025+ panel with >=7d purge/embargo, train-only normalization, block-bootstrap \u0394QLIKE CIs. Otherwise preserve blocked state and do not fabricate evidence. If a new admissible unauthenticated observed-liquidation or volatility source appears with verifiable provenance/coverage for an untested claim-worthy panel, pre-register before outcomes and execute.",
-    "next_unfinished_task": "GATE4_EXTERNAL_BLOCKER_MONITOR_OR_NEW_ADMISSIBLE_SOURCE_PREREG",
-    "program_status": "ACTIVE_BLOCKED_EXTERNAL",
+    "generated": "2026-11-11T16:32:29Z",
+    "last_checked": "2026-11-11T16:32:29Z",
+    "next_action_heavy": "Gate 4 remains EXTERNAL_BLOCKED (human/legal). Default heavy work: execute GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 per next_panel_gap_audit_20261111T163229Z (1) freeze prereg BEFORE outcomes for new early Hyperliquid observed-liquidation window (9 coins, ironflow+cached funding, candles missing for ~2025-11..2026-04 intersection to be fixed in prereg); (2) bounded first-time unauthenticated candleSnapshot acquisition with provenance for missing months only (no re-fetch 2026-05..2026-10); (3) build deterministic RV panel + report; (4) run pre-registered evaluation and emit evaluation_summary verdict; (5) update state atomically. If infeasible, emit documented infeasibility and pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10. If valid RESOLVED_VERIFIED Gate 4 terms appear, switch to Branch 1.",
+    "next_unfinished_task": "TRACKA_GAP_EARLY_PREREG_AND_CANDLE_ACQUISITION_2025H2_2026Q1",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
     "rank": 0,
     "resume_triggers": [
-      "Mark-price/RV context for 2026-05..2026-10 cached (candleSnapshot 1h, 9 symbols)",
-      "TRACKA-HL successor panel rebuilt with RV and pre-registered C2 vs B1 evaluation executed with verdict artifact",
-      "New admissible unauthenticated observed-liquidation source appears (Track A) with verifiable provenance/coverage",
-      "New admissible unauthenticated source extends Track B/C to an untested claim-worthy panel passing pre-outcome admissibility+provenance checks",
-      "Valid fclr016_v5 terms evidence RESOLVED_VERIFIED appears (Gate 4 conditional Track C ablation)"
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1 conditional Track C ablation)",
+      "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 prereg frozen and missing-month candle provenance acquired -> build/evaluate new observed-liquidation panel",
+      "If GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 infeasible with evidence -> pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 with frozen ex-ante selection rules",
+      "New admissible unauthenticated observed-liquidation or volatility source appears with verifiable provenance/coverage for an untested claim-worthy panel"
     ],
-    "status": "ACTIVE_BLOCKED_EXTERNAL",
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
     "task": "GATE4_EXTERNAL_BLOCKER_MONITOR_OR_NEW_ADMISSIBLE_SOURCE_PREREG"
   },
   {
     "track_a": {
-      "status": "CONFIRMATORY_COMPLETE_NOT_MET",
-      "note": "ironflow/hyperliquid-liquidations (CC BY 4.0) observed labels; successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes. Bounded first-time unauthenticated Hyperliquid candleSnapshot (2026-05..2026-10, 9 symbols) cached; RV-augmented panel built (1656 buckets, 1647 w/ RV24h, 1434 w/ label, 9 symbols). Pre-registered C2 vs B1 QLIKE on next-24h liquidation intensity: C2 mean 274.51 vs B1 72.13 (n=693, 3 test blocks, 9 instruments), diff +202.38, 95% CI [15.42,443.78] (excludes zero in wrong direction), rel reduction -280.56% -> forecast gate NOT_MET. No threshold-shopping, no Binance/2024 conflation, no modeled/proxy labels.",
+      "status": "CONFIRMATORY_COMPLETE_NOT_MET_2026M05M10__NEXT_CAMPAIGN_GAP_EARLY_AUDITED",
+      "note": "ironflow/hyperliquid-liquidations (CC BY 4.0) observed labels; successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes. Bounded first-time unauthenticated Hyperliquid candleSnapshot (2026-05..2026-10, 9 symbols) cached; RV-augmented panel built (1656 buckets, 1647 w/ RV24h, 1434 w/ label, 9 symbols). Pre-registered C2 vs B1 QLIKE on next-24h liquidation intensity: C2 mean 274.51 vs B1 72.13 (n=693, 3 test blocks, 9 instruments), diff +202.38, 95% CI [15.42,443.78] (excludes zero in wrong direction), rel reduction -280.56% -> forecast gate NOT_MET. No threshold-shopping, no Binance/2024 conflation, no modeled/proxy labels. | 2026-11-11T16:32:29Z gap audit selected GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 for new prereg+bounded candle acquisition (no outcomes).",
       "experiment_id": "TRACKA-HL-S-20261111T133430Z",
       "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
       "data_source": "ironflow/hyperliquid-liquidations",
@@ -68,6 +67,6 @@
       "python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v",
       "python -c \"from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])\""
     ],
-    "updated_at": "2026-11-11T16:02:32Z"
+    "updated_at": "2026-11-11T16:32:29Z"
   }
 ]

@@ -108,3 +108,21 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Primary contrast (C2 vs B1):** B1 mean QLIKE 72.133883 (n=693), C2 274.514250 (n=693). Mean diff (C2-B1) +202.380367, 95% CI [15.418948, 443.775055], relative QLIKE reduction -280.56% (C2 worse). Gate: >=2% reduction NOT_MET, CI excludes zero in wrong direction NOT_MET, >=5 paired instruments PASS (9), >=3 test blocks PASS (3). **Forecast gate: NOT_MET.**
 
 **Compliance:** no outcome inspection before prereg freeze; Hyperliquid-only (no Binance/2024 conflation); observed ironflow labels only (no modeled/proxy/synthetic); no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; bounded first-time candle acquisition (not redundant polling). Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal, fabricated=false), not acted on. Historical 2024 H001 record and prior 13:34:30Z Track A terminal addendum preserved; this addendum supersedes the context-insufficiency determination with the completed evaluation outcome.
+
+---
+
+## Branch 2 Addendum — 2026-11-11T16:32:29Z (Next-panel gap audit, no outcomes)
+
+**Artifacts:** `research_state/next_panel_gap_audit_20261111T163229Z.json`, `research_state/next_panel_gap_audit_20261111T163229Z.md`
+**Determination:** Substantive inventory/audit completed; **no outcomes computed**, **no new preregistration frozen**.
+
+**Context:** Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (`research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`, `fabricated=false`, human/legal). Track A successor `TRACKA-HL-S-20261111T133430Z` remains **NOT_MET** (2026-05..2026-10; closed for that prereg). Track B/C 2024 remain closed negative; sealed holds immutable.
+
+**Cached admissible assets inventoried (hashes/sizes in JSON audit):**
+- `research_state/data_cache/ironflow_events/` (2025-05..2026-10, 18 monthly parquet files, ~2,848,413 rows, 468 markets): observed Hyperliquid liquidation labels (ironflow, CC BY 4.0 as previously recorded), admissible Track A precedent; Hyperliquid only.
+- `research_state/data_cache/hyperliquid_funding/` (AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP; ~2025-11-01..2026-10-31 coverage per samples, confirm per-coin in prereg/build): unauthenticated cached funding.
+- `research_state/data_cache/hyperliquid_candles/` (same 9 coins, 2026-05..2026-10 only): RV/price context cached for evaluated window; **no candle cache for 2025-05..2026-04**.
+
+**Selected next heavy campaign:** `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` (priority: observed liquidation-risk). Candidate: new pre-registered funding-conditioned vs RV-only forecast of observed Hyperliquid liquidation intensity on an earlier admissible window (ironflow labels + cached funding overlap) disjoint in design from NOT_MET 2026-05..2026-10, requiring bounded first-time unauthenticated candleSnapshot acquisition with provenance for missing months only (no re-fetch 2026-05..2026-10) and freeze BEFORE outcomes. If infeasible on documented minima/coverage, pivot to `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` with frozen ex-ante selection/event-adequacy rules.
+
+**Compliance:** no outcome inspection; no Binance/2024 conflation; no modeled/proxy labels presented as observed; no threshold-shopping/sealed-hold reuse; no `.github/workflows` edits; no redundant network polling; no Gate 4 bypass/fabrication. Historical 2024 H001 and prior Track A records preserved.
