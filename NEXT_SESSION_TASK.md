@@ -1,8 +1,8 @@
-# NEXT_SESSION_TASK — 2026-11-11T12:00:00Z
+# NEXT_SESSION_TASK — 2026-11-11T12:50:22Z
 **Execute:** `HANDOFF_NEXT_SESSION.md` (single durable handoff, authoritative).
 
-## Immediate objectives
-- **Track A:** resolve `tracka_hl_alignment_blocker.md` to a terminal state — path (a) evidence audit → (b) successor prereg (frozen before outcomes) + eval + verdict, or (c) auditable closure verdict. Produce artifacts in `research_state/` and update manifest/frontier/registry/final verdict atomically when terminal.
-- **Gate 4:** if verifiable human/legal terms evidence becomes available, run FCLR-016 v5 promotion + `--expect-go` validators + confirmatory ablation; otherwise keep explicitly BLOCKED (no bypass).
+## Immediate objectives (heavy, no status-only)
+- **Track A (primary):** Path (a) audit done (`research_state/tracka_alignment_patha_audit_20261111T125022Z.md`). **Terminalize now:** freeze successor prereg on 2026-05-01..2026-10-31 overlap (pre-outcomes) → build panel → pre-registered eval → verdict + atomic state updates; OR emit terminal NOT_SUPPORTED/BLOCKED closure if minima unmet.
+- **Gate 4:** keep BLOCKED on human/legal terms unless valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears; then deterministic `--expect-go` promotion + confirmatory ablation only.
 
-No status-only output. Obey all hard bans in the handoff.
+Obey all hard bans in the handoff.
