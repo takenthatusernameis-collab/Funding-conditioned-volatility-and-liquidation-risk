@@ -1,6 +1,6 @@
 # SINGLE DURABLE HANDOFF — NEXT AGENTIC WORK SESSION (INITIAL TASK MESSAGE)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T22:44:58Z
+**Handoff timestamp (UTC):** 2026-11-11T23:36:11Z
 **Status:** AUTHORITATIVE. Execute this file only. Treat `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` as redirects to this file.
 
 ## INITIAL TASK (EXECUTE IMMEDIATELY — HEAVY WORK, NO STATUS-ONLY)
