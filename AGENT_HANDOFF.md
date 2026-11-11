@@ -1,6 +1,4 @@
 # AGENT_HANDOFF (redirect)
-**Timestamp (UTC):** 2026-11-11T21:06:15Z
+**Timestamp (UTC):** 2026-11-11T21:12:58Z
 
-This file is **not** the durable handoff.
-
-**Authoritative single durable handoff:** `HANDOFF_NEXT_SESSION.md` — read in full and execute it. Do not execute this file.
+Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Read and execute it in full. Do not execute this file.
