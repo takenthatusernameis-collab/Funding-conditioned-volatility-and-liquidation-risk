@@ -1,7 +1,9 @@
-# SINGLE DURABLE HANDOFF — INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
-**Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-11T23:49:18Z
-**Status:** AUTHORITATIVE. Execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects.
+# INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
+**Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility and liquidation risk)
+**Handoff timestamp (UTC):** 2026-11-11T23:51:53Z (supersedes 2026-11-11T23:49:18Z content; this file remains the sole authoritative handoff)
+**Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects.
+
+**Immediate task:** Do not produce a status-only response. Execute the Focus Campaign below now: (1) freeze `research_state/tracka_prereg_volatility_20261111T234918Z.{json,md}` before any outcome computation, (2) build cached admissible Hyperliquid volatility panel + report, (3) run pre-registered B1 vs C2 eval and emit verdict artifact, (4) atomically update `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, and append `final_confirmatory_verdict.md`. If any step is infeasible/INADMISSIBLE, emit evidence artifact, update state, and immediately preregister+attempt the next best admissible untested claim in-session. Gate 4 Branch 1 only on a valid `fclr016_v5_terms_evidence_RESOLVED_*` trigger with required fields and human/legal attestation.
 
 ## BOTTLENECK CHECK (THIS SESSION)
 - Gate 4 Branch 1 trigger: **NOT PRESENT** — `research_state/fclr016_local_audit/` contains no `fclr016_v5_terms_evidence_RESOLVED_*` with required RESOLVED_VERIFIED/legal attestation/fabricated=false; only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts exist. **Do not wait/poll; proceed Branch 2.**
