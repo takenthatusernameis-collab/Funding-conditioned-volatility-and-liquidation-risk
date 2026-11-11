@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:53:37Z",
+  "fetched_utc": "2026-11-11T20:11:21Z",
   "coin": "ZEC",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "44c880d60a0913283b92d476f2d4633c8425f8904ba91e2ea8cea066a055bbb8",
+  "rows": 4416,
+  "sha256": "74b6afa0bcc16da2a95fa56f37b3537b838ab0611a52dbad68f8a1b63c4d17cb",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }

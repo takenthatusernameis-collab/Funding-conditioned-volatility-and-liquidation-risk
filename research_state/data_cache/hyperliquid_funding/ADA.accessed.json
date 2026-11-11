@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:54:08Z",
+  "fetched_utc": "2026-11-11T20:11:59Z",
   "coin": "ADA",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "e9034ee9e307c3b87e963aceffaa3ad65eb0b5f17645c5a1a0101155e2c21180",
+  "rows": 4416,
+  "sha256": "907256f7f160a488df815dc6b20fbfc7224ed67a2bafd8f1c296adb9316ecdfa",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }

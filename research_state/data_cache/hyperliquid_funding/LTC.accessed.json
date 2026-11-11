@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:54:14Z",
+  "fetched_utc": "2026-11-11T20:12:06Z",
   "coin": "LTC",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "ce553410522b2553bc0a9751a93b51b8b66303523d5ea1692d187826cc591d60",
+  "rows": 4416,
+  "sha256": "a7b98a80ba1a31a1061fbe6b7dea032606bc3f70401b686456c546929488153a",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }

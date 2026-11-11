@@ -1,0 +1,62 @@
+{
+  "generated_utc": "2026-11-11T20:11:14Z",
+  "coins": {
+    "ZEC": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "NEAR": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "UNI": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "AAVE": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "CRV": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "ADA": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "LTC": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    },
+    "BCH": {
+      "rows": 4416,
+      "chunks": 9,
+      "coverage_first_ms": 1777593600045,
+      "coverage_last_ms": 1793487600044,
+      "end_target_ms": 1793491199999
+    }
+  },
+  "errors": []
+}

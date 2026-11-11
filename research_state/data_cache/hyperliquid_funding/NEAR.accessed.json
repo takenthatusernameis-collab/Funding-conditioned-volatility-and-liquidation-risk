@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:53:43Z",
+  "fetched_utc": "2026-11-11T20:11:28Z",
   "coin": "NEAR",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "0a153533a6a37eeca3926816d3908b9e3ac571c5624202e13612db723202db92",
+  "rows": 4416,
+  "sha256": "f72d3b82f0dca14b6375ed4bb4ad30da57960289ecfad33bcf64fee421746412",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }

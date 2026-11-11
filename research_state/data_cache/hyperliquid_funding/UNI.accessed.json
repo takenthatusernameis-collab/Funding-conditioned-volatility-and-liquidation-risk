@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:53:49Z",
+  "fetched_utc": "2026-11-11T20:11:36Z",
   "coin": "UNI",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "93b6b1d966b9b482bc656ba5427210fa611a2bebb3f0d2217ffd2ef8e3548569",
+  "rows": 4416,
+  "sha256": "f17120db00764a6f5d14d2254a905867e890a0fe6b2824887e8b5e9a11b20f13",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }

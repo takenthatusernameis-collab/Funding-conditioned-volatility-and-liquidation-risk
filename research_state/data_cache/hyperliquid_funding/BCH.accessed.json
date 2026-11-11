@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:54:20Z",
+  "fetched_utc": "2026-11-11T20:12:13Z",
   "coin": "BCH",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "9470b5c3d092439413ff4beb44b93449749aec6f39c5bd8f1ec308dc3cec924d",
+  "rows": 4416,
+  "sha256": "ff2b4099144a0f4594323c37414ddc12dceac3d10c1ee5f097b93889110e8f90",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }

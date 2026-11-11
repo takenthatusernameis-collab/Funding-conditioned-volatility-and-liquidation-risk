@@ -1,16 +1,17 @@
 {
-  "fetched_utc": "2026-11-11T19:54:02Z",
+  "fetched_utc": "2026-11-11T20:11:51Z",
   "coin": "CRV",
-  "month": null,
   "endpoint": "fundingHistory",
-  "interval": null,
+  "paginated_chunks": 9,
   "start_ms": 1777593600000,
   "end_ms": 1793491199999,
-  "rows": null,
-  "sha256": "18e7f4ca80e753d62cc7ad2509af34dd9191e0b503ccde305cedc76671757df4",
+  "rows": 4416,
+  "sha256": "3ddb6fcfaa40d82dd353f5c03758eb44e440ceca9c74304378ad7e06dcb6cf1e",
   "http_status": 200,
   "api_key_required": false,
   "requester_pays": false,
   "signature_required": false,
-  "unauthenticated": true
+  "unauthenticated": true,
+  "coverage_first_ms": 1777593600045,
+  "coverage_last_ms": 1793487600044
 }
