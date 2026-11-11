@@ -1,21 +1,24 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, authoritative):** 2026-11-11T18:25:52Z
+**Timestamp (UTC, authoritative):** 2026-11-11T18:46:47Z
 **Status:** AUTHORITATIVE. This is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is a redirect only. Any doc conflicting with this handoff is stale. Read fully before acting. **No status-only output.**
 
-## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T18:25:52Z
+**SESSION ENTRY (VERIFIED 2026-11-11T18:46:47Z):** `research_state/fclr016_local_audit/` contains no `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json`; Gate 4 remains **EXPLICIT_BLOCKER_UNRESOLVED** (`research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`, `fabricated=false`). **Execute Branch 2 now.** Root 2024 raw clutter already consolidated to `data/raw_legacy_2024q1_scattered/`; handoff/campaign docs consolidated and consistent.
+
+## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T18:46:47Z
 
 **Mission (repo-prioritized):** Advance `Funding-conditioned-volatility-and-liquidation-risk` on **liquidation-risk forecasting co-equal with volatility forecasting**, using admissible unauthenticated data with verifiable provenance. Track A successor (2026-05..2026-10, 9 symbols, observed ironflow) is evaluated **NOT_MET** (closed for that prereg). Track B/C (2024) are closed negative. Gate 4 is externally blocked. **Do not idle, do not report status only, do not relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts + consistent state updates.**
 
-### Bottleneck removed this session (2026-11-11T18:25:52Z)
-- Consolidated scattered root raw 2024 zips/folders into `data/raw_legacy_2024q1_scattered/` to declutter the repo root and reduce navigation/build friction for future agents. (Already complete in prior session; confirmed no outstanding root clutter.)
+### Bottleneck removal status
+- Consolidated scattered root raw 2024 zips/folders into `data/raw_legacy_2024q1_scattered/` (complete; no root clutter reintroduced).
+- Single durable handoff/campaign pointers enforced (`HANDOFF_NEXT_SESSION.md` authoritative; `AGENT_HANDOFF.md` redirect; `FOCUS_CAMPAIGN.md`/`NEXT_SESSION_TASK.md` aligned).
 
 ### Completed (do not relitigate)
 - **Track A successor `TRACKA-HL-S-20261111T133430Z` (2026-05-01..2026-10-31):** RV bottleneck removed via bounded first-time unauthenticated Hyperliquid candleSnapshot acquisition (54 coin-months, cached), RV panel built/evaluated, **forecast gate NOT_MET** (C2 worse than B1). Verdict: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`. Panel: `research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet`. Prior context-insufficient closure superseded: `research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md`.
 - **Branch 2 gap audit completed (no outcomes computed):** `research_state/next_panel_gap_audit_20261111T163229Z.json`, `research_state/next_panel_gap_audit_20261111T163229Z.md`. Confirms cached admissible assets and fillable Track-A gaps.
 - **Closed negative / sealed:** Track B/C confirmatory (2024) NOT_SUPPORTED (H001/Track B). FCLR-002/003/Track B/C test sets immutable — **no reuse, no threshold-shopping**.
 
-### Current cached admissible inventory (verified 2026-11-11T18:25:52Z)
+### Current cached admissible inventory (verified 2026-11-11T18:46:47Z)
 - **Ironflow observed labels (Hyperliquid):** `research_state/data_cache/ironflow_events/` — 18 monthly parquets `2025-05..2026-10` (2025-05 partial from 2025-05-25; complete months 2025-06..2026-10), ~2.85M rows, 468 markets. Observed only.
 - **Hyperliquid funding (9 coins AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP):** `research_state/data_cache/hyperliquid_funding/*.json` — hourly records; sampled coverage `2025-11-01T00:00:00Z`..`2026-10-30T23:00:00Z` (8668 rows/coin). Confirm exact per-coin bounds in prereg/build.
 - **Hyperliquid 1h candles (9 coins):** `research_state/data_cache/hyperliquid_candles/<COIN>/2026-05..2026-10.json` (+ `.accessed.json`, `.sha256`) — **no candle cache for 2025-11..2026-04**. Do **NOT** re-fetch 2026-05..2026-10.
@@ -32,7 +35,7 @@
 1. Run Gate 4 promotion/admissibility validators per tooling (`scripts/fclr016_v5_promotion_dryrun.py`, `scripts/fclr016_validate_v5_admissibility.py`, `scripts/fclr016_v5_preflight_summary.py` or repo equivalents) with `--expect-go` semantics where applicable.
 2. Only on all-green GO, execute confirmatory Track C multi-split ablation on the frozen 2025+ panel (>=7d purge/embargo, train-only normalization, block-bootstrap ΔQLIKE CIs, pre-registered contrasts/thresholds) with frozen artifacts.
 3. Emit verdict artifact(s) under `research_state/` and update `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md` atomically.
-**If trigger absent:** Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (blocker: `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`, `fabricated=false`). **Do NOT set `RESOLVED_VERIFIED` or `fabricated=true`; do NOT bypass/fabricate terms evidence. Proceed to Branch 2.**
+**If trigger absent (CURRENT):** Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (blocker: `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`, `fabricated=false`). **Do NOT set `RESOLVED_VERIFIED` or `fabricated=true`; do NOT bypass/fabricate terms evidence. Proceed to Branch 2.**
 
 ### Branch 2 (DEFAULT, mandatory while Gate 4 blocked): New observed-liquidation Track A claim (PRIORITY)
 **Selected campaign:** `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` — pre-register and evaluate a **new** funding-conditioned vs RV-only forecast of **observed Hyperliquid liquidation intensity** on an earlier admissible window where ironflow labels and HL funding are cached but RV/candle context is missing, **disjoint in design from the evaluated NOT_MET 2026-05..2026-10 prereg**. Use `research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json` as structural template only; do not copy outcomes.
@@ -68,4 +71,4 @@
 - State: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md`
 - Checks: `python -m unittest discover -s tests -v` (as relevant)
 
-**End of Handoff — Execute INITIAL TASK MESSAGE now: Branch 1 if Gate 4 resolved, else Branch 2 heavy campaign (GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1).**
+**End of Handoff — Execute INITIAL TASK MESSAGE now: Branch 1 if Gate 4 resolved, else Branch 2 heavy campaign (`GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1`).**
