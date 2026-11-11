@@ -1,14 +1,15 @@
 # HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff / initial task message for next agentic work session**
-**Timestamp (UTC):** 2026-11-11T07:38:45Z
-**Repo:** `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`
+**Timestamp (UTC):** 2026-11-11T07:41:39Z
+**Repo:** /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
 
 ## Repo-priority state (evidence-backed, do not relitigate)
-- **Track A — Observed liquidations (repo-name priority): UNBLOCKED_GO_SOURCE.** `ironflow/hyperliquid-liquidations` adjudicated GO per Phase 3 rubric (CC BY 4.0, unauthenticated HF bulk parquet, no requester-pays, complete months 2025-06..2026-10 with 164–353 *-PERP markets/month, schema mappable to FCLR-010/H004, provenance in-repo). New experiment `TRACKA-HL-20261111T073000Z` preregistered pre-outcomes at `research_state/tracka_prereg_hyperliquid_2026.json`. Split boundaries frozen in `research_state/run_manifest.json`. Hyperliquid-native only; no Binance/2024 conflation; no sealed-holdout reuse.
-- **Track B — Modeled breach proxy:** CONFIRMATORY_COMPLETE, NOT_SUPPORTED (TB1 degenerate/zero test breaches; TB2 gate NOT_MET: LogLoss B1=0.292447→C2=0.287540 +1.68% <2%, 95% CI crosses zero, Holm fails, 2 test blocks <3). Not observed liquidations. `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`.
-- **Track C/H1 — Funding-conditioned volatility:** NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014). `research_state/final_confirmatory_verdict.md`, `research_state/hypothesis_registry.json`.
-- **Program:** `ACTIVE` (Track A unblocked by ironflow GO). Last recorded verification green: scope registry 127/127 pass, provenance 161/161 verified unmapped_count=0, targeted tests 35/35 OK.
-- **Bottlenecks cleared:** Tracks B/C concluded (NOT_SUPPORTED) — no active blocker; Track A unblocked (ironflow GO). Latent precondition: Track A alignment market/funding/price context requires an admissible unauthenticated Hyperliquid source — prove admissible provenance/coverage or document blocker in `research_state/tracka_hl_alignment_blocker.md`; Binance 2024 zips are inadmissible for Track A (no Binance/2024 conflation).
+- **Repo priority:** Funding-conditioned volatility + liquidation risk → Track A (observed liquidation labels) is the claim-worthy track; Tracks B/C concluded NOT_SUPPORTED.
+- **Track A — Observed liquidations: UNBLOCKED_GO_SOURCE.** `ironflow/hyperliquid-liquidations` adjudicated GO per Phase 3 rubric (CC BY 4.0, unauthenticated HF bulk parquet, no requester-pays, complete months 2025-06..2026-10 with 164–353 `*-PERP` markets/month, schema mappable to FCLR-010/H004, provenance in-repo). Experiment `TRACKA-HL-20261111T073000Z` preregistered pre-outcomes at `research_state/tracka_prereg_hyperliquid_2026.json`. Split boundaries frozen in `research_state/run_manifest.json`. Hyperliquid-native only; no Binance/2024 conflation; no sealed-holdout reuse.
+- **Track B — Modeled breach proxy:** CONFIRMATORY_COMPLETE, NOT_SUPPORTED (TB1 degenerate/zero test breaches; TB2 gate NOT_MET: LogLoss B1=0.292447→C2=0.287540 +1.68% <2%, 95% CI crosses zero, Holm fails, 2 test blocks <3). Not observed liquidations. No active blocker; no further Track B work.
+- **Track C/H1 — Funding-conditioned volatility:** NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014). No active blocker; no further Track C work.
+- **Program:** `ACTIVE` (Track A unblocked by ironflow GO). Bottlenecks cleared: Tracks B/C concluded (NOT_SUPPORTED); Track A unblocked (ironflow GO).
+- **Latent precondition:** Track A alignment market/funding/price context requires an admissible unauthenticated Hyperliquid source — prove admissible provenance/coverage or document blocker in `research_state/tracka_hl_alignment_blocker.md`; Binance 2024 zips are inadmissible for Track A (no Binance/2024 conflation).
 
 ## Singular next task — TRACKA-HL Phase 4 (heavy, execute immediately)
 Objective: build aligned Hyperliquid liquidation + market/funding/price panel from admissible unauthenticated sources, run pre-registered evaluation per `research_state/tracka_prereg_hyperliquid_2026.json`, produce auditable verdict artifact.
