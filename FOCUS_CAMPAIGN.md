@@ -1,19 +1,20 @@
-# FOCUS_CAMPAIGN — 2026-11-11T13:06:42Z
-**Single durable handoff:** `HANDOFF_NEXT_SESSION.md` (authoritative). Execute it. `AGENT_HANDOFF.md` superseded.
+# FOCUS_CAMPAIGN — 2026-11-11T13:26:16Z
+**Single durable handoff (authoritative):** `HANDOFF_NEXT_SESSION.md` — execute it. `AGENT_HANDOFF.md` superseded/redirect.
 
 ## Active campaign (heavy, inescapable)
-1. **Track A liquidation-risk (primary computable):** Path (a) audit complete (`research_state/tracka_alignment_patha_audit_20261111T125022Z.md`); full frozen prereg infeasible. **Terminalize this session:** (b) freeze successor prereg on 2026-05-01..2026-10-31 overlap (pre-outcomes, hashed inputs) → aligned panel → pre-registered eval → `evaluation_summary_TRACKA-HL-*` + atomic frontier/registry/manifest/final-verdict updates, OR (c) terminal NOT_SUPPORTED/BLOCKED closure with evidence.
+1. **Track A liquidation-risk (PRIMARY, COMPUTABLE, TERMINALIZE THIS SESSION):** Observed Hyperliquid liquidations (ironflow) — co-equal to repo mission. Path (a) audit complete; maximal admissible overlap `2026-05-01..2026-10-31`.
+   - **Path (b):** freeze successor prereg (pre-outcomes, checksums) → build aligned panel from cached admissible inputs → pre-registered evaluation (leakage/embargo checks) → `evaluation_summary_TRACKA-HL-*` verdict → atomic updates to frontier/registry/manifest/final verdict.
+   - **Path (c):** if minima unmet, emit terminal NOT_SUPPORTED/BLOCKED `evaluation_summary_TRACKA-HL-terminal-*` with evidence + atomic state closure.
+   **No status-only output; verdict artifact required.**
 
-Repo name `Funding-conditioned-volatility-and-liquidation-risk`: liquidation-risk forecasting is co-equal with volatility forecasting; Track A is the heavy mandatory campaign this session and must not be deferred.
-
-2. **Gate 4 / Track C volatility (external-blocked):** human/legal Binance terms evidence required; keep BLOCKED, no bypass/fabrication. If resolved: deterministic reconcile → `--expect-go` validators → confirmatory multi-split ablation only.
+2. **Gate 4 / Track C volatility (EXTERNAL-BLOCKED):** Human/legal Binance terms evidence required; keep BLOCKED, no bypass/fabrication. Act only on valid resolved terms artifact → deterministic reconcile + `--expect-go` validators → confirmatory multi-split ablation.
 
 ## Closed / do not relitigate
 - Track B/C confirmatory (2024): closed negative (H001 NOT_SUPPORTED). Sealed holds immutable.
 
 ## Hard bans
-No outcome inspection before freeze; no Binance/2024 conflation; no modeled/proxy labels; no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; no redundant network polling; no status-only output.
+No outcome inspection before freeze; no Binance/2024 conflation; no modeled/proxy labels; no threshold-shopping; no sealed-holdout reuse; no `.github/workflows` edits; no redundant network polling.
 
 ## Bottleneck removal
-- `AGENT_HANDOFF.md` retired to redirect (eliminates conflicting stale handoff).
-- Gate 4 deprioritized as external-blocked (cannot automate). Track A path (a) ambiguity removed; next agent must execute path (b)/(c) to terminal state.
+- Single handoff enforced (`HANDOFF_NEXT_SESSION.md`); stale/conflicting handoff retired.
+- Gate 4 isolated to prevent spin; Track A path ambiguity removed with fixed overlap and mandatory terminalization.
