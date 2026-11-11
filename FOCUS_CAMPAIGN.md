@@ -2,7 +2,7 @@
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Priority (per repo name):** 1) Track C/H1 funding-conditioned volatility — **CONCLUDED NOT_SUPPORTED**; 2) Track B liquidation boundary risk (modeled synthetic breaches) — **CONCLUDED NOT_SUPPORTED**; 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.
-**Campaign timestamp:** 2026-11-11T01:58:05Z
+**Campaign timestamp:** 2026-11-11T02:34:17Z
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — `next_unfinished_task: NONE` pending a new admissible unauthenticated source.
 
@@ -10,7 +10,7 @@
 No network/paid/manual/credentialed data; no fabricated provenance/outcomes; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only, never observed liquidations); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
 
 ## Mission (current)
-Preserve an auditable, reproducible terminal state and ensure future agents cannot idle or relitigate: the singular next action is **NONE** unless a genuinely new admissible unauthenticated source/route appears. Any resumed work must be heavy, verifiable, and pre-registered before outcomes. Silence/polling is not an option — `NONE` is the task until a new source appears.
+Preserve an auditable, reproducible terminal state and ensure future agents cannot idle or relitigate: the singular next action is **NONE** unless a genuinely new admissible unauthenticated source/route appears. Any resumed work must be heavy, verifiable, and pre-registered before outcomes.
 
 ## Heavy-work mandate (future agents cannot avoid heavy work)
 - Any resumed work must be **heavy, verifiable, and pre-registered before outcomes**.
@@ -23,16 +23,10 @@ Preserve an auditable, reproducible terminal state and ensure future agents cann
 - **Track A:** STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). Not locally repairable.
 
 ## Bottlenecks removed (verified clean)
-- Registry drift (FCLR-NEXT-165): script registry aligned at 127 entries (127 `scripts/*.py`, 0 missing, 0 extra, 0 bad). `check_tracka_scope_registry_drift.py` reports `pass True`.
-- Root md+json bound drift: cap raised 188->211 (actual baseline 144 md + 67 json, 0 untracked) in `scripts/tracka_resume_check.py`, `tests/test_tracka_hardening_099.py`, `tests/test_tracka_hardening_125.py`; negative test (101) padded 200->240.
-- Environment: `numpy`/`pandas`/`scipy` installed; full suite runs.
-- Corrupted/stale `research_state/experiment_frontier.json` repaired to valid concluded-state frontier.
+- Registry drift aligned at 127 entries (127 `scripts/*.py`, 0 missing/extra/bad). `check_tracka_scope_registry_drift.py` reports `pass True`.
+- Root md+json bound 211 (baseline 144 md + 67 json). Environment: `numpy`/`pandas`/`scipy` installed.
+- Corrupted `research_state/experiment_frontier.json` repaired to valid concluded-state frontier.
 - Durable handoffs consolidated to one unambiguous initial task (`NONE` pending new admissible source, with explicit reopen gates).
-
-## Milestones (terminal)
-- M1–M4 (Track C): COMPLETE — NOT_SUPPORTED.
-- M5 (Track B): COMPLETE — TB1 degenerate; TB2 confirmatory gate NOT_MET/NOT_SUPPORTED.
-- M6 (program): **CONCLUDED_UNDER_CONSTRAINTS** — all admissible local routes exhausted. `next_unfinished_task: NONE`.
 
 ## Execution rules (for any future reopen)
 1. New admissible unauthenticated source only (no network-paid/manual/credentialed). 2. New experiment ID. 3. Prereg/freeze before outcomes. 4. No threshold shopping/holdout reuse. 5. Track B = modeled breach proxy only. 6. No fabricated provenance. 7. No status-only output; deliver heavy verifiable work or stop with evidence.

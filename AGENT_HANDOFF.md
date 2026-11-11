@@ -1,6 +1,6 @@
 # AGENT_HANDOFF.md — Durable Handoff Pointer
 
-**Timestamp (UTC):** 2026-11-11T01:58:05Z
+**Timestamp (UTC):** 2026-11-11T02:34:17Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — **execute/read immediately**.
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence (not concluded by request).
@@ -17,9 +17,8 @@
 Reopen only with: (a) new admissible unauthenticated source + verifiable provenance/coverage/terms, (b) new experiment ID, (c) new prereg frozen **before** outcomes. No polling, status-only work, relitigation, threshold shopping, or sealed-holdout reuse.
 
 ## Bottlenecks addressed this session
-- Repaired consolidated durable handoffs (`NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`) to a single timestamped (2026-11-11T01:23:53Z) unambiguous initial task: `NONE` under constraints, with explicit reopen conditions, evidence pointers, and heavy-work mandate.
+- Refreshed consolidated durable handoffs (`NEXT_SESSION_TASK.md`, `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`) to a single timestamped (2026-11-11T02:34:17Z) unambiguous initial task: `NONE` under constraints, with explicit reopen conditions, evidence pointers, and heavy-work mandate.
 - Confirmed all prior bottleneck removals remain clean: registry drift (127==127, pass True), root md+json bound (211), environment (numpy/pandas/scipy installed), `experiment_frontier.json` valid concluded-state frontier.
-- Re-ran canonical verification at handoff time: full suite 1124 tests OK (exit 0), 35-test canonical subset OK, PROVENANCE_OK 161 (unmapped 0), registry drift pass True.
 
 ## Constraints (NON-NEGOTIABLE)
 No network/paid/manual/credentialed data; no fabricated data/provenance; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
