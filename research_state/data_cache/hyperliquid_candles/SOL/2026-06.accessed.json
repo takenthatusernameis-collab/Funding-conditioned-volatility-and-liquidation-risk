@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:51:27Z",
+ "coin": "SOL",
+ "month": "2026-06",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1780272000000,
+ "end_ms": 1782863999999,
+ "rows": 720,
+ "sha256": "e483d45b44ed9ef4bdf8fe86cd32e53009e5767e141c434fc339d9eb90313236",
+ "http_status": 200
+}

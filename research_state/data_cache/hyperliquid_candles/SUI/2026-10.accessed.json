@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:52:03Z",
+ "coin": "SUI",
+ "month": "2026-10",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1790812800000,
+ "end_ms": 1793491199999,
+ "rows": 744,
+ "sha256": "ffcc4b13f9bf3b3703ffc182b3a0ccee1042c4e05d8704c5c7ad5bb6a76be3c5",
+ "http_status": 200
+}

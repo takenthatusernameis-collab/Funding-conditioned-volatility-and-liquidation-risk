@@ -1,0 +1,333 @@
+{
+  "track": "A",
+  "experiment_id": "TRACKA-HL-S-RV-20261111T145408Z",
+  "prereg_document": "research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json",
+  "generated_utc": "2026-11-11T14:54:10Z",
+  "window_utc": "2026-05-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+  "symbols": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP",
+    "AVAX",
+    "DOGE",
+    "LINK",
+    "SUI"
+  ],
+  "n_symbols": 9,
+  "admissible_overlap": "2026-05-01..2026-10-31",
+  "inputs": {
+    "ironflow_labels": {
+      "ironflow_events_2026-05.parquet": "a400479845ae15397b0c1efb17c91ab6edc68d6a658f59accf36118dcfe21072",
+      "ironflow_events_2026-06.parquet": "88ee6767b3f69bdff4d12666395062e40a5f52e4dda8d221af97b95d1cd36add",
+      "ironflow_events_2026-07.parquet": "ba2699261986c13dc023d95a987ed01ee9115f08fc435161ad06f5addb6c769c",
+      "ironflow_events_2026-08.parquet": "2e1089f1072bbafb05da82465ff36e5ca321dd88bb8b37fccd366cb3eda5913c",
+      "ironflow_events_2026-09.parquet": "35430b107244388721be20026d00b035b2df389035ac790ced0c6c37c4bb502e",
+      "ironflow_events_2026-10.parquet": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+      "rows_total": 1264105,
+      "months": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10"
+      ]
+    },
+    "hyperliquid_funding": {
+      "hyperliquid_funding_BTC.json": "1c7d2b5d8c40c7b9e3ba84264bce214bb0f694f78aa8623d0b04b336c6a7e430",
+      "hyperliquid_funding_ETH.json": "2e3851fa6c541fecf3bbf399e8b8b87ad483c876a8010fa66a0f15b628815c5c",
+      "hyperliquid_funding_BNB.json": "92c9c9221eb331e2450253d423be2cf37a70a0118961d998a931bed35c11321a",
+      "hyperliquid_funding_SOL.json": "5aba146a9a587e4770884b5cfc7a1212d06e161049ed20c33512bb4c5f6e0ee3",
+      "hyperliquid_funding_XRP.json": "95d980a1688ab5f98764fe9f46683c37f418f546d91b809dde147b5465cf4781",
+      "hyperliquid_funding_AVAX.json": "d420bc4efe8b284eb4b974babba1e650fa043dd470440d3ce95d475dec3e48f4",
+      "hyperliquid_funding_DOGE.json": "91d3882a699796c354f6aa8159f4a4fa3b61ea05b857f04ae6b10b9c40e42e3b",
+      "hyperliquid_funding_LINK.json": "0dec3eaf2667caa7aa9ac277836f22ade3b909ee1623aff3fe441d3973fc8ac2",
+      "hyperliquid_funding_SUI.json": "78bd52963727f5a71f36c5eead5ab31a9b2f41deca2aa2d19c61a486c2251fef",
+      "rows_per_coin": {
+        "BTC": 8668,
+        "ETH": 8668,
+        "BNB": 8668,
+        "SOL": 8668,
+        "XRP": 8668,
+        "AVAX": 8668,
+        "DOGE": 8668,
+        "LINK": 8668,
+        "SUI": 8668
+      }
+    },
+    "hyperliquid_candles": {
+      "hyperliquid_candles_BTC_2026-05.json": "7af48de925e19631925f5eba92f92ce137686f5789e0957467ebddeda9f66703",
+      "hyperliquid_candles_BTC_2026-06.json": "211796a8ddfe6bb13b828947d6c37ae8284c5b5eb48d0822a3a8d0abd042afee",
+      "hyperliquid_candles_BTC_2026-07.json": "adadd97ebd53f4e7105fd88ae11a93ade3897b58a32b12ba203bbfa028118850",
+      "hyperliquid_candles_BTC_2026-08.json": "1850753fa9aee9715f986883cbf3e7e69a179d9381f4079fd23b961fe4b35fa3",
+      "hyperliquid_candles_BTC_2026-09.json": "ec494803f170380f2966aad2dc1164b843464823e9f404ce8a8eeb663cc83562",
+      "hyperliquid_candles_BTC_2026-10.json": "a88a4a464c1535b99833e2a69502779b9d8edd290f8217ec0c7f5393bd349b1b",
+      "hyperliquid_candles_ETH_2026-05.json": "aacf4334829d3666d118e9a0f3212af87a0378b74ec79157af15f58286b9e688",
+      "hyperliquid_candles_ETH_2026-06.json": "c9c8db39a099200805fd2c1eee786965b017d5cf87b12e1e94d50fcc5a3f5da1",
+      "hyperliquid_candles_ETH_2026-07.json": "d2204685020ced2f8f1a03fc0bba41d588db2ca54c71b98dd884285e77253f67",
+      "hyperliquid_candles_ETH_2026-08.json": "1530fcba746dd8cb6539333384ab878e0c5914beeaab729f2ca9b026e943aa6b",
+      "hyperliquid_candles_ETH_2026-09.json": "5078076832a337f65ddd7a81757e9f8b3113f7fcb1119a187901be846ebbc922",
+      "hyperliquid_candles_ETH_2026-10.json": "221b667b290826eabb47fd4f5c7149b7211205e068db190f4d119a9aafeac733",
+      "hyperliquid_candles_BNB_2026-05.json": "f6ced725ef3b386296115268af71857a8224ae3591da7bdf8e45a2b63cb7b7a5",
+      "hyperliquid_candles_BNB_2026-06.json": "98645e09e61b9f0215252abf7ca74f385cff2babf1fbf9b37446516d6d76f58b",
+      "hyperliquid_candles_BNB_2026-07.json": "f8cbb8862230577b0ca851c61dea884e738623436b000bdeda5d08355ee019d7",
+      "hyperliquid_candles_BNB_2026-08.json": "225fd7f930ee82e36ca1d2395f3544419a9ad89ee1892e05d467dffaa9a3d672",
+      "hyperliquid_candles_BNB_2026-09.json": "7ede94c13e97e9195d78cfa627a3dcdca22430eea23c3454e456e7aaacec4707",
+      "hyperliquid_candles_BNB_2026-10.json": "d330cd27376dc5a1a4b9316613a0ca33127180e6261c5dda6924056ae13039b3",
+      "hyperliquid_candles_SOL_2026-05.json": "ffd8fb699c1d26429e744d71e1885cfa5b3a10ec12e1665bb042b1aa5145f423",
+      "hyperliquid_candles_SOL_2026-06.json": "e483d45b44ed9ef4bdf8fe86cd32e53009e5767e141c434fc339d9eb90313236",
+      "hyperliquid_candles_SOL_2026-07.json": "8c996073660a1d5ad014c8cf319c1888e68a1d19e78fd3f411bb0c6eda37a0c1",
+      "hyperliquid_candles_SOL_2026-08.json": "c6e8e0cb8818b7c1a975c66eac1f09b2eea13c65eebc14eec2dbe7ead07b37fb",
+      "hyperliquid_candles_SOL_2026-09.json": "49f36012f6cccdba857c75291dc03532bbe382740086f27066403c7111fb2bb8",
+      "hyperliquid_candles_SOL_2026-10.json": "c1c3a43748ec39e9396910934c524fecf4d72342ba44517be247035aa0b0e2fb",
+      "hyperliquid_candles_XRP_2026-05.json": "d7ca5a7678c7a687a6f59ce321ab5e110c7b76fbe7263e4636fdd62677661437",
+      "hyperliquid_candles_XRP_2026-06.json": "09a2c69d6a9c1f9d12238a34de3a5870c9a7b5d913fd102c7b6864a29e5e6c48",
+      "hyperliquid_candles_XRP_2026-07.json": "157a4c155859a0e41fb7edb863f10804c902fc067196d217d55b2217cd660641",
+      "hyperliquid_candles_XRP_2026-08.json": "fc716657d6a538c0fa601b99d47d8678d08783732d8cf71d1257b4ca4f2f4776",
+      "hyperliquid_candles_XRP_2026-09.json": "4de8ef61a8ef5b10570f63709e7f89368faf201c370230fecd241370dee4b2d0",
+      "hyperliquid_candles_XRP_2026-10.json": "5c08e31b3af7f2af36652e0fac0b9649508cd1e507b680a197955d52c9a5576a",
+      "hyperliquid_candles_AVAX_2026-05.json": "0b48d1aeadea2327167e7cc9b8fb0e55e42dce6f7bd6bc13658a3d2179b119a4",
+      "hyperliquid_candles_AVAX_2026-06.json": "3784e11b85ea7c6033f585b51d06ddced7f676673196a39ab857a5dfb1b8cae3",
+      "hyperliquid_candles_AVAX_2026-07.json": "5761899afea50f4f1a339a5f0c19042ea21c5299f88fca96c4365c253e64057e",
+      "hyperliquid_candles_AVAX_2026-08.json": "eae7cdb0ea9298f16e24e09bd18f190e9130cb4ef62599f583587f21f1baa9a8",
+      "hyperliquid_candles_AVAX_2026-09.json": "f3bfbb9308cd078af85f0bafda5b8d215a711b9a50f0effe7ddbf66145161096",
+      "hyperliquid_candles_AVAX_2026-10.json": "509168cfe56f5977c12b83688a74b17107b9dc76be4f4b43cf363dec885de7f3",
+      "hyperliquid_candles_DOGE_2026-05.json": "a7079e29c69b891efcce060240daafc4064ab4455333d659d118cfee9bdc99fa",
+      "hyperliquid_candles_DOGE_2026-06.json": "6f174055ba8d7b8816683df92f356aa2599413cddf5ea2317eeadcf7ed170906",
+      "hyperliquid_candles_DOGE_2026-07.json": "655e357c60888592aa44a8c2317fe1b6de062a0b4eb9d5625783b61216cf7f41",
+      "hyperliquid_candles_DOGE_2026-08.json": "81f165be6f9352127a818b836cad357c0759efc366d6ac3a8d50ddcba538ea47",
+      "hyperliquid_candles_DOGE_2026-09.json": "209d289a9156727614b85a740fdc1e694a79d4499d1d2aca0ef33a095069a9fe",
+      "hyperliquid_candles_DOGE_2026-10.json": "46ee8b1413656a4cd1823bf3cb475b1892c7be35032976b2958336f62d5ce3f7",
+      "hyperliquid_candles_LINK_2026-05.json": "819d9a93f6de145cf379fe696b2c9dc14bd23c4a597c827e60e9f888b934cf76",
+      "hyperliquid_candles_LINK_2026-06.json": "692326fa1bfdb1fc281182f68ee20690f65e5aa30b7ea2484707f864ae05b0ec",
+      "hyperliquid_candles_LINK_2026-07.json": "2c6da188f5ce75ccc70238e77a74b30bbf6a7813a600d8aa2972684d512491e0",
+      "hyperliquid_candles_LINK_2026-08.json": "aa9f81c15d87c96dfd016fbff706b676fcb622f50a4025630d9b04945dc0ee15",
+      "hyperliquid_candles_LINK_2026-09.json": "0a32dd56f48dfd8b3e1407929bcb3b024149e568b9a90b83f4661e3124faa465",
+      "hyperliquid_candles_LINK_2026-10.json": "98ed80eaceda35c33f491230beaf8e61806c73c88928a44df622657d93e4d8e2",
+      "hyperliquid_candles_SUI_2026-05.json": "30d7447197fe991ba449dc1b65434eb3b2aa8ff85733a1e7ff5549ad973a90da",
+      "hyperliquid_candles_SUI_2026-06.json": "a0cc749c4a8f57168cee3a71def78a56ad183ecdbdc49113a874ba91da999acf",
+      "hyperliquid_candles_SUI_2026-07.json": "9118dfecd6174b1a739d362c4757b11c8f5fb921a9d2101aaef7136557e856f5",
+      "hyperliquid_candles_SUI_2026-08.json": "57298dcbc0b3c1d38759e60ffbd0473813888a08555bfbfd9ee5473323809470",
+      "hyperliquid_candles_SUI_2026-09.json": "f24f47b1e4daee3796ad0d76fe3fd77da0a797b19fb911aadc3fb53b9c2645c6",
+      "hyperliquid_candles_SUI_2026-10.json": "ffcc4b13f9bf3b3703ffc182b3a0ccee1042c4e05d8704c5c7ad5bb6a76be3c5",
+      "rows_per_coin": {
+        "BTC": 4416,
+        "ETH": 4416,
+        "BNB": 4416,
+        "SOL": 4416,
+        "XRP": 4416,
+        "AVAX": 4416,
+        "DOGE": 4416,
+        "LINK": 4416,
+        "SUI": 4416
+      },
+      "months_ok": {
+        "BTC": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "ETH": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "BNB": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "SOL": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "XRP": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "AVAX": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "DOGE": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "LINK": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "SUI": [
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ]
+      }
+    }
+  },
+  "panel": {
+    "path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/tracka_hl_aligned_panel_with_rv_20261111T145408Z.parquet",
+    "sha256": "d73d1d621a77fa731a1125c22424298556042504bc828a9721fab09e6cd4eded",
+    "total_buckets": 1656,
+    "buckets_with_label": 1434,
+    "buckets_with_funding": 1656,
+    "buckets_with_rv24h": 1647,
+    "buckets_complete_label_funding_rv": 1385,
+    "symbols_with_any_label": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "n_symbols_with_label": 9,
+    "min_paired_instruments_required": 5,
+    "min_paired_instruments_met": true,
+    "rv_baseline_b1_computable": true
+  },
+  "coverage_by_coin": [
+    {
+      "coin": "AVAX",
+      "buckets": 184,
+      "label_buckets": 148,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 13064137.167147,
+      "total_events": 3533
+    },
+    {
+      "coin": "BNB",
+      "buckets": 184,
+      "label_buckets": 118,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 5928470.8238,
+      "total_events": 1840
+    },
+    {
+      "coin": "BTC",
+      "buckets": 184,
+      "label_buckets": 183,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 5601807425.242623,
+      "total_events": 352619
+    },
+    {
+      "coin": "DOGE",
+      "buckets": 184,
+      "label_buckets": 146,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 25109157.168608002,
+      "total_events": 5830
+    },
+    {
+      "coin": "ETH",
+      "buckets": 184,
+      "label_buckets": 178,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 1569899101.8320131,
+      "total_events": 90756
+    },
+    {
+      "coin": "LINK",
+      "buckets": 184,
+      "label_buckets": 144,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 15946336.633720001,
+      "total_events": 4328
+    },
+    {
+      "coin": "SOL",
+      "buckets": 184,
+      "label_buckets": 180,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 425314850.35396504,
+      "total_events": 71178
+    },
+    {
+      "coin": "SUI",
+      "buckets": 184,
+      "label_buckets": 163,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 31417565.578911003,
+      "total_events": 8599
+    },
+    {
+      "coin": "XRP",
+      "buckets": 184,
+      "label_buckets": 174,
+      "funding_buckets": 184,
+      "rv24h_buckets": 183,
+      "rv_complete_buckets": 177,
+      "total_notional": 227550597.07766998,
+      "total_events": 36893
+    }
+  ],
+  "missingness": {
+    "buckets_missing_label": 222,
+    "buckets_missing_funding": 0,
+    "buckets_missing_rv24h": 9,
+    "buckets_missing_rv_complete": 63
+  },
+  "feasibility": {
+    "rv_mark_price_cached": true,
+    "rv_baseline_b1_computable": true,
+    "reason": "mark-price 1h candleSnapshot acquired (first-time, unauthenticated) for 2026-05..2026-10; RV1h/RV24h/RV168h computable causally.",
+    "min_test_blocks_temporally_feasible": true,
+    "min_test_blocks": 3,
+    "claim_worthy_on_cache": true,
+    "determination": "RV context acquired; proceed to pre-registered successor C2 vs B1 evaluation."
+  }
+}

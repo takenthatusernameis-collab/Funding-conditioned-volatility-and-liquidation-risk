@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:51:47Z",
+ "coin": "DOGE",
+ "month": "2026-07",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1782864000000,
+ "end_ms": 1785542399999,
+ "rows": 744,
+ "sha256": "655e357c60888592aa44a8c2317fe1b6de062a0b4eb9d5625783b61216cf7f41",
+ "http_status": 200
+}

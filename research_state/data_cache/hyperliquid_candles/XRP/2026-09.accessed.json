@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:51:36Z",
+ "coin": "XRP",
+ "month": "2026-09",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1788220800000,
+ "end_ms": 1790812799999,
+ "rows": 720,
+ "sha256": "4de8ef61a8ef5b10570f63709e7f89368faf201c370230fecd241370dee4b2d0",
+ "http_status": 200
+}

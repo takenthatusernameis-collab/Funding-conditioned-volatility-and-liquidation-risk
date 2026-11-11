@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:51:16Z",
+ "coin": "ETH",
+ "month": "2026-08",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1785542400000,
+ "end_ms": 1788220799999,
+ "rows": 744,
+ "sha256": "1530fcba746dd8cb6539333384ab878e0c5914beeaab729f2ca9b026e943aa6b",
+ "http_status": 200
+}

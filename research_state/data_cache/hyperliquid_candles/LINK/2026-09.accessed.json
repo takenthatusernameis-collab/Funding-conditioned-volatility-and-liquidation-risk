@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:51:55Z",
+ "coin": "LINK",
+ "month": "2026-09",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1788220800000,
+ "end_ms": 1790812799999,
+ "rows": 720,
+ "sha256": "0a32dd56f48dfd8b3e1407929bcb3b024149e568b9a90b83f4661e3124faa465",
+ "http_status": 200
+}

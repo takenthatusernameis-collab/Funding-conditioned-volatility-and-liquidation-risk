@@ -1,0 +1,12 @@
+{
+ "fetched_utc": "2026-11-11T14:51:24Z",
+ "coin": "BNB",
+ "month": "2026-10",
+ "endpoint": "candleSnapshot",
+ "interval": "1h",
+ "start_ms": 1790812800000,
+ "end_ms": 1793491199999,
+ "rows": 744,
+ "sha256": "d330cd27376dc5a1a4b9316613a0ca33127180e6261c5dda6924056ae13039b3",
+ "http_status": 200
+}
