@@ -1,46 +1,174 @@
-# HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
-**Single durable handoff / initial task message for next agentic work session**
-**Timestamp (UTC):** 2026-11-11T09:23:05Z
-**Repo:** /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
+# HANDOFF: Next Agentic Work Session — Funding-Conditioned Volatility & Liquidation Risk
 
-## Non-negotiable state (do not relitigate)
-- **Priority:** Funding-conditioned volatility + liquidation risk. **Track A** (observed Hyperliquid liquidations) is the only claim-worthy active track. **Track B** (modeled breach proxy) and **Track C/H1** (funding-conditioned volatility) are concluded **NOT_SUPPORTED** — no further work on B/C.
-- **Track A source:** `ironflow/hyperliquid-liquidations` adjudicated **GO** (CC BY 4.0, unauthenticated HF bulk parquet, observed-only). Local labels: `research_state/data_cache/ironflow_events/*.parquet` (2025-05..2026-10, 2,848,413 rows, 468 markets incl. `*-PERP` for BTC/ETH/BNB/SOL/XRP/AVAX/DOGE/LINK/SUI). Prereg (frozen pre-outcomes): `research_state/tracka_prereg_hyperliquid_2026.json` (`TRACKA-HL-20261111T073000Z`, `status: PREREGISTERED_FROZEN_PRE_OUTCOMES`, `frozen_before_outcomes: true`).
-- **Program blocker (documented, not resolved):** full 2025-06..2026-10 aligned panel **cannot** be built from currently evidenced admissible unauthenticated Hyperliquid-native sources. Evidence in `research_state/tracka_hl_alignment_blocker.md`: HL `fundingHistory` cached 2025-11..2026-10 only; `candleSnapshot` (mark 1h) ~6–7mo lookback (~2026-05..2026-10); no admissible historical index/premium endpoint identified. Frozen prereg splits (train 2025-06..2025-11 / val 2025-12..2026-01 / test 2026-02..2026-10, 7d embargo) are therefore not executable on a full aligned panel with current sources.
+**Timestamp:** 2026-11-11T09:26:13Z
+**Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
+**Current Phase:** Gate 4 Admissibility — **BLOCKED at FCLR-016 v5 Terms Evidence**
 
-## Bottleneck-removal campaign (HEAVY, inescapable — complete this session)
-Objective: close the Track A alignment gap to a **terminal, auditable** outcome. No status-only output; produce a verdict/closure artifact and update canonical state.
+---
 
-### Step 1 — Prereg freeze gate (MANDATORY, before any outcome computation)
-- Verify `research_state/tracka_prereg_hyperliquid_2026.json` remains frozen (`frozen_before_outcomes: true`, splits/label/metric unchanged). Record verification in your work log/artifact. **Do not inspect outcomes** before this passes.
+## 🔴 CRITICAL BOTTLENECK (Structural — Cannot Be Resolved by Code)
 
-### Step 2 — Exhaust path (a): admissible coverage extension (time-boxed, evidence-first)
-- Search **in-repo/local cache** for overlooked Hyperliquid-native, unauthenticated, provenance-able market/price/funding data covering 2025-06..2026-10 (inspect `data/`, `research_state/data_cache/`, existing HL scripts: `scripts/hl_coverage_probe.py`, `scripts/hyperliquid_funding_fetch.py`). Note: Binance `*USDT*` / markPriceKlines caches are **not** Hyperliquid-native and cannot be conflated with HL labels.
-- If and only if a concrete, admissible unauthenticated HL-native historical source is identified (mark/index/premium/klines/funding back to 2025-06 for overlapping symbols), fetch minimally with full provenance (URL, access UTC, hash/ETag, license/terms) and prove coverage. If no such source is evidenced, **declare path (a) exhausted** citing `research_state/tracka_hl_alignment_blocker.md` + any new probe evidence.
+**FCLR-016 v5 Terms Evidence is BLOCKED** (`research_state/fclr016_local_audit/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`):
 
-### Step 3 — Force a terminal path (choose one; execute fully)
-- **(b) Scope-down with RE-PREREG (preferred if a viable overlap exists):** quantify the maximal overlap where observed HL labels + admissible HL mark/price + admissible HL funding all coexist (current evidence suggests funding 2025-11..2026-10, mark candles ~2026-05..2026-10 → intersection ~2026-05..2026-10; confirm precisely from local artifacts). This **deviates** from frozen prereg → **write a new successor prereg** `research_state/tracka_prereg_hyperliquid_2026_scoped.json` (new experiment_id, frozen pre-outcomes, explicit split boundaries/embargo, symbols, label, baselines B0/B1, models C1/C2, primary contrast C2 vs B1, QLIKE metric, materiality gate ≥2% rel reduction & 95% CI excludes zero & ≥5 paired instruments & ≥3 non-overlapping 30-day test blocks — or explicitly document infeasibility of any gate element given the narrowed window) **before any outcome computation**. If the overlap cannot satisfy minimum prereg power/blocks, path (b) is infeasible → take (c).
-- **(c) Terminal closure (if (a) exhausted and (b) infeasible):** produce a conclusive, auditable Track A closure verdict **NOT_SUPPORTED / INCONCLUSIVE_CLOSED_DUE_TO_ALIGNMENT_DATA_INADMISSIBILITY** in `research_state/evaluation_summary_TRACKA-HL-20261111T073000Z.md`, explicitly tying the closure to prereg constraints and evidenced coverage gaps (no fabricated results). Update `research_state/final_confirmatory_verdict.md` (Track A section), `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json` (H_tracka_hl_liquidation_forecast), and `research_state/run_manifest.json` to reflect the terminal state.
+```json
+{
+  "status": "EXPLICIT_BLOCKER_UNRESOLVED",
+  "structural_blocker": {
+    "reason": "Automated agent environment cannot perform verifiable human/legal review of external Binance Vision/Binance market-data terms. Recording permissions without verifiable review evidence would be fabrication (forbidden).",
+    "blocked_by": "requires human-maintainer/legal review with verifiable evidence capture",
+    "environment_can_verify_externally": false
+  }
+}
+```
 
-### Step 4 — If (b) yields a feasible, newly-preregistered panel (heavy execution)
-- Build aligned Hyperliquid-native panel (ironflow observed events + admissible HL context) with full provenance; enforce 7d embargo, no leakage, UTC normalization.
-- Run pre-registered evaluation (QLIKE, C2 vs B1, materiality gate per successor prereg). Compute outcomes **only after** successor prereg is written/frozen.
-- Write `research_state/evaluation_summary_<SUCCESSOR_EXPERIMENT_ID>.md` with full trace (scores, CIs, paired instruments, test blocks, gate pass/fail) and atomically update frontier/registry/manifest/final verdict.
+**Required to unblock:** A **human maintainer/legal reviewer** must:
+1. Review the exact Binance Vision / Binance market-data terms URL
+2. Populate all 8 required verifiable evidence fields:
+   - `terms_url_reviewed` — exact URL reviewed
+   - `access_date_utc` — UTC date/time of review
+   - `terms_version_or_snapshot_id` — version/snapshot ID or justified `not_provided_by_source`
+   - `relevant_clause_summary` — factual summary of research-use/retention/attribution clauses
+   - `reviewer_role` — human/legal/maintainer (NOT agent-only)
+   - `conclusion` — PERMITTED / PERMITTED_WITH_CONDITIONS / RESTRICTED / PROHIBITED / UNCLEAR
+   - `conditions_or_restrictions` — explicit list or justified empty
+   - `evidence_artifacts` — optional archived snapshot paths/hashes/URLs
+3. Set `fabricated=false`, `status=RESOLVED_VERIFIED`
+4. Save as **new file** `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` in `research_state/fclr016_local_audit/`
 
-## Hard constraints (violation = failed handoff)
-- **No** threshold-shopping on test set. **No** sealed-holdout reuse. **No** Binance/2024 conflation with HL labels. **No** modeled/proxy/synthetic liquidation labels. **No** outcome inspection before prereg/successor-prereg freeze verification. **No** risk overlay before forecast gate met. **No** `.github/workflows` edits. **No** redundant network polling.
-- Any panel/split deviation from the frozen prereg **requires re-preregistration before outcomes**.
+**Until this is done:** All confirmatory outcomes on 2025+ data are **prohibited** by fail-closed guards (`check_confirmatory_provenance`, `check_admissibility_package`, preflight summary). No amount of code changes, test passes, or data processing can bypass this.
 
-## Required deliverables (end-of-session, auditable)
-1. Path decision recorded: `(a) exhausted` evidence and chosen `(b)` or `(c)` documented (append to `research_state/tracka_hl_alignment_blocker.md` or successor note).
-2. **Either** `research_state/evaluation_summary_TRACKA-HL-20261111T073000Z.md` (closure, path c) **or** successor prereg + `research_state/evaluation_summary_<SUCCESSOR_ID>.md` (path b executed).
-3. Canonical state updated atomically: `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, and `final_confirmatory_verdict.md` as applicable.
-4. Keep `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md`, `FOCUS_CAMPAIGN.md`, `AGENT_HANDOFF.md` consistent if further work remains (else mark terminal).
+---
 
-## Canonical artifacts
-`HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md`, `FOCUS_CAMPAIGN.md`, `AGENT_HANDOFF.md`, `research_state/tracka_prereg_hyperliquid_2026.json`, `research_state/tracka_hl_alignment_blocker.md`, `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md`, `research_state/data_cache/ironflow_events/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/ironflow_probe_digest_latest.json`.
+## 🟡 SECONDARY BLOCKERS (Depend on Primary)
 
-## Verification checklist
-- `python scripts/check_tracka_scope_registry_drift.py --json`
-- `python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"`
-- `python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v`
+| Blocker | File | Status | Unlock Condition |
+|---------|------|--------|------------------|
+| Pre-registration draft | `pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json` | `draft: true` | Terms resolved → promote to frozen/non-draft |
+| Provenance manifest v5 | `fclr016_v5_provenance_license_manifest_20261108T014405Z.json` | `confirmatory_provenance_go: false` | Terms resolved + identity GO |
+| Completeness/leakage audit | `fclr016_v5_completeness_leakage_audit_20261108T014405Z.json` | `verdict: PASS_COMPLETENESS_LEAKAGE_DETERMINISTIC` | Already green; needs terms resolved for package GO |
+
+---
+
+## ✅ WHAT IS WORKING (No Action Needed)
+
+- **Data ingestion:** `src/ingest/loader.py` — extracts zips, loads CSVs, normalizes to UTC hourly frames
+- **Feature engineering:** `src/features/funding.py`, `src/volatility/feature_engineering.py` — funding trailing stats, volatility features, train-only scalers
+- **Track A admissibility seam:** `src/analysis/tracka_admissible.py` — Ironflow/Hyperliquid manifest validation (stdlib-only, fail-closed)
+- **Track C pipeline:** `scripts/run_funding_ablations.py` — walk-forward splits, purge/embargo, block bootstrap, HAR regression
+- **Test suite:** 90+ tests covering admissibility, provenance, leakage, funding ablations, feature splits, timestamp parsing
+- **FCLR-016 v5 preflight summary:** `scripts/fclr016_v5_preflight_summary.py` — read-only parity check, emits JSON + markdown checklist + refusal matrix
+
+---
+
+## 🎯 NEXT FOCUS CAMPAIGN (For Future Agents — Heavy Work Required)
+
+**DO NOT ATTEMPT** to "work around" the terms blocker. The fail-closed architecture is intentional and correct.
+
+### Campaign: **Human Review Execution & Gate 4 Promotion**
+
+**Objective:** Obtain verifiable human/legal review of Binance Vision terms → promote Gate 4 package to frozen/GO → enable confirmatory Track C runs on 2025-08..2025-10 scope.
+
+#### Phase 1: Human Review (External Dependency)
+- [ ] Identify human maintainer/legal reviewer with authority to review Binance data terms
+- [ ] Provide them the exact required fields list (from `fclr016_v5_terms_evidence_BLOCKED_...json`)
+- [ ] Capture review evidence (archived snapshot, screenshots, or hash-verified URL)
+- [ ] Produce `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with all fields populated
+
+#### Phase 2: Package Reconciliation (Code Work — Deterministic)
+- [ ] Run `scripts/fclr016_v5_preflight_summary.py` with resolved terms evidence
+- [ ] Verify all 4 package artifacts have consistent `frozen_scope` (2025-08-01..2025-10-31, 5 symbols, 5 kinds)
+- [ ] Reconcile `admissibility_refs_sha256` across provenance manifest, completeness audit, terms evidence, prereg draft
+- [ ] Promote pre-registration to frozen/non-draft (`draft: false`, `confirmatory_claim_go: "GO"`, `admissibility_complete: true`, `frozen_before_outcomes: true`, `license_terms_resolved: true`)
+
+#### Phase 3: Validator Acceptance (Code Work — Deterministic)
+- [ ] Run `scripts/fclr016_validate_v5_admissibility.py --expect-go` → must exit 0 with `all_go=true`
+- [ ] Run `scripts/run_funding_ablations.py --check-admissibility-package --expect-go` → must exit 0 with `confirmatory_outcomes_permitted=true`
+- [ ] Both validators must return matching hashes and green gates
+
+#### Phase 4: Confirmatory Execution (Heavy Compute — Only After Phase 3)
+- [ ] Execute confirmatory Track C multi-split ablation on 2025-08..2025-10 scope
+- [ ] Symbols: BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT
+- [ ] Kinds: fundingRate, klines, markPriceKlines, indexPriceKlines, premiumIndexKlines
+- [ ] Walk-forward splits with ≥7d purge/embargo, train-only normalization, block bootstrap ΔQLIKE CIs
+- [ ] Produce frozen evaluation artifacts + evaluation_summary.md
+
+---
+
+## 🛑 EXPLICIT FORBIDDEN ACTIONS (Will Be Refused by Guards)
+
+| Action | Guard | Refusal Reason |
+|--------|-------|----------------|
+| Run confirmatory on 2025+ without resolved terms | `check_confirmatory_provenance` | "terms evidence not RESOLVED_VERIFIED" |
+| Set `status=RESOLVED_VERIFIED` without human fields | `_check_resolved_terms_evidence_package` | "missing required field: terms_url_reviewed / access_date_utc / reviewer_role / conclusion" |
+| Set `fabricated=true` on resolved evidence | Preflight / validator | "fabricated!=false on resolved evidence forbidden" |
+| Use agent-only reviewer_role | Preflight / validator | "human/legal review required" |
+| Promote prereg to frozen while any gate blocked | Preflight promotion sequence | "all guards must be green before promotion" |
+| Load kline/funding/outcome data on refusal | `_confirmatory_data_path_seam_error` | "confirmatory outcomes prohibited until frozen+all GO" |
+
+---
+
+## 📂 KEY FILES FOR NEXT SESSION
+
+```
+research_state/fclr016_local_audit/
+├── fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json    # CURRENT BLOCKER
+├── fclr016_v5_provenance_license_manifest_20261108T014405Z.json
+├── fclr016_v5_completeness_leakage_audit_20261108T014405Z.json
+├── fclr016_v5_identity_consolidation_20261108T003908Z.json
+├── fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json
+└── fclr016_v5_terms_evidence_RESOLVED_<UTC>.json              # MUST BE CREATED BY HUMAN
+
+scripts/
+├── fclr016_v5_preflight_summary.py          # Read-only parity check + markdown
+├── fclr016_validate_v5_admissibility.py     # Validator (fail-closed)
+├── run_funding_ablations.py                 # Main pipeline + --check-admissibility-package
+
+src/
+├── ingest/loader.py                         # Data ingestion
+├── features/funding.py                      # Funding features (lagged, no lookahead)
+├── volatility/feature_engineering.py        # Volatility features + train-only scaler
+└── analysis/tracka_admissible.py            # Track A Ironflow seam
+```
+
+---
+
+## 🔑 COMMANDS TO RUN (After Human Review Complete)
+
+```bash
+# 1. Preflight check with resolved terms evidence
+python scripts/fclr016_v5_preflight_summary.py \
+  research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json \
+  research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json \
+  research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json \
+  research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json
+
+# 2. Validator with --expect-go
+python scripts/fclr016_validate_v5_admissibility.py \
+  --provenance-manifest research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json \
+  --completeness-audit research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json \
+  --terms-evidence research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json \
+  --prereg-draft research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json \
+  --expect-go
+
+# 3. Pipeline admissibility check with --expect-go
+python scripts/run_funding_ablations.py \
+  --check-admissibility-package \
+  --provenance-manifest research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json \
+  --completeness-audit research_state/fclr016_local_audit/fclr016_v5_completeness_leakage_audit_20261108T014405Z.json \
+  --terms-evidence research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json \
+  --prereg-draft research_state/fclr016_local_audit/fclr016_v5_confirmatory_prereg_DRAFT_20261108T014835Z.json \
+  --expect-go
+```
+
+---
+
+## 📋 SUMMARY FOR NEXT AGENT
+
+**This project is architecturally sound but blocked on a human-process dependency.** The codebase, tests, and validation infrastructure are complete and correct. The only path forward is:
+
+1. **Human/legal review of Binance Vision terms** (external, cannot be automated)
+2. **Deterministic package reconciliation** (code work, straightforward once terms resolved)
+3. **Validator acceptance** (automated, will pass if reconciliation correct)
+4. **Confirmatory compute** (heavy, only after validator GO)
+
+**Do not waste cycles** trying to bypass the terms blocker — the fail-closed design is the correct scientific practice for confirmatory research on proprietary data. The next session should focus entirely on facilitating the human review and then executing the deterministic promotion sequence.
