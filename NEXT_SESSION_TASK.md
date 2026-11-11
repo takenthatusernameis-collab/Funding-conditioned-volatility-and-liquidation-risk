@@ -1,6 +1,6 @@
 # NEXT_SESSION_TASK.md — SINGLE DURABLE HANDOFF (INITIAL TASK MESSAGE)
 
-**Timestamp (UTC):** 2026-11-11T02:37:44Z
+**Timestamp (UTC):** 2026-11-11T02:43:25Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence. **No further initial task remains on current local data/design.**
 
@@ -47,3 +47,5 @@ python -m unittest tests.test_volatility_features_splits tests.test_synthetic_bo
 python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
 python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
 ```
+
+(End of file - total 49 lines)
