@@ -1,11 +1,11 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, authoritative):** 2026-11-11T16:32:29Z
+**Timestamp (UTC, authoritative):** 2026-11-11T17:16:49Z
 **Status:** AUTHORITATIVE. This is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is a redirect only. Any doc conflicting with this handoff is stale. Read fully before acting. **No status-only output.**
 
-## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T16:32:29Z
+## INITIAL TASK MESSAGE (EXECUTE NOW) — 2026-11-11T17:16:49Z
 
-**Mission (repo-prioritized):** Advance `Funding-conditioned-volatility-and-liquidation-risk` on **liquidation-risk forecasting co-equal with volatility forecasting**, using admissible unauthenticated data with verifiable provenance. Track A (2026-05..2026-10, 9 symbols, observed ironflow) is evaluated **NOT_MET** (closed for that prereg). Track B/C (2024) are closed negative. Gate 4 is external-blocked. **Do not idle, do not report status only, do not relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts + consistent state updates.**
+**Mission (repo-prioritized):** Advance `Funding-conditioned-volatility-and-liquidation-risk` on **liquidation-risk forecasting co-equal with volatility forecasting**, using admissible unauthenticated data with verifiable provenance. Track A successor (2026-05..2026-10, 9 symbols, observed ironflow) is evaluated **NOT_MET** (closed for that prereg). Track B/C (2024) are closed negative. Gate 4 is externally blocked. **Do not idle, do not report status only, do not relitigate closed work. Execute the first applicable heavy-work branch below and leave substantive artifacts + consistent state updates.**
 
 ### Completed (do not relitigate)
 - **Track A successor `TRACKA-HL-S-20261111T133430Z` (2026-05-01..2026-10-31):** RV bottleneck removed via bounded first-time unauthenticated Hyperliquid candleSnapshot acquisition (54 coin-months, cached), RV panel built/evaluated, **forecast gate NOT_MET** (C2 worse than B1). Verdict: `research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md`. Panel: `research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet`. Prior context-insufficient closure superseded: `research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md`.
