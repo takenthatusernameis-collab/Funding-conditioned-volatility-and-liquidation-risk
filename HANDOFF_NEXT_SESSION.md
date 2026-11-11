@@ -1,6 +1,6 @@
 # HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff / initial task message for next agentic work session**
-**Timestamp (UTC):** 2026-11-11T07:41:39Z
+**Timestamp (UTC):** 2026-11-11T08:26:48Z
 **Repo:** /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
 
 ## Repo-priority state (evidence-backed, do not relitigate)
