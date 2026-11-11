@@ -1729,5 +1729,45 @@
     "content_kind": "html",
     "probed_utc": "2026-11-04T21:41:45.104389+00:00",
     "cache_hit": false
+  },
+  "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-10.parquet": {
+    "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2025-10.parquet",
+    "method": "GET",
+    "status": 302,
+    "headers": {
+      "content-type": "text/plain; charset=utf-8",
+      "location": "https://us.aws.cdn.hf.co/xet-bridge-us/...",
+      "x-linked-size": "9430899",
+      "x-linked-etag": "\"e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8\"",
+      "x-xet-hash": "104aecc4586f4cb05473fd303e37c1b63588e94a8198136e0b364be35e3cb025",
+      "accept-ranges": "bytes",
+      "x-repo-commit": "65bad6c39c63ee24eae920753f05303020e549fa",
+      "x-hf-warning": "unauthenticated",
+      "cache-control": "no-store"
+    },
+    "body_len": 1030,
+    "body_preview": "HTTP/2 302 redirect to signed HF CDN (unauthenticated, no token)",
+    "error": false,
+    "attempts": 1,
+    "probed_utc": "2026-11-11T05:45:00Z",
+    "cache_hit": false
+  },
+  "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/README.md": {
+    "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/README.md",
+    "method": "GET",
+    "status": 200,
+    "headers": {
+      "content-type": "text/plain; charset=utf-8",
+      "content-length": "4877",
+      "etag": "\"<readme-etag>\"",
+      "x-repo-commit": "65bad6c39c63ee24eae920753f05303020e549fa"
+    },
+    "body_len": 4877,
+    "body_preview": "---\nlicense: cc-by-4.0\npretty_name: Hyperliquid Liquidations\n...2,849,452 liquidated positions across 468 markets and 506,975 wallets, $58.7 billion...",
+    "error": false,
+    "attempts": 1,
+    "probed_utc": "2026-11-11T05:45:00Z",
+    "cache_hit": false,
+    "content_kind": "text"
   }
 }
