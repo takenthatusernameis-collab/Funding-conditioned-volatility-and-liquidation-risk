@@ -1,44 +1,21 @@
 # FOCUS_CAMPAIGN.md — Heavy-Work Execution Plan
 
+**Timestamp (UTC):** 2026-11-11T02:37:44Z
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Priority (per repo name):** 1) Track C/H1 funding-conditioned volatility — **CONCLUDED NOT_SUPPORTED**; 2) Track B liquidation boundary risk (modeled synthetic breaches) — **CONCLUDED NOT_SUPPORTED**; 3) Track A observed liquidations — **STRUCTURALLY_BLOCKED**.
-**Campaign timestamp:** 2026-11-11T02:36:31Z
 **Program status:** `CONCLUDED_UNDER_CONSTRAINTS` — all admissible local routes exhausted with evidence.
-**Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` — `next_unfinished_task: NONE` pending a new admissible unauthenticated source.
+**Single durable handoff (authoritative initial task):** `NEXT_SESSION_TASK.md` → `next_unfinished_task: NONE` pending a new admissible unauthenticated source.
 
-## Hard constraints (NON-NEGOTIABLE)
-
-No network/paid/manual/credentialed data; no fabricated provenance/outcomes; no threshold shopping; no sealed-holdout reuse; no Track A/B/C conflation (Track B = modeled synthetic breach proxy only, never observed liquidations); preregister/freeze before outcomes; no risk overlay until forecast gate passes; no `.github/workflows` edits.
-
-## Mission (current)
-
-Preserve an auditable, reproducible terminal state and ensure future agents cannot idle or relitigate: the singular next action is **NONE** unless a genuinely new admissible unauthenticated source/route appears. Any resumed work must be heavy, verifiable, and pre-registered before outcomes.
-
-## Heavy-work mandate (future agents cannot avoid heavy work)
-
-- Any resumed work must be **heavy, verifiable, and pre-registered before outcomes**.
-- No status-only output, no polling loops, no relitigation of concluded tracks, no threshold shopping, no sealed-holdout reuse.
-- Deliver verifiable evidence or stop cleanly with evidence. Fabricated progress is prohibited.
-
-## Current state (verified evidence)
-
-- **Track B:** CONFIRMATORY_COMPLETE, gate NOT_MET / NOT_SUPPORTED. TB1 degenerate (0 test breaches). TB2 (frozen `trackb_TB2_20261110T190405Z`, 2024-01-01..2024-09-30, h168_long_10x_m0, 5 symbols): event-adequate test positives 619/5040 (12.3%) but pooled Log Loss B1=0.292447→C2=0.287540 (+1.68% < 2%), 95% CI [-0.010997,0.003094] crosses zero (p=0.488), Holm fails, 2 test blocks <3. Overlay INELIGIBLE. `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`.
-- **Track C/H1:** concluded NOT_SUPPORTED on all claim-worthy local panels (FCLR-003/008/009/012-V/013/014). Overlay INELIGIBLE.
-- **Track A:** STRUCTURALLY_BLOCKED (no admissible unauthenticated observed-liquidation census). Not locally repairable.
+## Repo-name prioritized outcome (closed under constraints)
+1. **Funding-conditioned volatility (Track C/H1):** NOT_SUPPORTED (all claim-worthy local panels exhausted). `research_state/final_confirmatory_verdict.md`
+2. **Liquidation-risk / modeled boundary breaches (Track B, proxy only):** CONFIRMATORY_COMPLETE NOT_SUPPORTED (TB1 degenerate; TB2 NOT_MET). `research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md`
+3. **Observed liquidations (Track A):** STRUCTURALLY_BLOCKED (no admissible unauthenticated census). `research_state/track_a_structural_block.md`
 
 ## Bottlenecks
+**None blocking.** Registry 127/127 aligned, handoffs consolidated to single initial task, environment ready, concluded-state frontier recorded. No polling/status-only infrastructure required.
 
-**None blocking.** Registry drift aligned 127/127 (pass True). Root md+json bound 211. Environment numpy/pandas/scipy ready. `experiment_frontier.json` valid concluded-state frontier. Durable handoffs consolidated to one unambiguous initial task (`NONE` pending new admissible source, with explicit reopen gates).
+## Next campaign (only if reopened) — heavy work required
+Execute only when ALL reopen conditions in `NEXT_SESSION_TASK.md` hold:
+- **Heavy deliverable:** ingest/verify new admissible unauthenticated source with provenance+coverage+terms evidence recorded in-repo; define new experiment ID; freeze preregistration/protocol (hashes/boundaries in `research_state/run_manifest.json`) **before any outcome computation**; run pre-registered evaluation with leakage/split/integrity checks and record verdict artifacts.
+- **Forbidden:** status-only work, polling, relitigation, threshold shopping, sealed-holdout reuse, Track conflation, fabricated provenance, network/paid/manual/credentialed data, overlay before forecast gate, `.github/workflows` edits.
 
-## Execution rules (for any future reopen)
-
-1. New admissible unauthenticated source only (no network-paid/manual/credentialed). 2. New experiment ID. 3. Prereg/freeze before outcomes. 4. No threshold shopping/holdout reuse. 5. Track B = modeled breach proxy only. 6. No fabricated provenance. 7. No status-only output; deliver heavy verifiable work or stop with evidence.
-
-## Canonical verification (re-run 2026-11-10T23:28Z, all green)
-
-```bash
-python -m unittest discover tests            # 1124 tests, OK (exit 0)
-python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v   # 35 tests, OK
-python -c "from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])"   # PROVENANCE_OK 161
-python scripts/check_tracka_scope_registry_drift.py --json   # pass True, 127/127
-```
+If reopen conditions are not met: **stop with evidence (`NONE`).**
