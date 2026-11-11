@@ -1,7 +1,7 @@
 # HANDOFF: Next Agentic Work Session — SINGLE DURABLE HANDOFF
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Timestamp (UTC, this update):** 2026-11-11T13:02:23Z
-**Authoritative:** This file is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. Read this entire file before any action. No status-only output.
+**Timestamp (UTC, this update):** 2026-11-11T13:04:48Z
+**Authoritative:** This file is the only task message to execute. `FOCUS_CAMPAIGN.md` and `NEXT_SESSION_TASK.md` must point here. `AGENT_HANDOFF.md` is superseded (redirect only). Read this entire file before any action. No status-only output.
 
 ## INITIAL TASK MESSAGE (execute now) — 2026-11-11T13:02:23Z
 
