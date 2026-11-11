@@ -1,1 +1,54 @@
-{"hypotheses":[{"id":"H1_primary","type":"primary","description":"Funding extremes + RV + price dislocation improve OOS forecast of future RV/stress vs RV-only baseline","status":"NOT_SUPPORTED","frozen_at":"2026-11-06T20:36:32Z","last_tested":"2026-11-10T10:38:27Z","last_experiment":"FCLR-014","last_verdict":"forecast_gate_NOT_MET","evidence":"FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED."},{"id":"H2_shek_replication","type":"secondary","description":"Independently reconstruct Shek (2026) funding-correction pattern from admissible public data; distinguish correction time from volatility/liquidation","status":"proposed","frozen_at":"2026-11-06T20:36:32Z","paper":"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458"},{"id":"H_trackb_modeled_breaches","type":"primary_trackb","description":"Funding-conditioned features improve detection of synthetic mark-price boundary breaches (modeled proxy, not observed liquidations) vs price/RV-only baseline","status":"NOT_SUPPORTED","frozen_at":"2026-11-10T15:43:07Z","prereg_hash":"46dcfb56c279e853230e75f6cb246ed878d765d2b399ea9a2e21c41581194adb","last_tested":"2026-11-10T20:00:21Z","last_experiment":"trackb_TB2_20261110T190405Z","last_verdict":"forecast_gate_NOT_MET","evidence":"Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, label synthetic_boundary_breach_h168_long_10x_m0, train/val/test with 7d purge/embargo). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction, below the pre-registered 2% materiality floor (NOT_MET). Paired block bootstrap (2000 reps, 30-day blocks, seed 20261110): Log Loss 95% CI [-0.010997, 0.003094] crosses zero (NOT_MET), p=0.488; Brier p=0.488. Holm across 2 metrics FAILS. Only 2 non-overlapping 30-day test blocks (<3 required, NOT_MET). Overall forecast gate NOT_MET. Track B = modeled synthetic breach proxy only, never observed liquidations. Risk overlay INELIGIBLE. TB1 (trackb_TB1_20261110T173838Z) remains degenerate/inadmissible (zero test breaches). All admissible local Track B routes now executed; no gate passed."}]}
+{
+  "hypotheses": [
+    {
+      "id": "H1_primary",
+      "type": "primary",
+      "description": "Funding extremes + RV + price dislocation improve OOS forecast of future RV/stress vs RV-only baseline",
+      "status": "NOT_SUPPORTED",
+      "frozen_at": "2026-11-06T20:36:32Z",
+      "last_tested": "2026-11-10T10:38:27Z",
+      "last_experiment": "FCLR-014",
+      "last_verdict": "forecast_gate_NOT_MET",
+      "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED."
+    },
+    {
+      "id": "H2_shek_replication",
+      "type": "secondary",
+      "description": "Independently reconstruct Shek (2026) funding-correction pattern from admissible public data; distinguish correction time from volatility/liquidation",
+      "status": "proposed",
+      "frozen_at": "2026-11-06T20:36:32Z",
+      "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458"
+    },
+    {
+      "id": "H_trackb_modeled_breaches",
+      "type": "primary_trackb",
+      "description": "Funding-conditioned features improve detection of synthetic mark-price boundary breaches (modeled proxy, not observed liquidations) vs price/RV-only baseline",
+      "status": "NOT_SUPPORTED",
+      "frozen_at": "2026-11-10T15:43:07Z",
+      "prereg_hash": "46dcfb56c279e853230e75f6cb246ed878d765d2b399ea9a2e21c41581194adb",
+      "last_tested": "2026-11-10T20:00:21Z",
+      "last_experiment": "trackb_TB2_20261110T190405Z",
+      "last_verdict": "forecast_gate_NOT_MET",
+      "evidence": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, label synthetic_boundary_breach_h168_long_10x_m0, train/val/test with 7d purge/embargo). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction, below the pre-registered 2% materiality floor (NOT_MET). Paired block bootstrap (2000 reps, 30-day blocks, seed 20261110): Log Loss 95% CI [-0.010997, 0.003094] crosses zero (NOT_MET), p=0.488; Brier p=0.488. Holm across 2 metrics FAILS. Only 2 non-overlapping 30-day test blocks (<3 required, NOT_MET). Overall forecast gate NOT_MET. Track B = modeled synthetic breach proxy only, never observed liquidations. Risk overlay INELIGIBLE. TB1 (trackb_TB1_20261110T173838Z) remains degenerate/inadmissible (zero test breaches). All admissible local Track B routes now executed; no gate passed."
+    },
+    {
+      "id": "H_tracka_hl_liquidation_forecast",
+      "type": "primary_tracka",
+      "description": "Funding-conditioned features improve out-of-sample forecasting of observed Hyperliquid perpetual liquidation intensity (notional_usd-weighted liquidation event count per symbol per 24h) vs RV-only baseline, on a new Hyperliquid panel (2025-06..2026-10).",
+      "status": "PROPOSED_PREREGISTERED",
+      "preregistered_utc": "2026-11-11T07:30:00Z",
+      "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
+      "last_experiment": "TRACKA-HL-20261111T073000Z",
+      "last_verdict": "pending",
+      "evidence": "ironflow/hyperliquid-liquidations GO (CC BY 4.0, unauthenticated HF bulk parquet, complete months 2025-06..2026-10, 164-353 *-PERP markets/month). New experiment, no Binance/2024 conflation, no sealed-holdout reuse. Splits frozen before outcomes.",
+      "data_source": "ironflow/hyperliquid-liquidations",
+      "venue": "hyperliquid_perpetuals",
+      "coverage_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+      "license": "CC BY 4.0",
+      "unauthenticated": true,
+      "no_requester_pays": true,
+      "observed_only": true,
+      "modeled_or_proxy": false
+    }
+  ]
+}

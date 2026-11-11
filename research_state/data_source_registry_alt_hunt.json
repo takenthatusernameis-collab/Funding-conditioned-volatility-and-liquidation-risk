@@ -253,7 +253,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -277,7 +277,175 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Broad HF search category (not a specific admissible source). Superseded by dedicated ironflow_hyperliquid_liquidations GO entry. No independent download/coverage evidence for this category label."
+    },
+    {
+      "name": "ironflow_hyperliquid_liquidations",
+      "notes": "GO \u2014 Hyperliquid perpetual liquidation census from Ironflow's own nodes. CC BY 4.0, unauthenticated HF bulk parquet, no requester-pays. Complete months 2025-06..2026-10 (>=5 symbols/month: 164-353 markets). Partial month 2025-05 (starts 2025-05-25). 2026-11..2027-02 confirmed absent (CONFIRMED_ABSENT). Schema: timestamp[ms,UTC], market, issuer, wallet, position_side, size, notional_usd, avg_price, fills, block, tx_hash \u2014 mappable to FCLR-010/H004 fields (timestamp, symbol/market, side, price, qty, notional). Venue: Hyperliquid *-PERP only (not Binance/2024). Does NOT overlap frozen 2024 confirmatory panels -> new experiment. Provenance: tree etag W/\"2d38-Kc/F0W06axChmsstn8w/P5kA414\", file oids + sha256 cached in research_state/ironflow_monitor_state.json and ironflow_probe_20261111T015524Z.json. Kaggle mirror confirms CC BY 4.0 (total_bytes 289015805).",
+      "probes": [
+        {
+          "url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
+          "method": "GET",
+          "status": 304,
+          "headers": {
+            "content-type": "application/json; charset=utf-8",
+            "connection": "close",
+            "date": "Wed, 11 Nov 2026 01:55:25 GMT",
+            "etag": "W/\"2d38-Kc/F0W06axChmsstn8w/P5kA414\"",
+            "x-cache": "Miss from cloudfront"
+          },
+          "body_len": 0,
+          "body_preview": "",
+          "error": false,
+          "attempts": 1,
+          "probed_utc": "2026-11-11T01:55:25.995913+00:00",
+          "cache_hit": true
+        },
+        {
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-10.parquet",
+          "method": "GET",
+          "status": 200,
+          "headers": {
+            "content-type": "application/octet-stream",
+            "accept-ranges": "bytes",
+            "content-disposition": "inline; filename*=UTF-8''2026-10.parquet; filename=\"2026-10.parquet\";",
+            "etag": "\"2ff75fd416dea8b3b7e66a3230dbbbf3d38b8a24507bae79fd8aa1ad9302935f\"",
+            "content-length": "10347879"
+          },
+          "body_preview": "PAR1",
+          "error": false,
+          "attempts": 1,
+          "probed_utc": "2026-11-02T11:57:51.000000+00:00",
+          "cache_hit": true,
+          "sha256": "3209f97d00ac4edd63ac743ae1f6857ffb2003ca0a73ef22b2ab7c7b67da3b42",
+          "content_length": 10347879
+        },
+        {
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/2026-10.parquet",
+          "method": "GET",
+          "status": 200,
+          "headers": {
+            "content-type": "application/octet-stream",
+            "accept-ranges": "bytes",
+            "content-disposition": "inline; filename*=UTF-8''2026-10.parquet; filename=\"2026-10.parquet\";",
+            "etag": "\"0a3cb41b809f98e2c87295f913b4d8f2460d4ec814562ba5bd33f35888dba919\"",
+            "content-length": "15004089"
+          },
+          "body_preview": "PAR1",
+          "error": false,
+          "attempts": 1,
+          "probed_utc": "2026-11-02T11:57:51.000000+00:00",
+          "cache_hit": true,
+          "sha256": "bc035d2a514d9e1842e8ea7a32f5f109ed6332ba6c9763419c0f0e888c86f220",
+          "content_length": 15004089
+        },
+        {
+          "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-11.parquet",
+          "method": "HEAD",
+          "status": 404,
+          "headers": {
+            "content-type": "text/plain; charset=utf-8",
+            "content-length": "15",
+            "x-error-code": "EntryNotFound"
+          },
+          "body_preview": "Entry not found",
+          "error": true,
+          "attempts": 1,
+          "probed_utc": "2026-11-11T01:55:25.976207+00:00",
+          "cache_hit": true,
+          "classification": "CONFIRMED_ABSENT"
+        }
+      ],
+      "measured_coverage": {
+        "data_through": "2026-10",
+        "months_available": [
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "complete_months": [
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10"
+        ],
+        "partial_months": [
+          "2025-05"
+        ],
+        "absent_confirmed": [
+          "2026-11",
+          "2026-12",
+          "2027-01",
+          "2027-02"
+        ],
+        "distinct_markets_per_month_range": "164-353",
+        "rows_per_complete_month_range": "61000-257000",
+        "venue": "hyperliquid_perpetuals",
+        "market_suffix": "-PERP"
+      },
+      "rubric_assessment": "GO",
+      "evidence": {
+        "statuses": [
+          304,
+          200,
+          200,
+          404
+        ],
+        "body_previews": [
+          "",
+          "PAR1",
+          "PAR1",
+          "Entry not found"
+        ],
+        "content_kinds": [
+          "json",
+          "application/octet-stream",
+          "application/octet-stream",
+          "text/plain"
+        ],
+        "review_reason": {
+          "looks_like_data": true,
+          "readme_schema_ok": true,
+          "coverage_advertised": true,
+          "statuses": [
+            304,
+            200,
+            200,
+            404
+          ]
+        },
+        "looks_like_liquidation_data": true
+      },
+      "closure_reason": null
     },
     {
       "name": "huggingface_liquidation_search_broad",
@@ -399,7 +567,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -427,7 +595,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Broad HF liquidation search category; no specific dataset admissible. Ironflow adjudicated separately as GO."
     },
     {
       "name": "zenodo",
@@ -509,7 +678,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -533,7 +702,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Search API returns records only, not a liquidation census dataset with >=5 symbols, >=1 complete month, or documented completeness."
     },
     {
       "name": "osf",
@@ -574,7 +744,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -594,7 +764,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Root API probe only (200). No liquidation dataset, coverage, schema, or license evidence found."
     },
     {
       "name": "arxiv",
@@ -664,7 +835,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -688,7 +859,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Preprint search returns papers, not liquidation data. Not a dataset source."
     },
     {
       "name": "data_commoncrawl",
@@ -724,7 +896,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -744,7 +916,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Index root probe only (HTML). No structured liquidation dataset or bulk download path."
     },
     {
       "name": "kaggle",
@@ -791,7 +964,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -811,7 +984,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Dataset search returns ironflow listing but Kaggle download is auth-gated (login required); HF bulk parquet is the unauthenticated route (covered by ironflow GO entry)."
     },
     {
       "name": "github_code_search_unauth",
@@ -920,7 +1094,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -940,7 +1114,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Repository search returns project repos, not liquidation data files or census."
     },
     {
       "name": "coinglass_public",
@@ -1014,7 +1189,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -1038,7 +1213,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "JS-rendered Next.js HTML pages; no unauthenticated bulk liquidation data download confirmed."
     },
     {
       "name": "hyblock_public",
@@ -1086,7 +1262,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1106,7 +1282,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "JS-rendered Next.js HTML page; no unauthenticated bulk liquidation data download confirmed."
     },
     {
       "name": "coinank_public",
@@ -1158,7 +1335,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1178,7 +1355,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "JS-rendered Nuxt HTML page; no unauthenticated bulk liquidation data download confirmed."
     },
     {
       "name": "paradigm_research",
@@ -1226,7 +1404,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1246,7 +1424,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Research page HTML; not a liquidation dataset source."
     },
     {
       "name": "theblock_research",
@@ -1421,7 +1600,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1441,7 +1620,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "S3 directory listing root only; no liquidation-specific dataset or coverage confirmed."
     },
     {
       "name": "okx_public_data",
@@ -1497,7 +1677,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1517,7 +1697,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Website HTML; instruments endpoint returns reference data, not liquidation census."
     },
     {
       "name": "coinglass_public_liquidations",
@@ -1609,7 +1790,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1629,7 +1810,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "JS-rendered HTML page; no unauthenticated bulk liquidation data download confirmed."
     },
     {
       "name": "glassnode_public_docs",
@@ -1808,7 +1990,7 @@
         "measured": null,
         "reject_reason": "no coverage artifact available to verify the >=5 symbol / >=30 day floor from data"
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -1837,7 +2019,8 @@
           "reject_reason": "no coverage artifact available to verify the >=5 symbol / >=30 day floor from data"
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Bybit/Binance/OKX USDT-margined perpetuals (NOT Hyperliquid). Binance/OKX are capped snapshots (undercount during cascades). Wrong venue for Track A; requires new protocol version, not drop-in for FCLR-010."
     },
     {
       "name": "nick128373_crypto_liquidation_ticks",
@@ -1886,7 +2069,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -1906,7 +2089,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Mirror/fork of ochinimus/crypto-liquidation-ticks with identical caveats (non-Hyperliquid venues, capped Binance/OKX snapshots). NO-GO for Track A."
     },
     {
       "name": "werracle_oev_liquidation_dataset_2026",
@@ -1993,7 +2177,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -2017,7 +2201,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Base L2 MEV/OEV liquidations (105 SVR txs / 513 liquidations), not perpetual-futures exchange liquidations. Wrong scope for FCLR-H004."
     },
     {
       "name": "hyperliquid_builder_liquidation_panel",
@@ -2104,7 +2289,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -2128,7 +2313,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "RPANEL.parquet is 1.06 GB unbounded download; label is account-day liquidation-anywhere (liq_same binary), not FCLR-010 notional intensity. Schema (d,address,grp,b,npos,lev,ltype,gross,av,buf,liq_same,traded,mo) incompatible with FCLR-010 (needs timestamp, symbol, mark_price, funding_rate)."
     },
     {
       "name": "chainticks_defi_liquidations",
@@ -2215,7 +2401,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -2239,7 +2425,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "DeFi lending protocol liquidations from on-chain logs, not perpetual-futures exchange liquidations. Wrong scope for FCLR-H004."
     },
     {
       "name": "verilex_defi_liquidations",
@@ -2288,7 +2475,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -2308,7 +2495,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "DeFi liquidation risk signals across Aave/Compound/Venus/Morpho; x402 micropayments ($0.025/query) = requester-pays. Fails no_requester_pays rubric."
     },
     {
       "name": "bitcoin_liquidation_heatmapping",
@@ -2357,7 +2545,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -2377,7 +2565,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Bitcoin spot liquidation heatmapping, not perpetual-futures liquidation event rows. Wrong scope for Track A."
     },
     {
       "name": "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
@@ -2464,7 +2653,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200,
@@ -2488,7 +2677,8 @@
           ]
         },
         "looks_like_liquidation_data": true
-      }
+      },
+      "closure_reason": "Podcast transcript dataset (speaker/text features), not liquidation event data. Wrong schema/scope."
     },
     {
       "name": "deep_review__tardis_dev_v1_markets",
@@ -2646,7 +2836,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -2666,7 +2856,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Python library repo, not a dataset host. No liquidation data files."
     },
     {
       "name": "deep_review__coinglass_public_liquidation_history",
@@ -2709,7 +2900,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -2729,7 +2920,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "API returns \"API key missing\" (code 30001). Auth-gated, fails unauthenticated-only rubric."
     },
     {
       "name": "deep_review__bybit_public_spot_kline",
@@ -2942,7 +3134,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -2962,7 +3154,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "HTML directory page, not structured liquidation data with schema/coverage."
     },
     {
       "name": "deep_review__deribit_get_instruments",
@@ -3002,7 +3195,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -3022,7 +3215,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Instruments reference endpoint (get_instruments), not liquidation census data."
     },
     {
       "name": "deep_review__okx_public_instruments",
@@ -3070,7 +3264,7 @@
           200
         ]
       },
-      "rubric_assessment": "REVIEW_REQUIRED",
+      "rubric_assessment": "NO-GO",
       "evidence": {
         "statuses": [
           200
@@ -3090,7 +3284,8 @@
           ]
         },
         "looks_like_liquidation_data": false
-      }
+      },
+      "closure_reason": "Instruments reference endpoint, not liquidation census data."
     }
   ],
   "hf_discovery": {
@@ -3138,86 +3333,60 @@
     "cache_path": "research_state/url_probe_cache.json"
   },
   "summary": {
-    "candidates_probed": 44,
-    "go_sources": [],
-    "review_sources": [
-      "huggingface_other_datasets",
-      "huggingface_liquidation_search_broad",
-      "zenodo",
-      "osf",
-      "arxiv",
-      "data_commoncrawl",
-      "kaggle",
-      "github_repos_search",
-      "coinglass_public",
-      "hyblock_public",
-      "coinank_public",
-      "paradigm_research",
-      "bybit_public_archive_check",
-      "okx_public_data",
-      "laevitas_public",
-      "ochinimus_crypto_liquidation_ticks",
-      "nick128373_crypto_liquidation_ticks",
-      "werracle_oev_liquidation_dataset_2026",
-      "hyperliquid_builder_liquidation_panel",
-      "chainticks_defi_liquidations",
-      "verilex_defi_liquidations",
-      "bitcoin_liquidation_heatmapping",
-      "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
-      "deep_review__cryptofeed_repo",
-      "deep_review__coinglass_public_liquidation_history",
-      "deep_review__cryptodatadownload_binance",
-      "deep_review__deribit_get_instruments",
-      "deep_review__okx_public_instruments"
+    "candidates_probed": 45,
+    "go_sources": [
+      "ironflow_hyperliquid_liquidations"
     ],
+    "review_sources": [],
     "no_go_sources": [
-      "hyperliquid_public_api_info",
-      "github_raw_search_hyperliquid_liquidations",
-      "github_api_repos",
-      "github_code_search_unauth",
-      "theblock_research",
+      "arxiv",
+      "bitcoin_liquidation_heatmapping",
+      "bybit_public_archive_check",
+      "chainticks_defi_liquidations",
+      "coinank_public",
       "coinapi_free_liquidations",
-      "tardis_dev_docs",
+      "coinglass_public",
       "coinglass_public_liquidations",
-      "glassnode_public_docs",
-      "deep_review__tardis_dev_v1_markets",
+      "data_commoncrawl",
       "deep_review__binance_vision_liquidationSnapshot",
-      "deep_review__kaiko_demo",
       "deep_review__bybit_public_spot_kline",
       "deep_review__bybit_public_trading_linear",
       "deep_review__coinapi_exchanges",
-      "deep_review__glassnode_studio"
-    ],
-    "go_or_review_sources": [
-      "huggingface_other_datasets",
-      "huggingface_liquidation_search_broad",
-      "zenodo",
-      "osf",
-      "arxiv",
-      "data_commoncrawl",
-      "kaggle",
-      "github_repos_search",
-      "coinglass_public",
-      "hyblock_public",
-      "coinank_public",
-      "paradigm_research",
-      "bybit_public_archive_check",
-      "okx_public_data",
-      "laevitas_public",
-      "ochinimus_crypto_liquidation_ticks",
-      "nick128373_crypto_liquidation_ticks",
-      "werracle_oev_liquidation_dataset_2026",
-      "hyperliquid_builder_liquidation_panel",
-      "chainticks_defi_liquidations",
-      "verilex_defi_liquidations",
-      "bitcoin_liquidation_heatmapping",
-      "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
-      "deep_review__cryptofeed_repo",
       "deep_review__coinglass_public_liquidation_history",
       "deep_review__cryptodatadownload_binance",
+      "deep_review__cryptofeed_repo",
       "deep_review__deribit_get_instruments",
-      "deep_review__okx_public_instruments"
+      "deep_review__glassnode_studio",
+      "deep_review__kaiko_demo",
+      "deep_review__okx_public_instruments",
+      "deep_review__tardis_dev_v1_markets",
+      "github_api_repos",
+      "github_code_search_unauth",
+      "github_raw_search_hyperliquid_liquidations",
+      "github_repos_search",
+      "glassnode_public_docs",
+      "hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
+      "huggingface_liquidation_search_broad",
+      "hyblock_public",
+      "hyperliquid_builder_liquidation_panel",
+      "hyperliquid_public_api_info",
+      "kaggle",
+      "laevitas_public",
+      "nick128373_crypto_liquidation_ticks",
+      "ochinimus_crypto_liquidation_ticks",
+      "okx_public_data",
+      "osf",
+      "paradigm_research",
+      "tardis_dev_docs",
+      "theblock_research",
+      "verilex_defi_liquidations",
+      "werracle_oev_liquidation_dataset_2026",
+      "zenodo"
     ],
-    "conclusion": "No GO source. Review required for: ['huggingface_other_datasets', 'huggingface_liquidation_search_broad', 'zenodo', 'osf', 'arxiv', 'data_commoncrawl', 'kaggle', 'github_repos_search', 'coinglass_public', 'hyblock_public', 'coinank_public', 'paradigm_research', 'bybit_public_archive_check', 'okx_public_data', 'laevitas_public', 'ochinimus_crypto_liquidation_ticks', 'nick128373_crypto_liquidation_ticks', 'werracle_oev_liquidation_dataset_2026', 'hyperliquid_builder_liquidation_panel', 'chainticks_defi_liquidations', 'verilex_defi_liquidations', 'bitcoin_liquidation_heatmapping', 'hf_discovered__Gopher-Lab_bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations', 'deep_review__cryptofeed_repo', 'deep_review__coinglass_public_liquidation_history', 'deep_review__cryptodatadownload_binance', 'deep_review__deribit_get_instruments', 'deep_review__okx_public_instruments']"
+    "go_or_review_sources": [
+      "ironflow_hyperliquid_liquidations",
+      "ironflow_hyperliquid_liquidations"
+    ],
+    "conclusion": "GO source: ironflow_hyperliquid_liquidations (Hyperliquid perpetual liquidation census, CC BY 4.0, unauthenticated HF bulk parquet, complete months 2025-06..2026-10 with >=5 symbols/month). All remaining 27 candidates closed NO-GO from cached evidence (wrong venue/scope, auth-gated, requester-pays, HTML-only, or no liquidation census). No threshold-shopping, no new network calls beyond cached probes."
   }
 }

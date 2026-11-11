@@ -1,9 +1,9 @@
 # NEXT_SESSION_TASK — Pointer (Authoritative Handoff)
 
-**Timestamp (UTC):** 2026-11-11T06:33:29Z
+**Timestamp (UTC):** 2026-11-11T07:30:00Z
 **Single durable handoff / execute first:** `HANDOFF_NEXT_SESSION.md`
 
 ## Immediate task
-**`SOURCE_UNBLOCK_CAMPAIGN`** — finalize rubric adjudication of HF `ironflow/hyperliquid-liquidations` (local event parquets 2025-05..2026-10 present and empirically inspected; GO-pending formal evidence record) and close remaining secondary candidates; if GO, preregister and execute a **new** Track A Hyperliquid liquidation experiment (no 2024/Binance conflation, no sealed-holdout reuse).
+**`TRACKA-HL_PHASE_4`** — build aligned Hyperliquid liquidation + market/funding/price panel from admissible unauthenticated sources; run pre-registered evaluation per `research_state/tracka_prereg_hyperliquid_2026.json`; produce auditable verdict artifact. Verify prereg freeze (`frozen_before_outcomes: true`) before any outcome computation.
 
-Read and execute `HANDOFF_NEXT_SESSION.md`. Do not poll, relitigate concluded tracks, threshold-shop, fabricate data/provenance, or produce status-only output.
+Read and execute `HANDOFF_NEXT_SESSION.md`. Do not poll, relitigate concluded tracks, threshold-shop, fabricate data/provenance, inspect outcomes before prereg freeze, or produce status-only output.

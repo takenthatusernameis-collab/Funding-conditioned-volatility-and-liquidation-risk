@@ -1,5 +1,5 @@
 # FOCUS_CAMPAIGN — Pointer
 
-**Timestamp (UTC):** 2026-11-11T06:33:29Z
+**Timestamp (UTC):** 2026-11-11T07:30:00Z
 **Single durable handoff:** `HANDOFF_NEXT_SESSION.md`
-**Campaign:** `SOURCE_UNBLOCK_CAMPAIGN` (heavy). Primary: formal GO/NO-GO adjudication for `ironflow/hyperliquid-liquidations` using cached local parquets/probes + rubric evidence; secondary: close remaining candidates. Phase 4 only after GO with frozen preregistration and new Track A experiment (Hyperliquid, no sealed/2024 conflation).
+**Campaign:** `TRACKA-HL_PHASE_4` (heavy). Source unblock complete: `ironflow/hyperliquid-liquidations` GO (CC BY 4.0, unauthenticated HF bulk parquet, complete months 2025-06..2026-10, 164–353 *-PERP markets/month). All secondary alt-hunt candidates closed NO-GO. Track A prereg frozen pre-outcomes at `research_state/tracka_prereg_hyperliquid_2026.json`. Execute Phase 4: aligned panel build + pre-registered evaluation + verdict artifact. No 2024/Binance conflation, no sealed-holdout reuse.

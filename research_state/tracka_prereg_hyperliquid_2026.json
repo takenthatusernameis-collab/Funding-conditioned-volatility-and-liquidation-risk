@@ -1,0 +1,94 @@
+{
+  "experiment_id": "TRACKA-HL-20261111T073000Z",
+  "preregistered_utc": "2026-11-11T07:30:00Z",
+  "campaign": "SOURCE_UNBLOCK_CAMPAIGN",
+  "track": "A",
+  "status": "PREREGISTERED_FROZEN_PRE_OUTCOMES",
+  "claim": "Funding-conditioned features improve out-of-sample forecasting of observed Hyperliquid perpetual liquidation intensity (notional_usd-weighted liquidation event count per symbol per 24h) vs RV-only baseline, on a new Hyperliquid panel (2025-06..2026-10), pre-registered before any outcome computation.",
+  "hypothesis_id": "H_tracka_hl_liquidation_forecast",
+  "hypothesis_type": "primary_tracka",
+  "venue": "hyperliquid_perpetuals",
+  "data_source": {
+    "name": "ironflow/hyperliquid-liquidations",
+    "license": "CC BY 4.0",
+    "access": "unauthenticated HF bulk parquet (resolve/main/data/events/YYYY-MM.parquet)",
+    "requester_pays": false,
+    "api_key_required": false,
+    "signature_required": false,
+    "coverage_window": "2025-05-25 .. 2026-10-31",
+    "complete_months": [
+      "2025-06", "2025-07", "2025-08", "2025-09", "2025-10",
+      "2025-11", "2025-12", "2026-01", "2026-02", "2026-03",
+      "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"
+    ],
+    "partial_month_excluded": "2025-05 (starts 2025-05-25)",
+    "absent_confirmed": ["2026-11", "2026-12", "2027-01", "2027-02"],
+    "schema_events": ["timestamp", "market", "issuer", "wallet", "position_side", "size", "notional_usd", "avg_price", "fills", "block", "tx_hash"],
+    "schema_fills": ["timestamp", "market", "issuer", "wallet", "position_side", "size", "notional_usd", "avg_price", "fills", "block", "tx_hash"],
+    "provenance": {
+      "tree_url": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations/tree/main?recursive=true",
+      "tree_etag": "W/\"2d38-Kc/F0W06axChmsstn8w/P5kA414\"",
+      "access_date_utc": "2026-11-11T01:55:25Z",
+      "source_file": "research_state/ironflow_probe_20261111T015524Z.json",
+      "digest_file": "research_state/ironflow_probe_digest_latest.json",
+      "monitor_file": "research_state/ironflow_monitor_state.json"
+    }
+  },
+  "panel": {
+    "symbols": "All *-PERP markets with >=1 liquidation event in each complete month; minimum 5 symbols/month required (observed 164-353 distinct markets/month)",
+    "min_symbols": 5,
+    "time_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+    "label": "observed_hyperliquid_liquidation_event_rows",
+    "label_definition": "Raw ironflow events rows (observed liquidations, not modeled/proxy/synthetic). label = notional_usd-weighted liquidation event count per symbol per 24h UTC bucket.",
+    "modeled_or_proxy": false,
+    "merges_non_hyperliquid": false,
+    "timestamp_normalized_utc": true
+  },
+  "split_boundaries": {
+    "status": "frozen_before_outcomes",
+    "rule": "Chronological splits by unique UTC timestamps across the common symbol panel; 7-day embargo between partitions",
+    "embargo_days": 7,
+    "train": {
+      "start": "2025-06-01T00:00:00Z",
+      "end": "2025-11-30T23:00:00Z"
+    },
+    "validation": {
+      "start": "2025-12-08T00:00:00Z",
+      "end": "2026-01-31T23:00:00Z"
+    },
+    "test": {
+      "start": "2026-02-08T00:00:00Z",
+      "end": "2026-10-31T23:00:00Z"
+    },
+    "test_blocks": ">=3 non-overlapping 30-day blocks (2026-02-08..2026-03-09, 2026-03-16..2026-04-15, 2026-04-22..2026-05-21, ...)"
+  },
+  "baselines": ["B0", "B1"],
+  "models": ["C1", "C2"],
+  "primary_contrast": "C2 vs B1",
+  "primary_target": "next-24h observed liquidation intensity (notional_usd-weighted event count per symbol)",
+  "metric": "QLIKE (lower is better) on observed liquidation intensity",
+  "materiality_gate": {
+    "min_relative_reduction_pct": 2.0,
+    "ci_excludes_zero": true,
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3,
+    "all_required": true
+  },
+  "forbidden": [
+    "No threshold-shopping on test set",
+    "No sealed-holdout reuse (FCLR-002/FCLR-003/Track B/C test sets are sealed)",
+    "No Binance/2024 conflation (Hyperliquid only, 2025-06..2026-10 panel)",
+    "No modeled/proxy/synthetic liquidation labels (observed ironflow events only)",
+    "No outcome inspection before preregistration freeze",
+    "No risk overlay before forecast gate is met",
+    "No network polling or redundant GETs beyond cached provenance"
+  ],
+  "admissibility_guard": {
+    "schema_mapped_to": "FCLR-010/H004",
+    "observed_only": true,
+    "unauthenticated_only": true,
+    "no_requester_pays": true,
+    "research_license": "CC BY 4.0"
+  },
+  "next_step": "Build aligned analysis panel (liquidation events + Hyperliquid market/funding/price context from admissible unauthenticated sources, with provenance) or document blocker if alignment data inadmissible. Then run pre-registered evaluation."
+}
