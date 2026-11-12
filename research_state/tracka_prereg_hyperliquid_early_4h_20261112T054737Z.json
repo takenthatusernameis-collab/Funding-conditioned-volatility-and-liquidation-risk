@@ -1,0 +1,134 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY-4H-20261112T054737Z",
+  "timestamp_utc": "2026-11-12T05:47:37Z",
+  "track": "A",
+  "campaign": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1-4H",
+  "status": "PREREG_FROZEN_PRE_OUTCOMES",
+  "description": "Early 2025-11..2026-04 observed-liquidation+funding panel on 4h cadence. Supersedes TRACKA-HL-EARLY-20261111T191958Z which was INADMISSIBLE due to 1h candleSnapshot returning empty historical rows. 4h candleSnapshot returns complete historical candles. This is a NEW design/cadence, not a reopening of sealed 1h outcomes.",
+  "data_sources": {
+    "candles": {
+      "source": "Hyperliquid public API candleSnapshot endpoint",
+      "endpoint": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "params": {"type": "candleSnapshot", "req": {"coin": "<COIN>", "interval": "4h", "startTime": "<ms>", "endTime": "<ms>"}},
+      "interval": "4h",
+      "window_utc": "2025-11-01T00:00:00Z .. 2026-04-30T23:59:59Z",
+      "coins": ["BTC", "ETH", "BNB", "SOL", "XRP", "AVAX", "DOGE", "LINK", "SUI"],
+      "cached_path": "research_state/data_cache/hyperliquid_candles_4h/<COIN>/<YYYY-MM>.json",
+      "provenance_files": ["<COIN>/<YYYY-MM>.accessed.json", "<COIN>/<YYYY-MM>.sha256"],
+      "fetch_report": "research_state/tracka_hl_early_candle_fetch_4h_report_20261112T054104Z.json",
+      "fetch_script": "scripts/tracka_hl_fetch_candles_early_4h.py",
+      "unauthenticated": true,
+      "license": "Hyperliquid public API, unauthenticated; no terms restriction on research use identified",
+      "expected_bars_per_coin": 1086,
+      "expected_bars_per_30d_block": 180
+    },
+    "funding": {
+      "source": "Hyperliquid public API",
+      "cached_path": "research_state/data_cache/hyperliquid_funding/<COIN>.json",
+      "coverage_utc": "2025-11-01 .. 2026-10-30 (hourly, ~8668 rows/coin)",
+      "unauthenticated": true,
+      "license": "Hyperliquid public API, unauthenticated"
+    },
+    "labels": {
+      "source": "ironflow/hyperliquid-liquidations (CC BY 4.0)",
+      "cached_path": "research_state/data_cache/ironflow_events/<YYYY-MM>.parquet",
+      "window_utc": "2025-11-01 .. 2026-04-30",
+      "markets": ["BTC-PERP", "ETH-PERP", "BNB-PERP", "SOL-PERP", "XRP-PERP", "AVAX-PERP", "DOGE-PERP", "LINK-PERP", "SUI-PERP"],
+      "observed_only": true,
+      "license": "CC BY 4.0",
+      "label_construction": "notional_usd-weighted event count per symbol per 24h UTC bucket (sum of notional_usd per symbol per day)"
+    }
+  },
+  "panel_construction": {
+    "unit": "symbol x 24h UTC bucket (aligned to 00:00 UTC)",
+    "window_utc": "2025-11-01T00:00:00Z .. 2026-04-30T23:59:59Z",
+    "symbols": ["BTC", "ETH", "BNB", "SOL", "XRP", "AVAX", "DOGE", "LINK", "SUI"],
+    "n_symbols": 9,
+    "target": "next-24h observed liquidation intensity (liq_notional_usd shifted -1 day)",
+    "baseline_features_B1": {
+      "description": "RV/context-only baseline derived from 4h closes",
+      "features": [
+        "rv_4h: trailing 4h realized volatility from 4h log returns (1 period)",
+        "rv_24h: trailing 24h realized volatility from 4h log returns (6 periods)",
+        "rv_168h: trailing 168h realized volatility from 4h log returns (42 periods)",
+        "liq_intensity_lag1: previous day's liquidation intensity (log)",
+        "liq_intensity_lag7: 7-day lag liquidation intensity (log)"
+      ],
+      "model_form": "OLS on log(target + 1e-12) with standardized predictors (training-only mean/std)"
+    },
+    "candidate_features_C2": {
+      "description": "B1 features plus pre-specified funding-conditioned features",
+      "features_B1_plus": [
+        "fundingRate: latest funding rate at or before forecast origin (signed)",
+        "abs_funding_90d_pct: percentile rank of |fundingRate| vs prior 90 calendar days (min 30 obs)",
+        "funding_premium: mark/index premium at forecast origin (when available)",
+        "funding_ema_dist: mark/EMA24 distance at forecast origin"
+      ],
+      "model_form": "Same OLS form as B1, additional predictors appended"
+    }
+  },
+  "splits": {
+    "train": {"start": "2025-11-01T00:00:00Z", "end": "2026-01-31T23:59:59Z"},
+    "validation": {"start": "2026-02-01T00:00:00Z", "end": "2026-02-28T23:59:59Z"},
+    "test_blocks": [
+      {"block": 0, "start": "2026-03-07T00:00:00Z", "end": "2026-04-05T23:59:59Z"},
+      {"block": 1, "start": "2026-04-12T00:00:00Z", "end": "2026-05-11T23:59:59Z"},
+      {"block": 2, "start": "2026-05-18T00:00:00Z", "end": "2026-06-16T23:59:59Z"}
+    ],
+    "embargo_days": 7,
+    "note": "Test blocks are 30-day non-overlapping with 7-day embargo between blocks. Block 2 extends beyond 2026-04-30 window; data after 2026-04-30 will be excluded. Effective test blocks within window: blocks 0 and 1 (2 blocks). If <3 blocks feasible, record as PILOT/INCONCLUSIVE with exact shortfall."
+  },
+  "metrics": {
+    "primary": "QLIKE on next-24h liquidation intensity (lower better)",
+    "secondary": ["MAE", "RMSE"],
+    "materiality_gate": {
+      "relative_qlique_reduction_pct": 2.0,
+      "ci_excludes_zero": true,
+      "min_paired_instruments": 5,
+      "min_test_blocks": 3
+    }
+  },
+  "inference": {
+    "method": "block bootstrap resampling complete 30-day UTC time blocks jointly across instruments",
+    "n_replications": 2000,
+    "seed": 20261112,
+    "paired_comparisons": ["C2_vs_B1", "C1_vs_B1", "C2_vs_C1"]
+  },
+  "gate_assessment": {
+    "primary_contrast": "C2_vs_B1",
+    "pass_criteria": {
+      "relative_qlique_reduction_ge_2pct": "C2 relative QLIKE reduction vs B1 >= 2%",
+      "ci_95_excludes_zero": "95% CI upper bound < 0 (C2 better)",
+      "min_5_paired_instruments": ">= 5 symbols with paired forecasts in test blocks",
+      "min_3_test_blocks": ">= 3 non-overlapping 30-day test blocks with data"
+    },
+    "verdict_values": ["PASS", "NOT_MET", "INCONCLUSIVE", "INADMISSIBLE"],
+    "inadmissibility_criteria": [
+      "Insufficient candles for RV computation (rv_24h requires 6 4h bars, rv_168h requires 42)",
+      "Insufficient funding observations for 90d percentile (min 30)",
+      "Insufficient label coverage (< 5 symbols with labels in test blocks)",
+      "Insufficient test blocks (< 3 non-overlapping 30-day blocks within window)",
+      "Data provenance/venue inconsistency detected"
+    ]
+  },
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "no_github_workflows_edits": true,
+    "no_redundant_network_polling": true,
+    "venue_consistent": "Hyperliquid-only",
+    "labels_observed_only": true
+  },
+  "artifacts_to_produce": {
+    "prereg_json": "research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.json",
+    "prereg_md": "research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.md",
+    "panel_parquet": "research_state/tracka_hl_early_4h_panel_20261112T054737Z.parquet",
+    "panel_report_json": "research_state/tracka_hl_early_4h_panel_build_report_20261112T054737Z.json",
+    "verdict_md": "research_state/evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.md",
+    "verdict_json": "research_state/evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.json"
+  }
+}
