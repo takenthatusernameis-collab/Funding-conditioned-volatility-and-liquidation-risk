@@ -1,17 +1,17 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T08:40:27Z (supersedes prior handoffs; this file is the sole durable handoff)
+**Authoritative handoff timestamp (UTC):** 2026-11-12T08:43:37Z (supersedes prior handoffs; this file is the sole durable handoff)
 
 ## Repo-priority P0 (inferred from repository name)
 Advance the core claim — **funding-conditioned volatility and liquidation risk** — with heavy, claim-advancing work only: (a) execute Gate 4 Branch 1 on a valid RESOLVED trigger, (b) run §16 admissibility audit (+ prereg/build/eval/verdict if admissible) for a genuinely new liquidation-label source/window, (c) produce bounded eligibility evidence ruling new heavy work in/out, or (d) emit a timestamped checkpoint proving no new eligible work and STOP CLEANLY. Status files, polling, and re-probes of already-assessed sources are NOT heavy work and are banned.
 
-## Verified state (2026-11-12T08:40:27Z)
+## Verified state (2026-11-12T08:43:37Z)
 - **Gate 4 Branch 1 trigger:** ABSENT (`research_state/fclr016_local_audit/` has no `*RESOLVED*` with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). External/legal; do not create/attest/bypass, do not wait/poll.
 - **Eligibility/monitor:** `research_state/new_data_monitor_probe_20261112T073159Z.{md,json}` → `new_claim_worthy_experiment_eligible_now=false` (ironflow/hyperliquid-liquidations `lastModified=2026-11-07T10:18:25Z`, latest event month `2026-10`, no verified post-2026-10-31 observed labels; HL 2026-11+ depth ~12.0d, <100d reprobe/<90d for ≥3×30d blocks).
 - **Alt-source discovery completed (do not rerun without new unassessed candidate):** `research_state/alt_source_scan_latest.json` (20261112T075045Z, 22 candidates) and `research_state/alt_source_deep_review_latest.md` (20261112T075134Z, 14 probes) — **no new GO sources**. Unauthenticated probes were auth-gated/404/403/library/not-dataset or lacked structured liquidation census; ironflow HF (CC BY 4.0) is the only known admissible Track A source found but is exhausted for claim-worthy work (events through 2026-10).
 - **Caches/registry:** `research_state/hf_search_cache.json`, `research_state/data_source_registry_alt_hunt.json`, `research_state/ironflow_fastpath_cache.json`, `research_state/ironflow_monitor_state.json`. Candidates materially covered by latest scan/deep-review are not re-probe targets.
 - **Sealed/exhausted (no reopening/relitigation/retune):** metpie 2025Q2 §16 INADMISSIBLE (~65d); TRACKA-HL-EARLY-4H INCONCLUSIVE_PILOT_SHORTFALL; Track A expansion PASS but robustness FRAGILE; volatility family/alt-vol/primary NOT_MET; Track B/C/H1 NOT_SUPPORTED as sealed; cached-data designs exhausted. H2 `H2_shek_replication` EXPLORATORY_ONLY/PARTIAL with evidence (`research_state/h002_replication_report.md`, `h002_run_record.json`) — no promotion/re-run.
-- **Offline sanity check (2026-11-12T08:37:30Z):** `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit -v` → **103 tests OK**. Evidence artifacts written to temp dirs, no resume trigger, `data_through=2026-10`, probe diff zero, baseline drift intact.
+- **Offline sanity check (2026-11-12T08:42:16Z):** `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit -v` → **103 tests OK**. Evidence artifacts written to temp dirs, no resume trigger, `data_through=2026-10`, probe diff zero, baseline drift intact.
 
 ## Bottlenecks and required removal (execute, do not stall)
 | Bottleneck | Nature | Removal action |
@@ -42,7 +42,7 @@ Advance the core claim — **funding-conditioned volatility and liquidation risk
 - H2 evidence: `research_state/h002_replication_report.md`, `research_state/h002_run_record.json`
 
 ## Immediate first action (now)
-Gate 4 check → **absent**. Triage for a materially new, unassessed, plausibly §16-admissible liquidation-label candidate in caches/artifacts: **none found**. Write `research_state/session_checkpoint_20261112T084027Z.md` (evidence: Gate 4 absent, probe 20261112T073159Z ineligible, alt-source scan/review show no new GO, offline sanity 103 tests OK) and **STOP CLEANLY**. No network probes needed; offline sanity already verified.
+Gate 4 check → **absent**. Triage for a materially new, unassessed, plausibly §16-admissible liquidation-label candidate in caches/artifacts: **none found**. Write `research_state/session_checkpoint_20261112T084337Z.md` (evidence: Gate 4 absent, probe 20261112T073159Z ineligible, alt-source scan/review show no new GO, offline sanity 103 tests OK) and **STOP CLEANLY**. No network probes needed; offline sanity already verified.
 
 ## Session entry conditions (resume triggers only)
 Resume ONLY when a materially different condition obtains:
