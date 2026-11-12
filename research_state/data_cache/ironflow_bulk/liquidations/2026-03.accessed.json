@@ -1,0 +1,12 @@
+{
+  "api_key_required": false,
+  "bytes": 6001329,
+  "dataset": "liquidations",
+  "fetched_utc": "2026-11-12T23:40:45Z",
+  "license": "CC-BY-4.0",
+  "month": "2026-03",
+  "requester_pays": false,
+  "sha256": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d",
+  "unauthenticated": true,
+  "url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/2026-03.parquet"
+}
