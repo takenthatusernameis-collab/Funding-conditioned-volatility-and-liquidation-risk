@@ -1,4 +1,4 @@
 # NEXT_SESSION_TASK (redirect)
-**Timestamp (UTC):** 2026-11-12T00:01:29Z
+**Timestamp (UTC):** 2026-11-12T00:36:38Z
 
 Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative as of this timestamp). Immediate heavy objective: complete declared multiplicity family for frozen TRACKA-VOL-20261111T234918Z by evaluating pre-registered secondary horizons (6h, 72h, 168h realized variance) on existing cached panel → Holm correction across full family (primary 24h + 3 secondary × 3 contrasts = 12 comparisons) → family-wise verdict artifact → atomic state updates; if infeasible, document and prereg/attempt next admissible claim (e.g., liquidation robustness on 8-coin expansion universe) in-session. Gate 4 Branch 1 only on valid RESOLVED_VERIFIED trigger with human/legal attestation.
