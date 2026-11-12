@@ -1,4 +1,4 @@
 # FOCUS_CAMPAIGN (redirect)
-**Timestamp (UTC):** 2026-11-12T04:30:17Z
+**Timestamp (UTC):** 2026-11-12T04:35:30Z
 
-Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Execute it: Gate 4 Branch 1 only if valid RESOLVED trigger present; else mandatory external new-data acquisition campaign (bounded probe → evidence → prereg+build/eval OR document structural exhaustion + next free route). No status-only output.
+Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Execute it: Gate 4 Branch 1 only if valid RESOLVED trigger present; else continue materially different free heavy route (evidence-backed reprobe/monitor HL+ironflow extension and/or §16 audit of metpie). No status-only output.

@@ -1,0 +1,60 @@
+{
+  "audit_id": "new_data_external_probe_audit_20261112T043530Z",
+  "timestamp_utc": "2026-11-12T04:35:30Z",
+  "gate4_branch1_trigger_present": false,
+  "gate4_check_utc": "2026-11-12T04:32:39Z",
+  "local_admissible_untested_candidate": false,
+  "local_audit_baseline": "research_state/new_data_admissibility_audit_20261112T042738Z.md",
+  "external_probes_executed": true,
+  "evidence_artifacts": [
+    "research_state/external_new_data_probe_20261112T043403Z.json",
+    "research_state/hyperliquid_nov2026_coverage_probe_20261112T043403Z.json",
+    "research_state/external_new_data_probe_followup_20261112T043437Z.json",
+    "research_state/new_data_external_probe_audit_20261112T043530Z.md"
+  ],
+  "findings": {
+    "hyperliquid_api_candles_1h_2026_11_01_11": {
+      "status": "HTTP_200",
+      "symbols": 9,
+      "count_per_symbol": 241,
+      "window": "2026-11-01T00:00Z..2026-11-11T00:00Z",
+      "admissible_now": false,
+      "reason": "window_too_short_for_3x30d_blocks"
+    },
+    "hyperliquid_api_funding_2026_11_01_11": {
+      "status": "HTTP_200",
+      "symbols": 9,
+      "count_per_symbol": 240,
+      "admissible_now": false,
+      "reason": "window_too_short"
+    },
+    "ironflow_hf_dataset": {
+      "id": "ironflow/hyperliquid-liquidations",
+      "lastModified": "2026-11-07T10:18:25Z",
+      "coverage": "2025-05-25..2026-10-31",
+      "license": "cc-by-4.0",
+      "admissible_as_new_source": false,
+      "reason": "same_as_sealed_cache_no_post_2026_10_31_labels"
+    },
+    "ironflow_github_repo": {
+      "status": "HTTP_404",
+      "admissible": false
+    },
+    "metpie_hyperliquid_liquidation_events": {
+      "window": "2025-03-22..2025-05-25",
+      "verified_admissible_new_claim_now": false,
+      "reason": "historical_not_post_sealed_full_admissibility_audit_required"
+    },
+    "hf_search_crypto_liquidation_parquet": {
+      "count": 0
+    }
+  },
+  "verifiably_admissible_external_source_now": false,
+  "next_materially_different_free_route": [
+    "Re-probe/acquire HL 2026-11+ candles+funding when >=100d coverage available AND monitor ironflow HF for post-2026-10-31 observed liquidation labels; freeze prereg before outcomes if jointly admissible",
+    "Full \u00a716 admissibility audit of metpie Mar-May 2025 vs HL features for that window only if venue-consistent >=5sym >=3x30d feasible and not sealed; prereg before outcomes",
+    "Execute Gate 4 Branch 1 only on valid RESOLVED_VERIFIED trigger"
+  ],
+  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+  "next_unfinished_task": "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE"
+}

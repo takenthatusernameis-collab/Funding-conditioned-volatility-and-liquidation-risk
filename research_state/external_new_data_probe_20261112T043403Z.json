@@ -1,0 +1,281 @@
+{
+  "probe_ts_utc": "20261112T043403Z",
+  "campaign": "EXTERNAL_NEW_DATA_PROBE",
+  "probes": [
+    {
+      "url": "https://api.github.com/repos/ironflow/hyperliquid-liquidations",
+      "method": "GET",
+      "status": 404,
+      "ok": false,
+      "bytes": 118,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/repos#get-a-repository\",\"status\":\"404\"}",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://api.github.com/repos/ironflow/hyperliquid-liquidations/releases/latest",
+      "method": "GET",
+      "status": 404,
+      "ok": false,
+      "bytes": 130,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://api.github.com/repos/ironflow/hyperliquid-liquidations/contents/",
+      "method": "GET",
+      "status": 404,
+      "ok": false,
+      "bytes": 127,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://api.github.com/search/repositories?q=hyperliquid+liquidations+dataset&per_page=5",
+      "method": "GET",
+      "status": 200,
+      "ok": true,
+      "bytes": 19129,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "{\"total_count\":3,\"incomplete_results\":false,\"items\":[{\"id\":1352613008,\"node_id\":\"R_kgDOUJ88kA\",\"name\":\"hyperliquid-liquidation-events\",\"full_name\":\"metpie/hyperliquid-liquidation-events\",\"private\":false,\"owner\":{\"login\":\"metpie\",\"id\":295848332,\"node_id\":\"U_kgDOEaJJjA\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/295848332?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/metpie\",\"html_url\":\"https://github.com/metpie\",\"followers_url\":\"https://api.github.com/users/metpie/followers\",\"following_url\":\"https://api.github.com/users/metpie/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/metpie/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/metpie/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/metpie/subscriptions\",\"organiz",
+      "error": null
+    },
+    {
+      "url": "https://api.github.com/search/repositories?q=ironflow+liquidations&per_page=5",
+      "method": "GET",
+      "status": 200,
+      "ok": true,
+      "bytes": 55,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}",
+      "error": null
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 30129,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"BTC\",\"i\":\"1h\",\"o\":\"77534.0\",\"c\":\"77638.0\",\"h\":\"77657.0\",\"l\":\"77478.0\",\"v\":\"213.26285\",\"n\":4415},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"BTC\",\"i\":\"1h\",\"o\":\"77639.0\",\"c\":\"77694.0\",\"h\":\"77742.0\",\"l\":\"77621.0\",\"v\":\"1006.25558\",\"n\":7034},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"BTC\",\"i\":\"1h\",\"o\":\"77695.0\",\"c\":\"77703.0\",\"h\":\"77850.0\",\"l\":\"77637.0\",\"v\":\"403.59206\",\"n\":6127},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"BTC\",\"i\":\"1h\",\"o\":\"77704.0\",\"c\":\"77767.0\",\"h\":\"77825.0\",\"l\":\"77690.0\",\"v\":\"102.9943\",\"n\":3820},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"BTC\",\"i\":\"1h\",\"o\":\"77768.0\",\"c\":\"77786.0\",\"h\":\"77826.0\",\"l\":\"77682.0\",\"v\":\"214.45659\",\"n\":3826},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"BTC\",\"i\":\"1h\",\"o\":\"77785.0\",\"c\":\"77888.0\",\"h\":\"77889.0\",\"l\":\"77749.",
+      "error": null,
+      "summary": {
+        "coin": "BTC",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 29195,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"ETH\",\"i\":\"1h\",\"o\":\"2254.9\",\"c\":\"2261.0\",\"h\":\"2262.8\",\"l\":\"2253.1\",\"v\":\"2500.2482\",\"n\":2994},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"ETH\",\"i\":\"1h\",\"o\":\"2261.1\",\"c\":\"2269.0\",\"h\":\"2271.7\",\"l\":\"2261.0\",\"v\":\"14000.4626\",\"n\":5698},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"ETH\",\"i\":\"1h\",\"o\":\"2269.3\",\"c\":\"2264.0\",\"h\":\"2274.0\",\"l\":\"2263.3\",\"v\":\"17285.1869\",\"n\":8936},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"ETH\",\"i\":\"1h\",\"o\":\"2264.0\",\"c\":\"2267.5\",\"h\":\"2271.0\",\"l\":\"2263.7\",\"v\":\"2023.861\",\"n\":1810},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"ETH\",\"i\":\"1h\",\"o\":\"2267.3\",\"c\":\"2266.1\",\"h\":\"2268.9\",\"l\":\"2263.9\",\"v\":\"4377.3864\",\"n\":6379},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"ETH\",\"i\":\"1h\",\"o\":\"2266.1\",\"c\":\"2269.1\",\"h\":\"2269.1\",\"l\":\"2263.9\",\"v\":\"2117.3697\",\"n\":",
+      "error": null,
+      "summary": {
+        "coin": "ETH",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 28410,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"BNB\",\"i\":\"1h\",\"o\":\"703.26\",\"c\":\"704.42\",\"h\":\"704.8\",\"l\":\"702.31\",\"v\":\"870.477\",\"n\":1056},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"BNB\",\"i\":\"1h\",\"o\":\"704.56\",\"c\":\"702.71\",\"h\":\"705.37\",\"l\":\"701.6\",\"v\":\"4288.591\",\"n\":2498},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"BNB\",\"i\":\"1h\",\"o\":\"702.87\",\"c\":\"701.39\",\"h\":\"704.03\",\"l\":\"701.25\",\"v\":\"1893.219\",\"n\":2165},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"BNB\",\"i\":\"1h\",\"o\":\"701.46\",\"c\":\"702.74\",\"h\":\"704.5\",\"l\":\"701.25\",\"v\":\"2455.989\",\"n\":1737},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"BNB\",\"i\":\"1h\",\"o\":\"702.67\",\"c\":\"704.43\",\"h\":\"705.81\",\"l\":\"702.38\",\"v\":\"765.277\",\"n\":1091},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"BNB\",\"i\":\"1h\",\"o\":\"704.37\",\"c\":\"704.88\",\"h\":\"705.56\",\"l\":\"704.34\",\"v\":\"352.637\",\"n\":629},{\"t\":179",
+      "error": null,
+      "summary": {
+        "coin": "BNB",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 28769,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"SOL\",\"i\":\"1h\",\"o\":\"95.395\",\"c\":\"95.623\",\"h\":\"95.69\",\"l\":\"95.257\",\"v\":\"33365.33\",\"n\":2311},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"SOL\",\"i\":\"1h\",\"o\":\"95.623\",\"c\":\"95.623\",\"h\":\"95.835\",\"l\":\"95.505\",\"v\":\"40638.51\",\"n\":1586},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"SOL\",\"i\":\"1h\",\"o\":\"95.624\",\"c\":\"95.35\",\"h\":\"95.873\",\"l\":\"95.28\",\"v\":\"26678.78\",\"n\":1537},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"SOL\",\"i\":\"1h\",\"o\":\"95.35\",\"c\":\"95.543\",\"h\":\"95.78\",\"l\":\"95.334\",\"v\":\"12732.07\",\"n\":1099},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"SOL\",\"i\":\"1h\",\"o\":\"95.536\",\"c\":\"95.428\",\"h\":\"95.606\",\"l\":\"95.215\",\"v\":\"38198.34\",\"n\":1830},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"SOL\",\"i\":\"1h\",\"o\":\"95.428\",\"c\":\"95.676\",\"h\":\"95.676\",\"l\":\"95.389\",\"v\":\"29459.78\",\"n\":1395},{\"t\":1",
+      "error": null,
+      "summary": {
+        "coin": "SOL",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 28795,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"XRP\",\"i\":\"1h\",\"o\":\"1.2506\",\"c\":\"1.2556\",\"h\":\"1.2566\",\"l\":\"1.2496\",\"v\":\"1052579.0\",\"n\":687},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"XRP\",\"i\":\"1h\",\"o\":\"1.2559\",\"c\":\"1.2523\",\"h\":\"1.2564\",\"l\":\"1.2511\",\"v\":\"125863.0\",\"n\":394},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"XRP\",\"i\":\"1h\",\"o\":\"1.2525\",\"c\":\"1.2474\",\"h\":\"1.2545\",\"l\":\"1.2469\",\"v\":\"583193.0\",\"n\":497},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"XRP\",\"i\":\"1h\",\"o\":\"1.2475\",\"c\":\"1.2492\",\"h\":\"1.2511\",\"l\":\"1.2474\",\"v\":\"147876.0\",\"n\":465},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"XRP\",\"i\":\"1h\",\"o\":\"1.2492\",\"c\":\"1.2502\",\"h\":\"1.252\",\"l\":\"1.2476\",\"v\":\"131532.0\",\"n\":369},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"XRP\",\"i\":\"1h\",\"o\":\"1.2505\",\"c\":\"1.2546\",\"h\":\"1.2548\",\"l\":\"1.2505\",\"v\":\"227655.0\",\"n\":376},{\"t\":17",
+      "error": null,
+      "summary": {
+        "coin": "XRP",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 28704,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"AVAX\",\"i\":\"1h\",\"o\":\"8.5569\",\"c\":\"8.55\",\"h\":\"8.5678\",\"l\":\"8.535\",\"v\":\"15179.04\",\"n\":387},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"AVAX\",\"i\":\"1h\",\"o\":\"8.55\",\"c\":\"8.5344\",\"h\":\"8.5678\",\"l\":\"8.5258\",\"v\":\"3083.33\",\"n\":192},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"AVAX\",\"i\":\"1h\",\"o\":\"8.5394\",\"c\":\"8.5191\",\"h\":\"8.5764\",\"l\":\"8.5137\",\"v\":\"3168.79\",\"n\":223},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"AVAX\",\"i\":\"1h\",\"o\":\"8.5232\",\"c\":\"8.6536\",\"h\":\"8.7\",\"l\":\"8.5208\",\"v\":\"13839.1\",\"n\":485},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"AVAX\",\"i\":\"1h\",\"o\":\"8.6484\",\"c\":\"8.7826\",\"h\":\"8.786\",\"l\":\"8.605\",\"v\":\"43102.9\",\"n\":668},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"AVAX\",\"i\":\"1h\",\"o\":\"8.7875\",\"c\":\"8.9337\",\"h\":\"8.9393\",\"l\":\"8.777\",\"v\":\"113960.82\",\"n\":1837},{\"t\":179351280",
+      "error": null,
+      "summary": {
+        "coin": "AVAX",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 30729,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"DOGE\",\"i\":\"1h\",\"o\":\"0.075611\",\"c\":\"0.075776\",\"h\":\"0.075815\",\"l\":\"0.075499\",\"v\":\"1646175.0\",\"n\":344},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"DOGE\",\"i\":\"1h\",\"o\":\"0.075767\",\"c\":\"0.0756\",\"h\":\"0.075828\",\"l\":\"0.075531\",\"v\":\"225232.0\",\"n\":139},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"DOGE\",\"i\":\"1h\",\"o\":\"0.075613\",\"c\":\"0.075356\",\"h\":\"0.075816\",\"l\":\"0.075355\",\"v\":\"1433261.0\",\"n\":235},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"DOGE\",\"i\":\"1h\",\"o\":\"0.075371\",\"c\":\"0.075499\",\"h\":\"0.075652\",\"l\":\"0.075371\",\"v\":\"918358.0\",\"n\":361},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"DOGE\",\"i\":\"1h\",\"o\":\"0.075492\",\"c\":\"0.075627\",\"h\":\"0.075746\",\"l\":\"0.075334\",\"v\":\"3078957.0\",\"n\":388},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"DOGE\",\"i\":\"1h\",\"o\":\"0.075626\",\"c\":\"0.075812\",\"h\":\"0",
+      "error": null,
+      "summary": {
+        "coin": "DOGE",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 28530,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"LINK\",\"i\":\"1h\",\"o\":\"11.647\",\"c\":\"11.657\",\"h\":\"11.696\",\"l\":\"11.646\",\"v\":\"14682.2\",\"n\":701},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"LINK\",\"i\":\"1h\",\"o\":\"11.654\",\"c\":\"11.606\",\"h\":\"11.677\",\"l\":\"11.595\",\"v\":\"11677.0\",\"n\":553},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"LINK\",\"i\":\"1h\",\"o\":\"11.607\",\"c\":\"11.532\",\"h\":\"11.679\",\"l\":\"11.528\",\"v\":\"15275.6\",\"n\":613},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"LINK\",\"i\":\"1h\",\"o\":\"11.534\",\"c\":\"11.56\",\"h\":\"11.615\",\"l\":\"11.492\",\"v\":\"24344.9\",\"n\":878},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"LINK\",\"i\":\"1h\",\"o\":\"11.554\",\"c\":\"11.605\",\"h\":\"11.617\",\"l\":\"11.472\",\"v\":\"18936.8\",\"n\":574},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"LINK\",\"i\":\"1h\",\"o\":\"11.605\",\"c\":\"11.674\",\"h\":\"11.69\",\"l\":\"11.605\",\"v\":\"59030.3\",\"n\":884},{\"t\":1793",
+      "error": null,
+      "summary": {
+        "coin": "LINK",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 29601,
+      "ctype": "application/json",
+      "preview": "[{\"t\":1793491200000,\"T\":1793494799999,\"s\":\"SUI\",\"i\":\"1h\",\"o\":\"0.89888\",\"c\":\"0.9003\",\"h\":\"0.90099\",\"l\":\"0.89802\",\"v\":\"66707.8\",\"n\":227},{\"t\":1793494800000,\"T\":1793498399999,\"s\":\"SUI\",\"i\":\"1h\",\"o\":\"0.90079\",\"c\":\"0.90012\",\"h\":\"0.90385\",\"l\":\"0.89924\",\"v\":\"93209.6\",\"n\":197},{\"t\":1793498400000,\"T\":1793501999999,\"s\":\"SUI\",\"i\":\"1h\",\"o\":\"0.90029\",\"c\":\"0.89928\",\"h\":\"0.90324\",\"l\":\"0.89879\",\"v\":\"71518.5\",\"n\":174},{\"t\":1793502000000,\"T\":1793505599999,\"s\":\"SUI\",\"i\":\"1h\",\"o\":\"0.89933\",\"c\":\"0.90073\",\"h\":\"0.903\",\"l\":\"0.89899\",\"v\":\"29344.9\",\"n\":195},{\"t\":1793505600000,\"T\":1793509199999,\"s\":\"SUI\",\"i\":\"1h\",\"o\":\"0.90043\",\"c\":\"0.9022\",\"h\":\"0.90406\",\"l\":\"0.89841\",\"v\":\"199327.9\",\"n\":229},{\"t\":1793509200000,\"T\":1793512799999,\"s\":\"SUI\",\"i\":\"1h\",\"o\":\"0.90262\",\"c\":\"0.90535\",\"h\":\"0.9056\",\"l\":\"0.90201\",\"v\":\"156699.0\",\"",
+      "error": null,
+      "summary": {
+        "coin": "SUI",
+        "count_in_preview_parseable": 0,
+        "preview_truncated": true
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 19002,
+      "ctype": "application/json",
+      "preview": "[{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000837098\",\"time\":1793491200061},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000616818\",\"time\":1793494800010},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"0.0000139043\",\"time\":1793498400085},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000055359\",\"time\":1793502000041},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"0.0000271141\",\"time\":1793505600027},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"0.0000094722\",\"time\":1793509200029},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"0.0000575039\",\"time\":1793512800032},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"0.0000497063\",\"time\":1793516400024},{\"coin\":\"BTC\",\"fundingRate\":\"0.0000125\",\"premium\":\"0.0000874392\",\"time\":1793520000000},{\"coin\":\"BTC\"",
+      "error": null,
+      "summary": {
+        "coin": "BTC",
+        "count_in_preview_parseable": 0
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 19113,
+      "ctype": "application/json",
+      "preview": "[{\"coin\":\"ETH\",\"fundingRate\":\"0.0000112272\",\"premium\":\"-0.0004101823\",\"time\":1793491200061},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000099378\",\"premium\":\"-0.0004204978\",\"time\":1793494800010},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0003801425\",\"time\":1793498400085},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.000317484\",\"time\":1793502000041},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0003418443\",\"time\":1793505600027},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0002614769\",\"time\":1793509200029},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0002166574\",\"time\":1793512800032},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0002207432\",\"time\":1793516400024},{\"coin\":\"ETH\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.000242838\",\"time\":1793520000000},{\"c",
+      "error": null,
+      "summary": {
+        "coin": "ETH",
+        "count_in_preview_parseable": 0
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 19371,
+      "ctype": "application/json",
+      "preview": "[{\"coin\":\"SOL\",\"fundingRate\":\"0.0000014701\",\"premium\":\"-0.0004882388\",\"time\":1793491200061},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000064592\",\"premium\":\"-0.0004483261\",\"time\":1793494800010},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000106862\",\"premium\":\"-0.0004145101\",\"time\":1793498400085},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000082796\",\"premium\":\"-0.000433763\",\"time\":1793502000041},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000049199\",\"premium\":\"-0.0004606406\",\"time\":1793505600027},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000062072\",\"premium\":\"-0.0004503427\",\"time\":1793509200029},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0003842923\",\"time\":1793512800032},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0003548445\",\"time\":1793516400024},{\"coin\":\"SOL\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.000355345\",\"time\":179352",
+      "error": null,
+      "summary": {
+        "coin": "SOL",
+        "count_in_preview_parseable": 0
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 19239,
+      "ctype": "application/json",
+      "preview": "[{\"coin\":\"BNB\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0003466914\",\"time\":1793491200061},{\"coin\":\"BNB\",\"fundingRate\":\"0.000002611\",\"premium\":\"-0.0004791123\",\"time\":1793494800010},{\"coin\":\"BNB\",\"fundingRate\":\"-0.0000225187\",\"premium\":\"-0.0006801498\",\"time\":1793498400085},{\"coin\":\"BNB\",\"fundingRate\":\"-0.0000466156\",\"premium\":\"-0.000872925\",\"time\":1793502000041},{\"coin\":\"BNB\",\"fundingRate\":\"-0.0000498772\",\"premium\":\"-0.0008990175\",\"time\":1793505600027},{\"coin\":\"BNB\",\"fundingRate\":\"-0.0000021574\",\"premium\":\"-0.0005172592\",\"time\":1793509200029},{\"coin\":\"BNB\",\"fundingRate\":\"0.0000036577\",\"premium\":\"-0.0004707384\",\"time\":1793512800032},{\"coin\":\"BNB\",\"fundingRate\":\"0.0000024412\",\"premium\":\"-0.0004804703\",\"time\":1793516400024},{\"coin\":\"BNB\",\"fundingRate\":\"0.00000883\",\"premium\":\"-0.0004293603\",\"time",
+      "error": null,
+      "summary": {
+        "coin": "BNB",
+        "count_in_preview_parseable": 0
+      }
+    },
+    {
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "status": 200,
+      "ok": true,
+      "bytes": 19148,
+      "ctype": "application/json",
+      "preview": "[{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000616104\",\"time\":1793491200061},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000919783\",\"time\":1793494800010},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000946919\",\"time\":1793498400085},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000843428\",\"time\":1793502000041},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0001227134\",\"time\":1793505600027},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000966538\",\"time\":1793509200029},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000753987\",\"time\":1793512800032},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000520378\",\"time\":1793516400024},{\"coin\":\"XRP\",\"fundingRate\":\"0.0000125\",\"premium\":\"-0.0000415268\",\"time\":1793520000000},{\"coin\"",
+      "error": null,
+      "summary": {
+        "coin": "XRP",
+        "count_in_preview_parseable": 0
+      }
+    },
+    {
+      "url": "https://huggingface.co/api/datasets?search=hyperliquid%20liquidation&limit=10",
+      "method": "GET",
+      "status": 200,
+      "ok": true,
+      "bytes": 2517,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "[{\"_id\":\"6ae4ebe22e624a487cf87f13\",\"id\":\"ironflow/hyperliquid-liquidations\",\"author\":\"ironflow\",\"disabled\":false,\"gated\":false,\"lastModified\":\"2026-11-07T10:18:25.000Z\",\"likes\":3,\"trendingScore\":2,\"private\":false,\"sha\":\"65bad6c39c63ee24eae920753f05303020e549fa\",\"description\":\"\\n\\t\\n\\t\\t\\n\\t\\n\\t\\n\\t\\tHyperliquid Liquidations\\n\\t\\n\\nEvery liquidation on Hyperliquid perpetuals from 25 May 2025 to 31 October 2026: 2,849,452 liquidated positions across 468 markets and 506,975 wallets, $58.7 billion in liquidated notional. Native perps and HIP-3 builder markets (stocks, commodities, indices) are both included. The busiest day is the 10 October 2025 crash: 109,790 liquidations, $7.2 billion.\\nMost of this history is no longer available from Hyperliquid's own API, which returns only a\u2026 See the f",
+      "error": null
+    },
+    {
+      "url": "https://huggingface.co/api/datasets?search=crypto%20liquidation%20parquet&limit=10",
+      "method": "GET",
+      "status": 200,
+      "ok": true,
+      "bytes": 2,
+      "ctype": "application/json; charset=utf-8",
+      "preview": "[]",
+      "error": null
+    }
+  ]
+}

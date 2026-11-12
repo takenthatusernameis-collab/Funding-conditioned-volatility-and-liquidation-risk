@@ -1,11 +1,11 @@
 [
   {
-    "artifact_churn_note": "20261112T020322Z: Completed TRACKA-ALT-VOL-20261112T020322Z alternate volatility design on cached HL panel (2026-05..2026-10, 9 coins). Target: next-6h RV. C2_ALT (adds rv72h) vs B1. Rel reduction 5.77% (>=2% PASS), CI [-0.121, 0.034] crosses zero (CI FAIL). 5 test blocks, 9 instruments. Verdict: NOT_MET. Prereg: tracka_prereg_alt_volatility_20261112T015546Z.json (frozen pre-outcomes). Note: Prereg specified 2025-11..2026-10 window but candle data only available 2026-05..2026-10; used available window with adjusted splits. State updated; sealed records preserved.",
-    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed (FRAGILE on robustness); Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated; Alternate volatility design NOT_MET.",
+    "artifact_churn_note": "20261112T043530Z: Gate 4 trigger absent (verified). Executed bounded external new-data acquisition probes per HANDOFF/\u00a716: HL API candles+funding 2026-11-01..2026-11-11 HTTP 200 for 9 coins (241/240 pts, ~10d, insufficient for >=3x30d blocks); ironflow/hyperliquid-liquidations HF still 2025-05-25..2026-10-31 (no post-2026-10-31 labels); ironflow GitHub 404; metpie repo 2025-03-22..2025-05-25 not verifiably admissible now. No verifiably admissible external source now. Evidence: research_state/new_data_external_probe_audit_20261112T043530Z.{md,json} and raw probes. Sealed records preserved.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). No verifiably admissible new data now: HL 2026-11 window ~10d insufficient, no post-2026-10-31 observed liquidation labels verified. All cached-data designs exhausted/sealed.",
     "generated": "20261112T020322Z",
-    "last_checked": "20261112T020322Z",
-    "next_action_heavy": "Alternate volatility design NOT_MET. All admissible cached-data volatility designs on HL 2026-05..2026-10 exhausted (primary 24h, family 6h/24h/72h/168h, alternate 6h with rv72h). No further claim-worthy volatility designs on current cached data. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1. Otherwise, program awaits new admissible data source per RESEARCH_PROMPT.md.",
-    "next_unfinished_task": "GATE4_OR_NEW_DATA_SOURCE",
+    "last_checked": "20261112T043530Z",
+    "next_action_heavy": "If Gate 4 valid RESOLVED_VERIFIED trigger appears, execute Branch 1. Else run bounded evidence-backed reprobe/monitor: HL 2026-11+ candles+funding when >=100d available AND ironflow HF for post-2026-10-31 observed liquidation labels; and/or full \u00a716 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL features if venue-consistent >=5 sym >=3x30d blocks feasible. If admissible, freeze prereg BEFORE outcomes then build/eval+verdict+state updates. If not, emit timestamped probe/audit evidence. No status-only output, no polling.",
+    "next_unfinished_task": "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
     "rank": 0,
     "resume_triggers": [
@@ -20,7 +20,7 @@
     "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed (FRAGILE on robustness); Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated.",
     "generated": "20261112T015119Z",
     "last_checked": "20261112T015119Z",
-    "next_action_heavy": "Robustness campaign FRAGILE: preregister and attempt next best admissible untested claim in-session — alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits (per prereg fallback). If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
+    "next_action_heavy": "Robustness campaign FRAGILE: preregister and attempt next best admissible untested claim in-session \u2014 alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits (per prereg fallback). If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
     "next_unfinished_task": "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
     "rank": 0,
@@ -171,7 +171,12 @@
         "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
         "instruments": 9,
         "test_blocks": 3,
-        "horizons_evaluated": ["6h", "24h", "72h", "168h"],
+        "horizons_evaluated": [
+          "6h",
+          "24h",
+          "72h",
+          "168h"
+        ],
         "total_comparisons": 12,
         "multiplicity_correction": "Holm",
         "primary_pass": false
@@ -188,7 +193,10 @@
         "target_horizon": "6h",
         "model": "C2_ALT (B1 + fundingRate, abs_funding, premium, ema_dist, rv72h)",
         "rel_reduction_pct": 5.77,
-        "ci95": [-0.121154, 0.033865],
+        "ci95": [
+          -0.121154,
+          0.033865
+        ],
         "gate": "NOT_MET (materiality PASS, CI_excludes_zero FAIL)",
         "note": "Prereg deviation: candle data only available 2026-05..2026-10; splits adjusted to 5 test blocks. C2_ALT adds rv72h feature. Materiality gate passed (5.77% >= 2%) but CI crosses zero."
       }
