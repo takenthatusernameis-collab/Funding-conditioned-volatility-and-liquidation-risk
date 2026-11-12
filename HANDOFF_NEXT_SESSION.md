@@ -1,6 +1,6 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized)
-**Handoff timestamp (UTC):** 2026-11-12T06:27:01Z (supersedes 2026-11-12T05:44:30Z; this file is the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T06:31:39Z (supersedes 2026-11-12T06:27:01Z; this file is the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Progress snapshot (resolved bottlenecks removed)
@@ -25,7 +25,7 @@ Do not produce a status-only response. Execute the Focus Campaign below now. Eve
 2. **PRIMARY heavy task:** early-window liquidation forecast (4h cadence), funding-conditioned — build panel → evaluate C2 vs B1 → emit verdict + atomic state updates (steps 1-4 above). If infeasible, timestamped evidence + advance to next admissible heavy task.
 3. State hygiene: keep this file the single durable root handoff; keep redirects aligned. Preserve all sealed records/verdicts/manifests exactly as immutable.
 
-## BOTTLENECKS — STATUS & REQUIRED ACTION (2026-11-12T06:27:01Z)
+## BOTTLENECKS — STATUS & REQUIRED ACTION (2026-11-12T06:31:39Z)
 | Bottleneck | Status | Removal/action |
 |---|---|---|
 | Early 2025-11..2026-04 RV/candles missing at 1h (prior blocker) | **REMOVED — COMPLETE** | 4h candles cached+provenanced for 9 coins, full window/blocks covered (`research_state/data_cache/hyperliquid_candles_4h/`, `tracka_hl_early_candle_fetch_4h_report_20261112T054104Z.json`). |
@@ -60,3 +60,5 @@ Do not produce a status-only response. Execute the Focus Campaign below now. Eve
 
 ---
 **Execute now:** Gate 4 check (absent) → run `scripts/tracka_hl_build_early_4h_panel.py` → evaluate pre-registered C2 vs B1 liquidation-forecast claim → emit verdict + atomic state updates. If deterministically infeasible, emit timestamped evidence artifact and advance to next admissible heavy task. No status-only output.
+
+(End of file - total 62 lines)
