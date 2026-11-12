@@ -1,81 +1,62 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized)
-**Handoff timestamp (UTC):** 2026-11-12T02:07:25Z (supersedes 2026-11-12T01:42:43Z; this file remains the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T04:26:20Z (supersedes 2026-11-12T02:07:25Z; this file remains the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Immediate task (heavy, in-session now)
 Do not produce a status-only response. Execute the Focus Campaign below now.
 
-### (A) REPO-PRIORITY: ALL CACHED-DATA VOLATILITY DESIGNS EXHAUSTED — AWAIT GATE 4 OR NEW DATA
-The robustness/falsification campaign for sealed Track A liquidation expansion PASS (`TRACKA-HL-EXPANSION-20261111T195500Z`) completed **FRAGILE** (`TRACKA-EXP-ROBUST-20261112T015119Z`): LOIO FAIL (4/8 pass, need ≥6), Placebo/Permutation FAIL (true rel 19.04% ≤ 95th pctl 21.10%), Bootstrap Settings PASS (3/3). State updated; sealed PASS preserved.
+### (A) Gate 4 Branch 1 — FIRST CHECK (deterministic, only if valid trigger exists)
+- **Verified this session (2026-11-12T04:26:20Z):** `research_state/fclr016_local_audit/` contains **no** `fclr016_v5_terms_evidence_RESOLVED_*` artifact with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts present. **Do not wait/poll.**
+- **If a valid RESOLVED trigger appears:** execute deterministic Branch 1 path only — promotion + validators; on all-green run confirmatory Track C multi-split ablation + verdict + required state updates per Gate 4 protocol. Never guess, never set `fabricated=true`, never bypass.
+- **If absent (current state):** proceed immediately to (B). Program awaits Gate 4 or new data, but this session must still do heavy work (B).
 
-Per protocol fallback, preregistered and executed alternate volatility design `TRACKA-ALT-VOL-20261112T015546Z` on cached HL 2026-05..2026-10 panel: 6h horizon, C2_ALT (adds rv72h), 5 test blocks. Verdict: **NOT_MET** (`TRACKA-ALT-VOL-20261112T020322Z`) — materiality PASSED (5.77% ≥ 2%) but CI crosses zero.
+### (B) REPO-PRIORITY: ALL CACHED-DATA CLAIMS EXHAUSTED — NEW ADMISSIBLE DATA CAMPAIGN (MANDATORY)
+All admissible cached-data volatility/liquidation designs on current Hyperliquid/Binance caches are **EXHAUSTED/SEALED** (see “Sealed — do not reopen”). No new claim-worthy experiment may be run on exhausted cached data. The next repo-priority work is to **find and qualify a NEW admissible data source/window** (or prove none exists locally) per `RESEARCH_PROMPT.md` §16 and move it to a frozen preregistration.
 
-**All admissible cached-data volatility designs on Hyperliquid 2026-05..2026-10 are now EXHAUSTED:**
-- Primary 24h (TRACKA-VOL-20261111T234918Z): NOT_MET (-1.37%, CI crosses zero)
-- Family multiplicity 6h/24h/72h/168h (TRACKA-VOL-FAMILY-20261112T005111Z): NOT_MET (Holm, no horizon passes)
-- Alternate 6h + rv72h (TRACKA-ALT-VOL-20261112T020322Z): NOT_MET (materiality PASS, CI FAIL)
+**New admissible data (hard requirements):** unauthenticated/public, provenance + license/terms documented, sufficient for the claim (observed labels where required; no modeled/proxy/synthetic liquidation labels as observed), coverage meeting design minimums (typically ≥5 symbols/instruments and ≥3 non-overlapping 30-day test blocks, with non-overlapping train/val/test and embargo as applicable), venue-consistent with artifacts, and not conflated with sealed Binance 2024 verdicts.
 
-### (B) Gate 4 Branch 1 (ONLY if valid trigger appears)
-If `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation → deterministic promotion+validators → on all-green confirmatory Track C multi-split ablation + verdict + state updates. **Verified absent; do not wait/poll.**
+## FOCUS CAMPAIGN (EXECUTE IN ORDER, HEAVY WORK REQUIRED)
+1. **Gate 4 trigger check (done/verified):** absent → continue. Do not re-poll.
+2. **Local new-data admissibility inventory (concrete, this session):**
+   - Inventory potential untested sources in-repo: `data/raw/`, `data/`, `research_state/data_cache/` (including non-HL/Binance-month dirs such as `hyperliquid_candles`, `hyperliquid_funding`, `ironflow_events`, `craftify_liq`, any BTCUSDT subdirs, manifests), and any scripts under `scripts/`/`src/` that define admissible acquisition/build paths.
+   - For each candidate, produce an evidence-backed assessment against §16: venue, symbols, time coverage, continuity/gaps, label type (observed vs proxy), provenance/license evidence available locally, and whether it enables an **untested** funding-conditioned volatility or liquidation-risk claim not already sealed.
+   - Write findings to a timestamped artifact: `research_state/new_data_admissibility_audit_<UTC>.md` (+ `.json` summary) listing `ADMISSIBLE_CANDIDATE` / `INADMISSIBLE` / `NEEDS_EXTERNAL_PROVENANCE` with reasons.
+3. **If any locally-admissible untested candidate exists:** freeze a preregistration **BEFORE outcomes** (`research_state/track*_prereg_*_<UTC>.json` + `.md`) with hypothesis, exact data/feature/label definitions, splits/embargo/blocks, primary metric/gate, robustness/multiplicity plan, and pass/fail criteria; then execute build+eval in-session if feasible and emit verdict + atomic state updates (`experiment_frontier.json`, manifests/registry as applicable). No threshold-shopping, no holdout reuse.
+4. **If no locally-admissible candidate exists (likely, given exhausted caches):** document exhausted-local state in the audit artifacts and in this handoff’s next update context; specify the minimal external acquisition needed (exact venue/product, symbols, date range, fields, license/provenance proof required) to unblock a new claim — but **do not fabricate, download unverified data, or guess provenance**. Any network acquisition must follow repo policy and be unauthenticated, bounded, and fully evidenced.
+5. **State hygiene (only as justified):** keep this file the single durable root handoff; keep redirects aligned. Preserve all sealed records/verdicts/manifests exactly as immutable.
 
-## BOTTLENECK CHECK (THIS SESSION)
-- **Gate 4 Branch 1 trigger:** NOT PRESENT — `research_state/fclr016_local_audit/` contains no `fclr016_v5_terms_evidence_RESOLVED_*` with required RESOLVED_VERIFIED/legal attestation/fabricated=false; only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts exist. **Do not wait/poll; program awaits Gate 4 or new data.** Never guess, never set `fabricated=true`, never bypass.
-- **Stale/competing handoff surfaces:** REMOVED — root `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` redirect to this file. Single durable handoff only.
-- **Volatility multiplicity family:** COMPLETED NOT_MET — `research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md` (12 comparisons, Holm correction, no horizon passes primary gate). Immutable.
-- **Liquidation expansion PASS:** SEALED — `TRACKA-HL-EXPANSION-20261111T195500Z` PASS (C2 vs B1 rel QLIKE -19.04%, 95% CI [-5.088,-0.478], n=593, 8 instruments, 3 blocks, 2026-05..2026-10). Immutable, do not relitigate.
-- **Liquidation expansion robustness:** FRAGILE — `TRACKA-EXP-ROBUST-20261112T015119Z` (LOIO FAIL, Placebo/Permutation FAIL, Bootstrap PASS). Immutable, documented with exact failure modes.
-- **Alternate volatility design:** NOT_MET — `TRACKA-ALT-VOL-20261112T020322Z` (materiality PASS 5.77%, CI crosses zero). Immutable.
-- **Volatility primary 24h:** NOT_MET — `TRACKA-VOL-20261111T234918Z` (C2 vs B1 rel QLIKE -1.37%, CI crosses zero, n=19233, 9 instruments, 3 blocks). Immutable.
-- **All other Track A/B/C contexts:** SEALED/CLOSED negative (NOT_MET, NOT_SUPPORTED, INADMISSIBLE). Immutable.
-
-## FOCUS CAMPAIGN (REPO-NAME-PRIORITIZED)
-**Objective (inferred from repo name + protocol):** No further claim-worthy experiments can be executed on current cached admissible data. All Track A volatility designs exhausted. Track A liquidation expansion PASS is sealed but FRAGILE on robustness. Gate 4 Branch 1 remains EXTERNAL_BLOCKED. **Next session must either:** (1) detect valid Gate 4 Branch 1 trigger and execute deterministic Branch 1 path, OR (2) await/acquire new admissible data source per RESEARCH_PROMPT.md §16 (unauthenticated, provenance/license, ≥5 symbols, ≥3 non-overlapping 30-day blocks) and pre-register new claim BEFORE outcomes.
-
-**Execute in this exact order:**
-1. **Check Gate 4 trigger:** Verify `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with ALL required fields (`status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). If present → execute Branch 1 deterministically (Track C multi-split ablation + verdict + state updates). If absent → proceed to step 2.
-2. **No status-only output.** Document current exhausted state in handoff; do not fabricate new experiments on exhausted cached data. Any new experiment requires NEW admissible data source with provenance.
-3. **Preserve all sealed/closed records.** Never mutate `TRACKA-HL-EXPANSION-20261111T195500Z`, `TRACKA-EXP-ROBUST-20261112T015119Z`, `TRACKA-VOL-FAMILY-20261112T005111Z`, `TRACKA-ALT-VOL-20261112T020322Z`, FCLR-003, Track B/C verdicts.
-
-## BOTTLENECKS — STATUS & REMOVAL
-| Bottleneck | Status | Removal/action |
+## BOTTLENECKS — STATUS & REQUIRED ACTION
+| Bottleneck | Status | Removal/action (this session) |
 |---|---|---|
-| Gate 4 Branch 1 (external/legal Binance terms) | BLOCKED, not agent-removable | **Do not wait.** Run Branch 1 ONLY if valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with all required fields, `fabricated=false`, `status=RESOLVED_VERIFIED`, and human/legal attestation → deterministic promotion+validators → on all-green confirmatory Track C multi-split ablation + verdict + state. Verified absent now. |
-| Volatility multiplicity family incomplete | **REMOVED** | Completed: `research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md` (NOT_MET). |
-| Liquidation expansion robustness | **COMPLETED FRAGILE** | `TRACKA-EXP-ROBUST-20261112T015119Z` (LOIO FAIL, Placebo FAIL, Bootstrap PASS). Documented exact failure modes; sealed PASS preserved. |
-| Alternate volatility design | **COMPLETED NOT_MET** | `TRACKA-ALT-VOL-20261112T020322Z` (materiality PASS, CI FAIL). All cached-data volatility designs exhausted. |
-| No further claim-worthy cached-data experiments | **EXHAUSTED** | No admissible cached-data volatility/liquidation designs remain. Requires Gate 4 trigger OR new admissible data source (per RESEARCH_PROMPT.md §16). |
-| Competing root handoff docs / session ambiguity | REMOVED | This file is sole durable root handoff; redirect files in place. |
+| Gate 4 Branch 1 (external/legal Binance terms) | BLOCKED, not agent-removable | Verified absent 2026-11-12T04:26:20Z. **Do not wait.** Execute Branch 1 only on valid RESOLVED trigger with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation. |
+| No untested admissible cached-data experiment remains | **EXHAUSTED** | Mandatory local new-data admissibility inventory + timestamped audit artifacts (§16). Prereg+run if candidate found; else evidence-backed exhaustion/external-spec. |
+| Competing root handoff docs / session ambiguity | REMOVED | This file sole durable root handoff; redirects in place. |
+| Prior campaign items (volatility family, expansion robustness, alternate volatility) | COMPLETED/SEALED | Do not reopen/retune/relitigate. |
 
 ## COMPLETED / SEALED — DO NOT REOPEN, RETUNE, OR RELITIGATE
 - Track A liquidation expansion `TRACKA-HL-EXPANSION-20261111T195500Z` = **PASS** (C2 vs B1 rel QLIKE -19.04%, 95% CI [-5.088,-0.478], n=593, 8 instruments, 3 blocks, 2026-05..2026-10). Sealed.
-- Track A liquidation expansion robustness `TRACKA-EXP-ROBUST-20261112T015119Z` = **FRAGILE** (LOIO: 4/8 FAIL, Placebo: p≈0.07 FAIL, Bootstrap: 3/3 PASS). Sealed.
-- Track A alternate volatility `TRACKA-ALT-VOL-20261112T020322Z` = **NOT_MET** (6h horizon, C2_ALT+rv72h, rel 5.77%, CI crosses zero, 5 test blocks). Sealed.
-- Track A volatility primary 24h `TRACKA-VOL-20261111T234918Z` = **NOT_MET** (C2 vs B1 rel QLIKE -1.37%, CI crosses zero, n=19233, 9 instruments, 3 blocks). Sealed.
-- Track A volatility family `TRACKA-VOL-FAMILY-20261112T005111Z` = **NOT_MET** (Holm across 12 comparisons; no horizon passes primary gate). Sealed.
+- Track A liquidation expansion robustness `TRACKA-EXP-ROBUST-20261112T015119Z` = **FRAGILE** (LOIO FAIL 4/8, Placebo FAIL p≈0.07, Bootstrap PASS 3/3). Sealed.
+- Track A alternate volatility `TRACKA-ALT-VOL-20261112T020322Z` = **NOT_MET** (6h, C2_ALT+rv72h, rel 5.77%, CI crosses zero). Sealed.
+- Track A volatility primary 24h `TRACKA-VOL-20261111T234918Z` = **NOT_MET** (rel -1.37%, CI crosses zero). Sealed.
+- Track A volatility family `TRACKA-VOL-FAMILY-20261112T005111Z` = **NOT_MET** (Holm, 12 comparisons). Sealed.
 - Track A 9-symbol 2026-05..2026-10 liquidation = **NOT_MET** (closed). Track A early 2025-11..2026-04 = **INADMISSIBLE** (closed).
 - Track B/C 2024 and H1/FCLR-002/003 contexts sealed/closed negative; H1 primary NOT_SUPPORTED on tested panels. Immutable.
-- 2024 Binance confirmatory FCLR-003 = **NOT_SUPPORTED** (final_confirmatory_verdict.md executive verdict). Immutable.
+- 2024 Binance confirmatory FCLR-003 = **NOT_SUPPORTED** (`research_state/final_confirmatory_verdict.md`). Immutable.
 
 ## HARD BANS (BINDING)
 - No outcome inspection before prereg freeze. No threshold-shopping. No sealed-holdout reuse.
-- No Binance/2024 conflation; Hyperliquid-only venue for cached-data campaigns with matching artifacts.
+- No Binance/2024 conflation; venue-consistent artifacts only.
 - No modeled/proxy/synthetic liquidation labels as observed.
 - No `.github/workflows` edits. No redundant network polling. No agent-set `RESOLVED_VERIFIED`/`fabricated=true`; no Gate 4 bypass.
-- **No status-only output.** Every session must deliver prereg + (build+eval or documented infeasibility+next-attempt) + state updates, OR detect valid Gate 4 trigger and execute Branch 1, OR document exhausted state and await new data.
-- **No new experiments on exhausted cached data.** Any new claim requires NEW admissible data source with provenance/license/coverage per RESEARCH_PROMPT.md §16.
+- **No status-only output.** Every session must deliver: Gate 4 Branch 1 execution if triggered, OR prereg + (build+eval or documented infeasibility with evidence) + state updates, OR a concrete timestamped new-data admissibility audit (+ prereg/external-spec as applicable).
+- **No new experiments on exhausted cached data.** Any new claim requires NEW admissible data/source with provenance/license/coverage per RESEARCH_PROMPT.md §16.
 
 ## KEY REFERENCES
 - Handoff/state: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`, `research_state/run_manifest.json`, `research_state/final_confirmatory_verdict.md`, `research_state/fclr016_local_audit/`
-- Caches: `research_state/data_cache/hyperliquid_candles/` (9 coins, 2026-05..2026-10), `research_state/data_cache/hyperliquid_funding/` (9 coins, ~2025-11..2026-10), `research_state/data_cache/ironflow_events/` (2025-05..2026-10, 432 markets)
-- Liquidation expansion panel: `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`, `research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json`
-- Liquidation expansion robustness: `research_state/tracka_prereg_expansion_robust_20261112T014515Z.json`, `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md`
-- Alternate volatility: `research_state/tracka_prereg_alt_volatility_20261112T015546Z.json`, `research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md`
-- Volatility panel: `research_state/tracka_vol_panel_20261111T234918Z.parquet`, `research_state/tracka_vol_panel_build_report_20261111T234918Z.json`
-- Evaluation scripts: `scripts/run_expansion_robustness.py`, `scripts/run_alt_volatility.py`, `scripts/tracka_hl_evaluate_successor.py`, `src/volatility/eval.py`, `src/volatility/block_bootstrap.py`, `src/volatility/features_ext.py`
+- Protocol: `RESEARCH_PROMPT.md` (esp. §16 admissible new data)
+- Caches: `research_state/data_cache/hyperliquid_candles/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/ironflow_events/`, `data/`, `data/raw/`
+- Sealed results: `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md`, `research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md`, `research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md`, `research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md`
 
 ---
-
-**Execute Gate 4 check first. If trigger absent: document exhausted state and await new admissible data source. No status-only output.**
-
-(End of file - total lines)
+**Execute Gate 4 check (verified absent) → run local new-data admissibility inventory and emit `research_state/new_data_admissibility_audit_<UTC>.md/.json` now. If candidate found: freeze prereg and run. No status-only output.**

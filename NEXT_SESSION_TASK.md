@@ -1,4 +1,4 @@
 # NEXT_SESSION_TASK (redirect)
-**Timestamp (UTC):** 2026-11-12T02:07:25Z
+**Timestamp (UTC):** 2026-11-12T04:26:20Z
 
-Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative as of this timestamp). Immediate heavy objective: check Gate 4 Branch 1 trigger (`research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation); if present, execute deterministic Branch 1 (Track C multi-split ablation + verdict + state updates). If absent (verified), all cached-data volatility/liquidation designs exhausted — document exhausted state and await new admissible data source per RESEARCH_PROMPT.md §16. No status-only output.
+Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative as of this timestamp). Immediate heavy objective: verify Gate 4 Branch 1 trigger (valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with RESOLVED_VERIFIED/fabricated=false/human-legal attestation) — if present execute deterministic Branch 1; if absent (verified 2026-11-12T04:26:20Z), run local new-data admissibility inventory and emit `research_state/new_data_admissibility_audit_<UTC>.md/.json` per RESEARCH_PROMPT.md §16, then freeze prereg and run if candidate found (else document exhausted-local state + external-spec). No status-only output.
