@@ -1,7 +1,7 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T14:56:44Z (updated; prior 2026-11-12T14:37:52Z and 2026-11-12T12:34:20Z retained below as history)
+**Authoritative handoff timestamp (UTC):** 2026-11-12T15:42:03Z (re-verified; prior 2026-11-12T14:56:44Z, 2026-11-12T14:37:52Z, 2026-11-12T12:34:20Z retained below as history)
 **This file is the ONLY durable handoff.** It supersedes `HANDOFF_NEXT_SESSION.md` @ 2026-11-12T11:38:00Z, the 2026-11-12T09:51:12Z "clean stop", and every earlier checkpoint.
 **Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
 
@@ -249,3 +249,14 @@ Expected: HTTP 200 and **1104** bars for every coin. If this fails, record the e
 - **Highest expected info gain per free compute:** Audit+repair `scripts/tracka_hl_build_early_4h_panel.py` / `scripts/tracka_hl_evaluate_early_4h.py` (and helpers) against `tracka_prereg_early2025h1_20261112T134503Z.json` + panel/build report, then produce a corrected timestamped eval or reason-coded inconclusive — cheap, unblocks claim-worthy PASS/NOT_MET and Step 5.
 - **Artifacts/commands:** Read/verified `AGENT_HANDOFF.md`, `RESEARCH_PROMPT.md` (head), `requirements.txt`, `.github/workflows/main.yml` (no agent-venv-from-requirements), `research_state/experiment_frontier.json`, early2025h1 acq/prereg/panel/eval artifacts, caches present. Preflight evidence: `python3 -c "import numpy,pandas,scipy,pyarrow,requests; print('deps OK')"` -> `deps OK`. No sealed verdicts modified; no raw data committed; workflow not edited (protected).
 - **DoD (required):** (1) supported: campaign admissible and partially executed; contradicted: "no artifacts yet" and "workflow provisions agent venv from requirements"; unknown: true C2 vs B1 effect pending valid eval. (2) strongest alternative: pipeline bug. (3) dominant limitation: eval/target validity. (4) falsifier: corrected prereg-consistent re-eval with non-degenerate losses/deltas. (5) highest info gain: pipeline audit+fix+re-eval. (6) see artifacts/commands above and updated §0–§3 of this file.
+
+---
+
+## SESSION LOG
+
+### 2026-11-12T15:42:03Z — Handoff/state verification (no research outcomes)
+- Verified `AGENT_HANDOFF.md` is the sole durable handoff and root redirect files (`HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md`) point here; no competing handoff docs found.
+- Re-verified corrected evidence artifacts exist: panel `research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet` (SHA-256 `08c60803…`), valid eval `research_state/evaluation_summary_EARLY4H-2025H1-20261112T145537Z.{md,json}` (rv NOT_MET, liq INCONCLUSIVE_NUMERICAL_INSTABILITY), frozen prereg `tracka_prereg_early2025h1_20261112T134503Z.{json,md}`, pipeline correction note `research_state/tracka_hl_early2025h1_pipeline_correction_20261112T145644Z.md`.
+- Confirmed `research_state/experiment_frontier.json` rank-0 is aligned: `FCLR_EARLY4H_2025H1_LIQ_GLM` / `FCLR_EARLY4H_2025H1_LIQ_GLM_PREREG_BUILD_EVAL`, `ACTIVE_HEAVY_CAMPAIGN`.
+- No new outcomes inspected; no raw data committed. Gate 4 remains external blocker (not required for campaign).
+- Next agent: execute §4 `FCLR-EARLY4H-2025H1-LIQ-GLM v1` (freeze new prereg before any liq outcome, implement `scripts/early4h_liq_glm.py` Poisson/quasi-Poisson log-link, evaluate/adjudicate, then power/label-ceiling/concentration follow-up if needed).
