@@ -1,10 +1,10 @@
 [
   {
-    "artifact_churn_note": "20261112T043530Z: Gate 4 trigger absent (verified). Executed bounded external new-data acquisition probes per HANDOFF/\u00a716: HL API candles+funding 2026-11-01..2026-11-11 HTTP 200 for 9 coins (241/240 pts, ~10d, insufficient for >=3x30d blocks); ironflow/hyperliquid-liquidations HF still 2025-05-25..2026-10-31 (no post-2026-10-31 labels); ironflow GitHub 404; metpie repo 2025-03-22..2025-05-25 not verifiably admissible now. No verifiably admissible external source now. Evidence: research_state/new_data_external_probe_audit_20261112T043530Z.{md,json} and raw probes. Sealed records preserved.",
+    "artifact_churn_note": "20261112T044425Z: Gate 4 trigger absent (verified). Bounded external probes re-run: HL API 2026-11-01..now HTTP 200 269 candles+269 funding/coin (9 coins, ~11.2d, insufficient for >=3x30d blocks); ironflow/hyperliquid-liquidations HF lastModified 2026-11-07T10:18:25Z events 2025-05..2026-10 only (no post-2026-10-31 labels); metpie 2025-03-22..2025-05-25 historical unaudited. No verifiably admissible new external source. Evidence: research_state/new_data_external_probe_audit_20261112T044425Z.{md,json}, external_probe_raw_20261112T044425Z.json. Sealed records preserved.",
     "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). No verifiably admissible new data now: HL 2026-11 window ~10d insufficient, no post-2026-10-31 observed liquidation labels verified. All cached-data designs exhausted/sealed.",
-    "generated": "20261112T020322Z",
-    "last_checked": "20261112T043530Z",
-    "next_action_heavy": "If Gate 4 valid RESOLVED_VERIFIED trigger appears, execute Branch 1. Else run bounded evidence-backed reprobe/monitor: HL 2026-11+ candles+funding when >=100d available AND ironflow HF for post-2026-10-31 observed liquidation labels; and/or full \u00a716 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL features if venue-consistent >=5 sym >=3x30d blocks feasible. If admissible, freeze prereg BEFORE outcomes then build/eval+verdict+state updates. If not, emit timestamped probe/audit evidence. No status-only output, no polling.",
+    "generated": "20261112T044425Z",
+    "last_checked": "20261112T044425Z",
+    "next_action_heavy": "If Gate 4 valid RESOLVED_VERIFIED trigger appears, execute Branch 1. Else run bounded evidence-backed reprobe/monitor when plausibly eligible: HL 2026-11+ candles+funding when >=100d available AND ironflow HF for post-2026-10-31 observed liquidation labels; and/or full \u00a716 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL features if venue-consistent >=5 sym >=3x30d blocks feasible. If admissible, freeze prereg BEFORE outcomes then build/eval+verdict+state updates. If not, emit timestamped probe/audit evidence. No status-only output, no polling.",
     "next_unfinished_task": "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
     "rank": 0,

@@ -1,0 +1,131 @@
+{
+  "audit_ts_utc": "2026-11-12T04:44:25Z",
+  "gate4_resolved_present": false,
+  "gate4_check_dir": "research_state/fclr016_local_audit (no *RESOLVED* with RESOLVED_VERIFIED+attestation)",
+  "hyperliquid_api_probe": {
+    "probe_utc": "2026-11-12T04:44:17.660526+00:00",
+    "start_ms": 1793491200000,
+    "end_ms": 1794458657660,
+    "candles": {
+      "BTC": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "ETH": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "BNB": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "SOL": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "XRP": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "AVAX": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "DOGE": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "LINK": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      },
+      "SUI": {
+        "count": 269,
+        "first": 1793491200000,
+        "last": 1794456000000
+      }
+    },
+    "funding": {
+      "BTC": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "ETH": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "BNB": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "SOL": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "XRP": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "AVAX": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "DOGE": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "LINK": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      },
+      "SUI": {
+        "count": 269,
+        "first": 1793491200061,
+        "last": 1794456000012
+      }
+    }
+  },
+  "ironflow_hf": {
+    "id": "ironflow/hyperliquid-liquidations",
+    "lastModified": "2026-11-07T10:18:25.000Z",
+    "license": "cc-by-4.0",
+    "event_files_last": "data/events/2026-10.parquet",
+    "coverage": "2025-05-25..2026-10-31 (per description/events)",
+    "downloads": 3689
+  },
+  "hf_search_hyperliquid_liquidation": [
+    {
+      "id": "ironflow/hyperliquid-liquidations"
+    },
+    {
+      "id": "craftify2221/hyperliquid-builder-liquidation-panel"
+    }
+  ],
+  "metpie_repo": {
+    "full_name": "metpie/hyperliquid-liquidation-events",
+    "description": "346k liquidation trades across 179 Hyperliquid perp markets, Mar-May 2025 (from public node-trade data)",
+    "license": "CC BY 4.0 (README) / Other in API",
+    "window": "2025-03-22..2025-05-25",
+    "files": [
+      "liquidation_events.parquet",
+      "liquidation_events.csv.gz"
+    ],
+    "updated_at": "2026-08-31T16:30:47Z"
+  }
+}
