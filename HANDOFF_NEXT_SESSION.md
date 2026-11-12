@@ -1,7 +1,8 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T08:53:05Z (supersedes prior handoffs; this file is the sole durable handoff)
-**Message time (UTC):** 2026-11-12T08:53:05Z
+**Authoritative handoff timestamp (UTC):** 2026-11-12T08:55:13Z (supersedes prior handoffs; this file is the sole durable handoff)
+**Message time (UTC):** 2026-11-12T08:55:13Z
+**State re-verified at 2026-11-12T08:55:13Z:** `git status` clean; no new artifacts since 2026-11-12T08:53:05Z; Gate 4 still absent; monitor probe `new_data_monitor_probe_20261112T073159Z` still ineligible; alt-source scan/review still no new GO. All verified state below unchanged and remains the single source of truth.
 
 ## Repo-priority P0 (inferred from repository name)
 The repository name is `Funding-conditioned-volatility-and-liquidation-risk`. Priority order per the name: **volatility forecasting (Track C) first, then observed liquidation risk (Track A), then modeled boundary breaches (Track B)**. Advance the core claim — funding-conditioned volatility and liquidation risk — with **heavy, claim-advancing work only**: (a) execute Gate 4 Branch 1 on a valid RESOLVED trigger, (b) run §16 admissibility audit (+ prereg/build/eval/verdict if admissible) for a genuinely new liquidation-label source/window, (c) produce bounded eligibility evidence ruling new heavy work in/out, or (d) emit a timestamped checkpoint proving no new eligible work and STOP CLEANLY. Status files, polling, re-probes of already-assessed sources, and cosmetic engineering are NOT heavy work and are banned.
@@ -50,7 +51,7 @@ All bottlenecks are currently **unremovable by the agent**; the correct session 
 - Track C dossier: `research_state/track_c_consolidated_dossier.md`
 
 ## Immediate first action (now)
-Gate 4 absent → eligibility ineligible (evidenced) → no materially new unassessed §16-admissible candidate → all five campaign steps executed → write `research_state/session_checkpoint_20261112T085305Z.md` (evidence: Gate 4 absent, probe 20261112T073159Z ineligible, alt-source scan/review no new GO, offline sanity 103 tests OK) and STOP CLEANLY. No network probes needed; offline sanity already verified.
+Gate 4 absent → eligibility ineligible (evidenced) → no materially new unassessed §16-admissible candidate → all five campaign steps executed → write `research_state/session_checkpoint_20261112T085513Z.md` (evidence: Gate 4 absent, probe 20261112T073159Z ineligible, alt-source scan/review no new GO, offline sanity 103 tests OK) and STOP CLEANLY. No network probes needed; offline sanity already verified.
 
 ## Session entry conditions (resume triggers only)
 Resume ONLY when a materially different condition obtains:
