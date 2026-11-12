@@ -1,18 +1,18 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized)
-**Handoff timestamp (UTC):** 2026-11-12T04:27:38Z (supersedes 2026-11-12T04:26:20Z; this file remains the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T04:30:17Z (supersedes 2026-11-12T04:27:38Z; this file remains the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Immediate task (heavy, in-session now)
 Do not produce a status-only response. Execute the Focus Campaign below now.
 
 ### (A) Gate 4 Branch 1 — FIRST CHECK (deterministic, only if valid trigger exists)
-- **Verified this session (2026-11-12T04:27:38Z):** `research_state/fclr016_local_audit/` contains **no** `fclr016_v5_terms_evidence_RESOLVED_*` artifact with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Highest local artifact is `fclr016_v5_terms_evidence_UNRESOLVED_20261108T204000Z.json` (`confirmatory_claim_go=NO_GO`, `status=UNRESOLVED`, reviewer_role=pending_human_legal_maintainer). Only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts present. **Do not wait/poll.**
+- **Verified this session (2026-11-12T04:30:17Z):** `research_state/fclr016_local_audit/` contains **no** `fclr016_v5_terms_evidence_RESOLVED_*` artifact with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Highest local artifact is `fclr016_v5_terms_evidence_UNRESOLVED_20261108T204000Z.json` (`confirmatory_claim_go=NO_GO`, `status=UNRESOLVED`, reviewer_role=pending_human_legal_maintainer). Only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts present. **Do not wait/poll.**
 - **If a valid RESOLVED trigger appears:** execute deterministic Branch 1 path only — promotion + validators; on all-green run confirmatory Track C multi-split ablation + verdict + required state updates per Gate 4 protocol. Never guess, never set `fabricated=true`, never bypass.
 - **If absent (current state):** proceed immediately to (B). Program awaits Gate 4 or new data, but this session must still do heavy work (B).
 
 ### (B) REPO-PRIORITY: LOCAL NEW-DATA ADMISSIBILITY INVENTORY COMPLETE — NO LOCALLY-ADMISSIBLE UNTESTED CANDIDATE
-The mandatory local new-data admissibility inventory (RESEARCH_PROMPT.md §16) was executed this session. Findings are recorded in:
+The mandatory local new-data admissibility inventory (RESEARCH_PROMPT.md §16) was executed and finalized in prior session (2026-11-12T04:27:38Z). Findings are recorded in:
 - `research_state/new_data_admissibility_audit_20261112T042738Z.md` (evidence-backed assessment)
 - `research_state/new_data_admissibility_audit_20261112T042738Z.json` (machine summary)
 
@@ -27,7 +27,7 @@ Per §(B) step 4: document exhausted-local state + specify the minimal external 
 
 ## FOCUS CAMPAIGN (EXECUTE IN ORDER, HEAVY WORK REQUIRED)
 1. **Gate 4 trigger check (done/verified):** absent → continue. Do not re-poll.
-2. **Local new-data admissibility inventory (DONE this session):** audit artifacts emitted above. Conclusion: no locally-admissible untested candidate.
+2. **Local new-data admissibility inventory (DONE prior session):** audit artifacts emitted above. Conclusion: no locally-admissible untested candidate.
 3. **Mandatory next heavy work — EXTERNAL NEW-DATA ACQUISITION CAMPAIGN:** Acquire ONE new admissible source/window meeting ALL of RESEARCH_PROMPT.md §16 (see audit artifact § "Minimal external acquisition needed"):
    - unauthenticated/public, provenance + license/terms documented,
    - observed labels where required (no modeled/proxy/synthetic liquidation labels as observed),
@@ -39,13 +39,14 @@ Per §(B) step 4: document exhausted-local state + specify the minimal external 
 5. **If no admissible external source is verifiable:** document structural exhaustion with evidence in this handoff's next update context; name the next materially different free route; keep `program_status=ACTIVE_HEAVY_CAMPAIGN`, `next_unfinished_task=EXTERNAL_NEW_DATA_SOURCE`. Do not write another blocker memo and wait if a valid bounded free-data/diagnostic task exists.
 6. **State hygiene (only as justified):** keep this file the single durable root handoff; keep redirects aligned. Preserve all sealed records/verdicts/manifests exactly as immutable.
 
-## BOTTLENECKS — STATUS & REQUIRED ACTION
+## BOTTLENECKS — STATUS & REQUIRED ACTION (UPDATED)
 | Bottleneck | Status | Removal/action (this session / next session) |
 |---|---|---|
-| Gate 4 Branch 1 (external/legal Binance terms) | BLOCKED, not agent-removable | Verified absent 2026-11-12T04:27:38Z. **Do not wait.** Execute Branch 1 only on valid RESOLVED trigger with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation. |
+| Gate 4 Branch 1 (external/legal Binance terms) | BLOCKED, not agent-removable | Verified absent 2026-11-12T04:30:17Z. **Do not wait.** Execute Branch 1 only on valid RESOLVED trigger with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation. |
 | No untested admissible cached-data experiment | EXHAUSTED | Inventory complete → audit artifacts emitted. Next: external new-data acquisition campaign (above). |
 | Competing root handoff docs / session ambiguity | REMOVED | This file sole durable root handoff; redirects in place. |
 | Prior campaign items (volatility family, expansion robustness, alternate volatility) | COMPLETED/SEALED | Do not reopen/retune/relitigate. |
+| **No active external data probe in progress** | **NEW — MUST START NOW** | **This session MUST run bounded probe(s) of candidate new sources per RESEARCH_PROMPT.md §16. Probe results → evidence artifacts → prereg if admissible, else document exhaustion + next route.** |
 
 ## COMPLETED / SEALED — DO NOT REOPEN, RETUNE, OR RELITIGATE
 - Track A liquidation expansion `TRACKA-HL-EXPANSION-20261111T195500Z` = **PASS** (C2 vs B1 rel QLIKE -19.04%, 95% CI [-5.088,-0.478], n=593, 8 instruments, 3 blocks, 2026-05..2026-10). Sealed.
@@ -70,7 +71,7 @@ Per §(B) step 4: document exhausted-local state + specify the minimal external 
 - Protocol: `RESEARCH_PROMPT.md` (esp. §16 admissible new data)
 - Caches: `research_state/data_cache/hyperliquid_candles/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/ironflow_events/`, `data/`, `data/raw/`
 - Sealed results: `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md`, `research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md`, `research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md`, `research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md`
-- This session's audit: `research_state/new_data_admissibility_audit_20261112T042738Z.md` + `.json`
+- This session's audit baseline: `research_state/new_data_admissibility_audit_20261112T042738Z.md` + `.json`
 
 ---
-**Execute Gate 4 check (verified absent) → external new-data acquisition campaign now. If candidate verified: freeze prereg + build/eval + verdict + state updates. If none verifiable: document structural exhaustion + next materially different free route. No status-only output.**
+**Execute Gate 4 check (verified absent) → external new-data acquisition campaign NOW. Run bounded probe(s) of candidate new source(s) per RESEARCH_PROMPT.md §16. If candidate verified: freeze prereg + build/eval + verdict + state updates. If none verifiable: document structural exhaustion + next materially different free route. No status-only output. No waiting.**
