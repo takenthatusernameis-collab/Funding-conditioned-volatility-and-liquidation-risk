@@ -1,5 +1,5 @@
 # DEEP REVIEW OF ALTERNATIVE LIQUIDATION SOURCES
-**TIMESTAMP:** 20261111T044105Z
+**TIMESTAMP:** 20261112T075134Z
 **RUBRIC:** {"min_symbols": 5, "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks", "completeness_doc_required": true, "license_ok": true, "unauthenticated_only": true, "no_requester_pays": true, "schema_compatible_fclr010": true}
 
 ## Probe cache accounting
@@ -138,7 +138,7 @@
 - error: True
 - len: None
 - preview: <?xml version="1.0" encoding="UTF-8"?>
-<Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>data/futures/um/daily/liquidationSnapshot/</Key><RequestId>HSGP84K97WYBS6KS
+<Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>data/futures/um/daily/liquidationSnapshot/</Key><RequestId>6H036KHD7ZG0Q84C
 
 ## ASSESSMENT
 - All sources tested unauthenticated only.
