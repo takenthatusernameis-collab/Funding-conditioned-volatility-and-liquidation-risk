@@ -45,6 +45,18 @@ TEST_BLOCKS = [(pd.Timestamp(b["start"], tz="UTC"), pd.Timestamp(b["end"], tz="U
 EPS = 1e-12
 
 
+def _json_default(o):
+    if isinstance(o, (np.bool_,)):
+        return bool(o)
+    if isinstance(o, (np.integer,)):
+        return int(o)
+    if isinstance(o, (np.floating,)):
+        return float(o)
+    if isinstance(o, (pd.Timestamp,)):
+        return o.isoformat()
+    raise TypeError(f"Object of type {o.__class__.__name__} is not JSON serializable")
+
+
 def sha256_file(p: Path) -> str:
     h = hashlib.sha256()
     with p.open("rb") as f:
@@ -362,7 +374,7 @@ def main() -> None:
         },
     }
     report_path = out_dir / f"tracka_hl_early_4h_panel_build_report_{TS}.json"
-    report_path.write_text(json.dumps(report, indent=2) + "\n")
+    report_path.write_text(json.dumps(report, indent=2, default=_json_default) + "\n")
     print(json.dumps({
         "panel": str(panel_path),
         "report": str(report_path),
