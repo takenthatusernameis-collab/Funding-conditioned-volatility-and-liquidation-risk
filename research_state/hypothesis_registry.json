@@ -197,7 +197,37 @@
         "GATE4_BRANCH_1",
         "NEW_OBSERVED_LIQUIDATION_SOURCE"
       ]
+    },
+    {
+      "id": "H_tracka_hl_funding_conditioned_volatility_fullhistory",
+      "type": "primary",
+      "priority": "P1",
+      "status": "FROZEN_PRE_OUTCOMES",
+      "terminal": false,
+      "terminal_class": null,
+      "reopen_requires": [],
+      "last_verdict": null,
+      "experiment_id": "TRACKA-VOL-FULLHIST-20261112T201536Z",
+      "prereg": "research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json",
+      "claim": "On a never-opened 11-month Hyperliquid window, funding-conditioned features (C2) improve OOS 24h realized-variance forecasting vs an RV-only baseline (B1).",
+      "evidence": "Frozen 2026-11-12T20:15:36Z; outcome_data_inspected_before_freeze=false; no evaluation artifact; bulk cache absent; execution pending (AGENT_HANDOFF.md START HERE)."
+    },
+    {
+      "id": "H_tracka_hl_liquidation_cross_sectional_funding",
+      "type": "exploratory",
+      "priority": "P2",
+      "status": "FROZEN_PRE_OUTCOMES",
+      "terminal": false,
+      "terminal_class": null,
+      "reopen_requires": [],
+      "last_verdict": null,
+      "experiment_id": "TRACKA-LIQ-XSEC-20261112T201536Z",
+      "prereg": "research_state/prereg_tracka_liq_xsec_20261112T201536Z.json",
+      "promotable": false,
+      "max_status": "EXPLORATORY_ONLY",
+      "claim": "On the full Hyperliquid native-perp cross-section, a funding-conditioned score carries information about the relative ordering of next-24h observed liquidation intensity across coins.",
+      "evidence": "Frozen 2026-11-12T20:15:36Z; outcome_data_inspected_before_freeze=false; no evaluation artifact; execution pending (AGENT_HANDOFF.md START HERE)."
     }
   ],
-  "updated_utc": "2026-11-12T21:21:38Z"
+  "updated_utc": "2026-11-12T22:40:00Z"
 }

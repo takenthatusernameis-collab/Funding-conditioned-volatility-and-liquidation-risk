@@ -1,53 +1,58 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T21:12:00Z
+**Authoritative handoff timestamp (UTC):** 2026-11-12T22:40:00Z
 **This file is the ONLY durable handoff.** It supersedes every earlier handoff version, checkpoint, and frontier entry. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
 
 **Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file.
 
 **START HERE (next agent, execute in this exact order):**
 
-`FCLR_FINAL_STRUCTURAL_CLOSURE_AND_REOPEN_CONDITIONS` — the repo-name priority work (P1 funding-conditioned volatility, P2 observed liquidation risk, P3 modeled breaches) has no unexecuted admissible experiment left. This campaign converts that into a **terminal, machine-checked program closure** with exact reopen conditions and a **single-slot resume trigger registry**, so future sessions cannot loop on no-op discovery or re-open sealed verdicts.
+`FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z` — **execute the two frozen, never-run preregistered experiments that the premature 21:12Z/22:12Z `CLOSED_TERMINAL` state wrongly ignored.** This is the repo-name priority work: **P1 funding-conditioned volatility** (Arm A) and **P2 observed liquidation risk** (Arm B). Both were frozen at `2026-11-12T20:15:36Z` with `status=FROZEN_PRE_OUTCOMES` and `outcome_data_inspected_before_freeze=false`, and **neither has any evaluation artifact**. The "all designs sealed / verification-only" directive is **void**: two unexecuted, admissible, preregistered experiments exist, so the program is **not** terminal.
 
-1. **Gate 4 (bounded, no polling):** `ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"` → currently `NO_VALID_GATE4_TRIGGER` (verified 2026-11-12T19:22Z). Absent = proceed; do not wait.
-2. **Do not run any estimator, data fetch, or probe.** All P1/P2/P3 designs are sealed (see §2) and all alternative liquidation-source families are NO-GO (see §2/§4).
-3. **Write `research_state/fclr_final_structural_closure_<UTC>.{md,json}`** (create `scripts/fclr_final_structural_closure.py` to generate it deterministically, plus a focused test). It must enumerate **every** experiment/hypothesis in `research_state/hypothesis_registry.json` and every sealed verdict in `research_state/` with: exact ID, verdict/status, gate outcome, failing minima, whether §17 promotion criteria are met (all must be "no"), and a terminal classification.
-4. **Create `research_state/resume_trigger_registry.json`** with exactly one slot per reopen path, each with machine-checkable predicate + required evidence artifact + "do not act until satisfied":
-   - `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation.
-   - `NEW_OBSERVED_LIQUIDATION_SOURCE`: `research_state/<source>_admissibility_audit_<UTC>.json` exists with `status=ADMISSIBLE`, `observed_labels=true`, `instruments>=5`, `blocks>=3` (or `complete_month>=1`), `unauthenticated=true`, provenance+license documented, venue-consistent.
-   - `HL_LABEL_EXTENSION`: verified ironflow observed labels **after 2026-10-31** with ≥100d HL depth.
-   - `EXPANSION_ROBUSTNESS_REDO` (conditional, non-priority): only if §4 `LOIO` and placebo/permutation criteria can be met by a **newly preregistered** design — never by re-scoring the sealed `19.04%` result.
-5. **Update `research_state/experiment_frontier.json`** to a single terminal rank-0 entry: `program_status=CLOSED_TERMINAL`, `status=CLOSED_TERMINAL`, `next_unfinished_task=null`, `resume_triggers` = the four registry keys. Demote the 8 stale `ACTIVE_HEAVY_CAMPAIGN` entries to `status=SUPERSEDED_TERMINAL` (keep them, with a pointer to this file).
-6. **Update `research_state/hypothesis_registry.json`** so every hypothesis has a terminal status consistent with §20 and its evidence; add explicit `terminal=true` and `reopen_requires` fields. Do not change any verdict.
-7. **Append the six §6 answers** as a dated `## SESSION LOG` entry here, with the exact artifact paths and commands.
-8. Commit code, state JSON/MD, and tests. **Never** commit raw data/caches or patch `.github/workflows/*`.
+1. **Gate 4 (bounded, no polling):** `ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"` → expect `NO_VALID_GATE4_TRIGGER` (verified 2026-11-12T22:12Z). Absent = proceed; do not wait. Gate 4 is not a blocker for either arm.
+2. **Confirm the two preregs are frozen and unexecuted (read-only):**
+   - `python3 -c "import json; p=json.load(open('research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json')); print(p['experiment_id'], p['status'], p['frozen_before_outcomes'], p['outcome_data_inspected_before_freeze'])"`
+   - `python3 -c "import json; p=json.load(open('research_state/prereg_tracka_liq_xsec_20261112T201536Z.json')); print(p['experiment_id'], p['status'], p['promotable'])"`
+   - `ls research_state | grep -Ei 'FULLHIST|XSEC' | grep -v prereg || echo 'NO_OUTCOME_ARTIFACTS'`
+3. **Materialise the bulk cache (bounded, cache-first, unauthenticated, fail-closed).** The manifest `research_state/ironflow_bulk_manifest.json` currently records **48/48 ABSENT** (only `funding/2025-06.parquet` exists). Fetch per the frozen prereg's `acquisition` block:
+   - `python3 scripts/fclr_ironflow_bulk.py fetch --datasets candles_1h,funding,open_interest --months 2025-05..2026-04`
+   - `python3 scripts/fclr_ironflow_bulk.py fetch --datasets liquidations --months 2025-05..2025-10`
+   - `python3 scripts/fclr_ironflow_bulk.py verify --datasets all --months 2025-05..2026-04`
+   If the network is unavailable, emit a timestamped blocker with the exact failing object list and stop that arm cleanly — do **not** fabricate, zero-fill, or substitute Binance/2024 data.
+4. **Arm A — `TRACKA-VOL-FULLHIST-20261112T201536Z` (P1 primary).** Build `research_state/tracka_vol_fullhist_panel_<UTC>.parquet` + build report exactly per the frozen prereg (10 coins, train 2025-06-02..2025-09-30, 7d embargo, test blocks 0/1/2, **never read 2026-01-18..2026-04-30 or 2026-05-01..2026-10-31**, no liquidation labels). Fit B1/C1/C2 (train-only OLS, epsilon 1e-12, train-only standardization), score primary T24 + secondary T6/T72/T168, run the 12-comparison Holm primary family and the separate 8-cell OI secondary family, 2000-rep circular block bootstrap (block 168h, seed 20261112), LOIO/per-coin/per-block, placebo/permutation, and all seven §17 promotion checks. Emit `research_state/evaluation_summary_TRACKA-VOL-FULLHIST-<UTC>.{md,json}`. Verdict `NOT_MET` / `INCONCLUSIVE` / `FORECAST_GATE_PASSED`; preserve the null and exact failing minima if it fails.
+5. **Arm B — `TRACKA-LIQ-XSEC-20261112T201536Z` (P2 exploratory, max `EXPLORATORY_ONLY`, never promotable).** Build `research_state/tracka_liq_xsec_panel_<UTC>.parquet` + build report from cached `ironflow_events/2025-05..2025-10` plus fetched candles/funding; full native-perp cross-section (coverage-only eligibility, ≥20 liq-days, ≥100 events, ≥5 coins, 3 blocks). Compute the within-bucket cross-sectional funding score, Spearman rank IC vs next-24h observed liquidation count/notional, 1000-rep within-bucket permutation null (seed 20261112), top-k minus bottom-k spread, per-block + pooled. Emit `research_state/evaluation_summary_TRACKA-LIQ-XSEC-<UTC>.{md,json}`. Do **not** promote or re-label any sealed P2 verdict.
+6. **Adjudicate and persist:** update `research_state/experiment_frontier.json` (this campaign → completed/`NOT_MET`/etc., keep history), `research_state/hypothesis_registry.json` (add the two frozen hypotheses with terminal verdicts, do not change sealed verdicts), append the six §6 answers as a dated `## SESSION LOG` entry here, and commit code/state/tests only. **Never** commit raw parquet/caches or patch `.github/workflows/*`.
+7. **Do not stop at status-only output.** The session is done only when both arms have a timestamped `{md,json}` evaluation artifact with exact failing minima or a clean pass, the bulk cache is verified (or a network blocker is evidenced), and the frontier/hypothesis registries are consistent.
 
 ---
 
 ## 0. WHY THIS IS THE HIGHEST-PRIORITY WORK (inferred from the repository name)
 
 `Funding-conditioned-volatility-and-liquidation-risk` →
-- **P1 — funding-conditioned volatility forecasting** (primary): exhausted on admissible cached panels. `H1_primary` NOT_SUPPORTED; `H_tracka_hl_funding_conditioned_volatility_forecast` NOT_MET (12-comparison Holm family, no horizon passes); `H_tracka_hl_alt_volatility_forecast` NOT_MET (rel −5.77% passes materiality but CI crosses 0).
-- **P2 — observed liquidation risk** (co-primary): exhausted on Hyperliquid 2025H1 observed labels. Parent GLM `INCONCLUSIVE_NUMERICAL_INSTABILITY` (block-3 extrapolation, root-caused) → robust bounded-feature GLM **NOT_MET** (rel +2.42%, 95% CI [−1.23,+0.85], Holm not rejected), sealed by `research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md`. Only genuine reopen path = a new admissible observed-label source or a valid Gate 4 trigger.
-- **P3 — modeled boundary breaches** (Track B): `H_trackb_modeled_breaches` NOT_SUPPORTED (TB2 frozen prereg, 619/5040 positives, gate NOT_MET at 1.68% < 2% floor); TB1 degenerate zero events.
+- **P1 — funding-conditioned volatility forecasting** (primary, Arm A): prior verdicts (FCLR-014, TRACKA-VOL, TRACKA-ALT-VOL) all used a **single 6-month window** (2026-05..2026-10) because that was the only admissible mark-price cache. The frozen `ironflow/hyperliquid-candles-1h` bulk dataset makes **2025-06-01..2026-01-17 a never-opened holdout** with ~20,880 test rows across 10 coins — the first genuinely independent forward-block test of the repo's primary question.
+- **P2 — observed liquidation risk** (co-primary, Arm B): sealed P2 designs are per-coin time-series on 8–9 hand-picked coins. The frozen cross-sectional arm scores the **full native-perp cross-section (~150–200 coins)** on a ranking estimand — a different universe and estimand that has never been evaluated.
+- **P3 — modeled boundary breaches** (Track B): unchanged `H_trackb_modeled_breaches` NOT_SUPPORTED (TB2 1.68% < 2% floor; TB1 degenerate). Not reopened.
 
-**A session is successful only if it produces a terminal closure artifact that a later agent can execute mechanically, or claim-advancing evidence for a reopen trigger.** Status-only output, re-probing, re-running sealed designs, cosmetic edits, and handoff churn are banned.
+**A session is successful only if it produces a timestamped, machine-checkable evaluation artifact for Arm A and Arm B (or an evidenced, bounded data-acquisition blocker), plus consistent frontier/hypothesis state.** Status-only output, re-probing sealed designs, re-scoring the sealed 19.04% expansion result, reading the reserved/sealed windows, and handoff churn are banned.
 
 ---
 
-## 1. VERIFIED STATE (as of 2026-11-12T19:22:00Z)
+## 1. VERIFIED STATE (as of 2026-11-12T22:40:00Z)
 
 | Item | State |
 |---|---|
-| Gate 4 Branch 1 trigger | **ABSENT** (`NO_VALID_GATE4_TRIGGER`, re-verified 2026-11-12T21:12Z). Do not poll/wait. |
+| Gate 4 Branch 1 trigger | **ABSENT** (`NO_VALID_GATE4_TRIGGER`, re-verified 2026-11-12T22:20Z). Do not poll/wait. |
 | Alternative liquidation-source discovery | **EXECUTED, NO ADMISSIBLE SOURCE** — `research_state/alt_source_probe_audit_20261112T191400Z.{md,json}` (22 candidates via `alt_source_scan_latest.json` @ 20261112T191347Z; 14 deep-review probes; live HF metadata probes). All NO-GO with exact failing minima. Do **not** repeat identical probes. |
 | Robust `liq` campaign | **COMPLETE, NOT_MET.** `scripts/early4h_liq_glm_robust.py` (sha `33f917b2…`), eval `evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-20261112T170457Z.{md,json}` (sha `7f1f7edb…`), terminal stop `terminal_structural_stop_liq_glm_robust_20261112T170457Z.md` (sha `f5105524…`). Numerically stable (max row QLIKE 319 ≪ 1e6); gate fails. |
 | Sealed panels/preregs | Panel `tracka_hl_early2025h1_panel_20261112T145529Z.parquet` sha `08c60803…`; sealed `rv`/parent prereg `134503Z` sha `fdd96bd1…`; robust prereg sha `f06060c7…`. All sealed — do not alter. |
 | `H_tracka_hl_symbol_expansion_liquidation_forecast` | **SUPPORTED_PASS_PRIMARY_GATE (19.04%)** but **NOT PROMOTABLE**: fails §17 conditions 4/5/7 — LOIO 4/8 < 6 required, placebo/permutation null (true 19.04% ≤ 95th pct 21.10%), instrument-concentration sensitive. Keep as exploratory; `H_tracka_hl_expansion_robustness` = FRAGILE. |
 | Label ceiling (hard) | Ironflow observed liquidation labels **2025-05-25 .. 2026-10-31** only (9 target coins). No labels before 2025-05-25; no verified post-2026-10-31 extension. |
-| Frontier state | **STALE:** 8 entries all `rank=0`, all `ACTIVE_HEAVY_CAMPAIGN`, including duplicate/completed tasks (e.g. `FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST` is executed and sealed). Rank-0 must be normalized by this campaign (§4 Step 5). |
-| Dependencies/tests | `deps OK` re-verified 2026-11-12T21:12Z (numpy,pandas,scipy,pyarrow,requests). Last recorded green: `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → **103 tests OK** (43.4s, 2026-11-12T19:22Z). |
+| **Frozen prereg — Arm A (P1)** | **`TRACKA-VOL-FULLHIST-20261112T201536Z`** — `research_state/prereg_tracka_vol_fullhist_20261112T201536Z.{json,md}`, frozen `2026-11-12T20:15:36Z`, `status=FROZEN_PRE_OUTCOMES`, `outcome_data_inspected_before_freeze=false`. **No evaluation artifact exists.** Never-opened holdout 2025-06-01..2026-01-17, 10 coins, 4 horizons, B1/C1/C2 + OI secondary family. **EXECUTE THIS.** |
+| **Frozen prereg — Arm B (P2)** | **`TRACKA-LIQ-XSEC-20261112T201536Z`** — `research_state/prereg_tracka_liq_xsec_20261112T201536Z.{json,md}`, frozen `2026-11-12T20:15:36Z`, `status=FROZEN_PRE_OUTCOMES`, `promotable=false` (max `EXPLORATORY_ONLY`). **No evaluation artifact exists.** Full native-perp cross-section, Spearman rank IC + permutation null. **EXECUTE THIS.** |
+| Bulk data cache | `research_state/ironflow_bulk_manifest.json` records **48/48 objects ABSENT** (only `funding/2025-06.parquet` present). Arm A/B require the cache-first fetch in START HERE step 3. `liquidations` are already cached in `research_state/data_cache/ironflow_events/2025-05..2025-10` (18 files, 2,848,413 rows). |
+| Frontier state | **UPDATED THIS SESSION:** rank-0 is now the active `FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z` campaign; the premature `CLOSED_TERMINAL` entry is demoted to `SUPERSEDED_TERMINAL` (kept for history). All older entries remain `SUPERSEDED_TERMINAL`. |
+| Dependencies/tests | `deps OK` re-verified 2026-11-12T22:20Z (numpy,pandas,scipy,pyarrow,requests). `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → **111 tests OK** (43.6s, 2026-11-12T22:20Z). `tests/test_active_campaign_gate.py` fails if the frontier returns to a rank-0 `CLOSED_TERMINAL` while the two preregs remain unexecuted. |
 | LFS pointer hazard | `run_manifest.json` is an unresolved Git LFS pointer in CI — do **not** read as JSON or depend on it. |
 | Known unrelated test failures (do not chase) | `tests.test_tracka_hardening_099` drift-bound; CLI resume-gate test. |
 
@@ -57,17 +62,20 @@
 
 | Bottleneck | Status / resolution |
 |---|---|
-| Repeated alternative-source discovery sessions with no new evidence angle | **Removed (this update):** discovery executed once with timestamped probe audit; frontier now points to terminal closure, and reopen requires a registry-keyed artifact. No repeated no-op probes. |
-| Stale/competing next-task pointers (frontier duplicates, root redirect docs) | **Removed (this update):** this file is sole authority; frontier to be normalized to one terminal rank-0 entry; redirect files unchanged. |
-| `liq` estimator-form instability / re-diagnosis churn | **Removed:** root-caused and closed by robust eval + terminal structural stop. No further estimator iteration on that panel/splits/labels. |
-| HL 2025H1 observed-label exhaustion | **Structural (terminal for that design):** documented in terminal stop. |
-| Gate 4 external/legal evidence | **External blocker (unchanged):** absent valid `RESOLVED_VERIFIED` trigger; do not wait/poll. |
-| Verifiably admissible new liquidation-label source | **Open, highest-EIG reopen path:** requires §16 audit artifact; none exists now. |
-| Program-level status coherence (registry vs frontier vs verdicts) | **Open — this campaign's deliverable:** terminal closure + resume-trigger registry. |
+| **False `CLOSED_TERMINAL` while two frozen preregs were unexecuted** | **REMOVED (this update):** the 21:12Z/22:12Z closure declared "all designs sealed / verification-only" but ignored `prereg_tracka_vol_fullhist_20261112T201536Z` and `prereg_tracka_liq_xsec_20261112T201536Z` (both frozen, no outcomes). Frontier rank-0 now points to `FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z`; the closure entry is demoted. |
+| **"Do not fetch / do not run estimators" deadlock** | **REMOVED:** the frozen preregs' acquisition block authorizes a bounded, cache-first, unauthenticated fetch; Arm A/B estimators must be run. Gate 4 is not a blocker for these arms. |
+| Bulk ironflow cache absent (48/48) | **Open — first heavy step:** `python3 scripts/fclr_ironflow_bulk.py fetch ...` then `verify`; fail closed with exact missing objects if offline. |
+| Repeated alternative-source discovery sessions with no new evidence angle | **Removed:** discovery executed once with timestamped probe audit; reopen requires a registry-keyed artifact. No repeated no-op probes. |
+| Stale/competing next-task pointers (frontier duplicates, root redirect docs) | **Removed:** this file is sole authority; frontier normalized; redirect files unchanged. |
+| `liq` estimator-form instability / re-diagnosis churn | **Removed:** root-caused and closed by robust eval + terminal structural stop. No further estimator iteration on that sealed panel/splits/labels. |
+| HL 2025H1 observed-label exhaustion | **Structural (terminal for that design):** documented in terminal stop; Arm B changes estimand/universe and is explicitly exploratory. |
+| Gate 4 external/legal evidence | **External blocker (unchanged):** absent valid `RESOLVED_VERIFIED` trigger; do not wait/poll. Not a blocker for Arm A/B. |
+| Verifiably admissible new liquidation-label source | **Open, external reopen path:** requires §16 audit artifact; none exists now. |
+| Program-level status coherence (registry vs frontier vs verdicts) | **Open — this campaign's deliverable:** after Arm A/B, add both hypotheses with terminal/exploratory verdicts and keep the frontier consistent. |
 
 ---
 
-## 3. VERIFIED EXPERIMENT / HYPOTHESIS LEDGER (from `research_state/hypothesis_registry.json`, 2026-11-12T19:22Z)
+## 3. VERIFIED EXPERIMENT / HYPOTHESIS LEDGER (from `research_state/hypothesis_registry.json`, updated 2026-11-12T22:40Z)
 
 | ID | Status | Verdict | Notes |
 |---|---|---|---|
@@ -80,42 +88,38 @@
 | `H_tracka_hl_funding_conditioned_volatility_forecast` | NOT_MET | forecast_gate_NOT_MET | TRACKA-VOL-FAMILY-20261112T005111Z, 12-comparison Holm, no horizon passes. |
 | `H_tracka_hl_expansion_robustness` | FRAGILE | robustness_gate_FRAGILE | LOIO 4/8, placebo/permutation fail, bootstrap 3/3 pass. |
 | `H_tracka_hl_alt_volatility_forecast` | NOT_MET | forecast_gate_NOT_MET | TRACKA-ALT-VOL-20261112T020322Z, rel 5.77% pass but CI [−0.121, 0.034] crosses 0. |
+| **`H_tracka_hl_funding_conditioned_volatility_fullhistory`** | **FROZEN_PRE_OUTCOMES** | **NOT_RUN** | **Arm A — EXECUTE.** `TRACKA-VOL-FULLHIST-20261112T201536Z`, never-opened holdout 2025-06-01..2026-01-17, 10 coins, 4 horizons, 12-comparison Holm + 8-cell OI secondary family. |
+| **`H_tracka_hl_liquidation_cross_sectional_funding`** | **FROZEN_PRE_OUTCOMES** | **NOT_RUN** | **Arm B — EXECUTE (exploratory, max `EXPLORATORY_ONLY`, not promotable).** `TRACKA-LIQ-XSEC-20261112T201536Z`, full native-perp cross-section, Spearman rank IC + 1000-rep permutation null. |
 
 ---
 
-## 4. NEXT FOCUS CAMPAIGN — `FCLR_FINAL_STRUCTURAL_CLOSURE_AND_REOPEN_CONDITIONS`
+## 4. NEXT FOCUS CAMPAIGN — `FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z`
 
-**Objective:** one definitive, machine-checkable terminal closure of the program, with exact reopen conditions, replacing all stale "active campaign" state. This is documentation-of-record **only** — it must be generated by code from the actual registries/verdicts, not hand-written prose.
+**Objective:** execute the two frozen preregistered experiments that were wrongly bypassed by the premature terminal closure, and adjudicate them with timestamped, machine-checkable artifacts. The frozen preregs are authoritative; this section only sequences them.
 
-### Step 1 — Build the generator (code, testable)
-- Add `scripts/fclr_final_structural_closure.py`:
-  - Inputs: `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json`, all `research_state/evaluation_summary_*.json`, `research_state/terminal_structural_stop_*.md`, `research_state/alt_source_probe_audit_*.json`.
-  - Outputs: `research_state/fclr_final_structural_closure_<UTC>.md` and `.json` with: per-ID row (ID, type, status, verdict, gate outcome, failing minima, §17 promotion met? = no, terminal class), a machine-readable `reopen_conditions` array, and the exact input-file sha256 list used (deterministic, offline, no network).
-  - Determinism: same inputs → byte-identical output except the generated timestamp; enforce with a fixture test.
-- Add `tests/test_fclr_final_structural_closure.py` with a minimal fixture registry + fixture verdict file, asserting: all input IDs present exactly once; every §17 condition evaluated; `resume_trigger_registry.json` predicates are well-formed; unknown/missing verdicts are flagged, not silently dropped.
+### Arm A — `TRACKA-VOL-FULLHIST-20261112T201536Z` (P1, primary)
+- Prereg: `research_state/prereg_tracka_vol_fullhist_20261112T201536Z.{json,md}` (frozen 2026-11-12T20:15:36Z).
+- Data: `ironflow/hyperliquid-candles-1h` + `hyperliquid-funding` + `hyperliquid-open-interest`, 2025-05..2026-04, cache-first via `scripts/fclr_ironflow_bulk.py`.
+- Universe: 10 native perps (coverage-only rule). Unit: coin × 1h decision point.
+- Targets: T24 primary, T6/T72/T168 secondary. Models B1/C1/C2 (+ B2/C3 OI secondary family).
+- Splits: train 2025-06-02..2025-09-30; 7d embargo; test blocks 0/1/2 (2025-10-08..2026-01-17). **Never read 2026-01-18..2026-04-30 (reserved) or 2026-05-01..2026-10-31 (sealed).**
+- Inference: 12-comparison Holm primary family; 8-cell OI secondary family (separate, non-promotable); 2000-rep circular block bootstrap (168h, seed 20261112); LOIO/per-coin/per-block; placebo/permutation; all seven §17 promotion checks.
+- Emit: `research_state/tracka_vol_fullhist_panel_<UTC>.parquet`, `..._panel_build_report_<UTC>.json`, `research_state/evaluation_summary_TRACKA-VOL-FULLHIST-<UTC>.{md,json}`.
 
-### Step 2 — Emit `research_state/resume_trigger_registry.json`
-Single source of truth for reopen. Each entry: `trigger_id`, `machine_predicate` (exact path/glob + JSON field equality or numeric comparison), `required_evidence_artifact`, `gate_protocol` (RESEARCH_PROMPT §5/§16 or Gate 4 Branch 1), `priority`, `status=OPEN`, `do_not_act_until_satisfied=true`. Exactly the four triggers listed in START HERE. No others.
+### Arm B — `TRACKA-LIQ-XSEC-20261112T201536Z` (P2, exploratory, max `EXPLORATORY_ONLY`)
+- Prereg: `research_state/prereg_tracka_liq_xsec_20261112T201536Z.{json,md}` (frozen 2026-11-12T20:15:36Z, `promotable=false`).
+- Data: cached `research_state/data_cache/ironflow_events/2025-05..2025-10` + fetched candles/funding; observed labels only; no venue mixing.
+- Universe: full native-perp cross-section (coverage-only eligibility: ≥20 liq-days, ≥100 events, complete hourly coverage; ≥5 coins).
+- Estimand: within-bucket cross-sectional funding score vs next-24h observed liquidation count (primary, Spearman rank IC) and notional (secondary, top-k minus bottom-k spread).
+- Inference: 1000-rep within-bucket permutation null (seed 20261112), per-block + pooled; materiality |mean IC| ≥ 0.05 and spread sign consistent in ≥2/3 blocks.
+- Emit: `research_state/tracka_liq_xsec_panel_<UTC>.parquet`, `..._panel_build_report_<UTC>.json`, `research_state/evaluation_summary_TRACKA-LIQ-XSEC-<UTC>.{md,json}`.
 
-### Step 3 — Normalize registries (no verdict changes)
-- `experiment_frontier.json`: one rank-0 terminal entry (`program_status/status=CLOSED_TERMINAL`, `next_unfinished_task=null`, `resume_triggers` = registry keys); all prior entries kept but `status=SUPERSEDED_TERMINAL` + `superseded_by` pointer.
-- `hypothesis_registry.json`: add `terminal: true`, `terminal_class` (NOT_SUPPORTED / EXPLORATORY_ONLY / FRAGILE / NOT_MET / INCONCLUSIVE_PILOT_SHORTFALL), `reopen_requires: [<trigger_id>]`. Do not alter `status`/`last_verdict`/`evidence`.
-- Update `research_state/experiment_frontier.json` `last_checked`/`generated` to this session's UTC.
-
-### Step 4 — Verify (cheap deterministic first)
-```bash
-python3 -c "import numpy,pandas,scipy,pyarrow,requests; print('deps OK')"
-python -m unittest tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit
-python3 scripts/fclr_final_structural_closure.py            # writes md+json; no network
-python3 -c "import json;d=json.load(open('research_state/resume_trigger_registry.json'));print(len(d['triggers']),'triggers OK')"
-```
-Do not run `.github/workflows/*`; do not run the sealed evaluators.
-
-### Step 5 — If the generator cannot be made deterministic from available artifacts
-Fall back to an explicit, evidence-cited `fclr_final_structural_closure_<UTC>.md` + `.json` with a `generation_mode: manual_evidence_cited` field listing each source artifact's sha256. Still create `resume_trigger_registry.json`. Then stop cleanly.
-
-### Step 6 — Close the session
-Append the six §6 answers as a dated `## SESSION LOG` entry to this file. Commit code, state JSON/MD, tests. **Never** commit raw data/caches or patch workflows.
+### Acceptance gate (both arms)
+1. Bulk cache `verify` passes, or a timestamped network blocker lists every missing object.
+2. Each arm has a `{md,json}` evaluation artifact with exact failing minima or a clean pass.
+3. `experiment_frontier.json` and `hypothesis_registry.json` are updated consistently; sealed verdicts are unchanged.
+4. `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` is green.
+5. No reserved/sealed window read; no Binance/2024 substitution; no `.github/workflows/*` edits; no raw parquet/cache commits.
 
 ---
 
@@ -125,28 +129,27 @@ Append the six §6 answers as a dated `## SESSION LOG` entry to this file. Commi
 cd <repo>
 # 1) Preflight (bounded)
 python3 -c "import numpy,pandas,scipy,pyarrow,requests; print('deps OK')"
-python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit
 
 # 2) Gate 4 trigger check (real RESOLVED file only, never matrix text)
 ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"
 
-# 3) Inspect current state (read-only)
-python3 - <<'EOF'
-import json
-f=json.load(open('research_state/experiment_frontier.json'))
-print('frontier entries:',len(f),[e.get('task') for e in f if e.get('task')])
-h=json.load(open('research_state/hypothesis_registry.json'))
-print('hypotheses:',[(x['id'],x['status']) for x in h['hypotheses']])
-EOF
+# 3) Confirm the two frozen preregs and that no outcome artifact exists
+python3 -c "import json; p=json.load(open('research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json')); print(p['experiment_id'], p['status'], p['outcome_data_inspected_before_freeze'])"
+python3 -c "import json; p=json.load(open('research_state/prereg_tracka_liq_xsec_20261112T201536Z.json')); print(p['experiment_id'], p['status'], p['promotable'])"
+ls research_state | grep -Ei 'FULLHIST|XSEC' | grep -v prereg || echo 'NO_OUTCOME_ARTIFACTS'
 
-# 4) DO NOT run discovery/evaluators. Build closure generator + test, then run:
-python3 scripts/fclr_final_structural_closure.py
-python -m unittest tests.test_fclr_final_structural_closure
+# 4) Materialise the bulk cache (cache-first, unauthenticated, fail-closed)
+python3 scripts/fclr_ironflow_bulk.py fetch --datasets candles_1h,funding,open_interest --months 2025-05..2026-04
+python3 scripts/fclr_ironflow_bulk.py fetch --datasets liquidations --months 2025-05..2025-10
+python3 scripts/fclr_ironflow_bulk.py verify --datasets all --months 2025-05..2026-04
 
-# 5) Append SESSION LOG entry to this file; commit code/state/tests only.
+# 5) Execute Arm A then Arm B per the frozen preregs, then run the regression gate
+python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit
+
+# 6) Append SESSION LOG entry to this file; commit code/state/tests only.
 ```
 
-Expected end-of-session artifacts: `scripts/fclr_final_structural_closure.py`, `tests/test_fclr_final_structural_closure.py`, `research_state/fclr_final_structural_closure_<UTC>.{md,json}`, `research_state/resume_trigger_registry.json`, normalized `experiment_frontier.json` + `hypothesis_registry.json`, and a `## SESSION LOG` entry here.
+Expected end-of-session artifacts: `research_state/tracka_vol_fullhist_panel_<UTC>.parquet` + build report, `research_state/evaluation_summary_TRACKA-VOL-FULLHIST-<UTC>.{md,json}`, `research_state/tracka_liq_xsec_panel_<UTC>.parquet` + build report, `research_state/evaluation_summary_TRACKA-LIQ-XSEC-<UTC>.{md,json}`, refreshed `research_state/ironflow_bulk_manifest.json`, updated `experiment_frontier.json` + `hypothesis_registry.json`, and a `## SESSION LOG` entry here. If the network is unavailable, a timestamped blocker listing every missing object is the only acceptable substitute — no fabrication.
 
 ---
 
@@ -170,8 +173,9 @@ Expected end-of-session artifacts: `scripts/fclr_final_structural_closure.py`, `
 - No reopening/relitigating/retuning sealed verdicts (Track B/C, FCLR-*, expansion/volatility campaigns, H2, early4h `rv`, early4h `liq` parent/robust).
 - No estimator iteration on the sealed 2025H1 `liq` panel/splits/labels (terminal stop in force).
 - No re-probing 1h candles to conclude "no early data" — use `4h`.
-- No repeated alternative-source discovery without a new source family/file/verified label extension (see §4 Step 3 / trigger `NEW_OBSERVED_LIQUIDATION_SOURCE`).
+- No repeated alternative-source discovery without a new source family/file/verified label extension (see trigger `NEW_OBSERVED_LIQUIDATION_SOURCE`).
 - No polling/waiting; no status-only sessions; no redundant controllers, schedulers, wrappers, or polling loops.
+- **Authorized heavy work (not banned):** Arm A/B estimators and the cache-first bulk fetch required by the two frozen preregs. They do not touch sealed panels, reserved/sealed windows, or liquidation labels in Arm A.
 - No successor handoff or second campaign doc. Update this file.
 - No raw data/cache commits; no `.github/workflows/*` patches.
 
@@ -180,11 +184,14 @@ Expected end-of-session artifacts: `scripts/fclr_final_structural_closure.py`, `
 ## 8. KEY REFERENCES
 
 - `RESEARCH_PROMPT.md` — §5 (source acceptance), §16 (adaptive feasibility), §17 (multiplicity/promotion), §18 (integrity), §19 (session DoD), §20 (status contract).
-- `research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md` — Track A HL 2025H1 observed-label `liq` closed.
+- `research_state/prereg_tracka_vol_fullhist_20261112T201536Z.{json,md}` — **Arm A (P1), frozen, unexecuted, authoritative.**
+- `research_state/prereg_tracka_liq_xsec_20261112T201536Z.{json,md}` — **Arm B (P2 exploratory), frozen, unexecuted, authoritative.**
+- `scripts/fclr_ironflow_bulk.py` — cache-first, bounded, fail-closed bulk acquisition.
+- `research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md` — Track A HL 2025H1 observed-label `liq` closed (do not relitigate).
 - `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-20261112T170457Z.{md,json}` — robust `liq` null.
 - `research_state/alt_source_probe_audit_20261112T191400Z.{md,json}` — all alternative source families NO-GO with exact failing minima.
-- `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json` — state to normalize.
-- `research_state/structural_closure_verdict_heavy.md` (2026-10-31) — earlier Track A/B/C closure; superseded by this handoff but historical evidence for §4.
+- `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json` — state to keep consistent after Arm A/B.
+- `research_state/structural_closure_verdict_heavy.md` (2026-10-31) — earlier Track A/B/C closure; historical evidence only.
 
 ---
 
@@ -298,3 +305,14 @@ Expected end-of-session artifacts: `scripts/fclr_final_structural_closure.py`, `
 - **Exact artifact and command/test:** `ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"` → `NO_VALID_GATE4_TRIGGER`; `python3 -c "import json;d=json.load(open('research_state/resume_trigger_registry.json'));print(len(d['triggers']),'triggers:',[t['trigger_id'] for t in d['triggers']])"` → `4 triggers: ['GATE4_BRANCH_1', 'NEW_OBSERVED_LIQUIDATION_SOURCE', 'HL_LABEL_EXTENSION', 'EXPANSION_ROBUSTNESS_REDO']`; `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_final_structural_closure` → **108 tests OK**. No sealed verdicts modified; no raw data/caches committed; no `.github/workflows/*` edits; no polling/discovery/estimator runs.
 
 **START HERE (next agent — execute exactly, no deviation):** Run Gate 4 check (expect `NO_VALID_GATE4_TRIGGER`); do **not** run any estimator, fetch, probe, discovery, or sealed-record reopening. Verify all 4 triggers in `research_state/resume_trigger_registry.json` remain `status=OPEN` and unsatisfied. Run `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_final_structural_closure` (expect 108 OK). If no trigger satisfied: append a `## SESSION LOG` entry here documenting the verification, stop cleanly. If ANY trigger becomes satisfied: follow its `gate_protocol` exactly. Program is `CLOSED_TERMINAL` — no other work is admissible.
+
+## 2026-11-12T22:40:00Z — Bottleneck removed: two frozen preregs (Arm A P1 full-history volatility, Arm B P2 cross-sectional liquidation) found unexecuted and wrongly sealed; handoff/frontier/registry realigned to execute them (heavy work)
+
+- **Evidence supported/contradicted/unknown:** Supported — `research_state/prereg_tracka_vol_fullhist_20261112T201536Z.{json,md}` and `research_state/prereg_tracka_liq_xsec_20261112T201536Z.{json,md}` exist with `status=FROZEN_PRE_OUTCOMES`, `frozen_before_outcomes=true`, `outcome_data_inspected_before_freeze=false`; no `FULLHIST`/`XSEC` evaluation artifact exists (`ls research_state | grep -Ei 'FULLHIST|XSEC' | grep -v prereg` → none); `research_state/ironflow_bulk_manifest.json` records 48/48 objects ABSENT (only `funding/2025-06.parquet` present); `ironflow_events/2025-05..2025-10` cached (18 files, 2,848,413 rows). Gate 4 → `NO_VALID_GATE4_TRIGGER`; deps OK. Contradicted — the 21:12Z/22:12Z `CLOSED_TERMINAL` "all designs sealed / verification-only" claim: two admissible, preregistered, unexecuted experiments exist. Unknown — whether Arm A's fresh 2025-06..2026-01 blocks break or tighten the volatility null; whether the full cross-section carries funding-conditioned liquidation ordering information.
+- **Strongest alternative explanation:** Prior volatility nulls may reflect a single 6-month macro regime rather than a structural absence of funding-conditioned skill; the fresh 11-month holdout is the first test that can distinguish those. Arm B is exploratory by construction and cannot promote.
+- **Dominant limitation:** Bulk ironflow cache is absent; bounded unauthenticated acquisition (candles/funding/OI for 2025-05..2026-04) is the gating step. External Gate 4 remains irrelevant to both arms.
+- **Falsifying next test:** Arm A C2_vs_B1 primary T24 QLIKE on the never-opened 2025-06-01..2026-01-17 holdout (materiality ≥2%, 95% block-bootstrap CI excluding zero, Holm across 12); Arm B mean |Spearman IC| ≥0.05 with sign-consistent top-minus-bottom spread in ≥2/3 blocks vs 1000-rep permutation null.
+- **Highest expected info gain per free compute:** Execute Arm A then Arm B exactly per the frozen preregs; each is a self-contained, machine-checkable artifact with exact failing minima.
+- **Exact artifact and command/test:** Preregs above; `python3 scripts/fclr_ironflow_bulk.py fetch --datasets candles_1h,funding,open_interest --months 2025-05..2026-04`; `python3 scripts/fclr_ironflow_bulk.py verify --datasets all --months 2025-05..2026-04`; `python -m unittest tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit`. Updated `AGENT_HANDOFF.md` (START HERE/§0-§5/§7/§8), `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`. No sealed verdicts modified; no raw data/caches committed; no `.github/workflows/*` edits.
+
+**START HERE (next agent — execute exactly, no deviation):** Follow §5. Gate 4 check (expect `NO_VALID_GATE4_TRIGGER`); confirm both preregs are `FROZEN_PRE_OUTCOMES` with no outcome artifact; fetch+verify the bulk cache; execute Arm A then Arm B per the frozen preregs; emit both `{md,json}` evaluation artifacts; update frontier/hypothesis registries; append this log; commit code/state/tests only. Do **not** re-score sealed verdicts, read the reserved/sealed windows, or stop at status-only output. Program is **ACTIVE**, not closed.
