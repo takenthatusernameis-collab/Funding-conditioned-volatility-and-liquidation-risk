@@ -1,146 +1,109 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T16:52:59Z
-**This file is the ONLY durable handoff.** It supersedes every earlier handoff, the 2026-11-12T15:47:45Z version, the 15:44:36Z/15:38:39Z "verification" sessions, the 14:56:44Z pipeline repair, the 14:37:52Z consolidation, and all earlier checkpoints. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
+**Authoritative handoff timestamp (UTC):** 2026-11-12T17:13:43Z
+**This file is the ONLY durable handoff.** It supersedes every earlier handoff version and all checkpoints. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
 
 **Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file.
 
-**START HERE (next agent):** execute `FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1` (§4). The prereg is **already frozen** at `research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json` (SHA-256 `f06060c7…`). Implement `scripts/early4h_liq_glm_robust.py`, evaluate on the existing corrected panel, adjudicate. Do **not** re-diagnose the parent GLM: its instability is localized to test block 3 and is already root-caused in the Step 5 audit (`research_state/tracka_liq_glm_step5_power_coverage_20261112T165210Z.md`). If the robust estimator also returns `INCONCLUSIVE_NUMERICAL_INSTABILITY`, emit a single timestamped evidenced structural-blocker document with the exact failing minima and stop. Do not create a second campaign doc.
+**START HERE (next agent):** execute bounded **alternative liquidation-label source discovery** campaign `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY` (§4). Track A observed-label `liq` on Hyperliquid 2025H1 is **CLOSED** by terminal structural stop `research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md` (robust bounded-feature GLM numerically stable but `NOT_MET`: rel +2.42%, 95% CI [-1.23,+0.85] crosses 0, Holm not rejected). Do **not** re-run or iterate estimator forms on that panel/splits/labels.
 
 ---
 
 ## 0. IMMEDIATE FIRST ACTION (do this now, in order)
 
-1. Read only this file. The previous campaign was **executed** this session; do not re-run it and do not re-diagnose it.
-2. Preflight is GREEN as of 2026-11-12T16:50Z (this session re-ran it): `deps OK`; `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → `Ran 103 tests OK`; panel SHA-256 `08c60803…` matches; robust prereg SHA-256 `f06060c7…`. **Do not re-run preflight from scratch to "verify" — go straight to §4 Step 2.** Only re-run if an artifact hash/coverage check fails.
-3. **Execute the next heavy campaign (§4): `FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1`.** Its prereg is frozen; implement the bounded-feature estimator, evaluate, adjudicate.
-4. Do **not** re-fetch candles/funding/labels, do **not** re-window, do **not** alter the sealed `134503Z` prereg or its artifacts.
-
-Campaign is admissible, Hyperliquid-only, observed labels only, disjoint from sealed windows, and requires **no** Gate 4, **no** new source, and **no** post-2026-10-31 data.
+1. Read only this file. Do not re-verify/re-run sealed campaigns (`rv` NOT_MET, early4h `liq` parent INCONCLUSIVE root-caused, robust `liq` NOT_MET terminal stop).
+2. **Gate 4 check (bounded, no polling):** look for a valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation evidence. As of this handoff only `*_BLOCKED_*`/`*_UNRESOLVED_*` exist and `RESOLVED_VERIFIED` inside `fclr020_gate4_readiness_action_matrix_latest.json` is a readiness matrix string, **not** a trigger. If a valid trigger exists → execute Gate 4 Branch 1 per protocol; else proceed.
+3. **Heavy work now:** run bounded alternative liquidation-label source discovery (§4). Requirement for claim-worthy consideration (RESEARCH_PROMPT §5/§16): **≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license documented, observed labels only, venue-consistent (no Binance/2024 conflation with Hyperliquid windows).**
+4. If a source passes smoke test: perform §16 **admissibility audit BEFORE any preregistration/outcome computation** (`research_state/<source>_admissibility_audit_<UTC>.{md,json}`), then only if admissible freeze prereg → build/eval/verdict → atomic state updates under a **NEW** experiment ID. If no source passes: emit timestamped probe evidence with **exact failing minima per source**, update `experiment_frontier.json`, and clean stop. No repeated no-op probes.
+5. Do **not** re-fetch/re-window sealed 2025H1 caches, do **not** alter sealed preregs/evals, do **not** poll/wait.
 
 ---
 
 ## 1. WHY THIS IS THE HIGHEST-PRIORITY WORK (inferred from the repository name)
 
 `Funding-conditioned-volatility-and-liquidation-risk` →
-- **P1 — funding-conditioned volatility forecasting** (primary). **Answered:** `rv` is `NOT_MET` under the corrected sealed eval (`...145537Z`). Do not re-litigate.
-- **P2 — observed liquidation risk** (co-primary). **Open.** The parent `liq` GLM returned `INCONCLUSIVE_NUMERICAL_INSTABILITY`; the root cause is diagnosed and the next estimator is pre-frozen. This is the remaining claim-advancing work.
-- **P3 — modeled boundary breaches** (only after P1/P2 are exhausted).
+- **P1 — funding-conditioned volatility forecasting** (primary). **Answered/exhausted on admissible cached panels:** `rv` sealed `NOT_MET` (`evaluation_summary_EARLY4H-2025H1-20261112T145537Z.*`, panel `08c60803…`); other volatility campaigns sealed (see frontier/history). Do not re-litigate.
+- **P2 — observed liquidation risk** (co-primary). **Closed on HL 2025H1 observed labels:** parent GLM `INCONCLUSIVE_NUMERICAL_INSTABILITY` (block-3 extrapolation, root-caused) → robust bounded-feature GLM `NOT_MET` with terminal structural stop. **Only path to advance P2 is a genuinely new admissible observed-label source** (or valid Gate 4 Branch 1 if triggered).
+- **P3 — modeled boundary breaches** (Track B) sealed NOT_SUPPORTED across completed windows; not the next highest-EIG free-compute move vs. source discovery.
 
-A session is successful only if it produces **heavy, claim-advancing evidence** or a **timestamped, evidenced terminal stop** with the exact failing minima. Status-only output, re-probing already-assessed sources, cosmetic edits, and handoff churn are banned.
-
----
-
-## 2. VERIFIED EVIDENCE (re-verified live 2026-11-12T16:50Z)
-
-| Input | Coverage | Source | Prior use |
-|---|---|---|---|
-| Observed liquidation labels | **2025-05-25 .. 2025-10-31**; 9 target coins; **394,167 events / ~$23.38B notional** (all 192 markets: 679,487 events) | `research_state/data_cache/ironflow_events/2025-05.parquet … 2025-10.parquet` (cached, CC BY 4.0) | used in parent campaigns |
-| 4h candles (RV/features) | **2025-05-01 .. 2025-10-31, 1104 bars/coin, 0 internal gaps**, all 9 coins | live `candleSnapshot` `interval=4h` | cached and used |
-| Funding history (hourly) | **2025-05-01 .. 2025-10-31**, ~4416 rows/coin | live `fundingHistory` | cached and used |
-
-**Per-coin label counts (target 9):** BTC 141,632 ($11.32B), ETH 109,681 ($8.42B), SOL 83,021 ($2.49B), XRP 27,318 ($0.64B), DOGE 9,569 ($0.32B), SUI 9,346 ($0.12B), LINK 6,144 ($0.12B), AVAX 4,361 ($0.12B), BNB 4,095 ($0.04B). BTC+ETH ≈ **63.6% of events / 83.6% of notional**.
-
-**Label ceiling (hard):** ironflow labels exist only 2025-05-25 .. 2026-10-31. There are **no labels before 2025-05-25**. The 2024-08..2025-04 4h extension is structurally impossible for an observed-label test; do not fabricate or proxy it.
-
-**Sealed `rv` result (do not relitigate):** `rv` `NOT_MET` — C2_vs_B1 diff `+0.243`, CI `[-0.097, 0.583]` includes 0, rel `-29.3%`, p=0.161. Artifacts: panel `tracka_hl_early2025h1_panel_20261112T145529Z.parquet` (SHA-256 `08c60803…`), eval `evaluation_summary_EARLY4H-2025H1-20261112T145537Z.{md,json}`, prereg `tracka_prereg_early2025h1_20261112T134503Z.json` (SHA-256 `fdd96bd1…`, unchanged).
-
-**Parent `liq` GLM (executed this session):** `TRACKA-HL-EARLY4H-2025H1-LIQ-GLM`, prereg `tracka_prereg_early2025h1_liq_glm_20261112T164838Z.json` (SHA-256 `d9ebb279…`), script `scripts/early4h_liq_glm.py`, eval `evaluation_summary_EARLY4H-2025H1-LIQ-GLM-20261112T164926Z.{md,json}`. Verdict **`INCONCLUSIVE_NUMERICAL_INSTABILITY`**:
-- B1 (RV-only) is stable: mean QLIKE 4.15, max row QLIKE 212.8, **0** rows > 1e6.
-- C1: mean QLIKE 4,769; max row QLIKE 4.83e6; **1** row > 1e6 (block 3 / SOL).
-- C2: mean QLIKE 3.43e6; max row QLIKE 3.48e9; **2** rows > 1e6 (block 3 / SOL, DOGE).
-- The instability is **localized to test block 3 (2025-09-29..2025-10-28, the Oct-2025 funding spike)**: `fundingRate` 27.7×, `premium` 12.5×, `ema_dist` 4.5× outside the training range. Blocks 0-2 are stable. Power is **not** the constraint (246-261 positive days per block). This is a **bounded-feature problem**, not a sample-size/label problem.
-
-**Step 5 audit (this session):** `research_state/tracka_liq_glm_step5_power_coverage_20261112T165210Z.{md,json}` — power adequate, label ceiling documented, concentration documented, next campaign specified.
-
-**Gate 4 Branch 1 trigger: ABSENT.** Only `fclr016_v5_terms_evidence_BLOCKED_…`/`_UNRESOLVED_…` exist; the literal `RESOLVED_VERIFIED` inside `fclr020_gate4_readiness_action_matrix_latest.json` is a readiness matrix, not a trigger. Do not wait or poll.
-
-**`run_manifest.json` is an unresolved Git LFS pointer in CI.** Do not read it as JSON and do not make the campaign depend on it.
+A session is successful only if it produces **heavy, claim-advancing evidence** (new admissible source → §16 audit → prereg/frozen test path advanced) or a **timestamped, evidenced stop** with exact failing minima per probed source. Status-only output, re-probing without new evidence angle, cosmetic edits, and handoff churn are banned.
 
 ---
 
-## 3. BOTTLENECKS REMOVED / REMAINING
+## 2. VERIFIED STATE (as of 2026-11-12T17:13:43Z)
+
+| Item | State |
+|---|---|
+| Robust `liq` campaign | **COMPLETE, NOT_MET.** `scripts/early4h_liq_glm_robust.py` (sha `33f917b2…`), eval `evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-20261112T170457Z.{md,json}` (sha `7f1f7edb…`), terminal stop `terminal_structural_stop_liq_glm_robust_20261112T170457Z.md` (sha `f5105524…`). Numerically stable (max row QLIKE 319≪1e6); gate fails (CI upper +0.85, Holm not rejected). |
+| Corrected 2025H1 panel/preregs | Panel `tracka_hl_early2025h1_panel_20261112T145529Z.parquet` sha `08c60803…`; sealed `rv`/parent prereg `134503Z` sha `fdd96bd1…`; robust prereg sha `f06060c7…`. All sealed — do not alter. |
+| Label ceiling (hard) | Ironflow observed liquidation labels **2025-05-25 .. 2026-10-31** only (9 target coins). No labels before 2025-05-25; no verified post-2026-10-31 extension evidenced as admissible. |
+| Gate 4 Branch 1 trigger | **ABSENT.** No `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Do not wait/poll. |
+| Frontier rank-0 | `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY`, `ACTIVE_HEAVY_CAMPAIGN` (`experiment_frontier.json`, last checked 2026-11-12T17:04:57Z). |
+| Dependencies/tests (last green) | `deps OK`; `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → 103 tests OK. Re-run only if artifact hashes fail or you change relevant code. |
+| LFS pointer hazard | `run_manifest.json` is an unresolved Git LFS pointer in CI — do **not** read as JSON or depend on it. |
+| Prior alt-source probes | `data_source_registry_alt_hunt.json`, `alt_source_deep_review_latest.md`, `url_probe_cache.json`, `hf_search_cache.json` exist (last deep review 20261112T075134Z). Treat as cached evidence; do not repeat identical no-op probes — extend with new source families/angles or clearly mark as unchanged with timestamps. |
+
+---
+
+## 3. BOTTLENECKS — REMOVED / REMAINING
 
 | Bottleneck | Status / resolution |
 |---|---|
-| **Four competing handoff docs** | **Removed:** this file is the sole durable handoff; the three root `*HANDOFF*`/`*NEXT*`/`*CAMPAIGN*`/`*TASK*` files are redirects; `research_state/FCLR_CAMPAIGN_NEXT.md` is SUPERSEDED. |
-| **Status-only re-verification churn** | **Removed:** this session executed the parent `liq` GLM end-to-end (prereg → script → eval → Step 5) instead of re-verifying. The next agent's first action is execution, not verification. |
-| **Dependency/install wall** | **Removed for the agent loop:** `deps OK`; core deps importable. Caveat: `.github/workflows/main.yml` does not provision an agent venv from `requirements.txt`; if CI agents lack deps, report as a workflow blocker, do not patch `.github/workflows/*`. |
-| **Wrong window arithmetic / 1h-vs-4h confusion** | **Removed:** 4h interval required; 5 complete Jun–Oct blocks + May ramp; per-coin reporting mandated. |
-| **LFS pointer read as JSON** | **Removed:** campaign must not read `run_manifest.json`. |
-| **Degenerate/invalid EARLY4H-2025H1 evaluation (134634Z)** | **Removed:** root-caused and fixed; corrected eval is valid. |
-| **`liq` estimator-form instability** | **Root-caused (2026-11-12T16:52Z):** the parent log-link GLM is stable except for 1-2 block-3 rows where raw funding/premium/ema_dist leave the training support. **Next step pre-frozen:** bounded-feature GLM (`FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1`). |
-| **Funding percentile warm-up** | **Removed:** `abs_fund_pct` computed from 2025-05-01. |
-
-Do not re-diagnose the dependency wall, re-probe 1h candles, re-run alt-source discovery, reopen sealed verdicts, or re-run the parent GLM.
+| Stale handoff pointing to already-completed robust `liq` campaign | **Removed (this update):** START HERE now targets `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY`; robust campaign recorded as closed with artifacts. |
+| `liq` estimator-form instability / re-diagnosis churn | **Removed:** root-caused and closed by robust eval + terminal structural stop. No further estimator iteration on same panel/splits/labels. |
+| Competing handoff docs | **Removed:** this file sole durable handoff; root redirect files unchanged. |
+| Dependency/install wall for agent loop | **Removed (bounded):** deps importable, named tests green. CI workflow provisioning caveat remains external — report only, do not patch `.github/workflows/*`. |
+| HL 2025H1 observed-label exhaustion | **Structural (terminal for that design):** documented in terminal stop. |
+| Gate 4 external/legal evidence | **External blocker (unchanged):** absent valid RESOLVED_VERIFIED trigger; do not wait/poll. |
+| Verifiably admissible new liquidation-label source | **Open, highest-EIG:** requires bounded discovery + §16 audit evidence. |
 
 ---
 
-## 4. NEXT FOCUS CAMPAIGN — `FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1`
+## 4. NEXT FOCUS CAMPAIGN — `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY`
 
-**Objective:** the first stable, pre-registered test of funding-conditioned features on **observed liquidation intensity** using the **same Poisson/quasi-Poisson log-link GLM** with each continuous feature **bounded to the training range**, because the parent GLM's only failure is block-3 extrapolation (§2). Reuse the **same frozen panel, universe, and splits**. `rv` is already answered; do not re-test it.
+**Objective:** find and evidence-check a **new admissible observed-liquidation data source** that can support a preregistered funding-conditioned liquidation-risk test (P2), or produce a timestamped evidenced clean stop with exact failing minima per source family.
 
-**Status: PREREG ALREADY FROZEN — do not re-freeze, do not edit it.**
-- Prereg: `research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json` (SHA-256 `f06060c7fccb5530629bdd7ff3d7278a22ad7480a12aa86d07c3868ba1b09123`) + `.md`.
-- Experiment ID: `TRACKA-HL-EARLY4H-2025H1-LIQ-GLM-ROBUST`.
-- Panel: `research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet` (SHA-256 `08c60803…`).
+### Step 1 — Bounded discovery/probe (heavy, evidence-backed)
+- Use/extend existing tooling: `scripts/hunt_alternative_liquidation_sources.py`, `scripts/deep_review_alt_sources.py` (and caches) to probe materially distinct unauthenticated source families/methods (per RESEARCH_PROMPT §16 — do not repeat identical failed probes without a new angle).
+- For each candidate record: URL/path, auth/payment requirement, HTTP/result evidence, schema/sample fields if accessible, symbols/coverage window, completeness characterization (census vs sample), license/terms/provenance, and **explicit GO/NO-GO** with failing minima (e.g. `<5 symbols`, `<90d / <3×30d blocks`, no liquidation events, auth/paywalled, unknown license, modeled/proxy only).
+- Persist/refresh evidence artifacts (timestamped): `research_state/data_source_registry_alt_hunt*.json`, `research_state/alt_source_deep_review*.md`, and/or a new `research_state/alt_source_probe_audit_<UTC>.{md,json}` capturing this session's deltas.
 
-### Step 1 — Verify inputs (bounded, no outcome)
-- Confirm panel SHA-256 `08c60803…` and robust prereg SHA-256 `f06060c7…`.
-- Do **not** re-fetch caches, re-window, or recompute the panel. If the panel hash differs, rebuild via `python3 scripts/early4h_campaign.py build` and use the newest panel (deterministic, same inputs).
+### Step 2 — §16 admissibility audit (BEFORE outcomes/prereg)
+- If any candidate passes smoke test, create `research_state/<source>_admissibility_audit_<UTC>.{md,json}` covering: unauthenticated access, provenance/license, coverage (≥5 instruments, ≥3 non-overlapping 30d blocks or ≥1 complete month as applicable), observed-vs-modeled labels, venue consistency, timestamp/clock integrity, joinability to admissible features, and sealed-holdout separation. **No outcome inspection, no threshold shopping.**
+- Only if admissible: freeze a new prereg (`research_state/tracka_prereg_<source>_<UTC>.{md,json}`) before any outcome computation, then build/eval/verdict and update `experiment_frontier.json` + `hypothesis_registry.json` atomically under a **NEW** experiment ID.
 
-### Step 2 — Implement the estimator (new script; do not mutate sealed scripts)
-- Add `scripts/early4h_liq_glm_robust.py`. It must:
-  - Load the frozen robust prereg + corrected panel; assert both SHA-256s.
-  - For `fundingRate`, `abs_fund_pct`, `premium`, `ema_dist`: compute observed `[min, max]`, mean, std on the **train split** (positive `t1_liq` rows only); clip to `[min, max]`; standardize by train mean/std. RV log features unchanged.
-  - Fit Poisson/quasi-Poisson log-link by IRLS on the train split only (no regularization, no model search, no tuning).
-  - Predict on the test blocks, compute QLIKE on positive rows, paired block bootstrap (2000 reps, seed 20261112), Holm across the family.
-  - Emit `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.md` + `.json` with per-model QLIKE, paired `C2_vs_B1` Δ + CI, rel reduction, per-block/per-coin breakdown, Holm p-values, numerical-stability block (max row QLIKE ≤ 1e6), and an explicit **PASS / NOT_MET / INCONCLUSIVE_*** verdict.
-  - Reuse the exact `liq`-glm evaluation conventions (positive `t1_liq` rows only, same splits/universe) so results are comparable.
+### Step 3 — If none admissible (expected unless new evidence appears)
+- Emit/update a single timestamped evidenced summary of probed families with exact failing minima; ensure frontier remains accurate (`FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY` or clean blocked/stop state as warranted by evidence, never fabricated). Stop cleanly — no polling.
 
-### Step 3 — Evaluate and adjudicate
-- **If PASS:** update `experiment_frontier.json` and `hypothesis_registry.json` atomically under the **new** experiment ID; write `research_state/final_confirmatory_verdict_liq_glm_robust_<UTC>.md`. Do not modify sealed records or `run_manifest.json`.
-- **If NOT_MET:** preserve the null honestly, report it, then continue to Step 4.
-- **If INCONCLUSIVE_NUMERICAL_INSTABILITY again:** report the exact per-row QLIKE and the offending rows/coins/blocks, then go to Step 4.
-
-### Step 4 — If Step 3 is negative or inconclusive, immediately continue
-1. **Terminal structural stop** with a timestamped evidenced document stating the exact failing minima (panel, blocks, coins, features, rows, QLIKE) and why no admissible cached-data estimator can resolve it. Do **not** iterate estimator forms without a materially new source or a new preregistered design.
-2. Only if a genuinely new admissible source exists per `RESEARCH_PROMPT.md` §16 may a new campaign be frozen. No polling, no status-only output.
-
-### Step 5 — Close the session
+### Step 4 — Close the session
 - Append a dated `## SESSION LOG` entry to **this file** with the six §6 answers.
-- Update `research_state/experiment_frontier.json` (`resume_triggers`, `next_unfinished_task`, `program_status`).
-- Commit code, manifests, prereg, panel build report, and verdict. **Never** commit raw data or caches.
-- Only if a genuine terminal stop is reached emit a single timestamped evidenced clean-stop artifact and stop.
+- Update `research_state/experiment_frontier.json` if state changed materially.
+- Commit scripts/state/docs/manifests/verdicts as appropriate. **Never** commit raw data/caches or patch `.github/workflows/*`.
 
 ---
 
 ## 5. EXACT START COMMANDS
 
-### 5.0 Preflight (run once; fix, do not stop)
 ```bash
 cd <repo>
+# 1) Bounded preflight (only if hashes suspicious or relevant code changed)
 python3 -c "import numpy,pandas,scipy,pyarrow,requests; print('deps OK')"
 python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit
-python3 -c "import hashlib;print(hashlib.sha256(open('research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet','rb').read()).hexdigest())"
-python3 -c "import hashlib;print(hashlib.sha256(open('research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json','rb').read()).hexdigest())"
+
+# 2) Gate 4 trigger check (must be a real RESOLVED file, not matrix text)
+ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"
+
+# 3) Heavy discovery (inspect CLI/help first; prefer cache-aware bounded runs)
+python3 scripts/hunt_alternative_liquidation_sources.py --help 2>&1 | head -120 || python3 scripts/hunt_alternative_liquidation_sources.py
+python3 scripts/deep_review_alt_sources.py --help 2>&1 | head -120 || true
+
+# 4) After probes: record timestamped evidence in research_state/*alt_source* and update experiment_frontier.json if needed
 ```
-Expected: `deps OK`; `Ran 103 tests OK`; panel `08c60803…`; prereg `f06060c7…`.
 
-### 5.1 Run the campaign (after implementing `scripts/early4h_liq_glm_robust.py`)
-```bash
-python3 scripts/early4h_liq_glm_robust.py
-```
-Expected: an `evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.{md,json}` with a single verdict. Do not re-run the parent `early4h_liq_glm.py`.
+Expected artifacts at session end (depending on outcome): timestamped probe/audit evidence (`*alt_source*` / `*admissibility_audit*`), and/or frozen prereg+eval for a truly admissible new source, plus a `## SESSION LOG` entry here and any necessary frontier update.
 
-### 5.2 Artifacts that must exist at session end
-- `scripts/early4h_liq_glm_robust.py`
-- `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.md` + `.json`
-- updated `research_state/experiment_frontier.json` and a `## SESSION LOG` entry here
-- if a terminal stop: a single timestamped evidenced structural-blocker document
-
-Known pre-existing failures at HEAD (do **not** chase them): `tests.test_tracka_hardening_099` drift-bound (`research_state` root md+json count), probe-family inventory (newer `*probe_*.json` artifacts), and the CLI resume-gate test. They predate this campaign and are unrelated; the two named test modules are the required green gate.
+Known pre-existing unrelated failures (do **not** chase): `tests.test_tracka_hardening_099` drift-bound and CLI resume-gate test.
 
 ---
 
@@ -161,34 +124,39 @@ Known pre-existing failures at HEAD (do **not** chase them): `tests.test_tracka_
 - No Binance/2024 conflation with Hyperliquid windows; no venue mixing in one panel.
 - No modeled/proxy/synthetic liquidation labels presented as observed.
 - No agent-set `RESOLVED_VERIFIED`/`fabricated=true`; no Gate 4 bypass; no whole-tree grep for the trigger string.
-- No reopening/relitigating/retuning sealed verdicts (Track B/C, FCLR-*, expansion robustness, H2, `rv`).
+- No reopening/relitigating/retuning sealed verdicts (Track B/C, FCLR-*, expansion/volatility campaigns, H2, early4h `rv`, early4h `liq` parent/robust).
 - No polling/waiting; no status-only sessions; no redundant controllers, schedulers, wrappers, or polling loops.
+- **Do not** iterate estimator forms on the sealed 2025H1 `liq` panel/splits/labels (terminal stop in force).
 - **Do not** re-probe 1h candles to conclude "no early data" — use `4h`.
-- **Do not** re-run the parent `liq` GLM or re-diagnose its block-3 instability; it is already root-caused.
 - **Do not** create a successor handoff or a second campaign doc. Update this file.
-- **Do not** commit raw data or caches.
+- **Do not** commit raw data/caches or patch `.github/workflows/*`.
 
 ---
 
 ## 8. KEY REFERENCES
 
-- `RESEARCH_PROMPT.md` — §5 (source acceptance), §15 (outcome families / honest label gate), §16 (adaptive feasibility), §17 (multiplicity/promotion), §18 (integrity/deterministic resume), §19 (session DoD), §20 (status contract).
-- `research_state/research_protocol_fclr010.md` — frozen Track A protocol, model forms, gate.
-- `scripts/early4h_campaign.py` — sealed campaign (build/eval); do not mutate its model form.
-- `scripts/early4h_liq_glm.py` — parent GLM estimator (completed, `INCONCLUSIVE_NUMERICAL_INSTABILITY`).
-- `research_state/tracka_liq_glm_step5_power_coverage_20261112T165210Z.md` — Step 5 audit and robust-campaign rationale.
-- `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-20261112T164926Z.md` — parent GLM result.
-- `research_state/evaluation_summary_EARLY4H-2025H1-20261112T145537Z.md` — corrected sealed eval (`rv` NOT_MET, parent `liq` inconclusive).
-- `scripts/tracka_hl_fetch_candles_early_4h.py`, `scripts/tracka_hl_expansion_funding_paginate.py` — acquisition templates.
-- `scripts/create_forward_prereg.py`, `scripts/fclr010_harness.py` — prereg/harness templates (prereg helper reads the LFS-pointer manifest; the robust prereg is already frozen).
-- Caches: `research_state/data_cache/ironflow_events/`, `research_state/data_cache/hyperliquid_funding_early/`, `research_state/data_cache/hyperliquid_candles_4h_early/`.
-- State: `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json`.
+- `RESEARCH_PROMPT.md` — §5 (source acceptance), §15 (honest label gate), §16 (adaptive feasibility), §17 (multiplicity/promotion), §18 (integrity), §19 (session DoD), §20 (status contract).
+- `research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md` — Track A HL 2025H1 observed-label `liq` closed.
+- `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-20261112T170457Z.{md,json}` — robust `liq` null.
+- `research_state/experiment_frontier.json`, `research_state/hypothesis_registry.json` — current state/resume triggers.
+- `scripts/hunt_alternative_liquidation_sources.py`, `scripts/deep_review_alt_sources.py` — discovery/probe tooling.
+- Caches/evidence: `research_state/data_source_registry_alt_hunt.json`, `research_state/alt_source_deep_review_latest.md`, `research_state/url_probe_cache.json`, `research_state/hf_search_cache.json`.
+- Protocol/templates: `research_state/research_protocol_fclr010.md`, `scripts/create_forward_prereg.py`, `scripts/fclr010_harness.py` (note LFS manifest hazard).
 
 ---
 
 ## 9. SESSION LOG (append-only; newest first)
 
 <!-- Format: ## <UTC> — <agent/session id> — <one-line outcome> ... -->
+
+## 2026-11-12T17:13:43Z — Handoff refreshed: LIQ-GLM-ROBUST closed; next campaign set to bounded alternative liquidation-label source discovery
+
+- **Evidence supported/contradicted/unknown:** Supported — robust `liq` campaign completed NOT_MET with terminal structural stop (artifacts present, hashes verifiable) and frontier rank-0 is `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY`. Contradicted — prior handoff START HERE still pointed to already-executed LIQ-GLM-ROBUST implementation. Unknown — existence of any new admissible unauthenticated observed-liquidation source satisfying §5/§16 minima.
+- **Strongest alternative explanation:** No admissible external observed-label source exists within free/unauthenticated constraints; discovery will produce evidenced failing minima only.
+- **Dominant limitation:** External data availability/provenance/licensing and label-coverage minima (≥5 instruments, ≥3×30d or ≥1 complete month, observed labels) dominate; HL 2025H1 observed-label path is structurally exhausted.
+- **Falsifying next test:** Identification of a concrete source passing §16 admissibility audit, followed by a frozen prereg and out-of-sample evaluation showing funding-conditioned improvement on observed liquidation risk.
+- **Highest expected info gain per free compute:** Bounded `scripts/hunt_alternative_liquidation_sources.py` / `scripts/deep_review_alt_sources.py` discovery with timestamped GO/NO-GO evidence and, if any candidate passes smoke test, immediate §16 admissibility audit before outcomes.
+- **Artifacts/commands:** Updated `AGENT_HANDOFF.md` (this file) to set START HERE/campaign/bottlenecks to `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY`; verified presence of `evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-20261112T170457Z.{md,json}` and `terminal_structural_stop_liq_glm_robust_20261112T170457Z.md`. No sealed verdicts modified; no raw data committed; no workflow changes.
 
 ## 2026-11-12T17:04:57Z — Executed `FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1`; bounded-feature GLM numerically STABLE (max row QLIKE 319 ≪ 1e6) but gate FAILS (CI upper +0.85, Holm not rejected) → NOT_MET; terminal structural stop emitted; Track A observed-label `liq` on HL 2025H1 CLOSED
 
