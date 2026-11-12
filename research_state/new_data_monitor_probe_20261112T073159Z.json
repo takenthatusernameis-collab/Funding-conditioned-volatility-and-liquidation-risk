@@ -1,0 +1,43 @@
+{
+  "timestamp_utc": "2026-11-12T07:31:59Z",
+  "probe_type": "bounded_new_data_monitor_probe",
+  "gate4_trigger": {
+    "checked_path": "research_state/fclr016_local_audit/*RESOLVED*",
+    "resolved_present": false,
+    "status": "ABSENT"
+  },
+  "ironflow_hf": {
+    "endpoint": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations",
+    "lastModified": "2026-11-07T10:18:25.000Z",
+    "sha": "65bad6c39c63ee24eae920753f05303020e549fa",
+    "siblings_count": 38,
+    "latest_event_month_observed": "2026-10",
+    "post_2026_10_31_observed_labels_verified": false
+  },
+  "hyperliquid_2026_11_plus": {
+    "start": "2026-11-01T00:00:00Z",
+    "btc_1d_candles_count": 12,
+    "btc_1d_first_ms": 1793491200000,
+    "btc_1d_last_ms": 1794441600000,
+    "btc_funding_count": 272,
+    "btc_funding_first_ms": 1793491200061,
+    "btc_funding_last_ms": 1794466800018,
+    "approx_span_days": 12.0,
+    "threshold_days_reprobe": 100,
+    "min_days_3x30d_blocks": 90,
+    "eligible_now": false
+  },
+  "sealed_prior": {
+    "metpie_2025Q2_admissibility": "INADMISSIBLE",
+    "tracka_early_4h": "INCONCLUSIVE_PILOT_SHORTFALL"
+  },
+  "new_claim_worthy_experiment_eligible_now": false,
+  "ineligibility_reasons": [
+    "No Gate 4 fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (RESOLVED_VERIFIED, fabricated=false, human/legal attestation)",
+    "No verified post-2026-10-31 observed liquidation labels (ironflow lastModified 2026-11-07T10:18:25Z, latest events 2026-10)",
+    "HL 2026-11+ depth ~12.0 days < 100-day reprobe threshold and < 90 days for >=3x30d blocks",
+    "metpie 2025-03-22..2025-05-25 sealed INADMISSIBLE (block-feasibility ~65d < 90d)",
+    "All cached-data/prior-tested designs sealed/exhausted"
+  ],
+  "recommendation": "No polling. Reprobe only if plausibly eligible: HL >=100d AND verifiable post-2026-10-31 observed labels, or other evidenced new admissible source per RESEARCH_PROMPT.md §16."
+}

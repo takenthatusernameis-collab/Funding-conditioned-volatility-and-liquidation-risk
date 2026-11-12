@@ -1,16 +1,16 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized)
-**Handoff timestamp (UTC):** 2026-11-12T07:30:28Z (supersedes 2026-11-12T07:00:00Z; this file is the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T07:31:59Z (supersedes 2026-11-12T07:30:28Z; this file is the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Progress snapshot (this session — heavy work completed)
 
-- **Gate 4 Branch 1 trigger:** ABSENT (rechecked 2026-11-12T07:30:28Z; no `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_*` with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). **Do not wait/poll.** Branch 1 executes only on a valid RESOLVED trigger.
-- **Bounded new-data discovery/monitor probes EXECUTED (2026-11-12T07:30:28Z)** — evidence: `research_state/new_data_monitor_probe_20261112T073028Z.json` (HF API response hash `8ed0a63b94bdd4b8444690f1f3b77e25b04cfe8250e7e41495680b04b76e6786`, live HL info probes).
-  - **ironflow/hyperliquid-liquidations:** `lastModified=2026-11-07T10:18:25.000Z`, latest event file `data/events/2026-10.parquet`, no post-2026-10 event file, no 2026-11 file. **No verified post-2026-10-31 observed liquidation labels.**
-  - **Hyperliquid 2026-11+ depth (from 2026-11-01):** BTC 1d candles 12 (2026-11-01..2026-11-12, span ~12.0d inclusive), BTC funding 272 rows (~11.29d), sample 4h candles 68 each (BTC/ETH/SOL/HYPE/XRP). **Far below 100-day reprobe threshold and << 90 days required for ≥3×30d test blocks.**
-  - **Eligibility now:** `new_claim_worthy_experiment_eligible_now=false`. Documented ineligibility reasons recorded in artifact.
-- **Prior sealed determinations unchanged:** metpie 2025-03-22..2025-05-25 §16 audit = INADMISSIBLE (block-feasibility shortfall ~65d < 90d for ≥3×30d test blocks), artifacts `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}` (sealed). TRACKA-HL-EARLY-4H-20261112T054737Z = INCONCLUSIVE_PILOT_SHORTFALL (sealed).
+- **Gate 4 Branch 1 trigger:** ABSENT (rechecked 2026-11-12T07:31:59Z; no `research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_*` with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). **Do not wait/poll.** Branch 1 executes only on a valid RESOLVED trigger.
+- **Bounded new-data monitor probe EXECUTED (2026-11-12T07:31:59Z)** — evidence: `research_state/new_data_monitor_probe_20261112T073159Z.{md,json}` (live HF API + HL info probes).
+  - **ironflow/hyperliquid-liquidations:** `lastModified=2026-11-07T10:18:25.000Z`, `sha=65bad6c39c63ee24eae920753f05303020e549fa`, 38 siblings; latest event month `2026-10` (no post-2026-10-31 / no 2026-11 event file). **No verified post-2026-10-31 observed liquidation labels.**
+  - **Hyperliquid 2026-11+ depth (from 2026-11-01):** BTC 1d candles 12 (2026-11-01..2026-11-12, ~12.0d), BTC funding 272 rows (~11.29d). **Far below 100-day reprobe threshold and << 90 days required for ≥3×30d test blocks.**
+  - **Eligibility now:** `new_claim_worthy_experiment_eligible_now=false` (evidenced). No polling.
+- **Prior sealed determinations unchanged:** metpie 2025-03-22..2025-05-25 §16 audit = INADMISSIBLE (block-feasibility shortfall ~65d < 90d for ≥3×30d test blocks), `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}` (sealed). TRACKA-HL-EARLY-4H-20261112T054737Z = INCONCLUSIVE_PILOT_SHORTFALL (sealed).
 
 ## Immediate task (heavy, in-session now)
 
@@ -24,10 +24,10 @@ Do not produce a status-only response. Every session must deliver concrete heavy
 
 1. Gate 4 trigger check — absent; execute Branch 1 only on valid RESOLVED trigger.
 2. §16 admissibility audits of any genuinely new candidate source/window — emit timestamped determination+artifacts before any prereg/eval (metpie 2025Q2 already INADMISSIBLE/sealed).
-3. Bounded monitor reprobes (HL 2026-11+ depth, ironflow HF extension beyond 2026-10-31, or other evidenced sources) with timestamped evidence when plausibly eligible; otherwise documented ineligibility + clean stop (this session: probe `new_data_monitor_probe_20261112T073028Z.json`, ineligible).
+3. Bounded monitor reprobes (HL 2026-11+ depth, ironflow HF extension beyond 2026-10-31, or other evidenced sources) with timestamped evidence when plausibly eligible; otherwise documented ineligibility + clean stop (this session: `research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`, ineligible).
 4. State hygiene: keep this file the single durable root handoff; keep redirects aligned. Preserve all sealed records/verdicts/manifests exactly as immutable.
 
-## BOTTLENECKS — STATUS & REQUIRED ACTION (2026-11-12T07:30:28Z)
+## BOTTLENECKS — STATUS & REQUIRED ACTION (2026-11-12T07:31:59Z)
 
 | Bottleneck | Status | Removal/action |
 |---|---|---|
@@ -35,7 +35,7 @@ Do not produce a status-only response. Every session must deliver concrete heavy
 | 4h early-window liquidation forecast (TRACKA-HL-EARLY-4H-20261112T054737Z) | COMPLETED — INCONCLUSIVE_PILOT_SHORTFALL | Sealed. Do not reopen/retune. |
 | Cached-data exhaustion on prior tested designs (1h/24h/4h/volatility/expansion/alt-vol) | EXHAUSTED/SEALED | No relitigation. Only new pre-specified admissible designs on genuinely new/admissible data/windows. |
 | metpie 2025-03-22..2025-05-25 admissibility | RESOLVED — INADMISSIBLE | Block-feasibility shortfall (~65d < 90d). `admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}`. Sealed. |
-| Post-2026-10-31 HL window too short (~12.0d as of probe) / no verified post-2026-10-31 observed labels | OPEN, **not eligible now** (evidenced) | Reprobe only when plausibly eligible (HL ≥100d AND verifiable post-2026-10-31 observed labels). Latest probe: `new_data_monitor_probe_20261112T073028Z.json`. No polling. |
+| Post-2026-10-31 HL window too short (~12.0d) / no verified post-2026-10-31 observed labels | OPEN, **not eligible now** (evidenced) | Reprobe only when plausibly eligible (HL ≥100d AND verifiable post-2026-10-31 observed labels). Latest: `new_data_monitor_probe_20261112T073159Z.{md,json}`. No polling. |
 | No untested admissible cached-data experiment | EXHAUSTED | `new_data_admissibility_audit_20261112T042738Z.md`. New claim requires NEW admissible source/window per §16. |
 
 ## COMPLETED / SEALED — DO NOT REOPEN, RETUNE, OR RELITIGATE
@@ -58,7 +58,8 @@ Do not produce a status-only response. Every session must deliver concrete heavy
 
 ## KEY REFERENCES
 
-- This-session probe (evidence): `research_state/new_data_monitor_probe_20261112T073028Z.json`.
+- This-session probe (evidence): `research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`.
+- Prior probe: `research_state/new_data_monitor_probe_20261112T073028Z.json`.
 - Metpie §16 audit (sealed, INADMISSIBLE): `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}`.
 - Early-4h verdict (sealed): `research_state/evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.{md,json}`.
 - External/admissibility probes: `research_state/new_data_external_probe_audit_20261112T044425Z.{md,json}`, `research_state/new_data_admissibility_audit_20261112T042738Z.md`.
