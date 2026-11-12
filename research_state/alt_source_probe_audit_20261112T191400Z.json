@@ -1,0 +1,124 @@
+{
+  "audit_id": "alt_source_probe_audit_20261112T191400Z",
+  "timestamp_utc": "2026-11-12T19:14:00Z",
+  "campaign": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
+  "gate4": {
+    "check_command": "ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo NO_VALID_GATE4_TRIGGER",
+    "result": "NO_VALID_GATE4_TRIGGER",
+    "branch1_eligible": false
+  },
+  "commands": [
+    "python3 scripts/hunt_alternative_liquidation_sources.py",
+    "python3 scripts/deep_review_alt_sources.py",
+    "unauthenticated HF API metadata probes for 11 candidate datasets (2026-11-12T19:14Z)"
+  ],
+  "artifacts_inspected": [
+    "AGENT_HANDOFF.md",
+    "research_state/experiment_frontier.json",
+    "research_state/data_source_registry_alt_hunt.json",
+    "research_state/alt_source_deep_review_latest.md",
+    "research_state/url_probe_cache.json",
+    "research_state/hf_search_cache.json",
+    "research_state/next_data_discovery_plan.md",
+    "research_state/alt_source_scan_latest.json"
+  ],
+  "artifacts_written": [
+    "research_state/alt_source_probe_audit_20261112T191400Z.md",
+    "research_state/alt_source_probe_audit_20261112T191400Z.json",
+    "research_state/alt_source_scan_latest.json",
+    "research_state/alt_source_deep_review_latest.md"
+  ],
+  "acceptance_minima": {
+    "min_instruments": 5,
+    "coverage": ">=1 complete month OR >=3 non-overlapping 30-day blocks",
+    "unauthenticated": true,
+    "provenance_license_documented": true,
+    "observed_labels_only": true,
+    "venue_consistent": true,
+    "no_binance_2024_hl_conflation": true,
+    "section16_audit_before_prereg_outcomes": true
+  },
+  "candidates": [
+    {
+      "name": "ironflow/hyperliquid-liquidations",
+      "venue": "Hyperliquid",
+      "evidence": "HF metadata: CC BY 4.0, lastModified 2026-11-07T10:18:25Z, events/fills 2025-05..2026-10 only, no 2026-11+",
+      "failing_minima": ["no verified post-2026-10-31 observed-label extension", "HL 2025H1 observed-label design already closed by terminal stop"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "ochinimus/crypto-liquidation-ticks",
+      "venue": "Bybit/Binance/OKX perps",
+      "evidence": "HF metadata: CC BY 4.0, 1,442,664 rows, 800 symbols, 2026-07-08T16:42:32Z..2026-08-06T23:59:42Z (~29.3 days)",
+      "failing_minima": ["<1 complete month", "<3 non-overlapping 30-day blocks", "venue-consistency/joinability unproven for HL P2 design"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "nick128373/crypto-liquidation-ticks",
+      "venue": "Bybit/Binance/OKX perps",
+      "evidence": "HF metadata mirrors ochinimus snapshot window/files",
+      "failing_minima": ["duplicate snapshot", "<1 complete month", "<3 non-overlapping 30-day blocks"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "Chainticks/defi-liquidations",
+      "venue": "DeFi lending (Aave/Compound/Venus/Morpho, multi-chain)",
+      "evidence": "HF metadata: CC BY 4.0, on-chain lending liquidation events parquet by date",
+      "failing_minima": ["mechanism/venue mismatch vs perp funding-conditioned design", "joinability/admissibility to target panel not evidenced"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "craftify2221/hyperliquid-builder-liquidation-panel",
+      "venue": "Hyperliquid",
+      "evidence": "HF metadata: ODC-BY, account-day/builder-interface observational panel artifacts",
+      "failing_minima": ["observed liquidation-event census/label semantics not evidenced", "coverage/block structure not evidenced as admissible without §16 audit"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "PhysiAI/Bitcoin-Liquidation-Heatmapping*",
+      "venue": "unspecified/BTC heatmap",
+      "evidence": "HF metadata: siblings README/.gitattributes only, no data files evidenced",
+      "failing_minima": ["no evidenced observed liquidation-label dataset", "instrument/coverage minima not met"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "pCwOrM/werracle-oev-liquidation-dataset-2026",
+      "venue": "DeFi/Base L2 OEV-liquidation records",
+      "evidence": "HF metadata: 513 liquidations / 105 txs",
+      "failing_minima": ["coverage far below minima", "mechanism mismatch"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "tanod/base-lending-liquidations",
+      "venue": "Base lending protocols",
+      "evidence": "HF metadata: rolling ~30-day aggregate census copy 2026-10-11..2026-11-09",
+      "failing_minima": ["aggregate only, event-level observed labels not evidenced", "coverage/block minima not met", "mechanism mismatch"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "carrierone/verilex-defi-liquidations",
+      "venue": "DeFi/API product",
+      "evidence": "HF metadata: README-only siblings, API-oriented",
+      "failing_minima": ["no unauthenticated historical dataset evidenced", "coverage/label minima unmet"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "Gopher-Lab/bankless_Hasu__Hart_on_Oval__The_Recapturing_of_Billions_in_DeFi_Liquidations",
+      "venue": "n/a",
+      "evidence": "HF metadata: n<1K textual/transcript dataset (2024)",
+      "failing_minima": ["not an observed liquidation event panel", "all minima unmet"],
+      "decision": "NO-GO"
+    },
+    {
+      "name": "exchange_public_api_archive_family",
+      "venue": "Hyperliquid/Binance/Bybit/OKX/Deribit/misc",
+      "evidence": "url_probe_cache + deep_review probes: 401/403/404/405/auth-missing/DNS/lib-only/no liquidation census path",
+      "failing_minima": ["no unauthenticated admissible observed liquidation-label dataset evidenced at required minima"],
+      "decision": "NO-GO"
+    }
+  ],
+  "new_admissible_source_found": false,
+  "section16_audit_created": false,
+  "outcome": "CLEAN_STOP_NO_NEW_ADMISSIBLE_SOURCE",
+  "next_action": "Only reprobe when a materially new source family/endpoint/file or verified post-2026-10-31 label extension appears; otherwise Gate 4 Branch 1 only on valid RESOLVED_VERIFIED trigger."
+}
