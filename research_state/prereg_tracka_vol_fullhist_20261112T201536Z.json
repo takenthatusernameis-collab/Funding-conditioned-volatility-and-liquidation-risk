@@ -1,0 +1,214 @@
+{
+  "experiment_id": "TRACKA-VOL-FULLHIST-20261112T201536Z",
+  "campaign": "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z",
+  "arm": "A",
+  "track": "A_volatility",
+  "preregistered_utc": "2026-11-12T20:15:36Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "pre_registered_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "priority": "P1",
+  "hypothesis_id": "H_tracka_hl_funding_conditioned_volatility_fullhistory",
+  "hypothesis_type": "primary_tracka_volatility",
+  "claim": "On a never-before-opened 11-month Hyperliquid window, funding-conditioned features (C2) improve out-of-sample forecasting of forward realized variance vs a realized-volatility-only baseline (B1) on the primary 24h horizon, with pre-registered materiality, uncertainty, and multiplicity conditions.",
+  "why_this_is_new": {
+    "problem_with_prior_work": "Every prior volatility verdict in this repository (TRACKA-VOL-20261111T234918Z NOT_MET, TRACKA-ALT-VOL-20261112T020322Z NOT_MET) was computed on the single 6-month window 2026-05-01..2026-10-31, because the only admissible mark-price cache covered exactly those months. FCLR-006/007 were additionally underpowered (<3 blocks).",
+    "what_changed": "ironflow/hyperliquid-candles-1h (CC BY 4.0, unauthenticated HF bulk parquet, verified 2026-11-12) supplies complete hourly candles for 2025-05-25..2026-10-31 across 342 markets. That makes 2025-06-01..2026-01-17 a never-opened holdout for the volatility target and raises per-block observations to ~6,960 (vs 6,480 in the closed design).",
+    "not_a_relitigation": "The sealed 2026-05..2026-10 volatility verdicts are not modified, re-scored, or re-labelled. This is a new window (new forward blocks) under 17 of RESEARCH_PROMPT, with the identical metric/family so the null can be tightened or broken on fresh evidence.",
+    "no_label_use": "Arm A consumes no liquidation labels at all. P2 outcomes cannot leak into P1."
+  },
+  "venue": "hyperliquid_perpetuals_native_perps_only",
+  "data_sources": {
+    "candles_1h": {
+      "dataset": "ironflow/hyperliquid-candles-1h",
+      "license": "CC-BY-4.0",
+      "access": "unauthenticated HuggingFace bulk parquet (resolve/main/data/YYYY-MM.parquet)",
+      "requester_pays": false,
+      "api_key_required": false,
+      "signup_required": false,
+      "columns_used": ["timestamp", "market", "close"],
+      "months": ["2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+      "coverage_verified_utc": "2026-11-12T20:10:00Z",
+      "coverage_evidence": "Per-coin row counts equal the exact hourly grid for every month 2025-06..2026-04 (row/coin min == days_in_month*24); 2025-05 is a partial month from 2025-05-25 14:00Z and is used only for the 168h warm-up."
+    },
+    "funding": {
+      "dataset": "ironflow/hyperliquid-funding",
+      "license": "CC-BY-4.0",
+      "access": "unauthenticated HuggingFace bulk parquet (resolve/main/data/YYYY-MM.parquet)",
+      "requester_pays": false,
+      "api_key_required": false,
+      "columns_used": ["timestamp", "market", "funding_rate", "premium"],
+      "months": ["2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+      "coverage_verified_utc": "2026-11-12T20:10:00Z",
+      "coverage_evidence": "744/720/744/720 hourly settlements per coin per month matching the candle grid exactly; funding_rate and premium non-null."
+    },
+    "open_interest_secondary_only": {
+      "dataset": "ironflow/hyperliquid-open-interest",
+      "license": "CC-BY-4.0",
+      "access": "unauthenticated HuggingFace bulk parquet (resolve/main/data/YYYY-MM.parquet)",
+      "columns_used": ["timestamp", "market", "open_interest_usd", "mark_price"],
+      "role": "secondary feature family only (B2/C3); never used by the primary contrast C2_vs_B1",
+      "coverage_verified_utc": "2026-11-12T20:10:00Z"
+    },
+    "not_used": [
+      "ironflow/hyperliquid-liquidations (P2 labels are out of scope for Arm A)",
+      "research_state/data_cache/hyperliquid_candles/* (2026-05..2026-10 only; excluded to prevent sealed-holdout overlap)",
+      "Any Binance/2024 source (RESEARCH_PROMPT 1)"
+    ]
+  },
+  "acquisition": {
+    "tool": "scripts/fclr_ironflow_bulk.py",
+    "cache_root": "research_state/data_cache/ironflow_bulk/<dataset>/<YYYY-MM>.parquet",
+    "provenance_sidecars": ["<file>.sha256", "<file>.accessed.json"],
+    "policy": "cache-first; a verified object (sha256 sidecar match + schema pass) is never re-downloaded; fail closed on schema drift; bounded 3-attempt exponential backoff; no credentials; no workflow edits",
+    "baseline_manifest": "research_state/ironflow_bulk_manifest.json"
+  },
+  "universe": {
+    "selection_rule": "coverage-only, frozen ex ante, computed before any outcome: native perps (market endswith '-PERP' and contains no ':') with complete hourly candle AND funding AND open-interest coverage for 2025-05-25..2026-04-30.",
+    "coins": ["BTC", "ETH", "SOL", "HYPE", "ENA", "WLD", "FARTCOIN", "TRUMP", "NEAR", "XRP"],
+    "n_coins": 10,
+    "min_instruments_required": 5,
+    "selection_used_outcomes": false,
+    "selection_used_liquidation_labels": false,
+    "note": "This is a different universe arm from the closed 9-coin panels (BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI) and from the 8-coin expansion set (ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH). No coin appears in more than one of those sealed sets except BTC/ETH/SOL/XRP/NEAR, which are re-used only in a new window, never in a sealed window."
+  },
+  "unit": "coin x 1h decision point (hour start, UTC)",
+  "targets": [
+    {
+      "id": "T24",
+      "column": "target_rv24h_fwd",
+      "role": "primary",
+      "definition": "RV_{t+1..t+24} = sum_{i=1..24} r_{t+i}^2, r = log(close_{t+i}/close_{t+i-1}), computed only from closes strictly after the decision point t. Rows whose 24h label window crosses a block end are dropped.",
+      "metric": "QLIKE"
+    },
+    {
+      "id": "T6",
+      "column": "target_rv6h_fwd",
+      "role": "secondary",
+      "definition": "Same construction with horizon 6h.",
+      "metric": "QLIKE"
+    },
+    {
+      "id": "T72",
+      "column": "target_rv72h_fwd",
+      "role": "secondary",
+      "definition": "Same construction with horizon 72h.",
+      "metric": "QLIKE"
+    },
+    {
+      "id": "T168",
+      "column": "target_rv168h_fwd",
+      "role": "secondary",
+      "definition": "Same construction with horizon 168h.",
+      "metric": "QLIKE"
+    }
+  ],
+  "features_causal": {
+    "rule": "Every feature at decision point t uses only closes/funding/OI with timestamp <= t. No forward fill of the target into features. No global normalization: all scaling statistics come from the train split only.",
+    "rv1h": "sum of squared trailing 1h log returns over the previous 1h",
+    "rv24h": "sum of squared trailing 1h log returns over the previous 24h",
+    "rv168h": "sum of squared trailing 1h log returns over the previous 168h",
+    "funding_rate": "latest settled fundingRate at or before t (as-of merge, backward, hour-floored)",
+    "abs_funding": "abs(funding_rate)",
+    "premium": "latest settled premium at or before t (as-of merge, backward, hour-floored)",
+    "ema_dist": "close_t / EMA24(close)_t - 1, EMA span 24 computed causally on trailing closes",
+    "log_open_interest": "log(open_interest_usd_t + 1) (secondary family only)",
+    "dlog_open_interest_24h": "log(open_interest_usd_t + 1) - log(open_interest_usd_{t-24h} + 1) (secondary family only)",
+    "warmup": "first usable row per coin is the first hour with a complete 168h trailing RV, i.e. 2025-06-01T14:00Z."
+  },
+  "models": {
+    "B1": {"form": "OLS on log(target + 1e-12)", "features": ["rv1h", "rv24h", "rv168h"], "fit": "train split only", "regularization": "none"},
+    "C1": {"form": "OLS on log(target + 1e-12)", "features": ["rv1h", "rv24h", "rv168h", "funding_rate", "abs_funding"], "fit": "train split only", "regularization": "none"},
+    "C2": {"form": "OLS on log(target + 1e-12)", "features": ["rv1h", "rv24h", "rv168h", "funding_rate", "abs_funding", "premium", "ema_dist"], "fit": "train split only", "regularization": "none"},
+    "B2": {"form": "OLS on log(target + 1e-12)", "features": ["rv1h", "rv24h", "rv168h", "log_open_interest", "dlog_open_interest_24h"], "role": "secondary family only", "fit": "train split only"},
+    "C3": {"form": "OLS on log(target + 1e-12)", "features": ["rv1h", "rv24h", "rv168h", "funding_rate", "abs_funding", "premium", "ema_dist", "log_open_interest", "dlog_open_interest_24h"], "role": "secondary family only", "fit": "train split only"}
+  },
+  "preprocessing": {
+    "epsilon": 1e-12,
+    "standardization": "predictor columns standardized with train-split mean/std only; zero-variance columns are dropped and logged in the build report",
+    "prediction_transform": "forecast = exp(X beta_hat); clipped to a strictly positive floor of 1e-12",
+    "missingness": "rows with any non-finite feature or target are dropped; drop counts per coin/block are reported",
+    "no_tuning": "no model search, no hyperparameter search, no threshold search"
+  },
+  "primary_contrast": "C2_vs_B1",
+  "primary_metric": "QLIKE",
+  "metric_definition": "QLIKE(y, yhat) = mean(y/yhat - log(y/yhat) - 1) over valid pairs with y>0 and yhat>0; lower is better.",
+  "materiality_gate": {
+    "min_relative_reduction_pct": 2.0,
+    "relative_reduction_definition": "100 * (QLIKE_B1 - QLIKE_C2) / QLIKE_B1 on pooled paired test observations; positive favors C2",
+    "ci_excludes_zero_in_favor_of_C2": true,
+    "ci_method": "circular block bootstrap over time, block length 168h, 2000 reps, seed 20261112",
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3,
+    "holm_family": "primary",
+    "alpha": 0.05,
+    "all_required": true
+  },
+  "multiplicity": {
+    "primary_family_size": 12,
+    "primary_family_definition": "4 horizons (6h, 24h, 72h, 168h) x 3 contrasts (C2_vs_B1, C1_vs_B1, C2_vs_C1); Holm across all 12; every cell reported including failures.",
+    "secondary_family_size": 8,
+    "secondary_family_definition": "4 horizons x 2 contrasts (B2_vs_B1, C3_vs_B1) on the open-interest features; Holm within the secondary family only; explicitly NOT promotable and NOT pooled with the primary family.",
+    "promotion_note": "No secondary-family result may be used to promote, rescue, or re-label any primary result (RESEARCH_PROMPT 17)."
+  },
+  "splits": {
+    "method": "chronological, coin-pooled; 7-calendar-day embargo between train and each test block and between consecutive test blocks; no random split",
+    "train": {"start": "2025-06-02T00:00:00Z", "end": "2025-09-30T23:00:00Z"},
+    "validation": {"start": "2025-10-01T00:00:00Z", "end": "2025-10-07T23:00:00Z", "role": "embargo only, never scored"},
+    "test_blocks": [
+      {"block": 0, "start": "2025-10-08T00:00:00Z", "end": "2025-11-06T23:00:00Z"},
+      {"block": 1, "start": "2025-11-13T00:00:00Z", "end": "2025-12-12T23:00:00Z"},
+      {"block": 2, "start": "2025-12-19T00:00:00Z", "end": "2026-01-17T23:00:00Z"}
+    ],
+    "n_test_blocks": 3,
+    "block_end_rule": "Decision points whose label horizon extends past the block end are dropped (last 24h of each block for the primary target, proportionally for shorter horizons). This guarantees no scoring row reads the reserved region.",
+    "reserved_untouched": {
+      "start": "2026-01-18T00:00:00Z",
+      "end": "2026-04-30T23:00:00Z",
+      "rule": "Never opened, never scored, never used for any decision in this campaign. A future campaign may only open it with a NEW preregistration frozen before any read."
+    },
+    "excluded_from_all_purposes": {
+      "start": "2026-05-01T00:00:00Z",
+      "end": "2026-10-31T23:59:59Z",
+      "reason": "Sealed holdout of the closed volatility designs (TRACKA-VOL-20261111T234918Z, TRACKA-ALT-VOL-20261112T020322Z). Must not be read for any purpose in this campaign."
+    },
+    "expected_test_rows_per_block": "~6,960 (10 coins x 696 decision points after the 24h block-end drop); ~20,880 total",
+    "power_note": "The closed 6-month design produced a mean-diff 95% CI half-width of ~0.0065 on a QLIKE of ~6.5 (19,233 obs). With ~20,880 obs on fresh blocks the half-width is comparable, i.e. ~20x tighter than the 2% materiality floor (0.13 absolute). The test is adequately powered to either break or tighten the null."
+  },
+  "promotion_criteria_to_report": [
+    "1. data and label gates pass (coverage + provenance + schema)",
+    "2. frozen out-of-sample comparison beats the declared RV-only baseline on the primary target",
+    "3. materiality floor (>=2% rel QLIKE reduction) and multiplicity/uncertainty conditions pass",
+    "4. skill is not dominated by one coin, one block, or one brief crisis (report LOIO, per-coin, per-block)",
+    "5. calibration and subgroup diagnostics acceptable",
+    "6. independent recomputation from stored input hashes reproduces the headline within tolerance",
+    "7. red-team and leakage audit shows no unresolved issue capable of reversing the conclusion"
+  ],
+  "decision_rule": {
+    "PROMOTE_CANDIDATE": "all primary-gate conditions pass AND all 7 promotion criteria report clean; status FORECAST_GATE_PASSED and only then may an overlay be considered",
+    "NOT_MET": "primary gate fails; preserve the null and record exact failing minima",
+    "INCONCLUSIVE": "a gate cannot be evaluated (e.g. <3 blocks with data, numerical instability); root-cause it, do not re-tune"
+  },
+  "forbidden": [
+    "Reading or scoring 2026-05-01..2026-10-31 for any purpose (sealed holdout)",
+    "Reading or scoring 2026-01-18..2026-04-30 (reserved untouched region)",
+    "Reading ironflow liquidation labels in Arm A",
+    "Any Binance/2024 data, or mixing venues in one panel",
+    "Any modeled/proxy/synthetic volatility label",
+    "Threshold, model, feature, or split tuning against test blocks",
+    "Re-scoring, re-weighting, or re-labelling the sealed 2026-05..2026-10 volatility verdicts",
+    "Using a secondary-family (open-interest) result to promote any claim",
+    "Agent-set RESOLVED_VERIFIED or fabricated=true; any Gate 4 bypass",
+    "Editing .github/workflows/*",
+    "Committing raw bulk parquet objects or caches"
+  ],
+  "artifacts_to_emit": [
+    "research_state/tracka_vol_fullhist_panel_<UTC>.parquet",
+    "research_state/tracka_vol_fullhist_panel_build_report_<UTC>.json",
+    "research_state/evaluation_summary_TRACKA-VOL-FULLHIST-<UTC>.md",
+    "research_state/evaluation_summary_TRACKA-VOL-FULLHIST-<UTC>.json",
+    "research_state/ironflow_bulk_manifest.json (refreshed)"
+  ],
+  "gate_4_note": "Gate 4 Branch 1 remains EXTERNAL_BLOCKED (no valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json). It is not a blocker for Arm A and must not be waited on or polled."
+}

@@ -1,0 +1,306 @@
+{
+  "cache_root": "research_state/data_cache/ironflow_bulk",
+  "datasets": {
+    "candles_1h": {
+      "repo": "https://huggingface.co/datasets/ironflow/hyperliquid-candles-1h/resolve/main",
+      "required_columns": [
+        "timestamp",
+        "market",
+        "close"
+      ],
+      "template": "data/{month}.parquet"
+    },
+    "funding": {
+      "repo": "https://huggingface.co/datasets/ironflow/hyperliquid-funding/resolve/main",
+      "required_columns": [
+        "timestamp",
+        "market",
+        "funding_rate"
+      ],
+      "template": "data/{month}.parquet"
+    },
+    "liquidations": {
+      "repo": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main",
+      "required_columns": [
+        "timestamp",
+        "market",
+        "position_side",
+        "notional_usd"
+      ],
+      "template": "data/events/{month}.parquet"
+    },
+    "open_interest": {
+      "repo": "https://huggingface.co/datasets/ironflow/hyperliquid-open-interest/resolve/main",
+      "required_columns": [
+        "timestamp",
+        "market",
+        "open_interest_usd"
+      ],
+      "template": "data/{month}.parquet"
+    }
+  },
+  "generated_utc": "2026-11-12T20:16:38Z",
+  "manifest_id": "fclr_ironflow_bulk_manifest",
+  "months": [
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04"
+  ],
+  "objects": [
+    {
+      "dataset": "candles_1h",
+      "month": "2025-05",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-06",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-07",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-08",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-09",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-10",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-11",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2025-12",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2026-01",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2026-02",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2026-03",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "candles_1h",
+      "month": "2026-04",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-05",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-06",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-07",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-08",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-09",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-10",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-11",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2025-12",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2026-01",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2026-02",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2026-03",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "funding",
+      "month": "2026-04",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-05",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-06",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-07",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-08",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-09",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-10",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-11",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2025-12",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2026-01",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2026-02",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2026-03",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "liquidations",
+      "month": "2026-04",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-05",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-06",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-07",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-08",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-09",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-10",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-11",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2025-12",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2026-01",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2026-02",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2026-03",
+      "status": "ABSENT"
+    },
+    {
+      "dataset": "open_interest",
+      "month": "2026-04",
+      "status": "ABSENT"
+    }
+  ],
+  "totals": {
+    "absent": 48,
+    "objects": 48,
+    "ok": 0,
+    "problems": 0
+  }
+}
