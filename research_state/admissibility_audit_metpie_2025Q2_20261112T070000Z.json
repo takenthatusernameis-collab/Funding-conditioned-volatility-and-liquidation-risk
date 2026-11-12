@@ -1,0 +1,103 @@
+{
+  "audit_id": "admissibility_audit_metpie_2025Q2_20261112T070000Z",
+  "timestamp_utc": "2026-11-12T07:00:00Z",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "protocol": "RESEARCH_PROMPT.md section 16; HANDOFF_NEXT_SESSION.md PRIMARY route step 2",
+  "gate4_trigger": {
+    "present": false,
+    "evidence": "No research_state/fclr016_local_audit/fclr016_v5_terms_evidence_RESOLVED_*.json with status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation. Highest local artifact: fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json (status=EXPLICIT_BLOCKER_UNRESOLVED, fabricated=false, confirmatory_claim_go=NO_GO).",
+    "branch1_executable": false
+  },
+  "metpie_source": {
+    "source_url": "https://github.com/metpie/hyperliquid-liquidation-events",
+    "api_url": "https://api.github.com/repos/metpie/hyperliquid-liquidation-events",
+    "http_status": 200,
+    "unauthenticated": true,
+    "license": "CC BY 4.0",
+    "local_cache": "research_state/data_cache/metpie_liq/liquidation_events.csv.gz",
+    "local_cache_bytes": 6736079,
+    "total_rows": 346130,
+    "schema": ["time", "coin", "px", "sz", "side", "liquidated_start_pos", "hash", "notional_usd"],
+    "time_range_utc": ["2025-03-22T10:56:26Z", "2025-05-25T14:23:20Z"],
+    "window_duration_days": 64.1,
+    "unique_coins": 179,
+    "label_type": "observed_liquidation_events",
+    "label_provenance": "public node-trade archive (trade_dir_override = LiquidatedMarket), tx hashes present",
+    "modeled_or_proxy": false,
+    "venue": "hyperliquid_perpetuals",
+    "venue_consistent": true
+  },
+  "metpie_symbol_coverage": {
+    "coins_ge_5000_events": 11,
+    "coins_ge_5000_events_list": ["BTC", "ETH", "SOL", "HYPE", "XRP", "POPCAT", "FARTCOIN", "kPEPE", "TRUMP", "SUI", "kBONK"],
+    "coins_ge_1000_events": 39,
+    "min_instruments_required": 5,
+    "min_instruments_met": true
+  },
+  "hl_data_availability": {
+    "endpoint": "https://api.hyperliquid.xyz/info",
+    "unauthenticated": true,
+    "api_key_required": false,
+    "signature_required": false,
+    "requester_pays": false,
+    "candleSnapshot_4h": {
+      "fetchable": true,
+      "rows_per_symbol": 390,
+      "symbols_tested": ["BTC", "ETH", "SOL", "XRP", "HYPE", "POPCAT", "FARTCOIN", "kPEPE", "TRUMP", "SUI", "kBONK"],
+      "window_coverage": "2025-03-22 to 2025-05-25 (complete)",
+      "gaps": 0
+    },
+    "fundingHistory": {
+      "fetchable": true,
+      "first_page_cap": 500,
+      "pagination_required": true,
+      "pagination_method": "21-day chunks",
+      "btc_full_window_rows": 1548,
+      "btc_range_utc": ["2025-03-22T00:00:00.038Z", "2025-05-25T23:00:00.018Z"],
+      "btc_gaps_gt_1_5h": 3,
+      "full_window_achievable": true
+    }
+  },
+  "block_feasibility": {
+    "window_start_utc": "2025-03-22T00:00:00Z",
+    "window_end_utc": "2025-05-25T23:59:59Z",
+    "window_duration_days": 64.1,
+    "min_required_for_3x30_day_blocks": 90,
+    "min_required_with_7d_embargo_between_blocks": 104,
+    "min_required_with_train_val_3_blocks_embargo": 150,
+    "feasible_30_day_test_blocks": 0,
+    "min_test_blocks_required": 3,
+    "block_feasible": false,
+    "reason": "Window ~65 days < 90 days minimum for 3 non-overlapping 30-day test blocks. Structurally infeasible under any split configuration."
+  },
+  "rv_context_features": {
+    "rv_from_4h_closes": true,
+    "funding_rate_signed": true,
+    "mark_index_premium": "partial",
+    "ema_distance": true
+  },
+  "section16_criteria": {
+    "unauthenticated_public_access": "PASS",
+    "provenance_license_documented": "PASS",
+    "observed_labels_not_modeled": "PASS",
+    "venue_consistency": "PASS",
+    "ge_5_instruments_label_coverage": "PASS",
+    "ge_3_non_overlapping_30_day_test_blocks": "NOT_MET",
+    "train_val_test_7d_embargo_feasible": "NOT_MET",
+    "rv_context_features_computable": "PASS"
+  },
+  "determination": "INADMISSIBLE",
+  "primary_failure_reason": "Block feasibility: metpie 2025-03-22..2025-05-25 window (~65 days) structurally too short for >=3 non-overlapping 30-day OOS test blocks (>=90 days required). No split configuration, embargo adjustment, or symbol selection can remedy this data-window constraint.",
+  "next_step": "Bounded reprobe/monitor (HANDOFF_NEXT_SESSION.md step 3): not currently eligible. HL 2026-11+ window ~11.2 days (<100 day threshold); no verified post-2026-10-31 observed liquidation labels (ironflow files through 2026-10 only). No polling. Alternative: Gate 4 Branch 1 only on valid RESOLVED_VERIFIED trigger.",
+  "compliance": {
+    "no_outcome_inspection_before_prereg_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels_as_observed": true,
+    "no_github_workflows_edits": true,
+    "no_redundant_network_polling": true,
+    "no_agent_set_resolved_verified": true,
+    "no_gate4_bypass": true
+  }
+}

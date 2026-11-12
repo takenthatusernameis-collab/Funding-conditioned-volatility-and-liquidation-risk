@@ -1,11 +1,11 @@
 [
   {
-    "artifact_churn_note": "20261112T063907Z: Completed TRACKA-HL-EARLY-4H-20261112T054737Z per frozen prereg (4h cadence, 9 symbols, 2025-11-01..2026-04-30). Panel built from cached candles/funding/ironflow labels (1629 buckets, 9 syms, 2 test blocks with data). Verdict INCONCLUSIVE_PILOT_SHORTFALL: primary gate cannot be satisfied because <3 non-overlapping 30d test blocks feasible within window (blocks 0,1 only). C2 vs B1 (n_pairs=362, 9 instruments): mean diff +24.207 QLIKE, 95% CI [22.037,25.408], rel reduction -31.64% (materiality NOT_MET, CI NOT_MET). Reported for transparency, not confirmatory PASS. Artifacts: evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.{md,json}, tracka_hl_early_4h_panel_build_report_20261112T054737Z.json, scripts/tracka_hl_evaluate_early_4h.py. Sealed records preserved. Gate 4 trigger absent.",
-    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). 4h early-window design exhausted under prereg (block-count shortfall). All other cached-data designs exhausted/sealed. HL 2026-11 window ~11.2d, no verified post-2026-10-31 observed labels.",
-    "generated": "20261112T063907Z",
-    "last_checked": "20261112T063907Z",
-    "next_action_heavy": "Gate 4 Branch 1 only if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Else run bounded heavy evidence-backed work: (a) full \u00a716 admissibility audit of metpie/hyperliquid-liquidation-events 2025-03-22..2025-05-25 joined to cached HL funding+candles for that exact window (venue-consistent, observed labels, unauthenticated, provenance/license; determine if >=5 sym and >=3 non-overlapping 30d test blocks feasible; if admissible freeze prereg BEFORE outcomes then build/eval); (b) if (a) inadmissible, bounded reprobe/monitor with timestamped evidence when plausibly eligible (HL >=100d 2026-11+ and verifiable post-2026-10-31 ironflow labels). Emit concrete timestamped artifact+state updates every session. No status-only output, no polling, no sealed-record reopening.",
-    "next_unfinished_task": "METPIE_2025Q2_ADMISSIBILITY_AUDIT_OR_BOUNDED_REPROBE",
+    "artifact_churn_note": "20261112T07:00:00Z: §16 admissibility audit of metpie/hyperliquid-liquidation-events 2025-03-22..2025-05-25 joined to HL funding+candles COMPLETED — INADMISSIBLE. Evidence: HL 4h candles fetchable (390 rows/symbol, complete window, 11 top symbols), HL fundingHistory paginatable (BTC 1,548 rows full window), metpie ≥5 instruments PASS (11 coins ≥5,000 events), RV/context features computable. Primary failing criterion: block feasibility — window ~64.1 days < 90 days minimum for ≥3 non-overlapping 30-day OOS test blocks; structurally infeasible under any split configuration. Artifacts: `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}`. Bounded reprobe (step 3) NOT currently eligible: HL 2026-11+ ~11.2 days (<100d threshold), no verified post-2026-10-31 observed liquidation labels (ironflow HF through 2026-10 only). No polling. Gate 4 trigger absent (verified).",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). All cached-data designs exhausted/sealed. metpie INADMISSIBLE (block-feasibility). HL 2026-11 window ~11.2d insufficient; no verified post-2026-10-31 observed labels. No untested admissible cached-data experiment remains.",
+    "generated": "20261112T070000Z",
+    "last_checked": "20261112T070000Z",
+    "next_action_heavy": "Gate 4 Branch 1 only if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Else execute bounded new-data discovery/monitor probes: HL 2026-11+ candle/funding depth (≥100d required), ironflow/hyperliquid-liquidations HF lastModified/event files for extension beyond 2026-10-31 (verified observed labels required). Emit timestamped probe/audit artifact with evidence; if newly admissible, freeze prereg BEFORE outcomes then build/eval+verdict+atomic state updates. If ineligible, document exact failing minima and stop cleanly. No status-only output, no polling, no sealed-record reopening.",
+    "next_unfinished_task": "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
     "rank": 0,
     "resume_triggers": [
@@ -13,7 +13,7 @@
       "New admissible data source/window verified (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
     ],
     "status": "ACTIVE_HEAVY_CAMPAIGN",
-    "task": "GATE4_OR_ADMISSIBLE_NEW_DATA_AUDIT"
+    "task": "GATE4_OR_NEW_DATA_SOURCE_MONITOR"
   },
   {
     "artifact_churn_note": "20261112T044425Z: Gate 4 trigger absent (verified). Bounded external probes re-run: HL API 2026-11-01..now HTTP 200 269 candles+269 funding/coin (9 coins, ~11.2d, insufficient for >=3x30d blocks); ironflow/hyperliquid-liquidations HF lastModified 2026-11-07T10:18:25Z events 2025-05..2026-10 only (no post-2026-10-31 labels); metpie 2025-03-22..2025-05-25 historical unaudited. No verifiably admissible new external source. Evidence: research_state/new_data_external_probe_audit_20261112T044425Z.{md,json}, external_probe_raw_20261112T044425Z.json. Sealed records preserved.",
