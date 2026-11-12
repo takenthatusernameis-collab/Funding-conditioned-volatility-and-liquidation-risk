@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:41:22Z",
+  "coin": "AVAX",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "308f9e439f3ff683a025fee705b9844767713de0f2bbbb5f53df6b7e59736b3f",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

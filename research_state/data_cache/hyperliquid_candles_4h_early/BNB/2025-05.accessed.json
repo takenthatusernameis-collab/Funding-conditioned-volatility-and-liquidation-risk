@@ -1,0 +1,17 @@
+{
+  "fetched_utc": "2026-11-12T13:41:23Z",
+  "coin": "BNB",
+  "month": "2025-05",
+  "endpoint": "candleSnapshot",
+  "interval": "4h",
+  "start_ms": 1746057600000,
+  "end_ms": 1748735999999,
+  "rows": 186,
+  "sha256": "d2fa3892128c81e40db9a6259f52446c37cf85da7e79de118e2bddbfd43ad478",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true,
+  "license": "Hyperliquid public API, unauthenticated"
+}

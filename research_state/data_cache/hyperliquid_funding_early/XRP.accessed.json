@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:42:47Z",
+  "coin": "XRP",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "900224161bded191a684bf2349fb9761dd02311a2214c13ec791ea6830f47d74",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

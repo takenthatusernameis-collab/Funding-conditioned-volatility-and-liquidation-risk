@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:41:33Z",
+  "coin": "BNB",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "31da8ea1fd6db3b72bf1d1009c983be5654e35894e4b78523dacd13b802e21dc",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

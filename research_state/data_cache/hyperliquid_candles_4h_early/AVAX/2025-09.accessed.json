@@ -1,0 +1,17 @@
+{
+  "fetched_utc": "2026-11-12T13:41:14Z",
+  "coin": "AVAX",
+  "month": "2025-09",
+  "endpoint": "candleSnapshot",
+  "interval": "4h",
+  "start_ms": 1756684800000,
+  "end_ms": 1759276799999,
+  "rows": 180,
+  "sha256": "3f0086777ac40a7c632efe5539f873eac2519e4c1b0dbf7172a2eb049cfc0349",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true,
+  "license": "Hyperliquid public API, unauthenticated"
+}

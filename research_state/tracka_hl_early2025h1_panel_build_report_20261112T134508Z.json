@@ -1,0 +1,226 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY4H-2025H1",
+  "campaign": "FCLR-EARLY4H-2025H1-HEAVY v2",
+  "generated_utc": "2026-11-12T13:45:08Z",
+  "panel": {
+    "path": "research_state/tracka_hl_early2025h1_panel_20261112T134508Z.parquet",
+    "sha256": "1d6bf748daf6217f67d4178b8775be86ca93345353dfbb0ec748ef82c1cb95ac",
+    "rows": 1440,
+    "coins": 9,
+    "window_utc": "2025-05-25T00:00:00+00:00 .. 2025-10-31T23:59:59+00:00"
+  },
+  "inputs": {
+    "labels": {
+      "ironflow_events_2025-05.parquet": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+      "ironflow_events_2025-06.parquet": "737908e4568ca903370e6bfc8bf9792d70102ddafa0161b48598dc3dd1b2e338",
+      "ironflow_events_2025-07.parquet": "4ad6e10a5e34c329040a92d05942c8f0862ff97353120dba9efeed76429b4f22",
+      "ironflow_events_2025-08.parquet": "b21bd8ce70fc9f8ef131afadef2185bcdf473e5df1f283f80e9dab5901ba8aac",
+      "ironflow_events_2025-09.parquet": "63bfe5cc8f57176a7f0e5a91d990c224bbddb9e28854b6535b4e8cd2e72cb2bc",
+      "ironflow_events_2025-10.parquet": "e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8",
+      "rows_total": 395167
+    },
+    "candles": {
+      "AVAX_2025-05": "b5a7cc01625039250d00fe2ac7201802048e05621ab5777fe7291a4f9525b2fb",
+      "AVAX_2025-06": "22d53bbe13a40c4cef2ee8b39904e6da3e1a947a1bade777d243c0177467b664",
+      "AVAX_2025-07": "9bb6f6e2b71ed0d94254c63e48482f328b5301b429440f3d3be7cb98d1a3c9ab",
+      "AVAX_2025-08": "4ab481551b1d1fa2f103c45e5027d8cbefb26b668af9c25e73c7e29ee3d21d2c",
+      "AVAX_2025-09": "3f0086777ac40a7c632efe5539f873eac2519e4c1b0dbf7172a2eb049cfc0349",
+      "AVAX_2025-10": "1238354d27e3963867785e611aa9320fd008751b7ce97d71ee2b7e695d5397ad",
+      "BNB_2025-05": "d2fa3892128c81e40db9a6259f52446c37cf85da7e79de118e2bddbfd43ad478",
+      "BNB_2025-06": "d8f7811c6546cc18d275aa3ee368c314b56e3eb0f3f7fb3c2f56215bb9f015e3",
+      "BNB_2025-07": "8b2d04ba2bd56cd5d1d16793f1737772b99496d99b3e4f397e7ac3801bae0ac9",
+      "BNB_2025-08": "eb8cd5bd98549860a6e96867e7cc0b57eccde773585313c6e1bd00960ff75f7d",
+      "BNB_2025-09": "1fcca8648466daa99d3bae0ba039d30ece9a2aee20335b4ec1a469f78c2210c6",
+      "BNB_2025-10": "47022fac689ec14c51dead6e69348d5275276ca5352fb952e748b0a91a424a70",
+      "BTC_2025-05": "537f1ce1304a561de1438644aba565061ebba97e77315835195670526cb40fb5",
+      "BTC_2025-06": "239cd02c94fb2ee92cd5047857093de597cb046ddeaa428c27f7e4b288962d03",
+      "BTC_2025-07": "9a57a2b2ad9f08f5667c442528f53be73618aaaa8d5eab7809635537b85dfa4d",
+      "BTC_2025-08": "06e9995773c7f23239a5c4199d4559d8614ea32dae8b2f2d074c928a9c2f36fd",
+      "BTC_2025-09": "aeebe3dfacbcf78fa6ee701aa381be4932259fb5ee0e3f2dc78843bb8170451e",
+      "BTC_2025-10": "1855964f079dcf13797957aba322ad3aaaf2af4376b7a8d1424f6964bca28c21",
+      "DOGE_2025-05": "a4fd7a57ceeb5295902936a9a6f07828e1bdc0c028c50b95fe09883485381e40",
+      "DOGE_2025-06": "2423e6692cf977671278396346bafdf32738e9b5e27221a7c3984c2a0e555cad",
+      "DOGE_2025-07": "e34b9a8752ade68557b9bf4a5c1dc30838402f904e621a6904ebefc092f9e805",
+      "DOGE_2025-08": "0785a570416a43334ccf9141399dfe60d74c50ec919ac8b5338e7eb63a7c3cb8",
+      "DOGE_2025-09": "ea66e11ae863004e0e1a40b674a557e0f9bd0b838d92bc660bc376c781988d4b",
+      "DOGE_2025-10": "85a52f7e6ec97f05531ee3c51281237e32008ee7914b99bb8489534c7e1b7385",
+      "ETH_2025-05": "3045ff08ec1d8f5fa85bc60c606b622af55d0283af200135e44f3b9b491b8512",
+      "ETH_2025-06": "e8d9ae1de0ddcee74f33208f7ee6067d1541ce41236c4e8391909a6c9b7a8fd2",
+      "ETH_2025-07": "fc44fa12a285ef2561662c86a608dd82f77dcab14b12583d28adf7d44ffb87bc",
+      "ETH_2025-08": "0c9e0120f542dd94ababad392e006619565e58d24da3da9deeec8a0047d41362",
+      "ETH_2025-09": "b8e7ae106a08b44420edc4c2367e4a3d822eea9333863d4f34e3d41fec8621e1",
+      "ETH_2025-10": "c8fd302b241e0b4ba0096e1546a27123246ff36e6fe42afa5d430f5b834e9731",
+      "LINK_2025-05": "c11b10c32836c17deb3fa97f10d660183c7a4afa1066ebfc6e5da169f636bfd0",
+      "LINK_2025-06": "674993c8f914d5a23cf6e69e7443ce13672ea19e203436259eb8c7f7d57d6eb2",
+      "LINK_2025-07": "b4d0915800c4e91e02f64a721e9d83297ab6d2388292de526f35ce25464d4152",
+      "LINK_2025-08": "1cc9753e6b7b8e5c7c6619a4b93c6f057c22659aae00187f4319b352092df645",
+      "LINK_2025-09": "3cb89aa57906dfa442340bae9e3c0e0f0165c00dc1fcb9c84eacb358c94e8ba8",
+      "LINK_2025-10": "4353cb8e1f94ceade039f775e2339aa546c12c9161c776ad0a11cfe97a053b7e",
+      "SOL_2025-05": "a50949a9950933c9c728dfec90105b903b6fbc06e8299d91d358a3c0e470a226",
+      "SOL_2025-06": "3d31c7b64b3f417a95c3e73532d110df071ba43d0f1ebd37d0619a65526705ee",
+      "SOL_2025-07": "5722852248802fecf7b9e1e29096fade02b02719f982788726dba8d6722e44a0",
+      "SOL_2025-08": "9c0389b8b4b5bfc0b973097a8613e3d047230a00bfc93dace0882617caff81b2",
+      "SOL_2025-09": "9d5afc3c0bf9f1e2e967fcd81cd43fc6877150b10624f2abad036d329eabe2c4",
+      "SOL_2025-10": "d7f6c48cab6622458a2af2129dba57b940ee6406744bea2dcdb2967ab8353659",
+      "SUI_2025-05": "1420caebed53056c4306deb8fb26f34f3bd4916a947c891ff5db44322532e08d",
+      "SUI_2025-06": "050efab8d919c649c82343e3f7c4d35df7127fee22923c05fafe839caa1f57d0",
+      "SUI_2025-07": "67d032acb83f8beb1e1b86ca5dd16f4e94fc942ce5f1258f5496bc63cf131509",
+      "SUI_2025-08": "4cfc63d68d013295e6239b191c7c807e8f474f5d4c629a3d1de6898500a628ff",
+      "SUI_2025-09": "d45892ddfb6d315c655b51e07942fef1e5376d6b5d59ff3e12a1b0949a99db43",
+      "SUI_2025-10": "6ad7aa7cd9913a32bf09d7bc62971e8f538386fe47239affda00e2b7e26e3425",
+      "XRP_2025-05": "7b10668af9a1d9ab4f10fdaa72c812541578d8bdfa502bca07d7944c99b5160c",
+      "XRP_2025-06": "894d67c4dbdb9fb6bc44acd568c21f94aad67ae190251ee8fd93671a483dfab7",
+      "XRP_2025-07": "79f8fb04a3eb773a8e68df9f7a0047f0c664fcc0d344339b0b1cc44469270036",
+      "XRP_2025-08": "63eb8694726240c7ae453144ec8006f4d764232c3e49e2038a494669aefd41d0",
+      "XRP_2025-09": "e0bbc8dfb82499f9e70d5e69866220b79d253bf1ea5743e268f7b9784aee57bf",
+      "XRP_2025-10": "efdb99db9092810a039ce67057438161c9835a2543df20a202a76dcfa181128a",
+      "rows_total": 9936
+    },
+    "funding": {
+      "funding_AVAX": "308f9e439f3ff683a025fee705b9844767713de0f2bbbb5f53df6b7e59736b3f",
+      "funding_BNB": "31da8ea1fd6db3b72bf1d1009c983be5654e35894e4b78523dacd13b802e21dc",
+      "funding_BTC": "a9398f0a6d24012bff0f8d1489246789c739dd6cbf2f3836acc731275ca19bcc",
+      "funding_DOGE": "10ac3b30fed1901ce03a9c6f07e5db0d658c61475d79b1fdadb3b6c7564dd751",
+      "funding_ETH": "4fe0084093fde8183f6dd617ca9241899e3bdd38926ae09042fd7b6322e51bc9",
+      "funding_LINK": "afe586fa8ca15b142da18db1426c6524dd4735279f30ba254e65186519ced15d",
+      "funding_SOL": "72a2b5653614e8c1209fec69fe075837903885f25b7729976953f5c62ace6bd3",
+      "funding_SUI": "670a5f7ed14fba23247dd7c1f771812adb58703e0b330a04bc6c7aa8a8826181",
+      "funding_XRP": "900224161bded191a684bf2349fb9761dd02311a2214c13ec791ea6830f47d74",
+      "rows_total": 36288
+    }
+  },
+  "coverage_by_coin": [
+    {
+      "coin": "AVAX",
+      "rows": 160,
+      "liq_events": 4361,
+      "liq_notional": 123372814.53057003,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "BNB",
+      "rows": 160,
+      "liq_events": 4095,
+      "liq_notional": 44675438.697963,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "BTC",
+      "rows": 160,
+      "liq_events": 141632,
+      "liq_notional": 11320559112.212097,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "DOGE",
+      "rows": 160,
+      "liq_events": 9569,
+      "liq_notional": 321536191.35950696,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "ETH",
+      "rows": 160,
+      "liq_events": 109681,
+      "liq_notional": 8419334408.81091,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "LINK",
+      "rows": 160,
+      "liq_events": 6144,
+      "liq_notional": 120826091.547563,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "SOL",
+      "rows": 160,
+      "liq_events": 83021,
+      "liq_notional": 2485372968.8615584,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "SUI",
+      "rows": 160,
+      "liq_events": 9346,
+      "liq_notional": 124011376.179867,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    },
+    {
+      "coin": "XRP",
+      "rows": 160,
+      "liq_events": 27318,
+      "liq_notional": 644154158.400178,
+      "rv24_obs": 160,
+      "fund_obs": 160,
+      "t1_obs": 159,
+      "t2_obs": 159
+    }
+  ],
+  "test_blocks": {
+    "0": {
+      "rows": 270,
+      "coins_with_t1": 9,
+      "coins_with_t2": 9
+    },
+    "1": {
+      "rows": 270,
+      "coins_with_t1": 9,
+      "coins_with_t2": 9
+    },
+    "2": {
+      "rows": 270,
+      "coins_with_t1": 9,
+      "coins_with_t2": 9
+    },
+    "3": {
+      "rows": 270,
+      "coins_with_t1": 9,
+      "coins_with_t2": 9
+    }
+  },
+  "leakage_guards": {
+    "train_test_day_overlap": 0,
+    "val_test_day_overlap": 0,
+    "test_days_with_feature_row_in_train": 1,
+    "test_days_with_feature_row_in_val": 1,
+    "embargo_days": 1,
+    "verdict": "FAIL"
+  },
+  "missingness": {
+    "buckets_missing_rv24": 0,
+    "buckets_missing_funding": 0,
+    "buckets_missing_t1": 9,
+    "buckets_missing_t2": 9
+  },
+  "feasibility": {
+    "test_blocks_with_both_targets": 4,
+    "min_test_blocks_required": 3,
+    "min_instruments_required": 5
+  },
+  "outcomes_inspected": false
+}

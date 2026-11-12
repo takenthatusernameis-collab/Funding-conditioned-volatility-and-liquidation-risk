@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:41:54Z",
+  "coin": "DOGE",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "10ac3b30fed1901ce03a9c6f07e5db0d658c61475d79b1fdadb3b6c7564dd751",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

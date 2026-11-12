@@ -1,0 +1,341 @@
+{
+  "campaign": "FCLR-EARLY4H-2025H1-HEAVY v2",
+  "generated_utc": "2026-11-12T13:42:47Z",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "label_window_utc": "2025-05-25T00:00:00+00:00 .. 2025-10-31T23:59:59+00:00",
+  "interval": "4h",
+  "coins": [
+    "AVAX",
+    "BNB",
+    "BTC",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "SOL",
+    "SUI",
+    "XRP"
+  ],
+  "candle_months": 6,
+  "counts": {
+    "candle_months_fetched": 54,
+    "candle_months_cached": 0,
+    "coins_funded": 9,
+    "errors": 0
+  },
+  "per_coin": {
+    "AVAX": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "BNB": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "BTC": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "DOGE": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "ETH": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "LINK": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "SOL": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "SUI": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    },
+    "XRP": {
+      "candles": {
+        "2025-05": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-06": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-07": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-08": {
+          "status": "fetched",
+          "n": 186
+        },
+        "2025-09": {
+          "status": "fetched",
+          "n": 180
+        },
+        "2025-10": {
+          "status": "fetched",
+          "n": 186
+        }
+      },
+      "funding": {
+        "rows": 4416,
+        "first": "2025-05-01T00:00:00.104000+00:00",
+        "last": "2025-10-31T23:00:00.037000+00:00"
+      },
+      "candle_bars": 1104
+    }
+  },
+  "errors": [],
+  "provenance": {
+    "unauthenticated": true,
+    "api_key_required": false,
+    "requester_pays": false,
+    "license": "Hyperliquid public API, unauthenticated",
+    "outcomes_inspected": false
+  }
+}

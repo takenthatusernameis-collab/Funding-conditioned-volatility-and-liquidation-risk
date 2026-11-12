@@ -1,0 +1,17 @@
+{
+  "fetched_utc": "2026-11-12T13:42:29Z",
+  "coin": "SUI",
+  "month": "2025-09",
+  "endpoint": "candleSnapshot",
+  "interval": "4h",
+  "start_ms": 1756684800000,
+  "end_ms": 1759276799999,
+  "rows": 180,
+  "sha256": "d45892ddfb6d315c655b51e07942fef1e5376d6b5d59ff3e12a1b0949a99db43",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true,
+  "license": "Hyperliquid public API, unauthenticated"
+}

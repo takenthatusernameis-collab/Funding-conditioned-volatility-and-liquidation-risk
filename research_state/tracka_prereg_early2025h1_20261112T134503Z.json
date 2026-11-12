@@ -1,0 +1,169 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY4H-2025H1",
+  "campaign": "FCLR-EARLY4H-2025H1-HEAVY v2",
+  "timestamp_utc": "2026-11-12T13:45:03Z",
+  "track": "A",
+  "primary_contrast": "C2_vs_B1",
+  "pre_registered_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "status": "FROZEN",
+  "data_sources": {
+    "labels": {
+      "source": "ironflow/hyperliquid-liquidations (cached parquet)",
+      "path": "research_state/data_cache/ironflow_events/<YYYY-MM>.parquet",
+      "observed_labels": true,
+      "modeled_or_proxy": false,
+      "window_utc": "2025-05-25T00:00:00+00:00 .. 2025-10-31T23:59:59+00:00"
+    },
+    "candles": {
+      "source": "Hyperliquid candleSnapshot interval=4h (unauthenticated)",
+      "path": "research_state/data_cache/hyperliquid_candles_4h_early/<COIN>/<YYYY-MM>.json"
+    },
+    "funding": {
+      "source": "Hyperliquid fundingHistory (unauthenticated, paginated at 500)",
+      "path": "research_state/data_cache/hyperliquid_funding_early/<COIN>.json"
+    }
+  },
+  "universe": {
+    "coins": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "selection_rule": "named ex ante by label activity and liquidity; no survivor substitution",
+    "n_coins": 9,
+    "concentration_note": "BTC+ETH are ~63% of events and ~84% of notional; per-coin reporting is mandatory and no PASS may be driven by one coin."
+  },
+  "unit": "coin x 24h UTC bucket",
+  "targets": [
+    {
+      "id": "T1_LIQ",
+      "family": "track_a_observed_liquidation",
+      "definition": "next-24h observed liquidation notional USD (sum of notional_usd over the bucket), QLIKE loss"
+    },
+    {
+      "id": "T2_RV",
+      "family": "track_c_realized_variance",
+      "definition": "next-24h realized variance from 4h log returns (RV24h), QLIKE loss"
+    }
+  ],
+  "models": {
+    "B0": {
+      "form": "persistence",
+      "features": [
+        "lag1_log_liq_or_rv"
+      ]
+    },
+    "B1": {
+      "form": "HAR-RV",
+      "features": [
+        "log_rv_4h",
+        "log_rv_24h",
+        "log_rv_168h"
+      ],
+      "note": "RV-only baseline; no funding information"
+    },
+    "C1": {
+      "form": "HAR-RV + funding",
+      "features": [
+        "B1",
+        "signed_funding",
+        "abs_funding_trailing_pct90"
+      ]
+    },
+    "C2": {
+      "form": "HAR-RV + funding + premium",
+      "features": [
+        "C1",
+        "mark_index_premium",
+        "mark_ema24_distance"
+      ]
+    }
+  },
+  "contrasts": {
+    "primary": "C2_vs_B1",
+    "secondary": [
+      "C1_vs_B1",
+      "C2_vs_C1"
+    ],
+    "multiple_testing": "Holm across the full declared contrast family per target"
+  },
+  "metric": "QLIKE (lower better)",
+  "splits": {
+    "train": {
+      "start": "2025-05-25T00:00:00Z",
+      "end": "2025-06-30T23:59:59Z"
+    },
+    "validation": {
+      "start": "2025-06-24T00:00:00Z",
+      "end": "2025-06-30T23:59:59Z"
+    },
+    "test_blocks": [
+      {
+        "block": 0,
+        "start": "2025-07-01T00:00:00Z",
+        "end": "2025-07-30T23:59:59Z",
+        "embargo_days_after": 1
+      },
+      {
+        "block": 1,
+        "start": "2025-07-31T00:00:00Z",
+        "end": "2025-08-29T23:59:59Z",
+        "embargo_days_after": 1
+      },
+      {
+        "block": 2,
+        "start": "2025-08-30T00:00:00Z",
+        "end": "2025-09-28T23:59:59Z",
+        "embargo_days_after": 1
+      },
+      {
+        "block": 3,
+        "start": "2025-09-29T00:00:00Z",
+        "end": "2025-10-28T23:59:59Z",
+        "embargo_days_after": 1
+      }
+    ],
+    "embargo_days": 1,
+    "min_test_blocks_required": 3,
+    "note": "Test blocks are complete 30-day spans inside 2025-06..2025-10 with >=1-day purge between train/validation/test boundaries."
+  },
+  "inference": {
+    "method": "block bootstrap over complete 30-day UTC blocks",
+    "n_bootstrap": 2000,
+    "seed": 20261112,
+    "ci": "95% percentile",
+    "correction": "Holm across the declared family"
+  },
+  "materiality": {
+    "min_relative_qlike_reduction_pct": 2.0,
+    "min_relative_qlike_reduction_fraction": 0.02,
+    "require_ci_upper_below_zero": true,
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3
+  },
+  "missingness_policy": "missing stays missing; no forward fill; no synthetic labels",
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "venue_consistent": "Hyperliquid-only"
+  },
+  "artifacts_to_produce": [
+    "research_state/tracka_hl_early2025h1_acquisition_report_<UTC>.json",
+    "research_state/tracka_prereg_early2025h1_<UTC>.json",
+    "research_state/tracka_prereg_early2025h1_<UTC>.md",
+    "research_state/tracka_hl_early2025h1_panel_<UTC>.parquet",
+    "research_state/tracka_hl_early2025h1_panel_build_report_<UTC>.json",
+    "research_state/evaluation_summary_EARLY4H-2025H1-<UTC>.md",
+    "research_state/evaluation_summary_EARLY4H-2025H1-<UTC>.json"
+  ]
+}

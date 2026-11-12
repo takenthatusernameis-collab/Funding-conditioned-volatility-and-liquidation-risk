@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:42:16Z",
+  "coin": "LINK",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "afe586fa8ca15b142da18db1426c6524dd4735279f30ba254e65186519ced15d",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:42:37Z",
+  "coin": "SUI",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "670a5f7ed14fba23247dd7c1f771812adb58703e0b330a04bc6c7aa8a8826181",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

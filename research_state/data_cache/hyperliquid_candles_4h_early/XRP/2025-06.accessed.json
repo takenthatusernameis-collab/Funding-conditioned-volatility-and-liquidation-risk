@@ -1,0 +1,17 @@
+{
+  "fetched_utc": "2026-11-12T13:42:38Z",
+  "coin": "XRP",
+  "month": "2025-06",
+  "endpoint": "candleSnapshot",
+  "interval": "4h",
+  "start_ms": 1748736000000,
+  "end_ms": 1751327999999,
+  "rows": 180,
+  "sha256": "894d67c4dbdb9fb6bc44acd568c21f94aad67ae190251ee8fd93671a483dfab7",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true,
+  "license": "Hyperliquid public API, unauthenticated"
+}

@@ -1,0 +1,11 @@
+{
+  "fetched_utc": "2026-11-12T13:42:05Z",
+  "coin": "ETH",
+  "endpoint": "fundingHistory",
+  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
+  "rows": 4416,
+  "sha256": "4fe0084093fde8183f6dd617ca9241899e3bdd38926ae09042fd7b6322e51bc9",
+  "http_status": 200,
+  "unauthenticated": true,
+  "paginated_at": 500
+}

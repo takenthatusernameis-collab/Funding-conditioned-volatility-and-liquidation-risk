@@ -1,0 +1,17 @@
+{
+  "fetched_utc": "2026-11-12T13:41:46Z",
+  "coin": "DOGE",
+  "month": "2025-08",
+  "endpoint": "candleSnapshot",
+  "interval": "4h",
+  "start_ms": 1754006400000,
+  "end_ms": 1756684799999,
+  "rows": 186,
+  "sha256": "0785a570416a43334ccf9141399dfe60d74c50ec919ac8b5338e7eb63a7c3cb8",
+  "http_status": 200,
+  "api_key_required": false,
+  "requester_pays": false,
+  "signature_required": false,
+  "unauthenticated": true,
+  "license": "Hyperliquid public API, unauthenticated"
+}
