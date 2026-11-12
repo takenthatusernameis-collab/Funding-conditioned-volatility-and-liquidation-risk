@@ -1,0 +1,66 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY-4H-20261112T054737Z",
+  "timestamp_utc": "2026-11-12T06:39:07Z",
+  "prereg_document": "research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.json",
+  "prereg_sha256": "909590bb96ed9dc3ba34f0b14325b7ca8d31cf611cb4a8b151e18a926baa354e",
+  "panel": "research_state/tracka_hl_early_4h_panel_20261112T054737Z.parquet",
+  "panel_sha256": "ddb223307f1483a1251ac0ef09c29f60495aaed678fc5376bd25bc2bdda5bf25",
+  "build_report": "research_state/tracka_hl_early_4h_panel_build_report_20261112T054737Z.json",
+  "verdict": "INCONCLUSIVE_PILOT_SHORTFALL",
+  "gate_pass": false,
+  "primary_contrast": "C2_vs_B1",
+  "metrics": {
+    "b1_mean_qlike": 76.50737384841467,
+    "c2_mean_qlike": 100.71437567012083,
+    "n_b1_test": 362,
+    "n_c2_test": 362
+  },
+  "contrast": {
+    "mean_diff_c2_minus_b1": 24.207001821706154,
+    "rel_reduction_pct": -31.64008984240903,
+    "ci95_lo": 22.037348458330037,
+    "ci95_hi": 25.408226216021685,
+    "n_pairs": 362,
+    "n_blocks": 2
+  },
+  "gate": {
+    "materiality_ge_2pct": false,
+    "ci_excludes_zero_better": false,
+    "min_instruments_ge_5": true,
+    "min_test_blocks_ge_3": false,
+    "paired_instruments": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "test_blocks_with_data": [
+      0,
+      1
+    ]
+  },
+  "train_rows": {
+    "B1": 692,
+    "C2": 498
+  },
+  "test_rows": {
+    "B1": 362,
+    "C2": 362
+  },
+  "determination": "PILOT/INCONCLUSIVE \u2014 <3 non-overlapping 30-day test blocks within 2025-11-01..2026-04-30 window (blocks with data: 2, required: 3). Primary gate cannot be satisfied per prereg; results reported for transparency, not confirmatory PASS.",
+  "prereg_caveat": "Block 2 extends beyond 2026-04-30 window; effective test blocks within window are 0 and 1 only (2 < 3).",
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "venue_consistent": "Hyperliquid-only"
+  },
+  "seed": 20261112,
+  "n_bootstrap": 2000
+}

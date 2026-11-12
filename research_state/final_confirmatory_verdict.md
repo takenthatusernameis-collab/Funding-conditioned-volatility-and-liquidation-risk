@@ -305,3 +305,13 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Branch 1 not triggered unless valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears.
 
 **Historical record preserved:** 2024 H001 NOT_SUPPORTED and all prior Track A addenda NOT erased; this addendum is appended alongside them.
+
+---
+
+## 2026-11-12T06:39:07Z addendum — Track A early-4h liquidation forecast (TRACKA-HL-EARLY-4H-20261112T054737Z)
+- **Scope:** Track A exploratory/pilot (separate from sealed 2024 Binance confirmatory FCLR-003). Hyperliquid-only, observed ironflow labels, 4h-cadence redesign of prior sealed INADMISSIBLE 1h early-window claim.
+- **Prereg (frozen pre-outcomes):** `research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.{json,md}` (05:47:37Z). Window 2025-11-01..2026-04-30, 9 symbols, B1 (RV/context, 4h-derived) vs C2 (funding-conditioned), QLIKE next-24h liquidation intensity, block bootstrap 2000 reps seed 20261112, gate ≥2% rel reduction + CI excludes zero + ≥5 paired instruments + ≥3 non-overlapping 30d OOS blocks.
+- **Execution:** deterministic panel from cached 4h candles/funding/ironflow labels (`tracka_hl_early_4h_panel_20261112T054737Z.parquet`, build report `tracka_hl_early_4h_panel_build_report_20261112T054737Z.json`, eval script `scripts/tracka_hl_evaluate_early_4h.py`).
+- **Verdict:** `INCONCLUSIVE_PILOT_SHORTFALL` (primary gate cannot be satisfied). C2 vs B1: B1 mean QLIKE 76.507, C2 100.714 (n_pairs=362, 9 instruments), mean diff +24.207, 95% CI [22.037,25.408] (wrong direction), rel reduction -31.64%. Gate: materiality NOT_MET, CI NOT_MET, instruments PASS (9), test blocks NOT_MET (2: [0,1]; block 2 extends beyond 2026-04-30 window, <3 required). Results reported for transparency only, **not confirmatory PASS** and not a reopening of any sealed verdict.
+- **Compliance:** no outcome inspection before freeze; no threshold-shopping; Hyperliquid-only; observed labels only; no Binance/2024 conflation; no modeled/proxy labels.
+- **Sealed records unchanged:** 2024 FCLR-003 NOT_SUPPORTED, Track B/C/H1 and all prior Track A sealed verdicts remain immutable.

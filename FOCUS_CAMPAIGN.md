@@ -1,4 +1,4 @@
 # FOCUS_CAMPAIGN (redirect)
-**Timestamp (UTC):** 2026-11-12T06:31:39Z
+**Timestamp (UTC):** 2026-11-12T06:39:45Z
 
-Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Execute it: Gate 4 Branch 1 only if valid RESOLVED trigger present (verified absent 2026-11-12T06:31:39Z). PRIMARY: 4h candles cached+complete and prereg frozen (`tracka_prereg_hyperliquid_early_4h_20261112T054737Z`) — run panel build script, evaluate C2 vs B1 liquidation forecast on cached evidence, emit verdict + atomic state updates. If infeasible, emit timestamped evidence and advance. No status-only output.
+Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Execute it: Gate 4 Branch 1 only if valid RESOLVED trigger present (verified absent). PRIMARY: §16 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL funding+candles → if admissible prereg(before outcomes)+build+eval+verdict+state updates; if not, evidenced infeasibility + bounded eligible reprobe only when plausible. TRACKA-HL-EARLY-4H-20261112T054737Z completed INCONCLUSIVE_PILOT_SHORTFALL. No status-only output.

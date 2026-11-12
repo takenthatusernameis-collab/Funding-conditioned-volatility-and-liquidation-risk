@@ -1,4 +1,4 @@
 # NEXT_SESSION_TASK (redirect)
-**Timestamp (UTC):** 2026-11-12T06:31:39Z
+**Timestamp (UTC):** 2026-11-12T06:39:45Z
 
-Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative). Gate 4 Branch 1 only if valid RESOLVED trigger present (verified absent 2026-11-12T06:31:39Z). PRIMARY: 4h candles 2025-11..2026-04 cached+complete (`research_state/data_cache/hyperliquid_candles_4h/`) and prereg frozen (`tracka_prereg_hyperliquid_early_4h_20261112T054737Z`) — run `scripts/tracka_hl_build_early_4h_panel.py`, then evaluate pre-registered C2 vs B1 liquidation forecast + verdict + atomic state updates. If infeasible, emit timestamped evidence and advance. No status-only output.
+Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative). Gate 4 Branch 1 only if valid RESOLVED trigger present (verified absent 2026-11-12T06:39:45Z). PRIMARY: full §16 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL funding+candles (timestamped determination + block-feasibility evidence); if ADMISSIBLE freeze prereg before outcomes then build/eval+verdict+atomic state updates; if INADMISSIBLE emit timestamped evidence and advance to bounded eligible reprobe only when plausible. TRACKA-HL-EARLY-4H-20261112T054737Z = INCONCLUSIVE_PILOT_SHORTFALL (sealed). No status-only output.
