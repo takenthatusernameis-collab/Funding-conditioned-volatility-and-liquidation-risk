@@ -1,5 +1,30 @@
 [
 {
+ "artifact_churn_note": "20261112T113800Z: SUPERSEDES the 20261112T073418Z FCLR-NEXT entry and its 'clean stop' premise. Re-verified live this session: a powered, never-used, fully admissible Hyperliquid panel exists for 2025-05-01..2025-10-31. Evidence: ironflow observed labels cached for 2025-05..2025-10 (9 coins AVAX/BNB/BTC/DOGE/ETH/LINK/SOL/SUI/XRP, 1.13M events, $32.3B notional); Hyperliquid candleSnapshot interval=4h returns 1104 bars/coin over 2025-05-01..2025-10-31 with 0 internal gaps (180-186 bars/month); fundingHistory paginates at 500 rows (4416 rows/coin, 9 pages) over the same window. The earlier 'candles absent before 2026-04' conclusion was a 1h-only artifact: Hyperliquid serves 1h from 2026-04-18 but 4h back to 2024-08-01. Window = 6 non-overlapping 30-d blocks (>=3 required), 9 instruments (>=5 required), disjoint from all sealed windows (2026-05..2026-10 NOT_MET; 2025-11..2026-04 INCONCLUSIVE_PILOT_SHORTFALL; 2024 Binance Track B/C sealed). Requires no Gate 4, no new source, no post-2026-10-31 data.",
+ "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal; do not wait/poll). NOT a blocker for this campaign. Hazards: (1) 1h candles unavailable before 2026-04-18 - must use 4h; (2) funding cache starts 2025-11 - must paginate live fundingHistory for 2025-05..2025-10; (3) the literal string RESOLVED_VERIFIED appears inside research_state/fclr020_local_audit/fclr020_gate4_readiness_action_matrix_latest.json - it is a readiness matrix, NOT a Gate 4 trigger. RESOLVED 2026-11-12T11:38Z: requirements.txt now includes pyarrow and the worker bootstrap installs it, so the recurring pandas/pyarrow ModuleNotFoundError wall is gone; do not re-diagnose it.",
+ "generated": "20261112T113800Z",
+ "last_checked": "20261112T113800Z",
+ "next_action_heavy": "FCLR-EARLY4H-2025H1-HEAVY, strict order: (1) bounded unauthenticated acquisition of 4h candleSnapshot + fundingHistory for the 9 coins over 2025-05-01..2025-11-01, cached with .sha256/.accessed.json, emit tracka_hl_early2025h1_acquisition_report_<UTC>.json. (2) Freeze research_state/tracka_prereg_early2025h1_<UTC>.{json,md} BEFORE any outcome: window 2025-05-01..2025-10-31, 9 named coins, unit coin x 24h UTC bucket, frozen B0/B1/C1/C2 model forms, primary contrast C2_vs_B1, QLIKE, >=3 non-overlapping 30-d test blocks with >=7-d embargo, block bootstrap >=2000 fixed seed, Holm across the full declared family, materiality >=2% relative reduction AND 95% CI upper bound <0, >=5 paired instruments; targets = Track A next-24h observed liquidation intensity AND Track C-style next-24h RV. (3) Deterministic panel build -> tracka_hl_early2025h1_panel_<UTC>.parquet + build report with hashes/coverage/missingness/leakage guards. (4) Evaluate -> evaluation_summary_EARLY4H-2025H1-<UTC>.md with per-block/per-coin breakdown, Holm-adjusted p-values, calibration, explicit PASS/NOT_MET; atomic state updates under a NEW experiment ID. (5) If NOT_MET continue to power/coverage audit, then the 2024-08..2025-04 extension feasibility question (4h reaches 2024-08-01; ironflow labels do not exist before 2025-05 - hard label ceiling). Do not stop on a negative primary.",
+ "next_unfinished_task": "FCLR_EARLY4H_2025H1_ACQUIRE_PREREG_BUILD_EVAL",
+ "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+ "rank": 0,
+ "resume_triggers": [
+  "This campaign has not yet been executed (sufficient on its own)",
+  "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation)",
+  "HL 2026-11+ depth >=100d AND verified post-2026-10-31 observed labels",
+  "New admissible liquidation-label source (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
+ ],
+ "status": "ACTIVE_HEAVY_CAMPAIGN",
+ "supersedes_prior_next_task_entries": [
+  "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
+  "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
+  "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
+  "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
+  "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+ ],
+ "task": "FCLR_EARLY4H_2025H1_ACQUIRE_PREREG_BUILD_EVAL"
+},
+{
   "artifact_churn_note": "2026-11-12T07:34:18Z: FCLR-NEXT campaign installed as the sole authoritative next task, superseding all prior rank-0 next-task entries. Prior session (2026-11-12T07:31:59Z) monitor probe completed and evidenced INELIGIBLE (`research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`: HL ~12.0d < 100d, no post-2026-10-31 ironflow labels). Gate 4 trigger absent (verified, external/legal). Stale rank-0 frontier entries (TRACKA_ALT_VOLATILITY / TRACKA_EXPANSION_ROBUSTNESS / BOUNDED_NEW_DATA_DISCOVERY / EXTERNAL_NEW_DATA_SOURCE) are sealed NOT_MET/FRAGILE or just-executed ineligible probes — preserved as history, not relitigated. H2 registry corrected to EXPLORATORY_ONLY/PARTIAL (`research_state/h002_replication_report.md`).",
   "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal, not agent-removable — do not wait/poll). HL 2026-11+ ~12d insufficient; no verified post-2026-10-31 observed liquidation labels. All cached-data designs sealed/exhausted. No untested admissible cached-data experiment remains.",
   "generated": "20261112T073418Z",
