@@ -1,0 +1,121 @@
+{
+  "artifact": "new_data_admissibility_audit",
+  "schema_version": 1,
+  "generated_utc": "2026-11-12T04:27:38Z",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "gate4_trigger_checked_utc": "2026-11-12T04:27:38Z",
+  "gate4_resolved_trigger_present": false,
+  "gate4_highest_local_artifact": "research_state/fclr016_local_audit/fclr016_v5_terms_evidence_UNRESOLVED_20261108T204000Z.json",
+  "gate4_status": "UNRESOLVED_BLOCKED_NOT_AGENT_REMOVABLE",
+  "admissibility_requirements_source": "RESEARCH_PROMPT.md §16",
+  "locally_admissible_untested_candidate_found": false,
+  "determination": "ALL_CACHED_DATA_EXHAUSTED_SEALED",
+  "candidates_inventoried": [
+    {
+      "id": "HL_funding_cache",
+      "path": "research_state/data_cache/hyperliquid_funding/*.json",
+      "venue": "hyperliquid",
+      "symbols": 23,
+      "coverage_utc": "2025-11-01..2026-10-30 (hourly, verified 8668 records for BTC/ETH/SOL/BNB/XRP)",
+      "label_type": "funding feature only",
+      "provenance_evidence": ".sha256 + .accessed.json per coin; api.hyperliquid.xyz/info fundingHistory POST (unauthenticated)",
+      "admissible": false,
+      "untested_claim_enabled": false,
+      "verdict": "INADMISSIBLE_FOR_NEW_CLAIM_feature_only_window_exhausted"
+    },
+    {
+      "id": "HL_candles_cache",
+      "path": "research_state/data_cache/hyperliquid_candles/*/",
+      "venue": "hyperliquid",
+      "symbols": 17,
+      "coverage_utc": "BTC/ETH empty 2025-11..2026-03; partial 2026-04 (~45KB); full 2026-05..2026-10 (~114-118KB/month)",
+      "label_type": "candles RV feature only",
+      "provenance_evidence": ".sha256 + .accessed.json per month; hyperliquid_candles_manifest_20261111T145106Z.json",
+      "admissible": false,
+      "untested_claim_enabled": false,
+      "verdict": "INADMISSIBLE_FOR_NEW_CLAIM_window_2026-05..2026-10_exhausted_early_2025-11..2026-04_INADMISSIBLE_RV_uncomputable"
+    },
+    {
+      "id": "ironflow_events_cache",
+      "path": "research_state/data_cache/ironflow_events/*.parquet",
+      "venue": "hyperliquid (ironflow)",
+      "coverage_utc": "2025-05..2026-10 monthly (18 parquets)",
+      "label_type": "observed liquidation labels",
+      "provenance_evidence": "CC BY 4.0",
+      "admissible": false,
+      "untested_claim_enabled": false,
+      "verdict": "INADMISSIBLE_FOR_NEW_CLAIM_outcome_labels_only_no_new_feature_window"
+    },
+    {
+      "id": "craftify_liq_cache",
+      "path": "research_state/data_cache/craftify_liq/liq_2025-10.parquet, liq_2026-01.parquet",
+      "venue": "unknown/secondary",
+      "coverage_utc": "2 months only (2025-10, 2026-01)",
+      "label_type": "liquidation (claimed)",
+      "provenance_evidence": "none documented locally",
+      "admissible": false,
+      "untested_claim_enabled": false,
+      "verdict": "INADMISSIBLE_coverage_insufficient_provenance_unverified"
+    },
+    {
+      "id": "binance_cache",
+      "path": "data/raw/ + research_state/data_cache/*USDT_2024_.. / 2025_.. / 2026_..",
+      "venue": "binance",
+      "symbols": 5,
+      "coverage_utc": "2024-01..2026-11",
+      "label_type": "market data",
+      "provenance_evidence": "local zips, extraction tested",
+      "admissible": false,
+      "untested_claim_enabled": false,
+      "verdict": "SEALED_INADMISSIBLE_Track_A_Hyperliquid_only_Binance_2024_conflation_forbidden_Track_B_C_2024_NOT_SUPPORTED"
+    },
+    {
+      "id": "acquisition_path_scripts",
+      "path": "scripts/hyperliquid_funding_fetch.py, tracka_hl_fetch_candles_*.py, h004_download_2026.py, download_extended.py, exhaustive_binance_probe.py, hunt_alternative_liquidation_sources.py, monitor_ironflow_liquidations.py",
+      "venue": "n/a",
+      "admissible": false,
+      "untested_claim_enabled": false,
+      "verdict": "PATHS_ONLY_no_new_local_window_symbols_uncovered"
+    }
+  ],
+  "sealed_records_not_to_reopen": [
+    "TRACKA-HL-EXPANSION-20261111T195500Z=PASS (robustness FRAGILE)",
+    "TRACKA-VOL-20261111T234918Z=NOT_MET",
+    "TRACKA-VOL-FAMILY-20261112T005111Z=NOT_MET",
+    "TRACKA-ALT-VOL-20261112T020322Z=NOT_MET",
+    "Track_A_9symbol_2026-05..2026-10=NOT_MET_closed",
+    "Track_A_early_2025-11..2026-04=INADMISSIBLE_closed",
+    "Track_B_C_2024_H1_FCLR-002_003=NOT_SUPPORTED_closed",
+    "FCLR-003_2024_Binance_confirmatory=NOT_SUPPORTED_immutable"
+  ],
+  "minimal_external_acquisition_specification": {
+    "venue_product": "perpetual futures venue with unauthenticated public historical funding + mark/index price candles AND observed liquidation labels, OR genuinely new venue; NOT Binance 2024, not conflated with sealed Binance verdicts",
+    "symbols": ">=5 instruments, ex-ante selected, not outcome-dependent",
+    "date_range": "window NOT already sealed: Hyperliquid 2026-11 onward (post-panel) OR different venue/window with >=3 non-overlapping 30-day test blocks plus train/val/test + 7-day embargo",
+    "fields": "signed funding rate (timestamped), mark price, index price (premium/EMA), observed liquidation notional/count where Track A, else realized-volatility Track C target",
+    "license_provenance_proof": "exact URL/endpoint, access date UTC, license/terms, file hashes/ETags, schema, cadence, gaps; human/legal review where terms require (Gate 4 pattern)",
+    "access_constraint": "unauthenticated, bounded, no payment/signup/manual download/requester-pays; fully evidenced; no fabricated/proxy/synthetic liquidation labels as observed"
+  },
+  "required_next_artifacts": [
+    "bounded network probe(s) of selected new source, fully evidenced (endpoint, status, schema sample, coverage, license/terms), saved to research_state/ with timestamp",
+    "if admissible: freeze preregistration BEFORE outcomes (research_state/track*_prereg_*_<UTC>.json + .md), then build+eval in-session if feasible, emit verdict + atomic state updates (experiment_frontier.json, manifests/registry)",
+    "if no admissible external source verifiable: document structural exhaustion with evidence, name next materially different free route, keep program_status=ACTIVE_HEAVY_CAMPAIGN next_unfinished_task=EXTERNAL_NEW_DATA_SOURCE"
+  ],
+  "bottlenecks": [
+    {"bottleneck": "Gate 4 Branch 1 external/legal Binance terms", "status": "BLOCKED_not_agent_removable", "action": "Verified absent 2026-11-12T04:27:38Z; execute Branch 1 only on valid RESOLVED trigger (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation); do not wait/poll"},
+    {"bottleneck": "No untested admissible cached-data experiment", "status": "EXHAUSTED", "action": "inventory complete -> this audit artifact; next: external new-data acquisition spec above"},
+    {"bottleneck": "competing root handoff docs / session ambiguity", "status": "REMOVED", "action": "HANDOFF_NEXT_SESSION.md sole durable root handoff; AGENT_HANDOFF.md/FOCUS_CAMPAIGN.md/NEXT_SESSION_TASK.md are redirects"},
+    {"bottleneck": "prior campaign items volatility family / expansion robustness / alternate volatility", "status": "COMPLETED_SEALED", "action": "do not reopen/retune/relitigate"}
+  ],
+  "hard_bans": [
+    "no outcome inspection before prereg freeze; no threshold-shopping; no sealed-holdout reuse",
+    "no Binance/2024 conflation; venue-consistent artifacts only",
+    "no modeled/proxy/synthetic liquidation labels as observed",
+    "no .github/workflows edits; no redundant network polling; no agent-set RESOLVED_VERIFIED/fabricated=true; no Gate 4 bypass",
+    "no status-only output",
+    "no new experiments on exhausted cached data; new claim requires NEW admissible data/source with provenance/license/coverage per RESEARCH_PROMPT.md §16"
+  ],
+  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+  "next_unfinished_task": "EXTERNAL_NEW_DATA_SOURCE_PROBE_PREREG_EVAL_OR_DOCUMENTED_STRUCTURAL_EXHAUSTION",
+  "no_status_only_output": true
+}

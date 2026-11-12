@@ -1,36 +1,49 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized)
-**Handoff timestamp (UTC):** 2026-11-12T04:26:20Z (supersedes 2026-11-12T02:07:25Z; this file remains the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T04:27:38Z (supersedes 2026-11-12T04:26:20Z; this file remains the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Immediate task (heavy, in-session now)
 Do not produce a status-only response. Execute the Focus Campaign below now.
 
 ### (A) Gate 4 Branch 1 — FIRST CHECK (deterministic, only if valid trigger exists)
-- **Verified this session (2026-11-12T04:26:20Z):** `research_state/fclr016_local_audit/` contains **no** `fclr016_v5_terms_evidence_RESOLVED_*` artifact with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts present. **Do not wait/poll.**
+- **Verified this session (2026-11-12T04:27:38Z):** `research_state/fclr016_local_audit/` contains **no** `fclr016_v5_terms_evidence_RESOLVED_*` artifact with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Highest local artifact is `fclr016_v5_terms_evidence_UNRESOLVED_20261108T204000Z.json` (`confirmatory_claim_go=NO_GO`, `status=UNRESOLVED`, reviewer_role=pending_human_legal_maintainer). Only `_BLOCKED`/`_UNRESOLVED`/`_partial`/probe artifacts present. **Do not wait/poll.**
 - **If a valid RESOLVED trigger appears:** execute deterministic Branch 1 path only — promotion + validators; on all-green run confirmatory Track C multi-split ablation + verdict + required state updates per Gate 4 protocol. Never guess, never set `fabricated=true`, never bypass.
 - **If absent (current state):** proceed immediately to (B). Program awaits Gate 4 or new data, but this session must still do heavy work (B).
 
-### (B) REPO-PRIORITY: ALL CACHED-DATA CLAIMS EXHAUSTED — NEW ADMISSIBLE DATA CAMPAIGN (MANDATORY)
-All admissible cached-data volatility/liquidation designs on current Hyperliquid/Binance caches are **EXHAUSTED/SEALED** (see “Sealed — do not reopen”). No new claim-worthy experiment may be run on exhausted cached data. The next repo-priority work is to **find and qualify a NEW admissible data source/window** (or prove none exists locally) per `RESEARCH_PROMPT.md` §16 and move it to a frozen preregistration.
+### (B) REPO-PRIORITY: LOCAL NEW-DATA ADMISSIBILITY INVENTORY COMPLETE — NO LOCALLY-ADMISSIBLE UNTESTED CANDIDATE
+The mandatory local new-data admissibility inventory (RESEARCH_PROMPT.md §16) was executed this session. Findings are recorded in:
+- `research_state/new_data_admissibility_audit_20261112T042738Z.md` (evidence-backed assessment)
+- `research_state/new_data_admissibility_audit_20261112T042738Z.json` (machine summary)
 
-**New admissible data (hard requirements):** unauthenticated/public, provenance + license/terms documented, sufficient for the claim (observed labels where required; no modeled/proxy/synthetic liquidation labels as observed), coverage meeting design minimums (typically ≥5 symbols/instruments and ≥3 non-overlapping 30-day test blocks, with non-overlapping train/val/test and embargo as applicable), venue-consistent with artifacts, and not conflated with sealed Binance 2024 verdicts.
+**Conclusion:** **NO locally-admissible untested candidate exists.** All admissible cached-data volatility/liquidation designs on current Hyperliquid/Binance caches are EXHAUSTED/SEALED:
+- `hyperliquid_funding/` (23 coins, 2025-11..2026-10): feature-only, window exhausted.
+- `hyperliquid_candles/*/` (17 symbols): 2026-05..2026-10 exhausted (all volatility designs NOT_MET); 2025-11..2026-04 INADMISSIBLE (candles empty → RV uncomputable).
+- `ironflow_events/*.parquet` (2025-05..2026-10): observed labels only, paired with exhausted candle window.
+- `craftify_liq/` (2 months): coverage insufficient, provenance unverified → INADMISSIBLE.
+- `data/raw/` + Binance monthly caches: SEALED/INADMISSIBLE (Track A Hyperliquid-only; Binance/2024 conflation forbidden; Track B/C 2024 NOT_SUPPORTED).
+
+Per §(B) step 4: document exhausted-local state + specify the minimal external acquisition needed — **do not fabricate, download unverified data, or guess provenance.** Any network acquisition must follow repo policy and be unauthenticated, bounded, and fully evidenced.
 
 ## FOCUS CAMPAIGN (EXECUTE IN ORDER, HEAVY WORK REQUIRED)
 1. **Gate 4 trigger check (done/verified):** absent → continue. Do not re-poll.
-2. **Local new-data admissibility inventory (concrete, this session):**
-   - Inventory potential untested sources in-repo: `data/raw/`, `data/`, `research_state/data_cache/` (including non-HL/Binance-month dirs such as `hyperliquid_candles`, `hyperliquid_funding`, `ironflow_events`, `craftify_liq`, any BTCUSDT subdirs, manifests), and any scripts under `scripts/`/`src/` that define admissible acquisition/build paths.
-   - For each candidate, produce an evidence-backed assessment against §16: venue, symbols, time coverage, continuity/gaps, label type (observed vs proxy), provenance/license evidence available locally, and whether it enables an **untested** funding-conditioned volatility or liquidation-risk claim not already sealed.
-   - Write findings to a timestamped artifact: `research_state/new_data_admissibility_audit_<UTC>.md` (+ `.json` summary) listing `ADMISSIBLE_CANDIDATE` / `INADMISSIBLE` / `NEEDS_EXTERNAL_PROVENANCE` with reasons.
-3. **If any locally-admissible untested candidate exists:** freeze a preregistration **BEFORE outcomes** (`research_state/track*_prereg_*_<UTC>.json` + `.md`) with hypothesis, exact data/feature/label definitions, splits/embargo/blocks, primary metric/gate, robustness/multiplicity plan, and pass/fail criteria; then execute build+eval in-session if feasible and emit verdict + atomic state updates (`experiment_frontier.json`, manifests/registry as applicable). No threshold-shopping, no holdout reuse.
-4. **If no locally-admissible candidate exists (likely, given exhausted caches):** document exhausted-local state in the audit artifacts and in this handoff’s next update context; specify the minimal external acquisition needed (exact venue/product, symbols, date range, fields, license/provenance proof required) to unblock a new claim — but **do not fabricate, download unverified data, or guess provenance**. Any network acquisition must follow repo policy and be unauthenticated, bounded, and fully evidenced.
-5. **State hygiene (only as justified):** keep this file the single durable root handoff; keep redirects aligned. Preserve all sealed records/verdicts/manifests exactly as immutable.
+2. **Local new-data admissibility inventory (DONE this session):** audit artifacts emitted above. Conclusion: no locally-admissible untested candidate.
+3. **Mandatory next heavy work — EXTERNAL NEW-DATA ACQUISITION CAMPAIGN:** Acquire ONE new admissible source/window meeting ALL of RESEARCH_PROMPT.md §16 (see audit artifact § "Minimal external acquisition needed"):
+   - unauthenticated/public, provenance + license/terms documented,
+   - observed labels where required (no modeled/proxy/synthetic liquidation labels as observed),
+   - ≥5 symbols/instruments, ≥3 non-overlapping 30-day test blocks, non-overlapping train/val/test + 7-day embargo,
+   - venue-consistent, not conflated with sealed Binance 2024 verdicts,
+   - NOT already sealed: e.g. Hyperliquid 2026-11 onward (post-panel) or a genuinely new venue/window.
+   Run bounded network probe(s), fully evidenced (endpoint, status, schema sample, coverage, license/terms), saved to `research_state/` with timestamp.
+4. **If any externally-admissible candidate is verified:** freeze a preregistration **BEFORE outcomes** (`research_state/track*_prereg_*_<UTC>.json` + `.md`) with hypothesis, exact data/feature/label definitions, splits/embargo/blocks, primary metric/gate, robustness/multiplicity plan, pass/fail criteria; then execute build+eval in-session if feasible and emit verdict + atomic state updates (`experiment_frontier.json`, manifests/registry). No threshold-shopping, no holdout reuse.
+5. **If no admissible external source is verifiable:** document structural exhaustion with evidence in this handoff's next update context; name the next materially different free route; keep `program_status=ACTIVE_HEAVY_CAMPAIGN`, `next_unfinished_task=EXTERNAL_NEW_DATA_SOURCE`. Do not write another blocker memo and wait if a valid bounded free-data/diagnostic task exists.
+6. **State hygiene (only as justified):** keep this file the single durable root handoff; keep redirects aligned. Preserve all sealed records/verdicts/manifests exactly as immutable.
 
 ## BOTTLENECKS — STATUS & REQUIRED ACTION
-| Bottleneck | Status | Removal/action (this session) |
+| Bottleneck | Status | Removal/action (this session / next session) |
 |---|---|---|
-| Gate 4 Branch 1 (external/legal Binance terms) | BLOCKED, not agent-removable | Verified absent 2026-11-12T04:26:20Z. **Do not wait.** Execute Branch 1 only on valid RESOLVED trigger with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation. |
-| No untested admissible cached-data experiment remains | **EXHAUSTED** | Mandatory local new-data admissibility inventory + timestamped audit artifacts (§16). Prereg+run if candidate found; else evidence-backed exhaustion/external-spec. |
+| Gate 4 Branch 1 (external/legal Binance terms) | BLOCKED, not agent-removable | Verified absent 2026-11-12T04:27:38Z. **Do not wait.** Execute Branch 1 only on valid RESOLVED trigger with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation. |
+| No untested admissible cached-data experiment | EXHAUSTED | Inventory complete → audit artifacts emitted. Next: external new-data acquisition campaign (above). |
 | Competing root handoff docs / session ambiguity | REMOVED | This file sole durable root handoff; redirects in place. |
 | Prior campaign items (volatility family, expansion robustness, alternate volatility) | COMPLETED/SEALED | Do not reopen/retune/relitigate. |
 
@@ -57,6 +70,7 @@ All admissible cached-data volatility/liquidation designs on current Hyperliquid
 - Protocol: `RESEARCH_PROMPT.md` (esp. §16 admissible new data)
 - Caches: `research_state/data_cache/hyperliquid_candles/`, `research_state/data_cache/hyperliquid_funding/`, `research_state/data_cache/ironflow_events/`, `data/`, `data/raw/`
 - Sealed results: `research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md`, `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md`, `research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md`, `research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md`, `research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md`
+- This session's audit: `research_state/new_data_admissibility_audit_20261112T042738Z.md` + `.json`
 
 ---
-**Execute Gate 4 check (verified absent) → run local new-data admissibility inventory and emit `research_state/new_data_admissibility_audit_<UTC>.md/.json` now. If candidate found: freeze prereg and run. No status-only output.**
+**Execute Gate 4 check (verified absent) → external new-data acquisition campaign now. If candidate verified: freeze prereg + build/eval + verdict + state updates. If none verifiable: document structural exhaustion + next materially different free route. No status-only output.**
