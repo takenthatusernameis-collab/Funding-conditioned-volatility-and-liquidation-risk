@@ -1,5 +1,21 @@
 [
   {
+    "artifact_churn_note": "20261112T005111Z: Completed TRACKA-VOL-FAMILY-20261112T005111Z multiplicity evaluation. Primary 24h + secondary 6h/72h/168h horizons evaluated on frozen panel. Family-wise gate: NOT_MET. Holm correction applied across 12 comparisons. State updated; sealed records preserved.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated.",
+    "generated": "20261112T005111Z",
+    "last_checked": "20261112T005111Z",
+    "next_action_heavy": "If volatility family NOT_MET: execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze new prereg BEFORE outcomes specifying ex-ante checks (leave-one-instrument-out, placebo/permutation on funding features fixed seed, alternative block/bootstrap settings) with pass/falsification criteria; emit verdict + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
+    "next_unfinished_task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "Complete TRACKA-EXP-ROBUST prereg+checks+verdict; preregister next admissible claim"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+  },
+  {
     "artifact_churn_note": "2026-11-11T23:59:55Z: Completed TRACKA-VOL-20261111T234918Z (GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS). Prereg frozen pre-outcomes; cached Hyperliquid 9-coin panel 2026-05..2026-10 built/evaluated. Verdict NOT_MET (C2 vs B1 QLIKE rel -1.37%, CI crosses zero, n=19233, 9 instruments, 3 blocks). State updated; sealed records preserved. Gate 4 external-blocked.",
     "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required, fabricated=false). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed. No Binance/2024 conflation.",
     "generated": "2026-11-11T23:59:55Z",

@@ -189,3 +189,24 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Compliance:** prereg frozen before outcomes; no outcome peeking/threshold-shopping/post-outcome edits; no sealed-holdout reuse; Hyperliquid-only (no Binance/2024 conflation); cached admissible inputs only; causal features; no `.github/workflows` edits; Gate 4 not bypassed (remains EXTERNAL_BLOCKED, no valid RESOLVED_VERIFIED trigger).
 
 **Implication:** Funding-conditioned features not confirmed over RV-only baseline for next-24h realized variance on this admissible 2026-05..2026-10 Hyperliquid panel under frozen criteria. Sealed Track A liquidation expansion PASS and all prior sealed/closed records preserved.
+
+
+## 20261112T005111Z — TRACKA-VOL-FAMILY-20261112T005111Z
+- **Verdict**: NOT_MET (family-wise)
+- **Experiment**: TRACKA-VOL-FAMILY-20261112T005111Z
+- **Prereg**: `research_state/tracka_prereg_volatility_20261111T234918Z.json`
+- **Panel**: `research_state/tracka_vol_panel_20261111T234918Z.parquet` (sha256 `bd6b9924...`)
+- **Family**: 4 horizons × 3 contrasts = 12 comparisons, Holm correction
+- **6h C2_vs_B1**: p=0.605427, rel=-0.03%, CI=[-0.006230,0.011278], Holm=NOT_REJECTED
+- **6h C1_vs_B1**: p=0.000000, rel=-0.05%, CI=[0.002769,0.005469], Holm=REJECTED
+- **6h C2_vs_C1**: p=0.692183, rel=0.02%, CI=[-0.010092,0.007090], Holm=NOT_REJECTED
+- **24h C2_vs_B1**: p=0.095507, rel=0.09%, CI=[-0.012758,0.000982], Holm=NOT_REJECTED
+- **24h C1_vs_B1**: p=0.000000, rel=0.06%, CI=[-0.004921,-0.002302], Holm=REJECTED
+- **24h C2_vs_C1**: p=0.532739, rel=0.03%, CI=[-0.008864,0.004727], Holm=NOT_REJECTED
+- **72h C2_vs_B1**: p=0.740218, rel=0.02%, CI=[-0.006749,0.004919], Holm=NOT_REJECTED
+- **72h C1_vs_B1**: p=0.086545, rel=-0.03%, CI=[-0.000165,0.003161], Holm=NOT_REJECTED
+- **72h C2_vs_C1**: p=0.388457, rel=0.05%, CI=[-0.007955,0.003141], Holm=NOT_REJECTED
+- **168h C2_vs_B1**: p=0.161060, rel=0.07%, CI=[-0.006904,0.001136], Holm=NOT_REJECTED
+- **168h C1_vs_B1**: p=0.363689, rel=0.01%, CI=[-0.001245,0.000466], Holm=NOT_REJECTED
+- **168h C2_vs_C1**: p=0.219855, rel=0.06%, CI=[-0.006347,0.001570], Holm=NOT_REJECTED
+- **Summary**: No horizon passes primary gate after multiplicity correction.
