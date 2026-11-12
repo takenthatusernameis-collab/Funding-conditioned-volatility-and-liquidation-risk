@@ -330,6 +330,18 @@ def replicate_funding_correction(symbols=None, months=None):
         for month in months:
             fund_dir = REPO / f"{sym}-fundingRate-{month}"
             fund_csv = fund_dir / f"{sym}-fundingRate-{month}.csv"
+            if not fund_csv.exists():
+                # Fallbacks to canonical provenanced sources for 2024-01..03 (repo-root
+                # funding dirs were never populated for these months):
+                #   1) research_state/data_cache/{sym}_{YYYY_MM}/fundingRate-YYYY-MM/
+                #      {sym}-fundingRate-YYYY-MM.csv  (canonical cache layout)
+                #   2) data/raw/{sym}-fundingRate-YYYY-MM.csv        (repo-root CSVs)
+                # Unauthenticated local files only; no network, no fabrication.
+                alt = DATA_CACHE / f"{sym}_{month.replace('-', '_')}" / "fundingRate" / f"{sym}-fundingRate-{month}.csv"
+                if not alt.exists():
+                    alt = REPO / "data" / "raw" / f"{sym}-fundingRate-{month}.csv"
+                if alt.exists():
+                    fund_csv = alt
             if fund_csv.exists():
                 try:
                     series += load_funding_series(fund_csv)

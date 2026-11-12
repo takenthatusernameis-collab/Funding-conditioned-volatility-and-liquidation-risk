@@ -157,9 +157,9 @@ class TestDriftInvariantsWiredCLI101(unittest.TestCase):
             root = _mk_repo(td / "repo", None)
             rs = _mk_valid_rs(td / "rs")
             # add files to exceed bound. Bound tracks the committed baseline
-            # (211 as of FCLR-NEXT-165 registry drift repair); pad generously so
+            # (260 as of 2026-11-12T03:2XZ heavy-campaign artifacts); pad generously so
             # the negative test stays fail-closed regardless of baseline drift.
-            for i in range(240):
+            for i in range(300):
                 (rs / f"pad_{i:04d}.md").write_text("x")
             checks = trc.drift_invariants(root, research_state_dir=rs)
             self.assertFalse(checks["root_md_json_bounded"]["pass"])

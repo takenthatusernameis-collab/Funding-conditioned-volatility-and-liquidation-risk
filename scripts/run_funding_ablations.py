@@ -17,6 +17,7 @@ import hashlib
 import re
 import subprocess
 import sys
+import zipfile
 from datetime import datetime, timezone, timedelta
 import os
 
@@ -491,11 +492,32 @@ def _load_manifest_json(p: Path) -> dict:
 def ensure_extracted(symbols: List[str]) -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     from src.ingest import loader
+    # 1) canonical contract-day zips at repo root (legacy layout)
     zips = loader.discover_zips(ZIPS_DIR)
+    # 2) canonical contract-day zips in the local data cache under <SYM>_<YYYY_MM>/
+    #    (the primary provenanced source for 2024-01..2024-03 klines). These are
+    #    unauthenticated local files only; extraction is idempotent and bounded.
+    if CACHE.exists():
+        for sym in symbols:
+            for zp in sorted(CACHE.glob(f"{sym}_*/{sym}-1h-*.zip")):
+                if zp.is_file():
+                    zips.append(zp)
+            for zp in sorted(CACHE.glob(f"{sym}_*/{sym}-fundingRate-*.zip")):
+                if zp.is_file():
+                    zips.append(zp)
     for zp in zips:
         if not any(s in zp.name for s in symbols):
             continue
         try:
+            # Remove any pre-existing RAW copy (e.g. zero-volume placeholder CSVs that
+            # shipped at repo root for the same stem) so the provenanced canonical zip
+            # overwrites them. loader.extract_zip skips existing targets by design, so
+            # the placeholder would otherwise silently shadow the real data.
+            with zipfile.ZipFile(zp) as zf:
+                for member in zf.namelist():
+                    t = RAW / member
+                    if t.exists():
+                        t.unlink()
             loader.extract_zip(zp, RAW)
         except Exception:
             continue

@@ -522,7 +522,55 @@ SCRIPT_REGISTRY = {
     "class": "repo_maintenance_utility",
     "reason": "repair_local_provenance.py: local-only provenance repair/maintenance utility (sha256 sidecars + JSON manifests for local Track C cache); no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network."
   },
-  "extract_fclr012v_v2.py": {
+  "eval_volatility_family.py": {
+     "class": "track_c_sealed_volatility",
+     "reason": "eval_volatility_family.py: evaluates the sealed volatility multiplicity family (TRACKA-VOL-FAMILY-20261112T005111Z) on the frozen cached Hyperliquid volatility panel; writes only timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts for a SEALED NOT_MET campaign, no live outcomes, no new prereg, no guarded Track A liquidation claim production."
+   },
+   "run_alt_volatility.py": {
+     "class": "track_c_sealed_volatility",
+     "reason": "run_alt_volatility.py: alternate volatility design evaluation (TRACKA-ALT-VOL-20261112T015546Z) on the frozen cached volatility panel; 6h horizon/different feature set/5 test blocks; writes only timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts for a SEALED NOT_MET campaign, no live outcomes, no new prereg, no guarded Track A liquidation claim production."
+   },
+   "run_expansion_robustness.py": {
+     "class": "track_c_sealed_volatility",
+     "reason": "run_expansion_robustness.py: pre-registered robustness/falsification campaign (leave-one-instrument-out, placebo/permutation on funding features fixed seed 20261112, alternative block/bootstrap settings) for the sealed Track A Hyperliquid expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on the frozen cached expansion panel; writes only timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts for a SEALED PASS campaign, no live outcomes, no new prereg, no guarded Track A liquidation claim production."
+   },
+   "tracka_hl_build_panel_cached.py": {
+     "class": "track_c_sealed_volatility",
+     "reason": "tracka_hl_build_panel_cached.py: deterministic panel builder from cached admissible ironflow_events + hyperliquid_funding inputs only (no network); writes only timestamped aligned parquet + panel-build report JSON for the Track A successor/early/expansion campaigns; no outcome computation, no mark-price/RV (not cached), fail-closed on schema."
+   },
+   "tracka_hl_build_panel_with_rv.py": {
+     "class": "track_c_sealed_volatility",
+     "reason": "tracka_hl_build_panel_with_rv.py: deterministic panel builder from cached admissible ironflow_events + hyperliquid_funding + hyperliquid_candles inputs only (no network); writes only timestamped aligned-with-RV parquet + panel-build report JSON for the Track A successor campaign; no outcome computation, fail-closed on schema."
+   },
+   "tracka_hl_evaluate_successor.py": {
+     "class": "track_c_sealed_volatility",
+     "reason": "tracka_hl_evaluate_successor.py: pre-registered C2-vs-B1 evaluation on observed Hyperliquid liquidation intensity using the frozen RV-augmented aligned panel and frozen pre-registered splits (train May / val early-Jun / 3 test blocks Jul-Aug-Sep-Oct with 7d embargo); block-bootstrap paired CIs and materiality gate; writes only timestamped evaluation_summary/verdict artifacts for a SEALED campaign, deterministic fixed seed 20261111, no threshold-shopping, no outcome inspection before freeze."
+   },
+   "tracka_hl_expansion_funding_paginate.py": {
+     "class": "raw_fetch_monitor_provenance",
+     "reason": "tracka_hl_expansion_funding_paginate.py: bounded, unauthenticated, provenanced Hyperliquid fundingHistory pagination (API caps at 500 rows) for expansion candidates until full 2026-05..2026-10 coverage; skips already-fully-covered coins; no redundant polling; admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
+   },
+   "tracka_hl_expansion_probe.py": {
+     "class": "raw_fetch_monitor_provenance",
+     "reason": "tracka_hl_expansion_probe.py: bounded probe acquisition for GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 candidate symbols; ranks by ex-ante observed label notional_usd over cached ironflow_events 2026-05..2026-10 (label-only, NOT an outcome/forecast), then bounded first-time unauthenticated Hyperliquid fundingHistory + candleSnapshot 2026-05..2026-10 with .accessed.json + .sha256 provenance; skips existing valid caches; writes only a timestamped probe report JSON; no redundant polling, no outcome claims."
+   },
+   "tracka_hl_fetch_candles_early.py": {
+     "class": "raw_fetch_monitor_provenance",
+     "reason": "tracka_hl_fetch_candles_early.py: bounded first-time acquisition of Hyperliquid 1h candleSnapshot for GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 (missing months 2025-11..2026-04 only); saves raw JSON per coin/month with .accessed.json provenance and .sha256; skips existing valid non-empty caches; retries with backoff on errors/429; never re-fetches cached 2026-05..2026-10; no redundant polling, no outcome claims."
+   },
+   "tracka_hl_fetch_candles_successor.py": {
+     "class": "raw_fetch_monitor_provenance",
+     "reason": "tracka_hl_fetch_candles_successor.py: bounded first-time acquisition of Hyperliquid 1h candleSnapshot for the Track A successor window; saves raw JSON per coin/month with .accessed.json provenance and .sha256; skips existing valid non-empty caches; retries with backoff on errors/429; no redundant polling, no outcome claims."
+   },
+   "tracka_hl_pathb_fetch_candles.py": {
+     "class": "raw_fetch_monitor_provenance",
+     "reason": "tracka_hl_pathb_fetch_candles.py: bounded, first-time Track A path-(b) mark-price candleSnapshot acquisition for the 9 funded symbols 2026-05..2026-10 via unauthenticated Hyperliquid candleSnapshot POST; saves raw responses per coin/month with .sha256 and .accessed.json provenance; first-time acquisition (no cache exists), NOT redundant polling; no outcome claims."
+   },
+   "tracka_hl_pathb_probe.py": {
+     "class": "raw_fetch_monitor_provenance",
+     "reason": "tracka_hl_pathb_probe.py: bounded, single-shot Track A path-(b) feasibility probe determining the real overlap between ironflow liquidation labels and admissible unauthenticated Hyperliquid-native decision-time predictors (funding history + mark-price candles) for the 9 funded symbols; writes ONLY a timestamped probe JSON under research_state/ (no outcomes inspected, no canonical mutation, no status-only churn); exit 0 always; no redundant polling, no outcome claims."
+   },
+   "extract_fclr012v_v2.py": {
     "class": "track_c_sealed_volatility",
     "reason": "extract_fclr012v_v2.py: FCLR-012-V v2 local CSV extractor for already-downloaded 2026-11 Binance zips; coverage-only, no outcome computation, no Track A liquidation claims, no canonical eval/cross-track writes."
   },

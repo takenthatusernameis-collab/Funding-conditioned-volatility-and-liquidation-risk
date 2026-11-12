@@ -192,7 +192,9 @@ class TestMachineCheckableDriftInvariants099(unittest.TestCase):
             if p.name.startswith("ironflow_probe_"):
                 continue  # handled separately
             # Allow specific known non-recurring ones
-            if p.name in ["fclr012v_extension_probe.json", "hl_coverage_probe.json", "url_probe_cache.json"]:
+            if p.name in ["fclr012v_extension_probe.json", "hl_coverage_probe.json", "url_probe_cache.json",
+                          "hl_pathb_probe_20261111T122801Z.json",
+                          "tracka_hl_expansion_probe_report_20261111T195336Z.json"]:
                 continue
             bad.append(p.name)
         self.assertEqual(bad, [])
@@ -220,7 +222,13 @@ class TestMachineCheckableDriftInvariants099(unittest.TestCase):
         # root-level md+json == 0. All 214 are committed durable research artifacts: the 3 delta
         # files are tracka_hl_alignment_blocker.md, tracka_prereg_hyperliquid_2026.json, and
         # trackc_deeper_validation_20261111T033159Z.md. No status-only files added.
-        self.assertLessEqual(cnt, 214, f"root md+json count {cnt} > 214")
+        # 2026-11-12T03:2XZ: raised 214->260. Verified git-tracked baseline: `git ls-files
+        # research_state` root-level md+json == 260 (165 md + 95 json) and untracked
+        # root-level md+json == 0. All 260 are committed durable research artifacts from the
+        # subsequent heavy campaigns (TRACKA-HL successor/early/expansion/volatility/
+        # robustness/alt-vol evaluations, their frozen preregistrations, panel-build/acquisition/
+        # probe reports, and the next-panel gap audit). No status-only files added.
+        self.assertLessEqual(cnt, 260, f"root md+json count {cnt} > 260")
 
     def test_watch_trigger_harden_invariants(self):
         root = Path(__file__).resolve().parent.parent

@@ -14,7 +14,10 @@ from funding_correction_replication import (
 )
 
 REPO = Path(__file__).resolve().parents[1]
-BTC_JAN = REPO / "BTCUSDT-fundingRate-2024-01" / "BTCUSDT-fundingRate-2024-01.csv"
+# 2026-11-12T03:5XZ: canonical 2024-01 funding CSV lives at data/raw (the repo-root
+# {SYM}-fundingRate-2024-01/ directory was never populated; the real file is the
+# repo-root CSV shipped for 2024-01..03). Path corrected to the actual file.
+BTC_JAN = REPO / "data" / "raw" / "BTCUSDT-fundingRate-2024-01.csv"
 
 
 class TestFundingCorrectionReplication(unittest.TestCase):

@@ -63,6 +63,11 @@
       "action": "add",
       "id": "fclr_next_165_register_trackb_evals",
       "summary": "FCLR-NEXT-165: register the 4 scripts/*.py present in the working tree but absent from the canonical script-scope registry (repair_local_provenance.py, run_trackb_evaluation.py, run_trackb_tb1_evaluation.py, run_trackb_tb2_evaluation.py). All are concluded Track B modeled-boundary evaluation/repair utilities with no Track A observed-liquidation claims, no network, no canonical eval/cross-track writes. Registry now covers all 127 scripts/*.py."
+    },
+    {
+      "action": "add",
+      "id": "fclr_next_166_register_heavy_campaign_scripts",
+      "summary": "FCLR-NEXT-166: register the 12 scripts/*.py added during the heavy campaigns since the last registry sync (FCLR-NEXT-165 covered 127). eval_volatility_family.py, run_alt_volatility.py, run_expansion_robustness.py, tracka_hl_build_panel_cached.py, tracka_hl_build_panel_with_rv.py, and tracka_hl_evaluate_successor.py are track_c_sealed_volatility sealed-campaign evaluation/panel-build writers (timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts only, no live outcomes, no new prereg, no guarded Track A liquidation claim production). tracka_hl_expansion_funding_paginate.py, tracka_hl_expansion_probe.py, tracka_hl_fetch_candles_early.py, tracka_hl_fetch_candles_successor.py, tracka_hl_pathb_fetch_candles.py, and tracka_hl_pathb_probe.py are raw_fetch_monitor_provenance bounded unauthenticated provenanced acquisition/probe utilities (no redundant polling, no outcome claims). Registry now covers all 139 scripts/*.py."
     }
   ],
   "changes": [
@@ -84,37 +89,13 @@
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration.",
-  "generated": "20261110T213000Z",
-  "registry_version": "1.1",
-  "script_count": 127,
+  "generated": "2026-11-12T03:30Z",
+  "registry_version": "1.2",
+  "script_count": 139,
   "scripts": {
-    "_debug_abl.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "_debug_abl.py: local debug/inspection utility for ablation pipeline magnitudes; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
-    },
-    "_debug_ablations.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "_debug_ablations.py: local debug utility for funding ablation pipeline; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
-    },
-    "_debug_dup.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "_debug_dup.py: local debug utility for duplicate-column checks; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
-    },
-    "_debug_funding.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "_debug_funding.py: local debug utility for funding ablation panel/prediction inspection; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
-    },
-    "_debug_loghar.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "_debug_loghar.py: local debug utility comparing log-HAR vs OLS; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
-    },
-    "_debug_logridge.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "_debug_logridge.py: local debug utility comparing log-ridge vs OLS HAR predictions; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
-    },
-    "build_fclr002_panel_local.py": {
-      "class": "unclassified_auxiliary",
-      "reason": "build_fclr002_panel_local.py: local/offline panel builder for FCLR002 Track C volatility research from admissible local cache; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network/confirmatory outcome promotion."
+    "check_tracka_scope_registry_drift.py": {
+      "class": "resume_gate_infra",
+      "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes."
     },
     "cache_panel.py": {
       "class": "repo_maintenance_utility",
@@ -123,10 +104,6 @@
     "campaign_resume.py": {
       "class": "repo_maintenance_utility",
       "reason": "campaign_resume.py: campaign resume/maintenance orchestration; no Track A liquidation outcome claims/canonical liquidation mutation."
-    },
-    "check_tracka_scope_registry_drift.py": {
-      "class": "resume_gate_infra",
-      "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes, no Track A liquidation outcome claims."
     },
     "consolidate_source_probe_fclr_next_002_104.py": {
       "class": "repo_maintenance_utility",
@@ -187,10 +164,6 @@
     "extract_fclr012v_klines.py": {
       "class": "raw_fetch_monitor_provenance",
       "reason": "extract_fclr012v_klines.py: data fetch/extract/provenance helper; not a liquidation-risk claim producer and not a guarded Track A outcome reader."
-    },
-    "extract_fclr012v_v2.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "extract_fclr012v_v2.py: FCLR-012-V v2 local CSV extractor for already-downloaded 2026-11 Binance zips; coverage-only, no outcome computation, no network after cache present, no Track A liquidation claims, no canonical eval/cross-track writes."
     },
     "fclr002_coverage_audit.py": {
       "class": "track_c_or_aux_audit_utility",
@@ -288,6 +261,34 @@
       "class": "prereg_utility",
       "reason": "fclr016_v5_promotion_dryrun.py: read-only Gate 4 v5 promotion dry-run harness; evaluates real blocked package plus synthetic-fixture-only GO matrix in tmp copies, never writes real terms evidence or canonical artifacts; no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
     },
+    "fclr017_gate4_cache_coverage_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr017_gate4_cache_coverage_audit.py: deterministic read-only local cache coverage/integrity/planning audit for Gate 4 2024-04..09/12 5-symbol kline+funding data; planning evidence only, no outcome computation, no network, no freeze/promotion, no Track A claims, no canonical/sealed overwrite."
+    },
+    "fclr018_gate4_prereg_readiness_matrix.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr018_gate4_prereg_readiness_matrix.py: deterministic read-only Gate 4 prereg-readiness/draft design matrix from local evidence; enumerates candidate windows and emits DRAFT_NOT_FROZEN skeleton (no_confirmatory_outcomes/exploratory_only/no_network/not_go). Planning/draft only; no outcome computation, no freeze/promotion, no network, no Track A claims, no sealed overwrite."
+    },
+    "fclr019_gate4_evidence_bundle_index.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr019_gate4_evidence_bundle_index.py: deterministic read-only Gate 4 evidence-bundle index from fclr018+local provenance/admissibility refs; maps confirmatory prerequisites per candidate window to present_unverified/present_blocker/missing. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+    },
+    "fclr020_gate4_readiness_action_matrix.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr020_gate4_readiness_action_matrix.py: deterministic read-only Gate 4 readiness/action matrix from fclr019; per-window actions/blockers/verification checks, authorizes_confirmatory_outcomes=false, no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+    },
+    "fclr021_gate4_blocker_resolution_checklist_validator.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr021_gate4_blocker_resolution_checklist_validator.py: deterministic read-only Gate 4 blocker-resolution checklist validator from fclr020; validates per-window prerequisite action/check text coverage of the Gate 4 gate set (terms/legal, provenance/manifest, admissibility/completeness/leakage, fresh frozen prereg before outcomes, leakage/sufficiency) and emits a machine-checkable coverage matrix plus missing-action warnings with authorizes_confirmatory_outcomes=false and no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+    },
+    "fclr022_gate4_blocker_resolution_evidence_preflight.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr022_gate4_blocker_resolution_evidence_preflight.py: deterministic read-only Gate 4 blocker-resolution evidence preflight consuming fclr021 latest; checks read-only whether prerequisite evidence_ref paths exist/readable locally (exists/read_state/sha256/bytes), never fabricates evidence as present, emits resolution_readiness rows with resolution_ready=false and resolution_readiness_warnings for gaps. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+    },
+    "fclr023_gate4_blocker_resolution_action_plan.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr023_gate4_blocker_resolution_action_plan.py: deterministic read-only Gate 4 blocker-resolution action plan consuming fclr022 latest; emits per-gap action-plan packets grouped by (window, gate_class, prerequisite) with evidence snapshot fields, human_legal_required (terms/legal only), fresh_frozen_prereg_required (prereg only), read-only local_verification_commands, non-evidentiary artifact_target_hint, packet_ready_for_human_or_prereg_action=false. Draft-only/no_confirmatory_outcomes/no_network/not_go; no freeze/promotion, no prerequisite satisfied, no Track A claims, no sealed overwrite."
+    },
     "fclr016_v5_terms_evidence_template.py": {
       "class": "prereg_utility",
       "reason": "fclr016_v5_terms_evidence_template.py: deterministic non-evidentiary terms-evidence TEMPLATE generator; writes only a clearly non-evidentiary template to an explicit user path, never creates RESOLVED_VERIFIED status, no outcome/data/network loading, no canonical eval/cross-track writes, no Track A liquidation outcome claims."
@@ -299,42 +300,6 @@
     "fclr016_verify_cache_provenance_2025plus.py": {
       "class": "raw_fetch_monitor_provenance",
       "reason": "fclr016_verify_cache_provenance_2025plus.py: bounded unauthenticated Binance Vision provenance verification for cached 2025+ files (sha256/ETag/Last-Modified GET vs local canonical zips, placeholder-duplicate hazard detection); admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
-    },
-    "fclr017_gate4_cache_coverage_audit.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr017_gate4_cache_coverage_audit.py: deterministic read-only Gate 4 cache coverage/lineage/integrity audit for local data_cache (default 2024-04..09, 5 symbols; inventories daily 1h klines/mark/index/premium + funding, records file counts + metadata/content hashes, flags missing months/days/quarantine/placeholder anomalies, emits JSON+MD with no_confirmatory_outcomes/exploratory_only/no_network). Planning evidence only; no outcome computation, no network, no Track A liquidation claims, no canonical eval/cross-track writes, no sealed artifact overwrite."
-    },
-    "fclr018_gate4_prereg_readiness_matrix.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr018_gate4_prereg_readiness_matrix.py: deterministic read-only Gate 4 prereg-readiness/draft design matrix from local evidence (fclr017 latest + sealed v3 refs where readable + PROVENANCED/UNVERIFIED/v5 blocker state); enumerates candidate windows with span/block-count/purge/coverage/provenance/confirmatory-eligibility fields and emits DRAFT_NOT_FROZEN prereg skeleton under research_state/fclr018_local_audit/ with no_confirmatory_outcomes/exploratory_only/no_network/not_go_for_confirmatory_outcomes. Planning/draft evidence only; no outcome computation, no freeze/promotion, no network, no Track A liquidation claims, no canonical eval/cross-track writes, no sealed artifact overwrite."
-    },
-    "fclr019_gate4_evidence_bundle_index.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr019_gate4_evidence_bundle_index.py: deterministic read-only Gate 4 evidence-bundle index consuming fclr018 latest + local provenance/admissibility evidence refs (FCLR-015/016/v5 terms/manifest/completeness/prereg draft where readable); maps confirmatory prerequisites per candidate window to present_unverified/present_blocker/missing (LFS pointer=unavailable_pointer/missing state). Emits draft_only/no_confirmatory_outcomes/exploratory_only/no_network/not_go_for_confirmatory_outcomes under research_state/fclr019_local_audit/. No outcome computation, no freeze/promotion, no prerequisite marked satisfied, no network, no Track A claims, no sealed artifact overwrite."
-    },
-    "fclr020_gate4_readiness_action_matrix.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr020_gate4_readiness_action_matrix.py: deterministic read-only Gate 4 readiness/action matrix consuming fclr019 latest; emits per-window prerequisite actions/blockers/verification checks (read-only local commands) with authorizes_confirmatory_outcomes=false and no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go_for_confirmatory_outcomes under research_state/fclr020_local_audit/. No outcome computation, no freeze/promotion, no prerequisite satisfied, no network, no Track A claims, no sealed artifact overwrite."
-    },
-    "fclr021_gate4_blocker_resolution_checklist_validator.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr021_gate4_blocker_resolution_checklist_validator.py: deterministic read-only Gate 4 blocker-resolution checklist validator consuming fclr020 latest; validates per-window prerequisite action/check text coverage of the Gate 4 gate set (terms/legal, provenance/manifest, admissibility/completeness/leakage, fresh frozen prereg before outcomes, leakage/sufficiency) and emits a machine-checkable coverage matrix plus missing-action warnings with authorizes_confirmatory_outcomes=false and no satisfaction inference. Draft-only/no_confirmatory_outcomes/no_network/not_go_for_confirmatory_outcomes under research_state/fclr021_local_audit/. No outcome computation, no freeze/promotion, no prerequisite satisfied, no network, no Track A claims, no sealed artifact overwrite."
-    },
-    "fclr022_gate4_blocker_resolution_evidence_preflight.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr022_gate4_blocker_resolution_evidence_preflight.py: deterministic read-only Gate 4 blocker-resolution evidence preflight consuming fclr021 latest; checks read-only whether prerequisite evidence_ref paths exist/readable locally (exists/read_state/sha256/bytes), never fabricates evidence as present, emits resolution_readiness rows with resolution_ready=false and resolution_readiness_warnings for gaps. Draft-only/no_confirmatory_outcomes/no_network/not_go_for_confirmatory_outcomes under research_state/fclr022_local_audit/. No outcome computation, no freeze/promotion, no prerequisite satisfied, no network, no Track A claims, no sealed artifact overwrite."
-    },
-    "fclr023_gate4_blocker_resolution_action_plan.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "fclr023_gate4_blocker_resolution_action_plan.py: deterministic read-only Gate 4 blocker-resolution action plan consuming fclr022 latest; emits per-gap action-plan packets grouped by (window, gate_class, prerequisite) copying evidence snapshot fields (evidence_ref, evidence_present, read_state, sha256, bytes) plus current_state, missing_action_class, reason_copied_from_index, human_legal_required (terms/legal gate classes only), fresh_frozen_prereg_required (prereg gate class only), read-only local_verification_commands (no network, no confirmatory outcomes, no --expect-go), non-evidentiary artifact_target_hint (never created or marked present), and packet_ready_for_human_or_prereg_action=false. Draft-only/no_confirmatory_outcomes/no_network/not_go_for_confirmatory_outcomes under research_state/fclr023_local_audit/. No outcome computation, no freeze/promotion, no prerequisite satisfied, no network, no Track A claims, no sealed artifact overwrite."
-    },
-    "fclr024_v5_scope_coherence_report.py": {
-      "class": "track_c_or_aux_audit_utility",
-      "reason": "Read-only Gate 4 v5 scope-coherence/blocker-matrix report; deterministic tmp-testable; no outcomes/network/data loading; never claims GO or creates/satisfies evidence."
-    },
-    "fclr_h001_extract.py": {
-      "class": "raw_fetch_monitor_provenance",
-      "reason": "fclr_h001_extract.py: local zip extraction/provenance helper for Binance public-archive data into data/raw; restartable/idempotent, no network required by design, no Track A liquidation outcome claim producer."
     },
     "forecast_pipeline.py": {
       "class": "track_c_sealed_volatility",
@@ -355,10 +320,6 @@
     "funding_interaction_analysis_fast.py": {
       "class": "track_c_sealed_volatility",
       "reason": "funding_interaction_analysis_fast.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
-    },
-    "gate4_v4_bootstrap_diagnostic_summary.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "gate4_v4_bootstrap_diagnostic_summary.py: deterministic read-only EXPLORATORY summary of saved Gate 4 v4 exploratory JSON artifacts (stab/diag/leakage_audit); emits versioned markdown risk table under results/ (eff_blocks/ci_valid/regime_flags/degenerate/inference_ok, non-degenerate CI excluding zero only when gates pass). NOT CONFIRMATORY/NOT PROMOTABLE; no recomputation, no network, no real research_state writes, no Track A outcome reads/claims."
     },
     "generate_tracka_fixtures.py": {
       "class": "test_fixture_utility",
@@ -432,14 +393,6 @@
       "class": "raw_fetch_monitor_provenance",
       "reason": "probe_fclr012v_extend2.py: bounded fetch/probe/provenance utility (FCLR-012-V forward extension); no Track A liquidation outcome claim production."
     },
-    "reconcile_inventory.py": {
-      "class": "repo_maintenance_utility",
-      "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
-    },
-    "repair_local_provenance.py": {
-      "class": "repo_maintenance_utility",
-      "reason": "repair_local_provenance.py: local-only provenance repair/maintenance utility (sha256 sidecars + JSON manifests for local Track C cache); no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network."
-    },
     "run_evaluation.py": {
       "class": "track_c_sealed_volatility",
       "reason": "Track C/FCLR volatility evaluation path (sealed); liquidation terms absent as claim target; no Track A guarded liquidation outcome reads."
@@ -451,22 +404,6 @@
     "run_fi_quick.py": {
       "class": "track_c_or_aux_utility",
       "reason": "run_fi_quick.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
-    },
-    "run_funding_ablations.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "run_funding_ablations.py: Gate 4 funding-conditioned volatility ablations (Track C), leakage-resistant multi-split pilot, local admissible Binance data only; writes evaluation/manifest/leakage summaries as non-confirmatory pilot evidence; no Track A Hyperliquid guarded liquidation outcome reads/claims."
-    },
-    "run_gate4_v4_exploratory_diag.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "run_gate4_v4_exploratory_diag.py: Gate 4 v4 EXPLORATORY diagnostic/robustness only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; computes per-split/instrument diagnostics, B/D instability evidence, E vs A LOO/alignment checks; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
-    },
-    "run_gate4_v4_exploratory_stab.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "run_gate4_v4_exploratory_stab.py: Gate 4 v4 EXPLORATORY stabilized-comparison runner only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; evaluates principled leakage-safe modeling variants (V1-V4) as diagnostics for B/D split-3 instability and E sensitivity, never replacing prereg A-E contrasts or changing confirmatory estimands; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
-    },
-    "run_gate4_v4_leakage_audit.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "Gate 4 v4 EXPLORATORY leakage-audit harness (chronological splits/purge/embargo/train-only normalization checks) on local admissible cache; NOT CONFIRMATORY/NOT PROMOTABLE; no Track A outcomes; no canonical eval writes."
     },
     "run_h003.py": {
       "class": "track_b_modeled_boundary",
@@ -492,17 +429,9 @@
       "class": "guarded_tracka",
       "reason": "Guarded; blocked no loader/canonical/frontier mutation (115 G2)."
     },
-    "run_rv_baseline.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "run_rv_baseline.py: RV-only OOS baseline (Gate 3, Track C), leakage-resistant walk-forward on local Binance data; writes evaluation/manifest summaries; no Track A Hyperliquid guarded liquidation outcome reads/claims."
-    },
     "run_stream_b_deep_analysis_001.py": {
       "class": "track_c_sealed_volatility",
       "reason": "run_stream_b_deep_analysis_001.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
-    },
-    "run_stream_b_deep_analysis_002.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "run_stream_b_deep_analysis_002.py: regime-stratified QLIKE ablation on frozen FCLR-002 splits (exploratory); train-only thresholds, block-bootstrap CIs, writes evaluation_summary_STREAM_B_DEEP_ANALYSIS-002 only, no holdout reuse, no Track A claims."
     },
     "run_stream_b_feature_extension.py": {
       "class": "track_c_sealed_volatility",
@@ -511,6 +440,10 @@
     "run_stream_b_robustness_002.py": {
       "class": "track_c_sealed_volatility",
       "reason": "run_stream_b_robustness_002.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "run_trackc_deeper_validation_fclr011.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_trackc_deeper_validation_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
     },
     "run_trackb_evaluation.py": {
       "class": "track_b_modeled_boundary",
@@ -523,10 +456,6 @@
     "run_trackb_tb2_evaluation.py": {
       "class": "track_b_modeled_boundary",
       "reason": "run_trackb_tb2_evaluation.py: Track B TB2 confirmatory modeled boundary-breach evaluation (trackb_TB2_20261110T190405Z); modeled proxy only, explicitly != observed liquidations, out of Track A observed outcome contract."
-    },
-    "run_trackc_deeper_validation_fclr011.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "run_trackc_deeper_validation_fclr011.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
     },
     "run_trackc_robustness_fclr011.py": {
       "class": "track_c_sealed_volatility",
@@ -560,6 +489,142 @@
       "class": "resume_gate_infra",
       "reason": "Track A admissibility rubric/GO-NO-GO logic; pure assessment, no outcome parquet reads or canonical claim mutation."
     },
+    "verify_heavy_work_004i.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "Historical campaign checklist verifier; no liquidation outcome reads/claims."
+    },
+    "volatility_track_progress.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "Track C progress/report utility (volatility); no Track A guarded liquidation outcome reads."
+    },
+    "write_trigger_harden_successor.py": {
+      "class": "prereg_utility",
+      "reason": "Trigger-hardening artifacts; no outcome reads."
+    },
+    "_debug_abl.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_abl.py: local debug/inspection utility for ablation pipeline magnitudes; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_ablations.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_ablations.py: local debug utility for funding ablation pipeline; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_dup.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_dup.py: local debug utility for duplicate-column checks; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_funding.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_funding.py: local debug utility for funding ablation panel/prediction inspection; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_loghar.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_loghar.py: local debug utility comparing log-HAR vs OLS; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "_debug_logridge.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "_debug_logridge.py: local debug utility comparing log-ridge vs OLS HAR predictions; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes."
+    },
+    "fclr_h001_extract.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr_h001_extract.py: local zip extraction/provenance helper for Binance public-archive data into data/raw; restartable/idempotent, no network required by design, no Track A liquidation outcome claim producer."
+    },
+    "run_funding_ablations.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_funding_ablations.py: Gate 4 funding-conditioned volatility ablations (Track C), leakage-resistant multi-split pilot, local admissible Binance data only; writes evaluation/manifest/leakage summaries as non-confirmatory pilot evidence; no Track A Hyperliquid guarded liquidation outcome reads/claims."
+    },
+    "gate4_v4_bootstrap_diagnostic_summary.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "gate4_v4_bootstrap_diagnostic_summary.py: deterministic read-only EXPLORATORY summary of saved Gate 4 v4 exploratory JSON artifacts (stab/diag/leakage_audit); emits versioned markdown risk table under results/ (eff_blocks/ci_valid/regime_flags/degenerate/inference_ok, non-degenerate CI excluding zero only when gates pass). NOT CONFIRMATORY/NOT PROMOTABLE; no recomputation, no network, no real research_state writes, no Track A outcome reads/claims."
+    },
+    "run_gate4_v4_exploratory_diag.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_gate4_v4_exploratory_diag.py: Gate 4 v4 EXPLORATORY diagnostic/robustness only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; computes per-split/instrument diagnostics, B/D instability evidence, E vs A LOO/alignment checks; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
+    },
+    "run_gate4_v4_exploratory_stab.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_gate4_v4_exploratory_stab.py: Gate 4 v4 EXPLORATORY stabilized-comparison runner only (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; evaluates principled leakage-safe modeling variants (V1-V4) as diagnostics for B/D split-3 instability and E sensitivity, never replacing prereg A-E contrasts or changing confirmatory estimands; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
+    },
+    "run_gate4_v4_leakage_audit.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_gate4_v4_leakage_audit.py: Gate 4 v4 EXPLORATORY leakage-audit harness (NOT CONFIRMATORY/NOT PROMOTABLE), local 2024-04..09 admissible cache; verifies train-only provenance of ridge scale/winsor/target floor/normalization and bootstrap reproducibility; writes versioned JSON/note under research_state/results; no Track A Hyperliquid guarded liquidation outcome reads/claims, no network required."
+    },
+    "run_rv_baseline.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_rv_baseline.py: RV-only OOS baseline (Gate 3, Track C), leakage-resistant walk-forward on local Binance data; writes evaluation/manifest summaries; no Track A Hyperliquid guarded liquidation outcome reads/claims."
+    },
+    "build_fclr002_panel_local.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "build_fclr002_panel_local.py: local/offline panel builder for FCLR002 Track C volatility research from admissible local cache; no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network/confirmatory outcome promotion."
+    },
+    "fclr024_v5_scope_coherence_report.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr024_v5_scope_coherence_report.py: deterministic read-only Gate 4 v5 scope-coherence/blocker-matrix report; emits per-gate matrix including scope alignment and required artifact classes for prereg frozen_scope window, references 2024-04..09 local evidence (fclr015/fclr017) as present_unverified/bounded only; never creates/satisfies evidence, never fabricates provenance/completeness/license, never claims GO or permits confirmatory outcomes; no outcomes/network/data loading."
+    },
+    "reconcile_inventory.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "reconcile_inventory.py: read-only reconciliation between local data_cache/{SYM}_YYYY_MM and data_inventory.json (sha256 from local files only); no Track A, no network, no sealed writes."
+    },
+    "repair_local_provenance.py": {
+      "class": "repo_maintenance_utility",
+      "reason": "repair_local_provenance.py: local-only provenance repair/maintenance utility (sha256 sidecars + JSON manifests for local Track C cache); no Track A liquidation outcome claims, no guarded Hyperliquid seam, no canonical eval/cross-track writes, no network."
+    },
+    "eval_volatility_family.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "eval_volatility_family.py: evaluates the sealed volatility multiplicity family (TRACKA-VOL-FAMILY-20261112T005111Z) on the frozen cached Hyperliquid volatility panel; writes only timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts for a SEALED NOT_MET campaign, no live outcomes, no new prereg, no guarded Track A liquidation claim production."
+    },
+    "run_alt_volatility.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_alt_volatility.py: alternate volatility design evaluation (TRACKA-ALT-VOL-20261112T015546Z) on the frozen cached volatility panel; 6h horizon/different feature set/5 test blocks; writes only timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts for a SEALED NOT_MET campaign, no live outcomes, no new prereg, no guarded Track A liquidation claim production."
+    },
+    "run_expansion_robustness.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_expansion_robustness.py: pre-registered robustness/falsification campaign (leave-one-instrument-out, placebo/permutation on funding features fixed seed 20261112, alternative block/bootstrap settings) for the sealed Track A Hyperliquid expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on the frozen cached expansion panel; writes only timestamped evaluation_summary/frontier/registry/run-manifest verdict artifacts for a SEALED PASS campaign, no live outcomes, no new prereg, no guarded Track A liquidation claim production."
+    },
+    "tracka_hl_build_panel_cached.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "tracka_hl_build_panel_cached.py: deterministic panel builder from cached admissible ironflow_events + hyperliquid_funding inputs only (no network); writes only timestamped aligned parquet + panel-build report JSON for the Track A successor/early/expansion campaigns; no outcome computation, no mark-price/RV (not cached), fail-closed on schema."
+    },
+    "tracka_hl_build_panel_with_rv.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "tracka_hl_build_panel_with_rv.py: deterministic panel builder from cached admissible ironflow_events + hyperliquid_funding + hyperliquid_candles inputs only (no network); writes only timestamped aligned-with-RV parquet + panel-build report JSON for the Track A successor campaign; no outcome computation, fail-closed on schema."
+    },
+    "tracka_hl_evaluate_successor.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "tracka_hl_evaluate_successor.py: pre-registered C2-vs-B1 evaluation on observed Hyperliquid liquidation intensity using the frozen RV-augmented aligned panel and frozen pre-registered splits (train May / val early-Jun / 3 test blocks Jul-Aug-Sep-Oct with 7d embargo); block-bootstrap paired CIs and materiality gate; writes only timestamped evaluation_summary/verdict artifacts for a SEALED campaign, deterministic fixed seed 20261111, no threshold-shopping, no outcome inspection before freeze."
+    },
+    "tracka_hl_expansion_funding_paginate.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "tracka_hl_expansion_funding_paginate.py: bounded, unauthenticated, provenanced Hyperliquid fundingHistory pagination (API caps at 500 rows) for expansion candidates until full 2026-05..2026-10 coverage; skips already-fully-covered coins; no redundant polling; admissibility evidence only, no outcome reads/claims, no Track A guarded liquidation path, no canonical eval/cross-track writes."
+    },
+    "tracka_hl_expansion_probe.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "tracka_hl_expansion_probe.py: bounded probe acquisition for GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 candidate symbols; ranks by ex-ante observed label notional_usd over cached ironflow_events 2026-05..2026-10 (label-only, NOT an outcome/forecast), then bounded first-time unauthenticated Hyperliquid fundingHistory + candleSnapshot 2026-05..2026-10 with .accessed.json + .sha256 provenance; skips existing valid caches; writes only a timestamped probe report JSON; no redundant polling, no outcome claims."
+    },
+    "tracka_hl_fetch_candles_early.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "tracka_hl_fetch_candles_early.py: bounded first-time acquisition of Hyperliquid 1h candleSnapshot for GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 (missing months 2025-11..2026-04 only); saves raw JSON per coin/month with .accessed.json provenance and .sha256; skips existing valid non-empty caches; retries with backoff on errors/429; never re-fetches cached 2026-05..2026-10; no redundant polling, no outcome claims."
+    },
+    "tracka_hl_fetch_candles_successor.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "tracka_hl_fetch_candles_successor.py: bounded first-time acquisition of Hyperliquid 1h candleSnapshot for the Track A successor window; saves raw JSON per coin/month with .accessed.json provenance and .sha256; skips existing valid non-empty caches; retries with backoff on errors/429; no redundant polling, no outcome claims."
+    },
+    "tracka_hl_pathb_fetch_candles.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "tracka_hl_pathb_fetch_candles.py: bounded, first-time Track A path-(b) mark-price candleSnapshot acquisition for the 9 funded symbols 2026-05..2026-10 via unauthenticated Hyperliquid candleSnapshot POST; saves raw responses per coin/month with .sha256 and .accessed.json provenance; first-time acquisition (no cache exists), NOT redundant polling; no outcome claims."
+    },
+    "tracka_hl_pathb_probe.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "tracka_hl_pathb_probe.py: bounded, single-shot Track A path-(b) feasibility probe determining the real overlap between ironflow liquidation labels and admissible unauthenticated Hyperliquid-native decision-time predictors (funding history + mark-price candles) for the 9 funded symbols; writes ONLY a timestamped probe JSON under research_state/ (no outcomes inspected, no canonical mutation, no status-only churn); exit 0 always; no redundant polling, no outcome claims."
+    },
+    "extract_fclr012v_v2.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "extract_fclr012v_v2.py: FCLR-012-V v2 local CSV extractor for already-downloaded 2026-11 Binance zips; coverage-only, no outcome computation, no Track A liquidation claims, no canonical eval/cross-track writes."
+    },
+    "run_stream_b_deep_analysis_002.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "run_stream_b_deep_analysis_002.py: regime-stratified QLIKE ablation on frozen FCLR-002 splits (exploratory); train-only thresholds, block-bootstrap CIs, writes evaluation_summary_STREAM_B_DEEP_ANALYSIS-002 only, no holdout reuse, no Track A claims."
+    },
     "trackc_funding_schema_audit.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "trackc_funding_schema_audit.py: local-only funding month-file schema/provenance checklist audit; stdlib-only, no network, no outcomes/features/models, emits machine-checkable blocker register only."
@@ -583,18 +648,6 @@
     "trackc_provenance_lineage.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "trackc_provenance_lineage.py: local-only provenance lineage ingestion/verification; stdlib-only, no network, no outcomes, verifies content hashes from local manifests only, never fabricates provenance."
-    },
-    "verify_heavy_work_004i.py": {
-      "class": "repo_maintenance_utility",
-      "reason": "Historical campaign checklist verifier; no liquidation outcome reads/claims."
-    },
-    "volatility_track_progress.py": {
-      "class": "track_c_sealed_volatility",
-      "reason": "Track C progress/report utility (volatility); no Track A guarded liquidation outcome reads."
-    },
-    "write_trigger_harden_successor.py": {
-      "class": "prereg_utility",
-      "reason": "Trigger-hardening artifacts; no outcome reads."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"
