@@ -1,4 +1,4 @@
 # NEXT_SESSION_TASK (redirect)
-**Timestamp (UTC):** 2026-11-12T05:30:24Z
+**Timestamp (UTC):** 2026-11-12T05:44:30Z
 
-Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative). Gate 4 Branch 1 only if valid RESOLVED trigger present (verified absent 2026-11-12T05:30:24Z). External probes re-run 2026-11-12T04:44:25Z: HL 2026-11 features ~11d insufficient; no post-2026-10-31 observed liquidation labels (ironflow HF ends 2026-10-31). No verifiably admissible new source now. Next heavy work: bounded reprobe/monitor for HL ≥100d + ironflow HF extension and/or full §16 audit of metpie if feasible; if admissible freeze prereg + build/eval + verdict + state updates, else emit timestamped probe/audit evidence. No status-only output.
+Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative). Gate 4 Branch 1 only if valid RESOLVED trigger present (verified absent 2026-11-12T05:44:30Z). PRIMARY: 4h candles 2025-11..2026-04 now cached+complete (`research_state/data_cache/hyperliquid_candles_4h/`) — freeze new 4h early-window prereg BEFORE outcomes, then build/eval C2 vs B1 liquidation forecast + verdict + atomic state updates. If infeasible, emit timestamped evidence and advance. No status-only output.

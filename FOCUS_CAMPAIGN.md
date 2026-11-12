@@ -1,4 +1,4 @@
 # FOCUS_CAMPAIGN (redirect)
-**Timestamp (UTC):** 2026-11-12T05:30:24Z
+**Timestamp (UTC):** 2026-11-12T05:44:30Z
 
-Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Execute it: Gate 4 Branch 1 only if valid RESOLVED trigger present; else continue materially different free heavy route (evidence-backed reprobe/monitor HL+ironflow extension and/or §16 audit of metpie). No status-only output.
+Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Execute it: Gate 4 Branch 1 only if valid RESOLVED trigger present; else PRIMARY heavy route is 4h early-window liquidation prereg+build+eval on cached evidence (unblocked 2026-11-12T05:40Z). No status-only output.
