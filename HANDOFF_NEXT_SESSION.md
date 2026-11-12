@@ -1,6 +1,6 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized; neither track subordinated to the other)
-**Handoff timestamp (UTC):** 2026-11-12T07:38:10Z (supersedes 2026-11-12T07:34:18Z; this file is the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T07:47:40Z (supersedes 2026-11-12T07:38:10Z; this file is the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Progress snapshot (prior session — heavy work completed, sealed)
@@ -12,7 +12,7 @@
   - Hyperliquid 2026-11+ depth: BTC 1d candles 12 rows (~12.0d), BTC funding 272 rows (~11.29d). << 100d reprobe threshold and << 90d for ≥3×30d test blocks.
 - **Sealed determinations unchanged:** metpie 2025Q2 §16 audit = INADMISSIBLE (block-feasibility ~65d < 90d); TRACKA-HL-EARLY-4H = INCONCLUSIVE_PILOT_SHORTFALL; all cached-data Track A/B/C/H1 designs sealed/exhausted (Track A expansion PASS but robustness FRAGILE; vol family NOT_MET; alt vol NOT_MET; Track B TB1/TB2 NOT_SUPPORTED; Track C/H1 NOT_SUPPORTED).
 
-## Bottlenecks — status and removal action (2026-11-12T07:38:10Z)
+## Bottlenecks — status and removal action (2026-11-12T07:47:40Z)
 
 | Bottleneck | Status | Removal/action |
 |---|---|---|
