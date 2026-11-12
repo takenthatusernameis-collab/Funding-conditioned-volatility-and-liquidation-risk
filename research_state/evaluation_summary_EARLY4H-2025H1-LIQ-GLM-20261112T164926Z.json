@@ -1,0 +1,136 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY4H-2025H1-LIQ-GLM",
+  "campaign": "FCLR-EARLY4H-2025H1-LIQ-GLM v1",
+  "generated_utc": "2026-11-12T16:49:26Z",
+  "prereg": "research_state/tracka_prereg_early2025h1_liq_glm_20261112T164838Z.json",
+  "prereg_sha256": "d9ebb279c04793f96991b600bfdad12d68ebf72b02125b3863ee35016dc4d56e",
+  "panel": "research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet",
+  "panel_sha256": "08c608035d179be8c274dd0b14386c5330893176c1b963048d09f82d98e3f958",
+  "estimator": "Poisson/quasi-Poisson GLM, log link, IRLS, no regularization",
+  "target": "t1_liq (next-24h observed liquidation notional USD), positive rows only",
+  "verdict": "INCONCLUSIVE_NUMERICAL_INSTABILITY",
+  "gate_pass": false,
+  "numerical_stability": {
+    "max_abs_linear_predictor": {
+      "B1": 19.023818113315404,
+      "C1": 19.145459496788607,
+      "C2": 21.301623632489417
+    },
+    "max_row_qlike": {
+      "B1": 212.77277168437803,
+      "C1": 4827828.989365644,
+      "C2": 3480421843.885737
+    },
+    "threshold": 1000000.0,
+    "unstable": true,
+    "reason": "per-row QLIKE > 1e6; mean QLIKE is a numerical artifact, not interpretable"
+  },
+  "fit": {
+    "B1": {
+      "converged": true,
+      "iters": 7,
+      "deviance": 8489251516.853722
+    },
+    "C1": {
+      "converged": true,
+      "iters": 9,
+      "deviance": 6908299864.525404
+    },
+    "C2": {
+      "converged": true,
+      "iters": 10,
+      "deviance": 6514065904.79853
+    }
+  },
+  "mean_qlike": {
+    "B1": 4.1503412541536155,
+    "C1": 4768.720706119235,
+    "C2": 3434905.183399949
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": 3434901.033058694,
+      "ci_lo": -1.3316836577625124,
+      "ci_hi": 10105771.626402186,
+      "n_pairs": 1016,
+      "n_blocks": 4,
+      "rel_reduction_pct": -82761894.08813271,
+      "p_value": 0.18274071788626695,
+      "holm_rejected": false
+    },
+    "C1_vs_B1": {
+      "mean_diff": 4764.570364865078,
+      "ci_lo": -0.19036052391033378,
+      "ci_hi": 14017.98371445085,
+      "n_pairs": 1016,
+      "n_blocks": 4,
+      "rel_reduction_pct": -114799.48450255142,
+      "p_value": 0.18275320779669893,
+      "holm_rejected": false
+    },
+    "C2_vs_C1": {
+      "mean_diff": 3430136.4626938286,
+      "ci_lo": -1.1310535087944107,
+      "ci_hi": 10091753.642687732,
+      "n_pairs": 1016,
+      "n_blocks": 4,
+      "rel_reduction_pct": -71929.9089647307,
+      "p_value": 0.18274070009200172,
+      "holm_rejected": false
+    }
+  },
+  "per_coin_mean_diff_c2_vs_b1": {
+    "AVAX": 15.730127937974792,
+    "BNB": 0.7387566244127333,
+    "BTC": 0.9226814719084578,
+    "DOGE": 82756.26376185793,
+    "ETH": 3.0260741126796797,
+    "LINK": 0.6664114442822803,
+    "SOL": 29003515.869882226,
+    "SUI": 0.34676256802196664,
+    "XRP": 8.519463036265691
+  },
+  "per_block_mean_diff_c2_vs_b1": {
+    "0": 0.3104450840124855,
+    "1": -1.8671872298536423,
+    "2": 0.2938765926959367,
+    "3": 13371110.256196534
+  },
+  "test_blocks_with_data": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "paired_instruments": [
+    "AVAX",
+    "BNB",
+    "BTC",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "SOL",
+    "SUI",
+    "XRP"
+  ],
+  "n_train_rows": 333,
+  "n_test_rows": 1080,
+  "gate": {
+    "materiality_ge_2pct": false,
+    "ci_upper_below_zero": false,
+    "min_test_blocks_ge_3": true,
+    "min_instruments_ge_5": true,
+    "holm_pass": false,
+    "single_coin_only": false
+  },
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "venue_consistent": "Hyperliquid-only"
+  },
+  "seed": 20261112,
+  "n_bootstrap": 2000
+}

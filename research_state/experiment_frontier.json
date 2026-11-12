@@ -1,15 +1,15 @@
 [
  {
-  "artifact_churn_note": "20261112T145644Z: Pipeline defect root-caused and fixed (identity lag shift(0)->shift(1); test-side per-target lag; funding warm-up from 2025-05-01). Degenerate 134634Z eval superseded by valid evaluation_summary_EARLY4H-2025H1-20261112T145537Z: rv NOT_MET (C2 worse than B1, CI includes 0, p=0.161); liq INCONCLUSIVE_NUMERICAL_INSTABILITY (frozen unregularized linear model extrapolates on Oct-2025 funding spike). CORRECTION: experiment_frontier previously claimed the workflow provisions an agent venv from requirements.txt \u2014 FALSE (verified .github/workflows/main.yml: only controller-tests venv; agent loop uses system python). liq is OPEN, not a null.",
+  "artifact_churn_note": "2026-11-12T16:52:59Z: Executed FCLR-EARLY4H-2025H1-LIQ-GLM v1 (parent). Parent liq GLM returned INCONCLUSIVE_NUMERICAL_INSTABILITY, localized to test block 3 (Oct-2025 funding spike): B1 0/1016 rows >1e6, C1 1/1016 (block3/SOL), C2 2/1016 (block3/SOL,DOGE); block-3 funding/premium/ema_dist are 27.7x/12.5x/4.5x outside the training range. Power is adequate (246-261 positive days per block); labels exist only 2025-05-25..2026-10-31; BTC+ETH 63.6% events / 83.6% notional. Next campaign FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 has a prereg ALREADY FROZEN (sha f06060c7...); implement scripts/early4h_liq_glm_robust.py (bounded-feature log-link IRLS), evaluate, adjudicate. If INCONCLUSIVE again -> timestamped evidenced structural-blocker doc with exact failing minima, then stop.",
   "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal; do not wait/poll). NOT a blocker for this campaign. Hazards: (1) 1h candles unavailable before 2026-04-18 - use 4h; (2) funding cache starts 2025-11 but early funding 2025-05..2025-10 is cached under hyperliquid_funding_early; (3) the literal RESOLVED_VERIFIED inside fclr020 readiness matrix is not a Gate 4 trigger; (4) run_manifest.json is an unresolved Git LFS pointer in CI - do NOT read it as JSON. liq frozen linear model is numerically unstable on Oct-2025 funding spike (model-form limitation, not a code bug).",
   "generated": "20261112T123420Z",
-  "last_checked": "20261112T145644Z",
-  "next_action_heavy": "Execute FCLR-EARLY4H-2025H1-LIQ-GLM v1 (see AGENT_HANDOFF.md section 4). Reuse corrected panel research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet (sha 08c60803...). Freeze NEW prereg tracka_prereg_early2025h1_liq_glm_<UTC>.json (experiment TRACKA-HL-EARLY4H-2025H1-LIQ-GLM) BEFORE any liq outcome: Poisson/quasi-Poisson log-link GLM (B1 HAR-RV log-link; C1=+funding; C2=+premium), same window/universe/splits/minima/materiality as 134503Z, target t1_liq only. Implement scripts/early4h_liq_glm.py (do not mutate sealed campaign model form). Emit evaluation_summary_EARLY4H-2025H1-LIQ-GLM-<UTC>.{md,json} with numerical-stability guard. If NOT_MET/INCONCLUSIVE: run power/coverage audit + 2024-08..2025-04 label-ceiling doc + BTC/ETH concentration check. Do NOT re-fetch caches, re-probe 1h, or reopen sealed verdicts.",
-  "next_unfinished_task": "FCLR_EARLY4H_2025H1_LIQ_GLM_PREREG_BUILD_EVAL",
+  "last_checked": "2026-11-12T16:52:59Z",
+  "next_action_heavy": "Implement scripts/early4h_liq_glm_robust.py and execute FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 (see AGENT_HANDOFF.md section 4). Prereg ALREADY FROZEN: research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json (sha f06060c7...). Reuse corrected panel research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet (sha 08c60803...). Same Poisson/quasi-Poisson log-link IRLS, but clip fundingRate/abs_fund_pct/premium/ema_dist to the train [min,max] then standardize by train mean/std; target t1_liq only. Emit evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.{md,json} with a numerical-stability guard. If NOT_MET: preserve the null. If INCONCLUSIVE again: timestamped evidenced structural-blocker doc with exact failing minima, then STOP. Do NOT re-fetch caches, re-run the parent GLM, re-probe 1h candles, or reopen sealed verdicts.",
+  "next_unfinished_task": "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST_IMPLEMENT_EVAL",
   "program_status": "ACTIVE_HEAVY_CAMPAIGN",
   "rank": 0,
   "resume_triggers": [
-   "This campaign has not yet been executed (sufficient on its own)",
+   "This campaign has a frozen prereg but no implementation/eval yet (sufficient on its own)",
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation)",
    "HL 2026-11+ depth >=100d AND verified post-2026-10-31 observed labels",
    "New admissible liquidation-label source (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
@@ -22,7 +22,10 @@
    "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
    "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
   ],
-  "task": "FCLR_EARLY4H_2025H1_LIQ_GLM"
+  "task": "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST",
+  "completed_campaigns": [
+   "TRACKA-HL-EARLY4H-2025H1 (rv NOT_MET; parent liq GLM INCONCLUSIVE_NUMERICAL_INSTABILITY)"
+  ]
  },
  {
   "artifact_churn_note": "2026-11-12T07:34:18Z: FCLR-NEXT campaign installed as the sole authoritative next task, superseding all prior rank-0 next-task entries. Prior session (2026-11-12T07:31:59Z) monitor probe completed and evidenced INELIGIBLE (`research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`: HL ~12.0d < 100d, no post-2026-10-31 ironflow labels). Gate 4 trigger absent (verified, external/legal). Stale rank-0 frontier entries (TRACKA_ALT_VOLATILITY / TRACKA_EXPANSION_ROBUSTNESS / BOUNDED_NEW_DATA_DISCOVERY / EXTERNAL_NEW_DATA_SOURCE) are sealed NOT_MET/FRAGILE or just-executed ineligible probes \u2014 preserved as history, not relitigated. H2 registry corrected to EXPLORATORY_ONLY/PARTIAL (`research_state/h002_replication_report.md`).",

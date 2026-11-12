@@ -1,0 +1,130 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY4H-2025H1-LIQ-GLM",
+  "campaign": "FCLR-EARLY4H-2025H1-LIQ-GLM v1",
+  "timestamp_utc": "2026-11-12T16:48:38Z",
+  "track": "A",
+  "supersedes": "TRACKA-HL-EARLY4H-2025H1 (sealed prereg 134503Z). Estimator-only successor: the sealed rv result (NOT_MET) is not re-tested and the sealed prereg is not modified. Only the liq estimator/model form changes (Poisson/quasi-Poisson log-link IRLS) because the sealed unregularized linear-in-log model was numerically unstable on the Oct-2025 funding spike.",
+  "reuses_frozen_panel": "research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet",
+  "reuses_frozen_panel_sha256": "08c608035d179be8c274dd0b14386c5330893176c1b963048d09f82d98e3f958",
+  "reuses_frozen_splits": true,
+  "primary_contrast": "C2_vs_B1",
+  "pre_registered_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "status": "FROZEN",
+  "data_sources": {
+    "labels": {
+      "source": "ironflow/hyperliquid-liquidations (cached parquet)",
+      "path": "research_state/data_cache/ironflow_events/<YYYY-MM>.parquet",
+      "observed_labels": true,
+      "modeled_or_proxy": false,
+      "window_utc": "2025-05-25T00:00:00+00:00 .. 2025-10-31T23:59:59+00:00"
+    },
+    "candles": {
+      "source": "Hyperliquid candleSnapshot interval=4h (unauthenticated)",
+      "path": "research_state/data_cache/hyperliquid_candles_4h_early/<COIN>/<YYYY-MM>.json"
+    },
+    "funding": {
+      "source": "Hyperliquid fundingHistory (unauthenticated, paginated at 500)",
+      "path": "research_state/data_cache/hyperliquid_funding_early/<COIN>.json"
+    }
+  },
+  "universe": {
+    "coins": ["AVAX", "BNB", "BTC", "DOGE", "ETH", "LINK", "SOL", "SUI", "XRP"],
+    "selection_rule": "named ex ante by label activity and liquidity; no survivor substitution",
+    "n_coins": 9,
+    "concentration_note": "BTC+ETH are ~63% of events and ~84% of notional; per-coin reporting is mandatory and no PASS may be driven by one coin."
+  },
+  "unit": "coin x 24h UTC bucket",
+  "targets": [
+    {
+      "id": "T1_LIQ",
+      "family": "track_a_observed_liquidation",
+      "definition": "next-24h observed liquidation notional USD (t1_liq), QLIKE loss. Only this target is tested in this campaign.",
+      "column": "t1_liq"
+    }
+  ],
+  "models": {
+    "B1": {
+      "form": "HAR-RV log-link Poisson/quasi-Poisson GLM",
+      "features": ["log_rv_4h", "log_rv_24h", "log_rv_168h"],
+      "note": "RV-only baseline; no funding information, no persistence lag."
+    },
+    "C1": {
+      "form": "HAR-RV + funding log-link Poisson/quasi-Poisson GLM",
+      "features": ["B1", "signed_funding", "abs_funding_trailing_pct90"],
+      "note": "signed_funding = fundingRate; abs_funding_trailing_pct90 = abs_fund_pct (90-obs trailing rank, >=30 obs)."
+    },
+    "C2": {
+      "form": "HAR-RV + funding + premium log-link Poisson/quasi-Poisson GLM",
+      "features": ["C1", "mark_index_premium", "mark_ema24_distance"],
+      "note": "mark_index_premium = premium; mark_ema24_distance = ema_dist."
+    }
+  },
+  "estimator": {
+    "family": "Poisson / quasi-Poisson",
+    "link": "log",
+    "fitting": "iteratively reweighted least squares (IRLS)",
+    "regularization": "none",
+    "model_search": "none",
+    "tuning": "none",
+    "fit_on": "train split only",
+    "prediction": "conditional mean mu = exp(X beta); no exp-of-unbounded-linear-predictor extrapolation beyond IRLS convergence",
+    "numerical_safeguards": "eta clipped to [-30, 30]; mu floored at 1e-12 only to avoid division by zero; IRLS capped at 100 iterations with step-halving if the Poisson deviance increases. These are numerical, not model tuning."
+  },
+  "contrasts": {
+    "primary": "C2_vs_B1",
+    "secondary": ["C1_vs_B1", "C2_vs_C1"],
+    "multiple_testing": "Holm across the full declared contrast family",
+    "direction": "QLIKE lower is better; diff = QLIKE(C2) - QLIKE(B1); PASS needs mean diff < 0"
+  },
+  "metric": "QLIKE (lower better)",
+  "metric_scope": "evaluated on rows with t1_liq > 0, identical to the sealed campaign _design/evaluate filtering and to src/volatility/eval.py (non-positive y or yhat are skipped). Zero-liq rows are therefore excluded from both fitting and loss; QLIKE is undefined for y=0.",
+  "splits": {
+    "train": {"start": "2025-05-25T00:00:00Z", "end": "2025-06-30T23:59:59Z"},
+    "validation": {"start": "2025-06-24T00:00:00Z", "end": "2025-06-30T23:59:59Z"},
+    "test_blocks": [
+      {"block": 0, "start": "2025-07-01T00:00:00Z", "end": "2025-07-30T23:59:59Z", "embargo_days_after": 1},
+      {"block": 1, "start": "2025-07-31T00:00:00Z", "end": "2025-08-29T23:59:59Z", "embargo_days_after": 1},
+      {"block": 2, "start": "2025-08-30T00:00:00Z", "end": "2025-09-28T23:59:59Z", "embargo_days_after": 1},
+      {"block": 3, "start": "2025-09-29T00:00:00Z", "end": "2025-10-28T23:59:59Z", "embargo_days_after": 1}
+    ],
+    "embargo_days": 1,
+    "min_test_blocks_required": 3,
+    "note": "Test blocks are complete 30-day spans inside 2025-07..2025-10 with >=1-day purge between train/validation/test boundaries. Identical to the sealed 134503Z layout."
+  },
+  "inference": {
+    "method": "block bootstrap over complete 30-day UTC blocks",
+    "n_bootstrap": 2000,
+    "seed": 20261112,
+    "ci": "95% percentile",
+    "correction": "Holm across the declared family"
+  },
+  "materiality": {
+    "min_relative_qlike_reduction_pct": 2.0,
+    "min_relative_qlike_reduction_fraction": 0.02,
+    "require_ci_upper_below_zero": true,
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3
+  },
+  "numerical_stability": {
+    "max_row_qlike_threshold": 1000000.0,
+    "verdict_on_exceed": "INCONCLUSIVE_NUMERICAL_INSTABILITY",
+    "reason": "A per-row QLIKE above 1e6 means a prediction is many orders of magnitude below the target (mean QLIKE is a numerical artifact, not an economic signal). Same guard as the corrected sealed eval."
+  },
+  "missingness_policy": "missing stays missing; no forward fill; no synthetic labels; listwise deletion within each model's feature set.",
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "venue_consistent": "Hyperliquid-only"
+  },
+  "artifacts_to_produce": [
+    "research_state/tracka_prereg_early2025h1_liq_glm_<UTC>.json",
+    "research_state/tracka_prereg_early2025h1_liq_glm_<UTC>.md",
+    "scripts/early4h_liq_glm.py",
+    "research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-<UTC>.md",
+    "research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-<UTC>.json"
+  ]
+}

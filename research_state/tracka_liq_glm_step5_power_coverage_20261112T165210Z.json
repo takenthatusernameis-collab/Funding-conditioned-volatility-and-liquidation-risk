@@ -1,0 +1,84 @@
+{
+  "artifact": "FCLR-EARLY4H-2025H1-LIQ-GLM-STEP5-POWER-COVERAGE",
+  "generated_utc": "2026-11-12T16:52:10Z",
+  "parent_campaign": "FCLR-EARLY4H-2025H1-LIQ-GLM v1",
+  "parent_eval": "research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-20261112T164926Z.json",
+  "parent_verdict": "INCONCLUSIVE_NUMERICAL_INSTABILITY",
+  "panel": "research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet",
+  "panel_sha256": "08c608035d179be8c274dd0b14386c5330893176c1b963048d09f82d98e3f958",
+  "scope": "Step 5 follow-up required by the frozen liq-glm prereg after an INCONCLUSIVE_NUMERICAL_INSTABILITY verdict. Diagnostics only; no new gate is declared here.",
+  "per_coin_coverage": {
+    "BTC": {"events": 141632, "notional_usd": 11320560000.0, "positive_days": 158, "event_share": 0.35841, "notional_share": 0.47961},
+    "ETH": {"events": 109681, "notional_usd": 8419334000.0, "positive_days": 159, "event_share": 0.27756, "notional_share": 0.35669},
+    "SOL": {"events": 83021, "notional_usd": 2485373000.0, "positive_days": 159, "event_share": 0.21009, "notional_share": 0.10530},
+    "XRP": {"events": 27318, "notional_usd": 644154200.0, "positive_days": 157, "event_share": 0.06913, "notional_share": 0.02729},
+    "DOGE": {"events": 9569, "notional_usd": 321536200.0, "positive_days": 149, "event_share": 0.02422, "notional_share": 0.01362},
+    "SUI": {"events": 9346, "notional_usd": 124011400.0, "positive_days": 147, "event_share": 0.02365, "notional_share": 0.00525},
+    "LINK": {"events": 6144, "notional_usd": 120826100.0, "positive_days": 136, "event_share": 0.01555, "notional_share": 0.00512},
+    "AVAX": {"events": 4361, "notional_usd": 123372800.0, "positive_days": 136, "event_share": 0.01104, "notional_share": 0.00523},
+    "BNB": {"events": 4095, "notional_usd": 44675400.0, "positive_days": 123, "event_share": 0.01036, "notional_share": 0.00189}
+  },
+  "totals": {"events": 394167, "notional_usd": 23380000000.0},
+  "concentration": {
+    "btc_eth_event_share": 0.636,
+    "btc_eth_notional_share": 0.836,
+    "note": "BTC+ETH dominate events and notional; per-coin reporting mandatory. No PASS may be driven by BTC/ETH alone."
+  },
+  "per_block": [
+    {"block": 0, "window": "2025-07-01..2025-07-30", "rows": 270, "positive_rows": 246, "mean_t1_liq_usd": 12400816.18, "funding_min": -3.30599e-05, "funding_max": 0.0002073269, "premium_min": -0.0007644796, "premium_max": 0.0021586149, "in_train_range": true},
+    {"block": 1, "window": "2025-07-31..2025-08-29", "rows": 270, "positive_rows": 256, "mean_t1_liq_usd": 21096615.3, "funding_min": -5.99471e-05, "funding_max": 9.55824e-05, "premium_min": -0.0009795772, "premium_max": 0.0012646588, "in_train_range": true},
+    {"block": 2, "window": "2025-08-30..2025-09-28", "rows": 270, "positive_rows": 253, "mean_t1_liq_usd": 12366683.38, "funding_min": -2.55095e-05, "funding_max": 9.07835e-05, "premium_min": -0.0007040757, "premium_max": 0.0012262681, "in_train_range": true},
+    {"block": 3, "window": "2025-09-29..2025-10-28", "rows": 270, "positive_rows": 261, "mean_t1_liq_usd": 28469414.68, "funding_min": -0.0013153319, "funding_max": 8.48471e-05, "premium_min": -0.0110226549, "premium_max": 0.001178777, "in_train_range": false}
+  ],
+  "train_feature_ranges": {
+    "funding_rate_abs_max": 4.75165e-05,
+    "premium_min": -0.0008801323,
+    "premium_max": 0.0007708633,
+    "ema_dist_min": -0.18424216122897963,
+    "ema_dist_max": 0.08596366930006538
+  },
+  "extrapolation": {
+    "block_3_funding_vs_train_max_ratio": 27.7,
+    "block_3_premium_vs_train_min_ratio": 12.5,
+    "test_ema_dist_vs_train_max_ratio": 4.5,
+    "interpretation": "The instability is confined to test block 3 (2025-09-29..2025-10-28, the Oct-2025 funding spike). Raw funding/premium/ema_dist fall outside the training range there, so the log-link linear predictor extrapolates."
+  },
+  "per_row_instability": {
+    "n_test_pairs": 1016,
+    "B1": {"n_over_1e6": 0, "max_row_qlike": 212.77},
+    "C1": {"n_over_1e6": 1, "max_row_qlike": 4827828.99, "location": "block 3 / SOL"},
+    "C2": {"n_over_1e6": 2, "max_row_qlike": 3480421843.89, "location": "block 3 / SOL, DOGE"}
+  },
+  "label_ceiling": {
+    "ironflow_min_timestamp": "2025-05-25T14:36:58Z",
+    "ironflow_max_timestamp": "2026-10-31T23:30:10Z",
+    "pre_2025_05_labels": false,
+    "note": "Observed liquidation labels do not exist before 2025-05-25. The 2024-08..2025-04 4h-candle/funding extension is therefore structurally impossible for an observed-label test; do not fabricate or proxy it."
+  },
+  "power_assessment": {
+    "min_test_blocks_required": 3,
+    "test_blocks_with_data": [0, 1, 2, 3],
+    "min_instruments_required": 5,
+    "paired_instruments": 9,
+    "positive_rows_per_block": [246, 256, 253, 261],
+    "verdict": "ADEQUATE for a 9-coin panel; every block has >= 246 positive days. Power is not the binding constraint.",
+    "top5_subcohort_events": 371221,
+    "top5_subcohort_event_share": 0.942,
+    "subcohort_note": "BTC, ETH, SOL, XRP, DOGE carry 94.2% of events. A frozen top-5 sub-cohort would be adequately powered but more BTC/ETH-concentrated; not preferred over the full 9-coin panel."
+  },
+  "binding_constraint": "Out-of-range extrapolation of raw funding/premium/ema_dist in test block 3, not sample size or label availability.",
+  "recommended_next_campaign": {
+    "id": "FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1",
+    "experiment_id": "TRACKA-HL-EARLY4H-2025H1-LIQ-GLM-ROBUST",
+    "rationale": "The only failure is bounded-feature extrapolation in one block. Re-specify the SAME Poisson/quasi-Poisson log-link GLM with each continuous feature clipped to the training [min, max] (frozen from train only) before fitting. This is a materially different estimator, so it requires a new frozen prereg before any outcome.",
+    "models": {
+      "B1": ["log_rv_4h", "log_rv_24h", "log_rv_168h"],
+      "C1": ["B1", "fundingRate_clipped", "abs_fund_pct"],
+      "C2": ["C1", "premium_clipped", "ema_dist_clipped"]
+    },
+    "transform": "For fundingRate, abs_fund_pct, premium, ema_dist: clip to the training-set observed [min, max] computed on positive-t1_liq train rows; then standardize by the training mean/std. RV log features unchanged. No outcome-dependent tuning.",
+    "splits": "identical to the sealed 134503Z layout (train 2025-05-25..2025-06-30; test blocks 0-3).",
+    "acceptance": "Same gate: >=2% relative QLIKE reduction AND 95% CI upper < 0 AND >=5 instruments AND >=3 blocks AND Holm across the family AND no single-coin driver; max row QLIKE <= 1e6 required for a non-inconclusive verdict.",
+    "if_again_inconclusive": "Emit a timestamped evidenced structural-blocker document with the exact failing minima and stop; do not iterate on estimator forms without a materially new source or a new preregistered design."
+  }
+}
