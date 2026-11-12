@@ -1,0 +1,98 @@
+{
+  "probe_id": "new_data_monitor_probe_20261112T073028Z",
+  "probe_time_utc": "2026-11-12T07:30:28.362428+00:00",
+  "gate4_trigger_check": {
+    "resolved_pattern_present": false,
+    "note": "No fclr016_v5_terms_evidence_RESOLVED_* found; Branch 1 not executable."
+  },
+  "ironflow_hf": {
+    "dataset": "ironflow/hyperliquid-liquidations",
+    "lastModified": "2026-11-07T10:18:25.000Z",
+    "events_files": [
+      "data/events/2025-05.parquet",
+      "data/events/2025-06.parquet",
+      "data/events/2025-07.parquet",
+      "data/events/2025-08.parquet",
+      "data/events/2025-09.parquet",
+      "data/events/2025-10.parquet",
+      "data/events/2025-11.parquet",
+      "data/events/2025-12.parquet",
+      "data/events/2026-01.parquet",
+      "data/events/2026-02.parquet",
+      "data/events/2026-03.parquet",
+      "data/events/2026-04.parquet",
+      "data/events/2026-05.parquet",
+      "data/events/2026-06.parquet",
+      "data/events/2026-07.parquet",
+      "data/events/2026-08.parquet",
+      "data/events/2026-09.parquet",
+      "data/events/2026-10.parquet"
+    ],
+    "fills_files": [
+      "data/fills/2025-05.parquet",
+      "data/fills/2025-06.parquet",
+      "data/fills/2025-07.parquet",
+      "data/fills/2025-08.parquet",
+      "data/fills/2025-09.parquet",
+      "data/fills/2025-10.parquet",
+      "data/fills/2025-11.parquet",
+      "data/fills/2025-12.parquet",
+      "data/fills/2026-01.parquet",
+      "data/fills/2026-02.parquet",
+      "data/fills/2026-03.parquet",
+      "data/fills/2026-04.parquet",
+      "data/fills/2026-05.parquet",
+      "data/fills/2026-06.parquet",
+      "data/fills/2026-07.parquet",
+      "data/fills/2026-08.parquet",
+      "data/fills/2026-09.parquet",
+      "data/fills/2026-10.parquet"
+    ],
+    "latest_event_file": "data/events/2026-10.parquet",
+    "has_post_2026_10_event_file": false,
+    "has_2026_11_event_file": false,
+    "sha256_response": "8ed0a63b94bdd4b8444690f1f3b77e25b04cfe8250e7e41495680b04b76e6786"
+  },
+  "hyperliquid_2026_11_depth": {
+    "btc_1d_candles_from_2026_11_01": {
+      "count": 12,
+      "first_t_ms": 1793491200000,
+      "first_t_iso": "2026-11-01T00:00:00+00:00",
+      "last_t_ms": 1794441600000,
+      "last_t_iso": "2026-11-12T00:00:00+00:00"
+    },
+    "btc_1d_span_days_inclusive": 12.0,
+    "btc_funding_from_2026_11_01": {
+      "count": 272,
+      "first_time_ms": 1793491200061,
+      "first_time_iso": "2026-11-01T00:00:00.061000+00:00",
+      "last_time_ms": 1794466800018,
+      "last_time_iso": "2026-11-12T07:00:00.018000+00:00"
+    },
+    "btc_funding_span_days": 11.29,
+    "sample_4h_candles_from_2026_11_01": {
+      "BTC": 68,
+      "ETH": 68,
+      "SOL": 68,
+      "HYPE": 68,
+      "XRP": 68
+    }
+  },
+  "eligibility_assessment": {
+    "hl_2026_11_plus_window_days_approx": 12.0,
+    "hl_threshold_days_for_reprobe_eligibility": 100,
+    "hl_meets_depth_threshold": false,
+    "verified_post_2026_10_observed_liquidation_labels": false,
+    "ironflow_latest_event_file": "data/events/2026-10.parquet",
+    "ironflow_last_modified": "2026-11-07T10:18:25.000Z",
+    "metpie_2025Q2_audit": "INADMISSIBLE (block-feasibility shortfall ~65d < 90d required for >=3x30d test blocks; sealed 2026-11-12T07:00:00Z)",
+    "gate4_branch1_trigger": "ABSENT",
+    "new_claim_worthy_experiment_eligible_now": false,
+    "ineligibility_reasons": [
+      "HL 2026-11+ depth ~12.0 days < 100-day reprobe threshold (and << 90 days needed for >=3x30d test blocks).",
+      "No verified post-2026-10-31 observed liquidation label file on ironflow/hyperliquid-liquidations (latest event file: data/events/2026-10.parquet).",
+      "Gate 4 Branch 1 trigger absent (external/legal, not agent-removable).",
+      "All cached-data designs exhausted/sealed; metpie 2025Q2 inadmissible."
+    ]
+  }
+}
