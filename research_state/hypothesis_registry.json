@@ -70,7 +70,7 @@
       "data_source": "ironflow/hyperliquid-liquidations",
       "venue": "hyperliquid_perpetuals",
       "observed_only": true,
-      "determination": "INADMISSIBLE \u2014 documented infeasibility; pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 under new prereg with frozen ex-ante symbol selection/event-adequacy rules."
+      "determination": "INADMISSIBLE — documented infeasibility; pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 under new prereg with frozen ex-ante symbol selection/event-adequacy rules."
     },
     {
       "id": "H_tracka_hl_symbol_expansion_liquidation_forecast",
@@ -85,7 +85,18 @@
       "venue": "hyperliquid_perpetuals",
       "data_source": "ironflow/hyperliquid-liquidations",
       "observed_only": true,
-      "evidence": "TRACKA-HL-EXPANSION-20261111T195500Z PASS: C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks (2026-05..2026-10, ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH)."
+      "evidence": "TRACKA-HL-EXPANSION-20261111T195500Z PASS: C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks (2026-05..2026-10, ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH).",
+      "robustness": {
+        "experiment_id": "TRACKA-EXP-ROBUST-20261112T015119Z",
+        "prereg": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
+        "verdict": "FRAGILE",
+        "verdict_artifact": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md",
+        "checks": {
+          "LOIO": "FAIL (4/8 pass, need >=6)",
+          "PLACEBO_PERMUTATION": "FAIL (true rel 19.04% <= 95th pctl 21.10%)",
+          "BOOTSTRAP_SETTINGS": "PASS (3/3 settings pass)"
+        }
+      }
     },
     {
       "id": "H_tracka_hl_funding_conditioned_volatility_forecast",
@@ -99,8 +110,39 @@
       "last_tested": "20261112T005111Z",
       "venue": "hyperliquid_perpetuals",
       "observed_only": true,
-      "evidence": "TRACKA-VOL-FAMILY-20261112T005111Z NOT_MET: Family-wise Holm correction across 12 comparisons (primary 24h + secondary 6h/72h/168h \u00d7 3 contrasts). No horizon passes primary gate. Verdict: research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md."
+      "evidence": "TRACKA-VOL-FAMILY-20261112T005111Z NOT_MET: Family-wise Holm correction across 12 comparisons (primary 24h + secondary 6h/72h/168h × 3 contrasts). No horizon passes primary gate. Verdict: research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md."
+    },
+    {
+      "id": "H_tracka_hl_expansion_robustness",
+      "type": "primary_tracka_expansion_robustness",
+      "description": "The sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) is robust to leave-one-instrument-out sensitivity, placebo/permutation on funding features, and alternative block/bootstrap settings.",
+      "status": "FRAGILE",
+      "preregistered_utc": "2026-11-12T01:45:15Z",
+      "prereg_document": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
+      "last_experiment": "TRACKA-EXP-ROBUST-20261112T015119Z",
+      "last_verdict": "robustness_gate_FRAGILE",
+      "last_tested": "20261112T015119Z",
+      "venue": "hyperliquid_perpetuals",
+      "data_source": "ironflow/hyperliquid-liquidations",
+      "observed_only": true,
+      "evidence": "TRACKA-EXP-ROBUST-20261112T015119Z FRAGILE: LOIO check FAIL (4/8 subsets pass, need >=6); Placebo/Permutation check FAIL (true rel reduction 19.04% <= 95th percentile 21.10% of null); Bootstrap Settings check PASS (3/3 settings pass). Verdict: research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md."
+    },
+    {
+      "id": "H_tracka_hl_alt_volatility_forecast",
+      "type": "primary_tracka_alt_volatility",
+      "description": "An alternate volatility forecast design on the cached Hyperliquid panel (2026-05..2026-10, 9 core coins) with a DIFFERENT pre-specified horizon (6h), feature set (adds rv72h), and split structure (5 test blocks) from the NOT_MET TRACKA-VOL-FAMILY-20261112T005111Z will demonstrate incremental forecast skill of funding-conditioned features (C2_ALT) over RV-only baseline (B1) for realized variance forecasting.",
+      "status": "NOT_MET",
+      "preregistered_utc": "2026-11-12T01:55:46Z",
+      "prereg_document": "research_state/tracka_prereg_alt_volatility_20261112T015546Z.json",
+      "last_experiment": "TRACKA-ALT-VOL-20261112T020322Z",
+      "last_verdict": "forecast_gate_NOT_MET",
+      "last_tested": "20261112T020322Z",
+      "venue": "hyperliquid_perpetuals",
+      "data_source": "Hyperliquid API (unauthenticated)",
+      "observed_only": true,
+      "evidence": "TRACKA-ALT-VOL-20261112T020322Z NOT_MET: C2_ALT vs B1 on next-6h RV (9 coins, 2026-05..2026-10, 5 test blocks). Rel QLIKE reduction 5.77% (>=2% PASS), but 95% CI [-0.121, 0.034] crosses zero (CI FAIL). Overall gate NOT_MET. Prereg deviation documented: candle data only available 2026-05..2026-10; used available window with adjusted splits. Verdict: research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md.",
+      "determination": "All admissible cached-data volatility designs on HL 2026-05..2026-10 exhausted (primary 24h, family 6h/24h/72h/168h, alternate 6h with rv72h). No further claim-worthy volatility designs on current cached data."
     }
   ],
-  "updated_utc": "20261112T005111Z"
+  "updated_utc": "20261112T020322Z"
 }

@@ -1,0 +1,44 @@
+{
+  "verdict_id": "TRACKA-ALT-VOL-20261112T020322Z",
+  "verdict": "NOT_MET",
+  "timestamp_utc": "2026-11-12T02:03:24.756451+00:00",
+  "prereg": "tracka_prereg_alt_volatility_20261112T015546Z.json",
+  "panel": "tracka_vol_panel_20261111T234918Z.parquet",
+  "panel_sha256": "bd6b9924...",
+  "results": {
+    "b1_mean_qlike": 0.9698746634228761,
+    "c2_mean_qlike": 0.9138815864163233,
+    "mean_diff": -0.055993077006552844,
+    "rel_reduction_pct": 5.773228141556188,
+    "ci_lo": -0.12115442100121512,
+    "ci_hi": 0.033865487273678205,
+    "n_pairs": 20268,
+    "n_blocks": 5,
+    "paired_instruments": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "test_blocks_with_data": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "gate": {
+    "materiality_pass": true,
+    "ci_excludes_zero": false,
+    "instruments_pass": true,
+    "blocks_pass": true,
+    "overall": false
+  },
+  "note": "Prereg specified 2025-11..2026-10 window but candle data only available 2026-05..2026-10; used available window with adjusted splits (5 test blocks). This is a documented deviation from prereg splits due to data availability."
+}

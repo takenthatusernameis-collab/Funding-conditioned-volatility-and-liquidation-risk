@@ -210,3 +210,98 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 - **168h C1_vs_B1**: p=0.363689, rel=0.01%, CI=[-0.001245,0.000466], Holm=NOT_REJECTED
 - **168h C2_vs_C1**: p=0.219855, rel=0.06%, CI=[-0.006347,0.001570], Holm=NOT_REJECTED
 - **Summary**: No horizon passes primary gate after multiplicity correction.
+
+---
+
+## Track A Expansion Robustness Addendum — 2026-11-12T01:51:19Z (TRACKA-EXP-ROBUST-20261112T014515Z, FRAGILE)
+
+**Campaign:** `LIQUIDATION_EXPANSION_ROBUSTNESS_FALSIFICATION` (pivoted from sealed PASS `TRACKA-HL-EXPANSION-20261111T195500Z`; volatility family `TRACKA-VOL-FAMILY-20261112T005111Z` completed NOT_MET).
+**Prereg (frozen pre-outcomes):** `research_state/tracka_prereg_expansion_robust_20261112T014515Z.json|.md`
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md`
+**Determination:** `FRAGILE` — pre-registered robustness/falsification campaign for the sealed Track A liquidation expansion PASS; two of three checks failed.
+
+**Panel (frozen, identical to sealed PASS):** `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` (sha256 `39916a72dfc37d15...`), 8 instruments (ZEC, NEAR, UNI, AAVE, CRV, ADA, LTC, BCH), window `2026-05-01..2026-10-31`, splits identical to sealed PASS (7d embargo, 3 non-overlapping 30-day test blocks).
+
+**Original Sealed PASS Reference:** C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088, -0.478], paired n=593, 8 instruments, 3 test blocks.
+
+**Checks (all evaluated on same frozen panel with identical features/splits):**
+
+### Check 1: LOIO (Leave-One-Instrument-Out) Sensitivity
+- **Procedure:** Re-evaluate C2 vs B1 on each 7-instrument subset (8 runs, each holding out one instrument); fixed seed 20261111, 2000 bootstrap reps.
+- **Pass Criterion:** ≥6 of 8 LOIO runs show rel QLIKE reduction ≥2% AND 95% CI excludes zero favoring C2.
+- **Results:**
+  - ZEC held out: rel=9.67% (mat PASS), CI=[-2.65, 0.68] (CI FAIL) → FAIL
+  - NEAR held out: rel=24.36% (mat PASS), CI=[-7.13, 0.00] (CI FAIL) → FAIL
+  - UNI held out: rel=3.12% (mat PASS), CI=[-1.92, 0.75] (CI FAIL) → FAIL
+  - AAVE held out: rel=18.78% (mat PASS), CI=[-5.79, -1.10] (CI PASS) → **PASS**
+  - CRV held out: rel=19.37% (mat PASS), CI=[-5.09, -0.39] (CI PASS) → **PASS**
+  - ADA held out: rel=17.58% (mat PASS), CI=[-4.41, -0.60] (CI PASS) → **PASS**
+  - LTC held out: rel=29.71% (mat PASS), CI=[-8.79, -2.42] (CI PASS) → **PASS**
+  - BCH held out: rel=10.39% (mat PASS), CI=[-6.22, 3.37] (CI FAIL) → FAIL
+- **Summary:** 4/8 PASS (need ≥6) → **FAIL**
+
+### Check 2: Placebo/Permutation on Funding Features
+- **Procedure:** Permute `fundingRate` and `abs_fund_pct` within each instrument (fixed seed 20261112, 1000 permutations); recompute C2 vs B1 on permuted data; build null distribution of rel QLIKE reduction.
+- **Pass Criterion:** True rel QLIKE reduction (19.04%) > 95th percentile of null distribution.
+- **Results:** Null distribution n=1000, 95th percentile = 21.10%. True rel reduction = 19.04%. 19.04% ≤ 21.10% → **FAIL** (approx p-value ≈ 0.07).
+
+### Check 3: Alternative Block/Bootstrap Settings
+- **Procedure:** Re-evaluate C2 vs B1 on full panel with three pre-specified bootstrap configurations (5000 reps each):
+  - (a) Circular block bootstrap, block_size=48h, seed 20261111
+  - (b) Stationary bootstrap, mean_block=24h, seed 20261112
+  - (c) Circular block bootstrap, block_size=24h, seed 20261111
+- **Pass Criterion:** ALL THREE settings yield rel QLIKE reduction ≥2% AND 95% CI excludes zero favoring C2.
+- **Results:** All 3 settings: rel=19.04%, CI excludes zero → **PASS** (all three PASS).
+
+**Overall Verdict:** **FRAGILE** (LOIO: FAIL, Placebo/Permutation: FAIL, Bootstrap Settings: PASS).
+
+**Compliance:** Prereg frozen pre-outcomes; no outcome inspection before freeze; no threshold-shopping; no sealed-holdout reuse; Hyperliquid-only observed ironflow labels; no Binance/2024 conflation; no modeled/proxy/synthetic labels; no redundant network polling; no `.github/workflows` edits; no agent-set RESOLVED_VERIFIED/fabricated=true; no Gate 4 bypass. Sealed PASS TRACKA-HL-EXPANSION-20261111T195500Z preserved; robustness campaign documented FRAGILE with exact failure modes.
+
+**Implication:** The sealed Track A liquidation expansion PASS shows sensitivity to instrument composition (LOIO fails when ZEC, NEAR, UNI, or BCH are removed) and the funding feature contribution is not statistically distinguishable from placebo at p<0.05. The result is robust to bootstrap method choice. Per protocol: document exact failure modes; preregister and attempt next best admissible untested claim in-session (alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits).
+
+**Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Branch 1 not triggered unless valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears.
+
+**Historical record preserved:** 2024 H001 NOT_SUPPORTED and all prior Track A addenda NOT erased; this addendum is appended alongside them.
+
+---
+
+## Track A Alternate Volatility Addendum — 2026-11-12T02:03:22Z (TRACKA-ALT-VOL-20261112T015546Z, NOT_MET)
+
+**Campaign:** `GAP-VOLATILITY-ALTERNATE-DESIGN` (pivoted from `TRACKA-EXP-ROBUST-20261112T015119Z` FRAGILE; volatility family `TRACKA-VOL-FAMILY-20261112T005111Z` completed NOT_MET).
+**Prereg (frozen pre-outcomes):** `research_state/tracka_prereg_alt_volatility_20261112T015546Z.json|.md`
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md`
+**Determination:** `NOT_MET` — alternate volatility design on cached HL panel (2026-05..2026-10, 9 coins) with different horizon (6h), feature set (adds rv72h), and split structure (5 test blocks) from prior NOT_MET volatility family.
+
+**Panel:** `research_state/tracka_vol_panel_20261111T234918Z.parquet` (sha256 `bd6b9924...`), 9 symbols (AVAX, BNB, BTC, DOGE, ETH, LINK, SOL, SUI, XRP), window `2026-05-01..2026-10-31` (prereg specified 2025-11..2026-10 but candle data only available 2026-05..2026-10; documented deviation).
+
+**Design (DIFFERENT from TRACKA-VOL-FAMILY):**
+- **Target Horizon:** 6h (vs 24h primary in prior family)
+- **Model C2_ALT:** B1 (rv1h, rv24h, rv168h) + fundingRate, abs_funding, premium, ema_dist, **rv72h** (added feature)
+- **Splits:** 5 non-overlapping 30-day test blocks (vs 3 in prior family), 7d embargo
+  - Train: 2026-05-01..2026-05-31
+  - Val: 2026-06-07..2026-06-30
+  - Test blocks: Jul 7-31, Aug 7-31, Sep 7-30, Oct 7-17, Oct 18-31
+- **Bootstrap:** 2000 reps, seed 20261112, circular block bootstrap
+
+**Results:**
+- B1 mean QLIKE: 0.969875 (n=20,268)
+- C2_ALT mean QLIKE: 0.913882 (n=20,268)
+- C2_ALT vs B1: rel QLIKE reduction **5.77%** (>=2% materiality: **PASS**), 95% CI [-0.121, 0.034] (excludes zero: **FAIL**)
+- Paired instruments: 9 (>=5: PASS)
+- Test blocks with data: 5 (>=3: PASS)
+- **Forecast gate (all criteria): NOT_MET** (CI crosses zero)
+
+**Compliance:** Prereg frozen pre-outcomes; no outcome inspection before freeze; no threshold-shopping; no sealed-holdout reuse; Hyperliquid only, observed mark prices; no Binance/2024 conflation; no modeled/proxy/synthetic labels; no redundant network polling; no `.github/workflows` edits; no agent-set RESOLVED_VERIFIED/fabricated=true; no Gate 4 bypass. Prereg deviation documented: candle data only available 2026-05..2026-10; splits adjusted to 5 test blocks on available window.
+
+**Implication:** The alternate volatility design achieved materiality (5.77% >= 2%) but the confidence interval crosses zero, so incremental forecast skill is not statistically confirmed at p<0.05. All admissible cached-data volatility designs on Hyperliquid 2026-05..2026-10 have now been exhausted:
+- Primary 24h horizon (TRACKA-VOL-20261111T234918Z): NOT_MET (-1.37%, CI crosses zero)
+- Family multiplicity across 6h/24h/72h/168h (TRACKA-VOL-FAMILY-20261112T005111Z): NOT_MET (Holm, no horizon passes)
+- Alternate 6h with rv72h feature, 5 test blocks (TRACKA-ALT-VOL-20261112T020322Z): NOT_MET (materiality PASS, CI FAIL)
+
+**No further claim-worthy volatility designs exist on current cached data.** Program awaits either:
+1. Valid Gate 4 Branch 1 trigger (`fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with human/legal attestation, `fabricated=false`)
+2. New admissible data source per RESEARCH_PROMPT.md §16 (unauthenticated, provenance/license, >=5 symbols, >=3 non-overlapping 30-day blocks)
+
+**Gate 4 / Track C:** remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal Binance terms evidence), `fabricated=false`. Branch 1 not triggered unless valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears.
+
+**Historical record preserved:** 2024 H001 NOT_SUPPORTED and all prior Track A addenda NOT erased; this addendum is appended alongside them.
