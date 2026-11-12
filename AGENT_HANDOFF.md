@@ -1,8 +1,7 @@
 # AGENT_HANDOFF (redirect)
-**Timestamp (UTC):** 2026-11-12T08:31:02Z
+**Timestamp (UTC):** 2026-11-12T08:35:32Z
 
-Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Read and execute it in full.
-- Gate 4 Branch 1 only on valid RESOLVED trigger (verified absent).
-- Alt-source discovery completed (20261112T075045Z/20261112T075134Z): no new GO sources; ironflow HF exhausted for claim-worthy work (events through 2026-10, HL 2026-11+ ~12d).
-- Execute in order: Gate 4 check → bounded HL/ironflow eligibility re-check only if plausible → triage caches for materially new unassessed admissible liquidation-label candidate → §16 audit/prereg/build/eval only if admissible → else timestamped checkpoint and STOP CLEANLY.
-- No hunt/deep_review re-run without materially new unassessed candidate. No polling, no sealed-record reopening, no status-only output.
+Authoritative single durable handoff: **`HANDOFF_NEXT_SESSION.md`**. Read and execute it only.
+- Gate 4 Branch 1 only on valid RESOLVED trigger (verified absent) — do not poll/bypass.
+- Alt-source discovery completed (no new GO; ironflow HF exhausted, events through 2026-10). No hunt/deep_review rerun without a materially new unassessed candidate.
+- Execute: Gate 4 check → bounded eligibility re-check only if plausible → triage materially new unassessed §16-admissible candidate → §16 audit before prereg, then prereg/build/eval/verdict under new experiment ID if admissible → else timestamped checkpoint and STOP CLEANLY. No sealed-record reopening, no status-only output.
