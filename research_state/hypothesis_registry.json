@@ -15,9 +15,15 @@
       "id": "H2_shek_replication",
       "type": "secondary",
       "description": "Independently reconstruct Shek (2026) funding-correction pattern from admissible public data; distinguish correction time from volatility/liquidation",
-      "status": "proposed",
+      "status": "EXPLORATORY_ONLY",
       "frozen_at": "2026-11-06T20:36:32Z",
-      "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458"
+      "last_tested": "2026-10-31T18:53:55Z",
+      "last_verdict": "PARTIAL (direction reproduced, not statistically significant)",
+      "last_experiment": "H002-PARTIAL-REPLICA-v1",
+      "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458",
+      "evidence": "Completed PARTIAL replication on admissible cached public data only (research_state/h002_replication_report.md; blocker research_state/h002_replication_blocker.md). 88 funding-extreme events across 5 Binance USDⓈ-M perpetuals, 2024-01-01..2024-03-31; RV-regime contrast resolved 2026-10-31: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true. Paper's full methodology not independently reconstructible (SSRN HTTP 403), so this remains PARTIAL — never an exact replication, confirmatory test, volatility-forecast-skill, boundary-breach, or observed-liquidation result. Correction time is a separate outcome (RESEARCH_PROMPT §15). Not promotable without a new fully pre-registered confirmatory protocol using only admissible unauthenticated data.",
+      "completion_note": "Status corrected from stale 'proposed' to EXPLORATORY_ONLY to match completed h002_replication_report.md (2026-10-29 report; RV-regime blocker removed 2026-10-31). No re-run; no promotion.",
+      "supersedes": ["proposed"]
     },
     {
       "id": "H_trackb_modeled_breaches",

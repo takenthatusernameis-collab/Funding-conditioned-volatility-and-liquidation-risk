@@ -1,4 +1,27 @@
 [
+{
+  "artifact_churn_note": "2026-11-12T07:34:18Z: FCLR-NEXT campaign installed as the sole authoritative next task, superseding all prior rank-0 next-task entries. Prior session (2026-11-12T07:31:59Z) monitor probe completed and evidenced INELIGIBLE (`research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`: HL ~12.0d < 100d, no post-2026-10-31 ironflow labels). Gate 4 trigger absent (verified, external/legal). Stale rank-0 frontier entries (TRACKA_ALT_VOLATILITY / TRACKA_EXPANSION_ROBUSTNESS / BOUNDED_NEW_DATA_DISCOVERY / EXTERNAL_NEW_DATA_SOURCE) are sealed NOT_MET/FRAGILE or just-executed ineligible probes — preserved as history, not relitigated. H2 registry corrected to EXPLORATORY_ONLY/PARTIAL (`research_state/h002_replication_report.md`).",
+  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal, not agent-removable — do not wait/poll). HL 2026-11+ ~12d insufficient; no verified post-2026-10-31 observed liquidation labels. All cached-data designs sealed/exhausted. No untested admissible cached-data experiment remains.",
+  "generated": "20261112T073418Z",
+  "last_checked": "20261112T073418Z",
+  "next_action_heavy": "FCLR-NEXT campaign (execute in order): (1) Gate 4 check — absent now; Branch 1 only on valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). (2) Bounded alternative liquidation-label source discovery per RESEARCH_PROMPT §5 using scripts/hunt_alternative_liquidation_sources.py → research_state/data_source_registry_alt_hunt.json, research_state/alt_source_deep_review_latest.md, research_state/url_probe_cache.json, research_state/hf_search_cache.json. Requirement for claim-worthy consideration: ≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only, venue-consistent (no Binance/2024 conflation). (3) If a source passes smoke test: §16 admissibility audit BEFORE any preregistration/outcome computation (research_state/<source>_admissibility_audit_<UTC>.{md,json}); if admissible → freeze prereg → build/eval/verdict → atomic state updates under a NEW experiment ID. (4) If no source passes: timestamped probe evidence with exact failing minima per source, experiment_frontier update, clean stop — no repeated no-op probes. (5) HL/ironflow reprobe only when plausibly eligible (HL ≥100d AND verified post-2026-10-31 observed labels); not eligible now; no polling. No status-only output.",
+  "next_unfinished_task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
+  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+  "rank": 0,
+  "resume_triggers": [
+    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+    "New admissible liquidation-label source verified (≥5 symbols, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels)",
+    "HL 2026-11+ depth ≥100d AND verified post-2026-10-31 observed labels (bounded reprobe)"
+  ],
+  "status": "ACTIVE_HEAVY_CAMPAIGN",
+  "supersedes_prior_next_task_entries": [
+    "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
+    "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
+    "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
+    "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+  ],
+  "task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY"
+},
   {
     "artifact_churn_note": "20261112T07:00:00Z: §16 admissibility audit of metpie/hyperliquid-liquidation-events 2025-03-22..2025-05-25 joined to HL funding+candles COMPLETED — INADMISSIBLE. Evidence: HL 4h candles fetchable (390 rows/symbol, complete window, 11 top symbols), HL fundingHistory paginatable (BTC 1,548 rows full window), metpie ≥5 instruments PASS (11 coins ≥5,000 events), RV/context features computable. Primary failing criterion: block feasibility — window ~64.1 days < 90 days minimum for ≥3 non-overlapping 30-day OOS test blocks; structurally infeasible under any split configuration. Artifacts: `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}`. Bounded reprobe (step 3) NOT currently eligible: HL 2026-11+ ~11.2 days (<100d threshold), no verified post-2026-10-31 observed liquidation labels (ironflow HF through 2026-10 only). No polling. Gate 4 trigger absent (verified).",
     "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). All cached-data designs exhausted/sealed. metpie INADMISSIBLE (block-feasibility). HL 2026-11 window ~11.2d insufficient; no verified post-2026-10-31 observed labels. No untested admissible cached-data experiment remains.",
