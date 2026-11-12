@@ -1,0 +1,101 @@
+{
+  "experiment_id": "TRACKA-VOL-20261111T234918Z",
+  "preregistered_utc": "2026-11-11T23:56:27Z",
+  "campaign": "GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS",
+  "track": "A_volatility",
+  "status": "PREREGISTERED_FROZEN_PRE_OUTCOMES",
+  "claim": "Funding-conditioned features (C2) improve out-of-sample forecasting of next-24h realized volatility/variance vs RV-only baseline (B1) on an admissible cached Hyperliquid panel, with metric QLIKE and pre-registered materiality/inference criteria.",
+  "hypothesis_id": "H_tracka_hl_funding_conditioned_volatility_forecast",
+  "venue": "hyperliquid_perpetuals",
+  "data_sources": {
+    "hyperliquid_candles": {
+      "path": "research_state/data_cache/hyperliquid_candles/{COIN}/{YYYY-MM}.json",
+      "interval": "1h",
+      "fields": ["t", "c"],
+      "coverage_note": "Cached admissible unauthenticated candleSnapshot files with sidecar .accessed.json/.sha256. Ex-ante audit (pre-outcome): 2025-11..2026-04 month files are empty for all candidate coins; 2026-05..2026-10 contain data for 9 core coins. ADA has 2026-05..2026-10 only; candidate universe fixed ex ante below.",
+      "months_used": ["2026-05","2026-06","2026-07","2026-08","2026-09","2026-10"]
+    },
+    "hyperliquid_funding": {
+      "path": "research_state/data_cache/hyperliquid_funding/{COIN}.json",
+      "fields": ["coin","fundingRate","premium","time"],
+      "cadence": "hourly",
+      "coverage_note": "Cached admissible unauthenticated fundingHistory; per-coin coverage verified ex ante to span panel window for included coins."
+    }
+  },
+  "panel": {
+    "universe_selection_rule_ex_ante": "Use cached-admissible coins with complete 1h candle coverage and funding coverage for 2026-05..2026-10: AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP (9 coins). ADA excluded ex ante because candle cache lacks 2025-11..2026-04 and full 12-month coverage is unavailable; 2026-05..2026-10-only ADA not required and would alter fixed universe post-handoff rationale, so core 9-coin set is frozen. No selection based on outcomes.",
+    "coins": ["AVAX","BNB","BTC","DOGE","ETH","LINK","SOL","SUI","XRP"],
+    "min_instruments": 5,
+    "time_window_utc": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
+    "frequency": "1h decision points aligned to available candles/funding",
+    "target": "next_24h_realized_variance",
+    "target_definition": "Forward realized variance over next 24 hourly log returns: RV_{t,t+24h} = sum_{i=1}^{24} r_{t+i}^2, r = log(close_t/close_{t-1}), computed causally from future closes in horizon only for label; requires complete 24 future 1h returns.",
+    "features_causal": true,
+    "feature_definitions": {
+      "rv1h": "sum of squared trailing 1h log return at t (trailing only)",
+      "rv24h": "sum of squared trailing 24 1h log returns ending at t",
+      "rv168h": "sum of squared trailing 168 1h log returns ending at t",
+      "funding_rate": "latest known fundingRate at or before t (as-of merge, backward)",
+      "abs_funding": "abs(funding_rate)",
+      "premium": "latest known premium at or before t (as-of merge, backward)",
+      "ema_dist": "close_t / EMA24(close)_t - 1, EMA computed causally on trailing closes"
+    }
+  },
+  "models": {
+    "B1": "RV-only baseline: OLS/linear predictor of log(target+eps) using trailing RV features (rv1h,rv24h,rv168h) with train-only fit; predictions clipped to positive for QLIKE.",
+    "C2": "Funding-conditioned: OLS/linear predictor of log(target+eps) using B1 features + funding_rate + abs_funding + premium + ema_dist with train-only fit; predictions clipped to positive for QLIKE."
+  },
+  "primary_contrast": "C2 vs B1",
+  "metric": "QLIKE",
+  "metric_definition": "QLIKE(y, yhat) = mean(y/yhat - log(y/yhat) - 1) over valid pairs with y>0, yhat>0; lower is better.",
+  "materiality_gate": {
+    "min_relative_reduction_pct": 2.0,
+    "relative_reduction_definition": "100 * (QLIKE_B1 - QLIKE_C2) / QLIKE_B1 on pooled paired test observations; positive favors C2.",
+    "ci_excludes_zero": true,
+    "ci_definition": "95% block-bootstrap CI on paired (QLIKE_B1 - QLIKE_C2) improvement or on alt-base diff as pre-specified implementation-consistent; CI must exclude zero in favor of C2 for pass.",
+    "min_paired_instruments": 5,
+    "min_test_blocks": 3,
+    "block_days": 30,
+    "embargo_days": 7,
+    "all_required": true
+  },
+  "split_scheme": {
+    "method": "chronological by timestamp with symbol-pooled observations; 7-day embargo between train and each test block and between test blocks where applicable",
+    "seed": 20261111,
+    "test_blocks": 3,
+    "block_length_days": 30,
+    "embargo_days": 7,
+    "selection_rule": "Use last contiguous eligible period partitioned into 3 non-overlapping 30-day test blocks separated by >=7-day embargo; remaining earlier data is train (and not used for tuning on test). Exact block boundaries recorded in build/eval artifacts from available timestamps before outcome scoring.",
+    "no_peeking": true
+  },
+  "bootstrap": {
+    "type": "circular_block_bootstrap",
+    "block_size_hours": 24,
+    "num_reps": 2000,
+    "alpha": 0.05,
+    "seed": 20261111
+  },
+  "admissibility_rules": {
+    "cache_first": true,
+    "bounded_fetch_allowed_only_if_prereg_gap": false,
+    "no_outcome_peeking": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "venue_restriction": "Hyperliquid only",
+    "no_binance_2024_conflation": true,
+    "observed_only_no_proxy_labels": true,
+    "hard_inadmissible_if": [
+      "fewer than 5 paired instruments in evaluation",
+      "fewer than 3 non-overlapping 30-day test blocks with >=7-day embargo",
+      "outcome-inspected prereg changes",
+      "non-causal feature leakage"
+    ]
+  },
+  "artifacts_planned": {
+    "prereg_json": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+    "prereg_md": "research_state/tracka_prereg_volatility_20261111T234918Z.md",
+    "panel": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
+    "build_report": "research_state/tracka_vol_panel_build_report_20261111T234918Z.json",
+    "evaluation_summary": "research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md"
+  }
+}

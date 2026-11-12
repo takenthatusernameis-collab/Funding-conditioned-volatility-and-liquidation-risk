@@ -1,20 +1,19 @@
 [
   {
-    "artifact_churn_note": "2026-11-11T20:30:00Z: Completed GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 (TRACKA-HL-EXPANSION-20261111T195500Z). Emitted universe/acquisition/panel/build/eval artifacts; verdict PASS for pre-registered C2 vs B1 (observed Hyperliquid liquidation intensity, 2026-05..2026-10, 8 symbols). State updated atomically; sealed records preserved. Gate 4 external-blocked.",
-    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required, fabricated=false). Track C/H1 NOT_SUPPORTED on sealed/closed panels; Track B TB1/TB2 NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET/closed; Track A early 2025-11..2026-04 INADMISSIBLE. Expansion TRACKA-HL-EXPANSION-20261111T195500Z PASS recorded (not a sealed-holdout reuse). No Binance/2024 conflation.",
-    "generated": "2026-11-11T20:30:00Z",
-    "last_checked": "2026-11-11T20:30:00Z",
-    "next_action_heavy": "TRACKA-HL-EXPANSION-20261111T195500Z (GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10) COMPLETED: preregistered C2 vs B1 on observed Hyperliquid liquidation intensity 2026-05..2026-10 (expanded 8-symbol universe, disjoint design from closed 9-symbol NOT_MET) = PASS (rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks). Gate 4 remains EXTERNAL_BLOCKED (human/legal). Next heavy campaign: (A) if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears execute Branch 1 deterministically; (B) otherwise pursue co-priority volatility forecasting on admissible untested panels via new frozen prereg (GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS) using available Hyperliquid/admissible data with documented event-adequacy, and run prereg\u2192build\u2192eval in-session; include pre-registered robustness/falsification for expansion PASS where admissible without threshold-shopping.",
-    "next_unfinished_task": "GATE4_EXTERNAL_BLOCKER_MONITOR_OR_POST_EXPANSION_ROBUSTNESS_AND_VOLATILITY_CAMPAIGN",
+    "artifact_churn_note": "2026-11-11T23:59:55Z: Completed TRACKA-VOL-20261111T234918Z (GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS). Prereg frozen pre-outcomes; cached Hyperliquid 9-coin panel 2026-05..2026-10 built/evaluated. Verdict NOT_MET (C2 vs B1 QLIKE rel -1.37%, CI crosses zero, n=19233, 9 instruments, 3 blocks). State updated; sealed records preserved. Gate 4 external-blocked.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required, fabricated=false). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed. No Binance/2024 conflation.",
+    "generated": "2026-11-11T23:59:55Z",
+    "last_checked": "2026-11-11T23:59:55Z",
+    "next_action_heavy": "Execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze `research_state/tracka_prereg_expansion_robust_20261111T235955Z.{json,md}` BEFORE any robustness outcome computation specifying ex-ante checks (e.g. leave-one-instrument-out sensitivity, placebo/permutation on funding features with fixed seed, and alternative pre-specified block/bootstrap settings) with pass/falsification criteria, then run all checks and emit `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261111T235955Z.md` (ROBUST/FRAGILE/INCONCLUSIVE) + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1. Do not relitigate sealed verdicts or threshold-shop.",
+    "next_unfinished_task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
     "rank": 0,
     "resume_triggers": [
-      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1 conditional Track C ablation)",
-      "Execute GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS: freeze new prereg on admissible untested panel (volatility co-priority) then build/evaluate; include expansion robustness/falsification checks pre-registered before outcomes",
-      "New admissible unauthenticated observed-liquidation or volatility source appears with verifiable provenance/coverage for an untested claim-worthy panel"
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "Complete TRACKA-EXP-ROBUST-20261111T235955Z prereg+checks+verdict; if ROBUST/FRAGILE/INCONCLUSIVE documented, preregister next admissible untested claim (e.g. alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits) and execute in-session"
     ],
     "status": "ACTIVE_HEAVY_CAMPAIGN",
-    "task": "GATE4_EXTERNAL_BLOCKER_MONITOR_OR_SYMBOL_EXPANSION_PREREG"
+    "task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
   },
   {
     "track_a": {
@@ -92,6 +91,21 @@
           "instruments": 8
         },
         "notes": "Observed Hyperliquid ironflow labels only; no Binance/2024 conflation; prereg frozen pre-outcomes; bounded acquisition with provenance; different universe/design from closed 9-symbol NOT_MET panel."
+      },
+      "volatility_campaign": {
+        "experiment_id": "TRACKA-VOL-20261111T234918Z",
+        "status": "NOT_MET",
+        "prereg": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+        "verdict": "research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md",
+        "panel": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
+        "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
+        "instruments": 9,
+        "test_blocks": 3,
+        "rel_reduction_pct": -1.3665270546001616,
+        "ci95": [
+          -0.014248708685881961,
+          0.0021159967844719407
+        ]
       }
     },
     "track_b": {
@@ -127,6 +141,6 @@
       "python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v",
       "python -c \"from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])\""
     ],
-    "updated_at": "2026-11-11T20:30:00Z"
+    "updated_at": "2026-11-11T23:59:55Z"
   }
 ]

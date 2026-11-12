@@ -171,3 +171,21 @@ No unsealed, contiguous >=5-symbol confirmatory window remains:
 **Compliance:** prereg frozen pre-outcomes; Hyperliquid-only observed ironflow labels (no Binance/2024 conflation); no modeled/proxy/synthetic liquidation labels; no threshold-shopping; no sealed-holdout reuse (FCLR-002/003/Track B/C/closed Track A panels not relitigated as this claim); bounded first-time acquisition with provenance, cache-first; no `.github/workflows` edits; no agent-set RESOLVED_VERIFIED/fabricated=true. Gate 4 remains `EXPLICIT_BLOCKER_UNRESOLVED` (human/legal), not bypassed.
 
 **Implication:** Funding-conditioned features demonstrate pre-registered incremental forecast skill over RV-only baseline for observed Hyperliquid liquidation intensity on this admissible expanded 2026M05M10 panel. Historical 2024 H001 NOT_SUPPORTED record and prior Track A NOT_MET/INADMISSIBLE records remain preserved; this is a distinct, separately pre-registered claim/universe.
+
+---
+
+## Track A Volatility Addendum — 2026-11-11T23:59:55Z (TRACKA-VOL-20261111T234918Z, NOT_MET)
+
+**Campaign:** `GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS` (repo-priority funding-conditioned volatility; Hyperliquid-only, cached admissible).
+**Prereg (frozen pre-outcomes):** `research_state/tracka_prereg_volatility_20261111T234918Z.json|.md`
+**Panel/build:** `research_state/tracka_vol_panel_20261111T234918Z.parquet`, `research_state/tracka_vol_panel_build_report_20261111T234918Z.json` (39744 rows, 38016 eligible; 9 coins AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP; 2026-05-01..2026-10-31 1h candles+funding cached; causal/trailing features, 7d embargo, 3x30d test blocks).
+**Verdict artifact:** `research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md` (`.json`)
+**Determination:** `NOT_MET` (minima satisfied; materiality/inference not satisfied).
+
+**Target:** next-24h realized variance (forward 24x1h log returns). **Contrast:** C2 (RV1h/RV24h/RV168h + funding_rate, abs_funding, premium, ema_dist) vs B1 (RV-only), train-only OLS on log(y+eps), metric QLIKE (lower better).
+
+**Results (test, pooled paired):** n=19233, 9 instruments, 3 test blocks (all >=5 instruments). QLIKE B1=0.44332726, C2=0.44938545; improvement (B1-C2)=-0.00605819; relative reduction **-1.37%** (<2%, wrong sign). 95% circular block-bootstrap CI (24h, 2000 reps, seed 20261111) **[-0.01424871, 0.00211600]** crosses zero (not favoring C2). Per-block rel: b1 +0.020%, b2 -7.452%, b3 +3.035%.
+
+**Compliance:** prereg frozen before outcomes; no outcome peeking/threshold-shopping/post-outcome edits; no sealed-holdout reuse; Hyperliquid-only (no Binance/2024 conflation); cached admissible inputs only; causal features; no `.github/workflows` edits; Gate 4 not bypassed (remains EXTERNAL_BLOCKED, no valid RESOLVED_VERIFIED trigger).
+
+**Implication:** Funding-conditioned features not confirmed over RV-only baseline for next-24h realized variance on this admissible 2026-05..2026-10 Hyperliquid panel under frozen criteria. Sealed Track A liquidation expansion PASS and all prior sealed/closed records preserved.

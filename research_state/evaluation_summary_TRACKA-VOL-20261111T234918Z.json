@@ -1,0 +1,57 @@
+{
+  "experiment_id": "TRACKA-VOL-20261111T234918Z",
+  "verdict": "NOT_MET",
+  "primary_contrast": "C2_vs_B1",
+  "metric": "QLIKE",
+  "n_test_pairs": 19233,
+  "paired_instruments": 9,
+  "test_blocks": 3,
+  "blocks_with_ge5_instruments": 3,
+  "qlike_b1": 0.44332726375781406,
+  "qlike_c2": 0.4493854507574832,
+  "improvement_b1_minus_c2": -0.006058186999669146,
+  "rel_reduction_pct": -1.3665270546001616,
+  "bootstrap": {
+    "type": "circular_block",
+    "block_size_hours": 24,
+    "reps": 2000,
+    "seed": 20261111,
+    "ci95_low": -0.014248708685881961,
+    "ci95_high": 0.0021159967844719407,
+    "n_boot": 2000
+  },
+  "ci_excludes_zero_favors_c2": false,
+  "materiality_ge2pct": false,
+  "per_block": {
+    "test_b1": {
+      "n": 6480,
+      "instruments": 9,
+      "qlike_b1": 0.3879257969293778,
+      "qlike_c2": 0.3878498583067656,
+      "rel_reduction_pct": 0.019575553678892445
+    },
+    "test_b2": {
+      "n": 6480,
+      "instruments": 9,
+      "qlike_b1": 0.4406826690608351,
+      "qlike_c2": 0.4735243305716931,
+      "rel_reduction_pct": -7.452451348007126
+    },
+    "test_b3": {
+      "n": 6273,
+      "instruments": 9,
+      "qlike_b1": 0.5032887620337092,
+      "qlike_c2": 0.48801620125717565,
+      "rel_reduction_pct": 3.034552314424741
+    }
+  },
+  "criteria": {
+    "min_paired_instruments>=5": true,
+    "min_test_blocks>=3": true,
+    "all_blocks_ge5_instruments": true,
+    "rel_reduction>=2pct": false,
+    "ci95_excludes_zero_favors_c2": false
+  },
+  "panel_sha256": "bd6b9924e2f76dfa9ea5cecd9737e62f32c0a76b663695bd9fc161cc1257b837",
+  "generated_utc": "2026-11-11T23:59:49Z"
+}

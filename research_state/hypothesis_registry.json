@@ -86,7 +86,21 @@
       "data_source": "ironflow/hyperliquid-liquidations",
       "observed_only": true,
       "evidence": "TRACKA-HL-EXPANSION-20261111T195500Z PASS: C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks (2026-05..2026-10, ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH)."
+    },
+    {
+      "id": "H_tracka_hl_funding_conditioned_volatility_forecast",
+      "type": "primary_tracka_volatility",
+      "description": "Funding-conditioned features (C2) improve OOS forecasting of next-24h realized variance vs RV-only baseline (B1) on admissible cached Hyperliquid panel (2026-05..2026-10).",
+      "status": "NOT_MET",
+      "preregistered_utc": "2026-11-11T23:56:27Z",
+      "prereg_document": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+      "last_experiment": "TRACKA-VOL-20261111T234918Z",
+      "last_verdict": "forecast_gate_NOT_MET",
+      "last_tested": "2026-11-11T23:59:49Z",
+      "venue": "hyperliquid_perpetuals",
+      "observed_only": true,
+      "evidence": "TRACKA-VOL-20261111T234918Z NOT_MET: 9 coins (AVAX,BNB,BTC,DOGE,ETH,LINK,SOL,SUI,XRP), 2026-05..2026-10 cached candles+funding, 3x30d test blocks w/7d embargo, n=19233 paired test obs. QLIKE B1=0.443327 vs C2=0.449385, improvement (B1-C2)=-0.006058, rel reduction -1.37% (<2%), 95% block-bootstrap CI [-0.014249,0.002116] crosses zero (not favoring C2). Verdict: research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md."
     }
   ],
-  "updated_utc": "2026-11-11T20:30:00Z"
+  "updated_utc": "2026-11-11T23:59:55Z"
 }

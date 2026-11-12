@@ -1,0 +1,253 @@
+{
+  "experiment_id": "TRACKA-VOL-20261111T234918Z",
+  "prereg": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+  "generated_utc": "2026-11-11T23:59:00Z",
+  "panel_path": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
+  "panel_sha256": "bd6b9924e2f76dfa9ea5cecd9737e62f32c0a76b663695bd9fc161cc1257b837",
+  "coins": [
+    "AVAX",
+    "BNB",
+    "BTC",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "SOL",
+    "SUI",
+    "XRP"
+  ],
+  "months_used": [
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10"
+  ],
+  "rows_total": 39744,
+  "rows_eligible_eval": 38016,
+  "coverage_by_coin": {
+    "AVAX": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "BNB": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "BTC": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "DOGE": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "ETH": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "LINK": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "SOL": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "SUI": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    },
+    "XRP": {
+      "rows_total": 4416,
+      "rows_eligible_eval": 4224,
+      "t_min_ms": 1777593600000,
+      "t_max_ms": 1793487600000,
+      "missing_target": 24,
+      "missing_rv24h": 24,
+      "missing_funding": 0
+    }
+  },
+  "split_boundaries_utc": {
+    "train_end_exclusive": "2026-07-12T23:00:00+00:00",
+    "test_b1": [
+      "2026-07-19T23:00:00+00:00",
+      "2026-08-18T23:00:00+00:00"
+    ],
+    "test_b2": [
+      "2026-08-25T23:00:00+00:00",
+      "2026-09-24T23:00:00+00:00"
+    ],
+    "test_b3": [
+      "2026-10-01T23:00:00+00:00",
+      "2026-10-31T23:00:00+00:00"
+    ],
+    "embargo_days": 7,
+    "block_days": 30
+  },
+  "split_counts_all": {
+    "embargo_or_excluded": 4545,
+    "test_b1": 6480,
+    "test_b2": 6480,
+    "test_b3": 6480,
+    "train": 15759
+  },
+  "split_counts_eligible": {
+    "embargo_or_excluded": 4536,
+    "test_b1": 6480,
+    "test_b2": 6480,
+    "test_b3": 6273,
+    "train": 14247
+  },
+  "test_block_instruments_eligible": {
+    "test_b1": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "test_b2": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ],
+    "test_b3": [
+      "AVAX",
+      "BNB",
+      "BTC",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "SOL",
+      "SUI",
+      "XRP"
+    ]
+  },
+  "min_instruments_any_test_block": 9,
+  "n_test_blocks_with_ge5_instruments": 3,
+  "inputs_sha256": {
+    "candles": {
+      "AVAX/2026-05": "0b48d1aeadea2327167e7cc9b8fb0e55e42dce6f7bd6bc13658a3d2179b119a4",
+      "AVAX/2026-06": "3784e11b85ea7c6033f585b51d06ddced7f676673196a39ab857a5dfb1b8cae3",
+      "AVAX/2026-07": "5761899afea50f4f1a339a5f0c19042ea21c5299f88fca96c4365c253e64057e",
+      "AVAX/2026-08": "eae7cdb0ea9298f16e24e09bd18f190e9130cb4ef62599f583587f21f1baa9a8",
+      "AVAX/2026-09": "f3bfbb9308cd078af85f0bafda5b8d215a711b9a50f0effe7ddbf66145161096",
+      "AVAX/2026-10": "509168cfe56f5977c12b83688a74b17107b9dc76be4f4b43cf363dec885de7f3",
+      "BNB/2026-05": "f6ced725ef3b386296115268af71857a8224ae3591da7bdf8e45a2b63cb7b7a5",
+      "BNB/2026-06": "98645e09e61b9f0215252abf7ca74f385cff2babf1fbf9b37446516d6d76f58b",
+      "BNB/2026-07": "f8cbb8862230577b0ca851c61dea884e738623436b000bdeda5d08355ee019d7",
+      "BNB/2026-08": "225fd7f930ee82e36ca1d2395f3544419a9ad89ee1892e05d467dffaa9a3d672",
+      "BNB/2026-09": "7ede94c13e97e9195d78cfa627a3dcdca22430eea23c3454e456e7aaacec4707",
+      "BNB/2026-10": "d330cd27376dc5a1a4b9316613a0ca33127180e6261c5dda6924056ae13039b3",
+      "BTC/2026-05": "7af48de925e19631925f5eba92f92ce137686f5789e0957467ebddeda9f66703",
+      "BTC/2026-06": "211796a8ddfe6bb13b828947d6c37ae8284c5b5eb48d0822a3a8d0abd042afee",
+      "BTC/2026-07": "adadd97ebd53f4e7105fd88ae11a93ade3897b58a32b12ba203bbfa028118850",
+      "BTC/2026-08": "1850753fa9aee9715f986883cbf3e7e69a179d9381f4079fd23b961fe4b35fa3",
+      "BTC/2026-09": "ec494803f170380f2966aad2dc1164b843464823e9f404ce8a8eeb663cc83562",
+      "BTC/2026-10": "a88a4a464c1535b99833e2a69502779b9d8edd290f8217ec0c7f5393bd349b1b",
+      "DOGE/2026-05": "a7079e29c69b891efcce060240daafc4064ab4455333d659d118cfee9bdc99fa",
+      "DOGE/2026-06": "6f174055ba8d7b8816683df92f356aa2599413cddf5ea2317eeadcf7ed170906",
+      "DOGE/2026-07": "655e357c60888592aa44a8c2317fe1b6de062a0b4eb9d5625783b61216cf7f41",
+      "DOGE/2026-08": "81f165be6f9352127a818b836cad357c0759efc366d6ac3a8d50ddcba538ea47",
+      "DOGE/2026-09": "209d289a9156727614b85a740fdc1e694a79d4499d1d2aca0ef33a095069a9fe",
+      "DOGE/2026-10": "46ee8b1413656a4cd1823bf3cb475b1892c7be35032976b2958336f62d5ce3f7",
+      "ETH/2026-05": "aacf4334829d3666d118e9a0f3212af87a0378b74ec79157af15f58286b9e688",
+      "ETH/2026-06": "c9c8db39a099200805fd2c1eee786965b017d5cf87b12e1e94d50fcc5a3f5da1",
+      "ETH/2026-07": "d2204685020ced2f8f1a03fc0bba41d588db2ca54c71b98dd884285e77253f67",
+      "ETH/2026-08": "1530fcba746dd8cb6539333384ab878e0c5914beeaab729f2ca9b026e943aa6b",
+      "ETH/2026-09": "5078076832a337f65ddd7a81757e9f8b3113f7fcb1119a187901be846ebbc922",
+      "ETH/2026-10": "221b667b290826eabb47fd4f5c7149b7211205e068db190f4d119a9aafeac733",
+      "LINK/2026-05": "819d9a93f6de145cf379fe696b2c9dc14bd23c4a597c827e60e9f888b934cf76",
+      "LINK/2026-06": "692326fa1bfdb1fc281182f68ee20690f65e5aa30b7ea2484707f864ae05b0ec",
+      "LINK/2026-07": "2c6da188f5ce75ccc70238e77a74b30bbf6a7813a600d8aa2972684d512491e0",
+      "LINK/2026-08": "aa9f81c15d87c96dfd016fbff706b676fcb622f50a4025630d9b04945dc0ee15",
+      "LINK/2026-09": "0a32dd56f48dfd8b3e1407929bcb3b024149e568b9a90b83f4661e3124faa465",
+      "LINK/2026-10": "98ed80eaceda35c33f491230beaf8e61806c73c88928a44df622657d93e4d8e2",
+      "SOL/2026-05": "ffd8fb699c1d26429e744d71e1885cfa5b3a10ec12e1665bb042b1aa5145f423",
+      "SOL/2026-06": "e483d45b44ed9ef4bdf8fe86cd32e53009e5767e141c434fc339d9eb90313236",
+      "SOL/2026-07": "8c996073660a1d5ad014c8cf319c1888e68a1d19e78fd3f411bb0c6eda37a0c1",
+      "SOL/2026-08": "c6e8e0cb8818b7c1a975c66eac1f09b2eea13c65eebc14eec2dbe7ead07b37fb",
+      "SOL/2026-09": "49f36012f6cccdba857c75291dc03532bbe382740086f27066403c7111fb2bb8",
+      "SOL/2026-10": "c1c3a43748ec39e9396910934c524fecf4d72342ba44517be247035aa0b0e2fb",
+      "SUI/2026-05": "30d7447197fe991ba449dc1b65434eb3b2aa8ff85733a1e7ff5549ad973a90da",
+      "SUI/2026-06": "a0cc749c4a8f57168cee3a71def78a56ad183ecdbdc49113a874ba91da999acf",
+      "SUI/2026-07": "9118dfecd6174b1a739d362c4757b11c8f5fb921a9d2101aaef7136557e856f5",
+      "SUI/2026-08": "57298dcbc0b3c1d38759e60ffbd0473813888a08555bfbfd9ee5473323809470",
+      "SUI/2026-09": "f24f47b1e4daee3796ad0d76fe3fd77da0a797b19fb911aadc3fb53b9c2645c6",
+      "SUI/2026-10": "ffcc4b13f9bf3b3703ffc182b3a0ccee1042c4e05d8704c5c7ad5bb6a76be3c5",
+      "XRP/2026-05": "d7ca5a7678c7a687a6f59ce321ab5e110c7b76fbe7263e4636fdd62677661437",
+      "XRP/2026-06": "09a2c69d6a9c1f9d12238a34de3a5870c9a7b5d913fd102c7b6864a29e5e6c48",
+      "XRP/2026-07": "157a4c155859a0e41fb7edb863f10804c902fc067196d217d55b2217cd660641",
+      "XRP/2026-08": "fc716657d6a538c0fa601b99d47d8678d08783732d8cf71d1257b4ca4f2f4776",
+      "XRP/2026-09": "4de8ef61a8ef5b10570f63709e7f89368faf201c370230fecd241370dee4b2d0",
+      "XRP/2026-10": "5c08e31b3af7f2af36652e0fac0b9649508cd1e507b680a197955d52c9a5576a"
+    },
+    "funding": {
+      "AVAX": "d420bc4efe8b284eb4b974babba1e650fa043dd470440d3ce95d475dec3e48f4",
+      "BNB": "92c9c9221eb331e2450253d423be2cf37a70a0118961d998a931bed35c11321a",
+      "BTC": "1c7d2b5d8c40c7b9e3ba84264bce214bb0f694f78aa8623d0b04b336c6a7e430",
+      "DOGE": "91d3882a699796c354f6aa8159f4a4fa3b61ea05b857f04ae6b10b9c40e42e3b",
+      "ETH": "2e3851fa6c541fecf3bbf399e8b8b87ad483c876a8010fa66a0f15b628815c5c",
+      "LINK": "0dec3eaf2667caa7aa9ac277836f22ade3b909ee1623aff3fe441d3973fc8ac2",
+      "SOL": "5aba146a9a587e4770884b5cfc7a1212d06e161049ed20c33512bb4c5f6e0ee3",
+      "SUI": "78bd52963727f5a71f36c5eead5ab31a9b2f41deca2aa2d19c61a486c2251fef",
+      "XRP": "95d980a1688ab5f98764fe9f46683c37f418f546d91b809dde147b5465cf4781"
+    }
+  },
+  "notes": [
+    "Features causal/trailing/as-of only; target uses future 24h returns only as label horizon.",
+    "Panel built before outcome scoring in this session; no post-outcome panel edits.",
+    "Chronological splits with 7d embargo and 30d blocks per prereg."
+  ]
+}
