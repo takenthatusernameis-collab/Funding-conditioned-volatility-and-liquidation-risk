@@ -1,3 +1,5 @@
+> **SUPERSEDED 2026-11-12T12:34:20Z — DO NOT EXECUTE.** The sole durable handoff is root `AGENT_HANDOFF.md`. This file is retained as historical evidence only.
+
 # FCLR CAMPAIGN NEXT (EXECUTABLE) — 2026-11-06T20:27:26Z (Track A lockdown reference)
 **RECONCILED 2026-11-07T00:15:23Z:** Root durable handoff `AGENT_HANDOFF.md` is authoritative. Repo-priority P0 = **Phase 3 funding-conditioned volatility ablations (Gate 4)** using local data (measurable, unblocked). Track A remains **blocked/no trigger** (no re-probe); follow Track A guarded protocol below **only** if trigger appears or a specific gap is hardened with tmp-isolated tests. `FCLR-NEXT-139` numbering retained as Track A campaign marker; do not create status-only churn.
 
