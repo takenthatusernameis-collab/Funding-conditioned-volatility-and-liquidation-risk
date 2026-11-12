@@ -1,0 +1,12 @@
+{
+  "api_key_required": false,
+  "bytes": 1665894,
+  "dataset": "funding",
+  "fetched_utc": "2026-11-12T22:26:27Z",
+  "license": "CC-BY-4.0",
+  "month": "2025-05",
+  "requester_pays": false,
+  "sha256": "26005d5d1bfd0719e8eeb5e4d4c0750dadfa63d0c8161ad476a6a55170455058",
+  "unauthenticated": true,
+  "url": "https://huggingface.co/datasets/ironflow/hyperliquid-funding/resolve/main/data/2025-05.parquet"
+}

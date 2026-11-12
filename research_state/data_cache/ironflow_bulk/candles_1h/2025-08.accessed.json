@@ -1,0 +1,12 @@
+{
+  "api_key_required": false,
+  "bytes": 5668785,
+  "dataset": "candles_1h",
+  "fetched_utc": "2026-11-12T22:26:24Z",
+  "license": "CC-BY-4.0",
+  "month": "2025-08",
+  "requester_pays": false,
+  "sha256": "bb5f2c85f874688f6fc154c576d0cc483445fa81bfcb28aa4024119aea248229",
+  "unauthenticated": true,
+  "url": "https://huggingface.co/datasets/ironflow/hyperliquid-candles-1h/resolve/main/data/2025-08.parquet"
+}

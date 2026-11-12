@@ -39,7 +39,7 @@
       "template": "data/{month}.parquet"
     }
   },
-  "generated_utc": "2026-11-12T20:16:38Z",
+  "generated_utc": "2026-11-12T22:27:06Z",
   "manifest_id": "fclr_ironflow_bulk_manifest",
   "months": [
     "2025-05",
@@ -57,161 +57,827 @@
   ],
   "objects": [
     {
+      "bytes": 1376475,
       "dataset": "candles_1h",
       "month": "2025-05",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 35550
+      },
+      "sha256": "9bd24cf774076f753f9692a663837f815853f755890434ba9a08e73600a86aef",
+      "status": "OK"
     },
     {
+      "bytes": 5579910,
       "dataset": "candles_1h",
       "month": "2025-06",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 154237
+      },
+      "sha256": "f8eef410c8e21881e8511fec10a1a032b5ad37b21f94deef96b6f2f8cdc8131b",
+      "status": "OK"
     },
     {
+      "bytes": 5702729,
       "dataset": "candles_1h",
       "month": "2025-07",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 156492
+      },
+      "sha256": "466c6ebc277045f231cbe18583d3aa41488bd27aed57a5effd118712b603d647",
+      "status": "OK"
     },
     {
+      "bytes": 5668785,
       "dataset": "candles_1h",
       "month": "2025-08",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 154531
+      },
+      "sha256": "bb5f2c85f874688f6fc154c576d0cc483445fa81bfcb28aa4024119aea248229",
+      "status": "OK"
     },
     {
+      "bytes": 5749438,
       "dataset": "candles_1h",
       "month": "2025-09",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 155796
+      },
+      "sha256": "ab22becbad69206cc01b4279604fabaaafb870bc54b2998c0bc243247db5f0f1",
+      "status": "OK"
     },
     {
+      "bytes": 6259526,
       "dataset": "candles_1h",
       "month": "2025-10",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 173905
+      },
+      "sha256": "f30ee1b41fe0c7405c4f5f0dba12adce2d19bdaa60f96bc31d1c1cc30395fad1",
+      "status": "OK"
     },
     {
+      "bytes": 6149702,
       "dataset": "candles_1h",
+      "month": "2025-11",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 170678
+      },
+      "sha256": "bb2af7f07763589da702776c68880671e53dba2ab89d3281242ba41588920294",
+      "status": "OK"
+    },
+    {
+      "bytes": 6703282,
+      "dataset": "candles_1h",
+      "month": "2025-12",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 189790
+      },
+      "sha256": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+      "status": "OK"
+    },
+    {
+      "bytes": 7474426,
+      "dataset": "candles_1h",
+      "month": "2026-01",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 211494
+      },
+      "sha256": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+      "status": "OK"
+    },
+    {
+      "bytes": 7609656,
+      "dataset": "candles_1h",
+      "month": "2026-02",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 216575
+      },
+      "sha256": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+      "status": "OK"
+    },
+    {
+      "bytes": 8571239,
+      "dataset": "candles_1h",
+      "month": "2026-03",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 248859
+      },
+      "sha256": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+      "status": "OK"
+    },
+    {
+      "bytes": 8547316,
+      "dataset": "candles_1h",
+      "month": "2026-04",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "market_class",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "trades"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "close"
+        ],
+        "rows": 246842
+      },
+      "sha256": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180",
+      "status": "OK"
+    },
+    {
+      "bytes": 1665894,
+      "dataset": "funding",
+      "month": "2025-05",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 145771
+      },
+      "sha256": "26005d5d1bfd0719e8eeb5e4d4c0750dadfa63d0c8161ad476a6a55170455058",
+      "status": "OK"
+    },
+    {
+      "bytes": 1720152,
+      "dataset": "funding",
+      "month": "2025-06",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 143163
+      },
+      "sha256": "bb6b8878b6491961fbfbcb168b9906a0cc8b4c82586357f42424cac11733c729",
+      "status": "OK"
+    },
+    {
+      "bytes": 1752080,
+      "dataset": "funding",
+      "month": "2025-07",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 149324
+      },
+      "sha256": "ad9d01aa425af412fce534c83c7a4f3ee5997dc3f533a07681b2ad4e679522ee",
+      "status": "OK"
+    },
+    {
+      "bytes": 1616826,
+      "dataset": "funding",
+      "month": "2025-08",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 150859
+      },
+      "sha256": "2cb155ad80289355fc96344316309fd48a4cccbef062a3c1e508cdb9f4152d27",
+      "status": "OK"
+    },
+    {
+      "bytes": 1625429,
+      "dataset": "funding",
+      "month": "2025-09",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 149815
+      },
+      "sha256": "f06b49dd307a7922a3e429bd9a06e0ddb4febe0d2556d7f232ce6a040f9db205",
+      "status": "OK"
+    },
+    {
+      "bytes": 2031904,
+      "dataset": "funding",
+      "month": "2025-10",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 161650
+      },
+      "sha256": "51c9ebd47a36afc31ae7907b539c1256e456132671f133be488ef3596c9e0a3d",
+      "status": "OK"
+    },
+    {
+      "bytes": 2122687,
+      "dataset": "funding",
+      "month": "2025-11",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 163714
+      },
+      "sha256": "8a41b57b7ed53096127c27768e18b1516dff28522012f8d08159f6d2f577c640",
+      "status": "OK"
+    },
+    {
+      "bytes": 2457073,
+      "dataset": "funding",
+      "month": "2025-12",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 187787
+      },
+      "sha256": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7",
+      "status": "OK"
+    },
+    {
+      "bytes": 2634907,
+      "dataset": "funding",
+      "month": "2026-01",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 212211
+      },
+      "sha256": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1",
+      "status": "OK"
+    },
+    {
+      "bytes": 2930598,
+      "dataset": "funding",
+      "month": "2026-02",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 221707
+      },
+      "sha256": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789",
+      "status": "OK"
+    },
+    {
+      "bytes": 3381832,
+      "dataset": "funding",
+      "month": "2026-03",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 258164
+      },
+      "sha256": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a",
+      "status": "OK"
+    },
+    {
+      "bytes": 3313307,
+      "dataset": "funding",
+      "month": "2026-04",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "funding_rate",
+          "premium"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "funding_rate"
+        ],
+        "rows": 261864
+      },
+      "sha256": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a",
+      "status": "OK"
+    },
+    {
+      "bytes": 649175,
+      "dataset": "liquidations",
+      "month": "2025-05",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "issuer",
+          "wallet",
+          "position_side",
+          "size",
+          "notional_usd",
+          "avg_price",
+          "fills",
+          "block",
+          "tx_hash"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "position_side",
+          "notional_usd"
+        ],
+        "rows": 15621
+      },
+      "sha256": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+      "status": "OK"
+    },
+    {
+      "bytes": 2362144,
+      "dataset": "liquidations",
+      "month": "2025-06",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "issuer",
+          "wallet",
+          "position_side",
+          "size",
+          "notional_usd",
+          "avg_price",
+          "fills",
+          "block",
+          "tx_hash"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "position_side",
+          "notional_usd"
+        ],
+        "rows": 60589
+      },
+      "sha256": "737908e4568ca903370e6bfc8bf9792d70102ddafa0161b48598dc3dd1b2e338",
+      "status": "OK"
+    },
+    {
+      "bytes": 4397200,
+      "dataset": "liquidations",
+      "month": "2025-07",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "issuer",
+          "wallet",
+          "position_side",
+          "size",
+          "notional_usd",
+          "avg_price",
+          "fills",
+          "block",
+          "tx_hash"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "position_side",
+          "notional_usd"
+        ],
+        "rows": 104176
+      },
+      "sha256": "4ad6e10a5e34c329040a92d05942c8f0862ff97353120dba9efeed76429b4f22",
+      "status": "OK"
+    },
+    {
+      "bytes": 5254028,
+      "dataset": "liquidations",
+      "month": "2025-08",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "issuer",
+          "wallet",
+          "position_side",
+          "size",
+          "notional_usd",
+          "avg_price",
+          "fills",
+          "block",
+          "tx_hash"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "position_side",
+          "notional_usd"
+        ],
+        "rows": 131150
+      },
+      "sha256": "b21bd8ce70fc9f8ef131afadef2185bcdf473e5df1f283f80e9dab5901ba8aac",
+      "status": "OK"
+    },
+    {
+      "bytes": 4609620,
+      "dataset": "liquidations",
+      "month": "2025-09",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "issuer",
+          "wallet",
+          "position_side",
+          "size",
+          "notional_usd",
+          "avg_price",
+          "fills",
+          "block",
+          "tx_hash"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "position_side",
+          "notional_usd"
+        ],
+        "rows": 111148
+      },
+      "sha256": "63bfe5cc8f57176a7f0e5a91d990c224bbddb9e28854b6535b4e8cd2e72cb2bc",
+      "status": "OK"
+    },
+    {
+      "bytes": 9430899,
+      "dataset": "liquidations",
+      "month": "2025-10",
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "issuer",
+          "wallet",
+          "position_side",
+          "size",
+          "notional_usd",
+          "avg_price",
+          "fills",
+          "block",
+          "tx_hash"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "position_side",
+          "notional_usd"
+        ],
+        "rows": 256803
+      },
+      "sha256": "e5382066e77c383e0abe0b5f337242f11997e33e57b674f669465aa7915adca8",
+      "status": "OK"
+    },
+    {
+      "dataset": "liquidations",
       "month": "2025-11",
       "status": "ABSENT"
     },
     {
-      "dataset": "candles_1h",
-      "month": "2025-12",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "candles_1h",
-      "month": "2026-01",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "candles_1h",
-      "month": "2026-02",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "candles_1h",
-      "month": "2026-03",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "candles_1h",
-      "month": "2026-04",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-05",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-06",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-07",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-08",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-09",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-10",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-11",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2025-12",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2026-01",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2026-02",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2026-03",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "funding",
-      "month": "2026-04",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-05",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-06",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-07",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-08",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-09",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-10",
-      "status": "ABSENT"
-    },
-    {
-      "dataset": "liquidations",
-      "month": "2025-11",
-      "status": "ABSENT"
-    },
-    {
       "dataset": "liquidations",
       "month": "2025-12",
       "status": "ABSENT"
@@ -237,70 +903,322 @@
       "status": "ABSENT"
     },
     {
+      "bytes": 3909219,
       "dataset": "open_interest",
       "month": "2025-05",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 145775
+      },
+      "sha256": "4490a320456fe0f416f5320f9419bd01c65236b877546c30966b287b9c60dea6",
+      "status": "OK"
     },
     {
+      "bytes": 3718677,
       "dataset": "open_interest",
       "month": "2025-06",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 143165
+      },
+      "sha256": "309346d25013e7ccb5ad753d8362ea91354209b9637bca254e99182213b9bdce",
+      "status": "OK"
     },
     {
+      "bytes": 4014891,
       "dataset": "open_interest",
       "month": "2025-07",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 149325
+      },
+      "sha256": "09116f78552bbfc3a0cc640e1a44c31a0322f6e2f1018974cc0a9ede18c3a16d",
+      "status": "OK"
     },
     {
+      "bytes": 3989104,
       "dataset": "open_interest",
       "month": "2025-08",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 150863
+      },
+      "sha256": "dce8b1320d0b9f7627f649988432e63cc393ffe4a7006c687f94d23f608aa665",
+      "status": "OK"
     },
     {
+      "bytes": 3939623,
       "dataset": "open_interest",
       "month": "2025-09",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 149823
+      },
+      "sha256": "53a5b1cab586fee5f207f51046e525595713b3efd52697e7e8352e67d61c1de3",
+      "status": "OK"
     },
     {
+      "bytes": 4160898,
       "dataset": "open_interest",
       "month": "2025-10",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 161213
+      },
+      "sha256": "5fd20253a69b689591fd987af85a706714788ae75d06912879a95b22258c5fc8",
+      "status": "OK"
     },
     {
+      "bytes": 4075126,
       "dataset": "open_interest",
       "month": "2025-11",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 158703
+      },
+      "sha256": "f3c20d2c8b68339e4194e5984481246235678f52d19139e26c6c8f0f084be2cf",
+      "status": "OK"
     },
     {
+      "bytes": 4161052,
       "dataset": "open_interest",
       "month": "2025-12",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 165714
+      },
+      "sha256": "584160f9a23f9dbe64ff248152bca0056831a40765cbb7f619af33c56283a59e",
+      "status": "OK"
     },
     {
+      "bytes": 4226085,
       "dataset": "open_interest",
       "month": "2026-01",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 167960
+      },
+      "sha256": "ac9ba48be4bedeac3ac2b7cf8a2defd8f5d334f19c57f7b2ede788212e4d01db",
+      "status": "OK"
     },
     {
+      "bytes": 3800891,
       "dataset": "open_interest",
       "month": "2026-02",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 153616
+      },
+      "sha256": "c346cb2a4f333da88da7f2ab93a6540eb435b802144d4e0c803bf2fbbd0307f7",
+      "status": "OK"
     },
     {
+      "bytes": 4184865,
       "dataset": "open_interest",
       "month": "2026-03",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 170376
+      },
+      "sha256": "1855bccbeca65a34573bb35580d32cb5de978fc565a0110699ddd00cd07452b3",
+      "status": "OK"
     },
     {
+      "bytes": 4133992,
       "dataset": "open_interest",
       "month": "2026-04",
-      "status": "ABSENT"
+      "problems": [],
+      "schema": {
+        "columns": [
+          "timestamp",
+          "market",
+          "coin",
+          "dex",
+          "mark_price",
+          "oracle_price",
+          "open_interest",
+          "open_interest_usd"
+        ],
+        "required_present": [
+          "timestamp",
+          "market",
+          "open_interest_usd"
+        ],
+        "rows": 169798
+      },
+      "sha256": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237",
+      "status": "OK"
     }
   ],
   "totals": {
-    "absent": 48,
+    "absent": 6,
     "objects": 48,
-    "ok": 0,
+    "ok": 42,
     "problems": 0
   }
 }
