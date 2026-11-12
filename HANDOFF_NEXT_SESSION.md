@@ -1,31 +1,32 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized; neither track subordinated to the other)
-**Handoff timestamp (UTC):** 2026-11-12T07:34:18Z (supersedes 2026-11-12T07:31:59Z; this file is the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T07:38:10Z (supersedes 2026-11-12T07:34:18Z; this file is the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Progress snapshot (prior session — heavy work completed, sealed)
 
+- **Offline verification:** `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit -v` → 103 tests OK. Codebase in working order before any network work.
 - **Gate 4 Branch 1 trigger:** ABSENT (rechecked 2026-11-12T07:31:59Z; no `research_state/fclr016_local_audit/*RESOLVED*` with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). External/legal blocker — not agent-removable. Do not wait/poll. Branch 1 executes only on a valid RESOLVED trigger.
 - **Bounded new-data monitor probe EXECUTED (2026-11-12T07:31:59Z):** `research_state/new_data_monitor_probe_20261112T073159Z.{md,json}` — ineligible now, evidenced; `new_claim_worthy_experiment_eligible_now=false`.
   - ironflow/hyperliquid-liquidations: `lastModified=2026-11-07T10:18:25Z`, latest event month `2026-10`, no verified post-2026-10-31 observed liquidation labels.
   - Hyperliquid 2026-11+ depth: BTC 1d candles 12 rows (~12.0d), BTC funding 272 rows (~11.29d). << 100d reprobe threshold and << 90d for ≥3×30d test blocks.
 - **Sealed determinations unchanged:** metpie 2025Q2 §16 audit = INADMISSIBLE (block-feasibility ~65d < 90d); TRACKA-HL-EARLY-4H = INCONCLUSIVE_PILOT_SHORTFALL; all cached-data Track A/B/C/H1 designs sealed/exhausted (Track A expansion PASS but robustness FRAGILE; vol family NOT_MET; alt vol NOT_MET; Track B TB1/TB2 NOT_SUPPORTED; Track C/H1 NOT_SUPPORTED).
 
-## Bottlenecks — status and removal action (2026-11-12T07:34:18Z)
+## Bottlenecks — status and removal action (2026-11-12T07:38:10Z)
 
 | Bottleneck | Status | Removal/action |
 |---|---|---|
-| Gate 4 Branch 1 (external/legal Binance terms evidence) | BLOCKED, not agent-removable | Isolate: execute Branch 1 only on valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). Agent does not create/attest it. Do not wait/poll. All other work proceeds without it. |
-| HL 2026-11+ ~12d; no verified post-2026-10-31 observed labels | OPEN, not eligible now (evidenced) | Attack via NEW source discovery (campaign below), not by re-probing the same endpoints. Reprobe HL/ironflow only when plausibly eligible (HL ≥100d AND verified post-2026-10-31 labels). No polling. |
-| Cached-data designs exhausted/sealed | EXHAUSTED | No relitigation/retune of sealed verdicts. Only a genuinely new admissible source/window per RESEARCH_PROMPT §16 can open a claim-worthy experiment. |
-| Contradictory frontier next-task entries (multiple rank-0 stale tasks incl. sealed NOT_MET/FRAGILE campaigns) | INEFFICIENT | Replaced by single authoritative FCLR-NEXT campaign below; prior sealed entries preserved as history, not relitigated. |
-| H2_shek_replication registry status "proposed" although `research_state/h002_replication_report.md` documents completed PARTIAL replication | INCONSISTENT | Registry corrected to EXPLORATORY_ONLY/PARTIAL with evidence pointer; no re-run, no promotion. |
+| Gate 4 Branch 1 (external/legal Binance terms evidence) | BLOCKED, not agent-removable | ISOLATED: execute Branch 1 only on valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation). Agent does NOT create/attest it. Do NOT wait/poll. All other work proceeds without it. No session is held up by this. |
+| HL 2026-11+ ~12d; no verified post-2026-10-31 observed labels | OPEN, not eligible now (evidenced) | REMOVED as blocking path: do NOT re-probe HL/ironflow endpoints. Attack exclusively via NEW source discovery (campaign step 2 below). Reprobe HL/ironflow only when plausibly eligible (HL ≥100d AND verified post-2026-10-31 observed labels). No polling. |
+| Cached-data designs exhausted/sealed | EXHAUSTED | REMOVED as candidate path: no relitigation/retune of sealed verdicts. Only a genuinely new admissible source/window per RESEARCH_PROMPT §16 can open a claim-worthy experiment. |
+| Contradictory frontier next-task entries (multiple rank-0 stale tasks incl. sealed NOT_MET/FRAGILE campaigns) | INEFFICIENT | REMOVED: replaced by single authoritative FCLR-NEXT campaign below; prior sealed entries preserved as history, not relitigated. `experiment_frontier.json` rank-0 entries superseded by `FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY`. |
+| H2_shek_replication registry status "proposed" although `research_state/h002_replication_report.md` documents completed PARTIAL replication | INCONSISTENT | REMOVED: registry corrected to EXPLORATORY_ONLY/PARTIAL with evidence pointer; no re-run, no promotion. |
 
-## NEXT FOCUS CAMPAIGN — FCLR-NEXT: bounded liquidation-label source discovery → §16 admissibility → prereg → eval → verdict (HEAVY, execute in order)
+## NEXT FOCUS CAMPAIGN — FCLR-NEXT: bounded liquidation-label source discovery → §16 admissibility → prereg → eval → verdict (HEAVY, execute in order — UNAVOIDABLE)
 
-No status-only output. Every session must deliver: Gate 4 Branch 1 (if triggered), OR a §16 admissibility audit (+ prereg/build/eval/verdict if a source passes), OR evidenced infeasibility + state update + clean stop, OR bounded probe evidence + ineligibility documentation.
+**This campaign is the sole heavy work for every session.** No status-only output. Every session must deliver ONE of: (a) Gate 4 Branch 1 (if triggered), OR (b) a §16 admissibility audit (+ prereg/build/eval/verdict if a source passes), OR (c) evidenced infeasibility + state update + clean stop, OR (d) bounded probe evidence + ineligibility documentation. Future agents cannot skip this campaign; each probe must add new evidence or stop.
 
-1. **Gate 4 check (first):** if valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears → execute Branch 1 immediately per campaign rules. (Absent now.)
+1. **Gate 4 check (FIRST, every session):** if valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears → execute Branch 1 immediately per campaign rules. (Absent now. Absence is not a reason to stop — proceed to step 2.)
 2. **Bounded alternative liquidation-label source discovery (RESEARCH_PROMPT §5):** enumerate/test/rank ≥1 additional unauthenticated public source family for observed perpetual liquidation labels beyond `ironflow/hyperliquid-liquidations`, using existing scaffolding (`scripts/hunt_alternative_liquidation_sources.py` → `research_state/data_source_registry_alt_hunt.json`; `research_state/alt_source_deep_review_latest.md`; `research_state/url_probe_cache.json`; `research_state/hf_search_cache.json`). For each source record: exact URL/endpoint, access date, test method, no-auth result (HTTP + body sample), license/terms, fields, earliest/latest timestamp, cadence, symbol coverage, gaps, hashes/ETags where feasible, rejection reason if inadmissible. Claim-worthy consideration requires: ≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only (not modeled/synthetic), venue-consistent (no Binance/2024 conflation).
 3. **If a source passes smoke test:** run full §16 admissibility audit → emit timestamped determination + artifacts (`research_state/<source>_admissibility_audit_<UTC>.{md,json}`) BEFORE any preregistration or outcome computation. If admissible → freeze prereg (frozen event definition, censoring, eligible contracts, volatility split, metrics, multiplicity, gate) → build panel → evaluate → verdict → atomic state updates (`hypothesis_registry.json`, `experiment_frontier.json`, run manifest) under a NEW experiment ID. Never inspect outcomes before prereg freeze.
 4. **If no source passes:** emit timestamped probe evidence documenting exact failing minima per source, update `experiment_frontier.json`, and stop cleanly. No repeated no-op probes; each probe must add new evidence or stop.
