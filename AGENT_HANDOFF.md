@@ -1,9 +1,11 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T15:42:03Z (re-verified; prior 2026-11-12T14:56:44Z, 2026-11-12T14:37:52Z, 2026-11-12T12:34:20Z retained below as history)
+**Authoritative handoff timestamp (UTC):** 2026-11-12T15:44:36Z (re-verified; prior 2026-11-12T15:42:03Z, 2026-11-12T14:56:44Z, 2026-11-12T14:37:52Z, 2026-11-12T12:34:20Z retained below as history)
 **This file is the ONLY durable handoff.** It supersedes `HANDOFF_NEXT_SESSION.md` @ 2026-11-12T11:38:00Z, the 2026-11-12T09:51:12Z "clean stop", and every earlier checkpoint.
 **Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
+
+**START HERE (next agent):** execute `FCLR-EARLY4H-2025H1-LIQ-GLM v1` in §4 on the existing corrected panel (`research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet`, SHA-256 `08c60803…`). Freeze a new prereg before any `liq` outcome, implement `scripts/early4h_liq_glm.py` (Poisson/quasi-Poisson log-link, IRLS, `liq` only), evaluate/adjudicate, then follow §4 Step 5 if NOT_MET/INCONCLUSIVE. Do not re-diagnose prior pipeline bugs, do not re-fetch caches, do not alter sealed artifacts.
 
 ---
 
@@ -254,7 +256,7 @@ Expected: HTTP 200 and **1104** bars for every coin. If this fails, record the e
 
 ## SESSION LOG
 
-### 2026-11-12T15:42:03Z — Handoff/state verification (no research outcomes)
+### 2026-11-12T15:44:36Z — Handoff consolidation/state verification (no research outcomes)
 - Verified `AGENT_HANDOFF.md` is the sole durable handoff and root redirect files (`HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md`) point here; no competing handoff docs found.
 - Re-verified corrected evidence artifacts exist: panel `research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet` (SHA-256 `08c60803…`), valid eval `research_state/evaluation_summary_EARLY4H-2025H1-20261112T145537Z.{md,json}` (rv NOT_MET, liq INCONCLUSIVE_NUMERICAL_INSTABILITY), frozen prereg `tracka_prereg_early2025h1_20261112T134503Z.{json,md}`, pipeline correction note `research_state/tracka_hl_early2025h1_pipeline_correction_20261112T145644Z.md`.
 - Confirmed `research_state/experiment_frontier.json` rank-0 is aligned: `FCLR_EARLY4H_2025H1_LIQ_GLM` / `FCLR_EARLY4H_2025H1_LIQ_GLM_PREREG_BUILD_EVAL`, `ACTIVE_HEAVY_CAMPAIGN`.
