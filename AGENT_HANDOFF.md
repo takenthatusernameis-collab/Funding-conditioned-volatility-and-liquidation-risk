@@ -1,7 +1,7 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T15:44:36Z (re-verified; prior 2026-11-12T15:42:03Z, 2026-11-12T14:56:44Z, 2026-11-12T14:37:52Z, 2026-11-12T12:34:20Z retained below as history)
+**Authoritative handoff timestamp (UTC):** 2026-11-12T15:47:45Z (re-verified live; prior 2026-11-12T15:44:36Z, 2026-11-12T15:42:03Z, 2026-11-12T14:56:44Z, 2026-11-12T14:37:52Z, 2026-11-12T12:34:20Z retained below as history)
 **This file is the ONLY durable handoff.** It supersedes `HANDOFF_NEXT_SESSION.md` @ 2026-11-12T11:38:00Z, the 2026-11-12T09:51:12Z "clean stop", and every earlier checkpoint.
 **Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
 
@@ -12,7 +12,7 @@
 ## 0. IMMEDIATE FIRST ACTION (do this now, in order)
 
 1. Read only this file. **The pipeline defect that produced the invalid 134634Z eval is already diagnosed and fixed** (see §2/§3 and `research_state/tracka_hl_early2025h1_pipeline_correction_20261112T145644Z.md`). Do **not** re-diagnose the identity-lag / wrong-lag-column / warm-up bugs, and do **not** re-run acquisition/build/eval from scratch blindly.
-2. Run the preflight in §5.0 (deps + tests). If a dependency is missing, install it. Data caches for 2025-05..2025-10 4h candles and early funding are already present locally — do not re-fetch unless hashes/coverage checks fail.
+2. **Preflight is already GREEN as of 2026-11-12T15:47Z** (this session re-ran it): `deps OK`; `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → `Ran 103 tests OK`; panel SHA-256 `08c60803…` matches; ironflow target events 394,167 across 2025-05..2025-10; live 4h `candleSnapshot` → HTTP 200 + 1104 bars for all 9 coins. **Do not re-run preflight from scratch to "verify" — go straight to §4 Step 2.** Only re-run if an artifact hash/coverage check fails. Data caches for 2025-05..2025-10 4h candles and early funding are present locally — do not re-fetch.
 3. **Execute the next heavy campaign (§4): `FCLR-EARLY4H-2025H1-LIQ-GLM v1`.** The corrected eval (`...20261112T145537Z`) is valid and yields: `rv` **NOT_MET** (funding does not improve RV forecasting; C2 worse than B1, CI includes 0) and `liq` **INCONCLUSIVE_NUMERICAL_INSTABILITY** (the frozen unregularized linear-in-log model extrapolates on the Oct-2025 funding spike). `liq` is therefore **open, not a null**. The next test is a QLIKE-consistent estimator (Poisson / quasi-Poisson log-link) on the same frozen panel/splits/universe — this is a **new model form**, so it requires a **new frozen prereg before any outcome is inspected**.
 4. Freeze the new prereg (§4 Step 2), build/evaluate (§4 Steps 3–4), and adjudicate. Do **not** alter the frozen `134503Z` prereg (hypotheses, contrasts, splits, minima, materiality) — it is sealed and its SHA-256 is unchanged.
 5. If the new `liq` GLM also yields a defensible **NOT_MET** (or is itself numerically unstable): execute Step 5 of §4 (power/coverage audit, 2024-08..2025-04 label-ceiling feasibility, per-coin/block concentration check). Only then consider a terminal structural stop with exact failing minima.
@@ -222,6 +222,15 @@ Expected: HTTP 200 and **1104** bars for every coin. If this fails, record the e
 ## 9. SESSION LOG (append-only; newest first)
 
 <!-- Format: ## <UTC> — <agent/session id> — <one-line outcome> ... -->
+
+## 2026-11-12T15:47:45Z — Handoff re-verification + bottleneck sweep — no research outcomes; preflight green; next session MUST execute `FCLR-EARLY4H-2025H1-LIQ-GLM v1` (§4)
+
+- **Evidence supported/contradicted/unknown:** Re-verified the sole durable handoff is internally consistent and current. Confirmed at 2026-11-12T15:47Z: `deps OK`; `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → `Ran 103 tests OK`; corrected panel `research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet` SHA-256 `08c60803…` matches; live 4h `candleSnapshot` → HTTP 200 + 1104 bars for all 9 coins; `research_state/experiment_frontier.json` rank-0 = `FCLR_EARLY4H_2025H1_LIQ_GLM_PREREG_BUILD_EVAL`, `ACTIVE_HEAVY_CAMPAIGN`; no `scripts/early4h_liq_glm.py` and no `*liq_glm*` prereg/eval exist → the campaign is still unexecuted. Contradicted — no competing handoff docs: `FOCUS_CAMPAIGN.md`, `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md` are redirects; `research_state/FCLR_CAMPAIGN_NEXT.md` is marked SUPERSEDED. Unknown — `liq` outcome under the QLIKE-consistent estimator.
+- **Strongest alternative explanation:** `rv` NOT_MET is a genuine null; `liq` is open only because the sealed linear-in-log model is numerically unstable on the Oct-2025 funding spike. The Poisson/quasi-Poisson log-link GLM is the QLIKE-consistent estimator and directly resolves this.
+- **Dominant limitation:** `liq` estimator form (unbounded exp link) dominates; secondary BTC/ETH concentration (~63% events / 84% notional) and 2025-05-25 label start. No dependency, data, source, or pipeline blocker remains.
+- **Falsifying next test:** `scripts/early4h_liq_glm.py` under a new frozen prereg on the existing corrected panel; a stable `C2_vs_B1` with 95% CI excluding 0 and ≥2% rel QLIKE reduction falsifies "funding does not inform liquidation intensity"; a stable null closes `liq`.
+- **Highest expected info gain per free compute:** §4 Steps 2–4 — freeze new prereg → implement `scripts/early4h_liq_glm.py` (IRLS Poisson log-link) → evaluate on frozen panel/splits → adjudicate. No re-fetch, no re-window, no Gate 4, no new source.
+- **Artifacts/commands:** Preflight green (above). Required session-end artifacts: `research_state/tracka_prereg_early2025h1_liq_glm_<UTC>.json` + `.md`, `scripts/early4h_liq_glm.py`, `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-<UTC>.md` + `.json`, updated `experiment_frontier.json`, and a `## SESSION LOG` entry here. Bottleneck sweep found none outstanding; handoff remains single-source.
 
 ## 2026-11-12T15:38:39Z — Preflight verification session — all preflight checks pass; next session MUST execute `FCLR-EARLY4H-2025H1-LIQ-GLM v1` (§4)
 
