@@ -9,7 +9,13 @@
       "last_tested": "2026-11-10T10:38:27Z",
       "last_experiment": "FCLR-014",
       "last_verdict": "forecast_gate_NOT_MET",
-      "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED."
+      "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED.",
+      "terminal": true,
+      "terminal_class": "NOT_SUPPORTED",
+      "reopen_requires": [
+        "GATE4_BRANCH_1",
+        "NEW_OBSERVED_LIQUIDATION_SOURCE"
+      ]
     },
     {
       "id": "H2_shek_replication",
@@ -21,9 +27,14 @@
       "last_verdict": "PARTIAL (direction reproduced, not statistically significant)",
       "last_experiment": "H002-PARTIAL-REPLICA-v1",
       "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458",
-      "evidence": "Completed PARTIAL replication on admissible cached public data only (research_state/h002_replication_report.md; blocker research_state/h002_replication_blocker.md). 88 funding-extreme events across 5 Binance USDⓈ-M perpetuals, 2024-01-01..2024-03-31; RV-regime contrast resolved 2026-10-31: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true. Paper's full methodology not independently reconstructible (SSRN HTTP 403), so this remains PARTIAL — never an exact replication, confirmatory test, volatility-forecast-skill, boundary-breach, or observed-liquidation result. Correction time is a separate outcome (RESEARCH_PROMPT §15). Not promotable without a new fully pre-registered confirmatory protocol using only admissible unauthenticated data.",
+      "evidence": "Completed PARTIAL replication on admissible cached public data only (research_state/h002_replication_report.md; blocker research_state/h002_replication_blocker.md). 88 funding-extreme events across 5 Binance USD\u24c8-M perpetuals, 2024-01-01..2024-03-31; RV-regime contrast resolved 2026-10-31: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true. Paper's full methodology not independently reconstructible (SSRN HTTP 403), so this remains PARTIAL \u2014 never an exact replication, confirmatory test, volatility-forecast-skill, boundary-breach, or observed-liquidation result. Correction time is a separate outcome (RESEARCH_PROMPT \u00a715). Not promotable without a new fully pre-registered confirmatory protocol using only admissible unauthenticated data.",
       "completion_note": "Status corrected from stale 'proposed' to EXPLORATORY_ONLY to match completed h002_replication_report.md (2026-10-29 report; RV-regime blocker removed 2026-10-31). No re-run; no promotion.",
-      "supersedes": ["proposed"]
+      "supersedes": [
+        "proposed"
+      ],
+      "terminal": true,
+      "terminal_class": "EXPLORATORY_ONLY",
+      "reopen_requires": []
     },
     {
       "id": "H_trackb_modeled_breaches",
@@ -35,7 +46,10 @@
       "last_tested": "2026-11-10T20:00:21Z",
       "last_experiment": "trackb_TB2_20261110T190405Z",
       "last_verdict": "forecast_gate_NOT_MET",
-      "evidence": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, label synthetic_boundary_breach_h168_long_10x_m0, train/val/test with 7d purge/embargo). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction, below the pre-registered 2% materiality floor (NOT_MET). Paired block bootstrap (2000 reps, 30-day blocks, seed 20261110): Log Loss 95% CI [-0.010997, 0.003094] crosses zero (NOT_MET), p=0.488; Brier p=0.488. Holm across 2 metrics FAILS. Only 2 non-overlapping 30-day test blocks (<3 required, NOT_MET). Overall forecast gate NOT_MET. Track B = modeled synthetic breach proxy only, never observed liquidations. Risk overlay INELIGIBLE. TB1 (trackb_TB1_20261110T173838Z) remains degenerate/inadmissible (zero test breaches). All admissible local Track B routes now executed; no gate passed."
+      "evidence": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, label synthetic_boundary_breach_h168_long_10x_m0, train/val/test with 7d purge/embargo). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction, below the pre-registered 2% materiality floor (NOT_MET). Paired block bootstrap (2000 reps, 30-day blocks, seed 20261110): Log Loss 95% CI [-0.010997, 0.003094] crosses zero (NOT_MET), p=0.488; Brier p=0.488. Holm across 2 metrics FAILS. Only 2 non-overlapping 30-day test blocks (<3 required, NOT_MET). Overall forecast gate NOT_MET. Track B = modeled synthetic breach proxy only, never observed liquidations. Risk overlay INELIGIBLE. TB1 (trackb_TB1_20261110T173838Z) remains degenerate/inadmissible (zero test breaches). All admissible local Track B routes now executed; no gate passed.",
+      "terminal": true,
+      "terminal_class": "NOT_SUPPORTED",
+      "reopen_requires": []
     },
     {
       "id": "H_tracka_hl_liquidation_forecast",
@@ -62,7 +76,13 @@
         "id": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
         "status": "PREREG_PENDING_FROZEN_EX_ANTE_RULES",
         "note": "Early campaign closed INADMISSIBLE. New prereg required BEFORE outcomes: symbol expansion on 2026-05..2026-10 with frozen ex-ante symbol selection (e.g., top label-activity markets from cached ironflow excluding closed 9-symbol panel) and event-adequacy minima (>=5 instruments, >=3 non-overlapping 30d test blocks, RV24h computable); bounded first-time acquisition of funding+candles for candidates as needed; no cherry-picking."
-      }
+      },
+      "terminal": true,
+      "terminal_class": "NOT_MET",
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE",
+        "HL_LABEL_EXTENSION"
+      ]
     },
     {
       "id": "H_tracka_hl_early_liquidation_forecast",
@@ -76,7 +96,13 @@
       "data_source": "ironflow/hyperliquid-liquidations",
       "venue": "hyperliquid_perpetuals",
       "observed_only": true,
-      "determination": "INCONCLUSIVE_PILOT_SHORTFALL \u2014 preregistered <3-test-block minimum unmet (2 feasible in window); results reported for transparency only. Prior 1h design remains sealed INADMISSIBLE (TRACKA-HL-EARLY-20261111T191958Z). 4h early-window cached design exhausted under this prereg."
+      "determination": "INCONCLUSIVE_PILOT_SHORTFALL \u2014 preregistered <3-test-block minimum unmet (2 feasible in window); results reported for transparency only. Prior 1h design remains sealed INADMISSIBLE (TRACKA-HL-EARLY-20261111T191958Z). 4h early-window cached design exhausted under this prereg.",
+      "terminal": true,
+      "terminal_class": "INCONCLUSIVE_PILOT_SHORTFALL",
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE",
+        "HL_LABEL_EXTENSION"
+      ]
     },
     {
       "id": "H_tracka_hl_symbol_expansion_liquidation_forecast",
@@ -102,7 +128,13 @@
           "PLACEBO_PERMUTATION": "FAIL (true rel 19.04% <= 95th pctl 21.10%)",
           "BOOTSTRAP_SETTINGS": "PASS (3/3 settings pass)"
         }
-      }
+      },
+      "terminal": true,
+      "terminal_class": "SUPPORTED_PASS_PRIMARY_GATE",
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE",
+        "HL_LABEL_EXTENSION"
+      ]
     },
     {
       "id": "H_tracka_hl_funding_conditioned_volatility_forecast",
@@ -116,7 +148,13 @@
       "last_tested": "20261112T005111Z",
       "venue": "hyperliquid_perpetuals",
       "observed_only": true,
-      "evidence": "TRACKA-VOL-FAMILY-20261112T005111Z NOT_MET: Family-wise Holm correction across 12 comparisons (primary 24h + secondary 6h/72h/168h \u00d7 3 contrasts). No horizon passes primary gate. Verdict: research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md."
+      "evidence": "TRACKA-VOL-FAMILY-20261112T005111Z NOT_MET: Family-wise Holm correction across 12 comparisons (primary 24h + secondary 6h/72h/168h \u00d7 3 contrasts). No horizon passes primary gate. Verdict: research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md.",
+      "terminal": true,
+      "terminal_class": "NOT_MET",
+      "reopen_requires": [
+        "GATE4_BRANCH_1",
+        "NEW_OBSERVED_LIQUIDATION_SOURCE"
+      ]
     },
     {
       "id": "H_tracka_hl_expansion_robustness",
@@ -131,7 +169,12 @@
       "venue": "hyperliquid_perpetuals",
       "data_source": "ironflow/hyperliquid-liquidations",
       "observed_only": true,
-      "evidence": "TRACKA-EXP-ROBUST-20261112T015119Z FRAGILE: LOIO check FAIL (4/8 subsets pass, need >=6); Placebo/Permutation check FAIL (true rel reduction 19.04% <= 95th percentile 21.10% of null); Bootstrap Settings check PASS (3/3 settings pass). Verdict: research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md."
+      "evidence": "TRACKA-EXP-ROBUST-20261112T015119Z FRAGILE: LOIO check FAIL (4/8 subsets pass, need >=6); Placebo/Permutation check FAIL (true rel reduction 19.04% <= 95th percentile 21.10% of null); Bootstrap Settings check PASS (3/3 settings pass). Verdict: research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md.",
+      "terminal": true,
+      "terminal_class": "FRAGILE",
+      "reopen_requires": [
+        "EXPANSION_ROBUSTNESS_REDO"
+      ]
     },
     {
       "id": "H_tracka_hl_alt_volatility_forecast",
@@ -147,8 +190,14 @@
       "data_source": "Hyperliquid API (unauthenticated)",
       "observed_only": true,
       "evidence": "TRACKA-ALT-VOL-20261112T020322Z NOT_MET: C2_ALT vs B1 on next-6h RV (9 coins, 2026-05..2026-10, 5 test blocks). Rel QLIKE reduction 5.77% (>=2% PASS), but 95% CI [-0.121, 0.034] crosses zero (CI FAIL). Overall gate NOT_MET. Prereg deviation documented: candle data only available 2026-05..2026-10; used available window with adjusted splits. Verdict: research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md.",
-      "determination": "All admissible cached-data volatility designs on HL 2026-05..2026-10 exhausted (primary 24h, family 6h/24h/72h/168h, alternate 6h with rv72h). No further claim-worthy volatility designs on current cached data."
+      "determination": "All admissible cached-data volatility designs on HL 2026-05..2026-10 exhausted (primary 24h, family 6h/24h/72h/168h, alternate 6h with rv72h). No further claim-worthy volatility designs on current cached data.",
+      "terminal": true,
+      "terminal_class": "NOT_MET",
+      "reopen_requires": [
+        "GATE4_BRANCH_1",
+        "NEW_OBSERVED_LIQUIDATION_SOURCE"
+      ]
     }
   ],
-  "updated_utc": "20261112T020322Z"
+  "updated_utc": "2026-11-12T21:21:38Z"
 }

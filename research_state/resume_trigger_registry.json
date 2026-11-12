@@ -1,0 +1,95 @@
+{
+  "generated_utc": "2026-11-12T21:20:43Z",
+  "n_triggers": 4,
+  "registry_version": 1,
+  "triggers": [
+    {
+      "do_not_act_until_satisfied": true,
+      "gate_protocol": "RESEARCH_PROMPT.md Gate 4 Branch 1 (external/legal evidence)",
+      "machine_predicate": {
+        "attestation": "human/legal",
+        "glob": "research_state/fclr016_v5_terms_evidence_RESOLVED_*.json",
+        "note": "Never agent-set; never bypassed; no whole-tree grep for the trigger string.",
+        "required_fields": {
+          "fabricated": false,
+          "status": "RESOLVED_VERIFIED"
+        },
+        "type": "file_glob_with_fields"
+      },
+      "priority": 1,
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json",
+      "status": "OPEN",
+      "trigger_id": "GATE4_BRANCH_1"
+    },
+    {
+      "do_not_act_until_satisfied": true,
+      "gate_protocol": "RESEARCH_PROMPT.md §5 source acceptance + §16 admissibility audit BEFORE preregistration/outcomes",
+      "machine_predicate": {
+        "also_documented": [
+          "provenance",
+          "license",
+          "venue_consistent"
+        ],
+        "note": "Or (instruments>=5 AND complete_month>=1) in place of blocks>=3 per RESEARCH_PROMPT §16.",
+        "path_template": "research_state/<source>_admissibility_audit_<UTC>.json",
+        "required_fields": {
+          "blocks": {
+            "op": ">=",
+            "value": 3
+          },
+          "complete_month": {
+            "op": ">=",
+            "value": 1
+          },
+          "instruments": {
+            "op": ">=",
+            "value": 5
+          },
+          "observed_labels": true,
+          "status": "ADMISSIBLE",
+          "unauthenticated": true
+        },
+        "type": "file_exists_with_fields"
+      },
+      "priority": 2,
+      "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.{md,json}",
+      "status": "OPEN",
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE"
+    },
+    {
+      "do_not_act_until_satisfied": true,
+      "gate_protocol": "RESEARCH_PROMPT.md §5/§16 on verified post-2026-10-31 observed ironflow labels",
+      "machine_predicate": {
+        "required": {
+          "labels_after": "2026-10-31",
+          "min_depth_days": 100,
+          "observed_only": true,
+          "venue": "hyperliquid_perpetuals"
+        },
+        "source": "ironflow/hyperliquid-liquidations",
+        "type": "verified_label_extension"
+      },
+      "priority": 3,
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}",
+      "status": "OPEN",
+      "trigger_id": "HL_LABEL_EXTENSION"
+    },
+    {
+      "do_not_act_until_satisfied": true,
+      "gate_protocol": "RESEARCH_PROMPT.md §17 promotion conditions 1-7 all met by a newly preregistered design (conditional, non-priority)",
+      "machine_predicate": {
+        "basis": "H_tracka_hl_expansion_robustness sealed FRAGILE",
+        "conditions": [
+          "LOIO >= 6 of 8 subsets pass",
+          "placebo/permutation: true effect > 95th percentile of null"
+        ],
+        "forbidden": "re-scoring the sealed 19.04% result",
+        "type": "newly_preregistered_design"
+      },
+      "priority": 4,
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json",
+      "status": "OPEN",
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO"
+    }
+  ]
+}
