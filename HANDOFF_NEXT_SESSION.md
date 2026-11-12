@@ -1,6 +1,6 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (priority: funding-conditioned volatility AND liquidation risk — repo-name-prioritized)
-**Handoff timestamp (UTC):** 2026-11-12T00:51:11Z (supersedes 2026-11-12T00:41:57Z; this file remains the sole authoritative handoff)
+**Handoff timestamp (UTC):** 2026-11-12T00:53:23Z (supersedes 2026-11-12T00:51:11Z; this file remains the sole authoritative handoff)
 **Status:** AUTHORITATIVE — execute this file only. `AGENT_HANDOFF.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. No competing root handoff files.
 
 ## Immediate task (heavy, in-session now)
