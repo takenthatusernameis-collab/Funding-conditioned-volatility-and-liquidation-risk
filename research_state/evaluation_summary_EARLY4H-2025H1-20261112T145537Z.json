@@ -1,0 +1,229 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY4H-2025H1",
+  "campaign": "FCLR-EARLY4H-2025H1-HEAVY v2",
+  "generated_utc": "2026-11-12T14:55:37Z",
+  "prereg": "research_state/tracka_prereg_early2025h1_20261112T134503Z.json",
+  "prereg_sha256": "fdd96bd116460ffd5698995dc6245f8937d58b2e078430640c2be7baef878e7b",
+  "panel": "research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet",
+  "panel_sha256": "08c608035d179be8c274dd0b14386c5330893176c1b963048d09f82d98e3f958",
+  "build_report": null,
+  "targets": [
+    {
+      "target": "liq",
+      "verdict": "INCONCLUSIVE_NUMERICAL_INSTABILITY",
+      "gate_pass": false,
+      "numerical_stability": {
+        "max_abs_linear_predictor": {
+          "B0": 18.803067812269674,
+          "B1": 18.922646802290505,
+          "C1": 46.46190697910416,
+          "C2": 23.884909498186637
+        },
+        "max_row_qlike": {
+          "B0": 8245.72662289456,
+          "B1": 6895.505783449189,
+          "C1": 1.6231674134340532e+27,
+          "C2": 269082408989529.5
+        },
+        "unstable": true,
+        "reason": "exp() link overflow from out-of-range frozen linear model; mean QLIKE is a numerical artifact, not interpretable"
+      },
+      "mean_qlike": {
+        "B0": 24.160824741783053,
+        "B1": 23.8918463750542,
+        "C1": 1.6772025802700173e+24,
+        "C2": 278989949820.22394
+      },
+      "contrasts": {
+        "C2_vs_B1": {
+          "mean_diff": 278989949796.33215,
+          "ci_lo": -18.970379645967068,
+          "ci_hi": 812624688299.5828,
+          "n_pairs": 968,
+          "n_blocks": 4,
+          "rel_reduction_pct": -1167720340306.6802,
+          "p_value": 0.178370914982484,
+          "holm_rejected": false
+        },
+        "C1_vs_B1": {
+          "mean_diff": 1.6772025802700173e+24,
+          "ci_lo": -1.4139093795325441,
+          "ci_hi": 4.885252049251886e+24,
+          "n_pairs": 968,
+          "n_blocks": 4,
+          "rel_reduction_pct": -7.019978924781665e+24,
+          "p_value": 0.17837091495834442,
+          "holm_rejected": false
+        },
+        "C2_vs_C1": {
+          "mean_diff": -1.6772025802697384e+24,
+          "ci_lo": -4.885252049251073e+24,
+          "ci_hi": -2.8718863094601415,
+          "n_pairs": 968,
+          "n_blocks": 4,
+          "rel_reduction_pct": 99.99999999998337,
+          "p_value": 0.17837091495834442,
+          "holm_rejected": false
+        }
+      },
+      "per_coin_mean_diff_c2_vs_b1": {
+        "AVAX": 23153.83582811564,
+        "BNB": -2.4269976682968495,
+        "BTC": 7.3539581640818446,
+        "DOGE": 9072777097.62205,
+        "ETH": 69.6541451895591,
+        "LINK": -10.914942780509456,
+        "SOL": 2242353408252.253,
+        "SUI": 1.9140273366921847,
+        "XRP": 2399.203778184423
+      },
+      "per_block_mean_diff_c2_vs_b1": {
+        "0": -25.22375069855634,
+        "1": -13.048820118617225,
+        "2": 2.1239642295040184,
+        "3": 1067439807950.1693
+      },
+      "test_blocks_with_data": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "paired_instruments": [
+        "AVAX",
+        "BNB",
+        "BTC",
+        "DOGE",
+        "ETH",
+        "LINK",
+        "SOL",
+        "SUI",
+        "XRP"
+      ],
+      "n_train_rows": 333,
+      "n_test_rows": 1080,
+      "gate": {
+        "materiality_ge_2pct": false,
+        "ci_upper_below_zero": false,
+        "min_test_blocks_ge_3": true,
+        "min_instruments_ge_5": true,
+        "holm_pass": false,
+        "single_coin_only": false
+      }
+    },
+    {
+      "target": "rv",
+      "verdict": "NOT_MET",
+      "gate_pass": false,
+      "numerical_stability": {
+        "max_abs_linear_predictor": {
+          "B0": 9.829144857048846,
+          "B1": 9.690220102997637,
+          "C1": 14.712761728898917,
+          "C2": 9.585674138550035
+        },
+        "max_row_qlike": {
+          "B0": 146.59526720460073,
+          "B1": 92.89362761570044,
+          "C1": 3081.2750669881666,
+          "C2": 73.4051037505443
+        },
+        "unstable": false,
+        "reason": null
+      },
+      "mean_qlike": {
+        "B0": 1.033780803826647,
+        "B1": 0.8297890328314015,
+        "C1": 4.555810991124681,
+        "C2": 1.073262343193147
+      },
+      "contrasts": {
+        "C2_vs_B1": {
+          "mean_diff": 0.24347331036174572,
+          "ci_lo": -0.09680735480785098,
+          "ci_hi": 0.5834049730266985,
+          "n_pairs": 1080,
+          "n_blocks": 4,
+          "rel_reduction_pct": -29.341591745430456,
+          "p_value": 0.1605905620124599,
+          "holm_rejected": false
+        },
+        "C1_vs_B1": {
+          "mean_diff": 3.72602195829328,
+          "ci_lo": -0.08759400667060677,
+          "ci_hi": 11.313323483165973,
+          "n_pairs": 1080,
+          "n_blocks": 4,
+          "rel_reduction_pct": -449.032442087041,
+          "p_value": 0.20015785708144945,
+          "holm_rejected": false
+        },
+        "C2_vs_C1": {
+          "mean_diff": -3.4825486479315333,
+          "ci_lo": -11.398160183356497,
+          "ci_hi": 0.6550098838768791,
+          "n_pairs": 1080,
+          "n_blocks": 4,
+          "rel_reduction_pct": 76.44190364165668,
+          "p_value": 0.25738507693472346,
+          "holm_rejected": false
+        }
+      },
+      "per_coin_mean_diff_c2_vs_b1": {
+        "AVAX": -0.217399298231212,
+        "BNB": 0.6203933240643529,
+        "BTC": 0.015024204078682183,
+        "DOGE": 0.416461476952183,
+        "ETH": 0.2894495735920563,
+        "LINK": 0.5592401178534327,
+        "SOL": 0.22229915986949542,
+        "SUI": 0.16428444832028635,
+        "XRP": 0.12150678675643457
+      },
+      "per_block_mean_diff_c2_vs_b1": {
+        "0": 0.5311007061451787,
+        "1": 0.6357092399082183,
+        "2": 0.11319333718578017,
+        "3": -0.3061100417921942
+      },
+      "test_blocks_with_data": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "paired_instruments": [
+        "AVAX",
+        "BNB",
+        "BTC",
+        "DOGE",
+        "ETH",
+        "LINK",
+        "SOL",
+        "SUI",
+        "XRP"
+      ],
+      "n_train_rows": 333,
+      "n_test_rows": 1080,
+      "gate": {
+        "materiality_ge_2pct": false,
+        "ci_upper_below_zero": false,
+        "min_test_blocks_ge_3": true,
+        "min_instruments_ge_5": true,
+        "holm_pass": false,
+        "single_coin_only": false
+      }
+    }
+  ],
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "venue_consistent": "Hyperliquid-only"
+  },
+  "seed": 20261112,
+  "n_bootstrap": 2000,
+  "determination": "liq: INCONCLUSIVE_NUMERICAL_INSTABILITY"
+}

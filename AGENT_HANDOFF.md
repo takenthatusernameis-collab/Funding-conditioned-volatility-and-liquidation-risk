@@ -1,7 +1,7 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T14:37:52Z (updated; prior 2026-11-12T12:34:20Z retained below as history)
+**Authoritative handoff timestamp (UTC):** 2026-11-12T14:56:44Z (updated; prior 2026-11-12T14:37:52Z and 2026-11-12T12:34:20Z retained below as history)
 **This file is the ONLY durable handoff.** It supersedes `HANDOFF_NEXT_SESSION.md` @ 2026-11-12T11:38:00Z, the 2026-11-12T09:51:12Z "clean stop", and every earlier checkpoint.
 **Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
 
@@ -9,11 +9,11 @@
 
 ## 0. IMMEDIATE FIRST ACTION (do this now, in order)
 
-1. Read only this file. **Do not restart acquisition/build/eval from scratch blindly** — `FCLR-EARLY4H-2025H1-HEAVY v2` artifacts already exist (see §2/§4 status) but the latest evaluation is **degenerate/invalid and not claim-worthy**.
+1. Read only this file. **The pipeline defect that produced the invalid 134634Z eval is already diagnosed and fixed** (see §2/§3 and `research_state/tracka_hl_early2025h1_pipeline_correction_20261112T145644Z.md`). Do **not** re-diagnose the identity-lag / wrong-lag-column / warm-up bugs, and do **not** re-run acquisition/build/eval from scratch blindly.
 2. Run the preflight in §5.0 (deps + tests). If a dependency is missing, install it. Data caches for 2025-05..2025-10 4h candles and early funding are already present locally — do not re-fetch unless hashes/coverage checks fail.
-3. **Diagnose and repair the evaluation/build pipeline** for `TRACKA-HL-EARLY4H-2025H1` (highest-priority unfinished work): explain why `research_state/evaluation_summary_EARLY4H-2025H1-20261112T134634Z.{md,json}` shows `liq` mean QLIKE `0.0` for all models/contrasts (rel reduction `n/a`) and `rv` C2≈B1≈C1 to ~1e-15 (no effective funding/premium signal or identical predictions). Trace target construction, feature joins, scaling, and QLIKE computation against the frozen prereg (`research_state/tracka_prereg_early2025h1_20261112T134503Z.json`).
-4. If the defect is a code/panel bug (not outcome-dependent tuning): fix it, rebuild/re-evaluate under **new timestamped** artifact IDs with a short `*_pipeline_correction_<UTC>.md` note linking back to the frozen prereg and documenting the fix; **do not** alter frozen hypotheses, contrasts, splits, minima, or materiality after seeing outcomes. Emit a valid verdict (PASS/NOT_MET with defensible numbers) or a reason-coded `INCONCLUSIVE_*` if validity cannot be restored.
-5. If Step 4 yields a defensible **NOT_MET**: immediately execute Step 5 of §4 (power/coverage audit, 2024-08..2025-04 label-ceiling feasibility, Track C on same panel if distinct). If a genuine terminal structural blocker remains, emit one timestamped evidenced stop artifact and stop; do not poll.
+3. **Execute the next heavy campaign (§4): `FCLR-EARLY4H-2025H1-LIQ-GLM v1`.** The corrected eval (`...20261112T145537Z`) is valid and yields: `rv` **NOT_MET** (funding does not improve RV forecasting; C2 worse than B1, CI includes 0) and `liq` **INCONCLUSIVE_NUMERICAL_INSTABILITY** (the frozen unregularized linear-in-log model extrapolates on the Oct-2025 funding spike). `liq` is therefore **open, not a null**. The next test is a QLIKE-consistent estimator (Poisson / quasi-Poisson log-link) on the same frozen panel/splits/universe — this is a **new model form**, so it requires a **new frozen prereg before any outcome is inspected**.
+4. Freeze the new prereg (§4 Step 2), build/evaluate (§4 Steps 3–4), and adjudicate. Do **not** alter the frozen `134503Z` prereg (hypotheses, contrasts, splits, minima, materiality) — it is sealed and its SHA-256 is unchanged.
+5. If the new `liq` GLM also yields a defensible **NOT_MET** (or is itself numerically unstable): execute Step 5 of §4 (power/coverage audit, 2024-08..2025-04 label-ceiling feasibility, per-coin/block concentration check). Only then consider a terminal structural stop with exact failing minima.
 
 Campaign is admissible, Hyperliquid-only, observed labels only, disjoint from sealed windows, and requires **no** Gate 4, **no** new source, and **no** post-2026-10-31 data.
 
@@ -30,13 +30,13 @@ A session is successful only if it produces **heavy, claim-advancing evidence** 
 
 ---
 
-## 2. VERIFIED EVIDENCE (re-verified live 2026-11-12T12:34Z, no outcomes inspected)
+## 2. VERIFIED EVIDENCE (re-verified live 2026-11-12T14:56Z, no outcomes inspected)
 
 | Input | Coverage | Source | Prior use |
 |---|---|---|---|
-| Observed liquidation labels | **2025-05-25 .. 2025-10-31**; 9 target coins; **394,167 events / $23.4B notional** (all 192 markets: 679,487 events) | `research_state/data_cache/ironflow_events/2025-05.parquet … 2025-10.parquet` (cached, CC BY 4.0) | **NONE** — never a target of any experiment |
-| 4h candles (RV/features) | **2025-05-01 .. 2025-10-31, 1104 bars/coin, 0 internal gaps**, all 9 coins | live `candleSnapshot` `interval=4h`, unauthenticated, ~0.34 s/call | never fetched for this window |
-| Funding history (hourly) | **2025-05-01 .. 2025-10-31, ~4416 rows/coin**, paginated at 500 (9 pages); filter `endTime` client-side | live `fundingHistory`, unauthenticated | cached funding starts 2025-11 only |
+| Observed liquidation labels | **2025-05-25 .. 2025-10-31**; 9 target coins; **394,167 events / $23.4B notional** (all 192 markets: 679,487 events) | `research_state/data_cache/ironflow_events/2025-05.parquet … 2025-10.parquet` (cached, CC BY 4.0) | **used** in `FCLR-EARLY4H-2025H1-HEAVY v2` (corrected) |
+| 4h candles (RV/features) | **2025-05-01 .. 2025-10-31, 1104 bars/coin, 0 internal gaps**, all 9 coins | live `candleSnapshot` `interval=4h`, unauthenticated, ~0.34 s/call | cached and used |
+| Funding history (hourly) | **2025-05-01 .. 2025-10-31, ~4416 rows/coin**, paginated at 500 (9 pages); filter `endTime` client-side | live `fundingHistory`, unauthenticated | cached and used |
 
 **Per-coin label counts (target 9):** BTC 141,632 ($11.32B), ETH 109,681 ($8.42B), SOL 83,021 ($2.49B), XRP 27,318 ($0.64B), DOGE 9,569 ($0.32B), SUI 9,346 ($0.12B), LINK 6,144 ($0.12B), AVAX 4,361 ($0.12B), BNB 4,095 ($0.04B).
 
@@ -46,7 +46,12 @@ A session is successful only if it produces **heavy, claim-advancing evidence** 
 
 **Why earlier work missed this window:** prior probes used **1h** candles, which Hyperliquid serves only from **2026-04-18**. The `4h` interval serves back to **2024-08-01**. The `4h` window 2025-05..2025-10 was never fetched or tested. The 2025-11..2026-04 `4h` pilot was `INCONCLUSIVE_PILOT_SHORTFALL` (only 2 complete blocks); its negative C2 result is **not** evidence against the new, powered window.
 
-**Campaign artifacts now exist but are NOT a valid closure.** `research_state/*early2025h1*` includes acquisition `tracka_hl_early2025h1_acquisition_report_20261112T134247Z.json`, preregs `tracka_prereg_early2025h1_20261112T134503Z.json` (frozen, `pre_registered_before_outcomes: true`) and `...134106Z`, panels/build reports (latest `tracka_hl_early2025h1_panel_20261112T134520Z.parquet` + build report), and evals (latest `evaluation_summary_EARLY4H-2025H1-20261112T134634Z.{md,json}`). Latest eval is **degenerate**: `liq` all-zero QLIKE/contrasts (`rel_reduction_pct: null`, CI [0,0], p=1), `rv` contrasts ~1e-15 with identical per-block/per-coin diffs — indicating a likely target/feature/QLIKE pipeline defect, not a trustworthy NOT_MET. Treat as **invalid/inconclusive pending audit**; do not promote, and do not claim the campaign executed.
+**Campaign status — CORRECTED AND VALID (2026-11-12T14:56Z).** The `134634Z` eval was invalid due to a code/pipeline defect (identity lag + wrong test-side lag column + truncated funding warm-up). It is fixed; see `research_state/tracka_hl_early2025h1_pipeline_correction_20261112T145644Z.md`. The **valid corrected artifacts** are:
+- panel `research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet` (+ build report `...145529Z.json`)
+- eval `research_state/evaluation_summary_EARLY4H-2025H1-20261112T145537Z.{md,json}`
+- frozen prereg `tracka_prereg_early2025h1_20261112T134503Z.json` (unchanged, SHA-256 `fdd96bd1…`)
+
+**Corrected outcome:** `rv` **NOT_MET** (C2_vs_B1 diff `+0.243`, CI `[-0.097, 0.583]` includes 0, rel `-29.3%`, p=0.161; stable). `liq` **INCONCLUSIVE_NUMERICAL_INSTABILITY** (frozen unregularized linear-in-log model extrapolates on the Oct-2025 funding spike; max per-row QLIKE `1.6e27`). **`liq` is open, not a null.** Do not cite `134634Z`.
 
 **Gate 4 Branch 1 trigger: ABSENT.** Only `fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json` and `..._UNRESOLVED_20261108T204000Z.json` exist. The literal string `RESOLVED_VERIFIED` inside `fclr020_gate4_readiness_action_matrix_latest.json` is a readiness matrix, **not** a trigger. Do not wait, poll, or whole-tree grep for it.
 
@@ -58,59 +63,63 @@ A session is successful only if it produces **heavy, claim-advancing evidence** 
 
 | Bottleneck | Status / resolution |
 |---|---|
-| **Four competing handoff docs** | **Removed:** this file is the sole durable handoff; `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. |
-| **Dependency/install wall (pandas/pyarrow/requests)** | **Partially removed:** `requirements.txt` includes `requests`; core deps importable in current env (`deps OK`). **Caveat:** `.github/workflows/main.yml` does **not** provision an agent venv from `requirements.txt` before the Kilo agent loop (only controller-tests installs a subset) — the prior claim was inaccurate. Workflow edits require explicit maintainer authorization and are out-of-scope here; if CI agents still lack deps, report as workflow blocker, do not patch `.github/workflows/*`. |
+| **Four competing handoff docs** | **Removed:** this file is the sole durable handoff; `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. `research_state/FCLR_CAMPAIGN_NEXT.md` is explicitly marked SUPERSEDED. |
+| **Dependency/install wall (pandas/pyarrow/requests)** | **Partially removed:** `requirements.txt` includes `requests`; core deps importable in current env (`deps OK`). **Caveat (verified 14:56Z):** `.github/workflows/main.yml` does **not** provision an agent venv from `requirements.txt` before the Kilo agent loop (only controller-tests installs pytest/numpy/requests). The `experiment_frontier.json` "FIXED 12:34Z: provisions an agent venv" claim is **false** — corrected in this handoff; do not rely on it. Workflow edits require explicit maintainer authorization and are out-of-scope; if CI agents lack deps, report as workflow blocker, do not patch `.github/workflows/*`. |
 | **Wrong window arithmetic / 1h-vs-4h confusion** | **Removed:** corrected in §2; 4h interval required; 5 complete Jun–Oct blocks + May ramp; per-coin reporting mandated. |
 | **LFS pointer read as JSON** | **Removed:** campaign must not read `run_manifest.json`. |
-| **Stale handoff state ("no artifacts yet", "execute Steps 1–4")** | **Removed (this update):** §0/§2/§4 now reflect existing early2025h1 artifacts and the real next task (pipeline audit/repair + valid re-eval). |
-| **Degenerate/invalid EARLY4H-2025H1 evaluation** | **Active blocker to a claim-worthy result:** latest eval (`...134634Z`) shows liq all-zero and rv diffs ~1e-15; must be diagnosed and fixed or reason-coded inconclusive before any verdict is trusted. |
+| **Stale handoff state ("no artifacts yet", "execute Steps 1–4")** | **Removed:** §0/§2/§4 now reflect the corrected valid artifacts and the next task. |
+| **Degenerate/invalid EARLY4H-2025H1 evaluation (134634Z)** | **REMOVED (2026-11-12T14:56Z):** root-caused and fixed in `scripts/early4h_campaign.py` (identity lag `shift(0)`→`shift(1)`; test-side per-target lag; funding warm-up from 2025-05-01). Corrected eval is valid. See pipeline correction note. |
+| **`liq` numerical instability of frozen linear model** | **Open:** the frozen unregularized linear-in-log model extrapolates on the Oct-2025 funding spike. Not a code bug — a model-form limitation. Requires a **new frozen prereg** for a QLIKE-consistent (Poisson/quasi-Poisson log-link) estimator (§4). |
+| **Funding percentile warm-up** | **Removed:** `abs_fund_pct` now computed from 2025-05-01; first valid 2025-05-30; only 5 warm-up days missing (all pre/at `LABEL_START`). |
 
 Do not re-diagnose the dependency wall, re-probe 1h candles, re-run alt-source discovery, or reopen sealed verdicts.
 
 ---
 
-## 4. NEXT FOCUS CAMPAIGN — `FCLR-EARLY4H-2025H1-HEAVY v2`
+## 4. NEXT FOCUS CAMPAIGN — `FCLR-EARLY4H-2025H1-LIQ-GLM v1`
 
-**Objective:** the first powered, pre-registered test of funding-conditioned features vs an RV-only baseline on the untouched 2025-05-25..2025-10-31 Hyperliquid panel, for **both** Track A (observed liquidation intensity) and Track C-style volatility.
+**Objective:** the first powered, pre-registered test of funding-conditioned features on **observed liquidation intensity** using a **QLIKE-consistent estimator** (Poisson / quasi-Poisson log-link), because the frozen linear-in-log model was numerically unstable on `liq` (§3). Reuse the **same frozen panel, universe, and splits** as `TRACKA-HL-EARLY4H-2025H1` — only the **estimator/model form** is new. The `rv` result is already a valid NOT_MET and is **not** re-litigated here.
 
-**Do NOT** inspect any outcome before the prereg is frozen. **Do NOT** reuse a sealed holdout. **Do NOT** tune, threshold-shop, or expand the feature grid after the freeze.
+**Why this is the highest-value next test:** `rv` (P1, funding-conditioned volatility) is now answered — funding does not help. `liq` (P2, observed liquidation risk) is the co-primary and is still **open**, but the frozen linear model cannot answer it. A log-link count/intensity model is the QLIKE-consistent estimator and is robust to the Oct-2025 funding spike because it models the mean directly instead of exponentiating an unbounded linear predictor.
 
-### Step 1 — Bounded acquisition + provenance (no outcomes)
-- Fetch `4h` `candleSnapshot` for `AVAX BNB BTC DOGE ETH LINK SOL SUI XRP` over **2025-05-01 .. 2025-11-01**, monthly, unauthenticated. Expect **1104 in-window bars/coin** (drop any bar with `t >= endTime`).
-- Fetch `fundingHistory` for the same coins/window, paginate at 500, filter to `2025-05-01T00:00:00Z .. 2025-10-31T23:59:59Z` client-side (~4416 rows/coin).
-- Cache under `research_state/data_cache/hyperliquid_candles_4h_early/<COIN>/<YYYY-MM>.json` and `research_state/data_cache/hyperliquid_funding_early/<COIN>.json` with `.sha256` + `.accessed.json` sidecars.
-- Emit `research_state/tracka_hl_early2025h1_acquisition_report_<UTC>.json`: endpoint, params, HTTP status, rows, first/last ms, per-month bar counts, gaps, unauthenticated/no-key/no-requester-pays status, per-file SHA-256.
-- Use `scripts/tracka_hl_fetch_candles_early_4h.py` and `scripts/tracka_hl_expansion_funding_paginate.py` as **templates**; parameterize the window (their `MONTHS`/`END_MS` are hard-coded to 2025-11..2026-04). Do not duplicate them.
+**Do NOT** inspect any `liq` outcome under the new estimator before its prereg is frozen. **Do NOT** reuse a sealed holdout. **Do NOT** tune, threshold-shop, or expand the feature grid after the freeze. **Do NOT** alter the sealed `134503Z` prereg.
 
-### Step 2 — Freeze prereg BEFORE any outcome computation
-Write `research_state/tracka_prereg_early2025h1_<UTC>.json` + `.md`, declaring **ex ante**:
-- **Window:** labels 2025-05-25T00:00:00Z .. 2025-10-31T23:59:59Z; **5 complete non-overlapping 30-day blocks with boundaries frozen in the prereg inside 2025-06-01..2025-10-31**, plus May 25–31 as a ramp/partial block (not a test block).
-- **Universe:** the 9 named coins, selected by name rule before outcomes; no survivor substitution.
-- **Unit:** coin × 24h UTC bucket.
-- **Targets (declare both, distinct families):** (a) Track A — next-24h observed liquidation intensity, notional-weighted; (b) Track C-style — next-24h realized variance (4h-based RV24h/RV168h).
-- **Models, frozen:** B0 persistence; B1 RV-only HAR(log RV4h, log RV24h, log RV168h); C1 = B1 + signed funding + 90-d trailing abs-funding percentile (≥30 obs); C2 = C1 + mark/index premium + mark/EMA24 distance. Epsilon 1e-12. Training-only standardization. **No regularization, no model search, no tuning.**
+### Step 1 — Reuse the corrected panel (no re-fetch, no re-window)
+- Input panel: `research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet` (SHA-256 `08c60803…`). Verify SHA-256 matches before use; if it does not, rebuild via `python3 scripts/early4h_campaign.py build` (deterministic, same inputs) and use the newest panel.
+- Do **not** re-fetch candles/funding/labels. Caches are complete and hash-verified (§2).
+
+### Step 2 — Freeze a NEW prereg BEFORE any outcome computation
+Write `research_state/tracka_prereg_early2025h1_liq_glm_<UTC>.json` + `.md`, declaring **ex ante**:
+- **Experiment ID:** `TRACKA-HL-EARLY4H-2025H1-LIQ-GLM`. **Campaign:** `FCLR-EARLY4H-2025H1-LIQ-GLM v1`.
+- **Reused (identical, from `134503Z`):** window, universe (9 coins), unit (coin × 24h UTC bucket), train/val/4 test blocks + 1-day embargo, minima (≥5 instruments, ≥3 test blocks), materiality (≥2% rel QLIKE reduction AND 95% CI upper < 0), Holm across the declared family, missingness policy.
+- **Target (only):** next-24h observed liquidation notional (`t1_liq`), QLIKE loss. Do **not** re-test `rv` here.
+- **Models, frozen (new estimator):**
+  - B1 = HAR-RV **log-link** (log RV4h, log RV24h, log RV168h) — RV-only baseline.
+  - C1 = B1 + signed funding + 90-d trailing abs-funding percentile (≥30 obs).
+  - C2 = C1 + mark/index premium + mark/EMA24 distance.
+  - Estimator: Poisson / quasi-Poisson GLM with **log link** (IRLS), no regularization, no model search, no tuning. Fit on train only. Predict the conditional mean directly (no exp-of-unbounded-linear-predictor extrapolation).
 - **Primary contrast:** `C2_vs_B1`. Secondary: `C1_vs_B1`, `C2_vs_C1`.
-- **Metric:** QLIKE (lower better) on paired OOS.
-- **Splits:** train / val / ≥3 complete non-overlapping 30-d test blocks with ≥7-d embargo.
-- **Inference:** block bootstrap over complete 30-d UTC blocks, ≥2000 reps, fixed seed. Holm correction across the **full declared family**.
-- **Materiality floor:** ≥2% relative QLIKE reduction AND 95% CI upper bound < 0.
-- **Minima:** ≥5 paired instruments; ≥3 test blocks.
-- **Missingness:** missing stays missing; no forward fill; no synthetic labels.
+- **Inference:** block bootstrap over complete 30-d UTC blocks, ≥2000 reps, fixed seed (20261112 or a new declared seed). Holm across the full declared family.
+- **Numerical-stability acceptance:** declare ex ante that a target is `INCONCLUSIVE_NUMERICAL_INSTABILITY` if any per-row QLIKE > 1e6 (same guard as the corrected eval), so the GLM is not silently reported as a 1e17 artifact.
 - Set `pre_registered_before_outcomes: true`, `frozen_before_outcomes: true`. Record the JSON SHA-256.
 
-### Step 3 — Build panel deterministically
-- Emit `research_state/tracka_hl_early2025h1_panel_<UTC>.parquet` + `..._panel_build_report_<UTC>.json` with input hashes, per-coin coverage, missingness, row counts before/after every filter, reason-coded exclusions.
-- Assert leakage guards: target never overlaps splits after purge/embargo; funding publication/settlement time and sign correct; mark/index alignment within the pre-registered tolerance.
+### Step 3 — Implement the estimator in a new script (do not mutate the sealed campaign)
+- Add `scripts/early4h_liq_glm.py` (new file; do **not** edit `scripts/early4h_campaign.py` model form). It must:
+  - Load the frozen prereg + corrected panel, assert SHA-256s.
+  - Fit Poisson/quasi-Poisson log-link by IRLS on the train split only.
+  - Predict on the test blocks, compute QLIKE, paired block bootstrap, Holm.
+  - Emit `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-<UTC>.md` + `.json` with per-model QLIKE, paired `C2_vs_B1` Δ + CI, rel reduction, per-block/per-coin breakdown, Holm p-values, numerical-stability block, and an explicit **PASS / NOT_MET / INCONCLUSIVE_*** verdict.
+- Assert leakage guards and reuse the same per-target lag (`lag_liq`) as the corrected panel.
 
 ### Step 4 — Evaluate and adjudicate
-- Emit `research_state/evaluation_summary_EARLY4H-2025H1-<UTC>.md` (+ `.json`): per-model QLIKE, paired `C2_vs_B1` Δ with CI, relative reduction, per-block and per-coin breakdown, calibration, Holm-adjusted p-values, and an explicit **PASS / NOT_MET** verdict with reasons.
-- **If PASS:** update `experiment_frontier.json` and `hypothesis_registry.json` atomically under the **new** experiment ID; write `research_state/final_confirmatory_verdict_early2025h1_<UTC>.md`. Do not modify sealed records or `run_manifest.json`.
+- **If PASS:** update `experiment_frontier.json` and `hypothesis_registry.json` atomically under the **new** experiment ID; write `research_state/final_confirmatory_verdict_liq_glm_<UTC>.md`. Do not modify sealed records or `run_manifest.json`.
 - **If NOT_MET:** preserve the null honestly, report it, then continue to Step 5 — do not stop.
+- **If INCONCLUSIVE_NUMERICAL_INSTABILITY:** report the exact per-row QLIKE and the offending rows/coins/blocks; then go to Step 5.
 
-### Step 5 — If Step 4 is negative, immediately continue
+### Step 5 — If Step 4 is negative or inconclusive, immediately continue
 1. **Power/coverage audit** on the 2025-05-25..2025-10-31 panel: per-coin event adequacy, which blocks carry signal, and whether a pre-registered *sub-cohort* (e.g. top-5 by label activity, frozen ex ante) is powered for a secondary confirmatory.
 2. **2024-08..2025-04 extension feasibility:** 4h candles reach 2024-08-01 and funding paginates from 2024-08, but **ironflow labels do not exist before 2025-05** — document this as a hard label ceiling; do not fabricate or proxy it.
-3. **Track C volatility on the same panel** if not already covered by Step 4(b).
+3. **Concentration check:** confirm no PASS is driven by BTC/ETH alone (BTC+ETH ≈63% events / 84% notional).
 4. Only then: a **new** materially different source per `RESEARCH_PROMPT.md` §16, or a timestamped evidenced structural-blocker document.
 
 ### Step 6 — Close the session
@@ -139,6 +148,12 @@ PY
 ```
 Expected: `deps OK`, tests OK, and target events > 0 for 2025-05..2025-10. If `deps OK` fails, install `requirements.txt` into an active venv; if target events are 0, the cache is incomplete — fetch the missing parquet(s) before proceeding.
 
+**Panel integrity (required before reuse):**
+```bash
+python3 -c "import hashlib;print(hashlib.sha256(open('research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet','rb').read()).hexdigest())"
+```
+Expected prefix `08c60803…`. If it differs, rebuild with `python3 scripts/early4h_campaign.py build` and use the newest panel (deterministic, same inputs).
+
 Known pre-existing failures at HEAD (do **not** chase them): `tests.test_tracka_hardening_099` drift-bound (`research_state` root md+json is 281 > 260), probe-family inventory (8 newer `*probe_*.json` artifacts), and the CLI resume-gate test. They predate this campaign and are unrelated; the two named test modules above are the required green gate.
 
 ### 5.1 Verify live data is still fetchable (bounded, no outcomes)
@@ -156,11 +171,11 @@ PY
 Expected: HTTP 200 and **1104** bars for every coin. If this fails, record the exact HTTP status and stop only after trying the `4h` interval again; never fall back to `1h`.
 
 ### 5.2 Artifacts that must exist at session end
-- `research_state/tracka_hl_early2025h1_acquisition_report_<UTC>.json`
-- `research_state/tracka_prereg_early2025h1_<UTC>.json` + `.md` (frozen before outcomes)
-- `research_state/tracka_hl_early2025h1_panel_<UTC>.parquet` + `..._panel_build_report_<UTC>.json`
-- `research_state/evaluation_summary_EARLY4H-2025H1-<UTC>.md` + `.json`
+- `research_state/tracka_prereg_early2025h1_liq_glm_<UTC>.json` + `.md` (frozen before outcomes; new experiment ID `TRACKA-HL-EARLY4H-2025H1-LIQ-GLM`)
+- `scripts/early4h_liq_glm.py` (new estimator script; do not mutate the sealed campaign script's model form)
+- `research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-<UTC>.md` + `.json`
 - updated `research_state/experiment_frontier.json` and a `## SESSION LOG` entry in this file
+- If the panel is rebuilt: `research_state/tracka_hl_early2025h1_panel_<UTC>.parquet` + build report (only if SHA-256 mismatch forces it)
 
 ---
 
@@ -205,6 +220,16 @@ Expected: HTTP 200 and **1104** bars for every coin. If this fails, record the e
 ## 9. SESSION LOG (append-only; newest first)
 
 <!-- Format: ## <UTC> — <agent/session id> — <one-line outcome> ... -->
+
+## 2026-11-12T14:56:44Z — Pipeline repair session — root-caused and fixed the degenerate EARLY4H eval; produced valid `rv` NOT_MET + `liq` INCONCLUSIVE; set next GLM campaign
+
+- **Evidence supported/contradicted/unknown:** Supported — the `134634Z` eval was invalid due to three code defects in `scripts/early4h_campaign.py`: (1) `_add_lags` used `shift(0)` (no-op), making `lag_liq[t] = log(t1_liq[t])` an identity → `liq` QLIKE exactly 0; (2) the test-side design used the shared `lag_log` (= `lag_liq`) for the `rv` model → predictions ~1.97e7, QLIKE ~19.27, identical across models (~1e-15 diffs); (3) `abs_fund_pct` computed on the daily panel (starts at `LABEL_START`) plus `_load_funding` truncating at `LABEL_START-8d` starved C1/C2 of ~200 training rows. Contradicted — the "no effective funding signal" reading of `rv` was an artifact. Unknown — whether funding helps `liq`: the corrected frozen linear model is numerically unstable on the Oct-2025 funding spike (max per-row QLIKE 1.6e27), so `liq` is **open, not a null**.
+- **Strongest alternative explanation:** For `rv`, the corrected, stable result is a genuine null: funding-conditioned features (C1/C2) do not improve next-24h RV forecasting over RV-only HAR (C2_vs_B1 diff +0.243, CI [-0.097, 0.583] includes 0, rel -29.3%, p=0.161). For `liq`, the frozen linear-in-log model's exp() link extrapolates on Oct-2025 funding ~100× the train range — a model-form limitation, not a code bug.
+- **Dominant limitation:** Estimator form for `liq` (unbounded exp link, no regularization by prereg) dominates `liq` uncertainty. Secondary: BTC/ETH concentration (~63% events / 84% notional) and the 2025-05-25 label start constrain powered inference.
+- **Falsifying next test:** Fit a QLIKE-consistent Poisson/quasi-Poisson log-link GLM on the same frozen panel/splits for `liq`; a stable `C2_vs_B1` with materially non-zero paired deltas would falsify "funding does not inform liquidation intensity"; a stable null would close `liq`.
+- **Highest expected info gain per free compute:** Implement `scripts/early4h_liq_glm.py` (Poisson log-link) under a **new frozen prereg** on the existing corrected panel — no re-fetch, no re-window, directly answers the open `liq` question with a QLIKE-consistent estimator.
+- **Artifacts/commands:** Fixed `scripts/early4h_campaign.py` (shift(1); per-target test lag; funding warm-up from 2025-05-01; numerical-stability guard). Wrote `research_state/tracka_hl_early2025h1_pipeline_correction_20261112T145644Z.md`. Produced corrected panel `...145529Z.parquet` + build report, corrected eval `evaluation_summary_EARLY4H-2025H1-20261112T145537Z.{md,json}` (`rv` NOT_MET, `liq` INCONCLUSIVE_NUMERICAL_INSTABILITY). Preflight: `deps OK`; `python -m unittest tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit` → `Ran 103 tests OK`. Prereg `134503Z` SHA-256 unchanged (`fdd96bd1…`). No sealed verdicts modified; no raw data committed; workflow not edited.
+- **DoD (required):** (1) supported: pipeline defect real and fixed; `rv` funding does not help; contradicted: `134634Z` was a valid eval. unknown: `liq` effect (estimator-limited). (2) strongest alternative: `rv` null is genuine; `liq` instability is model-form. (3) dominant limitation: `liq` estimator form. (4) falsifier: stable Poisson log-link GLM `liq` result. (5) highest info gain: `scripts/early4h_liq_glm.py` under new prereg. (6) see artifacts/commands above and updated §0–§5 of this file.
 
 ## 2026-11-12T14:37:52Z — Glyph Cluster (handoff consolidation) — clarified state, surfaced degenerate EARLY4H eval, set next heavy task
 

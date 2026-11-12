@@ -531,7 +531,12 @@ def _load_funding() -> Tuple[pd.DataFrame, Dict[str, str]]:
             if t is None:
                 continue
             ts = pd.Timestamp(int(t), unit="ms", tz="UTC")
-            if ts < LABEL_START.floor("24h") - pd.Timedelta(days=8) or ts > LABEL_END:
+            # Keep the full fetched window (2025-05-01..) so the 90-obs trailing funding
+            # percentile has >=30 observations of warm-up BEFORE LABEL_START. Funding is a
+            # feature, not a label: a trailing percentile at day t uses only prints <= t, so
+            # pre-window history leaks no outcome. The daily panel grid still starts at
+            # LABEL_START. Truncating at LABEL_START-8d starved C1/C2 of 13 training days.
+            if ts < pd.Timestamp(FETCH_START, tz="UTC") or ts > LABEL_END:
                 continue
             rows.append({"coin": coin, "ts": ts,
                          "fundingRate": float(r["fundingRate"]) if r.get("fundingRate") is not None else None,
@@ -589,11 +594,20 @@ def build() -> dict:
         parts.append(m)
     panel = pd.concat(parts, ignore_index=True).sort_values(["coin", "ts"]).reset_index(drop=True)
 
-    # Funding percentile: 90-day trailing rolling rank of |funding| (>=30 obs).
+    # Funding percentile: 90-observation trailing rolling rank of |funding| (prereg:
+    # "abs_funding_trailing_pct90, >=30 obs"). Built on the DAILY funding series from the
+    # earliest cached funding print (2025-05-01) so the 30-obs warm-up completes before
+    # LABEL_START. Computing it on the daily panel (which starts at LABEL_START) leaves
+    # the first 29 days NaN and silently drops most of the C1/C2 training span.
     panel["abs_fund_pct"] = np.nan
     for coin, idx in panel.groupby("coin").groups.items():
-        s = panel.loc[idx].sort_values("ts")["fundingRate"].abs()
-        panel.loc[idx, "abs_fund_pct"] = s.rolling(90, min_periods=30).rank(pct=True).values
+        fg = funding[funding["coin"] == coin].sort_values("ts")
+        daily_fund = (fg.set_index("ts")["fundingRate"].abs()
+                      .resample("24h").last().dropna().sort_index())
+        r = daily_fund.rolling(90, min_periods=30).rank(pct=True)
+        daily = panel.loc[idx].sort_values("ts")[["ts"]]
+        m = pd.merge_asof(daily, r.rename("abs_fund_pct").reset_index(), on="ts", direction="backward")
+        panel.loc[idx, "abs_fund_pct"] = m["abs_fund_pct"].to_numpy()
 
     # EMA24 distance from the daily close series.
     panel["ema_dist"] = np.nan
@@ -875,7 +889,7 @@ def _add_lags(panel: pd.DataFrame) -> pd.DataFrame:
     panel = panel.sort_values(["coin", "ts"]).reset_index(drop=True)
     for tgt, col in (("liq", "t1_liq"), ("rv", "t2_rv")):
         realized = np.log(panel[col].where(panel[col] > 0))
-        panel[f"lag_{tgt}"] = realized.groupby(panel["coin"]).shift(0)
+        panel[f"lag_{tgt}"] = realized.groupby(panel["coin"]).shift(1)
     # `lag_log` is only a placeholder; _design overrides it per target.
     panel["lag_log"] = panel["lag_liq"]
     return panel
@@ -899,21 +913,36 @@ def evaluate() -> dict:
 
         preds: Dict[str, List[dict]] = {}
         tgtcol = f"target_{target}"
+        # Numerical-stability guard: the frozen linear-in-log model has no regularization,
+        # so extreme out-of-range features (e.g. Oct-2025 funding ~100x the train range)
+        # can overflow the exp() link. Record the max |linear predictor| per model so the
+        # verdict can be reason-coded instead of reporting a meaningless 1e17 QLIKE.
+        max_abs_linpred: Dict[str, float] = {}
+        max_row_qlike: Dict[str, float] = {}
         for model in ("B0", "B1", "C1", "C2"):
             Xtr, ytr = _design(train, target, model)
             beta = _fit_log_ols(Xtr, ytr)
             rows: List[dict] = []
+            max_abs_linpred[model] = 0.0
+            max_row_qlike[model] = 0.0
             if beta is not None:
                 # Rebuild the design matrix row-by-row so the surviving keys stay aligned
                 # with the predictions (a single boolean mask reused across differently
                 # filtered frames is the failure mode that produced degenerate QLIKE).
-                feats = _model_feature_frame(test, model)
+                # The persistence feature must be the target's OWN lag (lag_liq vs lag_rv);
+                # using the shared `lag_log` placeholder would feed liq-scale values to the
+                # rv model and vice versa.
+                feats = _model_feature_frame(test.assign(lag_log=test[f"lag_{target}"]), model)
                 keep = feats.notna().all(axis=1) & test[tgtcol].notna() & (test[tgtcol] > 0)
                 sub = test.loc[keep]
                 Xte = feats.loc[keep].to_numpy(float)
                 if len(Xte):
+                    A = np.column_stack([np.ones(len(Xte)), Xte])
+                    lin = A @ beta
+                    max_abs_linpred[model] = float(np.max(np.abs(lin)))
                     yhat = _predict(beta, Xte)
                     q = _qlike(sub[tgtcol].to_numpy(float), yhat)
+                    max_row_qlike[model] = float(np.max(q))
                     for (coin, ts, blk), qi in zip(
                             sub[["coin", "ts", "test_block"]].itertuples(index=False, name=None), q):
                         rows.append({"coin": coin, "ts": ts, "block": int(blk),
@@ -980,6 +1009,13 @@ def evaluate() -> dict:
 
         blocks_with_data = sorted({b for b in per_block})
         instr = sorted(per_coin)
+        # The frozen model is linear-in-log with an exp() link and no regularization
+        # (prereg bans regularization/tuning). Extreme out-of-range features (Oct-2025
+        # funding ~100x the train range) drive a handful of predictions to ~1e-14 while
+        # the target is ~1e7, producing per-row QLIKE >1e15. The mean is then a numerical
+        # artifact, not an economic signal, so the target is reason-coded inconclusive
+        # rather than reported as a meaningless 1e17 NOT_MET.
+        numerical_unstable = any(v > 1e6 for v in max_row_qlike.values())
         rel_pass = primary["rel_reduction_pct"] is not None and primary["rel_reduction_pct"] >= MATERIALITY_PCT
         ci_pass = primary["ci_hi"] is not None and primary["ci_hi"] < 0
         block_pass = len(blocks_with_data) >= MIN_TEST_BLOCKS
@@ -990,6 +1026,8 @@ def evaluate() -> dict:
 
         if not block_pass:
             verdict = "INCONCLUSIVE_PILOT_SHORTFALL"
+        elif numerical_unstable:
+            verdict = "INCONCLUSIVE_NUMERICAL_INSTABILITY"
         elif gate_pass:
             verdict = "PASS"
         else:
@@ -999,6 +1037,14 @@ def evaluate() -> dict:
             "target": target,
             "verdict": verdict,
             "gate_pass": gate_pass,
+            "numerical_stability": {
+                "max_abs_linear_predictor": max_abs_linpred,
+                "max_row_qlike": max_row_qlike,
+                "unstable": numerical_unstable,
+                "reason": ("exp() link overflow from out-of-range frozen linear model; "
+                           "mean QLIKE is a numerical artifact, not interpretable"
+                           if numerical_unstable else None),
+            },
             "mean_qlike": {m: mean_q(m) for m in ("B0", "B1", "C1", "C2")},
             "contrasts": contrasts,
             "per_coin_mean_diff_c2_vs_b1": per_coin,
