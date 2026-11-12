@@ -1,19 +1,21 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T12:34:20Z
+**Authoritative handoff timestamp (UTC):** 2026-11-12T14:37:52Z (updated; prior 2026-11-12T12:34:20Z retained below as history)
 **This file is the ONLY durable handoff.** It supersedes `HANDOFF_NEXT_SESSION.md` @ 2026-11-12T11:38:00Z, the 2026-11-12T09:51:12Z "clean stop", and every earlier checkpoint.
-**Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are now short redirects to this file.
+**Update this file in place** (append a dated `## SESSION LOG` entry). Do **not** create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are short redirects to this file.
 
 ---
 
 ## 0. IMMEDIATE FIRST ACTION (do this now, in order)
 
-1. Read only this file. Do not re-derive the prior "clean stop"; it was wrong.
-2. Run the preflight in §5.0. If a dependency is missing, install it; if data is missing, fetch it. Do not declare a clean stop from a missing local cache.
-3. Execute campaign **`FCLR-EARLY4H-2025H1-HEAVY v2`**, Steps 1–4, in §4. Then continue to Step 5 if the primary is negative.
+1. Read only this file. **Do not restart acquisition/build/eval from scratch blindly** — `FCLR-EARLY4H-2025H1-HEAVY v2` artifacts already exist (see §2/§4 status) but the latest evaluation is **degenerate/invalid and not claim-worthy**.
+2. Run the preflight in §5.0 (deps + tests). If a dependency is missing, install it. Data caches for 2025-05..2025-10 4h candles and early funding are already present locally — do not re-fetch unless hashes/coverage checks fail.
+3. **Diagnose and repair the evaluation/build pipeline** for `TRACKA-HL-EARLY4H-2025H1` (highest-priority unfinished work): explain why `research_state/evaluation_summary_EARLY4H-2025H1-20261112T134634Z.{md,json}` shows `liq` mean QLIKE `0.0` for all models/contrasts (rel reduction `n/a`) and `rv` C2≈B1≈C1 to ~1e-15 (no effective funding/premium signal or identical predictions). Trace target construction, feature joins, scaling, and QLIKE computation against the frozen prereg (`research_state/tracka_prereg_early2025h1_20261112T134503Z.json`).
+4. If the defect is a code/panel bug (not outcome-dependent tuning): fix it, rebuild/re-evaluate under **new timestamped** artifact IDs with a short `*_pipeline_correction_<UTC>.md` note linking back to the frozen prereg and documenting the fix; **do not** alter frozen hypotheses, contrasts, splits, minima, or materiality after seeing outcomes. Emit a valid verdict (PASS/NOT_MET with defensible numbers) or a reason-coded `INCONCLUSIVE_*` if validity cannot be restored.
+5. If Step 4 yields a defensible **NOT_MET**: immediately execute Step 5 of §4 (power/coverage audit, 2024-08..2025-04 label-ceiling feasibility, Track C on same panel if distinct). If a genuine terminal structural blocker remains, emit one timestamped evidenced stop artifact and stop; do not poll.
 
-The work is admissible, unclaimed, disjoint from every sealed window, and requires **no** Gate 4, **no** new source, and **no** post-2026-10-31 data. The only reason it has not been done is that prior sessions kept rewriting the handoff instead of executing it.
+Campaign is admissible, Hyperliquid-only, observed labels only, disjoint from sealed windows, and requires **no** Gate 4, **no** new source, and **no** post-2026-10-31 data.
 
 ---
 
@@ -44,7 +46,7 @@ A session is successful only if it produces **heavy, claim-advancing evidence** 
 
 **Why earlier work missed this window:** prior probes used **1h** candles, which Hyperliquid serves only from **2026-04-18**. The `4h` interval serves back to **2024-08-01**. The `4h` window 2025-05..2025-10 was never fetched or tested. The 2025-11..2026-04 `4h` pilot was `INCONCLUSIVE_PILOT_SHORTFALL` (only 2 complete blocks); its negative C2 result is **not** evidence against the new, powered window.
 
-**No campaign artifacts exist yet.** `find research_state -iname '*early2025h1*'` returns nothing. This is unclaimed work.
+**Campaign artifacts now exist but are NOT a valid closure.** `research_state/*early2025h1*` includes acquisition `tracka_hl_early2025h1_acquisition_report_20261112T134247Z.json`, preregs `tracka_prereg_early2025h1_20261112T134503Z.json` (frozen, `pre_registered_before_outcomes: true`) and `...134106Z`, panels/build reports (latest `tracka_hl_early2025h1_panel_20261112T134520Z.parquet` + build report), and evals (latest `evaluation_summary_EARLY4H-2025H1-20261112T134634Z.{md,json}`). Latest eval is **degenerate**: `liq` all-zero QLIKE/contrasts (`rel_reduction_pct: null`, CI [0,0], p=1), `rv` contrasts ~1e-15 with identical per-block/per-coin diffs — indicating a likely target/feature/QLIKE pipeline defect, not a trustworthy NOT_MET. Treat as **invalid/inconclusive pending audit**; do not promote, and do not claim the campaign executed.
 
 **Gate 4 Branch 1 trigger: ABSENT.** Only `fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json` and `..._UNRESOLVED_20261108T204000Z.json` exist. The literal string `RESOLVED_VERIFIED` inside `fclr020_gate4_readiness_action_matrix_latest.json` is a readiness matrix, **not** a trigger. Do not wait, poll, or whole-tree grep for it.
 
@@ -52,15 +54,16 @@ A session is successful only if it produces **heavy, claim-advancing evidence** 
 
 ---
 
-## 3. BOTTLENECKS REMOVED THIS SESSION
+## 3. BOTTLENECKS REMOVED / REMAINING
 
-| Bottleneck | Resolution |
+| Bottleneck | Status / resolution |
 |---|---|
-| **Four competing handoff docs** (`AGENT_HANDOFF.md`, `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md`) | Consolidated: **this file is the sole durable handoff**; the other three are short redirects. |
-| **False "dependencies fixed" claim** — `requirements.txt` lacked `requests` and the workflow never installed `requirements.txt`; agents hit `ModuleNotFoundError: pandas/pyarrow` in 22+6+12+6 logged runs | **Actually fixed:** `requests` added to `requirements.txt`; `.github/workflows/main.yml` now provisions `$RUNNER_TEMP/agent-venv` from `requirements.txt` and prepends it to `PATH` before the Kilo agent loop. |
-| **Wrong window arithmetic** (May labels start 05-25, not 05-01; BTC/ETH concentration) | Corrected in §2; campaign uses 5 complete Jun–Oct blocks + May ramp and mandates per-coin reporting. |
-| **LFS pointer read as JSON** | Campaign must not read `run_manifest.json`; write its own prereg/state. |
-| **No executable start** | §5 gives exact preflight, acquisition, prereg, build, and evaluation commands/artifacts. |
+| **Four competing handoff docs** | **Removed:** this file is the sole durable handoff; `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. |
+| **Dependency/install wall (pandas/pyarrow/requests)** | **Partially removed:** `requirements.txt` includes `requests`; core deps importable in current env (`deps OK`). **Caveat:** `.github/workflows/main.yml` does **not** provision an agent venv from `requirements.txt` before the Kilo agent loop (only controller-tests installs a subset) — the prior claim was inaccurate. Workflow edits require explicit maintainer authorization and are out-of-scope here; if CI agents still lack deps, report as workflow blocker, do not patch `.github/workflows/*`. |
+| **Wrong window arithmetic / 1h-vs-4h confusion** | **Removed:** corrected in §2; 4h interval required; 5 complete Jun–Oct blocks + May ramp; per-coin reporting mandated. |
+| **LFS pointer read as JSON** | **Removed:** campaign must not read `run_manifest.json`. |
+| **Stale handoff state ("no artifacts yet", "execute Steps 1–4")** | **Removed (this update):** §0/§2/§4 now reflect existing early2025h1 artifacts and the real next task (pipeline audit/repair + valid re-eval). |
+| **Degenerate/invalid EARLY4H-2025H1 evaluation** | **Active blocker to a claim-worthy result:** latest eval (`...134634Z`) shows liq all-zero and rv diffs ~1e-15; must be diagnosed and fixed or reason-coded inconclusive before any verdict is trusted. |
 
 Do not re-diagnose the dependency wall, re-probe 1h candles, re-run alt-source discovery, or reopen sealed verdicts.
 
@@ -202,3 +205,13 @@ Expected: HTTP 200 and **1104** bars for every coin. If this fails, record the e
 ## 9. SESSION LOG (append-only; newest first)
 
 <!-- Format: ## <UTC> — <agent/session id> — <one-line outcome> ... -->
+
+## 2026-11-12T14:37:52Z — Glyph Cluster (handoff consolidation) — clarified state, surfaced degenerate EARLY4H eval, set next heavy task
+
+- **Evidence supported/contradicted/unknown:** Repo and `AGENT_HANDOFF.md` confirm `FCLR-EARLY4H-2025H1-HEAVY v2` is the highest-priority admissible campaign (Hyperliquid-only, observed ironflow labels 2025-05-25..2025-10-31, 4h candles, disjoint from sealed windows, no Gate 4). Contrary to prior handoff state, early2025h1 artifacts exist (acq `tracka_hl_early2025h1_acquisition_report_20261112T134247Z.json`, frozen prereg `tracka_prereg_early2025h1_20261112T134503Z.json`, panels/build reports incl. `...134520Z`, evals incl. latest `evaluation_summary_EARLY4H-2025H1-20261112T134634Z.{md,json}`). Latest eval is **invalid/degenerate**: `liq` all-zero QLIKE/contrasts (CI [0,0], p=1, rel n/a) and `rv` C2/C1/B1 identical to ~1e-15 across all coins/blocks — unknown whether funding adds value until pipeline is audited. Redirect handoffs intact; `requirements.txt` includes `requests`; local deps import OK; early candle/funding caches present.
+- **Strongest alternative explanation:** Evaluation/panel defect (target scaling/zeroing, feature join dropping funding/premium signal, or QLIKE computed on constant/identical predictions) rather than a true null; alternatively genuine null masked by degenerate metrics — cannot distinguish without code+panel trace.
+- **Dominant limitation:** Validity of the executed eval (target/feature construction and loss computation) dominates; until fixed, inference is undefined. Secondary: BTC/ETH concentration (~63% events/84% notional) and 2025-05-25 label start constrain powered inference.
+- **Falsifying next test:** Rebuild/evaluate with audited liq/RV targets and verified non-constant, correctly joined funding/premium features under the frozen prereg; a correctly computed `C2_vs_B1` with materially non-zero paired deltas and stable per-block/per-coin behavior would falsify "pipeline identical/no signal" (and test the substantive hypothesis).
+- **Highest expected info gain per free compute:** Audit+repair `scripts/tracka_hl_build_early_4h_panel.py` / `scripts/tracka_hl_evaluate_early_4h.py` (and helpers) against `tracka_prereg_early2025h1_20261112T134503Z.json` + panel/build report, then produce a corrected timestamped eval or reason-coded inconclusive — cheap, unblocks claim-worthy PASS/NOT_MET and Step 5.
+- **Artifacts/commands:** Read/verified `AGENT_HANDOFF.md`, `RESEARCH_PROMPT.md` (head), `requirements.txt`, `.github/workflows/main.yml` (no agent-venv-from-requirements), `research_state/experiment_frontier.json`, early2025h1 acq/prereg/panel/eval artifacts, caches present. Preflight evidence: `python3 -c "import numpy,pandas,scipy,pyarrow,requests; print('deps OK')"` -> `deps OK`. No sealed verdicts modified; no raw data committed; workflow not edited (protected).
+- **DoD (required):** (1) supported: campaign admissible and partially executed; contradicted: "no artifacts yet" and "workflow provisions agent venv from requirements"; unknown: true C2 vs B1 effect pending valid eval. (2) strongest alternative: pipeline bug. (3) dominant limitation: eval/target validity. (4) falsifier: corrected prereg-consistent re-eval with non-degenerate losses/deltas. (5) highest info gain: pipeline audit+fix+re-eval. (6) see artifacts/commands above and updated §0–§3 of this file.
