@@ -1,4 +1,4 @@
 # NEXT_SESSION_TASK (redirect)
-**Timestamp (UTC):** 2026-11-12T00:59:46Z
+**Timestamp (UTC):** 2026-11-12T01:42:43Z
 
 Execute **`HANDOFF_NEXT_SESSION.md`** (single durable handoff, authoritative as of this timestamp). Immediate heavy objective: execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze new prereg BEFORE outcomes specifying ex-ante checks (leave-one-instrument-out sensitivity, placebo/permutation on funding features fixed seed, alternative pre-specified block/bootstrap settings) with pass/falsification criteria; run all checks; emit verdict `research_state/evaluation_summary_TRACKA-EXP-ROBUST-<UTC>.md` (ROBUST/FRAGILE/INCONCLUSIVE) + atomic state updates. Volatility multiplicity family (TRACKA-VOL-FAMILY-20261112T005111Z) completed NOT_MET; Gate 4 Branch 1 only on valid RESOLVED_VERIFIED trigger with human/legal attestation.
