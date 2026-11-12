@@ -1,0 +1,136 @@
+{
+  "experiment_id": "TRACKA-HL-EARLY4H-2025H1-LIQ-GLM-ROBUST",
+  "campaign": "FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1",
+  "generated_utc": "2026-11-12T17:04:57Z",
+  "prereg": "research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json",
+  "prereg_sha256": "f06060c7fccb5530629bdd7ff3d7278a22ad7480a12aa86d07c3868ba1b09123",
+  "panel": "research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet",
+  "panel_sha256": "08c608035d179be8c274dd0b14386c5330893176c1b963048d09f82d98e3f958",
+  "estimator": "Poisson/quasi-Poisson GLM, log link, IRLS, no regularization, features bounded to training range",
+  "target": "t1_liq (next-24h observed liquidation notional USD), positive rows only",
+  "verdict": "NOT_MET",
+  "gate_pass": false,
+  "numerical_stability": {
+    "max_abs_linear_predictor": {
+      "B1": 19.023818113315404,
+      "C1": 19.14545949678862,
+      "C2": 19.291247628852247
+    },
+    "max_row_qlike": {
+      "B1": 212.77277168437803,
+      "C1": 243.3773515209239,
+      "C2": 319.052560592695
+    },
+    "threshold": 1000000.0,
+    "unstable": false,
+    "reason": null
+  },
+  "fit": {
+    "B1": {
+      "converged": true,
+      "iters": 7,
+      "deviance": 8489251516.853722
+    },
+    "C1": {
+      "converged": true,
+      "iters": 9,
+      "deviance": 6908299864.525405
+    },
+    "C2": {
+      "converged": true,
+      "iters": 7,
+      "deviance": 6514065904.7985325
+    }
+  },
+  "mean_qlike": {
+    "B1": 4.1503412541536155,
+    "C1": 4.187702803062571,
+    "C2": 4.049940528968774
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": -0.10040072518484182,
+      "ci_lo": -1.229877676075178,
+      "ci_hi": 0.8512533798199217,
+      "n_pairs": 1016,
+      "n_blocks": 4,
+      "rel_reduction_pct": 2.4190956607330034,
+      "p_value": 0.8500062587440791,
+      "holm_rejected": false
+    },
+    "C1_vs_B1": {
+      "mean_diff": 0.03736154890895439,
+      "ci_lo": -0.16621272020510197,
+      "ci_hi": 0.2361831113510873,
+      "n_pairs": 1016,
+      "n_blocks": 4,
+      "rel_reduction_pct": -0.9002042632413267,
+      "p_value": 0.7158904888884051,
+      "holm_rejected": false
+    },
+    "C2_vs_C1": {
+      "mean_diff": -0.13776227409379632,
+      "ci_lo": -1.1225377811304733,
+      "ci_hi": 0.6080960026874584,
+      "n_pairs": 1016,
+      "n_blocks": 4,
+      "rel_reduction_pct": 3.2896860300842587,
+      "p_value": 0.7550139774514621,
+      "holm_rejected": false
+    }
+  },
+  "per_coin_mean_diff_c2_vs_b1": {
+    "AVAX": 0.7333936751449303,
+    "BNB": 0.5779522910547558,
+    "BTC": 0.9314848750337679,
+    "DOGE": -0.14868482936765498,
+    "ETH": -2.968796361007031,
+    "LINK": 0.33462244718746725,
+    "SOL": -0.3122955244479818,
+    "SUI": 0.18713239997682132,
+    "XRP": 0.035668820745346684
+  },
+  "per_block_mean_diff_c2_vs_b1": {
+    "0": -0.04313568744812957,
+    "1": -1.696859988180112,
+    "2": 0.18768127924731026,
+    "3": 1.1322491787317233
+  },
+  "test_blocks_with_data": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "paired_instruments": [
+    "AVAX",
+    "BNB",
+    "BTC",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "SOL",
+    "SUI",
+    "XRP"
+  ],
+  "n_train_rows": 333,
+  "n_test_rows": 1080,
+  "gate": {
+    "materiality_ge_2pct": true,
+    "ci_upper_below_zero": false,
+    "min_test_blocks_ge_3": true,
+    "min_instruments_ge_5": true,
+    "holm_pass": false,
+    "single_coin_only": false
+  },
+  "compliance": {
+    "no_outcome_inspection_before_freeze": true,
+    "no_threshold_shopping": true,
+    "no_sealed_holdout_reuse": true,
+    "no_binance_2024_conflation": true,
+    "no_modeled_proxy_labels": true,
+    "venue_consistent": "Hyperliquid-only"
+  },
+  "seed": 20261112,
+  "n_bootstrap": 2000
+}

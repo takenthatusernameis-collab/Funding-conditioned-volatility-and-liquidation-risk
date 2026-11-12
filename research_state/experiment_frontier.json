@@ -1,306 +1,331 @@
 [
- {
-  "artifact_churn_note": "2026-11-12T16:52:59Z: Executed FCLR-EARLY4H-2025H1-LIQ-GLM v1 (parent). Parent liq GLM returned INCONCLUSIVE_NUMERICAL_INSTABILITY, localized to test block 3 (Oct-2025 funding spike): B1 0/1016 rows >1e6, C1 1/1016 (block3/SOL), C2 2/1016 (block3/SOL,DOGE); block-3 funding/premium/ema_dist are 27.7x/12.5x/4.5x outside the training range. Power is adequate (246-261 positive days per block); labels exist only 2025-05-25..2026-10-31; BTC+ETH 63.6% events / 83.6% notional. Next campaign FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 has a prereg ALREADY FROZEN (sha f06060c7...); implement scripts/early4h_liq_glm_robust.py (bounded-feature log-link IRLS), evaluate, adjudicate. If INCONCLUSIVE again -> timestamped evidenced structural-blocker doc with exact failing minima, then stop.",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal; do not wait/poll). NOT a blocker for this campaign. Hazards: (1) 1h candles unavailable before 2026-04-18 - use 4h; (2) funding cache starts 2025-11 but early funding 2025-05..2025-10 is cached under hyperliquid_funding_early; (3) the literal RESOLVED_VERIFIED inside fclr020 readiness matrix is not a Gate 4 trigger; (4) run_manifest.json is an unresolved Git LFS pointer in CI - do NOT read it as JSON. liq frozen linear model is numerically unstable on Oct-2025 funding spike (model-form limitation, not a code bug).",
-  "generated": "20261112T123420Z",
-  "last_checked": "2026-11-12T16:52:59Z",
-  "next_action_heavy": "Implement scripts/early4h_liq_glm_robust.py and execute FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 (see AGENT_HANDOFF.md section 4). Prereg ALREADY FROZEN: research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json (sha f06060c7...). Reuse corrected panel research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet (sha 08c60803...). Same Poisson/quasi-Poisson log-link IRLS, but clip fundingRate/abs_fund_pct/premium/ema_dist to the train [min,max] then standardize by train mean/std; target t1_liq only. Emit evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.{md,json} with a numerical-stability guard. If NOT_MET: preserve the null. If INCONCLUSIVE again: timestamped evidenced structural-blocker doc with exact failing minima, then STOP. Do NOT re-fetch caches, re-run the parent GLM, re-probe 1h candles, or reopen sealed verdicts.",
-  "next_unfinished_task": "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST_IMPLEMENT_EVAL",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "This campaign has a frozen prereg but no implementation/eval yet (sufficient on its own)",
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation)",
-   "HL 2026-11+ depth >=100d AND verified post-2026-10-31 observed labels",
-   "New admissible liquidation-label source (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "supersedes_prior_next_task_entries": [
-   "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
-   "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
-   "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
-   "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
-   "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
-  ],
-  "task": "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST",
-  "completed_campaigns": [
-   "TRACKA-HL-EARLY4H-2025H1 (rv NOT_MET; parent liq GLM INCONCLUSIVE_NUMERICAL_INSTABILITY)"
-  ]
- },
- {
-  "artifact_churn_note": "2026-11-12T07:34:18Z: FCLR-NEXT campaign installed as the sole authoritative next task, superseding all prior rank-0 next-task entries. Prior session (2026-11-12T07:31:59Z) monitor probe completed and evidenced INELIGIBLE (`research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`: HL ~12.0d < 100d, no post-2026-10-31 ironflow labels). Gate 4 trigger absent (verified, external/legal). Stale rank-0 frontier entries (TRACKA_ALT_VOLATILITY / TRACKA_EXPANSION_ROBUSTNESS / BOUNDED_NEW_DATA_DISCOVERY / EXTERNAL_NEW_DATA_SOURCE) are sealed NOT_MET/FRAGILE or just-executed ineligible probes \u2014 preserved as history, not relitigated. H2 registry corrected to EXPLORATORY_ONLY/PARTIAL (`research_state/h002_replication_report.md`).",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal, not agent-removable \u2014 do not wait/poll). HL 2026-11+ ~12d insufficient; no verified post-2026-10-31 observed liquidation labels. All cached-data designs sealed/exhausted. No untested admissible cached-data experiment remains.",
-  "generated": "20261112T073418Z",
-  "last_checked": "20261112T073418Z",
-  "next_action_heavy": "FCLR-NEXT campaign (execute in order): (1) Gate 4 check \u2014 absent now; Branch 1 only on valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). (2) Bounded alternative liquidation-label source discovery per RESEARCH_PROMPT \u00a75 using scripts/hunt_alternative_liquidation_sources.py \u2192 research_state/data_source_registry_alt_hunt.json, research_state/alt_source_deep_review_latest.md, research_state/url_probe_cache.json, research_state/hf_search_cache.json. Requirement for claim-worthy consideration: \u22655 instruments, \u22651 complete month or \u22653 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only, venue-consistent (no Binance/2024 conflation). (3) If a source passes smoke test: \u00a716 admissibility audit BEFORE any preregistration/outcome computation (research_state/<source>_admissibility_audit_<UTC>.{md,json}); if admissible \u2192 freeze prereg \u2192 build/eval/verdict \u2192 atomic state updates under a NEW experiment ID. (4) If no source passes: timestamped probe evidence with exact failing minima per source, experiment_frontier update, clean stop \u2014 no repeated no-op probes. (5) HL/ironflow reprobe only when plausibly eligible (HL \u2265100d AND verified post-2026-10-31 observed labels); not eligible now; no polling. No status-only output.",
-  "next_unfinished_task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
-   "New admissible liquidation-label source verified (\u22655 symbols, \u22651 complete month or \u22653 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels)",
-   "HL 2026-11+ depth \u2265100d AND verified post-2026-10-31 observed labels (bounded reprobe)"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "supersedes_prior_next_task_entries": [
-   "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
-   "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
-   "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
-   "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
-  ],
-  "task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY"
- },
- {
-  "artifact_churn_note": "20261112T07:00:00Z: \u00a716 admissibility audit of metpie/hyperliquid-liquidation-events 2025-03-22..2025-05-25 joined to HL funding+candles COMPLETED \u2014 INADMISSIBLE. Evidence: HL 4h candles fetchable (390 rows/symbol, complete window, 11 top symbols), HL fundingHistory paginatable (BTC 1,548 rows full window), metpie \u22655 instruments PASS (11 coins \u22655,000 events), RV/context features computable. Primary failing criterion: block feasibility \u2014 window ~64.1 days < 90 days minimum for \u22653 non-overlapping 30-day OOS test blocks; structurally infeasible under any split configuration. Artifacts: `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}`. Bounded reprobe (step 3) NOT currently eligible: HL 2026-11+ ~11.2 days (<100d threshold), no verified post-2026-10-31 observed liquidation labels (ironflow HF through 2026-10 only). No polling. Gate 4 trigger absent (verified).",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). All cached-data designs exhausted/sealed. metpie INADMISSIBLE (block-feasibility). HL 2026-11 window ~11.2d insufficient; no verified post-2026-10-31 observed labels. No untested admissible cached-data experiment remains.",
-  "generated": "20261112T070000Z",
-  "last_checked": "20261112T070000Z",
-  "next_action_heavy": "Gate 4 Branch 1 only if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Else execute bounded new-data discovery/monitor probes: HL 2026-11+ candle/funding depth (\u2265100d required), ironflow/hyperliquid-liquidations HF lastModified/event files for extension beyond 2026-10-31 (verified observed labels required). Emit timestamped probe/audit artifact with evidence; if newly admissible, freeze prereg BEFORE outcomes then build/eval+verdict+atomic state updates. If ineligible, document exact failing minima and stop cleanly. No status-only output, no polling, no sealed-record reopening.",
-  "next_unfinished_task": "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
-   "New admissible data source/window verified (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "task": "GATE4_OR_NEW_DATA_SOURCE_MONITOR"
- },
- {
-  "artifact_churn_note": "20261112T044425Z: Gate 4 trigger absent (verified). Bounded external probes re-run: HL API 2026-11-01..now HTTP 200 269 candles+269 funding/coin (9 coins, ~11.2d, insufficient for >=3x30d blocks); ironflow/hyperliquid-liquidations HF lastModified 2026-11-07T10:18:25Z events 2025-05..2026-10 only (no post-2026-10-31 labels); metpie 2025-03-22..2025-05-25 historical unaudited. No verifiably admissible new external source. Evidence: research_state/new_data_external_probe_audit_20261112T044425Z.{md,json}, external_probe_raw_20261112T044425Z.json. Sealed records preserved.",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). No verifiably admissible new data now: HL 2026-11 window ~10d insufficient, no post-2026-10-31 observed liquidation labels verified. All cached-data designs exhausted/sealed.",
-  "generated": "20261112T044425Z",
-  "last_checked": "20261112T044425Z",
-  "next_action_heavy": "If Gate 4 valid RESOLVED_VERIFIED trigger appears, execute Branch 1. Else run bounded evidence-backed reprobe/monitor when plausibly eligible: HL 2026-11+ candles+funding when >=100d available AND ironflow HF for post-2026-10-31 observed liquidation labels; and/or full \u00a716 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL features if venue-consistent >=5 sym >=3x30d blocks feasible. If admissible, freeze prereg BEFORE outcomes then build/eval+verdict+state updates. If not, emit timestamped probe/audit evidence. No status-only output, no polling.",
-  "next_unfinished_task": "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
-   "New admissible data source appears (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license)"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "task": "GATE4_OR_NEW_DATA_SOURCE"
- },
- {
-  "artifact_churn_note": "20261112T015119Z: Completed TRACKA-EXP-ROBUST-20261112T015119Z robustness/falsification campaign for sealed PASS TRACKA-HL-EXPANSION-20261111T195500Z. LOIO: 4/8 PASS (need >=6) -> FAIL. Placebo/Permutation: true rel 19.04% <= 95th pctl 21.10% -> FAIL. Bootstrap Settings: 3/3 PASS. Overall verdict: FRAGILE. Prereg frozen pre-outcomes: tracka_prereg_expansion_robust_20261112T014515Z.json. State updated; sealed records preserved.",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed (FRAGILE on robustness); Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated.",
-  "generated": "20261112T015119Z",
-  "last_checked": "20261112T015119Z",
-  "next_action_heavy": "Robustness campaign FRAGILE: preregister and attempt next best admissible untested claim in-session \u2014 alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits (per prereg fallback). If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
-  "next_unfinished_task": "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
-   "Complete TRACKA-ALT-VOL prereg+eval+verdict; preregister next admissible claim"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "task": "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL"
- },
- {
-  "artifact_churn_note": "20261112T005111Z: Completed TRACKA-VOL-FAMILY-20261112T005111Z multiplicity evaluation. Primary 24h + secondary 6h/72h/168h horizons evaluated on frozen panel. Family-wise gate: NOT_MET. Holm correction applied across 12 comparisons. State updated; sealed records preserved.",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated.",
-  "generated": "20261112T005111Z",
-  "last_checked": "20261112T005111Z",
-  "next_action_heavy": "If volatility family NOT_MET: execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze new prereg BEFORE outcomes specifying ex-ante checks (leave-one-instrument-out, placebo/permutation on funding features fixed seed, alternative block/bootstrap settings) with pass/falsification criteria; emit verdict + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
-  "next_unfinished_task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
-   "Complete TRACKA-EXP-ROBUST prereg+checks+verdict; preregister next admissible claim"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
- },
- {
-  "artifact_churn_note": "2026-11-11T23:59:55Z: Completed TRACKA-VOL-20261111T234918Z (GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS). Prereg frozen pre-outcomes; cached Hyperliquid 9-coin panel 2026-05..2026-10 built/evaluated. Verdict NOT_MET (C2 vs B1 QLIKE rel -1.37%, CI crosses zero, n=19233, 9 instruments, 3 blocks). State updated; sealed records preserved. Gate 4 external-blocked.",
-  "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required, fabricated=false). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed. No Binance/2024 conflation.",
-  "generated": "2026-11-11T23:59:55Z",
-  "last_checked": "2026-11-11T23:59:55Z",
-  "next_action_heavy": "Execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze `research_state/tracka_prereg_expansion_robust_20261111T235955Z.{json,md}` BEFORE any robustness outcome computation specifying ex-ante checks (e.g. leave-one-instrument-out sensitivity, placebo/permutation on funding features with fixed seed, and alternative pre-specified block/bootstrap settings) with pass/falsification criteria, then run all checks and emit `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261111T235955Z.md` (ROBUST/FRAGILE/INCONCLUSIVE) + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1. Do not relitigate sealed verdicts or threshold-shop.",
-  "next_unfinished_task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL",
-  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-  "rank": 0,
-  "resume_triggers": [
-   "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
-   "Complete TRACKA-EXP-ROBUST-20261111T235955Z prereg+checks+verdict; if ROBUST/FRAGILE/INCONCLUSIVE documented, preregister next admissible untested claim (e.g. alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits) and execute in-session"
-  ],
-  "status": "ACTIVE_HEAVY_CAMPAIGN",
-  "task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
- },
- {
-  "track_a": {
-   "status": "SYMBOL_EXPANSION_PASS_2026M05M10_ROBUSTNESS_FRAGILE__VOLATILITY_EXHAUSTED__AWAIT_GATE4_OR_NEW_DATA",
-   "note": "ironflow/hyperliquid-liquidations (CC BY 4.0) observed labels; successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes. Bounded first-time unauthenticated Hyperliquid candleSnapshot (2026-05..2026-10, 9 symbols) cached; RV-augmented panel built (1656 buckets, 1647 w/ RV24h, 1434 w/ label, 9 symbols). Pre-registered C2 vs B1 QLIKE on next-24h liquidation intensity: C2 mean 274.51 vs B1 72.13 (n=693, 3 test blocks, 9 instruments), diff +202.38, 95% CI [15.42,443.78] (excludes zero in wrong direction), rel reduction -280.56% -> forecast gate NOT_MET. No threshold-shopping, no Binance/2024 conflation, no modeled/proxy labels. | 2026-11-11T16:32:29Z gap audit selected GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 for new prereg+bounded candle acquisition (no outcomes).",
-   "experiment_id": "TRACKA-HL-S-20261111T133430Z",
-   "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
-   "data_source": "ironflow/hyperliquid-liquidations",
-   "coverage_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
-   "license": "CC BY 4.0",
-   "unauthenticated": true,
-   "observed_only": true,
-   "terminal_verdict": "research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md",
-   "panel_artifact": "research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet",
-   "panel_report": "research_state/tracka_hl_panel_with_rv_build_report_20261111T160124Z.json",
-   "prior_terminal_verdict": "research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md",
-   "candle_fetch_report": "research_state/tracka_hl_candle_fetch_report_20261111T160053Z.json",
-   "early_campaign": {
-    "experiment_id": "TRACKA-HL-EARLY-20261111T191958Z",
-    "campaign": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
-    "status": "INADMISSIBLE_DOCUMENTED_EVIDENCE",
-    "prereg_document": "research_state/tracka_prereg_hyperliquid_early_20261111T191958Z.json",
-    "verdict": "research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md",
-    "acquisition_report": "research_state/tracka_hl_early_candle_fetch_report_20261111T193140Z.json",
-    "window": "2025-11-01T00:00:00Z .. 2026-04-30T23:59:59Z",
-    "symbols": [
-     "BTC",
-     "ETH",
-     "BNB",
-     "SOL",
-     "XRP",
-     "AVAX",
-     "DOGE",
-     "LINK",
-     "SUI"
+  {
+    "artifact_churn_note": "2026-11-12T17:04:57Z: Executed FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1. Bounded-feature Poisson/quasi-Poisson GLM (log link, IRLS, clip+standardize fundingRate/abs_fund_pct/premium/ema_dist to train [min,max]) on the SAME frozen panel and splits as the sealed campaign. NUMERICAL STABILITY RESOLVED: max row QLIKE ≤ 319 ≪ 1e6 (parent had C2 max 3.5e9). VERDICT: NOT_MET — mean QLIKE reduction 2.42% (materiality PASS) but 95% CI [−1.23, +0.85] upper > 0 and Holm not rejected (gate FAIL). Per-coin/per-block breakdown: block 3 (Oct-2025 spike) diff +1.13 (C2 worse); block 1 diff −1.70 (C2 better); ETH −2.97, BTC +0.93. Label ceiling hard: ironflow labels only 2025-05-25..2026-10-31; no earlier labels exist. Power adequate (246-261 pos days/block, 1016 paired rows, 9 instruments). No further estimator iteration on this source/design (per RESEARCH_PROMPT §16 and prereg numerical_stability clause). Terminal structural stop document emitted: research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal; do not wait/poll). NOT a blocker for this campaign (campaign completed). All cached-data designs for Track A observed-label `liq` on Hyperliquid 2025H1 are exhausted/sealed. No verifiably admissible new observed-label source available without payment/credentials/manual intervention.",
+    "completed_campaigns": [
+      "TRACKA-HL-EARLY4H-2025H1 (rv NOT_MET; parent liq GLM INCONCLUSIVE_NUMERICAL_INSTABILITY)",
+      "TRACKA-HL-EARLY4H-2025H1-LIQ-GLM-ROBUST (NOT_MET, numerical stability resolved, terminal structural stop)"
     ],
-    "evidence": {
-     "labels": "cached ironflow_events 2025-11..2026-04 present (PASS)",
-     "funding": "cached hyperliquid_funding 9 coins ~2025-11-01..2026-10-30 covers window (PASS)",
-     "candles_rv": "NOT cached 2025-11..2026-04; bounded first-time acquisition executed (54 calls, HTTP 200 all): 2025-11..2026-03 empty [] for all 9 coins; 2026-04 partial ~327-328 rows/coin; RV24h/B1 not computable -> min 3 test blocks and baseline unsatisfiable (FAIL)"
-    },
-    "pivot": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 (new prereg, frozen ex-ante symbol selection/event-adequacy, 2026-05..2026-10, new universe/design; closed NOT_MET 9-symbol panel NOT relitigated)"
-   },
-   "expansion_campaign": {
-    "experiment_id": "TRACKA-HL-EXPANSION-20261111T195500Z",
-    "campaign": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
-    "status": "COMPLETED_PASS_ROBUSTNESS_FRAGILE",
-    "prereg_document": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
-    "universe_artifact": "research_state/tracka_hl_expansion_universe_20261111T201958Z.json",
-    "acquisition_report": "research_state/tracka_hl_expansion_acquisition_report_20261111T201958Z.json",
-    "panel_artifact": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
-    "panel_report": "research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json",
-    "verdict": "research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md",
-    "robustness_verdict": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md",
-    "robustness_prereg": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
-    "robustness_result": "FRAGILE",
-    "robustness_checks": {
-     "LOIO": "FAIL (4/8 pass, need >=6)",
-     "PLACEBO_PERMUTATION": "FAIL (true rel 19.04% <= 95th pctl 21.10%)",
-     "BOOTSTRAP_SETTINGS": "PASS (3/3 settings pass)"
-    },
-    "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
-    "symbols": [
-     "AAVE",
-     "ADA",
-     "BCH",
-     "CRV",
-     "LTC",
-     "NEAR",
-     "UNI",
-     "ZEC"
+    "generated": "20261112T170457Z",
+    "last_checked": "2026-11-12T17:04:57Z",
+    "next_action_heavy": "Track A observed-label `liq` on Hyperliquid 2025H1 is CLOSED (terminal structural stop). Next admissible heavy work: (1) Gate 4 Branch 1 — ONLY if a valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). (2) Bounded alternative liquidation-label source discovery per RESEARCH_PROMPT §5/§16 using scripts/hunt_alternative_liquidation_sources.py → research_state/data_source_registry_alt_hunt.json, research_state/alt_source_deep_review_latest.md. Requirement: ≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only, venue-consistent (no Binance/2024 conflation). (3) If a source passes smoke test: §16 admissibility audit BEFORE any preregistration/outcome computation; if admissible → freeze prereg → build/eval/verdict → atomic state updates under a NEW experiment ID. (4) If no source passes: timestamped probe evidence with exact failing minima per source, experiment_frontier update, clean stop — no repeated no-op probes. (5) HL/ironflow reprobe ONLY when plausibly eligible (HL ≥100d depth AND verified post-2026-10-31 observed labels); not eligible now; no polling. No status-only output.",
+    "next_unfinished_task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "New admissible liquidation-label source verified (≥5 symbols, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels)",
+      "HL 2026-11+ depth ≥100d AND verified post-2026-10-31 observed labels (bounded reprobe)"
     ],
-    "primary_contrast": "C2_vs_B1",
-    "metric": "QLIKE_next_24h_observed_liquidation_intensity",
-    "result": {
-     "rel_reduction_pct": 19.03709721199804,
-     "ci": [
-      -5.0881020797243135,
-      -0.4776599249731716
-     ],
-     "paired_n": 593,
-     "test_blocks": 3,
-     "instruments": 8
-    },
-    "notes": "Observed Hyperliquid ironflow labels only; no Binance/2024 conflation; prereg frozen pre-outcomes; bounded acquisition with provenance; different universe/design from closed 9-symbol NOT_MET panel. Robustness campaign FRAGILE: LOIO and Placebo/Permutation checks failed."
-   },
-   "volatility_campaign": {
-    "experiment_id": "TRACKA-VOL-20261111T234918Z",
-    "status": "NOT_MET",
-    "prereg": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
-    "verdict": "research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md",
-    "panel": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
-    "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
-    "instruments": 9,
-    "test_blocks": 3,
-    "rel_reduction_pct": -1.3665270546001616,
-    "ci95": [
-     -0.014248708685881961,
-     0.0021159967844719407
-    ]
-   },
-   "volatility_family_campaign": {
-    "experiment_id": "TRACKA-VOL-FAMILY-20261112T005111Z",
-    "status": "NOT_MET",
-    "prereg": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
-    "verdict": "research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md",
-    "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
-    "instruments": 9,
-    "test_blocks": 3,
-    "horizons_evaluated": [
-     "6h",
-     "24h",
-     "72h",
-     "168h"
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "supersedes_prior_next_task_entries": [
+      "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST_IMPLEMENT_EVAL",
+      "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
+      "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
+      "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
+      "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
     ],
-    "total_comparisons": 12,
-    "multiplicity_correction": "Holm",
-    "primary_pass": false
-   },
-   "alt_volatility_campaign": {
-    "experiment_id": "TRACKA-ALT-VOL-20261112T020322Z",
-    "status": "NOT_MET",
-    "prereg": "research_state/tracka_prereg_alt_volatility_20261112T015546Z.json",
-    "verdict": "research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md",
-    "panel": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
-    "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z (prereg specified 2025-11..2026-10; data only available 2026-05..2026-10)",
-    "instruments": 9,
-    "test_blocks": 5,
-    "target_horizon": "6h",
-    "model": "C2_ALT (B1 + fundingRate, abs_funding, premium, ema_dist, rv72h)",
-    "rel_reduction_pct": 5.77,
-    "ci95": [
-     -0.121154,
-     0.033865
-    ],
-    "gate": "NOT_MET (materiality PASS, CI_excludes_zero FAIL)",
-    "note": "Prereg deviation: candle data only available 2026-05..2026-10; splits adjusted to 5 test blocks. C2_ALT adds rv72h feature. Materiality gate passed (5.77% >= 2%) but CI crosses zero."
-   }
+    "task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY"
   },
-  "track_b": {
-   "status": "CONFIRMATORY_COMPLETE_TB2_GATE_NOT_MET_ALL_ADMISSIBLE_ROUTES_EXHAUSTED",
-   "completed_windows": [
-    {
-     "experiment_id": "TRACKB-20251110T154307Z",
-     "gate": "NOT_MET",
-     "verdict": "NOT_SUPPORTED",
-     "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI crosses zero."
-    },
-    {
-     "experiment_id": "trackb_TB1_20261110T173838Z",
-     "gate": "NOT_MET",
-     "verdict": "NOT_SUPPORTED_DEGENERATE_TEST_SET_INADMISSIBLE",
-     "note": "Frozen test split 2026-06-26..2026-10-31 had zero synthetic breaches (long 5x H=24h) across all 5 symbols; confirmatory evaluation impossible."
-    },
-    {
-     "experiment_id": "trackb_TB2_20261110T190405Z",
-     "gate": "NOT_MET",
-     "verdict": "NOT_SUPPORTED",
-     "artifact": "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md",
-     "timestamp_utc": "2026-11-10T20:00:21Z",
-     "note": "Event-adequate confirmatory on 2024-01-01..2024-09-30 (5 symbols, h168_long_10x_m0). Test positives 619/5040 (12.3%). Pooled Log Loss B1=0.292447->C2=0.287540 (+1.68% < 2% floor). 95% CI [-0.010997,0.003094] crosses zero, Holm fails, 2 test blocks <3. Overlay INELIGIBLE. Modeled proxy only."
-    }
-   ]
+  {
+    "artifact_churn_note": "2026-11-12T16:52:59Z: Executed FCLR-EARLY4H-2025H1-LIQ-GLM v1 (parent). Parent liq GLM returned INCONCLUSIVE_NUMERICAL_INSTABILITY, localized to test block 3 (Oct-2025 funding spike): B1 0/1016 rows >1e6, C1 1/1016 (block3/SOL), C2 2/1016 (block3/SOL,DOGE); block-3 funding/premium/ema_dist are 27.7x/12.5x/4.5x outside the training range. Power is adequate (246-261 positive days per block); labels exist only 2025-05-25..2026-10-31; BTC+ETH 63.6% events / 83.6% notional. Next campaign FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 has a prereg ALREADY FROZEN (sha f06060c7...); implement scripts/early4h_liq_glm_robust.py (bounded-feature log-link IRLS), evaluate, adjudicate. If INCONCLUSIVE again -> timestamped evidenced structural-blocker doc with exact failing minima, then stop.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal; do not wait/poll). NOT a blocker for this campaign. Hazards: (1) 1h candles unavailable before 2026-04-18 - use 4h; (2) funding cache starts 2025-11 but early funding 2025-05..2025-10 is cached under hyperliquid_funding_early; (3) the literal RESOLVED_VERIFIED inside fclr020 readiness matrix is not a Gate 4 trigger; (4) run_manifest.json is an unresolved Git LFS pointer in CI - do NOT read it as JSON. liq frozen linear model is numerically unstable on Oct-2025 funding spike (model-form limitation, not a code bug).",
+    "generated": "20261112T123420Z",
+    "last_checked": "2026-11-12T16:52:59Z",
+    "next_action_heavy": "Implement scripts/early4h_liq_glm_robust.py and execute FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 (see AGENT_HANDOFF.md section 4). Prereg ALREADY FROZEN: research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json (sha f06060c7...). Reuse corrected panel research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet (sha 08c60803...). Same Poisson/quasi-Poisson log-link IRLS, but clip fundingRate/abs_fund_pct/premium/ema_dist to the train [min,max] then standardize by train mean/std; target t1_liq only. Emit evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.{md,json} with a numerical-stability guard. If NOT_MET: preserve the null. If INCONCLUSIVE again: timestamped evidenced structural-blocker doc with exact failing minima, then STOP. Do NOT re-fetch caches, re-run the parent GLM, re-probe 1h candles, or reopen sealed verdicts.",
+    "next_unfinished_task": "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST_IMPLEMENT_EVAL",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "This campaign has a frozen prereg but no implementation/eval yet (sufficient on its own)",
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation)",
+      "HL 2026-11+ depth >=100d AND verified post-2026-10-31 observed labels",
+      "New admissible liquidation-label source (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "supersedes_prior_next_task_entries": [
+      "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
+      "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
+      "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
+      "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
+      "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+    ],
+    "task": "FCLR_EARLY4H_2025H1_LIQ_GLM_ROBUST"
   },
-  "track_c_h1": {
-   "status": "CONCLUDED_NOT_SUPPORTED",
-   "note": "All claim-worthy local panels exhausted (FCLR-003/008/009/012-V/013/014). Overlay INELIGIBLE."
+  {
+    "artifact_churn_note": "2026-11-12T07:34:18Z: FCLR-NEXT campaign installed as the sole authoritative next task, superseding all prior rank-0 next-task entries. Prior session (2026-11-12T07:31:59Z) monitor probe completed and evidenced INELIGIBLE (`research_state/new_data_monitor_probe_20261112T073159Z.{md,json}`: HL ~12.0d < 100d, no post-2026-10-31 ironflow labels). Gate 4 trigger absent (verified, external/legal). Stale rank-0 frontier entries (TRACKA_ALT_VOLATILITY / TRACKA_EXPANSION_ROBUSTNESS / BOUNDED_NEW_DATA_DISCOVERY / EXTERNAL_NEW_DATA_SOURCE) are sealed NOT_MET/FRAGILE or just-executed ineligible probes — preserved as history, not relitigated. H2 registry corrected to EXPLORATORY_ONLY/PARTIAL (`research_state/h002_replication_report.md`).",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal, not agent-removable — do not wait/poll). HL 2026-11+ ~12d insufficient; no verified post-2026-10-31 observed liquidation labels. All cached-data designs sealed/exhausted. No untested admissible cached-data experiment remains.",
+    "generated": "20261112T073418Z",
+    "last_checked": "20261112T073418Z",
+    "next_action_heavy": "FCLR-NEXT campaign (execute in order): (1) Gate 4 check — absent now; Branch 1 only on valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). (2) Bounded alternative liquidation-label source discovery per RESEARCH_PROMPT §5 using scripts/hunt_alternative_liquidation_sources.py → research_state/data_source_registry_alt_hunt.json, research_state/alt_source_deep_review_latest.md, research_state/url_probe_cache.json, research_state/hf_search_cache.json. Requirement for claim-worthy consideration: ≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only, venue-consistent (no Binance/2024 conflation). (3) If a source passes smoke test: §16 admissibility audit BEFORE any preregistration/outcome computation (research_state/<source>_admissibility_audit_<UTC>.{md,json}); if admissible → freeze prereg → build/eval/verdict → atomic state updates under a NEW experiment ID. (4) If no source passes: timestamped probe evidence with exact failing minima per source, experiment_frontier update, clean stop — no repeated no-op probes. (5) HL/ironflow reprobe only when plausibly eligible (HL ≥100d AND verified post-2026-10-31 observed labels); not eligible now; no polling. No status-only output.",
+    "next_unfinished_task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "New admissible liquidation-label source verified (≥5 symbols, ≥1 complete month or ≥3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels)",
+      "HL 2026-11+ depth ≥100d AND verified post-2026-10-31 observed labels (bounded reprobe)"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "supersedes_prior_next_task_entries": [
+      "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
+      "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
+      "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
+      "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+    ],
+    "task": "FCLR_NEXT_ALTERNATIVE_LIQUIDATION_SOURCE_DISCOVERY"
   },
-  "canonical_verification": [
-   "python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v",
-   "python -c \"from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])\""
-  ],
-  "updated_at": "2026-11-11T23:59:55Z"
- }
+  {
+    "artifact_churn_note": "20261112T07:00:00Z: §16 admissibility audit of metpie/hyperliquid-liquidation-events 2025-03-22..2025-05-25 joined to HL funding+candles COMPLETED — INADMISSIBLE. Evidence: HL 4h candles fetchable (390 rows/symbol, complete window, 11 top symbols), HL fundingHistory paginatable (BTC 1,548 rows full window), metpie ≥5 instruments PASS (11 coins ≥5,000 events), RV/context features computable. Primary failing criterion: block feasibility — window ~64.1 days < 90 days minimum for ≥3 non-overlapping 30-day OOS test blocks; structurally infeasible under any split configuration. Artifacts: `research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.{md,json}`. Bounded reprobe (step 3) NOT currently eligible: HL 2026-11+ ~11.2 days (<100d threshold), no verified post-2026-10-31 observed liquidation labels (ironflow HF through 2026-10 only). No polling. Gate 4 trigger absent (verified).",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). All cached-data designs exhausted/sealed. metpie INADMISSIBLE (block-feasibility). HL 2026-11 window ~11.2d insufficient; no verified post-2026-10-31 observed labels. No untested admissible cached-data experiment remains.",
+    "generated": "20261112T070000Z",
+    "last_checked": "20261112T070000Z",
+    "next_action_heavy": "Gate 4 Branch 1 only if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Else execute bounded new-data discovery/monitor probes: HL 2026-11+ candle/funding depth (≥100d required), ironflow/hyperliquid-liquidations HF lastModified/event files for extension beyond 2026-10-31 (verified observed labels required). Emit timestamped probe/audit artifact with evidence; if newly admissible, freeze prereg BEFORE outcomes then build/eval+verdict+atomic state updates. If ineligible, document exact failing minima and stop cleanly. No status-only output, no polling, no sealed-record reopening.",
+    "next_unfinished_task": "BOUNDED_NEW_DATA_DISCOVERY_AND_MONITOR_PROBES",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "New admissible data source/window verified (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "task": "GATE4_OR_NEW_DATA_SOURCE_MONITOR"
+  },
+  {
+    "artifact_churn_note": "20261112T044425Z: Gate 4 trigger absent (verified). Bounded external probes re-run: HL API 2026-11-01..now HTTP 269 candles+269 funding/coin (9 coins, ~11.2d, insufficient for >=3x30d blocks); ironflow/hyperliquid-liquidations HF lastModified 2026-11-07T10:18:25Z events 2025-05..2026-10 only (no post-2026-10-31 labels); metpie 2025-03-22..2025-05-25 historical unaudited. No verifiably admissible new external source. Evidence: research_state/new_data_external_probe_audit_20261112T044425Z.{md,json}, external_probe_raw_20261112T044425Z.json. Sealed records preserved.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal). No verifiably admissible new data now: HL 2026-11 window ~10d insufficient, no post-2026-10-31 observed liquidation labels verified. All cached-data designs exhausted/sealed.",
+    "generated": "20261112T044425Z",
+    "last_checked": "20261112T044425Z",
+    "next_action_heavy": "If Gate 4 valid RESOLVED_VERIFIED trigger appears, execute Branch 1. Else run bounded evidence-backed reprobe/monitor when plausibly eligible: HL 2026-11+ candles+funding when >=100d available AND ironflow HF for post-2026-10-31 observed liquidation labels; and/or full §16 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL features if venue-consistent >=5 sym >=3x30d blocks feasible. If admissible, freeze prereg BEFORE outcomes then build/eval+verdict+state updates. If not, emit timestamped probe/audit evidence. No status-only output, no polling.",
+    "next_unfinished_task": "EXTERNAL_NEW_DATA_SOURCE_MONITOR_AND_REPROBE",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "New admissible data source appears (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license)"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "task": "GATE4_OR_NEW_DATA_SOURCE"
+  },
+  {
+    "artifact_churn_note": "20261112T015119Z: Completed TRACKA-EXP-ROBUST-20261112T015119Z robustness/falsification campaign for sealed PASS TRACKA-HL-EXPANSION-20261111T195500Z. LOIO: 4/8 PASS (need >=6) -> FAIL. Placebo/Permutation: true rel 19.04% <= 95th pctl 21.10% -> FAIL. Bootstrap Settings: 3/3 PASS. Overall verdict: FRAGILE. Prereg frozen pre-outcomes: tracka_prereg_expansion_robust_20261112T014515Z.json. State updated; sealed records preserved.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed (FRAGILE on robustness); Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated.",
+    "generated": "20261112T015119Z",
+    "last_checked": "20261112T015119Z",
+    "next_action_heavy": "Robustness campaign FRAGILE: preregister and attempt next best admissible untested claim in-session — alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits (per prereg fallback). If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
+    "next_unfinished_task": "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "Complete TRACKA-ALT-VOL prereg+eval+verdict; preregister next admissible claim"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "task": "TRACKA_ALT_VOLATILITY_PREREG_AND_EVAL"
+  },
+  {
+    "artifact_churn_note": "20261112T005111Z: Completed TRACKA-VOL-FAMILY-20261112T005111Z multiplicity evaluation. Primary 24h + secondary 6h/72h/168h horizons evaluated on frozen panel. Family-wise gate: NOT_MET. Holm correction applied across 12 comparisons. State updated; sealed records preserved.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed; Volatility family evaluated.",
+    "generated": "20261112T005111Z",
+    "last_checked": "20261112T005111Z",
+    "next_action_heavy": "If volatility family NOT_MET: execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze new prereg BEFORE outcomes specifying ex-ante checks (leave-one-instrument-out, placebo/permutation on funding features fixed seed, alternative block/bootstrap settings) with pass/falsification criteria; emit verdict + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
+    "next_unfinished_task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "Complete TRACKA-EXP-ROBUST prereg+checks+verdict; preregister next admissible claim"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+  },
+  {
+    "artifact_churn_note": "2026-11-11T23:59:55Z: Completed TRACKA-VOL-20261111T234918Z (GAP-VOLATILITY-UNTESTED-ADMISSIBLE-PANELS). Prereg frozen pre-outcomes; cached Hyperliquid 9-coin panel 2026-05..2026-10 built/evaluated. Verdict NOT_MET (C2 vs B1 QLIKE rel -1.37%, CI crosses zero, n=19233, 9 instruments, 3 blocks). State updated; sealed records preserved. Gate 4 external-blocked.",
+    "blockers": "Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (human/legal Binance terms evidence required, fabricated=false). Track C/H1/Track B sealed NOT_SUPPORTED; Track A 9-symbol 2026-05..2026-10 NOT_MET closed; Track A early 2025-11..2026-04 INADMISSIBLE; Track A expansion PASS sealed; Volatility TRACKA-VOL-20261111T234918Z NOT_MET closed. No Binance/2024 conflation.",
+    "generated": "2026-11-11T23:59:55Z",
+    "last_checked": "2026-11-11T23:59:55Z",
+    "next_action_heavy": "Execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze `research_state/tracka_prereg_expansion_robust_20261111T235955Z.{json,md}` BEFORE any robustness outcome computation specifying ex-ante checks (e.g. leave-one-instrument-out sensitivity, placebo/permutation on funding features with fixed seed, and alternative pre-specified block/bootstrap settings) with pass/falsification criteria, then run all checks and emit `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261111T235955Z.md` (ROBUST/FRAGILE/INCONCLUSIVE) + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1. Do not relitigate sealed verdicts or threshold-shop.",
+    "next_unfinished_task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL",
+    "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+    "rank": 0,
+    "resume_triggers": [
+      "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
+      "Complete TRACKA-EXP-ROBUST-20261111T235955Z prereg+checks+verdict; if ROBUST/FRAGILE/INCONCLUSIVE documented, preregister next admissible untested claim (e.g. alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits) and execute in-session"
+    ],
+    "status": "ACTIVE_HEAVY_CAMPAIGN",
+    "task": "TRACKA_EXPANSION_ROBUSTNESS_PREREG_AND_EVAL"
+  },
+  {
+    "track_a": {
+      "status": "SYMBOL_EXPANSION_PASS_2026M05M10_ROBUSTNESS_FRAGILE__VOLATILITY_EXHAUSTED__AWAIT_GATE4_OR_NEW_DATA",
+      "note": "ironflow/hyperliquid-liquidations (CC BY 4.0) observed labels; successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes. Bounded first-time unauthenticated Hyperliquid candleSnapshot (2026-05..2026-10, 9 symbols) cached; RV-augmented panel built (1656 buckets, 1647 w/ RV24h, 1434 w/ label, 9 symbols). Pre-registered C2 vs B1 QLIKE on next-24h liquidation intensity: C2 mean 274.51 vs B1 72.13 (n=693, 3 test blocks, 9 instruments), diff +202.38, 95% CI [15.42,443.78] (excludes zero in wrong direction), rel reduction -280.56% -> forecast gate NOT_MET. No threshold-shopping, no Binance/2024 conflation, no modeled/proxy labels. | 2026-11-11T16:32:29Z gap audit selected GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1 for new prereg+bounded candle acquisition (no outcomes).",
+      "experiment_id": "TRACKA-HL-S-20261111T133430Z",
+      "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
+      "data_source": "ironflow/hyperliquid-liquidations",
+      "coverage_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+      "license": "CC BY 4.0",
+      "unauthenticated": true,
+      "observed_only": true,
+      "terminal_verdict": "research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md",
+      "panel_artifact": "research_state/tracka_hl_aligned_panel_with_rv_20261111T160124Z.parquet",
+      "panel_report": "research_state/tracka_hl_panel_with_rv_build_report_20261111T160124Z.json",
+      "prior_terminal_verdict": "research_state/evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md",
+      "candle_fetch_report": "research_state/tracka_hl_candle_fetch_report_20261111T160053Z.json",
+      "early_campaign": {
+        "experiment_id": "TRACKA-HL-EARLY-20261111T191958Z",
+        "campaign": "GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1",
+        "status": "INADMISSIBLE_DOCUMENTED_EVIDENCE",
+        "prereg_document": "research_state/tracka_prereg_hyperliquid_early_20261111T191958Z.json",
+        "verdict": "research_state/evaluation_summary_TRACKA-HL-early-infeasible-20261111T193500Z.md",
+        "acquisition_report": "research_state/tracka_hl_early_candle_fetch_report_20261111T193140Z.json",
+        "window": "2025-11-01T00:00:00Z .. 2026-04-30T23:59:59Z",
+        "symbols": [
+          "BTC",
+          "ETH",
+          "BNB",
+          "SOL",
+          "XRP",
+          "AVAX",
+          "DOGE",
+          "LINK",
+          "SUI"
+        ],
+        "evidence": {
+          "labels": "cached ironflow_events 2025-11..2026-04 present (PASS)",
+          "funding": "cached hyperliquid_funding 9 coins ~2025-11-01..2026-10-30 covers window (PASS)",
+          "candles_rv": "NOT cached 2025-11..2026-04; bounded first-time acquisition executed (54 calls, HTTP 200 all): 2025-11..2026-03 empty [] for all 9 coins; 2026-04 partial ~327-328 rows/coin; RV24h/B1 not computable -> min 3 test blocks and baseline unsatisfiable (FAIL)"
+        },
+        "pivot": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 (new prereg, frozen ex-ante symbol selection/event-adequacy, 2026-05..2026-10, new universe/design; closed 9-symbol NOT_MET panel NOT relitigated)"
+      },
+      "expansion_campaign": {
+        "experiment_id": "TRACKA-HL-EXPANSION-20261111T195500Z",
+        "campaign": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
+        "status": "COMPLETED_PASS_ROBUSTNESS_FRAGILE",
+        "prereg_document": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+        "universe_artifact": "research_state/tracka_hl_expansion_universe_20261111T201958Z.json",
+        "acquisition_report": "research_state/tracka_hl_expansion_acquisition_report_20261111T201958Z.json",
+        "panel_artifact": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+        "panel_report": "research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json",
+        "verdict": "research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md",
+        "robustness_verdict": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md",
+        "robustness_prereg": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
+        "robustness_result": "FRAGILE",
+        "robustness_checks": {
+          "LOIO": "FAIL (4/8 pass, need >=6)",
+          "PLACEBO_PERMUTATION": "FAIL (true rel 19.04% <= 95th pctl 21.10%)",
+          "BOOTSTRAP_SETTINGS": "PASS (3/3 settings pass)"
+        },
+        "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
+        "symbols": [
+          "AAVE",
+          "ADA",
+          "BCH",
+          "CRV",
+          "LTC",
+          "NEAR",
+          "UNI",
+          "ZEC"
+        ],
+        "primary_contrast": "C2_vs_B1",
+        "metric": "QLIKE_next_24h_observed_liquidation_intensity",
+        "result": {
+          "rel_reduction_pct": 19.03709721199804,
+          "ci": [
+            -5.0881020797243135,
+            -0.4776599249731716
+          ],
+          "paired_n": 593,
+          "test_blocks": 3,
+          "instruments": 8
+        },
+        "notes": "Observed Hyperliquid ironflow labels only; no Binance/2024 conflation; prereg frozen pre-outcomes; bounded acquisition with provenance; different universe/design from closed 9-symbol NOT_MET panel. Robustness campaign FRAGILE: LOIO and Placebo/Permutation checks failed."
+      },
+      "volatility_campaign": {
+        "experiment_id": "TRACKA-VOL-20261111T234918Z",
+        "status": "NOT_MET",
+        "prereg": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+        "verdict": "research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.md",
+        "panel": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
+        "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
+        "instruments": 9,
+        "test_blocks": 3,
+        "rel_reduction_pct": -1.3665270546001616,
+        "ci95": [
+          -0.014248708685881961,
+          0.0021159967844719407
+        ]
+      },
+      "volatility_family_campaign": {
+        "experiment_id": "TRACKA-VOL-FAMILY-20261112T005111Z",
+        "status": "NOT_MET",
+        "prereg": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+        "verdict": "research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md",
+        "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z",
+        "instruments": 9,
+        "test_blocks": 3,
+        "horizons_evaluated": [
+          "6h",
+          "24h",
+          "72h",
+          "168h"
+        ],
+        "total_comparisons": 12,
+        "multiplicity_correction": "Holm",
+        "primary_pass": false
+      },
+      "alt_volatility_campaign": {
+        "experiment_id": "TRACKA-ALT-VOL-20261112T020322Z",
+        "status": "NOT_MET",
+        "prereg": "research_state/tracka_prereg_alt_volatility_20261112T015546Z.json",
+        "verdict": "research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md",
+        "panel": "research_state/tracka_vol_panel_20261111T234918Z.parquet",
+        "window": "2026-05-01T00:00:00Z..2026-10-31T23:59:59Z (prereg specified 2025-11..2026-10; data only available 2026-05..2026-10)",
+        "instruments": 9,
+        "test_blocks": 5,
+        "target_horizon": "6h",
+        "model": "C2_ALT (B1 + fundingRate, abs_funding, premium, ema_dist, rv72h)",
+        "rel_reduction_pct": 5.77,
+        "ci95": [
+          -0.121154,
+          0.033865
+        ],
+        "gate": "NOT_MET (materiality PASS, CI_excludes_zero FAIL)",
+        "note": "Prereg deviation: candle data only available 2026-05..2026-10; splits adjusted to 5 test blocks. C2_ALT adds rv72h feature. Materiality gate passed (5.77% >= 2%) but CI crosses zero."
+      }
+    },
+    "track_b": {
+      "status": "CONFIRMATORY_COMPLETE_TB2_GATE_NOT_MET_ALL_ADMISSIBLE_ROUTES_EXHAUSTED",
+      "completed_windows": [
+        {
+          "experiment_id": "TRACKB-20251110T154307Z",
+          "gate": "NOT_MET",
+          "verdict": "NOT_SUPPORTED",
+          "note": "Modeled breach proxy only; C2 vs B1 rel improvement 1.50% < 2%, CI crosses zero."
+        },
+        {
+          "experiment_id": "trackb_TB1_20261110T173838Z",
+          "gate": "NOT_MET",
+          "verdict": "NOT_SUPPORTED_DEGENERATE_TEST_SET_INADMISSIBLE",
+          "note": "Frozen test split 2026-06-26..2026-10-31 had zero synthetic breaches (long 5x H=24h) across all 5 symbols; confirmatory evaluation impossible."
+        },
+        {
+          "experiment_id": "trackb_TB2_20261110T190405Z",
+          "gate": "NOT_MET",
+          "verdict": "NOT_SUPPORTED",
+          "artifact": "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md",
+          "timestamp_utc": "2026-11-10T20:00:21Z",
+          "note": "Event-adequate confirmatory on 2024-01-01..2024-09-30 (5 symbols, h168_long_10x_m0). Test positives 619/5040 (12.3%). Pooled Log Loss B1=0.292447->C2=0.287540 (+1.68% < 2% floor). 95% CI [-0.010997,0.003094] crosses zero, Holm fails, 2 test blocks <3. Overlay INELIGIBLE. Modeled proxy only."
+        }
+      ]
+    },
+    "track_c_h1": {
+      "status": "CONCLUDED_NOT_SUPPORTED",
+      "note": "All claim-worthy local panels exhausted (FCLR-003/008/009/012-V/013/014). Overlay INELIGIBLE."
+    },
+    "canonical_verification": [
+      "python -m unittest tests.test_volatility_features_splits tests.test_synthetic_boundary_labels tests.test_trackc_panel_admissibility_audit tests.test_trackc_funding_schema_audit tests.test_trackc_provenance_lineage -v",
+      "python -c \"from scripts.trackc_provenance_lineage import verify_paths_with_manifests; from pathlib import Path; res=verify_paths_with_manifests([str(p) for p in Path('research_state/data_cache').rglob('*-fundingRate-*.csv')], repo_root=Path('.')); assert res['provenance_verified'] and res['unmapped_count']==0; print('PROVENANCE_OK', res['files_considered'])\""
+    ],
+    "updated_at": "2026-11-11T23:59:55Z"
+  }
 ]
