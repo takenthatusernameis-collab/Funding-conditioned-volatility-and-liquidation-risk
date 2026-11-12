@@ -1,7 +1,7 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Authoritative handoff timestamp (UTC):** 2026-11-12T09:45:15Z (supersedes all prior handoffs/checkpoints; this file is the sole durable handoff)
-**Message time (UTC):** 2026-11-12T09:45:15Z
+**Authoritative handoff timestamp (UTC):** 2026-11-12T09:49:32Z (supersedes all prior handoffs/checkpoints; this file is the sole durable handoff)
+**Message time (UTC):** 2026-11-12T09:49:32Z
 
 ## Repo-priority P0 (inferred from repository name)
 `Funding-conditioned-volatility-and-liquidation-risk` sets priority: **(1) funding-conditioned volatility forecasting (Track C), (2) observed liquidation risk (Track A), (3) modeled boundary breaches (Track B)**. Every session must produce **heavy, claim-advancing work** or a **timestamped evidenced clean stop**. Status-only output, polling, re-probes of already-assessed sources, and cosmetic edits are banned.
