@@ -50,6 +50,14 @@ ARM_A_EVAL_GLOB = "evaluation_summary_TRACKA-VOL-FULLHIST-*.json"
 ARM_B_EVAL_GLOB = "evaluation_summary_TRACKA-LIQ-XSEC-*.json"
 
 BULK_DATASETS = ("candles_1h", "funding", "open_interest")
+
+# Must stay in lockstep with DATASETS in scripts/fclr_ironflow_bulk.py; used by the
+# fixture writer so tests build schema-valid objects without importing pyarrow here.
+BULK_REQUIRED_COLUMNS = {
+    "candles_1h": ("timestamp", "market", "close"),
+    "funding": ("timestamp", "market", "funding_rate"),
+    "open_interest": ("timestamp", "market", "open_interest_usd"),
+}
 BULK_MONTHS = (
     "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10",
     "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04",
@@ -107,12 +115,18 @@ def check_bulk_cache(root: Path = REPO) -> List[Dict[str, object]]:
     bulk = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(bulk)
 
+    # A0 must be evaluated against `root`, not the real repo cache: otherwise the
+    # definition-of-done gate cannot be validated hermetically and every fixture
+    # run reports the live cache state instead of the candidate root.
+    cache_root = _rs(root) / "data_cache" / "ironflow_bulk"
+
     out: List[Dict[str, object]] = []
     bad: List[str] = []
     for dataset in BULK_DATASETS:
         for month in BULK_MONTHS:
             try:
-                info = bulk.verify_object(dataset, month, require_exists=False)
+                info = bulk.verify_object(
+                    dataset, month, require_exists=False, cache_root=cache_root)
             except Exception as exc:  # schema/disk failure
                 bad.append(f"{dataset}/{month}: {exc}")
                 continue

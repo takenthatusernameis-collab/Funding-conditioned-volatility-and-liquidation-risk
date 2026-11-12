@@ -158,16 +158,22 @@ def url_for(dataset: str, month: str) -> str:
     return f"{base}/{tmpl.format(month=month)}"
 
 
-def local_path(dataset: str, month: str) -> Path:
-    return CACHE / dataset / f"{month}.parquet"
+def _cache_for(cache_root: Optional[Path]) -> Path:
+    return Path(cache_root) if cache_root is not None else CACHE
 
 
-def sidecar_path(dataset: str, month: str) -> Path:
-    return local_path(dataset, month).with_suffix(local_path(dataset, month).suffix + ".sha256")
+def local_path(dataset: str, month: str, cache_root: Optional[Path] = None) -> Path:
+    return _cache_for(cache_root) / dataset / f"{month}.parquet"
 
 
-def accessed_path(dataset: str, month: str) -> Path:
-    return local_path(dataset, month).with_suffix(".accessed.json")
+def sidecar_path(dataset: str, month: str, cache_root: Optional[Path] = None) -> Path:
+    p = local_path(dataset, month, cache_root)
+    return p.with_suffix(p.suffix + ".sha256")
+
+
+def accessed_path(dataset: str, month: str, cache_root: Optional[Path] = None) -> Path:
+    p = local_path(dataset, month, cache_root)
+    return p.with_suffix(".accessed.json")
 
 
 def validate_schema(dataset: str, path: Path) -> Dict[str, object]:
@@ -189,22 +195,23 @@ def validate_schema(dataset: str, path: Path) -> Dict[str, object]:
     return {"columns": names, "rows": rows, "required_present": list(required)}
 
 
-def read_sidecar(dataset: str, month: str) -> Optional[str]:
-    p = sidecar_path(dataset, month)
+def read_sidecar(dataset: str, month: str, cache_root: Optional[Path] = None) -> Optional[str]:
+    p = sidecar_path(dataset, month, cache_root)
     if not p.exists():
         return None
     txt = p.read_text().strip()
     return txt.split()[0] if txt else None
 
 
-def verify_object(dataset: str, month: str, *, require_exists: bool = True) -> Dict[str, object]:
-    path = local_path(dataset, month)
+def verify_object(dataset: str, month: str, *, require_exists: bool = True,
+                  cache_root: Optional[Path] = None) -> Dict[str, object]:
+    path = local_path(dataset, month, cache_root)
     if not path.exists():
         if require_exists:
             raise BulkError(f"missing cached object: {path}")
         return {"dataset": dataset, "month": month, "status": "ABSENT"}
     digest = sha256_file(path)
-    expected = read_sidecar(dataset, month)
+    expected = read_sidecar(dataset, month, cache_root)
     status = "OK"
     problems: List[str] = []
     if expected is None:

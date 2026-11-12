@@ -59,6 +59,61 @@ class GateTestCase(unittest.TestCase):
             }
         (self.root / "research_state" / f"{stem}.json").write_text(json.dumps(payload))
 
+    def _install_bulk_script(self) -> None:
+        (self.root / "scripts").mkdir(parents=True, exist_ok=True)
+        (self.root / "scripts" / "fclr_ironflow_bulk.py").write_bytes(SCRIPT.read_bytes())
+
+    def _write_bulk_object(self, dataset: str, month: str) -> None:
+        """Write a real, schema-valid one-row parquet object plus its sidecars."""
+        import pyarrow as pa
+        import pyarrow.parquet as pq
+
+        cache = self.root / "research_state" / "data_cache" / "ironflow_bulk" / dataset
+        cache.mkdir(parents=True, exist_ok=True)
+        columns = gate.BULK_REQUIRED_COLUMNS[dataset]
+        table = pa.table({c: pa.array([1], type=pa.int64()) for c in columns})
+        p = cache / f"{month}.parquet"
+        pq.write_table(table, p)
+        digest = gate.sha256_file(p)
+        p.with_suffix(".parquet.sha256").write_text(digest + "\n")
+        p.with_suffix(".parquet.accessed.json").write_text(
+            json.dumps({"dataset": dataset, "month": month, "sha256": digest}))
+
+
+class TestBulkCacheCheck(GateTestCase):
+    def test_missing_script_fails(self):
+        checks = gate.check_bulk_cache(self.root)
+        self.assertEqual([c["check"] for c in checks], ["A0"])
+        self.assertFalse(checks[0]["ok"])
+        self.assertIn("missing", checks[0]["detail"])
+
+    def test_empty_cache_is_absent_not_ok(self):
+        self._install_bulk_script()
+        checks = gate.check_bulk_cache(self.root)
+        self.assertEqual([c["check"] for c in checks], ["A0"])
+        self.assertFalse(checks[0]["ok"])
+        self.assertIn("ABSENT", checks[0]["detail"])
+
+    def test_complete_cache_passes(self):
+        self._install_bulk_script()
+        for dataset in gate.BULK_DATASETS:
+            for month in gate.BULK_MONTHS:
+                self._write_bulk_object(dataset, month)
+        checks = gate.check_bulk_cache(self.root)
+        self.assertTrue(checks[0]["ok"], checks[0]["detail"])
+
+    def test_hash_mismatch_fails(self):
+        self._install_bulk_script()
+        for dataset in gate.BULK_DATASETS:
+            for month in gate.BULK_MONTHS:
+                self._write_bulk_object(dataset, month)
+        victim = (self.root / "research_state" / "data_cache" / "ironflow_bulk"
+                  / "funding" / "2025-06.parquet.sha256")
+        victim.write_text("0" * 64 + "\n")
+        checks = gate.check_bulk_cache(self.root)
+        self.assertFalse(checks[0]["ok"])
+        self.assertIn("HASH_MISMATCH", checks[0]["detail"])
+
 
 class TestPreregCheck(GateTestCase):
     def test_missing_prereg_fails(self):
