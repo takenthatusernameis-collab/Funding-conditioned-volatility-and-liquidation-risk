@@ -1,7 +1,7 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-13T15:24:50Z
+**Handoff timestamp (UTC):** 2026-11-13T16:21:13Z
 **Status:** `EXECUTABLE_HEAVY_WORK_REMAINS` — one cached, never-scored, funding-conditioned volatility cell is still unexecuted.
 
 **THE SINGLE MANDATORY TASK: execute `FCLR-FWD-VOL-2026Q1Q2-FWD`.**
@@ -182,6 +182,18 @@ ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || ec
 ---
 
 ## SESSION LOG (append-only; newest first)
+
+## 2026-11-13T16:21:13Z — Kilo session: handoff re-verified and hardened as single durable initial task; no internal bottlenecks remain; FCLR-FWD-VOL-2026Q1Q2-FWD still unexecuted (mandatory)
+
+- **State re-verified (no new artifacts, no sealed/raw/cache/workflow mutations):** `python3 scripts/next_campaign_status.py` → `CAMPAIGN STATUS: executable heavy work REMAINS`; Hyperliquid `2026-01-18..2026-04-30 span=103d FEASIBLE (forward-reduced: 60/7/3x10)`. No `*2026Q1Q2-FWD*`/`*2026q1q2_fwd*` prereg, executor, panel, eval, or gate exists. `FOCUS_CAMPAIGN.md`/`HANDOFF_NEXT_SESSION.md`/`NEXT_SESSION_TASK.md` remain redirects to this file.
+- **Caches/gates/tests spot-checked:** ironflow bulk months present (`candles_1h` 2025-05..2026-04 incl. 2026-01..04); manifest 48 objects `status=OK`. Targeted campaign tests `tests.test_next_campaign_status` + `tests.test_fclr_next_campaign_gate` → **19/19 OK** (this session). Prior handoff-verified checks remain: 8 terminal gates `GATE: PASS`, 138/138 targeted suite.
+- **Bottlenecks:** none internal. Gate 4 Branch 1 external trigger absent (`NO_VALID_GATE4_TRIGGER`, do not poll). Alt-source scan/deep-review 2026-11-13T09:01Z: no new GO unauthenticated observed-liquidation candidate. Per-run design feasibility already encoded (`MIN_DESIGN_DAYS=127`, `MIN_FORWARD_DESIGN_DAYS=97`, `BULK_TESTED_WINDOWS`).
+- **Mandatory focus (highest IG per free compute, cannot be avoided):** execute `FCLR-FWD-VOL-2026Q1Q2-FWD` exactly per §IMMEDIATE TASK P1 — freeze prereg pre-outcomes (strict 158-instrument complete-coverage universe), run canonical C2-vs-B1/QLIKE/2000-rep bootstrap/500-rep placebo/LOIO/Holm/leakage/embargo, emit eval + gate, update `hypothesis_registry.json`/`experiment_frontier.json`, add window to `BULK_TESTED_WINDOWS`. Status-only and discovery-only sessions forbidden while unexecuted.
+- **Evidence supported / contradicted / unknown:** supported — untouched, label-bearing, funding-backed 103-day Hyperliquid window is feasible and pipeline smoke-proven; FCLR-011 has no disjoint replication (6 prior cells `NOT_REPLICATED`/`NOT_MET`). Contradicted — "cache exhausted", "180/≥2400 universe" (correct 158 strict), and claim of unfixed `fclr_next_campaign_gate` breakage. Unknown — whether funding-conditioned volatility signal replicates here (cell not yet canonically run).
+- **Strongest alternative explanation:** funding-conditioned volatility features carry no stable out-of-sample 24h RV signal; sealed FCLR-011 (+4.94%, 2026-05..2026-08) is a single-regime artifact.
+- **Dominant limitation:** single favourable period vs all disjoint tests null; ironflow OI gaps preclude B2/C3 in this window (primary B1/C1/C2 unaffected).
+- **Falsifying next test:** canonical `FCLR-FWD-VOL-2026Q1Q2-FWD` (158 instruments, 60/7/3×10, full reps); rel < 2% or CI crossing zero is a strong generalizable negative.
+- **Artifacts/commands:** `python3 scripts/next_campaign_status.py` (FEASIBLE); `python3 -m unittest tests.test_next_campaign_status tests.test_fclr_next_campaign_gate` (19/19 OK); `ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"`.
 
 ## 2026-11-13T16:18:31Z — Kilo session: handoff re-verified; no internal bottlenecks remain; mandatory cell FCLR-FWD-VOL-2026Q1Q2-FWD still unexecuted and is the sole next task
 
