@@ -1,4 +1,6 @@
-# AGENT HANDOFF — 2026-11-13T19:17:03Z (authoritative)
+# AGENT HANDOFF — 2026-11-13T19:19:03Z (authoritative, single durable handoff)
+
+**Initial task for next agentic session (read this first):** execute the Phase 0→4 campaign below to produce a **terminal, evidence-backed** Track A outcome (GO candidate → prereg → guarded execution → sealed evaluation, or timestamped NO_GO admissibility evidence). Do not stop at planning or status reruns.
 
 **Project:** Funding-conditioned volatility and liquidation risk (FCLR)
 **Repo root:** `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`
@@ -9,15 +11,16 @@ Core claim: extreme funding/volatility/price-dislocation features improve **out-
 Cached/pre-registered volatility & liquidation confirm/cross cells are **terminal with gate PASS** (LIQ-010-CONFIRM NOT_REPLICATED; EXP-ROBUST-REDO FRAGILE; FWD-VOL 2024Q4/2025/2025H2/2025Q1Q2-CROSS NOT_REPLICATED). `research_state/alt_source_deep_review_latest.md` (2026-11-13T17:12:25Z) records **0 GO/admissible new observed-liquidation sources** from that bounded hunt.
 **Highest-value unfinished frontier:** unlock Track A on an admissible **Hyperliquid observed-liquidations** candidate via the wired seam (month ≥ 2026-11, events+fills, machine-verifiable provenance/label/coverage, no modeled/proxy conflation). No other cached claim-worthy design remains open.
 
-## 2) Current verified state (2026-11-13T19:13:17Z)
+## 2) Current verified state (2026-11-13T19:19:03Z)
 - `python scripts/fclr_next_campaign_gate.py --json` → `ok: true` (all listed terminal cells present/consistent).
 - `admissible_seam_check(candidate_path=None)` (`scripts.tracka_resume_check`) → `pass: true`, `status: NO_CANDIDATE_PENDING`, `reason_code: ADMISSIBLE_SEAM_WIRED_AWAITING_CANDIDATE` (fail-closed, offline, manifest-only, `network=false`, `reads_parquet=false`, `reads_outcomes=false`, `writes_real_research_state=false`).
-- No `*2026-11*hyperliquid*` / candidate manifest found in `research_state/`.
+- No `*2026-11*hyperliquid*` candidate manifest / no `tracka_admissibility_no_go_*` artifact found in `research_state/`.
 - Harness CLIs present: `scripts/fclr_next_campaign_gate.py`, `scripts/tracka_resume_check.py`, `scripts/tracka_resume_gate.py`, `scripts/tracka_operator_report.py`, `scripts/fclr010_guarded_entry.py`.
 
 ## 3) Bottlenecks (remove to make progress)
-- **P0 MATERIAL BLOCKER:** no admissible candidate manifest for Hyperliquid observed liquidations (month ≥ 2026-11, events+fills roles, verifiable provenance/license/label/coverage; ≥1 complete month or ≥3 non-overlapping 30-day blocks; ≥5 instruments as required; venue-consistent, no modeled/proxy/DeFi conflation). Track A execution is correctly fail-closed until seam returns GO.
+- **P0 MATERIAL BLOCKER (active, 2026-11-13T19:19:03Z):** no admissible candidate manifest for Hyperliquid observed liquidations (month ≥ 2026-11, events+fills roles, verifiable provenance/license/label/coverage; ≥1 complete month or ≥3 non-overlapping 30-day blocks; ≥5 instruments as required; venue-consistent, no modeled/proxy/DeFi conflation). Track A execution is correctly fail-closed until seam returns GO.
 - **No infra blockers identified:** gate/seam checks pass; operator/gate/report path is wired. Do **not** spend sessions on status-only reruns, re-probing terminal cells, or polling without new evidence.
+- **Hygiene blocker:** multiple stale `FOCUS_CAMPAIGN`/`HANDOFF_NEXT_SESSION`/`NEXT_SESSION_TASK` artifacts exist under `research_state/` (e.g. `research_state/FOCUS_CAMPAIGN.md`, `research_state/NEXT_SESSION_TASK.md`) — **ignore them**; only this root `AGENT_HANDOFF.md` is authoritative.
 
 ## 4) NEXT CAMPAIGN — mandatory heavy work (do not stop at planning)
 **Objective:** produce a terminal, evidence-backed Track A outcome: either (A) admitted GO candidate → frozen prereg → guarded execution → sealed evaluation artifacts, or (B) timestamped NO_GO with per-minimum admissibility evidence proving no candidate is admissible. No threshold shopping; no silent skips.
@@ -56,4 +59,10 @@ Cached/pre-registered volatility & liquidation confirm/cross cells are **termina
 5. Do not modify `.github/workflows`.
 
 ## 6) Immediate next action for the next session
-Start at **Phase 0/1**: determine whether a materially new Hyperliquid observed-liquidations candidate (≥2026-11, events+fills, §16-admissible) exists; if yes, build and seam-assess its manifest to GO; if no, produce the timestamped NO_GO admissibility evidence artifact (Phase 0B) so the frontier is terminally evidenced rather than merely pending.
+Start at **Phase 0/1**: determine whether a materially new Hyperliquid observed-liquidations candidate (≥2026-11, events+fills, §16-admissible) exists that is **not** falsified in `research_state/alt_source_deep_review_latest.md` (2026-11-13T17:12:25Z). If yes, build and seam-assess its manifest to GO (Phases 1-3). If no, produce the timestamped NO_GO admissibility evidence artifact (Phase 0B: `research_state/tracka_admissibility_no_go_<UTC>.md` + `.json`) listing each considered candidate, evidence timestamp, and exact failing §16 minima so the frontier is terminally evidenced rather than merely pending.
+
+## 7) Session log — 2026-11-13T19:19:03Z
+- **Verified (no-churn):** `python scripts/fclr_next_campaign_gate.py --json` → `ok: true`; `admissible_seam_check(None)` → `pass:true, NO_CANDIDATE_PENDING, ADMISSIBLE_SEAM_WIRED_AWAITING_CANDIDATE` (offline, manifest-only). No `*2026-11*hyperliquid*` candidate manifest and no prior `tracka_admissibility_no_go_*` artifact present.
+- **Bottleneck status:** P0 material blocker unchanged — no admissible observed-liquidation candidate manifest (≥2026-11, events+fills, §16). No infra/workflow blockers; `.github/workflows` not modified.
+- **Handoff consolidated:** refreshed this root file as the single timestamped durable handoff (2026-11-13T19:19:03Z) with explicit Phase 0-4 heavy-work campaign and terminal NO_GO path; flagged stale `research_state/FOCUS_CAMPAIGN.md` et al. as non-authoritative.
+- **Next heavy task (unfinished):** Phase 0/1 — find/materialize & seam-assess a §16-admissible Hyperliquid candidate manifest to GO, or emit terminal `research_state/tracka_admissibility_no_go_<UTC>.{md,json}` evidence.
