@@ -192,6 +192,49 @@ python3 scripts/fclr_heavy_confirm_gate.py
 
 **Artifacts/commands:** `python3 scripts/fclr_fwd_vol_confirm.py` → `evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061555Z.{md,json}` (verdict NOT_REPLICATED, all 8 checks). `python3 scripts/fclr_heavy_confirm_gate.py` → GATE: PASS. `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` → 119 OK.
 
+## 2026-11-13T06:56:11Z — NEXT SESSION TASK: Execute Cell 1 `FCLR-LIQ-010-CONFIRM` (Track A liquidation, P1).
+
+**MANDATORY EXECUTION ORDER — no status-only sessions, no monitor-only closure.**
+
+### Step 1 — Freeze prereg BEFORE outcomes (already done)
+Prereg frozen: `research_state/prereg_fclr_liq_010_confirm_20261113T063000Z.{json,md}` (status=FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false).
+
+### Step 2 — Execute the cell on cached data only
+```bash
+cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
+python3 scripts/fclr_liq_010_confirm.py
+```
+- Uses cached Hyperliquid ironflow panel (`results/liqmicro_v2/panel_liqmicro_v2.parquet`) + 17 symbols with cached funding (`research_state/data_cache/hyperliquid_funding/{SYM}.json`).
+- No network, no paid sources, no credentials.
+- Produces timestamped evaluation artifact: `research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-<UTC>.{json,md}` and panel/build report.
+
+### Step 3 — Issue verdict and update state
+Record verdict (`CONFIRMED` / `FRAGILE` / `NOT_REPLICATED` / `INCONCLUSIVE`) in evaluation artifact. Update:
+- `research_state/hypothesis_registry.json` — add/replace `H_fclr_liq_010_confirm` with verdict + artifact hash
+- `research_state/experiment_frontier.json` — advance rank-0 to this cell's completion
+
+### Step 4 — Pass completion gate
+No dedicated gate script exists for this cell. Create minimal gate enforcing:
+1. Final verdict recorded in evaluation artifact (not SMOKE, not INCONCLUSIVE due to missing data)
+2. All pre-registered checks present (materiality ≥2%, CI excludes zero, instruments ≥5, blocks ≥3, LOIO ≥4/5, placebo pass, leakage audit pass)
+3. Panel hash matches build report
+4. Prereg frozen pre-outcomes
+
+Then run acceptance gate:
+```bash
+python3 scripts/fclr_heavy_confirm_gate.py  # must print GATE: PASS
+python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate  # all OK
+```
+
+### BOTTLENECKS REMOVED — no blockers remain
+- Primary Track C campaign COMPLETE (gate PASS, verdict NOT_REPLICATED)
+- All three next-focus preregs FROZEN_PRE_OUTCOMES (20261113T063000Z)
+- Cached data available: ironflow panel + 17-funded-symbol funding + expansion panel + Binance archive
+- Scripts implemented and importable
+- Targeted test suite green (119 tests)
+
+**HARD BAN ENFORCED:** This session MUST execute Steps 1–4 above. Re-running monitors, checking status, or producing "progress" without a terminal verdict is not progress.
+
 ## 2026-11-13T05:02:10Z — Kilo session: Materialized sealed FCLR-011 panel via `git lfs pull --include research_state/data_cache/fclr011_panel.json` (7,716,808 bytes, was unresolved 132-byte LFS pointer); re-ran `scripts/fclr_fwd_vol_confirm.py` end-to-end; forward result unchanged (C2 vs B1 mean diff +0.026760, CI [0.000343, 0.064822], rel -5.55%); repro gap persists at 0.552pp (>0.5pp tolerance) → `repro_011_pass=False`, verdict INCONCLUSIVE; gate FAILS only on `final_verdict_recorded` (6/7 checks pass). Targeted campaign suite: 119 tests OK. Root cause identified: `build_legacy_panel` in `fclr_fwd_vol_confirm.py` computes RV/EMA on the hourly grid (rolling windows over reindexed grid with NaN gaps, pandas `ewm`) whereas `run_evaluation.py` (`trailing_rv_window`, `build_features_for_origin`) computes on valid mark rows only — the 0.55pp residual matches this grid-vs-valid-row discrepancy.
 
 - **What changed:** `research_state/data_cache/fclr011_panel.json` materialized (LFS pointer resolved). New artifact set: `evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T050407Z.{md,json}`, `tracka_fwd_vol_panel_20261113T050407Z.parquet`, `tracka_fwd_vol_build_report_20261113T050407Z.json`.
