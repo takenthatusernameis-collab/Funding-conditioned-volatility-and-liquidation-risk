@@ -240,5 +240,6 @@
       "open_interest/2026-04.parquet": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237"
     }
   },
-  "runtime_seconds": 1402.2
+  "runtime_seconds": 1402.2,
+  "panel_sha256": "2939f8c3b9bdb3925d96335b4b38ef5d3446f2400cafb76cbf03ee4e1e745096"
 }

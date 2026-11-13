@@ -49,17 +49,24 @@ frontier** is the untouched ironflow Hyperliquid forward observed-liquidation wi
 - `admissible_seam_check(None)` → `pass:true, NO_CANDIDATE_PENDING` (that resume path is irrelevant to this campaign).
 - `python scripts/next_campaign_status.py --json` → `hyperliquid_bulk_frontier.any_forward_feasible: true`;
   run `2026-01-18..2026-04-30` = 103 days ≥ `MIN_FORWARD_DESIGN_DAYS` (60 train + 7 embargo + 3×10 test = 97).
-- **`python scripts/fclr_campaign_gate.py --arm all` → 6/11 (FAILS): `A3_report, A5, A6, B3_report, B4`.**
-  The prior "ACTIVE_HEAVY_CAMPAIGN" (FullHist) is **not actually complete** — see Phase 0.
+- **`python scripts/fclr_campaign_gate.py --arm all` → 11/11 PASS.** Phase 0 complete (2026-11-13T20:29:00Z): fixed producers
+  `scripts/fclr_build_tracka_vol_fullhist.py` (emit top-level `panel_sha256`; emit `contrasts.C2_vs_B1` and
+  `primary_family_cells` (12 cells) in the eval JSON) and `scripts/fclr_build_tracka_liq_xsec.py` (emit top-level
+  `panel_sha256`; emit `verdict` from the frozen `decision`). Regenerated Arm B artifacts
+  (`tracka_liq_xsec_*_2026-11-13T20:24:18Z.*`) reproduce the prior EXPLORATORY_NULL verdict exactly; Arm A artifacts
+  (`tracka_vol_fullhist_*_2026-11-13T02:44:48Z.*`) completed with identical provenance (verdict NOT_MET unchanged).
+  No results, verdicts, or thresholds were altered — only missing provenance fields were added.
 - Test subset green: `tests/test_active_campaign_gate.py tests/test_campaign_resume.py tests/test_fclr_next_campaign_gate.py tests/test_fclr_campaign_gate.py` → 33 passed.
-- Working tree: only `research_state/ironflow_fastpath_cache.json` modified (transient cache touch).
+- Working tree: modified `scripts/fclr_build_tracka_vol_fullhist.py`, `scripts/fclr_build_tracka_liq_xsec.py`, and
+  completed `research_state/tracka_liq_xsec_*_2026-11-13T20:24:18Z.*` +
+  `research_state/tracka_vol_fullhist_*_2026-11-13T02:44:48Z.*`.
+  `research_state/ironflow_fastpath_cache.json` still transiently touched.
 
 ## 3) Bottlenecks (removed / to close)
 - **REMOVED:** external-data dependence for the forward cell (data is on disk; verified above).
-- **P0 — close the existing campaign gate (5 failing checks):** `fclr_campaign_gate.py --arm all` fails
-  `A3_report` (panel build report lacks `panel_sha256`), `A5` (primary contrast `C2_vs_B1` missing),
-  `A6` (12 primary-family cells missing), `B3_report` (liq panel report lacks `panel_sha256`),
-  `B4` (liq evaluation verdict `None`). These are real gaps in prior artifacts, not infra.
+- **P0 — CLOSED (2026-11-13T20:29:00Z):** all 5 gate failures closed at the producer; `fclr_campaign_gate.py --arm all`
+  → 11/11. `A3_report`/`B3_report` now emit `panel_sha256`; `A5`/`A6` now emit `contrasts.C2_vs_B1` and
+  `primary_family_cells` (12 cells); `B4` now emits `verdict`. No gate weakened, no verdicts fabricated.
 - **Hygiene:** root `FOCUS_CAMPAIGN.md` / `HANDOFF_NEXT_SESSION.md` / `NEXT_SESSION_TASK.md` are redirects only.
 
 ## 4) NEXT CAMPAIGN — FCLR-FORWARD-LIQ-2026Q1Q2 (mandatory heavy work; do not stop at planning)
@@ -129,10 +136,40 @@ intensity, per 30-day block, within-bucket permutation null, seed frozen). Max a
 5. Do not commit raw parquet or caches.
 
 ## 6) Immediate next action for the next session
-Start at **Phase 0**: run `python scripts/fclr_campaign_gate.py --arm all`, read the 5 failures, and fix the
-producers to emit `panel_sha256` + the 12 primary-family cells + recognised verdicts. Then execute Phase 1
-(freeze the forward prereg for `2026-01-18..2026-04-30` **before** any outcome read) and Phases 2-3. This
-is executable **now**, offline, on data already on disk.
+Phase 0 is **CLOSED** (gate 11/11, tests 33/33 passed). Start at **Phase 1**: freeze the forward prereg for
+`2026-01-18..2026-04-30` **before any outcome read**, then execute Phases 2-3 (build/eval the forward
+observed-liquidation cell, gate 11/11 + tests) and Phase 4 (commit + update frontier/next task).
+Executable **now**, offline, on data already on disk — no network, no credentials, no external trigger.
+
+1. Write `research_state/prereg_tracka_liq_xsec_forward_2026q1q2_<UTC>.{json,md}` modeled on
+   `prereg_tracka_liq_xsec_20261112T201536Z.*`, with:
+   - **Splits:** burn-in `2026-01-18..2026-02-16` (warm-up + universe eligibility, never scored);
+     test blocks `2026-02-17..2026-03-18`, `2026-03-19..2026-04-03`, `2026-04-04..2026-04-30`
+     (or an exact 60/7/3×10 rolling-origin partition that fits the 103-day span — state the chosen
+     boundaries and justify arithmetic in the prereg).
+   - **Universe (coverage-only, frozen ex ante):** native perps (`market` ends `-PERP`, no `:`) with
+     ≥20 observed liquidation-days, ≥100 events over the test span, complete hourly candle+funding.
+     Floor 5 coins; expected ~150-190.
+   - **Features/score/estimand/inference:** identical to Arm B (rv24h, funding_rate, abs_funding,
+     premium, cross-sectional z-score; Spearman IC per 30-day block; within-bucket permutation,
+     1000 reps, seed 20261112; materiality |mean IC| ≥ 0.05 and consistent spread sign ≥ 2/3 blocks).
+   - `frozen_before_outcomes: true`, `outcome_data_inspected_before_freeze: false`, `promotable: false`
+     unless an unopened confirmatory window is proven.
+2. Confirm freeze **before** running any build/eval: the prereg file mtime must precede panel build.
+3. Extend/clone the Arm B builder (`scripts/fclr_build_tracka_liq_xsec.py`) to the forward window,
+   emitting `research_state/tracka_liq_xsec_forward_panel_<UTC>.parquet` + `..._build_report_<UTC>.json`
+   (must include `panel_sha256` = sha256 of the panel parquet).
+4. Compute the frozen contrasts only; emit
+   `research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-<UTC>.{md,json}` with a recognised verdict
+   (`EXPLORATORY_SIGNAL` / `EXPLORATORY_NULL` / `INADMISSIBLE`) and full diagnostics (per-block IC, null
+   percentiles, event counts, coins, coverage). No threshold shopping; no reading the reserved/sealed windows.
+5. `python scripts/fclr_campaign_gate.py --arm all` → 11/11; run the touched deterministic tests
+   (`tests/test_fclr_campaign_gate.py tests/test_active_campaign_gate.py tests/test_campaign_resume.py`).
+6. Update `research_state/experiment_frontier.json`: add the forward cell, set `last_checked`, and replace
+   the stale `next_action_heavy` with the actual next unfinished task (next unopened window or Phase-0 residual).
+7. Commit only meaningful research/engineering artifacts (code, concise manifests, provenance, reports;
+   **never** raw parquet or caches). Update this handoff's §7 session log with exact commands, results,
+   new artifact paths, and the next unfinished heavy task.
 
 ## 7) Session log — 2026-11-13T20:17:06Z
 - **Diagnosis:** prior handoff/frontier forced a permanent external-data NO_GO loop despite an untouched,
@@ -144,3 +181,19 @@ is executable **now**, offline, on data already on disk.
 - **Next heavy task (unfinished):** Phase 0 (close 5 gate failures at the producer) → Phase 1 (freeze forward
   prereg before outcomes) → Phase 2 (build/eval forward observed-liquidation cell) → Phase 3 (gate 11/11 +
   tests) → Phase 4 (commit + update frontier/next task).
+
+## 7b) Session log — 2026-11-13T20:29:00Z
+- **Change:** Bottleneck removed — closed Phase 0. Fixed `scripts/fclr_build_tracka_vol_fullhist.py` and
+  `scripts/fclr_build_tracka_liq_xsec.py` to emit the gate-required provenance (`panel_sha256`, `contrasts.C2_vs_B1`,
+  `primary_family_cells` (12 cells), `verdict`) and completed the Arm A / Arm B artifacts. Arm B regen at
+  `2026-11-13T20:24:18Z` reproduces EXPLORATORY_NULL exactly; Arm A verdict NOT_MET unchanged. No results,
+  thresholds, or verdicts fabricated — only missing provenance fields added.
+- **Verified:** `fclr_campaign_gate.py --arm all` → 11/11 PASS (was 6/11).
+  `tests/test_fclr_campaign_gate.py tests/test_active_campaign_gate.py tests/test_campaign_resume.py tests/test_fclr_next_campaign_gate.py` → 33 passed.
+  Forward region still untouched/reserved (`2026-01-18..2026-04-30`, 103 days, 537,179 observed liquidation
+  events, 192 native perps, 0 null notional — confirmed 2026-11-13T20:16Z).
+- **Next heavy task (unfinished):** Phase 1 — freeze `prereg_tracka_liq_xsec_forward_2026q1q2_<UTC>`
+  **before any outcome read** (burn-in `2026-01-18..2026-02-16`; test blocks
+  `2026-02-17..2026-03-18` / `2026-03-19..2026-04-03` / `2026-04-04..2026-04-30`; Arm B-identical design;
+  `frozen_before_outcomes: true`, `promotable: false`). Then Phase 2 build/eval the forward observed-liquidation
+  cell, Phase 3 gate 11/11 + tests, Phase 4 commit + update `experiment_frontier.json` next_action_heavy.
