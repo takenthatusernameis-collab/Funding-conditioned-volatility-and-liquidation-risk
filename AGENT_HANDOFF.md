@@ -1,8 +1,8 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-13T04:20:00Z
-**Status:** `PRIMARY_CAMPAIGN_COMPLETE` — Track C forward confirmation NOT_REPLICATED; gate PASS; next focus campaign defined below.
+**Handoff timestamp (UTC):** 2026-11-13T07:10:00Z
+**Status:** `PRIMARY_CAMPAIGN_COMPLETE` — Track C forward confirmation NOT_REPLICATED; Cell 1 FCLR-LIQ-010-CONFIRM NOT_REPLICATED; Cell 2 FCLR-EXP-ROBUST-REDO **NEXT**; gate PASS; next focus campaign defined below.
 
 **This file is the ONLY durable handoff.** It supersedes every earlier handoff, checkpoint, closure, and frontier entry. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are redirects to this file. Do not create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. Update this file in place by appending a dated `## SESSION LOG` entry.
 
@@ -55,33 +55,49 @@ Steps:
 
 ---
 
-## NEXT SESSION: EXECUTE NEXT FOCUS CAMPAIGN (no status-only sessions)
+## NEXT SESSION: EXECUTE CELL 2 `FCLR-EXP-ROBUST-REDO` (no status-only sessions)
 
-### Step 1 — Select and freeze the first cell (blocking)
+### Step 1 — Prereg already FROZEN (blocking satisfied)
+Prereg frozen: `research_state/prereg_fclr_exp_robust_redo_20261113T063000Z.{json,md}` (status=FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false, panel_sha256=39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699).
 
-Choose the highest-value unfinished cell from the NEXT FOCUS CAMPAIGN above. Freeze its prereg BEFORE any outcome computation. The prereg must specify: hypothesis ID, features, model (B1 vs C2), splits, embargo, metrics, gates, verdict rules, multiplicity correction, and the exact artifact path.
+### Step 2 — Execute the cell on cached data only
+```bash
+cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
+python3 scripts/fclr_exp_robust_redo.py
+```
+- Uses sealed expansion panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` (no network, no paid sources, no credentials).
+- Runs LOIO check (need >=6/8), placebo permutation (2000 perms, seed 20261113), bootstrap settings check (3 settings).
+- Produces timestamped evaluation artifact: `research_state/evaluation_summary_FCLR-EXP-ROBUST-REDO-<UTC>.{json,md}`.
 
-### Step 2 — Execute the cell
+### Step 3 — Issue verdict and update state
+Record verdict (`ROBUST` / `FRAGILE` / `INCONCLUSIVE`) in evaluation artifact. Update:
+- `research_state/hypothesis_registry.json` — add/replace `H_fclr_exp_robust_redo` with verdict + artifact hash
+- `research_state/experiment_frontier.json` — advance rank-0 to this cell's completion
 
-Run the experiment end-to-end on cached data only (no network, no paid sources, no credentials). Produce a timestamped evaluation artifact.
+### Step 4 — Pass completion gate
+Create minimal gate script `scripts/fclr_exp_robust_redo_gate.py` enforcing:
+1. Final verdict recorded in evaluation artifact (not SMOKE, not INCONCLUSIVE due to missing data)
+2. All pre-registered checks present (LOIO >=6/8, placebo PASS, materiality >=2%, CI excludes zero, bootstrap settings PASS)
+3. Panel hash matches build report (39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699)
+4. Prereg frozen pre-outcomes (status=FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false)
 
-### Step 3 — Issue the verdict and update state
-
-Record the verdict (CONFIRMED / NOT_REPLICATED / NOT_SUPPORTED / FRAGILE / INCONCLUSIVE) in the evaluation artifact. Update `research_state/hypothesis_registry.json` and `research_state/experiment_frontier.json` with the verdict and artifact hashes.
-
-### Step 4 — Pass the completion gate
-
-If a gate script exists for the cell, run it and confirm `GATE: PASS`. If no gate script exists, create the smallest gate that enforces: final verdict recorded, all pre-registered checks present, panel hash matches build report, prereg frozen pre-outcomes.
+Then run acceptance gate:
+```bash
+python3 scripts/fclr_exp_robust_redo_gate.py  # must print GATE: PASS
+python3 scripts/fclr_heavy_confirm_gate.py    # must print GATE: PASS
+python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate  # all OK
+```
 
 ---
 
-## ACCEPTANCE GATE (session completion)
+## ACCEPTANCE GATE (session completion for Cell 2)
 
-1. `python3 scripts/fclr_heavy_confirm_gate.py` → `GATE: PASS`.
-2. The latest `evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-*.json` has a final verdict (`CONFIRMED` or `NOT_REPLICATED`) and all 8 checks.
-3. `research_state/hypothesis_registry.json` and `research_state/experiment_frontier.json` agree with the verdict.
-4. `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` → all OK.
-5. No sealed artifact is mutated; no raw cache is committed; no workflow files are patched.
+1. `python3 scripts/fclr_exp_robust_redo_gate.py` → `GATE: PASS`.
+2. `python3 scripts/fclr_heavy_confirm_gate.py` → `GATE: PASS`.
+3. The latest `evaluation_summary_FCLR-EXP-ROBUST-REDO-*.json` has a final verdict (`ROBUST` / `FRAGILE` / `INCONCLUSIVE`) and all 3 checks (LOIO, placebo, bootstrap).
+4. `research_state/hypothesis_registry.json` and `research_state/experiment_frontier.json` agree with the verdict.
+5. `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` → all OK.
+6. No sealed artifact is mutated; no raw cache is committed; no workflow files are patched.
 
 ### Known pre-existing test debt (do not attribute to this campaign)
 
@@ -124,7 +140,7 @@ The **targeted campaign suite is green**: `tests.test_active_campaign_gate tests
 ## EXACT START COMMANDS
 
 ```bash
-cd <repo>
+cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
 
 # Preflight
 python3 -c "import numpy,pandas,scipy,pyarrow; print('deps OK')"
@@ -132,18 +148,21 @@ python3 -c "import numpy,pandas,scipy,pyarrow; print('deps OK')"
 # Gate 4 external trigger (expected absent; do not poll)
 ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"
 
-# Confirm primary campaign is complete (gate PASS, verdict NOT_REPLICATED)
+# Confirm primary campaign + Cell 1 complete (gate PASS, verdicts NOT_REPLICATED)
 python3 scripts/fclr_heavy_confirm_gate.py
 
-# Next focus campaign: select highest-value cell, freeze prereg BEFORE outcomes
-# Cell 1: FCLR-LIQ-010-CONFIRM (Track A liquidation)
-# Cell 2: FCLR-EXP-ROBUST-REDO (Track A expansion robustness)
-# Cell 3: FCLR-FWD-VOL-2025-CROSS (Track C volatility period-specificity)
+# Cell 2: FCLR-EXP-ROBUST-REDO (Track A expansion robustness) — prereg already frozen
+# Execute:
+python3 scripts/fclr_exp_robust_redo.py
+# Create and run gate:
+python3 scripts/fclr_exp_robust_redo_gate.py
+# Update state:
+#   research_state/hypothesis_registry.json (add H_fclr_exp_robust_redo)
+#   research_state/experiment_frontier.json (advance rank-0)
 
-# Example: freeze prereg for the chosen cell, then execute:
-#   python3 scripts/<cell_script>.py   # produces timestamped evaluation artifact
-#   python3 scripts/<cell_gate>.py     # must print GATE: PASS
-# Update research_state/hypothesis_registry.json and experiment_frontier.json
+# Acceptance:
+python3 scripts/fclr_heavy_confirm_gate.py
+python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate
 ```
 
 ---
@@ -170,6 +189,12 @@ python3 scripts/fclr_heavy_confirm_gate.py
 - `research_state/evaluation_summary_FCLR-011.md` — the sealed PASS that was suppressed.
 - `research_state/evaluation_summary_FCLR-012-V.md` — +15.19% signal, 0 blocks.
 - `research_state/run_manifest_local.json` — offline split fallback.
+- `research_state/prereg_fclr_exp_robust_redo_20261113T063000Z.{json,md}` — Cell 2 frozen prereg (LOIO >=6/8, placebo 2000 perms, bootstrap settings).
+- `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` — sealed expansion panel (sha256 39916a72...).
+- `scripts/fclr_exp_robust_redo.py` — Cell 2 execution script.
+- `scripts/run_expansion_robustness.py` — base robustness machinery (LOIO, placebo, bootstrap).
+- `research_state/prereg_fclr_fwd_vol_2025_cross_20261113T063000Z.{json,md}` — Cell 3 frozen prereg (2025-02..2025-05, 3 blocks, 5 instruments).
+- `scripts/fclr_fwd_vol_2025_cross.py` — Cell 3 execution script.
 - `RESEARCH_PROMPT.md` §16, §17, §18, §19, §20.
 
 ---
@@ -177,6 +202,52 @@ python3 scripts/fclr_heavy_confirm_gate.py
 ## SESSION LOG (append-only; newest first)
 
 ## 2026-11-13T07:06:00Z — Kilo session: Executed Cell 1 FCLR-LIQ-010-CONFIRM (Track A observed liquidation, P1) per repo-name priority `Funding-conditioned-volatility-and-liquidation-risk`. Frozen prereg prereg_fclr_liq_010_confirm_20261113T063000Z was pre-outcomes (outcome_data_inspected_before_freeze=false). Independent recompute on cached Hyperliquid ironflow census restricted to 17 funded symbols: C2 vs B1 Brier mean diff -0.000690, 95% CI [-0.001106,-0.000316] (excludes zero, improving), relative reduction 0.501% < 2% materiality floor; LOIO 0/17 at materiality; placebo null_p95 0.525% > true 0.501% (fail); leakage audit PASS. Verdict: NOT_REPLICATED (terminal). Artifacts: evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.{md,json}, panel fclr_liq_010_confirm_panel_20261113T065953Z.parquet (sha ec225a1768...), build report fclr_liq_010_confirm_build_report_20261113T065953Z.json (sha bc23e67a...). Created scripts/fclr_liq_010_confirm_gate.py -> GATE: PASS. Updated hypothesis_registry.json (H_fclr_liq_010_confirm terminal NOT_REPLICATED, artifact/panel/prereg hashes) and experiment_frontier.json (rank-0 ACTIVE_HEAVY_CAMPAIGN; Cell 2 FCLR-EXP-ROBUST-REDO and Cell 3 FCLR-FWD-VOL-2025-CROSS pending; both preregs frozen 20261113T063000Z). Acceptance: fclr_heavy_confirm_gate.py -> GATE: PASS; targeted suite tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate -> 119/119 OK. No sealed artifact mutated; no raw cache committed; no workflow files patched.
+
+## 2026-11-13T07:10:00Z — NEXT SESSION TASK: Execute Cell 2 `FCLR-EXP-ROBUST-REDO` (Track A expansion robustness, P2).
+
+**MANDATORY EXECUTION ORDER — no status-only sessions, no monitor-only closure.**
+
+### Step 1 — Prereg already FROZEN (blocking satisfied)
+Prereg frozen: `research_state/prereg_fclr_exp_robust_redo_20261113T063000Z.{json,md}` (status=FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false, panel_sha256=39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699).
+
+### Step 2 — Execute the cell on cached data only
+```bash
+cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
+python3 scripts/fclr_exp_robust_redo.py
+```
+- Uses sealed expansion panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` (no network, no paid sources, no credentials).
+- Runs LOIO check (need >=6/8), placebo permutation (2000 perms, seed 20261113), bootstrap settings check (3 settings).
+- Produces timestamped evaluation artifact: `research_state/evaluation_summary_FCLR-EXP-ROBUST-REDO-<UTC>.{json,md}`.
+
+### Step 3 — Issue verdict and update state
+Record verdict (`ROBUST` / `FRAGILE` / `INCONCLUSIVE`) in evaluation artifact. Update:
+- `research_state/hypothesis_registry.json` — add/replace `H_fclr_exp_robust_redo` with verdict + artifact hash
+- `research_state/experiment_frontier.json` — advance rank-0 to this cell's completion
+
+### Step 4 — Pass completion gate
+Create minimal gate script `scripts/fclr_exp_robust_redo_gate.py` enforcing:
+1. Final verdict recorded in evaluation artifact (not SMOKE, not INCONCLUSIVE due to missing data)
+2. All pre-registered checks present (LOIO >=6/8, placebo PASS, materiality >=2%, CI excludes zero, bootstrap settings PASS)
+3. Panel hash matches build report (39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699)
+4. Prereg frozen pre-outcomes (status=FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false)
+
+Then run acceptance gate:
+```bash
+python3 scripts/fclr_exp_robust_redo_gate.py  # must print GATE: PASS
+python3 scripts/fclr_heavy_confirm_gate.py    # must print GATE: PASS
+python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate  # all OK
+```
+
+### BOTTLENECKS REMOVED — no blockers remain
+- Primary Track C campaign COMPLETE (gate PASS, verdict NOT_REPLICATED)
+- Cell 1 FCLR-LIQ-010-CONFIRM COMPLETE (verdict NOT_REPLICATED, gate PASS)
+- Cell 2 prereg FROZEN_PRE_OUTCOMES (20261113T063000Z)
+- Cell 3 prereg FROZEN_PRE_OUTCOMES (20261113T063000Z)
+- Cached data available: expansion panel + Binance archive
+- Scripts implemented and importable (`fclr_exp_robust_redo.py`, `fclr_fwd_vol_2025_cross.py`)
+- Targeted test suite green (119 tests)
+
+**HARD BAN ENFORCED:** This session MUST execute Steps 1–4 above for Cell 2. Re-running monitors, checking status, or producing "progress" without a terminal verdict is not progress.
 
 ## 2026-11-13T06:15:55Z — Kilo session: Closed the FCLR-011 reproduction gap and issued the final forward verdict NOT_REPLICATED; primary Track C campaign COMPLETE; gate PASS; next focus campaign defined.
 
