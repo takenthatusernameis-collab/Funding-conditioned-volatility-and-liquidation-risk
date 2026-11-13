@@ -1,11 +1,15 @@
-# AGENT HANDOFF — 2026-11-13T21:30:41Z (authoritative, single durable handoff)
+# AGENT HANDOFF — 2026-11-13T21:40:00Z (authoritative, single durable handoff)
 
 **INITIAL TASK FOR NEXT SESSION — execute this now. Heavy work is mandatory; do not stop at planning, status, or a NO_GO memo.**
 Run campaign **FCLR-FORWARD-LIQ-2026Q1Q2 Phase 1→4** to a terminal, evidence-backed verdict on the already-on-disk,
 admissible ironflow Hyperliquid forward bulk cache (offline; no network, credentials, or external trigger).
 
-Verified at freeze of this handoff (2026-11-13T21:30:41Z): `python3 scripts/fclr_campaign_gate.py --arm all` → **11/11 PASS**;
-`python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate tests.test_campaign_resume` → **19/19 OK**;
+**Definition of done is machine-checked and now includes the forward cell.** `python3 scripts/fclr_campaign_gate.py --arm all`
+reports **16 checks** (A0-A6, B1-B4, F0-F4). Arm F fails closed until a frozen forward prereg, a hash-matched forward panel,
+a build report, and a recognised forward verdict exist. At freeze of this handoff (2026-11-13T21:40:00Z) the gate reports
+**12/16** — A/B fully PASS, **F1/F3/F4 FAIL** because the forward cell is genuinely unbuilt. That red Arm F is the proof
+that heavy work remains; do not "fix" it by editing the gate or fabricating artifacts. Make it green by executing Phases 1-4.
+Verified at this freeze: `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate` → **22/22 OK**;
 `next_campaign_status.py --json` → forward run `2026-01-18..2026-04-30` feasible (`feasible_forward: true`, 103 days).
 
 ### Phase 1 — Freeze the forward prereg BEFORE any outcome read (hard gate)
@@ -41,23 +45,32 @@ Write `research_state/prereg_tracka_liq_xsec_forward_2026q1q2_<UTC>.{json,md}`, 
      `TEST_END="2026-04-30 23:00:00"`;
    - `BLOCKS` → the three blocks above; `experiment_id` → forward ID; output stems → `tracka_liq_xsec_forward_*` /
      `evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-<UTC>.*`;
-   - labels: load `ironflow_bulk/liquidations/{2026-01..2026-04}.parquet` (not `ironflow_events/`), filter `day >= 2026-01-18`
-     and `day <= 2026-04-30` (the 2026-04-30 target day is required; May is still excluded); candles/funding: load `ironflow_bulk/{candles_1h,funding}/{2026-01..2026-04}.parquet`, keeping
-     2026-01-17 hours for the 24h warm-up only;
+   - **Labels — read `ironflow_bulk/liquidations`, not `ironflow_events/`.** In the parent builder `EVENTS` points at
+     `data_cache/ironflow_events`; for the forward clone set `EVENTS = RS / "data_cache" / "ironflow_bulk" / "liquidations"`
+     (the two caches are byte-identical for 2026-01..2026-04, but the bulk path is the one the handoff and gate name).
+     Filter `day >= 2026-01-18` and `day <= 2026-04-30` (the 2026-04-30 target day is required; May is still excluded).
+   - Candles/funding: keep `BULK = RS / "data_cache" / "ironflow_bulk"` and extend the month window to
+     `2025-12 <= m <= 2026-04` (the extra 2026-01..2026-04 hours cover the window; the 2025-12 tail is only the 24h
+     warm-up for the first scored day) — never read 2025-11 or earlier, never read 2026-05 or later;
+   - `COVERAGE_END` must stay `2026-04-30 23:00:00` so the final target day `2026-04-30` is present but May is not;
    - emit `tracka_liq_xsec_forward_panel_<UTC>.parquet`, `..._panel_build_report_<UTC>.json` (must include top-level
      `panel_sha256` = sha256 of the panel parquet), and `evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-<UTC>.{md,json}` with a
      recognised `verdict` (`EXPLORATORY_SIGNAL` / `EXPLORATORY_NULL` / `INADMISSIBLE`) and full diagnostics (per-block IC,
      permutation null 5th/95th percentiles, p-values, event counts, coins, coverage). No threshold shopping; no sealed/reserved reads.
+2. Sanity: `len(universe)` should be **≤113** (coverage filter only; 113 pass day/event before coverage). If the panel has 0 rows or
+   fewer than 5 coins, the builder must `fail()` with `FAIL_CLOSED` — do not weaken `MIN_COINS` to force a verdict.
 
 ### Phase 3 — Verify (deterministic, offline)
-1. `python3 scripts/fclr_campaign_gate.py --arm all` → **11/11**.
-2. `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate tests.test_campaign_resume` (plus any builder test added).
+1. `python3 scripts/fclr_campaign_gate.py --arm all` → **16/16** (A0-A6, B1-B4, F0-F4 all PASS). 12/16 means the forward cell
+   is still unbuilt — do not stop there.
+2. `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate` → all OK.
 3. `python3 scripts/fclr_next_campaign_gate.py --json` must remain `ok: true`.
-4. Verify the forward eval JSON parses and has a recognised `verdict`, `panel_sha256`, and per-block ICs.
+4. Verify the forward eval JSON parses and has a recognised `verdict`, top-level `panel_sha256`, and per-block ICs.
 
 ### Phase 4 — Closeout
 1. Update `research_state/experiment_frontier.json` rank 0: record the forward cell, set `last_checked`, and replace
    `next_action_heavy`/`next_unfinished_task` with the actual next unfinished heavy task (next unopened forward window or residual).
+   If the forward cell is now complete, Arm F will stay green — that is correct and is not a reason to invent new work.
 2. Append a timestamped §7e session log entry here with exact commands, results, new artifact paths, and the next heavy task.
 3. Commit only code/manifests/provenance/reports (**never** raw parquet/caches).
 
@@ -71,23 +84,33 @@ liquidation stress vs volatility-only baselines, on admissible data with frozen 
 Binance funding-vol / FWD-VOL cells are terminal (NOT_REPLICATED / FRAGILE) and gated PASS — do not re-run them. The highest-value
 unfinished frontier is the untouched ironflow Hyperliquid forward observed-liquidation window (below).
 
-## 2) Verified state (2026-11-13T21:30:41Z)
-- `python3 scripts/fclr_campaign_gate.py --arm all` → **11/11 PASS** (A0 bulk cache verified incl. pyarrow 26.0.1; A1/A3/A4/A5/A6/B1/B3/B4 all pass).
-- `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate tests.test_campaign_resume` → **19/19 OK** (0.305s).
+## 2) Verified state (2026-11-13T21:40:00Z)
+- `python3 scripts/fclr_campaign_gate.py --arm all` → **12/16 PASS**, `blocking: F1, F3_panel, F3_report, F4`. A0-A6 and B1-B4 all pass
+  (A0 bulk cache verified incl. pyarrow 26.0.1). Arm F is red **by design**: the forward cell is genuinely unbuilt. This is the correct
+  pre-work state, not a regression.
+- `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate` → **22/22 OK** (0.368s).
 - `python3 scripts/next_campaign_status.py --json` → `hyperliquid_bulk_frontier.any_forward_feasible: true`;
   run `2026-01-18..2026-04-30` = 103 days ≥ `MIN_FORWARD_DESIGN_DAYS` (60 train + 7 embargo + 3×10 test = 97).
-- Forward region remains untouched/reserved. Verified 2026-11-13T21:30:41Z from the on-disk bulk cache:
+- Forward region remains untouched/reserved. Verified 2026-11-13T21:40:00Z from the on-disk bulk cache:
   **377,110 observed native-perp liquidation events** across **192 native perps** in `2026-01-18..2026-04-30`, long/short sides,
   **0 null notional**; **113 coins** meet ≥20 liquidation-days and ≥100 events before the coverage filter. Candle/funding bulk
   coverage is present for the window. **Correction:** the earlier `537,179` figure was all markets (native + non-native) and must
   not be quoted as native events; the native count is 377,110.
 - Labels end `2026-04-30T23:48:51Z`; the last scoreable decision day is `2026-04-29` (target `[2026-04-30, 2026-05-01)`).
-- Working tree is clean at the 21:26:30Z checkpoint; no raw parquet/caches are tracked.
+- Both label caches are byte-identical for 2026-01..2026-04: `ironflow_bulk/liquidations` and `ironflow_events` carry the same rows
+  and schema. The forward clone must use the **bulk** path (see Phase 2).
+- No raw parquet/caches are tracked; the caches are local-only.
 
 ## 3) Bottlenecks (removed / to close)
 - **REMOVED — external data:** the forward cell needs no download/credentials/network; the 2025-05..2026-04 ironflow bulk cache is on disk
   (candles_1h/funding/open_interest/liquidations + sha256 sidecars, CC-BY-4.0).
-- **REMOVED — gate:** Phase 0 closed at the producer; `fclr_campaign_gate.py --arm all` is 11/11 (no gate weakened, no verdict fabricated).
+- **REMOVED — avoidable-work loophole:** the previous gate was 11/11 green on the two consumed cells alone, so a session could report
+  "done" without ever touching the only unopened window. Arm F (F0-F4) now makes `--arm all` fail closed until the forward cell is
+  built, so the green gate *means* the heavy work is finished. **Do not weaken Arm F, edit the gate to pass, or fabricate forward
+  artifacts — build the cell.**
+- **REMOVED — false regression signal in tests:** `tests/test_fclr_campaign_gate.py::test_empty_state_is_blocked` printed a live
+  `0/9 blocking` banner into the repo's test output, which is indistinguishable from a real campaign regression and had already
+  misled this session. It now redirects stdout and asserts on the captured text.
 - **REMOVED — builder drift:** the old builder hard-codes the consumed window. Phase 2's exact clone deltas are specified above so the next
   session cannot stall on "how do I extend it"; do not rewrite the old cell or re-probe its terminal verdict.
 - **Hygiene:** root `FOCUS_CAMPAIGN.md` / `HANDOFF_NEXT_SESSION.md` / `NEXT_SESSION_TASK.md` are redirects only.
@@ -135,6 +158,25 @@ This is executable offline on data already on disk; do not emit a NO_GO/status-o
   block ends are target horizons, so scored decision days are 29 + 15 + 19 = 63, ending `2026-04-29`.
 - **Bottleneck:** none blocking. Phase 0 closed; data on disk; builder clone deltas specified.
 - **Next heavy task (unfinished):** **FCLR-FORWARD-LIQ-2026Q1Q2 Phase 1→4** — freeze the forward prereg before outcomes, clone/parameterize
-  the Arm B builder to `2026-01-18..2026-04-30` (last scored day `2026-04-29`), evaluate with the frozen contrasts, pass gate 11/11 +
+  the Arm B builder to `2026-01-18..2026-04-30` (last scored day `2026-04-29`), evaluate with the frozen contrasts, pass gate 16/16 +
   deterministic tests, commit code/manifests/provenance/reports (no raw parquet), and set the next actionable heavy task in
   `experiment_frontier.json`.
+
+### 2026-11-13T21:40:00Z (bottleneck removal: gate now enforces the forward cell)
+- **Diagnosis:** the "definition of done" was 11/11 green on the two already-consumed cells (Arm A FULLHIST, Arm B XSEC). The only
+  remaining unopened window (`2026-01-18..2026-04-30`) had **no gate coverage**, so a session could truthfully report "gate 11/11 PASS"
+  while doing zero heavy work. That is the avoidable-work loophole this handoff exists to close.
+- **Change 1 — Arm F added to `scripts/fclr_campaign_gate.py`:** new checks `F0` (four forward bulk months present, from filename stems
+  only), `F1` (frozen forward prereg `prereg_tracka_liq_xsec_forward_*.json`), `F3` (forward panel + report with matching `panel_sha256`),
+  `F4` (forward eval JSON with a recognised verdict). `--arm all` is now 16 checks. Arm F is metadata-only: it never opens the reserved
+  parquet bodies and never computes an outcome, so it cannot leak the forward window. No existing check was weakened.
+- **Change 2 — test hygiene:** `tests/test_fclr_campaign_gate.py::test_empty_state_is_blocked` now redirects stdout and asserts on the
+  captured text, so the real campaign's output is no longer polluted with a fake `0/9 blocking` banner. Added three forward-arm tests
+  (independence from A/B, complete-passes, hash-mismatch-fails) + a forward-label fixture helper. Suite is now 17 tests.
+- **Verified (this session):** `fclr_campaign_gate.py --arm all` → **12/16 PASS**, `blocking: F1, F3_panel, F3_report, F4`
+  (the honest pre-work state; A0-A6/B1-B4 all pass). `unittest tests.test_fclr_campaign_gate tests.test_active_campaign_gate` → **22/22 OK**.
+  Independently recomputed the forward cache: 377,110 native events, 192 native perps, 113 coins ≥20d/≥100ev, 0 null notional,
+  labels end `2026-04-30T23:48:51Z`; confirmed `ironflow_bulk/liquidations` and `ironflow_events` are byte-identical for 2026-01..2026-04.
+- **Bottleneck:** none blocking the forward build. The gate now *requires* it; data on disk; exact clone deltas in Phase 2.
+- **Next heavy task (unfinished):** **FCLR-FORWARD-LIQ-2026Q1Q2 Phase 1→4**, now enforced by Arm F. Green 16/16 is only reachable by
+  building the forward cell.

@@ -27,10 +27,25 @@ Checks (Arm B, P2 exploratory)
   B3  build report exists and its recorded panel sha256 matches the panel on disk
   B4  evaluation summary JSON exists with a recognised verdict
 
+Checks (Arm F, forward — the "heavy work cannot be avoided" arm)
+---------------------------------------------------------------
+  F0  the four forward bulk months (2026-01..2026-04) are present on disk
+  F1  a frozen forward prereg exists (prereg_tracka_liq_xsec_forward_*.json)
+  F3  forward panel parquet + build report exist and the recorded sha256 matches
+  F4  forward evaluation summary JSON exists with a recognised verdict
+
+Arm F is the point of `--arm all`. Without it, `--arm all` is green on the two
+already-consumed cells alone, so a session can report "gate passed" while the only
+remaining unopened window (2026-01-18..2026-04-30) is still unread. Arm F fails
+closed until that window has actually been built and evaluated. It reads metadata
+only (filename stems + prereg/report/eval JSON); it never opens the reserved
+parquet bodies and never computes an outcome, so it cannot leak the forward window.
+
 Usage
 -----
-  python3 scripts/fclr_campaign_gate.py --arm a
-  python3 scripts/fclr_campaign_gate.py --arm all
+  python3 scripts/fclr_campaign_gate.py --arm a      # Arm A only
+  python3 scripts/fclr_campaign_gate.py --arm f      # forward readiness only
+  python3 scripts/fclr_campaign_gate.py --arm all    # A + B + F (definition of done)
 """
 from __future__ import annotations
 
@@ -48,6 +63,18 @@ ARM_A_PREREG_GLOB = "prereg_tracka_vol_fullhist_*.json"
 ARM_B_PREREG_GLOB = "prereg_tracka_liq_xsec_*.json"
 ARM_A_EVAL_GLOB = "evaluation_summary_TRACKA-VOL-FULLHIST-*.json"
 ARM_B_EVAL_GLOB = "evaluation_summary_TRACKA-LIQ-XSEC-*.json"
+
+# Arm F: the untouched, on-disk ironflow Hyperliquid forward region. This arm is the
+# "heavy work cannot be avoided" check. Without it, `--arm all` is green on the two
+# already-consumed cells alone and a session can report done while the only remaining
+# unopened window is still unread. Arm F therefore fails closed until Phase 1-4 of the
+# forward campaign have produced a frozen prereg, a hash-matched panel, a build report,
+# and a recognised verdict for 2026-01-18..2026-04-30. It reads metadata only: it never
+# opens the reserved parquet files and never computes an outcome, so it cannot leak.
+ARM_F_PREREG_GLOB = "prereg_tracka_liq_xsec_forward_*.json"
+ARM_F_PANEL_GLOB = "tracka_liq_xsec_forward_panel_*.parquet"
+ARM_F_REPORT_GLOB = "tracka_liq_xsec_forward_panel_build_report_*.json"
+ARM_F_EVAL_GLOB = "evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-*.json"
 
 BULK_DATASETS = ("candles_1h", "funding", "open_interest")
 
@@ -225,9 +252,50 @@ def run_arm_b(root: Path = REPO) -> List[Dict[str, object]]:
     return checks
 
 
+# ------------------------------- Arm F (forward) --------------------------------
+def _forward_days_present(root: Path) -> List[str]:
+    """Months of the on-disk forward region, without opening any parquet body.
+
+    Presence is judged from the parquet filename stem only; no file content is read,
+    so this check cannot touch or leak the reserved window's outcomes. The labels
+    may live in either the bulk liquidations cache or the legacy events cache; the
+    forward campaign reads the former, so that directory is the primary source.
+    """
+    candidates = [
+        _rs(root) / "data_cache" / "ironflow_bulk" / "liquidations",
+        _rs(root) / "data_cache" / "ironflow_events",
+    ]
+    for base in candidates:
+        if base.is_dir() and any(base.glob("*.parquet")):
+            return sorted({p.stem for p in base.glob("*.parquet")
+                           if p.stem in ("2026-01", "2026-02", "2026-03", "2026-04")})
+    return []
+
+
+def run_arm_f(root: Path = REPO) -> List[Dict[str, object]]:
+    """Forward-cell readiness: the unopened 2026-01-18..2026-04-30 window.
+
+    Fail-closed until the forward campaign has produced a frozen prereg, a panel with
+    a matching build report, and a recognised verdict. Metadata-only; never reads
+    parquet bodies.
+    """
+    checks: List[Dict[str, object]] = []
+    months = _forward_days_present(root)
+    have = [m for m in ("2026-01", "2026-02", "2026-03", "2026-04") if m in months]
+    checks.append(_check(
+        "F0", len(have) == 4,
+        "forward bulk months present: " + ", ".join(have) if have
+        else "no forward bulk months on disk",
+    ))
+    checks.append(check_prereg_frozen(root, ARM_F_PREREG_GLOB, "F1"))
+    checks += check_panel_and_report(root, ARM_F_PANEL_GLOB, ARM_F_REPORT_GLOB, "F3")
+    checks += check_eval_summary(root, ARM_F_EVAL_GLOB, "F4")
+    return checks
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--arm", choices=("a", "b", "all"), default="all")
+    ap.add_argument("--arm", choices=("a", "b", "f", "all"), default="all")
     ap.add_argument("--root", default=str(REPO))
     args = ap.parse_args(list(argv) if argv is not None else None)
 
@@ -237,6 +305,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         checks += run_arm_a(root)
     if args.arm in ("b", "all"):
         checks += run_arm_b(root)
+    if args.arm in ("f", "all"):
+        checks += run_arm_f(root)
 
     width = max((len(str(c["check"])) for c in checks), default=4)
     for c in checks:

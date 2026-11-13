@@ -7,7 +7,9 @@ an unrecognised verdict fails, and a complete fixture passes.
 """
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
 import json
 import tempfile
 import unittest
@@ -79,6 +81,17 @@ class GateTestCase(unittest.TestCase):
         p.with_suffix(".parquet.sha256").write_text(digest + "\n")
         p.with_suffix(".parquet.accessed.json").write_text(
             json.dumps({"dataset": dataset, "month": month, "sha256": digest}))
+
+    def _write_forward_labels(self) -> None:
+        """Seed the forward label months the Arm F presence check looks for."""
+        cache = self.root / "research_state" / "data_cache" / "ironflow_bulk" / "liquidations"
+        cache.mkdir(parents=True, exist_ok=True)
+        import pyarrow as pa
+        import pyarrow.parquet as pq
+
+        table = pa.table({"timestamp": pa.array([1], type=pa.int64())})
+        for month in ("2026-01", "2026-02", "2026-03", "2026-04"):
+            pq.write_table(table, cache / f"{month}.parquet")
 
 
 class TestBulkCacheCheck(GateTestCase):
@@ -178,7 +191,67 @@ class TestEvalCheck(GateTestCase):
 
 class TestFullGateExitCode(GateTestCase):
     def test_empty_state_is_blocked(self):
-        self.assertEqual(gate.main(["--arm", "all", "--root", str(self.root)]), 1)
+        # main() prints the human gate table. Redirect it so the real campaign's
+        # output is not polluted with a fake "0/N blocking" banner: that banner is
+        # indistinguishable from a genuine regression and has misled sessions into
+        # reporting a broken gate while the live cache was in fact green.
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            code = gate.main(["--arm", "all", "--root", str(self.root)])
+        self.assertEqual(code, 1)
+        self.assertIn("0/", buf.getvalue())
+
+    def test_forward_arm_independent_of_consumed_arms(self):
+        """Arm F must not be satisfied by the already-consumed Arm A/B artifacts."""
+        self._install_bulk_script()
+        for dataset in gate.BULK_DATASETS:
+            for month in gate.BULK_MONTHS:
+                self._write_bulk_object(dataset, month)
+        self._write_forward_labels()
+        # Complete Arm A and Arm B fixtures.
+        self._prereg("prereg_tracka_vol_fullhist_20261112T201536Z", frozen=True)
+        self._prereg("prereg_tracka_liq_xsec_20261112T201536Z", frozen=True)
+        a_sha = _write_panel(self.root, "research_state/tracka_vol_fullhist_panel_20261112T201536Z.parquet")
+        self._report("tracka_vol_fullhist_panel_build_report_20261112T201536Z", a_sha)
+        self._eval("evaluation_summary_TRACKA-VOL-FULLHIST-20261112T201536Z", "NOT_MET")
+        b_sha = _write_panel(self.root, "research_state/tracka_liq_xsec_panel_20261112T201536Z.parquet")
+        self._report("tracka_liq_xsec_panel_build_report_20261112T201536Z", b_sha)
+        self._eval("evaluation_summary_TRACKA-LIQ-XSEC-20261112T201536Z", "EXPLORATORY_NULL")
+
+        self.assertTrue(all(c["ok"] for c in gate.run_arm_a(self.root)))
+        self.assertTrue(all(c["ok"] for c in gate.run_arm_b(self.root)))
+        f = gate.run_arm_f(self.root)
+        self.assertFalse(all(c["ok"] for c in f)), "Arm F passed without the forward cell"
+        failed = {c["check"] for c in f if not c["ok"]}
+        self.assertEqual(failed, {"F1", "F3_panel", "F3_report", "F4"})
+
+    def test_forward_arm_complete_passes(self):
+        self._install_bulk_script()
+        for dataset in gate.BULK_DATASETS:
+            for month in gate.BULK_MONTHS:
+                self._write_bulk_object(dataset, month)
+        self._write_forward_labels()
+        self._prereg("prereg_tracka_liq_xsec_forward_20261113T000000Z", frozen=True)
+        f_sha = _write_panel(self.root, "research_state/tracka_liq_xsec_forward_panel_20261113T000000Z.parquet")
+        self._report("tracka_liq_xsec_forward_panel_build_report_20261113T000000Z", f_sha)
+        self._eval("evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-20261113T000000Z", "EXPLORATORY_NULL")
+        f = gate.run_arm_f(self.root)
+        self.assertTrue(all(c["ok"] for c in f), f)
+
+    def test_forward_panel_hash_mismatch_fails(self):
+        self._install_bulk_script()
+        for dataset in gate.BULK_DATASETS:
+            for month in gate.BULK_MONTHS:
+                self._write_bulk_object(dataset, month)
+        self._write_forward_labels()
+        self._prereg("prereg_tracka_liq_xsec_forward_20261113T000000Z", frozen=True)
+        _write_panel(self.root, "research_state/tracka_liq_xsec_forward_panel_20261113T000000Z.parquet")
+        self._report("tracka_liq_xsec_forward_panel_build_report_20261113T000000Z", "0" * 64)
+        self._eval("evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-20261113T000000Z", "EXPLORATORY_NULL")
+        f = gate.run_arm_f(self.root)
+        report = [c for c in f if c["check"] == "F3_report"][0]
+        self.assertFalse(report["ok"])
+        self.assertIn("MISMATCH", report["detail"])
 
 
 if __name__ == "__main__":
