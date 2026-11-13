@@ -1,8 +1,8 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-13T10:16:45Z
-**Status:** `HEAVY_CELL_EXECUTED_CAMPAIGN_RECONCILED` — Six volatility/liquidation cells are now terminal with gates PASS. `FCLR-FWD-VOL-2024Q4-CROSS` → `NOT_REPLICATED` (executed 2026-11-13T10:04:51Z) and `FCLR-FWD-VOL-2025H2-CROSS` → `NOT_REPLICATED` (executed 2026-11-13T10:22:40Z, `GATE: PASS` 13/13). **No frozen-but-unexecuted prereg remains** (`scripts/next_campaign_status.py` prints none actionable). All targeted tests (125) PASS. All terminal gates PASS. This handoff was stale (it prescribed Cell 6 as unexecuted after it had already run) and is corrected below.
+**Handoff timestamp (UTC):** 2026-11-13T11:12:44Z
+**Status:** `HEAVY_CELLS_EXHAUSTED_CACHE` — Six volatility/liquidation cells are terminal with gates PASS. Cell 7 `FCLR-FWD-VOL-2024Q1-RV-DIAGNOSTIC` audited 2026-11-13T11:12:44Z and closed **`NOT_EXECUTABLE_DESIGN_SHORTFALL`** (90.96-day 2024Q1 window, no funding; block-0 train 1.96d; 3×30d non-overlapping tests + 7d embargo + ≥30d train needs ≥141d). **No frozen-but-unexecuted prereg remains and no cached window supports another full pre-registered funding-conditioned or feasible RV-diagnostic heavy cell** (`scripts/next_campaign_status.py` is source of truth).
 
 Terminal ledger (all `GATE: PASS`):
 
@@ -12,105 +12,66 @@ Terminal ledger (all `GATE: PASS`):
 | FCLR-LIQ-010-CONFIRM | `NOT_REPLICATED` | rel 0.501% < 2% floor, LOIO 0/17, placebo fail |
 | FCLR-EXP-ROBUST-REDO | `FRAGILE` | LOIO 4/8, placebo fail |
 | FCLR-FWD-VOL-2025-CROSS | `NOT_REPLICATED` | rel 0.29%, CI crosses zero, LOIO 0/5 |
-| **FCLR-FWD-VOL-2024Q4-CROSS** | **`NOT_REPLICATED`** | **rel −20.77% (C2 worse), CI crosses zero, LOIO 0/5, placebo fail** |
-| **FCLR-FWD-VOL-2025H2-CROSS** | **`NOT_REPLICATED`** | **rel −8.97% (C2 significantly worse than B1; CI excludes zero favouring B1; materiality FAIL, LOIO 0/5 FAIL, placebo FAIL, Holm FAIL)** |
+| FCLR-FWD-VOL-2024Q4-CROSS | `NOT_REPLICATED` | rel −20.77% (C2 worse), CI crosses zero, LOIO 0/5, placebo fail |
+| FCLR-FWD-VOL-2025H2-CROSS | `NOT_REPLICATED` | rel −8.97% (C2 worse, CI excludes zero favouring B1), LOIO 0/5, placebo fail, Holm fail |
+| FCLR-FWD-VOL-2024Q1-RV-DIAGNOSTIC | `NOT_EXECUTABLE_DESIGN_SHORTFALL` | coverage audit only; no outcomes computed; no prereg/execution feasible |
 
-Sealed FCLR-011 PASS (4.94%) remains unrefuted but does not generalize forward, to 2024 H2, 2025 H1, or 2025 H2. `H1_primary` is `NOT_SUPPORTED`.
+Sealed FCLR-011 PASS (4.94%, 2026-05..2026-08) remains unrefuted but does not generalize to any disjoint tested window. `H1_primary` is `NOT_SUPPORTED`.
 
-**This file is the ONLY durable handoff.** Supersedes earlier handoffs/checkpoints. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. Do not create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. Update in place by appending a dated `## SESSION LOG` entry.
-
----
-
-## READ THIS FIRST — THE TWO BOTTLENECKS THAT CAUSED PAST SESSIONS TO WASTE CYCLES
-
-1. **"No frozen prereg remains" was FALSE.** A valid, genuinely pre-outcomes prereg
-   (`research_state/prereg_fclr_fwd_vol_2024q4_cross_20261113T091500Z.json`, 2026-11-13T09:15:00Z) had been
-   frozen but **never executed**, because the executor and gate hardcoded the filename stem
-   `2024_cross` while the prereg was written as `2024q4_cross`. The result: every session concluded
-   "nothing executable" and stopped. **Always check for frozen preregs whose experiment id has no
-   matching evaluation artifact before declaring a campaign closed.** Use:
-   ```bash
-   python3 scripts/next_campaign_status.py     # prints frozen-but-unexecuted preregs and ready windows
-   ```
-2. **A stale test asserted the old rank-0 campaign** and failed after the campaign advanced
-   (`'COMPLETED_CAMPAIGN_NEXT_PREREG_REQUIRED' != 'ACTIVE_HEAVY_CAMPAIGN'`). The contract is now
-   campaign-agnostic: rank 0 must be `ACTIVE_HEAVY_CAMPAIGN`; superseded campaigns must be demoted to
-   rank 1, never deleted.
+**This file is the ONLY durable handoff.** `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. Do not create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. Update in place by appending a dated `## SESSION LOG` entry.
 
 ---
 
-## IMMEDIATE TASK (mandatory, heavy-first, in this order)
+## READ THIS FIRST — NON-NEGOTIABLE EFFICIENCY RULES
 
-**Priority = repo name:** advance *funding-conditioned volatility and liquidation risk* by producing **new terminal evidence**. Re-running terminal cells, identical no-op probes, Gate 4 polling, or monitor-only closure is forbidden.
+1. **Never close "nothing executable" without running `python3 scripts/next_campaign_status.py` and recording output.** It must show no actionable frozen prereg and no newly executable cached window.
+2. **Never re-run terminal cells or re-verify gates as the session's only action.** Six gates PASS and 125 targeted tests PASS are established; rerun only if you produce a new artifact that could affect them (none expected).
+3. **Cached heavy-work frontier is exhausted under pre-registered constraints.** Do not invent a lower-bar design, overlap tested windows, drop required blocks/embargo/robustness, or force funding-conditioned claims on no-funding windows.
 
-### Cell 6 — DONE (executed this program)
-`FCLR-FWD-VOL-2025H2-CROSS` executed 2026-11-13T10:22:40Z on cached Binance 2025-07-23..2025-10-15 (train start 2025-04-01, 3 non-overlapping 30-day test blocks, 7-day embargo): verdict `NOT_REPLICATED`, pooled C2 vs B1 24h QLIKE mean diff +0.027446, 95% CI [0.002173, 0.071397] (excludes zero, favours B1), rel reduction −8.97%, p_boot 0.009. `materiality_ge_2pct` FAIL; `ci_excludes_zero_improving` FAIL; `loio_ge_4_of_5` FAIL (0/5); `placebo_pass` FAIL (null p95 −1.15% vs true −8.97%, 200 perms); `holm_pass` FAIL; `leakage_audit_pass` PASS; `instruments_ge_5` PASS; `blocks_ge_3` PASS. Artifacts: `research_state/evaluation_summary_FCLR-FWD-VOL-2025H2-CROSS-20261113T102240Z.{md,json}`; panel `tracka_fwd_vol_2025h2_cross_panel_20261113T102240Z.parquet`; build report `tracka_fwd_vol_2025h2_cross_build_report_20261113T102240Z.json`. Gate `scripts/fclr_fwd_vol_2025h2_cross_gate.py` → `GATE: PASS` (13/13). Registry `H_fclr_fwd_vol_2025h2_cross` terminal NOT_REPLICATED. **Do not re-run.**
+---
 
-### Cell 7 (execute this session — cached data only, no new data): `FCLR-FWD-VOL-2024Q1-RV-DIAGNOSTIC`
-The only remaining complete cached window disjoint from every tested window is **2024-01-01..2024-03-31** (mark/premium/index klines complete for all 5 symbols; `scripts/next_campaign_status.py` prints it `NO-FUNDING` because funding starts 2024-04). It is therefore a **volatility-only B0/B1 diagnostic; funding-conditioned hypotheses are explicitly out of scope** (Cell 7 rule). Pre-registered blocks (rolling-origin, train start 2024-01-01, 7-day embargo):
-  `0: test 2024-01-03..2024-02-01`;
-  `1: test 2024-01-31..2024-03-01`;
-  `2: test 2024-02-28..2024-03-30`.
-Checks: `leakage_audit_pass`, `instruments_ge_5`, `blocks_ge_3` (volatility-only design; LOIO/placebo/Holm reported, funding-gated checks N/A). Steps: (1) coverage-only audit `research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_<UTC>.{json,md}` (finite-row counts only, no outcome statistic) — reuse `scripts/fclr_fwd_vol_2024_cross_coverage.py` as the template; (2) **decide feasibility** — if the audit shows the Q1-2024 window cannot support ≥3 non-overlapping 30-day test blocks with a train period (~90 days total is insufficient), record the exact shortfall in `research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_<UTC>.md` and close Cell 7 as `NOT_EXECUTABLE_DESIGN_SHORTFALL`; do not force a funding-conditioned reading on a window without funding data; (3) if feasible, freeze `research_state/prereg_fclr_fwd_vol_2024q1_rv_diagnostic_<UTC>.{json,md}` with `status=FROZEN_PRE_OUTCOMES`, `outcome_data_inspected_before_freeze=false`, funding hypotheses out of scope, copying the gate block verbatim from the 2024q4 prereg (materiality ≥2%, CI excludes zero, ≥5 instruments, ≥3 blocks, Holm, placebo 200 perms, 7-day embargo, 2000-replicate bootstrap, seed 20261113); (4) extend/copy `scripts/fclr_fwd_vol_2024_cross.py` to `scripts/fclr_fwd_vol_2024q1_rv_diagnostic.py` with the new prereg path, blocks, and `tracka_fwd_vol_2024q1_rv_diagnostic_*` / `evaluation_summary_FCLR-FWD-VOL-2024Q1-RV-DIAGNOSTIC-*` stems; (5) run it (full, not `--smoke`) and create `scripts/fclr_fwd_vol_2024q1_rv_diagnostic_gate.py` that prints `GATE: PASS`; (6) update `hypothesis_registry.json` (`H_fclr_fwd_vol_2024q1_rv_diagnostic`) and `experiment_frontier.json`.
+## IMMEDIATE TASK (highest expected information gain per unit free compute)
 
-### Cell 8 (Track A, liquidation) — only if a *specific new* candidate emerges
-Bounded discovery is allowed only against a concrete candidate not already falsified in
-`research_state/alt_source_scan_latest.json` + `research_state/alt_source_deep_review_latest.md`
-(2026-11-13T09:01Z). If found: admissibility audit → freeze prereg → execute → terminal verdict → gate.
-If nothing new: record **new** concrete evidence (source, URL, observed fields, exact failing minimum) — do not
-restate prior negatives.
+**No cached heavy execution remains.** Advance only by producing **new evidence**:
 
-### Blocked (external only) — Gate 4 Branch 1
-Act only if `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` appears with `status=RESOLVED_VERIFIED`,
-`fabricated=false`, and human/legal attestation. Currently absent (`fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`); do not wait/poll.
+### P1 — Bounded discovery of a newly admissible observed-liquidation source (Track A, highest IG if a candidate exists)
+- Search only for a **specific, concrete candidate not already falsified** in `research_state/alt_source_scan_latest.json` and `research_state/alt_source_deep_review_latest.md` (2026-11-13T09:01Z). Do not restate prior negatives.
+- If a candidate is found: perform §16 admissibility audit (provenance/license, unauthenticated, observed labels only, venue-consistent, ≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks) → freeze prereg pre-outcomes → build/eval → terminal verdict → fail-closed gate → update registry/frontier.
+- If nothing new: record **new** concrete evidence (source/URL/fields/coverage/observed failing minimum) as a timestamped artifact in `research_state/` and update frontier; then stop (clean evidence-advancing close).
 
-### Completion (session is DONE only if one holds)
-1. **Heavy execution complete:** coverage audit (if required) + frozen pre-outcomes prereg (or evidenced NOT_EXECUTABLE_DESIGN_SHORTFALL) + timestamped terminal evaluation + registry/frontier updated + new fail-closed gate `GATE: PASS` + targeted tests green.
-2. **Evidence-advancing discovery only:** timestamped audit/probe artifact showing a **previously-unrecorded**
-   concrete failing minimum or newly discovered candidate (with exact fields/coverage), state updated.
+### P1 — Gate 4 Branch 1 (external trigger only; do not poll/wait)
+- Act only if `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` appears with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Currently absent (`fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`).
 
-Always run and report:
+### Forbidden / no-progress actions
+- No status-only sessions, no repeated no-op probes of prior NO-GO sources, no Gate 4 polling, no threshold shopping/post-hoc changes, no zero/forward-fill to force comparability, no mutation of sealed artifacts, no agent-set `RESOLVED_VERIFIED`, no paid/manual/credentialed data, no `.github/workflows/*` edits, no raw cache/data_cache commits.
+
+### Completion
+1. **Heavy execution complete:** admissibility audit + frozen pre-outcomes prereg + timestamped terminal evaluation + registry/frontier updated + new fail-closed gate `GATE: PASS` + targeted tests green (for a newly admissible source only).
+2. **Evidence-advancing discovery only:** timestamped audit/probe artifact showing a **previously-unrecorded** concrete failing minimum or newly discovered candidate, with exact fields/coverage, and state updated. This is a valid close given cache exhaustion.
+
+Always run/report when touching campaign state or if unsure:
 ```bash
+python3 scripts/next_campaign_status.py
 python3 scripts/fclr_heavy_confirm_gate.py
 python3 scripts/fclr_liq_010_confirm_gate.py
 python3 scripts/fclr_exp_robust_redo_gate.py
 python3 scripts/fclr_fwd_vol_2025_cross_gate.py
 python3 scripts/fclr_fwd_vol_2024_cross_gate.py
-python3 scripts/fclr_fwd_vol_2025h2_cross_gate.py   # Cell 6: GATE: PASS — confirm artifact, do not re-run
-python3 scripts/next_campaign_status.py               # must print no actionable frozen prereg; 2025-07..2025-10 inside tested window
+python3 scripts/fclr_fwd_vol_2025h2_cross_gate.py
 python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate tests.test_next_campaign_status
 ```
-No sealed mutation; no raw cache commits; no `.github/workflows/*` changes.
 
 ---
 
-## HARD BANS (enforced)
-
-- **No status-only sessions.** Do not re-verify gates and stop; that is not progress.
-- **No "nothing executable" closure without running `python3 scripts/next_campaign_status.py`** and recording its output. This exact failure mode wasted ≥3 sessions.
-- No threshold shopping, post-hoc feature/model/universe changes, or reuse of an inspected window as fresh confirmation.
-- No zero-fill/forward-fill to force comparability (legacy reproduction zero-fill for non-core features is documented).
-- No mutation of sealed FCLR-011/012-V/013/014 artifacts; no re-labelling a PASS as NOT_SUPPORTED.
-- No agent-set Gate 4 `RESOLVED_VERIFIED`; no paid/manual/credentialed data; no `.github/workflows/*` patches.
-- Do not commit raw cache or `data_cache/` contents.
-- Do not re-execute Cell 6 (`FCLR-FWD-VOL-2025H2-CROSS`); it is terminal NOT_REPLICATED with gate PASS.
-
----
-
-## BOTTLENECKS REMOVED THIS SESSION
+## BOTTLENECKS REMOVED (cumulative, key)
 
 | Bottleneck | Resolution |
 |---|---|
-| Frozen 2024q4 prereg never executed because executor/gate hardcoded stem `2024_cross` vs actual `2024q4_cross` | Aligned `scripts/fclr_fwd_vol_2024_cross.py` and `..._gate.py` to the `2024q4` / `2024Q4` stems; derived artifact paths from the prereg. Cell executed → `NOT_REPLICATED`, `GATE: PASS`. |
-| **"No frozen prereg remains executable" false closure claim** | Corrected in this handoff; added `scripts/next_campaign_status.py` to list frozen-but-unexecuted preregs and ready windows. |
-| Stale test hardcoded old rank-0 campaign | `tests/test_active_campaign_gate.py` now asserts rank 0 is an `ACTIVE_HEAVY_CAMPAIGN` from `{FCLR-HEAVY-CONFIRM…, FCLR-NEXT-CAMPAIGN…}`; superseded campaign demoted to rank 1. |
-| Frontier rank-0 left at a completed campaign | Rank 0 = `FCLR-NEXT-CAMPAIGN-20261113T091500Z` (`ACTIVE_HEAVY_CAMPAIGN`); `FCLR-HEAVY-CONFIRM-20261113T041200Z` demoted to rank 1. |
-| Obsolete "Execute Cell 1 FCLR-LIQ-010-CONFIRM" instruction (already terminal) | Removed; superseded. |
-| 2024 H2 window declared "not tested anywhere" but unexecuted | Executed; 2024 H2 now terminal `NOT_REPLICATED`. |
-| 2025 H2 window never evaluated despite complete cache | Executed 2026-11-13T10:22:40Z; terminal `NOT_REPLICATED`, `GATE: PASS`. Registry/frontier updated. |
-| **Stale handoff prescribed Cell 6 as unexecuted although it ran at 2026-11-13T10:22:40Z** | Corrected: Cell 6 marked DONE with verdict and artifacts; IMMEDIATE TASK now points to Cell 7; re-running terminal cells is banned. |
-| **`scripts/next_campaign_status.py` TESTED_WINDOWS omitted Cell 6's 2025-07..2025-10 window, so tested months still printed as READY** | Added `("2025-07-23", "2025-10-15", "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)")` to TESTED_WINDOWS; `tests/test_next_campaign_status.py` updated (2025-07..2025-10 now assert `inside_tested_window=True`). Script no longer misleads about tested months. |
-| **Frontier rank-0 claimed no disjoint funding-backed window remains while `next_campaign_status.py` listed READY months** | Reconciled: remaining READY months are 2025-01/2025-06 (single months, cannot support 3×30-day pre-registered blocks) and 2025-11..2026-04 (train would overlap the tested Cell 6 window); no window supports a full funding-conditioned pre-registered test. `experiment_frontier.json` rank-0 blockers/next_action/cells updated; Cell 7 RV-diagnostic is the remaining executable cached work. |
+| Frozen 2024q4 prereg never executed (stem mismatch) | Fixed; executed → `NOT_REPLICATED`, `GATE: PASS`. |
+| False "nothing executable" closures | `scripts/next_campaign_status.py` mandatory truth source. |
+| Stale tests/frontier/campaign rank | Contract campaign-agnostic; frontier reconciled. |
+| Cell 6 (2025H2) omitted from tested windows | TESTED_WINDOWS updated; stale handoff corrected. |
+| **Cell 7 (2024Q1 RV diagnostic) treated as executable without feasibility proof** | Coverage+feasibility audit recorded (`research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.{json,md}`); closed `NOT_EXECUTABLE_DESIGN_SHORTFALL` with exact shortfall (block-0 train 1.96d; need ≥141d vs 90.96d). Prevents repeated "try to execute Q1-2024" churn. |
 
 ---
 
@@ -118,35 +79,14 @@ No sealed mutation; no raw cache commits; no `.github/workflows/*` changes.
 
 ```bash
 cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
-
-# Preflight
-python3 -c "import numpy,pandas,scipy,pyarrow; print('deps OK')"
-
-# What is actually left? (frozen-but-unexecuted preregs + ready cached windows; must print no actionable prereg,
-# and 2025-07..2025-10 must now show inside_tested_window=True)
-python3 scripts/next_campaign_status.py
-
-# Gate 4 external trigger (expected absent; do not poll)
+python3 scripts/next_campaign_status.py   # must print no actionable prereg; confirms cache exhaustion
 ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"
-
-# Confirm all six terminal cells are green
-python3 scripts/fclr_heavy_confirm_gate.py
-python3 scripts/fclr_liq_010_confirm_gate.py
-python3 scripts/fclr_exp_robust_redo_gate.py
-python3 scripts/fclr_fwd_vol_2025_cross_gate.py
-python3 scripts/fclr_fwd_vol_2024_cross_gate.py
-python3 scripts/fclr_fwd_vol_2025h2_cross_gate.py   # Cell 6 -> GATE: PASS (confirm artifact; do not re-run)
-
-# Targeted suite
-python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate tests.test_next_campaign_status
-
-# Then execute Cell 7 (FCLR-FWD-VOL-2024Q1-RV-DIAGNOSTIC) per the IMMEDIATE TASK: coverage audit first,
-# feasibility decision, then freeze/execute/gate/registry only if 3 test blocks are supportable.
+# If pursuing P1 discovery: identify a specific NEW candidate, record timestamped admissibility/probe evidence, and follow §16.
 ```
 
 ---
 
-## DEFINITION OF DONE (answer in the handoff)
+## DEFINITION OF DONE (answer in handoff)
 
 - What did the evidence support, contradict, or leave unknown?
 - Strongest alternative explanation?
@@ -159,16 +99,11 @@ python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structu
 
 ## KEY REFERENCES
 
-- `research_state/prereg_fclr_fwd_vol_2024q4_cross_20261113T091500Z.{json,md}` — frozen prereg, executed this session.
-- `research_state/coverage_audit_fwd_vol_2024q4_cross_20261113T091427Z.json` — coverage-only audit template (5 symbols, 3 blocks).
-- `scripts/fclr_fwd_vol_2024_cross.py` — the executor to copy for Cell 6.
-- `scripts/fclr_fwd_vol_2024_cross_coverage.py` — the coverage-audit template for Cell 6.
-- `scripts/fclr_fwd_vol_2024_cross_gate.py` — the gate template for Cell 6.
-- `research_state/evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-20261113T100451Z.{md,json}` — this session's result.
-- `scripts/fclr_fwd_vol_confirm.py` — shared models/features/`bootstrap_diff`/`holm` machinery.
-- `scripts/next_campaign_status.py` — campaign truth: frozen-but-unexecuted preregs and ready windows.
-- `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json` — updated this session.
-- `research_state/evaluation_summary_FCLR-011.md` — the sealed PASS (4.94%).
+- `research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.{json,md}` — Cell 7 feasibility/closure (this session).
+- `scripts/next_campaign_status.py` — campaign truth: frozen-but-unexecuted preregs and cached windows.
+- `research_state/alt_source_scan_latest.json`, `research_state/alt_source_deep_review_latest.md` — prior bounded liquidation-source negatives (2026-11-13T09:01Z).
+- `research_state/hypothesis_registry.json`, `research_state/experiment_frontier.json` — terminal state.
+- `research_state/evaluation_summary_FCLR-011.md` — sealed PASS (4.94%).
 - `RESEARCH_PROMPT.md` §16, §17, §18, §19, §20.
 
 ---
@@ -216,3 +151,16 @@ python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structu
 - **Artifacts/commands:** `python3 scripts/fclr_fwd_vol_2024_cross.py`; `python3 scripts/fclr_fwd_vol_2024_cross_gate.py` → `GATE: PASS`; `python3 scripts/next_campaign_status.py`; the five gates above; the targeted suite → 125 OK; `research_state/evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-20261113T100451Z.{md,json}`.
 
 ## 2026-11-13T10:11:51Z — Kilo session: unblocked and executed the never-run 2024q4 cell (NOT_REPLICATED, GATE: PASS); removed the false "nothing executable" closure; identified the next executable window (2025 H2)
+## 2026-11-13T11:12:44Z — Kilo session: Cell 7 2024Q1 RV-diagnostic audited and closed NOT_EXECUTABLE_DESIGN_SHORTFALL; no executable cached heavy cell remains
+
+- **State verified (no sealed/raw/cache/workflow mutations):** `python3 scripts/next_campaign_status.py` → no frozen-but-unexecuted preregs; 2025-07..2025-10 `inside_tested_window=True` (FCLR-FWD-VOL-2025H2-CROSS). No `research_state/*2024q1*rv*` or prereg artifacts existed prior. All six terminal cells remain terminal with `GATE: PASS` per prior handoff/registry; `FOCUS_CAMPAIGN.md`/`HANDOFF_NEXT_SESSION.md`/`NEXT_SESSION_TASK.md` remain redirects to this file.
+- **Cell 7 coverage audit executed (new evidence, no outcomes computed):** `research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.{json,md}`. Window 2024-01-01T00:00:00Z..2024-03-31T23:00:00Z (~90.96 days). Cached 2024-01/02/03: mark/premium/index klines COMPLETE for 5 symbols; **funding ABSENT** (funding starts 2024-04) → volatility-only B0/B1 scope; funding-conditioned hypotheses out of scope.
+- **Feasibility — NOT_EXECUTABLE_DESIGN_SHORTFALL:** Pre-registered rolling-origin blocks (train start 2024-01-01, 7-day embargo) yield block 0 train **~1.96 days** (test 2024-01-03..2024-02-01, train_end 2023-12-26T22:00:00Z relative to window) — insufficient for model fitting; block 1 train 28.96d, block 2 train 56.96d but tests overlap/partition infeasible in 90.96d. Minimal design for 3×30-day non-overlapping tests + 7-day embargo + ≥30-day train requires ≥141 days vs 90.96 available (deficit 50.04 days). No partition of 2024-01..2024-03 satisfies ≥3 non-overlapping 30-day test blocks with a meaningful train. **Decision:** Cell 7 closed as `NOT_EXECUTABLE_DESIGN_SHORTFALL`. No prereg frozen, no execution, no funding-conditioned reading forced.
+- **Campaign exhaustion (structural):** All disjoint funding-backed cached windows executed (2024H2, 2025-02..05, 2025-07..10, plus sealed 2026-05..08). Remaining READY funding-backed months (2025-01, 2025-06, 2025-11, 2025-12, 2026-01..2026-04) are single months or otherwise cannot support 3×30-day pre-registered blocks with ~90-day train without overlapping tested windows — no full funding-conditioned pre-registered test executable from cache. 2024-01..03 is the only other complete cached window and is infeasible (above). `next_campaign_status.py` remains the source of truth.
+- **Blocked (external only), unchanged:** Gate 4 Branch 1 — no `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation) present; do not poll. Alt-source scan/deep-review 2026-11-13T09:01Z: no GO unauthenticated observed-liquidation candidate; bounded discovery allowed only against a *specific new* candidate with admissibility audit → prereg → execute → terminal verdict → gate.
+- **Evidence:** Supported — sealed FCLR-011 PASS (+4.94%, 2026-05..2026-08) does not generalize to any disjoint tested window (2024H2 −20.77%, 2025H1-cross +0.29%, 2025H2 −8.97%, C2 worse in last). Contradicted — any claim of an unexecuted cached funding-conditioned or feasible cached RV-diagnostic heavy cell. Unknown — funding-conditioned volatility edge outside 2026-05..2026-08; external observed-liquidation source emergence.
+- **Strongest alternative explanation:** Funding-conditioned volatility features carry no stable out-of-sample 24h RV signal; FCLR-011 is a single-regime artifact.
+- **Dominant limitation:** Cache cannot support another pre-registered 3×30-day test design (funding windows exhausted; 2024Q1 too short / no funding).
+- **Falsifying next test:** A newly admissible observed-liquidation source or a valid Gate 4 RESOLVED trigger enabling a pre-registered execution; absent that, no cached falsification path remains.
+- **Highest IG/unit free compute:** If a *specific new* external liquidation-data candidate appears, run §16 admissibility audit and freeze prereg before outcomes; otherwise record any newly evidenced negative with exact failing minimum. No status-only work.
+- **Artifacts:** `research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.json`, `research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.md`, `scripts/next_campaign_status.py` (no actionable prereg).

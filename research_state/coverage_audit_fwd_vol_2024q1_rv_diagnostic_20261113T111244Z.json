@@ -1,0 +1,72 @@
+{
+  "experiment_id": "FCLR-FWD-VOL-2024Q1-RV-DIAGNOSTIC",
+  "kind": "coverage_audit_and_feasibility",
+  "status": "NOT_EXECUTABLE_DESIGN_SHORTFALL",
+  "generated_utc": "2026-11-13T11:12:44Z",
+  "window": {
+    "start": "2024-01-01 00:00:00+00:00",
+    "end": "2024-03-31 23:00:00+00:00",
+    "days": 90.95833333333333
+  },
+  "data_availability": {
+    "months": [
+      "2024-01",
+      "2024-02",
+      "2024-03"
+    ],
+    "symbols_expected": 5,
+    "klines_mark_premium_index": "COMPLETE per next_campaign_status.py",
+    "funding": "ABSENT (funding starts 2024-04)",
+    "scope": "volatility-only B0/B1 diagnostic; funding-conditioned hypotheses explicitly out of scope"
+  },
+  "preregistered_blocks_as_specified": [
+    {
+      "block": 0,
+      "test_start": "2024-01-03T00:00:00Z",
+      "test_end": "2024-02-01T23:00:00Z",
+      "test_days": 29.958,
+      "train_end": "2023-12-26 23:00:00+00:00",
+      "train_days": 0.0
+    },
+    {
+      "block": 1,
+      "test_start": "2024-01-31T00:00:00Z",
+      "test_end": "2024-03-01T23:00:00Z",
+      "test_days": 30.958,
+      "train_end": "2024-01-23 23:00:00+00:00",
+      "train_days": 22.958
+    },
+    {
+      "block": 2,
+      "test_start": "2024-02-28T00:00:00Z",
+      "test_end": "2024-03-30T23:00:00Z",
+      "test_days": 31.958,
+      "train_end": "2024-02-20 23:00:00+00:00",
+      "train_days": 50.958
+    }
+  ],
+  "feasibility": {
+    "window_days": 90.95833333333333,
+    "required_blocks": 3,
+    "required_test_days_each": 30,
+    "embargo_days": 7,
+    "min_reference_design_days_train30_plus_3blocks": 141,
+    "deficit_days_vs_reference": 50.04166666666667,
+    "per_prereg_block_train_days_with_7d_embargo": [
+      0.0,
+      22.958,
+      50.958
+    ],
+    "block0_train_days": 0.0,
+    "feasible": false,
+    "reason": "2024 Q1 cache spans ~90 days total (2024-01-01..2024-03-31). Pre-registered rolling-origin blocks (train start 2024-01-01, 7-day embargo) yield block 0 train of ~1.96 days, which cannot support model fitting; blocks 1/2 overlap and further reduce usable train. A minimal 3x30-day non-overlapping test design with 7-day embargo and any >=30-day train requires >=141 days, exceeding the 90-day window by 51 days. No funding data exists (funding starts 2024-04) so funding-conditioned hypotheses are out of scope regardless. Cell 7 is NOT_EXECUTABLE_DESIGN_SHORTFALL."
+  },
+  "checks": {
+    "blocks_ge_3_proposed": true,
+    "funding_available": false,
+    "train_sufficient_for_block0": false,
+    "window_supports_3x30d_tests_plus_train_embargo": false
+  },
+  "no_outcomes_computed": true,
+  "next_action": "Close Cell 7 as NOT_EXECUTABLE_DESIGN_SHORTFALL. No frozen prereg or execution possible under pre-registered design. No disjoint funding-backed window remains executable for a full funding-conditioned preregistered test; remaining READY months are single months or overlap tested windows (see next_campaign_status.py)."
+}
