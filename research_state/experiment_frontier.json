@@ -2,18 +2,18 @@
   {
     "task": "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z",
     "rank": 0,
-    "status": "ACTIVE_HEAVY_CAMPAIGN",
-    "program_status": "ACTIVE",
-    "next_unfinished_task": "Execute Arm A (TRACKA-VOL-FULLHIST-20261112T201536Z, P1) then Arm B (TRACKA-LIQ-XSEC-20261112T201536Z, P2 exploratory). See AGENT_HANDOFF.md START HERE and \u00a74/\u00a75.",
+    "status": "COMPLETED",
+    "program_status": "COMPLETED",
+    "next_unfinished_task": null,
     "generated": "2026-11-12T22:40:00Z",
-    "last_checked": "2026-11-12T22:40:00Z",
-    "blockers": "Bulk ironflow cache absent (48/48 objects in ironflow_bulk_manifest.json; only funding/2025-06.parquet present). Bounded unauthenticated cache-first fetch required. Gate 4 external/legal (not a blocker for either arm).",
-    "next_action_heavy": "1) python3 scripts/fclr_ironflow_bulk.py fetch --datasets candles_1h,funding,open_interest --months 2025-05..2026-04; 2) fetch liquidations 2025-05..2025-10; 3) verify all; 4) build Arm A panel + OLS B1/C1/C2 + 12-comparison Holm + 2000-rep block bootstrap + LOIO/placebo + 7 \u00a717 checks; 5) build Arm B cross-section panel + Spearman IC + 1000-rep permutation; 6) emit both evaluation_summary_*.{md,json}; 7) update registries and append handoff log. Never read 2026-01-18..2026-04-30 or 2026-05-01..2026-10-31; never use liquidation labels in Arm A.",
+    "last_checked": "2026-11-13T02:44:48Z",
+    "blockers": "None. Both frozen preregs executed: Arm A TRACKA-VOL-FULLHIST-20261112T201536Z verdict NOT_MET (evaluation_summary_TRACKA-VOL-FULLHIST-2026-11-13T02:44:48Z.{md,json}); Arm B TRACKA-LIQ-XSEC-20261112T201536Z verdict EXPLORATORY_NULL (evaluation_summary_TRACKA-LIQ-XSEC-2026-11-13T00:33:08Z.{md,json}). Gate 4 external/legal remains absent (NO_VALID_GATE4_TRIGGER) and is not a blocker.",
+    "next_action_heavy": "COMPLETED. Arm A panel built + full evaluation run (2000-rep block bootstrap, 12-comparison Holm, LOIO/per-coin/per-block, placebo/permutation, 7 §17 criteria). Arm B cross-section evaluation previously completed. Hypothesis registry set terminal for both hypotheses; experiment_frontier rank-0 set COMPLETED/COMPLETED; SESSION LOG appended to AGENT_HANDOFF.md.",
     "resume_triggers": [],
     "supersedes_prior_next_task_entries": [
       "FCLR_FINAL_STRUCTURAL_CLOSURE_AND_REOPEN_CONDITIONS (premature CLOSED_TERMINAL)"
     ],
-    "artifact_churn_note": "2026-11-12T22:40:00Z: Two frozen preregs (prereg_tracka_vol_fullhist_20261112T201536Z, prereg_tracka_liq_xsec_20261112T201536Z; both frozen 2026-11-12T20:15:36Z, status FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false) were found unexecuted and ignored by the 21:12Z/22:12Z closure. This entry restores the active heavy campaign and demotes the closure entry."
+    "artifact_churn_note": "2026-11-12T22:40:00Z: Two frozen preregs (prereg_tracka_vol_fullhist_20261112T201536Z, prereg_tracka_liq_xsec_20261112T201536Z; both frozen 2026-11-12T20:15:36Z, status FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false) were found unexecuted and ignored by the 21:12Z/22:12Z closure. This entry restores the active heavy campaign and demotes the closure entry. 2026-11-13T02:44:48Z: Campaign COMPLETED — Arm A NOT_MET and Arm B EXPLORATORY_NULL both evaluated; frontier rank-0 set COMPLETED/COMPLETED; hypothesis registry set terminal for both hypotheses."
   },
   {
     "artifact_churn_note": "2026-11-12T17:04:57Z: Executed FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1. Bounded-feature Poisson/quasi-Poisson GLM (log link, IRLS, clip+standardize fundingRate/abs_fund_pct/premium/ema_dist to train [min,max]) on the SAME frozen panel and splits as the sealed campaign. NUMERICAL STABILITY RESOLVED: max row QLIKE \u2264 319 \u226a 1e6 (parent had C2 max 3.5e9). VERDICT: NOT_MET \u2014 mean QLIKE reduction 2.42% (materiality PASS) but 95% CI [\u22121.23, +0.85] upper > 0 and Holm not rejected (gate FAIL). Per-coin/per-block breakdown: block 3 (Oct-2025 spike) diff +1.13 (C2 worse); block 1 diff \u22121.70 (C2 better); ETH \u22122.97, BTC +0.93. Label ceiling hard: ironflow labels only 2025-05-25..2026-10-31; no earlier labels exist. Power adequate (246-261 pos days/block, 1016 paired rows, 9 instruments). No further estimator iteration on this source/design (per RESEARCH_PROMPT \u00a716 and prereg numerical_stability clause). Terminal structural stop document emitted: research_state/terminal_structural_stop_liq_glm_robust_20261112T170457Z.md. SUPERSEDED 2026-11-12T22:40:00Z: terminal closure was premature because FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z preregs were unexecuted.",

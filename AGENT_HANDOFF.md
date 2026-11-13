@@ -197,6 +197,15 @@ Expected end-of-session artifacts: `research_state/evaluation_summary_TRACKA-VOL
 
 ## 9. SESSION LOG (append-only; newest first)
 
+## 2026-11-13T02:44:48Z — Kilo session: Arm A TRACKA-VOL-FULLHIST-20261112T201536Z evaluation completed (verdict NOT_MET); both campaign hypotheses set terminal; frontier rank-0 set COMPLETED/COMPLETED; verification tests pass.
+
+- Evidence supported/contradicted/unknown: Supported — Arm A evaluation artifact exists (`evaluation_summary_TRACKA-VOL-FULLHIST-2026-11-13T02:44:48Z.{md,json}`) with verdict NOT_MET; Arm B EXPLORATORY_NULL artifact already existed (`evaluation_summary_TRACKA-LIQ-XSEC-2026-11-13T00:33:08Z.{md,json}`). Contradicted — no P1 forecast skill detected on the fresh holdout. Unknown — none remaining for this campaign; all frozen preregs executed.
+- Strongest alternative explanation: The funding-conditioned volatility signal is absent/too weak to clear the 2% materiality floor plus Holm multiplicity on the never-opened 2025-06-01..2026-01-17 holdout, consistent with all prior volatility campaigns (FCLR-014, TRACKA-VOL, TRACKA-ALT-VOL, TRACKA-VOL-FAMILY) which were NOT_MET. T24 rel reduction 1.19% (<2% floor); 95% CI [-0.0808,-0.0576] excludes zero in favor of C2 but Holm across the 12-comparison primary family not rejected.
+- Dominant limitation: Inference ceiling — even with a directionally favorable bootstrap CI, the 12-comparison Holm correction and 2% materiality floor are not cleared; no admissible data or design change available within this campaign can break the null.
+- Falsifying next test: Arm A clearing all gates (T24 rel QLIKE reduction >=2%, CI excludes zero in favor of C2, Holm rejected, >=5 instruments, >=3 blocks). No remaining local admissible test can falsify further; would require a new valid Gate 4 Branch 1 trigger or new observed-liquidation source.
+- Highest expected info gain per free compute: None remaining in this campaign — all claim-worthy local admissible experiments are exhausted. Future info gain requires external data (Gate 4 / new liquidation source / HL label extension).
+- Artifacts/commands: `research_state/evaluation_summary_TRACKA-VOL-FULLHIST-2026-11-13T02:44:48Z.{md,json}`; `research_state/tracka_vol_fullhist_panel_2026-11-13T02:44:48Z.parquet` + build report; `hypothesis_registry.json` (both hypotheses terminal); `experiment_frontier.json` (rank-0 COMPLETED/COMPLETED). Verify: `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit`.
+
 <!-- Format: ## <UTC> — <agent/session id> — <one-line outcome> ... -->
 
 ## 2026-11-13T01:20:00Z — Session state captured: Arm B (LIQ-XSEC) COMPLETED EXPLORATORY_NULL; Arm A (VOL-FULLHIST) panel built, evaluation PENDING; bulk cache ready for Arm A; tests fail on incomplete state; next session must complete Arm A eval and persist COMPLETED

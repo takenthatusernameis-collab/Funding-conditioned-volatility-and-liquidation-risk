@@ -556,7 +556,7 @@ def main() -> None:
         "features": {m: c for m, c in ALL_MODELS},
         "epsilon": EPS,
         "standardization": "train_split_mean_std_only",
-        "zero_variance_dropped": dropped,
+        "zero_variance_dropped": {f"{m}/{h}": dr for (m, h), dr in dropped.items()},
         "inputs_hashes": {"candles": candle_sums, "funding": funding_sums, "open_interest": oi_sums},
         "runtime_seconds": round(time.time() - t0, 2),
     }
@@ -579,7 +579,7 @@ def main() -> None:
     lines.append(f"- p_value (bootstrap sign, two-sided) = {bt['p_value']:.6f}")
     ho = holm_primary[(24, "C2_vs_B1")]
     lines.append(f"- Holm (12-comparison primary family): rank {ho['rank']}, alpha_adj {ho['alpha_adj']:.6f}, rejected = {ho['rejected']}")
-    lines.append(f"- n_pairs = {bt['n_pairs']}, instruments = {len(COINS)}, test blocks = 3", "")
+    lines.append(f"- n_pairs = {bt['n_pairs']}, instruments = {len(COINS)}, test blocks = 3")
     lines.append("## Full 12-comparison primary family (Holm, alpha 0.05)")
     lines.append("| Horizon | Contrast | QLIKE_base | QLIKE_alt | diff | rel_reduction_pct | 95% CI | p_value | Holm rejected |")
     for hh in HORIZONS:
@@ -614,11 +614,11 @@ def main() -> None:
     lines.append("## Placebo/permutation (funding features shuffled within train hour, 500 reps, seed 20261112)")
     lines.append(f"- observed diff T24 = {obs_diff:.8f}")
     lines.append(f"- null 95th percentile = {perm_95:.8f}")
-    lines.append(f"- p_value (two-sided) = {perm_p_two}", "")
+    lines.append(f"- p_value (two-sided) = {perm_p_two}")
     lines.append("## Section 17 promotion criteria")
     for k, v in promotion.items():
         lines.append(f"- {k}: {v}")
-    lines.append(f"- notes: {json.dumps(promotion_notes)}", "")
+    lines.append(f"- notes: {json.dumps(promotion_notes)}")
     lines.append("## Decision rule")
     lines.append(f"- primary_gate_pass = {primary_gate_pass}; conditions = {json.dumps(primary_cond)}")
     lines.append(f"- verdict = {verdict}")

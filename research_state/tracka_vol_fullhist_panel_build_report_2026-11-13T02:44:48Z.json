@@ -1,0 +1,244 @@
+{
+  "experiment_id": "TRACKA-VOL-FULLHIST-20261112T201536Z",
+  "campaign": "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z",
+  "arm": "A",
+  "prereg": "research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json",
+  "generated_utc": "2026-11-13T02:44:48Z",
+  "universe": [
+    "BTC",
+    "ETH",
+    "SOL",
+    "HYPE",
+    "ENA",
+    "WLD",
+    "FARTCOIN",
+    "TRUMP",
+    "NEAR",
+    "XRP"
+  ],
+  "n_coins": 10,
+  "windows_utc": {
+    "warmup_from": "2025-05-25 14:00:00",
+    "train": "2025-06-02 00:00:00 .. 2025-09-30 23:00:00",
+    "embargo_never_scored": "2025-10-01 00:00:00 .. 2025-10-07 23:00:00",
+    "test_blocks": [
+      [
+        0,
+        "2025-10-08 00:00:00",
+        "2025-11-06 23:00:00"
+      ],
+      [
+        1,
+        "2025-11-13 00:00:00",
+        "2025-12-12 23:00:00"
+      ],
+      [
+        2,
+        "2025-12-19 00:00:00",
+        "2026-01-17 23:00:00"
+      ]
+    ],
+    "reserved_never_touched": "2026-01-18 00:00:00 .. 2026-04-30 23:00:00",
+    "sealed_never_read": "2026-05-01 00:00:00 .. 2026-10-31 23:59:59"
+  },
+  "coverage": {
+    "BTC-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "ETH-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "SOL-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "HYPE-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "ENA-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "WLD-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "FARTCOIN-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "TRUMP-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "NEAR-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    },
+    "XRP-PERP": {
+      "candle_hours": 8170,
+      "funding_hours": 8170,
+      "oi_hours": 8122,
+      "full_grid_hours": 8170
+    }
+  },
+  "coverage_gaps": {
+    "primary_inputs_fail_closed": true,
+    "oi_secondary_gaps_hours": {
+      "BTC-PERP": 48,
+      "ETH-PERP": 48,
+      "SOL-PERP": 48,
+      "HYPE-PERP": 48,
+      "ENA-PERP": 48,
+      "WLD-PERP": 48,
+      "FARTCOIN-PERP": 48,
+      "TRUMP-PERP": 48,
+      "NEAR-PERP": 48,
+      "XRP-PERP": 48
+    },
+    "oi_gap_detail": "Each Arm A coin is missing exactly 48 OI hours on the hourly grid (2025-06-12 00:00..23:00 and 2026-02-12 00:00..23:00), forward-filled. OI feeds only the B2/C3 secondary family (never the primary C2_vs_B1 contrast), so no primary verdict is affected."
+  },
+  "panel": {
+    "path": "research_state/tracka_vol_fullhist_panel_2026-11-13T02:44:48Z.parquet",
+    "sha256": "2939f8c3b9bdb3925d96335b4b38ef5d3446f2400cafb76cbf03ee4e1e745096",
+    "n_rows": 49680,
+    "rows_before_validity": 55200,
+    "n_train": 28560,
+    "n_test_blocks": {
+      "test_b0": 5520,
+      "test_b1": 5520,
+      "test_b2": 5520
+    }
+  },
+  "features": {
+    "B1": [
+      "rv1h",
+      "rv24h",
+      "rv168h"
+    ],
+    "C1": [
+      "rv1h",
+      "rv24h",
+      "rv168h",
+      "funding_rate",
+      "abs_funding"
+    ],
+    "C2": [
+      "rv1h",
+      "rv24h",
+      "rv168h",
+      "funding_rate",
+      "abs_funding",
+      "premium",
+      "ema_dist"
+    ],
+    "B2": [
+      "rv1h",
+      "rv24h",
+      "rv168h",
+      "log_open_interest",
+      "dlog_open_interest_24h"
+    ],
+    "C3": [
+      "rv1h",
+      "rv24h",
+      "rv168h",
+      "funding_rate",
+      "abs_funding",
+      "premium",
+      "ema_dist",
+      "log_open_interest",
+      "dlog_open_interest_24h"
+    ]
+  },
+  "epsilon": 1e-12,
+  "standardization": "train_split_mean_std_only",
+  "zero_variance_dropped": {
+    "B1/6": [],
+    "B1/24": [],
+    "B1/72": [],
+    "B1/168": [],
+    "C1/6": [],
+    "C1/24": [],
+    "C1/72": [],
+    "C1/168": [],
+    "C2/6": [],
+    "C2/24": [],
+    "C2/72": [],
+    "C2/168": [],
+    "B2/6": [],
+    "B2/24": [],
+    "B2/72": [],
+    "B2/168": [],
+    "C3/6": [],
+    "C3/24": [],
+    "C3/72": [],
+    "C3/168": []
+  },
+  "inputs_hashes": {
+    "candles": {
+      "candles_1h/2025-05.parquet": "9bd24cf774076f753f9692a663837f815853f755890434ba9a08e73600a86aef",
+      "candles_1h/2025-06.parquet": "f8eef410c8e21881e8511fec10a1a032b5ad37b21f94deef96b6f2f8cdc8131b",
+      "candles_1h/2025-07.parquet": "466c6ebc277045f231cbe18583d3aa41488bd27aed57a5effd118712b603d647",
+      "candles_1h/2025-08.parquet": "bb5f2c85f874688f6fc154c576d0cc483445fa81bfcb28aa4024119aea248229",
+      "candles_1h/2025-09.parquet": "ab22becbad69206cc01b4279604fabaaafb870bc54b2998c0bc243247db5f0f1",
+      "candles_1h/2025-10.parquet": "f30ee1b41fe0c7405c4f5f0dba12adce2d19bdaa60f96bc31d1c1cc30395fad1",
+      "candles_1h/2025-11.parquet": "bb2af7f07763589da702776c68880671e53dba2ab89d3281242ba41588920294",
+      "candles_1h/2025-12.parquet": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+      "candles_1h/2026-01.parquet": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+      "candles_1h/2026-02.parquet": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+      "candles_1h/2026-03.parquet": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+      "candles_1h/2026-04.parquet": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180"
+    },
+    "funding": {
+      "funding/2025-05.parquet": "26005d5d1bfd0719e8eeb5e4d4c0750dadfa63d0c8161ad476a6a55170455058",
+      "funding/2025-06.parquet": "bb6b8878b6491961fbfbcb168b9906a0cc8b4c82586357f42424cac11733c729",
+      "funding/2025-07.parquet": "ad9d01aa425af412fce534c83c7a4f3ee5997dc3f533a07681b2ad4e679522ee",
+      "funding/2025-08.parquet": "2cb155ad80289355fc96344316309fd48a4cccbef062a3c1e508cdb9f4152d27",
+      "funding/2025-09.parquet": "f06b49dd307a7922a3e429bd9a06e0ddb4febe0d2556d7f232ce6a040f9db205",
+      "funding/2025-10.parquet": "51c9ebd47a36afc31ae7907b539c1256e456132671f133be488ef3596c9e0a3d",
+      "funding/2025-11.parquet": "8a41b57b7ed53096127c27768e18b1516dff28522012f8d08159f6d2f577c640",
+      "funding/2025-12.parquet": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7",
+      "funding/2026-01.parquet": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1",
+      "funding/2026-02.parquet": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789",
+      "funding/2026-03.parquet": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a",
+      "funding/2026-04.parquet": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a"
+    },
+    "open_interest": {
+      "open_interest/2025-05.parquet": "4490a320456fe0f416f5320f9419bd01c65236b877546c30966b287b9c60dea6",
+      "open_interest/2025-06.parquet": "309346d25013e7ccb5ad753d8362ea91354209b9637bca254e99182213b9bdce",
+      "open_interest/2025-07.parquet": "09116f78552bbfc3a0cc640e1a44c31a0322f6e2f1018974cc0a9ede18c3a16d",
+      "open_interest/2025-08.parquet": "dce8b1320d0b9f7627f649988432e63cc393ffe4a7006c687f94d23f608aa665",
+      "open_interest/2025-09.parquet": "53a5b1cab586fee5f207f51046e525595713b3efd52697e7e8352e67d61c1de3",
+      "open_interest/2025-10.parquet": "5fd20253a69b689591fd987af85a706714788ae75d06912879a95b22258c5fc8",
+      "open_interest/2025-11.parquet": "f3c20d2c8b68339e4194e5984481246235678f52d19139e26c6c8f0f084be2cf",
+      "open_interest/2025-12.parquet": "584160f9a23f9dbe64ff248152bca0056831a40765cbb7f619af33c56283a59e",
+      "open_interest/2026-01.parquet": "ac9ba48be4bedeac3ac2b7cf8a2defd8f5d334f19c57f7b2ede788212e4d01db",
+      "open_interest/2026-02.parquet": "c346cb2a4f333da88da7f2ab93a6540eb435b802144d4e0c803bf2fbbd0307f7",
+      "open_interest/2026-03.parquet": "1855bccbeca65a34573bb35580d32cb5de978fc565a0110699ddd00cd07452b3",
+      "open_interest/2026-04.parquet": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237"
+    }
+  },
+  "runtime_seconds": 1402.2
+}
