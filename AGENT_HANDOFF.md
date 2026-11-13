@@ -47,25 +47,32 @@ Artifacts:
 
 ### Step 1 — Close the reproduction gap (blocking)
 
+The sealed FCLR-011 panel `research_state/data_cache/fclr011_panel.json` is now materialized on disk (7,716,808 bytes, LFS pointer resolved this session). The pipeline re-runs but `repro_011_pass` is still `False` (4.39% vs sealed 4.94%, delta 0.552pp > 0.5pp tolerance). The root cause is in `scripts/fclr_fwd_vol_confirm.py::build_legacy_panel`: it computes RV (`rolling(24/168).sum()` on the reindexed hourly grid) and EMA (`df["mark"].ewm(span=24, ...)`) on the grid with NaN gaps, whereas the sealed FCLR-011 result was produced by `scripts/run_evaluation.py` which computes `trailing_rv_window(n)` and `build_features_for_origin` EMA on valid mark rows only. Fix `build_legacy_panel` to mirror `run_evaluation.py` conventions — trailing RV windows over valid rows and EMA over valid rows — then re-run.
+
 ```bash
 cd <repo>
-# 1a. Try to materialize the sealed panel (may be offline)
-git lfs pull --include research_state/data_cache/fclr011_panel.json || true
-ls -l research_state/data_cache/fclr011_panel.json || echo "LFS_PANEL_UNAVAILABLE"
 
-# 1b. Re-run the heavy pipeline (writes a new timestamped artifact set)
+# 1a. Confirm the sealed panel is materialized (not an LFS pointer)
+ls -l research_state/data_cache/fclr011_panel.json
+# expect 7,716,808 bytes, ASCII JSON (not "version https://git-lfs")
+
+# 1b. Fix build_legacy_panel in scripts/fclr_fwd_vol_confirm.py:
+#     - Replace grid-based RV rolling windows with trailing windows over valid mark rows
+#     - Replace pandas ewm EMA with valid-row-only EMA (alpha=2/25, SMA init over last 24 valid rows)
+#     - Mirror run_evaluation.py::trailing_rv_window and ::build_features_for_origin conventions
+#     Do NOT widen the frozen ±0.5pp tolerance; fix the pipeline to match the sealed conventions.
+
+# 1c. Re-run the heavy pipeline (writes a new timestamped artifact set)
 python3 scripts/fclr_fwd_vol_confirm.py
 
-# 1c. The FCLR-011 reproduction cell must report pass=true (delta <= 0.5pp)
+# 1d. The FCLR-011 reproduction cell must report pass=true (delta <= 0.5pp)
 python3 - <<'PY'
 import json, glob
 f = sorted(glob.glob('research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-*.json'))[-1]
 d = json.load(open(f))
-print(f, d['verdict'], d['repro_011'])
+print(f, d['verdict'], d['checks']['repro_011_pass'], d['repro_011']['abs_diff_vs_sealed_pp'])
 PY
 ```
-
-If `LFS_PANEL_UNAVAILABLE`, reconstruct the exact legacy panel from the same cache using the feature code in `scripts/run_evaluation.py` (`load_mark_series`, `build_features_for_origin`, `fit_ols`, `predict`, `qlike`, `block_bootstrap_diff`). The residual 0.55pp is small; the likely cause is RV/EMA computed on valid mark rows vs the hourly grid. Do not widen the frozen tolerance; fix the pipeline or add a new prereg version with a documented reason.
 
 ### Step 2 — Issue the final forward verdict
 
@@ -130,6 +137,8 @@ The **targeted campaign suite is green**: `tests.test_active_campaign_gate tests
 | False "all volatility NOT_MET" summary | Corrected: FCLR-011 PASS restored; `H1_primary` set INCONCLUSIVE with reconciliation; new campaign rank-0. |
 | "No heavy work authorized" deadlock | Revoked; replaced with a mandatory heavy campaign and a fail-closed completion gate. |
 | `run_manifest.json` is an unresolved Git-LFS pointer (130 bytes) → every `run_evaluation.py` call crashed | Added `scripts/run_evaluation.py::load_manifest()` + committed `research_state/run_manifest_local.json` offline fallback with verbatim split boundaries. |
+| Sealed FCLR-011 panel `data_cache/fclr011_panel.json` was an unresolved Git-LFS pointer (132 bytes) → reproduction cell could not run | **Resolved this session:** `git lfs pull --include research_state/data_cache/fclr011_panel.json` materialized 7,716,808 bytes. Panel now on disk. |
+| `build_legacy_panel` RV/EMA computed on hourly grid vs valid mark rows → repro delta 0.552pp > 0.5pp tolerance | **Open bottleneck:** Fix `scripts/fclr_fwd_vol_confirm.py::build_legacy_panel` to mirror `scripts/run_evaluation.py` (`trailing_rv_window` on valid mark rows, EMA on valid rows only, not grid-based `rolling`/`ewm`). Then re-run pipeline and confirm `repro_011_pass=True` (delta <= 0.5pp). |
 | No enforcement that the campaign is executed | Added `scripts/fclr_heavy_confirm_gate.py` and `tests/test_fclr_heavy_confirm_gate.py`; gate fails until a final verdict exists. |
 | Frontier/registry drift | Frontier rank-0 is now `FCLR-HEAVY-CONFIRM-20261113T041200Z` / `ACTIVE_HEAVY_CAMPAIGN`; prior FULLHIST entry demoted to rank 1; registry reconciled. |
 | Underpowered 5–76 day test windows | New design uses 3 × 30-day blocks with 5 instruments and a 2000-replicate bootstrap. |
@@ -187,6 +196,16 @@ python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structu
 ---
 
 ## SESSION LOG (append-only; newest first)
+
+## 2026-11-13T05:02:10Z — Kilo session: Materialized sealed FCLR-011 panel via `git lfs pull --include research_state/data_cache/fclr011_panel.json` (7,716,808 bytes, was unresolved 132-byte LFS pointer); re-ran `scripts/fclr_fwd_vol_confirm.py` end-to-end; forward result unchanged (C2 vs B1 mean diff +0.026760, CI [0.000343, 0.064822], rel -5.55%); repro gap persists at 0.552pp (>0.5pp tolerance) → `repro_011_pass=False`, verdict INCONCLUSIVE; gate FAILS only on `final_verdict_recorded` (6/7 checks pass). Targeted campaign suite: 119 tests OK. Root cause identified: `build_legacy_panel` in `fclr_fwd_vol_confirm.py` computes RV/EMA on the hourly grid (rolling windows over reindexed grid with NaN gaps, pandas `ewm`) whereas `run_evaluation.py` (`trailing_rv_window`, `build_features_for_origin`) computes on valid mark rows only — the 0.55pp residual matches this grid-vs-valid-row discrepancy.
+
+- **What changed:** `research_state/data_cache/fclr011_panel.json` materialized (LFS pointer resolved). New artifact set: `evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T050407Z.{md,json}`, `tracka_fwd_vol_panel_20261113T050407Z.parquet`, `tracka_fwd_vol_build_report_20261113T050407Z.json`.
+- **Evidence supported:** FCLR-011 is a genuine sealed gate PASS (4.94%, CI excludes zero, 3 blocks). Forward walk-forward finds C2 significantly worse than B1 (pooled +0.026760, CI excludes zero in favor of B1, rel -5.55%, 5/5 LOIO negative). Placebo not significant (null p95 -5.35% vs true -5.55%).
+- **Evidence contradicted:** The claim that "all claim-worthy local admissible experiments are exhausted." Binance cache (5 symbols, 2024-01-01..2026-11-08) and the unrefuted FCLR-011 PASS remain.
+- **Unknown / dominant limitation:** Exact reproduction of the sealed FCLR-011 panel within ±0.5pp. The pipeline lands at 4.39% vs 4.94% (delta 0.552pp). Fix `build_legacy_panel` to mirror `run_evaluation.py` conventions (`trailing_rv_window` on valid rows, EMA on valid rows only, not grid-based `rolling`/`ewm`), then re-run and confirm `repro_011_pass=True`.
+- **Strongest alternative explanation:** The FCLR-011 PASS is period-specific (2026-05..2026-08) and does not generalize; the forward C2 degradation is genuine, not a pipeline artifact.
+- **Highest expected information gain:** Fix `build_legacy_panel` RV/EMA conventions → close repro gap → issue final verdict (NOT_REPLICATED if forward CI favors B1; CONFIRMED only if all 8 gates pass) → run gate → run tests → proceed to secondary heavy work (`FCLR-LIQ-010-CONFIRM`, `FCLR-EXP-ROBUST-REDO`, `FCLR-FWD-VOL-2025-CROSS`).
+- **Artifacts/commands:** `python3 scripts/fclr_fwd_vol_confirm.py` → `evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T050407Z.{md,json}`. `python3 scripts/fclr_heavy_confirm_gate.py` → `GATE: FAIL` (INCONCLUSIVE, by design). `python -m unittest tests.test_active_campaign_gate tests.test_fclr_heavy_confirm_gate` → OK.
 
 ## 2026-11-13T04:20:00Z — Kilo session: Rebuilt the durable handoff as a mandatory heavy campaign; reconciled the suppressed FCLR-011 PASS; executed a new frozen forward walk-forward; gate fails closed on INCONCLUSIVE pending exact reproduction.
 
