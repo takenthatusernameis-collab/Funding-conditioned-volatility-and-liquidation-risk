@@ -39,6 +39,7 @@ TESTED_WINDOWS = [
     ("2026-05-01", "2026-08-31", "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"),
     ("2026-08-03", "2026-10-31", "FCLR-FWD-VOL-011-CONFIRM forward walk"),
     ("2025-07-23", "2025-10-15", "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"),
+    ("2026-01-01", "2026-04-01", "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"),
 ]
 
 
@@ -157,6 +158,59 @@ def ready_windows() -> list[dict]:
     return rows
 
 
+# A rolling-origin design needs, for each of 3 non-overlapping 30-day test
+# blocks, >=30 days of prior train plus a 7-day embargo. The minimum span is
+# therefore 30 (train) + 7 (embargo) + 3 x 30 (tests) = 127 days.
+MIN_DESIGN_DAYS = 30 + 7 + 3 * 30
+
+
+def _month_days(key: str) -> int:
+    """Days in a YYYY-MM month key (calendar length)."""
+    import calendar
+    y, m = int(key[:4]), int(key[5:7])
+    return calendar.monthrange(y, m)[1]
+
+
+def design_feasible_months(rows: list[dict]) -> dict:
+    """Contiguous runs of ready, funding-backed, untested months that can host a
+    full 3-block pre-registered design under MIN_DESIGN_DAYS.
+
+    A month is only usable if it is funding-backed and outside every tested
+    window. Only *contiguous* runs matter: a rolling-origin design needs an
+    unbroken history. A run shorter than MIN_DESIGN_DAYS cannot support the
+    frozen design even though the individual months are 'ready'.
+    """
+    usable = {w["month"] for w in rows
+              if w["funding_available"] and not w["inside_tested_window"]}
+    if not usable:
+        return {"runs": [], "any_feasible": False}
+
+    ordered = sorted(usable)
+    runs: list[list[str]] = []
+    cur = [ordered[0]]
+    for prev, nxt in zip(ordered, ordered[1:]):
+        py, pm = int(prev[:4]), int(prev[5:7])
+        ny, nm = int(nxt[:4]), int(nxt[5:7])
+        pm += 1
+        if pm > 12:
+            pm = 1
+            py += 1
+        if (ny, nm) == (py, pm):
+            cur.append(nxt)
+        else:
+            runs.append(cur)
+            cur = [nxt]
+    runs.append(cur)
+
+    out = []
+    for run in runs:
+        days = sum(_month_days(m) for m in run)
+        out.append({"months": run, "span_days": days,
+                    "feasible": days >= MIN_DESIGN_DAYS})
+    return {"runs": out, "any_feasible": any(r["feasible"] for r in out),
+            "min_design_days": MIN_DESIGN_DAYS}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
@@ -167,11 +221,13 @@ def main() -> None:
     windows = ready_windows()
     ready = [w for w in windows if w["funding_available"] and not w["inside_tested_window"]]
     partial = [w for w in windows if not w["funding_available"] and not w["inside_tested_window"]]
+    feasibility = design_feasible_months(windows)
 
     if args.json:
         print(json.dumps({"actionable_preregs": actionable,
                           "ready_funding_backed_months": ready,
-                          "no_funding_months": partial}, indent=1))
+                          "no_funding_months": partial,
+                          "design_feasibility": feasibility}, indent=1))
         return
 
     print("== FROZEN PRE-RESULTS PREREGS WITHOUT AN EVALUATION ARTIFACT ==")
@@ -192,9 +248,24 @@ def main() -> None:
     if ready:
         for w in ready:
             print(f"  {w['month']}")
-        print("\n  -> A prereg over >=3 of these months is executable with no new data.")
     else:
         print("  none")
+
+    print("\n== CONTIGUOUS RUN FEASIBILITY FOR A 3-BLOCK PRE-REGISTERED DESIGN ==")
+    runs = feasibility["runs"]
+    if not runs:
+        print("  no ready disjoint funding-backed months -> cache frontier exhausted")
+    else:
+        for r in runs:
+            tag = "FEASIBLE" if r["feasible"] else "TOO SHORT"
+            print(f"  {r['months'][0]}..{r['months'][-1]}  span={r['span_days']}d  "
+                  f"(need >= {feasibility['min_design_days']}d)  {tag}")
+        if feasibility["any_feasible"]:
+            print("\n  -> A full 3-block pre-registered design fits a FEASIBLE run above.")
+        else:
+            print("\n  -> No contiguous run spans enough days; a 3-block design would "
+                  "need an empty/overlapping train. Cache frontier EXHAUSTED for a full "
+                  "pre-registered funding-conditioned test.")
 
     print("\n== MONTHS WITH COMPLETE KLINES BUT NO FUNDING (baseline-only designs) ==")
     if partial:

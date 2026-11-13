@@ -1,0 +1,156 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025Q1Q2-CROSS-COVERAGE",
+ "kind": "coverage_and_train_feasibility_audit_only",
+ "generated_utc": "2026-11-13T11:16:01Z",
+ "window": {
+  "data_start": "2025-05-01T00:00:00Z",
+  "data_end": "2026-04-30T23:00:00Z",
+  "span_days": 365.9583333333333
+ },
+ "train_start": "2025-05-01T00:00:00Z",
+ "embargo_days": 7,
+ "blocks": [
+  [
+   "2026-01-01T00:00:00Z",
+   "2026-01-31T23:00:00Z"
+  ],
+  [
+   "2026-02-01T00:00:00Z",
+   "2026-03-02T23:00:00Z"
+  ],
+  [
+   "2026-03-03T00:00:00Z",
+   "2026-04-01T23:00:00Z"
+  ]
+ ],
+ "models": {
+  "B0": [
+   "log_rv24h"
+  ],
+  "B1": [
+   "log_rv1h",
+   "log_rv24h",
+   "log_rv168h"
+  ],
+  "C1": [
+   "log_rv1h",
+   "log_rv24h",
+   "log_rv168h",
+   "signed_funding",
+   "abs_fund_pct"
+  ],
+  "C2": [
+   "log_rv1h",
+   "log_rv24h",
+   "log_rv168h",
+   "signed_funding",
+   "abs_fund_pct",
+   "premium",
+   "ema_dist"
+  ]
+ },
+ "per_symbol": {
+  "BTCUSDT": {
+   "grid_rows": 8760,
+   "model_ready_rows": 8568,
+   "target_24h_rows": 8736,
+   "funding_nonnull_rows": 8760
+  },
+  "ETHUSDT": {
+   "grid_rows": 8760,
+   "model_ready_rows": 8568,
+   "target_24h_rows": 8736,
+   "funding_nonnull_rows": 8760
+  },
+  "BNBUSDT": {
+   "grid_rows": 8760,
+   "model_ready_rows": 8568,
+   "target_24h_rows": 8736,
+   "funding_nonnull_rows": 8760
+  },
+  "SOLUSDT": {
+   "grid_rows": 8760,
+   "model_ready_rows": 8568,
+   "target_24h_rows": 8736,
+   "funding_nonnull_rows": 8760
+  },
+  "XRPUSDT": {
+   "grid_rows": 8760,
+   "model_ready_rows": 8352,
+   "target_24h_rows": 8688,
+   "funding_nonnull_rows": 8760
+  }
+ },
+ "per_block": [
+  {
+   "block": 0,
+   "test_start": "2026-01-01T00:00:00Z",
+   "test_end": "2026-01-31T23:00:00Z",
+   "test_days": 31.958333333333332,
+   "train_end": "2025-12-25T00:00:00Z",
+   "train_days": 238.0,
+   "rows": 3720,
+   "symbols_with_rows": 5,
+   "rows_per_symbol": {
+    "BTCUSDT": 744,
+    "ETHUSDT": 744,
+    "BNBUSDT": 744,
+    "SOLUSDT": 744,
+    "XRPUSDT": 744
+   }
+  },
+  {
+   "block": 1,
+   "test_start": "2026-02-01T00:00:00Z",
+   "test_end": "2026-03-02T23:00:00Z",
+   "test_days": 30.958333333333332,
+   "train_end": "2026-01-25T00:00:00Z",
+   "train_days": 269.0,
+   "rows": 3600,
+   "symbols_with_rows": 5,
+   "rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   }
+  },
+  {
+   "block": 2,
+   "test_start": "2026-03-03T00:00:00Z",
+   "test_end": "2026-04-01T23:00:00Z",
+   "test_days": 30.958333333333332,
+   "train_end": "2026-02-24T00:00:00Z",
+   "train_days": 299.0,
+   "rows": 3600,
+   "symbols_with_rows": 5,
+   "rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   }
+  }
+ ],
+ "train_days_per_block": [
+  238.0,
+  269.0,
+  299.0
+ ],
+ "n_symbols": 5,
+ "n_model_rows": 42624,
+ "checks": {
+  "instruments_ge_5": true,
+  "blocks_ge_3": true,
+  "every_block_symbols_ge_5": true,
+  "every_block_rows_ge_100": true,
+  "test_blocks_non_overlapping": true,
+  "disjoint_from_prior_tested_windows": true,
+  "train_ge_30_days_every_block": true,
+  "target_present": true
+ },
+ "feasible": true,
+ "no_outcomes_computed": true
+}

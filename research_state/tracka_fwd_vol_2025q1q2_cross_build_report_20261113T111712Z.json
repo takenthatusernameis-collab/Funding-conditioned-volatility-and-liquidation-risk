@@ -1,0 +1,44 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025Q1Q2-CROSS-20261113T111601Z",
+ "generated_utc": "2026-11-13T11:17:12Z",
+ "panel_path": "tracka_fwd_vol_2025q1q2_cross_panel_20261113T111712Z.parquet",
+ "panel_sha256": "6d930a6a41869b82b63ae219dd5376fab9bb932883ab0b65d2c6ceb363b908fd",
+ "n_rows": 40320,
+ "n_valid_rows": 39144,
+ "coverage_target_24h": {
+  "BTCUSDT": 8040,
+  "ETHUSDT": 8040,
+  "BNBUSDT": 8040,
+  "SOLUSDT": 8040,
+  "XRPUSDT": 7992
+ },
+ "blocks": [
+  {
+   "block": 0,
+   "train_end": "2025-12-25T00:00:00Z",
+   "embargo": "2025-12-25T00:00:00Z..2025-12-31T23:00:00Z",
+   "test_start": "2026-01-01T00:00:00Z",
+   "test_end": "2026-01-31T23:00:00Z",
+   "days": 31
+  },
+  {
+   "block": 1,
+   "train_end": "2026-01-25T00:00:00Z",
+   "embargo": "2026-01-25T00:00:00Z..2026-01-31T23:00:00Z",
+   "test_start": "2026-02-01T00:00:00Z",
+   "test_end": "2026-03-02T23:00:00Z",
+   "days": 30
+  },
+  {
+   "block": 2,
+   "train_end": "2026-02-24T00:00:00Z",
+   "embargo": "2026-02-24T00:00:00Z..2026-03-02T23:00:00Z",
+   "test_start": "2026-03-03T00:00:00Z",
+   "test_end": "2026-04-01T23:00:00Z",
+   "days": 30
+  }
+ ],
+ "inputs": "research_state/data_cache/{SYM}_2025_MM/{markPriceKlines,premiumIndexKlines,indexPriceKlines}-{date} + {SYM}-fundingRate-{YYYY-MM}",
+ "network_used": false,
+ "sealed_artifacts_mutated": false
+}

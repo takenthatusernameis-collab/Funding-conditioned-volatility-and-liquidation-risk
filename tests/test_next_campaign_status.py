@@ -76,6 +76,38 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertFalse(windows["2024-01"]["funding_available"],
                          "2024-01 has no funding but was reported funded")
 
+    def test_2026q1q2_window_marked_tested(self):
+        """The FCLR-FWD-VOL-2025Q1Q2-CROSS test months must not be re-proposed."""
+        windows = {w["month"]: w for w in self.mod.ready_windows()}
+        for m in ("2026-01", "2026-02", "2026-03", "2026-04"):
+            self.assertIn(m, windows)
+            self.assertTrue(windows[m]["inside_tested_window"],
+                            f"{m} wrongly marked untested after 2025Q1Q2 cell")
+            self.assertEqual(windows[m]["tested_by"],
+                             "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)")
+
+    def test_no_ready_run_is_feasible_for_full_design(self):
+        """The remaining READY months must not be reported as a full-design run.
+
+        A 3-block pre-registered design needs >=127 contiguous days. After the
+        2025Q1Q2 cell consumed 2026-01..2026-04, no contiguous READY run is long
+        enough; the tool must say so instead of the old blanket 'executable'.
+        """
+        feas = self.mod.design_feasible_months(self.mod.ready_windows())
+        self.assertFalse(feas["any_feasible"],
+                         f"a ready run was called feasible: {feas['runs']}")
+        for r in feas["runs"]:
+            self.assertLess(r["span_days"], feas["min_design_days"])
+            self.assertFalse(r["feasible"])
+
+    def test_feasibility_logic_detects_a_long_run(self):
+        """Guard the feasibility rule itself with a synthetic contiguous run."""
+        rows = [{"month": m, "funding_available": True, "inside_tested_window": False}
+                for m in ("2025-01", "2025-02", "2025-03", "2025-04", "2025-05")]
+        feas = self.mod.design_feasible_months(rows)
+        self.assertTrue(feas["any_feasible"])
+        self.assertTrue(feas["runs"][0]["feasible"])
+
 
 if __name__ == "__main__":
     unittest.main()
