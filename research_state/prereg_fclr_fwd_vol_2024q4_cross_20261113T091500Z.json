@@ -1,0 +1,142 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2024Q4-CROSS-20261113T091500Z",
+ "campaign": "FCLR-NEXT-CAMPAIGN-20261113T091500Z",
+ "cell": "FWD-VOL-2024Q4-CROSS",
+ "track": "C_volatility",
+ "priority": "P1",
+ "preregistered_utc": "2026-11-13T09:15:00Z",
+ "status": "FROZEN_PRE_OUTCOMES",
+ "pre_registered_before_outcomes": true,
+ "frozen_before_outcomes": true,
+ "outcome_data_inspected_before_freeze": false,
+ "outcome_values_inspected_before_freeze": "none; only finite-row counts of model inputs and of the 24h target were read, and no metric, coefficient, prediction, or target distribution statistic was computed",
+ "hypothesis_id": "H_fclr_fwd_vol_2024q4_cross",
+ "hypothesis_type": "primary_trackc_volatility_period_specificity",
+ "claim": "The sealed FCLR-011 funding-conditioned volatility PASS (C2 vs B1, +4.94% relative QLIKE reduction, 5 instruments, 3 blocks, 2026-05..2026-08) does NOT replicate on a disjoint, never-tested 2024-07-23..2024-09-30 rolling-origin walk-forward over the cached Binance public archive. A CONFIRMED verdict requires >=2% relative QLIKE reduction with a 95% day-block bootstrap CI excluding zero on the improving side, >=5 instruments, >=3 non-overlapping test blocks, Holm across the declared family, LOIO >=4/5, funding-permutation placebo PASS, and a leakage audit PASS.",
+ "why_this_is_new": {
+  "problem_with_prior_period_tests": "Every volatility period test in this repository is either the sealed FCLR-011 window (2026-05..2026-08), the forward 2026-08..2026-10 confirmation (NOT_REPLICATED), or the 2025-02..2025-05 cross (NOT_REPLICATED, rel 0.29%). No test has used 2024 data at any hour.",
+  "untested_window": "The cached Binance archive holds complete hourly mark/premium/index klines for the five FCLR-011 symbols over 2024-07-01..2024-09-30 and 8-hourly funding from 2024-04. 2024 H2 is a documented high-funding-stress regime (the 2024-08-05 carry unwind and the 2024-09 FOMC cut are both inside the test blocks), which is the strongest available test of regime-specificity.",
+  "not_a_relitigation": "The sealed FCLR-011 artifact is not mutated or re-scored. This is a new period with identical models, metric, contrasts, and gate structure, so the null can be broken on genuinely fresh out-of-sample evidence.",
+  "no_label_use": "No liquidation label is consumed. This arm is volatility-only.",
+  "separation": "No hour in this window overlaps 2025-02..2025-05, 2025-11..2026-04, 2026-05..2026-08, or 2026-08..2026-10 at any timestamp."
+ },
+ "venue": "binance_usdm_public_archive_cached",
+ "data_sources": {
+  "mark": {
+   "path_template": "research_state/data_cache/{SYM}_2024_MM/markPriceKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv",
+   "fields": ["open_time", "close"],
+   "cached_coverage": "2024-07-01..2024-09-30 (verified: mark/premium/index day directories present for all 92 days)"
+  },
+  "premium": {
+   "path_template": "research_state/data_cache/{SYM}_2024_MM/premiumIndexKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv",
+   "fields": ["open_time", "close"]
+  },
+  "index": {
+   "path_template": "research_state/data_cache/{SYM}_2024_MM/indexPriceKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv",
+   "fields": ["open_time", "close"]
+  },
+  "funding": {
+   "path_template": "research_state/data_cache/{SYM}_2024_MM/{SYM}-fundingRate-YYYY-MM/{SYM}-fundingRate-YYYY-MM.csv",
+   "fields": ["calc_time", "last_funding_rate"],
+   "months_used": ["2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09"]
+  }
+ },
+ "coverage_audit": {
+  "artifact": "research_state/coverage_audit_fwd_vol_2024q4_cross_20261113T091427Z.json",
+  "generated_utc": "2026-11-13T09:14:27Z",
+  "n_symbols": 5,
+  "n_model_rows": 10080,
+  "per_block": [
+   {"block": 0, "train_rows": 1080, "test_rows": 3600},
+   {"block": 1, "train_rows": 4440, "test_rows": 3600},
+   {"block": 2, "train_rows": 7680, "test_rows": 1680}
+  ],
+  "all_checks_pass": true,
+  "note": "Coverage only: finite-row counts. No outcome statistic computed. Every block has >=5 instruments on both sides and >=1080 training rows."
+ },
+ "universe": {
+  "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+  "n_symbols": 5,
+  "rule": "the five FCLR-011 symbols, restricted to the months with complete cached mark/premium/index klines (2024-07..2024-09)"
+ },
+ "features": {
+  "B0": ["log_rv24h"],
+  "B1": ["log_rv1h", "log_rv24h", "log_rv168h"],
+  "C1": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct"],
+  "C2": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct", "premium", "ema_dist"],
+  "estimator": "OLS on log forward-horizon RV with train-only standardization and smearing; identical implementation to scripts/fclr_fwd_vol_confirm.py::fit_predict",
+  "target": "target_Hh = sum of hourly squared log returns over the next H hours; features strictly causal, target strictly forward",
+  "horizons_reported": [6, 24, 72, 168],
+  "primary_horizon": 24
+ },
+ "splits": {
+  "design": "rolling-origin walk-forward; each block refits on all data up to its train_end; 7-calendar-day embargo between train end and test start",
+  "train_start": "2024-07-01T00:00:00Z",
+  "data_start": "2024-07-01T00:00:00Z",
+  "data_end": "2024-09-30T23:00:00Z",
+  "blocks": [
+   {
+    "block": 0,
+    "train_end": "2024-07-16T23:00:00Z",
+    "embargo": "2024-07-17T00:00:00Z..2024-07-22T23:00:00Z",
+    "test_start": "2024-07-23T00:00:00Z",
+    "test_end": "2024-08-21T23:00:00Z",
+    "days": 30
+   },
+   {
+    "block": 1,
+    "train_end": "2024-08-13T23:00:00Z",
+    "embargo": "2024-08-14T00:00:00Z..2024-08-19T23:00:00Z",
+    "test_start": "2024-08-20T00:00:00Z",
+    "test_end": "2024-09-18T23:00:00Z",
+    "days": 30
+   },
+   {
+    "block": 2,
+    "train_end": "2024-09-09T23:00:00Z",
+    "embargo": "2024-09-10T00:00:00Z..2024-09-15T23:00:00Z",
+    "test_start": "2024-09-16T00:00:00Z",
+    "test_end": "2024-09-30T23:00:00Z",
+    "days": 15
+   }
+  ],
+  "block_rule": "Three non-overlapping test blocks, each preceded by a 7-day embargo. Blocks 0 and 1 are full 30 days; block 2 is 15 days because the cached mark-price coverage ends 2024-09-30. No padding, no imputation, and no test rows are dropped for missing inputs.",
+  "train_span_note": "Training span grows per block (1,080 / 4,440 / 7,680 rows). log_rv168h and ema_dist are therefore available in every training span; abs_fund_pct has >=30 trailing 8-hourly funding observations at every origin because funding history begins 2024-04.",
+  "no_inspected_overlap": "No hour in this window was used in FCLR-011 (2026-05..2026-08), FCLR-FWD-VOL-011-CONFIRM (2026-08..2026-10), FCLR-FWD-VOL-2025-CROSS (2025-02..2025-05), or any sealed cell."
+ },
+ "primary_contrast": "C2_vs_B1",
+ "primary_metric": "QLIKE",
+ "gates": {
+  "materiality_rel_reduction_pct": 2.0,
+  "ci_level": 0.95,
+  "ci_method": "day-block bootstrap over UTC days, pooled across blocks",
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 20261113,
+  "holm_family": "all horizon x contrast x block cells",
+  "holm_alpha": 0.05,
+  "loio_min": 4,
+  "loio_note": "leave one instrument out of training, evaluate on the held-out instrument",
+  "placebo_reps": 200,
+  "placebo_seed": 20261113,
+  "placebo_rule": "permute signed_funding and abs_fund_pct within symbol; true relative reduction must exceed the null 95th percentile",
+  "min_instruments": 5,
+  "min_blocks": 3,
+  "leakage_rule": "every feature strictly causal at t; target strictly forward; 7-day embargo between train end and test start"
+ },
+ "verdict_rule": {
+  "CONFIRMED": "materiality_ge_2pct AND ci_excludes_zero_improving AND holm_pass AND loio_ge_4_of_5 AND placebo_pass AND leakage_audit_pass AND instruments_ge_5 AND blocks_ge_3",
+  "FRAGILE": "materiality_ge_2pct AND ci_excludes_zero_improving but LOIO or placebo FAIL",
+  "NOT_REPLICATED": "materiality FAIL or CI includes zero",
+  "INCONCLUSIVE": "instruments < 5 or blocks < 3 or leakage FAIL or no finite primary rows"
+ },
+ "forbidden": [
+  "mutating any sealed artifact (FCLR-011/012-V/013/014)",
+  "threshold shopping or feature changes after outcome inspection",
+  "reusing an inspected window as a fresh confirmation",
+  "committing raw cache",
+  "editing .github/workflows/*",
+  "declaring a volatility PASS for H1_primary without the confirmatory gate",
+  "reusing an execution whose training span was empty (such a run is void, not evidence)"
+ ],
+ "network_required": false
+}
