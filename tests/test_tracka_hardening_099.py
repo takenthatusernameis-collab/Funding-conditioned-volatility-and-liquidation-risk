@@ -248,7 +248,13 @@ class TestMachineCheckableDriftInvariants099(unittest.TestCase):
         # research_state` root-level md+json == 396 and untracked root-level md+json == 0.
         # All 396 are committed durable research artifacts; the prior bound had drifted below
         # the committed baseline. No status-only files added; bound tracks the baseline.
-        self.assertLessEqual(cnt, 396, f"root md+json count {cnt} > 396")
+        # 2026-11-13T23:29Z: raised 396->406. Verified git-tracked baseline: `git ls-files
+        # research_state` root-level md+json == 406 (tracked) and untracked root-level
+        # md+json == 0. The 10 delta files are committed durable artifacts from the forward
+        # liq cell (prereg, panel build/report, evaluation summary, campaign/coverage probes).
+        # No status-only files added; bound tracks the committed baseline so untracked churn
+        # still fails closed.
+        self.assertLessEqual(cnt, 406, f"root md+json count {cnt} > 406")
 
     def test_watch_trigger_harden_invariants(self):
         root = Path(__file__).resolve().parent.parent
