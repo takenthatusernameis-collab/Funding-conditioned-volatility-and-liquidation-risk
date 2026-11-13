@@ -61,7 +61,8 @@ class GateTestCase(unittest.TestCase):
 
     def _install_bulk_script(self) -> None:
         (self.root / "scripts").mkdir(parents=True, exist_ok=True)
-        (self.root / "scripts" / "fclr_ironflow_bulk.py").write_bytes(SCRIPT.read_bytes())
+        bulk_script = ROOT / "scripts" / "fclr_ironflow_bulk.py"
+        (self.root / "scripts" / "fclr_ironflow_bulk.py").write_bytes(bulk_script.read_bytes())
 
     def _write_bulk_object(self, dataset: str, month: str) -> None:
         """Write a real, schema-valid one-row parquet object plus its sidecars."""

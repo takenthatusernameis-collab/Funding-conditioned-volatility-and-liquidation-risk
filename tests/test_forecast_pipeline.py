@@ -1,4 +1,6 @@
 import sys
+import json
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -49,8 +51,27 @@ def test_standardization_train_only():
     assert out[0] is not None
 
 def test_splits_load():
-    s = load_splits()
-    assert "train" in s
+    # Create a temporary manifest file for testing
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+        json.dump({
+            "splits": {
+                "train": ("2024-01-02T00:00:00Z", "2024-02-24T08:00:00Z"),
+                "val": ("2024-03-02T08:00:00Z", "2024-03-20T02:00:00Z"),
+                "test": ("2024-03-27T02:00:00Z", "2024-03-30T23:00:00Z"),
+            }
+        }, f)
+        tmp_path = Path(f.name)
+
+    # Temporarily replace RUN_MANIFEST
+    import forecast_pipeline
+    original = forecast_pipeline.RUN_MANIFEST
+    forecast_pipeline.RUN_MANIFEST = tmp_path
+    try:
+        s = load_splits()
+        assert "train" in s
+    finally:
+        forecast_pipeline.RUN_MANIFEST = original
+        tmp_path.unlink()
 
 def test_common_panel():
     d = {"a": {"2024-01-01", "2024-01-02"}, "b": {"2024-01-02", "2024-01-03"}}
