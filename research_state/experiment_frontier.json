@@ -4,11 +4,11 @@
     "rank": 0,
     "status": "ACTIVE_HEAVY_CAMPAIGN",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-    "next_unfinished_task": "FCLR-FORWARD-LIQ-2026Q1Q2: Phase 1 freeze forward prereg prereg_tracka_liq_xsec_forward_2026q1q2_<UTC>.{json,md} (modeled on prereg_tracka_liq_xsec_20261112T201536Z; burn-in 2026-01-18..2026-02-02; 7-day embargoes 2026-02-03..09 / 2026-03-12..18 / 2026-04-04..10; blocks 2026-02-10..2026-03-11 / 2026-03-19..2026-04-03 / 2026-04-11..2026-04-30; block end is target horizon, so scored decision days end 2026-04-29 because labels end 2026-04-30T23:48:51Z; frozen_before_outcomes=true, promotable=false) BEFORE any outcome read; Phase 2 clone scripts/fclr_build_tracka_liq_xsec.py to scripts/fclr_build_tracka_liq_xsec_forward.py for 2026-01-18..2026-04-30 (377110 native liq events, 192 native perps, 113 coins eligible before coverage; on-disk ironflow bulk 2026-01..2026-04, offline) and emit forward panel + build report with panel_sha256 + evaluation_summary TRACKA-LIQ-XSEC-FORWARD with verdict EXPLORATORY_SIGNAL|EXPLORATORY_NULL|INADMISSIBLE; Phase 3 campaign gate 11/11 + deterministic tests; Phase 4 commit code/manifests/provenance/reports (no raw parquet) and set next_action_heavy to the next unfinished task.",
+    "next_unfinished_task": "FCLR-FORWARD-LIQ-2026Q1Q2 Phase 1-4 COMPLETE (2026-11-13T22:31:55Z): prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z frozen before outcomes; forward panel tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet + build report + evaluation_summary TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z verdict EXPLORATORY_NULL (107 coins, mean IC -0.02703, pooled IC -0.02512, pooled p 0.031, sign consistency 1/3; materiality not met). Gate 16/16 PASS; 22/22 tests OK. NEXT HEAVY: freeze and execute a materially different admissible unopened design (e.g. new forward/alternative observed-liquidation source or cached admissible volatility window not previously tested) with prereg-before-outcomes, or declare bounded structural NO_GO with exact failing minima if no admissible unopened route exists. Do not re-run terminal/consumed cells or weaken gates.",
     "generated": "2026-11-13T09:15:00Z",
-    "last_checked": "2026-11-13T22:27:02Z",
-    "blockers": "No external-data blocker: ironflow Hyperliquid bulk 2025-05..2026-04 on disk (candles/funding/OI/liquidations, sha256 sidecars, CC-BY-4.0). Consumed region 2025-05-25..2026-01-17; forward 2026-01-18..2026-04-30 reserved/untouched. Phase 0 CLOSED 2026-11-13T20:29:00Z. Terminal Binance funding-vol/FWD-VOL cells gated PASS. Gate now 12/16 with Arm F red by design (F1/F3/F4 unbuilt) - correct pre-work state.",
-    "next_action_heavy": "EXECUTE FCLR-FORWARD-LIQ-2026Q1Q2 Phases 1-4 now (offline, on-disk data only). Arm F of the campaign gate (F0-F4) now fails closed until this cell is built, so 16/16 is only reachable by doing the work: (1) freeze prereg_tracka_liq_xsec_forward_2026q1q2_<UTC>.{json,md} BEFORE outcomes with the exact burn-in/embargo/block boundaries in AGENT_HANDOFF.md Phase 1; (2) clone scripts/fclr_build_tracka_liq_xsec.py to scripts/fclr_build_tracka_liq_xsec_forward.py, set EVENTS=data_cache/ironflow_bulk/liquidations and BULK=data_cache/ironflow_bulk, load 2025-12..2026-04 (2025-12 tail is warm-up only), filter native labels 2026-01-18..2026-04-30, score only the frozen blocks, emit forward panel + build_report(panel_sha256) + evaluation_summary TRACKA-LIQ-XSEC-FORWARD; (3) python3 scripts/fclr_campaign_gate.py --arm all == 16/16 and python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate; (4) commit code/manifests/provenance/reports (no raw parquet) and set next_action_heavy to the next unopened forward window or residual. Do not emit NO_GO/status-only memos and do not weaken Arm F.",
+    "last_checked": "2026-11-13T22:32:30Z",
+    "blockers": "No external-data blocker. Forward cell FCLR-FORWARD-LIQ-2026Q1Q2 (2026-01-18..2026-04-30, ironflow bulk on disk) executed and gated 16/16. Remaining constraint: all cached Binance funding-vol/FWD-VOL and current Hyperliquid observed-liq windows executed/terminal on this cache; next heavy work requires a materially different admissible unopened route or a bounded, evidence-backed NO_GO.",
+    "next_action_heavy": "Identify and execute the next materially different admissible unopened heavy task: (P1) freeze prereg and evaluate any remaining untouched admissible observed-liquidation/volatility window on cached data not previously tested; (P2) if a new admissible unauthenticated observed-liquidation source passes minima, run admissibility audit -> prereg -> build/eval -> verdict. If none exists, emit a bounded structural NO_GO with exact failing minima per candidate and update frontier/handoff; never do status-only work, never reopen terminal cells, never weaken gates.",
     "cells": [
       {
         "cell": "FWD-VOL-2024Q4-CROSS",
@@ -36,6 +36,15 @@
         "artifact": "research_state/evaluation_summary_FCLR-FWD-VOL-2025Q1Q2-CROSS-20261113T111712Z.json",
         "gate": "scripts/fclr_fwd_vol_2025q1q2_cross_gate.py -> GATE: PASS (13/13)",
         "note": "Executed 2026-11-13T11:17:12Z on contiguous cached 2025-05..2026-04 (5 symbols, 3 non-overlapping test blocks 2026-01-01..2026-04-01, 7-day embargo, train 238/269/299 days, n_valid=39144, test n=10800). rel +0.23% (<2% floor), CI [-0.005287,0.002960] crosses zero, LOIO 0/5, placebo FAIL, Holm FAIL, leakage PASS. Coverage audit coverage_audit_fwd_vol_2025q1q2_cross_20261113T111601Z.json proved feasibility before freeze."
+      },
+      {
+        "cell": "TRACKA-LIQ-XSEC-FORWARD-2026Q1Q2",
+        "status": "COMPLETED",
+        "verdict": "EXPLORATORY_NULL",
+        "experiment_id": "TRACKA-LIQ-XSEC-FORWARD-20261113T222859Z",
+        "artifact": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json",
+        "gate": "scripts/fclr_campaign_gate.py --arm all -> 16/16 PASS",
+        "note": "Executed offline 2026-11-13T22:31:55Z on ironflow bulk 2026-01-18..2026-04-30 (107 coins, 63 scored days across 3 blocks, 6741 rows). Prereg frozen 2026-11-13T22:28:59Z before outcomes. Mean IC -0.02703 (|.|<0.05), pooled IC -0.02512, pooled p 0.031, spread sign consistency 1/3 -> EXPLORATORY_NULL (EXPLORATORY_ONLY, never promotable)."
       }
     ],
     "supersedes_prior_next_task_entries": [
@@ -52,7 +61,8 @@
     },
     "verification_20261113T213041Z": "gate 11/11 PASS; tests 19/19 OK; forward run feasible; 377110 native liq events / 192 native perps / 113 eligible / 0 null notional; labels end 2026-04-30T23:48:51Z; earlier 537179 was all-market (native+non-native) and is corrected.",
     "verification_20261113T214000Z": "gate 12/16 PASS (A0-A6,B1-B4 pass; F1,F3_panel,F3_report,F4 fail closed - forward cell unbuilt); tests 22/22 OK; forward feasible 103 days; 377110 native liq events / 192 native perps / 113 eligible / 0 null notional; labels end 2026-04-30T23:48:51Z; ironflow_bulk/liquidations == ironflow_events for 2026-01..2026-04.",
-    "verification_20261113T222702Z": "rechecked: gate 12/16 (blocking F1,F3_panel,F3_report,F4), Arm F intentionally red until forward cell built; forward feasible; handoff refreshed as single durable initial task for FCLR-FORWARD-LIQ-2026Q1Q2 Phases 1-4."
+    "verification_20261113T222702Z": "rechecked: gate 12/16 (blocking F1,F3_panel,F3_report,F4), Arm F intentionally red until forward cell built; forward feasible; handoff refreshed as single durable initial task for FCLR-FORWARD-LIQ-2026Q1Q2 Phases 1-4.",
+    "verification_20261113T223155Z": "FCLR-FORWARD-LIQ-2026Q1Q2 complete: prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z frozen before outcomes; forward builder/eval emitted panel 2026-11-13T22:31:55Z (107 coins, 6741 rows, sha256 990598685617b088...) + build report + eval verdict EXPLORATORY_NULL (mean IC -0.02703, pooled IC -0.02512, pooled p 0.031, spread sign 1/3). fclr_campaign_gate.py --arm all 16/16; unittest test_fclr_campaign_gate test_active_campaign_gate 22/22 OK."
   },
   {
     "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",

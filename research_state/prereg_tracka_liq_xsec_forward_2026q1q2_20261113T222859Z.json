@@ -1,0 +1,167 @@
+{
+  "experiment_id": "TRACKA-LIQ-XSEC-FORWARD-20261113T222859Z",
+  "campaign": "FCLR-FORWARD-LIQ-2026Q1Q2",
+  "arm": "B",
+  "track": "A_liquidation",
+  "preregistered_utc": "2026-11-13T22:28:59Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "pre_registered_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "priority": "P2",
+  "hypothesis_id": "H_tracka_hl_liquidation_cross_sectional_funding_forward_2026q1q2",
+  "hypothesis_type": "exploratory_tracka_liquidation_cross_section_forward",
+  "promotable": false,
+  "claim": "On the unopened forward Hyperliquid native-perp cross-section (2026-01-18..2026-04-30), a funding-conditioned score carries information about the RELATIVE ordering of next-24h observed liquidation intensity across coins (cross-sectional rank IC and top-minus-bottom spread), using the same estimand/inference as Arm B TRACKA-LIQ-XSEC-20261112T201536Z.",
+  "status_contract": {
+    "max_status": "EXPLORATORY_ONLY",
+    "cannot": [
+      "promote any hypothesis",
+      "override, soften, or re-label any sealed time-series P2 verdict",
+      "be described as confirmatory"
+    ],
+    "rationale": "Forward window on an already-open region evaluated under a frozen exploratory prereg; estimand matches Arm B cross-sectional ranking, not a per-coin time-series design."
+  },
+  "venue": "hyperliquid_perpetuals_native_perps_only",
+  "data_sources": {
+    "liquidations": {
+      "dataset": "ironflow/hyperliquid-liquidations",
+      "license": "CC-BY-4.0",
+      "access": "unauthenticated HuggingFace bulk parquet via ironflow bulk cache (local, on-disk)",
+      "observed_only": true,
+      "modeled_or_proxy": false,
+      "columns_used": ["timestamp", "market", "notional_usd"],
+      "months": ["2026-01", "2026-02", "2026-03", "2026-04"],
+      "cache_path": "research_state/data_cache/ironflow_bulk/liquidations/<YYYY-MM>.parquet"
+    },
+    "candles_1h": {
+      "dataset": "ironflow/hyperliquid-candles-1h",
+      "license": "CC-BY-4.0",
+      "columns_used": ["timestamp", "market", "close"],
+      "months": ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+      "note": "2025-12 tail used only for 24h rv warm-up for the first scored day; 2025-11 and earlier never read."
+    },
+    "funding": {
+      "dataset": "ironflow/hyperliquid-funding",
+      "license": "CC-BY-4.0",
+      "columns_used": ["timestamp", "market", "funding_rate", "premium"],
+      "months": ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04"]
+    }
+  },
+  "universe": {
+    "selection_rule": "Coverage-only, frozen ex ante, before any outcome: native perps (market endswith '-PERP', no ':') with >=20 observed liquidation-days AND >=100 observed liquidation events over 2026-01-18..2026-04-30, AND complete hourly candle+funding coverage over the test window 2026-02-10..2026-04-30.",
+    "selection_used_outcomes": true,
+    "selection_outcome_definition": "Only label EXISTENCE/coverage counts are used for eligibility (event-adequacy rule). No liquidation magnitude, direction, timing, or forecast result informs selection.",
+    "min_instruments_required": 5,
+    "pre_coverage_day_event_eligible": 113,
+    "native_perps_considered": 192,
+    "note": "Final universe is 113 or fewer (coverage filter only), not ~150-190. No venue mixing."
+  },
+  "unit": "coin x 24h UTC bucket",
+  "targets": [
+    {
+      "id": "T1_LIQ_COUNT",
+      "column": "t1_liq_count",
+      "role": "primary",
+      "definition": "Observed ironflow liquidation event count in the next 24h UTC bucket for that coin. Observed only; never modeled or synthetic.",
+      "metric": "spearman_rank_ic"
+    },
+    {
+      "id": "T1_LIQ_NOTIONAL",
+      "column": "t1_liq_notional",
+      "role": "secondary",
+      "definition": "Observed ironflow liquidation notional USD in the next 24h UTC bucket.",
+      "metric": "spearman_rank_ic"
+    }
+  ],
+  "features_causal": {
+    "rule": "All features use only data at or before the bucket start. Hourly series are aggregated to the decision bucket with backward-looking as-of merges only.",
+    "rv24h": "Trailing 24h realized variance from hourly closes ending at bucket start",
+    "funding_rate": "Latest settled fundingRate at or before bucket start",
+    "abs_funding": "abs(funding_rate)",
+    "premium": "Latest settled premium at or before bucket start",
+    "score": "Cross-sectional z-score of funding_rate plus cross-sectional z-score of abs_funding, computed WITHIN each 24h bucket across the eligible universe. No time-series fitting, no leakage across buckets."
+  },
+  "estimand": {
+    "primary": "Spearman rank correlation between the cross-sectional funding score at bucket t and next-24h observed liquidation event count at t+1, per 30-day block on the pooled cross-section.",
+    "secondary": "Top-k minus bottom-k mean next-24h liquidation notional spread (k = 10% of universe, floor 5), per block.",
+    "aggregation": "Mean IC across blocks with permutation inference; the unit of inference is the 30-day block."
+  },
+  "inference": {
+    "null": "Within each 24h bucket, permute the funding score across coins.",
+    "reps": 1000,
+    "seed": 20261112,
+    "two_sided": true,
+    "materiality_floor": "|mean IC| >= 0.05 AND top-minus-bottom spread sign consistent across >=2 of 3 blocks",
+    "uncertainty": "Report permutation null 5th/95th percentiles and empirical p-value per block and pooled."
+  },
+  "splits": {
+    "method": "chronological, 7-day embargo between blocks, no random split",
+    "design_span_days": 103,
+    "design_span_utc": "2026-01-18T00:00:00Z..2026-04-30T23:59:59Z",
+    "burn_in": {
+      "start": "2026-01-18T00:00:00Z",
+      "end": "2026-02-02T23:59:59Z",
+      "days": 16,
+      "role": "Feature warm-up and eligibility context only; never scored"
+    },
+    "embargoes": [
+      {"after": "burn_in", "start": "2026-02-03T00:00:00Z", "end": "2026-02-09T23:59:59Z", "days": 7},
+      {"after": "block_0", "start": "2026-03-12T00:00:00Z", "end": "2026-03-18T23:59:59Z", "days": 7},
+      {"after": "block_1", "start": "2026-04-04T00:00:00Z", "end": "2026-04-10T23:59:59Z", "days": 7}
+    ],
+    "test_blocks": [
+      {
+        "block": 0,
+        "target_window_start": "2026-02-10T00:00:00Z",
+        "target_window_end": "2026-03-11T23:00:00Z",
+        "scored_decision_days_start": "2026-02-10T00:00:00Z",
+        "scored_decision_days_end": "2026-03-10T00:00:00Z",
+        "scored_decision_day_count": 29
+      },
+      {
+        "block": 1,
+        "target_window_start": "2026-03-19T00:00:00Z",
+        "target_window_end": "2026-04-03T23:00:00Z",
+        "scored_decision_days_start": "2026-03-19T00:00:00Z",
+        "scored_decision_days_end": "2026-04-02T00:00:00Z",
+        "scored_decision_day_count": 15
+      },
+      {
+        "block": 2,
+        "target_window_start": "2026-04-11T00:00:00Z",
+        "target_window_end": "2026-04-30T23:00:00Z",
+        "scored_decision_days_start": "2026-04-11T00:00:00Z",
+        "scored_decision_days_end": "2026-04-29T00:00:00Z",
+        "scored_decision_day_count": 19
+      }
+    ],
+    "n_test_blocks": 3,
+    "total_scored_decision_days": 63,
+    "last_scoreable_decision_day": "2026-04-29T00:00:00Z",
+    "note": "Block end is the target horizon, not the last decision day. Builder scores start..end-1 day. Last decision day 2026-04-29 targets [2026-04-30, 2026-05-01) which is fully present. d=2026-04-30 would read May and is forbidden. Labels end 2026-04-30T23:48:51Z."
+  },
+  "decision_rule": {
+    "EXPLORATORY_SIGNAL": "Materiality + permutation criteria met -> report as EXPLORATORY_ONLY signal with full diagnostics; never promoted",
+    "EXPLORATORY_NULL": "Criteria not met -> preserve the null with exact failing minima",
+    "INADMISSIBLE": "Universe < 5 coins or < 3 blocks with data -> emit infeasibility with exact minima and stop (do not weaken MIN_COINS)"
+  },
+  "forbidden": [
+    "Any claim of promotion or confirmation",
+    "Reading or scoring 2026-05-01 or later (May 2026 and sealed windows)",
+    "Reading or scoring 2025-11 or earlier",
+    "Venue mixing (non-Hyperliquid liquidation data)",
+    "Modeled/proxy/synthetic liquidation labels",
+    "Tuning score, k, or materiality floor against test blocks",
+    "Editing .github/workflows/*",
+    "Committing raw parquet objects or caches",
+    "Re-probing terminal Binance cells or sealed/Gate-4 paths",
+    "Threshold shopping or fabricating artifacts/verdicts"
+  ],
+  "artifacts_to_emit": [
+    "research_state/tracka_liq_xsec_forward_panel_<UTC>.parquet",
+    "research_state/tracka_liq_xsec_forward_panel_build_report_<UTC>.json",
+    "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-<UTC>.md",
+    "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-<UTC>.json"
+  ]
+}

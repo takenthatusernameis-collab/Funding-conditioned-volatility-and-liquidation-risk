@@ -1,0 +1,65 @@
+{
+  "experiment_id": "TRACKA-LIQ-XSEC-FORWARD-20261113T222859Z",
+  "campaign": "FCLR-FORWARD-LIQ-2026Q1Q2",
+  "arm": "B",
+  "prereg": "research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json",
+  "generated_utc": "2026-11-13T22:31:55Z",
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "universe_size": 107,
+  "universe_min_instruments_required": 5,
+  "selection_rule": "coverage-only + label existence (>=20 liq-days, >=100 liq events, complete hourly candle+funding over test window)",
+  "windows_utc": {
+    "burn_in_never_scored": "2026-01-18 00:00:00 .. 2026-02-02 23:00:00",
+    "test_blocks": [
+      [
+        0,
+        "2026-02-10 00:00:00",
+        "2026-03-11 23:00:00"
+      ],
+      [
+        1,
+        "2026-03-19 00:00:00",
+        "2026-04-03 23:00:00"
+      ],
+      [
+        2,
+        "2026-04-11 00:00:00",
+        "2026-04-30 23:00:00"
+      ]
+    ],
+    "scored_decision_days_end": "2026-04-29 00:00:00"
+  },
+  "inputs_hashes": {
+    "labels": {
+      "ironflow_bulk/liquidations/2026-01.parquet": "489f5d9d747c3d58f0af515c925c9d2625eafbfbc33570e1c8ba4c8ca7ce7248",
+      "ironflow_bulk/liquidations/2026-02.parquet": "8e27c2e1ca90baebbc768ea74a105f4547f85d2a85c81b67927f9c32d02ec18f",
+      "ironflow_bulk/liquidations/2026-03.parquet": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d",
+      "ironflow_bulk/liquidations/2026-04.parquet": "3d84969be4e65fea8abbc9c8b5950160e835c39ed0906d155cbefe46d23fd9b4"
+    },
+    "candles": {
+      "candles_1h/2025-12.parquet": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+      "candles_1h/2026-01.parquet": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+      "candles_1h/2026-02.parquet": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+      "candles_1h/2026-03.parquet": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+      "candles_1h/2026-04.parquet": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180"
+    },
+    "funding": {
+      "funding/2025-12.parquet": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7",
+      "funding/2026-01.parquet": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1",
+      "funding/2026-02.parquet": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789",
+      "funding/2026-03.parquet": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a",
+      "funding/2026-04.parquet": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a"
+    }
+  },
+  "panel": {
+    "path": "research_state/tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet",
+    "sha256": "990598685617b088344435ac8c3e318fcdb42ed5e342df82120a15340b91caac",
+    "n_rows": 6634,
+    "n_buckets": 62
+  },
+  "panel_sha256": "990598685617b088344435ac8c3e318fcdb42ed5e342df82120a15340b91caac",
+  "feature_rule": "score_d = z(funding_rate) + z(abs_funding), cross-sectional z within bucket",
+  "k": 11,
+  "runtime_seconds": 19.8
+}
