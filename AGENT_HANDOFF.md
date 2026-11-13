@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-13T19:13:17Z (authoritative)
+# AGENT HANDOFF — 2026-11-13T19:17:03Z (authoritative)
 
 **Project:** Funding-conditioned volatility and liquidation risk (FCLR)
 **Repo root:** `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`
