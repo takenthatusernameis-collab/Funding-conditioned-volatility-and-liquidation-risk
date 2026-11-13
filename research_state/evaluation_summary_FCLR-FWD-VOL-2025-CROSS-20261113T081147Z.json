@@ -1,0 +1,121 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-CROSS-20261113T063000Z",
+ "campaign": "FCLR-NEXT-CAMPAIGN-20261113T063000Z",
+ "cell": "FWD-VOL-2025-CROSS",
+ "generated_utc": "2026-11-13T08:11:47Z",
+ "prereg": "prereg_fclr_fwd_vol_2025_cross_20261113T063000Z.json",
+ "verdict": "NOT_REPLICATED",
+ "checks": {
+  "materiality_ge_2pct": false,
+  "ci_excludes_zero": false,
+  "instruments_ge_5": true,
+  "blocks_ge_3": true,
+  "loio_ge_4_of_5": false,
+  "placebo_pass": false,
+  "no_leakage": true
+ },
+ "primary": {
+  "mean_diff": -0.0010895316309771936,
+  "ci_lo": -0.00890264317834016,
+  "ci_hi": 0.008930060624316567,
+  "n": 10776,
+  "n_days": 90,
+  "p_boot": 0.753,
+  "rel_reduction_pct": 0.29157281733490487
+ },
+ "holm": {
+  "b2_C1_vs_B1": 0.036000000000000004,
+  "b2_C2_vs_C1": 0.128,
+  "b1_C1_vs_B1": 0.336,
+  "b1_C2_vs_B1": 1.0,
+  "b0_C2_vs_C1": 1.0,
+  "b2_C2_vs_B1": 1.0,
+  "b0_C1_vs_B1": 1.0,
+  "b0_C2_vs_B1": 1.0,
+  "b1_C2_vs_C1": 1.0
+ },
+ "per_block": [
+  {
+   "block": 0,
+   "train_rows": 3245,
+   "test_rows": 3600
+  },
+  {
+   "block": 1,
+   "train_rows": 6965,
+   "test_rows": 3600
+  },
+  {
+   "block": 2,
+   "train_rows": 10685,
+   "test_rows": 3600
+  }
+ ],
+ "loio": [
+  {
+   "held_out": "BTCUSDT",
+   "mean_diff": 0.015090291036728438,
+   "ci_lo": 0.005723711837547507,
+   "ci_hi": 0.023626002056212424,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.0,
+   "rel_reduction_pct": -3.4661584575546014
+  },
+  {
+   "held_out": "ETHUSDT",
+   "mean_diff": -0.002425275185340058,
+   "ci_lo": -0.012350895259492038,
+   "ci_hi": 0.0066273436871120105,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.652,
+   "rel_reduction_pct": 0.6890730247664857
+  },
+  {
+   "held_out": "BNBUSDT",
+   "mean_diff": 0.006859196404935815,
+   "ci_lo": 5.837645391662022e-05,
+   "ci_hi": 0.013323090134107067,
+   "n": 2136,
+   "n_days": 89,
+   "p_boot": 0.048,
+   "rel_reduction_pct": -1.9581521928290795
+  },
+  {
+   "held_out": "SOLUSDT",
+   "mean_diff": -0.0048848015399845235,
+   "ci_lo": -0.015149537234759826,
+   "ci_hi": 0.007129276536026435,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.376,
+   "rel_reduction_pct": 1.5463162231457983
+  },
+  {
+   "held_out": "XRPUSDT",
+   "mean_diff": 0.002187666151550303,
+   "ci_lo": -0.014553607052657288,
+   "ci_hi": 0.028783596597364375,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.928,
+   "rel_reduction_pct": -0.48600879009845127
+  }
+ ],
+ "placebo": {
+  "null_p95": 1.185912036297226,
+  "true_rel_reduction_pct": 0.29157281733490487,
+  "pass": false,
+  "n_perm": 200
+ },
+ "coverage": {
+  "BTCUSDT": 4345,
+  "ETHUSDT": 4345,
+  "BNBUSDT": 4345,
+  "SOLUSDT": 4345,
+  "XRPUSDT": 4345
+ },
+ "n_panel_rows": 21845,
+ "n_valid_rows": 18005
+}

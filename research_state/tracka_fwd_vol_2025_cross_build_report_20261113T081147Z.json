@@ -1,0 +1,36 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-CROSS-20261113T063000Z",
+ "generated_utc": "2026-11-13T08:11:47Z",
+ "panel_path": "tracka_fwd_vol_2025_cross_panel_20261113T081147Z.parquet",
+ "panel_sha256": "98477cab6bec3d83adb7f2ce51926736886306669356c3feda78de25740e347f",
+ "n_rows": 21845,
+ "n_valid_rows": 18005,
+ "coverage": {
+  "BTCUSDT": 4345,
+  "ETHUSDT": 4345,
+  "BNBUSDT": 4345,
+  "SOLUSDT": 4345,
+  "XRPUSDT": 4345
+ },
+ "blocks": [
+  {
+   "block": 0,
+   "train_end": "2025-01-28T00:00:00Z",
+   "test_start": "2025-02-04T00:00:00Z",
+   "test_end": "2025-03-05T23:59:59Z"
+  },
+  {
+   "block": 1,
+   "train_end": "2025-02-28T00:00:00Z",
+   "test_start": "2025-03-07T00:00:00Z",
+   "test_end": "2025-04-05T23:59:59Z"
+  },
+  {
+   "block": 2,
+   "train_end": "2025-03-31T00:00:00Z",
+   "test_start": "2025-04-07T00:00:00Z",
+   "test_end": "2025-05-06T23:59:59Z"
+  }
+ ],
+ "inputs": "research_state/data_cache/{SYM}_{YYYY}_{MM}/{markPriceKlines,premiumIndexKlines,indexPriceKlines}-{date} + {SYM}-fundingRate-{YYYY-MM}"
+}

@@ -1,8 +1,8 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-13T08:00:00Z
-**Status:** `NEXT_CAMPAIGN_TWO_CELLS_COMPLETE` — Track C forward NOT_REPLICATED; Cell 1 FCLR-LIQ-010-CONFIRM NOT_REPLICATED; Cell 2 FCLR-EXP-ROBUST-REDO FRAGILE (gate script defect only, see log); Cell 3 FCLR-FWD-VOL-2025-CROSS **NEXT**; gate PASS; next focus campaign defined below.
+**Handoff timestamp (UTC):** 2026-11-13T08:11:47Z
+**Status:** `NEXT_CAMPAIGN_CLOSED_ALL_CELLS_TERMINAL` — Track C forward NOT_REPLICATED (H1_primary NOT_SUPPORTED); Cell 1 FCLR-LIQ-010-CONFIRM NOT_REPLICATED (terminal); Cell 2 FCLR-EXP-ROBUST-REDO FRAGILE (terminal, GATE: PASS); Cell 3 FCLR-FWD-VOL-2025-CROSS NOT_REPLICATED (terminal, GATE: PASS); next focus campaign CLOSED — no frozen cells remain; next heavy work requires a NEW frozen prereg (Track A alternative observed-liquidation source per RESEARCH_PROMPT §16, or Track C new period/venue).
 
 **This file is the ONLY durable handoff.** It supersedes every earlier handoff, checkpoint, closure, and frontier entry. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are redirects to this file. Do not create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. Update this file in place by appending a dated `## SESSION LOG` entry.
 
@@ -200,6 +200,25 @@ python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structu
 ---
 
 ## SESSION LOG (append-only; newest first)
+
+## 2026-11-13T08:11:47Z — Kilo session: Executed Cell 3 `FCLR-FWD-VOL-2025-CROSS` (Track C volatility period-specificity, P2) and completed Cell 2 `FCLR-EXP-ROBUST-REDO` gate (Track A expansion robustness, P2). Next focus campaign CLOSED — all three cells terminal.
+
+**Cell 2 FCLR-EXP-ROBUST-REDO (Track A expansion robustness, P2) — COMPLETE.**
+Gate defect resolved (source already carried materiality_ge_2pct + ci_excludes_zero in checks dict). Re-ran `scripts/fclr_exp_robust_redo.py` on sealed expansion panel `tracka_hl_expansion_panel_20261111T202344Z.parquet` (sha256 39916a72...): verdict FRAGILE (terminal), LOIO 4/8 FAIL, placebo null p95 21.8887% >= true 19.0371% FAIL, bootstrap settings PASS, materiality PASS, CI-excludes-zero PASS, full-panel contrast rel reduction 19.04%. New artifact `evaluation_summary_FCLR-EXP-ROBUST-REDO-20261113T080456Z.{md,json}` with all 5 checks. `scripts/fclr_exp_robust_redo_gate.py` -> GATE: PASS. Registry `H_fclr_exp_robust_redo` = FRAGILE terminal (artifact hash 508c93d2...). Prior sealed 19.04% PASS not re-scored.
+
+**Cell 3 FCLR-FWD-VOL-2025-CROSS (Track C volatility, P2) — COMPLETE.**
+Executed `scripts/fclr_fwd_vol_2025_cross.py` on cached Binance 2025-02..2025-05 window (5 symbols BTC/ETH/BNB/SOL/XRP, 3x30-day blocks, 90 days, n=10776): verdict NOT_REPLICATED (terminal). Pooled C2 vs B1 24h QLIKE mean diff -0.001089, 95% CI [-0.008903, 0.008930] crosses zero, rel reduction 0.29% (<2% floor), p_boot 0.753. LOIO 0/5 FAIL, placebo FAIL, no_leakage PASS, instruments_ge_5 PASS, blocks_ge_3 PASS. Created `scripts/fclr_fwd_vol_2025_cross_gate.py` -> GATE: PASS (all 7 checks). Artifacts: `evaluation_summary_FCLR-FWD-VOL-2025-CROSS-20261113T081147Z.{md,json}`, panel `tracka_fwd_vol_2025_cross_panel_20261113T081147Z.parquet` (sha 98477cab...), build report `tracka_fwd_vol_2025_cross_build_report_20261113T081147Z.json`. Registry `H_fclr_fwd_vol_2025_cross` = NOT_REPLICATED terminal (artifact hash 59eb18b4...).
+
+**Campaign status: NEXT FOCUS CAMPAIGN CLOSED.** All three cells terminal: Cell 1 FCLR-LIQ-010-CONFIRM NOT_REPLICATED; Cell 2 FCLR-EXP-ROBUST-REDO FRAGILE; Cell 3 FCLR-FWD-VOL-2025-CROSS NOT_REPLICATED. Primary Track C campaign (FCLR-FWD-VOL-011-CONFIRM) earlier COMPLETE (NOT_REPLICATED, GATE: PASS). FCLR-011 sealed PASS (4.94%) stands unrefuted but does not generalize forward or to 2025. H1_primary NOT_SUPPORTED.
+
+**Next heavy work (repo-name priority: Track A liquidation + Track C volatility):** No frozen pre-registered cells remain. Per RESEARCH_PROMPT §16 adaptive feasibility, the next materially different route is bounded alternative observed-liquidation source discovery (Track A) or a new period/venue for Track C volatility — each requires a NEW frozen prereg before outcomes. Gate 4 Branch 1 remains absent (NO_VALID_GATE4_TRIGGER) and is not a blocker. No status-only sessions; no monitor-only closure.
+
+**Acceptance (all green):**
+- `python3 scripts/fclr_exp_robust_redo_gate.py` -> GATE: PASS
+- `python3 scripts/fclr_fwd_vol_2025_cross_gate.py` -> GATE: PASS
+- `python3 scripts/fclr_heavy_confirm_gate.py` -> GATE: PASS
+- `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` -> 119 OK
+- No sealed artifact mutated; no raw cache committed; no workflow files patched.
 
 ## 2026-11-13T08:00:00Z — Kilo session: Executed Cell 2 `FCLR-EXP-ROBUST-REDO` (Track A expansion robustness, P2).
 
