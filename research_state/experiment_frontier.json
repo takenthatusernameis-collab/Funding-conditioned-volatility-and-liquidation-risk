@@ -7,8 +7,8 @@
   "next_unfinished_task": null,
   "generated": "2026-11-13T09:15:00Z",
   "last_checked": "2026-11-13T10:04:51Z",
-  "blockers": "Cell FWD-VOL-2024Q4-CROSS now terminal NOT_REPLICATED (gate PASS). Next heavy route requires either a newly admissible observed-liquidation source (Track A) or another materially different cached window/venue (Track C). Alt-source scan 20261113T090105Z found no GO unauthenticated observed-liquidation source meeting minima.",
-  "next_action_heavy": "Execute the next cell of FCLR-NEXT-CAMPAIGN-20261113T091500Z: freeze a prereg BEFORE outcomes for a genuinely new route. P1 Track A: newly admissible observed-liquidation source -> admissibility audit -> prereg -> execute -> gate. P2 Track C: a cached window/venue not yet tested (not 2024 H2, not 2025-02..2025-05, not 2026-05..2026-08, not 2026-08..2026-10). No status-only sessions.",
+  "blockers": "Cells FWD-VOL-2024Q4-CROSS and FWD-VOL-2025H2-CROSS both terminal NOT_REPLICATED (gates PASS). The only other complete cached window, 2024-01..2024-03, lacks funding coverage (funding starts 2024-04), so it is a volatility-only B0/B1 diagnostic, not a funding-conditioned test — do not force it as Cell 7. Alt-source scan 20261113T090105Z found no GO unauthenticated observed-liquidation source meeting minima.",
+  "next_action_heavy": "Cell FWD-VOL-2025H2-CROSS is now terminal NOT_REPLICATED (gate PASS). No remaining complete funding-backed cached window is disjoint from all tested windows and executable under the pre-registered design (2024-01..2024-03 lacks funding). Heavy progress now requires either (P1) a newly admissible observed-liquidation source passing the §16 admissibility audit before any preregistration/outcome computation, or (P2) the 2024-01..2024-03 volatility-only RV diagnostic frozen explicitly out of funding scope. Gate 4 Branch 1 only on a valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). No status-only sessions.",
   "cells": [
    {
     "cell": "FWD-VOL-2024Q4-CROSS",

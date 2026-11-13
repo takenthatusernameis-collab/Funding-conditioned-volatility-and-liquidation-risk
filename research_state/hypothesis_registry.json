@@ -325,12 +325,31 @@
    "terminal_class": "NOT_REPLICATED",
    "evidence": "Execution on cached Binance 2024 H2 window (5 symbols BTC/ETH/BNB/SOL/XRP, 3 non-overlapping test blocks 2024-07-23..2024-08-21 / 2024-08-20..2024-09-18 / 2024-09-16..2024-09-30, 7-day embargo, n_valid=10080, test n=8880, 69 days): pooled C2 vs B1 24h QLIKE mean diff +0.091136 (CI [-0.012223, 0.256785] crosses zero, favours B1), rel reduction -20.77% (negative = C2 worse), p_boot 0.185. materiality FAIL; ci_excludes_zero_improving FAIL; LOIO 0/5 FAIL (only XRPUSDT positive at 7.56%); placebo null p95 -19.72% vs true -20.77% FAIL (200 perms); Holm FAIL; leakage PASS; instruments_ge_5 PASS; blocks_ge_3 PASS. Horizon family: h24 C2_vs_B1 rel -20.77%; h168 C2_vs_B1 rel +12.46% (CI excludes zero, improving) but not material at the primary 24h horizon and not robust to LOIO/placebo. Verdict: NOT_REPLICATED (terminal). Artifacts: research_state/evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-20261113T100451Z.{md,json}; panel tracka_fwd_vol_2024q4_cross_panel_20261113T100451Z.parquet; build report tracka_fwd_vol_2024q4_cross_build_report_20261113T100451Z.json. Gate: scripts/fclr_fwd_vol_2024_cross_gate.py -> GATE: PASS.",
    "reopen_requires": [],
+  "campaign": "FCLR-NEXT-CAMPAIGN-20261113T091500Z",
+  "verdict_recorded": true,
+  "artifact_hash": "7122075ecf8d4af2e38d65b8bdbc0ce35c8955112eb8bb0e4f8f986aacfe8746",
+  "panel_hash": "5349fc345eb479366d5c169f5f31f8e06ac91cb6c7ca5903cd03d26420c7d99b",
+  "prereg_hash": "e1a26ca57301d5908c6aed435bcf8d97911694ed719af84d45cdb28dbce6d4c1"
+  },
+  {
+   "id": "H_fclr_fwd_vol_2025h2_cross",
+   "type": "primary_trackc_volatility_period_specificity",
+   "description": "Period-specificity test: whether the sealed FCLR-011 funding-conditioned volatility PASS (C2 vs B1, +4.94% rel QLIKE on 2026-05..2026-08, 5 instruments, 3 blocks) replicates on a disjoint, never-tested 2025-07-23..2025-10-15 rolling-origin walk-forward (train start 2025-04-01, 3 non-overlapping 30-day blocks, 7-day embargo) over cached Binance mark/premium/index/funding (5 symbols).",
+   "status": "NOT_REPLICATED",
+   "frozen_at": "2026-11-13T10:21:39Z",
+   "last_tested": "2026-11-13T10:22:40Z",
+   "last_experiment": "FCLR-FWD-VOL-2025H2-CROSS-20261113T102139Z",
+   "last_verdict": "NOT_REPLICATED",
+   "terminal": true,
+   "terminal_class": "NOT_REPLICATED",
+   "evidence": "Execution on cached Binance 2025 H2 window (5 symbols BTC/ETH/BNB/SOL/XRP, train start 2025-04-01, 3 non-overlapping test blocks 2025-07-23..2025-08-21 / 2025-08-20..2025-09-18 / 2025-09-16..2025-10-15, 7-day embargo, n_valid=22800, test n=10680, 84 days): pooled C2 vs B1 24h QLIKE mean diff +0.027446 (CI [0.002173, 0.071397] excludes zero but FAVOURS B1), rel reduction -8.97% (< 2% materiality floor and wrong sign), p_boot 0.009. materiality_ge_2pct FAIL; ci_excludes_zero_improving FAIL; LOIO 0/5 (<4) FAIL; placebo null p95 >= true effect FAIL (200 perms, seed 20261113); Holm FAIL; leakage_audit_pass PASS; instruments_ge_5 PASS; blocks_ge_3 PASS. The FCLR-011 PASS does not generalize to 2025 H2 either — C2 is significantly worse than B1 on this disjoint window, consistent with 2024 H2 (rel -20.77%). Verdict: NOT_REPLICATED (terminal). Artifacts: research_state/evaluation_summary_FCLR-FWD-VOL-2025H2-CROSS-20261113T102240Z.{md,json}; panel tracka_fwd_vol_2025h2_cross_panel_20261113T102240Z.parquet; build report tracka_fwd_vol_2025h2_cross_build_report_20261113T102240Z.json. Gate: scripts/fclr_fwd_vol_2025h2_cross_gate.py -> GATE: PASS (13/13).",
+   "reopen_requires": [],
    "campaign": "FCLR-NEXT-CAMPAIGN-20261113T091500Z",
    "verdict_recorded": true,
-   "artifact_hash": "7122075ecf8d4af2e38d65b8bdbc0ce35c8955112eb8bb0e4f8f986aacfe8746",
-   "panel_hash": "5349fc345eb479366d5c169f5f31f8e06ac91cb6c7ca5903cd03d26420c7d99b",
-   "prereg_hash": "e1a26ca57301d5908c6aed435bcf8d97911694ed719af84d45cdb28dbce6d4c1"
+   "artifact_hash": "cc230583703a40bb53042fc3e3b8f0db65d0109094550c95fa6c992275d995f8",
+   "panel_hash": "61cef0e6cac2208403ef2ce4c2f204cf3f67cc5a85837f83be692a6324e16ccf",
+   "prereg_hash": "eb83ab1c62f76fe7ef6123441c2f8d69b2a167bb6a56c8de067d4bd820a00681"
   }
  ],
- "updated_utc": "2026-11-13T10:04:51Z"
+ "updated_utc": "2026-11-13T10:22:40Z"
 }
