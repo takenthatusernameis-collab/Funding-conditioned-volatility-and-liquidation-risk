@@ -1,0 +1,92 @@
+{
+ "generated_utc": "2026-11-13T04:12:00Z",
+ "campaign": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
+ "purpose": "coverage-only audit before prereg/outcome freeze",
+ "window": {
+  "start": "2026-08-03",
+  "end": "2026-10-31",
+  "required_days": 90
+ },
+ "symbols": {
+  "BTCUSDT": {
+   "mark_days_total": 1047,
+   "mark_first": "2024-01-01",
+   "mark_last": "2026-11-08",
+   "premium_days_total": 1016,
+   "index_days_total": 1016,
+   "funding_months": 31,
+   "funding_last": "2026-10",
+   "test_window_missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "test_window_mark_days": 88
+  },
+  "ETHUSDT": {
+   "mark_days_total": 1047,
+   "mark_first": "2024-01-01",
+   "mark_last": "2026-11-08",
+   "premium_days_total": 986,
+   "index_days_total": 986,
+   "funding_months": 31,
+   "funding_last": "2026-10",
+   "test_window_missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "test_window_mark_days": 88
+  },
+  "BNBUSDT": {
+   "mark_days_total": 1047,
+   "mark_first": "2024-01-01",
+   "mark_last": "2026-11-08",
+   "premium_days_total": 955,
+   "index_days_total": 955,
+   "funding_months": 31,
+   "funding_last": "2026-10",
+   "test_window_missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "test_window_mark_days": 88
+  },
+  "SOLUSDT": {
+   "mark_days_total": 1047,
+   "mark_first": "2024-01-01",
+   "mark_last": "2026-11-08",
+   "premium_days_total": 955,
+   "index_days_total": 955,
+   "funding_months": 31,
+   "funding_last": "2026-10",
+   "test_window_missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "test_window_mark_days": 88
+  },
+  "XRPUSDT": {
+   "mark_days_total": 1047,
+   "mark_first": "2024-01-01",
+   "mark_last": "2026-11-08",
+   "premium_days_total": 955,
+   "index_days_total": 955,
+   "funding_months": 31,
+   "funding_last": "2026-10",
+   "test_window_missing_mark_days": [
+    "2026-10-28",
+    "2026-10-29"
+   ],
+   "test_window_mark_days": 88
+  }
+ },
+ "archive_gaps": {
+  "dates": [
+   "2026-10-28",
+   "2026-10-29"
+  ],
+  "handling": "dropped, not imputed",
+  "documented_in": "evaluation_summary_FCLR-012-V.md"
+ },
+ "funding_coverage": "2024-04..2026-10; 8-hourly; last calc_time 2026-10-31T16:00Z; test window ends 2026-10-31 so no stale funding is used.",
+ "conclusion": "PASS: 5 instruments, complete hourly mark/premium/index coverage for the 3x30-day test window except two genuinely absent archive days (2026-10-28/29) that are dropped; funding covers the full test window. No new fetch required."
+}

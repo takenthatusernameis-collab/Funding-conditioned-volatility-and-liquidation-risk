@@ -1,0 +1,207 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-011-CONFIRM-20261113T041200Z",
+ "campaign": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
+ "track": "C_volatility",
+ "preregistered_utc": "2026-11-13T04:12:00Z",
+ "status": "FROZEN_PRE_OUTCOMES",
+ "pre_registered_before_outcomes": true,
+ "frozen_before_outcomes": true,
+ "outcome_data_inspected_before_freeze": false,
+ "priority": "P1",
+ "hypothesis_id": "H_fclr_fwd_vol_011_confirm",
+ "hypothesis_type": "primary_trackc_volatility",
+ "claim": "The FCLR-011 funding-conditioned volatility PASS (C2 vs B1, +4.94% relative QLIKE reduction, 95% CI [-0.032546,-0.001418], 5 instruments, 3 blocks, test 2026-05-08..2026-08-06) replicates out-of-sample on a pre-registered rolling-origin walk-forward over the most recent Binance mark-price cache (2026-08-07..2026-11-04), with >=2% relative QLIKE reduction, a 95% block-bootstrap CI excluding zero, >=5 instruments, >=3 non-overlapping 30-day test blocks, Holm across the declared 12-cell family, and no LOIO/placebo/leakage failure.",
+ "why_this_is_new": {
+  "contradiction_being_resolved": "The 2026-11-13 handoff and hypothesis_registry report every volatility campaign as NOT_MET and declare all claim-worthy local work exhausted. That is contradicted by research_state/evaluation_summary_FCLR-011.md (gate PASS) and evaluation_summary_FCLR-012-V.md (+15.19% point estimate). H1_primary.last_experiment is stale at FCLR-014, which predates FCLR-011. No artifact invalidates FCLR-011.",
+  "underpowered_prior_tests": "FCLR-006 (2 blocks), FCLR-007 (0), FCLR-012-V (0), FCLR-013 (1), FCLR-014 (0) all failed the >=3-block gate because their test windows were 5-76 days. FCLR-009 (6 blocks) was NOT_MET; FCLR-011 (3 blocks) PASSED. The evidence is mixed and underpowered, not exhausted.",
+  "data_available_now": "research_state/data_cache holds Binance 1h markPriceKlines for BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT for 2024-01-01..2026-11-08 (310 mark days in 2026 per symbol), with premiumIndexKlines and fundingRate for the same period. The 2026-08-07..2026-11-04 window supplies three contiguous 30-day blocks.",
+  "not_a_relitigation": "No sealed FCLR-011/012-V/013/014 artifact is modified or re-scored. The FCLR-011 window is reproduced only as a pipeline-validation cell (REPRO-011) and is not counted as new confirmation evidence.",
+  "honesty": "The test window overlaps prior fitting data (FCLR-012-V train/val) and two prior test windows (FCLR-013: 2026-08-26..2026-09-30; FCLR-012-V: 2026-10-29..2026-11-02). This is disclosed and a pre-registered sensitivity excluding those exact days is required. A CONFIRMED verdict must survive that sensitivity."
+ },
+ "venue": "binance_um_perp",
+ "data_sources": {
+  "mark_price_1h": {
+   "dataset": "binance-public-data/UM/markPriceKlines",
+   "access": "unauthenticated local archive",
+   "path_template": "research_state/data_cache/{SYM}_{YYYY}_{MM}/markPriceKlines-{YYYY-MM-DD}/{SYM}-1h-{YYYY-MM-DD}.csv",
+   "columns_used": [
+    "open_time",
+    "close"
+   ],
+   "license": "public archive"
+  },
+  "premium_index_1h": {
+   "dataset": "binance-public-data/UM/premiumIndexKlines",
+   "access": "unauthenticated local archive",
+   "path_template": "research_state/data_cache/{SYM}_{YYYY}_{MM}/premiumIndexKlines-{YYYY-MM-DD}/{SYM}-1h-{YYYY-MM-DD}.csv",
+   "columns_used": [
+    "open_time",
+    "close"
+   ],
+   "license": "public archive"
+  },
+  "index_price_1h": {
+   "dataset": "binance-public-data/UM/indexPriceKlines",
+   "access": "unauthenticated local archive",
+   "path_template": "research_state/data_cache/{SYM}_{YYYY}_{MM}/indexPriceKlines-{YYYY-MM-DD}/{SYM}-1h-{YYYY-MM-DD}.csv",
+   "columns_used": [
+    "open_time",
+    "close"
+   ],
+   "license": "public archive"
+  },
+  "funding_rate": {
+   "dataset": "binance-public-data/UM/fundingRate",
+   "access": "unauthenticated local archive",
+   "path_template": "research_state/data_cache/{SYM}_{YYYY}_{MM}/{SYM}-fundingRate-{YYYY-MM}/{SYM}-fundingRate-{YYYY-MM}.csv",
+   "columns_used": [
+    "calc_time",
+    "last_funding_rate"
+   ],
+   "license": "public archive"
+  },
+  "not_used": [
+   "Hyperliquid ironflow labels (Track A)",
+   "any liquidation label",
+   "any modeled/proxy label"
+  ]
+ },
+ "universe": {
+  "selection_rule": "fixed ex ante, identical to FCLR-011 for direct comparability",
+  "symbols": [
+   "BTCUSDT",
+   "ETHUSDT",
+   "BNBUSDT",
+   "SOLUSDT",
+   "XRPUSDT"
+  ],
+  "n_instruments": 5
+ },
+ "target": {
+  "primary": "next_24h_realized_variance_mark_price",
+  "definition": "sum of squared 1h log returns over t+1..t+24",
+  "units": "squared log-return",
+  "secondary_horizons_h": [
+   6,
+   72,
+   168
+  ],
+  "missing_rule": "origins without a complete 24h-ahead window are dropped; no imputation"
+ },
+ "features": {
+  "rv1h": "trailing 1h realized variance",
+  "rv24h": "trailing 24h realized variance",
+  "rv168h": "trailing 168h realized variance",
+  "signed_funding": "latest fundingRate with calc_time <= t",
+  "abs_fund_pct": "percentile rank of |funding| vs preceding 90 calendar days, min 30 observations, past-only",
+  "premium": "premiumIndexKlines close (fallback mark/index - 1)",
+  "ema_dist": "mark / 24h EMA(mark) - 1, causal"
+ },
+ "models": {
+  "B0": "persistence: log RV24h",
+  "B1": "HAR OLS on log RV1h, log RV24h, log RV168h",
+  "C1": "B1 + signed_funding + abs_fund_pct",
+  "C2": "C1 + premium + ema_dist",
+  "fit": "OLS on log(target+1e-12), train-only standardization, training-only smearing back-transform; no regularization, no tuning"
+ },
+ "primary_contrast": "C2_vs_B1 on 24h QLIKE",
+ "declared_family": {
+  "horizons_h": [
+   6,
+   24,
+   72,
+   168
+  ],
+  "contrasts": [
+   "C2_vs_B1",
+   "C1_vs_B1",
+   "C2_vs_C1"
+  ],
+  "n_cells": 12,
+  "multiplicity": "Holm across all 12 cells, alpha=0.05"
+ },
+ "splits": {
+  "design": "rolling-origin walk-forward; each test block is out-of-sample for its own refit model; 7-calendar-day embargo between train end and test start; origins only",
+  "train_start": "2026-01-01T00:00:00Z",
+  "data_end": "2026-10-31T23:00:00Z",
+  "blocks": [
+   {
+    "block": 0,
+    "train_end": "2026-07-27T23:00:00Z",
+    "embargo": "2026-07-28T00:00:00Z..2026-08-02T23:00:00Z",
+    "test_start": "2026-08-03T00:00:00Z",
+    "test_end": "2026-09-01T23:00:00Z",
+    "days": 30
+   },
+   {
+    "block": 1,
+    "train_end": "2026-08-26T23:00:00Z",
+    "embargo": "2026-08-27T00:00:00Z..2026-09-01T23:00:00Z",
+    "test_start": "2026-09-02T00:00:00Z",
+    "test_end": "2026-10-01T23:00:00Z",
+    "days": 30
+   },
+   {
+    "block": 2,
+    "train_end": "2026-09-24T23:00:00Z",
+    "embargo": "2026-09-25T00:00:00Z..2026-10-01T23:00:00Z",
+    "test_start": "2026-10-02T00:00:00Z",
+    "test_end": "2026-10-31T23:00:00Z",
+    "days": 30
+   }
+  ],
+  "pooled_test": "union of the three test blocks (90 calendar days of origins, 5 instruments; 2026-10-28/29 mark days are genuinely absent from the archive and are dropped, not imputed)",
+  "previously_inspected_days": [
+   "2026-08-26..2026-09-30 (FCLR-013 test)",
+   "2026-10-29..2026-11-02 (FCLR-012-V test)"
+  ]
+ },
+ "inference": {
+  "method": "circular block bootstrap over UTC days, resampling days jointly across instruments",
+  "block": "24h",
+  "reps": 2000,
+  "seed": 20261113,
+  "ci": "95% percentile",
+  "paired": "by (symbol, origin timestamp)"
+ },
+ "gates": {
+  "materiality_min_rel_reduction_pct": 2.0,
+  "ci_excludes_zero_favoring_C2": true,
+  "min_instruments": 5,
+  "min_non_overlapping_30d_blocks": 3,
+  "holm_pass": true,
+  "loio_min_pass": "4 of 5 symbols",
+  "placebo": "true pooled rel reduction > 95th percentile of 200 funding-permutation refits",
+  "sensitivity_excluding_inspected_days": "pooled rel reduction >= 2% and CI excludes zero after removing 2026-08-26..2026-09-30 and 2026-10-29..2026-11-02",
+  "repro_011": "pipeline reproduces FCLR-011 rel reduction within +/-0.5 percentage points and CI excludes zero",
+  "archive_gaps": "2026-10-28 and 2026-10-29 mark days are absent for all 5 symbols; origins on those days are dropped (no imputation). All three blocks retain >=28 observed days."
+ },
+ "verdict_rules": {
+  "CONFIRMED": "all gates pass, including sensitivity and repro_011",
+  "NOT_REPLICATED": "materiality or CI fails on the full pooled test after a clean pipeline/repro check",
+  "INCONCLUSIVE": "pipeline/repro fails, or <3 blocks, or <5 instruments, or bootstrap infeasible"
+ },
+ "forbidden": [
+  "no threshold shopping",
+  "no post-hoc feature/model/universe changes",
+  "no reuse of an inspected test window as fresh confirmation without the disclosed sensitivity",
+  "no zero-fill/forward-fill of missing features to force comparability",
+  "no liquidation labels",
+  "no mutation of sealed FCLR-011/012-V/013/014 artifacts",
+  "no agent-set Gate 4 RESOLVED_VERIFIED"
+ ],
+ "atomic_state_updates": [
+  "research_state/experiment_frontier.json",
+  "research_state/hypothesis_registry.json",
+  "research_state/run_manifest.json (or run_manifest_local.json offline)",
+  "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-<UTC>.{md,json}",
+  "research_state/tracka_fwd_vol_panel_<UTC>.parquet",
+  "research_state/tracka_fwd_vol_build_report_<UTC>.json"
+ ],
+ "artifacts": {
+  "panel": "research_state/tracka_fwd_vol_panel_<UTC>.parquet",
+  "build_report": "research_state/tracka_fwd_vol_build_report_<UTC>.json",
+  "evaluation_md": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-<UTC>.md",
+  "evaluation_json": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-<UTC>.json"
+ }
+}

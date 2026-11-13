@@ -1,233 +1,261 @@
 {
-  "hypotheses": [
-    {
-      "id": "H1_primary",
-      "type": "primary",
-      "description": "Funding extremes + RV + price dislocation improve OOS forecast of future RV/stress vs RV-only baseline",
-      "status": "NOT_SUPPORTED",
-      "frozen_at": "2026-11-06T20:36:32Z",
-      "last_tested": "2026-11-10T10:38:27Z",
-      "last_experiment": "FCLR-014",
-      "last_verdict": "forecast_gate_NOT_MET",
-      "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED.",
-      "terminal": true,
-      "terminal_class": "NOT_SUPPORTED",
-      "reopen_requires": [
-        "GATE4_BRANCH_1",
-        "NEW_OBSERVED_LIQUIDATION_SOURCE"
-      ]
-    },
-    {
-      "id": "H2_shek_replication",
-      "type": "secondary",
-      "description": "Independently reconstruct Shek (2026) funding-correction pattern from admissible public data; distinguish correction time from volatility/liquidation",
-      "status": "EXPLORATORY_ONLY",
-      "frozen_at": "2026-11-06T20:36:32Z",
-      "last_tested": "2026-10-31T18:53:55Z",
-      "last_verdict": "PARTIAL (direction reproduced, not statistically significant)",
-      "last_experiment": "H002-PARTIAL-REPLICA-v1",
-      "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458",
-      "evidence": "Completed PARTIAL replication on admissible cached public data only (research_state/h002_replication_report.md; blocker research_state/h002_replication_blocker.md). 88 funding-extreme events across 5 Binance USD\u24c8-M perpetuals, 2024-01-01..2024-03-31; RV-regime contrast resolved 2026-10-31: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true. Paper's full methodology not independently reconstructible (SSRN HTTP 403), so this remains PARTIAL \u2014 never an exact replication, confirmatory test, volatility-forecast-skill, boundary-breach, or observed-liquidation result. Correction time is a separate outcome (RESEARCH_PROMPT \u00a715). Not promotable without a new fully pre-registered confirmatory protocol using only admissible unauthenticated data.",
-      "completion_note": "Status corrected from stale 'proposed' to EXPLORATORY_ONLY to match completed h002_replication_report.md (2026-10-29 report; RV-regime blocker removed 2026-10-31). No re-run; no promotion.",
-      "supersedes": [
-        "proposed"
-      ],
-      "terminal": true,
-      "terminal_class": "EXPLORATORY_ONLY",
-      "reopen_requires": []
-    },
-    {
-      "id": "H_trackb_modeled_breaches",
-      "type": "primary_trackb",
-      "description": "Funding-conditioned features improve detection of synthetic mark-price boundary breaches (modeled proxy, not observed liquidations) vs price/RV-only baseline",
-      "status": "NOT_SUPPORTED",
-      "frozen_at": "2026-11-10T15:43:07Z",
-      "prereg_hash": "46dcfb56c279e853230e75f6cb246ed878d765d2b399ea9a2e21c41581194adb",
-      "last_tested": "2026-11-10T20:00:21Z",
-      "last_experiment": "trackb_TB2_20261110T190405Z",
-      "last_verdict": "forecast_gate_NOT_MET",
-      "evidence": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, label synthetic_boundary_breach_h168_long_10x_m0, train/val/test with 7d purge/embargo). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction, below the pre-registered 2% materiality floor (NOT_MET). Paired block bootstrap (2000 reps, 30-day blocks, seed 20261110): Log Loss 95% CI [-0.010997, 0.003094] crosses zero (NOT_MET), p=0.488; Brier p=0.488. Holm across 2 metrics FAILS. Only 2 non-overlapping 30-day test blocks (<3 required, NOT_MET). Overall forecast gate NOT_MET. Track B = modeled synthetic breach proxy only, never observed liquidations. Risk overlay INELIGIBLE. TB1 (trackb_TB1_20261110T173838Z) remains degenerate/inadmissible (zero test breaches). All admissible local Track B routes now executed; no gate passed.",
-      "terminal": true,
-      "terminal_class": "NOT_SUPPORTED",
-      "reopen_requires": []
-    },
-    {
-      "id": "H_tracka_hl_liquidation_forecast",
-      "type": "primary_tracka",
-      "description": "Funding-conditioned features improve out-of-sample forecasting of observed Hyperliquid perpetual liquidation intensity (notional_usd-weighted liquidation event count per symbol per 24h) vs RV-only baseline, on a new Hyperliquid panel (2025-06..2026-10).",
-      "status": "NOT_MET",
-      "preregistered_utc": "2026-11-11T07:30:00Z",
-      "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
-      "last_experiment": "TRACKA-HL-20261111T160124Z",
-      "last_verdict": "forecast_gate_NOT_MET",
-      "evidence": "Successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes. Bounded unauthenticated Hyperliquid candleSnapshot 2026-05..2026-10 cached for 9 symbols (first-time acquisition). RV-augmented panel: 1656 buckets, 1647 w/ RV24h, 1434 w/ label, all 9 symbols labeled. C2 vs B1 QLIKE on next-24h observed liquidation intensity (n=693, 3 test blocks, 9 instruments): mean diff +202.38 (C2 worse), 95% CI [15.42,443.78], rel reduction -280.56% (<2% and wrong sign), CI does not support C2 improvement. Forecast gate NOT_MET. No outcome inspection before freeze, no Binance/2024 conflation, observed ironflow labels only, no redundant network polling. Verdict: research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md. Prior context-insufficient closure: evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md (superseded by completed evaluation).",
-      "data_source": "ironflow/hyperliquid-liquidations",
-      "venue": "hyperliquid_perpetuals",
-      "coverage_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
-      "license": "CC BY 4.0",
-      "unauthenticated": true,
-      "no_requester_pays": true,
-      "observed_only": true,
-      "modeled_or_proxy": false,
-      "last_tested": "2026-11-11T16:02:32Z",
-      "claim_worthy_on_cache": true,
-      "determination": "Path (b) completed after bounded first-time candle acquisition; pre-registered C2 vs B1 evaluated on RV-augmented panel (2026-05-01..2026-10-31). Gate NOT_MET (C2 worse than B1).",
-      "next_campaign": {
-        "id": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
-        "status": "PREREG_PENDING_FROZEN_EX_ANTE_RULES",
-        "note": "Early campaign closed INADMISSIBLE. New prereg required BEFORE outcomes: symbol expansion on 2026-05..2026-10 with frozen ex-ante symbol selection (e.g., top label-activity markets from cached ironflow excluding closed 9-symbol panel) and event-adequacy minima (>=5 instruments, >=3 non-overlapping 30d test blocks, RV24h computable); bounded first-time acquisition of funding+candles for candidates as needed; no cherry-picking."
-      },
-      "terminal": true,
-      "terminal_class": "NOT_MET",
-      "reopen_requires": [
-        "NEW_OBSERVED_LIQUIDATION_SOURCE",
-        "HL_LABEL_EXTENSION"
-      ]
-    },
-    {
-      "id": "H_tracka_hl_early_liquidation_forecast",
-      "type": "primary_tracka_early",
-      "description": "Funding-conditioned features improve OOS forecasting of observed Hyperliquid perpetual liquidation intensity vs RV-only baseline on early admissible window 2025-11-01..2026-04-30 (disjoint from closed NOT_MET 2026-05..2026-10).",
-      "status": "INCONCLUSIVE_PILOT_SHORTFALL",
-      "preregistered_utc": "2026-11-12T05:47:37Z",
-      "prereg_document": "research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.json",
-      "last_verdict": "inconclusive_pilot_shortfall",
-      "evidence": "TRACKA-HL-EARLY-4H-20261112T054737Z (4h cadence, Hyperliquid-only, observed ironflow labels, 9 symbols, 2025-11-01..2026-04-30) evaluated per frozen prereg on cached panel (tracka_hl_early_4h_panel_20261112T054737Z.parquet, build report tracka_hl_early_4h_panel_build_report_20261112T054737Z.json). C2 vs B1 QLIKE: B1=76.507 (n=362), C2=100.714 (n=362), mean diff +24.207, 95% CI [22.037,25.408] (excludes zero in wrong direction), rel reduction -31.64%. Gate: materiality NOT_MET, CI_excludes_zero_better NOT_MET, >=5 paired instruments PASS (9), >=3 non-overlapping 30d test blocks NOT_MET (2: [0,1]; block 2 beyond 2026-04-30 window). Primary forecast gate cannot be satisfied per prereg (<3 blocks) -> INCONCLUSIVE_PILOT_SHORTFALL (not confirmatory PASS). Verdict: research_state/evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.{md,json}. No threshold-shopping; no Binance/2024 conflation; no modeled/proxy labels.",
-      "data_source": "ironflow/hyperliquid-liquidations",
-      "venue": "hyperliquid_perpetuals",
-      "observed_only": true,
-      "determination": "INCONCLUSIVE_PILOT_SHORTFALL \u2014 preregistered <3-test-block minimum unmet (2 feasible in window); results reported for transparency only. Prior 1h design remains sealed INADMISSIBLE (TRACKA-HL-EARLY-20261111T191958Z). 4h early-window cached design exhausted under this prereg.",
-      "terminal": true,
-      "terminal_class": "INCONCLUSIVE_PILOT_SHORTFALL",
-      "reopen_requires": [
-        "NEW_OBSERVED_LIQUIDATION_SOURCE",
-        "HL_LABEL_EXTENSION"
-      ]
-    },
-    {
-      "id": "H_tracka_hl_symbol_expansion_liquidation_forecast",
-      "type": "primary_tracka_expansion",
-      "description": "Funding-conditioned features (C2) improve OOS forecasting of observed Hyperliquid liquidation intensity vs RV-only baseline (B1) on expanded ex-ante-selected symbol panel 2026-05..2026-10.",
-      "status": "SUPPORTED_PASS_PRIMARY_GATE",
-      "preregistered_utc": "2026-11-11T19:55:00Z",
-      "prereg_document": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
-      "last_experiment": "TRACKA-HL-EXPANSION-20261111T195500Z",
-      "last_verdict": "forecast_gate_PASS",
-      "last_tested": "2026-11-11T20:30:00Z",
-      "venue": "hyperliquid_perpetuals",
-      "data_source": "ironflow/hyperliquid-liquidations",
-      "observed_only": true,
-      "evidence": "TRACKA-HL-EXPANSION-20261111T195500Z PASS: C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks (2026-05..2026-10, ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH).",
-      "robustness": {
-        "experiment_id": "TRACKA-EXP-ROBUST-20261112T015119Z",
-        "prereg": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
-        "verdict": "FRAGILE",
-        "verdict_artifact": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md",
-        "checks": {
-          "LOIO": "FAIL (4/8 pass, need >=6)",
-          "PLACEBO_PERMUTATION": "FAIL (true rel 19.04% <= 95th pctl 21.10%)",
-          "BOOTSTRAP_SETTINGS": "PASS (3/3 settings pass)"
-        }
-      },
-      "terminal": true,
-      "terminal_class": "SUPPORTED_PASS_PRIMARY_GATE",
-      "reopen_requires": [
-        "NEW_OBSERVED_LIQUIDATION_SOURCE",
-        "HL_LABEL_EXTENSION"
-      ]
-    },
-    {
-      "id": "H_tracka_hl_funding_conditioned_volatility_forecast",
-      "type": "primary_tracka_volatility",
-      "description": "Funding-conditioned features (C2) improve OOS forecasting of next-24h realized variance vs RV-only baseline (B1) on admissible cached Hyperliquid panel (2026-05..2026-10).",
-      "status": "NOT_MET",
-      "preregistered_utc": "2026-11-11T23:56:27Z",
-      "prereg_document": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
-      "last_experiment": "TRACKA-VOL-FAMILY-20261112T005111Z",
-      "last_verdict": "forecast_gate_NOT_MET",
-      "last_tested": "20261112T005111Z",
-      "venue": "hyperliquid_perpetuals",
-      "observed_only": true,
-      "evidence": "TRACKA-VOL-FAMILY-20261112T005111Z NOT_MET: Family-wise Holm correction across 12 comparisons (primary 24h + secondary 6h/72h/168h \u00d7 3 contrasts). No horizon passes primary gate. Verdict: research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md.",
-      "terminal": true,
-      "terminal_class": "NOT_MET",
-      "reopen_requires": [
-        "GATE4_BRANCH_1",
-        "NEW_OBSERVED_LIQUIDATION_SOURCE"
-      ]
-    },
-    {
-      "id": "H_tracka_hl_expansion_robustness",
-      "type": "primary_tracka_expansion_robustness",
-      "description": "The sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) is robust to leave-one-instrument-out sensitivity, placebo/permutation on funding features, and alternative block/bootstrap settings.",
-      "status": "FRAGILE",
-      "preregistered_utc": "2026-11-12T01:45:15Z",
-      "prereg_document": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
-      "last_experiment": "TRACKA-EXP-ROBUST-20261112T015119Z",
-      "last_verdict": "robustness_gate_FRAGILE",
-      "last_tested": "20261112T015119Z",
-      "venue": "hyperliquid_perpetuals",
-      "data_source": "ironflow/hyperliquid-liquidations",
-      "observed_only": true,
-      "evidence": "TRACKA-EXP-ROBUST-20261112T015119Z FRAGILE: LOIO check FAIL (4/8 subsets pass, need >=6); Placebo/Permutation check FAIL (true rel reduction 19.04% <= 95th percentile 21.10% of null); Bootstrap Settings check PASS (3/3 settings pass). Verdict: research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md.",
-      "terminal": true,
-      "terminal_class": "FRAGILE",
-      "reopen_requires": [
-        "EXPANSION_ROBUSTNESS_REDO"
-      ]
-    },
-    {
-      "id": "H_tracka_hl_alt_volatility_forecast",
-      "type": "primary_tracka_alt_volatility",
-      "description": "An alternate volatility forecast design on the cached Hyperliquid panel (2026-05..2026-10, 9 core coins) with a DIFFERENT pre-specified horizon (6h), feature set (adds rv72h), and split structure (5 test blocks) from the NOT_MET TRACKA-VOL-FAMILY-20261112T005111Z will demonstrate incremental forecast skill of funding-conditioned features (C2_ALT) over RV-only baseline (B1) for realized variance forecasting.",
-      "status": "NOT_MET",
-      "preregistered_utc": "2026-11-12T01:55:46Z",
-      "prereg_document": "research_state/tracka_prereg_alt_volatility_20261112T015546Z.json",
-      "last_experiment": "TRACKA-ALT-VOL-20261112T020322Z",
-      "last_verdict": "forecast_gate_NOT_MET",
-      "last_tested": "20261112T020322Z",
-      "venue": "hyperliquid_perpetuals",
-      "data_source": "Hyperliquid API (unauthenticated)",
-      "observed_only": true,
-      "evidence": "TRACKA-ALT-VOL-20261112T020322Z NOT_MET: C2_ALT vs B1 on next-6h RV (9 coins, 2026-05..2026-10, 5 test blocks). Rel QLIKE reduction 5.77% (>=2% PASS), but 95% CI [-0.121, 0.034] crosses zero (CI FAIL). Overall gate NOT_MET. Prereg deviation documented: candle data only available 2026-05..2026-10; used available window with adjusted splits. Verdict: research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md.",
-      "determination": "All admissible cached-data volatility designs on HL 2026-05..2026-10 exhausted (primary 24h, family 6h/24h/72h/168h, alternate 6h with rv72h). No further claim-worthy volatility designs on current cached data.",
-      "terminal": true,
-      "terminal_class": "NOT_MET",
-      "reopen_requires": [
-        "GATE4_BRANCH_1",
-        "NEW_OBSERVED_LIQUIDATION_SOURCE"
-      ]
-    },
-    {
-      "id": "H_tracka_hl_funding_conditioned_volatility_fullhistory",
-      "type": "primary",
-      "priority": "P1",
-      "status": "NOT_MET",
-      "terminal": true,
-      "terminal_class": "NOT_MET",
-      "reopen_requires": [],
-      "last_verdict": "forecast_gate_NOT_MET",
-      "experiment_id": "TRACKA-VOL-FULLHIST-20261112T201536Z",
-      "prereg": "research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json",
-      "claim": "On a never-opened 11-month Hyperliquid window, funding-conditioned features (C2) improve OOS 24h realized-variance forecasting vs an RV-only baseline (B1).",
-      "evidence": "Frozen 2026-11-12T20:15:36Z; outcome_data_inspected_before_freeze=false; no evaluation artifact; bulk cache absent; execution pending (AGENT_HANDOFF.md START HERE)."
-    },
-    {
-      "id": "H_tracka_hl_liquidation_cross_sectional_funding",
-      "type": "exploratory",
-      "priority": "P2",
-      "status": "EXPLORATORY_NULL",
-      "terminal": true,
-      "terminal_class": "EXPLORATORY_NULL",
-      "reopen_requires": [],
-      "last_verdict": "exploratory_null",
-      "experiment_id": "TRACKA-LIQ-XSEC-20261112T201536Z",
-      "prereg": "research_state/prereg_tracka_liq_xsec_20261112T201536Z.json",
-      "promotable": false,
-      "max_status": "EXPLORATORY_ONLY",
-      "claim": "On the full Hyperliquid native-perp cross-section, a funding-conditioned score carries information about the relative ordering of next-24h observed liquidation intensity across coins.",
-      "evidence": "Frozen 2026-11-12T20:15:36Z; outcome_data_inspected_before_freeze=false; no evaluation artifact; execution pending (AGENT_HANDOFF.md START HERE)."
+ "hypotheses": [
+  {
+   "id": "H1_primary",
+   "type": "primary",
+   "description": "Funding extremes + RV + price dislocation improve OOS forecast of future RV/stress vs RV-only baseline",
+   "status": "INCONCLUSIVE",
+   "frozen_at": "2026-11-06T20:36:32Z",
+   "last_tested": "2026-11-13T04:16:30Z",
+   "last_experiment": "FCLR-FWD-VOL-011-CONFIRM-20261113T041200Z",
+   "last_verdict": "FCLR-011 forecast_gate_PASS (4.94%, CI excludes zero); forward walk-forward C2 worse by 5.55% (CI favours B1); reproduction delta 0.52pp -> INCONCLUSIVE pending exact panel",
+   "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), 95% CI [-0.016361, 0.007728] crosses zero, test window 17 days = 0 non-overlapping 30-day blocks (<3 required). All claim-worthy panels tested: FCLR-003, FCLR-008, FCLR-012-V, FCLR-013, FCLR-014 -> H1_primary remains NOT_SUPPORTED.",
+   "terminal": false,
+   "terminal_class": "INCONCLUSIVE_MIXED_EVIDENCE",
+   "reopen_requires": [
+    "GATE4_BRANCH_1",
+    "NEW_OBSERVED_LIQUIDATION_SOURCE"
+   ],
+   "reconciliation": {
+    "corrected_utc": "2026-11-13T04:20:00Z",
+    "stale_status": "NOT_SUPPORTED (last_experiment FCLR-014, which predates FCLR-011)",
+    "reason": "FCLR-011 passed the forecast gate and was never invalidated; FCLR-012-V/013/014 were underpowered or mixed. The forward confirmation contradicts FCLR-011 but the pipeline reproduction is 0.52pp outside tolerance, so the honest aggregate status is INCONCLUSIVE, not NOT_SUPPORTED or CONFIRMED.",
+    "new_campaign": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
+    "reopen_requires": [
+     "GATE4_BRANCH_1",
+     "NEW_OBSERVED_LIQUIDATION_SOURCE"
+    ]
+   }
+  },
+  {
+   "id": "H2_shek_replication",
+   "type": "secondary",
+   "description": "Independently reconstruct Shek (2026) funding-correction pattern from admissible public data; distinguish correction time from volatility/liquidation",
+   "status": "EXPLORATORY_ONLY",
+   "frozen_at": "2026-11-06T20:36:32Z",
+   "last_tested": "2026-10-31T18:53:55Z",
+   "last_verdict": "PARTIAL (direction reproduced, not statistically significant)",
+   "last_experiment": "H002-PARTIAL-REPLICA-v1",
+   "paper": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7529458",
+   "evidence": "Completed PARTIAL replication on admissible cached public data only (research_state/h002_replication_report.md; blocker research_state/h002_replication_blocker.md). 88 funding-extreme events across 5 Binance USD\u24c8-M perpetuals, 2024-01-01..2024-03-31; RV-regime contrast resolved 2026-10-31: high-RV median 16.0 h vs low-RV 8.0 h, log-rank chi2=3.08, two-sided p=0.0792, direction_lower_hazard_high_rv=true. Paper's full methodology not independently reconstructible (SSRN HTTP 403), so this remains PARTIAL \u2014 never an exact replication, confirmatory test, volatility-forecast-skill, boundary-breach, or observed-liquidation result. Correction time is a separate outcome (RESEARCH_PROMPT \u00a715). Not promotable without a new fully pre-registered confirmatory protocol using only admissible unauthenticated data.",
+   "completion_note": "Status corrected from stale 'proposed' to EXPLORATORY_ONLY to match completed h002_replication_report.md (2026-10-29 report; RV-regime blocker removed 2026-10-31). No re-run; no promotion.",
+   "supersedes": [
+    "proposed"
+   ],
+   "terminal": true,
+   "terminal_class": "EXPLORATORY_ONLY",
+   "reopen_requires": []
+  },
+  {
+   "id": "H_trackb_modeled_breaches",
+   "type": "primary_trackb",
+   "description": "Funding-conditioned features improve detection of synthetic mark-price boundary breaches (modeled proxy, not observed liquidations) vs price/RV-only baseline",
+   "status": "NOT_SUPPORTED",
+   "frozen_at": "2026-11-10T15:43:07Z",
+   "prereg_hash": "46dcfb56c279e853230e75f6cb246ed878d765d2b399ea9a2e21c41581194adb",
+   "last_tested": "2026-11-10T20:00:21Z",
+   "last_experiment": "trackb_TB2_20261110T190405Z",
+   "last_verdict": "forecast_gate_NOT_MET",
+   "evidence": "Track B TB2 confirmatory on frozen prereg trackb_TB2_20261110T190405Z (2024-01-01..2024-09-30, 5 symbols, label synthetic_boundary_breach_h168_long_10x_m0, train/val/test with 7d purge/embargo). Event-adequate: test 619/5040 positives (12.3%), all 5 symbols >0. Pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% relative reduction, below the pre-registered 2% materiality floor (NOT_MET). Paired block bootstrap (2000 reps, 30-day blocks, seed 20261110): Log Loss 95% CI [-0.010997, 0.003094] crosses zero (NOT_MET), p=0.488; Brier p=0.488. Holm across 2 metrics FAILS. Only 2 non-overlapping 30-day test blocks (<3 required, NOT_MET). Overall forecast gate NOT_MET. Track B = modeled synthetic breach proxy only, never observed liquidations. Risk overlay INELIGIBLE. TB1 (trackb_TB1_20261110T173838Z) remains degenerate/inadmissible (zero test breaches). All admissible local Track B routes now executed; no gate passed.",
+   "terminal": true,
+   "terminal_class": "NOT_SUPPORTED",
+   "reopen_requires": []
+  },
+  {
+   "id": "H_tracka_hl_liquidation_forecast",
+   "type": "primary_tracka",
+   "description": "Funding-conditioned features improve out-of-sample forecasting of observed Hyperliquid perpetual liquidation intensity (notional_usd-weighted liquidation event count per symbol per 24h) vs RV-only baseline, on a new Hyperliquid panel (2025-06..2026-10).",
+   "status": "NOT_MET",
+   "preregistered_utc": "2026-11-11T07:30:00Z",
+   "prereg_document": "research_state/tracka_prereg_hyperliquid_2026.json",
+   "last_experiment": "TRACKA-HL-20261111T160124Z",
+   "last_verdict": "forecast_gate_NOT_MET",
+   "evidence": "Successor prereg TRACKA-HL-S-20261111T133430Z frozen pre-outcomes. Bounded unauthenticated Hyperliquid candleSnapshot 2026-05..2026-10 cached for 9 symbols (first-time acquisition). RV-augmented panel: 1656 buckets, 1647 w/ RV24h, 1434 w/ label, all 9 symbols labeled. C2 vs B1 QLIKE on next-24h observed liquidation intensity (n=693, 3 test blocks, 9 instruments): mean diff +202.38 (C2 worse), 95% CI [15.42,443.78], rel reduction -280.56% (<2% and wrong sign), CI does not support C2 improvement. Forecast gate NOT_MET. No outcome inspection before freeze, no Binance/2024 conflation, observed ironflow labels only, no redundant network polling. Verdict: research_state/evaluation_summary_TRACKA-HL-20261111T160124Z.md. Prior context-insufficient closure: evaluation_summary_TRACKA-HL-terminal-20261111T133430Z.md (superseded by completed evaluation).",
+   "data_source": "ironflow/hyperliquid-liquidations",
+   "venue": "hyperliquid_perpetuals",
+   "coverage_window": "2025-06-01T00:00:00Z .. 2026-10-31T23:59:59Z",
+   "license": "CC BY 4.0",
+   "unauthenticated": true,
+   "no_requester_pays": true,
+   "observed_only": true,
+   "modeled_or_proxy": false,
+   "last_tested": "2026-11-11T16:02:32Z",
+   "claim_worthy_on_cache": true,
+   "determination": "Path (b) completed after bounded first-time candle acquisition; pre-registered C2 vs B1 evaluated on RV-augmented panel (2026-05-01..2026-10-31). Gate NOT_MET (C2 worse than B1).",
+   "next_campaign": {
+    "id": "GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10",
+    "status": "PREREG_PENDING_FROZEN_EX_ANTE_RULES",
+    "note": "Early campaign closed INADMISSIBLE. New prereg required BEFORE outcomes: symbol expansion on 2026-05..2026-10 with frozen ex-ante symbol selection (e.g., top label-activity markets from cached ironflow excluding closed 9-symbol panel) and event-adequacy minima (>=5 instruments, >=3 non-overlapping 30d test blocks, RV24h computable); bounded first-time acquisition of funding+candles for candidates as needed; no cherry-picking."
+   },
+   "terminal": true,
+   "terminal_class": "NOT_MET",
+   "reopen_requires": [
+    "NEW_OBSERVED_LIQUIDATION_SOURCE",
+    "HL_LABEL_EXTENSION"
+   ]
+  },
+  {
+   "id": "H_tracka_hl_early_liquidation_forecast",
+   "type": "primary_tracka_early",
+   "description": "Funding-conditioned features improve OOS forecasting of observed Hyperliquid perpetual liquidation intensity vs RV-only baseline on early admissible window 2025-11-01..2026-04-30 (disjoint from closed NOT_MET 2026-05..2026-10).",
+   "status": "INCONCLUSIVE_PILOT_SHORTFALL",
+   "preregistered_utc": "2026-11-12T05:47:37Z",
+   "prereg_document": "research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.json",
+   "last_verdict": "inconclusive_pilot_shortfall",
+   "evidence": "TRACKA-HL-EARLY-4H-20261112T054737Z (4h cadence, Hyperliquid-only, observed ironflow labels, 9 symbols, 2025-11-01..2026-04-30) evaluated per frozen prereg on cached panel (tracka_hl_early_4h_panel_20261112T054737Z.parquet, build report tracka_hl_early_4h_panel_build_report_20261112T054737Z.json). C2 vs B1 QLIKE: B1=76.507 (n=362), C2=100.714 (n=362), mean diff +24.207, 95% CI [22.037,25.408] (excludes zero in wrong direction), rel reduction -31.64%. Gate: materiality NOT_MET, CI_excludes_zero_better NOT_MET, >=5 paired instruments PASS (9), >=3 non-overlapping 30d test blocks NOT_MET (2: [0,1]; block 2 beyond 2026-04-30 window). Primary forecast gate cannot be satisfied per prereg (<3 blocks) -> INCONCLUSIVE_PILOT_SHORTFALL (not confirmatory PASS). Verdict: research_state/evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.{md,json}. No threshold-shopping; no Binance/2024 conflation; no modeled/proxy labels.",
+   "data_source": "ironflow/hyperliquid-liquidations",
+   "venue": "hyperliquid_perpetuals",
+   "observed_only": true,
+   "determination": "INCONCLUSIVE_PILOT_SHORTFALL \u2014 preregistered <3-test-block minimum unmet (2 feasible in window); results reported for transparency only. Prior 1h design remains sealed INADMISSIBLE (TRACKA-HL-EARLY-20261111T191958Z). 4h early-window cached design exhausted under this prereg.",
+   "terminal": true,
+   "terminal_class": "INCONCLUSIVE_PILOT_SHORTFALL",
+   "reopen_requires": [
+    "NEW_OBSERVED_LIQUIDATION_SOURCE",
+    "HL_LABEL_EXTENSION"
+   ]
+  },
+  {
+   "id": "H_tracka_hl_symbol_expansion_liquidation_forecast",
+   "type": "primary_tracka_expansion",
+   "description": "Funding-conditioned features (C2) improve OOS forecasting of observed Hyperliquid liquidation intensity vs RV-only baseline (B1) on expanded ex-ante-selected symbol panel 2026-05..2026-10.",
+   "status": "SUPPORTED_PASS_PRIMARY_GATE",
+   "preregistered_utc": "2026-11-11T19:55:00Z",
+   "prereg_document": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+   "last_experiment": "TRACKA-HL-EXPANSION-20261111T195500Z",
+   "last_verdict": "forecast_gate_PASS",
+   "last_tested": "2026-11-11T20:30:00Z",
+   "venue": "hyperliquid_perpetuals",
+   "data_source": "ironflow/hyperliquid-liquidations",
+   "observed_only": true,
+   "evidence": "TRACKA-HL-EXPANSION-20261111T195500Z PASS: C2 vs B1 rel QLIKE reduction 19.04%, 95% CI [-5.088,-0.478], 593 pairs, 8 instruments, 3 blocks (2026-05..2026-10, ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH).",
+   "robustness": {
+    "experiment_id": "TRACKA-EXP-ROBUST-20261112T015119Z",
+    "prereg": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
+    "verdict": "FRAGILE",
+    "verdict_artifact": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md",
+    "checks": {
+     "LOIO": "FAIL (4/8 pass, need >=6)",
+     "PLACEBO_PERMUTATION": "FAIL (true rel 19.04% <= 95th pctl 21.10%)",
+     "BOOTSTRAP_SETTINGS": "PASS (3/3 settings pass)"
     }
-  ],
-  "updated_utc": "2026-11-12T22:40:00Z"
+   },
+   "terminal": true,
+   "terminal_class": "SUPPORTED_PASS_PRIMARY_GATE",
+   "reopen_requires": [
+    "NEW_OBSERVED_LIQUIDATION_SOURCE",
+    "HL_LABEL_EXTENSION"
+   ]
+  },
+  {
+   "id": "H_tracka_hl_funding_conditioned_volatility_forecast",
+   "type": "primary_tracka_volatility",
+   "description": "Funding-conditioned features (C2) improve OOS forecasting of next-24h realized variance vs RV-only baseline (B1) on admissible cached Hyperliquid panel (2026-05..2026-10).",
+   "status": "NOT_MET",
+   "preregistered_utc": "2026-11-11T23:56:27Z",
+   "prereg_document": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+   "last_experiment": "TRACKA-VOL-FAMILY-20261112T005111Z",
+   "last_verdict": "forecast_gate_NOT_MET",
+   "last_tested": "20261112T005111Z",
+   "venue": "hyperliquid_perpetuals",
+   "observed_only": true,
+   "evidence": "TRACKA-VOL-FAMILY-20261112T005111Z NOT_MET: Family-wise Holm correction across 12 comparisons (primary 24h + secondary 6h/72h/168h \u00d7 3 contrasts). No horizon passes primary gate. Verdict: research_state/evaluation_summary_TRACKA-VOL-FAMILY-20261112T005111Z.md.",
+   "terminal": true,
+   "terminal_class": "NOT_MET",
+   "reopen_requires": [
+    "GATE4_BRANCH_1",
+    "NEW_OBSERVED_LIQUIDATION_SOURCE"
+   ]
+  },
+  {
+   "id": "H_tracka_hl_expansion_robustness",
+   "type": "primary_tracka_expansion_robustness",
+   "description": "The sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) is robust to leave-one-instrument-out sensitivity, placebo/permutation on funding features, and alternative block/bootstrap settings.",
+   "status": "FRAGILE",
+   "preregistered_utc": "2026-11-12T01:45:15Z",
+   "prereg_document": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
+   "last_experiment": "TRACKA-EXP-ROBUST-20261112T015119Z",
+   "last_verdict": "robustness_gate_FRAGILE",
+   "last_tested": "20261112T015119Z",
+   "venue": "hyperliquid_perpetuals",
+   "data_source": "ironflow/hyperliquid-liquidations",
+   "observed_only": true,
+   "evidence": "TRACKA-EXP-ROBUST-20261112T015119Z FRAGILE: LOIO check FAIL (4/8 subsets pass, need >=6); Placebo/Permutation check FAIL (true rel reduction 19.04% <= 95th percentile 21.10% of null); Bootstrap Settings check PASS (3/3 settings pass). Verdict: research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md.",
+   "terminal": true,
+   "terminal_class": "FRAGILE",
+   "reopen_requires": [
+    "EXPANSION_ROBUSTNESS_REDO"
+   ]
+  },
+  {
+   "id": "H_tracka_hl_alt_volatility_forecast",
+   "type": "primary_tracka_alt_volatility",
+   "description": "An alternate volatility forecast design on the cached Hyperliquid panel (2026-05..2026-10, 9 core coins) with a DIFFERENT pre-specified horizon (6h), feature set (adds rv72h), and split structure (5 test blocks) from the NOT_MET TRACKA-VOL-FAMILY-20261112T005111Z will demonstrate incremental forecast skill of funding-conditioned features (C2_ALT) over RV-only baseline (B1) for realized variance forecasting.",
+   "status": "NOT_MET",
+   "preregistered_utc": "2026-11-12T01:55:46Z",
+   "prereg_document": "research_state/tracka_prereg_alt_volatility_20261112T015546Z.json",
+   "last_experiment": "TRACKA-ALT-VOL-20261112T020322Z",
+   "last_verdict": "forecast_gate_NOT_MET",
+   "last_tested": "20261112T020322Z",
+   "venue": "hyperliquid_perpetuals",
+   "data_source": "Hyperliquid API (unauthenticated)",
+   "observed_only": true,
+   "evidence": "TRACKA-ALT-VOL-20261112T020322Z NOT_MET: C2_ALT vs B1 on next-6h RV (9 coins, 2026-05..2026-10, 5 test blocks). Rel QLIKE reduction 5.77% (>=2% PASS), but 95% CI [-0.121, 0.034] crosses zero (CI FAIL). Overall gate NOT_MET. Prereg deviation documented: candle data only available 2026-05..2026-10; used available window with adjusted splits. Verdict: research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.md.",
+   "determination": "All admissible cached-data volatility designs on HL 2026-05..2026-10 exhausted (primary 24h, family 6h/24h/72h/168h, alternate 6h with rv72h). No further claim-worthy volatility designs on current cached data.",
+   "terminal": true,
+   "terminal_class": "NOT_MET",
+   "reopen_requires": [
+    "GATE4_BRANCH_1",
+    "NEW_OBSERVED_LIQUIDATION_SOURCE"
+   ]
+  },
+  {
+   "id": "H_tracka_hl_funding_conditioned_volatility_fullhistory",
+   "type": "primary",
+   "priority": "P1",
+   "status": "NOT_MET",
+   "terminal": true,
+   "terminal_class": "NOT_MET",
+   "reopen_requires": [],
+   "last_verdict": "forecast_gate_NOT_MET",
+   "experiment_id": "TRACKA-VOL-FULLHIST-20261112T201536Z",
+   "prereg": "research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json",
+   "claim": "On a never-opened 11-month Hyperliquid window, funding-conditioned features (C2) improve OOS 24h realized-variance forecasting vs an RV-only baseline (B1).",
+   "evidence": "Frozen 2026-11-12T20:15:36Z; outcome_data_inspected_before_freeze=false; no evaluation artifact; bulk cache absent; execution pending (AGENT_HANDOFF.md START HERE)."
+  },
+  {
+   "id": "H_tracka_hl_liquidation_cross_sectional_funding",
+   "type": "exploratory",
+   "priority": "P2",
+   "status": "EXPLORATORY_NULL",
+   "terminal": true,
+   "terminal_class": "EXPLORATORY_NULL",
+   "reopen_requires": [],
+   "last_verdict": "exploratory_null",
+   "experiment_id": "TRACKA-LIQ-XSEC-20261112T201536Z",
+   "prereg": "research_state/prereg_tracka_liq_xsec_20261112T201536Z.json",
+   "promotable": false,
+   "max_status": "EXPLORATORY_ONLY",
+   "claim": "On the full Hyperliquid native-perp cross-section, a funding-conditioned score carries information about the relative ordering of next-24h observed liquidation intensity across coins.",
+   "evidence": "Frozen 2026-11-12T20:15:36Z; outcome_data_inspected_before_freeze=false; no evaluation artifact; execution pending (AGENT_HANDOFF.md START HERE)."
+  },
+  {
+   "id": "H_fclr_fwd_vol_011_confirm",
+   "type": "primary_trackc_volatility",
+   "description": "The FCLR-011 funding-conditioned volatility PASS replicates out-of-sample on a rolling-origin walk-forward over Binance 2026-08-03..2026-10-31 (3x30-day blocks, 5 instruments).",
+   "status": "INCONCLUSIVE",
+   "frozen_at": "2026-11-13T04:12:00Z",
+   "last_tested": "2026-11-13T04:20:00Z",
+   "last_experiment": "FCLR-FWD-VOL-011-CONFIRM-20261113T041200Z",
+   "last_verdict": "INCONCLUSIVE_PENDING_REPRO",
+   "terminal": false,
+   "terminal_class": "INCONCLUSIVE_PENDING_REPRO",
+   "evidence": "Pooled C2 vs B1 24h QLIKE mean diff +0.02676 (positive = C2 worse), 95% CI [0.000343, 0.064822] favouring B1, rel -5.55%, n=10200, 85 days. LOIO: 5/5 negative (3/5 CI excludes zero). Placebo p95 -5.35% vs true -5.55% (not significant). Sensitivity excluding inspected days: -7.82%, CI [-0.0004, 0.1099]. FCLR-011 reproduction: 4.42% vs sealed 4.94% (delta 0.516pp) -> outside +/-0.5pp tolerance. Artifacts: research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041934Z.{md,json}; panel/build report.",
+   "reopen_requires": [
+    "EXACT_FCLR011_PANEL_RECONSTRUCTION",
+    "FINAL_FORWARD_VERDICT"
+   ],
+   "campaign": "FCLR-HEAVY-CONFIRM-20261113T041200Z"
+  }
+ ],
+ "updated_utc": "2026-11-12T22:40:00Z"
 }

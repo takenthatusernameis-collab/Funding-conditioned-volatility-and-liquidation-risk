@@ -393,8 +393,30 @@ def qlike(y, yhat):
     return y/yhat - math.log(y/yhat) - 1.0
 
 
+def load_manifest():
+    """Load the run manifest, tolerating an unresolved Git-LFS pointer.
+
+    research_state/run_manifest.json is LFS-tracked. In an offline checkout it can
+    be a 130-byte pointer, which used to make every evaluation crash with a JSON
+    decode error. Fall back to the committed offline reconstruction when present.
+    """
+    if RUN_MANIFEST.exists():
+        txt = RUN_MANIFEST.read_text()
+        if not txt.lstrip().startswith("version https://git-lfs"):
+            return json.loads(txt)
+    local = REPO / "research_state" / "run_manifest_local.json"
+    if local.exists():
+        return json.loads(local.read_text())
+    raise SystemExit(
+        "REFUSAL: research_state/run_manifest.json is an unresolved Git-LFS pointer "
+        "and research_state/run_manifest_local.json is absent. Run "
+        "`git lfs pull --include research_state/run_manifest.json`, or restore the "
+        "offline manifest."
+    )
+
+
 def build_panel():
-    m = json.loads(RUN_MANIFEST.read_text())
+    m = load_manifest()
     splits = m[SPLIT_KEY]
     train = (parse_iso(splits['train']['start']), parse_iso(splits['train']['end']))
     val = (parse_iso(splits['validation']['start']), parse_iso(splits['validation']['end']))

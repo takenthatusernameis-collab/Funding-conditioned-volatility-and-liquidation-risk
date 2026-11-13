@@ -45,6 +45,14 @@ BLOCKED_PAYLOAD = {
 }
 
 SCRIPT_REGISTRY = {
+  "fclr_fwd_vol_confirm.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "FCLR-FWD-VOL-011-CONFIRM heavy pipeline; no liquidation outcome reads; timestamped Track C artifacts only."
+  },
+  "fclr_heavy_confirm_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "FCLR-HEAVY-CONFIRM read-only completion gate; no network, no outcome reads, no canonical mutation."
+  },
   "check_tracka_scope_registry_drift.py": {
     "class": "resume_gate_infra",
     "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes."

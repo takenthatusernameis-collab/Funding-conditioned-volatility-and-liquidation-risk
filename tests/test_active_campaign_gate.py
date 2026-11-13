@@ -17,7 +17,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RS = ROOT / "research_state"
-CAMPAIGN = "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z"
+CAMPAIGN = "FCLR-HEAVY-CONFIRM-20261113T041200Z"
+PRIOR_CAMPAIGN = "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z"
 PREREGS = {
     "TRACKA-VOL-FULLHIST-20261112T201536Z": "prereg_tracka_vol_fullhist_20261112T201536Z.json",
     "TRACKA-LIQ-XSEC-20261112T201536Z": "prereg_tracka_liq_xsec_20261112T201536Z.json",
@@ -60,16 +61,24 @@ class TestActiveCampaignGate(unittest.TestCase):
             for h in hits:
                 self.assertTrue(h.stat().st_size > 0, f"empty artifact {h}")
 
-    def test_frontier_rank0_is_completed_campaign(self):
+    def test_frontier_rank0_is_active_heavy_campaign(self):
         frontier = json.loads((RS / "experiment_frontier.json").read_text())
         rank0 = [e for e in frontier if e.get("rank") == 0]
         self.assertEqual(len(rank0), 1, f"expected exactly one rank-0 entry, got {len(rank0)}")
         e = rank0[0]
         self.assertEqual(e.get("task"), CAMPAIGN)
-        self.assertNotEqual(e.get("status"), "CLOSED_TERMINAL",
-                            "rank-0 must not be CLOSED_TERMINAL while preregs are unexecuted")
-        self.assertEqual(e.get("status"), "COMPLETED")
-        self.assertEqual(e.get("program_status"), "COMPLETED")
+        self.assertEqual(e.get("status"), "ACTIVE_HEAVY_CAMPAIGN")
+        self.assertEqual(e.get("program_status"), "ACTIVE_HEAVY_CAMPAIGN")
+        # The prior all-NOT_MET campaign must be demoted, not deleted.
+        prior = [x for x in frontier if x.get("task") == PRIOR_CAMPAIGN]
+        self.assertEqual(len(prior), 1)
+        self.assertNotEqual(prior[0].get("rank"), 0)
+
+    def test_new_campaign_prereg_is_frozen(self):
+        p = json.loads((RS / "prereg_fclr_fwd_vol_011_confirm_20261113T041200Z.json").read_text())
+        self.assertEqual(p["status"], "FROZEN_PRE_OUTCOMES")
+        self.assertTrue(p["frozen_before_outcomes"])
+        self.assertFalse(p["outcome_data_inspected_before_freeze"])
 
     def test_registry_hypotheses_are_terminal_with_verdicts(self):
         reg = json.loads((RS / "hypothesis_registry.json").read_text())
