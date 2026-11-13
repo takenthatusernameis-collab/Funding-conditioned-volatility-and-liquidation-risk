@@ -1,30 +1,32 @@
 [
-  {
-   "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
-   "rank": 0,
-   "status": "ACTIVE_HEAVY_CAMPAIGN",
-   "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-   "next_unfinished_task": null,
-   "generated": "2026-11-13T04:12:00Z",
-   "last_checked": "2026-11-13T08:11:47Z",
-   "blockers": "None. Campaign complete: reproduction gap closed (build_legacy_panel funding load range aligned with run_evaluation.py START_ALL; repro delta 0.044pp <= 0.5pp tolerance, repro_011_pass=True); forward confirmation verdict NOT_REPLICATED (pooled C2-vs-B1 mean diff +0.026760, 95% CI [0.000343,0.064822] favouring B1, rel -5.55%, n=10200, 85 days); GATE: PASS via scripts/fclr_heavy_confirm_gate.py; targeted campaign suite 119 tests OK. FCLR-011 sealed PASS stands unrefuted but does not generalize to the forward window. H1_primary NOT_SUPPORTED. Cell 1 FCLR-LIQ-010-CONFIRM executed 2026-11-13T06:59:53Z: verdict NOT_REPLICATED (C2 vs B1 Brier mean diff -0.000690, CI [-0.001106,-0.000316] excludes zero improving, rel reduction 0.501% < 2% materiality floor; LOIO 0/17 >=2%+CI-excludes-zero; placebo null_p95 0.525% > true 0.501%, pass=False; leakage PASS). Artifacts: research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.{md,json}; panel/build report.",
-   "next_action_heavy": "COMPLETED. Primary Track C campaign finished. Cell 1 FCLR-LIQ-010-CONFIRM executed 2026-11-13T06:59:53Z verdict NOT_REPLICATED (rel reduction 0.501% < 2% floor; placebo fail; LOIO fail; registry H_fclr_liq_010_confirm terminal). Remaining heavy work per FOCUS_CAMPAIGN: (2) FCLR-EXP-ROBUST-REDO — pre-register new expansion-robustness design (LOIO >= 6/8, placebo PASS) on sealed expansion panel research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet; do not re-score FRAGILE 19.04% PASS. Prereg already frozen: prereg_fclr_exp_robust_redo_20261113T063000Z. (3) FCLR-FWD-VOL-2025-CROSS — pre-register 2025-02..2025-05 walk-forward (3 blocks) to test FCLR-011 period-specificity on cached Binance panel. Prereg already frozen: prereg_fclr_fwd_vol_2025_cross_20261113T063000Z. Each requires frozen prereg before outcomes and a timestamped evaluation artifact.",
-   "resume_triggers": [],
-   "supersedes_prior_next_task_entries": [
-    "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z (COMPLETED; its all-NOT_MET volatility summary is contradicted by the unrefuted FCLR-011 gate PASS)"
-   ],
-   "evidence": {
-    "fclr011_pass": "research_state/evaluation_summary_FCLR-011.md: C2 vs B1 rel QLIKE 4.94%, 95% CI [-0.032546,-0.001418], 5 instruments, 3 blocks",
-    "fclr012v_signal": "research_state/evaluation_summary_FCLR-012-V.md: +15.19% point estimate, 0 blocks -> INCONCLUSIVE",
-    "forward_verdict": "NOT_REPLICATED: research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061555Z.json — pooled C2-vs-B1 rel -5.55%, 95% CI [0.000343,0.064822] (favours B1), repro_011_pass=True (4.90% vs sealed 4.94%, delta 0.044pp), all 8 checks present, GATE: PASS",
-    "repro_fix": "scripts/fclr_fwd_vol_confirm.py::build_legacy_panel funding load range changed from start-120d to start; repro_fclr011 start date aligned to 2026-01-01 matching run_evaluation.py START_ALL",
-    "panel": "research_state/tracka_fwd_vol_panel_20261113T061555Z.parquet",
-    "build_report": "research_state/tracka_fwd_vol_build_report_20261113T061555Z.json",
-    "gate": "python3 scripts/fclr_heavy_confirm_gate.py -> GATE: PASS",
-    "tests": "python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate -> 119 OK",
-    "liq_010_confirm": "NOT_REPLICATED: research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.json — C2 vs B1 Brier mean diff -0.000690, CI [-0.001106,-0.000316], rel reduction 0.501% < 2% floor; LOIO 0/17; placebo null_p95 0.525% > true 0.501%; leakage PASS. Panel fclr_liq_010_confirm_panel_20261113T065953Z.parquet sha ec225a17...; build report fclr_liq_010_confirm_build_report_20261113T065953Z.json. Prereg prereg_fclr_liq_010_confirm_20261113T063000Z.json sha ee70e04f... frozen pre-outcomes."
-   }
-  },
+ {
+  "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
+  "rank": 0,
+  "status": "COMPLETED_CAMPAIGN_NEXT_PREREG_REQUIRED",
+  "program_status": "COMPLETED_CAMPAIGN_NEXT_PREREG_REQUIRED",
+  "next_unfinished_task": null,
+  "generated": "2026-11-13T04:12:00Z",
+  "last_checked": "2026-11-13T09:01:48Z",
+  "blockers": "No frozen prereg remains. Gate 4 external trigger absent. Alt-source hunt/deep-review 2026-11-13T09:01:19Z: no GO candidate meeting unauthenticated observed-liquidation minima; cached Hyperliquid/ironflow designs exhausted/terminal.",
+  "next_action_heavy": "Freeze a new prereg before outcomes for a materially different admissible route: (P1) alternative observed-liquidation source -> admissibility audit -> prereg -> execute; or (P2) cached Binance/other admissible volatility window/venue not previously tested (not 2025-02..2025-05, not 2026-08..2026-10). No status-only sessions.",
+  "resume_triggers": [],
+  "supersedes_prior_next_task_entries": [
+   "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z (COMPLETED; its all-NOT_MET volatility summary is contradicted by the unrefuted FCLR-011 gate PASS)"
+  ],
+  "evidence": {
+   "fclr011_pass": "research_state/evaluation_summary_FCLR-011.md: C2 vs B1 rel QLIKE 4.94%, 95% CI [-0.032546,-0.001418], 5 instruments, 3 blocks",
+   "fclr012v_signal": "research_state/evaluation_summary_FCLR-012-V.md: +15.19% point estimate, 0 blocks -> INCONCLUSIVE",
+   "forward_verdict": "NOT_REPLICATED: research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061555Z.json \u2014 pooled C2-vs-B1 rel -5.55%, 95% CI [0.000343,0.064822] (favours B1), repro_011_pass=True (4.90% vs sealed 4.94%, delta 0.044pp), all 8 checks present, GATE: PASS",
+   "repro_fix": "scripts/fclr_fwd_vol_confirm.py::build_legacy_panel funding load range changed from start-120d to start; repro_fclr011 start date aligned to 2026-01-01 matching run_evaluation.py START_ALL",
+   "panel": "research_state/tracka_fwd_vol_panel_20261113T061555Z.parquet",
+   "build_report": "research_state/tracka_fwd_vol_build_report_20261113T061555Z.json",
+   "gate": "python3 scripts/fclr_heavy_confirm_gate.py -> GATE: PASS",
+   "tests": "python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate -> 119 OK",
+   "liq_010_confirm": "NOT_REPLICATED: research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.json \u2014 C2 vs B1 Brier mean diff -0.000690, CI [-0.001106,-0.000316], rel reduction 0.501% < 2% floor; LOIO 0/17; placebo null_p95 0.525% > true 0.501%; leakage PASS. Panel fclr_liq_010_confirm_panel_20261113T065953Z.parquet sha ec225a17...; build report fclr_liq_010_confirm_build_report_20261113T065953Z.json. Prereg prereg_fclr_liq_010_confirm_20261113T063000Z.json sha ee70e04f... frozen pre-outcomes.",
+   "alt_source_scan": "research_state/alt_source_scan_latest.json (20261113T090119Z, no GO candidate)",
+   "alt_source_deep_review": "research_state/alt_source_deep_review_latest.md (20261113T090119Z, 0 cache hits, 14 fresh probes, all NO-GO/incompatible)"
+  }
+ },
  {
   "task": "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z",
   "rank": 1,

@@ -1,8 +1,8 @@
 {
-  "generated_utc": "20261112T191347Z",
+  "generated_utc": "20261113T090105Z",
   "cache_info": {
-    "source": "cache",
-    "generated_utc": "2026-11-12T07:50:45.770102+00:00",
+    "source": "live",
+    "generated_utc": "2026-11-13T09:01:05.277269+00:00",
     "queries": [
       "liquidation",
       "liquidations",

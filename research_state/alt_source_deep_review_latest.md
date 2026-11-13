@@ -1,5 +1,5 @@
 # DEEP REVIEW OF ALTERNATIVE LIQUIDATION SOURCES
-**TIMESTAMP:** 20261112T191338Z
+**TIMESTAMP:** 20261113T090119Z
 **RUBRIC:** {"min_symbols": 5, "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks", "completeness_doc_required": true, "license_ok": true, "unauthenticated_only": true, "no_requester_pays": true, "schema_compatible_fclr010": true}
 
 ## Probe cache accounting
@@ -59,7 +59,7 @@
 ### https://www.deribit.com/api/v2/public/get_instruments?currency=BTC&kind=future [GET]
 - status: 200 ok:None
 - len: None
-- preview: {"jsonrpc":"2.0","result":[{"base_currency":"BTC","underlying_type":"crypto","block_trade_tick_size":0.01,"max_non_default_leverage":5.0,"price_index":"btc_usd","max_leverage":50,"expiration_timestamp
+- preview: {"jsonrpc":"2.0","result":[{"min_trade_amount":10.0,"expiration_timestamp":32503708800000,"tick_size":0.5,"creation_timestamp":1534242287000,"contract_size":10.0,"price_index":"btc_usd","state":"open"
 
 ### https://open-api.coinglass.com/public/v2/liquidation_history?symbol=BTC&timeType=4h [GET]
 - status: 200 ok:None
@@ -138,7 +138,7 @@
 - error: True
 - len: None
 - preview: <?xml version="1.0" encoding="UTF-8"?>
-<Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>data/futures/um/daily/liquidationSnapshot/</Key><RequestId>82CJ3184JW8PZ3EX
+<Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>data/futures/um/daily/liquidationSnapshot/</Key><RequestId>334C8GYW7TYTMAP8
 
 ## ASSESSMENT
 - All sources tested unauthenticated only.
