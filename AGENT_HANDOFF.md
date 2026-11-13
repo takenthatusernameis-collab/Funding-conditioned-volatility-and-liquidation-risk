@@ -183,6 +183,14 @@ ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || ec
 
 ## SESSION LOG (append-only; newest first)
 
+## 2026-11-13T16:18:31Z — Kilo session: handoff re-verified; no internal bottlenecks remain; mandatory cell FCLR-FWD-VOL-2026Q1Q2-FWD still unexecuted and is the sole next task
+
+- **State re-verified (no new artifacts, no sealed/raw/cache/workflow mutations):** `python3 scripts/next_campaign_status.py` still prints `CAMPAIGN STATUS: executable heavy work REMAINS` with `2026-01-18..2026-04-30 span=103d FEASIBLE (forward-reduced: 60/7/3x10)`. All 8 terminal gates `GATE: PASS`; targeted suite 138/138 OK.
+- **No bottlenecks:** Gate 4 Branch 1 trigger absent (external, do not poll); alt-source scan 2026-11-13T09:01Z — no new GO unauthenticated observed-liquidation candidate. No internal engineering blocker remains.
+- **The mandatory task is unchanged and unavoidable:** execute `FCLR-FWD-VOL-2026Q1Q2-FWD` — freeze pre-outcomes prereg on 2026-01-18..2026-04-30, run C2-vs-B1 QLIKE contrast over 158 strictly-complete instruments, add fail-closed gate, update registry/frontier, add window to BULK_TESTED_WINDOWS. Status-only and discovery-only sessions are forbidden while this cell is unexecuted.
+- **Next agent's sole directive:** run the exact start commands in §EXACT START COMMANDS, then execute the cell per §IMMEDIATE TASK P1. Do not re-propose Binance READY months or re-score this window once terminal.
+- **Artifacts/commands:** `python3 scripts/next_campaign_status.py` (must show FEASIBLE), `PYTHONPATH=src python3 <patched-builder-copy>` (smoke proven end-to-end), `python3 -m unittest ...` (138/138 OK).
+
 ## 2026-11-13T15:24:50Z — Kilo session: proved the mandatory cell is executable end-to-end, corrected the provably-wrong universe rule (158 instruments, not 180), and fixed the 2 failing campaign-gate tests (138/138 OK)
 
 - **The mandatory task is real and untouched:** `FCLR-FWD-VOL-2026Q1Q2-FWD` has no prereg, no executor, and no evaluation artifact. `next_campaign_status.py` still prints `executable heavy work REMAINS` with `2026-01-18..2026-04-30 span=103d FEASIBLE (forward-reduced: 60/7/3x10)`.
