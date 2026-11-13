@@ -120,16 +120,21 @@ def main() -> None:
     plac = placebo(panel, perms, prereg["gates"]["placebo_seed"])
     boot = base.run_bootstrap_settings_check(panel)
 
+    # Full-panel primary contrast (C2 vs B1): materiality + CI-excludes-zero,
+    # the two remaining pre-registered gates beyond LOIO / placebo / bootstrap.
+    full = base.run_c2_vs_b1_eval(panel, base.N_BOOT, base.SEED_BOOTSTRAP)
     checks = {
         "loio_ge_6_of_8": bool(loio["overall_pass"]),
         "placebo_pass": bool(plac["overall_pass"]),
         "bootstrap_settings_pass": bool(boot["overall_pass"]),
+        "materiality_ge_2pct": bool(full["passes_materiality"]),
+        "ci_excludes_zero": bool(full["ci_excludes_zero"]),
     }
     if args.smoke:
         verdict = "SMOKE"
     elif not (panel["split"] == "test").any():
         verdict = "INCONCLUSIVE"
-    elif checks["loio_ge_6_of_8"] and checks["placebo_pass"] and checks["bootstrap_settings_pass"]:
+    elif all(checks.values()):
         verdict = "ROBUST"
     else:
         verdict = "FRAGILE"
@@ -153,6 +158,7 @@ def main() -> None:
             "per_instrument": loio["per_instrument"],
         },
         "bootstrap_settings": boot,
+        "full_panel_contrast": full,
         "prior_sealed_verdict": prereg["sealed_reference"]["prior_verdict"],
         "n_rows": int(len(panel)),
     }
