@@ -373,7 +373,7 @@ def build_legacy_panel(sym: str, start: pd.Timestamp, end: pd.Timestamp) -> pd.D
         return pd.DataFrame()
     prem = load_field(sym, "premiumIndexKlines", start, end)
     idx = load_field(sym, "indexPriceKlines", start, end)
-    fund = load_funding(sym, start - pd.Timedelta(days=120), end)
+    fund = load_funding(sym, start, end)
     df = pd.DataFrame({"mark": mark})
     df["ret"] = np.log(df["mark"]).diff()
     df["r2"] = df["ret"] ** 2
@@ -419,7 +419,7 @@ def build_legacy_panel(sym: str, start: pd.Timestamp, end: pd.Timestamp) -> pd.D
 
 
 def repro_fclr011() -> dict:
-    parts = [build_legacy_panel(s, pd.Timestamp("2025-12-31", tz=UTC),
+    parts = [build_legacy_panel(s, pd.Timestamp("2026-01-01", tz=UTC),
                                 pd.Timestamp("2026-08-07", tz=UTC)) for s in SYMBOLS]
     p = pd.concat([x for x in parts if not x.empty], ignore_index=True)
     p["ts"] = pd.to_datetime(p["ts"], utc=True)
