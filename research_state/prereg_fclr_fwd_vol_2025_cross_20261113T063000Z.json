@@ -1,0 +1,81 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-CROSS-20261113T063000Z",
+ "campaign": "FCLR-NEXT-CAMPAIGN-20261113T063000Z",
+ "cell": "FWD-VOL-2025-CROSS",
+ "track": "C_volatility",
+ "priority": "P2",
+ "preregistered_utc": "2026-11-13T06:30:00Z",
+ "status": "FROZEN_PRE_OUTCOMES",
+ "pre_registered_before_outcomes": true,
+ "frozen_before_outcomes": true,
+ "outcome_data_inspected_before_freeze": false,
+ "hypothesis_id": "H_fclr_fwd_vol_2025_cross",
+ "hypothesis_type": "secondary_trackc_volatility_period_specificity",
+ "claim": "The FCLR-011 funding-conditioned volatility PASS (C2 vs B1, +4.94% relative QLIKE reduction, 5 instruments, 3 blocks) is period-specific to 2026-05..2026-08 and does NOT replicate on a pre-registered 2025-02..2025-05 rolling-origin walk-forward over the cached Binance mark-price archive. A CONFIRMED verdict requires >=2% relative QLIKE reduction with a 95% block-bootstrap CI excluding zero on the improving side, >=5 instruments, 3 non-overlapping 30-day test blocks, Holm across the declared 12-cell family, LOIO >=4/5, placebo PASS, and a no-leakage sensitivity.",
+ "why_this_is_new": {
+  "contradiction_being_resolved": "The forward 2026-08..2026-10 window returned NOT_REPLICATED. This cell tests the complementary hypothesis: was the FCLR-011 PASS an artifact of the specific 2026-05..2026-08 regime, or does funding-conditioned volatility work on a different, non-overlapping 2025 window?",
+  "independence": "The 2025-02..2025-05 window is non-overlapping with the sealed FCLR-011 test (2026-05-08..2026-08-06) and the forward window (2026-08..2026-10). No sealed artifact is mutated.",
+  "data_available_now": "research_state/data_cache holds Binance 1h mark/premium/index/funding for BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT for 2024-12..2026-11. Verified: 2025-02..2025-05 supplies >=4300 valid hourly rows per symbol with complete funding history.",
+  "disclosure": "The 2025 window precedes the sealed FCLR-011 train start (2026-01-01) and is therefore not fitting data for the sealed PASS; it is genuinely out-of-sample in time. The 90-day |funding| percentile uses only past funding at each origin."
+ },
+ "venue": "binance_um_perp",
+ "data_sources": {
+  "mark_price_1h": "research_state/data_cache/{SYM}_{YYYY}_{MM}/markPriceKlines-{date}/{SYM}-1h-{date}.csv",
+  "premium_index_1h": "research_state/data_cache/{SYM}_{YYYY}_{MM}/premiumIndexKlines-{date}/{SYM}-1h-{date}.csv",
+  "index_price_1h": "research_state/data_cache/{SYM}_{YYYY}_{MM}/indexPriceKlines-{date}/{SYM}-1h-{date}.csv",
+  "funding_rate": "research_state/data_cache/{SYM}_{YYYY}_{MM}/{SYM}-fundingRate-{YYYY-MM}/{SYM}-fundingRate-{YYYY-MM}.csv"
+ },
+ "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+ "models": {
+  "B0": ["log_rv24h"],
+  "B1": ["log_rv1h", "log_rv24h", "log_rv168h"],
+  "C1": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct"],
+  "C2": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct", "premium", "ema_dist"]
+ },
+ "primary_contrast": "C2_vs_B1",
+ "primary_metric": "qlike",
+ "primary_horizon_h": 24,
+ "splits": {
+  "data_start": "2024-12-01T00:00:00Z",
+  "data_end": "2025-06-01T00:00:00Z",
+  "train_start": "2024-12-01T00:00:00Z",
+  "embargo_days": 7,
+  "blocks": [
+   {"block": 0, "train_end": "2025-01-28T00:00:00Z", "test_start": "2025-02-04T00:00:00Z", "test_end": "2025-03-05T23:59:59Z"},
+   {"block": 1, "train_end": "2025-02-28T00:00:00Z", "test_start": "2025-03-07T00:00:00Z", "test_end": "2025-04-05T23:59:59Z"},
+   {"block": 2, "train_end": "2025-03-31T00:00:00Z", "test_start": "2025-04-07T00:00:00Z", "test_end": "2025-05-06T23:59:59Z"}
+  ]
+ },
+ "gates": {
+  "materiality_ge_2pct": true,
+  "ci_excludes_zero": true,
+  "min_instruments": 5,
+  "min_blocks": 3,
+  "loio_min_pass": 4,
+  "loio_total": 5,
+  "placebo_reps": 200,
+  "placebo_seed": 20261113,
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 20261113,
+  "holm_cells": 12
+ },
+ "verdict_rules": {
+  "NOT_REPLICATED": "primary CI includes zero or rel reduction < materiality floor -> period-specific",
+  "CONFIRMED": "all checks pass -> funding-conditioned volatility generalizes across periods",
+  "INCONCLUSIVE": "insufficient valid test rows or pipeline defect"
+ },
+ "required_artifacts": {
+  "panel": "research_state/tracka_fwd_vol_2025_cross_panel_<UTC>.parquet",
+  "build_report": "research_state/tracka_fwd_vol_2025_cross_build_report_<UTC>.json",
+  "evaluation_json": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-CROSS-<UTC>.json",
+  "evaluation_md": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-CROSS-<UTC>.md",
+  "gate": "scripts/fclr_fwd_vol_2025_cross_gate.py"
+ },
+ "constraints": [
+  "No network access; cached Binance archive only.",
+  "No mutation of sealed FCLR-011/012-V/013/014 artifacts.",
+  "No threshold shopping; verdict rules fixed here.",
+  "No zero-fill/forward-fill of core features.",
+  "The 2025 window must remain non-overlapping with the sealed test window."
+ ]
+}

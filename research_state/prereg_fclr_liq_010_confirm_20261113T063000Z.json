@@ -1,0 +1,113 @@
+{
+ "experiment_id": "FCLR-LIQ-010-CONFIRM-20261113T063000Z",
+ "campaign": "FCLR-NEXT-CAMPAIGN-20261113T063000Z",
+ "cell": "LIQ-010-CONFIRM",
+ "track": "A_observed_liquidation",
+ "priority": "P1",
+ "preregistered_utc": "2026-11-13T06:30:00Z",
+ "status": "FROZEN_PRE_OUTCOMES",
+ "pre_registered_before_outcomes": true,
+ "frozen_before_outcomes": true,
+ "outcome_data_inspected_before_freeze": false,
+ "hypothesis_id": "H_fclr_liq_010_confirm",
+ "hypothesis_type": "primary_tracka_observed_liquidation",
+ "claim": "The sealed FCLR-010 observed-liquidation PASS (combined C2 vs RV-only B1, primary Brier contrast -0.003077, 95% CI [-0.004892,-0.001263], relative reduction 2.21%) replicates in direction and significance under an independent recomputation on the cached Hyperliquid ironflow census restricted to the 17 symbols with cached funding, with the pre-registered C2 vs B1 Brier CI excluding zero on the improving side, >=2% relative Brier reduction, >=5 instruments, >=3 non-overlapping 30-day blocks, LOIO >=4/5, placebo PASS, and leakage audit PASS.",
+ "sealed_reference": {
+  "artifact": "research_state/evaluation_summary_FCLR010.md",
+  "protocol": "research_state/research_protocol_fclr010.md v1.0",
+  "generated_utc": "2026-11-01T09:14:03Z",
+  "primary_contrast": "C2_vs_B1",
+  "primary_metric": "brier",
+  "mean_diff": -0.003077,
+  "ci": [-0.004892, -0.001263],
+  "rel_reduction_pct": 2.21,
+  "instruments_sealed": 199,
+  "test_events_sealed": 12450,
+  "test_base_rate_sealed": 0.142123
+ },
+ "why_this_is_new": {
+  "ranking": "Repo is Funding-conditioned-volatility-and-liquidation-risk. The primary Track C volatility campaign is COMPLETE and gated. The highest-value unfinished work is the Track A observed-liquidation arm, whose sealed PASS has never been independently recomputed.",
+  "no_relitigation": "The sealed FCLR-010 artifact is not mutated. This cell issues an independent CONFIRMED / FRAGILE / NOT_REPLICATED verdict.",
+  "data_available_now": "research_state/data_cache/ironflow_events/*.parquet (2025-05..2026-10, 18 monthly files) provides observed liquidation labels for 468 markets. research_state/data_cache/hyperliquid_funding/*.json provides funding for 17 symbols (AAVE, ADA, AVAX, BCH, BNB, BTC, CRV, DOGE, ETH, LINK, LTC, NEAR, SOL, SUI, UNI, XRP, ZEC). Only these 17 symbols have both labels and funding offline.",
+  "disclosure": "The sealed FCLR-010 used 199 instruments because it had live Hyperliquid mark/funding access; only 17 symbols retain cached funding. This is a narrower but honest independent recompute, not a re-score. The 17-symbol test grid contains ~12.5k events (vs sealed 12,450), so the event scale matches while the instrument count is smaller."
+ },
+ "venue": "hyperliquid_ironflow_census",
+ "data_sources": {
+  "labels": {
+   "dataset": "ironflow_hyperliquid_liquidation_events",
+   "access": "unauthenticated local cache",
+   "path_template": "research_state/data_cache/ironflow_events/YYYY-MM.parquet",
+   "license": "CC BY 4.0",
+   "alt_panel": "results/liqmicro_v2/panel_liqmicro_v2.parquet (hourly aggregated liq_count, 199 symbols)"
+  },
+  "funding": {
+   "dataset": "hyperliquid funding history",
+   "access": "local cache",
+   "path_template": "research_state/data_cache/hyperliquid_funding/{SYM}.json",
+   "fields": ["time", "fundingRate", "premium"]
+  }
+ },
+ "universe": {
+  "rule": "symbols with both cached ironflow labels and cached Hyperliquid funding",
+  "symbols": ["AAVE", "ADA", "AVAX", "BCH", "BNB", "BTC", "CRV", "DOGE", "ETH", "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP", "ZEC"],
+  "n_symbols": 17
+ },
+ "label": {
+  "unit": "symbol x fully closed UTC hour",
+  "occurrence": "1 if liq_count >= 1 in symbol-hour else 0 (full grid: absence = 0)",
+  "grid": "complete hourly grid per symbol over the window"
+ },
+ "models": {
+  "B1_rv_only": ["log_rv24h", "log_rv168h"],
+  "C2_combined": ["log_rv24h", "log_rv168h", "signed_funding", "abs_funding_pct", "premium"]
+ },
+ "primary_contrast": "C2_vs_B1",
+ "primary_metric": "brier",
+ "splits": {
+  "train": ["2025-11-01T00:00:00Z", "2026-03-06T23:00:00Z"],
+  "val": ["2026-03-14T00:00:00Z", "2026-05-20T23:00:00Z"],
+  "test": ["2026-05-28T00:00:00Z", "2026-10-31T23:00:00Z"],
+  "embargo_days": 7,
+  "block_days": 30,
+  "min_blocks": 3
+ },
+ "gates": {
+  "materiality_rel_reduction_pct": 2.0,
+  "ci_excludes_zero_side": "improving",
+  "min_instruments": 5,
+  "min_blocks": 3,
+  "loio_min_pass": 4,
+  "loio_total": 5,
+  "placebo_reps": 200,
+  "placebo_seed": 20261113,
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 20261113,
+  "leakage_audit": "features at t use only data <= t; funding is causal (ffill); embargo enforced at split boundaries"
+ },
+ "verdict_rules": {
+  "CONFIRMED": "all gate checks pass",
+  "FRAGILE": "primary passes but >=1 robustness check (LOIO/placebo/leakage) fails",
+  "NOT_REPLICATED": "primary contrast CI includes zero or rel reduction < materiality floor",
+  "INCONCLUSIVE": "insufficient valid test rows or data defect"
+ },
+ "multiplicity": {
+  "family": ["C2_vs_B1", "C1_vs_B1", "C2_vs_C1"],
+  "method": "Holm",
+  "alpha": 0.05
+ },
+ "required_artifacts": {
+  "panel": "research_state/fclr_liq_010_confirm_panel_<UTC>.parquet",
+  "build_report": "research_state/fclr_liq_010_confirm_build_report_<UTC>.json",
+  "evaluation_json": "research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-<UTC>.json",
+  "evaluation_md": "research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-<UTC>.md",
+  "gate": "scripts/fclr_liq_010_confirm_gate.py"
+ },
+ "constraints": [
+  "No network access; cached data only.",
+  "No mutation of the sealed FCLR-010 artifact.",
+  "No threshold shopping; verdict rules fixed here.",
+  "No zero-fill/forward-fill of core features; funding ffill is causal and disclosed.",
+  "No paid/manual/credentialed data.",
+  "The 17-symbol universe is fixed by cache availability and disclosed; do not expand it with live data."
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "experiment_id": "FCLR-EXP-ROBUST-REDO-20261113T063000Z",
+ "campaign": "FCLR-NEXT-CAMPAIGN-20261113T063000Z",
+ "cell": "EXP-ROBUST-REDO",
+ "track": "A_expansion_robustness",
+ "priority": "P2",
+ "preregistered_utc": "2026-11-13T06:30:00Z",
+ "status": "FROZEN_PRE_OUTCOMES",
+ "pre_registered_before_outcomes": true,
+ "frozen_before_outcomes": true,
+ "outcome_data_inspected_before_freeze": false,
+ "hypothesis_id": "H_fclr_exp_robust_redo",
+ "hypothesis_type": "secondary_tracka_expansion_robustness",
+ "claim": "A new expansion-robustness design on the sealed expansion panel meets LOIO >= 6/8 AND placebo PASS (funding-permutation null p95 < true C2-vs-B1 relative QLIKE reduction), which would upgrade the prior FRAGILE 19.04% PASS toward ROBUST. The prior sealed 19.04% PASS (LOIO 4/8, placebo null p95 21.10% >= true 19.04%) is FRAGILE and MUST NOT be re-scored as a PASS; this cell only tests whether a pre-registered, adequately-powered design changes that verdict.",
+ "sealed_reference": {
+  "prior_verdict": "FRAGILE",
+  "prior_artifact": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md",
+  "prior_loio": "4/8 (need >=6)",
+  "prior_placebo": "null p95 21.1022% >= true 19.04%",
+  "prior_rel_reduction_pct": 19.04,
+  "prior_ci": [-5.088, -0.478],
+  "panel": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+  "panel_sha256": "39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699"
+ },
+ "why_this_is_new": {
+  "ranking": "Track A expansion robustness is the second-highest unfinished Track A item after the observed-liquidation confirmation. The prior cell was FRAGILE because the placebo null (21.10%) exceeded the true effect (19.04%).",
+  "design_change": "This cell increases permutation resolution (2000 permutations) and uses a fixed-seed block bootstrap; it does NOT change the panel, splits, features, or the 2% materiality floor. If the true effect is genuinely below the placebo null, the verdict remains FRAGILE and that is the honest result.",
+  "no_relitigation": "The sealed expansion panel and the prior FRAGILE verdict are not mutated. This cell writes a NEW verdict artifact."
+ },
+ "venue": "hyperliquid_expansion_panel",
+ "data_sources": {
+  "panel": {
+   "path": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+   "sha256": "39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699",
+   "access": "local cached"
+  }
+ },
+ "splits": {
+  "train": ["2026-05-01T00:00:00Z", "2026-05-31T23:59:59Z"],
+  "val": ["2026-06-07T00:00:00Z", "2026-06-30T23:59:59Z"],
+  "test_blocks": [
+   ["2026-07-07T00:00:00Z", "2026-08-06T23:59:59Z"],
+   ["2026-08-13T00:00:00Z", "2026-09-11T23:59:59Z"],
+   ["2026-09-18T00:00:00Z", "2026-10-17T23:59:59Z"]
+  ]
+ },
+ "models": {
+  "B1": ["log_rv1h", "log_rv24h", "log_rv168h"],
+  "C2": ["log_rv1h", "log_rv24h", "log_rv168h", "fundingRate", "abs_fund_pct", "premium", "ema_dist"]
+ },
+ "primary_contrast": "C2_vs_B1",
+ "primary_metric": "qlike",
+ "gates": {
+  "loio_min_pass": 6,
+  "loio_total": 8,
+  "materiality_rel_reduction_pct": 2.0,
+  "ci_excludes_zero": true,
+  "placebo_permutations": 2000,
+  "placebo_seed": 20261113,
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 20261113
+ },
+ "verdict_rules": {
+  "ROBUST": "LOIO >=6/8 AND placebo PASS AND materiality AND CI excludes zero",
+  "FRAGILE": "primary passes but LOIO or placebo fails (matches prior verdict if unchanged)",
+  "INCONCLUSIVE": "insufficient valid rows / data defect"
+ },
+ "required_artifacts": {
+  "evaluation_json": "research_state/evaluation_summary_FCLR-EXP-ROBUST-REDO-<UTC>.json",
+  "evaluation_md": "research_state/evaluation_summary_FCLR-EXP-ROBUST-REDO-<UTC>.md",
+  "gate": "scripts/fclr_exp_robust_redo_gate.py"
+ },
+ "constraints": [
+  "No network access.",
+  "No mutation of the sealed expansion panel or prior FRAGILE verdict.",
+  "No threshold shopping; do not lower the LOIO or materiality bars.",
+  "Do not re-score the prior FRAGILE PASS as a PASS."
+ ]
+}
