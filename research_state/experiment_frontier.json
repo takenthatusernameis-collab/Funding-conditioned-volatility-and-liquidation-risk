@@ -8,7 +8,7 @@
   "generated": "2026-11-13T09:15:00Z",
   "last_checked": "2026-11-13T10:04:51Z",
   "blockers": "Cells FWD-VOL-2024Q4-CROSS and FWD-VOL-2025H2-CROSS both terminal NOT_REPLICATED (gates PASS). The only other complete cached window, 2024-01..2024-03, lacks funding coverage (funding starts 2024-04), so it is a volatility-only B0/B1 diagnostic, not a funding-conditioned test — do not force it as Cell 7. Alt-source scan 20261113T090105Z found no GO unauthenticated observed-liquidation source meeting minima.",
-  "next_action_heavy": "Cell FWD-VOL-2025H2-CROSS is now terminal NOT_REPLICATED (gate PASS). No remaining complete funding-backed cached window is disjoint from all tested windows and executable under the pre-registered design (2024-01..2024-03 lacks funding). Heavy progress now requires either (P1) a newly admissible observed-liquidation source passing the §16 admissibility audit before any preregistration/outcome computation, or (P2) the 2024-01..2024-03 volatility-only RV diagnostic frozen explicitly out of funding scope. Gate 4 Branch 1 only on a valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). No status-only sessions.",
+  "next_action_heavy": "Cell FWD-VOL-2025H2-CROSS terminal NOT_REPLICATED (gate PASS). After reconciling TESTED_WINDOWS with executed cells, disjoint funding-backed months are 2025-01, 2025-06 (single months: cannot support 3x30-day pre-registered test blocks) and 2025-11..2026-04 (train would overlap the tested Cell 6 window). No window supports a full funding-conditioned pre-registered test. Executable now: Cell 7 volatility-only RV diagnostic on 2024-01..2024-03 per AGENT_HANDOFF.md IMMEDIATE TASK (funding hypotheses out of scope; coverage audit first; close as NOT_EXECUTABLE if 3 blocks infeasible). Beyond the cache: (P1) newly admissible observed-liquidation source passing the §16 admissibility audit before any preregistration/outcome computation; Gate 4 Branch 1 only on a valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json. No status-only sessions.",
   "cells": [
    {
     "cell": "FWD-VOL-2024Q4-CROSS",
@@ -17,7 +17,16 @@
     "experiment_id": "FCLR-FWD-VOL-2024Q4-CROSS-20261113T091500Z",
     "artifact": "research_state/evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-20261113T100451Z.json",
     "gate": "scripts/fclr_fwd_vol_2024_cross_gate.py -> GATE: PASS",
-    "note": "First execution of this cell; was blocked by a prereg/executor naming mismatch (2024q4 vs 2024) now fixed."
+     "note": "First execution of this cell; was blocked by a prereg/executor naming mismatch (2024q4 vs 2024) now fixed."
+   },
+   {
+    "cell": "FWD-VOL-2025H2-CROSS",
+    "status": "COMPLETED",
+    "verdict": "NOT_REPLICATED",
+    "experiment_id": "FCLR-FWD-VOL-2025H2-CROSS-20261113T102139Z",
+    "artifact": "research_state/evaluation_summary_FCLR-FWD-VOL-2025H2-CROSS-20261113T102240Z.json",
+    "gate": "scripts/fclr_fwd_vol_2025h2_cross_gate.py -> GATE: PASS (13/13)",
+    "note": "Executed 2026-11-13T10:22:40Z on cached Binance 2025-07-23..2025-10-15; C2 significantly worse than B1 (rel -8.97%, CI excludes zero favouring B1); materiality/LOIO/placebo/Holm FAIL; leakage PASS."
    }
   ],
   "supersedes_prior_next_task_entries": [

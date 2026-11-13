@@ -61,12 +61,15 @@ class TestNextCampaignStatus(unittest.TestCase):
 
     def test_funding_backed_months_are_detected(self):
         windows = {w["month"]: w for w in self.mod.ready_windows()}
-        # 2025-07..2025-10 are complete, funding-backed and never tested.
+        # 2025-07..2025-10 are complete, funding-backed and now inside Cell 6's
+        # tested window (FCLR-FWD-VOL-2025H2-CROSS, executed 2026-11-13T10:22:40Z).
         for m in ("2025-07", "2025-08", "2025-09", "2025-10"):
             self.assertIn(m, windows)
             self.assertTrue(windows[m]["funding_available"], f"{m} funding not detected")
-            self.assertFalse(windows[m]["inside_tested_window"],
-                             f"{m} wrongly marked tested")
+            self.assertTrue(windows[m]["inside_tested_window"],
+                            f"{m} wrongly marked untested")
+            self.assertEqual(windows[m]["tested_by"],
+                             "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)")
 
     def test_pre_funding_months_flagged(self):
         windows = {w["month"]: w for w in self.mod.ready_windows()}
