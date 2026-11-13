@@ -1,10 +1,34 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-13T09:03:59Z
-**Status:** `CAMPAIGN_CLOSED_NO_FROZEN_PREREG` — All frozen heavy-work cells terminal with gates PASS: FCLR-FWD-VOL-011-CONFIRM NOT_REPLICATED (forward C2 worse, repro delta 0.044pp); FCLR-LIQ-010-CONFIRM NOT_REPLICATED (rel 0.501%<2%, placebo/LOIO fail); FCLR-EXP-ROBUST-REDO FRAGILE (LOIO 4/8, placebo fail); FCLR-FWD-VOL-2025-CROSS NOT_REPLICATED (CI crosses zero, rel 0.29%, placebo/LOIO fail). Sealed FCLR-011 PASS (4.94%) stands unrefuted but does not generalize forward or to 2025-02..2025-05; `H1_primary` NOT_SUPPORTED. **No frozen prereg remains and no admissible untested window/source is currently identified.** Gate 4 Branch 1 trigger absent (`NO_VALID_GATE4_TRIGGER`). Bounded alt-source re-probe this session (`scripts/hunt_alternative_liquidation_sources.py` -> `research_state/alt_source_scan_latest.json`; `scripts/deep_review_alt_sources.py` -> `research_state/alt_source_deep_review_latest.md`, generated 2026-11-13T09:01:05Z/19Z) found **no GO unauthenticated observed-liquidation source** meeting minima (>=5 instruments, >=1 complete month or >=3 non-overlapping 30d blocks, provenance/license, schema-compatible, not modeled/proxy). Targeted gates/tests green this session (119/119).
+**Handoff timestamp (UTC):** 2026-11-13T09:59:53Z
+**Status:** `CAMPAIGN_CLOSED_EXECUTE_NEXT_PREREG` — All current frozen heavy cells are terminal with gates PASS: FCLR-FWD-VOL-011-CONFIRM `NOT_REPLICATED` (forward C2 worse, repro delta 0.044pp); FCLR-LIQ-010-CONFIRM `NOT_REPLICATED` (rel 0.501%<2%, placebo/LOIO fail); FCLR-EXP-ROBUST-REDO `FRAGILE` (LOIO 4/8, placebo fail); FCLR-FWD-VOL-2025-CROSS `NOT_REPLICATED` (CI crosses zero, rel 0.29%, placebo/LOIO fail). Sealed FCLR-011 PASS (4.94%) stands unrefuted but does not generalize forward or to 2025-02..2025-05; `H1_primary` NOT_SUPPORTED. **No frozen prereg remains executable.** Gate 4 Branch 1 absent (`NO_VALID_GATE4_TRIGGER`). Latest bounded alt-source discovery `20261113T090105Z` (`research_state/alt_source_scan_latest.json`, `research_state/alt_source_deep_review_latest.md`): **no GO unauthenticated observed-liquidation source** meeting minima (>=5 instruments, >=1 complete month or >=3 non-overlapping 30d blocks, provenance/license, schema-compatible, not modeled/proxy). Gates/tests re-verified this session (4/4 gates PASS, targeted suite 119/119).
 
-**This file is the ONLY durable handoff.** It supersedes every earlier handoff, checkpoint, closure, and frontier entry. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, and `NEXT_SESSION_TASK.md` are redirects to this file. Do not create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. Update this file in place by appending a dated `## SESSION LOG` entry.
+**This file is the ONLY durable handoff.** Supersedes earlier handoffs/checkpoints. `HANDOFF_NEXT_SESSION.md`, `FOCUS_CAMPAIGN.md`, `NEXT_SESSION_TASK.md` are redirects. Do not create another `*HANDOFF*`, `*NEXT*`, `*CAMPAIGN*`, or `*TASK*` root file. Update in place by appending a dated `## SESSION LOG` entry.
+
+---
+## IMMEDIATE TASK (mandatory, heavy-first)
+
+**Priority = repo name:** advance *funding-conditioned volatility and liquidation risk* by producing **new terminal evidence**, not status checks. Re-running sealed/terminal cells, repeating identical no-op probes, polling Gate 4, or monitor-only closure is forbidden.
+
+### A — Track A (liquidation risk): freeze & execute on first newly admissible observed source (highest IG if found)
+1. **Discover (bounded, evidence-only):** search for a concrete, not-yet-falsified unauthenticated candidate with downloadable historical *observed* (not modeled/proxy/aggregate-only) perp liquidation records and plausible coverage (>=5 instruments, >=1 complete month or >=3 non-overlapping 30d blocks). Reuse `scripts/hunt_alternative_liquidation_sources.py` / `scripts/deep_review_alt_sources.py` only when adding a specific new candidate/probe beyond `alt_source_scan_latest.json@20261113T090105Z`.
+2. **Admissibility (pre-outcomes):** write timestamped `research_state/<source>_admissibility_audit_<UTC>.{md,json}` per RESEARCH_PROMPT §16 documenting provenance/license, schema, symbol/date coverage, completeness/census vs sample, and exact pass/fail of minima. NO-GO if sample/undercounted, wrong product/venue, modeled, credentialed, or requester-pays.
+3. **Freeze prereg:** `research_state/prereg_tracka_altliq_<UTC>.{json,md}` with `status=FROZEN_PRE_OUTCOMES`, `outcome_data_inspected_before_freeze=false`, hypotheses, model C2 vs B1 baseline, leakage/temporal rules, and ex-ante gates: materiality >=2% relative reduction, CI excludes zero, >=5 instruments, >=3 blocks, LOIO, placebo, leakage.
+4. **Execute & verdict:** build panel (cached/local artifacts only), evaluate, produce `research_state/evaluation_summary_FCLR-ALTLIQ-<UTC>.{md,json}` with terminal verdict (`CONFIRMED`/`FRAGILE`/`NOT_REPLICATED`/`INCONCLUSIVE`), update `hypothesis_registry.json` and `experiment_frontier.json`, and add a fail-closed gate script under `scripts/` that prints `GATE: PASS` on the recorded terminal result.
+
+### B — Track C (volatility): freeze & execute only if a materially different cached admissible design exists
+- Inspect `research_state/data_cache/` (Binance monthly mark/funding cached 2024-01..2026-11 for BTC/ETH/BNB/SOL/XRP). A valid new design must be **materially different** from tested/sealed windows (not 2025-02..2025-05, not the completed forward walk-forward cells) and satisfy >=5 instruments and >=3 non-overlapping 30d test blocks with documented leakage-safe splits. If found: coverage audit -> freeze prereg pre-outcomes -> execute -> terminal verdict -> gate. If none: record *new* concrete evidence (window, exact shortfall vs minima) and proceed with A; do not fabricate.
+
+### Blocked (external only)
+- Gate 4 Branch 1: act only if `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` appears with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation. Absent now; do not wait/poll.
+
+### Completion (session is DONE only if one holds)
+1. **Heavy execution complete:** frozen prereg + (admissibility audit if new source) + timestamped terminal evaluation + registry/frontier updated + new fail-closed gate `GATE: PASS` + targeted tests green.
+2. **Evidence-advancing discovery only:** timestamped audit/probe artifacts showing a **previously-unrecorded** concrete failing minimum or newly discovered candidate (with exact fields/coverage), state updated; no generic negative restatement.
+
+Always run and report: `python3 scripts/fclr_heavy_confirm_gate.py && python3 scripts/fclr_liq_010_confirm_gate.py && python3 scripts/fclr_exp_robust_redo_gate.py && python3 scripts/fclr_fwd_vol_2025_cross_gate.py` and `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate`. No sealed mutation; no raw cache commits; no `.github/workflows/*` changes.
+
 ---
 
 
@@ -193,48 +217,8 @@ Executed `scripts/fclr_fwd_vol_2025_cross.py` on cached Binance 2025-02..2025-05
 
 **Artifacts/commands:** `python3 scripts/fclr_fwd_vol_confirm.py` → `evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061555Z.{md,json}` (verdict NOT_REPLICATED, all 8 checks). `python3 scripts/fclr_heavy_confirm_gate.py` → GATE: PASS. `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` → 119 OK.
 
-## 2026-11-13T06:56:11Z — NEXT SESSION TASK: Execute Cell 1 `FCLR-LIQ-010-CONFIRM` (Track A liquidation, P1).
-
-**MANDATORY EXECUTION ORDER — no status-only sessions, no monitor-only closure.**
-
-### Step 1 — Freeze prereg BEFORE outcomes (already done)
-Prereg frozen: `research_state/prereg_fclr_liq_010_confirm_20261113T063000Z.{json,md}` (status=FROZEN_PRE_OUTCOMES, outcome_data_inspected_before_freeze=false).
-
-### Step 2 — Execute the cell on cached data only
-```bash
-cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
-python3 scripts/fclr_liq_010_confirm.py
-```
-- Uses cached Hyperliquid ironflow panel (`results/liqmicro_v2/panel_liqmicro_v2.parquet`) + 17 symbols with cached funding (`research_state/data_cache/hyperliquid_funding/{SYM}.json`).
-- No network, no paid sources, no credentials.
-- Produces timestamped evaluation artifact: `research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-<UTC>.{json,md}` and panel/build report.
-
-### Step 3 — Issue verdict and update state
-Record verdict (`CONFIRMED` / `FRAGILE` / `NOT_REPLICATED` / `INCONCLUSIVE`) in evaluation artifact. Update:
-- `research_state/hypothesis_registry.json` — add/replace `H_fclr_liq_010_confirm` with verdict + artifact hash
-- `research_state/experiment_frontier.json` — advance rank-0 to this cell's completion
-
-### Step 4 — Pass completion gate
-No dedicated gate script exists for this cell. Create minimal gate enforcing:
-1. Final verdict recorded in evaluation artifact (not SMOKE, not INCONCLUSIVE due to missing data)
-2. All pre-registered checks present (materiality ≥2%, CI excludes zero, instruments ≥5, blocks ≥3, LOIO ≥4/5, placebo pass, leakage audit pass)
-3. Panel hash matches build report
-4. Prereg frozen pre-outcomes
-
-Then run acceptance gate:
-```bash
-python3 scripts/fclr_heavy_confirm_gate.py  # must print GATE: PASS
-python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate  # all OK
-```
-
-### BOTTLENECKS REMOVED — no blockers remain
-- Primary Track C campaign COMPLETE (gate PASS, verdict NOT_REPLICATED)
-- All three next-focus preregs FROZEN_PRE_OUTCOMES (20261113T063000Z)
-- Cached data available: ironflow panel + 17-funded-symbol funding + expansion panel + Binance archive
-- Scripts implemented and importable
-- Targeted test suite green (119 tests)
-
-**HARD BAN ENFORCED:** This session MUST execute Steps 1–4 above. Re-running monitors, checking status, or producing "progress" without a terminal verdict is not progress.
+## [SUPERSEDED 2026-11-13T09:59:53Z] Former "Execute Cell 1 FCLR-LIQ-010-CONFIRM" task block
+Obsolete: Cell 1 executed and terminal (`FCLR-LIQ-010-CONFIRM` NOT_REPLICATED, gate PASS, see 2026-11-13T07:06:00Z session log). See `## IMMEDIATE TASK` at top for the current mandatory next action. Do not re-run this cell.
 
 ## 2026-11-13T05:02:10Z — Kilo session: Materialized sealed FCLR-011 panel via `git lfs pull --include research_state/data_cache/fclr011_panel.json` (7,716,808 bytes, was unresolved 132-byte LFS pointer); re-ran `scripts/fclr_fwd_vol_confirm.py` end-to-end; forward result unchanged (C2 vs B1 mean diff +0.026760, CI [0.000343, 0.064822], rel -5.55%); repro gap persists at 0.552pp (>0.5pp tolerance) → `repro_011_pass=False`, verdict INCONCLUSIVE; gate FAILS only on `final_verdict_recorded` (6/7 checks pass). Targeted campaign suite: 119 tests OK. Root cause identified: `build_legacy_panel` in `fclr_fwd_vol_confirm.py` computes RV/EMA on the hourly grid (rolling windows over reindexed grid with NaN gaps, pandas `ewm`) whereas `run_evaluation.py` (`trailing_rv_window`, `build_features_for_origin`) computes on valid mark rows only — the 0.55pp residual matches this grid-vs-valid-row discrepancy.
 
@@ -280,3 +264,13 @@ python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structu
 - Falsifying next test (highest IG/unit free compute): freeze prereg on a genuinely new admissible observed-liquidation source (or new cached volatility window with >=3 blocks, >=5 symbols) and test C2 vs B1 with pre-specified materiality/CI/LOIO/placebo/leakage gates; a material, CI-excluding-zero, robust improvement would falsify current leading null/non-generalization.
 - Highest expected IG next action: monitor/discover a concrete downloadable observed-liquidation candidate meeting §16 minima; immediately run admissibility audit and freeze prereg if found. If none appears, identify any untested cached volatility window meeting block/instrument minima and freeze a new prereg.
 - Artifacts/commands: `python3 scripts/fclr_heavy_confirm_gate.py` PASS; `python3 scripts/fclr_liq_010_confirm_gate.py` PASS; `python3 scripts/fclr_exp_robust_redo_gate.py` PASS; `python3 scripts/fclr_fwd_vol_2025_cross_gate.py` PASS; `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` (119 OK); `python3 scripts/hunt_alternative_liquidation_sources.py`; `python3 scripts/deep_review_alt_sources.py`; `research_state/alt_source_scan_latest.json`; `research_state/alt_source_deep_review_latest.md`.
+## 2026-11-13T09:59:53Z — Kilo session: durable handoff refreshed; terminal-state/gates re-verified; obsolete Cell 1 task removed; next heavy campaign defined (prereg+execute on first newly admissible design).
+
+- **State verified (no sealed/raw/cache/workflow mutations):** `scripts/fclr_heavy_confirm_gate.py` PASS (FCLR-FWD-VOL-011-CONFIRM NOT_REPLICATED, 7/7, repro delta 0.044pp); `scripts/fclr_liq_010_confirm_gate.py` PASS (NOT_REPLICATED); `scripts/fclr_exp_robust_redo_gate.py` PASS (FRAGILE); `scripts/fclr_fwd_vol_2025_cross_gate.py` PASS (NOT_REPLICATED). Targeted suite: `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate` -> 119/119 OK. Gate 4 absent (`NO_VALID_GATE4_TRIGGER`).
+- **Bottlenecks removed:** obsolete "NEXT SESSION TASK: Execute Cell 1 FCLR-LIQ-010-CONFIRM" block (already terminal 2026-11-13T07:06Z) marked superseded to prevent wasted cycles; top-of-file handoff replaced with repo-priority, heavy-first `IMMEDIATE TASK` requiring either (1) freeze prereg + execute + terminal verdict + fail-closed gate PASS on a newly admissible Track A observed-liquidation source or a materially different cached Track C volatility design, or (2) timestamped evidence of a previously-unrecorded concrete failing minimum/new candidate.
+- **Discovery baseline (not re-probed this turn):** latest `research_state/alt_source_scan_latest.json` + `alt_source_deep_review_latest.md` (generated 2026-11-13T09:01:05Z/19Z) show **no GO unauthenticated observed-liquidation source** meeting minima; identical no-op sweeps forbidden.
+- **Supported:** sealed FCLR-011 PASS (4.94%) unrefuted but non-generalizing; forward/cross/robustness/liquidation-confirm cells terminal negative/fragile per recorded artifacts. **Contradicted:** none newly. **Unknown:** existence of any future unauthenticated observed-liquidation dataset meeting coverage/provenance/license/schema minima. **Dominant limitation:** absence of newly admissible data/design (Track A blocked on observed source; cached Track C designs in scope exhausted).
+- **Strongest alternative explanation:** funding-conditioned edge is regime/period/source-specific or below materiality/robustness thresholds on admissible panels tested.
+- **Falsifying next test:** preregistered C2-vs-B1 on a new admissible observed-liquidation panel or new cached volatility window (>=5 instruments, >=3 non-overlapping 30d blocks) with ex-ante materiality>=2%, CI-excludes-zero, LOIO, placebo, leakage gates — robust material improvement would falsify current non-generalization/null.
+- **Highest expected IG/unit free compute:** identify a specific not-yet-falsified candidate/window with evidence of meeting minima -> admissibility/coverage audit -> freeze prereg pre-outcomes -> execute -> terminal verdict + gate.
+- **Artifacts/commands:** `python3 scripts/fclr_heavy_confirm_gate.py`; `python3 scripts/fclr_liq_010_confirm_gate.py`; `python3 scripts/fclr_exp_robust_redo_gate.py`; `python3 scripts/fclr_fwd_vol_2025_cross_gate.py`; `python -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate`; `AGENT_HANDOFF.md` (updated 2026-11-13T09:59:53Z).
