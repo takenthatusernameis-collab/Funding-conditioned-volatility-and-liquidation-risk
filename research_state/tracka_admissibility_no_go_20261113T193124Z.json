@@ -1,0 +1,69 @@
+{
+  "artifact": "tracka_admissibility_no_go",
+  "timestamp_utc": "2026-11-13T19:31:24Z",
+  "track": "A",
+  "trigger_month_min": "2026-11",
+  "seam": "src.analysis.tracka_admissible.assess_ironflow_month_admissibility",
+  "verdict": "NO_GO",
+  "status": "TERMINAL_BLOCKED_EXTERNAL_DATA",
+  "reason_code": "NO_ADMISSIBLE_CACHED_OR_MATERIALIZED_CANDIDATE_FOR_TRIGGER_MONTH",
+  "summary": "Track A observed-liquidation resume requires an Ironflow Hyperliquid events+fills candidate for month >= 2026-11. Cache holds ironflow events only through 2026-10; there is no 2026-11 events/fills parquet, no candidate manifest, and no admissible alternative observed-liquidation source (22 candidates falsified in alt_source_deep_review_latest.md 2026-11-13T17:12:25Z). The seam is wired and fail-closed: assess_ironflow_month_admissibility returns GO only for a structurally valid manifest, but the resume check returns NO_CANDIDATE_PENDING because no real candidate/data is present. The blocker is external data acquisition (post-2026-10 observed HL liquidation labels); no internal work can satisfy the trigger. Per RESEARCH_PROMPT section 16 this cell stays blocked; do not write further blocker memos or re-verify; advance unblocked tracks instead.",
+  "cached_ironflow_events_months": [
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10"
+  ],
+  "cached_ironflow_fills_months": [],
+  "cached_ironflow_latest_event_month": "2026-10",
+  "trigger_gap": {
+    "required_month_min": "2026-11",
+    "latest_cached_month": "2026-10",
+    "missing_months": [
+      "2026-11"
+    ],
+    "missing_roles": [
+      "fills"
+    ],
+    "note": "fills role has no cached parquet at all; events cache ends 2026-10."
+  },
+  "candidates_considered": [
+    {
+      "candidate": "ironflow/hyperliquid-liquidations 2026-11 (events+fills)",
+      "evidence": "cache scan 2026-11-13T19:31:24Z: events through 2026-10; fills absent; no 2026-11 parquet",
+      "verdict": "NO_GO",
+      "failing_minima": [
+        "data_not_present",
+        "month_below_cache_max",
+        "fills_missing"
+      ]
+    }
+  ],
+  "falsified_alternative_sources_ref": "research_state/alt_source_deep_review_latest.md (2026-11-13T17:12:25Z, 22 candidates, 0 GO)",
+  "seam_check": {
+    "pass": true,
+    "status": "NO_CANDIDATE_PENDING",
+    "reason_code": "ADMISSIBLE_SEAM_WIRED_AWAITING_CANDIDATE"
+  },
+  "unblocked_alternative_tracks": [
+    "Track C volatility/stress outcomes from admissible cached price/mark history (never blocked by liquidation labels)",
+    "Funding-conditioned volatility ablations / Gate 4 hardening on cached data",
+    "Section-16-permitted narrow-cohort pilots and coverage/inference diagnostics",
+    "Seam/gate/CLI hardening with tmp-isolated tests (no status churn)"
+  ],
+  "next_trigger_only_if": "A materially new, unauthenticated, observed-liquidation source or Ironflow month >= 2026-11 events+fills appears (not falsified above); then build+assess manifest to GO BEFORE any outcome inspection."
+}
