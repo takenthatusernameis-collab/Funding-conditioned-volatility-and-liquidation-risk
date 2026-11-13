@@ -1,13 +1,13 @@
-# AGENT HANDOFF — 2026-11-13T17:15:00Z
+# AGENT HANDOFF — 2026-11-13T17:15:00Z (single durable handoff)
 
 ## PROJECT
 `Funding-conditioned-volatility-and-liquidation-risk` — empirical research only (no trading). Investigate whether extreme funding, realized volatility, and pre-specified delayed/smoothed-price features improve out-of-sample forecasts of future volatility / liquidation-related stress, with leakage-resistant evaluation and preserved negative results.
 
-PRIORITY BY REPO NAME (liquidation-risk first):
-1. NEW_OBSERVED_LIQUIDATION_SOURCE (P1) — only agent-actionable resume trigger; unlocks observed-liquidation heavy work.
-2. HL_LABEL_EXTENSION (P3) — needs ≥100d depth AND verified post-2026-10-31 observed labels; externally data-dependent, no polling.
-3. GATE4_BRANCH_1 (P2) — externally blocked (human/legal attestation); never agent-set, never polled.
-4. EXPANSION_ROBUSTNESS_REDO (P4) — needs newly preregistered design LOIO≥6/8 AND placebo > p95; never re-score sealed 19.04%.
+## PRIORITY BY REPO NAME (liquidation-risk first)
+1. **NEW_OBSERVED_LIQUIDATION_SOURCE (P1)** — only agent-actionable resume trigger; unlocks observed-liquidation heavy work. Prioritized first because repo name = liquidation-risk.
+2. **HL_LABEL_EXTENSION (P3)** — needs ≥100d depth AND verified post-2026-10-31 observed labels; externally data-dependent, no polling.
+3. **GATE4_BRANCH_1 (P2)** — externally blocked (human/legal attestation); never agent-set, never polled.
+4. **EXPANSION_ROBUSTNESS_REDO (P4)** — needs newly preregistered design LOIO≥6/8 AND placebo > p95; never re-score sealed 19.04%.
 
 ## STATE (durable, sealed)
 - **Cached heavy-data frontier: EXHAUSTED.** All frozen preregistered cells in `FCLR-NEXT-CAMPAIGN-20261113T091500Z` (rank 0, ACTIVE_HEAVY_CAMPAIGN) are **COMPLETED, GATE PASS, terminal**:
@@ -22,17 +22,17 @@ PRIORITY BY REPO NAME (liquidation-risk first):
 - **Hypotheses:** 31 in `research_state/hypothesis_registry.json`, all `terminal: true`.
 - **Resume triggers:** 4 in `research_state/resume_trigger_registry.json`, all `OPEN`, `do_not_act_until_satisfied: true`.
 - **Blocked externally (NOT agent-removable — do not poll/wait):**
-  - GATE4_BRANCH_1 requires valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation).
-  - HL_LABEL_EXTENSION needs ≥100d depth AND verified post-2026-10-31 observed labels.
+  - GATE4_BRANCH_1 requires valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Agents cannot create this file.
+  - HL_LABEL_EXTENSION needs ≥100d depth AND verified post-2026-10-31 observed labels (ironflow/hyperliquid). External data dependency; mark ineligible until evidence appears; no polling.
   - EXPANSION_ROBUSTNESS_REDO requires a newly preregistered design meeting LOIO≥6/8 AND placebo true > p95 (no re-scoring sealed 19.04%).
-- **Alt-source scan (TASK-20261113T162742Z, executed 2026-11-13T17:12:25Z): 0 GO / 0 admissible NEW observed-liquidation sources.** See `research_state/alt_source_deep_review_latest.md`.
+- **Alt-source scan (TASK-20261113T162742Z, executed 2026-11-13T17:12:25Z): 0 GO / 0 admissible NEW observed-liquidation sources.** See `research_state/alt_source_deep_review_latest.md`. Ironflow/HL already integrated/exhausted. Closest (`ochinimus/crypto-liquidation-ticks`, ~27d coverage; `nick128373/crypto-liquidation-ticks`, no evidenced coverage/instruments/blocks) fail §16 minima. No §16 admissibility audit warranted; no prereg/outcomes computed.
 
 ## THIS SESSION (heavy work completed) — TASK-20261113T162742Z
 - Executed bounded alternative liquidation-label source discovery per RESEARCH_PROMPT §5/§16:
   - `python3 scripts/hunt_alternative_liquidation_sources.py` → `research_state/alt_source_scan_latest.json` (generated_utc **20261113T171152Z**, 22 candidates, HF search cache 2026-11-13T09:01:05Z, source=cache).
   - `python3 scripts/deep_review_alt_sources.py` → `research_state/alt_source_deep_review_latest.md` (**timestamp_utc 2026-11-13T17:12:25Z**, 14 fresh probes, 0 cache hits) with per-source assessment against §16 minima.
   - Probe evidence persisted in `research_state/url_probe_cache.json`.
-- **Result: 0 GO / 0 admissible NEW observed-liquidation sources.** Ironflow/HL already integrated/exhausted. Closest (`ochinimus/crypto-liquidation-ticks`, ~27d coverage; `nick128373/crypto-liquidation-ticks`, no evidenced coverage/instruments/blocks) fail §16 minima. No §16 admissibility audit warranted; no prereg/outcomes computed.
+- **Result: 0 GO / 0 admissible NEW observed-liquidation sources.** No prereg created, no outcomes computed, no terminal cells re-run, no Gate 4/HL/external polling.
 - Updated `research_state/experiment_frontier.json` rank 0 `last_checked/blockers/next_action_heavy` to reflect clean stop.
 
 ## SINGLE DURABLE INITIAL TASK FOR NEXT SESSION (timestamped, unambiguous)
@@ -40,8 +40,9 @@ PRIORITY BY REPO NAME (liquidation-risk first):
 
 Do NOT:
 - Re-run terminal cells, do NOT re-open sealed verdicts, do NOT re-score sealed results.
-- Poll Gate 4/HL labels/external triggers (all externally blocked, `do_not_act_until_satisfied: true`).
+- Poll Gate 4 / HL labels / external triggers (all externally blocked, `do_not_act_until_satisfied: true`).
 - Produce status-only churn, redundant wrappers, polling loops, or repeated no-op probes.
+- Run any "next session" task without first confirming a resume trigger is satisfied (see § below).
 
 Resume heavy work **only** on materially new evidence satisfying a resume trigger. Prioritize by repo name (liquidation-risk first):
 
@@ -57,7 +58,7 @@ If none satisfied: state "no trigger satisfied; cache frontier exhausted; alt-so
 
 Rule: when any resume trigger above is satisfied, the next session **must** execute heavy work in this order — (a) §16 admissibility audit artifact, (b) prereg freeze pre-outcomes, (c) build/eval panel, (d) terminal verdict, (e) atomic registry/frontier updates — under a NEW experiment ID. Heavy work is not optional once a trigger is satisfied; status-only reports do not satisfy this campaign.
 
-**Bottleneck removal:**
+**Bottleneck removal (sessions must not wait on these):**
 - Gate 4 Branch 1: human/legal attestation only — agents cannot create `fclr016_v5_terms_evidence_RESOLVED_*.json`. Marked non-agent-actionable; sessions must not wait on it.
 - HL label extension: needs new observed post-2026-10-31 labels + ≥100d depth — external data dependency; mark ineligible until evidence appears; no polling.
 - Expansion robustness redo: needs new preregistration with LOIO≥6/8 AND placebo > p95 — a new design, not a re-score of the sealed 19.04%.
@@ -70,4 +71,4 @@ Rule: when any resume trigger above is satisfied, the next session **must** exec
 - `research_state/experiment_frontier.json` (rank 0 updated), `research_state/hypothesis_registry.json`, `research_state/resume_trigger_registry.json`
 - `scripts/hunt_alternative_liquidation_sources.py`, `scripts/deep_review_alt_sources.py`
 
-**This is the single durable handoff. `FOCUS_CAMPAIGN.md`/`HANDOFF_NEXT_SESSION.md`/`NEXT_SESSION_TASK.md` are redirects.**
+**This is the single durable handoff. `FOCUS_CAMPAIGN.md`/`HANDOFF_NEXT_SESSION.md`/`NEXT_SESSION_TASK.md` are redirects — do not execute them; read and update `AGENT_HANDOFF.md` only.**
