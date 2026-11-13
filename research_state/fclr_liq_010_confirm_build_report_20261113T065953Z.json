@@ -1,0 +1,29 @@
+{
+ "experiment_id": "FCLR-LIQ-010-CONFIRM-20261113T063000Z",
+ "generated_utc": "2026-11-13T06:59:53Z",
+ "panel_path": "fclr_liq_010_confirm_panel_20261113T065953Z.parquet",
+ "panel_sha256": "ec225a17683a76783fd480a27f41910a6f1920eed71e348fcd7a990433cbac52",
+ "n_rows": 148920,
+ "n_test_rows": 64056,
+ "n_symbols": 17,
+ "coverage_events_test": {
+  "AAVE": 602,
+  "ADA": 526,
+  "AVAX": 423,
+  "BCH": 329,
+  "BNB": 286,
+  "BTC": 1675,
+  "CRV": 484,
+  "DOGE": 443,
+  "ETH": 1236,
+  "LINK": 455,
+  "LTC": 314,
+  "NEAR": 1093,
+  "SOL": 1201,
+  "SUI": 556,
+  "UNI": 652,
+  "XRP": 1077,
+  "ZEC": 1173
+ },
+ "inputs": "research_state/data_cache/ironflow_events + hyperliquid_funding/{SYM}.json"
+}

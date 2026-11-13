@@ -252,7 +252,26 @@
    "evidence": "Pooled C2 vs B1 24h QLIKE mean diff +0.026760 (positive = C2 worse), 95% CI [0.000343, 0.064822] favouring B1, rel -5.55%, n=10200, 85 days. LOIO: 5/5 negative (3/5 CI excludes zero). Placebo p95 -5.35% vs true -5.55% (not significant). Sensitivity excluding inspected days: -7.82%, CI [-0.0004, 0.1099]. FCLR-011 reproduction: 4.90% vs sealed 4.94% (delta 0.044pp, within +/-0.5pp tolerance, repro_011_pass=True). Pipeline reproduction gap closed by fixing build_legacy_panel funding load range to match run_evaluation.py START_ALL (2026-01-01). Forward confirmation does NOT replicate the FCLR-011 PASS out-of-sample: C2 is significantly worse than B1 on fresh data (2026-08-03..2026-10-31). Verdict: NOT_REPLICATED. Artifacts: research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061555Z.{md,json}; panel/build report.",
    "reopen_requires": [],
    "campaign": "FCLR-HEAVY-CONFIRM-20261113T041200Z"
+  },
+  {
+   "id": "H_fclr_liq_010_confirm",
+   "type": "primary_tracka_observed_liquidation",
+   "description": "Independent recomputation of the sealed FCLR-010 observed-liquidation PASS (C2 vs B1 Brier contrast) on the cached Hyperliquid ironflow census restricted to the 17 symbols with cached funding.",
+   "status": "NOT_REPLICATED",
+   "frozen_at": "2026-11-13T06:30:00Z",
+   "last_tested": "2026-11-13T06:59:53Z",
+   "last_experiment": "FCLR-LIQ-010-CONFIRM-20261113T063000Z",
+   "last_verdict": "NOT_REPLICATED",
+   "terminal": true,
+   "terminal_class": "NOT_REPLICATED",
+   "evidence": "Independent recompute on 17 funded symbols (ironflow census 2025-11-01..2026-10-31; test 64056 symbol-hour rows, 157 days). Sealed reference FCLR-010: C2 vs B1 Brier mean diff -0.003077, 95% CI [-0.004892,-0.001263], rel reduction 2.21%, 199 instruments (live access). Recomputed C2 vs B1 Brier mean diff -0.000690, 95% CI [-0.001106,-0.000316] (excludes zero, improving), relative reduction 0.501% (< 2% materiality floor). LOIO: 0/17 held-outs meet >=2% materiality with CI excludes zero (all 17 CIs exclude zero but rel reduction ~0.39-0.60%). Placebo: null_p95 0.525% vs true 0.501%, pass=False (200 permutations). Leakage audit PASS. Narrower 17-symbol offline recompute does not replicate the sealed PASS on pre-registered gates. Verdict: NOT_REPLICATED (primary CI excludes zero but relative reduction below materiality floor; robustness checks fail). Artifacts: research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.{md,json}; panel fclr_liq_010_confirm_panel_20261113T065953Z.parquet; build report fclr_liq_010_confirm_build_report_20261113T065953Z.json.",
+   "reopen_requires": ["NEW_OBSERVED_LIQUIDATION_SOURCE"],
+   "campaign": "FCLR-NEXT-CAMPAIGN-20261113T063000Z",
+   "verdict_recorded": true,
+   "artifact_hash": "183edb1633de50555d0833e072920574b9e4877026ce6555998bb546dcd23d78",
+   "panel_hash": "ec225a17683a76783fd480a27f41910a6f1920eed71e348fcd7a990433cbac52",
+   "prereg_hash": "ee70e04fade29a583c738835399db33be0d8c412862f5ba2de78dbb2316c116f"
   }
  ],
- "updated_utc": "2026-11-12T22:40:00Z"
+ "updated_utc": "2026-11-13T07:01:00Z"
 }
