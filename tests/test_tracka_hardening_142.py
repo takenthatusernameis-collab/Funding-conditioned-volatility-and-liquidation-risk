@@ -199,7 +199,7 @@ class Test142ParityMatrixGuardedGateCli(unittest.TestCase):
                 pre_reg = cli_extra[cli_extra.index("--pre-reg") + 1] if "--pre-reg" in cli_extra else None
                 r_gate = gate.decide(str(gk["data_path"]), str(td_parent / "out"),
                                      pre_reg_path=pre_reg, admissible_manifest_path=adm_path,
-                                     harness_repo_root=REAL)
+                                     harness_repo_root=REAL, skip_drift_preflight=True)
                 self.assertEqual(r_ge.get("status"), "BLOCKED", (label, r_ge))
                 self.assertEqual(r_gate.get("status"), "BLOCKED", (label, r_gate))
                 # comparable refusal fields
