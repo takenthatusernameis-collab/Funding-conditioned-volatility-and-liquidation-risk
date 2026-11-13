@@ -1,4 +1,10 @@
-# AGENT HANDOFF — 2026-11-13T21:40:00Z (authoritative, single durable handoff)
+# AGENT HANDOFF — 2026-11-13T22:27:02Z (authoritative, single durable handoff)
+
+## START HERE — INITIAL TASK FOR NEXT SESSION (2026-11-13T22:27:02Z) — HEAVY WORK REQUIRED
+- **Execute now (no planning-only, no status-only, no NO_GO while executable):** complete **FCLR-FORWARD-LIQ-2026Q1Q2 Phase 1→4** on the on-disk admissible ironflow Hyperliquid forward bulk cache (offline; no network/credentials/external trigger).
+- **Current machine-checked state:** `python3 scripts/fclr_campaign_gate.py --arm all` → **12/16 PASS**; blocking **F1, F3_panel, F3_report, F4** (Arm A/B green). Red Arm F is intentional proof the forward cell is unbuilt — make it **16/16** by building real artifacts, never by weakening the gate.
+- **Done means:** frozen forward prereg (`prereg_tracka_liq_xsec_forward_2026q1q2_<UTC>.json/md`) written before outcomes; forward builder + panel + build report (`panel_sha256`) + `evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-*.json` with recognized verdict; `fclr_campaign_gate.py --arm all` 16/16; deterministic tests green; `experiment_frontier.json` and this handoff §7e updated with actual results/next heavy task; commit code/manifests/provenance/reports only (never raw parquet/caches).
+- **Do not:** re-run terminal Binance cells, probe sealed/Gate-4 paths, read May 2026, fabricate artifacts/thresholds/verdicts, or stop after planning. Follow the exact Phase 1-4 spec below.
 
 **INITIAL TASK FOR NEXT SESSION — execute this now. Heavy work is mandatory; do not stop at planning, status, or a NO_GO memo.**
 Run campaign **FCLR-FORWARD-LIQ-2026Q1Q2 Phase 1→4** to a terminal, evidence-backed verdict on the already-on-disk,
