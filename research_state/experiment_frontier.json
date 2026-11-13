@@ -1,12 +1,45 @@
 [
  {
-  "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
+  "task": "FCLR-NEXT-CAMPAIGN-20261113T091500Z",
   "rank": 0,
-  "status": "COMPLETED_CAMPAIGN_NEXT_PREREG_REQUIRED",
-  "program_status": "COMPLETED_CAMPAIGN_NEXT_PREREG_REQUIRED",
+  "status": "ACTIVE_HEAVY_CAMPAIGN",
+  "program_status": "ACTIVE_HEAVY_CAMPAIGN",
+  "next_unfinished_task": null,
+  "generated": "2026-11-13T09:15:00Z",
+  "last_checked": "2026-11-13T10:04:51Z",
+  "blockers": "Cell FWD-VOL-2024Q4-CROSS now terminal NOT_REPLICATED (gate PASS). Next heavy route requires either a newly admissible observed-liquidation source (Track A) or another materially different cached window/venue (Track C). Alt-source scan 20261113T090105Z found no GO unauthenticated observed-liquidation source meeting minima.",
+  "next_action_heavy": "Execute the next cell of FCLR-NEXT-CAMPAIGN-20261113T091500Z: freeze a prereg BEFORE outcomes for a genuinely new route. P1 Track A: newly admissible observed-liquidation source -> admissibility audit -> prereg -> execute -> gate. P2 Track C: a cached window/venue not yet tested (not 2024 H2, not 2025-02..2025-05, not 2026-05..2026-08, not 2026-08..2026-10). No status-only sessions.",
+  "cells": [
+   {
+    "cell": "FWD-VOL-2024Q4-CROSS",
+    "status": "COMPLETED",
+    "verdict": "NOT_REPLICATED",
+    "experiment_id": "FCLR-FWD-VOL-2024Q4-CROSS-20261113T091500Z",
+    "artifact": "research_state/evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-20261113T100451Z.json",
+    "gate": "scripts/fclr_fwd_vol_2024_cross_gate.py -> GATE: PASS",
+    "note": "First execution of this cell; was blocked by a prereg/executor naming mismatch (2024q4 vs 2024) now fixed."
+   }
+  ],
+  "supersedes_prior_next_task_entries": [
+   "FCLR-HEAVY-CONFIRM-20261113T041200Z"
+  ],
+  "evidence": {
+   "fclr011_pass": "research_state/evaluation_summary_FCLR-011.md: C2 vs B1 rel QLIKE 4.94%, 95% CI [-0.032546,-0.001418], 5 instruments, 3 blocks",
+   "fwd_vol_011_confirm": "NOT_REPLICATED (rel -5.55%, CI favours B1); gate PASS",
+   "liq_010_confirm": "NOT_REPLICATED (rel 0.501% < 2% floor; LOIO 0/17; placebo fail); gate PASS",
+   "exp_robust_redo": "FRAGILE (LOIO 4/8; placebo fail); gate PASS",
+   "fwd_vol_2025_cross": "NOT_REPLICATED (rel 0.29%; CI crosses zero); gate PASS",
+   "fwd_vol_2024q4_cross": "NOT_REPLICATED (rel -20.77%; CI crosses zero; LOIO 0/5; placebo fail); gate PASS"
+  }
+ },
+ {
+  "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
+  "rank": 1,
+  "status": "SUPERSEDED_TERMINAL",
+  "program_status": "SUPERSEDED_TERMINAL",
   "next_unfinished_task": null,
   "generated": "2026-11-13T04:12:00Z",
-  "last_checked": "2026-11-13T09:01:48Z",
+  "last_checked": "2026-11-13T10:04:51Z",
   "blockers": "No frozen prereg remains. Gate 4 external trigger absent. Alt-source hunt/deep-review 2026-11-13T09:01:19Z: no GO candidate meeting unauthenticated observed-liquidation minima; cached Hyperliquid/ironflow designs exhausted/terminal.",
   "next_action_heavy": "Freeze a new prereg before outcomes for a materially different admissible route: (P1) alternative observed-liquidation source -> admissibility audit -> prereg -> execute; or (P2) cached Binance/other admissible volatility window/venue not previously tested (not 2025-02..2025-05, not 2026-08..2026-10). No status-only sessions.",
   "resume_triggers": [],
@@ -25,7 +58,9 @@
    "liq_010_confirm": "NOT_REPLICATED: research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.json \u2014 C2 vs B1 Brier mean diff -0.000690, CI [-0.001106,-0.000316], rel reduction 0.501% < 2% floor; LOIO 0/17; placebo null_p95 0.525% > true 0.501%; leakage PASS. Panel fclr_liq_010_confirm_panel_20261113T065953Z.parquet sha ec225a17...; build report fclr_liq_010_confirm_build_report_20261113T065953Z.json. Prereg prereg_fclr_liq_010_confirm_20261113T063000Z.json sha ee70e04f... frozen pre-outcomes.",
    "alt_source_scan": "research_state/alt_source_scan_latest.json (20261113T090119Z, no GO candidate)",
    "alt_source_deep_review": "research_state/alt_source_deep_review_latest.md (20261113T090119Z, 0 cache hits, 14 fresh probes, all NO-GO/incompatible)"
-  }
+  },
+  "superseded_by": "FCLR-NEXT-CAMPAIGN-20261113T091500Z",
+  "note": "All four terminal cells complete (FCLR-FWD-VOL-011-CONFIRM, FCLR-LIQ-010-CONFIRM, FCLR-EXP-ROBUST-REDO, FCLR-FWD-VOL-2025-CROSS). Demoted from rank 0 after terminal closure."
  },
  {
   "task": "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z",

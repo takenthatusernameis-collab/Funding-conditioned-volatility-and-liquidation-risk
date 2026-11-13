@@ -1,0 +1,44 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2024Q4-CROSS-20261113T091500Z",
+ "generated_utc": "2026-11-13T10:04:51Z",
+ "panel_path": "tracka_fwd_vol_2024q4_cross_panel_20261113T100451Z.parquet",
+ "panel_sha256": "5349fc345eb479366d5c169f5f31f8e06ac91cb6c7ca5903cd03d26420c7d99b",
+ "n_rows": 21960,
+ "n_valid_rows": 10080,
+ "coverage_target_24h": {
+  "BTCUSDT": 2184,
+  "ETHUSDT": 2184,
+  "BNBUSDT": 2184,
+  "SOLUSDT": 2184,
+  "XRPUSDT": 2184
+ },
+ "blocks": [
+  {
+   "block": 0,
+   "train_end": "2024-07-16T23:00:00Z",
+   "embargo": "2024-07-17T00:00:00Z..2024-07-22T23:00:00Z",
+   "test_start": "2024-07-23T00:00:00Z",
+   "test_end": "2024-08-21T23:00:00Z",
+   "days": 30
+  },
+  {
+   "block": 1,
+   "train_end": "2024-08-13T23:00:00Z",
+   "embargo": "2024-08-14T00:00:00Z..2024-08-19T23:00:00Z",
+   "test_start": "2024-08-20T00:00:00Z",
+   "test_end": "2024-09-18T23:00:00Z",
+   "days": 30
+  },
+  {
+   "block": 2,
+   "train_end": "2024-09-09T23:00:00Z",
+   "embargo": "2024-09-10T00:00:00Z..2024-09-15T23:00:00Z",
+   "test_start": "2024-09-16T00:00:00Z",
+   "test_end": "2024-09-30T23:00:00Z",
+   "days": 15
+  }
+ ],
+ "inputs": "research_state/data_cache/{SYM}_2024_MM/{markPriceKlines,premiumIndexKlines,indexPriceKlines}-{date} + {SYM}-fundingRate-{YYYY-MM}",
+ "network_used": false,
+ "sealed_artifacts_mutated": false
+}

@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RS = ROOT / "research_state"
 CAMPAIGN = "FCLR-HEAVY-CONFIRM-20261113T041200Z"
+ACTIVE_CAMPAIGN = "FCLR-NEXT-CAMPAIGN-20261113T091500Z"
 PRIOR_CAMPAIGN = "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z"
 PREREGS = {
     "TRACKA-VOL-FULLHIST-20261112T201536Z": "prereg_tracka_vol_fullhist_20261112T201536Z.json",
@@ -66,7 +67,9 @@ class TestActiveCampaignGate(unittest.TestCase):
         rank0 = [e for e in frontier if e.get("rank") == 0]
         self.assertEqual(len(rank0), 1, f"expected exactly one rank-0 entry, got {len(rank0)}")
         e = rank0[0]
-        self.assertEqual(e.get("task"), CAMPAIGN)
+        # The active campaign advances as cells close. The rank-0 entry must be
+        # an ACTIVE_HEAVY_CAMPAIGN; superseded campaigns must be demoted, not deleted.
+        self.assertIn(e.get("task"), {CAMPAIGN, ACTIVE_CAMPAIGN})
         self.assertEqual(e.get("status"), "ACTIVE_HEAVY_CAMPAIGN")
         self.assertEqual(e.get("program_status"), "ACTIVE_HEAVY_CAMPAIGN")
         # The prior all-NOT_MET campaign must be demoted, not deleted.

@@ -21,10 +21,10 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 RS = REPO / "research_state"
-PREREG_GLOB = "prereg_fclr_fwd_vol_2024_cross_*.json"
-EVAL_GLOB = "evaluation_summary_FCLR-FWD-VOL-2024-CROSS-*.json"
-PANEL_GLOB = "tracka_fwd_vol_2024_cross_panel_*.parquet"
-BUILD_REPORT_GLOB = "tracka_fwd_vol_2024_cross_build_report_*.json"
+PREREG_GLOB = "prereg_fclr_fwd_vol_2024q4_cross_*.json"
+EVAL_GLOB = "evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-*.json"
+PANEL_GLOB = "tracka_fwd_vol_2024q4_cross_panel_*.parquet"
+BUILD_REPORT_GLOB = "tracka_fwd_vol_2024q4_cross_build_report_*.json"
 REQUIRED_CHECKS = [
     "materiality_ge_2pct",
     "ci_excludes_zero_improving",

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """FCLR-FWD-VOL-2024-CROSS — Track C volatility period-specificity on 2024 H2 (P1).
 
-Frozen prereg: research_state/prereg_fclr_fwd_vol_2024_cross_20261113T091500Z.{json,md}
+Frozen prereg: research_state/prereg_fclr_fwd_vol_2024q4_cross_20261113T091500Z.{json,md}
 
 Tests whether the sealed FCLR-011 funding-conditioned volatility PASS (C2 vs B1,
 +4.94% relative QLIKE reduction, 5 instruments, 3 blocks, 2026-05..2026-08)
-replicates on a disjoint, never-tested 2024-07-07..2024-09-30 rolling-origin
+replicates on a disjoint, never-tested 2024-07-23..2024-09-30 rolling-origin
 walk-forward over the cached Binance public archive.
 
 Cached-only. No network. No mutation of any sealed artifact. The prereg is asserted
@@ -35,7 +35,7 @@ if str(REPO / "scripts") not in sys.path:
 import fclr_fwd_vol_confirm as fwd  # noqa: E402
 
 RS = REPO / "research_state"
-PREREG = RS / "prereg_fclr_fwd_vol_2024_cross_20261113T091500Z.json"
+PREREG = RS / "prereg_fclr_fwd_vol_2024q4_cross_20261113T091500Z.json"
 UTC = fwd.UTC
 
 DATA_START = prereg_data_start = "2024-04-01T00:00:00Z"
@@ -122,7 +122,7 @@ def main() -> None:
     prereg = json.loads(PREREG.read_text())
     assert prereg["status"] == "FROZEN_PRE_OUTCOMES"
     assert prereg["outcome_data_inspected_before_freeze"] is False
-    assert prereg["experiment_id"] == "FCLR-FWD-VOL-2024-CROSS-20261113T091500Z"
+    assert prereg["experiment_id"] == "FCLR-FWD-VOL-2024Q4-CROSS-20261113T091500Z"
 
     out_utc = args.out_utc or now_utc()
     safe = out_utc.replace(":", "").replace("-", "")
@@ -288,7 +288,7 @@ def main() -> None:
         print(json.dumps(payload, indent=1, default=str))
         return
 
-    panel_path = RS / f"tracka_fwd_vol_2024_cross_panel_{safe}.parquet"
+    panel_path = RS / f"tracka_fwd_vol_2024q4_cross_panel_{safe}.parquet"
     panel.to_parquet(panel_path, index=False)
     build_report = {
         "experiment_id": prereg["experiment_id"],
@@ -303,8 +303,8 @@ def main() -> None:
         "network_used": False,
         "sealed_artifacts_mutated": False,
     }
-    (RS / f"tracka_fwd_vol_2024_cross_build_report_{safe}.json").write_text(json.dumps(build_report, indent=1))
-    (RS / f"evaluation_summary_FCLR-FWD-VOL-2024-CROSS-{safe}.json").write_text(json.dumps(payload, indent=1, default=str))
+    (RS / f"tracka_fwd_vol_2024q4_cross_build_report_{safe}.json").write_text(json.dumps(build_report, indent=1))
+    (RS / f"evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-{safe}.json").write_text(json.dumps(payload, indent=1, default=str))
 
     md = [f"# Evaluation Summary — {prereg['experiment_id']}", "",
           f"Generated: {out_utc}", f"Verdict: **{verdict}**", "",
@@ -332,10 +332,10 @@ def main() -> None:
     if placebo:
         md += ["", "## Placebo (funding permutation)", "",
                f"- null p95: {placebo['null_p95']:.2f}% vs true {placebo['true_rel_reduction_pct']:.2f}% -> pass={placebo['pass']}", ""]
-    (RS / f"evaluation_summary_FCLR-FWD-VOL-2024-CROSS-{safe}.md").write_text("\n".join(md))
+    (RS / f"evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-{safe}.md").write_text("\n".join(md))
     print(json.dumps({"verdict": verdict, "checks": checks,
                       "primary": primary, "panel": panel_path.name,
-                      "eval": f"evaluation_summary_FCLR-FWD-VOL-2024-CROSS-{safe}.json"},
+                      "eval": f"evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-{safe}.json"},
                      indent=1, default=str))
 
 
