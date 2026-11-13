@@ -111,7 +111,15 @@ def main() -> None:
     assert prereg["outcome_data_inspected_before_freeze"] is False
 
     # ---- 1. Load observed liquidation labels (existing verified cache) ----
-    label_months = [f"2025-{m:02d}" for m in range(5, 11)]
+    # The frozen prereg's "Data" table lists labels 2025-05..2025-10, but its Splits
+    # table scores test blocks 0/1/2 through 2026-01-17, whose next-24h targets need
+    # labels through 2026-01-17. Those months are cached in ironflow_events/ and are
+    # inside the admissible label ceiling (2025-05-25..2026-10-31) -- NOT in the
+    # reserved (2026-01-18..2026-04-30) or sealed (2026-05-01..2026-10-31) windows.
+    # The day filter below (<= 2026-01-17) guarantees no reserved-window timestamp is
+    # ever used. Design (universe rule, splits, score, inference) is unchanged.
+    label_months = [f"{y:04d}-{m:02d}" for y in (2025, 2026) for m in range(1, 13)
+                    if "2025-05" <= f"{y:04d}-{m:02d}" <= "2026-01"]
     label_frames, label_sums = [], {}
     for m in label_months:
         p = EVENTS / f"{m}.parquet"
@@ -129,7 +137,15 @@ def main() -> None:
     labels = labels[(labels["day"] >= ts(COVERAGE_START)) & (labels["day"] <= ts(COVERAGE_END))]
 
     # ---- 2. Load candles + funding for universe/eligibility and features ----
-    months = [f"2025-{m:02d}" for m in range(5, 11)]
+    # The frozen prereg's "Data" table lists 2025-05..2025-10 (the originally planned
+    # fetch range), but its Splits table and coverage-only universe rule require
+    # complete hourly candle+funding coverage over the full test window
+    # 2025-10-08..2026-01-17. The bulk manifest fetched 2025-05..2026-04, so load every
+    # month that intersects the test window. Design (universe rule, splits, score,
+    # inference) is unchanged; only the input load range is extended to satisfy the
+    # frozen coverage predicate.
+    months = [f"{y:04d}-{m:02d}" for y in (2025, 2026) for m in range(1, 13)
+              if "2025-10" <= f"{y:04d}-{m:02d}" <= "2026-01"]
     candles_frames, funding_frames = [], []
     candle_sums, funding_sums = {}, {}
     for m in months:
@@ -145,8 +161,14 @@ def main() -> None:
         funding_frames.append(f)
     candles = pd.concat(candles_frames, ignore_index=True)
     funding = pd.concat(funding_frames, ignore_index=True)
+    # ironflow/hyperliquid-funding settlement timestamps carry sub-second jitter
+    # (observed ~98.6% of rows at e.g. 00:00:00.104Z). Floor to the hourly grid so
+    # funding aligns with the candle grid; the sealed panel builders do the same.
+    funding["timestamp"] = funding["timestamp"].dt.floor("1h")
 
     # ---- 3. Universe selection (ex ante; only label existence counts) ----
+    # tz-aware grid: cached timestamps are tz-aware UTC (e.g. 2025-05-25 14:00:00+00:00);
+    # a naive grid would silently reindex to all-NaN and pass zero coverage.
     test_grid = pd.date_range(ts(TEST_START), ts(TEST_END), freq="1h")
     coin_stats = {}
     for coin, g in labels.groupby("coin"):
@@ -374,7 +396,7 @@ def main() -> None:
              "## Universe (coverage-only, label-existence only)"]
     lines.append(f"- eligible coins (>= {MIN_LIQ_DAYS} liq-days, >= {MIN_LIQ_EVENTS} liq events): {len(eligible)}")
     lines.append(f"- complete hourly candle+funding coverage over test window: {n_coins} coins")
-    lines.append(f"- universe = {universe[:12]} ... ({n_coins} total)", "")
+    lines.append(f"- universe = {universe[:12]} ... ({n_coins} total)")
     lines.append("## Primary estimand: Spearman rank IC(score_d, next-24h liquidation event count)")
     lines.append(f"- mean IC across blocks = {mean_ic if mean_ic is not None else 'NA'}")
     lines.append(f"- pooled IC = {pooled_ic if pooled_ic is not None else 'NA'} (n={pooled_n})")
@@ -382,12 +404,16 @@ def main() -> None:
     for b in range(3):
         pb = per_block[f"block_{b}"]
         lines.append(f"| {b} | {pb['ic'] if pb['ic'] is not None else 'NA'} | {pb['n']} | {per_block_p[f'block_{b}']} |")
-    lines.append(f"- permutation null (1000 reps, seed 20261112): 5th={null_lo}, 95th={null_hi}, pooled p={p_pooled}", "")
+    lines.append(f"- permutation null (1000 reps, seed 20261112): 5th={null_lo}, 95th={null_hi}, pooled p={p_pooled}")
     lines.append("## Secondary: top-k minus bottom-k next-24h notional spread (k = 10% universe, floor 5)")
     for b in range(3):
         v = spread_per_block[f"block_{b}"]
-        lines.append(f"- block {b}: k={v['k'] if v else 'NA'}, top={v['top_k_mean_notional']:.2f} if v else 'NA', bottom={v['bottom_k_mean_notional']:.2f} if v else 'NA', spread={v['spread']:.2f} if v else 'NA'")
-    lines.append(f"- spread sign consistent (positive) in >= 2/3 blocks: {sign_consistent} ({sum(spread_signs)}/{len(spread_signs)})", "")
+        if v is None:
+            lines.append(f"- block {b}: k=NA, top=NA, bottom=NA, spread=NA")
+        else:
+            lines.append(f"- block {b}: k={v['k']}, top={v['top_k_mean_notional']:.2f}, "
+                         f"bottom={v['bottom_k_mean_notional']:.2f}, spread={v['spread']:.2f}")
+    lines.append(f"- spread sign consistent (positive) in >= 2/3 blocks: {sign_consistent} ({sum(spread_signs)}/{len(spread_signs)})")
     lines.append("## Materiality: |mean IC| >= 0.05 AND spread sign consistent >= 2/3 blocks")
     lines.append(f"- |mean IC| = {abs(mean_ic) if mean_ic is not None else 'NA'} >= 0.05: {bool(mean_ic is not None and abs(mean_ic) >= MATERIALITY_IC)}")
     lines.append(f"- decision = {decision}")
