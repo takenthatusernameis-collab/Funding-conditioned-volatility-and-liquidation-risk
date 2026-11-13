@@ -51,7 +51,7 @@ def _write_fixture(root: Path, *, cells=None, verdict_override=None, drop_checks
     for cell in cells:
         (rs / PREREGS[cell]).write_text(json.dumps({
             "status": prereg_status,
-            "outcome_data_inspected_before_freeze": prereg_status == "FROZEN_PRE_OUTCOMES",
+            "outcome_data_inspected_before_freeze": False,
         }))
         verdict = (verdict_override or {}).get(cell, TERMINAL[cell])
         payload = {"verdict": verdict}
@@ -99,12 +99,14 @@ class NextCampaignGateTest(unittest.TestCase):
         self.assertTrue(all(c["ok"] for c in checks), [c for c in checks if not c["ok"]])
 
     def test_nonterminal_verdict_fails(self) -> None:
-        _write_fixture(self.root, verdict_override={"EXP-ROBUST-REDO": "INCONCLUSIVE"})
+        # LIQ-010-CONFIRM accepts CONFIRMED / FRAGILE / NOT_REPLICATED / INCONCLUSIVE,
+        # so use a verdict outside that terminal set to prove fail-closed behaviour.
+        _write_fixture(self.root, verdict_override={"LIQ-010-CONFIRM": "NOT_STARTED"})
         checks = gate.run_gate()
         ok = all(c["ok"] for c in checks)
         self.assertFalse(ok)
         failed = [c["check"] for c in checks if not c["ok"]]
-        self.assertIn("EXP-ROBUST-REDO:terminal_verdict", failed)
+        self.assertIn("LIQ-010-CONFIRM:terminal_verdict", failed)
 
     def test_missing_checks_block_fails(self) -> None:
         _write_fixture(self.root, drop_checks=True)
