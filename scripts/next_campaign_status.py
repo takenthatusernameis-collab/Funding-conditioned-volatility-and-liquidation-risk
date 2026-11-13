@@ -10,6 +10,12 @@ Two failure modes this script exists to prevent:
    executor hardcoded a different filename stem).
 2. A session declares the cached data exhausted while a complete, disjoint,
    never-tested window is still on disk.
+3. A session declares the whole campaign exhausted because the *Binance 5-symbol*
+   design has no feasible run left, while a completely separate cached dataset
+   (the ironflow Hyperliquid bulk parquet: 1h candles + funding + OI + observed
+   liquidation events) still has an untouched region. This actually happened: the
+   tool reported "cache frontier EXHAUSTED" while 2025-11..2026-04 (181 days,
+   ~180 native-perp coins with observed liquidation labels) had never been scored.
 
 Reads only. No network. No outcome computation.
 
@@ -30,6 +36,24 @@ CACHE = RS / "data_cache"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"]
 KINDS = ("markPriceKlines", "premiumIndexKlines", "indexPriceKlines")
+
+# Ironflow Hyperliquid bulk cache. This is a DIFFERENT data domain from the
+# Binance 5-symbol cache above: many native perps, hourly candles + funding + OI
+# + observed liquidation events, CC BY 4.0, unauthenticated, already on disk.
+BULK = RS / "data_cache" / "ironflow_bulk"
+BULK_DATASETS = ("candles_1h", "funding", "open_interest", "liquidations")
+# Regions already consumed by a sealed/terminal cell in the Hyperliquid domain.
+# 2026-01-01..2026-04-30 was declared "reserved untouched" by the FullHist
+# prereg; that reserve is precisely what the next forward cell consumes, so it is
+# NOT a tested window and must stay visible as an executable frontier.
+BULK_TESTED_WINDOWS = [
+    # Arm A train/embargo + Arm B burn-in/scored region of the FullHist campaign.
+    ("2025-05-25", "2026-01-17", "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)"),
+]
+# A forward cell is allowed to use a shorter, pre-registered window when the
+# untouched region cannot fit the 30/30/30 rolling-origin skeleton. Minimum for
+# that reduced design: 60 train + 7 embargo + 3 x 10 test = 97 days.
+MIN_FORWARD_DESIGN_DAYS = 60 + 7 + 3 * 10
 
 # Windows already consumed by a sealed or terminal cell. Keep this list honest:
 # a window listed here must not be re-proposed as "new".
@@ -211,6 +235,92 @@ def design_feasible_months(rows: list[dict]) -> dict:
             "min_design_days": MIN_DESIGN_DAYS}
 
 
+def bulk_months(dataset: str) -> list[str]:
+    """Months present in the ironflow bulk cache for one dataset."""
+    d = BULK / dataset
+    if not d.exists():
+        return []
+    return sorted(p.stem for p in d.glob("*.parquet"))
+
+
+def bulk_frontier() -> dict:
+    """Untouched, feasible regions in the ironflow Hyperliquid bulk cache.
+
+    This is the second data domain the old tool was blind to. A region is
+    usable when it is outside every tested Hyperliquid window and long enough to
+    host a 3-block pre-registered design. Coverage of the datasets is read from
+    the parquet month files already on disk; no file-content reads, no network.
+
+    Month granularity is too coarse to be honest here: the Arm B burn-in starts
+    mid-month (2025-05-25) and the scored region ends 2026-01-17, so a whole
+    month such as 2026-01 is partly tested. This function therefore works in
+    *days*: each dataset's month files give a covered month set, and each month
+    is clipped to the untested day range before measuring contiguous runs.
+
+    Returns per-dataset month counts and contiguous untouched runs with both the
+    full 30/30/30 and the forward-reduced 60/7/3x10 feasibility flags.
+    """
+    present = {ds: bulk_months(ds) for ds in BULK_DATASETS}
+    if not any(present.values()):
+        return {"present": present, "runs": [], "any_feasible": False,
+                "any_forward_feasible": False,
+                "min_design_days": MIN_DESIGN_DAYS,
+                "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
+
+    common = set(present.get("candles_1h", []))
+    for ds in BULK_DATASETS:
+        common &= set(present.get(ds, []))
+    if not common:
+        return {"present": present, "runs": [], "any_feasible": False,
+                "any_forward_feasible": False,
+                "min_design_days": MIN_DESIGN_DAYS,
+                "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
+
+    # Expand covered months to a sorted set of UTC dates, then drop tested days.
+    import datetime as _dt
+
+    covered: set[_dt.date] = set()
+    for m in common:
+        y, mo = int(m[:4]), int(m[5:7])
+        _, ndays = _month_days(m), None
+        for d in range(1, _month_days(m) + 1):
+            covered.add(_dt.date(y, mo, d))
+
+    def _tested(day: _dt.date) -> bool:
+        for a, b, _lbl in BULK_TESTED_WINDOWS:
+            da = _dt.date.fromisoformat(a)
+            db = _dt.date.fromisoformat(b)
+            if da <= day <= db:
+                return True
+        return False
+
+    usable = sorted(d for d in covered if not _tested(d))
+
+    runs: list[dict] = []
+    cur: list[_dt.date] = []
+    for d in usable:
+        if cur and (d - cur[-1]).days != 1:
+            runs.append(cur)
+            cur = []
+        cur.append(d)
+    if cur:
+        runs.append(cur)
+
+    out = []
+    for run in runs:
+        days = len(run)
+        out.append({"start": run[0].isoformat(),
+                    "end": run[-1].isoformat(),
+                    "span_days": days,
+                    "feasible": days >= MIN_DESIGN_DAYS,
+                    "feasible_forward": days >= MIN_FORWARD_DESIGN_DAYS})
+    return {"present": present, "runs": out,
+            "any_feasible": any(r["feasible"] for r in out),
+            "any_forward_feasible": any(r["feasible_forward"] for r in out),
+            "min_design_days": MIN_DESIGN_DAYS,
+            "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
@@ -222,12 +332,14 @@ def main() -> None:
     ready = [w for w in windows if w["funding_available"] and not w["inside_tested_window"]]
     partial = [w for w in windows if not w["funding_available"] and not w["inside_tested_window"]]
     feasibility = design_feasible_months(windows)
+    bulk = bulk_frontier()
 
     if args.json:
         print(json.dumps({"actionable_preregs": actionable,
                           "ready_funding_backed_months": ready,
                           "no_funding_months": partial,
-                          "design_feasibility": feasibility}, indent=1))
+                          "design_feasibility": feasibility,
+                          "hyperliquid_bulk_frontier": bulk}, indent=1))
         return
 
     print("== FROZEN PRE-RESULTS PREREGS WITHOUT AN EVALUATION ARTIFACT ==")
@@ -264,8 +376,42 @@ def main() -> None:
             print("\n  -> A full 3-block pre-registered design fits a FEASIBLE run above.")
         else:
             print("\n  -> No contiguous run spans enough days; a 3-block design would "
-                  "need an empty/overlapping train. Cache frontier EXHAUSTED for a full "
-                  "pre-registered funding-conditioned test.")
+                  "need an empty/overlapping train. The Binance 5-symbol design is exhausted.")
+
+    print("\n== HYPERLIQUID BULK FRONTIER (ironflow: candles + funding + OI + observed liq) ==")
+    if not any(bulk["present"].values()):
+        print("  bulk cache absent -> this domain contributes no frontier")
+    else:
+        for ds in BULK_DATASETS:
+            print(f"  {ds:14s} months={len(bulk['present'].get(ds, []))}")
+        runs = bulk["runs"]
+        if not runs:
+            print("  no untouched contiguous region -> Hyperliquid bulk frontier exhausted")
+        else:
+            for r in runs:
+                if r["feasible"]:
+                    tag = "FEASIBLE"
+                elif r["feasible_forward"]:
+                    tag = "FEASIBLE (forward-reduced: 60/7/3x10)"
+                else:
+                    tag = "TOO SHORT"
+                print(f"  {r['start']}..{r['end']}  span={r['span_days']}d  "
+                      f"(need >= {bulk['min_design_days']}d)  {tag}")
+            if bulk["any_feasible"]:
+                print("\n  -> An untouched Hyperliquid region fits a FEASIBLE 3-block design. "
+                      "This is executable heavy work; do NOT close the campaign on the "
+                      "Binance-only exhaustion.")
+            elif bulk["any_forward_feasible"]:
+                print("\n  -> An untouched Hyperliquid region fits a FEASIBLE forward-reduced "
+                      "(60/7/3x10) design. Freeze that prereg and execute; do NOT close the "
+                      "campaign on the Binance-only exhaustion.")
+            else:
+                print("\n  -> No untouched Hyperliquid region is long enough for a 3-block design.")
+
+    if not feasibility["any_feasible"] and not bulk["any_feasible"] and not bulk["any_forward_feasible"]:
+        print("\n  == CAMPAIGN STATUS: no feasible 3-block design in EITHER domain ==")
+    else:
+        print("\n  == CAMPAIGN STATUS: executable heavy work REMAINS (see FEASIBLE above) ==")
 
     print("\n== MONTHS WITH COMPLETE KLINES BUT NO FUNDING (baseline-only designs) ==")
     if partial:

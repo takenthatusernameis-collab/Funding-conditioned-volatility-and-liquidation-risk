@@ -108,6 +108,48 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertTrue(feas["any_feasible"])
         self.assertTrue(feas["runs"][0]["feasible"])
 
+    def test_hyperliquid_bulk_frontier_detects_forward_window(self):
+        """The real frontier: 2026-01-18..2026-04-30 must be surfaced as forward-feasible.
+
+        Regression guard for the false 'cache exhausted' closure: the old tool
+        only modelled the Binance 5-symbol design and declared the campaign
+        exhausted while an untouched 103-day Hyperliquid region with observed
+        liquidation labels sat cached.
+        """
+        bulk = self.mod.bulk_frontier()
+        self.assertTrue(any(d for d in bulk["present"].values()),
+                        "ironflow bulk cache should be present on disk")
+        self.assertTrue(bulk["any_forward_feasible"],
+                        f"untouched Hyperliquid forward window not detected: {bulk['runs']}")
+        fwd = [r for r in bulk["runs"] if r["feasible_forward"]]
+        self.assertTrue(fwd)
+        self.assertGreaterEqual(fwd[0]["span_days"],
+                                self.mod.MIN_FORWARD_DESIGN_DAYS)
+        self.assertEqual(fwd[0]["start"], "2026-01-18")
+        self.assertEqual(fwd[0]["end"], "2026-04-30")
+
+    def test_bulk_tested_window_is_excluded(self):
+        """Arm B's scored region (through 2026-01-17) must not count as untouched."""
+        bulk = self.mod.bulk_frontier()
+        for r in bulk["runs"]:
+            # No run may start inside the tested window and run past it.
+            self.assertFalse(
+                r["start"] <= "2026-01-17" and r["end"] >= "2026-01-17",
+                f"run overlaps tested Arm B region: {r}",
+            )
+        # The forward region must begin strictly after the tested boundary.
+        fwd = [r for r in bulk["runs"] if r["feasible_forward"]]
+        self.assertTrue(fwd)
+        self.assertGreater(fwd[0]["start"], "2026-01-17")
+
+    def test_campaign_status_message_distinguishes_domains(self):
+        """The Binance exhaustion message must not claim the whole campaign is dead."""
+        feasibility = self.mod.design_feasible_months(self.mod.ready_windows())
+        bulk = self.mod.bulk_frontier()
+        self.assertFalse(feasibility["any_feasible"])
+        # Even with Binance exhausted, the bulk domain keeps the campaign alive.
+        self.assertTrue(bulk["any_forward_feasible"])
+
 
 if __name__ == "__main__":
     unittest.main()
