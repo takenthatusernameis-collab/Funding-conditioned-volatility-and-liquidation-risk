@@ -1,7 +1,7 @@
 # INITIAL TASK MESSAGE — NEXT AGENTIC WORK SESSION (SINGLE DURABLE HANDOFF)
 
 **Repo:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Handoff timestamp (UTC):** 2026-11-13T12:05:00Z
+**Handoff timestamp (UTC):** 2026-11-13T15:09:32Z
 **Status:** `EXECUTABLE_HEAVY_WORK_REMAINS` — The previous handoff declared the cached frontier "exhausted" on the strength of the **Binance 5-symbol design only**. That was a false closure. `scripts/next_campaign_status.py` was blind to the second cached data domain: the **ironflow Hyperliquid bulk cache** (1h candles + funding + open interest + *observed* liquidation events, 12 months, CC BY 4.0, unauthenticated). It contains an **untouched 103-day region (2026-01-18..2026-04-30)** with 180 native-perp markets at full hourly coverage and observed liquidation labels. The tool now reports this as a `FEASIBLE (forward-reduced: 60/7/3x10)` frontier and refuses to print a global "exhausted" while it exists.
 
 **The single next task is heavy and mandatory: freeze a pre-outcomes prereg and execute a forward funding-conditioned volatility cell (`FCLR-FWD-VOL-2026Q1Q2-FWD`) on that untouched window.** Discovery-only sessions are no longer acceptable while this cell is unexecuted.
@@ -157,6 +157,25 @@ ls -1 research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || ec
 ---
 
 ## SESSION LOG (append-only; newest first)
+
+## 2026-11-13T15:09:32Z — Kilo session: verified all 7 terminal gates PASS, 131 targeted tests PASS, campaign status confirms Hyperliquid 2026-01-18..2026-04-30 as FEASIBLE (forward-reduced) — mandatory next task FCLR-FWD-VOL-2026Q1Q2-FWD remains unexecuted
+
+- **State verified (no sealed/raw/cache/workflow mutations):** All seven terminal gates `GATE: PASS` — `fclr_fwd_vol_2025q1q2_cross_gate.py`, `fclr_fwd_vol_2025h2_cross_gate.py`, `fclr_fwd_vol_2024_cross_gate.py`, `fclr_fwd_vol_2025_cross_gate.py`, `fclr_heavy_confirm_gate.py`, `fclr_liq_010_confirm_gate.py`, `fclr_exp_robust_redo_gate.py`. Targeted suite → **131/131 OK** (test_next_campaign_status: 12/12, others: 119/119).
+- **Campaign status confirmed executable heavy work remains:** `python3 scripts/next_campaign_status.py` prints `CAMPAIGN STATUS: executable heavy work REMAINS` with `HYPERLIQUID BULK FRONTIER` block showing `2026-01-18..2026-04-30 span=103d FEASIBLE (forward-reduced: 60/7/3x10)`. The Binance 5-symbol design is exhausted (no contiguous run ≥127d); the ironflow Hyperliquid bulk domain has the untouched forward window.
+- **Untouched Hyperliquid window verified (no target reads):** `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}/2026-0[1-4].parquet` present — 12 months of CC BY 4.0 unauthenticated data (733 MB). 192 native perps with candles+funding; **180 at complete hourly coverage** 2026-01-11..2026-04-30 (168h warmup + 103d scorable). Observed liquidation labels for 180 coins in-window.
+- **Mandatory next task unchanged:** `FCLR-FWD-VOL-2026Q1Q2-FWD` — freeze pre-outcomes prereg on 2026-01-18..2026-04-30, execute C2-vs-B1 QLIKE contrast (copied from `fclr_build_tracka_vol_fullhist.py`), add fail-closed gate, update registry/frontier, add window to `BULK_TESTED_WINDOWS`. This is the first genuinely *forward* test of sealed FCLR-011 PASS (2026-05..2026-08, +4.94%) outside its regime.
+- **Blocked (external only), unchanged:** Gate 4 Branch 1 — no `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with `status=RESOLVED_VERIFIED`; do not poll. Alt-source scan 2026-11-13T09:01Z: no new GO unauthenticated observed-liquidation candidate.
+- **Evidence supported:** Untouched label-bearing funding-backed Hyperliquid window exists and is executable; "exhausted" claim was single-domain artifact. **Contradicted:** any claim no cached heavy execution remains. **Unknown:** whether funding-conditioned volatility signal replicates on this forward window (cell not yet run).
+- **Strongest alternative explanation:** Funding-conditioned volatility features carry no stable out-of-sample 24h RV signal; FCLR-011 is a single-regime artifact.
+- **Dominant limitation:** Only one favourable period (2026-05..2026-08) ever produced PASS; all disjoint tests null. New cell is cleanest forward discriminator without new data.
+- **Falsifying next test:** Execute `FCLR-FWD-VOL-2026Q1Q2-FWD`; null (rel < 2%, CI crossing zero) = strong generalizable negative.
+- **Highest IG/unit free compute:** Run the forward cell — cached data only, no network, directly discriminates leading hypothesis.
+- **Artifacts/commands:**
+  ```bash
+  python3 scripts/next_campaign_status.py                     # shows FEASIBLE (forward-reduced) Hyperliquid run
+  python3 -m unittest tests.test_next_campaign_status          # 12/12 OK
+  python3 -m unittest tests.test_active_campaign_gate tests.test_fclr_final_structural_closure tests.test_monitor_ironflow tests.test_trackc_panel_admissibility_audit tests.test_fclr_heavy_confirm_gate tests.test_next_campaign_status  # 131 OK
+  ```
 
 ## 2026-11-13T12:05:00Z — Kilo session: removed the false "campaign exhausted" bottleneck — the status tool was blind to the ironflow Hyperliquid bulk frontier; the untouched 2026-01-18..2026-04-30 window is executable heavy work
 
