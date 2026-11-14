@@ -1,101 +1,34 @@
-# SINGLE DURABLE HANDOFF — 2026-11-14T11:37:01Z (next agentic session)
+# SINGLE DURABLE HANDOFF — 2026-11-14T12:33:25Z (initial task for next agentic session)
 
-## Repository / campaign
-- **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation risk, Hyperliquid/Track A frontier).
-- **Completed P0:** `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z` — **VERDICT: EXPLAINED_BY_ESTIMATOR**
-- **Program status:** ACTIVE, `max_status=EXPLORATORY_ONLY`, `promotable=false`, `audit_only=true`, `does_not_reopen_sealed_verdict=true`.
+## Repository / mission
+- **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation risk; Binance 5-symbol Track C + Hyperliquid/Track A frontier). Forecast validation only; no trading/overlay promotion.
+- **Program state (verified this session):** `scripts/next_campaign_status.py` → no frozen preregs without evaluation artifacts; Binance 5-symbol 3-block design exhausted; Hyperliquid 2026-01-18..2026-04-30 forward-reduced (60/7/3×10) region is **no longer untouched** (forward liq-xsec and vol-forward executed). `scripts/fclr_campaign_gate.py --arm all` **19/19 PASS**. Gate 4 blocker pipeline **27/27 PASS**. Final structural closure **5/5 PASS**. Reconciliation tests **10/10 PASS**. Track A hardening (140,142) **PASS**.
 
-## Reconciliation Complete — 2×2 Audit Results
+## Completed / terminal (do not reopen or re-execute)
+- **FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z — COMPLETE, EXPLAINED_BY_ESTIMATOR (EXPLORATORY_ONLY, promotable=false).** 2×2 audit on identical 1,472 (coin,ts) keys: sealed+sealed 19.0371%, recompute+sealed 19.0371%, sealed+recompute 6.19%, recompute+recompute 6.19% C2_vs_B1 QLIKE reduction. Gap fully explained by estimator (raw/unscaled, fill-missing-0 vs z-scored train-only scaling, drop-missing), not data. Artifacts: `prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.{json,md}`, `evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-20261114T113226Z.{json,md}` (latest), `scripts/fclr_liq_expansion_reconcile.py`, `tests/test_fclr_liq_expansion_reconcile.py`. Sealed verdicts unchanged.
+- **TRACKA-HL-EXPANSION (2026-05..2026-10, 8-symbol, observed liq):** prereg frozen/executed; sealed PASS 19.04% (`tracka_hl_expansion_eval_result_20261111T202344Z.json`) but robustness **FRAGILE** (LOIO 4/8, placebo FAIL); independent recompute **INCONCLUSIVE** (6.19%); reconciliation above explains estimator delta. Panel/build/eval artifacts exist — **do not re-acquire, rebuild, or re-evaluate**.
+- **TRACKA-VOL-FULLHIST (2025-06-01..2026-01-17):** `evaluation_summary_TRACKA-VOL-FULLHIST-2026-11-13T02:44:48Z.json` **NOT_MET** (terminal).
+- **Forward 2026Q1Q2 (2026-01-18..2026-04-30, Hyperliquid bulk):** `TRACKA-LIQ-XSEC-FORWARD` **EXPLORATORY_NULL** (`evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json`), `TRACKA-VOL-FORWARD` **EXPLORATORY_NULL/VALID_EXPLORATORY** (`evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T03:30:40Z.json`). Both complete; region no longer available for a fresh forward claim.
+- **Track C volatility cross-period:** FCLR-011 sealed PASS (2026-05..2026-08) does not generalize (2024Q4/2025/2025H2/2025Q1Q2/forward confirm all NOT_REPLICATED). H1_primary NOT_SUPPORTED (terminal). Gate 4 Branch 1 (terms/legal) **EXTERNAL_BLOCKED** — agent must not set `RESOLVED_VERIFIED` or `fabricated=true`.
 
-| | Sealed Estimator | Recompute Estimator |
-|---|---|---|
-| **Sealed panel** | **19.0371%** | **6.19%** |
-| **Recompute panel** | **19.0371%** | **6.19%** |
+## CURRENT BOTTLENECK (blocking new confirmatory/heavy execution)
+- No unfrozen/unexecuted preregistered heavy cell remains on cached/admissible data; Binance and Hyperliquid 2026Q1Q2 forward designs are exhausted/tested; no valid Gate 4 trigger; no verified new observed-liquidation source meeting §16 minima (≥5 instruments, ≥3 non-overlapping 30-day blocks or equivalent complete-month design as preregistered, unauthenticated, provenance/license, observed-only labels, venue-consistent, joinable).
+- **Stale directives removed:** prior handoffs instructed "Execute Step 1 of TRACKA-HL-EXPANSION" — that campaign is already acquired/built/evaluated/reconciled; do not repeat.
 
-- **Sealed reference (TRACKA-HL-EXPANSION):** 19.04% C2_vs_B1 QLIKE reduction
-- **Recompute reference (FCLR-LIQ-EXPANSION-RECOMPUTE):** 6.19% C2_vs_B1 QLIKE reduction
-- **Gap:** 12.85 percentage points
-- **Verdict:** **EXPLAINED_BY_ESTIMATOR** — The gap is 100% attributable to estimator differences, not data differences. Both panels share 1,472 identical (coin, ts) keys.
+## NEXT HEAVY WORK CAMPAIGN (mandatory; no status-only session) — 2026-11-14T12:33:25Z
+**Campaign:** `FCLR-NEW-ADMISSIBLE-SOURCE-AUDIT-20261114T123325Z` (bounded, one-shot, fail-closed)
 
-### Key Finding
-The sealed estimator (`tracka_hl_evaluate_successor.py`) uses **raw features without z-scoring, filling missing with 0.0**. The recompute estimator (`fclr_liq_expansion_recompute.py`) uses **z-scored features with train-only scaling, dropping missing**. This methodological difference fully explains the 19.04% vs 6.19% discrepancy.
+1. **External trigger check (deterministic, local):** search `research_state/` for any `fclr016_v5_terms_evidence_RESOLVED_*.json` with `status==RESOLVED_VERIFIED`, `fabricated==false`, and human/legal attestation fields present. If **present and valid** → immediately execute Gate 4 Branch 1 path per existing gate scripts/tests (no outcome peeking beyond prereg) and record verdict/evidence. If **absent** → record `NO_VALID_GATE4_TRIGGER` with exact glob/result and proceed to (2).
+2. **Admissibility re-audit of any untested candidate (heavy, evidence-first):** review `research_state/alt_source_scan_latest.json`, `research_state/alt_source_deep_review_latest.md`, `research_state/data_source_registry*.json`, and `scripts/hunt_alternative_liquidation_sources.py` outputs. Identify **zero or more** candidates not previously terminally rejected for §16 minima. For each: perform a **bounded unauthenticated probe** (no credentials, no payment, no manual download, honor rate limits, single pass with backoff cap) to verify access, schema/fields, observed-vs-modeled label nature, history depth, instrument count, and license/provenance. Emit `research_state/new_data_admissibility_audit_<UTC>.{json,md}` with per-candidate PASS/FAIL and exact failing minima.
+3. **Branch on result:**
+   - **If any candidate passes §16 minima:** freeze a NEW prereg (`FROZEN_PRE_OUTCOMES`, before outcomes) specifying design/splits/estimand/gates, then execute acquisition→panel build→evaluation→verdict with hashes and gate tests. Update `experiment_frontier.json`/`hypothesis_registry.json`/`run_manifest.json`/`final_confirmatory_verdict.md` atomically. This is the highest-value executable path.
+   - **If none pass:** emit timestamped `research_state/structural_exhaustion_confirmation_<UTC>.md` citing exact probe evidence, failing minima per source, and confirming no agent-removable heavy work remains; set frontier/task state to bounded terminal/trigger-only. **Do not poll or repeat identical probes.**
 
-## Artifacts Produced (All EXPLORATORY_ONLY, promotable=false)
-- `research_state/prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.{json,md}` — Frozen prereg
-- `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-20261114T113226Z.{json,md}` — Full 2×2 evidence with verdict
-- `tests/test_fclr_liq_expansion_reconcile.py` — Regression tests (10/10 pass)
+## Forbidden / regression guards
+- No "campaign exhausted/closed" claim without citing this handoff's verified probe evidence for the specific UTC.
+- No reading sealed/terminal windows for new claims; no outcome inspection before prereg freeze; no threshold shopping.
+- No `.github/workflows` edits; no fabricated `RESOLVED_VERIFIED`; no modeled/synthetic labels labeled observed.
+- Preserve all sealed artifacts (FCLR-002/003/011, Track A/B/C records).
 
-## Validation Gates (All Pass)
-- `python3 scripts/next_campaign_status.py` — Hyperliquid forward window FEASIBLE (103-day untouched region)
-- `python3 scripts/fclr_campaign_gate.py --arm all` — **19/19 PASS**
-- Gate 4 blocker pipeline (tests/test_fclr019..023) — **27/27 PASS**
-- Track C admissibility/provenance/gap repair — **PASS** (1 test timeout, rest pass)
-- Final structural closure (test_fclr_final_structural_closure.py) — **5/5 PASS**
-- New reconciliation tests (test_fclr_liq_expansion_reconcile.py) — **10/10 PASS**
-
-## Known Test Failures (Expected)
-- `test_tracka_hardening_140.py::test_gate_nonexistent_data_path_blocked_stable` — Drift preflight detects new reconciliation artifacts (correct behavior)
-- `test_tracka_hardening_140.py::test_gate_unreadable_data_path_blocked_stable` — Same cause
-These are **not regressions** — the drift preflight correctly identifies the 8 new timestamped artifacts from this reconciliation.
-
-## NEXT HEAVY WORK CAMPAIGN — FOCUS (Future agents must execute this; no status-only sessions)
-
-**Campaign:** EXECUTE TRACKA-HL-EXPANSION (Liquidation Forecast, Symbol Expansion) — **PRIMARY / MANDATORY**
-
-**Prereg:** `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json` (FROZEN_PRE_OUTCOMES)
-**Window:** 2026-05-01..2026-10-31 (or largest contiguous subwindow)
-**Target:** Observed Hyperliquid liquidation intensity (notional-weighted ironflow events)
-**Contrast:** C2 (funding + RV + premium + ema_dist) vs B1 (RV-only)
-**Metric:** QLIKE, ≥2% relative reduction, CI excludes zero, ≥5 symbols, ≥3 test blocks
-
-**Prereg `next_steps` (must execute in order — do not skip):**
-1. **Bounded acquisition**: `fundingHistory` + `candleSnapshot` 2026-05..2026-10 for top ex-ante candidate symbols (from `candidate_symbols_frozen_ex_ante`, excluding 9 already-cached coins). Record provenance (`.accessed.json` + `.sha256`). **No redundant polling.**
-2. **Ex-ante symbol selection**: Apply frozen rule on cached ironflow labels (2026-05..2026-10 parquets). Metric: sum(notional_usd) per market, >0 events in ≥2 of 6 months, nonzero label variance across test blocks. Target final paired universe ≥5 symbols incl. overlap with 9 cached coins.
-3. **Build deterministic RV-augmented panel**: symbols × 24h buckets with observed label intensity + funding + RV1h/RV24h/RV168h + ema_dist + abs_fund_pct. Emit panel parquet + build report with hashes/coverage/leakage notes.
-4. **Run pre-registered evaluation**: Block bootstrap (≥3 test blocks, 7d embargo, ≥2% materiality, Holm across primary family). Emit `evaluation_summary_TRACKA-HL-EXPANSION-<UTC>.{md,json}` verdict (MET/NOT_MET/INADMISSIBLE per prereg).
-5. **Atomic state update**: `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md` addendum. Preserve sealed 2024 H001 and closed Track A NOT_MET records.
-
-**Scripts likely involved**: `scripts/fclr_build_tracka_liq_xsec.py`, `scripts/tracka_hl_fetch_candles_*`, `scripts/tracka_hl_build_panel_with_rv.py`, `scripts/run_liqmicro_v2.py`, `scripts/tracka_operator_report.py`, `scripts/tracka_resume_gate.py`.
-
-## SECONDARY (execute only after TRACKA-HL-EXPANSION is complete)
-
-### EXECUTE TRACKA-VOL-FULLHIST (Volatility, Full History)
-**Prereg:** `research_state/prereg_tracka_vol_fullhist_20261112T201536Z.md` (JSON twin exists, FROZEN_PRE_OUTCOMES)
-**Window:** 2025-06-01..2026-01-17 (3 test blocks: 2025-10-08..2025-11-06, 2025-11-13..2025-12-12, 2025-12-19..2026-01-17)
-**Reserved untouched:** 2026-01-18..2026-04-30 (MUST NOT BE READ)
-**Universe:** 10 native perps (BTC, ETH, SOL, HYPE, ENA, WLD, FARTCOIN, TRUMP, NEAR, XRP) with complete hourly coverage
-**Contrast:** C2_vs_B1 (primary), 4 horizons × {C2_vs_B1, C1_vs_B1, C2_vs_C1} Holm family (12 tests)
-**Gates:** QLIKE reduction ≥2%, bootstrap CI excludes zero, ≥5 instruments, ≥3 blocks
-
-### HYPERLIQUID FORWARD-REDUCED CELL (2026-01-18..2026-04-30)
-The reserved region from FULLHIST is exactly the forward window detected by `next_campaign_status.py`. A new prereg must be frozen for a **forward-reduced design** (60 train + 7 embargo + 3×10 test = 97 days) on this 103-day region before the campaign can claim closure on the Hyperliquid domain.
-
-## Forbidden Patterns (Regression Guards)
-| Pattern | Why It's Forbidden | Test That Catches It |
-|---------|-------------------|---------------------|
-| Declaring "campaign exhausted" while Hyperliquid bulk has FEASIBLE forward window | False closure happened before | `test_hyperliquid_bulk_frontier_detects_forward_window` |
-| Re-proposing executed prereg as actionable | Frozen prereg without eval sat unexecuted | `test_no_actionable_prereg_while_cells_remain_terminal` |
-| Missing `checks` block in evaluation artifact | Gate 4 fails closed without it | `test_missing_checks_block_fails` |
-| Non-terminal verdict accepted as terminal | Only CONFIRMED/FRAGILE/NOT_REPLICATED/INCONCLUSIVE are terminal | `test_nonterminal_verdict_fails` |
-| Agent setting `RESOLVED_VERIFIED=true` or `fabricated=true` | Human/legal review required for Gate 4 Branch 1 | Multiple Gate 4 tests assert `fabricated=false` |
-| Reading sealed/terminal windows (2026-05-01..2026-10-31, 2026-01-18..2026-04-30 reserved) | Contaminates holdouts | Prereg `forbidden` clauses + `test_tracka_hardening_*` read guards |
-| Outcome inspection before prereg freeze | Violates pre-registration integrity | `test_unfrozen_prereg_fails` |
-
-## Handoff Integrity Checklist
-- [x] `python3 scripts/next_campaign_status.py` shows Hyperliquid forward window FEASIBLE
-- [x] All Gate 4 blocker pipeline tests pass (27/27)
-- [x] All Track C admissibility tests pass
-- [x] Final structural closure test passes (5/5)
-- [x] Campaign gate: 19/19 PASS
-- [x] New reconciliation tests pass (10/10)
-- [x] No sealed window read, no outcome inspection before freeze, no `RESOLVED_VERIFIED` fabrication
-- [x] **2×2 reconciliation complete: EXPLAINED_BY_ESTIMATOR verdict with full evidence**
-
-**If any check fails: STOP. Fix the regression before proceeding.**
-
-## Immediate Next Action for This Session (2026-11-14T11:37:01Z)
-**Execute Step 1 of TRACKA-HL-EXPANSION**: Bounded first-time acquisition of Hyperliquid `fundingHistory` + `candleSnapshot` 2026-05..2026-10 for top ex-ante candidate symbols (from `candidate_symbols_frozen_ex_ante`, excluding the 9 already-cached coins). Record provenance (`.accessed.json` + `.sha256`). Target: confirm admissibility/acquirability for ≥5 final paired symbols.
-
-**Do not** proceed to panel build or evaluation until acquisition + symbol selection are complete and documented with provenance.
-**Do not** touch Gate 4 Branch 1 (terms/legal) — it remains externally blocked. Track A/B execution is independent.
-**Do not** read sealed/terminal windows (2026-05-01..2026-10-31, 2026-01-18..2026-04-30 reserved).
+## Immediate action now
+Run step (1) trigger check, then step (2) bounded re-audit/probes against existing registry/scan artifacts; produce the required timestamped audit/report and, if admissible, freeze+execute new prereg in-session. Record commands, hashes, and verdict in an addendum to this handoff or linked `research_state/` artifacts.
