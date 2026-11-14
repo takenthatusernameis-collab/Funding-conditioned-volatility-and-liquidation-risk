@@ -1,26 +1,26 @@
-# AGENT_HANDOFF — 2026-11-14T14:17:43Z (single durable handoff)
+# AGENT_HANDOFF — 2026-11-14T14:19:09Z (single durable handoff)
 
 ## Project
 `Funding-conditioned-volatility-and-liquidation-risk` (repo: `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`)
 
 ## Initial task for the next agentic work session (start here)
-**State: `TRIGGER_ONLY` (bounded). There is no agent-removable heavy campaign work right now. Do not run status-only or discovery-only sessions.**
+**State: `TRIGGER_ONLY` (bounded). No agent-removable heavy campaign work is available. This is a hard stop unless an explicit trigger is satisfied.**
 
-1. Read this file, then `research_state/experiment_frontier.json` rank 0, then run `python3 scripts/next_campaign_status.py`.
-2. Check for external triggers (must be new/material since `2026-11-14T13:27:41Z`):
-   - Gate 4: `ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` — only a file with `status==RESOLVED_VERIFIED`, `fabricated==false`, and human/legal attestation is a valid trigger.
-   - New observed-liquidation source: materially new unauthenticated candidate with evidence not already falsified in `research_state/structural_exhaustion_confirmation_20261114T132741Z.md` / `research_state/new_data_admissibility_audit_20261114T123710Z.json` / `research_state/alt_source_deep_review_latest.md`.
-   - HL label extension: Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels.
-   - Expansion robustness redo: cached-panel robustness/falsification only if a NEW frozen prereg exists pre-outcomes.
-3. **If no trigger is satisfied:** record a brief timestamped verification note in your response and **clean stop**. Do not poll, wait, repeat identical probes, re-execute tested/exhausted windows, or create status-only artifacts.
-4. **If a trigger is satisfied:** execute only the corresponding branch under a **NEW experiment ID** with atomic, pre-outcomes discipline: freeze prereg (before outcomes) → §16 admissibility audit artifact when a new source is involved (ALL minima must pass before prereg/outcomes) → build/eval/verdict → update registry/frontier/manifest/run artifacts with hashes/verdicts. Run relevant gates/tests (`python3 scripts/fclr_campaign_gate.py --arm all` and targeted `unittest` modules). No threshold shopping, no sealed holdout/anchor overwrites.
+1. Read this file, `research_state/experiment_frontier.json` (rank 0), and run `python3 scripts/next_campaign_status.py`.
+2. Check external triggers (new/material since `2026-11-14T13:27:41Z`):
+   - **Gate 4:** `ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` — valid only if `status==RESOLVED_VERIFIED`, `fabricated==false`, and human/legal attestation present.
+   - **New observed-liquidation source (Track A):** materially new unauthenticated candidate not already falsified in `research_state/structural_exhaustion_confirmation_20261114T132741Z.md`, `research_state/new_data_admissibility_audit_20261114T123710Z.json`, `research_state/alt_source_deep_review_latest.md`.
+   - **HL label extension:** Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels.
+   - **Expansion robustness redo:** cached-panel robustness/falsification only with a NEW frozen prereg (pre-outcomes).
+3. **If no trigger is satisfied (current default):** report a brief timestamped verification note and **clean stop**. Do not poll/wait, do not repeat identical probes, do not re-run tested/exhausted windows, do not create status-only artifacts or new handoff files.
+4. **If a trigger is satisfied:** open a **NEW experiment ID** and follow atomic pre-outcomes discipline only: freeze prereg before outcomes → if new source, produce §16 admissibility audit (`research_state/<source>_admissibility_audit_<UTC>.{md,json}`) proving ALL minima before prereg/outcomes → build/eval/verdict → update registry/frontier/manifest/run artifacts with hashes/verdicts. Run relevant gates/tests (`python3 scripts/fclr_campaign_gate.py --arm all`, targeted `unittest`). No threshold shopping, no sealed holdout/anchor overwrites, no `.github/workflows` edits.
 
-## Current verified state (2026-11-14T14:17:43Z)
-- Frontier rank 0: `FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z`, `status=TRIGGER_ONLY`, `program_status=BOUNDED_TRIGGER_ONLY` (`research_state/experiment_frontier.json`).
-- `python3 scripts/next_campaign_status.py` → no unfrozen/unexecuted prereg; no feasible 3-block design in either domain (Binance 5-symbol exhausted; Hyperliquid bulk forward reserve 2026-01-18..2026-04-30 tested/exhausted).
-- Gate 4: **NO_VALID_GATE4_TRIGGER** (no `fclr016_v5_terms_evidence_RESOLVED_*` present; only blocked evidence files exist).
-- New-source admissibility: **0 GO** (`research_state/new_data_admissibility_audit_20261114T123710Z.json`, `research_state/alt_source_deep_review_latest.md`, `research_state/structural_exhaustion_confirmation_20261114T132741Z.md`).
-- Targeted tests (this session): `python3 -m unittest -q tests.test_next_campaign_status tests.test_fclr_campaign_gate` → 41 tests OK.
+## Current verified state (2026-11-14T14:19:09Z)
+- Frontier rank 0: `FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z`, `status=TRIGGER_ONLY`, `program_status=BOUNDED_TRIGGER_ONLY`.
+- `python3 scripts/next_campaign_status.py` (checked this session): no unfrozen/unexecuted prereg; **no feasible 3-block design in either domain** (Binance 5-symbol exhausted; Hyperliquid bulk forward reserve 2025-05-01..2025-05-24, 24d, too short/tested-exhausted context).
+- Gate 4: **NO_VALID_GATE4_TRIGGER** (`ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` → none).
+- New-source admissibility: **0 GO** (prior audits/candidates falsified or not materially new).
+- Bottlenecks are external/blocking (terms/evidence, admissible new observed-label source, HL depth+labels). No local code/data fix can unblock them without a real trigger; avoid busywork.
 
 ## Explicit triggers (only these unblock heavy work)
 | Trigger | Condition | Required action |
