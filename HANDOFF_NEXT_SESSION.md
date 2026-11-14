@@ -1,5 +1,5 @@
 # REDIRECT — not a handoff
 
-**Authoritative single durable handoff: `AGENT_HANDOFF.md` (2026-11-14T01:53:00Z).**
+**Authoritative single durable handoff: `AGENT_HANDOFF.md` (2026-11-14T03:20:41Z).**
 
 Do not execute this file. Read and update `AGENT_HANDOFF.md` only. This file exists solely so old references resolve; it must never contain campaign instructions.

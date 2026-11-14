@@ -1,14 +1,15 @@
 [
   {
-    "task": "FCLR-NEXT-CAMPAIGN-20261113T091500Z",
+    "task": "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z",
     "rank": 0,
     "status": "ACTIVE_HEAVY_CAMPAIGN",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-    "next_unfinished_task": "P1 FCLR-VOL-FORWARD-2026Q1Q2 COMPLETE (bounded structural NO_GO / INADMISSIBLE): universe 0 coins < 5 required (coverage-only); open_interest coverage 1752/1776h across all 192 candidate coins, candle+funding complete. No remaining heavy work on cached data; await Gate 4 Branch 1 trigger or a materially new admissible observed-liquidation source.",
+    "next_unfinished_task": "Execute FCLR-VOL-FORWARD-AUDIT-20261114T032041Z: correct the invalid TRACKA-VOL-FORWARD-2026Q1Q2 evaluator (train-only scaling/fit, finite paired-row block bootstrap, real Holm p-values, explicit execution metadata), re-run on the cached 165-coin/1,485-row panel, harden the campaign gate against NaN CI/placeholder Holm/missing metadata, and emit a corrected timestamped evaluation plus gate/test evidence.",
     "generated": "2026-11-13T09:15:00Z",
-    "last_checked": "2026-11-14T02:33:29Z",
-    "blockers": "P1 FCLR-VOL-FORWARD-2026Q1Q2 executed -> bounded structural NO_GO (INADMISSIBLE): universe 0 coins < 5 required; open_interest coverage 1752/1776h (24h short) across all 192 candidate coins, candle+funding complete. No remaining heavy work on cached data. No P2 GO evidenced (alt_source_scan 0 GO). Await Gate 4 Branch 1 (valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json) or a materially new admissible observed-liquidation source passing section-16 audit before any new prereg/outcome work.",
-    "next_action_heavy": "P1 FCLR-VOL-FORWARD-2026Q1Q2 COMPLETE (bounded structural NO_GO / INADMISSIBLE): universe 0 coins < 5 required (coverage-only); open_interest coverage 1752/1776h across all 192 candidate coins, candle+funding complete. Prereg frozen pre-outcomes; no evaluated targets; frozen-before-outcomes preserved; gate 18/18 PASS; tests 27/27 OK. No remaining heavy work on cached data. Next heavy work ONLY if: (1) Gate 4 Branch 1 valid RESOLVED_VERIFIED trigger appears, or (2) a materially new admissible observed-liquidation source passes section-16 audit -> freeze prereg -> build/eval/verdict under a NEW experiment ID. No status-only output; no re-probing terminal cells.",
+    "refreshed": "2026-11-14T03:20:41Z",
+    "last_checked": "2026-11-14T03:20:41Z",
+    "blockers": "P1 FCLR-VOL-FORWARD-2026Q1Q2 is EXECUTION_INVALID, not a valid null: the 02:45 run fits OLS on test rows, uses unscaled raw RV features that collapse B1/C2 predictions to the 1e-12 clip floor, calls a 168-hour block bootstrap on only 9 daily means (returns NaN), and uses a hard-coded 0.5 placeholder for Holm. Data coverage is adequate (165 coins, 1,485 rows, 3/3 blocks); the blocker is evaluation implementation and gate validation, not missing cached data. No external data is required.",
+    "next_action_heavy": "Execute FCLR-VOL-FORWARD-AUDIT-20261114T032041Z now: (1) create /tmp/fclr-venv and install requirements.txt; (2) preserve the 02:45 artifacts as invalid and confirm the frozen prereg sha256 9ec5186616553c76db7ee58645a8f5c824bba9e401a0025191b6ac7738a108dd is unchanged; (3) fix scripts/fclr_build_tracka_vol_forward.py so scaling/OLS coefficients come from the train split only and the primary bootstrap uses the 1,485 paired test rows with block_h=168/reps=2000; (4) replace placeholder Holm with deterministic paired permutation/bootstrap p-values; (5) add gate checks and fixture tests rejecting non-finite CI, placeholder Holm, and missing execution metadata; (6) re-run the evaluator, gate, and tests; (7) update this frontier and AGENT_HANDOFF.md with the corrected verdict and artifact hashes. Remain EXPLORATORY_ONLY and never promotable.",
     "cells": [
       {
         "cell": "FWD-VOL-2024Q4-CROSS",
@@ -49,12 +50,15 @@
       {
         "cell": "TRACKA-VOL-FORWARD-2026Q1Q2",
         "status": "COMPLETED",
-        "verdict": "INADMISSIBLE",
+        "verdict": "EXPLORATORY_NULL",
+        "execution_status": "INVALID_PENDING_CORRECTED_RECOMPUTE",
         "experiment_id": "TRACKA-VOL-FORWARD-2026Q1Q2-20261114T015222Z",
-        "artifact": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T02:33:29Z.json",
-        "build_report": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:33:29Z.json",
-        "gate": "scripts/fclr_campaign_gate.py --arm all -> 18/18 PASS (F0-F6 incl. vol-forward F5/F6)",
-        "note": "Executed 2026-11-14T02:33:29Z on cached ironflow bulk 2026-01-18..2026-04-30 (103d, forward-reduced 60/7/3x10, no May/sealed reads). Bounded structural NO_GO (outcome B): universe 0 coins < 5 required (coverage-only). Root cause: open_interest coverage 1752/1776 hours (24h short) across all 192 candidate coins; candle and funding coverage complete (1776/1776). Builder ran as-is (fail-closed, no evaluation-logic change); prereg frozen pre-outcomes; no evaluated targets computed. Frozen-before-outcomes preserved. No P2 GO evidenced (alt_source_scan 0 GO). P3 NO_GO recorded; no remaining heavy work on cached data."
+        "artifact": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T02:45:26Z.json",
+        "build_report": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:45:26Z.json",
+        "panel": "research_state/tracka_vol_forward_panel_2026-11-14T02:45:26Z.parquet",
+        "panel_sha256": "dd4258363ef7aebb0504af9d17b48b98221b8e3e67d49f8944d622294d027b56",
+        "gate": "scripts/fclr_campaign_gate.py --arm all -> 18/18 PASS (F6 currently under-validates the invalid eval)",
+        "note": "The 02:33 INADMISSIBLE result is superseded by checkpoint 51ca490c2: the open_interest column was corrected to 'open_interest', yielding 165 coins, 1,485 rows, and 3/3 test blocks. The 02:45 EXPLORATORY_NULL is INVALID: fit_predict_qlike() fits on test rows, raw RV features are unscaled and collapse B1/C2 to the 1e-12 clip floor (QLIKE ~1e8-3e8), the 168-hour block bootstrap is applied to only 9 daily means (NaN CI), and Holm uses a hard-coded 0.5 placeholder. Do not cite as a research null. Correct under FCLR-VOL-FORWARD-AUDIT-20261114T032041Z; preserve all prior artifacts; remain EXPLORATORY_ONLY and never promotable."
       }
     ],
     "supersedes_prior_next_task_entries": [
@@ -73,8 +77,9 @@
     "verification_20261113T214000Z": "gate 12/16 PASS (A0-A6,B1-B4 pass; F1,F3_panel,F3_report,F4 fail closed - forward cell unbuilt); tests 22/22 OK; forward feasible 103 days; 377110 native liq events / 192 native perps / 113 eligible / 0 null notional; labels end 2026-04-30T23:48:51Z; ironflow_bulk/liquidations == ironflow_events for 2026-01..2026-04.",
     "verification_20261113T222702Z": "rechecked: gate 12/16 (blocking F1,F3_panel,F3_report,F4), Arm F intentionally red until forward cell built; forward feasible; handoff refreshed as single durable initial task for FCLR-FORWARD-LIQ-2026Q1Q2 Phases 1-4.",
     "verification_20261113T223155Z": "FCLR-FORWARD-LIQ-2026Q1Q2 complete: prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z frozen before outcomes; forward builder/eval emitted panel 2026-11-13T22:31:55Z (107 coins, 6741 rows, sha256 990598685617b088...) + build report + eval verdict EXPLORATORY_NULL (mean IC -0.02703, pooled IC -0.02512, pooled p 0.031, spread sign 1/3). fclr_campaign_gate.py --arm all 16/16; unittest test_fclr_campaign_gate test_active_campaign_gate 22/22 OK.",
-    "verification_20261113T223515Z": "handoff reconciled: gate 16/16 PASS, tests 22/22 OK, forward liq EXPLORATORY_NULL complete; next heavy=P1 FCLR-VOL-FORWARD-2026Q1Q2 (HL vol forward-reduced 2026-01-18..2026-04-30 cached).",
-    "note_handoff_refreshed": "AGENT_HANDOFF.md refreshed 2026-11-14T01:49:18Z as single durable handoff; P1 FCLR-VOL-FORWARD-2026Q1Q2 remains executable heavy next action."
+    "verification_20261114T032041Z": "Stale-handoff audit: checkpoint 51ca490c2 superseded the 02:35 INADMISSIBLE claim after the open_interest schema fix. With /tmp/fclr-venv deps, gate is 18/18 PASS and the two focused unittest modules are 27/27 OK, but the 02:45 vol-forward eval is INVALID: test-row OLS fit, unscaled raw RV features collapsing B1/C2 to the 1e-12 clip floor, 9 daily bootstrap observations vs block_h=168 (NaN CI), and placeholder 0.5 Holm p-values. FCLR-VOL-FORWARD-AUDIT-20261114T032041Z is the executable P0 campaign.",
+    "verification_20261113T223515Z": "HISTORICAL / SUPERSEDED: handoff reconciled at 2026-11-13T22:35:15Z; the then-next heavy task was P1 FCLR-VOL-FORWARD-2026Q1Q2. Superseded by verification_20261114T032041Z.",
+    "note_handoff_refreshed": "AGENT_HANDOFF.md refreshed 2026-11-14T03:20:41Z as single durable handoff; current executable heavy task is FCLR-VOL-FORWARD-AUDIT-20261114T032041Z."
   },
   {
     "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
