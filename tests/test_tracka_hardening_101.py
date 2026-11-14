@@ -157,13 +157,13 @@ class TestDriftInvariantsWiredCLI101(unittest.TestCase):
             root = _mk_repo(td / "repo", None)
             rs = _mk_valid_rs(td / "rs")
             # add files to exceed bound. Bound tracks the committed baseline
-            # (260 as of 2026-11-12T03:2XZ heavy-campaign artifacts); pad generously so
+            # (419 as of 2026-11-14T04:21:39Z heavy-campaign artifacts); pad generously so
             # the negative test stays fail-closed regardless of baseline drift.
-            for i in range(300):
+            for i in range(600):
                 (rs / f"pad_{i:04d}.md").write_text("x")
             checks = trc.drift_invariants(root, research_state_dir=rs)
             self.assertFalse(checks["root_md_json_bounded"]["pass"])
-            self.assertGreater(checks["root_md_json_bounded"]["count"], 163)
+            self.assertGreater(checks["root_md_json_bounded"]["count"], 500)
 
     def test_run_accepts_override_dirs_does_not_touch_real_state(self):
         # smoke: run() can be pointed at synthetic layout via drift check path? run() uses

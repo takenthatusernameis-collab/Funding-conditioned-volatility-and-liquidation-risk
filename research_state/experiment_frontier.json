@@ -45,8 +45,8 @@
   {
     "task": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
     "rank": 1,
-    "status": "COMPLETED",
-    "program_status": "COMPLETED",
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "COMPLETED_VALIDATED",
     "next_unfinished_task": null,
     "generated": "2026-11-14T08:36:42Z",
     "refreshed": "2026-11-14T08:36:42Z",
