@@ -1,4 +1,16 @@
-# SINGLE DURABLE HANDOFF — 2026-11-14T13:31:53Z (initial task for next agentic session)
+# SINGLE DURABLE HANDOFF — 2026-11-14T13:35Z (initial task for next agentic session)
+
+## INITIAL TASK MESSAGE (read and execute this block first)
+**State:** Campaign is **bounded trigger-only / structurally exhausted** for agent-removable heavy work. `AGENT_HANDOFF.md` is the single durable handoff; `NEXT_SESSION_HANDOFF.md` is an obsolete pointer only.
+
+**You MUST do heavy work when a trigger is satisfied. You MUST NOT do status-only or repeated-probe sessions when no trigger is satisfied.**
+
+1. **Mandatory triage (every session, in order):**
+   - `python3 scripts/next_campaign_status.py` (truth: expect "no feasible 3-block design in EITHER domain" unless state changed).
+   - Gate 4: `ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo NO_VALID_GATE4_TRIGGER` and accept only files with `status==RESOLVED_VERIFIED`, `fabricated==false`, and human/legal attestation (reject `*_BLOCKED_*`, `*_UNRESOLVED_*`).
+   - Read `research_state/experiment_frontier.json` rank 0 and `research_state/structural_exhaustion_confirmation_20261114T132741Z.md`.
+2. **If NO trigger is satisfied:** clean stop. Record "still trigger-only" with command outputs; do **not** poll, do **not** repeat probes already falsified in `structural_exhaustion_confirmation_20261114T132741Z.md`, do **not** re-open tested windows (incl. 2026-01-18..2026-04-30, TRACKA-HL-EXPANSION, TRACKA-VOL-FULLHIST, forward LIQ/VOL cells), do **not** reopen sealed/terminal verdicts.
+3. **If a trigger IS satisfied:** execute the matching heavy-work campaign below to completion with fail-closed rigor (prereg before outcomes, provenance/hashes, deterministic artifacts, tests, atomic state/frontier/handoff updates). Future agents must not defer trigger-satisfied work.
 
 ## Repository / mission
 - **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation risk; Binance 5-symbol Track C + Hyperliquid/Track A frontier). Forecast validation only; no trading/overlay promotion.
@@ -21,15 +33,19 @@
 - No unfrozen/unexecuted preregistered heavy cell on cached/admissible data; Binance and Hyperliquid forward designs exhausted/tested; no valid Gate 4 trigger; no verified NEW observed-liquidation source meeting §16 minima (≥5 instruments, ≥3 non-overlapping 30-day blocks or equivalent preregistered complete-month design, unauthenticated, provenance/license, observed-only labels, venue-consistent, joinable).
 - **STALE DIRECTIVES REMOVED:** `NEXT_SESSION_HANDOFF.md` (2026-11-14T09:23:34Z) still says "Execute Step 1 of TRACKA-HL-EXPANSION" and treats forward window as actionable — this is obsolete. `AGENT_HANDOFF.md` and this block supersede it; do not follow stale steps.
 
-## NEXT HEAVY WORK CAMPAIGN (mandatory, bounded, fail-closed) — `FCLR-NEW-ADMISSIBLE-SOURCE-AUDIT-2026-11-14T13:15:35Z` — **COMPLETE 2026-11-14T13:27:41Z**
+## NEXT HEAVY WORK CAMPAIGN (mandatory on trigger, bounded, fail-closed) — bounded trigger-only as of 2026-11-14T13:35Z
 
-**Session result:** structural exhaustion confirmed. No valid Gate 4 trigger; 0 §16-admissible new observed-liquidation sources; all cached-data cells terminal/exhausted; Hyperliquid forward reserve tested/exhausted; Binance design exhausted. **No agent-removable heavy work remains.** Campaign state: **bounded trigger-only**. No polling, no repeated identical probes, no re-execution of tested windows (incl. 2026-01-18..2026-04-30), no status-only sessions.
+**Audit completed:** `FCLR-NEW-ADMISSIBLE-SOURCE-AUDIT-2026-11-14T13:15:35Z` (Steps 1–3). Structural exhaustion confirmed: no valid Gate 4 trigger; 0 §16-admissible new observed-liquidation sources; all cached-data cells terminal/exhausted; Hyperliquid forward reserve tested/exhausted; Binance design exhausted. **No agent-removable heavy work remains until a trigger fires.** No polling, no repeated identical probes, no re-execution of tested windows (incl. 2026-01-18..2026-04-30), no status-only sessions.
 
-Resume triggers (act only when satisfied; see `research_state/experiment_frontier.json` rank 0):
-1. `GATE4_BRANCH_1`: valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears (`status==RESOLVED_VERIFIED`, `fabricated==false`, human/legal attestation) → execute Gate 4 Branch 1 per gate scripts/tests, no outcome peeking beyond prereg.
-2. `NEW_OBSERVED_LIQUIDATION_SOURCE`: materially new candidate not falsified in `structural_exhaustion_confirmation_20261114T132741Z.md` → formal §16 admissibility audit artifact BEFORE any prereg/outcomes → if ADMISSIBLE, freeze prereg pre-outcomes → build/eval/verdict → atomic state updates under a NEW experiment ID.
-3. `HL_LABEL_EXTENSION`: Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels → bounded reprobe only.
-4. `EXPANSION_ROBUSTNESS_REDO`: cached-panel robustness with a NEW frozen prereg pre-outcomes.
+**Resume triggers (act immediately and heavily when satisfied; do not defer):**
+1. `GATE4_BRANCH_1` — valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`status==RESOLVED_VERIFIED`, `fabricated==false`, human/legal attestation).
+   - **Heavy work:** run full Gate 4 blocker pipeline (019–023) and readiness scripts; execute Branch 1 only per frozen prereg/gate contracts; emit gate artifacts, hashes, and verdict; update `experiment_frontier.json`/`hypothesis_registry.json`/handoff atomically. No outcome peeking beyond prereg; agent must never fabricate RESOLVED_VERIFIED.
+2. `NEW_OBSERVED_LIQUIDATION_SOURCE` — materially new candidate (not already falsified in `structural_exhaustion_confirmation_20261114T132741Z.md`).
+   - **Heavy work:** (a) §16 admissibility audit artifact with per-candidate probe evidence, provenance/license, instrument/block/depth checks BEFORE outcomes; (b) if ADMISSIBLE, freeze new prereg pre-outcomes (design/contrasts/metrics/materiality/families); (c) bounded acquisition with `.accessed.json`+`.sha256`; (d) deterministic panel build with leakage/coverage notes; (e) pre-registered evaluation (bootstrap CIs, ≥3 blocks, materiality/robustness gates) and verdict artifact; (f) atomic state updates under a NEW experiment ID. If NOT admissible, record evidence and remain trigger-only.
+3. `HL_LABEL_EXTENSION` — Hyperliquid coverage ≥100d depth AND verified post-2026-10-31 observed liquidation labels.
+   - **Heavy work:** bounded reprobe/audit artifact first; only if a full preregistered design becomes feasible, freeze prereg pre-outcomes then build/eval/verdict with full provenance and state updates. No reuse of tested 2026-01-18..2026-04-30 as a fresh claim.
+4. `EXPANSION_ROBUSTNESS_REDO` — cached-panel robustness recheck with a NEW frozen prereg pre-outcomes.
+   - **Heavy work:** freeze new prereg specifying estimator/robustness family before outcomes; run full robustness battery (LOIO/placebo/blocks/bootstrap) on the specified cached panel; emit eval + reconciliation-quality verdict; atomic updates. No post-hoc threshold shopping.
 
 ## Immediate action for next session
 1. Read `AGENT_HANDOFF.md` (this file) and `research_state/experiment_frontier.json` rank 0; treat `NEXT_SESSION_HANDOFF.md` as OBSOLETE — do not execute its stale TRACKA-HL-EXPANSION / forward-window steps.
