@@ -1,0 +1,179 @@
+{
+  "experiment_id": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
+  "campaign": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "generated": "2026-11-14T11:19:38Z",
+  "frozen_before_outcomes": true,
+  "pre_registered_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "audit_only": true,
+  "does_not_reopen_sealed_verdict": true,
+  "purpose": "2\u00d72 reconciliation audit for the 19.04% vs 6.19% C2_vs_B1 QLIKE gap between the sealed Track A liquidation expansion (TRACKA-HL-EXPANSION-20261111T195500Z, PASS, +19.04% QLIKE rel reduction) and its independent recompute (FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T073346Z, INCONCLUSIVE, +6.19% QLIKE rel reduction). Both share 1,472 (coin, ts) keys over 2026-05-01..2026-10-31. Cells: {Sealed panel, Recompute panel} \u00d7 {Sealed estimator, Recompute estimator}. Verdict in {EXPLAINED_BY_ESTIMATOR, EXPLAINED_BY_DATA, UNEXPLAINED, INCONCLUSIVE}. All results EXPLORATORY_ONLY, promotable=false. Does not reopen sealed verdict.",
+  "sealed_reference": {
+    "verdict_id": "TRACKA-HL-expansion-20261111T202344Z",
+    "panel_sha256": "39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699",
+    "C2_vs_B1": {
+      "rel_reduction_pct": 19.03709721199804,
+      "mean_diff": -2.7097421242345674,
+      "ci": [
+        -5.0881020797243135,
+        -0.4776599249731716
+      ],
+      "n_pairs": 593,
+      "n_blocks": 3
+    },
+    "loio_pass": 4,
+    "loio_total": 8,
+    "placebo_null_p95": 21.1,
+    "placebo_true_rel": 19.0371
+  },
+  "recompute_reference": {
+    "experiment_id": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T073346Z",
+    "panel_sha256": "a4d73c79683550a15e616f3f5fbd93128db1c5498944f9139226f543cfe96715",
+    "C2_vs_B1": {
+      "rel_reduction_pct": 6.19,
+      "mean_diff": -0.19279729,
+      "ci": [
+        -0.42074401,
+        -0.03377946
+      ],
+      "n_pairs": 593,
+      "n_blocks": 3
+    },
+    "loio_pass": 7,
+    "loio_total": 8,
+    "placebo_null_p95": 7.6603,
+    "placebo_true_rel": 6.19
+  },
+  "universe": [
+    "AAVE",
+    "ADA",
+    "BCH",
+    "CRV",
+    "LTC",
+    "NEAR",
+    "UNI",
+    "ZEC"
+  ],
+  "markets": [
+    "AAVE-PERP",
+    "ADA-PERP",
+    "BCH-PERP",
+    "CRV-PERP",
+    "LTC-PERP",
+    "NEAR-PERP",
+    "UNI-PERP",
+    "ZEC-PERP"
+  ],
+  "horizon_hours": 24,
+  "target": {
+    "name": "next_24h_observed_liquidation_intensity",
+    "definition": "next-24h observed ironflow liquidation intensity per symbol per 24h UTC bucket: sum(notional_usd) of observed liquidation events over t+1..t+24h, strictly forward from decision time t",
+    "source_series": "ironflow_events observed liquidation labels (notional_usd)"
+  },
+  "label": {
+    "name": "observed_liquidation_intensity",
+    "definition": "sum(notional_usd) of observed Hyperliquid liquidation events per symbol per 24h UTC bucket (observed liquidations only; no modeled/proxy/synthetic)"
+  },
+  "models": {
+    "B0": [
+      "log_liq_lag1"
+    ],
+    "B1": [
+      "log_rv1h",
+      "log_rv24h",
+      "log_rv168h"
+    ],
+    "C1": [
+      "B1",
+      "signed_funding_z",
+      "abs_fund_pct_z"
+    ],
+    "C2": [
+      "C1",
+      "premium_z",
+      "ema_dist_z"
+    ],
+    "scaling": "train-only mean/std for funding/premium/ema features"
+  },
+  "fit": {
+    "estimator": "OLS",
+    "link": "log(target + 1e-12)",
+    "scaling": "train-only mean/std",
+    "back_transform": "train-only smearing (Duan) on exp(pred)"
+  },
+  "missing_data": {
+    "zero_fill": false,
+    "forward_fill": false,
+    "paired_common_rows": true,
+    "report_coverage_by_symbol_and_feature": true
+  },
+  "primary_metric": "paired out-of-sample QLIKE, C2 vs B1",
+  "secondary_metrics": [
+    "MAE",
+    "RMSE"
+  ],
+  "inference": {
+    "paired": true,
+    "bootstrap": "circular block over complete UTC days",
+    "block_days": 1,
+    "replicates": 2000,
+    "seed": 20261114,
+    "multiplicity": "Holm across C2_vs_B1, C1_vs_B1, C2_vs_C1",
+    "alpha": 0.05,
+    "loio": true,
+    "placebo": "funding permutation within instrument",
+    "placebo_replicates": 200
+  },
+  "splits": {
+    "train": [
+      "2026-05-01T00:00:00Z",
+      "2026-05-31T23:00:00Z"
+    ],
+    "validation": [
+      "2026-06-07T00:00:00Z",
+      "2026-06-30T23:00:00Z"
+    ],
+    "test_blocks": [
+      [
+        "2026-07-07T00:00:00Z",
+        "2026-08-06T23:00:00Z"
+      ],
+      [
+        "2026-08-13T00:00:00Z",
+        "2026-09-11T23:00:00Z"
+      ],
+      [
+        "2026-09-18T00:00:00Z",
+        "2026-10-17T23:00:00Z"
+      ]
+    ],
+    "n_test_blocks": 3,
+    "purge_embargo_days": 7
+  },
+  "stop_rule": {
+    "min_instruments": 5,
+    "min_test_blocks": 3,
+    "min_core_coverage": 0.8,
+    "on_failure": "INADMISSIBLE with exact failing minima; do not relax after outcomes"
+  },
+  "verdict_space": [
+    "EXPLAINED_BY_ESTIMATOR",
+    "EXPLAINED_BY_DATA",
+    "UNEXPLAINED",
+    "INCONCLUSIVE"
+  ],
+  "verdict_rule": {
+    "EXPLAINED_BY_ESTIMATOR": "Gap primarily attributable to estimator differences (same data, different estimator yields different results)",
+    "EXPLAINED_BY_DATA": "Gap primarily attributable to data differences (same estimator, different panel yields different results)",
+    "UNEXPLAINED": "Gap persists across both dimensions; neither estimator nor data alone explains the discrepancy",
+    "INCONCLUSIVE": "Insufficient evidence to attribute; admissibility or numerical limits prevent clean verdict"
+  },
+  "inputs": {
+    "sealed_panel": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+    "recompute_panel": "research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet"
+  },
+  "sealed_artifacts_must_not_change": true
+}
