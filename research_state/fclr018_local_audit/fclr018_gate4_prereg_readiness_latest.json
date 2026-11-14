@@ -160,7 +160,7 @@
         }
       },
       "end": "2024-09-30",
-      "fclr017_reference_global_ok_for_default_scope": true,
+      "fclr017_reference_global_ok_for_default_scope": false,
       "max_non_overlapping_30d_blocks_with_7d_purge": 5,
       "months": [
         "2024-04",
@@ -172,7 +172,7 @@
       ],
       "provenance_status": "IDENTITY_VERIFIED_BOUNDED_FCLR015",
       "purge_embargo_days": 7,
-      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_readable_json": false,
       "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
       "span_days": 183,
       "start": "2024-04-01",
@@ -292,7 +292,7 @@
         }
       },
       "end": "2024-12-31",
-      "fclr017_reference_global_ok_for_default_scope": true,
+      "fclr017_reference_global_ok_for_default_scope": false,
       "max_non_overlapping_30d_blocks_with_7d_purge": 2,
       "months": [
         "2024-10",
@@ -301,7 +301,7 @@
       ],
       "provenance_status": "UNVERIFIED",
       "purge_embargo_days": 7,
-      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_readable_json": false,
       "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
       "span_days": 92,
       "start": "2024-10-01",
@@ -540,7 +540,7 @@
         }
       },
       "end": "2024-12-31",
-      "fclr017_reference_global_ok_for_default_scope": true,
+      "fclr017_reference_global_ok_for_default_scope": false,
       "max_non_overlapping_30d_blocks_with_7d_purge": 7,
       "months": [
         "2024-04",
@@ -555,7 +555,7 @@
       ],
       "provenance_status": "UNVERIFIED",
       "purge_embargo_days": 7,
-      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_readable_json": false,
       "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
       "span_days": 275,
       "start": "2024-04-01",
@@ -854,7 +854,7 @@
         }
       },
       "end": "2025-12-31",
-      "fclr017_reference_global_ok_for_default_scope": true,
+      "fclr017_reference_global_ok_for_default_scope": false,
       "max_non_overlapping_30d_blocks_with_7d_purge": 10,
       "months": [
         "2025-01",
@@ -872,7 +872,7 @@
       ],
       "provenance_status": "UNVERIFIED",
       "purge_embargo_days": 7,
-      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_readable_json": false,
       "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
       "span_days": 365,
       "start": "2025-01-01",
@@ -1171,7 +1171,7 @@
         }
       },
       "end": "2024-12-31",
-      "fclr017_reference_global_ok_for_default_scope": true,
+      "fclr017_reference_global_ok_for_default_scope": false,
       "max_non_overlapping_30d_blocks_with_7d_purge": 10,
       "months": [
         "2024-01",
@@ -1189,7 +1189,7 @@
       ],
       "provenance_status": "UNVERIFIED",
       "purge_embargo_days": 7,
-      "sealed_v3_manifest_readable_json": true,
+      "sealed_v3_manifest_readable_json": false,
       "sealed_v3_manifest_ref": "research_state/run_manifest_funding_v3_30d.json",
       "span_days": 366,
       "start": "2024-01-01",
@@ -1314,9 +1314,9 @@
       "path": "research_state/evaluation_summary_funding_v3_30d.md"
     },
     "v3_manifest": {
-      "note": null,
+      "note": "lfs_pointer_unavailable:research_state/run_manifest_funding_v3_30d.json",
       "path": "research_state/run_manifest_funding_v3_30d.json",
-      "readable": true,
+      "readable": false,
       "sealed_ref_only": true
     },
     "v3_prereg": {
@@ -1330,7 +1330,7 @@
   "prereg_status": "DRAFT_NOT_FROZEN",
   "provenanced_confirmatory_ranges_note": "2024-04-01..2024-09-30 identity-verified bounded (FCLR-015 context) only; confirmatory bounded by PROVENANCED_CONFIRMATORY_RANGES + manifest/terms evidence + admissibility guards.",
   "purpose": "deterministic read-only Gate 4 prereg-readiness/draft design matrix from local evidence; planning/draft only",
-  "report_sha256": "033c33e8259c706acc3202a36de5c1c93c1a9e0a15599de6b9194554e86cc062",
+  "report_sha256": "1c1c954a93d912a16b1badbce39cfad04608f83ac0e7a641c6616fd76f72bfdf",
   "symbols": [
     "BTCUSDT",
     "ETHUSDT",
@@ -1338,7 +1338,7 @@
     "XRPUSDT",
     "BNBUSDT"
   ],
-  "timestamp_utc": "20261108T132537Z",
+  "timestamp_utc": "20261114T173656Z",
   "v5_terms_blocker_state": {
     "all_go": false,
     "confirmatory_outcomes_permitted": false,

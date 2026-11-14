@@ -1,4 +1,4 @@
-# FCLR-018 Gate 4 prereg-readiness matrix (20261108T132537Z)
+# FCLR-018 Gate 4 prereg-readiness matrix (20261114T173656Z)
 
 - method: deterministic local evidence read; read-only; no network; no model-outcome computation
 - prereg_status: **DRAFT_NOT_FROZEN** (NOT FROZEN / NOT PROMOTED / NOT EXECUTABLE AS CONFIRMATORY)
