@@ -1,226 +1,206 @@
-# AGENT HANDOFF — 2026-11-14T08:30:00Z (single durable handoff)
+# AGENT HANDOFF — 2026-11-14T08:36:42Z (single durable handoff)
 
 ## INITIAL TASK FOR NEXT AGENTIC WORK SESSION (MANDATORY, HEAVY, OFFLINE, UNBLOCKED)
 
-**Do this first. Do not produce a status-only, inventory-only, or planning-only response.**
+**Campaign:** `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z`
+**Experiment ID:** `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z`
 
-1. **PRIMARY (must complete in this session unless a hard local error is hit): Verify Phase B completion and await next trigger.**
-   - Confirm `scripts/fclr_liq_expansion_recompute.py` exists and runs (bugs fixed: `design_matrix` signature, `block_keys` `.to_numpy()`, `log_liq_lag1` NaN-on-zero, z-scored-column-before-scaling order).
-   - Confirm `research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}` frozen FROZEN_PRE_OUTCOMES (all required fields correct).
-   - Confirm panel `research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet` (sha256 `a4d73c79...cfe96715`) + build report exist with matching hash.
-   - Confirm `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md}` emitted with verdict **INCONCLUSIVE** (VALID_EXPLORATORY): C2_vs_B1 rel reduction **6.19%** (CI [-0.42074401,-0.03377946], n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed **19.0371%** — **does NOT reproduce** sealed (6.19% < 9.52% = sealed x 0.5). LOIO **7/8** (sealed 4/8) — passes. Placebo **FAIL**: true 6.19% <= null p95 7.6603%. core_coverage 0.9959, instruments 8, test blocks 3 — all stop-rule minima MET.
-   - Confirm tests `tests/test_fclr_liq_expansion_recompute.py` pass (6 tests: prereg frozen fields, panel-hash consistency, non-empty contrasts, sealed-artifact immutability).
-   - Run `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect **19/19 PASS**) and `/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute`.
-   - **Do not** start Phase A unless Phase B verification hits a provable hard stop. Phase A is capped INCONCLUSIVE/EXPLORATORY.
+**Start here. Do not write a status-only, inventory-only, or planning-only response. Do not re-run Phase B. Do not wait for Gate 4 or a new data source.**
 
-2. **SECONDARY (only after Phase B verification is done): Phase A — fix and rerun FCLR-011 recompute.** Phase A is capped INCONCLUSIVE/EXPLORATORY; see diagnosis below. Do **not** let Phase A displace Phase B verification.
+### Why this is the highest-value next task
 
-3. **AFTER VERIFICATION (atomically):** update `research_state/experiment_frontier.json` and `research_state/hypothesis_registry.json` (audit-only; do not alter sealed statuses), append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`, append a dated session log here.
+The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Phase B completed the independent recomputation of the sealed Track A liquidation-expansion PASS, but it returned **INCONCLUSIVE**:
 
-**Next action if no trigger appears:** Document bounded NO_GO with exact missing trigger evidence and stop cleanly. No agent-removable heavy work remains:
-- Gate 4 trigger absent (EXPLICIT_BLOCKER_UNRESOLVED, external/legal — do not wait/poll).
-- No verifiably admissible new observed-liquidation source.
-- HL 2026-11+ ~12d < 100d minimum; no verified post-2026-10-31 observed liquidation labels.
-- All cached-data designs exhausted/sealed.
+- Sealed `TRACKA-HL-EXPANSION-20261111T202344Z`: C2-vs-B1 relative QLIKE reduction **19.0371%**, CI `[-5.088102, -0.477660]`, 593 pairs, 3 blocks, 8 instruments.
+- Recomputed `TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z`: **6.19%**, CI `[-0.42074401, -0.03377946]`, 593 pairs, 3 blocks; placebo FAIL (true 6.19% <= null p95 7.6603%); LOIO 7/8.
 
-**Triggers that would resume heavy work:** GATE4_BRANCH_1 (valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json`), NEW_OBSERVED_LIQUIDATION_SOURCE (>=5 instruments, >=1 complete month or >=3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only), HL_LABEL_EXTENSION (HL >=100d AND verified post-2026-10-31 observed labels).
+The panels have the same 1,472 `(coin, ts)` keys and the same observed liquidation labels, funding, candles, and base features. The unresolved scientific question is therefore not “run Phase B again”; it is:
 
-This handoff **supersedes all prior handoffs**, including 2026-11-14T07:33:46Z, 06:35:00Z, and 06:25:08Z.
+> **Is the sealed 19.04% result an estimator artifact, a data-lineage artifact, or a genuinely non-reproducible result?**
 
-### What I verified myself (do not re-verify, do not re-litigate)
-| Claim | Verified result | Evidence |
+The leading alternative explanation is the estimator difference: the sealed evaluation used raw features, no training-only scaling, no smearing correction, and zero-filled missing funding/premium/EMA values; the recompute used train-only z-scoring, Duan smearing, and complete-case rows. A frozen 2×2 reconciliation can attribute the 19.04% → 6.19% gap without reopening the sealed verdict.
+
+### Exact sequence (do all of it in this session)
+
+1. **Freeze a prereg before computing any outcome.** Create:
+   - `research_state/prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.json`
+   - `research_state/prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.md`
+
+   Required fields:
+   - `experiment_id`: `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z`
+   - `campaign`: `FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z`
+   - `status`: `FROZEN_PRE_OUTCOMES`
+   - `frozen_before_outcomes`: `true`
+   - `pre_registered_before_outcomes`: `true`
+   - `outcome_data_inspected_before_freeze`: `false`
+   - `promotable`: `false`
+   - `max_status`: `EXPLORATORY_ONLY`
+   - `audit_only`: `true`
+   - `does_not_reopen_sealed_verdict`: `true`
+   - `panels`: sealed SHA-256 `39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699`; recompute SHA-256 `a4d73c79683550a15e616f3f5fbd93128db1c5498944f9139226f543cfe96715`
+   - `estimators`: exact `sealed_like` and `recompute_like` definitions below
+   - `grid`: `{sealed_panel, recompute_panel} × {sealed_like, recompute_like}`
+   - `verdict_space`: `EXPLAINED_BY_ESTIMATOR|EXPLAINED_BY_DATA|UNEXPLAINED|INCONCLUSIVE`
+   - `stop_rule`: both panels must retain 1,472 keys; aligned keys must match; >=5 instruments; >=3 test blocks; core coverage >=0.80; otherwise bounded `INADMISSIBLE` with exact failing minima.
+
+2. **Write** `scripts/fclr_liq_expansion_reconcile.py` (new file; ~500–800 lines is fine; mirror the rigor of `scripts/fclr_liq_expansion_recompute.py`).
+
+   **Read-only inputs:**
+   - `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` (sealed; SHA-256 `39916a72...f699`)
+   - `research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet` (recompute; SHA-256 `a4d73c79...6715`)
+
+   **Panel alignment checks (fail closed):**
+   - Verify both SHA-256s before loading.
+   - Assert both have 1,472 rows and identical `(coin, ts)` keys.
+   - Derive `target_next_intensity = liq_notional_usd.groupby(coin).shift(-1)` on both panels; assert the recompute panel’s stored target matches the derived target within `1e-9` relative tolerance.
+   - Compare `liq_notional_usd`, `fundingRate`, `premium`, `rv1h`, `rv24h`, `rv168h`, `ema_dist`, and `abs_fund_pct`; report max absolute difference, count of mismatched cells, and any row-key differences.
+   - Derive splits from the frozen timestamps exactly as the sealed evaluation did:
+     - train `2026-05-01..2026-05-31`
+     - validation `2026-06-07..2026-06-30`
+     - test blocks `2026-07-07..2026-08-06`, `2026-08-13..2026-09-11`, `2026-09-18..2026-10-17`
+     - 7-day purge/embargo at boundaries.
+
+   **`sealed_like` estimator (must match the sealed evaluation path):**
+   - Model rows: target > 0; B1 requires `rv1h`, `rv24h`, `rv168h` all non-null and > 0.
+   - C2 = B1 + `fundingRate`, `abs_fund_pct`, `premium`, `ema_dist`; **missing values become 0.0**, exactly as the sealed evaluation did.
+   - OLS on `log(target + 1e-12)`; no training-only scaling; no smearing; prediction `exp(X @ beta)`.
+   - Fit on train rows only; evaluate on the three test blocks.
+   - QLIKE = `y/yhat - log(y/yhat) - 1`; paired block bootstrap with seed `20261111`, 2,000 reps, blocks as in the sealed evaluation; relative reduction = `-mean_diff / mean_QLIKE(B1) * 100`.
+
+   **`recompute_like` estimator (must match the current recompute path):**
+   - Complete-case train rows for `CORE_FEATURES = [log_rv1h, log_rv24h, log_rv168h, signed_funding_z, abs_fund_pct_z, premium_z, ema_dist_z]`, target > 0.
+   - Train-only mean/std scaling for `signed_funding`, `abs_fund_pct`, `premium`, `ema_dist`; train-only Duan smearing.
+   - Models B0/B1/C1/C2 as in `scripts/fclr_liq_expansion_recompute.py`; evaluate on complete-case positive test rows.
+   - Paired circular block bootstrap, seed `20261114`, 2,000 reps, 1-day blocks; Holm across the three contrasts.
+
+   **Run the 2×2 grid:**
+   - sealed panel × sealed_like
+   - sealed panel × recompute_like
+   - recompute panel × sealed_like
+   - recompute panel × recompute_like
+
+   For each cell report: `n_train`, `n_test`, `n_pairs`, `B1_QLIKE`, `C2_QLIKE`, `mean_diff`, `rel_reduction_pct`, `ci_lo`, `ci_hi`, `passes_materiality`, `ci_excludes_zero`, and `matches_sealed` / `matches_recompute` at a declared tolerance of **±0.5 percentage points**.
+
+   **Attribution:**
+   - `panel_effect = (recompute_panel × sealed_like) - (sealed_panel × sealed_like)`
+   - `estimator_effect = (sealed_panel × recompute_like) - (sealed_panel × sealed_like)`
+   - `interaction = (recompute_panel × recompute_like) - (recompute_panel × sealed_like) - estimator_effect`
+   - State which effect explains the 19.0371% → 6.19% gap. If the estimator effect dominates, say so explicitly and do **not** call the sealed result “refuted”; call it an estimator-dependent result preserved under its sealed status.
+
+3. **Emit** `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-<UTC>.{json,md}` with:
+   - `verdict`: one of `EXPLAINED_BY_ESTIMATOR|EXPLAINED_BY_DATA|UNEXPLAINED|INCONCLUSIVE`
+   - `status`: `VALID_EXPLORATORY`
+   - `promotable: false`, `max_status: EXPLORATORY_ONLY`, `audit_only: true`, `does_not_reopen_sealed_verdict: true`
+   - the full 2×2 table, attribution terms, and an explicit sentence: “The sealed 19.04% survives / does not survive the corrected common-row, train-only-scaled, smearing estimator.”
+
+4. **Add** `tests/test_fclr_liq_expansion_reconcile.py` (unittest style) covering:
+   - both panel SHA-256s and key alignment;
+   - `sealed_like` and `recompute_like` produce deterministic, finite predictions on a small synthetic fixture;
+   - the 2×2 result has all four cells and all required fields;
+   - sealed artifacts remain byte-identical (hash check).
+
+5. **Run verification:**
+   ```bash
+   /tmp/fclr-venv/bin/python scripts/fclr_liq_expansion_reconcile.py --out-utc 2026-11-14T08:36:42Z
+   /tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all
+   /tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute tests.test_fclr_liq_expansion_reconcile
+   ```
+   Expected: gate **19/19 PASS**; all targeted tests pass.
+
+6. **Atomically update after the run:**
+   - `research_state/experiment_frontier.json`: advance the rank-0 reconciliation entry with the verdict, artifacts, and next action; keep rank 0 truthful and non-terminal.
+   - `research_state/hypothesis_registry.json`: append an audit hypothesis `H_tracka_liq_expansion_reconciliation` with status `EXPLORATORY_ONLY`; do **not** alter the sealed `H_tracka_hl_symbol_expansion_liquidation_forecast` status.
+   - Append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`.
+   - Append a dated session log entry to this file.
+
+### Definition of done for this session
+
+- Frozen prereg exists with `FROZEN_PRE_OUTCOMES` and the exact fields above.
+- `scripts/fclr_liq_expansion_reconcile.py` exists and runs end-to-end offline.
+- All four 2×2 cells are present with finite metrics.
+- The attribution verdict is one of the four allowed values and is backed by the table.
+- `tests/test_fclr_liq_expansion_reconcile.py` passes; gate is 19/19; targeted tests pass.
+- Sealed panel and sealed evaluation remain byte-identical.
+- No status-only or planning-only output.
+
+### What not to do
+
+- **Do not** modify `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet` or `research_state/tracka_hl_expansion_eval_result_20261111T202344Z.json`.
+- **Do not** re-run Phase B or Phase A; their outcomes are already recorded.
+- **Do not** wait for Gate 4, a new liquidation source, or HL label extension; this campaign is fully offline.
+- **Do not** promote anything; all outputs are `EXPLORATORY_ONLY` and `promotable=false`.
+- **Do not** use `ironflow_bulk` (stops 2026-04) or invent missing funding/premium/EMA values.
+- **Do not** replace the sealed 19.04% number in the sealed artifact.
+
+### After reconciliation (next heavy work, same session if time permits)
+
+- If `EXPLAINED_BY_ESTIMATOR`: freeze a corrected-estimator audit protocol and run the same 2×2 on the cached 9-symbol successor panel (if present) to test whether the estimator effect generalizes. Keep it `EXPLORATORY_ONLY`; the sealed holdout is already inspected, so no confirmatory claim.
+- If `EXPLAINED_BY_DATA`: freeze a row-level data-lineage audit that isolates the mismatched buckets/features and quantifies their contribution to the gap.
+- If `UNEXPLAINED`: run leave-one-instrument-out and per-block diagnostics on the 2×2 to find which symbol/block drives the gap; freeze that diagnostic before looking at outcomes.
+
+---
+
+## VERIFIED CURRENT STATE (2026-11-14T08:36:42Z)
+
+| Item | Verified state | Evidence |
 |---|---|---|
+| Phase B recompute | **COMPLETE / VALID_EXPLORATORY / INCONCLUSIVE** | `evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md}` |
+| Phase B headline | C2-vs-B1 **6.19%** vs sealed **19.0371%**; placebo FAIL (null p95 7.6603%); LOIO 7/8 | same |
+| Phase B panel | 1,472 buckets; 1,203 with label; 1,168 complete label+funding+RV; 8 instruments; 3 test blocks | `tracka_liq_expansion_recompute_panel_build_report_20261114T083000Z.json` |
+| Sealed Track A | PASS, FRAGILE; unchanged | `tracka_hl_expansion_eval_result_20261111T202344Z.json`; `evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.md` |
 | Campaign gate | **19/19 PASS** | `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` |
-| Deps | `pyarrow 26.0.1, pandas 3.1.1, numpy 2.5.4, scipy 1.18.1` present **only** in `/tmp/fclr-venv` | system `python3` lacks `pyarrow` |
-| Gate tests | 34 tests OK (`tests.test_active_campaign_gate`, `tests.test_fclr_campaign_gate`) | `/tmp/fclr-venv/bin/python -m unittest ...` |
-| Artifact guard | `research_state` root = 419 md/json, 419 tracked, 0 untracked — consistent | `scripts/tracka_resume_check.py` `root_md_json_bounded` |
-| Phase A prereg freeze | works, exits 0 | `fclr011_recompute_audit.py --write-prereg --out-utc <UTC>` |
-| **Phase A full run** | **exits 0 but verdict `INCONCLUSIVE`, empty contrasts** | `inconclusive_reason: "model C1 not fittable on train rows"` |
-| **Phase A root cause** | **structural, not data-missing** | see diagnosis below |
-| **Phase B script** | **DOES NOT EXIST** | `ls scripts/*recompute*` → only `fclr011_recompute_audit.py` |
-| Phase B inputs | **all present and sufficient** | see Phase B section |
+| Targeted tests | **40/40 OK** after frontier rank-0 repair | `/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute` |
+| Environment | Use `/tmp/fclr-venv/bin/python`; system `python3` lacks `pyarrow`; `pytest` not installed; tests are `unittest` | handoff environment facts |
 
-### PHASE A DIAGNOSIS — why "just run it" fails (do not repeat the failed command)
-`scripts/fclr011_recompute_audit.py` computes the frozen `CORE_FEATURES` list, which requires
-`log_rv168h` (7-day rolling RV). Because the target is 24h-ahead RV, the first **168 + 24 = 192**
-hourly rows of every symbol have no `log_rv168h`. Measured on the real panel I built:
+### Current research-gate state
 
-```
-train rows 9096 → complete (with 168h) = 152  → B1 fits on only {BNBUSDT, BTCUSDT}
-                              complete (no 168h) = 1218
-per-symbol train log_rv168h non-null: BTC 72, BNB 145, ETH 0, SOL 0, XRP 0
-validation: 2798 with / 3541 without;  test: 10905 with / 10905 without
-```
+- **H1 primary volatility:** `NOT_SUPPORTED` (terminal; sealed FCLR-011 PASS does not generalize forward).
+- **Track A observed liquidation:** sealed expansion `SUPPORTED_PASS_PRIMARY_GATE` but `FRAGILE`; independent recompute `INCONCLUSIVE`; reconciliation is now the active audit.
+- **Track A volatility:** `NOT_MET` (terminal).
+- **Track B modeled breach:** `NOT_SUPPORTED` (terminal).
+- **Funding-correction replication (H2):** `EXPLORATORY_ONLY` / PARTIAL (terminal).
+- **Gate 4 / new observed-liquidation source:** external/legal trigger absent; not a blocker for the offline reconciliation.
+- **Program status:** ACTIVE; the next task is the 2×2 estimator/data reconciliation above.
 
-`run_audit()` then requires **all** of B0/B1/C1/C2 to fit on `train_core`, and C1/C2 need the
-complete-case rows — only 152 exist, so it returns `INCONCLUSIVE` before any contrast is computed.
-**The prereg is frozen and correct. The panel is correct. The failure is the 168h feature in the
-train window, not missing data and not a broken prereg.**
+### Environment facts (do not rediscover)
 
-**There is also a real code bug you must fix or the run reports the wrong thing:**
-`main()` calls `assemble_panel(MONTHS)` (all 8 months) and writes the parquet, then
-`run_audit(prereg, out_utc, smoke)` calls `assemble_panel(months)` **again** with
-`months = ["2026_05","2026_06"] if smoke else MONTHS`. So `--smoke` and a full run produce an
-**identical panel SHA-256** (`41962f82...`), and the emitted `build`/`coverage` block describes a
-*second* panel that does not match the parquet on disk. Fix: pass the already-built `panel`/`build`
-into `run_audit` instead of rebuilding, or gate `--smoke` on the month list.
+- Use **`/tmp/fclr-venv/bin/python`** for anything needing `pyarrow`/`pandas`/`numpy`/`scipy`.
+- System `python3` fails with `ModuleNotFoundError: pyarrow`.
+- `pytest` is not installed; tests are `unittest`; run targeted modules.
+- No network. No `.github/workflows/*` edits. No raw parquet/cache commits. No sealed-artifact overwrites. No fabricated artifacts/thresholds/p-values/verdicts.
+- Unresolved Git-LFS pointer: `research_state/data_cache/fclr011_panel.json`; do not wait for LFS.
 
-### PHASE A — APPROVED EXECUTION PATH (do this, in order)
-1. **Do not** re-run the bare full command from the old handoff; it is already known to return
-   `INCONCLUSIVE`. That result is *correct* given the current code, but it is not a research finding —
-   it is a design bug.
-2. **Fix the double-assemble bug** in `scripts/fclr011_recompute_audit.py` (see above). Add a test in
-   `tests/` asserting that a `--smoke` run and a full run produce **different** panel hashes, and that
-   `build.rows_total` equals `len(panel)` for the parquet that was written. This is a real,
-   heavy, verifiable code change — not status churn.
-3. **Decide the 168h design with a frozen decision, before touching outcomes.** Two admissible options;
-   pick one and record it in the prereg delta, do not tune after seeing results:
-   - **(A1, preferred) Warm-up exclusion with an honest split:** drop `log_rv168h` from
-     `CORE_FEATURES`/B1 for the **train** fit only, keep the 168h feature out of the frozen design
-     entirely, and re-freeze B1 as `HAR-RV` = `log_rv1h + log_rv24h`. This raises train complete rows
-     from 152 → **1218** and is a clean, defensible, fully-specified model. All four models stay
-     nested (B0 ⊂ B1 ⊂ C1 ⊂ C2).
-   - **(A2) Extend the train window backwards** into 2025 so 168h is warm by 2026-01-01. This needs
-     `BTCUSDT_2025_11`/`2025_12` (and the other four symbols) in
-     `research_state/data_cache/`; check before choosing — if absent, A2 is data-blocked and you must
-     use A1.
-4. Freeze `research_state/prereg_fclr011_recompute_20261114T042139Z.json` + `.md` again **only if**
-   the frozen design genuinely changes (A1 changes B1, so yes). Keep `status=FROZEN_PRE_OUTCOMES`,
-   `frozen_before_outcomes=true`, `pre_registered_before_outcomes=true`,
-   `outcome_data_inspected_before_freeze=false`, `promotable=false`, `max_status=EXPLORATORY_ONLY`,
-   `audit_only=true`, `does_not_reopen_sealed_verdict=true`.
-5. Run the fixed script end-to-end with an explicit `--out-utc`. Assert the emitted verdict is one of
-   `REPRODUCED|NOT_REPRODUCED|INCONCLUSIVE|INADMISSIBLE`, that `contrasts` is **non-empty**, and that
-   the panel SHA-256 in the JSON matches the parquet on disk. Emit
-   `research_state/evaluation_summary_FCLR-011-RECOMPUTE-<UTC>.{json,md}`.
-6. **Stop rule (do not relax after outcomes):** instruments < 5, test blocks < 3, or core coverage
-   < 0.80 ⇒ bounded `INADMISSIBLE/INCONCLUSIVE` NO_GO with the exact failing minima.
+### Invariants
 
----
-
-## PHASE B — NOW THE PRIMARY HEAVY TASK (Phase A is capped at INCONCLUSIVE/EXPLORATORY)
-
-Phase B is **not** blocked and **not** waiting on Phase A. It has a bigger budget and real data.
-**You must implement it from scratch — no script exists.** Do not look for one; write it.
-
-**Target:** independently recompute the sealed Track A liquidation expansion PASS
-`TRACKA-HL-EXPANSION-20261111T195500Z`, on the frozen 2026-05..2026-10 window, and its FRAGILE
-robustness result. **Sealed reference (do not re-score, do not overwrite):**
-`research_state/tracka_hl_expansion_eval_result_20261111T202344Z.json` —
-`C2_vs_B1 rel_reduction_pct = 19.0371`, `mean_diff = -2.70974`, `ci = [-5.088102, -0.477660]`,
-`n_pairs = 593`, `n_blocks = 3`, `paired_symbols = [AAVE, ADA, BCH, CRV, LTC, NEAR, UNI, ZEC]`;
-`C1_vs_B1 = 9.6794%`; `C2_vs_C1 = 10.3605%`. Robustness: LOIO 4/8, placebo null p95 21.10%.
-Sealed panel `tracka_hl_expansion_panel_20261111T202344Z.parquet`,
-sha256 `39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699` (1472 buckets, 1203 with
-label, 1168 complete label+funding+rv). **Do not modify it.**
-
-**Inputs — verified present and sufficient (this is why Phase B is unblocked):**
-- Labels: `research_state/data_cache/ironflow_events/2026-05..2026-10.parquet` — 1,264,105 rows total,
-  columns `timestamp, market, issuer, wallet, position_side, size, notional_usd, avg_price, fills,
-  block, tx_hash`. **Observed Hyperliquid liquidation labels only.** No modeled/proxy/synthetic, no
-  venue mixing.
-- Funding: `research_state/data_cache/hyperliquid_funding/{ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH}.json` —
-  **all 8 symbols, 4,416 funding rows each, coverage 1777593600045..1793487600044**, unauthenticated,
-  no API key, `fundingRate` + `premium` per row.
-- 1h candles: `research_state/data_cache/hyperliquid_candles/{SYM}/2026-05..2026-10.json` — all 8
-  symbols, all 6 months, `.accessed.json` + `.sha256` provenance present.
-- `ironflow_bulk/{liquidations,candles_1h,funding,open_interest}` covers **2025-05..2026-04 only** —
-  it does **not** reach 2026-05..2026-10. **Do not plan on it for Phase B.** Use `ironflow_events` +
-  `hyperliquid_*` caches above.
-
-**Implementation requirements (these are the whole point of the task):**
-1. **Write** `scripts/fclr_liq_expansion_recompute.py` (new file, ~600-900 lines is fine; mirror the
-   structure and rigor of `fclr011_recompute_audit.py`).
-2. **Freeze a prereg BEFORE computing any outcome**: `research_state/
-   prereg_tracka_liq_expansion_recompute_20261114T042139Z.{json,md}` with the same
-   `FROZEN_PRE_OUTCOMES` field set as Phase A. Include the frozen splits, the 3 registered contrasts
-   (`C2_vs_B1`, `C1_vs_B1`, `C2_vs_C1`), the 24h/UTC-day circular block bootstrap, Holm, LOIO,
-   funding-permutation placebo, and the stop rule.
-3. **Rebuild the panel from the caches** (not from the sealed parquet — that would be circular).
-   Emit `research_state/tracka_liq_expansion_recompute_panel_<UTC>.parquet` +
-   `..._panel_build_report_<UTC>.json` with per-coin row counts, coverage, label/funding/rv
-   completeness, and input SHA-256s.
-4. **Recompute** B0/B1/C1/C2 with train-only fit/scaling/smearing, evaluate on the frozen test window,
-   report QLIKE/MAE/RMSE, paired block bootstrap (2000 deterministic reps), Holm over the 3 contrasts,
-   LOIO, funding-permutation placebo, per-symbol/per-block stability, and a leakage audit.
-5. Emit `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md}` with verdict
-   `REPRODUCED|NOT_REPRODUCED|INCONCLUSIVE|INADMISSIBLE`, all `EXPLORATORY_ONLY`, `promotable=false`.
-   **State explicitly whether the 19.04% survives and whether LOIO 4/8 and the placebo failure
-   replicate.** Do not promote, do not reopen the sealed verdict.
-6. **Stop rule:** instruments < 5, test blocks < 3, or insufficient core coverage ⇒ bounded
-   `INADMISSIBLE/INCONCLUSIVE` NO_GO with exact failing minima. No threshold relaxation post-outcomes.
-7. **Add tests** under `tests/` (unittest style, matching the repo) covering: prereg frozen-field
-   assertion, panel-hash consistency, non-empty contrasts, and that sealed artifacts are unchanged.
-
-**Sequencing:** Phase B first if you want guaranteed heavy, decisive output. Phase A is optional and
-capped. Do **both** if time allows, but never emit a report that only describes Phase A.
-
----
-
-## AFTER EACH PHASE (atomically, non-optional)
-- Update `research_state/experiment_frontier.json` (advance/record phase status; keep rank 0 truthful).
-- Add an audit hypothesis to `research_state/hypothesis_registry.json` (do not alter sealed statuses).
-- Append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`.
-- Append a dated session log entry below with commands, key results/hashes, verdicts, blockers.
-- Re-run `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect 19/19) and targeted gate tests:
-  `/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate`.
-  **Note:** `pytest` is not installed and full `unittest discover` exceeds a 2-minute shell timeout — run targeted modules.
-- **Definition of done for this session:** Phase B implementation + frozen prereg + rebuilt panel + evaluation summary + tests + gate verification committed as artifacts in working tree (or a documented hard stop with exact failing minima and no false NO_GO). Any other outcome is insufficient progress.
-
-## ENVIRONMENT FACTS (do not rediscover)
-- Use **`/tmp/fclr-venv/bin/python`** for everything needing `pyarrow`/`pandas`/`numpy`/`scipy`.
-  System `python3` fails with `ModuleNotFoundError: pyarrow`.
-- `pytest` is not installed; tests are `unittest`. Target specific modules.
-- No network. No `.github/workflows/*` edits. No raw parquet/cache commits. No sealed-artifact
-  overwrites. No fabricated artifacts/thresholds/p-values/verdicts.
-- Unresolved Git-LFS pointer: `research_state/data_cache/fclr011_panel.json`. **Do not wait for LFS** —
-  Phase A rebuilds from cache by design.
-- Invariants: preregister before outcome inspection; observed ≠ modeled labels; no venue mixing; no
-  forward-fill/synthetic; no May 2026/sealed holdout scoring; no terminal verdict reopening.
+- Preregister before outcome inspection.
+- Observed Hyperliquid liquidation labels only; no modeled/proxy/synthetic labels; no venue mixing.
+- No forward-fill, no zero-fill of missing market features in the corrected estimator.
+- Train-only fit/scaling/smearing.
+- No May 2026 / sealed-holdout reuse as fresh confirmation.
+- No terminal verdict reopening; sealed artifacts remain byte-identical.
 
 ---
 
 ## Session log
 
-### 2026-11-14T07:33:46Z — Handoff refreshed as single durable, execution-forcing focus campaign
-- Reconfirmed `AGENT_HANDOFF.md` as the only authoritative handoff; kept redirect stubs in `FOCUS_CAMPAIGN.md`, `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md`.
-- Elevated **Phase B (`TRACKA-LIQ-EXPANSION-RECOMPUTE`) as mandatory primary work** with explicit definition of done (implementation, frozen prereg, rebuilt panel, eval, tests, gates). Phase A remains secondary/capped to prevent another session from stalling on its known design dead-end.
-- Preserved all verified bottleneck fixes from 06:35:00Z: Phase A `INCONCLUSIVE` due to 168h train-window design + double-assemble bug; Phase B unblocked via `ironflow_events`+`hyperliquid_funding`+`hyperliquid_candles` caches (not `ironflow_bulk`); sealed reference numbers and stop rules unchanged.
-- No sealed artifacts modified; no outcome computation performed in this session.
+### 2026-11-14T08:36:42Z — Durable handoff rewritten as an execution-forcing reconciliation campaign
+- Replaced the previous “Phase B complete; verify then await trigger / bounded NO_GO” handoff. That instruction was a bottleneck: it would have ended the next session without doing heavy work even though a high-information offline task remains.
+- Added `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z`: a frozen 2×2 audit of sealed vs recomputed panel × sealed-like vs recompute-like estimator, with exact artifacts, tests, and acceptance criteria.
+- Repaired the failing active-campaign gate: `tests.test_active_campaign_gate` requires exactly one rank-0 entry with `status=READY_EXECUTE` and `program_status=ACTIVE`; the frontier was updated to the new reconciliation campaign and the old Phase B entry was demoted to rank 1 with a terminal status.
+- Re-ran verification: campaign gate **19/19 PASS**; targeted tests **40/40 OK** after the frontier repair.
+- No sealed artifact modified; no outcome computation performed in this session.
 
-### 2026-11-14T06:35:00Z — Durable handoff rewritten from executed evidence (bottlenecks removed)
-Executed the prior handoff's Phase A commands instead of re-asserting them, and found its premise
-false. Changes made:
-- **Removed the bottleneck** that would have burned the next session: the old handoff said Phase A was
-  `READY_EXECUTE` and Phase B was "pending, use cached ironflow bulk". In reality Phase A returns
-  `INCONCLUSIVE` with empty contrasts (train complete-case rows = 152 because `log_rv168h` is absent
-  for the first 192h of every symbol, so C1/C2 cannot fit), and Phase B has **no script at all** —
-  and its named input `ironflow_bulk` stops at 2026-04, so a future agent following the old text would
-  have hit a missing-data wall and possibly declared a false NO_GO.
-- Verified the real Phase B inputs: `ironflow_events` 2026-05..10 (1.26M observed liquidation rows),
-  `hyperliquid_funding` all 8 symbols × 4,416 rows with full 2026-05..10 coverage, `hyperliquid_candles`
-  all 8 symbols × 6 months. Phase B is therefore fully executable offline.
-- Documented and specified a fix for a real bug: `fclr011_recompute_audit.py` assembles the panel twice
-  (`main()` over `MONTHS`, then `run_audit()` over smoke-narrowed months), so `--smoke` and full runs
-  share one panel SHA-256 and the reported `build`/`coverage` does not describe the emitted parquet.
-- Promoted Phase B to the primary heavy task with an exact spec, sealed reference numbers, and a
-  requirement to write `scripts/fclr_liq_expansion_recompute.py` plus tests.
-- Removed all diagnostic artifacts I created (prereg, panel, build report, evaluation summary for
-  `20261114T063000Z`) and reverted an incidental `ironflow_fastpath_cache.json` timestamp touch, so the
-  working tree is clean at HEAD. No sealed artifact modified.
+### 2026-11-14T08:30:00Z — Phase B recompute completed (INCONCLUSIVE)
+- `scripts/fclr_liq_expansion_recompute.py` implemented and run; frozen prereg `prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}`; panel `tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet` (sha256 `a4d73c79...cfe96715`); evaluation summary emitted.
+- C2-vs-B1 rel reduction **6.19%** (CI `[-0.42074401, -0.03377946]`, n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed **19.0371%** — does NOT reproduce sealed (6.19% < 9.52% = sealed × 0.5).
+- LOIO 7/8 (sealed 4/8) — passes. Placebo FAIL: true 6.19% <= null p95 7.6603%. core_coverage 0.9959; instruments 8; test blocks 3 — all stop-rule minima met.
+- All outputs `EXPLORATORY_ONLY`, `promotable=false`; sealed artifacts unchanged.
 
-### 2026-11-14T06:25:08Z — (superseded) execution-explicit handoff
-Claimed Phase A ready and Phase B pending on ironflow bulk. Phase A premise disproven above; Phase B
-input claim corrected above.
+### 2026-11-14T07:33:46Z — Prior handoff (superseded)
+- Promoted Phase B as the primary heavy task; kept Phase A secondary/capped. Phase B has since completed; this entry is retained as history only.
 
-### 2026-11-14T04:21:39Z
-Installed `FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z` as rank 0 with Phase A/B; repaired the
-artifact-count guard; removed the hardcoded active-campaign test.
+### 2026-11-14T06:35:00Z — Prior bottleneck removal (superseded)
+- Corrected the false claim that Phase A was ready and Phase B was blocked on `ironflow_bulk`; documented the Phase A 168h train-window dead end and the real Phase B input caches.
 
-### 2026-11-14T03:30:40Z
-Executed FCLR-VOL-FORWARD-AUDIT-20261114T032041Z: corrected evaluator (train-only fit/scaling, paired
-per-row block bootstrap n=1485/block_h=168/reps=2000, paired-permutation Holm), verdict
-EXPLORATORY_NULL, gate 19/19 PASS.
-
-### 2026-11-14T02:35:42Z
-Prior 02:33 INADMISSIBLE claim superseded by 02:43/02:45 checkpoint; preserved as history.
+### 2026-11-14T04:21:39Z — Red-team campaign installed (superseded)
+- Installed `FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z` with Phase A/B; repaired the artifact-count guard and removed the hardcoded active-campaign test.

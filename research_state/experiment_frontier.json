@@ -1,15 +1,63 @@
 [
   {
-    "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
+    "task": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
     "rank": 0,
-    "status": "COMPLETED_EXPLORATORY",
+    "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
-    "next_unfinished_task": "Phase B COMPLETE (2026-11-14T08:30:00Z): scripts/fclr_liq_expansion_recompute.py implemented and run; prereg research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md} frozen FROZEN_PRE_OUTCOMES; panel research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet built (sha256 a4d73c79...cfe96715) + build report; evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md} emitted with verdict INCONCLUSIVE (VALID_EXPLORATORY). C2_vs_B1 rel reduction 6.19% (CI [-0.42074401,-0.03377946], n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed 19.0371% — does NOT reproduce sealed (6.19% < 9.52% = sealed x 0.5). LOIO 7/8 (sealed 4/8) — passes. Placebo FAIL: true 6.19% <= null p95 7.6603%. core_coverage 0.9959, instruments 8, test blocks 3 — all stop-rule minima MET. All EXPLORATORY_ONLY, promotable=false, sealed artifacts unchanged. Phase A remains secondary/capped (BLOCKED_DESIGN: log_rv168h train-window + double-assemble bug). Gate 19/19 PASS; targeted tests 40/40 OK. No agent-removable heavy work remains: Gate 4 trigger absent, no new observed-liquidation source, HL 2026-11+ ~12d < 100d. Next session: verify artifacts/gate/tests, then await GATE4_BRANCH_1 / NEW_OBSERVED_LIQUIDATION_SOURCE / HL_LABEL_EXTENSION trigger; if none appears, document bounded NO_GO with exact missing trigger evidence.",
+    "next_unfinished_task": "Freeze prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.{json,md} before outcomes, then implement scripts/fclr_liq_expansion_reconcile.py and run the 2x2 audit: {sealed_panel, recompute_panel} x {sealed_like, recompute_like}. Attribute the sealed 19.0371% vs recomputed 6.19% C2-vs-B1 gap to estimator, data, or interaction. Emit evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-<UTC>.{json,md}; add tests/test_fclr_liq_expansion_reconcile.py; keep all outputs EXPLORATORY_ONLY and promotable=false; do not reopen sealed artifacts.",
+    "generated": "2026-11-14T08:36:42Z",
+    "refreshed": "2026-11-14T08:36:42Z",
+    "last_checked": "2026-11-14T08:36:42Z",
+    "blockers": "None agent-removable. Offline reconciliation uses the sealed panel, the recompute panel, and their frozen splits; no network, Gate 4, or new liquidation source is required. Sealed artifacts are read-only.",
+    "next_action_heavy": "Execute FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z: freeze prereg -> implement scripts/fclr_liq_expansion_reconcile.py -> run 2x2 -> emit evaluation summary -> add tests -> run scripts/fclr_campaign_gate.py --arm all (expect 19/19) and targeted unittest modules. If explained by estimator, continue with the corrected-estimator audit on the cached 9-symbol successor panel (if present). If explained by data, freeze a row-level data-lineage audit. If unexplained, run LOIO/per-block diagnostics. No status-only output.",
+    "phases": [
+      {
+        "phase": "RECONCILIATION",
+        "task": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
+        "status": "READY_EXECUTE",
+        "claim": "The sealed Track A expansion PASS (19.0371% C2-vs-B1 QLIKE reduction) and the independent recompute (6.19%) use the same 1,472 panel keys but different estimators. A frozen 2x2 reconciliation will attribute the gap to estimator, data, or interaction without reopening the sealed verdict.",
+        "expected_artifacts": [
+          "research_state/prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.json",
+          "research_state/prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.md",
+          "scripts/fclr_liq_expansion_reconcile.py",
+          "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-<UTC>.json",
+          "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-<UTC>.md",
+          "tests/test_fclr_liq_expansion_reconcile.py"
+        ],
+        "inputs": {
+          "sealed_panel": "research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet",
+          "sealed_panel_sha256": "39916a72dfc37d15b6cc886d4e43ed878e0b8e1c2f22936fc4ebf8edd366f699",
+          "recompute_panel": "research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet",
+          "recompute_panel_sha256": "a4d73c79683550a15e616f3f5fbd93128db1c5498944f9139226f543cfe96715"
+        },
+        "verdict_space": [
+          "EXPLAINED_BY_ESTIMATOR",
+          "EXPLAINED_BY_DATA",
+          "UNEXPLAINED",
+          "INCONCLUSIVE"
+        ]
+      }
+    ],
+    "evidence": {
+      "phase_b_recompute": "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.json: C2_vs_B1 rel_reduction_pct 6.19, CI [-0.42074401,-0.03377946], n_pairs 593, n_blocks 3, placebo null p95 7.6603 (FAIL), LOIO 7/8.",
+      "sealed_reference": "research_state/tracka_hl_expansion_eval_result_20261111T202344Z.json: C2_vs_B1 rel_reduction_pct 19.03709721199804, CI [-5.0881020797243135,-0.4776599249731716], n_pairs 593, n_blocks 3.",
+      "panel_alignment": "Both panels contain 1,472 rows and identical (coin, ts) keys; base label/funding/RV features are present in both. The open question is estimator/data attribution, not missing data."
+    }
+  },
+  {
+    "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
+    "superseded_by": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
+    "superseded_at": "2026-11-14T08:36:42Z",
+    "note": "Phase B completed at 2026-11-14T08:30:00Z with verdict INCONCLUSIVE (VALID_EXPLORATORY). Demoted from rank 0 because the next high-information task is the sealed-vs-recompute reconciliation; all Phase B artifacts are preserved.",
+    "next_unfinished_task": "Phase B COMPLETE (2026-11-14T08:30:00Z): scripts/fclr_liq_expansion_recompute.py implemented and run; prereg research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md} frozen FROZEN_PRE_OUTCOMES; panel research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet built (sha256 a4d73c79...cfe96715) + build report; evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md} emitted with verdict INCONCLUSIVE (VALID_EXPLORATORY). C2_vs_B1 rel reduction 6.19% (CI [-0.42074401,-0.03377946], n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed 19.0371% — does NOT reproduce sealed (6.19% < 9.52% = sealed x 0.5). LOIO 7/8 (sealed 4/8) — passes. Placebo FAIL: true 6.19% <= null p95 7.6603%. core_coverage 0.9959, instruments 8, test blocks 3 — all stop-rule minima MET. All EXPLORATORY_ONLY, promotable=false, sealed artifacts unchanged. Phase A remains secondary/capped (BLOCKED_DESIGN: log_rv168h train-window + double-assemble bug). Gate 19/19 PASS; targeted tests 40/40 OK.",
     "generated": "2026-11-14T07:33:46Z",
     "refreshed": "2026-11-14T08:30:00Z",
     "last_checked": "2026-11-14T08:30:00Z",
-    "blockers": "None agent-removable. Phase B complete (INCONCLUSIVE). No remaining unblocked heavy campaign: Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal, do not wait/poll), no verifiably admissible new observed-liquidation source, HL 2026-11+ window ~12d insufficient for >=3x30d blocks, no verified post-2026-10-31 observed liquidation labels. All cached-data designs exhausted/sealed.",
-    "next_action_heavy": "VERIFY: re-run /tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all (expect 19/19) and /tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute. Then document state in AGENT_HANDOFF.md. AWAIT TRIGGER: GATE4_BRANCH_1 (valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json), NEW_OBSERVED_LIQUIDATION_SOURCE (>=5 instruments, >=1 complete month or >=3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only), or HL_LABEL_EXTENSION (HL >=100d AND verified post-2026-10-31 observed labels). If no trigger appears within this session, write timestamped NO_GO evidence with exact failing minima and stop cleanly — no status-only output, no polling.",
+    "blockers": "None agent-removable. Phase B complete (INCONCLUSIVE). Phase A remains secondary/capped (BLOCKED_DESIGN). The next heavy work is the separate reconciliation campaign at rank 0.",
+    "next_action_heavy": "SUPERSEDED by FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z. Do not re-run Phase B. Preserve all artifacts.",
     "phases": [
 {
         "phase": "B",
@@ -32,7 +80,7 @@
       {
         "phase": "B",
         "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
-        "status": "READY_EXECUTE",
+        "status": "SUPERSEDED",
         "claim": "Independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 593 paired rows, +19.04% C2-vs-B1 QLIKE; LOIO 4/8, placebo FAIL) from a NEWLY WRITTEN script using observed ironflow liquidation labels only. No implementation exists yet.",
         "expected_artifacts": [
           "research_state/prereg_tracka_liq_expansion_recompute_20261114T042139Z.json",
