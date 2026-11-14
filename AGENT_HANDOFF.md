@@ -1,4 +1,4 @@
-# Agent Handoff — 2026-11-14T18:14:52Z
+# Agent Handoff — 2026-11-14T18:17:36Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -88,7 +88,7 @@ ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo 
 
 ---
 
-## Initial Task for Next Agentic Session (2026-11-14T18:14:52Z) — durable handoff (repo-prioritized)
+## Initial Task for Next Agentic Session (2026-11-14T18:17:36Z) — durable handoff (repo-prioritized)
 
 **Repository priority (this repo):** `Funding-conditioned-volatility-and-liquidation-risk` — treat the repo’s core mission as *forecast value of funding-conditioned features for realized volatility and (observed) liquidation-risk signals* under strict leakage/cost/access rules; every next session must advance that mission via measurable evidence (artifacts, verdicts, tests, or a bounded audit with exact failing minima). Do **not** produce status-only output.
 
@@ -151,5 +151,5 @@ python3 -m pytest tests/test_fclr_final_structural_closure.py -v
 - ❌ No re-execution of tested/exhausted windows (`2026-01-18..2026-04-30`, sealed Terminal A/B/C/H1 families per frontier/evidence).
 - ❌ No status-only responses. Every session ends with: committed/state-updated work **or** a written bounded NO_GO + exact missing trigger/minima + `last_checked` bump.
 
-**Handoff timestamp:** 2026-11-14T18:14:52Z
+**Handoff timestamp:** 2026-11-14T18:17:36Z
 **Rank-0 status:** `TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY` (see `experiment_frontier.json`).
