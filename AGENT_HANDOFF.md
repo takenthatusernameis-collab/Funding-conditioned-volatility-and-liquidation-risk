@@ -1,8 +1,18 @@
-# Durable Agent Handoff — 2026-11-14T23:16:00Z
+# Durable Agent Handoff — 2026-11-14T23:29:40Z
 
 **START HERE (sole active handoff).** `NEXT_SESSION_HANDOFF.md` is a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is superseded historical evidence. Do not plan or explore—execute the active bounded campaign below. Ignore conflicting historical directives.
 
-## Verified state (2026-11-14T23:16:00Z)
+## Initial task for this session (do this first, before anything else)
+
+Create the frozen pre-results protocol for the corrected-estimator audit, then implement and run it end-to-end on cached artifacts only:
+
+1. **Freeze first** — Write `research_state/prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_<UTC>.{json,md}` with `status:"FROZEN_PRE_OUTCOMES"`, `frozen_before_outcomes:true`, `outcome_data_inspected_before_freeze:false`, `promotable:false`, `max_status:"EXPLORATORY_ONLY"`. Do NOT inspect any outcome metric before the prereg is frozen.
+2. **Implement** — Add `scripts/fclr_fwd_vol_2025_disjoint_corrected_audit.py` (do not modify sealed scripts/artifacts). Reuse cached panel `research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet` (sha256 `de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba`), frozen disjoint blocks 2025-06/11/12, corrected estimator (train-only standardization, finite-row masking, train-only log-target Duan smearing, drop-only missingness), contrast against sealed reference from `evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json`.
+3. **Test** — Add focused tests under `tests/` (frozen prereg, panel hash, train/test/embargo/causality, train-only scaling/smearing, deterministic seed, leakage, no sealed mutation).
+4. **Run and emit** — Execute end-to-end, emit prereg `.json/.md`, evaluation summary `.json/.md` (plus build/lineage report if a derived artifact is produced), summarize tests + command output.
+5. **Decide** — Verdict space `EXPLAINED_BY_ESTIMATOR | NOT_EXPLAINED_BY_ESTIMATOR | INCONCLUSIVE`; all `EXPLORATORY_ONLY`, `promotable=false`. Emit timestamped `INCONCLUSIVE` or `NO_GO` with exact failing checks as minimum failure. Status-only work is not completion.
+
+## Verified state (2026-11-14T23:29:40Z)
 
 - Repo: `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility / liquidation risk). Do not start unrelated work, add schedulers, edit `.github/workflows/*`, fetch paid/credentialed/manual data, commit raw cache, or reopen sealed verdicts.
 - Sealed/complete (do **not** re-run): `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` = **EXPLORATORY_NULL** (not confirmatory/not promotable, gate PASS). `FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z` = **UNEXPLAINED** (EXPLORATORY_ONLY). **This session completed:** `FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z` singleton diagnostic = **EXPLAINED_BY_ESTIMATOR** (EXPLORATORY_ONLY, `promotable=false`, singleton only; not a three-block confirmation). Preserve all artifacts/hashes.
