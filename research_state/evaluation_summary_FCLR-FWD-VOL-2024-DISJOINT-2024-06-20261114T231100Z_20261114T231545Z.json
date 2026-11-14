@@ -1,0 +1,363 @@
+{
+  "campaign": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z",
+  "estimator_swing_corrected_minus_sealed_rel_pct": -4.482794563756424,
+  "experiment_id": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z",
+  "generated_utc": "2026-11-14T23:15:53Z",
+  "leakage_audit": {
+    "embargo_days": 7,
+    "embargo_enforced": true,
+    "features_causal_by_construction": true,
+    "no_future_scaling_fitting_imputation": true,
+    "pass": true,
+    "target_forward_by_construction": true,
+    "train_after_test_empty": true
+  },
+  "lineage_check": {
+    "duplicate_keys": 0,
+    "has_5_symbols": true,
+    "key_count": 8880,
+    "no_duplicate_keys": true,
+    "pass": true,
+    "per_cell_nonzero": true,
+    "per_model_cell_coverage": {
+      "B0": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 29,
+        "train_rows": 3480
+      },
+      "B1": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 23,
+        "train_rows": 2760
+      },
+      "C1": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 23,
+        "train_rows": 2760
+      },
+      "C2": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 23,
+        "train_rows": 2760
+      }
+    },
+    "row_count": 8880,
+    "span_end": "2024-07-07 23:00:00+00:00",
+    "span_ok": true,
+    "span_start": "2024-04-25 00:00:00+00:00",
+    "symbols": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "test_rows": 3600,
+    "train_rows": 3600,
+    "train_test_nonempty": true
+  },
+  "max_status": "EXPLORATORY_ONLY",
+  "notes": "Singleton diagnostic only. Not a three-block confirmation. No sealed verdicts reopened.",
+  "panel": {
+    "key_count": 8880,
+    "path": "research_state/tracka_fwd_vol_2024_disjoint_2024_06_panel_20261114T231545Z.parquet",
+    "row_count": 8880,
+    "sha256": "ec1827f0200d9e2ae8d7a381c0a4b2f3e3b467dd554aa07e083d5cd025cd3ff4",
+    "span_end": "2024-07-07 23:00:00+00:00",
+    "span_start": "2024-04-25 00:00:00+00:00",
+    "symbols": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "prereg": "prereg_fclr_fwd_vol_2024_disjoint_2024_06_20261114T231100Z.json",
+  "prereg_frozen_before_outcomes": true,
+  "prereg_sha256": "0f44033ae2023b1b2d478d76c7c709adb8a621bd55a92637e52c85c757cdf350",
+  "promotable": false,
+  "results": {
+    "corrected": {
+      "arm": "corrected",
+      "contrasts": {
+        "C1_vs_B1": {
+          "ci_hi": 0.02181563347586936,
+          "ci_lo": -0.012237178828641102,
+          "mean_diff": 0.00604972711254129,
+          "n": 3600,
+          "n_days": 30,
+          "p_boot": 0.46,
+          "rel_reduction_pct": -1.421042452272471
+        },
+        "C2_vs_B1": {
+          "ci_hi": 0.03468207610350498,
+          "ci_lo": -0.009033194596158797,
+          "mean_diff": 0.014951052553487902,
+          "n": 3600,
+          "n_days": 30,
+          "p_boot": 0.193,
+          "rel_reduction_pct": -3.5119072297689584
+        },
+        "C2_vs_C1": {
+          "ci_hi": 0.02187858772477263,
+          "ci_lo": -0.0029519126819327938,
+          "mean_diff": 0.00890132544094661,
+          "n": 3600,
+          "n_days": 30,
+          "p_boot": 0.132,
+          "rel_reduction_pct": -2.0615690067279897
+        }
+      },
+      "fit_meta": {
+        "B0": {
+          "scaled": true,
+          "smear": 1.5127151568056199,
+          "test_rows": 3600,
+          "train_rows": 3480
+        },
+        "B1": {
+          "scaled": true,
+          "smear": 1.5269354733636962,
+          "test_rows": 3600,
+          "train_rows": 2760
+        },
+        "C1": {
+          "scaled": true,
+          "smear": 1.5301475537762885,
+          "test_rows": 3600,
+          "train_rows": 2760
+        },
+        "C2": {
+          "scaled": true,
+          "smear": 1.5287330401387962,
+          "test_rows": 3600,
+          "train_rows": 2760
+        }
+      },
+      "holm": {
+        "C1_vs_B1": 0.46,
+        "C2_vs_B1": 0.396,
+        "C2_vs_C1": 0.396
+      },
+      "loio": [
+        {
+          "ci_hi": 0.07385629640274906,
+          "ci_lo": 0.015080710846220874,
+          "held_out": "BTCUSDT",
+          "mean_diff": 0.045966869804710736,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.004,
+          "rel_reduction_pct": -9.719679233787884
+        },
+        {
+          "ci_hi": 0.05396135928761792,
+          "ci_lo": 0.0031631288885177367,
+          "held_out": "ETHUSDT",
+          "mean_diff": 0.029032295877255965,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.04,
+          "rel_reduction_pct": -9.985554587618296
+        },
+        {
+          "ci_hi": 0.1599504057736797,
+          "ci_lo": 0.06436581005667845,
+          "held_out": "BNBUSDT",
+          "mean_diff": 0.10766144792760587,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.0,
+          "rel_reduction_pct": -27.548846553603827
+        },
+        {
+          "ci_hi": 0.15636070563978213,
+          "ci_lo": 0.02646550886534595,
+          "held_out": "SOLUSDT",
+          "mean_diff": 0.08328136895659631,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.008,
+          "rel_reduction_pct": -20.754802450243968
+        },
+        {
+          "ci_hi": 0.04168274800567323,
+          "ci_lo": -0.09215618455222302,
+          "held_out": "XRPUSDT",
+          "mean_diff": -0.016618914711610814,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.676,
+          "rel_reduction_pct": 2.5036239355289225
+        }
+      ],
+      "placebo": {
+        "n_perm": 200,
+        "null_p95": -1.616945651704316,
+        "pass": false,
+        "true_rel_reduction_pct": -3.5119072297689584
+      },
+      "primary": {
+        "ci_hi": 0.03468207610350498,
+        "ci_lo": -0.009033194596158797,
+        "mean_diff": 0.014951052553487902,
+        "n": 3600,
+        "n_days": 30,
+        "p_boot": 0.193,
+        "rel_reduction_pct": -3.5119072297689584
+      }
+    },
+    "sealed": {
+      "arm": "sealed",
+      "contrasts": {
+        "C1_vs_B1": {
+          "ci_hi": 0.0029991285952989076,
+          "ci_lo": -0.04796506826422483,
+          "mean_diff": -0.020378788857055546,
+          "n": 3600,
+          "n_days": 30,
+          "p_boot": 0.086,
+          "rel_reduction_pct": 3.9883921995767233
+        },
+        "C2_vs_B1": {
+          "ci_hi": 0.023778366086377067,
+          "ci_lo": -0.04050992922517061,
+          "mean_diff": -0.004960772911304939,
+          "n": 3600,
+          "n_days": 30,
+          "p_boot": 0.853,
+          "rel_reduction_pct": 0.9708873339874656
+        },
+        "C2_vs_C1": {
+          "ci_hi": 0.03834610448250662,
+          "ci_lo": -0.004356464322687624,
+          "mean_diff": 0.01541801594575061,
+          "n": 3600,
+          "n_days": 30,
+          "p_boot": 0.129,
+          "rel_reduction_pct": -3.142854218066699
+        }
+      },
+      "fit_meta": {
+        "B0": {
+          "scaled": false,
+          "smear": 1.0,
+          "test_rows": 3600,
+          "train_rows": 3480
+        },
+        "B1": {
+          "scaled": false,
+          "smear": 1.0,
+          "test_rows": 3600,
+          "train_rows": 2760
+        },
+        "C1": {
+          "scaled": false,
+          "smear": 1.0,
+          "test_rows": 3600,
+          "train_rows": 2760
+        },
+        "C2": {
+          "scaled": false,
+          "smear": 1.0,
+          "test_rows": 3600,
+          "train_rows": 2760
+        }
+      },
+      "holm": {
+        "C1_vs_B1": 0.258,
+        "C2_vs_B1": 0.853,
+        "C2_vs_C1": 0.258
+      },
+      "loio": [
+        {
+          "ci_hi": 0.0421599543958864,
+          "ci_lo": -0.03904888757761788,
+          "held_out": "BTCUSDT",
+          "mean_diff": 0.006309465117040657,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.744,
+          "rel_reduction_pct": -1.3522562227811146
+        },
+        {
+          "ci_hi": 0.037037588449157575,
+          "ci_lo": -0.028920426114832302,
+          "held_out": "ETHUSDT",
+          "mean_diff": 0.004594890642370887,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.784,
+          "rel_reduction_pct": -1.3391411030130618
+        },
+        {
+          "ci_hi": 0.20511573574848804,
+          "ci_lo": 0.03388089377855186,
+          "held_out": "BNBUSDT",
+          "mean_diff": 0.11561839767569854,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.0,
+          "rel_reduction_pct": -24.143922157459357
+        },
+        {
+          "ci_hi": 0.2604721469580893,
+          "ci_lo": 0.024591947912738794,
+          "held_out": "SOLUSDT",
+          "mean_diff": 0.13647397239962125,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.008,
+          "rel_reduction_pct": -17.70935873397047
+        },
+        {
+          "ci_hi": 0.014361654850732044,
+          "ci_lo": -0.18464415527759623,
+          "held_out": "XRPUSDT",
+          "mean_diff": -0.07322293358977941,
+          "n": 720,
+          "n_days": 30,
+          "p_boot": 0.12,
+          "rel_reduction_pct": 9.295024951955137
+        }
+      ],
+      "placebo": {
+        "n_perm": 200,
+        "null_p95": 0.3875192455769698,
+        "pass": true,
+        "true_rel_reduction_pct": 0.9708873339874656
+      },
+      "primary": {
+        "ci_hi": 0.023778366086377067,
+        "ci_lo": -0.04050992922517061,
+        "mean_diff": -0.004960772911304939,
+        "n": 3600,
+        "n_days": 30,
+        "p_boot": 0.853,
+        "rel_reduction_pct": 0.9708873339874656
+      }
+    }
+  },
+  "singleton_only": true,
+  "smoke": false,
+  "splits": {
+    "embargo_days": 7,
+    "target_buffer_end": "2024-07-07 23:00:00+00:00",
+    "test_end": "2024-06-30 23:00:00+00:00",
+    "test_start": "2024-06-01 00:00:00+00:00",
+    "train_end": "2024-05-24 23:00:00+00:00",
+    "train_start": "2024-04-25 00:00:00+00:00"
+  },
+  "verdict": "EXPLAINED_BY_ESTIMATOR",
+  "verdict_space": [
+    "EXPLAINED_BY_ESTIMATOR",
+    "EXPLAINED_BY_DATA",
+    "UNEXPLAINED",
+    "INCONCLUSIVE"
+  ]
+}

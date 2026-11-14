@@ -1,75 +1,57 @@
-# Durable Agent Handoff — 2026-11-14T22:26:41Z
+# Durable Agent Handoff — 2026-11-14T23:16:00Z
 
-**START HERE (sole active handoff).** `NEXT_SESSION_HANDOFF.md` is a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is superseded historical evidence. Do not plan or explore—execute the campaign below. Ignore conflicting historical directives.
+**START HERE (sole active handoff).** `NEXT_SESSION_HANDOFF.md` is a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is superseded historical evidence. Do not plan or explore—execute the active bounded campaign below. Ignore conflicting historical directives.
 
-## Verified state (2026-11-14T22:26:41Z)
+## Verified state (2026-11-14T23:16:00Z)
 
 - Repo: `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility / liquidation risk). Do not start unrelated work, add schedulers, edit `.github/workflows/*`, fetch paid/credentialed/manual data, commit raw cache, or reopen sealed verdicts.
-- Sealed/complete (do **not** re-run): `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` = **EXPLORATORY_NULL** (not confirmatory/not promotable, gate PASS). `FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z` = **UNEXPLAINED** (EXPLORATORY_ONLY, `promotable=false`, full artifacts emitted). Preserve all artifacts/hashes.
-- Confirmatory program **COMPLETE/CONCLUDED** (`research_state/final_synthesis_report.md`, 2026-11-10): no confirmatory gate passed; Track A (observed liquidations) STRUCTURALLY_BLOCKED; no risk overlay eligible. This diagnostic is bounded exploratory attribution only.
-- Health checks (must remain passing): `python3 scripts/next_campaign_status.py` shows **2024-06 FEASIBLE** as the remaining untouched disjoint Binance block (train `2024-04-25..2024-05-24`, test `2024-06-01..2024-06-30`, 7d embargo). `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → PASS. `python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute tests.test_fclr_fwd_vol_2025_disjoint_reconcile -v` → 57 OK.
-- Cached data ready on disk (no network required): 2024-04/05/06 complete for 5 symbols (mark/premium/index/funding) in `research_state/data_cache/*_2024_{04,05,06}` and `data/raw/*-fundingRate-2024-0{4,5,6}.csv`.
-- Hard evidence preserved: pooled 2025 disjoint C2-B1 mean diff `+0.006923`, rel reduction `-1.963%`, 95% CI `[-0.012604, 0.028030]` (Holm not passed, LOIO not passed, placebo passed). Reconcile UNEXPLAINED (max estimator swing 2.127pp, max data swing 2.231pp).
+- Sealed/complete (do **not** re-run): `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` = **EXPLORATORY_NULL** (not confirmatory/not promotable, gate PASS). `FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z` = **UNEXPLAINED** (EXPLORATORY_ONLY). **This session completed:** `FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z` singleton diagnostic = **EXPLAINED_BY_ESTIMATOR** (EXPLORATORY_ONLY, `promotable=false`, singleton only; not a three-block confirmation). Preserve all artifacts/hashes.
+- Confirmatory program **COMPLETE/CONCLUDED** (`research_state/final_synthesis_report.md`, 2026-11-10): no confirmatory gate passed; Track A (observed liquidations) STRUCTURALLY_BLOCKED; no risk overlay eligible. Diagnostics are bounded exploratory attribution only.
+- 2024-06 singleton artifacts (all present, cached-only): prereg `research_state/prereg_fclr_fwd_vol_2024_disjoint_2024_06_20261114T231100Z.{json,md}` (FROZEN_PRE_OUTCOMES, pre-outcomes), panel `research_state/tracka_fwd_vol_2024_disjoint_2024_06_panel_20261114T231545Z.parquet` (sha256 `ec1827f0200d9e2ae8d7a381c0a4b2f3e3b467dd554aa07e083d5cd025cd3ff4`), build report `..._build_report_20261114T231545Z.json`, eval `research_state/evaluation_summary_FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z_20261114T231545Z.{json,md}`.
+- 2024-06 result (primary C2 vs B1, 24h QLIKE, test 2024-06-01..2024-06-30, train 2024-04-25..2024-05-24, 7d embargo, 5 symbols, lineage/leakage PASS): **sealed** rel_reduction `-2.669%`, mean_diff `0.01906`, CI `[0.00721, 0.03223]`, p_boot `0.004`, n=3600, days=30. **corrected** (train-only standardization + Duan smearing) rel_reduction `1.814%`, mean_diff `-0.00974`, CI `[-0.01644, -0.00198]`, p_boot `0.018`, n=3600. Swing (corrected-sealed) `+4.483pp` => verdict **EXPLAINED_BY_ESTIMATOR** (material estimator sensitivity on cached 2024-06). This is bounded exploratory evidence only, **not** confirmatory, **not** promotable, **not** evidence of practical edge, and **not** a substitute for a pre-registered 3-block confirmation.
+- Health checks: `python3 scripts/next_campaign_status.py` (reads-only; Binance contiguous exhausted, disjoint frontier still lists 2024-06 as a feasible *block* from cache but 2024-06 singleton diagnostic is now executed per this handoff/eval—do not re-run 2024-06). `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → PASS. `python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute tests.test_fclr_fwd_vol_2025_disjoint_reconcile tests.test_fclr_fwd_vol_2024_disjoint_2024_06 -v` → 64 OK.
+- Hard rules unchanged: no network/paid/credentialed/manual data, no raw-cache commits, no `.github/workflows/*` edits, no sealed mutation, no leakage/future info, do not relabel exploratory as confirmatory, do not promote H1, do not invent provenance.
 
-## Initial task (heavy, mandatory): 2024-06 singleton diagnostic
+## Active heavy campaign (execute next): corrected-estimator audit on cached 2025 disjoint panel (singleton context closed)
 
-Create campaign `FCLR-FWD-VOL-2024-DISJOINT-2024-06-<UTC>` and execute end-to-end as a **singleton diagnostic only** (never a fresh three-block confirmation). Do **not** run tested disjoint months `2025-06`, `2025-11`, `2025-12`.
+**Do not** re-run 2024-06, **do not** run tested disjoint months `2025-06/2025-11/2025-12` as new cells, and **do not** run a fresh three-block confirmation. The 2024-06 singleton was `EXPLAINED_BY_ESTIMATOR`; the bounded next step is a cached-panel robustness/audit using the **corrected** estimator conventions on the already-executed 2025 disjoint panel to test whether the 2025 `EXPLORATORY_NULL`/`UNEXPLAINED` reconcile is estimator-sensitive under a NEW frozen prereg.
+
+Create `FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-<UTC>` and execute end-to-end on cached artifacts only:
 
 ### 1) Freeze pre-results protocol before inspecting any outcome
-Write `research_state/prereg_<campaign>_<UTC>.json` and `.md` with `status:"FROZEN_PRE_OUTCOMES"`, `frozen_before_outcomes:true`, `outcome_data_inspected_before_freeze:false`, `promotable:false`, `max_status:"EXPLORATORY_ONLY"`.
+Write `research_state/prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_<UTC>.{json,md}` with `status:"FROZEN_PRE_OUTCOMES"`, `frozen_before_outcomes:true`, `outcome_data_inspected_before_freeze:false`, `promotable:false`, `max_status:"EXPLORATORY_ONLY"`.
 
 Protocol must:
-- Build panel from cached `2024-04/05/06` mark/premium/index/funding only (train `2024-04-25..2024-05-24`, test `2024-06-01..2024-06-30`, 7-day embargo). Record source sha256, row count, key count, symbol set, span.
-- Reuse frozen B0/B1/C1/C2 feature sets and primary C2-vs-B1 24h QLIKE contract from disjoint/reconcile preregs.
-- Define two estimator arms, explicit and independently testable: **sealed** (raw features, no scaling, no smearing) and **corrected** (train-only standardization, finite-row masking, train-only log-target smearing, drop-only missingness).
-- Run paired OOS QLIKE contrasts for the single 2024-06 block: C2 vs B1 (primary), C1 vs B1, C2 vs C1.
-- Require row/key/lineage hashes and per-cell coverage before outcome fitting; any mismatch => `INCONCLUSIVE` (not numeric).
-- Report mean QLIKE differences, relative reductions, day-block-bootstrap CIs (deterministic seed), Holm-adjusted p-values, LOIO, and funding-permutation placebo.
-- Verdict space: `EXPLAINED_BY_ESTIMATOR` | `EXPLAINED_BY_DATA` | `UNEXPLAINED` | `INCONCLUSIVE`; all outputs `EXPLORATORY_ONLY`, `promotable=false`.
-
-Do not inspect predictions/contrasts/target summaries/metric values/outcome distributions before prereg freeze. Coverage/arithmetic checks allowed; outcome computation is not.
+- Use existing cached panel `research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet` (sha256 `de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba`) and frozen disjoint block design (2025-06/11/12, per prereg `prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json`). No new test windows.
+- Reuse frozen B0/B1/C1/C2 and primary C2-vs-B1 24h QLIKE contract.
+- Apply **corrected** estimator only as pre-specified (train-only standardization, finite-row masking, train-only log-target Duan smearing, drop-only missingness), comparable to 2024-06 corrected arm; contrast against recorded sealed reference from `evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json` / reconcile artifacts (no re-execution of sealed scripts as a new cell).
+- Require row/key/panel-hash/lineage verification before outcome computation; mismatch => `INCONCLUSIVE`.
+- Report paired pooled C2-vs-B1 (and C1-vs-B1, C2-vs-C1) 24h QLIKE, relative reductions, day-block-bootstrap CIs (deterministic seed), Holm, LOIO, placebo.
+- Verdict space: `EXPLAINED_BY_ESTIMATOR` | `NOT_EXPLAINED_BY_ESTIMATOR` | `INCONCLUSIVE`; all `EXPLORATORY_ONLY`, `promotable=false`. Do not reopen sealed 2025 CROSS/RECONCILE verdicts.
 
 ### 2) Implement and run
-- Add dedicated script(s) under `scripts/` (do not modify sealed campaign scripts/artifacts). Reuse helpers only where safe; make estimator arms explicit and independently testable.
-- Add focused tests under `tests/` covering at least: frozen prereg identity, panel hash, train/test embargo, feature causality, finite-row masking, train-only scaling/smearing, deterministic bootstrap seed, leakage audit.
-- Run smoke and full 2024-06 execution. Emit:
-  - `research_state/prereg_<campaign>_<UTC>.json` and `.md`
-  - `research_state/<campaign>_panel_<UTC>.parquet` + build report (sha256, row count, key count, source hash, coverage)
-  - `research_state/evaluation_summary_<campaign>_<UTC>.json` and `.md`
-  - focused tests and command output summarized in final report
+- Add dedicated script(s) under `scripts/` (do not modify sealed scripts/artifacts). Add focused tests under `tests/` (frozen prereg, panel hash, train/test/embargo/causality, train-only scaling/smearing, deterministic seed, leakage, no sealed mutation).
+- Emit: prereg `.json/.md`, evaluation summary `.json/.md` (and build/lineage report if a derived artifact is produced), tests + command output summarized.
 
 ### 3) Decide from evidence (bounded)
-- Preserve result as bounded negative / UNEXPLAINED / INCONCLUSIVE as warranted; all outputs EXPLORATORY_ONLY, `promotable=false`.
-- Do NOT re-open sealed 2025 reconcile/CROSS verdicts. Do NOT run `2025-06/2025-11/2025-12`. Do NOT run a fresh three-block confirmation on 2024-06.
-- Minimum failure: emit timestamped `INCONCLUSIVE` or `NO_GO` with exact failing checks. Bounded negative result is valid completion; status-only session is not.
+- Preserve as bounded negative/NOT_EXPLAINED_BY_ESTIMATOR/INCONCLUSIVE as warranted; `EXPLORATORY_ONLY`, `promotable=false`.
+- Minimum failure: emit timestamped `INCONCLUSIVE` or `NO_GO` with exact failing checks. Status-only session is not completion.
+
+## Resume triggers (act only when satisfied)
+1. `GATE4_BRANCH_1`: valid resolved terms evidence appears (`RESOLVED_VERIFIED`, `fabricated==false`, human/legal attestation) → execute Gate 4 Branch 1 per gate scripts/tests.
+2. `NEW_OBSERVED_LIQUIDATION_SOURCE`: materially new candidate → formal §16 admissibility audit proving ALL minima BEFORE prereg/outcomes; if ADMISSIBLE → freeze prereg pre-outcomes → build/eval/verdict under NEW experiment ID.
+3. `HL_LABEL_EXTENSION`: Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels → bounded reprobe only.
+4. (This campaign satisfies the prior `EXPANSION_ROBUSTNESS_REDO`-like cached-panel robustness intent under NEW frozen prereg; further robustness only with a NEW justified prereg.)
 
 ## Verification before completion
 ```bash
 cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
 python3 scripts/next_campaign_status.py
 python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py
-python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute tests.test_fclr_fwd_vol_2025_disjoint_reconcile -v
-# plus all new 2024-06 diagnostic tests added this session
+python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute tests.test_fclr_fwd_vol_2025_disjoint_reconcile tests.test_fclr_fwd_vol_2024_disjoint_2024_06 -v
+# plus all new corrected-audit tests added this session
 ```
 Verify `NEXT_SESSION_HANDOFF.md` remains tombstone, this file remains the sole active handoff, and no sealed artifact hash changed.
 
-## Hard rules
-- 2025 disjoint is **not** evidence of practical edge. Reconcile verdict **UNEXPLAINED** preserved.
-- Gate 4 remains `EXTERNAL_BLOCKED` unless valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Never fabricate/self-certify.
-- Do not re-run tested Binance windows: `2024-07-23..2024-09-30`, `2025-02-01..2025-05-31`, `2025-07-23..2025-10-15`, `2026-01-01..2026-04-01`, `2026-05-01..2026-08-31`, `2026-08-03..2026-10-31`, or tested disjoint months `2025-06/2025-11/2025-12`. `2024-06` is untouched and is this session's task.
-- No leakage: no future information for scaling/fitting/threshold selection/imputation. Do not relabel exploratory as confirmatory, promote H1, or invent provenance.
-- Preserve prior artifacts and null results. Update frontier/registry atomically under new experiment IDs; never mutate sealed records.
-
-## Resume triggers (act only when satisfied)
-1. `GATE4_BRANCH_1`: valid resolved terms evidence appears (`RESOLVED_VERIFIED`, `fabricated==false`, human/legal attestation) → execute Gate 4 Branch 1 per gate scripts/tests.
-2. `NEW_OBSERVED_LIQUIDATION_SOURCE`: materially new candidate → formal §16 admissibility audit proving ALL minima BEFORE prereg/outcomes; if ADMISSIBLE → freeze prereg pre-outcomes → build/eval/verdict under NEW experiment ID.
-3. `HL_LABEL_EXTENSION`: Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels → bounded reprobe only.
-4. `EXPANSION_ROBUSTNESS_REDO`: cached-panel robustness with NEW frozen prereg pre-outcomes.
-
 ## Completion contract
-Complete only when (a) frozen 2024-06 singleton diagnostic executed with full artifact set + tests + verdict, or (b) timestamped evidence-backed blocker with exact failed precondition emitted. Status-only work is not completion.
-
-## Guardrails for next agent
-- If a newer timestamped `AGENT_HANDOFF.md` exists, follow it.
-- Otherwise this is binding: do not "plan/explore" — execute the 2024-06 singleton diagnostic per §1-3.
-- `NEXT_SESSION_HANDOFF.md` remains a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is historical.
+Complete only when (a) frozen 2025 disjoint corrected-estimator audit executed with full artifact set + tests + verdict, or (b) timestamped evidence-backed blocker with exact failed precondition emitted. Status-only work is not completion.

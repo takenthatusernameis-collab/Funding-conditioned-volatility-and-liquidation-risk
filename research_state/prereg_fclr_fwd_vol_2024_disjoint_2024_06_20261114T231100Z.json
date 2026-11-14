@@ -1,0 +1,168 @@
+{
+  "experiment_id": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z",
+  "campaign": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z",
+  "cell": "FWD-VOL-2024-DISJOINT-2024-06-SINGLETON",
+  "track": "C_volatility_exploratory_diagnostic",
+  "priority": "P1",
+  "preregistered_utc": "2026-11-14T23:11:00Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "pre_registered_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "outcome_values_inspected_before_freeze": "none; no predictions, contrasts, target distribution statistics, or metric values were computed or inspected before freeze",
+  "hypothesis_type": "exploratory_singleton_attribution_diagnostic",
+  "claim": "Bounded singleton diagnostic on 2024-06 (train 2024-04-25..2024-05-24, test 2024-06-01..2024-06-30, 7-day embargo) to attribute estimator-vs-data sensitivity under the frozen B0/B1/C1/C2 and C2-vs-B1 24h QLIKE contract. This is a singleton diagnostic only, never a fresh three-block confirmation, and all outputs are EXPLORATORY_ONLY with promotable=false.",
+  "venue": "binance_usdm_public_archive_cached",
+  "data_sources": {
+    "months": ["2024-04", "2024-05", "2024-06"],
+    "cache_roots": [
+      "research_state/data_cache/{SYM}_2024_04",
+      "research_state/data_cache/{SYM}_2024_05",
+      "research_state/data_cache/{SYM}_2024_06"
+    ],
+    "raw_funding_csvs": [
+      "data/raw/BTCUSDT-fundingRate-2024-04.csv",
+      "data/raw/BTCUSDT-fundingRate-2024-05.csv",
+      "data/raw/BTCUSDT-fundingRate-2024-06.csv",
+      "data/raw/ETHUSDT-fundingRate-2024-04.csv",
+      "data/raw/ETHUSDT-fundingRate-2024-05.csv",
+      "data/raw/ETHUSDT-fundingRate-2024-06.csv",
+      "data/raw/BNBUSDT-fundingRate-2024-04.csv",
+      "data/raw/BNBUSDT-fundingRate-2024-05.csv",
+      "data/raw/BNBUSDT-fundingRate-2024-06.csv",
+      "data/raw/SOLUSDT-fundingRate-2024-04.csv",
+      "data/raw/SOLUSDT-fundingRate-2024-05.csv",
+      "data/raw/SOLUSDT-fundingRate-2024-06.csv",
+      "data/raw/XRPUSDT-fundingRate-2024-04.csv",
+      "data/raw/XRPUSDT-fundingRate-2024-05.csv",
+      "data/raw/XRPUSDT-fundingRate-2024-06.csv"
+    ],
+    "kinds": ["markPriceKlines", "premiumIndexKlines", "indexPriceKlines", "fundingRate"],
+    "network_required": false
+  },
+  "universe": {
+    "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+    "n_symbols": 5
+  },
+  "splits": {
+    "design": "single disjoint 30-day test block with 30-day train and 7-day embargo",
+    "train_days": 30,
+    "embargo_days": 7,
+    "test_days": 30,
+    "data_start": "2024-04-25T00:00:00Z",
+    "data_end": "2024-06-30T23:00:00Z",
+    "target_forward_buffer_end": "2024-07-07T23:00:00Z",
+    "blocks": [
+      {
+        "block": 0,
+        "train_start": "2024-04-25T00:00:00Z",
+        "train_end": "2024-05-24T23:00:00Z",
+        "embargo_start": "2024-05-25T00:00:00Z",
+        "embargo_end": "2024-05-31T23:00:00Z",
+        "test_start": "2024-06-01T00:00:00Z",
+        "test_end": "2024-06-30T23:00:00Z"
+      }
+    ],
+    "notes": "Feature construction and targets are built on a grid extending to target_forward_buffer_end so 24h forward targets exist through 2024-06-30; test evaluation rows are restricted to 2024-06-01..2024-06-30 and all features remain strictly causal at origin t."
+  },
+  "features": {
+    "B0": ["log_rv24h"],
+    "B1": ["log_rv1h", "log_rv24h", "log_rv168h"],
+    "C1": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct"],
+    "C2": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct", "premium", "ema_dist"]
+  },
+  "primary_contrast": "C2_vs_B1",
+  "primary_metric": "QLIKE_24h",
+  "horizon_hours": 24,
+  "estimator_arms": {
+    "sealed": {
+      "name": "sealed",
+      "description": "Raw features, no scaling/standardization, no train-only smearing, finite-row masking only; OLS on log(target+eps) with plain exp back-transform.",
+      "scaling": "none",
+      "smearing": "none",
+      "missingness": "finite-row masking/drop only",
+      "fit": "OLS normal equations with small ridge diagonal for numerical stability (1e-12)"
+    },
+    "corrected": {
+      "name": "corrected",
+      "description": "Train-only standardization, finite-row masking, train-only Duan smearing on log-target residuals, explicit drop-only missingness.",
+      "scaling": "train-only mean/std",
+      "smearing": "train-only Duan mean(exp(residual))",
+      "missingness": "drop rows with non-finite required features/target; never fill/impute",
+      "fit": "OLS least squares on standardized design"
+    }
+  },
+  "contrasts": [
+    ["C2", "B1"],
+    ["C1", "B1"],
+    ["C2", "C1"]
+  ],
+  "inference": {
+    "bootstrap": {
+      "method": "paired day-block bootstrap over UTC days in test set",
+      "reps": 2000,
+      "seed": 20261114,
+      "ci_level": 0.95
+    },
+    "holm": {
+      "enabled": true,
+      "family": "primary and secondary contrasts within this singleton diagnostic",
+      "alpha": 0.05
+    },
+    "loio": {
+      "enabled": true,
+      "rule": "leave one instrument out of training, evaluate held-out instrument on the 2024-06 test block; report count with rel_reduction>=2% and ci_excludes_zero_improving"
+    },
+    "placebo": {
+      "enabled": true,
+      "method": "permute signed_funding and abs_fund_pct within symbol in train/test panel construction context for refit/eval",
+      "reps": 200,
+      "seed": 20261114,
+      "rule": "true relative reduction must exceed null 95th percentile"
+    }
+  },
+  "gates": {
+    "materiality_rel_reduction_pct": 2.0,
+    "ci_excludes_zero_improving": true,
+    "instruments_ge_5": 5,
+    "loio_min": 4,
+    "placebo_pass_required_for_positive_signal": true,
+    "leakage_audit_pass": true
+  },
+  "lineage_requirements": {
+    "record_source_sha256": true,
+    "record_row_count": true,
+    "record_key_count": true,
+    "record_symbol_set": true,
+    "record_span": true,
+    "panel_hash_required": true,
+    "per_cell_coverage_required": true,
+    "mismatch_policy": "INCONCLUSIVE (not numeric)"
+  },
+  "leakage_audit": {
+    "features_strictly_causal": true,
+    "target_strictly_forward": true,
+    "no_future_information_for_scaling_fitting_threshold_imputation": true,
+    "embargo_enforced": true
+  },
+  "verdict_rule": {
+    "EXPLAINED_BY_ESTIMATOR": "material change in primary C2-vs-B1 direction/magnitude attributable to estimator arm (sealed vs corrected) under lineage-consistent panel and passing leakage/coverage checks",
+    "EXPLAINED_BY_DATA": "lineage/data-coverage/audit evidence explains outcome under estimator-consistent behavior",
+    "UNEXPLAINED": "neither estimator nor lineage/data audit explains the outcome; bounded exploratory attribution remains unresolved",
+    "INCONCLUSIVE": "any required prereg/lineage/coverage/hash/key/leakage mismatch or missing required artifact prevents numeric attribution"
+  },
+  "status_rule": {
+    "promotable": false,
+    "max_status": "EXPLORATORY_ONLY",
+    "singleton_only": true,
+    "no_fresh_three_block_confirmation": true
+  },
+  "forbidden": [
+    "mutating sealed artifacts or verdicts",
+    "running tested disjoint months 2025-06, 2025-11, 2025-12",
+    "running a fresh three-block confirmation on 2024-06",
+    "inspecting predictions/contrasts/target summaries/metric values/outcome distributions before prereg freeze",
+    "network fetches, paid/credentialed/manual data, raw cache commits, workflow edits",
+    "relabeling exploratory as confirmatory or promoting H1"
+  ]
+}

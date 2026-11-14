@@ -1,0 +1,237 @@
+{
+  "campaign": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z",
+  "data_months": [
+    "2024-04",
+    "2024-05",
+    "2024-06"
+  ],
+  "embargo_days": 7,
+  "experiment_id": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z",
+  "generated_utc": "2026-11-14T23:15:45Z",
+  "key_count": 8880,
+  "leakage_audit": {
+    "embargo_days": 7,
+    "embargo_enforced": true,
+    "features_causal_by_construction": true,
+    "no_future_scaling_fitting_imputation": true,
+    "pass": true,
+    "target_forward_by_construction": true,
+    "train_after_test_empty": true
+  },
+  "lineage_check": {
+    "duplicate_keys": 0,
+    "has_5_symbols": true,
+    "key_count": 8880,
+    "no_duplicate_keys": true,
+    "pass": true,
+    "per_cell_nonzero": true,
+    "per_model_cell_coverage": {
+      "B0": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 29,
+        "train_rows": 3480
+      },
+      "B1": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 23,
+        "train_rows": 2760
+      },
+      "C1": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 23,
+        "train_rows": 2760
+      },
+      "C2": {
+        "test_days": 30,
+        "test_rows": 3600,
+        "train_days": 23,
+        "train_rows": 2760
+      }
+    },
+    "row_count": 8880,
+    "span_end": "2024-07-07 23:00:00+00:00",
+    "span_ok": true,
+    "span_start": "2024-04-25 00:00:00+00:00",
+    "symbols": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "test_rows": 3600,
+    "train_rows": 3600,
+    "train_test_nonempty": true
+  },
+  "max_status": "EXPLORATORY_ONLY",
+  "panel_path": "research_state/tracka_fwd_vol_2024_disjoint_2024_06_panel_20261114T231545Z.parquet",
+  "panel_sha256": "ec1827f0200d9e2ae8d7a381c0a4b2f3e3b467dd554aa07e083d5cd025cd3ff4",
+  "prereg": "prereg_fclr_fwd_vol_2024_disjoint_2024_06_20261114T231100Z.json",
+  "prereg_sha256": "0f44033ae2023b1b2d478d76c7c709adb8a621bd55a92637e52c85c757cdf350",
+  "promotable": false,
+  "row_count": 8880,
+  "source_file_hash_count": 1835,
+  "source_file_hashes_sample": [
+    {
+      "bytes": 2488,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/BTCUSDT-fundingRate-2024-04/BTCUSDT-fundingRate-2024-04.csv",
+      "sha256": "a7dfc9321f2122d3d9a12cebfc82d9143999cc9153eee69fe159564f35bb3484",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-01/BTCUSDT-1h-2024-04-01/BTCUSDT-1h-2024-04-01.csv",
+      "sha256": "a980a0bb17c3ad5d90f4bab0748af4e2052270ec8ad8570810ac8865fb6a7c65",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-02/BTCUSDT-1h-2024-04-02/BTCUSDT-1h-2024-04-02.csv",
+      "sha256": "71babe68799519417efc096ece7071833e4e77836a18ff1d0f0114f866cbce0c",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-03/BTCUSDT-1h-2024-04-03/BTCUSDT-1h-2024-04-03.csv",
+      "sha256": "986ca41cdc4ea46679230306821f4e584d787f374afc1e0ed4a9a50ab719851f",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-04/BTCUSDT-1h-2024-04-04/BTCUSDT-1h-2024-04-04.csv",
+      "sha256": "05048d149461ae5af19cebc5d71553d0d730017dc8c6cbe10e781101d074f15d",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-05/BTCUSDT-1h-2024-04-05/BTCUSDT-1h-2024-04-05.csv",
+      "sha256": "75db14f0d10095b78869448a5a2c5377c4dccba1f2cf46a719c6317afb3541b7",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-06/BTCUSDT-1h-2024-04-06/BTCUSDT-1h-2024-04-06.csv",
+      "sha256": "3961e3c532e4ce8298011a96aa5c7d8d539c80725ed07afaca48ec6701e14bf7",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-07/BTCUSDT-1h-2024-04-07/BTCUSDT-1h-2024-04-07.csv",
+      "sha256": "fe173f5e8ef52f9d87e123f7d6a97b82228b8ba11bdfdb4e1e266bf4d46d44e7",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-08/BTCUSDT-1h-2024-04-08/BTCUSDT-1h-2024-04-08.csv",
+      "sha256": "8a9d419d181c7b886d16a7f2b59809233b42ee02510e77df90ec6d1ff5808b19",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-09/BTCUSDT-1h-2024-04-09/BTCUSDT-1h-2024-04-09.csv",
+      "sha256": "b2d4e7f75a9b1d9fdfb99b04a6db3334ac839933db4e290ca40f5aed75eaa2fd",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-10/BTCUSDT-1h-2024-04-10/BTCUSDT-1h-2024-04-10.csv",
+      "sha256": "7391fc2ef6428e9715356e7bb8593a7e965b60a97041eb375ef485976380a449",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-11/BTCUSDT-1h-2024-04-11/BTCUSDT-1h-2024-04-11.csv",
+      "sha256": "7bd7ffe843c2898c617325abfe384784d3907ab8aabd3b45a2c4b1903a76cc53",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-12/BTCUSDT-1h-2024-04-12/BTCUSDT-1h-2024-04-12.csv",
+      "sha256": "1d091afcd4773f34e2ef1ac99bd0491c8957a618ce308622d99a2ba1381833b6",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-13/BTCUSDT-1h-2024-04-13/BTCUSDT-1h-2024-04-13.csv",
+      "sha256": "008d48ecb01383edbc094d02be3152ff685d34dd251d0492dd5c402540d51b9f",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-14/BTCUSDT-1h-2024-04-14/BTCUSDT-1h-2024-04-14.csv",
+      "sha256": "a3991eb5b0a216c0147e5206e66e43fdada97949ae2b7ff42747f2ada86b9b82",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-15/BTCUSDT-1h-2024-04-15/BTCUSDT-1h-2024-04-15.csv",
+      "sha256": "e5a2c72d9de38ff17a6356cedbea5a96f7e4e7e215e015a17d7452b7c58ed6c9",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-16/BTCUSDT-1h-2024-04-16/BTCUSDT-1h-2024-04-16.csv",
+      "sha256": "4e73bd18af3a1c7c8d7c4fd09ca3ca7a798b98e91ec734259ab21419dcf595a0",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-17/BTCUSDT-1h-2024-04-17/BTCUSDT-1h-2024-04-17.csv",
+      "sha256": "ba98bdeebb8bf97aa0ae0cab49155e0746c04881951086c10e317d8ae4251d0c",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-18/BTCUSDT-1h-2024-04-18/BTCUSDT-1h-2024-04-18.csv",
+      "sha256": "fd7d620c6276708373a5e77cd89957299d4eb8c01f5cc996c693e46f81080127",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "bytes": 2586,
+      "month": "2024-04",
+      "path": "research_state/data_cache/BTCUSDT_2024_04/indexPriceKlines-2024-04-19/BTCUSDT-1h-2024-04-19/BTCUSDT-1h-2024-04-19.csv",
+      "sha256": "f586950c2342a2deaf7f11a488e7966df685a04345981a0a05371669a69ab311",
+      "symbol": "BTCUSDT"
+    }
+  ],
+  "span_end": "2024-07-07 23:00:00+00:00",
+  "span_start": "2024-04-25 00:00:00+00:00",
+  "symbols": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "target_buffer_end": "2024-07-07 23:00:00+00:00",
+  "test": {
+    "end": "2024-06-30 23:00:00+00:00",
+    "start": "2024-06-01 00:00:00+00:00"
+  },
+  "train": {
+    "end": "2024-05-24 23:00:00+00:00",
+    "start": "2024-04-25 00:00:00+00:00"
+  }
+}
