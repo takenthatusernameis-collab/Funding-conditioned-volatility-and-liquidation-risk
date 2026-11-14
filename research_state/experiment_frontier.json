@@ -1,21 +1,21 @@
 [
   {
-    "task": "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z",
+    "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
     "next_unfinished_task": "Phase A: freeze research_state/prereg_fclr011_recompute_20261114T042139Z.json before any outcome computation; rebuild the FCLR-011 panel from cached Binance 2026-01..2026-08 inputs (do not rely on the LFS pointer fclr011_panel.json); run an independent train-only OLS/HAR recomputation of B0/B1/C1/C2 on the frozen splits (train 2026-01-01..2026-03-17, val 2026-03-25..2026-04-30, test 2026-05-08..2026-08-06); emit evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.{json,md} with QLIKE, 24h block bootstrap 2000 reps, Holm, LOIO, placebo, leakage audit, and exact artifact hashes. Phase B: freeze a new prereg and independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 19.04% C2-vs-B1 QLIKE reduction; FRAGILE LOIO 4/8, placebo FAIL) using cached ironflow observed liquidation labels only; emit evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md}. Both phases are EXPLORATORY_ONLY and never promotable; preserve all sealed artifacts.",
-    "generated": "2026-11-14T04:21:39Z",
-    "refreshed": "2026-11-14T04:21:39Z",
-    "last_checked": "2026-11-14T04:21:39Z",
-    "blockers": "None agent-removable. The old trigger-only directive is superseded. Gate 4 external/legal trigger remains absent but is not required for these local exploratory audits. fclr011_panel.json and run_manifest*.json are Git-LFS pointers; rebuild the FCLR-011 panel from cached Binance zips/CSVs instead of waiting for LFS. Do not wait or poll.",
-    "next_action_heavy": "Execute Phase A end-to-end, then Phase B. If Phase A is data-blocked, emit a bounded NO_GO with exact failing minima and execute Phase B; do not stop at a status-only report.",
+    "generated": "2026-11-14T06:35:00Z",
+    "refreshed": "2026-11-14T06:35:00Z",
+    "last_checked": "2026-11-14T06:35:00Z",
+    "blockers": "None agent-removable. Corrected 2026-11-14T06:35:00Z: Phase A of the prior handoff returns INCONCLUSIVE with empty contrasts (train complete-case rows=152 because log_rv168h is absent for the first 192h of every symbol, so C1/C2 cannot fit) and has a double-assemble bug (main() builds over MONTHS, run_audit() rebuilds over smoke-narrowed months, so --smoke and full runs share one panel sha256 and the reported build/coverage does not match the emitted parquet). Phase B has NO implementation script and its previously named input ironflow_bulk covers only 2025-05..2026-04, so it does NOT reach the 2026-05..2026-10 window. Real Phase B inputs are present: ironflow_events 2026-05..10 (1,264,105 observed liquidation rows), hyperliquid_funding all 8 symbols x 4,416 rows with full coverage, hyperliquid_candles all 8 symbols x 6 months.",
+    "next_action_heavy": "Write scripts/fclr_liq_expansion_recompute.py from scratch, freeze prereg research_state/prereg_tracka_liq_expansion_recompute_20261114T042139Z.{json,md} BEFORE outcomes, rebuild the expansion panel from ironflow_events + hyperliquid_funding + hyperliquid_candles (NOT ironflow_bulk, which stops at 2026-04), recompute B0/B1/C1/C2 with train-only fit/scaling/smearing, paired 24h block bootstrap 2000 reps, Holm over C2_vs_B1/C1_vs_B1/C2_vs_C1, LOIO, funding-permutation placebo, per-symbol/per-block stability, leakage audit; emit evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md} with verdict REPRODUCED|NOT_REPRODUCED|INCONCLUSIVE|INADMISSIBLE (EXPLORATORY_ONLY, never promotable) stating whether the sealed 19.04% C2-vs-B1 reduction, LOIO 4/8 and the placebo failure replicate. Sealed reference: tracka_hl_expansion_eval_result_20261111T202344Z.json (mean_diff -2.70974, ci [-5.088102,-0.477660], n_pairs 593, n_blocks 3). Phase A is optional, capped at INCONCLUSIVE/EXPLORATORY, and requires the 168h/double-assemble fixes documented in AGENT_HANDOFF.md.",
     "phases": [
       {
         "phase": "A",
         "task": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
-        "status": "READY_EXECUTE",
-        "claim": "Independently recompute the sealed FCLR-011 volatility PASS (C2 vs B1 +4.94% QLIKE, CI [-0.032546,-0.001418], 5 instruments, 3 blocks, test 2026-05-08..2026-08-06) under the frozen splits and a clean OLS/HAR implementation with no missing-value zero-fill.",
+        "status": "BLOCKED_DESIGN",
+        "claim": "Phase A is capped: the frozen CORE_FEATURES require log_rv168h, which is absent for the first 192h of every symbol, leaving 152 train complete rows so C1/C2 cannot fit; the script also rebuilds the panel twice so --smoke and full runs share one panel sha256 and the reported build/coverage mismatches the emitted parquet. Requires a frozen design change (drop log_rv168h / HAR-RV) plus the double-assemble fix, then re-run. EXPLORATORY_ONLY.",
         "expected_artifacts": [
           "research_state/prereg_fclr011_recompute_20261114T042139Z.json",
           "research_state/fclr011_recompute_panel_20261114T042139Z.parquet",
@@ -27,10 +27,12 @@
       {
         "phase": "B",
         "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
-        "status": "PENDING_PHASE_A",
-        "claim": "Independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 593 paired rows, 19.04% C2-vs-B1 QLIKE reduction) and its FRAGILE robustness result (LOIO 4/8, placebo FAIL) using cached ironflow observed liquidation labels only.",
+        "status": "READY_EXECUTE",
+        "claim": "Independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 593 paired rows, +19.04% C2-vs-B1 QLIKE; LOIO 4/8, placebo FAIL) from a NEWLY WRITTEN script using observed ironflow liquidation labels only. No implementation exists yet.",
         "expected_artifacts": [
           "research_state/prereg_tracka_liq_expansion_recompute_20261114T042139Z.json",
+          "research_state/tracka_liq_expansion_recompute_panel_<UTC>.parquet",
+          "research_state/tracka_liq_expansion_recompute_panel_build_report_<UTC>.json",
           "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.json",
           "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.md"
         ]
