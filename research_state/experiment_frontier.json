@@ -4,11 +4,11 @@
     "rank": 0,
     "status": "ACTIVE_HEAVY_CAMPAIGN",
     "program_status": "ACTIVE_HEAVY_CAMPAIGN",
-    "next_unfinished_task": "EXECUTE FCLR-VOL-FORWARD-2026Q1Q2 (HEAVY, P1): Hyperliquid volatility forward-reduced on cached 2026-01-18..2026-04-30 (ironflow bulk, 103d, feasible 60/7/3x10). Preregister before outcomes, build/eval on cached data only (no May 2026, no sealed 2026-05..2026-10), keep fail-closed gates/tests green, update frontier/handoff with evidence. If P1 infeasible by exact minima and no admissible P2 observed-liq GO source exists, emit bounded structural NO_GO per candidate.",
+    "next_unfinished_task": "P1 FCLR-VOL-FORWARD-2026Q1Q2 COMPLETE (bounded structural NO_GO / INADMISSIBLE): universe 0 coins < 5 required (coverage-only); open_interest coverage 1752/1776h across all 192 candidate coins, candle+funding complete. No remaining heavy work on cached data; await Gate 4 Branch 1 trigger or a materially new admissible observed-liquidation source.",
     "generated": "2026-11-13T09:15:00Z",
-    "last_checked": "2026-11-14T01:49:18Z",
-    "blockers": "No external-data blocker for P1 (ironflow bulk 2025-05..2026-04 on disk). Forward liq 2026Q1Q2 complete EXPLORATORY_NULL; Binance 5-symbol exhausted. Alt observed-liq sources no GO evidenced.",
-    "next_action_heavy": "EXECUTE FCLR-VOL-FORWARD-2026Q1Q2 (HEAVY, P1): Hyperliquid volatility forward-reduced on cached 2026-01-18..2026-04-30 (ironflow bulk, 103d, feasible 60/7/3x10). Preregister before outcomes, build/eval on cached data only (no May 2026, no sealed 2026-05..2026-10), keep fail-closed gates/tests green, update frontier/handoff with evidence. If P1 infeasible by exact minima and no admissible P2 observed-liq GO source exists, emit bounded structural NO_GO per candidate.",
+    "last_checked": "2026-11-14T02:33:29Z",
+    "blockers": "P1 FCLR-VOL-FORWARD-2026Q1Q2 executed -> bounded structural NO_GO (INADMISSIBLE): universe 0 coins < 5 required; open_interest coverage 1752/1776h (24h short) across all 192 candidate coins, candle+funding complete. No remaining heavy work on cached data. No P2 GO evidenced (alt_source_scan 0 GO). Await Gate 4 Branch 1 (valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json) or a materially new admissible observed-liquidation source passing section-16 audit before any new prereg/outcome work.",
+    "next_action_heavy": "P1 FCLR-VOL-FORWARD-2026Q1Q2 COMPLETE (bounded structural NO_GO / INADMISSIBLE): universe 0 coins < 5 required (coverage-only); open_interest coverage 1752/1776h across all 192 candidate coins, candle+funding complete. Prereg frozen pre-outcomes; no evaluated targets; frozen-before-outcomes preserved; gate 18/18 PASS; tests 27/27 OK. No remaining heavy work on cached data. Next heavy work ONLY if: (1) Gate 4 Branch 1 valid RESOLVED_VERIFIED trigger appears, or (2) a materially new admissible observed-liquidation source passes section-16 audit -> freeze prereg -> build/eval/verdict under a NEW experiment ID. No status-only output; no re-probing terminal cells.",
     "cells": [
       {
         "cell": "FWD-VOL-2024Q4-CROSS",
@@ -45,6 +45,16 @@
         "artifact": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json",
         "gate": "scripts/fclr_campaign_gate.py --arm all -> 16/16 PASS",
         "note": "Executed offline 2026-11-13T22:31:55Z on ironflow bulk 2026-01-18..2026-04-30 (107 coins, 63 scored days across 3 blocks, 6741 rows). Prereg frozen 2026-11-13T22:28:59Z before outcomes. Mean IC -0.02703 (|.|<0.05), pooled IC -0.02512, pooled p 0.031, spread sign consistency 1/3 -> EXPLORATORY_NULL (EXPLORATORY_ONLY, never promotable)."
+      },
+      {
+        "cell": "TRACKA-VOL-FORWARD-2026Q1Q2",
+        "status": "COMPLETED",
+        "verdict": "INADMISSIBLE",
+        "experiment_id": "TRACKA-VOL-FORWARD-2026Q1Q2-20261114T015222Z",
+        "artifact": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T02:33:29Z.json",
+        "build_report": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:33:29Z.json",
+        "gate": "scripts/fclr_campaign_gate.py --arm all -> 18/18 PASS (F0-F6 incl. vol-forward F5/F6)",
+        "note": "Executed 2026-11-14T02:33:29Z on cached ironflow bulk 2026-01-18..2026-04-30 (103d, forward-reduced 60/7/3x10, no May/sealed reads). Bounded structural NO_GO (outcome B): universe 0 coins < 5 required (coverage-only). Root cause: open_interest coverage 1752/1776 hours (24h short) across all 192 candidate coins; candle and funding coverage complete (1776/1776). Builder ran as-is (fail-closed, no evaluation-logic change); prereg frozen pre-outcomes; no evaluated targets computed. Frozen-before-outcomes preserved. No P2 GO evidenced (alt_source_scan 0 GO). P3 NO_GO recorded; no remaining heavy work on cached data."
       }
     ],
     "supersedes_prior_next_task_entries": [

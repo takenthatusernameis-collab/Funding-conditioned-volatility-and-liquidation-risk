@@ -107,6 +107,62 @@ def fail(msg: str) -> None:
     raise SystemExit(f"FAIL_CLOSED: {msg}")
 
 
+def fail_inadmissible(msg: str) -> None:
+    """Emit a bounded structural NO_GO build report + eval summary (verdict INADMISSIBLE)
+    recording the exact failing minimum, then exit fail-closed.
+
+    Does not touch evaluated targets, features, splits, or thresholds: no panel was
+    built and no outcome was computed. Preserves frozen-before-outcomes. The emitted
+    artifacts are evidence of the coverage-gap NO_GO, not a rescue attempt.
+    """
+    s = now_utc()
+    report_path = RS / f"tracka_vol_forward_panel_build_report_{s}.json"
+    build_report = {
+        "experiment_id": EXPERIMENT_ID, "campaign": CAMPAIGN, "arm": "A",
+        "prereg": str(PREREG_PATH.relative_to(REPO)), "generated_utc": s,
+        "promotable": False, "max_status": "EXPLORATORY_ONLY",
+        "verdict": "INADMISSIBLE", "reason": msg,
+        "universe_size": 0, "universe": [], "min_instruments_required": MIN_COINS,
+        "selection_rule": "coverage-only (complete hourly candle+funding+OI over scoring window); liquidation existence counts never used as a target",
+        "windows_utc": {
+            "coverage": f"{COVERAGE_START} .. {COVERAGE_END}",
+            "train_end": BURN_IN_END, "embargo": f"{EMBARGO_START} .. 2026-03-25 23:00:00",
+            "test_blocks": [[b, st, e] for b, st, e in BLOCKS],
+            "held_out_reserve_never_scored": "2026-04-25 .. 2026-04-30",
+        },
+        "panel": {"path": None, "sha256": None, "n_rows": 0, "n_days_scored": 0,
+                  "n_blocks": 0, "n_coins": 0},
+        "note": "BOUNDED STRUCTURAL NO_GO: INADMISSIBLE before any outcome computation. Coverage gap only; no evaluated targets touched. Frozen-before-outcomes preserved.",
+    }
+    report_path.write_text(json.dumps(build_report, indent=2) + "\n")
+
+    eval_json_path = RS / f"evaluation_summary_TRACKA-VOL-FORWARD-{s}.json"
+    eval_md_path = RS / f"evaluation_summary_TRACKA-VOL-FORWARD-{s}.md"
+    eval_json = {
+        "experiment_id": EXPERIMENT_ID, "campaign": CAMPAIGN, "arm": "A",
+        "decision": "INADMISSIBLE", "verdict": "INADMISSIBLE", "promotable": False,
+        "max_status": "EXPLORATORY_ONLY", "universe_size": 0, "universe": [],
+        "reason": msg, "panel_sha256": None,
+        "panel_path": None, "build_report": str(report_path.relative_to(REPO)),
+        "generated_utc": s,
+        "note": "BOUNDED STRUCTURAL NO_GO: INADMISSIBLE before any outcome computation. Coverage gap only; no evaluated targets touched. Frozen-before-outcomes preserved. Does not override sealed verdicts.",
+    }
+    eval_json_path.write_text(json.dumps(eval_json, indent=2) + "\n")
+    eval_md_path.write_text(
+        f"# Evaluation Summary — TRACKA-VOL-FORWARD-{s}\n"
+        f"**Generated (UTC):** {s}\n"
+        f"**Campaign:** `{CAMPAIGN}` — Arm A forward volatility (P1, exploratory)\n"
+        f"**Experiment:** `{EXPERIMENT_ID}`\n"
+        f"**Verdict:** `INADMISSIBLE` (bounded structural NO_GO; EXPLORATORY_ONLY; never promotable)\n\n"
+        f"**Reason:** {msg}\n\n"
+        f"**Failing minimum:** universe 0 coins < {MIN_COINS} required (coverage-only).\n"
+        f"**Root cause:** open_interest coverage incomplete over scoring window "
+        f"{TEST_START} .. {COVERAGE_END}; candle and funding coverage complete.\n"
+        f"No evaluated targets computed; frozen-before-outcomes preserved.\n",
+    )
+    raise SystemExit(f"FAIL_CLOSED: {msg}")
+
+
 def ts(s: str) -> pd.Timestamp:
     return pd.Timestamp(s, tz="UTC")
 
@@ -224,7 +280,7 @@ def main() -> int:
     universe = sorted(coins)
     n_coins = len(universe)
     if n_coins < MIN_COINS:
-        fail(f"INADMISSIBLE: universe {n_coins} coins < {MIN_COINS} required (coverage-only)")
+        fail_inadmissible(f"INADMISSIBLE: universe {n_coins} coins < {MIN_COINS} required (coverage-only)")
     mkts = [c + "-PERP" for c in universe]
 
     # ---- 3. Causal features at 1h grid over [warm-up .. coverage_end] ----
@@ -291,10 +347,10 @@ def main() -> int:
                 rows.append(feat_row)
     panel = pd.DataFrame(rows)
     if panel.empty:
-        fail("INADMISSIBLE: panel empty after row construction")
+        fail_inadmissible("INADMISSIBLE: panel empty after row construction")
     panel = panel.dropna(subset=["rv24h", "funding_rate"]).copy()
     if panel.empty:
-        fail("INADMISSIBLE: panel empty after causal feature filtering")
+        fail_inadmissible("INADMISSIBLE: panel empty after causal feature filtering")
 
     # ---- 6. QLIKE per horizon x contrast, pooled paired; primary contrast CI + permutation + LOIO ----
     def fam_cols(fam: str) -> list[str]:

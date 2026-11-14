@@ -223,7 +223,11 @@ class TestFullGateExitCode(GateTestCase):
         f = gate.run_arm_f(self.root)
         self.assertFalse(all(c["ok"] for c in f)), "Arm F passed without the forward cell"
         failed = {c["check"] for c in f if not c["ok"]}
-        self.assertEqual(failed, {"F1", "F3_panel", "F3_report", "F4"})
+        self.assertEqual(
+            failed,
+            {"F1", "F3_panel", "F3_report", "F4", "F5", "F6"},
+            f"unexpected Arm F failures: {failed}",
+        )
 
     def test_forward_arm_complete_passes(self):
         self._install_bulk_script()
@@ -235,6 +239,9 @@ class TestFullGateExitCode(GateTestCase):
         f_sha = _write_panel(self.root, "research_state/tracka_liq_xsec_forward_panel_20261113T000000Z.parquet")
         self._report("tracka_liq_xsec_forward_panel_build_report_20261113T000000Z", f_sha)
         self._eval("evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-20261113T000000Z", "EXPLORATORY_NULL")
+        # Vol-forward cell (P1) on the same reserved window: frozen prereg + recognised INADMISSIBLE verdict.
+        self._prereg("prereg_tracka_vol_forward_20261114T015222Z", frozen=True)
+        self._eval("evaluation_summary_TRACKA-VOL-FORWARD-20261114T015222Z", "INADMISSIBLE")
         f = gate.run_arm_f(self.root)
         self.assertTrue(all(c["ok"] for c in f), f)
 
@@ -252,6 +259,29 @@ class TestFullGateExitCode(GateTestCase):
         report = [c for c in f if c["check"] == "F3_report"][0]
         self.assertFalse(report["ok"])
         self.assertIn("MISMATCH", report["detail"])
+
+
+class TestVolForwardGateCheck(GateTestCase):
+    def test_vol_forward_prereg_missing_fails(self):
+        self.assertFalse(gate.check_prereg_frozen(self.root, gate.ARM_F_VOL_PREREG_GLOB, "F5")["ok"])
+
+    def test_vol_forward_prereg_unfrozen_fails(self):
+        self._prereg("prereg_tracka_vol_forward_20261114T000000Z", frozen=False)
+        self.assertFalse(gate.check_prereg_frozen(self.root, gate.ARM_F_VOL_PREREG_GLOB, "F5")["ok"])
+
+    def test_vol_forward_prereg_frozen_passes(self):
+        self._prereg("prereg_tracka_vol_forward_20261114T015222Z", frozen=True)
+        self.assertTrue(gate.check_prereg_frozen(self.root, gate.ARM_F_VOL_PREREG_GLOB, "F5")["ok"])
+
+    def test_vol_forward_eval_unrecognised_verdict_fails(self):
+        self._eval("evaluation_summary_TRACKA-VOL-FORWARD-20261114T000000Z", "looks_great")
+        checks = gate.check_eval_summary(self.root, gate.ARM_F_VOL_EVAL_GLOB, "F6")
+        self.assertFalse(checks[0]["ok"])
+
+    def test_vol_forward_eval_inadmissible_passes(self):
+        self._eval("evaluation_summary_TRACKA-VOL-FORWARD-20261114T015222Z", "INADMISSIBLE")
+        checks = gate.check_eval_summary(self.root, gate.ARM_F_VOL_EVAL_GLOB, "F6")
+        self.assertTrue(all(c["ok"] for c in checks))
 
 
 if __name__ == "__main__":

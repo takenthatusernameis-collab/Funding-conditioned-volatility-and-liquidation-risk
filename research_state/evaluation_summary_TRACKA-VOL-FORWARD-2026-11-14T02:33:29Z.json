@@ -1,0 +1,17 @@
+{
+  "experiment_id": "TRACKA-VOL-FORWARD-2026Q1Q2-20261114T015222Z",
+  "campaign": "FCLR-VOL-FORWARD-2026Q1Q2",
+  "arm": "A",
+  "decision": "INADMISSIBLE",
+  "verdict": "INADMISSIBLE",
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "universe_size": 0,
+  "universe": [],
+  "reason": "INADMISSIBLE: universe 0 coins < 5 required (coverage-only)",
+  "panel_sha256": null,
+  "panel_path": null,
+  "build_report": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:33:29Z.json",
+  "generated_utc": "2026-11-14T02:33:29Z",
+  "note": "BOUNDED STRUCTURAL NO_GO: INADMISSIBLE before any outcome computation. Coverage gap only; no evaluated targets touched. Frozen-before-outcomes preserved. Does not override sealed verdicts."
+}

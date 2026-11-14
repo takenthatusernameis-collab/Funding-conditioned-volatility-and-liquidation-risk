@@ -75,6 +75,11 @@ ARM_F_PREREG_GLOB = "prereg_tracka_liq_xsec_forward_*.json"
 ARM_F_PANEL_GLOB = "tracka_liq_xsec_forward_panel_*.parquet"
 ARM_F_REPORT_GLOB = "tracka_liq_xsec_forward_panel_build_report_*.json"
 ARM_F_EVAL_GLOB = "evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-*.json"
+# Vol-forward cell on the same reserved forward window (P1). Additive to F0-F4;
+# never weakens them. Requires the frozen vol-forward prereg and a recognised
+# eval verdict (INADMISSIBLE is a recognised bounded NO_GO verdict).
+ARM_F_VOL_PREREG_GLOB = "prereg_tracka_vol_forward_*.json"
+ARM_F_VOL_EVAL_GLOB = "evaluation_summary_TRACKA-VOL-FORWARD-*.json"
 
 BULK_DATASETS = ("candles_1h", "funding", "open_interest")
 
@@ -290,6 +295,9 @@ def run_arm_f(root: Path = REPO) -> List[Dict[str, object]]:
     checks.append(check_prereg_frozen(root, ARM_F_PREREG_GLOB, "F1"))
     checks += check_panel_and_report(root, ARM_F_PANEL_GLOB, ARM_F_REPORT_GLOB, "F3")
     checks += check_eval_summary(root, ARM_F_EVAL_GLOB, "F4")
+    # Vol-forward cell (P1) on the same reserved window — additive, fail-closed.
+    checks.append(check_prereg_frozen(root, ARM_F_VOL_PREREG_GLOB, "F5"))
+    checks += check_eval_summary(root, ARM_F_VOL_EVAL_GLOB, "F6")
     return checks
 
 

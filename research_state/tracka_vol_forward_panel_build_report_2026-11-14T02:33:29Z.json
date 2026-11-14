@@ -1,0 +1,47 @@
+{
+  "experiment_id": "TRACKA-VOL-FORWARD-2026Q1Q2-20261114T015222Z",
+  "campaign": "FCLR-VOL-FORWARD-2026Q1Q2",
+  "arm": "A",
+  "prereg": "research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json",
+  "generated_utc": "2026-11-14T02:33:29Z",
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "verdict": "INADMISSIBLE",
+  "reason": "INADMISSIBLE: universe 0 coins < 5 required (coverage-only)",
+  "universe_size": 0,
+  "universe": [],
+  "min_instruments_required": 5,
+  "selection_rule": "coverage-only (complete hourly candle+funding+OI over scoring window); liquidation existence counts never used as a target",
+  "windows_utc": {
+    "coverage": "2026-01-18 00:00:00 .. 2026-04-24 23:00:00",
+    "train_end": "2026-03-18 23:00:00",
+    "embargo": "2026-03-19 00:00:00 .. 2026-03-25 23:00:00",
+    "test_blocks": [
+      [
+        0,
+        "2026-03-26 00:00:00",
+        "2026-04-04 23:00:00"
+      ],
+      [
+        1,
+        "2026-04-05 00:00:00",
+        "2026-04-14 23:00:00"
+      ],
+      [
+        2,
+        "2026-04-15 00:00:00",
+        "2026-04-24 23:00:00"
+      ]
+    ],
+    "held_out_reserve_never_scored": "2026-04-25 .. 2026-04-30"
+  },
+  "panel": {
+    "path": null,
+    "sha256": null,
+    "n_rows": 0,
+    "n_days_scored": 0,
+    "n_blocks": 0,
+    "n_coins": 0
+  },
+  "note": "BOUNDED STRUCTURAL NO_GO: INADMISSIBLE before any outcome computation. Coverage gap only; no evaluated targets touched. Frozen-before-outcomes preserved."
+}
