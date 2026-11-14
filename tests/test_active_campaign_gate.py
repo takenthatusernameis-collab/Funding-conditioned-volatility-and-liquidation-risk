@@ -32,6 +32,8 @@ COMPLETED_STATUSES = {
 # data is exhausted and the only path forward is an external material trigger). Both
 # are active, both carry a concrete unfinished task, and neither may be terminal.
 ACTIVE_STATUSES = {"READY_EXECUTE", "TRIGGER_ONLY"}
+ACTIVE_TASK_PREFIXES = ("FCLR-",)
+TRIGGER_ONLY_TASK_PREFIX = "FCLR-BOUNDED-TRIGGER-ONLY-"
 PREREGS = {
     "TRACKA-VOL-FULLHIST-20261112T201536Z": "prereg_tracka_vol_fullhist_20261112T201536Z.json",
     "TRACKA-LIQ-XSEC-20261112T201536Z": "prereg_tracka_liq_xsec_20261112T201536Z.json",
@@ -80,8 +82,8 @@ class TestActiveCampaignGate(unittest.TestCase):
         self.assertEqual(len(rank0), 1, f"expected exactly one rank-0 entry, got {len(rank0)}")
         e = rank0[0]
         # The active campaign advances as phases close. Rank 0 must be the
-        # current heavy campaign and must carry a concrete unfinished task.
-        self.assertTrue(str(e.get("task", "")).startswith(ACTIVE_CAMPAIGN_ID_PREFIX))
+        # current heavy/sentinel campaign and must carry a concrete unfinished task.
+        self.assertTrue(any(str(e.get("task", "")).startswith(p) for p in ACTIVE_TASK_PREFIXES))
         self.assertNotIn(e.get("status"), COMPLETED_STATUSES,
                          "rank-0 must never hold a completed/superseded campaign")
         self.assertIn(e.get("status"), ACTIVE_STATUSES,
@@ -90,6 +92,12 @@ class TestActiveCampaignGate(unittest.TestCase):
                       "rank-0 program_status must be ACTIVE or BOUNDED_TRIGGER_ONLY")
         self.assertTrue(e.get("next_unfinished_task"))
         self.assertTrue(e.get("phases"))
+        if e.get("status") == "TRIGGER_ONLY":
+            self.assertTrue(str(e.get("task", "")).startswith(TRIGGER_ONLY_TASK_PREFIX))
+            self.assertEqual(e.get("program_status"), "BOUNDED_TRIGGER_ONLY")
+            self.assertTrue(e.get("resume_triggers"))
+        else:
+            self.assertEqual(e.get("program_status"), "ACTIVE")
         # Every other campaign must be demoted, not deleted.
         others = [x for x in frontier if x.get("rank") != 0]
         self.assertTrue(others, "completed campaigns must be retained, not deleted")

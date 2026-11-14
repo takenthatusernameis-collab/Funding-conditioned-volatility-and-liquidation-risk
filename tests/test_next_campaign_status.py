@@ -52,16 +52,16 @@ class TestNextCampaignStatus(unittest.TestCase):
             self.assertTrue(by_exp[exp]["has_evaluation_artifact"],
                             f"{exp} executed but artifact not detected")
 
-    def test_new_disjoint_prereg_is_actionable(self):
-        """The frozen 2025 disjoint campaign has no evaluation artifact yet."""
+    def test_disjoint_campaign_is_executed(self):
+        """The frozen 2025 disjoint campaign is executed (not actionable)."""
         st = self.mod.prereg_status()
         by_exp = {r["experiment_id"]: r for r in st["preregs"]}
         exp = "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z"
         self.assertIn(exp, by_exp, f"{exp} prereg missing")
         self.assertTrue(by_exp[exp]["frozen_before_outcomes"])
         self.assertFalse(by_exp[exp]["outcomes_inspected_before_freeze"])
-        self.assertFalse(by_exp[exp]["has_evaluation_artifact"])
-        self.assertTrue(by_exp[exp]["actionable_now"])
+        self.assertTrue(by_exp[exp]["has_evaluation_artifact"])
+        self.assertFalse(by_exp[exp]["actionable_now"])
 
     def test_terminal_preregs_are_not_actionable(self):
         """Executed/terminal cells must not be re-proposed as pending."""

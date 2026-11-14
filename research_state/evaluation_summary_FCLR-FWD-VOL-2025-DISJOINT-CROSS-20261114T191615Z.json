@@ -1,0 +1,348 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
+ "campaign": "FCLR-2025-DISJOINT-VOL-20261114T183000Z",
+ "cell": "FWD-VOL-2025-DISJOINT-CROSS",
+ "track": "C_volatility_exploratory",
+ "generated_utc": "2026-11-14T19:16:15Z",
+ "prereg": "prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+ "prereg_sha256": "fcf3e7e505c62c3f13514f0b52364b28aa878870867f955898bb6143320aaefa",
+ "verdict": "EXPLORATORY_NULL",
+ "promotable": false,
+ "max_status": "EXPLORATORY_ONLY",
+ "status_rule": {
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "gate4": "EXTERNAL_BLOCKED"
+ },
+ "checks": {
+  "materiality_ge_2pct": false,
+  "ci_excludes_zero_improving": false,
+  "instruments_ge_5": true,
+  "blocks_ge_3": true,
+  "loio_ge_4_of_5": false,
+  "placebo_pass": true,
+  "holm_pass": false,
+  "leakage_audit_pass": true
+ },
+ "primary": {
+  "mean_diff": 0.0069231708051235965,
+  "ci_lo": -0.012604044681266236,
+  "ci_hi": 0.028030237827547048,
+  "n": 10800,
+  "n_days": 90,
+  "p_boot": 0.535,
+  "rel_reduction_pct": -1.9633752428119817
+ },
+ "primary_contrast": "h24_C2_vs_B1",
+ "per_block": [
+  {
+   "block": 0,
+   "train_start": "2025-04-25T00:00:00Z",
+   "train_end": "2025-05-24T23:00:00Z",
+   "test_start": "2025-06-01T00:00:00Z",
+   "test_end": "2025-06-30T23:00:00Z",
+   "train_rows": 2760,
+   "train_rows_per_symbol": {
+    "BNBUSDT": 552,
+    "BTCUSDT": 552,
+    "ETHUSDT": 552,
+    "SOLUSDT": 552,
+    "XRPUSDT": 552
+   },
+   "test_rows": 3600,
+   "test_rows_per_symbol": {
+    "BNBUSDT": 720,
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   }
+  },
+  {
+   "block": 1,
+   "train_start": "2025-09-25T00:00:00Z",
+   "train_end": "2025-10-24T23:00:00Z",
+   "test_start": "2025-11-01T00:00:00Z",
+   "test_end": "2025-11-30T23:00:00Z",
+   "train_rows": 3432,
+   "train_rows_per_symbol": {
+    "BNBUSDT": 720,
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 552
+   },
+   "test_rows": 3600,
+   "test_rows_per_symbol": {
+    "BNBUSDT": 720,
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   }
+  },
+  {
+   "block": 2,
+   "train_start": "2025-10-25T00:00:00Z",
+   "train_end": "2025-11-23T23:00:00Z",
+   "test_start": "2025-12-01T00:00:00Z",
+   "test_end": "2025-12-31T23:00:00Z",
+   "train_rows": 3552,
+   "train_rows_per_symbol": {
+    "BNBUSDT": 720,
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 672
+   },
+   "test_rows": 3600,
+   "test_rows_per_symbol": {
+    "BNBUSDT": 720,
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   }
+  }
+ ],
+ "holm": {
+  "h168_C2_vs_B1_b1": 0.0,
+  "h168_C2_vs_B1_b2": 0.0,
+  "h168_C2_vs_C1_b1": 0.0,
+  "h168_C2_vs_C1_b2": 0.0,
+  "h168_C2_vs_B1_b0": 0.07,
+  "h168_C2_vs_C1_b0": 0.20400000000000001,
+  "h24_C2_vs_C1_b1": 0.495,
+  "h6_C2_vs_C1_b1": 1.0,
+  "h168_C1_vs_B1_b2": 1.0,
+  "h24_C2_vs_C1_b0": 1.0,
+  "h6_C2_vs_B1_b1": 1.0,
+  "h6_C2_vs_C1_b0": 1.0,
+  "b1": 1.0,
+  "h24_C2_vs_B1_b1": 1.0,
+  "h6_C2_vs_B1_b0": 1.0,
+  "b0": 1.0,
+  "h24_C2_vs_B1_b0": 1.0,
+  "h168_C1_vs_B1_b0": 1.0,
+  "h24_C2_vs_C1_b2": 1.0,
+  "b2": 1.0,
+  "h24_C2_vs_B1_b2": 1.0,
+  "h72_C1_vs_B1_b0": 1.0,
+  "h72_C2_vs_C1_b0": 1.0,
+  "h72_C2_vs_C1_b2": 1.0,
+  "h72_C2_vs_B1_b2": 1.0,
+  "h24_C1_vs_B1_b2": 1.0,
+  "h72_C2_vs_B1_b0": 1.0,
+  "h6_C1_vs_B1_b0": 1.0,
+  "h6_C1_vs_B1_b1": 1.0,
+  "h72_C1_vs_B1_b2": 1.0,
+  "h72_C2_vs_C1_b1": 1.0,
+  "h168_C1_vs_B1_b1": 1.0,
+  "h24_C1_vs_B1_b1": 1.0,
+  "h6_C1_vs_B1_b2": 1.0,
+  "h24_C1_vs_B1_b0": 1.0,
+  "h72_C2_vs_B1_b1": 1.0,
+  "h72_C1_vs_B1_b1": 1.0,
+  "h6_C2_vs_B1_b2": 1.0,
+  "h6_C2_vs_C1_b2": 1.0
+ },
+ "loio": [
+  {
+   "held_out": "BTCUSDT",
+   "mean_diff": 0.009124125807533329,
+   "ci_lo": -0.00510070752540765,
+   "ci_hi": 0.022703259476102956,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.256,
+   "rel_reduction_pct": -2.0977536690971146
+  },
+  {
+   "held_out": "ETHUSDT",
+   "mean_diff": 0.024103396446998465,
+   "ci_lo": -0.0061509632073842675,
+   "ci_hi": 0.05876675735597028,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.164,
+   "rel_reduction_pct": -6.2623744001755615
+  },
+  {
+   "held_out": "BNBUSDT",
+   "mean_diff": -0.012273058234388077,
+   "ci_lo": -0.04757750538595601,
+   "ci_hi": 0.033320825848289035,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.524,
+   "rel_reduction_pct": 3.330818093383085
+  },
+  {
+   "held_out": "SOLUSDT",
+   "mean_diff": 0.01966847116577303,
+   "ci_lo": -0.005732780515136452,
+   "ci_hi": 0.050705587167973305,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.184,
+   "rel_reduction_pct": -6.673768950160815
+  },
+  {
+   "held_out": "XRPUSDT",
+   "mean_diff": 0.005526150067871918,
+   "ci_lo": -0.016343730714990234,
+   "ci_hi": 0.026517199850771278,
+   "n": 2160,
+   "n_days": 90,
+   "p_boot": 0.684,
+   "rel_reduction_pct": -1.7281552671827116
+  }
+ ],
+ "placebo": {
+  "null_p95": -1.969026080567705,
+  "true_rel_reduction_pct": -1.9633752428119817,
+  "pass": true,
+  "n_perm": 200
+ },
+ "leakage": {
+  "features_causal": true,
+  "target_forward": true,
+  "embargo_days": 7,
+  "embargo_enforced_between_train_and_test": true,
+  "per_block_train_start": [
+   "2025-04-25T00:00:00Z",
+   "2025-09-25T00:00:00Z",
+   "2025-10-25T00:00:00Z"
+  ],
+  "pass": true
+ },
+ "coverage_target_24h": {
+  "BTCUSDT": 6000,
+  "ETHUSDT": 6000,
+  "BNBUSDT": 6000,
+  "SOLUSDT": 6000,
+  "XRPUSDT": 5952
+ },
+ "n_symbols": 5,
+ "n_blocks": 3,
+ "n_valid_rows": 28944,
+ "n_panel_rows": 30120,
+ "horizon_family": {
+  "h6": {
+   "C2_vs_B1": {
+    "mean_diff": 0.012497814663474955,
+    "ci_lo": -0.00765637577209801,
+    "ci_hi": 0.0375440734309775,
+    "n": 10800,
+    "n_days": 90,
+    "p_boot": 0.294,
+    "rel_reduction_pct": -1.849063608921221
+   },
+   "C1_vs_B1": {
+    "mean_diff": 0.0017996572926566184,
+    "ci_lo": -0.004265026960785792,
+    "ci_hi": 0.008662341581274633,
+    "n": 10800,
+    "n_days": 90,
+    "p_boot": 0.625,
+    "rel_reduction_pct": -0.26626101426405663
+   },
+   "C2_vs_C1": {
+    "mean_diff": 0.010698157370818336,
+    "ci_lo": -0.0075738577249707,
+    "ci_hi": 0.03290801713645169,
+    "n": 10800,
+    "n_days": 90,
+    "p_boot": 0.32,
+    "rel_reduction_pct": -1.5785993998838672
+   }
+  },
+  "h24": {
+   "C2_vs_B1": {
+    "mean_diff": 0.0069231708051235965,
+    "ci_lo": -0.012604044681266236,
+    "ci_hi": 0.028030237827547048,
+    "n": 10800,
+    "n_days": 90,
+    "p_boot": 0.535,
+    "rel_reduction_pct": -1.9633752428119817
+   },
+   "C1_vs_B1": {
+    "mean_diff": 1.4364876699178975e-05,
+    "ci_lo": -0.005201927662304429,
+    "ci_hi": 0.0047746449116305495,
+    "n": 10800,
+    "n_days": 90,
+    "p_boot": 0.986,
+    "rel_reduction_pct": -0.004073804340684787
+   },
+   "C2_vs_C1": {
+    "mean_diff": 0.006908805928424418,
+    "ci_lo": -0.010414154882113343,
+    "ci_hi": 0.026126967603832103,
+    "n": 10800,
+    "n_days": 90,
+    "p_boot": 0.469,
+    "rel_reduction_pct": -1.9592216236157505
+   }
+  },
+  "h72": {
+   "C2_vs_B1": {
+    "mean_diff": -0.00013775102084861486,
+    "ci_lo": -0.007306732211825784,
+    "ci_hi": 0.007236614860077759,
+    "n": 10560,
+    "n_days": 88,
+    "p_boot": 0.979,
+    "rel_reduction_pct": 0.07082476029861451
+   },
+   "C1_vs_B1": {
+    "mean_diff": -0.000767838299326284,
+    "ci_lo": -0.0032897396011081007,
+    "ci_hi": 0.0014093936900722033,
+    "n": 10560,
+    "n_days": 88,
+    "p_boot": 0.517,
+    "rel_reduction_pct": 0.3947844681139923
+   },
+   "C2_vs_C1": {
+    "mean_diff": 0.0006300872784776685,
+    "ci_lo": -0.006445597926691932,
+    "ci_hi": 0.007732885952427452,
+    "n": 10560,
+    "n_days": 88,
+    "p_boot": 0.875,
+    "rel_reduction_pct": -0.3252437195034935
+   }
+  },
+  "h168": {
+   "C2_vs_B1": {
+    "mean_diff": 0.006439267047430048,
+    "ci_lo": 0.0005954469155283475,
+    "ci_hi": 0.013129797102885268,
+    "n": 10080,
+    "n_days": 84,
+    "p_boot": 0.029,
+    "rel_reduction_pct": -4.436170869759745
+   },
+   "C1_vs_B1": {
+    "mean_diff": 0.001790674835304041,
+    "ci_lo": -0.00028516896640996446,
+    "ci_hi": 0.0039905819809137166,
+    "n": 10080,
+    "n_days": 84,
+    "p_boot": 0.101,
+    "rel_reduction_pct": -1.2336403325216978
+   },
+   "C2_vs_C1": {
+    "mean_diff": 0.004648592212126009,
+    "ci_lo": -0.0004838630466133362,
+    "ci_hi": 0.01032760810971699,
+    "n": 10080,
+    "n_days": 84,
+    "p_boot": 0.077,
+    "rel_reduction_pct": -3.1635042726100826
+   }
+  }
+ }
+}

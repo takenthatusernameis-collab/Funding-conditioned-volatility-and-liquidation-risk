@@ -1,8 +1,7 @@
 # NEXT SESSION HANDOFF — OBSOLETE (pointer only)
 
-**Status:** STALE. Superseded by `AGENT_HANDOFF.md` (single durable handoff, 2026-11-14T19:12:00Z).
+**Status:** STALE. Superseded by `AGENT_HANDOFF.md` (2026-11-14T19:16:15Z).
 
-- Do **not** follow any prior directives in this file's history. The operative state is **READY_EXECUTE** for `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` (exploratory only, `promotable=false`).
-- Read `AGENT_HANDOFF.md`, `research_state/experiment_frontier.json` rank 0, and `research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json`.
-- Heavy work is unblocked: implement `scripts/fclr_fwd_vol_2025_disjoint_cross.py`, run the three disjoint 2025 blocks, emit artifacts, and pass `scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py`.
-- No polling, no repeated identical probes, no re-execution of tested windows, no status-only sessions.
+- Do **not** follow prior directives here. Operative state: **TRIGGER-ONLY / NO agent-removable heavy work** after `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` completed as **EXPLORATORY_NULL** (promotable=false).
+- Read `AGENT_HANDOFF.md` and `research_state/experiment_frontier.json` rank 0. Act only on material triggers (GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO) per handoff rules.
+- No polling, no status-only sessions, no re-execution of tested/exhausted windows.

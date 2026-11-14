@@ -1,0 +1,53 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
+ "generated_utc": "2026-11-14T19:16:15Z",
+ "panel_path": "tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+ "panel_sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+ "n_rows": 30120,
+ "n_valid_rows": 28944,
+ "n_blocks": 3,
+ "n_symbols": 5,
+ "coverage_target_24h": {
+  "BTCUSDT": 6000,
+  "ETHUSDT": 6000,
+  "BNBUSDT": 6000,
+  "SOLUSDT": 6000,
+  "XRPUSDT": 5952
+ },
+ "blocks": [
+  {
+   "block": 0,
+   "train_start": "2025-04-25T00:00:00Z",
+   "train_end": "2025-05-24T23:00:00Z",
+   "embargo": "2025-05-25T00:00:00Z..2025-05-31T23:00:00Z",
+   "test_start": "2025-06-01T00:00:00Z",
+   "test_end": "2025-06-30T23:00:00Z",
+   "days": 30
+  },
+  {
+   "block": 1,
+   "train_start": "2025-09-25T00:00:00Z",
+   "train_end": "2025-10-24T23:00:00Z",
+   "embargo": "2025-10-25T00:00:00Z..2025-10-31T23:00:00Z",
+   "test_start": "2025-11-01T00:00:00Z",
+   "test_end": "2025-11-30T23:00:00Z",
+   "days": 30
+  },
+  {
+   "block": 2,
+   "train_start": "2025-10-25T00:00:00Z",
+   "train_end": "2025-11-23T23:00:00Z",
+   "embargo": "2025-11-24T00:00:00Z..2025-11-30T23:00:00Z",
+   "test_start": "2025-12-01T00:00:00Z",
+   "test_end": "2025-12-31T23:00:00Z",
+   "days": 31
+  }
+ ],
+ "inputs": "research_state/data_cache/{SYM}_2025_MM/{markPriceKlines,premiumIndexKlines,indexPriceKlines}-{date} + {SYM}-fundingRate-{YYYY-MM}",
+ "data_start": "2025-04-25T00:00:00Z",
+ "data_end": "2025-12-31T23:00:00Z",
+ "network_used": false,
+ "sealed_artifacts_mutated": false,
+ "promotable": false,
+ "max_status": "EXPLORATORY_ONLY"
+}
