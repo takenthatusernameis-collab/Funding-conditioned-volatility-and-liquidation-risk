@@ -1,4 +1,4 @@
-# SINGLE DURABLE HANDOFF — 2026-11-14T11:35:00Z (next agentic session)
+# SINGLE DURABLE HANDOFF — 2026-11-14T11:37:01Z (next agentic session)
 
 ## Repository / campaign
 - **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation risk, Hyperliquid/Track A frontier).
@@ -38,16 +38,17 @@ The sealed estimator (`tracka_hl_evaluate_successor.py`) uses **raw features wit
 - `test_tracka_hardening_140.py::test_gate_unreadable_data_path_blocked_stable` — Same cause
 These are **not regressions** — the drift preflight correctly identifies the 8 new timestamped artifacts from this reconciliation.
 
-## Next Heavy Work Campaign (Priority Order)
+## NEXT HEAVY WORK CAMPAIGN — FOCUS (Future agents must execute this; no status-only sessions)
 
-### 1. EXECUTE TRACKA-HL-EXPANSION (Liquidation Forecast, Symbol Expansion) — **PRIMARY**
+**Campaign:** EXECUTE TRACKA-HL-EXPANSION (Liquidation Forecast, Symbol Expansion) — **PRIMARY / MANDATORY**
+
 **Prereg:** `research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json` (FROZEN_PRE_OUTCOMES)
 **Window:** 2026-05-01..2026-10-31 (or largest contiguous subwindow)
 **Target:** Observed Hyperliquid liquidation intensity (notional-weighted ironflow events)
 **Contrast:** C2 (funding + RV + premium + ema_dist) vs B1 (RV-only)
 **Metric:** QLIKE, ≥2% relative reduction, CI excludes zero, ≥5 symbols, ≥3 test blocks
 
-**Prereg `next_steps` (must execute in order):**
+**Prereg `next_steps` (must execute in order — do not skip):**
 1. **Bounded acquisition**: `fundingHistory` + `candleSnapshot` 2026-05..2026-10 for top ex-ante candidate symbols (from `candidate_symbols_frozen_ex_ante`, excluding 9 already-cached coins). Record provenance (`.accessed.json` + `.sha256`). **No redundant polling.**
 2. **Ex-ante symbol selection**: Apply frozen rule on cached ironflow labels (2026-05..2026-10 parquets). Metric: sum(notional_usd) per market, >0 events in ≥2 of 6 months, nonzero label variance across test blocks. Target final paired universe ≥5 symbols incl. overlap with 9 cached coins.
 3. **Build deterministic RV-augmented panel**: symbols × 24h buckets with observed label intensity + funding + RV1h/RV24h/RV168h + ema_dist + abs_fund_pct. Emit panel parquet + build report with hashes/coverage/leakage notes.
@@ -56,7 +57,9 @@ These are **not regressions** — the drift preflight correctly identifies the 8
 
 **Scripts likely involved**: `scripts/fclr_build_tracka_liq_xsec.py`, `scripts/tracka_hl_fetch_candles_*`, `scripts/tracka_hl_build_panel_with_rv.py`, `scripts/run_liqmicro_v2.py`, `scripts/tracka_operator_report.py`, `scripts/tracka_resume_gate.py`.
 
-### 2. EXECUTE TRACKA-VOL-FULLHIST (Volatility, Full History)
+## SECONDARY (execute only after TRACKA-HL-EXPANSION is complete)
+
+### EXECUTE TRACKA-VOL-FULLHIST (Volatility, Full History)
 **Prereg:** `research_state/prereg_tracka_vol_fullhist_20261112T201536Z.md` (JSON twin exists, FROZEN_PRE_OUTCOMES)
 **Window:** 2025-06-01..2026-01-17 (3 test blocks: 2025-10-08..2025-11-06, 2025-11-13..2025-12-12, 2025-12-19..2026-01-17)
 **Reserved untouched:** 2026-01-18..2026-04-30 (MUST NOT BE READ)
@@ -64,9 +67,7 @@ These are **not regressions** — the drift preflight correctly identifies the 8
 **Contrast:** C2_vs_B1 (primary), 4 horizons × {C2_vs_B1, C1_vs_B1, C2_vs_C1} Holm family (12 tests)
 **Gates:** QLIKE reduction ≥2%, bootstrap CI excludes zero, ≥5 instruments, ≥3 blocks
 
-**Scripts likely involved**: `scripts/fclr_ironflow_bulk.py`, `scripts/fclr_build_tracka_vol_fullhist.py`, `scripts/eval_volatility_family.py`.
-
-### 3. HYPERLIQUID FORWARD-REDUCED CELL (2026-01-18..2026-04-30)
+### HYPERLIQUID FORWARD-REDUCED CELL (2026-01-18..2026-04-30)
 The reserved region from FULLHIST is exactly the forward window detected by `next_campaign_status.py`. A new prereg must be frozen for a **forward-reduced design** (60 train + 7 embargo + 3×10 test = 97 days) on this 103-day region before the campaign can claim closure on the Hyperliquid domain.
 
 ## Forbidden Patterns (Regression Guards)
@@ -91,3 +92,10 @@ The reserved region from FULLHIST is exactly the forward window detected by `nex
 - [x] **2×2 reconciliation complete: EXPLAINED_BY_ESTIMATOR verdict with full evidence**
 
 **If any check fails: STOP. Fix the regression before proceeding.**
+
+## Immediate Next Action for This Session (2026-11-14T11:37:01Z)
+**Execute Step 1 of TRACKA-HL-EXPANSION**: Bounded first-time acquisition of Hyperliquid `fundingHistory` + `candleSnapshot` 2026-05..2026-10 for top ex-ante candidate symbols (from `candidate_symbols_frozen_ex_ante`, excluding the 9 already-cached coins). Record provenance (`.accessed.json` + `.sha256`). Target: confirm admissibility/acquirability for ≥5 final paired symbols.
+
+**Do not** proceed to panel build or evaluation until acquisition + symbol selection are complete and documented with provenance.
+**Do not** touch Gate 4 Branch 1 (terms/legal) — it remains externally blocked. Track A/B execution is independent.
+**Do not** read sealed/terminal windows (2026-05-01..2026-10-31, 2026-01-18..2026-04-30 reserved).
