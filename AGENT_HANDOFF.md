@@ -1,4 +1,4 @@
-# SINGLE DURABLE HANDOFF — 2026-11-14T12:36:32Z (initial task for next agentic session)
+# SINGLE DURABLE HANDOFF — 2026-11-14T12:38:21Z (initial task for next agentic session)
 
 ## Repository / mission
 - **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation risk; Binance 5-symbol Track C + Hyperliquid/Track A frontier). Forecast validation only; no trading/overlay promotion.
@@ -16,7 +16,7 @@
 - No unfrozen/unexecuted preregistered heavy cell on cached/admissible data; Binance and Hyperliquid forward designs exhausted/tested; no valid Gate 4 trigger; no verified NEW observed-liquidation source meeting §16 minima (≥5 instruments, ≥3 non-overlapping 30-day blocks or equivalent preregistered complete-month design, unauthenticated, provenance/license, observed-only labels, venue-consistent, joinable).
 - **STALE DIRECTIVES REMOVED:** `NEXT_SESSION_HANDOFF.md` (2026-11-14T09:23:34Z) still says "Execute Step 1 of TRACKA-HL-EXPANSION" and treats forward window as actionable — this is obsolete. `AGENT_HANDOFF.md` and this block supersede it; do not follow stale steps.
 
-## NEXT HEAVY WORK CAMPAIGN (mandatory, bounded, fail-closed) — `FCLR-NEW-ADMISSIBLE-SOURCE-AUDIT-2026-11-14T12:36:32Z`
+## NEXT HEAVY WORK CAMPAIGN (mandatory, bounded, fail-closed) — `FCLR-NEW-ADMISSIBLE-SOURCE-AUDIT-2026-11-14T12:38:21Z`
 **Objective:** convert "no obvious source" into timestamped, evidence-backed admissibility decisions; if and only if a source passes §16, freeze+execute a new prereg in-session. No status-only completion.
 
 ### Step 1 — Gate 4 trigger check (deterministic, first action)
@@ -40,5 +40,15 @@
 
 ## Immediate action for next session
 1. Read `research_state/new_data_admissibility_audit_20261114T123710Z.json` and `research_state/alt_source_deep_review_latest.md`.
-2. If no new material evidence since 2026-11-14T12:36:32Z, produce `research_state/structural_exhaustion_confirmation_<UTC>.md` (heavy documentation with exact per-source minima failures) and update `experiment_frontier.json` to reflect bounded trigger-only state; otherwise run step 2 probes only for the materially new candidate and branch per step 3.
+2. If no new material evidence since 2026-11-14T12:38:21Z, produce `research_state/structural_exhaustion_confirmation_<UTC>.md` (heavy documentation with exact per-source minima failures) and update `experiment_frontier.json` to reflect bounded trigger-only state; otherwise run step 2 probes only for the materially new candidate and branch per step 3.
 3. Record commands/hashes/verdicts; run `scripts/next_campaign_status.py` and relevant tests before any "done" claim.
+
+**Verification commands:**
+```bash
+python3 scripts/next_campaign_status.py
+python3 -m pytest tests/test_next_campaign_status.py -v
+python3 -m pytest tests/test_fclr_final_structural_closure.py -v
+python3 -m pytest tests/test_fclr019_gate4_evidence_bundle_index.py tests/test_fclr020_gate4_readiness_action_matrix.py tests/test_fclr021_gate4_blocker_resolution_checklist_validator.py tests/test_fclr022_gate4_blocker_resolution_evidence_preflight.py tests/test_fclr023_gate4_blocker_resolution_action_plan.py -v
+```
+
+(End of handoff)
