@@ -1,8 +1,8 @@
-# Durable Agent Handoff — 2026-11-14T22:20:10Z
+# Durable Agent Handoff — 2026-11-14T22:26:41Z
 
-**Sole active handoff.** `NEXT_SESSION_HANDOFF.md` is a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is superseded historical evidence. Execute the campaign below. Ignore conflicting historical directives.
+**START HERE (sole active handoff).** `NEXT_SESSION_HANDOFF.md` is a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is superseded historical evidence. Do not plan or explore—execute the campaign below. Ignore conflicting historical directives.
 
-## Verified state (2026-11-14T22:20:10Z)
+## Verified state (2026-11-14T22:26:41Z)
 
 - Repo: `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility / liquidation risk). Do not start unrelated work, add schedulers, edit `.github/workflows/*`, fetch paid/credentialed/manual data, commit raw cache, or reopen sealed verdicts.
 - Sealed/complete (do **not** re-run): `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` = **EXPLORATORY_NULL** (not confirmatory/not promotable, gate PASS). `FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z` = **UNEXPLAINED** (EXPLORATORY_ONLY, `promotable=false`, full artifacts emitted). Preserve all artifacts/hashes.
