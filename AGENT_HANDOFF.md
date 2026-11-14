@@ -1,4 +1,4 @@
-# SINGLE DURABLE HANDOFF — 2026-11-14T13:15:35Z (initial task for next agentic session)
+# SINGLE DURABLE HANDOFF — 2026-11-14T13:31:53Z (initial task for next agentic session)
 
 ## Repository / mission
 - **Repo:** `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility & liquidation risk; Binance 5-symbol Track C + Hyperliquid/Track A frontier). Forecast validation only; no trading/overlay promotion.
