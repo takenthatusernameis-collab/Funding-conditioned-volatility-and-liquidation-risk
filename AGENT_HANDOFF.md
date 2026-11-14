@@ -1,48 +1,77 @@
-# Agent Handoff — 2026-11-14T19:16:15Z
+# Durable Agent Handoff — 2026-11-14T19:20:32Z
 
-## Repository: Funding-conditioned-volatility-and-liquidation-risk
+## Authority and scope
 
-## Current State: COMPLETED_VALIDATED (exploratory) — no agent-removable heavy work
-- Rank 0: `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z` — **COMPLETED_VALIDATED**
-- Verdict: **EXPLORATORY_NULL** (`promotable=false`, `max_status=EXPLORATORY_ONLY`, Gate 4 Binance v5 terms `EXTERNAL_BLOCKED`; no RESOLVED_VERIFIED trigger). Do **not** claim confirmatory/promotion for H1.
+This is the single operative handoff for the next agentic session.
 
-## This session (executed, heavy)
-- Verified no `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` trigger.
-- Implemented `scripts/fclr_fwd_vol_2025_disjoint_cross.py` (per-block train windows from frozen prereg, FCLR-011 model set/QLIKE/contrasts, 2000-rep day-block bootstrap, Holm family, LOIO, funding-permutation placebo, leakage audit; exploratory verdicts only).
-- Ran `--smoke` (1 symbol, block 0) and full 3-block evaluation (5 symbols, 3 blocks, 10,800 paired rows, 90 days).
-- Emitted:
-  - `research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet`
-  - `research_state/tracka_fwd_vol_2025_disjoint_cross_build_report_20261114T191615Z.json` (sha256 `de0ca73e7d092a20...`)
-  - `research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json`
-  - `research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.md`
-- `scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py`: **PASS** (17 checks).
-- Updated `research_state/experiment_frontier.json` rank 0 -> COMPLETED_VALIDATED; updated `tests/test_next_campaign_status.py` to reflect executed campaign.
+Repository focus: **funding-conditioned volatility and liquidation risk**. Do not start unrelated work, add schedulers, edit `.github/workflows/*`, fetch paid/credentialed/manual data, commit raw cache, or reopen sealed verdicts.
 
-## Result summary (primary C2 vs B1, 24h QLIKE, pooled 3 blocks)
-- mean diff (C2-B1): **+0.006923** (C2 worse), 95% CI **[-0.012604, 0.028030]** crosses 0
-- relative reduction: **-1.963%**, p_boot **0.535**, Holm p (primary) **1.0**, n=10800, days=90
-- Checks: materiality_ge_2pct **false**, ci_excludes_zero_improving **false**, instruments_ge_5 **true**, blocks_ge_3 **true**, loio_ge_4_of_5 **false**, placebo_pass **true**, holm_pass **false**, leakage_audit_pass **true**
-- Per-block train/test rows: b0 2760/3600 (2025-04-25..05-24 -> 2025-06), b1 3432/3600 (2025-09-25..10-24 -> 2025-11), b2 3552/3600 (2025-10-25..11-23 -> 2025-12)
-- Interpretation: sealed FCLR-011 does **not** transport to these three disjoint 2025 blocks (exploratory null; no promotion).
+Evidence cutoff for this handoff: the current worktree at 2026-11-14T19:20:32Z. The latest completed experiment is `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z`, executed at 2026-11-14T19:16:15Z with verdict **EXPLORATORY_NULL**. It is not confirmatory and is not promotable.
 
-## Initial Task for Next Agentic Session (2026-11-14T19:16:15Z) — durable handoff
-**Status: TRIGGER-ONLY / NO agent-removable heavy work on cached admissible Binance data.** Do not poll. Do not produce status-only output. Do not re-run tested/exhausted windows (incl. 2024-06/2025-06/2025-11/2025-12 disjoint blocks now tested, 2024-07-23..2024-09-30, 2025-02-01..2025-05-31, 2025-07-23..2025-10-15, 2026-01-01..2026-04-01, 2026-05-01..2026-08-31, 2026-08-03..2026-10-31, 2026-01-18..2026-04-30). Do not re-open sealed FCLR-011/012-V/013/014 artifacts.
+## Initial task: run a heavy estimator/data reconciliation on the cached 2025 panel
 
-### Deterministic check (<30s)
+Create a new campaign ID, for example `FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z`, and use this sequence. The work is deliberately specified so it must be performed rather than replaced with a status-only check.
+
+### 1. Freeze a pre-results protocol before inspecting any outcome
+
+Write both JSON and Markdown prereg artifacts under `research_state/` with status `FROZEN_PRE_OUTCOMES`, `frozen_before_outcomes=true`, and `outcome_data_inspected_before_freeze=false`.
+
+The protocol must:
+
+- reuse the existing panel `research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet` (sha256 `de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba`);
+- use only these already materialized 30-day train/test blocks, with the same 7-day embargo:
+  - train `2025-04-25..2025-05-24`, test `2025-06`;
+  - train `2025-09-25..2025-10-24`, test `2025-11`;
+  - train `2025-10-25..2025-11-23`, test `2025-12`;
+- keep the frozen B0/B1/C1/C2 feature sets and primary C2 vs B1 24h QLIKE contract from `research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json`;
+- define a sealed-reference estimator arm (raw features, no leakage-safe scaling, no target-derived fills) and a corrected-estimator arm (train-only standardization, finite-feature masking, train-only log-target smearing, explicit missingness policy);
+- run a two-by-two attribution matrix over {existing panel, a lineage-preserving cleaned copy} × {sealed estimator, corrected estimator};
+- require row/key/lineage hashes and per-cell coverage before outcome fitting; any row-key or feature-lineage mismatch is `INCONCLUSIVE`, not a numeric result;
+- report mean QLIKE differences, relative reductions, paired block-bootstrap CIs, Holm-adjusted p-values, LOIO, and funding-permutation placebo;
+- classify the result as `EXPLAINED_BY_ESTIMATOR`, `EXPLAINED_BY_DATA`, `UNEXPLAINED`, or `INCONCLUSIVE`; all outputs remain `EXPLORATORY_ONLY` and `promotable=false`.
+
+Do not inspect model predictions, contrasts, target summaries, metric values, or outcome distributions before the prereg is frozen. Coverage/arithmetic checks are allowed; outcome computation is not.
+
+### 2. Implement and run the reconciliation
+
+Implement a dedicated script under `scripts/` rather than modifying the sealed campaign. Reuse existing helpers where safe, but make the two estimator implementations explicit and independently testable. Add focused tests under `tests/` covering at least: frozen prereg identity, panel hash, train/test embargo, feature causality, finite-row masking, train-only scaling/smearing, deterministic bootstrap seed, and leakage audit.
+
+Run at least a smoke execution and the full cached-panel execution. Emit:
+
+- `research_state/prereg_<campaign>_<UTC>.json` and `.md`;
+- `research_state/<campaign>_reconciliation_panel_<UTC>.parquet` if a cleaned copy is needed, plus a build report containing sha256, row count, key count, source hash, and coverage;
+- `research_state/evaluation_summary_<campaign>_<UTC>.json` and `.md`;
+- focused tests and their command output in the final report.
+
+### 3. Decide the next bounded stage from the evidence
+
+- If attribution is `EXPLAINED_BY_ESTIMATOR`, treat the existing null as an implementation-sensitive exploratory result, document the defensible estimator, and proceed to the single remaining untouched disjoint Binance block `2024-06` under a **new frozen prereg** (train `2024-04-25..2024-05-24`, test `2024-06-01..2024-06-30`). Report it as a singleton diagnostic, never as a fresh three-block confirmation.
+- If attribution is `EXPLAINED_BY_DATA`, freeze a row-level lineage repair/audit before any further model evaluation.
+- If attribution is `UNEXPLAINED`, run LOIO/per-block diagnostics and preserve the result; do not tune features or relax gates.
+- If any design minimum fails, emit a timestamped `INCONCLUSIVE` or `NO_GO` with exact failing checks. A bounded negative result is valid completion; a status-only session is not.
+
+## Required verification
+
+Before reporting completion:
+
 ```bash
 cd /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk
-python3 scripts/next_campaign_status.py | tail -20
-ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "NO_VALID_GATE4_TRIGGER"
+python3 scripts/next_campaign_status.py
 python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py
+python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute -v
+# run the new reconciliation tests added by the session
 ```
-If still `NO_VALID_GATE4_TRIGGER` and no new admissible trigger, **do not loop**: record bounded NO_GO only if you must touch state; otherwise preserve evidence.
 
-### Resume triggers (act only on a material trigger, with NEW experiment ID / frozen prereg pre-outcomes as required)
-1. **GATE4_BRANCH_1** — valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with `status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal attestation -> follow Gate 4 confirmatory flow (do not treat disjoint cross as confirmatory).
-2. **NEW_OBSERVED_LIQUIDATION_SOURCE** — materially new candidate -> §16 admissibility audit artifact BEFORE prereg/outcomes -> if ADMISSIBLE freeze prereg pre-outcomes -> build/eval/verdict -> atomic registry/frontier updates under NEW experiment ID.
-3. **HL_LABEL_EXTENSION** — Hyperliquid >=100d depth AND verified post-2026-10-31 observed labels -> bounded reprobe only.
-4. **EXPANSION_ROBUSTNESS_REDO** — cached-panel robustness with NEW frozen prereg pre-outcomes (no sealed verdict mutation).
+Also verify that `NEXT_SESSION_HANDOFF.md` remains a tombstone, that `AGENT_HANDOFF.md` remains the sole active handoff, and that no sealed artifact hash changed.
 
-## Hard stops
-- No polling for Gate 4. No network discovery without a materially new angle and admissibility audit. No raw cache commits. No `.github/workflows/*` edits.
-- Every session ends with committed/state-updated work OR a bounded NO_GO + exact evidence.
+## Hard evidence rules
+
+- The existing 2025 disjoint result is **not** evidence of a practical edge: pooled C2-B1 mean difference `+0.006923`, relative reduction `-1.963%`, 95% CI `[-0.012604, 0.028030]`, Holm not passed, LOIO not passed, placebo passed.
+- Gate 4 remains `EXTERNAL_BLOCKED` unless a valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Never fabricate or self-certify it.
+- Do not re-run tested Binance windows: `2024-07-23..2024-09-30`, `2025-02-01..2025-05-31`, `2025-07-23..2025-10-15`, `2026-01-01..2026-04-01`, `2026-05-01..2026-08-31`, `2026-08-03..2026-10-31`, or the tested disjoint months `2025-06`, `2025-11`, `2025-12`.
+- Do not relabel exploratory results as confirmatory, promote H1, invent provenance, or use future information for scaling, fitting, threshold selection, or imputation.
+- Preserve all prior artifacts and null results. Update the frontier/registry atomically under the new experiment ID; never mutate sealed records.
+
+## Completion contract
+
+The next session is complete only when it has either (a) executed the frozen reconciliation and emitted the full artifact set with tests and a verdict, or (b) produced a timestamped evidence-backed blocker showing the exact failed precondition. Merely checking status, finding no trigger, or repeating this handoff is not completion.

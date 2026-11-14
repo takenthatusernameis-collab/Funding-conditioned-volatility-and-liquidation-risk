@@ -1,5 +1,52 @@
 [
   {
+    "task": "FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z",
+    "rank": 0,
+    "status": "READY_EXECUTE",
+    "program_status": "READY_EXECUTE",
+    "generated": "2026-11-14T19:20:32Z",
+    "refreshed": "2026-11-14T19:20:32Z",
+    "last_checked": "2026-11-14T19:20:32Z",
+    "next_unfinished_task": "Execute the estimator/data reconciliation specified in AGENT_HANDOFF.md on the cached 2025 disjoint panel. Freeze a pre-results prereg first; emit a 2x2 attribution matrix, focused tests, and an EXPLORATORY_ONLY verdict. This is offline heavy work and must not be replaced by a status-only check.",
+    "blockers": "No agent-removable blocker for the reconciliation. The existing disjoint result is EXPLORATORY_NULL, not a practical edge; Gate 4 remains EXTERNAL_BLOCKED and promotable=false.",
+    "next_action_heavy": "Freeze and execute the reconciliation, then follow the handoff's bounded branch: EXPLAINED_BY_ESTIMATOR -> singleton 2024-06 diagnostic under a new prereg; EXPLAINED_BY_DATA -> row-level lineage audit; UNEXPLAINED -> LOIO/per-block diagnostics. Do not re-run tested 2025 test months.",
+    "resume_triggers": [
+      "RECONCILIATION_ARTIFACTS_MISSING",
+      "RECONCILIATION_VERDICT"
+    ],
+    "phases": [
+      {
+        "phase": "ESTIMATOR_DATA_RECONCILIATION",
+        "status": "READY_EXECUTE",
+        "claim": "The cached 2025 disjoint panel can support an offline, pre-registered attribution of the observed null to estimator behavior, data lineage, or an unexplained residual before consuming the remaining 2024-06 block.",
+        "expected_artifacts": [
+          "research_state/prereg_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.json",
+          "research_state/prereg_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.md",
+          "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.json",
+          "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.md",
+          "scripts/fclr_fwd_vol_2025_disjoint_reconcile.py",
+          "tests/test_fclr_fwd_vol_2025_disjoint_reconcile.py"
+        ],
+        "inputs": {
+          "panel": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+          "panel_sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+          "frozen_design": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json"
+        },
+        "verdict_space": [
+          "EXPLAINED_BY_ESTIMATOR",
+          "EXPLAINED_BY_DATA",
+          "UNEXPLAINED",
+          "INCONCLUSIVE"
+        ]
+      }
+    ],
+    "evidence": {
+      "handoff": "AGENT_HANDOFF.md",
+      "disjoint_cross": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z COMPLETED_VALIDATED EXPLORATORY_NULL (gate PASS).",
+      "next_campaign_status": "scripts/next_campaign_status.py reports executable heavy work remains; the 2024-06 singleton is a bounded fallback, not a replacement for reconciliation."
+    }
+  },
+  {
     "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T191615Z",
     "rank": 0,
     "status": "TRIGGER_ONLY",
