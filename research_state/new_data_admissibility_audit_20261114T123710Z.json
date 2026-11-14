@@ -1,0 +1,74 @@
+{
+  "audit_id": "FCLR-NEW-ADMISSIBLE-SOURCE-AUDIT-20261114T123710Z",
+  "generated_utc": "20261114T123710Z",
+  "gate4_trigger_check": {
+    "glob": "research_state/fclr016_v5_terms_evidence_RESOLVED_*.json",
+    "matches_valid": [],
+    "result": "NO_VALID_GATE4_TRIGGER"
+  },
+  "probes": [
+    {
+      "url": "https://huggingface.co/api/datasets/ochinimus/crypto-liquidation-ticks",
+      "status": 200,
+      "ok": true,
+      "bytes": 1890,
+      "head": "{\"_id\":\"6a7574ab56758b68affa93bb\",\"id\":\"ochinimus/crypto-liquidation-ticks\",\"author\":\"ochinimus\",\"sha\":\"2bdfa28137d55d47aa208ae09791e34e6dae6a9c\",\"lastModified\":\"2026-08-07T06:01:25.000Z\",\"private\":false,\"gated\":false,\"disabled\":false,\"tags\":[\"task_categories:time-series-forecasting\",\"task_categories:tabular-regression\",\"license:cc-by-4.0\",\"size_categories:1M<n<10M\",\"format:csv\",\"modality:tabular\""
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/nick128373/crypto-liquidation-ticks",
+      "status": 200,
+      "ok": true,
+      "bytes": 1892,
+      "head": "{\"_id\":\"6add0993193959402108516e\",\"id\":\"nick128373/crypto-liquidation-ticks\",\"author\":\"nick128373\",\"sha\":\"b79ff7cab7c2f475f0ffde0ddb4abd5209ddbb94\",\"lastModified\":\"2026-10-24T19:40:04.000Z\",\"private\":false,\"gated\":false,\"disabled\":false,\"tags\":[\"task_categories:time-series-forecasting\",\"task_categories:tabular-regression\",\"license:cc-by-4.0\",\"size_categories:1M<n<10M\",\"format:csv\",\"modality:tabula"
+    },
+    {
+      "url": "https://datasets-server.huggingface.co/splits?dataset=ochinimus/crypto-liquidation-ticks",
+      "status": 200,
+      "ok": true,
+      "bytes": 121,
+      "head": "{\"splits\":[{\"dataset\":\"ochinimus/crypto-liquidation-ticks\",\"config\":\"default\",\"split\":\"train\"}],\"pending\":[],\"failed\":[]}"
+    },
+    {
+      "url": "https://datasets-server.huggingface.co/splits?dataset=nick128373/crypto-liquidation-ticks",
+      "status": 200,
+      "ok": true,
+      "bytes": 122,
+      "head": "{\"splits\":[{\"dataset\":\"nick128373/crypto-liquidation-ticks\",\"config\":\"default\",\"split\":\"train\"}],\"pending\":[],\"failed\":[]}"
+    },
+    {
+      "url": "https://datasets-server.huggingface.co/first-rows?dataset=ochinimus/crypto-liquidation-ticks&config=default&split=train",
+      "status": 200,
+      "ok": true,
+      "bytes": 21133,
+      "head": "{\"dataset\":\"ochinimus/crypto-liquidation-ticks\",\"config\":\"default\",\"split\":\"train\",\"features\":[{\"feature_idx\":0,\"name\":\"ts_ms\",\"type\":{\"dtype\":\"int64\",\"_type\":\"Value\"}},{\"feature_idx\":1,\"name\":\"utc_time\",\"type\":{\"dtype\":\"string\",\"_type\":\"Value\"}},{\"feature_idx\":2,\"name\":\"symbol\",\"type\":{\"dtype\":\"string\",\"_type\":\"Value\"}},{\"feature_idx\":3,\"name\":\"exchange\",\"type\":{\"dtype\":\"string\",\"_type\":\"Value\"}}"
+    },
+    {
+      "url": "https://datasets-server.huggingface.co/first-rows?dataset=nick128373/crypto-liquidation-ticks&config=default&split=train",
+      "status": 200,
+      "ok": true,
+      "bytes": 21134,
+      "head": "{\"dataset\":\"nick128373/crypto-liquidation-ticks\",\"config\":\"default\",\"split\":\"train\",\"features\":[{\"feature_idx\":0,\"name\":\"ts_ms\",\"type\":{\"dtype\":\"int64\",\"_type\":\"Value\"}},{\"feature_idx\":1,\"name\":\"utc_time\",\"type\":{\"dtype\":\"string\",\"_type\":\"Value\"}},{\"feature_idx\":2,\"name\":\"symbol\",\"type\":{\"dtype\":\"string\",\"_type\":\"Value\"}},{\"feature_idx\":3,\"name\":\"exchange\",\"type\":{\"dtype\":\"string\",\"_type\":\"Value\"}"
+    },
+    {
+      "url": "https://public.bybit.com/trading/",
+      "status": 200,
+      "ok": true,
+      "bytes": 65536,
+      "head": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Directory listing for /trading/</title>\n</head>\n<body>\n<h1>Directory listing for /trading/</h1>\n<hr>\n<ul>\n<li><a href=\"0GUSDT/\">0GUSDT/</a></li>\n<li><a href=\"10000000AIDOGEUSDT/\">10000000AIDOGEUSDT/</a></li>\n<li><a href="
+    },
+    {
+      "url": "https://public.bybit.com/contract_market/",
+      "status": 404,
+      "ok": false,
+      "error": "HTTP Error 404: Not Found",
+      "head": "<html>\n<head><title>404 Not Found</title></head>\n<body>\n<h1>404 Not Found</h1>\n<ul>\n<li>Code: NoSuchKey</li>\n<li>Message: The specified key does not exist.</li>\n<li>Key: contract_market/index.html</li>\n<li>RequestId: 5E7A3PMCY5Y1PAF2</li>\n<li>HostId: M7fNhEVAAe3+j5E6YMroFEP4OPfhS8ahW1VF4Av6hEiO6+CaRVSgtn4wRQf9P3FWytXQvWQqzWE=</li>\n</ul>\n<hr/>\n</body>\n</html>\n"
+    },
+    {
+      "url": "https://www.okx.com/api/v5/public/liquidation-orders?instType=SWAP&uly=BTC-USDT&state=filled",
+      "status": 200,
+      "ok": true,
+      "bytes": 12744,
+      "head": "{\"code\":\"0\",\"data\":[{\"details\":[{\"bkLoss\":\"0\",\"bkPx\":\"67134.5\",\"ccy\":\"\",\"posSide\":\"short\",\"side\":\"buy\",\"sz\":\"4.17\",\"time\":1794659214491,\"ts\":\"1794659214491\"},{\"bkLoss\":\"0\",\"bkPx\":\"67069.4\",\"ccy\":\"\",\"posSide\":\"long\",\"side\":\"sell\",\"sz\":\"0.02\",\"time\":1794658619466,\"ts\":\"1794658619466\"},{\"bkLoss\":\"0\",\"bkPx\":\"67093.1\",\"ccy\":\"\",\"posSide\":\"long\",\"side\":\"sell\",\"sz\":\"0.13\",\"time\":1794655921956,\"ts\":\"179465"
+    }
+  ]
+}
