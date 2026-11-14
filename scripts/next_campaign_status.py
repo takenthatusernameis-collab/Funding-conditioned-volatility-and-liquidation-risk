@@ -16,6 +16,10 @@ Two failure modes this script exists to prevent:
    liquidation events) still has an untouched region. This actually happened: the
    tool reported "cache frontier EXHAUSTED" while 2025-11..2026-04 (181 days,
    ~180 native-perp coins with observed liquidation labels) had never been scored.
+4. A session re-runs an already executed disjoint test month because the frontier
+   list was not updated with the sealed singleton/3-block cells. The 2025-06,
+   2025-11, 2025-12, and 2024-06 test months are all consumed by executed
+   evaluation artifacts and must never be proposed as fresh test blocks again.
 
 Reads only. No network. No outcome computation.
 
@@ -68,6 +72,13 @@ TESTED_WINDOWS = [
     ("2026-08-03", "2026-10-31", "FCLR-FWD-VOL-011-CONFIRM forward walk"),
     ("2025-07-23", "2025-10-15", "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"),
     ("2026-01-01", "2026-04-01", "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"),
+    # Executed disjoint singleton/3-block cells. Keep these exact months out of
+    # the "never-tested" frontier; otherwise the status tool tells the next
+    # session to re-run sealed test windows.
+    ("2024-06-01", "2024-06-30", "FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)"),
+    ("2025-06-01", "2025-06-30", "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"),
+    ("2025-11-01", "2025-11-30", "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"),
+    ("2025-12-01", "2025-12-31", "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"),
 ]
 
 

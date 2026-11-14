@@ -126,25 +126,27 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertTrue(feas["any_feasible"])
         self.assertTrue(feas["runs"][0]["feasible"])
 
-    def test_disjoint_block_frontier_detects_three_blocks(self):
-        """Three independent 30-day test months must be reported executable.
+    def test_disjoint_campaign_months_are_marked_tested(self):
+        """Executed disjoint test months must not be re-proposed as fresh blocks.
 
-        This is the agent-removable heavy work the old contiguous-only check
-        missed. 2025-01 is intentionally infeasible because its train months
-        (2024-11/2024-12) are absent; 2025-06, 2025-11 and 2025-12 are feasible.
+        2025-06/2025-11/2025-12 were consumed by the sealed 2025 disjoint cross
+        (EXPLORATORY_NULL); 2024-06 was consumed by the singleton estimator
+        diagnostic (EXPLAINED_BY_ESTIMATOR). The frontier must report them as
+        tested, not executable, to prevent duplicate sealed-cell work.
         """
+        windows = {w["month"]: w for w in self.mod.ready_windows()}
         frontier = self.mod.disjoint_block_frontier(self.mod.ready_windows())
         feasible = {b["month"]: b for b in frontier["feasible_blocks"]}
-        for m in ("2025-06", "2025-11", "2025-12"):
-            self.assertIn(m, feasible, f"{m} should be feasible: {feasible}")
-            self.assertGreaterEqual(feasible[m]["test_days"], 30)
-            self.assertEqual(feasible[m]["train_days"], 30)
-            self.assertEqual(feasible[m]["embargo_days"], 7)
-            self.assertEqual(feasible[m]["missing_train_months"], [])
-        self.assertNotIn("2025-01", feasible,
-                         "2025-01 train months are incomplete and must be infeasible")
-        self.assertGreaterEqual(frontier["n_feasible"], frontier["min_blocks"])
-        self.assertTrue(frontier["campaign_feasible"])
+        for m in ("2024-06", "2025-06", "2025-11", "2025-12"):
+            self.assertIn(m, windows, f"{m} missing from cache inventory")
+            self.assertTrue(windows[m]["inside_tested_window"],
+                            f"{m} executed but wrongly marked untested")
+            self.assertIn("DISJOINT", windows[m]["tested_by"] or "",
+                          f"{m} lacks executed-cell attribution: {windows[m]}")
+            self.assertNotIn(m, feasible,
+                             f"{m} executed but re-proposed as feasible: {feasible}")
+        self.assertGreaterEqual(frontier["n_feasible"], 0)
+        self.assertFalse(frontier["campaign_feasible"])
 
     def test_nested_csv_layout_is_counted(self):
         """A deeper CSV nesting must not make a complete month look empty."""
@@ -204,10 +206,12 @@ class TestNextCampaignStatus(unittest.TestCase):
             )
 
     def test_campaign_status_message_distinguishes_domains(self):
-        """Contiguous Binance and Hyperliquid bulk are exhausted; disjoint blocks remain.
+        """All three sources of fresh 3-block work are now exhausted.
 
-        The old contiguous-only check said no heavy work remained. The disjoint
-        30-day frontier is executable heavy work and must be reported as such.
+        The old contiguous-only check said no heavy work remained; the disjoint
+        frontier then reopened already-tested months. Both bugs are fixed: the
+        status must report no feasible contiguous, disjoint, or Hyperliquid run.
+        Bounded cached-panel audits may remain, but they are not 3-block cells.
         """
         feasibility = self.mod.design_feasible_months(self.mod.ready_windows())
         disjoint = self.mod.disjoint_block_frontier(self.mod.ready_windows())
@@ -215,8 +219,8 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertFalse(feasibility["any_feasible"])
         self.assertFalse(bulk["any_feasible"])
         self.assertFalse(bulk["any_forward_feasible"])
-        self.assertTrue(disjoint["campaign_feasible"])
-        self.assertGreaterEqual(disjoint["n_feasible"], disjoint["min_blocks"])
+        self.assertFalse(disjoint["campaign_feasible"])
+        self.assertGreaterEqual(disjoint["n_feasible"], 0)
 
 
 if __name__ == "__main__":
