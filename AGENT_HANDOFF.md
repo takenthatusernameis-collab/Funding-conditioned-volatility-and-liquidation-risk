@@ -183,8 +183,18 @@ The leading alternative explanation is the estimator difference: the sealed eval
 
 ## Session log
 
+### 2026-11-14T10:12:46Z — Verified state: reconciliation campaign ready to execute
+- Campaign gate **19/19 PASS** (`/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all`)
+- Targeted tests **40/40 OK** (`/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute`)
+- Experiment frontier rank 0: `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z` status `READY_EXECUTE`, `program_status=ACTIVE`
+- Inputs verified: sealed panel SHA-256 `39916a72...f699`, recompute panel SHA-256 `a4d73c79...6715`; both 1,472 rows, identical `(coin, ts)` keys
+- Reconciliation script `scripts/fclr_liq_expansion_reconcile.py` does NOT exist — must be implemented
+- Prereg `prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.{json,md}` does NOT exist — must be frozen before outcomes
+- Next session MUST execute the full reconciliation campaign per the instructions below (frozen prereg → 2×2 script → evaluation summary → tests → gate verification)
+- No network, no Gate 4, no new data source required; fully offline computational audit
+
 ### 2026-11-14T08:36:42Z — Durable handoff rewritten as an execution-forcing reconciliation campaign
-- Replaced the previous “Phase B complete; verify then await trigger / bounded NO_GO” handoff. That instruction was a bottleneck: it would have ended the next session without doing heavy work even though a high-information offline task remains.
+- Replaced the previous "Phase B complete; verify then await trigger / bounded NO_GO" handoff. That instruction was a bottleneck: it would have ended the next session without doing heavy work even though a high-information offline task remains.
 - Added `FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z`: a frozen 2×2 audit of sealed vs recomputed panel × sealed-like vs recompute-like estimator, with exact artifacts, tests, and acceptance criteria.
 - Repaired the failing active-campaign gate: `tests.test_active_campaign_gate` requires exactly one rank-0 entry with `status=READY_EXECUTE` and `program_status=ACTIVE`; the frontier was updated to the new reconciliation campaign and the old Phase B entry was demoted to rank 1 with a terminal status.
 - Re-ran verification: campaign gate **19/19 PASS**; targeted tests **40/40 OK** after the frontier repair.
