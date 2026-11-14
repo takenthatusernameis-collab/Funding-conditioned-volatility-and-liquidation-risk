@@ -1,6 +1,6 @@
 # NEXT SESSION HANDOFF — OBSOLETE (pointer only)
 
-**Status:** STALE. Superseded by `AGENT_HANDOFF.md` (single durable handoff, 2026-11-14T18:30:00Z).
+**Status:** STALE. Superseded by `AGENT_HANDOFF.md` (single durable handoff, 2026-11-14T19:08:11Z).
 
 - Do **not** follow any prior directives in this file's history (including TRACKA-HL-EXPANSION "Step 1" or claims of a feasible/untouched 2026-01-18..2026-04-30 forward window). Those regions/cells are tested/exhausted or terminal.
 - Operative state: **READY_EXECUTE** — frozen exploratory campaign `FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z`.

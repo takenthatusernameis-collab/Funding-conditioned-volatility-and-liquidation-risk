@@ -1,4 +1,4 @@
-# Agent Handoff — 2026-11-14T18:30:00Z
+# Agent Handoff — 2026-11-14T19:08:11Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -32,7 +32,7 @@ The previous rank-0 trigger-only sentinel `FCLR-BOUNDED-TRIGGER-ONLY-20261114T13
 
 ---
 
-## Initial Task for Next Agentic Session (2026-11-14T18:30:00Z) — durable handoff
+## Initial Task for Next Agentic Session (2026-11-14T19:08:11Z) — durable handoff
 
 **Objective:** Execute the frozen exploratory campaign. Produce the panel, build report, evaluation JSON+MD, and pass the definition-of-done gate. Do not stop at status output. Do not poll. Do not claim confirmatory status.
 
@@ -152,3 +152,5 @@ No `CONFIRMED` or `PROMOTED` verdict is permitted while Gate 4 Binance v5 terms 
 6. `scripts/next_campaign_status.py` — fixed status tool
 7. `tests/test_next_campaign_status.py` — regression tests
 8. `tests/test_active_campaign_gate.py` — frontier invariant guard
+
+(End of file)
