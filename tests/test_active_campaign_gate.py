@@ -17,8 +17,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RS = ROOT / "research_state"
-ACTIVE_CAMPAIGN = "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z"
-PRIOR_CAMPAIGN = "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z"
+# Rank-0 advances as phases close, so this guard must not pin a campaign id.
+# It pins the *invariant*: exactly one rank-0 entry, it is ACTIVE with a concrete
+# unfinished task and a phase list, and every completed campaign stays demoted.
+ACTIVE_CAMPAIGN_ID_PREFIX = "FCLR-"
+COMPLETED_STATUSES = {
+    "COMPLETED_VALIDATED",
+    "SUPERSEDED_TERMINAL",
+    "SUPERSEDED_BY_FCLR_HEAVY_CONFIRM",
+    "SUPERSEDED",
+}
 PREREGS = {
     "TRACKA-VOL-FULLHIST-20261112T201536Z": "prereg_tracka_vol_fullhist_20261112T201536Z.json",
     "TRACKA-LIQ-XSEC-20261112T201536Z": "prereg_tracka_liq_xsec_20261112T201536Z.json",
@@ -68,16 +76,19 @@ class TestActiveCampaignGate(unittest.TestCase):
         e = rank0[0]
         # The active campaign advances as phases close. Rank 0 must be the
         # current heavy campaign and must carry a concrete unfinished task.
-        self.assertEqual(e.get("task"), ACTIVE_CAMPAIGN)
+        self.assertTrue(str(e.get("task", "")).startswith(ACTIVE_CAMPAIGN_ID_PREFIX))
+        self.assertNotIn(e.get("status"), COMPLETED_STATUSES,
+                         "rank-0 must never hold a completed/superseded campaign")
         self.assertEqual(e.get("status"), "READY_EXECUTE")
         self.assertEqual(e.get("program_status"), "ACTIVE")
         self.assertTrue(e.get("next_unfinished_task"))
         self.assertTrue(e.get("phases"))
-        # The completed P0 audit must be demoted, not deleted.
-        prior = [x for x in frontier if x.get("task") == PRIOR_CAMPAIGN]
-        self.assertEqual(len(prior), 1)
-        self.assertEqual(prior[0].get("rank"), 1)
-        self.assertEqual(prior[0].get("status"), "COMPLETED_VALIDATED")
+        # Every other campaign must be demoted, not deleted.
+        others = [x for x in frontier if x.get("rank") != 0]
+        self.assertTrue(others, "completed campaigns must be retained, not deleted")
+        for x in others:
+            self.assertIn(x.get("status"), COMPLETED_STATUSES,
+                          f"non-rank-0 entry {x.get('task')} must carry a terminal status")
 
     def test_prior_campaign_prereg_remains_frozen(self):
         p = json.loads((RS / "prereg_fclr_fwd_vol_011_confirm_20261113T041200Z.json").read_text())
