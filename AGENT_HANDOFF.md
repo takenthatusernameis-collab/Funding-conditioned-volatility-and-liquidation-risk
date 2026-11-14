@@ -1,15 +1,20 @@
-# AGENT_HANDOFF — 2026-11-14T16:14:08Z (single durable handoff)
+# AGENT_HANDOFF — 2026-11-14T16:16:05Z (single durable handoff)
 
 ## Project
 `Funding-conditioned-volatility-and-liquidation-risk` — `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`
 
+## NEXT SESSION INITIAL TASK (inferred from repository name)
+**Priority:** funding-conditioned volatility and liquidation risk. The highest-value unfinished work remains Track A observed-liquidation confirmation and, only when admissible, a new §16-compliant source or Gate 4 Branch 1. As of 2026-11-14T16:16:05Z there is no agent-removable cached-data heavy cell: `python3 scripts/next_campaign_status.py` reports no feasible 3-block design in either domain, and all frozen preregs have evaluation artifacts. Do not manufacture a new campaign or re-run tested windows. Execute the bounded trigger check below; if no trigger is satisfied, record a brief verification and clean stop. If any trigger is satisfied, immediately execute the corresponding heavy campaign under a NEW experiment ID with pre-outcomes discipline, build/eval/verdict, and atomic state updates.
+
 ## INITIAL TASK (next agentic session — execute immediately, no status-only work)
 **Program state: `BOUNDED_TRIGGER_ONLY`** (frontier rank 0: `FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z`). No unfrozen/unexecuted cached-data heavy cell is feasible now (`python3 scripts/next_campaign_status.py` → no feasible 3-block design in either domain). Bottlenecks are external (Gate 4 human/legal evidence; no §16-admissible new observed-liquidation source; HL depth/labels insufficient).
+
+**Verification at 2026-11-14T16:16:05Z:** `python3 scripts/next_campaign_status.py` → no feasible 3-block design in EITHER domain; `python3 -m pytest tests/test_next_campaign_status.py -q` → 12 passed; Gate 4 glob → no `RESOLVED_*` file (only `BLOCKED_20261108T014835Z.json`); ironflow tree probe → HTTP 304 (no new data).
 
 **Mandatory first actions (bounded, non-polling):**
 1. Read this file and `research_state/experiment_frontier.json` (rank 0).
 2. Run: `python3 scripts/next_campaign_status.py`
-3. Check the four explicit triggers below against artifacts/state **newer/materially different than 2026-11-14T13:27:41Z**:
+3. Check the four explicit triggers below against artifacts/state **newer/materially different than 2026-11-14T16:16:05Z**:
    - `GATE4_BRANCH_1`: `ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` — valid only if a file exists with `status==RESOLVED_VERIFIED`, `fabricated==false`, and human/legal attestation present. (Current: none; only `fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json`.)
    - `NEW_OBSERVED_LIQUIDATION_SOURCE`: materially new unauthenticated candidate not falsified in `research_state/structural_exhaustion_confirmation_20261114T132741Z.md`, `research_state/new_data_admissibility_audit_20261114T123710Z.json`, `research_state/alt_source_deep_review_latest.md` (22 candidates, 0 GO).
    - `HL_LABEL_EXTENSION`: Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels.
