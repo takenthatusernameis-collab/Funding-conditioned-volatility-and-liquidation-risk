@@ -738,6 +738,18 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "tracka_hl_fetch_candles_early_4h_2025h1.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
   },
+  "fclr011_recompute_audit.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr011_recompute_audit.py: independent sealed-recompute audit of the FCLR-011 volatility PASS (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary_FCLR-011-RECOMPUTE artifacts only; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_liq_expansion_recompute.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr_liq_expansion_recompute.py: independent sealed-recompute audit of the sealed Track A liquidation-expansion PASS (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE artifacts only; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_liq_expansion_reconcile.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr_liq_expansion_reconcile.py: sealed-vs-recompute reconciliation audit of the Track A liquidation-expansion PASS (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION artifacts only; no guarded Track A liquidation outcome claim production."
+  },
 }
 
 ALLOWED_CLASSES = {

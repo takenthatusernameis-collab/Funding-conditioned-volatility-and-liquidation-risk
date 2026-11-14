@@ -27,6 +27,11 @@ COMPLETED_STATUSES = {
     "SUPERSEDED_BY_FCLR_HEAVY_CONFIRM",
     "SUPERSEDED",
 }
+# Active (non-terminal) rank-0 states. The campaign legitimately alternates between
+# READY_EXECUTE (an agent-removable heavy cell is open) and TRIGGER_ONLY (all cached
+# data is exhausted and the only path forward is an external material trigger). Both
+# are active, both carry a concrete unfinished task, and neither may be terminal.
+ACTIVE_STATUSES = {"READY_EXECUTE", "TRIGGER_ONLY"}
 PREREGS = {
     "TRACKA-VOL-FULLHIST-20261112T201536Z": "prereg_tracka_vol_fullhist_20261112T201536Z.json",
     "TRACKA-LIQ-XSEC-20261112T201536Z": "prereg_tracka_liq_xsec_20261112T201536Z.json",
@@ -79,8 +84,10 @@ class TestActiveCampaignGate(unittest.TestCase):
         self.assertTrue(str(e.get("task", "")).startswith(ACTIVE_CAMPAIGN_ID_PREFIX))
         self.assertNotIn(e.get("status"), COMPLETED_STATUSES,
                          "rank-0 must never hold a completed/superseded campaign")
-        self.assertEqual(e.get("status"), "READY_EXECUTE")
-        self.assertEqual(e.get("program_status"), "ACTIVE")
+        self.assertIn(e.get("status"), ACTIVE_STATUSES,
+                      "rank-0 must hold an active (non-terminal) status: READY_EXECUTE or TRIGGER_ONLY")
+        self.assertIn(e.get("program_status"), {"ACTIVE", "BOUNDED_TRIGGER_ONLY"},
+                      "rank-0 program_status must be ACTIVE or BOUNDED_TRIGGER_ONLY")
         self.assertTrue(e.get("next_unfinished_task"))
         self.assertTrue(e.get("phases"))
         # Every other campaign must be demoted, not deleted.
