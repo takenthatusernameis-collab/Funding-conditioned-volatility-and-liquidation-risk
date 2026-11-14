@@ -1,9 +1,13 @@
-# AGENT HANDOFF — 2026-11-14T10:15:38Z
+# AGENT HANDOFF — 2026-11-14T10:15:38Z (single durable handoff)
 
 ## Campaign Context
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Active Campaign (Rank 0):** FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z
 **Status:** READY_EXECUTE | program_status: ACTIVE
+**Handoff integrity:** This file is the single durable handoff. `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md`, and `FOCUS_CAMPAIGN.md` are REDIRECTs to this file. `HANDOFF_20261114T101715Z.md` is a REDIRECT to this file; its prior "CAMPAIGN COMPLETE / NO ACTIONABLE WORK REMAINS" declaration was false closure and has been removed as a bottleneck.
+
+## Focus Campaign (heavy work — not skippable)
+**FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z**: attribute the 19.04% vs 6.19% C2_vs_B1 QLIKE gap between the sealed expansion estimator and the recompute estimator on shared 1,472 (coin, ts) keys. Verdict space: `EXPLAINED_BY_ESTIMATOR`, `EXPLAINED_BY_DATA`, `UNEXPLAINED`, `INCONCLUSIVE`. All outputs `EXPLORATORY_ONLY`, `promotable=false`. This is the only open P0 cell; no other sealed window may be reopened. Future agents must not defer, relabel, or substitute status-only work for this reconciliation.
 
 ## The Single Durable Initial Task for the Next Session
 
@@ -55,7 +59,9 @@ Both panels share 1,472 (coin, ts) keys. The open question is estimator vs. data
 
 ## Bottleneck Removal
 
-No agent-removable blockers. The reconciliation uses only sealed panels, frozen splits, and cached data — no Gate 4, no new liquidation source, no network required.
+Removed: `HANDOFF_20261114T101715Z.md` falsely declared `CAMPAIGN COMPLETE / NO ACTIONABLE WORK REMAINS`, which induced false closure and blocked the reconciliation. It is now a REDIRECT to this file; no session may declare exhaustion without the sealed-vs-recompute reconciliation artifacts on disk and `fclr_campaign_gate.py --arm all` passing 19/19.
+
+No agent-removable blockers remain for the reconciliation itself: it uses only sealed panels, frozen splits, and cached data — no Gate 4, no new liquidation source, no network required.
 
 ## Next Heavy Action if This Session Cannot Complete
 
