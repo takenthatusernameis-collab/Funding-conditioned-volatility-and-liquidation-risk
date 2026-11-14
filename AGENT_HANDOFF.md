@@ -1,12 +1,23 @@
-# AGENT HANDOFF — 2026-11-14T06:35:00Z (single durable handoff)
+# AGENT HANDOFF — 2026-11-14T07:33:46Z (single durable handoff)
 
-## INITIAL TASK FOR NEXT AGENTIC WORK SESSION (execute now; heavy, local, unblocked)
+## INITIAL TASK FOR NEXT AGENTIC WORK SESSION (MANDATORY, HEAVY, OFFLINE, UNBLOCKED)
 
-This handoff **supersedes all prior handoffs**, including the 2026-11-14T06:25:08Z version.
-That version told you to "just run Phase A then Phase B". That is no longer accurate. I ran the
-commands. **Phase A is a structural dead-end as currently written, and Phase B has no
-implementation at all.** This file fixes both so the next session cannot stall or emit a
-status-only report.
+**Do this first. Do not produce a status-only, inventory-only, or planning-only response.**
+
+1. **PRIMARY (must complete in this session unless a hard local error is hit): Phase B — implement and run `TRACKA-LIQ-EXPANSION-RECOMPUTE`.**
+   - `scripts/fclr_liq_expansion_recompute.py` does **not** exist. Create it.
+   - Freeze `research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}` **before any outcome computation** (`FROZEN_PRE_OUTCOMES`, `frozen_before_outcomes=true`, `pre_registered_before_outcomes=true`, `outcome_data_inspected_before_freeze=false`, `promotable=false`, `max_status=EXPLORATORY_ONLY`).
+   - Rebuild the panel from caches (**not** from the sealed parquet): `research_state/data_cache/ironflow_events/2026-05..2026-10.parquet` + `research_state/data_cache/hyperliquid_funding/{ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH}.json` + `research_state/data_cache/hyperliquid_candles/{SYM}/2026-05..2026-10.json`. **Do not use `ironflow_bulk` (stops at 2026-04).**
+   - Recompute B0/B1/C1/C2 with train-only fit/scaling/smearing on the frozen sealed design/splits; run paired 24h/circular block bootstrap (2000 deterministic reps), Holm over `C2_vs_B1/C1_vs_B1/C2_vs_C1`, LOIO, funding-permutation placebo, per-symbol/per-block stability, leakage audit.
+   - Emit `research_state/tracka_liq_expansion_recompute_panel_<UTC>.parquet`, `..._panel_build_report_<UTC>.json`, `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md}` with verdict `REPRODUCED|NOT_REPRODUCED|INCONCLUSIVE|INADMISSIBLE` and an explicit statement of whether sealed **19.04%** C2-vs-B1, **LOIO 4/8**, and the **placebo failure** replicate. Preserve all sealed artifacts.
+   - Add targeted `unittest` tests for prereg frozen fields, panel-hash consistency, non-empty contrasts, and sealed-artifact immutability.
+2. **SECONDARY (only after Phase B artifacts/tests/gates are done, or if Phase B hits a provable hard stop with exact failing minima): Phase A — fix and rerun FCLR-011 recompute.** Phase A is capped `INCONCLUSIVE/EXPLORATORY`; see diagnosis below. Do **not** let Phase A displace Phase B.
+3. **AFTER EACH PHASE (atomically):** update `research_state/experiment_frontier.json` and `research_state/hypothesis_registry.json` (audit-only; do not alter sealed statuses), append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`, append a dated session log here, and verify `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect 19/19) plus targeted gate tests.
+
+This handoff **supersedes all prior handoffs**, including 2026-11-14T06:35:00Z and 06:25:08Z.
+Prior handoff claimed Phase A `READY_EXECUTE` and Phase B pending on `ironflow_bulk` — **both false**.
+Phase A is a design/implementation dead-end as written (empty contrasts, double-assemble bug); Phase B
+has no implementation but **all required inputs are present**. This file removes those bottlenecks.
 
 ### What I verified myself (do not re-verify, do not re-litigate)
 | Claim | Verified result | Evidence |
@@ -138,15 +149,15 @@ capped. Do **both** if time allows, but never emit a report that only describes 
 
 ---
 
-## AFTER EACH PHASE (atomically)
+## AFTER EACH PHASE (atomically, non-optional)
 - Update `research_state/experiment_frontier.json` (advance/record phase status; keep rank 0 truthful).
 - Add an audit hypothesis to `research_state/hypothesis_registry.json` (do not alter sealed statuses).
 - Append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`.
 - Append a dated session log entry below with commands, key results/hashes, verdicts, blockers.
-- Re-run `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect 19/19) and the
-  gate tests: `/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate`.
-  **Note:** `pytest` is not installed and the full `unittest discover` exceeds a 2-minute shell timeout —
-  run targeted modules, not the whole suite.
+- Re-run `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect 19/19) and targeted gate tests:
+  `/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate`.
+  **Note:** `pytest` is not installed and full `unittest discover` exceeds a 2-minute shell timeout — run targeted modules.
+- **Definition of done for this session:** Phase B implementation + frozen prereg + rebuilt panel + evaluation summary + tests + gate verification committed as artifacts in working tree (or a documented hard stop with exact failing minima and no false NO_GO). Any other outcome is insufficient progress.
 
 ## ENVIRONMENT FACTS (do not rediscover)
 - Use **`/tmp/fclr-venv/bin/python`** for everything needing `pyarrow`/`pandas`/`numpy`/`scipy`.
@@ -162,6 +173,12 @@ capped. Do **both** if time allows, but never emit a report that only describes 
 ---
 
 ## Session log
+
+### 2026-11-14T07:33:46Z — Handoff refreshed as single durable, execution-forcing focus campaign
+- Reconfirmed `AGENT_HANDOFF.md` as the only authoritative handoff; kept redirect stubs in `FOCUS_CAMPAIGN.md`, `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md`.
+- Elevated **Phase B (`TRACKA-LIQ-EXPANSION-RECOMPUTE`) as mandatory primary work** with explicit definition of done (implementation, frozen prereg, rebuilt panel, eval, tests, gates). Phase A remains secondary/capped to prevent another session from stalling on its known design dead-end.
+- Preserved all verified bottleneck fixes from 06:35:00Z: Phase A `INCONCLUSIVE` due to 168h train-window design + double-assemble bug; Phase B unblocked via `ironflow_events`+`hyperliquid_funding`+`hyperliquid_candles` caches (not `ironflow_bulk`); sealed reference numbers and stop rules unchanged.
+- No sealed artifacts modified; no outcome computation performed in this session.
 
 ### 2026-11-14T06:35:00Z — Durable handoff rewritten from executed evidence (bottlenecks removed)
 Executed the prior handoff's Phase A commands instead of re-asserting them, and found its premise
