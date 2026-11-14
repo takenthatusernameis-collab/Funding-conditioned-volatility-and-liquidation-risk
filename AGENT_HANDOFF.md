@@ -1,6 +1,6 @@
-# AGENT HANDOFF — 2026-11-14T01:49:08Z (authoritative, single durable handoff)
+# AGENT HANDOFF — 2026-11-14T01:53:00Z (authoritative, single durable handoff)
 
-## INITIAL TASK FOR NEXT SESSION (2026-11-14T01:49:08Z) — EXECUTE P1, NO RE-VERIFICATION
+## INITIAL TASK FOR NEXT SESSION (2026-11-14T01:53:00Z) — EXECUTE P1, NO RE-VERIFICATION
 
 **Deliverable (non-negotiable):** execute P1 end-to-end and persist evidence in this session.
 A verification-only, status-only, or handoff-rewrite-only session is a FAILED session
@@ -12,7 +12,20 @@ The only acceptable completions are:
 - **(B)** a bounded structural NO_GO naming each candidate (source/window) and its exact
   failing minimum, with evidence, frontier/this handoff updated.
 
-### P1 — `FCLR-VOL-FORWARD-2026Q1Q2` (PREFERRED, cached/offline, no external data)
+### P1 — `FCLR-VOL-FORWARD-2026Q1Q2` (PREFERRED, cached/offline, no external data) — SCAFFOLD READY
+
+**Scaffold is already on disk (verified 2026-11-14T01:52:22Z) — you start from working code:**
+- **Frozen prereg:** `research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json`
+  (status=FROZEN_PRE_OUTCOMES, promotable=false, max EXPLORATORY_ONLY, experiment_id
+  `TRACKA-VOL-FORWARD-2026Q1Q2-20261114T015222Z`, campaign `FCLR-VOL-FORWARD-2026Q1Q2`; coverage-only
+  universe, forward-reduced 60/7/3x10 over 2026-01-18..2026-04-30; no May/sealed reads).
+- **Builder (run-ready, fail-closed, compiles clean):** `scripts/fclr_build_tracka_vol_forward.py`
+  — cloned from `fclr_build_tracka_liq_xsec_forward.py` (frozen-window, fail-closed, hashed inputs,
+  timestamped panel/build-report/eval artifacts) with Arm A features/targets/QLIKE spec from
+  `fclr_build_tracka_vol_fullhist.py`. It asserts the prereg, hashes every input parquet, selects the
+  coverage-only universe (candle+funding+OI over scoring window), builds forward-RV targets, computes the
+  12-cell primary family (QLIKE, Holm), the primary contrast C2_vs_B1 (block-bootstrap CI, LOIO), and
+  emits a recognized verdict. It refuses to read May 2026 or the sealed window.
 
 **Why this is the highest-value unopened route:** Hyperliquid ironflow bulk untouched region
 `2026-01-18..2026-04-30` (103 days; candles/funding/OI/liquidations on disk) is
@@ -22,46 +35,38 @@ volatility**. Materially different from completed liq forward
 (`TRACKA-LIQ-XSEC-FORWARD-20261113T222859Z`, EXPLORATORY_NULL): different target family,
 estimand, and hypothesis. No May 2026, no sealed `2026-05..2026-10` read.
 
-**Reuse path (smallest correct implementation):**
-- Clone `scripts/fclr_build_tracka_liq_xsec_forward.py` (frozen-window pattern: `PREREG_PATH`,
-  `EXPERIMENT_ID`, `CAMPAIGN`, `BLOCKS` constants, fail-closed assertions, hashed inputs,
-  timestamped panel/build-report/eval artifacts) into `scripts/fclr_build_tracka_vol_forward.py`.
-- Reuse Arm A feature/target/eval spec from `scripts/fclr_build_tracka_vol_fullhist.py`
-  (RV horizons, B1/C1/C2 families, QLIKE, block bootstrap, Holm, LOIO, placebo/permutation,
-  materiality floor, §17 criteria as applicable). Do **not** edit fullhist frozen outputs.
+**EXECUTION (the only work left — heavy, end-to-end):**
+1. Confirm the frozen prereg is unchanged (it is frozen ex ante; do not edit it): read
+   `research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json` and confirm
+   `status=FROZEN_PRE_OUTCOMES`, `promotable=false`, `outcome_data_inspected_before_freeze=false`.
+2. **Run:** `python3 scripts/fclr_build_tracka_vol_forward.py` — this performs the entire
+   build+eval (coverage-only universe, causal features, forward RV targets, QLIKE family, bootstrap,
+   LOIO, verdict) and writes `research_state/tracka_vol_forward_panel_<UTC>.parquet`,
+   `research_state/tracka_vol_forward_panel_build_report_<UTC>.json`,
+   `research_state/evaluation_summary_TRACKA-VOL-FORWARD-<UTC>.{json,md}`. The panel/build-report are
+   sha256-matched. Expect outcome (A) `EXPLORATORY_SIGNAL`/`EXPLORATORY_NULL` or (B) `INADMISSIBLE`
+   with the exact failing minimum printed.
+3. **If INADMISSIBLE (outcome B):** record the printed failing minimum (e.g. universe < 5, panel empty)
+   as a bounded structural NO_GO; do not tune features/splits to rescue (forbidden). Still update frontier/handoff.
+4. **Gates + tests, fail-closed:**
+   - `scripts/fclr_campaign_gate.py` currently checks Arm F as liq-xsec-forward artifacts only.
+     If this vol-forward cell must be recognized as campaign-complete/heavy progress, extend the gate
+     **additively and fail-closed** (new arm/check or generalized forward checks) plus tests;
+     never weaken Arm F or existing checks.
+   - Run: `python3 scripts/fclr_campaign_gate.py --arm all` (must stay all-PASS / strictly stronger)
+     and `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate`.
+   - Run any new/affected targeted tests for the builder/eval/gate changes.
+5. **Persist:** update `research_state/experiment_frontier.json` (new cell under rank 0 with
+   artifact/verdict), this handoff, and atomic state artifacts with evidence. Record exact commands,
+   outcomes, and uncovered issues. Commit policy: follow repo norms; do not commit raw parquet/caches
+   or modify `.github/workflows`.
 
-**Phase 1 — freeze prereg before ANY outcome read**
-- Write `research_state/prereg_tracka_vol_forward_2026q1q2_<UTC>.json` (+ `.md` if useful) with:
-  new `experiment_id` `TRACKA-VOL-FORWARD-2026Q1Q2-<UTC>`; `status=FROZEN_PRE_OUTCOMES`;
-  `outcome_data_inspected_before_freeze=false`; `pre_registered_before_outcomes=true`;
-  `frozen_before_outcomes=true`; `promotable=false`; `max_status=EXPLORATORY_ONLY`; exact window
-  `2026-01-18..2026-04-30`, 60/7/3x10 split with 7-day embargo and non-overlapping 10-day test
-  blocks; coverage-only universe frozen ex ante (native perps only, no venue mixing, no forward
-  fill/synthetic); features B1 vs C1/C2 primary contrast; horizons/QLIKE/CI/block bootstrap/
-  permutation/LOIO/materiality floor.
-- Freeze only after a **coverage-only** audit (existence/counts/coverage, never magnitudes/outcomes).
-
-**Phase 2 — build + evaluate on cached bulk only**
-- Run the new builder to emit `research_state/tracka_vol_forward_panel_<UTC>.parquet`,
-  `research_state/tracka_vol_forward_panel_build_report_<UTC>.json` (sha256-matched), and
-  `research_state/evaluation_summary_TRACKA-VOL-FORWARD-<UTC>.{json,md}` with a recognized verdict.
-- Universe by coverage-only; no outcome-informed selection. Never read May 2026 or sealed
-  `2026-05..2026-10`.
-
-**Phase 3 — gates + tests, fail-closed**
-- `scripts/fclr_campaign_gate.py` currently checks Arm F as liq-xsec-forward artifacts only.
-  If this vol-forward cell must be recognized as campaign-complete/heavy progress, extend the
-  gate **additively and fail-closed** (new arm/check or generalized forward checks) plus tests;
-  never weaken Arm F or existing checks.
-- Run: `python3 scripts/fclr_campaign_gate.py --arm all` (must stay all-PASS / strictly stronger)
-  and `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate`.
-- Run any new/affected targeted tests for the builder/eval/gate changes.
-
-**Phase 4 — persist**
-- Update `research_state/experiment_frontier.json` (new cell under rank 0 with artifact/verdict),
-  this handoff, and atomic state artifacts with evidence.
-- Record exact commands, outcomes, and uncovered issues. Commit policy: follow repo norms; do not
-  commit raw parquet/caches or modify `.github/workflows`.
+**Reuse path (if you must modify the builder — only if a bug blocks execution):**
+- The builder already follows the frozen-window pattern (`PREREG_PATH`, `EXPERIMENT_ID`, `CAMPAIGN`,
+  `BLOCKS` constants, fail-closed assertions, hashed inputs, timestamped artifacts).
+- Feature/target/QLIKE spec is in the builder docstrings + the frozen prereg; do **not** edit fullhist
+  frozen outputs. Do not tune against test blocks (forbidden). Any change that touches evaluated targets
+  invalidates the frozen-before-outcomes claim — prefer fixing the builder to run as-is.
 
 ### P2 — only if P1 is inadmissible with evidence
 If a materially new unauthenticated observed-liquidation source passes minima (≥5 instruments,
@@ -79,6 +84,10 @@ frontier/handoff. Never a status-only memo.
 
 ## 2) Bottlenecks removed / constraints
 
+- **Execution-start bottleneck removed:** the P1 builder + frozen prereg now exist on disk
+  (verified 2026-11-14T01:52:22Z, compiles clean, prereg schema-validated). The next agent starts
+  from working, run-ready code and only needs to `python3 scripts/fclr_build_tracka_vol_forward.py`;
+  no prose-to-code transcription. This is the single remaining heavy step.
 - **Verification churn removed:** gate 16/16, tests 22/22, scripts compile, and feasibility were
   frozen as verified at 2026-11-13T23:29:16Z. Repeating them without code/artifact changes is
   wasted progress; execute P1.
@@ -91,7 +100,8 @@ frontier/handoff. Never a status-only memo.
   observed≠modeled; no venue mixing; no forward fill/synthetic; no May 2026 or sealed-window
   reads; no re-probing terminal cells.
 - **Hygiene:** `FOCUS_CAMPAIGN.md`, `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md` are
-  redirects to this file only. This file is the single durable handoff.
+  redirects to this file only. `research_state/FCLR_CAMPAIGN_NEXT.md` is superseded (historical only).
+  This file is the single durable handoff.
 
 ## 3) Invariants (never violate)
 
@@ -112,8 +122,26 @@ frontier/handoff. Never a status-only memo.
 - Feasibility: `python3 scripts/next_campaign_status.py` → HL `2026-01-18..2026-04-30` FEASIBLE
   forward-reduced 60/7/3x10; Binance exhausted.
 - Frontier: `research_state/experiment_frontier.json` rank 0 `ACTIVE_HEAVY_CAMPAIGN`.
+- **P1 scaffold (added 2026-11-14T01:52:22Z):** frozen prereg
+  `research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json` (status
+  FROZEN_PRE_OUTCOMES, promotable=false, outcome_data_inspected_before_freeze=false) and run-ready
+  builder `scripts/fclr_build_tracka_vol_forward.py` (compiles clean via `py_compile`). Builder NOT
+  yet executed (that execution is the next session's deliverable and would consume the
+  frozen-before-outcomes claim).
 
 ## 5) Session log
+
+### 2026-11-14T01:53:00Z
+- Converted the prose P1 reuse path into a runnable scaffold so the next agent cannot avoid the heavy
+  execution step: froze `research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json`
+  (coverage-only, FROZEN_PRE_OUTCOMES, promotable=false, forward-reduced 60/7/3x10 over
+  2026-01-18..2026-04-30, no May/sealed reads) and wrote run-ready fail-closed builder
+  `scripts/fclr_build_tracka_vol_forward.py` (Arm A features/targets/QLIKE, 12-cell primary family,
+  block-bootstrap CI, LOIO, sha256-matched artifacts). Compile-checked the builder (`py_compile` OK) and
+  validated the prereg schema/assertions (`PREREG_OK`); did NOT execute the builder to preserve the
+  frozen-before-outcomes claim. Gate/tests/feasibility unchanged and sufficient (16/16, 22/22). Redirect
+  stubs and this handoff refreshed to the new timestamp. Next agent must run the builder end-to-end
+  (outcome A or bounded INADMISSIBLE outcome B) and must not do verification-only work.
 
 ### 2026-11-14T01:49:41Z
 - Re-verified at message time: gate 16/16 PASS (A0-A6,B1-B4,F0-F4; note Arm F currently checks LIQ forward only); tests 22/22 OK; `next_campaign_status.py` confirms P1 FEASIBLE forward-reduced 60/7/3x10 on untouched HL region 2026-01-18..2026-04-30 (ironflow bulk on disk, 103d). Binance 5-symbol design exhausted (disjoint ready months 2025-01/06/11/12 have max 61d contiguous < 127d). No admissible new liq source evidenced (0 GO). No external data/credentials required for P1. Next agent must execute P1 `FCLR-VOL-FORWARD-2026Q1Q2` end-to-end (outcome A or bounded NO_GO outcome B) and must not do verification-only work.
