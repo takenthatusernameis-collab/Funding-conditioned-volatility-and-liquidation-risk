@@ -1,89 +1,97 @@
-# AGENT HANDOFF — 2026-11-13T23:29:16Z (authoritative, single durable handoff)
+# AGENT HANDOFF — 2026-11-14T01:28:24Z (authoritative, single durable handoff)
 
-## START HERE — INITIAL TASK FOR NEXT SESSION (issued 2026-11-13T23:29:16Z) — HEAVY WORK REQUIRED
+## INITIAL TASK FOR NEXT SESSION (2026-11-14T01:28:24Z) — EXECUTE P1, NO RE-VERIFICATION
 
-**Deliverable of the next session (non-negotiable):** execute P1 below end-to-end and
-persist its evidence. A verification-only or handoff-rewrite-only session is a FAILED
-session (RESEARCH_PROMPT §19). Do not re-run the checks in §4; they were re-confirmed at
-the timestamp above and are frozen as sufficient. The only acceptable completions are:
-(a) a new frozen prereg + panel + build report + evaluation verdict for
-`FCLR-VOL-FORWARD-2026Q1Q2`, with gate/tests green and frontier/handoff updated; or
-(b) a bounded structural NO_GO naming each candidate and its exact failing minimum.
+**Deliverable (non-negotiable):** execute P1 end-to-end and persist evidence in this session.
+A verification-only, status-only, or handoff-rewrite-only session is a FAILED session
+(RESEARCH_PROMPT §19). Do **not** re-run the checks in §4; they were frozen at
+2026-11-13T23:29:16Z and remain sufficient unless you change code/artifacts they cover.
+The only acceptable completions are:
+- **(A)** a new frozen prereg + panel + build report + evaluation verdict for
+  `FCLR-VOL-FORWARD-2026Q1Q2`, with gates/tests green and frontier/this handoff updated; or
+- **(B)** a bounded structural NO_GO naming each candidate (source/window) and its exact
+  failing minimum, with evidence, frontier/this handoff updated.
 
-### P1 — `FCLR-VOL-FORWARD-2026Q1Q2` (preferred, cached/offline, no external data)
+### P1 — `FCLR-VOL-FORWARD-2026Q1Q2` (PREFERRED, cached/offline, no external data)
 
-- **Why this is the highest-value unopened route:** Hyperliquid ironflow bulk untouched
-  region `2026-01-18..2026-04-30` (103 days, candles/funding/OI/liquidations already on
-  disk) is `FEASIBLE forward-reduced (60/7/3x10)` per
-  `python3 scripts/next_campaign_status.py`. The window was reserved by
-  `prereg_tracka_vol_fullhist_20261112T201536Z.json` but **never scored for Arm A
-  volatility**. It is materially different from the completed liq forward
-  (`TRACKA-LIQ-XSEC-FORWARD-20261113T222859Z`, EXPLORATORY_NULL): different target family,
-  different estimand, different hypothesis. No May 2026, no sealed `2026-05..2026-10` read.
+**Why this is the highest-value unopened route:** Hyperliquid ironflow bulk untouched region
+`2026-01-18..2026-04-30` (103 days; candles/funding/OI/liquidations on disk) is
+`FEASIBLE forward-reduced (60/7/3x10)` per `python3 scripts/next_campaign_status.py`.
+Reserved by `prereg_tracka_vol_fullhist_20261112T201536Z.json` but **never scored for Arm A
+volatility**. Materially different from completed liq forward
+(`TRACKA-LIQ-XSEC-FORWARD-20261113T222859Z`, EXPLORATORY_NULL): different target family,
+estimand, and hypothesis. No May 2026, no sealed `2026-05..2026-10` read.
 
-- **Reuse path (smallest correct implementation):** clone
-  `scripts/fclr_build_tracka_liq_xsec_forward.py` (the proven frozen-window pattern:
-  `PREREG_PATH`, `EXPERIMENT_ID`, `CAMPAIGN`, `BLOCKS` constants + fail-closed assertions)
-  into `scripts/fclr_build_tracka_vol_forward.py`, and reuse the Arm A feature/target spec
-  from `scripts/fclr_build_tracka_vol_fullhist.py` (RV horizons, B1/C1/C2 families, QLIKE,
-  block bootstrap, Holm, LOIO). Do NOT edit the fullhist builder's frozen outputs.
+**Reuse path (smallest correct implementation):**
+- Clone `scripts/fclr_build_tracka_liq_xsec_forward.py` (frozen-window pattern: `PREREG_PATH`,
+  `EXPERIMENT_ID`, `CAMPAIGN`, `BLOCKS` constants, fail-closed assertions, hashed inputs,
+  timestamped panel/build-report/eval artifacts) into `scripts/fclr_build_tracka_vol_forward.py`.
+- Reuse Arm A feature/target/eval spec from `scripts/fclr_build_tracka_vol_fullhist.py`
+  (RV horizons, B1/C1/C2 families, QLIKE, block bootstrap, Holm, LOIO, placebo/permutation,
+  materiality floor, §17 criteria as applicable). Do **not** edit fullhist frozen outputs.
 
-- **Phase 1 — freeze prereg before ANY outcome read.** Write
-  `research_state/prereg_tracka_vol_forward_2026q1q2_<UTC>.json` with: new experiment ID
-  `TRACKA-VOL-FORWARD-2026Q1Q2-<UTC>`; `status=FROZEN_PRE_OUTCOMES`;
+**Phase 1 — freeze prereg before ANY outcome read**
+- Write `research_state/prereg_tracka_vol_forward_2026q1q2_<UTC>.json` (+ `.md` if useful) with:
+  new `experiment_id` `TRACKA-VOL-FORWARD-2026Q1Q2-<UTC>`; `status=FROZEN_PRE_OUTCOMES`;
   `outcome_data_inspected_before_freeze=false`; `pre_registered_before_outcomes=true`;
-  `frozen_before_outcomes=true`; `promotable=false`; `max_status=EXPLORATORY_ONLY`; exact
-  window `2026-01-18..2026-04-30`, 60/7/3x10 split with 7-day embargo and non-overlapping
-  10-day test blocks; coverage-only universe frozen ex ante (native perps only, no venue
-  mixing, no forward fill/synthetic); features B1 vs C1/C2 primary contrast; horizons /
-  QLIKE / CI / block bootstrap / permutation / LOIO / materiality floor. Freeze only after a
-  coverage-only audit (existence counts/coverage, never magnitudes/outcomes).
+  `frozen_before_outcomes=true`; `promotable=false`; `max_status=EXPLORATORY_ONLY`; exact window
+  `2026-01-18..2026-04-30`, 60/7/3x10 split with 7-day embargo and non-overlapping 10-day test
+  blocks; coverage-only universe frozen ex ante (native perps only, no venue mixing, no forward
+  fill/synthetic); features B1 vs C1/C2 primary contrast; horizons/QLIKE/CI/block bootstrap/
+  permutation/LOIO/materiality floor.
+- Freeze only after a **coverage-only** audit (existence/counts/coverage, never magnitudes/outcomes).
 
-- **Phase 2 — build + evaluate on cached bulk only.** Run the new builder to emit
-  `tracka_vol_forward_panel_<UTC>.parquet`, `..._build_report_<UTC>.json` (sha256-matched),
-  and `evaluation_summary_FCLR-VOL-FORWARD-..._<UTC>.{json,md}` with a recognized verdict.
-  Universe by coverage-only; no outcome-informed selection.
+**Phase 2 — build + evaluate on cached bulk only**
+- Run the new builder to emit `research_state/tracka_vol_forward_panel_<UTC>.parquet`,
+  `research_state/tracka_vol_forward_panel_build_report_<UTC>.json` (sha256-matched), and
+  `research_state/evaluation_summary_TRACKA-VOL-FORWARD-<UTC>.{json,md}` with a recognized verdict.
+- Universe by coverage-only; no outcome-informed selection. Never read May 2026 or sealed
+  `2026-05..2026-10`.
 
-- **Phase 3 — gates + tests, fail-closed.** Extend `scripts/fclr_campaign_gate.py` and its
-  tests only if this new cell requires it (fail-closed, never weaken Arm F). Then run:
-  `python3 scripts/fclr_campaign_gate.py --arm all` (must stay 16/16 or a strictly stronger
-  all-PASS set) and `python3 -m unittest -q tests.test_fclr_campaign_gate
-  tests.test_active_campaign_gate`.
+**Phase 3 — gates + tests, fail-closed**
+- `scripts/fclr_campaign_gate.py` currently checks Arm F as liq-xsec-forward artifacts only.
+  If this vol-forward cell must be recognized as campaign-complete/heavy progress, extend the
+  gate **additively and fail-closed** (new arm/check or generalized forward checks) plus tests;
+  never weaken Arm F or existing checks.
+- Run: `python3 scripts/fclr_campaign_gate.py --arm all` (must stay all-PASS / strictly stronger)
+  and `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate`.
+- Run any new/affected targeted tests for the builder/eval/gate changes.
 
-- **Phase 4 — persist.** Update `research_state/experiment_frontier.json` (new cell under
-  rank 0 with artifact/verdict), this handoff, and atomic state artifacts with evidence.
-  Record exact commands, outcomes, uncovered issues.
+**Phase 4 — persist**
+- Update `research_state/experiment_frontier.json` (new cell under rank 0 with artifact/verdict),
+  this handoff, and atomic state artifacts with evidence.
+- Record exact commands, outcomes, and uncovered issues. Commit policy: follow repo norms; do not
+  commit raw parquet/caches or modify `.github/workflows`.
 
 ### P2 — only if P1 is inadmissible with evidence
-If a materially new unauthenticated observed-liquidation source passes minima (≥5
-instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, provenance/license,
-observed-only, venue-consistent, joinable), run the §16 admissibility audit → freeze prereg
-→ build/eval → verdict under a new experiment ID. Current scans show **0 GO**
+If a materially new unauthenticated observed-liquidation source passes minima (≥5 instruments,
+≥1 complete month or ≥3 non-overlapping 30-day blocks, provenance/license, observed-only,
+venue-consistent, joinable), run §16 admissibility audit → freeze prereg → build/eval → verdict
+under a new experiment ID. Current scans show **0 GO**
 (`alt_source_scan_latest.json` 20261113T171152Z, `alt_source_probe_audit_20261112T191400Z.md`,
-`tracka_admissibility_no_go_20261113T193124Z.md`). Treat as NO_GO unless materially new
-evidenced source appears.
+`tracka_admissibility_no_go_20261113T193124Z.md`). Treat as NO_GO unless materially new evidenced
+source appears.
 
 ### P3 — terminal fallback, still evidence-backed
-Only if P1 is infeasible by exact failing minima AND no P2 GO exists: emit a bounded
-structural NO_GO naming each candidate (source/window) and the specific minimum it fails,
-then update frontier/handoff. Never a status-only memo.
+Only if P1 is infeasible by exact failing minima AND no P2 GO exists: emit a bounded structural
+NO_GO naming each candidate (source/window) and the specific minimum it fails, then update
+frontier/handoff. Never a status-only memo.
 
-## 2) Bottlenecks (removed / constraints)
+## 2) Bottlenecks removed / constraints
 
-- **Verification churn removed:** gate 16/16, tests 22/22, scripts compile, and feasibility
-  were verified at 2026-11-13T23:06:30Z and re-confirmed 2026-11-13T23:29:16Z. Repeating
-  them does not advance the campaign; execute P1 instead.
-- **No external data required for P1:** ironflow bulk 2025-05..2026-04 on disk. Binance
-  ready disjoint months `2025-01,2025-06,2025-11,2025-12` have contiguous runs 31/30/61d <
-  127d (not feasible for 3-block design); Binance 5-symbol design exhausted.
+- **Verification churn removed:** gate 16/16, tests 22/22, scripts compile, and feasibility were
+  frozen as verified at 2026-11-13T23:29:16Z. Repeating them without code/artifact changes is
+  wasted progress; execute P1.
+- **No external data required for P1:** ironflow bulk 2025-05..2026-04 on disk. Binance ready
+  disjoint months `2025-01,2025-06,2025-11,2025-12` have contiguous runs 31/30/61d < 127d (not
+  feasible for 3-block design); Binance 5-symbol design exhausted.
 - **No admissible new liq source evidenced:** Gate 4/Track A external trigger absent
-  (`NO_VALID_GATE4_TRIGGER`); HL/ironflow observed labels end 2026-10; alt-source deep
-  review shows 0 GO.
+  (`NO_VALID_GATE4_TRIGGER`); HL/ironflow observed labels end 2026-10; alt-source deep review 0 GO.
 - **Fail-closed enforced:** Arm F/gate must not be weakened; prereg must predate outcomes;
   observed≠modeled; no venue mixing; no forward fill/synthetic; no May 2026 or sealed-window
   reads; no re-probing terminal cells.
 - **Hygiene:** `FOCUS_CAMPAIGN.md`, `HANDOFF_NEXT_SESSION.md`, `NEXT_SESSION_TASK.md` are
-  redirects to this file only.
+  redirects to this file only. This file is the single durable handoff.
 
 ## 3) Invariants (never violate)
 
@@ -93,7 +101,7 @@ then update frontier/handoff. Never a status-only memo.
 4. No `.github/workflows` edits; do not commit raw parquet/caches.
 5. Do not fabricate artifacts, thresholds, p-values, or verdicts. If blocked, produce bounded NO_GO with exact failing minima.
 
-## 4) Verified evidence (frozen at 2026-11-13T23:29:16Z — do not re-verify)
+## 4) Verified evidence (frozen at 2026-11-13T23:29:16Z — do not re-verify without cause)
 
 - Gate: `python3 scripts/fclr_campaign_gate.py --arm all` **16/16 PASS** (A0-A6,B1-B4,F0-F4).
 - Tests: `python3 -m unittest -q tests.test_fclr_campaign_gate tests.test_active_campaign_gate` **22/22 OK**.
@@ -106,6 +114,13 @@ then update frontier/handoff. Never a status-only memo.
 - Frontier: `research_state/experiment_frontier.json` rank 0 `ACTIVE_HEAVY_CAMPAIGN`.
 
 ## 5) Session log
+
+### 2026-11-14T01:28:24Z
+- Refreshed the single durable handoff as the explicit, timestamped initial task for the next
+  session: P1 `FCLR-VOL-FORWARD-2026Q1Q2` execution contract made non-negotiable, re-verification
+  frozen at 2026-11-13T23:29:16Z, and concrete clone/reuse/gate-extension guidance retained.
+  Purpose: remove repeated verification-only bottleneck and force heavy progress (A or B outcome).
+  No research state regressed; no terminal cell reopened.
 
 ### 2026-11-13T23:29:16Z
 - Refreshed the single durable handoff to remove the verification-only bottleneck observed
