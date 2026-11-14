@@ -1,6 +1,24 @@
 # NEXT SESSION HANDOFF — 2026-11-14T09:23:34Z
 
-## Project: Funding-conditioned volatility and liquidation risk (FCLR)
+## ⚠ OBSOLETE — SUPERSEDED BY AGENT_HANDOFF.md (2026-11-14T13:15:35Z)
+
+This file is STALE and must NOT be followed. It asserts an "ACTIVE FRONTIER" of an
+untouched 103-day Hyperliquid forward window (2026-01-18..2026-04-30) and directs
+execution of TRACKA-HL-EXPANSION Step 1. That forward region is ALREADY TESTED AND
+EXHAUSTED by `TRACKA-LIQ-XSEC-FORWARD` (EXPLORATORY_NULL) and `TRACKA-VOL-FORWARD`
+(EXPLORATORY_NULL/VALID_EXPLORATORY), and TRACKA-HL-EXPANSION is a sealed terminal
+campaign (PASS but robustness FRAGILE; independent recompute INCONCLUSIVE; reconciled
+EXPLAINED_BY_ESTIMATOR).
+
+`scripts/next_campaign_status.py` and `tests/test_next_campaign_status.py` were updated
+2026-11-14T13:27:41Z to mark the forward reserve as tested (`BULK_TESTED_WINDOWS`);
+both now report "no feasible 3-block design in EITHER domain" (12/12 PASS).
+
+Single durable handoff: `AGENT_HANDOFF.md`. Operative state: **bounded trigger-only**
+(see `research_state/experiment_frontier.json` rank 0,
+`research_state/structural_exhaustion_confirmation_20261114T132741Z.md`). No polling,
+no repeated identical probes, no re-execution of tested windows, no status-only sessions.
+
 
 ### Executive Summary
 This is a quantitative finance research repository studying funding-rate-conditioned volatility and liquidation risk in crypto perpetuals (Binance 5-symbol + Hyperliquid native perps via ironflow bulk cache). The campaign uses a **fail-closed gate architecture** to prevent premature closure declarations. Two data domains exist:

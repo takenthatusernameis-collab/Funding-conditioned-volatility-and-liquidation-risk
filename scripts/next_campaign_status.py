@@ -43,12 +43,15 @@ KINDS = ("markPriceKlines", "premiumIndexKlines", "indexPriceKlines")
 BULK = RS / "data_cache" / "ironflow_bulk"
 BULK_DATASETS = ("candles_1h", "funding", "open_interest", "liquidations")
 # Regions already consumed by a sealed/terminal cell in the Hyperliquid domain.
-# 2026-01-01..2026-04-30 was declared "reserved untouched" by the FullHist
-# prereg; that reserve is precisely what the next forward cell consumes, so it is
-# NOT a tested window and must stay visible as an executable frontier.
+# 2026-01-18..2026-04-30 was the FullHist forward reserve; it is now tested and
+# exhausted by TRACKA-LIQ-XSEC-FORWARD (EXPLORATORY_NULL) and TRACKA-VOL-FORWARD
+# (EXPLORATORY_NULL/VALID_EXPLORATORY) per AGENT_HANDOFF 2026-11-14T13:15:35Z.
+# Do NOT re-list it as an executable frontier.
 BULK_TESTED_WINDOWS = [
     # Arm A train/embargo + Arm B burn-in/scored region of the FullHist campaign.
     ("2025-05-25", "2026-01-17", "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)"),
+    # Forward reserve consumed by the 2026Q1Q2 forward cells.
+    ("2026-01-18", "2026-04-30", "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD (EXPLORATORY_NULL; region exhausted)"),
 ]
 # A forward cell is allowed to use a shorter, pre-registered window when the
 # untouched region cannot fit the 30/30/30 rolling-origin skeleton. Minimum for

@@ -108,47 +108,57 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertTrue(feas["any_feasible"])
         self.assertTrue(feas["runs"][0]["feasible"])
 
-    def test_hyperliquid_bulk_frontier_detects_forward_window(self):
-        """The real frontier: 2026-01-18..2026-04-30 must be surfaced as forward-feasible.
+    def test_hyperliquid_bulk_forward_window_now_tested(self):
+        """The 2026-01-18..2026-04-30 forward reserve is tested and exhausted.
 
-        Regression guard for the false 'cache exhausted' closure: the old tool
-        only modelled the Binance 5-symbol design and declared the campaign
-        exhausted while an untouched 103-day Hyperliquid region with observed
-        liquidation labels sat cached.
+        TRACKA-LIQ-XSEC-FORWARD (EXPLORATORY_NULL) and TRACKA-VOL-FORWARD
+        (EXPLORATORY_NULL/VALID_EXPLORATORY) consumed the region per
+        AGENT_HANDOFF 2026-11-14T13:15:35Z, so it must NOT be surfaced as an
+        executable forward-feasible frontier. Regression guard against a false
+        re-opening of a tested window (the inverse of the old false-closure bug).
         """
         bulk = self.mod.bulk_frontier()
         self.assertTrue(any(d for d in bulk["present"].values()),
                         "ironflow bulk cache should be present on disk")
-        self.assertTrue(bulk["any_forward_feasible"],
-                        f"untouched Hyperliquid forward window not detected: {bulk['runs']}")
+        self.assertFalse(bulk["any_forward_feasible"],
+                         f"tested forward window must not be forward-feasible: {bulk['runs']}")
         fwd = [r for r in bulk["runs"] if r["feasible_forward"]]
-        self.assertTrue(fwd)
-        self.assertGreaterEqual(fwd[0]["span_days"],
-                                self.mod.MIN_FORWARD_DESIGN_DAYS)
-        self.assertEqual(fwd[0]["start"], "2026-01-18")
-        self.assertEqual(fwd[0]["end"], "2026-04-30")
+        self.assertEqual(fwd, [], f"no forward-feasible run may remain: {fwd}")
+        self.assertFalse(bulk["any_feasible"])
 
     def test_bulk_tested_window_is_excluded(self):
         """Arm B's scored region (through 2026-01-17) must not count as untouched."""
         bulk = self.mod.bulk_frontier()
+        # With Arm B (through 2026-01-17) and the forward reserve
+        # (2026-01-18..2026-04-30) both tested, no run may be feasible or
+        # forward-feasible. The only possible residual is the short pre-burn-in
+        # prefix (2025-05-01..2025-05-24), which is far below design minimum.
         for r in bulk["runs"]:
-            # No run may start inside the tested window and run past it.
+            self.assertFalse(r["feasible"], f"run wrongly feasible: {r}")
+            self.assertFalse(r["feasible_forward"], f"run wrongly forward-feasible: {r}")
+            self.assertLess(r["span_days"], self.mod.MIN_FORWARD_DESIGN_DAYS)
+        self.assertFalse(bulk["any_feasible"])
+        self.assertFalse(bulk["any_forward_feasible"])
+        for r in bulk["runs"]:
             self.assertFalse(
                 r["start"] <= "2026-01-17" and r["end"] >= "2026-01-17",
                 f"run overlaps tested Arm B region: {r}",
             )
-        # The forward region must begin strictly after the tested boundary.
-        fwd = [r for r in bulk["runs"] if r["feasible_forward"]]
-        self.assertTrue(fwd)
-        self.assertGreater(fwd[0]["start"], "2026-01-17")
 
     def test_campaign_status_message_distinguishes_domains(self):
-        """The Binance exhaustion message must not claim the whole campaign is dead."""
+        """Neither domain retains a feasible 3-block design.
+
+        Binance: no contiguous READY run >= 127d. Hyperliquid bulk: the
+        2026-01-18..2026-04-30 forward reserve is tested/exhausted
+        (TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD), so no untouched
+        forward-feasible region remains. The campaign is correctly bounded
+        to trigger-only; no domain keeps it alive.
+        """
         feasibility = self.mod.design_feasible_months(self.mod.ready_windows())
         bulk = self.mod.bulk_frontier()
         self.assertFalse(feasibility["any_feasible"])
-        # Even with Binance exhausted, the bulk domain keeps the campaign alive.
-        self.assertTrue(bulk["any_forward_feasible"])
+        self.assertFalse(bulk["any_feasible"])
+        self.assertFalse(bulk["any_forward_feasible"])
 
 
 if __name__ == "__main__":
