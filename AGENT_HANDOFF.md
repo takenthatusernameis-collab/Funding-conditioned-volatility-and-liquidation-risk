@@ -166,3 +166,9 @@ After each phase:
 
 ### 2026-11-14T02:35:42Z
 - Prior 02:33 INADMISSIBLE claim superseded by 02:43/02:45 checkpoint; preserved as history, not to be repeated.
+
+### 2026-11-14T04:37:07Z
+- Baseline re-verified at current HEAD (a28eecc96): 55 targeted tests OK; `scripts/fclr_campaign_gate.py --arm all` = 19/19 PASS.
+- Active rank-0 campaign `FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z` is `READY_EXECUTE`. Phase A (`FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z`) = `READY_EXECUTE`; Phase B (`FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z`) = `PENDING_PHASE_A`. No agent-removable blockers. `fclr011_panel.json` remains an unresolved Git-LFS pointer — rebuild the FCLR-011 panel from cached Binance inputs instead of waiting for LFS.
+- Bottlenecks already removed: stale "no heavy work" handoff superseded, hardcoded active-campaign test removed, artifact-count guard repaired to tracked-baseline + untracked-file check. Gate 4 external/legal trigger absent but not required for these local exploratory audits.
+- Next action: execute Phase A end-to-end — freeze prereg (`research_state/prereg_fclr011_recompute_20261114T042139Z.json` + `.md`, status FROZEN_PRE_OUTCOMES before any outcome computation), rebuild the panel from `research_state/data_cache/{SYM}_2026_MM` (2026-01..2026-08), run independent train-only OLS/HAR recomputation of B0/B1/C1/C2 on frozen splits, emit `research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.{json,md}` with verdict one of REPRODUCED/NOT_REPRODUCED/INCONCLUSIVE/INADMISSIBLE. Then execute Phase B. Do not stop at a status-only report; do not wait for Gate 4; do not reuse the old "no heavy work remains" directive (superseded).
