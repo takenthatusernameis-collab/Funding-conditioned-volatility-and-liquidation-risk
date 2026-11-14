@@ -1,13 +1,13 @@
 [
   {
     "task": "FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z",
-    "rank": 0,
-    "status": "READY_EXECUTE",
-    "program_status": "READY_EXECUTE",
+    "rank": 1,
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "COMPLETED_VALIDATED",
     "generated": "2026-11-14T19:20:32Z",
-    "refreshed": "2026-11-14T19:20:32Z",
-    "last_checked": "2026-11-14T19:20:32Z",
-    "next_unfinished_task": "Execute the estimator/data reconciliation specified in AGENT_HANDOFF.md on the cached 2025 disjoint panel. Freeze a pre-results prereg first; emit a 2x2 attribution matrix, focused tests, and an EXPLORATORY_ONLY verdict. This is offline heavy work and must not be replaced by a status-only check.",
+    "refreshed": "2026-11-14T21:16:13Z",
+    "last_checked": "2026-11-14T21:16:13Z",
+    "next_unfinished_task": "SUPERSEDED by the 2024-06 singleton diagnostic (FCLR-FWD-VOL-2024-DISJOINT-2024-06). Reconcile verdict UNEXPLAINED; preserve artifacts; do not re-run.",
     "blockers": "No agent-removable blocker for the reconciliation. The existing disjoint result is EXPLORATORY_NULL, not a practical edge; Gate 4 remains EXTERNAL_BLOCKED and promotable=false.",
     "next_action_heavy": "Freeze and execute the reconciliation, then follow the handoff's bounded branch: EXPLAINED_BY_ESTIMATOR -> singleton 2024-06 diagnostic under a new prereg; EXPLAINED_BY_DATA -> row-level lineage audit; UNEXPLAINED -> LOIO/per-block diagnostics. Do not re-run tested 2025 test months.",
     "resume_triggers": [
@@ -44,7 +44,10 @@
       "handoff": "AGENT_HANDOFF.md",
       "disjoint_cross": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z COMPLETED_VALIDATED EXPLORATORY_NULL (gate PASS).",
       "next_campaign_status": "scripts/next_campaign_status.py reports executable heavy work remains; the 2024-06 singleton is a bounded fallback, not a replacement for reconciliation."
-    }
+    },
+    "superseded_by": "FCLR-FWD-VOL-2024-DISJOINT-2024-06-<UTC>",
+    "superseded_at": "2026-11-14T21:16:13Z",
+    "note": "Reconciliation stage complete (verdict UNEXPLAINED). Demoted so exactly one rank-0 heavy campaign remains; see AGENT_HANDOFF.md."
   },
   {
     "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T191615Z",
@@ -52,11 +55,11 @@
     "status": "TRIGGER_ONLY",
     "program_status": "BOUNDED_TRIGGER_ONLY",
     "generated": "2026-11-14T19:16:15Z",
-    "refreshed": "2026-11-14T19:16:15Z",
-    "last_checked": "2026-11-14T19:16:15Z",
+    "refreshed": "2026-11-14T21:16:13Z",
+    "last_checked": "2026-11-14T21:16:13Z",
     "next_unfinished_task": "Trigger-only sentinel: no agent-removable heavy work on cached/admissible Binance 5-symbol data after FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL). Wait for a material external trigger and act only when present; do not poll or re-run tested windows.",
-    "blockers": "Gate 4 Binance v5 terms EXTERNAL_BLOCKED (no RESOLVED_VERIFIED trigger). Binance 5-symbol cached-data volatility cells exhausted/tested (incl. 2025 disjoint 2025-06/2025-11/2025-12). No admissible new observed-liquidation source per prior audits. No agent-removable heavy work.",
-    "next_action_heavy": "On trigger only, with NEW experiment ID and frozen prereg pre-outcomes as required: (1) GATE4_BRANCH_1 — valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation) -> Gate 4 confirmatory flow. (2) NEW_OBSERVED_LIQUIDATION_SOURCE -> §16 admissibility audit artifact BEFORE prereg/outcomes; if ADMISSIBLE freeze prereg -> build/eval/verdict. (3) HL_LABEL_EXTENSION -> bounded reprobe only if >=100d depth and verified post-2026-10-31 labels. (4) EXPANSION_ROBUSTNESS_REDO -> cached-panel robustness with NEW frozen prereg pre-outcomes. Do not poll; do not repeat tested windows.",
+    "blockers": "Gate 4 Binance v5 terms EXTERNAL_BLOCKED (no RESOLVED_VERIFIED trigger). Trigger-only sentinel; the single rank-0 slot is held by this sentinel because the reconcile completed and the 2024-06 singleton campaign is the next bounded heavy cell under AGENT_HANDOFF.md.",
+    "next_action_heavy": "On trigger only, with NEW experiment ID and frozen prereg pre-outcomes as required: (1) GATE4_BRANCH_1 \u2014 valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation) -> Gate 4 confirmatory flow. (2) NEW_OBSERVED_LIQUIDATION_SOURCE -> \u00a716 admissibility audit artifact BEFORE prereg/outcomes; if ADMISSIBLE freeze prereg -> build/eval/verdict. (3) HL_LABEL_EXTENSION -> bounded reprobe only if >=100d depth and verified post-2026-10-31 labels. (4) EXPANSION_ROBUSTNESS_REDO -> cached-panel robustness with NEW frozen prereg pre-outcomes. Do not poll; do not repeat tested windows.",
     "resume_triggers": [
       "GATE4_BRANCH_1",
       "NEW_OBSERVED_LIQUIDATION_SOURCE",
@@ -84,7 +87,7 @@
     ],
     "evidence": {
       "disjoint_cross": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z COMPLETED_VALIDATED EXPLORATORY_NULL (gate PASS).",
-      "next_campaign_status": "scripts/next_campaign_status.py -> no feasible 3-block contiguous design; disjoint 2025 feasible blocks tested by this campaign.",
+      "next_campaign_status": "scripts/next_campaign_status.py: 2024-06 FEASIBLE (train 2024-04-25..2024-05-24, test 2024-06-01..2024-06-30); executable heavy work REMAINS.",
       "gate4": "NO_VALID_GATE4_TRIGGER; promotable=false."
     }
   },

@@ -83,6 +83,11 @@
       "action": "add",
       "id": "fclr_reconcile_register_20261114T152856Z",
       "summary": "Register the 3 sealed-recompute/reconciliation audit scripts added since the last registry sync: fclr011_recompute_audit.py, fclr_liq_expansion_recompute.py, fclr_liq_expansion_reconcile.py. All are track_c_sealed_volatility independent-recompute utilities that emit timestamped evaluation_summary artifacts only (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); no live outcomes, no new prereg, no guarded Track A liquidation claim production. Registry now covers all 176 scripts/*.py."
+    },
+    {
+      "action": "add",
+      "id": "fclr_disjoint_register_20261114T211600Z",
+      "summary": "Register the 4 scripts added by FCLR-FWD-VOL-2025-DISJOINT-CROSS and its reconciliation stage (coverage_audit_fwd_vol_2025_disjoint_cross.py, fclr_fwd_vol_2025_disjoint_cross.py, fclr_fwd_vol_2025_disjoint_cross_gate.py, fclr_fwd_vol_2025_disjoint_reconcile.py). All offline/exploratory Track C utilities and gates (EXPLORATORY_ONLY, promotable=false, no sealed mutation, no liquidation outcome reads). Registry now covers all 180 scripts/*.py."
     }
   ],
   "changes": [
@@ -103,10 +108,10 @@
       "summary": "register fclr023_gate4_blocker_resolution_action_plan.py as track_c_or_aux_audit_utility read-only blocker-resolution action plan (packet_ready_for_human_or_prereg_action=false, no satisfaction inference, no fabrication)"
     }
   ],
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration.",
-  "generated": "20261114T152856Z",
-  "registry_version": "1.2",
-  "script_count": 176,
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile).",
+  "generated": "20261114T211600Z",
+  "registry_version": "1.3",
+  "script_count": 180,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -811,6 +816,22 @@
     "write_trigger_harden_successor.py": {
       "class": "prereg_utility",
       "reason": "Trigger-hardening artifacts; no outcome reads."
+    },
+    "coverage_audit_fwd_vol_2025_disjoint_cross.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "coverage_audit_fwd_vol_2025_disjoint_cross.py: offline coverage/train-feasibility audit for the 2025 disjoint cross (finite-row counts and span arithmetic only); no guarded Track A liquidation outcome claim production."
+    },
+    "fclr_fwd_vol_2025_disjoint_cross.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr_fwd_vol_2025_disjoint_cross.py: exploratory disjoint 2025 volatility cross (EXPLORATORY_ONLY, promotable=false); cached-only, no liquidation outcome reads; emits timestamped Track C artifacts."
+    },
+    "fclr_fwd_vol_2025_disjoint_cross_gate.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr_fwd_vol_2025_disjoint_cross_gate.py: read-only definition-of-done gate for the 2025 disjoint cross; no network, no outcome computation, no canonical mutation."
+    },
+    "fclr_fwd_vol_2025_disjoint_reconcile.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "fclr_fwd_vol_2025_disjoint_reconcile.py: sealed-vs-corrected estimator/data reconciliation audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"

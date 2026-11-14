@@ -674,9 +674,25 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_fwd_vol_2025_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
   },
+  "coverage_audit_fwd_vol_2025_disjoint_cross.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "coverage_audit_fwd_vol_2025_disjoint_cross.py: offline coverage/train-feasibility audit for the 2025 disjoint cross (finite-row counts and span arithmetic only); no guarded Track A liquidation outcome claim production."
+  },
   "fclr_fwd_vol_2025_cross_gate.py": {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_fwd_vol_2025_cross_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025_disjoint_cross.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025_disjoint_cross.py: exploratory disjoint 2025 volatility cross (EXPLORATORY_ONLY, promotable=false); cached-only, no liquidation outcome reads; emits timestamped Track C artifacts."
+  },
+  "fclr_fwd_vol_2025_disjoint_cross_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025_disjoint_cross_gate.py: read-only definition-of-done gate for the 2025 disjoint cross; no network, no outcome computation, no canonical mutation."
+  },
+  "fclr_fwd_vol_2025_disjoint_reconcile.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr_fwd_vol_2025_disjoint_reconcile.py: sealed-vs-corrected estimator/data reconciliation audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
   },
   "fclr_fwd_vol_2025h2_cross.py": {
     "class": "track_c_or_aux_audit_utility",
