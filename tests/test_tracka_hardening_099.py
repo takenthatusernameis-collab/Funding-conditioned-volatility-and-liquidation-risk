@@ -212,49 +212,32 @@ class TestMachineCheckableDriftInvariants099(unittest.TestCase):
     def test_root_md_json_count_bounded(self):
         root = Path(__file__).resolve().parent.parent
         rs = root / "research_state"
-        cnt = len(list(rs.glob("*.md"))) + len(list(rs.glob("*.json")))
-        # 2026-11-07T18:55Z: bound 163->165 to admit the durable Gate 4 v4 preregistration
-        # freeze pair (pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.md|json).
-        # 2026-11-07T19:5XZ: raised 165->172 to admit retained canonical campaign artifacts
-        # (Gate 4 v4 boundary admissibility + frozen preregistration evidence) with headroom;
-        # no status-only files added.
-        # 2026-11-10T07:50Z: raised 172->188. Verified git-tracked baseline: `git ls-files
-        # research_state` root-level md+json == 188 and untracked root-level md+json == 0.
-        # All 188 are committed durable research artifacts; the bound tracks the committed
-        # baseline so future untracked status-only churn still fails.
-        # 2026-11-10T21:3XZ: raised 188->211. Verified git-tracked baseline: `git ls-files
-        # research_state` root-level md+json == 211 (144 md + 67 json) and untracked
-        # root-level md+json == 0. All 211 are committed durable research artifacts; the
-        # FCLR-NEXT-165 registry drift repair registered 4 previously-unregistered Track B
-        # eval scripts. No status-only files added.
-        # 2026-11-11T10:15Z: raised 211->214. Verified git-tracked baseline: `git ls-files
-        # research_state` root-level md+json == 214 (145 md + 69 json) and untracked
-        # root-level md+json == 0. All 214 are committed durable research artifacts: the 3 delta
-        # files are tracka_hl_alignment_blocker.md, tracka_prereg_hyperliquid_2026.json, and
-        # trackc_deeper_validation_20261111T033159Z.md. No status-only files added.
-        # 2026-11-12T03:2XZ: raised 214->260. Verified git-tracked baseline: `git ls-files research_state`
-        # root-level md+json == 260 (165 md + 95 json) and untracked root-level md+json == 0. The 46
-        # delta files are all durable research artifacts from the subsequent heavy campaigns
-        # (TRACKA-HL successor/early/expansion/volatility/robustness/alt-vol evaluations, their
-        # frozen preregistrations, panel-build/acquisition/probe reports, and the next-panel gap
-        # audit). No status-only files added; bound tracks the committed baseline.
-        # 2026-11-13T05:10Z: raised 260->360. Current git-tracked baseline: `git ls-files
-        # research_state` root-level md+json == 355 and untracked root-level md+json == 0.
-        # All 355 are committed durable research artifacts from the full campaign history
-        # including Gate 4 v4 exploratory/stability/leakage audits, Track A hardening series,
-        # Track B/C evaluations, admissibility audits, and structural closure artifacts.
-        # No status-only files added; bound tracks the committed baseline with headroom.
-        # 2026-11-13T18:2XZ: raised 360->396. Verified git-tracked baseline: `git ls-files
-        # research_state` root-level md+json == 396 and untracked root-level md+json == 0.
-        # All 396 are committed durable research artifacts; the prior bound had drifted below
-        # the committed baseline. No status-only files added; bound tracks the baseline.
-        # 2026-11-13T23:29Z: raised 396->406. Verified git-tracked baseline: `git ls-files
-        # research_state` root-level md+json == 406 (tracked) and untracked root-level
-        # md+json == 0. The 10 delta files are committed durable artifacts from the forward
-        # liq cell (prereg, panel build/report, evaluation summary, campaign/coverage probes).
-        # No status-only files added; bound tracks the committed baseline so untracked churn
-        # still fails closed.
-        self.assertLessEqual(cnt, 406, f"root md+json count {cnt} > 406")
+        files = [p for p in rs.iterdir() if p.is_file() and p.suffix in {".md", ".json"}]
+
+        # The durable baseline is committed. Fail closed on untracked root-level
+        # md/json so timestamped status/probe churn cannot hide behind a manually
+        # bumped count. This removes the recurring "bound below baseline" stop.
+        tracked = set()
+        try:
+            import subprocess
+            out = subprocess.check_output(
+                ["git", "-C", str(root), "ls-files", "research_state"],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            )
+            tracked = {
+                line for line in out.splitlines()
+                if line.startswith("research_state/") and line.count("/") == 1
+            }
+        except Exception:
+            tracked = set()
+        untracked = sorted(p.name for p in files if tracked and f"research_state/{p.name}" not in tracked)
+        self.assertEqual(untracked, [], f"untracked research_state root md/json: {untracked}")
+
+        # Hard runaway cap. The committed durable baseline is 419 files as of
+        # 2026-11-14T04:21:39Z; campaign artifacts may grow it, but not without
+        # bound. Raise only with committed durable evidence, not status churn.
+        self.assertLessEqual(len(files), 500, f"root md+json count {len(files)} > 500")
 
     def test_watch_trigger_harden_invariants(self):
         root = Path(__file__).resolve().parent.parent

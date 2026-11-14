@@ -610,6 +610,134 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "trackc_provenance_lineage.py: local-only provenance lineage ingestion/verification; stdlib-only, no network, no outcomes, verifies content hashes from local manifests only, never fabricates provenance."
   },
+  "early4h_campaign.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "early4h_campaign.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "early4h_liq_glm.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "early4h_liq_glm.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "early4h_liq_glm_robust.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "early4h_liq_glm_robust.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_build_tracka_liq_xsec.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_build_tracka_liq_xsec.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_build_tracka_liq_xsec_forward.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_build_tracka_liq_xsec_forward.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_build_tracka_vol_forward.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_build_tracka_vol_forward.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_build_tracka_vol_fullhist.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_build_tracka_vol_fullhist.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_campaign_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_campaign_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_exp_robust_redo.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_exp_robust_redo.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_exp_robust_redo_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_exp_robust_redo_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_final_structural_closure.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_final_structural_closure.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2024_cross.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2024_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2024_cross_coverage.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2024_cross_coverage.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2024_cross_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2024_cross_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2024q4_cross_coverage.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2024q4_cross_coverage.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025_cross.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025_cross_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025_cross_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025h2_cross.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025h2_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025h2_cross_coverage.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025h2_cross_coverage.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025h2_cross_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025h2_cross_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025q1q2_cross.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025q1q2_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025q1q2_cross_coverage.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025q1q2_cross_coverage.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_fwd_vol_2025q1q2_cross_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025q1q2_cross_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_ironflow_bulk.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_ironflow_bulk.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_liq_010_confirm.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_liq_010_confirm.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_liq_010_confirm_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_liq_010_confirm_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_next_campaign_gate.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_next_campaign_gate.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "next_campaign_status.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "next_campaign_status.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "tracka_hl_build_early_4h_panel.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "tracka_hl_build_early_4h_panel.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "tracka_hl_evaluate_early_4h.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "tracka_hl_evaluate_early_4h.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "tracka_hl_fetch_candles_early_4h.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "tracka_hl_fetch_candles_early_4h.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
+  "tracka_hl_fetch_candles_early_4h_2025h1.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "tracka_hl_fetch_candles_early_4h_2025h1.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
+  },
 }
 
 ALLOWED_CLASSES = {

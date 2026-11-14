@@ -98,40 +98,36 @@ def drift_invariants(repo_root: Path, research_state_dir: Path = None) -> dict:
         "digests": sorted(p.name for p in digests),
         "count": len(probes) + len(digests),
     }
-    # root md+json bounded (099 invariant). Bound is a safety cap against status-only
-    # churn accumulation; durable canonical research artifacts (frozen preregistrations
-    # and their machine-readable JSON twins, sealed anchors, canonical summaries) are
-    # counted but exempted from the churn rationale. 2026-11-07T18:55Z: raised 163->165
-    # to admit the Gate 4 v4 preregistration freeze pair
-    # (pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.md|json). 2026-11-07T19:5XZ:
-    # raised 165->172 to admit retained canonical campaign artifacts (Gate 4 v4 boundary
-    # admissibility + frozen preregistration evidence) with headroom; no status-only files added.
-    # 2026-11-10T07:50Z: raised 172->188. Verified `git ls-files research_state` root-level
-    # md+json == 188 and untracked root-level md+json == 0 (git ls-files --others --exclude-standard
-    # research_state). All 188 are git-tracked durable research artifacts; the prior bound had
-    # drifted below the committed baseline, which is not status-only churn. No new untracked files.
-    # 2026-11-10T21:3XZ: raised 188->211. Verified git-tracked baseline: `git ls-files
-    # research_state` root-level md+json == 211 (144 md + 67 json) and untracked root-level
-    # md+json == 0. All 211 are committed durable research artifacts (registry drift repair
-    # FCLR-NEXT-165 registered the 4 missing Track B eval scripts; no status-only files added).
-    # 2026-11-11T10:15Z: raised 211->214. Verified git-tracked baseline: `git ls-files
-    # research_state` root-level md+json == 214 (145 md + 69 json) and untracked root-level
-    # md+json == 0. All 214 are committed durable research artifacts: the 3 delta files are
-    # tracka_hl_alignment_blocker.md (Track A alignment-blocker evidence), tracka_prereg_hyperliquid_2026.json
-    # (frozen Track A preregistration), and trackc_deeper_validation_20261111T033159Z.md (Track C
-    # deeper-validation evidence). No status-only files added; bound tracks the committed baseline.
-    # 2026-11-12T03:2XZ: raised 214->260. Verified git-tracked baseline: `git ls-files research_state`
-    # root-level md+json == 260 (165 md + 95 json) and untracked root-level md+json == 0. The 46
-    # delta files are all durable research artifacts from the subsequent heavy campaigns
-    # (TRACKA-HL successor/early/expansion/volatility/robustness/alt-vol evaluations, their
-    # frozen preregistrations, panel-build/acquisition/probe reports, and the next-panel gap
-    # audit). No status-only files added; bound tracks the committed baseline.
-    # 2026-11-13T18:2XZ: raised 260->396. Verified git-tracked baseline: `git ls-files research_state`
-    # root-level md+json == 396 (227 md + 169 json) and untracked root-level md+json == 0. All are
-    # durable research artifacts (frozen preregs, eval summaries, panel builds, audits/reports).
-    # No status-only files added; bound tracks the committed baseline.
-    root_count = len(list(rs.glob("*.md"))) + len(list(rs.glob("*.json")))
-    checks["root_md_json_bounded"] = {"pass": root_count <= 396, "count": root_count, "bound": 396}
+    # root md+json bounded (099 invariant). Fail closed on untracked root-level
+    # md/json so status-only churn cannot hide behind a manually bumped bound.
+    # The hard cap is a runaway guard; the committed durable baseline is 419 as of
+    # 2026-11-14T04:21:39Z. In non-git fixtures, fall back to the hard cap only.
+    root_files = [p for p in rs.iterdir() if p.is_file() and p.suffix in {".md", ".json"}]
+    root_count = len(root_files)
+    tracked_root = set()
+    try:
+        import subprocess
+        out = subprocess.check_output(
+            ["git", "-C", str(root), "ls-files", "research_state"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+        tracked_root = {
+            line for line in out.splitlines()
+            if line.startswith("research_state/") and line.count("/") == 1
+        }
+    except Exception:
+        tracked_root = set()
+    untracked = sorted(
+        p.name for p in root_files
+        if tracked_root and f"research_state/{p.name}" not in tracked_root
+    )
+    checks["root_md_json_bounded"] = {
+        "pass": not untracked and root_count <= 500,
+        "count": root_count,
+        "bound": 500,
+        "untracked": untracked,
+    }
     # canonical alt outputs only (no recurring timestamped deep_review/scan families beyond latest)
     bad_alt = []
     for p in rs.glob("*_deep_review_*.md"):

@@ -1,7 +1,55 @@
 [
   {
-    "task": "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z",
+    "task": "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z",
     "rank": 0,
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "next_unfinished_task": "Phase A: freeze research_state/prereg_fclr011_recompute_20261114T042139Z.json before any outcome computation; rebuild the FCLR-011 panel from cached Binance 2026-01..2026-08 inputs (do not rely on the LFS pointer fclr011_panel.json); run an independent train-only OLS/HAR recomputation of B0/B1/C1/C2 on the frozen splits (train 2026-01-01..2026-03-17, val 2026-03-25..2026-04-30, test 2026-05-08..2026-08-06); emit evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.{json,md} with QLIKE, 24h block bootstrap 2000 reps, Holm, LOIO, placebo, leakage audit, and exact artifact hashes. Phase B: freeze a new prereg and independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 19.04% C2-vs-B1 QLIKE reduction; FRAGILE LOIO 4/8, placebo FAIL) using cached ironflow observed liquidation labels only; emit evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md}. Both phases are EXPLORATORY_ONLY and never promotable; preserve all sealed artifacts.",
+    "generated": "2026-11-14T04:21:39Z",
+    "refreshed": "2026-11-14T04:21:39Z",
+    "last_checked": "2026-11-14T04:21:39Z",
+    "blockers": "None agent-removable. The old trigger-only directive is superseded. Gate 4 external/legal trigger remains absent but is not required for these local exploratory audits. fclr011_panel.json and run_manifest*.json are Git-LFS pointers; rebuild the FCLR-011 panel from cached Binance zips/CSVs instead of waiting for LFS. Do not wait or poll.",
+    "next_action_heavy": "Execute Phase A end-to-end, then Phase B. If Phase A is data-blocked, emit a bounded NO_GO with exact failing minima and execute Phase B; do not stop at a status-only report.",
+    "phases": [
+      {
+        "phase": "A",
+        "task": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
+        "status": "READY_EXECUTE",
+        "claim": "Independently recompute the sealed FCLR-011 volatility PASS (C2 vs B1 +4.94% QLIKE, CI [-0.032546,-0.001418], 5 instruments, 3 blocks, test 2026-05-08..2026-08-06) under the frozen splits and a clean OLS/HAR implementation with no missing-value zero-fill.",
+        "expected_artifacts": [
+          "research_state/prereg_fclr011_recompute_20261114T042139Z.json",
+          "research_state/fclr011_recompute_panel_20261114T042139Z.parquet",
+          "research_state/fclr011_recompute_panel_build_report_20261114T042139Z.json",
+          "research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.json",
+          "research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.md"
+        ]
+      },
+      {
+        "phase": "B",
+        "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
+        "status": "PENDING_PHASE_A",
+        "claim": "Independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 593 paired rows, 19.04% C2-vs-B1 QLIKE reduction) and its FRAGILE robustness result (LOIO 4/8, placebo FAIL) using cached ironflow observed liquidation labels only.",
+        "expected_artifacts": [
+          "research_state/prereg_tracka_liq_expansion_recompute_20261114T042139Z.json",
+          "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.json",
+          "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.md"
+        ]
+      }
+    ],
+    "supersedes_prior_next_task_entries": [
+      "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z (COMPLETE; its trigger-only 'no heavy work' directive is superseded)"
+    ],
+    "evidence": {
+      "fclr011_sealed_pass": "research_state/evaluation_summary_FCLR-011.md: C2 vs B1 rel QLIKE 4.94%, 95% CI [-0.032546,-0.001418], 5 instruments, 3 blocks, test 2026-05-08..2026-08-06.",
+      "fclr011_failed_replications": "2024 H2 -20.77%; 2025 H2 -8.97%; 2025 Q1-Q2 +0.23%; 2026 Q1-Q2 -0.89%; forward 2026-08..10 -5.55% (all NOT_REPLICATED).",
+      "prior_recompute_not_clean": "research_state/trackc_recompute_audit_20261104T175643Z.md used heuristic run_trackc_* scripts and reported +6.86% vs the sealed +4.94%; fclr011_panel.json is an unresolved Git-LFS pointer.",
+      "tracka_expansion_sealed": "research_state/evaluation_summary_TRACKA-HL-expansion-20261111T202344Z.md: 19.04% C2 vs B1 rel QLIKE, CI [-5.088,-0.478], 8 instruments, 593 paired rows; robustness FRAGILE (LOIO 4/8, placebo FAIL).",
+      "baseline_after_guard_repair": "Targeted tests pass; scripts/fclr_campaign_gate.py --arm all = 19/19 PASS."
+    }
+  },
+  {
+    "task": "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z",
+    "rank": 1,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETED_VALIDATED",
     "next_unfinished_task": "Trigger-only: execute Gate 4 Branch 1 only on valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation); or run \u00a716 admissibility audit + frozen prereg + execute only on a materially new qualifying observed-liquidation source (>=5 instruments, >=1 complete month or >=3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed-only labels, venue-consistent, joinable). No trigger present as of 2026-11-14T03:35:26Z \u2014 do not wait/poll; bounded NO_GO if unchanged.",
@@ -92,7 +140,9 @@
     "verification_20261114T032041Z": "Stale-handoff audit: checkpoint 51ca490c2 superseded the 02:35 INADMISSIBLE claim after the open_interest schema fix. With /tmp/fclr-venv deps, gate is 18/18 PASS and the two focused unittest modules are 27/27 OK, but the 02:45 vol-forward eval is INVALID: test-row OLS fit, unscaled raw RV features collapsing B1/C2 to the 1e-12 clip floor, 9 daily bootstrap observations vs block_h=168 (NaN CI), and placeholder 0.5 Holm p-values. FCLR-VOL-FORWARD-AUDIT-20261114T032041Z is the executable P0 campaign.",
     "verification_20261114T033040Z": "P0 audit complete: corrected evaluator re-run on cached 165-coin/1,485-row panel at 2026-11-14T03:30:40Z. Verdict EXPLORATORY_NULL (VALID_EXPLORATORY), rel_reduction_pct=-0.89% (< 2% floor), CI [-0.005794, -0.001762] finite (favours B1, not C2), LOIO min -0.96%. Four defects fixed: train-only scaling/OLS fit, train-mean/std scaling, paired per-row block bootstrap (n=1485, block_h=168, reps=2000), paired-permutation Holm p-values. Gate 19/19 PASS including F6_deep; tests 34/34 OK. Artifacts: panel e4d1d8a6..., build report 9e38717d..., eval 24636d80.... All prior artifacts preserved. Remain EXPLORATORY_ONLY; never promotable.",
     "verification_20261113T223515Z": "HISTORICAL / SUPERSEDED: handoff reconciled at 2026-11-13T22:35:15Z; the then-next heavy task was P1 FCLR-VOL-FORWARD-2026Q1Q2. Superseded by verification_20261114T032041Z.",
-    "note_handoff_refreshed": "AGENT_HANDOFF.md refreshed 2026-11-14T03:35:26Z as single durable handoff; state is trigger-only (P0 validated complete)."
+    "note_handoff_refreshed": "AGENT_HANDOFF.md refreshed 2026-11-14T03:35:26Z as single durable handoff; state is trigger-only (P0 validated complete).",
+    "superseded_by": "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z",
+    "note": "Superseded as active rank-0 by the 2026-11-14T04:21:39Z red-team campaign; preserved as completed evidence."
   },
   {
     "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",

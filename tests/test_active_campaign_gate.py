@@ -17,8 +17,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RS = ROOT / "research_state"
-ACTIVE_CAMPAIGN = "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z"
-PRIOR_CAMPAIGN = "FCLR-HEAVY-CONFIRM-20261113T041200Z"
+ACTIVE_CAMPAIGN = "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z"
+PRIOR_CAMPAIGN = "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z"
 PREREGS = {
     "TRACKA-VOL-FULLHIST-20261112T201536Z": "prereg_tracka_vol_fullhist_20261112T201536Z.json",
     "TRACKA-LIQ-XSEC-20261112T201536Z": "prereg_tracka_liq_xsec_20261112T201536Z.json",
@@ -66,18 +66,20 @@ class TestActiveCampaignGate(unittest.TestCase):
         rank0 = [e for e in frontier if e.get("rank") == 0]
         self.assertEqual(len(rank0), 1, f"expected exactly one rank-0 entry, got {len(rank0)}")
         e = rank0[0]
-        # The active campaign advances as cells close. The rank-0 entry must be
-        # COMPLETED_VALIDATED when its heavy work is done; superseded campaigns
-        # must be demoted, not deleted.
-        self.assertIn(e.get("task"), {ACTIVE_CAMPAIGN})
-        self.assertEqual(e.get("status"), "COMPLETED_VALIDATED")
-        self.assertEqual(e.get("program_status"), "COMPLETED_VALIDATED")
-        # The prior all-NOT_MET campaign must be demoted, not deleted.
+        # The active campaign advances as phases close. Rank 0 must be the
+        # current heavy campaign and must carry a concrete unfinished task.
+        self.assertEqual(e.get("task"), ACTIVE_CAMPAIGN)
+        self.assertEqual(e.get("status"), "READY_EXECUTE")
+        self.assertEqual(e.get("program_status"), "ACTIVE")
+        self.assertTrue(e.get("next_unfinished_task"))
+        self.assertTrue(e.get("phases"))
+        # The completed P0 audit must be demoted, not deleted.
         prior = [x for x in frontier if x.get("task") == PRIOR_CAMPAIGN]
         self.assertEqual(len(prior), 1)
-        self.assertNotEqual(prior[0].get("rank"), 0)
+        self.assertEqual(prior[0].get("rank"), 1)
+        self.assertEqual(prior[0].get("status"), "COMPLETED_VALIDATED")
 
-    def test_new_campaign_prereg_is_frozen(self):
+    def test_prior_campaign_prereg_remains_frozen(self):
         p = json.loads((RS / "prereg_fclr_fwd_vol_011_confirm_20261113T041200Z.json").read_text())
         self.assertEqual(p["status"], "FROZEN_PRE_OUTCOMES")
         self.assertTrue(p["frozen_before_outcomes"])
