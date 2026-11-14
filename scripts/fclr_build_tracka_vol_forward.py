@@ -273,7 +273,7 @@ def main() -> int:
         mkt = coin + "-PERP"
         c = candles[candles["market"] == mkt].set_index("timestamp")["close"].reindex(scoring_grid)
         f = funding[funding["market"] == mkt].set_index("timestamp")["funding_rate"].reindex(scoring_grid)
-        o = oi[oi["market"] == mkt].set_index("timestamp")["open_interest_usd"].reindex(scoring_grid)
+        o = oi[oi["market"] == mkt].set_index("timestamp")["open_interest"].reindex(scoring_grid)
         if int(c.notna().sum()) == len(scoring_grid) and int(f.notna().sum()) == len(scoring_grid) \
                 and int(o.notna().sum()) == len(scoring_grid):
             coins.append(coin)
@@ -308,7 +308,7 @@ def main() -> int:
     funding_rate = asof_col(funding, "funding_rate")
     premium = asof_col(funding, "premium")
     abs_funding = funding_rate.abs()
-    oi_usd = asof_col(oi, "open_interest_usd")
+    oi_usd = asof_col(oi, "open_interest")
     log_oi = np.log(oi_usd + 1.0)
     dlog_oi_24 = log_oi - log_oi.shift(24)
 
