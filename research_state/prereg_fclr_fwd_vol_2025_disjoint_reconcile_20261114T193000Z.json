@@ -1,0 +1,179 @@
+{
+  "experiment_id": "FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z",
+  "campaign": "FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z",
+  "cell": "FWD-VOL-2025-DISJOINT-RECONCILE",
+  "track": "C_volatility_exploratory",
+  "priority": "P1",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "generated_utc": "2026-11-14T20:15:00Z",
+  "frozen_before_outcomes": true,
+  "pre_registered_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "audit_only": true,
+  "does_not_reopen_sealed_verdict": true,
+  "purpose": "Attribute the EXPLORATORY_NULL of the 2025 disjoint cross (FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z: pooled C2-B1 mean diff +0.006923, relative reduction -1.963%, 95% CI [-0.012604, 0.028030]) to estimator behaviour or to a data-lineage defect on the cached 2025 panel. Two-by-two attribution matrix over {existing panel, cleaned lineage copy} x {sealed estimator, corrected estimator}. All results EXPLORATORY_ONLY, promotable=false. Does not reopen any sealed verdict.",
+  "source_experiment": {
+    "prereg": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+    "evaluation": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json",
+    "verdict": "EXPLORATORY_NULL",
+    "primary": "C2_vs_B1 24h QLIKE",
+    "sealed_reference": {
+      "verdict_id": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
+      "mean_diff": 0.0069231708051235965,
+      "rel_reduction_pct": -1.9633752428119817,
+      "ci": [
+        -0.012604044681266236,
+        0.028030237827547048
+      ],
+      "n": 10800,
+      "n_days": 90
+    }
+  },
+  "panel": {
+    "path": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+    "sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+    "row_count_expected": 30120,
+    "n_symbols": 5,
+    "universe": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "splits": {
+    "design": "three disjoint 30-day test blocks, each with its own 30-day train window",
+    "train_days": 30,
+    "embargo_days": 7,
+    "blocks": [
+      {
+        "block": 0,
+        "train_start": "2025-04-25T00:00:00Z",
+        "train_end": "2025-05-24T23:00:00Z",
+        "test_start": "2025-06-01T00:00:00Z",
+        "test_end": "2025-06-30T23:00:00Z"
+      },
+      {
+        "block": 1,
+        "train_start": "2025-09-25T00:00:00Z",
+        "train_end": "2025-10-24T23:00:00Z",
+        "test_start": "2025-11-01T00:00:00Z",
+        "test_end": "2025-11-30T23:00:00Z"
+      },
+      {
+        "block": 2,
+        "train_start": "2025-10-25T00:00:00Z",
+        "train_end": "2025-11-23T23:00:00Z",
+        "test_start": "2025-12-01T00:00:00Z",
+        "test_end": "2025-12-31T23:00:00Z"
+      }
+    ],
+    "block_rule": "no padding, no imputation; any row-key or feature-lineage mismatch is INCONCLUSIVE"
+  },
+  "features": {
+    "B0": [
+      "log_rv24h"
+    ],
+    "B1": [
+      "log_rv1h",
+      "log_rv24h",
+      "log_rv168h"
+    ],
+    "C1": [
+      "log_rv1h",
+      "log_rv24h",
+      "log_rv168h",
+      "signed_funding",
+      "abs_fund_pct"
+    ],
+    "C2": [
+      "log_rv1h",
+      "log_rv24h",
+      "log_rv168h",
+      "signed_funding",
+      "abs_fund_pct",
+      "premium",
+      "ema_dist"
+    ]
+  },
+  "estimator_arms": {
+    "sealed": {
+      "definition": "raw (unstandardised) feature columns, ridge-stabilised normal equations (1e-10 on the diagonal), plain exp back-transform with no smearing, no target-derived fills; reproduces the reference estimator conventions used before this campaign",
+      "scaling": "none",
+      "smearing": "none",
+      "missing_policy": "finite-row masking only; never fill"
+    },
+    "corrected": {
+      "definition": "train-only column means/std, finite-feature masking, train-only Duan smearing on log-target residuals, OLS via least squares, explicit missingness policy (drop row, never zero-fill, never forward-fill)",
+      "scaling": "train-only standardization",
+      "smearing": "train-only Duan smearing",
+      "missing_policy": "drop row; missing stays missing"
+    }
+  },
+  "panel_arms": {
+    "existing": {
+      "path": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+      "sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba"
+    },
+    "cleaned": {
+      "description": "lineage-preserving copy: removes the corrupted XRPUSDT mark rows for 2025-10-19 (close column holds premium-index values), recomputes XRP rolling RV and forward targets after removal, imputes nothing",
+      "corrupt_symbol": "XRPUSDT",
+      "corrupt_day": "2025-10-19",
+      "corrupt_source_file": "research_state/data_cache/XRPUSDT_2025_10/markPriceKlines-2025-10-19/XRPUSDT-1h-2025-10-19.csv",
+      "expected_removed_rows": 24,
+      "expected_recomputed_symbols": [
+        "XRPUSDT"
+      ]
+    }
+  },
+  "primary_metric": "paired out-of-sample QLIKE difference, C2 vs B1, 24h target",
+  "secondary_metrics": [
+    "MAE",
+    "RMSE"
+  ],
+  "inference": {
+    "paired": true,
+    "bootstrap": "day-block bootstrap over complete UTC days, pooled across blocks",
+    "replicates": 2000,
+    "seed": 20261114,
+    "holm_family": "horizon x contrast (primary C2_vs_B1 reported with family adjustment)",
+    "holm_alpha": 0.05,
+    "loio": "leave one instrument out of training, evaluate on the held-out instrument",
+    "loio_min": 4,
+    "loio_total": 5,
+    "placebo": "permute funding within symbol",
+    "placebo_replicates": 200,
+    "placebo_seed": 20261114
+  },
+  "gates": {
+    "materiality_rel_reduction_pct": 2.0,
+    "min_instruments": 5,
+    "min_blocks": 3,
+    "require_row_key_and_lineage_match": true
+  },
+  "verdict_space": [
+    "EXPLAINED_BY_ESTIMATOR",
+    "EXPLAINED_BY_DATA",
+    "UNEXPLAINED",
+    "INCONCLUSIVE"
+  ],
+  "verdict_rule": {
+    "EXPLAINED_BY_ESTIMATOR": "the 2x2 matrix shows a same-data estimator swing of at least 1.0 percentage point that is at least 3x any same-estimator data swing on the primary contrast",
+    "EXPLAINED_BY_DATA": "the 2x2 matrix shows a same-estimator cleaned-vs-existing swing of at least 1.0 percentage point that is at least 3x any same-panel estimator swing",
+    "UNEXPLAINED": "no dimension produces a material, dominant swing",
+    "INCONCLUSIVE": "row-key/lineage check fails, or a cell cannot be fitted"
+  },
+  "forbidden": [
+    "mutating any sealed artifact",
+    "re-running the tested disjoint test months",
+    "relabeling an exploratory result as confirmatory",
+    "threshold shopping or feature changes after outcome inspection",
+    "committing raw cache",
+    "editing .github/workflows/*",
+    "declaring Gate 4 Binance v5 terms evidence resolved"
+  ],
+  "network_required": false
+}

@@ -1,0 +1,31 @@
+{
+  "source_panel": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+  "source_sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+  "removed_rows": 24,
+  "removed_symbol": "XRPUSDT",
+  "removed_day": "2025-10-19",
+  "removed_reason": "cached mark close column holds premium-index values (nonpositive prices)",
+  "recomputed_symbols": [
+    "XRPUSDT"
+  ],
+  "rows_after": 30096,
+  "row_count_delta": 24,
+  "imputation_used": false,
+  "forward_fill_used": false,
+  "target_rows_removed": 24,
+  "coverage_note": "only XRP rolling RV and forward targets change; all other symbols and columns are copied unchanged",
+  "checks": {
+    "removed_row_count_expected_24": true,
+    "no_duplicate_keys": true,
+    "symbols_unchanged": true,
+    "other_symbols_unchanged": true,
+    "no_nonpositive_marks": true,
+    "row_order_preserved": true
+  },
+  "all_pass": true,
+  "panel_path": "research_state/fclr_fwd_vol_2025_disjoint_reconcile_panel_20261114T204000Z.parquet",
+  "panel_sha256": "7a9a831747b0edc21c5af5164a6b3bc5603f57a8e4f3981513c0a5858f3752e2",
+  "row_count": 30096,
+  "key_count": 30096,
+  "generated_utc": "2026-11-14T20:40:00Z"
+}
