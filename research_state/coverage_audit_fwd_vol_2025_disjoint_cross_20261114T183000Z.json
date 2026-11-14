@@ -1,0 +1,191 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-COVERAGE",
+ "kind": "coverage_and_train_feasibility_audit_only",
+ "generated_utc": "2026-11-14T18:30:00Z",
+ "window": {
+  "data_start": "2025-04-25T00:00:00Z",
+  "data_end": "2025-12-31T23:00:00Z",
+  "span_days": 251.95833333333334
+ },
+ "blocks": [
+  {
+   "block": 0,
+   "train_start": "2025-04-25T00:00:00Z",
+   "train_end": "2025-05-24T23:00:00Z",
+   "test_start": "2025-06-01T00:00:00Z",
+   "test_end": "2025-06-30T23:00:00Z"
+  },
+  {
+   "block": 1,
+   "train_start": "2025-09-25T00:00:00Z",
+   "train_end": "2025-10-24T23:00:00Z",
+   "test_start": "2025-11-01T00:00:00Z",
+   "test_end": "2025-11-30T23:00:00Z"
+  },
+  {
+   "block": 2,
+   "train_start": "2025-10-25T00:00:00Z",
+   "train_end": "2025-11-23T23:00:00Z",
+   "test_start": "2025-12-01T00:00:00Z",
+   "test_end": "2025-12-31T23:00:00Z"
+  }
+ ],
+ "models": {
+  "B0": [
+   "log_rv24h"
+  ],
+  "B1": [
+   "log_rv1h",
+   "log_rv24h",
+   "log_rv168h"
+  ],
+  "C1": [
+   "log_rv1h",
+   "log_rv24h",
+   "log_rv168h",
+   "signed_funding",
+   "abs_fund_pct"
+  ],
+  "C2": [
+   "log_rv1h",
+   "log_rv24h",
+   "log_rv168h",
+   "signed_funding",
+   "abs_fund_pct",
+   "premium",
+   "ema_dist"
+  ]
+ },
+ "per_symbol": {
+  "BTCUSDT": {
+   "grid_rows": 6024,
+   "model_ready_rows": 5832,
+   "target_24h_rows": 6000,
+   "funding_nonnull_rows": 6024
+  },
+  "ETHUSDT": {
+   "grid_rows": 6024,
+   "model_ready_rows": 5832,
+   "target_24h_rows": 6000,
+   "funding_nonnull_rows": 6024
+  },
+  "BNBUSDT": {
+   "grid_rows": 6024,
+   "model_ready_rows": 5832,
+   "target_24h_rows": 6000,
+   "funding_nonnull_rows": 6024
+  },
+  "SOLUSDT": {
+   "grid_rows": 6024,
+   "model_ready_rows": 5832,
+   "target_24h_rows": 6000,
+   "funding_nonnull_rows": 6024
+  },
+  "XRPUSDT": {
+   "grid_rows": 6024,
+   "model_ready_rows": 5616,
+   "target_24h_rows": 5952,
+   "funding_nonnull_rows": 6024
+  }
+ },
+ "per_block": [
+  {
+   "block": 0,
+   "train_start": "2025-04-25T00:00:00Z",
+   "train_end": "2025-05-24T23:00:00Z",
+   "test_start": "2025-06-01T00:00:00Z",
+   "test_end": "2025-06-30T23:00:00Z",
+   "test_days": 30.958333333333332,
+   "train_days": 30.958,
+   "rows": 3600,
+   "symbols_with_rows": 5,
+   "rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   },
+   "train_rows": 2760,
+   "train_rows_per_symbol": {
+    "BTCUSDT": 552,
+    "ETHUSDT": 552,
+    "BNBUSDT": 552,
+    "SOLUSDT": 552,
+    "XRPUSDT": 552
+   }
+  },
+  {
+   "block": 1,
+   "train_start": "2025-09-25T00:00:00Z",
+   "train_end": "2025-10-24T23:00:00Z",
+   "test_start": "2025-11-01T00:00:00Z",
+   "test_end": "2025-11-30T23:00:00Z",
+   "test_days": 30.958333333333332,
+   "train_days": 30.958,
+   "rows": 3600,
+   "symbols_with_rows": 5,
+   "rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   },
+   "train_rows": 3432,
+   "train_rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 552
+   }
+  },
+  {
+   "block": 2,
+   "train_start": "2025-10-25T00:00:00Z",
+   "train_end": "2025-11-23T23:00:00Z",
+   "test_start": "2025-12-01T00:00:00Z",
+   "test_end": "2025-12-31T23:00:00Z",
+   "test_days": 31.958333333333332,
+   "train_days": 30.958,
+   "rows": 3600,
+   "symbols_with_rows": 5,
+   "rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 720
+   },
+   "train_rows": 3552,
+   "train_rows_per_symbol": {
+    "BTCUSDT": 720,
+    "ETHUSDT": 720,
+    "BNBUSDT": 720,
+    "SOLUSDT": 720,
+    "XRPUSDT": 672
+   }
+  }
+ ],
+ "train_days_per_block": [
+  30.958,
+  30.958,
+  30.958
+ ],
+ "n_symbols": 5,
+ "n_model_rows": 28944,
+ "checks": {
+  "instruments_ge_5": true,
+  "blocks_ge_3": true,
+  "every_block_symbols_ge_5": true,
+  "every_block_rows_ge_100": true,
+  "test_blocks_non_overlapping": true,
+  "disjoint_from_prior_tested_windows": true,
+  "train_ge_30_days_every_block": true,
+  "target_present": true
+ },
+ "feasible": true,
+ "overlap_notes": [],
+ "no_outcomes_computed": true
+}

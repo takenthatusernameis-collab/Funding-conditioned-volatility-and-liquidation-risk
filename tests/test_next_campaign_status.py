@@ -52,12 +52,30 @@ class TestNextCampaignStatus(unittest.TestCase):
             self.assertTrue(by_exp[exp]["has_evaluation_artifact"],
                             f"{exp} executed but artifact not detected")
 
-    def test_no_actionable_prereg_while_cells_remain_terminal(self):
-        """Fails loudly if a genuinely unexecuted prereg reappears undetected."""
+    def test_new_disjoint_prereg_is_actionable(self):
+        """The frozen 2025 disjoint campaign has no evaluation artifact yet."""
         st = self.mod.prereg_status()
-        actionable = [r["experiment_id"] for r in st["preregs"] if r["actionable_now"]]
-        self.assertEqual(actionable, [],
-                         f"unexecuted frozen preregs need attention: {actionable}")
+        by_exp = {r["experiment_id"]: r for r in st["preregs"]}
+        exp = "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z"
+        self.assertIn(exp, by_exp, f"{exp} prereg missing")
+        self.assertTrue(by_exp[exp]["frozen_before_outcomes"])
+        self.assertFalse(by_exp[exp]["outcomes_inspected_before_freeze"])
+        self.assertFalse(by_exp[exp]["has_evaluation_artifact"])
+        self.assertTrue(by_exp[exp]["actionable_now"])
+
+    def test_terminal_preregs_are_not_actionable(self):
+        """Executed/terminal cells must not be re-proposed as pending."""
+        st = self.mod.prereg_status()
+        by_exp = {r["experiment_id"]: r for r in st["preregs"]}
+        for exp in ("FCLR-FWD-VOL-2024Q4-CROSS-20261113T091500Z",
+                    "FCLR-FWD-VOL-2025-CROSS-20261113T063000Z",
+                    "FCLR-FWD-VOL-011-CONFIRM-20261113T041200Z",
+                    "FCLR-FWD-VOL-2025Q1Q2-CROSS-20261113T111601Z"):
+            self.assertIn(exp, by_exp, f"{exp} prereg missing")
+            self.assertFalse(by_exp[exp]["actionable_now"],
+                             f"{exp} terminal but reported actionable")
+            self.assertTrue(by_exp[exp]["has_evaluation_artifact"],
+                            f"{exp} terminal but artifact not detected")
 
     def test_funding_backed_months_are_detected(self):
         windows = {w["month"]: w for w in self.mod.ready_windows()}
@@ -108,6 +126,46 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertTrue(feas["any_feasible"])
         self.assertTrue(feas["runs"][0]["feasible"])
 
+    def test_disjoint_block_frontier_detects_three_blocks(self):
+        """Three independent 30-day test months must be reported executable.
+
+        This is the agent-removable heavy work the old contiguous-only check
+        missed. 2025-01 is intentionally infeasible because its train months
+        (2024-11/2024-12) are absent; 2025-06, 2025-11 and 2025-12 are feasible.
+        """
+        frontier = self.mod.disjoint_block_frontier(self.mod.ready_windows())
+        feasible = {b["month"]: b for b in frontier["feasible_blocks"]}
+        for m in ("2025-06", "2025-11", "2025-12"):
+            self.assertIn(m, feasible, f"{m} should be feasible: {feasible}")
+            self.assertGreaterEqual(feasible[m]["test_days"], 30)
+            self.assertEqual(feasible[m]["train_days"], 30)
+            self.assertEqual(feasible[m]["embargo_days"], 7)
+            self.assertEqual(feasible[m]["missing_train_months"], [])
+        self.assertNotIn("2025-01", feasible,
+                         "2025-01 train months are incomplete and must be infeasible")
+        self.assertGreaterEqual(frontier["n_feasible"], frontier["min_blocks"])
+        self.assertTrue(frontier["campaign_feasible"])
+
+    def test_nested_csv_layout_is_counted(self):
+        """A deeper CSV nesting must not make a complete month look empty."""
+        import tempfile
+        old_cache = self.mod.CACHE
+        try:
+            with tempfile.TemporaryDirectory() as td:
+                self.mod.CACHE = Path(td)
+                base = Path(td) / "BTCUSDT_2025_06"
+                for kind in self.mod.KINDS:
+                    day = base / f"{kind}-2025-06-01" / "nested" / "deeper"
+                    day.mkdir(parents=True)
+                    for i in range(30):
+                        (day / f"BTCUSDT-1h-2025-06-{i + 1:02d}.csv").write_text("open_time,close\n")
+                counts = self.mod.kline_months("BTCUSDT")
+                self.assertEqual(counts["2025-06"]["markPriceKlines"], 30)
+                self.assertEqual(counts["2025-06"]["premiumIndexKlines"], 30)
+                self.assertEqual(counts["2025-06"]["indexPriceKlines"], 30)
+        finally:
+            self.mod.CACHE = old_cache
+
     def test_hyperliquid_bulk_forward_window_now_tested(self):
         """The 2026-01-18..2026-04-30 forward reserve is tested and exhausted.
 
@@ -146,19 +204,19 @@ class TestNextCampaignStatus(unittest.TestCase):
             )
 
     def test_campaign_status_message_distinguishes_domains(self):
-        """Neither domain retains a feasible 3-block design.
+        """Contiguous Binance and Hyperliquid bulk are exhausted; disjoint blocks remain.
 
-        Binance: no contiguous READY run >= 127d. Hyperliquid bulk: the
-        2026-01-18..2026-04-30 forward reserve is tested/exhausted
-        (TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD), so no untouched
-        forward-feasible region remains. The campaign is correctly bounded
-        to trigger-only; no domain keeps it alive.
+        The old contiguous-only check said no heavy work remained. The disjoint
+        30-day frontier is executable heavy work and must be reported as such.
         """
         feasibility = self.mod.design_feasible_months(self.mod.ready_windows())
+        disjoint = self.mod.disjoint_block_frontier(self.mod.ready_windows())
         bulk = self.mod.bulk_frontier()
         self.assertFalse(feasibility["any_feasible"])
         self.assertFalse(bulk["any_feasible"])
         self.assertFalse(bulk["any_forward_feasible"])
+        self.assertTrue(disjoint["campaign_feasible"])
+        self.assertGreaterEqual(disjoint["n_feasible"], disjoint["min_blocks"])
 
 
 if __name__ == "__main__":

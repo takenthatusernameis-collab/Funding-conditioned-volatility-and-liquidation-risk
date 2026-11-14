@@ -1,0 +1,117 @@
+{
+ "experiment_id": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
+ "campaign": "FCLR-2025-DISJOINT-VOL-20261114T183000Z",
+ "cell": "FWD-VOL-2025-DISJOINT-CROSS",
+ "track": "C_volatility_exploratory",
+ "priority": "P1",
+ "preregistered_utc": "2026-11-14T18:30:00Z",
+ "status": "FROZEN_PRE_OUTCOMES",
+ "pre_registered_before_outcomes": true,
+ "frozen_before_outcomes": true,
+ "outcome_data_inspected_before_freeze": false,
+ "outcome_values_inspected_before_freeze": "none; only finite-row counts of model inputs and of the 24h target were read (coverage audit 2026-11-14T18:30:00Z), and no metric, coefficient, prediction, target distribution statistic, or contrast was computed",
+ "hypothesis_id": "H_fclr_fwd_vol_2025_disjoint_cross",
+ "hypothesis_type": "exploratory_trackc_volatility_transportability",
+ "claim": "The sealed FCLR-011 funding-conditioned volatility PASS (C2 vs B1, +4.94% relative QLIKE reduction, 5 instruments, 3 blocks, 2026-05..2026-08) does NOT produce the same direction/magnitude on three disjoint, never-tested 30-day Binance test blocks (2025-06, 2025-11, 2025-12). This is an EXPLORATORY transportability audit: it can yield EXPLORATORY_SIGNAL or EXPLORATORY_NULL, but it cannot promote H1 or claim confirmatory status while Gate 4 Binance v5 terms evidence remains unresolved.",
+ "why_this_is_new": {
+  "problem_with_prior_period_tests": "Every prior funding-conditioned volatility period test is either the sealed FCLR-011 window (2026-05..2026-08), the forward 2026-08..2026-10 confirmation (NOT_REPLICATED), the 2025-02..2025-05 cross (NOT_REPLICATED, rel 0.29%), the 2024-07-23..2024-09-30 cross (NOT_REPLICATED, rel -20.77%), the 2025-07-23..2025-10-15 cross (NOT_REPLICATED, rel -8.97%), or the 2026-01..2026-04 cross (NOT_REPLICATED, rel -0.89%). None of the three test months in this campaign has been used as a test block.",
+  "untested_window": "The cached Binance archive holds complete hourly mark/premium/index klines and 8-hourly funding for the five FCLR-011 symbols. The three test months are disjoint from every prior tested window and fully materialized on disk: coverage audit 2026-11-14T18:30:00Z reports 5 symbols, 3 blocks, 3600 test rows per block, and train rows 2760/3432/3552.",
+  "not_a_relitigation": "The sealed FCLR-011 artifact is not mutated or re-scored. This is a new period with identical models, metric, contrasts, and gate structure, so the null can be broken on genuinely fresh out-of-sample evidence.",
+  "no_label_use": "No liquidation label is consumed. This arm is volatility-only.",
+  "separation": "Test blocks are 2025-06-01..2025-06-30, 2025-11-01..2025-11-30, and 2025-12-01..2025-12-31. Each has a 30-day train window ending 7 days before test start. Train months may overlap earlier tested periods as legitimate pre-test history; only the test months must be disjoint from previously evaluated outcomes.",
+  "regime_note": "2024-06 is also reported feasible by scripts/next_campaign_status.py, but it is excluded here to keep a single 2025 regime and avoid the early-funding warm-up period."
+ },
+ "venue": "binance_usdm_public_archive_cached",
+ "data_sources": {
+  "mark": {"path_template": "research_state/data_cache/{SYM}_YYYY_MM/markPriceKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv", "field": "mark price (hourly)"},
+  "premium": {"path_template": "research_state/data_cache/{SYM}_YYYY_MM/premiumIndexKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv", "field": "premium index (hourly)"},
+  "index": {"path_template": "research_state/data_cache/{SYM}_YYYY_MM/indexPriceKlines-YYYY-MM-DD/{SYM}-1h-YYYY-MM-DD.csv", "field": "index price (hourly)"},
+  "funding": {"path_template": "research_state/data_cache/{SYM}_YYYY_MM/{SYM}-fundingRate-YYYY-MM/", "field": "funding rate (8-hourly, causal backward as-of)"}
+ },
+ "features": {
+  "B0": ["log_rv24h"],
+  "B1": ["log_rv1h", "log_rv24h", "log_rv168h"],
+  "C1": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct"],
+  "C2": ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct", "premium", "ema_dist"]
+ },
+ "splits": {
+  "design": "disjoint 30-day test blocks; each block refits on its own 30-day train window; 7-calendar-day embargo between train end and test start",
+  "train_days": 30,
+  "embargo_days": 7,
+  "test_days_min": 30,
+  "data_start": "2025-04-25T00:00:00Z",
+  "data_end": "2025-12-31T23:00:00Z",
+  "blocks": [
+   {"block": 0, "train_start": "2025-04-25T00:00:00Z", "train_end": "2025-05-24T23:00:00Z", "embargo": "2025-05-25T00:00:00Z..2025-05-31T23:00:00Z", "test_start": "2025-06-01T00:00:00Z", "test_end": "2025-06-30T23:00:00Z", "days": 30},
+   {"block": 1, "train_start": "2025-09-25T00:00:00Z", "train_end": "2025-10-24T23:00:00Z", "embargo": "2025-10-25T00:00:00Z..2025-10-31T23:00:00Z", "test_start": "2025-11-01T00:00:00Z", "test_end": "2025-11-30T23:00:00Z", "days": 30},
+   {"block": 2, "train_start": "2025-10-25T00:00:00Z", "train_end": "2025-11-23T23:00:00Z", "embargo": "2025-11-24T00:00:00Z..2025-11-30T23:00:00Z", "test_start": "2025-12-01T00:00:00Z", "test_end": "2025-12-31T23:00:00Z", "days": 31}
+  ],
+  "block_rule": "Three non-overlapping test blocks, each preceded by a 7-day embargo. No padding, no imputation, and no test rows are dropped for missing inputs.",
+  "train_span_note": "Each block has its own 30-day train window. Train history may overlap prior tested periods; only test blocks must be disjoint."
+ },
+ "primary_contrast": "C2_vs_B1",
+ "primary_metric": "QLIKE",
+ "gates": {
+  "materiality_rel_reduction_pct": 2.0,
+  "ci_level": 0.95,
+  "ci_method": "day-block bootstrap over UTC days, pooled across blocks",
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 20261114,
+  "holm_family": "all horizon x contrast x block cells",
+  "holm_alpha": 0.05,
+  "loio_min": 4,
+  "loio_total": 5,
+  "loio_note": "leave one instrument out of training, evaluate on the held-out instrument",
+  "placebo_reps": 200,
+  "placebo_seed": 20261114,
+  "placebo_rule": "permute signed_funding and abs_fund_pct within symbol; true relative reduction must exceed the null 95th percentile",
+  "min_instruments": 5,
+  "min_blocks": 3,
+  "leakage_rule": "every feature strictly causal at t; target strictly forward; 7-day embargo between train end and test start"
+ },
+ "verdict_rule": {
+  "EXPLORATORY_SIGNAL": "materiality_ge_2pct AND ci_excludes_zero_improving AND holm_pass AND loio_ge_4_of_5 AND placebo_pass AND leakage_audit_pass AND instruments_ge_5 AND blocks_ge_3",
+  "EXPLORATORY_NULL": "materiality FAIL or CI includes zero, with admissible data and leakage",
+  "INCONCLUSIVE": "instruments < 5 or blocks < 3 or leakage FAIL or no finite primary rows",
+  "SMOKE": "smoke run only; not evidence"
+ },
+ "status_rule": {
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "reason": "Gate 4 Binance v5 terms evidence is unresolved; no confirmatory Binance outcome may be claimed."
+ },
+ "forbidden": [
+  "mutating any sealed artifact (FCLR-011/012-V/013/014)",
+  "threshold shopping or feature changes after outcome inspection",
+  "reusing an inspected window as a fresh confirmation",
+  "committing raw cache",
+  "editing .github/workflows/*",
+  "declaring a CONFIRMED or PROMOTED status for H1_primary",
+  "treating the unresolved Binance v5 terms blocker as resolved",
+  "reusing an execution whose training span was empty (such a run is void, not evidence)"
+ ],
+ "network_required": false,
+ "coverage_audit": {
+  "artifact": "research_state/coverage_audit_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+  "generated_utc": "2026-11-14T18:30:00Z",
+  "n_symbols": 5,
+  "n_model_rows": 28944,
+  "train_rows_per_block": [2760, 3432, 3552],
+  "test_rows_per_block": [3600, 3600, 3600],
+  "train_days_per_block": [30.958, 30.958, 30.958],
+  "all_checks_pass": true,
+  "note": "Coverage + train feasibility only: finite-row counts and train-span arithmetic. No outcome statistic computed. Every block has 5 instruments and 3600 test rows."
+ },
+ "gate4_status": {
+  "state": "EXTERNAL_BLOCKED",
+  "evidence": "research_state/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+  "resolved_trigger_glob": "research_state/fclr016_v5_terms_evidence_RESOLVED_*.json",
+  "resolved_trigger_found": false,
+  "promotable": false
+ },
+ "universe": {
+  "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+  "n_symbols": 5,
+  "rule": "the five FCLR-011 symbols, restricted to complete cached months with funding and the three never-tested 2025 test blocks"
+ }
+}

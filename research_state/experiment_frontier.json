@@ -1,13 +1,62 @@
 [
   {
-    "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z",
+    "task": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
     "rank": 0,
-    "status": "TRIGGER_ONLY",
-    "program_status": "BOUNDED_TRIGGER_ONLY",
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "generated": "2026-11-14T18:30:00Z",
+    "refreshed": "2026-11-14T18:30:00Z",
+    "last_checked": "2026-11-14T18:30:00Z",
+    "next_unfinished_task": "Execute the frozen exploratory campaign FCLR-FWD-VOL-2025-DISJOINT-CROSS: verify the prereg is frozen and the coverage audit is feasible, implement scripts/fclr_fwd_vol_2025_disjoint_cross.py, run --smoke then the full 3-block evaluation, emit panel/build report/evaluation JSON+MD, run the campaign gate, and update the frontier/handoff. No polling; no status-only output.",
+    "blockers": "Gate 4 Binance v5 terms evidence is EXTERNAL_BLOCKED (research_state/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json; no RESOLVED_VERIFIED trigger). This campaign is therefore EXPLORATORY_ONLY, promotable=false, and may not claim CONFIRMED or promote H1.",
+    "next_action_heavy": "(1) Read AGENT_HANDOFF.md, this entry, and research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json. (2) Confirm no research_state/fclr016_v5_terms_evidence_RESOLVED_*.json exists; if one appears, stop and follow the Gate 4 branch instead. (3) Implement scripts/fclr_fwd_vol_2025_disjoint_cross.py by adapting scripts/fclr_fwd_vol_2025q1q2_cross.py with per-block train_start. (4) Run --smoke, then the full run; emit tracka_fwd_vol_2025_disjoint_cross_panel_<UTC>.parquet, build report, and evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-<UTC>.{json,md}. (5) Run scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py and targeted tests. (6) Update research_state/experiment_frontier.json, research_state/hypothesis_registry.json if needed, and AGENT_HANDOFF.md.",
+    "resume_triggers": [],
+    "phases": [
+      {
+        "phase": "EXECUTE_DISJOINT_CROSS",
+        "task": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
+        "status": "READY_EXECUTE",
+        "claim": "Three disjoint, never-tested 30-day Binance test blocks (2025-06, 2025-11, 2025-12) will test whether the sealed FCLR-011 funding-conditioned volatility PASS replicates. The campaign is exploratory only because Gate 4 Binance v5 terms evidence is unresolved.",
+        "expected_artifacts": [
+          "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+          "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.md",
+          "research_state/coverage_audit_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+          "scripts/fclr_fwd_vol_2025_disjoint_cross.py",
+          "scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py",
+          "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_<UTC>.parquet",
+          "research_state/tracka_fwd_vol_2025_disjoint_cross_build_report_<UTC>.json",
+          "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-<UTC>.json",
+          "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-<UTC>.md"
+        ],
+        "inputs": {
+          "prereg": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+          "coverage_audit": "research_state/coverage_audit_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+          "executor_pattern": "scripts/fclr_fwd_vol_2025q1q2_cross.py",
+          "gate4_evidence": "research_state/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json"
+        },
+        "verdict_space": [
+          "EXPLORATORY_SIGNAL",
+          "EXPLORATORY_NULL",
+          "INCONCLUSIVE",
+          "SMOKE"
+        ]
+      }
+    ],
+    "evidence": {
+      "next_campaign_status": "scripts/next_campaign_status.py reports 4 feasible disjoint 30-day blocks (2024-06, 2025-06, 2025-11, 2025-12); the prereg selects the three 2025 blocks.",
+      "coverage_audit": "research_state/coverage_audit_fwd_vol_2025_disjoint_cross_20261114T183000Z.json: 5 symbols, 3 blocks, 3600 test rows/block, train rows 2760/3432/3552, all checks pass.",
+      "gate4": "NO_VALID_GATE4_TRIGGER; only research_state/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json. Exploratory only; promotable=false."
+    }
+  },
+  {
+    "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z",
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "generated": "2026-11-14T13:27:41Z",
     "refreshed": "2026-11-14T13:27:41Z",
     "last_checked": "2026-11-14T18:17:36Z",
-    "next_unfinished_task": "Trigger-only sentinel: re-run Gate 4 glob (research_state/fclr016_v5_terms_evidence_RESOLVED_*.json; expect NO_VALID_GATE4_TRIGGER unless a valid trigger appears) and check for materially new observed-liquidation-source evidence since 2026-11-14T12:38:21Z. If nothing new: clean stop — no polling, no repeated identical probes, no status-only sessions. If a trigger appears: execute the corresponding branch (Gate 4 Branch 1 / new-source §16 audit / frozen prereg / build/eval/verdict / atomic state updates) under a NEW experiment ID.",
+    "next_unfinished_task": "SUPERSEDED by FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z. Preserve all evidence; do not re-run the trigger-only sentinel.",
     "blockers": "No agent-removable heavy work. All cached-data cells terminal/exhausted; Binance 5-symbol design exhausted; Hyperliquid forward reserve 2026-01-18..2026-04-30 tested/exhausted by TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD; Gate 4 Branch 1 EXTERNAL_BLOCKED (only fclr016_v5_terms_evidence_BLOCKED_* found, no RESOLVED_VERIFIED); 0 admissible new observed-liquidation sources (\u00a716 minima all fail). See research_state/structural_exhaustion_confirmation_20261114T132741Z.md.",
     "next_action_heavy": "None agent-removable now. On trigger: (1) GATE4_BRANCH_1 \u2014 valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation) \u2192 execute Gate 4 Branch 1 per gate scripts/tests. (2) NEW_OBSERVED_LIQUIDATION_SOURCE \u2014 materially new candidate \u2192 \u00a716 admissibility audit artifact BEFORE prereg/outcomes \u2192 if ADMISSIBLE freeze prereg pre-outcomes \u2192 build/eval/verdict \u2192 atomic registry/frontier/manifest updates under NEW experiment ID. (3) HL_LABEL_EXTENSION \u2014 HL \u2265100d depth AND verified post-2026-10-31 observed labels \u2192 bounded reprobe only. (4) EXPANSION_ROBUSTNESS_REDO \u2014 cached-panel robustness with NEW frozen prereg pre-outcomes. Do not poll; do not repeat identical probes; do not re-execute tested windows (incl. 2026-01-18..2026-04-30).",
     "resume_triggers": [
@@ -40,7 +89,10 @@
       "gate4": "NO_VALID_GATE4_TRIGGER; matches: fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json only",
       "admissibility_audit": "research_state/new_data_admissibility_audit_20261114T123710Z.json \u2014 0 GO candidates; ochinimus/nick128373 crypto-liquidation-ticks fail coverage/blocks/instrument minima; Bybit/OKX public paths no historical census; HF DeFi/heatmap/OEV/pension wrong domain",
       "deep_review": "research_state/alt_source_deep_review_latest.md \u2014 22 candidates, 0 GO"
-    }
+    },
+    "superseded_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
+    "superseded_at": "2026-11-14T18:30:00Z",
+    "note": "Superseded by the frozen exploratory 2025 disjoint campaign. The old trigger-only state was replaced because scripts/next_campaign_status.py missed independent 30-day test blocks; see the new rank-0 entry."
   },
   {
     "task": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",

@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from datetime import date, timedelta
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -134,13 +135,18 @@ def funding_months(sym: str) -> set[str]:
     out = set()
     for d in CACHE.glob(f"{sym}_20??_??/{sym}-fundingRate-*"):
         m = re.search(r"fundingRate-(\d{4}-\d{2})", d.name)
-        if m and any(d.glob("*.csv")):
+        if m and any(d.glob("**/*.csv")):
             out.add(m.group(1))
     return out
 
 
 def kline_months(sym: str) -> dict[str, dict[str, int]]:
-    """Return {YYYY-MM: {kind: csv_count}} for one symbol."""
+    """Return {YYYY-MM: {kind: csv_count}} for one symbol.
+
+    Count recursively: some cache months nest per-day CSVs more deeply than the
+    original one-level layout. A shallow glob undercounts those months and used
+    to make a complete, executable block look absent.
+    """
     out: dict[str, dict[str, int]] = {}
     for d in CACHE.glob(f"{sym}_20??_??"):
         m = re.search(r"_(\d{4})_(\d{2})$", d.name)
@@ -150,7 +156,7 @@ def kline_months(sym: str) -> dict[str, dict[str, int]]:
         row = out.setdefault(key, {k: 0 for k in KINDS})
         for kind in KINDS:
             for sub in d.glob(f"{kind}-*"):
-                row[kind] += len(list(sub.glob("*.csv")))
+                row[kind] += len(list(sub.glob("**/*.csv")))
     return out
 
 
@@ -236,6 +242,106 @@ def design_feasible_months(rows: list[dict]) -> dict:
                     "feasible": days >= MIN_DESIGN_DAYS})
     return {"runs": out, "any_feasible": any(r["feasible"] for r in out),
             "min_design_days": MIN_DESIGN_DAYS}
+
+
+# A disjoint 30-day block needs 30 days of train + a 7-day embargo + 30 test
+# days. Unlike the rolling-origin design above, the three blocks do not need to
+# be contiguous: each is an independent, never-tested month with its own train
+# history. This is the design used by the current FCLR forward-volatility cells.
+MIN_DISJOINT_BLOCKS = 3
+DISJOINT_TRAIN_DAYS = 30
+DISJOINT_EMBARGO_DAYS = 7
+DISJOINT_TEST_DAYS = 30
+
+
+def _month_start(key: str) -> date:
+    return date.fromisoformat(f"{key}-01")
+
+
+def _month_last_day(key: str) -> date:
+    y, m = int(key[:4]), int(key[5:7])
+    return date(y, m, _month_days(key))
+
+
+def _months_between(start: date, end: date) -> list[str]:
+    out = []
+    y, m = start.year, start.month
+    while (y, m) <= (end.year, end.month):
+        out.append(f"{y:04d}-{m:02d}")
+        m += 1
+        if m > 12:
+            m = 1
+            y += 1
+    return out
+
+
+def disjoint_block_frontier(rows: list[dict]) -> dict:
+    """Find executable, independent 30-day test blocks.
+
+    A block is usable when its test month is complete, funding-backed and not
+    inside any tested window, and every calendar month in its 30-day train
+    window is complete and funding-backed. Test months must be disjoint from
+    prior tested windows; train months may overlap prior windows as legitimate
+    pre-test history.
+
+    Returns every ready month as a candidate plus the subset that is feasible.
+    The campaign is executable when at least MIN_DISJOINT_BLOCKS blocks are
+    feasible.
+    """
+    month_counts = {w["month"]: w for w in rows}
+    blocks = []
+    for w in rows:
+        if not w.get("funding_available") or w.get("inside_tested_window"):
+            continue
+        key = w["month"]
+        test_start_d = _month_start(key)
+        test_end_d = _month_last_day(key)
+        train_end_exclusive = test_start_d - timedelta(days=DISJOINT_EMBARGO_DAYS)
+        train_start_d = train_end_exclusive - timedelta(days=DISJOINT_TRAIN_DAYS)
+        train_months = _months_between(train_start_d, train_end_exclusive - timedelta(days=1))
+        missing = []
+        for m in train_months:
+            c = month_counts.get(m)
+            if not c or not c.get("funding_available"):
+                missing.append(f"{m}:missing_or_unfunded")
+                continue
+            counts = {"markPriceKlines": c.get("mark_csv", 0),
+                      "premiumIndexKlines": c.get("premium_csv", 0),
+                      "indexPriceKlines": c.get("index_csv", 0)}
+            if any(counts[k] < 5 * 25 for k in KINDS):
+                missing.append(f"{m}:incomplete_kline_coverage")
+        feasible = (w.get("funding_available")
+                    and not w.get("inside_tested_window")
+                    and not missing)
+        blocks.append({
+            "month": key,
+            "train_start": f"{train_start_d.isoformat()}T00:00:00Z",
+            "train_end": f"{(train_end_exclusive - timedelta(days=1)).isoformat()}T23:00:00Z",
+            "embargo_start": f"{train_end_exclusive.isoformat()}T00:00:00Z",
+            "embargo_end": f"{(test_start_d - timedelta(days=1)).isoformat()}T23:00:00Z",
+            "test_start": f"{test_start_d.isoformat()}T00:00:00Z",
+            "test_end": f"{test_end_d.isoformat()}T23:00:00Z",
+            "train_months": train_months,
+            "test_days": (test_end_d - test_start_d).days + 1,
+            "train_days": DISJOINT_TRAIN_DAYS,
+            "embargo_days": DISJOINT_EMBARGO_DAYS,
+            "missing_train_months": missing,
+            "feasible": bool(feasible),
+            "reason": "complete funding-backed untested test block with complete train history"
+                      if feasible else "; ".join(missing) or "unfunded or inside tested window",
+        })
+    feasible_blocks = [b for b in blocks if b["feasible"]]
+    return {
+        "blocks": blocks,
+        "feasible_blocks": feasible_blocks,
+        "n_feasible": len(feasible_blocks),
+        "any_feasible": bool(feasible_blocks),
+        "campaign_feasible": len(feasible_blocks) >= MIN_DISJOINT_BLOCKS,
+        "min_blocks": MIN_DISJOINT_BLOCKS,
+        "min_train_days": DISJOINT_TRAIN_DAYS,
+        "min_embargo_days": DISJOINT_EMBARGO_DAYS,
+        "min_test_days": DISJOINT_TEST_DAYS,
+    }
 
 
 def bulk_months(dataset: str) -> list[str]:
@@ -335,6 +441,7 @@ def main() -> None:
     ready = [w for w in windows if w["funding_available"] and not w["inside_tested_window"]]
     partial = [w for w in windows if not w["funding_available"] and not w["inside_tested_window"]]
     feasibility = design_feasible_months(windows)
+    disjoint = disjoint_block_frontier(windows)
     bulk = bulk_frontier()
 
     if args.json:
@@ -342,6 +449,7 @@ def main() -> None:
                           "ready_funding_backed_months": ready,
                           "no_funding_months": partial,
                           "design_feasibility": feasibility,
+                          "disjoint_block_frontier": disjoint,
                           "hyperliquid_bulk_frontier": bulk}, indent=1))
         return
 
@@ -379,7 +487,26 @@ def main() -> None:
             print("\n  -> A full 3-block pre-registered design fits a FEASIBLE run above.")
         else:
             print("\n  -> No contiguous run spans enough days; a 3-block design would "
-                  "need an empty/overlapping train. The Binance 5-symbol design is exhausted.")
+                  "need an empty/overlapping train. The Binance 5-symbol contiguous "
+                  "design is exhausted; see the disjoint-block frontier below.")
+
+    print("\n== DISJOINT 30-DAY BLOCK FRONTIER (independent, never-tested test months) ==")
+    if not disjoint["blocks"]:
+        print("  no ready disjoint funding-backed months -> no block candidates")
+    else:
+        for b in disjoint["blocks"]:
+            tag = "FEASIBLE" if b["feasible"] else "INFEASIBLE"
+            print(f"  {b['month']}  {tag:10s} train={b['train_start'][:10]}.."
+                  f"{b['train_end'][:10]} test={b['test_start'][:10]}..{b['test_end'][:10]} "
+                  f"test_days={b['test_days']}  {b['reason']}")
+        if disjoint["campaign_feasible"]:
+            print(f"\n  -> {disjoint['n_feasible']} disjoint 30-day test blocks fit "
+                  f"(need >= {disjoint['min_blocks']}); executable heavy work REMAINS.")
+        elif disjoint["any_feasible"]:
+            print(f"\n  -> Only {disjoint['n_feasible']} feasible disjoint block(s); "
+                  f"the campaign needs >= {disjoint['min_blocks']}.")
+        else:
+            print("\n  -> No disjoint 30-day block is feasible.")
 
     print("\n== HYPERLIQUID BULK FRONTIER (ironflow: candles + funding + OI + observed liq) ==")
     if not any(bulk["present"].values()):
@@ -411,8 +538,9 @@ def main() -> None:
             else:
                 print("\n  -> No untouched Hyperliquid region is long enough for a 3-block design.")
 
-    if not feasibility["any_feasible"] and not bulk["any_feasible"] and not bulk["any_forward_feasible"]:
-        print("\n  == CAMPAIGN STATUS: no feasible 3-block design in EITHER domain ==")
+    if (not feasibility["any_feasible"] and not bulk["any_feasible"]
+            and not bulk["any_forward_feasible"] and not disjoint["campaign_feasible"]):
+        print("\n  == CAMPAIGN STATUS: no feasible 3-block design in ANY domain ==")
     else:
         print("\n  == CAMPAIGN STATUS: executable heavy work REMAINS (see FEASIBLE above) ==")
 
