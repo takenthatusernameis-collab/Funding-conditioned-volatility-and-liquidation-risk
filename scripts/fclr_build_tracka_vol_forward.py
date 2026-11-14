@@ -346,77 +346,175 @@ def main() -> int:
                     feat_row[TARGET_COL[h]] = forward_rv(coin, h, day)
                 rows.append(feat_row)
     panel = pd.DataFrame(rows)
-    if panel.empty:
-        fail_inadmissible("INADMISSIBLE: panel empty after row construction")
+    panel["split"] = "test"
+
+    # Train rows: days in [COVERAGE_START, BURN_IN_END] whose longest target fits in train
+    train_day_end = ts(BURN_IN_END) - pd.Timedelta(hours=max(HORIZONS_H) - 1)
+    train_days = pd.date_range(ts(COVERAGE_START), train_day_end, freq="24h")
+    train_rows = []
+    for day in train_days:
+        for coin in universe:
+            tr = {"coin": coin, "block": -1, "day": day, "split": "train"}
+            for name, tbl in feat_tables.items():
+                tr[name] = float(tbl.loc[day, coin]) if day in tbl.index and coin in tbl.columns else np.nan
+            for h in HORIZONS_H:
+                tr[TARGET_COL[h]] = forward_rv(coin, h, day)
+            train_rows.append(tr)
+
+    if train_rows:
+        train_panel = pd.DataFrame(train_rows)
+        train_panel["split"] = "train"
+        panel = pd.concat([panel, train_panel], ignore_index=True)
+
     panel = panel.dropna(subset=["rv24h", "funding_rate"]).copy()
     if panel.empty:
         fail_inadmissible("INADMISSIBLE: panel empty after causal feature filtering")
 
-    # ---- 6. QLIKE per horizon x contrast, pooled paired; primary contrast CI + permutation + LOIO ----
+    # ---- 6. Train/test split; train-only scaling + OLS fit; test-only QLIKE ----
     def fam_cols(fam: str) -> list[str]:
         return {"B1": FAMILY_B1, "C1": FAMILY_C1, "C2": FAMILY_C2, "C3": FAMILY_C3}[fam]
 
-    def fit_predict_qlike(sub: pd.DataFrame, fam: str, h: int) -> float:
-        """Out-of-sample-ish OLS on train-fit coefficients applied to test rows (causal, in-sample
-        fit on the coin-pooled test rows is acknowledged; the estimand is the QLIKE reduction)."""
-        cols = [c for c in fam_cols(fam) if c in sub.columns]
-        X = sub[cols].to_numpy(dtype=float)
-        X = np.column_stack([np.ones(len(X)), np.nan_to_num(X)])
-        y = sub[TARGET_COL[h]].to_numpy(dtype=float)
-        ok = np.isfinite(y)
-        if ok.sum() < len(cols) + 2:
-            return float("nan")
-        beta, *_ = np.linalg.lstsq(X[ok], y[ok], rcond=None)
-        yhat = np.clip(X @ beta, 1e-12, None)
-        return qlike(y[ok], yhat[ok])
+    train_df = panel[panel["split"] == "train"].copy()
+    test_df = panel[panel["split"] == "test"].copy()
+    train_rows_n = int(len(train_df))
+    test_rows_n = int(len(test_df))
+    if train_rows_n < 10 or test_rows_n == 0:
+        fail_inadmissible(f"INADMISSIBLE: train_rows={train_rows_n} test_rows={test_rows_n} insufficient for fit/eval")
 
-    def contrast_block(sub: pd.DataFrame, fam_a: str, fam_b: str, h: int) -> dict:
-        q_a = fit_predict_qlike(sub, fam_a, h)
-        q_b = fit_predict_qlike(sub, fam_b, h)
+    FEATURE_COLS = sorted(set(FAMILY_B1 + FAMILY_C1 + FAMILY_C2 + FAMILY_C3))
+
+    # Train-only scaling statistics (mean/std per feature column, computed on train only)
+    X_train_all = train_df[FEATURE_COLS].to_numpy(dtype=float)
+    x_mean = np.nanmean(X_train_all, axis=0)
+    x_std = np.nanstd(X_train_all, axis=0)
+    x_std = np.where((x_std == 0) | ~np.isfinite(x_std), 1.0, x_std)
+    _feat_idx = {c: i for i, c in enumerate(FEATURE_COLS)}
+
+    def std_cols(X: np.ndarray, col_names: list[str]) -> np.ndarray:
+        idx = [_feat_idx[c] for c in col_names]
+        return (np.nan_to_num(X, nan=0.0) - x_mean[idx]) / x_std[idx]
+
+    def fit_beta(sub: pd.DataFrame, fam: str, h: int) -> np.ndarray | None:
+        cols = [c for c in fam_cols(fam) if c in sub.columns]
+        X = std_cols(sub[cols].to_numpy(dtype=float), cols)
+        X = np.column_stack([np.ones(len(X)), X])
+        y = sub[TARGET_COL[h]].to_numpy(dtype=float)
+        ok = np.isfinite(y) & np.isfinite(X).all(axis=1)
+        if ok.sum() < len(cols) + 2:
+            return None
+        beta, *_ = np.linalg.lstsq(X[ok], y[ok], rcond=None)
+        return beta
+
+    def qlike_on(sub: pd.DataFrame, fam: str, h: int, beta: np.ndarray) -> tuple[float, np.ndarray]:
+        cols = [c for c in fam_cols(fam) if c in sub.columns]
+        X = std_cols(sub[cols].to_numpy(dtype=float), cols)
+        X = np.column_stack([np.ones(len(X)), X])
+        y = sub[TARGET_COL[h]].to_numpy(dtype=float)
+        ok = np.isfinite(y) & np.isfinite(X).all(axis=1)
+        if ok.sum() == 0:
+            return float("nan"), np.array([])
+        yhat = np.clip(X[ok] @ beta, 1e-12, None)
+        q = y[ok] / yhat - np.log(y[ok] / yhat) - 1.0
+        return float(np.mean(q)), q
+
+    # Fit beta per family x horizon on TRAIN only; never on test rows
+    beta_cache: dict[tuple[str, int], np.ndarray] = {}
+    for fam in ("B1", "C1", "C2", "C3"):
+        for h in HORIZONS_H:
+            beta = fit_beta(train_df, fam, h)
+            if beta is not None:
+                beta_cache[(fam, h)] = beta
+
+    def qlike_test(sub: pd.DataFrame, fam: str, h: int) -> float:
+        beta = beta_cache.get((fam, h))
+        if beta is None:
+            return float("nan")
+        q, _ = qlike_on(sub, fam, h, beta)
+        return q
+
+    def contrast_block_test(sub: pd.DataFrame, fam_a: str, fam_b: str, h: int) -> dict:
+        q_a = qlike_test(sub, fam_a, h)
+        q_b = qlike_test(sub, fam_b, h)
         if not (np.isfinite(q_a) and np.isfinite(q_b)) or q_b <= 0:
             return {"qlike_a": q_a, "qlike_b": q_b, "rel_reduction_pct": None}
         rel = 100.0 * (q_b - q_a) / q_b  # positive favors fam_a over fam_b
         return {"qlike_a": q_a, "qlike_b": q_b, "rel_reduction_pct": rel}
 
+    test_blocks_idx = [b[0] for b in BLOCKS]
     primary_cells = []
     for h in HORIZONS_H:
-        sub = panel[panel["block"].isin([b[0] for b in BLOCKS])]
+        sub = test_df[test_df["block"].isin(test_blocks_idx)]
         for ca, cb in [("C2", "B1"), ("C1", "B1"), ("C2", "C1")]:
             primary_cells.append({"horizon_h": h, "contrast": f"{ca}_vs_{cb}",
-                                  **contrast_block(sub, ca, cb, h)})
-    # Holm across the 12-cell primary family on the available p-values (materiality-gated)
-    pvals = [1.0 if c["rel_reduction_pct"] is None else max(0.0, min(1.0, 0.5)) for c in primary_cells]
-    # Use a permutation-free Holm placeholder only for ranking; the decision rule is the materiality gate.
+                                  **contrast_block_test(sub, ca, cb, h)})
+
+    # Holm across the 12-cell primary family with deterministic paired-permutation p-values
+    def perm_pvalue(sub: pd.DataFrame, fam_a: str, fam_b: str, h: int, reps: int = PERM_REPS) -> float:
+        beta_a = beta_cache.get((fam_a, h))
+        beta_b = beta_cache.get((fam_b, h))
+        if beta_a is None or beta_b is None:
+            return 1.0
+        cols_a = [c for c in fam_cols(fam_a) if c in sub.columns]
+        cols_b = [c for c in fam_cols(fam_b) if c in sub.columns]
+        Xa = std_cols(sub[cols_a].to_numpy(dtype=float), cols_a)
+        Xa = np.column_stack([np.ones(len(Xa)), Xa])
+        Xb = std_cols(sub[cols_b].to_numpy(dtype=float), cols_b)
+        Xb = np.column_stack([np.ones(len(Xb)), Xb])
+        y = sub[TARGET_COL[h]].to_numpy(dtype=float)
+        ok = np.isfinite(y) & np.isfinite(Xa).all(axis=1) & np.isfinite(Xb).all(axis=1)
+        if ok.sum() < 10:
+            return 1.0
+        yv = y[ok]
+        qa = yv / np.clip(Xa[ok] @ beta_a, 1e-12, None) - np.log(yv / np.clip(Xa[ok] @ beta_a, 1e-12, None)) - 1.0
+        qb = yv / np.clip(Xb[ok] @ beta_b, 1e-12, None) - np.log(yv / np.clip(Xb[ok] @ beta_b, 1e-12, None)) - 1.0
+        diff = qa - qb  # positive => fam_a worse (higher QLIKE)
+        obs_mean = float(np.mean(diff))
+        rng = np.random.RandomState(SEED)
+        count = 0
+        for _ in range(reps):
+            signs = rng.choice([-1.0, 1.0], size=len(diff))
+            if float(np.mean(signs * diff)) >= obs_mean:
+                count += 1
+        return (count + 1) / (reps + 1)
+
+    pvals = []
+    for c in primary_cells:
+        h = c["horizon_h"]
+        ca, cb = c["contrast"].split("_vs_")
+        sub = test_df[test_df["block"].isin(test_blocks_idx)]
+        pvals.append(perm_pvalue(sub, ca, cb, h))
     holm_flags = holm_reject(pvals)
 
-    # Primary contrast C2_vs_B1 at headline horizon T24: bootstrap CI + permutation + LOIO
-    sub24 = panel[panel["block"].isin([b[0] for b in BLOCKS])]
+    # Primary contrast C2_vs_B1 at T24: paired per-row bootstrap CI over test rows
     ci_lo, ci_hi = (float("nan"), float("nan"))
+    bootstrap_n = 0
+    ci_favours_c2 = False
     try:
-        q_c2 = fit_predict_qlike(sub24, "C2", PRIMARY_HORIZON)
-        q_b1 = fit_predict_qlike(sub24, "B1", PRIMARY_HORIZON)
-        # paired diff series by day for the bootstrap
-        def per_day_qlike(fam: str) -> pd.Series:
-            cols = [c for c in fam_cols(fam) if c in sub24.columns]
-            X = np.column_stack([np.ones(len(sub24)), np.nan_to_num(sub24[cols].to_numpy(dtype=float))])
+        sub24 = test_df[test_df["block"].isin(test_blocks_idx)]
+        beta_c2 = beta_cache.get(("C2", PRIMARY_HORIZON))
+        beta_b1 = beta_cache.get(("B1", PRIMARY_HORIZON))
+        if beta_c2 is not None and beta_b1 is not None:
+            cols_c2 = [c for c in FAMILY_C2 if c in sub24.columns]
+            cols_b1 = [c for c in FAMILY_B1 if c in sub24.columns]
+            Xc2 = np.column_stack([np.ones(len(sub24)), std_cols(sub24[cols_c2].to_numpy(dtype=float), cols_c2)])
+            Xb1 = np.column_stack([np.ones(len(sub24)), std_cols(sub24[cols_b1].to_numpy(dtype=float), cols_b1)])
             y = sub24[TARGET_COL[PRIMARY_HORIZON]].to_numpy(dtype=float)
-            ok = np.isfinite(y)
-            beta, *_ = np.linalg.lstsq(X[ok], y[ok], rcond=None)
-            yhat = np.clip(X @ beta, 1e-12, None)
-            d = sub24.loc[ok].copy()
-            d["ql"] = d.index.map(lambda i: 0)  # placeholder
-            d["ql_val"] = (y[ok] / yhat[ok] - np.log(y[ok] / yhat[ok]) - 1.0)
-            return d.groupby("day")["ql_val"].mean()
-        diff = per_day_qlike("B1") - per_day_qlike("C2")
-        ci_lo, ci_hi = block_bootstrap_ci(diff)
+            ok = np.isfinite(y) & np.isfinite(Xc2).all(axis=1) & np.isfinite(Xb1).all(axis=1)
+            yv = y[ok]
+            qa = yv / np.clip(Xc2[ok] @ beta_c2, 1e-12, None) - np.log(yv / np.clip(Xc2[ok] @ beta_c2, 1e-12, None)) - 1.0
+            qb = yv / np.clip(Xb1[ok] @ beta_b1, 1e-12, None) - np.log(yv / np.clip(Xb1[ok] @ beta_b1, 1e-12, None)) - 1.0
+            diff = qb - qa  # positive => C2 better (lower QLIKE than B1)
+            bootstrap_n = int(len(diff))
+            ci_lo, ci_hi = block_bootstrap_ci(pd.Series(diff))
+            ci_favours_c2 = bool(np.isfinite(ci_lo) and ci_lo > 0)
     except Exception as exc:  # numerical instability -> INCONCLUSIVE, never re-tune
         print(f"WARN: primary bootstrap skipped: {exc}", file=sys.stderr)
 
     # LOIO (leave-one-instrument-out) on the primary contrast: min rel reduction over drops
     loio_min_rel = float("inf")
     for drop in universe:
-        sub = sub24[sub24["coin"] != drop]
-        c = contrast_block(sub, "C2", "B1", PRIMARY_HORIZON)
+        sub = test_df[(test_df["block"].isin(test_blocks_idx)) & (test_df["coin"] != drop)]
+        c = contrast_block_test(sub, "C2", "B1", PRIMARY_HORIZON)
         if c["rel_reduction_pct"] is not None:
             loio_min_rel = min(loio_min_rel, float(c["rel_reduction_pct"]))
     if not np.isfinite(loio_min_rel):
@@ -472,6 +570,14 @@ def main() -> int:
         "experiment_id": EXPERIMENT_ID, "campaign": CAMPAIGN, "arm": "A",
         "decision": verdict, "verdict": verdict, "promotable": False,
         "max_status": "EXPLORATORY_ONLY", "universe_size": n_coins, "universe": universe,
+        "execution_status": "VALID_EXPLORATORY" if verdict != "INADMISSIBLE" else "EXECUTION_INVALID",
+        "train_rows": train_rows_n,
+        "test_rows": test_rows_n,
+        "scaling": "train_mean_std",
+        "fit_split": "train_only",
+        "bootstrap_n": bootstrap_n,
+        "bootstrap_block_h": BOOT_BLOCK_H,
+        "holm_method": "paired_permutation",
         "primary": {
             "contrast": "C2_vs_B1", "horizon_h": PRIMARY_HORIZON,
             "rel_reduction_pct": rel, "materiality_floor_pct": MATERIALITY_REL_PCT,
@@ -499,6 +605,10 @@ def main() -> int:
         f"**Experiment:** `{EXPERIMENT_ID}`",
         f"**Prereg:** `research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json` (frozen 2026-11-14T01:52:22Z, promotable=false, max EXPLORATORY_ONLY)",
         f"**Panel:** `{panel_path.relative_to(REPO)}`", "",
+        f"**Execution status:** `{eval_json.get('execution_status')}`",
+        f"**Train rows:** {train_rows_n} | **Test rows:** {test_rows_n}",
+        f"**Scaling:** {eval_json.get('scaling')} | **Fit split:** {eval_json.get('fit_split')}",
+        f"**Bootstrap n:** {bootstrap_n} | **Block h:** {eval_json.get('bootstrap_block_h')} | **Holm method:** {eval_json.get('holm_method')}", "",
         f"**Verdict:** `{verdict}` (EXPLORATORY_ONLY; never promotable)", "",
         "## Universe (coverage-only, label-existence only)",
         f"- complete hourly candle+funding+OI over scoring window: {n_coins} coins ({universe})",

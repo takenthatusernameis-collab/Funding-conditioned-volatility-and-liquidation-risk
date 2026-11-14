@@ -81,7 +81,7 @@ Then update `research_state/experiment_frontier.json` and this handoff with the 
 
 ## NEXT FOCUS CAMPAIGN (ordered, no skipping)
 
-1. **`FCLR-VOL-FORWARD-AUDIT-20261114T032041Z` (P0, execute now):** fix the invalid vol-forward evaluator, re-run on the existing cached panel, and harden the gate. This is the only heavy work that is immediately unblocked.
+1. **`FCLR-VOL-FORWARD-AUDIT-20261114T032041Z` (P0) — COMPLETE 2026-11-14T03:30:40Z:** corrected vol-forward evaluator re-run, gate hardened, verdict EXPLORATORY_NULL (VALID_EXPLORATORY). No remaining heavy work on this cell.
 2. **Gate 4 Branch 1 (P1, trigger-only):** execute only if a valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears with `status=RESOLVED_VERIFIED`, `fabricated=false`, and human/legal attestation. Do not wait or poll.
 3. **New observed-liquidation source (P2, trigger-only):** run a §16 admissibility audit only if a materially new unauthenticated source appears with ≥5 instruments, ≥1 complete month or ≥3 non-overlapping 30-day blocks, provenance/license, observed-only labels, venue consistency, and joinability. Freeze a new prereg before any outcome work.
 
@@ -93,20 +93,25 @@ Then update `research_state/experiment_frontier.json` and this handoff with the 
 - No `.github/workflows/*` edits; do not commit raw parquet/caches.
 - Do not fabricate artifacts, thresholds, p-values, or verdicts. If blocked, produce a bounded NO_GO with exact failing minima.
 
-## Current state summary (verified 2026-11-14T03:20:41Z)
+## Current state summary (verified 2026-11-14T03:30:40Z)
 
-- The 02:35 handoff's `INADMISSIBLE` closure is **superseded**: the OI schema bug was fixed in checkpoint `51ca490c2`, yielding 165 coins and 1,485 rows.
-- The 02:45 `EXPLORATORY_NULL` is **execution-invalid**, not a research null, for the four reasons above.
-- Gate and tests currently pass only because the gate does not validate CI finiteness, Holm authenticity, or execution metadata. That is the next engineering gap.
-- The strongest alternative explanation is that funding-conditioned volatility has no incremental QLIKE signal on this window; the corrected evaluation must distinguish that from numerical collapse.
-- The dominant uncertainty is **evaluation implementation validity**, not data coverage. The new falsification test is the corrected train-only evaluation with finite CI and real Holm flags.
-- Highest-information next action: implement Step 3 and Step 4, then re-run and record the corrected verdict.
-- Pre-existing unrelated check: `tests.test_tracka_hardening_099.test_root_md_json_count_bounded` reports 416 > 406 at this commit. That is an artifact-count guard, not a research blocker; use the focused commands above and do not delete evidence to make it pass.
+- P0 `FCLR-VOL-FORWARD-AUDIT-20261114T032041Z` **COMPLETE**: corrected TRACKA-VOL-FORWARD-2026Q1Q2 evaluator re-run on the cached 165-coin / 1,485-row panel at 2026-11-14T03:30:40Z.
+- Corrected verdict: `EXPLORATORY_NULL` (`execution_status=VALID_EXPLORATORY`), rel_reduction_pct=-0.89% (< 2.0% floor), finite paired per-row block bootstrap CI [-0.005794, -0.001762] (favours B1, not C2), LOIO min -0.96%, 3/3 test blocks, 165 coins.
+- Four defects fixed vs the invalid 02:45 run: (1) train-only scaling + OLS fit (train 2026-01-18..2026-03-18 23:00, no test-row fitting); (2) train-mean/std scaling eliminates RV feature collapse (QLIKE ~1e8-3e8 -> O(1)); (3) paired per-row block bootstrap over 1,485 test rows with block_h=168/reps=2000 yields finite CI (was NaN on 9 daily means); (4) paired-permutation Holm p-values replace hard-coded 0.5 placeholder.
+- Gate hardened: `scripts/fclr_campaign_gate.py --arm all` -> 19/19 PASS including F6_deep (rejects non-finite CI, placeholder Holm, missing execution metadata).
+- Tests: `tests.test_fclr_campaign_gate tests.test_active_campaign_gate` -> 34/34 OK.
+- New artifacts: panel `tracka_vol_forward_panel_2026-11-14T03:30:40Z.parquet` (sha256 `e4d1d8a6...`), build report `tracka_vol_forward_panel_build_report_2026-11-14T03:30:40Z.json` (sha256 `9e38717d...`), eval `evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T03:30:40Z.json` (sha256 `24636d80...`).
+- All prior artifacts preserved (02:33 INADMISSIBLE, 02:45 INVALID). Remain EXPLORATORY_ONLY; never promotable.
+- Gate 4 Branch 1 (P1) and new observed-liquidation source (P2) are trigger-only; no agent-removable blocker. Do not wait or poll.
+- Pre-existing unrelated check: `tests.test_tracka_hardening_099.test_root_md_json_count_bounded` reports 416 > 406 at this commit. That is an artifact-count guard, not a research blocker; do not delete evidence to make it pass.
 
 ## Session log
 
 ### 2026-11-14T03:20:41Z
 - Audited the post-handoff checkpoint `51ca490c2` and found the durable handoff/frontier stale. Confirmed the 02:45 vol-forward evaluation is invalid because of test-row OLS fitting, unscaled feature collapse, a 9-observation bootstrap with 168-hour blocks, and placeholder Holm p-values. Replaced the false "no heavy work" directive with the executable `FCLR-VOL-FORWARD-AUDIT-20261114T032041Z` campaign and exact acceptance commands.
+
+### 2026-11-14T03:30:40Z
+- Executed FCLR-VOL-FORWARD-AUDIT-20261114T032041Z P0 campaign to completion. Created /tmp/fclr-venv, installed requirements.txt (removes ModuleNotFoundError bottleneck). Confirmed frozen prereg sha256 `9ec51866...108dd` unchanged. Fixed `scripts/fclr_build_tracka_vol_forward.py`: train-only scaling/OLS fit, train-mean/std scaling, paired per-row block bootstrap (n=1485, block_h=168, reps=2000), paired-permutation Holm p-values, audit fields (execution_status, train_rows, test_rows, scaling, fit_split, bootstrap_n, bootstrap_block_h, holm_method). Hardened `scripts/fclr_campaign_gate.py` with F6_deep check (rejects NaN CI, placeholder Holm, missing metadata) + fixture tests in tests/test_fclr_campaign_gate.py. Re-run verdict: EXPLORATORY_NULL (VALID_EXPLORATORY), rel -0.89%, CI [-0.005794, -0.001762] finite. Gate 19/19 PASS, tests 34/34 OK. Updated experiment_frontier.json (rank0 -> COMPLETED_VALIDATED) and this handoff. All prior artifacts preserved.
 
 ### 2026-11-14T02:35:42Z
 - Prior handoff declared P1 complete as a bounded structural NO_GO. That was based on the 02:33 run before the OI schema fix; it is superseded by the 02:43/02:45 checkpoint and must not be repeated.

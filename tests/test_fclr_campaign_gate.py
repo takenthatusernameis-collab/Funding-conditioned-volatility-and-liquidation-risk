@@ -225,7 +225,7 @@ class TestFullGateExitCode(GateTestCase):
         failed = {c["check"] for c in f if not c["ok"]}
         self.assertEqual(
             failed,
-            {"F1", "F3_panel", "F3_report", "F4", "F5", "F6"},
+            {"F1", "F3_panel", "F3_report", "F4", "F5", "F6", "F6_deep"},
             f"unexpected Arm F failures: {failed}",
         )
 
@@ -282,6 +282,89 @@ class TestVolForwardGateCheck(GateTestCase):
         self._eval("evaluation_summary_TRACKA-VOL-FORWARD-20261114T015222Z", "INADMISSIBLE")
         checks = gate.check_eval_summary(self.root, gate.ARM_F_VOL_EVAL_GLOB, "F6")
         self.assertTrue(all(c["ok"] for c in checks))
+
+
+class TestVolForwardDeepEvalCheck(GateTestCase):
+    def _write_vol_forward_eval(self, payload: dict) -> None:
+        (self.root / "research_state" / "evaluation_summary_TRACKA-VOL-FORWARD-20261114T015222Z.json").write_text(
+            json.dumps(payload))
+        (self.root / "research_state" / "prereg_tracka_vol_forward_20261114T015222Z.json").write_text(
+            json.dumps({"experiment_id": "x", "frozen_before_outcomes": True, "pre_registered_before_outcomes": True}))
+
+    def _valid_eval(self) -> dict:
+        return {
+            "verdict": "EXPLORATORY_NULL", "execution_status": "VALID_EXPLORATORY",
+            "train_rows": 30000, "test_rows": 1485, "scaling": "train_mean_std",
+            "fit_split": "train_only", "bootstrap_n": 1485, "bootstrap_block_h": 168,
+            "holm_method": "paired_permutation",
+            "primary": {
+                "contrast": "C2_vs_B1", "horizon_h": 24,
+                "ci_block_bootstrap": {"lo": 0.001, "hi": 0.005, "reps": 2000, "block_h": 168, "favours_c2": True},
+            },
+            "holm_flags": [False] * 12,
+            "primary_family_12_cells": [
+                {"horizon_h": h, "contrast": c, "p": 0.3}
+                for h in (6, 24, 72, 168)
+                for c in ("C2_vs_B1", "C1_vs_B1", "C2_vs_C1")
+            ],
+        }
+
+    def test_deep_eval_passes_when_valid(self):
+        self._write_vol_forward_eval(self._valid_eval())
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertTrue(all(c["ok"] for c in checks), checks)
+
+    def test_deep_eval_rejects_nan_ci(self):
+        payload = self._valid_eval()
+        payload["primary"]["ci_block_bootstrap"]["lo"] = float("nan")
+        self._write_vol_forward_eval(payload)
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertFalse(all(c["ok"] for c in checks))
+        self.assertIn("non-finite", checks[0]["detail"])
+
+    def test_deep_eval_rejects_inf_ci(self):
+        payload = self._valid_eval()
+        payload["primary"]["ci_block_bootstrap"]["hi"] = float("inf")
+        self._write_vol_forward_eval(payload)
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertFalse(all(c["ok"] for c in checks))
+        self.assertIn("non-finite", checks[0]["detail"])
+
+    def test_deep_eval_rejects_missing_execution_status(self):
+        payload = self._valid_eval()
+        del payload["execution_status"]
+        self._write_vol_forward_eval(payload)
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertFalse(all(c["ok"] for c in checks))
+        self.assertIn("execution_status", checks[0]["detail"])
+
+    def test_deep_eval_rejects_missing_train_rows(self):
+        payload = self._valid_eval()
+        del payload["train_rows"]
+        self._write_vol_forward_eval(payload)
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertFalse(all(c["ok"] for c in checks))
+        self.assertIn("train_rows", checks[0]["detail"])
+
+    def test_deep_eval_rejects_placeholder_holm_pvals(self):
+        payload = self._valid_eval()
+        payload["primary_family_12_cells"] = [
+            {"horizon_h": h, "contrast": c, "p": 0.5}
+            for h in (6, 24, 72, 168)
+            for c in ("C2_vs_B1", "C1_vs_B1", "C2_vs_C1")
+        ]
+        self._write_vol_forward_eval(payload)
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertFalse(all(c["ok"] for c in checks))
+        self.assertIn("placeholder", checks[0]["detail"])
+
+    def test_deep_eval_rejects_wrong_holm_flags_length(self):
+        payload = self._valid_eval()
+        payload["holm_flags"] = [False] * 5
+        self._write_vol_forward_eval(payload)
+        checks = gate.check_vol_forward_eval_deep(self.root)
+        self.assertFalse(all(c["ok"] for c in checks))
+        self.assertIn("holm_flags", checks[0]["detail"])
 
 
 if __name__ == "__main__":

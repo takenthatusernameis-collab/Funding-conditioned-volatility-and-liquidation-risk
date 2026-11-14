@@ -52,6 +52,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
@@ -233,6 +234,58 @@ def check_eval_summary(root: Path, pattern: str, label: str) -> List[Dict[str, o
     return checks
 
 
+def check_vol_forward_eval_deep(root: Path = REPO) -> List[Dict[str, object]]:
+    """Deep validation of the vol-forward evaluation summary (Arm F, F6).
+
+    Fail-closed on: non-finite primary bootstrap CI, placeholder/non-numeric
+    Holm p-values or flags, and missing execution metadata
+    (execution_status, train_rows, test_rows, scaling, fit_split,
+    bootstrap_n, bootstrap_block_h, holm_method).
+    """
+    p = _latest(ARM_F_VOL_EVAL_GLOB, root)
+    out: List[Dict[str, object]] = []
+    if p is None:
+        return [_check("F6_deep", False, "no vol-forward evaluation summary")]
+    spec = _read_json(p)
+    if spec is None:
+        return [_check("F6_deep", False, f"{p.name} is not valid JSON")]
+    # INADMISSIBLE is a bounded structural NO_GO: no outcomes were computed,
+    # so there is no CI, Holm p-value, or execution metadata to validate.
+    if spec.get("verdict") == "INADMISSIBLE":
+        return [_check("F6_deep", True, "INADMISSIBLE bounded NO_GO; deep validation skipped (no outcomes computed)")]
+    problems: List[str] = []
+
+    es = spec.get("execution_status")
+    if es != "VALID_EXPLORATORY":
+        problems.append(f"execution_status={es!r} (expected VALID_EXPLORATORY)")
+
+    for key in ("train_rows", "test_rows", "scaling", "fit_split",
+                "bootstrap_n", "bootstrap_block_h", "holm_method"):
+        if key not in spec:
+            problems.append(f"missing {key}")
+
+    primary = spec.get("primary") or {}
+    ci = primary.get("ci_block_bootstrap") or {}
+    lo, hi = ci.get("lo"), ci.get("hi")
+    if not (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+            and math.isfinite(lo) and math.isfinite(hi)):
+        problems.append(f"non-finite primary bootstrap CI: lo={lo!r} hi={hi!r}")
+
+    holm_flags = spec.get("holm_flags")
+    if not isinstance(holm_flags, list) or len(holm_flags) != 12:
+        problems.append(f"holm_flags invalid: {holm_flags!r}")
+    elif not all(isinstance(f, bool) for f in holm_flags):
+        problems.append("holm_flags contains non-boolean entries")
+
+    cells = spec.get("primary_family_12_cells") or []
+    placeholder_n = sum(1 for c in cells if c.get("p") == 0.5 or c.get("holm_p") == 0.5)
+    if len(cells) > 0 and placeholder_n == len(cells):
+        problems.append("all Holm p-values are placeholder 0.5")
+
+    detail = "vol-forward eval deep validation OK" if not problems else "; ".join(problems)
+    return [_check("F6_deep", not problems, detail)]
+
+
 def run_arm_a(root: Path = REPO) -> List[Dict[str, object]]:
     checks: List[Dict[str, object]] = []
     checks += check_bulk_cache(root)
@@ -298,6 +351,7 @@ def run_arm_f(root: Path = REPO) -> List[Dict[str, object]]:
     # Vol-forward cell (P1) on the same reserved window — additive, fail-closed.
     checks.append(check_prereg_frozen(root, ARM_F_VOL_PREREG_GLOB, "F5"))
     checks += check_eval_summary(root, ARM_F_VOL_EVAL_GLOB, "F6")
+    checks += check_vol_forward_eval_deep(root)
     return checks
 
 
