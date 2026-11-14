@@ -367,8 +367,25 @@
    "verdict_recorded": true,
    "artifact_hash": "f081641df36c5c31f85f436d042e0d1bc641662e6bdabf20bb51979486932cf8",
    "panel_hash": "6d930a6a41869b82b63ae219dd5376fab9bb932883ab0b65d2c6ceb363b908fd",
-   "prereg_hash": "ae2c5b1becf18c1d5ccd70179d07f170976e258088ac16be9beb1761ef654253"
+    "prereg_hash": "ae2c5b1becf18c1d5ccd70179d07f170976e258088ac16be9beb1761ef654253"
+  },
+  {
+    "id": "H_tracka_hl_expansion_recompute",
+    "type": "primary_tracka_expansion_recompute",
+    "description": "Independent recomputation of the sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) from cached observed ironflow liquidation labels + Hyperliquid funding + mark-price candles, without reading the sealed panel parquet. C2 vs B1 on next-24h observed liquidation intensity QLIKE.",
+    "status": "INCONCLUSIVE",
+    "terminal": true,
+    "terminal_class": "INCONCLUSIVE",
+    "frozen_at": "2026-11-14T07:33:46Z",
+    "last_tested": "2026-11-14T08:30:00Z",
+    "last_experiment": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T073346Z",
+    "last_verdict": "INCONCLUSIVE (VALID_EXPLORATORY)",
+    "venue": "hyperliquid_perpetuals",
+    "data_source": "ironflow/hyperliquid-liquidations",
+    "observed_only": true,
+    "evidence": "Execution on cached 2026-05..2026-10 panel (1472 buckets, 1203 labeled, 1168 complete label+funding+rv, 8 instruments AAVE/ADA/BCH/CRV/LTC/NEAR/UNI/ZEC). C2_vs_B1 rel QLIKE reduction 6.19% (CI [-0.42074401,-0.03377946], n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed 19.0371% — does NOT reproduce (6.19% < 9.52% = sealed x 0.5). LOIO 7/8 (sealed 4/8) passes. Placebo FAIL: true 6.19% <= null p95 7.6603%. core_coverage 0.9959 >= 0.80; instruments 8 >= 5; test blocks 3 >= 3 — all stop-rule minima MET. Artifacts: research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md}, panel tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet (sha256 a4d73c79...cfe96715), build report, prereg prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}. Script: scripts/fclr_liq_expansion_recompute.py. Tests: tests/test_fclr_liq_expansion_recompute.py. All EXPLORATORY_ONLY, promotable=false, sealed artifacts unchanged.",
+    "reopen_requires": []
   }
  ],
- "updated_utc": "2026-11-13T11:17:12Z"
+ "updated_utc": "2026-11-14T08:30:00Z"
 }

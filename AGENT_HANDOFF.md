@@ -1,23 +1,31 @@
-# AGENT HANDOFF — 2026-11-14T07:33:46Z (single durable handoff)
+# AGENT HANDOFF — 2026-11-14T08:30:00Z (single durable handoff)
 
 ## INITIAL TASK FOR NEXT AGENTIC WORK SESSION (MANDATORY, HEAVY, OFFLINE, UNBLOCKED)
 
 **Do this first. Do not produce a status-only, inventory-only, or planning-only response.**
 
-1. **PRIMARY (must complete in this session unless a hard local error is hit): Phase B — implement and run `TRACKA-LIQ-EXPANSION-RECOMPUTE`.**
-   - `scripts/fclr_liq_expansion_recompute.py` does **not** exist. Create it.
-   - Freeze `research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}` **before any outcome computation** (`FROZEN_PRE_OUTCOMES`, `frozen_before_outcomes=true`, `pre_registered_before_outcomes=true`, `outcome_data_inspected_before_freeze=false`, `promotable=false`, `max_status=EXPLORATORY_ONLY`).
-   - Rebuild the panel from caches (**not** from the sealed parquet): `research_state/data_cache/ironflow_events/2026-05..2026-10.parquet` + `research_state/data_cache/hyperliquid_funding/{ZEC,NEAR,UNI,AAVE,CRV,ADA,LTC,BCH}.json` + `research_state/data_cache/hyperliquid_candles/{SYM}/2026-05..2026-10.json`. **Do not use `ironflow_bulk` (stops at 2026-04).**
-   - Recompute B0/B1/C1/C2 with train-only fit/scaling/smearing on the frozen sealed design/splits; run paired 24h/circular block bootstrap (2000 deterministic reps), Holm over `C2_vs_B1/C1_vs_B1/C2_vs_C1`, LOIO, funding-permutation placebo, per-symbol/per-block stability, leakage audit.
-   - Emit `research_state/tracka_liq_expansion_recompute_panel_<UTC>.parquet`, `..._panel_build_report_<UTC>.json`, `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md}` with verdict `REPRODUCED|NOT_REPRODUCED|INCONCLUSIVE|INADMISSIBLE` and an explicit statement of whether sealed **19.04%** C2-vs-B1, **LOIO 4/8**, and the **placebo failure** replicate. Preserve all sealed artifacts.
-   - Add targeted `unittest` tests for prereg frozen fields, panel-hash consistency, non-empty contrasts, and sealed-artifact immutability.
-2. **SECONDARY (only after Phase B artifacts/tests/gates are done, or if Phase B hits a provable hard stop with exact failing minima): Phase A — fix and rerun FCLR-011 recompute.** Phase A is capped `INCONCLUSIVE/EXPLORATORY`; see diagnosis below. Do **not** let Phase A displace Phase B.
-3. **AFTER EACH PHASE (atomically):** update `research_state/experiment_frontier.json` and `research_state/hypothesis_registry.json` (audit-only; do not alter sealed statuses), append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`, append a dated session log here, and verify `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect 19/19) plus targeted gate tests.
+1. **PRIMARY (must complete in this session unless a hard local error is hit): Verify Phase B completion and await next trigger.**
+   - Confirm `scripts/fclr_liq_expansion_recompute.py` exists and runs (bugs fixed: `design_matrix` signature, `block_keys` `.to_numpy()`, `log_liq_lag1` NaN-on-zero, z-scored-column-before-scaling order).
+   - Confirm `research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}` frozen FROZEN_PRE_OUTCOMES (all required fields correct).
+   - Confirm panel `research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet` (sha256 `a4d73c79...cfe96715`) + build report exist with matching hash.
+   - Confirm `research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md}` emitted with verdict **INCONCLUSIVE** (VALID_EXPLORATORY): C2_vs_B1 rel reduction **6.19%** (CI [-0.42074401,-0.03377946], n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed **19.0371%** — **does NOT reproduce** sealed (6.19% < 9.52% = sealed x 0.5). LOIO **7/8** (sealed 4/8) — passes. Placebo **FAIL**: true 6.19% <= null p95 7.6603%. core_coverage 0.9959, instruments 8, test blocks 3 — all stop-rule minima MET.
+   - Confirm tests `tests/test_fclr_liq_expansion_recompute.py` pass (6 tests: prereg frozen fields, panel-hash consistency, non-empty contrasts, sealed-artifact immutability).
+   - Run `/tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all` (expect **19/19 PASS**) and `/tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute`.
+   - **Do not** start Phase A unless Phase B verification hits a provable hard stop. Phase A is capped INCONCLUSIVE/EXPLORATORY.
 
-This handoff **supersedes all prior handoffs**, including 2026-11-14T06:35:00Z and 06:25:08Z.
-Prior handoff claimed Phase A `READY_EXECUTE` and Phase B pending on `ironflow_bulk` — **both false**.
-Phase A is a design/implementation dead-end as written (empty contrasts, double-assemble bug); Phase B
-has no implementation but **all required inputs are present**. This file removes those bottlenecks.
+2. **SECONDARY (only after Phase B verification is done): Phase A — fix and rerun FCLR-011 recompute.** Phase A is capped INCONCLUSIVE/EXPLORATORY; see diagnosis below. Do **not** let Phase A displace Phase B verification.
+
+3. **AFTER VERIFICATION (atomically):** update `research_state/experiment_frontier.json` and `research_state/hypothesis_registry.json` (audit-only; do not alter sealed statuses), append to `research_state/negative_results_report.md` and `research_state/leakage_audit.md`, append a dated session log here.
+
+**Next action if no trigger appears:** Document bounded NO_GO with exact missing trigger evidence and stop cleanly. No agent-removable heavy work remains:
+- Gate 4 trigger absent (EXPLICIT_BLOCKER_UNRESOLVED, external/legal — do not wait/poll).
+- No verifiably admissible new observed-liquidation source.
+- HL 2026-11+ ~12d < 100d minimum; no verified post-2026-10-31 observed liquidation labels.
+- All cached-data designs exhausted/sealed.
+
+**Triggers that would resume heavy work:** GATE4_BRANCH_1 (valid `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json`), NEW_OBSERVED_LIQUIDATION_SOURCE (>=5 instruments, >=1 complete month or >=3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only), HL_LABEL_EXTENSION (HL >=100d AND verified post-2026-10-31 observed labels).
+
+This handoff **supersedes all prior handoffs**, including 2026-11-14T07:33:46Z, 06:35:00Z, and 06:25:08Z.
 
 ### What I verified myself (do not re-verify, do not re-litigate)
 | Claim | Verified result | Evidence |

@@ -2,27 +2,32 @@
   {
     "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
     "rank": 0,
-    "status": "READY_EXECUTE",
+    "status": "COMPLETED_EXPLORATORY",
     "program_status": "ACTIVE",
-    "next_unfinished_task": "Phase A: freeze research_state/prereg_fclr011_recompute_20261114T042139Z.json before any outcome computation; rebuild the FCLR-011 panel from cached Binance 2026-01..2026-08 inputs (do not rely on the LFS pointer fclr011_panel.json); run an independent train-only OLS/HAR recomputation of B0/B1/C1/C2 on the frozen splits (train 2026-01-01..2026-03-17, val 2026-03-25..2026-04-30, test 2026-05-08..2026-08-06); emit evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.{json,md} with QLIKE, 24h block bootstrap 2000 reps, Holm, LOIO, placebo, leakage audit, and exact artifact hashes. Phase B: freeze a new prereg and independently recompute the sealed Track A liquidation expansion PASS (2026-05..2026-10, 8 symbols, 19.04% C2-vs-B1 QLIKE reduction; FRAGILE LOIO 4/8, placebo FAIL) using cached ironflow observed liquidation labels only; emit evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md}. Both phases are EXPLORATORY_ONLY and never promotable; preserve all sealed artifacts.",
+    "next_unfinished_task": "Phase B COMPLETE (2026-11-14T08:30:00Z): scripts/fclr_liq_expansion_recompute.py implemented and run; prereg research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md} frozen FROZEN_PRE_OUTCOMES; panel research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet built (sha256 a4d73c79...cfe96715) + build report; evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md} emitted with verdict INCONCLUSIVE (VALID_EXPLORATORY). C2_vs_B1 rel reduction 6.19% (CI [-0.42074401,-0.03377946], n_pairs=593, n_blocks=3, holm_p=0.036) vs sealed 19.0371% — does NOT reproduce sealed (6.19% < 9.52% = sealed x 0.5). LOIO 7/8 (sealed 4/8) — passes. Placebo FAIL: true 6.19% <= null p95 7.6603%. core_coverage 0.9959, instruments 8, test blocks 3 — all stop-rule minima MET. All EXPLORATORY_ONLY, promotable=false, sealed artifacts unchanged. Phase A remains secondary/capped (BLOCKED_DESIGN: log_rv168h train-window + double-assemble bug). Gate 19/19 PASS; targeted tests 40/40 OK. No agent-removable heavy work remains: Gate 4 trigger absent, no new observed-liquidation source, HL 2026-11+ ~12d < 100d. Next session: verify artifacts/gate/tests, then await GATE4_BRANCH_1 / NEW_OBSERVED_LIQUIDATION_SOURCE / HL_LABEL_EXTENSION trigger; if none appears, document bounded NO_GO with exact missing trigger evidence.",
     "generated": "2026-11-14T07:33:46Z",
-    "refreshed": "2026-11-14T07:33:46Z",
-    "last_checked": "2026-11-14T07:33:46Z",
-    "blockers": "None agent-removable. 2026-11-14T07:33:46Z: Phase B is the mandatory primary task (no implementation exists) with all required offline inputs present (ironflow_events 2026-05..10, hyperliquid_funding 8 symbols x 4416 rows, hyperliquid_candles 8 symbols x 6 months). Phase A remains BLOCKED_DESIGN/capped: log_rv168h absent for first 192h of every symbol (train complete-case rows=152, C1/C2 unfittable) and fclr011_recompute_audit.py has a double-assemble bug (smoke/full share panel sha256 and reported build/coverage mismatch). ironflow_bulk stops at 2026-04 and must not be used for Phase B.",
-    "next_action_heavy": "MANDATORY: implement scripts/fclr_liq_expansion_recompute.py, freeze prereg research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md} BEFORE outcomes, rebuild expansion panel from ironflow_events + hyperliquid_funding + hyperliquid_candles (NOT ironflow_bulk), recompute B0/B1/C1/C2 (train-only fit/scaling/smearing), paired 24h block bootstrap 2000 reps, Holm over C2_vs_B1/C1_vs_B1/C2_vs_C1, LOIO, funding-permutation placebo, per-symbol/per-block stability, leakage audit; emit tracka_liq_expansion_recompute_panel_<UTC>.parquet, panel_build_report_<UTC>.json, evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-<UTC>.{json,md} (REPRODUCED|NOT_REPRODUCED|INCONCLUSIVE|INADMISSIBLE, EXPLORATORY_ONLY) stating whether sealed 19.04% C2-vs-B1, LOIO 4/8, and placebo failure replicate. Add targeted unittest tests and run gate (19/19) + gate tests. Only after Phase B done/hard-stopped: tackle Phase A fixes per AGENT_HANDOFF.md.",
+    "refreshed": "2026-11-14T08:30:00Z",
+    "last_checked": "2026-11-14T08:30:00Z",
+    "blockers": "None agent-removable. Phase B complete (INCONCLUSIVE). No remaining unblocked heavy campaign: Gate 4 EXPLICIT_BLOCKER_UNRESOLVED (external/legal, do not wait/poll), no verifiably admissible new observed-liquidation source, HL 2026-11+ window ~12d insufficient for >=3x30d blocks, no verified post-2026-10-31 observed liquidation labels. All cached-data designs exhausted/sealed.",
+    "next_action_heavy": "VERIFY: re-run /tmp/fclr-venv/bin/python scripts/fclr_campaign_gate.py --arm all (expect 19/19) and /tmp/fclr-venv/bin/python -m unittest tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_liq_expansion_recompute. Then document state in AGENT_HANDOFF.md. AWAIT TRIGGER: GATE4_BRANCH_1 (valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json), NEW_OBSERVED_LIQUIDATION_SOURCE (>=5 instruments, >=1 complete month or >=3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only), or HL_LABEL_EXTENSION (HL >=100d AND verified post-2026-10-31 observed labels). If no trigger appears within this session, write timestamped NO_GO evidence with exact failing minima and stop cleanly — no status-only output, no polling.",
     "phases": [
-      {
-        "phase": "A",
-        "task": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
-        "status": "BLOCKED_DESIGN",
-        "claim": "Phase A is capped: the frozen CORE_FEATURES require log_rv168h, which is absent for the first 192h of every symbol, leaving 152 train complete rows so C1/C2 cannot fit; the script also rebuilds the panel twice so --smoke and full runs share one panel sha256 and the reported build/coverage mismatches the emitted parquet. Requires a frozen design change (drop log_rv168h / HAR-RV) plus the double-assemble fix, then re-run. EXPLORATORY_ONLY.",
+{
+        "phase": "B",
+        "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
+        "status": "COMPLETED_EXPLORATORY",
+        "claim": "COMPLETE 2026-11-14T08:30:00Z: Independently recomputed the sealed Track A liquidation expansion PASS from a newly written script (scripts/fclr_liq_expansion_recompute.py) using observed ironflow liquidation labels only. Verdict INCONCLUSIVE (VALID_EXPLORATORY): C2_vs_B1 rel reduction 6.19% vs sealed 19.0371% (does not reproduce, 6.19% < 9.52% threshold). CI [-0.42074401,-0.03377946] excludes zero but below sealed x 0.5. n_pairs=593, n_blocks=3, holm_p=0.036. LOIO 7/8 (sealed 4/8) — passes. Placebo FAIL: true 6.19% <= null p95 7.6603%. core_coverage 0.9959 >= 0.80, instruments 8 >= 5, test blocks 3 >= 3 — all stop-rule minima MET. Artifacts: prereg, panel (sha256 a4d73c79...cfe96715), build report, evaluation summary JSON+MD. All EXPLORATORY_ONLY, promotable=false, sealed artifacts unchanged.",
         "expected_artifacts": [
-          "research_state/prereg_fclr011_recompute_20261114T042139Z.json",
-          "research_state/fclr011_recompute_panel_20261114T042139Z.parquet",
-          "research_state/fclr011_recompute_panel_build_report_20261114T042139Z.json",
-          "research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.json",
-          "research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261114T042139Z.md"
-        ]
+          "research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.json",
+          "research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet",
+          "research_state/tracka_liq_expansion_recompute_panel_build_report_20261114T083000Z.json",
+          "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.json",
+          "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.md",
+          "research_state/scripts/fclr_liq_expansion_recompute.py",
+          "tests/test_fclr_liq_expansion_recompute.py"
+        ],
+        "actual_verdict": "INCONCLUSIVE",
+        "actual_status": "VALID_EXPLORATORY",
+        "completed_utc": "2026-11-14T08:30:00Z"
       },
       {
         "phase": "B",

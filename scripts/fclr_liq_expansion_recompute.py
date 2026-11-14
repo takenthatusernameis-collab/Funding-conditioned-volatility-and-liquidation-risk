@@ -533,6 +533,7 @@ def build_panel() -> tuple[pd.DataFrame, dict]:
         merged.append(pl)
     panel = pd.concat(merged, ignore_index=True).sort_values(["coin", "ts"]).reset_index(drop=True)
     panel["has_funding"] = panel["fundingRate"].notna()
+    panel["signed_funding"] = panel["fundingRate"]
 
     # RV as-of per coin (latest hourly RV at or before bucket start, <= 168h)
     rv_merged = []
@@ -571,7 +572,7 @@ def build_panel() -> tuple[pd.DataFrame, dict]:
     # causal lag feature (prior day's intensity)
     panel["liq_lag1"] = panel.groupby("coin")["liq_notional_usd"].shift(1)
 
-    panel["log_liq_lag1"] = np.log(panel["liq_lag1"].where(panel["liq_lag1"] > 0) + EPS)
+    panel["log_liq_lag1"] = np.log(panel["liq_lag1"].fillna(0.0).clip(lower=0.0) + EPS)
     panel["log_rv1h"] = np.log(panel["rv1h"].where(panel["rv1h"] > 0) + EPS)
     panel["log_rv24h"] = np.log(panel["rv24h"].where(panel["rv24h"] > 0) + EPS)
     panel["log_rv168h"] = np.log(panel["rv168h"].where(panel["rv168h"] > 0) + EPS)
@@ -636,7 +637,7 @@ def _solve(A: np.ndarray, b: np.ndarray):
     return beta
 
 
-def design_matrix(df: pd.DataFrame, model: str):
+def design_matrix(df: pd.DataFrame, model: str, spec: dict | None = None):
     if model == "B0":
         cols = ["log_liq_lag1"]
     elif model == "B1":
@@ -768,8 +769,42 @@ def leakage_audit(panel: pd.DataFrame) -> dict:
 # ---------------------------------------------------------------------- evaluation
 
 
+RAW_FEATURES = ["log_rv1h", "log_rv24h", "log_rv168h", "signed_funding", "abs_fund_pct", "premium", "ema_dist"]
+
+
 def run_audit(prereg: dict, out_utc: str, smoke: bool, panel: pd.DataFrame, build: dict) -> dict:
     assert_prereg_frozen(prereg)
+
+    train = panel[panel["split"] == "train"].copy()
+    train_raw = train[train[RAW_FEATURES].notna().all(axis=1)].copy()
+    train_raw = train_raw[train_raw["target_next_intensity"] > 0].copy()
+    if train_raw.empty:
+        result = {
+            "experiment_id": EXPERIMENT_ID,
+            "campaign": CAMPAIGN,
+            "generated": out_utc,
+            "smoke": bool(smoke),
+            "status": "INADMISSIBLE",
+            "verdict": "INADMISSIBLE",
+            "promotable": False,
+            "max_status": "EXPLORATORY_ONLY",
+            "audit_only": True,
+            "does_not_reopen_sealed_verdict": True,
+            "prereg": str(PREREG_JSON.relative_to(REPO)),
+            "prereg_status": prereg["status"],
+            "splits": prereg["splits"],
+            "build": build,
+            "coverage": {"test_rows_total": 0, "test_rows_core_complete": 0, "test_rows_core_positive": 0, "core_coverage": 0.0},
+            "instruments": [],
+            "n_test_blocks_days": 0,
+            "test_blocks_with_data": [],
+            "test_window": [TEST_BLOCKS[0][0], TEST_BLOCKS[-1][1]],
+            "sealed_reference": SEALED,
+            "failing_minima": ["no complete positive-target training rows"],
+        }
+        return result
+
+    spec = add_train_scaling(train_raw, panel)
 
     test_mask = panel["split"] == "test"
     test_all = panel[test_mask].copy()
@@ -779,7 +814,6 @@ def run_audit(prereg: dict, out_utc: str, smoke: bool, panel: pd.DataFrame, buil
     instruments = sorted(test_core_pos["coin"].unique().tolist()) if len(test_core_pos) else []
     test_days = sorted({ts.floor("D") for ts in test_core_pos["ts"]}) if len(test_core_pos) else []
     test_blocks_with_data = sorted({int((ts - pd.Timestamp("2026-07-01", tz="UTC")).days // 1) for ts in test_core_pos["ts"]}) if len(test_core_pos) else []
-    # map each test ts to a block index
     def block_of(ts: pd.Timestamp) -> int:
         for i, (b0, b1) in enumerate(TEST_BLOCKS):
             if parse_ts(b0) <= ts <= parse_ts(b1):
@@ -830,8 +864,8 @@ def run_audit(prereg: dict, out_utc: str, smoke: bool, panel: pd.DataFrame, buil
         result["failing_minima"] = inadmissible
         return result
 
-    train = panel[panel["split"] == "train"].copy()
-    train_core = train[train[CORE_FEATURES].notna().all(axis=1)].copy()
+    train_df = panel[panel["split"] == "train"].copy()
+    train_core = train_df[train_df[CORE_FEATURES].notna().all(axis=1)].copy()
     train_core = train_core[train_core["target_next_intensity"] > 0].copy()
     if train_core.empty:
         result["status"] = "INADMISSIBLE"
@@ -839,7 +873,6 @@ def run_audit(prereg: dict, out_utc: str, smoke: bool, panel: pd.DataFrame, buil
         result["failing_minima"] = ["no complete positive-target training rows"]
         return result
 
-    spec = add_train_scaling(train_core, panel)
     train_core["log_target"] = np.log(train_core["target_next_intensity"].clip(lower=EPS))
     panel["log_target"] = np.log(panel["target_next_intensity"].clip(lower=EPS))
 
@@ -957,7 +990,7 @@ def run_audit(prereg: dict, out_utc: str, smoke: bool, panel: pd.DataFrame, buil
 
     per_block = {}
     for bi in test_blocks_with_data:
-        m = (block_keys == bi).to_numpy()
+        m = (block_keys == bi)
         if m.sum() == 0:
             continue
         mb, ma = float(np.nanmean(q["B1"][m])), float(np.nanmean(q["C2"][m]))

@@ -376,3 +376,18 @@ holdout reuse, no split changes.
 - **Artifact:** research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md; prereg research_state/research_protocol_trackb_TB2_20261110T190405Z.md; splits/run record run_manifest.json#split_boundaries_trackb_TB2_20261110T190405Z and #tb2_confirmatory_run.
 - **Overlay eligibility:** NOT ELIGIBLE (forecast gate NOT_MET).
 - **Program status:** All admissible local routes exhausted with evidence — Track A STRUCTURALLY_BLOCKED, Track C concluded NOT_SUPPORTED, Track B TB2 confirmatory gate NOT_MET, Track B TB1 degenerate/inadmissible. Program concluded under constraints pending a new admissible unauthenticated source. No threshold shopping; no sealed-holdout reuse; no .github/workflows edits.
+
+---
+## TRACKA-LIQ-EXPANSION-RECOMPUTE (FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T073346Z) — 2026-11-14T08:30:00Z
+
+- **Outcome:** INCONCLUSIVE (VALID_EXPLORATORY). Independent recomputation of sealed Track A liquidation expansion PASS TRACKA-HL-EXPANSION-20261111T195500Z did not replicate the sealed 19.04% C2-vs-B1 result. All results EXPLORATORY_ONLY, promotable=false. Does not reopen the sealed verdict.
+- **Contrast:** C2 vs B1 on next-24h observed liquidation intensity (notional_usd-weighted, ironflow labels only), out-of-sample QLIKE. C2 = RV-HAR + signed funding + trailing |funding| percentile + mark/index premium + mark/EMA24 distance; B1 = RV-HAR only (log RV1h/RV24h/RV168h).
+- **Point estimate:** 6.19% relative QLIKE reduction (vs sealed 19.0371%). Below the sealed x 0.5 = 9.52% materially-consistent threshold → does NOT reproduce.
+- **Uncertainty:** paired circular block bootstrap (2000 deterministic reps, seed 20261114, 1-day blocks), 95% CI [-0.42074401, -0.03377946] — excludes zero (C2 better than B1) but below materiality threshold for sealed replication. Holm p=0.036 across 3 contrasts. C1_vs_B1 = 3.08% (holm_p=0.087); C2_vs_C1 = 3.21% (holm_p=0.087).
+- **Claim-worthiness minimums:** instruments 8 >= 5 PASS; test blocks 3 >= 3 PASS; core_coverage 0.9959 >= 0.80 PASS. All stop-rule minima MET — not INADMISSIBLE.
+- **Robustness:** LOIO 7/8 (sealed 4/8) — passes >=6 threshold. Placebo/funding-permutation FAIL: true 6.19% <= null p95 7.6603% (200 permutations, seed 20261114) → true effect within null distribution.
+- **Leakage audit:** PASS — target strictly forward (shift -1 day), no zero-fill, no forward-fill, train-only scaling/smearing, backward merge_asof for funding/RV, 7d purge/embargo at split boundaries.
+- **Verdict:** INCONCLUSIVE. C2 vs B1 shows a favorable point estimate (6.19%, CI excludes zero) but does not replicate the sealed 19.04% (below 9.52% threshold) and the placebo check fails (true effect within null distribution). No incremental forecast skill established at the sealed level.
+- **Data:** observed Hyperliquid ironflow liquidation labels only (1,264,105 rows, 2026-05..2026-10); Hyperliquid funding (8 symbols x 4,416 rows); Hyperliquid 1h candles (8 symbols x 6 months). NOT ironflow_bulk (stops 2026-04). No Binance/2024 conflation; no modeled/proxy/synthetic labels.
+- **Artifacts:** scripts/fclr_liq_expansion_recompute.py; research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.{json,md}; research_state/tracka_liq_expansion_recompute_panel_20261114T083000Z.parquet (sha256 a4d73c79...cfe96715); research_state/tracka_liq_expansion_recompute_panel_build_report_20261114T083000Z.json; research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.{json,md}; tests/test_fclr_liq_expansion_recompute.py.
+- **Sealed artifacts:** unchanged (read-only). research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet (sha256 39916a72...) and research_state/tracka_hl_expansion_eval_result_20261111T202344Z.json preserved.
