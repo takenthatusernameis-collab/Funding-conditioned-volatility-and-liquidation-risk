@@ -1,4 +1,4 @@
-# AGENT_HANDOFF — 2026-11-14T14:19:09Z (single durable handoff)
+# AGENT_HANDOFF — 2026-11-14T14:20:23Z (single durable handoff)
 
 ## Project
 `Funding-conditioned-volatility-and-liquidation-risk` (repo: `/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk`)
@@ -15,7 +15,7 @@
 3. **If no trigger is satisfied (current default):** report a brief timestamped verification note and **clean stop**. Do not poll/wait, do not repeat identical probes, do not re-run tested/exhausted windows, do not create status-only artifacts or new handoff files.
 4. **If a trigger is satisfied:** open a **NEW experiment ID** and follow atomic pre-outcomes discipline only: freeze prereg before outcomes → if new source, produce §16 admissibility audit (`research_state/<source>_admissibility_audit_<UTC>.{md,json}`) proving ALL minima before prereg/outcomes → build/eval/verdict → update registry/frontier/manifest/run artifacts with hashes/verdicts. Run relevant gates/tests (`python3 scripts/fclr_campaign_gate.py --arm all`, targeted `unittest`). No threshold shopping, no sealed holdout/anchor overwrites, no `.github/workflows` edits.
 
-## Current verified state (2026-11-14T14:19:09Z)
+## Current verified state (2026-11-14T14:20:23Z)
 - Frontier rank 0: `FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z`, `status=TRIGGER_ONLY`, `program_status=BOUNDED_TRIGGER_ONLY`.
 - `python3 scripts/next_campaign_status.py` (checked this session): no unfrozen/unexecuted prereg; **no feasible 3-block design in either domain** (Binance 5-symbol exhausted; Hyperliquid bulk forward reserve 2025-05-01..2025-05-24, 24d, too short/tested-exhausted context).
 - Gate 4: **NO_VALID_GATE4_TRIGGER** (`ls research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` → none).
