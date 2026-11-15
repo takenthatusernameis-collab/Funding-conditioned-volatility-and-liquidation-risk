@@ -1,4 +1,4 @@
-# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T16:40:31Z
+# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T16:48:23Z
 # SOLE DURABLE HANDOFF POINTER
 
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk (funding rates, volatility, liquidation-risk in crypto perpetuals)
