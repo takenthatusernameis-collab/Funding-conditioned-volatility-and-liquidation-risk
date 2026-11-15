@@ -822,11 +822,11 @@ def _write_md(result, arm_a, arm_b, out_dir):
     return "\n".join(lines)
 
 
-def _cell_summary_line(arm_result, side):
+def _cell_summary_line(arm_result, cell, side):
     p = (arm_result.get("pooled") or {})
     ci = (p.get("median_diff_ci") or {})
-    return (f"  [{arm_result['percentiles'][0]},{arm_result['percentiles'][1]}]/"
-            f"{arm_result['censor_max_follow_hours']}h/{arm_result['rv_split']}: "
+    return (f"  [{cell['percentiles'][0]},{cell['percentiles'][1]}]/"
+            f"{cell['censor_max_follow_hours']}h/{cell['rv_split']}: "
             f"events={arm_result['n_events']} "
             f"(corrected={arm_result['n_corrected']}, censored={arm_result['n_censored']}) "
             f"KM med high={p.get('km_median_high')}h low={p.get('km_median_low')}h "
@@ -847,13 +847,13 @@ def _write_sens_md(result, grid, out_dir):
     lines.append("## Grid cells — Arm A (Binance, primary)\n")
     for cell in grid:
         a = cell["arm_a"]
-        lines.append(_cell_summary_line(a, "A"))
+        lines.append(_cell_summary_line(a, cell, "A"))
         lines.append(f"  CI: [{a['pooled']['median_diff_ci']['lo'] if a['pooled'] and a['pooled'].get('median_diff_ci') else None}, "
                      f"{a['pooled']['median_diff_ci']['hi'] if a['pooled'] and a['pooled'].get('median_diff_ci') else None}]\n")
     lines.append("\n## Grid cells — Arm B (ironflow, secondary, never promotable)\n")
     for cell in grid:
         b = cell["arm_b"]
-        lines.append(_cell_summary_line(b, "B"))
+        lines.append(_cell_summary_line(b, cell, "B"))
         lines.append(f"  CI: [{b['pooled']['median_diff_ci']['lo'] if b['pooled'] and b['pooled'].get('median_diff_ci') else None}, "
                      f"{b['pooled']['median_diff_ci']['hi'] if b['pooled'] and b['pooled'].get('median_diff_ci') else None}]\n")
     lines.append("## Consistency vs headline\n")
@@ -866,11 +866,37 @@ def _write_sens_md(result, grid, out_dir):
     return "\n".join(lines)
 
 
+GRID_CACHE = REPO / "research_state" / "fclr_shek_scale_grid_cache.pkl"
+
+
+def _save_grid_cache(result, grid, ts):
+    """Persist the heavy grid computation so a re-run can skip ~90 min of compute.
+
+    The grid is the expensive part (24 cells x cluster+block bootstraps); if the
+    markdown renderer crashes after compute, the work is not lost.
+    """
+    import pickle
+    GRID_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    GRID_CACHE.write_bytes(pickle.dumps({"ts": ts, "result": result, "grid": grid}))
+
+
+def _load_grid_cache():
+    import pickle
+    if not GRID_CACHE.exists():
+        return None
+    try:
+        return pickle.loads(GRID_CACHE.read_bytes())
+    except Exception:
+        return None
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=None)
     ap.add_argument("--arm", choices=["a", "b", "both"], default="both")
     ap.add_argument("--no-write", action="store_true")
+    ap.add_argument("--use-cache", action="store_true",
+                    help="skip heavy grid compute and reuse research_state/fclr_shek_scale_grid_cache.pkl")
     args = ap.parse_args(argv)
 
     out_dir = Path(args.out) if args.out else REPO / "research_state"
@@ -878,8 +904,35 @@ def main(argv=None):
 
     prereg = json.loads(PREREG.read_text())
     ts = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    result, arm_a, arm_b = execute()
-    grid = result.get("sensitivity_grid", [])
+
+    if args.use_cache:
+        cached = _load_grid_cache()
+        if not cached:
+            raise SystemExit("grid cache missing; run without --use-cache first")
+        result, grid = cached["result"], cached["grid"]
+        arm_a, arm_b = None, None
+        print(f"using grid cache ts={cached.get('ts')} n_cells={len(grid)}")
+    else:
+        result, arm_a, arm_b = execute()
+        grid = result.get("sensitivity_grid", [])
+        # Persist the durable JSON artifact FIRST, before any markdown rendering,
+        # so a renderer crash cannot lose the heavy computation.
+        sens_payload = json.dumps({
+            "prereg_id": result["prereg_id"],
+            "frozen_at_utc": result["frozen_at_utc"],
+            "headline_cell": {"percentiles": [5.0, 95.0], "censor_max_follow_hours": 168, "rv_split": "tercile"},
+            "grid_dimensions": {
+                "percentiles": [[1.0, 99.0], [5.0, 95.0], [10.0, 90.0]],
+                "censor_max_follow_hours": [168, 336],
+                "rv_split": ["tercile", "median"],
+            },
+            "n_cells": len(grid),
+            "grid": grid,
+        }, indent=2, default=str)
+        sens_json_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-SENS-{ts}.json"
+        sens_json_path.write_text(sens_payload)
+        print(f"wrote {sens_json_path}")
+        _save_grid_cache(result, grid, ts)
 
     payload = json.dumps(result, indent=2, default=str)
     md = _write_md(result, arm_a, arm_b, out_dir)
@@ -908,9 +961,7 @@ def main(argv=None):
     json_path.write_text(payload)
     md_path.write_text(md)
 
-    sens_json_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-SENS-{ts}.json"
     sens_md_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-SENS-{ts}.md"
-    sens_json_path.write_text(sens_payload)
     sens_md_path.write_text(sens_md)
     print(f"wrote {json_path}")
     print(f"wrote {md_path}")
