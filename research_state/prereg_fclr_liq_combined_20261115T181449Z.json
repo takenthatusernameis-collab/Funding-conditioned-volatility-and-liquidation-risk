@@ -1,0 +1,118 @@
+{
+  "experiment_id": "FCLR-LIQ-COMBINED-20261115T181449Z",
+  "prereg_frozen_utc": "2026-11-15T18:14:49Z",
+  "class": "CONFIRMATORY",
+  "promotable": false,
+  "outcome_data_inspected_before_freeze": false,
+  "estimand": {
+    "name": "24h_observed_liquidation_intensity_qlike",
+    "target": "daily_total_notional_usd_next_24h",
+    "aggregation": "sum of notional_usd over (coin, calendar_day)",
+    "target_shift": "next_calendar_day (shift -1 within coin)",
+    "loss": "QLIKE",
+    "baseline": "B1",
+    "challenger": "C2",
+    "contrast": "C2_vs_B1",
+    "materiality_floor_pct": 2.0,
+    "min_instruments": 5,
+    "min_test_blocks": 3,
+    "block_bootstrap_reps": 2000,
+    "block_bootstrap_seed": 20261115,
+    "holm_family": [
+      "C2_vs_B1"
+    ],
+    "purge_embargo_days": 7,
+    "walk_forward": "expanding_window"
+  },
+  "universe": {
+    "coins": [
+      "AAVE",
+      "ADA",
+      "AVAX",
+      "BNB",
+      "BTC",
+      "CRV",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "LTC",
+      "NEAR",
+      "SOL",
+      "SUI",
+      "UNI",
+      "XRP"
+    ],
+    "n_coins": 15,
+    "source_family": "combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed liquidation events",
+    "panel_artifact": null
+  },
+  "features": {
+    "B1": [
+      "rv24h",
+      "rv168h"
+    ],
+    "C2": [
+      "rv24h",
+      "rv168h",
+      "fundingRate",
+      "abs_fund_pct",
+      "premium",
+      "ema_dist"
+    ],
+    "note": "All features are causal (past-only as-of joins) at the event->daily aggregation grain. Funding features are the last funding timestamp <= event; RV features are 4h-candle rolling std over past bars."
+  },
+  "splits": {
+    "train": {
+      "start": "2025-03-22",
+      "end": "2025-08-31",
+      "blocks": "PRISTINE blocks 0-1 + ESTIMAND_OVERLAP blocks 2-4 (estimand-novel for the combined panel)"
+    },
+    "validation": {
+      "start": "2025-09-01",
+      "end": "2025-09-30"
+    },
+    "embargo_days": 7,
+    "test_blocks": [
+      {
+        "index": 1,
+        "start": "2025-10-01",
+        "end": "2025-10-31",
+        "class": "PRISTINE_ADJACENT_ESTIMAND_NOVEL"
+      },
+      {
+        "index": 2,
+        "start": "2026-01-01",
+        "end": "2026-01-31",
+        "class": "IRONFLOW_ESTIMAND_NOVEL"
+      },
+      {
+        "index": 3,
+        "start": "2026-09-01",
+        "end": "2026-09-30",
+        "class": "IRONFLOW_ESTIMAND_NOVEL"
+      }
+    ],
+    "note": "Test blocks are estimand-novel (new source family + new target). Expanding-window walk-forward: fit on train+val+preceding test blocks, evaluate next test block."
+  },
+  "gate": {
+    "pass_conditions": [
+      "relative_qlike_reduction_C2_vs_B1 >= 2.0%",
+      "block_bootstrap_ci_hi < 0 (excludes zero in favorable direction)",
+      "n_paired_instruments >= 5",
+      "n_test_blocks_with_data >= 3"
+    ],
+    "verdict_space": [
+      "PASS",
+      "NOT_MET"
+    ],
+    "null_handling": "Record NOT_MET honestly; do not retune thresholds; install next materially different heavy cell if NOT_MET."
+  },
+  "constraints": {
+    "no_outcome_peeking_before_freeze": true,
+    "no_threshold_tuning_after_freeze": true,
+    "no_sealed_artifact_mutation": true,
+    "no_paid_or_credentialed_data": true,
+    "no_network_for_outcomes": true,
+    "H2_shek_replication_remains": "EXPLORATORY_ONLY (promotable=false)"
+  }
+}

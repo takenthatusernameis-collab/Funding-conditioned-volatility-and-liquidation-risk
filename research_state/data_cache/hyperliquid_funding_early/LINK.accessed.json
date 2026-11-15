@@ -1,11 +1,1 @@
-{
-  "fetched_utc": "2026-11-12T13:42:16Z",
-  "coin": "LINK",
-  "endpoint": "fundingHistory",
-  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
-  "rows": 4416,
-  "sha256": "afe586fa8ca15b142da18db1426c6524dd4735279f30ba254e65186519ced15d",
-  "http_status": 200,
-  "unauthenticated": true,
-  "paginated_at": 500
-}
+{"fetched_utc":"2026-11-15T18:12:29Z","coin":"LINK","month":"2025-03..2025-10","endpoint":"fundingHistory","interval":"1h","start_ms":1740787200000,"end_ms":1761955199000,"rows":5872,"sha256":"6ffcc3e12efa29f09b9f3871bc1bf1b5cc80f57dfcdb725f1d823a91d746cd17","http_status":200,"api_key_required":false,"requester_pays":false,"signature_required":false,"unauthenticated":true,"license":"Hyperliquid public API, unauthenticated; no terms restriction on research use identified"}

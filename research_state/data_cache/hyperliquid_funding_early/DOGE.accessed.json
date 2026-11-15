@@ -1,11 +1,1 @@
-{
-  "fetched_utc": "2026-11-12T13:41:54Z",
-  "coin": "DOGE",
-  "endpoint": "fundingHistory",
-  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
-  "rows": 4416,
-  "sha256": "10ac3b30fed1901ce03a9c6f07e5db0d658c61475d79b1fdadb3b6c7564dd751",
-  "http_status": 200,
-  "unauthenticated": true,
-  "paginated_at": 500
-}
+{"fetched_utc":"2026-11-15T18:12:21Z","coin":"DOGE","month":"2025-03..2025-10","endpoint":"fundingHistory","interval":"1h","start_ms":1740787200000,"end_ms":1761955199000,"rows":5872,"sha256":"e04341e445d97d7e90b24be9d621f769e23fa340640a9ad24a02f12c7a4a7e40","http_status":200,"api_key_required":false,"requester_pays":false,"signature_required":false,"unauthenticated":true,"license":"Hyperliquid public API, unauthenticated; no terms restriction on research use identified"}

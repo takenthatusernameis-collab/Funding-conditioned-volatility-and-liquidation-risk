@@ -1,11 +1,1 @@
-{
-  "fetched_utc": "2026-11-12T13:41:33Z",
-  "coin": "BNB",
-  "endpoint": "fundingHistory",
-  "window_utc": "2025-05-01T00:00:00Z .. 2025-11-01T00:00:00Z",
-  "rows": 4416,
-  "sha256": "31da8ea1fd6db3b72bf1d1009c983be5654e35894e4b78523dacd13b802e21dc",
-  "http_status": 200,
-  "unauthenticated": true,
-  "paginated_at": 500
-}
+{"fetched_utc":"2026-11-15T18:11:18Z","coin":"BNB","month":"2025-03..2025-10","endpoint":"fundingHistory","interval":"1h","start_ms":1740787200000,"end_ms":1761955199000,"rows":5872,"sha256":"1ae93e13ec83dfab645c1f74979cd7569ba9e0c3fe5fae2be21531b2a982440f","http_status":200,"api_key_required":false,"requester_pays":false,"signature_required":false,"unauthenticated":true,"license":"Hyperliquid public API, unauthenticated; no terms restriction on research use identified"}

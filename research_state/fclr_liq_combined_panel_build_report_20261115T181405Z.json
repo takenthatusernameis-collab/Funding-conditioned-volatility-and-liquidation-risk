@@ -1,0 +1,180 @@
+{
+  "generated_utc": "2026-11-15T18:14:19Z",
+  "experiment_id": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
+  "phase": "COMBINED_PANEL_BUILD",
+  "panel_path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "funded_coins": [
+    "AAVE",
+    "ADA",
+    "AVAX",
+    "BNB",
+    "BTC",
+    "CRV",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "LTC",
+    "NEAR",
+    "SOL",
+    "SUI",
+    "UNI",
+    "XRP"
+  ],
+  "n_events_before_filters": 1779594,
+  "n_events_after_dedup": 1740415,
+  "n_rows_panel": 1740415,
+  "dedup_keys": [
+    "coin",
+    "timestamp",
+    "notional_usd",
+    "tx_hash"
+  ],
+  "causal_features": [
+    "fundingRate",
+    "premium",
+    "abs_fund_pct",
+    "mark",
+    "ema_dist",
+    "rv24h",
+    "rv168h"
+  ],
+  "per_coin": {
+    "AAVE": {
+      "n_events": 14364,
+      "n_with_funding": 14364,
+      "n_with_mark": 14364,
+      "n_with_rv24h": 14364,
+      "n_with_rv168h": 14364,
+      "first_ts": "2025-03-23T07:52:20.927000+00:00",
+      "last_ts": "2026-10-31T06:47:29.835000+00:00"
+    },
+    "ADA": {
+      "n_events": 10428,
+      "n_with_funding": 10428,
+      "n_with_mark": 10428,
+      "n_with_rv24h": 10428,
+      "n_with_rv168h": 10428,
+      "first_ts": "2025-03-23T00:20:02.722000+00:00",
+      "last_ts": "2026-10-31T15:28:27.568000+00:00"
+    },
+    "AVAX": {
+      "n_events": 11944,
+      "n_with_funding": 11944,
+      "n_with_mark": 11944,
+      "n_with_rv24h": 11944,
+      "n_with_rv168h": 11944,
+      "first_ts": "2025-03-23T11:20:20.063000+00:00",
+      "last_ts": "2026-10-30T15:07:04.799000+00:00"
+    },
+    "BNB": {
+      "n_events": 10099,
+      "n_with_funding": 10099,
+      "n_with_mark": 10099,
+      "n_with_rv24h": 10099,
+      "n_with_rv168h": 10099,
+      "first_ts": "2025-03-24T10:53:47.059000+00:00",
+      "last_ts": "2026-10-31T17:13:48.371000+00:00"
+    },
+    "BTC": {
+      "n_events": 876796,
+      "n_with_funding": 876796,
+      "n_with_mark": 876796,
+      "n_with_rv24h": 876796,
+      "n_with_rv168h": 876796,
+      "first_ts": "2025-03-23T10:18:10.520000+00:00",
+      "last_ts": "2026-10-31T17:54:03.303000+00:00"
+    },
+    "CRV": {
+      "n_events": 9138,
+      "n_with_funding": 9138,
+      "n_with_mark": 9138,
+      "n_with_rv24h": 9138,
+      "n_with_rv168h": 9138,
+      "first_ts": "2025-03-22T19:00:18.471000+00:00",
+      "last_ts": "2026-10-30T15:06:24.627000+00:00"
+    },
+    "DOGE": {
+      "n_events": 21986,
+      "n_with_funding": 21986,
+      "n_with_mark": 21986,
+      "n_with_rv24h": 21986,
+      "n_with_rv168h": 21986,
+      "first_ts": "2025-03-24T00:20:06.824000+00:00",
+      "last_ts": "2026-10-30T01:31:17.449000+00:00"
+    },
+    "ETH": {
+      "n_events": 324332,
+      "n_with_funding": 324332,
+      "n_with_mark": 324332,
+      "n_with_rv24h": 324332,
+      "n_with_rv168h": 324332,
+      "first_ts": "2025-03-23T07:51:24.567000+00:00",
+      "last_ts": "2026-10-31T22:02:10.044000+00:00"
+    },
+    "LINK": {
+      "n_events": 14767,
+      "n_with_funding": 14767,
+      "n_with_mark": 14767,
+      "n_with_rv24h": 14767,
+      "n_with_rv168h": 14767,
+      "first_ts": "2025-03-24T05:36:46.047000+00:00",
+      "last_ts": "2026-10-31T20:01:11.137000+00:00"
+    },
+    "LTC": {
+      "n_events": 8910,
+      "n_with_funding": 8910,
+      "n_with_mark": 8910,
+      "n_with_rv24h": 8910,
+      "n_with_rv168h": 8910,
+      "first_ts": "2025-03-24T05:36:46.047000+00:00",
+      "last_ts": "2026-10-30T03:47:13.845000+00:00"
+    },
+    "NEAR": {
+      "n_events": 26968,
+      "n_with_funding": 26968,
+      "n_with_mark": 26968,
+      "n_with_rv24h": 26968,
+      "n_with_rv168h": 26968,
+      "first_ts": "2025-03-24T03:09:29.925000+00:00",
+      "last_ts": "2026-10-31T18:19:15.163000+00:00"
+    },
+    "SOL": {
+      "n_events": 269318,
+      "n_with_funding": 269318,
+      "n_with_mark": 269318,
+      "n_with_rv24h": 269318,
+      "n_with_rv168h": 269318,
+      "first_ts": "2025-03-22T23:08:15.246000+00:00",
+      "last_ts": "2026-10-31T11:56:41.393000+00:00"
+    },
+    "SUI": {
+      "n_events": 29908,
+      "n_with_funding": 29908,
+      "n_with_mark": 29908,
+      "n_with_rv24h": 29908,
+      "n_with_rv168h": 29908,
+      "first_ts": "2025-03-23T08:22:57.218000+00:00",
+      "last_ts": "2026-10-31T00:40:46.455000+00:00"
+    },
+    "UNI": {
+      "n_events": 11168,
+      "n_with_funding": 11168,
+      "n_with_mark": 11168,
+      "n_with_rv24h": 11168,
+      "n_with_rv168h": 11168,
+      "first_ts": "2025-03-23T10:18:10.520000+00:00",
+      "last_ts": "2026-10-31T00:34:21.213000+00:00"
+    },
+    "XRP": {
+      "n_events": 100289,
+      "n_with_funding": 100289,
+      "n_with_mark": 100289,
+      "n_with_rv24h": 100289,
+      "n_with_rv168h": 100289,
+      "first_ts": "2025-03-23T11:19:22.810000+00:00",
+      "last_ts": "2026-10-30T14:17:23.629000+00:00"
+    }
+  },
+  "notes": "Past-only as-of joins (direction=backward); no zero-fill; no look-ahead. 4h candleSnapshot is the RV source (1h is live-only for old ranges)."
+}
