@@ -1,11 +1,11 @@
-# AGENT HANDOFF — 2026-11-15T23:05:12Z
+# AGENT HANDOFF — 2026-11-15T23:13:19Z
 
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
 **Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Sole durable handoff:** this file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` and `NEXT_SESSION_TASK.md` = tombstones (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore. `research_state/FCLR_CAMPAIGN_NEXT.md` = SUPERSEDED historical evidence.
 
-## STATE (verified 2026-11-15T23:05:12Z, HEAD af89eb624)
-- **Full regression:** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (baseline 371s; green on clean tree).
+## STATE (verified 2026-11-15T23:13:19Z, HEAD f839b2726, tree clean)
+- **Full regression:** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (baseline 371s; green on clean tree at HEAD f839b2726).
 - **Scope drift:** `python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195 reason=OK`.
 - **Invariants:** `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → 38 tests OK.
 - **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` | `TRIGGER_ONLY` | `program_status=BOUNDED_TRIGGER_ONLY` | `next_action_heavy=null` | `all_terminal=true`.
@@ -20,11 +20,12 @@
 3. **Full suite was "started but not completed" in the prior handoff.** Now verified green end-to-end (1341 tests, 0 failures, 1 skipped).
 4. **Reverted test-mutated cache timestamp** (`research_state/ironflow_fastpath_cache.json`) so the tree is clean for the next session.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (heavy, default)
-**Mission:** keep the program in a heavy-working, trigger-ready state. "No trigger fired" is NOT a reason to stop. The next session must execute the bounded, non-skippable reproducibility/integrity/power campaign in `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` and leave cited artifacts — not just a green suite.
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (heavy, default — non-skippable)
+
+**Repository mission (FCLR):** determine whether extreme perpetual-futures funding conditions, realized volatility, and pre-specified price-dislocation/smoothing features improve out-of-sample forecasts of future volatility and liquidation-related stress — using only admissible, free, unauthenticated data. Track A (observed liquidation) is externally blocked (`data_through=2026-10`; 2026-11..2027-01 CONFIRMED_ABSENT). All cached-data estimands are terminal. **The agent-removable heavy work is the bounded reproducibility/integrity/power campaign below — not a new estimand.**
 
 ### Phase A — Trigger check (run once at session start, no polling)
-1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all triggers remain OPEN and `data_through=2026-10` with 2026-11..2027-01 absent. Do not re-probe or poll.
+1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all 4 triggers remain OPEN and `data_through=2026-10` with 2026-11..2027-01 absent. Record timestamp + verdict in `AGENT_HANDOFF.md`. Do not re-probe or poll.
 2. If any trigger is newly satisfied with its required evidence artifact, pivot immediately to Phase D.
 
 ### Phase B — Heavy reproducibility & integrity (mandatory while trigger-only)
@@ -41,6 +42,8 @@
 
 ### Phase E — Closeout
 9. Update this handoff (timestamp, verified/fixed items, exact commands/results, remaining external blockers). Commit a checkpoint only if repository convention/permissions require it; otherwise leave the tree clean and documented.
+
+**Stop cleanly ONLY when:** trigger checked once + every Phase B/C artifact written + full suite/guards green + this handoff reflects ground truth with external blockers documented. "No trigger → stop cleanly" is NOT completion. Phase B and Phase C are non-skippable heavy work.
 
 ## HARD CONSTRAINTS (non-negotiable)
 - ❌ Never reopen sealed/terminal families or mutate sealed artifacts; never edit `.github/workflows/*`.
