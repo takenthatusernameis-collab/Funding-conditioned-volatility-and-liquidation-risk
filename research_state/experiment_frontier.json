@@ -1,5 +1,51 @@
 [
   {
+    "task": "FCLR-POWER-CALIBRATION-20261115T002244Z",
+    "rank": 0,
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "generated": "2026-11-15T00:22:44Z",
+    "refreshed": "2026-11-15T00:22:44Z",
+    "last_checked": "2026-11-15T00:22:44Z",
+    "next_unfinished_task": "Freeze prereg (FROZEN_PRE_OUTCOMES, promotable=false, EXPLORATORY_ONLY) then execute scripts/fclr_power_calibration.py to assign per-track power/MDE verdicts (NULL_INFORMATIVE / NULL_UNDERPOWERED / INCONCLUSIVE) for the vol and observed-liquidation nulls.",
+    "blockers": "No agent-removable data blocker: analysis is offline and read-only over persisted design quantities. External observed-liquidation source hunt is TERMINAL_NO_GO (evidence in research_state/liquidation_source_campaign.md).",
+    "next_action_heavy": "Implement scripts/fclr_power_calibration.py + tests/test_fclr_power_calibration.py; emit evaluation_summary_FCLR-POWER-CALIBRATION-<UTC>.json/.md; verify regression and campaign gate; update handoff. Do not re-fit models, recompute sealed contrasts, or re-probe exhausted sources.",
+    "resume_triggers": [
+      "POWER_CALIBRATION_PREREG_FROZEN",
+      "POWER_CALIBRATION_EVAL_MISSING"
+    ],
+    "phases": [
+      {
+        "phase": "DESIGN_POWER_AND_MDE_CALIBRATION",
+        "status": "READY_EXECUTE",
+        "claim": "Persisted design SEs/null quantiles are sufficient to compute analytic MDE and achieved power at the pre-specified floors for the vol (2% QLIKE) and observed-liquidation (|IC|>=0.05) nulls, without re-fitting models or touching sealed outcomes.",
+        "expected_artifacts": [
+          "scripts/fclr_power_calibration.py",
+          "tests/test_fclr_power_calibration.py",
+          "research_state/prereg_fclr_power_calibration_<UTC>.json",
+          "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-<UTC>.json",
+          "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-<UTC>.md"
+        ],
+        "inputs": {
+          "vol_eval": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.json",
+          "vol_prereg": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+          "liq_eval": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json",
+          "liq_prereg": "research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json"
+        },
+        "verdict_space": [
+          "NULL_INFORMATIVE",
+          "NULL_UNDERPOWERED",
+          "INCONCLUSIVE"
+        ]
+      }
+    ],
+    "evidence": {
+      "handoff": "AGENT_HANDOFF.md",
+      "next_campaign_status": "no feasible 3-block design in any domain; all cached 3-block cells exhausted",
+      "external_source_hunt": "TERMINAL_NO_GO (research_state/liquidation_source_campaign.md, track_a_deadend_map.md)"
+    }
+  },
+  {
     "task": "FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z",
     "rank": 1,
     "status": "COMPLETED_VALIDATED",
@@ -51,9 +97,9 @@
   },
   {
     "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T191615Z",
-    "rank": 0,
-    "status": "TRIGGER_ONLY",
-    "program_status": "BOUNDED_TRIGGER_ONLY",
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "generated": "2026-11-14T19:16:15Z",
     "refreshed": "2026-11-14T21:16:13Z",
     "last_checked": "2026-11-14T21:16:13Z",
@@ -89,7 +135,10 @@
       "disjoint_cross": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z COMPLETED_VALIDATED EXPLORATORY_NULL (gate PASS).",
       "next_campaign_status": "scripts/next_campaign_status.py: 2024-06 FEASIBLE (train 2024-04-25..2024-05-24, test 2024-06-01..2024-06-30); executable heavy work REMAINS.",
       "gate4": "NO_VALID_GATE4_TRIGGER; promotable=false."
-    }
+    },
+    "superseded_by": "FCLR-POWER-CALIBRATION-20261115T002244Z",
+    "superseded_at": "2026-11-15T00:22:44Z",
+    "note": "Demoted so exactly one rank-0 heavy campaign remains; see AGENT_HANDOFF.md."
   },
   {
     "task": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",

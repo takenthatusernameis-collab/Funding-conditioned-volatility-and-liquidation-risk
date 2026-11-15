@@ -694,6 +694,14 @@ SCRIPT_REGISTRY = {
     "class": "track_c_sealed_volatility",
     "reason": "fclr_fwd_vol_2025_disjoint_reconcile.py: sealed-vs-corrected estimator/data reconciliation audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
   },
+  "fclr_fwd_vol_2024_disjoint_2024_06.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2024_disjoint_2024_06.py: singleton 2024-06 disjoint volatility diagnostic (EXPLORATORY_ONLY, promotable=false, EXPLAINED_BY_ESTIMATOR); cached-only, no liquidation outcome reads, timestamped Track C artifacts."
+  },
+  "fclr_fwd_vol_2025_disjoint_corrected_audit.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_fwd_vol_2025_disjoint_corrected_audit.py: corrected-estimator robustness audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
+  },
   "fclr_fwd_vol_2025h2_cross.py": {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_fwd_vol_2025h2_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."

@@ -109,9 +109,9 @@
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile).",
-  "generated": "20261114T211600Z",
+  "generated": "20261115T002500Z",
   "registry_version": "1.3",
-  "script_count": 180,
+  "script_count": 182,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -832,6 +832,14 @@
     "fclr_fwd_vol_2025_disjoint_reconcile.py": {
       "class": "track_c_sealed_volatility",
       "reason": "fclr_fwd_vol_2025_disjoint_reconcile.py: sealed-vs-corrected estimator/data reconciliation audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
+    },
+    "fclr_fwd_vol_2024_disjoint_2024_06.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr_fwd_vol_2024_disjoint_2024_06.py: singleton 2024-06 disjoint volatility diagnostic (EXPLORATORY_ONLY, promotable=false, EXPLAINED_BY_ESTIMATOR); cached-only, no liquidation outcome reads, timestamped Track C artifacts."
+    },
+    "fclr_fwd_vol_2025_disjoint_corrected_audit.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr_fwd_vol_2025_disjoint_corrected_audit.py: corrected-estimator robustness audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"
