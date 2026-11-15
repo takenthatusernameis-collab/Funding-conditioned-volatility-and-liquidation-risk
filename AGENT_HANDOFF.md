@@ -1,8 +1,10 @@
 # Durable Agent Handoff — sole authoritative version
 
-**SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_TASK.md` is a pointer to the INITIAL TASK MESSAGE below; `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is a retired/superseded proposal (never execute its Track C funding-ablations campaign). Older handoff revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
+**SOLE DURABLE HANDOFF — START HERE (refreshed 2026-11-15T17:54:17Z).** `NEXT_SESSION_TASK.md` is a pointer to the INITIAL TASK MESSAGE below; `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is a retired/superseded proposal (never execute its Track C funding-ablations campaign). Older handoff revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, do not reopen sealed verdicts, and do not create competing handoff files.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T170000Z` (SOLE TASK — the only active handoff)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T17:54:17Z` (SOLE TASK — the only active handoff)
+
+> **REFRESHED 2026-11-15T17:54:17Z (baseline re-verified this session):** campaign gate 19/19 PASS, fwd-vol gate PASS, scope drift 187/187 OK, rank-0 `FCLR-LIQ-COMBINED-PANEL-20261115T170000Z` READY_EXECUTE/ACTIVE. This is the only actionable handoff. Heavy work is mandatory/default; status-only sessions are not completion. Do not create parallel handoff files; do not stop because no trigger fired.
 
 > **READ THIS FIRST.** This file is the single durable handoff. `NEXT_SESSION_TASK.md` points here; `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is retired. **Heavy work is the DEFAULT path, NOT trigger-gated.** Do **not** write status-only handoff notes, do **not** re-probe exhausted families, do **not** reopen sealed verdicts, and do **not** re-edit this file's prose before producing the next campaign deliverables.
 
