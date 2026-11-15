@@ -98,6 +98,12 @@
       "action": "add",
       "id": "fclr_shek_scale_register_20261115T070318Z",
       "summary": "Register fclr_shek_scale.py (track_c_sealed_volatility) for the FCLR-SHEK-SCALE scaled correction-hazard campaign; EXPLORATORY_ONLY, promotable=false, sealed artifacts unmutated. Registry now covers all 185 scripts/*.py."
+    },
+    {
+      "action": "add",
+      "id": "fclr_verify_fast_identify_register_20261115T082826Z",
+      "reason": "Register verify_fast_identify.py (unclassified_auxiliary) restoring drift green: offline canonical-vs-fast funding-extreme equivalence utility used by the FCLR-SHEK-SCALE sensitivity grid; registry now covers all 186 scripts/*.py.",
+      "script": "verify_fast_identify.py"
     }
   ],
   "changes": [
@@ -118,10 +124,10 @@
       "summary": "register fclr023_gate4_blocker_resolution_action_plan.py as track_c_or_aux_audit_utility read-only blocker-resolution action plan (packet_ready_for_human_or_prereg_action=false, no satisfaction inference, no fabrication)"
     }
   ],
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile). Reconciled with FCLR-SHEK-SCALE registration (fclr_shek_scale.py) at 2026-11-15T07:03:18Z; registry now covers all 185 scripts/*.py.",
-  "generated": "20261115T070318Z",
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile). Reconciled with FCLR-SHEK-SCALE registration (fclr_shek_scale.py) at 2026-11-15T07:03:18Z; registry now covers all 186 scripts/*.py (verify_fast_identify.py added 2026-11-15T08:28:26Z).",
+  "generated": "20261115T082826Z",
   "registry_version": "1.3",
-  "script_count": 185,
+  "script_count": 186,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -862,6 +868,10 @@
     "fclr_design_feasibility.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr_design_feasibility.py: deterministic offline required-n/decidability inversion over persisted power-calibration SEs and cached panel counts (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); no model re-fit, no SE re-derivation from raw data, no network; writes timestamped evaluation artifacts only."
+    },
+    "verify_fast_identify.py": {
+      "class": "unclassified_auxiliary",
+      "reason": "verify_fast_identify.py: local deterministic equivalence check of the fast sliding-window funding-extreme identifier vs the canonical O(n^2) implementation on cached Arm A + Arm B series; print-only, no research_state writes, no Track A liquidation outcome claims."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"

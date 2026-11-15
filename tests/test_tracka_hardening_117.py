@@ -464,6 +464,10 @@ SCRIPT_REGISTRY = {
   "write_trigger_harden_successor.py": {
     "class": "prereg_utility",
     "reason": "Trigger-hardening artifacts; no outcome reads."
+  },
+  "verify_fast_identify.py": {
+    "class": "unclassified_auxiliary",
+    "reason": "verify_fast_identify.py: local deterministic equivalence check (fast sliding-window vs canonical O(n^2) funding-extreme identifier) on cached series only; prints comparison results, no research_state writes, no liquidation outcome claims."
   }
 ,
   "_debug_abl.py": {
