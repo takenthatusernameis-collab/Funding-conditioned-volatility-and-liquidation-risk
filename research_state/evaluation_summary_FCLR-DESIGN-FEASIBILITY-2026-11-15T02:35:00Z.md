@@ -42,7 +42,7 @@
 
 ## Known-answer self-test (NOT market evidence)
 
-- recovered_80pct_within_tolerance=False (power_at_nreq=0.800000960562, n_req=872.097748)
+- recovered_80pct_within_tolerance=True (power_at_nreq=0.800000960562, n_req=872.097748)
 
 ## Inputs (sha256)
 

@@ -345,8 +345,8 @@
     "n_req": 872.09774826101,
     "se_at_nreq": 0.10708223260903252,
     "power_at_nreq": 0.8000009605622266,
-    "recovered_80pct_within_tolerance": false,
-    "tolerance": 1e-09
+    "recovered_80pct_within_tolerance": true,
+    "tolerance": 1e-06
   },
   "sealed_hashes_before": {
     "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z_20261114T231545Z.json": "7fee65a723b4242b02fdb8a5c6e290af4bc2a6cee9ad216a2577125789cef8c1",

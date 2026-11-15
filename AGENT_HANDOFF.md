@@ -1,4 +1,4 @@
-# Durable Agent Handoff — refreshed 2026-11-15T02:35:00Z (sole authoritative version)
+# Durable Agent Handoff — refreshed 2026-11-15T02:41:13Z (sole authoritative version)
 
 **SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_HANDOFF.md` is a tombstone; older `AGENT_HANDOFF` revisions, `research_state/FCLR_CAMPAIGN_NEXT.md`, and obsolete next-plan files are superseded historical evidence. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
 
@@ -12,15 +12,31 @@
 
 Artifacts (all EXPLORATORY_ONLY, promotable=false): `research_state/prereg_fclr_design_feasibility_2026-11-15T02:35:00Z.json`, `scripts/fclr_design_feasibility.py`, `tests/test_fclr_design_feasibility.py` (19 tests OK), `research_state/evaluation_summary_FCLR-DESIGN-FEASIBILITY-2026-11-15T02:35:00Z.{json,md}`. Scope registry updated (184 scripts) and synced to `tests/test_tracka_hardening_117.py`. Sealed artifacts unchanged (vol sealed eval hash `78537585fe59ed4a75d7861a80bf3964e35c97a6a53c48a39c6d012354e69215` unchanged; `sealed_artifacts_mutated=false`).
 
+## NEXT FOCUS CAMPAIGN (heavy work is trigger-gated, never avoided)
+
+**`FCLR-TRIGGER-READINESS-CAMPAIGN-20261115T024113Z` — trigger-readiness campaign (not cached-heavy-work).** No agent-removable heavy work remains on cached/admissible data. The program is in trigger-only sentinel state. Future agents must not avoid heavy work: when a valid resume trigger materializes, heavy confirmatory work executes immediately with zero bottlenecks. The campaign maintains readiness so no trigger is missed due to missing templates, unready scripts, or uninitialized infrastructure.
+
+Campaign scope:
+- Maintain pre-frozen preregistration templates for the Gate 4 confirmatory flow, ready to instantiate with a new experiment ID when `GATE4_BRANCH_1` fires.
+- Maintain a §16 admissibility audit template for materially new liquidation source families, ready to run before any prereg/outcomes when `NEW_OBSERVED_LIQUIDATION_SOURCE` fires.
+- Keep experiment runner and gate scripts green and ready (`scripts/fclr_campaign_gate.py`, `scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py`, `scripts/check_tracka_scope_registry_drift.py`).
+- Event-driven only: **no polling, no schedulers/controllers, no edits to `.github/workflows/*`, no paid/credentialed/manual data, no re-running tested windows, no re-probing TERMINAL_NO_GO families.**
+- Heavy work executes only on a valid trigger; otherwise the session records trigger status and stops cleanly.
+
 ## FIRST ACTION (timestamped initial task for the next agentic work session)
 
-**Now (2026-11-15T02:35:00Z): `FCLR-TRIGGER-ONLY-SENTINEL-20261115T023500Z` — no agent-removable heavy work remains on cached/admissible data. Do not do busywork. Act immediately and heavily only when a valid external trigger materializes.**
+**Now (2026-11-15T02:41:13Z): `FCLR-TRIGGER-READINESS-20261115T024113Z` — no agent-removable heavy work remains on cached/admissible data. Do not do busywork. Do not re-run exhausted campaigns. Do not add polling, schedulers, controllers, or workflow edits.**
 
-Cached/admissible program is exhausted: power calibration complete (VOL=NULL_UNDERPOWERED, LIQ=INCONCLUSIVE), design-feasibility complete (VOL structurally UNDECIDABLE_ON_CACHE; LIQ DECIDABLE_ON_CACHE but sealed liq verdict remains non-confirmatory due to null asymmetry), `scripts/next_campaign_status.py` shows no feasible 3-block design in any domain, and the observed-liquidation external hunt is TERMINAL_NO_GO. There is **no valid cached heavy campaign to invent**; re-running/re-probing exhausted work is forbidden and not progress.
+The next session's sole task is trigger readiness:
+1. Verify neither resume trigger has fired:
+   - `GATE4_BRANCH_1`: a valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears with `status=RESOLVED_VERIFIED`, `fabricated=false`, and required human/legal attestation (not agent-settable).
+   - `NEW_OBSERVED_LIQUIDATION_SOURCE`: a **materially new** source family (not a re-probe of Binance liquidationSnapshot/forceOrders, OKX, Bybit, Deribit, Zenodo, OSF, arXiv, GitHub, CryptoDataDownload, HuggingFace exhausted sets, metpie 65-day window, or ironflow short untouched region) has appeared and passed §16 admissibility audit.
+2. If a trigger has fired: execute heavy confirmatory work immediately per the trigger protocol below; do not defer.
+3. If no trigger has fired: record evidence of trigger status (exact paths checked, result) in `AGENT_HANDOFF.md` and stop cleanly. Status-only trigger checks are acceptable here only because no cached heavy work exists.
 
 **On trigger (execute heavy work; do not defer):**
-1. **`GATE4_BRANCH_1`** — a valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears with `status=RESOLVED_VERIFIED`, `fabricated=false`, and required human/legal attestation (not agent-settable). Action: freeze a new prereg pre-outcomes for the Gate 4 confirmatory flow and execute it per `RESEARCH_PROMPT.md`/gate protocol; record outcomes in new timestamped artifacts. `promotable` only if gate passes.
-2. **`NEW_OBSERVED_LIQUIDATION_SOURCE`** — a **materially new** source family (not a re-probe of Binance liquidationSnapshot/forceOrders, OKX, Bybit, Deribit, Zenodo, OSF, arXiv, GitHub, CryptoDataDownload, HuggingFace exhausted sets, metpie 65-day window, or ironflow short untouched region). Action: bounded probe + §16 admissibility audit artifact **before** any prereg/outcomes; if ADMISSIBLE, freeze prereg pre-outcomes then build/eval/verdict with new experiment ID. If inadmissible, record evidence-backed blocker.
+1. **`GATE4_BRANCH_1`** — Action: freeze a new prereg pre-outcomes for the Gate 4 confirmatory flow and execute it per `RESEARCH_PROMPT.md`/gate protocol; record outcomes in new timestamped artifacts. `promotable` only if gate passes.
+2. **`NEW_OBSERVED_LIQUIDATION_SOURCE`** — Action: bounded probe + §16 admissibility audit artifact **before** any prereg/outcomes; if ADMISSIBLE, freeze prereg pre-outcomes then build/eval/verdict with new experiment ID. If inadmissible, record evidence-backed blocker.
 
 **Resume triggers:** `GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`. **Do not** poll, add schedulers/controllers, edit `.github/workflows/*`, fetch paid/credentialed/manual data, re-run tested windows, re-probe TERMINAL_NO_GO families, or relabel exploratory as confirmatory.
 
