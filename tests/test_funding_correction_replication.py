@@ -138,6 +138,28 @@ class TestFundingCorrectionReplication(unittest.TestCase):
                     "corrected_count"):
             self.assertIn(key, res)
 
+    def test_nested_cache_funding_loads_for_scaled_sample(self):
+        """Scaled Arm A (2024-04..2026-10) funding must load from the nested
+        research_state/data_cache/{sym}_{YYYY_MM}/{sym}-fundingRate-{YYYY-MM}/
+        layout. Before the fix the fallback only knew a flat 'fundingRate/'
+        subdir, so every non-2024-Q1 month silently yielded zero events and the
+        scaled Shek campaign was un-runnable. Guard against silent zero-events.
+        """
+        for sym in ("BTCUSDT", "ETHUSDT", "SOLUSDT"):
+            res = replicate_funding_correction(
+                symbols=[sym], months=["2025-06"])
+            self.assertGreater(
+                res["total_events"], 0,
+                f"{sym} 2025-06 produced 0 events; nested funding layout not loaded",
+            )
+
+    def test_scaled_month_range_nonzero_events(self):
+        """A representative scaled month (2026-01, deep in the 2024-04..2026-10
+        Arm A range) must reconstruct events, proving the whole range is usable."""
+        res = replicate_funding_correction(
+            symbols=["BTCUSDT", "ETHUSDT"], months=["2026-01"])
+        self.assertGreater(res["total_events"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -57,6 +57,12 @@ BULK_TESTED_WINDOWS = [
     ("2025-05-25", "2026-01-17", "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)"),
     # Forward reserve consumed by the 2026Q1Q2 forward cells.
     ("2026-01-18", "2026-04-30", "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD (EXPLORATORY_NULL; region exhausted)"),
+    # FCLR-011 sealed PASS test window (2026-05-08..2026-08-06, 3 blocks x 30d, 91d).
+    # Consumed by the sealed FCLR-011 evaluation; do NOT re-list as untouched.
+    ("2026-05-01", "2026-08-06", "FCLR-011 sealed PASS test window (2026-05-08..2026-08-06; EXPLORATORY_ONLY)"),
+    # FCLR-FWD-VOL-011-CONFIRM forward walk (2026-08-03..2026-10-31, 3 blocks x 30d).
+    # NOT_REPLICATED (rel -5.55%, CI favours B1); do NOT re-list as untouched.
+    ("2026-08-03", "2026-10-31", "FCLR-FWD-VOL-011-CONFIRM forward walk (2026-08-03..2026-10-31; NOT_REPLICATED)"),
 ]
 # A forward cell is allowed to use a shorter, pre-registered window when the
 # untouched region cannot fit the 30/30/30 rolling-origin skeleton. Minimum for

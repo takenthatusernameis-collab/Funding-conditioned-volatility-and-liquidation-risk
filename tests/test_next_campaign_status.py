@@ -222,6 +222,43 @@ class TestNextCampaignStatus(unittest.TestCase):
         self.assertFalse(disjoint["campaign_feasible"])
         self.assertGreaterEqual(disjoint["n_feasible"], 0)
 
+    def test_extended_frontier_excludes_fclr011_tested_windows(self):
+        """FCLR-011 (2026-05-08..2026-08-06) + FWD-VOL-011-CONFIRM forward
+        (2026-08-03..2026-10-31) consume 2026-05-01..2026-10-31 in the extended
+        Hyperliquid stores too. Before the fix, BULK_TESTED_WINDOWS listed only the
+        two ironflow ranges, so hl_extended_frontier() wrongly surfaced
+        2026-05-01..2026-10-31 (184d) as FEASIBLE phantom heavy work, contradicting
+        AGENT_HANDOFF's 'no feasible 3-block design in ANY domain'. Guard against a
+        re-opening of an already-tested window (inverse of the old false-closure bug).
+        """
+        hl = self.mod.hl_extended_frontier()
+        for r in hl["runs"]:
+            # No run may overlap the consumed 2026-05-08..2026-10-31 region.
+            overlaps = not (r["end"] < "2026-05-08" or r["start"] > "2026-10-31")
+            self.assertFalse(
+                overlaps and r["span_days"] >= self.mod.MIN_FORWARD_DESIGN_DAYS,
+                f"phantom feasible run over tested FCLR-011 windows: {r}",
+            )
+            self.assertFalse(r["feasible"], f"run wrongly feasible: {r}")
+            self.assertFalse(r["feasible_forward"], f"run wrongly forward-feasible: {r}")
+        self.assertFalse(hl["any_feasible"])
+        self.assertFalse(hl["any_forward_feasible"])
+
+    def test_bulk_tested_windows_cover_fclr011(self):
+        """The FCLR-011 + forward-walk Binance windows must be registered so no
+        domain re-proposes them as untouched."""
+        covered = [(a, b) for (a, b, _lbl) in self.mod.BULK_TESTED_WINDOWS]
+        # A window starting on/before 2026-05-08 and ending on/after 2026-08-06.
+        self.assertTrue(
+            any(a <= "2026-05-08" and b >= "2026-08-06" for (a, b) in covered),
+            f"FCLR-011 test window not covered: {covered}",
+        )
+        # A window covering the forward walk through 2026-10-31.
+        self.assertTrue(
+            any(a <= "2026-08-03" and b >= "2026-10-31" for (a, b) in covered),
+            f"forward-walk window not covered: {covered}",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

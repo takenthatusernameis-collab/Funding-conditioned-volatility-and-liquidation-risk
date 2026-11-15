@@ -331,13 +331,27 @@ def replicate_funding_correction(symbols=None, months=None):
             fund_dir = REPO / f"{sym}-fundingRate-{month}"
             fund_csv = fund_dir / f"{sym}-fundingRate-{month}.csv"
             if not fund_csv.exists():
-                # Fallbacks to canonical provenanced sources for 2024-01..03 (repo-root
-                # funding dirs were never populated for these months):
-                #   1) research_state/data_cache/{sym}_{YYYY_MM}/fundingRate-YYYY-MM/
-                #      {sym}-fundingRate-YYYY-MM.csv  (canonical cache layout)
-                #   2) data/raw/{sym}-fundingRate-YYYY-MM.csv        (repo-root CSVs)
+                # Fallbacks to canonical provenanced sources (repo-root funding
+                # dirs are only populated for 2024-01..03; every other month lives
+                # in the nested research_state/data_cache cache):
+                #   1) research_state/data_cache/{sym}_{YYYY_MM}/{sym}-fundingRate-YYYY-MM/
+                #      {sym}-fundingRate-YYYY-MM.csv  (canonical nested cache layout,
+                #      used for 2024-04..2026-10 -- the scaled Arm A sample)
+                #   2) research_state/data_cache/{sym}_{YYYY_MM}/fundingRate/
+                #      {sym}-fundingRate-YYYY-MM.csv  (legacy flat layout)
+                #   3) data/raw/{sym}-fundingRate-YYYY-MM.csv        (repo-root CSVs)
                 # Unauthenticated local files only; no network, no fabrication.
-                alt = DATA_CACHE / f"{sym}_{month.replace('-', '_')}" / "fundingRate" / f"{sym}-fundingRate-{month}.csv"
+                cache_month = DATA_CACHE / f"{sym}_{month.replace('-', '_')}"
+                alt = cache_month / f"{sym}-fundingRate-{month}" / f"{sym}-fundingRate-{month}.csv"
+                if not alt.exists():
+                    alt = cache_month / "fundingRate" / f"{sym}-fundingRate-{month}.csv"
+                if not alt.exists():
+                    # Last resort: any CSV under the month cache whose name matches
+                    # the funding-rate file for this month (tolerates layout drift).
+                    matches = sorted(cache_month.rglob(f"{sym}-fundingRate-{month}.csv")) \
+                        if cache_month.is_dir() else []
+                    if matches:
+                        alt = matches[0]
                 if not alt.exists():
                     alt = REPO / "data" / "raw" / f"{sym}-fundingRate-{month}.csv"
                 if alt.exists():
