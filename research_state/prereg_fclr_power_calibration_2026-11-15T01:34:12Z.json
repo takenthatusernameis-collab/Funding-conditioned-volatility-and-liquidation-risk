@@ -1,0 +1,69 @@
+{
+  "experiment_id": "FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z",
+  "task": "FCLR-NEXT-002",
+  "campaign": "FCLR-POWER-CALIBRATION",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "pre_registered_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "does_not_reopen_sealed_verdict": true,
+  "audit_only": true,
+  "network_required": false,
+  "created_utc": "2026-11-15T01:34:12Z",
+  "objective": "Design-power and minimum-detectable-effect (MDE) calibration for concluded volatility and observed-liquidation nulls using only persisted design quantities (no model re-fit, no sealed-contrast recomputation, no outcome inspection beyond frozen inputs).",
+  "tracks": {
+    "volatility_forward_2025_disjoint": {
+      "verdict_source": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.json",
+      "prereg_source": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+      "panel_source": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+      "primary_contrast": "h24_C2_vs_B1",
+      "horizons": ["h6", "h24", "h72", "h168"],
+      "contrasts": ["C2_vs_B1", "C1_vs_B1", "C2_vs_C1"],
+      "materiality_floor_rel_reduction_pct": 2.0,
+      "materiality_floor_interpretation": "Improvement is a negative change in QLIKE; floor is |effect| >= 0.02 * baseline where baseline = |mean_diff| / (|rel_reduction_pct|/100).",
+      "se_method": "analytic from persisted 95% CI: SE = (ci_hi - ci_lo) / (2 * 1.96)",
+      "mde80_method": "MDE_80 = (z_0.975 + z_0.80) * SE = (1.96 + 0.8416212335729143) * SE",
+      "power_method": "two-sided achieved power at absolute floor: Phi(|delta|/SE - 1.96) + Phi(-|delta|/SE - 1.96)"
+    },
+    "observed_liquidation_xsec_forward": {
+      "verdict_source": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json",
+      "prereg_source": "research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json",
+      "panel_source": "research_state/tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet",
+      "materiality_floor_abs_ic": 0.05,
+      "sign_consistency_requirement": ">= 2/3 blocks same sign",
+      "se_method": "pooled analytic from persisted null quantiles: SE = (null_95th - null_5th) / (2 * 1.6448536269514722) with symmetry validation (|mid|/width <= 0.01)",
+      "per_block_se_method": "approximation scaled by n ratio from pooled null SE: SE_block = SE_pooled * sqrt(pooled_n / block_n); explicitly flagged as approximation because per-block null quantiles are not persisted",
+      "mde80_method": "MDE_80 = (1.96 + 0.8416212335729143) * SE",
+      "power_method": "two-sided achieved power at |IC| floor: Phi(|delta|/SE - 1.96) + Phi(-|delta|/SE - 1.96)"
+    }
+  },
+  "verdict_rule": {
+    "NULL_INFORMATIVE": "achieved power at pre-specified floor >= 0.80",
+    "NULL_UNDERPOWERED": "achieved power < 0.80",
+    "INCONCLUSIVE": "required SE/inputs missing or unstable"
+  },
+  "alpha": 0.05,
+  "power_target": 0.80,
+  "inputs": {
+    "vol_eval": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.json",
+    "vol_eval_sha256": "b829fbe90a6da05f55f4be0821716ab802494452390eb867d29ee281a64d569b",
+    "vol_prereg": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+    "vol_prereg_sha256": "fcf3e7e505c62c3f13514f0b52364b28aa878870867f955898bb6143320aaefa",
+    "vol_panel": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+    "vol_panel_sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+    "liq_eval": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json",
+    "liq_eval_sha256": "3b94f07361ef2fc59de6bdf4534d587ddb5d0752a905d1d8591a134d451ac5f1",
+    "liq_prereg": "research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json",
+    "liq_prereg_sha256": "55e8ddd9938e5f6258b69bb20787622546154a12cbfe4295434bac95fd7c0594",
+    "liq_panel": "research_state/tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet",
+    "liq_panel_sha256": "990598685617b088344435ac8c3e318fcdb42ed5e342df82120a15340b91caac"
+  },
+  "expected_outputs": [
+    "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json",
+    "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.md",
+    "scripts/fclr_power_calibration.py",
+    "tests/test_fclr_power_calibration.py"
+  ]
+}

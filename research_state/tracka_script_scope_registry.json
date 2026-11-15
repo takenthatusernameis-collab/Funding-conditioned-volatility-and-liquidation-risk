@@ -88,6 +88,11 @@
       "action": "add",
       "id": "fclr_disjoint_register_20261114T211600Z",
       "summary": "Register the 4 scripts added by FCLR-FWD-VOL-2025-DISJOINT-CROSS and its reconciliation stage (coverage_audit_fwd_vol_2025_disjoint_cross.py, fclr_fwd_vol_2025_disjoint_cross.py, fclr_fwd_vol_2025_disjoint_cross_gate.py, fclr_fwd_vol_2025_disjoint_reconcile.py). All offline/exploratory Track C utilities and gates (EXPLORATORY_ONLY, promotable=false, no sealed mutation, no liquidation outcome reads). Registry now covers all 180 scripts/*.py."
+    },
+    {
+      "action": "add",
+      "id": "fclr_next_002_power_calibration_register",
+      "summary": "Register fclr_power_calibration.py (track_c_or_aux_audit_utility) for FCLR-NEXT-002 offline power/MDE calibration of concluded nulls; EXPLORATORY_ONLY, no sealed mutation."
     }
   ],
   "changes": [
@@ -111,7 +116,7 @@
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile).",
   "generated": "20261115T002500Z",
   "registry_version": "1.3",
-  "script_count": 182,
+  "script_count": 183,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -840,6 +845,10 @@
     "fclr_fwd_vol_2025_disjoint_corrected_audit.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr_fwd_vol_2025_disjoint_corrected_audit.py: corrected-estimator robustness audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
+    },
+    "fclr_power_calibration.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr_power_calibration.py: deterministic offline power/MDE calibration over persisted design quantities for concluded vol/liq nulls (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); reads frozen prereg/evals only, no model re-fit, no sealed-contrast recomputation, no network; writes timestamped evaluation artifacts only."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"
