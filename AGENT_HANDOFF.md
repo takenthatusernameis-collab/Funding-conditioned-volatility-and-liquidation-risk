@@ -1,10 +1,10 @@
 # Durable Agent Handoff — sole authoritative version
 
-**SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_HANDOFF.md` is a tombstone; older `AGENT_HANDOFF` revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` (self-superseded) are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
+**SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is a **superseded retired proposal** (retracted 2026-11-15T07:37:00Z — never execute its Track C/funding-ablations campaign); older `AGENT_HANDOFF` revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` (self-superseded) are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T07:30:00Z` (SOLE TASK — the only active handoff)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T07:37:00Z` (SOLE TASK — the only active handoff)
 
-> **READ THIS FIRST.** This file is the single durable handoff. `NEXT_SESSION_HANDOFF.md` is a tombstone; `research_state/FCLR_CAMPAIGN_NEXT.md` is self-superseded. Do **not** write status-only handoff notes, do **not** re-probe exhausted families, do **not** reopen sealed verdicts. **Do not re-edit this file's prose before producing the next campaign deliverables.** You may update this file ONLY at the end, by (a) appending a timestamped execution-record line and (b) installing the next heavy cell at rank 0 after `COMPLETED_VALIDATED`.
+> **READ THIS FIRST.** This file is the single durable handoff. `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is a retired proposal (withdrawn); `research_state/FCLR_CAMPAIGN_NEXT.md` is self-superseded. Do **not** write status-only handoff notes, do **not** re-probe exhausted families, do **not** reopen sealed verdicts. **Do not re-edit this file's prose before producing the next campaign deliverables.** You may update this file ONLY at the end, by (a) appending a timestamped execution-record line and (b) installing the next heavy cell at rank 0 after `COMPLETED_VALIDATED`.
 
 **START NOW — run this exact command block, do not re-derive it:**
 ```
@@ -31,16 +31,12 @@ If green, proceed immediately to step 2 — do not stop to re-summarise the base
 
 **Optional preempt triggers only (do not block default):** `GATE4_BRANCH_1` (valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json`, `RESOLVED_VERIFIED`, `fabricated=false`, required human/legal attestation) or `NEW_OBSERVED_LIQUIDATION_SOURCE` (materially new family, §16 audit before prereg/outcomes).
 
-## Baseline verified this session (2026-11-15T07:30:00Z)
+## Baseline verified this session (2026-11-15T07:37:00Z)
 
-- FCLR-SHEK-SCALE headline executed this session (meaningful deliverables produced); baseline gates/tests green at verification time.
-- `python3 scripts/fclr_campaign_gate.py` → **19/19 PASS**.
-- `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → **PASS**.
-- `python3 scripts/check_tracka_scope_registry_drift.py` → **185/185 OK**.
-- `python3 -m unittest tests.test_fclr_shek_scale tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication tests.test_tracka_hardening_117 -v` → **58/58 OK**.
-- `python3 scripts/next_campaign_status.py` → **no feasible 3-block design in ANY domain** (forecast frontier exhausted).
-- Headline artifacts: `research_state/evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.{json,md}` (prereg `prereg_fclr_shek_scale_20261115T063600Z`, frozen 2026-11-15T06:36:00Z, EXPLORATORY_ONLY/promotable=false).
-  - **Arm A (Binance independent, 847 events): TAIL_SHAPE_EFFECT** — pooled high KM 8.00000028h vs low 8.0h, median diff material=false (threshold 4.0h), log-rank chi2=18.899 p=1.378e-05 Holm 1.103e-04, cluster+block 95% CI [-2.78e-07,1.94e-06] (tail/mean slower under high RV, 8h-cadence median unchanged).
+- Prior session's handoff churn root-caused and closed: commit `aaa9f37b9` (2026-11-15T07:36:49Z) added a conflicting second handoff proposing Track C/funding ablations; it was retired this session (see header). No grid artifact exists (`research_state/*SENS*` = none) — `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` remains rank-0 `READY_EXECUTE`.
+- Targeted suite re-run green at 2026-11-15T07:37:00Z: `python3 -m unittest tests.test_fclr_shek_scale tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication tests.test_tracka_hardening_117` → **58/58 OK**. `research_state/experiment_frontier.json` auto-updated by the test run; frontier rank-0 unchanged (`READY_EXECUTE`).
+- Prior baseline (2026-11-15T07:30:00Z, retained): campaign gate 19/19 PASS; fwd-vol gate PASS; scope drift 185/185 OK; `next_campaign_status.py` → "no feasible 3-block design in ANY domain". Headline artifacts: `research_state/evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.{json,md}` (prereg `prereg_fclr_shek_scale_20261115T063600Z`, frozen 2026-11-15T06:36:00Z, EXPLORATORY_ONLY/promotable=false).
+  - **Arm A (Binance independent, 847 events): TAIL_SHAPE_EFFECT** — pooled high KM 8.00000028h vs low 8.0h, median diff material=false (threshold 4.0h), log-rank chi2=18.899 p=1.378e-05 Holm 1.103e-04, cluster+block 95% CI [-2.78e-07,1.94e-06].
   - **Arm B (ironflow 160 coins, 39021 events, secondary never-promotable): REPLICATES_DIRECTION** — pooled high KM 1.999995h vs low 1.000025h, material, log-rank chi2=384.365 p=0 Holm 0.
 - Unfinished heavy work (required by prereg): frozen sensitivity grid not emitted by `execute()` → rank-0 `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z`.
 
@@ -95,6 +91,8 @@ Added `tests/test_fclr_shek_scale.py` (5 deterministic fixture tests, all passin
 11. **Scope-registry drift (RESOLVED 2026-11-15T07:03:18Z).** `scripts/fclr_shek_scale.py` existed but was absent from both `research_state/tracka_script_scope_registry.json` and `tests/test_tracka_hardening_117.py` `SCRIPT_REGISTRY`, so `check_tracka_scope_registry_drift.py` FAILED (scripts=185, registry=184) and red-carded every verification set, blocking the commit path. **Fix:** registered `fclr_shek_scale.py` (`track_c_sealed_volatility`, EXPLORATORY_ONLY, promotable=false) in both registries; `script_count` 184→185; drift check now 185/185 PASS. Do not let scope-registry drift block the FCLR-SHEK-SCALE verification set again.
 
 12. **Headline run omitted frozen sensitivity grid (2026-11-15T07:30:00Z).** `scripts/fclr_shek_scale.py` executed headline + primary family only; the prereg's frozen sensitivity grid (percentiles/censor/rv-split) was not emitted. Installed `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` at rank 0 as mandatory heavy follow-up — do not declare the study fully robust until grid artifacts exist.
+
+13. **Conflicting second handoff written by a prior session (2026-11-15T07:36:49Z, resolved 07:37:00Z).** Commit `aaa9f37b9` added `AGENT_HANDOFF_20261115T073240Z.md` proposing a Track C / funding-ablations campaign, contradicting the sole durable handoff and duplicating the exact handoff-churn failure mode (item 10). **Fix:** the file is now a SUPERSEDED/RETIRED pointer at its header; both active handoffs name the retracted status. A future agent must never start Track C work from that file while `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` is still rank-0 `READY_EXECUTE`. Do not recreate competing handoff files; there is exactly ONE active handoff (`AGENT_HANDOFF.md`).
 
 ## Research-gate / §19 carry-forward (unchanged)
 
