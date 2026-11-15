@@ -1,15 +1,15 @@
 # Durable Agent Handoff — sole authoritative version
 
-**SOLE DURABLE HANDOFF — START HERE (refreshed 2026-11-15T19:57:17Z).** `NEXT_SESSION_TASK.md` points here; `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is retired/superseded (never execute its Track C funding-ablations campaign). Older revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, do not reopen sealed verdicts, and do not create competing handoff files.
+**SOLE DURABLE HANDOFF — START HERE (refreshed 2026-11-15T20:02:13Z).** `NEXT_SESSION_TASK.md` points here; `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is retired/superseded (never execute its Track C funding-ablations campaign). Older revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, do not reopen sealed verdicts, and do not create competing handoff files.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T19:57:17Z` (SOLE TASK)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T20:02:13Z` (SOLE TASK)
 
 > **READ THIS FIRST.** Heavy work is the DEFAULT path, NOT trigger-gated. Do **not** stop at status, do **not** re-run tested windows for the same estimand, do **not** reopen sealed/terminal families, and do **not** create parallel handoff files.
 
 ### Repo priority (from repository name)
 `Funding-conditioned-volatility-and-liquidation-risk`: deliver a materially new, cache-backed confirmatory result on funding-conditioned liquidation-risk/volatility forecasting if one exists; otherwise close the next estimand honestly with timestamped evidence and immediately install the next materially different heavy cell at rank 0.
 
-### Current state (verified 2026-11-15T19:57:17Z)
+### Current state (verified 2026-11-15T20:02:13Z)
 - Baseline green at verification: campaign gate 19/19 PASS; fwd-vol gate PASS; scope drift 191/191 OK; targeted suite 82/82 OK (`tests.test_fclr_shek_scale tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_fclr_liq_combined_admissibility_audit`); `next_campaign_status.py` → "no feasible 3-block design in ANY domain"; `tracka_resume_check.py` PASS.
 - Frontier rank-0 (active heavy cell): `FCLR-LIQ-XSEC-ORDERING-20261115T185957Z` (`READY_EXECUTE` / `ACTIVE`).
 - Prior heavy cell **CONCLUDED `NOT_MET`** (do not re-run same estimand): `FCLR-LIQ-COMBINED-PANEL-20261115T170000Z` / `H_fclr_liq_combined_panel_forecast` — C2 vs B1 on 24h observed liquidation intensity, 15-coin combined metpie+ironflow panel, 3 test blocks (2025-10, 2026-01, 2026-09); C2 worse by 17.1% relative QLIKE, 95% block-bootstrap CI spans zero. Artifacts tracked: `research_state/prereg_fclr_liq_combined_20261115T181449Z.json`, `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet`, `research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.{json,md}`.
@@ -54,7 +54,7 @@ Materially different estimand on the **same admissible cache-backed panel** `res
 
 
 ## Bottlenecks removed / in force (do not recreate)
-- **Removed/updated this refresh (2026-11-15T19:57:17Z):** stale "redo completed steps" instructions corrected; combined-panel cell recorded as CONCLUDED NOT_MET with artifacts; next heavy cell `FCLR-LIQ-XSEC-ORDERING` installed at rank 0; scope-registry drift fixed earlier (191 scripts, green).
+- **Removed/updated this refresh (2026-11-15T20:02:13Z):** stale "redo completed steps" instructions corrected; combined-panel cell recorded as CONCLUDED NOT_MET with artifacts; next heavy cell `FCLR-LIQ-XSEC-ORDERING` installed at rank 0; scope-registry drift fixed earlier (191 scripts, green).
 - **Bookkeeping (cleared this refresh):** prior `evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.{json,md}` root-bound concern resolved (files present/tracked); `tracka_resume_check` PASS. Keep new eval artifacts tracked in checkpoint commits.
 - **Still in force:** phantom 3-block frontier fixed (`next_campaign_status` honest); Shek Arm A nested-cache funding fallback; invalid frontier rank-0 prevention; stop-cleanly-as-completion rejected; handoff churn rejected; sealed verdicts immutable.
 
