@@ -1,0 +1,199 @@
+{
+  "experiment_id": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
+  "campaign": "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z",
+  "generated": "20261115T234700Z",
+  "smoke": true,
+  "status": "INADMISSIBLE",
+  "verdict": "INADMISSIBLE",
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "audit_only": true,
+  "does_not_reopen_sealed_verdict": true,
+  "prereg": "research_state/prereg_fclr011_recompute_20261114T042139Z.json",
+  "prereg_status": "FROZEN_PRE_OUTCOMES",
+  "splits": {
+    "train": [
+      "2026-01-01T00:00:00Z",
+      "2026-03-17T23:00:00Z"
+    ],
+    "validation": [
+      "2026-03-25T00:00:00Z",
+      "2026-04-30T23:00:00Z"
+    ],
+    "test": [
+      "2026-05-08T00:00:00Z",
+      "2026-08-06T23:00:00Z"
+    ],
+    "purge_embargo_days": 7
+  },
+  "build": {
+    "symbols": [
+      {
+        "symbol": "BTCUSDT",
+        "kline_rows_raw": 1464,
+        "kline_rows_on_regular_grid": 1464,
+        "kline_missing_hours": 0,
+        "funding_rows": 183,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 1464,
+        "rows_train": 0,
+        "rows_validation": 0,
+        "rows_test": 1296,
+        "target_non_null": 1440,
+        "coverage": {
+          "log_rv1h": 0.999317,
+          "log_rv24h": 0.983607,
+          "log_rv168h": 0.885246,
+          "signed_funding": 1.0,
+          "abs_funding_pct_trail": 0.979508,
+          "ema24_dist": 0.98429
+        },
+        "core_coverage": 0.885246
+      },
+      {
+        "symbol": "ETHUSDT",
+        "kline_rows_raw": 1464,
+        "kline_rows_on_regular_grid": 1464,
+        "kline_missing_hours": 0,
+        "funding_rows": 183,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 1464,
+        "rows_train": 0,
+        "rows_validation": 0,
+        "rows_test": 1296,
+        "target_non_null": 1440,
+        "coverage": {
+          "log_rv1h": 0.998634,
+          "log_rv24h": 0.983607,
+          "log_rv168h": 0.885246,
+          "signed_funding": 1.0,
+          "abs_funding_pct_trail": 0.979508,
+          "ema24_dist": 0.98429
+        },
+        "core_coverage": 0.884563
+      },
+      {
+        "symbol": "BNBUSDT",
+        "kline_rows_raw": 1464,
+        "kline_rows_on_regular_grid": 1464,
+        "kline_missing_hours": 0,
+        "funding_rows": 183,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 1464,
+        "rows_train": 0,
+        "rows_validation": 0,
+        "rows_test": 1296,
+        "target_non_null": 1440,
+        "coverage": {
+          "log_rv1h": 0.997268,
+          "log_rv24h": 0.983607,
+          "log_rv168h": 0.885246,
+          "signed_funding": 1.0,
+          "abs_funding_pct_trail": 0.979508,
+          "ema24_dist": 0.98429
+        },
+        "core_coverage": 0.88388
+      },
+      {
+        "symbol": "SOLUSDT",
+        "kline_rows_raw": 1464,
+        "kline_rows_on_regular_grid": 1464,
+        "kline_missing_hours": 0,
+        "funding_rows": 183,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 1464,
+        "rows_train": 0,
+        "rows_validation": 0,
+        "rows_test": 1296,
+        "target_non_null": 1440,
+        "coverage": {
+          "log_rv1h": 0.998634,
+          "log_rv24h": 0.983607,
+          "log_rv168h": 0.885246,
+          "signed_funding": 1.0,
+          "abs_funding_pct_trail": 0.979508,
+          "ema24_dist": 0.98429
+        },
+        "core_coverage": 0.884563
+      },
+      {
+        "symbol": "XRPUSDT",
+        "kline_rows_raw": 1464,
+        "kline_rows_on_regular_grid": 1464,
+        "kline_missing_hours": 0,
+        "funding_rows": 183,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 1464,
+        "rows_train": 0,
+        "rows_validation": 0,
+        "rows_test": 1296,
+        "target_non_null": 1440,
+        "coverage": {
+          "log_rv1h": 0.997268,
+          "log_rv24h": 0.983607,
+          "log_rv168h": 0.885246,
+          "signed_funding": 1.0,
+          "abs_funding_pct_trail": 0.979508,
+          "ema24_dist": 0.98429
+        },
+        "core_coverage": 0.884563
+      }
+    ],
+    "rows_total": 7320,
+    "instruments": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "coverage": {
+    "test_rows_total": 6360,
+    "test_rows_core_complete": 6355,
+    "core_coverage": 0.999214
+  },
+  "instruments": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "n_test_blocks_days": 53,
+  "test_window": [
+    "2026-05-08T00:00:00Z",
+    "2026-08-06T23:00:00Z"
+  ],
+  "sealed_reference": {
+    "C2_vs_B1": {
+      "rel_reduction_pct": 4.94,
+      "ci": [
+        -0.032546,
+        -0.001418
+      ],
+      "n_pairs": 10785
+    },
+    "C1_vs_B1": {
+      "rel_reduction_pct": 1.36,
+      "ci": [
+        -0.00826,
+        -0.001111
+      ],
+      "n_pairs": 10785
+    },
+    "C2_vs_C1": {
+      "rel_reduction_pct": 3.63,
+      "ci": [
+        -0.027256,
+        0.001778
+      ],
+      "n_pairs": 10785
+    }
+  },
+  "failing_minima": [
+    "no complete training rows"
+  ],
+  "panel_path": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4"
+}

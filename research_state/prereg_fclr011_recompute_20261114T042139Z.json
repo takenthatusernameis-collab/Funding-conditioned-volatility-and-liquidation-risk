@@ -1,0 +1,125 @@
+{
+  "experiment_id": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
+  "campaign": "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "generated": "2026-11-15T23:44:02Z",
+  "frozen_before_outcomes": true,
+  "pre_registered_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "audit_only": true,
+  "does_not_reopen_sealed_verdict": true,
+  "purpose": "Clean independent recomputation of the sealed FCLR-011 volatility PASS (C2 vs B1 4.94% QLIKE, CI [-0.032546,-0.001418], 5 instruments, 3 blocks, test 2026-05-08..2026-08-06) from cached Binance inputs, without the Git-LFS panel and without the heuristic run_trackc_* predictor.",
+  "sealed_reference": {
+    "evaluation_summary": "research_state/evaluation_summary_FCLR-011.md",
+    "prereg": "research_state/pre_registration_fclr011_20261103T111501Z.md",
+    "verdict": "forecast_gate_PASS",
+    "primary_contrast": "C2_vs_B1",
+    "rel_reduction_pct": 4.94,
+    "ci_qlipe_diff": [
+      -0.032546,
+      -0.001418
+    ],
+    "instruments": 5,
+    "test_blocks": 3
+  },
+  "universe": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "horizon_hours": 24,
+  "target": {
+    "name": "rv24h",
+    "definition": "next-24h realized variance of mark-price log returns: sum of squared 1h log returns over t+1..t+24, forward-looking from decision time t",
+    "source_series": "klines close (mark price unavailable in cache)",
+    "source_limitation": "markPriceKlines/indexPriceKlines/premiumIndexKlines are absent from the 2026 cache; close-to-close RV and close-based premium proxies are used and recorded in the build report"
+  },
+  "models": {
+    "B0": [
+      "log_rv24h_lag1"
+    ],
+    "B1": [
+      "log_rv1h",
+      "log_rv24h",
+      "log_rv168h"
+    ],
+    "C1": [
+      "B1",
+      "signed_funding",
+      "abs_funding_pct_trail"
+    ],
+    "C2": [
+      "C1",
+      "premium",
+      "ema24_dist"
+    ],
+    "premium_status": "NOT_COMPUTABLE_WITHOUT_INDEX_PRICE"
+  },
+  "fit": {
+    "estimator": "OLS",
+    "link": "log(target + 1e-12)",
+    "scaling": "train-only mean/std",
+    "back_transform": "train-only smearing (Duan) on exp(pred)"
+  },
+  "missing_data": {
+    "zero_fill": false,
+    "forward_fill": false,
+    "paired_common_rows": true,
+    "report_coverage_by_symbol_and_feature": true
+  },
+  "primary_metric": "paired out-of-sample QLIKE, C2 vs B1",
+  "secondary_metrics": [
+    "MAE",
+    "RMSE"
+  ],
+  "inference": {
+    "paired": true,
+    "bootstrap": "circular block over complete UTC days",
+    "block_hours": 24,
+    "replicates": 2000,
+    "seed": 20261114,
+    "multiplicity": "Holm across C2_vs_B1, C1_vs_B1, C2_vs_C1",
+    "alpha": 0.05,
+    "loio": true,
+    "placebo": "funding permutation within instrument",
+    "placebo_replicates": 200
+  },
+  "splits": {
+    "train": [
+      "2026-01-01T00:00:00Z",
+      "2026-03-17T23:00:00Z"
+    ],
+    "validation": [
+      "2026-03-25T00:00:00Z",
+      "2026-04-30T23:00:00Z"
+    ],
+    "test": [
+      "2026-05-08T00:00:00Z",
+      "2026-08-06T23:00:00Z"
+    ],
+    "purge_embargo_days": 7
+  },
+  "stop_rule": {
+    "min_instruments": 5,
+    "min_test_blocks": 3,
+    "min_core_coverage": 0.8,
+    "on_failure": "INADMISSIBLE with exact failing minima; do not relax after outcomes"
+  },
+  "verdict_space": [
+    "REPRODUCED",
+    "NOT_REPRODUCED",
+    "INCONCLUSIVE",
+    "INADMISSIBLE"
+  ],
+  "verdict_rule": {
+    "REPRODUCED": "materially consistent with sealed +4.94% under the frozen design",
+    "NOT_REPRODUCED": "fails to reproduce the sealed result",
+    "INCONCLUSIVE": "data/coverage/numerical limits prevent a clean verdict",
+    "INADMISSIBLE": "frozen minimums are not met"
+  },
+  "sealed_artifacts_must_not_change": true
+}

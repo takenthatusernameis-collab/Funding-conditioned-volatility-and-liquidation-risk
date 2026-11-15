@@ -1,0 +1,117 @@
+{
+  "generated_utc": "2026-11-15T23:45:00Z",
+  "validation_type": "lfs_materialization_and_json_parse_audit",
+  "governing_handoff": "AGENT_HANDOFF.md (2026-11-15T23:38:49Z)",
+  "lfs_commands": {
+    "checkout": "git lfs checkout -- research_state/run_manifest.json research_state/run_manifest_funding_v3_30d.json ...",
+    "fetch_attempt": "git lfs fetch (exit 0 but no new objects retrieved; environmental blocker)",
+    "ls_files": "git lfs ls-files (20 tracked LFS objects)"
+  },
+  "parse_summary": {
+    "materialized_parsed_ok": 3,
+    "unmaterialized_pointer_only": 7,
+    "zero_parse_failures": true,
+    "total_lfs_tracked_objects": 20,
+    "total_lfs_materialized": 13
+  },
+  "materialized": [
+    {
+      "path": "research_state/run_manifest.json",
+      "status": "MATERIALIZED",
+      "bytes": 17113,
+      "parse": "OK",
+      "top_keys": ["split_boundaries_fclr010", "fclr010_experiment", "fclr010_features", "fclr010_models", "fclr010_targets", "fclr010_splits", "fclr010_eval", "fclr010_gate", "fclr010_leakage", "fclr010_pre_registration", "fclr010_protocol", "fclr010_reproducibility", "fclr010_note"]
+    },
+    {
+      "path": "research_state/run_manifest_funding_v3_30d.json",
+      "status": "MATERIALIZED",
+      "bytes": 10456,
+      "parse": "OK",
+      "top_keys": ["last_funding_ablations", "funding_ablations_experiment_id", "funding_ablations", "funding_ablations_contrasts_vs_A", "funding_ablations_note", "funding_ablations_splits", "funding_ablations_bootstrap", "funding_ablations_data_sufficiency", "funding_ablations_per_split_paired_delta_vs_A", "funding_ablations_exploratory_sensitivity_block_hours", "funding_ablations_verdict", "funding_ablations_pre_registration"]
+    },
+    {
+      "path": "research_state/experiment_frontier.json",
+      "status": "MATERIALIZED",
+      "bytes": 16929,
+      "parse": "OK",
+      "top_keys": null,
+      "note": "list of 4 cells; rank-0 = FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z (TRIGGER_ONLY)"
+    },
+    {
+      "path": "research_state/hypothesis_registry.json",
+      "status": "MATERIALIZED",
+      "bytes": 41399,
+      "parse": "OK",
+      "top_keys": ["hypotheses", "updated_utc"],
+      "note": "hypotheses = list of 22 entries, all terminal"
+    }
+  ],
+  "unmaterialized": [
+    {
+      "path": "research_state/run_manifest_FCLR002.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 132,
+      "pointer_oid": "a10add1d67fedff27ce78a13e4...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    },
+    {
+      "path": "research_state/run_manifest_funding_explor_5sym.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 130,
+      "pointer_oid": "893f064375f76577a7196e7581...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    },
+    {
+      "path": "research_state/run_manifest_funding_repro.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 130,
+      "pointer_oid": "bd3ee0e0512a433e4cfe4aa153...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    },
+    {
+      "path": "research_state/run_manifest_funding_v2_5sym.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 129,
+      "pointer_oid": "14bc4922d4fa0606a873296272...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    },
+    {
+      "path": "research_state/run_manifest_funding_v3_30d_exploratory_v4.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 130,
+      "pointer_oid": "00a6369bd49479afb859cbe230...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    },
+    {
+      "path": "research_state/run_manifest_funding_v4_exploratory_30d.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 130,
+      "pointer_oid": "8e6e06cdc1d9d69bc17603c2fd...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    },
+    {
+      "path": "research_state/run_manifest_local.json",
+      "status": "UNMATERIALIZED",
+      "bytes": 129,
+      "pointer_oid": "5f7a031232f3666a766294d05a...",
+      "note": "LFS pointer only; git lfs fetch did not retrieve. Reported, not fabricated."
+    }
+  ],
+  "other_lfs_tracked_materialized": [
+    "research_state/data_cache/candidate_activity_ranking.json",
+    "research_state/data_cache/coverage_20260807.csv",
+    "research_state/data_cache/fclr002_panel.json",
+    "research_state/data_cache/fclr002_panel_local.json",
+    "research_state/data_cache/fclr011_panel.json",
+    "research_state/data_cache/hyperliquid_candles_manifest_20261111T145106Z.json",
+    "research_state/data_cache/liquidations_full_20260807.csv",
+    "research_state/data_cache/manifest_extended.json",
+    "research_state/data_cache/manifest_extract.json",
+    "research_state/data_cache/manifest_fclr002.json",
+    "research_state/data_cache/manifest_fclr003.json"
+  ],
+  "environmental_blockers": [
+    "7 run_manifest_*.json LFS objects could not be retrieved by git lfs fetch in this sandbox (network/LFS endpoint unavailable). Content is NOT fabricated; downstream recomputation uses the two materialized manifests plus cached inputs."
+  ],
+  "verdict": "PASS_WITH_ENVIRONMENTAL_BLOCKERS"
+}

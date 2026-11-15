@@ -1,0 +1,197 @@
+{
+  "experiment_id": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
+  "campaign": "FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z",
+  "generated": "20261115T235000Z",
+  "smoke": false,
+  "status": "INCONCLUSIVE",
+  "verdict": "INCONCLUSIVE",
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "audit_only": true,
+  "does_not_reopen_sealed_verdict": true,
+  "prereg": "research_state/prereg_fclr011_recompute_20261114T042139Z.json",
+  "prereg_status": "FROZEN_PRE_OUTCOMES",
+  "splits": {
+    "train": [
+      "2026-01-01T00:00:00Z",
+      "2026-03-17T23:00:00Z"
+    ],
+    "validation": [
+      "2026-03-25T00:00:00Z",
+      "2026-04-30T23:00:00Z"
+    ],
+    "test": [
+      "2026-05-08T00:00:00Z",
+      "2026-08-06T23:00:00Z"
+    ],
+    "purge_embargo_days": 7
+  },
+  "build": {
+    "symbols": [
+      {
+        "symbol": "BTCUSDT",
+        "kline_rows_raw": 4680,
+        "kline_rows_on_regular_grid": 5832,
+        "kline_missing_hours": 1152,
+        "funding_rows": 729,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 5832,
+        "rows_train": 1824,
+        "rows_validation": 888,
+        "rows_test": 2184,
+        "target_non_null": 4248,
+        "coverage": {
+          "log_rv1h": 0.799383,
+          "log_rv24h": 0.728395,
+          "log_rv168h": 0.613169,
+          "signed_funding": 0.999829,
+          "abs_funding_pct_trail": 0.994684,
+          "ema24_dist": 0.798525
+        },
+        "core_coverage": 0.613169
+      },
+      {
+        "symbol": "ETHUSDT",
+        "kline_rows_raw": 4392,
+        "kline_rows_on_regular_grid": 5832,
+        "kline_missing_hours": 1440,
+        "funding_rows": 729,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 5832,
+        "rows_train": 1824,
+        "rows_validation": 888,
+        "rows_test": 2184,
+        "target_non_null": 3840,
+        "coverage": {
+          "log_rv1h": 0.748971,
+          "log_rv24h": 0.658436,
+          "log_rv168h": 0.600823,
+          "signed_funding": 0.999829,
+          "abs_funding_pct_trail": 0.994684,
+          "ema24_dist": 0.749143
+        },
+        "core_coverage": 0.600652
+      },
+      {
+        "symbol": "BNBUSDT",
+        "kline_rows_raw": 5265,
+        "kline_rows_on_regular_grid": 5832,
+        "kline_missing_hours": 567,
+        "funding_rows": 729,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 5832,
+        "rows_train": 1824,
+        "rows_validation": 888,
+        "rows_test": 2184,
+        "target_non_null": 4575,
+        "coverage": {
+          "log_rv1h": 0.889746,
+          "log_rv24h": 0.784465,
+          "log_rv168h": 0.632373,
+          "signed_funding": 0.999829,
+          "abs_funding_pct_trail": 0.994684,
+          "ema24_dist": 0.898834
+        },
+        "core_coverage": 0.631859
+      },
+      {
+        "symbol": "SOLUSDT",
+        "kline_rows_raw": 4560,
+        "kline_rows_on_regular_grid": 5808,
+        "kline_missing_hours": 1248,
+        "funding_rows": 729,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 5808,
+        "rows_train": 1800,
+        "rows_validation": 888,
+        "rows_test": 2184,
+        "target_non_null": 4056,
+        "coverage": {
+          "log_rv1h": 0.779442,
+          "log_rv24h": 0.698347,
+          "log_rv168h": 0.603306,
+          "signed_funding": 1.0,
+          "abs_funding_pct_trail": 0.994835,
+          "ema24_dist": 0.781164
+        },
+        "core_coverage": 0.60124
+      },
+      {
+        "symbol": "XRPUSDT",
+        "kline_rows_raw": 4824,
+        "kline_rows_on_regular_grid": 5832,
+        "kline_missing_hours": 1008,
+        "funding_rows": 729,
+        "funding_asof_min_lag_h": 0.0,
+        "rows_total": 5832,
+        "rows_train": 1824,
+        "rows_validation": 888,
+        "rows_test": 2184,
+        "target_non_null": 4152,
+        "coverage": {
+          "log_rv1h": 0.820473,
+          "log_rv24h": 0.711934,
+          "log_rv168h": 0.600823,
+          "signed_funding": 0.999829,
+          "abs_funding_pct_trail": 0.994684,
+          "ema24_dist": 0.823217
+        },
+        "core_coverage": 0.599108
+      }
+    ],
+    "rows_total": 29136,
+    "instruments": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "coverage": {
+    "test_rows_total": 10920,
+    "test_rows_core_complete": 10905,
+    "core_coverage": 0.998626
+  },
+  "instruments": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "n_test_blocks_days": 91,
+  "test_window": [
+    "2026-05-08T00:00:00Z",
+    "2026-08-06T23:00:00Z"
+  ],
+  "sealed_reference": {
+    "C2_vs_B1": {
+      "rel_reduction_pct": 4.94,
+      "ci": [
+        -0.032546,
+        -0.001418
+      ],
+      "n_pairs": 10785
+    },
+    "C1_vs_B1": {
+      "rel_reduction_pct": 1.36,
+      "ci": [
+        -0.00826,
+        -0.001111
+      ],
+      "n_pairs": 10785
+    },
+    "C2_vs_C1": {
+      "rel_reduction_pct": 3.63,
+      "ci": [
+        -0.027256,
+        0.001778
+      ],
+      "n_pairs": 10785
+    }
+  },
+  "inconclusive_reason": "model C1 not fittable on train rows",
+  "panel_path": "research_state/fclr011_recompute_panel_20261115T235000Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4"
+}
