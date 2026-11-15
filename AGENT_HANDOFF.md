@@ -32,6 +32,8 @@ Artifacts: `research_state/prereg_fclr_design_feasibility_2026-11-15T02:35:00Z.j
 3. **If `NEW_OBSERVED_LIQUIDATION_SOURCE` fired (HEAVY):** immediately run bounded probe + §16 admissibility audit artifact **before** any prereg/outcomes; if ADMISSIBLE, freeze prereg pre-outcomes then build/eval/verdict with new experiment ID; if inadmissible, record evidence-backed blocker. Do not relabel exploratory as confirmatory.
 4. **If neither fired:** do not do busywork or status churn; stop cleanly after confirming readiness artifacts/scripts are intact. Cached heavy-work frontier is exhausted — absence of a trigger is the only blocker.
 
+**Execution record — FCLR-TRIGGER-CHECK-20261115T025810Z run at 2026-11-15T03:04:30Z:** `glob research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` → none (GATE4_BRANCH_1 NOT FIRED); `NEW_OBSERVED_LIQUIDATION_SOURCE` → no new admissible liquidation-source artifact, no `research_state/hl_label_extension_audit_*` artifact (NOT FIRED); `python3 scripts/fclr_campaign_gate.py` → 19/19 PASS; `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → GATE PASS; `python3 scripts/check_tracka_scope_registry_drift.py` → 184/184 OK; `git status` clean on `main` @ `9f87b3656`. Stopping cleanly — heavy work is trigger-gated, not avoided; next session re-runs this trigger check at start and proceeds only on a valid trigger.
+
 **Resume triggers:** `GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`. **Forbidden:** polling, schedulers/controllers, `.github/workflows/*` edits, paid/credentialed/manual data, re-running tested windows, re-probing TERMINAL_NO_GO families, reopening sealed verdicts.
 
 ## Bottlenecks removed (do not recreate)
