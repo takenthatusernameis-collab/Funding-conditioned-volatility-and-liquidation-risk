@@ -2,14 +2,14 @@
   {
     "task": "FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z",
     "rank": 0,
-    "status": "READY_EXECUTE",
-    "program_status": "ACTIVE",
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "COMPLETED_VALIDATED",
     "generated": "2026-11-15T07:30:00Z",
-    "refreshed": "2026-11-15T07:30:00Z",
-    "last_checked": "2026-11-15T07:30:00Z",
-    "next_unfinished_task": "Execute the pre-specified sensitivity grid frozen in research_state/prereg_fclr_shek_scale_20261115T063600Z (percentiles [1,99],[5,95],[10,90] x censor 168h/336h x rv_split tercile/median) for Arm A and Arm B on the same frozen samples; report only (never used to select headline). Emit timestamped eval artifacts, add/extend deterministic tests, update frontier/H2 notes as needed, keep EXPLORATORY_ONLY/promotable=false. Heavy, cache-only, no network.",
-    "blockers": "None agent-removable. Headline/primary-family results already sealed in evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z; grid is follow-up robustness required by frozen prereg, not a new outcome-peek design choice.",
-    "next_action_heavy": "1) Re-verify baseline green. 2) Extend scripts/fclr_shek_scale.py (or add a clearly-scoped companion registered in both scope registries) to compute and record the frozen sensitivity grid for both arms against the frozen prereg/samples; write research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-<UTC>.{json,md} (or augment with a new timestamped artifact) with headline unchanged. 3) Add deterministic no-network tests for grid cell computation/verdict consistency. 4) Run full verification (fclr_campaign_gate, fwd-vol gate, scope drift 185+/OK, targeted+new tests, next_campaign_status honest). 5) Update frontier/H2 evidence notes; install next heavy cell at rank 0 (only trigger-gated paths remain after grid). Commit meaningful work only.",
+    "refreshed": "2026-11-15T16:35:55Z",
+    "last_checked": "2026-11-15T16:35:55Z",
+    "next_unfinished_task": null,
+    "blockers": "None. Frozen prereg sensitivity grid emitted and validated; all 12 grid cells x 2 arms (24 arm-cells) computed on cache, no network, no sealed mutation, EXPLORATORY_ONLY/promotable=false retained. Headline cell [5,95]/168h/tercile matches sealed verdicts (Arm A TAIL_SHAPE_EFFECT, Arm B REPLICATES_DIRECTION). next_campaign_status.py: no feasible 3-block design in ANY domain -- no cache-heavy estimand remains.",
+    "next_action_heavy": null,
     "resume_triggers": [
       "GATE4_BRANCH_1",
       "NEW_OBSERVED_LIQUIDATION_SOURCE"
@@ -17,34 +17,88 @@
     "phases": [
       {
         "phase": "GRID_EXECUTION",
-        "status": "ACTIVE",
+        "status": "COMPLETED",
         "claim": "Compute frozen sensitivity grid on cached samples per prereg; no threshold tuning, no headline change.",
         "expected_artifacts": [
           "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-<UTC>.json",
           "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-<UTC>.md"
+        ],
+        "actual_artifacts": [
+          "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.json",
+          "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.md"
         ]
       },
       {
         "phase": "ROBUSTNESS_RECORD",
-        "status": "PENDING",
-        "claim": "Record grid outcomes and consistency with headline verdicts; keep EXPLORATORY_ONLY.",
+        "status": "COMPLETED",
+        "claim": "Record grid outcomes and consistency with headline verdicts; keep EXPLORATORY_ONLY. All 24 arm-cells validated; headline cell matches sealed Arm A TAIL_SHAPE_EFFECT / Arm B REPLICATES_DIRECTION.",
         "expected_artifacts": [
           "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-<UTC>.json"
+        ],
+        "actual_artifacts": [
+          "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.json"
         ]
       },
       {
         "phase": "COMPLETED_VALIDATED",
-        "status": "PENDING",
-        "claim": "Tests/gates green, frontier advanced, next heavy cell installed (trigger-only sentinel if no other cache-heavy estimand).",
+        "status": "COMPLETED",
+        "claim": "Tests/gates green, frontier advanced. Campaign gate 19/19, fwd-vol gate PASS, scope drift 186/186 OK, targeted suite 60/60 OK (incl. tests.test_fclr_shek_scale), next_campaign_status.py -> no feasible 3-block design in ANY domain. No cache-heavy estimand remains; trigger-only state.",
         "expected_artifacts": [
           "tests/test_fclr_shek_scale.py"
+        ],
+        "actual_artifacts": [
+          "tests/test_fclr_shek_scale.py",
+          "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.json",
+          "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.md"
         ]
       }
     ],
     "evidence": {
       "frozen_prereg": "research_state/prereg_fclr_shek_scale_20261115T063600Z.json",
       "headline_eval": "research_state/evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.json",
-      "forecast_frontier_exhausted": "python3 scripts/next_campaign_status.py -> no feasible 3-block FORECAST design"
+      "forecast_frontier_exhausted": "python3 scripts/next_campaign_status.py -> no feasible 3-block FORECAST design",
+      "sens_grid_json": "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.json",
+      "sens_grid_md": "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.md",
+      "grid_cells": 12,
+      "grid_arm_cells": 24,
+      "percentiles": [
+        [
+          1.0,
+          99.0
+        ],
+        [
+          5.0,
+          95.0
+        ],
+        [
+          10.0,
+          90.0
+        ]
+      ],
+      "censor_hours": [
+        168,
+        336
+      ],
+      "rv_split": [
+        "tercile",
+        "median"
+      ],
+      "headline_cell": {
+        "percentiles": [
+          5.0,
+          95.0
+        ],
+        "censor_max_follow_hours": 168,
+        "rv_split": "tercile"
+      },
+      "headline_cell_arm_a_verdict": "TAIL_SHAPE_EFFECT",
+      "headline_cell_arm_b_verdict": "REPLICATES_DIRECTION",
+      "verification": "campaign gate 19/19 PASS; fwd-vol gate PASS; scope drift 186/186 OK; targeted suite 60/60 OK; next_campaign_status -> no feasible 3-block design in ANY domain",
+      "sealed_artifacts_mutated": false,
+      "network_used": false,
+      "class": "EXPLORATORY_ONLY",
+      "promotable": false,
+      "completed_utc": "2026-11-15T16:35:55Z"
     }
   },
   {
