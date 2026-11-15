@@ -817,6 +817,14 @@ SCRIPT_REGISTRY = {
   "fclr_liq_combined_xsec_eval.py": {
     "class": "track_c_sealed_volatility",
     "reason": "fclr_liq_combined_xsec_eval.py: EVALUATION_AND_GATE for FCLR-LIQ-XSEC-ORDERING; executes the frozen pre-outcomes prereg on the combined metpie+ironflow panel, computes daily cross-sectional Spearman rank-IC, top-3 hit-rate, and cross-sectional QLIKE with block-bootstrap CI and Holm correction; writes timestamped evaluation_summary artifacts and updates non-sealed experiment_frontier/hypothesis_registry; no outcome peeking, no threshold tuning, no sealed artifact mutation, no network."
+  },
+  "fclr_liq_combined_xsec_qlike_prereg.py": {
+    "class": "prereg_utility",
+    "reason": "fclr_liq_combined_xsec_qlike_prereg.py: PREREG_FREEZE for FCLR-LIQ-XSEC-QLIKE; writes a NEW pre-outcomes prereg for daily cross-sectional QLIKE of next-day liquidation intensity (C2 vs B1, mean daily cross-sectional QLIKE primary, rank-IC + top-3 hit-rate secondary) on the combined metpie+ironflow panel; outcome_data_inspected_before_freeze=false; no outcome reads, no sealed mutation."
+  },
+  "fclr_liq_combined_xsec_qlike_eval.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr_liq_combined_xsec_qlike_eval.py: EVALUATION_AND_GATE for FCLR-LIQ-XSEC-QLIKE; executes the frozen pre-outcomes prereg on the combined metpie+ironflow panel, computes daily cross-sectional QLIKE (primary), Spearman rank-IC, and top-3 hit-rate with block-bootstrap CI and Holm correction; writes timestamped evaluation_summary artifacts and updates non-sealed experiment_frontier/hypothesis_registry; no outcome peeking, no threshold tuning, no sealed artifact mutation, no network."
   }
 }
 

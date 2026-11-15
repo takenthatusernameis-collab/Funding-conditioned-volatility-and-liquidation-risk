@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""FCLR-LIQ-XSEC-QLIKE step 1: PREREG_FREEZE (pre-outcomes).
+
+Freezes a NEW pre-outcomes prereg for the daily cross-sectional QLIKE of
+next-day liquidation intensity across 15 coins on the combined metpie+ironflow panel.
+
+Primary metric = cross-sectional QLIKE (lower is better), NOT Spearman rank-IC.
+Secondary = mean daily Spearman rank-IC + top-3 hit-rate.
+
+This script ONLY writes the prereg JSON+MD with outcome_data_inspected_before_freeze=false.
+It does NOT read the panel outcomes, does NOT compute any forecast metric, and does NOT
+mutate any sealed artifact. Thresholds below are fixed here and must not be tuned later.
+"""
+from __future__ import annotations
+
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[1]
+RS = REPO / "research_state"
+
+TS = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+PREREG = {
+    "experiment_id": f"FCLR-LIQ-XSEC-QLIKE-{TS}",
+    "prereg_frozen_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "class": "CONFIRMATORY",
+    "promotable": False,
+    "outcome_data_inspected_before_freeze": False,
+    "estimand": {
+        "name": "daily_cross_sectional_qlike",
+        "target": "next_day_total_notional_usd_per_coin",
+        "aggregation": "sum of notional_usd over (coin, calendar_day)",
+        "target_shift": "next_calendar_day (shift -1 within coin)",
+        "metric": "cross-sectional QLIKE (mean of per-coin QLIKE losses across coins each day)",
+        "qlike": "qlike(y, yhat) = y/yhat - log(y/yhat) - 1, lower is better",
+        "metrics": ["mean_daily_cross_sectional_qlike", "mean_daily_spearman_rank_ic", "top3_hit_rate"],
+        "primary_metric_for_materiality": "mean_daily_cross_sectional_qlike",
+        "baseline": "B1",
+        "challenger": "C2",
+        "contrast": "C2_vs_B1",
+        "materiality_floor_pct": 2.0,
+        "min_instruments": 5,
+        "min_test_blocks": 3,
+        "block_bootstrap_reps": 2000,
+        "block_bootstrap_seed": 20261115,
+        "holm_family": ["C2_vs_B1_mean_daily_cross_sectional_qlike",
+                        "C2_vs_B1_mean_daily_spearman_rank_ic",
+                        "C2_vs_B1_top3_hit_rate"],
+        "purge_embargo_days": 7,
+        "walk_forward": "expanding_window",
+        "note": "QLike is a loss: C2 improves when mean_daily_cross_sectional_qlike_C2 < mean_daily_cross_sectional_qlike_B1, i.e. paired diff (C2-B1) < 0.",
+    },
+    "universe": {
+        "coins": ["AAVE", "ADA", "AVAX", "BNB", "BTC", "CRV", "DOGE", "ETH",
+                  "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP"],
+        "n_coins": 15,
+        "source_family": "combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed liquidation events",
+        "panel_artifact": None,
+    },
+    "features": {
+        "B1": ["rv24h", "rv168h"],
+        "C2": ["rv24h", "rv168h", "fundingRate", "abs_fund_pct", "premium", "ema_dist"],
+        "note": "All features are causal (past-only as-of joins) at the event->daily aggregation grain. Funding features are the last funding timestamp <= event; RV features are 4h-candle rolling std over past bars.",
+    },
+    "splits": {
+        "train": {"start": "2025-03-22", "end": "2025-05-21",
+                  "blocks": "panel-origin expanding-window train; block1 train window is empty (panel starts 2025-03-22) so block 1 is train-limited by design"},
+        "validation": {"start": "2025-05-22", "end": "2025-09-30"},
+        "embargo_days": 7,
+        "test_blocks": [
+            {"index": 1, "start": "2025-03-22", "end": "2025-04-21",
+             "class": "PRISTINE_METPIE"},
+            {"index": 2, "start": "2025-04-21", "end": "2025-05-21",
+             "class": "PRISTINE_METPIE"},
+            {"index": 3, "start": "2025-10-01", "end": "2025-10-31",
+             "class": "IRONFLOW_ESTIMAND_NOVEL"},
+        ],
+        "note": "Test blocks are non-overlapping 30d blocks; 2 pristine metpie blocks never tested for this estimand + 1 estimand-novel ironflow block. Expanding-window walk-forward: fit on data <= block_start - 7d, evaluate the block.",
+    },
+    "gate": {
+        "pass_conditions": [
+            "mean_daily_cross_sectional_qlike_C2_vs_B1 relative improvement >= 2.0% (C2 lower loss)",
+            "block_bootstrap 95% CI hi < 0 for paired diff (C2-B1) on primary QLIKE (excludes zero in favorable direction)",
+            "n_paired_instruments >= 5",
+            "n_test_blocks_with_data >= 3",
+        ],
+        "verdict_space": ["PASS", "NOT_MET"],
+        "null_handling": "Record NOT_MET honestly; do not retune thresholds; install next materially different heavy cell if NOT_MET.",
+    },
+    "constraints": {
+        "no_outcome_peeking_before_freeze": True,
+        "no_threshold_tuning_after_freeze": True,
+        "no_sealed_artifact_mutation": True,
+        "no_paid_or_credentialed_data": True,
+        "no_network_for_outcomes": True,
+        "H2_shek_replication_remains": "EXPLORATORY_ONLY (promotable=false)",
+    },
+}
+
+prereg_json = RS / f"prereg_fclr_liq_combined_xsec_qlike_{TS}.json"
+prereg_md = RS / f"prereg_fclr_liq_combined_xsec_qlike_{TS}.md"
+
+prereg_json.write_text(json.dumps(PREREG, indent=2) + "\n")
+
+md = []
+md.append(f"# FCLR-LIQ-XSEC-QLIKE PREREGISTRATION — {TS}")
+md.append("")
+md.append(f"**Frozen (UTC):** {PREREG['prereg_frozen_utc']}")
+md.append(f"**Experiment ID:** `{PREREG['experiment_id']}`")
+md.append(f"**Class:** {PREREG['class']} (promotable={PREREG['promotable']})")
+md.append(f"**outcome_data_inspected_before_freeze:** `false`")
+md.append("")
+md.append("## Estimand")
+md.append("")
+md.append(f"- **Target:** next-day liquidation intensity per coin (daily total notional_usd)")
+md.append(f"- **Primary metric:** mean daily cross-sectional QLIKE (lower is better)")
+md.append(f"- **Metrics:** mean daily cross-sectional QLIKE, mean daily Spearman rank-IC, top-3 hit-rate")
+md.append(f"- **Primary metric for materiality:** mean daily cross-sectional QLIKE")
+md.append(f"- **Contrast:** C2 vs B1; **Materiality floor:** 2.0% relative improvement (C2 lower QLIKE loss)")
+md.append(f"- **QLIKE:** qlike(y, yhat) = y/yhat - ln(y/yhat) - 1; paired diff (C2 - B1) < 0 favours C2")
+md.append(f"- **Min instruments:** 5; **Min test blocks:** 3; **Block bootstrap:** 2000 reps (seed 20261115)")
+md.append(f"- **Purge/embargo:** 7 days; **Walk-forward:** expanding window")
+md.append("")
+md.append("## Universe")
+md.append("")
+md.append(f"- 15 Hyperliquid coins: {', '.join(PREREG['universe']['coins'])}")
+md.append(f"- Source: combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) observed liquidation events")
+md.append("")
+md.append("## Features")
+md.append("")
+md.append(f"- **B1:** {PREREG['features']['B1']}")
+md.append(f"- **C2:** {PREREG['features']['C2']}")
+md.append(f"- {PREREG['features']['note']}")
+md.append("")
+md.append("## Splits")
+md.append("")
+md.append(f"- **Train:** {PREREG['splits']['train']['start']}..{PREREG['splits']['train']['end']} ({PREREG['splits']['train']['blocks']})")
+md.append(f"- **Validation:** {PREREG['splits']['validation']['start']}..{PREREG['splits']['validation']['end']}")
+md.append(f"- **Embargo:** {PREREG['splits']['embargo_days']} days")
+for tb in PREREG['splits']['test_blocks']:
+    md.append(f"- **Test block {tb['index']}:** {tb['start']}..{tb['end']} ({tb['class']})")
+md.append("")
+md.append("## Gate")
+md.append("")
+for c in PREREG['gate']['pass_conditions']:
+    md.append(f"- {c}")
+md.append("")
+md.append(f"**Verdict space:** {PREREG['gate']['verdict_space']}")
+md.append("")
+md.append("## Hard constraints")
+md.append("")
+md.append("- No outcome peeking or threshold tuning before/after freeze.")
+md.append("- No sealed artifact mutation; no paid/credentialed/manual data; no network for outcomes.")
+md.append("- H2_shek_replication remains EXPLORATORY_ONLY (promotable=false).")
+md.append("- NOT_MET is recorded honestly; next materially different heavy cell installed if NOT_MET.")
+prereg_md.write_text("\n".join(md) + "\n")
+
+print(json.dumps({"prereg_json": str(prereg_json.relative_to(REPO)),
+                  "prereg_md": str(prereg_md.relative_to(REPO)),
+                  "experiment_id": PREREG["experiment_id"]}, indent=2))

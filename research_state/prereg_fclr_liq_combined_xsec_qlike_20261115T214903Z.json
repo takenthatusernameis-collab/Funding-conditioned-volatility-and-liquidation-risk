@@ -1,0 +1,128 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-QLIKE-20261115T214903Z",
+  "prereg_frozen_utc": "2026-11-15T21:49:03Z",
+  "class": "CONFIRMATORY",
+  "promotable": false,
+  "outcome_data_inspected_before_freeze": false,
+  "estimand": {
+    "name": "daily_cross_sectional_qlike",
+    "target": "next_day_total_notional_usd_per_coin",
+    "aggregation": "sum of notional_usd over (coin, calendar_day)",
+    "target_shift": "next_calendar_day (shift -1 within coin)",
+    "metric": "cross-sectional QLIKE (mean of per-coin QLIKE losses across coins each day)",
+    "qlike": "qlike(y, yhat) = y/yhat - log(y/yhat) - 1, lower is better",
+    "metrics": [
+      "mean_daily_cross_sectional_qlike",
+      "mean_daily_spearman_rank_ic",
+      "top3_hit_rate"
+    ],
+    "primary_metric_for_materiality": "mean_daily_cross_sectional_qlike",
+    "baseline": "B1",
+    "challenger": "C2",
+    "contrast": "C2_vs_B1",
+    "materiality_floor_pct": 2.0,
+    "min_instruments": 5,
+    "min_test_blocks": 3,
+    "block_bootstrap_reps": 2000,
+    "block_bootstrap_seed": 20261115,
+    "holm_family": [
+      "C2_vs_B1_mean_daily_cross_sectional_qlike",
+      "C2_vs_B1_mean_daily_spearman_rank_ic",
+      "C2_vs_B1_top3_hit_rate"
+    ],
+    "purge_embargo_days": 7,
+    "walk_forward": "expanding_window",
+    "note": "QLike is a loss: C2 improves when mean_daily_cross_sectional_qlike_C2 < mean_daily_cross_sectional_qlike_B1, i.e. paired diff (C2-B1) < 0."
+  },
+  "universe": {
+    "coins": [
+      "AAVE",
+      "ADA",
+      "AVAX",
+      "BNB",
+      "BTC",
+      "CRV",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "LTC",
+      "NEAR",
+      "SOL",
+      "SUI",
+      "UNI",
+      "XRP"
+    ],
+    "n_coins": 15,
+    "source_family": "combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed liquidation events",
+    "panel_artifact": null
+  },
+  "features": {
+    "B1": [
+      "rv24h",
+      "rv168h"
+    ],
+    "C2": [
+      "rv24h",
+      "rv168h",
+      "fundingRate",
+      "abs_fund_pct",
+      "premium",
+      "ema_dist"
+    ],
+    "note": "All features are causal (past-only as-of joins) at the event->daily aggregation grain. Funding features are the last funding timestamp <= event; RV features are 4h-candle rolling std over past bars."
+  },
+  "splits": {
+    "train": {
+      "start": "2025-03-22",
+      "end": "2025-05-21",
+      "blocks": "panel-origin expanding-window train; block1 train window is empty (panel starts 2025-03-22) so block 1 is train-limited by design"
+    },
+    "validation": {
+      "start": "2025-05-22",
+      "end": "2025-09-30"
+    },
+    "embargo_days": 7,
+    "test_blocks": [
+      {
+        "index": 1,
+        "start": "2025-03-22",
+        "end": "2025-04-21",
+        "class": "PRISTINE_METPIE"
+      },
+      {
+        "index": 2,
+        "start": "2025-04-21",
+        "end": "2025-05-21",
+        "class": "PRISTINE_METPIE"
+      },
+      {
+        "index": 3,
+        "start": "2025-10-01",
+        "end": "2025-10-31",
+        "class": "IRONFLOW_ESTIMAND_NOVEL"
+      }
+    ],
+    "note": "Test blocks are non-overlapping 30d blocks; 2 pristine metpie blocks never tested for this estimand + 1 estimand-novel ironflow block. Expanding-window walk-forward: fit on data <= block_start - 7d, evaluate the block."
+  },
+  "gate": {
+    "pass_conditions": [
+      "mean_daily_cross_sectional_qlike_C2_vs_B1 relative improvement >= 2.0% (C2 lower loss)",
+      "block_bootstrap 95% CI hi < 0 for paired diff (C2-B1) on primary QLIKE (excludes zero in favorable direction)",
+      "n_paired_instruments >= 5",
+      "n_test_blocks_with_data >= 3"
+    ],
+    "verdict_space": [
+      "PASS",
+      "NOT_MET"
+    ],
+    "null_handling": "Record NOT_MET honestly; do not retune thresholds; install next materially different heavy cell if NOT_MET."
+  },
+  "constraints": {
+    "no_outcome_peeking_before_freeze": true,
+    "no_threshold_tuning_after_freeze": true,
+    "no_sealed_artifact_mutation": true,
+    "no_paid_or_credentialed_data": true,
+    "no_network_for_outcomes": true,
+    "H2_shek_replication_remains": "EXPLORATORY_ONLY (promotable=false)"
+  }
+}

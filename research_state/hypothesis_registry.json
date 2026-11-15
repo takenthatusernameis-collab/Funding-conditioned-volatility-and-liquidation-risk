@@ -439,7 +439,28 @@
       "terminal_class": "NOT_MET",
       "type": "confirmatory",
       "updated_utc": "2026-11-15T20:35:10Z"
+    },
+    {
+      "class": "CONFIRMATORY",
+      "contrast": "C2_vs_B1",
+      "description": "Funding + premium + ema features improve cross-sectional QLIKE forecasting of next-day liquidation intensity (C2) over RV-only baseline (B1) on the combined metpie+ironflow Hyperliquid panel",
+      "estimand": "daily_cross_sectional_qlike",
+      "experiment_id": "FCLR-LIQ-XSEC-QLIKE-20261115T214903Z",
+      "id": "H_fclr_liq_xsec_qlike_forecast",
+      "last_evaluation": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
+      "last_tested": "2026-11-15T21:49:50Z",
+      "last_verdict": "NOT_MET",
+      "promotable": false,
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE",
+        "HL_LABEL_EXTENSION"
+      ],
+      "status": "NOT_MET",
+      "terminal": true,
+      "terminal_class": "NOT_MET",
+      "type": "confirmatory",
+      "updated_utc": "2026-11-15T21:49:50Z"
     }
   ],
-  "updated_utc": "2026-11-15T20:35:10Z"
+  "updated_utc": "2026-11-15T21:49:50Z"
 }

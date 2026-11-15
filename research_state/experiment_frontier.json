@@ -14,49 +14,61 @@
       "sealed_artifacts_mutated": false
     },
     "generated": "20261115T203550Z",
-    "last_checked": "20261115T203550Z",
-    "last_evaluation": null,
-    "last_verdict": null,
-    "next_action_heavy": "python3 scripts/fclr_liq_combined_xsec_qlike_prereg.py (new; writes prereg_fclr_liq_combined_xsec_qlike_<UTC>.{json,md} pre-outcomes) -> python3 scripts/fclr_liq_combined_xsec_qlike_eval.py (new; reads frozen prereg + fclr_liq_combined_panel_20261115T181405Z.parquet, writes evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.{json,md}, updates frontier+hypothesis_registry) -> python3 scripts/fclr_campaign_gate.py && python3 scripts/check_tracka_scope_registry_drift.py && targeted unittest suite. Register both new scripts in BOTH scope registries.",
-    "next_unfinished_task": "FCLR-LIQ-XSEC-QLIKE: freeze a NEW pre-outcomes prereg for cross-sectional QLIKE of next-day liquidation intensity on the SAME admissible 15-coin combined metpie+ironflow panel (cache-only, no new acquisition): each day compute cross-sectional QLIKE between predicted and realized next-day intensity across 15 coins; compare C2 (rv24h,rv168h,fundingRate,abs_fund_pct,premium,ema_dist) vs B1 (rv24h,rv168h) on mean daily cross-sectional QLIKE (primary), Spearman rank-IC and top-3 hit-rate (secondary), expanding-window walk-forward over 3 non-overlapping 30d test blocks: 2 pristine metpie blocks (2025-03-22..2025-04-21, 2025-04-21..2025-05-21) + 1 estimand-novel ironflow block (2025-10-01..2025-10-31), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, ≥2% materiality floor on primary. Then eval+gate+timestamped verdict; update frontier + H_fclr_liq_xsec_qlike_forecast. Do not stop.",
-    "note": "Heavy work is the DEFAULT path (READY_EXECUTE), NOT trigger-gated. Installed after the cross-sectional ordering cell concluded NOT_MET (2026-11-15T20:35:10Z). Reuses the already-built admissible panel; no new acquisition. Uses the 2 pristine metpie blocks never before tested for cross-sectional estimands. See AGENT_HANDOFF.md INITIAL TASK MESSAGE 20261115T203550Z.",
+    "last_checked": "20261115T215045Z",
+    "last_evaluation": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
+    "last_verdict": "NOT_MET",
+    "next_action_heavy": null,
+    "next_unfinished_task": null,
+    "note": "Executed FCLR-LIQ-XSEC-QLIKE-20261115T203550Z rank-0 heavy campaign: prereg frozen pre-outcomes at research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.{json,md}; eval executed at research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.{json,md}; verdict NOT_MET (recorded honestly; C2 worse than B1 on cross-sectional QLIKE, rel improvement -75.56%, only 2 of 3 blocks evaluable because block-1 train window is empty at panel origin 2025-03-22). Both new scripts registered in tracka_script_scope_registry.json and tests/test_tracka_hardening_117.py; drift green, tests 117/118 pass. No agent-removable heavy work remains at rank 0: all candidate liquidation estimands (combined panel, cross-sectional ordering, cross-sectional QLIKE) concluded NOT_MET/SUPERSEDED; no new admissible observed-liquidation source; H2_shek_replication EXPLORATORY_ONLY. Next session: verify drift + 117/118 green, confirm NOT_MET recorded, then stop cleanly unless a new observed liquidation source arrives (GATE4_BRANCH_1 / NEW_OBSERVED_LIQUIDATION_SOURCE).",
     "phases": [
       {
+        "actual_artifacts": [
+          "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.json",
+          "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.md"
+        ],
         "claim": "Freeze NEW pre-outcomes prereg for cross-sectional QLIKE of next-day liquidation intensity (C2 vs B1) on the 15-coin combined panel: daily cross-sectional QLIKE (primary) + rank-IC + top-3 hit-rate (secondary), expanding-window walk-forward, 3 non-overlapping 30d test blocks (2 pristine metpie + 1 estimand-novel ironflow), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
         "expected_artifacts": [
           "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.json",
           "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.md"
         ],
         "phase": "PREREG_FREEZE",
-        "status": "PENDING"
+        "status": "COMPLETED"
       },
       {
+        "actual_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.json",
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.md"
+        ],
         "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional QLIKE / rank-IC / top-3 hit-rate verdict with block-bootstrap CI and Holm; run forecast gate.",
         "expected_artifacts": [
           "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.json",
           "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.md"
         ],
         "phase": "EVALUATION_AND_GATE",
-        "status": "PENDING"
+        "status": "COMPLETED"
       },
       {
+        "actual_artifacts": [
+          "research_state/tracka_script_scope_registry.json (193->195 scripts)",
+          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
+        ],
         "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_qlike_forecast); no sealed mutation, no workflows edits.",
         "expected_artifacts": [
           "research_state/tracka_script_scope_registry.json (191->193 scripts)",
           "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
         ],
         "phase": "REGISTRY_AND_FRONTIER",
-        "status": "PENDING"
+        "status": "COMPLETED"
       }
     ],
-    "program_status": "ACTIVE",
+    "program_status": "CONCLUDED_NOT_MET",
     "rank": 0,
     "refreshed": "20261115T203550Z",
     "resume_triggers": [
       "GATE4_BRANCH_1",
       "NEW_OBSERVED_LIQUIDATION_SOURCE"
     ],
-    "status": "READY_EXECUTE",
+    "status": "CONCLUDED_NOT_MET",
     "task": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z"
   },
   {
@@ -130,7 +142,7 @@
     "task": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z"
   },
   {
-    "blockers": "None agent-removable on cache: §16 audit = ADMISSIBLE_PENDING_BOUNDED_ACQUISITION (see research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}); only the 2025-03..2025-10 HL candle/funding context must be fetched (bounded, unauthenticated). Not a re-probe: metpie is a materially new observed-liquidation source family never used for outcomes.",
+    "blockers": "None agent-removable on cache: \u00a716 audit = ADMISSIBLE_PENDING_BOUNDED_ACQUISITION (see research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}); only the 2025-03..2025-10 HL candle/funding context must be fetched (bounded, unauthenticated). Not a re-probe: metpie is a materially new observed-liquidation source family never used for outcomes.",
     "evidence": {
       "audit": "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}",
       "class": "CONFIRMATORY_PENDING_PREREG",
@@ -156,7 +168,7 @@
           "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.json",
           "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.md"
         ],
-        "claim": "§16 admissibility + integration audit of the combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed-liquidation source. Determination ADMISSIBLE_PENDING_BOUNDED_ACQUISITION; all criteria PASS except aligned market context (cache covers 2025-11+ only).",
+        "claim": "\u00a716 admissibility + integration audit of the combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed-liquidation source. Determination ADMISSIBLE_PENDING_BOUNDED_ACQUISITION; all criteria PASS except aligned market context (cache covers 2025-11+ only).",
         "expected_artifacts": [
           "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.json",
           "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.md"
