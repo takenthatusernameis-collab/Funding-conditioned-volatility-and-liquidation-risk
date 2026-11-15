@@ -24,30 +24,27 @@ Create the frozen pre-results protocol for the corrected-estimator audit, then i
 - Health checks: `python3 scripts/next_campaign_status.py` (reads-only; Binance contiguous exhausted, disjoint frontier still lists 2024-06 as a feasible *block* from cache but 2024-06 singleton diagnostic is now executed per this handoff/eval—do not re-run 2024-06). `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → PASS. `python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute tests.test_fclr_fwd_vol_2025_disjoint_reconcile tests.test_fclr_fwd_vol_2024_disjoint_2024_06 -v` → 64 OK.
 - Hard rules unchanged: no network/paid/credentialed/manual data, no raw-cache commits, no `.github/workflows/*` edits, no sealed mutation, no leakage/future info, do not relabel exploratory as confirmatory, do not promote H1, do not invent provenance.
 
-## Active heavy campaign (execute next): corrected-estimator audit on cached 2025 disjoint panel (singleton context closed)
+## Active heavy campaign — COMPLETE: corrected-estimator audit on cached 2025 disjoint panel (singleton context closed)
 
-**Do not** re-run 2024-06, **do not** run tested disjoint months `2025-06/2025-11/2025-12` as new cells, and **do not** run a fresh three-block confirmation. The 2024-06 singleton was `EXPLAINED_BY_ESTIMATOR`; the bounded next step is a cached-panel robustness/audit using the **corrected** estimator conventions on the already-executed 2025 disjoint panel to test whether the 2025 `EXPLORATORY_NULL`/`UNEXPLAINED` reconcile is estimator-sensitive under a NEW frozen prereg.
+`FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z` executed end-to-end on cached artifacts only. Verdict: **NOT_EXPLAINED_BY_ESTIMATOR** (EXPLORATORY_ONLY, promotable=false). The corrected estimator reproduces the sealed 2025 CROSS reference exactly (corrected -1.9633752428119808% vs sealed -1.9633752428119817%, swing 0.000pp, no sign flip), so the 2025 EXPLORATORY_NULL/UNEXPLAINED is NOT attributable to estimator conventions (train-only standardization + Duan smearing); preserved as a bounded negative result.
 
-Create `FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-<UTC>` and execute end-to-end on cached artifacts only:
+**Do not** re-run 2024-06, **do not** run tested disjoint months `2025-06/2025-11/2025-12` as new cells, and **do not** run a fresh three-block confirmation. The 2024-06 singleton was `EXPLAINED_BY_ESTIMATOR`; this audit was the bounded final cached-panel robustness step.
 
-### 1) Freeze pre-results protocol before inspecting any outcome
-Write `research_state/prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_<UTC>.{json,md}` with `status:"FROZEN_PRE_OUTCOMES"`, `frozen_before_outcomes:true`, `outcome_data_inspected_before_freeze:false`, `promotable:false`, `max_status:"EXPLORATORY_ONLY"`.
+Artifacts emitted (all new files; no sealed artifact mutated):
+- `research_state/prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_2026-11-15T00:12:56Z.{json,md}` (FROZEN_PRE_OUTCOMES, frozen_before_outcomes true, outcome_data_inspected_before_freeze false, promotable false, max_status EXPLORATORY_ONLY)
+- `scripts/fclr_fwd_vol_2025_disjoint_corrected_audit.py`
+- `research_state/tracka_fwd_vol_2025_disjoint_corrected_audit_build_report_20261115T001256Z.json`
+- `research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.{json,md}` (verdict NOT_EXPLAINED_BY_ESTIMATOR)
+- `tests/test_fclr_fwd_vol_2025_disjoint_corrected_audit.py` (24 tests)
 
-Protocol must:
-- Use existing cached panel `research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet` (sha256 `de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba`) and frozen disjoint block design (2025-06/11/12, per prereg `prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json`). No new test windows.
-- Reuse frozen B0/B1/C1/C2 and primary C2-vs-B1 24h QLIKE contract.
-- Apply **corrected** estimator only as pre-specified (train-only standardization, finite-row masking, train-only log-target Duan smearing, drop-only missingness), comparable to 2024-06 corrected arm; contrast against recorded sealed reference from `evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json` / reconcile artifacts (no re-execution of sealed scripts as a new cell).
-- Require row/key/panel-hash/lineage verification before outcome computation; mismatch => `INCONCLUSIVE`.
-- Report paired pooled C2-vs-B1 (and C1-vs-B1, C2-vs-C1) 24h QLIKE, relative reductions, day-block-bootstrap CIs (deterministic seed), Holm, LOIO, placebo.
-- Verdict space: `EXPLAINED_BY_ESTIMATOR` | `NOT_EXPLAINED_BY_ESTIMATOR` | `INCONCLUSIVE`; all `EXPLORATORY_ONLY`, `promotable=false`. Do not reopen sealed 2025 CROSS/RECONCILE verdicts.
+Verification:
+- `python3 scripts/next_campaign_status.py` -> exit 0 (no feasible 3-block design; cached exhausted)
+- `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` -> GATE: PASS (15/15)
+- `python3 -m unittest tests.test_next_campaign_status tests.test_fclr_liq_expansion_recompute tests.test_fclr_fwd_vol_2025_disjoint_reconcile tests.test_fclr_fwd_vol_2024_disjoint_2024_06 tests.test_fclr_fwd_vol_2025_disjoint_corrected_audit -v` -> 88 OK
+- Sealed hashes unchanged: panel de0ca73e..., cross eval 78537585..., cross prereg fcf3e7e5...
 
-### 2) Implement and run
-- Add dedicated script(s) under `scripts/` (do not modify sealed scripts/artifacts). Add focused tests under `tests/` (frozen prereg, panel hash, train/test/embargo/causality, train-only scaling/smearing, deterministic seed, leakage, no sealed mutation).
-- Emit: prereg `.json/.md`, evaluation summary `.json/.md` (and build/lineage report if a derived artifact is produced), tests + command output summarized.
+Resume triggers unchanged (GATE4_BRANCH_1 / NEW_OBSERVED_LIQUIDATION_SOURCE / HL_LABEL_EXTENSION). No further cached-panel robustness action is warranted without a NEW justified prereg.
 
-### 3) Decide from evidence (bounded)
-- Preserve as bounded negative/NOT_EXPLAINED_BY_ESTIMATOR/INCONCLUSIVE as warranted; `EXPLORATORY_ONLY`, `promotable=false`.
-- Minimum failure: emit timestamped `INCONCLUSIVE` or `NO_GO` with exact failing checks. Status-only session is not completion.
 
 ## Resume triggers (act only when satisfied)
 1. `GATE4_BRANCH_1`: valid resolved terms evidence appears (`RESOLVED_VERIFIED`, `fabricated==false`, human/legal attestation) → execute Gate 4 Branch 1 per gate scripts/tests.

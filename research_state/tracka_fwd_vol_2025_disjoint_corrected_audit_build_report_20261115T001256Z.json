@@ -1,0 +1,49 @@
+{
+  "blocks": [
+    {
+      "block": 0,
+      "test_end": "2025-06-30T23:00:00Z",
+      "test_start": "2025-06-01T00:00:00Z",
+      "train_end": "2025-05-24T23:00:00Z",
+      "train_start": "2025-04-25T00:00:00Z"
+    },
+    {
+      "block": 1,
+      "test_end": "2025-11-30T23:00:00Z",
+      "test_start": "2025-11-01T00:00:00Z",
+      "train_end": "2025-10-24T23:00:00Z",
+      "train_start": "2025-09-25T00:00:00Z"
+    },
+    {
+      "block": 2,
+      "test_end": "2025-12-31T23:00:00Z",
+      "test_start": "2025-12-01T00:00:00Z",
+      "train_end": "2025-11-23T23:00:00Z",
+      "train_start": "2025-10-25T00:00:00Z"
+    }
+  ],
+  "campaign": "FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT",
+  "embargo_days": 7,
+  "experiment_id": "FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z",
+  "generated_utc": "2026-11-15T00:12:56Z",
+  "key_count": 30120,
+  "max_status": "EXPLORATORY_ONLY",
+  "network_used": false,
+  "panel": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+  "panel_sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+  "prereg": "prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_2026-11-15T00:12:56Z.json",
+  "prereg_sha256": "46ff738577f43cb82203f9ffd20982d82615eeef8dc4606b3462f9f0e1b538df",
+  "promotable": false,
+  "row_count": 30120,
+  "sealed_artifacts_mutated": false,
+  "sealed_reference_source": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json",
+  "span_end": "2025-12-31 23:00:00+00:00",
+  "span_start": "2025-04-25 00:00:00+00:00",
+  "symbols": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ]
+}
