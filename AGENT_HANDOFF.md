@@ -1,140 +1,51 @@
-# AGENT HANDOFF — 2026-11-15T20:43:23Z
+# AGENT HANDOFF — 2026-11-15T21:34:53Z
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
-**Session status:** CONCLUDED — confirmatory program exhausted under current constraints
+**Session status:** ACTIVE — rank-0 heavy campaign `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` (`READY_EXECUTE`) pending execution
 
 ---
 
-## EXECUTIVE SUMMARY
-The confirmatory research program is **COMPLETE / CONCLUDED**. All pre-specified confirmatory evaluations executed in-repo show **no confirmatory evidence** that funding-conditioned features deliver robust OOS improvement beyond RV-only baselines. Track A (observed liquidations) is **STRUCTURALLY BLOCKED** — no admissible unauthenticated historical source exists in this environment. No risk overlay is eligible.
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — 2026-11-15T21:34:53Z
 
-**Campaign state:** BOUNDED TRIGGER-ONLY. No agent-removable heavy work remains. Do not poll, do not re-probe identical candidates, do not run status-only sessions.
+**Repository:** Funding-conditioned-volatility-and-liquidation-risk
+**Sole durable handoff:** This file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` = tombstone. `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore.
 
----
+## IMMEDIATE HEAVY TASK (default path — NOT trigger-gated)
 
-## VERIFICATION CHECKLIST (run these to confirm state)
-```bash
-# 1. Campaign status — expect: "no feasible 3-block design in ANY domain"
-python3 scripts/next_campaign_status.py
+Rank-0 heavy campaign: **`FCLR-LIQ-XSEC-QLIKE-20261115T203550Z`** (`READY_EXECUTE` / `ACTIVE`).
 
-# 2. Next campaign gate — expect: GATE: PASS (all 3 cells frozen+terminal+checks)
-python3 scripts/fclr_next_campaign_gate.py
+Prior cell `FCLR-LIQ-XSEC-ORDERING-20261115T203501Z` is **CONCLUDED `NOT_MET`** (do not re-run same estimand; eval `research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.*`: rel_improvement -14.34%, p=0.0, verdict NOT_MET). Prior cell `FCLR-LIQ-COMBINED-PANEL-20261115T170000Z` is **CONCLUDED `NOT_MET`**.
 
-# 3. Structural closure tests — expect: all pass
-python3 -m pytest tests/test_next_campaign_status.py -v
-python3 -m pytest tests/test_fclr_final_structural_closure.py -v
-python3 -m pytest tests/test_fclr019_gate4_evidence_bundle_index.py \
-                   tests/test_fclr020_gate4_readiness_action_matrix.py \
-                   tests/test_fclr021_gate4_blocker_resolution_checklist_validator.py \
-                   tests/test_fclr022_gate4_blocker_resolution_evidence_preflight.py \
-                   tests/test_fclr023_gate4_blocker_resolution_action_plan.py -v
+Execute the materially different **cross-sectional QLIKE** estimand on the existing 15-coin panel `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` (1,740,415 events, 7,512 daily rows; no new acquisition), using the 2 pristine metpie blocks + 1 estimand-novel ironflow block.
 
-# 4. Dep-light reproducibility gate — expect: 48/48 OK
-python -m unittest tests.test_volatility_features_splits \
-                   tests.test_synthetic_boundary_labels \
-                   tests.test_trackc_panel_admissibility_audit \
-                   tests.test_trackc_gap_repair_manifest \
-                   tests.test_trackc_funding_schema_audit \
-                   tests.test_trackc_panel_window_planner.TestPanelWindowPlanner.test_contiguous_sequences \
-                   tests.test_trackc_panel_window_planner.TestPanelWindowPlanner.test_cli_smoke \
-                   tests.test_trackc_panel_deep_audit_orchestrator \
-                   tests.test_trackc_provenance_lineage -v
-```
+## EXECUTE IN ORDER
 
----
-
-## WHAT IS EXHAUSTED (evidence from `next_campaign_status.py`)
-
-| Domain | Feasible 3-block design? | Status |
-|--------|-------------------------|--------|
-| **Binance 5-symbol contiguous** | ❌ NO | No contiguous run ≥127d (max 61d: 2024-04..2024-05) |
-| **Binance 5-symbol disjoint** | ❌ NO | 3 ready months (2024-04, 2024-05, 2025-01) but ALL lack complete funding-backed train history (pre-2024-04 funding missing) |
-| **Hyperliquid bulk (ironflow: candles+funding+OI+observed liq)** | ❌ NO | Only untouched: 2025-05-01..2025-05-24 (24d < 127d); 2026-01-18..2026-04-30 forward region tested/exhausted by TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD |
-| **Hyperliquid extended (candles+funding+events, 17 coins)** | ❌ NO | Usable months exist (2025-11..2026-10) but **all inside tested windows** per `BULK_TESTED_WINDOWS` — no untouched contiguous region |
-
-**Bottom line:** `CAMPAIGN STATUS: no feasible 3-block design in ANY domain`
-
----
-
-## FCLR-NEXT-CAMPAIGN GATE — PASSED
-All three campaign cells have frozen preregs, terminal verdicts, and checks blocks:
-| Cell | Verdict | Checks |
-|------|---------|--------|
-| LIQ-010-CONFIRM | NOT_REPLICATED | 7 checks |
-| EXP-ROBUST-REDO | FRAGILE | 5 checks |
-| FWD-VOL-2025-CROSS | NOT_REPLICATED | 7 checks |
-
----
-
-## STRUCTURAL EXHAUSTION CONFIRMED (2026-11-14T13:27:41Z)
-**Source:** `research_state/structural_exhaustion_confirmation_20261114T132741Z.md`
-
-- **Gate 4 trigger:** NO_VALID_GATE4_TRIGGER (only `BLOCKED` evidence artifact exists)
-- **New admissible observed-liquidation sources:** 0 of 22 candidates probed — ALL NO-GO
-  - HF datasets: insufficient coverage, wrong venue (Binance), or unverified scope
-  - Exchange APIs: auth required, no historical census, or commercial
-  - Ironflow Hyperliquid: NOT NEW (already integrated/exhausted; post-2026-10-31 depth ~12d < 100d)
-- **FCLR-LIQ-EXPANSION-RECONCILIATION:** COMPLETE → `EXPLAINED_BY_ESTIMATOR`
-- **Binance 5-symbol 3-block design:** EXHAUSTED
-- **Hyperliquid 2026Q1Q2 forward region:** TESTED/EXHAUSTED
-
----
-
-## RESUME TRIGGERS (act ONLY when satisfied — do not poll)
-1. **GATE4_BRANCH_1**: Valid `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` appears (`status==RESOLVED_VERIFIED`, `fabricated==false`, human/legal attestation)
-2. **NEW_OBSERVED_LIQUIDATION_SOURCE**: Materially new candidate not falsified above → formal §16 admissibility audit artifact (`research_state/<source>_admissibility_audit_<UTC>.{md,json}` proving ALL §16 minima) BEFORE any prereg/outcomes
-3. **HL_LABEL_EXTENSION**: Hyperliquid ≥100d depth AND verified post-2026-10-31 observed liquidation labels → bounded reprobe only
-4. **EXPANSION_ROBUSTNESS_REDO**: Robustness/falsification on a cached panel with a NEW frozen prereg pre-outcomes
-
----
-
-## CONFIRMATORY VERDICTS (from `final_synthesis_report.md`)
-
-| Hypothesis / Track | Verdict | Key Evidence |
-|---|---|---|
-| **H001 / Track C** (funding extremes + RV + dislocation → OOS volatility/stress forecast) | **NOT_SUPPORTED** | 8+ confirmatory panels; best C2 vs B1 = -0.43% QLIKE (CI crosses zero, below 2% floor); no confirmatory gate passed |
-| **H002** (Shek 2026 replication) | **PARTIAL_REPLICATION (non-confirmatory)** | Direction reproduced (16h vs 8h) but p=0.079, magnitudes differ (27h/3h vs 16h/8h), universe smaller (5 vs 18) |
-| **H003 / Track B** (modeled boundary-breach predictability) | **NOT_SUPPORTED** | 32 tests (16 cells × 2 horizons); no cells survive Holm correction |
-| **Track A** (observed liquidations) | **STRUCTURALLY_BLOCKED** | No admissible unauthenticated historical source with required coverage; cannot be repaired locally without prohibited network/paid/manual access |
-
-**Family-wide confirmatory claim: REJECTED / UNSUPPORTED**
-
----
+1. Confirm rank-0 = `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` in `research_state/experiment_frontier.json` (status READY_EXECUTE, all 3 phases PENDING).
+2. Freeze NEW pre-outcomes prereg: create `scripts/fclr_liq_combined_xsec_qlike_prereg.py` → `research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.{json,md}` (daily cross-sectional QLIKE of next-day liquidation intensity, B1 vs C2, primary metric = cross-sectional QLIKE, secondary = rank-IC + top-3 hit-rate, expanding-window walk-forward over 3 non-overlapping 30d test blocks: 2 pristine metpie blocks 2025-03-22..2025-04-21 & 2025-04-21..2025-05-21 + 1 estimand-novel ironflow block 2025-10-01..2025-10-31, 7d purge/embargo, ≥2000 block-bootstrap reps seed 20261115, Holm, ≥2% materiality floor on primary; `outcome_data_inspected_before_freeze=false`).
+3. Create `scripts/fclr_liq_combined_xsec_qlike_eval.py` → `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.{json,md}`; update frontier + `H_fclr_liq_xsec_qlike_forecast`. If NOT_MET, record honestly and install next materially different heavy cell at rank 0.
+4. Register BOTH new scripts in BOTH `research_state/tracka_script_scope_registry.json` and `tests/test_tracka_hardening_117.py` `SCRIPT_REGISTRY`; keep drift + 117/118 green. Checkpoint-commit deliverables (include untracked combined eval summaries if still untracked).
 
 ## HARD CONSTRAINTS (non-negotiable)
-- ❌ NO network/downloads
-- ❌ NO paid/manual/credentialed data access
-- ❌ NO workflow/scheduler/poller additions
-- ❌ NO fabricated provenance or outcomes
-- ❌ NO threshold shopping or sealed-holdout reuse
-- ✅ Local computation only on cached artifacts
-- ✅ Read-only audit/diagnostic/synthesis permitted
+- ❌ Never reopen sealed/terminal families or mutate sealed artifacts; never edit `.github/workflows/*`.
+- ❌ No outcome-peeking/threshold tuning before prereg; no paid/credentialed/manual data for outcomes.
+- ❌ No polling, no re-running same estimand, no re-probing TERMINAL_NO_GO families.
+- ✅ `H2_shek_replication` remains EXPLORATORY_ONLY (`promotable=false`).
+- ✅ Exactly ONE active handoff (`AGENT_HANDOFF.md`). "No trigger → stop cleanly" is NOT completion.
 
----
-
-## WHAT THE NEXT AGENT MUST DO
-**If a resume trigger fires:** Execute the corresponding bounded workflow (Gate 4 Branch 1, new source admissibility audit, HL label extension, or expansion robustness redo) with a NEW frozen prereg pre-outcomes.
-
-**If NO resume trigger fires:**
-1. Run the verification checklist above to confirm state
-2. Acknowledge campaign is concluded under current constraints
-3. **Do not invent heavy work** — there is none executable
-4. **Do not re-probe** falsified candidates (structural_exhaustion_confirmation.md lists all 22)
-5. **Do not run status-only sessions** — this creates noise, not signal
-
-**The only path to new heavy work is an ENVIRONMENT CHANGE** (new admissible unauthenticated data source with verifiable provenance and sufficient coverage). In this environment, that path is blocked.
-
----
+## BOTTLENECKS REMOVED
+1. **Contradiction resolved:** `AGENT_HANDOFF.md` previously stated "no agent-removable heavy work remains" while `experiment_frontier.json` rank 0 shows `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` (`READY_EXECUTE` / `ACTIVE`, all phases PENDING). Heavy work IS executable and is the DEFAULT path, not trigger-gated. This handoff supersedes the stale "concluded" claim.
+2. **No stale handoffs:** `NEXT_SESSION_HANDOFF.md` = tombstone (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = retired/superseded. Single durable handoff = this file only.
 
 ## KEY ARTIFACTS FOR REFERENCE
-- `research_state/final_synthesis_report.md` — Executive synthesis
-- `research_state/structural_exhaustion_confirmation_20261114T132741Z.md` — Exhaustion evidence
-- `research_state/next_campaign_status.py` — Truth script (run it)
-- `research_state/hypothesis_registry.json` — All hypotheses & status
-- `research_state/experiment_frontier.json` — Experiment registry
-- `research_state/negative_results_report.md` — Preserved null results
-- `AGENT_HANDOFF.md` — This file (single durable handoff)
+- `research_state/experiment_frontier.json` — rank-0 cell `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` (READY_EXECUTE, phases PENDING)
+- `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` — 15-coin combined metpie+ironflow observed-liquidation panel
+- `research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.json` — prior cell NOT_MET (do not re-run)
+- `scripts/fclr_liq_combined_xsec_prereg.py` — existing ORDERING prereg script (template for QLIKE prereg)
+- `scripts/fclr_liq_combined_xsec_eval.py` — existing ORDERING eval script (template for QLIKE eval)
+- `research_state/tracka_script_scope_registry.json` — script registry (register new QLIKE scripts)
+- `tests/test_tracka_hardening_117.py` — `SCRIPT_REGISTRY` (sync with registry)
+- `AGENT_HANDOFF.md` — this file (single durable handoff)
 
 ---
 
-**Generated by:** Kilo agentic session 2026-11-15T20:43:23Z
-**Next session:** Act only on resume triggers. Do not poll. Do not invent work.
+**Generated by:** Kilo agentic session 2026-11-15T21:34:53Z
+**Next session:** Execute `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` rank-0 heavy campaign per INITIAL TASK MESSAGE above. Do not poll. Do not invent work beyond this campaign.
