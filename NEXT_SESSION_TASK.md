@@ -1,15 +1,27 @@
-# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T08:36:03Z
-# SOLE DURABLE HANDOFF — DO NOT RE-EDIT PROSE BEFORE PRODUCING DELIVERABLES
+# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T08:43:11Z
+# SOLE DURABLE HANDOFF POINTER — DO NOT RE-EDIT HANDOFF PROSE BEFORE PRODUCING DELIVERABLES
 
 ## REPOSITORY CONTEXT
 **Project:** Funding-conditioned-volatility-and-liquidation-risk (quantitative finance research on funding rates, volatility, and liquidation risk in crypto perpetuals)
-**Status:** Campaign status `scripts/next_campaign_status.py` → "no feasible 3-block design in ANY domain" (verified honest)
-**Active Handoff:** `AGENT_HANDOFF.md` (sole authoritative; `NEXT_SESSION_HANDOFF.md` is a tombstone; `AGENT_HANDOFF_20261115T073240Z.md` is RETIRED)
+**Status:** `scripts/next_campaign_status.py` → "no feasible 3-block design in ANY domain" (honest; forecast frontier exhausted, Shek sensitivity grid remains)
+**Authoritative handoff:** `AGENT_HANDOFF.md` (sole active). `NEXT_SESSION_HANDOFF.md` = tombstone. `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED.
 
 ## INITIAL TASK FOR NEXT AGENTIC WORK SESSION
 
 **Execute `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` immediately (DEFAULT heavy path, NOT trigger-gated).**
-This is the frozen prereg sensitivity grid required by `research_state/prereg_fclr_shek_scale_20261115T063600Z.json` but not emitted by the headline run `evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.{json,md}`. Forecast 3-block frontier is exhausted; this cache-only robustness cell on the same frozen Shek samples is the honest next step.
+Frozen prereg `research_state/prereg_fclr_shek_scale_20261115T063600Z.json` specifies the sensitivity grid, but headline artifacts `evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.{json,md}` emitted only headline/primary-family results. This is required cache-only robustness work on frozen Shek samples (not a re-probe). Do not stop for triggers; do not re-summarise baseline; produce deliverables.
+
+**Baseline re-verified 2026-11-15T08:43Z:** gates green (19/19, fwd-vol PASS), scope drift 186/186 OK, targeted suite 58/58 OK, frontier rank-0 `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` `READY_EXECUTE`, no `research_state/*SENS*` artifacts present. No sealed artifacts mutated.
+
+### MANDATORY START BLOCK (copy-paste, do not re-derive)
+```bash
+git status --short && git log -1 --oneline
+python3 scripts/fclr_campaign_gate.py               # 19/19
+python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py  # PASS
+python3 scripts/check_tracka_scope_registry_drift.py      # 186/186
+python3 -m unittest tests.test_fclr_shek_scale tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication tests.test_tracka_hardening_117 -v
+python3 scripts/next_campaign_status.py             # "no feasible 3-block design in ANY domain"
+```
 
 ### MANDATORY START BLOCK (copy-paste, do not re-derive)
 ```bash
@@ -39,7 +51,7 @@ If green, proceed immediately to heavy execution — do not stop to re-summarise
 5. **Extend `scripts/fclr_shek_scale.py` or add a clearly-scoped companion script** registered in BOTH scope registries:
    - `research_state/tracka_script_scope_registry.json`
    - `tests/test_tracka_hardening_117.py` `SCRIPT_REGISTRY`
-   - Keep drift check green (`scripts/check_tracka_scope_registry_drift.py` → 185+/185+)
+   - Keep drift check green (`scripts/check_tracka_scope_registry_drift.py` → 186/186 currently; must remain green)
 6. **Add/extend deterministic, fixture-based, tmp-isolated, no-network tests** covering grid-cell computation and verdict-consistency logic (extend `tests/test_fclr_shek_scale.py` or add registered companion test). Keep `H2_shek_replication` `EXPLORATORY_ONLY`, `promotable=false`, never terminal-promote.
 7. **Advance frontier:** move `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` to `COMPLETED_VALIDATED` with evidence and install the next heavy cell at rank 0. If no cache-heavy estimand remains, install a truthful trigger-only sentinel (only after grid actually completed).
 8. **Full verification before commit:**
