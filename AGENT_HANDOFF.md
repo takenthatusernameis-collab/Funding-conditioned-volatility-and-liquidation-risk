@@ -1,6 +1,19 @@
-# Durable Agent Handoff — refreshed 2026-11-15T05:09:18Z (sole authoritative version)
+# Durable Agent Handoff — sole authoritative version (initial task refreshed 2026-11-15T06:02:24Z)
 
 **SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_HANDOFF.md` is a tombstone; older `AGENT_HANDOFF` revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` (self-superseded) are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
+
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T06:02:24Z`
+
+**Execute `FCLR-SHEK-SCALE-20261115T040843Z` now (default heavy path, not trigger-gated).** Do NOT stop for "no trigger" and do NOT chase exhausted vol/liq-forecast 3-block designs (`python3 scripts/next_campaign_status.py` correctly reports none feasible).
+
+1. Baseline (record any material change): `git status` (HEAD `de5710f9f`, `main`); `python3 scripts/fclr_campaign_gate.py` (19/19); `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` (PASS); `python3 scripts/check_tracka_scope_registry_drift.py` (184/184); `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication -v` (38/38) — **all verified green 2026-11-15T06:02:24Z**.
+2. **Freeze before outcomes:** write `research_state/prereg_fclr_shek_scale_<UTC>.json` (+`.md`) after a data-availability audit (Binance funding 2024-04..2026-10 excl. 2024-01..03; ironflow_bulk 200 coins × 12m 2025-05..2026-04; nested funding layout supported). Record exact eligible sample, exclusions, thresholds, Holm family, inference, sensitivity grid, stopping rules.
+3. Heavy execution: extend registered `scripts/funding_correction_replication.py` with `--scale` (preferred; keeps scope drift 184/184) or add `scripts/fclr_shek_scale.py` + sync `research_state/tracka_script_scope_registry.json` and `tests/test_tracka_hardening_117.py`; add `tests/test_fclr_shek_scale.py` (fixture/deterministic/tmp-isolated/no network).
+4. Deliver `research_state/evaluation_summary_FCLR-SHEK-SCALE-<UTC>.{json,md}` with event counts/censoring, KM medians, log-rank, cluster+block-bootstrap 95% CI, sensitivity grid, Holm p-values, explicit verdict (`REPLICATES_DIRECTION`/`NULL`/`UNDERPOWERED`/`INCONCLUSIVE`). Update `research_state/hypothesis_registry.json` `H2_shek_replication` (keep EXPLORATORY_ONLY/promotable=false). Advance frontier phases to `COMPLETED_VALIDATED` and install next heavy cell at rank 0.
+5. Verify: campaign gate 19/19, scope drift OK (184/184 or synced 185/185 only if unavoidable new script), targeted + relevant suites green, `next_campaign_status.py` still honest. Commit only meaningful work. Never reopen sealed/terminal families, never mutate sealed artifacts, never edit `.github/workflows/*`, never use paid/credentialed/manual data.
+
+**Bottlenecks:** none blocking — forecast-frontier phantom removed, nested funding cache load fixed, rank-0 `READY_EXECUTE/ACTIVE`, gates/tests/drift green. If blocked, record exact command/error + proof of a tried materially-different free route.
+
 
 ## Baseline verified this session (2026-11-15T05:09:18Z)
 
