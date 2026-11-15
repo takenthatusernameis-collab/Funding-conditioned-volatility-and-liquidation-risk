@@ -14,7 +14,9 @@
       "sealed_artifacts_mutated": false
     },
     "generated": "20261115T185957Z",
-    "last_checked": "20261115T185957Z",
+    "last_checked": "20261115T201104Z",
+    "last_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T201101Z",
+    "last_verdict": "NOT_MET",
     "next_action_heavy": "python3 scripts/fclr_liq_combined_xsec_prereg.py (new; writes prereg_fclr_liq_combined_xsec_<UTC>.{json,md} pre-outcomes) -> python3 scripts/fclr_liq_combined_xsec_eval.py (new; reads frozen prereg + fclr_liq_combined_panel_20261115T181405Z.parquet, writes evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.{json,md}, updates frontier+hypothesis_registry) -> python3 scripts/fclr_campaign_gate.py && python3 scripts/check_tracka_scope_registry_drift.py && targeted unittest suite. Register both new scripts in BOTH scope registries.",
     "next_unfinished_task": "FCLR-LIQ-XSEC-ORDERING: freeze a NEW pre-outcomes prereg for cross-sectional liquidation ordering on the SAME admissible 15-coin combined metpie+ironflow panel (cache-only, no new acquisition): each day rank coins by predicted next-day liquidation intensity; compare C2 (rv24h,rv168h,fundingRate,abs_fund_pct,premium,ema_dist) vs B1 (rv24h,rv168h) on cross-sectional Spearman rank-IC, top-3 hit-rate, and cross-sectional QLIKE, expanding-window walk-forward over 3 non-overlapping 30d test blocks (2025-10, 2026-01, 2026-09), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. Then eval+gate+timestamped verdict; update frontier + H_fclr_liq_xsec_ordering_forecast. Do not stop.",
     "note": "Heavy work is the DEFAULT path (READY_EXECUTE), NOT trigger-gated. Installed after the combined-panel time-series cell concluded NOT_MET (2026-11-15T18:58:44Z). Reuses the already-built admissible panel; no new acquisition. See AGENT_HANDOFF.md INITIAL TASK MESSAGE 20261115T185957Z.",

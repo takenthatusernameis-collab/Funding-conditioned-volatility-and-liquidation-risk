@@ -418,7 +418,28 @@
       "type": "confirmatory",
       "updated_utc": "2026-11-15T18:59:57Z",
       "venue": "hyperliquid_perpetuals"
+    },
+    {
+      "class": "CONFIRMATORY",
+      "contrast": "C2_vs_B1",
+      "description": "Funding + premium + ema features improve cross-sectional ordering of next-day liquidation intensity (C2) over RV-only baseline (B1) on the combined metpie+ironflow Hyperliquid panel",
+      "estimand": "daily_cross_sectional_liquidation_ordering",
+      "experiment_id": "FCLR-LIQ-XSEC-ORDERING-20261115T200813Z",
+      "id": "H_fclr_liq_xsec_ordering_forecast",
+      "last_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T201101Z",
+      "last_tested": "2026-11-15T20:11:04Z",
+      "last_verdict": "NOT_MET",
+      "promotable": false,
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE",
+        "HL_LABEL_EXTENSION"
+      ],
+      "status": "NOT_MET",
+      "terminal": true,
+      "terminal_class": "NOT_MET",
+      "type": "confirmatory",
+      "updated_utc": "2026-11-15T20:11:04Z"
     }
   ],
-  "updated_utc": "2026-11-15T18:59:57Z"
+  "updated_utc": "2026-11-15T20:11:04Z"
 }
