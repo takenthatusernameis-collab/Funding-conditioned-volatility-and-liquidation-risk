@@ -269,6 +269,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_sealed_volatility",
     "reason": "freeze_fclr009_splits.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
   },
+  "fclr_shek_scale.py": {
+    "class": "test_fixture_utility",
+    "reason": "fclr_shek_scale.py: FCLR-SHEK-SCALE scaled correction-hazard pipeline entry point; registered so the G3 full-scripts sweep covers scripts/*.py; EXPLORATORY_ONLY, promotable=false, cache-only, no Track A guarded liquidation reads."
+  },
   "funding_correction_replication.py": {
     "class": "track_c_sealed_volatility",
     "reason": "FCLR-H002 funding-correction replication (volatility/correction-time context); explicitly distinct from liquidation outcomes; no Track A guarded liquidation reads."

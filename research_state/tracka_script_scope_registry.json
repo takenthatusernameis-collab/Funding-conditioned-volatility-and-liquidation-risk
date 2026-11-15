@@ -93,6 +93,11 @@
       "action": "add",
       "id": "fclr_next_002_power_calibration_register",
       "summary": "Register fclr_power_calibration.py (track_c_or_aux_audit_utility) for FCLR-NEXT-002 offline power/MDE calibration of concluded nulls; EXPLORATORY_ONLY, no sealed mutation."
+    },
+    {
+      "action": "add",
+      "id": "fclr_shek_scale_register_20261115T070318Z",
+      "summary": "Register fclr_shek_scale.py (track_c_sealed_volatility) for the FCLR-SHEK-SCALE scaled correction-hazard campaign; EXPLORATORY_ONLY, promotable=false, sealed artifacts unmutated. Registry now covers all 185 scripts/*.py."
     }
   ],
   "changes": [
@@ -113,10 +118,10 @@
       "summary": "register fclr023_gate4_blocker_resolution_action_plan.py as track_c_or_aux_audit_utility read-only blocker-resolution action plan (packet_ready_for_human_or_prereg_action=false, no satisfaction inference, no fabrication)"
     }
   ],
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile).",
-  "generated": "20261115T002500Z",
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile). Reconciled with FCLR-SHEK-SCALE registration (fclr_shek_scale.py) at 2026-11-15T07:03:18Z; registry now covers all 185 scripts/*.py.",
+  "generated": "20261115T070318Z",
   "registry_version": "1.3",
-  "script_count": 184,
+  "script_count": 185,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -505,6 +510,10 @@
     "freeze_fclr009_splits.py": {
       "class": "track_c_sealed_volatility",
       "reason": "freeze_fclr009_splits.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
+    },
+    "fclr_shek_scale.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "FCLR-SHEK-SCALE scaled funding-extreme correction-time hazard pipeline (EXPLORATORY_ONLY, promotable=false); cache-only Arm A/Arm B event reconstruction plus KM/log-rank/cluster-block-bootstrap/Holm survival contrast; writes timestamped evaluation_summary artifacts only; distinct from liquidation outcomes; no Track A guarded liquidation reads."
     },
     "funding_correction_replication.py": {
       "class": "track_c_sealed_volatility",
