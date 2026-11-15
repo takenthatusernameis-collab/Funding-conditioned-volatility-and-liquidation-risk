@@ -1,0 +1,374 @@
+{
+  "experiment_id": "FCLR-DESIGN-FEASIBILITY-20261115T021249Z",
+  "campaign": "FCLR-DESIGN-FEASIBILITY",
+  "generated_utc": "2026-11-15T02:35:00Z",
+  "status": "VALID_EXPLORATORY",
+  "verdict": "UNDECIDABLE_ON_CACHE",
+  "max_status": "EXPLORATORY_ONLY",
+  "promotable": false,
+  "audit_only": true,
+  "does_not_reopen_sealed_verdict": true,
+  "prereg": "research_state/prereg_fclr_design_feasibility_2026-11-15T02:35:00Z.json",
+  "prereg_sha256": "cee37cf3892df52a288699cd2ac7ce84208439eb97fd37a18f1478ee00ee56e6",
+  "inputs": {
+    "power_calibration_eval": {
+      "path": "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json",
+      "sha256": "90a9cb219e9c2c7d348e53f60c79e265ddaa746a5755aeb74111a11ac4594d4d"
+    },
+    "power_calibration_prereg": {
+      "path": "research_state/prereg_fclr_power_calibration_2026-11-15T01:34:12Z.json",
+      "sha256": "1411461f8a65c9d169e6850c4680fdddc1edaf7e77969692347188112613579e"
+    },
+    "vol_panel": {
+      "path": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+      "sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba"
+    },
+    "liq_panel": {
+      "path": "research_state/tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet",
+      "sha256": "990598685617b088344435ac8c3e318fcdb42ed5e342df82120a15340b91caac"
+    }
+  },
+  "method": {
+    "alpha": 0.05,
+    "power_target": 0.8,
+    "z_975": 1.959963984540054,
+    "z_80": 0.8416212335729143,
+    "z_95": 1.6448536269514722,
+    "mde80_factor": 2.8015852181129683,
+    "se_req_formula": "|floor| / (z_975 + z_80)",
+    "n_req_formula": "n_obs * (SE_obs / SE_req)^2 (1/sqrt(n) scaling)",
+    "decidability_rule": {
+      "DECIDABLE_ON_CACHE": "n_req <= n_available",
+      "UNDECIDABLE_ON_CACHE": "n_req > n_available",
+      "INCONCLUSIVE": "unstable/missing/non-finite inputs"
+    }
+  },
+  "volatility": {
+    "track": "volatility_forward_2025_disjoint",
+    "primary_contrast": "h24_C2_vs_B1",
+    "n_obs_panel_rows": 30120,
+    "n_available_contrast_cached_primary": 10800,
+    "panel_structure": "5 symbols x 90 test days x 3 blocks x 24h = 10800 contrast obs (primary h24); panel rows 30120",
+    "se_scaling": "1/sqrt(n) on contrast-level n",
+    "primary": {
+      "contrast": "h24_C2_vs_B1",
+      "n_obs_contrast": 10800,
+      "n_days": 90,
+      "se_obs": 0.010469953259366775,
+      "floor_abs_qlike": 0.007052315476086073,
+      "se_req_for_80pct": 0.002517258954141763,
+      "n_req_contrast": 186834.66278867307,
+      "n_available_contrast": 10800.0,
+      "power_at_floor_persisted": 0.1033789356427115,
+      "verdict": "UNDECIDABLE_ON_CACHE",
+      "scaling_factor_se": 4.159267461196265
+    },
+    "per_horizon_C2_vs_B1": {
+      "h6": {
+        "contrast": "h6_C2_vs_B1",
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.011721151275997467,
+        "floor_abs_qlike": 0.01351799321902876,
+        "se_req_for_80pct": 0.004825122980957873,
+        "n_req_contrast": 63730.52905287485,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.21085494528143695,
+        "verdict": "UNDECIDABLE_ON_CACHE",
+        "scaling_factor_se": 2.4291922345304884
+      },
+      "h24": {
+        "contrast": "h24_C2_vs_B1",
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.010469953259366775,
+        "floor_abs_qlike": 0.007052315476086073,
+        "se_req_for_80pct": 0.002517258954141763,
+        "n_req_contrast": 186834.66278867307,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.1033789356427115,
+        "verdict": "UNDECIDABLE_ON_CACHE",
+        "scaling_factor_se": 4.159267461196265
+      },
+      "h72": {
+        "contrast": "h72_C2_vs_B1",
+        "n_obs_contrast": 10560,
+        "n_days": 88,
+        "se_obs": 0.003521863439754369,
+        "floor_abs_qlike": 0.0038899113888369793,
+        "se_req_for_80pct": 0.001388467987226554,
+        "n_req_contrast": 67941.82377251238,
+        "n_available_contrast": 10560.0,
+        "power_at_floor_persisted": 0.1972384943218422,
+        "verdict": "UNDECIDABLE_ON_CACHE",
+        "scaling_factor_se": 2.536510364051852
+      },
+      "h168": {
+        "contrast": "h168_C2_vs_B1",
+        "n_obs_contrast": 10080,
+        "n_days": 84,
+        "se_obs": 0.003147352014374541,
+        "floor_abs_qlike": 0.002903074401991548,
+        "se_req_for_80pct": 0.001036225627984623,
+        "n_req_contrast": 92991.34134839664,
+        "n_available_contrast": 10080.0,
+        "power_at_floor_persisted": 0.1517069607269635,
+        "verdict": "UNDECIDABLE_ON_CACHE",
+        "scaling_factor_se": 3.037323078464959
+      }
+    },
+    "all_contrasts": {
+      "h6_C2_vs_B1": {
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.011721151275997467,
+        "floor_abs_qlike": 0.01351799321902876,
+        "se_req_for_80pct": 0.004825122980957873,
+        "n_req_contrast": 63730.52905287485,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.21085494528143695,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h6_C1_vs_B1": {
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.003277257329949024,
+        "floor_abs_qlike": 0.01351799321902876,
+        "se_req_for_80pct": 0.004825122980957873,
+        "n_req_contrast": 4982.279284863929,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.9847994357783223,
+        "verdict": "DECIDABLE_ON_CACHE"
+      },
+      "h6_C2_vs_C1": {
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.010184202412934957,
+        "floor_abs_qlike": 0.013553986364881889,
+        "se_req_for_80pct": 0.004837970402346459,
+        "n_req_contrast": 47857.65185857379,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.26514759453958486,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h24_C2_vs_B1": {
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.010469953259366775,
+        "floor_abs_qlike": 0.007052315476086073,
+        "se_req_for_80pct": 0.002517258954141763,
+        "n_req_contrast": 186834.66278867307,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.1033789356427115,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h24_C1_vs_B1": {
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.002445087021141921,
+        "floor_abs_qlike": 0.007052315476086072,
+        "se_req_for_80pct": 0.002517258954141762,
+        "n_req_contrast": 10189.587604584423,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.8223397196347364,
+        "verdict": "DECIDABLE_ON_CACHE"
+      },
+      "h24_C2_vs_C1": {
+        "n_obs_contrast": 10800,
+        "n_days": 90,
+        "se_obs": 0.009256359010899119,
+        "floor_abs_qlike": 0.007052602773620057,
+        "se_req_for_80pct": 0.002517361502346303,
+        "n_req_contrast": 146020.20839605178,
+        "n_available_contrast": 10800.0,
+        "power_at_floor_persisted": 0.11869544771726309,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h72_C2_vs_B1": {
+        "n_obs_contrast": 10560,
+        "n_days": 88,
+        "se_obs": 0.003521863439754369,
+        "floor_abs_qlike": 0.0038899113888369793,
+        "se_req_for_80pct": 0.001388467987226554,
+        "n_req_contrast": 67941.82377251238,
+        "n_available_contrast": 10560.0,
+        "power_at_floor_persisted": 0.1972384943218422,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h72_C1_vs_B1": {
+        "n_obs_contrast": 10560,
+        "n_days": 88,
+        "se_obs": 0.0012432634232048753,
+        "floor_abs_qlike": 0.0038899113888369785,
+        "se_req_for_80pct": 0.0013884679872265538,
+        "n_req_contrast": 8466.784185421908,
+        "n_available_contrast": 10560.0,
+        "power_at_floor_persisted": 0.8787635101464625,
+        "verdict": "DECIDABLE_ON_CACHE"
+      },
+      "h72_C2_vs_C1": {
+        "n_obs_contrast": 10560,
+        "n_days": 88,
+        "se_obs": 0.0033289556452919837,
+        "floor_abs_qlike": 0.003874554622850454,
+        "se_req_for_80pct": 0.0013829865312682487,
+        "n_req_contrast": 61184.86898288824,
+        "n_available_contrast": 10560.0,
+        "power_at_floor_persisted": 0.21388843205771862,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h168_C2_vs_B1": {
+        "n_obs_contrast": 10080,
+        "n_days": 84,
+        "se_obs": 0.003147352014374541,
+        "floor_abs_qlike": 0.002903074401991548,
+        "se_req_for_80pct": 0.001036225627984623,
+        "n_req_contrast": 92991.34134839664,
+        "n_available_contrast": 10080.0,
+        "power_at_floor_persisted": 0.1517069607269635,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      },
+      "h168_C1_vs_B1": {
+        "n_obs_contrast": 10080,
+        "n_days": 84,
+        "se_obs": 0.001019690698249109,
+        "floor_abs_qlike": 0.002903074401991548,
+        "se_req_for_80pct": 0.001036225627984623,
+        "n_req_contrast": 9760.8758559035,
+        "n_available_contrast": 10080.0,
+        "power_at_floor_persisted": 0.8124749664701831,
+        "verdict": "DECIDABLE_ON_CACHE"
+      },
+      "h168_C2_vs_C1": {
+        "n_obs_contrast": 10080,
+        "n_days": 84,
+        "se_obs": 0.002734641813216353,
+        "floor_abs_qlike": 0.002938887898697628,
+        "se_req_for_80pct": 0.0010490089252673674,
+        "n_req_contrast": 68501.97065827136,
+        "n_available_contrast": 10080.0,
+        "power_at_floor_persisted": 0.18920807901235281,
+        "verdict": "UNDECIDABLE_ON_CACHE"
+      }
+    },
+    "track_verdict": "UNDECIDABLE_ON_CACHE",
+    "track_verdict_rule": "primary h24 C2_vs_B1 contrast-level decidability at 2% implied-baseline QLIKE floor"
+  },
+  "observed_liquidation": {
+    "track": "observed_liquidation_xsec_forward",
+    "n_obs_panel_rows": 6634,
+    "n_available_pooled_cached": 6634,
+    "panel_structure": "107 coins x 3 blocks; pooled n=6634 (2996/1605/2033)",
+    "se_scaling": "1/sqrt(n) on pooled n",
+    "pooled": {
+      "n_obs_pooled": 6634,
+      "pooled_ic": -0.025121866063245266,
+      "se_obs_analytic": 0.012089357803458227,
+      "floor_abs_ic": 0.05,
+      "se_req_for_80pct": 0.017847038768172088,
+      "n_req_pooled": 3044.0346796498725,
+      "n_available_pooled": 6634.0,
+      "power_at_floor_persisted": 0.9852188181675309,
+      "analytic_decidability": "DECIDABLE_ON_CACHE",
+      "se_robust": 0.012628718290747075,
+      "n_req_pooled_robust": 3321.7097723447378,
+      "robust_decidability": "DECIDABLE_ON_CACHE"
+    },
+    "per_block": {
+      "block_0": {
+        "n_obs": 2996,
+        "ic": -0.04092235444458491,
+        "se_obs_approx": 0.017989540086039535,
+        "se_method": "approximation: pooled-null SE scaled by sqrt(pooled_n/block_n); per-block null quantiles not persisted",
+        "se_req_for_80pct": 0.017847038768172088,
+        "n_req_at_block_scale": 3044.0346796498725,
+        "n_available_block": 2996.0,
+        "power_at_floor_persisted": 0.7937302006013388,
+        "verdict_approx": "UNDECIDABLE_ON_CACHE"
+      },
+      "block_1": {
+        "n_obs": 1605,
+        "ic": -0.03124730002096616,
+        "se_obs_approx": 0.024578390875187164,
+        "se_method": "approximation: pooled-null SE scaled by sqrt(pooled_n/block_n); per-block null quantiles not persisted",
+        "se_req_for_80pct": 0.017847038768172088,
+        "n_req_at_block_scale": 3044.034679649874,
+        "n_available_block": 1605.0,
+        "power_at_floor_persisted": 0.5296638412855585,
+        "verdict_approx": "UNDECIDABLE_ON_CACHE"
+      },
+      "block_2": {
+        "n_obs": 2033,
+        "ic": -0.008922015565550372,
+        "se_obs_approx": 0.021838473378062148,
+        "se_method": "approximation: pooled-null SE scaled by sqrt(pooled_n/block_n); per-block null quantiles not persisted",
+        "se_req_for_80pct": 0.017847038768172088,
+        "n_req_at_block_scale": 3044.034679649874,
+        "n_available_block": 2033.0,
+        "power_at_floor_persisted": 0.6291495290646318,
+        "verdict_approx": "UNDECIDABLE_ON_CACHE"
+      }
+    },
+    "sign_consistency": {
+      "n_blocks": 3,
+      "negative_blocks": 3,
+      "positive_blocks": 0,
+      "same_sign_count": 3,
+      "requirement_ge_2_of_3": true,
+      "met": true,
+      "observed_ics": [
+        -0.04092235444458491,
+        -0.03124730002096616,
+        -0.008922015565550372
+      ]
+    },
+    "symmetry_robustness": {
+      "symmetry_pass_1pct_persisted": false,
+      "null_mid_persisted": -0.0008871690537513768,
+      "symmetry_abs_frac_persisted": 0.022307243116526917,
+      "se_analytic_pooled": 0.012089357803458227,
+      "se_robust_max_halfwidth_over_z95": 0.012628718290747075,
+      "analytic_verdict": "DECIDABLE_ON_CACHE",
+      "robust_verdict": "DECIDABLE_ON_CACHE",
+      "verdict_flips_due_to_instability": false,
+      "note": "Analytic SE used null quantile half-width; symmetry failed (abs_frac>1%). Robust SE uses max(|q5|,|q95|)/z_95."
+    },
+    "track_verdict": "DECIDABLE_ON_CACHE",
+    "track_verdict_rule": "Decidability from analytic pooled SE vs cached pooled n, with symmetry-robust check; verdict flip => INCONCLUSIVE. Instability is flagged regardless."
+  },
+  "known_answer_self_test": {
+    "description": "deterministic toy fixture (NOT market evidence): required-n inversion recovery",
+    "delta": 0.3,
+    "se_true": 0.1,
+    "n_obs": 1000.0,
+    "se_req": 0.10708223260903252,
+    "n_req": 872.09774826101,
+    "se_at_nreq": 0.10708223260903252,
+    "power_at_nreq": 0.8000009605622266,
+    "recovered_80pct_within_tolerance": false,
+    "tolerance": 1e-09
+  },
+  "sealed_hashes_before": {
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z_20261114T231545Z.json": "7fee65a723b4242b02fdb8a5c6e290af4bc2a6cee9ad216a2577125789cef8c1",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.json": "b829fbe90a6da05f55f4be0821716ab802494452390eb867d29ee281a64d569b",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json": "78537585fe59ed4a75d7861a80bf3964e35c97a6a53c48a39c6d012354e69215",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.json": "a4d9410f0d44359c01dec9434afcea808c9cc172395f58019ecbcbfa6098f3e6",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json": "90a9cb219e9c2c7d348e53f60c79e265ddaa746a5755aeb74111a11ac4594d4d",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json": "3b94f07361ef2fc59de6bdf4534d587ddb5d0752a905d1d8591a134d451ac5f1",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json": "fcf3e7e505c62c3f13514f0b52364b28aa878870867f955898bb6143320aaefa",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/prereg_fclr_power_calibration_2026-11-15T01:34:12Z.json": "1411461f8a65c9d169e6850c4680fdddc1edaf7e77969692347188112613579e",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json": "55e8ddd9938e5f6258b69bb20787622546154a12cbfe4295434bac95fd7c0594"
+  },
+  "sealed_hashes_after": {
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z_20261114T231545Z.json": "7fee65a723b4242b02fdb8a5c6e290af4bc2a6cee9ad216a2577125789cef8c1",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.json": "b829fbe90a6da05f55f4be0821716ab802494452390eb867d29ee281a64d569b",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json": "78537585fe59ed4a75d7861a80bf3964e35c97a6a53c48a39c6d012354e69215",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.json": "a4d9410f0d44359c01dec9434afcea808c9cc172395f58019ecbcbfa6098f3e6",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json": "90a9cb219e9c2c7d348e53f60c79e265ddaa746a5755aeb74111a11ac4594d4d",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json": "3b94f07361ef2fc59de6bdf4534d587ddb5d0752a905d1d8591a134d451ac5f1",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json": "fcf3e7e505c62c3f13514f0b52364b28aa878870867f955898bb6143320aaefa",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/prereg_fclr_power_calibration_2026-11-15T01:34:12Z.json": "1411461f8a65c9d169e6850c4680fdddc1edaf7e77969692347188112613579e",
+    "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json": "55e8ddd9938e5f6258b69bb20787622546154a12cbfe4295434bac95fd7c0594"
+  },
+  "sealed_artifacts_mutated": false
+}

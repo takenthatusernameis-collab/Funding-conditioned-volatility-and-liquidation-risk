@@ -1,0 +1,81 @@
+{
+  "experiment_id": "FCLR-DESIGN-FEASIBILITY-20261115T021249Z",
+  "task": "FCLR-DESIGN-FEASIBILITY",
+  "campaign": "FCLR-DESIGN-FEASIBILITY",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "pre_registered_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY",
+  "does_not_reopen_sealed_verdict": true,
+  "audit_only": true,
+  "network_required": false,
+  "created_utc": "2026-11-15T02:35:00Z",
+  "objective": "Invert persisted SEs from the power calibration to compute required sample size (n) for 80% power at pre-specified floors and determine decidability (DECIDABLE_ON_CACHE / UNDECIDABLE_ON_CACHE / INCONCLUSIVE) for the concluded volatility and observed-liquidation nulls using only persisted design quantities. No model re-fit, no sealed-contrast recomputation, no SE re-derivation from raw data, no outcome inspection beyond persisted SEs/design counts.",
+  "tracks": {
+    "volatility_forward_2025_disjoint": {
+      "source_eval": "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json",
+      "panel_source": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+      "primary_contrast": "h24_C2_vs_B1",
+      "horizons": ["h6", "h24", "h72", "h168"],
+      "contrasts": ["C2_vs_B1", "C1_vs_B1", "C2_vs_C1"],
+      "floor_rel_pct": 2.0,
+      "floor_interpretation": "Improvement is a negative change in QLIKE; floor_abs = 0.02 * baseline, baseline = |mean_diff| / (|rel_reduction_pct|/100), taken as persisted in the power-calibration eval.",
+      "n_obs_contrast_primary": 10800,
+      "n_obs_panel_rows": 30120,
+      "panel_structure": "5 symbols x ~6168 hourly rows (90 test days x 5 symbols x 3 blocks x 24h contrast-level for primary h24 n=10800)",
+      "se_scaling": "SE scales as 1/sqrt(n) on contrast-level n_obs; n_req = n_obs * (SE_obs / SE_req)^2",
+      "decidability_basis": "Compare n_req (contrast-level) to n_available (contrast-level cached, 10800). A larger cached design would require more symbols/blocks/days than available in cache."
+    },
+    "observed_liquidation_xsec_forward": {
+      "source_eval": "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json",
+      "panel_source": "research_state/tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet",
+      "floor_abs_ic": 0.05,
+      "n_obs_pooled": 6634,
+      "n_obs_per_block": {"block_0": 2996, "block_1": 1605, "block_2": 2033},
+      "n_obs_panel_rows": 6634,
+      "panel_structure": "107 coins x 3 blocks, pooled n=6634",
+      "se_scaling": "SE scales as 1/sqrt(n) on pooled n; n_req = n_obs * (SE_obs / SE_req)^2",
+      "symmetry_instability": "Pooled null symmetry failed in power calibration (null_mid=-0.0008871690537513768, abs_frac=0.022307243116526917 > 0.01). Report analytic-SE decidability and a symmetry-robust variant using SE_robust = max(|q5|,|q95|)/z_95; flag verdict flip.",
+      "decidability_basis": "Compare n_req (pooled) to n_available (pooled cached, 6634)."
+    }
+  },
+  "alpha": 0.05,
+  "power_target": 0.8,
+  "z_975": 1.959963984540054,
+  "z_80": 0.8416212335729143,
+  "z_95": 1.6448536269514722,
+  "mde80_factor": 2.8015852181129683,
+  "required_n_formula": {
+    "SE_req": "|floor| / (z_975 + z_80) = |floor| / mde80_factor",
+    "n_req": "n_obs * (SE_obs / SE_req)^2 (1/sqrt(n) scaling)",
+    "power_equation": "power = Phi(|delta|/SE - z_975) + Phi(-|delta|/SE - z_975) = 0.80 at floor"
+  },
+  "decidability_rule": {
+    "DECIDABLE_ON_CACHE": "n_req <= n_available (a cached design large enough to reach 80% power at the floor exists)",
+    "UNDECIDABLE_ON_CACHE": "n_req > n_available (no cached configuration can resolve the floor; structural limit on cache)",
+    "INCONCLUSIVE": "SE or scaling unstable / required inputs missing or non-finite"
+  },
+  "liq_symmetry_robust_rule": {
+    "SE_robust": "max(|null_5th|, |null_95th|) / z_95",
+    "report": "Report analytic-SE verdict and symmetry-robust-SE verdict; flag whether decidability flips due to instability."
+  },
+  "inputs": {
+    "power_calibration_eval": "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json",
+    "power_calibration_eval_sha256": "90a9cb219e9c2c7d348e53f60c79e265ddaa746a5755aeb74111a11ac4594d4d",
+    "power_calibration_prereg": "research_state/prereg_fclr_power_calibration_2026-11-15T01:34:12Z.json",
+    "power_calibration_prereg_sha256": "1411461f8a65c9d169e6850c4680fdddc1edaf7e77969692347188112613579e",
+    "vol_panel": "research_state/tracka_fwd_vol_2025_disjoint_cross_panel_20261114T191615Z.parquet",
+    "vol_panel_sha256": "de0ca73e7d092a205e5f8c1163d56437384d1b15d65b4a27bc54a57e21738cba",
+    "liq_panel": "research_state/tracka_liq_xsec_forward_panel_2026-11-13T22:31:55Z.parquet",
+    "liq_panel_sha256": "990598685617b088344435ac8c3e318fcdb42ed5e342df82120a15340b91caac"
+  },
+  "expected_outputs": [
+    "research_state/evaluation_summary_FCLR-DESIGN-FEASIBILITY-2026-11-15T02:35:00Z.json",
+    "research_state/evaluation_summary_FCLR-DESIGN-FEASIBILITY-2026-11-15T02:35:00Z.md",
+    "scripts/fclr_design_feasibility.py",
+    "tests/test_fclr_design_feasibility.py"
+  ],
+  "known_answer_self_test": "Toy fixture (NOT market evidence): inject known SE/n/delta and assert required-n inversion recovers 80% power at floor."
+}

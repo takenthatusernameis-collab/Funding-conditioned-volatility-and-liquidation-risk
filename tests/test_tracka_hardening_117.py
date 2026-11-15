@@ -706,6 +706,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_power_calibration.py: deterministic offline power/MDE calibration over persisted design quantities for concluded vol/liq nulls (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); reads frozen prereg/evals only, no model re-fit, no sealed-contrast recomputation, no network; writes timestamped evaluation artifacts only."
   },
+  "fclr_design_feasibility.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_design_feasibility.py: deterministic offline required-n/decidability inversion over persisted power-calibration SEs and cached panel counts (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); no model re-fit, no SE re-derivation from raw data, no network; writes timestamped evaluation artifacts only."
+  },
   "fclr_fwd_vol_2025h2_cross.py": {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_fwd_vol_2025h2_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
