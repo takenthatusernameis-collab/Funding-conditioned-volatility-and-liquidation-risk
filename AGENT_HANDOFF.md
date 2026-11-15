@@ -11,7 +11,7 @@
 git status --short && git log -1 --oneline
 python3 scripts/fclr_campaign_gate.py               # 19/19
 python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py  # PASS
-python3 scripts/check_tracka_scope_registry_drift.py      # 185/185
+python3 scripts/check_tracka_scope_registry_drift.py      # 186/186
 python3 -m unittest tests.test_fclr_shek_scale tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication tests.test_tracka_hardening_117 -v
 python3 scripts/next_campaign_status.py             # "no feasible 3-block design in ANY domain"
 ```
@@ -103,3 +103,5 @@ Added `tests/test_fclr_shek_scale.py` (5 deterministic fixture tests, all passin
 ## Completion contract
 
 Complete by (a) executing the `FCLR-SHEK-SCALE` heavy campaign to a recorded verdict with a frozen prereg and timestamped eval/verdict artifacts + green gates/tests and no sealed mutation, or (b) recording an evidence-backed blocker citing the exact command/error and proof of a tried materially-different free route. **"No trigger → stop cleanly" is NOT completion.** Never reopen a sealed verdict, never re-probe a TERMINAL_NO_GO family, never edit `.github/workflows/*`, never use paid/credentialed/manual data.
+
+**Execution record — BASELINE-REVERIFY-20261115T083916Z:** Baseline re-verified green at 2026-11-15T08:39:16Z. campaign gate 19/19 PASS; fwd-vol gate PASS; scope drift 186/186 OK; targeted suite 58/58 OK (`tests.test_fclr_shek_scale tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication tests.test_tracka_hardening_117`); `next_campaign_status.py` → "no feasible 3-block design in ANY domain". Rank-0 heavy campaign `FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z` unchanged (`READY_EXECUTE`). Frozen sensitivity grid still not emitted (`research_state/*SENS*` = none). No sealed artifacts mutated; no workflow edited; no paid/credentialed/manual data used.
