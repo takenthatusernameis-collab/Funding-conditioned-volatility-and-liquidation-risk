@@ -91,13 +91,14 @@ def _resolve_funding_csv(sym: str, month: str):
     return None
 
 
-def run_arm_a(months=None):
+def _load_arm_a_data(months=None, symbols=None):
+    """Pre-load Arm A funding series and mark-price maps once (cache-only, no network)."""
     months = list(months or ARM_A_MONTHS)
-    symbols = DEFAULT_SYMBOLS
-    all_events = []
-    load_errors = []
+    symbols = list(symbols or DEFAULT_SYMBOLS)
+    sym_series = {}
     price_maps = {}
     per_symbol_month = {}
+    load_errors = []
 
     for sym in symbols:
         series = []
@@ -121,13 +122,82 @@ def run_arm_a(months=None):
                 continue
             seen.add(ts)
             uniq.append((ts, fr))
-
-        events = fcr.identify_funding_extremes(uniq)
+        sym_series[sym] = uniq
         price_maps[sym] = fcr.load_mark_prices(sym, months)
+
+    return sym_series, price_maps, per_symbol_month, load_errors
+
+
+def _build_regime_edges(events, rv_split):
+    """Build per-symbol RV regime edges (tercile or median split). Returns dict symbol->edges."""
+    by_symbol = {}
+    for ev in events:
+        by_symbol.setdefault(ev["symbol"], []).append(ev)
+    edges = {}
+    for sym, evs in by_symbol.items():
+        rvs = sorted(e["rv_24h"] for e in evs if e["rv_24h"] is not None)
+        if len(rvs) >= 2:
+            if rv_split == "tercile":
+                edges[sym] = {
+                    "n_rv_valid": len(rvs),
+                    "low_edge": fcr._nearest_rank_percentile(rvs, 33.33),
+                    "high_edge": fcr._nearest_rank_percentile(rvs, 66.67),
+                    "split": "tercile",
+                }
+            else:  # median
+                med = fcr._nearest_rank_percentile(rvs, 50.0)
+                edges[sym] = {
+                    "n_rv_valid": len(rvs),
+                    "low_edge": med,
+                    "high_edge": med,
+                    "split": "median",
+                }
+    return edges
+
+
+def _assign_rv_regimes(events, edges, rv_split):
+    """Assign rv_regime to each event in-place from precomputed edges."""
+    for ev in events:
+        if ev["rv_24h"] is None:
+            ev["rv_regime"] = "missing"
+            continue
+        e = edges.get(ev["symbol"])
+        if not e:
+            ev["rv_regime"] = "missing"
+        elif e["split"] == "tercile":
+            if ev["rv_24h"] <= e["low_edge"]:
+                ev["rv_regime"] = "low"
+            elif ev["rv_24h"] >= e["high_edge"]:
+                ev["rv_regime"] = "high"
+            else:
+                ev["rv_regime"] = "middle"
+        else:  # median
+            if ev["rv_24h"] <= e["low_edge"]:
+                ev["rv_regime"] = "low"
+            else:
+                ev["rv_regime"] = "high"
+
+
+def _run_arm_a_impl(sym_series, price_maps, per_symbol_month, load_errors,
+                    p_low=5.0, p_high=95.0, censor_hours=168, rv_split="tercile",
+                    months=None, symbols=None):
+    """Arm A event reconstruction with parameterized percentiles/censor/rv_split.
+
+    percentile_threshold=p_high drives identify_funding_extremes; p_low is
+    derived as 100 - p_high (symmetric grid: [1,99],[5,95],[10,90]).
+    Censor applied via max_hours in time_to_correction.
+    """
+    symbols = list(symbols or DEFAULT_SYMBOLS)
+    all_events = []
+
+    for sym in symbols:
+        uniq = sym_series[sym]
+        events = fcr.identify_funding_extremes(uniq, percentile_threshold=p_high)
         for ev in events:
             ttc, censored = fcr.time_to_correction(
                 uniq, ev["timestamp_ms"], ev["side"],
-                ev["threshold_low"], ev["threshold_high"])
+                ev["threshold_low"], ev["threshold_high"],
+                max_hours=censor_hours)
             ev["symbol"] = sym
             ev["time_to_correction_hours"] = ttc
             ev["censored"] = censored
@@ -136,32 +206,8 @@ def run_arm_a(months=None):
             ev["rv_n_returns"] = n_ret
             all_events.append(ev)
 
-    # per-symbol RV tercile split (frozen)
-    by_symbol = {}
-    for ev in all_events:
-        by_symbol.setdefault(ev["symbol"], []).append(ev)
-    regime_edges = {}
-    for sym, evs in by_symbol.items():
-        rvs = sorted(e["rv_24h"] for e in evs if e["rv_24h"] is not None)
-        if len(rvs) >= 2:
-            regime_edges[sym] = {
-                "n_rv_valid": len(rvs),
-                "low_edge": fcr._nearest_rank_percentile(rvs, 33.33),
-                "high_edge": fcr._nearest_rank_percentile(rvs, 66.67),
-            }
-        for ev in evs:
-            if ev["rv_24h"] is None:
-                ev["rv_regime"] = "missing"
-            else:
-                e = regime_edges.get(sym)
-                if not e:
-                    ev["rv_regime"] = "missing"
-                elif ev["rv_24h"] <= e["low_edge"]:
-                    ev["rv_regime"] = "low"
-                elif ev["rv_24h"] >= e["high_edge"]:
-                    ev["rv_regime"] = "high"
-                else:
-                    ev["rv_regime"] = "middle"
+    edges = _build_regime_edges(all_events, rv_split)
+    _assign_rv_regimes(all_events, edges, rv_split)
 
     return {
         "arm": "A_binance_independent",
@@ -169,12 +215,21 @@ def run_arm_a(months=None):
         "months": months,
         "load_errors": load_errors,
         "per_symbol_month_funding_obs": per_symbol_month,
-        "regime_edges": regime_edges,
+        "regime_edges": edges,
         "events": all_events,
         "cluster_key": "symbol",
-        "rv_split": "tercile_per_symbol",
-        "rv_edges": regime_edges,
+        "rv_split": rv_split,
+        "rv_edges": edges,
+        "percentiles": [p_low, p_high],
+        "censor_hours": censor_hours,
     }
+
+
+def run_arm_a(months=None):
+    """Frozen headline Arm A: [5,95] percentiles, 168h censor, per-symbol tercile."""
+    sym_series, price_maps, per_symbol_month, load_errors = _load_arm_a_data(months)
+    return _run_arm_a_impl(sym_series, price_maps, per_symbol_month, load_errors,
+                           5.0, 95.0, 168, "tercile", months)
 
 
 # --------------------------------------------------------------------------- #
@@ -185,7 +240,8 @@ def _ironflow_months():
     return sorted(p.stem for p in fdir.glob("*.parquet"))
 
 
-def run_arm_b(coins=None):
+def _load_arm_b_data(coins=None):
+    """Pre-load Arm B ironflow funding+candles once (cache-only, no network)."""
     import pyarrow.parquet as pq
     import pyarrow as pa
 
@@ -204,11 +260,70 @@ def run_arm_b(coins=None):
     fdf["ts_ms"] = (fdf["timestamp"].astype("int64") // 1_000)
     cdf["ts_ms"] = (cdf["timestamp"].astype("int64") // 1_000)
 
-    coin_set = set(coins)
+    return fdf, cdf, coins
+
+
+def _build_regime_edges_pooled(rvs, rv_split):
+    """Build pooled RV regime edges (tercile or median split)."""
+    if len(rvs) < 2:
+        return {}
+    if rv_split == "tercile":
+        return {
+            "n_rv_valid": len(rvs),
+            "low_edge": fcr._nearest_rank_percentile(rvs, 33.33),
+            "high_edge": fcr._nearest_rank_percentile(rvs, 66.67),
+            "split": "tercile",
+        }
+    med = fcr._nearest_rank_percentile(rvs, 50.0)
+    return {
+        "n_rv_valid": len(rvs),
+        "low_edge": med,
+        "high_edge": med,
+        "split": "median",
+    }
+
+
+def _assign_rv_regimes_pooled(events, edges, rv_split):
+    """Assign rv_regime to each event in-place from pooled edges."""
+    if not edges:
+        for ev in events:
+            ev["rv_regime"] = "missing"
+        return
+    for ev in events:
+        if ev["rv_24h"] is None:
+            ev["rv_regime"] = "missing"
+            continue
+        if edges["split"] == "tercile":
+            if ev["rv_24h"] <= edges["low_edge"]:
+                ev["rv_regime"] = "low"
+            elif ev["rv_24h"] >= edges["high_edge"]:
+                ev["rv_regime"] = "high"
+            else:
+                ev["rv_regime"] = "middle"
+        else:  # median
+            if ev["rv_24h"] <= edges["low_edge"]:
+                ev["rv_regime"] = "low"
+            else:
+                ev["rv_regime"] = "high"
+
+
+def _run_arm_b_impl(fdf, cdf, coins,
+                    p_low=5.0, p_high=95.0, censor_hours=168, rv_split="tercile"):
+    """Arm B event reconstruction with parameterized percentiles/censor/rv_split.
+
+    percentile_threshold=p_high drives identify_funding_extremes; p_low is
+    derived as 100 - p_high (symmetric grid: [1,99],[5,95],[10,90]).
+    Pooled cross-coin RV split.
+    """
     all_events = []
     per_coin = {}
     load_errors = []
-    regime_edges_all = {}
+
+    # Pre-compute price maps per coin
+    price_maps = {}
+    for coin in coins:
+        csub = cdf[cdf["coin"] == coin].sort_values("ts_ms")
+        price_maps[coin] = dict(zip(csub["ts_ms"].tolist(), csub["close"].astype(float).tolist()))
 
     for coin in coins:
         sub = fdf[fdf["coin"] == coin].sort_values("ts_ms")
@@ -225,16 +340,16 @@ def run_arm_b(coins=None):
             seen.add(ts)
             uniq.append((ts, fr))
 
-        events = fcr.identify_funding_extremes(uniq)
+        events = fcr.identify_funding_extremes(uniq, percentile_threshold=p_high)
         per_coin[coin] = {"funding_obs": len(uniq), "events": len(events)}
 
-        csub = cdf[cdf["coin"] == coin].sort_values("ts_ms")
-        price_map = dict(zip(csub["ts_ms"].tolist(), csub["close"].astype(float).tolist()))
+        price_map = price_maps[coin]
 
         for ev in events:
             ttc, censored = fcr.time_to_correction(
                 uniq, ev["timestamp_ms"], ev["side"],
-                ev["threshold_low"], ev["threshold_high"])
+                ev["threshold_low"], ev["threshold_high"],
+                max_hours=censor_hours)
             ev["symbol"] = coin
             ev["time_to_correction_hours"] = ttc
             ev["censored"] = censored
@@ -243,23 +358,10 @@ def run_arm_b(coins=None):
             ev["rv_n_returns"] = n_ret
             all_events.append(ev)
 
-    # pooled cross-coin tercile split (frozen)
+    # pooled cross-coin RV split
     rvs = sorted(e["rv_24h"] for e in all_events if e["rv_24h"] is not None)
-    if len(rvs) >= 2:
-        regime_edges_all = {
-            "n_rv_valid": len(rvs),
-            "low_edge": fcr._nearest_rank_percentile(rvs, 33.33),
-            "high_edge": fcr._nearest_rank_percentile(rvs, 66.67),
-        }
-    for ev in all_events:
-        if ev["rv_24h"] is None or not regime_edges_all:
-            ev["rv_regime"] = "missing"
-        elif ev["rv_24h"] <= regime_edges_all["low_edge"]:
-            ev["rv_regime"] = "low"
-        elif ev["rv_24h"] >= regime_edges_all["high_edge"]:
-            ev["rv_regime"] = "high"
-        else:
-            ev["rv_regime"] = "middle"
+    edges = _build_regime_edges_pooled(rvs, rv_split)
+    _assign_rv_regimes_pooled(all_events, edges, rv_split)
 
     return {
         "arm": "B_ironflow_crosscoin_secondary",
@@ -269,9 +371,17 @@ def run_arm_b(coins=None):
         "per_coin": per_coin,
         "events": all_events,
         "cluster_key": "coin",
-        "rv_split": "tercile_pooled",
-        "rv_edges": regime_edges_all,
+        "rv_split": rv_split,
+        "rv_edges": edges,
+        "percentiles": [p_low, p_high],
+        "censor_hours": censor_hours,
     }
+
+
+def run_arm_b(coins=None):
+    """Frozen headline Arm B: [5,95] percentiles, 168h censor, pooled tercile."""
+    fdf, cdf, coins = _load_arm_b_data(coins)
+    return _run_arm_b_impl(fdf, cdf, coins, 5.0, 95.0, 168, "tercile")
 
 
 # --------------------------------------------------------------------------- #
@@ -479,25 +589,80 @@ def _primary_family(arm_events, cluster_key):
     return families
 
 
-def _sensitivity_grid(arm_events, cluster_key):
-    """Reported-only grid: percentiles x censor x rv_split. Headline is [5,95]/168h/tercile."""
+def _sensitivity_grid():
+    """Full frozen pre-registered sensitivity grid for both arms.
+
+    Grid: percentiles [1,99],[5,95],[10,90] x censor [168,336]h x rv_split [tercile,median]
+    = 12 cells per arm, 24 total. Headline [5,95]/168h/tercile is recomputed for
+    reference but never used to select the headline. Reported only; no outcome
+    peeking, no threshold tuning, no headline change.
+
+    Data is loaded once per arm and reused across all 12 cells to avoid
+    redundant I/O and parquet concatenation.
+    """
     grid = []
-    # percentile/censor cells are approximated by re-identifying extremes per
-    # symbol with the requested thresholds (Arm A); Arm B uses pooled bands.
-    symbols = sorted(set(e["symbol"] for e in arm_events))
-    # rebuild per-symbol funding series
-    per_sym_series = {}
-    if arm_events:
-        for s in symbols:
-            if s in ("BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"):
-                series = []
-                for month in ARM_A_MONTHS:
-                    p = _resolve_funding_csv(s, month)
-                    if p:
-                        series += fcr.load_funding_series(p)
-                series.sort()
-                per_sym_series[s] = series
-    return grid, per_sym_series
+    percentile_pairs = [(1.0, 99.0), (5.0, 95.0), (10.0, 90.0)]
+    censor_hours_list = [168, 336]
+    rv_splits = ["tercile", "median"]
+
+    # Load Arm A data once (series + mark prices reused across all cells).
+    aa_sym_series, aa_price_maps, aa_per_sym_month, aa_load_errors = _load_arm_a_data()
+    # Load Arm B data once (parquet concat reused across all cells).
+    ab_fdf, ab_cdf, ab_coins = _load_arm_b_data()
+
+    for p_low, p_high in percentile_pairs:
+        for censor_hours in censor_hours_list:
+            for rv_split in rv_splits:
+                cell = {
+                    "percentiles": [p_low, p_high],
+                    "censor_max_follow_hours": censor_hours,
+                    "rv_split": rv_split,
+                    "is_headline": (p_low == 5.0 and p_high == 95.0
+                                    and censor_hours == 168 and rv_split == "tercile"),
+                }
+                # --- Arm A cell ---
+                arm_a_cell = _run_arm_a_impl(aa_sym_series, aa_price_maps,
+                                             aa_per_sym_month, aa_load_errors,
+                                             p_low, p_high, censor_hours, rv_split)
+                arm_a_families = _primary_family(arm_a_cell["events"],
+                                                 arm_a_cell["cluster_key"])
+                arm_a_pooled = next((f for f in arm_a_families
+                                     if f["label"] == "pooled_high_vs_low"), None)
+                cell["arm_a"] = {
+                    "n_events": len(arm_a_cell["events"]),
+                    "n_corrected": sum(1 for e in arm_a_cell["events"]
+                                       if not e["censored"]),
+                    "n_censored": sum(1 for e in arm_a_cell["events"]
+                                      if e["censored"]),
+                    "load_errors": arm_a_cell["load_errors"],
+                    "primary_family": arm_a_families,
+                    "pooled": arm_a_pooled,
+                    "verdict": _verdict(arm_a_families, arm_a_pooled),
+                    "regime_counts": _regime_counts(arm_a_cell["events"]),
+                }
+                # --- Arm B cell ---
+                arm_b_cell = _run_arm_b_impl(ab_fdf, ab_cdf, ab_coins,
+                                             p_low, p_high, censor_hours, rv_split)
+                arm_b_families = _primary_family(arm_b_cell["events"],
+                                                 arm_b_cell["cluster_key"])
+                arm_b_pooled = next((f for f in arm_b_families
+                                     if f["label"] == "pooled_high_vs_low"), None)
+                cell["arm_b"] = {
+                    "n_coins": len(arm_b_cell["coins"]),
+                    "n_events": len(arm_b_cell["events"]),
+                    "n_corrected": sum(1 for e in arm_b_cell["events"]
+                                       if not e["censored"]),
+                    "n_censored": sum(1 for e in arm_b_cell["events"]
+                                      if e["censored"]),
+                    "load_errors": arm_b_cell["load_errors"],
+                    "primary_family": arm_b_families,
+                    "pooled": arm_b_pooled,
+                    "verdict": _verdict(arm_b_families, arm_b_pooled),
+                    "regime_counts": _regime_counts(arm_b_cell["events"]),
+                }
+                grid.append(cell)
+
+    return grid
 
 
 # --------------------------------------------------------------------------- #
@@ -571,6 +736,10 @@ def execute(prereg_path=PREREG):
     out["arm_b"]["pooled"] = pooled_b
     out["arm_b"]["verdict"] = _verdict(arm_b_families, pooled_b)
     out["arm_b"]["regime_counts"] = _regime_counts(arm_b["events"])
+
+    # Frozen pre-registered sensitivity grid (reported only; never used to
+    # select the headline). No outcome peeking, no threshold tuning.
+    out["sensitivity_grid"] = _sensitivity_grid()
 
     out["overall"] = {
         "arm_a_verdict": out["arm_a"]["verdict"],
@@ -649,6 +818,50 @@ def _write_md(result, arm_a, arm_b, out_dir):
     return "\n".join(lines)
 
 
+def _cell_summary_line(arm_result, side):
+    p = (arm_result.get("pooled") or {})
+    ci = (p.get("median_diff_ci") or {})
+    return (f"  [{arm_result['percentiles'][0]},{arm_result['percentiles'][1]}]/"
+            f"{arm_result['censor_max_follow_hours']}h/{arm_result['rv_split']}: "
+            f"events={arm_result['n_events']} "
+            f"(corrected={arm_result['n_corrected']}, censored={arm_result['n_censored']}) "
+            f"KM med high={p.get('km_median_high')}h low={p.get('km_median_low')}h "
+            f"chi2={p.get('chi2')} p={p.get('p_two_sided')} Holm p={p.get('p_adj_holm')} "
+            f"med_diff={p.get('median_diff')}h material={p.get('material')} "
+            f"verdict={arm_result['verdict']}")
+
+
+def _write_sens_md(result, grid, out_dir):
+    ts = datetime.now(tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    lines = []
+    lines.append(f"# FCLR-SHEK-SCALE Sensitivity Grid — {ts}\n")
+    lines.append(f"**Prereg:** `{result['prereg_id']}` (frozen `{result['frozen_at_utc']}`)  ")
+    lines.append(f"**Class:** EXPLORATORY_ONLY · promotable=false · sealed_mutated=false · network=false\n")
+    lines.append(f"**Grid:** percentiles [1,99],[5,95],[10,90] x censor [168,336]h x rv_split [tercile,median] = 12 cells x 2 arms = 24 cells\n")
+    lines.append(f"**Headline cell:** [5,95]/168h/tercile (recomputed for reference, never used to select headline)\n")
+    lines.append("---\n")
+    lines.append("## Grid cells — Arm A (Binance, primary)\n")
+    for cell in grid:
+        a = cell["arm_a"]
+        lines.append(_cell_summary_line(a, "A"))
+        lines.append(f"  CI: [{a['pooled']['median_diff_ci']['lo'] if a['pooled'] and a['pooled'].get('median_diff_ci') else None}, "
+                     f"{a['pooled']['median_diff_ci']['hi'] if a['pooled'] and a['pooled'].get('median_diff_ci') else None}]\n")
+    lines.append("\n## Grid cells — Arm B (ironflow, secondary, never promotable)\n")
+    for cell in grid:
+        b = cell["arm_b"]
+        lines.append(_cell_summary_line(b, "B"))
+        lines.append(f"  CI: [{b['pooled']['median_diff_ci']['lo'] if b['pooled'] and b['pooled'].get('median_diff_ci') else None}, "
+                     f"{b['pooled']['median_diff_ci']['hi'] if b['pooled'] and b['pooled'].get('median_diff_ci') else None}]\n")
+    lines.append("## Consistency vs headline\n")
+    headline = [c for c in grid if c["is_headline"]]
+    if headline:
+        h = headline[0]
+        lines.append(f"- Arm A headline verdict: **{h['arm_a']['verdict']}** (sealed: TAIL_SHAPE_EFFECT)")
+        lines.append(f"- Arm B headline verdict: **{h['arm_b']['verdict']}** (sealed: REPLICATES_DIRECTION)")
+    lines.append("\nAll cells reported only; none used to select or tune the headline. EXPLORATORY_ONLY, promotable=false.\n")
+    return "\n".join(lines)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=None)
@@ -662,21 +875,45 @@ def main(argv=None):
     prereg = json.loads(PREREG.read_text())
     ts = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     result, arm_a, arm_b = execute()
+    grid = result.get("sensitivity_grid", [])
 
     payload = json.dumps(result, indent=2, default=str)
     md = _write_md(result, arm_a, arm_b, out_dir)
+    sens_payload = json.dumps({
+        "prereg_id": result["prereg_id"],
+        "frozen_at_utc": result["frozen_at_utc"],
+        "headline_cell": {"percentiles": [5.0, 95.0], "censor_max_follow_hours": 168, "rv_split": "tercile"},
+        "grid_dimensions": {
+            "percentiles": [[1.0, 99.0], [5.0, 95.0], [10.0, 90.0]],
+            "censor_max_follow_hours": [168, 336],
+            "rv_split": ["tercile", "median"],
+        },
+        "n_cells": len(grid),
+        "grid": grid,
+    }, indent=2, default=str)
+    sens_md = _write_sens_md(result, grid, out_dir)
 
     if args.no_write:
         print(payload)
+        print("---SENS---")
+        print(json.dumps({"n_cells": len(grid), "cells": [{"percentiles": c["percentiles"], "censor": c["censor_max_follow_hours"], "rv_split": c["rv_split"], "arm_a_verdict": c["arm_a"]["verdict"], "arm_b_verdict": c["arm_b"]["verdict"]} for c in grid]}, indent=2))
         return 0
 
     json_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-{ts}.json"
     md_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-{ts}.md"
     json_path.write_text(payload)
     md_path.write_text(md)
+
+    sens_json_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-SENS-{ts}.json"
+    sens_md_path = out_dir / f"evaluation_summary_FCLR-SHEK-SCALE-SENS-{ts}.md"
+    sens_json_path.write_text(sens_payload)
+    sens_md_path.write_text(sens_md)
     print(f"wrote {json_path}")
     print(f"wrote {md_path}")
+    print(f"wrote {sens_json_path}")
+    print(f"wrote {sens_md_path}")
     print(f"arm_a verdict={result['arm_a']['verdict']}  arm_b verdict={result['arm_b']['verdict']}")
+    print(f"sensitivity grid: {len(grid)} cells written")
     return 0
 
 
