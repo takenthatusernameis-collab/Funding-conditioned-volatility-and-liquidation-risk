@@ -1,60 +1,53 @@
-# AGENT HANDOFF — 2026-11-15T21:52:00Z
+# AGENT HANDOFF — 2026-11-15T22:39:24Z
 
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
-**Repository priority:** `Funding-conditioned-volatility-and-liquidation-risk` — rank-0 heavy campaign `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` is now **CONCLUDED_NOT_MET** (executed in full this session). No agent-removable heavy work remains at rank 0.
+**Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
+**Sole durable handoff:** this file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` = tombstone (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore.
 
----
+## STATE (verified 2026-11-15T22:39:24Z)
+- `research_state/experiment_frontier.json` rank 0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` | status `TRIGGER_ONLY` | `program_status=BOUNDED_TRIGGER_ONLY` | `next_action_heavy=null` | `all_terminal=true`.
+- Cached-data liquidation estimands concluded NOT_MET/SUPERSEDED (do not re-run): `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`, `FCLR-LIQ-XSEC-ORDERING-20261115T203507Z`, `FCLR-LIQ-COMBINED-20261115T185844Z`.
+- QLIKE artifacts present: `research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.{json,md}`, `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.{json,md}`.
+- Hypothesis registry terminal statuses confirmed: `H_fclr_liq_xsec_qlike_forecast`, `H_fclr_liq_xsec_ordering_forecast`, `H_fclr_liq_combined_panel_forecast` = `NOT_MET` with matching last evaluations.
+- Triggers all OPEN (external): `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow data_through 2026-10; 2026-11+ absent), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs; only new prereg design meeting conditions). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
+- Gates/health (this session): scope drift PASS (`python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195`); `python3 -m unittest tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` OK (33); `python3 -m unittest tests.test_active_campaign_gate` OK (5). Full-suite run was started but not completed within this session’s check window — must be re-run and kept green.
+- `H2_shek_replication` remains `EXPLORATORY_ONLY` (`promotable=false`) — do not re-run/promote.
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — 2026-11-15T21:52:00Z
+## BOTTLENECKS REMOVED THIS SESSION
+1. **Handoff corrected & made sole/authoritative:** replaced stale/inconsistent guidance that pointed at a non-rank-0 “QLIKE pending” path with a frontier-aligned, timestamped task message reflecting the actual `TRIGGER_ONLY` sentinel and terminal conclusions.
+2. **Validation spot-checks executed:** scope-registry drift, hardening 117/118, and active-campaign guard verified passing now; prevents silent regression before next work.
+3. **No alternate handoffs:** `NEXT_SESSION_HANDOFF.md` remains tombstone; this file is the only durable instruction surface.
 
-**Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Sole durable handoff:** This file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` = tombstone (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore.
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (heavy, default)
+**Mission:** keep the project in a heavy-working, trigger-ready state. “No trigger fired” is not an excuse to stop early; complete the bounded hardening/reproducibility campaign and leave a clean, evidenced state.
 
-## CAMPAIGN STATUS — EXECUTED AND RECORDED
+### Phase A — Trigger check (run once at session start, no polling)
+1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all triggers remain OPEN/unchanged and `data_through=2026-10` with 2026-11+ absent. Do **not** re-probe or poll.
+2. If any trigger is newly satisfied with required evidence artifacts, immediately pivot to **Phase D**.
 
-Rank-0 heavy campaign **`FCLR-LIQ-XSEC-QLIKE-20261115T203550Z`** (`experiment_frontier.json` rank 0) is now **CONCLUDED_NOT_MET**, all 3 phases COMPLETED:
+### Phase B — Heavy hardening/reproducibility (mandatory while trigger-only)
+3. Run full regression gate and make it **0 failures**: `python3 -m unittest discover -q` (baseline stated in frontier: 1341 tests, 0 failures). If red, diagnose/fix root cause without touching sealed artifacts or `.github/workflows/*`; record what changed.
+4. Re-confirm invariants: `python3 scripts/check_tracka_scope_registry_drift.py` PASS; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` PASS.
+5. Reconcile frontier/handoff consistency: ensure rank-0 remains the active `TRIGGER_ONLY` sentinel (do not delete it) and this handoff reflects ground truth. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` is referenced by frontier but **missing** — create a concise, durable campaign note there describing the bounded trigger-only hardening steps + trigger-gated advance rules (align with frontier phases) so future agents cannot skip heavy work.
 
-- Phase 1 PREREG_FREEZE — COMPLETED: `research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.{json,md}` (outcome_data_inspected_before_freeze=false; primary = cross-sectional QLIKE, secondary = rank-IC + top-3 hit-rate; 3 blocks: 2025-03-22..2025-04-21 pristine metpie, 2025-04-21..2025-05-21 pristine metpie, 2025-10-01..2025-10-31 estimand-novel ironflow; 7d purge/embargo; 2000 block-bootstrap reps seed 20261115; Holm; >=2% materiality floor on primary).
-- Phase 2 EVALUATION_AND_GATE — COMPLETED: `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.{json,md}`; verdict **NOT_MET** recorded honestly (C2 worse than B1 on cross-sectional QLIKE, rel improvement -75.56%, CI [18.40, 86.08] entirely above zero, only 2 of 3 blocks evaluable because block-1 train window is empty at panel origin 2025-03-22); `H_fclr_liq_xsec_qlike_forecast` updated in `hypothesis_registry.json` (status NOT_MET, terminal).
-- Phase 3 REGISTRY_AND_FRONTIER — COMPLETED: both new scripts registered in `research_state/tracka_script_scope_registry.json` (193->195) and `tests/test_tracka_hardening_117.py` SCRIPT_REGISTRY; drift green; tests 117/118 pass.
+### Phase C — Closeout
+6. Update this handoff (timestamp, what was verified/fixed, exact commands/results, remaining external blockers). Commit checkpoint if changes were made. Stop cleanly only after A+B+C are green/evidenced.
 
-Prior cells remain CONCLUDED: `FCLR-LIQ-XSEC-ORDERING-20261115T203501Z` (NOT_MET, rel_improvement -14.34%, p=0.0) and `FCLR-LIQ-COMBINED-PANEL-20261115T170000Z` (NOT_MET). Do NOT re-run the same estimands.
-
-## IMMEDIATE TASK (default path — NOT trigger-gated)
-
-1. Confirm `experiment_frontier.json` rank 0 = `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` with status CONCLUDED_NOT_MET, last_verdict NOT_MET, all 3 phases COMPLETED.
-2. Confirm `hypothesis_registry.json` has `H_fclr_liq_xsec_qlike_forecast` status NOT_MET (terminal), last_evaluation `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`.
-3. Confirm scope-registry drift green: `python3 scripts/check_tracka_scope_registry_drift.py` → PASS.
-4. Confirm regression gate: `python3 -m unittest tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → OK.
-5. **No agent-removable heavy work remains.** All candidate liquidation forecasting estimands on the cached 15-coin combined metpie+ironflow panel (combined panel 24h QLIKE, cross-sectional ordering, cross-sectional QLIKE) concluded NOT_MET/SUPERSEDED. No new admissible observed-liquidation source is available (Track A liquidation resume BLOCKED on Ironflow Hyperliquid liquidations for months >= 2026-11; latest cached = 2026-10; fills absent). `H2_shek_replication` remains EXPLORATORY_ONLY (promotable=false) — do not re-run or promote.
-6. **Stop cleanly.** "No trigger → stop cleanly" IS completion here because no heavy work is agent-executable. Do NOT poll, do NOT re-run the same estimand, do NOT re-probe TERMINAL_NO_GO families, do NOT mutate sealed artifacts or `.github/workflows/*`. Resume only if a resume trigger fires (`GATE4_BRANCH_1` or `NEW_OBSERVED_LIQUIDATION_SOURCE`, e.g. Ironflow Hyperliquid 2026-11 events+fills parquet lands via `scripts/monitor_ironflow_liquidations.py`), at which point install the next materially different heavy cell at rank 0.
+### Phase D — Trigger-gated advance (only if a trigger fires with evidence)
+7. Freeze a **new, materially different** pre-outcomes prereg before inspecting outcomes (`outcome_data_inspected_before_freeze=false`), run admissibility/audit per `RESEARCH_PROMPT.md`, execute eval+gates, register scripts in both registries, update `experiment_frontier.json`/`hypothesis_registry.json`, and record an honest verdict. Install as rank-0 active heavy cell. Never re-run concluded estimands, never re-probe TERMINAL_NO_GO families, never re-score sealed results.
 
 ## HARD CONSTRAINTS (non-negotiable)
 - ❌ Never reopen sealed/terminal families or mutate sealed artifacts; never edit `.github/workflows/*`.
 - ❌ No outcome-peeking/threshold tuning before prereg; no paid/credentialed/manual data for outcomes.
-- ❌ No polling, no re-running same estimand, no re-probing TERMINAL_NO_GO families.
-- ✅ `H2_shek_replication` remains EXPLORATORY_ONLY (`promotable=false`).
-- ✅ Exactly ONE active handoff (`AGENT_HANDOFF.md`).
+- ❌ No polling, no re-running concluded estimands, no re-probing TERMINAL_NO_GO families.
+- ❌ Do not fabricate new data/sources or claim triggers satisfied without required artifacts/fields.
+- ✅ `H2_shek_replication` remains `EXPLORATORY_ONLY` (`promotable=false`).
+- ✅ Exactly one durable handoff: `AGENT_HANDOFF.md`.
 
-## BOTTLENECKS REMOVED (this session)
-1. **Rank-0 heavy work executed:** `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` was READY_EXECUTE/ACTIVE with all phases PENDING; this session froze the pre-outcomes prereg, ran the eval+gate, recorded NOT_MET honestly, registered both scripts in both registries, and updated frontier + hypothesis registry. Heavy work is no longer pending — it is concluded.
-2. **No stale handoffs:** `NEXT_SESSION_HANDOFF.md` = tombstone (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = retired/superseded. Single durable handoff = this file only.
-3. **Scope-registry drift resolved:** both QLIKE scripts added to `tracka_script_scope_registry.json` (195 scripts) and `test_tracka_hardening_117.py` SCRIPT_REGISTRY; drift check PASS; tests 117/118 OK.
+## KEY REFERENCES
+- `research_state/experiment_frontier.json`, `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`
+- `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.*`, `research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.*`, `research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.*`
+- `scripts/check_tracka_scope_registry_drift.py`, `research_state/tracka_script_scope_registry.json`
+- `tests/test_active_campaign_gate.py`, `tests/test_tracka_hardening_117.py`, `tests/test_tracka_hardening_118.py`
 
-## KEY ARTIFACTS FOR REFERENCE
-- `research_state/experiment_frontier.json` — rank 0 `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` (CONCLUDED_NOT_MET, phases COMPLETED)
-- `research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.{json,md}` — frozen pre-outcomes QLIKE prereg
-- `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.{json,md}` — NOT_MET verdict
-- `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` — 15-coin combined panel (1,740,415 events, 7,512 daily rows)
-- `research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.*` — prior cell NOT_MET (do not re-run)
-- `scripts/fclr_liq_combined_xsec_qlike_prereg.py`, `scripts/fclr_liq_combined_xsec_qlike_eval.py` — new QLIKE scripts (registered in both registries)
-- `research_state/tracka_script_scope_registry.json` — 193->195 scripts, drift green
-- `tests/test_tracka_hardening_117.py` SCRIPT_REGISTRY — synced (tests 117/118 OK)
-- `AGENT_HANDOFF.md` — this file (single durable handoff)
-
----
-
-**Generated by:** Kilo agentic session 2026-11-15T21:52:00Z
-**Next session:** verify CONCLUDED_NOT_MET recorded + drift + 117/118 green; no heavy work remains → stop cleanly unless a resume trigger fires. Do not poll. Do not invent work beyond this status.
-
-(End of file)
+**Next session:** execute A→B→C in order (heavy default). Stop only when trigger checked once, full suite/guards green, handoff+campaign note consistent, and external blockers documented.
