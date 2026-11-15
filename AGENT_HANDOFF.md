@@ -1,40 +1,46 @@
-# AGENT HANDOFF — 2026-11-15T22:39:24Z
+# AGENT HANDOFF — 2026-11-15T22:57:29Z
 
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
 **Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
-**Sole durable handoff:** this file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` = tombstone (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore.
+**Sole durable handoff:** this file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` and `NEXT_SESSION_TASK.md` = tombstones (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore. `research_state/FCLR_CAMPAIGN_NEXT.md` = SUPERSEDED historical evidence.
 
-## STATE (verified 2026-11-15T22:39:24Z)
-- `research_state/experiment_frontier.json` rank 0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` | status `TRIGGER_ONLY` | `program_status=BOUNDED_TRIGGER_ONLY` | `next_action_heavy=null` | `all_terminal=true`.
-- Cached-data liquidation estimands concluded NOT_MET/SUPERSEDED (do not re-run): `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`, `FCLR-LIQ-XSEC-ORDERING-20261115T203507Z`, `FCLR-LIQ-COMBINED-20261115T185844Z`.
-- QLIKE artifacts present: `research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.{json,md}`, `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.{json,md}`.
-- Hypothesis registry terminal statuses confirmed: `H_fclr_liq_xsec_qlike_forecast`, `H_fclr_liq_xsec_ordering_forecast`, `H_fclr_liq_combined_panel_forecast` = `NOT_MET` with matching last evaluations.
-- Triggers all OPEN (external): `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow data_through 2026-10; 2026-11+ absent), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs; only new prereg design meeting conditions). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
-- Gates/health (this session): scope drift PASS (`python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195`); `python3 -m unittest tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` OK (33); `python3 -m unittest tests.test_active_campaign_gate` OK (5). Full-suite run was started but not completed within this session’s check window — must be re-run and kept green.
-- `H2_shek_replication` remains `EXPLORATORY_ONLY` (`promotable=false`) — do not re-run/promote.
+## STATE (verified 2026-11-15T22:57:29Z, HEAD af89eb624)
+- **Full regression:** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (re-verified on the final tree, 371s).
+- **Scope drift:** `python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195 reason=OK`.
+- **Invariants:** `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → 38 tests OK.
+- **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` | `TRIGGER_ONLY` | `program_status=BOUNDED_TRIGGER_ONLY` | `next_action_heavy=null` | `all_terminal=true`.
+- **Concluded NOT_MET/SUPERSEDED (do not re-run):** `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`, `FCLR-LIQ-XSEC-ORDERING-20261115T203507Z`, `FCLR-LIQ-COMBINED-20261115T185844Z`. Hypotheses `H_fclr_liq_xsec_qlike_forecast`, `H_fclr_liq_xsec_ordering_forecast`, `H_fclr_liq_combined_panel_forecast` = NOT_MET.
+- **Other terminal tracks:** `H1_primary` NOT_SUPPORTED (v3_30d data-sufficient but null); `H_trackb_modeled_breaches` NOT_SUPPORTED (TB1 degenerate, TB2 NOT_MET); `H2_shek_replication` EXPLORATORY_ONLY (`promotable=false`).
+- **Triggers all OPEN (external):** `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow `data_through=2026-10`; 2026-11..2027-01 absent), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
+- **LFS state:** `research_state/run_manifest.json` restored to valid JSON (17,113 bytes) via `git lfs checkout`. The `run_manifest_funding_{v2_5sym,v3_30d,v3_30d_exploratory_v4,v4_exploratory_30d,explor_5sym,repro}.json` objects are NOT local and `git lfs fetch` could not retrieve them in this sandbox (environmental blocker; do not fabricate content).
 
 ## BOTTLENECKS REMOVED THIS SESSION
-1. **Handoff corrected & made sole/authoritative:** replaced stale/inconsistent guidance that pointed at a non-rank-0 “QLIKE pending” path with a frontier-aligned, timestamped task message reflecting the actual `TRIGGER_ONLY` sentinel and terminal conclusions.
-2. **Validation spot-checks executed:** scope-registry drift, hardening 117/118, and active-campaign guard verified passing now; prevents silent regression before next work.
-3. **No alternate handoffs:** `NEXT_SESSION_HANDOFF.md` remains tombstone; this file is the only durable instruction surface.
+1. **Stale handoff traps neutralized.** `NEXT_SESSION_TASK.md` and `NEXT_SESSION_HANDOFF.md` still pointed at `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` as `READY_EXECUTE`/`ACTIVE` even though that cell concluded NOT_MET — a future agent could have re-run a concluded estimand. Both are now tombstones pointing here.
+2. **`run_manifest.json` was an unmaterialized LFS pointer** (many scripts read it as JSON). Restored via `git lfs checkout`; verified valid JSON.
+3. **Full suite was "started but not completed" in the prior handoff.** Now verified green end-to-end (1341 tests, 0 failures, 1 skipped).
+4. **Reverted test-mutated cache timestamp** (`research_state/ironflow_fastpath_cache.json`) so the tree is clean for the next session.
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (heavy, default)
-**Mission:** keep the project in a heavy-working, trigger-ready state. “No trigger fired” is not an excuse to stop early; complete the bounded hardening/reproducibility campaign and leave a clean, evidenced state.
+**Mission:** keep the program in a heavy-working, trigger-ready state. "No trigger fired" is NOT a reason to stop. The next session must execute the bounded, non-skippable reproducibility/integrity/power campaign in `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` and leave cited artifacts — not just a green suite.
 
 ### Phase A — Trigger check (run once at session start, no polling)
-1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all triggers remain OPEN/unchanged and `data_through=2026-10` with 2026-11+ absent. Do **not** re-probe or poll.
-2. If any trigger is newly satisfied with required evidence artifacts, immediately pivot to **Phase D**.
+1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all triggers remain OPEN and `data_through=2026-10` with 2026-11+ absent. Do not re-probe or poll.
+2. If any trigger is newly satisfied with its required evidence artifact, pivot immediately to Phase D.
 
-### Phase B — Heavy hardening/reproducibility (mandatory while trigger-only)
-3. Run full regression gate and make it **0 failures**: `python3 -m unittest discover -q` (baseline stated in frontier: 1341 tests, 0 failures). If red, diagnose/fix root cause without touching sealed artifacts or `.github/workflows/*`; record what changed.
-4. Re-confirm invariants: `python3 scripts/check_tracka_scope_registry_drift.py` PASS; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` PASS.
-5. Reconcile frontier/handoff consistency: ensure rank-0 remains the active `TRIGGER_ONLY` sentinel (do not delete it) and this handoff reflects ground truth. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` is referenced by frontier but **missing** — create a concise, durable campaign note there describing the bounded trigger-only hardening steps + trigger-gated advance rules (align with frontier phases) so future agents cannot skip heavy work.
+### Phase B — Heavy reproducibility & integrity (mandatory while trigger-only)
+3. Materialize/validate LFS manifests: `git lfs checkout -- research_state/run_manifest.json`; `git lfs ls-files`; write `research_state/manifest_validation_<UTC>.json` (zero parse failures; unmaterialized objects reported, never faked).
+4. Independent recomputation: `python3 scripts/fclr011_recompute_audit.py --out-utc <UTC>` and `python3 scripts/run_funding_ablations.py --split-design v3_30d --start 2024-04-01 --end 2024-09-30 --include-cache --out-suffix _repro_<UTC>`; write `research_state/reproducibility_recompute_<UTC>.json` with per-metric expected/observed/tolerance/pass.
+5. Result-integrity reconciliation → `research_state/result_integrity_<UTC>.json`; leakage audit → `research_state/leakage_audit_<UTC>.md`.
+6. Regression gates green: `python3 -m unittest discover -q` (0 failures), scope-drift PASS, active-campaign/hardening guards PASS. Keep the rank-0 TRIGGER_ONLY sentinel active.
 
-### Phase C — Closeout
-6. Update this handoff (timestamp, what was verified/fixed, exact commands/results, remaining external blockers). Commit checkpoint if changes were made. Stop cleanly only after A+B+C are green/evidenced.
+### Phase C — Program-level power & structural-shortfall synthesis (mandatory)
+7. Write `research_state/program_power_synthesis_<UTC>.{json,md}`: per-track estimand, achieved sample, effect + uncertainty, materiality floor, minimum detectable effect, and classification (true null vs underpowered/degenerate vs externally blocked). Do not invent a new estimand to escape trigger-only.
 
-### Phase D — Trigger-gated advance (only if a trigger fires with evidence)
-7. Freeze a **new, materially different** pre-outcomes prereg before inspecting outcomes (`outcome_data_inspected_before_freeze=false`), run admissibility/audit per `RESEARCH_PROMPT.md`, execute eval+gates, register scripts in both registries, update `experiment_frontier.json`/`hypothesis_registry.json`, and record an honest verdict. Install as rank-0 active heavy cell. Never re-run concluded estimands, never re-probe TERMINAL_NO_GO families, never re-score sealed results.
+### Phase D — Trigger-gated advance (only if a trigger fires)
+8. Freeze a NEW, materially different pre-outcomes prereg (`outcome_data_inspected_before_freeze=false`), run admissibility/audit per `RESEARCH_PROMPT.md`, execute eval+gates, register scripts in both registries, update `experiment_frontier.json`/`hypothesis_registry.json`, install as rank-0 heavy cell. Never re-run concluded estimands, never re-probe TERMINAL_NO_GO families, never re-score sealed results.
+
+### Phase E — Closeout
+9. Update this handoff (timestamp, verified/fixed items, exact commands/results, remaining external blockers). Commit a checkpoint only if repository convention/permissions require it; otherwise leave the tree clean and documented.
 
 ## HARD CONSTRAINTS (non-negotiable)
 - ❌ Never reopen sealed/terminal families or mutate sealed artifacts; never edit `.github/workflows/*`.
@@ -46,8 +52,10 @@
 
 ## KEY REFERENCES
 - `research_state/experiment_frontier.json`, `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`
-- `research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.*`, `research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.*`, `research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.*`
+- `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` (authoritative heavy campaign), `research_state/negative_results_report.md`
+- `research_state/evaluation_summary_funding_v3_30d.md`, `research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md`, `research_state/evaluation_summary_FCLR-011.md`
+- `scripts/fclr011_recompute_audit.py`, `scripts/run_funding_ablations.py`, `scripts/run_gate4_v4_leakage_audit.py`
 - `scripts/check_tracka_scope_registry_drift.py`, `research_state/tracka_script_scope_registry.json`
 - `tests/test_active_campaign_gate.py`, `tests/test_tracka_hardening_117.py`, `tests/test_tracka_hardening_118.py`
 
-**Next session:** execute A→B→C in order (heavy default). Stop only when trigger checked once, full suite/guards green, handoff+campaign note consistent, and external blockers documented.
+**Next session:** execute A→B→C→E in order (heavy default). Stop only when the trigger is checked once, every Phase B/C artifact is written, the full suite/guards are green, and this handoff reflects ground truth with external blockers documented.

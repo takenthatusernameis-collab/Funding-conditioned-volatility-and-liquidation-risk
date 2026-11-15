@@ -1,15 +1,12 @@
-# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T21:40:52Z
-# SOLE DURABLE HANDOFF POINTER (NOT AN ALTERNATE HANDOFF)
+# NEXT SESSION TASK — TOMBSTONE (NO AUTHORITY)
 
-**Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Sole durable handoff:** `AGENT_HANDOFF.md` — execute its `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — 2026-11-15T21:40:52Z`.
-`NEXT_SESSION_HANDOFF.md` = tombstone. `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore.
+**Tombstone timestamp:** 2026-11-15T22:57:29Z
 
-## IMMEDIATE HEAVY TASK (default path — NOT trigger-gated)
-Rank-0 heavy campaign: **`FCLR-LIQ-XSEC-QLIKE-20261115T203550Z`** (`READY_EXECUTE` / `ACTIVE`, all phases PENDING).
+This file is intentionally retained only to prevent stale instructions from being followed. It has **no campaign authority**.
 
-Prior cells CONCLUDED `NOT_MET` (do not re-run same estimands): `FCLR-LIQ-XSEC-ORDERING-20261115T203501Z` (`research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.*`) and `FCLR-LIQ-COMBINED-PANEL-20261115T170000Z`.
+- **Sole durable handoff:** `AGENT_HANDOFF.md` — execute its `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION`.
+- **Rank-0 active state:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`). All cached-data estimands are terminal; the only agent-removable heavy work is the bounded reproducibility/integrity campaign in `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
+- **Concluded — do NOT re-run:** `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`, `FCLR-LIQ-XSEC-ORDERING-20261115T203507Z`, `FCLR-LIQ-COMBINED-20261115T185844Z` (all NOT_MET/SUPERSEDED).
+- **VOID directive:** the earlier "execute rank-0 heavy campaign `FCLR-LIQ-XSEC-QLIKE-20261115T203550Z` (READY_EXECUTE / ACTIVE)" line is obsolete — that cell concluded NOT_MET and was superseded.
 
-Execute the materially different **cross-sectional QLIKE** estimand on the existing 15-coin panel `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` (no new acquisition; 2 pristine metpie blocks + 1 estimand-novel ironflow block) per the ordered steps and constraints in `AGENT_HANDOFF.md`. Create/register prereg+eval scripts, run eval+gates, update frontier/hypothesis, checkpoint-commit. "No trigger → stop cleanly" is NOT completion. Do not poll.
-
-(End of file - total 13 lines)
+Ignore every historical directive that conflicts with `AGENT_HANDOFF.md`. "No trigger → stop cleanly" is NOT completion.
