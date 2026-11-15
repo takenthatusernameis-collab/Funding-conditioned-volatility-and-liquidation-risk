@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-15T23:13:19Z
+# AGENT HANDOFF — 2026-11-15T23:16:17Z
 
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
 **Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Sole durable handoff:** this file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` and `NEXT_SESSION_TASK.md` = tombstones (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore. `research_state/FCLR_CAMPAIGN_NEXT.md` = SUPERSEDED historical evidence.
 
-## STATE (verified 2026-11-15T23:13:19Z, HEAD f839b2726, tree clean)
+## STATE (verified 2026-11-15T23:16:17Z, HEAD f839b2726, tree clean)
 - **Full regression:** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (baseline 371s; green on clean tree at HEAD f839b2726).
 - **Scope drift:** `python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195 reason=OK`.
 - **Invariants:** `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → 38 tests OK.
