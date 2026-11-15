@@ -581,11 +581,15 @@ def _primary_family(arm_events, cluster_key):
         if sym:
             families.append(sym)
 
-    # Holm over the family
-    pvals = [f["p_two_sided"] for f in families]
-    adj = fcr.holm_bonferroni(pvals)
-    for f, a in zip(families, adj):
-        f["p_adj_holm"] = a
+    # Holm over the family (ignore comparisons with undefined p)
+    valid = [f for f in families if f.get("p_two_sided") is not None]
+    if valid:
+        pvals = [f["p_two_sided"] for f in valid]
+        adj = fcr.holm_bonferroni(pvals)
+        for f, a in zip(valid, adj):
+            f["p_adj_holm"] = a
+    for f in families:
+        f.setdefault("p_adj_holm", None)
     return families
 
 
