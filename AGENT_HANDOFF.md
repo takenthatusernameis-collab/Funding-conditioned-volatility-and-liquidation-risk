@@ -30,14 +30,15 @@
 
 **Completion criteria (all required):** trigger checked once with verdict recorded; every Phase B artifact written; Phase C synthesis written with per-track MDE/classification; full suite + drift + guards green; this handoff reflects ground truth. "No trigger → stop cleanly" is NOT completion.
 
-## STATE (last verified 2026-11-15T23:53:26Z; working tree observed clean at 2026-11-15T23:53:26Z, HEAD f01e6a5d8)
+## STATE (last verified 2026-11-15T23:55:12Z; working tree observed clean at 2026-11-15T23:55:12Z, HEAD 3bbcd2b2c)
 - **Full regression (last recorded):** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (baseline 371s).
 - **Scope drift (last recorded):** `python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195 reason=OK`.
 - **Invariants (last recorded):** `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → 38 tests OK.
 - **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` | `TRIGGER_ONLY` | `program_status=BOUNDED_TRIGGER_ONLY` | `next_action_heavy=null` | `all_terminal=true`.
 - **Concluded NOT_MET/SUPERSEDED (do not re-run):** `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`, `FCLR-LIQ-XSEC-ORDERING-20261115T203507Z`, `FCLR-LIQ-COMBINED-20261115T185844Z`. Hypotheses `H_fclr_liq_xsec_qlike_forecast`, `H_fclr_liq_xsec_ordering_forecast`, `H_fclr_liq_combined_panel_forecast` = NOT_MET.
 - **Other terminal tracks:** `H1_primary` NOT_SUPPORTED (v3_30d data-sufficient but null); `H_trackb_modeled_breaches` NOT_SUPPORTED (TB1 degenerate, TB2 NOT_MET); `H2_shek_replication` EXPLORATORY_ONLY (`promotable=false`).
-- **Triggers all OPEN (external, verified 2026-11-15T23:53:26Z):** `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow `data_through=2026-10`; 2026-11..2027-01 CONFIRMED_ABSENT, `new_files_found=0`), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
+- **Triggers all OPEN (external, verified 2026-11-15T23:55:12Z):** `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow `data_through=2026-10`; 2026-11..2027-01 CONFIRMED_ABSENT, `new_files_found=0`), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
+- **Phase A trigger check (this session, 2026-11-15T23:55:12Z):** read `research_state/resume_trigger_registry.json` + `research_state/ironflow_monitor_state.json`; all 4 triggers OPEN, `data_through=2026-10`, `2026-11..2027-01` absent, no newly satisfied trigger with required evidence artifact → NO pivot to Phase D; proceed Phase B→C→E. No polling/re-probing.
 - **LFS state:** `research_state/run_manifest.json` restored to valid JSON (17,113 bytes). `run_manifest_funding_{v2_5sym,v3_30d,v3_30d_exploratory_v4,v4_exploratory_30d,explor_5sym,repro}.json` are NOT local and `git lfs fetch` could not retrieve them in this sandbox (environmental blocker; do not fabricate content).
 
 ## BOTTLENECKS REMOVED (2026-11-15T23:16:17Z session) — keep removed
