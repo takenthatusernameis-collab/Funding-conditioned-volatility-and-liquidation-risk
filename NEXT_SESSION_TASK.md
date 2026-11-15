@@ -1,4 +1,4 @@
-# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T08:48:14Z
+# NEXT SESSION INITIAL TASK MESSAGE — 2026-11-15T08:56:31Z
 # SOLE DURABLE HANDOFF POINTER — DO NOT RE-EDIT HANDOFF PROSE BEFORE PRODUCING DELIVERABLES
 
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk (funding rates, volatility, liquidation-risk in crypto perpetuals)
@@ -7,7 +7,7 @@
 ## IMMEDIATE TASK (default heavy path, NOT trigger-gated)
 Execute **`FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z`** now. Compute the frozen prereg sensitivity grid for both arms and emit timestamped artifacts `research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-<UTC>.{json,md}`. Required cache-only robustness on frozen Shek samples (not a re-probe, no headline/threshold tuning). Forecast 3-block frontier is exhausted per `next_campaign_status.py`.
 
-## Baseline re-verified (2026-11-15T08:48:14Z)
+## Baseline re-verified (2026-11-15T08:56:31Z)
 - `fclr_campaign_gate.py` 19/19 PASS (env lacked `pyarrow`; installed in user site-packages)
 - `fclr_fwd_vol_2025_disjoint_cross_gate.py` PASS
 - `check_tracka_scope_registry_drift.py` 186/186 OK
