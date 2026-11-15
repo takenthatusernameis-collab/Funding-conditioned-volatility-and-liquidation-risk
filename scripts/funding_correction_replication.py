@@ -228,6 +228,26 @@ def benjamini_hochberg(pvals):
     return adj
 
 
+def holm_bonferroni(pvals):
+    """Holm step-down family-wise correction. Returns adjusted p-values (same order).
+
+    Standard Holm: sort ascending, compare p_(i) to alpha/(n-i), enforce monotone
+    non-decreasing adjusted p-values. Used by the scaled FCLR-SHEK-SCALE campaign
+    as the pre-registered multiplicity control over the primary comparison family.
+    """
+    n = len(pvals)
+    if n == 0:
+        return []
+    order = sorted(range(n), key=lambda i: pvals[i])
+    adj = [0.0] * n
+    running = 0.0
+    for rank, idx in enumerate(order):
+        val = (n - rank) * pvals[idx]
+        running = max(running, min(1.0, val))
+        adj[idx] = running
+    return adj
+
+
 def bootstrap_median_ci(times, n_boot=2000, seed=12345):
     """Bootstrap CI for median."""
     import random

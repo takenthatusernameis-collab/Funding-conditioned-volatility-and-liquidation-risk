@@ -1,0 +1,113 @@
+{
+  "prereg_id": "FCLR-SHEK-SCALE-20261115T063600Z",
+  "campaign": "FCLR-SHEK-SCALE-20261115T040843Z",
+  "title": "Funding-conditioned correction hazard under volatility regimes — scaled EXPLORATORY_ONLY partial replication of Shek (SSRN 7529458)",
+  "frozen_at_utc": "2026-11-15T06:36:00Z",
+  "frozen_by": "agentic work session (sole durable handoff AGENT_HANDOFF.md)",
+  "head_at_freeze": "72c310d7c",
+  "status": "FROZEN_PREREG",
+  "class": "EXPLORATORY_ONLY",
+  "promotable": false,
+  "sealed_artifacts_mutated": false,
+  "network_used": false,
+  "paid_or_credentialed_or_manual_data": false,
+  "independent_of": "FCLR-H002-PARTIAL-REPLICA-v1 (88 events, 5 Binance symbols, 2024-01..2024-03). This scaled study EXCLUDES 2024-01..2024-03 so Arm A is an independent, never-previously-reported sample.",
+  "disclaimer": "Correction time is a separate outcome from volatility-forecast skill and from observed-liquidation prediction. This study never relabels any result as forecast skill, boundary-breach prediction, or observed-liquidation prediction. Full Shek methodology (SSRN 7529458) is not independently reconstructible (HTTP 403), so this remains a PARTIAL, non-promotable replication.",
+
+  "event_definition_frozen": {
+    "source": "research_state/h002_pre_registration.md (verbatim, frozen 2026-10-29T22:48:55Z)",
+    "venue_arm_a": "Binance USDⓈ-M perpetual funding rates, 8h cadence (calc_time epoch ms, last_funding_rate)",
+    "trailing_window_days": 90,
+    "min_valid_funding_obs": 30,
+    "percentile_low_pct": 5.0,
+    "percentile_high_pct": 95.0,
+    "percentile_method": "nearest-rank on sorted trailing values",
+    "sides": ["positive", "negative"],
+    "dedupe": "after an extreme on a side, subsequent same-side observations are skipped until funding crosses back inside [p_low, p_high]; keep the FIRST extreme of each same-side cluster",
+    "correction": "first subsequent funding observation (strictly after the event) back inside the band (positive: funding <= p_high; negative: funding >= p_low)",
+    "censor_max_follow_hours": 168,
+    "censored_if": "no correction within 168h, or series ends first",
+    "rv_regime": "trailing 24h realized volatility of mark-price log returns ending at event",
+    "rv_min_valid_returns": 23,
+    "rv_split_arm_a": "per-symbol RV terciles over events with valid RV: low = rv <= 33.33rd nearest-rank edge; high = rv >= 66.67rd nearest-rank edge; middle otherwise; missing = no valid RV",
+    "primary_contrast": "high-RV vs low-RV correction-time hazard"
+  },
+
+  "arms": {
+    "arm_a_binance_independent": {
+      "role": "primary",
+      "universe_symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT"],
+      "months_in_scope": ["2024-04", "...", "2026-10"],
+      "months_excluded_already_reported": ["2024-01", "2024-02", "2024-03"],
+      "months_total": 31,
+      "funding_obs_per_symbol_month": {
+        "min": 84, "max": 93, "median": 93,
+        "total_funding_obs_across_panel": 14160,
+        "note": "every symbol-month has >=84 valid obs (>=30 threshold satisfied at event level)"
+      },
+      "mark_price_coverage": {
+        "event_months_with_mark": 31,
+        "min_hourly_rows_per_month": 672,
+        "median_hourly_rows_per_month": 744,
+        "note": "24h trailing RV requires 23 hourly returns; >=672 rows/month is ample"
+      },
+      "inclusion_rule": "event included iff >=30 valid funding obs in the trailing 90d window AND a valid trailing-24h mark-price RV (else rv_regime='missing', still counted in event totals but excluded from the RV-regime contrast)",
+      "exclusions_recorded": [],
+      "cache_layout": "research_state/data_cache/{SYM}_{YYYY_MM}/{SYM}-fundingRate-{YYYY-MM}/{SYM}-fundingRate-{YYYY-MM}.csv (nested; nested fallback fixed 2026-11-15T05:09:18Z)"
+    },
+    "arm_b_ironflow_crosscoin": {
+      "role": "secondary_never_promotable",
+      "source": "research_state/data_cache/ironflow_bulk/{funding,candles_1h}/2025-05..2026-04.parquet (observed months: 2025-05..2025-12)",
+      "months_observed": ["2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12"],
+      "inclusion_thresholds_frozen": {
+        "min_funding_obs_per_coin": 1000,
+        "min_candle_rows_per_coin": 5000
+      },
+      "coins_qualifying": 160,
+      "coins_qualifying_list": ["AAVE","ACE","ADA","AIXBT","ALGO","ALT","ANIME","APE","APT","AR","ARB","ARK","ATOM","AVAX","BABY","BANANA","BCH","BERA","BIGTIME","BIO","BLAST","BLUR","BNB","BOME","BRETT","BSV","BTC","CAKE","CELO","CFX","CHILLGUY","COMP","CRV","DOGE","DOOD","DOT","DYDX","DYM","EIGEN","ENA","ENS","ETC","ETH","ETHFI","FARTCOIN","FET","FIL","FTT","FXS","GALA","GAS","GMT","GMX","GOAT","GRASS","GRIFFAIN","HBAR","HMSTR","HYPE","HYPER","IMX","INIT","INJ","IO","IOTA","IP","JTO","JUP","KAITO","KAS","LAYER","LDO","LINK","LTC","MANTA","MAV","MAVIA","ME","MELANIA","MEME","MERL","MEW","MINA","MNT","MOODENG","MORPHO","MOVE","NEAR","NEO","NIL","NOT","NXPC","OM","ONDO","OP","ORDI","PAXG","PENDLE","PENGU","PEOPLE","PNUT","POL","POLYX","POPCAT","PROMPT","PURR","PYTH","RENDER","REZ","RSR","RUNE","S","SAGA","SAND","SCR","SEI","SNX","SOL","SOPH","SPX","STRK","STX","SUI","SUPER","SUSHI","TAO","TIA","TNSR","TON","TRB","TRUMP","TRX","TST","TURBO","UMA","UNI","USTC","USUAL","VINE","VIRTUAL","W","WCT","WIF","WLD","XAI","XLM","XRP","YGG","ZEN","ZEREBRO","ZETA","ZK","ZORA","ZRO","kBONK","kFLOKI","kLUNC","kNEIRO","kPEPE","kSHIB"],
+      "rv_split_arm_b": "pooled cross-coin RV terciles over all events with valid RV (shared edges, not per-coin)",
+      "note": "separate, never-promotable secondary family; results reported but never used to promote H2"
+    }
+  },
+
+  "inference_method_frozen": {
+    "km": "Kaplan-Meier median correction time per RV regime; if the KM median is not reached (survival stays above 0.5 within the 168h censor), the KM median is reported as '>censor' and the regime is flagged km_median_not_reached. The headline direction is the KM median; the mean corrected time is reported as a secondary tail summary only.",
+    "log_rank": "two-sided log-rank test (1 df) on high-RV vs low-RV, respecting right-censoring",
+    "median_diff_ci": "per-coin cluster + per-month block bootstrap 95% CI of the median difference (high-RV median minus low-RV median)",
+    "cluster": "per-symbol (Arm A) / per-coin (Arm B)",
+    "block": "per-calendar-month block bootstrap",
+    "n_boot": 2000,
+    "seed": 20261115,
+    "multiplicity": "Holm across the pre-specified primary family: pooled high-vs-low, positive-side high-vs-low, negative-side high-vs-low, and per-symbol high-vs-low (5 comparisons). Arm B is a separate secondary family, never merged into the primary Holm family.",
+    "sensitivity_grid": {
+      "percentiles": [[1.0, 99.0], [5.0, 95.0], [10.0, 90.0]],
+      "censor_max_follow_hours": [168, 336],
+      "rv_split": ["tercile", "median"],
+      "usage": "reported only; never used to select the headline; headline is the frozen [5,95] / 168h / tercile cell"
+    }
+  },
+
+  "headline_cell": {
+    "percentiles": [5.0, 95.0],
+    "censor_max_follow_hours": 168,
+    "rv_split": "tercile",
+    "primary_estimand": "high-RV vs low-RV correction-time hazard (direction and Holm-adjusted significance)"
+  },
+
+  "verdict_rules": {
+    "materiality": "The pre-registered direction is assessed on the KM/median correction-time contrast, NOT the log-rank p alone. Because the 8h funding cadence quantises correction times to multiples of 8h, a tiny median difference can be log-rank-significant without being economically material. REPLICATES_DIRECTION requires BOTH the direction (high-RV median > low-RV median) AND materiality: |median_diff| >= 0.5 * min(median_high, median_low). A significant log-rank with a sub-material median gap is reported as TAIL_SHAPE_EFFECT, not REPLICATES_DIRECTION.",
+    "REPLICATES_DIRECTION": "high-RV KM median > low-RV KM median (lower hazard at higher RV) AND |median_diff| >= 0.5*min(median_high, median_low) AND Holm-adjusted pooled p < 0.05",
+    "TAIL_SHAPE_EFFECT": "log-rank (and/or mean tail) differs significantly with the correct direction, but the median contrast is sub-material (|median_diff| < 0.5*min medians); reported as a distributional/tail difference, not a median replication",
+    "NULL": "Holm-adjusted pooled p >= 0.05 with a precisely-estimated near-zero difference",
+    "UNDERPOWERED": "CI wide enough to include both material improvement and material worsening (median-diff 95% CI crosses both signs at a magnitude > 0.5x pooled median)",
+    "INCONCLUSIVE": "direction or CI indeterminate, or insufficient events per regime after exclusions",
+    "never_promote": "No verdict in this study promotes H2 out of EXPLORATORY_ONLY or into any forecast/liquidation claim"
+  },
+
+  "stopping_rules": {
+    "no_early_peek": "This prereg is frozen BEFORE inspecting any correction-time outcome for the scaled sample.",
+    "no_threshold_tuning": "Event thresholds, censoring, RV split, and inclusion rules are frozen above; the sensitivity grid is reported, not optimised.",
+    "no_new_data": "No network, no paid/credentialed/manual data; cache only.",
+    "stop_condition": "Complete the frozen primary cell + full sensitivity grid and record a verdict; do not stop for lack of a trigger."
+  }
+}
