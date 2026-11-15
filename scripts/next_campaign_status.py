@@ -441,6 +441,177 @@ def bulk_frontier() -> dict:
             "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
 
 
+HL_CANDLES = RS / "data_cache" / "hyperliquid_candles"
+HL_FUNDING = RS / "data_cache" / "hyperliquid_funding"
+IRONFLOW_EVENTS = RS / "data_cache" / "ironflow_events"
+HL_COINS = ("AAVE", "ADA", "AVAX", "BCH", "BNB", "BTC", "CRV", "DOGE", "ETH",
+            "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP", "ZEC")
+
+
+def hl_candle_months() -> dict[str, list[str]]:
+    """Months present in hyperliquid_candles/<COIN>/ for each coin."""
+    out: dict[str, list[str]] = {}
+    if not HL_CANDLES.exists():
+        return out
+    for coin in HL_COINS:
+        d = HL_CANDLES / coin
+        if not d.exists():
+            continue
+        months = sorted(p.stem for p in d.glob("*.json"))
+        if months:
+            out[coin] = months
+    return out
+
+
+def hl_funding_months() -> dict[str, list[str]]:
+    """Months covered by hyperliquid_funding/<COIN>.json based on first/last row time.
+
+    Reads only the first and last row of each file to infer the covered month
+    range; no full file scan, no network.
+    """
+    out: dict[str, list[str]] = {}
+    if not HL_FUNDING.exists():
+        return out
+    import datetime as _dt
+    for coin in HL_COINS:
+        p = HL_FUNDING / f"{coin}.json"
+        if not p.exists():
+            continue
+        try:
+            data = json.loads(p.read_text())
+        except Exception:
+            continue
+        if not isinstance(data, list) or len(data) < 2:
+            continue
+        first = data[0]
+        last = data[-1]
+        t_first = first.get("t") or first.get("time")
+        t_last = last.get("t") or last.get("time")
+        if t_first is None or t_last is None:
+            continue
+        ms_first = int(t_first) // 1000
+        ms_last = int(t_last) // 1000
+        from datetime import datetime, timezone
+        dt_first = datetime.fromtimestamp(ms_first, tz=timezone.utc)
+        dt_last = datetime.fromtimestamp(ms_last, tz=timezone.utc)
+        months: list[str] = []
+        y, m = dt_first.year, dt_first.month
+        while (y, m) <= (dt_last.year, dt_last.month):
+            months.append(f"{y:04d}-{m:02d}")
+            m += 1
+            if m > 12:
+                m = 1
+                y += 1
+        out[coin] = months
+    return out
+
+
+def ironflow_event_months() -> list[str]:
+    """Months present in ironflow_events/*.parquet."""
+    if not IRONFLOW_EVENTS.exists():
+        return []
+    return sorted(p.stem for p in IRONFLOW_EVENTS.glob("*.parquet"))
+
+
+def hl_extended_frontier() -> dict:
+    """Untouched, feasible regions in the extended Hyperliquid data stores.
+
+    Checks hyperliquid_candles/ (1h candles per coin), hyperliquid_funding/
+    (funding rates per coin), and ironflow_events/ (observed liquidation events)
+    -- three data stores NOT scanned by bulk_frontier(). A month is usable when
+    all three data types are present for >=5 coins and the month is outside every
+    tested Hyperliquid window. Returns contiguous runs and feasibility flags.
+    """
+    candle_months = hl_candle_months()
+    funding_months = hl_funding_months()
+    event_months = ironflow_event_months()
+    event_set = set(event_months)
+
+    if not candle_months or not funding_months or not event_set:
+        return {"candle_coins": len(candle_months),
+                "funding_coins": len(funding_months),
+                "event_months": len(event_months),
+                "runs": [], "any_feasible": False,
+                "any_forward_feasible": False,
+                "min_design_days": MIN_DESIGN_DAYS,
+                "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
+
+    # Coins with both candles and funding for a given month.
+    coin_months: dict[str, set[str]] = {}
+    for coin in HL_COINS:
+        cm = set(candle_months.get(coin, []))
+        fm = set(funding_months.get(coin, []))
+        common = cm & fm
+        if common:
+            coin_months[coin] = common
+
+    # A month is usable when >=5 coins have both candles+funding AND events exist.
+    usable_months: set[str] = set()
+    all_cf_months: set[str] = set()
+    for cm_set in coin_months.values():
+        all_cf_months |= cm_set
+    for m in all_cf_months:
+        n_coins = sum(1 for cm_set in coin_months.values() if m in cm_set)
+        if n_coins >= 5 and m in event_set:
+            usable_months.add(m)
+
+    if not usable_months:
+        return {"candle_coins": len(candle_months),
+                "funding_coins": len(funding_months),
+                "event_months": len(event_months),
+                "usable_months": [],
+                "runs": [], "any_feasible": False,
+                "any_forward_feasible": False,
+                "min_design_days": MIN_DESIGN_DAYS,
+                "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
+
+    import datetime as _dt
+
+    def _tested(day: _dt.date) -> bool:
+        for a, b, _lbl in BULK_TESTED_WINDOWS:
+            da = _dt.date.fromisoformat(a)
+            db = _dt.date.fromisoformat(b)
+            if da <= day <= db:
+                return True
+        return False
+
+    covered: set[_dt.date] = set()
+    for m in sorted(usable_months):
+        y, mo = int(m[:4]), int(m[5:7])
+        for d in range(1, _month_days(m) + 1):
+            covered.add(_dt.date(y, mo, d))
+
+    usable_days = sorted(d for d in covered if not _tested(d))
+
+    runs: list[list[_dt.date]] = []
+    cur: list[_dt.date] = []
+    for d in usable_days:
+        if cur and (d - cur[-1]).days != 1:
+            runs.append(cur)
+            cur = []
+        cur.append(d)
+    if cur:
+        runs.append(cur)
+
+    out = []
+    for run in runs:
+        days = len(run)
+        out.append({"start": run[0].isoformat(),
+                    "end": run[-1].isoformat(),
+                    "span_days": days,
+                    "feasible": days >= MIN_DESIGN_DAYS,
+                    "feasible_forward": days >= MIN_FORWARD_DESIGN_DAYS})
+    return {"candle_coins": len(candle_months),
+            "funding_coins": len(funding_months),
+            "event_months": len(event_months),
+            "usable_months": sorted(usable_months),
+            "runs": out,
+            "any_feasible": any(r["feasible"] for r in out),
+            "any_forward_feasible": any(r["feasible_forward"] for r in out),
+            "min_design_days": MIN_DESIGN_DAYS,
+            "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
@@ -454,6 +625,7 @@ def main() -> None:
     feasibility = design_feasible_months(windows)
     disjoint = disjoint_block_frontier(windows)
     bulk = bulk_frontier()
+    hl_extended = hl_extended_frontier()
 
     if args.json:
         print(json.dumps({"actionable_preregs": actionable,
@@ -461,7 +633,8 @@ def main() -> None:
                           "no_funding_months": partial,
                           "design_feasibility": feasibility,
                           "disjoint_block_frontier": disjoint,
-                          "hyperliquid_bulk_frontier": bulk}, indent=1))
+                          "hyperliquid_bulk_frontier": bulk,
+                          "hyperliquid_extended_frontier": hl_extended}, indent=1))
         return
 
     print("== FROZEN PRE-RESULTS PREREGS WITHOUT AN EVALUATION ARTIFACT ==")
@@ -549,8 +722,38 @@ def main() -> None:
             else:
                 print("\n  -> No untouched Hyperliquid region is long enough for a 3-block design.")
 
-    if (not feasibility["any_feasible"] and not bulk["any_feasible"]
-            and not bulk["any_forward_feasible"] and not disjoint["campaign_feasible"]):
+    print("\n== HYPERLIQUID EXTENDED FRONTIER (candles+funding+observed-liq events, not in bulk scan) ==")
+    print(f"  coins_with_candles={hl_extended['candle_coins']} "
+          f"coins_with_funding={hl_extended['funding_coins']} "
+          f"event_months={hl_extended['event_months']}")
+    if hl_extended.get("usable_months"):
+        print(f"  usable_months(>=5 coins, outside tested windows): {hl_extended['usable_months']}")
+    runs = hl_extended["runs"]
+    if not runs:
+        print("  no untouched contiguous region -> extended Hyperliquid frontier exhausted")
+    else:
+        for r in runs:
+            if r["feasible"]:
+                tag = "FEASIBLE"
+            elif r["feasible_forward"]:
+                tag = "FEASIBLE (forward-reduced: 60/7/3x10)"
+            else:
+                tag = "TOO SHORT"
+            print(f"  {r['start']}..{r['end']}  span={r['span_days']}d  "
+                  f"(need >= {hl_extended['min_design_days']}d)  {tag}")
+        if hl_extended["any_feasible"]:
+            print("\n  -> An untouched extended Hyperliquid region fits a FEASIBLE 3-block design. "
+                  "Executable heavy work REMAINS beyond the ironflow_bulk scan.")
+        elif hl_extended["any_forward_feasible"]:
+            print("\n  -> An untouched extended Hyperliquid region fits a FEASIBLE forward-reduced "
+                  "(60/7/3x10) design. Freeze that prereg and execute.")
+        else:
+            print("\n  -> No untouched extended Hyperliquid region is long enough for a 3-block design.")
+
+    campaign_feasible = (feasibility["any_feasible"] or bulk["any_feasible"]
+                         or bulk["any_forward_feasible"] or disjoint["campaign_feasible"]
+                         or hl_extended["any_feasible"] or hl_extended["any_forward_feasible"])
+    if not campaign_feasible:
         print("\n  == CAMPAIGN STATUS: no feasible 3-block design in ANY domain ==")
     else:
         print("\n  == CAMPAIGN STATUS: executable heavy work REMAINS (see FEASIBLE above) ==")
