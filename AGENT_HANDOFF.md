@@ -1,12 +1,12 @@
-# Durable Agent Handoff — sole authoritative version (initial task refreshed 2026-11-15T06:02:24Z)
+# Durable Agent Handoff — sole authoritative version (initial task refreshed 2026-11-15T06:03:41Z)
 
 **SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_HANDOFF.md` is a tombstone; older `AGENT_HANDOFF` revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` (self-superseded) are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T06:02:24Z`
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — `2026-11-15T06:03:41Z`
 
 **Execute `FCLR-SHEK-SCALE-20261115T040843Z` now (default heavy path, not trigger-gated).** Do NOT stop for "no trigger" and do NOT chase exhausted vol/liq-forecast 3-block designs (`python3 scripts/next_campaign_status.py` correctly reports none feasible).
 
-1. Baseline (record any material change): `git status` (HEAD `de5710f9f`, `main`); `python3 scripts/fclr_campaign_gate.py` (19/19); `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` (PASS); `python3 scripts/check_tracka_scope_registry_drift.py` (184/184); `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication -v` (38/38) — **all verified green 2026-11-15T06:02:24Z**.
+1. Baseline (record any material change): `git status` (HEAD `66f24902`, `main`, clean); `python3 scripts/fclr_campaign_gate.py` (19/19); `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` (PASS); `python3 scripts/check_tracka_scope_registry_drift.py` (184/184); `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication -v` (38/38); `python3 scripts/next_campaign_status.py` (no feasible 3-block design in ANY domain) — **all verified green 2026-11-15T06:03:41Z**.
 2. **Freeze before outcomes:** write `research_state/prereg_fclr_shek_scale_<UTC>.json` (+`.md`) after a data-availability audit (Binance funding 2024-04..2026-10 excl. 2024-01..03; ironflow_bulk 200 coins × 12m 2025-05..2026-04; nested funding layout supported). Record exact eligible sample, exclusions, thresholds, Holm family, inference, sensitivity grid, stopping rules.
 3. Heavy execution: extend registered `scripts/funding_correction_replication.py` with `--scale` (preferred; keeps scope drift 184/184) or add `scripts/fclr_shek_scale.py` + sync `research_state/tracka_script_scope_registry.json` and `tests/test_tracka_hardening_117.py`; add `tests/test_fclr_shek_scale.py` (fixture/deterministic/tmp-isolated/no network).
 4. Deliver `research_state/evaluation_summary_FCLR-SHEK-SCALE-<UTC>.{json,md}` with event counts/censoring, KM medians, log-rank, cluster+block-bootstrap 95% CI, sensitivity grid, Holm p-values, explicit verdict (`REPLICATES_DIRECTION`/`NULL`/`UNDERPOWERED`/`INCONCLUSIVE`). Update `research_state/hypothesis_registry.json` `H2_shek_replication` (keep EXPLORATORY_ONLY/promotable=false). Advance frontier phases to `COMPLETED_VALIDATED` and install next heavy cell at rank 0.
@@ -15,13 +15,14 @@
 **Bottlenecks:** none blocking — forecast-frontier phantom removed, nested funding cache load fixed, rank-0 `READY_EXECUTE/ACTIVE`, gates/tests/drift green. If blocked, record exact command/error + proof of a tried materially-different free route.
 
 
-## Baseline verified this session (2026-11-15T05:09:18Z)
+## Baseline verified this session (2026-11-15T06:03:41Z)
 
-- Working tree clean at HEAD `de5710f9ffb499aed0c9e0d0c7fc8fd8d0382a5b`, branch `main`.
+- Working tree clean at HEAD `66f24902e` (`main`).
 - `python3 scripts/fclr_campaign_gate.py` → **19/19 PASS**.
 - `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → **GATE PASS**.
-- `python3 scripts/check_tracka_scope_registry_drift.py` → **184/184 OK** (no script added; only existing scripts edited, so the count is unchanged).
-- `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication` → **38/38 OK** (includes 3 new regression tests added this session).
+- `python3 scripts/check_tracka_scope_registry_drift.py` → **184/184 OK**.
+- `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_funding_correction_replication -v` → **38/38 OK** (6.058s).
+- `python3 scripts/next_campaign_status.py` → **no feasible 3-block design in ANY domain** (forecast frontier honestly exhausted).
 - Cached-data coverage (verified, no network): Binance USDⓈ-M funding = **5 symbols × 31 months (2024-04..2026-10)** at the nested layout `research_state/data_cache/{SYM}_{YYYY_MM}/{SYM}-fundingRate-{YYYY-MM}/{SYM}-fundingRate-{YYYY-MM}.csv` (~90–93 obs/month at 8h cadence); mark/index/premium = 5 symbols × 35 months (2024-01..2026-11); ironflow bulk = **200 coins × 12 months (2025-05..2026-04)** for candles_1h / funding / open_interest / liquidations; ironflow_events = 18 months (2025-05..2026-10). Cache root `research_state/data_cache/` ≈ 733 MB.
 - Prior results unchanged (do not rerun): vol FullHist `NOT_MET` (C2_vs_B1 rel QLIKE 1.19% < 2% floor; CI excludes 0; Holm-sig on t24) — statistically real, economically immaterial. Liq xsec forward `EXPLORATORY_NULL` (decidable at pooled n, null-asymmetric). `H1_primary = NOT_SUPPORTED` (terminal). `H2_shek_replication = EXPLORATORY_ONLY / PARTIAL` (88 events, Q1 2024 only; high-RV 16h vs low-RV 8h, log-rank p=0.0792 — direction matches the paper's 27h/3h claim but is underpowered).
 
@@ -66,7 +67,7 @@ This is the active rank-0 frontier entry (`research_state/experiment_frontier.js
 5. Produce all deliverables (script/test/eval/registry/frontier), run the verification set, and record the exact commands + results in the execution record below.
 6. Commit only if the work is meaningful (never activity-only).
 
-**Execution record — FCLR-SHEK-SCALE-START-20261115T050918Z:** Frontier rank-0 = `FCLR-SHEK-SCALE-20261115T040843Z` (`READY_EXECUTE`/`ACTIVE`); `tests.test_active_campaign_gate` OK. Baseline gates green (campaign 19/19, fwd PASS, scope 184/184). Cached coverage verified for both arms (Binance funding 2024-04..2026-10 nested layout; ironflow_bulk 200 coins × 12 months). **Bottlenecks removed this session (see below) so the scaled campaign is now runnable end-to-end** — funding loads for the full 2024-04..2026-10 range (was silently zero before the nested-layout fix). Next session executes steps 3–5.
+**Execution record — FCLR-SHEK-SCALE-START-20261115T060341Z:** Frontier rank-0 = `FCLR-SHEK-SCALE-20261115T040843Z` (`READY_EXECUTE`/`ACTIVE`). Baseline re-verified green at HEAD `66f24902` clean: campaign gate 19/19, fwd-vol gate PASS, scope drift 184/184, targeted tests 38/38 OK, `next_campaign_status.py` reports no feasible 3-block forecast design in ANY domain. Cached coverage confirmed (Binance funding 2024-04..2026-10 nested layout; ironflow_bulk 200 coins × 12m). No blocking bottlenecks found. **Next session must execute heavy steps 3–5 now:** freeze prereg after data-availability audit, run event reconstruction → survival contrast (KM/log-rank/cluster+block bootstrap/Holm) → sensitivity grid, produce eval/verdict artifacts, update `H2_shek_replication`, advance frontier, and verify. "No trigger" is not a stop condition.
 
 ## Optional escalation triggers (do NOT block the default heavy campaign)
 
