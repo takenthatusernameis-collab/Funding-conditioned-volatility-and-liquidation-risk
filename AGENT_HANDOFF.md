@@ -1,17 +1,17 @@
-# AGENT HANDOFF — 2026-11-15T22:57:29Z
+# AGENT HANDOFF — 2026-11-15T23:05:12Z
 
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
 **Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
 **Sole durable handoff:** this file (`AGENT_HANDOFF.md`). `NEXT_SESSION_HANDOFF.md` and `NEXT_SESSION_TASK.md` = tombstones (no authority). `AGENT_HANDOFF_20261115T073240Z.md` = RETIRED/SUPERSEDED — ignore. `research_state/FCLR_CAMPAIGN_NEXT.md` = SUPERSEDED historical evidence.
 
-## STATE (verified 2026-11-15T22:57:29Z, HEAD af89eb624)
-- **Full regression:** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (re-verified on the final tree, 371s).
+## STATE (verified 2026-11-15T23:05:12Z, HEAD af89eb624)
+- **Full regression:** `python3 -m unittest discover -q` → `Ran 1341 tests`, `OK (skipped=1)`, 0 failures (baseline 371s; green on clean tree).
 - **Scope drift:** `python3 scripts/check_tracka_scope_registry_drift.py` → `scripts=195 registry=195 reason=OK`.
 - **Invariants:** `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → 38 tests OK.
 - **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` | `TRIGGER_ONLY` | `program_status=BOUNDED_TRIGGER_ONLY` | `next_action_heavy=null` | `all_terminal=true`.
 - **Concluded NOT_MET/SUPERSEDED (do not re-run):** `FCLR-LIQ-XSEC-QLIKE-20261115T214949Z`, `FCLR-LIQ-XSEC-ORDERING-20261115T203507Z`, `FCLR-LIQ-COMBINED-20261115T185844Z`. Hypotheses `H_fclr_liq_xsec_qlike_forecast`, `H_fclr_liq_xsec_ordering_forecast`, `H_fclr_liq_combined_panel_forecast` = NOT_MET.
 - **Other terminal tracks:** `H1_primary` NOT_SUPPORTED (v3_30d data-sufficient but null); `H_trackb_modeled_breaches` NOT_SUPPORTED (TB1 degenerate, TB2 NOT_MET); `H2_shek_replication` EXPLORATORY_ONLY (`promotable=false`).
-- **Triggers all OPEN (external):** `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow `data_through=2026-10`; 2026-11..2027-01 absent), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
+- **Triggers all OPEN (external):** `GATE4_BRANCH_1` (human/legal attestation), `NEW_OBSERVED_LIQUIDATION_SOURCE` (ironflow `data_through=2026-10`; 2026-11..2027-01 CONFIRMED_ABSENT), `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` (do not re-run sealed designs). See `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`.
 - **LFS state:** `research_state/run_manifest.json` restored to valid JSON (17,113 bytes) via `git lfs checkout`. The `run_manifest_funding_{v2_5sym,v3_30d,v3_30d_exploratory_v4,v4_exploratory_30d,explor_5sym,repro}.json` objects are NOT local and `git lfs fetch` could not retrieve them in this sandbox (environmental blocker; do not fabricate content).
 
 ## BOTTLENECKS REMOVED THIS SESSION
@@ -24,7 +24,7 @@
 **Mission:** keep the program in a heavy-working, trigger-ready state. "No trigger fired" is NOT a reason to stop. The next session must execute the bounded, non-skippable reproducibility/integrity/power campaign in `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` and leave cited artifacts — not just a green suite.
 
 ### Phase A — Trigger check (run once at session start, no polling)
-1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all triggers remain OPEN and `data_through=2026-10` with 2026-11+ absent. Do not re-probe or poll.
+1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`; confirm all triggers remain OPEN and `data_through=2026-10` with 2026-11..2027-01 absent. Do not re-probe or poll.
 2. If any trigger is newly satisfied with its required evidence artifact, pivot immediately to Phase D.
 
 ### Phase B — Heavy reproducibility & integrity (mandatory while trigger-only)
