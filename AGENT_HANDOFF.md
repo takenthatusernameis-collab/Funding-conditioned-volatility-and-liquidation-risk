@@ -1,13 +1,14 @@
-# Durable Agent Handoff — refreshed 2026-11-15T04:08:43Z (sole authoritative version)
+# Durable Agent Handoff — refreshed 2026-11-15T04:37:22Z (sole authoritative version)
 
 **SOLE DURABLE HANDOFF — START HERE.** `NEXT_SESSION_HANDOFF.md` is a tombstone; older `AGENT_HANDOFF` revisions and `research_state/FCLR_CAMPAIGN_NEXT.md` (self-superseded) are historical evidence only. This file is the only active handoff. Do not write status-only notes, do not re-probe exhausted families, and do not reopen sealed verdicts.
 
-## Baseline verified this session (2026-11-15T04:08:43Z)
+## Baseline verified this session (2026-11-15T04:37:22Z)
 
-- Full suite at session start: **1326 tests, 1 failure, 1 skip**. The only red test was `tests/test_active_campaign_gate.py::test_frontier_rank0_is_active_heavy_campaign` — the prior session had written rank-0 status `ACTIVE_WAITING` / program_status `WAITING_EXTERNAL_TRIGGER`, which is outside the allowed enum (`READY_EXECUTE`|`TRIGGER_ONLY` / `ACTIVE`|`BOUNDED_TRIGGER_ONLY`). **Fixed this session** (see Bottlenecks removed). That single red test was the blocker that let the prior session "stop cleanly"; it is now green.
+- Working tree clean at HEAD `e79090ca5f69ffad24a61027cd3443149200f29b`, branch `main`.
 - `python3 scripts/fclr_campaign_gate.py` → **19/19 PASS**.
 - `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py` → **GATE PASS**.
 - `python3 scripts/check_tracka_scope_registry_drift.py` → **184/184 OK**.
+- `python3 -m unittest tests.test_active_campaign_gate -v` → **5/5 OK**.
 - Cached-data coverage (verified, no network): Binance USDⓈ-M funding = **5 symbols × 31 months (2024-04..2026-10)**; mark/index/premium = **5 symbols × 35 months (2024-01..2026-11)**; ironflow bulk = **200 coins × 12 months (2025-05..2026-04)** for candles_1h / funding / open_interest / liquidations. Cache root `research_state/data_cache/` ≈ 733 MB.
 - Prior results unchanged (do not rerun): vol FullHist `NOT_MET` (C2_vs_B1 rel QLIKE 1.19% < 2% floor; CI excludes 0; Holm-sig on t24) — statistically real, economically immaterial. Liq xsec forward `EXPLORATORY_NULL` (decidable at pooled n, null-asymmetric). `H1_primary = NOT_SUPPORTED` (terminal). `H2_shek_replication = EXPLORATORY_ONLY / PARTIAL`.
 
@@ -44,15 +45,15 @@ This is the active rank-0 frontier entry (`research_state/experiment_frontier.js
 
 ## FIRST ACTION (timestamped, mandatory for the next agentic work session)
 
-**Now: `FCLR-SHEK-SCALE-START-20261115T040843Z` (execute on session start).**
-1. Read this file + `RESEARCH_PROMPT.md`; confirm working tree (`git status`, HEAD).
+**Now: `FCLR-SHEK-SCALE-START-20261115T043722Z` (execute on session start).**
+1. Read this file + `RESEARCH_PROMPT.md`; confirm working tree (`git status`, HEAD `e79090ca5`).
 2. Re-run the baseline checks and record results here if materially changed: `python3 scripts/fclr_campaign_gate.py`; `python3 scripts/fclr_fwd_vol_2025_disjoint_cross_gate.py`; `python3 scripts/check_tracka_scope_registry_drift.py`; `python3 -m unittest tests.test_active_campaign_gate -v`.
 3. **Freeze the prereg first** (`prereg_fclr_shek_scale_<UTC>.json`): run the data-availability audit (funding-obs counts + mark coverage per symbol-month / per coin) and write the exact eligible sample + exclusions into the prereg **before** looking at any correction-time outcome.
 4. Execute the heavy pipeline end-to-end: event reconstruction → survival contrast (KM + log-rank + cluster + block bootstrap + Holm) → pre-specified sensitivity grid → verdict.
 5. Produce all deliverables (script/test/eval/registry/frontier), run the verification set, and record the exact commands + results in the execution record below.
 6. Commit only if the work is meaningful (never activity-only).
 
-**Execution record — FCLR-SHEK-SCALE-START-20261115T040843Z:** frontier rank-0 rewritten to `FCLR-SHEK-SCALE-20261115T040843Z` (`READY_EXECUTE`/`ACTIVE`); `tests.test_active_campaign_gate` now **OK** (was the sole red test). Baseline gates green (campaign 19/19, fwd PASS, scope 184/184). Cached coverage verified for both arms. Next session executes steps 3–5.
+**Execution record — FCLR-SHEK-SCALE-START-20261115T043722Z:** frontier rank-0 rewritten to `FCLR-SHEK-SCALE-20261115T040843Z` (`READY_EXECUTE`/`ACTIVE`); `tests.test_active_campaign_gate` now **OK**. Baseline gates green (campaign 19/19, fwd PASS, scope 184/184). Cached coverage verified for both arms. Next session executes steps 3–5 above.
 
 ## Optional escalation triggers (do NOT block the default heavy campaign)
 
