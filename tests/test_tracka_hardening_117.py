@@ -270,8 +270,8 @@ SCRIPT_REGISTRY = {
     "reason": "freeze_fclr009_splits.py: Track C sealed volatility/forecast/robustness or supporting utility; no Track A Hyperliquid guarded liquidation outcome claims."
   },
   "fclr_shek_scale.py": {
-    "class": "test_fixture_utility",
-    "reason": "fclr_shek_scale.py: FCLR-SHEK-SCALE scaled correction-hazard pipeline entry point; registered so the G3 full-scripts sweep covers scripts/*.py; EXPLORATORY_ONLY, promotable=false, cache-only, no Track A guarded liquidation reads."
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr_shek_scale.py: FCLR-SHEK-SCALE scaled funding-extreme correction-time hazard pipeline (EXPLORATORY_ONLY, promotable=false); cache-only Arm A/Arm B event reconstruction plus KM/log-rank/cluster-block-bootstrap/Holm survival contrast; writes timestamped evaluation_summary artifacts only; distinct from liquidation outcomes; no Track A guarded liquidation reads."
   },
   "funding_correction_replication.py": {
     "class": "track_c_sealed_volatility",
@@ -789,6 +789,10 @@ SCRIPT_REGISTRY = {
   "fclr_liq_expansion_reconcile.py": {
     "class": "track_c_sealed_volatility",
     "reason": "fclr_liq_expansion_reconcile.py: sealed-vs-recompute reconciliation audit of the Track A liquidation-expansion PASS (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION artifacts only; no guarded Track A liquidation outcome claim production."
+  },
+  "fclr_liq_combined_admissibility_audit.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_liq_combined_admissibility_audit.py: read-only §16 admissibility + integration audit of the combined metpie+ironflow Hyperliquid observed-liquidation source; reads cached liquidation parquet/csv only (no network), writes only its own timestamped admissibility_audit artifacts; no outcome/holdout reads, no forecast verdict, no sealed/canonical mutation, no Track A guarded liquidation outcome claims."
   },
 }
 

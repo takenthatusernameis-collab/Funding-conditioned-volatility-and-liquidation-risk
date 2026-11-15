@@ -1,9 +1,9 @@
 [
  {
   "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T164031Z",
-  "rank": 0,
-  "status": "TRIGGER_ONLY",
-  "program_status": "BOUNDED_TRIGGER_ONLY",
+  "rank": 1,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
   "generated": "2026-11-15T16:40:31Z",
   "refreshed": "2026-11-15T16:40:31Z",
   "last_checked": "2026-11-15T16:40:31Z",
@@ -40,13 +40,13 @@
    "gates": "campaign gate 19/19 PASS; fwd-vol gate PASS; scope drift 186/186 OK; targeted suite 60/60 OK.",
    "gate4": "NO_VALID_GATE4_TRIGGER; promotable=false."
   },
-  "superseded_by": null,
-  "superseded_at": null,
-  "note": "Installed at rank 0 so test_active_campaign_gate::test_frontier_rank0_is_active_heavy_campaign holds (exactly one rank-0 entry, TRIGGER_ONLY/BOUNDED_TRIGGER_ONLY, concrete unfinished task, resume_triggers present). The completed Shek sensitivity grid is demoted to rank 1 and retained, not deleted."
+  "superseded_by": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
+  "superseded_at": "20261115T170000Z",
+  "note": "Demoted from rank 0: replaced by a real READY_EXECUTE heavy campaign (combined metpie+ironflow observed-liquidation panel) so heavy work is the default path, not trigger-gated. Retained, not deleted."
  },
  {
   "task": "FCLR-SHEK-SCALE-SENSITIVITY-GRID-20261115T073000Z",
-  "rank": 1,
+  "rank": 2,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "generated": "2026-11-15T07:30:00Z",
@@ -150,7 +150,7 @@
  },
  {
   "task": "FCLR-SHEK-SCALE-20261115T040843Z",
-  "rank": 2,
+  "rank": 3,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "generated": "2026-11-15T04:08:43Z",
@@ -241,7 +241,7 @@
  },
  {
   "task": "FCLR-TRIGGER-ONLY-SENTINEL-20261115T023500Z",
-  "rank": 3,
+  "rank": 4,
   "status": "SUPERSEDED",
   "program_status": "SUPERSEDED",
   "generated": "2026-11-15T02:35:00Z",
@@ -276,7 +276,7 @@
  },
  {
   "task": "FCLR-DESIGN-FEASIBILITY-20261115T021249Z",
-  "rank": 4,
+  "rank": 5,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "generated": "2026-11-15T02:12:49Z",
@@ -328,7 +328,7 @@
  },
  {
   "task": "FCLR-POWER-CALIBRATION-20261115T002244Z",
-  "rank": 5,
+  "rank": 6,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "generated": "2026-11-15T00:22:44Z",
@@ -379,7 +379,7 @@
  },
  {
   "task": "FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z",
-  "rank": 6,
+  "rank": 7,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "generated": "2026-11-14T19:20:32Z",
@@ -429,7 +429,7 @@
  },
  {
   "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T191615Z",
-  "rank": 7,
+  "rank": 8,
   "status": "SUPERSEDED",
   "program_status": "SUPERSEDED",
   "generated": "2026-11-14T19:16:15Z",
@@ -474,7 +474,7 @@
  },
  {
   "task": "FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T183000Z",
-  "rank": 8,
+  "rank": 9,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "generated": "2026-11-14T18:30:00Z",
@@ -542,7 +542,7 @@
  },
  {
   "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261114T132741Z",
-  "rank": 9,
+  "rank": 10,
   "status": "SUPERSEDED",
   "program_status": "SUPERSEDED",
   "generated": "2026-11-14T13:27:41Z",
@@ -588,7 +588,7 @@
  },
  {
   "task": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
-  "rank": 10,
+  "rank": 11,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "next_unfinished_task": null,
@@ -635,7 +635,7 @@
  },
  {
   "task": "FCLR-LIQ-EXPANSION-RECOMPUTE-20261114T042139Z",
-  "rank": 11,
+  "rank": 12,
   "status": "SUPERSEDED",
   "program_status": "SUPERSEDED",
   "superseded_by": "FCLR-LIQ-EXPANSION-RECONCILIATION-20261114T083642Z",
@@ -693,7 +693,7 @@
  },
  {
   "task": "FCLR-VOL-FORWARD-AUDIT-20261114T032041Z",
-  "rank": 12,
+  "rank": 13,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETED_VALIDATED",
   "next_unfinished_task": "Trigger-only: execute Gate 4 Branch 1 only on valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation); or run \u00a716 admissibility audit + frozen prereg + execute only on a materially new qualifying observed-liquidation source (>=5 instruments, >=1 complete month or >=3 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed-only labels, venue-consistent, joinable). No trigger present as of 2026-11-14T03:35:26Z \u2014 do not wait/poll; bounded NO_GO if unchanged.",
@@ -790,7 +790,7 @@
  },
  {
   "task": "FCLR-HEAVY-CONFIRM-20261113T041200Z",
-  "rank": 13,
+  "rank": 14,
   "status": "SUPERSEDED_TERMINAL",
   "program_status": "SUPERSEDED_TERMINAL",
   "next_unfinished_task": null,
@@ -820,7 +820,7 @@
  },
  {
   "task": "FCLR-FULLHISTORY-VOL-LIQ-20261112T201536Z",
-  "rank": 14,
+  "rank": 15,
   "status": "SUPERSEDED_BY_FCLR_HEAVY_CONFIRM",
   "program_status": "SUPERSEDED_BY_FCLR_HEAVY_CONFIRM",
   "next_unfinished_task": null,
@@ -847,7 +847,7 @@
   "next_action_heavy": "Track A observed-label `liq` on Hyperliquid 2025H1 is CLOSED (terminal structural stop). Next admissible heavy work: (1) Gate 4 Branch 1 \u2014 ONLY if a valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). (2) Bounded alternative liquidation-label source discovery per RESEARCH_PROMPT \u00a75/\u00a716 using scripts/hunt_alternative_liquidation_sources.py \u2192 research_state/data_source_registry_alt_hunt.json, research_state/alt_source_deep_review_latest.md. Requirement: \u22655 instruments, \u22651 complete month or \u22653 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only, venue-consistent (no Binance/2024 conflation). (3) If a source passes smoke test: \u00a716 admissibility audit BEFORE any preregistration/outcome computation; if admissible \u2192 freeze prereg \u2192 build/eval/verdict \u2192 atomic state updates under a NEW experiment ID. (4) If no source passes: timestamped probe evidence with exact failing minima per source, experiment_frontier update, clean stop \u2014 no repeated no-op probes. (5) HL/ironflow reprobe ONLY when plausibly eligible (HL \u2265100d depth AND verified post-2026-10-31 observed labels); not eligible now; no polling. No status-only output.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 15,
+  "rank": 16,
   "resume_triggers": [
    "GATE4_BRANCH_1",
    "NEW_OBSERVED_LIQUIDATION_SOURCE",
@@ -878,7 +878,7 @@
   "next_action_heavy": "Implement scripts/early4h_liq_glm_robust.py and execute FCLR-EARLY4H-2025H1-LIQ-GLM-ROBUST v1 (see AGENT_HANDOFF.md section 4). Prereg ALREADY FROZEN: research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json (sha f06060c7...). Reuse corrected panel research_state/tracka_hl_early2025h1_panel_20261112T145529Z.parquet (sha 08c60803...). Same Poisson/quasi-Poisson log-link IRLS, but clip fundingRate/abs_fund_pct/premium/ema_dist to the train [min,max] then standardize by train mean/std; target t1_liq only. Emit evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-<UTC>.{md,json} with a numerical-stability guard. If NOT_MET: preserve the null. If INCONCLUSIVE again: timestamped evidenced structural-blocker doc with exact failing minima, then STOP. Do NOT re-fetch caches, re-run the parent GLM, re-probe 1h candles, or reopen sealed verdicts.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 16,
+  "rank": 17,
   "resume_triggers": [
    "This campaign has a frozen prereg but no implementation/eval yet (sufficient on its own)",
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation)",
@@ -905,7 +905,7 @@
   "next_action_heavy": "FCLR-NEXT campaign (execute in order): (1) Gate 4 check \u2014 absent now; Branch 1 only on valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). (2) Bounded alternative liquidation-label source discovery per RESEARCH_PROMPT \u00a75 using scripts/hunt_alternative_liquidation_sources.py \u2192 research_state/data_source_registry_alt_hunt.json, research_state/alt_source_deep_review_latest.md, research_state/url_probe_cache.json, research_state/hf_search_cache.json. Requirement for claim-worthy consideration: \u22655 instruments, \u22651 complete month or \u22653 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels only, venue-consistent (no Binance/2024 conflation). (3) If a source passes smoke test: \u00a716 admissibility audit BEFORE any preregistration/outcome computation (research_state/<source>_admissibility_audit_<UTC>.{md,json}); if admissible \u2192 freeze prereg \u2192 build/eval/verdict \u2192 atomic state updates under a NEW experiment ID. (4) If no source passes: timestamped probe evidence with exact failing minima per source, experiment_frontier update, clean stop \u2014 no repeated no-op probes. (5) HL/ironflow reprobe only when plausibly eligible (HL \u2265100d AND verified post-2026-10-31 observed labels); not eligible now; no polling. No status-only output.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 17,
+  "rank": 18,
   "resume_triggers": [
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
    "New admissible liquidation-label source verified (\u22655 symbols, \u22651 complete month or \u22653 non-overlapping 30-day blocks, unauthenticated, provenance/license, observed labels)",
@@ -930,7 +930,7 @@
   "next_action_heavy": "Gate 4 Branch 1 only if valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (status=RESOLVED_VERIFIED, fabricated=false, human/legal attestation). Else execute bounded new-data discovery/monitor probes: HL 2026-11+ candle/funding depth (\u2265100d required), ironflow/hyperliquid-liquidations HF lastModified/event files for extension beyond 2026-10-31 (verified observed labels required). Emit timestamped probe/audit artifact with evidence; if newly admissible, freeze prereg BEFORE outcomes then build/eval+verdict+atomic state updates. If ineligible, document exact failing minima and stop cleanly. No status-only output, no polling, no sealed-record reopening.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 18,
+  "rank": 19,
   "resume_triggers": [
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
    "New admissible data source/window verified (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license, observed labels)"
@@ -948,7 +948,7 @@
   "next_action_heavy": "If Gate 4 valid RESOLVED_VERIFIED trigger appears, execute Branch 1. Else run bounded evidence-backed reprobe/monitor when plausibly eligible: HL 2026-11+ candles+funding when >=100d available AND ironflow HF for post-2026-10-31 observed liquidation labels; and/or full \u00a716 admissibility audit of metpie 2025-03-22..2025-05-25 joined to HL features if venue-consistent >=5 sym >=3x30d blocks feasible. If admissible, freeze prereg BEFORE outcomes then build/eval+verdict+state updates. If not, emit timestamped probe/audit evidence. No status-only output, no polling.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 19,
+  "rank": 20,
   "resume_triggers": [
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
    "New admissible data source appears (>=5 symbols, >=3 non-overlapping 30d blocks, unauthenticated, provenance/license)"
@@ -966,7 +966,7 @@
   "next_action_heavy": "Robustness campaign FRAGILE: preregister and attempt next best admissible untested claim in-session \u2014 alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits (per prereg fallback). If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 20,
+  "rank": 21,
   "resume_triggers": [
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
    "Complete TRACKA-ALT-VOL prereg+eval+verdict; preregister next admissible claim"
@@ -984,7 +984,7 @@
   "next_action_heavy": "If volatility family NOT_MET: execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze new prereg BEFORE outcomes specifying ex-ante checks (leave-one-instrument-out, placebo/permutation on funding features fixed seed, alternative block/bootstrap settings) with pass/falsification criteria; emit verdict + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 21,
+  "rank": 22,
   "resume_triggers": [
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
    "Complete TRACKA-EXP-ROBUST prereg+checks+verdict; preregister next admissible claim"
@@ -1002,7 +1002,7 @@
   "next_action_heavy": "Execute pre-registered robustness/falsification campaign for sealed Track A liquidation expansion PASS (TRACKA-HL-EXPANSION-20261111T195500Z) on cached panel `research_state/tracka_hl_expansion_panel_20261111T202344Z.parquet`: freeze `research_state/tracka_prereg_expansion_robust_20261111T235955Z.{json,md}` BEFORE any robustness outcome computation specifying ex-ante checks (e.g. leave-one-instrument-out sensitivity, placebo/permutation on funding features with fixed seed, and alternative pre-specified block/bootstrap settings) with pass/falsification criteria, then run all checks and emit `research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261111T235955Z.md` (ROBUST/FRAGILE/INCONCLUSIVE) + atomic state updates. If Gate 4 valid RESOLVED_VERIFIED trigger appears, switch to Branch 1. Do not relitigate sealed verdicts or threshold-shop.",
   "next_unfinished_task": null,
   "program_status": "SUPERSEDED_TERMINAL",
-  "rank": 22,
+  "rank": 23,
   "resume_triggers": [
    "Valid fclr016_v5_terms_evidence_RESOLVED_<UTC>.json appears (Gate 4 Branch 1)",
    "Complete TRACKA-EXP-ROBUST-20261111T235955Z prereg+checks+verdict; if ROBUST/FRAGILE/INCONCLUSIVE documented, preregister next admissible untested claim (e.g. alternate volatility design on cached HL 2025-11..2026-10 with different pre-specified horizon/features/splits) and execute in-session"
@@ -1189,6 +1189,93 @@
   "next_unfinished_task": null,
   "superseded_by": "research_state/fclr_final_structural_closure_20261112T212043.json",
   "superseded_at": "2026-11-12T21:21:38Z",
-  "rank": 23
+  "rank": 24
+ },
+ {
+  "task": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
+  "rank": 0,
+  "status": "READY_EXECUTE",
+  "program_status": "ACTIVE",
+  "generated": "20261115T170000Z",
+  "refreshed": "20261115T170000Z",
+  "last_checked": "20261115T170000Z",
+  "next_unfinished_task": "FCLR-LIQ-COMBINED-PANEL step 2: bounded first-time Hyperliquid candle+funding acquisition for the 15 funded coins over 2025-03-22..2025-10-31 (cached HL context only reaches 2025-11), then build the unified metpie+ironflow observed-liquidation panel (dedup on coin/timestamp/notional/tx-hash), freeze a NEW pre-outcomes prereg for a 24h observed-liquidation-intensity C2-vs-B1 expanding-window walk-forward with >=3 test blocks (2 pristine metpie blocks + estimand-novel 2025-05..2025-10 ironflow blocks), execute, and gate.",
+  "blockers": "None agent-removable on cache: \u00a716 audit = ADMISSIBLE_PENDING_BOUNDED_ACQUISITION (see research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}); only the 2025-03..2025-10 HL candle/funding context must be fetched (bounded, unauthenticated). Not a re-probe: metpie is a materially new observed-liquidation source family never used for outcomes.",
+  "next_action_heavy": "python3 scripts/fclr_liq_combined_admissibility_audit.py (already run) -> bounded HL candle/funding fetch for 15 funded coins 2025-03..2025-10 -> scripts/fclr_build_liq_combined_panel.py (new) -> freeze research_state/prereg_fclr_liq_combined_<UTC>.json (pre-outcomes) -> scripts/fclr_liq_combined_eval.py (new) -> research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.{json,md} -> gate + frontier update.",
+  "resume_triggers": [
+   "GATE4_BRANCH_1",
+   "NEW_OBSERVED_LIQUIDATION_SOURCE"
+  ],
+  "phases": [
+   {
+    "phase": "ADMISSIBILITY_AUDIT",
+    "status": "COMPLETED",
+    "claim": "\u00a716 admissibility + integration audit of the combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed-liquidation source. Determination ADMISSIBLE_PENDING_BOUNDED_ACQUISITION; all criteria PASS except aligned market context (cache covers 2025-11+ only).",
+    "expected_artifacts": [
+     "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.json",
+     "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.md"
+    ],
+    "actual_artifacts": [
+     "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.json",
+     "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.md"
+    ]
+   },
+   {
+    "phase": "BOUNDED_CONTEXT_ACQUISITION",
+    "status": "PENDING",
+    "claim": "Bounded first-time unauthenticated Hyperliquid candle+funding acquisition for the 15 funded coins over 2025-03-22..2025-10-31 (cache currently 2025-11+). Idempotent, provenance-stamped, no keys.",
+    "expected_artifacts": [
+     "research_state/data_cache/hyperliquid_candles/<COIN>/2025-0[3-9].json",
+     "2025-10.json",
+     "research_state/data_cache/hyperliquid_funding/<COIN>.json (extended)"
+    ],
+    "actual_artifacts": []
+   },
+   {
+    "phase": "COMBINED_PANEL_BUILD",
+    "status": "PENDING",
+    "claim": "Unified observed-liquidation panel: metpie+ironflow events deduped on (coin,timestamp,notional_usd,tx-hash) + aligned 1h/4h funding, mark/index premium, RV24h features (causal, no look-ahead).",
+    "expected_artifacts": [
+     "research_state/fclr_liq_combined_panel_<UTC>.parquet",
+     "research_state/fclr_liq_combined_panel_build_report_<UTC>.json"
+    ],
+    "actual_artifacts": []
+   },
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "PENDING",
+    "claim": "Freeze NEW prereg PRE-OUTCOMES: 24h observed-liquidation-intensity QLIKE C2 vs B1 expanding-window walk-forward, >=5 instruments, >=3 non-overlapping 30d test blocks incl. the 2 pristine metpie blocks + estimand-novel 2025-05..2025-10 blocks, block bootstrap, Holm, 2% materiality floor.",
+    "expected_artifacts": [
+     "research_state/prereg_fclr_liq_combined_<UTC>.json",
+     "research_state/prereg_fclr_liq_combined_<UTC>.md"
+    ],
+    "actual_artifacts": []
+   },
+   {
+    "phase": "EVALUATION_AND_GATE",
+    "status": "PENDING",
+    "claim": "Execute frozen prereg, emit verdict, run forecast gate; update frontier/hypothesis registry; no sealed mutation.",
+    "expected_artifacts": [
+     "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.json",
+     "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.md"
+    ],
+    "actual_artifacts": []
+   }
+  ],
+  "evidence": {
+   "audit": "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}",
+   "determination": "ADMISSIBLE_PENDING_BOUNDED_ACQUISITION",
+   "combined_span_days": 588.5234,
+   "n_30d_blocks": 19,
+   "n_pristine_blocks": 2,
+   "funded_coins_ge_min_events": 15,
+   "sealed_artifacts_mutated": false,
+   "network_used_for_outcomes": false,
+   "class": "CONFIRMATORY_PENDING_PREREG",
+   "promotable": false
+  },
+  "superseded_by": null,
+  "superseded_at": null,
+  "note": "Heavy work is the DEFAULT path (READY_EXECUTE), NOT trigger-gated. metpie is a materially new observed-liquidation source family. See AGENT_HANDOFF.md INITIAL TASK MESSAGE 2026-11-15T170000Z."
  }
 ]

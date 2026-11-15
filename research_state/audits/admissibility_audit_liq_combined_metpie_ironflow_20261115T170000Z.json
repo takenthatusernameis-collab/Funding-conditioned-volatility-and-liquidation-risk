@@ -1,0 +1,317 @@
+{
+  "audit_id": "admissibility_audit_liq_combined_metpie_ironflow",
+  "block_classification": [
+    {
+      "class": "PRISTINE",
+      "end": "2025-04-21T10:56:25Z",
+      "index": 0,
+      "overlap": null,
+      "start": "2025-03-22T10:56:26Z"
+    },
+    {
+      "class": "PRISTINE",
+      "end": "2025-05-21T10:56:25Z",
+      "index": 1,
+      "overlap": null,
+      "start": "2025-04-21T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-06-20T10:56:25Z",
+      "index": 2,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-05-21T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-07-20T10:56:25Z",
+      "index": 3,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-06-20T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-08-19T10:56:25Z",
+      "index": 4,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-07-20T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-09-18T10:56:25Z",
+      "index": 5,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-08-19T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-10-18T10:56:25Z",
+      "index": 6,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-09-18T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-11-17T10:56:25Z",
+      "index": 7,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-10-18T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2025-12-17T10:56:25Z",
+      "index": 8,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-11-17T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-01-16T10:56:25Z",
+      "index": 9,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-12-17T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-02-15T10:56:25Z",
+      "index": 10,
+      "overlap": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2026-01-16T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-03-17T10:56:25Z",
+      "index": 11,
+      "overlap": "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD (EXPLORATORY_NULL; region exhausted)",
+      "start": "2026-02-15T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-04-16T10:56:25Z",
+      "index": 12,
+      "overlap": "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD (EXPLORATORY_NULL; region exhausted)",
+      "start": "2026-03-17T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-05-16T10:56:25Z",
+      "index": 13,
+      "overlap": "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD (EXPLORATORY_NULL; region exhausted)",
+      "start": "2026-04-16T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-06-15T10:56:25Z",
+      "index": 14,
+      "overlap": "FCLR-011 sealed PASS test window (2026-05-08..2026-08-06; EXPLORATORY_ONLY)",
+      "start": "2026-05-16T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-07-15T10:56:25Z",
+      "index": 15,
+      "overlap": "FCLR-011 sealed PASS test window (2026-05-08..2026-08-06; EXPLORATORY_ONLY)",
+      "start": "2026-06-15T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-08-14T10:56:25Z",
+      "index": 16,
+      "overlap": "FCLR-011 sealed PASS test window (2026-05-08..2026-08-06; EXPLORATORY_ONLY)",
+      "start": "2026-07-15T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-09-13T10:56:25Z",
+      "index": 17,
+      "overlap": "FCLR-FWD-VOL-011-CONFIRM forward walk (2026-08-03..2026-10-31; NOT_REPLICATED)",
+      "start": "2026-08-14T10:56:26Z"
+    },
+    {
+      "class": "ESTIMAND_OVERLAP",
+      "end": "2026-10-13T10:56:25Z",
+      "index": 18,
+      "overlap": "FCLR-FWD-VOL-011-CONFIRM forward walk (2026-08-03..2026-10-31; NOT_REPLICATED)",
+      "start": "2026-09-13T10:56:26Z"
+    }
+  ],
+  "campaign": "FCLR-LIQ-COMBINED-PANEL",
+  "combined": {
+    "coins": 478,
+    "coins_ge_min_events": 63,
+    "end": "2026-10-31T23:30:10Z",
+    "funded_coins": [
+      "AAVE",
+      "ADA",
+      "AVAX",
+      "BCH",
+      "BNB",
+      "BTC",
+      "CRV",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "LTC",
+      "NEAR",
+      "SOL",
+      "SUI",
+      "UNI",
+      "XRP"
+    ],
+    "funded_coins_ge_min_events": [
+      "AAVE",
+      "ADA",
+      "AVAX",
+      "BNB",
+      "BTC",
+      "CRV",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "LTC",
+      "NEAR",
+      "SOL",
+      "SUI",
+      "UNI",
+      "XRP"
+    ],
+    "funded_coins_with_cached_candles": [
+      "AAVE",
+      "ADA",
+      "AVAX",
+      "BCH",
+      "BNB",
+      "BTC",
+      "CRV",
+      "DOGE",
+      "ETH",
+      "LINK",
+      "LTC",
+      "NEAR",
+      "SOL",
+      "SUI",
+      "UNI",
+      "XRP"
+    ],
+    "n_30d_blocks": 19,
+    "n_pristine_blocks": 2,
+    "rows": 3194543,
+    "span_days": 588.5234,
+    "start": "2025-03-22T10:56:26Z"
+  },
+  "context_cache": {
+    "candle_months": [
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10"
+    ],
+    "covers_combined_window_start": false,
+    "funding_time_range": [
+      "2025-11-01T00:00:00Z",
+      "2026-10-31T23:00:00Z"
+    ],
+    "note": "cached HL candles cover 2025-11..2026-10; cached HL funding 2025-11-01 00:00:00.078000+00:00..2026-10-31 23:00:00.044000+00:00; combined window starts 2025-03-22 10:56:26.556000+00:00. Cache does NOT reach the combined window start -> bounded first-time HL candle/funding acquisition for the funded coins is required before panel build."
+  },
+  "criteria": {
+    "aligned_market_context_available": {
+      "evidence": "cached HL candles cover 2025-11..2026-10; cached HL funding 2025-11-01 00:00:00.078000+00:00..2026-10-31 23:00:00.044000+00:00; combined window starts 2025-03-22 10:56:26.556000+00:00. Cache does NOT reach the combined window start -> bounded first-time HL candle/funding acquisition for the funded coins is required before panel build. 16 funded coins have a cached candle directory.",
+      "status": "PARTIAL"
+    },
+    "ge_3_nonoverlapping_30d_blocks": {
+      "evidence": "combined span 588.5234d -> 19 non-overlapping 30d blocks (>= 3 required); 2 pristine of 19.",
+      "status": "PASS"
+    },
+    "ge_5_instruments_with_label_coverage": {
+      "evidence": "15 coins with >= 5000 events AND cached HL funding: ['AAVE', 'ADA', 'AVAX', 'BNB', 'BTC', 'CRV', 'DOGE', 'ETH', 'LINK', 'LTC', 'NEAR', 'SOL', 'SUI', 'UNI', 'XRP'].",
+      "status": "PASS"
+    },
+    "observed_labels_not_modeled": {
+      "evidence": "Both provide observed liquidation events (px/sz/side/notional_usd/tx hash), not synthetic/modeled/proxy.",
+      "status": "PASS"
+    },
+    "provenance_license_documented": {
+      "evidence": "metpie/hyperliquid-liquidation-events CC BY 4.0; ironflow/hyperliquid-liquidations CC BY 4.0; both Hyperliquid node-trade 'LiquidatedMarket' archives.",
+      "status": "PASS"
+    },
+    "unauthenticated_public_access": {
+      "evidence": "metpie GitHub CC BY 4.0 + ironflow HF; both cached, no auth/keys/signature/requester-pays.",
+      "status": "PASS"
+    },
+    "venue_consistency_hyperliquid": {
+      "evidence": "metpie coin == ironflow market(-PERP) on identical universe; seam gap 0.2273h at 2025-05-25; same venue (Hyperliquid perps).",
+      "status": "PASS"
+    }
+  },
+  "determination": "ADMISSIBLE_PENDING_BOUNDED_ACQUISITION",
+  "network_used": false,
+  "next_step": "If ADMISSIBLE(_PENDING_BOUNDED_ACQUISITION): (1) bounded first-time Hyperliquid candle/funding acquisition for the funded coins lacking cache; (2) freeze a NEW prereg (pre-outcomes) for a 24h observed-liquidation-intensity C2-vs-B1 expanding-window walk-forward on the combined 2025-03-22..2025-10-31 window, placing >=3 test blocks in the pristine early segment and/or the estimand-novel 2025-05..2025-10 range; (3) build panel; (4) evaluate; (5) gate + frontier update. No sealed verdict is reopened; no threshold tuning.",
+  "outcomes_inspected": false,
+  "priority": "funding-conditioned volatility AND liquidation risk",
+  "protocol": "RESEARCH_PROMPT.md \u00a716",
+  "repo": "Funding-conditioned-volatility-and-liquidation-risk",
+  "schema_mapping": {
+    "coin": "metpie.coin ; ironflow.market with '-PERP' suffix stripped",
+    "notional_usd": "metpie.notional_usd ; ironflow.notional_usd",
+    "side": "metpie.side ; ironflow.position_side",
+    "timestamp": "metpie.time(ms)->UTC ; ironflow.timestamp->UTC"
+  },
+  "seam": {
+    "gap_hours": 0.2273,
+    "interpretation": "Near-seamless abutment (~13 min) consistent with two releases of the same Hyperliquid node-trade liquidation archive; treat as one continuous observed-liquidation series after dedup on (coin, timestamp, notional_usd, tx-hash).",
+    "ironflow_first": "2025-05-25T14:36:58Z",
+    "metpie_last": "2025-05-25T14:23:20Z"
+  },
+  "sources": {
+    "ironflow": {
+      "coins": 468,
+      "end": "2026-10-31T23:30:10Z",
+      "license": "CC BY 4.0",
+      "path": "research_state/data_cache/ironflow_events/*.parquet",
+      "rows": 2848413,
+      "span_days": 524.3703,
+      "start": "2025-05-25T14:36:58Z"
+    },
+    "metpie": {
+      "coins": 179,
+      "end": "2025-05-25T14:23:20Z",
+      "license": "CC BY 4.0",
+      "path": "research_state/data_cache/metpie_liq/liquidation_events.csv.gz",
+      "rows": 346130,
+      "span_days": 64.1437,
+      "start": "2025-03-22T10:56:26Z"
+    }
+  },
+  "tested_windows_hyperliquid": [
+    {
+      "end": "2026-01-17",
+      "label": "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC (NOT_MET/EXPLORATORY_NULL)",
+      "start": "2025-05-25"
+    },
+    {
+      "end": "2026-04-30",
+      "label": "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD (EXPLORATORY_NULL; region exhausted)",
+      "start": "2026-01-18"
+    },
+    {
+      "end": "2026-08-06",
+      "label": "FCLR-011 sealed PASS test window (2026-05-08..2026-08-06; EXPLORATORY_ONLY)",
+      "start": "2026-05-01"
+    },
+    {
+      "end": "2026-10-31",
+      "label": "FCLR-FWD-VOL-011-CONFIRM forward walk (2026-08-03..2026-10-31; NOT_REPLICATED)",
+      "start": "2026-08-03"
+    }
+  ],
+  "timestamp_utc": "20261115T170000Z",
+  "writes_canonical_research_state": false
+}
