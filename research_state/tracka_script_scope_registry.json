@@ -104,6 +104,18 @@
       "id": "fclr_verify_fast_identify_register_20261115T082826Z",
       "reason": "Register verify_fast_identify.py (unclassified_auxiliary) restoring drift green: offline canonical-vs-fast funding-extreme equivalence utility used by the FCLR-SHEK-SCALE sensitivity grid; registry now covers all 186 scripts/*.py.",
       "script": "verify_fast_identify.py"
+    },
+    {
+      "action": "add",
+      "id": "fclr_liq_combined_register_20261115T181449Z",
+      "reason": "Register the three FCLR-LIQ-COMBINED-PANEL heavy-campaign scripts (context fetch, panel build, prereg freeze) restoring scope-registry drift green; registry now covers all 190 scripts/*.py.",
+      "script": "fclr_liq_combined_fetch_context.py,fclr_build_liq_combined_panel.py,fclr_liq_combined_prereg.py"
+    },
+    {
+      "action": "add",
+      "id": "fclr_liq_combined_eval_register_20261115T182500Z",
+      "reason": "Register fclr_liq_combined_eval.py (track_c_sealed_volatility) evaluation/gate writer for FCLR-LIQ-COMBINED-PANEL; registry now covers all 191 scripts/*.py.",
+      "script": "fclr_liq_combined_eval.py"
     }
   ],
   "changes": [
@@ -122,12 +134,20 @@
     {
       "id": "fclr023_register",
       "summary": "register fclr023_gate4_blocker_resolution_action_plan.py as track_c_or_aux_audit_utility read-only blocker-resolution action plan (packet_ready_for_human_or_prereg_action=false, no satisfaction inference, no fabrication)"
+    },
+    {
+      "id": "fclr_liq_combined_register_20261115T181449Z",
+      "summary": "register fclr_liq_combined_fetch_context.py (raw_fetch_monitor_provenance), fclr_build_liq_combined_panel.py (track_c_or_aux_audit_utility), fclr_liq_combined_prereg.py (prereg_utility) for the FCLR-LIQ-COMBINED-PANEL heavy campaign"
+    },
+    {
+      "id": "fclr_liq_combined_eval_register_20261115T182500Z",
+      "summary": "register fclr_liq_combined_eval.py (track_c_sealed_volatility) as the FCLR-LIQ-COMBINED-PANEL evaluation/gate writer"
     }
   ],
-  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile). Reconciled with FCLR-SHEK-SCALE registration (fclr_shek_scale.py) at 2026-11-15T07:03:18Z; registry now covers all 186 scripts/*.py (verify_fast_identify.py added 2026-11-15T08:28:26Z).",
-  "generated": "20261115T082826Z",
+  "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile). Reconciled with FCLR-SHEK-SCALE registration (fclr_shek_scale.py) at 2026-11-15T07:03:18Z; registry now covers all 186 scripts/*.py (verify_fast_identify.py added 2026-11-15T08:28:26Z). Reconciled with FCLR-LIQ-COMBINED-PANEL registration (fclr_liq_combined_fetch_context.py, fclr_build_liq_combined_panel.py, fclr_liq_combined_prereg.py) at 2026-11-15T18:14:49Z; registry now covers all 190 scripts/*.py. Reconciled with FCLR-LIQ-COMBINED-PANEL eval registration (fclr_liq_combined_eval.py) at 2026-11-15T18:25:00Z; registry now covers all 191 scripts/*.py.",
+  "generated": "20261115T182500Z",
   "registry_version": "1.3",
-  "script_count": 187,
+  "script_count": 191,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -397,6 +417,10 @@
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr024_v5_scope_coherence_report.py: deterministic read-only Gate 4 v5 scope-coherence/blocker-matrix report; emits per-gate matrix including scope alignment and required artifact classes for prereg frozen_scope window, references 2024-04..09 local evidence (fclr015/fclr017) as present_unverified/bounded only; never creates/satisfies evidence, never fabricates provenance/completeness/license, never claims GO or permits confirmatory outcomes; no outcomes/network/data loading."
     },
+    "fclr_build_liq_combined_panel.py": {
+      "class": "track_c_or_aux_audit_utility",
+      "reason": "fclr_build_liq_combined_panel.py: offline COMBINED_PANEL_BUILD for FCLR-LIQ-COMBINED-PANEL; normalizes metpie+ironflow observed-liquidation events to one schema, dedups on (coin,timestamp,notional_usd,tx_hash), joins past-only causal funding/mark/RV features, writes its own timestamped parquet+build report; no guarded Track A liquidation outcome claim, no forecast verdict, no sealed/canonical mutation."
+    },
     "fclr_build_tracka_liq_xsec.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr_build_tracka_liq_xsec.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
@@ -528,6 +552,18 @@
     "fclr_liq_combined_admissibility_audit.py": {
       "class": "track_c_or_aux_audit_utility",
       "reason": "fclr_liq_combined_admissibility_audit.py: read-only \u00a716 admissibility + integration audit of the combined metpie+ironflow Hyperliquid observed-liquidation source; reads cached liquidation parquet/csv only (no network), writes only its own timestamped admissibility_audit artifacts; no outcome/holdout reads, no forecast verdict, no sealed/canonical mutation, no Track A guarded liquidation outcome claims."
+    },
+    "fclr_liq_combined_eval.py": {
+      "class": "track_c_sealed_volatility",
+      "reason": "fclr_liq_combined_eval.py: EVALUATION_AND_GATE for FCLR-LIQ-COMBINED-PANEL; executes the frozen pre-outcomes prereg (C2-vs-B1 expanding-window walk-forward QLIKE on 24h observed liquidation intensity) on the combined metpie+ironflow panel, block-bootstrap paired CI + Holm, materiality gate; writes only timestamped evaluation_summary_FCLR-LIQ-COMBINED artifacts and updates non-sealed experiment_frontier/hypothesis_registry; no outcome inspection before freeze, no threshold tuning, no sealed-artifact mutation, no network."
+    },
+    "fclr_liq_combined_fetch_context.py": {
+      "class": "raw_fetch_monitor_provenance",
+      "reason": "fclr_liq_combined_fetch_context.py: bounded first-time unauthenticated Hyperliquid 1h/4h candle + fundingHistory acquisition for the 15 funded coins of the combined metpie+ironflow liquidation panel over 2025-03..2025-10; per coin/month .accessed.json + .sha256 provenance, idempotent skip, bounded retry; no keys/signature/requester-pays, no paid/credentialed/manual data, no outcome reads, no sealed/canonical mutation."
+    },
+    "fclr_liq_combined_prereg.py": {
+      "class": "prereg_utility",
+      "reason": "fclr_liq_combined_prereg.py: PREREG_FREEZE for FCLR-LIQ-COMBINED-PANEL; writes a NEW pre-outcomes prereg (24h observed-liquidation-intensity QLIKE, C2-vs-B1 expanding-window walk-forward) with outcome_data_inspected_before_freeze=false; does not read outcomes, compute metrics, or mutate sealed artifacts."
     },
     "fclr_liq_expansion_recompute.py": {
       "class": "track_c_sealed_volatility",

@@ -794,6 +794,22 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_liq_combined_admissibility_audit.py: read-only §16 admissibility + integration audit of the combined metpie+ironflow Hyperliquid observed-liquidation source; reads cached liquidation parquet/csv only (no network), writes only its own timestamped admissibility_audit artifacts; no outcome/holdout reads, no forecast verdict, no sealed/canonical mutation, no Track A guarded liquidation outcome claims."
   },
+  "fclr_liq_combined_fetch_context.py": {
+    "class": "raw_fetch_monitor_provenance",
+    "reason": "fclr_liq_combined_fetch_context.py: bounded first-time unauthenticated Hyperliquid 1h/4h candle + fundingHistory acquisition for the 15 funded coins of the combined metpie+ironflow liquidation panel over 2025-03..2025-10; per coin/month .accessed.json + .sha256 provenance, idempotent skip, bounded retry; no keys/signature/requester-pays, no paid/credentialed/manual data, no outcome reads, no sealed/canonical mutation."
+  },
+  "fclr_build_liq_combined_panel.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_build_liq_combined_panel.py: offline COMBINED_PANEL_BUILD for FCLR-LIQ-COMBINED-PANEL; normalizes metpie+ironflow observed-liquidation events to one schema, dedups on (coin,timestamp,notional_usd,tx_hash), joins past-only causal funding/mark/RV features, writes its own timestamped parquet+build report; no guarded Track A liquidation outcome claim, no forecast verdict, no sealed/canonical mutation."
+  },
+  "fclr_liq_combined_prereg.py": {
+    "class": "prereg_utility",
+    "reason": "fclr_liq_combined_prereg.py: PREREG_FREEZE for FCLR-LIQ-COMBINED-PANEL; writes a NEW pre-outcomes prereg (24h observed-liquidation-intensity QLIKE, C2-vs-B1 expanding-window walk-forward) with outcome_data_inspected_before_freeze=false; does not read outcomes, compute metrics, or mutate sealed artifacts."
+  },
+  "fclr_liq_combined_eval.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "fclr_liq_combined_eval.py: EVALUATION_AND_GATE for FCLR-LIQ-COMBINED-PANEL; executes the frozen pre-outcomes prereg (C2-vs-B1 expanding-window walk-forward QLIKE on 24h observed liquidation intensity) on the combined metpie+ironflow panel, block-bootstrap paired CI + Holm, materiality gate; writes only timestamped evaluation_summary_FCLR-LIQ-COMBINED artifacts and updates non-sealed experiment_frontier/hypothesis_registry; no outcome inspection before freeze, no threshold tuning, no sealed-artifact mutation, no network."
+  },
 }
 
 ALLOWED_CLASSES = {

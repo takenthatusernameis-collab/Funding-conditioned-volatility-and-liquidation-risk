@@ -1,0 +1,112 @@
+{
+  "compliance": {
+    "no_network_for_outcomes": true,
+    "no_paid_or_credentialed_data": true,
+    "no_sealed_artifact_mutation": true,
+    "no_threshold_tuning": true,
+    "outcome_data_inspected_before_freeze": false,
+    "purge_embargo_days": 7
+  },
+  "contrast": "C2_vs_B1",
+  "contrast_C2_vs_B1": {
+    "block_bootstrap_reps": 2000,
+    "ci_hi": 20.588969859197835,
+    "ci_lo": -0.6939139248178801,
+    "mean_diff": 10.251595660571509,
+    "n_blocks": 3,
+    "n_pairs": 1221,
+    "p_value": 0.085,
+    "rel_reduction_pct": -17.098968003227284,
+    "seed": 20261115
+  },
+  "evaluation_id": "FCLR-LIQ-COMBINED-20261115T185844Z",
+  "experiment_id": "FCLR-LIQ-COMBINED-20261115T181449Z",
+  "gate": {
+    "block_pass": true,
+    "ci_hi": 20.588969859197835,
+    "ci_pass": false,
+    "instr_pass": true,
+    "materiality_pct": 2.0,
+    "min_blocks": 3,
+    "min_instruments": 5,
+    "n_blocks_with_data": 3,
+    "n_paired_instruments": 15,
+    "rel_pass": false,
+    "rel_reduction_pct": -17.098968003227284,
+    "verdict": "NOT_MET"
+  },
+  "generated_utc": "2026-11-15T18:58:45Z",
+  "holm": {
+    "adjusted_alpha": 0.05,
+    "family": [
+      "C2_vs_B1"
+    ],
+    "holm_reject": false,
+    "n_tests": 1,
+    "p_value": 0.085
+  },
+  "models": {
+    "B1": [
+      "rv24h",
+      "rv168h"
+    ],
+    "C2": [
+      "rv24h",
+      "rv168h",
+      "fundingRate",
+      "abs_fund_pct",
+      "premium",
+      "ema_dist"
+    ]
+  },
+  "n_daily_rows": 7497,
+  "n_universe": 15,
+  "panel": "fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "pooled": {
+    "B1_mean_qlike": 59.95447010975521,
+    "B1_n": 1221,
+    "C2_mean_qlike": 70.20606577032673,
+    "C2_n": 1221
+  },
+  "prereg": "prereg_fclr_liq_combined_20261115T181449Z.json",
+  "prereg_sha256": "93f774d7eeb3212a7a286ee31f6c0041a73ee66c41abe23f0b6130385fdf4a79",
+  "test_blocks": [
+    {
+      "B1_mean_qlike": 119.0999145930163,
+      "B1_n": 412,
+      "C2_mean_qlike": 139.68888445221413,
+      "C2_n": 412,
+      "block": 0,
+      "cutoff": "2025-09-24",
+      "end": "2025-10-31",
+      "n_test": 412,
+      "n_train": 2405,
+      "start": "2025-10-01"
+    },
+    {
+      "B1_mean_qlike": 42.039462918536024,
+      "B1_n": 390,
+      "C2_mean_qlike": 53.12995690332319,
+      "C2_n": 390,
+      "block": 1,
+      "cutoff": "2025-12-25",
+      "end": "2026-01-31",
+      "n_test": 390,
+      "n_train": 3628,
+      "start": "2026-01-01"
+    },
+    {
+      "B1_mean_qlike": 18.472202036895823,
+      "B1_n": 419,
+      "C2_mean_qlike": 17.778288112077945,
+      "C2_n": 419,
+      "block": 2,
+      "cutoff": "2026-08-25",
+      "end": "2026-09-30",
+      "n_test": 419,
+      "n_train": 6615,
+      "start": "2026-09-01"
+    }
+  ]
+}
