@@ -702,6 +702,10 @@ SCRIPT_REGISTRY = {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_fwd_vol_2025_disjoint_corrected_audit.py: corrected-estimator robustness audit of the 2025 disjoint null (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); timestamped evaluation_summary artifacts only."
   },
+  "fclr_power_calibration.py": {
+    "class": "track_c_or_aux_audit_utility",
+    "reason": "fclr_power_calibration.py: deterministic offline power/MDE calibration over persisted design quantities for concluded vol/liq nulls (EXPLORATORY_ONLY, promotable=false, does_not_reopen_sealed_verdict=true); reads frozen prereg/evals only, no model re-fit, no sealed-contrast recomputation, no network; writes timestamped evaluation artifacts only."
+  },
   "fclr_fwd_vol_2025h2_cross.py": {
     "class": "track_c_or_aux_audit_utility",
     "reason": "fclr_fwd_vol_2025h2_cross.py: registered offline campaign utility; no guarded Track A liquidation outcome claim production."
