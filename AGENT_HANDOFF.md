@@ -1,45 +1,66 @@
-# AGENT HANDOFF — 2026-11-16T09:52:34Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T09:54:52Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
-**Repo:** Funding-conditioned-volatility-and-liquidation-risk (funding-conditioned volatility & liquidation risk; liquidation data via ironflow/HuggingFace; FCLR estimand campaigns). **Rank-0 campaign state:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `all_terminal=true`, `next_action_heavy=null`). **All cached-data confirmatory estimands are terminal** (FCLR-009/H001 NOT_MET; FCLR-011 sealed PASS not independently reproduced by clean recompute (-294.01% vs sealed +4.94%) → fragile/non-promotable; Track B sealed NOT_SUPPORTED; Track C cached confirmatory designs terminal; H2 EXPLORATORY_ONLY). **Gate 4 Branch 1** blocked on human/legal attestation (agent cannot set RESOLVED_VERIFIED). Do NOT start/re-run any confirmatory estimand on cached data, re-probe the HuggingFace tree, poll, mutate sealed artifacts/frontier/registries, edit `.github/workflows/*`, or add root-level `research_state/*.md|json` (root cap 498/500; write only under `research_state/session_<UTC>/`).
 
-**Non-skippable holding action, in order:**
-1. **Trigger check ONCE (no re-poll).** Read `research_state/resume_trigger_registry.json` (4 triggers, all OPEN) and `research_state/ironflow_monitor_state.json` (last probe `ironflow_probe_20261102T115745Z`, 2026-11-02T11:57:45Z, GET 200, `data_through=2026-10`, 2026-11..2027-01 CONFIRMED_ABSENT; probes==2 satisfied). If NO trigger is satisfied (current state: none satisfied), do not advance science — proceed to step 2 to keep gates green. If a trigger IS satisfied with its required evidence artifact, jump to Phase D of `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
-2. **Run and record deterministic gates (must stay green):**
-   - `python3 scripts/check_handoff_heavywork_gate.py` → PASS (handoff/session bundle/root-cap enforced)
-   - `python3 scripts/check_tracka_scope_registry_drift.py` → PASS
-   - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` → 51 tests OK
-   - `python3 -m unittest discover -q` → run to completion and record count + EXIT (discovery suite must complete; do not treat a timeout as green).
-3. **On external trigger only (materially different estimand):** perform §16 admissibility audit + NEW pre-outages prereg (>=3 non-overlapping 30d blocks, MDE below 2% floor, Holm family, `outcome_data_inspected_before_freeze=false`), produce the full heavy artifact set in a fresh `research_state/session_<UTC>/` (`rca011_feature_attribution_*`, `rca011_impl_crosscheck_*`, `rca011_sealed_bridge_*`, `prereg_template_trigger_gated_*`, `program_power_synthesis_*`), and update the `session_<UTC>` reference + gate results in this file. "No trigger → stop cleanly" is NOT completion; keeping the enforced gate/suite green and the handoff accurate IS the required holding action.
+**Priority 0 — repository and rank-0 state.** Repository: `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility and liquidation risk). The sole rank-0 campaign is `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`). All cached-data confirmatory estimands are terminal. The sealed FCLR-011 PASS was not independently reproduced (clean recompute C2 versus B1 **-294.01%**, versus sealed **+4.94%**) and is fragile/non-promotable. Track B is sealed `NOT_SUPPORTED`; Track C cached confirmatory designs are terminal; H2 is `EXPLORATORY_ONLY`.
 
-**Heavy campaign (FCLR-RCA-011) is COMPLETE and gate-pinned.** `research_state/session_20261116T035833Z/` already contains the full Phase-B/C evidence set, so a future session cannot satisfy the handoff-heavywork gate by running only the trigger check + suite — `check_handoff_heavywork_gate.py` fails closed unless the recorded `session_<UTC>/` bundle contains `rca011_feature_attribution_*`, `rca011_impl_crosscheck_*`, `rca011_sealed_bridge_*`, `prereg_template_trigger_gated_*`, and `program_power_synthesis_*`. Do not delete or replace this bundle without installing a complete successor bundle first.
+**Read these first, in order:**
+1. `research_state/resume_trigger_registry.json`
+2. `research_state/ironflow_monitor_state.json`
+3. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`
+4. `research_state/session_20261116T035833Z/program_power_synthesis_20261116T035833Z.md`
 
-### Heavy-session evidence (authoritative, on disk)
-Latest self-contained heavy bundle (gate-pinned): `research_state/session_20261116T035833Z/`
-- `rca011_feature_attribution_20261116T035833Z.{json,md}` — B1_plus_funding vs B1 **-342.67%** (CI [-497.48,-221.27]); B1_plus_ema24 vs B1 **+9.75%**; joint vs B1 **-294.01%**.
-- `rca011_impl_crosscheck_20261116T035833Z.json` — OLS vs lstsq parity (~1e-12–1e-17).
-- `rca011_sealed_bridge_20261116T035833Z.md` (+ `_ext`) — sealed PASS (+4.94%) not reproduced by clean recompute (-294.01%); +120-row eligibility delta; sealed panel LFS pointer unauditable here.
-- `prereg_template_trigger_gated_20261116T035833Z.json` — power-remediation prereg skeleton.
-- `program_power_synthesis_20261116T035833Z.{json,md}` — FCLR-011 (c) integrity/underpowered (152 train rows); `next_action_heavy=null`.
+**Mandatory next-session sequence.** Do all steps in order. A trigger check plus unit tests is not a heavy session and is not completion.
 
-### Verified this session (2026-11-16T09:52:34Z)
-- Triggers: all OPEN (n=4). Ironflow: `last_probe=ironflow_probe_20261102T115745Z` (2026-11-02T11:57:45Z, GET 200), `data_through=2026-10`, 2026-11/12 and 2027-01 CONFIRMED_ABSENT; probes==2 satisfied. No re-probe (reads only). **Re-verified 2026-11-16T09:52:34Z:** `resume_trigger_registry.json` still 4 triggers all OPEN; `ironflow_monitor_state.json` still `data_through=2026-10` with 2026-11/12 and 2027-01 CONFIRMED_ABSENT; no new files in the tree; `last_tree_change.changed=false`. No trigger satisfied → no science advance; holding action only.
-- `python3 scripts/check_handoff_heavywork_gate.py` → **PASS** (`heavy_session=session_20261116T035833Z session_ok=True root=498/500 reason=OK`, EXIT=0)
-- `python3 scripts/check_tracka_scope_registry_drift.py` → **PASS** (`scripts=196 registry=196 reason=OK`, EXIT=0)
-- `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` → **51 tests OK** (EXIT=0)
-- `python3 -m unittest discover -q` → **completed, EXIT=0** (1354 tests, skipped=1, ~345s wall; recorded final EXIT, not a timeout). Full discovery run to completion in this session.
-- Root md/json count: **498/500** (gate counts `research_state/` root md+json only; repo-root files `AGENT_HANDOFF.md`, `AGENT_HANDOFF_20261115T073240Z.md`, `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`, `RESEARCH_PROMPT.md` are outside the cap). Session bundle `research_state/session_20261116T035833Z/` intact (14 files, all 5 Phase-B/C prefixes present). No root `research_state` writes, no re-probe, no sealed-artifact/frontier/registry/workflow mutation.
+1. **Create a new evidence directory:** `research_state/session_<UTC>/` using the actual session UTC. Do not add files to the `research_state/` root: it is at **498/500** md/json and the cap is fail-closed.
+2. **Check triggers exactly once, without network access or polling.** Read the two trigger files above. Record the timestamp, each trigger status, `data_through`, and the post-2026-10 month classifications in the new session directory. Current state: all four triggers are `OPEN`; Ironflow is `data_through=2026-10`; 2026-11, 2026-12, and 2027-01 are `CONFIRMED_ABSENT`. Do not re-probe HuggingFace, run a monitor, or repeat the trigger check later in the same session.
+3. **Audit the completed heavy evidence bundle.** Verify that `research_state/session_20261116T035833Z/` still contains all required artifact families:
+   - `rca011_feature_attribution_*`
+   - `rca011_impl_crosscheck_*`
+   - `rca011_sealed_bridge_*`
+   - `prereg_template_trigger_gated_*`
+   - `program_power_synthesis_*`
+   Write a concise evidence-audit artifact in the new session directory that records the bundle path, the artifact families found, and the integrity conclusion: the RCA is complete; FCLR-011 is not reproducible/promotable; the attribution fit has only 152 complete training rows after purge/dropna; and `next_action_heavy=null` on cached data. Do not rerun FCLR-RCA-011 merely because an old note calls it pending.
+4. **Run and capture every required gate.** Save the commands and outputs under the new session directory:
+   - `python3 scripts/check_handoff_heavywork_gate.py --json` — must PASS with the complete `session_20261116T035833Z` bundle and root count at most 500.
+   - `python3 scripts/check_tracka_scope_registry_drift.py --json` — must PASS.
+   - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` — must pass all 51 tests.
+   - `python3 -m unittest discover -q` — run to completion; record the exact test count, skip count, wall time if available, and final process EXIT. Never treat a timeout or monitor cap as green.
+5. **Update only this handoff after the evidence audit and gates.** Replace the timestamp/verification section with the actual new timestamp and results. Keep this initial task message, the sole-handoff declaration, the completed bundle reference, and the external blockers intact. Do not create another handoff file and do not execute any tombstoned instructions.
 
-### Bottlenecks (current state)
-1. **Discovery-suite duration:** `unittest discover -q` is long-running but completes (EXIT=0). Run to completion and record final EXIT/count; never treat a timeout/monitor cap as green.
-2. **Environment deps:** if `numpy`/`pandas`/`scipy`/`pyarrow`/`requests` are missing, install `pip install -r requirements.txt` before running hardening/suite gates.
-3. **Scientific bottleneck (external, not agent-removable):** all cached-data confirmatory estimands terminal; advance only on a satisfied external trigger with admissible evidence.
+**Trigger-gated science is the only scientific advance.** If no trigger is satisfied, do not advance or re-run a confirmatory estimand. The required holding action is the new-session evidence audit plus complete gate run plus an accurate handoff update. If a trigger is satisfied with its registry-defined evidence artifact, then before inspecting outcomes:
+- perform the `RESEARCH_PROMPT.md` §16 admissibility/source audit;
+- instantiate `research_state/session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json` as a new prereg in the new session directory;
+- require a materially different estimand, at least five paired OOS instruments, at least three non-overlapping 30-day test blocks, a prespecified Holm family, seven-day purge/embargo, and target MDE below the 2% materiality floor;
+- set `outcome_data_inspected_before_freeze=false`; and
+- only then execute, register any new scripts in both scope registries, run all gates, and update the frontier/hypothesis registries with an honest verdict.
 
-### Next materially different free route
-Hold TRIGGER_ONLY with gate+suite green. Advance ONLY on a satisfied external trigger with §16 admissibility audit + new pre-outages prereg (materially different estimand, >=3 non-overlapping 30d blocks, MDE < 2% floor, Holm family). On advance, write a fresh `research_state/session_<UTC>/` heavy bundle (gate-enforced set) and update this file.
+**Heavy-work evidence on disk (authoritative).** The completed gate-pinned bundle is `research_state/session_20261116T035833Z/`:
+- `rca011_feature_attribution_20261116T035833Z.{json,md}`: funding increment **-342.67%** (CI [-497.48, -221.27]); EMA24 increment **+9.75%**; joint increment **-294.01%**.
+- `rca011_impl_crosscheck_20261116T035833Z.json`: independent OLS and `lstsq` paths agree to approximately 1e-12–1e-17.
+- `rca011_sealed_bridge_20261116T035833Z.md` and `_ext`: sealed **+4.94%** versus clean recompute **-294.01%**; 120-row eligibility delta; sealed panel is an unavailable/LFS-pointer artifact here.
+- `prereg_template_trigger_gated_20261116T035833Z.json`: trigger-gated power-remediation skeleton.
+- `program_power_synthesis_20261116T035833Z.{json,md}`: integrity/instability finding; FCLR-011 is fragile and non-promotable; `next_action_heavy=null`.
+
+**Bottlenecks and prohibitions.**
+- Do not start or re-run any cached-data confirmatory estimand; all are terminal.
+- Do not mutate sealed artifacts, the frontier, hypothesis registries, or `.github/workflows/*`.
+- Do not poll, re-probe the HuggingFace tree, use paid/credentialed/manual outcome data, or add root-level `research_state/*.md|json`.
+- If dependencies are missing, install `pip install -r requirements.txt` before the documented gates.
+- The discovery suite is long-running; let it finish and record its actual EXIT, not a partial result.
+- The scientific blocker is external: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation. The agent-removable requirement is the audit, complete verification, and accurate handoff update described above.
+
+**Completion standard.** Completion requires a new `session_<UTC>/` evidence-audit artifact, all four command outputs captured there, a green heavy-work gate, a green scope-drift check, all targeted tests passing, the full discovery suite completed with its final EXIT recorded, root count at most 500, and this handoff updated with the new timestamp/results. A status-only session, a prose-only summary, or a timeout is not completion.
+
+### Verification record — 2026-11-16T09:54:52Z
+- Trigger files read once: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T035833Z`, `session_ok=True`, `root=498/500`, `reason=OK`, EXIT 0.
+- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `scripts=196`, `registry=196`, `reason=OK`, EXIT 0.
+- `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143`: **51 tests OK**, EXIT 0.
+- `python3 -m unittest discover -q`: **completed**, 1354 tests, `OK (skipped=1)`, approximately 343.820s, final EXIT 0.
+- The full suite touched `research_state/ironflow_fastpath_cache.json`; that generated timestamp-only side effect was reverted. Final modified files are the three documentation files only.
+- No network probe, no polling, no sealed-artifact/frontier/registry mutation, and no new confirmatory estimand were performed.
 
 ## Tombstones (no authority)
 - `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
-
-(End of file - total 43 lines)
