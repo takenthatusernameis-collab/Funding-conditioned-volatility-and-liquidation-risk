@@ -1,7 +1,7 @@
-# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-02` — current as of 2026-11-16T20:06:45Z
+# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-02` — current as of 2026-11-16T20:14:30Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
-**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-16T20:06:45Z). This file is the detailed campaign note referenced by the frontier and the handoff.
+**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-16T20:14:30Z). This file is the detailed campaign note referenced by the frontier and the handoff.
 **Governing rules:** `RESEARCH_PROMPT.md`. Never re-run concluded estimands, re-score sealed results, fabricate data, edit `.github/workflows/*`, poll, re-probe the HuggingFace tree, or use paid/credentialed/manual outcome data.
 **Artifact rule:** write every new artifact to a new `research_state/session_<UTC>/`. The `research_state/` root is at 500/500 md/json; adding root files breaks the enforced churn cap.
 
@@ -72,9 +72,9 @@ A session that only rereads triggers, repeats prior prose, copies old bundle wit
 - **Suite duration:** allow discovery suite to finish and record actual exit status; do not substitute partial run.
 - **External science:** if no trigger fires, required progress is the new FCLR-008 artifact (or documented LIQ-010 fallback), evidence audit, complete gate run, and accurate handoff update. Repeated polling and new confirmatory estimands on exhausted cached data are forbidden.
 
-## Verification record — 2026-11-16T20:06:45Z
+## Verification record — 2026-11-16T20:14:30Z
 
-- Handoff/campaign refresh aligned to completed FCLR-006 and **FCLR-008 as current target** (published values embedded); incomplete/superseded sessions explicitly flagged. An empty incomplete session dir was removed.
+- Handoff/campaign reaffirmed: **FCLR-008** is mandatory next heavy artifact (`recompute_fclr008_<UTC>.{json,md}`), FCLR-006/FCLR-009 done/not to repeat, trigger-only/superseded sessions not resumable.
 - `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**; `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T185811Z`, root 500/500, EXIT 0.
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**; 196/196 scripts, EXIT 0.
 - No new heavy research artifact produced by this maintenance refresh; next session must produce `recompute_fclr008_<UTC>.{json,md}` (+ script) or documented LIQ-010 fallback, with evidence audit and full gate/suite capture.
