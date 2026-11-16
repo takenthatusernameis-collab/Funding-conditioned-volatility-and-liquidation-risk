@@ -1,0 +1,44 @@
+{
+  "session_utc": "2026-11-16T10:53:41Z",
+  "trigger_registry_generated_utc": "2026-11-12T21:20:43Z",
+  "ironflow_last_check": "2026-11-02T05:59:46Z",
+  "ironflow_data_through": "2026-10",
+  "ironflow_consecutive_absent": 3,
+  "post_2026_10_months": [
+    "2026-11",
+    "2026-12",
+    "2027-01"
+  ],
+  "post_2026_10_classification": "CONFIRMED_ABSENT",
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "evidence_artifact_exists": false,
+      "note": "Human/legal attestation required; agent cannot set RESOLVED_VERIFIED"
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN",
+      "evidence_artifact_exists": false,
+      "note": "Requires admissible unauthenticated source with >=5 instruments, >=3 blocks or >=1 complete month"
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "evidence_artifact_exists": false,
+      "note": "Requires >=100-day verified label depth beyond 2026-10-31; currently absent"
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "evidence_artifact_exists": false,
+      "note": "Requires newly preregistered design meeting LOIO>=6/8 and placebo>95th percentile"
+    }
+  ],
+  "any_trigger_fired": false,
+  "trigger_check_verdict": "NO_TRIGGER_FIRED",
+  "checked_once_only": true,
+  "no_network_probe": true,
+  "no_polling": true
+}
