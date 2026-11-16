@@ -602,7 +602,7 @@ def predict(fit: dict, df: pd.DataFrame, model: str, spec: dict) -> np.ndarray |
         return None
     z = A @ fit["beta"]
     # smearing back-transform: E[RV] = exp(z) * mean(exp(resid)) over training residuals
-    smear = spec.get("smearing", 1.0)
+    smear = fit.get("smearing", 1.0)
     out = np.exp(np.clip(z, -50, 50)) * smear
     if not np.all(np.isfinite(out)):
         return None
@@ -806,10 +806,13 @@ def run_audit(prereg: dict, out_utc: str, smoke: bool) -> dict:
         mask = np.isfinite(resid)
         r = resid[mask] - A[mask] @ f["beta"]
         f["smearing"] = float(np.mean(np.exp(r))) if len(r) else 1.0
-        spec["smearing"] = f["smearing"]
         fits[m] = f
 
-    eval_rows = test_core.copy()
+    eval_rows = panel[
+        (panel["split"] == "test")
+        & panel["target_rv24h"].notna()
+        & panel[CORE_FEATURES].notna().all(axis=1)
+    ].copy()
     preds = {}
     for m in MODELS:
         p = predict(fits[m], eval_rows, m, spec)

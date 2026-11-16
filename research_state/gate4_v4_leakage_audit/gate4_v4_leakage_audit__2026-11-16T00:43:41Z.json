@@ -1,0 +1,4264 @@
+{
+  "label": "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
+  "ts": "_2026-11-16T00:43:41Z",
+  "git_sha": "47692441e9909727c8b2595861a3a44ba7dac311",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "start": "2024-04-01",
+  "end": "2024-09-30",
+  "include_cache": true,
+  "prereg_v4": "research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json",
+  "confirmatory_claim_go": "NO_GO",
+  "command": "python scripts/run_gate4_v4_leakage_audit.py --out-suffix _2026-11-16T00:43:41Z",
+  "variant_audits": [
+    {
+      "variant": "V1_primary",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.999999999999,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.322332200984235e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321435,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.712343980322764e-15,
+                    "std": 0.9004503377814955,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8005625846400345e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-d7ef600a88a4",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 0,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000001,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9966158955401242,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-acc44af7858d",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 0,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 2.1691842775138485e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.800964430811488e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-8ba3c6680fb8",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 0,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000003,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.880578658486893e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-e97bbb09a08c",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 0,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 7.648086187801532e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.281864566235543e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.1202250338560137e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.720546510793176e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-cab53d823b35",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 0,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.5350384863686576e-17,
+                    "std": 0.9925092578236598,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-4b61963c2365",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 1,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000011,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0516739496946756e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.0605115459105973e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5023913567066796e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-d0fafc856c35",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 1,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000007,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 1.543774460162576e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -7.070076972737315e-17,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.0251611610469108e-15,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -9.721355837513808e-16,
+                    "std": 0.99813258473833,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-b29c6250baff",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 1,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.999999999998,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 5.0655509531662927e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9925092578236596,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9463204468147669,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9981325847383274,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-eac63caacfa5",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 1,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.209282135543194e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.544603913195376e-16,
+                    "std": 0.9925092578236576,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7117904106870904e-16,
+                    "std": 0.9981325847383282,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-7d88dbae3364",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 1,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.418418660014228e-16,
+                    "std": 0.9948320067476148,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.56492231687198e-15,
+                    "std": 0.9632419486019032,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.58712294929232e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-e1e9116a398b",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 2,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 2.1975548528662893e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5627056731493612e-15,
+                    "std": 0.9632419486019027,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.9839036866154e-16,
+                    "std": 0.9987105088124241,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-e847fd263c45",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 2,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0000000000036,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 1.4667842893480266e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3673674640056912e-15,
+                    "std": 0.9948320067476151,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.160928938651851e-15,
+                    "std": 0.998710508812425,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-4eda7a411cc2",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 2,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.794368040498497e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -5.005541609306548e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.9911163275124495e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-c79c678e9f65",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 2,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 5.687969093847155e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.8312957107219076e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.0377342360757477e-16,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-f2487e754485",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 2,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.8649415636748036e-16,
+                    "std": 0.9960552114476227,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.0469231931743235e-15,
+                    "std": 0.9720503535125002,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4244240327772447e-16,
+                    "std": 0.9990152631781924,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-af52bb624740",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 3,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3474202797550455e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -7.995936954255721e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-e4b10cd25f82",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 3,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000023,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2215367242069963e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.6038497447603311e-15,
+                    "std": 0.9990152631781931,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-b2e69c7bf910",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 3,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000006,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 6.111909994395511e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.2893655964520483e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2308614320253704e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.6575417282365954e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-8b85951d414f",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 3,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-10*I",
+                "target_floor": 5.59152013782038e-08,
+                "target_floor_rule": "max(p,0)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.340801316494332e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.3359891355439186e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-f02ba2df1443",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V1_primary",
+                "split_id": 3,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "V2_scale_ridge",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.999999999999,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 6.322332200984235e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.32233e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321435,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.712343980322764e-15,
+                    "std": 0.9004503377814955,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8005625846400345e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-c11ff60f1e21",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 0,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000001,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=9.12003e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9966158955401242,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-42e808ec55cb",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 0,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 2.1691842775138485e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=2.16918e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.800964430811488e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-79a6ef70cfef",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 0,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000003,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.76831e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.880578658486893e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-881661cf8078",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 0,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.648086187801532e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.64809e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.281864566235543e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.1202250338560137e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.720546510793176e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-d935ca5facd2",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 0,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.84989e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.5350384863686576e-17,
+                    "std": 0.9925092578236598,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-a62349134d5b",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 1,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000011,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.20434e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0516739496946756e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.0605115459105973e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5023913567066796e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-0ea85967602a",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 1,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000007,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 1.543774460162576e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.54377e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -7.070076972737315e-17,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.0251611610469108e-15,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -9.721355837513808e-16,
+                    "std": 0.99813258473833,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-26e8f2ec28a1",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 1,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.999999999998,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 5.0655509531662927e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.06555e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9925092578236596,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9463204468147669,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9981325847383274,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-99835877108a",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 1,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 6.209282135543194e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.20928e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.544603913195376e-16,
+                    "std": 0.9925092578236576,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7117904106870904e-16,
+                    "std": 0.9981325847383282,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-6c5eef7cced4",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 1,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.26666e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.418418660014228e-16,
+                    "std": 0.9948320067476148,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.56492231687198e-15,
+                    "std": 0.9632419486019032,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.58712294929232e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-419f8d127883",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 2,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.26679e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 2.1975548528662893e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5627056731493612e-15,
+                    "std": 0.9632419486019027,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.9839036866154e-16,
+                    "std": 0.9987105088124241,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-c4299ddc7f3c",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 2,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0000000000036,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 1.4667842893480266e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.46678e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3673674640056912e-15,
+                    "std": 0.9948320067476151,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.160928938651851e-15,
+                    "std": 0.998710508812425,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-cb28d1746a65",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 2,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.794368040498497e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.79437e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -5.005541609306548e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.9911163275124495e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-fe0e00c0f176",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 2,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 5.687969093847155e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.68797e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.8312957107219076e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.0377342360757477e-16,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-3a27c1305a08",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 2,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.81847e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.8649415636748036e-16,
+                    "std": 0.9960552114476227,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.0469231931743235e-15,
+                    "std": 0.9720503535125002,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4244240327772447e-16,
+                    "std": 0.9990152631781924,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-eb9254db4452",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 3,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.46763e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3474202797550455e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -7.995936954255721e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-3e601fe694c0",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 3,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000023,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.47154e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2215367242069963e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.6038497447603311e-15,
+                    "std": 0.9990152631781931,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-049c20b56fdb",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 3,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000006,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.111909994395511e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.11191e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.2893655964520483e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2308614320253704e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.6575417282365954e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-de0645f2b4fc",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 3,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 5.59152013782038e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.59152e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.340801316494332e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.3359891355439186e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-86f2f2a00a65",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V2_scale_ridge",
+                "split_id": 3,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "V3_scale_ridge_target_floor",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.999999999999,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 6.322332200984235e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.32233e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321435,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.712343980322764e-15,
+                    "std": 0.9004503377814955,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8005625846400345e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-c51aaa12aa07",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 0,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000001,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=9.12003e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9966158955401242,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-ef48f8cec184",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 0,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 2.1691842775138485e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=2.16918e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.800964430811488e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-54c71466e8a8",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 0,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000003,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.76831e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.880578658486893e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-88d541a8f590",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 0,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.648086187801532e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.64809e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.281864566235543e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.1202250338560137e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.720546510793176e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-3a2b87e58b0e",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 0,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.84989e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.5350384863686576e-17,
+                    "std": 0.9925092578236598,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-84758fbab004",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 1,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000011,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.20434e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0516739496946756e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.0605115459105973e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5023913567066796e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-387d8c15ce40",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 1,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000007,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 1.543774460162576e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.54377e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -7.070076972737315e-17,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.0251611610469108e-15,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -9.721355837513808e-16,
+                    "std": 0.99813258473833,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-67a9380cdf3f",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 1,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.999999999998,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 5.0655509531662927e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.06555e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9925092578236596,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9463204468147669,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9981325847383274,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-b99a80b3dc33",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 1,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 6.209282135543194e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.20928e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.544603913195376e-16,
+                    "std": 0.9925092578236576,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7117904106870904e-16,
+                    "std": 0.9981325847383282,
+                    "n": 1608
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-7be2e28655bd",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 1,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.26666e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.418418660014228e-16,
+                    "std": 0.9948320067476148,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.56492231687198e-15,
+                    "std": 0.9632419486019032,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.58712294929232e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-21f114ee80d8",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 2,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.26679e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 2.1975548528662893e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5627056731493612e-15,
+                    "std": 0.9632419486019027,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.9839036866154e-16,
+                    "std": 0.9987105088124241,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-f4a8b3a0ad40",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 2,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0000000000036,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 1.4667842893480266e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.46678e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3673674640056912e-15,
+                    "std": 0.9948320067476151,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.160928938651851e-15,
+                    "std": 0.998710508812425,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-af8272a7a987",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 2,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.794368040498497e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.79437e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -5.005541609306548e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.9911163275124495e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-920deb9ed747",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 2,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 5.687969093847155e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.68797e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.8312957107219076e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.0377342360757477e-16,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-026d165bd9fa",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 2,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.81847e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.8649415636748036e-16,
+                    "std": 0.9960552114476227,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.0469231931743235e-15,
+                    "std": 0.9720503535125002,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4244240327772447e-16,
+                    "std": 0.9990152631781924,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-b7b02cf1b8b2",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 3,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.46763e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3474202797550455e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -7.995936954255721e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-123d47819de0",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 3,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000023,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.47154e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2215367242069963e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.6038497447603311e-15,
+                    "std": 0.9990152631781931,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-f3fb97a4d59c",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 3,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000006,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.111909994395511e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.11191e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.2893655964520483e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2308614320253704e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.6575417282365954e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-9fda41c89b88",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 3,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 5.59152013782038e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.59152e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.340801316494332e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.3359891355439186e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                }
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-6e68eefb7882",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V3_scale_ridge_target_floor",
+                "split_id": 3,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "V4_winsor_train",
+      "all_train_params_test_invariant": true,
+      "splits": [
+        {
+          "split_id": 0,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-05-07T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-05-15T00:00:00+00:00",
+            "2024-06-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 821.999999999999,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 6.322332200984235e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.32233e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0002009230857267e-15,
+                    "std": 0.9863939238321435,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.712343980322764e-15,
+                    "std": 0.9004503377814955,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.8005625846400345e-16,
+                    "std": 0.9966158955401235,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.9023183633802845,
+                  -1.3908892925819503,
+                  -0.5469290159300464
+                ],
+                "winsor_hi": [
+                  4.036898402264587,
+                  2.333490119566642,
+                  7.1385190412230966
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-757484fbda46",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 0,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000001,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 9.120034707549193e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=9.12003e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.480900135424055e-16,
+                    "std": 0.9863939238321434,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.640530436946318e-15,
+                    "std": 0.9004503377814969,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9966158955401242,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.905085922662494,
+                  -1.185066440510925,
+                  -0.5572128036236171
+                ],
+                "winsor_hi": [
+                  5.0516129765477515,
+                  2.2807631401392117,
+                  8.253086751271711
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-72dd5c8d9d39",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 0,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 2.1691842775138485e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=2.16918e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 4.800964430811488e-17,
+                    "std": 0.986393923832144,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.28025718154973e-15,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -8.481703827766962e-16,
+                    "std": 0.9966158955401241,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.7514750379210692,
+                  -1.0024606156587845,
+                  -0.4883565809481695
+                ],
+                "winsor_hi": [
+                  5.258914269862821,
+                  2.386597555997418,
+                  7.390951296470242
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-b02390ce6e20",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 0,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000003,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.768308959316559e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.76831e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -2.880578658486893e-16,
+                    "std": 0.9863939238321441,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.800964430811488e-16,
+                    "std": 0.9004503377814966,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.400482215405744e-17,
+                    "std": 0.9966158955401232,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.39665859592002906,
+                  -0.6852540124717984,
+                  -0.22437814990687574
+                ],
+                "winsor_hi": [
+                  5.747239182279132,
+                  2.058656613011952,
+                  9.845778941495016
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-c2fbfb1373e5",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 0,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 888,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 887,
+                "n_train_total": 888,
+                "ridge_scale_diag_trace_over_k": 822.0000000000006,
+                "ridge_rule": "1e-8*max(822,1)",
+                "target_floor": 7.648086187801532e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.64809e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.281864566235543e-16,
+                    "std": 0.9863939238321432,
+                    "n": 888
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.1202250338560137e-16,
+                    "std": 0.9004503377814964,
+                    "n": 888
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.720546510793176e-16,
+                    "std": 0.9966158955401248,
+                    "n": 888
+                  }
+                },
+                "winsor_lo": [
+                  -0.7204689260559031,
+                  -0.9419082448781357,
+                  -0.4666227593130433
+                ],
+                "winsor_hi": [
+                  5.12669797771995,
+                  2.167843015418549,
+                  8.535365110502763
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-b6097c75d02b",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 0,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 888,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 1,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-06-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-06-14T00:00:00+00:00",
+            "2024-07-13T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999989,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 4.849885331783696e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.84989e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.5350384863686576e-17,
+                    "std": 0.9925092578236598,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 2.8633811739586127e-15,
+                    "std": 0.9463204468147671,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4745269404580604e-16,
+                    "std": 0.998132584738328,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.8861094434015766,
+                  -1.0261486665526611,
+                  -0.5181925775472207
+                ],
+                "winsor_hi": [
+                  5.1284723311309595,
+                  3.048254738870431,
+                  5.166585303970753
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-04e27fd1e3ad",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 1,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000011,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 7.204344629424312e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=7.20434e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.0516739496946756e-15,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.0605115459105973e-16,
+                    "std": 0.9463204468147686,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5023913567066796e-16,
+                    "std": 0.9981325847383294,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.646441767035839,
+                  -1.1573388022767188,
+                  -0.38773982692651626
+                ],
+                "winsor_hi": [
+                  6.041653759253848,
+                  2.446046749296299,
+                  8.277729645048918
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-19c3f8ba8ada",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 1,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1542.0000000000007,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 1.543774460162576e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.54377e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -7.070076972737315e-17,
+                    "std": 0.9925092578236602,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.0251611610469108e-15,
+                    "std": 0.9463204468147667,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -9.721355837513808e-16,
+                    "std": 0.99813258473833,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.7124349455914321,
+                  -0.9886473051972163,
+                  -0.46346723492660774
+                ],
+                "winsor_hi": [
+                  6.663660967665726,
+                  3.337464041287395,
+                  5.000455844200992
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-e50bdda42daa",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 1,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.999999999998,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 5.0655509531662927e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.06555e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9925092578236596,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.130588518647913e-16,
+                    "std": 0.9463204468147669,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.5907673188658958e-16,
+                    "std": 0.9981325847383274,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.33463069441302395,
+                  -0.6024191849574779,
+                  -0.18941051078861443
+                ],
+                "winsor_hi": [
+                  7.686749554252361,
+                  3.02822980369785,
+                  4.700390026156935
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-567357bfb69a",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 1,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 1608,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 1607,
+                "n_train_total": 1608,
+                "ridge_scale_diag_trace_over_k": 1541.9999999999975,
+                "ridge_rule": "1e-8*max(1542,1)",
+                "target_floor": 6.209282135543194e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.20928e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -9.544603913195376e-16,
+                    "std": 0.9925092578236576,
+                    "n": 1608
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.242046183642389e-16,
+                    "std": 0.946320446814768,
+                    "n": 1608
+                  },
+                  "rv_trail_6": {
+                    "mean": -3.7117904106870904e-16,
+                    "std": 0.9981325847383282,
+                    "n": 1608
+                  }
+                },
+                "winsor_lo": [
+                  -0.704528222009917,
+                  -0.9983247027667536,
+                  -0.461655262419358
+                ],
+                "winsor_hi": [
+                  6.538437320399927,
+                  2.9920886872337737,
+                  3.57214571483106
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-f4093798e930",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 1,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 1608,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 2,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-07-06T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-07-14T00:00:00+00:00",
+            "2024-08-12T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.266656351453027e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.26666e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 3.418418660014228e-16,
+                    "std": 0.9948320067476148,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 3.56492231687198e-15,
+                    "std": 0.9632419486019032,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.58712294929232e-16,
+                    "std": 0.9987105088124234,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.8605916062460529,
+                  -0.9912884845182773,
+                  -0.5230796136739642
+                ],
+                "winsor_hi": [
+                  5.583594324144818,
+                  3.5076207626371345,
+                  5.504592991270646
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-85a67c55f32d",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 2,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 6.266785055183277e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.26679e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 2.1975548528662893e-16,
+                    "std": 0.9948320067476147,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.5627056731493612e-15,
+                    "std": 0.9632419486019027,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.9839036866154e-16,
+                    "std": 0.9987105088124241,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.668089278775278,
+                  -1.0256748251259111,
+                  -0.386602582472086
+                ],
+                "winsor_hi": [
+                  6.801311689310939,
+                  2.7586674947125984,
+                  6.011304424013771
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-ae3c5da93665",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 2,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2262.0000000000036,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 1.4667842893480266e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.46678e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3673674640056912e-15,
+                    "std": 0.9948320067476151,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -4.883455228591754e-16,
+                    "std": 0.9632419486019036,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.160928938651851e-15,
+                    "std": 0.998710508812425,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.7360748552897185,
+                  -0.9578792135985185,
+                  -0.4790673911722242
+                ],
+                "winsor_hi": [
+                  7.598119763285556,
+                  3.9777196286758003,
+                  5.359034681753807
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-4444c23c4a34",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 2,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 4.794368040498497e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.79437e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -5.005541609306548e-16,
+                    "std": 0.9948320067476141,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": -8.057701127176394e-16,
+                    "std": 0.9632419486019022,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.9911163275124495e-16,
+                    "std": 0.9987105088124252,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.3494262958289516,
+                  -0.5834001791673614,
+                  -0.19997079108982127
+                ],
+                "winsor_hi": [
+                  9.008367217739762,
+                  3.6861739649842,
+                  4.552512462126026
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-7abc1bae68f5",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 2,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 2328,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 2327,
+                "n_train_total": 2328,
+                "ridge_scale_diag_trace_over_k": 2261.9999999999995,
+                "ridge_rule": "1e-8*max(2262,1)",
+                "target_floor": 5.687969093847155e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.68797e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -1.8312957107219076e-16,
+                    "std": 0.994832006747614,
+                    "n": 2328
+                  },
+                  "rv_trail_168": {
+                    "mean": 1.7336266061500726e-15,
+                    "std": 0.9632419486019038,
+                    "n": 2328
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.0377342360757477e-16,
+                    "std": 0.9987105088124235,
+                    "n": 2328
+                  }
+                },
+                "winsor_lo": [
+                  -0.6674510938624523,
+                  -1.039384013418458,
+                  -0.4481710639687814
+                ],
+                "winsor_hi": [
+                  6.1433209762028165,
+                  3.4377373504311364,
+                  6.812615312243367
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-d1f5c170ae8c",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 2,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 2328,
+                "n_test": 720
+              }
+            }
+          ]
+        },
+        {
+          "split_id": 3,
+          "train": [
+            "2024-04-01T00:00:00+00:00",
+            "2024-08-05T23:59:59+00:00"
+          ],
+          "test": [
+            "2024-08-13T00:00:00+00:00",
+            "2024-09-11T23:59:59+00:00"
+          ],
+          "symbols": [
+            {
+              "symbol": "BTCUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2981.9999999999977,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 4.818465146102617e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=4.81847e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.8649415636748036e-16,
+                    "std": 0.9960552114476227,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 4.0469231931743235e-15,
+                    "std": 0.9720503535125002,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": 2.4244240327772447e-16,
+                    "std": 0.9990152631781924,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.7664792017755664,
+                  -1.121396910576536,
+                  -0.4960428273611742
+                ],
+                "winsor_hi": [
+                  4.7168648469939125,
+                  3.7608256116637446,
+                  6.460436359975997
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-ac457420e2ae",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 3,
+                "symbol": "BTCUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "ETHUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000014,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.467631639491685e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.46763e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.3474202797550455e-15,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.713789629229293e-16,
+                    "std": 0.9720503535125012,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -7.995936954255721e-16,
+                    "std": 0.9990152631781926,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.5342024594668976,
+                  -1.0507876851532743,
+                  -0.3536308097638206
+                ],
+                "winsor_hi": [
+                  7.659732566633936,
+                  3.144379864672535,
+                  7.381126240868528
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-c426f86e829c",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 3,
+                "symbol": "ETHUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "SOLUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000023,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 1.4715376617041278e-07,
+                "target_floor_rule": "max(p,1e-4*train_target_median=1.47154e-07)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 1.2215367242069963e-15,
+                    "std": 0.9960552114476228,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.8649415636748036e-16,
+                    "std": 0.9720503535125018,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -1.6038497447603311e-15,
+                    "std": 0.9990152631781931,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.7134406082631607,
+                  -1.0261213559938103,
+                  -0.4767266656065385
+                ],
+                "winsor_hi": [
+                  7.388737632301336,
+                  4.329048304887038,
+                  5.380708500377498
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-d445c0d47567",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 3,
+                "symbol": "SOLUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "XRPUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.000000000006,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 6.111909994395511e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=6.11191e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": -4.2893655964520483e-16,
+                    "std": 0.9960552114476234,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": -1.2308614320253704e-15,
+                    "std": 0.972050353512503,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -2.6575417282365954e-16,
+                    "std": 0.9990152631781921,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.4508354214746608,
+                  -0.7739103585486447,
+                  -0.26798778774654847
+                ],
+                "winsor_hi": [
+                  9.515063812079156,
+                  3.8862714759272157,
+                  3.9025245184030357
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-3293d564d879",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 3,
+                "symbol": "XRPUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            },
+            {
+              "symbol": "BNBUSDT",
+              "status": "OK",
+              "n_train": 3048,
+              "n_test": 720,
+              "train_params": {
+                "n_train_valid": 3047,
+                "n_train_total": 3048,
+                "ridge_scale_diag_trace_over_k": 2982.0000000000005,
+                "ridge_rule": "1e-8*max(2982,1)",
+                "target_floor": 5.59152013782038e-08,
+                "target_floor_rule": "max(p,1e-4*train_target_median=5.59152e-08)",
+                "normalization": {
+                  "rv_trail_24": {
+                    "mean": 9.184837201098408e-16,
+                    "std": 0.9960552114476231,
+                    "n": 3048
+                  },
+                  "rv_trail_168": {
+                    "mean": 6.340801316494332e-16,
+                    "std": 0.9720503535125016,
+                    "n": 3048
+                  },
+                  "rv_trail_6": {
+                    "mean": -4.3359891355439186e-16,
+                    "std": 0.999015263178192,
+                    "n": 3048
+                  }
+                },
+                "winsor_lo": [
+                  -0.5643971831241811,
+                  -1.0449876004911784,
+                  -0.40424502761786113
+                ],
+                "winsor_hi": [
+                  5.742325242240217,
+                  3.396285340955301,
+                  7.477406643113078
+                ],
+                "winsor_bounds_from": "train_only"
+              },
+              "test_perturbation_unchanged": true,
+              "changed_keys": [],
+              "leakage_diagnosis": {
+                "diagnosis_id": "LDIAG-bea669fc0075",
+                "source_artifact": "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+                "variant": "V4_winsor_train",
+                "split_id": 3,
+                "symbol": "BNBUSDT",
+                "diagnosis": "TRAIN_PARAMS_INVARIANT",
+                "leakage_detected": false,
+                "changed_keys": [],
+                "refusal_reason": null,
+                "n_train": 3048,
+                "n_test": 720
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "leakage_invariance_all": true,
+  "block_bootstrap_reproducibility": {
+    "run1": {
+      "point": 0.48790231255543,
+      "ci_low": -0.054706643995741815,
+      "ci_high": 1.1856151857489614,
+      "n_obs": 12969,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 20261109,
+      "block_hours": 24,
+      "alpha": 0.05,
+      "ci_accounting_valid": true,
+      "n_obs_total": 12969,
+      "n_obs_finite": 12969,
+      "n_obs_nonfinite": 0,
+      "n_blocks_total": 120,
+      "n_blocks_nonempty_finite": 120,
+      "effective_block_count": 120,
+      "n_reps_requested": 2000,
+      "n_reps_effective": 2000,
+      "degenerate": false,
+      "regime_flags": [],
+      "inference_ok": true
+    },
+    "run2": {
+      "point": 0.48790231255543,
+      "ci_low": -0.054706643995741815,
+      "ci_high": 1.1856151857489614,
+      "n_obs": 12969,
+      "n_blocks": 120,
+      "n_reps": 2000,
+      "seed": 20261109,
+      "block_hours": 24,
+      "alpha": 0.05,
+      "ci_accounting_valid": true,
+      "n_obs_total": 12969,
+      "n_obs_finite": 12969,
+      "n_obs_nonfinite": 0,
+      "n_blocks_total": 120,
+      "n_blocks_nonempty_finite": 120,
+      "effective_block_count": 120,
+      "n_reps_requested": 2000,
+      "n_reps_effective": 2000,
+      "degenerate": false,
+      "regime_flags": [],
+      "inference_ok": true
+    },
+    "seed": 20261109,
+    "identical_on_rerun": true,
+    "run1_diagnostics": {
+      "effective_block_count": 120,
+      "ci_accounting_valid": true,
+      "regime_flags": [],
+      "degenerate": false,
+      "inference_ok": true,
+      "n_reps_effective": 2000,
+      "n_obs_finite": 12969
+    },
+    "run2_diagnostics": {
+      "effective_block_count": 120,
+      "ci_accounting_valid": true,
+      "regime_flags": [],
+      "degenerate": false,
+      "inference_ok": true,
+      "n_reps_effective": 2000,
+      "n_obs_finite": 12969
+    },
+    "diagnostics_identical_on_rerun": true
+  },
+  "leakage_rollup_rules_version": "1.0",
+  "leakage_by_source_artifact": {
+    "gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json": {
+      "total_rows": 80,
+      "train_params_invariant": 80,
+      "leakage_signal": 0,
+      "insufficient_data": 0,
+      "indeterminate": 0,
+      "leakage_detected": 0,
+      "leakage_detection_refused": 0,
+      "by_variant": {
+        "V1_primary": {
+          "total": 20,
+          "invariant": 20,
+          "leakage_signal": 0,
+          "refused": 0
+        },
+        "V2_scale_ridge": {
+          "total": 20,
+          "invariant": 20,
+          "leakage_signal": 0,
+          "refused": 0
+        },
+        "V3_scale_ridge_target_floor": {
+          "total": 20,
+          "invariant": 20,
+          "leakage_signal": 0,
+          "refused": 0
+        },
+        "V4_winsor_train": {
+          "total": 20,
+          "invariant": 20,
+          "leakage_signal": 0,
+          "refused": 0
+        }
+      }
+    }
+  },
+  "interpretation": "Train-only provenance: True \u2014 every train-derived parameter (ridge scale, winsor bounds, target floor, normalization mean/std) is unchanged when the test fold is perturbed; no test-derived statistic enters training parameters. Block-bootstrap reproducibility: True \u2014 fixed seed yields identical CIs across independent runs (deterministic inference). Additive diagnostics reproducible: True \u2014 effective_block_count/regime_flags/ci_accounting_valid are serialized in JSON+MD and identical on rerun. **Leakage audit PASS (EXPLORATORY diagnostic, not confirmatory):** Gate 4 v4 leakage controls hold on the local 2024-04..09 slice; block-bootstrap inference is deterministic and reproducible.",
+  "json_path": "research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit__2026-11-16T00:43:41Z.json",
+  "md_state_path": "research_state/gate4_v4_leakage_audit/gate4_v4_leakage_audit__2026-11-16T00:43:41Z.md",
+  "md_results_path": "results/fclr_heavy001/gate4_v4_leakage_audit__2026-11-16T00:43:41Z.md"
+}

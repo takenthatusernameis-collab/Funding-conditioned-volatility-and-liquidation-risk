@@ -1,0 +1,62 @@
+{
+  "generated_utc": "2026-11-16T00:45:48Z",
+  "reconciliation_type": "result_integrity_terminal_status_reconciliation",
+  "hypothesis_registry": {
+    "n_hypotheses": 22,
+    "unique_ids": 22,
+    "duplicate_ids": [],
+    "nonterminal_ids": [],
+    "missing_status_ids": [],
+    "status_counts": {
+      "NOT_SUPPORTED": 2,
+      "EXPLORATORY_ONLY": 1,
+      "NOT_MET": 7,
+      "INCONCLUSIVE_PILOT_SHORTFALL": 1,
+      "SUPPORTED_PASS_PRIMARY_GATE": 1,
+      "FRAGILE": 2,
+      "EXPLORATORY_NULL": 1,
+      "NOT_REPLICATED": 6,
+      "INCONCLUSIVE": 1
+    }
+  },
+  "experiment_frontier": {
+    "n_cells": 4,
+    "ranks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tasks": [
+      "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z",
+      "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
+      "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
+      "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z"
+    ],
+    "duplicate_tasks": [],
+    "rank0": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z",
+    "rank0_status": "TRIGGER_ONLY",
+    "nonterminal_cells": []
+  },
+  "evaluation_summaries": {
+    "count": 151,
+    "sample_latest": [
+      "research_state/evaluation_summary_h003_FCLR002.md",
+      "research_state/evaluation_summary_tracka_overlay_001.md",
+      "research_state/evaluation_summary_trackb_20251110T154307Z.md",
+      "research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md",
+      "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md"
+    ]
+  },
+  "checks": {
+    "hypothesis_ids_unique": true,
+    "all_hypotheses_terminal": true,
+    "all_hypotheses_have_status": true,
+    "frontier_tasks_unique": true,
+    "rank0_is_trigger_only_sentinel": true,
+    "frontier_nonnull_all_terminal": true
+  },
+  "all_checks_pass": true,
+  "verdict": "PASS",
+  "notes": "Every hypothesis has exactly one terminal status; every frontier cell is terminal or the rank-0 TRIGGER_ONLY sentinel. No duplicate ids/tasks, no missing statuses."
+}

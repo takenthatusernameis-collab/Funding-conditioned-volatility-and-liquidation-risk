@@ -1,0 +1,79 @@
+{
+  "generated_utc": "2026-11-16T00:45:10Z",
+  "reproducibility_type": "independent_recompute_vs_sealed_expected",
+  "tolerance_policy": "FCLR-011 relative-reduction within 0.05 pct-points; funding ablation within 1e-6 abs and identical n_obs/n_blocks",
+  "fclr011_recompute": {
+    "experiment_id": "FCLR-011-INDEPENDENT-RECOMPUTE-20261114T042139Z",
+    "verdict": "NOT_REPRODUCED",
+    "status": "VALID_EXPLORATORY",
+    "audit_only": true,
+    "promotable": false,
+    "inconclusive_reason": null,
+    "contrasts": {
+      "C2_vs_B1": {
+        "expected_rel_reduction_pct": 4.94,
+        "observed_rel_reduction_pct": -294.0072,
+        "abs_diff_pct_points": 298.9472,
+        "tolerance_pct_points": 0.05,
+        "pass": false,
+        "expected_n_pairs": 10785,
+        "observed_n_pairs": 10905
+      },
+      "C1_vs_B1": {
+        "expected_rel_reduction_pct": 1.36,
+        "observed_rel_reduction_pct": -342.6749,
+        "abs_diff_pct_points": 344.0349,
+        "tolerance_pct_points": 0.05,
+        "pass": false,
+        "expected_n_pairs": 10785,
+        "observed_n_pairs": 10905
+      },
+      "C2_vs_C1": {
+        "expected_rel_reduction_pct": 3.63,
+        "observed_rel_reduction_pct": 10.994,
+        "abs_diff_pct_points": 7.364,
+        "tolerance_pct_points": 0.05,
+        "pass": false,
+        "expected_n_pairs": 10785,
+        "observed_n_pairs": 10905
+      }
+    },
+    "all_pass": false,
+    "diagnosis": "Independent clean OLS recompute (no LFS panel, no heuristic predictor) does NOT reproduce the sealed FCLR-011 PASS (sealed C2_vs_B1 +4.94%). Observed C2_vs_B1 is strongly negative (C2 worse than B1) because the C2 premium slot is NOT computable from the cached 2026 archive and C2 degrades to C1 + EMA24 distance; adding signed-funding / trailing-|funding| features to the log-RV HAR design materially worsens out-of-sample QLIKE on 2026-05-08..2026-08-06 (C2_vs_B1 -294.01, C1_vs_B1 -342.67, C2_vs_C1 +10.99 pct-points). Genuine reproducibility/integrity finding, not a script failure: the audit runs end-to-end after two implementation defects were fixed. The sealed result is NOT INDEPENDENTLY REPRODUCED / fragile and never promotable.",
+    "bugs_fixed": [
+      "eval_rows was a pre-scaling copy of test_core missing funding_z/abs_fund_pct_z/ema24_dist_z -> C1/C2 design matrices returned None and the audit always exited INCONCLUSIVE",
+      "predict() read spec['smearing'] (last model's value, shared) instead of fit['smearing'] (per-model Duan smearing) -> all models used C2's smearing"
+    ],
+    "panel_path": "research_state/session_20261116T0040Z/fclr011_recompute_panel_20261116T004150Z.parquet",
+    "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4"
+  },
+  "funding_ablations_v3_30d": {
+    "contrast": "E_rv_funding_trails_vs_A",
+    "expected_point": 0.4879023125556385,
+    "observed_point": 0.48790231255149863,
+    "abs_diff": 4.139855125373515e-12,
+    "expected_ci": [
+      -0.042160777324701186,
+      1.1973379300276015
+    ],
+    "observed_ci": [
+      -0.04216077732786338,
+      1.197337930020189
+    ],
+    "expected_n_obs": 12969,
+    "observed_n_obs": 12969,
+    "expected_n_blocks": 120,
+    "observed_n_blocks": 120,
+    "tolerance_abs": 1e-06,
+    "pass": true,
+    "verdict_reproduced": "DATA-SUFFICIENT PILOT / INCONCLUSIVE ON PRIMARY CONTRAST"
+  },
+  "overall": {
+    "fclr011_reproduced": false,
+    "funding_ablations_reproduced": true,
+    "blocking_defects": [
+      "FCLR-011 independent recompute does not reproduce the sealed C2_vs_B1 result; see diagnosis"
+    ],
+    "notes": "Funding ablation reproduces exactly; FCLR-011 is a material integrity finding (sealed PASS not reproducible under the independent clean design)."
+  }
+}

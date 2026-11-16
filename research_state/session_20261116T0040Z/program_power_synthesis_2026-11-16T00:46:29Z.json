@@ -1,0 +1,160 @@
+{
+  "generated_utc": "2026-11-16T00:46:29Z",
+  "program": "FCLR",
+  "scope": "terminal tracks A/B/C/H2",
+  "mde_method": "MDE(80% power, two-sided alpha=0.05) = (z_{0.975}+z_{0.80}) * SE, SE=(CI_hi-CI_lo)/(2*z_{0.975}); relative MDE = MDE / baseline-mean",
+  "tracks": [
+    {
+      "track": "A_observed_liquidation_combined",
+      "experiment": "FCLR-LIQ-COMBINED-20261115T185844Z",
+      "estimand": "C2 vs B1 on 24h observed liquidation intensity, expanding-window QLIKE",
+      "achieved_sample": {
+        "instruments": 15,
+        "test_blocks": 3,
+        "test_events": 1221
+      },
+      "observed_effect": {
+        "rel_reduction_pct": -17.1,
+        "mean_diff_qlike": 10.2516,
+        "ci95": [
+          -0.6939,
+          20.589
+        ],
+        "p": 0.085
+      },
+      "materiality_floor_pct": 2.0,
+      "mde_rel_qlike_pct": 25.37,
+      "standard_error_qlike": 5.4294,
+      "classification": "UNDERPOWERED (MDE ~25.4% >> 2% floor; CI spans 0)",
+      "evidence": [
+        "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.md"
+      ]
+    },
+    {
+      "track": "A_observed_liquidation_xsec_qlike",
+      "experiment": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
+      "estimand": "mean daily cross-sectional QLIKE, C2 vs B1",
+      "achieved_sample": {
+        "instruments": 15,
+        "test_blocks_evaluable": 2,
+        "test_blocks_required": 3
+      },
+      "observed_effect": {
+        "rel_improvement_pct": -75.56,
+        "ci_hi": 86.08,
+        "holm_reject": [
+          true,
+          true,
+          false
+        ]
+      },
+      "materiality_floor_pct": 2.0,
+      "mde_rel_qlike_pct": null,
+      "classification": "UNDERPOWERED / DEGENERATE (only 2 of 3 blocks evaluable; CI spans 0; NOT_MET)",
+      "evidence": [
+        "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.json"
+      ]
+    },
+    {
+      "track": "B_modeled_boundary_breach_TB2",
+      "experiment": "trackb_TB2_20261110T190405Z",
+      "estimand": "C2 vs B1 synthetic boundary-breach classification, Log Loss",
+      "achieved_sample": {
+        "instruments": 5,
+        "test_blocks": 2,
+        "test_events": 619,
+        "prevalence": 0.1228
+      },
+      "observed_effect": {
+        "rel_ll_reduction_pct": 1.6781,
+        "ll_diff": -0.000932,
+        "ci95": [
+          -0.010997,
+          0.003094
+        ],
+        "p": 0.488
+      },
+      "materiality_floor_pct": 2.0,
+      "mde_rel_ll_pct": 3.44,
+      "standard_error_ll": 0.003595,
+      "classification": "UNDERPOWERED (MDE ~3.4% > 2% floor; only 2 test blocks < 3 required)",
+      "evidence": [
+        "research_state/evaluation_summary_trackb_TB2_20261110T190405Z.md"
+      ]
+    },
+    {
+      "track": "B_modeled_boundary_breach_TB1",
+      "experiment": "trackb_TB1_20261110T173838Z",
+      "estimand": "C2 vs B1 synthetic boundary-breach classification, Log Loss",
+      "achieved_sample": {
+        "instruments": 5,
+        "test_blocks": 4,
+        "test_events": 0
+      },
+      "observed_effect": {
+        "test_prevalence": 0.0,
+        "note": "zero test-set breach events"
+      },
+      "materiality_floor_pct": 2.0,
+      "mde_rel_ll_pct": null,
+      "classification": "DEGENERATE (zero test events -> metrics undefined)",
+      "evidence": [
+        "research_state/evaluation_summary_trackb_TB1_20261110T173838Z.md"
+      ]
+    },
+    {
+      "track": "C_funding_conditioned_volatility_H1",
+      "experiment": "run_funding_ablations v3_30d + FCLR-011",
+      "estimand": "E (RV+funding trails) vs A (RV only) forward 24h variance QLIKE; FCLR-011 C2 vs B1",
+      "achieved_sample": {
+        "instruments": 5,
+        "test_blocks_30d": 4,
+        "obs": 12969
+      },
+      "observed_effect": {
+        "E_vs_A_point": 0.4879,
+        "ci95": [
+          -0.0422,
+          1.1973
+        ],
+        "A_qlike": 0.7983,
+        "FCLR011_sealed_rel_pct": 4.94,
+        "FCLR011_forward": "NOT_REPLICATED",
+        "FCLR011_independent_recompute": "NOT_REPRODUCED"
+      },
+      "materiality_floor_pct": 2.0,
+      "mde_rel_qlike_pct": 110.97,
+      "standard_error_qlike": 0.3162,
+      "classification": "TRUE NULL / NON-REPRODUCIBLE (E vs A CI spans 0; MDE ~111% >> 2% floor; sealed FCLR-011 does not replicate forward and does not independently reproduce)",
+      "evidence": [
+        "research_state/evaluation_summary_funding_v3_30d.md",
+        "research_state/session_20261116T0040Z/reproducibility_recompute_2026-11-16T00:45:10Z.json"
+      ]
+    },
+    {
+      "track": "H2_shek_replication",
+      "experiment": "FCLR-SHEK-SCALE-20261115T071135Z",
+      "estimand": "Shek-style scaling replication",
+      "achieved_sample": {
+        "note": "scaled exploratory arms A/B"
+      },
+      "observed_effect": {
+        "status": "EXPLORATORY_ONLY",
+        "promotable": false
+      },
+      "materiality_floor_pct": null,
+      "mde_rel_pct": null,
+      "classification": "EXPLORATORY_ONLY (not a confirmatory test; promotable=false)",
+      "evidence": [
+        "research_state/evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.json"
+      ]
+    }
+  ],
+  "summary": {
+    "externally_blocked": "Track A forward progress requires new observed liquidation data (ironflow data_through=2026-10; 2026-11..2027-01 absent).",
+    "underpowered_or_degenerate": "Tracks A and B achieved MDEs far above their 2% materiality floors; TB1 is degenerate (zero events), TB2 has only 2 test blocks, xsec has only 2 of 3 evaluable blocks.",
+    "true_absence_of_skill": "Track C H1 is a true null on the data-sufficient v3_30d design; the sealed FCLR-011 PASS does not replicate forward and does not independently reproduce.",
+    "exploratory": "H2 remains EXPLORATORY_ONLY / not promotable."
+  },
+  "next_action_heavy": "No agent-removable confirmatory estimand remains on cached data. The only honest heavy work is (1) preserve the bounded reproducibility/integrity/power campaign (this artifact + manifest/result-integrity/leakage artifacts + green suite) and (2) hold rank-0 TRIGGER_ONLY until an external trigger fires. Do not invent a new estimand or re-run concluded cells. If a trigger fires (new observed liquidation source, HL label extension, legal attestation, or a genuinely new EXPANSION_ROBUSTNESS_REDO prereg), freeze a NEW pre-outcomes prereg with adequate power (>=3 blocks, MDE below the 2% floor) and execute it as rank 0."
+}

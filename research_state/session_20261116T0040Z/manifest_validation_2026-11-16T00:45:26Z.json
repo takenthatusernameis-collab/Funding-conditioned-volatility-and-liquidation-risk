@@ -1,0 +1,4481 @@
+{
+  "generated_utc": "2026-11-16T00:45:26Z",
+  "validation_type": "lfs_materialization_and_json_parse_audit",
+  "scope": "research_state/*.json",
+  "parse_summary": {
+    "materialized_parsed_ok": 240,
+    "unmaterialized_pointer_only": 7,
+    "zero_parse_failures": true,
+    "total_json_files": 247
+  },
+  "materialized": [
+    {
+      "path": "research_state/admissibility_audit_metpie_2025Q2_20261112T070000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4902,
+      "parse": "OK",
+      "top_keys": [
+        "audit_id",
+        "block_feasibility",
+        "compliance",
+        "determination",
+        "gate4_trigger",
+        "hl_data_availability",
+        "metpie_source",
+        "metpie_symbol_coverage",
+        "next_step",
+        "primary_failure_reason",
+        "protocol",
+        "repo"
+      ]
+    },
+    {
+      "path": "research_state/alt_source_probe_audit_20261112T191400Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5964,
+      "parse": "OK",
+      "top_keys": [
+        "acceptance_minima",
+        "artifacts_inspected",
+        "artifacts_written",
+        "audit_id",
+        "campaign",
+        "candidates",
+        "commands",
+        "gate4",
+        "new_admissible_source_found",
+        "next_action",
+        "outcome",
+        "section16_audit_created"
+      ]
+    },
+    {
+      "path": "research_state/alt_source_scan_latest.json",
+      "status": "MATERIALIZED",
+      "bytes": 12871,
+      "parse": "OK",
+      "top_keys": [
+        "cache_info",
+        "candidates",
+        "deep_review_urls",
+        "errors",
+        "generated_utc"
+      ]
+    },
+    {
+      "path": "research_state/cached_inputs_hashes.json",
+      "status": "MATERIALIZED",
+      "bytes": 3504480,
+      "parse": "OK",
+      "top_keys": [
+        "count",
+        "derivation_notes",
+        "generated_at",
+        "hashes"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_binance_fwd_vol_20261113T041200Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2482,
+      "parse": "OK",
+      "top_keys": [
+        "archive_gaps",
+        "campaign",
+        "conclusion",
+        "funding_coverage",
+        "generated_utc",
+        "purpose",
+        "symbols",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2926,
+      "parse": "OK",
+      "top_keys": [
+        "checks",
+        "data_availability",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "kind",
+        "next_action",
+        "no_outcomes_computed",
+        "preregistered_blocks_as_specified",
+        "status",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_fwd_vol_2024q4_cross_20261113T091418Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2330,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "checks",
+        "data_end",
+        "data_start",
+        "experiment_id",
+        "generated_utc",
+        "input_columns",
+        "kind",
+        "n_model_rows",
+        "n_symbols",
+        "no_outcomes_computed",
+        "per_block"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_fwd_vol_2024q4_cross_20261113T091427Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2331,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "checks",
+        "data_end",
+        "data_start",
+        "experiment_id",
+        "generated_utc",
+        "input_columns",
+        "kind",
+        "n_model_rows",
+        "n_symbols",
+        "no_outcomes_computed",
+        "per_block"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4089,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "checks",
+        "experiment_id",
+        "feasible",
+        "generated_utc",
+        "kind",
+        "models",
+        "n_model_rows",
+        "n_symbols",
+        "no_outcomes_computed",
+        "overlap_notes",
+        "per_block"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_fwd_vol_2025h2_cross_20261113T102139Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3046,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "checks",
+        "data_end",
+        "data_start",
+        "experiment_id",
+        "generated_utc",
+        "input_columns",
+        "kind",
+        "models",
+        "n_model_rows",
+        "n_panel_rows",
+        "n_symbols"
+      ]
+    },
+    {
+      "path": "research_state/coverage_audit_fwd_vol_2025q1q2_cross_20261113T111601Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3146,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "checks",
+        "embargo_days",
+        "experiment_id",
+        "feasible",
+        "generated_utc",
+        "kind",
+        "models",
+        "n_model_rows",
+        "n_symbols",
+        "no_outcomes_computed",
+        "per_block"
+      ]
+    },
+    {
+      "path": "research_state/data_inventory.json",
+      "status": "MATERIALIZED",
+      "bytes": 49154,
+      "parse": "OK",
+      "top_keys": [
+        "<list len=463>"
+      ]
+    },
+    {
+      "path": "research_state/data_source_registry.json",
+      "status": "MATERIALIZED",
+      "bytes": 1845,
+      "parse": "OK",
+      "top_keys": [
+        "generated_at",
+        "sources"
+      ]
+    },
+    {
+      "path": "research_state/data_source_registry_alt_hunt.json",
+      "status": "MATERIALIZED",
+      "bytes": 157276,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "candidates",
+        "hf_discovery",
+        "hunt_id",
+        "probe_cache",
+        "rubric",
+        "summary",
+        "timestamp_utc",
+        "unauthenticated_only"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_EARLY4H-2025H1-20261112T134536Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5220,
+      "parse": "OK",
+      "top_keys": [
+        "build_report",
+        "campaign",
+        "compliance",
+        "determination",
+        "experiment_id",
+        "generated_utc",
+        "n_bootstrap",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "prereg_sha256",
+        "seed"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_EARLY4H-2025H1-20261112T134634Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5229,
+      "parse": "OK",
+      "top_keys": [
+        "build_report",
+        "campaign",
+        "compliance",
+        "determination",
+        "experiment_id",
+        "generated_utc",
+        "n_bootstrap",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "prereg_sha256",
+        "seed"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_EARLY4H-2025H1-20261112T145537Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6717,
+      "parse": "OK",
+      "top_keys": [
+        "build_report",
+        "campaign",
+        "compliance",
+        "determination",
+        "experiment_id",
+        "generated_utc",
+        "n_bootstrap",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "prereg_sha256",
+        "seed"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-20261112T164926Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3708,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "compliance",
+        "contrasts",
+        "estimator",
+        "experiment_id",
+        "fit",
+        "gate",
+        "gate_pass",
+        "generated_utc",
+        "mean_qlike",
+        "n_bootstrap",
+        "n_test_rows"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_EARLY4H-2025H1-LIQ-GLM-ROBUST-20261112T170457Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3680,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "compliance",
+        "contrasts",
+        "estimator",
+        "experiment_id",
+        "fit",
+        "gate",
+        "gate_pass",
+        "generated_utc",
+        "mean_qlike",
+        "n_bootstrap",
+        "n_test_rows"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261115T234700Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5167,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "build",
+        "campaign",
+        "coverage",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "failing_minima",
+        "generated",
+        "instruments",
+        "max_status",
+        "n_test_blocks_days",
+        "panel_path"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-011-RECOMPUTE-20261115T235000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5240,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "build",
+        "campaign",
+        "coverage",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated",
+        "inconclusive_reason",
+        "instruments",
+        "max_status",
+        "n_test_blocks_days",
+        "panel_path"
+      ]
+    },
+    {
+      "path": "research_state/session_20261116T0040Z/evaluation_summary_FCLR-011-RECOMPUTE-20261116T004150Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 17431,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "build",
+        "campaign",
+        "contrasts",
+        "coverage",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated",
+        "holm",
+        "instruments",
+        "leakage_audit",
+        "loio_pass"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-DESIGN-FEASIBILITY-2026-11-15T02:35:00Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 18920,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "known_answer_self_test",
+        "max_status",
+        "method",
+        "observed_liquidation",
+        "prereg",
+        "prereg_sha256"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-EXP-ROBUST-REDO-20261113T071229Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4911,
+      "parse": "OK",
+      "top_keys": [
+        "bootstrap_settings",
+        "campaign",
+        "cell",
+        "checks",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_rows",
+        "panel",
+        "panel_sha256",
+        "placebo",
+        "prereg"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-EXP-ROBUST-REDO-20261113T080456Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5312,
+      "parse": "OK",
+      "top_keys": [
+        "bootstrap_settings",
+        "campaign",
+        "cell",
+        "checks",
+        "experiment_id",
+        "full_panel_contrast",
+        "generated_utc",
+        "loio",
+        "n_rows",
+        "panel",
+        "panel_sha256",
+        "placebo"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041259Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2866,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041401Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2980,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041459Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2982,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041543Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2977,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041630Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2981,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041731Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2979,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T041934Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2979,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T050407Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2979,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061005Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2979,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-011-CONFIRM-20261113T061555Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2977,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo",
+        "prereg",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2024-DISJOINT-2024-06-20261114T231100Z_20261114T231545Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 10068,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "estimator_swing_corrected_minus_sealed_rel_pct",
+        "experiment_id",
+        "generated_utc",
+        "leakage_audit",
+        "lineage_check",
+        "max_status",
+        "notes",
+        "panel",
+        "prereg",
+        "prereg_frozen_before_outcomes",
+        "prereg_sha256"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2024Q4-CROSS-20261113T100451Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6685,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "checks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "holm",
+        "horizon_family",
+        "leakage",
+        "loio",
+        "n_panel_rows",
+        "n_symbols"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-CROSS-20261113T081147Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2653,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "checks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "holm",
+        "loio",
+        "n_panel_rows",
+        "n_valid_rows",
+        "per_block",
+        "placebo"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CORRECTED-AUDIT-2026-11-15T00:12:56Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 15378,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "build_report",
+        "campaign",
+        "cell",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated_utc",
+        "interpretation",
+        "lineage_audit",
+        "max_status",
+        "panel",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-CROSS-20261114T191615Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8320,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "checks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "holm",
+        "horizon_family",
+        "leakage",
+        "loio",
+        "max_status",
+        "n_blocks"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2025-DISJOINT-RECONCILE-20261114T193000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 53807,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "cells",
+        "cleaned_panel_report",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated_utc",
+        "interpretation",
+        "lineage_audit",
+        "max_status",
+        "panel",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2025H2-CROSS-20261113T102240Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6772,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "checks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "holm",
+        "horizon_family",
+        "leakage",
+        "loio",
+        "n_panel_rows",
+        "n_symbols"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-FWD-VOL-2025Q1Q2-CROSS-20261113T111712Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6751,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "checks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "holm",
+        "horizon_family",
+        "leakage",
+        "loio",
+        "n_panel_rows",
+        "n_symbols"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-LIQ-010-CONFIRM-20261113T065953Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5250,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "checks",
+        "coverage_events_test",
+        "experiment_id",
+        "generated_utc",
+        "loio",
+        "n_panel_rows",
+        "n_symbols",
+        "n_test_rows",
+        "placebo",
+        "prereg"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2781,
+      "parse": "OK",
+      "top_keys": [
+        "compliance",
+        "contrast",
+        "contrast_C2_vs_B1",
+        "evaluation_id",
+        "experiment_id",
+        "gate",
+        "generated_utc",
+        "holm",
+        "models",
+        "n_daily_rows",
+        "n_universe",
+        "panel"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T201101Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2948,
+      "parse": "OK",
+      "top_keys": [
+        "block_bootstrap",
+        "compliance",
+        "contrast",
+        "evaluation_id",
+        "experiment_id",
+        "gate",
+        "generated_utc",
+        "holm",
+        "metrics",
+        "models",
+        "n_daily_rows",
+        "n_universe"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2948,
+      "parse": "OK",
+      "top_keys": [
+        "block_bootstrap",
+        "compliance",
+        "contrast",
+        "evaluation_id",
+        "experiment_id",
+        "gate",
+        "generated_utc",
+        "holm",
+        "metrics",
+        "models",
+        "n_daily_rows",
+        "n_universe"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2950,
+      "parse": "OK",
+      "top_keys": [
+        "block_bootstrap",
+        "compliance",
+        "contrast",
+        "evaluation_id",
+        "experiment_id",
+        "gate",
+        "generated_utc",
+        "holm",
+        "metrics",
+        "models",
+        "n_daily_rows",
+        "n_universe"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-POWER-CALIBRATION-2026-11-15T01:34:12Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 18354,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "known_answer_self_test",
+        "max_status",
+        "method",
+        "observed_liquidation",
+        "prereg",
+        "prereg_sha256"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-SHEK-SCALE-20261115T071135Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 145504,
+      "parse": "OK",
+      "top_keys": [
+        "arm_a",
+        "arm_b",
+        "frozen_at_utc",
+        "overall",
+        "prereg_id"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-SHEK-SCALE-20261115T144938Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2060037,
+      "parse": "OK",
+      "top_keys": [
+        "arm_a",
+        "arm_b",
+        "frozen_at_utc",
+        "overall",
+        "prereg_id",
+        "sensitivity_grid"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_FCLR-SHEK-SCALE-SENS-20261115T144938Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1915074,
+      "parse": "OK",
+      "top_keys": [
+        "frozen_at_utc",
+        "grid",
+        "grid_dimensions",
+        "headline_cell",
+        "n_cells",
+        "prereg_id"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-ALT-VOL-20261112T020322Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1212,
+      "parse": "OK",
+      "top_keys": [
+        "gate",
+        "note",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "results",
+        "timestamp_utc",
+        "verdict",
+        "verdict_id"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-EXP-ROBUST-20261112T015119Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5791,
+      "parse": "OK",
+      "top_keys": [
+        "checks",
+        "original_sealed_pass",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "timestamp_utc",
+        "verdict",
+        "verdict_id"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-HL-EARLY-4H-20261112T054737Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2142,
+      "parse": "OK",
+      "top_keys": [
+        "build_report",
+        "compliance",
+        "contrast",
+        "determination",
+        "experiment_id",
+        "gate",
+        "gate_pass",
+        "metrics",
+        "n_bootstrap",
+        "panel",
+        "panel_sha256",
+        "prereg_caveat"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 18617,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "build",
+        "campaign",
+        "contrasts",
+        "coverage",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated",
+        "holm",
+        "instruments",
+        "leakage_audit",
+        "loio_detail"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-20261114T112451Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 34334,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "cells",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated",
+        "max_status",
+        "prereg",
+        "prereg_status",
+        "promotable",
+        "rationale",
+        "recompute_reference"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-20261114T112620Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 34334,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "cells",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated",
+        "max_status",
+        "prereg",
+        "prereg_status",
+        "promotable",
+        "rationale",
+        "recompute_reference"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECONCILIATION-20261114T113226Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 30585,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "cells",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "generated",
+        "max_status",
+        "prereg",
+        "prereg_status",
+        "promotable",
+        "rationale",
+        "recompute_reference"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-2026-11-13T00:33:08Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4010,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "build_report",
+        "campaign",
+        "decision",
+        "experiment_id",
+        "generated_utc",
+        "materiality",
+        "max_status",
+        "panel_sha256",
+        "primary",
+        "promotable",
+        "secondary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-2026-11-13T20:24:18Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4043,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "build_report",
+        "campaign",
+        "decision",
+        "experiment_id",
+        "generated_utc",
+        "materiality",
+        "max_status",
+        "panel_sha256",
+        "primary",
+        "promotable",
+        "secondary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-LIQ-XSEC-FORWARD-2026-11-13T22:31:55Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3524,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "blocks_with_ic",
+        "build_report",
+        "campaign",
+        "decision",
+        "experiment_id",
+        "generated_utc",
+        "materiality",
+        "max_status",
+        "panel_path",
+        "panel_sha256",
+        "primary"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-VOL-20261111T234918Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1613,
+      "parse": "OK",
+      "top_keys": [
+        "blocks_with_ge5_instruments",
+        "bootstrap",
+        "ci_excludes_zero_favors_c2",
+        "criteria",
+        "experiment_id",
+        "generated_utc",
+        "improvement_b1_minus_c2",
+        "materiality_ge2pct",
+        "metric",
+        "n_test_pairs",
+        "paired_instruments",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T02:33:29Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 751,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "build_report",
+        "campaign",
+        "decision",
+        "experiment_id",
+        "generated_utc",
+        "max_status",
+        "note",
+        "panel_path",
+        "panel_sha256",
+        "promotable",
+        "reason"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T02:43:53Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 751,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "build_report",
+        "campaign",
+        "decision",
+        "experiment_id",
+        "generated_utc",
+        "max_status",
+        "note",
+        "panel_path",
+        "panel_sha256",
+        "promotable",
+        "reason"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T02:45:26Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5515,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "blocks_with_data",
+        "build_report",
+        "campaign",
+        "decision",
+        "experiment_id",
+        "generated_utc",
+        "holm_flags",
+        "max_status",
+        "min_test_blocks",
+        "note",
+        "panel_path"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-VOL-FORWARD-2026-11-14T03:30:40Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5792,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "blocks_with_data",
+        "bootstrap_block_h",
+        "bootstrap_n",
+        "build_report",
+        "campaign",
+        "decision",
+        "execution_status",
+        "experiment_id",
+        "fit_split",
+        "generated_utc",
+        "holm_flags"
+      ]
+    },
+    {
+      "path": "research_state/evaluation_summary_TRACKA-VOL-FULLHIST-2026-11-13T02:44:48Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 13897,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "build_report",
+        "campaign",
+        "contrasts",
+        "experiment_id",
+        "family_primary",
+        "family_secondary",
+        "generated_utc",
+        "loio",
+        "panel_sha256",
+        "per_block",
+        "per_coin"
+      ]
+    },
+    {
+      "path": "research_state/experiment_frontier.json",
+      "status": "MATERIALIZED",
+      "bytes": 16929,
+      "parse": "OK",
+      "top_keys": [
+        "<list len=4>"
+      ]
+    },
+    {
+      "path": "research_state/external_new_data_probe_20261112T043403Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 22703,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "probe_ts_utc",
+        "probes"
+      ]
+    },
+    {
+      "path": "research_state/external_new_data_probe_followup_20261112T043437Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9510,
+      "parse": "OK",
+      "top_keys": [
+        "probe_ts_utc",
+        "probes"
+      ]
+    },
+    {
+      "path": "research_state/external_probe_raw_20261112T044425Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3240,
+      "parse": "OK",
+      "top_keys": [
+        "audit_ts_utc",
+        "gate4_check_dir",
+        "gate4_resolved_present",
+        "hf_search_hyperliquid_liquidation",
+        "hyperliquid_api_probe",
+        "ironflow_hf",
+        "metpie_repo"
+      ]
+    },
+    {
+      "path": "research_state/fclr002_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 1354,
+      "parse": "OK",
+      "top_keys": [
+        "common_contiguous_windows",
+        "common_first",
+        "common_last",
+        "common_timestamps",
+        "experiment",
+        "generated_utc",
+        "longest_window",
+        "per_symbol",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/fclr006_block_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 2618,
+      "parse": "OK",
+      "top_keys": [
+        "definitions",
+        "generated",
+        "head",
+        "manifest_split_boundaries_fclr006",
+        "purpose",
+        "windows"
+      ]
+    },
+    {
+      "path": "research_state/fclr007_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 2333,
+      "parse": "OK",
+      "top_keys": [
+        "audit_timestamp",
+        "common",
+        "common_gaps",
+        "funding",
+        "gap_pairs",
+        "missing_mark_days",
+        "panel",
+        "per_symbol",
+        "proposed_splits",
+        "symbols"
+      ]
+    },
+    {
+      "path": "research_state/fclr008_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 14352,
+      "parse": "OK",
+      "top_keys": [
+        "audit_type",
+        "block_counts",
+        "common_span_days",
+        "common_timestamps",
+        "experiment",
+        "gaps",
+        "generated",
+        "hashes",
+        "per_symbol",
+        "symbols",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/fclr009_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 22965,
+      "parse": "OK",
+      "top_keys": [
+        "audit_type",
+        "block_counts",
+        "common_span_days",
+        "common_timestamps",
+        "experiment",
+        "gaps",
+        "generated",
+        "hashes",
+        "per_symbol",
+        "symbols",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/fclr010_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 5027,
+      "parse": "OK",
+      "top_keys": [
+        "audit_type",
+        "block_counts",
+        "common_span_days",
+        "experiment",
+        "gaps",
+        "generated",
+        "hashes",
+        "label_hours_union",
+        "label_summary",
+        "labels",
+        "native_perp_count",
+        "native_perps"
+      ]
+    },
+    {
+      "path": "research_state/fclr011_recompute_panel_build_report_20261115T234700Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 263833,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_symbol",
+        "experiment_id",
+        "generated",
+        "input_hashes",
+        "panel_path",
+        "panel_sha256",
+        "row_counts",
+        "source_limitation",
+        "splits"
+      ]
+    },
+    {
+      "path": "research_state/fclr011_recompute_panel_build_report_20261115T235000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 263833,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_symbol",
+        "experiment_id",
+        "generated",
+        "input_hashes",
+        "panel_path",
+        "panel_sha256",
+        "row_counts",
+        "source_limitation",
+        "splits"
+      ]
+    },
+    {
+      "path": "research_state/session_20261116T0040Z/fclr011_recompute_panel_build_report_20261116T004150Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 263837,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_symbol",
+        "experiment_id",
+        "generated",
+        "input_hashes",
+        "panel_path",
+        "panel_sha256",
+        "row_counts",
+        "source_limitation",
+        "splits"
+      ]
+    },
+    {
+      "path": "research_state/fclr012v_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 7137,
+      "parse": "OK",
+      "top_keys": [
+        "audit_type",
+        "block_counts",
+        "common_span_days",
+        "common_timestamps",
+        "experiment",
+        "gaps",
+        "generated",
+        "hashes",
+        "missing_days",
+        "per_symbol",
+        "symbols",
+        "timestamp_gaps"
+      ]
+    },
+    {
+      "path": "research_state/fclr012v_extension_probe.json",
+      "status": "MATERIALIZED",
+      "bytes": 10881,
+      "parse": "OK",
+      "top_keys": [
+        "downloads",
+        "extracts",
+        "probes"
+      ]
+    },
+    {
+      "path": "research_state/fclr012v_extension_probe2.json",
+      "status": "MATERIALIZED",
+      "bytes": 17116,
+      "parse": "OK",
+      "top_keys": [
+        "downloads",
+        "extracts",
+        "probes"
+      ]
+    },
+    {
+      "path": "research_state/fclr013_coverage_audit.json",
+      "status": "MATERIALIZED",
+      "bytes": 1598,
+      "parse": "OK",
+      "top_keys": [
+        "common_contiguous_windows",
+        "common_first",
+        "common_last",
+        "common_timestamps",
+        "experiment",
+        "generated_utc",
+        "longest_window",
+        "per_symbol",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/fclr013_coverage_audit_20261107T0936Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4643,
+      "parse": "OK",
+      "top_keys": [
+        "audit_id",
+        "coverage_only",
+        "expected_days",
+        "network_in_audit",
+        "outcomes_inspected",
+        "sources",
+        "summary",
+        "symbols",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/fclr016_v5_confirmatory_prereg_DRAFT_NOT_FROZEN_20261108T213600Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2857,
+      "parse": "OK",
+      "top_keys": [
+        "admissibility_complete",
+        "admissibility_refs_paths",
+        "admissibility_refs_sha256",
+        "artifact",
+        "confirmatory_claim_go",
+        "confirmatory_outcomes_permitted",
+        "design_freeze",
+        "draft",
+        "frozen",
+        "frozen_before_outcomes",
+        "frozen_scope",
+        "gates"
+      ]
+    },
+    {
+      "path": "research_state/fclr016_v5_terms_evidence_BLOCKED_20261108T014835Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4352,
+      "parse": "OK",
+      "top_keys": [
+        "access_date_utc",
+        "admissibility_complete",
+        "agent_note",
+        "artifact",
+        "conclusion",
+        "conditions_or_restrictions",
+        "confirmatory_claim_go",
+        "confirmatory_provenance_go",
+        "evidence_artifacts",
+        "fabricated",
+        "generated_utc",
+        "git_sha_recorded"
+      ]
+    },
+    {
+      "path": "research_state/fclr_final_structural_closure_20261112T212043.json",
+      "status": "MATERIALIZED",
+      "bytes": 39017,
+      "parse": "OK",
+      "top_keys": [
+        "determinism",
+        "generated_utc",
+        "input_artifacts",
+        "n_rows",
+        "n_section_17_promotion_met",
+        "program_status",
+        "reopen_conditions",
+        "reopen_only_via_registry",
+        "rows",
+        "section_17_all_conditions_not_met",
+        "terminal_verdict"
+      ]
+    },
+    {
+      "path": "research_state/fclr_fwd_vol_2025_disjoint_reconcile_panel_build_report_20261114T204000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1195,
+      "parse": "OK",
+      "top_keys": [
+        "all_pass",
+        "checks",
+        "coverage_note",
+        "forward_fill_used",
+        "generated_utc",
+        "imputation_used",
+        "key_count",
+        "panel_path",
+        "panel_sha256",
+        "recomputed_symbols",
+        "removed_day",
+        "removed_reason"
+      ]
+    },
+    {
+      "path": "research_state/fclr_fwd_vol_2026q1q2_fwd_universe.json",
+      "status": "MATERIALIZED",
+      "bytes": 2788,
+      "parse": "OK",
+      "top_keys": [
+        "grid_end",
+        "grid_start",
+        "n",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/fclr_h004_tracka_viable.json",
+      "status": "MATERIALIZED",
+      "bytes": 4208,
+      "parse": "OK",
+      "top_keys": [
+        "blocked_paths_confirmed_dead_2024",
+        "cache_status_note",
+        "completeness_per_venue",
+        "constraints_respected",
+        "decision",
+        "decision_utc",
+        "feature_cache_status_2026",
+        "next_action",
+        "prior_status",
+        "resolution",
+        "source",
+        "target_symbol_coverage_2026"
+      ]
+    },
+    {
+      "path": "research_state/fclr_liq_010_confirm_build_report_20261113T065953Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 686,
+      "parse": "OK",
+      "top_keys": [
+        "coverage_events_test",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_symbols",
+        "n_test_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/fclr_liq_combined_context_fetch_report_20261115T181320Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2893,
+      "parse": "OK",
+      "top_keys": [
+        "cached",
+        "empty",
+        "errors",
+        "experiment_id",
+        "fetched",
+        "funded_coins",
+        "generated_utc",
+        "missing_4h_coins_full_early",
+        "notes",
+        "phase"
+      ]
+    },
+    {
+      "path": "research_state/fclr_liq_combined_panel_build_report_20261115T181405Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5055,
+      "parse": "OK",
+      "top_keys": [
+        "causal_features",
+        "dedup_keys",
+        "experiment_id",
+        "funded_coins",
+        "generated_utc",
+        "n_events_after_dedup",
+        "n_events_before_filters",
+        "n_rows_panel",
+        "notes",
+        "panel_path",
+        "panel_sha256",
+        "per_coin"
+      ]
+    },
+    {
+      "path": "research_state/fclr_next162_inventory_reconciliation_20261108T213500Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 51799,
+      "parse": "OK",
+      "top_keys": [
+        "artifact",
+        "cache_dir",
+        "cache_files_total",
+        "cache_month_dirs",
+        "generated_utc",
+        "inventory_entry_count",
+        "inventory_path",
+        "inventory_present",
+        "matched",
+        "matched_months",
+        "missing_in_inventory",
+        "note"
+      ]
+    },
+    {
+      "path": "research_state/funding_schema_audit_2024q1_repair.json",
+      "status": "MATERIALIZED",
+      "bytes": 35834,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "generated_utc",
+        "months",
+        "next_action",
+        "per_symbol",
+        "repo_root",
+        "summary",
+        "symbols"
+      ]
+    },
+    {
+      "path": "research_state/funding_schema_audit_2025_h1.json",
+      "status": "MATERIALIZED",
+      "bytes": 47569,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "generated_utc",
+        "months",
+        "next_action",
+        "per_symbol",
+        "repo_root",
+        "summary",
+        "symbols"
+      ]
+    },
+    {
+      "path": "research_state/h002_run_record.json",
+      "status": "MATERIALIZED",
+      "bytes": 3966,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts",
+        "blocker_removed",
+        "campaign",
+        "constraints_respected",
+        "data_vintages",
+        "experiment_id",
+        "frozen_definition",
+        "git_head",
+        "hypothesis_id",
+        "remaining_blocker",
+        "results",
+        "status"
+      ]
+    },
+    {
+      "path": "research_state/hf_search_cache.json",
+      "status": "MATERIALIZED",
+      "bytes": 7621,
+      "parse": "OK",
+      "top_keys": [
+        "candidates",
+        "errors",
+        "generated_utc",
+        "queries"
+      ]
+    },
+    {
+      "path": "research_state/hl_coverage_probe.json",
+      "status": "MATERIALIZED",
+      "bytes": 2994,
+      "parse": "OK",
+      "top_keys": [
+        "candle_snapshot",
+        "candle_snapshot_depth",
+        "candle_snapshot_full_label_window",
+        "funding_history",
+        "funding_history_depth",
+        "generated_utc",
+        "label_window",
+        "notes",
+        "universe_count",
+        "universe_sample"
+      ]
+    },
+    {
+      "path": "research_state/hl_pathb_probe_20261111T122801Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 16569,
+      "parse": "OK",
+      "top_keys": [
+        "candle_snapshot_monthly",
+        "coins_present_in_universe",
+        "coins_probed",
+        "elapsed_s",
+        "errors",
+        "funding_history_monthly",
+        "generated_utc",
+        "network",
+        "overlap_summary",
+        "purpose",
+        "universe_count"
+      ]
+    },
+    {
+      "path": "research_state/hyperliquid_nov2026_coverage_probe_20261112T043403Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1968,
+      "parse": "OK",
+      "top_keys": [
+        "candles_1h",
+        "funding",
+        "probe_ts_utc",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/hypothesis_registry.json",
+      "status": "MATERIALIZED",
+      "bytes": 41399,
+      "parse": "OK",
+      "top_keys": [
+        "hypotheses",
+        "updated_utc"
+      ]
+    },
+    {
+      "path": "research_state/ironflow_bulk_manifest.json",
+      "status": "MATERIALIZED",
+      "bytes": 27285,
+      "parse": "OK",
+      "top_keys": [
+        "cache_root",
+        "datasets",
+        "generated_utc",
+        "manifest_id",
+        "months",
+        "objects",
+        "totals"
+      ]
+    },
+    {
+      "path": "research_state/ironflow_fastpath_cache.json",
+      "status": "MATERIALIZED",
+      "bytes": 66,
+      "parse": "OK",
+      "top_keys": [
+        "last_tree_ts",
+        "tree_status"
+      ]
+    },
+    {
+      "path": "research_state/ironflow_monitor_state.json",
+      "status": "MATERIALIZED",
+      "bytes": 70429,
+      "parse": "OK",
+      "top_keys": [
+        "consecutive_absent",
+        "consecutive_absent_trend",
+        "data_through",
+        "last_check",
+        "last_probe",
+        "last_probe_ts",
+        "last_quick_check",
+        "last_quick_probe",
+        "last_scan",
+        "last_tree_change",
+        "probe_history",
+        "resume_trigger"
+      ]
+    },
+    {
+      "path": "research_state/ironflow_probe_20261111T015524Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 25268,
+      "parse": "OK",
+      "top_keys": [
+        "artifact_churn",
+        "baseline_drift",
+        "cached_hits",
+        "consecutive_absent",
+        "data_through",
+        "dataset",
+        "head_probes",
+        "mode",
+        "months_probed",
+        "new_files_found",
+        "probe_diff",
+        "probe_id"
+      ]
+    },
+    {
+      "path": "research_state/ironflow_probe_digest_latest.json",
+      "status": "MATERIALIZED",
+      "bytes": 52402,
+      "parse": "OK",
+      "top_keys": [
+        "archived_entries",
+        "campaign",
+        "digest_ts",
+        "entries",
+        "latest_data_through",
+        "latest_probe",
+        "removed_count",
+        "total_entries"
+      ]
+    },
+    {
+      "path": "research_state/manifest_validation_20261115T234500Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5248,
+      "parse": "OK",
+      "top_keys": [
+        "environmental_blockers",
+        "generated_utc",
+        "governing_handoff",
+        "lfs_commands",
+        "materialized",
+        "other_lfs_tracked_materialized",
+        "parse_summary",
+        "unmaterialized",
+        "validation_type",
+        "verdict"
+      ]
+    },
+    {
+      "path": "research_state/new_data_admissibility_audit_20261112T042738Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7767,
+      "parse": "OK",
+      "top_keys": [
+        "admissibility_requirements_source",
+        "artifact",
+        "bottlenecks",
+        "candidates_inventoried",
+        "determination",
+        "gate4_highest_local_artifact",
+        "gate4_resolved_trigger_present",
+        "gate4_status",
+        "gate4_trigger_checked_utc",
+        "generated_utc",
+        "hard_bans",
+        "locally_admissible_untested_candidate_found"
+      ]
+    },
+    {
+      "path": "research_state/new_data_admissibility_audit_20261114T123710Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5416,
+      "parse": "OK",
+      "top_keys": [
+        "audit_id",
+        "gate4_trigger_check",
+        "generated_utc",
+        "probes"
+      ]
+    },
+    {
+      "path": "research_state/new_data_external_probe_audit_20261112T043530Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2573,
+      "parse": "OK",
+      "top_keys": [
+        "audit_id",
+        "evidence_artifacts",
+        "external_probes_executed",
+        "findings",
+        "gate4_branch1_trigger_present",
+        "gate4_check_utc",
+        "local_admissible_untested_candidate",
+        "local_audit_baseline",
+        "next_materially_different_free_route",
+        "next_unfinished_task",
+        "program_status",
+        "timestamp_utc"
+      ]
+    },
+    {
+      "path": "research_state/new_data_external_probe_audit_20261112T044425Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1860,
+      "parse": "OK",
+      "top_keys": [
+        "audit_id",
+        "evidence_artifacts",
+        "external_probes_executed",
+        "findings",
+        "gate4_branch1_trigger_present",
+        "local_admissible_untested_candidate",
+        "local_audit_baseline",
+        "next_unfinished_task",
+        "program_status",
+        "timestamp_utc",
+        "verifiably_admissible_external_source_now"
+      ]
+    },
+    {
+      "path": "research_state/new_data_monitor_probe_20261112T073028Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3796,
+      "parse": "OK",
+      "top_keys": [
+        "eligibility_assessment",
+        "gate4_trigger_check",
+        "hyperliquid_2026_11_depth",
+        "ironflow_hf",
+        "probe_id",
+        "probe_time_utc"
+      ]
+    },
+    {
+      "path": "research_state/new_data_monitor_probe_20261112T073159Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1925,
+      "parse": "OK",
+      "top_keys": [
+        "gate4_trigger",
+        "hyperliquid_2026_11_plus",
+        "ineligibility_reasons",
+        "ironflow_hf",
+        "new_claim_worthy_experiment_eligible_now",
+        "probe_type",
+        "recommendation",
+        "sealed_prior",
+        "timestamp_utc"
+      ]
+    },
+    {
+      "path": "research_state/next_panel_gap_audit_20261111T163229Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 34299,
+      "parse": "OK",
+      "top_keys": [
+        "artifact",
+        "cached_assets",
+        "evaluated_panels",
+        "gaps",
+        "gate4_status",
+        "generated_utc",
+        "hard_bans_respected",
+        "purpose",
+        "recommended_next_heavy_work",
+        "repo"
+      ]
+    },
+    {
+      "path": "research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 10990,
+      "parse": "OK",
+      "top_keys": [
+        "admissibility_source_rules",
+        "confirmatory_claim_go",
+        "decision_gates",
+        "do_not",
+        "experiment_id",
+        "exploratory_label_required",
+        "features",
+        "frozen_at_utc",
+        "frozen_before_outcomes",
+        "git_sha",
+        "holdout_status",
+        "hypotheses"
+      ]
+    },
+    {
+      "path": "research_state/pre_registration_gate4_funding_multisplit_v4_20261107T1845Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 2815,
+      "parse": "OK",
+      "top_keys": [
+        "ablations",
+        "confirmatory_claim_go",
+        "data_slice",
+        "experiment_id",
+        "exploratory_label_required",
+        "exploratory_smoke_authorized_after_freeze",
+        "frozen_at_utc",
+        "frozen_before_outcomes",
+        "git_sha",
+        "input_manifest",
+        "leakage_controls",
+        "outcome_metrics_present"
+      ]
+    },
+    {
+      "path": "research_state/pre_registration_gate4_funding_multisplit_v4_draft_skeleton_20261108T162806Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1597,
+      "parse": "OK",
+      "top_keys": [
+        "artifact",
+        "blockers_before_freeze",
+        "confirmatory_claim_go",
+        "confirmatory_outcomes_permitted",
+        "created_utc",
+        "evaluation",
+        "exploratory_only_default",
+        "frozen_before_outcomes",
+        "hard_stops",
+        "scope",
+        "status"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr011_recompute_20261114T042139Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3816,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "fit",
+        "frozen_before_outcomes",
+        "generated",
+        "horizon_hours",
+        "inference",
+        "max_status",
+        "missing_data",
+        "models"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_design_feasibility_2026-11-15T02:35:00Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5379,
+      "parse": "OK",
+      "top_keys": [
+        "alpha",
+        "audit_only",
+        "campaign",
+        "created_utc",
+        "decidability_rule",
+        "does_not_reopen_sealed_verdict",
+        "expected_outputs",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "inputs",
+        "known_answer_self_test",
+        "liq_symmetry_robust_rule"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_exp_robust_redo_20261113T063000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3973,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "constraints",
+        "data_sources",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id",
+        "hypothesis_type",
+        "models",
+        "outcome_data_inspected_before_freeze"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_011_confirm_20261113T041200Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9459,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts",
+        "atomic_state_updates",
+        "campaign",
+        "claim",
+        "data_sources",
+        "declared_family",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2024_disjoint_2024_06_20261114T231100Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7502,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "contrasts",
+        "data_sources",
+        "estimator_arms",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "horizon_hours"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2024q4_cross_20261113T091500Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8358,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "coverage_audit",
+        "data_sources",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id",
+        "hypothesis_type"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2025_cross_20261113T063000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4964,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "constraints",
+        "data_sources",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id",
+        "hypothesis_type",
+        "models",
+        "outcome_data_inspected_before_freeze"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_2026-11-15T00:12:56Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5632,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "contrast",
+        "estimator_arm",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "generated_utc",
+        "inference",
+        "max_status"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2025_disjoint_cross_20261114T183000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8468,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "coverage_audit",
+        "data_sources",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gate4_status",
+        "gates",
+        "hypothesis_id"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2025_disjoint_reconcile_20261114T193000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6850,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "cell",
+        "does_not_reopen_sealed_verdict",
+        "estimator_arms",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "generated_utc",
+        "inference"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2025h2_cross_20261113T102139Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8805,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "coverage_audit",
+        "data_sources",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id",
+        "hypothesis_type"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_fwd_vol_2025q1q2_cross_20261113T111601Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7628,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "coverage_audit",
+        "data_sources",
+        "experiment_id",
+        "features",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id",
+        "hypothesis_type"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_liq_010_confirm_20261113T063000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5895,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "cell",
+        "claim",
+        "constraints",
+        "data_sources",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "gates",
+        "hypothesis_id",
+        "hypothesis_type",
+        "label",
+        "models"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_liq_combined_20261115T181449Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3359,
+      "parse": "OK",
+      "top_keys": [
+        "class",
+        "constraints",
+        "estimand",
+        "experiment_id",
+        "features",
+        "gate",
+        "outcome_data_inspected_before_freeze",
+        "prereg_frozen_utc",
+        "promotable",
+        "splits",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_liq_combined_xsec_20261115T200813Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3778,
+      "parse": "OK",
+      "top_keys": [
+        "class",
+        "constraints",
+        "estimand",
+        "experiment_id",
+        "features",
+        "gate",
+        "outcome_data_inspected_before_freeze",
+        "prereg_frozen_utc",
+        "promotable",
+        "splits",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3778,
+      "parse": "OK",
+      "top_keys": [
+        "class",
+        "constraints",
+        "estimand",
+        "experiment_id",
+        "features",
+        "gate",
+        "outcome_data_inspected_before_freeze",
+        "prereg_frozen_utc",
+        "promotable",
+        "splits",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4124,
+      "parse": "OK",
+      "top_keys": [
+        "class",
+        "constraints",
+        "estimand",
+        "experiment_id",
+        "features",
+        "gate",
+        "outcome_data_inspected_before_freeze",
+        "prereg_frozen_utc",
+        "promotable",
+        "splits",
+        "universe"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_power_calibration_2026-11-15T01:34:12Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4611,
+      "parse": "OK",
+      "top_keys": [
+        "alpha",
+        "audit_only",
+        "campaign",
+        "created_utc",
+        "does_not_reopen_sealed_verdict",
+        "expected_outputs",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "inputs",
+        "max_status",
+        "network_required",
+        "objective"
+      ]
+    },
+    {
+      "path": "research_state/prereg_fclr_shek_scale_20261115T063600Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9270,
+      "parse": "OK",
+      "top_keys": [
+        "arms",
+        "campaign",
+        "class",
+        "disclaimer",
+        "event_definition_frozen",
+        "frozen_at_utc",
+        "frozen_by",
+        "head_at_freeze",
+        "headline_cell",
+        "independent_of",
+        "inference_method_frozen",
+        "network_used"
+      ]
+    },
+    {
+      "path": "research_state/prereg_tracka_liq_expansion_recompute_20261114T073346Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9167,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "fit",
+        "frozen_before_outcomes",
+        "generated",
+        "horizon_hours",
+        "inference",
+        "inputs",
+        "label",
+        "markets"
+      ]
+    },
+    {
+      "path": "research_state/prereg_tracka_liq_expansion_reconciliation_20261114T083642Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5742,
+      "parse": "OK",
+      "top_keys": [
+        "audit_only",
+        "campaign",
+        "does_not_reopen_sealed_verdict",
+        "experiment_id",
+        "fit",
+        "frozen_before_outcomes",
+        "generated",
+        "horizon_hours",
+        "inference",
+        "inputs",
+        "label",
+        "markets"
+      ]
+    },
+    {
+      "path": "research_state/prereg_tracka_liq_xsec_20261112T201536Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9326,
+      "parse": "OK",
+      "top_keys": [
+        "acquisition",
+        "arm",
+        "artifacts_to_emit",
+        "campaign",
+        "claim",
+        "data_sources",
+        "decision_rule",
+        "estimand",
+        "experiment_id",
+        "features_causal",
+        "forbidden",
+        "frozen_before_outcomes"
+      ]
+    },
+    {
+      "path": "research_state/prereg_tracka_liq_xsec_forward_2026q1q2_20261113T222859Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8767,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "artifacts_to_emit",
+        "campaign",
+        "claim",
+        "data_sources",
+        "decision_rule",
+        "estimand",
+        "experiment_id",
+        "features_causal",
+        "forbidden",
+        "frozen_before_outcomes",
+        "hypothesis_id"
+      ]
+    },
+    {
+      "path": "research_state/prereg_tracka_vol_forward_2026q1q2_20261114T015222Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9951,
+      "parse": "OK",
+      "top_keys": [
+        "acquisition",
+        "arm",
+        "artifacts_to_emit",
+        "campaign",
+        "claim",
+        "data_sources",
+        "decision_rule",
+        "experiment_id",
+        "features_causal",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gate_4_note"
+      ]
+    },
+    {
+      "path": "research_state/prereg_tracka_vol_fullhist_20261112T201536Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 14847,
+      "parse": "OK",
+      "top_keys": [
+        "acquisition",
+        "arm",
+        "artifacts_to_emit",
+        "campaign",
+        "claim",
+        "data_sources",
+        "decision_rule",
+        "experiment_id",
+        "features_causal",
+        "forbidden",
+        "frozen_before_outcomes",
+        "gate_4_note"
+      ]
+    },
+    {
+      "path": "research_state/session_20261116T0040Z/reproducibility_recompute_2026-11-16T00:45:10Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3726,
+      "parse": "OK",
+      "top_keys": [
+        "fclr011_recompute",
+        "funding_ablations_v3_30d",
+        "generated_utc",
+        "overall",
+        "reproducibility_type",
+        "tolerance_policy"
+      ]
+    },
+    {
+      "path": "research_state/resume_trigger_registry.json",
+      "status": "MATERIALIZED",
+      "bytes": 3436,
+      "parse": "OK",
+      "top_keys": [
+        "generated_utc",
+        "n_triggers",
+        "registry_version",
+        "triggers"
+      ]
+    },
+    {
+      "path": "research_state/run_manifest.json",
+      "status": "MATERIALIZED",
+      "bytes": 17113,
+      "parse": "OK",
+      "top_keys": [
+        "FAMILY-EVAL-20261112T005111Z",
+        "git_sha",
+        "last_run",
+        "notes",
+        "runs",
+        "rv_baseline",
+        "schema_version",
+        "split_boundaries_fclr010",
+        "status",
+        "updated_utc"
+      ]
+    },
+    {
+      "path": "research_state/session_20261116T0040Z/run_manifest_funding_repro_2026-11-16T00:43:02Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 17070,
+      "parse": "OK",
+      "top_keys": [
+        "funding_ablations",
+        "funding_ablations_bootstrap",
+        "funding_ablations_contrasts_vs_A",
+        "funding_ablations_data_sufficiency",
+        "funding_ablations_experiment_id",
+        "funding_ablations_exploratory_sensitivity_block_hours",
+        "funding_ablations_include_cache",
+        "funding_ablations_note",
+        "funding_ablations_per_split_paired_delta_vs_A",
+        "funding_ablations_pre_registration",
+        "funding_ablations_split_design",
+        "funding_ablations_splits"
+      ]
+    },
+    {
+      "path": "research_state/run_manifest_funding_v3_30d.json",
+      "status": "MATERIALIZED",
+      "bytes": 10456,
+      "parse": "OK",
+      "top_keys": [
+        "funding_ablations",
+        "funding_ablations_bootstrap",
+        "funding_ablations_contrasts_vs_A",
+        "funding_ablations_data_sufficiency",
+        "funding_ablations_experiment_id",
+        "funding_ablations_exploratory_sensitivity_block_hours",
+        "funding_ablations_note",
+        "funding_ablations_per_split_paired_delta_vs_A",
+        "funding_ablations_pre_registration",
+        "funding_ablations_splits",
+        "funding_ablations_verdict",
+        "last_funding_ablations"
+      ]
+    },
+    {
+      "path": "research_state/tracka_admissibility_no_go_20261113T193124Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3202,
+      "parse": "OK",
+      "top_keys": [
+        "artifact",
+        "cached_ironflow_events_months",
+        "cached_ironflow_fills_months",
+        "cached_ironflow_latest_event_month",
+        "candidates_considered",
+        "falsified_alternative_sources_ref",
+        "next_trigger_only_if",
+        "reason_code",
+        "seam",
+        "seam_check",
+        "status",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2024_disjoint_2024_06_build_report_20261114T231545Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8643,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "data_months",
+        "embargo_days",
+        "experiment_id",
+        "generated_utc",
+        "key_count",
+        "leakage_audit",
+        "lineage_check",
+        "max_status",
+        "panel_path",
+        "panel_sha256",
+        "prereg"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2024q4_cross_build_report_20261113T100451Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1311,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "network_used",
+        "panel_path",
+        "panel_sha256",
+        "sealed_artifacts_mutated"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2025_cross_build_report_20261113T081147Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1015,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2025_disjoint_corrected_audit_build_report_20261115T001256Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1669,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "campaign",
+        "embargo_days",
+        "experiment_id",
+        "generated_utc",
+        "key_count",
+        "max_status",
+        "network_used",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "prereg_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2025_disjoint_cross_build_report_20261114T191615Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1617,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage_target_24h",
+        "data_end",
+        "data_start",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "max_status",
+        "n_blocks",
+        "n_rows",
+        "n_symbols",
+        "n_valid_rows"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2025h2_cross_build_report_20261113T102240Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1311,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "network_used",
+        "panel_path",
+        "panel_sha256",
+        "sealed_artifacts_mutated"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_2025q1q2_cross_build_report_20261113T111712Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1315,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage_target_24h",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "network_used",
+        "panel_path",
+        "panel_sha256",
+        "sealed_artifacts_mutated"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041259Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041401Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041459Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041543Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041630Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041731Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T041934Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T050407Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T061005Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_fwd_vol_build_report_20261113T061555Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1230,
+      "parse": "OK",
+      "top_keys": [
+        "blocks",
+        "coverage",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_rows",
+        "n_valid_rows",
+        "panel_path",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_candle_fetch_report_20261111T160053Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4195,
+      "parse": "OK",
+      "top_keys": [
+        "coins",
+        "errors",
+        "generated_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_candle_fetch_report_20261111T201845Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 4195,
+      "parse": "OK",
+      "top_keys": [
+        "coins",
+        "errors",
+        "generated_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early2025h1_acquisition_report_20261112T134247Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7231,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "candle_months",
+        "coins",
+        "counts",
+        "errors",
+        "generated_utc",
+        "interval",
+        "label_window_utc",
+        "per_coin",
+        "provenance",
+        "window_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early2025h1_panel_build_report_20261112T134258Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9736,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "leakage_guards",
+        "missingness",
+        "outcomes_inspected",
+        "panel",
+        "test_blocks"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early2025h1_panel_build_report_20261112T134352Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9645,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "leakage_guards",
+        "missingness",
+        "outcomes_inspected",
+        "panel",
+        "test_blocks"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early2025h1_panel_build_report_20261112T134508Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9689,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "leakage_guards",
+        "missingness",
+        "outcomes_inspected",
+        "panel",
+        "test_blocks"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early2025h1_panel_build_report_20261112T134520Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9689,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "leakage_guards",
+        "missingness",
+        "outcomes_inspected",
+        "panel",
+        "test_blocks"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early2025h1_panel_build_report_20261112T145529Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9689,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "leakage_guards",
+        "missingness",
+        "outcomes_inspected",
+        "panel",
+        "test_blocks"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early_4h_panel_build_report_20261112T054737Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 12661,
+      "parse": "OK",
+      "top_keys": [
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "missingness",
+        "n_symbols",
+        "panel",
+        "prereg_document",
+        "symbols",
+        "track",
+        "window_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early_candle_fetch_4h_report_20261112T054104Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7991,
+      "parse": "OK",
+      "top_keys": [
+        "cached",
+        "coins",
+        "discovery_note",
+        "errors",
+        "fetched",
+        "generated_utc",
+        "interval"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_early_candle_fetch_report_20261111T193140Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7776,
+      "parse": "OK",
+      "top_keys": [
+        "cached",
+        "coins",
+        "errors",
+        "fetched",
+        "generated_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_acquisition_report_20261111T201958Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7885,
+      "parse": "OK",
+      "top_keys": [
+        "actions",
+        "candle_fetch_report",
+        "experiment_id",
+        "funding_paginate_report",
+        "generated_utc",
+        "per_coin",
+        "prereg",
+        "scope"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_eval_result_20261111T202344Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1471,
+      "parse": "OK",
+      "top_keys": [
+        "build_report",
+        "contrasts",
+        "eval_summary",
+        "gate_pass",
+        "mean_qlike",
+        "paired_symbols",
+        "panel_hash",
+        "panel_path",
+        "test_blocks_with_data",
+        "verdict",
+        "verdict_id"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_funding_paginate_report_20261111T201214Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1513,
+      "parse": "OK",
+      "top_keys": [
+        "coins",
+        "errors",
+        "generated_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_funding_paginate_report_20261111T201846Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1513,
+      "parse": "OK",
+      "top_keys": [
+        "coins",
+        "errors",
+        "generated_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_panel_build_report_20261111T202344Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 10579,
+      "parse": "OK",
+      "top_keys": [
+        "acquisition",
+        "coverage_by_coin",
+        "experiment_id",
+        "generated_utc",
+        "inputs",
+        "n_symbols",
+        "notes",
+        "panel",
+        "prereg",
+        "symbols",
+        "universe",
+        "window_utc"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_probe_report_20261111T195336Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 21702,
+      "parse": "OK",
+      "top_keys": [
+        "acquisition",
+        "errors",
+        "generated_utc",
+        "prereg",
+        "ranking",
+        "selected"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_expansion_universe_20261111T201958Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 10845,
+      "parse": "OK",
+      "top_keys": [
+        "closed_excluded",
+        "evidence",
+        "experiment_id",
+        "generated_utc",
+        "meets_min",
+        "min_required",
+        "n_selected",
+        "not_selected",
+        "prereg",
+        "probe_report",
+        "selected_universe",
+        "selection_basis"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_panel_build_report_20261111T133430Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5662,
+      "parse": "OK",
+      "top_keys": [
+        "admissible_overlap",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "missingness",
+        "n_symbols",
+        "panel",
+        "prereg_document",
+        "symbols",
+        "track"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_panel_with_rv_build_report_20261111T145408Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 14053,
+      "parse": "OK",
+      "top_keys": [
+        "admissible_overlap",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "missingness",
+        "n_symbols",
+        "panel",
+        "prereg_document",
+        "symbols",
+        "track"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_panel_with_rv_build_report_20261111T145731Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 14779,
+      "parse": "OK",
+      "top_keys": [
+        "admissible_overlap",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "missingness",
+        "n_symbols",
+        "panel",
+        "prereg_document",
+        "symbols",
+        "track"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_panel_with_rv_build_report_20261111T160124Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 14779,
+      "parse": "OK",
+      "top_keys": [
+        "admissible_overlap",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "missingness",
+        "n_symbols",
+        "panel",
+        "prereg_document",
+        "symbols",
+        "track"
+      ]
+    },
+    {
+      "path": "research_state/tracka_hl_panel_with_rv_build_report_20261111T201852Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 14779,
+      "parse": "OK",
+      "top_keys": [
+        "admissible_overlap",
+        "coverage_by_coin",
+        "experiment_id",
+        "feasibility",
+        "generated_utc",
+        "inputs",
+        "missingness",
+        "n_symbols",
+        "panel",
+        "prereg_document",
+        "symbols",
+        "track"
+      ]
+    },
+    {
+      "path": "research_state/tracka_liq_expansion_recompute_panel_build_report_20261114T082500Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9489,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "experiment_id",
+        "generated",
+        "inputs",
+        "markets",
+        "panel",
+        "panel_path",
+        "panel_sha256",
+        "prereg",
+        "row_counts",
+        "sealed_reference_panel_sha256",
+        "sealed_reference_total_buckets"
+      ]
+    },
+    {
+      "path": "research_state/tracka_liq_expansion_recompute_panel_build_report_20261114T083000Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9489,
+      "parse": "OK",
+      "top_keys": [
+        "campaign",
+        "experiment_id",
+        "generated",
+        "inputs",
+        "markets",
+        "panel",
+        "panel_path",
+        "panel_sha256",
+        "prereg",
+        "row_counts",
+        "sealed_reference_panel_sha256",
+        "sealed_reference_total_buckets"
+      ]
+    },
+    {
+      "path": "research_state/tracka_liq_glm_step5_power_coverage_20261112T165210Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6808,
+      "parse": "OK",
+      "top_keys": [
+        "artifact",
+        "binding_constraint",
+        "concentration",
+        "extrapolation",
+        "generated_utc",
+        "label_ceiling",
+        "panel",
+        "panel_sha256",
+        "parent_campaign",
+        "parent_eval",
+        "parent_verdict",
+        "per_block"
+      ]
+    },
+    {
+      "path": "research_state/tracka_liq_xsec_forward_panel_build_report_2026-11-13T22:31:55Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3015,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "feature_rule",
+        "generated_utc",
+        "inputs_hashes",
+        "k",
+        "max_status",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "promotable"
+      ]
+    },
+    {
+      "path": "research_state/tracka_liq_xsec_panel_build_report_2026-11-13T00:33:08Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3302,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "feature_rule",
+        "generated_utc",
+        "inputs_hashes",
+        "k",
+        "max_status",
+        "panel",
+        "prereg",
+        "promotable",
+        "runtime_seconds"
+      ]
+    },
+    {
+      "path": "research_state/tracka_liq_xsec_panel_build_report_2026-11-13T20:24:18Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 3388,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "feature_rule",
+        "generated_utc",
+        "inputs_hashes",
+        "k",
+        "max_status",
+        "panel",
+        "panel_sha256",
+        "prereg",
+        "promotable"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_alt_volatility_20261112T015546Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5621,
+      "parse": "OK",
+      "top_keys": [
+        "atomic_state_updates_required",
+        "baselines",
+        "campaign",
+        "claim",
+        "data_source",
+        "event_adequacy_rule",
+        "experiment_id",
+        "forbidden",
+        "gate_4_note",
+        "hypothesis_id",
+        "hypothesis_type",
+        "materiality_gate"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_early2025h1_20261112T134106Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5176,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts_to_produce",
+        "campaign",
+        "compliance",
+        "contrasts",
+        "data_sources",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "inference",
+        "materiality",
+        "metric",
+        "missingness_policy",
+        "models"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_early2025h1_20261112T134503Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5027,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts_to_produce",
+        "campaign",
+        "compliance",
+        "contrasts",
+        "data_sources",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "inference",
+        "materiality",
+        "metric",
+        "missingness_policy",
+        "models"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_early2025h1_liq_glm_20261112T164838Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6638,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts_to_produce",
+        "campaign",
+        "compliance",
+        "contrasts",
+        "data_sources",
+        "estimator",
+        "experiment_id",
+        "frozen_before_outcomes",
+        "inference",
+        "materiality",
+        "metric",
+        "metric_scope"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_early2025h1_liq_glm_robust_20261112T165234Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 5904,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts_to_produce",
+        "campaign",
+        "compliance",
+        "contrasts",
+        "data_sources",
+        "estimator",
+        "experiment_id",
+        "feature_transform",
+        "frozen_before_outcomes",
+        "inference",
+        "materiality",
+        "metric"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_expansion_robust_20261112T014515Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9548,
+      "parse": "OK",
+      "top_keys": [
+        "atomic_state_updates_required",
+        "baselines",
+        "campaign",
+        "claim",
+        "data_source",
+        "event_adequacy_rule",
+        "experiment_id",
+        "feature_sets",
+        "forbidden",
+        "gate_4_note",
+        "hypothesis_id",
+        "hypothesis_type"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_hyperliquid_2026.json",
+      "status": "MATERIALIZED",
+      "bytes": 4788,
+      "parse": "OK",
+      "top_keys": [
+        "admissibility_guard",
+        "baselines",
+        "campaign",
+        "claim",
+        "data_source",
+        "experiment_id",
+        "forbidden",
+        "hypothesis_id",
+        "hypothesis_type",
+        "materiality_gate",
+        "metric",
+        "models"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_hyperliquid_early_20261111T191958Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6970,
+      "parse": "OK",
+      "top_keys": [
+        "baselines",
+        "campaign",
+        "claim",
+        "context_sources",
+        "data_source",
+        "experiment_id",
+        "feasibility_assessment_pre_outcomes",
+        "forbidden",
+        "hypothesis_id",
+        "hypothesis_type",
+        "infeasibility_rule",
+        "materiality_gate"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_hyperliquid_early_4h_20261112T054737Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 7264,
+      "parse": "OK",
+      "top_keys": [
+        "artifacts_to_produce",
+        "campaign",
+        "compliance",
+        "data_sources",
+        "description",
+        "experiment_id",
+        "gate_assessment",
+        "inference",
+        "metrics",
+        "panel_construction",
+        "splits",
+        "status"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_hyperliquid_expansion_20261111T195500Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9309,
+      "parse": "OK",
+      "top_keys": [
+        "baselines",
+        "campaign",
+        "claim",
+        "context_sources",
+        "data_source",
+        "event_adequacy_rule",
+        "experiment_id",
+        "forbidden",
+        "gate_4_note",
+        "hypothesis_id",
+        "hypothesis_type",
+        "materiality_gate"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_hyperliquid_successor_20261111T133430Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8253,
+      "parse": "OK",
+      "top_keys": [
+        "baselines",
+        "campaign",
+        "claim",
+        "context_sources",
+        "data_source",
+        "experiment_id",
+        "feasibility_assessment_pre_outcomes",
+        "forbidden",
+        "hypothesis_id",
+        "hypothesis_type",
+        "materiality_gate",
+        "metric"
+      ]
+    },
+    {
+      "path": "research_state/tracka_prereg_volatility_20261111T234918Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 6148,
+      "parse": "OK",
+      "top_keys": [
+        "admissibility_rules",
+        "artifacts_planned",
+        "bootstrap",
+        "campaign",
+        "claim",
+        "data_sources",
+        "experiment_id",
+        "hypothesis_id",
+        "materiality_gate",
+        "metric",
+        "metric_definition",
+        "models"
+      ]
+    },
+    {
+      "path": "research_state/tracka_script_scope_registry.json",
+      "status": "MATERIALIZED",
+      "bytes": 72512,
+      "parse": "OK",
+      "top_keys": [
+        "allowed_classes",
+        "changelog",
+        "changes",
+        "description",
+        "generated",
+        "registry_version",
+        "script_count",
+        "scripts",
+        "source_of_record"
+      ]
+    },
+    {
+      "path": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:33:29Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1484,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "generated_utc",
+        "max_status",
+        "min_instruments_required",
+        "note",
+        "panel",
+        "prereg",
+        "promotable",
+        "reason",
+        "selection_rule"
+      ]
+    },
+    {
+      "path": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:43:53Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 1484,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "generated_utc",
+        "max_status",
+        "min_instruments_required",
+        "note",
+        "panel",
+        "prereg",
+        "promotable",
+        "reason",
+        "selection_rule"
+      ]
+    },
+    {
+      "path": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T02:45:26Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9169,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "feature_families",
+        "generated_utc",
+        "inputs_hashes",
+        "liquidation_existence_counts",
+        "max_status",
+        "min_instruments_required",
+        "panel",
+        "prereg",
+        "primary_contrast"
+      ]
+    },
+    {
+      "path": "research_state/tracka_vol_forward_panel_build_report_2026-11-14T03:30:40Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9171,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "experiment_id",
+        "feature_families",
+        "generated_utc",
+        "inputs_hashes",
+        "liquidation_existence_counts",
+        "max_status",
+        "min_instruments_required",
+        "panel",
+        "prereg",
+        "primary_contrast"
+      ]
+    },
+    {
+      "path": "research_state/tracka_vol_fullhist_panel_build_report_2026-11-13T02:44:48Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 8464,
+      "parse": "OK",
+      "top_keys": [
+        "arm",
+        "campaign",
+        "coverage",
+        "coverage_gaps",
+        "epsilon",
+        "experiment_id",
+        "features",
+        "generated_utc",
+        "inputs_hashes",
+        "n_coins",
+        "panel",
+        "panel_sha256"
+      ]
+    },
+    {
+      "path": "research_state/tracka_vol_panel_build_report_20261111T234918Z.json",
+      "status": "MATERIALIZED",
+      "bytes": 9863,
+      "parse": "OK",
+      "top_keys": [
+        "coins",
+        "coverage_by_coin",
+        "experiment_id",
+        "generated_utc",
+        "inputs_sha256",
+        "min_instruments_any_test_block",
+        "months_used",
+        "n_test_blocks_with_ge5_instruments",
+        "notes",
+        "panel_path",
+        "panel_sha256",
+        "prereg"
+      ]
+    },
+    {
+      "path": "research_state/trackb_20251110T154307Z_admissibility.json",
+      "status": "MATERIALIZED",
+      "bytes": 1222,
+      "parse": "OK",
+      "top_keys": [
+        "blockers",
+        "campaign",
+        "confirmatory_ready",
+        "data_quality",
+        "description",
+        "id",
+        "provenance",
+        "splits",
+        "symbols",
+        "timestamp_utc",
+        "track",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/trackb_TB1_admissibility.json",
+      "status": "MATERIALIZED",
+      "bytes": 118331,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackb_TB1_admissibility_2024q1q3.json",
+      "status": "MATERIALIZED",
+      "bytes": 75432,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackb_TB2_admissibility.json",
+      "status": "MATERIALIZED",
+      "bytes": 27608,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready",
+        "generated_utc",
+        "min_complete_symbol_days",
+        "network_used",
+        "next_action_if_met",
+        "next_action_if_not_met",
+        "outcomes_computed",
+        "panel_non_overlapping_30d_blocks_estimate",
+        "per_symbol",
+        "provenance_audit",
+        "resume_trigger_met"
+      ]
+    },
+    {
+      "path": "research_state/trackb_TB2_admissibility_2024q1q3.json",
+      "status": "MATERIALIZED",
+      "bytes": 72612,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackb_TB2_label_design_scan.json",
+      "status": "MATERIALIZED",
+      "bytes": 15120,
+      "parse": "OK",
+      "top_keys": [
+        "generated_utc",
+        "results",
+        "symbols",
+        "window"
+      ]
+    },
+    {
+      "path": "research_state/trackb_window_candidates_fast.json",
+      "status": "MATERIALIZED",
+      "bytes": 199968,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "candidate_count_total",
+        "candidates_ranked",
+        "caveats",
+        "generated_utc",
+        "min_blocks_estimate",
+        "min_symbols",
+        "mode",
+        "months_discovered",
+        "months_with_all_symbols_present",
+        "next_action",
+        "repo_root"
+      ]
+    },
+    {
+      "path": "research_state/trackc_deep_audit_2025_full_check.json",
+      "status": "MATERIALIZED",
+      "bytes": 82366,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackc_deep_audit_2025_h1_check.json",
+      "status": "MATERIALIZED",
+      "bytes": 61758,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackc_deep_audit_orchestrator_2026_11.json",
+      "status": "MATERIALIZED",
+      "bytes": 24629,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackc_deep_audit_orchestrator_2026_11_check.json",
+      "status": "MATERIALIZED",
+      "bytes": 24629,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackc_deep_audit_orchestrator_2026_11_recheck.json",
+      "status": "MATERIALIZED",
+      "bytes": 43157,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackc_deep_audit_orchestrator_latest.json",
+      "status": "MATERIALIZED",
+      "bytes": 55137,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "candidate",
+        "candidate_months",
+        "generated_utc",
+        "min_blocks",
+        "min_symbols",
+        "mode",
+        "next_action",
+        "prereg_hash",
+        "repo_root",
+        "summary"
+      ]
+    },
+    {
+      "path": "research_state/trackc_funding_schema_audit_2024Q1.json",
+      "status": "MATERIALIZED",
+      "bytes": 33453,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "generated_utc",
+        "months",
+        "next_action",
+        "per_symbol",
+        "repo_root",
+        "summary",
+        "symbols"
+      ]
+    },
+    {
+      "path": "research_state/trackc_funding_schema_audit_2026_11.json",
+      "status": "MATERIALIZED",
+      "bytes": 3730,
+      "parse": "OK",
+      "top_keys": [
+        "blockers_global",
+        "cache",
+        "generated_utc",
+        "months",
+        "next_action",
+        "per_symbol",
+        "repo_root",
+        "summary",
+        "symbols"
+      ]
+    },
+    {
+      "path": "research_state/trackc_gap_repair_manifest_2026_11.json",
+      "status": "MATERIALIZED",
+      "bytes": 15285,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready_in_audit",
+        "generated_utc",
+        "next_action",
+        "per_symbol",
+        "resume_trigger_met_in_audit",
+        "source_audit_generated_utc",
+        "source_audit_path",
+        "source_audit_sha256",
+        "summary",
+        "symbols",
+        "window_hint"
+      ]
+    },
+    {
+      "path": "research_state/trackc_gap_repair_manifest_2026_11_repair.json",
+      "status": "MATERIALIZED",
+      "bytes": 15286,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready_in_audit",
+        "generated_utc",
+        "next_action",
+        "per_symbol",
+        "resume_trigger_met_in_audit",
+        "source_audit_generated_utc",
+        "source_audit_path",
+        "source_audit_sha256",
+        "summary",
+        "symbols",
+        "window_hint"
+      ]
+    },
+    {
+      "path": "research_state/trackc_gap_repair_manifest_all_cache.json",
+      "status": "MATERIALIZED",
+      "bytes": 58308,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready_in_audit",
+        "generated_utc",
+        "next_action",
+        "per_symbol",
+        "resume_trigger_met_in_audit",
+        "source_audit_generated_utc",
+        "source_audit_path",
+        "source_audit_sha256",
+        "summary",
+        "symbols",
+        "window_hint"
+      ]
+    },
+    {
+      "path": "research_state/trackc_panel_admissibility_2025_01_2026_10.json",
+      "status": "MATERIALIZED",
+      "bytes": 29020,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready",
+        "generated_utc",
+        "min_complete_symbol_days",
+        "network_used",
+        "next_action_if_met",
+        "next_action_if_not_met",
+        "outcomes_computed",
+        "panel_non_overlapping_30d_blocks_estimate",
+        "per_symbol",
+        "provenance_audit",
+        "resume_trigger_met"
+      ]
+    },
+    {
+      "path": "research_state/trackc_panel_admissibility_2026_11.json",
+      "status": "MATERIALIZED",
+      "bytes": 23247,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready",
+        "generated_utc",
+        "min_complete_symbol_days",
+        "network_used",
+        "next_action_if_met",
+        "next_action_if_not_met",
+        "outcomes_computed",
+        "panel_non_overlapping_30d_blocks_estimate",
+        "per_symbol",
+        "provenance_audit",
+        "resume_trigger_met"
+      ]
+    },
+    {
+      "path": "research_state/trackc_panel_admissibility_all_cache.json",
+      "status": "MATERIALIZED",
+      "bytes": 50862,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready",
+        "generated_utc",
+        "min_complete_symbol_days",
+        "network_used",
+        "next_action_if_met",
+        "next_action_if_not_met",
+        "outcomes_computed",
+        "panel_non_overlapping_30d_blocks_estimate",
+        "per_symbol",
+        "provenance_audit",
+        "resume_trigger_met"
+      ]
+    },
+    {
+      "path": "research_state/trackc_panel_admissibility_latest.json",
+      "status": "MATERIALIZED",
+      "bytes": 23247,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "confirmatory_resume_ready",
+        "generated_utc",
+        "min_complete_symbol_days",
+        "network_used",
+        "next_action_if_met",
+        "next_action_if_not_met",
+        "outcomes_computed",
+        "panel_non_overlapping_30d_blocks_estimate",
+        "per_symbol",
+        "provenance_audit",
+        "resume_trigger_met"
+      ]
+    },
+    {
+      "path": "research_state/trackc_panel_window_plan_latest.json",
+      "status": "MATERIALIZED",
+      "bytes": 194930,
+      "parse": "OK",
+      "top_keys": [
+        "cache",
+        "candidate_count_total",
+        "candidates_ranked",
+        "caveats",
+        "generated_utc",
+        "min_blocks_estimate",
+        "min_symbols",
+        "mode",
+        "months_discovered",
+        "months_with_all_symbols_present",
+        "next_action",
+        "repo_root"
+      ]
+    },
+    {
+      "path": "research_state/url_probe_cache.json",
+      "status": "MATERIALIZED",
+      "bytes": 123134,
+      "parse": "OK",
+      "top_keys": [
+        "https://api.github.com/repos/hyperliquid-dex/hyperliquid-liquidations/contents",
+        "https://api.github.com/search/code?q=hyperliquid+liquidations+parquet",
+        "https://api.github.com/search/repositories?q=hyperliquid+liquidations",
+        "https://api.hyperliquid.xyz/info",
+        "https://api.osf.io/v2/",
+        "https://api.tardis.dev/v1/",
+        "https://api.tardis.dev/v1/markets",
+        "https://data.binance.vision/data/futures/um/daily/liquidationSnapshot/",
+        "https://docs.glassnode.com/",
+        "https://example.com/",
+        "https://export.arxiv.org/api/query?search_query=all:crypto+liquidation+perpetual&max_results=5",
+        "https://export.arxiv.org/api/query?search_query=all:hyperliquid+liquidations&max_results=5"
+      ]
+    }
+  ],
+  "unmaterialized": [
+    {
+      "path": "research_state/run_manifest_FCLR002.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 132,
+      "pointer_oid": "a10add1d67fedff27ce78a13e439c877fc5c61c028736c65cab460a946576844"
+    },
+    {
+      "path": "research_state/run_manifest_funding_explor_5sym.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 130,
+      "pointer_oid": "893f064375f76577a7196e7581e96673583e22ea8791c818120eb0b6e3513ca5"
+    },
+    {
+      "path": "research_state/run_manifest_funding_repro.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 130,
+      "pointer_oid": "bd3ee0e0512a433e4cfe4aa153c86714758d4c63471ba9c788b6feea1bd3c4d4"
+    },
+    {
+      "path": "research_state/run_manifest_funding_v2_5sym.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 129,
+      "pointer_oid": "14bc4922d4fa0606a87329627291be4ed0977672cc225cad3259a8b7dfc1ab20"
+    },
+    {
+      "path": "research_state/run_manifest_funding_v3_30d_exploratory_v4.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 130,
+      "pointer_oid": "00a6369bd49479afb859cbe23042aa32727117851d8cd0b9d3025fb92bec1954"
+    },
+    {
+      "path": "research_state/run_manifest_funding_v4_exploratory_30d.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 130,
+      "pointer_oid": "8e6e06cdc1d9d69bc17603c2fd9f3dfbbfcca8f261b66d34ca08aaba1871e6f8"
+    },
+    {
+      "path": "research_state/run_manifest_local.json",
+      "status": "UNMATERIALIZED_LFS_POINTER",
+      "bytes": 129,
+      "pointer_oid": "5f7a031232f3666a766294d05af340350bb8a24a9d679e5bff0d604cc3740118"
+    }
+  ],
+  "parse_failures": []
+}
