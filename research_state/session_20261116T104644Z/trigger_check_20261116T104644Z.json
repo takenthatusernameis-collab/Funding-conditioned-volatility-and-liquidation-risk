@@ -1,0 +1,73 @@
+{
+  "session_utc": "20261116T104644Z",
+  "generated_at_utc": "2026-11-16T10:46:44Z",
+  "network_used": false,
+  "polling": false,
+  "reprobes": 0,
+  "read_files": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_*.json",
+      "required_fields": {
+        "fabricated": false,
+        "status": "RESOLVED_VERIFIED"
+      },
+      "attestation": "human/legal",
+      "agent_can_set": false
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.{md,json}",
+      "required_fields": {
+        "blocks": { "op": ">=", "value": 3 },
+        "complete_month": { "op": ">=", "value": 1 },
+        "instruments": { "op": ">=", "value": 5 },
+        "observed_labels": true,
+        "status": "ADMISSIBLE",
+        "unauthenticated": true
+      }
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}",
+      "required_fields": {
+        "labels_after": "2026-10-31",
+        "min_depth_days": 100,
+        "observed_only": true,
+        "venue": "hyperliquid_perpetuals"
+      }
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json",
+      "required_fields": {
+        "LOIO": { "op": ">=", "value": "6 of 8 subsets pass" },
+        "placebo_permutation": "true effect > 95th percentile of null"
+      }
+    }
+  ],
+  "trigger_verdict": "NO_TRIGGER_FIRED",
+  "ironflow_state": {
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "post_2026_10_months_probed": ["2026-11", "2026-12", "2027-01"],
+    "post_2026_10_classifications": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    },
+    "any_available_post_2026_10": false,
+    "last_check": "2026-11-02T05:59:46Z",
+    "last_quick_check": "2026-11-11T01:55:25Z"
+  },
+  "phase_b_branch": "3b",
+  "phase_b_note": "No trigger fired -> refresh/extend trigger-readiness power ledger OR perform an independent numpy-only recomputation of a terminal headline from its stored panel/config and assert agreement within a declared tolerance. This session performs the independent recomputation of FCLR-009 (the only adequately powered Track C experiment, n=24495, MDE 1.95%)."
+}

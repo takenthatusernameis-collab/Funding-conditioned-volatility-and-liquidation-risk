@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T10:39:51Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T10:48:31Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -52,8 +52,9 @@
 
 **Completion standard.** Completion requires a new `session_<UTC>/` containing: a one-time trigger check; a **new** quantitative artifact (power-ledger refresh or trigger execution or independent recomputation); an evidence-audit artifact; all four gate outputs captured there; a green heavy-work gate; a green scope-drift check; all targeted tests passing; the full discovery suite completed with its final EXIT recorded; root count at most 500; and this handoff updated with the new timestamp/results. A status-only session, a prose-only summary, a copied-bundle-only session, or a timeout is **not** completion.
 
-### Verification record — 2026-11-16T10:39:51Z (handoff refresh; no new heavy artifact produced this session — that is the next session's mandatory task).
-- Trigger files read once at session start: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied.
+### Verification record — 2026-11-16T10:48:31Z
+- Trigger files read once at session start: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied. The one-time trigger verdict was written to the untracked trigger-check output at UTC 2026-11-16T10:46:44Z.
+- **That trigger-check-only output is NOT completion:** it produced only a trigger check (no new quantitative artifact, no evidence audit, no gate run). A trigger-check-only session is explicitly not completion under the heavy-work mandate (step 3 / §31).
 - Last completed heavy session: `session_20261116T100533Z` — new heavy artifact `trigger_readiness_power_calibration_20261116T100533Z.{json,md}` (offline design-power ledger); evidence audit `evidence_audit_20261116T100533Z.md` present; five RCA families carried forward unmodified from `session_20261116T035833Z/`.
 - `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `session_ok=True`, `missing=[]`, `root=498/500`, `reason=OK`, EXIT 0 (re-verified this session).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `scripts=196`, `registry=196`, `reason=OK`, EXIT 0 (re-verified this session).
