@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T12:45:00Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T12:53:49Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -57,14 +57,14 @@
 
 **Reopen triggers (machine-checkable — Act ONLY when satisfied).** All four are `OPEN`. Do not act until the predicate is satisfied by a concrete evidence artifact in `research_state/`: `GATE4_BRANCH_1` (`fclr016_v5_terms_evidence_RESOLVED_*.json` with `status: RESOLVED_VERIFIED`, `fabricated: false`), `NEW_OBSERVED_LIQUIDATION_SOURCE` (`<source>_admissibility_audit_<UTC>.json` with `status: ADMISSIBLE`, `observed_labels: true`), `HL_LABEL_EXTENSION` (`hl_label_extension_audit_<UTC>.{md,json}`), `EXPANSION_ROBUSTNESS_REDO` (`expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`).
 
-**Verification record — 2026-11-16T12:45:00Z**
+**Verification record — 2026-11-16T12:53:49Z**
 
-- Maintenance session (not a heavy research session): fixed the false gate failure by allowing a new-style latest session with `evidence_audit_*` + a fresh quantitative artifact, while still resolving the complete carried-forward bundle. No sealed/frontier/registry mutation, no network, no new confirmatory estimand.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T115028Z`, `session_ok=True`, `missing=[]`, `root=500/500`, `reason=OK`, EXIT 0.
-- `python3 -m unittest tests.test_tracka_hardening_143`: **14 tests OK**, EXIT 0.
+- Maintenance session (not a heavy research session): assessed repo state, confirmed sole-handoff/campaign alignment, removed empty incomplete directory `research_state/session_20261116T125200Z` (bottleneck: stale empty session shell). No sealed/frontier/registry mutation, no network, no polling, no new confirmatory estimand.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T115028Z`, `latest_session_evidence.has_audit=true`, `has_new_quant=true`, `root_count=500/500`, `reason_code=OK`, EXIT 0.
+- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `reason_code=OK`, `actual_script_count=196`, `registry_script_count=196`, EXIT 0.
 - Prior heavy-session verification remains authoritative: `session_20261116T115028Z` completed with `independent_recompute_fclr011_20261116T115028Z.{json,md}` (`all_within_tolerance=true`), trigger check `NO_TRIGGER_FIRED`, five RCA families carried forward unmodified from `session_20261116T035833Z/` via `session_20261116T100533Z/`; full discovery suite completed 1354 tests, `OK (skipped=1)`, 344.264s, final EXIT 0 (captured in `session_20261116T115028Z/unittest_discover.txt`).
 - Root md/json count: **500/500** (at cap — all new artifacts must go to `research_state/session_<UTC>/`; no root-level additions).
-- Remaining external blocker: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation; cannot be resolved by the agent.
+- Remaining external blocker: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation; cannot be resolved by the agent. Next heavy session must produce `recompute_fclr009_<UTC>.{json,md}` in a new `research_state/session_<UTC>/` (or documented LIQ-010 fallback if an exact required FCLR-009 cache is missing).
 
 ## Tombstones (no authority)
 - `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
