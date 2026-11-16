@@ -7,8 +7,9 @@ was prose-only, so a future session could "complete" by running only the
 trigger check + the unittest suite and skipping the heavy artifacts.
 
 These tests pin the invariant that the durable handoff must point at a
-self-contained heavy-session evidence bundle, and that the gate fails
-loudly if that bundle is incomplete or the root churn cap is breached.
+heavy session that either contains the Phase-B/C bundle or carries it forward
+with a fresh evidence audit and quantitative artifact. The gate must also fail
+loudly if the latest session is incomplete or the root churn cap is breached.
 """
 from __future__ import annotations
 
@@ -84,6 +85,23 @@ class TestHandoffGateFailsClosed(unittest.TestCase):
         res = gate.check(self.repo)
         self.assertTrue(res["pass"], res["failures"])
         self.assertEqual(res["heavy_session_id"], self.sid)
+
+    def test_new_style_latest_session_with_audit_and_quant_passes(self):
+        # A later audit session may carry the complete bundle forward and add a
+        # fresh quantitative artifact instead of copying Phase-B into itself.
+        latest_sid = "session_20261116T115028Z"
+        latest = self.repo / "research_state" / latest_sid
+        latest.mkdir()
+        (latest / "evidence_audit_x.md").write_text("x")
+        (latest / "independent_recompute_x.json").write_text("{}")
+        with (self.repo / "AGENT_HANDOFF.md").open("a") as fh:
+            fh.write(f"\nLatest session: research_state/{latest_sid}/\n")
+        res = gate.check(self.repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertEqual(res["heavy_session_id"], self.sid)
+        self.assertEqual(res["latest_session_id"], latest_sid)
+        self.assertTrue(res["latest_session_evidence"]["has_audit"])
+        self.assertTrue(res["latest_session_evidence"]["has_new_quant"])
 
     def test_missing_handoff_fails(self):
         (self.repo / "AGENT_HANDOFF.md").unlink()

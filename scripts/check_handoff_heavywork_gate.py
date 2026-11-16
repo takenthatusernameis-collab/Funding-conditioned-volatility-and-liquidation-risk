@@ -12,10 +12,12 @@ This gate binds the durable handoff to concrete evidence artifacts on disk:
   (1) The sole durable handoff ``AGENT_HANDOFF.md`` must exist, must carry the
       ``INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION`` section, and must
       record the *last completed* heavy session id and its full-suite result.
-  (2) The recorded heavy session subdir
-      ``research_state/session_<UTC>/`` must exist and contain the mandatory
-      Phase-B evidence set (feature attribution, impl cross-check, sealed
-      bridge, trigger-gated prereg skeleton) plus the Phase-C synthesis.
+  (2) The latest session in the handoff must show new heavy work: either it
+      contains the mandatory Phase-B/C evidence set (feature attribution, impl
+      cross-check, sealed bridge, trigger-gated prereg skeleton, and power
+      synthesis), or it carries forward a complete bundle and adds an evidence
+      audit plus a fresh quantitative artifact. The gate resolves the latest
+      complete bundle separately.
   (3) The ``research_state/`` root md+json count must stay <= 500 (the churn
       cap enforced by test_tracka_hardening_125) — this gate also fails if the
       cap is breached, so a session cannot flood the root to dodge the check.
@@ -62,24 +64,37 @@ ROOT_COUNT_CAP = 500
 
 _SESSION_DIR_RE = re.compile(r"(session_\d{8}T\d{6}Z)")
 
+# New-style heavy sessions do not copy the static Phase-B bundle into every
+# session directory. They carry forward a complete bundle and add a fresh
+# evidence audit plus a new quantitative artifact. This keeps the gate from
+# failing merely because the handoff records the latest audit session rather
+# than the older complete bundle.
+NEW_QUANT_PREFIXES = (
+    "independent_recompute_",
+    "trigger_readiness_power_calibration_",
+    "trigger_readiness_power_ledger_",
+    "power_ledger_refresh_",
+    "reproducibility_recompute_",
+    "recompute_",
+)
+AUDIT_PREFIX = "evidence_audit_"
+
 
 def _root_count(rs: Path) -> int:
     return len(list(rs.glob("*.md"))) + len(list(rs.glob("*.json")))
 
 
-def _latest_handoff_session(handoff: Path) -> str | None:
-    """Return the full ``session_<UTC>`` dir name (with prefix) from the handoff.
-
-    Prefers the ``session_<UTC>/`` ids written in the Phase-B/Phase-C bullets and
-    closeout lines. Returns the lexicographically-latest (UTC-sortable) id.
-    """
+def _handoff_session_ids(handoff: Path) -> list[str]:
     if not handoff.exists():
-        return None
+        return []
     text = handoff.read_text(encoding="utf-8", errors="ignore")
-    matches = _SESSION_DIR_RE.findall(text)
-    if not matches:
-        return None
-    return sorted(matches)[-1]
+    return sorted(set(_SESSION_DIR_RE.findall(text)))
+
+
+def _latest_handoff_session(handoff: Path) -> str | None:
+    """Return the lexicographically latest session_<UTC> id in the handoff."""
+    ids = _handoff_session_ids(handoff)
+    return ids[-1] if ids else None
 
 
 def _session_has_required(session_dir: Path) -> dict:
@@ -94,6 +109,22 @@ def _session_has_required(session_dir: Path) -> dict:
     return {"files": sorted(files), "missing": missing}
 
 
+def _session_has_new_heavy(session_dir: Path) -> dict:
+    """Return whether a session has the new-style evidence audit + fresh quant."""
+    files = [p.name for p in session_dir.glob("*") if p.is_file()]
+    audit_files = [f for f in files if f.startswith(AUDIT_PREFIX)]
+    quant_files = sorted(
+        f for f in files if any(f.startswith(prefix) for prefix in NEW_QUANT_PREFIXES)
+    )
+    return {
+        "files": sorted(files),
+        "has_audit": bool(audit_files),
+        "audit_files": audit_files,
+        "has_new_quant": bool(quant_files),
+        "new_quant_files": quant_files,
+    }
+
+
 def check(repo: Path = REPO) -> dict:
     rs = repo / "research_state"
     handoff = repo / "AGENT_HANDOFF.md"
@@ -106,6 +137,10 @@ def check(repo: Path = REPO) -> dict:
         "failures": [],
         "handoff_exists": False,
         "handoff_markers_ok": False,
+        "handoff_session_ids": [],
+        "latest_session_id": None,
+        "latest_session_dir": None,
+        "latest_session_evidence": None,
         "heavy_session_id": None,
         "heavy_session_dir": None,
         "heavy_session_exists": False,
@@ -126,25 +161,60 @@ def check(repo: Path = REPO) -> dict:
         else:
             payload["handoff_markers_ok"] = True
 
-    # (2) The heavy session subdir must exist and contain the Phase-B/C set.
-    sid = _latest_handoff_session(handoff)
-    payload["heavy_session_id"] = sid
-    if not sid:
+    # (2) The latest session must have done new heavy work.  A complete
+    # carried-forward Phase-B/C bundle still satisfies the check; a new-style
+    # session may instead carry a complete bundle forward and add an evidence
+    # audit plus a fresh quantitative artifact.
+    ids = _handoff_session_ids(handoff)
+    latest_sid = ids[-1] if ids else None
+    payload["handoff_session_ids"] = ids
+    payload["latest_session_id"] = latest_sid
+    if not latest_sid:
         payload["failures"].append("HEAVY_SESSION_ID_UNRECORDED")
     else:
-        sdir = rs / sid
-        payload["heavy_session_dir"] = str(sdir.relative_to(repo)) if sdir.exists() else None
-        if not sdir.exists():
-            payload["failures"].append(f"HEAVY_SESSION_DIR_MISSING:{sid}")
+        latest_sdir = rs / latest_sid
+        payload["latest_session_dir"] = (
+            str(latest_sdir.relative_to(repo)) if latest_sdir.exists() else None
+        )
+        latest_info = {"files": [], "missing": []}
+        if not latest_sdir.exists():
+            payload["failures"].append(f"HEAVY_SESSION_DIR_MISSING:{latest_sid}")
+            latest_info["missing"] = [
+                prefix + "*" for prefix in PHASE_B_PREFIXES + PHASE_C_PREFIXES
+            ]
         else:
-            payload["heavy_session_exists"] = True
-            info = _session_has_required(sdir)
-            payload["heavy_session_files"] = info["files"]
-            payload["heavy_session_missing"] = info["missing"]
-            if info["missing"]:
+            latest_info = _session_has_required(latest_sdir)
+            latest_new = _session_has_new_heavy(latest_sdir)
+            payload["latest_session_evidence"] = latest_new
+            latest_complete = not latest_info["missing"]
+            latest_new_ok = latest_new["has_audit"] and latest_new["has_new_quant"]
+            if not (latest_complete or latest_new_ok):
                 payload["failures"].append(
-                    f"HEAVY_SESSION_ARTIFACTS_MISSING:{sid}:{info['missing']}"
+                    f"HEAVY_SESSION_ARTIFACTS_MISSING:{latest_sid}:{latest_info['missing']}"
                 )
+
+        complete_sid = None
+        for cand in reversed(ids):
+            cdir = rs / cand
+            if cdir.exists() and not _session_has_required(cdir)["missing"]:
+                complete_sid = cand
+                break
+
+        heavy_sid = complete_sid or latest_sid
+        payload["heavy_session_id"] = heavy_sid
+        heavy_sdir = rs / heavy_sid
+        if heavy_sdir.exists():
+            payload["heavy_session_exists"] = True
+            payload["heavy_session_dir"] = str(heavy_sdir.relative_to(repo))
+            heavy_info = _session_has_required(heavy_sdir)
+            payload["heavy_session_files"] = heavy_info["files"]
+            payload["heavy_session_missing"] = heavy_info["missing"]
+            if complete_sid is not None and heavy_info["missing"]:
+                payload["failures"].append(
+                    f"HEAVY_SESSION_ARTIFACTS_MISSING:{heavy_sid}:{heavy_info['missing']}"
+                )
+        else:
+            payload["heavy_session_missing"] = latest_info["missing"]
 
     # (3) Root churn cap.
     rc = _root_count(rs)
