@@ -1,0 +1,47 @@
+FULL UNITTEST DISCOVERY SUITE RESULTS
+Session: session_20261116T185811Z
+Date: 2026-11-16T19:08:17Z
+Command: python3 -m unittest discover -q
+
+SUMMARY:
+  Ran 1340 tests
+  Errors: 13 (all pre-existing: missing pyarrow/fastparquet modules)
+  Skipped: 9
+  Failures: 0
+  EXIT: 1 (due to missing optional dependency, not test failures)
+
+ERRORS (all pre-existing, unrelated to campaign code):
+  - tests.test_fclr_campaign_gate.TestBulkCacheCheck: 5 errors (pyarrow missing in _write_bulk_object)
+  - tests.test_fclr_fwd_vol_2025_disjoint_corrected_audit: 2 errors (setUpClass parquet read)
+  - tests.test_fclr_fwd_vol_2025_disjoint_reconcile: 2 errors (setUpClass parquet read)
+  - tests.test_fclr_liq_combined_admissibility_audit: 4 errors (setUp parquet write)
+
+CONFIRMATORY PROVENANCE GUARD REFUSALS (expected, not errors):
+  - confirmatory_provenance_fclr014 guard refused confirmatory-labeled runs
+  - on unprovenanced 2025+ cache windows (2025-08-01..2025-10-31)
+  - Terms evidence not RESOLVED_VERIFIED (EXPLICIT_BLOCKER_UNRESOLVED)
+  - Human/legal review required for terms evidence
+
+TARGETED UNITTESTS (previously run, all OK):
+  - test_active_campaign_gate: OK
+  - test_tracka_hardening_117: OK
+  - test_tracka_hardening_118: OK
+  - test_tracka_hardening_143: OK
+  - 52 tests total OK
+
+GATE RESULTS:
+  - check_handoff_heavywork_gate.py --json: PASS, reason_code=OK, root_count=500/500
+  - check_tracka_scope_registry_drift.py --json: PASS, 196/196 scripts
+
+REVERTED TRACKED FILE CHANGES:
+  - research_state/ironflow_fastpath_cache.json (test side effect, reverted via git checkout)
+
+SESSION FILES:
+  - trigger_check.json
+  - recompute_fclr006_20261116T185811Z.py
+  - recompute_fclr006_20261116T185811Z.json
+  - recompute_fclr006_20261116T185811Z.md
+  - evidence_audit_20261116T185811Z.md
+  - heavywork_gate.json
+  - scope_drift.json
+  - unittest_discover.txt

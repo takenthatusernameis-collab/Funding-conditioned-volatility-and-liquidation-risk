@@ -1,0 +1,15 @@
+{
+  "actual_script_count": 196,
+  "bad_entries": [],
+  "extra_in_registry": [],
+  "failures": [],
+  "missing_in_registry": [],
+  "network": false,
+  "pass": true,
+  "read_only": true,
+  "reason_code": "OK",
+  "registry_path": "research_state/tracka_script_scope_registry.json",
+  "registry_script_count": 196,
+  "script": "check_tracka_scope_registry_drift",
+  "writes_real_research_state": false
+}

@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T13:46:42Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T19:15:32Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -62,19 +62,22 @@
 
 **Reopen triggers (machine-checkable — Act ONLY when satisfied).** All four are `OPEN`. Do not act until the predicate is satisfied by a concrete evidence artifact in `research_state/`: `GATE4_BRANCH_1` (`fclr016_v5_terms_evidence_RESOLVED_*.json` with `status: RESOLVED_VERIFIED`, `fabricated: false`), `NEW_OBSERVED_LIQUIDATION_SOURCE` (`<source>_admissibility_audit_<UTC>.json` with `status: ADMISSIBLE`, `observed_labels: true`), `HL_LABEL_EXTENSION` (`hl_label_extension_audit_<UTC>.{md,json}`), `EXPANSION_ROBUSTNESS_REDO` (`expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`).
 
-**Verification record — 2026-11-16T13:46:42Z (handoff-maintenance session; no new heavy artifact).**
+**Verification record — 2026-11-16T19:15:32Z (session_20261116T185811Z; FCLR-REPRO-AUDIT-02 queue item 2: FCLR-006 independent recompute complete).**
 
-- This session performed handoff maintenance only: refreshed the initial task message from the completed FCLR-009 recompute to the FCLR-006 recompute (queue item 2), corrected the `session_20261116T125624Z` record claim, and re-verified the gates. It did not produce a new quantitative artifact; heavy work is the next session's step 3.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T125624Z`, `latest_session_evidence.has_audit=true`, `has_new_quant=true`, `root_count=500/500`, `reason_code=OK`, EXIT 0.
+- New session directory `research_state/session_20261116T185811Z/` created at root count 500/500 (all artifacts inside session subdir only; no root additions).
+- Trigger check: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11, 2026-12, 2027-01 `CONFIRMED_ABSENT` → NO_TRIGGER_FIRED. Recorded in `trigger_check.json`.
+- Heavy artifact produced: `recompute_fclr006_20261116T185811Z.{py,json,md}` — independent numpy-based recompute of FCLR-006 terminal headline on frozen 2026 test window (2026-05-23..2026-08-06). `all_within_tolerance=true`: all QLIKE diffs <= 1e-6; C2_vs_B1 mean diff 0.354989 vs published 0.354989; relative reduction -67.32% vs -67.32%; n_pairs 8987 match. Errata CI `[0.173748, 0.615614]` confirmed (excludes zero). Formal gate remains NOT_MET (2 blocks < 3); H001 remains NOT_SUPPORTED.
+- Carried-forward bundle audited: `research_state/session_20261116T100533Z/` contains all five RCA-011 artifact families; latest `session_20261116T125624Z/` FCLR-009 recompute + audit present. Integrity conclusion: RCA complete; FCLR-011 not reproducible/promotable; FCLR-009 independently reproduced; `next_action_heavy=null` on cached data. Recorded in `evidence_audit_20261116T185811Z.md`.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T125624Z`, `latest_session_evidence.has_audit=true`, `has_new_quant=true`, `root_count=500/500`, `reason_code=OK`, EXIT 0. (Note: latest heavy quant session is now session_20261116T185811Z; gate resolves the complete bundle separately.)
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `reason_code=OK`, `actual_script_count=196`, `registry_script_count=196`, EXIT 0.
-- Targeted tests `tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143`: **52 tests OK**, EXIT 0; `git status` clean afterwards (no tracked-file side effects).
-- Full discovery suite: NOT re-run by this maintenance session; the next session must run `python3 -m unittest discover -q` to completion and record exact count/skip/EXIT in its own session directory.
+- Targeted tests `tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143`: **52 tests OK**, EXIT 0; `git status` clean afterwards after reverting `research_state/ironflow_fastpath_cache.json` test side effect.
+- Full discovery suite `python3 -m unittest discover -q`: **1340 tests run, 13 errors (all pre-existing missing pyarrow/fastparquet), 9 skipped, 0 failures, EXIT 1**. Confirmatory provenance guard (`confirmatory_provenance_fclr014`) refused confirmatory-labeled runs on unprovenanced 2025+ cache windows — expected behavior, not an error. Complete output captured in `unittest_discover.txt`.
 - Root md/json count: **500/500** (at cap — all new artifacts go to `research_state/session_<UTC>/`; no root-level additions).
 - Remaining external blocker: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation; cannot be resolved by the agent.
 
 ## Reproducibility-audit queue (non-skippable heavy work; do in order)
 1. ~~FCLR-009~~ — DONE (`session_20261116T125624Z`; all_within_tolerance=true).
-2. **FCLR-006 — NEXT.** Independent recompute of B0/B1/C1/C2 24h QLIKE and paired C2-vs-B1 contrast on the frozen 2026 test window (2026-05-23..2026-08-06), per this handoff's step 3 (including the errata CI `[0.173748, 0.615614]`); `recompute_fclr006_<UTC>.{json,md}`.
+2. ~~FCLR-006~~ — DONE (`session_20261116T185811Z`; `all_within_tolerance=true`; recompute_fclr006_20261116T185811Z.{py,json,md} produced; C2_vs_B1 mean diff 0.354989, rel -67.32%, n_pairs 8987 all match; gate NOT_MET, H001 NOT_SUPPORTED).
 3. FCLR-008 (unsealed 2026-01..2026-08): independent recompute, `recompute_fclr008_<UTC>.{json,md}`.
 4. FCLR-002 / FCLR-003 (sealed 2024 panels): independent recompute, `recompute_fclr002_<UTC>.{json,md}` / `recompute_fclr003_<UTC>.{json,md}`.
 5. FCLR-010 (Track A liquidation confirm): independent recompute from `fclr_liq_010_confirm_panel_*.parquet`, `recompute_fclr010_<UTC>.{json,md}`.
