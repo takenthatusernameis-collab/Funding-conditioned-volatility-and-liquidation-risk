@@ -36,6 +36,7 @@
 **Heavy-work evidence on disk (authoritative).** The current self-contained bundle is `research_state/session_20261116T100533Z/`:
 - Carried forward unmodified from `session_20261116T035833Z/`: `rca011_feature_attribution_*` (funding increment **-342.67%**, EMA24 **+9.75%**, joint **-294.01%**), `rca011_impl_crosscheck_*` (OLS/lstsq agree ~1e-12–1e-17), `rca011_sealed_bridge_*` (sealed **+4.94%** vs clean recompute **-294.01%**; 120-row eligibility delta; sealed panel is an unavailable/LFS-pointer artifact), `prereg_template_trigger_gated_*`, `program_power_synthesis_*` (FCLR-011 fragile/non-promotable; `next_action_heavy=null`).
 - Latest heavy session (`session_20261116T115028Z/`): `independent_recompute_fclr011_20261116T115028Z.{json,md}` + `independent_recompute_fclr011.py` — offline, numpy-only, read-only third implementation path. Finding: all five FCLR-011 attribution contrasts reproduce sealed RCA011 QLIKE values to ~1e-8 and rel% to ~1e-6, far inside declared tolerance (QLIKE abs <= 1e-6; rel% <= 1e-3 pct-points); `all_within_tolerance=true`. Triple-confirms that the recompute degradation is not a numerical solver artifact and that the sealed +4.94% PASS is not reproducible; funding augmentation drives the recompute harm. Also `trigger_check.json` (one-time `NO_TRIGGER_FIRED`) and `evidence_audit_20261116T115028Z.md`.
+- Latest heavy session (`session_20261116T125624Z/`): `recompute_fclr009_20261116T125624Z.{py,json,md}` + `evidence_audit_20261116T125624Z.md` — independent numpy/pandas recompute of FCLR-009 (B0 0.367906 n=24648, B1 0.340756 n=24495, C1 0.339628, C2 0.342205; C2-vs-B1 mean diff 0.001449, rel -0.425%, CI [-0.003120, 0.006165], n_pairs 24495); `all_within_tolerance=true`. Corroborates the FCLR-009 NOT_MET terminal headline via a second independent code path (no LFS manifest dependency). Also the FCLR-009 reproducibility-audit queue kickoff.
 - Carried forward from `session_20261116T100533Z/`: `trigger_readiness_power_calibration_20261116T100533Z.{json,md}` and `trigger_readiness_power.py` — offline, stdlib-only design-power ledger. Finding: most historical windows were **underpowered** for the 2% materiality floor; only FCLR-009 (n=24,495, 6 blocks, MDE 1.95%) was adequately powered; the Track A liquidation recompute (n=593, MDE 8.88%) needs **~11,689 paired observations** for a 2% MDE. Per-trigger sample floors are now fixed before any outcome data exists.
 
 **Bottlenecks removed.**
@@ -57,14 +58,24 @@
 
 **Reopen triggers (machine-checkable — Act ONLY when satisfied).** All four are `OPEN`. Do not act until the predicate is satisfied by a concrete evidence artifact in `research_state/`: `GATE4_BRANCH_1` (`fclr016_v5_terms_evidence_RESOLVED_*.json` with `status: RESOLVED_VERIFIED`, `fabricated: false`), `NEW_OBSERVED_LIQUIDATION_SOURCE` (`<source>_admissibility_audit_<UTC>.json` with `status: ADMISSIBLE`, `observed_labels: true`), `HL_LABEL_EXTENSION` (`hl_label_extension_audit_<UTC>.{md,json}`), `EXPANSION_ROBUSTNESS_REDO` (`expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`).
 
-**Verification record — 2026-11-16T12:53:49Z**
+**Verification record — 2026-11-16T12:56:24Z**
 
-- Maintenance session (not a heavy research session): assessed repo state, confirmed sole-handoff/campaign alignment, removed empty incomplete directory `research_state/session_20261116T125200Z` (bottleneck: stale empty session shell). No sealed/frontier/registry mutation, no network, no polling, no new confirmatory estimand.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T115028Z`, `latest_session_evidence.has_audit=true`, `has_new_quant=true`, `root_count=500/500`, `reason_code=OK`, EXIT 0.
+- Heavy research session: produced `research_state/session_20261116T125624Z/recompute_fclr009_20261116T125624Z.{py,json,md}` — independent numpy/pandas recompute of FCLR-009 (the only adequately powered Track C null, n=24,495, 6 blocks, MDE 1.95%) from cached 2025 data with hardcoded frozen splits (no LFS manifest dependency). Result: B0 0.367906 (n=24,648), B1 0.340756 (n=24,495), C1 0.339628, C2 0.342205; C2-vs-B1 mean diff 0.001449, relative -0.425%, 95% CI [-0.003120, 0.006165], n_pairs 24,495. `all_within_tolerance=true`. Corroborates the FCLR-009 NOT_MET terminal headline via a second independent code path. No sealed artifact mutated.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T125624Z`, `latest_session_evidence.has_audit=true`, `has_new_quant=true`, `root_count=500/500`, `reason_code=OK`, EXIT 0.
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `reason_code=OK`, `actual_script_count=196`, `registry_script_count=196`, EXIT 0.
-- Prior heavy-session verification remains authoritative: `session_20261116T115028Z` completed with `independent_recompute_fclr011_20261116T115028Z.{json,md}` (`all_within_tolerance=true`), trigger check `NO_TRIGGER_FIRED`, five RCA families carried forward unmodified from `session_20261116T035833Z/` via `session_20261116T100533Z/`; full discovery suite completed 1354 tests, `OK (skipped=1)`, 344.264s, final EXIT 0 (captured in `session_20261116T115028Z/unittest_discover.txt`).
-- Root md/json count: **500/500** (at cap — all new artifacts must go to `research_state/session_<UTC>/`; no root-level additions).
-- Remaining external blocker: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation; cannot be resolved by the agent. Next heavy session must produce `recompute_fclr009_<UTC>.{json,md}` in a new `research_state/session_<UTC>/` (or documented LIQ-010 fallback if an exact required FCLR-009 cache is missing).
+- Targeted tests + full discovery suite: run and recorded under `research_state/session_20261116T125624Z/` (see `unittest_discover.txt`); exact count/skip/exit captured from the actual process exit.
+- Root md/json count: **500/500** (at cap — all new artifacts go to `research_state/session_<UTC>/`; no root-level additions).
+- Remaining external blocker: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation; cannot be resolved by the agent.
+
+## Reproducibility-audit queue (non-skippable heavy work; do in order)
+1. ~~FCLR-009~~ — DONE (`session_20261116T125624Z`).
+2. FCLR-006 (sealed 2026 May-Aug underpowered panel): independent recompute of B1/C1/C2 24h QLIKE from cached 2026 data, `recompute_fclr006_<UTC>.{json,md}`.
+3. FCLR-008 (unsealed 2026-01..2026-08): independent recompute, `recompute_fclr008_<UTC>.{json,md}`.
+4. FCLR-002 / FCLR-003 (sealed 2024 panels): independent recompute, `recompute_fclr002_<UTC>.{json,md}` / `recompute_fclr003_<UTC>.{json,md}`.
+5. FCLR-010 (Track A liquidation confirm): independent recompute from `fclr_liq_010_confirm_panel_*.parquet`, `recompute_fclr010_<UTC>.{json,md}`.
+6. FCLR-013 / FCLR-014 (2026 Q3 / 2025 H1 panels): independent recompute.
+
+A session that completes an item must (a) create a new `research_state/session_<UTC>/`, (b) emit a new quantitative artifact named per the queue, (c) write an evidence audit, (d) run all gates + full discovery suite to completion, (e) update this handoff's verification record and tick the queue item. Trigger check + tests alone is not completion. "No trigger → stop cleanly" is NOT completion.
 
 ## Tombstones (no authority)
 - `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.

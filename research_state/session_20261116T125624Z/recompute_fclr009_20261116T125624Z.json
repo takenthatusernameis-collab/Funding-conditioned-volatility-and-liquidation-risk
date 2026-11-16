@@ -1,0 +1,125 @@
+{
+  "session_utc": "20261116T125624Z",
+  "method": "independent numpy/pandas recompute; raw CSV load; hardcoded frozen splits; OLS via np.linalg.solve on log(y+eps) with raw predictors + intercept + 1e-12 ridge; canonical QLIKE; block bootstrap random.Random(12345) by date; no statsmodels, no network, read-only",
+  "data_cache": "research_state/data_cache",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "splits": {
+    "train": [
+      "2025-01-01 00:00:00+00:00",
+      "2025-04-05 23:00:00+00:00"
+    ],
+    "val": [
+      "2025-04-13 00:00:00+00:00",
+      "2025-05-31 23:00:00+00:00"
+    ],
+    "test": [
+      "2025-06-08 00:00:00+00:00",
+      "2025-12-31 23:00:00+00:00"
+    ]
+  },
+  "model_results": {
+    "B0": {
+      "test_qlike_mean": 0.3679059963327461,
+      "test_n": 24648
+    },
+    "B1": {
+      "test_qlike_mean": 0.3407563167079211,
+      "test_n": 24495
+    },
+    "C1": {
+      "test_qlike_mean": 0.33962786426517716,
+      "test_n": 24495
+    },
+    "C2": {
+      "test_qlike_mean": 0.342205409326571,
+      "test_n": 24495
+    }
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": 0.001449092618649951,
+      "rel_reduction_pct": -0.42525774214540507,
+      "ci_lo": -0.0031202350234405154,
+      "ci_hi": 0.006164742824817063,
+      "n_pairs": 24495
+    },
+    "C1_vs_B1": {
+      "mean_diff": -0.0011284524427438675,
+      "rel_reduction_pct": 0.3311611223075636,
+      "ci_lo": -0.004737888805169498,
+      "ci_hi": 0.0024400403186516464,
+      "n_pairs": 24495
+    },
+    "C2_vs_C1": {
+      "mean_diff": 0.0025775450613938185,
+      "rel_reduction_pct": -0.7589321526873613,
+      "ci_lo": -0.0014258655926938165,
+      "ci_hi": 0.006739122793640774,
+      "n_pairs": 24495
+    }
+  },
+  "comparison_to_published": {
+    "B0": {
+      "published_qlike": 0.367906,
+      "recomputed_qlike": 0.3679059963327461,
+      "abs_diff_qlike": 3.667253889449995e-09,
+      "published_n": 24648,
+      "recomputed_n": 24648,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "B1": {
+      "published_qlike": 0.340756,
+      "recomputed_qlike": 0.3407563167079211,
+      "abs_diff_qlike": 3.167079211108259e-07,
+      "published_n": 24495,
+      "recomputed_n": 24495,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "C1": {
+      "published_qlike": 0.339628,
+      "recomputed_qlike": 0.33962786426517716,
+      "abs_diff_qlike": 1.3573482282591698e-07,
+      "published_n": 24495,
+      "recomputed_n": 24495,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "C2": {
+      "published_qlike": 0.342205,
+      "recomputed_qlike": 0.342205409326571,
+      "abs_diff_qlike": 4.093265710269911e-07,
+      "published_n": 24495,
+      "recomputed_n": 24495,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "C2_vs_B1": {
+      "published_mean_diff": 0.001449,
+      "recomputed_mean_diff": 0.001449092618649951,
+      "abs_diff_mean_diff": 9.26186499510765e-08,
+      "published_rel_pct": -0.43,
+      "recomputed_rel_pct": -0.42525774214540507,
+      "abs_diff_rel_pct": 0.004742257854594922,
+      "published_ci_lo": -0.00312,
+      "recomputed_ci_lo": -0.0031202350234405154,
+      "published_ci_hi": 0.006165,
+      "recomputed_ci_hi": 0.006164742824817063,
+      "rel_within_tol": true,
+      "n_pairs_match": true
+    }
+  },
+  "tolerances": {
+    "qlike_abs": 1e-06,
+    "rel_pct_points": 0.01
+  },
+  "all_within_tolerance": true,
+  "conclusion": "Independent recompute reproduces all published FCLR-009 QLIKE values, n, and the C2-vs-B1 contrast (mean diff, relative reduction, CI, n_pairs) within declared tolerance. The FCLR-009 NOT_MET terminal headline is corroborated by an independent code path."
+}
