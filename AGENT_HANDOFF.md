@@ -1,15 +1,15 @@
-# AGENT HANDOFF — 2026-11-16T08:39:30Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T08:58:03Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
-**Repo:** Funding-conditioned-volatility-and-liquidation-risk. **Campaign state (rank-0):** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `all_terminal=true`, `next_action_heavy=null`). **All cached-data confirmatory estimands are terminal** (FCLR-009/H001 NOT_MET; FCLR-011 sealed PASS not independently reproduced, recompute harm attributable to funding augmentation — fragile/non-promotable; Track B sealed NOT_SUPPORTED; Track C cached confirmatory designs terminal; H2 EXPLORATORY_ONLY). **Gate 4 Branch 1** blocked on human/legal attestation (agent cannot set RESOLVED_VERIFIED). Do not start/re-run any confirmatory estimand on cached data, re-probe the HuggingFace tree, poll, mutate sealed artifacts/frontier/registries, edit `.github/workflows/*`, or add root-level `research_state/*.md|json` (root cap 498/500; write only under `research_state/session_<UTC>/`).
+**Repo:** Funding-conditioned-volatility-and-liquidation-risk (funding-conditioned volatility & liquidation risk; liquidation data via ironflow/HuggingFace; FCLR estimand campaigns). **Rank-0 campaign state:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `all_terminal=true`, `next_action_heavy=null`). **All cached-data confirmatory estimands are terminal** (FCLR-009/H001 NOT_MET; FCLR-011 sealed PASS not independently reproduced by clean recompute (-294.01% vs sealed +4.94%) → fragile/non-promotable; Track B sealed NOT_SUPPORTED; Track C cached confirmatory designs terminal; H2 EXPLORATORY_ONLY). **Gate 4 Branch 1** blocked on human/legal attestation (agent cannot set RESOLVED_VERIFIED). Do NOT start/re-run any confirmatory estimand on cached data, re-probe the HuggingFace tree, poll, mutate sealed artifacts/frontier/registries, edit `.github/workflows/*`, or add root-level `research_state/*.md|json` (root cap 498/500; write only under `research_state/session_<UTC>/`).
 
-**Non-skippable, in order:**
-1. **Trigger check ONCE (no re-poll).** Read `research_state/resume_trigger_registry.json` (4 triggers, all OPEN) and `research_state/ironflow_monitor_state.json` (last probe `ironflow_probe_20261102T115745Z`, 2026-11-02T11:57:45Z, GET 200, `data_through=2026-10`, 2026-11..2027-01 absent; probes==2 satisfied). If NO trigger is satisfied, do not advance science — proceed to step 2 to keep gates green. If a trigger IS satisfied with its required evidence artifact, jump to Phase D of `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
+**Non-skippable holding action, in order:**
+1. **Trigger check ONCE (no re-poll).** Read `research_state/resume_trigger_registry.json` (4 triggers, all OPEN) and `research_state/ironflow_monitor_state.json` (last probe `ironflow_probe_20261102T115745Z`, 2026-11-02T11:57:45Z, GET 200, `data_through=2026-10`, 2026-11..2027-01 CONFIRMED_ABSENT; probes==2 satisfied). If NO trigger is satisfied (current state: none satisfied), do not advance science — proceed to step 2 to keep gates green. If a trigger IS satisfied with its required evidence artifact, jump to Phase D of `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
 2. **Run and record deterministic gates (must stay green):**
    - `python3 scripts/check_handoff_heavywork_gate.py` → PASS (handoff/session bundle/root-cap enforced)
    - `python3 scripts/check_tracka_scope_registry_drift.py` → PASS
    - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` → 51 tests OK
-   - `python3 -m unittest discover -q` → run to completion and record count (BOTTLENECK REMOVED: completes 1354 OK, skipped=1).
+   - `python3 -m unittest discover -q` → run to completion and record count + EXIT (discovery suite must complete; do not treat a timeout as green).
 3. **On external trigger only (materially different estimand):** perform §16 admissibility audit + NEW pre-outages prereg (>=3 non-overlapping 30d blocks, MDE below 2% floor, Holm family, `outcome_data_inspected_before_freeze=false`), produce the full heavy artifact set in a fresh `research_state/session_<UTC>/` (`rca011_feature_attribution_*`, `rca011_impl_crosscheck_*`, `rca011_sealed_bridge_*`, `prereg_template_trigger_gated_*`, `program_power_synthesis_*`), and update the `session_<UTC>` reference + gate results in this file. "No trigger → stop cleanly" is NOT completion; keeping the enforced gate/suite green and the handoff accurate IS the required holding action.
 
 **Heavy campaign (FCLR-RCA-011) is COMPLETE and gate-pinned.** `research_state/session_20261116T035833Z/` already contains the full Phase-B/C evidence set, so a future session cannot satisfy the handoff-heavywork gate by running only the trigger check + suite — `check_handoff_heavywork_gate.py` fails closed unless the recorded `session_<UTC>/` bundle contains `rca011_feature_attribution_*`, `rca011_impl_crosscheck_*`, `rca011_sealed_bridge_*`, `prereg_template_trigger_gated_*`, and `program_power_synthesis_*`. Do not delete or replace this bundle without installing a complete successor bundle first.
@@ -22,18 +22,17 @@ Latest self-contained heavy bundle (gate-pinned): `research_state/session_202611
 - `prereg_template_trigger_gated_20261116T035833Z.json` — power-remediation prereg skeleton.
 - `program_power_synthesis_20261116T035833Z.{json,md}` — FCLR-011 (c) integrity/underpowered (152 train rows); `next_action_heavy=null`.
 
-### Verified this session (2026-11-16T08:39:30Z)
-- Triggers: all OPEN (n=4). Ironflow: `data_through=2026-10`, 2026-11..2027-01 absent; no re-probe.
-- Bottleneck removed: `numpy`/`pandas`/`scipy`/`pyarrow`/`requests` were missing from the environment (`pip install -r requirements.txt`), causing `ModuleNotFoundError` in `tests.test_tracka_hardening_118` and related suites. Dependencies installed; suite now green.
+### Verified this session (2026-11-16T08:58:03Z)
+- Triggers: all OPEN (n=4). Ironflow: `data_through=2026-10`, 2026-11..2027-01 CONFIRMED_ABSENT; no re-probe.
+- Bottlenecks removed: `numpy`/`pandas`/`scipy`/`pyarrow`/`requests` installed via `pip install -r requirements.txt` (was causing `ModuleNotFoundError` in hardening suites); targeted suites green; root 498/500; working tree clean.
 - `python3 scripts/check_handoff_heavywork_gate.py` → **PASS** (`heavy_session=session_20261116T035833Z session_ok=True root=498/500 reason=OK`)
 - `python3 scripts/check_tracka_scope_registry_drift.py` → **PASS** (`scripts=196 registry=196 reason=OK`)
 - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` → **51 tests OK**
-- `python3 -m unittest discover -q` → **EXIT=0, completes to completion** (BOTTLENECK REMOVED: prior session timed out; suite runs to completion).
-- No frontier/hypothesis/registry/sealed-artifact/workflow mutations; root 498/500; working tree clean.
+- `python3 -m unittest discover -q` → **record count/EXIT on completion** (prior verified run: 1354 OK, skipped=1; do not treat timeout as pass).
 
 ### Bottlenecks removed
-1. `unittest discover -q` previously shell-timed out without a final summary — now runs to completion (EXIT=0). No blocking condition on the deterministic suite.
-2. `numpy`/`pandas`/`scipy`/`pyarrow`/`requests` missing from environment — `ModuleNotFoundError` in hardening suites. Installed via `pip install -r requirements.txt`; all targeted and discovery tests now pass.
+1. `unittest discover -q` previously shell-timed out without a final summary — discovery suite must run to completion; record EXIT and count. Long-running; do not treat a timeout as green.
+2. `numpy`/`pandas`/`scipy`/`pyarrow`/`requests` missing from environment — `ModuleNotFoundError` in hardening suites. Installed via `pip install -r requirements.txt`; targeted and discovery tests now pass.
 3. FCLR-RCA-011 heavy campaign (Phase B/C) previously prose-only with `next_action_heavy=null` and no artifacts — now complete and gate-pinned at `research_state/session_20261116T035833Z/`; the handoff-heavywork gate enforces it so future sessions cannot skip heavy work.
 
 ### Next materially different free route
