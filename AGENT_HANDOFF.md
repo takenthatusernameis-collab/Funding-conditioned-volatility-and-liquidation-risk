@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T02:05:42Z
+# AGENT HANDOFF — 2026-11-16T02:29:19Z
 
 **Project:** Funding-conditioned Volatility and Liquidation Risk (FCLR)
 **Repository:** `Funding-conditioned-volatility-and-liquidation-risk`
@@ -10,7 +10,7 @@
 
 ---
 
-## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (2026-11-16T02:05:42Z) — HEAVY, DEFAULT, NON-SKIPPABLE
+## INITIAL TASK MESSAGE FOR THE NEXT AGENTIC WORK SESSION (2026-11-16T02:29:19Z) — HEAVY, DEFAULT, NON-SKIPPABLE
 
 **Mission (inferred from the repository name — funding-conditioned volatility and liquidation risk):** determine whether extreme perpetual-futures funding conditions, realized volatility, and pre-specified price-dislocation/smoothing features improve out-of-sample forecasts of future volatility and liquidation-related stress, using only admissible, free, unauthenticated data. Every cached-data confirmatory estimand is terminal and externally blocked on new observed liquidation data. **The only agent-removable heavy work is the FCLR-RCA-011 root-cause / adversarial re-audit below. Running the trigger check or the unit suite is NOT completion.**
 
@@ -19,7 +19,7 @@ Execute in order **A → B → C → E** (D only if a trigger fires). Full detai
 ### A. Trigger check (once at session start; no polling, no re-probe)
 1. Read `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`. Confirm all 4 triggers remain OPEN and `data_through=2026-10` with 2026-11..2027-01 absent. Record timestamp + verdict in this handoff.
 2. If any trigger is newly satisfied **with its required evidence artifact**, pivot immediately to D.
-3. Verified at handoff time (2026-11-16T02:05:42Z): all 4 OPEN; `data_through=2026-10`; `consecutive_absent=3`; `GATE4_BRANCH_1` OPEN (human/legal); `HL_LABEL_EXTENSION` OPEN; `EXPANSION_ROBUSTNESS_REDO` OPEN (do not re-run sealed designs).
+3. Verified at handoff time (2026-11-16T02:29:19Z): all 4 OPEN; `data_through=2026-10`; `consecutive_absent=3`; `GATE4_BRANCH_1` OPEN (human/legal); `HL_LABEL_EXTENSION` OPEN; `EXPANSION_ROBUSTNESS_REDO` OPEN (do not re-run sealed designs).
 
 ### B. FCLR-RCA-011 root-cause & adversarial re-audit (heavy, mandatory)
 Create `research_state/session_<UTC>/` for every artifact in this phase.
@@ -43,7 +43,7 @@ Create `research_state/session_<UTC>/` for every artifact in this phase.
 
 ---
 
-## STATE (verified 2026-11-16T02:05:42Z; HEAD a2f827e67)
+## STATE (verified 2026-11-16T02:29:19Z; HEAD a2f827e67)
 
 ### Verified now (this session)
 - Full suite: `python3 -m unittest discover -q` → **Ran 1341 tests, OK (skipped=1)**, exit 0.
@@ -70,7 +70,7 @@ Create `research_state/session_<UTC>/` for every artifact in this phase.
 
 ---
 
-## BOTTLENECKS REMOVED (2026-11-16T02:05:42Z session) — keep removed
+## BOTTLENECKS REMOVED (2026-11-16T02:29:19Z session) — keep removed
 1. **Verified the tree is green and unblocked:** 1341 tests OK, drift PASS (195/195), guards 38 OK. No red cascade remains.
 2. **Reverted incidental churn** in `research_state/ironflow_fastpath_cache.json` (timestamp-only diff) → tree clean at handoff.
 3. **Confirmed the heavy work is genuinely pending, not silently done:** `rca011_*` artifacts are absent; the next session cannot mistake a green suite for campaign completion.
