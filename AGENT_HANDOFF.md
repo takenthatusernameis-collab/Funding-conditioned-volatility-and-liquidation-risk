@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T11:50:28Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T12:00:37Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -53,10 +53,10 @@
 
 **Reopen triggers (machine-checkable — Act ONLY when satisfied).** All four are `OPEN`. Do not act until the predicate is satisfied by a concrete evidence artifact in `research_state/`: `GATE4_BRANCH_1` (`fclr016_v5_terms_evidence_RESOLVED_*.json` with `status: RESOLVED_VERIFIED`, `fabricated: false`), `NEW_OBSERVED_LIQUIDATION_SOURCE` (`<source>_admissibility_audit_<UTC>.json` with `status: ADMISSIBLE`, `observed_labels: true`), `HL_LABEL_EXTENSION` (`hl_label_extension_audit_<UTC>.{md,json}`), `EXPANSION_ROBUSTNESS_REDO` (`expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`).
 
-**Verification record — 2026-11-16T11:50:28Z**
+**Verification record — 2026-11-16T12:00:37Z**
 
 - Session: `session_20261116T115028Z` — new heavy artifact `independent_recompute_fclr011_20261116T115028Z.{json,md}` (offline, numpy-only, read-only third implementation path); evidence audit `evidence_audit_20261116T115028Z.md`; trigger check `trigger_check.{json,md}` (`NO_TRIGGER_FIRED`); five RCA families carried forward unmodified from `session_20261116T035833Z/` via `session_20261116T100533Z/`.
-- Trigger check at 2026-11-16T11:50:28Z: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied.
+- Trigger check at 2026-11-16T12:00:37Z: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied.
 - New quantitative artifact: independent numpy-only recomputation of the terminal FCLR-011 feature-attribution headline from the stored recompute panel (`research_state/session_20261116T0040Z/fclr011_recompute_panel_20261116T004150Z.parquet`, sha256 `41962f82…`). Result: `all_within_tolerance=true`; all five contrasts (funding −342.67%, ema24 +9.75%, joint −294.01%, ema24-over-funding +10.99%, funding-over-ema24 −336.55%) reproduce sealed RCA011 QLIKE to ~1e-8 and rel% to ~1e-6, inside declared tolerance (QLIKE abs ≤ 1e-6; rel% ≤ 1e-3 pct-points). Triple-confirms FCLR-011 NOT_REPRODUCED / fragile / non-promotable.
 - `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `session_ok=True`, `missing=[]`, `root=500/500`, `reason=OK`, EXIT 0 (captured in `session_20261116T115028Z/heavywork_gate.json`).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `scripts=196`, `registry=196`, `reason=OK`, EXIT 0 (captured in `session_20261116T115028Z/scope_drift.json`).
