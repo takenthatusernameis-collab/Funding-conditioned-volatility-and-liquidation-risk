@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T10:48:31Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T10:50:28Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -35,7 +35,7 @@
 - **New this session:** `trigger_readiness_power_calibration_20261116T100533Z.{json,md}` and `trigger_readiness_power.py` — offline, stdlib-only design-power ledger. Finding: most historical windows were **underpowered** for the 2% materiality floor; only FCLR-009 (n=24,495, 6 blocks, MDE 1.95%) was adequately powered; the Track A liquidation recompute (n=593, MDE 8.88%) needs **~11,689 paired observations** for a 2% MDE. Per-trigger sample floors are now fixed before any outcome data exists.
 - `trigger_check.json` — one-time trigger verdict (`NO_TRIGGER_FIRED`).
 
-**Bottlenecks removed this session.**
+**Bottlenecks removed.**
 - **Treadmill eliminated.** The prior handoff defined "heavy work" as re-auditing a static bundle and re-running gates, which any future session could repeat forever without new science. The gate is now a *floor*; completion requires a *new* `session_<UTC>/` with a *new* quantitative artifact (step 3).
 - **Design-on-trigger delay removed.** Sample-size/power is now precomputed per trigger, so a firing trigger executes an already-sized prereg instead of improvising one.
 - **Dependency bottleneck removed.** The readiness/reproducibility path is stdlib-only; it runs where `statsmodels` (not in `requirements.txt`) is absent. Do not add `statsmodels` to the core path.
@@ -52,9 +52,10 @@
 
 **Completion standard.** Completion requires a new `session_<UTC>/` containing: a one-time trigger check; a **new** quantitative artifact (power-ledger refresh or trigger execution or independent recomputation); an evidence-audit artifact; all four gate outputs captured there; a green heavy-work gate; a green scope-drift check; all targeted tests passing; the full discovery suite completed with its final EXIT recorded; root count at most 500; and this handoff updated with the new timestamp/results. A status-only session, a prose-only summary, a copied-bundle-only session, or a timeout is **not** completion.
 
-### Verification record — 2026-11-16T10:48:31Z
-- Trigger files read once at session start: all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied. The one-time trigger verdict was written to the untracked trigger-check output at UTC 2026-11-16T10:46:44Z.
-- **That trigger-check-only output is NOT completion:** it produced only a trigger check (no new quantitative artifact, no evidence audit, no gate run). A trigger-check-only session is explicitly not completion under the heavy-work mandate (step 3 / §31).
+### Verification record — 2026-11-16T10:50:28Z
+
+- Trigger files read once at session start (2026-11-16T10:46:44Z): all four triggers `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`; no trigger satisfied. One-time trigger-check output `trigger_check_20261116T104644Z.json` written to the untracked trigger-check directory at UTC 2026-11-16T10:46:44Z. Verdict: `NO_TRIGGER_FIRED`.
+- **That trigger-check-only output is NOT completion:** that directory contains only the trigger check (no new quantitative artifact, no evidence audit, no gate run). The session's `phase_b_note` planned an FCLR-009 recompute but produced none. A trigger-check-only session is explicitly not completion under the heavy-work mandate (step 3 / §31).
 - Last completed heavy session: `session_20261116T100533Z` — new heavy artifact `trigger_readiness_power_calibration_20261116T100533Z.{json,md}` (offline design-power ledger); evidence audit `evidence_audit_20261116T100533Z.md` present; five RCA families carried forward unmodified from `session_20261116T035833Z/`.
 - `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**, `heavy_session=session_20261116T100533Z`, `session_ok=True`, `missing=[]`, `root=498/500`, `reason=OK`, EXIT 0 (re-verified this session).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**, `scripts=196`, `registry=196`, `reason=OK`, EXIT 0 (re-verified this session).
