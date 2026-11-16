@@ -1,0 +1,78 @@
+{
+  "generated_utc": "2026-11-16T02:41:30Z",
+  "session": "20261116T023837Z",
+  "experiment": "FCLR-RCA-011 sealed-vs-recompute bridge (Phase B.5)",
+  "sealed_source": "research_state/evaluation_summary_FCLR-011.md",
+  "recompute_source": "research_state/session_20261116T0040Z/reproducibility_recompute_2026-11-16T00:45:10Z.json",
+  "recompute_panel": "research_state/session_20261116T0040Z/fclr011_recompute_panel_20261116T004150Z.parquet",
+  "recompute_eval": "research_state/session_20261116T0040Z/evaluation_summary_FCLR-011-RECOMPUTE-20261116T004150Z.{json,md}",
+  "test_window": "2026-05-08T00:00:00Z..2026-08-06T23:00:00Z (91 UTC days, 3x30d blocks)",
+  "contrasts": [
+    {
+      "contrast": "C2_vs_B1",
+      "sealed_rel_reduction_pct": 4.94,
+      "sealed_mean_diff_qlike": -0.016458,
+      "sealed_ci_95": [-0.032546, -0.001418],
+      "sealed_n_pairs": 10785,
+      "recomputed_rel_reduction_pct": -294.0072,
+      "recomputed_ci_95": null,
+      "recomputed_n_pairs": 10905,
+      "recomputed_pass": false,
+      "sign_sealed": "improving (C2 < B1)",
+      "sign_recomputed": "degrading (C2 >> B1)",
+      "delta_n_pairs": 120,
+      "verdict_consistent": false
+    },
+    {
+      "contrast": "C1_vs_B1",
+      "sealed_rel_reduction_pct": 1.36,
+      "sealed_mean_diff_qlike": -0.004526,
+      "sealed_ci_95": [-0.008260, -0.001111],
+      "sealed_n_pairs": 10785,
+      "recomputed_rel_reduction_pct": -342.6749,
+      "recomputed_ci_95": null,
+      "recomputed_n_pairs": 10905,
+      "recomputed_pass": false,
+      "sign_sealed": "improving (C1 < B1)",
+      "sign_recomputed": "degrading (C1 >> B1)",
+      "delta_n_pairs": 120,
+      "verdict_consistent": false
+    },
+    {
+      "contrast": "C2_vs_C1",
+      "sealed_rel_reduction_pct": 3.63,
+      "sealed_mean_diff_qlike": -0.011932,
+      "sealed_ci_95": [-0.027256, 0.001778],
+      "sealed_n_pairs": 10785,
+      "recomputed_rel_reduction_pct": 10.994,
+      "recomputed_ci_95": null,
+      "recomputed_n_pairs": 10905,
+      "recomputed_pass": false,
+      "sign_sealed": "improving (C2 < C1, CI crosses zero)",
+      "sign_recomputed": "improving (C2 < C1)",
+      "delta_n_pairs": 120,
+      "verdict_consistent": "sign_only_partial_magnitude_divergent"
+    }
+  ],
+  "coverage_differences": {
+    "paired_rows_sealed": 10785,
+    "paired_rows_recomputed": 10905,
+    "delta_rows": 120,
+    "instruments": 5,
+    "test_blocks": 3,
+    "test_window_identical": true,
+    "notes": "Same frozen split window and 5-symbol universe; recompute panel is rebuilt from cached klines/funding only with 10,905 common eligible paired rows vs 10,785 in sealed summary."
+  },
+  "gap_attribution": {
+    "premium_slot": "NOT_COMPUTABLE from cached 2026 archive in recompute (mark/index premium absent; C2 degrades to C1 + EMA24 distance). Sealed FCLR-011 notes state 'Mark/index premium not fully integrated where source missing; EMA distance computed from mark prices' yet sealed reported C2 vs B1 +4.94% — premium handling/availability is a prime suspect for sign/magnitude gap.",
+    "test_window": "Identical (2026-05-08..2026-08-06). Not the cause.",
+    "model_class": "Both intended as OLS on log(RV+eps) with train-only scaling and smearing back-transform per frozen design; recompute uses clean independent implementation (after fixing pre-scaling/missing z-cols and per-model smearing bugs). Residual gap after bug fixes indicates sealed result is not independently reproducible under the clean recompute pipeline given available cached inputs.",
+    "feature_contribution_signal": "In recompute, adding funding features to B1 (C1_vs_B1) and C2_vs_B1 are massively degrading while C2_vs_C1 is +10.99% improving — suggests EMA24 distance helps relative to funding-augmented C1 but funding augmentation itself is harmful OOS on this recompute; requires nested feature-attribution run on panel for formal decomposition (compute blocked in this environment).",
+    "overall_assessment": "Sealed FCLR-011 PASS (+4.94% C2 vs B1) is NOT independently reproduced and is fragile/non-promotable. Most plausible drivers: (i) missing/inconsistent premium slot between sealed and recompute, (ii) undocumented differences in feature construction/imputation or panel assembly in sealed path, (iii) sample eligibility differences (120-row delta). Implementation cross-check and nested attribution are required to fully disambiguate (pending env with numpy/pandas)."
+  },
+  "compute_status": {
+    "nested_feature_attribution": "PENDING — requires numpy/pandas/pyarrow and panel-based QLIKE/bootstrap computation (not installed in this environment)",
+    "implementation_crosscheck_statsmodels_qr_svd": "PENDING — requires numpy (and optionally statsmodels/scipy) not installed",
+    "sealed_panel_artifact_availability": "research_state/data_cache/fclr011_panel.json is Git-LFS pointer in repo state; sealed raw panel not directly loadable here"
+  }
+}

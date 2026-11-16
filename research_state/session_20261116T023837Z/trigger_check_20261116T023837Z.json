@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-11-16T02:40:53Z",
+  "session": "20261116T023837Z",
+  "method": "single read of research_state/resume_trigger_registry.json and research_state/ironflow_monitor_state.json (no polling, no re-probe)",
+  "triggers": {
+    "GATE4_BRANCH_1": {"status": "OPEN", "evidence": "no research_state/fclr016_v5_terms_evidence_RESOLVED_*.json with status RESOLVED_VERIFIED and fabricated=false; human/legal attestation required"},
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": {"status": "OPEN", "evidence": "ironflow monitor data_through 2026-10; no NEW_ADMISSIBLE_SOURCE artifact; 2026-11+ not available as admissible observed liquidation extension"},
+    "HL_LABEL_EXTENSION": {"status": "OPEN", "evidence": "no verified post-2026-10-31 observed ironflow labels/audit; parquet paths end at 2026-10"},
+    "EXPANSION_ROBUSTNESS_REDO": {"status": "OPEN", "evidence": "no NEW prereg meeting LOIO>=6/8 and placebo>95th; sealed designs not to be rerun"}
+  },
+  "ironflow_monitor": {
+    "last_check": "2026-11-02T05:59:46Z",
+    "last_probe_utc": "2026-11-02T11:57:45.019472+00:00",
+    "dataset": "ironflow/hyperliquid-liquidations",
+    "event_parquet_months_available": ["2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10"],
+    "fills_parquet_months_available": ["2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10"],
+    "data_through": "2026-10",
+    "months_2026_11_to_2027_01_confirmed_absent_as_available_data": true
+  },
+  "verdict": "NO_TRIGGER_FIRED",
+  "action": "Proceed with bounded hardening campaign (FCLR_HEAVY_CAMPAIGN_NEXT.md Phase B/C) on cached data; no trigger-gated advance."
+}

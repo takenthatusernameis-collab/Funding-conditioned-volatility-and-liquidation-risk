@@ -1,65 +1,40 @@
-# AGENT HANDOFF — 2026-11-16T02:33:10Z
+# AGENT HANDOFF — 2026-11-16T02:40:53Z (sole durable handoff)
 
-## What Changed & Why
-- **Repository audited**: Verified FCLR-009 protocol (`research_state/research_protocol_fclr009.md`), coverage audit (`fclr009_coverage_audit.json`), and frozen splits (`run_manifest.json#split_boundaries_fclr009`) all exist and are consistent.
-- **Critical gap identified**: FCLR-009 is PRE-REGISTERED (frozen before outcomes), SPLITS FROZEN, DATA VERIFIED (5 symbols × 365 days, 8760 common hourly timestamps, 12 non-overlapping 30-day blocks) — but **no evaluation artifact exists**. The confirmatory evaluation has never been run.
-- **Campaign status tool false negative**: `scripts/next_campaign_status.py` reports "no actionable pre-regs" because it maps tested windows to specific prior experiments (FCLR-FWD-VOL-2025-CROSS etc.), not to FCLR-009's distinct confirmatory design on the same 2025 panel.
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
+**Priority (repo: Funding-conditioned-volatility-and-liquidation-risk):** Execute the mandatory FCLR-RCA-011 heavy campaign on cached data (no triggers fired). Do **not** stop after trigger checks or unit tests alone.
 
-## Evidence Added / Verified
-| Artifact | Status | Key Content |
-|----------|--------|-------------|
-| `research_state/research_protocol_fclr009.md` | FROZEN v1.0 | Confirmatory test on unsealed 2025-01-01..2025-12-31 panel; 5 symbols; B0/B1/C1/C2 model family; primary contrast C2 vs B1 on 24h QLIKE; ≥2% relative reduction floor; Holm correction; block bootstrap 2000 reps; min 5 instruments + 3 non-overlapping 30d blocks |
-| `research_state/fclr009_coverage_audit.json` | COVERAGE_ONLY (no outcomes) | All 5 symbols: 365 mark files, 12 funding months, 0 missing days, 8760 common timestamps, SHA256 hashes per file |
-| `run_manifest.json#split_boundaries_fclr009` | FROZEN 2026-11-01T02:56Z | Train: 2025-01-01..2025-04-05; Val: 2025-04-13..2025-05-31; Test: 2025-06-08..2025-12-31 (206 days = 6 non-overlapping 30d blocks); 7d purge/embargo at boundaries; `frozen_before_outcomes: true` |
+1. **Install/ensure compute deps** in this environment (`pip install -r requirements.txt` and `statsmodels` if needed) so `numpy/pandas/pyarrow` imports and the full test suite can run. This is the current execution bottleneck.
+2. **Phase B (FCLR-RCA-011, write to `research_state/session_<UTC>/`, root is at capacity 498/500):**
+   - **Nested feature attribution:** on `research_state/session_20261116T0040Z/fclr011_recompute_panel_20261116T004150Z.parquet` (or fresh `python3 scripts/fclr011_recompute_audit.py --out-utc <UTC>`), estimate nested QLIKE for B1, B1+funding, B1+ema24, B1+funding+ema24 (C1,C2) with same train-only scaling, smearing, purge/embargo and paired block bootstrap. Decompose C2_vs_B1 degradation into funding-feature vs EMA24 contribution. Emit `rca011_feature_attribution_<UTC>.{json,md}`.
+   - **Implementation cross-check:** re-fit frozen design with independent OLS path (e.g. `statsmodels.OLS` or QR/SVD) to rule out `numpy.lstsq`/smearing artifacts. Emit `rca011_impl_crosscheck_<UTC>.json`.
+   - **Complete/extend sealed bridge:** `research_state/session_20261116T023837Z/rca011_sealed_bridge_20261116T023837Z.{json,md}` already tabulates sealed vs recompute contrasts and attributes gap (premium slot + 120-row eligibility delta; sealed not independently reproduced). Extend with attribution/cross-check findings and any panel-diff evidence if available.
+   - **Power remediation template:** `research_state/session_20261116T023837Z/prereg_template_trigger_gated_20261116T023837Z.json` exists (>=3 non-overlapping 30d blocks, MDE below 2% floor, Holm, `outcome_data_inspected_before_freeze=false`, §16 audit before freeze). Refine if RCA implies specific design constraints.
+3. **Phase C:** write/update `program_power_synthesis_<UTC>.{json,md}` in the session dir with RCA attribution — classify FCLR-011 as (a) true absence of skill, (b) underpowered/degenerate, or (c) feature/back-transform/artifact-driven — citing RCA artifacts. State honest `next_action_heavy`.
+4. **Regression gates (must be green):** `python3 -m unittest discover -q` (0 failures), `python3 scripts/check_tracka_scope_registry_drift.py` PASS, `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` PASS. Keep rank-0 TRIGGER_ONLY sentinel active; never mutate sealed artifacts; never edit `.github/workflows/*`.
+5. **Stop cleanly only** when trigger checked once (record verdict), Phase B RCA artifacts complete, Phase C synthesis updated, gates green, and this handoff updated with exact commands/results/blockers.
 
-## Current Gate States
-- **FCLR-H001 (24h volatility forecasting)**: `SPLITS_FROZEN_OUTCOMES_NOT_COMPUTED` — protocol frozen, splits frozen, data ready, **evaluation not executed**
-- **Track A (observed liquidations)**: `EXPLICIT_BLOCKER_UNRESOLVED` (Binance terms/legal) — not a prerequisite for Track C
-- **Track B (modeled boundary breach)**: Sealed `NOT_SUPPORTED`
-- **FCLR-008 (2026 Jan-Aug)**: `INCONCLUSIVE` (+4.30% but CI crosses zero) — sealed, not re-opened
-- **TRACKA-VOL-FAMILY (Hyperliquid 2026-05..2026-10)**: `NOT_MET` — sealed
+## Trigger check (performed once, 2026-11-16T02:40:53Z)
+- Sources: `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json` (no polling/re-probe). Artifact: `research_state/session_20261116T023837Z/trigger_check_20261116T023837Z.json`.
+- **Verdict: NO_TRIGGER_FIRED.** `GATE4_BRANCH_1` OPEN (human/legal). `NEW_OBSERVED_LIQUIDATION_SOURCE` OPEN. `HL_LABEL_EXTENSION` OPEN. `EXPANSION_ROBUSTNESS_REDO` OPEN.
+- Ironflow: `data_through=2026-10`; event/fill parquet months available through 2026-10; 2026-11..2027-01 not present as available data.
 
-## Single Highest-Value Next Task
-**Execute FCLR-009 confirmatory evaluation** on the frozen 2025 panel per the pre-registered protocol.
+## What changed this session & why
+- **Corrected stale/bottlenecked handoff:** prior handoff claimed FCLR-009 evaluation “never run”. Verified `research_state/evaluation_summary_FCLR-009.md` (2026-11-10T00:18:07Z) exists and is **NOT_MET** (C2 vs B1 -0.43%, 95% CI [-0.003120, 0.006165] crosses zero; 5 instruments, 6 non-overlapping 30d test blocks). **Do not re-run FCLR-009.** Reconciled direction to frontier rank-0 `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` and `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
+- **Phase B progress (cached, no outcomes fabricated):** authored `research_state/session_20261116T023837Z/rca011_sealed_bridge_20261116T023837Z.{json,md}` and `research_state/session_20261116T023837Z/prereg_template_trigger_gated_20261116T023837Z.json`; recorded `session_progress_20261116T023837Z.md`.
+- **Key integrity fact (from existing artifacts):** independent recompute (`session_20261116T0040Z/reproducibility_recompute_2026-11-16T00:45:10Z.json`) shows sealed FCLR-011 PASS **not independently reproduced** (C2_vs_B1 -294.01% vs sealed +4.94%; C1_vs_B1 -342.67%; C2_vs_C1 +10.99%; n_pairs 10,905 vs 10,785; same test window). Recompute premium slot not computable from cached 2026 archive (C2 degrades to C1+EMA24). FCLR-011 is fragile/non-promotable pending attribution/cross-check.
 
-### Exact Steps
-1. **Build the FCLR-009 panel** from cached 2025 data (`research_state/data_cache/` or equivalent) for symbols: BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT. Must include:
-   - Hourly mark-price klines (close → log returns → realized variance)
-   - Funding rates (signed, absolute, trailing 90-day percentile)
-   - Mark/index premium and mark/EMA24 distance
-   - Target: forward 24h realized variance (log(RV + 1e-12))
-2. **Apply frozen splits** exactly from `run_manifest.json#split_boundaries_fclr009` with 7-day purge/embargo
-3. **Fit models** (train-only normalization):
-   - B0: persistence (lagged RV24)
-   - B1: RV-HAR (log RV1h, RV24h, RV168h → log target)
-   - C1: B1 + signed funding + 90d abs-funding percentile
-   - C2: C1 + premium + EMA24 distance
-4. **Evaluate on test window** (2025-06-08..2025-12-31):
-   - Primary metric: paired out-of-sample QLIKE (C2 vs B1)
-   - Block bootstrap CI (24h blocks, 2000 reps, seed=12345)
-   - Holm correction across registered family
-5. **Gate decision**: MET iff C2 vs B1 shows ≥2% relative QLIKE reduction with 95% CI excluding zero on improving side, AND ≥5 instruments, AND ≥3 non-overlapping 30-day blocks
-6. **Emit artifacts**:
-   - `research_state/evaluation_summary_FCLR-009-<UTC>.md` (and .json)
-   - Update `run_manifest.json` with FCLR-009 run record
-   - Update `hypothesis_registry.json` (H_tracka_vol or FCLR-H001 entry)
-   - Update `experiment_frontier.json`
-   - Append to `final_confirmatory_verdict.md`
+## Current gate/program state (authoritative)
+- **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z`, status TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `all_terminal=true`, `next_action_heavy=null` (agent-removable heavy work = bounded RCA/hardening campaign in `FCLR_HEAVY_CAMPAIGN_NEXT.md`).
+- **FCLR-H001 / FCLR-009:** evaluation complete, **NOT_MET** (see `research_state/evaluation_summary_FCLR-009.md`); do not rerun.
+- **FCLR-011:** sealed PASS not independently reproduced (integrity finding); RCA pending.
+- **Track A:** no new admissible observed-liquidation data (ironflow through 2026-10). **Track B:** sealed NOT_SUPPORTED. **Track C:** terminal on cached confirmatory designs. **H2:** EXPLORATORY_ONLY, not promotable.
+- **Gate 4 Branch 1:** blocked on human/legal attestation (agent cannot set).
+- **Registries:** no run_manifest/hypothesis/frontier mutations made this session; FCLR-009 eval artifact exists but registry reconciliation should be done carefully/only if schema-consistent with evidence.
 
-### Verification Command
-```bash
-# After execution, verify artifacts exist:
-ls -la research_state/evaluation_summary_FCLR-009-*.md
-grep -c "FCLR-009" research_state/run_manifest.json
-grep "FCLR-H001\|H_tracka_vol" research_state/hypothesis_registry.json
-```
+## Blockers & commands/results
+- **Env blocker:** `numpy/pandas/pyarrow/statsmodels` absent (Python 3.12.3; `pip list` lacks them; `import numpy` fails). Prevents nested QLIKE attribution, implementation cross-check, and full suite.
+- **Attempted gates (partial):** `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118` → **Ran 38 tests, 6 errors, 0 assertion failures** (all `ModuleNotFoundError: No module named 'numpy'` via `scripts.coupled_robust_eval` import in `tests/test_tracka_hardening_118`). `discover -q` and drift check not fully green due to missing deps.
+- **State constraints:** `research_state/` root md/json = 498/500 (write new artifacts to `research_state/session_<UTC>/` only). Never edit `.github/workflows/*`. Never fabricate data/outcomes.
 
-## Blockers & Next Materially Different Free Route
-- **No data blocker**: 2025 full-year coverage verified (SHA256 hashes in audit)
-- **No code blocker**: All feature engineering, baselines, bootstrap, walk-forward evaluation exist in `src/`
-- **No credential blocker**: Fully cached, no network required
-- **If FCLR-009 gate NOT_MET**: Preserve null result; next task = pre-register robustness/falsification campaign on the sealed TRACKA-HL-EXPANSION PASS panel (per `experiment_frontier.json#next_action_heavy`) OR pre-register next admissible confirmatory cell on remaining untouched cached data
-- **Do NOT** re-run FCLR-008, TRACKA-VOL-FAMILY, or any sealed holdout
-
-## Per-Session Definition of Done (from RESEARCH_PROMPT.md §19)
-This session must deliver **one substantive, verifiable result**: the completed FCLR-009 confirmatory evaluation with all artifacts, or an explicit evidence-backed structural blocker (none currently exist) plus execution of the next valid independent task.
+## Next materially different free route (if RCA completes and no trigger fires)
+Hold TRIGGER_ONLY sentinel with green suite and finalized RCA/power synthesis documenting non-reproducible/fragile FCLR-011 and underpowered/terminal cached-data state. Advance only on a satisfied trigger with §16 admissibility audit + NEW pre-outcomes prereg (`outcome_data_inspected_before_freeze=false`), materially different estimand, >=3 non-overlapping 30d blocks, MDE below 2% floor, Holm family preregistered.
