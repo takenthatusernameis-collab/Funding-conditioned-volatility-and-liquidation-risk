@@ -40,10 +40,14 @@ Latest self-contained heavy bundle: `research_state/session_20261116T035833Z/` �
 - **Track A:** no new admissible observed-liquidation data (ironflow through 2026-10). **Track B:** sealed NOT_SUPPORTED. **Track C:** terminal on cached confirmatory designs. **H2:** EXPLORATORY_ONLY, not promotable.
 - **Gate 4 Branch 1:** blocked on human/legal attestation (agent cannot set RESOLVED_VERIFIED).
 
-### Blockers & commands/results (record exact output when you run)
-- **No open blockers.** Structural: all 4 resume triggers OPEN; no agent-removable confirmatory estimand on cached data.
-- **Verified this session:** `check_handoff_heavywork_gate.py` PASS (`root=498/500`, heavy_session=session_20261116T035833Z, session_ok=True); drift PASS (`scripts=196 registry=196`); guards+143 = 51 tests OK; root md+json = 498/500.
-- Full `discover -q` was last recorded green in the prior session (**1341 OK, skipped=1**). Re-run and record the new count here.
+### Blockers & commands/results (recorded 2026-11-16T05:04:21Z, session work)
+- **No open blockers.** Structural: all 4 resume triggers OPEN (`resume_trigger_registry.json`: n_triggers=4, all OPEN). `ironflow_monitor_state.json`: last probe `ironflow_probe_20261102T115745Z` (2026-11-02T11:57:45Z, GET 200), `data_through=2026-10` (events/fills 2025-05..2026-10 present), 2026-11..2027-01 absent. Probes==2 satisfied; **no re-probe performed**.
+- **Verified this session (exact):**
+  - `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] handoff-heavywork gate: handoff=True markers=True heavy_session=session_20261116T035833Z session_ok=True root=498/500 reason=OK`
+  - `python3 scripts/check_tracka_scope_registry_drift.py` → `[PASS] scope-registry drift: scripts=196 registry=196 reason=OK`
+  - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` → `Ran 51 tests in 0.453s` / `OK` (plus `Updated experiment_frontier.json` line from active-campaign gate)
+  - `python3 -m unittest discover -q` → **PENDING (running at handoff update time; see `research_state/session_20261116T035833Z/unittest_discover_20261116T045921Z.txt` / next-session run for final count).** Prior recorded: 1341 OK, skipped=1.
+- **Root churn:** `research_state/` root .md+.json = 498/500 (gate-enforced cap). Heavy artifacts written only under `research_state/session_20261116T035833Z/`.
 
 ### Next materially different free route
 Hold TRIGGER_ONLY with the gate green. Advance ONLY on a satisfied external trigger with §16 admissibility audit + NEW pre-outcomes prereg (materially different estimand, >=3 non-overlapping 30d blocks, MDE below 2% floor, Holm family). On advance, write a fresh `session_<UTC>/` heavy bundle (same artifact set the gate enforces) and update the `session_<UTC>` reference in this file.
