@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T22:02:02Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T22:06:35Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first)
 
@@ -17,19 +17,19 @@
 1. **Create `research_state/session_<UTC>/`** (actual UTC). `research_state/` root is **500/500** md/json (fail-closed cap); put ALL new artifacts inside the session subdirectory only.
 2. **Check triggers exactly once (no network, no polling).** Read files 1–2. Record timestamp, each trigger status, `data_through`, and post-2026-10 month classifications in the session dir. Current state: all four `OPEN`; Ironflow `data_through=2026-10`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. Do not re-probe HuggingFace or repeat later.
 3. **FCLR-008 independent recompute** (unsealed 2026-01..2026-08 volatility-forecast panel; **FCLR-009 and FCLR-006 are DONE — do NOT repeat**). Recompute independently from frozen protocol and cached 2026 data:
- - Protocol: `research_state/research_protocol_fclr008.md` (frozen). Published: `research_state/evaluation_summary_FCLR-008.md`.
- - Frozen splits (do not relax): train `2026-01-01T00:00:00Z..2026-03-17T23:00:00Z`; 7d embargo `2026-03-18..2026-03-24`; val `2026-03-25T00:00:00Z..2026-04-30T23:00:00Z`; 7d embargo `2026-05-01..2026-05-07`; test `2026-05-08T00:00:00Z..2026-08-06T23:00:00Z` (91 days, 3×30d blocks).
- - Universe: BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT. Data: `research_state/data_cache/{SYM}_2026_0{1,2,3,4,5,6,7,8}/` (markPriceKlines 1h, indexPriceKlines, premiumIndexKlines, fundingRate). Load earlier 2026 cache months if needed for lookbacks but respect frozen test boundary.
- - Models: B0 persistence (preceding RV24h); B1 HAR-style OLS on log RV1h/RV24h/RV168h; C1 = B1 + signed funding + past-only 90-day |funding| percentile; C2 = C1 + mark/index premium + mark/EMA24 distance. OLS on log(RV+1e-12); follow frozen protocol semantics. Primary contrast: C2 vs B1 on 24h QLIKE; secondary: C1 vs B1, C2 vs C1. Block bootstrap ~24h blocks, 2000 deterministic-seed replicates.
- - **Published values to reproduce:** B0 QLIKE `0.330127` (n=10800), B1 `0.333314` (n=10785), C1 `0.330164` (n=10785), C2 `0.318996` (n=10785). C2_vs_B1 mean diff `-0.014318` (95% CI `[-0.029938, 0.000524]`), rel reduction `4.30%`, paired n `10785`. C1_vs_B1 mean diff `-0.003150` (CI `[-0.010051, 0.003832]`), rel `0.94%`, n `10785`. C2_vs_C1 mean diff `-0.011168` (CI `[-0.026088, 0.002175]`), rel `3.38%`, n `10785`. Gate: **NOT_MET** (CI does not exclude zero).
- - **Tolerances:** QLIKE absolute `<= 1e-6`; mean diff absolute `<= 1e-6`; relative reduction `<= 0.01` percentage points (n must match where deterministic). Write `recompute_fclr008_<UTC>.{json,md}` + script in the session dir. Do **not** run canonical `scripts/run_evaluation.py` against tracked `evaluation_summary_FCLR-008.md`; use an independent path; never mutate sealed artifacts.
- - **Fallback only if required cache input missing:** record exact path/hash and instead recompute `FCLR-LIQ-010-CONFIRM` from `research_state/fclr_liq_010_confirm_panel_20261113T065953Z.parquet` (still heavy work). Missing fallback doc/prose alone is not completion.
+  - Protocol: `research_state/research_protocol_fclr008.md` (frozen). Published: `research_state/evaluation_summary_FCLR-008.md`.
+  - Frozen splits (do not relax): train `2026-01-01T00:00:00Z..2026-03-17T23:00:00Z`; 7d embargo `2026-03-18..2026-03-24`; val `2026-03-25T00:00:00Z..2026-04-30T23:00:00Z`; 7d embargo `2026-05-01..2026-05-07`; test `2026-05-08T00:00:00Z..2026-08-06T23:00:00Z` (91 days, 3×30d blocks).
+  - Universe: BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT. Data: `research_state/data_cache/{SYM}_2026_0{1,2,3,4,5,6,7,8}/` (markPriceKlines 1h, indexPriceKlines, premiumIndexKlines, fundingRate). Load earlier 2026 cache months if needed for lookbacks but respect frozen test boundary.
+  - Models: B0 persistence (preceding RV24h); B1 HAR-style OLS on log RV1h/RV24h/RV168h; C1 = B1 + signed funding + past-only 90-day |funding| percentile; C2 = C1 + mark/index premium + mark/EMA24 distance. OLS on log(RV+1e-12); follow frozen protocol semantics. Primary contrast: C2 vs B1 on 24h QLIKE; secondary: C1 vs B1, C2 vs C1. Block bootstrap ~24h blocks, 2000 deterministic-seed replicates.
+  - **Published values to reproduce:** B0 QLIKE `0.330127` (n=10800), B1 `0.333314` (n=10785), C1 `0.330164` (n=10785), C2 `0.318996` (n=10785). C2_vs_B1 mean diff `-0.014318` (95% CI `[-0.029938, 0.000524]`), rel reduction `4.30%`, paired n `10785`. C1_vs_B1 mean diff `-0.003150` (CI `[-0.010051, 0.003832]`), rel `0.94%`, n `10785`. C2_vs_C1 mean diff `-0.011168` (CI `[-0.026088, 0.002175]`), rel `3.38%`, n `10785`. Gate: **NOT_MET** (CI does not exclude zero).
+  - **Tolerances:** QLIKE absolute `<= 1e-6`; mean diff absolute `<= 1e-6`; relative reduction `<= 0.01` percentage points (n must match where deterministic). Write `recompute_fclr008_<UTC>.{json,md}` + script in the session dir. Do **not** run canonical `scripts/run_evaluation.py` against tracked `evaluation_summary_FCLR-008.md`; use an independent path; never mutate sealed artifacts.
+  - **Fallback only if required cache input missing:** record exact path/hash and instead recompute `FCLR-LIQ-010-CONFIRM` from `research_state/fclr_liq_010_confirm_panel_20261113T065953Z.parquet` (still heavy work). Missing fallback doc/prose alone is not completion.
 4. **Audit carried-forward evidence.** Confirm `research_state/session_20261116T100533Z/` has the five RCA-011 families and `session_20261116T125624Z/` (FCLR-009) + `session_20261116T185811Z/` (FCLR-006) recomputes/audits are present. Write concise evidence-audit artifact in session dir. Do not rerun FCLR-RCA-011/FCLR-009/FCLR-006.
 5. **Run and capture every required gate under the new session dir:**
- - `python3 scripts/check_handoff_heavywork_gate.py --json` — PASS (complete bundle + new session audit + fresh quant artifact, root <= 500).
- - `python3 scripts/check_tracka_scope_registry_drift.py --json` — PASS (register any new script in both scope registries).
- - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` — all pass.
- - `python3 -m unittest discover -q` — run to completion; record exact test count, skip count, final EXIT. Never treat timeout/monitor cap as green. Revert any timestamp-only side effect to tracked files.
+  - `python3 scripts/check_handoff_heavywork_gate.py --json` — PASS (complete bundle + new session audit + fresh quant artifact, root <= 500).
+  - `python3 scripts/check_tracka_scope_registry_drift.py --json` — PASS (register any new script in both scope registries).
+  - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` — all pass.
+  - `python3 -m unittest discover -q` — run to completion; record exact test count, skip count, final EXIT. Never treat timeout/monitor cap as green. Revert any timestamp-only side effect to tracked files.
 6. **Update only this handoff** after steps 3–5: replace timestamp/verification with actual results, advance queue (tick FCLR-008 if done), keep sole-handoff contract, bundle refs, blockers intact. Do not create another handoff file.
 
 **Trigger-gated science is the only scientific advance — but must be pre-powered.** If no trigger is satisfied, do not advance or re-run a confirmatory estimand; required holding action is the new FCLR-008 (or documented LIQ-010 fallback) reproducibility artifact + evidence audit + complete verification + accurate handoff update. If a trigger is satisfied, follow §16 admissibility/source audit first, freeze a pre-sized prereg before inspecting outcomes (use `session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json` and power floors in `session_20261116T100533Z/trigger_readiness_power_calibration_20261116T100533Z.md`: Gate4/TrackC `paired_n>=23224`, TrackA/expansion `paired_n>=11689`, >=3 blocks, 7d purge/embargo), require a materially different estimand, execute, register any new scripts in both scope registries, run all gates, and update frontier/hypothesis registries with an honest verdict.
@@ -86,15 +86,11 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
 
-## Verification record — 2026-11-16T22:02:02Z handoff refresh (maintenance; no new heavy research artifact produced)
+## Verification record — 2026-11-16T22:06:35Z handoff refresh (final durable task initialization)
 
-- Purpose: refreshed sole durable handoff to make **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) the unambiguous, non-skippable next task with embedded protocol/published values/tolerances; removed incomplete trigger-only `/` that broke gate resolution.
+- Purpose: initialized the sole durable handoff with unambiguous, non-skippable FCLR-008 independent recompute as the primary heavy task; embedded exact protocol, published values, tolerances, fallbacks, gates, and verification commands.
 - Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT` (from `research_state/resume_trigger_registry.json`, `research_state/ironflow_monitor_state.json`).
 - Inputs verified present: `research_state/research_protocol_fclr008.md`, `research_state/evaluation_summary_FCLR-008.md`, `research_state/data_cache/{BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}_2026_0{1..8}/`, fallback `research_state/fclr_liq_010_confirm_panel_20261113T065953Z.parquet`.
 - Session state: no empty session dirs; incomplete/non-counting dirs listed above.
 - Gates rechecked this refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (latest session resolving to `session_20261116T185811Z` evidence/new-quant context with complete bundle carried forward; root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). Targeted suite `tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` **52 tests OK, EXIT 0**.
-- Full `unittest discover -q` not rerun in this maintenance refresh (long-running); **mandatory in next heavy session** with recorded count/skip/EXIT. No new heavy quantitative artifact produced now.
-
-**Verification record — 2026-11-16T21:15:19Z handoff refresh (maintenance).** FCLR-008 primary; empty post-handoff dirs removed; gates PASS (heavy 100533Z, latest 185811Z), scope drift PASS (196/196), targeted 52 OK EXIT 0. No new heavy artifact.
-
-**Verification record — 2026-11-16T12:56:24Z session_20261116T125624Z (FCLR-009 recompute).** FCLR-009 reproduced `all_within_tolerance=true`; queue item 1 complete.
+- Full `unittest discover -q` not rerun in this initialization (long-running); **mandatory in next heavy session** with recorded count/skip/EXIT. No new heavy quantitative artifact produced now.
