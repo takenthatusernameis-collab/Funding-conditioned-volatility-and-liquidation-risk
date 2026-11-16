@@ -13,12 +13,15 @@ import sys
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
+from importlib.util import find_spec
 from pathlib import Path
 
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
+PARQUET_AVAILABLE = find_spec("pyarrow") is not None or find_spec("fastparquet") is not None
 
 
 def _mod():

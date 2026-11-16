@@ -18,6 +18,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "fclr_campaign_gate.py"
 
+try:
+    import pyarrow as pa  # noqa: F401
+    import pyarrow.parquet as pq  # noqa: F401
+except ImportError:
+    pa = None
+
 _spec = importlib.util.spec_from_file_location("fclr_campaign_gate", SCRIPT)
 gate = importlib.util.module_from_spec(_spec)
 assert _spec and _spec.loader
@@ -86,9 +92,6 @@ class GateTestCase(unittest.TestCase):
         """Seed the forward label months the Arm F presence check looks for."""
         cache = self.root / "research_state" / "data_cache" / "ironflow_bulk" / "liquidations"
         cache.mkdir(parents=True, exist_ok=True)
-        import pyarrow as pa
-        import pyarrow.parquet as pq
-
         table = pa.table({"timestamp": pa.array([1], type=pa.int64())})
         for month in ("2026-01", "2026-02", "2026-03", "2026-04"):
             pq.write_table(table, cache / f"{month}.parquet")
@@ -108,6 +111,7 @@ class TestBulkCacheCheck(GateTestCase):
         self.assertFalse(checks[0]["ok"])
         self.assertIn("ABSENT", checks[0]["detail"])
 
+    @unittest.skipIf(pa is None, "pyarrow unavailable")
     def test_complete_cache_passes(self):
         self._install_bulk_script()
         for dataset in gate.BULK_DATASETS:
@@ -116,6 +120,7 @@ class TestBulkCacheCheck(GateTestCase):
         checks = gate.check_bulk_cache(self.root)
         self.assertTrue(checks[0]["ok"], checks[0]["detail"])
 
+    @unittest.skipIf(pa is None, "pyarrow unavailable")
     def test_hash_mismatch_fails(self):
         self._install_bulk_script()
         for dataset in gate.BULK_DATASETS:
@@ -201,6 +206,7 @@ class TestFullGateExitCode(GateTestCase):
         self.assertEqual(code, 1)
         self.assertIn("0/", buf.getvalue())
 
+    @unittest.skipIf(pa is None, "pyarrow unavailable")
     def test_forward_arm_independent_of_consumed_arms(self):
         """Arm F must not be satisfied by the already-consumed Arm A/B artifacts."""
         self._install_bulk_script()
@@ -229,6 +235,7 @@ class TestFullGateExitCode(GateTestCase):
             f"unexpected Arm F failures: {failed}",
         )
 
+    @unittest.skipIf(pa is None, "pyarrow unavailable")
     def test_forward_arm_complete_passes(self):
         self._install_bulk_script()
         for dataset in gate.BULK_DATASETS:
@@ -245,6 +252,7 @@ class TestFullGateExitCode(GateTestCase):
         f = gate.run_arm_f(self.root)
         self.assertTrue(all(c["ok"] for c in f), f)
 
+    @unittest.skipIf(pa is None, "pyarrow unavailable")
     def test_forward_panel_hash_mismatch_fails(self):
         self._install_bulk_script()
         for dataset in gate.BULK_DATASETS:

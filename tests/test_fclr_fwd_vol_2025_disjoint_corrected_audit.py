@@ -19,6 +19,7 @@ import json
 import subprocess
 import sys
 import unittest
+from importlib.util import find_spec
 from pathlib import Path
 
 import numpy as np
@@ -29,6 +30,8 @@ RS = ROOT / "research_state"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import fclr_fwd_vol_2025_disjoint_corrected_audit as aud  # noqa: E402
+
+PARQUET_AVAILABLE = find_spec("pyarrow") is not None or find_spec("fastparquet") is not None
 
 OUT_UTC = "2026-11-15T00:12:56Z"
 PREREG = RS / f"prereg_fclr_fwd_vol_2025_disjoint_corrected_audit_{OUT_UTC}.json"
@@ -95,6 +98,8 @@ class TestFrozenPrereg(unittest.TestCase):
 class TestPanelIdentityAndLineage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not PARQUET_AVAILABLE:
+            raise unittest.SkipTest("parquet engine (pyarrow/fastparquet) unavailable")
         cls.panel = pd.read_parquet(PANEL)
         cls.panel["ts"] = pd.to_datetime(cls.panel["ts"])
         cls.lineage = aud.audit_lineage(cls.panel)
@@ -144,6 +149,8 @@ class TestSplitEmbargoAndCausality(unittest.TestCase):
 class TestFiniteRowMaskingDropOnly(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not PARQUET_AVAILABLE:
+            raise unittest.SkipTest("parquet engine (pyarrow/fastparquet) unavailable")
         cls.panel = pd.read_parquet(PANEL)
         cls.panel["ts"] = pd.to_datetime(cls.panel["ts"])
 

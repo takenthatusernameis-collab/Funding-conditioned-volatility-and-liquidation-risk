@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import sys
 import unittest
+from importlib.util import find_spec
 from pathlib import Path
 
 import numpy as np
@@ -28,6 +29,8 @@ RS = ROOT / "research_state"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import fclr_fwd_vol_2025_disjoint_reconcile as rec  # noqa: E402
+
+PARQUET_AVAILABLE = find_spec("pyarrow") is not None or find_spec("fastparquet") is not None
 
 PREREG = RS / "prereg_fclr_fwd_vol_2025_disjoint_reconcile_20261114T193000Z.json"
 PREREG_MD = RS / "prereg_fclr_fwd_vol_2025_disjoint_reconcile_20261114T193000Z.md"
@@ -87,6 +90,8 @@ class TestFrozenPrereg(unittest.TestCase):
 class TestPanelIdentityAndLineage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not PARQUET_AVAILABLE:
+            raise unittest.SkipTest("parquet engine (pyarrow/fastparquet) unavailable")
         cls.panel = pd.read_parquet(PANEL)
         cls.panel["ts"] = pd.to_datetime(cls.panel["ts"])
         cls.lineage = rec.audit_lineage(cls.panel)
@@ -129,6 +134,8 @@ class TestPanelIdentityAndLineage(unittest.TestCase):
 class TestCleanedPanelBuild(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not PARQUET_AVAILABLE:
+            raise unittest.SkipTest("parquet engine (pyarrow/fastparquet) unavailable")
         cls.panel = pd.read_parquet(PANEL)
         cls.panel["ts"] = pd.to_datetime(cls.panel["ts"])
         cls.cleaned, cls.report = rec.build_cleaned_panel(cls.panel)
