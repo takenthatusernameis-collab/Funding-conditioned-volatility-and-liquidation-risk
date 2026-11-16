@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T20:14:30Z (sole durable handoff; current next task FCLR-008 reproducibility recompute)
+# AGENT HANDOFF — 2026-11-16T20:59:36Z (sole durable handoff; current next task FCLR-008 reproducibility recompute)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -41,7 +41,7 @@
 - `session_20261116T115028Z/`: third numpy-only FCLR-011 crosscheck (`independent_recompute_fclr011_*`) confirming sealed PASS not reproducible; funding drives harm.
 - `session_20261116T140001Z/`: FCLR-006 attempt with `all_within_tolerance=false` (row-count/alignment discrepancy) — **superseded** by `session_20261116T185811Z`; do not treat as queue completion.
 
-**Bottlenecks removed (2026-11-16T20:06:45Z refresh; reaffirmed 2026-11-16T20:14:30Z).**
+**Bottlenecks removed (2026-11-16T20:59:36Z refresh; reaffirmed).**
 - **Stale primary target removed:** FCLR-006/FCLR-009 DONE; primary is **FCLR-008** (queue item 3) with explicit published values embedded above. `FCLR_HEAVY_CAMPAIGN_NEXT.md` aligned in this refresh to prevent rework.
 - **Stale/incomplete session ambiguity removed:** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only) are incomplete/superseded — must not be resumed, copied, or counted. `session_20261116T140001Z/` superseded by 185811Z. An empty incomplete session directory found in this refresh was removed.
 - **False gate failure / treadmill / design-on-trigger / dependency / handoff-authority / root-churn bottlenecks** remain resolved as before (gate accepts latest session with audit+fresh quant while resolving complete bundle; stdlib/numpy-only reproducibility path; no statsmodels in core; this file sole authority; root 500/500 session-only writes).
@@ -56,10 +56,15 @@
 
 **Reopen triggers (machine-checkable — Act ONLY when satisfied).** All four are `OPEN`. Do not act until the predicate is satisfied by a concrete evidence artifact in `research_state/`: `GATE4_BRANCH_1` (`fclr016_v5_terms_evidence_RESOLVED_*.json` with `status: RESOLVED_VERIFIED`, `fabricated: false`), `NEW_OBSERVED_LIQUIDATION_SOURCE` (`<source>_admissibility_audit_<UTC>.json` with `status: ADMISSIBLE`, `observed_labels: true`), `HL_LABEL_EXTENSION` (`hl_label_extension_audit_<UTC>.{md,json}`), `EXPANSION_ROBUSTNESS_REDO` (`expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`).
 
-**Verification record — 2026-11-16T20:14:30Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
+**Verification record — 2026-11-16T20:59:36Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
 - Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions (`session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` trigger-only; `session_20261116T140001Z/` superseded by 185811Z). FCLR-006/FCLR-009 remain DONE and must not be repeated.
 - Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
 - Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes, no new `research_state/session_*`, no targeted/full suite rerun (not required for handoff-only maintenance; full verification remains mandatory in next heavy session per contract).
+
+**Verification record — 2026-11-16T20:14:30Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
+- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions (`session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` trigger-only; `session_20261116T140001Z/` superseded by 185811Z). FCLR-006/FCLR-009 remain DONE and must not be repeated.
+- Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
+- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, audit+new_quant present, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; no targeted/full suite rerun in this maintenance refresh.
 
 **Verification record — 2026-11-16T20:06:45Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
 - Purpose: removed stale-target and stale-session bottlenecks so next session cannot avoid heavy work. `AGENT_HANDOFF.md` and `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` aligned: queue item 2 (FCLR-006) CLOSED via `session_20261116T185811Z` (`all_within_tolerance=true`); **queue item 3 (FCLR-008) is CURRENT TARGET** with explicit published values/tolerances. Incomplete/superseded sessions flagged: trigger-only `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/`, and tolerance-failed `session_20261116T140001Z/` (superseded by 185811Z) — not resumable/countable. An empty incomplete session dir was removed.
@@ -88,3 +93,5 @@ A session that completes an item must (a) create a new `research_state/session_<
 - `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore; this file is the sole durable handoff.
+
+(End of file - total 90 lines)
