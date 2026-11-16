@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T09:38:55Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T09:52:34Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 **Repo:** Funding-conditioned-volatility-and-liquidation-risk (funding-conditioned volatility & liquidation risk; liquidation data via ironflow/HuggingFace; FCLR estimand campaigns). **Rank-0 campaign state:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `all_terminal=true`, `next_action_heavy=null`). **All cached-data confirmatory estimands are terminal** (FCLR-009/H001 NOT_MET; FCLR-011 sealed PASS not independently reproduced by clean recompute (-294.01% vs sealed +4.94%) → fragile/non-promotable; Track B sealed NOT_SUPPORTED; Track C cached confirmatory designs terminal; H2 EXPLORATORY_ONLY). **Gate 4 Branch 1** blocked on human/legal attestation (agent cannot set RESOLVED_VERIFIED). Do NOT start/re-run any confirmatory estimand on cached data, re-probe the HuggingFace tree, poll, mutate sealed artifacts/frontier/registries, edit `.github/workflows/*`, or add root-level `research_state/*.md|json` (root cap 498/500; write only under `research_state/session_<UTC>/`).
@@ -22,8 +22,8 @@ Latest self-contained heavy bundle (gate-pinned): `research_state/session_202611
 - `prereg_template_trigger_gated_20261116T035833Z.json` — power-remediation prereg skeleton.
 - `program_power_synthesis_20261116T035833Z.{json,md}` — FCLR-011 (c) integrity/underpowered (152 train rows); `next_action_heavy=null`.
 
-### Verified this session (2026-11-16T09:30:40Z)
-- Triggers: all OPEN (n=4). Ironflow: `last_probe=ironflow_probe_20261102T115745Z` (2026-11-02T11:57:45Z, GET 200), `data_through=2026-10`, 2026-11..2027-01 CONFIRMED_ABSENT; probes==2 satisfied. No re-probe (reads only). **Re-verified 2026-11-16T09:38:55Z:** `resume_trigger_registry.json` still 4 triggers all OPEN; `ironflow_monitor_state.json` still `data_through=2026-10` with 2026-11/12 and 2027-01 CONFIRMED_ABSENT; no new files in the tree; `last_tree_change.changed=false`. No trigger satisfied → no science advance; holding action only.
+### Verified this session (2026-11-16T09:52:34Z)
+- Triggers: all OPEN (n=4). Ironflow: `last_probe=ironflow_probe_20261102T115745Z` (2026-11-02T11:57:45Z, GET 200), `data_through=2026-10`, 2026-11/12 and 2027-01 CONFIRMED_ABSENT; probes==2 satisfied. No re-probe (reads only). **Re-verified 2026-11-16T09:52:34Z:** `resume_trigger_registry.json` still 4 triggers all OPEN; `ironflow_monitor_state.json` still `data_through=2026-10` with 2026-11/12 and 2027-01 CONFIRMED_ABSENT; no new files in the tree; `last_tree_change.changed=false`. No trigger satisfied → no science advance; holding action only.
 - `python3 scripts/check_handoff_heavywork_gate.py` → **PASS** (`heavy_session=session_20261116T035833Z session_ok=True root=498/500 reason=OK`, EXIT=0)
 - `python3 scripts/check_tracka_scope_registry_drift.py` → **PASS** (`scripts=196 registry=196 reason=OK`, EXIT=0)
 - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` → **51 tests OK** (EXIT=0)
@@ -41,3 +41,5 @@ Hold TRIGGER_ONLY with gate+suite green. Advance ONLY on a satisfied external tr
 ## Tombstones (no authority)
 - `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
+
+(End of file - total 43 lines)
