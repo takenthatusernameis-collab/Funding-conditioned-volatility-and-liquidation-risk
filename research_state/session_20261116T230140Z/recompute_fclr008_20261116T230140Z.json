@@ -1,0 +1,159 @@
+{
+  "session_utc": "20261116T230140Z",
+  "method": "independent recompute; daily CSV load; hardcoded frozen splits from research_protocol_fclr008.md; OLS via numpy.linalg.lstsq on log(y+1e-12) with train-only standardized features (no intercept, zero-variance dropped); canonical QLIKE; block bootstrap random.Random(12345) by UTC day; no statsmodels, no network, no manifest/LFS dependency, read-only; features: funding_rate (resampled hourly by flooring to hour + last per hour + forward-fill), abs_funding, premium (premiumIndexKlines close), ema_dist (mark/ema24-1 with pandas ewm span=24 adjust=False)",
+  "data_cache": "research_state/data_cache",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "splits": {
+    "train": [
+      "2026-01-01 00:00:00+00:00",
+      "2026-03-17 23:00:00+00:00"
+    ],
+    "val": [
+      "2026-03-25 00:00:00+00:00",
+      "2026-04-30 23:00:00+00:00"
+    ],
+    "test": [
+      "2026-05-08 00:00:00+00:00",
+      "2026-08-06 23:00:00+00:00"
+    ]
+  },
+  "counts": {
+    "collected": 23520,
+    "train": 8280,
+    "val": 4440,
+    "test": 10800
+  },
+  "model_results": {
+    "B0": {
+      "test_qlike_mean": 6.616620221478094,
+      "test_n": 10800
+    },
+    "B1": {
+      "test_qlike_mean": 6.499482053560488,
+      "test_n": 10800
+    },
+    "C1": {
+      "test_qlike_mean": 6.468326362720546,
+      "test_n": 10800
+    },
+    "C2": {
+      "test_qlike_mean": 6.454879828869629,
+      "test_n": 10800
+    }
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": -0.04460222469085881,
+      "rel_reduction_pct": 0.6862427547811324,
+      "ci_lo": -0.0636257316422598,
+      "ci_hi": -0.025771563561743514,
+      "n_pairs": 10800
+    },
+    "C1_vs_B1": {
+      "mean_diff": -0.031155690839941113,
+      "rel_reduction_pct": 0.47935651769164717,
+      "ci_lo": -0.04316160069485931,
+      "ci_hi": -0.018819982237230394,
+      "n_pairs": 10800
+    },
+    "C2_vs_C1": {
+      "mean_diff": -0.013446533850917698,
+      "rel_reduction_pct": 0.20788273653622744,
+      "ci_lo": -0.025358894660540938,
+      "ci_hi": -0.002577176647890099,
+      "n_pairs": 10800
+    }
+  },
+  "comparison_to_published": {
+    "B0": {
+      "published_qlike": 0.330127,
+      "recomputed_qlike": 6.616620221478094,
+      "abs_diff_qlike": 6.286493221478094,
+      "published_n": 10800,
+      "recomputed_n": 10800,
+      "n_match": true,
+      "qlike_within_tol": false
+    },
+    "B1": {
+      "published_qlike": 0.333314,
+      "recomputed_qlike": 6.499482053560488,
+      "abs_diff_qlike": 6.166168053560488,
+      "published_n": 10785,
+      "recomputed_n": 10800,
+      "n_match": false,
+      "qlike_within_tol": false
+    },
+    "C1": {
+      "published_qlike": 0.330164,
+      "recomputed_qlike": 6.468326362720546,
+      "abs_diff_qlike": 6.138162362720546,
+      "published_n": 10785,
+      "recomputed_n": 10800,
+      "n_match": false,
+      "qlike_within_tol": false
+    },
+    "C2": {
+      "published_qlike": 0.318996,
+      "recomputed_qlike": 6.454879828869629,
+      "abs_diff_qlike": 6.135883828869629,
+      "published_n": 10785,
+      "recomputed_n": 10800,
+      "n_match": false,
+      "qlike_within_tol": false
+    },
+    "C2_vs_B1": {
+      "published_mean_diff": -0.014318,
+      "recomputed_mean_diff": -0.04460222469085881,
+      "abs_diff_mean_diff": 0.03028422469085881,
+      "published_rel_pct": 4.3,
+      "recomputed_rel_pct": 0.6862427547811324,
+      "abs_diff_rel_pct": 3.6137572452188675,
+      "published_ci_lo": -0.029938,
+      "recomputed_ci_lo": -0.0636257316422598,
+      "published_ci_hi": 0.000524,
+      "recomputed_ci_hi": -0.025771563561743514,
+      "rel_within_tol": false,
+      "n_pairs_match": false
+    },
+    "C1_vs_B1": {
+      "published_mean_diff": -0.00315,
+      "recomputed_mean_diff": -0.031155690839941113,
+      "abs_diff_mean_diff": 0.028005690839941113,
+      "published_rel_pct": 0.94,
+      "recomputed_rel_pct": 0.47935651769164717,
+      "abs_diff_rel_pct": 0.4606434823083528,
+      "published_ci_lo": -0.010051,
+      "recomputed_ci_lo": -0.04316160069485931,
+      "published_ci_hi": 0.003832,
+      "recomputed_ci_hi": -0.018819982237230394,
+      "rel_within_tol": false,
+      "n_pairs_match": false
+    },
+    "C2_vs_C1": {
+      "published_mean_diff": -0.011168,
+      "recomputed_mean_diff": -0.013446533850917698,
+      "abs_diff_mean_diff": 0.0022785338509176967,
+      "published_rel_pct": 3.38,
+      "recomputed_rel_pct": 0.20788273653622744,
+      "abs_diff_rel_pct": 3.1721172634637727,
+      "published_ci_lo": -0.026088,
+      "recomputed_ci_lo": -0.025358894660540938,
+      "published_ci_hi": 0.002175,
+      "recomputed_ci_hi": -0.002577176647890099,
+      "rel_within_tol": false,
+      "n_pairs_match": false
+    }
+  },
+  "tolerances": {
+    "qlike_abs": 1e-06,
+    "rel_pct_points": 0.01
+  },
+  "all_within_tolerance": false,
+  "conclusion": "Independent recompute diverged from published FCLR-008 values beyond tolerance; investigate feature construction / row eligibility / OLS details."
+}
