@@ -1,0 +1,187 @@
+{
+  "session_utc": "20261116T221127Z",
+  "method": "independent recompute; daily CSV load; hardcoded frozen splits from research_protocol_fclr008.md; OLS via deterministic Gaussian elimination on log(y+1e-12) with raw predictors + intercept + 1e-12 ridge; canonical QLIKE; block bootstrap random.Random(12345) by UTC day; no statsmodels, no network, no manifest/LFS dependency, read-only",
+  "data_cache": "research_state/data_cache",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "splits": {
+    "train": [
+      "2026-01-01 00:00:00+00:00",
+      "2026-03-17 23:00:00+00:00"
+    ],
+    "val": [
+      "2026-03-25 00:00:00+00:00",
+      "2026-04-30 23:00:00+00:00"
+    ],
+    "test": [
+      "2026-05-08 00:00:00+00:00",
+      "2026-08-06 23:00:00+00:00"
+    ],
+    "embargoes": [
+      "2026-03-18..2026-03-24 (7d)",
+      "2026-05-01..2026-05-07 (7d)"
+    ]
+  },
+  "counts": {
+    "collected": 23520,
+    "train": 8280,
+    "val": 4440,
+    "test": 10800
+  },
+  "model_results": {
+    "B0": {
+      "test_qlike_mean": 0.33012673825515837,
+      "test_n": 10800
+    },
+    "B1": {
+      "test_qlike_mean": 0.33331369829450647,
+      "test_n": 10785
+    },
+    "C1": {
+      "test_qlike_mean": 0.3287876012140791,
+      "test_n": 10785
+    },
+    "C2": {
+      "test_qlike_mean": 0.316855204715718,
+      "test_n": 10785
+    }
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": -0.01645849357878845,
+      "rel_reduction_pct": 4.937838937614317,
+      "ci_lo": -0.032545923853796795,
+      "ci_hi": -0.001418335481494875,
+      "n_pairs": 10785
+    },
+    "C1_vs_B1": {
+      "mean_diff": -0.004526097080427368,
+      "rel_reduction_pct": 1.3579091119226183,
+      "ci_lo": -0.008259633895194855,
+      "ci_hi": -0.001111395029196655,
+      "n_pairs": 10785
+    },
+    "C2_vs_C1": {
+      "mean_diff": -0.011932396498361081,
+      "rel_reduction_pct": 3.6292112154775875,
+      "ci_lo": -0.027256277190303446,
+      "ci_hi": 0.0017782933685970062,
+      "n_pairs": 10785
+    }
+  },
+  "gate": {
+    "primary_contrast": "C2_vs_B1",
+    "test_days": 91,
+    "n_blocks_30d": 3,
+    "instruments": 5,
+    "rel_reduction_pct": 4.937838937614317,
+    "rel_floor_pct": 2.0,
+    "ci_lo": -0.032545923853796795,
+    "ci_hi": -0.001418335481494875,
+    "ci_excludes_zero": true,
+    "paired_n": 10785,
+    "gate_met": true,
+    "verdict": "PASS"
+  },
+  "comparison_to_published": {
+    "B0": {
+      "published_qlike": 0.330127,
+      "recomputed_qlike": 0.33012673825515837,
+      "abs_diff_qlike": 2.6174484163421496e-07,
+      "published_n": 10800,
+      "recomputed_n": 10800,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "B1": {
+      "published_qlike": 0.333314,
+      "recomputed_qlike": 0.33331369829450647,
+      "abs_diff_qlike": 3.017054935328112e-07,
+      "published_n": 10785,
+      "recomputed_n": 10785,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "C1": {
+      "published_qlike": 0.330164,
+      "recomputed_qlike": 0.3287876012140791,
+      "abs_diff_qlike": 0.0013763987859209403,
+      "published_n": 10785,
+      "recomputed_n": 10785,
+      "n_match": true,
+      "qlike_within_tol": false
+    },
+    "C2": {
+      "published_qlike": 0.318996,
+      "recomputed_qlike": 0.316855204715718,
+      "abs_diff_qlike": 0.0021407952842820155,
+      "published_n": 10785,
+      "recomputed_n": 10785,
+      "n_match": true,
+      "qlike_within_tol": false
+    },
+    "C2_vs_B1": {
+      "published_mean_diff": -0.014318,
+      "recomputed_mean_diff": -0.01645849357878845,
+      "abs_diff_mean_diff": 0.002140493578788448,
+      "published_rel_pct": 4.3,
+      "recomputed_rel_pct": 4.937838937614317,
+      "abs_diff_rel_pct": 0.6378389376143172,
+      "published_ci_lo": -0.029938,
+      "recomputed_ci_lo": -0.032545923853796795,
+      "published_ci_hi": 0.000524,
+      "recomputed_ci_hi": -0.001418335481494875,
+      "published_n_pairs": 10785,
+      "recomputed_n_pairs": 10785,
+      "n_pairs_match": true,
+      "mean_diff_within_tol": false,
+      "rel_within_tol": false
+    },
+    "C1_vs_B1": {
+      "published_mean_diff": -0.00315,
+      "recomputed_mean_diff": -0.004526097080427368,
+      "abs_diff_mean_diff": 0.0013760970804273676,
+      "published_rel_pct": 0.94,
+      "recomputed_rel_pct": 1.3579091119226183,
+      "abs_diff_rel_pct": 0.41790911192261837,
+      "published_ci_lo": -0.010051,
+      "recomputed_ci_lo": -0.008259633895194855,
+      "published_ci_hi": 0.003832,
+      "recomputed_ci_hi": -0.001111395029196655,
+      "published_n_pairs": 10785,
+      "recomputed_n_pairs": 10785,
+      "n_pairs_match": true,
+      "mean_diff_within_tol": false,
+      "rel_within_tol": false
+    },
+    "C2_vs_C1": {
+      "published_mean_diff": -0.011168,
+      "recomputed_mean_diff": -0.011932396498361081,
+      "abs_diff_mean_diff": 0.0007643964983610804,
+      "published_rel_pct": 3.38,
+      "recomputed_rel_pct": 3.6292112154775875,
+      "abs_diff_rel_pct": 0.24921121547758762,
+      "published_ci_lo": -0.026088,
+      "recomputed_ci_lo": -0.027256277190303446,
+      "published_ci_hi": 0.002175,
+      "recomputed_ci_hi": 0.0017782933685970062,
+      "published_n_pairs": 10785,
+      "recomputed_n_pairs": 10785,
+      "n_pairs_match": true,
+      "mean_diff_within_tol": false,
+      "rel_within_tol": false
+    }
+  },
+  "tolerances": {
+    "qlike_abs": 1e-06,
+    "mean_diff_abs": 1e-06,
+    "rel_pct_points": 0.01
+  },
+  "all_within_tolerance": false,
+  "conclusion": "Independent recompute diverged from published FCLR-008 values beyond tolerance; investigate feature construction / row eligibility / OLS details."
+}

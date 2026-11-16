@@ -1,0 +1,88 @@
+{
+  "session_utc": "20261116T221127Z",
+  "check_timestamp_utc": "2026-11-16T22:11:27Z",
+  "method": "single read-only pass over resume_trigger_registry.json and ironflow_monitor_state.json; no network, no polling, no re-probe",
+  "trigger_registry": {
+    "generated_utc": "2026-11-16T11:46:26Z",
+    "n_triggers": 4,
+    "registry_version": 1,
+    "triggers": [
+      {
+        "trigger_id": "GATE4_BRANCH_1",
+        "status": "OPEN",
+        "priority": 1,
+        "do_not_act_until_satisfied": true,
+        "machine_predicate_type": "file_glob_with_fields",
+        "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json",
+        "required_fields": {"fabricated": false, "status": "RESOLVED_VERIFIED"},
+        "satisfied": false,
+        "notes": "Agent cannot create or mark RESOLVED_VERIFIED; human/legal attestation only."
+      },
+      {
+        "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+        "status": "OPEN",
+        "priority": 2,
+        "do_not_act_until_satisfied": true,
+        "machine_predicate_type": "file_exists_with_fields",
+        "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.{md,json}",
+        "required_fields": {"status": "ADMISSIBLE", "observed_labels": true, "unauthenticated": true},
+        "satisfied": false,
+        "notes": "No admissible observed liquidation source artifact present."
+      },
+      {
+        "trigger_id": "HL_LABEL_EXTENSION",
+        "status": "OPEN",
+        "priority": 3,
+        "do_not_act_until_satisfied": true,
+        "machine_predicate_type": "verified_label_extension",
+        "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}",
+        "required_fields": {"labels_after": "2026-10-31", "min_depth_days": 100, "observed_only": true, "venue": "hyperliquid_perpetuals"},
+        "satisfied": false,
+        "notes": "No verified post-2026-10-31 observed ironflow label extension artifact present."
+      },
+      {
+        "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+        "status": "OPEN",
+        "priority": 4,
+        "do_not_act_until_satisfied": true,
+        "machine_predicate_type": "newly_preregistered_design",
+        "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json",
+        "required_conditions": ["LOIO >= 6 of 8 subsets pass", "placebo/permutation: true effect > 95th percentile of null"],
+        "forbidden": "re-scoring the sealed 19.04% result",
+        "satisfied": false,
+        "notes": "Conditional, non-priority; no prereg + evaluation artifact present."
+      }
+    ],
+    "all_triggers_open": true,
+    "verdict": "NO_TRIGGER_FIRED"
+  },
+  "ironflow_monitor_state": {
+    "last_check": "2026-11-02T05:59:46Z",
+    "last_probe_ts": "20261102T150101Z",
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "tree_etag": "W/\\\"2d38-Kc/F0W06axChmsstn8w/P5kA414\\\"",
+    "post_2026_10_summary": {
+      "months_probed": ["2026-11", "2026-12", "2027-01"],
+      "any_available": false,
+      "available_months": []
+    },
+    "month_classifications": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    },
+    "resume_trigger": {
+      "campaign": "LIQUIDATION_FORWARD_VALIDATE_HEAVY-004i",
+      "generated_utc": "2026-11-02T15:01:03.263525+00:00",
+      "data_through": "2026-10",
+      "currently_fired": false
+    },
+    "last_quick_check": {
+      "timestamp_utc": "2026-11-11T01:55:25.976189+00:00",
+      "triggered": false,
+      "data_through": "2026-10"
+    }
+  },
+  "session_verdict": "NO_TRIGGER_FIRED — proceed with FCLR-008 independent recompute (queue item 3, heavy work). No confirmatory estimand on cached data may be advanced or re-run."
+}
