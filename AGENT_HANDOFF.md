@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T04:15:00Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-16T04:17:00Z (sole durable handoff; updated 2026-11-16T041658Z session)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 **Priority (repo: Funding-conditioned-volatility-and-liquidation-risk):** FCLR-RCA-011 bounded reproducibility/integrity campaign (B1/B2/B3/B4 + synthesis) is complete on cached data with no trigger fired. The session is **not** clean-finish until you (1) confirm the full regression suite is green end-to-end, (2) record the exact result in this handoff, and (3) hold `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY). Do not start a new confirmatory estimand, do not re-run concluded/sealed cells, do not mutate sealed artifacts, do not edit `.github/workflows/*`, do not fabricate data/outcomes.
@@ -15,7 +15,9 @@ python3 scripts/check_tracka_scope_registry_drift.py
 python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118
 python3 -m unittest discover -q
 ```
-**Recorded 2026-11-16T035833Z session:** drift PASS (`scripts=195 registry=195 reason=OK`). Targeted gate PASS: `Ran 38 tests in 0.393s` / `OK` (`tests.test_active_campaign_gate`, `tests.test_tracka_hardening_117`, `tests.test_tracka_hardening_118`). `python3 -m unittest discover -q` was started but **not confirmed complete** in that session's tool budget (long-running; no completion summary captured, no residual unittest process observed at handoff write). **Next session must run `discover -q` to completion and record pass/fail counts here.**
+**Recorded 2026-11-16T035833Z session:** drift PASS (`scripts=195 registry=195 reason=OK`). Targeted gate PASS: `Ran 38 tests in 0.393s` / `OK` (`tests.test_active_campaign_gate`, `tests.test_tracka_hardening_117`, `tests.test_tracka_hardening_118`).
+
+**Confirmed complete 2026-11-16T041658Z session:** `python3 -m unittest discover -q` → **`Ran 1341 tests in 264.001s` / `OK (skipped=1)`** — 0 failures, 0 errors. All three deterministic gates now green end-to-end: drift PASS, targeted guards PASS (38), full discover PASS (1341). No residual unittest process.
 
 ### Step 2 — RCA artifacts (done; read, do not redo unless inputs change)
 Written to `research_state/session_20261116T035833Z/` (root md/json unchanged this session except this handoff update):
@@ -31,11 +33,12 @@ Written to `research_state/session_20261116T035833Z/` (root md/json unchanged th
 ### Step 4 — update this handoff and stop cleanly
 After `discover -q` completes, update this file in place with exact command, pass/fail/skip/error counts, and any failures with evidence. If all gates green and no trigger: hold TRIGGER_ONLY, no commit required. If a trigger fires in a future session, follow §16 admissibility audit + NEW pre-outcomes prereg (template minima: >=3 non-overlapping 30d blocks, MDE < 2% floor, Holm family, `outcome_data_inspected_before_freeze=false`, 7d purge/embargo, materially different estimand).
 
-## What changed this session (2026-11-16T035833Z) & why
-- **Unblocked env:** `pip install -r requirements.txt statsmodels -q` succeeded; `deps OK` (numpy/pandas/pyarrow/scipy/statsmodels).
-- **Gates:** scope-registry drift PASS; targeted `active_campaign_gate`/`hardening_117`/`hardening_118` PASS (38 tests). Full `discover -q` not confirmed complete (see Step 1) — explicit bottleneck to close next session.
-- **Phase B completed:** B1 nested feature attribution, B2 statsmodels-vs-lstsq cross-check, B3 sealed bridge extension, B4 template adequacy confirmed. **Phase C completed:** program power synthesis with FCLR-011 classified as feature/artifact-driven integrity failure + unstable sparse train fit (not promotable, not independently reproduced).
-- No registries/run_manifests/hypotheses/frontier mutated; no sealed artifacts changed; no workflows touched.
+**CLOSED 2026-11-16T041658Z session:** `discover -q` completed to 1341 OK (skipped=1), 0 failures, 0 errors. All gates green. Trigger check re-confirmed: `research_state/resume_trigger_registry.json` (generated 2026-11-12T21:20:43Z) — GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO all **OPEN**; `research_state/ironflow_monitor_state.json` `data_through=2026-10`, 2026-11..2027-01 absent. **NO_TRIGGER_FIRED.** Hold `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY). No commit required; no new confirmatory estimand; no sealed artifacts mutated; no `.github/workflows/*` edits; no data/outcome fabrication.
+
+## What changed this session (2026-11-16T041658Z) & why
+- **Closed the last open blocker:** `python3 -m unittest discover -q` ran to completion → `Ran 1341 tests in 264.001s` / `OK (skipped=1)`, 0 failures, 0 errors. Combined with drift PASS (195/195) and targeted guards PASS (38), all deterministic gates are green end-to-end.
+- **Trigger re-check (once, no re-probe):** resume_trigger_registry (4 triggers, all OPEN) + ironflow_monitor_state (`data_through=2026-10`, 2026-11..2027-01 absent) → **NO_TRIGGER_FIRED**.
+- No RCA/synthesis work required this session — Phase B/C artifacts from 2026-11-16T035833Z are complete and unchanged. No registries, manifests, hypotheses, or frontier mutated; no sealed artifacts changed; no workflows touched; no commit made.
 
 ## Current gate/program state (authoritative)
 - **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z`, TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `all_terminal=true`, `next_action_heavy=null`.
@@ -45,9 +48,9 @@ After `discover -q` completes, update this file in place with exact command, pas
 - **Gate 4 Branch 1:** blocked on human/legal attestation.
 
 ## Blockers & commands/results
-- **Open blocker:** `python3 -m unittest discover -q` completion unconfirmed this session — rerun to completion and record counts (Step 1).
+- **No open blockers.** The prior `discover -q` completion blocker is closed (1341 OK, skipped=1).
 - **Structural (external):** all resume triggers OPEN; no agent-removable confirmatory estimand on cached data.
-- **State constraints:** `research_state/` root md/json at/near capacity (498/500 noted previously) — write new artifacts to `research_state/session_<UTC>/` only. Never edit `.github/workflows/*`. Never fabricate data/outcomes.
+- **State constraints:** `research_state/` root md/json count must stay <= 500 — write new artifacts to `research_state/session_<UTC>/` only. Never edit `.github/workflows/*`. Never fabricate data/outcomes.
 
 ## Next materially different free route
 Hold TRIGGER_ONLY with fully green suite and finalized RCA/synthesis. Advance only on a satisfied external trigger with §16 admissibility audit + NEW pre-outcomes prereg (materially different estimand, >=3 non-overlapping 30d blocks, MDE below 2% floor, Holm family preregistered).
