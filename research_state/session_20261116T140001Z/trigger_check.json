@@ -1,0 +1,23 @@
+{
+  "timestamp_utc": "2026-11-16T13:58:36Z",
+  "method": "read-only local file read, once; no network, no HuggingFace probe, no polling",
+  "files_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "triggers": {
+    "GATE4_BRANCH_1": "OPEN",
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": "OPEN",
+    "HL_LABEL_EXTENSION": "OPEN",
+    "EXPANSION_ROBUSTNESS_REDO": "OPEN"
+  },
+  "ironflow": {
+    "data_through": "2026-10",
+    "post_2026_10_months": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    }
+  },
+  "verdict": "NO_TRIGGER_FIRED"
+}
