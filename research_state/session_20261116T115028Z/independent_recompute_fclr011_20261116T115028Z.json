@@ -1,0 +1,138 @@
+{
+  "session_utc": "2026-11-16T11:50:28Z",
+  "method": "numpy-only OLS (np.linalg.lstsq) + train-only z-scaling (ddof=0) + Duan smearing; no statsmodels; read-only",
+  "panel_path": "research_state/session_20261116T0040Z/fclr011_recompute_panel_20261116T004150Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "sealed_reference": "research_state/session_20261116T100533Z/rca011_feature_attribution_20261116T035833Z.json",
+  "train_window": [
+    "2026-01-01 00:00:00+00:00",
+    "2026-03-17 23:00:00+00:00"
+  ],
+  "test_window": [
+    "2026-05-08 00:00:00+00:00",
+    "2026-08-06 23:00:00+00:00"
+  ],
+  "purge_days": 7,
+  "target": "target_rv24h",
+  "models": {
+    "B1": {
+      "qlike_test": 0.5631926708894541,
+      "n_train": 152,
+      "n_test": 10905,
+      "smear": 4.20412648086586
+    },
+    "B1_plus_funding": {
+      "qlike_test": 2.493112362971524,
+      "n_train": 152,
+      "n_test": 10905,
+      "smear": 3.357050020165655
+    },
+    "B1_plus_ema24": {
+      "qlike_test": 0.508304272725866,
+      "n_train": 152,
+      "n_test": 10905,
+      "smear": 4.2703696599809655
+    },
+    "B1_plus_funding_plus_ema24": {
+      "qlike_test": 2.2190198425480196,
+      "n_train": 152,
+      "n_test": 10905,
+      "smear": 2.849825900755691
+    }
+  },
+  "contrasts_recomputed": {
+    "B1_plus_funding_vs_B1": {
+      "qlike_a": 2.493112362971524,
+      "qlike_b": 0.5631926708894541,
+      "rel_pct": -342.67485921543226
+    },
+    "B1_plus_ema24_vs_B1": {
+      "qlike_a": 0.508304272725866,
+      "qlike_b": 0.5631926708894541,
+      "rel_pct": 9.745936160160344
+    },
+    "B1_plus_funding_plus_ema24_vs_B1": {
+      "qlike_a": 2.2190198425480196,
+      "qlike_b": 0.5631926708894541,
+      "rel_pct": -294.0072300734145
+    },
+    "B1_plus_funding_plus_ema24_vs_B1_plus_funding": {
+      "qlike_a": 2.2190198425480196,
+      "qlike_b": 2.493112362971524,
+      "rel_pct": 10.993989861604764
+    },
+    "B1_plus_funding_plus_ema24_vs_B1_plus_ema24": {
+      "qlike_a": 2.2190198425480196,
+      "qlike_b": 0.508304272725866,
+      "rel_pct": -336.5534506818441
+    }
+  },
+  "comparison": {
+    "B1_plus_funding_vs_B1": {
+      "sealed_qlike_a": 2.493112370884653,
+      "recomputed_qlike_a": 2.493112362971524,
+      "abs_diff_qlike_a": 7.913129262959728e-09,
+      "sealed_qlike_b": 0.5631926700670037,
+      "recomputed_qlike_b": 0.5631926708894541,
+      "abs_diff_qlike_b": 8.224504410847544e-10,
+      "sealed_rel_pct": -342.6748612669346,
+      "recomputed_rel_pct": -342.67485921543226,
+      "abs_diff_rel_pct": 2.051502349331713e-06,
+      "within_tolerance": true
+    },
+    "B1_plus_ema24_vs_B1": {
+      "sealed_qlike_a": 0.5083042717602884,
+      "recomputed_qlike_a": 0.508304272725866,
+      "abs_diff_qlike_a": 9.65577617861868e-10,
+      "sealed_qlike_b": 0.5631926700670037,
+      "recomputed_qlike_b": 0.5631926708894541,
+      "abs_diff_qlike_b": 8.224504410847544e-10,
+      "sealed_rel_pct": 9.745936199806222,
+      "recomputed_rel_pct": 9.745936160160344,
+      "abs_diff_rel_pct": 3.96458776918962e-08,
+      "within_tolerance": true
+    },
+    "B1_plus_funding_plus_ema24_vs_B1": {
+      "sealed_qlike_a": 2.219019849947922,
+      "recomputed_qlike_a": 2.2190198425480196,
+      "abs_diff_qlike_a": 7.3999024685633685e-09,
+      "sealed_qlike_b": 0.5631926700670037,
+      "recomputed_qlike_b": 0.5631926708894541,
+      "abs_diff_qlike_b": 8.224504410847544e-10,
+      "sealed_rel_pct": -294.00723196271764,
+      "recomputed_rel_pct": -294.0072300734145,
+      "abs_diff_rel_pct": 1.8893031210609479e-06,
+      "within_tolerance": true
+    },
+    "B1_plus_funding_plus_ema24_vs_B1_plus_funding": {
+      "sealed_qlike_a": 2.219019849947922,
+      "recomputed_qlike_a": 2.2190198425480196,
+      "abs_diff_qlike_a": 7.3999024685633685e-09,
+      "sealed_qlike_b": 2.493112370884653,
+      "recomputed_qlike_b": 2.493112362971524,
+      "abs_diff_qlike_b": 7.913129262959728e-09,
+      "sealed_rel_pct": 10.993989847295667,
+      "recomputed_rel_pct": 10.993989861604764,
+      "abs_diff_rel_pct": 1.4309096130205035e-08,
+      "within_tolerance": true
+    },
+    "B1_plus_funding_plus_ema24_vs_B1_plus_ema24": {
+      "sealed_qlike_a": 2.219019849947922,
+      "recomputed_qlike_a": 2.2190198425480196,
+      "abs_diff_qlike_a": 7.3999024685633685e-09,
+      "sealed_qlike_b": 0.5083042717602884,
+      "recomputed_qlike_b": 0.508304272725866,
+      "abs_diff_qlike_b": 9.65577617861868e-10,
+      "sealed_rel_pct": -336.5534529669252,
+      "recomputed_rel_pct": -336.5534506818441,
+      "abs_diff_rel_pct": 2.2850811092212098e-06,
+      "within_tolerance": true
+    }
+  },
+  "tolerances": {
+    "qlike_abs": 1e-06,
+    "rel_pct_points": 0.001
+  },
+  "all_within_tolerance": true,
+  "conclusion": "Independent numpy-only recomputation reproduces the sealed RCA011 feature-attribution QLIKE values and contrasts within declared tolerance; the terminal FCLR-011 NOT_REPRODUCED / fragile finding is confirmed by a third independent implementation path."
+}

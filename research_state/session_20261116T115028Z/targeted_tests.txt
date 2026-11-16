@@ -1,0 +1,74 @@
+test_evaluation_artifacts_exist_for_both_arms (tests.test_active_campaign_gate.TestActiveCampaignGate.test_evaluation_artifacts_exist_for_both_arms) ... ok
+test_frontier_rank0_is_active_heavy_campaign (tests.test_active_campaign_gate.TestActiveCampaignGate.test_frontier_rank0_is_active_heavy_campaign) ... ok
+test_preregs_remain_frozen (tests.test_active_campaign_gate.TestActiveCampaignGate.test_preregs_remain_frozen) ... ok
+test_prior_campaign_prereg_remains_frozen (tests.test_active_campaign_gate.TestActiveCampaignGate.test_prior_campaign_prereg_remains_frozen) ... ok
+test_registry_hypotheses_are_terminal_with_verdicts (tests.test_active_campaign_gate.TestActiveCampaignGate.test_registry_hypotheses_are_terminal_with_verdicts) ... ok
+test_blocked_branch_never_mutates_manifest_or_summary (tests.test_tracka_hardening_117.Test117G1Fclr010ExecuteManifestBehindGuard.test_blocked_branch_never_mutates_manifest_or_summary) ... ok
+test_deferred_split_context_only_in_guarded_loader (tests.test_tracka_hardening_117.Test117G1Fclr010ExecuteManifestBehindGuard.test_deferred_split_context_only_in_guarded_loader) ... ok
+test_guarded_loader_reads_splits_only_when_called (tests.test_tracka_hardening_117.Test117G1Fclr010ExecuteManifestBehindGuard.test_guarded_loader_reads_splits_only_when_called) ... ok
+test_main_blocked_no_pre_guard_manifest_read (tests.test_tracka_hardening_117.Test117G1Fclr010ExecuteManifestBehindGuard.test_main_blocked_no_pre_guard_manifest_read) ... ok
+test_default_execution_refused_no_canonical_mutation (tests.test_tracka_hardening_117.Test117G2H004HistoricalPilotGuard.test_default_execution_refused_no_canonical_mutation) ... ok
+test_quarantine_markers_present (tests.test_tracka_hardening_117.Test117G2H004HistoricalPilotGuard.test_quarantine_markers_present) ... ok
+test_refusal_payload_shape_stable (tests.test_tracka_hardening_117.Test117G2H004HistoricalPilotGuard.test_refusal_payload_shape_stable) ... ok
+test_no_new_unclassified_eval_summary_writers (tests.test_tracka_hardening_117.Test117G3FullScriptsRegistrySweep.test_no_new_unclassified_eval_summary_writers) ... ok
+test_registry_covers_all_scripts (tests.test_tracka_hardening_117.Test117G3FullScriptsRegistrySweep.test_registry_covers_all_scripts) ... ok
+test_registry_entries_valid (tests.test_tracka_hardening_117.Test117G3FullScriptsRegistrySweep.test_registry_entries_valid) ... ok
+test_risk_scripts_have_explicit_guard_or_scope (tests.test_tracka_hardening_117.Test117G3FullScriptsRegistrySweep.test_risk_scripts_have_explicit_guard_or_scope) ... ok
+test_blocked_never_calls_pipeline_or_frontier_writer (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_blocked_never_calls_pipeline_or_frontier_writer) ... ok
+test_explicit_frontier_writer_exists_and_is_pipeline_only (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_explicit_frontier_writer_exists_and_is_pipeline_only) ... ok
+test_frontier_writer_isolated_tmp_no_real_rs_mutation (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_frontier_writer_isolated_tmp_no_real_rs_mutation) ... ok
+test_refusal_payload_stable (tests.test_tracka_hardening_117.Test117StableContracts.test_refusal_payload_stable) ... ok
+test_guarded_execute_loader_failure_controlled_refusal (tests.test_tracka_hardening_118.Test118G1Fclr010ExecutePostReadyLoaderRefusal.test_guarded_execute_loader_failure_controlled_refusal)
+guarded_execute with a failing outcome_loader returns BLOCKED with ... ok
+test_main_blocked_post_ready_loader_no_canonical_mutation (tests.test_tracka_hardening_118.Test118G1Fclr010ExecutePostReadyLoaderRefusal.test_main_blocked_post_ready_loader_no_canonical_mutation)
+fclr010_execute.main() with guarded_execute returning a post-READY ... ok
+test_no_pre_guard_manifest_read_on_blocked_branch (tests.test_tracka_hardening_118.Test118G1Fclr010ExecutePostReadyLoaderRefusal.test_no_pre_guard_manifest_read_on_blocked_branch)
+Blocked main must not print split metadata or pre-read manifest before ... ok
+test_allowed_path_canonical_targets_not_in_guard (tests.test_tracka_hardening_118.Test118G2H004AllowedPathQuarantine.test_allowed_path_canonical_targets_not_in_guard)
+Guard's canonical target list covers Hyperliquid Track A canonical ... ok
+test_allowed_path_guard_passes_no_seam_tokens (tests.test_tracka_hardening_118.Test118G2H004AllowedPathQuarantine.test_allowed_path_guard_passes_no_seam_tokens)
+Machine guard: H004_HYPERLIQUID_FCLR010_GUARDED_SEAM is False; ... ok
+test_default_refusal_stable_no_canonical_mutation (tests.test_tracka_hardening_118.Test118G2H004AllowedPathQuarantine.test_default_refusal_stable_no_canonical_mutation)
+Default (non-allowed) execution: rc=1, stable refusal payload, no ... ok
+test_drift_check_detects_missing_script (tests.test_tracka_hardening_118.Test118G3CanonicalScriptScopeRegistryDriftCheck.test_drift_check_detects_missing_script)
+Drift check logic fails when a script exists in dir but not in registry. ... ok
+test_no_unclassified_eval_summary_writers (tests.test_tracka_hardening_118.Test118G3CanonicalScriptScopeRegistryDriftCheck.test_no_unclassified_eval_summary_writers)
+Scripts mentioning evaluation_summary cannot be unclassified_auxiliary. ... ok
+test_registry_entries_valid (tests.test_tracka_hardening_118.Test118G3CanonicalScriptScopeRegistryDriftCheck.test_registry_entries_valid)
+Every registry entry has a valid class and sufficient reason. ... ok
+test_registry_file_exists_valid_json (tests.test_tracka_hardening_118.Test118G3CanonicalScriptScopeRegistryDriftCheck.test_registry_file_exists_valid_json) ... ok
+test_registry_keys_match_scripts_dir (tests.test_tracka_hardening_118.Test118G3CanonicalScriptScopeRegistryDriftCheck.test_registry_keys_match_scripts_dir)
+Drift check: scripts/*.py filenames must exactly == registry keys. ... ok
+test_registry_synced_with_test_117 (tests.test_tracka_hardening_118.Test118G3CanonicalScriptScopeRegistryDriftCheck.test_registry_synced_with_test_117)
+Registry is reconciled with test_tracka_hardening_117.SCRIPT_REGISTRY. ... ok
+test_blocked_frontier_unchanged (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_blocked_frontier_unchanged)
+Blocked run_liqmicro_v2 never mutates experiment_frontier.json. ... ok
+test_blocked_never_calls_pipeline_or_mutates_canonical (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_blocked_never_calls_pipeline_or_mutates_canonical)
+run_liqmicro_v2 blocked: _run_pipeline never called, no canonical ... ok
+test_pipeline_only_reached_after_ready (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_pipeline_only_reached_after_ready)
+Source order: _run_pipeline is invoked only after the guard READY_FROZEN ... ok
+test_each_script_canonical_targets_never_mutated_blocked (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_each_script_canonical_targets_never_mutated_blocked)
+Explicit per-script: blocked main never writes its canonical outputs. ... ok
+test_fclr010_execute_loader_failure_no_canonical_mutation (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_fclr010_execute_loader_failure_no_canonical_mutation)
+fclr010_execute specific: post-READY loader failure (manifest ... ok
+test_matrix_all_non_ready_states_refuse_no_mutation (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_matrix_all_non_ready_states_refuse_no_mutation)
+For every guarded ready-writing script and every non-READY guard ... ok
+test_cli_json_pass_shape (tests.test_tracka_hardening_143.TestHandoffGateCliContract.test_cli_json_pass_shape) ... ok
+test_incomplete_phase_b_fails (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_incomplete_phase_b_fails) ... ok
+test_incomplete_phase_c_fails (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_incomplete_phase_c_fails) ... ok
+test_missing_handoff_fails (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_missing_handoff_fails) ... ok
+test_missing_markers_fail (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_missing_markers_fail) ... ok
+test_missing_session_dir_fails (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_missing_session_dir_fails) ... ok
+test_root_count_cap_breach_fails (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_root_count_cap_breach_fails) ... ok
+test_unrecorded_session_id_fails (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_unrecorded_session_id_fails) ... ok
+test_valid_minimal_bundle_passes (tests.test_tracka_hardening_143.TestHandoffGateFailsClosed.test_valid_minimal_bundle_passes) ... ok
+test_real_repo_gate_passes (tests.test_tracka_hardening_143.TestHandoffGateOnRealRepo.test_real_repo_gate_passes) ... ok
+test_real_repo_handoff_has_markers (tests.test_tracka_hardening_143.TestHandoffGateOnRealRepo.test_real_repo_handoff_has_markers) ... ok
+test_real_repo_heavy_session_self_contained (tests.test_tracka_hardening_143.TestHandoffGateOnRealRepo.test_real_repo_heavy_session_self_contained) ... ok
+test_real_repo_root_count_within_cap (tests.test_tracka_hardening_143.TestHandoffGateOnRealRepo.test_real_repo_root_count_within_cap) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.593s
+
+OK
+   Updated experiment_frontier.json

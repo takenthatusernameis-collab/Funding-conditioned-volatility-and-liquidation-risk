@@ -1,0 +1,76 @@
+{
+  "checked_at_utc": "2026-11-16T11:50:28Z",
+  "network": false,
+  "polling": false,
+  "trigger_registry_generated_utc": "2026-11-16T11:46:26Z",
+  "ironflow_monitor_last_quick_check": "2026-11-11T01:55:25.976207+00:00",
+  "ironflow_data_through": "2026-10",
+  "ironflow_consecutive_absent": 3,
+  "ironflow_post_2026_10_summary": {
+    "months_probed": [
+      "2026-11",
+      "2026-12",
+      "2027-01"
+    ],
+    "any_available": false,
+    "available_months": []
+  },
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "predicate_artifact_exists": false,
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_*.json",
+      "required_fields": {
+        "status": "RESOLVED_VERIFIED",
+        "fabricated": false
+      },
+      "agent_settable": false,
+      "reason": "human/legal attestation required; cannot be set by agent"
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN",
+      "predicate_artifact_exists": false,
+      "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.json",
+      "required_fields": {
+        "status": "ADMISSIBLE",
+        "observed_labels": true,
+        "instruments": ">=5",
+        "blocks": ">=3",
+        "complete_month": ">=1",
+        "unauthenticated": true
+      },
+      "agent_settable": false,
+      "reason": "no new admissible observed-liquidation source evidence artifact present"
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "predicate_artifact_exists": false,
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}",
+      "required": {
+        "labels_after": "2026-10-31",
+        "min_depth_days": 100,
+        "venue": "hyperliquid_perpetuals",
+        "observed_only": true
+      },
+      "agent_settable": false,
+      "reason": "no verified post-2026-10-31 label extension evidence artifact present"
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "predicate_artifact_exists": false,
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json",
+      "conditions": [
+        "LOIO >= 6 of 8 subsets pass",
+        "placebo/permutation: true effect > 95th percentile of null"
+      ],
+      "agent_settable": false,
+      "reason": "no newly preregistered expansion robustness redo prereg + evaluation summary present"
+    }
+  ],
+  "any_trigger_fired": false,
+  "verdict": "NO_TRIGGER_FIRED"
+}

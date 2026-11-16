@@ -1,0 +1,238 @@
+{
+  "status": "REFUSED",
+  "guard": "confirmatory_provenance_fclr014",
+  "error": "CONFIRMATORY PROVENANCE GUARD: v5 manifest confirmatory_provenance_go!=true (NO_GO): /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+  "start": "2025-08-01",
+  "end": "2025-10-31"
+}
+{
+  "status": "REFUSED",
+  "guard": "confirmatory_provenance_fclr014",
+  "error": "CONFIRMATORY PROVENANCE GUARD (FCLR-014 NO-GO): Refusing confirmatory-labeled run on unprovenanced 2025+ cache window 2025-08-01..2025-10-31 (experiment=G4V5_CONFIRMATORY_SYNTH). 2025-01..2025-12,2026-01..06,2026-10 cache months lack admissible confirmatory provenance/license evidence (research_state/fclr014_local_audit/fclr014_provenance_decision_20261107T133102Z.md). Provide --provenance-manifest with verified Binance Vision identity+licensing evidence, or run as exploratory/pilot. Do NOT run claim outcomes on unprovenanced data.",
+  "start": "2025-08-01",
+  "end": "2025-10-31"
+}
+{
+  "status": "REFUSED",
+  "guard": "confirmatory_provenance_fclr014",
+  "error": "CONFIRMATORY PROVENANCE GUARD: v5 manifest confirmatory_provenance_go!=true (NO_GO): /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr016_local_audit/fclr016_v5_provenance_license_manifest_20261108T014405Z.json",
+  "start": "2025-08-01",
+  "end": "2025-10-31"
+}
+{
+  "status": "REFUSED",
+  "guard": "confirmatory_provenance_fclr014",
+  "error": "CONFIRMATORY PROVENANCE GUARD: terms evidence not RESOLVED_VERIFIED (status='EXPLICIT_BLOCKER_UNRESOLVED'); confirmatory GO refused",
+  "start": "2025-08-01",
+  "end": "2025-10-31"
+}
+{
+  "status": "REFUSED",
+  "guard": "confirmatory_provenance_fclr014",
+  "error": "CONFIRMATORY PROVENANCE GUARD: terms evidence cross-check failed: RESOLVED_VERIFIED terms evidence reviewer_role appears agent-only (human/legal review required)",
+  "start": "2025-08-01",
+  "end": "2025-10-31"
+}
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/series.py:848: Pandas4Warning: Series.values returning an ndarray that drops timezone information for DatetimeTZDtype is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'Series.dt.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'Series.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/indexes/datetimelike.py:1029: Pandas4Warning: DatetimeIndex.values returning an ndarray that drops timezone information is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'DatetimeIndex.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'DatetimeIndex.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/series.py:848: Pandas4Warning: Series.values returning an ndarray that drops timezone information for DatetimeTZDtype is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'Series.dt.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'Series.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/indexes/datetimelike.py:1029: Pandas4Warning: DatetimeIndex.values returning an ndarray that drops timezone information is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'DatetimeIndex.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'DatetimeIndex.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/series.py:848: Pandas4Warning: Series.values returning an ndarray that drops timezone information for DatetimeTZDtype is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'Series.dt.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'Series.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/indexes/datetimelike.py:1029: Pandas4Warning: DatetimeIndex.values returning an ndarray that drops timezone information is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'DatetimeIndex.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'DatetimeIndex.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/series.py:848: Pandas4Warning: Series.values returning an ndarray that drops timezone information for DatetimeTZDtype is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'Series.dt.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'Series.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/indexes/datetimelike.py:1029: Pandas4Warning: DatetimeIndex.values returning an ndarray that drops timezone information is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'DatetimeIndex.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'DatetimeIndex.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/series.py:848: Pandas4Warning: Series.values returning an ndarray that drops timezone information for DatetimeTZDtype is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'Series.dt.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'Series.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+/home/runner/work/_temp/kilo-home/.local/lib/python3.12/site-packages/pandas/core/indexes/datetimelike.py:1029: Pandas4Warning: DatetimeIndex.values returning an ndarray that drops timezone information is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'DatetimeIndex.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'DatetimeIndex.array' to get the ExtensionArray.
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+  warnings.warn(
+artifact not found: /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/nonexistent_xyz_artifact.json
+refusing --out outside canonical output dir: /home/runner/work/_temp/kilo-tmp/tmppcfjb9fw/evil_outside_results.md
+refusing x outside canonical output dir: /other/child
+refusing unsafe --out-suffix (must be a single path component, no traversal or absolute path): '../../evil'
+refusing unsafe --out-suffix (must be a single path component, no traversal or absolute path): '/abs/path'
+refusing unsafe --out-suffix (must be a single path component, no traversal or absolute path): '..'
+----------------------------------------------------------------------
+Ran 1354 tests in 344.264s
+
+OK (skipped=1)
+{
+  "all_go": false,
+  "blockers": [
+    "parse_error"
+  ],
+  "confirmatory_outcomes_permitted": false,
+  "error": "cannot parse artifact: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+  "errors": [
+    "cannot parse artifact: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+  ],
+  "expect_go": true,
+  "expect_go_refused": true,
+  "gates": {},
+  "hashes": {
+    "completeness_audit": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8",
+    "prereg_draft": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f",
+    "provenance_manifest": "17eed55d881c0dd5fe0935a98d89dd9e52d62aed941f3fb7d17bd490e5aa3e8f",
+    "terms_evidence": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+  },
+  "ok": false,
+  "validator": "run_funding_ablations.admissibility_package"
+}
+{
+  "all_go": false,
+  "blockers": [
+    "terms_resolved_verified",
+    "provenance_manifest_go",
+    "completeness_leakage_pass",
+    "prereg_frozen_non_draft",
+    "prereg_claim_go"
+  ],
+  "confirmatory_outcomes_permitted": false,
+  "errors": [],
+  "expect_go": false,
+  "gates": {
+    "completeness_leakage_pass": false,
+    "prereg_claim_go": false,
+    "prereg_frozen_non_draft": false,
+    "provenance_manifest_go": false,
+    "terms_resolved_verified": false
+  },
+  "hashes": {
+    "completeness_audit": "32dfcddca782cf7e2f029b2814dd86c5054a0d5069785ab29e8814fd98ccfca8",
+    "prereg_draft": "8bf5e7f2ac593048c9782cbb8cfabd041dea97cc46c30288d0cb09ddc8957f7f",
+    "provenance_manifest": "6888116a707a4fe1bad84d6fb1b957dfdd2890c2ce48a3c3bc9430e17f325346",
+    "terms_evidence": "8128c1d513bee2e16a57f3ee19d103d17ad0d68ca15378724c7d432e35d59923"
+  },
+  "ok": true,
+  "validator": "run_funding_ablations.admissibility_package"
+}
+wrote /home/runner/work/_temp/kilo-tmp/tmpicgauiv6/results/strict.md rows=1 claimable_excludes_zero=0 enriched=0 backfill_applied=2 backfill_refused=3 rows_missing_diag=1 rows_backfilled=1 strict_remediation_entries=2
+wrote /home/runner/work/_temp/kilo-tmp/tmp294h5nnu/results/backfill.md rows=1 claimable_excludes_zero=0 enriched=0 backfill_applied=2 backfill_refused=3 rows_missing_diag=1 rows_backfilled=1 strict_remediation_entries=0
+wrote /home/runner/work/_temp/kilo-tmp/tmpipm8fgwu/results/out.md rows=1 claimable_excludes_zero=0 enriched=1 backfill_applied=0 backfill_refused=0 rows_missing_diag=0 rows_backfilled=0 strict_remediation_entries=0
+wrote /home/runner/work/_temp/kilo-tmp/tmprkrcdgp2/results/gate4_v4_bootstrap_diagnostic_summary_20261116T115430Z.md rows=3 claimable_excludes_zero=1 enriched=0 backfill_applied=0 backfill_refused=0 rows_missing_diag=1 rows_backfilled=0 strict_remediation_entries=0
+wrote /home/runner/work/_temp/kilo-tmp/tmppcfjb9fw/results/inside.md rows=3 claimable_excludes_zero=1 enriched=0 backfill_applied=0 backfill_refused=0 rows_missing_diag=1 rows_backfilled=0 strict_remediation_entries=0
+Wrote evidence: /home/runner/work/_temp/kilo-tmp/tmpkb35764z/evidence/ironflow_probe_20261116T115440Z.json (probe artifacts 1 -> 2)
+No resume trigger. data_through=2026-10 probed=['2026-11', '2026-12', '2027-01', '2027-02'] head_probes=8 cached_hits=0 probe_diff(added=0 changed=0 removed=0) baseline_drift(intact=True regressions=0 content_replaced=0 pairs_checked=0 method=state_only_tree_unchanged) kaggle_mirror(updated=None last=None triggered=None)
+Wrote evidence: /home/runner/work/_temp/kilo-tmp/tmpvicooa6l/evidence/ironflow_probe_20261116T115444Z.json (probe artifacts 1 -> 2)
+No resume trigger. data_through=2026-10 probed=['2026-11', '2026-12', '2027-01', '2027-02'] head_probes=8 cached_hits=0 probe_diff(added=0 changed=0 removed=0) baseline_drift(intact=True regressions=0 content_replaced=0 pairs_checked=0 method=state_only_tree_unchanged) kaggle_mirror(updated=None last=None triggered=None)
+Wrote evidence: /home/runner/work/_temp/kilo-tmp/tmpuzgi8t0r/evidence/ironflow_probe_20261116T115444Z.json (probe artifacts 1 -> 2)
+No resume trigger. data_through=2026-10 probed=['2026-11', '2026-12', '2027-01', '2027-02'] head_probes=8 cached_hits=0 probe_diff(added=0 changed=0 removed=0) baseline_drift(intact=True regressions=0 content_replaced=0 pairs_checked=0 method=state_only_tree_unchanged) kaggle_mirror(updated=None last=None triggered=None)
+{
+  "new_data_path": false,
+  "reasons": [],
+  "quick_check": {
+    "triggered": false,
+    "months_probed": [
+      "2026-11"
+    ],
+    "head_probes": 0,
+    "get_requests": 0
+  },
+  "probe_diff_summary": {
+    "added_count": 0,
+    "changed_count": 0,
+    "removed_count": 0,
+    "unchanged_count": 2,
+    "any_change": false
+  }
+}
+{
+  "ok": false,
+  "checks": [
+    {
+      "id": "data_through_consistent",
+      "description": "data_through equals the latest complete month in last_probe",
+      "data_through": "2026-10",
+      "recomputed_max_complete": null,
+      "pass": false
+    },
+    {
+      "id": "consecutive_absent_consistent",
+      "description": "stored consecutive_absent matches recomputation from last_probe",
+      "stored": null,
+      "recomputed": 0,
+      "pass": false
+    },
+    {
+      "id": "resume_trigger_months_match_forward_edge",
+      "description": "resume trigger months equal forward_edge_months(data_through)",
+      "expected": [
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02"
+      ],
+      "recorded": [],
+      "pass": false
+    },
+    {
+      "id": "on_trigger_prereg_before_outcomes",
+      "description": "resume trigger mandates pre-registration before outcome inspection",
+      "pass": false
+    },
+    {
+      "id": "tree_etag_present",
+      "description": "tree_etag recorded alongside tree_parquet_paths",
+      "tree_etag": false,
+      "tree_paths_count": 0,
+      "pass": true
+    },
+    {
+      "id": "tree_etag_well_formed",
+      "description": "tree_etag is a real, non-placeholder HTTP ETag (W/\"<opaque>\")",
+      "tree_etag": null,
+      "reason": "missing",
+      "pass": false
+    },
+    {
+      "id": "content_hash_baseline_complete",
+      "description": "every known month has a recorded LFS content hash in tree_parquet_items",
+      "known_months": [],
+      "missing_oids": [],
+      "pass": true
+    }
+  ],
+  "errors": [
+    "data_through=2026-10 but latest complete month=None",
+    "consecutive_absent stored=None recomputed=0",
+    "resume_trigger condition months do not match forward_edge_months(data_through)",
+    "resume_trigger.on_trigger missing pre-register-before-outcomes mandate",
+    "tree_etag not well-formed: missing (raw=None)"
+  ],
+  "data_through": "2026-10",
+  "consecutive_absent": null,
+  "content_hash_missing": [],
+  "baseline_drift": {
+    "known_months": [],
+    "checked": 0,
+    "missing_cache_entries": [],
+    "stale_cache_entries": [],
+    "missing_oids": [],
+    "cache_incomplete": false,
+    "drifted": false,
+    "content_hash_missing": [],
+    "content_hash_incomplete": false,
+    "content_hash_complete": true
+  }
+}
+VERIFY ok=False data_through=2026-10 consecutive_absent=None baseline_drift=False content_hash_complete=True known_months=0
+Wrote /home/runner/work/_temp/kilo-tmp/tmpjg2eqmqt/alt_source_deep_review_latest.md (cache_hits=0 cache_misses=14)
+Wrote /home/runner/work/_temp/kilo-tmp/tmpdkuyamwv/research_state/alt_source_scan_latest.json (candidates=8, source=cache)
+   Updated experiment_frontier.json
