@@ -1,0 +1,38 @@
+{
+  "session_utc": "20261116T201748Z",
+  "generated_utc": "2026-11-16T20:17:48Z",
+  "check_type": "single deterministic trigger read (no network, no polling, no HuggingFace re-probe)",
+  "trigger_registry": {
+    "path": "research_state/resume_trigger_registry.json",
+    "generated_utc": "2026-11-16T11:46:26Z",
+    "n_triggers": 4,
+    "triggers": [
+      {"trigger_id": "GATE4_BRANCH_1", "status": "OPEN", "priority": 1},
+      {"trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE", "status": "OPEN", "priority": 2},
+      {"trigger_id": "HL_LABEL_EXTENSION", "status": "OPEN", "priority": 3},
+      {"trigger_id": "EXPANSION_ROBUSTNESS_REDO", "status": "OPEN", "priority": 4}
+    ],
+    "verdict": "ALL_OPEN"
+  },
+  "ironflow_monitor": {
+    "path": "research_state/ironflow_monitor_state.json",
+    "last_check": "2026-11-02T05:59:46Z",
+    "last_probe": "ironflow_probe_20261102T115745Z",
+    "last_quick_check": "2026-11-11T01:55:25Z",
+    "last_quick_probe": "2026-11-11T01:55:25Z",
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "currently_fired": false,
+    "post_2026_10_months_probed": ["2026-11", "2026-12", "2027-01"],
+    "post_2026_10_any_available": false,
+    "post_2026_10_month_classifications": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    },
+    "verdict": "NO_TRIGGER_FIRED"
+  },
+  "conclusion": "No external trigger satisfied. Per campaign FCLR-REPRO-AUDIT-02 Phase A/B, holding action is the FCLR-008 independent recompute (queue item 3) plus evidence audit, complete gate run, and accurate handoff update. No new confirmatory estimand to be started; all cached-data estimands remain terminal.",
+  "fired_triggers": [],
+  "heavy_work_assigned": "FCLR-008 independent recompute (recompute_fclr008_20261116T201748Z.{json,md})"
+}
