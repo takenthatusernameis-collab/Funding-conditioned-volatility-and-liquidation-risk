@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T20:59:36Z (sole durable handoff; current next task FCLR-008 reproducibility recompute)
+# AGENT HANDOFF — 2026-11-16T21:09:12Z (sole durable handoff; current next task FCLR-008 reproducibility recompute)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -93,5 +93,10 @@ A session that completes an item must (a) create a new `research_state/session_<
 - `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore; this file is the sole durable handoff.
+
+**Verification record — 2026-11-16T21:09:12Z handoff refresh.**
+- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions (`session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` trigger-only; `session_20261116T140001Z/` superseded by 185811Z). FCLR-006/FCLR-009 remain DONE and must not be repeated.
+- Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
+- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; no new `research_state/session_*`; full verification remains mandatory in next heavy session per contract.
 
 (End of file - total 90 lines)
