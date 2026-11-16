@@ -1,13 +1,13 @@
-# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-02` — current as of 2026-11-16T20:14:30Z
+# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-02` — current as of 2026-11-16T21:15:19Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
-**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-16T20:14:30Z). This file is the detailed campaign note referenced by the frontier and the handoff.
+**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-16T21:15:19Z). This file is the detailed campaign note referenced by the frontier and the handoff.
 **Governing rules:** `RESEARCH_PROMPT.md`. Never re-run concluded estimands, re-score sealed results, fabricate data, edit `.github/workflows/*`, poll, re-probe the HuggingFace tree, or use paid/credentialed/manual outcome data.
 **Artifact rule:** write every new artifact to a new `research_state/session_<UTC>/`. The `research_state/` root is at 500/500 md/json; adding root files breaks the enforced churn cap.
 
 ## Why this campaign exists (bottlenecks removed)
 
-The previous `FCLR-READINESS-01` campaign was complete: it precomputed per-trigger design power and produced the FCLR-011 third independent recompute. Incomplete sessions `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only) must not be resumed/copied/counted; an empty incomplete session dir was removed in this refresh. `FCLR-REPRO-AUDIT-02` makes the heavy-work gate a **floor** and requires every session to emit a *new* quantitative artifact: an independent reproducibility audit of the terminal headlines, in queue order.
+The previous `FCLR-READINESS-01` campaign was complete: it precomputed per-trigger design power and produced the FCLR-011 third independent recompute. Incomplete sessions `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/`, `session_20261116T201748Z/` (trigger-only) must not be resumed/copied/counted. **2026-11-16T21:15:19Z refresh:** three empty post-handoff session dirs (`session_20261116T202023Z/`, `session_20261116T211000Z/`, `session_20261116T211303Z/`) were removed as clutter; the prior maintenance-refresh treadmill (20:06/20:14/20:59/21:09 with no heavy artifact) must not continue — the next session must emit `recompute_fclr008_<UTC>.{json,md}`. `FCLR-REPRO-AUDIT-02` makes the heavy-work gate a **floor** and requires every session to emit a *new* quantitative artifact: an independent reproducibility audit of the terminal headlines, in queue order.
 
 **2026-11-16T20:06:45Z refresh (stale-target bottleneck removed):** FCLR-009 DONE (`session_20261116T125624Z/`, `all_within_tolerance=true`). FCLR-006 DONE (`session_20261116T185811Z/`, `all_within_tolerance=true`; supersedes tolerance-failed `session_20261116T140001Z/`). The primary Phase-B target is now **FCLR-008** (queue item 3) with explicit published values recorded in `AGENT_HANDOFF.md`; FCLR-006/FCLR-009 must not be repeated. This alignment removes the prior campaign/handoff mismatch that could send agents to already-complete work.
 
@@ -64,13 +64,23 @@ A session that only rereads triggers, repeats prior prose, copies old bundle wit
 ## Bottleneck policy
 
 - **Stale instructions:** `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`, `HANDOFF_NEXT_SESSION_20261116T114626Z.md`, and `AGENT_HANDOFF_20261115T073240Z.md` have no authority. `AGENT_HANDOFF.md` is sole handoff.
-- **Incomplete sessions:** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only) — do not resume, copy, or count. `session_20261116T140001Z/` is a superseded tolerance-failed FCLR-006 attempt. An empty incomplete session dir was removed in this refresh.
+- **Incomplete sessions:** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/`, `session_20261116T201748Z/` (trigger-only) — do not resume, copy, or count. `session_20261116T140001Z/` is a superseded tolerance-failed FCLR-006 attempt. Empty dirs `session_20261116T202023Z/`, `session_20261116T211000Z/`, `session_20261116T211303Z/` removed 2026-11-16T21:15:19Z — do not recreate empty shells.
+- **Maintenance treadmill:** handoff-only refreshes with no new heavy artifact (20:06/20:14/20:59/21:09) are not completion and must not repeat; the next session must emit a new `recompute_fclr008_<UTC>.{json,md}`.
 - **Completed-work confusion:** FCLR-RCA-011, FCLR-009, and FCLR-006 are complete; do not rerun merely because an old note calls them pending. Next is **FCLR-008**.
 - **Gate false failure:** gate accepts latest new-style session with `evidence_audit_*` + fresh quantitative artifact while resolving complete bundle. Do not weaken.
 - **Root churn:** root `research_state/*.md|json` count is 500/500. Keep new outputs in session subdirectories.
 - **Dependencies:** readiness/reproducibility path is stdlib/numpy-only; do not add `statsmodels` or unpinned heavy deps to core path.
 - **Suite duration:** allow discovery suite to finish and record actual exit status; do not substitute partial run.
 - **External science:** if no trigger fires, required progress is the new FCLR-008 artifact (or documented LIQ-010 fallback), evidence audit, complete gate run, and accurate handoff update. Repeated polling and new confirmatory estimands on exhausted cached data are forbidden.
+
+## Verification record — 2026-11-16T21:15:19Z
+
+- Handoff/campaign reaffirmed: **FCLR-008** is mandatory next heavy artifact (`recompute_fclr008_<UTC>.{json,md}`), FCLR-006/FCLR-009 done/not to repeat, trigger-only/superseded sessions not resumable. Removed three empty post-handoff session dirs (`session_20261116T202023Z/`, `session_20261116T211000Z/`, `session_20261116T211303Z/`).
+- Inputs verified present: `research_state/research_protocol_fclr008.md`, `research_state/evaluation_summary_FCLR-008.md`, `data_cache/{SYM}_2026_0{1..8}/` for all 5 symbols, fallback parquet `fclr_liq_010_confirm_panel_20261113T065953Z.parquet`.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS**; `heavy_session=session_20261116T100533Z`, `latest_session=session_20261116T185811Z`, root 500/500, EXIT 0.
+- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**; 196/196 scripts, EXIT 0.
+- Targeted suite (`test_active_campaign_gate`, `test_tracka_hardening_117/118/143`): **52 tests OK, EXIT 0**.
+- No new heavy research artifact produced by this maintenance refresh; next session must produce `recompute_fclr008_<UTC>.{json,md}` (+ script) or documented LIQ-010 fallback, with evidence audit and full gate/suite capture.
 
 ## Verification record — 2026-11-16T20:14:30Z
 

@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-16T21:09:12Z (sole durable handoff; current next task FCLR-008 reproducibility recompute)
+# AGENT HANDOFF — 2026-11-16T21:15:19Z (sole durable handoff; current next task FCLR-008 reproducibility recompute)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
@@ -28,7 +28,7 @@
    - `python3 scripts/check_handoff_heavywork_gate.py --json` — PASS with complete `session_20261116T100533Z` bundle, new session as latest (audit + fresh quant artifact), root <= 500.
    - `python3 scripts/check_tracka_scope_registry_drift.py --json` — PASS (register any new script in both scope registries).
    - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` — all pass.
-   - `python3 -m unittest discover -q` — run to completion; record exact test count, skip count, final EXIT. Never treat timeout/monitor cap as green. Revert any timestamp-only side effect to tracked files (e.g. `research_state/ironflow_fastpath_cache.json`).
+   - `python3 -m unittest discover -q` — run to completion; record exact test count, skip count, final EXIT. Never treat timeout/monitor cap as green. Revert any timestamp-only side effect to tracked files (e.g. `research_state/ironflow_fastpath_cache.json`, `experiment_frontier.json`).
 6. **Update only this handoff** after steps 3–5: replace timestamp/verification with actual results, advance queue (tick FCLR-008 if done), keep sole-handoff contract, bundle refs, blockers intact. Do not create another handoff file and do not execute tombstoned instructions.
 
 **Trigger-gated science is the only scientific advance — but it must be pre-powered.** If no trigger is satisfied, do not advance or re-run a confirmatory estimand. The required holding action is the new FCLR-008 reproducibility artifact (or documented LIQ-010 fallback) plus the evidence audit, complete gate run, and accurate handoff update. If a trigger is satisfied, follow §16 admissibility/source audit first, freeze the pre-sized prereg before inspecting outcomes, require a materially different estimand and the power ledger's sample floor, then execute, register any new scripts in both scope registries, run all gates, and update the frontier/hypothesis registries with an honest verdict.
@@ -41,9 +41,11 @@
 - `session_20261116T115028Z/`: third numpy-only FCLR-011 crosscheck (`independent_recompute_fclr011_*`) confirming sealed PASS not reproducible; funding drives harm.
 - `session_20261116T140001Z/`: FCLR-006 attempt with `all_within_tolerance=false` (row-count/alignment discrepancy) — **superseded** by `session_20261116T185811Z`; do not treat as queue completion.
 
-**Bottlenecks removed (2026-11-16T20:59:36Z refresh; reaffirmed).**
+**Bottlenecks removed (2026-11-16T21:15:19Z refresh; reaffirmed).**
+- **Empty/stale session clutter removed:** three empty post-handoff session directories created after the last handoff (0 entries, untracked) were removed this refresh. They were incomplete trigger-only placeholders and must never be recreated as empty shells.
+- **Maintenance-refresh treadmill called out:** prior refreshes (20:06, 20:14, 20:59, 21:09) were handoff-only maintenance with no new heavy artifact. That is acceptable only when followed by a real FCLR-008 session; do not repeat the pattern. The next session MUST emit `recompute_fclr008_<UTC>.{json,md}`.
 - **Stale primary target removed:** FCLR-006/FCLR-009 DONE; primary is **FCLR-008** (queue item 3) with explicit published values embedded above. `FCLR_HEAVY_CAMPAIGN_NEXT.md` aligned in this refresh to prevent rework.
-- **Stale/incomplete session ambiguity removed:** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only) are incomplete/superseded — must not be resumed, copied, or counted. `session_20261116T140001Z/` superseded by 185811Z. An empty incomplete session directory found in this refresh was removed.
+- **Stale/incomplete session ambiguity removed:** trigger-only sessions (see campaign note for exact ids) are incomplete/superseded — must not be resumed, copied, or counted. `session_20261116T140001Z/` superseded by 185811Z.
 - **False gate failure / treadmill / design-on-trigger / dependency / handoff-authority / root-churn bottlenecks** remain resolved as before (gate accepts latest session with audit+fresh quant while resolving complete bundle; stdlib/numpy-only reproducibility path; no statsmodels in core; this file sole authority; root 500/500 session-only writes).
 
 **Bottlenecks and prohibitions.**
@@ -56,26 +58,11 @@
 
 **Reopen triggers (machine-checkable — Act ONLY when satisfied).** All four are `OPEN`. Do not act until the predicate is satisfied by a concrete evidence artifact in `research_state/`: `GATE4_BRANCH_1` (`fclr016_v5_terms_evidence_RESOLVED_*.json` with `status: RESOLVED_VERIFIED`, `fabricated: false`), `NEW_OBSERVED_LIQUIDATION_SOURCE` (`<source>_admissibility_audit_<UTC>.json` with `status: ADMISSIBLE`, `observed_labels: true`), `HL_LABEL_EXTENSION` (`hl_label_extension_audit_<UTC>.{md,json}`), `EXPANSION_ROBUSTNESS_REDO` (`expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`).
 
-**Verification record — 2026-11-16T20:59:36Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
-- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions (`session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` trigger-only; `session_20261116T140001Z/` superseded by 185811Z). FCLR-006/FCLR-009 remain DONE and must not be repeated.
+**Verification record — 2026-11-16T21:15:19Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
+- Purpose: refreshed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; removed three empty post-handoff session dirs; flagged the tracked trigger-only session as non-counting. FCLR-006/FCLR-009 remain DONE and must not be repeated.
 - Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
-- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes, no new `research_state/session_*`, no targeted/full suite rerun (not required for handoff-only maintenance; full verification remains mandatory in next heavy session per contract).
-
-**Verification record — 2026-11-16T20:14:30Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
-- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions (`session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` trigger-only; `session_20261116T140001Z/` superseded by 185811Z). FCLR-006/FCLR-009 remain DONE and must not be repeated.
-- Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
-- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, audit+new_quant present, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; no targeted/full suite rerun in this maintenance refresh.
-
-**Verification record — 2026-11-16T20:06:45Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
-- Purpose: removed stale-target and stale-session bottlenecks so next session cannot avoid heavy work. `AGENT_HANDOFF.md` and `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` aligned: queue item 2 (FCLR-006) CLOSED via `session_20261116T185811Z` (`all_within_tolerance=true`); **queue item 3 (FCLR-008) is CURRENT TARGET** with explicit published values/tolerances. Incomplete/superseded sessions flagged: trigger-only `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/`, and tolerance-failed `session_20261116T140001Z/` (superseded by 185811Z) — not resumable/countable. An empty incomplete session dir was removed.
-- Gates (maintenance check): `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, audit+new_quant present, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; no targeted/full suite rerun in this maintenance refresh.
-
-**Last completed heavy verification — 2026-11-16T19:17:06Z (session_20261116T185811Z; queue item 2 FCLR-006 DONE).**
-- Trigger check: all OPEN; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 CONFIRMED_ABSENT → NO_TRIGGER_FIRED (`trigger_check.json`).
-- Heavy artifact: `recompute_fclr006_20261116T185811Z.{py,json,md}` — `all_within_tolerance=true` (B0 0.518169 n=9000, B1 0.527290 n=8987, C1 0.620158, C2 0.882279; C2_vs_B1 diff 0.354989 rel -67.32% n_pairs 8987; errata CI [0.173748,0.615614]; gate NOT_MET 2 blocks < 3; H001 NOT_SUPPORTED). Evidence audit present.
-- Bundle/integrity: `session_20261116T100533Z` complete (5 RCA families + power ledger); `session_20261116T125624Z` FCLR-009 reproduced; `session_20261116T185811Z` FCLR-006 reproduced. RCA complete; FCLR-011 not reproducible/promotable; `next_action_heavy=null` on cached data.
-- Gates/tests: heavywork gate PASS, scope drift PASS (196/196), targeted 52 OK EXIT 0 (after reverting `ironflow_fastpath_cache.json` side effect), discovery suite 1340 run / 13 pre-existing pyarrow/fastparquet errors / 9 skipped / 0 failures / EXIT 1 (expected confirmatory provenance refusals on unprovenanced 2025+ cache) — `unittest_discover.txt` captured in session.
-- Root 500/500. External blocker unchanged: no admissible post-2026-10 observed liquidation labels/source and no agent-settable Gate 4 attestation.
+- Inputs verified present: `research_state/research_protocol_fclr008.md`, `research_state/evaluation_summary_FCLR-008.md`, and `research_state/data_cache/{BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}_2026_0{1..8}/` all present. Fallback panel `fclr_liq_010_confirm_panel_20261113T065953Z.parquet` present (6,051,126 bytes).
+- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). Targeted suite `tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` **52 tests OK, EXIT 0**. No code/script changes; full `unittest discover` remains mandatory in the next heavy session per contract.
 
 ## Reproducibility-audit queue (non-skippable heavy work; do in order)
 
@@ -95,8 +82,21 @@ A session that completes an item must (a) create a new `research_state/session_<
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore; this file is the sole durable handoff.
 
 **Verification record — 2026-11-16T21:09:12Z handoff refresh.**
-- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions (`session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` trigger-only; `session_20261116T140001Z/` superseded by 185811Z). FCLR-006/FCLR-009 remain DONE and must not be repeated.
+- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work; cleared/flagged no resumable trigger-only/incomplete sessions. FCLR-006/FCLR-009 remain DONE and must not be repeated.
 - Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
-- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; no new `research_state/session_*`; full verification remains mandatory in next heavy session per contract.
+- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (heavy_session `session_20261116T100533Z`, latest_session `session_20261116T185811Z`, root 500/500). `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; full verification remains mandatory in next heavy session per contract.
 
-(End of file - total 90 lines)
+**Verification record — 2026-11-16T20:59:36Z handoff refresh (maintenance; no new heavy research artifact produced this session).**
+- Purpose: reaffirmed sole durable handoff points unambiguously to **FCLR-008 independent recompute** (`recompute_fclr008_<UTC>.{json,md}`) as mandatory next heavy work. FCLR-006/FCLR-009 remain DONE and must not be repeated.
+- Triggers/monitor read (no network): all 4 `OPEN`; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
+- Gates rechecked: `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS**; `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (196/196). No code/script changes; full verification remains mandatory in next heavy session per contract.
+
+## Reopen triggers summary (machine-checkable)
+
+All four are `OPEN`; act ONLY when the registry-defined predicate is satisfied by a concrete artifact:
+- `GATE4_BRANCH_1` — `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status: RESOLVED_VERIFIED`, `fabricated: false`). Human/legal attestation only; never agent-set.
+- `NEW_OBSERVED_LIQUIDATION_SOURCE` — `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status: ADMISSIBLE`, `observed_labels: true`, >=5 instruments, >=3 blocks or >=1 complete month).
+- `HL_LABEL_EXTENSION` — `research_state/hl_label_extension_audit_<UTC>.{md,json}`.
+- `EXPANSION_ROBUSTNESS_REDO` — `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`.
+
+(End of file)
