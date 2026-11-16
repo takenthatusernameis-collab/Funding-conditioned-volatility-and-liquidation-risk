@@ -1,0 +1,35 @@
+{
+  "generated_utc": "2026-11-16T03:58:33Z",
+  "campaign": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z",
+  "scope": "FCLR-RCA-011 reproducibility/integrity follow-up on cached data (no trigger fired)",
+  "trigger_check": {
+    "artifact": "research_state/session_20261116T023837Z/trigger_check_20261116T023837Z.json",
+    "verdict": "NO_TRIGGER_FIRED",
+    "open_triggers": ["GATE4_BRANCH_1", "NEW_OBSERVED_LIQUIDATION_SOURCE", "HL_LABEL_EXTENSION", "EXPANSION_ROBUSTNESS_REDO"]
+  },
+  "evidence": {
+    "sealed": "research_state/evaluation_summary_FCLR-011.md",
+    "recompute_repro": "research_state/session_20261116T0040Z/reproducibility_recompute_2026-11-16T00:45:10Z.json",
+    "recompute_eval": "research_state/session_20261116T0040Z/evaluation_summary_FCLR-011-RECOMPUTE-20261116T004150Z.md",
+    "bridge": "research_state/session_20261116T023837Z/rca011_sealed_bridge_20261116T023837Z.md",
+    "feature_attribution": "research_state/session_20261116T035833Z/rca011_feature_attribution_20261116T035833Z.json",
+    "impl_crosscheck": "research_state/session_20261116T035833Z/rca011_impl_crosscheck_20261116T035833Z.json",
+    "power_template": "research_state/session_20261116T023837Z/prereg_template_trigger_gated_20261116T023837Z.json"
+  },
+  "fclr011_classification": "feature/back-transform/artifact-driven (integrity-failure) with underpowered training window; NOT true absence of skill as a general claim, NOT a clean sealed PASS",
+  "rationale": [
+    "Independent recompute on cached 2026 archive (same test window/universe, 7d purge, train-only scaling+smearing, 24h block bootstrap) is NOT_REPRODUCED: C2_vs_B1 -294.01% (n=10905) vs sealed +4.94% (n=10785), C1_vs_B1 -342.67%, C2_vs_C1 +10.99%.",
+    "Feature attribution (same recompute panel/design): funding augmentation is catastrophically harmful OOS (B1_plus_funding vs B1 -342.67%, CI [-497.48,-221.27]; B1_plus_funding_plus_ema24 vs B1 -294.01%), while ema24_dist alone helps vs B1 (+9.75%, CI [7.01,12.74]) and helps over funding (+10.99% over B1_plus_funding) but cannot rescue joint degradation (funding_over_ema24 -336.55%).",
+    "Implementation cross-check: statsmodels.OLS vs numpy.linalg.lstsq predictions/contrasts match to ~1e-12–1e-17 abs diff; no solver/smearing implementation artifact explains degradation.",
+    "Premium slot is not computable from cached 2026 archive (C2 degrades to C1+ema24_dist in recompute) and paired-row eligibility differs by +120 rows; sealed panel unavailable (LFS pointer). This is a material feature/panel-availability and integrity gap, not proof the sealed effect is real.",
+    "Attribution fit uses only 152 complete train rows after purge/dropna (vs 10,905 test rows), so funding-coefficient estimates are likely unstable/overfit — consistent with catastrophic OOS harm from added funding features but limiting any claim of 'true absence of skill' in general."
+  ],
+  "next_action_heavy": null,
+  "next_free_route": "Hold TRIGGER_ONLY sentinel. No agent-removable confirmatory estimand remains on cached data. Advance only on a satisfied external trigger with §16 admissibility audit and a NEW pre-outcomes prereg meeting template minima (>=3 non-overlapping 30d blocks, MDE below 2% floor, Holm family, outcome_data_inspected_before_freeze=false). Do not re-run concluded/sealed cells; do not mutate sealed artifacts.",
+  "gates": {
+    "deps_installed": true,
+    "scope_registry_drift": "PASS (scripts=195 registry=195)",
+    "targeted_tests": "PASS (38 tests, active_campaign_gate + hardening_117 + hardening_118)",
+    "full_discover": "STARTED but not confirmed complete within session tool budget; see AGENT_HANDOFF.md for exact status and rerun command"
+  }
+}
