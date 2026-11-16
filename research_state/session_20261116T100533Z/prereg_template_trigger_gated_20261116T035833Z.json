@@ -1,0 +1,73 @@
+{
+  "template_id": "FCLR-PREREG-TEMPLATE-TRIGGER-GATED-20261116T023837Z",
+  "generated_utc": "2026-11-16T02:42:00Z",
+  "status": "TEMPLATE_PRE_OUTCOMES_SKELETON",
+  "frozen_before_outcomes": false,
+  "pre_registered_before_outcomes": false,
+  "outcome_data_inspected_before_freeze": false,
+  "promotable": false,
+  "max_status": "EXPLORATORY_ONLY_UNTIL_FROZEN_AND_EVALUATED",
+  "purpose": "Concrete, adequately-powered preregistration skeleton for the first trigger-gated advance. Must be instantiated as a NEW prereg file with a specific estimand, source audit, and frozen timestamp BEFORE any outcome inspection when a resume trigger fires.",
+  "applicability": {
+    "activate_only_if_trigger_in": ["GATE4_BRANCH_1", "NEW_OBSERVED_LIQUIDATION_SOURCE", "HL_LABEL_EXTENSION", "EXPANSION_ROBUSTNESS_REDO"],
+    "forbidden": [
+      "re-run or re-score concluded/sealed estimands",
+      "re-probe TERMINAL_NO_GO source families",
+      "mutate sealed artifacts or .github/workflows/*",
+      "use paid/credentialed/manual outcome data",
+      "polling loops"
+    ]
+  },
+  "required_minima": {
+    "non_overlapping_30d_test_blocks": {"min": 3, "rationale": "claim-worthiness / block-bootstrap stability per RESEARCH_PROMPT and program precedent"},
+    "paired_oos_instruments": {"min": 5},
+    "materiality_floor_relative_improvement_pct": 2.0,
+    "mde_target": "target MDE (80% power, alpha=0.05, two-sided) MUST be below the 2% materiality floor for the primary contrast given realistic event counts/variance; compute and document MDE before freeze from pilot variance only if permitted, else justify conservatively from historical sealed estimates",
+    "inference": {
+      "bootstrap": "paired block bootstrap over complete UTC-day (or prereg-specified) blocks",
+      "replicates_min": 2000,
+      "seed": "deterministic, frozen in prereg",
+      "ci_level": 0.95
+    },
+    "multiplicity": {
+      "correction": "Holm (or stronger preregistered FWER control) across the full registered contrast family",
+      "family_must_be_enumerated_pre_outcomes": true
+    },
+    "splits": {
+      "chronological": true,
+      "leakage_resistant": true,
+      "purge_embargo_days_min": 7,
+      "no_random_split": true,
+      "no_tuning_on_sealed_holdout": true
+    }
+  },
+  "instantiation_checklist": [
+    "Assign unique experiment_id and UTC timestamp; create research_state/session_<UTC>/ (do not add root md/json if root near cap).",
+    "Write §16 admissibility/source audit artifact for any new data (unauthenticated, provenance, license/terms, coverage, gaps) BEFORE prereg freeze/outcomes.",
+    "Define estimand, outcome, universe, features (causal/as-of), baselines, primary contrast, and materially-different rationale vs all terminal cells.",
+    "Freeze train/val/test with embargo, block definitions, and sample-size/MDE justification.",
+    "Set outcome_data_inspected_before_freeze=true/false honestly at freeze (must be false for confirmatory).",
+    "Register any new scripts in BOTH scope registries (drift green) before claiming completion.",
+    "Run evaluation + gates; emit evaluation_summary and leakage/data-integrity notes; update frontier/hypothesis registries with honest verdict.",
+    "Never promote without meeting all preregistered gate criteria; preserve null/inconclusive results."
+  ],
+  "example_fields_to_fill": {
+    "experiment_id": "FCLR-<NEW>-<UTC>",
+    "trigger_id": "<one of resume_triggers>",
+    "trigger_evidence_artifact": "<path>",
+    "estimand": "<materially different from all terminal cells>",
+    "data_source": {"name": "", "admissibility_audit": "", "unauthenticated": true},
+    "universe": [],
+    "period": {"start": "", "end": ""},
+    "target": "",
+    "models": {},
+    "primary_contrast": "",
+    "secondary_contrasts": [],
+    "holm_family": [],
+    "splits": {"train": [], "validation": [], "test": [], "embargo_days": 7},
+    "blocks": {"definition": "non-overlapping 30-day", "count_test": null},
+    "mde": {"alpha": 0.05, "power": 0.8, "floor_pct": 2.0, "estimated_mde_pct": null, "basis": ""},
+    "bootstrap": {"reps": 2000, "seed": null, "block_unit": "UTC-day"}
+  },
+  "notes": "H2_shek_replication remains EXPLORATORY_ONLY (promotable=false). Track A forward progress requires admissible observed-liquidation data/labels; Track B sealed NOT_SUPPORTED; Track C terminal on cached confirmatory designs per frontier/power synthesis."
+}

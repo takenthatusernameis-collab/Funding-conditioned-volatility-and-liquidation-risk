@@ -1,0 +1,259 @@
+{
+  "artifact": "trigger_readiness_power_calibration",
+  "session_utc": "20261116T100533Z",
+  "generated_at_utc": "2026-11-16T10:06:27Z",
+  "network_used": false,
+  "outcome_data_read": false,
+  "method": {
+    "se_from_ci": "SE = (ci_hi - ci_lo) / (2 * z_{0.975})",
+    "mde_abs": "MDE_abs = (z_{0.975} + z_{0.80}) * SE",
+    "mde_rel_pct": "MDE_rel% = MDE_abs / B1_QLIKE * 100",
+    "n_required": "n_req = n_pairs * (MDE_rel% / 2.0)^2  (SE ~ 1/sqrt(n))",
+    "achieved_power": "power = Phi(effect_abs/SE - z_{0.975}), effect_abs = 0.02*B1",
+    "z_alpha": 1.959963984540054,
+    "z_beta": 0.8416212335729143,
+    "materiality_floor_pct": 2.0,
+    "caveat": "Normal approximation on the reported bootstrap CI; treats the CI half-width as the sampling SE. Directional/scale evidence for design sizing, not a new confirmatory result."
+  },
+  "historical_power_ledger": [
+    {
+      "experiment": "FCLR-002",
+      "rel_reduction_pct": 9.28,
+      "ci_lo": -0.097648,
+      "ci_hi": -0.008788,
+      "b1_qlike": 0.487438,
+      "n_pairs": 8274,
+      "test_blocks": 2,
+      "metric": "trackC_qlike",
+      "source": "research_state/evaluation_summary_FCLR002.md",
+      "ci_width_abs": 0.08886,
+      "se_abs": 0.022668783891162374,
+      "mde_abs_qlike": 0.06350852986207789,
+      "mde_rel_pct": 13.029047768552696,
+      "powered_for_2pct": false,
+      "n_required_for_2pct": 351140,
+      "achieved_power_for_2pct": 0.06301928089694481,
+      "ci_excludes_zero": true
+    },
+    {
+      "experiment": "FCLR-003",
+      "rel_reduction_pct": -10.98,
+      "ci_lo": 0.001487,
+      "ci_hi": 0.093225,
+      "b1_qlike": 0.400689,
+      "n_pairs": 10796,
+      "test_blocks": 3,
+      "metric": "trackC_qlike",
+      "source": "research_state/evaluation_summary_FCLR003.md",
+      "ci_width_abs": 0.091738,
+      "se_abs": 0.023402981055676952,
+      "mde_abs_qlike": 0.06556544578536239,
+      "mde_rel_pct": 16.363175875894367,
+      "powered_for_2pct": false,
+      "n_required_for_2pct": 722667,
+      "achieved_power_for_2pct": 0.052881059301589595,
+      "ci_excludes_zero": true
+    },
+    {
+      "experiment": "FCLR-009",
+      "rel_reduction_pct": -0.43,
+      "ci_lo": -0.00312,
+      "ci_hi": 0.006165,
+      "b1_qlike": 0.340756,
+      "n_pairs": 24495,
+      "test_blocks": 6,
+      "metric": "trackC_qlike",
+      "source": "research_state/evaluation_summary_FCLR-009.md",
+      "ci_width_abs": 0.009285,
+      "se_abs": 0.002368665973772706,
+      "mde_abs_qlike": 0.006636019578768773,
+      "mde_rel_pct": 1.9474402736177128,
+      "powered_for_2pct": true,
+      "n_required_for_2pct": 23224,
+      "achieved_power_for_2pct": 0.8204898762552622,
+      "ci_excludes_zero": false
+    },
+    {
+      "experiment": "FCLR-011_SEALED",
+      "rel_reduction_pct": 4.94,
+      "ci_lo": -0.032546,
+      "ci_hi": -0.001418,
+      "b1_qlike": 0.333314,
+      "n_pairs": 10785,
+      "test_blocks": 3,
+      "metric": "trackC_qlike",
+      "source": "research_state/evaluation_summary_FCLR-011.md",
+      "ci_width_abs": 0.031128,
+      "se_abs": 0.007940962243575314,
+      "mde_abs_qlike": 0.022247282439193793,
+      "mde_rel_pct": 6.67457185692584,
+      "powered_for_2pct": false,
+      "n_required_for_2pct": 120118,
+      "achieved_power_for_2pct": 0.1312538140578851,
+      "ci_excludes_zero": true
+    },
+    {
+      "experiment": "FCLR-013",
+      "rel_reduction_pct": -1.32,
+      "ci_lo": -0.011716,
+      "ci_hi": 0.022101,
+      "b1_qlike": 0.452171,
+      "n_pairs": 4199,
+      "test_blocks": 1,
+      "metric": "trackC_qlike",
+      "source": "research_state/evaluation_summary_FCLR-013.md",
+      "ci_width_abs": 0.033817,
+      "se_abs": 0.008626944236410512,
+      "mde_abs_qlike": 0.024169119450212558,
+      "mde_rel_pct": 5.345128159526498,
+      "powered_for_2pct": false,
+      "n_required_for_2pct": 29992,
+      "achieved_power_for_2pct": 0.18096653827898435,
+      "ci_excludes_zero": false
+    },
+    {
+      "experiment": "FCLR-014",
+      "rel_reduction_pct": 1.14,
+      "ci_lo": -0.016361,
+      "ci_hi": 0.007728,
+      "b1_qlike": 0.338659,
+      "n_pairs": 1918,
+      "test_blocks": 0,
+      "metric": "trackC_qlike",
+      "source": "research_state/evaluation_summary_FCLR-014.md",
+      "ci_width_abs": 0.024089,
+      "se_abs": 0.006145265981928994,
+      "mde_abs_qlike": 0.017216486336344747,
+      "mde_rel_pct": 5.083723254466808,
+      "powered_for_2pct": false,
+      "n_required_for_2pct": 12392,
+      "achieved_power_for_2pct": 0.19550546131160662,
+      "ci_excludes_zero": false
+    },
+    {
+      "experiment": "FCLR-LIQ-EXPANSION-RECOMPUTE",
+      "rel_reduction_pct": 6.19,
+      "ci_lo": -0.42074401,
+      "ci_hi": -0.03377946,
+      "b1_qlike": 3.114659,
+      "n_pairs": 593,
+      "test_blocks": 3,
+      "metric": "liq_intensity_qlike",
+      "source": "research_state/evaluation_summary_TRACKA-LIQ-EXPANSION-RECOMPUTE-20261114T083000Z.json",
+      "ci_width_abs": 0.38696455,
+      "se_abs": 0.09871726038139655,
+      "mde_abs_qlike": 0.2765648174571296,
+      "mde_rel_pct": 8.87945734852931,
+      "powered_for_2pct": false,
+      "n_required_for_2pct": 11689,
+      "achieved_power_for_2pct": 0.09193425221127582,
+      "ci_excludes_zero": true
+    }
+  ],
+  "summary": {
+    "trackC_best_powered": {
+      "experiment": "FCLR-009",
+      "mde_rel_pct": 1.9474402736177128,
+      "n_pairs": 24495,
+      "test_blocks": 6,
+      "powered_for_2pct": true
+    },
+    "trackC_underpowered": [
+      "FCLR-002",
+      "FCLR-003",
+      "FCLR-011_SEALED",
+      "FCLR-013",
+      "FCLR-014"
+    ],
+    "trackA_best_powered": {
+      "experiment": "FCLR-LIQ-EXPANSION-RECOMPUTE",
+      "mde_rel_pct": 8.87945734852931,
+      "n_pairs": 593,
+      "n_required_for_2pct": 11689
+    },
+    "key_finding": "Most historical windows were underpowered for the 2% materiality floor; only FCLR-009 (n=24495, 6 blocks) was adequately powered. The Track A liquidation recompute (n=593) needs ~11689 paired observations for a 2% MDE."
+  },
+  "trigger_readiness": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "intended_estimand": "Gate 4 funding-multisplit Track C confirmatory (C2 vs B1 next-24h RV QLIKE)",
+      "historical_basis": [
+        "FCLR-009",
+        "FCLR-011_SEALED"
+      ],
+      "note": "Binance terms/legal attestation is human-owned; the agent cannot set RESOLVED_VERIFIED. Design is pre-sized so execution is immediate once attested.",
+      "anchor_experiment": "FCLR-009",
+      "anchor_mde_rel_pct": 1.9474402736177128,
+      "anchor_n_required_for_2pct": 23224,
+      "sizing_rule": "paired_n >= 23224 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+      "instantiation_checklist": [
+        "read resume_trigger_registry.json + ironflow_monitor_state.json once (no network)",
+        "run RESEARCH_PROMPT.md section 16 admissibility/source audit",
+        "instantiate prereg_template_trigger_gated_* as a NEW prereg with outcome_data_inspected_before_freeze=false",
+        "enforce paired_n >= 23224 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+        "enumerate the Holm family pre-outcomes; freeze splits before outcomes",
+        "register any new scripts in BOTH scope registries; run all gates; record honest verdict"
+      ]
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "intended_estimand": "Track A observed-liquidation intensity forecast (C2 vs B1 OOS QLIKE, ironflow-style labels)",
+      "historical_basis": [
+        "FCLR-LIQ-EXPANSION-RECOMPUTE"
+      ],
+      "note": "Requires an admissible, unauthenticated observed-liquidation source with >=3 blocks and >=5 instruments.",
+      "anchor_experiment": "FCLR-LIQ-EXPANSION-RECOMPUTE",
+      "anchor_mde_rel_pct": 8.87945734852931,
+      "anchor_n_required_for_2pct": 11689,
+      "sizing_rule": "paired_n >= 11689 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+      "instantiation_checklist": [
+        "read resume_trigger_registry.json + ironflow_monitor_state.json once (no network)",
+        "run RESEARCH_PROMPT.md section 16 admissibility/source audit",
+        "instantiate prereg_template_trigger_gated_* as a NEW prereg with outcome_data_inspected_before_freeze=false",
+        "enforce paired_n >= 11689 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+        "enumerate the Holm family pre-outcomes; freeze splits before outcomes",
+        "register any new scripts in BOTH scope registries; run all gates; record honest verdict"
+      ]
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "intended_estimand": "Track A observed-liquidation intensity forecast on verified post-2026-10-31 Hyperliquid labels",
+      "historical_basis": [
+        "FCLR-LIQ-EXPANSION-RECOMPUTE"
+      ],
+      "note": "Requires >=100-day verified label depth beyond 2026-10-31; currently absent.",
+      "anchor_experiment": "FCLR-LIQ-EXPANSION-RECOMPUTE",
+      "anchor_mde_rel_pct": 8.87945734852931,
+      "anchor_n_required_for_2pct": 11689,
+      "sizing_rule": "paired_n >= 11689 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+      "instantiation_checklist": [
+        "read resume_trigger_registry.json + ironflow_monitor_state.json once (no network)",
+        "run RESEARCH_PROMPT.md section 16 admissibility/source audit",
+        "instantiate prereg_template_trigger_gated_* as a NEW prereg with outcome_data_inspected_before_freeze=false",
+        "enforce paired_n >= 11689 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+        "enumerate the Holm family pre-outcomes; freeze splits before outcomes",
+        "register any new scripts in BOTH scope registries; run all gates; record honest verdict"
+      ]
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "intended_estimand": "Track A expansion robustness: LOIO>=6/8 AND placebo>95th percentile on a NEW preregistered design",
+      "historical_basis": [
+        "FCLR-LIQ-EXPANSION-RECOMPUTE"
+      ],
+      "note": "Current 8-coin panel already failed twice; only a materially new design re-opens this. Size for 2% MDE before executing.",
+      "anchor_experiment": "FCLR-LIQ-EXPANSION-RECOMPUTE",
+      "anchor_mde_rel_pct": 8.87945734852931,
+      "anchor_n_required_for_2pct": 11689,
+      "sizing_rule": "paired_n >= 11689 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+      "instantiation_checklist": [
+        "read resume_trigger_registry.json + ironflow_monitor_state.json once (no network)",
+        "run RESEARCH_PROMPT.md section 16 admissibility/source audit",
+        "instantiate prereg_template_trigger_gated_* as a NEW prereg with outcome_data_inspected_before_freeze=false",
+        "enforce paired_n >= 11689 (>=5 instruments, >=3 non-overlapping 30d blocks, 7d purge/embargo)",
+        "enumerate the Holm family pre-outcomes; freeze splits before outcomes",
+        "register any new scripts in BOTH scope registries; run all gates; record honest verdict"
+      ]
+    }
+  ]
+}

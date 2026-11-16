@@ -1,0 +1,76 @@
+{
+  "utc": "20261116T035833Z",
+  "panel": "research_state/session_20261116T0040Z/fclr011_recompute_panel_20261116T004150Z.parquet",
+  "method_sm": "statsmodels.api.OLS + Duan smearing (train-only)",
+  "method_lstsq": "numpy.linalg.lstsq + Duan smearing (train-only, independent path)",
+  "models": {
+    "B1": {
+      "sm_qlike": 0.5631926700670037,
+      "lstsq_qlike": 0.5631926700670044,
+      "max_abs_pred_diff": 2.7755575615628914e-17
+    },
+    "B1_plus_funding": {
+      "sm_qlike": 2.493112370884653,
+      "lstsq_qlike": 2.4931123708846847,
+      "max_abs_pred_diff": 7.460698725481052e-14
+    },
+    "B1_plus_ema24": {
+      "sm_qlike": 0.5083042717602884,
+      "lstsq_qlike": 0.5083042717602881,
+      "max_abs_pred_diff": 3.2959746043559335e-17
+    },
+    "B1_plus_funding_plus_ema24": {
+      "sm_qlike": 2.219019849947922,
+      "lstsq_qlike": 2.2190198499479354,
+      "max_abs_pred_diff": 1.4876988529977098e-14
+    }
+  },
+  "contrasts": {
+    "B1_plus_funding_vs_B1": {
+      "sm_rel_pct": -342.6748612669346,
+      "lstsq_rel_pct": -342.6748612669397,
+      "abs_diff_pct_points": 5.059064278611913e-12,
+      "sm_qlike_a": 2.493112370884653,
+      "sm_qlike_b": 0.5631926700670037,
+      "lstsq_qlike_a": 2.4931123708846847,
+      "lstsq_qlike_b": 0.5631926700670044
+    },
+    "B1_plus_ema24_vs_B1": {
+      "sm_rel_pct": 9.745936199806222,
+      "lstsq_rel_pct": 9.745936199806367,
+      "abs_diff_pct_points": 1.4566126083082054e-13,
+      "sm_qlike_a": 0.5083042717602884,
+      "sm_qlike_b": 0.5631926700670037,
+      "lstsq_qlike_a": 0.5083042717602881,
+      "lstsq_qlike_b": 0.5631926700670044
+    },
+    "B1_plus_funding_plus_ema24_vs_B1": {
+      "sm_rel_pct": -294.00723196271764,
+      "lstsq_rel_pct": -294.0072319627195,
+      "abs_diff_pct_points": 1.8758328224066645e-12,
+      "sm_qlike_a": 2.219019849947922,
+      "sm_qlike_b": 0.5631926700670037,
+      "lstsq_qlike_a": 2.2190198499479354,
+      "lstsq_qlike_b": 0.5631926700670044
+    },
+    "B1_plus_funding_plus_ema24_vs_B1_plus_funding": {
+      "sm_rel_pct": 10.993989847295667,
+      "lstsq_rel_pct": 10.993989847296259,
+      "abs_diff_pct_points": 5.915268275202834e-13,
+      "sm_qlike_a": 2.219019849947922,
+      "sm_qlike_b": 2.493112370884653,
+      "lstsq_qlike_a": 2.2190198499479354,
+      "lstsq_qlike_b": 2.4931123708846847
+    },
+    "B1_plus_funding_plus_ema24_vs_B1_plus_ema24": {
+      "sm_rel_pct": -336.5534529669252,
+      "lstsq_rel_pct": -336.55345296692803,
+      "abs_diff_pct_points": 2.8421709430404007e-12,
+      "sm_qlike_a": 2.219019849947922,
+      "sm_qlike_b": 0.5083042717602884,
+      "lstsq_qlike_a": 2.2190198499479354,
+      "lstsq_qlike_b": 0.5083042717602881
+    }
+  },
+  "conclusion": "numerical parity indicates no lstsq/smearing implementation artifact explains the recompute degradation"
+}
