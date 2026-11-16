@@ -1,9 +1,10 @@
-# FCLR Focus Campaign (Trigger-Only) — revised 2026-11-16T02:05:42Z
+# FCLR Focus Campaign (Trigger-Only) — revised 2026-11-16T04:54:04Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (TRIGGER_ONLY / BOUNDED_TRIGGER_ONLY, `next_action_heavy=null`, `all_terminal=true`).
 **Sole handoff:** `AGENT_HANDOFF.md`. This file is the detailed, non-skippable campaign note referenced by the frontier and the handoff.
 **Governing rules:** `RESEARCH_PROMPT.md`. Never re-run concluded estimands, never re-score sealed results, never fabricate data, never edit `.github/workflows/*`, no polling, no paid/credentialed/manual outcome data.
 **Artifact rule:** write every new artifact to a NEW session subdir `research_state/session_<UTC>/`. The `research_state/` root is at 498/500 md/json — adding root files will break the drift preflight.
+**UNSKIPPABLE GATE (FCLR-NEXT-143):** the mandated Phase-B/C work is now machine-enforced by `scripts/check_handoff_heavywork_gate.py` + `tests/test_tracka_hardening_143.py` (part of `discover -q`). A session that only runs the trigger check + suite is INCOMPLETE: the gate fails closed unless the handoff points at a self-contained `session_<UTC>/` bundle containing `rca011_feature_attribution_*`, `rca011_impl_crosscheck_*`, `rca011_sealed_bridge_*`, `prereg_template_trigger_gated_*`, and `program_power_synthesis_*`. Keep it green or advance it with a new complete bundle.
 
 ## Ground truth (verified 2026-11-16T02:05:42Z)
 Every cached-data confirmatory estimand is terminal. Verified green: 1341 unittest tests OK (skipped=1); scope drift PASS (scripts=195 registry=195); guards 38 tests OK. All 4 resume triggers OPEN; ironflow `data_through=2026-10`, 2026-11..2027-01 CONFIRMED_ABSENT.

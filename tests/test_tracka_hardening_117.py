@@ -57,6 +57,10 @@ SCRIPT_REGISTRY = {
     "class": "resume_gate_infra",
     "reason": "Repo-local deterministic drift check for tracka_script_scope_registry.json; fails on scripts/*.py additions/removals or malformed entries. Read-only, no network, no real research_state writes."
   },
+  "check_handoff_heavywork_gate.py": {
+    "class": "resume_gate_infra",
+    "reason": "FCLR-NEXT-143 read-only handoff-freshness + mandatory-heavy-work gate; deterministic, no network, no real research_state writes; fails closed if the durable handoff is missing markers, if the recorded heavy session_<UTC> bundle lacks Phase-B/C artifacts, or if root md+json count exceeds the churn cap."
+  },
   "cache_panel.py": {
     "class": "repo_maintenance_utility",
     "reason": "cache_panel.py: panel cache helper; no Track A liquidation outcome claim production."
