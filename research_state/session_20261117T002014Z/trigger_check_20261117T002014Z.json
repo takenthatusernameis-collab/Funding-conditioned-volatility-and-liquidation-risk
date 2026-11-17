@@ -1,0 +1,46 @@
+{
+ "session": "session_20261117T002014Z",
+ "checked_utc": "2026-11-17T00:22:42Z",
+ "network": false,
+ "hf_probe": false,
+ "lfs_fetch": false,
+ "registry_generated_utc": "2026-11-16T11:46:26Z",
+ "ironflow_monitor_last_check": "2026-11-02T05:59:46Z",
+ "ironflow_data_through_observed": "2026-10",
+ "post_2026_10_classification": {
+  "2026-11": "CONFIRMED_ABSENT",
+  "2026-12": "CONFIRMED_ABSENT",
+  "2027-01": "CONFIRMED_ABSENT"
+ },
+ "triggers": [
+  {
+   "trigger_id": "GATE4_BRANCH_1",
+   "registry_status": "OPEN",
+   "evidence_present": false,
+   "act": false
+  },
+  {
+   "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+   "registry_status": "OPEN",
+   "evidence_present": false,
+   "act": false
+  },
+  {
+   "trigger_id": "HL_LABEL_EXTENSION",
+   "registry_status": "OPEN",
+   "evidence_present": false,
+   "act": false
+  },
+  {
+   "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+   "registry_status": "OPEN",
+   "evidence_present": false,
+   "act": false
+  }
+ ],
+ "all_open": true,
+ "verdict": "NO_TRIGGER_FIRED__BOUNDED_TRIGGER_ONLY",
+ "note": "Offline, one-shot check. No network request, HuggingFace probe, or git-lfs fetch. GATE4_BRANCH_1 is human/legal attestation and cannot be agent-set.",
+ "ironflow_consecutive_absent": 3,
+ "ironflow_last_check": "2026-11-02T05:59:46Z"
+}
