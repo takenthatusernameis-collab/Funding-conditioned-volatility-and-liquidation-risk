@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-17T02:57:42Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T03:16:56Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first)
 
@@ -31,13 +31,10 @@ A trigger-check-only session, tests/gates-only session, copied bundle, re-audit 
 - FCLR-006 — `session_20261116T185811Z`; `all_within_tolerance=true`.
 - FCLR-008 — `session_20261116T230140Z`; B0/B1 within tolerance, C1/C2 divergence documented; qualitative **NOT_MET** corroborated.
 - FCLR-RCA-011 — complete bundle `session_20261116T100533Z`.
+- **FCLR-013 — DONE (`session_20261117T031656Z`).** Independent ZIP/CSV recompute (no parquet) from `research_state/data_cache/{BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}_2026_07|08|09/`. Verdict **NOT_REPLICATED**: C2-vs-B1 QLIKE mean diff **0.017010** (CI `[-0.000523,0.034809]`, crosses zero), relative reduction **-4.99%** vs sealed **-1.32%** (NOT_MET); only 1 test block (>=3 required); materiality <2%; LOIO and placebo both **fail**; n_pairs=4200, 5 symbols, 36 test days. Direction consistent with sealed (C2 worse than B1), magnitude differs. Do not re-run FCLR-013.
 
-**Next target — FCLR-013 (2026 Q3 funding-conditioned volatility, Track C):**
-- Universe: BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT (5).
-- Window: 2026-07-01 .. 2026-09-30; frozen splits: train 2026-07-01..2026-08-05, val 2026-08-06..2026-08-25, test 2026-08-26..2026-09-30 (7d embargo).
-- Primary contrast: C2 vs B1 on next-24h realized variance QLIKE (2000-rep 24h-block bootstrap); sealed result **NOT_MET** (rel -1.32%, 1 test block). Recompute independently and issue an honest CONFIRMED/NOT_REPLICATED/INCONCLUSIVE verdict; do not re-score the sealed summary.
-- Inputs (local, no network): `research_state/data_cache/{BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}_2026_07|08|09/` — **ZIP archives** (`<SYM>-1h-YYYY-MM-DD.zip`, `BTCUSDT-fundingRate-*.zip`, index/premium). Use the ZIP-aware reader pattern from `session_20261117T000400Z/recompute_fclr002_003_20261117T000400Z.py`; a CSV-only glob will silently drop days.
-- Do **not** use `scripts/fclr_liq_010_confirm.py` — it is parquet-only and cannot run here (see blocked-path warning).
+**Next target — FCLR-014 (confirmatory funding-vol panel, Track C):**
+- Independent recompute only if its local non-parquet inputs are valid and time permits. Same independence rule as FCLR-013: write `recompute_fclr014_<UTC>.{py,json,md}`. If FCLR-014's registered panel is parquet-only with no CSV/JSON twin, record the exact blocker and emit the closest non-parquet artifact instead of fabricating values.
 
 **Blocked-path warning (do not waste a session here):**
 - **No parquet engine is installed** (`pyarrow`, `fastparquet`, `duckdb`, `polars` all absent; network installs prohibited). Any task whose only input is `.parquet` is blocked unless a CSV/JSON twin exists. FCLR-010 was solved this way; FCLR-013 uses ZIP/CSV caches.
@@ -68,14 +65,15 @@ A trigger-check-only session, tests/gates-only session, copied bundle, re-audit 
 4. ~~FCLR-002~~ — DONE (`session_20261117T000400Z`; exact values diverged beyond tolerance; qualitative C2-vs-B1 improvement corroborated; gate NOT_MET).
 5. ~~FCLR-003~~ — DONE (`session_20261117T000400Z`; B0/B1 matched; C1/C2 diverged; NOT_MET corroborated).
 6. ~~FCLR-010~~ — **DONE (`session_20261117T002014Z`; CSV/JSON parquet-free recompute; verdict NOT_REPLICATED: 0.50% vs sealed 2.21%, LOIO/placebo fail).**
-7. **FCLR-013 (2026 Q3 panels, 5 symbols, ZIP cache): independent recompute — CURRENT TARGET (PRIMARY).**
-8. **FCLR-014 (confirmatory funding-vol panel): independent recompute — NEXT (only if local non-parquet inputs valid).**
+7. ~~FCLR-013~~ — **DONE (`session_20261117T031656Z`; ZIP/CSV parquet-free recompute; verdict NOT_REPLICATED: C2-vs-B1 rel -4.99%, CI crosses zero, 1 test block; sealed -1.32% NOT_MET).**
+8. **FCLR-014 (confirmatory funding-vol panel): independent recompute — CURRENT (only if local non-parquet inputs valid).**
 
 A session that completes an item must (a) create `research_state/session_<UTC>/`, (b) emit a new quantitative artifact named per queue, (c) write evidence audit, (d) run all gates + full discovery suite to completion with recorded EXIT, (e) update this handoff and tick the queue item.
 
 ## Heavy-work evidence on disk (authoritative; do not redo)
 
 - **FCLR-010 — `research_state/session_20261117T002014Z/`:** parquet-free recompute (`recompute_fclr010_20261117T002014Z.{py,json,md}`), evidence audit, trigger check. Verdict NOT_REPLICATED.
+- **FCLR-013 — `research_state/session_20261117T031656Z/`:** ZIP/CSV parquet-free recompute (`recompute_fclr013_20261117T031656Z.{py,json,md}`), evidence audit, trigger check. Verdict NOT_REPLICATED: C2-vs-B1 rel -4.99%, CI crosses zero, 1 test block; sealed -1.32% NOT_MET.
 - FCLR-002/FCLR-003 — `research_state/session_20261117T000400Z/` (recomputes, evidence audit, gate/suite captures).
 - FCLR-008 — `research_state/session_20261116T230140Z/` (B0/B1 QLIKE match <=3e-7; C1/C2 divergence ~1.4e-3/2.1e-3; evidence audit and full gate/suite capture complete).
 - FCLR-006 — `research_state/session_20261116T185811Z/` (`all_within_tolerance=true`).
@@ -124,14 +122,14 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
 
-## Verification record — 2026-11-17T02:57:42Z handoff refresh
+## Verification record — 2026-11-17T03:16:56Z handoff refresh
 
-- **Changed:** refreshed the sole durable handoff with current timestamp; FCLR-010 remains **DONE** (`session_20261117T002014Z`, parquet-free CSV/JSON recompute, verdict **NOT_REPLICATED**: 0.50% vs sealed 2.21%, LOIO/placebo fail); next target set to **FCLR-013** (2026 Q3, 5-symbol ZIP cache); all documented bottlenecks remain removed; root `research_state/*.md|json` at 500/500 cap — session-only writes required.
-- **New heavy artifact required this session:** `research_state/session_<UTC>/recompute_fclr013_<UTC>.{py,json,md}` + `evidence_audit_<UTC>.md` + trigger check + full gate/suite capture.
+- **Changed:** refreshed the sole durable handoff with current timestamp; FCLR-013 **DONE** (`session_20261117T031656Z`, ZIP/CSV parquet-free recompute, verdict **NOT_REPLICATED**: C2-vs-B1 QLIKE mean diff 0.017010, CI `[-0.000523,0.034809]` crosses zero, rel **-4.99%** vs sealed **-1.32%** NOT_MET, 1 test block >=3 required, materiality <2%, LOIO/placebo fail; n_pairs=4200, 5 symbols, 36 test days); FCLR-010 remains **DONE** (`session_20261117T002014Z`, verdict NOT_REPLICATED: 0.50% vs sealed 2.21%); next target set to **FCLR-014**; all documented bottlenecks remain removed; root `research_state/*.md|json` at 500/500 cap — session-only writes required.
+- **New heavy artifact this session:** `research_state/session_20261117T031656Z/recompute_fclr013_20261117T031656Z.{py,json,md}` + `evidence_audit_20261117T031656Z.md` + `trigger_check_20261117T031656Z.json`.
 - **Baseline gates:** `check_handoff_heavywork_gate.py --json` **PASS**; `check_tracka_scope_registry_drift.py --json` **PASS**.
 - **Targeted suite:** `test_active_campaign_gate`, `test_tracka_hardening_117/118/143` — **52 tests OK, EXIT 0**.
-- **Full `unittest discover -q`:** baseline 1340 tests, 4 pre-existing pyarrow errors (`tests.test_fclr_liq_combined_admissibility_audit`), 18 skipped, EXIT 1; success = no new failures/errors. Never treat timeout/monitor cap as green.
-- **Queue:** FCLR-009/006/008/002/003/010 DONE; FCLR-013 CURRENT (mandatory heavy artifact); FCLR-014 NEXT.
-- **Git tree:** new session artifacts under `research_state/session_<UTC>/` only; no tracked file modified.
+- **Full `unittest discover -q`:** 1340 tests, 4 pre-existing pyarrow errors (`tests.test_fclr_liq_combined_admissibility_audit`), 18 skipped, EXIT 1 — identical to baseline, no new failures/errors. Timestamp-only side effect on `research_state/ironflow_fastpath_cache.json` reverted; no tracked file modified.
+- **Queue:** FCLR-009/006/008/002/003/010/013 DONE; FCLR-014 CURRENT.
+- **Git tree:** new session artifacts under `research_state/session_20261117T031656Z/` only; no tracked file modified.
 
 (End of file)

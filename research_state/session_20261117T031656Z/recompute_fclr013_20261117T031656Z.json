@@ -1,0 +1,173 @@
+{
+  "experiment_id": "FCLR-013",
+  "campaign": "FCLR-REPRO-AUDIT-04",
+  "cell": "FCLR-013",
+  "generated_utc": "2026-11-17T03:16:56Z",
+  "out_utc": "2026-11-17T03:16:56Z",
+  "input_mode": "csv_zip_parquet_free",
+  "input_data_cache": "research_state/data_cache/{SYM}_2026_07|08|09/",
+  "input_series": [
+    "markPriceKlines",
+    "indexPriceKlines",
+    "premiumIndexKlines",
+    "fundingRate"
+  ],
+  "output_format": "json_md_only_no_parquet",
+  "verdict": "NOT_REPLICATED",
+  "checks": {
+    "materiality_ge_2pct": false,
+    "ci_excludes_zero_improving": false,
+    "instruments_ge_5": true,
+    "blocks_ge_3": false,
+    "loio_ge_4_of_5": false,
+    "placebo_pass": true,
+    "leakage_audit_pass": true
+  },
+  "primary": {
+    "mean_diff": 0.01700983720599113,
+    "rel_reduction_pct": -4.988898715596898,
+    "ci_lo": -0.0005229941205959622,
+    "ci_hi": 0.03480880428982366,
+    "n_pairs": 4200
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": 0.01700983720599113,
+      "rel_reduction_pct": -4.988898715596898,
+      "ci_lo": -0.0005229941205959622,
+      "ci_hi": 0.03480880428982366,
+      "n_pairs": 4200
+    },
+    "C1_vs_B1": {
+      "mean_diff": 0.0020700727532855126,
+      "rel_reduction_pct": -0.6071418071197509,
+      "ci_lo": -0.008234211184718431,
+      "ci_hi": 0.010499553346859501,
+      "n_pairs": 4200
+    },
+    "C2_vs_C1": {
+      "mean_diff": 0.014939764452705614,
+      "rel_reduction_pct": -4.355313976494518,
+      "ci_lo": -0.00031239076298746353,
+      "ci_hi": 0.03075175070904211,
+      "n_pairs": 4200
+    }
+  },
+  "loio": [
+    {
+      "held_out": "BTCUSDT",
+      "mean_diff": 0.10533133440820129,
+      "rel_reduction_pct": -31.483374249434316,
+      "ci_lo": 0.05883201891132148,
+      "ci_hi": 0.15516354213844702,
+      "n_pairs": 3360
+    },
+    {
+      "held_out": "ETHUSDT",
+      "mean_diff": 0.05080988232927908,
+      "rel_reduction_pct": -14.610193368280145,
+      "ci_lo": 0.02675255517460354,
+      "ci_hi": 0.07499237866997992,
+      "n_pairs": 3360
+    },
+    {
+      "held_out": "BNBUSDT",
+      "mean_diff": -0.002395975462016478,
+      "rel_reduction_pct": 0.6328848662126378,
+      "ci_lo": -0.017963188633406124,
+      "ci_hi": 0.013331431330156813,
+      "n_pairs": 3360
+    },
+    {
+      "held_out": "SOLUSDT",
+      "mean_diff": 0.007760411581074802,
+      "rel_reduction_pct": -2.101237165101173,
+      "ci_lo": -0.0118276989825656,
+      "ci_hi": 0.02889687607271887,
+      "n_pairs": 3360
+    },
+    {
+      "held_out": "XRPUSDT",
+      "mean_diff": -0.0004981278404968558,
+      "rel_reduction_pct": 0.16237476026996672,
+      "ci_lo": -0.011864040873054807,
+      "ci_hi": 0.010151098513006527,
+      "n_pairs": 3360
+    }
+  ],
+  "placebo": {
+    "null_p95": -5.155397038837882,
+    "true_rel_reduction_pct": -4.988898715596898,
+    "pass": true,
+    "n_perm": 200
+  },
+  "model_results": {
+    "B0": {
+      "test_qlike_mean": 0.4788259596110826,
+      "test_n": 4200
+    },
+    "B1": {
+      "test_qlike_mean": 0.34095374902707326,
+      "test_n": 4200
+    },
+    "C1": {
+      "test_qlike_mean": 0.3430238217803588,
+      "test_n": 4200
+    },
+    "C2": {
+      "test_qlike_mean": 0.3579635862330643,
+      "test_n": 4200
+    }
+  },
+  "counts": {
+    "train": 3480,
+    "val": 2400,
+    "test": 4200
+  },
+  "splits": {
+    "train": [
+      "2026-07-01T00:00:00Z",
+      "2026-08-05T23:00:00Z"
+    ],
+    "val": [
+      "2026-08-06T00:00:00Z",
+      "2026-08-25T23:00:00Z"
+    ],
+    "test": [
+      "2026-08-26T00:00:00Z",
+      "2026-09-30T23:00:00Z"
+    ]
+  },
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "n_symbols": 5,
+  "n_test_rows": 4200,
+  "n_train_rows": 3480,
+  "n_panel_rows": 10080,
+  "sealed_reference": {
+    "source": "research_state/evaluation_summary_FCLR-013.md",
+    "primary_contrast": "C2_vs_B1",
+    "mean_diff": 0.005953,
+    "ci": [
+      -0.011716,
+      0.022101
+    ],
+    "rel_reduction_pct": -1.32,
+    "verdict": "NOT_MET"
+  },
+  "gate": {
+    "primary_c2_vs_b1_rel_pass": false,
+    "primary_c2_vs_b1_ci_pass": false,
+    "instruments": 5,
+    "test_days": 36,
+    "blocks_30d": 1,
+    "blocks_pass": false,
+    "overall": "NOT_MET"
+  },
+  "conclusion": "Independent recompute complete; verdict issued honestly without re-scoring sealed summary."
+}
