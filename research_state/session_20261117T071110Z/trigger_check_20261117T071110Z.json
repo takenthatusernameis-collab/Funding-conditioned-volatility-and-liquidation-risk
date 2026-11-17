@@ -1,0 +1,33 @@
+{
+  "all_open": true,
+  "any_trigger_fired": false,
+  "artifact_id": "FCLR-TRIGGER-CHECK-20261117T071110Z",
+  "consequence": "No trigger satisfied -> no confirmatory estimand advanced or re-scored; heavy holding work = design-admissibility adjudication + replication synthesis (this session).",
+  "generated_utc": "2026-11-17T07:12:47Z",
+  "ironflow": {
+    "consecutive_absent": 3,
+    "data_through": "2026-10",
+    "last_probe_ts": "20261102T150101Z",
+    "post_2026_10_summary": null
+  },
+  "network": false,
+  "polling": false,
+  "reopen_triggers": [
+    {
+      "id": null,
+      "status": "OPEN"
+    },
+    {
+      "id": null,
+      "status": "OPEN"
+    },
+    {
+      "id": null,
+      "status": "OPEN"
+    },
+    {
+      "id": null,
+      "status": "OPEN"
+    }
+  ]
+}

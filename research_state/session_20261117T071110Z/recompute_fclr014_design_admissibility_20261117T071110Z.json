@@ -1,0 +1,227 @@
+{
+  "artifact_id": "FCLR-014-DESIGN-ADMISSIBILITY-20261117T071110Z",
+  "canonical_full_c2_feasible": false,
+  "canonical_tool": "scripts/next_campaign_status.py --json",
+  "canonical_tool_path": {
+    "design_feasibility_any_feasible": false,
+    "design_runs": [
+      {
+        "feasible": false,
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61
+      },
+      {
+        "feasible": false,
+        "months": [
+          "2025-01"
+        ],
+        "span_days": 31
+      }
+    ],
+    "disjoint_blocks": [
+      {
+        "feasible": false,
+        "month": "2024-04",
+        "reason": "2024-02:missing_or_unfunded; 2024-03:missing_or_unfunded"
+      },
+      {
+        "feasible": false,
+        "month": "2024-05",
+        "reason": "2024-03:missing_or_unfunded"
+      },
+      {
+        "feasible": false,
+        "month": "2025-01",
+        "reason": "2024-11:missing_or_unfunded; 2024-12:missing_or_unfunded"
+      }
+    ],
+    "disjoint_campaign_feasible": false,
+    "disjoint_n_feasible": 0
+  },
+  "conflict_resolution": {
+    "discrepancy": "041333Z (corrected JSON) and 051045Z count 4 mark+funding-only blocks and claim a prereg is freezable; the canonical full-C2 tool reports 0 feasible blocks / no >=127d run.",
+    "retraction": "RETRACTED: the claim 'campaign_feasible_new_prereg=true / freeze a NEW mark+funding-only prereg using 2024-10, 2024-11, 2024-12' (session_20261117T051045Z and the corrected 041333Z JSON) is UNSAFE for a confirmatory claim: it uses mutually overlapping blocks.  It is valid only as an EXPLORATORY / NOT-CONFIRMATORY / NOT-PROMOTABLE 2-block pilot.",
+    "root_cause": "The 4-block count treats each month independently and omits the mutual non-overlap constraint across blocks.  A 30d train + 7d embargo + 30d test window spans ~2.2 months, so consecutive candidate months (2024-10/11/12, 2025-01) have train windows that overlap a neighbouring block's test month, i.e. cross-block leakage.  Enforcing non-overlap leaves at most 2 blocks."
+  },
+  "generated_utc": "2026-11-17T07:12:03Z",
+  "markfund_only_analysis": {
+    "candidate_test_months": [
+      {
+        "embargo_days": 7,
+        "incomplete_train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "individually_feasible": false,
+        "test_end": "2024-04-30",
+        "test_month": "2024-04",
+        "test_start": "2024-04-01",
+        "train_end": "2024-03-25",
+        "train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "train_start": "2024-02-24"
+      },
+      {
+        "embargo_days": 7,
+        "incomplete_train_months": [
+          "2024-03"
+        ],
+        "individually_feasible": false,
+        "test_end": "2024-05-31",
+        "test_month": "2024-05",
+        "test_start": "2024-05-01",
+        "train_end": "2024-04-24",
+        "train_months": [
+          "2024-03",
+          "2024-04"
+        ],
+        "train_start": "2024-03-25"
+      },
+      {
+        "embargo_days": 7,
+        "incomplete_train_months": [],
+        "individually_feasible": true,
+        "test_end": "2024-10-31",
+        "test_month": "2024-10",
+        "test_start": "2024-10-01",
+        "train_end": "2024-09-24",
+        "train_months": [
+          "2024-08",
+          "2024-09"
+        ],
+        "train_start": "2024-08-25"
+      },
+      {
+        "embargo_days": 7,
+        "incomplete_train_months": [],
+        "individually_feasible": true,
+        "test_end": "2024-11-30",
+        "test_month": "2024-11",
+        "test_start": "2024-11-01",
+        "train_end": "2024-10-25",
+        "train_months": [
+          "2024-09",
+          "2024-10"
+        ],
+        "train_start": "2024-09-25"
+      },
+      {
+        "embargo_days": 7,
+        "incomplete_train_months": [],
+        "individually_feasible": true,
+        "test_end": "2024-12-31",
+        "test_month": "2024-12",
+        "test_start": "2024-12-01",
+        "train_end": "2024-11-24",
+        "train_months": [
+          "2024-10",
+          "2024-11"
+        ],
+        "train_start": "2024-10-25"
+      },
+      {
+        "embargo_days": 7,
+        "incomplete_train_months": [],
+        "individually_feasible": true,
+        "test_end": "2025-01-31",
+        "test_month": "2025-01",
+        "test_start": "2025-01-01",
+        "train_end": "2024-12-25",
+        "train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "train_start": "2024-11-25"
+      }
+    ],
+    "individually_feasible_months": [
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01"
+    ],
+    "markfund_only_campaign_feasible": false,
+    "max_mutually_non_overlapping": 2,
+    "min_blocks_required": 3,
+    "min_design_days": 127,
+    "n_individually_feasible": 4,
+    "n_overlapping_pairs": 5,
+    "non_overlapping_selection": [
+      "2024-10",
+      "2025-01"
+    ],
+    "overlapping_pairs": [
+      {
+        "block_a": "2024-10",
+        "block_b": "2024-11",
+        "overlap_window": [
+          "2024-09-25",
+          "2024-10-31"
+        ]
+      },
+      {
+        "block_a": "2024-10",
+        "block_b": "2024-12",
+        "overlap_window": [
+          "2024-10-25",
+          "2024-10-31"
+        ]
+      },
+      {
+        "block_a": "2024-11",
+        "block_b": "2024-12",
+        "overlap_window": [
+          "2024-10-25",
+          "2024-11-30"
+        ]
+      },
+      {
+        "block_a": "2024-11",
+        "block_b": "2025-01",
+        "overlap_window": [
+          "2024-11-25",
+          "2024-11-30"
+        ]
+      },
+      {
+        "block_a": "2024-12",
+        "block_b": "2025-01",
+        "overlap_window": [
+          "2024-11-25",
+          "2024-12-31"
+        ]
+      }
+    ]
+  },
+  "permits_new_prereg": false,
+  "prior_session_claims": {
+    "session_20261117T041333Z": {
+      "campaign_feasible_new_prereg": true,
+      "corrected_blocker": "DESIGN_ADMISSIBILITY (CORRECTED 2026-11-17T06:08:53Z): full-C2 estimand has 0 available disjoint blocks and no contiguous untested run >= 127d; mark+funding-only (B0/B1/C1) has 4 available blocks (2024-10, 2024-11, 2024-12, 2025-01) meeting >=3. A new mark+funding-only pre-registered design CAN be frozen before outcomes. The prior 2-block count in this artifact was erroneous: it penalized train months for overlapping TESTED_WINDOWS, contradicting scripts/next_campaign_status.py disjoint_block_frontier() which explicitly permits train months to overlap prior windows as legitimate pre-test history. Corrected count: 4 blocks, campaign_feasible_new_prereg=true.",
+      "n_available_disjoint_blocks_markfund": 4,
+      "overall_verdict": null,
+      "path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261117T041333Z/fclr014_panel_blocker_resolution_20261117T041333Z.json",
+      "present": true
+    },
+    "session_20261117T051045Z": {
+      "campaign_feasible_new_prereg": null,
+      "corrected_blocker": "Design admissibility under TESTED_WINDOWS, NOT data absence. Cache holds 31 months mark+funding (2024-04..2026-10) and 22 months full mark+index+premium+funding (2025-01..2026-10).",
+      "n_available_disjoint_blocks_markfund": null,
+      "overall_verdict": {
+        "full_c2_design_feasible": false,
+        "mark_funding_only_design_feasible": true,
+        "recommended_path": "mark_funding_only"
+      },
+      "path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261117T051045Z/fclr014_panel_blocker_resolution_20261117T051045Z.json",
+      "present": true
+    }
+  },
+  "question": "Can a >=3-block confirmatory FCLR-014 design be frozen from local cached data before outcome inspection?",
+  "verdict": "BLOCKED_ON_DESIGN",
+  "verdict_detail": "FCLR-014 is BLOCKED-ON-DESIGN.  Under the registered full-C2 rule (mark+index+premium+funding) the canonical tool finds 0 feasible disjoint blocks and no contiguous untested run >=127d.  Under a mark+funding-only rule (a materially different estimand requiring a new prereg) only 2 mutually non-overlapping blocks exist (<3).  Therefore no >=3-block confirmatory design can be frozen from local data without consuming a sealed window.  Do NOT freeze a prereg on the retracted 4-block claim; do NOT re-score sealed results."
+}

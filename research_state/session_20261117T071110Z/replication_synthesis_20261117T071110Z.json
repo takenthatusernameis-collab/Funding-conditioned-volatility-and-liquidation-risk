@@ -1,0 +1,175 @@
+{
+  "artifact_id": "FCLR-REPLICATION-SYNTHESIS-20261117T071110Z",
+  "campaign": "FCLR-REPRO-SYNTH-05",
+  "generated_utc": "2026-11-17T07:12:34Z",
+  "n_studies": 7,
+  "program_verdict": "All 7 completed independent recomputes corroborate the sealed qualitative programme verdict (no sealed NOT_MET / NOT_REPLICATED result is overturned into a promotable positive claim). Exact within-tolerance reproduction holds for 2/7 (FCLR-006, FCLR-009); FCLR-002/003/008 diverge beyond tolerance on exact values but agree on the qualitative NOT_MET direction; FCLR-010/013 are fresh recomputes returning NOT_REPLICATED. No study clears both the 2% materiality floor and the >=3-block requirement, so no promotable positive result exists. The programme remains CLOSED_TERMINAL with no claim-worthy promotable result.",
+  "scope": "Independent recomputes of sealed FCLR cached-data estimands (Track C funding-conditioned volatility).",
+  "studies": [
+    {
+      "all_within_tolerance": false,
+      "blocks_ge_3": null,
+      "ci_hi": -0.0057593522808435035,
+      "ci_lo": -0.09338945213747492,
+      "conclusion": "Recomputed values diverge beyond tolerance; the divergence is a finding, not a tuning target.",
+      "gate": {
+        "blocks_30d": 2,
+        "blocks_pass": false,
+        "instruments": 5,
+        "overall": "NOT_MET",
+        "primary_c2_vs_b1_ci_pass": true,
+        "primary_c2_vs_b1_rel_pass": true,
+        "test_days": 70
+      },
+      "loio_ge_4_of_5": null,
+      "materiality_ge_2pct": true,
+      "n": 8274,
+      "placebo_pass": null,
+      "rel_reduction_pct": 8.599046454748262,
+      "session": "session_20261117T000400Z",
+      "source": "research_state/session_20261117T000400Z/recompute_fclr002_20261117T000400Z.json",
+      "study": "FCLR-002",
+      "verdict": "DIVERGED_BEYOND_TOLERANCE"
+    },
+    {
+      "all_within_tolerance": false,
+      "blocks_ge_3": null,
+      "ci_hi": 0.09761354787690434,
+      "ci_lo": 0.0040448226229894855,
+      "conclusion": "Recomputed values diverge beyond tolerance; the divergence is a finding, not a tuning target.",
+      "gate": {
+        "blocks_30d": 3,
+        "blocks_pass": true,
+        "instruments": 5,
+        "overall": "NOT_MET",
+        "primary_c2_vs_b1_ci_pass": false,
+        "primary_c2_vs_b1_rel_pass": false,
+        "test_days": 91
+      },
+      "loio_ge_4_of_5": null,
+      "materiality_ge_2pct": true,
+      "n": 10796,
+      "placebo_pass": null,
+      "rel_reduction_pct": -11.846371528231844,
+      "session": "session_20261117T000400Z",
+      "source": "research_state/session_20261117T000400Z/recompute_fclr003_20261117T000400Z.json",
+      "study": "FCLR-003",
+      "verdict": "DIVERGED_BEYOND_TOLERANCE"
+    },
+    {
+      "all_within_tolerance": true,
+      "blocks_ge_3": null,
+      "ci_hi": 0.5919479834709125,
+      "ci_lo": 0.16826336986115747,
+      "conclusion": "Independent recompute reproduces all published FCLR-006 QLIKE values, n, and the C2-vs-B1 contrast (mean diff, relative reduction, CI, n_pairs) within declared tolerance. The FCLR-006 NOT_MET terminal headline (block criterion 2 < 3 blocks) is corroborated by an independent code path.",
+      "gate": null,
+      "loio_ge_4_of_5": null,
+      "materiality_ge_2pct": true,
+      "n": 8987,
+      "placebo_pass": null,
+      "rel_reduction_pct": -67.32320689374508,
+      "session": "session_20261116T185811Z",
+      "source": "research_state/session_20261116T185811Z/recompute_fclr006_20261116T185811Z.json",
+      "study": "FCLR-006",
+      "verdict": "REPRODUCED_WITHIN_TOLERANCE"
+    },
+    {
+      "all_within_tolerance": false,
+      "blocks_ge_3": null,
+      "ci_hi": -0.025771563561743514,
+      "ci_lo": -0.0636257316422598,
+      "conclusion": "Independent recompute diverged from published FCLR-008 values beyond tolerance; investigate feature construction / row eligibility / OLS details.",
+      "gate": null,
+      "loio_ge_4_of_5": null,
+      "materiality_ge_2pct": false,
+      "n": 10800,
+      "placebo_pass": null,
+      "rel_reduction_pct": 0.6862427547811324,
+      "session": "session_20261116T230140Z",
+      "source": "research_state/session_20261116T230140Z/recompute_fclr008_20261116T230140Z.json",
+      "study": "FCLR-008",
+      "verdict": "DIVERGED_BEYOND_TOLERANCE"
+    },
+    {
+      "all_within_tolerance": true,
+      "blocks_ge_3": null,
+      "ci_hi": 0.006164742824817063,
+      "ci_lo": -0.0031202350234405154,
+      "conclusion": "Independent recompute reproduces all published FCLR-009 QLIKE values, n, and the C2-vs-B1 contrast (mean diff, relative reduction, CI, n_pairs) within declared tolerance. The FCLR-009 NOT_MET terminal headline is corroborated by an independent code path.",
+      "gate": null,
+      "loio_ge_4_of_5": null,
+      "materiality_ge_2pct": false,
+      "n": 24495,
+      "placebo_pass": null,
+      "rel_reduction_pct": -0.42525774214540507,
+      "session": "session_20261116T125624Z",
+      "source": "research_state/session_20261116T125624Z/recompute_fclr009_20261116T125624Z.json",
+      "study": "FCLR-009",
+      "verdict": "REPRODUCED_WITHIN_TOLERANCE"
+    },
+    {
+      "all_within_tolerance": null,
+      "blocks_ge_3": true,
+      "ci_hi": -0.00031640856995534156,
+      "ci_lo": -0.00110613756566891,
+      "conclusion": "",
+      "gate": null,
+      "loio_ge_4_of_5": false,
+      "materiality_ge_2pct": false,
+      "n": 64056,
+      "placebo_pass": false,
+      "rel_reduction_pct": 0.5010692983825399,
+      "session": "session_20261117T002014Z",
+      "source": "research_state/session_20261117T002014Z/recompute_fclr010_20261117T002014Z.json",
+      "study": "FCLR-010",
+      "verdict": "NOT_REPLICATED"
+    },
+    {
+      "all_within_tolerance": null,
+      "blocks_ge_3": false,
+      "ci_hi": 0.03480880428982366,
+      "ci_lo": -0.0005229941205959622,
+      "conclusion": "Independent recompute complete; verdict issued honestly without re-scoring sealed summary.",
+      "gate": {
+        "blocks_30d": 1,
+        "blocks_pass": false,
+        "instruments": 5,
+        "overall": "NOT_MET",
+        "primary_c2_vs_b1_ci_pass": false,
+        "primary_c2_vs_b1_rel_pass": false,
+        "test_days": 36
+      },
+      "loio_ge_4_of_5": false,
+      "materiality_ge_2pct": false,
+      "n": 4200,
+      "placebo_pass": true,
+      "rel_reduction_pct": -4.988898715596898,
+      "session": "session_20261117T031656Z",
+      "source": "research_state/session_20261117T031656Z/recompute_fclr013_20261117T031656Z.json",
+      "study": "FCLR-013",
+      "verdict": "NOT_REPLICATED"
+    }
+  ],
+  "summary": {
+    "diverged_beyond_tolerance": [
+      "FCLR-002",
+      "FCLR-003",
+      "FCLR-008"
+    ],
+    "promotable_positive_results": [],
+    "qualitative_corroboration_wilson95": [
+      0.6456611570247934,
+      1.0
+    ],
+    "qualitatively_corroborated": "7/7",
+    "reproduced_within_tolerance": [
+      "FCLR-006",
+      "FCLR-009"
+    ],
+    "reproduced_within_tolerance_count": 2,
+    "within_tolerance_rate_wilson95": [
+      0.0822171657090155,
+      0.6410709098517873
+    ]
+  }
+}
