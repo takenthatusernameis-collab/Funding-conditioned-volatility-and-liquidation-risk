@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-17T14:00:38Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T14:02:03Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first — heavy work required)
 
@@ -152,7 +152,7 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
 - `HANDOFF_NEXT_SESSION_20261117T033007Z.md`: tombstoned 2026-11-17T04:09:17Z — ignore.
 
-## Verification record — 2026-11-17T14:00:38Z (handoff refresh; FCLR-FRONTIER-VERIFY-06 active)
+## Verification record — 2026-11-17T14:02:03Z (handoff refresh; FCLR-FRONTIER-VERIFY-06 active)
 
 - **Current trigger check (once, no network/polling):** `research_state/resume_trigger_registry.json` + `research_state/ironflow_monitor_state.json` read at 2026-11-17T14:00Z; all four triggers **OPEN** (`GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO`); Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT` (per `post_2026_10_summary`). No trigger fired; no confirmatory estimand advanced/re-scored.
 - **Last completed heavy session:** `research_state/session_20261117T072040Z/` (FCLR-REPRO-SYNTH-05 DONE). Queue 1–9 complete; **current mandatory heavy item is FCLR-FRONTIER-VERIFY-06** — independent exhaustive frontier audit `recompute_frontier_exhaustive_audit_<UTC>.{py,json,md}` in a new `research_state/session_<UTC>/` (must not be a copy/re-audit of `session_20261117T072040Z`).
