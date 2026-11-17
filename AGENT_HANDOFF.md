@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-17T02:57:14Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T02:57:42Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first)
 
@@ -124,14 +124,14 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
 
-## Verification record — 2026-11-17T02:57:14Z handoff refresh
+## Verification record — 2026-11-17T02:57:42Z handoff refresh
 
-- **Changed:** refreshed the sole durable handoff; FCLR-010 marked **DONE** (`session_20261117T002014Z`, parquet-free CSV/JSON recompute, verdict **NOT_REPLICATED**: 0.50% vs sealed 2.21%, LOIO/placebo fail); next target set to **FCLR-013** (2026 Q3, 5-symbol ZIP cache); recorded the removed parquet-engine bottleneck and the FCLR-013 actionable path; ticked the reproducibility queue.
-- **New heavy artifact:** `research_state/session_20261117T002014Z/recompute_fclr010_20261117T002014Z.{py,json,md}` + `evidence_audit_20261117T002014Z.md` + `trigger_check_20261117T002014Z.json`.
+- **Changed:** refreshed the sole durable handoff with current timestamp; FCLR-010 remains **DONE** (`session_20261117T002014Z`, parquet-free CSV/JSON recompute, verdict **NOT_REPLICATED**: 0.50% vs sealed 2.21%, LOIO/placebo fail); next target set to **FCLR-013** (2026 Q3, 5-symbol ZIP cache); all documented bottlenecks remain removed; root `research_state/*.md|json` at 500/500 cap — session-only writes required.
+- **New heavy artifact required this session:** `research_state/session_<UTC>/recompute_fclr013_<UTC>.{py,json,md}` + `evidence_audit_<UTC>.md` + trigger check + full gate/suite capture.
 - **Baseline gates:** `check_handoff_heavywork_gate.py --json` **PASS**; `check_tracka_scope_registry_drift.py --json` **PASS**.
 - **Targeted suite:** `test_active_campaign_gate`, `test_tracka_hardening_117/118/143` — **52 tests OK, EXIT 0**.
-- **Full `unittest discover -q`:** recorded under the session dir; baseline 1340 tests, 4 pre-existing pyarrow errors, 18 skipped, EXIT 1; success = no new failures/errors.
-- **Queue:** FCLR-009/006/008/002/003/010 DONE; FCLR-013 CURRENT; FCLR-014 NEXT.
-- **Git tree:** new session artifacts under `research_state/session_20261117T002014Z/` only; no tracked file modified.
+- **Full `unittest discover -q`:** baseline 1340 tests, 4 pre-existing pyarrow errors (`tests.test_fclr_liq_combined_admissibility_audit`), 18 skipped, EXIT 1; success = no new failures/errors. Never treat timeout/monitor cap as green.
+- **Queue:** FCLR-009/006/008/002/003/010 DONE; FCLR-013 CURRENT (mandatory heavy artifact); FCLR-014 NEXT.
+- **Git tree:** new session artifacts under `research_state/session_<UTC>/` only; no tracked file modified.
 
 (End of file)
