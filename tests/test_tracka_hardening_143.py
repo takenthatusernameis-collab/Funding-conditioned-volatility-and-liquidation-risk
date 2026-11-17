@@ -157,6 +157,68 @@ class TestHandoffGateFailsClosed(unittest.TestCase):
         self.assertTrue(any(f.startswith("ROOT_COUNT_EXCEEDS_CAP") for f in res["failures"]))
 
 
+class TestFrontierVerifyCampaignGate(unittest.TestCase):
+    """FCLR-FRONTIER-VERIFY-06: once the campaign has started, a post-start
+    session cannot satisfy the heavy-work gate with an arbitrary recompute_*
+    artifact. It must emit the exact exhaustive-audit triad and a trigger check.
+    Sessions predating the campaign remain grandfathered."""
+
+    START = "20261117T130551Z"
+
+    def _repo(self, latest_sid="session_20261117T140000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143fv_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the new frontier contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-FRONTIER-VERIFY-06-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def test_post_start_generic_recompute_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["frontier_verify"]["required"])
+        self.assertTrue(res["frontier_verify"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("FRONTIER_VERIFY_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+        self.assertTrue(any(f.startswith("FRONTIER_VERIFY_TRIGGER_CHECK_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_exact_triad_and_trigger_passes(self):
+        repo, sdir = self._repo()
+        for suffix in (".py", ".json", ".md"):
+            (sdir / f"recompute_frontier_exhaustive_audit_20261117T140000Z{suffix}").write_text("x")
+        (sdir / "trigger_check_20261117T140000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["frontier_verify"]["pass"])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261117T000000Z")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["frontier_verify"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffGateCliContract(unittest.TestCase):
     def test_cli_json_pass_shape(self):
         import subprocess

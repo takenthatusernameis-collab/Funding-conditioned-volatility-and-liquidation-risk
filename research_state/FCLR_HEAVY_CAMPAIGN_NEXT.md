@@ -1,4 +1,4 @@
-# FCLR Focus Campaign — `FCLR-FRONTIER-VERIFY-06-20261117T130551Z` — aligned 2026-11-17T15:09:31Z
+# FCLR Focus Campaign — `FCLR-FRONTIER-VERIFY-06-20261117T130551Z` — aligned 2026-11-17T16:15:09Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
 **Sole durable handoff:** `AGENT_HANDOFF.md` (authoritative). This file is the detailed subordinate campaign note; if it conflicts with the handoff, the handoff wins.
@@ -63,10 +63,12 @@ No trigger fired → produce `recompute_frontier_exhaustive_audit_<UTC>.{py,json
 
 Trigger checks, tests/gates, copied bundles, static re-audits, re-runs of FCLR-014 or the synthesis, “no trigger → stop cleanly”, and handoff-only refreshes are **not** completion.
 
-## Verification record — 2026-11-17T15:09:31Z
+## Verification record — 2026-11-17T16:15:09Z
 
 - Handoff refreshed: `AGENT_HANDOFF.md` is the sole durable handoff; `FCLR-FRONTIER-VERIFY-06` remains the active mandatory heavy campaign.
 - `check_handoff_heavywork_gate.py --json`: **PASS** (`reason_code: OK`, root 500/500, latest session `session_20261117T072040Z`).
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (196 scripts, no drift).
-- Targeted tests: 73 run, 6 pre-existing environmental errors (missing `numpy`), 0 failures. Full `python3 -m unittest discover -q`: 1119 tests, 62 errors, 9 failures, 14 skipped, EXIT 1 (mostly missing `numpy`/`pyarrow` and unresolved LFS fixtures; no failure attributable to these documentation edits). The prior 1340/4/18 baseline is not reproducible in this sandbox.
+- Targeted guard tests: `tests.test_tracka_hardening_099 tests.test_tracka_hardening_143 tests.test_active_campaign_gate` — 32 tests, OK, EXIT 0 (before the new frontier-gate tests); `tests.test_tracka_hardening_143` alone after hardening — 17 tests, OK, EXIT 0.
+- Gate hardening: `scripts/check_handoff_heavywork_gate.py` now fails closed for post-start sessions lacking the exact `recompute_frontier_exhaustive_audit_<UTC>.{py,json,md}` triad or a trigger check. Current pre-start session remains green.
+- Full `python3 -m unittest discover -q` was not rerun for this documentation-only refresh; the recorded sandbox baseline remains **1119 tests, 62 errors, 9 failures, 14 skipped, EXIT 1** (mostly missing `numpy`/`pyarrow` and unresolved LFS fixtures; no failure attributable to these documentation edits). The prior 1340/4/18 baseline is not reproducible in this sandbox.
 - No new session artifact produced in this refresh; the next session must satisfy `FCLR-FRONTIER-VERIFY-06`.

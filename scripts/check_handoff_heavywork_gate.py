@@ -62,6 +62,13 @@ PHASE_C_PREFIXES = (
 # Root churn cap (mirrors test_tracka_hardening_125.test_root_md_json_bounded).
 ROOT_COUNT_CAP = 500
 
+# FCLR-FRONTIER-VERIFY-06 hardening: once the campaign has started, a later
+# session cannot satisfy the gate with an arbitrary recompute_* artifact. It must
+# emit the campaign's exact exhaustive-audit triad plus its trigger check.
+FRONTIER_VERIFY_CAMPAIGN_RE = re.compile(r"FCLR-FRONTIER-VERIFY-06-(\d{8}T\d{6}Z)")
+FRONTIER_VERIFY_ARTIFACT_PREFIX = "recompute_frontier_exhaustive_audit_"
+FRONTIER_VERIFY_REQUIRED_SUFFIXES = (".py", ".json", ".md")
+
 _SESSION_DIR_RE = re.compile(r"(session_\d{8}T\d{6}Z)")
 
 # New-style heavy sessions do not copy the static Phase-B bundle into every
@@ -109,6 +116,53 @@ def _session_has_required(session_dir: Path) -> dict:
     return {"files": sorted(files), "missing": missing}
 
 
+def _frontier_verify_state(handoff_text: str, latest_sid: str | None,
+                           latest_files: list[str]) -> dict:
+    """Return FCLR-FRONTIER-VERIFY-06 non-avoidance state for the latest session.
+
+    The campaign id carries its start UTC. Sessions lexicographically after that
+    start must contain the exact exhaustive-audit triad and a trigger check; an
+    arbitrary recompute_* file is not enough. Sessions from before the campaign
+    existed are grandfathered so this gate remains green during the handoff
+    refresh that first announces the campaign.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = FRONTIER_VERIFY_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(1)
+    out["campaign_id"] = f"FCLR-FRONTIER-VERIFY-06-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    # Session ids are session_<UTC>; compare only the UTC portion.
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+    required = [f"{FRONTIER_VERIFY_ARTIFACT_PREFIX}<UTC>{suffix}"
+                for suffix in FRONTIER_VERIFY_REQUIRED_SUFFIXES]
+    out["required_artifacts"] = required
+    out["missing_required_artifacts"] = [
+        artifact for artifact, suffix in zip(required, FRONTIER_VERIFY_REQUIRED_SUFFIXES)
+        if not any(f.startswith(FRONTIER_VERIFY_ARTIFACT_PREFIX) and f.endswith(suffix)
+                   for f in latest_files)
+    ]
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") for f in latest_files
+    )
+    out["pass"] = not out["missing_required_artifacts"] and out["has_trigger_check"]
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -147,6 +201,7 @@ def check(repo: Path = REPO) -> dict:
         "heavy_session_missing": [],
         "root_count": 0,
         "root_count_cap": ROOT_COUNT_CAP,
+        "frontier_verify": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -192,6 +247,21 @@ def check(repo: Path = REPO) -> dict:
                 payload["failures"].append(
                     f"HEAVY_SESSION_ARTIFACTS_MISSING:{latest_sid}:{latest_info['missing']}"
                 )
+
+            # FCLR-FRONTIER-VERIFY-06: after the campaign starts, require the
+            # exact exhaustive-audit triad plus a trigger check, not any quant.
+            fv = _frontier_verify_state(text, latest_sid, latest_info["files"])
+            payload["frontier_verify"] = fv
+            if fv["required"]:
+                if fv["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "FRONTIER_VERIFY_ARTIFACTS_MISSING:"
+                        + ",".join(fv["missing_required_artifacts"])
+                    )
+                if not fv["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"FRONTIER_VERIFY_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
 
         complete_sid = None
         for cand in reversed(ids):
