@@ -1,0 +1,52 @@
+{
+  "artifact_id": "FCLR-TRIGGER-CHECK-20261117T194457Z",
+  "generated_utc": "2026-11-17T19:47:31Z",
+  "session_utc": "20261117T194457Z",
+  "campaign": "FCLR-FRONTIER-VERIFY-07-20261117T194457Z",
+  "network": false,
+  "polling": false,
+  "trigger_check_exactly_once": true,
+  "sources_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "all_open": true,
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN"
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN"
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN"
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN"
+    }
+  ],
+  "any_trigger_fired": false,
+  "consequence": "No trigger satisfied -> no confirmatory estimand advanced or re-scored; mandatory heavy holding work = FCLR-FRONTIER-VERIFY-07 independent exhaustive frontier audit (this session).",
+  "ironflow": {
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "post_2026_10": null
+  },
+  "no_trigger_rule_applied": true,
+  "sealed_estimands_not_rerun": [
+    "FCLR-014",
+    "replication_synthesis",
+    "FCLR-REPRO-SYNTH-05",
+    "FCLR-013",
+    "FCLR-010",
+    "FCLR-002",
+    "FCLR-003",
+    "FCLR-009",
+    "FCLR-006",
+    "FCLR-008"
+  ]
+}

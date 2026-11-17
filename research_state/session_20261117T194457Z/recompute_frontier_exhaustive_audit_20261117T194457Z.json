@@ -1,0 +1,253 @@
+{
+  "artifact_id": "FCLR-FRONTIER-VERIFY-07-20261117T194457Z",
+  "campaign": "FCLR-FRONTIER-VERIFY-07-20261117T194457Z",
+  "comparison": {
+    "all_exact_match": true,
+    "canonical_returncode": 0,
+    "fields": {
+      "full_c2.any_contiguous_run_ge_min_design_days": {
+        "canonical": false,
+        "exact_match": true,
+        "independent": false
+      },
+      "full_c2.campaign_feasible": {
+        "canonical": false,
+        "exact_match": true,
+        "independent": false
+      },
+      "full_c2.n_feasible": {
+        "canonical": 0,
+        "exact_match": true,
+        "independent": 0
+      },
+      "markfund.any_contiguous_run_ge_min_design_days": {
+        "canonical": false,
+        "exact_match": true,
+        "independent": false
+      },
+      "markfund.campaign_feasible_non_overlapping": {
+        "canonical": false,
+        "exact_match": true,
+        "independent": false
+      },
+      "markfund.individually_feasible_months": {
+        "canonical": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ],
+        "exact_match": true,
+        "independent": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ]
+      },
+      "markfund.max_mutually_non_overlapping": {
+        "canonical": 2,
+        "exact_match": true,
+        "independent": 2
+      },
+      "markfund.n_individually_feasible": {
+        "canonical": 4,
+        "exact_match": true,
+        "independent": 4
+      },
+      "markfund.n_overlapping_pairs": {
+        "canonical": 5,
+        "exact_match": true,
+        "independent": 5
+      }
+    },
+    "sealed_certificates": {
+      "072040Z": {
+        "fclr014_closed_verdict_reproduced": true,
+        "individually_feasible_months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ],
+        "matches_independent": true,
+        "max_mutually_non_overlapping": 2,
+        "n_overlapping_pairs": 5,
+        "path": "research_state/session_20261117T072040Z/recompute_design_frontier_certificate_20261117T072040Z.json",
+        "present": true
+      },
+      "193323Z": {
+        "fclr014_closed_verdict_reproduced": true,
+        "individually_feasible_months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ],
+        "matches_independent": true,
+        "max_mutually_non_overlapping": 2,
+        "n_overlapping_pairs": 5,
+        "path": "research_state/session_20261117T193323Z/recompute_frontier_exhaustive_audit_20261117T193323Z.json",
+        "present": true
+      }
+    }
+  },
+  "fclr014_closed_verdict_reproduced": true,
+  "frontier_verification_mismatch": false,
+  "full_c2": {
+    "any_run_ge_min_design_days": false,
+    "block_rule": {
+      "embargo_days": 7,
+      "min_blocks": 3,
+      "min_design_days": 127,
+      "test_days": 30,
+      "train_days": 30
+    },
+    "campaign_feasible_non_overlapping": false,
+    "contiguous_runs_complete_months": [
+      {
+        "feasible_ge_min_design_days": false,
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61
+      },
+      {
+        "feasible_ge_min_design_days": false,
+        "months": [
+          "2025-01"
+        ],
+        "span_days": 31
+      }
+    ],
+    "family": "full_c2",
+    "individually_feasible_months": [],
+    "max_mutually_non_overlapping": 0,
+    "max_non_overlapping_selections": [
+      []
+    ],
+    "n_individually_feasible": 0,
+    "n_overlapping_pairs": 0,
+    "non_overlapping_selections": [
+      []
+    ],
+    "overlapping_pairs": []
+  },
+  "generated_utc": "2026-11-17T19:47:18Z",
+  "mark_funding_only": {
+    "any_run_ge_min_design_days": false,
+    "block_rule": {
+      "embargo_days": 7,
+      "min_blocks": 3,
+      "min_design_days": 127,
+      "test_days": 30,
+      "train_days": 30
+    },
+    "campaign_feasible_non_overlapping": false,
+    "contiguous_runs_complete_months": [
+      {
+        "feasible_ge_min_design_days": false,
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61
+      },
+      {
+        "feasible_ge_min_design_days": false,
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ],
+        "span_days": 123
+      }
+    ],
+    "family": "mark_funding_only",
+    "individually_feasible_months": [
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01"
+    ],
+    "max_mutually_non_overlapping": 2,
+    "max_non_overlapping_selections": [
+      [
+        "2024-10",
+        "2025-01"
+      ]
+    ],
+    "n_individually_feasible": 4,
+    "n_overlapping_pairs": 5,
+    "non_overlapping_selections": [
+      [],
+      [
+        "2024-10"
+      ],
+      [
+        "2024-10",
+        "2025-01"
+      ],
+      [
+        "2024-11"
+      ],
+      [
+        "2024-12"
+      ],
+      [
+        "2025-01"
+      ]
+    ],
+    "overlapping_pairs": [
+      {
+        "block_a": "2024-10",
+        "block_b": "2024-11",
+        "overlap_window": [
+          "2024-09-26",
+          "2024-10-31"
+        ]
+      },
+      {
+        "block_a": "2024-10",
+        "block_b": "2024-12",
+        "overlap_window": [
+          "2024-10-26",
+          "2024-10-31"
+        ]
+      },
+      {
+        "block_a": "2024-11",
+        "block_b": "2024-12",
+        "overlap_window": [
+          "2024-10-26",
+          "2024-11-30"
+        ]
+      },
+      {
+        "block_a": "2024-11",
+        "block_b": "2025-01",
+        "overlap_window": [
+          "2024-11-26",
+          "2024-11-30"
+        ]
+      },
+      {
+        "block_a": "2024-12",
+        "block_b": "2025-01",
+        "overlap_window": [
+          "2024-11-26",
+          "2024-12-31"
+        ]
+      }
+    ]
+  },
+  "method": "independent stdlib-only ZIP/CSV day-coverage reconstruction; month-interval block feasibility; exhaustive subset enumeration; canonical tool used only as comparison target; no network; no parquet; no outcome data inspected",
+  "n_months_inventory": 35,
+  "overall_verdict": "BLOCKED_ON_DESIGN",
+  "promotable": false,
+  "repository": "Funding-conditioned-volatility-and-liquidation-risk",
+  "session_utc": "20261117T194457Z",
+  "track_priority": "Track C funding-conditioned volatility"
+}

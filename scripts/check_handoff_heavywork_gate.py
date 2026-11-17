@@ -62,10 +62,11 @@ PHASE_C_PREFIXES = (
 # Root churn cap (mirrors test_tracka_hardening_125.test_root_md_json_bounded).
 ROOT_COUNT_CAP = 500
 
-# FCLR-FRONTIER-VERIFY-06 hardening: once the campaign has started, a later
-# session cannot satisfy the gate with an arbitrary recompute_* artifact. It must
-# emit the campaign's exact exhaustive-audit triad plus its trigger check.
-FRONTIER_VERIFY_CAMPAIGN_RE = re.compile(r"FCLR-FRONTIER-VERIFY-06-(\d{8}T\d{6}Z)")
+# FCLR-FRONTIER-VERIFY-06/07 hardening: once a frontier campaign has started, a
+# later session cannot satisfy the gate with an arbitrary recompute_* artifact. It
+# must emit the campaign's exact exhaustive-audit triad plus a trigger check.
+# Multiple campaigns may be declared; every campaign that has started binds.
+FRONTIER_VERIFY_CAMPAIGN_RE = re.compile(r"FCLR-FRONTIER-VERIFY-(\d+)-(\d{8}T\d{6}Z)")
 FRONTIER_VERIFY_ARTIFACT_PREFIX = "recompute_frontier_exhaustive_audit_"
 FRONTIER_VERIFY_REQUIRED_SUFFIXES = (".py", ".json", ".md")
 
