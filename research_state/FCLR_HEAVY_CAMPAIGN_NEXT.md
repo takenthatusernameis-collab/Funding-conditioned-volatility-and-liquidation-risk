@@ -1,13 +1,15 @@
-# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-04` — current as of 2026-11-17T00:23:34Z
+# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-04` — current as of 2026-11-17T04:07:43Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
-**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-17T00:23:34Z). This file is the detailed campaign note referenced by the frontier and the handoff.
+**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-17T04:07:43Z). This file is the detailed campaign note referenced by the frontier and the handoff.
 **Governing rules:** `RESEARCH_PROMPT.md`. Never re-run concluded estimands, re-score sealed results, fabricate data, edit `.github/workflows/*`, poll, re-probe the HuggingFace tree, use paid/credentialed/manual outcome data, or run `git lfs pull`.
 **Artifact rule:** write every new artifact to a new `research_state/session_<UTC>/`. The `research_state/` root is at 500/500 md/json; adding root files breaks the enforced churn cap.
 
-## Current target (updated 2026-11-17T00:23:34Z)
+## Current target (updated 2026-11-17T04:07:43Z)
 
-**Primary heavy artifact: FCLR-013 independent recompute** (2026 Q3 funding-conditioned volatility, 5 symbols), then **FCLR-014** if its local inputs are valid and non-parquet.
+**Primary heavy artifact: FCLR-014 panel coverage audit + blocker resolution** (5-symbol local `data_cache` coverage matrix + corrected blocker statement). FCLR-013 and FCLR-010 are DONE (both NOT_REPLICATED) and must not be repeated.
+
+**CORRECTED FCLR-014 FRAMING (verified this session):** the prior "no admissible panel exists locally" claim is FALSE. The local `data_cache` holds complete 5-symbol mark+index+premium+funding for **all of 2025 (12 mo) and 2026-01..10 (10 mo)**, plus **2024-04..2024-11 mark+funding** (2024-11 has index/premium for BTCUSDT only; 2024-12 index/premium incomplete for all). The genuine blocker is **design admissibility under `TESTED_WINDOWS`** in `scripts/next_campaign_status.py`: a contiguous 3-block confirmatory design needs an untested run >= `MIN_DESIGN_DAYS` (127d), and every such run is consumed by a sealed cell (2025-02..2026-10). Complete-but-untested months 2024-04/2024-05 and 2025-01 have 30-day train windows that lack funding or full index/premium. The next session must document this corrected blocker and either freeze a NEW pre-registered design (mark+funding-only B0/B1/C1, or a disjoint-block design on fully-complete months) before outcomes, or record the exact missing coverage month and hold. Do NOT re-score sealed summaries.
 
 Completed and NOT to be repeated:
 - **FCLR-010 — DONE (`session_20261117T002014Z`).** Independent **parquet-free** recompute (CSV `results/liqmicro_v2/panel_liqmicro_v2.csv` + `hyperliquid_funding/{SYM}.json`). Verdict **NOT_REPLICATED**: C2-vs-B1 Brier relative reduction **0.50%** (CI `[-0.001106,-0.000316]`) vs sealed **2.21%**; below 2% materiality floor; LOIO and placebo **fail**; 17 symbols, n=64,056, 157 days. Direction replicates; magnitude does not.
