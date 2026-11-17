@@ -1,0 +1,9 @@
+# Trigger check — 20261117T000400Z
+
+- Checked offline at 2026-11-17T00:04:00Z.
+- `GATE4_BRANCH_1`: OPEN.
+- `NEW_OBSERVED_LIQUIDATION_SOURCE`: OPEN.
+- `HL_LABEL_EXTENSION`: OPEN.
+- `EXPANSION_ROBUSTNESS_REDO`: OPEN.
+- Ironflow monitor state: `data_through=2026-10`; 2026-11, 2026-12, and 2027-01 were previously classified absent.
+- No network request, HuggingFace tree probe, LFS fetch, or repeated later probe was performed.

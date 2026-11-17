@@ -1,25 +1,27 @@
-# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-02` — current as of 2026-11-16T23:39:00Z
+# FCLR Focus Campaign — `FCLR-REPRO-AUDIT-03` — current as of 2026-11-17T00:04:00Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
-**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-16T23:39:00Z). This file is the detailed campaign note referenced by the frontier and the handoff.
+**Sole handoff:** `AGENT_HANDOFF.md` (refreshed 2026-11-17T00:04:00Z). This file is the detailed campaign note referenced by the frontier and the handoff.
 **Governing rules:** `RESEARCH_PROMPT.md`. Never re-run concluded estimands, re-score sealed results, fabricate data, edit `.github/workflows/*`, poll, re-probe the HuggingFace tree, use paid/credentialed/manual outcome data, or run `git lfs pull`.
 **Artifact rule:** write every new artifact to a new `research_state/session_<UTC>/`. The `research_state/` root is at 500/500 md/json; adding root files breaks the enforced churn cap.
 
-## Current target (updated 2026-11-16T23:39:00Z)
+## Current target (updated 2026-11-17T00:04:00Z)
 
-**Primary heavy artifact: FCLR-002 independent recompute** (`recompute_fclr002_<UTC>.{py,json,md}`), then **FCLR-003** (`recompute_fclr003_<UTC>.{py,json,md}`).
+**Primary heavy artifact: FCLR-010 independent recompute** from `research_state/fclr_liq_010_confirm_panel_20261113T065953Z.parquet`, then **FCLR-013/FCLR-014** independent recomputes if their cached panels are available.
 
 Completed and NOT to be repeated:
+- FCLR-002 — `session_20261117T000400Z` (`recompute_fclr002_20261117T000400Z.{json,md}`; exact values diverged beyond tolerance, qualitative C2-vs-B1 improvement corroborated; gate remains NOT_MET).
+- FCLR-003 — `session_20261117T000400Z` (`recompute_fclr003_20261117T000400Z.{json,md}`; B0/B1 matched, C1/C2 diverged beyond tolerance; NOT_MET corroborated).
 - FCLR-009 — `session_20261116T125624Z` (`all_within_tolerance=true`).
 - FCLR-006 — `session_20261116T185811Z` (`all_within_tolerance=true`; supersedes `session_20261116T140001Z`).
-- FCLR-008 — `session_20261116T230140Z` (B0/B1 within tolerance; C1/C2 divergence documented; qualitative NOT_MET corroborated). `session_20261116T221127Z` is a superseded earlier FCLR-008 attempt (no evidence audit; divergent C1/C2) — do not count/resume.
+- FCLR-008 — `session_20261116T230140Z` (B0/B1 within tolerance; C1/C2 divergence documented; qualitative NOT_MET corroborated). `session_20261116T221127Z` is a superseded earlier FCLR-008 attempt — do not count/resume.
 - FCLR-RCA-011 — complete bundle `session_20261116T100533Z/`.
 
 Incomplete trigger-only sessions (do not resume/copy/count): `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/`.
 
 ## Why this campaign exists (bottlenecks removed)
 
-The former `FCLR-READINESS-01` campaign was complete. The stale-target bottleneck is removed: FCLR-008/006/009 are DONE, so the primary target is now FCLR-002 (queue item 4), with FCLR-003 next. The previous handoff pointed at `research_protocol_fclr002.md` / `research_protocol_fclr003.md`, which do not exist; this note and the handoff now embed the frozen splits and published values from the evaluation summaries. `run_manifest.json`, `run_manifest_FCLR002.json`, `fclr002_panel*.json`, `manifest_fclr002.json`, and `manifest_fclr003.json` are unresolved Git-LFS pointers with no local object; hardcode splits and rebuild from raw 2024 CSVs. Do not attempt `git lfs pull` (network prohibited).
+The former `FCLR-READINESS-01` campaign was complete. FCLR-002 and FCLR-003 have now been independently recomputed, so they must not be repeated. The next agent-removable bottleneck is the remaining reproducibility queue: FCLR-010, then FCLR-013/FCLR-014. The previous handoff understated a major data-path issue: Apr-Jun 2024 mark/premium/index files are ZIP archives, while Jan-Mar and Jul-Nov are CSVs. A CSV-only reader silently drops the entire Apr-Jun training window and produces false `None`/zero-row results. Future sessions must use a ZIP-aware reader or the existing session-local `recompute_fclr002_003_20261117T000400Z.py`.
 
 The rank-0 frontier's `next_unfinished_task` defers the concrete task to this note. This note makes a **new quantitative artifact** the completion floor: trigger checks, tests/gates, copied bundles, static re-audits, and "no trigger → stop cleanly" are not completion. The maintenance-refresh treadmill (handoff-only refreshes with no heavy artifact) must not repeat.
 
@@ -27,36 +29,26 @@ The rank-0 frontier's `next_unfinished_task` defers the concrete task to this no
 
 ### Phase A — Check external triggers once
 
-Read only `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`. Record timestamp and verdict in the new session directory. Do not poll, issue network requests, re-probe HuggingFace, or repeat later. Triggers: `GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` — satisfied only by registry-defined evidence artifacts. Agent cannot mark `GATE4_BRANCH_1` RESOLVED_VERIFIED. Current state: all OPEN; Ironflow `data_through=2026-10`; 2026-11/12/2027-01 `CONFIRMED_ABSENT`.
+Read only `research_state/resume_trigger_registry.json` and `research_state/ironflow_monitor_state.json`. Record timestamp and verdict in the new session directory. Do not poll, issue network requests, re-probe HuggingFace, or repeat later. Triggers: `GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` — satisfied only by registry-defined evidence artifacts. Agent cannot mark `GATE4_BRANCH_1` RESOLVED_VERIFIED. Current state: all OPEN; Ironflow `data_through=2026-10`; 2026-11/12 and 2027-01 `CONFIRMED_ABSENT`.
 
 ### Phase B — Emit ONE new quantitative artifact (the heavy work)
 
 Every session must write artifact (JSON+MD) + script into the new session directory.
 
-1. **No trigger fired — FCLR-002 independent recompute (primary, non-skippable).** Recompute B0/B1/C1/C2 24h QLIKE and paired contrasts on the frozen test window from cached 2024 data.
-   - Frozen splits (7d embargo): train `2024-04-01T00:00:00Z..2024-06-08T23:00:00Z`; val `2024-06-16T00:00:00Z..2024-07-15T23:00:00Z`; test `2024-07-23T00:00:00Z..2024-09-30T23:00:00Z`.
-   - Data: `research_state/data_cache/{BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}_2024_0{1..9}/` raw CSVs (markPriceKlines, fundingRate, indexPriceKlines).
-   - Published values (`research_state/evaluation_summary_FCLR002.md`): B0 `0.543471` (n=8280), B1 `0.487438` (n=8274), C1 `0.487455` (n=8274), C2 `0.442223` (n=8274). C2_vs_B1 diff `-0.045215` CI `[-0.097648,-0.008788]` rel `9.28%` n=8274; C1_vs_B1 `0.000017` CI `[-0.005982,0.006047]` rel `-0.00%`; C2_vs_C1 `-0.045232` CI `[-0.098089,-0.009173]` rel `9.28%`. Gate NOT_MET (test = 70 days = 2 blocks < 3). Tolerances: QLIKE abs <= 1e-6; mean diff abs <= 1e-6; relative reduction <= 0.01 pp.
-   - Hardcode splits; do not read `run_manifest.json` (unresolved LFS pointer) and do not run canonical `scripts/run_evaluation.py` against the tracked summary. `scripts/build_fclr002_panel_local.py` reads `run_manifest.json` for splits and defaults its output to the tracked LFS pointer `data_cache/fclr002_panel_local.json`; do not run it as-is. Use a session-local copy with hardcoded splits and `--out research_state/session_<UTC>/...`, or implement the feature construction directly. Pure feature helpers may be imported; implement split/OLS/QLIKE/bootstrap independently; never mutate sealed artifacts. Write `recompute_fclr002_<UTC>.{py,json,md}`.
-
-2. **FCLR-003 (do if FCLR-002 completes cleanly and time remains).** Same method with `research_state/evaluation_summary_FCLR003.md`:
-   - Frozen splits (7d embargo): train `2024-04-01T00:00:00Z..2024-07-23T23:00:00Z`; val `2024-07-31T00:00:00Z..2024-09-24T23:00:00Z`; test `2024-10-02T00:00:00Z..2024-12-31T23:00:00Z`.
-   - Data: `research_state/data_cache/{SYM}_2024_01..12/`.
-   - Published: B0 `0.486931` (n=10800), B1 `0.400689` (n=10796), C1 `0.389589` (n=10796), C2 `0.444702` (n=10796). C2_vs_B1 `0.044013` CI `[0.001487,0.093225]` rel `-10.98%`; C1_vs_B1 `-0.011100` CI `[-0.016972,-0.005925]` rel `2.77%`; C2_vs_C1 `0.055113` CI `[0.009734,0.107156]` rel `-14.15%`. Gate NOT_MET (3 blocks PASS). Tolerances as above. Write `recompute_fclr003_<UTC>.{py,json,md}`.
-
-3. **Fallback only if 2024 cache incomplete:** record exact missing path/hash, then independently recompute `FCLR-LIQ-010-CONFIRM` from `research_state/fclr_liq_010_confirm_panel_20261113T065953Z.parquet`. Still heavy work; trigger check/copy/prose-only is not.
-
+1. **No trigger fired — FCLR-010 independent recompute (primary, non-skippable).** Recompute the terminal Track-A liquidation-confirm headline from `research_state/fclr_liq_010_confirm_panel_20261113T065953Z.parquet` without mutating the sealed panel. If `pyarrow` is unavailable, use an available parquet-capable local reader; if no local reader exists, record the exact dependency blocker and use the documented fallback in `AGENT_HANDOFF.md` rather than fabricating values. Write `recompute_fclr010_<UTC>.{json,md}`.
+2. **FCLR-013/FCLR-014 (do if FCLR-010 completes cleanly and their cached panels/coverage audits are present).** Independent recompute from the registered 2026 Q3 / 2025 H1 panels; write `recompute_fclr013_<UTC>.{json,md}` and/or `recompute_fclr014_<UTC>.{json,md}`. Do not rerun FCLR-002/003/006/008/009.
+3. **Fallback only if FCLR-010 inputs are unavailable:** record the exact missing path/hash and independently recompute the `fclr_liq_010_confirm_panel` fallback named in the handoff. A trigger check/copy/prose-only result is not completion.
 4. **Trigger fired:** perform `RESEARCH_PROMPT.md` §16 admissibility/source audit, instantiate a **new** prereg from `session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json` sized per `session_20261116T100533Z/trigger_readiness_power_calibration_20261116T100533Z.md` (paired_n >= anchor `n_required_for_2pct`, >=5 instruments, >=3 non-overlapping 30-day blocks, 7d purge/embargo, prespecified Holm family, `outcome_data_inspected_before_freeze=false`), then execute and record honest verdict.
 
 ### Phase C — Verify and hand off
 
 1. Create `research_state/session_<UTC>/`.
-2. Audit `session_20261116T100533Z/` (5 RCA families), `session_20261116T125624Z/` (FCLR-009), `session_20261116T185811Z/` (FCLR-006), and `session_20261116T230140Z/` (FCLR-008) present.
+2. Audit `session_20261116T100533Z/` (5 RCA families), `session_20261116T125624Z/` (FCLR-009), `session_20261116T185811Z/` (FCLR-006), `session_20261116T230140Z/` (FCLR-008), and `session_20261117T000400Z/` (FCLR-002/003) present.
 3. Write a concise evidence-audit artifact in the new session dir.
 4. Run and capture under new session dir: `check_handoff_heavywork_gate.py --json`, `check_tracka_scope_registry_drift.py --json`, targeted unittests, and `python3 -m unittest discover -q` to completion (record count/skip/error/EXIT; never call timeout green). Baseline: 1340 tests, 4 pre-existing pyarrow errors (`tests.test_fclr_liq_combined_admissibility_audit`), 18 skipped, EXIT 1; success = same set with no new failures/errors. Revert timestamp-only tracked-file side effects.
 5. Update only `AGENT_HANDOFF.md` (timestamp/verification/queue), preserve sole-handoff contract and blockers.
 
-A session that only rereads triggers, repeats prior prose, copies old bundle without new analysis, redoes FCLR-006/008/009, or records green checks without a new artifact is incomplete.
+A session that only rereads triggers, repeats prior prose, copies old bundle without new analysis, redoes FCLR-002/003/006/008/009, or records green checks without a new artifact is incomplete.
 
 ## Design-power summary (from `trigger_readiness_power_calibration_20261116T100533Z.md`)
 
@@ -69,33 +61,35 @@ A session that only rereads triggers, repeats prior prose, copies old bundle wit
 
 - **Stale instructions:** `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`, `HANDOFF_NEXT_SESSION_20261116T114626Z.md`, and `AGENT_HANDOFF_20261115T073240Z.md` have no authority. `AGENT_HANDOFF.md` is sole handoff.
 - **Incomplete sessions:** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only) — do not resume, copy, or count. `session_20261116T140001Z/` is a superseded tolerance-failed FCLR-006 attempt. `session_20261116T221127Z/` is a superseded divergent FCLR-008 attempt. Do not recreate empty shells.
-- **Maintenance treadmill:** handoff-only refreshes with no new heavy artifact are not completion and must not repeat; the next session must emit `recompute_fclr002_<UTC>.{json,md}` (FCLR-003 next).
-- **Completed-work confusion:** FCLR-RCA-011, FCLR-009, FCLR-006, and FCLR-008 are complete; do not rerun merely because an old note calls them pending. Next is **FCLR-002**.
-- **Missing inputs:** `research_protocol_fclr002.md` / `research_protocol_fclr003.md` do not exist; `run_manifest.json` and panel/manifest JSONs are unresolved LFS pointers. Hardcode the splits embedded above and rebuild from raw 2024 CSVs; do not `git lfs pull`.
+- **Maintenance treadmill:** handoff-only refreshes with no new heavy artifact are not completion and must not repeat; the next session must emit `recompute_fclr010_<UTC>.{json,md}` (FCLR-013/014 next).
+- **Completed-work confusion:** FCLR-002/003/006/008/009 and FCLR-RCA-011 are complete; do not rerun them merely because an old note calls them pending. Next is **FCLR-010**.
+- **Missing inputs:** `research_protocol_fclr002.md` / `research_protocol_fclr003.md` do not exist; `run_manifest.json` and panel/manifest JSONs are unresolved LFS pointers. FCLR-002/003 have now been computed with hardcoded splits; do not repeat. For FCLR-010, verify the parquet is a real local file and not an LFS pointer before analysis.
+- **ZIP/CSV bottleneck:** the 2024 cache is mixed-format; Apr-Jun mark/premium/index data are ZIP archives. CSV-only globbing silently produces false zero-row results. Use the ZIP-aware reader pattern in `session_20261117T000400Z/recompute_fclr002_003_20261117T000400Z.py`.
 - **Gate false failure:** gate accepts latest new-style session with `evidence_audit_*` + fresh quantitative artifact while resolving complete bundle. Do not weaken.
 - **Root churn:** root `research_state/*.md|json` count is 500/500. Keep new outputs in session subdirectories.
 - **Dependencies:** readiness/reproducibility path is stdlib/numpy-only; do not add `statsmodels` or unpinned heavy deps to core path.
 - **Suite duration:** allow discovery suite to finish and record actual exit status; do not substitute partial run. The 4 pyarrow errors are environmental, not a new regression.
-- **External science:** if no trigger fires, required progress is the new FCLR-002 artifact (FCLR-003 next, or documented LIQ-010 fallback), evidence audit, complete gate run, and accurate handoff update. Repeated polling and new confirmatory estimands on exhausted cached data are forbidden.
+- **External science:** if no trigger fires, required progress is the new FCLR-010 artifact (FCLR-013/014 next), evidence audit, complete gate run, and accurate handoff update. Repeated polling and new confirmatory estimands on exhausted cached data are forbidden.
 
-## Verification record — 2026-11-16T23:39:00Z
+## Verification record — 2026-11-17T00:04:00Z
 
-- Handoff/campaign aligned: **FCLR-002** is mandatory next heavy artifact (`recompute_fclr002_<UTC>.{json,md}`), FCLR-003 next, FCLR-006/008/009 done/not to repeat, trigger-only/superseded sessions not resumable, `session_20261116T221127Z` non-counting.
+- Handoff/campaign aligned: **FCLR-010** is mandatory next heavy artifact; FCLR-002 and FCLR-003 are DONE in `session_20261117T000400Z` and must not be repeated.
 - Inputs verified present: `research_state/evaluation_summary_FCLR002.md`, `evaluation_summary_FCLR003.md`, `data_cache/{SYM}_2024_01..12/` for all 5 symbols, fallback parquet `fclr_liq_010_confirm_panel_20261113T065953Z.parquet`.
+- New bottleneck documented: Apr-Jun 2024 mark/premium/index files are ZIP archives; future readers must handle them.
 - Blocked inputs documented: `research_protocol_fclr002.md` / `research_protocol_fclr003.md` absent; `run_manifest.json` / `run_manifest_FCLR002.json` / `fclr002_panel*.json` / `manifest_fclr002.json` / `manifest_fclr003.json` are unresolved LFS pointers.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`latest_session=session_20261116T230140Z`, `heavy_session=session_20261116T100533Z`, root 500/500, EXIT 0).
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`latest_session=session_20261116T230140Z` at capture; root 500/500, EXIT 0).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS**; 196/196 scripts, EXIT 0.
 - Targeted suite (`test_active_campaign_gate`, `test_tracka_hardening_117/118/143`): **52 tests OK, EXIT 0**.
-- Full `unittest discover -q`: **1340 tests, 4 pre-existing pyarrow errors, 18 skipped, EXIT 1** — recorded per mandate; no new failures introduced by this refresh.
+- Full `unittest discover -q`: **1340 tests, 4 pre-existing pyarrow errors, 18 skipped, EXIT 1** — recorded per mandate; no new failures introduced.
 
 ## Session closeout
 
-- [ ] Trigger registry and monitor state checked once; verdict recorded.
-- [ ] New `research_state/session_<UTC>/` created.
-- [ ] One new quantitative artifact produced (FCLR-002; FCLR-003 next or documented LIQ-010 fallback).
-- [ ] Carried-forward `session_20261116T100533Z` bundle and `session_20261116T125624Z`/`session_20261116T185811Z`/`session_20261116T230140Z` recomputes verified.
-- [ ] Gate JSON outputs and full-suite final result recorded under the new session directory.
-- [ ] Root md/json count remains at most 500.
+- [x] Trigger registry and monitor state checked once; verdict recorded.
+- [x] New `research_state/session_20261117T000400Z/` created.
+- [x] Two new quantitative artifacts produced (FCLR-002 and FCLR-003).
+- [x] Carried-forward bundles verified.
+- [x] Gate JSON outputs and full-suite final result recorded under the new session directory.
+- [x] Root md/json count remains at most 500.
 - [ ] `AGENT_HANDOFF.md` updated with the new timestamp, new-artifact result, gate results, and remaining external blockers.
 
 Stop cleanly only when every box is checked. Never leave the suite with new failures, never delete the rank-0 sentinel, and never claim completion from a trigger-only or copied-bundle-only check alone.

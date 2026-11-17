@@ -1,0 +1,209 @@
+{
+  "session_utc": "20261117T000400Z",
+  "experiment": "FCLR-003",
+  "method": "independent csv/pandas/numpy recompute; hardcoded frozen splits; OLS on log(y+1e-12) with intercept and 1e-12 ridge; canonical QLIKE; UTC-day block bootstrap seed 12345; no network, LFS, canonical evaluator, or sealed-artifact mutation",
+  "splits": {
+    "train": [
+      "2024-04-01T00:00:00Z",
+      "2024-07-23T23:00:00Z"
+    ],
+    "val": [
+      "2024-07-31T00:00:00Z",
+      "2024-09-24T23:00:00Z"
+    ],
+    "test": [
+      "2024-10-02T00:00:00Z",
+      "2024-12-31T23:00:00Z"
+    ],
+    "months": [
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ],
+    "published": {
+      "B0": {
+        "qlike": 0.486931,
+        "n": 10800
+      },
+      "B1": {
+        "qlike": 0.400689,
+        "n": 10796
+      },
+      "C1": {
+        "qlike": 0.389589,
+        "n": 10796
+      },
+      "C2": {
+        "qlike": 0.444702,
+        "n": 10796
+      },
+      "C2_vs_B1": {
+        "mean_diff": 0.044013,
+        "rel_pct": -10.98,
+        "ci_lo": 0.001487,
+        "ci_hi": 0.093225,
+        "n_pairs": 10796
+      },
+      "C1_vs_B1": {
+        "mean_diff": -0.0111,
+        "rel_pct": 2.77,
+        "ci_lo": -0.016972,
+        "ci_hi": -0.005925,
+        "n_pairs": 10796
+      },
+      "C2_vs_C1": {
+        "mean_diff": 0.055113,
+        "rel_pct": -14.15,
+        "ci_lo": 0.009734,
+        "ci_hi": 0.107156,
+        "n_pairs": 10796
+      }
+    }
+  },
+  "counts": {
+    "train": 13680,
+    "val": 6720,
+    "test": 10800
+  },
+  "model_results": {
+    "B0": {
+      "test_qlike_mean": 0.4869309736229882,
+      "test_n": 10800
+    },
+    "B1": {
+      "test_qlike_mean": 0.40068858620872827,
+      "test_n": 10796
+    },
+    "C1": {
+      "test_qlike_mean": 0.39209154569820076,
+      "test_n": 10796
+    },
+    "C2": {
+      "test_qlike_mean": 0.4481556448022338,
+      "test_n": 10796
+    }
+  },
+  "contrasts": {
+    "C2_vs_B1": {
+      "mean_diff": 0.04746705859350549,
+      "rel_reduction_pct": -11.846371528231844,
+      "ci_lo": 0.0040448226229894855,
+      "ci_hi": 0.09761354787690434,
+      "n_pairs": 10796
+    },
+    "C1_vs_B1": {
+      "mean_diff": -0.00859704051052755,
+      "rel_reduction_pct": 2.1455666086902574,
+      "ci_lo": -0.01368347450270378,
+      "ci_hi": -0.004150245321974472,
+      "n_pairs": 10796
+    },
+    "C2_vs_C1": {
+      "mean_diff": 0.05606409910403304,
+      "rel_reduction_pct": -14.298726845588883,
+      "ci_lo": 0.010211427705034675,
+      "ci_hi": 0.10867799586312295,
+      "n_pairs": 10796
+    }
+  },
+  "comparison_to_published": {
+    "B0": {
+      "published_qlike": 0.486931,
+      "recomputed_qlike": 0.4869309736229882,
+      "abs_diff_qlike": 2.637701179697416e-08,
+      "published_n": 10800,
+      "recomputed_n": 10800,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "B1": {
+      "published_qlike": 0.400689,
+      "recomputed_qlike": 0.40068858620872827,
+      "abs_diff_qlike": 4.137912717472325e-07,
+      "published_n": 10796,
+      "recomputed_n": 10796,
+      "n_match": true,
+      "qlike_within_tol": true
+    },
+    "C1": {
+      "published_qlike": 0.389589,
+      "recomputed_qlike": 0.39209154569820076,
+      "abs_diff_qlike": 0.002502545698200742,
+      "published_n": 10796,
+      "recomputed_n": 10796,
+      "n_match": true,
+      "qlike_within_tol": false
+    },
+    "C2": {
+      "published_qlike": 0.444702,
+      "recomputed_qlike": 0.4481556448022338,
+      "abs_diff_qlike": 0.003453644802233813,
+      "published_n": 10796,
+      "recomputed_n": 10796,
+      "n_match": true,
+      "qlike_within_tol": false
+    },
+    "C2_vs_B1": {
+      "published_mean_diff": 0.044013,
+      "recomputed_mean_diff": 0.04746705859350549,
+      "abs_diff_mean_diff": 0.0034540585935054907,
+      "published_rel_pct": -10.98,
+      "recomputed_rel_pct": -11.846371528231844,
+      "abs_diff_rel_pct": 0.8663715282318432,
+      "published_ci_lo": 0.001487,
+      "recomputed_ci_lo": 0.0040448226229894855,
+      "published_ci_hi": 0.093225,
+      "recomputed_ci_hi": 0.09761354787690434,
+      "rel_within_tol": false,
+      "n_pairs_match": true
+    },
+    "C1_vs_B1": {
+      "published_mean_diff": -0.0111,
+      "recomputed_mean_diff": -0.00859704051052755,
+      "abs_diff_mean_diff": 0.002502959489472451,
+      "published_rel_pct": 2.77,
+      "recomputed_rel_pct": 2.1455666086902574,
+      "abs_diff_rel_pct": 0.6244333913097426,
+      "published_ci_lo": -0.016972,
+      "recomputed_ci_lo": -0.01368347450270378,
+      "published_ci_hi": -0.005925,
+      "recomputed_ci_hi": -0.004150245321974472,
+      "rel_within_tol": false,
+      "n_pairs_match": true
+    },
+    "C2_vs_C1": {
+      "published_mean_diff": 0.055113,
+      "recomputed_mean_diff": 0.05606409910403304,
+      "abs_diff_mean_diff": 0.000951099104033036,
+      "published_rel_pct": -14.15,
+      "recomputed_rel_pct": -14.298726845588883,
+      "abs_diff_rel_pct": 0.14872684558888238,
+      "published_ci_lo": 0.009734,
+      "recomputed_ci_lo": 0.010211427705034675,
+      "published_ci_hi": 0.107156,
+      "recomputed_ci_hi": 0.10867799586312295,
+      "rel_within_tol": false,
+      "n_pairs_match": true
+    }
+  },
+  "all_within_tolerance": false,
+  "gate": {
+    "primary_c2_vs_b1_rel_pass": false,
+    "primary_c2_vs_b1_ci_pass": false,
+    "instruments": 5,
+    "test_days": 91,
+    "blocks_30d": 3,
+    "blocks_pass": true,
+    "overall": "NOT_MET"
+  },
+  "conclusion": "Recomputed values diverge beyond tolerance; the divergence is a finding, not a tuning target."
+}
