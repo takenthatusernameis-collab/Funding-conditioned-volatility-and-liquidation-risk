@@ -1,0 +1,192 @@
+{
+  "artifact_id": "FCLR-REPLICATION-ROBUSTNESS-20261117T072040Z",
+  "based_on": "research_state/session_20261117T071110Z/replication_synthesis_20261117T071110Z.json",
+  "boundary_certificate": {
+    "exact_minimal_flip": {
+      "concrete_examples": [
+        {
+          "current": "NOT_REPLICATED, rel -4.99%, CI crosses 0, blocks=1 (<3), LOIO/placebo fail, materiality<2%",
+          "minimal_change_to_flip": "A new/extended non-parquet panel yielding >=3 non-overlapping 30d test blocks with C2-vs-B1 relative reduction >=2% favorable, CI excluding 0, LOIO and placebo passing, under a frozen pre-outcomes prereg; i.e. a materially different estimand/dataset than the sealed 1-block 2026Q3 recompute.",
+          "study": "FCLR-013"
+        },
+        {
+          "current": "BLOCKED_ON_DESIGN: mark+funding-only max 2 mutually non-overlapping blocks (<3)",
+          "minimal_change_to_flip": "At least 1 additional mutually non-overlapping mark+funding-only feasible block (total >=3) from an admissible untested window with complete train history, then a frozen prereg before outcomes and a passing confirmatory run.",
+          "study": "FCLR-014 (unexecuted confirmatory path)"
+        },
+        {
+          "current": "NOT_REPLICATED, 0.50% (<2%), LOIO/placebo fail though blocks>=3",
+          "minimal_change_to_flip": "Relative reduction >=2% with CI excluding 0 and LOIO/placebo passing on a pre-powered, preregistered design (>=23224 paired_n per power floor context where applicable) \u2014 would require different effect, not re-scoring.",
+          "study": "FCLR-010"
+        }
+      ],
+      "description": "Any single sealed NOT_MET/NOT_REPLICATED recompute study would need to become a pre-registered, independently reproducible promotable positive result under its own gates.",
+      "global_minimal_change": "One promotable positive result on a trigger-satisfied, pre-powered (paired_n floors met), >=3-block, 7d-purge/embargo, pre-registered design with admissible observed data; OR a new untested cached-data design that is both design-feasible (>=3 mutually non-overlapping blocks) and yields a passing confirmatory result. Neither exists in current local cached frontier."
+    },
+    "programme_state": "CLOSED_TERMINAL / NO_CLAIM_WORTHY_RESULT_PROMOTABLE",
+    "promotable_definition": "materiality >=2% (|rel_reduction_pct|>=2 with favorable direction and CI excluding 0 per study gate) AND blocks>=3 AND other study gates pass; no study currently meets all."
+  },
+  "estimand_heterogeneity_caveat": {
+    "caveat": "LOO rates and sign aggregation pool heterogeneous estimands (QLIKE vs Brier), horizons, and sample designs; they summarize programme-level corroboration, not a single estimand's sampling distribution. Within-tolerance reproduction is the stricter like-for-like criterion (2/7).",
+    "designs": "Different symbols/windows/block counts/data vintages (FCLR-002/003 2024 panels, FCLR-006/008/009 later panels, FCLR-010 liqmicro+hyperliquid funding, FCLR-013 2026Q3 ZIP/CSV 5-symbol).",
+    "metrics": {
+      "Brier": [
+        "FCLR-010"
+      ],
+      "QLIKE": [
+        "FCLR-002",
+        "FCLR-003",
+        "FCLR-006",
+        "FCLR-008",
+        "FCLR-009",
+        "FCLR-013"
+      ]
+    }
+  },
+  "generated_utc": "2026-11-17T07:20:40Z",
+  "n_studies": 7,
+  "promotable_positive_results": [],
+  "qualitative_corroboration": {
+    "definition": "Independent recompute does not overturn the sealed qualitative programme verdict into a promotable positive claim (all 7: REPRODUCED_WITHIN_TOLERANCE/DIVERGED_BEYOND_TOLERANCE-agreeing-NOT_MET/NOT_REPLICATED).",
+    "leave_one_out": [
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-002",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      },
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-003",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      },
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-006",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      },
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-008",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      },
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-009",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      },
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-010",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      },
+      {
+        "kept_n": 6,
+        "left_out": "FCLR-013",
+        "qualitative_corroborated_count": 6,
+        "qualitative_corroboration_rate": 1.0,
+        "wilson95": [
+          0.6096569663469354,
+          0.9999999999999999
+        ]
+      }
+    ],
+    "loo_all_unity": true,
+    "loo_rate_max": 1.0,
+    "loo_rate_min": 1.0,
+    "overall_count": 7,
+    "overall_rate": 1.0,
+    "wilson95_overall": [
+      0.6456611570247934,
+      1.0
+    ]
+  },
+  "sign_consistency_c2_vs_b1": {
+    "consistent_in_sign": false,
+    "negative_c2_worse": 4,
+    "note": "Mixed signs across estimands/datasets: FCLR-002 positive, others negative or near-zero; no uniform directional effect.",
+    "positive_c2_better": 3,
+    "rows": [
+      {
+        "metric": "QLIKE",
+        "rel_reduction_pct": 8.599046454748262,
+        "sign": "positive(C2_better)",
+        "study": "FCLR-002"
+      },
+      {
+        "metric": "QLIKE",
+        "rel_reduction_pct": -11.846371528231844,
+        "sign": "negative(C2_worse)",
+        "study": "FCLR-003"
+      },
+      {
+        "metric": "QLIKE",
+        "rel_reduction_pct": -67.32320689374508,
+        "sign": "negative(C2_worse)",
+        "study": "FCLR-006"
+      },
+      {
+        "metric": "QLIKE",
+        "rel_reduction_pct": 0.6862427547811324,
+        "sign": "positive(C2_better)",
+        "study": "FCLR-008"
+      },
+      {
+        "metric": "QLIKE",
+        "rel_reduction_pct": -0.42525774214540507,
+        "sign": "negative(C2_worse)",
+        "study": "FCLR-009"
+      },
+      {
+        "metric": "Brier",
+        "rel_reduction_pct": 0.5010692983825399,
+        "sign": "positive(C2_better)",
+        "study": "FCLR-010"
+      },
+      {
+        "metric": "QLIKE",
+        "rel_reduction_pct": -4.988898715596898,
+        "sign": "negative(C2_worse)",
+        "study": "FCLR-013"
+      }
+    ]
+  },
+  "studies": [
+    "FCLR-002",
+    "FCLR-003",
+    "FCLR-006",
+    "FCLR-008",
+    "FCLR-009",
+    "FCLR-010",
+    "FCLR-013"
+  ]
+}

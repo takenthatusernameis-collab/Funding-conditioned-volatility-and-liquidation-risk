@@ -1,0 +1,28 @@
+{
+  "all_open": true,
+  "any_trigger_fired": false,
+  "artifact_id": "FCLR-TRIGGER-CHECK-20261117T072040Z",
+  "consequence": "No trigger satisfied -> no confirmatory estimand advanced or re-scored; heavy holding work = FCLR-REPRO-SYNTH-05 design-frontier certificate + replication robustness.",
+  "generated_utc": "2026-11-17T07:22:30Z",
+  "ironflow": {
+    "consecutive_absent": 3,
+    "data_through": "2026-10",
+    "post_2026_10": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    }
+  },
+  "network": false,
+  "polling": false,
+  "reopen_triggers": [
+    {"id": "GATE4_BRANCH_1", "status": "OPEN"},
+    {"id": "NEW_OBSERVED_LIQUIDATION_SOURCE", "status": "OPEN"},
+    {"id": "HL_LABEL_EXTENSION", "status": "OPEN"},
+    {"id": "EXPANSION_ROBUSTNESS_REDO", "status": "OPEN"}
+  ],
+  "sources_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ]
+}
