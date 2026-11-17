@@ -1,0 +1,27 @@
+{
+  "artifact_id": "FCLR-TRIGGER-ACTIVATION-SELFTEST-20261117T215904Z",
+  "generated_utc": "2026-11-17T21:59:04Z",
+  "session_utc": "20261117T215904Z",
+  "executable": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261117T215904Z/trigger_activation_selftest_20261117T215904Z.py",
+  "runner": "python3 -m unittest / direct",
+  "tests_run": 13,
+  "failures": 3,
+  "errors": 0,
+  "skipped": 0,
+  "exit": 1,
+  "was_successful": false,
+  "suite": [
+    {
+      "test": "test_30_train_7_embargo_30_test_durations (__main__.TestTriggerActivationBlockArithmetic.test_30_train_7_embargo_30_test_durations)",
+      "outcome": "pass"
+    },
+    {
+      "test": "test_non_overlap_detection_across_blocks (__main__.TestTriggerActivationBlockArithmetic.test_non_overlap_detection_across_blocks)",
+      "outcome": "pass"
+    },
+    {
+      "test": "test_holm_family_enumeration_deterministic (__main__.TestTriggerActivationHolmFamily.test_holm_family_enumeration_deterministic)",
+      "outcome": "pass"
+    }
+  ]
+}

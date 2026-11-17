@@ -1,0 +1,56 @@
+{
+  "artifact_id": "FCLR-TRIGGER-CHECK-20261117T215904Z",
+  "generated_utc": "2026-11-17T21:59:04Z",
+  "session_utc": "20261117T215904Z",
+  "campaign": "FCLR-TRIGGER-READINESS-01-20261117T203457Z",
+  "network": false,
+  "polling": false,
+  "trigger_check_exactly_once": true,
+  "sources_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "all_open": true,
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN"
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN"
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN"
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN"
+    }
+  ],
+  "any_trigger_fired": false,
+  "consequence": "No trigger satisfied -> no confirmatory estimand advanced or re-scored; mandatory heavy holding work = outcome-blind trigger-activation readiness package (FCLR-TRIGGER-READINESS-01) built this session.",
+  "ironflow": {
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "post_2026_10": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    }
+  },
+  "no_trigger_rule_applied": true,
+  "sealed_estimands_not_rerun": [
+    "FCLR-014",
+    "replication_synthesis",
+    "FCLR-REPRO-SYNTH-05",
+    "FCLR-013",
+    "FCLR-010",
+    "FCLR-002",
+    "FCLR-003",
+    "FCLR-009",
+    "FCLR-006",
+    "FCLR-008"
+  ]
+}
