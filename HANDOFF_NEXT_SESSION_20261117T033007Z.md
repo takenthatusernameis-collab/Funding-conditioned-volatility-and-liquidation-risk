@@ -1,0 +1,141 @@
+# HANDOFF — NEXT AGENTIC WORK SESSION — 2026-11-17T03:30:07Z
+
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (execute first)
+
+**Priority 0 — repository and rank-0 state.**
+- Repository: `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility and liquidation risk). The primary Track C volatility campaign is COMPLETE and gated; the Track A observed-liquidation arm is the active unfinished arm.
+- Program: `CLOSED_TERMINAL` — final structural closure `research_state/fclr_final_structural_closure_20261116T114626.{md,json}`; verdict `NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED`; no feasible 3-block pre-registered design in any domain.
+- Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `next_action_heavy=null`). All cached-data confirmatory estimands are terminal.
+- Consequence: **do not start or re-run any cached-data confirmatory estimand.** The only agent-removable heavy work is the independent reproducibility audit below. "Keep the suite green" is a floor, not completion.
+
+**MANDATORY HEAVY WORK (non-skippable): FCLR-014 independent recompute, or closest non-parquet artifact if blocked.**
+A trigger-check-only session, tests/gates-only session, copied bundle, re-audit of static bundles, or "no trigger → stop cleanly" is **NOT** completion. Completion requires ALL of:
+1. new `research_state/session_<UTC>/`;
+2. `recompute_fclr014_<UTC>.{py,json,md}` with an independent recompute from local non-parquet inputs (or exact blocker + closest non-parquet artifact);
+3. `evidence_audit_<UTC>.md`;
+4. gate captures + full-suite capture under the session dir;
+5. this handoff updated with actual results and the queue ticked.
+
+**Read first (in order):**
+1. `research_state/resume_trigger_registry.json`
+2. `research_state/ironflow_monitor_state.json`
+3. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`
+4. `research_state/session_20261117T031656Z/evidence_audit_20261117T031656Z.md` + `recompute_fclr013_20261117T031656Z.md` (latest completed heavy evidence; ZIP/CSV parquet-free method)
+5. `research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json`
+
+**Completed work — do not repeat:**
+- **FCLR-013 — DONE (`session_20261117T031656Z`).** Independent ZIP/CSV recompute (no parquet) from `research_state/data_cache/{BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT,XRPUSDT}_2026_07|08|09/`. Verdict **NOT_REPLICATED**: C2-vs-B1 QLIKE mean diff **0.017010** (CI `[-0.000523,0.034809]`, crosses zero), relative reduction **-4.99%** vs sealed **-1.32%** (NOT_MET); only 1 test block (>=3 required); materiality <2%; LOIO and placebo both **fail**; n_pairs=4200, 5 symbols, 36 test days. Direction consistent with sealed (C2 worse than B1), magnitude differs. Do not re-run FCLR-013.
+- **FCLR-010 — DONE (`session_20261117T002014Z`).** Independent parquet-free recompute from `results/liqmicro_v2/panel_liqmicro_v2.csv` + `hyperliquid_funding/{SYM}.json`. Verdict **NOT_REPLICATED**: C2-vs-B1 Brier relative reduction **0.50%** (CI `[-0.001106,-0.000316]`, excludes zero) vs sealed **2.21%**; below the 2% materiality floor; LOIO (`>=4/5`) and placebo both **fail**; 17 symbols, n=64,056 test rows, 157 days. Direction replicates, magnitude does not. Do not re-run FCLR-010.
+- FCLR-002 — `session_20261117T000400Z`; exact values diverged beyond tolerance; C2-vs-B1 directionally positive (`8.60%`, CI `[-0.093389,-0.005759]`); 70-day/2-block gate **NOT_MET**.
+- FCLR-003 — `session_20261117T000400Z`; B0/B1 match, C1/C2 diverge; C2 vs B1 worse (`-11.85%`); **NOT_MET** corroborated.
+- FCLR-009 — `session_20261116T125624Z`; `all_within_tolerance=true`.
+- FCLR-006 — `session_20261116T185811Z`; `all_within_tolerance=true`.
+- FCLR-008 — `session_20261116T230140Z`; B0/B1 within tolerance, C1/C2 divergence documented; qualitative **NOT_MET** corroborated.
+- FCLR-RCA-011 — complete bundle `session_20261116T100533Z`.
+
+**Next target — FCLR-014 (confirmatory funding-vol panel, Track C):**
+- Independent recompute from local non-parquet inputs. Same independence rule as FCLR-013: write `recompute_fclr014_<UTC>.{py,json,md}`.
+- Pre-registration `pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json` notes: candidate frozen splits are illustrative copy of FCLR-002; test window = 70 days = **2 blocks — INSUFFICIENT for confirmatory** (needs >=3 non-overlapping 30-day blocks). DO NOT use for confirmatory until a new admissible panel with >=3 blocks is verified and boundaries re-recorded.
+- If FCLR-014's registered panel is parquet-only with no CSV/JSON/ZIP twin, **record the exact blocker** and emit the closest non-parquet artifact instead of fabricating values.
+- **Critical:** The FCLR-002/003 cache uses ZIP/CSV for 2024 data (Apr-Jun 2024 are ZIPs; Jan-Mar and Jul-Nov are CSVs). The 70-day test window (2024-07-23 .. 2024-09-30) has only 2 blocks. This fails the >=3-block confirmatory rule. A session that runs this panel must label results `EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE` per the pre-registration.
+
+**Blocked-path warning (do not waste a session here):**
+- **No parquet engine is installed** (`pyarrow`, `fastparquet`, `duckdb`, `polars` all absent; network installs prohibited). Any task whose only input is `.parquet` is blocked unless a CSV/JSON/ZIP twin exists. FCLR-010 was solved this way; FCLR-013 uses ZIP/CSV caches.
+- `research_state/research_protocol_fclr002.md` and `research_state/research_protocol_fclr003.md` **do not exist** — do not block on them.
+- `research_state/run_manifest.json`, `run_manifest_FCLR002.json`, `data_cache/fclr002_panel*.json`, `data_cache/manifest_fclr002.json`, `data_cache/manifest_fclr003.json` are **unresolved Git-LFS pointers with no local object**. Do NOT run `git lfs pull` (network is prohibited). FCLR-002/003 are already computed; do not repeat them.
+- **2024 cache format:** Apr-Jun 2024 mark/premium/index files are ZIPs; Jan-Mar and Jul-Nov are CSVs. (Relevant to FCLR-002/003 panels, which are complete.)
+- **FCLR-014 confirmatory path blocked by design:** The pre-registration explicitly states `confirmatory_claim_go: "NO_GO"` and `exploratory_label_required: "EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE"` because the only available cached panel (FCLR-002 copy) has only 2 test blocks. A confirmatory run requires a NEW panel with >=3 blocks that does not currently exist locally.
+
+**Execute in order (do not skip to "stop cleanly"):**
+1. **Create `research_state/session_<UTC>/`** (actual UTC). `research_state/` root is **500/500** (fail-closed cap); put ALL new artifacts inside the session subdirectory only.
+2. **Check triggers exactly once (no network, no polling).** Read files 1–2. Record timestamp, each trigger status, `data_through`, and post-2026-10 month classifications in the session dir. Current state: all four `OPEN`; Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`.
+3. **FCLR-014 independent recompute (primary).** Read the 2024 ZIP/CSV cache for the 5 symbols (BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT — directories `research_state/data_cache/{SYM}_2024_01..12/`), independently reconstruct the registered estimand(s) from `pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json` using the ZIP-aware reader pattern in `session_20261117T000400Z/recompute_fclr002_003_20261117T000400Z.py`. Do not read `run_manifest.json`, do not use parquet, do not re-score sealed summaries. Write `recompute_fclr014_<UTC>.{py,json,md}`. If the available local panel only yields 2 test blocks (70 days), **explicitly label the output `EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE`** and record the blocker (insufficient blocks for confirmatory claim).
+4. **Fallback only if FCLR-014 local non-parquet inputs are unavailable:** record the exact missing path/hash and independently recompute the closest local cached estimand. A trigger check/copy/prose-only result is not completion.
+5. **Audit carried-forward evidence.** Confirm `session_20261116T100533Z/` (5 RCA-011 families), `session_20261116T125624Z/` (FCLR-009), `session_20261116T185811Z/` (FCLR-006), `session_20261116T230140Z/` (FCLR-008), `session_20261117T000400Z/` (FCLR-002/003), `session_20261117T002014Z/` (FCLR-010), `session_20261117T031656Z/` (FCLR-013) are present. Write a concise evidence-audit artifact in the session dir. Do not rerun any of them.
+6. **Run and capture every required gate under the new session dir:**
+   - `python3 scripts/check_handoff_heavywork_gate.py --json` — PASS (complete bundle + new session audit + fresh quant artifact, root <= 500).
+   - `python3 scripts/check_tracka_scope_registry_drift.py --json` — PASS (register any new script in both scope registries; a session-local recompute script under `research_state/session_*/` is not scanned, but any `scripts/*.py` addition must be registered).
+   - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143` — all pass (52 tests).
+   - `python3 -m unittest discover -q` — run to completion; record exact test count, skip count, error list, and final EXIT. **Baseline:** 1340 tests, 4 pre-existing errors (all `tests.test_fclr_liq_combined_admissibility_audit`, caused by missing `pyarrow`; environmental, not agent-caused), 18 skipped, EXIT 1. Success = identical set with no new failures/errors. Never treat timeout/monitor cap as green. Revert any timestamp-only side effect to tracked files.
+7. **Update only this handoff** after steps 3–6: replace timestamp/verification with actual results, tick FCLR-014, keep sole-handoff contract, bundle refs, blockers intact. Do not create another handoff file.
+
+**Trigger-gated science is the only scientific advance — but must be pre-powered.** If no trigger is satisfied, do not advance or re-run a confirmatory estimand; required holding action is the FCLR-014 reproducibility artifact (or closest non-parquet proxy) + evidence audit + complete verification + accurate handoff update. If a trigger is satisfied, follow `RESEARCH_PROMPT.md` §16 admissibility/source audit first, freeze a pre-sized prereg before inspecting outcomes (use `session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json` and power floors in `session_20261116T100533Z/trigger_readiness_power_calibration_20261116T100533Z.md`: Gate4/TrackC `paired_n>=23224`, TrackA/expansion `paired_n>=11689`, >=3 blocks, 7d purge/embargo), require a materially different estimand, execute, register any new scripts in both scope registries, run all gates, and update frontier/hypothesis registries with an honest verdict.
+
+## Reproducibility-audit queue (non-skippable; do in order)
+
+1. ~~FCLR-009~~ — DONE (`session_20261116T125624Z`; `all_within_tolerance=true`).
+2. ~~FCLR-006~~ — DONE (`session_20261116T185811Z`; `all_within_tolerance=true`; supersedes tolerance-failed `session_20261116T140001Z`).
+3. ~~FCLR-008~~ — DONE (`session_20261116T230140Z`; B0/B1 within tolerance; C1/C2 divergence documented; qualitative NOT_MET corroborated). `session_20261116T221127Z` is an earlier divergent FCLR-008 attempt with no evidence audit — **superseded, do not count/resume**.
+4. ~~FCLR-002~~ — DONE (`session_20261117T000400Z`; exact values diverged beyond tolerance; qualitative C2-vs-B1 improvement corroborated; gate NOT_MET).
+5. ~~FCLR-003~~ — DONE (`session_20261117T000400Z`; B0/B1 matched; C1/C2 diverged; NOT_MET corroborated).
+6. ~~FCLR-010~~ — **DONE (`session_20261117T002014Z`; CSV/JSON parquet-free recompute; verdict NOT_REPLICATED: 0.50% vs sealed 2.21%, LOIO/placebo fail).**
+7. ~~FCLR-013~~ — **DONE (`session_20261117T031656Z`; ZIP/CSV parquet-free recompute; verdict NOT_REPLICATED: C2-vs-B1 rel -4.99%, CI crosses zero, 1 test block; sealed -1.32% NOT_MET).**
+8. **FCLR-014 (confirmatory funding-vol panel): independent recompute — CURRENT** (only if local non-parquet inputs valid; label EXPLORATORY if <3 blocks).
+
+A session that completes an item must (a) create `research_state/session_<UTC>/`, (b) emit a new quantitative artifact named per queue, (c) write evidence audit, (d) run all gates + full discovery suite to completion with recorded EXIT, (e) update this handoff and tick the queue item.
+
+## Heavy-work evidence on disk (authoritative; do not redo)
+
+- **FCLR-013 — `research_state/session_20261117T031656Z/`:** ZIP/CSV parquet-free recompute (`recompute_fclr013_20261117T031656Z.{py,json,md}`), evidence audit, trigger check. Verdict NOT_REPLICATED: C2-vs-B1 rel -4.99%, CI crosses zero, 1 test block; sealed -1.32% NOT_MET.
+- **FCLR-010 — `research_state/session_20261117T002014Z/`:** parquet-free recompute (`recompute_fclr010_20261117T002014Z.{py,json,md}`), evidence audit, trigger check. Verdict NOT_REPLICATED.
+- FCLR-002/FCLR-003 — `research_state/session_20261117T000400Z/` (recomputes, evidence audit, gate/suite captures).
+- FCLR-008 — `research_state/session_20261116T230140Z/` (B0/B1 QLIKE match <=3e-7; C1/C2 divergence ~1.4e-3/2.1e-3; evidence audit and full gate/suite capture complete).
+- FCLR-006 — `research_state/session_20261116T185811Z/` (`all_within_tolerance=true`).
+- FCLR-009 — `research_state/session_20261116T125624Z/` (`all_within_tolerance=true`).
+- Self-contained bundle: `research_state/session_20261116T100533Z/` (5 RCA-011 families + `trigger_readiness_power_calibration_*`/`trigger_readiness_power.py`).
+- `research_state/session_20261116T115028Z/`: third numpy-only FCLR-011 crosscheck confirming sealed PASS not reproducible.
+
+**Incomplete / non-counting sessions (do not resume, copy, or count):** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only). `session_20261116T140001Z/` superseded (tolerance-failed FCLR-006). `session_20261116T221127Z/` superseded (divergent FCLR-008). No empty session directories present.
+
+## Bottlenecks removed / prevented
+
+- **Parquet engine absent (the FCLR-010 blocker, now removed):** `pyarrow`/`fastparquet`/`duckdb`/`polars` are not installed and network installs are prohibited. The FCLR-010 recompute was moved to `results/liqmicro_v2/panel_liqmicro_v2.csv` + `hyperliquid_funding/{SYM}.json`, proving the CSV/JSON path. Future sessions must use the same rule: if a registered input is parquet-only, find a CSV/JSON/ZIP twin or record the exact blocker — never fabricate.
+- **FCLR-013 target made actionable:** its 2026 Q3 inputs are present as ZIP caches for all 5 symbols; no parquet is required. This is complete.
+- **Nonexistent protocol paths:** `research_protocol_fclr002.md` / `research_protocol_fclr003.md` do not exist. The frozen splits and published values are embedded in the handoff and `evaluation_summary_FCLR002/003.md`; FCLR-002/003 are complete.
+- **Unresolved LFS inputs:** `run_manifest.json`, `run_manifest_FCLR002.json`, `fclr002_panel*.json`, `manifest_fclr002.json`, `manifest_fclr003.json` are pointers with no local object. Do not attempt `git lfs pull`.
+- **2024 ZIP/CSV bottleneck:** Apr-Jun 2024 files are ZIPs; CSV-only readers silently drop the training window. Use the ZIP-aware reader from `session_20261117T000400Z` (FCLR-002/003, complete).
+- **Frontier loophole closed:** the rank-0 frontier defers the concrete unfinished task to `FCLR_HEAVY_CAMPAIGN_NEXT.md`; that note defines a new quantitative artifact as the completion floor, so "keep the suite green" alone cannot close a session.
+- **Duplicate FCLR-008 attempt marked:** `session_20261116T221127Z` is explicitly non-counting; `session_20261116T230140Z` is authoritative.
+- **Suite baseline documented:** 4 errors are pre-existing missing-`pyarrow` errors in `test_fclr_liq_combined_admissibility_audit`; they are not agent-caused and must not be "fixed" by adding heavy deps to the core path.
+- **Maintenance-refresh treadmill blocked:** handoff-only refreshes with no new heavy artifact are not completion; next session must emit `recompute_fclr014_<UTC>.{json,md}`.
+- **Reproducibility path:** stdlib/numpy-only; no `statsmodels`/unpinned heavy deps in core path.
+- **Handoff authority:** this file only (`AGENT_HANDOFF.md` and this `HANDOFF_NEXT_SESSION_*.md`).
+- **Root churn:** 500/500 — session-only writes required.
+
+## Bottlenecks and prohibitions
+
+- Do not start or re-run any cached-data confirmatory estimand; all terminal.
+- Do not mutate sealed artifacts, frontier, hypothesis registries, or `.github/workflows/*`.
+- Do not poll, re-probe HuggingFace tree, use paid/credentialed/manual outcome data, or add root-level `research_state/*.md|json`.
+- Do not add `statsmodels` or unpinned heavy dependencies to core path.
+- Do not run `git lfs pull` or otherwise fetch network data.
+- Do not run `scripts/fclr_liq_010_confirm.py` (parquet-only; will fail on import).
+- Discovery suite is long-running; let it finish and record actual EXIT, not partial/timeout.
+- Scientific blocker is external (no admissible post-2026-10 observed liquidation labels/source; no agent-settable Gate 4 attestation). Agent-removable requirement: new quantitative artifact + evidence audit + complete verification + accurate handoff update.
+
+## Reopen triggers (machine-checkable — Act ONLY when satisfied; all `OPEN`)
+
+- `GATE4_BRANCH_1` — `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status: RESOLVED_VERIFIED`, `fabricated: false`). Human/legal attestation only.
+- `NEW_OBSERVED_LIQUIDATION_SOURCE` — `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status: ADMISSIBLE`, `observed_labels: true`, >=5 instruments, >=3 blocks or >=1 complete month).
+- `HL_LABEL_EXTENSION` — `research_state/hl_label_extension_audit_<UTC>.{md,json}`.
+- `EXPANSION_ROBUSTNESS_REDO` — `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`.
+
+## Tombstones (no authority)
+
+- `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
+- `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
+- `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
+
+## Verification record — 2026-11-17T03:30:07Z handoff creation
+
+- **Created:** this handoff message for the next agentic work session, prioritizing by repository name (`Funding-conditioned-volatility-and-liquidation-risk` → Track C funding-conditioned volatility first).
+- **Current campaign:** `FCLR-REPRO-AUDIT-04` in `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
+- **Rank-0 active state:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`). All cached-data confirmatory estimands are terminal.
+- **Completed queue:** FCLR-009/006/008/002/003/010/013 DONE.
+- **Next target:** FCLR-014 (confirmatory funding-vol panel) — independent recompute from 2024 ZIP/CSV caches; label EXPLORATORY if <3 blocks (current cached panel is 70 days = 2 blocks, insufficient for confirmatory per pre-registration).
+- **All documented bottlenecks remain removed;** root `research_state/*.md|json` at 500/500 cap — session-only writes required.
+- **External triggers:** all four `OPEN`; Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`.
+
+---
+
+**This handoff is the single durable artifact for the next session. Execute the INITIAL TASK MESSAGE above. Do not create additional handoff files. Update only `AGENT_HANDOFF.md` after completion.**
