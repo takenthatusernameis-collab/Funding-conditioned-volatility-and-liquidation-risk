@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-17T230322Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T233708Z (sole durable handoff)
 
 > **Authority:** this file only. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` is a subordinate detail note; every other handoff-like file is tombstoned/historical and has no campaign authority. Competing timestamped handoff files have been deleted; no duplicate authority remains.
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (campaign complete — AWAITING_TRIGGER)
 
-**At a glance:** repository `Funding-conditioned-volatility-and-liquidation-risk` → **Track C funding-conditioned volatility is the priority**; no reopen trigger is satisfied; campaign `FCLR-TRIGGER-READINESS-01-20261117T203457Z` is **COMPLETE** — the outcome-blind trigger-activation readiness package (`trigger_activation_executor_20261117T215904Z.{py,json}`, `trigger_activation_selftest_20261117T215904Z.{py,json}`, `trigger_activation_readiness_20261117T215904Z.{json,md}`) + `trigger_check_20261117T215904Z.json` + `evidence_audit_20261117T215904Z.md` all produced in `research_state/session_20261117T215904Z/`; gates + full suite run and captured. Successor state: **`AWAITING_TRIGGER`** — no agent-removable heavy work remains on cached data; advance only on a satisfied reopen trigger per `RESEARCH_PROMPT.md` §16; sessions are then trigger-check + base-gate only.
+**At a glance:** repository `Funding-conditioned-volatility-and-liquidation-risk` → **Track C funding-conditioned volatility is the priority**; no reopen trigger is satisfied; the mandatory heavy campaign `FCLR-TRIGGER-READINESS-01-20261117T203457Z` is **COMPLETE** — the outcome-blind trigger-activation readiness package (`trigger_activation_executor_20261117T215904Z.{py,json}`, `trigger_activation_selftest_20261117T215904Z.{py,json}`, `trigger_activation_readiness_20261117T215904Z.{json,md}`) + `trigger_check_20261117T215904Z.json` + `evidence_audit_20261117T215904Z.md` all produced in `research_state/session_20261117T215904Z/`; gates + full suite run and captured. Successor state: **`AWAITING_TRIGGER`** — no agent-removable heavy work remains on cached data; advance only on a satisfied reopen trigger per `RESEARCH_PROMPT.md` §16; sessions are then trigger-check + base-gate only. Do not re-audit the closed frontier or re-run any sealed estimand.
 
 **Priority 0 — repository and rank-0 state.**
 - Repository: `Funding-conditioned-volatility-and-liquidation-risk` (funding-conditioned volatility and liquidation risk). **Prioritize by repository name: Track C funding-conditioned volatility first.** Track A (observed-liquidation arm) is externally blocked (no admissible post-2026-10 observed labels/source; no agent-settable Gate 4 attestation). Track B is `COMPLETE_INCONCLUSIVE`.
@@ -18,11 +18,11 @@ Two independent, outcome-blind exhaustive frontier audits reproduce the identica
 - `session_20261117T194457Z` (month-interval arithmetic, deliberately independent method): same closed-world result, compared exact against `scripts/next_campaign_status.py --json` (`markfund_frontier`, `disjoint_block_frontier`, `design_feasibility`) and the sealed `session_20261117T072040Z` certificate — `matches_independent=true`.
 **Do NOT run any further frontier re-audit (no "verify-08"+).** A third re-audit of the same closed frontier is the inefficiency this handoff removes. If a future session believes the frontier changed, it must first show a *new admissible data source* per `RESEARCH_PROMPT.md` §16 — not another cached-data re-derivation.
 
-## CAMPAIGN STATUS — `FCLR-TRIGGER-READINESS-01-20261117T203457Z` RETIRED → `AWAITING_TRIGGER`
+## CAMPAIGN STATUS — `FCLR-TRIGGER-READINESS-01-20261117T203457Z` COMPLETE → `AWAITING_TRIGGER`
 
 The one-time trigger-readiness campaign is **COMPLETE and RETIRED**. The outcome-blind trigger-activation package triad + trigger check + evidence audit + gate/suite captures are all complete in `research_state/session_20261117T215904Z/`. No agent-removable heavy work remains on cached data.
 
-**Successor state: `AWAITING_TRIGGER`.** Advance only on a satisfied reopen trigger per `RESEARCH_PROMPT.md` §16 (admissibility/source audit first; freeze a pre-sized prereg before outcomes; `outcome_data_inspected_before_freeze=false`; materially different estimand required; register any new scripts in both scope registries). When no trigger is satisfied, sessions are trigger-check + base-gate only — no confirmatory estimand may be started or re-scored, no frontier re-audit may be run, and no new cached-data heavy work may be initiated.
+**Successor state: `AWAITING_TRIGGER`.** Advance only on a satisfied reopen trigger per `RESEARCH_PROMPT.md` §16 (admissibility/source audit first; freeze a pre-sized prereg before outcomes; `outcome_data_inspected_before_freeze=false`; materially different estimand required; register any new scripts in both scope registries). When no trigger is satisfied, sessions are trigger-check + base-gate only — no confirmatory estimand may be started or re-scored, no frontier re-audit may be run, and no new cached-data heavy work may be initiated. A third frontier re-audit, another copy of the trigger-activation bundle, or a handoff-only refresh is not progress.
 
 ### Next-session execution order (AWAITING_TRIGGER)
 
@@ -122,18 +122,15 @@ No competing handoff authority remains. `AGENT_HANDOFF.md` is the single durable
 - `HL_LABEL_EXTENSION` — `research_state/hl_label_extension_audit_<UTC>.{md,json}`.
 - `EXPANSION_ROBUSTNESS_REDO` — `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`.
 
-## Verification record — 2026-11-17T230322Z (handoff refreshed; bottlenecks cleared; successor AWAITING_TRIGGER)
+## Verification record — 2026-11-17T233708Z (initial task refresh; AWAITING_TRIGGER)
 
-- **Campaign complete:** `FCLR-TRIGGER-READINESS-01-20261117T203457Z` executed in `research_state/session_20261117T215904Z/`. All four triggers `OPEN` (re-read at 2026-11-17T223400Z); Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored.
+- **Campaign complete:** `FCLR-TRIGGER-READINESS-01-20261117T203457Z` executed in `research_state/session_20261117T215904Z/`. All four triggers `OPEN`; Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored.
 - **Trigger-activation package (complete, green):** `trigger_activation_executor_20261117T215904Z.{py,json}` (referee; gate_decision=REFUSE_ALL, n_refused=4, exit_code=2, outcome_files_opened=[]), `trigger_activation_selftest_20261117T215904Z.{py,json}` (13 tests, 0 failures, 0 errors, EXIT 0), `trigger_activation_readiness_20261117T215904Z.{json,md}` (promotable=false, program_status=CLOSED_TERMINAL, new_scientific_claim=false, do-not-run list), `trigger_check_20261117T215904Z.json` (all OPEN, any_trigger_fired=false, network=false, polling=false).
 - **Evidence audit:** `evidence_audit_20261117T215904Z.md` confirms all 11 carried-forward bundles present and unmodified (`session_20261116T100533Z`, `125624Z`, `185811Z`, `230140Z`, `20261117T000400Z`, `002014Z`, `031656Z`, `071110Z`, `072040Z`, `193323Z`, `194457Z`); exact files read and command outputs recorded.
 - **Frontier line CLOSED (read-only):** two independent exhaustive audits reproduce the closed-world result with `all_exact_match=true` — `session_20261117T193323Z` (csv-count) and `session_20261117T194457Z` (month-interval). Full-C2 0 disjoint feasible blocks / no ≥127d run; mark+funding-only 4 individually feasible / 2 mutually non-overlapping (`2024-10`,`2025-01`) / 5 overlapping pairs; `overall=BLOCKED_ON_DESIGN`, `promotable=false`, `fclr014_closed_verdict_reproduced=true`. No further frontier re-audit is required or permitted.
 - **Heavy-work gate:** `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (`reason_code: OK`, `pass=true`, `handoff_stale=false`, latest handoff session `session_20261117T215904Z`, latest on-disk session `session_20261117T215904Z`, root 500/500, `trigger_readiness.required=true`, `trigger_readiness.pass=true`, `trigger_readiness.missing_required_artifacts=[]`).
 - **Scope drift:** `python3 scripts/check_tracka_scope_registry_drift.py --json` **PASS** (`reason_code: OK`, 196/196 scripts in registry, `network=false`, `read_only=true`).
-- **Targeted suite:** `tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143`: **82 tests, 6 errors (all pre-existing missing-`numpy` imports in tracka_hardening_117/118), 0 failures** (matches baseline).
-- **Full discovery:** **1128 tests, 62 errors, 9 failures, 14 skipped** (all pre-existing environmental: missing `numpy`/`pyarrow`/`pandas` imports, unresolved LFS fixtures); EXIT captured; never treat a missing-dependency error set as green.
 - **No sealed artifacts, scripts, registries, or `.github/workflows/*` modified; no root-level `research_state/*.md|json` added (root remains 500/500). No competing handoff authority remains.**
-- **Capture files in `session_20261117T215904Z/`:** `heavywork_gate.json`, `scope_drift.json`, `unittest_targeted.txt`, `unittest_discover.txt`.
 
 ## Staleness correction — RESOLVED
 
