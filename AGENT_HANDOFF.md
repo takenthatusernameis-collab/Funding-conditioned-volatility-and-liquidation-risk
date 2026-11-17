@@ -142,3 +142,6 @@ This campaign binds every future session to heavy, outcome-blind quantitative/en
 ---
 
 **This handoff is the single durable artifact for the next session. Execute the INITIAL TASK MESSAGE above. Do not create additional handoff files. Update only `AGENT_HANDOFF.md` after completion.**
+## Staleness correction — 2026-11-17T22:34Z
+
+- Latest on-disk session is now `session_20261117T215904Z` (partial trigger-activation package: executor + selftest + trigger check present; `trigger_activation_readiness_*` and `evidence_audit_*` still missing). Recorded here so `HANDOFF_STALE_LATEST_SESSION` clears. Next session must complete the triad + evidence audit + gates/suite per campaign `FCLR-TRIGGER-READINESS-01-20261117T203457Z`, then retire the campaign token and set `AWAITING_TRIGGER`.
