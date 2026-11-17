@@ -361,6 +361,178 @@ def disjoint_block_frontier(rows: list[dict]) -> dict:
     }
 
 
+# ---------------------------------------------------------------------------
+# Mark+funding-only block frontier (B0/B1/C1 estimands: no premium/index C2
+# terms). The full-C2 disjoint_block_frontier above requires all three kline
+# kinds complete, so it under-reports feasibility for the funding-conditioned
+# volatility estimands that only need mark klines + funding. This frontier
+# closes the enumeration gap certified in
+# session_20261117T072040Z/recompute_design_frontier_certificate_*.py: it
+# reports individually-feasible test months AND the subset that is mutually
+# non-overlapping on [train_start, test_end]. Blocks must be mutually
+# non-overlapping to avoid cross-block train/test leakage.
+# ---------------------------------------------------------------------------
+MIN_MF_BLOCKS = 3
+
+
+def mark_months() -> dict[str, int]:
+    """Per-month total markPriceKlines CSV count across all 5 symbols."""
+    out: dict[str, int] = {}
+    for sym in SYMBOLS:
+        for d in CACHE.glob(f"{sym}_20??_??"):
+            m = re.search(r"_(\d{4})_(\d{2})$", d.name)
+            if not m:
+                continue
+            key = f"{m.group(1)}-{m.group(2)}"
+            n = 0
+            for sub in d.glob("markPriceKlines-*"):
+                n += len(list(sub.glob("**/*.csv")))
+            out[key] = out.get(key, 0) + n
+    return out
+
+
+def _inside_tested(month: str) -> bool:
+    return any(a[:7] <= month <= b[:7] for (a, b, _lbl) in TESTED_WINDOWS)
+
+
+def _overlaps(a: tuple, b: tuple) -> bool:
+    return max(a[0], b[0]) <= min(a[1], b[1])
+
+
+def _max_non_overlapping(intervals: list[tuple]) -> list:
+    """Greedy earliest-finish selection of mutually non-overlapping intervals."""
+    ordered = sorted(intervals, key=lambda x: (x[1], x[0], x[2]))
+    chosen: list = []
+    last_end = None
+    for s, e, name in ordered:
+        if last_end is None or s > last_end:
+            chosen.append(name)
+            last_end = e
+    return chosen
+
+
+def markfund_frontier() -> dict:
+    """Mark+funding-only non-overlapping block frontier (B0/B1/C1 estimands).
+
+    A month is mark+funding-complete when, across all 5 symbols, it has >=125
+    mark kline CSVs and funding. A test block is individually feasible when its
+    test month is mark+funding-complete and outside every tested window and
+    every calendar month in its 30-day train window is mark+funding-complete
+    (train months may overlap prior tested windows as legitimate history).
+
+    Mutual non-overlap is enforced on [train_start, test_end] across selected
+    blocks: the campaign is feasible only when at least MIN_MF_BLOCKS blocks
+    can be chosen that do not overlap in train-or-test, which is the honest
+    design constraint (overlapping blocks leak across the train/test split).
+    """
+    marks = mark_months()
+    funding: set[str] = set()
+    for sym in SYMBOLS:
+        funding |= funding_months(sym)
+
+    complete_mf = {m for m, n in marks.items()
+                   if n >= 5 * 25 and m in funding}
+
+    candidates = []
+    for key in sorted(complete_mf):
+        if _inside_tested(key):
+            continue
+        test_start_d = _month_start(key)
+        test_end_d = _month_last_day(key)
+        train_end_excl = test_start_d - timedelta(days=DISJOINT_EMBARGO_DAYS)
+        train_start_d = train_end_excl - timedelta(days=DISJOINT_TRAIN_DAYS)
+        train_months = _months_between(train_start_d,
+                                       train_end_excl - timedelta(days=1))
+        missing = [m for m in train_months if m not in complete_mf]
+        feasible = not missing
+        candidates.append({
+            "test_month": key,
+            "train_start": train_start_d.isoformat(),
+            "train_end": (train_end_excl - timedelta(days=1)).isoformat(),
+            "embargo_start": train_end_excl.isoformat(),
+            "embargo_end": (test_start_d - timedelta(days=1)).isoformat(),
+            "test_start": test_start_d.isoformat(),
+            "test_end": test_end_d.isoformat(),
+            "block_window": [train_start_d, test_end_d],
+            "train_months": train_months,
+            "individually_feasible": feasible,
+            "incomplete_train_months": missing,
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "test_month_inside_tested_window": False,
+        })
+
+    feasible = [c for c in candidates if c["individually_feasible"]]
+    intervals = [(c["block_window"][0], c["block_window"][1], c["test_month"])
+                 for c in feasible]
+    pair_overlaps = []
+    for i in range(len(intervals)):
+        for j in range(i + 1, len(intervals)):
+            if _overlaps(intervals[i], intervals[j]):
+                s = max(intervals[i][0], intervals[j][0]).isoformat()
+                e = min(intervals[i][1], intervals[j][1]).isoformat()
+                pair_overlaps.append({
+                    "block_a": intervals[i][2],
+                    "block_b": intervals[j][2],
+                    "overlap_window": [s, e],
+                })
+    selection = _max_non_overlapping(intervals)
+
+    usable = sorted(m for m in complete_mf if not _inside_tested(m))
+    contiguous_runs = []
+    if usable:
+        cur = [usable[0]]
+        runs = []
+        for prev, nxt in zip(usable, usable[1:]):
+            py, pm = int(prev[:4]), int(prev[5:7])
+            pm += 1
+            if pm > 12:
+                pm = 1
+                py += 1
+            ny, nm = int(nxt[:4]), int(nxt[5:7])
+            if (ny, nm) == (py, pm):
+                cur.append(nxt)
+            else:
+                runs.append(cur)
+                cur = [nxt]
+        runs.append(cur)
+        for run in runs:
+            days = sum(_month_days(m) for m in run)
+            contiguous_runs.append({
+                "months": run,
+                "span_days": days,
+                "feasible_ge_min_design_days": days >= MIN_DESIGN_DAYS,
+            })
+
+    for c in candidates:
+        c["block_window"] = [c["block_window"][0].isoformat(),
+                             c["block_window"][1].isoformat()]
+
+    return {
+        "estimand": "mark+funding-only",
+        "min_blocks_required": MIN_MF_BLOCKS,
+        "min_design_days": MIN_DESIGN_DAYS,
+        "block_rule": {
+            "train_days": DISJOINT_TRAIN_DAYS,
+            "embargo_days": DISJOINT_EMBARGO_DAYS,
+            "test_days": DISJOINT_TEST_DAYS,
+            "mutual_non_overlap_window": "[train_start, test_end]",
+        },
+        "tested_windows_source": "TESTED_WINDOWS",
+        "candidate_test_months": candidates,
+        "individually_feasible_months": [c["test_month"] for c in feasible],
+        "n_individually_feasible": len(feasible),
+        "overlapping_pairs": pair_overlaps,
+        "n_overlapping_pairs": len(pair_overlaps),
+        "max_mutually_non_overlapping": len(selection),
+        "non_overlapping_selection": selection,
+        "campaign_feasible_non_overlapping": len(selection) >= MIN_MF_BLOCKS,
+        "any_individually_feasible": bool(feasible),
+        "contiguous_runs_untested_complete_mf_months": contiguous_runs,
+        "any_contiguous_run_ge_min_design_days":
+            any(r["feasible_ge_min_design_days"] for r in contiguous_runs),
+    }
+
+
 def bulk_months(dataset: str) -> list[str]:
     """Months present in the ironflow bulk cache for one dataset."""
     d = BULK / dataset
@@ -630,6 +802,7 @@ def main() -> None:
     partial = [w for w in windows if not w["funding_available"] and not w["inside_tested_window"]]
     feasibility = design_feasible_months(windows)
     disjoint = disjoint_block_frontier(windows)
+    markfund = markfund_frontier()
     bulk = bulk_frontier()
     hl_extended = hl_extended_frontier()
 
@@ -639,6 +812,7 @@ def main() -> None:
                           "no_funding_months": partial,
                           "design_feasibility": feasibility,
                           "disjoint_block_frontier": disjoint,
+                          "markfund_frontier": markfund,
                           "hyperliquid_bulk_frontier": bulk,
                           "hyperliquid_extended_frontier": hl_extended}, indent=1))
         return
@@ -697,6 +871,25 @@ def main() -> None:
                   f"the campaign needs >= {disjoint['min_blocks']}.")
         else:
             print("\n  -> No disjoint 30-day block is feasible.")
+
+    print("\n== MARK+FUNDING-ONLY BLOCK FRONTIER (B0/B1/C1; no premium/index C2 terms) ==")
+    mf = markfund
+    print(f"  individually feasible test months: {mf['n_individually_feasible']} "
+          f"{mf['individually_feasible_months']}")
+    print(f"  mutually non-overlapping selection: {mf['max_mutually_non_overlapping']} "
+          f"{mf['non_overlapping_selection']} (need >= {mf['min_blocks_required']})")
+    print(f"  overlapping pairs: {mf['n_overlapping_pairs']}")
+    for run in mf["contiguous_runs_untested_complete_mf_months"]:
+        tag = "FEASIBLE" if run["feasible_ge_min_design_days"] else "TOO SHORT"
+        print(f"  {run['months'][0]}..{run['months'][-1]}  span={run['span_days']}d  "
+              f"(need >= {mf['min_design_days']}d)  {tag}")
+    if mf["campaign_feasible_non_overlapping"]:
+        print("\n  -> A >=3-block mutually non-overlapping mark+funding-only design fits; "
+              "executable heavy work REMAINS.")
+    else:
+        print("\n  -> Mark+funding-only blocks are individually feasible but fewer than "
+              f"{mf['min_blocks_required']} are mutually non-overlapping; a >=3-block "
+              "confirmatory design cannot be frozen from local cached data (BLOCKED_ON_DESIGN).")
 
     print("\n== HYPERLIQUID BULK FRONTIER (ironflow: candles + funding + OI + observed liq) ==")
     if not any(bulk["present"].values()):
@@ -758,6 +951,7 @@ def main() -> None:
 
     campaign_feasible = (feasibility["any_feasible"] or bulk["any_feasible"]
                          or bulk["any_forward_feasible"] or disjoint["campaign_feasible"]
+                         or markfund["campaign_feasible_non_overlapping"]
                          or hl_extended["any_feasible"] or hl_extended["any_forward_feasible"])
     if not campaign_feasible:
         print("\n  == CAMPAIGN STATUS: no feasible 3-block design in ANY domain ==")

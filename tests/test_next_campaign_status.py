@@ -259,6 +259,75 @@ class TestNextCampaignStatus(unittest.TestCase):
             f"forward-walk window not covered: {covered}",
         )
 
+    def test_markfund_frontier_reproduces_certified_closed_verdict(self):
+        """The mark+funding-only frontier must reproduce the FCLR-014 closed
+        verdict certified in session_20261117T072040Z: 4 individually-feasible
+        test months (2024-10/11/12, 2025-01) but only 2 mutually non-overlapping
+        blocks (2024-10, 2025-01) < 3, so no >=3-block design can be frozen.
+
+        This is the enumeration gap that let sessions improvise and disagree;
+        closing it in-tool (not just as a session artifact) is the hardening
+        target. The completeness rule is NOT weakened: only mark+funding months
+        with all 5 symbols covered count.
+        """
+        mf = self.mod.markfund_frontier()
+        self.assertEqual(mf["estimand"], "mark+funding-only")
+        self.assertEqual(mf["min_blocks_required"], 3)
+        self.assertEqual(mf["n_individually_feasible"], 4)
+        self.assertEqual(set(mf["individually_feasible_months"]),
+                         {"2024-10", "2024-11", "2024-12", "2025-01"})
+        self.assertEqual(mf["max_mutually_non_overlapping"], 2)
+        self.assertEqual(mf["non_overlapping_selection"], ["2024-10", "2025-01"])
+        self.assertEqual(mf["n_overlapping_pairs"], 5)
+        self.assertFalse(mf["campaign_feasible_non_overlapping"])
+        self.assertTrue(mf["any_individually_feasible"])
+        self.assertFalse(mf["any_contiguous_run_ge_min_design_days"])
+
+    def test_markfund_frontier_excludes_tested_windows(self):
+        """Test months inside TESTED_WINDOWS must not be proposed as fresh
+        mark+funding-only blocks (prevents duplicate sealed-cell work)."""
+        mf = self.mod.markfund_frontier()
+        for c in mf["candidate_test_months"]:
+            self.assertFalse(c["test_month_inside_tested_window"],
+                             f"tested month re-proposed: {c['test_month']}")
+            self.assertFalse(self.mod._inside_tested(c["test_month"]),
+                             f"tested month leaked into candidates: {c['test_month']}")
+
+    def test_markfund_frontier_non_overlap_selection_is_disjoint(self):
+        """The greedy non-overlapping selection must be genuinely pairwise
+        non-overlapping on [train_start, test_end] (no cross-block leakage)."""
+        from datetime import date
+        mf = self.mod.markfund_frontier()
+        by_month = {c["test_month"]: c for c in mf["candidate_test_months"]}
+        sel = mf["non_overlapping_selection"]
+        windows = [(date.fromisoformat(by_month[m]["train_start"]),
+                    date.fromisoformat(by_month[m]["test_end"]))
+                   for m in sel]
+        for i in range(len(windows)):
+            for j in range(i + 1, len(windows)):
+                a, b = windows[i], windows[j]
+                self.assertFalse(
+                    max(a[0], b[0]) <= min(a[1], b[1]),
+                    f"selection blocks overlap: {sel[i]} vs {sel[j]}",
+                )
+
+    def test_markfund_frontier_in_json_output(self):
+        """--json must expose the markfund_frontier key with the closed verdict."""
+        import json
+        import subprocess
+        import sys
+        out = subprocess.run(
+            [sys.executable, str(self.mod.REPO / "scripts"
+             / "next_campaign_status.py"), "--json"],
+            capture_output=True, text=True, check=True,
+        ).stdout
+        data = json.loads(out)
+        self.assertIn("markfund_frontier", data)
+        mf = data["markfund_frontier"]
+        self.assertEqual(mf["n_individually_feasible"], 4)
+        self.assertEqual(mf["max_mutually_non_overlapping"], 2)
+        self.assertFalse(mf["campaign_feasible_non_overlapping"])
+
 
 if __name__ == "__main__":
     unittest.main()
