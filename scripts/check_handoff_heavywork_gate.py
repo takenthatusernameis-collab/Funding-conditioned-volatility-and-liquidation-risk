@@ -130,6 +130,24 @@ def _latest_handoff_session(handoff: Path) -> str | None:
     return ids[-1] if ids else None
 
 
+def _latest_disk_session(rs: Path) -> str | None:
+    """Return the lexicographically latest session_<UTC> directory on disk.
+
+    FCLR-TRIGGER-READINESS-01 non-avoidance: the gate previously trusted the
+    handoff's latest session id, so a session could create a post-campaign
+    directory, skip the mandatory package, and leave the handoff pointing at an
+    older session. The gate would stay green forever. Comparing the newest
+    on-disk session against the newest handoff-recorded session closes that
+    stale-handoff bypass: a newer session must be recorded (and then checked).
+    """
+    ids = []
+    for p in rs.iterdir() if rs.is_dir() else []:
+        m = _SESSION_DIR_RE.fullmatch(p.name)
+        if m and p.is_dir():
+            ids.append(m.group(1))
+    return max(ids) if ids else None
+
+
 def _session_has_required(session_dir: Path) -> dict:
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
     missing = []
@@ -264,6 +282,8 @@ def check(repo: Path = REPO) -> dict:
         "handoff_markers_ok": False,
         "handoff_session_ids": [],
         "latest_session_id": None,
+        "latest_disk_session_id": None,
+        "handoff_stale": False,
         "latest_session_dir": None,
         "latest_session_evidence": None,
         "heavy_session_id": None,
@@ -296,6 +316,13 @@ def check(repo: Path = REPO) -> dict:
     latest_sid = ids[-1] if ids else None
     payload["handoff_session_ids"] = ids
     payload["latest_session_id"] = latest_sid
+    latest_disk_sid = _latest_disk_session(rs)
+    payload["latest_disk_session_id"] = latest_disk_sid
+    if latest_sid and latest_disk_sid and latest_disk_sid > latest_sid:
+        payload["handoff_stale"] = True
+        payload["failures"].append(
+            f"HANDOFF_STALE_LATEST_SESSION:{latest_disk_sid}"
+        )
     if not latest_sid:
         payload["failures"].append("HEAVY_SESSION_ID_UNRECORDED")
     else:

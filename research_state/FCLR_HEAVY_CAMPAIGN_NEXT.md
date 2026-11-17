@@ -1,4 +1,4 @@
-# FCLR Focus Campaign — `FCLR-TRIGGER-READINESS-01-20261117T203457Z` — aligned 2026-11-17T20:34:57Z
+# FCLR Focus Campaign — `FCLR-TRIGGER-READINESS-01-20261117T203457Z` — aligned 2026-11-17T20:52:56Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
 **Sole durable handoff:** `AGENT_HANDOFF.md` (authoritative). This file is the detailed subordinate campaign note; if it conflicts with the handoff, the handoff wins.
@@ -33,7 +33,7 @@ Incomplete / non-counting (do not resume/copy/count): `session_20261116T104644Z/
 ## Why this campaign exists (bottlenecks removed)
 
 - **Frontier-audit treadmill removed:** repeated independent frontier re-audits all reproduced the same closed result; two now agree with `all_exact_match=true`. Further cached-data re-audits are prohibited and no longer satisfy the heavy-work gate.
-- **Handoff staleness corrected:** the prior handoff named `session_20261117T193323Z` as latest while `session_20261117T194457Z` already existed; both are now recorded and the frontier line is closed.
+- **Handoff staleness corrected and blocked:** the prior handoff named `session_20261117T193323Z` as latest while `session_20261117T194457Z` already existed; both are now recorded and the frontier line is closed. The gate now fails (`HANDOFF_STALE_LATEST_SESSION`) if a newer on-disk session is not recorded in `AGENT_HANDOFF.md`, so the handoff cannot go stale to dodge the package.
 - **Gate regression fixed:** the frontier regex read the campaign-number group instead of the timestamp group, breaking pre-start grandfathering (`test_pre_start_session_is_grandfathered`). Fixed; a `trigger_readiness` enforcement state was added.
 - **Parquet engine absent:** use ZIP/CSV twins; network installs prohibited.
 - **Root churn:** 500/500 — session-only writes.
@@ -51,15 +51,16 @@ No trigger fired → produce `trigger_activation_executor_<UTC>.{py,json}`, `tri
 1. Create `research_state/session_<UTC>/` (all new artifacts inside).
 2. Audit carried-forward bundles: `session_20261116T100533Z/`, `125624Z/`, `185811Z/`, `230140Z/`, `20261117T000400Z/`, `002014Z/`, `031656Z/`, `071110Z/`, `072040Z/`, `193323Z/`, `194457Z/`.
 3. Write concise `evidence_audit_<UTC>.md`.
-4. Run and capture under the session dir: `check_handoff_heavywork_gate.py --json` (must show `trigger_readiness.pass=true`), `check_tracka_scope_registry_drift.py --json`, targeted `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143`, and `python3 -m unittest discover -q` to completion (record count/skip/error/EXIT). **Baseline is environment-dependent:** targeted 80 tests / 6 pre-existing missing-`numpy` errors / 0 failures; discovery 1122 tests / 62 errors / 9 failures / 14 skipped / EXIT 1. Record the actual run; never treat a missing-dependency error set as green. Revert timestamp-only tracked-file side effects.
+4. Run and capture under the session dir: `check_handoff_heavywork_gate.py --json` (must show `trigger_readiness.pass=true` and `handoff_stale=false`), `check_tracka_scope_registry_drift.py --json`, targeted `python3 -m unittest tests.test_active_campaign_gate tests.test_next_campaign_status tests.test_tracka_hardening_117 tests.test_tracka_hardening_118 tests.test_tracka_hardening_143`, and `python3 -m unittest discover -q` to completion (record count/skip/error/EXIT). **Baseline is environment-dependent:** targeted 82 tests / 6 pre-existing missing-`numpy` errors / 0 failures; discovery 1126 tests / 62 errors / 9 failures / 14 skipped / EXIT 1. Record the actual run; never treat a missing-dependency error set as green. Revert timestamp-only tracked-file side effects. Record the new session id in `AGENT_HANDOFF.md` before the final gate capture, or the stale-handoff check fails closed.
 5. Update only `AGENT_HANDOFF.md`; preserve sole-handoff contract and blockers.
 
 Trigger checks, tests/gates, copied bundles, frontier re-audits, re-runs of FCLR-014 or the synthesis, "no trigger → stop cleanly", and handoff-only refreshes are **not** completion.
 
-## Verification record — 2026-11-17T20:34:57Z
+## Verification record — 2026-11-17T205209Z
 
 - Handoff refreshed: `AGENT_HANDOFF.md` is the sole durable handoff; `FCLR-TRIGGER-READINESS-01-20261117T203457Z` is the active mandatory heavy campaign.
-- `check_handoff_heavywork_gate.py --json`: **PASS** (`reason_code: OK`, root 500/500, latest session `session_20261117T194457Z`, `trigger_readiness.required=false` → grandfathered).
+- Heavy-work gate hardened: `scripts/check_handoff_heavywork_gate.py` now fails with `HANDOFF_STALE_LATEST_SESSION:<id>` when the newest `research_state/session_<UTC>/` on disk is not the newest session id recorded in the handoff. Added `TestHandoffFreshnessGate` (2 tests) to `tests/test_tracka_hardening_143.py`.
+- `check_handoff_heavywork_gate.py --json`: **PASS** (`reason_code: OK`, root 500/500, latest handoff/on-disk session `session_20261117T194457Z`, `handoff_stale=false`, `trigger_readiness.required=false` → grandfathered).
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code: OK`).
-- Targeted suite: **80 tests, 6 pre-existing missing-`numpy` errors, 0 failures**. Full discovery baseline: 1122/62/9/14/EXIT 1 (environmental).
+- Targeted suite: **82 tests, 6 pre-existing missing-`numpy` errors, 0 failures**. Full discovery baseline: 1126/62/9/14/EXIT 1 (environmental).
 - No new session artifact produced in this refresh; the next session must satisfy `FCLR-TRIGGER-READINESS-01`.

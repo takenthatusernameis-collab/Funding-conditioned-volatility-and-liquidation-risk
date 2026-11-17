@@ -293,6 +293,70 @@ class TestTriggerReadinessCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestHandoffFreshnessGate(unittest.TestCase):
+    """FCLR-TRIGGER-READINESS-01: a newer on-disk session that is not recorded
+    in the handoff fails closed. The gate must not stay green merely because the
+    handoff still points at an older session while a post-campaign session skips
+    the trigger-activation package."""
+
+    START = "20261117T203457Z"
+
+    def _repo(self, handoff_sid="session_20261117T194457Z",
+              disk_sid="session_20261118T000000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143fresh_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        rs = repo / "research_state"
+        rs.mkdir(parents=True)
+        # Complete carried-forward Phase-B/C bundle.
+        base = rs / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        # Older session referenced by the handoff.
+        old = rs / handoff_sid
+        old.mkdir()
+        (old / "evidence_audit_x.md").write_text("x")
+        (old / "recompute_x.json").write_text("{}")
+        # Newer session on disk, not yet referenced by the handoff.
+        new = rs / disk_sid
+        new.mkdir()
+        (new / "evidence_audit_x.md").write_text("x")
+        (new / "trigger_check_x.json").write_text("{}")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-TRIGGER-READINESS-01-{self.START}\n"
+            f"Latest session: research_state/{handoff_sid}/\n"
+        )
+        return repo, new
+
+    def test_newer_disk_session_not_in_handoff_fails_closed(self):
+        repo, _ = self._repo()
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["handoff_stale"])
+        self.assertTrue(any(f.startswith("HANDOFF_STALE_LATEST_SESSION")
+                            for f in res["failures"]))
+
+    def test_handoff_recorded_new_session_is_checked_and_passes(self):
+        repo, new = self._repo()
+        text = (repo / "AGENT_HANDOFF.md").read_text()
+        text += "\nLatest session: research_state/session_20261118T000000Z/\n"
+        (repo / "AGENT_HANDOFF.md").write_text(text)
+        for prefix, suffix in gate.TRIGGER_READINESS_REQUIRED:
+            (new / f"{prefix}20261118T000000Z{suffix}").write_text("x")
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertFalse(res["handoff_stale"])
+        self.assertEqual(res["latest_session_id"], "session_20261118T000000Z")
+
+
 class TestHandoffGateCliContract(unittest.TestCase):
     def test_cli_json_pass_shape(self):
         import subprocess
