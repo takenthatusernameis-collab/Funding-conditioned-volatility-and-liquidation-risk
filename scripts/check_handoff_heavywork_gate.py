@@ -70,6 +70,30 @@ FRONTIER_VERIFY_CAMPAIGN_RE = re.compile(r"FCLR-FRONTIER-VERIFY-(\d+)-(\d{8}T\d{
 FRONTIER_VERIFY_ARTIFACT_PREFIX = "recompute_frontier_exhaustive_audit_"
 FRONTIER_VERIFY_REQUIRED_SUFFIXES = (".py", ".json", ".md")
 
+# FCLR-TRIGGER-READINESS-01 hardening: once the trigger-readiness campaign has
+# started, a later session cannot satisfy the gate with an arbitrary recompute_*
+# artifact or a trigger-check-only session. It must emit the outcome-blind
+# trigger-activation package (executor + self-test + readiness certificate) plus
+# a trigger check. Sessions predating the campaign are grandfathered so the gate
+# stays green during the handoff refresh that first announces the campaign.
+TRIGGER_READINESS_CAMPAIGN_RE = re.compile(
+    r"FCLR-TRIGGER-READINESS-(\d+)-(\d{8}T\d{6}Z)"
+)
+TRIGGER_READINESS_ARTIFACT_PREFIXES = (
+    "trigger_activation_executor_",
+    "trigger_activation_selftest_",
+    "trigger_activation_readiness_",
+)
+# (prefix, required_suffix) pairs that must ALL be present in the latest session.
+TRIGGER_READINESS_REQUIRED = (
+    ("trigger_activation_executor_", ".py"),
+    ("trigger_activation_executor_", ".json"),
+    ("trigger_activation_selftest_", ".py"),
+    ("trigger_activation_selftest_", ".json"),
+    ("trigger_activation_readiness_", ".json"),
+    ("trigger_activation_readiness_", ".md"),
+)
+
 _SESSION_DIR_RE = re.compile(r"(session_\d{8}T\d{6}Z)")
 
 # New-style heavy sessions do not copy the static Phase-B bundle into every
@@ -84,6 +108,7 @@ NEW_QUANT_PREFIXES = (
     "power_ledger_refresh_",
     "reproducibility_recompute_",
     "recompute_",
+    "trigger_activation_",
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -139,8 +164,8 @@ def _frontier_verify_state(handoff_text: str, latest_sid: str | None,
     m = FRONTIER_VERIFY_CAMPAIGN_RE.search(handoff_text or "")
     if not m:
         return out
-    campaign_start = m.group(1)
-    out["campaign_id"] = f"FCLR-FRONTIER-VERIFY-06-{campaign_start}"
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-FRONTIER-VERIFY-{m.group(1)}-{campaign_start}"
     out["campaign_start_utc"] = campaign_start
     if not latest_sid:
         return out
@@ -156,6 +181,51 @@ def _frontier_verify_state(handoff_text: str, latest_sid: str | None,
         artifact for artifact, suffix in zip(required, FRONTIER_VERIFY_REQUIRED_SUFFIXES)
         if not any(f.startswith(FRONTIER_VERIFY_ARTIFACT_PREFIX) and f.endswith(suffix)
                    for f in latest_files)
+    ]
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") for f in latest_files
+    )
+    out["pass"] = not out["missing_required_artifacts"] and out["has_trigger_check"]
+    return out
+
+
+def _trigger_readiness_state(handoff_text: str, latest_sid: str | None,
+                             latest_files: list[str]) -> dict:
+    """Return FCLR-TRIGGER-READINESS-01 non-avoidance state for the latest session.
+
+    After the trigger-readiness campaign starts, a post-start session must emit
+    the outcome-blind trigger-activation package (executor + self-test + readiness
+    certificate) plus a trigger check; an arbitrary recompute_* artifact is not
+    enough. Sessions predating the campaign are grandfathered so this gate stays
+    green during the handoff refresh that first announces the campaign.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = TRIGGER_READINESS_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-TRIGGER-READINESS-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in TRIGGER_READINESS_REQUIRED]
+    out["required_artifacts"] = required
+    out["missing_required_artifacts"] = [
+        label
+        for label, (prefix, suffix) in zip(required, TRIGGER_READINESS_REQUIRED)
+        if not any(f.startswith(prefix) and f.endswith(suffix) for f in latest_files)
     ]
     out["has_trigger_check"] = any(
         f.startswith("trigger_check_") and f.endswith(".json") for f in latest_files
@@ -203,6 +273,7 @@ def check(repo: Path = REPO) -> dict:
         "root_count": 0,
         "root_count_cap": ROOT_COUNT_CAP,
         "frontier_verify": None,
+        "trigger_readiness": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -262,6 +333,22 @@ def check(repo: Path = REPO) -> dict:
                 if not fv["has_trigger_check"]:
                     payload["failures"].append(
                         f"FRONTIER_VERIFY_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-TRIGGER-READINESS-01: after the campaign starts, require the
+            # outcome-blind trigger-activation package plus a trigger check, not
+            # any quant artifact.
+            tr = _trigger_readiness_state(text, latest_sid, latest_info["files"])
+            payload["trigger_readiness"] = tr
+            if tr["required"]:
+                if tr["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "TRIGGER_READINESS_ARTIFACTS_MISSING:"
+                        + ",".join(tr["missing_required_artifacts"])
+                    )
+                if not tr["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"TRIGGER_READINESS_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
