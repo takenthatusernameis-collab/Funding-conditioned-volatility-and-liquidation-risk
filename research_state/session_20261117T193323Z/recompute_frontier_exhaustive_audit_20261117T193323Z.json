@@ -1,0 +1,2642 @@
+{
+  "artifact_id": "FCLR-FRONTIER-VERIFY-06-AUDIT-20261117T193323Z",
+  "block_rule": {
+    "embargo_days": 7,
+    "mutual_non_overlap_window": "[train_start, test_end]",
+    "test_days": 30,
+    "train_days": 30
+  },
+  "cache_reconstruction": {
+    "full_c2_complete_months": [
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10"
+    ],
+    "mark_funding_complete_months": [
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10"
+    ],
+    "months": {
+      "2024-01": {
+        "funding_available": false,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2024-02": {
+        "funding_available": false,
+        "index_csv": 145,
+        "mark_csv": 145,
+        "premium_csv": 145,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": false,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "BTCUSDT": {
+            "funding_available": false,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "ETHUSDT": {
+            "funding_available": false,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "SOLUSDT": {
+            "funding_available": false,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "XRPUSDT": {
+            "funding_available": false,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          }
+        }
+      },
+      "2024-03": {
+        "funding_available": false,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": false,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2024-04": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2024-05": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2024-06": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2024-07": {
+        "funding_available": true,
+        "index_csv": 310,
+        "mark_csv": 310,
+        "premium_csv": 310,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          }
+        }
+      },
+      "2024-08": {
+        "funding_available": true,
+        "index_csv": 310,
+        "mark_csv": 310,
+        "premium_csv": 310,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 62,
+            "mark_csv": 62,
+            "premium_csv": 62
+          }
+        }
+      },
+      "2024-09": {
+        "funding_available": true,
+        "index_csv": 300,
+        "mark_csv": 300,
+        "premium_csv": 300,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 60,
+            "mark_csv": 60,
+            "premium_csv": 60
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 60,
+            "mark_csv": 60,
+            "premium_csv": 60
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 60,
+            "mark_csv": 60,
+            "premium_csv": 60
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 60,
+            "mark_csv": 60,
+            "premium_csv": 60
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 60,
+            "mark_csv": 60,
+            "premium_csv": 60
+          }
+        }
+      },
+      "2024-10": {
+        "funding_available": true,
+        "index_csv": 62,
+        "mark_csv": 155,
+        "premium_csv": 62,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          }
+        }
+      },
+      "2024-11": {
+        "funding_available": true,
+        "index_csv": 30,
+        "mark_csv": 150,
+        "premium_csv": 30,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 30,
+            "premium_csv": 0
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 30,
+            "premium_csv": 0
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 30,
+            "premium_csv": 0
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 30,
+            "premium_csv": 0
+          }
+        }
+      },
+      "2024-12": {
+        "funding_available": true,
+        "index_csv": 0,
+        "mark_csv": 155,
+        "premium_csv": 0,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 0,
+            "mark_csv": 31,
+            "premium_csv": 0
+          }
+        }
+      },
+      "2025-01": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2025-02": {
+        "funding_available": true,
+        "index_csv": 140,
+        "mark_csv": 140,
+        "premium_csv": 140,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          }
+        }
+      },
+      "2025-03": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2025-04": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2025-05": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2025-06": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2025-07": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2025-08": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2025-09": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2025-10": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2025-11": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2025-12": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2026-01": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2026-02": {
+        "funding_available": true,
+        "index_csv": 140,
+        "mark_csv": 140,
+        "premium_csv": 140,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 28,
+            "mark_csv": 28,
+            "premium_csv": 28
+          }
+        }
+      },
+      "2026-03": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2026-04": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2026-05": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2026-06": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2026-07": {
+        "funding_available": true,
+        "index_csv": 185,
+        "mark_csv": 185,
+        "premium_csv": 185,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 37,
+            "mark_csv": 37,
+            "premium_csv": 37
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 37,
+            "mark_csv": 37,
+            "premium_csv": 37
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 37,
+            "mark_csv": 37,
+            "premium_csv": 37
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 37,
+            "mark_csv": 37,
+            "premium_csv": 37
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 37,
+            "mark_csv": 37,
+            "premium_csv": 37
+          }
+        }
+      },
+      "2026-08": {
+        "funding_available": true,
+        "index_csv": 155,
+        "mark_csv": 155,
+        "premium_csv": 155,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 31,
+            "mark_csv": 31,
+            "premium_csv": 31
+          }
+        }
+      },
+      "2026-09": {
+        "funding_available": true,
+        "index_csv": 150,
+        "mark_csv": 150,
+        "premium_csv": 150,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 30,
+            "mark_csv": 30,
+            "premium_csv": 30
+          }
+        }
+      },
+      "2026-10": {
+        "funding_available": true,
+        "index_csv": 145,
+        "mark_csv": 145,
+        "premium_csv": 145,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": true,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "BTCUSDT": {
+            "funding_available": true,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "ETHUSDT": {
+            "funding_available": true,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "SOLUSDT": {
+            "funding_available": true,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          },
+          "XRPUSDT": {
+            "funding_available": true,
+            "index_csv": 29,
+            "mark_csv": 29,
+            "premium_csv": 29
+          }
+        }
+      },
+      "2026-11": {
+        "funding_available": false,
+        "index_csv": 40,
+        "mark_csv": 40,
+        "premium_csv": 40,
+        "symbols": {
+          "BNBUSDT": {
+            "funding_available": false,
+            "index_csv": 8,
+            "mark_csv": 8,
+            "premium_csv": 8
+          },
+          "BTCUSDT": {
+            "funding_available": false,
+            "index_csv": 8,
+            "mark_csv": 8,
+            "premium_csv": 8
+          },
+          "ETHUSDT": {
+            "funding_available": false,
+            "index_csv": 8,
+            "mark_csv": 8,
+            "premium_csv": 8
+          },
+          "SOLUSDT": {
+            "funding_available": false,
+            "index_csv": 8,
+            "mark_csv": 8,
+            "premium_csv": 8
+          },
+          "XRPUSDT": {
+            "funding_available": false,
+            "index_csv": 8,
+            "mark_csv": 8,
+            "premium_csv": 8
+          }
+        }
+      }
+    },
+    "n_months_inventory": 35
+  },
+  "cache_root": "research_state/data_cache",
+  "campaign": "FCLR-FRONTIER-VERIFY-06-20261117T130551Z",
+  "comparison": {
+    "all_exact_match": true,
+    "canonical_tool": {
+      "command": "python3 scripts/next_campaign_status.py --json",
+      "design_feasibility": {
+        "any_feasible": false,
+        "min_design_days": 127,
+        "runs": [
+          {
+            "feasible": false,
+            "months": [
+              "2024-04",
+              "2024-05"
+            ],
+            "span_days": 61
+          },
+          {
+            "feasible": false,
+            "months": [
+              "2025-01"
+            ],
+            "span_days": 31
+          }
+        ]
+      },
+      "disjoint_block_frontier": {
+        "any_feasible": false,
+        "blocks": [
+          {
+            "embargo_days": 7,
+            "embargo_end": "2024-03-31T23:00:00Z",
+            "embargo_start": "2024-03-25T00:00:00Z",
+            "feasible": false,
+            "missing_train_months": [
+              "2024-02:missing_or_unfunded",
+              "2024-03:missing_or_unfunded"
+            ],
+            "month": "2024-04",
+            "reason": "2024-02:missing_or_unfunded; 2024-03:missing_or_unfunded",
+            "test_days": 30,
+            "test_end": "2024-04-30T23:00:00Z",
+            "test_start": "2024-04-01T00:00:00Z",
+            "train_days": 30,
+            "train_end": "2024-03-24T23:00:00Z",
+            "train_months": [
+              "2024-02",
+              "2024-03"
+            ],
+            "train_start": "2024-02-24T00:00:00Z"
+          },
+          {
+            "embargo_days": 7,
+            "embargo_end": "2024-04-30T23:00:00Z",
+            "embargo_start": "2024-04-24T00:00:00Z",
+            "feasible": false,
+            "missing_train_months": [
+              "2024-03:missing_or_unfunded"
+            ],
+            "month": "2024-05",
+            "reason": "2024-03:missing_or_unfunded",
+            "test_days": 31,
+            "test_end": "2024-05-31T23:00:00Z",
+            "test_start": "2024-05-01T00:00:00Z",
+            "train_days": 30,
+            "train_end": "2024-04-23T23:00:00Z",
+            "train_months": [
+              "2024-03",
+              "2024-04"
+            ],
+            "train_start": "2024-03-25T00:00:00Z"
+          },
+          {
+            "embargo_days": 7,
+            "embargo_end": "2024-12-31T23:00:00Z",
+            "embargo_start": "2024-12-25T00:00:00Z",
+            "feasible": false,
+            "missing_train_months": [
+              "2024-11:missing_or_unfunded",
+              "2024-12:missing_or_unfunded"
+            ],
+            "month": "2025-01",
+            "reason": "2024-11:missing_or_unfunded; 2024-12:missing_or_unfunded",
+            "test_days": 31,
+            "test_end": "2025-01-31T23:00:00Z",
+            "test_start": "2025-01-01T00:00:00Z",
+            "train_days": 30,
+            "train_end": "2024-12-24T23:00:00Z",
+            "train_months": [
+              "2024-11",
+              "2024-12"
+            ],
+            "train_start": "2024-11-25T00:00:00Z"
+          }
+        ],
+        "campaign_feasible": false,
+        "feasible_blocks": [],
+        "min_blocks": 3,
+        "min_embargo_days": 7,
+        "min_test_days": 30,
+        "min_train_days": 30,
+        "n_feasible": 0
+      },
+      "markfund_frontier": {
+        "any_contiguous_run_ge_min_design_days": false,
+        "any_individually_feasible": true,
+        "block_rule": {
+          "embargo_days": 7,
+          "mutual_non_overlap_window": "[train_start, test_end]",
+          "test_days": 30,
+          "train_days": 30
+        },
+        "campaign_feasible_non_overlapping": false,
+        "candidate_test_months": [
+          {
+            "block_window": [
+              "2024-02-24",
+              "2024-04-30"
+            ],
+            "embargo_end": "2024-03-31",
+            "embargo_start": "2024-03-25",
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "incomplete_train_months": [
+              "2024-02",
+              "2024-03"
+            ],
+            "individually_feasible": false,
+            "test_end": "2024-04-30",
+            "test_month": "2024-04",
+            "test_month_inside_tested_window": false,
+            "test_start": "2024-04-01",
+            "train_end": "2024-03-24",
+            "train_months": [
+              "2024-02",
+              "2024-03"
+            ],
+            "train_start": "2024-02-24"
+          },
+          {
+            "block_window": [
+              "2024-03-25",
+              "2024-05-31"
+            ],
+            "embargo_end": "2024-04-30",
+            "embargo_start": "2024-04-24",
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "incomplete_train_months": [
+              "2024-03"
+            ],
+            "individually_feasible": false,
+            "test_end": "2024-05-31",
+            "test_month": "2024-05",
+            "test_month_inside_tested_window": false,
+            "test_start": "2024-05-01",
+            "train_end": "2024-04-23",
+            "train_months": [
+              "2024-03",
+              "2024-04"
+            ],
+            "train_start": "2024-03-25"
+          },
+          {
+            "block_window": [
+              "2024-08-25",
+              "2024-10-31"
+            ],
+            "embargo_end": "2024-09-30",
+            "embargo_start": "2024-09-24",
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "incomplete_train_months": [],
+            "individually_feasible": true,
+            "test_end": "2024-10-31",
+            "test_month": "2024-10",
+            "test_month_inside_tested_window": false,
+            "test_start": "2024-10-01",
+            "train_end": "2024-09-23",
+            "train_months": [
+              "2024-08",
+              "2024-09"
+            ],
+            "train_start": "2024-08-25"
+          },
+          {
+            "block_window": [
+              "2024-09-25",
+              "2024-11-30"
+            ],
+            "embargo_end": "2024-10-31",
+            "embargo_start": "2024-10-25",
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "incomplete_train_months": [],
+            "individually_feasible": true,
+            "test_end": "2024-11-30",
+            "test_month": "2024-11",
+            "test_month_inside_tested_window": false,
+            "test_start": "2024-11-01",
+            "train_end": "2024-10-24",
+            "train_months": [
+              "2024-09",
+              "2024-10"
+            ],
+            "train_start": "2024-09-25"
+          },
+          {
+            "block_window": [
+              "2024-10-25",
+              "2024-12-31"
+            ],
+            "embargo_end": "2024-11-30",
+            "embargo_start": "2024-11-24",
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "incomplete_train_months": [],
+            "individually_feasible": true,
+            "test_end": "2024-12-31",
+            "test_month": "2024-12",
+            "test_month_inside_tested_window": false,
+            "test_start": "2024-12-01",
+            "train_end": "2024-11-23",
+            "train_months": [
+              "2024-10",
+              "2024-11"
+            ],
+            "train_start": "2024-10-25"
+          },
+          {
+            "block_window": [
+              "2024-11-25",
+              "2025-01-31"
+            ],
+            "embargo_end": "2024-12-31",
+            "embargo_start": "2024-12-25",
+            "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+            "incomplete_train_months": [],
+            "individually_feasible": true,
+            "test_end": "2025-01-31",
+            "test_month": "2025-01",
+            "test_month_inside_tested_window": false,
+            "test_start": "2025-01-01",
+            "train_end": "2024-12-24",
+            "train_months": [
+              "2024-11",
+              "2024-12"
+            ],
+            "train_start": "2024-11-25"
+          }
+        ],
+        "contiguous_runs_untested_complete_mf_months": [
+          {
+            "feasible_ge_min_design_days": false,
+            "months": [
+              "2024-04",
+              "2024-05"
+            ],
+            "span_days": 61
+          },
+          {
+            "feasible_ge_min_design_days": false,
+            "months": [
+              "2024-10",
+              "2024-11",
+              "2024-12",
+              "2025-01"
+            ],
+            "span_days": 123
+          }
+        ],
+        "estimand": "mark+funding-only",
+        "individually_feasible_months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ],
+        "max_mutually_non_overlapping": 2,
+        "min_blocks_required": 3,
+        "min_design_days": 127,
+        "n_individually_feasible": 4,
+        "n_overlapping_pairs": 5,
+        "non_overlapping_selection": [
+          "2024-10",
+          "2025-01"
+        ],
+        "overlapping_pairs": [
+          {
+            "block_a": "2024-10",
+            "block_b": "2024-11",
+            "overlap_window": [
+              "2024-09-25",
+              "2024-10-31"
+            ]
+          },
+          {
+            "block_a": "2024-10",
+            "block_b": "2024-12",
+            "overlap_window": [
+              "2024-10-25",
+              "2024-10-31"
+            ]
+          },
+          {
+            "block_a": "2024-11",
+            "block_b": "2024-12",
+            "overlap_window": [
+              "2024-10-25",
+              "2024-11-30"
+            ]
+          },
+          {
+            "block_a": "2024-11",
+            "block_b": "2025-01",
+            "overlap_window": [
+              "2024-11-25",
+              "2024-11-30"
+            ]
+          },
+          {
+            "block_a": "2024-12",
+            "block_b": "2025-01",
+            "overlap_window": [
+              "2024-11-25",
+              "2024-12-31"
+            ]
+          }
+        ],
+        "tested_windows_source": "TESTED_WINDOWS"
+      },
+      "returncode": 0
+    },
+    "exact_match": {
+      "design_feasibility.any_feasible": true,
+      "disjoint_block_frontier.campaign_feasible": true,
+      "disjoint_block_frontier.individual_feasible_count_matches_canonical": true,
+      "disjoint_block_frontier.n_feasible": true,
+      "markfund_frontier.any_contiguous_run_ge_min_design_days": true,
+      "markfund_frontier.campaign_feasible_non_overlapping": true,
+      "markfund_frontier.individually_feasible_months": true,
+      "markfund_frontier.max_mutually_non_overlapping": true,
+      "markfund_frontier.n_individually_feasible": true,
+      "markfund_frontier.n_overlapping_pairs": true,
+      "markfund_frontier.non_overlapping_selection": true
+    },
+    "sealed_certificate": {
+      "fclr014_closed_verdict_reproduced": true,
+      "overall_verdict": "BLOCKED_ON_DESIGN",
+      "per_estimand": {
+        "full_c2": {
+          "any_feasible_without_nonoverlap_enumeration_gap": false,
+          "campaign_feasible_non_overlapping": false,
+          "canonical_tool": "scripts/next_campaign_status.py --json",
+          "design_feasibility_any_feasible": false,
+          "design_runs": [
+            {
+              "feasible": false,
+              "months": [
+                "2024-04",
+                "2024-05"
+              ],
+              "span_days": 61
+            },
+            {
+              "feasible": false,
+              "months": [
+                "2025-01"
+              ],
+              "span_days": 31
+            }
+          ],
+          "disjoint_campaign_feasible": false,
+          "disjoint_n_feasible": 0,
+          "estimand": "full-C2 (mark+index+premium+funding, all 3 kline kinds)",
+          "min_design_days": 127,
+          "verdict": "BLOCKED_ON_DESIGN"
+        },
+        "markfund_only": {
+          "any_contiguous_run_ge_min_design_days": false,
+          "block_rule": {
+            "embargo_days": 7,
+            "mutual_non_overlap_window": "[train_start, test_end]",
+            "test_days": 30,
+            "train_days": 30
+          },
+          "campaign_feasible_non_overlapping": false,
+          "candidate_test_months": [
+            {
+              "block_window": [
+                "2024-02-24",
+                "2024-04-30"
+              ],
+              "embargo_end": "2024-03-31",
+              "embargo_start": "2024-03-25",
+              "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+              "incomplete_train_months": [
+                "2024-02",
+                "2024-03"
+              ],
+              "individually_feasible": false,
+              "test_end": "2024-04-30",
+              "test_month": "2024-04",
+              "test_month_inside_tested_window": false,
+              "test_start": "2024-04-01",
+              "train_end": "2024-03-24",
+              "train_months": [
+                "2024-02",
+                "2024-03"
+              ],
+              "train_start": "2024-02-24"
+            },
+            {
+              "block_window": [
+                "2024-03-25",
+                "2024-05-31"
+              ],
+              "embargo_end": "2024-04-30",
+              "embargo_start": "2024-04-24",
+              "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+              "incomplete_train_months": [
+                "2024-03"
+              ],
+              "individually_feasible": false,
+              "test_end": "2024-05-31",
+              "test_month": "2024-05",
+              "test_month_inside_tested_window": false,
+              "test_start": "2024-05-01",
+              "train_end": "2024-04-23",
+              "train_months": [
+                "2024-03",
+                "2024-04"
+              ],
+              "train_start": "2024-03-25"
+            },
+            {
+              "block_window": [
+                "2024-08-25",
+                "2024-10-31"
+              ],
+              "embargo_end": "2024-09-30",
+              "embargo_start": "2024-09-24",
+              "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+              "incomplete_train_months": [],
+              "individually_feasible": true,
+              "test_end": "2024-10-31",
+              "test_month": "2024-10",
+              "test_month_inside_tested_window": false,
+              "test_start": "2024-10-01",
+              "train_end": "2024-09-23",
+              "train_months": [
+                "2024-08",
+                "2024-09"
+              ],
+              "train_start": "2024-08-25"
+            },
+            {
+              "block_window": [
+                "2024-09-25",
+                "2024-11-30"
+              ],
+              "embargo_end": "2024-10-31",
+              "embargo_start": "2024-10-25",
+              "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+              "incomplete_train_months": [],
+              "individually_feasible": true,
+              "test_end": "2024-11-30",
+              "test_month": "2024-11",
+              "test_month_inside_tested_window": false,
+              "test_start": "2024-11-01",
+              "train_end": "2024-10-24",
+              "train_months": [
+                "2024-09",
+                "2024-10"
+              ],
+              "train_start": "2024-09-25"
+            },
+            {
+              "block_window": [
+                "2024-10-25",
+                "2024-12-31"
+              ],
+              "embargo_end": "2024-11-30",
+              "embargo_start": "2024-11-24",
+              "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+              "incomplete_train_months": [],
+              "individually_feasible": true,
+              "test_end": "2024-12-31",
+              "test_month": "2024-12",
+              "test_month_inside_tested_window": false,
+              "test_start": "2024-12-01",
+              "train_end": "2024-11-23",
+              "train_months": [
+                "2024-10",
+                "2024-11"
+              ],
+              "train_start": "2024-10-25"
+            },
+            {
+              "block_window": [
+                "2024-11-25",
+                "2025-01-31"
+              ],
+              "embargo_end": "2024-12-31",
+              "embargo_start": "2024-12-25",
+              "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+              "incomplete_train_months": [],
+              "individually_feasible": true,
+              "test_end": "2025-01-31",
+              "test_month": "2025-01",
+              "test_month_inside_tested_window": false,
+              "test_start": "2025-01-01",
+              "train_end": "2024-12-24",
+              "train_months": [
+                "2024-11",
+                "2024-12"
+              ],
+              "train_start": "2024-11-25"
+            }
+          ],
+          "contiguous_runs_untested_complete_mf_months": [
+            {
+              "feasible_ge_min_design_days": false,
+              "months": [
+                "2024-04",
+                "2024-05"
+              ],
+              "span_days": 61
+            },
+            {
+              "feasible_ge_min_design_days": false,
+              "months": [
+                "2024-10",
+                "2024-11",
+                "2024-12",
+                "2025-01"
+              ],
+              "span_days": 123
+            }
+          ],
+          "estimand": "mark+funding-only",
+          "individually_feasible_months": [
+            "2024-10",
+            "2024-11",
+            "2024-12",
+            "2025-01"
+          ],
+          "max_mutually_non_overlapping": 2,
+          "min_blocks_required": 3,
+          "min_design_days": 127,
+          "n_individually_feasible": 4,
+          "n_overlapping_pairs": 5,
+          "non_overlapping_selection": [
+            "2024-10",
+            "2025-01"
+          ],
+          "overlapping_pairs": [
+            {
+              "block_a": "2024-10",
+              "block_b": "2024-11",
+              "overlap_window": [
+                "2024-09-25",
+                "2024-10-31"
+              ]
+            },
+            {
+              "block_a": "2024-10",
+              "block_b": "2024-12",
+              "overlap_window": [
+                "2024-10-25",
+                "2024-10-31"
+              ]
+            },
+            {
+              "block_a": "2024-11",
+              "block_b": "2024-12",
+              "overlap_window": [
+                "2024-10-25",
+                "2024-11-30"
+              ]
+            },
+            {
+              "block_a": "2024-11",
+              "block_b": "2025-01",
+              "overlap_window": [
+                "2024-11-25",
+                "2024-11-30"
+              ]
+            },
+            {
+              "block_a": "2024-12",
+              "block_b": "2025-01",
+              "overlap_window": [
+                "2024-11-25",
+                "2024-12-31"
+              ]
+            }
+          ],
+          "tested_windows_source": "scripts.next_campaign_status.TESTED_WINDOWS"
+        }
+      },
+      "promotable": false,
+      "source": "research_state/session_20261117T072040Z/recompute_design_frontier_certificate_20261117T072040Z.json"
+    }
+  },
+  "expected_closed_world": {
+    "fclr014_closed_verdict_reproduced": true,
+    "full_c2": {
+      "any_contiguous_run_ge_127d": false,
+      "campaign_feasible": false,
+      "disjoint_feasible_blocks": 0
+    },
+    "mark_funding_only": {
+      "any_contiguous_run_ge_127d": false,
+      "campaign_feasible_non_overlapping": false,
+      "individually_feasible_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01"
+      ],
+      "max_mutually_non_overlapping": 2,
+      "mutually_non_overlapping": [
+        "2024-10",
+        "2025-01"
+      ],
+      "n_individually_feasible": 4,
+      "n_overlapping_pairs": 5
+    },
+    "overall": "BLOCKED_ON_DESIGN",
+    "promotable": false
+  },
+  "fclr014_closed_verdict_reproduced": true,
+  "frontier_verification_mismatch": false,
+  "full_c2": {
+    "blocks": [
+      {
+        "block_window": [
+          "2024-02-24",
+          "2024-04-30"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-03-31",
+        "embargo_start": "2024-03-25",
+        "individually_feasible": false,
+        "missing_train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "test_days": 30,
+        "test_end": "2024-04-30",
+        "test_month": "2024-04",
+        "test_start": "2024-04-01",
+        "train_days": 30,
+        "train_end": "2024-03-24",
+        "train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "train_start": "2024-02-24"
+      },
+      {
+        "block_window": [
+          "2024-03-25",
+          "2024-05-31"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-04-30",
+        "embargo_start": "2024-04-24",
+        "individually_feasible": false,
+        "missing_train_months": [
+          "2024-03"
+        ],
+        "test_days": 31,
+        "test_end": "2024-05-31",
+        "test_month": "2024-05",
+        "test_start": "2024-05-01",
+        "train_days": 30,
+        "train_end": "2024-04-23",
+        "train_months": [
+          "2024-03",
+          "2024-04"
+        ],
+        "train_start": "2024-03-25"
+      },
+      {
+        "block_window": [
+          "2024-11-25",
+          "2025-01-31"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-12-31",
+        "embargo_start": "2024-12-25",
+        "individually_feasible": false,
+        "missing_train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "test_days": 31,
+        "test_end": "2025-01-31",
+        "test_month": "2025-01",
+        "test_start": "2025-01-01",
+        "train_days": 30,
+        "train_end": "2024-12-24",
+        "train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "train_start": "2024-11-25"
+      }
+    ],
+    "campaign_feasible_non_overlapping": false,
+    "contiguous_runs_untested_complete_months": {
+      "any_run_ge_min_design_days": false,
+      "longest_run_days": 61,
+      "runs": [
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-04",
+            "2024-05"
+          ],
+          "span_days": 61
+        },
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2025-01"
+          ],
+          "span_days": 31
+        }
+      ]
+    },
+    "estimand": "full-C2 (mark+index+premium+funding, all 3 kline kinds)",
+    "individually_feasible_months": [],
+    "max_mutually_non_overlapping": 0,
+    "max_non_overlapping_selections": [
+      []
+    ],
+    "maximal_non_overlapping_selections": [
+      []
+    ],
+    "n_individually_feasible": 0,
+    "n_overlapping_pairs": 0,
+    "non_overlapping_subsets": [
+      []
+    ],
+    "overlapping_pairs": []
+  },
+  "generated_utc": "2026-11-17T19:37:03Z",
+  "mark_funding_only": {
+    "blocks": [
+      {
+        "block_window": [
+          "2024-02-24",
+          "2024-04-30"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-03-31",
+        "embargo_start": "2024-03-25",
+        "individually_feasible": false,
+        "missing_train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "test_days": 30,
+        "test_end": "2024-04-30",
+        "test_month": "2024-04",
+        "test_start": "2024-04-01",
+        "train_days": 30,
+        "train_end": "2024-03-24",
+        "train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "train_start": "2024-02-24"
+      },
+      {
+        "block_window": [
+          "2024-03-25",
+          "2024-05-31"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-04-30",
+        "embargo_start": "2024-04-24",
+        "individually_feasible": false,
+        "missing_train_months": [
+          "2024-03"
+        ],
+        "test_days": 31,
+        "test_end": "2024-05-31",
+        "test_month": "2024-05",
+        "test_start": "2024-05-01",
+        "train_days": 30,
+        "train_end": "2024-04-23",
+        "train_months": [
+          "2024-03",
+          "2024-04"
+        ],
+        "train_start": "2024-03-25"
+      },
+      {
+        "block_window": [
+          "2024-08-25",
+          "2024-10-31"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-09-30",
+        "embargo_start": "2024-09-24",
+        "individually_feasible": true,
+        "missing_train_months": [],
+        "test_days": 31,
+        "test_end": "2024-10-31",
+        "test_month": "2024-10",
+        "test_start": "2024-10-01",
+        "train_days": 30,
+        "train_end": "2024-09-23",
+        "train_months": [
+          "2024-08",
+          "2024-09"
+        ],
+        "train_start": "2024-08-25"
+      },
+      {
+        "block_window": [
+          "2024-09-25",
+          "2024-11-30"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-10-31",
+        "embargo_start": "2024-10-25",
+        "individually_feasible": true,
+        "missing_train_months": [],
+        "test_days": 30,
+        "test_end": "2024-11-30",
+        "test_month": "2024-11",
+        "test_start": "2024-11-01",
+        "train_days": 30,
+        "train_end": "2024-10-24",
+        "train_months": [
+          "2024-09",
+          "2024-10"
+        ],
+        "train_start": "2024-09-25"
+      },
+      {
+        "block_window": [
+          "2024-10-25",
+          "2024-12-31"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-11-30",
+        "embargo_start": "2024-11-24",
+        "individually_feasible": true,
+        "missing_train_months": [],
+        "test_days": 31,
+        "test_end": "2024-12-31",
+        "test_month": "2024-12",
+        "test_start": "2024-12-01",
+        "train_days": 30,
+        "train_end": "2024-11-23",
+        "train_months": [
+          "2024-10",
+          "2024-11"
+        ],
+        "train_start": "2024-10-25"
+      },
+      {
+        "block_window": [
+          "2024-11-25",
+          "2025-01-31"
+        ],
+        "embargo_days": 7,
+        "embargo_end": "2024-12-31",
+        "embargo_start": "2024-12-25",
+        "individually_feasible": true,
+        "missing_train_months": [],
+        "test_days": 31,
+        "test_end": "2025-01-31",
+        "test_month": "2025-01",
+        "test_start": "2025-01-01",
+        "train_days": 30,
+        "train_end": "2024-12-24",
+        "train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "train_start": "2024-11-25"
+      }
+    ],
+    "campaign_feasible_non_overlapping": false,
+    "contiguous_runs_untested_complete_months": {
+      "any_run_ge_min_design_days": false,
+      "longest_run_days": 123,
+      "runs": [
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-04",
+            "2024-05"
+          ],
+          "span_days": 61
+        },
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-10",
+            "2024-11",
+            "2024-12",
+            "2025-01"
+          ],
+          "span_days": 123
+        }
+      ]
+    },
+    "estimand": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+    "individually_feasible_months": [
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01"
+    ],
+    "max_mutually_non_overlapping": 2,
+    "max_non_overlapping_selections": [
+      [
+        "2024-10",
+        "2025-01"
+      ]
+    ],
+    "maximal_non_overlapping_selections": [
+      [
+        "2024-10",
+        "2025-01"
+      ],
+      [
+        "2024-11"
+      ],
+      [
+        "2024-12"
+      ]
+    ],
+    "n_individually_feasible": 4,
+    "n_overlapping_pairs": 5,
+    "non_overlapping_subsets": [
+      [],
+      [
+        "2024-10"
+      ],
+      [
+        "2024-11"
+      ],
+      [
+        "2024-12"
+      ],
+      [
+        "2025-01"
+      ],
+      [
+        "2024-10",
+        "2025-01"
+      ]
+    ],
+    "overlapping_pairs": [
+      {
+        "block_a": "2024-10",
+        "block_b": "2024-11",
+        "overlap_window": [
+          "2024-09-25",
+          "2024-10-31"
+        ]
+      },
+      {
+        "block_a": "2024-10",
+        "block_b": "2024-12",
+        "overlap_window": [
+          "2024-10-25",
+          "2024-10-31"
+        ]
+      },
+      {
+        "block_a": "2024-11",
+        "block_b": "2024-12",
+        "overlap_window": [
+          "2024-10-25",
+          "2024-11-30"
+        ]
+      },
+      {
+        "block_a": "2024-11",
+        "block_b": "2025-01",
+        "overlap_window": [
+          "2024-11-25",
+          "2024-11-30"
+        ]
+      },
+      {
+        "block_a": "2024-12",
+        "block_b": "2025-01",
+        "overlap_window": [
+          "2024-11-25",
+          "2024-12-31"
+        ]
+      }
+    ]
+  },
+  "method": "independent stdlib-only ZIP/CSV cache reconstruction; tested-window boundaries read from scripts/next_campaign_status.py source (exclusion only); canonical tool run only as comparison target; no network; no parquet; no outcome data inspected",
+  "min_design_days": 127,
+  "mismatch_details": [],
+  "notes": "No confirmatory estimand was run or re-scored; no sealed artifact was modified; no outcome data was inspected. All triggers were OPEN at trigger check time, so no trigger-satisfied path was taken.",
+  "overall_verdict": "BLOCKED_ON_DESIGN",
+  "promotable": false,
+  "repository": "Funding-conditioned-volatility-and-liquidation-risk",
+  "sensitivity_grid": [
+    {
+      "any_run_ge_min_design_days": false,
+      "campaign_feasible_non_overlapping": false,
+      "contiguous_runs": [
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-04",
+            "2024-05"
+          ],
+          "span_days": 61
+        },
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2025-01"
+          ],
+          "span_days": 31
+        }
+      ],
+      "embargo_days": 7,
+      "family": "full_c2",
+      "individually_feasible_months": [],
+      "label": "EXPLORATORY_DESIGN_ONLY / NOT_A_PREREG / NOT_PROMOTABLE",
+      "longest_run_days": 61,
+      "max_mutually_non_overlapping": 0,
+      "max_non_overlapping_selections": [
+        []
+      ],
+      "min_design_days": 79,
+      "n_individually_feasible": 0,
+      "n_overlapping_pairs": 0,
+      "test_days": 14,
+      "train_days": 30
+    },
+    {
+      "any_run_ge_min_design_days": false,
+      "campaign_feasible_non_overlapping": false,
+      "contiguous_runs": [
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-04",
+            "2024-05"
+          ],
+          "span_days": 61
+        },
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-10",
+            "2024-11",
+            "2024-12",
+            "2025-01"
+          ],
+          "span_days": 123
+        }
+      ],
+      "embargo_days": 7,
+      "family": "mark_funding_only",
+      "individually_feasible_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01"
+      ],
+      "label": "EXPLORATORY_DESIGN_ONLY / NOT_A_PREREG / NOT_PROMOTABLE",
+      "longest_run_days": 123,
+      "max_mutually_non_overlapping": 2,
+      "max_non_overlapping_selections": [
+        [
+          "2024-10",
+          "2025-01"
+        ]
+      ],
+      "min_design_days": 79,
+      "n_individually_feasible": 4,
+      "n_overlapping_pairs": 5,
+      "test_days": 14,
+      "train_days": 30
+    },
+    {
+      "any_run_ge_min_design_days": false,
+      "campaign_feasible_non_overlapping": false,
+      "contiguous_runs": [
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-04",
+            "2024-05"
+          ],
+          "span_days": 61
+        },
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2025-01"
+          ],
+          "span_days": 31
+        }
+      ],
+      "embargo_days": 7,
+      "family": "full_c2",
+      "individually_feasible_months": [],
+      "label": "EXPLORATORY_DESIGN_ONLY / NOT_A_PREREG / NOT_PROMOTABLE",
+      "longest_run_days": 61,
+      "max_mutually_non_overlapping": 0,
+      "max_non_overlapping_selections": [
+        []
+      ],
+      "min_design_days": 127,
+      "n_individually_feasible": 0,
+      "n_overlapping_pairs": 0,
+      "test_days": 30,
+      "train_days": 30
+    },
+    {
+      "any_run_ge_min_design_days": false,
+      "campaign_feasible_non_overlapping": false,
+      "contiguous_runs": [
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-04",
+            "2024-05"
+          ],
+          "span_days": 61
+        },
+        {
+          "feasible_ge_min_design_days": false,
+          "months": [
+            "2024-10",
+            "2024-11",
+            "2024-12",
+            "2025-01"
+          ],
+          "span_days": 123
+        }
+      ],
+      "embargo_days": 7,
+      "family": "mark_funding_only",
+      "individually_feasible_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01"
+      ],
+      "label": "EXPLORATORY_DESIGN_ONLY / NOT_A_PREREG / NOT_PROMOTABLE",
+      "longest_run_days": 123,
+      "max_mutually_non_overlapping": 2,
+      "max_non_overlapping_selections": [
+        [
+          "2024-10",
+          "2025-01"
+        ]
+      ],
+      "min_design_days": 127,
+      "n_individually_feasible": 4,
+      "n_overlapping_pairs": 5,
+      "test_days": 30,
+      "train_days": 30
+    }
+  ],
+  "session_utc": "20261117T193323Z",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "tested_windows": [
+    {
+      "end": "2024-09-30",
+      "label": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+      "start": "2024-07-23"
+    },
+    {
+      "end": "2025-05-31",
+      "label": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+      "start": "2025-02-01"
+    },
+    {
+      "end": "2026-08-31",
+      "label": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+      "start": "2026-05-01"
+    },
+    {
+      "end": "2026-10-31",
+      "label": "FCLR-FWD-VOL-011-CONFIRM forward walk",
+      "start": "2026-08-03"
+    },
+    {
+      "end": "2025-10-15",
+      "label": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+      "start": "2025-07-23"
+    },
+    {
+      "end": "2026-04-01",
+      "label": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+      "start": "2026-01-01"
+    },
+    {
+      "end": "2024-06-30",
+      "label": "FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)",
+      "start": "2024-06-01"
+    },
+    {
+      "end": "2025-06-30",
+      "label": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+      "start": "2025-06-01"
+    },
+    {
+      "end": "2025-11-30",
+      "label": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+      "start": "2025-11-01"
+    },
+    {
+      "end": "2025-12-31",
+      "label": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+      "start": "2025-12-01"
+    }
+  ],
+  "tested_windows_source": "scripts/next_campaign_status.py TESTED_WINDOWS (parsed from source)",
+  "track_priority": "Track C funding-conditioned volatility",
+  "verdict_detail": "Independent audit reproduces the closed FCLR-014 verdict: full-C2 has 0 feasible disjoint blocks and no contiguous untested run >=127d; mark+funding-only has 4 individually feasible test months (2024-10, 2024-11, 2024-12, 2025-01) but only 2 mutually non-overlapping (2024-10, 2025-01) < 3, 5 overlapping pairs, no contiguous run >=127d. No >=3-block mutually non-overlapping confirmatory design can be frozen from local cached data. BLOCKED_ON_DESIGN; promotable=false."
+}

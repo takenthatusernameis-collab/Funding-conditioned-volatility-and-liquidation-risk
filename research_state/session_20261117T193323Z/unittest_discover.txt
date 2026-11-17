@@ -1,0 +1,1133 @@
+artifact not found: /home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/nonexistent_xyz_artifact.json
+refusing --out outside canonical output dir: /home/runner/work/_temp/kilo-tmp/tmpvue1dbhk/evil_outside_results.md
+refusing x outside canonical output dir: /other/child
+======================================================================
+ERROR: tests.test_data_loading (unittest.loader._FailedTest.tests.test_data_loading)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_data_loading
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_data_loading.py", line 2, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+
+
+======================================================================
+ERROR: tests.test_eval_inference_diagnostics (unittest.loader._FailedTest.tests.test_eval_inference_diagnostics)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_eval_inference_diagnostics
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_eval_inference_diagnostics.py", line 11, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_failing_regime_inference (unittest.loader._FailedTest.tests.test_failing_regime_inference)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_failing_regime_inference
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_failing_regime_inference.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_fclr016_v5_admissibility_guard (unittest.loader._FailedTest.tests.test_fclr016_v5_admissibility_guard)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr016_v5_admissibility_guard
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_guard.py", line 7, in <module>
+    from run_funding_ablations import check_confirmatory_provenance, check_admissibility_package
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_fclr016_v5_admissibility_hardening (unittest.loader._FailedTest.tests.test_fclr016_v5_admissibility_hardening)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr016_v5_admissibility_hardening
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_hardening.py", line 23, in <module>
+    from run_funding_ablations import check_admissibility_package, check_confirmatory_provenance  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: test_blocked_package_blockers_nonempty_and_gates_false (tests.test_fclr016_v5_admissibility_report.TestReportCannotClaimGo.test_blocked_package_blockers_nonempty_and_gates_false)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 191, in test_blocked_package_blockers_nonempty_and_gates_false
+    mod = _load_report_module()
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 55, in _load_report_module
+    spec.loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_admissibility_report.py", line 12, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_markdown_never_says_all_go_true (tests.test_fclr016_v5_admissibility_report.TestReportCannotClaimGo.test_markdown_never_says_all_go_true)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 199, in test_markdown_never_says_all_go_true
+    mod = _load_report_module()
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 55, in _load_report_module
+    spec.loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_admissibility_report.py", line 12, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_report_path_never_loads_kline_funding_or_outcomes (tests.test_fclr016_v5_admissibility_report.TestReportLoadsNoData.test_report_path_never_loads_kline_funding_or_outcomes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 161, in test_report_path_never_loads_kline_funding_or_outcomes
+    import run_funding_ablations as rfa  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_fabricated_resolved_terms_never_claims_go (tests.test_fclr016_v5_admissibility_report.TestReportRefusesMalformedOrFabricated.test_fabricated_resolved_terms_never_claims_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 149, in test_fabricated_resolved_terms_never_claims_go
+    out = json.loads(p.stdout.split("---MARKDOWN---", 1)[0])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_missing_file_refuses_no_go (tests.test_fclr016_v5_admissibility_report.TestReportRefusesMalformedOrFabricated.test_missing_file_refuses_no_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 113, in test_missing_file_refuses_no_go
+    out = json.loads(p.stdout.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: tests.test_fclr016_v5_cli_refusal_parity_132 (unittest.loader._FailedTest.tests.test_fclr016_v5_cli_refusal_parity_132)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr016_v5_cli_refusal_parity_132
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_cli_refusal_parity_132.py", line 32, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_fclr016_v5_confirmatory_cli_refusal_e2e (unittest.loader._FailedTest.tests.test_fclr016_v5_confirmatory_cli_refusal_e2e)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr016_v5_confirmatory_cli_refusal_e2e
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_confirmatory_cli_refusal_e2e.py", line 27, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: test_build_path_never_calls_outcome_loaders (tests.test_fclr016_v5_preflight_summary.TestParityAndNoDataLoading.test_build_path_never_calls_outcome_loaders)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 202, in test_build_path_never_calls_outcome_loaders
+    import run_funding_ablations as rfa
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_parity_with_package_check (tests.test_fclr016_v5_preflight_summary.TestParityAndNoDataLoading.test_parity_with_package_check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 181, in test_parity_with_package_check
+    mod = _load_mod()
+          ^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 47, in _load_mod
+    spec.loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_preflight_summary.py", line 18, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_never_claims_go_and_emits_checklist_refusal_matrix (tests.test_fclr016_v5_preflight_summary.TestRealBlockedPackage.test_never_claims_go_and_emits_checklist_refusal_matrix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 65, in test_never_claims_go_and_emits_checklist_refusal_matrix
+    mod = _load_mod()
+          ^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 47, in _load_mod
+    spec.loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_preflight_summary.py", line 18, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_agent_only_reviewer_never_go (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_agent_only_reviewer_never_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 167, in test_agent_only_reviewer_never_go
+    self._assert_never_go({"status": "RESOLVED_VERIFIED", "fabricated": False,
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 152, in _assert_never_go
+    out = json.loads(text.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_draft_promoted_claims_never_go (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_draft_promoted_claims_never_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 175, in test_draft_promoted_claims_never_go
+    self._assert_never_go({}, pr_mut={"draft": False, "confirmatory_claim_go": "GO", "admissibility_complete": True,
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 152, in _assert_never_go
+    out = json.loads(text.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_fabricated_resolved_never_go (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_fabricated_resolved_never_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 157, in test_fabricated_resolved_never_go
+    self._assert_never_go({"status": "RESOLVED_VERIFIED", "fabricated": True,
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 152, in _assert_never_go
+    out = json.loads(text.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_malformed_json_refuses_no_go (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_malformed_json_refuses_no_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 132, in test_malformed_json_refuses_no_go
+    out = json.loads(p.stdout.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_missing_file_refuses (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_missing_file_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 117, in test_missing_file_refuses
+    out = json.loads(p.stdout.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_resolved_missing_human_fields_never_go (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_resolved_missing_human_fields_never_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 162, in test_resolved_missing_human_fields_never_go
+    self._assert_never_go({"status": "RESOLVED_VERIFIED", "fabricated": False,
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 152, in _assert_never_go
+    out = json.loads(text.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_template_as_evidence_never_go (tests.test_fclr016_v5_preflight_summary.TestRefusesBadInputs.test_template_as_evidence_never_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 172, in test_template_as_evidence_never_go
+    self._assert_never_go({"status": "TEMPLATE_NOT_EVIDENCE", "fabricated": False})
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 152, in _assert_never_go
+    out = json.loads(text.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: setUpClass (tests.test_fclr016_v5_promotion_dryrun.TestMandatoryScenarioMatrix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 135, in setUpClass
+    cls.report = _with_boom_loaders(lambda: _load_mod().run_dryrun(PM_REAL, CA_REAL, TE_REAL, PR_REAL))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 66, in _with_boom_loaders
+    import run_funding_ablations as rfa
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_real_blocked_never_go_and_inputs_canonicals_unchanged (tests.test_fclr016_v5_promotion_dryrun.TestPromotionDryrunRealBlocked.test_real_blocked_never_go_and_inputs_canonicals_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 88, in test_real_blocked_never_go_and_inputs_canonicals_unchanged
+    report = _with_boom_loaders(lambda: _load_mod().run_dryrun(PM_REAL, CA_REAL, TE_REAL, PR_REAL))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 66, in _with_boom_loaders
+    import run_funding_ablations as rfa
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_package_check_never_treats_template_as_resolved (tests.test_fclr016_v5_terms_evidence_template.TestTemplateCannotAdvanceGates.test_package_check_never_treats_template_as_resolved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_terms_evidence_template.py", line 166, in test_package_check_never_treats_template_as_resolved
+    from run_funding_ablations import check_admissibility_package  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_provenance_guard_refuses_template_via_terms_evidence (tests.test_fclr016_v5_terms_evidence_template.TestTemplateCannotAdvanceGates.test_provenance_guard_refuses_template_via_terms_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_terms_evidence_template.py", line 193, in test_provenance_guard_refuses_template_via_terms_evidence
+    from run_funding_ablations import check_confirmatory_provenance  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_report_never_claims_go_for_template (tests.test_fclr016_v5_terms_evidence_template.TestTemplateCannotAdvanceGates.test_report_never_claims_go_for_template)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_terms_evidence_template.py", line 185, in test_report_never_claims_go_for_template
+    out = json.loads(p.stdout.split("---MARKDOWN---", 1)[0])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_module_import_safe_and_never_claims_go (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceNoDataLoading.test_module_import_safe_and_never_claims_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 119, in test_module_import_safe_and_never_claims_go
+    import run_funding_ablations as rfa  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_local_2024_evidence_refs_present_unverified_only (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceRealScopedPackage.test_local_2024_evidence_refs_present_unverified_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 69, in test_local_2024_evidence_refs_present_unverified_only
+    mod = _load_mod()
+          ^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 40, in _load_mod
+    spec.loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr024_v5_scope_coherence_report.py", line 22, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_malformed_json_refuses_no_go (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceRefusals.test_malformed_json_refuses_no_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 106, in test_malformed_json_refuses_no_go
+    out = json.loads(p.stdout.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_missing_file_refuses_no_go (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceRefusals.test_missing_file_refuses_no_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 93, in test_missing_file_refuses_no_go
+    out = json.loads(p.stdout.strip().splitlines()[0])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: tests.test_fclr_fwd_vol_2024_disjoint_2024_06 (unittest.loader._FailedTest.tests.test_fclr_fwd_vol_2024_disjoint_2024_06)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr_fwd_vol_2024_disjoint_2024_06
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr_fwd_vol_2024_disjoint_2024_06.py", line 8, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_fclr_fwd_vol_2025_disjoint_corrected_audit (unittest.loader._FailedTest.tests.test_fclr_fwd_vol_2025_disjoint_corrected_audit)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr_fwd_vol_2025_disjoint_corrected_audit
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr_fwd_vol_2025_disjoint_corrected_audit.py", line 25, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_fclr_fwd_vol_2025_disjoint_reconcile (unittest.loader._FailedTest.tests.test_fclr_fwd_vol_2025_disjoint_reconcile)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr_fwd_vol_2025_disjoint_reconcile
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr_fwd_vol_2025_disjoint_reconcile.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_fclr_liq_combined_admissibility_audit (unittest.loader._FailedTest.tests.test_fclr_liq_combined_admissibility_audit)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_fclr_liq_combined_admissibility_audit
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr_liq_combined_admissibility_audit.py", line 19, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+
+
+======================================================================
+ERROR: tests.test_funding_ablations (unittest.loader._FailedTest.tests.test_funding_ablations)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_funding_ablations
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_funding_ablations.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_funding_ablations_lfs_manifest (unittest.loader._FailedTest.tests.test_funding_ablations_lfs_manifest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_funding_ablations_lfs_manifest
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_funding_ablations_lfs_manifest.py", line 9, in <module>
+    from scripts.run_funding_ablations import _load_manifest_json
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_funding_ablations_multisplit (unittest.loader._FailedTest.tests.test_funding_ablations_multisplit)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_funding_ablations_multisplit
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_funding_ablations_multisplit.py", line 14, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_funding_ablations_split_selection (unittest.loader._FailedTest.tests.test_funding_ablations_split_selection)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_funding_ablations_split_selection
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_funding_ablations_split_selection.py", line 18, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+
+
+======================================================================
+ERROR: tests.test_funding_ablations_v3_loader (unittest.loader._FailedTest.tests.test_funding_ablations_v3_loader)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_funding_ablations_v3_loader
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_funding_ablations_v3_loader.py", line 17, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_gate4_v4_exploratory_diag (unittest.loader._FailedTest.tests.test_gate4_v4_exploratory_diag)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_gate4_v4_exploratory_diag
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_gate4_v4_exploratory_diag.py", line 6, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_gate4_v4_exploratory_stab (unittest.loader._FailedTest.tests.test_gate4_v4_exploratory_stab)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_gate4_v4_exploratory_stab
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_gate4_v4_exploratory_stab.py", line 9, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_gate4_v4_exploratory_stab_diagnostics (unittest.loader._FailedTest.tests.test_gate4_v4_exploratory_stab_diagnostics)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_gate4_v4_exploratory_stab_diagnostics
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_gate4_v4_exploratory_stab_diagnostics.py", line 17, in <module>
+    from scripts.run_gate4_v4_exploratory_stab import LABEL, make_interpretation, write_md  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_gate4_v4_exploratory_stab.py", line 38, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_gate4_v4_leakage_audit (unittest.loader._FailedTest.tests.test_gate4_v4_leakage_audit)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_gate4_v4_leakage_audit
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_gate4_v4_leakage_audit.py", line 9, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_gate4_v4_leakage_audit_md_diagnostics (unittest.loader._FailedTest.tests.test_gate4_v4_leakage_audit_md_diagnostics)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_gate4_v4_leakage_audit_md_diagnostics
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_gate4_v4_leakage_audit_md_diagnostics.py", line 19, in <module>
+    from scripts.run_gate4_v4_leakage_audit import (  # noqa: E402
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_gate4_v4_leakage_audit.py", line 27, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_timestamp_parsing (unittest.loader._FailedTest.tests.test_timestamp_parsing)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_timestamp_parsing
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_timestamp_parsing.py", line 2, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+
+
+======================================================================
+ERROR: tests.test_tracka_hardening_114 (unittest.loader._FailedTest.tests.test_tracka_hardening_114)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_tracka_hardening_114
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_114.py", line 49, in <module>
+    from src.analysis.liqmicro.ingest import (
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/src/analysis/liqmicro/ingest.py", line 8, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: tests.test_tracka_hardening_115 (unittest.loader._FailedTest.tests.test_tracka_hardening_115)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: tests.test_tracka_hardening_115
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_115.py", line 43, in <module>
+    from src.analysis.liqmicro.ingest import GuardedReadRefused as _IngestGuardedReadRefused
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/src/analysis/liqmicro/ingest.py", line 8, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+ERROR: test_coupled_robust_eval_main_blocked_no_writes (tests.test_tracka_hardening_116.Test116G1ReadyWritingBlockedNoCanonicalFrontierMutation.test_coupled_robust_eval_main_blocked_no_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_116.py", line 231, in test_coupled_robust_eval_main_blocked_no_writes
+    from scripts import coupled_robust_eval
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/coupled_robust_eval.py", line 19, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_overlay_quick_main_blocked_no_writes (tests.test_tracka_hardening_116.Test116G1ReadyWritingBlockedNoCanonicalFrontierMutation.test_overlay_quick_main_blocked_no_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_116.py", line 206, in test_overlay_quick_main_blocked_no_writes
+    from scripts import overlay_quick
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/overlay_quick.py", line 10, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_overlay_tracka_execute_main_blocked_no_writes (tests.test_tracka_hardening_116.Test116G1ReadyWritingBlockedNoCanonicalFrontierMutation.test_overlay_tracka_execute_main_blocked_no_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_116.py", line 219, in test_overlay_tracka_execute_main_blocked_no_writes
+    from scripts import overlay_tracka_execute
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/overlay_tracka_execute.py", line 11, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_extended_registry_covers_115_and_risk_mentions (tests.test_tracka_hardening_116.Test116G3RemainingScriptClassification.test_extended_registry_covers_115_and_risk_mentions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_116.py", line 312, in test_extended_registry_covers_115_and_risk_mentions
+    from tests.test_tracka_hardening_115 import HARNESS_CALLER_REGISTRY
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_115.py", line 43, in <module>
+    from src.analysis.liqmicro.ingest import GuardedReadRefused as _IngestGuardedReadRefused
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/src/analysis/liqmicro/ingest.py", line 8, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_no_real_research_state_new_files_on_blocked_mains (tests.test_tracka_hardening_116.Test116StableContracts.test_no_real_research_state_new_files_on_blocked_mains)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_116.py", line 400, in test_no_real_research_state_new_files_on_blocked_mains
+    mod = __import__(modname, fromlist=[fn])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/overlay_quick.py", line 10, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_blocked_never_calls_pipeline_or_frontier_writer (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_blocked_never_calls_pipeline_or_frontier_writer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1051, in test_blocked_never_calls_pipeline_or_frontier_writer
+    mod = self._import_run_liqmicro()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1042, in _import_run_liqmicro
+    mod = importlib.import_module('scripts.run_liqmicro')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro.py", line 15, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_frontier_writer_isolated_tmp_no_real_rs_mutation (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_frontier_writer_isolated_tmp_no_real_rs_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1071, in test_frontier_writer_isolated_tmp_no_real_rs_mutation
+    mod = self._import_run_liqmicro()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1042, in _import_run_liqmicro
+    mod = importlib.import_module('scripts.run_liqmicro')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro.py", line 15, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_blocked_frontier_unchanged (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_blocked_frontier_unchanged)
+Blocked run_liqmicro_v2 never mutates experiment_frontier.json.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 501, in test_blocked_frontier_unchanged
+    mod = self._import_run_liqmicro_v2()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 463, in _import_run_liqmicro_v2
+    mod = importlib.import_module("scripts.run_liqmicro_v2")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro_v2.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_blocked_never_calls_pipeline_or_mutates_canonical (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_blocked_never_calls_pipeline_or_mutates_canonical)
+run_liqmicro_v2 blocked: _run_pipeline never called, no canonical
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 476, in test_blocked_never_calls_pipeline_or_mutates_canonical
+    mod = self._import_run_liqmicro_v2()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 463, in _import_run_liqmicro_v2
+    mod = importlib.import_module("scripts.run_liqmicro_v2")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro_v2.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_each_script_canonical_targets_never_mutated_blocked (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_each_script_canonical_targets_never_mutated_blocked)
+Explicit per-script: blocked main never writes its canonical outputs.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 587, in test_each_script_canonical_targets_never_mutated_blocked
+    rc, out, _ = self._run_blocked_main(mod_name, dict(BLOCKED_PAYLOAD))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 536, in _run_blocked_main
+    mod = importlib.import_module(f"scripts.{mod_name}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/coupled_robust_eval.py", line 19, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_matrix_all_non_ready_states_refuse_no_mutation (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_matrix_all_non_ready_states_refuse_no_mutation)
+For every guarded ready-writing script and every non-READY guard
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 560, in test_matrix_all_non_ready_states_refuse_no_mutation
+    rc, out, _ = self._run_blocked_main(mod_name, payload)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 536, in _run_blocked_main
+    mod = importlib.import_module(f"scripts.{mod_name}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/coupled_robust_eval.py", line 19, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_blocked_no_frontier_or_canonical_mutation (tests.test_tracka_hardening_119.Test119G4RunLiqmicroV2NoFrontierMutation.test_blocked_no_frontier_or_canonical_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_119.py", line 268, in test_blocked_no_frontier_or_canonical_mutation
+    import scripts.run_liqmicro_v2 as mod
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro_v2.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_all_guarded_ready_writing_frontier_unchanged_on_block (tests.test_tracka_hardening_119.Test119G5ExperimentFrontierMutationAudit.test_all_guarded_ready_writing_frontier_unchanged_on_block)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_119.py", line 324, in test_all_guarded_ready_writing_frontier_unchanged_on_block
+    mod = importlib.import_module(f"scripts.{name[:-3]}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/coupled_robust_eval.py", line 19, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_run_liqmicro_v2_frontier_unchanged (tests.test_tracka_hardening_119.Test119G5ExperimentFrontierMutationAudit.test_run_liqmicro_v2_frontier_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_119.py", line 312, in test_run_liqmicro_v2_frontier_unchanged
+    import scripts.run_liqmicro_v2 as mod
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro_v2.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+FAIL: test_real_package_never_claims_go_and_emits_required_fields (tests.test_fclr016_v5_admissibility_report.TestReportOnRealBlockedPackage.test_real_package_never_claims_go_and_emits_required_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_admissibility_report.py", line 77, in test_real_package_never_claims_go_and_emits_required_fields
+    self.assertIn("---MARKDOWN---", p.stdout)
+AssertionError: '---MARKDOWN---' not found in ''
+
+======================================================================
+FAIL: test_cli_emits_json_and_markdown_no_go (tests.test_fclr016_v5_preflight_summary.TestRealBlockedPackage.test_cli_emits_json_and_markdown_no_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_preflight_summary.py", line 99, in test_cli_emits_json_and_markdown_no_go
+    self.assertIn("---MARKDOWN---", p.stdout)
+AssertionError: '---MARKDOWN---' not found in ''
+
+======================================================================
+FAIL: test_candidate_terms_evaluated_read_only (tests.test_fclr016_v5_promotion_dryrun.TestCandidateAndSafety.test_candidate_terms_evaluated_read_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 207, in test_candidate_terms_evaluated_read_only
+    self.assertEqual(p.returncode, 0, p.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_promotion_dryrun.py", line 25, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+FAIL: test_missing_file_refuses (tests.test_fclr016_v5_promotion_dryrun.TestCandidateAndSafety.test_missing_file_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 214, in test_missing_file_refuses
+    self.assertEqual(p.returncode, 2)
+AssertionError: 1 != 2
+
+======================================================================
+FAIL: test_cli_json_markdown_and_no_go (tests.test_fclr016_v5_promotion_dryrun.TestPromotionDryrunRealBlocked.test_cli_json_markdown_and_no_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 111, in test_cli_json_markdown_and_no_go
+    self.assertEqual(p.returncode, 0, p.stderr + p.stdout[:400])
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_promotion_dryrun.py", line 25, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+FAIL: test_json_only_flag (tests.test_fclr016_v5_promotion_dryrun.TestPromotionDryrunRealBlocked.test_json_only_flag)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr016_v5_promotion_dryrun.py", line 126, in test_json_only_flag
+    self.assertEqual(p.returncode, 0, p.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/fclr016_v5_promotion_dryrun.py", line 25, in <module>
+    import run_funding_ablations as rfa  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_funding_ablations.py", line 24, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+======================================================================
+FAIL: test_gate_input_summary_consumed_read_only_alongside_blocker (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceGateInputConsumption.test_gate_input_summary_consumed_read_only_alongside_blocker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 154, in test_gate_input_summary_consumed_read_only_alongside_blocker
+    self.assertEqual(p.returncode, 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_missing_gate_input_summary_reported_present_false_not_error (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceGateInputConsumption.test_missing_gate_input_summary_reported_present_false_not_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 173, in test_missing_gate_input_summary_reported_present_false_not_error
+    self.assertEqual(p.returncode, 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_real_scoped_prereg_reports_scope_mismatch_never_go (tests.test_fclr024_v5_scope_coherence_report.TestScopeCoherenceRealScopedPackage.test_real_scoped_prereg_reports_scope_mismatch_never_go)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_fclr024_v5_scope_coherence_report.py", line 53, in test_real_scoped_prereg_reports_scope_mismatch_never_go
+    self.assertEqual(p.returncode, 0)
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 1122 tests in 218.439s
+
+FAILED (failures=9, errors=62, skipped=14)
+wrote /home/runner/work/_temp/kilo-tmp/tmpju9t_ran/results/strict.md rows=1 claimable_excludes_zero=0 enriched=0 backfill_applied=2 backfill_refused=3 rows_missing_diag=1 rows_backfilled=1 strict_remediation_entries=2
+wrote /home/runner/work/_temp/kilo-tmp/tmpxywll60o/results/backfill.md rows=1 claimable_excludes_zero=0 enriched=0 backfill_applied=2 backfill_refused=3 rows_missing_diag=1 rows_backfilled=1 strict_remediation_entries=0
+wrote /home/runner/work/_temp/kilo-tmp/tmp7z__z8m5/results/out.md rows=1 claimable_excludes_zero=0 enriched=1 backfill_applied=0 backfill_refused=0 rows_missing_diag=0 rows_backfilled=0 strict_remediation_entries=0
+wrote /home/runner/work/_temp/kilo-tmp/tmpdlfof5n8/results/gate4_v4_bootstrap_diagnostic_summary_20261117T193818Z.md rows=3 claimable_excludes_zero=1 enriched=0 backfill_applied=0 backfill_refused=0 rows_missing_diag=1 rows_backfilled=0 strict_remediation_entries=0
+wrote /home/runner/work/_temp/kilo-tmp/tmpvue1dbhk/results/inside.md rows=3 claimable_excludes_zero=1 enriched=0 backfill_applied=0 backfill_refused=0 rows_missing_diag=1 rows_backfilled=0 strict_remediation_entries=0
+Wrote evidence: /home/runner/work/_temp/kilo-tmp/tmpdwyo996l/evidence/ironflow_probe_20261117T193829Z.json (probe artifacts 1 -> 2)
+No resume trigger. data_through=2026-10 probed=['2026-11', '2026-12', '2027-01', '2027-02'] head_probes=8 cached_hits=0 probe_diff(added=0 changed=0 removed=0) baseline_drift(intact=True regressions=0 content_replaced=0 pairs_checked=0 method=state_only_tree_unchanged) kaggle_mirror(updated=None last=None triggered=None)
+Wrote evidence: /home/runner/work/_temp/kilo-tmp/tmp6q_ichak/evidence/ironflow_probe_20261117T193833Z.json (probe artifacts 1 -> 2)
+No resume trigger. data_through=2026-10 probed=['2026-11', '2026-12', '2027-01', '2027-02'] head_probes=8 cached_hits=0 probe_diff(added=0 changed=0 removed=0) baseline_drift(intact=True regressions=0 content_replaced=0 pairs_checked=0 method=state_only_tree_unchanged) kaggle_mirror(updated=None last=None triggered=None)
+Wrote evidence: /home/runner/work/_temp/kilo-tmp/tmpae7pyx1r/evidence/ironflow_probe_20261117T193833Z.json (probe artifacts 1 -> 2)
+No resume trigger. data_through=2026-10 probed=['2026-11', '2026-12', '2027-01', '2027-02'] head_probes=8 cached_hits=0 probe_diff(added=0 changed=0 removed=0) baseline_drift(intact=True regressions=0 content_replaced=0 pairs_checked=0 method=state_only_tree_unchanged) kaggle_mirror(updated=None last=None triggered=None)
+{
+  "new_data_path": false,
+  "reasons": [],
+  "quick_check": {
+    "triggered": false,
+    "months_probed": [
+      "2026-11"
+    ],
+    "head_probes": 0,
+    "get_requests": 0
+  },
+  "probe_diff_summary": {
+    "added_count": 0,
+    "changed_count": 0,
+    "removed_count": 0,
+    "unchanged_count": 2,
+    "any_change": false
+  }
+}
+{
+  "ok": false,
+  "checks": [
+    {
+      "id": "data_through_consistent",
+      "description": "data_through equals the latest complete month in last_probe",
+      "data_through": "2026-10",
+      "recomputed_max_complete": null,
+      "pass": false
+    },
+    {
+      "id": "consecutive_absent_consistent",
+      "description": "stored consecutive_absent matches recomputation from last_probe",
+      "stored": null,
+      "recomputed": 0,
+      "pass": false
+    },
+    {
+      "id": "resume_trigger_months_match_forward_edge",
+      "description": "resume trigger months equal forward_edge_months(data_through)",
+      "expected": [
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02"
+      ],
+      "recorded": [],
+      "pass": false
+    },
+    {
+      "id": "on_trigger_prereg_before_outcomes",
+      "description": "resume trigger mandates pre-registration before outcome inspection",
+      "pass": false
+    },
+    {
+      "id": "tree_etag_present",
+      "description": "tree_etag recorded alongside tree_parquet_paths",
+      "tree_etag": false,
+      "tree_paths_count": 0,
+      "pass": true
+    },
+    {
+      "id": "tree_etag_well_formed",
+      "description": "tree_etag is a real, non-placeholder HTTP ETag (W/\"<opaque>\")",
+      "tree_etag": null,
+      "reason": "missing",
+      "pass": false
+    },
+    {
+      "id": "content_hash_baseline_complete",
+      "description": "every known month has a recorded LFS content hash in tree_parquet_items",
+      "known_months": [],
+      "missing_oids": [],
+      "pass": true
+    }
+  ],
+  "errors": [
+    "data_through=2026-10 but latest complete month=None",
+    "consecutive_absent stored=None recomputed=0",
+    "resume_trigger condition months do not match forward_edge_months(data_through)",
+    "resume_trigger.on_trigger missing pre-register-before-outcomes mandate",
+    "tree_etag not well-formed: missing (raw=None)"
+  ],
+  "data_through": "2026-10",
+  "consecutive_absent": null,
+  "content_hash_missing": [],
+  "baseline_drift": {
+    "known_months": [],
+    "checked": 0,
+    "missing_cache_entries": [],
+    "stale_cache_entries": [],
+    "missing_oids": [],
+    "cache_incomplete": false,
+    "drifted": false,
+    "content_hash_missing": [],
+    "content_hash_incomplete": false,
+    "content_hash_complete": true
+  }
+}
+VERIFY ok=False data_through=2026-10 consecutive_absent=None baseline_drift=False content_hash_complete=True known_months=0
+Wrote /home/runner/work/_temp/kilo-tmp/tmppj5fx211/alt_source_deep_review_latest.md (cache_hits=0 cache_misses=14)
+Wrote /home/runner/work/_temp/kilo-tmp/tmpqk4i2ldj/research_state/alt_source_scan_latest.json (candidates=8, source=cache)

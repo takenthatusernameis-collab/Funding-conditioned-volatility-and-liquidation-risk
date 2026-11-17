@@ -1,0 +1,147 @@
+.....................................E.E.............EE.E.E.................
+======================================================================
+ERROR: test_blocked_never_calls_pipeline_or_frontier_writer (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_blocked_never_calls_pipeline_or_frontier_writer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1051, in test_blocked_never_calls_pipeline_or_frontier_writer
+    mod = self._import_run_liqmicro()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1042, in _import_run_liqmicro
+    mod = importlib.import_module('scripts.run_liqmicro')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro.py", line 15, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_frontier_writer_isolated_tmp_no_real_rs_mutation (tests.test_tracka_hardening_117.Test117G4RunLiqmicroFrontierWriterAuditability.test_frontier_writer_isolated_tmp_no_real_rs_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1071, in test_frontier_writer_isolated_tmp_no_real_rs_mutation
+    mod = self._import_run_liqmicro()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_117.py", line 1042, in _import_run_liqmicro
+    mod = importlib.import_module('scripts.run_liqmicro')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro.py", line 15, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_blocked_frontier_unchanged (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_blocked_frontier_unchanged)
+Blocked run_liqmicro_v2 never mutates experiment_frontier.json.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 501, in test_blocked_frontier_unchanged
+    mod = self._import_run_liqmicro_v2()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 463, in _import_run_liqmicro_v2
+    mod = importlib.import_module("scripts.run_liqmicro_v2")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro_v2.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_blocked_never_calls_pipeline_or_mutates_canonical (tests.test_tracka_hardening_118.Test118G4RunLiqmicroV2FrontierParity.test_blocked_never_calls_pipeline_or_mutates_canonical)
+run_liqmicro_v2 blocked: _run_pipeline never called, no canonical
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 476, in test_blocked_never_calls_pipeline_or_mutates_canonical
+    mod = self._import_run_liqmicro_v2()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 463, in _import_run_liqmicro_v2
+    mod = importlib.import_module("scripts.run_liqmicro_v2")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/run_liqmicro_v2.py", line 16, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_each_script_canonical_targets_never_mutated_blocked (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_each_script_canonical_targets_never_mutated_blocked)
+Explicit per-script: blocked main never writes its canonical outputs.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 587, in test_each_script_canonical_targets_never_mutated_blocked
+    rc, out, _ = self._run_blocked_main(mod_name, dict(BLOCKED_PAYLOAD))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 536, in _run_blocked_main
+    mod = importlib.import_module(f"scripts.{mod_name}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/coupled_robust_eval.py", line 19, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+======================================================================
+ERROR: test_matrix_all_non_ready_states_refuse_no_mutation (tests.test_tracka_hardening_118.Test118G5GuardedReadyWritingNoReadyRefusalMatrix.test_matrix_all_non_ready_states_refuse_no_mutation)
+For every guarded ready-writing script and every non-READY guard
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 560, in test_matrix_all_non_ready_states_refuse_no_mutation
+    rc, out, _ = self._run_blocked_main(mod_name, payload)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/tests/test_tracka_hardening_118.py", line 536, in _run_blocked_main
+    mod = importlib.import_module(f"scripts.{mod_name}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/scripts/coupled_robust_eval.py", line 19, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+----------------------------------------------------------------------
+Ran 76 tests in 4.286s
+
+FAILED (errors=6)
