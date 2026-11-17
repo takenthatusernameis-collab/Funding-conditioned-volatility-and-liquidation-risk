@@ -1,4 +1,4 @@
-# FCLR Focus Campaign — `FCLR-FRONTIER-VERIFY-06-20261117T130551Z` — aligned 2026-11-17T16:15:09Z
+# FCLR Focus Campaign — `FCLR-FRONTIER-VERIFY-06-20261117T130551Z` — aligned 2026-11-17T19:31:14Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
 **Sole durable handoff:** `AGENT_HANDOFF.md` (authoritative). This file is the detailed subordinate campaign note; if it conflicts with the handoff, the handoff wins.
