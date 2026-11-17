@@ -71,8 +71,18 @@ MIN_FORWARD_DESIGN_DAYS = 60 + 7 + 3 * 10
 
 # Windows already consumed by a sealed or terminal cell. Keep this list honest:
 # a window listed here must not be re-proposed as "new".
+#
+# FCLR-LEDGER-INTEGRITY-01 (2026-11-17T23:45:00Z): FCLR-003's sealed NEGATIVE
+# test window (2024-10-02..2024-12-31) was missing here, so the mark+funding
+# frontier reported 2024-10/11/12 as "individually feasible / never tested".
+# Those are FCLR-003 *test* months (B0/B1/C1 already scored on them); re-listing
+# them as fresh invites a direct re-score of sealed data, a §17 violation. The
+# prior certification reached the right conclusion (closed, <3 blocks) via an
+# incomplete ledger; this entry makes the enumeration honest. FCLR-002's test
+# window (2024-07-23..2024-09-30) is already covered by the 2024Q4-CROSS row.
 TESTED_WINDOWS = [
     ("2024-07-23", "2024-09-30", "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"),
+    ("2024-10-02", "2024-12-31", "FCLR-003 sealed NEGATIVE test window (NOT_SUPPORTED)"),
     ("2025-02-01", "2025-05-31", "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"),
     ("2026-05-01", "2026-08-31", "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"),
     ("2026-08-03", "2026-10-31", "FCLR-FWD-VOL-011-CONFIRM forward walk"),

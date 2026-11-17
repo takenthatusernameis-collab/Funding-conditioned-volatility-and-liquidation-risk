@@ -260,28 +260,53 @@ class TestNextCampaignStatus(unittest.TestCase):
         )
 
     def test_markfund_frontier_reproduces_certified_closed_verdict(self):
-        """The mark+funding-only frontier must reproduce the FCLR-014 closed
-        verdict certified in session_20261117T072040Z: 4 individually-feasible
-        test months (2024-10/11/12, 2025-01) but only 2 mutually non-overlapping
-        blocks (2024-10, 2025-01) < 3, so no >=3-block design can be frozen.
+        """The mark+funding-only frontier must reproduce the closed verdict:
+        no >=3-block design can be frozen.
 
-        This is the enumeration gap that let sessions improvise and disagree;
-        closing it in-tool (not just as a session artifact) is the hardening
-        target. The completeness rule is NOT weakened: only mark+funding months
-        with all 5 symbols covered count.
+        FCLR-LEDGER-INTEGRITY-01 (2026-11-17T234500Z): FCLR-003's sealed
+        NEGATIVE test window (2024-10-02..2024-12-31) was missing from
+        TESTED_WINDOWS, so the frontier wrongly listed 2024-10/11/12 as
+        "individually feasible". Those are FCLR-003 *test* months (B0/B1/C1
+        already scored) and must never be re-proposed. With the ledger fixed,
+        the only individually-feasible mark+funding month is 2025-01 (its
+        30-day train window is FCLR-003 test, allowed as pre-test history),
+        which is a single block < 3, so the campaign is closed. The
+        completeness rule is NOT weakened: only mark+funding months with all 5
+        symbols covered count.
         """
         mf = self.mod.markfund_frontier()
         self.assertEqual(mf["estimand"], "mark+funding-only")
         self.assertEqual(mf["min_blocks_required"], 3)
-        self.assertEqual(mf["n_individually_feasible"], 4)
-        self.assertEqual(set(mf["individually_feasible_months"]),
-                         {"2024-10", "2024-11", "2024-12", "2025-01"})
-        self.assertEqual(mf["max_mutually_non_overlapping"], 2)
-        self.assertEqual(mf["non_overlapping_selection"], ["2024-10", "2025-01"])
-        self.assertEqual(mf["n_overlapping_pairs"], 5)
+        self.assertEqual(mf["n_individually_feasible"], 1)
+        self.assertEqual(set(mf["individually_feasible_months"]), {"2025-01"})
+        self.assertEqual(mf["max_mutually_non_overlapping"], 1)
+        self.assertEqual(mf["non_overlapping_selection"], ["2025-01"])
+        self.assertEqual(mf["n_overlapping_pairs"], 0)
         self.assertFalse(mf["campaign_feasible_non_overlapping"])
         self.assertTrue(mf["any_individually_feasible"])
         self.assertFalse(mf["any_contiguous_run_ge_min_design_days"])
+
+    def test_fclr003_sealed_test_months_not_reproposed(self):
+        """FCLR-003's sealed NEGATIVE test months (2024-10/11/12) must never be
+        re-proposed as fresh blocks. Regression guard for the ledger omission
+        fixed in FCLR-LEDGER-INTEGRITY-01: before the fix the frontier listed
+        them as individually feasible, inviting a direct re-score of sealed
+        data (a §17 violation)."""
+        mf = self.mod.markfund_frontier()
+        for m in ("2024-10", "2024-11", "2024-12"):
+            self.assertNotIn(m, mf["individually_feasible_months"],
+                             f"{m} is FCLR-003 sealed test but re-proposed")
+            self.assertTrue(self.mod._inside_tested(m),
+                            f"{m} (FCLR-003 test) not marked tested: ledger gap")
+        windows = {w["month"]: w for w in self.mod.ready_windows()}
+        for m in ("2024-10", "2024-11", "2024-12"):
+            self.assertTrue(self.mod._inside_tested(m),
+                            f"{m} (FCLR-003 test) not marked tested: ledger gap")
+            if m in windows:
+                self.assertTrue(windows[m]["inside_tested_window"],
+                                f"{m} wrongly marked untested")
+                self.assertIn("FCLR-003", windows[m]["tested_by"] or "",
+                              f"{m} lacks FCLR-003 attribution: {windows[m]}")
 
     def test_markfund_frontier_excludes_tested_windows(self):
         """Test months inside TESTED_WINDOWS must not be proposed as fresh
@@ -324,8 +349,8 @@ class TestNextCampaignStatus(unittest.TestCase):
         data = json.loads(out)
         self.assertIn("markfund_frontier", data)
         mf = data["markfund_frontier"]
-        self.assertEqual(mf["n_individually_feasible"], 4)
-        self.assertEqual(mf["max_mutually_non_overlapping"], 2)
+        self.assertEqual(mf["n_individually_feasible"], 1)
+        self.assertEqual(mf["max_mutually_non_overlapping"], 1)
         self.assertFalse(mf["campaign_feasible_non_overlapping"])
 
 
