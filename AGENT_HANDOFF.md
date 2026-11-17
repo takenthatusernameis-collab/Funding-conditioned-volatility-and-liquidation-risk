@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-17T14:02:03Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T14:06:40Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first — heavy work required)
 
@@ -9,7 +9,7 @@
 - Consequence: **do not start or re-run any sealed cached-data confirmatory estimand; do not re-run FCLR-014, the replication synthesis, or FCLR-REPRO-SYNTH-05.** A trigger-check-only session, tests/gates-only session, copied bundle, static re-audit, handoff-only refresh, or "stop cleanly" is **NOT** completion.
 
 **MANDATORY HEAVY WORK — `FCLR-FRONTIER-VERIFY-06` (non-skippable; cannot be avoided).**
-All cached-data confirmatory work is terminal and all external triggers are `OPEN` at 2026-11-17T14:00:38Z, so the next session must perform a new, independent quantitative verification of the certified design frontier. This is not a new outcome claim and must not read outcome data. It is a heavy reproducibility/robustness artifact that hardens the closure against the earlier contradictory 2-block/4-block sessions. No session may close without the new artifact + evidence audit + gate/suite captures (or a trigger-satisfied `RESEARCH_PROMPT.md` §16-compliant preregistered path).
+All cached-data confirmatory work is terminal and all external triggers are `OPEN` at 2026-11-17T14:06:40Z, so the next session must perform a new, independent quantitative verification of the certified design frontier. This is not a new outcome claim and must not read outcome data. It is a heavy reproducibility/robustness artifact that hardens the closure against the earlier contradictory 2-block/4-block sessions. No session may close without the new artifact + evidence audit + gate/suite captures (or a trigger-satisfied `RESEARCH_PROMPT.md` §16-compliant preregistered path).
 
 ## NEXT FOCUS CAMPAIGN — `FCLR-FRONTIER-VERIFY-06-20261117T130551Z` (future agents cannot opt out)
 
