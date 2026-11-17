@@ -1,0 +1,66 @@
+{
+  "script": "trigger_check",
+  "session_utc": "2026-11-17T04:13:33Z",
+  "generated_utc": "2026-11-17T04:13:33Z",
+  "network": false,
+  "read_only": true,
+  "sources": {
+    "resume_trigger_registry": "research_state/resume_trigger_registry.json",
+    "ironflow_monitor_state": "research_state/ironflow_monitor_state.json"
+  },
+  "trigger_registry_generated_utc": "2026-11-16T11:46:26Z",
+  "n_triggers": 4,
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "file_glob_with_fields",
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json",
+      "note": "Never agent-set; never bypassed. Human/legal attestation only."
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "file_exists_with_fields",
+      "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.{md,json}",
+      "note": "Agent cannot mark ADMISSIBLE; requires >=5 instruments, >=3 blocks or >=1 complete month, observed_labels=true, status=ADMISSIBLE."
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "verified_label_extension",
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}",
+      "note": "Requires labels after 2026-10-31, min_depth_days>=100, observed_only=true, venue=hyperliquid_perpetuals."
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "newly_preregistered_design",
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json",
+      "note": "Conditional, non-priority. Forbidden: re-scoring the sealed 19.04% result."
+    }
+  ],
+  "all_triggers_open": true,
+  "no_trigger_fired": true,
+  "ironflow": {
+    "last_check": "2026-11-02T05:59:46Z",
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "tree_etag": "W/\"2d38-Kc/F0W06axChmsstn8w/P5kA414\"",
+    "post_2026_10_summary": {
+      "months_probed": ["2026-11", "2026-12", "2027-01"],
+      "any_available": false,
+      "available_months": []
+    },
+    "post_2026_10_classifications": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    }
+  },
+  "conclusion": "All four reopen triggers are OPEN; no trigger fired. No confirmatory estimand may be advanced or re-scored. The only agent-removable heavy work is the FCLR-014 panel coverage audit + blocker resolution, plus evidence audit, complete verification, and accurate handoff update."
+}

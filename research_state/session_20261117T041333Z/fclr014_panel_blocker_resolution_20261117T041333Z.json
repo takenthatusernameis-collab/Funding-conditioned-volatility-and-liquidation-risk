@@ -1,0 +1,727 @@
+{
+  "blocker_id": "FCLR-014-BLOCKER-RESOLUTION-20261117T041333Z",
+  "generated_utc": "2026-11-17T04:13:33Z",
+  "prereg": "research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json",
+  "prereg_status": "FROZEN_BEFORE_OUTCOMES; confirmatory_claim_go=NO_GO; exploratory_label_required=EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
+  "prereg_split_defect": "candidate_frozen_splits_pending_panel.test = 2024-07-23..2024-09-30 (70 days = 2 non-overlapping 30-day blocks) copied from FCLR-002; fails block_requirement >=3",
+  "corrected_blocker": "DESIGN_ADMISSIBILITY: full-C2 estimand has 0 available disjoint blocks and no contiguous untested run >= 127d; mark+funding-only (B0/B1/C1) has 2 available blocks (<3). A confirmatory >=3-block FCLR-014 design cannot be frozen from local data without consuming a sealed window. A 2-block mark+funding-only EXPLORATORY pilot is the only constructible local design, and it is NOT promotable.",
+  "campaign_feasible_new_prereg": false,
+  "min_design_days": 127,
+  "full_c2_estimand": {
+    "admissibility_rule": "mark+index+premium+funding complete for all 5 symbols",
+    "n_available_disjoint_blocks": 0,
+    "available_test_months": [],
+    "candidate_blocks": [
+      {
+        "test_month": "2024-04",
+        "train_start": "2024-02-24",
+        "train_end": "2024-03-24",
+        "embargo_days": 7,
+        "test_start": "2024-04-01",
+        "test_end": "2024-04-30",
+        "train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "missing_train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-02:missing_or_unfunded_or_tested; 2024-03:missing_or_unfunded_or_tested"
+      },
+      {
+        "test_month": "2024-05",
+        "train_start": "2024-03-25",
+        "train_end": "2024-04-23",
+        "embargo_days": 7,
+        "test_start": "2024-05-01",
+        "test_end": "2024-05-31",
+        "train_months": [
+          "2024-03",
+          "2024-04"
+        ],
+        "missing_train_months": [
+          "2024-03"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-03:missing_or_unfunded_or_tested"
+      },
+      {
+        "test_month": "2025-01",
+        "train_start": "2024-11-25",
+        "train_end": "2024-12-24",
+        "embargo_days": 7,
+        "test_start": "2025-01-01",
+        "test_end": "2025-01-31",
+        "train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "missing_train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-11:missing_or_unfunded_or_tested; 2024-12:missing_or_unfunded_or_tested"
+      }
+    ],
+    "contiguous_runs": [
+      {
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61,
+        "feasible": false
+      },
+      {
+        "months": [
+          "2025-01"
+        ],
+        "span_days": 31,
+        "feasible": false
+      }
+    ]
+  },
+  "markfund_only_estimand": {
+    "admissibility_rule": "mark+funding complete for all 5 symbols (B0/B1/C1; no C2 premium/EMA)",
+    "n_available_disjoint_blocks": 2,
+    "available_test_months": [
+      "2024-12",
+      "2025-01"
+    ],
+    "candidate_blocks": [
+      {
+        "test_month": "2024-04",
+        "train_start": "2024-02-24",
+        "train_end": "2024-03-24",
+        "embargo_days": 7,
+        "test_start": "2024-04-01",
+        "test_end": "2024-04-30",
+        "train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "missing_train_months": [
+          "2024-02",
+          "2024-03"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-02:missing_or_unfunded_or_tested; 2024-03:missing_or_unfunded_or_tested"
+      },
+      {
+        "test_month": "2024-05",
+        "train_start": "2024-03-25",
+        "train_end": "2024-04-23",
+        "embargo_days": 7,
+        "test_start": "2024-05-01",
+        "test_end": "2024-05-31",
+        "train_months": [
+          "2024-03",
+          "2024-04"
+        ],
+        "missing_train_months": [
+          "2024-03"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-03:missing_or_unfunded_or_tested"
+      },
+      {
+        "test_month": "2024-10",
+        "train_start": "2024-08-25",
+        "train_end": "2024-09-23",
+        "embargo_days": 7,
+        "test_start": "2024-10-01",
+        "test_end": "2024-10-31",
+        "train_months": [
+          "2024-08",
+          "2024-09"
+        ],
+        "missing_train_months": [
+          "2024-08",
+          "2024-09"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-08:missing_or_unfunded_or_tested; 2024-09:missing_or_unfunded_or_tested"
+      },
+      {
+        "test_month": "2024-11",
+        "train_start": "2024-09-25",
+        "train_end": "2024-10-24",
+        "embargo_days": 7,
+        "test_start": "2024-11-01",
+        "test_end": "2024-11-30",
+        "train_months": [
+          "2024-09",
+          "2024-10"
+        ],
+        "missing_train_months": [
+          "2024-09"
+        ],
+        "status": "INCOMPLETE_TRAIN",
+        "feasible": false,
+        "reason": "2024-09:missing_or_unfunded_or_tested"
+      },
+      {
+        "test_month": "2024-12",
+        "train_start": "2024-10-25",
+        "train_end": "2024-11-23",
+        "embargo_days": 7,
+        "test_start": "2024-12-01",
+        "test_end": "2024-12-31",
+        "train_months": [
+          "2024-10",
+          "2024-11"
+        ],
+        "missing_train_months": [],
+        "status": "AVAILABLE",
+        "feasible": true,
+        "reason": "complete funding-backed untested test block with complete train history"
+      },
+      {
+        "test_month": "2025-01",
+        "train_start": "2024-11-25",
+        "train_end": "2024-12-24",
+        "embargo_days": 7,
+        "test_start": "2025-01-01",
+        "test_end": "2025-01-31",
+        "train_months": [
+          "2024-11",
+          "2024-12"
+        ],
+        "missing_train_months": [],
+        "status": "AVAILABLE",
+        "feasible": true,
+        "reason": "complete funding-backed untested test block with complete train history"
+      }
+    ],
+    "contiguous_runs": [
+      {
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61,
+        "feasible": false
+      },
+      {
+        "months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01"
+        ],
+        "span_days": 123,
+        "feasible": false
+      }
+    ]
+  },
+  "month_classification": [
+    {
+      "month": "2024-01",
+      "admissible_for_fclr014_markfund": false,
+      "admissible_full_c2": false,
+      "status": "INCOMPLETE_COVERAGE",
+      "reason": "missing_dir=[] unfunded=['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT'] mark_lt_25=[]",
+      "tested_windows": [],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 0
+    },
+    {
+      "month": "2024-02",
+      "admissible_for_fclr014_markfund": false,
+      "admissible_full_c2": false,
+      "status": "INCOMPLETE_COVERAGE",
+      "reason": "missing_dir=[] unfunded=['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT'] mark_lt_25=[]",
+      "tested_windows": [],
+      "mark_total": 145,
+      "index_total": 145,
+      "premium_total": 145,
+      "funding_symbols": 0
+    },
+    {
+      "month": "2024-03",
+      "admissible_for_fclr014_markfund": false,
+      "admissible_full_c2": false,
+      "status": "INCOMPLETE_COVERAGE",
+      "reason": "missing_dir=[] unfunded=['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT'] mark_lt_25=[]",
+      "tested_windows": [],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 0
+    },
+    {
+      "month": "2024-04",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "UNTESTED_COMPLETE_MARKFUND",
+      "reason": "outside every TESTED_WINDOW; mark+funding complete for 5 symbols",
+      "tested_windows": [],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-05",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "UNTESTED_COMPLETE_MARKFUND",
+      "reason": "outside every TESTED_WINDOW; mark+funding complete for 5 symbols",
+      "tested_windows": [],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-06",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-07",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-08",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-09",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-10",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": false,
+      "status": "UNTESTED_COMPLETE_MARKFUND",
+      "reason": "outside every TESTED_WINDOW; mark+funding complete for 5 symbols; index/premium INCOMPLETE -> full-C2 NOT admissible",
+      "tested_windows": [],
+      "mark_total": 155,
+      "index_total": 62,
+      "premium_total": 62,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-11",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": false,
+      "status": "UNTESTED_COMPLETE_MARKFUND",
+      "reason": "outside every TESTED_WINDOW; mark+funding complete for 5 symbols; index/premium INCOMPLETE -> full-C2 NOT admissible",
+      "tested_windows": [],
+      "mark_total": 150,
+      "index_total": 30,
+      "premium_total": 30,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2024-12",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": false,
+      "status": "UNTESTED_COMPLETE_MARKFUND",
+      "reason": "outside every TESTED_WINDOW; mark+funding complete for 5 symbols; index/premium INCOMPLETE -> full-C2 NOT admissible",
+      "tested_windows": [],
+      "mark_total": 155,
+      "index_total": 0,
+      "premium_total": 0,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-01",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "UNTESTED_COMPLETE_MARKFUND",
+      "reason": "outside every TESTED_WINDOW; mark+funding complete for 5 symbols",
+      "tested_windows": [],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-02",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 140,
+      "index_total": 140,
+      "premium_total": 140,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-03",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-04",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-05",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-06",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-07",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-08",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-09",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-10",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-11",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2025-12",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-01",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-02",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 140,
+      "index_total": 140,
+      "premium_total": 140,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-03",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-04",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-05",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM']",
+      "tested_windows": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-06",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM']",
+      "tested_windows": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-07",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM']",
+      "tested_windows": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+      ],
+      "mark_total": 185,
+      "index_total": 185,
+      "premium_total": 185,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-08",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM', 'FCLR-FWD-VOL-011-CONFIRM forward walk']",
+      "tested_windows": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+        "FCLR-FWD-VOL-011-CONFIRM forward walk"
+      ],
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-09",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-011-CONFIRM forward walk']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-011-CONFIRM forward walk"
+      ],
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-10",
+      "admissible_for_fclr014_markfund": true,
+      "admissible_full_c2": true,
+      "status": "CONSUMED_BY_SEALED_CELL",
+      "reason": "month overlaps tested window(s): ['FCLR-FWD-VOL-011-CONFIRM forward walk']",
+      "tested_windows": [
+        "FCLR-FWD-VOL-011-CONFIRM forward walk"
+      ],
+      "mark_total": 145,
+      "index_total": 145,
+      "premium_total": 145,
+      "funding_symbols": 5
+    },
+    {
+      "month": "2026-11",
+      "admissible_for_fclr014_markfund": false,
+      "admissible_full_c2": false,
+      "status": "INCOMPLETE_COVERAGE",
+      "reason": "missing_dir=[] unfunded=['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT'] mark_lt_25=['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT']",
+      "tested_windows": [],
+      "mark_total": 40,
+      "index_total": 40,
+      "premium_total": 40,
+      "funding_symbols": 0
+    }
+  ],
+  "tool_cross_check": {
+    "tool_ready_funding_backed_months": [
+      "2024-04",
+      "2024-05",
+      "2025-01"
+    ],
+    "tool_any_contiguous_feasible": false,
+    "tool_contiguous_runs": [
+      {
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61,
+        "feasible": false
+      },
+      {
+        "months": [
+          "2025-01"
+        ],
+        "span_days": 31,
+        "feasible": false
+      }
+    ],
+    "tool_n_feasible_disjoint_blocks": 0,
+    "tool_campaign_feasible": false
+  },
+  "conclusion": "FCLR-014 is BLOCKED-ON-DESIGN, not blocked-on-data. The cache DOES hold complete 5-symbol mark+funding months, but every untested complete month lacks a complete funded 30-day train window, and no contiguous untested run reaches MIN_DESIGN_DAYS. Under the FULL C2 rule (mark+index+premium+funding) there are 0 available disjoint blocks; under the mark+funding-only rule there are 2 (2024-12, 2025-01) - still <3. A confirmatory >=3-block FCLR-014 design cannot be frozen from local data without consuming a sealed window; do NOT re-score and do NOT relax the completeness rule."
+}

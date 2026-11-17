@@ -1,0 +1,1452 @@
+{
+  "audit_id": "FCLR-014-COVERAGE-20261117T041333Z",
+  "generated_utc": "2026-11-17T04:13:33Z",
+  "coverage_only": true,
+  "outcomes_inspected": false,
+  "network": false,
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "per_symbol_min_mark_days": 25,
+  "months": {
+    "2024-01": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 0,
+      "admissible_for_fclr014": false,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        }
+      }
+    },
+    "2024-02": {
+      "days_in_month": 29,
+      "mark_total": 145,
+      "index_total": 145,
+      "premium_total": 145,
+      "funding_symbols": 0,
+      "admissible_for_fclr014": false,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": false
+        },
+        "ETHUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": false
+        },
+        "BNBUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": false
+        },
+        "SOLUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": false
+        },
+        "XRPUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": false
+        }
+      }
+    },
+    "2024-03": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 0,
+      "admissible_for_fclr014": false,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": false
+        }
+      }
+    },
+    "2024-04": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-05": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-06": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-07": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-08": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-09": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-10": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 62,
+      "premium_total": 62,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-11": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 30,
+      "premium_total": 30,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        }
+      }
+    },
+    "2024-12": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 0,
+      "premium_total": 0,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 0,
+          "premium_days": 0,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-01": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-02": {
+      "days_in_month": 28,
+      "mark_total": 140,
+      "index_total": 140,
+      "premium_total": 140,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-03": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-04": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-05": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-06": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-07": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-08": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-09": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-10": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-11": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2025-12": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-01": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-02": {
+      "days_in_month": 28,
+      "mark_total": 140,
+      "index_total": 140,
+      "premium_total": 140,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 28,
+          "index_days": 28,
+          "premium_days": 28,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-03": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-04": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-05": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-06": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-07": {
+      "days_in_month": 31,
+      "mark_total": 185,
+      "index_total": 185,
+      "premium_total": 185,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 37,
+          "index_days": 37,
+          "premium_days": 37,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 37,
+          "index_days": 37,
+          "premium_days": 37,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 37,
+          "index_days": 37,
+          "premium_days": 37,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 37,
+          "index_days": 37,
+          "premium_days": 37,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 37,
+          "index_days": 37,
+          "premium_days": 37,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-08": {
+      "days_in_month": 31,
+      "mark_total": 155,
+      "index_total": 155,
+      "premium_total": 155,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 31,
+          "index_days": 31,
+          "premium_days": 31,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-09": {
+      "days_in_month": 30,
+      "mark_total": 150,
+      "index_total": 150,
+      "premium_total": 150,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": true,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 30,
+          "index_days": 30,
+          "premium_days": 30,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-10": {
+      "days_in_month": 31,
+      "mark_total": 145,
+      "index_total": 145,
+      "premium_total": 145,
+      "funding_symbols": 5,
+      "admissible_for_fclr014": true,
+      "all_symbols_full_mark": false,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": true
+        },
+        "ETHUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": true
+        },
+        "BNBUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": true
+        },
+        "SOLUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": true
+        },
+        "XRPUSDT": {
+          "mark_days": 29,
+          "index_days": 29,
+          "premium_days": 29,
+          "funding_present": true
+        }
+      }
+    },
+    "2026-11": {
+      "days_in_month": 30,
+      "mark_total": 40,
+      "index_total": 40,
+      "premium_total": 40,
+      "funding_symbols": 0,
+      "admissible_for_fclr014": false,
+      "all_symbols_full_mark": false,
+      "per_symbol": {
+        "BTCUSDT": {
+          "mark_days": 8,
+          "index_days": 8,
+          "premium_days": 8,
+          "funding_present": false
+        },
+        "ETHUSDT": {
+          "mark_days": 8,
+          "index_days": 8,
+          "premium_days": 8,
+          "funding_present": false
+        },
+        "BNBUSDT": {
+          "mark_days": 8,
+          "index_days": 8,
+          "premium_days": 8,
+          "funding_present": false
+        },
+        "SOLUSDT": {
+          "mark_days": 8,
+          "index_days": 8,
+          "premium_days": 8,
+          "funding_present": false
+        },
+        "XRPUSDT": {
+          "mark_days": 8,
+          "index_days": 8,
+          "premium_days": 8,
+          "funding_present": false
+        }
+      }
+    }
+  }
+}
