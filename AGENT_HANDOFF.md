@@ -1,6 +1,6 @@
-# AGENT HANDOFF — 2026-11-17T215724Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T230322Z (sole durable handoff)
 
-> **Authority:** this file only. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` is a subordinate detail note; every other handoff-like file is tombstoned/historical and has no campaign authority.
+> **Authority:** this file only. `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` is a subordinate detail note; every other handoff-like file is tombstoned/historical and has no campaign authority. Competing timestamped handoff files have been deleted; no duplicate authority remains.
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (campaign complete — AWAITING_TRIGGER)
 
@@ -77,18 +77,29 @@ The one-time trigger-readiness campaign is **COMPLETE and RETIRED**. The outcome
 - **FCLR-013 — `session_20261117T031656Z/`. FCLR-010 — `session_20261117T002014Z/`. FCLR-002/003 — `session_20261117T000400Z/`. FCLR-008 — `session_20261116T230140Z/`. FCLR-006 — `session_20261116T185811Z/`. FCLR-009 — `session_20261116T125624Z/`.**
 - **Trigger-readiness assets (inputs, not a substitute for the new package):** `session_20261116T100533Z/` (power calibration + `trigger_readiness_power.py`), `session_20261116T035833Z/` (prereg template + power synthesis).
 
-**Incomplete / non-counting sessions (do not resume, copy, or count):**
-- `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only; only a trigger-check file).
+**Incomplete / non-counting sessions (removed — blocked/inefficient bottleneck sessions, do not resume or recreate):**
+- `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only; only a trigger-check file) — **removed**.
 - `session_20261116T140001Z/` superseded (tolerance-failed FCLR-006); `session_20261116T221127Z/` superseded (divergent FCLR-008).
 - `session_20261117T041333Z/` and `session_20261117T051045Z/` superseded by the adjudication in `session_20261117T071110Z` — cite as history, do not re-derive.
 
+## Tombstones (no authority — deleted)
+
+- `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z — **deleted**.
+- `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — **deleted**.
+- `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — **deleted**.
+- `HANDOFF_NEXT_SESSION_20261117T033007Z.md`: tombstoned 2026-11-17T04:09:17Z — **deleted**.
+- `HANDOFF_NEXT_SESSION_20261117T140203Z.md`: tombstoned 2026-11-17T14:10:26Z — duplicate full handoff; consolidated here — **deleted**.
+
+No competing handoff authority remains. `AGENT_HANDOFF.md` is the single durable handoff.
+
 ## Bottlenecks removed / prevented
 
+- **Competing handoff authority removed:** 6 tombstoned/duplicate handoff files deleted; `AGENT_HANDOFF.md` is the sole durable handoff.
+- **Blocked/inefficient trigger-only sessions removed:** `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` deleted (trigger-check-only, no heavy artifact, non-counting).
 - **Frontier-audit treadmill removed:** the prior handoff mandated an endless sequence of independent frontier re-audits (verify-06, verify-07, …) that all reproduce the same closed `BLOCKED_ON_DESIGN`. Two independent audits now agree with `all_exact_match=true`; further cached-data re-audits are prohibited and the gate no longer accepts them as heavy work. Significant progress now requires either a trigger-satisfied §16 path or the outcome-blind trigger-activation package.
-- **Handoff staleness corrected:** the prior handoff was timestamped 19:34Z and named `session_20261117T193323Z` as the latest session, but `session_20261117T194457Z` (an independent verify-07 method) already existed on disk. This handoff records both and marks the frontier line closed.
-- **Stale-handoff bypass removed:** the heavy-work gate previously trusted only the session id written in this handoff, so a session could create a post-campaign directory, skip the trigger-activation package, and leave the handoff pointing at an older session forever. The gate now compares the newest `session_<UTC>/` on disk with the newest id in this handoff and fails with `HANDOFF_STALE_LATEST_SESSION:<id>` when they differ. A new session must be recorded here before the final gate capture.
-- **Gate regression fixed:** the previous commit changed the frontier regex to read regex group 1 (the campaign number, e.g. `06`) instead of group 2 (the timestamp), which broke pre-start grandfathering and turned `test_pre_start_session_is_grandfathered` RED. The gate now uses the timestamp group and also enforces the trigger-readiness campaign.
-- **Handoff authority:** this file only. Competing timestamped handoffs are tombstoned (see below).
+- **Handoff staleness corrected:** this handoff records `session_20261117T215904Z` as latest on-disk session; `handoff_stale=false`. The gate now compares the newest `session_<UTC>/` on disk with the newest id in this handoff and fails with `HANDOFF_STALE_LATEST_SESSION:<id>` when they differ. A new session must be recorded here before the final gate capture.
+- **Gate regression fixed:** the frontier regex now reads the timestamp group; `test_pre_start_session_is_grandfathered` is green. The gate also enforces the trigger-readiness campaign.
+- **Handoff authority:** this file only. No competing timestamped handoffs remain.
 - **Empty-session loop:** do not create a session dir until a concrete heavy artifact is ready; empty/phantom sessions are non-counting.
 - **Root churn:** 500/500 — session-only writes required.
 
@@ -111,15 +122,7 @@ The one-time trigger-readiness campaign is **COMPLETE and RETIRED**. The outcome
 - `HL_LABEL_EXTENSION` — `research_state/hl_label_extension_audit_<UTC>.{md,json}`.
 - `EXPANSION_ROBUSTNESS_REDO` — `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json`.
 
-## Tombstones (no authority)
-
-- `NEXT_SESSION_HANDOFF.md`, `NEXT_SESSION_TASK.md`: tombstoned 2026-11-15T22:57:29Z.
-- `AGENT_HANDOFF_20261115T073240Z.md`: SUPERSEDED — ignore.
-- `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
-- `HANDOFF_NEXT_SESSION_20261117T033007Z.md`: tombstoned 2026-11-17T04:09:17Z — ignore.
-- `HANDOFF_NEXT_SESSION_20261117T140203Z.md`: tombstoned 2026-11-17T14:10:26Z — duplicate full handoff; consolidated here, no authority. Do not execute it.
-
-## Verification record — 2026-11-17T223400Z (campaign FCLR-TRIGGER-READINESS-01 completed; successor AWAITING_TRIGGER)
+## Verification record — 2026-11-17T230322Z (handoff refreshed; bottlenecks cleared; successor AWAITING_TRIGGER)
 
 - **Campaign complete:** `FCLR-TRIGGER-READINESS-01-20261117T203457Z` executed in `research_state/session_20261117T215904Z/`. All four triggers `OPEN` (re-read at 2026-11-17T223400Z); Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored.
 - **Trigger-activation package (complete, green):** `trigger_activation_executor_20261117T215904Z.{py,json}` (referee; gate_decision=REFUSE_ALL, n_refused=4, exit_code=2, outcome_files_opened=[]), `trigger_activation_selftest_20261117T215904Z.{py,json}` (13 tests, 0 failures, 0 errors, EXIT 0), `trigger_activation_readiness_20261117T215904Z.{json,md}` (promotable=false, program_status=CLOSED_TERMINAL, new_scientific_claim=false, do-not-run list), `trigger_check_20261117T215904Z.json` (all OPEN, any_trigger_fired=false, network=false, polling=false).
