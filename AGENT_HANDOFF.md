@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-17T13:15:06Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T13:17:51Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first)
 
@@ -111,7 +111,7 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `session_20261116T104644Z/`, `session_20261116T105341Z/`, `session_20261116T134957Z/` (trigger-only).
 - `session_20261116T140001Z/` superseded (tolerance-failed FCLR-006).
 - `session_20261116T221127Z/` superseded (divergent FCLR-008).
-- `session_20261117T060853Z/` — PHANTOM: its evidence audit cites coverage/blocker artifacts that were never written (only `evidence_audit` + `trigger_check` exist). Non-counting.
+- `session_20261117T060853Z/` — PHANTOM (removed 2026-11-17T13:17Z; only `evidence_audit` + `trigger_check` existed). Do not recreate.
 - `session_20261117T041333Z/` (FCLR-014 coverage + blocker, 2-block reading correct; its corrected JSON 4-block claim is retracted) and `session_20261117T051045Z/` (FCLR-014 coverage + blocker, 4-block feasibility RETRACTED) are **superseded by the adjudication in `session_20261117T071110Z`** — cite them as history, do not re-derive from them.
 
 ## Bottlenecks removed / prevented
@@ -152,17 +152,17 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
 - `HANDOFF_NEXT_SESSION_20261117T033007Z.md`: tombstoned 2026-11-17T04:09:17Z — ignore.
 
-## Verification record — 2026-11-17T13:15:06Z (handoff refresh; FCLR-FRONTIER-VERIFY-06 active)
+## Verification record — 2026-11-17T13:17:51Z (handoff refresh; FCLR-FRONTIER-VERIFY-06 active)
 
-- **Current trigger check (once, no network/polling):** `resume_trigger_registry.json` + `ironflow_monitor_state.json` read at 2026-11-17T13:15:06Z (and previously recorded in a removed incomplete trigger-only session); all four triggers **OPEN** (`GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO`); Ironflow `data_through=2026-10`, `consecutive_absent=3`, `tree_not_modified=true`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored.
+- **Current trigger check (once, no network/polling):** `resume_trigger_registry.json` + `ironflow_monitor_state.json` read at 2026-11-17T13:17Z; all four triggers **OPEN** (`GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO`); Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored.
 - **Last completed heavy session:** `research_state/session_20261117T072040Z/` (FCLR-REPRO-SYNTH-05 DONE). Queue 1–9 complete; **current mandatory heavy item is FCLR-FRONTIER-VERIFY-06** — independent exhaustive frontier audit `recompute_frontier_exhaustive_audit_<UTC>.{py,json,md}` in a new `research_state/session_<UTC>/`.
-- **Bottlenecks removed this pass:** removed an incomplete trigger-only session directory (contained only a trigger-check artifact; non-counting/loop risk). No empty/phantom session dirs remain to act on; `session_20261117T060853Z/` remains quarantined as PHANTOM (do not resume/count). Handoff/campaign authority consolidated in `AGENT_HANDOFF.md` + `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
-- **Gates (read-only, this pass):** `check_handoff_heavywork_gate.py --json` **PASS** (`reason_code: OK`, root 500/500, latest session `session_20261117T072040Z`); `check_tracka_scope_registry_drift.py --json` **PASS** (196 scripts, no drift). Targeted/full suites not rerun this maintenance pass (no new quantitative artifact produced); environment baseline previously recorded as **1119 tests, 62 errors, 9 failures, 14 skipped, EXIT 1** (missing `numpy`/`pyarrow`, unresolved LFS fixtures). Next session that performs FCLR-FRONTIER-VERIFY-06 must run and capture targeted + full discovery gates to completion per campaign step 8 and record actual EXIT.
+- **Bottlenecks removed this pass:** removed phantom non-counting session `research_state/session_20261117T060853Z/` (contained only `evidence_audit` + `trigger_check`, no heavy artifact; previously flagged PHANTOM). No empty/phantom session dirs remain. Handoff/campaign authority consolidated in `AGENT_HANDOFF.md` + `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md`.
+- **Gates (read-only, this pass):** `check_handoff_heavywork_gate.py --json` **PASS** (`reason_code: OK`, root 500/500, latest session `session_20261117T072040Z`); `check_tracka_scope_registry_drift.py --json` **PASS** (196 scripts, no drift). Targeted/full suites not rerun this maintenance pass (no new quantitative artifact produced); environment baseline recorded as **1119 tests, 62 errors, 9 failures, 14 skipped, EXIT 1** (missing `numpy`/`pyarrow`, unresolved LFS fixtures). Next session that performs FCLR-FRONTIER-VERIFY-06 must run and capture targeted + full discovery gates to completion per campaign step 8 and record actual EXIT.
 - **Prior heavy verification (unchanged, `session_20261117T072040Z`):** design-frontier certificate `BLOCKED_ON_DESIGN`/`promotable=false` (full-C2 0 blocks/no ≥127d; mark+funding-only 4 individually feasible, 2 mutually non-overlapping 2024-10/2025-01, 5 pairs); replication robustness qualitative 7/7 Wilson95 [0.646,1.000], LOO 6/6 all-unity, sign mixed 3+/4-; FCLR-014 verdict reproduced. Artifact refs unchanged.
 - **Canonical tool state:** `scripts/next_campaign_status.py` exposes `markfund_frontier` (4 individually feasible / 2 mutually non-overlapping / 5 overlapping pairs), matching certified closure. No tool change made.
 - **Evidence audit (carried forward, not rerun):** `session_20261116T100533Z/`, `125624Z/`, `185811Z/`, `230140Z/`, `20261117T000400Z/`, `002014Z/`, `031656Z/`, `071110Z/`, `072040Z/`.
 - **Campaign state:** Programme remains `CLOSED_TERMINAL`/trigger-gated; blockers unchanged (external triggers OPEN + cached-data design-admissibility certified). **`FCLR-FRONTIER-VERIFY-06-20261117T130551Z` active** — no session may close without a new quantitative frontier-audit artifact + evidence audit + gate/suite captures (or a trigger-satisfied §16-compliant preregistered path). "No trigger → stop cleanly" is **not** completion.
-- **Git tree:** tracked changes limited to `AGENT_HANDOFF.md` this pass (subordinate campaign note already aligned); no sealed artifacts modified. No root-level `research_state/*.md|json` added (500/500 cap).
+- **Git tree:** tracked changes this pass: `AGENT_HANDOFF.md` updated; removed phantom `research_state/session_20261117T060853Z/`. No sealed artifacts modified. No root-level `research_state/*.md|json` added (500/500 cap).
 
 ---
 
