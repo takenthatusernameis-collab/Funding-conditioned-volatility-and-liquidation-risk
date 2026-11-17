@@ -1,4 +1,4 @@
-# FCLR Focus Campaign — `FCLR-FRONTIER-VERIFY-06` — aligned 2026-11-17T12:36:30Z
+# FCLR Focus Campaign — `FCLR-FRONTIER-VERIFY-06-20261117T130551Z` — aligned 2026-11-17T13:05:51Z
 
 **Frontier rank 0:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `all_terminal=true`, `next_action_heavy=null`).
 **Sole durable handoff:** `AGENT_HANDOFF.md` (authoritative). This file is the detailed subordinate campaign note; if it conflicts with the handoff, the handoff wins.
@@ -63,7 +63,7 @@ No trigger fired → produce `recompute_frontier_exhaustive_audit_<UTC>.{py,json
 
 Trigger checks, tests/gates, copied bundles, static re-audits, re-runs of FCLR-014 or the synthesis, “no trigger → stop cleanly”, and handoff-only refreshes are **not** completion.
 
-## Verification record — 2026-11-17T12:36:30Z
+## Verification record — 2026-11-17T13:05:51Z
 
 - `check_handoff_heavywork_gate.py --json`: **PASS** (`reason_code: OK`, root 500/500, latest session `session_20261117T072040Z`).
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (196 scripts, no drift).
