@@ -1,0 +1,67 @@
+{
+  "artifact_id": "FCLR-TRIGGER-CHECK-20261117T130203Z",
+  "generated_utc": "2026-11-17T13:02:03Z",
+  "campaign": "FCLR-FRONTIER-VERIFY-06-20261117T123630Z",
+  "method": "read-only, no network, no polling, no HF re-probe",
+  "files_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json",
+      "required_fields": {"status": "RESOLVED_VERIFIED", "fabricated": false},
+      "satisfied": false
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.json",
+      "required_fields": {"status": "ADMISSIBLE", "observed_labels": true, "instruments": 5, "blocks": 3, "complete_month": 1, "unauthenticated": true},
+      "satisfied": false
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.json",
+      "required_fields": {"labels_after": "2026-10-31", "min_depth_days": 100, "observed_only": true, "venue": "hyperliquid_perpetuals"},
+      "satisfied": false
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json",
+      "satisfied": false
+    }
+  ],
+  "n_triggers": 4,
+  "n_satisfied": 0,
+  "all_open": true,
+  "any_fired": false,
+  "ironflow_monitor": {
+    "data_through": "2026-10",
+    "consecutive_absent": 3,
+    "post_2026_10_months_probed": ["2026-11", "2026-12", "2027-01"],
+    "post_2026_10_any_available": false,
+    "post_2026_10_available_months": [],
+    "post_2026_10_classifications": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    },
+    "last_probe_ts": "20261111T015525Z",
+    "last_scan_ts": "2026-11-07T06:15:55Z",
+    "tree_parquet_paths_count": 36,
+    "tree_last_status": 304,
+    "tree_not_modified": true
+  },
+  "consequence": "No trigger satisfied -> no confirmatory estimand advanced, re-run, or re-scored. Required holding action is the independent FCLR-FRONTIER-VERIFY-06 exhaustive frontier audit (no-trigger rule).",
+  "no_trigger_rule_applied": true,
+  "sealed_work_not_rerun": [
+    "FCLR-014",
+    "FCLR-REPRO-SYNTH-05",
+    "replication synthesis"
+  ]
+}
