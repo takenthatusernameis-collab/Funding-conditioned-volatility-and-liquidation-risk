@@ -1,4 +1,18 @@
-# HANDOFF — NEXT AGENTIC WORK SESSION — 2026-11-17T03:30:07Z
+# NEXT SESSION HANDOFF — OBSOLETE SUPERSEDED FILE (TOMBSTONE)
+
+**Tombstone timestamp:** 2026-11-17T04:09:17Z
+
+This file is retained only as a historical snapshot and has **no campaign authority**.
+
+- **Sole durable handoff:** `AGENT_HANDOFF.md` — execute its `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION`.
+- **Detailed campaign note:** `research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md` (aligned to `AGENT_HANDOFF.md`).
+- **Current mandatory heavy work:** FCLR-014 panel coverage audit + blocker-resolution artifacts (`fclr014_panel_coverage_audit_<UTC>.{json,md}` + `fclr014_panel_blocker_resolution_<UTC>.{json,md}`) in a new `research_state/session_<UTC>/` — not an FCLR-014 confirmatory recompute.
+- **Rank-0 active state:** `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY` / `BOUNDED_TRIGGER_ONLY`, `next_action_heavy=null`). All cached-data confirmatory estimands are terminal.
+- **Completed (do not repeat):** FCLR-009, FCLR-006, FCLR-008, FCLR-002, FCLR-003, FCLR-010, FCLR-013, FCLR-RCA-011.
+
+Ignore every directive in the remainder of this historical file that conflicts with `AGENT_HANDOFF.md`.
+
+## HISTORICAL SNAPSHOT BELOW (2026-11-17T03:30:07Z) — NOT AUTHORITATIVE
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (execute first)
 
