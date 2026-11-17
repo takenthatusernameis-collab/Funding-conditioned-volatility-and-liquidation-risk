@@ -4,8 +4,10 @@
   "prereg": "research_state/pre_registration_fclr014_confirmatory_funding_vol_20261109T181124Z.json",
   "prereg_status": "FROZEN_BEFORE_OUTCOMES; confirmatory_claim_go=NO_GO; exploratory_label_required=EXPLORATORY / NOT CONFIRMATORY / NOT PROMOTABLE",
   "prereg_split_defect": "candidate_frozen_splits_pending_panel.test = 2024-07-23..2024-09-30 (70 days = 2 non-overlapping 30-day blocks) copied from FCLR-002; fails block_requirement >=3",
-  "corrected_blocker": "DESIGN_ADMISSIBILITY: full-C2 estimand has 0 available disjoint blocks and no contiguous untested run >= 127d; mark+funding-only (B0/B1/C1) has 2 available blocks (<3). A confirmatory >=3-block FCLR-014 design cannot be frozen from local data without consuming a sealed window. A 2-block mark+funding-only EXPLORATORY pilot is the only constructible local design, and it is NOT promotable.",
-  "campaign_feasible_new_prereg": false,
+  "corrected_blocker": "DESIGN_ADMISSIBILITY (CORRECTED 2026-11-17T06:08:53Z): full-C2 estimand has 0 available disjoint blocks and no contiguous untested run >= 127d; mark+funding-only (B0/B1/C1) has 4 available blocks (2024-10, 2024-11, 2024-12, 2025-01) meeting >=3. A new mark+funding-only pre-registered design CAN be frozen before outcomes. The prior 2-block count in this artifact was erroneous: it penalized train months for overlapping TESTED_WINDOWS, contradicting scripts/next_campaign_status.py disjoint_block_frontier() which explicitly permits train months to overlap prior windows as legitimate pre-test history. Corrected count: 4 blocks, campaign_feasible_new_prereg=true.",
+  "campaign_feasible_new_prereg": true,
+  "available_test_months_markfund": ["2024-10", "2024-11", "2024-12", "2025-01"],
+  "n_available_disjoint_blocks_markfund": 4,
   "min_design_days": 127,
   "full_c2_estimand": {
     "admissibility_rule": "mark+index+premium+funding complete for all 5 symbols",
@@ -143,13 +145,10 @@
           "2024-08",
           "2024-09"
         ],
-        "missing_train_months": [
-          "2024-08",
-          "2024-09"
-        ],
-        "status": "INCOMPLETE_TRAIN",
-        "feasible": false,
-        "reason": "2024-08:missing_or_unfunded_or_tested; 2024-09:missing_or_unfunded_or_tested"
+        "missing_train_months": [],
+        "status": "AVAILABLE",
+        "feasible": true,
+        "reason": "complete funding-backed untested test block with complete train history (train months 2024-08/2024-09 overlap TESTED_WINDOWS but are permitted as legitimate pre-test history per next_campaign_status.py disjoint_block_frontier())"
       },
       {
         "test_month": "2024-11",
