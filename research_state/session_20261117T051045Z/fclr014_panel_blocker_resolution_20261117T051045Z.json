@@ -1,0 +1,770 @@
+{
+ "artifact_id": "FCLR-014-BLOCKER-RESOLUTION-20261117T051045Z",
+ "generated_utc": "2026-11-17T05:10:45Z",
+ "corrected_blocker": "Design admissibility under TESTED_WINDOWS, NOT data absence. Cache holds 31 months mark+funding (2024-04..2026-10) and 22 months full mark+index+premium+funding (2025-01..2026-10).",
+ "cache_coverage": {
+  "mark_funding_months": [
+   "2024-04",
+   "2024-05",
+   "2024-06",
+   "2024-07",
+   "2024-08",
+   "2024-09",
+   "2024-10",
+   "2024-11",
+   "2024-12",
+   "2025-01",
+   "2025-02",
+   "2025-03",
+   "2025-04",
+   "2025-05",
+   "2025-06",
+   "2025-07",
+   "2025-08",
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10"
+  ],
+  "full_feature_months": [
+   "2024-04",
+   "2024-05",
+   "2024-06",
+   "2024-07",
+   "2024-08",
+   "2024-09",
+   "2025-01",
+   "2025-02",
+   "2025-03",
+   "2025-04",
+   "2025-05",
+   "2025-06",
+   "2025-07",
+   "2025-08",
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10"
+  ],
+  "note": "2024-04..2024-09: complete mark+funding+premium+index for all 5; 2024-10..2024-12: mark+funding only (premium/index missing for 4/5 symbols); 2025-01..2026-10: complete full features for all 5"
+ },
+ "tested_windows": [
+  {
+   "start": "2024-07-23",
+   "end": "2024-09-30",
+   "label": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+  },
+  {
+   "start": "2025-02-01",
+   "end": "2025-05-31",
+   "label": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+  },
+  {
+   "start": "2026-05-01",
+   "end": "2026-08-31",
+   "label": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+  },
+  {
+   "start": "2026-08-03",
+   "end": "2026-10-31",
+   "label": "FCLR-FWD-VOL-011-CONFIRM forward walk"
+  },
+  {
+   "start": "2025-07-23",
+   "end": "2025-10-15",
+   "label": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+  },
+  {
+   "start": "2026-01-01",
+   "end": "2026-04-01",
+   "label": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+  },
+  {
+   "start": "2024-06-01",
+   "end": "2024-06-30",
+   "label": "FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)"
+  },
+  {
+   "start": "2025-06-01",
+   "end": "2025-06-30",
+   "label": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+  },
+  {
+   "start": "2025-11-01",
+   "end": "2025-11-30",
+   "label": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+  },
+  {
+   "start": "2025-12-01",
+   "end": "2025-12-31",
+   "label": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+  }
+ ],
+ "min_design_days": 127,
+ "option_a_full_c2": {
+  "design_name": "Full C2 (mark+index+premium+funding)",
+  "require_premium_index": true,
+  "admissible_months": [
+   "2024-04",
+   "2024-05",
+   "2024-06",
+   "2024-07",
+   "2024-08",
+   "2024-09",
+   "2025-01",
+   "2025-02",
+   "2025-03",
+   "2025-04",
+   "2025-05",
+   "2025-06",
+   "2025-07",
+   "2025-08",
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10"
+  ],
+  "total_admissible": 28,
+  "blocks": [
+   {
+    "month": "2024-04",
+    "classification": "INCOMPLETE_TRAIN",
+    "tested_by": null,
+    "feasible": false,
+    "reason": "Train months incomplete: 2024-02:incomplete_mark_or_funding, 2024-03:incomplete_mark_or_funding",
+    "train_months": [
+     "2024-02",
+     "2024-03"
+    ],
+    "missing_train": [
+     "2024-02:incomplete_mark_or_funding",
+     "2024-03:incomplete_mark_or_funding"
+    ]
+   },
+   {
+    "month": "2024-05",
+    "classification": "INCOMPLETE_TRAIN",
+    "tested_by": null,
+    "feasible": false,
+    "reason": "Train months incomplete: 2024-03:incomplete_mark_or_funding",
+    "train_months": [
+     "2024-03",
+     "2024-04"
+    ],
+    "missing_train": [
+     "2024-03:incomplete_mark_or_funding"
+    ]
+   },
+   {
+    "month": "2024-06",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)"
+   },
+   {
+    "month": "2024-07",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2024-08",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2024-09",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-01",
+    "classification": "INCOMPLETE_TRAIN",
+    "tested_by": null,
+    "feasible": false,
+    "reason": "Train months incomplete: 2024-11:ETHUSDT_incomplete_premium_or_index, 2024-12:BTCUSDT_incomplete_premium_or_index",
+    "train_months": [
+     "2024-11",
+     "2024-12"
+    ],
+    "missing_train": [
+     "2024-11:ETHUSDT_incomplete_premium_or_index",
+     "2024-12:BTCUSDT_incomplete_premium_or_index"
+    ]
+   },
+   {
+    "month": "2025-02",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-03",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-04",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-05",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-06",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+   },
+   {
+    "month": "2025-07",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-08",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-09",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-10",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-11",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+   },
+   {
+    "month": "2025-12",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+   },
+   {
+    "month": "2026-01",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-02",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-03",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-04",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-05",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-06",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-07",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-08",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-09",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-011-CONFIRM forward walk",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-011-CONFIRM forward walk"
+   },
+   {
+    "month": "2026-10",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-011-CONFIRM forward walk",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-011-CONFIRM forward walk"
+   }
+  ],
+  "feasible_blocks": [],
+  "n_feasible_blocks": 0,
+  "contiguous_runs": [],
+  "feasible_runs": [],
+  "any_feasible_run": false,
+  "min_design_days": 127,
+  "can_freeze_new_prereg": false,
+  "min_blocks_required": 3
+ },
+ "option_b_mark_funding_only": {
+  "design_name": "Mark+funding-only (B0/B1/C1)",
+  "require_premium_index": false,
+  "admissible_months": [
+   "2024-04",
+   "2024-05",
+   "2024-06",
+   "2024-07",
+   "2024-08",
+   "2024-09",
+   "2024-10",
+   "2024-11",
+   "2024-12",
+   "2025-01",
+   "2025-02",
+   "2025-03",
+   "2025-04",
+   "2025-05",
+   "2025-06",
+   "2025-07",
+   "2025-08",
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10"
+  ],
+  "total_admissible": 31,
+  "blocks": [
+   {
+    "month": "2024-04",
+    "classification": "INCOMPLETE_TRAIN",
+    "tested_by": null,
+    "feasible": false,
+    "reason": "Train months incomplete: 2024-02:incomplete_mark_or_funding, 2024-03:incomplete_mark_or_funding",
+    "train_months": [
+     "2024-02",
+     "2024-03"
+    ],
+    "missing_train": [
+     "2024-02:incomplete_mark_or_funding",
+     "2024-03:incomplete_mark_or_funding"
+    ]
+   },
+   {
+    "month": "2024-05",
+    "classification": "INCOMPLETE_TRAIN",
+    "tested_by": null,
+    "feasible": false,
+    "reason": "Train months incomplete: 2024-03:incomplete_mark_or_funding",
+    "train_months": [
+     "2024-03",
+     "2024-04"
+    ],
+    "missing_train": [
+     "2024-03:incomplete_mark_or_funding"
+    ]
+   },
+   {
+    "month": "2024-06",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024-DISJOINT-2024-06 (EXPLAINED_BY_ESTIMATOR; singleton)"
+   },
+   {
+    "month": "2024-07",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2024-08",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2024-09",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2024Q4-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2024-10",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-08",
+     "2024-09"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2024-11",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-09",
+     "2024-10"
+    ],
+    "test_days": 30,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2024-12",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-10",
+     "2024-11"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2025-01",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-11",
+     "2024-12"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2025-02",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-03",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-04",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-05",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-06",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+   },
+   {
+    "month": "2025-07",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-08",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-09",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-10",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025H2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2025-11",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+   },
+   {
+    "month": "2025-12",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025-DISJOINT-CROSS (EXPLORATORY_NULL)"
+   },
+   {
+    "month": "2026-01",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-02",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-03",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-04",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-2025Q1Q2-CROSS (NOT_REPLICATED)"
+   },
+   {
+    "month": "2026-05",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-06",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-07",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-08",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM"
+   },
+   {
+    "month": "2026-09",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-011-CONFIRM forward walk",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-011-CONFIRM forward walk"
+   },
+   {
+    "month": "2026-10",
+    "classification": "CONSUMED_BY_SEALED_CELL",
+    "tested_by": "FCLR-FWD-VOL-011-CONFIRM forward walk",
+    "feasible": false,
+    "reason": "Inside tested window: FCLR-FWD-VOL-011-CONFIRM forward walk"
+   }
+  ],
+  "feasible_blocks": [
+   {
+    "month": "2024-10",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-08",
+     "2024-09"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2024-11",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-09",
+     "2024-10"
+    ],
+    "test_days": 30,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2024-12",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-10",
+     "2024-11"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7
+   },
+   {
+    "month": "2025-01",
+    "classification": "AVAILABLE",
+    "tested_by": null,
+    "feasible": true,
+    "reason": "Complete funding-backed untested test block with complete train history",
+    "train_months": [
+     "2024-11",
+     "2024-12"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7
+   }
+  ],
+  "n_feasible_blocks": 4,
+  "contiguous_runs": [
+   {
+    "months": [
+     "2024-10",
+     "2024-11",
+     "2024-12",
+     "2025-01"
+    ],
+    "span_days": 123,
+    "feasible": false
+   }
+  ],
+  "feasible_runs": [],
+  "any_feasible_run": false,
+  "min_design_days": 127,
+  "can_freeze_new_prereg": true,
+  "min_blocks_required": 3
+ },
+ "overall_verdict": {
+  "full_c2_design_feasible": false,
+  "mark_funding_only_design_feasible": true,
+  "recommended_path": "mark_funding_only"
+ },
+ "next_action": "Freeze a NEW mark+funding-only B0/B1/C1 prereg (copy prereg_template_trigger_gated, set outcome_data_inspected_before_freeze=false) using 2024-10, 2024-11, 2024-12 as test blocks with 2024-08..2024-11 train history. STOP before outcomes. Full C2 design not feasible (all 2025+ full-feature months consumed by tested windows)."
+}

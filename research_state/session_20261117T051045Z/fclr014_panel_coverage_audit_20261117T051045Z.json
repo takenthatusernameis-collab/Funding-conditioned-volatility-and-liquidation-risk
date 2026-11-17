@@ -1,0 +1,1151 @@
+{
+ "audit_id": "FCLR-014-COVERAGE-20261117T051045Z",
+ "window": "2024-01..2026-11",
+ "symbols": [
+  "BTCUSDT",
+  "ETHUSDT",
+  "BNBUSDT",
+  "SOLUSDT",
+  "XRPUSDT"
+ ],
+ "coverage": {
+  "BTCUSDT": {
+   "2024-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-02": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": false
+   },
+   "2024-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-07": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-08": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-09": {
+    "markPriceKlines": 60,
+    "premiumIndexKlines": 60,
+    "indexPriceKlines": 60,
+    "funding_present": true
+   },
+   "2024-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2025-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2025-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-07": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2026-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-07": {
+    "markPriceKlines": 37,
+    "premiumIndexKlines": 37,
+    "indexPriceKlines": 37,
+    "funding_present": true
+   },
+   "2026-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-10": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": true
+   },
+   "2026-11": {
+    "markPriceKlines": 8,
+    "premiumIndexKlines": 8,
+    "indexPriceKlines": 8,
+    "funding_present": false
+   }
+  },
+  "ETHUSDT": {
+   "2024-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-02": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": false
+   },
+   "2024-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-07": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-08": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-09": {
+    "markPriceKlines": 60,
+    "premiumIndexKlines": 60,
+    "indexPriceKlines": 60,
+    "funding_present": true
+   },
+   "2024-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2025-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2025-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-07": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2026-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-07": {
+    "markPriceKlines": 37,
+    "premiumIndexKlines": 37,
+    "indexPriceKlines": 37,
+    "funding_present": true
+   },
+   "2026-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-10": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": true
+   },
+   "2026-11": {
+    "markPriceKlines": 8,
+    "premiumIndexKlines": 8,
+    "indexPriceKlines": 8,
+    "funding_present": false
+   }
+  },
+  "BNBUSDT": {
+   "2024-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-02": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": false
+   },
+   "2024-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-07": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-08": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-09": {
+    "markPriceKlines": 60,
+    "premiumIndexKlines": 60,
+    "indexPriceKlines": 60,
+    "funding_present": true
+   },
+   "2024-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2025-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2025-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-07": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2026-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-07": {
+    "markPriceKlines": 37,
+    "premiumIndexKlines": 37,
+    "indexPriceKlines": 37,
+    "funding_present": true
+   },
+   "2026-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-10": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": true
+   },
+   "2026-11": {
+    "markPriceKlines": 8,
+    "premiumIndexKlines": 8,
+    "indexPriceKlines": 8,
+    "funding_present": false
+   }
+  },
+  "SOLUSDT": {
+   "2024-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-02": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": false
+   },
+   "2024-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-07": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-08": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-09": {
+    "markPriceKlines": 60,
+    "premiumIndexKlines": 60,
+    "indexPriceKlines": 60,
+    "funding_present": true
+   },
+   "2024-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2025-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2025-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-07": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2026-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-07": {
+    "markPriceKlines": 37,
+    "premiumIndexKlines": 37,
+    "indexPriceKlines": 37,
+    "funding_present": true
+   },
+   "2026-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-10": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": true
+   },
+   "2026-11": {
+    "markPriceKlines": 8,
+    "premiumIndexKlines": 8,
+    "indexPriceKlines": 8,
+    "funding_present": false
+   }
+  },
+  "XRPUSDT": {
+   "2024-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-02": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": false
+   },
+   "2024-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": false
+   },
+   "2024-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2024-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2024-07": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-08": {
+    "markPriceKlines": 62,
+    "premiumIndexKlines": 62,
+    "indexPriceKlines": 62,
+    "funding_present": true
+   },
+   "2024-09": {
+    "markPriceKlines": 60,
+    "premiumIndexKlines": 60,
+    "indexPriceKlines": 60,
+    "funding_present": true
+   },
+   "2024-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2024-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 0,
+    "indexPriceKlines": 0,
+    "funding_present": true
+   },
+   "2025-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2025-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-07": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-10": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2025-11": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2025-12": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-01": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-02": {
+    "markPriceKlines": 28,
+    "premiumIndexKlines": 28,
+    "indexPriceKlines": 28,
+    "funding_present": true
+   },
+   "2026-03": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-04": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-05": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-06": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-07": {
+    "markPriceKlines": 37,
+    "premiumIndexKlines": 37,
+    "indexPriceKlines": 37,
+    "funding_present": true
+   },
+   "2026-08": {
+    "markPriceKlines": 31,
+    "premiumIndexKlines": 31,
+    "indexPriceKlines": 31,
+    "funding_present": true
+   },
+   "2026-09": {
+    "markPriceKlines": 30,
+    "premiumIndexKlines": 30,
+    "indexPriceKlines": 30,
+    "funding_present": true
+   },
+   "2026-10": {
+    "markPriceKlines": 29,
+    "premiumIndexKlines": 29,
+    "indexPriceKlines": 29,
+    "funding_present": true
+   },
+   "2026-11": {
+    "markPriceKlines": 8,
+    "premiumIndexKlines": 8,
+    "indexPriceKlines": 8,
+    "funding_present": false
+   }
+  }
+ },
+ "admissible_for_fclr014": {
+  "2024-01": false,
+  "2024-02": false,
+  "2024-03": false,
+  "2024-04": true,
+  "2024-05": true,
+  "2024-06": true,
+  "2024-07": true,
+  "2024-08": true,
+  "2024-09": true,
+  "2024-10": true,
+  "2024-11": true,
+  "2024-12": true,
+  "2025-01": true,
+  "2025-02": true,
+  "2025-03": true,
+  "2025-04": true,
+  "2025-05": true,
+  "2025-06": true,
+  "2025-07": true,
+  "2025-08": true,
+  "2025-09": true,
+  "2025-10": true,
+  "2025-11": true,
+  "2025-12": true,
+  "2026-01": true,
+  "2026-02": true,
+  "2026-03": true,
+  "2026-04": true,
+  "2026-05": true,
+  "2026-06": true,
+  "2026-07": true,
+  "2026-08": true,
+  "2026-09": true,
+  "2026-10": true,
+  "2026-11": false
+ },
+ "summary": {
+  "total_months": 35,
+  "admissible_months": 31,
+  "months": [
+   "2024-01",
+   "2024-02",
+   "2024-03",
+   "2024-04",
+   "2024-05",
+   "2024-06",
+   "2024-07",
+   "2024-08",
+   "2024-09",
+   "2024-10",
+   "2024-11",
+   "2024-12",
+   "2025-01",
+   "2025-02",
+   "2025-03",
+   "2025-04",
+   "2025-05",
+   "2025-06",
+   "2025-07",
+   "2025-08",
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10",
+   "2026-11"
+  ]
+ }
+}
