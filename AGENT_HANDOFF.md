@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-17T12:14:21Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-17T12:34:39Z (sole durable handoff)
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (do this first)
 
@@ -95,7 +95,7 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `session_20261116T140001Z/` superseded (tolerance-failed FCLR-006).
 - `session_20261116T221127Z/` superseded (divergent FCLR-008).
 - **`session_20261117T050235Z/`, `session_20261117T060341Z/` — EMPTY (0 files), wasted loops, non-counting.**
-- **Empty session created 2026-11-17T11:06:29Z (no session directory artifacts, zero files, non-counting, do not resume) — same class as the two EMPTY sessions above.**
+- **`session_20261117T110629Z/` — EMPTY (0 files, created ~2026-11-17T11:06:29Z, non-counting, do not resume) — same class as `session_20261117T050235Z/` and `session_20261117T060341Z/`.**
 - **`session_20261117T060853Z/` — PHANTOM: its evidence audit cites `fclr014_panel_coverage_audit_20261117T060853Z.{json,md}` and `fclr014_panel_blocker_resolution_20261117T060853Z.{json,md}` that were never written (only `evidence_audit` + `trigger_check` exist). Non-counting.**
 - `session_20261117T041333Z/` (FCLR-014 coverage + blocker, 2-block reading correct; its corrected JSON 4-block claim is retracted) and `session_20261117T051045Z/` (FCLR-014 coverage + blocker, 4-block feasibility RETRACTED) are **superseded by the adjudication in `session_20261117T071110Z`** — cite them as history, do not re-derive from them.
 
@@ -138,10 +138,14 @@ A session that completes an item must (a) create `research_state/session_<UTC>/`
 - `HANDOFF_NEXT_SESSION_20261116T114626Z.md`: tombstoned 2026-11-16T12:45:00Z — ignore.
 - `HANDOFF_NEXT_SESSION_20261117T033007Z.md`: tombstoned 2026-11-17T04:09:17Z — ignore.
 
-## Verification record — 2026-11-17T12:14:21Z (FCLR-REPRO-SYNTH-05 completed; FCLR-NEXT-HEAVY-COMMIT-20261117T105305Z active)
+## Verification record — 2026-11-17T12:34:39Z (maintenance refresh; FCLR-NEXT-HEAVY-COMMIT-20261117T105305Z active)
 
-- **Session:** `research_state/session_20261117T072040Z/` (all new artifacts inside; no root-level `research_state/*.md|json` added).
-- **Trigger check (once, no network/polling):** `resume_trigger_registry.json` + `ironflow_monitor_state.json` read; all four triggers **OPEN** (`GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO`); Ironflow `data_through=2026-10`, `consecutive_absent=3`, 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored. Artifact: `trigger_check_20261117T072040Z.json`.
+- **Current trigger check (once, no network/polling):** `resume_trigger_registry.json` + `ironflow_monitor_state.json` re-read at 2026-11-17T12:34:39Z; all four triggers **OPEN** (`GATE4_BRANCH_1`, `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO`); Ironflow `data_through=2026-10`, `consecutive_absent=3`, 2026-11/2026-12/2027-01 `CONFIRMED_ABSENT`. No trigger fired; no confirmatory estimand advanced/re-scored.
+- **Last completed heavy session:** `research_state/session_20261117T072040Z/` (FCLR-REPRO-SYNTH-05 DONE). Queue 1–9 complete; no queued cached-data heavy item remains.
+- **Gates (spot check, this refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json` **PASS** (`reason_code: OK`); `python3 scripts/next_campaign_status.py --json` confirms `any_feasible=false`, no actionable preregs, no disjoint ≥127d run on cached confirmatory data. Full suite not rerun in this handoff-only refresh (baseline unchanged: 1340 tests, 4 pre-existing pyarrow errors in `tests.test_fclr_liq_combined_admissibility_audit`, 18 skipped, EXIT 1). Next session that performs work must run and capture full gates/suite per campaign step 6.
+- **Non-counting:** `session_20261117T110629Z/` EMPTY (0 files) — do not resume/copy/count. No new heavy artifact produced in this refresh; next session must satisfy `FCLR-NEXT-HEAVY-COMMIT-20261117T105305Z`.
+
+- **Prior heavy verification (unchanged, `session_20261117T072040Z`):** all four triggers OPEN; design-frontier certificate `BLOCKED_ON_DESIGN`/`promotable=false` (full-C2 0 blocks/no ≥127d; mark+funding-only 4 individually feasible, 2 mutually non-overlapping); replication robustness qualitative 7/7 Wilson95 [0.646,1.000], LOO 6/6 all-unity, sign mixed 3+/4-; evidence audit/gate/suite captures present. Artifact: `trigger_check_20261117T072040Z.json`.
 - **Design-frontier certificate (new quantitative):** `recompute_design_frontier_certificate_20261117T072040Z.{py,json,md}` — per-estimand with/without mutual non-overlap (30d train + 7d embargo + 30d test, non-overlap on `[train_start,test_end]`, test months outside `TESTED_WINDOWS`). Full-C2: 0 disjoint feasible / no contiguous ≥127d → `BLOCKED_ON_DESIGN`. Mark+funding-only: 4 individually feasible (2024-10/11/12, 2025-01), **2 mutually non-overlapping** (2024-10, 2025-01), 5 pairs, contiguous untested <127d → `BLOCKED_ON_DESIGN`. **FCLR-014 closed verdict reproduced=true**; overall `BLOCKED_ON_DESIGN`, `promotable=false`; 4-block prereg claim retracted.
 - **Replication robustness (new quantitative):** `replication_robustness_20261117T072040Z.{py,json,md}` (built on `session_20261117T071110Z/replication_synthesis_20261117T071110Z.json`, no rerun). Qualitative corroboration **7/7** (Wilson95 [0.646,1.000]); LOO 6/6 all-unity (rates 1.000–1.000). C2-vs-B1 sign: positive 3 (FCLR-002,008,010) / negative 4 (FCLR-003,006,009,013), mixed across QLIKE/Brier designs (heterogeneity caveat stated; within-tolerance remains 2/7). Boundary certificate: no promotable positive result without trigger-satisfied/pre-powered ≥3-block preregistered admissible design or design-feasible cached-data estimand passing confirmatory gates.
 - **Tool hardening:** `scripts/next_campaign_status.py` not modified; no `scripts/*.py` added; scope registries unchanged (196 scripts).
