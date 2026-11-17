@@ -1,0 +1,140 @@
+{
+  "artifact_id": "FCLR-TRIGGER-ACTIVATION-READINESS-20261117T215904Z",
+  "generated_utc": "2026-11-17T21:59:04Z",
+  "session_utc": "20261117T215904Z",
+  "campaign": "FCLR-TRIGGER-READINESS-01-20261117T203457Z",
+  "network": false,
+  "polling": false,
+  "outcome_blind": true,
+  "programme_verdict": {
+    "promotable": false,
+    "program_status": "CLOSED_TERMINAL",
+    "new_scientific_claim": false,
+    "campaign_status": "COMPLETE",
+    "successor_state": "AWAITING_TRIGGER"
+  },
+  "sources_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json",
+    "research_state/session_20261116T100533Z/trigger_readiness_power_calibration_20261116T100533Z.md",
+    "research_state/session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json"
+  ],
+  "trigger_contracts": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "estimand": "Gate 4 funding-multisplit Track C confirmatory: C2 vs B1 next-24h RV QLIKE on funding-conditioned volatility",
+      "track": "Track C (funding-conditioned volatility)",
+      "paired_n_floor": 23224,
+      "non_overlapping_30d_test_blocks_min": 3,
+      "purge_embargo_days": 7,
+      "paired_oos_instruments_min": 5,
+      "holm_family": ["C1_vs_B1_next24h_RV_QLIKE_secondary", "C2_vs_B1_next24h_RV_QLIKE_primary", "C2_vs_C1_next24h_RV_QLIKE_secondary"],
+      "mde_target_rel_pct": "<2.0",
+      "materiality_floor_rel_pct": 2.0,
+      "irreducible_human_step": "Gate 4 v5 legal attestation: research_state/fclr016_v5_terms_evidence_RESOLVED_*.json with status=RESOLVED_VERIFIED, fabricated=false (human/legal-owned; agent cannot set)",
+      "trigger_status": "OPEN",
+      "trigger_satisfied": false,
+      "gate_decision": "REFUSE",
+      "executable_artifacts": ["trigger_activation_executor_20261117T215904Z.py", "trigger_activation_executor_20261117T215904Z.json"]
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "estimand": "Track A observed-liquidation intensity forecast: C2 vs B1 OOS QLIKE on admissible observed-liquidation labels",
+      "track": "Track A (observed liquidation)",
+      "paired_n_floor": 11689,
+      "non_overlapping_30d_test_blocks_min": 3,
+      "purge_embargo_days": 7,
+      "paired_oos_instruments_min": 5,
+      "holm_family": ["B0_vs_B1_OOS_QLIKE_secondary", "C2_vs_B1_OOS_QLIKE_primary"],
+      "mde_target_rel_pct": "<2.0",
+      "materiality_floor_rel_pct": 2.0,
+      "irreducible_human_step": "Admissible unauthenticated source audit: research_state/<source>_admissibility_audit_<UTC>.{md,json} with status=ADMISSIBLE, observed_labels=true, >=5 instruments, >=3 blocks or >=1 complete month",
+      "trigger_status": "OPEN",
+      "trigger_satisfied": false,
+      "gate_decision": "REFUSE",
+      "executable_artifacts": ["trigger_activation_executor_20261117T215904Z.py", "trigger_activation_executor_20261117T215904Z.json"]
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "estimand": "Track A observed-liquidation intensity forecast on verified post-2026-10-31 Hyperliquid labels",
+      "track": "Track A (observed liquidation)",
+      "paired_n_floor": 11689,
+      "non_overlapping_30d_test_blocks_min": 3,
+      "purge_embargo_days": 7,
+      "paired_oos_instruments_min": 5,
+      "holm_family": ["B0_vs_B1_OOS_QLIKE_secondary", "C2_vs_B1_OOS_QLIKE_primary"],
+      "mde_target_rel_pct": "<2.0",
+      "materiality_floor_rel_pct": 2.0,
+      "irreducible_human_step": "Verified label extension audit: research_state/hl_label_extension_audit_<UTC>.{md,json} on post-2026-10-31 labels with >=100-day depth",
+      "trigger_status": "OPEN",
+      "trigger_satisfied": false,
+      "gate_decision": "REFUSE",
+      "executable_artifacts": ["trigger_activation_executor_20261117T215904Z.py", "trigger_activation_executor_20261117T215904Z.json"]
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "estimand": "Track A expansion robustness redo: LOIO >= 6 of 8 subsets AND placebo/permutation true effect > 95th percentile of null, on a newly preregistered design",
+      "track": "Track A (observed liquidation)",
+      "paired_n_floor": 11689,
+      "non_overlapping_30d_test_blocks_min": 3,
+      "purge_embargo_days": 7,
+      "paired_oos_instruments_min": 5,
+      "holm_family": ["LOIO_ge_6_of_8_primary", "placebo_gt_95th_null_secondary"],
+      "mde_target_rel_pct": "<2.0",
+      "materiality_floor_rel_pct": 2.0,
+      "irreducible_human_step": "Newly preregistered design with LOIO>=6/8 and placebo>95th percentile; re-scoring sealed 19.04% result forbidden",
+      "trigger_status": "OPEN",
+      "trigger_satisfied": false,
+      "gate_decision": "REFUSE",
+      "executable_artifacts": ["trigger_activation_executor_20261117T215904Z.py", "trigger_activation_executor_20261117T215904Z.json"]
+    }
+  ],
+  "executable_artifacts": {
+    "executor": {
+      "py": "trigger_activation_executor_20261117T215904Z.py",
+      "json": "trigger_activation_executor_20261117T215904Z.json",
+      "stdlib_only": true,
+      "outcome_files_opened": [],
+      "exit_code_on_all_open": 2
+    },
+    "selftest": {
+      "py": "trigger_activation_selftest_20261117T215904Z.py",
+      "json": "trigger_activation_selftest_20261117T215904Z.json",
+      "runner": "python3 -m unittest",
+      "tests_run": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "was_successful": true
+    },
+    "trigger_check": {
+      "json": "trigger_check_20261117T215904Z.json",
+      "all_triggers_open": true,
+      "any_trigger_fired": false,
+      "data_through": "2026-10",
+      "consecutive_absent": 3,
+      "post_2026_10": {
+        "2026-11": "CONFIRMED_ABSENT",
+        "2026-12": "CONFIRMED_ABSENT",
+        "2027-01": "CONFIRMED_ABSENT"
+      }
+    }
+  },
+  "do_not_run_list": [
+    "No sealed cached-data confirmatory estimand (FCLR-014, replication synthesis, FCLR-REPRO-SYNTH-05, FCLR-013, FCLR-010, FCLR-002/003, FCLR-009, FCLR-006, FCLR-008)",
+    "No frontier re-audit (verify-06/verify-07 line CLOSED; all_exact_match=true reproduced twice)",
+    "No outcome file opened while building/executing the trigger-activation package (evaluation_summary_*, results/*, sealed panel, holdout)",
+    "No HuggingFace tree polling, alternative-source re-probe, paid/credentialed/manual outcome data, or git lfs pull",
+    "No root-level research_state/*.md|json (root at 500/500 churn cap)",
+    "No statsmodels or unpinned heavy dependencies in core path"
+  ],
+  "reopen_trigger_path": "RESEARCH_PROMPT.md section 16: source/admissibility audit first; freeze pre-sized prereg from session_20261116T035833Z prereg template with power floors from session_20261116T100533Z calibration (Gate4/TrackC paired_n>=23224; TrackA/HL/expansion paired_n>=11689; >=3 blocks; 7d purge/embargo; outcome_data_inspected_before_freeze=false); materially different estimand required; execute; honest verdict; register new scripts in both scope registries",
+  "files_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json",
+    "research_state/session_20261116T100533Z/trigger_readiness_power_calibration_20261116T100533Z.md",
+    "research_state/session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json"
+  ],
+  "completeness_statement": "Trigger-activation package triad (executor + selftest + readiness certificate) plus trigger check complete in this session dir. No cached-data confirmatory work remains agent-removable. Scientific advance is trigger-gated only."
+}

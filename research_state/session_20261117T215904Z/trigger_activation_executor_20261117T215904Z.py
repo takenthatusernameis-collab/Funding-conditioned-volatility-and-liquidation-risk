@@ -73,23 +73,23 @@ TRIGGER_TRACK = {
 }
 
 TRIGGER_HOLM_FAMILY = {
-    "GATE4_BRANCH_1": [
+    "GATE4_BRANCH_1": sorted([
         "C2_vs_B1_next24h_RV_QLIKE_primary",
         "C1_vs_B1_next24h_RV_QLIKE_secondary",
         "C2_vs_C1_next24h_RV_QLIKE_secondary",
-    ],
-    "NEW_OBSERVED_LIQUIDATION_SOURCE": [
+    ]),
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": sorted([
         "C2_vs_B1_OOS_QLIKE_primary",
         "B0_vs_B1_OOS_QLIKE_secondary",
-    ],
-    "HL_LABEL_EXTENSION": [
+    ]),
+    "HL_LABEL_EXTENSION": sorted([
         "C2_vs_B1_OOS_QLIKE_primary",
         "B0_vs_B1_OOS_QLIKE_secondary",
-    ],
-    "EXPANSION_ROBUSTNESS_REDO": [
+    ]),
+    "EXPANSION_ROBUSTNESS_REDO": sorted([
         "LOIO_ge_6_of_8_primary",
         "placebo_gt_95th_null_secondary",
-    ],
+    ]),
 }
 
 # Outcome-file path markers the executor must never open. Any match is a hard
