@@ -1,25 +1,25 @@
-# AGENT HANDOFF — 2026-11-18T03:23:41Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T03:26:30Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:23:41Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:26:30Z)
 
 **State: `ACTIVE_CAMPAIGN`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T030427Z` (read-only data audit + Design A/B/C gap-closure designs + Track B modeled-boundary protocol; gate post-capture PASS with `handoff_stale=false`).
 
-- **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — Track C volatility/stress forecasting (funding extremes + RV vs RV-only baseline, QLIKE/MAE/RMSE, leakage-resistant OOS) and Track B modeled liquidation-boundary labels from public mark-price data. Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500).**
+- **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — **Track C volatility/stress forecasting** (funding extremes + RV vs RV-only baseline, QLIKE/MAE/RMSE, leakage-resistant OOS) and **Track B modeled liquidation-boundary labels** from public mark-price data. Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500).**
 - **Program:** `ACTIVE_CAMPAIGN` — `FCLR-VOL-LIQ-FORECAST-01-20261118T023259Z`. Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`).
 - **Frontier/ledger:** CLOSED/recorded (`session_20261118T004445Z` complete). Triggers all `OPEN`, none fired (no trigger-gated work). Campaign proceeds on non-trigger Track C/B cached-data heavy work.
 - **Carried-forward complete Phase-B/C heavy bundle:** `research_state/session_20261116T100533Z/` (self-contained; referenced for gate continuity). Latest heavy session: `research_state/session_20261118T030427Z/`.
 - **Gates (verify first):** `check_handoff_heavywork_gate.py --json` must show `pass=true`, `reason_code=OK`, `handoff_stale=false`, latest = `session_20261118T030427Z`; `check_tracka_scope_registry_drift.py --json` PASS (196/196).
 
 ### Progress this session (2026-11-18T03:04:27Z, `session_20261118T030427Z`, read-only data audit, no network)
-- **Data-sufficiency bottleneck mapped to cached data (concrete):** 5 instruments (BTC/ETH/SOL/XRP/BNB) have funding + mark/index/plain-1h kline caches on disk for **2024-04..2024-12** (`data_coverage_audit_20261118T030427Z.json`). Prior ablation gaps are closeable in design: `instruments 4→5` (add BNBUSDT) and `ok_30d blocks 0→3` (proposed 3x30d chronological tests with 7d purge/embargo in 2024-04..09 window) — see `trackc_extension_design_20261118T030427Z.json` / `trackc_vol_forecast_extend_20261118T030427Z.md`.
+- **Data-sufficiency bottleneck mapped to cached data (concrete):** 5 instruments (BTC/ETH/SOL/XRP/BNB) have funding + mark/index/plain-1h kline caches on disk for **2024-04..2024-12** (`data_coverage_audit_20261118T030427Z.json`). Prior ablation gaps closeable in design: `instruments 4→5` (add BNBUSDT) and `ok_30d blocks 0→3` (proposed 3x30d chronological tests with 7d purge/embargo in 2024-04..09 window) — see `trackc_extension_design_20261118T030427Z.json` / `trackc_vol_forecast_extend_20261118T030427Z.md`.
 - **Provenance constraint:** `scripts/run_funding_ablations.py` confirmatory-provenanced range = 2024-04-01..2024-09-30 (FCLR-015). 2024-10..12 funded but outside that range and overlapping sealed FCLR-003 test context → **exploratory-only with explicit audit/caveat**; confirmatory-intent paths refuse unprovenanced ranges. Q1 2024 has no funding files (RV-only extension feasible only).
 - **Track B (modeled boundaries):** feasibility/protocol documented for synthetic breach labels from cached mark-price ZIP/CSV/dir (no parquet, no observed liquidations) — `trackb_boundary_labels_20261118T030427Z.{md,json}`.
 - **Execution blocker (environmental):** `numpy`/`pandas`/`scipy` absent; forecast/ablation scripts import at module level. **Estimand execution not completed this session** (no installs permitted). Full unittest discovery is environment-dependent (missing-numpy errors pre-existing; not green).
 
 ### Bottlenecks removed / reinforced in this handoff
-- **Estimand-execution blocker (numpy/pandas/scipy missing, installs prohibited):** cannot be removed by install. Session must not stall on it. Stdlib-only fallback paths below are mandatory substitutes that produce real quantitative/leakage artifacts without the numerical stack.
+- **Estimand-execution blocker (numpy/pandas/scipy missing, installs prohibited):** cannot be removed by install. Session must not stall on it. Stdlib-only fallback paths below are **mandatory substitutes** that produce real quantitative/leakage artifacts without the numerical stack.
 - **Root churn cap (500/500):** all new artifacts go into `research_state/session_<UTC>/` only. Zero root `research_state/*.md|json` additions.
 - **Handoff freshness:** latest session id recorded before final gate capture; `handoff_stale=false` required.
 - **Heavy-work non-avoidance:** gate captures alone do NOT satisfy heavy work. A session producing only `check_*` outputs with no new `design_a_leakage_audit` or Track B label artifact has not done heavy work and must not report completion.
@@ -37,8 +37,8 @@ python3 scripts/next_campaign_status.py --json | jq '{markfund_frontier,disjoint
 
 The numerical estimand (Design A Track C) is **blocked** by missing `numpy`/`pandas`/`scipy` (environmental, installs prohibited). It cannot run in this environment. The fallback heavy work below is stdlib-only and **required** — a session that produces only gate captures without a new quantitative/leakage artifact has not done heavy work.
 
-- **Primary fallback (still required):** produce a **stdlib-only** zip/csv data-completeness & leakage-audit artifact for Design A (bar counts per symbol/month/kind, gaps, split boundary integrity, funding alignment checks, tested-window non-conflict verification for 2024-04..2024-09), using only cached ZIP/CSV/dir. Emit `design_a_leakage_audit_<UTC>.json` + `.md` in session dir.
-- **Secondary fallback (still required):** implement a **stdlib Track B** mark-price breach-label generator for a frozen scenario set (leverage [5,10,20] × long/short × horizon [4h,24h] over a small cached window, e.g. one funded month in 2024-04..09), emitting session-local label CSV/JSON. Clearly label synthetic/modeled, not observed.
+- **Primary fallback (REQUIRED):** produce a **stdlib-only** zip/csv data-completeness & leakage-audit artifact for Design A (bar counts per symbol/month/kind, gaps, split boundary integrity, funding alignment checks, tested-window non-conflict verification for 2024-04..2024-09), using only cached ZIP/CSV/dir. Emit `design_a_leakage_audit_<UTC>.json` + `.md` in session dir.
+- **Secondary fallback (REQUIRED):** implement a **stdlib Track B** mark-price breach-label generator for a frozen scenario set (leverage [5,10,20] × long/short × horizon [4h,24h] over a small cached window, e.g. one funded month in 2024-04..09), emitting session-local label CSV/JSON. Clearly label synthetic/modeled, not observed.
 - **If numerical runtime becomes available (upgrade path):** freeze an outcome-blind exploratory prereg in session dir for **Design A** (`trackc_extension_design_20261118T030427Z.json`: 5 instruments BTC/ETH/SOL/XRP/BNB, 2024-04-01..2024-09-30, 3 splits × 30d non-overlapping tests, 7d purge/embargo, expanding train, A_rv_only/B_rv_signed/C_rv_abs/D_rv_signed_abs/E_rv_funding_trails, QLIKE/MAE/RMSE, block-bootstrap ΔQLIKE CIs). Verify per-symbol bar completeness and tested-window/leakage non-conflict, then run and emit per-split metrics + evaluation summary in session dir. Label **EXPLORATORY/PILOT**; do not claim confirmatory/promotion.
 
 **Step 3 — Record, verify, hand off:**
@@ -79,7 +79,7 @@ The numerical estimand (Design A Track C) is **blocked** by missing `numpy`/`pan
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T03:20:59Z
+## Verification record — 2026-11-18T03:26:00Z
 - `check_handoff_heavywork_gate.py --json` (pre-handoff-update): **PASS** `pass=true`, `reason_code=OK`, `handoff_stale=false`, latest=`session_20261118T030427Z`; post-update capture: see `session_20261118T030427Z/heavywork_gate_post.json`.
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196) — `session_20261118T030427Z/scope_drift.json`.
 - `next_campaign_status.py --json`: captured in `session_20261118T030427Z/next_campaign_status.json` (frontier closed, no actionable preregs; Hyperliquid bulk/extended frontiers exhausted; mark+funding-only n_feasible=0, max_mutually_non_overlapping=1 < 3).
