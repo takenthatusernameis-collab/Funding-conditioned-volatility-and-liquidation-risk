@@ -1,87 +1,77 @@
-# AGENT HANDOFF — 2026-11-18T02:32:59Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T03:04:27Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T02:32:59Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:04:27Z)
 
-**State verified clean (2026-11-18T02:32:59Z). Program `ACTIVE_CAMPAIGN`. Heavy work is mandatory for the next session — do not stop cleanly.**
+**State: `ACTIVE_CAMPAIGN`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T030427Z` (this handoff records it before final gate capture).
 
-- Repo: `Funding-conditioned-volatility-and-liquidation-risk`. Repo-priority P0 = **Track C volatility/stress forecasting + Track B modeled liquidation-boundary labels**, using only admissible public price/mark-price data already on disk (no network, no parquet engine, no new root artifacts). This is the core mission: do funding extremes + realized volatility improve out-of-sample forecasts of future volatility and liquidation-boundary stress vs an RV-only baseline?
-- Program: `ACTIVE_CAMPAIGN` — `FCLR-VOL-LIQ-FORECAST-01-20261118T023259Z`. Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null` — triggers remain OPEN; campaign proceeds on Track C/B cached-data work, not trigger-gated outcomes).
-- Campaign `FCLR-LEDGER-INTEGRITY-02-20261118T004445Z` is **COMPLETE** (`research_state/session_20261118T004445Z/`). Frontier closed: `n_individually_feasible=1` (`2025-01`), `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=False`.
-- Gates (verified this session): `check_handoff_heavywork_gate.py --json` **PASS** (`reason_code=OK`, `handoff_stale=false`, `failures=[]`, latest `session_20261118T004445Z`); `check_tracka_scope_registry_drift.py --json` **PASS** (196/196).
-- Triggers all `OPEN`, none fired — no trigger-gated work. Campaign runs on non-trigger Track C/B heavy work instead.
-- RV baseline: complete for 2024 Q1 (4 instruments: BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT). Funding ablations PILOT/INCONCLUSIVE — data sufficiency not met: instruments=4 < 5, 0/3 required 30-day non-overlapping test blocks. **Next campaign must close these gaps.**
+- **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — Track C volatility/stress forecasting (funding extremes + RV vs RV-only baseline, QLIKE/MAE/RMSE, leakage-resistant OOS) and Track B modeled liquidation-boundary labels from public mark-price data. Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500).**
+- **Program:** `ACTIVE_CAMPAIGN` — `FCLR-VOL-LIQ-FORECAST-01-20261118T023259Z`. Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`).
+- **Frontier/ledger:** CLOSED/recorded (`session_20261118T004445Z` complete). Triggers all `OPEN`, none fired (no trigger-gated work). Campaign proceeds on non-trigger Track C/B cached-data heavy work.
+- **Carried-forward complete Phase-B/C heavy bundle:** `research_state/session_20261116T100533Z/` (self-contained; referenced for gate continuity). Latest heavy session: `research_state/session_20261118T030427Z/`.
+- **Gates (verify first):** `check_handoff_heavywork_gate.py --json` must show `pass=true`, `reason_code=OK`, `handoff_stale=false`, latest = `session_20261118T030427Z`; `check_tracka_scope_registry_drift.py --json` PASS (196/196).
 
-## Next session first/only action (run once, then stop only if blocked with recorded evidence)
+### Progress this session (2026-11-18T03:04:27Z, `session_20261118T030427Z`, read-only data audit, no network)
+- **Data-sufficiency bottleneck mapped to cached data (concrete):** 5 instruments (BTC/ETH/SOL/XRP/BNB) have funding + mark/index/plain-1h kline caches on disk for **2024-04..2024-12** (`data_coverage_audit_20261118T030427Z.json`). Prior ablation gaps are closeable in design: `instruments 4→5` (add BNBUSDT) and `ok_30d blocks 0→3` (proposed 3x30d chronological tests with 7d purge/embargo in 2024-04..09 window) — see `trackc_extension_design_20261118T030427Z.json` / `trackc_vol_forecast_extend_20261118T030427Z.md`.
+- **Provenance constraint:** `scripts/run_funding_ablations.py` confirmatory-provenanced range = 2024-04-01..2024-09-30 (FCLR-015). 2024-10..12 funded but outside that range and overlapping sealed FCLR-003 test context → **exploratory-only with explicit audit/caveat**; confirmatory-intent paths refuse unprovenanced ranges. Q1 2024 has no funding files (RV-only extension feasible only).
+- **Track B (modeled boundaries):** feasibility/protocol documented for synthetic breach labels from cached mark-price ZIP/CSV/dir (no parquet, no observed liquidations) — `trackb_boundary_labels_20261118T030427Z.{md,json}`.
+- **Execution blocker (environmental):** `numpy`/`pandas`/`scipy` absent; forecast/ablation scripts import at module level. **Estimand execution not completed this session** (no installs permitted). Full unittest discovery is environment-dependent (missing-numpy errors pre-existing; not green).
 
-**Step 1 — Run gate checks (read-only, no network):**
+## Next session — first/only actions (run once; produce NEW artifacts in a new session dir, then stop only if blocked with recorded evidence)
+
+**Step 1 — Gates/status (read-only):**
 ```bash
 python3 scripts/check_handoff_heavywork_gate.py --json | jq '{pass,reason_code,handoff_stale,latest_session_id,failures,root_count,root_count_cap}'
 python3 scripts/check_tracka_scope_registry_drift.py --json | jq '{pass,reason_code}'
-python3 scripts/next_campaign_status.py --json | jq '.markfund_frontier | {n_individually_feasible,max_mutually_non_overlapping,campaign_feasible_non_overlapping,individually_feasible_months}'
+python3 scripts/next_campaign_status.py --json | jq '{markfund_frontier,disjoint_block_frontier,actionable_preregs}'
 ```
 
-**Step 2 — Execute heavy work (choose one, must produce new artifacts in `research_state/session_<UTC>/` only — root is at 500/500):**
-- **Track C (primary):** Extend volatility forecasting beyond 2024 Q1 using existing cached ZIP/CSV data on disk. Add additional instruments/splits to close the `instruments=4 < 5` and `ok_30d=0 < 3` sufficiency gaps. Compare funding+RV features vs RV-only baseline with QLIKE/MAE/RMSE. Output: `research_state/session_<UTC>/trackc_vol_forecast_extend_<UTC>.{md,json}` + evaluation summary.
-- **Track B (secondary):** Build modeled liquidation-boundary-breach labels from public mark-price data on disk (ZIP/CSV twins only — no parquet). Predefine hypothetical leverage/margin scenarios; calculate whether observed mark-price paths cross the modeled boundary. Clearly label as synthetic/modeled, not observed liquidation. Output: `research_state/session_<UTC>/trackb_boundary_labels_<UTC>.{md,json}`.
+**Step 2 — Execute heavy work (choose highest-value feasible path; write ALL new artifacts to `research_state/session_<UTC>/` only):**
+- **Primary (Track C, estimand execution):** in a numpy/pandas/scipy-capable approved environment (no network install), freeze an **outcome-blind exploratory prereg** in session dir for **Design A** (`trackc_extension_design_20261118T030427Z.json`: 5 instruments BTC/ETH/SOL/XRP/BNB, 2024-04-01..2024-09-30, 3 splits × 30d non-overlapping tests, 7d purge/embargo, expanding train, A_rv_only/B_rv_signed/C_rv_abs/D_rv_signed_abs/E_rv_funding_trails, QLIKE/MAE/RMSE, block-bootstrap ΔQLIKE CIs). Verify per-symbol bar completeness and tested-window/leakage non-conflict, then run and emit per-split metrics + evaluation summary in session dir. Label **EXPLORATORY/PILOT**; do not claim confirmatory/promotion.
+- **If numerical runtime unavailable (fallback heavy work, still required):** (a) produce a **stdlib-only** zip/csv data-completeness & leakage-audit artifact for Design A (bar counts, gaps, split boundary integrity, funding alignment checks) using only cached ZIP/CSV/dir; and/or (b) implement a stdlib Track B mark-price breach-label generator for a frozen scenario set over a small cached window, emitting session-local label CSV/JSON (modeled/synthetic only). Record exact blocker preventing full estimand evaluation.
+- **Secondary (Track B):** freeze outcome-blind modeled-breach prereg and generate synthetic boundary labels from cached mark-price data (ZIP/CSV) for predefined L/side/mmr/horizon; clearly label synthetic/modeled, not observed.
 
-**Step 3 — Record results and update handoff:**
-- Create `research_state/session_<UTC>/` (real UTC) with all new artifacts. **Record its id in this handoff before final gate capture.**
-- Re-run Step 1 gate checks; confirm `handoff_stale=false`, `pass=true`.
-- Targeted tests: `python3 -m unittest discover tests -q` (record count/errors/failures/EXIT; missing-`numpy` errors are environmental, not green).
-- Update only `AGENT_HANDOFF.md`; preserve sole-handoff contract.
+**Step 3 — Record, verify, hand off:**
+- Create `research_state/session_<UTC>/` with `evidence_audit_<UTC>.md`, outputs, and gate captures. Record its id in this handoff **before** final gate capture (`handoff_stale=false`).
+- Run targeted tests and/or `python3 -m unittest discover -q` (record counts/errors/failures/EXIT; missing-numpy/environmental errors are not green). Re-run gates; confirm PASS. Update only `AGENT_HANDOFF.md`.
 
-## If and only if a reopen trigger becomes machine-satisfied (outcome-gated heavy work)
-
-1. Create `research_state/session_<UTC>/` (real UTC) and record its id in this handoff **before** final gate capture. Root `research_state/` is at 500/500 — put all new artifacts in the session dir only.
-2. **GATE4_BRANCH_1:** only on `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with `status=RESOLVED_VERIFIED` and `fabricated=false` (human/legal attestation only). Execute Gate 4 Branch 1 protocol per `RESEARCH_PROMPT.md` §16 with outcome-blind prereg before outcomes.
-3. **NEW_OBSERVED_LIQUIDATION_SOURCE:** only on `research_state/<source>_admissibility_audit_<UTC>.{md,json}` proving `status=ADMISSIBLE`, `observed_labels=true`, unauthenticated, provenance/license/venue-consistent, ≥5 instruments and (≥3 blocks or ≥1 complete month). Do admissibility audit BEFORE prereg/outcomes.
-4. **HL_LABEL_EXTENSION:** only on verified post-2026-10-31 observed ironflow labels (≥100 days) with `research_state/hl_label_extension_audit_<UTC>.{md,json}`; then run a newly preregistered design per §17.
-5. **EXPANSION_ROBUSTNESS_REDO:** only a newly preregistered design (`research_state/expansion_robustness_redo_prereg_<UTC>.json`) achieving LOIO≥6/8 AND placebo>95th null — **re-scoring sealed 19.04% is forbidden**.
-6. For any triggered path: produce outcome-blind prereg, leakage/overlap audit against consumed windows, execution artifacts, evaluation summary, and gate captures in-session; do not weaken §17.
+## If and only if a reopen trigger becomes machine-satisfied (outcome-gated)
+1. Create `research_state/session_<UTC>/` and record id in handoff before final gate capture.
+2. **GATE4_BRANCH_1:** `fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`, human/legal). Outcome-blind prereg before outcomes.
+3. **NEW_OBSERVED_LIQUIDATION_SOURCE:** `<source>_admissibility_audit_<UTC>.{md,json}` proving `status=ADMISSIBLE`, `observed_labels=true`, unauthenticated, provenance/license/venue-consistent, ≥5 instruments and (≥3 blocks or ≥1 complete month). Admissibility audit BEFORE prereg/outcomes.
+4. **HL_LABEL_EXTENSION:** verified post-2026-10-31 observed ironflow labels (≥100 days) + `hl_label_extension_audit_<UTC>.{md,json}` + newly preregistered design.
+5. **EXPANSION_ROBUSTNESS_REDO:** newly preregistered design achieving LOIO≥6/8 AND placebo>95th null — **re-scoring sealed 19.04% forbidden**.
 
 ## Read first
-
-1. `RESEARCH_PROMPT.md` §1–§5 (mission, constraints, source tracks A/B/C) and §16–§17 (gates).
-2. `research_state/evaluation_summary.md` (RV baseline complete; funding ablations inconclusive; data-sufficiency gaps).
-3. `research_state/fclr_final_structural_closure_20261116T114626.{md,json}` and `research_state/resume_trigger_registry.json`.
-4. `research_state/session_20261118T004445Z/{ledger_audit,frontier_recompute,closure_ledger_backfill,trigger_check,trigger_activation_readiness,evidence_audit}_20261118T004445Z.*`.
-5. `research_state/data_source_registry.json` (Binance ZIPs Track B/C concluded NOT_SUPPORTED for Track A; Hyperliquid alignment untested).
+1. `RESEARCH_PROMPT.md` §1–§6, §16–§17.
+2. `research_state/session_20261118T030427Z/{trackc_extension_design,data_coverage_audit,trackc_vol_forecast_extend,trackb_boundary_labels,evidence_audit}_20261118T030427Z.*`.
+3. `research_state/evaluation_summary.md`, `research_state/data_source_registry.json`, `research_state/fclr_final_structural_closure_20261116T114626.{md,json}`, `research_state/resume_trigger_registry.json`.
+4. `research_state/session_20261118T004445Z/*` (frontier/ledger closed).
 
 ## Bottlenecks removed / prevented
-
-- **Root churn cap (500/500):** all new artifacts go in `research_state/session_<UTC>/` only. No root-level `research_state/*.md|json`. Do not add root files.
-- **Parquet engine absent:** use ZIP/CSV/JSON twins only. `.parquet`-only tasks blocked unless a CSV/JSON/ZIP twin exists. Do not run `git lfs pull` or `pip install` for parquet engines.
-- **Data sufficiency (instruments=4 < 5; ok_30d=0 < 3):** Track C extension must add instruments and 30-day non-overlapping test blocks to close these gaps before any confirmatory claim.
-- **Tested-window ledger omission fixed** (`FCLR-003` 2024-10-02..2024-12-31 in `TESTED_WINDOWS`); frontier honestly closed. Do not regress.
-- **Closure-ledger backfill plan recorded** (`session_20261118T004445Z/closure_ledger_backfill_20261118T004445Z.*`); sealed closure JSON not mutated.
-- **Ledger-integrity campaign 02 complete**; no pending integrity heavy work.
-- **Sole durable handoff authority maintained**; no competing handoff. No empty/phantom sessions required.
+- **Instrument/block planning gap:** concrete 5-instrument, 3x30d-split Design A/B/C specified against cached data (closes planning blocker for stated sufficiency gaps).
+- **Provenance/sealed-window hazard surfaced:** 2024-10..12 and 2025+ confirmatory guards/sealed overlaps explicitly flagged; Design A constrained to provenanced 2024-04..09 window.
+- **Root churn (500/500):** all new artifacts in session dir only. **No parquet engine:** zip/csv/dir only. **No network/installs/LFS.**
+- **Handoff freshness:** this session id recorded here before final gate capture.
+- **Sole durable handoff maintained.**
 
 ## Prohibitions
+- Do not re-run sealed cached-data confirmatory estimands or re-score sealed results (FCLR-014, replication synthesis, design-frontier certs, FCLR-013/010/002/003/009/006/008, frontier verify-06/07/08+, sealed 19.04%).
+- No polling/HF re-probe, no paid/credentialed/manual outcome data, no network installs/fetches, no `git lfs pull`.
+- No mutation of sealed artifacts/closure JSON/`.github/workflows/*`; no root-level `research_state/*.md|json`.
+- No `statsmodels` or unpinned heavy deps in core path. Do not run parquet-only scripts without a CSV/JSON/ZIP twin.
+- Do not treat missing-numpy/environmental discovery errors as green. Never inspect outcomes while producing outcome-blind preregs.
 
-- Do not start or re-run any sealed cached-data confirmatory estimand (FCLR-014, replication synthesis, design-frontier certificates, FCLR-013/010/002/003/009/006/008, frontier verify-06/07/08+, sealed 19.04% re-score).
-- Do not poll, re-probe HuggingFace, use paid/credentialed/manual outcome data, or run network installs/data fetches (`git lfs pull`).
-- Do not mutate sealed artifacts, closure JSON, `.github/workflows/*`, or add root-level `research_state/*.md|json` (root 500/500 cap).
-- Do not add `statsmodels` or unpinned heavy deps to core path.
-- Do not run `scripts/fclr_liq_010_confirm.py` (parquet-only; no engine installed).
-- No parquet engine installed; `.parquet`-only tasks blocked unless CSV/JSON/ZIP twin exists (use ZIP-aware readers where applicable). Unresolved Git-LFS pointers remain unresolved — do not block on them.
-- Do not treat environment-dependent missing-`numpy` discovery errors as green; discovery baseline was EXIT 1 in prior capture.
-- Never inspect outcome data while producing outcome-blind trigger artifacts/preregs.
-- Record any new session id in this handoff before final gate capture to keep `handoff_stale=false`.
-
-## Reopen triggers (machine-checkable — all currently OPEN)
-
-- `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status: RESOLVED_VERIFIED`, `fabricated: false`) — human/legal only.
-- `NEW_OBSERVED_LIQUIDATION_SOURCE`: `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status: ADMISSIBLE`, `observed_labels: true`, ≥5 instruments, ≥3 blocks or ≥1 complete month).
+## Reopen triggers (machine-checkable — all OPEN)
+- `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`).
+- `NEW_OBSERVED_LIQUIDATION_SOURCE`: `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status=ADMISSIBLE`, `observed_labels=true`, ≥5 instruments, ≥3 blocks or ≥1 complete month).
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
-- `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json` (LOIO≥6/8 AND placebo>95th null; no sealed re-score).
+- `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T02:32:59Z
-
-- `check_handoff_heavywork_gate.py --json`: PASS (`reason_code=OK`, `handoff_stale=false`, `failures=[]`, latest `session_20261118T004445Z`, root_count=500/500).
-- `check_tracka_scope_registry_drift.py --json`: PASS (196/196).
-- `next_campaign_status.py --json`: `markfund_frontier` closed (`n_individually_feasible=1`, `individually_feasible_months=["2025-01"]`, `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=false`); `disjoint_block_frontier.n_feasible=0`.
-- Triggers: all OPEN, `data_through=2026-10`, `consecutive_absent=3`, 2026-11/12 & 2027-01 `CONFIRMED_ABSENT`. No machine-satisfied reopen condition. Campaign proceeds on Track C/B cached-data heavy work.
-- `AGENT_HANDOFF.md` remains sole durable handoff; no sealed artifacts/workflows/registries modified. Program state: `ACTIVE_CAMPAIGN` (heavy work mandatory, not optional).
+## Verification record — 2026-11-18T03:04:27Z
+- `check_handoff_heavywork_gate.py --json` (pre-handoff-update): **FAIL** `HANDOFF_STALE_LATEST_SESSION:session_20261118T030427Z` (expected until handoff records this session). Post-update capture: see `session_20261118T030427Z/heavywork_gate_post.json`.
+- `check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196) — `session_20261118T030427Z/scope_drift.json`.
+- `next_campaign_status.py --json`: captured in `session_20261118T030427Z/next_campaign_status.json` (frontier closed, no actionable preregs).
+- `python3 -m unittest discover -q`: not run to completion in-session (environmental missing-numpy baseline; prior recorded 1126/62 errors/9 failures/14 skipped/EXIT 1). No targeted tests executed beyond gates; estimand scripts blocked by missing numpy/pandas/scipy.
+- Artifacts (session-only): data inventory/coverage audit, Track C extension designs + status, Track B boundary protocol/feasibility, evidence audit, gate/status captures. No sealed artifacts/workflows/registries modified. `AGENT_HANDOFF.md` sole durable handoff updated; session id recorded.

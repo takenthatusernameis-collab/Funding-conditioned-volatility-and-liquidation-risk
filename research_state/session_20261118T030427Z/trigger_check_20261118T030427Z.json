@@ -1,0 +1,18 @@
+{
+  "session_id": "session_20261118T030427Z",
+  "timestamp_utc": "2026-11-18T03:04:27Z",
+  "network_used": false,
+  "sources_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "triggers": {
+    "GATE4_BRANCH_1": {"status": "OPEN", "machine_satisfied": false, "note": "no fclr016_v5_terms_evidence_RESOLVED_* with status=RESOLVED_VERIFIED,fabricated=false observed"},
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": {"status": "OPEN", "machine_satisfied": false, "note": "no admissible observed-liquidation source audit satisfying criteria observed"},
+    "HL_LABEL_EXTENSION": {"status": "OPEN", "machine_satisfied": false, "note": "no hl_label_extension_audit satisfying post-2026-10-31 observed >=100d depth observed"},
+    "EXPANSION_ROBUSTNESS_REDO": {"status": "OPEN", "machine_satisfied": false, "note": "no expansion_robustness_redo_prereg + evaluation meeting LOIO>=6/8 AND placebo>95th null observed"}
+  },
+  "ironflow_monitor": {"data_through": "2026-10", "consecutive_absent": 3, "confirmed_absent": ["2026-11", "2026-12", "2027-01"]},
+  "any_trigger_fired": false,
+  "campaign_proceeds_on": "non-trigger Track C/B cached-data heavy work"
+}

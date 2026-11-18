@@ -1,0 +1,78 @@
+{
+  "bnbusdt_as_5th_instrument": true,
+  "common_funding_backed_months_all5": [
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12"
+  ],
+  "common_funding_backed_ranges_all5": [
+    [
+      "2024-04",
+      "2024-12",
+      275
+    ]
+  ],
+  "design_a_recompute": {
+    "feasible_by_calendar": true,
+    "instruments": 5,
+    "ok_30d_non_overlapping_test_blocks": 3,
+    "provenanced_confirmatory_range": true,
+    "splits": [
+      {
+        "embargo_days": 7,
+        "test_days": 30,
+        "train_days": 45
+      },
+      {
+        "embargo_days": 7,
+        "test_days": 30,
+        "train_days": 82
+      },
+      {
+        "embargo_days": 7,
+        "test_days": 30,
+        "train_days": 119
+      }
+    ],
+    "window": "2024-04-01..2024-09-30",
+    "window_days": 183
+  },
+  "gap_closure_design_feasible": {
+    "instruments_ge_5": true,
+    "ok_30d_non_overlapping_test_blocks_ge_3": true,
+    "window": "2024-04..2024-09 (5 instruments, funded, within PROVENANCED_CONFIRMATORY_RANGES 2024-04-01..2024-09-30)"
+  },
+  "input": "research_state/session_20261118T030427Z/data_coverage_audit_20261118T030427Z.json",
+  "instruments_evaluated": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "network_used": false,
+  "notes": [
+    "Deterministic calendar/coverage recompute from session audit; no outcomes inspected.",
+    "Bar-level completeness and tested-window conflict must be verified before execution.",
+    "2024-10..2024-12 funded but outside provenanced confirmatory range and overlap sealed FCLR-003 context; exploratory-only if used."
+  ],
+  "prior_ablation_state": {
+    "instruments": 4,
+    "ok_30d_non_overlapping_test_blocks": 0,
+    "split_test_days": [
+      14,
+      14,
+      14
+    ],
+    "verdict": "PILOT/INCONCLUSIVE"
+  },
+  "q1_funding_ablation_feasible": false,
+  "q1_rv_only_5inst_feasible_by_coverage": true,
+  "script": "recompute_trackc_sufficiency_20261118T030427Z.py"
+}

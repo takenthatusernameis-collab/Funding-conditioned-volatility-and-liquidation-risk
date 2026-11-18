@@ -1,0 +1,37 @@
+{
+  "session_id": "session_20261118T030427Z",
+  "timestamp_utc": "2026-11-18T03:04:27Z",
+  "track": "B_modeled_boundary_breach",
+  "network_used": false,
+  "parquet_used": false,
+  "observed_liquidation_labels": false,
+  "label_type": "synthetic_modeled_boundary_breach",
+  "data_sources_on_disk": {
+    "mark_price_klines": "research_state/data_cache/<SYMBOL>_YYYY_MM/markPriceKlines-YYYY-MM-DD/ (zip/csv/dir)",
+    "symbols_available_example": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+    "coverage_note": "Dense daily mark kline dirs cached across 2024-01..2026-11 for core symbols; per-bar completeness verification required before run"
+  },
+  "proposed_scenarios": {
+    "status": "PROPOSED_NOT_FROZEN",
+    "leverage_levels_example": [5, 10, 20],
+    "sides": ["long", "short"],
+    "margin_mode": "isolated_hypothetical",
+    "mmr_source": "to_be_documented_from_public_contract_params_or_explicit_approximation",
+    "horizon_examples": ["4h", "24h"]
+  },
+  "leakage_controls": [
+    "chronological_splits",
+    "purge_embargo_ge_7d",
+    "train_only_normalization",
+    "no_future_mark_in_features",
+    "horizon_labels_use_tplus1_to_tplusH_only",
+    "no_sealed_holdout_reuse"
+  ],
+  "feasibility": "feasible_on_cached_mark_zip_csv_subject_to_completeness_check",
+  "execution_status": "NOT_EXECUTED",
+  "blockers": [
+    "numpy_pandas_scipy_absent_for_downstream_forecast_eval",
+    "outcome_blind_prereg_not_frozen_this_session"
+  ],
+  "scientific_caveat": "Modeled breaches do not reconstruct account-specific liquidation mechanics or observed forced liquidations; report as synthetic proxy only."
+}

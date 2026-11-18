@@ -1,0 +1,610 @@
+{
+  "symbols": {
+    "ADAUSDT": {
+      "2024_01": null,
+      "2024_02": null,
+      "2024_03": null,
+      "2024_04": null,
+      "2024_05": null,
+      "2024_06": null,
+      "2024_07": null,
+      "2024_08": null,
+      "2024_09": null,
+      "2024_10": null,
+      "2024_11": null,
+      "2024_12": null
+    },
+    "AVAXUSDT": {
+      "2024_01": null,
+      "2024_02": null,
+      "2024_03": null,
+      "2024_04": null,
+      "2024_05": null,
+      "2024_06": null,
+      "2024_07": null,
+      "2024_08": null,
+      "2024_09": null,
+      "2024_10": null,
+      "2024_11": null,
+      "2024_12": null
+    },
+    "BNBUSDT": {
+      "2024_01": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_02": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 145,
+        "premium": true
+      },
+      "2024_03": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_04": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_05": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_06": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_07": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_08": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_09": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_10": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      },
+      "2024_11": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 33,
+        "premium": false
+      },
+      "2024_12": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      }
+    },
+    "BTCUSDT": {
+      "2024_01": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_02": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 145,
+        "premium": true
+      },
+      "2024_03": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_04": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_05": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_06": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_07": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_08": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_09": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_10": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_11": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_12": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      }
+    },
+    "DOGEUSDT": {
+      "2024_01": null,
+      "2024_02": null,
+      "2024_03": null,
+      "2024_04": null,
+      "2024_05": null,
+      "2024_06": null,
+      "2024_07": null,
+      "2024_08": null,
+      "2024_09": null,
+      "2024_10": null,
+      "2024_11": null,
+      "2024_12": null
+    },
+    "ETHUSDT": {
+      "2024_01": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_02": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 145,
+        "premium": true
+      },
+      "2024_03": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_04": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_05": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_06": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_07": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_08": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_09": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_10": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 111,
+        "premium": true
+      },
+      "2024_11": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 33,
+        "premium": false
+      },
+      "2024_12": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      }
+    },
+    "LINKUSDT": {
+      "2024_01": null,
+      "2024_02": null,
+      "2024_03": null,
+      "2024_04": null,
+      "2024_05": null,
+      "2024_06": null,
+      "2024_07": null,
+      "2024_08": null,
+      "2024_09": null,
+      "2024_10": null,
+      "2024_11": null,
+      "2024_12": null
+    },
+    "SOLUSDT": {
+      "2024_01": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_02": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 145,
+        "premium": true
+      },
+      "2024_03": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_04": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_05": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_06": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_07": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_08": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_09": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_10": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      },
+      "2024_11": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 33,
+        "premium": false
+      },
+      "2024_12": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      }
+    },
+    "XRPUSDT": {
+      "2024_01": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_02": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 145,
+        "premium": true
+      },
+      "2024_03": {
+        "exists": true,
+        "funding": false,
+        "index": true,
+        "kline": true,
+        "mark": true,
+        "n_files": 155,
+        "premium": true
+      },
+      "2024_04": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_05": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_06": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_07": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_08": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 127,
+        "premium": true
+      },
+      "2024_09": {
+        "exists": true,
+        "funding": true,
+        "index": true,
+        "kline": false,
+        "mark": true,
+        "n_files": 123,
+        "premium": true
+      },
+      "2024_10": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      },
+      "2024_11": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 33,
+        "premium": false
+      },
+      "2024_12": {
+        "exists": true,
+        "funding": true,
+        "index": false,
+        "kline": false,
+        "mark": true,
+        "n_files": 34,
+        "premium": false
+      }
+    }
+  }
+}

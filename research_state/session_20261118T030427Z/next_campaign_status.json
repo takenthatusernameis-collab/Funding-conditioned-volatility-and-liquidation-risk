@@ -1,0 +1,368 @@
+{
+ "actionable_preregs": [],
+ "ready_funding_backed_months": [
+  {
+   "month": "2024-04",
+   "mark_csv": 150,
+   "premium_csv": 150,
+   "index_csv": 150,
+   "funding_available": true,
+   "inside_tested_window": false,
+   "tested_by": null
+  },
+  {
+   "month": "2024-05",
+   "mark_csv": 155,
+   "premium_csv": 155,
+   "index_csv": 155,
+   "funding_available": true,
+   "inside_tested_window": false,
+   "tested_by": null
+  },
+  {
+   "month": "2025-01",
+   "mark_csv": 155,
+   "premium_csv": 155,
+   "index_csv": 155,
+   "funding_available": true,
+   "inside_tested_window": false,
+   "tested_by": null
+  }
+ ],
+ "no_funding_months": [
+  {
+   "month": "2024-01",
+   "mark_csv": 155,
+   "premium_csv": 155,
+   "index_csv": 155,
+   "funding_available": false,
+   "inside_tested_window": false,
+   "tested_by": null
+  },
+  {
+   "month": "2024-02",
+   "mark_csv": 145,
+   "premium_csv": 145,
+   "index_csv": 145,
+   "funding_available": false,
+   "inside_tested_window": false,
+   "tested_by": null
+  },
+  {
+   "month": "2024-03",
+   "mark_csv": 155,
+   "premium_csv": 155,
+   "index_csv": 155,
+   "funding_available": false,
+   "inside_tested_window": false,
+   "tested_by": null
+  }
+ ],
+ "design_feasibility": {
+  "runs": [
+   {
+    "months": [
+     "2024-04",
+     "2024-05"
+    ],
+    "span_days": 61,
+    "feasible": false
+   },
+   {
+    "months": [
+     "2025-01"
+    ],
+    "span_days": 31,
+    "feasible": false
+   }
+  ],
+  "any_feasible": false,
+  "min_design_days": 127
+ },
+ "disjoint_block_frontier": {
+  "blocks": [
+   {
+    "month": "2024-04",
+    "train_start": "2024-02-24T00:00:00Z",
+    "train_end": "2024-03-24T23:00:00Z",
+    "embargo_start": "2024-03-25T00:00:00Z",
+    "embargo_end": "2024-03-31T23:00:00Z",
+    "test_start": "2024-04-01T00:00:00Z",
+    "test_end": "2024-04-30T23:00:00Z",
+    "train_months": [
+     "2024-02",
+     "2024-03"
+    ],
+    "test_days": 30,
+    "train_days": 30,
+    "embargo_days": 7,
+    "missing_train_months": [
+     "2024-02:missing_or_unfunded",
+     "2024-03:missing_or_unfunded"
+    ],
+    "feasible": false,
+    "reason": "2024-02:missing_or_unfunded; 2024-03:missing_or_unfunded"
+   },
+   {
+    "month": "2024-05",
+    "train_start": "2024-03-25T00:00:00Z",
+    "train_end": "2024-04-23T23:00:00Z",
+    "embargo_start": "2024-04-24T00:00:00Z",
+    "embargo_end": "2024-04-30T23:00:00Z",
+    "test_start": "2024-05-01T00:00:00Z",
+    "test_end": "2024-05-31T23:00:00Z",
+    "train_months": [
+     "2024-03",
+     "2024-04"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7,
+    "missing_train_months": [
+     "2024-03:missing_or_unfunded"
+    ],
+    "feasible": false,
+    "reason": "2024-03:missing_or_unfunded"
+   },
+   {
+    "month": "2025-01",
+    "train_start": "2024-11-25T00:00:00Z",
+    "train_end": "2024-12-24T23:00:00Z",
+    "embargo_start": "2024-12-25T00:00:00Z",
+    "embargo_end": "2024-12-31T23:00:00Z",
+    "test_start": "2025-01-01T00:00:00Z",
+    "test_end": "2025-01-31T23:00:00Z",
+    "train_months": [
+     "2024-11",
+     "2024-12"
+    ],
+    "test_days": 31,
+    "train_days": 30,
+    "embargo_days": 7,
+    "missing_train_months": [
+     "2024-11:missing_or_unfunded",
+     "2024-12:missing_or_unfunded"
+    ],
+    "feasible": false,
+    "reason": "2024-11:missing_or_unfunded; 2024-12:missing_or_unfunded"
+   }
+  ],
+  "feasible_blocks": [],
+  "n_feasible": 0,
+  "any_feasible": false,
+  "campaign_feasible": false,
+  "min_blocks": 3,
+  "min_train_days": 30,
+  "min_embargo_days": 7,
+  "min_test_days": 30
+ },
+ "markfund_frontier": {
+  "estimand": "mark+funding-only",
+  "min_blocks_required": 3,
+  "min_design_days": 127,
+  "block_rule": {
+   "train_days": 30,
+   "embargo_days": 7,
+   "test_days": 30,
+   "mutual_non_overlap_window": "[train_start, test_end]"
+  },
+  "tested_windows_source": "TESTED_WINDOWS",
+  "candidate_test_months": [
+   {
+    "test_month": "2024-04",
+    "train_start": "2024-02-24",
+    "train_end": "2024-03-24",
+    "embargo_start": "2024-03-25",
+    "embargo_end": "2024-03-31",
+    "test_start": "2024-04-01",
+    "test_end": "2024-04-30",
+    "block_window": [
+     "2024-02-24",
+     "2024-04-30"
+    ],
+    "train_months": [
+     "2024-02",
+     "2024-03"
+    ],
+    "individually_feasible": false,
+    "incomplete_train_months": [
+     "2024-02",
+     "2024-03"
+    ],
+    "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+    "test_month_inside_tested_window": false
+   },
+   {
+    "test_month": "2024-05",
+    "train_start": "2024-03-25",
+    "train_end": "2024-04-23",
+    "embargo_start": "2024-04-24",
+    "embargo_end": "2024-04-30",
+    "test_start": "2024-05-01",
+    "test_end": "2024-05-31",
+    "block_window": [
+     "2024-03-25",
+     "2024-05-31"
+    ],
+    "train_months": [
+     "2024-03",
+     "2024-04"
+    ],
+    "individually_feasible": false,
+    "incomplete_train_months": [
+     "2024-03"
+    ],
+    "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+    "test_month_inside_tested_window": false
+   },
+   {
+    "test_month": "2025-01",
+    "train_start": "2024-11-25",
+    "train_end": "2024-12-24",
+    "embargo_start": "2024-12-25",
+    "embargo_end": "2024-12-31",
+    "test_start": "2025-01-01",
+    "test_end": "2025-01-31",
+    "block_window": [
+     "2024-11-25",
+     "2025-01-31"
+    ],
+    "train_months": [
+     "2024-11",
+     "2024-12"
+    ],
+    "individually_feasible": true,
+    "incomplete_train_months": [],
+    "estimator_scope": "mark+funding-only (B0/B1/C1; no premium/index C2 terms)",
+    "test_month_inside_tested_window": false
+   }
+  ],
+  "individually_feasible_months": [
+   "2025-01"
+  ],
+  "n_individually_feasible": 1,
+  "overlapping_pairs": [],
+  "n_overlapping_pairs": 0,
+  "max_mutually_non_overlapping": 1,
+  "non_overlapping_selection": [
+   "2025-01"
+  ],
+  "campaign_feasible_non_overlapping": false,
+  "any_individually_feasible": true,
+  "contiguous_runs_untested_complete_mf_months": [
+   {
+    "months": [
+     "2024-04",
+     "2024-05"
+    ],
+    "span_days": 61,
+    "feasible_ge_min_design_days": false
+   },
+   {
+    "months": [
+     "2025-01"
+    ],
+    "span_days": 31,
+    "feasible_ge_min_design_days": false
+   }
+  ],
+  "any_contiguous_run_ge_min_design_days": false
+ },
+ "hyperliquid_bulk_frontier": {
+  "present": {
+   "candles_1h": [
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04"
+   ],
+   "funding": [
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04"
+   ],
+   "open_interest": [
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04"
+   ],
+   "liquidations": [
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04"
+   ]
+  },
+  "runs": [
+   {
+    "start": "2025-05-01",
+    "end": "2025-05-24",
+    "span_days": 24,
+    "feasible": false,
+    "feasible_forward": false
+   }
+  ],
+  "any_feasible": false,
+  "any_forward_feasible": false,
+  "min_design_days": 127,
+  "min_forward_design_days": 97
+ },
+ "hyperliquid_extended_frontier": {
+  "candle_coins": 17,
+  "funding_coins": 17,
+  "event_months": 18,
+  "usable_months": [
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10"
+  ],
+  "runs": [],
+  "any_feasible": false,
+  "any_forward_feasible": false,
+  "min_design_days": 127,
+  "min_forward_design_days": 97
+ }
+}

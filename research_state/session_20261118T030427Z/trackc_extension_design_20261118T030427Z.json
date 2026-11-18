@@ -1,0 +1,206 @@
+{
+  "designs": [
+    {
+      "chronological": true,
+      "data_window": "2024-04-01..2024-09-30",
+      "horizon": "24h forward RV",
+      "id": "TRACKC_EXT_DESIGN_A_EXPLORATORY",
+      "instruments": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "label": "5-instrument funding ablation extension, provenanced 2024-04..09 window",
+      "leakage_controls": [
+        "chronological splits",
+        "7d purge/embargo",
+        "train-only normalization",
+        "funding last-known at/before hour",
+        "trailing stats past-only",
+        "no sealed-holdout reuse"
+      ],
+      "metrics": [
+        "QLIKE_primary",
+        "MAE",
+        "RMSE",
+        "delta_QLIKE_vs_A_block_bootstrap_CI"
+      ],
+      "models": [
+        "A_rv_only (HAR direct-variance OLS)",
+        "B_rv_signed",
+        "C_rv_abs",
+        "D_rv_signed_abs",
+        "E_rv_funding_trails"
+      ],
+      "n_instruments": 5,
+      "n_splits": 3,
+      "ok_30d_non_overlapping_test_blocks": 3,
+      "open_risks": [
+        "train windows short in early splits (45d) - pilot quality risk",
+        "requires numpy/pandas/scipy runtime to execute estimands",
+        "must confirm per-symbol bar completeness before run"
+      ],
+      "provenance_note": "Within PROVENANCED_CONFIRMATORY_RANGES (2024-04-01..2024-09-30, FCLR-015 identity-verified per run_funding_ablations constants). Confirmatory promotion would still require outcome-blind prereg, leakage audit, and meeting all \u00a717 gates; this design is proposed for pilot/exploratory execution readiness.",
+      "purge_embargo_days": 7,
+      "splits": [
+        {
+          "embargo_days": 7,
+          "purge_embargo": "2024-05-16..2024-05-22",
+          "split": 1,
+          "test": "2024-05-23..2024-06-21",
+          "test_days": 30,
+          "train": "2024-04-01..2024-05-15",
+          "train_days": 45
+        },
+        {
+          "embargo_days": 7,
+          "purge_embargo": "2024-06-22..2024-06-28",
+          "split": 2,
+          "test": "2024-06-29..2024-07-28",
+          "test_days": 30,
+          "train": "2024-04-01..2024-06-21",
+          "train_days": 82
+        },
+        {
+          "embargo_days": 7,
+          "purge_embargo": "2024-07-29..2024-08-04",
+          "split": 3,
+          "test": "2024-08-05..2024-09-03",
+          "test_days": 30,
+          "train": "2024-04-01..2024-07-28",
+          "train_days": 119
+        }
+      ],
+      "status": "PROPOSED_EXPLORATORY_NOT_RUN",
+      "sufficiency_gaps_addressed": [
+        "instruments: 5 >= 5",
+        "ok_30d_non_overlapping_test_blocks: 3 >= 3"
+      ],
+      "train_only_normalization": true
+    },
+    {
+      "chronological": true,
+      "data_window": "2024-04-01..2024-12-31",
+      "horizon": "24h forward RV",
+      "id": "TRACKC_EXT_DESIGN_B_EXPLORATORY_EXTENDED",
+      "instruments": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "label": "5-instrument funding ablation extension, 2024-04..12 full funded window",
+      "leakage_controls": [
+        "chronological splits",
+        "7d purge/embargo",
+        "train-only normalization",
+        "funding last-known at/before hour",
+        "trailing stats past-only"
+      ],
+      "metrics": [
+        "QLIKE_primary",
+        "MAE",
+        "RMSE",
+        "delta_QLIKE_vs_A_block_bootstrap_CI"
+      ],
+      "models": [
+        "A_rv_only (HAR direct-variance OLS)",
+        "B_rv_signed",
+        "C_rv_abs",
+        "D_rv_signed_abs",
+        "E_rv_funding_trails"
+      ],
+      "n_instruments": 5,
+      "n_splits": 3,
+      "ok_30d_non_overlapping_test_blocks": 3,
+      "open_risks": [
+        "10-12 months overlap sealed FCLR-003 tested/test windows - must not reuse as test without explicit non-conflict audit",
+        "confirmatory guard will refuse 10-12; keep exploratory",
+        "requires numpy/pandas/scipy runtime"
+      ],
+      "provenance_note": "2024-04..2024-09 provenanced (FCLR-015); 2024-10..2024-12 have funding+mark data on disk but are outside PROVENANCED_CONFIRMATORY_RANGES in run_funding_ablations and were part of sealed FCLR-003 test context - using 10-12 as test in new designs risks sealed-window reuse/conflict and confirmatory paths will refuse per guard. Treat as EXPLORATORY ONLY with explicit provenance caveat; do not use as confirmatory evidence.",
+      "purge_embargo_days": 7,
+      "splits": [
+        {
+          "embargo_days": 7,
+          "purge_embargo": "2024-05-25..2024-05-31",
+          "split": 1,
+          "test": "2024-06-01..2024-06-30",
+          "test_days": 30,
+          "train": "2024-04-01..2024-05-24",
+          "train_days": 54
+        },
+        {
+          "embargo_days": 7,
+          "purge_embargo": "2024-07-01..2024-07-07",
+          "split": 2,
+          "test": "2024-07-08..2024-08-06",
+          "test_days": 30,
+          "train": "2024-04-01..2024-06-30",
+          "train_days": 91
+        },
+        {
+          "embargo_days": 7,
+          "purge_embargo": "2024-08-07..2024-08-13",
+          "split": 3,
+          "test": "2024-08-14..2024-09-12",
+          "test_days": 30,
+          "train": "2024-04-01..2024-08-06",
+          "train_days": 128
+        }
+      ],
+      "status": "PROPOSED_EXPLORATORY_NOT_RUN",
+      "sufficiency_gaps_addressed": [
+        "instruments: 5 >= 5",
+        "ok_30d_non_overlapping_test_blocks: 3 >= 3 (within 04-09 region)"
+      ],
+      "train_only_normalization": true
+    },
+    {
+      "data_window": "2024-01-01..2024-03-31",
+      "id": "TRACKC_EXT_DESIGN_C_RV_BASELINE_Q1_5INST",
+      "instruments": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "BNBUSDT"
+      ],
+      "label": "RV-only baseline extension to 5 instruments on 2024 Q1 cached data",
+      "metrics": [
+        "QLIKE_primary",
+        "MAE",
+        "RMSE"
+      ],
+      "models": [
+        "Persistence (B1)",
+        "RV-HAR RV-only (B2)"
+      ],
+      "n_instruments": 5,
+      "open_risks": [
+        "does not address funding-ablation ok_30d gap",
+        "requires numpy/pandas/scipy runtime"
+      ],
+      "provenance_note": "All 5 have klines/mark/index/premium in data_cache for 2024-01..03; fundingRate absent for all in Q1 so funding ablations infeasible. RV-only HAR vs persistence baseline is feasible if bar completeness verified. Existing RV baseline used 4 instruments; adding BNBUSDT addresses instrument-count gap for RV-only track.",
+      "splits": "match existing RV baseline split protocol (chronological, 7d purge/embargo) - to be specified in outcome-blind prereg note",
+      "status": "PROPOSED_EXPLORATORY_NOT_RUN",
+      "sufficiency_gaps_addressed": [
+        "RV-only instrument count 4->5 (partial gap closure)"
+      ]
+    }
+  ],
+  "execution_blockers": [
+    "numpy/pandas/scipy not installed in environment; forecast/ablation scripts import numpy/pandas at module level",
+    "no parquet engine; not required for these designs (zip/csv/dir sources available)",
+    "full discovery baseline environmental (62 missing-numpy errors) - do not treat as green",
+    "network installs prohibited per handoff/protocol"
+  ],
+  "network_used": false,
+  "purpose": "Close Track C data-sufficiency planning bottleneck by proposing concrete, leakage-aware multi-split designs using cached on-disk data (no new fetches).",
+  "recommended_next_executable_step": "In an environment with numpy/pandas/scipy available (or via approved stdlib-only/compatible implementation), run Design A as EXPLORATORY with outcome-blind prereg in session dir, explicit provenance statement, and leakage audit against sealed tested windows before inspecting outcomes.",
+  "session_id": "session_20261118T030427Z",
+  "timestamp_utc": "2026-11-18T03:04:27Z"
+}
