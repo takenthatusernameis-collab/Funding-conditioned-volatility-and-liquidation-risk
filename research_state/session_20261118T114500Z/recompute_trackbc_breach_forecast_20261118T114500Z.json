@@ -1,0 +1,28 @@
+{
+  "schema": "recompute_trackbc_breach_forecast",
+  "session_utc": "2026-11-18T11:45:00Z",
+  "generated_utc": "20261118T114500Z",
+  "campaign": "FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "label_type": "synthetic_modeled_boundary_breach",
+  "observed_liquidation_labels": false,
+  "n_dataset_rows": 41760,
+  "n_unique_entry_origins": 3480,
+  "overall_breach_rate": 0.03395593869731801,
+  "instruments": ["BTCUSDT","ETHUSDT","SOLUSDT","XRPUSDT","BNBUSDT"],
+  "label_month": "2024-04",
+  "feature_cache_months": ["2024-03","2024-04"],
+  "splits": [
+    {"split":1,"train":"2024-04-01..2024-04-15","embargo":"2024-04-16..2024-04-22","test":"2024-04-23..2024-04-30","n_train":21600,"n_test":10080,"n_test_pos":167,"test_breach_rate":0.016567460317460318,"rv_only_auc":0.6825401955093142,"fund_cond_auc":0.6039353754913255,"delta_auc":-0.07860482001798874,"bootstrap_delta_auc_mean":-0.08461211459530166,"bootstrap_ci95":[-0.1595021886595548,-0.005464373977060122],"reps":500},
+    {"split":2,"train":"2024-04-01..2024-04-17","embargo":"2024-04-18..2024-04-24","test":"2024-04-25..2024-04-30","n_train":24480,"n_test":7200,"n_test_pos":124,"test_breach_rate":0.017222222222222222,"rv_only_auc":0.6998121774649428,"fund_cond_auc":0.6462827549736502,"delta_auc":-0.053529422491292666,"bootstrap_delta_auc_mean":-0.04624912732452968,"bootstrap_ci95":[-0.14157831874207327,0.12672316384180793],"reps":500}
+  ],
+  "pooled_mean_delta_auc": -0.0660671212546407,
+  "materiality_floor_met": false,
+  "materiality_floor": "Delta AUC >= +0.01 over RV-only on pooled OOS test with CI95 lower bound > 0",
+  "bootstrap_seed": 12345,
+  "bootstrap_reps": 500,
+  "alert_frac": 0.05,
+  "honest_status": "EXPLORATORY/PILOT. Funding-conditioned features did not improve modeled breach discrimination over RV-only; negative result reported as-is; no confirmatory/forecast-gate claim."
+}

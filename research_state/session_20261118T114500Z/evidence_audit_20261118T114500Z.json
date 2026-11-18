@@ -1,0 +1,43 @@
+{
+  "schema": "evidence_audit",
+  "session_utc": "2026-11-18T11:45:00Z",
+  "generated_utc": "20261118T114500Z",
+  "campaign": "FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "read_only": true,
+  "heavy_session": "session_20261118T114500Z",
+  "heavy_session_mode": "new_style_audit_quant",
+  "tracks_completed": {
+    "track_c_carried_forward": {
+      "source_session": "session_20261118T093031Z",
+      "artifacts": ["trackc_design_a_forecast_20261118T093031Z.{py,json,md}"],
+      "headline": "funding-trail features improve QLIKE vs RV-only (mean delta -0.3579, CI95 [-0.4980, -0.1932]); EXPLORATORY/PILOT"
+    },
+    "track_b_carried_forward": {
+      "source_session": "session_20261118T093031Z",
+      "artifacts": ["trackb_breach_labels_20261118T093031Z.{py,json,md}", "recompute_trackb_breach_labels_20261118T093031Z.json"],
+      "headline": "synthetic modeled boundary-breach labels; rows 41760; breached 1418; overall breach rate 0.03395593869731801; observed_liquidation_labels=false"
+    },
+    "breach_forecast_executed_this_session": {
+      "artifacts": ["trackbc_breach_prereg_20261118T114500Z.{json,md}", "trackbc_breach_forecast_20261118T114500Z.{py,json,md}"],
+      "headline": "RV-only baseline vs funding-conditioned candidate on 2024-04 (2 splits, block bootstrap seed 12345); pooled mean Delta AUC -0.0661; materiality floor NOT met; funding-conditioned did not improve breach discrimination; EXPLORATORY/PILOT"
+    }
+  },
+  "trigger_check": {
+    "artifact": "trigger_check_20261118T114500Z.json",
+    "all_triggers_open": true,
+    "no_trigger_fired": true
+  },
+  "fresh_quant_artifact": "recompute_trackbc_breach_forecast_20261118T114500Z.json",
+  "prohibitions_respected": [
+    "no sealed re-score",
+    "no network",
+    "no root research_state/*.md|json (root 500/500 at cap)",
+    "no sealed-artifact/workflow/.github mutation",
+    "no duplicate AGENT_HANDOFF",
+    "no look-ahead / full-sample normalization / sealed months / observed-liquidation labeling"
+  ],
+  "honest_status": "EXPLORATORY/PILOT. Execution campaign satisfied with substantive artifacts; no confirmatory promotion claimed."
+}

@@ -167,6 +167,24 @@ BREACH_FORECAST_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-VOL-LIQ-ROBUST-04 hardening: the next focus campaign advances the science
+# past Track C + Track B by confirming the Track C funding-trail QLIKE improvement
+# under an alternative chronological holdout, stdlib only. Once this campaign
+# starts (start UTC 120000Z), a post-start session cannot satisfy the gate with an
+# audit-only or gate-only session. It must emit the outcome-blind robust-04 prereg,
+# the robustness recompute triad, and a trigger check. Sessions predating the
+# campaign start (incl. session_20261118T114500Z) are grandfathered so this handoff
+# refresh remains green.
+ROBUST_04_CAMPAIGN_RE = re.compile(r"FCLR-VOL-LIQ-ROBUST-04-(\d{8}T\d{6}Z)")
+ROBUST_04_REQUIRED = (
+    ("fclr_robust04_prereg_", ".json"),
+    ("fclr_robust04_prereg_", ".md"),
+    ("fclr_robust04_robustness_", ".py"),
+    ("fclr_robust04_robustness_", ".json"),
+    ("fclr_robust04_robustness_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -545,6 +563,72 @@ def _breach_forecast_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _robust_04_state(handoff_text: str, latest_sid: str | None,
+                     latest_files: list[str],
+                     latest_dir: Path | None = None) -> dict:
+    """Return FCLR-VOL-LIQ-ROBUST-04 non-avoidance state.
+
+    After the robust-04 campaign starts (start UTC 120000Z), a post-start session
+    must emit the outcome-blind robust-04 prereg, the robustness recompute triad,
+    and a trigger check, with no zero-byte placeholders. Sessions predating the
+    campaign start are grandfathered so the handoff refresh stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = ROBUST_04_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(1)
+    out["campaign_id"] = f"FCLR-VOL-LIQ-ROBUST-04-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files
+            if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in ROBUST_04_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, ROBUST_04_REQUIRED):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -592,6 +676,7 @@ def check(repo: Path = REPO) -> dict:
         "closure_ledger": None,
         "vol_liq_execution": None,
         "breach_forecast": None,
+        "robust_04": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -751,6 +836,29 @@ def check(repo: Path = REPO) -> dict:
                 if not bf["has_trigger_check"]:
                     payload["failures"].append(
                         f"BREACH_FORECAST_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-VOL-LIQ-ROBUST-04: after the robust-04 campaign starts,
+            # require the outcome-blind prereg + robustness triad + trigger check.
+            # Zero-byte placeholders fail closed.
+            r04 = _robust_04_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["robust_04"] = r04
+            if r04["required"]:
+                if r04["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "ROBUST_04_ARTIFACTS_MISSING:"
+                        + ",".join(r04["missing_required_artifacts"])
+                    )
+                if r04["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "ROBUST_04_ARTIFACTS_EMPTY:"
+                        + ",".join(r04["empty_required_artifacts"])
+                    )
+                if not r04["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"ROBUST_04_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
