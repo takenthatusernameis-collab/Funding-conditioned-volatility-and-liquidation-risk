@@ -2,9 +2,18 @@
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T01:50:38Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T02:10:40Z)
 
-**At a glance — repository `Funding-conditioned-volatility-and-liquidation-risk` → priority is Track C funding-conditioned volatility (repo-name rule).** The program's confirmatory science is genuinely terminal: H001 NOT_SUPPORTED (FCLR-003 sealed negative, FCLR-006 negative, FCLR-011 sealed PASS does NOT replicate forward), Track A externally blocked (no admissible post-2026-10 observed liquidation labels), Track B modeled-boundary inconclusive. **That part is settled and must not be relitigated.** What WAS broken is the *bookkeeping*: the "closed frontier" rested on a tested-window ledger that omitted FCLR-003's sealed test window, so the frontier tool mislabeled 2024-10/11/12 as fresh and invited re-scoring sealed negative data. **That bottleneck has now been fixed in `scripts/next_campaign_status.py` (FCLR-LEDGER-INTEGRITY-01, previous session).** The next session's mandatory heavy campaign is to **independently verify the fix, produce the durable per-month ledger audit, and refresh the outcome-blind trigger-activation package** — not to re-fix, and not to wait idle.
+**Campaign `FCLR-LEDGER-INTEGRITY-02-20261118T004445Z` is COMPLETE.** Session `session_20261118T004445Z/` produced artifacts 1–7 (ledger audit PASS, frontier recompute PASS, closure-ledger backfill plan, trigger check, refreshed trigger-activation readiness, evidence audit, gates + suite capture). The corrected frontier is verified closed: `n_individually_feasible=1` (`2025-01` only), `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=False`. `check_handoff_heavywork_gate.py --json` PASS (`handoff_stale=false`); `check_tracka_scope_registry_drift.py --json` PASS (196/196). Suite baseline: targeted 82/6/0, discovery EXIT 1 (all errors `ModuleNotFoundError: numpy`, environment-dependent — do not treat as green, do not install numpy, do not fix).
+
+**No heavy work remains.** Program is `CLOSED_TERMINAL`; rank-0 `TRIGGER_ONLY`; 0/58 rows §17-promotable. All four reopen triggers are `OPEN` and NOT agent-satisfiable (GATE4_BRANCH_1 needs human/legal attestation; NEW_OBSERVED_LIQUIDATION_SOURCE and HL_LABEL_EXTENSION need post-2026-10 observed labels — confirmed absent through 2026-10, `consecutive_absent=3`; EXPANSION_ROBUSTNESS_REDO forbids re-scoring sealed 19.04%). Do NOT re-run sealed estimands, do not poll HF, do not run `git lfs pull`, do not run `scripts/fclr_liq_010_confirm.py`.
+
+**Next session's sole command sequence: verify state, then stop cleanly unless a reopen trigger is machine-satisfied.**
+```bash
+python3 scripts/check_handoff_heavywork_gate.py --json | jq '{pass,reason_code,handoff_stale,latest_session_id,failures}'
+python3 scripts/check_tracka_scope_registry_drift.py --json | jq '{pass,reason_code}'
+# Expected: both PASS, handoff_stale=false, failures=[]. No trigger fired -> no heavy work due. Stop cleanly.
+```
 
 **Rank-0 state (unchanged, do not relitigate):**
 - Program: `CLOSED_TERMINAL` — `research_state/fclr_final_structural_closure_20261116T114626.{md,json}`; verdict `NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED`; 0/58 rows §17-promotable.
@@ -131,7 +140,7 @@ Create `research_state/session_<UTC>/` (real UTC; `research_state/` root is **50
 
 ## Staleness correction
 
-Latest on-disk session `session_20261117T215904Z` is recorded in this handoff. When the next session creates `session_<UTC>/`, record its id here **before** the final gate capture so `handoff_stale` stays false and `HANDOFF_STALE_LATEST_SESSION` does not fire.
+Latest completed heavy session `session_20261118T004445Z` is recorded in this handoff (campaign `FCLR-LEDGER-INTEGRITY-02`, artifacts 1–7 complete, gate capture done). When a future session creates `session_<UTC>/`, record its id here **before** the final gate capture so `handoff_stale` stays false and `HANDOFF_STALE_LATEST_SESSION` does not fire.
 
 ---
 

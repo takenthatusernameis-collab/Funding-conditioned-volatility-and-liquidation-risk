@@ -1,0 +1,121 @@
+{
+  "closure_ledger": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "failures": [],
+  "frontier_verify": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "handoff_exists": true,
+  "handoff_markers_ok": true,
+  "handoff_session_ids": [
+    "session_20261116T035833Z",
+    "session_20261116T100533Z",
+    "session_20261117T000400Z",
+    "session_20261117T031656Z",
+    "session_20261117T051045Z",
+    "session_20261117T071110Z",
+    "session_20261117T072040Z",
+    "session_20261117T193323Z",
+    "session_20261117T194457Z",
+    "session_20261117T215904Z",
+    "session_20261118T004445Z"
+  ],
+  "handoff_stale": false,
+  "heavy_session_dir": "research_state/session_20261116T100533Z",
+  "heavy_session_exists": true,
+  "heavy_session_files": [
+    "evidence_audit_20261116T100533Z.md",
+    "heavywork_gate.json",
+    "prereg_template_trigger_gated_20261116T035833Z.json",
+    "program_power_synthesis_20261116T035833Z.json",
+    "program_power_synthesis_20261116T035833Z.md",
+    "rca011_feature_attribution_20261116T035833Z.json",
+    "rca011_feature_attribution_20261116T035833Z.md",
+    "rca011_impl_crosscheck_20261116T035833Z.json",
+    "rca011_sealed_bridge_20261116T035833Z.md",
+    "rca011_sealed_bridge_ext_20261116T035833Z.md",
+    "scope_drift.json",
+    "targeted_tests.txt",
+    "trigger_check.json",
+    "trigger_readiness_power.py",
+    "trigger_readiness_power_calibration_20261116T100533Z.json",
+    "trigger_readiness_power_calibration_20261116T100533Z.md",
+    "unittest_discover.txt"
+  ],
+  "heavy_session_id": "session_20261116T100533Z",
+  "heavy_session_missing": [],
+  "latest_disk_session_id": "session_20261118T004445Z",
+  "latest_session_dir": "research_state/session_20261118T004445Z",
+  "latest_session_evidence": {
+    "audit_files": [
+      "evidence_audit_20261118T004445Z.md"
+    ],
+    "files": [
+      "closure_ledger_backfill_20261118T004445Z.json",
+      "closure_ledger_backfill_20261118T004445Z.md",
+      "evidence_audit_20261118T004445Z.md",
+      "frontier_recompute_20261118T004445Z.json",
+      "frontier_recompute_20261118T004445Z.md",
+      "frontier_recompute_20261118T004445Z.py",
+      "heavywork_gate.json",
+      "ledger_audit_20261118T004445Z.json",
+      "ledger_audit_20261118T004445Z.md",
+      "ledger_audit_20261118T004445Z.py",
+      "targeted_tests.txt",
+      "trigger_activation_readiness_20261118T004445Z.json",
+      "trigger_activation_readiness_20261118T004445Z.md",
+      "trigger_activation_readiness_20261118T004445Z.py",
+      "trigger_check_20261118T004445Z.json",
+      "trigger_check_20261118T004445Z.py",
+      "unittest_discover.txt"
+    ],
+    "has_audit": true,
+    "has_new_quant": true,
+    "new_quant_files": [
+      "trigger_activation_readiness_20261118T004445Z.json",
+      "trigger_activation_readiness_20261118T004445Z.md",
+      "trigger_activation_readiness_20261118T004445Z.py"
+    ]
+  },
+  "latest_session_id": "session_20261118T004445Z",
+  "ledger_integrity": {
+    "campaign_id": "FCLR-LEDGER-INTEGRITY-02-20261118T004445Z",
+    "campaign_start_utc": "20261118T004445Z",
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "network": false,
+  "pass": true,
+  "read_only": true,
+  "reason_code": "OK",
+  "root_count": 500,
+  "root_count_cap": 500,
+  "script": "check_handoff_heavywork_gate",
+  "trigger_readiness": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "writes_real_research_state": false
+}
+EXIT=0
