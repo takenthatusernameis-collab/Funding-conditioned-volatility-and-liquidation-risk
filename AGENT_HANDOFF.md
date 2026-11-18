@@ -1,8 +1,8 @@
-# AGENT HANDOFF — 2026-11-18T03:26:30Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T03:53:59Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:26:30Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:53:59Z)
 
 **State: `ACTIVE_CAMPAIGN`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T030427Z` (read-only data audit + Design A/B/C gap-closure designs + Track B modeled-boundary protocol; gate post-capture PASS with `handoff_stale=false`).
 
@@ -19,10 +19,10 @@
 - **Execution blocker (environmental):** `numpy`/`pandas`/`scipy` absent; forecast/ablation scripts import at module level. **Estimand execution not completed this session** (no installs permitted). Full unittest discovery is environment-dependent (missing-numpy errors pre-existing; not green).
 
 ### Bottlenecks removed / reinforced in this handoff
-- **Estimand-execution blocker (numpy/pandas/scipy missing, installs prohibited):** cannot be removed by install. Session must not stall on it. Stdlib-only fallback paths below are **mandatory substitutes** that produce real quantitative/leakage artifacts without the numerical stack.
-- **Root churn cap (500/500):** all new artifacts go into `research_state/session_<UTC>/` only. Zero root `research_state/*.md|json` additions.
-- **Handoff freshness:** latest session id recorded before final gate capture; `handoff_stale=false` required.
-- **Heavy-work non-avoidance:** gate captures alone do NOT satisfy heavy work. A session producing only `check_*` outputs with no new `design_a_leakage_audit` or Track B label artifact has not done heavy work and must not report completion.
+- **Estimand-execution blocker (numpy/pandas/scipy missing, installs prohibited):** cannot be removed by install, so it is removed as a *blocker* by mandatory stdlib-only substitution. Session must not stall on it. The stdlib-only fallback paths below (evidence_audit + recompute_trackc_leakage_audit + recompute_trackb_breach_labels) produce real quantitative/leakage artifacts without the numerical stack. A session that waits for numpy is stalled; a session that emits the stdlib artifacts has done heavy work.
+- **Root churn cap at exactly 500/500:** `research_state/` root md+json count is at the cap. All new artifacts go into `research_state/session_<UTC>/` only. Zero root `research_state/*.md|json` additions — any root addition breaches the cap and fails the gate.
+- **Handoff freshness:** latest session id recorded before final gate capture; `handoff_stale=false` required. If a newer `session_*` directory exists on disk than is recorded in the handoff, the handoff is stale and must be updated before completion.
+- **Heavy-work non-avoidance:** gate captures alone do NOT satisfy heavy work. A session producing only `check_*` outputs with no new `evidence_audit_*` + `recompute_*` artifact pair has not done heavy work and must not report completion. The gate machine-checks this (`check_handoff_heavywork_gate.py`).
 
 ## Next session — first/only actions (run once; produce NEW artifacts in a new session dir, then stop only if blocked with recorded evidence)
 
@@ -37,8 +37,8 @@ python3 scripts/next_campaign_status.py --json | jq '{markfund_frontier,disjoint
 
 The numerical estimand (Design A Track C) is **blocked** by missing `numpy`/`pandas`/`scipy` (environmental, installs prohibited). It cannot run in this environment. The fallback heavy work below is stdlib-only and **required** — a session that produces only gate captures without a new quantitative/leakage artifact has not done heavy work.
 
-- **Primary fallback (REQUIRED):** produce a **stdlib-only** zip/csv data-completeness & leakage-audit artifact for Design A (bar counts per symbol/month/kind, gaps, split boundary integrity, funding alignment checks, tested-window non-conflict verification for 2024-04..2024-09), using only cached ZIP/CSV/dir. Emit `design_a_leakage_audit_<UTC>.json` + `.md` in session dir.
-- **Secondary fallback (REQUIRED):** implement a **stdlib Track B** mark-price breach-label generator for a frozen scenario set (leverage [5,10,20] × long/short × horizon [4h,24h] over a small cached window, e.g. one funded month in 2024-04..09), emitting session-local label CSV/JSON. Clearly label synthetic/modeled, not observed.
+- **Primary fallback (REQUIRED):** produce a **stdlib-only** zip/csv data-completeness & leakage-audit artifact for Design A (bar counts per symbol/month/kind, gaps, split boundary integrity, funding alignment checks, tested-window non-conflict verification for 2024-04..2024-09), using only cached ZIP/CSV/dir. Emit `evidence_audit_<UTC>.json` + `.md` **and** a deterministic stdlib recompute driver `recompute_trackc_leakage_audit_<UTC>.py` + `.json` in session dir. Both are mandatory: `evidence_audit_*` satisfies the gate's audit prefix; `recompute_trackc_leakage_audit_*` satisfies the gate's `recompute_*` quant prefix. No numpy/pandas/scipy imports allowed.
+- **Secondary fallback (REQUIRED):** implement a **stdlib Track B** mark-price breach-label generator for a frozen scenario set (leverage [5,10,20] × long/short × horizon [4h,24h] over a small cached window, e.g. one funded month in 2024-04..09), emitting `recompute_trackb_breach_labels_<UTC>.py` + `.json` (session-local label CSV/JSON inside session dir). Clearly label synthetic/modeled, not observed. No numpy/pandas/scipy imports allowed.
 - **If numerical runtime becomes available (upgrade path):** freeze an outcome-blind exploratory prereg in session dir for **Design A** (`trackc_extension_design_20261118T030427Z.json`: 5 instruments BTC/ETH/SOL/XRP/BNB, 2024-04-01..2024-09-30, 3 splits × 30d non-overlapping tests, 7d purge/embargo, expanding train, A_rv_only/B_rv_signed/C_rv_abs/D_rv_signed_abs/E_rv_funding_trails, QLIKE/MAE/RMSE, block-bootstrap ΔQLIKE CIs). Verify per-symbol bar completeness and tested-window/leakage non-conflict, then run and emit per-split metrics + evaluation summary in session dir. Label **EXPLORATORY/PILOT**; do not claim confirmatory/promotion.
 
 **Step 3 — Record, verify, hand off:**
