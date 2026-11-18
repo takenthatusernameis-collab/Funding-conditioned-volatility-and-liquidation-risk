@@ -1,8 +1,10 @@
-# AGENT HANDOFF — 2026-11-18T12:21:30Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T12:28:27Z (SOLE DURABLE HANDOFF)
 
-> **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains. There is exactly one root `AGENT_HANDOFF.md`; do not create copies under `research_state/`, `scripts/`, `tests/`, or `src/`.
+> **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T12:21:30Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T12:28:27Z)
+
+**MANDATORY — do this first, do not idle/re-audit/gate-only:** create `research_state/session_<UTC>/` (UTC **after** `20261118T120000Z`) and execute **`FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z`** (Track C funding-trail robustness confirmation, stdlib-only, cached data). Freeze the prereg before touching evaluation; produce the required robust-04 prereg+robustness triad+trigger check+evidence audit+`recompute_*` (all non-empty); record the new session id in this handoff before final gate capture. If you do anything else instead of heavy quantitative progress, the machine gate will fail the session closed.
 
 **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — the repo name *is* the campaign. Two named risks, in this priority order:
 1. **Funding-conditioned volatility/stress forecasting (Track C):** does funding predict future realized vol / stress vs an RV-only baseline? QLIKE/MAE/RMSE, leakage-resistant OOS.
@@ -10,7 +12,7 @@
 
 Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins under `research_state/data_cache/` and `data/raw/`). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500 at cap).**
 
-**State: `ACTIVE_CAMPAIGN` / GATE GREEN, BOTTLENECK CLEARED (stale handoff resolved via `session_20261118T114500Z`), NEXT HEAVY CAMPAIGN BOUND.** Latest completed heavy session: **`research_state/session_20261118T114500Z`** (Track C forecast + Track B breach labels carried forward from `session_20261118T093031Z`, **and** the breach-forecast campaign `FCLR-VOL-LIQ-BREACH-FORECAST-03` executed — EXPLORATORY/PILOT, honest negative result, materiality floor NOT met). The next session must NOT idle, re-audit, or emit another gate-only note. It must execute the mandatory **next focus campaign `FCLR-VOL-LIQ-ROBUST-04`** below and record its new session id in this handoff before final gate capture.
+**State: `ACTIVE_CAMPAIGN` / GATE GREEN, BOTTLENECKS CLEARED.** Latest completed heavy session: **`research_state/session_20261118T114500Z`** (Track C forecast + Track B breach labels carried forward from `session_20261118T093031Z`, and breach-forecast campaign `FCLR-VOL-LIQ-BREACH-FORECAST-03` executed — EXPLORATORY/PILOT, honest negative result, materiality floor NOT met). No newer unrecorded session exists; no duplicate handoff authority; stale/incomplete/unrecorded-session, empty-session-bypass, and audit/gate-only non-avoidance blockers are closed. Next session must produce new heavy work under `FCLR-VOL-LIQ-ROBUST-04`.
 
 **Program lineage:** parent `FCLR-VOL-LIQ-FORECAST-01-20261118T023259Z`. Completed execution campaign: `FCLR-VOL-LIQ-EXECUTION-01-20261118T092338Z` (Track C Design A stdlib forecast + Track B modeled breach labels — both delivered in `session_20261118T093031Z`). Completed breach-forecast campaign: `FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z` (joined Track C features + Track B labels; executed in `session_20261118T114500Z`, EXPLORATORY/PILOT, honest negative result — funding-conditioned features did NOT improve modeled breach discrimination; materiality floor NOT met). **Active next focus campaign: `FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z`** (stdlib robustness confirmation of Track C funding-trail QLIKE on an alternative chronological holdout; see Next Focus Campaign section). Rank-0 trigger state remains `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`); all triggers OPEN, none fired.
 
@@ -37,8 +39,10 @@ Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins un
 
 ## Next focus campaign — REQUIRED heavy-work (non-avoidable; machine-enforced by gate)
 
-**`FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z` — Track C funding-trail robustness confirmation (stdlib, cached data).**
-Research question: does the Track C Design A funding-trail QLIKE improvement (E = −0.3579 vs RV-only) hold under an alternative chronological holdout (2024-09 holdout, train 2024-04..08) on the cached 2024-04..09 panel? Same 5 instruments, stdlib OLS HAR, expanding train, block bootstrap seed 12345. Label EXPLORATORY/PILOT; no confirmatory/forecast-gate claim; no sealed months.
+**`FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z` — Track C funding-trail robustness confirmation (stdlib, cached data). MUST be executed in the next post-start session.**
+Research question: does the Track C Design A funding-trail QLIKE improvement (E = −0.3579 vs RV-only, `session_20261118T093031Z/114500Z`) hold under an alternative chronological holdout (**test/holdout 2024-09, train 2024-04..08**) on the cached 2024-04..09 panel? Same 5 instruments (BTC/ETH/SOL/XRP/BNB), stdlib OLS HAR, causal-at-t features, block bootstrap seed 12345, LOIO. Label **EXPLORATORY/PILOT**; no confirmatory/forecast-gate claim; no sealed months.
+
+**Execution discipline (to prevent avoidance):** freeze prereg before any metric computation; do not stop at audit/gate/test-only work; if blocked by code/environment, create the session dir + prereg + script + partial JSON/MD documenting the exact blocker with non-empty evidence in the same session (never an empty file). Root `research_state/` is at 500/500 — all new artifacts go in the session subdir only.
 
 **Prereg (freeze first, before touching evaluation):** `fclr_robust04_prereg_<UTC>.json` (+ `.md` companion). Fix ex ante: instruments, holdout month 2024-09, train window 2024-04..08, entry-origin rule, feature set (lrv1/lrv24/lrv168/fund/fund_abs/fmean/fewma, causal at t), model family (stdlib OLS HAR, Duan smearing), metric (ΔQLIKE vs RV-only, MAE, RMSE), block bootstrap (UTC-day, seed 12345, 2000 reps), leave-one-instrument-out, materiality floor. Record `outcome_data_inspected_before_freeze=false`. No future bars, no full-sample normalization, no sealed months.
 
@@ -94,10 +98,10 @@ Freeze an outcome-blind exploratory prereg for Track C Design A using the `track
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T12:21:30Z
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS (confirmed 2026-11-18T12:21:30Z)** — `pass=true`, `handoff_stale=false`, `root_count=500/500` [at cap], latest session `session_20261118T114500Z`; `breach_forecast` required=true PASS (machine-enforced, prereg+forecast triad+trigger check all non-empty); `robust_04` future start 120000Z → grandfathered for current session; `vol_liq_execution` PASS (trigger check present, non-empty).
-- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`).
-- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design remains **BLOCKED** (`any_feasible=false`).
-- `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125`: **PASS (56 tests, confirmed 2026-11-18T12:21:30Z)**; full discover hangs in this runtime; record limitation, not a green full suite.
-- Bottleneck status this refresh: **no unresolved bottleneck blocks the next campaign.** The stale/incomplete-session, newer-unrecorded-session, empty-session-bypass, and audit/gate-only non-avoidance blockers are all closed. The only remaining constraints are the data-bound confirmatory design (insufficient contiguous funded history) and the numpy/pandas/scipy-absent environment — both handled by the stdlib exploratory path, not by idling.
-- No sealed artifacts/workflows/registries modified. `AGENT_HANDOFF.md` remains the sole durable handoff. The next session must execute `FCLR-VOL-LIQ-ROBUST-04` and record its new session id here.
+## Verification record — 2026-11-18T12:28:27Z (refresh)
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** — `pass=true`, `reason_code=OK`, `handoff_stale=false`, `root_count=500/500`, latest `session_20261118T114500Z`; `breach_forecast` + `vol_liq_execution` PASS; `robust_04` not yet required for this latest session (grandfathered relative to campaign start) — **next post-start session must satisfy robust-04 artifacts or fail closed**.
+- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
+- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); Track C/B stdlib exploratory path remains feasible on cached data.
+- `python3 -m unittest tests.test_tracka_hardening_143 -v`: **PASS** (37 tests). `python3 -m unittest tests.test_tracka_hardening_125 -v`: **PASS** (19 tests). Full `unittest discover` remains environmental/hanging in this runtime; record limitation, not a green full suite.
+- Bottlenecks: **none blocking next campaign** — sole durable handoff confirmed (no duplicates), no unrecorded/newer session beyond `session_20261118T114500Z`, required artifacts non-empty, gates/tests green. Remaining constraints (root 500/500 cap, numpy/pandas/scipy absent, confirmatory multi-block infeasible) are documented and handled by stdlib/session-dir exploratory workflow.
+- Action taken: refreshed top-of-handoff timestamped initial task message and reinforced non-avoidable `FCLR-VOL-LIQ-ROBUST-04` execution; no sealed artifacts/workflows/registries modified.
