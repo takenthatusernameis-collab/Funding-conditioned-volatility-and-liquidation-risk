@@ -1,10 +1,14 @@
-# AGENT HANDOFF — 2026-11-18T11:28:05Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T11:29:38Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains. There is exactly one root `AGENT_HANDOFF.md`; do not create copies under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T11:22:38Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T11:29:38Z)
 
-**Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — the two named risks are the campaign: **(1) funding-conditioned volatility/stress forecasting** (Track C: funding extremes + RV vs RV-only baseline, QLIKE/MAE/RMSE, leakage-resistant OOS) and **(2) liquidation-boundary risk** (Track B: modeled breach labels from public mark-price data). Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins under `research_state/data_cache/` and `data/raw/`). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500 at cap).**
+**Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — the repo name *is* the campaign. Two named risks, in this priority order:
+1. **Funding-conditioned volatility/stress forecasting (Track C):** does funding predict future realized vol / stress vs an RV-only baseline? QLIKE/MAE/RMSE, leakage-resistant OOS.
+2. **Liquidation-boundary risk (Track B):** do funding-conditioned features predict modeled liquidation-boundary breaches?
+
+Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins under `research_state/data_cache/` and `data/raw/`). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500 at cap).**
 
 **State: `ACTIVE_CAMPAIGN` / GATE GREEN, BOTTLENECKS CLEARED, NEXT HEAVY CAMPAIGN BOUND.** Latest completed heavy session: **`research_state/session_20261118T093031Z`** (Track C forecast **and** Track B breach labels both complete). The next session must NOT idle, re-audit, or emit another gate-only note. It must execute the mandatory **breach-forecast campaign** below and record its new session id in this handoff before final gate capture.
 
@@ -87,10 +91,10 @@ Freeze an outcome-blind exploratory prereg for Track C Design A using the `track
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T11:22:38Z
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`pass=true`, `reason_code=OK`, `failures=[]`, root=500/500, latest=`session_20261118T093031Z`=disk, `handoff_stale=false`, `vol_liq_execution.pass=true`, `breach_forecast.required=false` [grandfathered pre-start]). The new `FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z` requirement binds the next post-start session.
-- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
-- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design BLOCKED (`n_feasible=0`, `max_mutually_non_overlapping=1<3`); Track C Design A + Track B feasible via stdlib on cached data (proven in `session_20261118T093031Z`).
-- `python3 -m unittest tests.test_tracka_hardening_143 -v`: **PASS (37 tests)** — the 32 prior tests plus 5 new breach-forecast fail-closed cases (trackc-only, empty-file, missing-trigger, full-package, pre-start grandfathering). Also `tests.test_tracka_hardening_125`, `_098`, `_099`, `tests.test_active_campaign_gate`: **PASS (54 tests)**.
-- End-to-end gate proof (tmp copy, real state untouched): a post-start session lacking breach-forecast artifacts fails with `BREACH_FORECAST_ARTIFACTS_MISSING`; adding `trackbc_breach_prereg_*` + `trackbc_breach_forecast_*` triad makes it pass.
-- No sealed artifacts/workflows/registries modified. `AGENT_HANDOFF.md` remains the sole durable handoff; this refresh records the completed Track C + Track B session and the exact non-avoidance contract for the next breach-forecast campaign.
+## Verification record — 2026-11-18T11:29:38Z
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`pass=true`, `reason_code=OK`, `failures=[]`, `root_count=500/500` [at cap], `handoff_stale=false`, `latest_disk_session_id=session_20261118T093031Z`). `breach_forecast`: `required=false` (latest session predates the `FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z` start → grandfathered), `pass=true`. The breach-forecast requirement **binds the next post-start session**.
+- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`).
+- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design remains **BLOCKED** (`any_feasible=false`, `min_design_days=127`; ready funding-backed months `['2024-04','2024-05','2025-01']` cannot reach 127 contiguous days). Track C Design A + Track B remain feasible via stdlib on cached data (proven by `session_20261118T093031Z`).
+- `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125`: **PASS (56 tests)**. Full `unittest discover` hangs in this runtime; use targeted tests and record that limitation, not a green full suite.
+- Bottleneck status this refresh: **no unresolved bottleneck blocks the next campaign.** The stale/incomplete-session, empty-session-bypass, and audit/gate-only non-avoidance blockers are all closed (see §Bottlenecks resolved). The only remaining constraint is the data-bound confirmatory design (insufficient contiguous funded history) and the numpy/pandas/scipy-absent environment — both handled by the stdlib exploratory path below, not by idling.
+- No sealed artifacts/workflows/registries modified. `AGENT_HANDOFF.md` remains the sole durable handoff; this refresh records the current timestamp and re-verified green state. The next session must execute the breach-forecast campaign and record its new session id here.
