@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-18T11:22:38Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T11:28:05Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains. There is exactly one root `AGENT_HANDOFF.md`; do not create copies under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
