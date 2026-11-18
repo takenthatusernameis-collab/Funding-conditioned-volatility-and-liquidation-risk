@@ -1,8 +1,8 @@
-# AGENT HANDOFF — 2026-11-18T13:21:54Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-18T13:23:05Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T13:21:54Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T13:23:05Z)
 
 **MANDATORY — do this first, do not idle/re-audit/gate-only:** create `research_state/session_<UTC>/` (UTC **after** `20261118T120000Z`) and execute **`FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z`** (Track C funding-trail robustness confirmation, stdlib-only, cached data). Freeze the prereg before touching evaluation; produce the required robust-04 prereg+robustness triad+trigger check+evidence audit+`recompute_*` (all non-empty); record the new session id in this handoff before final gate capture. If you do anything else instead of heavy quantitative progress, the machine gate will fail the session closed.
 
