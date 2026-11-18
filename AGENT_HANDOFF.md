@@ -1,86 +1,95 @@
-# AGENT HANDOFF — 2026-11-18T18:26:17Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-18T19:17:14Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority.
 > No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T18:26:17Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T19:17:14Z)
 
-**You must execute `FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z` now. Do not idle, do not re-audit, do not gate-only, do not merely refresh this handoff, do not re-score sealed work, and do not re-run the closed QLIKE line.**
+**You must execute `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` now. Do not idle, do not re-audit, do not gate-only, do not merely refresh this handoff, do not re-score sealed work, do not re-run RISK-06, and do not re-open the closed Track C QLIKE line.**
 
-Create `research_state/session_<UTC>/` with UTC **strictly after** `20261118T182600Z`, freeze the risk-06 prereg **before touching evaluation/outcomes**, then produce the full risk-06 artifact set (all files **non-empty**) in that session. Update the **Latest executed session** line in this handoff to the new session id before final gate capture. `scripts/check_handoff_heavywork_gate.py` now enforces the risk-06 package and **fails the session closed** if any required artifact is missing or zero-byte. There is no legitimate audit-only path.
+Create `research_state/session_<UTC>/` with UTC **strictly after** `20261118T191714Z`, freeze the risk-07 prereg **before touching evaluation/outcomes**, then produce the full risk-07 artifact set (all files **non-empty**) in that session. Because the heavy-work gate binds every still-armed campaign to the newest session, you must also **carry forward** the non-empty RISK-06 package and the non-empty ROBUST-05 package into the same new session directory (exact list below). Update the **Latest executed session** line in this handoff to the new session id before final gate capture. `scripts/check_handoff_heavywork_gate.py` now enforces RISK-07 (prereg, calibrator implementation, recalibration evaluation, trigger check, non-zero bytes) and fails the session closed if anything is missing. There is no legitimate audit-only path.
 
 **Repo priority (name = campaign):** `Funding-conditioned-volatility-and-liquidation-risk`
 1. **Track C (closed, negative):** funding-conditioned information does **not** forecast future realized volatility/stress beyond RV-only. Rejected under QLIKE on 2024-06/07/08/09 holdouts. Do not re-run.
-2. **Track B (primary, active):** do funding-conditioned features forecast **modeled liquidation-boundary breach risk** with better out-of-sample probability calibration than RV-only? This is the live question.
+2. **Track B funding-vs-RV (closed, honest negative):** funding-conditioned features did **not** improve modeled breach-risk calibration over RV-only (RISK-06, floor not met). Do not re-run RISK-06.
+3. **Track B baseline-calibration (primary, active):** the RV-only baseline is the best available score but is it **reliably miscalibrated**, and can a **train-only recalibration layer** fix it out-of-sample (Brier + ECE) and transfer across scenarios/holdouts beyond a label-permutation placebo? This is the live question (RISK-07).
 
-## Current state (verified 2026-11-18T18:26:17Z)
+## Current state (verified 2026-11-18T19:17:14Z)
 
-- **Campaign state:** `ACTIVE_CAMPAIGN`; gates green after this refresh; mandated next step cleared of blockers.
-- **Latest executed session:** `research_state/session_20261118T143817Z` — campaign `FCLR-VOL-LIQ-ROBUST-05-20261118T132800Z`, EXPLORATORY/PILOT, complete package (prereg + robustness triad + trigger check + evidence audit + independent recompute). ROBUST-05 is an **honest negative** and its artifact set remains gate-binding.
-- **Active required next campaign:** `FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z` (machine-enforced by `scripts/check_handoff_heavywork_gate.py` for any session after `20261118T182600Z`).
+- **Campaign state:** `ACTIVE_CAMPAIGN`; gates green after this refresh; risk-07 is armed and machine-enforced.
+- **Latest executed session:** `research_state/session_20261118T182813Z` — campaign `FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z`, EXPLORATORY/PILOT, complete package (prereg + multi-month modeled labels + out-of-sample calibration + trigger check + evidence audit + independent recompute). RISK-06 is an **honest negative** and its artifact set remains gate-binding.
+- **Active required next campaign:** `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` (machine-enforced by `scripts/check_handoff_heavywork_gate.py` for any session after `20261118T191714Z`).
 - **Rank-0 trigger state:** `TRIGGER_ONLY`; all four reopen triggers OPEN/none fired.
+- **Root `research_state/` md+json count:** **498/500** — write every new artifact under the session subdir, never at root.
 
-### ROBUST-05 result (do not re-run, do not re-interpret)
-Four chronological holdouts, expanding train, 7-day purge/embargo, 5 instruments, stdlib OLS HAR + Duan smearing. `ΔQLIKE_vs_A = mean(QLIKE_A − QLIKE_model)`; QLIKE is a **loss**, so positive = model beats RV-only.
+### RISK-06 result (do not re-run, do not re-interpret)
+Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01`, 7-day purge/embargo, 5 instruments, 12 scenarios, 262,080 modeled rows (6,241 breached, rate 0.023813). `ΔBrier = Brier_B0 − Brier_Bm`; Brier is a **loss**, so positive = funding model better calibrated.
 
-| Holdout | E mean ΔQLIKE vs A | bootstrap CI95 | E beats A |
+| Holdout | B1 ΔBrier (primary `L10|long|H24`) | B2 ΔBrier | B1 beats B0 |
 |---|---|---|---|
-| 2024-06 | −0.0632 | [−0.0915, −0.0344] | no |
-| 2024-07 | −0.2166 | [−0.2839, −0.1491] | no |
-| 2024-08 | −0.7476 | [−1.1282, −0.3058] | no |
-| 2024-09 | −0.0293 | [−0.0418, −0.0161] | no |
+| 2024-07 | −0.000035 | −0.000176 | no |
+| 2024-08 | +0.000535 | −0.000310 | no (CI lower < 0) |
+| 2024-09 | +0.000196 | −0.000098 | yes (CI lower > 0) |
 
-- Pooled best model by QLIKE = **A_rv_only**; E pooled Δ = −0.2678 (CI95 [−0.3733, −0.1501]).
-- Placebo (funding permuted, seed 12345): pooled Δ = −0.0934; real |Δ| = 0.2678 > placebo |Δ|.
-- **Materiality floor NOT met (0 of 4).** Track C funding-conditioned volatility forecasting is **closed for exploratory purposes**. Correct claim: RV-only outperformed funding-conditioned models on QLIKE in every cached holdout tested.
-- Independent recompute (`recompute_fclr_robust05_robustness_20261118T143817Z.json`) re-derives every aggregate + the frozen day-block bootstrap from stored loss arrays: **0 discrepancies**.
+- Beat-B0 holdouts on primary scenario: **B1 1/3, B2 0/3**.
+- Real mean ΔBrier: B1 **+0.000209**, B2 **−0.000198**; placebo mean: B1 **−0.000439**, B2 **−0.000466**.
+- **Materiality floor NOT met.** Verdict: `HONEST_NEGATIVE_OR_INCONCLUSIVE`. Correct claim: funding-conditioned features did not improve modeled breach-risk calibration over RV-only in the tested holdouts.
+- Independent recompute (`recompute_fclr_risk06_calibration_20261118T182813Z.json`) re-derives every aggregate + the frozen day-block bootstrap: **0 discrepancies**.
+- Calibration deciles show the real defect: baseline predicted risk is compressed into ~0.6–8% while observed rates range 0–11%; in `2024-09` the top decile predicts 3.05% and observes **0%**. Risk-07 targets this defect directly.
 
-### Feasibility facts — do not claim you are data-blocked (verified 2026-11-18T18:26:17Z)
+### Feasibility facts — do not claim you are data-blocked (verified 2026-11-18T19:17:14Z)
 - Confirmatory multi-block **cached** design remains infeasible in all domains (`scripts/next_campaign_status.py --json` → `any_feasible=false`). Certified closed; do not reopen without a machine-satisfied trigger.
-- `research_state/data_cache/` has complete **1h mark-price files + funding files** for `BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, BNBUSDT` for every month **2024-04 … 2024-09** (30–31 mark days/file-month, 3 funding files/month). Risk-06 is runnable **fully offline**.
+- `research_state/data_cache/` has complete **1h mark-price files + funding files** for `BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, BNBUSDT` for every month **2024-03 … 2024-09** (30–31 mark days/file-month, 3 funding files/month). RISK-07 is runnable **fully offline** and can reuse the stored RISK-06 label matrix (`fclr_risk06_labels_20261118T182813Z.json`, 13 MB, includes all 262,080 rows).
 - **Sealed months:** 2024-10 onward (all 2025/2026 cache) are **sealed** and must not be read for outcomes.
 - Environment: `numpy/pandas/scipy` absent by design. Implement with stdlib (`math/csv/json/zipfile/statistics/random`). Do not wait for installs or network.
-- Root `research_state/` md+json count is **498/500**: write every new artifact under the session subdir.
 
 ## Next focus campaign — REQUIRED heavy work (machine-enforced)
 
-**`FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z` — Track B multi-month liquidation-breach risk calibration (stdlib, cached data).**
+**`FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` — Track B train-only recalibration of modeled breach-risk probabilities (stdlib, cached data, no new labels needed).**
 
-**Research question:** do funding-conditioned features improve **out-of-sample probabilistic calibration** (Brier score, log-loss) of **modeled liquidation-boundary breach risk** over an RV-only baseline across multiple chronological holdouts, and is any effect distinguishable from a funding-permutation placebo?
+**Research question:** is the RV-only baseline (`B0_rv_only`) reliably miscalibrated out-of-sample on modeled liquidation-boundary breach risk, and can a **train-only** recalibration layer materially improve **Brier score and ECE** across multiple chronological holdouts and **transfer** across scenarios, beyond a label-permutation placebo?
 
 **Design (freeze ex ante):**
-- Instruments: `BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, BNBUSDT`.
-- Label months (synthetic modeled labels, `observed_liquidation_labels=false`): `2024-04 … 2024-09`. Reuse/parameterize the verified Track B labeling code (entry at 1h mark close t; evaluate mark path t+1..t+H; `mmr=0.005`; L∈{5,10,20}; side∈{long,short}; H∈{4,24}; long boundary `P0*(1−1/L)/(1−mmr)`, short boundary `P0*(1+1/L)/(1+mmr)`).
-- Chronological holds (7-day purge/embargo, expanding train):
+- **Inputs:** reuse the verified RISK-06 modeled label matrix and cached 1h mark/funding features. Same 5 instruments, label months `2024-04 … 2024-09`, `mmr=0.005`, `L∈{5,10,20}`, `side∈{long,short}`, `H∈{4,24}`; `synthetic_modeled_boundary_breach`, `observed_liquidation_labels=false`.
+- **Splits:** identical chronological holds with 7-day purge/embargo and expanding train:
   - `2024-07`: train 2024-04-01…2024-06-23, embargo 06-24…06-30, test 07-01…07-31
   - `2024-08`: train 2024-04-01…2024-07-24, embargo 07-25…07-31, test 08-01…08-31
   - `2024-09`: train 2024-04-01…2024-08-24, embargo 08-25…08-31, test 09-01…09-30
-- Features (causal at t, train-only standardization): `lrv1, lrv24, lrv168` (RV block); funding block `fund, fund_abs, fmean, fewma`; funding-shock block `fund_shock=|fund−fewma|`, `fund_z=(fund−fmean)/trailing_sd`.
-- Models (stdlib IRLS logistic, ridge `lambda=1e-6`, seed `12345`):
-  - `B0_rv_only` = RV block.
-  - `B1_funding_conditioned` = RV + funding block.
-  - `B2_funding_shock` = RV + funding-shock block.
-- Metrics: **Brier score (primary, lower better)**, log-loss, and AUC (secondary). Paired `ΔBrier = Brier_B0 − Brier_Bm` (**positive = funding model better calibrated**). Report the pre-registered primary scenario `L10|long|H24` and the equal-weight pooled result over all 12 scenarios.
-- Uncertainty: UTC-day block bootstrap, seed `12345`, 2000 reps, percentile CI95; LOIO per holdout.
-- Placebo: deterministic permutation of the funding series across entry timestamps (seed `12345`), identical pipeline; report its ΔBrier distribution.
-- Calibration table: predicted vs observed breach rate by predicted-risk decile for the best model, per holdout.
-- **Materiality floor (correct sign):** `B1` **or** `B2` beats `B0` (`ΔBrier > 0` with bootstrap CI95 lower bound > 0) in **≥2 of 3** holdouts on the primary scenario **and** real `|mean ΔBrier|` exceeds placebo `|mean ΔBrier|`. Otherwise report an honest negative result. Negative results are a valid completion; skipping the run is not.
+- **Base score:** per-scenario `B0_rv_only` stdlib IRLS logistic (RV block `lrv1,lrv24,lrv168`, ridge `1e-6`, train-only standardization, seed `12345`), pooled across the 5 instruments within the train window — exactly the RISK-06 baseline that produced the best Brier.
+- **Calibrators (all train-only, fitted on out-of-fold scores):**
+  - `C1_platt`: 1-D logistic recalibration `sigmoid(a·logit(s)+b)` by IRLS with ridge `1e-6`.
+  - `C2_isotonic`: PAVA isotonic regression on out-of-fold `(s, y)` with tie pooling and monotone step map; interpolate between knots, clip to `[0,1]`.
+  - `C3_prior_offset`: one-parameter base-rate shift `sigmoid(logit(s) + logit(p_train) − logit(mean_train_score))`, per scenario.
+  - `C0_identity`: uncalibrated baseline reference (must reproduce RISK-06 test Brier exactly).
+- **Leakage control (mandatory):** fit every calibrator on **out-of-fold train predictions** produced by **5 contiguous UTC-day-block folds** inside the train window (each fold model trained on the other folds; no shuffling across days). The final base model is refit on the full train window for test scores. Never fit a calibrator on test rows or on in-sample train predictions.
+- **Metrics:** **Brier (primary)**, ECE with 10 equal-count bins (merge bins with `<30` rows; report bin count), log-loss, AUC, calibration-in-the-large (mean predicted vs observed), and reliability slope/intercept from a 1-D logistic fit on test scores (diagnostic only, not used for tuning). Define `ΔBrier = Brier_C0 − Brier_Cm` and `ΔECE = ECE_C0 − ECE_Cm` (**positive = calibrated better**).
+- **Uncertainty:** UTC-day block bootstrap, seed `12345`, 2000 reps, percentile CI95 for ΔBrier and ΔECE, per holdout and pooled over the 12 scenarios (equal weight). LOIO over instruments for the primary scenario.
+- **Cross-scenario transfer (secondary, pre-registered):** for C1/C3, fit the calibrator on scenario A's train out-of-fold scores and apply to scenario B's test scores; report the mean ΔBrier over ordered scenario pairs and whether the sign is consistent with own-scenario calibration.
+- **Placebo:** permute train labels within scenario (seed `12345`) **after** out-of-fold scores are computed, refit each calibrator on the permuted train scores, apply to the real test set; repeat 200 permutations. Report the placebo null mean and 95th percentile of mean ΔBrier. The real effect must exceed the placebo 95th percentile.
+- **Materiality floor (correct sign, all three required):** at least one of `C1`/`C3` achieves `ΔBrier > 0` with bootstrap CI95 lower bound `> 0` in **≥2 of 3** holdouts on the primary scenario `L10|long|H24`; mean `ΔECE ≥ 0.005` in **≥2 of 3** holdouts (min-bin guard satisfied); and the real mean ΔBrier exceeds the **95th percentile** of the label-permutation placebo null. Otherwise report an honest negative (negative results are a valid completion; skipping the run is not).
 
-**Execution recipe (fast path, reuse verified code):** copy `research_state/session_20261118T143817Z/trackb_breach_labels_20261118T093031Z.py` and `trackbc_breach_forecast_20261118T114500Z.py` into the new session dir; parameterize the label month over 2024-04…09, reuse the stdlib IRLS logistic / `brier` / day-block bootstrap, and add the funding-shock block + permutation placebo. The one-month forecast ran in minutes; 6 label months × 3 holds × 3 models + placebo should finish in ~10–25 minutes. Write incrementally so a timeout still leaves non-empty partial JSON/MD.
+**Execution recipe (fast path, reuse verified code):**
+1. Copy `research_state/session_20261118T182813Z/fclr_risk06_labels_20261118T182813Z.json` into the new session dir and load it directly (no label rebuild needed; do not mutate it).
+2. Copy `fclr_risk06_calibration_20261118T182813Z.py` and keep `build_feature_map`, `design`, `standardize`, `irls_logistic`, `predict_row`, `brier`, `logloss`, `auc`, `day_block_bootstrap`, `date_set` — then add the OOF-fold loop and the three calibrators. Copy `recompute_fclr_risk06_calibration_*.py` as the recompute template.
+3. Write increments: prereg first, then calibrator self-tests (`C2` monotone non-decreasing, `C1` monotone in score, `C3` identity when `p_train == mean_train_score`, all outputs finite in `[0,1]`), then per-holdout results, then placebo, then transfer.
+4. Runtime is modest: reuse of the 13 MB label JSON plus 3 holds × 12 scenarios × 5 OOF folds × 1 base model is the dominant cost; write partial non-empty JSON/MD after each holdout so a timeout still leaves evidence.
 
-**Required artifacts (exact prefixes; all non-empty) in `research_state/session_<UTC>/` with UTC > `20261118T182600Z`):**
-- `fclr_risk06_prereg_<UTC>.json` and `.md` (must contain `outcome_data_inspected_before_freeze=false`, the three holds, label months, model list, metrics, seed, floor)
-- `fclr_risk06_labels_<UTC>.py`, `.json`, `.md` (multi-month modeled breach labels; `.json` must contain the per-scenario breach counts)
-- `fclr_risk06_calibration_<UTC>.py`, `.json`, `.md`
-- `trigger_check_<UTC>.json`
-- `evidence_audit_<UTC>.json` + `.md`
-- `recompute_fclr_risk06_calibration_<UTC>.json`
+**Required risk-07 artifacts (exact prefixes; all non-empty) in the new `research_state/session_<UTC>/`:**
+- `fclr_risk07_prereg_<UTC>.json` and `.md` — must contain `outcome_data_inspected_before_freeze=false`, the three holds, base score definition, calibrator list, OOF scheme, metrics, seed, placebo rule, and the materiality floor.
+- `fclr_risk07_calibrators_<UTC>.py` and `.json` — implementation + self-test evidence (monotonicity, bounds, identity checks) and fitted parameters per holdout/scenario.
+- `fclr_risk07_recalibration_<UTC>.py`, `.json`, `.md` — full per-holdout, per-scenario Brier/ECE/log-loss/AUC, bootstrap CIs, pooled result, transfer matrix, placebo null, decile/reliability diagnostics, verdict.
+- `evidence_audit_<UTC>.json` + `.md`.
+- `recompute_fclr_risk07_recalibration_<UTC>.json` — independent re-derivation from stored per-row scores/labels; `n_discrepancies` must be 0.
+- `trigger_check_<UTC>.json`.
 
-**Carry forward (copy, do not recompute) into the new session dir (all non-empty):** from `session_20261118T143817Z` — `trackc_design_a_forecast_*.{py,json,md}`, `trackb_breach_labels_*.{py,json,md}`, `trackbc_breach_prereg_*.json`, `trackbc_breach_forecast_*.{py,json,md}`, `fclr_robust05_prereg_*.{json,md}`, `fclr_robust05_robustness_*.{py,json,md}`.
+**Mandatory carry-forward into the same new session dir (copy, do not recompute; all non-empty):**
+- RISK-06 package from `session_20261118T182813Z`: `fclr_risk06_prereg_*.{json,md}`, `fclr_risk06_labels_*.{py,json,md}`, `fclr_risk06_calibration_*.{py,json,md}`.
+- ROBUST-05 package from `session_20261118T143817Z`: `fclr_robust05_prereg_*.{json,md}`, `fclr_robust05_robustness_*.{py,json,md}`.
+- One non-empty `trigger_check_<UTC>.json` (the new one satisfies this).
 
 ### Record, verify, hand off (in order)
-1. Create the post-`182600Z` session dir and freeze the prereg **first**.
-2. Produce every required risk-06 artifact non-empty; never emit zero-byte files.
+1. Create the post-`191714Z` session dir and freeze the risk-07 prereg **first**.
+2. Produce every required risk-07 and carried-forward artifact non-empty; never emit zero-byte files.
 3. Change the **Latest executed session** line above to the new session id.
 4. Run targeted bounded tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125 -v`.
 5. Record exact gate outcomes: `python3 scripts/check_handoff_heavywork_gate.py --json`, `python3 scripts/check_tracka_scope_registry_drift.py --json`, `python3 scripts/next_campaign_status.py --json`.
@@ -88,22 +97,23 @@ Four chronological holdouts, expanding train, 7-day purge/embargo, 5 instruments
 
 ## Read first
 1. `RESEARCH_PROMPT.md` §1–§6, §16–§17.
-2. `research_state/session_20261118T143817Z/` — `fclr_robust05_robustness_20261118T143817Z.{py,json,md}`, `recompute_*`, `evidence_audit_*` (closed Track C baseline).
-3. `research_state/session_20261118T143817Z/trackb_breach_labels_20261118T093031Z.py` and `trackbc_breach_forecast_20261118T114500Z.{py,json,md}` — the code to extend for risk-06.
-4. `research_state/evaluation_summary.md`, `research_state/data_source_registry.json`, `research_state/resume_trigger_registry.json`.
+2. `research_state/session_20261118T182813Z/fclr_risk06_calibration_20261118T182813Z.{py,json,md}` — the baseline being recalibrated; reuse its functions.
+3. `research_state/session_20261118T182813Z/fclr_risk06_labels_20261118T182813Z.json` — the 262,080-row modeled label matrix to reuse.
+4. `research_state/session_20261118T182813Z/recompute_fclr_risk06_calibration_20261118T182813Z.py` — recompute pattern.
+5. `research_state/evaluation_summary.md`, `research_state/data_source_registry.json`, `research_state/resume_trigger_registry.json`.
 
 ## Prohibitions
 - Do not re-run/re-score sealed cached-data confirmatory estimands or sealed results (FCLR-014, replication synthesis, design-frontier certs, FCLR-013/010/002/003/009/006/008, frontier verify-06/07/08+, sealed 19.04%).
-- **Do not read sealed months 2024-10 … 2026-11 for outcomes.** Risk-06 uses only 2024-04…2024-09.
-- Do not re-open the Track C QLIKE question: it is closed negative. No funding-trail "improvement" claim in either sign.
+- **Do not read sealed months 2024-10 … 2026-11 for outcomes.** RISK-07 uses only 2024-04…2024-09 (features 2024-03…2024-09).
+- Do not re-open the Track C QLIKE question or re-run RISK-06 funding-vs-RV calibration.
 - No polling/HF re-probe, no paid/credentialed/manual outcome data, no network installs/fetches, no `git lfs pull`.
-- No mutation of sealed artifacts/closure JSON/`.github/workflows/*`; no root-level `research_state/*.md|json` (root is **498/500** — write all new artifacts under the session subdir); no duplicate `AGENT_HANDOFF*`.
+- No mutation of sealed artifacts/closure JSON/`.github/workflows/*`; no root-level `research_state/*.md|json` (root is **498/500**); no duplicate `AGENT_HANDOFF*`.
 - No `statsmodels` or unpinned heavy deps in the core path. Do not run parquet-only scripts without a CSV/JSON/ZIP twin.
 - Do not treat missing-numpy/environmental discovery errors as green.
 - Never inspect outcomes while producing outcome-blind preregs. **Never emit empty/zero-byte artifacts.**
 - Do not treat **modeled** breach labels as observed liquidations (`observed_liquidation_labels=false` must stay explicit).
 - Do not leave a session recorded in this handoff without its required execution artifacts present and non-empty on disk.
-- **Do not spend a session on handoff refresh / audit / gate-only work. That is the known failure loop. The only acceptable output of the next session is the executed RISK-06 package.**
+- **Do not spend a session on handoff refresh / audit / gate-only work. That is the known failure loop. The only acceptable output of the next session is the executed RISK-07 package plus its carried-forward packages.**
 
 ## Reopen triggers (machine-checkable — all OPEN)
 - `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`).
@@ -111,14 +121,13 @@ Four chronological holdouts, expanding train, 7-day purge/embargo, 5 instruments
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T18:26:17Z (handoff refresh + bottleneck removal; no new research session created)
-- **Bottleneck removed 1 (gate was failing):** the previous handoff recorded `session_20261118T132800Z` while `session_20261118T143817Z` existed on disk → `HANDOFF_STALE_LATEST_SESSION`. This refresh records the executed ROBUST-05 session.
-- **Bottleneck removed 2 (incomplete ROBUST-05 package):** `session_20261118T143817Z` lacked the required `evidence_audit_*` and `recompute_fclr_robust05_robustness_*` artifacts. Both were produced from the stored results; the recompute re-derives every aggregate and the frozen bootstrap with **0 discrepancies**.
-- **Bottleneck removed 3 (avoidance):** `scripts/check_handoff_heavywork_gate.py` now enforces `FCLR-LIQ-RISK-CALIBRATION-06` (prereg, multi-month labels triad, calibration triad, trigger check, no zero-byte files); a post-`182600Z` session cannot pass without the heavy package.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** — `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, latest = `session_20261118T143817Z`, root `498/500`; `robust_05` is actively binding (`required=true`, `pass=true`); `risk_06` is armed (`campaign_start_utc=20261118T182600Z`, grandfathered for the current latest session).
+## Verification record — 2026-11-18T19:17:14Z (bottleneck removal + risk-07 arming; no new research session created)
+- **Bottleneck removed 1 (stale handoff):** the executed RISK-06 session `session_20261118T182813Z` existed and was committed, but the handoff still recorded `session_20261118T143817Z` → `HANDOFF_STALE_LATEST_SESSION`. This refresh records the executed RISK-06 session and its honest-negative result.
+- **Bottleneck removed 2 (empty orphan session dir):** an empty session directory created by an aborted attempt (19:15Z, zero files) made the gate stale again. It contained no evidence and was removed; no work was lost.
+- **Bottleneck removed 3 (unwired campaign):** `scripts/check_handoff_heavywork_gate.py` defined `RISK_07_REQUIRED`/`_risk_07_state()` but never invoked them, so a declared RISK-07 campaign could be silently skipped. The gate now records `risk_07` state and fails closed on missing/empty risk-07 artifacts for any post-`191714Z` session.
+- **Bottleneck removed 4 (avoidance):** RISK-07's mandatory carry-forward list (RISK-06 + ROBUST-05) is spelled out above so a future session cannot pass the gate with only the new calibrator files, and cannot pass with zero-byte placeholders.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** — `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, latest = `session_20261118T182813Z`, root `498/500`; `risk_06` actively binding (`required=true`, `pass=true`); `risk_07` armed and grandfathered for the current latest session (`campaign_start_utc=20261118T191714Z`).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
-- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); stdlib exploratory Track B/C feasible on cached 2024-04…09.
-- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → **OK, 56 tests**. Full `unittest discover` is environmental/hanging in this runtime (not a green full suite).
-- Holdout feasibility: verified mark+funding cache coverage for 2024-04…2024-09 across all five instruments (30–31 mark days/file-month, 3 funding files/month).
-- Risk-06 enforcement self-tested: a simulated post-`182600Z` session with no risk-06 files (or with a zero-byte placeholder) fails; a complete non-empty set plus `trigger_check` passes.
+- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); stdlib exploratory Track B/C feasible on cached 2024-03…09.
+- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → **OK, 61 tests**. The new `TestRisk07CampaignGate` class proves post-start audit-only, empty-file, and missing-trigger sessions fail closed while a complete non-empty risk-07 set passes; pre-start sessions remain grandfathered.
 - Sole durable handoff preserved; no duplicates; no sealed artifacts, workflows, or registries modified.

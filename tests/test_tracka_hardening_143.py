@@ -537,6 +537,91 @@ class TestBreachForecastCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestRisk07CampaignGate(unittest.TestCase):
+    """FCLR-LIQ-RISK-RECALIBRATION-07: after RISK-06 rejects funding-conditioned
+    calibration, a post-start session must do the heavy baseline-recalibration
+    work (outcome-blind prereg + calibrator implementation + recalibration triad
+    + trigger check), not an audit-only or gate-only session. Empty placeholders
+    fail closed; pre-start sessions are grandfathered."""
+
+    START = "20261118T191714Z"
+
+    def _repo(self, latest_sid="session_20261118T200000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143r07_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the risk-07 contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (sdir / "recompute_x.json").write_text("{}")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-LIQ-RISK-RECALIBRATION-07-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_required(self, sdir, sid="20261118T200000Z", content="x"):
+        for prefix, suffix in gate.RISK_07_REQUIRED:
+            (sdir / f"{prefix}{sid}{suffix}").write_text(content)
+
+    def test_post_start_audit_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "evidence_audit_20261118T200000Z.json").write_text("{}")
+        (sdir / "trigger_check_20261118T200000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["risk_07"]["required"])
+        self.assertTrue(res["risk_07"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("RISK_07_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_empty_files_fail_closed(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir, content="")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["risk_07"]["empty_required_artifacts"])
+        self.assertTrue(any(f.startswith("RISK_07_ARTIFACTS_EMPTY")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_trigger_fails_closed(self):
+        repo, sdir = self._repo()
+        for prefix, suffix in gate.RISK_07_REQUIRED:
+            if prefix == "trigger_check_":
+                continue
+            (sdir / f"{prefix}20261118T200000Z{suffix}").write_text("x")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(any(f.startswith("RISK_07_TRIGGER_CHECK_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_full_recalibration_package_passes(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir)
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["risk_07"]["pass"])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261118T190000Z")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["risk_07"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffFreshnessGate(unittest.TestCase):
     """FCLR-TRIGGER-READINESS-01: a newer on-disk session that is not recorded
     in the handoff fails closed. The gate must not stay green merely because the

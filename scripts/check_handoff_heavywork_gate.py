@@ -936,6 +936,7 @@ def check(repo: Path = REPO) -> dict:
         "robust_04": None,
         "robust_05": None,
         "risk_06": None,
+        "risk_07": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -1164,6 +1165,31 @@ def check(repo: Path = REPO) -> dict:
                 if not r06["has_trigger_check"]:
                     payload["failures"].append(
                         f"RISK_06_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-RISK-RECALIBRATION-07: after the risk-07 campaign starts,
+            # require the outcome-blind prereg + stdlib calibrator implementation +
+            # recalibration evaluation triad + trigger check. Zero-byte placeholders
+            # fail closed, so a future session cannot dodge the heavy calibration
+            # work with an audit-only or gate-only session.
+            r07 = _risk_07_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["risk_07"] = r07
+            if r07["required"]:
+                if r07["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "RISK_07_ARTIFACTS_MISSING:"
+                        + ",".join(r07["missing_required_artifacts"])
+                    )
+                if r07["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "RISK_07_ARTIFACTS_EMPTY:"
+                        + ",".join(r07["empty_required_artifacts"])
+                    )
+                if not r07["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"RISK_07_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
