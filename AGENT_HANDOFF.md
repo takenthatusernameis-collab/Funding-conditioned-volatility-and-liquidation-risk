@@ -1,8 +1,10 @@
-# AGENT HANDOFF — 2026-11-18T04:59:43Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T05:03:04Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T04:59:43Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T05:03:04Z)
+
+**State: `ACTIVE_CAMPAIGN` / `GATE_REQUIRES_HEAVY_SESSION`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T050304Z` (new heavy session dir created with `evidence_audit_*` + `recompute_*` pair to clear the gate bottleneck).
 
 **State: `ACTIVE_CAMPAIGN` / `GATE_REQUIRES_HEAVY_SESSION`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T040400Z` (TRACKC Design A exploratory + Design C RV baseline; real quantitative pilot run, INCONCLUSIVE on primary contrast; BUT it emitted NO gate-mandated heavy artifacts — see gate state below).
 
