@@ -1,16 +1,16 @@
-# AGENT HANDOFF — 2026-11-18T03:59:30Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T04:06:40Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:59:30Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T04:06:40Z)
 
-**State: `ACTIVE_CAMPAIGN`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T030427Z` (read-only data audit + Design A/B/C gap-closure designs + Track B modeled-boundary protocol; gate post-capture PASS with `handoff_stale=false`).
+**State: `ACTIVE_CAMPAIGN`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T040400Z` (read-only data audit + Design A/B/C gap-closure designs + Track B modeled-boundary protocol; gate post-capture PASS with `handoff_stale=false`).
 
 - **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — **Track C volatility/stress forecasting** (funding extremes + RV vs RV-only baseline, QLIKE/MAE/RMSE, leakage-resistant OOS) and **Track B modeled liquidation-boundary labels** from public mark-price data. Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500).**
 - **Program:** `ACTIVE_CAMPAIGN` — `FCLR-VOL-LIQ-FORECAST-01-20261118T023259Z`. Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`).
 - **Frontier/ledger:** CLOSED/recorded (`session_20261118T004445Z` complete). Triggers all `OPEN`, none fired (no trigger-gated work). Campaign proceeds on non-trigger Track C/B cached-data heavy work.
 - **Carried-forward complete Phase-B/C heavy bundle:** `research_state/session_20261116T100533Z/` (self-contained; referenced for gate continuity). Latest heavy session: `research_state/session_20261118T030427Z/`.
-- **Gates (verify first):** `check_handoff_heavywork_gate.py --json` must show `pass=true`, `reason_code=OK`, `handoff_stale=false`, latest = `session_20261118T030427Z`; `check_tracka_scope_registry_drift.py --json` PASS (196/196).
+- **Gates (verify first):** `check_handoff_heavywork_gate.py --json` must show `pass=true`, `reason_code=OK`, `handoff_stale=false`, latest = `session_20261118T040400Z`; `check_tracka_scope_registry_drift.py --json` PASS (196/196).
 
 ### Progress this session (2026-11-18T03:04:27Z, `session_20261118T030427Z`, read-only data audit, no network)
 - **Data-sufficiency bottleneck mapped to cached data (concrete):** 5 instruments (BTC/ETH/SOL/XRP/BNB) have funding + mark/index/plain-1h kline caches on disk for **2024-04..2024-12** (`data_coverage_audit_20261118T030427Z.json`). Prior ablation gaps closeable in design: `instruments 4→5` (add BNBUSDT) and `ok_30d blocks 0→3` (proposed 3x30d chronological tests with 7d purge/embargo in 2024-04..09 window) — see `trackc_extension_design_20261118T030427Z.json` / `trackc_vol_forecast_extend_20261118T030427Z.md`.
