@@ -1,0 +1,48 @@
+{
+  "schema": "evidence_audit",
+  "session_id": "session_20261118T093031Z",
+  "timestamp_utc": "20261118T093031Z",
+  "campaign": "FCLR-VOL-LIQ-EXECUTION-01-20261118T092338Z",
+  "network_used": false,
+  "installs": false,
+  "git_lfs_pull": false,
+  "writes": "session dir only + AGENT_HANDOFF.md (sole durable handoff)",
+  "root_research_state_files_added": 0,
+  "tracks_completed": {
+    "track_c": {
+      "artifacts": [
+        "trackc_design_a_forecast_20261118T093031Z.py",
+        "trackc_design_a_forecast_20261118T093031Z.json",
+        "trackc_design_a_forecast_20261118T093031Z.md"
+      ],
+      "status": "COMPLETE",
+      "label": "EXPLORATORY_PILOT",
+      "headline": "Funding-trail features (E_rv_funding_trails) improve QLIKE vs RV-only (mean_delta_qlike_vs_A=-0.3579, CI95=[-0.4980,-0.1932])."
+    },
+    "track_b": {
+      "artifacts": [
+        "trackb_breach_labels_20261118T093031Z.py",
+        "trackb_breach_labels_20261118T093031Z.json",
+        "trackb_breach_labels_20261118T093031Z.md"
+      ],
+      "status": "COMPLETE",
+      "label_type": "synthetic_modeled_boundary_breach",
+      "observed_liquidation_labels": false,
+      "n_rows": 41760,
+      "n_breached_rows": 1418,
+      "overall_breach_rate": 0.03395593869731801
+    }
+  },
+  "recompute_artifacts": [
+    "recompute_trackb_breach_labels_20261118T093031Z.json"
+  ],
+  "trigger_check": "trigger_check_20261118T093031Z.json",
+  "prohibitions_respected": {
+    "no_sealed_rescore": true,
+    "no_network": true,
+    "no_root_research_state_additions": true,
+    "no_sealed_artifact_mutation": true,
+    "no_workflow_edits": true
+  },
+  "honest_status": "EXPLORATORY/PILOT. Heavy execution campaign complete with substantive non-empty artifacts; no confirmatory promotion claimed."
+}

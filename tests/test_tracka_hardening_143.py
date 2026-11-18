@@ -453,6 +453,90 @@ class TestVolLiqExecutionCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestBreachForecastCampaignGate(unittest.TestCase):
+    """FCLR-VOL-LIQ-BREACH-FORECAST-03: after the breach-forecast campaign starts,
+    a post-start session cannot satisfy the heavy-work gate with an audit-only,
+    gate-only, or Track-C/B-only rerun. It must emit the outcome-blind breach-
+    forecast prereg, the forecast triad, a trigger check, and non-empty files."""
+
+    START = "20261118T103106Z"
+
+    def _repo(self, latest_sid="session_20261118T110000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143bf_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the breach-forecast contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (sdir / "recompute_execution_readiness_x.json").write_text("{}")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-VOL-LIQ-BREACH-FORECAST-03-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_required(self, sdir, sid="20261118T110000Z", content="x"):
+        for prefix, suffix in gate.BREACH_FORECAST_REQUIRED:
+            (sdir / f"{prefix}{sid}{suffix}").write_text(content)
+
+    def test_post_start_trackc_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "trackc_design_a_forecast_20261118T110000Z.json").write_text("{}")
+        (sdir / "trigger_check_20261118T110000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["breach_forecast"]["required"])
+        self.assertTrue(res["breach_forecast"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("BREACH_FORECAST_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_empty_files_fail_closed(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir, content="")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["breach_forecast"]["empty_required_artifacts"])
+        self.assertTrue(any(f.startswith("BREACH_FORECAST_ARTIFACTS_EMPTY")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_trigger_fails_closed(self):
+        repo, sdir = self._repo()
+        for prefix, suffix in gate.BREACH_FORECAST_REQUIRED:
+            if prefix == "trigger_check_":
+                continue
+            (sdir / f"{prefix}20261118T110000Z{suffix}").write_text("x")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(any(f.startswith("BREACH_FORECAST_TRIGGER_CHECK_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_full_forecast_package_passes(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir)
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["breach_forecast"]["pass"])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261118T093031Z")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["breach_forecast"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffFreshnessGate(unittest.TestCase):
     """FCLR-TRIGGER-READINESS-01: a newer on-disk session that is not recorded
     in the handoff fails closed. The gate must not stay green merely because the

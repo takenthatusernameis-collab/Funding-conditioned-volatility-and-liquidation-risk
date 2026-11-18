@@ -148,6 +148,25 @@ VOL_LIQ_EXECUTION_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-VOL-LIQ-BREACH-FORECAST-03 hardening: the next focus campaign advances the
+# science past Track C (volatility) + Track B (modeled breach labels) by joining
+# them — do funding-conditioned volatility features predict modeled
+# liquidation-boundary breaches? Once this campaign starts, a post-start session
+# cannot satisfy the gate with an audit-only, gate-only, or Track-C/B-only rerun.
+# It must emit the outcome-blind breach-forecast prereg (frozen before outcomes),
+# the forecast source/result/report triad, and a trigger check. Sessions predating
+# the campaign are grandfathered so this handoff refresh remains green.
+BREACH_FORECAST_CAMPAIGN_RE = re.compile(
+    r"FCLR-VOL-LIQ-BREACH-FORECAST-(\d+)-(\d{8}T\d{6}Z)"
+)
+BREACH_FORECAST_REQUIRED = (
+    ("trackbc_breach_prereg_", ".json"),
+    ("trackbc_breach_forecast_", ".py"),
+    ("trackbc_breach_forecast_", ".json"),
+    ("trackbc_breach_forecast_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -459,6 +478,73 @@ def _vol_liq_execution_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _breach_forecast_state(handoff_text: str, latest_sid: str | None,
+                           latest_files: list[str],
+                           latest_dir: Path | None = None) -> dict:
+    """Return FCLR-VOL-LIQ-BREACH-FORECAST-03 non-avoidance state.
+
+    After the breach-forecast campaign starts, a post-start session must contain
+    the outcome-blind breach-forecast prereg and forecast triad plus a trigger
+    check, with no zero-byte placeholders. Sessions predating the campaign are
+    grandfathered so the handoff refresh that first announces the campaign stays
+    green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = BREACH_FORECAST_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-VOL-LIQ-BREACH-FORECAST-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files
+            if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in BREACH_FORECAST_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, BREACH_FORECAST_REQUIRED):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -505,6 +591,7 @@ def check(repo: Path = REPO) -> dict:
         "ledger_integrity": None,
         "closure_ledger": None,
         "vol_liq_execution": None,
+        "breach_forecast": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -641,6 +728,29 @@ def check(repo: Path = REPO) -> dict:
                 if not vl["has_trigger_check"]:
                     payload["failures"].append(
                         f"VOL_LIQ_EXECUTION_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-VOL-LIQ-BREACH-FORECAST-03: after the breach-forecast campaign
+            # starts, require the outcome-blind prereg + forecast triad + trigger
+            # check. Zero-byte placeholders fail closed.
+            bf = _breach_forecast_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["breach_forecast"] = bf
+            if bf["required"]:
+                if bf["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "BREACH_FORECAST_ARTIFACTS_MISSING:"
+                        + ",".join(bf["missing_required_artifacts"])
+                    )
+                if bf["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "BREACH_FORECAST_ARTIFACTS_EMPTY:"
+                        + ",".join(bf["empty_required_artifacts"])
+                    )
+                if not bf["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"BREACH_FORECAST_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
