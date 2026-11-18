@@ -14,8 +14,10 @@ import zipfile
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-RS = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
+RS = REPO / "research_state"
 CACHE = RS / "data_cache"
+SESSION_DIR = RS / "session_20261118T093031Z"
 UTC_STAMP = "20261118T093031Z"
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"]
@@ -49,12 +51,17 @@ def day_ms_range(d):
     return int(dt.timestamp() * 1000), int((dt + timedelta(days=1)).timestamp() * 1000) - 1
 
 
+def dir_of(symbol, year_month):
+    y, m = year_month.split("-")
+    return f"{symbol}_{y}_{m}"
+
+
 def read_csv_lines(symbol, year_month, day, kind):
-    base = CACHE / f"{symbol}_{year_month}" / f"{kind}-{day}"
-    sub = base / f"{symbol}-1h-{day}"
+    """Read mark-price 1h klines from markPriceKlines-YYYY-MM-DD/<SYM>-1h-YYYY-MM-DD.{csv,zip}."""
+    base = CACHE / dir_of(symbol, year_month) / f"markPriceKlines-{day}"
     csv_name = f"{symbol}-1h-{day}.csv"
-    if (sub / csv_name).is_file():
-        return (sub / csv_name).read_text(encoding="utf-8", errors="ignore").splitlines()
+    if (base / csv_name).is_file():
+        return (base / csv_name).read_text(encoding="utf-8", errors="ignore").splitlines()
     zp = base / f"{symbol}-1h-{day}.zip"
     if zp.is_file():
         with zipfile.ZipFile(zp) as z:
@@ -63,12 +70,11 @@ def read_csv_lines(symbol, year_month, day, kind):
 
 
 def read_funding_lines(symbol, year_month):
-    base = CACHE / f"{symbol}_{year_month}"
-    d = base / f"{symbol}-fundingRate-{year_month}"
+    base = CACHE / dir_of(symbol, year_month) / f"{symbol}-fundingRate-{year_month}"
     csv_name = f"{symbol}-fundingRate-{year_month}.csv"
-    if (d / csv_name).is_file():
-        return (d / csv_name).read_text(encoding="utf-8", errors="ignore").splitlines()
-    zp = base / f"{symbol}-fundingRate-{year_month}.zip"
+    if (base / csv_name).is_file():
+        return (base / csv_name).read_text(encoding="utf-8", errors="ignore").splitlines()
+    zp = CACHE / dir_of(symbol, year_month) / f"{symbol}-fundingRate-{year_month}.zip"
     if zp.is_file():
         with zipfile.ZipFile(zp) as z:
             return z.read(csv_name).decode("utf-8", errors="ignore").splitlines()
@@ -85,7 +91,7 @@ def load_mark_series(symbol):
                 datetime.strptime(day, "%Y-%m-%d")
             except ValueError:
                 continue
-            lines = read_csv_lines(symbol, ym, day, f"{symbol}-1h-{day}.csv")
+            lines = read_csv_lines(symbol, ym, day, "mark")
             if not lines:
                 continue
             it = iter(lines)
@@ -274,8 +280,11 @@ def main():
     for split in SPLITS:
         sid = split["split"]
         tr_s, tr_e = split["train"]; te_s, te_e = split["test"]
-        tr_s_ms, tr_e_ms = day_ms_range(tr_s), day_ms_range(tr_e)
-        te_s_ms, te_e_ms = day_ms_range(te_s), day_ms_range(te_e)
+        tr_s_ms, _ = day_ms_range(tr_s)
+        _, tr_e_ms = day_ms_range(tr_e)
+        te_s_ms, _ = day_ms_range(te_s)
+        _, te_e_ms = day_ms_range(te_e)
+        print(f"[dbg] split {sid} train_ms={tr_s_ms}..{tr_e_ms} test_ms={te_s_ms}..{te_e_ms}", flush=True)
 
         def eligible_origin(panel, s_ms, e_ms):
             n = panel["n"]
@@ -294,6 +303,7 @@ def main():
 
         train_origins = {s: eligible_origin(panels[s], tr_s_ms, tr_e_ms) for s in SYMBOLS}
         test_origins = {s: eligible_origin(panels[s], te_s_ms, te_e_ms) for s in SYMBOLS}
+        print(f"[dbg] split {sid} train_origins={train_origins} test_origins={test_origins}", flush=True)
 
         common_test_ts = None
         for s in SYMBOLS:
@@ -518,8 +528,8 @@ def date_of(ts_ms):
 if __name__ == "__main__":
     result = main()
     # write json
-    json_path = RS / "session_20261118T093031Z" / f"trackc_design_a_forecast_{UTC_STAMP}.json"
-    md_path = RS / "session_20261118T093031Z" / f"trackc_design_a_forecast_{UTC_STAMP}.md"
+    json_path = SESSION_DIR / f"trackc_design_a_forecast_{UTC_STAMP}.json"
+    md_path = SESSION_DIR / f"trackc_design_a_forecast_{UTC_STAMP}.md"
     json_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
     md_lines = [
         f"# Track C — Design A Exploratory Volatility Forecast (stdlib OLS HAR)",
