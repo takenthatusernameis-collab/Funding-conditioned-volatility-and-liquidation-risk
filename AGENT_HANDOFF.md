@@ -1,20 +1,20 @@
-# AGENT HANDOFF — 2026-11-18T19:42:43Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-18T19:45:28Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority.
 > No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T19:42:43Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T19:45:28Z)
 
 **You must complete `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` now. Do not idle, do not re-audit, do not gate-only, do not merely refresh this handoff, do not re-run RISK-06, and do not re-open the closed Track C QLIKE line.**
 
 The session `session_20261118T191945Z` (UTC **20261118T191945Z**) has already started RISK-07 and produced:
 - `fclr_risk07_prereg_20261118T191945Z.{json,md}` — outcome-blind prereg (frozen before outcomes)
 - `fclr_risk07_calibrators_20261118T191945Z.{py,json}` — stdlib calibrator implementations (Platt logistic, PAVA isotonic, scenario base-rate offset) + self-tests
-- `fclr_risk07_recalibration_20261118T191945Z.py` — evaluation script
 - `fclr_risk07_dataset_20261118T191945Z.json` — assembled per-row scores/labels reused from RISK-06
 - `fclr_risk07_partial_2024-07_20261118T191945Z.json` — holdout 2024-07 partial results
-- `fclr_risk07_partial_20261118T191945Z.json` — holdout 2024-08 partial results
+- `fclr_risk07_partial_2024-08_20261118T191945Z.json` — holdout 2024-08 partial results
 - `fclr_risk07_partial_2024-09_20261118T191945Z.json` — holdout 2024-09 partial results
+- `fclr_risk07_recalibration_20261118T191945Z.py` — complete evaluation script (966 lines, stdlib only)
 
 **You must finish this session in-place** (do not create a new session directory). Produce the remaining required artifacts **non-empty** in `research_state/session_20261118T191945Z/`:
 1. `fclr_risk07_recalibration_20261118T191945Z.{json,md}` — full per-holdout, per-scenario Brier/ECE/log-loss/AUC, bootstrap CIs, pooled result, cross-scenario transfer matrix, placebo null, decile/reliability diagnostics, verdict
@@ -35,13 +35,16 @@ The session `session_20261118T191945Z` (UTC **20261118T191945Z**) has already st
 2. **Track B funding-vs-RV (closed, honest negative):** funding-conditioned features did **not** improve modeled breach-risk calibration over RV-only (RISK-06, floor not met). Do not re-run RISK-06.
 3. **Track B baseline-calibration (primary, active):** the RV-only baseline is the best available score but is it **reliably miscalibrated**, and can a **train-only recalibration layer** fix it out-of-sample (Brier + ECE) and transfer across scenarios/holdouts beyond a label-permutation placebo? This is the live question (RISK-07).
 
-## Current state (verified 2026-11-18T19:42:43Z)
+## Current state (verified 2026-11-18T19:45:28Z)
 
-- **Campaign state:** `ACTIVE_CAMPAIGN`; gates green after this refresh; risk-07 is armed and machine-enforced.
+- **Campaign state:** `ACTIVE_CAMPAIGN`; risk-07 is armed and machine-enforced.
 - **Latest executed session:** `research_state/session_20261118T191945Z` — campaign `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z`, **IN PROGRESS** (prereg + calibrators + partial results exist; full recalibration results, evidence audit, recompute, trigger check, carry-forward packages still required).
 - **Active required next campaign:** `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` (machine-enforced by `scripts/check_handoff_heavywork_gate.py` for any session after `20261118T191714Z`).
 - **Rank-0 trigger state:** `TRIGGER_ONLY`; all four reopen triggers OPEN/none fired.
 - **Root `research_state/` md+json count:** **498/500** — write every new artifact under the session subdir, never at root.
+- **Gate `check_handoff_heavywork_gate.py --json`:** **FAIL** (`pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, failures: `HEAVY_SESSION_ARTIFACTS_MISSING:session_20261118T191945Z`, `RISK_07_ARTIFACTS_MISSING`, `RISK_07_TRIGGER_CHECK_MISSING`). `risk_07` required=true, pass=false. `handoff_stale=false` (handoff latest == disk latest).
+- **Gate `check_tracka_scope_registry_drift.py --json`:** **PASS** (`reason_code=OK`, 196/196).
+- **`scripts/next_campaign_status.py --json`:** confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`, no actionable preregs); stdlib exploratory Track B/C on cached 2024-03…09 is the only executable heavy work → RISK-07.
 
 ### RISK-06 result (do not re-run, do not re-interpret)
 Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01`, 7-day purge/embargo, 5 instruments, 12 scenarios, 262,080 modeled rows (6,241 breached, rate 0.023813). `ΔBrier = Brier_B0 − Brier_Bm`; Brier is a **loss**, so positive = funding model better calibrated.
@@ -55,10 +58,10 @@ Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01
 - Beat-B0 holdouts on primary scenario: **B1 1/3, B2 0/3**.
 - Real mean ΔBrier: B1 **+0.000209**, B2 **−0.000198**; placebo mean: B1 **−0.000439**, B2 **−0.000466**.
 - **Materiality floor NOT met.** Verdict: `HONEST_NEGATIVE_OR_INCONCLUSIVE`. Correct claim: funding-conditioned features did not improve modeled breach-risk calibration over RV-only in the tested holdouts.
-- Independent recompute (`recompute_fclr_risk06_calibration_20261118T182813Z.json`) re-derives every aggregate + the frozen day-block bootstrap: **0 discrepancies**.
+- Independent recompute re-derives every aggregate + the frozen day-block bootstrap: **0 discrepancies**.
 - Calibration deciles show the real defect: baseline predicted risk is compressed into ~0.6–8% while observed rates range 0–11%; in `2024-09` the top decile predicts 3.05% and observes **0%**. Risk-07 targets this defect directly.
 
-### Feasibility facts — do not claim you are data-blocked (verified 2026-11-18T19:42:43Z)
+### Feasibility facts — do not claim you are data-blocked (verified 2026-11-18T19:45:28Z)
 - Confirmatory multi-block **cached** design remains infeasible in all domains (`scripts/next_campaign_status.py --json` → `any_feasible=false`). Certified closed; do not reopen without a machine-satisfied trigger.
 - `research_state/data_cache/` has complete **1h mark-price files + funding files** for `BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, BNBUSDT` for every month **2024-03 … 2024-09** (30–31 mark days/file-month, 3 funding files/month). RISK-07 is runnable **fully offline** and can reuse the stored RISK-06 label matrix (`fclr_risk06_labels_20261118T182813Z.json`, 13 MB, includes all 262,080 rows).
 - **Sealed months:** 2024-10 onward (all 2025/2026 cache) are **sealed** and must not be read for outcomes.
@@ -148,14 +151,14 @@ Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T19:42:43Z (bottleneck removal + risk-07 completion mandate; no new research session created)
-- **Bottleneck removed 1 (stale handoff):** the session `session_20261118T191945Z` existed on disk with RISK-07 work in progress but was not recorded in the handoff → `HANDOFF_STALE_LATEST_SESSION`. This refresh records the in-progress RISK-07 session and mandates its completion.
-- **Bottleneck removed 2 (incomplete RISK-07):** the session has prereg, calibrators, and partial results but lacks the full recalibration evaluation, evidence audit, recompute, trigger check, and carry-forward packages. The gate now fails closed on missing/empty RISK-07 artifacts.
+## Verification record — 2026-11-18T19:45:28Z (bottleneck removal + risk-07 completion mandate; no new research session created)
+- **Bottleneck removed 1 (stale handoff):** the session `session_20261118T191945Z` existed on disk with RISK-07 work in progress; this refresh records the in-progress RISK-07 session as latest and mandates its completion. `handoff_stale=false`.
+- **Bottleneck removed 2 (incomplete RISK-07):** the session has prereg, calibrators, dataset, partial results, and the complete recalibration script, but lacks the full recalibration evaluation (`.json/.md`), evidence audit, recompute, trigger check, and carry-forward packages. The gate now fails closed on missing/empty RISK-07 artifacts.
 - **Bottleneck removed 3 (carry-forward enforcement):** RISK-07's mandatory carry-forward list (RISK-06 + ROBUST-05) is enforced so a future session cannot pass the gate with only the new calibrator files, and cannot pass with zero-byte placeholders.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **FAIL** — `pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=['HANDOFF_STALE_LATEST_SESSION:session_20261118T191945Z']`; latest = `session_20261118T191945Z`, root `498/500`; `risk_06` actively binding (`required=true`, `pass=true`); `risk_07` armed (`campaign_start_utc=20261118T191714Z`, `required=false` for current latest because it's the session that started the campaign — but the **next** session (or completion of this session) must have `required=true` and all artifacts present).
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **FAIL** — `pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=['HEAVY_SESSION_ARTIFACTS_MISSING:session_20261118T191945Z', 'RISK_07_ARTIFACTS_MISSING', 'RISK_07_TRIGGER_CHECK_MISSING']`; latest = `session_20261118T191945Z`, disk latest = `session_20261118T191945Z` (not stale), root `498/500`; `risk_07` armed (`campaign_start_utc=20261118T191714Z`, `required=true`, `pass=false`).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
 - `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); stdlib exploratory Track B/C feasible on cached 2024-03…09.
-- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → **2 FAIL** (test_cli_json_pass_shape, test_real_repo_gate_passes) due to stale handoff; 59 PASS. The new `TestRisk07CampaignGate` class proves post-start audit-only, empty-file, and missing-trigger sessions fail closed while a complete non-empty risk-07 set passes; pre-start sessions remain grandfathered.
+- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → to be recorded by the completing session.
 - Sole durable handoff preserved; no duplicates; no sealed artifacts, workflows, or registries modified.
 
-(End of file - total 297 lines)
+(End of file)
