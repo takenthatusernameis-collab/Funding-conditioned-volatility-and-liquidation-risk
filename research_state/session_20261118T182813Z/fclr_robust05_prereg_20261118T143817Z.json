@@ -1,0 +1,77 @@
+{
+  "schema": "fclr_robust05_prereg",
+  "session_utc": "20261118T143817Z",
+  "campaign": "FCLR-VOL-LIQ-ROBUST-05-20261118T132800Z",
+  "track": "C_volatility_forecast_robustness_multi_holdout_plus_placebo",
+  "label": "EXPLORATORY_PILOT",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "outcome_data_inspected_before_freeze": false,
+  "preregistered_before_outcomes": true,
+  "freeze_utc": "20261118T143817Z",
+  "research_question": "Under the corrected QLIKE sign convention, does ANY funding-conditioned model (B/C/D/E) beat RV-only (A) across multiple chronological holdouts on the cached 2024-04..09 panel, and is any observed effect distinguishable from a placebo permutation null of the funding series?",
+  "prior_state": {
+    "robust_04_finding": "On the 2024-09 holdout the funding-trail model E was WORSE than RV-only: A - E = -0.029418, bootstrap CI95 [-0.042126, -0.015872]. Materiality floor not met.",
+    "sign_convention": "delta_qlike_vs_A = mean(QLIKE_A - QLIKE_model); QLIKE is a LOSS so positive = model better. The earlier 'funding-trail improves QLIKE' headline was a sign inversion and must not be repeated."
+  },
+  "design": {
+    "type": "four chronological holdouts with expanding train and 7-day purge/embargo",
+    "instruments": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+    "purge_embargo_days": 7,
+    "expanding_train": true,
+    "splits": [
+      {"split": 1, "name": "2024-06", "train": ["2024-04-01", "2024-05-24"], "embargo": ["2024-05-25", "2024-05-31"], "test": ["2024-06-01", "2024-06-30"]},
+      {"split": 2, "name": "2024-07", "train": ["2024-04-01", "2024-06-23"], "embargo": ["2024-06-24", "2024-06-30"], "test": ["2024-07-01", "2024-07-31"]},
+      {"split": 3, "name": "2024-08", "train": ["2024-04-01", "2024-07-24"], "embargo": ["2024-07-25", "2024-07-31"], "test": ["2024-08-01", "2024-08-31"]},
+      {"split": 4, "name": "2024-09", "train": ["2024-04-01", "2024-08-24"], "embargo": ["2024-08-25", "2024-08-31"], "test": ["2024-09-01", "2024-09-30"]}
+    ],
+    "entry_origin_rule": "origin at close of 1h bar t; features use only data available no later than bar t close (causal); trailing RV windows end at bar t; funding = latest observation with calc_time <= bar t close; a 24h-ahead target requires bars t+1..t+24 fully inside the declared window",
+    "target": "next-24h realized variance from 1h mark-price close-to-close log returns t+1..t+24 (sum of 24 hourly squared log returns, dimensionless)",
+    "mark_field": "close (markPriceKlines 1h), units USDT"
+  },
+  "features": {
+    "causal_at_t": true,
+    "feature_set": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs", "fmean", "fewma"],
+    "standardization": "train-only mean/std; zero-variance columns set std=1"
+  },
+  "models": {
+    "A_rv_only": ["lrv1", "lrv24", "lrv168"],
+    "B_rv_signed": ["lrv1", "lrv24", "lrv168", "fund"],
+    "C_rv_abs": ["lrv1", "lrv24", "lrv168", "fund_abs"],
+    "D_rv_signed_abs": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs"],
+    "E_rv_funding_trails": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs", "fmean", "fewma"]
+  },
+  "model_family": {
+    "type": "stdlib OLS on log realized variance (HAR-style), normal equations + Gaussian elimination with partial pivoting; Duan smearing back-transformation on train residuals",
+    "no_regularization_search": true,
+    "no_hyperparameter_tuning": true
+  },
+  "evaluation": {
+    "primary_metric": "QLIKE = log(pred_var) + y / pred_var",
+    "secondary_metrics": ["MAE", "RMSE"],
+    "contrast": "paired per-origin Delta QLIKE vs A_rv_only = QLIKE_A - QLIKE_model (positive = model better)",
+    "uncertainty": "UTC-day block bootstrap, resampled jointly across instruments, seed 12345, 2000 reps, percentile CI95",
+    "robustness": "leave-one-instrument-out (LOIO) mean Delta QLIKE vs A per holdout",
+    "pooled_and_per_holdout": true
+  },
+  "placebo": {
+    "description": "Deterministic permutation of the funding observation series (same observed rate values, perturbed time order) fed through the identical feature/estimation/evaluation pipeline, seed 12345. Reported as the placebo Delta QLIKE distribution for E.",
+    "seed": 12345,
+    "n_permutations": 1,
+    "purpose": "If the real funding-trail Delta QLIKE cannot beat the placebo magnitude, any apparent effect is indistinguishable from a null reordering of funding information."
+  },
+  "materiality_floor": "E beats A (mean(QLIKE_A - QLIKE_E) > 0 with bootstrap CI95 lower bound > 0) in >= 3 of 4 holdouts AND real funding-trail |mean Delta QLIKE| exceeds placebo |mean Delta QLIKE|. Otherwise report an honest negative result.",
+  "prohibitions": [
+    "no future bars",
+    "no full-sample normalization",
+    "no sealed months",
+    "no look-ahead",
+    "no funding/threshold tuning on test",
+    "no observed-liquidation labeling",
+    "no sealed cached-data confirmatory re-score",
+    "no repeated sign-inverted 'funding-trail improves QLIKE' claim"
+  ],
+  "sealed_months": "none touched; 2024-04..2024-09 is the provenanced exploratory cache, not sealed confirmatory data",
+  "honest_status": "EXPLORATORY/PILOT. Multi-holdout robustness + placebo null for an exploratory Track C result; negative results are a valid completion; no confirmatory promotion claimed."
+}

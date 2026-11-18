@@ -1,0 +1,73 @@
+{
+  "schema": "recompute_fclr_risk06_calibration",
+  "session": "session_20261118T182813Z",
+  "generated_utc": "20261118T182813Z",
+  "campaign": "FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z",
+  "source_artifact": "fclr_risk06_calibration_20261118T182813Z.json",
+  "network_used": false,
+  "n_holdouts": 3,
+  "recomputed_per_holdout_pooled": [
+    {
+      "holdout": "2024-07",
+      "pooled": {
+        "B1_funding_conditioned": {
+          "mean_delta_brier": -2.9437541303112047e-05,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.0002061295961564854
+        },
+        "B2_funding_shock": {
+          "mean_delta_brier": -0.0007830496241683676,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.00024612572909208703
+        }
+      }
+    },
+    {
+      "holdout": "2024-08",
+      "pooled": {
+        "B1_funding_conditioned": {
+          "mean_delta_brier": 0.0001586816457064923,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.000862649237961358
+        },
+        "B2_funding_shock": {
+          "mean_delta_brier": -0.0005850088433992402,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.0008861717453361346
+        }
+      }
+    },
+    {
+      "holdout": "2024-09",
+      "pooled": {
+        "B1_funding_conditioned": {
+          "mean_delta_brier": 0.00012568579572928143,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.00024774378666985944
+        },
+        "B2_funding_shock": {
+          "mean_delta_brier": -5.393067461665747e-05,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.00026552655199962735
+        }
+      }
+    }
+  ],
+  "recomputed_beats_B0_by_holdout_primary": {
+    "B1_funding_conditioned": 1,
+    "B2_funding_shock": 0
+  },
+  "recomputed_real_mean_delta_brier_primary": {
+    "B1_funding_conditioned": 0.00020897976504480838,
+    "B2_funding_shock": -0.00019789230320583045
+  },
+  "recomputed_placebo_mean_delta_brier": {
+    "B1_funding_conditioned": -0.00043884087359590093,
+    "B2_funding_shock": -0.00046594134214261626
+  },
+  "recomputed_floor_met": false,
+  "recomputed_verdict": "HONEST_NEGATIVE_OR_INCONCLUSIVE",
+  "n_discrepancies": 0,
+  "discrepancies": [],
+  "status": "RECONCILED_ZERO_DISCREPANCIES"
+}

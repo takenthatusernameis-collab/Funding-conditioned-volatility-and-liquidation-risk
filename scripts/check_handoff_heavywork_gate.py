@@ -224,6 +224,28 @@ RISK_06_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-LIQ-RISK-RECALIBRATION-07 hardening: RISK-06 found no funding-conditioned
+# Brier improvement on modeled breach risk, so the next focus campaign asks a
+# different, still-heavy question: is the *baseline itself* miscalibrated, and can
+# a train-only recalibration layer (Platt/logistic, stdlib PAVA isotonic, and a
+# scenario base-rate offset) materially improve out-of-sample calibration (ECE and
+# Brier) and transfer across scenarios? A post-start session must emit the
+# outcome-blind prereg, the calibrator implementation triad, the recalibration
+# evaluation triad, and a trigger check, with no zero-byte placeholders.
+RISK_07_CAMPAIGN_RE = re.compile(
+    r"FCLR-LIQ-RISK-RECALIBRATION-(\d+)-(\d{8}T\d{6}Z)"
+)
+RISK_07_REQUIRED = (
+    ("fclr_risk07_prereg_", ".json"),
+    ("fclr_risk07_prereg_", ".md"),
+    ("fclr_risk07_calibrators_", ".py"),
+    ("fclr_risk07_calibrators_", ".json"),
+    ("fclr_risk07_recalibration_", ".py"),
+    ("fclr_risk07_recalibration_", ".json"),
+    ("fclr_risk07_recalibration_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -784,6 +806,69 @@ def _risk_06_state(handoff_text: str, latest_sid: str | None,
     out["required_artifacts"] = required
     for label, (prefix, suffix) in zip(required, RISK_06_REQUIRED):
         matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
+def _risk_07_state(handoff_text: str, latest_sid: str | None,
+                   latest_files: list[str],
+                   latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-RISK-RECALIBRATION-07 non-avoidance state.
+
+    After the risk-07 campaign starts, a post-start session must emit the
+    outcome-blind prereg, the stdlib calibrator implementation (Platt logistic,
+    PAVA isotonic, scenario base-rate offset), the recalibration evaluation triad
+    (Brier + ECE + cross-scenario transfer), a trigger check, and no zero-byte
+    placeholders. Sessions predating the campaign start are grandfathered.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = RISK_07_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIQ-RISK-RECALIBRATION-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in RISK_07_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, RISK_07_REQUIRED):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
         if not matches:
             out["missing_required_artifacts"].append(label)
             continue
