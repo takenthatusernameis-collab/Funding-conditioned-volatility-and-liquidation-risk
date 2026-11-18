@@ -1,0 +1,16 @@
+{
+  "funding_files_expected": 30,
+  "funding_files_found": 30,
+  "input": "evidence_audit_20261118T091852Z.json",
+  "instruments": 5,
+  "leakage_flags": [],
+  "months_checked": 6,
+  "network_used": false,
+  "overall_pass": true,
+  "script": "recompute_trackc_leakage_audit_20261118T091852Z.py",
+  "sealed_conflict_months": [],
+  "splits_feasible": true,
+  "stdlib_only": true,
+  "tests_disjoint": true,
+  "verdict": "PASS"
+}

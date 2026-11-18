@@ -1,0 +1,96 @@
+{
+  "closure_ledger": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "failures": [],
+  "frontier_verify": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "handoff_exists": true,
+  "handoff_markers_ok": true,
+  "handoff_session_ids": [
+    "session_20261118T030427Z",
+    "session_20261118T050304Z",
+    "session_20261118T091852Z"
+  ],
+  "handoff_stale": false,
+  "heavy_session_dir": "research_state/session_20261118T091852Z",
+  "heavy_session_exists": true,
+  "heavy_session_files": [
+    "evidence_audit_20261118T091852Z.json",
+    "evidence_audit_20261118T091852Z.md",
+    "heavywork_gate_post.json",
+    "recompute_trackc_leakage_audit_20261118T091852Z.json",
+    "recompute_trackc_leakage_audit_20261118T091852Z.py",
+    "scope_drift.json"
+  ],
+  "heavy_session_id": "session_20261118T091852Z",
+  "heavy_session_missing": [
+    "rca011_feature_attribution_*",
+    "rca011_impl_crosscheck_*",
+    "rca011_sealed_bridge_*",
+    "prereg_template_trigger_gated_*",
+    "program_power_synthesis_*"
+  ],
+  "latest_disk_session_id": "session_20261118T091852Z",
+  "latest_session_dir": "research_state/session_20261118T091852Z",
+  "latest_session_evidence": {
+    "audit_files": [
+      "evidence_audit_20261118T091852Z.json",
+      "evidence_audit_20261118T091852Z.md"
+    ],
+    "files": [
+      "evidence_audit_20261118T091852Z.json",
+      "evidence_audit_20261118T091852Z.md",
+      "heavywork_gate_post.json",
+      "recompute_trackc_leakage_audit_20261118T091852Z.json",
+      "recompute_trackc_leakage_audit_20261118T091852Z.py",
+      "scope_drift.json"
+    ],
+    "has_audit": true,
+    "has_new_quant": true,
+    "new_quant_files": [
+      "recompute_trackc_leakage_audit_20261118T091852Z.json",
+      "recompute_trackc_leakage_audit_20261118T091852Z.py"
+    ]
+  },
+  "latest_session_id": "session_20261118T091852Z",
+  "ledger_integrity": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "network": false,
+  "pass": true,
+  "read_only": true,
+  "reason_code": "OK",
+  "root_count": 500,
+  "root_count_cap": 500,
+  "script": "check_handoff_heavywork_gate",
+  "trigger_readiness": {
+    "campaign_id": null,
+    "campaign_start_utc": null,
+    "has_trigger_check": false,
+    "missing_required_artifacts": [],
+    "pass": true,
+    "required": false,
+    "required_artifacts": []
+  },
+  "writes_real_research_state": false
+}
