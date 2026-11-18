@@ -1,0 +1,43 @@
+{
+  "artifact_id": "FCLR-CLOSURE-LEDGER-BACKFILL-20261118T004445Z",
+  "session_utc": "20261118T004445Z",
+  "campaign": "FCLR-LEDGER-INTEGRITY-02-20261118T000000Z",
+  "read_only": true,
+  "mutates_sealed_closure_json": false,
+  "sealed_closure_json": "research_state/fclr_final_structural_closure_20261116T114626.json",
+  "sealed_closure_sha256": "f2d55756478b1a344346f9152c2b5a00d464e179c44ea099a58acc2fe625c0d1",
+  "problem": "The sealed closure JSON enumerates 58 experiment rows with id/source_artifact/verdict but carries NO consumed train/val/test window metadata. A reader cannot tell from the closure JSON alone that 2024-04..2024-12 were consumed by FCLR-002/003, which is the omission FCLR-LEDGER-INTEGRITY-01 fixed in the frontier tool but did not backfill into the closure record.",
+  "constraint": "RESEARCH_PROMPT section 13: never overwrite a sealed artifact. The closure JSON is sealed; this is a PLAN only. Do not mutate it.",
+  "plan": {
+    "approach": "Emit a NEW, non-authoritative sidecar file that enumerates consumed windows per experiment. Do NOT edit the sealed closure JSON. Reference the sidecar from the handoff and the ledger audit.",
+    "sidecar_path_pattern": "research_state/closure_ledger_sidecar_<UTC>.json",
+    "sidecar_schema": {
+      "artifact_id": "string",
+      "generated_utc": "string",
+      "authoritative": false,
+      "note": "Non-authoritative consumed-window enumeration. The sealed closure JSON remains the authority for verdicts; this sidecar adds the window ledger it omits.",
+      "experiments": [
+        {
+          "experiment_id": "FCLR-002",
+          "train": ["YYYY-MM-DD", "YYYY-MM-DD"],
+          "val": ["YYYY-MM-DD", "YYYY-MM-DD"],
+          "test": ["YYYY-MM-DD", "YYYY-MM-DD"],
+          "consumed_months": ["YYYY-MM", "..."],
+          "source": "research_state/evaluation_summary_FCLR002.md#splits-frozen"
+        }
+      ]
+    },
+    "experiments_to_enumerate": [
+      {"experiment_id": "FCLR-002", "source": "evaluation_summary_FCLR002.md", "train": ["2024-04-01", "2024-06-08"], "val": ["2024-06-16", "2024-07-15"], "test": ["2024-07-23", "2024-09-30"], "consumed_months": ["2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09"]},
+      {"experiment_id": "FCLR-003", "source": "evaluation_summary_FCLR003.md", "train": ["2024-04-01", "2024-07-23"], "val": ["2024-07-31", "2024-09-24"], "test": ["2024-10-02", "2024-12-31"], "consumed_months": ["2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"]},
+      {"experiment_id": "FCLR-FWD-VOL-2024Q4-CROSS", "source": "TESTED_WINDOWS", "test": ["2024-07-23", "2024-09-30"]},
+      {"experiment_id": "FCLR-FWD-VOL-011-CONFIRM", "source": "BULK_TESTED_WINDOWS", "test": ["2026-08-03", "2026-10-31"]}
+    ],
+    "acceptance_test": "A future FCLR-CLOSURE-LEDGER-COMPLETENESS session must emit closure_ledger_sidecar_<UTC>.json covering every experiment in experiments_to_enumerate, plus a validator that cross-checks the sidecar against scripts/next_campaign_status.py TESTED_WINDOWS/BULK_TESTED_WINDOWS and the ledger audit, exiting nonzero on any consumed month not enumerated."
+  },
+  "do_not": [
+    "Do not edit research_state/fclr_final_structural_closure_20261116T114626.json",
+    "Do not add root-level research_state/*.md|json (root at 500/500)",
+    "Do not open any outcome metric, holdout, or results/* while building the sidecar"
+  ]
+}

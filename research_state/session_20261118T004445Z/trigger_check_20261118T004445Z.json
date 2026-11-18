@@ -1,0 +1,55 @@
+{
+  "all_open": true,
+  "any_trigger_fired": false,
+  "artifact_id": "FCLR-TRIGGER-CHECK-20261118T004445Z",
+  "campaign": "FCLR-LEDGER-INTEGRITY-02-20261118T000000Z",
+  "generated_utc": "2026-11-18T00:44:45Z",
+  "ironflow": {
+    "consecutive_absent": 3,
+    "data_through": "2026-10",
+    "post_2026_10": {
+      "2026-11": "CONFIRMED_ABSENT",
+      "2026-12": "CONFIRMED_ABSENT",
+      "2027-01": "CONFIRMED_ABSENT"
+    }
+  },
+  "network": false,
+  "no_trigger_rule_applied": true,
+  "polling": false,
+  "sealed_estimands_not_rerun": [
+    "FCLR-014",
+    "replication_synthesis",
+    "FCLR-REPRO-SYNTH-05",
+    "FCLR-013",
+    "FCLR-010",
+    "FCLR-002",
+    "FCLR-003",
+    "FCLR-009",
+    "FCLR-006",
+    "FCLR-008"
+  ],
+  "session_utc": "20261118T004445Z",
+  "sources_read": [
+    "research_state/resume_trigger_registry.json",
+    "research_state/ironflow_monitor_state.json"
+  ],
+  "trigger_check_exactly_once": true,
+  "triggers": [
+    {
+      "status": "OPEN",
+      "trigger_id": "GATE4_BRANCH_1"
+    },
+    {
+      "status": "OPEN",
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE"
+    },
+    {
+      "status": "OPEN",
+      "trigger_id": "HL_LABEL_EXTENSION"
+    },
+    {
+      "status": "OPEN",
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO"
+    }
+  ]
+}

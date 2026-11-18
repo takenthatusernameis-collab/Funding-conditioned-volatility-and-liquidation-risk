@@ -293,6 +293,83 @@ class TestTriggerReadinessCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestLedgerIntegrityCampaignGate(unittest.TestCase):
+    """FCLR-LEDGER-INTEGRITY-02: once the ledger-integrity campaign has started,
+    a post-start session cannot satisfy the heavy-work gate with an arbitrary
+    recompute_* artifact or a trigger-check-only session. It must emit the
+    outcome-blind ledger audit + frontier recompute + trigger check + refreshed
+    trigger-activation readiness. Sessions predating the campaign are
+    grandfathered."""
+
+    START = "20261118T000000Z"
+
+    def _repo(self, latest_sid="session_20261118T010000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143li_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the ledger contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-LEDGER-INTEGRITY-02-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_required(self, sdir, sid="20261118T010000Z"):
+        for prefix, suffix in gate.LEDGER_INTEGRITY_REQUIRED:
+            (sdir / f"{prefix}{sid}{suffix}").write_text("x")
+
+    def test_post_start_generic_recompute_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        (sdir / "trigger_check_20261118T010000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["ledger_integrity"]["required"])
+        self.assertTrue(res["ledger_integrity"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("LEDGER_INTEGRITY_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_full_ledger_set_passes(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir)
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["ledger_integrity"]["pass"])
+
+    def test_post_start_missing_readiness_fails_closed(self):
+        repo, sdir = self._repo()
+        for prefix, suffix in gate.LEDGER_INTEGRITY_REQUIRED:
+            if prefix == "trigger_activation_readiness_":
+                continue
+            (sdir / f"{prefix}20261118T010000Z{suffix}").write_text("x")
+        (sdir / "trigger_check_20261118T010000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(any(f.startswith("LEDGER_INTEGRITY_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261117T000000Z")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["ledger_integrity"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffFreshnessGate(unittest.TestCase):
     """FCLR-TRIGGER-READINESS-01: a newer on-disk session that is not recorded
     in the handoff fails closed. The gate must not stay green merely because the

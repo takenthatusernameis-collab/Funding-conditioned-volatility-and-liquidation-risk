@@ -1,0 +1,486 @@
+{
+  "artifact_id": "FCLR-LEDGER-AUDIT-20261118T004445Z",
+  "campaign": "FCLR-LEDGER-INTEGRITY-02-20261118T000000Z",
+  "frozen_split_windows": [
+    {
+      "end": "2024-06-08",
+      "experiment": "FCLR-002",
+      "phase": "train",
+      "source_file": "research_state/evaluation_summary_FCLR002.md",
+      "source_line": 8,
+      "start": "2024-04-01"
+    },
+    {
+      "end": "2024-07-15",
+      "experiment": "FCLR-002",
+      "phase": "val",
+      "source_file": "research_state/evaluation_summary_FCLR002.md",
+      "source_line": 9,
+      "start": "2024-06-16"
+    },
+    {
+      "end": "2024-09-30",
+      "experiment": "FCLR-002",
+      "phase": "test",
+      "source_file": "research_state/evaluation_summary_FCLR002.md",
+      "source_line": 10,
+      "start": "2024-07-23"
+    },
+    {
+      "end": "2024-07-23",
+      "experiment": "FCLR-003",
+      "phase": "train",
+      "source_file": "research_state/evaluation_summary_FCLR003.md",
+      "source_line": 8,
+      "start": "2024-04-01"
+    },
+    {
+      "end": "2024-09-24",
+      "experiment": "FCLR-003",
+      "phase": "val",
+      "source_file": "research_state/evaluation_summary_FCLR003.md",
+      "source_line": 9,
+      "start": "2024-07-31"
+    },
+    {
+      "end": "2024-12-31",
+      "experiment": "FCLR-003",
+      "phase": "test",
+      "source_file": "research_state/evaluation_summary_FCLR003.md",
+      "source_line": 10,
+      "start": "2024-10-02"
+    }
+  ],
+  "generated_utc": "2026-11-18",
+  "headline": {
+    "all_union_months_consumed": true,
+    "fclr002_003_union_months": [
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ],
+    "months_not_consumed": [],
+    "n_union_months": 9,
+    "pass": true,
+    "regression_months_2024_10_11_12_consumed_and_tested": true
+  },
+  "months": [
+    {
+      "consumed": false,
+      "consumed_by": [],
+      "frontier_says_tested": false,
+      "month": "2024-01",
+      "phase": []
+    },
+    {
+      "consumed": false,
+      "consumed_by": [],
+      "frontier_says_tested": false,
+      "month": "2024-02",
+      "phase": []
+    },
+    {
+      "consumed": false,
+      "consumed_by": [],
+      "frontier_says_tested": false,
+      "month": "2024-03",
+      "phase": []
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-002:train",
+        "FCLR-003:train"
+      ],
+      "frontier_says_tested": false,
+      "month": "2024-04",
+      "phase": [
+        "train"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-002:train",
+        "FCLR-003:train"
+      ],
+      "frontier_says_tested": false,
+      "month": "2024-05",
+      "phase": [
+        "train"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2024-DISJOINT-2024-06:test",
+        "FCLR-002:train",
+        "FCLR-002:val",
+        "FCLR-003:train"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-06",
+      "phase": [
+        "test",
+        "train",
+        "val"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2024Q4-CROSS:test",
+        "FCLR-002:val",
+        "FCLR-002:test",
+        "FCLR-003:train",
+        "FCLR-003:val"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-07",
+      "phase": [
+        "test",
+        "val",
+        "train"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2024Q4-CROSS:test",
+        "FCLR-002:test",
+        "FCLR-003:val"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-08",
+      "phase": [
+        "test",
+        "val"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2024Q4-CROSS:test",
+        "FCLR-002:test",
+        "FCLR-003:val"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-09",
+      "phase": [
+        "test",
+        "val"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-003 sealed NEGATIVE test window:test",
+        "FCLR-003:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-10",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-003 sealed NEGATIVE test window:test",
+        "FCLR-003:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-11",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-003 sealed NEGATIVE test window:test",
+        "FCLR-003:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2024-12",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": false,
+      "consumed_by": [],
+      "frontier_says_tested": false,
+      "month": "2025-01",
+      "phase": []
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-CROSS:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-02",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-CROSS:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-03",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-CROSS:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-04",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-05",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-DISJOINT-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-06",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025H2-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-07",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025H2-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-08",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025H2-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-09",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025H2-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-10",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-DISJOINT-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-11",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025-DISJOINT-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2025-12",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS:test",
+        "TRACKA-VOL-FULLHIST + TRACKA-LIQ-XSEC:test",
+        "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-01",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS:test",
+        "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-02",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS:test",
+        "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-03",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-2025Q1Q2-CROSS:test",
+        "TRACKA-LIQ-XSEC-FORWARD + TRACKA-VOL-FORWARD:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-04",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM:test",
+        "FCLR-011 sealed PASS test window:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-05",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM:test",
+        "FCLR-011 sealed PASS test window:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-06",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM:test",
+        "FCLR-011 sealed PASS test window:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-07",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-011 sealed PASS + FCLR-FWD-VOL-011-CONFIRM:test",
+        "FCLR-FWD-VOL-011-CONFIRM forward walk:test",
+        "FCLR-011 sealed PASS test window:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-08",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-011-CONFIRM forward walk:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-09",
+      "phase": [
+        "test"
+      ]
+    },
+    {
+      "consumed": true,
+      "consumed_by": [
+        "FCLR-FWD-VOL-011-CONFIRM forward walk:test"
+      ],
+      "frontier_says_tested": true,
+      "month": "2026-10",
+      "phase": [
+        "test"
+      ]
+    }
+  ],
+  "network": false,
+  "note": "Only the FCLR-002/003 '## Splits (frozen)' window lines (train/val/test metadata) are read; no QLIKE table, holdout, or results/* is opened. Consumed = any train/val/test window that used the month. frontier_says_tested = the mark+funding frontier's TEST-window ledger (scripts/next_campaign_status.py TESTED_WINDOWS); train/val months are legitimately NOT frontier-tested and may serve as pre-test history.",
+  "outcome_blind": true,
+  "outcome_metrics_inspected": false,
+  "read_only": true,
+  "registry_window_count": 15,
+  "session_utc": "20261118T004445Z",
+  "sources": {
+    "bulk_tested_windows": "scripts/next_campaign_status.py:BULK_TESTED_WINDOWS",
+    "fclr002_frozen_splits": "research_state/evaluation_summary_FCLR002.md",
+    "fclr003_frozen_splits": "research_state/evaluation_summary_FCLR003.md",
+    "tested_windows": "scripts/next_campaign_status.py:TESTED_WINDOWS"
+  }
+}

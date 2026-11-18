@@ -1,0 +1,69 @@
+{
+  "arithmetic_that_closes_frontier": {
+    "any_contiguous_run_ge_min_design_days": false,
+    "block_test_month": "2025-01",
+    "block_train_months": [
+      "2024-11",
+      "2024-12"
+    ],
+    "block_train_window": [
+      "2024-11-25",
+      "2024-12-24"
+    ],
+    "contiguous_untested_complete_mf_runs": [
+      {
+        "feasible_ge_min_design_days": false,
+        "months": [
+          "2024-04",
+          "2024-05"
+        ],
+        "span_days": 61
+      },
+      {
+        "feasible_ge_min_design_days": false,
+        "months": [
+          "2025-01"
+        ],
+        "span_days": 31
+      }
+    ],
+    "min_design_days": 127,
+    "only_individually_feasible_month": [
+      "2025-01"
+    ],
+    "reason_single_block_insufficient": "1 feasible block < MIN_MF_BLOCKS=3; train history may overlap prior tested windows, but the test month itself is untested, so a single block cannot form a 3-block campaign."
+  },
+  "artifact_id": "FCLR-FRONTIER-RECOMPUTE-20261118T004445Z",
+  "campaign": "FCLR-LEDGER-INTEGRITY-02-20261118T000000Z",
+  "expected_closed_verdict": {
+    "campaign_feasible_non_overlapping": false,
+    "individually_feasible_months": [
+      "2025-01"
+    ],
+    "max_mutually_non_overlapping": 1,
+    "n_individually_feasible": 1,
+    "n_overlapping_pairs": 0
+  },
+  "mismatches": {},
+  "network": false,
+  "note": "Verification only. The FCLR-LEDGER-INTEGRITY-01 TESTED_WINDOWS fix is applied; this re-derives the closed verdict and must NOT re-fix code.",
+  "outcome_blind": true,
+  "pass": true,
+  "read_only": true,
+  "session_utc": "20261118T004445Z",
+  "verdict": {
+    "any_individually_feasible": true,
+    "campaign_feasible_non_overlapping": false,
+    "disjoint_campaign_feasible": false,
+    "disjoint_n_feasible": 0,
+    "individually_feasible_months": [
+      "2025-01"
+    ],
+    "max_mutually_non_overlapping": 1,
+    "n_individually_feasible": 1,
+    "n_overlapping_pairs": 0,
+    "non_overlapping_selection": [
+      "2025-01"
+    ]
+  }
+}

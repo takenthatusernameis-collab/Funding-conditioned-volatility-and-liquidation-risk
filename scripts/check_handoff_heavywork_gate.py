@@ -96,6 +96,39 @@ TRIGGER_READINESS_REQUIRED = (
 
 _SESSION_DIR_RE = re.compile(r"(session_\d{8}T\d{6}Z)")
 
+# FCLR-LEDGER-INTEGRITY-02 hardening: once the ledger-integrity campaign has
+# started, a post-start session cannot satisfy the gate with an arbitrary
+# recompute_* artifact or a trigger-check-only session. It must emit the
+# outcome-blind per-month consumed-window ledger audit, the frontier recompute,
+# the trigger check, and the refreshed trigger-activation readiness. Sessions
+# predating the campaign are grandfathered so the gate stays green during the
+# handoff refresh that first announces the campaign.
+LEDGER_INTEGRITY_CAMPAIGN_RE = re.compile(
+    r"FCLR-LEDGER-INTEGRITY-(\d+)-(\d{8}T\d{6}Z)"
+)
+# (prefix, required_suffix) pairs that must ALL be present in the latest session.
+LEDGER_INTEGRITY_REQUIRED = (
+    ("ledger_audit_", ".json"),
+    ("frontier_recompute_", ".json"),
+    ("trigger_check_", ".json"),
+    ("trigger_activation_readiness_", ".json"),
+)
+
+# FCLR-CLOSURE-LEDGER-COMPLETENESS-01 hardening: once this campaign starts, a
+# post-start session cannot satisfy the gate with an arbitrary recompute_*
+# artifact. It must emit the non-authoritative closure-ledger sidecar + the
+# completeness validator (py + json output) + a trigger check. Sessions predating
+# the campaign are grandfathered.
+CLOSURE_LEDGER_CAMPAIGN_RE = re.compile(
+    r"FCLR-CLOSURE-LEDGER-COMPLETENESS-(\d+)-(\d{8}T\d{6}Z)"
+)
+CLOSURE_LEDGER_REQUIRED = (
+    ("closure_ledger_sidecar_", ".json"),
+    ("closure_ledger_validator_", ".py"),
+    ("closure_ledger_validator_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -252,6 +285,95 @@ def _trigger_readiness_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _ledger_integrity_state(handoff_text: str, latest_sid: str | None,
+                            latest_files: list[str]) -> dict:
+    """Return FCLR-LEDGER-INTEGRITY-02 non-avoidance state for the latest session.
+
+    After the ledger-integrity campaign starts, a post-start session must emit
+    the outcome-blind ledger audit + frontier recompute + trigger check + refreshed
+    trigger-activation readiness; an arbitrary recompute_* artifact or a
+    trigger-check-only session is not enough. Sessions predating the campaign are
+    grandfathered so the gate stays green during the handoff refresh that first
+    announces the campaign.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = LEDGER_INTEGRITY_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LEDGER-INTEGRITY-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in LEDGER_INTEGRITY_REQUIRED]
+    out["required_artifacts"] = required
+    out["missing_required_artifacts"] = [
+        label
+        for label, (prefix, suffix) in zip(required, LEDGER_INTEGRITY_REQUIRED)
+        if not any(f.startswith(prefix) and f.endswith(suffix) for f in latest_files)
+    ]
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") for f in latest_files
+    )
+    out["pass"] = not out["missing_required_artifacts"] and out["has_trigger_check"]
+    return out
+
+
+def _closure_ledger_state(handoff_text: str, latest_sid: str | None,
+                          latest_files: list[str]) -> dict:
+    """Return FCLR-CLOSURE-LEDGER-COMPLETENESS-01 non-avoidance state.
+
+    After the campaign starts, a post-start session must emit the non-authoritative
+    closure-ledger sidecar + completeness validator (py + json) + a trigger check.
+    Sessions predating the campaign are grandfathered.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = CLOSURE_LEDGER_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-CLOSURE-LEDGER-COMPLETENESS-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in CLOSURE_LEDGER_REQUIRED]
+    out["required_artifacts"] = required
+    out["missing_required_artifacts"] = [
+        label
+        for label, (prefix, suffix) in zip(required, CLOSURE_LEDGER_REQUIRED)
+        if not any(f.startswith(prefix) and f.endswith(suffix) for f in latest_files)
+    ]
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") for f in latest_files
+    )
+    out["pass"] = not out["missing_required_artifacts"] and out["has_trigger_check"]
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -294,6 +416,8 @@ def check(repo: Path = REPO) -> dict:
         "root_count_cap": ROOT_COUNT_CAP,
         "frontier_verify": None,
         "trigger_readiness": None,
+        "ledger_integrity": None,
+        "closure_ledger": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -376,6 +500,37 @@ def check(repo: Path = REPO) -> dict:
                 if not tr["has_trigger_check"]:
                     payload["failures"].append(
                         f"TRIGGER_READINESS_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LEDGER-INTEGRITY-02: after the campaign starts, require the
+            # outcome-blind ledger audit + frontier recompute + trigger check +
+            # refreshed trigger-activation readiness, not any quant artifact.
+            li = _ledger_integrity_state(text, latest_sid, latest_info["files"])
+            payload["ledger_integrity"] = li
+            if li["required"]:
+                if li["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "LEDGER_INTEGRITY_ARTIFACTS_MISSING:"
+                        + ",".join(li["missing_required_artifacts"])
+                    )
+                if not li["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"LEDGER_INTEGRITY_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-CLOSURE-LEDGER-COMPLETENESS-01: after the campaign starts,
+            # require the closure-ledger sidecar + validator + trigger check.
+            cl = _closure_ledger_state(text, latest_sid, latest_info["files"])
+            payload["closure_ledger"] = cl
+            if cl["required"]:
+                if cl["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "CLOSURE_LEDGER_ARTIFACTS_MISSING:"
+                        + ",".join(cl["missing_required_artifacts"])
+                    )
+                if not cl["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"CLOSURE_LEDGER_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
