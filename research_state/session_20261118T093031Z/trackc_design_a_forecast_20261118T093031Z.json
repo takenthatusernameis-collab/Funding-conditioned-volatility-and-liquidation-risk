@@ -1,0 +1,1012 @@
+{
+  "schema": "trackc_design_a_forecast",
+  "timestamp_utc": "20261118T093031Z",
+  "track": "C_volatility_forecast",
+  "design": "TRACKC_EXT_DESIGN_A_EXPLORATORY",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "label": "EXPLORATORY_PILOT",
+  "instruments": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "window": "2024-04-01..2024-09-30",
+  "horizon": "next-24h realized variance from 1h mark-price close-to-close log returns t+1..t+24",
+  "mark_field": "close (markPriceKlines 1h), units USDT",
+  "target_units": "squared log-return (dimensionless); sum of 24 hourly squared log returns",
+  "epsilon": 1e-12,
+  "models": [
+    "A_rv_only",
+    "B_rv_signed",
+    "C_rv_abs",
+    "D_rv_signed_abs",
+    "E_rv_funding_trails"
+  ],
+  "bootstrap": {
+    "B_rv_signed": {
+      "mean_improvement": null,
+      "ci_2_5": null,
+      "ci_97_5": null,
+      "n_reps": 0
+    },
+    "C_rv_abs": {
+      "mean_improvement": null,
+      "ci_2_5": null,
+      "ci_97_5": null,
+      "n_reps": 0
+    },
+    "D_rv_signed_abs": {
+      "mean_improvement": null,
+      "ci_2_5": null,
+      "ci_97_5": null,
+      "n_reps": 0
+    },
+    "E_rv_funding_trails": {
+      "mean_improvement": null,
+      "ci_2_5": null,
+      "ci_97_5": null,
+      "n_reps": 0
+    }
+  },
+  "splits": [
+    {
+      "split": 1,
+      "train": [
+        "2024-04-01",
+        "2024-05-15"
+      ],
+      "embargo": [
+        "2024-05-16",
+        "2024-05-22"
+      ],
+      "test": [
+        "2024-05-23",
+        "2024-06-21"
+      ],
+      "n_train_origins": {
+        "BTCUSDT": 0,
+        "ETHUSDT": 0,
+        "SOLUSDT": 0,
+        "XRPUSDT": 0,
+        "BNBUSDT": 0
+      },
+      "n_test_origins": {
+        "BTCUSDT": 0,
+        "ETHUSDT": 0,
+        "SOLUSDT": 0,
+        "XRPUSDT": 0,
+        "BNBUSDT": 0
+      },
+      "n_common_test_ts": 0,
+      "models": {
+        "A_rv_only": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "B_rv_signed": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "C_rv_abs": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "D_rv_signed_abs": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "E_rv_funding_trails": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "split": 2,
+      "train": [
+        "2024-04-01",
+        "2024-06-21"
+      ],
+      "embargo": [
+        "2024-06-22",
+        "2024-06-28"
+      ],
+      "test": [
+        "2024-06-29",
+        "2024-07-28"
+      ],
+      "n_train_origins": {
+        "BTCUSDT": 0,
+        "ETHUSDT": 0,
+        "SOLUSDT": 0,
+        "XRPUSDT": 0,
+        "BNBUSDT": 0
+      },
+      "n_test_origins": {
+        "BTCUSDT": 0,
+        "ETHUSDT": 0,
+        "SOLUSDT": 0,
+        "XRPUSDT": 0,
+        "BNBUSDT": 0
+      },
+      "n_common_test_ts": 0,
+      "models": {
+        "A_rv_only": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "B_rv_signed": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "C_rv_abs": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "D_rv_signed_abs": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "E_rv_funding_trails": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "split": 3,
+      "train": [
+        "2024-04-01",
+        "2024-07-28"
+      ],
+      "embargo": [
+        "2024-07-29",
+        "2024-08-04"
+      ],
+      "test": [
+        "2024-08-05",
+        "2024-09-03"
+      ],
+      "n_train_origins": {
+        "BTCUSDT": 0,
+        "ETHUSDT": 0,
+        "SOLUSDT": 0,
+        "XRPUSDT": 0,
+        "BNBUSDT": 0
+      },
+      "n_test_origins": {
+        "BTCUSDT": 0,
+        "ETHUSDT": 0,
+        "SOLUSDT": 0,
+        "XRPUSDT": 0,
+        "BNBUSDT": 0
+      },
+      "n_common_test_ts": 0,
+      "models": {
+        "A_rv_only": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "B_rv_signed": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "C_rv_abs": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "D_rv_signed_abs": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        },
+        "E_rv_funding_trails": {
+          "fit_ok": {
+            "BTCUSDT": true,
+            "ETHUSDT": true,
+            "SOLUSDT": true,
+            "XRPUSDT": true,
+            "BNBUSDT": true
+          },
+          "smearing": 1.0,
+          "per_instrument": {
+            "BTCUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "ETHUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "SOLUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "XRPUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            },
+            "BNBUSDT": {
+              "qlike": [],
+              "mae": [],
+              "rmse_sq": [],
+              "n": 0,
+              "days": [],
+              "pred_var": []
+            }
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "models": {
+      "A_rv_only": {
+        "n": 0,
+        "mean_qlike": null,
+        "mean_mae": null,
+        "mean_rmse": null,
+        "mean_delta_qlike_vs_A": null
+      },
+      "B_rv_signed": {
+        "n": 0,
+        "mean_qlike": null,
+        "mean_mae": null,
+        "mean_rmse": null,
+        "mean_delta_qlike_vs_A": null
+      },
+      "C_rv_abs": {
+        "n": 0,
+        "mean_qlike": null,
+        "mean_mae": null,
+        "mean_rmse": null,
+        "mean_delta_qlike_vs_A": null
+      },
+      "D_rv_signed_abs": {
+        "n": 0,
+        "mean_qlike": null,
+        "mean_mae": null,
+        "mean_rmse": null,
+        "mean_delta_qlike_vs_A": null
+      },
+      "E_rv_funding_trails": {
+        "n": 0,
+        "mean_qlike": null,
+        "mean_mae": null,
+        "mean_rmse": null,
+        "mean_delta_qlike_vs_A": null
+      }
+    }
+  },
+  "loio": {
+    "B_rv_signed": {
+      "BTCUSDT": null,
+      "ETHUSDT": null,
+      "SOLUSDT": null,
+      "XRPUSDT": null,
+      "BNBUSDT": null
+    },
+    "C_rv_abs": {
+      "BTCUSDT": null,
+      "ETHUSDT": null,
+      "SOLUSDT": null,
+      "XRPUSDT": null,
+      "BNBUSDT": null
+    },
+    "D_rv_signed_abs": {
+      "BTCUSDT": null,
+      "ETHUSDT": null,
+      "SOLUSDT": null,
+      "XRPUSDT": null,
+      "BNBUSDT": null
+    },
+    "E_rv_funding_trails": {
+      "BTCUSDT": null,
+      "ETHUSDT": null,
+      "SOLUSDT": null,
+      "XRPUSDT": null,
+      "BNBUSDT": null
+    }
+  },
+  "leakage": {
+    "train_only_standardization": true,
+    "no_sealed_months_touched": true,
+    "tested_months": [
+      "2024-05",
+      "2024-06",
+      "2024-07"
+    ],
+    "purge_embargo_days": 7
+  }
+}
