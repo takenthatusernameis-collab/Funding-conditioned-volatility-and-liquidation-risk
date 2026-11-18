@@ -1,8 +1,8 @@
-# AGENT HANDOFF — 2026-11-18T03:20:59Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T03:23:41Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:20:59Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T03:23:41Z)
 
 **State: `ACTIVE_CAMPAIGN`. Heavy work is mandatory — do not stop cleanly.** Latest session recorded: `research_state/session_20261118T030427Z` (read-only data audit + Design A/B/C gap-closure designs + Track B modeled-boundary protocol; gate post-capture PASS with `handoff_stale=false`).
 
@@ -17,6 +17,12 @@
 - **Provenance constraint:** `scripts/run_funding_ablations.py` confirmatory-provenanced range = 2024-04-01..2024-09-30 (FCLR-015). 2024-10..12 funded but outside that range and overlapping sealed FCLR-003 test context → **exploratory-only with explicit audit/caveat**; confirmatory-intent paths refuse unprovenanced ranges. Q1 2024 has no funding files (RV-only extension feasible only).
 - **Track B (modeled boundaries):** feasibility/protocol documented for synthetic breach labels from cached mark-price ZIP/CSV/dir (no parquet, no observed liquidations) — `trackb_boundary_labels_20261118T030427Z.{md,json}`.
 - **Execution blocker (environmental):** `numpy`/`pandas`/`scipy` absent; forecast/ablation scripts import at module level. **Estimand execution not completed this session** (no installs permitted). Full unittest discovery is environment-dependent (missing-numpy errors pre-existing; not green).
+
+### Bottlenecks removed / reinforced in this handoff
+- **Estimand-execution blocker (numpy/pandas/scipy missing, installs prohibited):** cannot be removed by install. Session must not stall on it. Stdlib-only fallback paths below are mandatory substitutes that produce real quantitative/leakage artifacts without the numerical stack.
+- **Root churn cap (500/500):** all new artifacts go into `research_state/session_<UTC>/` only. Zero root `research_state/*.md|json` additions.
+- **Handoff freshness:** latest session id recorded before final gate capture; `handoff_stale=false` required.
+- **Heavy-work non-avoidance:** gate captures alone do NOT satisfy heavy work. A session producing only `check_*` outputs with no new `design_a_leakage_audit` or Track B label artifact has not done heavy work and must not report completion.
 
 ## Next session — first/only actions (run once; produce NEW artifacts in a new session dir, then stop only if blocked with recorded evidence)
 
