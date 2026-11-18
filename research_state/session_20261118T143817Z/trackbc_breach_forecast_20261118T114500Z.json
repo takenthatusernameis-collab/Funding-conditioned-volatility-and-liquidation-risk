@@ -1,0 +1,656 @@
+{
+  "schema": "trackbc_breach_forecast",
+  "timestamp_utc": "20261118T114500Z",
+  "campaign": "FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z",
+  "track": "BC_breach_forecast",
+  "label": "EXPLORATORY_PILOT",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "prereg": "trackbc_breach_prereg_20261118T114500Z.json",
+  "outcome": "synthetic_modeled_boundary_breach (observed_liquidation_labels=false)",
+  "instruments": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "label_month": "2024-04",
+  "feature_cache_months": [
+    "2024-03",
+    "2024-04"
+  ],
+  "features": [
+    "lrv1",
+    "lrv24",
+    "lrv168",
+    "fund",
+    "fund_abs",
+    "fmean",
+    "fewma"
+  ],
+  "model_family": "stdlib IRLS logistic, ridge lambda=1e-6, max 100 iters, tol 1e-8, seed 12345",
+  "baseline": "RV_only [lrv1,lrv24,lrv168]",
+  "candidate": "funding_conditioned [lrv1,lrv24,lrv168,fund,fund_abs,fmean,fewma]",
+  "splits": [
+    {
+      "split": 1,
+      "train": [
+        "2024-04-01",
+        "2024-04-15"
+      ],
+      "embargo": [
+        "2024-04-16",
+        "2024-04-22"
+      ],
+      "test": [
+        "2024-04-23",
+        "2024-04-30"
+      ]
+    },
+    {
+      "split": 2,
+      "train": [
+        "2024-04-01",
+        "2024-04-17"
+      ],
+      "embargo": [
+        "2024-04-18",
+        "2024-04-24"
+      ],
+      "test": [
+        "2024-04-25",
+        "2024-04-30"
+      ]
+    }
+  ],
+  "n_dataset_rows": 41760,
+  "n_missing_origin": 0,
+  "n_missing_feat": 0,
+  "n_unique_entry_origins": 3480,
+  "overall_breach_rate": 0.03395593869731801,
+  "split_results": [
+    {
+      "n_train": 21600,
+      "n_test": 10080,
+      "n_train_pos": 995,
+      "n_test_pos": 167,
+      "test_breach_rate": 0.016567460317460318,
+      "rv_only": {
+        "auc": 0.6825401955093142,
+        "brier": 0.01672545376690288,
+        "precision_at_k": 0.011904761904761904,
+        "k": 504,
+        "calibration": [
+          [
+            0.035335661172419895,
+            0.002976190476190476,
+            1008
+          ],
+          [
+            0.036084050292909245,
+            0.015873015873015872,
+            1008
+          ],
+          [
+            0.03651073000846298,
+            0.012896825396825396,
+            1008
+          ],
+          [
+            0.036970542378497666,
+            0.006944444444444444,
+            1008
+          ],
+          [
+            0.0374182232537336,
+            0.003968253968253968,
+            1008
+          ],
+          [
+            0.03781190131028513,
+            0.005952380952380952,
+            1008
+          ],
+          [
+            0.03818888776303301,
+            0.012896825396825396,
+            1008
+          ],
+          [
+            0.039133810446123705,
+            0.012896825396825396,
+            1008
+          ],
+          [
+            0.04214176279363445,
+            0.05654761904761905,
+            1008
+          ],
+          [
+            0.04894938147874456,
+            0.034722222222222224,
+            1008
+          ]
+        ],
+        "mean_pred": 0.038854495089784426
+      },
+      "fund_cond": {
+        "auc": 0.6039353754913255,
+        "brier": 0.016492819411165857,
+        "precision_at_k": 0.0,
+        "k": 504,
+        "calibration": [
+          [
+            0.024801040967359963,
+            0.007936507936507936,
+            1008
+          ],
+          [
+            0.02643625962987827,
+            0.005952380952380952,
+            1008
+          ],
+          [
+            0.027203065132866435,
+            0.002976190476190476,
+            1008
+          ],
+          [
+            0.027704372701398198,
+            0.013888888888888888,
+            1008
+          ],
+          [
+            0.028378182883059936,
+            0.011904761904761904,
+            1008
+          ],
+          [
+            0.029350163584509877,
+            0.017857142857142856,
+            1008
+          ],
+          [
+            0.030751901859888357,
+            0.03373015873015873,
+            1008
+          ],
+          [
+            0.032572929233331396,
+            0.034722222222222224,
+            1008
+          ],
+          [
+            0.03534170334407987,
+            0.03670634920634921,
+            1008
+          ],
+          [
+            0.041522563588205386,
+            0.0,
+            1008
+          ]
+        ],
+        "mean_pred": 0.03040621829245777
+      },
+      "delta_auc": -0.07860482001798874,
+      "delta_precision_at_k": -0.011904761904761904,
+      "per_scenario": {
+        "L5|long|H4": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L5|long|H24": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L5|short|H4": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L5|short|H24": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|long|H4": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|long|H24": {
+          "n": 840,
+          "n_pos": 3,
+          "breach_rate": 0.0035714285714285713,
+          "auc_rv": 0.910394265232975,
+          "auc_fc": 0.8367184388689765,
+          "delta_auc": -0.0736758263639985,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|short|H4": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|short|H24": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L20|long|H4": {
+          "n": 840,
+          "n_pos": 2,
+          "breach_rate": 0.002380952380952381,
+          "auc_rv": 0.8842482100238663,
+          "auc_fc": 0.7619331742243437,
+          "delta_auc": -0.12231503579952263,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L20|long|H24": {
+          "n": 840,
+          "n_pos": 132,
+          "breach_rate": 0.15714285714285714,
+          "auc_rv": 0.7556818181818182,
+          "auc_fc": 0.6350368087656223,
+          "delta_auc": -0.12064500941619594,
+          "prec_rv": 0.14285714285714285,
+          "prec_fc": 0.0,
+          "delta_prec": -0.14285714285714285
+        },
+        "L20|short|H4": {
+          "n": 840,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L20|short|H24": {
+          "n": 840,
+          "n_pos": 30,
+          "breach_rate": 0.03571428571428571,
+          "auc_rv": 0.4840740740740741,
+          "auc_fc": 0.5178600823045267,
+          "delta_auc": 0.033786008230452635,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        }
+      },
+      "bootstrap_delta_auc": {
+        "mean": -0.08461211459530166,
+        "ci_lo": -0.1595021886595548,
+        "ci_hi": -0.005464373977060122,
+        "reps": 500
+      },
+      "loio_delta_auc": {
+        "BNBUSDT": -0.03547610397623968,
+        "BTCUSDT": -0.09146318319838065,
+        "ETHUSDT": -0.17197563739898836,
+        "SOLUSDT": -0.08963476845056328,
+        "XRPUSDT": -0.08032872589715312
+      },
+      "train_dates": [
+        "2024-04-01",
+        "2024-04-15"
+      ],
+      "test_dates": [
+        "2024-04-23",
+        "2024-04-30"
+      ],
+      "embargo_dates": [
+        "2024-04-16",
+        "2024-04-22"
+      ]
+    },
+    {
+      "n_train": 24480,
+      "n_test": 7200,
+      "n_train_pos": 1084,
+      "n_test_pos": 124,
+      "test_breach_rate": 0.017222222222222222,
+      "rv_only": {
+        "auc": 0.6998121774649428,
+        "brier": 0.01727441081150333,
+        "precision_at_k": 0.011111111111111112,
+        "k": 360,
+        "calibration": [
+          [
+            0.03490622809547788,
+            0.0,
+            720
+          ],
+          [
+            0.03525888243521002,
+            0.004166666666666667,
+            720
+          ],
+          [
+            0.03549087040533008,
+            0.019444444444444445,
+            720
+          ],
+          [
+            0.03573945196901893,
+            0.0125,
+            720
+          ],
+          [
+            0.03600340028703121,
+            0.002777777777777778,
+            720
+          ],
+          [
+            0.036279820499039446,
+            0.013888888888888888,
+            720
+          ],
+          [
+            0.036673867665691515,
+            0.008333333333333333,
+            720
+          ],
+          [
+            0.0373866190288712,
+            0.018055555555555554,
+            720
+          ],
+          [
+            0.038610934451327114,
+            0.05694444444444444,
+            720
+          ],
+          [
+            0.0413510332830991,
+            0.03611111111111111,
+            720
+          ]
+        ],
+        "mean_pred": 0.036770110812009656
+      },
+      "fund_cond": {
+        "auc": 0.6462827549736502,
+        "brier": 0.01700686353015424,
+        "precision_at_k": 0.008333333333333333,
+        "k": 360,
+        "calibration": [
+          [
+            0.02124806532380573,
+            0.013888888888888888,
+            720
+          ],
+          [
+            0.023664618693400825,
+            0.0,
+            720
+          ],
+          [
+            0.02455495131348811,
+            0.004166666666666667,
+            720
+          ],
+          [
+            0.025026716277919123,
+            0.004166666666666667,
+            720
+          ],
+          [
+            0.02566846300575003,
+            0.015277777777777777,
+            720
+          ],
+          [
+            0.026239253113641933,
+            0.02361111111111111,
+            720
+          ],
+          [
+            0.02705100365705954,
+            0.022222222222222223,
+            720
+          ],
+          [
+            0.028040244706007262,
+            0.03888888888888889,
+            720
+          ],
+          [
+            0.029079516633706906,
+            0.034722222222222224,
+            720
+          ],
+          [
+            0.03388387363319425,
+            0.015277777777777777,
+            720
+          ]
+        ],
+        "mean_pred": 0.02644567063579737
+      },
+      "delta_auc": -0.053529422491292666,
+      "delta_precision_at_k": -0.0027777777777777783,
+      "per_scenario": {
+        "L5|long|H4": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L5|long|H24": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L5|short|H4": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L5|short|H24": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|long|H4": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|long|H24": {
+          "n": 600,
+          "n_pos": 2,
+          "breach_rate": 0.0033333333333333335,
+          "auc_rv": 0.9515050167224081,
+          "auc_fc": 0.947324414715719,
+          "delta_auc": -0.004180602006689016,
+          "prec_rv": 0.03333333333333333,
+          "prec_fc": 0.03333333333333333,
+          "delta_prec": 0.0
+        },
+        "L10|short|H4": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L10|short|H24": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L20|long|H4": {
+          "n": 600,
+          "n_pos": 1,
+          "breach_rate": 0.0016666666666666668,
+          "auc_rv": 0.8096828046744574,
+          "auc_fc": 0.7495826377295493,
+          "delta_auc": -0.06010016694490816,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L20|long|H24": {
+          "n": 600,
+          "n_pos": 91,
+          "breach_rate": 0.15166666666666667,
+          "auc_rv": 0.7776722295386342,
+          "auc_fc": 0.6717977503832121,
+          "delta_auc": -0.10587447915542214,
+          "prec_rv": 0.06666666666666667,
+          "prec_fc": 0.06666666666666667,
+          "delta_prec": 0.0
+        },
+        "L20|short|H4": {
+          "n": 600,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "auc_rv": NaN,
+          "auc_fc": NaN,
+          "delta_auc": NaN,
+          "prec_rv": 0.0,
+          "prec_fc": 0.0,
+          "delta_prec": 0.0
+        },
+        "L20|short|H24": {
+          "n": 600,
+          "n_pos": 30,
+          "breach_rate": 0.05,
+          "auc_rv": 0.5598245614035088,
+          "auc_fc": 0.6201169590643275,
+          "delta_auc": 0.06029239766081873,
+          "prec_rv": 0.03333333333333333,
+          "prec_fc": 0.0,
+          "delta_prec": -0.03333333333333333
+        }
+      },
+      "bootstrap_delta_auc": {
+        "mean": -0.04624912732452968,
+        "ci_lo": -0.14157831874207327,
+        "ci_hi": 0.12672316384180793,
+        "reps": 500
+      },
+      "loio_delta_auc": {
+        "BNBUSDT": -0.004344016257434302,
+        "BTCUSDT": -0.04899900041562455,
+        "ETHUSDT": -0.15602033625289435,
+        "SOLUSDT": -0.10708310094813156,
+        "XRPUSDT": -0.054568556972458104
+      },
+      "train_dates": [
+        "2024-04-01",
+        "2024-04-17"
+      ],
+      "test_dates": [
+        "2024-04-25",
+        "2024-04-30"
+      ],
+      "embargo_dates": [
+        "2024-04-18",
+        "2024-04-24"
+      ]
+    }
+  ],
+  "pooled_delta_auc": {
+    "mean_delta_auc": -0.0660671212546407,
+    "n_splits": 2,
+    "note": "pooled mean of split-level Delta AUC; block-bootstrap CI per split reported above."
+  },
+  "bootstrap_seed": 12345,
+  "bootstrap_reps": 500,
+  "alert_frac": 0.05,
+  "honest_status": "EXPLORATORY/PILOT. Single labeled month (2024-04); two chronological train/test splits; block-bootstrap (fixed fitted models); no confirmatory/forecast-gate claim."
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "trackbc_breach_prereg",
+  "session_utc": "20261118T114500Z",
+  "campaign": "FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z",
+  "track": "BC_breach_forecast",
+  "label": "EXPLORATORY_PILOT",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "outcome_data_inspected_before_freeze": false,
+  "preregistered_before_outcomes": true,
+  "freeze_utc": "20261118T114500Z",
+  "research_question": "Do funding-conditioned realized-volatility features (causal at forecast origin t) predict modeled liquidation-boundary breaches within horizon H, beyond an RV-only baseline?",
+  "outcome": {
+    "type": "synthetic_modeled_boundary_breach",
+    "observed_liquidation_labels": false,
+    "source": "Track B modeled breach labels (trackb_breach_labels_20261118T093031Z), month 2024-04, 5 instruments, L in {5,10,20} x side {long,short} x H in {4h,24h}, mmr=0.005, entry at close of bar t (known at t), evaluation on hourly mark path t+1..t+H",
+    "outcome_column": "breached (0/1)",
+    "unit": "one scenario-row = instrument x entry-origin x leverage x side x horizon"
+  },
+  "data": {
+    "instruments": ["BTCUSDT","ETHUSDT","SOLUSDT","XRPUSDT","BNBUSDT"],
+    "label_month": "2024-04",
+    "feature_cache_months": ["2024-03","2024-04"],
+    "feature_source": "read-only ZIP/CSV dir twins under research_state/data_cache/ (markPriceKlines 1h + fundingRate), no network",
+    "entry_origin_rule": "entry at close of bar t; features use only data available no later than bar t close (causal); trailing RV windows end at bar t; funding = latest observation with calc_time <= bar t close",
+    "purge_embargo_days": 7,
+    "splits": [
+      {"split":1,"train":"2024-04-01..2024-04-15","embargo":"2024-04-16..2024-04-22","test":"2024-04-23..2024-04-30"},
+      {"split":2,"train":"2024-04-01..2024-04-17","embargo":"2024-04-18..2024-04-24","test":"2024-04-25..2024-04-30"}
+    ],
+    "note": "single labeled month (2024-04); two chronological train/test splits within it. PILOT due to single-month label coverage; not confirmatory."
+  },
+  "features": {
+    "causal_at_t": true,
+    "feature_set": ["lrv1","lrv24","lrv168","fund","fund_abs","fmean","fewma"],
+    "definitions": {
+      "lrv1": "sum of squared 1h mark-price log returns over trailing 1 hour ending at bar t",
+      "lrv24": "sum of squared 1h mark-price log returns over trailing 24 hours ending at bar t",
+      "lrv168": "sum of squared 1h mark-price log returns over trailing 168 hours ending at bar t",
+      "fund": "signed latest funding rate with calc_time <= bar t close",
+      "fund_abs": "abs(fund)",
+      "fmean": "mean of signed funding observations strictly before bar t (funding history trail)",
+      "fewma": "EWMA of signed funding observations strictly before bar t, alpha=2/(min(n,168)+1)"
+    },
+    "standardization": "train-only mean/std per split; zero-variance columns set std=1; missing features remain missing (no zero/forward fill)"
+  },
+  "model_family": {
+    "type": "drift-free logistic-type score, stdlib fit (IRLS, fixed ridge lambda=1e-6, max 100 iters, tol 1e-8, seed 12345)",
+    "baseline_B0_rv_only": ["lrv1","lrv24","lrv168"],
+    "candidate_B1_funding_conditioned": ["lrv1","lrv24","lrv168","fund","fund_abs","fmean","fewma"],
+    "no_regularization_search": true,
+    "no_hyperparameter_tuning": true
+  },
+  "evaluation": {
+    "metrics": ["ROC-AUC (Mann-Whitney U)","precision@k (alert budget k=top 5% of test rows by predicted probability)","Brier score","calibration (decile mean predicted vs observed breach rate)"],
+    "contrasts": ["B1_vs_B0: Delta AUC","B1_vs_B0: Delta precision@k","per scenario (L x side x H) AUC and precision@k"],
+    "uncertainty": "block bootstrap over UTC-day test blocks, jointly across instruments, seed 12345, 500 reps, CI95 percentile",
+    "robustness": "leave-one-instrument-out (LOIO) Delta AUC",
+    "baseline_comparison": "paired test origins identical across B0 and B1; same eligible rows"
+  },
+  "materiality_floor": "Delta AUC >= +0.01 (funding-conditioned over RV-only) on the pooled OOS test set, with CI95 lower bound > 0, to be considered materially informative; EXPLORATORY/PILOT only, no forecast-gate pass claim",
+  "multiplicity": "all tested scenarios (3 L x 2 side x 2 H = 12) x 2 splits x 2 metrics are in the declared family; report raw and Holm-adjusted where claimed",
+  "prohibitions": ["no future bars","no full-sample normalization","no sealed months","no look-ahead","no funding/threshold tuning on test","no observed-liquidation labeling"],
+  "sealed_months": "none touched; 2024-04 label data is the Track B completed cache (pilot), not re-scored confirmatory"
+}

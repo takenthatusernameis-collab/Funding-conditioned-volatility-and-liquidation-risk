@@ -647,6 +647,15 @@ def main():
     print("[dbg] running placebo design", flush=True)
     placebo_splits = run_design(placebo_panels, placebo_feats, "placebo")
 
+    def pooled_agg(metric, splits, model="E_rv_funding_trails"):
+        """Collect one metric across all placebo splits/instruments for a model."""
+        vals = []
+        for sr in splits:
+            for s in SYMBOLS:
+                pi = sr["models"][model]["per_instrument"].get(s, {})
+                vals.extend(pi.get(metric, []))
+        return vals
+
     placebo_by_split = {}
     for sr in placebo_splits:
         smry = split_summary(sr)
@@ -659,7 +668,7 @@ def main():
             "bootstrap_ci95": [boot["E_rv_funding_trails"]["ci_2_5"],
                                boot["E_rv_funding_trails"]["ci_97_5"]],
         }
-    placebo_pooled_e = pooled_agg("qlike")
+    placebo_pooled_e = pooled_agg("qlike", placebo_splits)
     placebo_mean_qlike_E = (sum(placebo_pooled_e) / len(placebo_pooled_e)
                             if placebo_pooled_e else None)
     out["placebo"] = {

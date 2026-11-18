@@ -1,0 +1,72 @@
+{
+  "schema": "fclr_robust04_prereg",
+  "session_utc": "20261118T132800Z",
+  "campaign": "FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z",
+  "track": "C_volatility_forecast_robustness",
+  "label": "EXPLORATORY_PILOT",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "outcome_data_inspected_before_freeze": false,
+  "preregistered_before_outcomes": true,
+  "freeze_utc": "20261118T132800Z",
+  "research_question": "Does the Track C Design A funding-trail QLIKE improvement over an RV-only baseline (headline E = -0.3579, session_20261118T093031Z) hold under an alternative chronological holdout (test 2024-09, train 2024-04..08) on the cached 2024-04..09 panel?",
+  "design": {
+    "type": "single alternative chronological holdout (robustness confirmation)",
+    "instruments": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+    "train_window": ["2024-04-01", "2024-08-24"],
+    "embargo_window": ["2024-08-25", "2024-08-31"],
+    "test_window": ["2024-09-01", "2024-09-30"],
+    "purge_embargo_days": 7,
+    "expanding_train": false,
+    "entry_origin_rule": "origin at close of 1h bar t; features use only data available no later than bar t close (causal); trailing RV windows end at bar t; funding = latest observation with calc_time <= bar t close; a 24h-ahead target requires bars t+1..t+24 fully inside the declared window",
+    "target": "next-24h realized variance from 1h mark-price close-to-close log returns t+1..t+24 (sum of 24 hourly squared log returns, dimensionless)",
+    "mark_field": "close (markPriceKlines 1h), units USDT"
+  },
+  "features": {
+    "causal_at_t": true,
+    "feature_set": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs", "fmean", "fewma"],
+    "definitions": {
+      "lrv1": "log(sum of squared 1h mark-price log returns over trailing 1 hour ending at bar t + eps)",
+      "lrv24": "log(sum of squared 1h mark-price log returns over trailing 24 hours ending at bar t + eps)",
+      "lrv168": "log(sum of squared 1h mark-price log returns over trailing 168 hours ending at bar t + eps)",
+      "fund": "signed latest funding rate with calc_time <= bar t close",
+      "fund_abs": "abs(fund)",
+      "fmean": "mean of signed funding observations strictly before bar t (funding history trail)",
+      "fewma": "EWMA of signed funding observations strictly before bar t, alpha=2/(min(n,168)+1)"
+    },
+    "standardization": "train-only mean/std; zero-variance columns set std=1"
+  },
+  "models": {
+    "A_rv_only": ["lrv1", "lrv24", "lrv168"],
+    "B_rv_signed": ["lrv1", "lrv24", "lrv168", "fund"],
+    "C_rv_abs": ["lrv1", "lrv24", "lrv168", "fund_abs"],
+    "D_rv_signed_abs": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs"],
+    "E_rv_funding_trails": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs", "fmean", "fewma"]
+  },
+  "model_family": {
+    "type": "stdlib OLS on log realized variance (HAR-style), normal equations + Gaussian elimination with partial pivoting; Duan smearing back-transformation on train residuals",
+    "no_regularization_search": true,
+    "no_hyperparameter_tuning": true
+  },
+  "evaluation": {
+    "primary_metric": "QLIKE = log(pred_var) + y / pred_var",
+    "secondary_metrics": ["MAE", "RMSE"],
+    "contrast": "paired per-origin Delta QLIKE vs A_rv_only (A - model); negative = improvement",
+    "uncertainty": "UTC-day block bootstrap, resampled jointly across instruments, seed 12345, 2000 reps, percentile CI95",
+    "robustness": "leave-one-instrument-out (LOIO) mean Delta QLIKE vs A",
+    "paired_test_origins": "identical eligible origins across all models"
+  },
+  "materiality_floor": "Mean Delta QLIKE (A - E) > 0 with bootstrap CI95 lower bound > 0 on the 2024-09 holdout, to be considered a materially informative robustness confirmation; EXPLORATORY/PILOT only, no forecast-gate or confirmatory pass claim",
+  "prohibitions": [
+    "no future bars",
+    "no full-sample normalization",
+    "no sealed months",
+    "no look-ahead",
+    "no funding/threshold tuning on test",
+    "no observed-liquidation labeling",
+    "no sealed cached-data confirmatory re-score"
+  ],
+  "sealed_months": "none touched; 2024-04..2024-09 is the provenanced exploratory cache, not sealed confirmatory data",
+  "honest_status": "EXPLORATORY/PILOT. Alternative-holdout robustness confirmation of an exploratory Track C result; no confirmatory promotion claimed."
+}
