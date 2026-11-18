@@ -1,0 +1,116 @@
+{
+  "schema": "recompute_trackb_breach_labels",
+  "session_utc": "2026-11-18T09:30:31Z",
+  "generated_utc": "20261118T093031Z",
+  "network_used": false,
+  "label_type": "synthetic_modeled_boundary_breach",
+  "observed_liquidation_labels": false,
+  "n_rows": 41760,
+  "n_breached_rows": 1418,
+  "overall_breach_rate": 0.03395593869731801,
+  "aggregate_by_scenario": {
+    "L5|long|H4": {
+      "n_origins": 3480,
+      "n_breached": 0,
+      "breach_rate": 0.0,
+      "mean_hours_to_breach": null,
+      "min_clearance": 0.0036229576588381776,
+      "max_clearance": 0.27092136267215855
+    },
+    "L5|long|H24": {
+      "n_origins": 3480,
+      "n_breached": 19,
+      "breach_rate": 0.005459770114942529,
+      "mean_hours_to_breach": 14.263157894736842,
+      "min_clearance": -0.017531260701477775,
+      "max_clearance": 0.27092136267215855
+    },
+    "L5|short|H4": {
+      "n_origins": 3480,
+      "n_breached": 0,
+      "breach_rate": 0.0,
+      "mean_hours_to_breach": null,
+      "min_clearance": 0.057839694126737944,
+      "max_clearance": 0.2655081203208874
+    },
+    "L5|short|H24": {
+      "n_origins": 3480,
+      "n_breached": 0,
+      "breach_rate": 0.0,
+      "mean_hours_to_breach": null,
+      "min_clearance": 0.034050571518981734,
+      "max_clearance": 0.2580400625289107
+    },
+    "L10|long|H4": {
+      "n_origins": 3480,
+      "n_breached": 18,
+      "breach_rate": 0.005172413793103448,
+      "mean_hours_to_breach": 3.0,
+      "min_clearance": -0.09687955490397579,
+      "max_clearance": 0.17041885010934457
+    },
+    "L10|long|H24": {
+      "n_origins": 3480,
+      "n_breached": 166,
+      "breach_rate": 0.04770114942528736,
+      "mean_hours_to_breach": 13.457831325301205,
+      "min_clearance": -0.11803377326429179,
+      "max_clearance": 0.17041885010934457
+    },
+    "L10|short|H4": {
+      "n_origins": 3480,
+      "n_breached": 2,
+      "breach_rate": 0.0005747126436781609,
+      "mean_hours_to_breach": 2.0,
+      "min_clearance": -0.04166279343545103,
+      "max_clearance": 0.16600563275869845
+    },
+    "L10|short|H24": {
+      "n_origins": 3480,
+      "n_breached": 24,
+      "breach_rate": 0.006896551724137931,
+      "mean_hours_to_breach": 13.666666666666666,
+      "min_clearance": -0.06545191604320724,
+      "max_clearance": 0.15853757496672172
+    },
+    "L20|long|H4": {
+      "n_origins": 3480,
+      "n_breached": 60,
+      "breach_rate": 0.017241379310344827,
+      "mean_hours_to_breach": 2.8333333333333335,
+      "min_clearance": -0.14713081118538288,
+      "max_clearance": 0.12016759382793757
+    },
+    "L20|long|H24": {
+      "n_origins": 3480,
+      "n_breached": 683,
+      "breach_rate": 0.19626436781609197,
+      "mean_hours_to_breach": 13.572474377745241,
+      "min_clearance": -0.1682850295456986,
+      "max_clearance": 0.12016759382793757
+    },
+    "L20|short|H4": {
+      "n_origins": 3480,
+      "n_breached": 40,
+      "breach_rate": 0.011494252873563218,
+      "mean_hours_to_breach": 3.0,
+      "min_clearance": -0.09141403721654574,
+      "max_clearance": 0.11625438897760375
+    },
+    "L20|short|H24": {
+      "n_origins": 3480,
+      "n_breached": 406,
+      "breach_rate": 0.11666666666666667,
+      "mean_hours_to_breach": 14.071428571428571,
+      "min_clearance": -0.11520315982430195,
+      "max_clearance": 0.10878633118562704
+    }
+  },
+  "per_instrument_breach_rate_headline": {
+    "BTCUSDT": 0.0,
+    "ETHUSDT": 0.04597701149425287,
+    "SOLUSDT": 0.09626436781609195,
+    "XRPUSDT": 0.06752873563218391,
+    "BNBUSDT": 0.028735632183908046
+  }
+}
