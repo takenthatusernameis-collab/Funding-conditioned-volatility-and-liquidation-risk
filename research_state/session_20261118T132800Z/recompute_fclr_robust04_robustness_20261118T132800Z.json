@@ -1,0 +1,129 @@
+{
+  "schema": "recompute_fclr_robust04_robustness",
+  "session_utc": "2026-11-18T13:28:00Z",
+  "generated_utc": "20261118T132800Z",
+  "campaign": "FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "design": "alternative_chronological_holdout",
+  "instruments": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "train_window": [
+    "2024-04-01",
+    "2024-08-24"
+  ],
+  "embargo_window": [
+    "2024-08-25",
+    "2024-08-31"
+  ],
+  "test_window": [
+    "2024-09-01",
+    "2024-09-30"
+  ],
+  "n_common_test_origins": 696,
+  "models": {
+    "A_rv_only": {
+      "mean_qlike": -6.110056052214218,
+      "mean_delta_qlike_vs_A": 0.0
+    },
+    "B_rv_signed": {
+      "mean_qlike": -6.108779175888441,
+      "mean_delta_qlike_vs_A": -0.0012768763257773091
+    },
+    "C_rv_abs": {
+      "mean_qlike": -6.106848782979606,
+      "mean_delta_qlike_vs_A": -0.0032072692346130803
+    },
+    "D_rv_signed_abs": {
+      "mean_qlike": -6.103127697637085,
+      "mean_delta_qlike_vs_A": -0.006928354577132994
+    },
+    "E_rv_funding_trails": {
+      "mean_qlike": -6.0806380469802095,
+      "mean_delta_qlike_vs_A": -0.029418005234008757
+    }
+  },
+  "bootstrap": {
+    "B_rv_signed": {
+      "mean_improvement": -0.001232542794452224,
+      "ci_2_5": -0.005123412056803153,
+      "ci_97_5": 0.0029125294858793438,
+      "n_reps": 2000
+    },
+    "C_rv_abs": {
+      "mean_improvement": -0.0032177498857536325,
+      "ci_2_5": -0.0062051575535464285,
+      "ci_97_5": -5.808455065491278e-05,
+      "n_reps": 2000
+    },
+    "D_rv_signed_abs": {
+      "mean_improvement": -0.0069133504411172594,
+      "ci_2_5": -0.011327648793506357,
+      "ci_97_5": -0.0020131906554671257,
+      "n_reps": 2000
+    },
+    "E_rv_funding_trails": {
+      "mean_improvement": -0.029232628974225856,
+      "ci_2_5": -0.04212624249173988,
+      "ci_97_5": -0.015872221477403303,
+      "n_reps": 2000
+    }
+  },
+  "loio": {
+    "B_rv_signed": {
+      "BTCUSDT": -0.0008196499668790649,
+      "ETHUSDT": -0.002488452849506735,
+      "SOLUSDT": 0.0019329382559212997,
+      "XRPUSDT": -0.0036723126033795595,
+      "BNBUSDT": -0.0013369044650424864
+    },
+    "C_rv_abs": {
+      "BTCUSDT": -0.0026537031688730877,
+      "ETHUSDT": -0.005253128584987887,
+      "SOLUSDT": -0.001714855989267968,
+      "XRPUSDT": -0.00400811126830414,
+      "BNBUSDT": -0.0024065471616323175
+    },
+    "D_rv_signed_abs": {
+      "BTCUSDT": -0.007390217766098037,
+      "ETHUSDT": -0.009803642462229971,
+      "SOLUSDT": -0.005283433729547265,
+      "XRPUSDT": -0.0062810763520046555,
+      "BNBUSDT": -0.005883402575785035
+    },
+    "E_rv_funding_trails": {
+      "BTCUSDT": -0.03107260210396559,
+      "ETHUSDT": -0.02692488094295342,
+      "SOLUSDT": -0.030697509745834146,
+      "XRPUSDT": -0.015080852057603648,
+      "BNBUSDT": -0.043314181319686985
+    }
+  },
+  "materiality": {
+    "floor": "mean Delta QLIKE (A - E) > 0 with bootstrap CI95 lower bound > 0 on the 2024-09 holdout (QLIKE lower is better; A - E > 0 means E improves)",
+    "delta_qlike_vs_A_E": -0.029418005234008757,
+    "bootstrap_mean_A_minus_E": -0.029232628974225856,
+    "bootstrap_ci95_A_minus_E": [
+      -0.04212624249173988,
+      -0.015872221477403303
+    ],
+    "better_model_by_mean_qlike": "A_rv_only",
+    "materiality_floor_met": false
+  },
+  "sign_audit": {
+    "delta_convention": "mean_delta_qlike_vs_A = mean(QLIKE_A - QLIKE_model); QLIKE is a loss, lower is better",
+    "negative_delta_means": "model has HIGHER QLIKE = WORSE than RV-only",
+    "prior_headline_check": "session_20261118T093031Z reported E=-0.3579 as an improvement; under the same convention that is A - E = -0.3579, i.e. E is WORSE by 0.3579. The prior 'funding-trail improves QLIKE' claim is a SIGN INVERSION.",
+    "prior_headline_corrected": "RV-only (A) has lower QLIKE than funding-trail (E) in every split of session_20261118T093031Z and on the 2024-09 holdout here.",
+    "robust04_finding": "On the 2024-09 alternative holdout the funding-trail model E is worse than RV-only (A - E < 0, CI95 strictly below 0); the pre-registered improvement floor is NOT met."
+  },
+  "bootstrap_seed": 12345,
+  "bootstrap_reps": 2000,
+  "honest_status": "EXPLORATORY/PILOT. Funding-trail features do NOT improve QLIKE on the 2024-09 holdout (RV-only has lower QLIKE; A - E < 0, CI95 strictly below 0). The prior Track C 'improvement' headline is a sign inversion. No confirmatory claim."
+}
