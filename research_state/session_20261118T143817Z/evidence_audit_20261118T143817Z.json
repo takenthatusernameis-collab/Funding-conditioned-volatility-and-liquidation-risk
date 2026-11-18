@@ -1,0 +1,160 @@
+{
+  "schema": "evidence_audit",
+  "session_utc": "2026-11-18T14:38:17Z",
+  "generated_utc": "20261118T143817Z",
+  "campaign": "FCLR-VOL-LIQ-ROBUST-05-20261118T132800Z",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "read_only": true,
+  "heavy_session": "session_20261118T143817Z",
+  "heavy_session_mode": "new_style_audit_quant",
+  "artifact_inventory": {
+    "evidence_audit_20261118T143817Z.json": 5755,
+    "fclr_robust04_prereg_20261118T132800Z.json": 4353,
+    "fclr_robust04_prereg_20261118T132800Z.md": 1840,
+    "fclr_robust04_robustness_20261118T132800Z.json": 2530579,
+    "fclr_robust04_robustness_20261118T132800Z.md": 5562,
+    "fclr_robust04_robustness_20261118T132800Z.py": 26924,
+    "fclr_robust05_prereg_20261118T143817Z.json": 5280,
+    "fclr_robust05_prereg_20261118T143817Z.md": 2706,
+    "fclr_robust05_robustness_20261118T143817Z.json": 10288245,
+    "fclr_robust05_robustness_20261118T143817Z.md": 6971,
+    "fclr_robust05_robustness_20261118T143817Z.py": 33291,
+    "recompute_fclr_robust05_robustness_20261118T143817Z.json": 10179,
+    "recompute_fclr_robust05_robustness_20261118T143817Z.py": 9111,
+    "trackb_breach_labels_20261118T093031Z.json": 7221666,
+    "trackb_breach_labels_20261118T093031Z.md": 2730,
+    "trackb_breach_labels_20261118T093031Z.py": 19592,
+    "trackbc_breach_forecast_20261118T114500Z.json": 16207,
+    "trackbc_breach_forecast_20261118T114500Z.md": 2776,
+    "trackbc_breach_forecast_20261118T114500Z.py": 25813,
+    "trackbc_breach_prereg_20261118T114500Z.json": 4661,
+    "trackc_design_a_forecast_20261118T093031Z.json": 8675239,
+    "trackc_design_a_forecast_20261118T093031Z.md": 6694,
+    "trackc_design_a_forecast_20261118T093031Z.py": 24086,
+    "trigger_check_20261118T143817Z.json": 1965
+  },
+  "all_required_artifacts_nonempty": true,
+  "tracks_completed": {
+    "track_c_carried_forward": {
+      "source_session": "session_20261118T093031Z",
+      "artifacts": [
+        "trackc_design_a_forecast_20261118T093031Z.{py,json,md}"
+      ],
+      "headline": "design-A funding-trail QLIKE result; prior headline E=-0.3579 is A-E and therefore means E was WORSE, not better (sign-inverted claim already corrected)."
+    },
+    "track_b_carried_forward": {
+      "source_session": "session_20261118T093031Z",
+      "artifacts": [
+        "trackb_breach_labels_20261118T093031Z.{py,json,md}"
+      ],
+      "headline": "synthetic modeled boundary-breach labels; 41760 rows; 1418 breached; observed_liquidation_labels=false."
+    },
+    "breach_forecast_carried_forward": {
+      "source_session": "session_20261118T114500Z",
+      "artifacts": [
+        "trackbc_breach_prereg_20261118T114500Z.json",
+        "trackbc_breach_forecast_20261118T114500Z.{py,json,md}"
+      ],
+      "headline": "pooled mean Delta AUC -0.0661; materiality floor NOT met; EXPLORATORY/PILOT."
+    },
+    "robust04_carried_forward": {
+      "source_session": "session_20261118T132800Z",
+      "artifacts": [
+        "fclr_robust04_prereg_20261118T132800Z.{json,md}",
+        "fclr_robust04_robustness_20261118T132800Z.{py,json,md}"
+      ],
+      "headline": "2024-09 holdout: A-E=-0.029418, CI95 [-0.042126,-0.015872]; RV-only better; floor NOT met."
+    },
+    "robust05_executed_this_session": {
+      "artifacts": [
+        "fclr_robust05_prereg_20261118T143817Z.{json,md}",
+        "fclr_robust05_robustness_20261118T143817Z.{py,json,md}"
+      ],
+      "design": "four chronological holdouts (test months 2024-06/07/08/09), expanding train, 7-day purge/embargo, plus deterministic funding-permutation placebo.",
+      "per_holdout_mean_delta_qlike_vs_A_E": {
+        "2024-06": {
+          "mean": -0.06316512276478664,
+          "ci95": [
+            -0.09153403549833822,
+            -0.034411390082598255
+          ],
+          "beats_A": false
+        },
+        "2024-07": {
+          "mean": -0.21655312609067562,
+          "ci95": [
+            -0.28389506546852256,
+            -0.1490814837253825
+          ],
+          "beats_A": false
+        },
+        "2024-08": {
+          "mean": -0.747576256449495,
+          "ci95": [
+            -1.1282113429812703,
+            -0.30581502677015515
+          ],
+          "beats_A": false
+        },
+        "2024-09": {
+          "mean": -0.029299003395344254,
+          "ci95": [
+            -0.04175021308373257,
+            -0.016079418710177904
+          ],
+          "beats_A": false
+        }
+      },
+      "pooled": {
+        "best_model_by_mean_qlike": "A_rv_only",
+        "mean_delta_qlike_vs_A": {
+          "B_rv_signed": -0.005964960289043748,
+          "C_rv_abs": -0.014429914431085216,
+          "D_rv_signed_abs": -0.047993906282469495,
+          "E_rv_funding_trails": -0.26784187402414333
+        },
+        "E_bootstrap_ci95": [
+          -0.3733193423789717,
+          -0.15007448187213587
+        ]
+      },
+      "placebo": {
+        "mean_delta_qlike_vs_A_E_pooled": -0.09342313873108703,
+        "real_abs_delta": 0.26784187402414333,
+        "placebo_abs_delta": 0.09342313873108703,
+        "real_exceeds_placebo_abs": true,
+        "note": "The funding-trail model is materially worse than A, and worse than the permuted-funding placebo in 2024-07 and 2024-08."
+      },
+      "materiality_floor_met": false,
+      "verdict": "HONEST NEGATIVE: RV-only (A) has the lowest pooled QLIKE; no funding-conditioned model beats A in any of the four holdouts. The pre-registered floor (>=3/4 holdouts with CI95 lower bound > 0, and real |delta| > placebo |delta|) is NOT met."
+    }
+  },
+  "sign_convention": {
+    "definition": "mean_delta_qlike_vs_A = mean(QLIKE_A - QLIKE_model); QLIKE is a loss, lower is better",
+    "reading": "positive = model beats RV-only; negative = model is worse",
+    "no_inversion_claim": "This audit does not repeat the sign-inverted 'funding-trail improves QLIKE' claim."
+  },
+  "independent_recompute": {
+    "artifact": "recompute_fclr_robust05_robustness_20261118T143817Z.json",
+    "method": "re-derivation of all reported aggregates and of the frozen UTC-day block bootstrap (seed 12345, 2000 reps) from the stored per-origin loss arrays; no model re-estimation",
+    "n_discrepancies": 0,
+    "materiality_matches_reported": true,
+    "recompute_agrees": true
+  },
+  "trigger_check": {
+    "artifact": "trigger_check_20261118T143817Z.json",
+    "all_triggers_open": true,
+    "no_trigger_fired": true
+  },
+  "prohibitions_respected": [
+    "no sealed re-score",
+    "no network",
+    "no root research_state/*.md|json writes (all artifacts under the session directory)",
+    "no sealed-artifact/workflow/.github mutation",
+    "no duplicate AGENT_HANDOFF",
+    "no look-ahead / full-sample normalization / sealed months / observed-liquidation labeling"
+  ],
+  "honest_status": "EXPLORATORY/PILOT. ROBUST-05 executed end-to-end with an independent aggregate+bootstrap recompute that agrees exactly. The funding-conditioned hypothesis is rejected on cached 2024-06..09 data under QLIKE; no confirmatory promotion claimed."
+}

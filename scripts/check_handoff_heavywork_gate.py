@@ -202,6 +202,28 @@ ROBUST_05_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-LIQ-RISK-CALIBRATION-06 hardening: ROBUST-05 rejected the funding-conditioned
+# volatility hypothesis under QLIKE, so the next focus campaign advances the
+# repository's *liquidation-risk* pillar instead of re-running a QLIKE variant. A
+# post-start session must emit the outcome-blind risk-06 prereg, the multi-month
+# modeled breach-label package, the out-of-sample Brier/log-loss calibration triad,
+# and a trigger check, with no zero-byte placeholders. Sessions predating the
+# campaign start are grandfathered so this handoff refresh stays green.
+RISK_06_CAMPAIGN_RE = re.compile(
+    r"FCLR-LIQ-RISK-CALIBRATION-(\d+)-(\d{8}T\d{6}Z)"
+)
+RISK_06_REQUIRED = (
+    ("fclr_risk06_prereg_", ".json"),
+    ("fclr_risk06_prereg_", ".md"),
+    ("fclr_risk06_labels_", ".py"),
+    ("fclr_risk06_labels_", ".json"),
+    ("fclr_risk06_labels_", ".md"),
+    ("fclr_risk06_calibration_", ".py"),
+    ("fclr_risk06_calibration_", ".json"),
+    ("fclr_risk06_calibration_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -712,6 +734,73 @@ def _robust_05_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _risk_06_state(handoff_text: str, latest_sid: str | None,
+                   latest_files: list[str],
+                   latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-RISK-CALIBRATION-06 non-avoidance state.
+
+    After the risk-06 campaign starts, a post-start session must emit the
+    outcome-blind prereg, the multi-month modeled breach-label triad, the
+    out-of-sample calibration triad (Brier/log-loss), and a trigger check, with
+    no zero-byte placeholders. Sessions predating the campaign start are
+    grandfathered.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = RISK_06_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIQ-RISK-CALIBRATION-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files
+            if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in RISK_06_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, RISK_06_REQUIRED):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -761,6 +850,7 @@ def check(repo: Path = REPO) -> dict:
         "breach_forecast": None,
         "robust_04": None,
         "robust_05": None,
+        "risk_06": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -966,6 +1056,29 @@ def check(repo: Path = REPO) -> dict:
                 if not r05["has_trigger_check"]:
                     payload["failures"].append(
                         f"ROBUST_05_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-RISK-CALIBRATION-06: after the risk-06 campaign starts,
+            # require the outcome-blind prereg + multi-month labels triad +
+            # calibration triad + trigger check. Zero-byte placeholders fail closed.
+            r06 = _risk_06_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["risk_06"] = r06
+            if r06["required"]:
+                if r06["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "RISK_06_ARTIFACTS_MISSING:"
+                        + ",".join(r06["missing_required_artifacts"])
+                    )
+                if r06["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "RISK_06_ARTIFACTS_EMPTY:"
+                        + ",".join(r06["empty_required_artifacts"])
+                    )
+                if not r06["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"RISK_06_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
