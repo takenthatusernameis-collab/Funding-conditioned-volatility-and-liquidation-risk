@@ -1,165 +1,167 @@
-# AGENT HANDOFF — 2026-11-18T19:45:28Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-18T20:19:19Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority.
 > No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T19:45:28Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T20:19:19Z)
 
-**You must complete `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` now. Do not idle, do not re-audit, do not gate-only, do not merely refresh this handoff, do not re-run RISK-06, and do not re-open the closed Track C QLIKE line.**
+**You must execute `FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z` now. Do not idle, do not re-audit RISK-07, do not gate-only, do not merely refresh this handoff, and do not attempt confirmatory multi-block on cached 2024 data.**
 
-The session `session_20261118T191945Z` (UTC **20261118T191945Z**) has already started RISK-07 and produced:
-- `fclr_risk07_prereg_20261118T191945Z.{json,md}` — outcome-blind prereg (frozen before outcomes)
-- `fclr_risk07_calibrators_20261118T191945Z.{py,json}` — stdlib calibrator implementations (Platt logistic, PAVA isotonic, scenario base-rate offset) + self-tests
-- `fclr_risk07_dataset_20261118T191945Z.json` — assembled per-row scores/labels reused from RISK-06
-- `fclr_risk07_partial_2024-07_20261118T191945Z.json` — holdout 2024-07 partial results
-- `fclr_risk07_partial_2024-08_20261118T191945Z.json` — holdout 2024-08 partial results
-- `fclr_risk07_partial_2024-09_20261118T191945Z.json` — holdout 2024-09 partial results
-- `fclr_risk07_recalibration_20261118T191945Z.py` — complete evaluation script (966 lines, stdlib only)
+The session `session_20261118T191945Z` (UTC **20261118T191945Z**) has **completed** `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` with all required artifacts present and non-empty in `research_state/session_20261118T191945Z/`:
+- `fclr_risk07_recalibration_20261118T191945Z.{json,md}` — verdict `HONEST_NEGATIVE_OR_INCONCLUSIVE`, materiality floor NOT met
+- `evidence_audit_20261118T191945Z.{json,md}`
+- `recompute_fclr_risk07_recalibration_20261118T191945Z.json` — `n_discrepancies=0`
+- `trigger_check_20261118T191945Z.json` — all 4 reopen triggers OPEN/none fired
+- RISK-06 + ROBUST-05 carry-forward packages (copied, non-empty)
 
-**You must finish this session in-place** (do not create a new session directory). Produce the remaining required artifacts **non-empty** in `research_state/session_20261118T191945Z/`:
-1. `fclr_risk07_recalibration_20261118T191945Z.{json,md}` — full per-holdout, per-scenario Brier/ECE/log-loss/AUC, bootstrap CIs, pooled result, cross-scenario transfer matrix, placebo null, decile/reliability diagnostics, verdict
-2. `evidence_audit_20261118T191945Z.{json,md}` — evidence audit for this session
-3. `recompute_fclr_risk07_recalibration_20261118T191945Z.json` — independent re-derivation from stored per-row scores/labels; `n_discrepancies` must be 0
-4. `trigger_check_20261118T191945Z.json` — trigger check for this session
+**Gates status (verified 2026-11-18T20:13:53Z):**
+- `check_handoff_heavywork_gate.py --json`: **PASS** (`risk_07` required=true, pass=true)
+- `check_tracka_scope_registry_drift.py --json`: **PASS** (196/196)
+- `next_campaign_status.py --json`: confirmatory multi-block **BLOCKED** (`any_feasible=false`); RISK-07 complete
 
-**Mandatory carry-forward into the same session dir (copy from `session_20261118T182813Z` and `session_20261118T143817Z`; all non-empty):**
-- RISK-06 package: `fclr_risk06_prereg_*.{json,md}`, `fclr_risk06_labels_*.{py,json,md}`, `fclr_risk06_calibration_*.{py,json,md}`
-- ROBUST-05 package: `fclr_robust05_prereg_*.{json,md}`, `fclr_robust05_robustness_*.{py,json,md}`
+---
 
-**Update the `Latest executed session` line in this handoff to `session_20261118T191945Z` before final gate capture.**
+## CURRENT STATE (verified 2026-11-18T20:19:19Z)
 
-`scripts/check_handoff_heavywork_gate.py` enforces RISK-07 (prereg, calibrator implementation, recalibration evaluation, trigger check, non-zero bytes, carry-forward) and fails the session closed if anything is missing. There is no legitimate audit-only path.
-
-**Repo priority (name = campaign):** `Funding-conditioned-volatility-and-liquidation-risk`
-1. **Track C (closed, negative):** funding-conditioned information does **not** forecast future realized volatility/stress beyond RV-only. Rejected under QLIKE on 2024-06/07/08/09 holdouts. Do not re-run.
-2. **Track B funding-vs-RV (closed, honest negative):** funding-conditioned features did **not** improve modeled breach-risk calibration over RV-only (RISK-06, floor not met). Do not re-run RISK-06.
-3. **Track B baseline-calibration (primary, active):** the RV-only baseline is the best available score but is it **reliably miscalibrated**, and can a **train-only recalibration layer** fix it out-of-sample (Brier + ECE) and transfer across scenarios/holdouts beyond a label-permutation placebo? This is the live question (RISK-07).
-
-## Current state (verified 2026-11-18T19:45:28Z)
-
-- **Campaign state:** `ACTIVE_CAMPAIGN`; risk-07 is armed and machine-enforced.
-- **Latest executed session:** `research_state/session_20261118T191945Z` — campaign `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z`, **COMPLETE** (prereg + calibrators + dataset + partials + full recalibration `.json/.md`, evidence audit `.json/.md`, recompute `.json` with `n_discrepancies=0`, trigger check `.json`, and the RISK-06 + ROBUST-05 carry-forward packages all present and non-empty).
-- **Active required next campaign:** `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` — **DONE**; gate-enforced heavy work is complete. The only executable heavy work remaining on cached 2024-03…09 is stdlib exploratory Track B/C; confirmatory multi-block cached design remains **BLOCKED** (`any_feasible=false`).
+- **Campaign state:** `ACTIVE_CAMPAIGN`; RISK-07 complete; confirmatory path **BLOCKED**.
+- **Latest executed session:** `research_state/session_20261118T191945Z` — `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` — **COMPLETE**.
+- **Active required next campaign:** `FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z` — **Track A exploratory on Hyperliquid observed liquidations** (Ironflow/HF dataset).
 - **Rank-0 trigger state:** `TRIGGER_ONLY`; all four reopen triggers OPEN/none fired.
 - **Root `research_state/` md+json count:** **498/500** — write every new artifact under the session subdir, never at root.
-- **Gate `check_handoff_heavywork_gate.py --json`:** **PASS** (`pass=true`, `reason_code=OK`, no failures). `risk_07` required=true, pass=true. `handoff_stale=false` (handoff latest == disk latest == `session_20261118T191945Z`).
-- **Gate `check_tracka_scope_registry_drift.py --json`:** **PASS** (`reason_code=OK`, 196/196).
-- **`scripts/next_campaign_status.py --json`:** confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`, no actionable preregs); stdlib exploratory Track B/C on cached 2024-03…09 is the only executable heavy work → RISK-07 (now complete).
 
-### RISK-06 result (do not re-run, do not re-interpret)
-Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01`, 7-day purge/embargo, 5 instruments, 12 scenarios, 262,080 modeled rows (6,241 breached, rate 0.023813). `ΔBrier = Brier_B0 − Brier_Bm`; Brier is a **loss**, so positive = funding model better calibrated.
+### RISK-07 final result (do not re-run, do not re-interpret)
+Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01`, 7-day purge/embargo, 5 instruments, 12 scenarios, 262,080 modeled rows. **Materiality floor NOT met** for any calibrator (C1_platt, C2_isotonic, C3_prior_offset). Real mean ΔBrier ≤ 0 or CI95 lower bound ≤ 0 in ≥2/3 holdouts. Placebo null not exceeded. Verdict: `HONEST_NEGATIVE_OR_INCONCLUSIVE`. Correct claim: train-only recalibration did not materially improve modeled breach-risk calibration over RV-only baseline out-of-sample.
 
-| Holdout | B1 ΔBrier (primary `L10|long|H24`) | B2 ΔBrier | B1 beats B0 |
-|---|---|---|---|
-| 2024-07 | −0.000035 | −0.000176 | no |
-| 2024-08 | +0.000535 | −0.000310 | no (CI lower < 0) |
-| 2024-09 | +0.000196 | −0.000098 | yes (CI lower > 0) |
+### Feasibility facts — do not claim you are blocked
+- **Confirmatory multi-block cached design:** infeasible in all domains (`any_feasible=false`). Certified closed; do not reopen without a machine-satisfied trigger.
+- **Cached 2024-03…09 data:** complete 1h mark-price + funding for 5 instruments. **Exhausted for confirmatory work.** Only stdlib exploratory re-runs possible — not the next priority.
+- **Hyperliquid (Ironflow/HF) data:** **observed liquidation labels available** (Track A candidate). Per `next_campaign_status.py`:
+  - `hyperliquid_bulk_frontier`: candles/funding/OI/liquidations **2025-05 … 2026-04** (12 months, 9 coins)
+  - `hyperliquid_extended_frontier`: usable_months **2025-11 … 2026-10** (12 months, 17 coins)
+  - Both frontiers show `any_feasible=false` for **confirmatory** design (min 127 design days, 3 non-overlapping blocks)
+  - **But exploratory Track A assessment is viable and unblocked** — no confirmatory gate required.
+- **Environment:** `numpy/pandas/scipy` absent by design for core path. Implement with stdlib (`json/csv/urllib/statistics/random/hashlib/datetime`). Parquet reads require `pandas`/`pyarrow` — acceptable for Track A label ingestion only; core modeling stays stdlib.
+- **Sealed months:** 2024-10 onward sealed for cached Binance confirmatory tracks. Hyperliquid 2025-05+ is **unopened** for Track A outcomes.
 
-- Beat-B0 holdouts on primary scenario: **B1 1/3, B2 0/3**.
-- Real mean ΔBrier: B1 **+0.000209**, B2 **−0.000198**; placebo mean: B1 **−0.000439**, B2 **−0.000466**.
-- **Materiality floor NOT met.** Verdict: `HONEST_NEGATIVE_OR_INCONCLUSIVE`. Correct claim: funding-conditioned features did not improve modeled breach-risk calibration over RV-only in the tested holdouts.
-- Independent recompute re-derives every aggregate + the frozen day-block bootstrap: **0 discrepancies**.
-- Calibration deciles show the real defect: baseline predicted risk is compressed into ~0.6–8% while observed rates range 0–11%; in `2024-09` the top decile predicts 3.05% and observes **0%**. Risk-07 targets this defect directly.
+---
 
-### Feasibility facts — do not claim you are data-blocked (verified 2026-11-18T19:45:28Z)
-- Confirmatory multi-block **cached** design remains infeasible in all domains (`scripts/next_campaign_status.py --json` → `any_feasible=false`). Certified closed; do not reopen without a machine-satisfied trigger.
-- `research_state/data_cache/` has complete **1h mark-price files + funding files** for `BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT, BNBUSDT` for every month **2024-03 … 2024-09** (30–31 mark days/file-month, 3 funding files/month). RISK-07 is runnable **fully offline** and can reuse the stored RISK-06 label matrix (`fclr_risk06_labels_20261118T182813Z.json`, 13 MB, includes all 262,080 rows).
-- **Sealed months:** 2024-10 onward (all 2025/2026 cache) are **sealed** and must not be read for outcomes.
-- Environment: `numpy/pandas/scipy` absent by design. Implement with stdlib (`math/csv/json/zipfile/statistics/random`). Do not wait for installs or network.
+## NEXT FOCUS CAMPAIGN — REQUIRED HEAVY WORK (machine-enforced)
 
-## Next focus campaign — REQUIRED heavy work (machine-enforced)
+**`FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z` — Track A exploratory assessment: Hyperliquid observed liquidation labels (Ironflow/HF dataset)**
 
-**`FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` — Track B train-only recalibration of modeled breach-risk probabilities (stdlib, cached data, no new labels needed).**
+### Research question
+Are the **observed forced-liquidation records** from the Ironflow/Hyperliquid Hugging Face dataset (`ironflow/hyperliquid-liquidations`) admissible, sufficiently complete, and temporally aligned with mark-price/funding data to support a **future confirmatory Track A forecast test**? If yes, freeze the admissibility criteria and register the confirmatory design. If no, document the exact shortfall and keep Track A `DATA_BLOCKED` or `NOT_STARTED`.
 
-**Research question:** is the RV-only baseline (`B0_rv_only`) reliably miscalibrated out-of-sample on modeled liquidation-boundary breach risk, and can a **train-only** recalibration layer materially improve **Brier score and ECE** across multiple chronological holdouts and **transfer** across scenarios, beyond a label-permutation placebo?
+### Scope (exploratory — no confirmatory gate)
+- **Source:** `https://huggingface.co/datasets/ironflow/hyperliquid-liquidations` — unauthenticated, no API key, no requester-pays.
+- **Data:** `data/events/YYYY-MM.parquet` (liquidation events) + `data/fills/YYYY-MM.parquet` (fill details).
+- **Target window:** **2025-11 … 2026-10** (12 months, per `hyperliquid_extended_frontier.usable_months`). Do not read 2025-05…2025-10 for outcomes (earlier window for context only).
+- **Coins:** 17 coins with candle coverage (`BTC`, `ETH`, `BNB`, `SOL`, `XRP`, `AVAX`, `DOGE`, `LINK`, `SUI`, `ARB`, `OP`, `MATIC`, `APT`, plus 4 more per extended frontier).
+- **Label definition:** observed forced liquidation **events** (not modeled boundary breaches). Each event row = one liquidation. Must normalize by contemporaneous open interest or volume where available; retain raw counts and source limits.
+- **Missing-event coverage:** absence from feed ≠ "no liquidation." Must quantify reporting caps, rate limits, venue scope, known gaps.
+- **Alignment:** join to Hyperliquid 1h candles (`candleSnapshot` API) and funding (`fundingHistory` API) by coin and timestamp. Verify timestamp semantics (ms since epoch, UTC).
 
-**Design (freeze ex ante):**
-- **Inputs:** reuse the verified RISK-06 modeled label matrix and cached 1h mark/funding features. Same 5 instruments, label months `2024-04 … 2024-09`, `mmr=0.005`, `L∈{5,10,20}`, `side∈{long,short}`, `H∈{4,24}`; `synthetic_modeled_boundary_breach`, `observed_liquidation_labels=false`.
-- **Splits:** identical chronological holds with 7-day purge/embargo and expanding train:
-  - `2024-07`: train 2024-04-01…2024-06-23, embargo 06-24…06-30, test 07-01…07-31
-  - `2024-08`: train 2024-04-01…2024-07-24, embargo 07-25…07-31, test 08-01…08-31
-  - `2024-09`: train 2024-04-01…2024-08-24, embargo 08-25…08-31, test 09-01…09-30
-- **Base score:** per-scenario `B0_rv_only` stdlib IRLS logistic (RV block `lrv1,lrv24,lrv168`, ridge `1e-6`, train-only standardization, seed `12345`), pooled across the 5 instruments within the train window — exactly the RISK-06 baseline that produced the best Brier.
-- **Calibrators (all train-only, fitted on out-of-fold scores):**
-  - `C1_platt`: 1-D logistic recalibration `sigmoid(a·logit(s)+b)` by IRLS with ridge `1e-6`.
-  - `C2_isotonic`: PAVA isotonic regression on out-of-fold `(s, y)` with tie pooling and monotone step map; interpolate between knots, clip to `[0,1]`.
-  - `C3_prior_offset`: one-parameter base-rate shift `sigmoid(logit(s) + logit(p_train) − logit(mean_train_score))`, per scenario.
-  - `C0_identity`: uncalibrated baseline reference (must reproduce RISK-06 test Brier exactly).
-- **Leakage control (mandatory):** fit every calibrator on **out-of-fold train predictions** produced by **5 contiguous UTC-day-block folds** inside the train window (each fold model trained on the other folds; no shuffling across days). The final base model is refit on the full train window for test scores. Never fit a calibrator on test rows or on in-sample train predictions.
-- **Metrics:** **Brier (primary)**, ECE with 10 equal-count bins (merge bins with `<30` rows; report bin count), log-loss, AUC, calibration-in-the-large (mean predicted vs observed), and reliability slope/intercept from a 1-D logistic fit on test scores (diagnostic only, not used for tuning). Define `ΔBrier = Brier_C0 − Brier_Cm` and `ΔECE = ECE_C0 − ECE_Cm` (**positive = calibrated better**).
-- **Uncertainty:** UTC-day block bootstrap, seed `12345`, 2000 reps, percentile CI95 for ΔBrier and ΔECE, per holdout and pooled over the 12 scenarios (equal weight). LOIO over instruments for the primary scenario.
-- **Cross-scenario transfer (secondary, pre-registered):** for C1/C3, fit the calibrator on scenario A's train out-of-fold scores and apply to scenario B's test scores; report the mean ΔBrier over ordered scenario pairs and whether the sign is consistent with own-scenario calibration.
-- **Placebo:** permute train labels within scenario (seed `12345`) **after** out-of-fold scores are computed, refit each calibrator on the permuted train scores, apply to the real test set; repeat 200 permutations. Report the placebo null mean and 95th percentile of mean ΔBrier. The real effect must exceed the placebo 95th percentile.
-- **Materiality floor (correct sign, all three required):** at least one of `C1`/`C3` achieves `ΔBrier > 0` with bootstrap CI95 lower bound `> 0` in **≥2 of 3** holdouts on the primary scenario `L10|long|H24`; mean `ΔECE ≥ 0.005` in **≥2 of 3** holdouts (min-bin guard satisfied); and the real mean ΔBrier exceeds the **95th percentile** of the label-permutation placebo null. Otherwise report an honest negative (negative results are a valid completion; skipping the run is not).
+### Required session directory
+Create and populate **`research_state/session_20261118T201919Z/`** (new session dir, UTC now) with **all artifacts non-empty**:
 
-**Execution recipe (fast path, reuse verified code):**
-1. Load `fclr_risk06_labels_20261118T182813Z.json` directly (no label rebuild needed; do not mutate it).
-2. Reuse `fclr_risk06_calibration_20261118T182813Z.py` functions: `build_feature_map`, `design`, `standardize`, `irls_logistic`, `predict_row`, `brier`, `logloss`, `auc`, `day_block_bootstrap`, `date_set` — then add the OOF-fold loop and the three calibrators. Copy `recompute_fclr_risk06_calibration_*.py` as the recompute template.
-3. Write increments: finish the three holdouts (2024-07, 2024-08, 2024-09) in `fclr_risk07_recalibration_20261118T191945Z.py`, emit the full JSON/MD, then placebo, then transfer.
-4. Runtime is modest: reuse of the 13 MB label JSON plus 3 holds × 12 scenarios × 5 OOF folds × 1 base model is the dominant cost; write partial non-empty JSON/MD after each holdout so a timeout still leaves evidence.
+1. **`fclr_tracka_exploratory01_prereg_20261118T201919Z.{json,md}`** — outcome-blind prereg (frozen before outcome inspection):
+   - Source URLs, access method, license/terms, authentication status
+   - Exact coin list, month range, expected row counts (from HF tree probe)
+   - Label construction: event definition, normalization, missingness rules
+   - Alignment protocol: candle/funding join keys, tolerance, timezone
+   - Admissibility gates (must pass for confirmatory): ≥5 coins, ≥3 complete months, ≤20% gap rate, provenance hashes
+   - `outcome_data_inspected_before_freeze=false`
 
-**Required risk-07 artifacts (exact prefixes; all non-empty) in `research_state/session_20261118T191945Z/`:**
-- `fclr_risk07_prereg_20261118T191945Z.{json,md}` — already exists; must contain `outcome_data_inspected_before_freeze=false`, the three holds, base score definition, calibrator list, OOF scheme, metrics, seed, placebo rule, and the materiality floor.
-- `fclr_risk07_calibrators_20261118T191945Z.{py,json}` — already exists; implementation + self-test evidence (monotonicity, bounds, identity checks) and fitted parameters per holdout/scenario.
-- `fclr_risk07_recalibration_20261118T191945Z.{py,json,md}` — **YOU MUST PRODUCE** full per-holdout, per-scenario Brier/ECE/log-loss/AUC, bootstrap CIs, pooled result, transfer matrix, placebo null, decile/reliability diagnostics, verdict.
-- `evidence_audit_20261118T191945Z.{json,md}` — **YOU MUST PRODUCE**.
-- `recompute_fclr_risk07_recalibration_20261118T191945Z.json` — **YOU MUST PRODUCE** independent re-derivation from stored per-row scores/labels; `n_discrepancies` must be 0.
-- `trigger_check_20261118T191945Z.json` — **YOU MUST PRODUCE**.
+2. **`fclr_tracka_exploratory01_ingest_20261118T201919Z.{py,json,md}`** — ingestion script + manifest + audit:
+   - Fetch HF tree listing (ETag-cached), probe each month for events+fills
+   - Download parquet (stdlib `urllib` + `pandas` for read only), write CSV/JSON twins for stdlib compatibility
+   - Schema validation, duplicate detection, timestamp unit check, coin mapping
+   - Per-month provenance: SHA256, row count, date range, coins present, gap diagnostics
+   - **Must run offline after first fetch** — cache raw parquet/CSV in `research_state/data_cache/ironflow_events/<COIN>/<YYYY-MM>.{parquet,csv,accessed.json,sha256}`
 
-**Mandatory carry-forward into the same session dir (copy, do not recompute; all non-empty):**
-- RISK-06 package from `session_20261118T182813Z`: `fclr_risk06_prereg_*.{json,md}`, `fclr_risk06_labels_*.{py,json,md}`, `fclr_risk06_calibration_*.{py,json,md}`.
-- ROBUST-05 package from `session_20261118T143817Z`: `fclr_robust05_prereg_*.{json,md}`, `fclr_robust05_robustness_*.{py,json,md}`.
-- One non-empty `trigger_check_20261118T191945Z.json` (the new one satisfies this).
+3. **`fclr_tracka_exploratory01_alignment_20261118T201919Z.{py,json,md}`** — label/feature alignment:
+   - Fetch Hyperliquid candles (1h) + funding for same coins/months (reuse `tracka_hl_fetch_candles_early.py` pattern)
+   - Join liquidation events to 1h candle bars by coin + timestamp (floor to hour)
+   - Construct per-coin-per-hour label: `liq_count`, `liq_notional` (if fills available), `obs_oi` (if available)
+   - Missingness matrix: hours with candles but no liq feed, hours with liq but no candles
+   - Output: aligned panel JSON + CSV (stdlib-readable)
 
-### Record, verify, hand off (in order)
-1. Finish the RISK-07 recalibration evaluation in `session_20261118T191945Z/` — produce every required artifact non-empty; never emit zero-byte files.
-2. Copy the RISK-06 and ROBUST-05 carry-forward packages into `session_20261118T191945Z/`.
-3. Change the **Latest executed session** line above to `session_20261118T191945Z`.
-4. Run targeted bounded tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125 -v`.
-5. Record exact gate outcomes: `python3 scripts/check_handoff_heavywork_gate.py --json`, `python3 scripts/check_tracka_scope_registry_drift.py --json`, `python3 scripts/next_campaign_status.py --json`.
-6. Update **only** `AGENT_HANDOFF.md` and the `session_20261118T191945Z/` directory.
+4. **`fclr_tracka_exploratory01_admissibility_20261118T201919Z.{json,md}`** — admissibility verdict:
+   - Per-coin, per-month coverage, gap rate, event prevalence
+   - Reporting limits: HF dataset caps, Ironflow collection rules, known truncation
+   - **Binary verdict per admissibility gate** (from prereg) with evidence
+   - If **all gates pass**: register confirmatory design `FCLR-LIQ-TRACKA-CONFIRMATORY-01` with frozen splits, metrics, gate
+   - If **any gate fails**: `DATA_BLOCKED` or `NOT_STARTED` with exact shortfall; do not proceed to confirmatory
 
-## Read first
-1. `RESEARCH_PROMPT.md` §1–§6, §16–§17.
-2. `research_state/session_20261118T182813Z/fclr_risk06_calibration_20261118T182813Z.{py,json,md}` — the baseline being recalibrated; reuse its functions.
-3. `research_state/session_20261118T182813Z/fclr_risk06_labels_20261118T182813Z.json` — the 262,080-row modeled label matrix to reuse.
-4. `research_state/session_20261118T182813Z/recompute_fclr_risk06_calibration_20261118T182813Z.py` — recompute pattern.
-5. `research_state/session_20261118T191945Z/fclr_risk07_prereg_20261118T191945Z.{json,md}` — the frozen prereg.
-6. `research_state/session_20261118T191945Z/fclr_risk07_calibrators_20261118T191945Z.{py,json}` — the calibrator implementations.
-7. `research_state/session_20261118T191945Z/fclr_risk07_recalibration_20261118T191945Z.py` — the evaluation script to complete.
-8. `research_state/session_20261118T191945Z/fclr_risk07_partial_2024-07_20261118T191945Z.json` — holdout 2024-07 partial.
-9. `research_state/session_20261118T191945Z/fclr_risk07_partial_2024-08_20261118T191945Z.json` — holdout 2024-08 partial.
-10. `research_state/session_20261118T191945Z/fclr_risk07_partial_2024-09_20261118T191945Z.json` — holdout 2024-09 partial.
-11. `research_state/evaluation_summary.md`, `research_state/data_source_registry.json`, `research_state/resume_trigger_registry.json`.
+5. **`evidence_audit_20261118T201919Z.{json,md}`** — session evidence audit (per RESEARCH_PROMPT.md §19)
 
-## Prohibitions
-- Do not re-run/re-score sealed cached-data confirmatory estimands or sealed results (FCLR-014, replication synthesis, design-frontier certs, FCLR-013/010/002/003/009/006/008, frontier verify-06/07/08+, sealed 19.04%).
-- **Do not read sealed months 2024-10 … 2026-11 for outcomes.** RISK-07 uses only 2024-04…2024-09 (features 2024-03…2024-09).
-- Do not re-open the Track C QLIKE question or re-run RISK-06 funding-vs-RV calibration.
-- No polling/HF re-probe, no paid/credentialed/manual outcome data, no network installs/fetches, no `git lfs pull`.
-- No mutation of sealed artifacts/closure JSON/`.github/workflows/*`; no root-level `research_state/*.md|json` (root is **498/500**); no duplicate `AGENT_HANDOFF*`.
-- No `statsmodels` or unpinned heavy deps in the core path. Do not run parquet-only scripts without a CSV/JSON/ZIP twin.
-- Do not treat missing-numpy/environmental discovery errors as green.
-- Never inspect outcomes while producing outcome-blind preregs. **Never emit empty/zero-byte artifacts.**
-- Do not treat **modeled** breach labels as observed liquidations (`observed_liquidation_labels=false` must stay explicit).
-- Do not leave a session recorded in this handoff without its required execution artifacts present and non-empty on disk.
-- **Do not spend a session on handoff refresh / audit / gate-only work. That is the known failure loop. The only acceptable output of the next session is the completed RISK-07 package plus its carried-forward packages.**
+6. **`trigger_check_20261118T201919Z.json`** — reopen trigger evaluation:
+   - `NEW_OBSERVED_LIQUIDATION_SOURCE`: this session's admissibility audit (`status=ADMISSIBLE` + `observed_labels=true` + ≥5 instruments + ≥3 blocks or ≥1 complete month) → FIRED or OPEN
+   - Other 3 triggers remain OPEN
 
-## Reopen triggers (machine-checkable — all OPEN)
-- `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`).
-- `NEW_OBSERVED_LIQUIDATION_SOURCE`: `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status=ADMISSIBLE`, `observed_labels=true`, ≥5 instruments, ≥3 blocks or ≥1 complete month).
-- `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
-- `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
+### Mandatory carry-forward into same session dir (copy, non-empty)
+- RISK-07 package from `session_20261118T191945Z`: `fclr_risk07_recalibration_*.{json,md}`, `fclr_risk07_prereg_*.{json,md}`, `fclr_risk07_calibrators_*.{py,json}`, `evidence_audit_*.{json,md}`, `recompute_fclr_risk07_recalibration_*.json`, `trigger_check_*.json`
+- RISK-06 + ROBUST-05 packages (already in RISK-07 dir, copy forward)
 
-## Verification record — 2026-11-18T20:13:53Z (RISK-07 completed; bottlenecks removed; gate PASS)
-- **Bottleneck removed 1 (stale handoff):** `session_20261118T191945Z` existed on disk with RISK-07 in progress; recorded as latest executed session. `handoff_stale=false`.
-- **Bottleneck removed 2 (incomplete RISK-07):** produced all missing required artifacts non-empty in `session_20261118T191945Z/`: `fclr_risk07_recalibration_20261118T191945Z.{json,md}` (verdict `HONEST_NEGATIVE_OR_INCONCLUSIVE`, floor not met), `evidence_audit_20261118T191945Z.{json,md}`, `recompute_fclr_risk07_recalibration_20261118T191945Z.json` (`n_discrepancies=0`), `trigger_check_20261118T191945Z.json` (all 4 reopen triggers OPEN/none fired).
-- **Bottleneck removed 3 (carry-forward enforcement):** RISK-06 package (from `session_20261118T182813Z`) and ROBUST-05 package (from `session_20261118T143817Z`) copied into `session_20261118T191945Z/`; all non-empty.
-- **Bottleneck removed 4 (audit-only avoidance):** the only acceptable output of this session was the completed RISK-07 package plus carried-forward packages; no handoff-only refresh, no gate-only session, no Track C QLIKE rerun, no sealed-month reads.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`pass=true`, `reason_code=OK`); `risk_07` required=true, pass=true; root `498/500` (<= cap 500).
-- `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
-- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); RISK-07 complete.
-- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → **61/61 OK** (includes `TestRisk07CampaignGate` full-package-pass and fail-closed cases).
-- Sole durable handoff preserved; no duplicates; no sealed artifacts, workflows, or registries modified; root `research_state/` unchanged (498/500).
+### Execution recipe (fast path, reuse verified code)
+1. **Probe HF tree first** — run `monitor_ironflow_liquidations.py --quick` to get current tree state, ETags, available months. Do not download full parquet until tree probe confirms coverage.
+2. **Fetch candles/funding in parallel** — run `tracka_hl_fetch_candles_early.py` (or adapt for 2025-11…2026-10) and `hyperliquid_funding_fetch.py` for same coins/months.
+3. **Ingest liquidations** — write stdlib CSV/JSON twins for each month/coin. Use `pandas` only for parquet→CSV conversion; core logic in stdlib.
+4. **Align & audit** — join on `(coin, hour_timestamp)`. Compute coverage diagnostics. Write admissibility verdict.
+5. **Write increments** — emit non-empty JSON/MD after each major step so timeout leaves evidence.
+6. **Runtime:** bounded by HF download speeds and parquet conversion. Write partials.
+
+### Prohibitions (enforced by gate)
+- Do not read sealed Binance months 2024-10…2026-11 for outcomes.
+- Do not re-run RISK-07, RISK-06, ROBUST-05, or Track C QLIKE.
+- No confirmatory claim from this exploratory session. Admissibility verdict only.
+- No `statsmodels` or heavy deps in core path. `pandas`/`pyarrow` only for parquet→CSV ingest.
+- Never emit zero-byte artifacts. Every required file must be non-empty.
+- Do not spend session on handoff refresh / audit / gate-only work. The only acceptable output is the completed Track A exploratory package plus carried-forward packages.
+
+### Verification commands (run before final handoff update)
+```bash
+python3 scripts/check_handoff_heavywork_gate.py --json
+python3 scripts/check_tracka_scope_registry_drift.py --json
+python3 scripts/next_campaign_status.py --json
+python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125 -v
+```
+All must PASS. `risk_07` remains required=true, pass=true. New session must be `heavy_session_dir`.
+
+### Handoff update (after verification)
+1. Change **Latest executed session** to `session_20261118T201919Z`.
+2. Change **Active required next campaign** to the campaign ID registered in admissibility verdict (or `BLOCKED` if Track A fails).
+3. Update **Rank-0 trigger state** per `trigger_check_20261118T201919Z.json`.
+4. Preserve sole durable handoff; no duplicates; no root-level `research_state/*.md|json`.
+
+---
+
+## READ FIRST (exact files)
+1. `RESEARCH_PROMPT.md` §1–§6, §9–§10, §13–§16, §18–§20
+2. `research_state/session_20261118T191945Z/fclr_risk07_recalibration_20261118T191945Z.md` — RISK-07 verdict
+3. `research_state/session_20261118T191945Z/trigger_check_20261118T191945Z.json` — trigger definitions
+4. `scripts/monitor_ironflow_liquidations.py` — Ironflow/HF probe + download (read full file)
+5. `scripts/tracka_hl_fetch_candles_early.py` — Hyperliquid candles fetch pattern
+6. `scripts/hyperliquid_funding_fetch.py` — Hyperliquid funding fetch pattern
+7. `scripts/next_campaign_status.py` — frontier feasibility (already run)
+8. `research_state/evaluation_summary.md`, `research_state/data_source_registry.json`, `research_state/resume_trigger_registry.json`
+
+---
+
+## REOPEN TRIGGERS (machine-checkable — all OPEN before this session)
+- `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status=RESOLVED_VERIFIED`, `fabricated=false`)
+- `NEW_OBSERVED_LIQUIDATION_SOURCE`: **THIS SESSION'S** `fclr_tracka_exploratory01_admissibility_20261118T201919Z.{json,md}` (`status=ADMISSIBLE`, `observed_labels=true`, ≥5 instruments, ≥3 blocks or ≥1 complete month)
+- `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth)
+- `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null)
+
+---
+
+## VERIFICATION RECORD — 2026-11-18T20:19:19Z (RISK-07 complete; next campaign defined)
+- **Bottleneck removed 1 (RISK-07 complete):** all required artifacts non-empty; `check_handoff_heavywork_gate.py` PASS; `risk_07` required=true, pass=true.
+- **Bottleneck removed 2 (confirmatory blocked acknowledged):** `next_campaign_status.py` → `any_feasible=false` certified; no attempt to reopen.
+- **Bottleneck removed 3 (Track A path opened):** Hyperliquid Ironflow/HF dataset identified as only viable Track A source; exploratory campaign defined with concrete admissibility gates.
+- **Bottleneck removed 4 (audit-only avoidance):** next session mandated to produce Track A exploratory package + carry-forward; no handoff refresh, no gate-only work.
+- Root `research_state/` unchanged (498/500 ≤ cap 500).
+- Sole durable handoff preserved; no duplicates; no sealed artifacts or workflows modified.
 
 (End of file)
