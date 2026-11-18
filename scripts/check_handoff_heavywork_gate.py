@@ -129,6 +129,25 @@ CLOSURE_LEDGER_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-VOL-LIQ-EXECUTION-01 hardening: the next session must produce the two
+# heavy research tracks (Track C stdlib forecast + Track B modeled breach
+# labels), not another audit-only or gate-only session. A post-start session
+# must contain the exact source/result/report triad for both tracks, a trigger
+# check, and no zero-byte placeholders. Sessions predating the campaign are
+# grandfathered so this handoff refresh remains green.
+VOL_LIQ_EXECUTION_CAMPAIGN_RE = re.compile(
+    r"FCLR-VOL-LIQ-EXECUTION-(\d+)-(\d{8}T\d{6}Z)"
+)
+VOL_LIQ_EXECUTION_REQUIRED = (
+    ("trackc_design_a_forecast_", ".py"),
+    ("trackc_design_a_forecast_", ".json"),
+    ("trackc_design_a_forecast_", ".md"),
+    ("trackb_breach_labels_", ".py"),
+    ("trackb_breach_labels_", ".json"),
+    ("trackb_breach_labels_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -374,6 +393,72 @@ def _closure_ledger_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _vol_liq_execution_state(handoff_text: str, latest_sid: str | None,
+                             latest_files: list[str],
+                             latest_dir: Path | None = None) -> dict:
+    """Return FCLR-VOL-LIQ-EXECUTION-01 non-avoidance state.
+
+    After the execution campaign starts, a post-start session must contain the
+    exact Track C forecast and Track B breach-label package, a trigger check,
+    and non-empty files. Empty placeholders do not count as heavy work.
+    Sessions predating the campaign are grandfathered.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = VOL_LIQ_EXECUTION_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-VOL-LIQ-EXECUTION-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files
+            if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in VOL_LIQ_EXECUTION_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, VOL_LIQ_EXECUTION_REQUIRED):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -412,12 +497,14 @@ def check(repo: Path = REPO) -> dict:
         "heavy_session_dir": None,
         "heavy_session_exists": False,
         "heavy_session_missing": [],
+        "heavy_session_mode": None,
         "root_count": 0,
         "root_count_cap": ROOT_COUNT_CAP,
         "frontier_verify": None,
         "trigger_readiness": None,
         "ledger_integrity": None,
         "closure_ledger": None,
+        "vol_liq_execution": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -533,6 +620,29 @@ def check(repo: Path = REPO) -> dict:
                         f"CLOSURE_LEDGER_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
+            # FCLR-VOL-LIQ-EXECUTION-01: after the execution campaign starts,
+            # require the exact Track C forecast + Track B breach-label package
+            # and a trigger check. Zero-byte placeholders fail closed.
+            vl = _vol_liq_execution_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["vol_liq_execution"] = vl
+            if vl["required"]:
+                if vl["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "VOL_LIQ_EXECUTION_ARTIFACTS_MISSING:"
+                        + ",".join(vl["missing_required_artifacts"])
+                    )
+                if vl["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "VOL_LIQ_EXECUTION_ARTIFACTS_EMPTY:"
+                        + ",".join(vl["empty_required_artifacts"])
+                    )
+                if not vl["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"VOL_LIQ_EXECUTION_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
         complete_sid = None
         for cand in reversed(ids):
             cdir = rs / cand
@@ -548,13 +658,22 @@ def check(repo: Path = REPO) -> dict:
             payload["heavy_session_dir"] = str(heavy_sdir.relative_to(repo))
             heavy_info = _session_has_required(heavy_sdir)
             payload["heavy_session_files"] = heavy_info["files"]
-            payload["heavy_session_missing"] = heavy_info["missing"]
-            if complete_sid is not None and heavy_info["missing"]:
-                payload["failures"].append(
-                    f"HEAVY_SESSION_ARTIFACTS_MISSING:{heavy_sid}:{heavy_info['missing']}"
-                )
+            if complete_sid is None:
+                # The latest session is a new-style audit + fresh quantitative
+                # session. Phase-B/C is carried forward by an older bundle, not
+                # duplicated into this session; do not report it as missing.
+                payload["heavy_session_mode"] = "new_style_audit_quant"
+                payload["heavy_session_missing"] = []
+            else:
+                payload["heavy_session_mode"] = "phase_b_c_bundle"
+                payload["heavy_session_missing"] = heavy_info["missing"]
+                if heavy_info["missing"]:
+                    payload["failures"].append(
+                        f"HEAVY_SESSION_ARTIFACTS_MISSING:{heavy_sid}:{heavy_info['missing']}"
+                    )
         else:
-            payload["heavy_session_missing"] = latest_info["missing"]
+            payload["heavy_session_mode"] = "missing"
+            payload["heavy_session_missing"] = []
 
     # (3) Root churn cap.
     rc = _root_count(rs)

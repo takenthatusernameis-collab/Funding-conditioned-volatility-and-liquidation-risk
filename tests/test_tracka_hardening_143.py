@@ -370,6 +370,89 @@ class TestLedgerIntegrityCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestVolLiqExecutionCampaignGate(unittest.TestCase):
+    """FCLR-VOL-LIQ-EXECUTION-01: after the execution campaign starts, a
+    post-start session cannot satisfy the heavy-work gate with an audit-only or
+    gate-only session. It must emit the exact Track C forecast + Track B
+    breach-label package, a trigger check, and non-empty files."""
+
+    START = "20261118T092338Z"
+
+    def _repo(self, latest_sid="session_20261118T100000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143vl_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the execution contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (sdir / "recompute_execution_readiness_x.json").write_text("{}")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-VOL-LIQ-EXECUTION-01-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_required(self, sdir, sid="20261118T100000Z", content="x"):
+        for prefix, suffix in gate.VOL_LIQ_EXECUTION_REQUIRED:
+            (sdir / f"{prefix}{sid}{suffix}").write_text(content)
+
+    def test_post_start_audit_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "evidence_audit_20261118T100000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["vol_liq_execution"]["required"])
+        self.assertTrue(res["vol_liq_execution"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("VOL_LIQ_EXECUTION_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_empty_files_fail_closed(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir, content="")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["vol_liq_execution"]["empty_required_artifacts"])
+        self.assertTrue(any(f.startswith("VOL_LIQ_EXECUTION_ARTIFACTS_EMPTY")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_trigger_fails_closed(self):
+        repo, sdir = self._repo()
+        for prefix, suffix in gate.VOL_LIQ_EXECUTION_REQUIRED:
+            if prefix == "trigger_check_":
+                continue
+            (sdir / f"{prefix}20261118T100000Z{suffix}").write_text("x")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(any(f.startswith("VOL_LIQ_EXECUTION_TRIGGER_CHECK_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_full_execution_package_passes(self):
+        repo, sdir = self._repo()
+        self._write_required(sdir)
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["vol_liq_execution"]["pass"])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261118T091852Z")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["vol_liq_execution"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffFreshnessGate(unittest.TestCase):
     """FCLR-TRIGGER-READINESS-01: a newer on-disk session that is not recorded
     in the handoff fails closed. The gate must not stay green merely because the
