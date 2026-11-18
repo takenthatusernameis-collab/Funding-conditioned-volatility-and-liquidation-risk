@@ -1,166 +1,71 @@
-# AGENT HANDOFF — 2026-11-18T01:50:38Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T02:28:52Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T02:10:40Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T02:28:52Z)
 
-**Campaign `FCLR-LEDGER-INTEGRITY-02-20261118T004445Z` is COMPLETE.** Session `session_20261118T004445Z/` produced artifacts 1–7 (ledger audit PASS, frontier recompute PASS, closure-ledger backfill plan, trigger check, refreshed trigger-activation readiness, evidence audit, gates + suite capture). The corrected frontier is verified closed: `n_individually_feasible=1` (`2025-01` only), `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=False`. `check_handoff_heavywork_gate.py --json` PASS (`handoff_stale=false`); `check_tracka_scope_registry_drift.py --json` PASS (196/196). Suite baseline: targeted 82/6/0, discovery EXIT 1 (all errors `ModuleNotFoundError: numpy`, environment-dependent — do not treat as green, do not install numpy, do not fix).
+**State verified clean (2026-11-18T02:28:52Z). No heavy work due. Stop cleanly unless a reopen trigger is machine-satisfied.**
 
-**No heavy work remains.** Program is `CLOSED_TERMINAL`; rank-0 `TRIGGER_ONLY`; 0/58 rows §17-promotable. All four reopen triggers are `OPEN` and NOT agent-satisfiable (GATE4_BRANCH_1 needs human/legal attestation; NEW_OBSERVED_LIQUIDATION_SOURCE and HL_LABEL_EXTENSION need post-2026-10 observed labels — confirmed absent through 2026-10, `consecutive_absent=3`; EXPANSION_ROBUSTNESS_REDO forbids re-scoring sealed 19.04%). Do NOT re-run sealed estimands, do not poll HF, do not run `git lfs pull`, do not run `scripts/fclr_liq_010_confirm.py`.
+- Program: `CLOSED_TERMINAL` — `research_state/fclr_final_structural_closure_20261116T114626.{md,json}`; verdict `NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED`; 0/58 rows §17-promotable.
+- Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`).
+- Campaign `FCLR-LEDGER-INTEGRITY-02-20261118T004445Z` is **COMPLETE** (`research_state/session_20261118T004445Z/`): ledger audit, frontier recompute, closure-ledger backfill plan, trigger check, trigger-activation readiness refresh, evidence audit, gates/suite capture present. Corrected frontier verified closed: `n_individually_feasible=1` (`2025-01`), `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=False`. Tested-window fix in `scripts/next_campaign_status.py` is applied and tested — **do not re-fix**.
+- Gates (verified this session): `check_handoff_heavywork_gate.py --json` **PASS** (`reason_code=OK`, `handoff_stale=false`, `failures=[]`, latest `session_20261118T004445Z`); `check_tracka_scope_registry_drift.py --json` **PASS** (196/196). `next_campaign_status.py --json` confirms closed frontier.
+- Triggers (one-shot, no network/polling): all four `OPEN`, none fired — `GATE4_BRANCH_1` (human/legal), `NEW_OBSERVED_LIQUIDATION_SOURCE`, `HL_LABEL_EXTENSION` (post-2026-10 observed labels absent through 2026-10, `consecutive_absent=3`; 2026-11/12, 2027-01 `CONFIRMED_ABSENT`), `EXPANSION_ROBUSTNESS_REDO` (re-scoring sealed 19.04% forbidden). `ironflow_monitor_state.json`: `data_through=2026-10`.
 
-**Next session's sole command sequence: verify state, then stop cleanly unless a reopen trigger is machine-satisfied.**
+**Next session first/only action (run once, then stop if unchanged):**
 ```bash
 python3 scripts/check_handoff_heavywork_gate.py --json | jq '{pass,reason_code,handoff_stale,latest_session_id,failures}'
 python3 scripts/check_tracka_scope_registry_drift.py --json | jq '{pass,reason_code}'
-# Expected: both PASS, handoff_stale=false, failures=[]. No trigger fired -> no heavy work due. Stop cleanly.
+python3 scripts/next_campaign_status.py --json | jq '.markfund_frontier | {n_individually_feasible,max_mutually_non_overlapping,campaign_feasible_non_overlapping,individually_feasible_months}'
 ```
+Expected: both gates PASS, `handoff_stale=false`, frontier closed as above. **If all triggers remain OPEN and no trigger artifact satisfies its machine-checkable predicate, perform no heavy work and stop cleanly.**
 
-**Rank-0 state (unchanged, do not relitigate):**
-- Program: `CLOSED_TERMINAL` — `research_state/fclr_final_structural_closure_20261116T114626.{md,json}`; verdict `NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED`; 0/58 rows §17-promotable.
-- Rank-0: `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`).
-- **Do not start or re-run any sealed cached-data confirmatory estimand.** Do not re-run FCLR-014, the replication synthesis, the design-frontier certificate, FCLR-013/010/002/003/009/006/008, or any frontier verify-06/07/08+ re-audit.
+## If and only if a reopen trigger becomes machine-satisfied (heavy work, non-avoidable)
 
----
+1. Create `research_state/session_<UTC>/` (real UTC) and record its id in this handoff **before** final gate capture. Root `research_state/` is at 500/500 — put all new artifacts in the session dir only.
+2. **GATE4_BRANCH_1:** only on `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` with `status=RESOLVED_VERIFIED` and `fabricated=false` (human/legal attestation only). Execute Gate 4 Branch 1 protocol per `RESEARCH_PROMPT.md` §16 with outcome-blind prereg before outcomes.
+3. **NEW_OBSERVED_LIQUIDATION_SOURCE:** only on `research_state/<source>_admissibility_audit_<UTC>.{md,json}` proving `status=ADMISSIBLE`, `observed_labels=true`, unauthenticated, provenance/license/venue-consistent, ≥5 instruments and (≥3 blocks or ≥1 complete month). Do admissibility audit BEFORE prereg/outcomes.
+4. **HL_LABEL_EXTENSION:** only on verified post-2026-10-31 observed ironflow labels (≥100 days) with `research_state/hl_label_extension_audit_<UTC>.{md,json}`; then run a newly preregistered design per §17.
+5. **EXPANSION_ROBUSTNESS_REDO:** only a newly preregistered design (`research_state/expansion_robustness_redo_prereg_<UTC>.json`) achieving LOIO≥6/8 AND placebo>95th null — **re-scoring sealed 19.04% is forbidden**.
+6. For any triggered path: produce outcome-blind prereg, leakage/overlap audit against consumed windows (`session_20261118T004445Z/ledger_audit_20261118T004445Z.*`, `scripts/next_campaign_status.py` `TESTED_WINDOWS`), execution artifacts, evaluation summary, and gate captures in-session; do not weaken §17.
 
-## WHAT WAS FIXED — `FCLR-LEDGER-INTEGRITY-01-20261117T234500Z` (code applied, verified)
+## Read first (if triggered)
 
-**The bottleneck (evidence-backed):** `scripts/next_campaign_status.py` `TESTED_WINDOWS` omitted FCLR-003's sealed NEGATIVE test window (2024-10-02..2024-12-31). Consequences:
-- `markfund_frontier()` reported `individually_feasible_months = ['2024-10','2024-11','2024-12','2025-01']` and `n_individually_feasible=4` — treating FCLR-003's *test* months as fresh.
-- `ready_windows()` labeled 2024-04/05/2025-01 as `inside_tested_window=False`.
-- A future agent reading `--json` could re-score sealed FCLR-003 test data — a §17 violation.
+1. `RESEARCH_PROMPT.md` §16–§17.
+2. `research_state/fclr_final_structural_closure_20261116T114626.{md,json}` and `research_state/resume_trigger_registry.json`.
+3. `research_state/session_20261118T004445Z/{ledger_audit,frontier_recompute,closure_ledger_backfill,trigger_check,trigger_activation_readiness,evidence_audit}_20261118T004445Z.*`.
+4. `research_state/session_20261117T215904Z/trigger_activation_readiness_20261117T215904Z.{json,md}` and `research_state/session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json`.
 
-**Fix applied (tracked code + tests):**
-- `scripts/next_campaign_status.py` — added `("2024-10-02", "2024-12-31", "FCLR-003 sealed NEGATIVE test window (NOT_SUPPORTED)")` to `TESTED_WINDOWS` with an explanatory comment.
-- `tests/test_next_campaign_status.py` — updated `test_markfund_frontier_reproduces_certified_closed_verdict` and `test_markfund_frontier_in_json_output` to the corrected verdict, and added `test_fclr003_sealed_test_months_not_reproposed` as a regression guard.
-- **Corrected frontier (verified):** `n_individually_feasible=1` (`2025-01` only), `max_mutually_non_overlapping=1`, `n_overlapping_pairs=0`, `campaign_feasible_non_overlapping=False`. The only individually-feasible month is 2025-01 (its 30-day train is FCLR-003 test, allowed as pre-test history), a single block < 3. **Frontier remains closed, now for the honest reason.**
-- **Tests:** `tests.test_next_campaign_status` 22/22 OK; all 77 frontier-dependent tests (`test_fclr014_anchor_integrity`, `test_fclr_design_feasibility`, `test_fclr_final_structural_closure`, `test_tracka_hardening_143`, `test_fclr018_gate4_prereg_readiness_matrix`) OK. Full discovery 1129/62/9/14 — same environment-dependent baseline (all errors are `ModuleNotFoundError: numpy`), +3 tests from this change.
-- **Gates:** `check_handoff_heavywork_gate.py --json` PASS (`handoff_stale=false`); `check_tracka_scope_registry_drift.py --json` PASS (196/196). Timestamp-only cache side effect reverted.
+## Bottlenecks removed / prevented
 
-**Still open (this is the next campaign's job):** the durable per-month ledger audit artifact does not yet exist, and the closure JSON's enumerated ledger still lacks FCLR-002/003 window rows. The code fix is in; the *evidence artifact* and *closure-ledger backfill* are not.
-
----
-
-## MANDATORY NEXT CAMPAIGN — `FCLR-LEDGER-INTEGRITY-02-20261118T015038Z` (outcome-blind, heavy, non-avoidable)
-
-### Deliverables (ALL required; a trigger-check-only or handoff-only session does NOT count)
-
-Create `research_state/session_<UTC>/` (real UTC; `research_state/` root is **500/500**, so **all new artifacts go in the session dir only**). Produce, in order:
-
-1. **`ledger_audit_<UTC>.{py,json,md}`** — outcome-blind, read-only. For every month 2024-01..2026-10, compute the union of train/val/test months consumed by FCLR-001/002/003/006/007/008/009/011/013/014 and all `FCLR-FWD-VOL-*` / `FCLR-LIQ-*` cells, from the sealed `evaluation_summary_*` files and `TESTED_WINDOWS`/`BULK_TESTED_WINDOWS`. Emit a per-month table: `{month, consumed_by:[experiment_ids], phase:[train|val|test|embargo], frontier_says_tested:bool}`. **Headline assertion:** every month in the FCLR-002/003 train/val/test union is marked consumed (specifically 2024-04..2024-12).
-
-2. **`frontier_recompute_<UTC>.{py,json,md}`** — independently re-run the corrected `next_campaign_status.py` logic and **confirm** the closed verdict: `n_individually_feasible=1` (2025-01), `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=False`. State the arithmetic that closes it. **Do NOT re-derive a different frontier; the fix is applied — verify, do not re-fix.** If you find the fix regressed, revert to `git show HEAD:scripts/next_campaign_status.py` and re-apply the single `TESTED_WINDOWS` row.
-
-3. **`closure_ledger_backfill_<UTC>.{json,md}`** — the minimal plan to add FCLR-002/003 consumed windows to the closure JSON's enumerated ledger (`fclr_final_structural_closure_*.json` `rows`/reopen metadata) so the omission is caught. Record as a plan; do NOT mutate the sealed closure JSON.
-
-4. **`trigger_check_<UTC>.json`** — one-shot, no network, no polling. Read `research_state/resume_trigger_registry.json` + `research_state/ironflow_monitor_state.json`. Record timestamp, each trigger status, `data_through`, post-2026-10 classifications. Current: all four triggers `OPEN`; Ironflow `data_through=2026-10`, `consecutive_absent=3`; 2026-11/12, 2027-01 `CONFIRMED_ABSENT`.
-
-5. **`trigger_activation_readiness_<UTC>.{json,md}`** — refresh the outcome-blind trigger-activation certificate from `session_20261117T215904Z/trigger_activation_readiness_20261117T215904Z.{json,md}` (promotable=false, program_status=CLOSED_TERMINAL, four trigger contracts with power floors: Gate4/TrackC `paired_n>=23224`, TrackA/expansion `paired_n>=11689`, ≥3 blocks, 7d purge/embargo, `outcome_data_inspected_before_freeze=false`). Carry the four pre-sized contracts forward; add the corrected-frontier reference.
-
-6. **`evidence_audit_<UTC>.md`** — confirm the carried-forward bundles are present and unmodified (FCLR-003 sealed negative; FCLR-011 recompute; frontier certificates `session_20261117T193323Z` + `session_20261117T194457Z`; trigger-readiness `session_20261117T215904Z`; the corrected `scripts/next_campaign_status.py`). Record exact files and command outputs.
-
-7. **Gates + suite capture (in the session dir):** `check_handoff_heavywork_gate.py --json`, `check_tracka_scope_registry_drift.py --json`, targeted suite, and `python3 -m unittest discover -q` to completion. Record count/skip/error/EXIT. **Baseline is environment-dependent** (targeted 82/6/0; discovery 1129/62/9/14/EXIT 1). Never treat a missing-dependency error set as green. Revert timestamp-only side effects to tracked files.
-
-### Definition of done (what makes this heavy work count)
-
-- The session dir contains artifacts 1–7 above with real numeric content (not a copied bundle).
-- `ledger_audit` **proves** 2024-04..2024-12 are consumed and cites the exact `next_campaign_status.py` `TESTED_WINDOWS` line and the exact `evaluation_summary_FCLR002/003.md` lines.
-- `frontier_recompute` **reproduces** the corrected closed verdict (`n_individually_feasible=1`, `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=False`).
-- Gates pass (`check_handoff_heavywork_gate.py --json` shows `handoff_stale=false` once this session id is recorded in this handoff before the final gate capture).
-- **Do NOT re-fix the code.** The fix is applied and tested; re-fixing is a regression. If you believe the fix is wrong, revert to `HEAD` and re-apply only the single `TESTED_WINDOWS` row, then show red→green.
-
----
-
-## Read first (in order)
-
-1. `RESEARCH_PROMPT.md` §16 (adaptive feasibility / progress without weakening evidence) and §17 (promotion conditions).
-2. `research_state/evaluation_summary_FCLR002.md`, `evaluation_summary_FCLR003.md` (the omitted train/val/test windows).
-3. `scripts/next_campaign_status.py` — `TESTED_WINDOWS` (lines ~74–88), `BULK_TESTED_WINDOWS`, `markfund_frontier()`, `disjoint_block_frontier()`, `ready_windows()`, `MIN_DESIGN_DAYS=127`.
-4. `tests/test_next_campaign_status.py` — the assertions that pin the current (wrong) frontier verdict; these must be updated by the follow-up.
-5. `research_state/fclr_final_structural_closure_20261116T114626.{md,json}` (the closure ledger that omits FCLR-002/003).
-6. `research_state/session_20261117T215904Z/trigger_activation_readiness_20261117T215904Z.{json,md}` + `trigger_activation_executor_20261117T215904Z.py`.
-7. `research_state/session_20261116T100533Z/trigger_readiness_power_calibration_20261116T100533Z.md` (power floors) and `session_20261116T035833Z/prereg_template_trigger_gated_20261116T035833Z.json` (prereg skeleton).
-
-## Completed work — do not repeat
-
-- **FCLR-003 — SEALED NEGATIVE (the only adequately powered confirmatory window):** C2 vs B1 +0.015205 QLIKE (worse), CI [-0.020240, 0.056734] crosses 0; 2024-10-02..2024-12-31, 91d, 3 blocks, 5 instruments, n=10796. `research_state/evaluation_summary_FCLR003.md`. Do not re-score.
-- **FCLR-011 sealed PASS → forward NOT_REPLICATED:** 2026-05..08 rel -5.55% on 2026-08..10; independent clean OLS recompute does not reproduce (+4.94% expected vs -294% observed, NOT_REPRODUCED). `session_20261116T0040Z/`.
-- **FCLR-REPRO-SYNTH-05 — DONE (`session_20261117T072040Z`):** design-frontier certificate `BLOCKED_ON_DESIGN` + replication robustness (7 studies, 2/7 within tolerance, 0 promotable).
-- **FCLR-014 — BLOCKED_ON_DESIGN (`session_20261117T071110Z`):** the 4-block "freeze a prereg" claim (`session_20261117T051045Z`) is RETRACTED as leakage-prone.
-- **Frontier verify-06/07 line CLOSED:** `session_20261117T193323Z` + `session_20261117T194457Z` both `all_exact_match=true`, `BLOCKED_ON_DESIGN`. Do not run verify-08+.
-- **Trigger-readiness package v1 — DONE (`session_20261117T215904Z`):** executor (referee, REFUSE_ALL, exit 2, outcome_files_opened=[]), selftest (13 tests, EXIT 0), readiness certificate, trigger check. Inputs to artifact 5 above; do not rebuild from scratch, refresh it.
-- **FCLR-LEDGER-INTEGRITY-01 code fix — DONE (2026-11-17T23:45:00Z):** `scripts/next_campaign_status.py` `TESTED_WINDOWS` now includes FCLR-003's sealed test window; frontier tests updated + regression guard added. Corrected frontier verified closed. See "What was fixed this session" above. Do not re-fix.
-
-## Blocked-path warning (do not waste a session here)
-
-- **No parquet engine is installed** (`pyarrow`, `fastparquet`, `duckdb`, `polars` absent; network installs prohibited). Any `.parquet`-only task is blocked unless a CSV/JSON/ZIP twin exists. Use the ZIP/CSV reader pattern from `session_20261117T031656Z` / `session_20261117T000400Z` and the `_read_zip_csvs` helper in `scripts/fclr011_recompute_audit.py`.
-- **Unresolved Git-LFS pointers (no local object):** `research_state/run_manifest.json`, `run_manifest_FCLR002.json`, `data_cache/fclr002_panel*.json`, `data_cache/manifest_fclr002.json`, `data_cache/manifest_fclr003.json`. Do NOT run `git lfs pull` (network prohibited). Do not block on them.
-- **`research_state/research_protocol_fclr002.md` / `research_protocol_fclr003.md` do not exist** — do not block on them. (Note: `research_protocol_fclr006.md` does exist and restates the FCLR-002/003 windows.)
-- **2024 cache format:** 2024-04..06 mark/premium/index files are ZIPs wrapping per-day CSVs (nested `SYM-1h-DATE/SYM-1h-DATE.csv`); Jan–Mar and Jul–Nov 2024 are CSVs; 2025–2026 are ZIP+CSV. Use a ZIP-aware, recursive reader.
-- Do NOT run `scripts/fclr_liq_010_confirm.py` (parquet-only; fails on import).
-- **No outcome data may be inspected** while building this campaign's artifacts; the trigger-activation package is outcome-blind by construction. Never open an `evaluation_summary_*` outcome, `results/*`, sealed panel, or holdout.
-
-## Bottlenecks removed / prevented by this handoff
-
-- **Tested-window ledger omission (the real bottleneck) — FIXED:** FCLR-003's sealed test window (2024-10-02..12-31) was added to `TESTED_WINDOWS`; the frontier no longer mislabels 2024-10/11/12 as fresh. See "What was fixed this session" above.
-- **Closure ledger omission — still open:** the structural closure JSON enumerates experiments but not the FCLR-002/003 consumed *windows*; artifact 3 records the backfill plan.
-- **Idle "AWAITING_TRIGGER" equilibrium corrected:** the prior handoff's "no agent-removable heavy work remains" was used to justify trigger-check-only sessions. This handoff names concrete, verifiable heavy work (ledger audit + corrected-frontier verification + refreshed readiness) that must be executed before any idle hold.
-- **Competing handoff authority:** none. `AGENT_HANDOFF.md` is the sole durable handoff.
-- **Empty-session loop:** do not create a session dir until artifact 1 is ready; empty/phantom sessions are non-counting.
+- Tested-window ledger omission fixed and regression-tested (`FCLR-003` 2024-10-02..2024-12-31 in `TESTED_WINDOWS`); frontier honestly closed. Do not regress.
+- Closure-ledger backfill plan recorded (`session_20261118T004445Z/closure_ledger_backfill_20261118T004445Z.*`); sealed closure JSON not mutated.
+- Ledger-integrity campaign 02 complete with evidence artifacts; no pending integrity heavy work.
+- Sole durable handoff authority maintained; no competing handoff. No empty/phantom sessions required.
 
 ## Prohibitions
 
-- Do not start or re-run any sealed cached-data confirmatory estimand; all sealed estimands are terminal.
-- Do not re-run FCLR-014, the replication synthesis, the design-frontier certificate; do not run verify-08+.
-- Do not mutate sealed artifacts, the closure JSON, or `.github/workflows/*`.
-- Do not poll, re-probe the HuggingFace tree, use paid/credentialed/manual outcome data, or add root-level `research_state/*.md|json` (root at 500/500 churn cap).
-- Do not add `statsmodels` or unpinned heavy dependencies to the core path.
-- Do not run `git lfs pull` or otherwise fetch network data.
-- Do not run `scripts/fclr_liq_010_confirm.py` (parquet-only; will fail on import).
-- Discovery suite is long-running; let it finish and record actual EXIT, not partial/timeout.
-- **Do NOT re-fix `scripts/next_campaign_status.py` `TESTED_WINDOWS`.** The FCLR-003 fix is applied and tested; re-editing it is a regression. If you believe it is wrong, revert to `git show HEAD:scripts/next_campaign_status.py` and re-apply only the single FCLR-003 row, then show red→green.
-- Do not mutate the sealed closure JSON; record the FCLR-002/003 backfill as a plan (artifact 3).
+- Do not start or re-run any sealed cached-data confirmatory estimand (FCLR-014, replication synthesis, design-frontier certificates, FCLR-013/010/002/003/009/006/008, frontier verify-06/07/08+, sealed 19.04% re-score).
+- Do not poll, re-probe HuggingFace, use paid/credentialed/manual outcome data, or run network installs/data fetches (`git lfs pull`).
+- Do not mutate sealed artifacts, closure JSON, `.github/workflows/*`, or add root-level `research_state/*.md|json` (root 500/500 cap).
+- Do not add `statsmodels` or unpinned heavy deps to core path.
+- Do not run `scripts/fclr_liq_010_confirm.py` (parquet-only; no engine installed).
+- No parquet engine installed; `.parquet`-only tasks blocked unless CSV/JSON/ZIP twin exists (use ZIP-aware readers where applicable). Unresolved Git-LFS pointers remain unresolved — do not block on them.
+- Do not treat environment-dependent missing-`numpy` discovery errors as green; discovery baseline was EXIT 1 in prior capture.
+- Never inspect outcome data while producing outcome-blind trigger artifacts/preregs.
+- Record any new session id in this handoff before final gate capture to keep `handoff_stale=false`.
 
-## Reopen triggers (machine-checkable — act ONLY when satisfied; all `OPEN`)
+## Reopen triggers (machine-checkable — all currently OPEN)
 
-- `GATE4_BRANCH_1` — `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status: RESOLVED_VERIFIED`, `fabricated: false`). Human/legal attestation only.
-- `NEW_OBSERVED_LIQUIDATION_SOURCE` — `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status: ADMISSIBLE`, `observed_labels: true`, ≥5 instruments, ≥3 blocks or ≥1 complete month).
-- `HL_LABEL_EXTENSION` — `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
-- `EXPANSION_ROBUSTNESS_REDO` — `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json` (LOIO≥6/8 AND placebo>95th null; re-scoring the sealed 19.04% forbidden).
+- `GATE4_BRANCH_1`: `research_state/fclr016_v5_terms_evidence_RESOLVED_*.json` (`status: RESOLVED_VERIFIED`, `fabricated: false`) — human/legal only.
+- `NEW_OBSERVED_LIQUIDATION_SOURCE`: `research_state/<source>_admissibility_audit_<UTC>.{md,json}` (`status: ADMISSIBLE`, `observed_labels: true`, ≥5 instruments, ≥3 blocks or ≥1 complete month).
+- `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
+- `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + `evaluation_summary_*.json` (LOIO≥6/8 AND placebo>95th null; no sealed re-score).
 
-## Verification record — 2026-11-18T01:50:38Z (ledger-integrity fix applied; campaign 02 opened)
+## Verification record — 2026-11-18T02:28:52Z
 
-- **Repo/rank-0:** `CLOSED_TERMINAL`; rank-0 `TRIGGER_ONLY`; 0/58 rows §17-promotable. No sealed estimand re-run.
-- **Concrete inefficiency found and FIXED (outcome-blind, from sealed evaluations + tracked code):** `scripts/next_campaign_status.py` `TESTED_WINDOWS` omitted FCLR-003's sealed test window. `markfund_frontier()` listed 2024-10/11/12 as individually feasible and `ready_windows()` marked 2024-04/05 as untested, though FCLR-002/003 consumed 2024-04..2024-12. Evidence: `evaluation_summary_FCLR002.md` lines 8–10; `evaluation_summary_FCLR003.md` lines 7–10.
-- **Fix applied:** added `("2024-10-02", "2024-12-31", "FCLR-003 sealed NEGATIVE test window (NOT_SUPPORTED)")` to `TESTED_WINDOWS` with an explanatory comment; updated the two frontier tests and added `test_fclr003_sealed_test_months_not_reproposed`.
-- **Corrected frontier (verified):** `n_individually_feasible=1` (`2025-01`), `max_mutually_non_overlapping=1`, `n_overlapping_pairs=0`, `campaign_feasible_non_overlapping=False`, `disjoint n_feasible=0`. The only individually-feasible month is 2025-01 (its 30-day train is FCLR-003 test, allowed as pre-test history), a single block < 3. **Frontier remains closed, now for the honest reason.**
-- **Arithmetic that closes the frontier:** the only complete untested contiguous run is 2025-01 = 31 days < `MIN_DESIGN_DAYS=127`; 2024-10..12 are FCLR-003 *test*; 2025-01's 30-day train window (2024-11-25..2024-12-24) is FCLR-003 *test*; so no ≥3 mutually-non-overlapping untested 30-day block set exists.
-- **Tests:** `tests.test_next_campaign_status` 22/22 OK (was 21, +1 regression guard); all 77 frontier-dependent tests (`test_fclr014_anchor_integrity`, `test_fclr_design_feasibility`, `test_fclr_final_structural_closure`, `test_tracka_hardening_143`, `test_fclr018_gate4_prereg_readiness_matrix`) OK. Full discovery: 1129/62/9/14/EXIT 1 — same environment-dependent baseline (all errors are `ModuleNotFoundError: numpy`), +3 tests from this change.
-- **Gates:** `check_handoff_heavywork_gate.py --json` **PASS** (`reason_code: OK`, `handoff_stale=false`, latest session `session_20261117T215904Z`, root 500/500, trigger_readiness.pass=true); `check_tracka_scope_registry_drift.py --json` **PASS** (196/196 scripts in registry). Timestamp-only cache side effect (`ironflow_fastpath_cache.json`) reverted.
-- **No sealed artifacts, registries, or `.github/workflows/*` modified; no root-level `research_state/*.md|json` added; no competing handoff authority remains. Tracked code changed: `scripts/next_campaign_status.py` (+10 lines) and `tests/test_next_campaign_status.py` (updated 2 tests, +1 new test).**
-
-## Staleness correction
-
-Latest completed heavy session `session_20261118T004445Z` is recorded in this handoff (campaign `FCLR-LEDGER-INTEGRITY-02`, artifacts 1–7 complete, gate capture done). When a future session creates `session_<UTC>/`, record its id here **before** the final gate capture so `handoff_stale` stays false and `HANDOFF_STALE_LATEST_SESSION` does not fire.
-
----
-
-## NEXT AGENT: YOUR FIRST COMMAND SEQUENCE
-
-```bash
-# 1. Verify the fix is in place
-python3 scripts/next_campaign_status.py --json | jq '.markfund_frontier | {n_individually_feasible, max_mutually_non_overlapping, campaign_feasible_non_overlapping, individually_feasible_months}'
-
-# Expected: n_individually_feasible=1, max_mutually_non_overlapping=1, campaign_feasible_non_overlapping=false, individually_feasible_months=["2025-01"]
-
-# 2. Create session dir (real UTC)
-SESSION_DIR="research_state/session_$(date -u +%Y%m%dT%H%M%SZ)"
-mkdir -p "$SESSION_DIR"
-
-# 3. Start artifact 1: ledger_audit (read-only, outcome-blind)
-#    Write a Python script that enumerates all consumed months from evaluation summaries + TESTED_WINDOWS
-#    Output: $SESSION_DIR/ledger_audit_$(date -u +%Y%m%dT%H%M%SZ).{py,json,md}
-
-# 4. Continue with artifacts 2-7 in order. Do not skip. Do not stop at artifact 1.
-```
-
-**This handoff is the only authority. The campaign is mandatory. Heavy work is non-avoidable. Execute.**
+- `check_handoff_heavywork_gate.py --json`: PASS (`reason_code=OK`, `handoff_stale=false`, `failures=[]`, latest `session_20261118T004445Z`).
+- `check_tracka_scope_registry_drift.py --json`: PASS (196/196).
+- `next_campaign_status.py --json`: `markfund_frontier` closed (`n_individually_feasible=1`, `individually_feasible_months=["2025-01"]`, `max_mutually_non_overlapping=1`, `campaign_feasible_non_overlapping=false`); `disjoint_block_frontier.n_feasible=0`.
+- Triggers: all OPEN, `data_through=2026-10`, `consecutive_absent=3`, 2026-11/12 & 2027-01 `CONFIRMED_ABSENT`. No machine-satisfied reopen condition. No heavy work executed.
+- `AGENT_HANDOFF.md` remains sole durable handoff; no sealed artifacts/workflows/registries modified.
