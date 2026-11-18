@@ -1,8 +1,8 @@
-# AGENT HANDOFF — 2026-11-18T13:37:08Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-18T14:24:09Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T13:37:08Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T14:24:09Z)
 
 **MANDATORY — do this first, do not idle/re-audit/gate-only/re-score sealed work:** create `research_state/session_<UTC>/` with UTC **strictly after** `20261118T132800Z` and execute **`FCLR-VOL-LIQ-ROBUST-05-20261118T132800Z`** (Track C sign-corrected multi-holdout robustness + placebo null, **stdlib-only**, cached/local data). Freeze the robust-05 prereg **before touching evaluation/outcomes**; then produce the required robust-05 prereg + robustness triad + trigger check + evidence audit + `recompute_*` (all **non-empty**) in that new session. Copy required carry-forward artifacts into the same session dir. Update this handoff's latest session id to the new session before final gate capture. If you do anything else instead of this heavy quantitative progress, the machine gate will fail the session closed.
 
@@ -16,13 +16,13 @@
 
 **Program/campaign lineage:** parent `FCLR-VOL-LIQ-FORECAST-01-20261118T023259Z`. Completed: `FCLR-VOL-LIQ-EXECUTION-01-20261118T092338Z` (`session_20261118T093031Z`, Track C Design A + Track B modeled breach labels), `FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z` (`session_20261118T114500Z`, EXPLORATORY/PILOT negative), `FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z` (`session_20261118T132800Z`, EXPLORATORY/PILOT negative + sign correction). **Active required next campaign:** `FCLR-VOL-LIQ-ROBUST-05-20261118T132800Z` (machine-enforced for any session after 132800Z). Rank-0 trigger state remains `FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z` (`TRIGGER_ONLY`, `next_action_heavy=null`); all reopen triggers OPEN/none fired.
 
-### Constraints / feasibility (verified 2026-11-18T13:37:08Z)
+### Constraints / feasibility (verified 2026-11-18T14:24:09Z)
 - **Confirmatory multi-block cached design:** infeasible in all domains (`python3 scripts/next_campaign_status.py --json` → `any_feasible=false`; contiguous runs too short; disjoint 30d blocks `n_feasible=0`; mark+funding-only `max_mutually_non_overlapping=1 < 3`; Hyperliquid exhausted). Certified closed — do not re-open without a machine-satisfied trigger.
-- **Allowed path:** stdlib exploratory/pilot work on admissible cached/local data only (`research_state/data_cache/`, `data/raw/`, ZIP/CSV/JSON/dir twins). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json`** (root **500/500** at cap) — write all new artifacts under the session subdir.
+- **Allowed path:** stdlib exploratory/pilot work on admissible cached/local data only (`research_state/data_cache/`, `data/raw/`, ZIP/CSV/JSON/dir twins). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json`** (root **498/500** at cap) — write all new artifacts under the session subdir.
 - **Environment:** `numpy/pandas/scipy` absent; do not wait for them. Implement stdlib (`math/csv/json/zipfile`) and label EXPLORATORY/PILOT. Full `unittest discover` may hang; run targeted bounded tests and record limitation.
 
 ### Gates (current)
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`reason_code=OK`, `handoff_stale=false`, root 500/500). Binds completed ROBUST-04/BREACH/EXECUTION campaigns and declares ROBUST-05 (grandfathered for latest session == start; **next post-start session must emit robust-05 artifacts or fail closed**).
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`reason_code=OK`, `handoff_stale=false`, root 498/500). Binds completed ROBUST-04/BREACH/EXECUTION campaigns and declares ROBUST-05 (grandfathered for latest session == start; **next post-start session must emit robust-05 artifacts or fail closed**).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`OK`, 196/196).
 - `python3 scripts/next_campaign_status.py --json`: confirmatory blocked; Track C/B stdlib exploratory feasible on cached data.
 - `python3 -m unittest tests.test_tracka_hardening_143 -v`: **PASS**. `python3 -m unittest tests.test_tracka_hardening_125 -v`: **PASS**.
@@ -82,8 +82,8 @@
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T13:37:08Z (handoff refresh)
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** — `pass=true`, `reason_code=OK`, `handoff_stale=false`, `root_count=500/500`, latest `session_20261118T132800Z`; `robust_04`, `breach_forecast`, `vol_liq_execution` PASS; `robust_05` declared but not yet required for latest session (start == latest → grandfathered). **Next post-start session must satisfy robust-05 artifacts or fail closed.**
+## Verification record — 2026-11-18T14:24:09Z (handoff refresh)
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** — `pass=true`, `reason_code=OK`, `handoff_stale=false`, `root_count=498/500`, latest `session_20261118T132800Z`; `robust_04`, `breach_forecast`, `vol_liq_execution` PASS; `robust_05` declared but not yet required for latest session (start == latest → grandfathered). **Next post-start session must satisfy robust-05 artifacts or fail closed.**
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
 - `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); stdlib exploratory Track C/B feasible on cached data.
 - Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 -v` **PASS** (37 tests); `python3 -m unittest tests.test_tracka_hardening_125 -v` **PASS**. Full `unittest discover` environmental/hanging in this runtime (not a green full suite).
