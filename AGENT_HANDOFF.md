@@ -1,10 +1,12 @@
-# AGENT HANDOFF — 2026-11-18T12:28:27Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-18T12:32:20Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T12:28:27Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T12:32:20Z)
 
 **MANDATORY — do this first, do not idle/re-audit/gate-only:** create `research_state/session_<UTC>/` (UTC **after** `20261118T120000Z`) and execute **`FCLR-VOL-LIQ-ROBUST-04-20261118T120000Z`** (Track C funding-trail robustness confirmation, stdlib-only, cached data). Freeze the prereg before touching evaluation; produce the required robust-04 prereg+robustness triad+trigger check+evidence audit+`recompute_*` (all non-empty); record the new session id in this handoff before final gate capture. If you do anything else instead of heavy quantitative progress, the machine gate will fail the session closed.
+
+**CAMPAIGN STATUS CONFIRMED:** `python3 scripts/next_campaign_status.py --json` → **no feasible 3-block design in ANY domain** (Binance 5-symbol contiguous: exhausted; disjoint blocks: n_feasible=0; mark+funding-only: max_non_overlap=1 < 3; Hyperliquid bulk: exhausted; Hyperliquid extended: exhausted). The confirmatory multi-block campaign is CERTIFIED CLOSED. Only stdlib exploratory work (Track C/B) on cached data remains feasible — exactly the `FCLR-VOL-LIQ-ROBUST-04` mandate.
 
 **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — the repo name *is* the campaign. Two named risks, in this priority order:
 1. **Funding-conditioned volatility/stress forecasting (Track C):** does funding predict future realized vol / stress vs an RV-only baseline? QLIKE/MAE/RMSE, leakage-resistant OOS.
@@ -98,7 +100,7 @@ Freeze an outcome-blind exploratory prereg for Track C Design A using the `track
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T12:28:27Z (refresh)
+## Verification record — 2026-11-18T12:32:20Z (refresh)
 - `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** — `pass=true`, `reason_code=OK`, `handoff_stale=false`, `root_count=500/500`, latest `session_20261118T114500Z`; `breach_forecast` + `vol_liq_execution` PASS; `robust_04` not yet required for this latest session (grandfathered relative to campaign start) — **next post-start session must satisfy robust-04 artifacts or fail closed**.
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
 - `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); Track C/B stdlib exploratory path remains feasible on cached data.
