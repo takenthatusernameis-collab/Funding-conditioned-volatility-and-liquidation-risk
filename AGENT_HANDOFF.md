@@ -1,8 +1,8 @@
-# AGENT HANDOFF — 2026-11-18T11:19:48Z (sole durable handoff)
+# AGENT HANDOFF — 2026-11-18T11:22:38Z (sole durable handoff)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority. No duplicate authority remains. There is exactly one root `AGENT_HANDOFF.md`; do not create copies under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T11:19:48Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-18T11:22:38Z)
 
 **Repo (P0):** `Funding-conditioned-volatility-and-liquidation-risk` — the two named risks are the campaign: **(1) funding-conditioned volatility/stress forecasting** (Track C: funding extremes + RV vs RV-only baseline, QLIKE/MAE/RMSE, leakage-resistant OOS) and **(2) liquidation-boundary risk** (Track B: modeled breach labels from public mark-price data). Use only admissible local/public data already on disk (ZIP/CSV/JSON/dir twins under `research_state/data_cache/` and `data/raw/`). **No network, no parquet engine, no `git lfs pull`, no installs, no new root `research_state/*.md|json` (root 500/500 at cap).**
 
@@ -16,7 +16,7 @@
 - `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design remains **BLOCKED** (contiguous runs too short; disjoint 30-day blocks `n_feasible=0`; `max_mutually_non_overlapping=1 < 3`). Ready funding-backed cache months: 2024-04, 2024-05, 2025-01. No actionable frozen preregs. Track C single-window Design A and Track B remain feasible via stdlib on cached data (proven by `session_20261118T093031Z`).
 - `python3 -m unittest tests.test_tracka_hardening_143 -v`: **PASS** (includes the new breach-forecast fail-closed coverage). Full `unittest discover` remains environmental/hanging in this runtime; use targeted tests and record that limitation, not a green full suite.
 
-### Bottlenecks resolved in this handoff (2026-11-18T11:19:48Z)
+### Bottlenecks resolved in this handoff (2026-11-18T11:22:38Z)
 - **Stale / incomplete latest session (CLEARED):** `session_20261118T093031Z` existed on disk with Track C only (missing Track B, `trigger_check`, and `evidence_audit`), so the gate failed closed with `HANDOFF_STALE_LATEST_SESSION`. Completed: `trackb_breach_labels_20261118T093031Z.{py,json,md}`, `recompute_trackb_breach_labels_20261118T093031Z.json`, `trigger_check_20261118T093031Z.json`, `evidence_audit_20261118T093031Z.{json,md}` are all present and non-empty. The gate is now green.
 - **Empty-session bypass (still closed):** the execution-campaign gate rejects zero-byte required artifacts by name and size; empty placeholders can never satisfy the heavy-work contract.
 - **Audit-only / gate-only non-avoidance (closed):** the new `FCLR-VOL-LIQ-BREACH-FORECAST-03` campaign requires the breach-forecast prereg + forecast triad + trigger check in the latest post-start session, not a generic recompute.
@@ -87,12 +87,10 @@ Freeze an outcome-blind exploratory prereg for Track C Design A using the `track
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T11:19:48Z
+## Verification record — 2026-11-18T11:22:38Z
 - `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`pass=true`, `reason_code=OK`, `failures=[]`, root=500/500, latest=`session_20261118T093031Z`=disk, `handoff_stale=false`, `vol_liq_execution.pass=true`, `breach_forecast.required=false` [grandfathered pre-start]). The new `FCLR-VOL-LIQ-BREACH-FORECAST-03-20261118T103106Z` requirement binds the next post-start session.
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
 - `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design BLOCKED (`n_feasible=0`, `max_mutually_non_overlapping=1<3`); Track C Design A + Track B feasible via stdlib on cached data (proven in `session_20261118T093031Z`).
 - `python3 -m unittest tests.test_tracka_hardening_143 -v`: **PASS (37 tests)** — the 32 prior tests plus 5 new breach-forecast fail-closed cases (trackc-only, empty-file, missing-trigger, full-package, pre-start grandfathering). Also `tests.test_tracka_hardening_125`, `_098`, `_099`, `tests.test_active_campaign_gate`: **PASS (54 tests)**.
 - End-to-end gate proof (tmp copy, real state untouched): a post-start session lacking breach-forecast artifacts fails with `BREACH_FORECAST_ARTIFACTS_MISSING`; adding `trackbc_breach_prereg_*` + `trackbc_breach_forecast_*` triad makes it pass.
 - No sealed artifacts/workflows/registries modified. `AGENT_HANDOFF.md` remains the sole durable handoff; this refresh records the completed Track C + Track B session and the exact non-avoidance contract for the next breach-forecast campaign.
-
-(End of file - total 96 lines)
