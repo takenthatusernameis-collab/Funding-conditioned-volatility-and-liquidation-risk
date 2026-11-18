@@ -38,13 +38,13 @@ The session `session_20261118T191945Z` (UTC **20261118T191945Z**) has already st
 ## Current state (verified 2026-11-18T19:45:28Z)
 
 - **Campaign state:** `ACTIVE_CAMPAIGN`; risk-07 is armed and machine-enforced.
-- **Latest executed session:** `research_state/session_20261118T191945Z` — campaign `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z`, **IN PROGRESS** (prereg + calibrators + partial results exist; full recalibration results, evidence audit, recompute, trigger check, carry-forward packages still required).
-- **Active required next campaign:** `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` (machine-enforced by `scripts/check_handoff_heavywork_gate.py` for any session after `20261118T191714Z`).
+- **Latest executed session:** `research_state/session_20261118T191945Z` — campaign `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z`, **COMPLETE** (prereg + calibrators + dataset + partials + full recalibration `.json/.md`, evidence audit `.json/.md`, recompute `.json` with `n_discrepancies=0`, trigger check `.json`, and the RISK-06 + ROBUST-05 carry-forward packages all present and non-empty).
+- **Active required next campaign:** `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` — **DONE**; gate-enforced heavy work is complete. The only executable heavy work remaining on cached 2024-03…09 is stdlib exploratory Track B/C; confirmatory multi-block cached design remains **BLOCKED** (`any_feasible=false`).
 - **Rank-0 trigger state:** `TRIGGER_ONLY`; all four reopen triggers OPEN/none fired.
 - **Root `research_state/` md+json count:** **498/500** — write every new artifact under the session subdir, never at root.
-- **Gate `check_handoff_heavywork_gate.py --json`:** **FAIL** (`pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, failures: `HEAVY_SESSION_ARTIFACTS_MISSING:session_20261118T191945Z`, `RISK_07_ARTIFACTS_MISSING`, `RISK_07_TRIGGER_CHECK_MISSING`). `risk_07` required=true, pass=false. `handoff_stale=false` (handoff latest == disk latest).
+- **Gate `check_handoff_heavywork_gate.py --json`:** **PASS** (`pass=true`, `reason_code=OK`, no failures). `risk_07` required=true, pass=true. `handoff_stale=false` (handoff latest == disk latest == `session_20261118T191945Z`).
 - **Gate `check_tracka_scope_registry_drift.py --json`:** **PASS** (`reason_code=OK`, 196/196).
-- **`scripts/next_campaign_status.py --json`:** confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`, no actionable preregs); stdlib exploratory Track B/C on cached 2024-03…09 is the only executable heavy work → RISK-07.
+- **`scripts/next_campaign_status.py --json`:** confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`, no actionable preregs); stdlib exploratory Track B/C on cached 2024-03…09 is the only executable heavy work → RISK-07 (now complete).
 
 ### RISK-06 result (do not re-run, do not re-interpret)
 Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01`, 7-day purge/embargo, 5 instruments, 12 scenarios, 262,080 modeled rows (6,241 breached, rate 0.023813). `ΔBrier = Brier_B0 − Brier_Bm`; Brier is a **loss**, so positive = funding model better calibrated.
@@ -151,14 +151,15 @@ Three chronological holdouts (`2024-07/08/09`), expanding train from `2024-04-01
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` (post-2026-10-31 observed ironflow labels, ≥100-day depth).
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null).
 
-## Verification record — 2026-11-18T19:45:28Z (bottleneck removal + risk-07 completion mandate; no new research session created)
-- **Bottleneck removed 1 (stale handoff):** the session `session_20261118T191945Z` existed on disk with RISK-07 work in progress; this refresh records the in-progress RISK-07 session as latest and mandates its completion. `handoff_stale=false`.
-- **Bottleneck removed 2 (incomplete RISK-07):** the session has prereg, calibrators, dataset, partial results, and the complete recalibration script, but lacks the full recalibration evaluation (`.json/.md`), evidence audit, recompute, trigger check, and carry-forward packages. The gate now fails closed on missing/empty RISK-07 artifacts.
-- **Bottleneck removed 3 (carry-forward enforcement):** RISK-07's mandatory carry-forward list (RISK-06 + ROBUST-05) is enforced so a future session cannot pass the gate with only the new calibrator files, and cannot pass with zero-byte placeholders.
-- `python3 scripts/check_handoff_heavywork_gate.py --json`: **FAIL** — `pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=['HEAVY_SESSION_ARTIFACTS_MISSING:session_20261118T191945Z', 'RISK_07_ARTIFACTS_MISSING', 'RISK_07_TRIGGER_CHECK_MISSING']`; latest = `session_20261118T191945Z`, disk latest = `session_20261118T191945Z` (not stale), root `498/500`; `risk_07` armed (`campaign_start_utc=20261118T191714Z`, `required=true`, `pass=false`).
+## Verification record — 2026-11-18T20:13:53Z (RISK-07 completed; bottlenecks removed; gate PASS)
+- **Bottleneck removed 1 (stale handoff):** `session_20261118T191945Z` existed on disk with RISK-07 in progress; recorded as latest executed session. `handoff_stale=false`.
+- **Bottleneck removed 2 (incomplete RISK-07):** produced all missing required artifacts non-empty in `session_20261118T191945Z/`: `fclr_risk07_recalibration_20261118T191945Z.{json,md}` (verdict `HONEST_NEGATIVE_OR_INCONCLUSIVE`, floor not met), `evidence_audit_20261118T191945Z.{json,md}`, `recompute_fclr_risk07_recalibration_20261118T191945Z.json` (`n_discrepancies=0`), `trigger_check_20261118T191945Z.json` (all 4 reopen triggers OPEN/none fired).
+- **Bottleneck removed 3 (carry-forward enforcement):** RISK-06 package (from `session_20261118T182813Z`) and ROBUST-05 package (from `session_20261118T143817Z`) copied into `session_20261118T191945Z/`; all non-empty.
+- **Bottleneck removed 4 (audit-only avoidance):** the only acceptable output of this session was the completed RISK-07 package plus carried-forward packages; no handoff-only refresh, no gate-only session, no Track C QLIKE rerun, no sealed-month reads.
+- `python3 scripts/check_handoff_heavywork_gate.py --json`: **PASS** (`pass=true`, `reason_code=OK`); `risk_07` required=true, pass=true; root `498/500` (<= cap 500).
 - `python3 scripts/check_tracka_scope_registry_drift.py --json`: **PASS** (`reason_code=OK`, 196/196).
-- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); stdlib exploratory Track B/C feasible on cached 2024-03…09.
-- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → to be recorded by the completing session.
-- Sole durable handoff preserved; no duplicates; no sealed artifacts, workflows, or registries modified.
+- `python3 scripts/next_campaign_status.py --json`: confirmatory multi-block cached design **BLOCKED** (`any_feasible=false`); RISK-07 complete.
+- Targeted tests: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125` → **61/61 OK** (includes `TestRisk07CampaignGate` full-package-pass and fail-closed cases).
+- Sole durable handoff preserved; no duplicates; no sealed artifacts, workflows, or registries modified; root `research_state/` unchanged (498/500).
 
 (End of file)
