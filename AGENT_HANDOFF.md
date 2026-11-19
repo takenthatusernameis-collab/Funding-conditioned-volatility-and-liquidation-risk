@@ -1,9 +1,9 @@
-# AGENT HANDOFF — 2026-11-19T05:35:53Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-19T07:47:04Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file under `research_state/` is tombstoned/historical and has no campaign authority.
 > No duplicate `AGENT_HANDOFF*` exists anywhere in the repo.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T05:35:53Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T07:47:04Z)
 
 **Campaign `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` is now LIVE and machine-enforced.** The previous session (`session_20261119T043545Z`) executed `FCLR-LIQ-TRACKA-CONFIRMATORY-01` and returned **NOT_MET** (models_run=True, power=POWERED, n_discrepancies=0). Do not replay it.
 
@@ -23,7 +23,7 @@ Your job this session is the heavy escalation work, in this order:
 
 ---
 
-## CURRENT STATE (verified 2026-11-19T05:35:53Z)
+## CURRENT STATE (verified 2026-11-19T07:47:04Z)
 
 - **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory **COMPLETE**; Track A 12-month extension **COMPLETE / ADMISSIBLE**; Track A confirmatory **CONFIRMATORY_COMPLETE, verdict NOT_MET**; escalation campaign `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` **READY and gate-enforced**.
 - **Latest EXECUTED session:** `session_20261119T043545Z` — confirmatory power/MDE audit (POWERED), independent stdlib recompute (`n_discrepancies=0`), three-block evaluation (verdict NOT_MET), evidence audit, trigger check.
@@ -125,7 +125,7 @@ Baseline recorded now: heavywork gate **PASS** (risk_08 enforced for sessions af
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` post-2026-10-31 observed labels, ≥100-day depth — **OPEN**
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null) — **OPEN**
 
-## VERIFICATION RECORD — 2026-11-19T05:35:53Z
+## VERIFICATION RECORD — 2026-11-19T07:47:04Z
 - Track A exploratory: COMPLETE, `ADMISSIBLE`, 6/6 gates, `n_discrepancies=0` (frozen, immutable).
 - Track A extension (`session_20261119T022824Z`): alignment **ADMISSIBLE** over `2025-11 .. 2026-10`; stdlib recompute `n_discrepancies=0`; confirmatory prereg registered.
 - Track A extension completion (`session_20261119T033443Z`): descriptive layer + verbatim carry-forwards + evidence audit + trigger check.
