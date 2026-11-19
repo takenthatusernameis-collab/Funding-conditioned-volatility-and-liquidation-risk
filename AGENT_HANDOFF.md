@@ -1,31 +1,31 @@
-# AGENT HANDOFF — 2026-11-19T08:47:32Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-19T09:03:34Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file under `research_state/` is tombstoned/historical and has no campaign authority. Verified this refresh: exactly one `AGENT_HANDOFF*` exists in the repo.
-> **Repo priority:** the repository is `Funding-conditioned-volatility-and-liquidation-risk`; the highest-value unexecuted work is therefore the *funding × realized-vol × open-interest* liquidation-incidence escalation, not descriptive or audit replays.
+> **Repo priority:** the repository is `Funding-conditioned-volatility-and-liquidation-risk`; the highest-value unexecuted work is therefore the **specification scan** for the joint funding×RV×OI interaction family, not descriptive or audit replays.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T08:47:32Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T09:03:34Z)
 
-**Campaign `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` is LIVE and machine-enforced.** Track A confirmatory already returned **NOT_MET** (`session_20261119T090239Z`, models_run=True, POWERED, `n_discrepancies=0`). Do not replay it. Do not re-audit it.
+**Campaign `FCLR-LIQ-RISK-ESCALATION-09-20261119T090334Z` is LIVE and machine-enforced.** RISK-08 completed in `session_20261119T090239Z` with verdict **NOT_MET** (POWERED, `n_discrepancies=0`). Do not replay RISK-08. Do not re-audit it.
 
-Your session's deliverable is the joint **funding × RV × OI** escalation, in this exact order:
+Your session's deliverable is the **specification scan** (RISK-09) for the 6-member interaction family, in this exact order:
 
-1. Create `research_state/session_<UTC>/` (UTC at session start).
-2. Write the **outcome-blind** prereg `fclr_risk08_prereg_<UTC>.{json,md}` and freeze it **before** touching any outcome. Contract is fixed below; you may not slim it.
-3. Run `fclr_risk08_power_<UTC>.{py,json,md}` with an explicit `status` in `{POWERED, UNDERPOWERED}`.
-4. Run `fclr_risk08_recompute_<UTC>.{py,json}`; require `n_discrepancies=0`.
-5. Run `fclr_risk08_evaluation_<UTC>.{py,json,md}`: joint funding×RV×OI regime model vs RV-only baseline, per frozen block; Brier headline; log-loss, AUC, calibration slope/intercept; label-hour permutation placebo; Holm; honest verdict `SUPPORT | NOT_MET | UNDERPOWERED`.
+1. Create `research_state/session_<UTC>/` (UTC at session start, strictly > `20261119T090239Z`).
+2. Write the **outcome-blind** prereg `fclr_risk09_prereg_<UTC>.{json,md}` and freeze it **before** touching any outcome. Contract: fixed 6-member family = {funding×RV, funding×OI, RV×OI, three-way, monotone-funding spline, decile-regime indicator}; same three blocks as RISK-08; Holm over family at α=0.05; same placebo (label-hour permutation, 1000 perms, seed `20261119`); same metrics (Brier headline, log-loss, AUC, calibration); same common-sample rule. You may not slim the family.
+3. Run `fclr_risk09_power_<UTC>.{py,json,md}` with explicit `status` in `{POWERED, UNDERPOWERED}` (recompute MDE from frozen block sizes and panel base rate; `PLAUSIBLE_EFFECT_BRIER = 0.001` stays frozen).
+4. Run `fclr_risk09_recompute_<UTC>.{py,json}`; require `n_discrepancies=0`.
+5. Run `fclr_risk09_evaluation_<UTC>.{py,json,md}`: each family member vs RV-only baseline on all three blocks + pooled; report per-member Brier/log-loss/AUC/calibration, placebo p, Holm-adjusted p, honest verdict `SUPPORT | NOT_MET | UNDERPOWERED`.
 6. Write `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json`.
-7. Run every verification command in this file; all must PASS. Only then may you update this handoff (and you must bump the campaign id to `RISK-ESCALATION-09` per the ladder rule below).
+7. Run every verification command in this file; all must PASS. Only then may you update this handoff (and you must bump the campaign id to `RISK-ESCALATION-10` per the ladder rule below).
 
-`scripts/check_handoff_heavywork_gate.py` **fails closed** for any session dir stamped after `20261119T044920Z` that lacks the exact 11-file `fclr_risk08_*` package + non-empty `trigger_check_*.json`. A descriptive-only, trigger-check-only, gate-only, or arbitrary-`recompute_*` session cannot pass. Zero-byte artifacts fail. There is no cheaper legal session.
+`scripts/check_handoff_heavywork_gate.py` **fails closed** for any session dir stamped after `20261119T090334Z` that lacks the exact 11-file `fclr_risk09_*` package + non-empty `trigger_check_*.json`. A descriptive-only, trigger-check-only, gate-only, or arbitrary-`recompute_*` session cannot pass. Zero-byte artifacts fail. There is no cheaper legal session.
 
-**Forbidden starts:** `FCLR-LIQ-TRACKA-CONFIRMATORY-02` (precondition is an UNDERPOWERED verdict; current verdict is NOT_MET), `FCLR-LIQ-TRACKA-DATA-EXTENSION-02` (no post-`2026-10-31` labels with ≥100-day depth), RISK-05/06/07, ROBUST-05, Track C QLIKE, and reading sealed Binance months (`2024-10 … 2026-11`) for outcomes.
+**Forbidden starts:** RISK-08 replay, `FCLR-LIQ-TRACKA-CONFIRMATORY-02` (precondition UNDERPOWERED; verdict was NOT_MET), `FCLR-LIQ-TRACKA-DATA-EXTENSION-02` (no post-`2026-10-31` labels with ≥100-day depth), RISK-05/06/07, ROBUST-05, Track C QLIKE, and reading sealed Binance months (`2024-10 … 2026-11`) for outcomes.
 
 ---
 
-## UNBLOCKED PREFLIGHT — verified 2026-11-19T08:47:32Z (do NOT redo any of this)
+## UNBLOCKED PREFLIGHT — verified 2026-11-19T09:03:34Z (do NOT redo any of this)
 
-The data bottleneck for RISK-08 is **already removed**. Everything needed is on disk:
+The data bottleneck for RISK-09 is **already removed**. Everything needed is on disk (same frozen panel as RISK-08):
 
 - Frozen panel: `research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv`
 - Shape: **113,880 coin-hours**, 13 coins (`BTC ETH BNB SOL XRP AVAX DOGE LINK SUI ARB OP APT ADA`), **12 complete months** (`2025-11 … 2026-10`).
@@ -42,42 +42,48 @@ The data bottleneck for RISK-08 is **already removed**. Everything needed is on 
 - `rv_lag` = sample std (`statistics.stdev`) of the trailing **24** hourly log returns ending at `t-1`, i.e. mean/std over `ret_{t-24..t-1}`.
 - `funding_lag` = `funding_rate` at `t-1`; `premium_lag` = `premium` at `t-1`.
 - `oi_change_lag` = `ln(open_interest_usd_{t-1} / open_interest_usd_{t-2})` (requires two lagged OI observations; if `t-2` missing, `oi_change_lag` is null).
-- Interactions: `funding_x_rv = funding_lag * rv_lag`, `funding_x_oi = funding_lag * oi_change_lag`, `rv_x_oi = rv_lag * oi_change_lag`.
-- **Common-sample rule (binding, prevents a fake paired-difference win):** drop a coin-hour for *all* models whenever any of `rv_lag, funding_lag, oi_change_lag` is null. Joint and RV-only must be scored on the identical test rows.
-- Standardize nothing ad hoc; fit logistic regression by stdlib IRLS (mirror `fit_logistic` in `session_20261119T090239Z/fclr_tracka_confirmatory01_evaluation_20261119T043545Z.py`).
+- Interaction family (6 members, all must be tested):
+  1. `funding_x_rv = funding_lag * rv_lag`
+  2. `funding_x_oi = funding_lag * oi_change_lag`
+  3. `rv_x_oi = rv_lag * oi_change_lag`
+  4. `three_way = funding_lag * rv_lag * oi_change_lag`
+  5. `funding_spline` = monotone cubic spline on `funding_lag` (3 knots at deciles 3/6/9; `scipy` not allowed — implement via stdlib piecewise linear on decile bins)
+  6. `decile_regime` = indicator for `funding_lag` in top/bottom decile × `rv_lag` in top decile
+- **Common-sample rule (binding, prevents a fake paired-difference win):** drop a coin-hour for *all* models whenever any of `rv_lag, funding_lag, oi_change_lag` is null. All family members and RV-only must be scored on the identical test rows.
+- Standardize nothing ad hoc; fit logistic regression by stdlib IRLS (mirror `fit_logistic` in `session_20261119T090239Z/fclr_risk08_evaluation_20261119T090239Z.py`).
 
-### Frozen design (mirror the confirmatory prereg; do not re-split)
+### Frozen design (mirror RISK-08; do not re-split)
 
 - `block_1` test `2025-11-01..2025-12-31`, train none (cold-start anchor; power only).
 - `block_2` test `2026-02-01..2026-04-30`, train `2025-11-01..2025-12-31`.
 - `block_3` test `2026-06-01..2026-08-31`, train `2025-11-01..2026-01-31`.
 - Purges `2026-01`, `2026-05`; reserve `2026-09..2026-10` untouched and never scored.
 - Primary block for the headline claim: **block_3** (largest clean train set). block_1 reported for completeness only.
-- Models: `intercept-only`, `RV-only` (`rv_lag`), `FUNDING+R V` reference, and `JOINT` (`funding_lag, rv_lag, oi_change_lag, funding_x_rv, funding_x_oi, rv_x_oi`). Headline contrast: `JOINT` vs `RV-only` on Brier.
+- Models: `intercept-only`, `RV-only` (`rv_lag`), and each of the 6 family members added to RV-only baseline. Headline contrast: each family member vs RV-only on Brier.
 - Metrics: Brier (headline), log-loss, AUC, calibration OLS slope/intercept on test ps.
-- Placebo: permute test labels **within hour across coins** (label-hour permutation), 1000 permutations, fixed seed `20261119`; report empirical p and 95th percentile of the null Brier difference.
-- Multiplicity: Holm over family = `{block_1, block_2, block_3, pooled}` at `alpha=0.05`; Holm family declared in prereg before outcomes.
-- Verdict rule: `SUPPORT` iff block_3 Brier improvement > 0, `p_raw < 0.05`, `p_holm < 0.05`, and placebo 95th percentile < observed improvement. Otherwise `NOT_MET` if powered; `UNDERPOWERED` if the power gate fails.
+- Placebo: permute test labels **within hour across coins** (label-hour permutation), 1000 permutations, fixed seed `20261119`; report empirical p and 95th percentile of the null Brier difference per member.
+- Multiplicity: Holm over family = `{member_1..member_6} × {block_1, block_2, block_3, pooled}` at `alpha=0.05`; Holm family declared in prereg before outcomes.
+- Verdict rule per member: `SUPPORT` iff block_3 Brier improvement > 0, `p_raw < 0.05`, `p_holm < 0.05`, and placebo 95th percentile < observed improvement. Family-wide: report all honest results. Overall campaign verdict: `SUPPORT` if any member passes; `NOT_MET` if all powered members fail; `UNDERPOWERED` if the power gate fails for all.
 
 ### Power gate (declare before evaluation)
 
-- Recompute MDE from frozen block sizes and panel base rate only (mirror `run_power` in the confirmatory evaluation module). `PLAUSIBLE_EFFECT_BRIER = 0.001` stays frozen.
-- If any scored block's `mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER`, `status=UNDERPOWERED`, `models_run=false`, and write the honest underpowered artifacts anyway (still all 11 files, still non-empty).
+- Recompute MDE from frozen block sizes and panel base rate only (mirror `run_power` in the RISK-08 evaluation module). `PLAUSIBLE_EFFECT_BRIER = 0.001` stays frozen.
+- If all scored blocks' `mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER`, `status=UNDERPOWERED`, `models_run=false`, and write the honest underpowered artifacts anyway (still all 11 files, still non-empty).
 
 ### Definition of done (all must hold; gate + review)
 
 | # | Requirement |
 |---|---|
-| 1 | New `research_state/session_<UTC>/` dir exists; UTC strictly greater than `20261119T044920Z` |
-| 2 | `fclr_risk08_prereg_<UTC>.{json,md}` exist, non-empty, and JSON has `frozen_utc` + `outcome_blind=true` + full contract above |
-| 3 | `fclr_risk08_power_<UTC>.{py,json,md}` exist, non-empty, JSON has explicit `status` |
-| 4 | `fclr_risk08_recompute_<UTC>.{py,json}` exist, non-empty, JSON has `n_discrepancies: 0` |
-| 5 | `fclr_risk08_evaluation_<UTC>.{py,json,md}` exist, non-empty, JSON has per-block Brier/log-loss/AUC/calibration, placebo p, Holm p, verdict |
+| 1 | New `research_state/session_<UTC>/` dir exists; UTC strictly greater than `20261119T090334Z` |
+| 2 | `fclr_risk09_prereg_<UTC>.{json,md}` exist, non-empty, and JSON has `frozen_utc` + `outcome_blind=true` + full contract above |
+| 3 | `fclr_risk09_power_<UTC>.{py,json,md}` exist, non-empty, JSON has explicit `status` |
+| 4 | `fclr_risk09_recompute_<UTC>.{py,json}` exist, non-empty, JSON has `n_discrepancies: 0` |
+| 5 | `fclr_risk09_evaluation_<UTC>.{py,json,md}` exist, non-empty, JSON has per-member per-block Brier/log-loss/AUC/calibration, placebo p, Holm p, verdict |
 | 6 | `evidence_audit_<UTC>.{json,md}` exist, non-empty, per `RESEARCH_PROMPT.md` §19 |
 | 7 | `trigger_check_<UTC>.json` exists, non-empty, re-evaluates all 4 registry triggers |
-| 8 | Every JSON embeds the campaign id `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` and the session UTC |
+| 8 | Every JSON embeds the campaign id `FCLR-LIQ-RISK-ESCALATION-09-20261119T090334Z` and the session UTC |
 | 9 | Verification block below passes end-to-end |
-| 10 | Handoff updated only after 9 passes, with campaign id bumped to RISK-09 |
+| 10 | Handoff updated only after 9 passes, with campaign id bumped to RISK-10 |
 
 ### Execution recipe
 
@@ -104,21 +110,21 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 
 ### Ladder rule (this is how the gate keeps biting without deadlocking)
 
-`RISK_08_CAMPAIGN_RE` binds the artifact family to the campaign number written in **this** file. So: after RISK-08 passes, rewrite **both** the initial task message and the campaign line with `FCLR-LIQ-RISK-ESCALATION-09-<new UTC>`, and the next session must emit `fclr_risk09_*`. Never leave RISK-08 in the header once its package exists, or the next honest session will be forced to duplicate it.
+`RISK_09_CAMPAIGN_RE` binds the artifact family to the campaign number written in **this** file. So: after RISK-09 passes, rewrite **both** the initial task message and the campaign line with `FCLR-LIQ-RISK-ESCALATION-10-<new UTC>`, and the next session must emit `fclr_risk10_*`. Never leave RISK-09 in the header once its package exists, or the next honest session will be forced to duplicate it.
 
 ### Contingency ladder — pre-authorized heavy follow-ons (no idling allowed)
 
-- **RISK-08 → SUPPORT:** next campaign `RISK-09` = *calibration and decision-curve escalation* on the same blocks: reliability bins, Brier decomposition (reliability/resolution/uncertainty), net-benefit over threshold sweep `0.10..0.50`, block-3 primary, same placebo/Holm discipline. Heavy by construction.
-- **RISK-08 → NOT_MET:** next campaign `RISK-09` = *specification scan*: prereg a fixed 6-member interaction family (funding×RV, funding×OI, RV×OI, three-way, monotone-funding spline, decile-regime indicator) under the same blocks with Holm over the family; report the honest family-wide result.
-- **RISK-08 → UNDERPOWERED:** next campaign `RISK-09` = *power restoration design*: pooled-block MDE audit, minimum-detectable-effect table by instrument count, and a preregistered decision on the smallest defensible effect; no outcome mining.
+- **RISK-09 → SUPPORT (any member):** next campaign `RISK-10` = *calibration and decision-curve escalation* on the winning specification: reliability bins, Brier decomposition (reliability/resolution/uncertainty), net-benefit over threshold sweep `0.10..0.50`, block-3 primary, same placebo/Holm discipline. Heavy by construction.
+- **RISK-09 → NOT_MET:** next campaign `RISK-10` = *nonlinear specification deepening*: prereg a 4-member family (fractional-polynomial funding, RV-funding hinge, OI-funding hinge, regime-switching funding×RV) under the same blocks with Holm over the family; report the honest family-wide result.
+- **RISK-09 → UNDERPOWERED:** next campaign `RISK-10` = *power restoration design*: pooled-block MDE audit, minimum-detectable-effect table by instrument count, and a preregistered decision on the smallest defensible effect; no outcome mining.
 - **Any verdict:** if a new post-`2026-10-31` observed-label source appears (≥100-day depth), `HL_LABEL_EXTENSION` becomes eligible; refresh only via the `research_state/hl_label_extension_audit_<UTC>.{md,json}` contract. `GATE4_BRANCH_1` and `EXPANSION_ROBUSTNESS_REDO` remain external-trigger-only; never manufacture evidence for them.
 
 ---
 
-## CURRENT STATE (verified 2026-11-19T08:47:32Z)
+## CURRENT STATE (verified 2026-11-19T09:03:34Z)
 
-- **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory COMPLETE; 12-month extension COMPLETE / ADMISSIBLE; Track A confirmatory COMPLETE, verdict **NOT_MET**; escalation `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` READY, gate-enforced, data preflight PASS.
-- **Latest session on disk:** `research_state/session_20261119T090239Z` — confirmatory power (POWERED), recompute (`n_discrepancies=0`), three-block evaluation (NOT_MET), evidence audit, trigger check.
+- **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory COMPLETE; 12-month extension COMPLETE / ADMISSIBLE; Track A confirmatory COMPLETE, verdict **NOT_MET**; RISK-08 COMPLETE, verdict **NOT_MET** (POWERED, `n_discrepancies=0`); escalation `FCLR-LIQ-RISK-ESCALATION-09-20261119T090334Z` READY, gate-enforced, data preflight PASS.
+- **Latest session on disk:** `research_state/session_20261119T090239Z` — RISK-08 power (POWERED), recompute (`n_discrepancies=0`), six-member family evaluation (NOT_MET), evidence audit, trigger check.
 - **Prior sessions:** `session_20261119T033443Z` (extension descriptive + audit + trigger check); `session_20261119T022824Z` (extension alignment ADMISSIBLE + confirmatory prereg).
 - **Descriptive context (associational only):** 18.93% of coin-hours have ≥1 observed event (Wilson 95% CI 18.70%..19.16%); incidence rises monotonically across trailing-24h RV deciles (6.33% → 36.02%); funding deciles U-shaped (decile 4 16.36%, decile 10 22.90%).
 - **Rank-0 triggers:** `NEW_OBSERVED_LIQUIDATION_SOURCE` = **FIRED**; `GATE4_BRANCH_1`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` = **OPEN**.
@@ -134,9 +140,10 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 5. **Empty-session / stale-handoff bottleneck gone** — gate compares newest on-disk session to handoff.
 6. **Confirmatory non-avoidance gate satisfied** by `session_20261119T090239Z`.
 7. **Escalation non-avoidance gate installed** — `RISK_08_CAMPAIGN_RE` / `RISK_08_REQUIRED` / `_risk_08_state` + `TestRisk08CampaignGate` (5 tests), concrete start UTC so no `<UTC>` dodge.
-8. **RISK-08 feature bottleneck removed (new this refresh)** — panel already carries `funding_rate` (100% non-null) and `open_interest_usd` (99.26% non-null); RV is derivable from `close`; no ingest or parquet read required.
-9. **Paired-sample trap removed (new this refresh)** — binding common-sample rule for null `oi_change_lag`, so JOINT vs RV-only are compared on identical rows.
-10. **Post-RISK-08 deadlock removed (new this refresh)** — explicit ladder rule to bump to `fclr_risk09_*`, plus a three-way contingency ladder so no verdict leads to idling.
+8. **RISK-08 feature bottleneck removed** — panel already carries `funding_rate` (100% non-null) and `open_interest_usd` (99.26% non-null); RV is derivable from `close`; no ingest or parquet read required.
+9. **Paired-sample trap removed** — binding common-sample rule for null `oi_change_lag`, so all family members vs RV-only are compared on identical rows.
+10. **Post-RISK-08 deadlock removed** — explicit ladder rule to bump to `fclr_risk09_*`, plus a three-way contingency ladder so no verdict leads to idling.
+11. **RISK-08 verdict finalized** — NOT_MET; RISK-09 specification scan is the only authorized next campaign.
 
 ### Known structural traps (avoid them)
 
@@ -154,12 +161,12 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 1. `RESEARCH_PROMPT.md` §1–§6, §9–§10, §13–§16, §18–§20
 2. `research_state/session_20261119T022824Z/fclr_tracka_confirmatory01_prereg_20261119T022824Z.json` — frozen design to extend
 3. `research_state/session_20261119T022824Z/fclr_tracka_extension01_admissibility_session_20261119T022824Z.json` — ADMISSIBLE verdict
-4. `research_state/session_20261119T090239Z/fclr_tracka_confirmatory01_evaluation_20261119T043545Z.py` — executable pattern (`build_features`, `fit_logistic`, `run_power`, `run_recompute`, `run_evaluation`, `hold-out blocks`)
-5. `research_state/session_20261119T090239Z/trigger_check_20261119T043545Z.json` — trigger definitions/status
+4. `research_state/session_20261119T090239Z/fclr_risk08_evaluation_20261119T090239Z.py` — executable pattern (`build_features`, `fit_logistic`, `run_power`, `run_recompute`, `run_evaluation`, `hold-out blocks`)
+5. `research_state/session_20261119T090239Z/trigger_check_20261119T090239Z.json` — trigger definitions/status
 6. `research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv` — frozen 12-month panel (the only input)
 7. `scripts/check_handoff_heavywork_gate.py`, `scripts/check_tracka_scope_registry_drift.py`, `scripts/fclr_ironflow_bulk.py`
 8. `research_state/resume_trigger_registry.json`, `research_state/data_source_registry.json`
-9. `tests/test_tracka_hardening_143.py` — `TestRisk08CampaignGate` non-avoidance contracts
+9. `tests/test_tracka_hardening_143.py` — `TestRisk08CampaignGate` non-avoidance contracts (adapt for RISK-09)
 
 ## REOPEN TRIGGERS (machine-checkable)
 
@@ -168,14 +175,15 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` post-2026-10-31 observed labels, ≥100-day depth — **OPEN**
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null) — **OPEN**
 
-## VERIFICATION RECORD — 2026-11-19T08:47:32Z
+## VERIFICATION RECORD — 2026-11-19T09:03:34Z
 
-- `check_handoff_heavywork_gate.py --json`: **PASS**, `root_count=498/500`, `handoff_stale=false`, latest session `session_20261119T090239Z`, `risk_08.required=false` (grandfathered until a post-`20261119T044920Z` session exists).
+- `check_handoff_heavywork_gate.py --json`: **PASS**, `root_count=498/500`, `handoff_stale=false`, latest session `session_20261119T090239Z`, `risk_09.required=false` (grandfathered until a post-`20261119T090334Z` session exists).
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (196/196).
 - `fclr_ironflow_bulk.py verify --datasets all --months 2025-11..2026-10`: **48 objects, 0 failures**.
 - `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125`: **PASS 69/69**.
 - Panel preflight: 113,880 rows, 13 coins, 12 months, `funding_rate` 100% non-null, `open_interest_usd` 113,035/113,880 non-null, `liq_count` 100% non-null.
 - Single durable handoff confirmed: exactly one `AGENT_HANDOFF*` in the repo.
 - No sealed artifact, frozen prereg, or workflow modified by this refresh.
+- RISK-08 package verified complete in `session_20261119T090239Z`: 11 `fclr_risk08_*` files + `trigger_check`, verdict NOT_MET.
 
 (End of file)
