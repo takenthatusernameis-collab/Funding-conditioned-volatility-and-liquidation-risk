@@ -1,9 +1,9 @@
-# AGENT HANDOFF — 2026-11-18T20:19:19Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-19T00:27:17Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file is tombstoned/historical and has no campaign authority.
 > No duplicate `AGENT_HANDOFF*` exists under `research_state/`, `scripts/`, `tests/`, or `src/`.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-18T20:19:19Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T00:27:17Z)
 
 **You must execute `FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z` now. Do not idle, do not re-audit RISK-07, do not gate-only, do not merely refresh this handoff, and do not attempt confirmatory multi-block on cached 2024 data.**
 
@@ -21,7 +21,7 @@ The session `session_20261118T191945Z` (UTC **20261118T191945Z**) has **complete
 
 ---
 
-## CURRENT STATE (verified 2026-11-18T20:19:19Z)
+## CURRENT STATE (verified 2026-11-19T00:27:17Z)
 
 - **Campaign state:** `ACTIVE_CAMPAIGN`; RISK-07 complete; confirmatory path **BLOCKED**.
 - **Latest executed session:** `research_state/session_20261118T191945Z` — `FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z` — **COMPLETE**.
@@ -156,7 +156,7 @@ All must PASS. `risk_07` remains required=true, pass=true. New session must be `
 
 ---
 
-## VERIFICATION RECORD — 2026-11-18T20:19:19Z (RISK-07 complete; next campaign defined)
+## VERIFICATION RECORD — 2026-11-19T00:27:17Z (RISK-07 complete; next campaign defined)
 - **Bottleneck removed 1 (RISK-07 complete):** all required artifacts non-empty; `check_handoff_heavywork_gate.py` PASS; `risk_07` required=true, pass=true.
 - **Bottleneck removed 2 (confirmatory blocked acknowledged):** `next_campaign_status.py` → `any_feasible=false` certified; no attempt to reopen.
 - **Bottleneck removed 3 (Track A path opened):** Hyperliquid Ironflow/HF dataset identified as only viable Track A source; exploratory campaign defined with concrete admissibility gates.
