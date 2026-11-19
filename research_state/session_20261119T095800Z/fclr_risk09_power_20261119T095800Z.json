@@ -1,0 +1,38 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-09-20261119T095305Z",
+  "session_utc": "20261119T095800Z",
+  "status": "UNDERPOWERED",
+  "models_run": false,
+  "plausible_effect_brier": 0.001,
+  "base_rate": 0.18931097674336253,
+  "blocks": [
+    {
+      "name": "block_2",
+      "n_test": 27443,
+      "base_rate": 0.18931097674336253,
+      "sd_diff_proxy": 0.2415599379551142,
+      "mde_brier_80pct": 0.004085196525609372,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    },
+    {
+      "name": "block_3",
+      "n_test": 28379,
+      "base_rate": 0.18931097674336253,
+      "sd_diff_proxy": 0.23367478668646058,
+      "mde_brier_80pct": 0.0038861284210082447,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    },
+    {
+      "name": "pooled",
+      "n_test": 55822,
+      "base_rate": 0.18931097674336253,
+      "sd_diff_proxy": 0.23762794909975693,
+      "mde_brier_80pct": 0.002817725360790807,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    }
+  ],
+  "rule": "if all scored blocks' mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER then UNDERPOWERED"
+}

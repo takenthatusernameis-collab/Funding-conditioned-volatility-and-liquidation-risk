@@ -1,0 +1,11 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-09-20261119T095305Z",
+  "session_utc": "20261119T095800Z",
+  "triggers": {
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": "FIRED",
+    "GATE4_BRANCH_1": "OPEN",
+    "HL_LABEL_EXTENSION": "OPEN",
+    "EXPANSION_ROBUSTNESS_REDO": "OPEN"
+  },
+  "trigger_note": "Trigger statuses re-evaluated against research_state/resume_trigger_registry.json and research_state/data_source_registry.json; unchanged from the RISK-08 session. No new post-2026-10-31 observed-label source with >=100-day depth is on disk, so HL_LABEL_EXTENSION remains OPEN and no label-extension evidence is manufactured."
+}

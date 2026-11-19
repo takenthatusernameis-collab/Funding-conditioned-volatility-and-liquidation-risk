@@ -1,0 +1,39 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-09-20261119T095305Z",
+  "session_utc": "20261119T095800Z",
+  "n_discrepancies": 0,
+  "detail": {
+    "panel_path": "research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv",
+    "panel_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9",
+    "rows": 113880,
+    "coins": 13,
+    "months": 12,
+    "first_month": "2025-11",
+    "last_month": "2026-10",
+    "funding_rate_nonnull": 113880,
+    "liq_count_nonnull": 113880,
+    "open_interest_usd_nonnull": 113035,
+    "common_sample_dropped": 923,
+    "common_sample_kept": 112957,
+    "expected": {
+      "rows": 113880,
+      "coins": 13,
+      "months": 12,
+      "first_month": "2025-11",
+      "last_month": "2026-10",
+      "funding_rate_nonnull": 113880,
+      "liq_count_nonnull": 113880,
+      "open_interest_usd_nonnull": 113035
+    },
+    "checks": {
+      "rows": true,
+      "coins": true,
+      "months": true,
+      "funding_rate_nonnull": true,
+      "liq_count_nonnull": true,
+      "open_interest_usd_nonnull": true
+    },
+    "discrepancies": 0,
+    "n_discrepancies": 0
+  }
+}
