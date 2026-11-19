@@ -1,67 +1,53 @@
 [
  {
   "rank": 0,
-  "status": "TRIGGER_ONLY",
-  "program_status": "BOUNDED_TRIGGER_ONLY",
-  "task": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z",
-  "generated": "20261115T220000Z",
-  "refreshed": "20261115T220000Z",
-  "last_checked": "20261115T220000Z",
-  "last_verdict": "NOT_MET",
-  "last_evaluation": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
-  "next_action_heavy": null,
-  "next_unfinished_task": "No agent-removable heavy estimand remains on cached data: all 3 frontier cells (FCLR-LIQ-XSEC-QLIKE, FCLR-LIQ-XSEC-ORDERING, FCLR-LIQ-COMBINED-PANEL) concluded NOT_MET/SUPERSEDED and every hypothesis is terminal; the frontier-verification line is CLOSED (two independent audits agree, all_exact_match=true). The only scientific advance is an EXTERNAL material trigger. Until a trigger fires, execute the mandatory outcome-blind heavy campaign FCLR-TRIGGER-READINESS-01-20261117T203457Z in research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md: build the trigger-activation package (executor + self-tests + per-trigger readiness certificate) in a new research_state/session_<UTC>/ so a future trigger fires into immediate, pre-powered execution. Do NOT run further cached-data frontier re-audits (no verify-08+), do NOT poll, do NOT re-run concluded estimands, do NOT fabricate new data.",
-  "resume_triggers": [
-   "GATE4_BRANCH_1",
-   "NEW_OBSERVED_LIQUIDATION_SOURCE",
-   "HL_LABEL_EXTENSION",
-   "EXPANSION_ROBUSTNESS_REDO"
-  ],
-  "trigger_status": {
-   "GATE4_BRANCH_1": "OPEN (human/legal attestation; agent cannot set)",
-   "NEW_OBSERVED_LIQUIDATION_SOURCE": "OPEN (ironflow data_through=2026-10; 2026-11+ CONFIRMED_ABSENT)",
-   "HL_LABEL_EXTENSION": "OPEN (no verified post-2026-10-31 observed labels)",
-   "EXPANSION_ROBUSTNESS_REDO": "OPEN (already executed twice as H_tracka_hl_expansion_robustness + H_fclr_exp_robust_redo; do NOT re-run; only re-open if a NEW preregistered design with LOIO>=6/8 AND placebo>95th is created, which the current 8-coin panel has already failed twice)"
-  },
-  "blockers": "No new admissible observed-liquidation data (ironflow Hyperliquid 2026-11..2027-01 parquet absent; fills absent for >=2026-11). Gate 4 Branch 1 blocked on human/legal Binance terms evidence (agent cannot set RESOLVED_VERIFIED). H2_shek_replication remains EXPLORATORY_ONLY (promotable=false).",
+  "status": "READY_EXECUTE",
+  "program_status": "ACTIVE",
+  "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T203300Z",
+  "generated": "20261119T203300Z",
+  "refreshed": "20261119T203300Z",
+  "last_checked": "20261119T203300Z",
+  "last_verdict": null,
+  "next_action_heavy": "Freeze research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim; build Hyperliquid mark/index/funding/klines panel; hash+freeze eligible panel before target generation; run B0/B1 baselines on development/validation.",
+  "next_unfinished_task": "FCLR-001 Step 1: protocol freeze + panel hash freeze (research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim). Then Step 2: B0/B1 baselines on dev/validation. No holdout outcomes inspected before protocol freeze. Track A power-blocked (RISK-12 UNDERPOWERED, MDE 0.002814 > PLAUSIBLE_EFFECT_BRIER 0.001); do not re-run RISK-09/10/11/12. Track C volatility forecasting is the only agent-removable heavy path on admissible public mark-price data. FCLR_HEAVY_CAMPAIGN_NEXT.md referenced by the prior frontier is superseded by this campaign.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None agent-removable: FCLR-001 §14 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md currently holds the OLD 2026-11-06 protocol and must be replaced with the §14 spec (Step 1). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers — superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
   "evidence": {
-   "frontier_cells": 3,
+   "frontier_cells": 0,
    "all_terminal": true,
    "data_through": "2026-10",
-   "consecutive_absent": 3,
    "new_files_found": 0,
    "suite_baseline": "1341 tests, 0 failures (after frontier repair)"
   },
   "phases": [
    {
-    "phase": "TRIGGER_CHECK",
-    "status": "PENDING",
-    "claim": "Run the bounded trigger check ONCE at session start: read research_state/resume_trigger_registry.json and research_state/ironflow_monitor_state.json; confirm data_through=2026-10 and 2026-11..2027-01 absent. Never re-probe (probes==2 already); do NOT poll.",
+    "phase": "PREREG_FREEZE",
+    "status": "NOT_STARTED",
+    "claim": "Freeze research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim (FCLR-001: unit, timing, universe, target, features, baselines, splits, metrics, inference, gate). outcome_data_inspected_before_freeze=false.",
     "expected_artifacts": [
-     "research_state/ironflow_monitor_state.json",
-     "research_state/resume_trigger_registry.json"
+     "research_state/research_protocol.md (matches RESEARCH_PROMPT.md §14 exactly)"
     ]
    },
    {
-    "phase": "HARDENING_CAMPAIGN",
-    "status": "PENDING",
-    "claim": "Execute the non-skippable bounded hardening campaign in research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md: keep full unittest suite GREEN (baseline 1341 tests, 0 failures), preserve the active-campaign guard invariant (rank-0 TRIGGER_ONLY), and harden reproducibility/automation without touching sealed artifacts or .github/workflows/*.",
+    "phase": "PANEL_BUILD_AND_HASH",
+    "status": "NOT_STARTED",
+    "claim": "Build Hyperliquid mark/index/funding/klines panel reusing frozen panel where possible; record source hashes, cutoff dates, eligible sample definition; hash+freeze eligible panel before target generation.",
     "expected_artifacts": [
-     "research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md",
-     "unittest discover (0 failures)"
+     "research_state/session_<UTC>/panel build report + panel hash",
+     "research_state/session_<UTC>/trigger_check_<UTC>.json"
     ]
    },
    {
-    "phase": "TRIGGER_GATED_ADVANCE",
-    "status": "BLOCKED_EXTERNAL",
-    "claim": "If and only if a resume trigger fires (GATE4_BRANCH_1 resolved attestation, NEW_OBSERVED_LIQUIDATION_SOURCE admissible audit, HL_LABEL_EXTENSION verified labels, or a genuinely NEW EXPANSION_ROBUSTNESS_REDO prereg), install the new materially-different heavy cell at rank 0 following RESEARCH_PROMPT.md (prereg BEFORE outcomes).",
+    "phase": "BASELINE_B0_B1",
+    "status": "NOT_STARTED",
+    "claim": "Run B0 (persistence RV24h) and B1 (HAR-style OLS log RV1h/RV24h/RV168h -> log target) on development/validation; record QLIKE/MAE/RMSE metrics.",
     "expected_artifacts": [
-     "research_state/prereg_<new>_<UTC>.json",
-     "research_state/evaluation_summary_<new>_<UTC>.json"
+     "research_state/session_<UTC>/baseline evaluation + metrics"
     ]
    }
   ],
-  "note": "SENTINEL: all cached-data estimands exhausted. Rank 0 must remain ACTIVE (TRIGGER_ONLY) per tests/test_active_campaign_gate.py. Heavy work that IS agent-removable is the bounded hardening/reproducibility campaign in research_state/FCLR_HEAVY_CAMPAIGN_NEXT.md. Stop cleanly ONLY when that campaign is green AND a trigger check has been run once; never leave the suite red and never delete this sentinel."
+  "note": "SENTINEL: all cached-data Track A/B estimands terminal (NOT_MET/NOT_REPLICATED/FRAGILE). FCLR-001 Track C volatility forecasting is the active rank-0 heavy campaign. No deferral, no placeholder artifacts, no trigger-gated wait. Complete protocol freeze + panel hash + B0/B1 metrics in one continuous session. tests/test_active_campaign_gate.py invariant preserved: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED."
  },
  {
   "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional QLIKE, not cross-sectional rank-IC or per-coin time-series QLIKE). Uses 2 pristine metpie blocks never tested for this estimand.",
