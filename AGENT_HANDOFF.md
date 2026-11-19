@@ -1,18 +1,29 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-19T22:06:05Z
+**Timestamp:** 2026-11-19T23:18:06Z
 **Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
-**Latest heavy session:** session_20261119T180650Z (RISK-12 power audit UNDERPOWERED, MDE 0.002814 > plausible 0.001; evidence_audit + fclr_risk12_* + trigger_check)
+**Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
+**Latest heavy session:** session_20261119T180650Z (RISK-12 Track A confirmatory power audit UNDERPOWERED, MDE 0.002814 > plausible 0.001; evidence_audit + fclr_risk12_* + trigger_check; terminal)
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-19T22:06:05Z)
+---
 
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-19T23:18:06Z)
 
-Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). Step 1 only this session:
+Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). This session completes Step 1 only:
 
-1. **Freeze `research_state/research_protocol.md` from RESEARCH_PROMPT.md §14 verbatim** — unit (eligible linear perpetual × closed UTC hourly timestamp), timing (forecast at t after closed hour t; outcomes begin t+1), universe (broadest public listing/delisting metadata, no fixed top-N), primary target (next-24h realized variance, sum of squared log returns t+1..t+24), secondary horizons (6h/72h/168h, multiplicity-declared), frozen predictors (RV1h/RV24h/RV168h, signed funding, 90-day abs-funding percentile with min-30-obs rule, mark/index premium, mark/EMA24 distance), frozen baselines (B0 persistence RV24h; B1 HAR OLS log RV1h/RV24h/RV168h → log target; C1 = B1 + funding + percentile; C2 = C1 + premium + EMA24), 60/20/20 chronological split with 7-day purge/embargo, primary metric paired OOS QLIKE C2 vs B1 with block-bootstrap CI (≥2000 reps), gate ≥2% relative QLIKE reduction + CI supports improvement + Holm over family, minimum ≥5 instruments and ≥3 non-overlapping 30-day blocks. `outcome_data_inspected_before_freeze=false`.
+1. **Campaign declaration (this handoff).** FCLR-STARTER-001-20261119T231806Z is the active rank-0 heavy campaign. Any session whose UTC is after 20261119T231806Z cannot satisfy the handoff heavy-work gate with prose, placeholders, or an arbitrary artifact. It must emit, under `research_state/session_<UTC>/`:
+   - `fclr_starter001_protocol_freeze_<UTC>.json` + `.md` — §14 protocol freeze hash-bound to `RESEARCH_PROMPT.md` §14; `experiment_id` starts with `FCLR-STARTER-001`; `outcome_data_inspected_before_freeze=false`; `protocol_path` must NOT be `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03 definition consumed by `scripts/run_evaluation.py` — never overwrite it). The freeze body lives at a new timestamped path, e.g. `research_state/protocol_fclr_starter_001_<UTC>.md`, and contains §14 verbatim with matching `section14_sha256`/`protocol_sha256`.
+   - `fclr_starter001_panel_freeze_<UTC>.json` + `.md` — `panel_sha256` (64 hex), non-empty `source_hashes`, `panel_frozen_before_target_generation=true`, non-empty `eligible_definition`, `cutoff_utc` (or `split_boundaries`). Panel hash recorded BEFORE any target is computed.
+   - `fclr_starter001_baselines_<UTC>.py` + `.json` + `.md` — B0 persistence (RV24h) and B1 HAR OLS (log RV1h/RV24h/RV168h → log target) on development/validation; `holdout_opened=false`; `split_used` contains dev/validation; `models.B0` and `models.B1` each with numeric `qlike >= 0`; `n_obs > 0`.
+   - `trigger_check_<UTC>.json` — non-empty.
+   Placeholders (`{}` / zero-byte) fail closed; free-text "frozen" claims without these artifacts fail closed.
 
-2. **Build panel from Hyperliquid mark/index/funding/klines data** — reuse frozen panel where possible; record source hashes, cutoff dates, eligible sample definition.
+2. **Freeze `research_state/protocol_fclr_starter_001_20261119T231806Z.md` from RESEARCH_PROMPT.md §14 verbatim** — unit (eligible linear perpetual × closed UTC hourly timestamp); timing (forecast at t after closed hour t; outcomes begin t+1); universe (broadest public listing/delisting metadata, no fixed top-N); primary target (next-24h realized variance, sum of squared log returns t+1..t+24); secondary horizons (6h/72h/168h, multiplicity-declared); frozen predictors (RV1h/RV24h/RV168h, signed funding, 90-day abs-funding percentile with min-30-obs rule, mark/index premium, mark/EMA24 distance); frozen baselines (B0 persistence RV24h; B1 HAR OLS log RV1h/RV24h/RV168h → log target; C1 = B1 + funding + percentile; C2 = C1 + premium + EMA24); 60/20/20 chronological split with 7-day purge/embargo; primary metric paired OOS QLIKE C2 vs B1 with block-bootstrap CI (≥2000 reps); gate ≥2% relative QLIKE reduction + CI supports improvement + Holm over family; minimum ≥5 instruments and ≥3 non-overlapping 30-day blocks. `outcome_data_inspected_before_freeze=false`.
 
-3. **Hash and freeze eligible panel before target generation** — no target computed until panel hash is recorded.
+3. **Build panel from Hyperliquid mark/index/funding/klines data** — reuse frozen panel where possible; record source hashes, cutoff dates, eligible sample definition.
+
+4. **Hash and freeze eligible panel before target generation** — no target computed until panel hash is recorded.
+
+5. **Run B0 and B1 baselines on development/validation** — record QLIKE/MAE/RMSE. Holdout NOT opened.
 
 Do NOT inspect holdout outcomes before protocol freeze. No other task has higher expected information gain per unit of free compute. Track A is power-blocked (RISK-12 UNDERPOWERED, MDE 0.002814 > PLAUSIBLE_EFFECT_BRIER 0.001); do NOT re-run RISK-09/10/11/12. Track B is NOT_SUPPORTED (terminal). Track C volatility forecasting is the only agent-removable heavy path on admissible public mark-price data.
 
@@ -24,9 +35,10 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 
 | Blocker | Evidence | Resolution |
 |---------|----------|------------|
-| `experiment_frontier.json` rank 0 = TRIGGER_ONLY waiting on external triggers (GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO) | `experiment_frontier.json` rank 0, `tests/test_active_campaign_gate.py` invariant | Rank 0 superseded: FCLR-001 is a fresh frozen protocol (§14), not a re-run of concluded cached-data estimands. Rank 0 set to READY_EXECUTE / ACTIVE with concrete unfinished task and phases. All downstream campaigns remain SUPERSEDED (terminal). Invariant preserved: exactly one rank-0, non-terminal, concrete task, phases present. |
-| `FCLR_HEAVY_CAMPAIGN_NEXT.md` referenced by prior frontier but missing (glob: no such file) | `research_state/experiment_frontier.json` lines 13, 48, 50, 64 | Superseded by FCLR-001 campaign. The heavy work is now protocol freeze + panel hash + B0/B1 metrics, defined in this handoff and RESEARCH_PROMPT.md §14. |
-| `research_protocol.md` holds old 2026-11-06 protocol (4 coins, 2024-01..03), not FCLR-001 §14 spec | `research_state/research_protocol.md` frozen 2026-11-06T20:36:32Z | Step 1 of this session: replace with RESEARCH_PROMPT.md §14 verbatim. Do not compute targets until freeze is recorded. |
+| RISK-12 Track A confirmatory (session_20261119T180650Z) UNDERPOWERED; MDE 0.002814 > 0.001; all 6 family members NOT_MET | `research_state/session_20261119T180650Z/` (fclr_risk12_power/evaluation/recompute/prereg) + trigger_check | Terminal. Demoted; do NOT re-run RISK-09/10/11/12 variants (explicitly prohibited in RISK-12 prereg). Power limit, not data availability. |
+| `research_state/research_protocol.md` holds sealed legacy 2026-11-06 protocol (4 coins, 2024-01..03), not FCLR-001 §14 spec | `research_state/research_protocol.md` frozen 2026-11-06T20:36:32Z; `scripts/run_evaluation.py:15` reads it as PROTOCOL | NOT overwritten (sealed legacy, consumed by run_evaluation.py). FCLR-001 §14 freeze written to a NEW timestamped path `research_state/protocol_fclr_starter_001_<UTC>.md` per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). |
+| `FCLR_HEAVY_CAMPAIGN_NEXT.md` referenced by prior frontier but missing | `research_state/experiment_frontier.json` lines 13, 48, 50, 64 | Superseded by FCLR-STARTER-001 campaign. Heavy work is protocol freeze + panel hash + B0/B1 metrics, defined in this handoff and RESEARCH_PROMPT.md §14. |
+| Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers (GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO) | `experiment_frontier.json` rank 0; `tests/test_active_campaign_gate.py` invariant | Rank 0 superseded: FCLR-001 is a fresh frozen protocol (§14), not a re-run of concluded cached-data estimands. Rank 0 = READY_EXECUTE / ACTIVE with concrete unfinished task + phases. All downstream campaigns remain SUPERSEDED (terminal). Invariant preserved: exactly one rank-0, non-terminal, concrete task, phases present. |
 
 ---
 
@@ -35,12 +47,12 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 **Prior state (all terminal on cached data):**
 - Track A liquidation forecasting: RISK-12 UNDERPOWERED (MDE 0.002814 > 0.001), all 6 family members NOT_MET, `models_run=false`. Track A Confirmatory-01 NOT_MET (Holm p=1.0). RISK-11 inconclusive. Power limit, not data availability.
 - Track B modeled boundary breach: TB2 NOT_MET (Log Loss C2 vs B1 +1.68% rel, below 2% floor, CI crosses zero, Holm FAILS, only 2 blocks <3 required). TB1 degenerate/inadmissible. NOT_SUPPORTED, terminal.
-- Track C volatility: FCLR-011 PASS (4.94% rel QLIKE, 2026-05..08) but NOT_REPLICATED on all forward/period-specificity tests (2024 H2, 2025 H1, 2025 H2, 2026 Q1-Q2 — all C2 worse than or indistinguishable from B1). TRACKA-VOL-FAMILY NOT_MET (Holm across 12 comparisons). TRACKA-ALT-VOL NOT_MET (CI crosses zero). All terminal.
+- Track C volatility: FCLR-011 PASS (4.94% rel QLIKE, 2026-05..08) but NOT_REPLICATED on all forward/period-specificity tests. TRACKA-VOL-FAMILY NOT_MET (Holm across 12 comparisons). TRACKA-ALT-VOL NOT_MET (CI crosses zero). All terminal.
 
 **Why FCLR-001 Track C is the highest-value task:**
-1. Track A is power-blocked — no credible path to detectable effect without a materially larger panel.
-2. Track B is NOT_SUPPORTED — modeled breach proxy does not generalize.
-3. Track C can proceed independently — uses mark-price data already available; no liquidation labels needed.
+1. Track A is power-blocked — no credible path to a detectable effect without a materially larger panel.
+2. Track B is NOT_SUPPORTED — the modeled breach proxy does not generalize.
+3. Track C proceeds independently — uses mark-price data already available; no liquidation labels needed.
 4. FCLR-001 is fully specified — RESEARCH_PROMPT.md §14 gives exact unit, timing, universe, target, features, baselines, splits, metrics, inference, and gate.
 5. Infrastructure is complete — baselines (`src/models/baselines.py`), features (`src/features/{funding,price,volatility}.py`), eval (`src/eval/{walkforward,inference}.py`), block bootstrap (`src/volatility/block_bootstrap.py`), walk-forward splits all implemented.
 6. Honest null preservation — if FCLR-001 fails, the null is preserved per protocol; no threshold shopping.
@@ -63,7 +75,7 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 
 ## 3. Single highest-value next task
 
-**Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting)**
+**Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting), Step 1: protocol freeze + panel hash freeze + B0/B1 baselines.**
 
 **Why:** Track A power-blocked, Track B NOT_SUPPORTED, Track C is the only viable confirmatory path. FCLR-001 §14 is fully specified; infrastructure complete; no credentials, no paid data, no network required for Step 1 (uses cached Hyperliquid panel).
 
@@ -83,7 +95,8 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 
 **Step 1: Freeze protocol and build panel**
 ```bash
-# 1. Create research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim
+# 1. Create research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim
+#    (do NOT write research_state/research_protocol.md — sealed legacy)
 # 2. Build panel from Hyperliquid data (mark, index, funding, klines) — reuse frozen panel where possible
 # 3. Hash and freeze eligible panel before target generation
 ```
@@ -98,7 +111,7 @@ from src.eval.walkforward import *
 "
 ```
 
-**Step 3: Run confirmatory evaluation on sealed holdout**
+**Step 3: Run confirmatory evaluation on sealed holdout** (later session, after protocol freeze)
 ```bash
 # After protocol freeze, run C1, C2 vs B1 on holdout
 # Compute paired QLIKE diff, block bootstrap CI, Holm correction
@@ -106,12 +119,13 @@ from src.eval.walkforward import *
 ```
 
 **Acceptance test for this session:**
-- `research_state/research_protocol.md` exists and matches RESEARCH_PROMPT.md §14 exactly
-- Panel built with frozen source hashes, cutoff dates, eligible sample definition recorded
-- B0 and B1 evaluated on development/validation with metrics recorded
-- No holdout outcomes inspected before protocol freeze
+- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-19T23:18:06Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
+- `experiment_frontier.json` rank 0 = FCLR-001, status READY_EXECUTE / program_status ACTIVE, all 3 phases NOT_STARTED, every other entry SUPERSEDED (`python3 -m unittest tests.test_active_campaign_gate` passes)
+- FCLR-STARTER-001 gate contract documented: post-campaign sessions must emit protocol freeze (json+md, §14 hash-bound, not sealed legacy file), panel freeze (json+md), baselines triad (py+json+md), trigger_check (json); placeholders fail closed (`python3 -m unittest tests.test_fclr_starter_001_campaign_gate` passes)
+- `research_state/research_protocol.md` NOT overwritten (sealed legacy)
 - `python3 scripts/check_handoff_heavywork_gate.py --json` returns pass
 - `python3 -m unittest discover tests` returns 0 failures
+- No holdout outcomes inspected before protocol freeze
 
 ---
 
@@ -129,6 +143,7 @@ from src.eval.walkforward import *
 - Attempt Track A liquidation forecasting without a materially larger panel
 - Modify `.github/workflows` (protected control plane)
 - Create placeholder artifacts — only create when contents are meaningful
+- Overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03)
 
 ---
 
@@ -145,6 +160,8 @@ If FCLR-001 hits a structural blocker (e.g., mark-price data unavailable for ade
 
 ---
 
-**Next session must:** Read this handoff + RESEARCH_PROMPT.md completely, inspect working tree and latest artifacts, then execute Step 1 of FCLR-001 (protocol freeze + panel build). No other task has higher expected information gain per unit of free compute.
+## 7. Next session must
 
-(End of file - total 148 lines)
+Read this handoff + RESEARCH_PROMPT.md completely, inspect working tree and latest artifacts, then execute Step 1 of FCLR-STARTER-001 (protocol freeze + panel hash + B0/B1 metrics). No other task has higher expected information gain per unit of free compute. The FCLR-STARTER-001 campaign is declared in this durable handoff; the machine-enforced handoff heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) requires the concrete artifact triad for any session after UTC 20261119T231806Z — future agents cannot satisfy it with prose or placeholders.
+
+(End of file)
