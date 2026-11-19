@@ -122,6 +122,12 @@
       "id": "fclr_handoff_heavywork_gate_register_20261116T044500Z",
       "reason": "Register check_handoff_heavywork_gate.py (resume_gate_infra): read-only gate binding the durable handoff to a self-contained heavy-session evidence bundle; no network, no outcome reads, no canonical mutation.",
       "script": "check_handoff_heavywork_gate.py"
+    },
+    {
+      "action": "add",
+      "id": "fclr_ironflow_cache_integrity_register_20261119T175557Z",
+      "reason": "Register check_ironflow_cache_integrity.py (resume_gate_infra): hash-only cache verification that replaces the pyarrow-dependent verify in the mandatory handoff verification block; read-only, offline, no outcome reads, no writes.",
+      "script": "check_ironflow_cache_integrity.py"
     }
   ],
   "changes": [
@@ -166,12 +172,18 @@
       "id": "fclr_handoff_heavywork_gate_register_20261116T044500Z",
       "summary": "Register check_handoff_heavywork_gate.py (resume_gate_infra) \u2014 the FCLR-NEXT-143 handoff-freshness + mandatory-heavy-work gate; registry now covers all 196 scripts/*.py.",
       "script": "check_handoff_heavywork_gate.py"
+    },
+    {
+      "action": "add",
+      "id": "fclr_ironflow_cache_integrity_register_20261119T175557Z",
+      "summary": "Register check_ironflow_cache_integrity.py (resume_gate_infra) \u2014 stdlib hash-only Ironflow bulk cache verifier that removes the pyarrow/pandas environment blocker from the mandatory handoff verification block; registry now covers all 197 scripts/*.py.",
+      "script": "check_ironflow_cache_integrity.py"
     }
   ],
   "description": "Canonical machine-readable script-scope registry for scripts/*.py. Drift check: scripts/*.py filenames must == registry keys; every entry has a valid class and reason; eval-summary writers cannot be unclassified_auxiliary; risk scripts assert explicit guard/scope. Reconciled with FCLR-NEXT-116 EXTENDED_CLASSIFICATION. Reconciled with FCLR-015 provenance probe addition. Reconciled with FCLR-018 prereg-readiness matrix addition. Reconciled with FCLR-NEXT-163 SCRIPT_REGISTRY sync (reconcile_inventory.py + build_fclr002_panel_local.py). Reconciled with FCLR-NEXT-164 Gate 4 v4 EXPLORATORY stabilized-comparison runner registration. Reconciled with FCLR-FUND-VOL-LIQ-REDTEAM-20261114T042139Z heavy-campaign script registration. Reconciled with FCLR-FWD-VOL-2025-DISJOINT registration (coverage audit, disjoint cross, cross gate, reconcile). Reconciled with FCLR-SHEK-SCALE registration (fclr_shek_scale.py) at 2026-11-15T07:03:18Z; registry now covers all 186 scripts/*.py (verify_fast_identify.py added 2026-11-15T08:28:26Z). Reconciled with FCLR-LIQ-COMBINED-PANEL registration (fclr_liq_combined_fetch_context.py, fclr_build_liq_combined_panel.py, fclr_liq_combined_prereg.py) at 2026-11-15T18:14:49Z; registry now covers all 190 scripts/*.py. Reconciled with FCLR-LIQ-COMBINED-PANEL eval registration (fclr_liq_combined_eval.py) at 2026-11-15T18:25:00Z; registry now covers all 191 scripts/*.py. Reconciled with FCLR-LIQ-XSEC-ORDERING registration (fclr_liq_combined_xsec_prereg.py, fclr_liq_combined_xsec_eval.py) at 2026-11-15T20:11:01Z; registry now covers all 193 scripts/*.py. Reconciled with FCLR-LIQ-XSEC-QLIKE registration (fclr_liq_combined_xsec_qlike_prereg.py, fclr_liq_combined_xsec_qlike_eval.py) at 2026-11-15T21:42:05Z; registry now covers all 195 scripts/*.py.",
-  "generated": "20261116T044500Z",
-  "registry_version": "1.4",
-  "script_count": 196,
+  "generated": "20261119T175557Z",
+  "registry_version": "1.5",
+  "script_count": 197,
   "scripts": {
     "_debug_abl.py": {
       "class": "unclassified_auxiliary",
@@ -956,6 +968,10 @@
     "check_handoff_heavywork_gate.py": {
       "class": "resume_gate_infra",
       "reason": "FCLR-NEXT-143 read-only handoff-freshness + mandatory-heavy-work gate; deterministic, no network, no real research_state writes; fails closed if the durable handoff is missing markers, if the recorded heavy session_<UTC> bundle lacks Phase-B/C artifacts, or if root md+json count exceeds the churn cap."
+    },
+    "check_ironflow_cache_integrity.py": {
+      "class": "resume_gate_infra",
+      "reason": "Stdlib-only (hashlib) read-only integrity check for the Ironflow bulk parquet cache sha256 sidecars; removes the pyarrow/pandas environment bottleneck from the handoff verification block so a bare runner can prove cache integrity without reading parquet content, without network, without outcome reads, and without writes."
     }
   },
   "source_of_record": "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY (reconciled canonical)"

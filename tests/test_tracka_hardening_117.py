@@ -61,6 +61,10 @@ SCRIPT_REGISTRY = {
     "class": "resume_gate_infra",
     "reason": "FCLR-NEXT-143 read-only handoff-freshness + mandatory-heavy-work gate; deterministic, no network, no real research_state writes; fails closed if the durable handoff is missing markers, if the recorded heavy session_<UTC> bundle lacks Phase-B/C artifacts, or if root md+json count exceeds the churn cap."
   },
+  "check_ironflow_cache_integrity.py": {
+    "class": "resume_gate_infra",
+    "reason": "Stdlib-only (hashlib) read-only integrity check for the Ironflow bulk parquet cache sha256 sidecars; removes the pyarrow/pandas environment bottleneck from the handoff verification block so a bare runner can prove cache integrity without reading parquet content, without network, without outcome reads, and without writes."
+  },
   "cache_panel.py": {
     "class": "repo_maintenance_utility",
     "reason": "cache_panel.py: panel cache helper; no Track A liquidation outcome claim production."
