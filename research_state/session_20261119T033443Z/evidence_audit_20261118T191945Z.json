@@ -1,0 +1,121 @@
+{
+  "schema": "evidence_audit",
+  "session_id": "session_20261118T191945Z",
+  "timestamp_utc": "20261118T191945Z",
+  "campaign": "FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z",
+  "network_used": false,
+  "installs": false,
+  "git_lfs_pull": false,
+  "writes": "session dir only + AGENT_HANDOFF.md (sole durable handoff)",
+  "root_research_state_files_added": 0,
+  "outcome_inspected_before_prereg_freeze": false,
+  "artifacts": {
+    "prereg": {
+      "files": [
+        "fclr_risk07_prereg_20261118T191945Z.json",
+        "fclr_risk07_prereg_20261118T191945Z.md"
+      ],
+      "status": "FROZEN_FIRST"
+    },
+    "calibrators": {
+      "files": [
+        "fclr_risk07_calibrators_20261118T191945Z.py",
+        "fclr_risk07_calibrators_20261118T191945Z.json"
+      ],
+      "status": "COMPLETE",
+      "calibrators": ["C0_identity", "C1_platt", "C2_isotonic", "C3_prior_offset"],
+      "oof_scheme": "5 contiguous UTC-day-block folds inside each train window; calibrators fit on out-of-fold train scores only"
+    },
+    "recalibration": {
+      "files": [
+        "fclr_risk07_recalibration_20261118T191945Z.py",
+        "fclr_risk07_recalibration_20261118T191945Z.json",
+        "fclr_risk07_recalibration_20261118T191945Z.md"
+      ],
+      "status": "COMPLETE",
+      "verdict": "HONEST_NEGATIVE_OR_INCONCLUSIVE",
+      "floor_met": false,
+      "label": "synthetic_modeled_boundary_breach (observed_liquidation_labels=false)",
+      "primary_scenario": "L10|long|H24",
+      "instruments": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+      "n_holdouts": 3,
+      "holdouts": ["2024-07", "2024-08", "2024-09"],
+      "real_mean_delta_brier_primary": {
+        "C1_platt": -0.00007630760210061753,
+        "C2_isotonic": -0.0002850033235065834,
+        "C3_prior_offset": -0.000006092376311708553
+      },
+      "floor_detail": {
+        "C1_platt": {
+          "delta_brier_significant_holdouts": 1,
+          "delta_ece_material_holdouts": 0,
+          "real_mean_delta_brier": -0.00007630760210061753,
+          "placebo_p95_mean": -0.00043696371359201454,
+          "criterion_1_brier_2of3": false,
+          "criterion_2_ece_2of3": false,
+          "criterion_3_beats_placebo_p95": true,
+          "floor_met": false
+        },
+        "C3_prior_offset": {
+          "delta_brier_significant_holdouts": 1,
+          "delta_ece_material_holdouts": 0,
+          "real_mean_delta_brier": -0.000006092376311708553,
+          "placebo_p95_mean": -0.000006092376244604271,
+          "criterion_1_brier_2of3": false,
+          "criterion_2_ece_2of3": false,
+          "criterion_3_beats_placebo_p95": false,
+          "floor_met": false
+        }
+      },
+      "bootstrap_reps": 2000,
+      "ece_bootstrap_reps": 400,
+      "placebo_permutations": 200
+    },
+    "trigger_check": {
+      "files": [
+        "trigger_check_20261118T191945Z.json"
+      ],
+      "status": "COMPLETE",
+      "all_triggers_open": true
+    },
+    "recompute": {
+      "files": [
+        "recompute_fclr_risk07_recalibration_20261118T191945Z.py",
+        "recompute_fclr_risk07_recalibration_20261118T191945Z.json"
+      ],
+      "status": "RECONCILED_ZERO_DISCREPANCIES",
+      "n_discrepancies": 0
+    },
+    "carry_forward": {
+      "RISK-06_package_from_session_20261118T182813Z": [
+        "fclr_risk06_prereg_20261118T182813Z.json",
+        "fclr_risk06_prereg_20261118T182813Z.md",
+        "fclr_risk06_labels_20261118T182813Z.py",
+        "fclr_risk06_labels_20261118T182813Z.json",
+        "fclr_risk06_labels_20261118T182813Z.md",
+        "fclr_risk06_calibration_20261118T182813Z.py",
+        "fclr_risk06_calibration_20261118T182813Z.json",
+        "fclr_risk06_calibration_20261118T182813Z.md"
+      ],
+      "ROBUST-05_package_from_session_20261118T143817Z": [
+        "fclr_robust05_prereg_20261118T143817Z.json",
+        "fclr_robust05_prereg_20261118T143817Z.md",
+        "fclr_robust05_robustness_20261118T143817Z.py",
+        "fclr_robust05_robustness_20261118T143817Z.json",
+        "fclr_robust05_robustness_20261118T143817Z.md"
+      ],
+      "status": "COPIED"
+    }
+  },
+  "prohibitions_respected": {
+    "no_sealed_rescore": true,
+    "no_sealed_month_read": true,
+    "no_network": true,
+    "no_root_research_state_additions": true,
+    "no_sealed_artifact_mutation": true,
+    "no_workflow_edits": true,
+    "no_track_c_qlike_rerun": true,
+    "no_zero_byte_artifacts": true
+  },
+  "honest_status": "EXPLORATORY/PILOT. RISK-07 executed end-to-end on cached 2024-04..09 data. Train-only recalibration (Platt/PAVA/prior-offset) fit on 5-fold out-of-fold train scores across three chronological holdouts with 7-day purge/embargo. Materiality floor NOT met: no calibrator achieves delta_brier>0 with CI95 lo>0 in >=2/3 holdouts on L10|long|H24; mean delta_ECE>=0.005 in 0/3 holdouts; real mean delta_brier does not exceed the label-permutation placebo p95. Reported as an honest negative/inconclusive. Modeled boundary breaches only; not observed liquidations."
+}

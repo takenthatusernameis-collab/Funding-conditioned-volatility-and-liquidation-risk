@@ -1,0 +1,54 @@
+{
+  "schema": "recompute_fclr_risk07_recalibration",
+  "session": "session_20261118T191945Z",
+  "generated_utc": "20261118T191945Z",
+  "campaign": "FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z",
+  "source_artifact": "fclr_risk07_recalibration_20261118T191945Z.json",
+  "network_used": false,
+  "numpy_used": false,
+  "parquet_used": false,
+  "n_holdouts": 3,
+  "recomputed_brier_hits_2of3": {
+    "C1_platt": 1,
+    "C3_prior_offset": 1
+  },
+  "recomputed_ece_hits_2of3": {
+    "C1_platt": 0,
+    "C3_prior_offset": 0
+  },
+  "recomputed_real_mean_delta_brier": {
+    "C1_platt": -7.630760210061753e-05,
+    "C3_prior_offset": -6.092376311708552e-06
+  },
+  "recomputed_placebo_p95_mean_delta_brier": {
+    "C1_platt": -0.0004369637135920145,
+    "C3_prior_offset": -6.092376244604271e-06
+  },
+  "recomputed_floor_detail": {
+    "C1_platt": {
+      "delta_brier_significant_holdouts": 1,
+      "delta_ece_material_holdouts": 0,
+      "real_mean_delta_brier": -7.630760210061753e-05,
+      "placebo_p95_mean": -0.0004369637135920145,
+      "criterion_1_brier_2of3": false,
+      "criterion_2_ece_2of3": false,
+      "criterion_3_beats_placebo_p95": true,
+      "floor_met": false
+    },
+    "C3_prior_offset": {
+      "delta_brier_significant_holdouts": 1,
+      "delta_ece_material_holdouts": 0,
+      "real_mean_delta_brier": -6.092376311708552e-06,
+      "placebo_p95_mean": -6.092376244604271e-06,
+      "criterion_1_brier_2of3": false,
+      "criterion_2_ece_2of3": false,
+      "criterion_3_beats_placebo_p95": false,
+      "floor_met": false
+    }
+  },
+  "recomputed_floor_met": false,
+  "recomputed_verdict": "HONEST_NEGATIVE_OR_INCONCLUSIVE",
+  "n_discrepancies": 0,
+  "discrepancies": [],
+  "status": "RECONCILED_ZERO_DISCREPANCIES"
+}

@@ -686,6 +686,67 @@ class TestHandoffFreshnessGate(unittest.TestCase):
         self.assertEqual(res["latest_session_id"], "session_20261118T000000Z")
 
 
+class TestTrackaConfirmatoryCampaignGate(unittest.TestCase):
+    """FCLR-LIQ-TRACKA-CONFIRMATORY-01: once the campaign starts, a post-start
+    session cannot dodge the registered confirmatory test with descriptive-only,
+    trigger-only, or arbitrary recompute_* artifacts. It must emit the power/MDE
+    audit, independent recompute, evaluation triad, and trigger check."""
+
+    START = "20261119T034500Z"
+
+    def _repo(self, latest_sid="session_20261119T040000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143tc_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-LIQ-TRACKA-CONFIRMATORY-01-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def test_post_start_descriptive_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "fclr_tracka_extension01_descriptive_x.json").write_text("{}")
+        (sdir / "trigger_check_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["tracka_confirmatory"]["required"])
+        self.assertTrue(res["tracka_confirmatory"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("TRACKA_CONFIRMATORY_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_full_package_passes(self):
+        repo, sdir = self._repo()
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        for prefix, suffix in gate.TRACKA_CONFIRMATORY_REQUIRED:
+            (sdir / f"{prefix}20261119T040000Z{suffix}").write_text("x")
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["tracka_confirmatory"]["pass"])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261119T030000Z")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (sdir / "recompute_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["tracka_confirmatory"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffGateCliContract(unittest.TestCase):
     def test_cli_json_pass_shape(self):
         import subprocess

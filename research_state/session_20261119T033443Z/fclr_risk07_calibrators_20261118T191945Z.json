@@ -1,0 +1,25 @@
+{
+  "schema": "fclr_risk07_calibrators_selftest",
+  "session": "session_20261118T191945Z",
+  "n_synthetic": 4000,
+  "tests": {
+    "C1_monotone_nondecreasing_in_score": true,
+    "C1_params": {
+      "a": -0.2116966718745095,
+      "b": 0.5787137357803175
+    },
+    "C2_monotone_nondecreasing_in_score": true,
+    "C2_n_knots": 4000,
+    "C3_identity_max_abs_error": 1.1102230246251565e-16,
+    "C3_identity_when_p_train_equals_mean_score": true,
+    "all_outputs_finite": true,
+    "all_outputs_in_unit_interval": true,
+    "ece_synthetic_platt": {
+      "ece": 0.008161112583901247,
+      "n_bins": 10,
+      "min_bin_size": 400
+    },
+    "ece_bin_guard_ok": true
+  },
+  "all_self_tests_pass": true
+}

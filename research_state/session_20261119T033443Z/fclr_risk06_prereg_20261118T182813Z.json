@@ -1,0 +1,98 @@
+{
+  "schema": "fclr_risk06_prereg",
+  "campaign": "FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z",
+  "session": "session_20261118T182813Z",
+  "generated_utc": "20261118T182813Z",
+  "frozen_before_outcome_inspection": true,
+  "outcome_data_inspected_before_freeze": false,
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "label": "EXPLORATORY_PILOT",
+  "track": "B_liquidation_boundary_breach_risk_calibration",
+  "research_question": "Do funding-conditioned features improve out-of-sample probabilistic calibration (Brier score primary, log-loss secondary) of modeled liquidation-boundary breach risk over an RV-only baseline across multiple chronological holdouts, and is any effect distinguishable from a funding-permutation placebo?",
+  "outcome": {
+    "type": "synthetic_modeled_boundary_breach",
+    "observed_liquidation_labels": false,
+    "explicit_caveat": "Never call these observed liquidations; they are modeled boundary crossings on cached 1h mark prices."
+  },
+  "instruments": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+  "label_months": ["2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09"],
+  "feature_history_months": ["2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09"],
+  "label_pipeline": {
+    "entry": "close of 1h mark bar t (known at t)",
+    "evaluation": "hourly mark path t+1..t+H",
+    "mmr": 0.005,
+    "leverage": [5, 10, 20],
+    "side": ["long", "short"],
+    "horizon_hours": [4, 24],
+    "long_boundary": "P0*(1 - 1/L)/(1 - mmr)",
+    "short_boundary": "P0*(1 + 1/L)/(1 + mmr)",
+    "breach_rule": "long breached if min(path) <= long_boundary; short breached if max(path) >= short_boundary",
+    "funding_carry": false,
+    "fees": false,
+    "margin_mode": "isolated_margin_approximation"
+  },
+  "holds": [
+    {
+      "holdout": "2024-07",
+      "train": ["2024-04-01", "2024-06-23"],
+      "embargo": ["2024-06-24", "2024-06-30"],
+      "test": ["2024-07-01", "2024-07-31"]
+    },
+    {
+      "holdout": "2024-08",
+      "train": ["2024-04-01", "2024-07-24"],
+      "embargo": ["2024-07-25", "2024-07-31"],
+      "test": ["2024-08-01", "2024-08-31"]
+    },
+    {
+      "holdout": "2024-09",
+      "train": ["2024-04-01", "2024-08-24"],
+      "embargo": ["2024-08-25", "2024-08-31"],
+      "test": ["2024-09-01", "2024-09-30"]
+    }
+  ],
+  "features": {
+    "rv_block": ["lrv1", "lrv24", "lrv168"],
+    "funding_block": ["fund", "fund_abs", "fmean", "fewma"],
+    "funding_shock_block": ["fund_shock", "fund_z"],
+    "standardization": "train-only z-score (mean/sd from training rows only)",
+    "causality": "all features computed from information available at or before entry bar t close"
+  },
+  "models": {
+    "B0_rv_only": ["lrv1", "lrv24", "lrv168"],
+    "B1_funding_conditioned": ["lrv1", "lrv24", "lrv168", "fund", "fund_abs", "fmean", "fewma"],
+    "B2_funding_shock": ["lrv1", "lrv24", "lrv168", "fund_shock", "fund_z"]
+  },
+  "estimation": {
+    "family": "stdlib IRLS logistic regression with intercept",
+    "ridge_lambda": 1e-06,
+    "max_iters": 100,
+    "tol": 1e-08,
+    "seed": 12345
+  },
+  "metrics": {
+    "primary": "Brier score (lower is better)",
+    "paired_delta": "delta_brier = brier_B0 - brier_Bm (positive means funding model better calibrated)",
+    "secondary": ["log_loss", "auc"],
+    "primary_scenario": "L10|long|H24",
+    "pooling": "equal-weight mean of delta_brier over all 12 scenarios"
+  },
+  "uncertainty": {
+    "method": "UTC-day block bootstrap, percentile CI95, 2000 reps",
+    "seed": 12345,
+    "leave_one_instrument_out": true
+  },
+  "placebo": {
+    "method": "deterministic permutation of the funding series across entry timestamps, identical pipeline",
+    "seed": 12345,
+    "report": "mean and percentile CI95 of delta_brier distribution"
+  },
+  "calibration_table": "predicted vs observed breach rate by predicted-risk decile for the best model, per holdout",
+  "materiality_floor": "B1 or B2 beats B0 (delta_brier > 0 with bootstrap CI95 lower bound > 0) in >= 2 of 3 holdouts on the primary scenario L10|long|H24 AND real |mean delta_brier| exceeds placebo |mean delta_brier|. Otherwise report an honest negative.",
+  "honest_negative_allowed": true,
+  "skipping_run_allowed": false,
+  "sealed_months_touched": [],
+  "sealed_month_policy": "2024-10 onward are sealed and are not read; only 2024-04..2024-09 labels and 2024-03..2024-09 marks/funding are read."
+}

@@ -1,0 +1,1773 @@
+{
+  "schema": "fclr_risk06_calibration",
+  "campaign": "FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z",
+  "session": "session_20261118T182813Z",
+  "timestamp_utc": "20261118T182813Z",
+  "label": "EXPLORATORY_PILOT",
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "outcome": "synthetic_modeled_boundary_breach (observed_liquidation_labels=false)",
+  "prereg": "fclr_risk06_prereg_20261118T182813Z.json",
+  "instruments": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "BNBUSDT"
+  ],
+  "feature_cache_months": [
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09"
+  ],
+  "scenarios": [
+    "L10|long|H24",
+    "L10|long|H4",
+    "L10|short|H24",
+    "L10|short|H4",
+    "L20|long|H24",
+    "L20|long|H4",
+    "L20|short|H24",
+    "L20|short|H4",
+    "L5|long|H24",
+    "L5|long|H4",
+    "L5|short|H24",
+    "L5|short|H4"
+  ],
+  "models": {
+    "B0_rv_only": [
+      "lrv1",
+      "lrv24",
+      "lrv168"
+    ],
+    "B1_funding_conditioned": [
+      "lrv1",
+      "lrv24",
+      "lrv168",
+      "fund",
+      "fund_abs",
+      "fmean",
+      "fewma"
+    ],
+    "B2_funding_shock": [
+      "lrv1",
+      "lrv24",
+      "lrv168",
+      "fund_shock",
+      "fund_z"
+    ]
+  },
+  "primary_scenario": "L10|long|H24",
+  "estimation": {
+    "family": "stdlib IRLS logistic",
+    "ridge_lambda": 1e-06,
+    "max_iters": 100,
+    "tol": 1e-08,
+    "seed": 12345
+  },
+  "bootstrap": {
+    "method": "UTC-day block, percentile CI95",
+    "seed": 12345,
+    "reps": 2000
+  },
+  "placebo": {
+    "method": "funding features permuted across entry origins per symbol, identical pipeline",
+    "seed": 12345
+  },
+  "fit_scope": "per-scenario models; pooled = equal-weight mean of per-scenario delta_brier",
+  "n_dataset_rows": 262080,
+  "n_rows_without_features": 0,
+  "n_unique_origins": 21840,
+  "overall_breach_rate": 0.023813339438339437,
+  "holdouts": [
+    {
+      "holdout": "2024-07",
+      "train": [
+        "2024-04-01",
+        "2024-06-23"
+      ],
+      "embargo": [
+        "2024-06-24",
+        "2024-06-30"
+      ],
+      "test": [
+        "2024-07-01",
+        "2024-07-31"
+      ],
+      "n_train_rows": 120960,
+      "n_test_rows": 44640,
+      "n_train_pos": 2656,
+      "n_test_pos": 1365,
+      "scenario_metrics": {
+        "L10|long|H24": {
+          "n": 3720,
+          "n_pos": 78,
+          "breach_rate": 0.020967741935483872,
+          "B0_rv_only": {
+            "brier": 0.020497448373829257,
+            "log_loss": 0.10063154105708769,
+            "auc": 0.8050873709852293,
+            "mean_predicted": 0.016300447879790448
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.02053245795833914,
+            "log_loss": 0.1004549400339572,
+            "auc": 0.6527232149143187,
+            "mean_predicted": 0.020095895490747966,
+            "placebo_brier": 0.020588798182126316,
+            "placebo_log_loss": 0.10403277249867615,
+            "delta_brier_vs_B0": -3.500958450988398e-05,
+            "delta_logloss_vs_B0": 0.0001766010231304821,
+            "delta_brier_placebo_vs_B0": -9.134980829705874e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.020741856259662073,
+            "log_loss": 0.10487585329785296,
+            "auc": 0.5892965262816993,
+            "mean_predicted": 0.016508786955182826,
+            "placebo_brier": 0.02054872790382635,
+            "placebo_log_loss": 0.10257043530584777,
+            "delta_brier_vs_B0": -0.0002444078858328154,
+            "delta_logloss_vs_B0": -0.004244312240765269,
+            "delta_brier_placebo_vs_B0": -5.127952999709265e-05
+          }
+        },
+        "L10|long|H4": {
+          "n": 3720,
+          "n_pos": 1,
+          "breach_rate": 0.00026881720430107527,
+          "B0_rv_only": {
+            "brier": 0.00027046211546131733,
+            "log_loss": 0.0032650688472686796,
+            "auc": 0.9163753697230438,
+            "mean_predicted": 0.0015806565144563772
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.00027136789929721564,
+            "log_loss": 0.003394001113673434,
+            "auc": 0.8085506856681903,
+            "mean_predicted": 0.001722532753781323,
+            "placebo_brier": 0.00027808969892788413,
+            "placebo_log_loss": 0.0034656425234994596,
+            "delta_brier_vs_B0": -9.05783835898307e-07,
+            "delta_logloss_vs_B0": -0.0001289322664047546,
+            "delta_brier_placebo_vs_B0": -7.627583466566796e-06
+          },
+          "B2_funding_shock": {
+            "brier": 0.0002724434510310541,
+            "log_loss": 0.0033866646100345226,
+            "auc": 0.6993815541812315,
+            "mean_predicted": 0.0016598543198354297,
+            "placebo_brier": 0.000275742422447673,
+            "placebo_log_loss": 0.003520515266207685,
+            "delta_brier_vs_B0": -1.9813355697367863e-06,
+            "delta_logloss_vs_B0": -0.00012159576276584306,
+            "delta_brier_placebo_vs_B0": -5.280306986355692e-06
+          }
+        },
+        "L10|short|H24": {
+          "n": 3720,
+          "n_pos": 56,
+          "breach_rate": 0.015053763440860216,
+          "B0_rv_only": {
+            "brier": 0.014819780368484902,
+            "log_loss": 0.07786594456071588,
+            "auc": 0.7206751013724267,
+            "mean_predicted": 0.009069205072732064
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.014873542029571675,
+            "log_loss": 0.0800074254634799,
+            "auc": 0.5194362133499688,
+            "mean_predicted": 0.011582423046162731,
+            "placebo_brier": 0.014823039393813395,
+            "placebo_log_loss": 0.07939545309324522,
+            "delta_brier_vs_B0": -5.376166108677326e-05,
+            "delta_logloss_vs_B0": -0.0021414809027640175,
+            "delta_brier_placebo_vs_B0": -3.259025328493023e-06
+          },
+          "B2_funding_shock": {
+            "brier": 0.014838121869605014,
+            "log_loss": 0.07882863980476515,
+            "auc": 0.6308435355583282,
+            "mean_predicted": 0.008699812666338864,
+            "placebo_brier": 0.014824255584937378,
+            "placebo_log_loss": 0.0793734904316251,
+            "delta_brier_vs_B0": -1.8341501120112264e-05,
+            "delta_logloss_vs_B0": -0.0009626952440492664,
+            "delta_brier_placebo_vs_B0": -4.475216452476047e-06
+          }
+        },
+        "L10|short|H4": {
+          "n": 3720,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 3.25237111151972e-07,
+            "log_loss": 0.0003930675858326195,
+            "auc": null,
+            "mean_predicted": 0.00039290427676886934
+          },
+          "B1_funding_conditioned": {
+            "brier": 2.49025327552092e-06,
+            "log_loss": 0.0008623493975549417,
+            "auc": null,
+            "mean_predicted": 0.0008610979407596202,
+            "placebo_brier": 9.024215936150706e-07,
+            "placebo_log_loss": 0.0005865482453102223,
+            "delta_brier_vs_B0": -2.165016164368948e-06,
+            "delta_logloss_vs_B0": -0.00046928181172232217,
+            "delta_brier_placebo_vs_B0": -5.771844824630985e-07
+          },
+          "B2_funding_shock": {
+            "brier": 5.732935900145084e-05,
+            "log_loss": 0.0017948562445346684,
+            "auc": null,
+            "mean_predicted": 0.0017647307148139387,
+            "placebo_brier": 1.4548160785307128e-06,
+            "placebo_log_loss": 0.0005967760241131059,
+            "delta_brier_vs_B0": -5.700412189029887e-05,
+            "delta_logloss_vs_B0": -0.0014017886587020488,
+            "delta_brier_placebo_vs_B0": -1.1295789673787408e-06
+          }
+        },
+        "L20|long|H24": {
+          "n": 3720,
+          "n_pos": 562,
+          "breach_rate": 0.1510752688172043,
+          "B0_rv_only": {
+            "brier": 0.1299377108279088,
+            "log_loss": 0.43264899005964297,
+            "auc": 0.49943430118165694,
+            "mean_predicted": 0.11367892991479217
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.129741314864023,
+            "log_loss": 0.4319857726889759,
+            "auc": 0.5563839449717037,
+            "mean_predicted": 0.11068054100881368,
+            "placebo_brier": 0.12926990833670182,
+            "placebo_log_loss": 0.4298183590626361,
+            "delta_brier_vs_B0": 0.00019639596388582037,
+            "delta_logloss_vs_B0": 0.0006632173706670463,
+            "delta_brier_placebo_vs_B0": 0.0006678024912069869
+          },
+          "B2_funding_shock": {
+            "brier": 0.13226946586170035,
+            "log_loss": 0.4423666533395785,
+            "auc": 0.4609295941618079,
+            "mean_predicted": 0.11928315187843504,
+            "placebo_brier": 0.12951262528070448,
+            "placebo_log_loss": 0.4307055311679967,
+            "delta_brier_vs_B0": -0.002331755033791544,
+            "delta_logloss_vs_B0": -0.009717663279935507,
+            "delta_brier_placebo_vs_B0": 0.0004250855472043291
+          }
+        },
+        "L20|long|H4": {
+          "n": 3720,
+          "n_pos": 32,
+          "breach_rate": 0.008602150537634409,
+          "B0_rv_only": {
+            "brier": 0.008526915918545524,
+            "log_loss": 0.0493590499006522,
+            "auc": 0.5996559788503254,
+            "mean_predicted": 0.007269592483107642
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.008557056377040994,
+            "log_loss": 0.050292330012585325,
+            "auc": 0.528767285791757,
+            "mean_predicted": 0.010258897234726387,
+            "placebo_brier": 0.008527756527689988,
+            "placebo_log_loss": 0.04918652013768657,
+            "delta_brier_vs_B0": -3.0140458495470437e-05,
+            "delta_logloss_vs_B0": -0.0009332801119331241,
+            "delta_brier_placebo_vs_B0": -8.406091444642522e-07
+          },
+          "B2_funding_shock": {
+            "brier": 0.00853749840800774,
+            "log_loss": 0.04986844841126182,
+            "auc": 0.546951260845987,
+            "mean_predicted": 0.0070734963060544625,
+            "placebo_brier": 0.008525597932212218,
+            "placebo_log_loss": 0.04892499870669748,
+            "delta_brier_vs_B0": -1.058248946221585e-05,
+            "delta_logloss_vs_B0": -0.0005093985106096183,
+            "delta_brier_placebo_vs_B0": 1.3179863333056402e-06
+          }
+        },
+        "L20|short|H24": {
+          "n": 3720,
+          "n_pos": 597,
+          "breach_rate": 0.16048387096774194,
+          "B0_rv_only": {
+            "brier": 0.13470969742454833,
+            "log_loss": 0.4416860031716538,
+            "auc": 0.7131553809178243,
+            "mean_predicted": 0.09158006865904822
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.13485505772784245,
+            "log_loss": 0.4421453984900674,
+            "auc": 0.7201628807931213,
+            "mean_predicted": 0.08729023989440837,
+            "placebo_brier": 0.13776569740997413,
+            "placebo_log_loss": 0.4553461777090632,
+            "delta_brier_vs_B0": -0.00014536030329412308,
+            "delta_logloss_vs_B0": -0.00045939531841360237,
+            "delta_brier_placebo_vs_B0": -0.0030559999854258
+          },
+          "B2_funding_shock": {
+            "brier": 0.13436544008850404,
+            "log_loss": 0.4400988587082162,
+            "auc": 0.7113333773145801,
+            "mean_predicted": 0.09349472767560067,
+            "placebo_brier": 0.13804736054587666,
+            "placebo_log_loss": 0.45688525486458026,
+            "delta_brier_vs_B0": 0.0003442573360442902,
+            "delta_logloss_vs_B0": 0.0015871444634376064,
+            "delta_brier_placebo_vs_B0": -0.003337663121328327
+          }
+        },
+        "L20|short|H4": {
+          "n": 3720,
+          "n_pos": 38,
+          "breach_rate": 0.01021505376344086,
+          "B0_rv_only": {
+            "brier": 0.010101422272803725,
+            "log_loss": 0.05604178521160389,
+            "auc": 0.7776451585236857,
+            "mean_predicted": 0.005178799753621076
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.010097356867834924,
+            "log_loss": 0.05570544036566848,
+            "auc": 0.7822121844535292,
+            "mean_predicted": 0.005396540750123833,
+            "placebo_brier": 0.010120695086790678,
+            "placebo_log_loss": 0.05711542292786213,
+            "delta_brier_vs_B0": 4.065404968800826e-06,
+            "delta_logloss_vs_B0": 0.0003363448459354143,
+            "delta_brier_placebo_vs_B0": -1.9272813986953227e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.010100658430463011,
+            "log_loss": 0.055741149076656414,
+            "auc": 0.7923539838188628,
+            "mean_predicted": 0.005255933870273518,
+            "placebo_brier": 0.010120294844256647,
+            "placebo_log_loss": 0.05719631029915055,
+            "delta_brier_vs_B0": 7.638423407136524e-07,
+            "delta_logloss_vs_B0": 0.00030063613494747676,
+            "delta_brier_placebo_vs_B0": -1.8872571452922815e-05
+          }
+        },
+        "L5|long|H24": {
+          "n": 3720,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 4.238710349395524e-05,
+            "log_loss": 0.0013166820840787013,
+            "auc": null,
+            "mean_predicted": 0.0012944940083754817
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.00030126178650318424,
+            "log_loss": 0.0018635304136938062,
+            "auc": null,
+            "mean_predicted": 0.0016727632971227221,
+            "placebo_brier": 4.998419716420913e-06,
+            "placebo_log_loss": 0.001893841109772379,
+            "delta_brier_vs_B0": -0.000258874683009229,
+            "delta_logloss_vs_B0": -0.0005468483296151049,
+            "delta_brier_placebo_vs_B0": 3.7388683777534324e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.007011061697702734,
+            "log_loss": 0.04340694438680464,
+            "auc": null,
+            "mean_predicted": 0.009880789922169647,
+            "placebo_brier": 4.250229874884582e-06,
+            "placebo_log_loss": 0.0018913656432614358,
+            "delta_brier_vs_B0": -0.006968674594208779,
+            "delta_logloss_vs_B0": -0.04209026230272594,
+            "delta_brier_placebo_vs_B0": 3.8136873619070655e-05
+          }
+        },
+        "L5|long|H4": {
+          "n": 3720,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 3.951053330040216e-18,
+            "log_loss": 1.9877256527182362e-09,
+            "auc": null,
+            "mean_predicted": 1.987725667701712e-09
+          },
+          "B1_funding_conditioned": {
+            "brier": 3.951053330003144e-18,
+            "log_loss": 1.9877256527182362e-09,
+            "auc": null,
+            "mean_predicted": 1.9877256676923866e-09,
+            "placebo_brier": 3.9510533300126215e-18,
+            "placebo_log_loss": 1.9877256527182362e-09,
+            "delta_brier_vs_B0": 3.7071840313521025e-29,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 2.7594724243180315e-29
+          },
+          "B2_funding_shock": {
+            "brier": 3.951053330034819e-18,
+            "log_loss": 1.9877256527182362e-09,
+            "auc": null,
+            "mean_predicted": 1.987725667700354e-09,
+            "placebo_brier": 3.951053330027404e-18,
+            "placebo_log_loss": 1.9877256527182362e-09,
+            "delta_brier_vs_B0": 5.39722607615079e-30,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 1.2812056362041648e-29
+          }
+        },
+        "L5|short|H24": {
+          "n": 3720,
+          "n_pos": 1,
+          "breach_rate": 0.00026881720430107527,
+          "B0_rv_only": {
+            "brier": 0.0002727322068201872,
+            "log_loss": 0.0033108159847655824,
+            "auc": 0.5114278031728959,
+            "mean_predicted": 0.001316333617929781
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.00030022658091640597,
+            "log_loss": 0.005070046698660695,
+            "auc": 0.4455498789997311,
+            "mean_predicted": 0.0027411210956089314,
+            "placebo_brier": 0.00027255152555073374,
+            "placebo_log_loss": 0.0034095922163601307,
+            "delta_brier_vs_B0": -2.749437409621877e-05,
+            "delta_logloss_vs_B0": -0.0017592307138951128,
+            "delta_brier_placebo_vs_B0": 1.806812694534637e-07
+          },
+          "B2_funding_shock": {
+            "brier": 0.00038160191335009957,
+            "log_loss": 0.005644603231267138,
+            "auc": 0.4498521107824684,
+            "mean_predicted": 0.003160672252708147,
+            "placebo_brier": 0.0002720810378973839,
+            "placebo_log_loss": 0.003419366508976,
+            "delta_brier_vs_B0": -0.00010886970652991237,
+            "delta_logloss_vs_B0": -0.0023337872465015556,
+            "delta_brier_placebo_vs_B0": 6.511689228033213e-07
+          }
+        },
+        "L5|short|H4": {
+          "n": 3720,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 3.951053330040216e-18,
+            "log_loss": 1.9877256527182362e-09,
+            "auc": null,
+            "mean_predicted": 1.987725667701712e-09
+          },
+          "B1_funding_conditioned": {
+            "brier": 3.951053330003144e-18,
+            "log_loss": 1.9877256527182362e-09,
+            "auc": null,
+            "mean_predicted": 1.9877256676923866e-09,
+            "placebo_brier": 3.951053329969081e-18,
+            "placebo_log_loss": 1.9877256527182362e-09,
+            "delta_brier_vs_B0": 3.7071840313521025e-29,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 7.113537805390919e-29
+          },
+          "B2_funding_shock": {
+            "brier": 3.951053330034819e-18,
+            "log_loss": 1.9877256527182362e-09,
+            "auc": null,
+            "mean_predicted": 1.987725667700354e-09,
+            "placebo_brier": 3.951053330037403e-18,
+            "placebo_log_loss": 1.9877256527182362e-09,
+            "delta_brier_vs_B0": 5.39722607615079e-30,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 2.813398462760874e-30
+          }
+        }
+      },
+      "primary": {
+        "scenario": "L10|long|H24",
+        "B1_funding_conditioned": {
+          "delta_brier": -3.500958450988398e-05,
+          "bootstrap": {
+            "mean": -3.0499317867385378e-05,
+            "ci_lo": -0.0003565426011164354,
+            "ci_hi": 0.0004624693728082956,
+            "reps": 2000
+          },
+          "bootstrap_logloss": {
+            "mean": 0.00027838546278564127,
+            "ci_lo": -0.00591337325122959,
+            "ci_hi": 0.010888569541203739,
+            "reps": 2000
+          }
+        },
+        "B2_funding_shock": {
+          "delta_brier": -0.0002444078858328154,
+          "bootstrap": {
+            "mean": -0.00024465228166604876,
+            "ci_lo": -0.0004966721137418147,
+            "ci_hi": -6.8006499076298e-05,
+            "reps": 2000
+          },
+          "bootstrap_logloss": {
+            "mean": -0.004272165678542299,
+            "ci_lo": -0.010162288318593768,
+            "ci_hi": -0.0005376219990587394,
+            "reps": 2000
+          }
+        },
+        "best_model": "B0_rv_only",
+        "calibration_deciles": [
+          {
+            "decile": 1,
+            "n": 372,
+            "mean_predicted": 0.014049059942895096,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 2,
+            "n": 372,
+            "mean_predicted": 0.01425925630621223,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 3,
+            "n": 372,
+            "mean_predicted": 0.014444480792903258,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 4,
+            "n": 372,
+            "mean_predicted": 0.014639456389685019,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 5,
+            "n": 372,
+            "mean_predicted": 0.014887941499570198,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 6,
+            "n": 372,
+            "mean_predicted": 0.015208276739157731,
+            "observed_rate": 0.002688172043010753
+          },
+          {
+            "decile": 7,
+            "n": 372,
+            "mean_predicted": 0.015707521183763697,
+            "observed_rate": 0.016129032258064516
+          },
+          {
+            "decile": 8,
+            "n": 372,
+            "mean_predicted": 0.01650892750914112,
+            "observed_rate": 0.0967741935483871
+          },
+          {
+            "decile": 9,
+            "n": 372,
+            "mean_predicted": 0.018026105174620905,
+            "observed_rate": 0.06182795698924731
+          },
+          {
+            "decile": 10,
+            "n": 372,
+            "mean_predicted": 0.025273453259955215,
+            "observed_rate": 0.03225806451612903
+          }
+        ]
+      },
+      "pooled": {
+        "B1_funding_conditioned": {
+          "mean_delta_brier": -2.9437541303112047e-05,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.0002061295961564854
+        },
+        "B2_funding_shock": {
+          "mean_delta_brier": -0.0007830496241683676,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.00024612572909208703
+        },
+        "bootstrap": {
+          "B1_funding_conditioned": {
+            "mean": -2.950754295191462e-05,
+            "ci_lo": -8.34074637427607e-05,
+            "ci_hi": 2.2697125114120178e-05,
+            "reps": 2000
+          },
+          "B2_funding_shock": {
+            "mean": -0.0007810552979328083,
+            "ci_lo": -0.001978223431481317,
+            "ci_hi": -0.00013675806422432018,
+            "reps": 2000
+          }
+        }
+      },
+      "loio_primary": {
+        "B1_funding_conditioned": {
+          "BTCUSDT": -6.696496979838318e-05,
+          "ETHUSDT": 1.1201440347496927e-07,
+          "SOLUSDT": -0.00018317830913271507,
+          "XRPUSDT": 1.960582319122245e-06,
+          "BNBUSDT": 4.010397939835375e-05
+        },
+        "B2_funding_shock": {
+          "BTCUSDT": -0.00044981855421664593,
+          "ETHUSDT": -0.0002008426479455476,
+          "SOLUSDT": -0.002245170507538412,
+          "XRPUSDT": -0.0001349179268566869,
+          "BNBUSDT": -0.0002740782971804995
+        }
+      }
+    },
+    {
+      "holdout": "2024-08",
+      "train": [
+        "2024-04-01",
+        "2024-07-24"
+      ],
+      "embargo": [
+        "2024-07-25",
+        "2024-07-31"
+      ],
+      "test": [
+        "2024-08-01",
+        "2024-08-31"
+      ],
+      "n_train_rows": 165600,
+      "n_test_rows": 44640,
+      "n_train_pos": 3931,
+      "n_test_pos": 1534,
+      "scenario_metrics": {
+        "L10|long|H24": {
+          "n": 3720,
+          "n_pos": 129,
+          "breach_rate": 0.03467741935483871,
+          "B0_rv_only": {
+            "brier": 0.034902429378726924,
+            "log_loss": 0.1604626709030508,
+            "auc": 0.6827706648188084,
+            "mean_predicted": 0.021588797331898963
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.03441053088825996,
+            "log_loss": 0.15473751475409273,
+            "auc": 0.7321943964130827,
+            "mean_predicted": 0.021150495162282217,
+            "placebo_brier": 0.03373259431492053,
+            "placebo_log_loss": 0.15686262983700414,
+            "delta_brier_vs_B0": 0.0004918984904669632,
+            "delta_logloss_vs_B0": 0.005725156148958077,
+            "delta_brier_placebo_vs_B0": 0.0011698350638063917
+          },
+          "B2_funding_shock": {
+            "brier": 0.03520031190370106,
+            "log_loss": 0.16233100367481884,
+            "auc": 0.5526153886007007,
+            "mean_predicted": 0.024801434351816365,
+            "placebo_brier": 0.03373658619421024,
+            "placebo_log_loss": 0.1571129135613759,
+            "delta_brier_vs_B0": -0.00029788252497413986,
+            "delta_logloss_vs_B0": -0.0018683327717680387,
+            "delta_brier_placebo_vs_B0": 0.0011658431845166864
+          }
+        },
+        "L10|long|H4": {
+          "n": 3720,
+          "n_pos": 10,
+          "breach_rate": 0.002688172043010753,
+          "B0_rv_only": {
+            "brier": 0.0026920585436656396,
+            "log_loss": 0.01922722412965608,
+            "auc": 0.7117789757412399,
+            "mean_predicted": 0.0014968869527498796
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.0026882431466113067,
+            "log_loss": 0.019333492709638547,
+            "auc": 0.7389487870619946,
+            "mean_predicted": 0.0011741464332164623,
+            "placebo_brier": 0.0026852262503922007,
+            "placebo_log_loss": 0.03100489329902942,
+            "delta_brier_vs_B0": 3.8153970543328836e-06,
+            "delta_logloss_vs_B0": -0.00010626857998246794,
+            "delta_brier_placebo_vs_B0": 6.8322932734389726e-06
+          },
+          "B2_funding_shock": {
+            "brier": 0.0027027289486994607,
+            "log_loss": 0.019381166656541247,
+            "auc": 0.6284097035040431,
+            "mean_predicted": 0.0019157066330728085,
+            "placebo_brier": 0.0026837233986662067,
+            "placebo_log_loss": 0.019615661169678156,
+            "delta_brier_vs_B0": -1.0670405033821103e-05,
+            "delta_logloss_vs_B0": -0.0001539425268851681,
+            "delta_brier_placebo_vs_B0": 8.335144999432973e-06
+          }
+        },
+        "L10|short|H24": {
+          "n": 3720,
+          "n_pos": 119,
+          "breach_rate": 0.03198924731182796,
+          "B0_rv_only": {
+            "brier": 0.02942207379263928,
+            "log_loss": 0.12349915978381792,
+            "auc": 0.8776997052639439,
+            "mean_predicted": 0.017893300711798104
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.028977680099874743,
+            "log_loss": 0.12106527462317813,
+            "auc": 0.880294689383668,
+            "mean_predicted": 0.021076361174941653,
+            "placebo_brier": 0.03127697932502492,
+            "placebo_log_loss": 0.15153237156893434,
+            "delta_brier_vs_B0": 0.00044439369276453797,
+            "delta_logloss_vs_B0": 0.00243388516063979,
+            "delta_brier_placebo_vs_B0": -0.0018549055323856395
+          },
+          "B2_funding_shock": {
+            "brier": 0.029066570720148163,
+            "log_loss": 0.120756440182444,
+            "auc": 0.8840704846226188,
+            "mean_predicted": 0.01988951813916617,
+            "placebo_brier": 0.031296790917829484,
+            "placebo_log_loss": 0.15191746917085405,
+            "delta_brier_vs_B0": 0.00035550307249111734,
+            "delta_logloss_vs_B0": 0.0027427196013739275,
+            "delta_brier_placebo_vs_B0": -0.0018747171251902034
+          }
+        },
+        "L10|short|H4": {
+          "n": 3720,
+          "n_pos": 11,
+          "breach_rate": 0.002956989247311828,
+          "B0_rv_only": {
+            "brier": 0.0030250482030625197,
+            "log_loss": 0.023214410691833425,
+            "auc": 0.734797421505429,
+            "mean_predicted": 0.0007272160986830218
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.0029529764481084626,
+            "log_loss": 0.05722544190395008,
+            "auc": 0.3193215519988235,
+            "mean_predicted": 0.00032297921731921296,
+            "placebo_brier": 0.002955374699480089,
+            "placebo_log_loss": 0.03824712814450259,
+            "delta_brier_vs_B0": 7.207175495405711e-05,
+            "delta_logloss_vs_B0": -0.034011031212116655,
+            "delta_brier_placebo_vs_B0": 6.967350358243066e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.0034125762298428948,
+            "log_loss": 0.02362029917955528,
+            "auc": 0.6311919409789456,
+            "mean_predicted": 0.003716559982308391,
+            "placebo_brier": 0.0029570956210357704,
+            "placebo_log_loss": 0.04066141378851094,
+            "delta_brier_vs_B0": -0.00038752802678037506,
+            "delta_logloss_vs_B0": -0.00040588848772185604,
+            "delta_brier_placebo_vs_B0": 6.795258202674931e-05
+          }
+        },
+        "L20|long|H24": {
+          "n": 3720,
+          "n_pos": 641,
+          "breach_rate": 0.17231182795698924,
+          "B0_rv_only": {
+            "brier": 0.14443629946637143,
+            "log_loss": 0.4637505895572507,
+            "auc": 0.5949426414861076,
+            "mean_predicted": 0.14030842613857705
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.14311537483729572,
+            "log_loss": 0.46059390838428516,
+            "auc": 0.6480688717642892,
+            "mean_predicted": 0.12035613700790446,
+            "placebo_brier": 0.14500147111219308,
+            "placebo_log_loss": 0.46973107335553105,
+            "delta_brier_vs_B0": 0.0013209246290757093,
+            "delta_logloss_vs_B0": 0.0031566811729655253,
+            "delta_brier_placebo_vs_B0": -0.0005651716458216494
+          },
+          "B2_funding_shock": {
+            "brier": 0.14578446123791822,
+            "log_loss": 0.46861338626956456,
+            "auc": 0.5272185034851865,
+            "mean_predicted": 0.15476785762710007,
+            "placebo_brier": 0.14517827112114493,
+            "placebo_log_loss": 0.470425076476924,
+            "delta_brier_vs_B0": -0.0013481617715467853,
+            "delta_logloss_vs_B0": -0.004862796712313877,
+            "delta_brier_placebo_vs_B0": -0.0007419716547734934
+          }
+        },
+        "L20|long|H4": {
+          "n": 3720,
+          "n_pos": 73,
+          "breach_rate": 0.019623655913978494,
+          "B0_rv_only": {
+            "brier": 0.01967354933011906,
+            "log_loss": 0.10120937591626364,
+            "auc": 0.6353655284320759,
+            "mean_predicted": 0.012298105049347625
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.019581285840207803,
+            "log_loss": 0.10117615063319359,
+            "auc": 0.6031303642325649,
+            "mean_predicted": 0.01221639218843597,
+            "placebo_brier": 0.019354582859406135,
+            "placebo_log_loss": 0.10172877284186778,
+            "delta_brier_vs_B0": 9.226348991125607e-05,
+            "delta_logloss_vs_B0": 3.322528307005135e-05,
+            "delta_brier_placebo_vs_B0": 0.0003189664707129239
+          },
+          "B2_funding_shock": {
+            "brier": 0.01968535130084612,
+            "log_loss": 0.10193860280656615,
+            "auc": 0.563476830271456,
+            "mean_predicted": 0.01301530438441991,
+            "placebo_brier": 0.019359419801639376,
+            "placebo_log_loss": 0.10198294078273996,
+            "delta_brier_vs_B0": -1.1801970727060018e-05,
+            "delta_logloss_vs_B0": -0.0007292268903025118,
+            "delta_brier_placebo_vs_B0": 0.0003141295284796834
+          }
+        },
+        "L20|short|H24": {
+          "n": 3720,
+          "n_pos": 430,
+          "breach_rate": 0.11559139784946236,
+          "B0_rv_only": {
+            "brier": 0.09257036512086159,
+            "log_loss": 0.3307707856647934,
+            "auc": 0.6741740298296459,
+            "mean_predicted": 0.15726154235669992
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.09362134106242477,
+            "log_loss": 0.33764460364646776,
+            "auc": 0.6961560754930374,
+            "mean_predicted": 0.17056937320824248,
+            "placebo_brier": 0.1022049340497889,
+            "placebo_log_loss": 0.3577012002314907,
+            "delta_brier_vs_B0": -0.0010509759415631842,
+            "delta_logloss_vs_B0": -0.006873817981674357,
+            "delta_brier_placebo_vs_B0": -0.00963456892892732
+          },
+          "B2_funding_shock": {
+            "brier": 0.0934866731573044,
+            "log_loss": 0.33411060888309857,
+            "auc": 0.7079903866544144,
+            "mean_predicted": 0.16796429082561637,
+            "placebo_brier": 0.1022893156730086,
+            "placebo_log_loss": 0.3580088330968903,
+            "delta_brier_vs_B0": -0.0009163080364428117,
+            "delta_logloss_vs_B0": -0.0033398232183051713,
+            "delta_brier_placebo_vs_B0": -0.009718950552147013
+          }
+        },
+        "L20|short|H4": {
+          "n": 3720,
+          "n_pos": 63,
+          "breach_rate": 0.016935483870967744,
+          "B0_rv_only": {
+            "brier": 0.016240133577616268,
+            "log_loss": 0.07088611462226034,
+            "auc": 0.907014596924359,
+            "mean_predicted": 0.014481308484835484
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.016025272171470855,
+            "log_loss": 0.06960384102680651,
+            "auc": 0.9119453450872647,
+            "mean_predicted": 0.016284882088287718,
+            "placebo_brier": 0.016718154526894177,
+            "placebo_log_loss": 0.0893363922956065,
+            "delta_brier_vs_B0": 0.00021486140614541266,
+            "delta_logloss_vs_B0": 0.0012822735954538256,
+            "delta_brier_placebo_vs_B0": -0.0004780209492779089
+          },
+          "B2_funding_shock": {
+            "brier": 0.016028055266707527,
+            "log_loss": 0.06972486569720542,
+            "auc": 0.9066109353229944,
+            "mean_predicted": 0.016782759669275303,
+            "placebo_brier": 0.016715074047387986,
+            "placebo_log_loss": 0.08920131906840488,
+            "delta_brier_vs_B0": 0.00021207831090874069,
+            "delta_logloss_vs_B0": 0.0011612489250549252,
+            "delta_brier_placebo_vs_B0": -0.00047494046977171814
+          }
+        },
+        "L5|long|H24": {
+          "n": 3720,
+          "n_pos": 28,
+          "breach_rate": 0.007526881720430108,
+          "B0_rv_only": {
+            "brier": 0.008104987213649047,
+            "log_loss": 0.10674572391497247,
+            "auc": 0.48672806067172264,
+            "mean_predicted": 0.001811439897809942
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.007782645825254739,
+            "log_loss": 0.1393177923669245,
+            "auc": 0.6372949233864726,
+            "mean_predicted": 0.0008466045023871585,
+            "placebo_brier": 0.007507160219418249,
+            "placebo_log_loss": 0.05087370592511833,
+            "delta_brier_vs_B0": 0.00032234138839430833,
+            "delta_logloss_vs_B0": -0.03257206845195201,
+            "delta_brier_placebo_vs_B0": 0.0005978269942307985
+          },
+          "B2_funding_shock": {
+            "brier": 0.012611616308771815,
+            "log_loss": 0.14570555451229156,
+            "auc": 0.5831817830057267,
+            "mean_predicted": 0.007776447514180065,
+            "placebo_brier": 0.007504157411923265,
+            "placebo_log_loss": 0.04999565654707966,
+            "delta_brier_vs_B0": -0.004506629095122767,
+            "delta_logloss_vs_B0": -0.038959830597319084,
+            "delta_brier_placebo_vs_B0": 0.0006008298017257828
+          }
+        },
+        "L5|long|H4": {
+          "n": 3720,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 2.17147201414454e-18,
+            "log_loss": 1.4735915831765322e-09,
+            "auc": null,
+            "mean_predicted": 1.4735915357196308e-09
+          },
+          "B1_funding_conditioned": {
+            "brier": 2.1714720141422817e-18,
+            "log_loss": 1.4735915831765322e-09,
+            "auc": null,
+            "mean_predicted": 1.4735915357188646e-09,
+            "placebo_brier": 2.1714720141350533e-18,
+            "placebo_log_loss": 1.4735915831765322e-09,
+            "delta_brier_vs_B0": 2.2583454527884728e-30,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 9.486745720062646e-30
+          },
+          "B2_funding_shock": {
+            "brier": 2.171472014157557e-18,
+            "log_loss": 1.4735915831765322e-09,
+            "auc": null,
+            "mean_predicted": 1.4735915357240475e-09,
+            "placebo_brier": 2.1714720141363055e-18,
+            "placebo_log_loss": 1.4735915831765322e-09,
+            "delta_brier_vs_B0": -1.301697530812445e-29,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 8.234506070222066e-30
+          }
+        },
+        "L5|short|H24": {
+          "n": 3720,
+          "n_pos": 27,
+          "breach_rate": 0.007258064516129033,
+          "B0_rv_only": {
+            "brier": 0.007259009974291652,
+            "log_loss": 0.1120127946578935,
+            "auc": 0.1363941791778239,
+            "mean_predicted": 0.0006973769024936265
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.007266424533017138,
+            "log_loss": 0.16929112604441166,
+            "auc": 0.2852142692380981,
+            "mean_predicted": 0.0012322978111795303,
+            "placebo_brier": 0.007241268099021414,
+            "placebo_log_loss": 0.0532227555600777,
+            "delta_brier_vs_B0": -7.414558725485874e-06,
+            "delta_logloss_vs_B0": -0.05727833138651815,
+            "delta_brier_placebo_vs_B0": 1.774187527023817e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.007367715647854633,
+            "log_loss": 0.1376948551582753,
+            "auc": 0.15902959553108484,
+            "mean_predicted": 0.003386508954648253,
+            "placebo_brier": 0.007239581358191174,
+            "placebo_log_loss": 0.050294253687813914,
+            "delta_brier_vs_B0": -0.00010870567356298117,
+            "delta_logloss_vs_B0": -0.025682060500381784,
+            "delta_brier_placebo_vs_B0": 1.942861610047808e-05
+          }
+        },
+        "L5|short|H4": {
+          "n": 3720,
+          "n_pos": 3,
+          "breach_rate": 0.0008064516129032258,
+          "B0_rv_only": {
+            "brier": 0.0008064516105264674,
+            "log_loss": 0.016399649209816406,
+            "auc": 0.26109765940274415,
+            "mean_predicted": 1.4735915357196308e-09
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.0008064516105264674,
+            "log_loss": 0.01639964920981687,
+            "auc": 0.1900726392251816,
+            "mean_predicted": 1.4735915357188646e-09,
+            "placebo_brier": 0.0008064516105264674,
+            "placebo_log_loss": 0.016399649209813953,
+            "delta_brier_vs_B0": 0.0,
+            "delta_logloss_vs_B0": -4.649058915617843e-16,
+            "delta_brier_placebo_vs_B0": 0.0
+          },
+          "B2_funding_shock": {
+            "brier": 0.0008064516105264674,
+            "log_loss": 0.016399649209814,
+            "auc": 0.4749798224374496,
+            "mean_predicted": 1.4735915357240475e-09,
+            "placebo_brier": 0.0008064516105264674,
+            "placebo_log_loss": 0.016399649209812923,
+            "delta_brier_vs_B0": 0.0,
+            "delta_logloss_vs_B0": 2.4077961846558082e-15,
+            "delta_brier_placebo_vs_B0": 0.0
+          }
+        }
+      },
+      "primary": {
+        "scenario": "L10|long|H24",
+        "B1_funding_conditioned": {
+          "delta_brier": 0.0004918984904669632,
+          "bootstrap": {
+            "mean": 0.0005003243649085843,
+            "ci_lo": -0.00012414288981169166,
+            "ci_hi": 0.0013744046295527624,
+            "reps": 2000
+          },
+          "bootstrap_logloss": {
+            "mean": 0.005828013036944484,
+            "ci_lo": -0.0013063482098031962,
+            "ci_hi": 0.018127670165085936,
+            "reps": 2000
+          }
+        },
+        "B2_funding_shock": {
+          "delta_brier": -0.00029788252497413986,
+          "bootstrap": {
+            "mean": -0.0002940503762726048,
+            "ci_lo": -0.0011411288907093194,
+            "ci_hi": 0.0002489853123276644,
+            "reps": 2000
+          },
+          "bootstrap_logloss": {
+            "mean": -0.0018329874182133553,
+            "ci_lo": -0.005570634792390026,
+            "ci_hi": 0.002914119760659315,
+            "reps": 2000
+          }
+        },
+        "best_model": "B1_funding_conditioned",
+        "calibration_deciles": [
+          {
+            "decile": 1,
+            "n": 372,
+            "mean_predicted": 0.006060479268188843,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 2,
+            "n": 372,
+            "mean_predicted": 0.00799185201061088,
+            "observed_rate": 0.002688172043010753
+          },
+          {
+            "decile": 3,
+            "n": 372,
+            "mean_predicted": 0.00962941291926951,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 4,
+            "n": 372,
+            "mean_predicted": 0.011122820860965842,
+            "observed_rate": 0.01881720430107527
+          },
+          {
+            "decile": 5,
+            "n": 372,
+            "mean_predicted": 0.01272693668990929,
+            "observed_rate": 0.021505376344086023
+          },
+          {
+            "decile": 6,
+            "n": 372,
+            "mean_predicted": 0.014484423257400276,
+            "observed_rate": 0.02956989247311828
+          },
+          {
+            "decile": 7,
+            "n": 372,
+            "mean_predicted": 0.017266513183494234,
+            "observed_rate": 0.04838709677419355
+          },
+          {
+            "decile": 8,
+            "n": 372,
+            "mean_predicted": 0.020430826614415205,
+            "observed_rate": 0.07795698924731183
+          },
+          {
+            "decile": 9,
+            "n": 372,
+            "mean_predicted": 0.028155508032330176,
+            "observed_rate": 0.11021505376344086
+          },
+          {
+            "decile": 10,
+            "n": 372,
+            "mean_predicted": 0.0836361787862379,
+            "observed_rate": 0.03763440860215054
+          }
+        ]
+      },
+      "pooled": {
+        "B1_funding_conditioned": {
+          "mean_delta_brier": 0.0001586816457064923,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.000862649237961358
+        },
+        "B2_funding_shock": {
+          "mean_delta_brier": -0.0005850088433992402,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.0008861717453361346
+        },
+        "bootstrap": {
+          "B1_funding_conditioned": {
+            "mean": 0.00016015799085458446,
+            "ci_lo": -0.00019249185721635035,
+            "ci_hi": 0.0006398702207253676,
+            "reps": 2000
+          },
+          "B2_funding_shock": {
+            "mean": -0.0005837510504279653,
+            "ci_lo": -0.001594729844959268,
+            "ci_hi": 5.704894032193007e-06,
+            "reps": 2000
+          }
+        }
+      },
+      "loio_primary": {
+        "B1_funding_conditioned": {
+          "BTCUSDT": 0.0006449037808465494,
+          "ETHUSDT": 0.0006138245311190921,
+          "SOLUSDT": -0.000669438673006631,
+          "XRPUSDT": 0.0014132854859477892,
+          "BNBUSDT": 0.0007391953668958035
+        },
+        "B2_funding_shock": {
+          "BTCUSDT": -0.00062264413154315,
+          "ETHUSDT": 2.9208010284553776e-06,
+          "SOLUSDT": -0.0021761214958092717,
+          "XRPUSDT": -5.0125714857719716e-05,
+          "BNBUSDT": 2.385578203630001e-05
+        }
+      }
+    },
+    {
+      "holdout": "2024-09",
+      "train": [
+        "2024-04-01",
+        "2024-08-24"
+      ],
+      "embargo": [
+        "2024-08-25",
+        "2024-08-31"
+      ],
+      "test": [
+        "2024-09-01",
+        "2024-09-30"
+      ],
+      "n_train_rows": 210240,
+      "n_test_rows": 41760,
+      "n_train_pos": 5527,
+      "n_test_pos": 574,
+      "scenario_metrics": {
+        "L10|long|H24": {
+          "n": 3480,
+          "n_pos": 2,
+          "breach_rate": 0.0005747126436781609,
+          "B0_rv_only": {
+            "brier": 0.0009915542413745553,
+            "log_loss": 0.023331138962352147,
+            "auc": 0.35020126509488214,
+            "mean_predicted": 0.02087867462565539
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.0008215038521972094,
+            "log_loss": 0.01644455934763348,
+            "auc": 0.4482461184588844,
+            "mean_predicted": 0.013699993887352286,
+            "placebo_brier": 0.0010663579521220645,
+            "placebo_log_loss": 0.024623170552011367,
+            "delta_brier_vs_B0": 0.00017005038917734588,
+            "delta_logloss_vs_B0": 0.006886579614718669,
+            "delta_brier_placebo_vs_B0": -7.480371074750926e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.0010429407401850914,
+            "log_loss": 0.024165559578021616,
+            "auc": 0.5760494537090282,
+            "mean_predicted": 0.02171285613232203,
+            "placebo_brier": 0.00106666989241113,
+            "placebo_log_loss": 0.024641057105035138,
+            "delta_brier_vs_B0": -5.1386498810536115e-05,
+            "delta_logloss_vs_B0": -0.0008344206156694692,
+            "delta_brier_placebo_vs_B0": -7.511565103657464e-05
+          }
+        },
+        "L10|long|H4": {
+          "n": 3480,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 2.4244968773575985e-06,
+            "log_loss": 0.001543680488084475,
+            "auc": null,
+            "mean_predicted": 0.0015424669209482755
+          },
+          "B1_funding_conditioned": {
+            "brier": 1.2791426396119442e-06,
+            "log_loss": 0.0010099922966936188,
+            "auc": null,
+            "mean_predicted": 0.001009351861479175,
+            "placebo_brier": 3.443030601610905e-06,
+            "placebo_log_loss": 0.0016437072920575213,
+            "delta_brier_vs_B0": 1.1453542377456543e-06,
+            "delta_logloss_vs_B0": 0.0005336881913908561,
+            "delta_brier_placebo_vs_B0": -1.0185337242533065e-06
+          },
+          "B2_funding_shock": {
+            "brier": 2.978033895475907e-06,
+            "log_loss": 0.001631991801049402,
+            "auc": null,
+            "mean_predicted": 0.0016305006402033062,
+            "placebo_brier": 3.165120073415517e-06,
+            "placebo_log_loss": 0.0016542907537431548,
+            "delta_brier_vs_B0": -5.535370181183086e-07,
+            "delta_logloss_vs_B0": -8.831131296492697e-05,
+            "delta_brier_placebo_vs_B0": -7.406231960579184e-07
+          }
+        },
+        "L10|short|H24": {
+          "n": 3480,
+          "n_pos": 9,
+          "breach_rate": 0.002586206896551724,
+          "B0_rv_only": {
+            "brier": 0.002659229636908329,
+            "log_loss": 0.022769185815998835,
+            "auc": 0.5167258875124043,
+            "mean_predicted": 0.010959485886202967
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.0027436959200079765,
+            "log_loss": 0.025241842668050303,
+            "auc": 0.656230993309645,
+            "mean_predicted": 0.014468529440614932,
+            "placebo_brier": 0.002816702459498208,
+            "placebo_log_loss": 0.02725944304295121,
+            "delta_brier_vs_B0": -8.446628309964751e-05,
+            "delta_logloss_vs_B0": -0.0024726568520514677,
+            "delta_brier_placebo_vs_B0": -0.0001574728225898791
+          },
+          "B2_funding_shock": {
+            "brier": 0.0026977398369579034,
+            "log_loss": 0.023371686029049283,
+            "auc": 0.6990300585806204,
+            "mean_predicted": 0.012255564118053786,
+            "placebo_brier": 0.0028136126547938464,
+            "placebo_log_loss": 0.02742663047994929,
+            "delta_brier_vs_B0": -3.851020004957441e-05,
+            "delta_logloss_vs_B0": -0.0006025002130504477,
+            "delta_brier_placebo_vs_B0": -0.0001543830178855174
+          }
+        },
+        "L10|short|H4": {
+          "n": 3480,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 3.3044263291373256e-07,
+            "log_loss": 0.0005376665581243638,
+            "auc": null,
+            "mean_predicted": 0.0005375011321611932
+          },
+          "B1_funding_conditioned": {
+            "brier": 8.662662171153622e-07,
+            "log_loss": 0.0006178126360901802,
+            "auc": null,
+            "mean_predicted": 0.0006173769165439531,
+            "placebo_brier": 5.3455677468463593e-05,
+            "placebo_log_loss": 0.0011325601021803485,
+            "delta_brier_vs_B0": -5.358235842016296e-07,
+            "delta_logloss_vs_B0": -8.014607796581644e-05,
+            "delta_brier_placebo_vs_B0": -5.312523483554986e-05
+          },
+          "B2_funding_shock": {
+            "brier": 1.3427047304045839e-06,
+            "log_loss": 0.0007652059471208876,
+            "auc": null,
+            "mean_predicted": 0.0007645325692632023,
+            "placebo_brier": 9.11752155236662e-05,
+            "placebo_log_loss": 0.001223470803150401,
+            "delta_brier_vs_B0": -1.0122620974908514e-06,
+            "delta_logloss_vs_B0": -0.0002275393889965238,
+            "delta_brier_placebo_vs_B0": -9.084477289075246e-05
+          }
+        },
+        "L20|long|H24": {
+          "n": 3480,
+          "n_pos": 228,
+          "breach_rate": 0.06551724137931035,
+          "B0_rv_only": {
+            "brier": 0.06360107772515051,
+            "log_loss": 0.25539380523340305,
+            "auc": 0.5750617703545456,
+            "mean_predicted": 0.11589097359898577
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.06163329124833022,
+            "log_loss": 0.244055799573363,
+            "auc": 0.5178378757471785,
+            "mean_predicted": 0.0813340674266913,
+            "placebo_brier": 0.0656323418660644,
+            "placebo_log_loss": 0.26416891485544136,
+            "delta_brier_vs_B0": 0.0019677864768202977,
+            "delta_logloss_vs_B0": 0.011338005660040035,
+            "delta_brier_placebo_vs_B0": -0.0020312641409138826
+          },
+          "B2_funding_shock": {
+            "brier": 0.06372102338712603,
+            "log_loss": 0.255904778529856,
+            "auc": 0.63422104615783,
+            "mean_predicted": 0.11911947874654824,
+            "placebo_brier": 0.06558371455767958,
+            "placebo_log_loss": 0.26414875027199153,
+            "delta_brier_vs_B0": -0.00011994566197551237,
+            "delta_logloss_vs_B0": -0.0005109732964529434,
+            "delta_brier_placebo_vs_B0": -0.0019826368325290694
+          }
+        },
+        "L20|long|H4": {
+          "n": 3480,
+          "n_pos": 7,
+          "breach_rate": 0.002011494252873563,
+          "B0_rv_only": {
+            "brier": 0.0020445516644057356,
+            "log_loss": 0.01777331214510905,
+            "auc": 0.8753239274402533,
+            "mean_predicted": 0.008364704922155247
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.002032448654804327,
+            "log_loss": 0.016633244378209726,
+            "auc": 0.6478960141499732,
+            "mean_predicted": 0.006523453573152619,
+            "placebo_brier": 0.002090204967835635,
+            "placebo_log_loss": 0.019512172338138144,
+            "delta_brier_vs_B0": 1.2103009601408497e-05,
+            "delta_logloss_vs_B0": 0.0011400677668993234,
+            "delta_brier_placebo_vs_B0": -4.565330342989936e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.0020453111502035074,
+            "log_loss": 0.017799000248690834,
+            "auc": 0.8699765538233721,
+            "mean_predicted": 0.008463418198234398,
+            "placebo_brier": 0.0020906729926106,
+            "placebo_log_loss": 0.019631684148183996,
+            "delta_brier_vs_B0": -7.594857977717175e-07,
+            "delta_logloss_vs_B0": -2.5688103581784916e-05,
+            "delta_brier_placebo_vs_B0": -4.6121328204864424e-05
+          }
+        },
+        "L20|short|H24": {
+          "n": 3480,
+          "n_pos": 315,
+          "breach_rate": 0.09051724137931035,
+          "B0_rv_only": {
+            "brier": 0.08225627033834265,
+            "log_loss": 0.3027140100914896,
+            "auc": 0.5794929662228241,
+            "mean_predicted": 0.09429923415193453
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.08279033512402166,
+            "log_loss": 0.30493719967683447,
+            "auc": 0.5651214925148574,
+            "mean_predicted": 0.10974446367998106,
+            "placebo_brier": 0.08282819824813975,
+            "placebo_log_loss": 0.30547981503475424,
+            "delta_brier_vs_B0": -0.0005340647856790087,
+            "delta_logloss_vs_B0": -0.0022231895853448425,
+            "delta_brier_placebo_vs_B0": -0.0005719279097970986
+          },
+          "B2_funding_shock": {
+            "brier": 0.08262030621971828,
+            "log_loss": 0.30457888743736006,
+            "auc": 0.5365139547130069,
+            "mean_predicted": 0.09854813807380619,
+            "placebo_brier": 0.08306334348424514,
+            "placebo_log_loss": 0.3068382771020118,
+            "delta_brier_vs_B0": -0.0003640358813756239,
+            "delta_logloss_vs_B0": -0.0018648773458704304,
+            "delta_brier_placebo_vs_B0": -0.0008070731459024899
+          }
+        },
+        "L20|short|H4": {
+          "n": 3480,
+          "n_pos": 13,
+          "breach_rate": 0.003735632183908046,
+          "B0_rv_only": {
+            "brier": 0.0037306968911338043,
+            "log_loss": 0.025117984900186408,
+            "auc": 0.47922167247232145,
+            "mean_predicted": 0.005779910143293911
+          },
+          "B1_funding_conditioned": {
+            "brier": 0.0037473732761361817,
+            "log_loss": 0.026164901327798036,
+            "auc": 0.43915156087062635,
+            "mean_predicted": 0.0069117428194461275,
+            "placebo_brier": 0.003758055662327264,
+            "placebo_log_loss": 0.026658989044629388,
+            "delta_brier_vs_B0": -1.6676385002377392e-05,
+            "delta_logloss_vs_B0": -0.0010469164276116286,
+            "delta_brier_placebo_vs_B0": -2.7358771193459683e-05
+          },
+          "B2_funding_shock": {
+            "brier": 0.003739168555793363,
+            "log_loss": 0.025581675158772875,
+            "auc": 0.44798207272969315,
+            "mean_predicted": 0.006350048417156236,
+            "placebo_brier": 0.003752108003979905,
+            "placebo_log_loss": 0.026683490582255442,
+            "delta_brier_vs_B0": -8.47166465955864e-06,
+            "delta_logloss_vs_B0": -0.00046369025858646745,
+            "delta_brier_placebo_vs_B0": -2.141111284610078e-05
+          }
+        },
+        "L5|long|H24": {
+          "n": 3480,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 6.996500439530319e-06,
+            "log_loss": 0.0025432368521512354,
+            "auc": null,
+            "mean_predicted": 0.0025397315095905156
+          },
+          "B1_funding_conditioned": {
+            "brier": 6.112178768458459e-06,
+            "log_loss": 0.0017202595128796474,
+            "auc": null,
+            "mean_predicted": 0.00171719167560205,
+            "placebo_brier": 9.733609796061861e-06,
+            "placebo_log_loss": 0.00268381886305376,
+            "delta_brier_vs_B0": 8.843216710718603e-07,
+            "delta_logloss_vs_B0": 0.000822977339271588,
+            "delta_brier_placebo_vs_B0": -2.737109356531542e-06
+          },
+          "B2_funding_shock": {
+            "brier": 5.692807629214361e-05,
+            "log_loss": 0.005263264223821804,
+            "auc": null,
+            "mean_predicted": 0.0052345346122769625,
+            "placebo_brier": 1.0114390932222786e-05,
+            "placebo_log_loss": 0.002671371795721654,
+            "delta_brier_vs_B0": -4.9931575852613295e-05,
+            "delta_logloss_vs_B0": -0.0027200273716705687,
+            "delta_brier_placebo_vs_B0": -3.1178904926924673e-06
+          }
+        },
+        "L5|long|H4": {
+          "n": 3480,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 1.3775564449581224e-18,
+            "log_loss": 1.1736934764309716e-09,
+            "auc": null,
+            "mean_predicted": 1.1736935055448346e-09
+          },
+          "B1_funding_conditioned": {
+            "brier": 1.3775564449272264e-18,
+            "log_loss": 1.1736934764309716e-09,
+            "auc": null,
+            "mean_predicted": 1.1736935055316727e-09,
+            "placebo_brier": 1.377556444936208e-18,
+            "placebo_log_loss": 1.1736934764309716e-09,
+            "delta_brier_vs_B0": 3.0895960760854476e-29,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 2.1914386465204602e-29
+          },
+          "B2_funding_shock": {
+            "brier": 1.3775564449348467e-18,
+            "log_loss": 1.1736934764309716e-09,
+            "auc": null,
+            "mean_predicted": 1.1736935055349188e-09,
+            "placebo_brier": 1.3775564449398651e-18,
+            "placebo_log_loss": 1.1736934764309716e-09,
+            "delta_brier_vs_B0": 2.32756337498975e-29,
+            "delta_logloss_vs_B0": 0.0,
+            "delta_brier_placebo_vs_B0": 1.825723809380768e-29
+          }
+        },
+        "L5|short|H24": {
+          "n": 3480,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 3.2186602862825748e-06,
+            "log_loss": 0.0017819303442802867,
+            "auc": null,
+            "mean_predicted": 0.001780319037813081
+          },
+          "B1_funding_conditioned": {
+            "brier": 1.1123517448974756e-05,
+            "log_loss": 0.002864315802094335,
+            "auc": null,
+            "mean_predicted": 0.002858736567094137,
+            "placebo_brier": 1.0741648463325762e-05,
+            "placebo_log_loss": 0.002544618182785704,
+            "delta_brier_vs_B0": -7.904857162692182e-06,
+            "delta_logloss_vs_B0": -0.0010823854578140483,
+            "delta_brier_placebo_vs_B0": -7.522988177043187e-06
+          },
+          "B2_funding_shock": {
+            "brier": 1.5712924641722937e-05,
+            "log_loss": 0.0030432261445002937,
+            "auc": null,
+            "mean_predicted": 0.003035337647352201,
+            "placebo_brier": 8.025984226043665e-06,
+            "placebo_log_loss": 0.00250434892798805,
+            "delta_brier_vs_B0": -1.2494264355440363e-05,
+            "delta_logloss_vs_B0": -0.001261295800220007,
+            "delta_brier_placebo_vs_B0": -4.80732393976109e-06
+          }
+        },
+        "L5|short|H4": {
+          "n": 3480,
+          "n_pos": 0,
+          "breach_rate": 0.0,
+          "B0_rv_only": {
+            "brier": 7.64810193348759e-09,
+            "log_loss": 8.248849923676136e-05,
+            "auc": null,
+            "mean_predicted": 8.24846749284568e-05
+          },
+          "B1_funding_conditioned": {
+            "brier": 9.951633049830579e-08,
+            "log_loss": 0.00014854869303514856,
+            "auc": null,
+            "mean_predicted": 0.0001484989059601523,
+            "placebo_brier": 4.856337513986123e-08,
+            "placebo_log_loss": 0.00016873730578785464,
+            "delta_brier_vs_B0": -9.18682285648182e-08,
+            "delta_logloss_vs_B0": -6.60601937983872e-05,
+            "delta_brier_placebo_vs_B0": -4.0915273206373645e-08
+          },
+          "B2_funding_shock": {
+            "brier": 7.471150958312261e-08,
+            "log_loss": 0.00011231836912037137,
+            "auc": null,
+            "mean_predicted": 0.00011228097985887832,
+            "placebo_brier": 7.45731735816598e-08,
+            "placebo_log_loss": 0.00016858956776652452,
+            "delta_brier_vs_B0": -6.706340764963502e-08,
+            "delta_logloss_vs_B0": -2.982986988361001e-05,
+            "delta_brier_placebo_vs_B0": -6.692507164817221e-08
+          }
+        }
+      },
+      "primary": {
+        "scenario": "L10|long|H24",
+        "B1_funding_conditioned": {
+          "delta_brier": 0.00017005038917734588,
+          "bootstrap": {
+            "mean": 0.00016943500485156138,
+            "ci_lo": 0.0001102764483828145,
+            "ci_hi": 0.00021529876518996697,
+            "reps": 2000
+          },
+          "bootstrap_logloss": {
+            "mean": 0.006864229873944178,
+            "ci_lo": 0.005705932568447937,
+            "ci_hi": 0.007838669861322287,
+            "reps": 2000
+          }
+        },
+        "B2_funding_shock": {
+          "delta_brier": -5.1386498810536115e-05,
+          "bootstrap": {
+            "mean": -5.1784901920737176e-05,
+            "ci_lo": -9.119551636430502e-05,
+            "ci_hi": -1.692807011744015e-05,
+            "reps": 2000
+          },
+          "bootstrap_logloss": {
+            "mean": -0.0008436766346556209,
+            "ci_lo": -0.0016243065882994973,
+            "ci_hi": -0.00012185132780926749,
+            "reps": 2000
+          }
+        },
+        "best_model": "B1_funding_conditioned",
+        "calibration_deciles": [
+          {
+            "decile": 1,
+            "n": 348,
+            "mean_predicted": 0.00626342176007291,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 2,
+            "n": 348,
+            "mean_predicted": 0.007594608939562496,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 3,
+            "n": 348,
+            "mean_predicted": 0.00865893901799108,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 4,
+            "n": 348,
+            "mean_predicted": 0.00953742283341903,
+            "observed_rate": 0.0028735632183908046
+          },
+          {
+            "decile": 5,
+            "n": 348,
+            "mean_predicted": 0.010510352099253918,
+            "observed_rate": 0.0028735632183908046
+          },
+          {
+            "decile": 6,
+            "n": 348,
+            "mean_predicted": 0.011631565895589637,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 7,
+            "n": 348,
+            "mean_predicted": 0.013223445121922844,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 8,
+            "n": 348,
+            "mean_predicted": 0.01637074696214993,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 9,
+            "n": 348,
+            "mean_predicted": 0.02269934273078583,
+            "observed_rate": 0.0
+          },
+          {
+            "decile": 10,
+            "n": 348,
+            "mean_predicted": 0.030510093512775185,
+            "observed_rate": 0.0
+          }
+        ]
+      },
+      "pooled": {
+        "B1_funding_conditioned": {
+          "mean_delta_brier": 0.00012568579572928143,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.00024774378666985944
+        },
+        "B2_funding_shock": {
+          "mean_delta_brier": -5.393067461665747e-05,
+          "n_scenarios": 12,
+          "mean_delta_brier_placebo": -0.00026552655199962735
+        },
+        "bootstrap": {
+          "B1_funding_conditioned": {
+            "mean": 0.00012553881130044663,
+            "ci_lo": -0.00027495180251501896,
+            "ci_hi": 0.0004937416225796024,
+            "reps": 2000
+          },
+          "B2_funding_shock": {
+            "mean": -5.4427614354846976e-05,
+            "ci_lo": -0.0001162922498155345,
+            "ci_hi": 1.232190627148009e-05,
+            "reps": 2000
+          }
+        }
+      },
+      "loio_primary": {
+        "B1_funding_conditioned": {
+          "BTCUSDT": 0.00020952471418100947,
+          "ETHUSDT": 0.00015914143261301872,
+          "SOLUSDT": 5.96885151622937e-05,
+          "XRPUSDT": 0.00011336613069480768,
+          "BNBUSDT": 0.00035964335017059867
+        },
+        "B2_funding_shock": {
+          "BTCUSDT": -0.00016084648963268257,
+          "ETHUSDT": -4.709150526866683e-05,
+          "SOLUSDT": -0.0001808461332384239,
+          "XRPUSDT": 1.8870571200398653e-05,
+          "BNBUSDT": -8.292507026225497e-06
+        }
+      }
+    }
+  ],
+  "floor_evaluation": {
+    "beats_B0_by_holdout_primary": {
+      "B1_funding_conditioned": 1,
+      "B2_funding_shock": 0
+    },
+    "real_mean_delta_brier_primary": {
+      "B1_funding_conditioned": 0.00020897976504480838,
+      "B2_funding_shock": -0.00019789230320583045
+    },
+    "placebo_mean_delta_brier_pooled": {
+      "B1_funding_conditioned": -0.00043884087359590093,
+      "B2_funding_shock": -0.00046594134214261626
+    },
+    "n_holdouts": 3,
+    "floor_met": false,
+    "rule": "B1 or B2 beats B0 (delta_brier>0, CI95 lower>0) in >=2/3 holdouts on L10|long|H24 AND |real mean| > |placebo mean|"
+  },
+  "verdict": "HONEST_NEGATIVE_OR_INCONCLUSIVE",
+  "honest_status": "EXPLORATORY/PILOT. Modeled boundary breaches only; not observed liquidations. Three chronological holdouts with 7-day purge/embargo; stdlib per-scenario logistic; UTC-day block bootstrap; funding-permutation placebo. No confirmatory claim."
+}

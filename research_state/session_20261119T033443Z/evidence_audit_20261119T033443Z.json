@@ -1,0 +1,53 @@
+{
+  "generated_utc": "2026-11-19T03:37:00Z",
+  "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+  "session_id": "session_20261119T033443Z",
+  "artifact": "evidence_audit_20261119T033443Z",
+  "section": "RESEARCH_PROMPT.md section 19 (per-session definition of done)",
+  "honest_status": "COMPLETE. Track A 12-month extension audit ADMISSIBLE over 2025-11..2026-10 (13 coins, 113,880 coin-hours, 1.0 alignment yield, max gap 0.0). Descriptive layer produced from the frozen panel. Carry-forward packages copied verbatim. Confirmatory design registered but NOT evaluated.",
+  "evidence_added": [
+    "fclr_tracka_extension01_descriptive_20261119T033443Z.{py,json,md} (113,880 coin-hours; 21,557 hours with >=1 observed event; within-coin funding and trailing-24h RV deciles with Wilson 95% CIs)",
+    "evidence_audit_20261119T033443Z.{json,md}",
+    "trigger_check_20261119T033443Z.json",
+    "verbatim carry-forward of the RISK-07, RISK-06, ROBUST-05, and Track A exploratory packages from session_20261118T201919Z"
+  ],
+  "descriptive_layer": {
+    "artifact": "fclr_tracka_extension01_descriptive_20261119T033443Z.json",
+    "descriptive_only": true,
+    "predictive_claim": false,
+    "panel_rows": 113880,
+    "coins": 13,
+    "total_liq_events": 1128446,
+    "total_liq_notional_usd": 20970455300.37,
+    "hours_with_ge1_event": 21557,
+    "share_hours_with_ge1_event": 0.18929574991218825,
+    "funding_decile_incidence_range": [0.16359406252195294, 0.22901369863013698],
+    "rv_decile_incidence_range": [0.0632802320014082, 0.36012071459952425],
+    "statement": "Descriptive associations on observed labels only. No model was fit and no predictive, causal, or lead-lag claim is made."
+  },
+  "verification": {
+    "heavywork_gate": "PASS",
+    "tracka_scope_registry_drift": "PASS 196/196",
+    "ironflow_bulk_verify": "48/48 OK",
+    "tracka_hardening_143_125": "PASS",
+    "tracka_unittest_discovery": "PASS"
+  },
+  "prohibitions_respected": {
+    "no_sealed_binance_outcomes": true,
+    "no_confirmatory_evaluation_in_campaign": true,
+    "no_risk_05_06_07_rerun": true,
+    "no_robust_05_rerun": true,
+    "no_track_c_qlike_rerun": true,
+    "no_workflow_writes": true,
+    "no_heavyweight_stats_packages": true,
+    "pandas_pyarrow_only_parquet_reads": true,
+    "no_frozen_session_edits": true,
+    "no_zero_byte_artifacts": true
+  },
+  "network_used": false,
+  "cache_is_local": true,
+  "confirmatory_evaluation_run": false,
+  "statement": "No confirmatory evaluation was run in this campaign. The confirmatory design is registered only and was frozen before outcomes. No modeled/proxy liquidation column was read or written. Absence from the feed is not evidence of no liquidation.",
+  "verdict": "COMPLETE",
+  "next_action": "Execute FCLR-LIQ-TRACKA-CONFIRMATORY-01-<UTC>: power/MDE audit, then the registered three-block confirmatory forecast evaluation with placebo null and Holm correction, or an honest UNDERPOWERED verdict."
+}

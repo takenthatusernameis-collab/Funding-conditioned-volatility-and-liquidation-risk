@@ -246,6 +246,29 @@ RISK_07_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-LIQ-TRACKA-CONFIRMATORY-01 hardening: the 12-month Track A extension is
+# ADMISSIBLE and its confirmatory three-block design is registered. The next
+# focus campaign must actually execute the heavy confirmatory test, not another
+# trigger check or descriptive-only replay. A post-start session must emit the
+# power/MDE audit triad, the independent stdlib recompute, the confirmatory
+# evaluation triad, and a trigger check, with no zero-byte placeholders. If the
+# power audit returns UNDERPOWERED, the evaluation artifacts must still be
+# written with status UNDERPOWERED and the frozen decision recorded.
+TRACKA_CONFIRMATORY_CAMPAIGN_RE = re.compile(
+    r"FCLR-LIQ-TRACKA-CONFIRMATORY-(\d+)-(\d{8}T\d{6}Z)"
+)
+TRACKA_CONFIRMATORY_REQUIRED = (
+    ("fclr_tracka_confirmatory01_power_", ".py"),
+    ("fclr_tracka_confirmatory01_power_", ".json"),
+    ("fclr_tracka_confirmatory01_power_", ".md"),
+    ("fclr_tracka_confirmatory01_recompute_", ".py"),
+    ("fclr_tracka_confirmatory01_recompute_", ".json"),
+    ("fclr_tracka_confirmatory01_evaluation_", ".py"),
+    ("fclr_tracka_confirmatory01_evaluation_", ".json"),
+    ("fclr_tracka_confirmatory01_evaluation_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -886,6 +909,70 @@ def _risk_07_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _tracka_confirmatory_state(handoff_text: str, latest_sid: str | None,
+                               latest_files: list[str],
+                               latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-TRACKA-CONFIRMATORY-01 non-avoidance state.
+
+    After the confirmatory campaign starts, a post-start session must emit the
+    power/MDE audit triad, the independent stdlib recompute, the confirmatory
+    evaluation triad, and a trigger check. Descriptive-only, trigger-only, or
+    arbitrary recompute_* sessions fail closed. Sessions predating the campaign
+    start are grandfathered so the handoff refresh that announces the campaign
+    remains green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = TRACKA_CONFIRMATORY_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIQ-TRACKA-CONFIRMATORY-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in TRACKA_CONFIRMATORY_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, TRACKA_CONFIRMATORY_REQUIRED):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -937,6 +1024,7 @@ def check(repo: Path = REPO) -> dict:
         "robust_05": None,
         "risk_06": None,
         "risk_07": None,
+        "tracka_confirmatory": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -1190,6 +1278,30 @@ def check(repo: Path = REPO) -> dict:
                 if not r07["has_trigger_check"]:
                     payload["failures"].append(
                         f"RISK_07_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-TRACKA-CONFIRMATORY-01: after the confirmatory campaign
+            # starts, require the power/MDE audit, independent stdlib recompute,
+            # confirmatory evaluation triad, and trigger check. A descriptive-only
+            # or trigger-only session fails closed.
+            tc = _tracka_confirmatory_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["tracka_confirmatory"] = tc
+            if tc["required"]:
+                if tc["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "TRACKA_CONFIRMATORY_ARTIFACTS_MISSING:"
+                        + ",".join(tc["missing_required_artifacts"])
+                    )
+                if tc["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "TRACKA_CONFIRMATORY_ARTIFACTS_EMPTY:"
+                        + ",".join(tc["empty_required_artifacts"])
+                    )
+                if not tc["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"TRACKA_CONFIRMATORY_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None

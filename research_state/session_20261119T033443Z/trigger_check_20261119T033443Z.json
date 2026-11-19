@@ -1,0 +1,36 @@
+{
+  "generated_utc": "2026-11-19T03:37:00Z",
+  "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+  "session_id": "session_20261119T033443Z",
+  "artifact": "trigger_check_20261119T033443Z",
+  "extension_verdict": "ADMISSIBLE",
+  "extension_admissibility": "research_state/session_20261119T022824Z/fclr_tracka_extension01_admissibility_session_20261119T022824Z.json",
+  "triggers": {
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": {
+      "status": "FIRED",
+      "scope": "exploratory artifact ADMISSIBLE (2025-11..2026-04) and extension ADMISSIBLE (2025-11..2026-10)",
+      "confirmed_on_extension": true,
+      "confirmed_on_extension_pointer": "session_20261119T022824Z/fclr_tracka_extension01_admissibility_session_20261119T022824Z.json (status=ADMISSIBLE, 13 instruments, 12 complete months, g1..g7 PASS)",
+      "observed_labels": true,
+      "instruments_ge_5": true,
+      "complete_months_ge_3": true
+    },
+    "HL_LABEL_EXTENSION": {
+      "status": "OPEN",
+      "condition": "labels after 2026-10-31 with >= 100-day depth",
+      "note": "extension window ends 2026-10-31; post-2026-10-31 labels not yet audited"
+    },
+    "GATE4_BRANCH_1": {
+      "status": "OPEN",
+      "note": "research_state/fclr016_v5_terms_evidence_RESOLVED_*.json (status=RESOLVED_VERIFIED, fabricated=false) not yet produced"
+    },
+    "EXPANSION_ROBUSTNESS_REDO": {
+      "status": "OPEN",
+      "note": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation summary (LOIO>=6/8 AND placebo>95th null) not yet produced"
+    }
+  },
+  "recheck_required": [
+    "re-evaluate NEW_OBSERVED_LIQUIDATION_SOURCE with confirmed_on_extension after each extension milestone",
+    "do not re-open HL_LABEL_EXTENSION until post-2026-10-31 observed labels exist with >=100-day depth"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "fclr_risk07_prereg",
+  "campaign": "FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z",
+  "session": "session_20261118T191945Z",
+  "generated_utc": "20261118T191945Z",
+  "frozen_before_outcome_inspection": true,
+  "outcome_data_inspected_before_freeze": false,
+  "network_used": false,
+  "parquet_used": false,
+  "numpy_used": false,
+  "label": "EXPLORATORY_PILOT",
+  "track": "B_liquidation_boundary_breach_risk_recalibration",
+  "parent_campaign": "FCLR-LIQ-RISK-CALIBRATION-06-20261118T182600Z",
+  "research_question": "Is the RV-only baseline (B0_rv_only) reliably miscalibrated out-of-sample on modeled liquidation-boundary breach risk, and can a train-only recalibration layer materially improve Brier score and ECE across multiple chronological holdouts and transfer across scenarios beyond a label-permutation placebo?",
+  "outcome": {
+    "type": "synthetic_modeled_boundary_breach",
+    "observed_liquidation_labels": false,
+    "explicit_caveat": "Never call these observed liquidations; they are modeled boundary crossings on cached 1h mark prices.",
+    "label_matrix_reused": "fclr_risk06_labels_20261118T182813Z.json (262080 rows; rebuilt features only, labels not recomputed)"
+  },
+  "instruments": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT", "BNBUSDT"],
+  "label_months": ["2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09"],
+  "feature_history_months": ["2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09"],
+  "sealed_months_touched": [],
+  "sealed_month_policy": "2024-10 onward are sealed and are not read; only 2024-04..2024-09 labels and 2024-03..2024-09 marks/funding are read.",
+  "holds": [
+    {"holdout": "2024-07", "train": ["2024-04-01", "2024-06-23"], "embargo": ["2024-06-24", "2024-06-30"], "test": ["2024-07-01", "2024-07-31"]},
+    {"holdout": "2024-08", "train": ["2024-04-01", "2024-07-24"], "embargo": ["2024-07-25", "2024-07-31"], "test": ["2024-08-01", "2024-08-31"]},
+    {"holdout": "2024-09", "train": ["2024-04-01", "2024-08-24"], "embargo": ["2024-08-25", "2024-08-31"], "test": ["2024-09-01", "2024-09-30"]}
+  ],
+  "base_score": {
+    "name": "B0_rv_only",
+    "family": "stdlib IRLS logistic regression with intercept",
+    "features": ["lrv1", "lrv24", "lrv168"],
+    "standardization": "train-only z-score (mean/sd from rows used to fit that fold/model only)",
+    "ridge_lambda": 1e-06,
+    "max_iters": 100,
+    "tol": 1e-08,
+    "seed": 12345,
+    "pooling": "pooled across the 5 instruments within the train window, one model per scenario",
+    "must_reproduce": "RISK-06 test Brier for the same holdout/scenario (C0_identity reference)"
+  },
+  "calibrators": [
+    {"id": "C0_identity", "definition": "uncalibrated base score s", "free_params": 0},
+    {"id": "C1_platt", "definition": "sigmoid(a*logit(s)+b), fitted by IRLS with ridge 1e-6", "free_params": 2},
+    {"id": "C2_isotonic", "definition": "PAVA isotonic regression on out-of-fold (s,y) with tie pooling, monotone step map, linear interpolation between knots, clipped to [0,1]", "free_params": "n_knots"},
+    {"id": "C3_prior_offset", "definition": "sigmoid(logit(s) + logit(p_train) - logit(mean_train_score))", "free_params": 1}
+  ],
+  "leakage_control": {
+    "oof_scheme": "5 contiguous UTC-day-block folds inside the train window; each fold model trained on the other four folds; no shuffling across days",
+    "calibrator_fit_data": "out-of-fold train predictions only",
+    "final_base_model": "refit on the full train window to produce test scores",
+    "prohibitions": ["never fit a calibrator on test rows", "never fit a calibrator on in-sample train predictions"]
+  },
+  "metrics": {
+    "primary": "Brier score (lower is better)",
+    "primary_delta": "delta_brier = brier_C0 - brier_Cm (positive = calibrated better)",
+    "secondary": ["ECE (10 equal-count bins, bins with <30 rows merged, bin count reported)", "log_loss", "auc", "calibration_in_the_large (mean predicted - observed)", "reliability_slope", "reliability_intercept"],
+    "primary_scenario": "L10|long|H24",
+    "pooled": "equal-weight mean over the 12 scenarios",
+    "diag_rule": "reliability slope/intercept from a 1-D logistic fit on test scores are diagnostic only and are never used for tuning"
+  },
+  "uncertainty": {
+    "method": "UTC-day block bootstrap, percentile CI95",
+    "seed": 12345,
+    "brier_reps": 2000,
+    "ece_reps": 400,
+    "ece_reps_note": "ECE requires re-binning each resample; 400 exact-recompute reps are pre-registered for ΔECE CIs while ΔBrier uses 2000 per-day-sum reps",
+    "leave_one_instrument_out": true
+  },
+  "cross_scenario_transfer": {
+    "status": "secondary_pre_registered",
+    "rule": "for C1 and C3, fit the calibrator on scenario A train out-of-fold scores and apply it to scenario B test scores; report mean delta_brier over all ordered pairs A!=B on the holdout and whether the sign agrees with own-scenario calibration"
+  },
+  "placebo": {
+    "method": "permute train labels within scenario AFTER out-of-fold scores are computed; refit each calibrator on permuted train scores; apply to the real test set",
+    "seed": 12345,
+    "n_permutations": 200,
+    "report": "placebo null mean and 95th percentile of mean delta_brier (pooled and primary scenario)"
+  },
+  "materiality_floor": {
+    "rule": "All three required: (1) C1 or C3 achieves delta_brier > 0 with bootstrap CI95 lower bound > 0 in >=2 of 3 holdouts on L10|long|H24; (2) mean delta_ECE >= 0.005 in >=2 of 3 holdouts with the min-bin guard satisfied; (3) the real mean delta_brier exceeds the 95th percentile of the label-permutation placebo null.",
+    "honest_negative_allowed": true,
+    "skipping_run_allowed": false
+  },
+  "expected_artifact_set": [
+    "fclr_risk07_prereg_<UTC>.json",
+    "fclr_risk07_prereg_<UTC>.md",
+    "fclr_risk07_calibrators_<UTC>.py",
+    "fclr_risk07_calibrators_<UTC>.json",
+    "fclr_risk07_recalibration_<UTC>.py",
+    "fclr_risk07_recalibration_<UTC>.json",
+    "fclr_risk07_recalibration_<UTC>.md",
+    "evidence_audit_<UTC>.json",
+    "evidence_audit_<UTC>.md",
+    "recompute_fclr_risk07_recalibration_<UTC>.json",
+    "trigger_check_<UTC>.json"
+  ],
+  "carry_forward": ["RISK-06 package", "ROBUST-05 package"]
+}
