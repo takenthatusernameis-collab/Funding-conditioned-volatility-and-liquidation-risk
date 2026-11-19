@@ -1,0 +1,50 @@
+{
+  "script": "trigger_check",
+  "session_utc": "2026-11-18T19:19:45Z",
+  "generated_utc": "20261118T191945Z",
+  "network": false,
+  "read_only": true,
+  "campaign": "FCLR-LIQ-RISK-RECALIBRATION-07-20261118T191714Z",
+  "sources": {
+    "resume_trigger_registry": "research_state/resume_trigger_registry.json",
+    "ironflow_monitor_state": "research_state/ironflow_monitor_state.json"
+  },
+  "n_triggers": 4,
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "file_glob_with_fields",
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json"
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "file_exists_with_fields",
+      "required_evidence_artifact": "research_state/<source>_admissibility_audit_<UTC>.{md,json}"
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "verified_label_extension",
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}"
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "newly_preregistered_design",
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json"
+    }
+  ],
+  "all_triggers_open": true,
+  "no_trigger_fired": true,
+  "ironflow": {
+    "last_check": "2026-11-02T05:59:46Z",
+    "data_through": "2026-10"
+  },
+  "conclusion": "All four reopen triggers OPEN; none fired. No confirmatory estimand may be advanced or re-scored. RISK-07 heavy exploratory recalibration was executed on cached 2024-04..09 data; Track B baseline recalibration result is an honest negative/inconclusive under the pre-registered materiality floor. Sealed months (2024-10 onward) remain unread."
+}

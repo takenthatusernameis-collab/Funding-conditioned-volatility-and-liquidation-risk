@@ -1,0 +1,57 @@
+{
+  "script": "trigger_check",
+  "session_utc": "2026-11-18T20:19:19Z",
+  "generated_utc": "20261118T201919Z",
+  "network": false,
+  "read_only": true,
+  "campaign": "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z",
+  "sources": {
+    "resume_trigger_registry": "research_state/resume_trigger_registry.json",
+    "ironflow_monitor_state": "research_state/ironflow_monitor_state.json",
+    "tracka_admissibility": "research_state/session_20261118T201919Z/fclr_tracka_exploratory01_admissibility_20261118T201919Z.json"
+  },
+  "n_triggers": 4,
+  "triggers": [
+    {
+      "trigger_id": "GATE4_BRANCH_1",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "file_glob_with_fields",
+      "required_evidence_artifact": "research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json"
+    },
+    {
+      "trigger_id": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+      "status": "FIRED",
+      "do_not_act_until_satisfied": false,
+      "machine_predicate_type": "file_exists_with_fields",
+      "required_evidence_artifact": "research_state/session_20261118T201919Z/fclr_tracka_exploratory01_admissibility_20261118T201919Z.json",
+      "fired_evidence": {
+        "status": "ADMISSIBLE",
+        "observed_labels": true,
+        "instruments": 13,
+        "complete_months": 6,
+        "admissibility_gates_passed": 6,
+        "admissibility_gates_total": 6
+      }
+    },
+    {
+      "trigger_id": "HL_LABEL_EXTENSION",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "verified_label_extension",
+      "required_evidence_artifact": "research_state/hl_label_extension_audit_<UTC>.{md,json}"
+    },
+    {
+      "trigger_id": "EXPANSION_ROBUSTNESS_REDO",
+      "status": "OPEN",
+      "do_not_act_until_satisfied": true,
+      "machine_predicate_type": "newly_preregistered_design",
+      "required_evidence_artifact": "research_state/expansion_robustness_redo_prereg_<UTC>.json + evaluation_summary_*.json"
+    }
+  ],
+  "all_triggers_open": false,
+  "no_trigger_fired": false,
+  "n_triggers_fired": 1,
+  "n_triggers_open": 3,
+  "conclusion": "NEW_OBSERVED_LIQUIDATION_SOURCE FIRED: Track A exploratory admissibility verdict is ADMISSIONABLE on 2025-11..2026-04 (13 coins, 6 complete months, 537,829 observed events, all 6 gates passed). Confirmatory design FCLR-LIQ-TRACKA-CONFIRMATORY-01 is NOT yet registered — requires candle/funding/OI cache extension to 2026-05..2026-10 before re-running admissibility audit. GATE4_BRANCH_1, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO remain OPEN."
+}

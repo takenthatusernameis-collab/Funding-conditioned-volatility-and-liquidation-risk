@@ -1,0 +1,861 @@
+{
+ "alignment_yield": 1.0,
+ "campaign_id": "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z",
+ "coins": [
+  "BTC",
+  "ETH",
+  "BNB",
+  "SOL",
+  "XRP",
+  "AVAX",
+  "DOGE",
+  "LINK",
+  "SUI",
+  "ARB",
+  "OP",
+  "APT",
+  "ADA"
+ ],
+ "coins_with_events": [
+  "ADA",
+  "APT",
+  "ARB",
+  "AVAX",
+  "BNB",
+  "BTC",
+  "DOGE",
+  "ETH",
+  "LINK",
+  "OP",
+  "SOL",
+  "SUI",
+  "XRP"
+ ],
+ "complete_months": [
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04"
+ ],
+ "events_joined": 537829,
+ "events_unjoined": 0,
+ "forbidden_label_columns": [],
+ "funding_coverage_rate": 1.0,
+ "gates": {
+  "g1_provenance_hashed": true,
+  "g2_instruments_ge_5": true,
+  "g3_complete_months_ge_3": true,
+  "g4_gap_rate_le_20pct": true,
+  "g5_observed_labels_only": true,
+  "g6_alignment_yield_ge_95pct": true
+ },
+ "generated_utc": "2026-11-19T01:30:11Z",
+ "hours_with_liq_total": 11106,
+ "label_definition": "observed Hyperliquid perp forced-liquidation event rows (one row = one liquidation), aggregated to coin-hour counts and USD notional; absence from feed is not evidence of no liquidation",
+ "liq_count_total": 537829,
+ "liq_notional_usd_total": 13021418299.26868,
+ "max_gap_rate": 0.0,
+ "oi_coverage_rate": 0.994475,
+ "panel_csv": "research_state/session_20261118T201919Z/fclr_tracka_exploratory01_panel_20261118T201919Z.csv",
+ "panel_csv_sha256": "45512ca71cbdb2d706a150cd71931cb7979cf3827ce6ad36f766093d0bad2791",
+ "panel_rows": 56472,
+ "per_coin_month": {
+  "ADA|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 95,
+   "liq_count": 413,
+   "liq_notional_usd": 1422707.94635,
+   "oi_hours": 720
+  },
+  "ADA|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 83,
+   "liq_count": 357,
+   "liq_notional_usd": 1294329.56453,
+   "oi_hours": 744
+  },
+  "ADA|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 78,
+   "liq_count": 360,
+   "liq_notional_usd": 773258.76456,
+   "oi_hours": 744
+  },
+  "ADA|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 82,
+   "liq_count": 233,
+   "liq_notional_usd": 418939.29300000006,
+   "oi_hours": 648
+  },
+  "ADA|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 50,
+   "liq_count": 111,
+   "liq_notional_usd": 248336.21686,
+   "oi_hours": 744
+  },
+  "ADA|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 40,
+   "liq_count": 86,
+   "liq_notional_usd": 153383.80578,
+   "oi_hours": 720
+  },
+  "APT|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 109,
+   "liq_count": 368,
+   "liq_notional_usd": 1340145.985701,
+   "oi_hours": 720
+  },
+  "APT|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 61,
+   "liq_count": 206,
+   "liq_notional_usd": 555087.764165,
+   "oi_hours": 744
+  },
+  "APT|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 61,
+   "liq_count": 184,
+   "liq_notional_usd": 382087.657169,
+   "oi_hours": 744
+  },
+  "APT|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 53,
+   "liq_count": 156,
+   "liq_notional_usd": 143998.466764,
+   "oi_hours": 648
+  },
+  "APT|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 49,
+   "liq_count": 104,
+   "liq_notional_usd": 217704.31619499996,
+   "oi_hours": 744
+  },
+  "APT|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 26,
+   "liq_count": 42,
+   "liq_notional_usd": 12870.676541,
+   "oi_hours": 720
+  },
+  "ARB|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 82,
+   "liq_count": 353,
+   "liq_notional_usd": 755310.5211199999,
+   "oi_hours": 720
+  },
+  "ARB|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 46,
+   "liq_count": 134,
+   "liq_notional_usd": 890786.9614849999,
+   "oi_hours": 744
+  },
+  "ARB|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 66,
+   "liq_count": 233,
+   "liq_notional_usd": 1587410.1273669996,
+   "oi_hours": 744
+  },
+  "ARB|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 84,
+   "liq_count": 219,
+   "liq_notional_usd": 244127.38089200002,
+   "oi_hours": 648
+  },
+  "ARB|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 40,
+   "liq_count": 80,
+   "liq_notional_usd": 169834.722287,
+   "oi_hours": 744
+  },
+  "ARB|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 55,
+   "liq_count": 136,
+   "liq_notional_usd": 458527.81360200007,
+   "oi_hours": 720
+  },
+  "AVAX|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 112,
+   "liq_count": 646,
+   "liq_notional_usd": 8222739.188330001,
+   "oi_hours": 720
+  },
+  "AVAX|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 67,
+   "liq_count": 274,
+   "liq_notional_usd": 1556143.1425200002,
+   "oi_hours": 744
+  },
+  "AVAX|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 93,
+   "liq_count": 495,
+   "liq_notional_usd": 2331832.8214530004,
+   "oi_hours": 744
+  },
+  "AVAX|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 81,
+   "liq_count": 276,
+   "liq_notional_usd": 854921.502224,
+   "oi_hours": 648
+  },
+  "AVAX|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 62,
+   "liq_count": 137,
+   "liq_notional_usd": 333966.453476,
+   "oi_hours": 744
+  },
+  "AVAX|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 58,
+   "liq_count": 159,
+   "liq_notional_usd": 247733.8322,
+   "oi_hours": 720
+  },
+  "BNB|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 129,
+   "liq_count": 3339,
+   "liq_notional_usd": 12990854.20062,
+   "oi_hours": 720
+  },
+  "BNB|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 64,
+   "liq_count": 215,
+   "liq_notional_usd": 1531789.66896,
+   "oi_hours": 744
+  },
+  "BNB|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 79,
+   "liq_count": 369,
+   "liq_notional_usd": 1405261.8764300002,
+   "oi_hours": 744
+  },
+  "BNB|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 89,
+   "liq_count": 479,
+   "liq_notional_usd": 1020778.7095000001,
+   "oi_hours": 648
+  },
+  "BNB|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 59,
+   "liq_count": 112,
+   "liq_notional_usd": 870111.09092,
+   "oi_hours": 744
+  },
+  "BNB|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 37,
+   "liq_count": 78,
+   "liq_notional_usd": 84510.58046,
+   "oi_hours": 720
+  },
+  "BTC|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 436,
+   "liq_count": 74515,
+   "liq_notional_usd": 2180612193.205091,
+   "oi_hours": 720
+  },
+  "BTC|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 319,
+   "liq_count": 39724,
+   "liq_notional_usd": 1109077639.3468099,
+   "oi_hours": 744
+  },
+  "BTC|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 325,
+   "liq_count": 46810,
+   "liq_notional_usd": 1594989147.4481878,
+   "oi_hours": 744
+  },
+  "BTC|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 429,
+   "liq_count": 76442,
+   "liq_notional_usd": 1467846200.449255,
+   "oi_hours": 648
+  },
+  "BTC|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 412,
+   "liq_count": 48139,
+   "liq_notional_usd": 1036913424.62677,
+   "oi_hours": 744
+  },
+  "BTC|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 284,
+   "liq_count": 33772,
+   "liq_notional_usd": 792399627.3424001,
+   "oi_hours": 720
+  },
+  "DOGE|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 121,
+   "liq_count": 1747,
+   "liq_notional_usd": 5700886.67094,
+   "oi_hours": 720
+  },
+  "DOGE|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 91,
+   "liq_count": 515,
+   "liq_notional_usd": 1672317.06519,
+   "oi_hours": 744
+  },
+  "DOGE|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 124,
+   "liq_count": 806,
+   "liq_notional_usd": 19393626.819860004,
+   "oi_hours": 744
+  },
+  "DOGE|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 134,
+   "liq_count": 653,
+   "liq_notional_usd": 2050639.7506839999,
+   "oi_hours": 648
+  },
+  "DOGE|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 102,
+   "liq_count": 289,
+   "liq_notional_usd": 546398.734609,
+   "oi_hours": 744
+  },
+  "DOGE|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 63,
+   "liq_count": 243,
+   "liq_notional_usd": 906938.6949169999,
+   "oi_hours": 720
+  },
+  "ETH|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 411,
+   "liq_count": 25853,
+   "liq_notional_usd": 945380670.759697,
+   "oi_hours": 720
+  },
+  "ETH|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 243,
+   "liq_count": 12248,
+   "liq_notional_usd": 490955110.9988899,
+   "oi_hours": 744
+  },
+  "ETH|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 256,
+   "liq_count": 14804,
+   "liq_notional_usd": 1398467041.0446398,
+   "oi_hours": 744
+  },
+  "ETH|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 353,
+   "liq_count": 16703,
+   "liq_notional_usd": 316676660.47339,
+   "oi_hours": 648
+  },
+  "ETH|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 282,
+   "liq_count": 8873,
+   "liq_notional_usd": 189380409.69500002,
+   "oi_hours": 744
+  },
+  "ETH|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 213,
+   "liq_count": 7098,
+   "liq_notional_usd": 148357746.08789,
+   "oi_hours": 720
+  },
+  "LINK|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 125,
+   "liq_count": 947,
+   "liq_notional_usd": 8489369.302199999,
+   "oi_hours": 720
+  },
+  "LINK|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 82,
+   "liq_count": 357,
+   "liq_notional_usd": 2364683.558,
+   "oi_hours": 744
+  },
+  "LINK|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 69,
+   "liq_count": 618,
+   "liq_notional_usd": 4225510.52571,
+   "oi_hours": 744
+  },
+  "LINK|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 78,
+   "liq_count": 410,
+   "liq_notional_usd": 1460285.36404,
+   "oi_hours": 648
+  },
+  "LINK|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 58,
+   "liq_count": 154,
+   "liq_notional_usd": 404336.68662,
+   "oi_hours": 744
+  },
+  "LINK|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 38,
+   "liq_count": 87,
+   "liq_notional_usd": 372269.8663599999,
+   "oi_hours": 720
+  },
+  "OP|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 71,
+   "liq_count": 163,
+   "liq_notional_usd": 559020.257936,
+   "oi_hours": 720
+  },
+  "OP|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 42,
+   "liq_count": 78,
+   "liq_notional_usd": 478311.54004099994,
+   "oi_hours": 744
+  },
+  "OP|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 53,
+   "liq_count": 141,
+   "liq_notional_usd": 390134.094178,
+   "oi_hours": 744
+  },
+  "OP|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 74,
+   "liq_count": 205,
+   "liq_notional_usd": 466080.28409000003,
+   "oi_hours": 648
+  },
+  "OP|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 44,
+   "liq_count": 61,
+   "liq_notional_usd": 183882.047912,
+   "oi_hours": 744
+  },
+  "OP|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 27,
+   "liq_count": 32,
+   "liq_notional_usd": 26726.720020999997,
+   "oi_hours": 720
+  },
+  "SOL|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 378,
+   "liq_count": 27989,
+   "liq_notional_usd": 342480590.78661096,
+   "oi_hours": 720
+  },
+  "SOL|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 244,
+   "liq_count": 11864,
+   "liq_notional_usd": 123277458.4824,
+   "oi_hours": 744
+  },
+  "SOL|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 250,
+   "liq_count": 14527,
+   "liq_notional_usd": 231016790.07334495,
+   "oi_hours": 744
+  },
+  "SOL|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 337,
+   "liq_count": 19718,
+   "liq_notional_usd": 163227205.12371704,
+   "oi_hours": 648
+  },
+  "SOL|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 280,
+   "liq_count": 8806,
+   "liq_notional_usd": 82245166.79282999,
+   "oi_hours": 744
+  },
+  "SOL|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 198,
+   "liq_count": 5263,
+   "liq_notional_usd": 29243667.279009998,
+   "oi_hours": 720
+  },
+  "SUI|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 148,
+   "liq_count": 1500,
+   "liq_notional_usd": 8010597.00684,
+   "oi_hours": 720
+  },
+  "SUI|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 115,
+   "liq_count": 655,
+   "liq_notional_usd": 2012034.52586,
+   "oi_hours": 744
+  },
+  "SUI|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 117,
+   "liq_count": 1156,
+   "liq_notional_usd": 6282439.567109999,
+   "oi_hours": 744
+  },
+  "SUI|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 132,
+   "liq_count": 653,
+   "liq_notional_usd": 3615476.7588170003,
+   "oi_hours": 648
+  },
+  "SUI|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 94,
+   "liq_count": 407,
+   "liq_notional_usd": 1311905.0744039998,
+   "oi_hours": 744
+  },
+  "SUI|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 61,
+   "liq_count": 195,
+   "liq_notional_usd": 257078.61174800002,
+   "oi_hours": 720
+  },
+  "XRP|2025-11": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 310,
+   "liq_count": 6154,
+   "liq_notional_usd": 99639563.2329,
+   "oi_hours": 720
+  },
+  "XRP|2025-12": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 176,
+   "liq_count": 2935,
+   "liq_notional_usd": 14865061.813299999,
+   "oi_hours": 744
+  },
+  "XRP|2026-01": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 214,
+   "liq_count": 5163,
+   "liq_notional_usd": 104230644.94639999,
+   "oi_hours": 744
+  },
+  "XRP|2026-02": {
+   "candle_hours": 672,
+   "expected_hours": 672,
+   "funding_hours": 672,
+   "gap_rate": 0.0,
+   "hours_with_liq": 280,
+   "liq_count": 5195,
+   "liq_notional_usd": 26174975.2228,
+   "oi_hours": 648
+  },
+  "XRP|2026-03": {
+   "candle_hours": 744,
+   "expected_hours": 744,
+   "funding_hours": 744,
+   "gap_rate": 0.0,
+   "hours_with_liq": 208,
+   "liq_count": 1731,
+   "liq_notional_usd": 12373566.041299999,
+   "oi_hours": 744
+  },
+  "XRP|2026-04": {
+   "candle_hours": 720,
+   "expected_hours": 720,
+   "funding_hours": 720,
+   "gap_rate": 0.0,
+   "hours_with_liq": 115,
+   "liq_count": 1077,
+   "liq_notional_usd": 7887297.416499999,
+   "oi_hours": 720
+  }
+ },
+ "scope_limits": [
+  "Exploratory only: no confirmatory split, model, or claim.",
+  "Window limited to cached 2025-11..2026-04; 2026-05..2026-10 requires a bulk fetch.",
+  "Reporting caps and venue collector gaps are unquantified from public metadata."
+ ],
+ "session_id": "session_20261118T201919Z",
+ "verdict": "ADMISSIBLE",
+ "window_months": [
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04"
+ ]
+}

@@ -1,0 +1,784 @@
+{
+ "campaign_id": "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z",
+ "carry_forward_note": "RISK-06/RISK-07/ROBUST-05 packages copied verbatim into this session dir.",
+ "coins_batch": [
+  "BTC",
+  "ETH",
+  "BNB",
+  "SOL",
+  "XRP",
+  "AVAX",
+  "DOGE",
+  "LINK",
+  "SUI",
+  "ARB",
+  "OP",
+  "APT",
+  "ADA"
+ ],
+ "duplicates": {
+  "2025-11": 0,
+  "2025-12": 0,
+  "2026-01": 0,
+  "2026-02": 0,
+  "2026-03": 0,
+  "2026-04": 0
+ },
+ "generated_utc": "2026-11-19T01:27:30Z",
+ "license": "cc-by-4.0",
+ "modeled_or_proxy": false,
+ "months": [
+  {
+   "candles_1h": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9360,
+     "ts_max_utc": "2025-11-30T23:00:00Z",
+     "ts_min_utc": "2025-11-01T00:00:00Z",
+     "value_mean": 964524.7089277968,
+     "value_sum": 9027951275.564178
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/candles_1h/2025-11.parquet",
+    "sha256": "bb2af7f07763589da702776c68880671e53dba2ab89d3281242ba41588920294",
+    "unique_hours": 720
+   },
+   "events": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 143987,
+     "ts_max_utc": "2025-11-30T23:59:07Z",
+     "ts_min_utc": "2025-11-01T03:02:20Z",
+     "value_mean": 25110.632550607595,
+     "value_sum": 3615604649.064336
+    },
+    "census_all": {
+     "markets": 199,
+     "rows": 214559,
+     "ts_max_utc": "2025-11-30T23:59:07Z",
+     "ts_min_utc": "2025-11-01T00:01:30Z",
+     "value_mean": 21248.207266871046,
+     "value_sum": 4558994102.972585
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "duplicate_rows": 0,
+    "path": "research_state/data_cache/ironflow_bulk/liquidations/2025-11.parquet",
+    "sha256": "74313ae0f60750a880735d2a647ef4c115440d68c39b1df0be8baccecbc8f361"
+   },
+   "funding": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9360,
+     "ts_max_utc": "2025-11-30T23:00:00Z",
+     "ts_min_utc": "2025-11-01T00:00:00Z",
+     "value_mean": -1.0606948504273495e-06,
+     "value_sum": -0.009928103799999992
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/funding/2025-11.parquet",
+    "sha256": "8a41b57b7ed53096127c27768e18b1516dff28522012f8d08159f6d2f577c640"
+   },
+   "month": "2025-11",
+   "open_interest": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9360,
+     "ts_max_utc": "2025-11-30T23:00:00Z",
+     "ts_min_utc": "2025-11-01T00:00:00Z",
+     "value_mean": 395232246.1182182,
+     "value_sum": 3699373823666.522
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/open_interest/2025-11.parquet",
+    "sha256": "f3c20d2c8b68339e4194e5984481246235678f52d19139e26c6c8f0f084be2cf"
+   }
+  },
+  {
+   "candles_1h": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2025-12-31T23:00:00Z",
+     "ts_min_utc": "2025-12-01T00:00:00Z",
+     "value_mean": 451855.6143511497,
+     "value_sum": 4370347502.00432
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/candles_1h/2025-12.parquet",
+    "sha256": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+    "unique_hours": 744
+   },
+   "events": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 69562,
+     "ts_max_utc": "2025-12-31T20:40:50Z",
+     "ts_min_utc": "2025-12-01T00:00:07Z",
+     "value_mean": 25165.04347822304,
+     "value_sum": 1750530754.432151
+    },
+    "census_all": {
+     "markets": 222,
+     "rows": 108154,
+     "ts_max_utc": "2025-12-31T23:48:10Z",
+     "ts_min_utc": "2025-12-01T00:00:07Z",
+     "value_mean": 19684.64169042496,
+     "value_sum": 2128972737.3862212
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "duplicate_rows": 0,
+    "path": "research_state/data_cache/ironflow_bulk/liquidations/2025-12.parquet",
+    "sha256": "d536ca955e01e126eb4741548b64c90899a8c2e7118d422d00efc4a024e271ea"
+   },
+   "funding": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2025-12-31T23:00:00Z",
+     "ts_min_utc": "2025-12-01T00:00:00Z",
+     "value_mean": 2.889842576509512e-06,
+     "value_sum": 0.0279505574
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/funding/2025-12.parquet",
+    "sha256": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7"
+   },
+   "month": "2025-12",
+   "open_interest": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2025-12-31T23:00:00Z",
+     "ts_min_utc": "2025-12-01T00:00:00Z",
+     "value_mean": 391564094.02292967,
+     "value_sum": 3787207917389.776
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/open_interest/2025-12.parquet",
+    "sha256": "584160f9a23f9dbe64ff248152bca0056831a40765cbb7f619af33c56283a59e"
+   }
+  },
+  {
+   "candles_1h": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2026-01-31T23:00:00Z",
+     "ts_min_utc": "2026-01-01T00:00:00Z",
+     "value_mean": 719761.8265680531,
+     "value_sum": 6961536386.56621
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/candles_1h/2026-01.parquet",
+    "sha256": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+    "unique_hours": 744
+   },
+   "events": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 85666,
+     "ts_max_utc": "2026-01-31T23:45:47Z",
+     "ts_min_utc": "2026-01-01T09:25:20Z",
+     "value_mean": 39286.008285275486,
+     "value_sum": 3365475185.76641
+    },
+    "census_all": {
+     "markets": 281,
+     "rows": 154506,
+     "ts_max_utc": "2026-01-31T23:45:47Z",
+     "ts_min_utc": "2026-01-01T00:00:24Z",
+     "value_mean": 27460.161506449338,
+     "value_sum": 4242759713.7154613
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "duplicate_rows": 0,
+    "path": "research_state/data_cache/ironflow_bulk/liquidations/2026-01.parquet",
+    "sha256": "489f5d9d747c3d58f0af515c925c9d2625eafbfbc33570e1c8ba4c8ca7ce7248"
+   },
+   "funding": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2026-01-31T23:00:00Z",
+     "ts_min_utc": "2026-01-01T00:00:00Z",
+     "value_mean": 3.6364637820512827e-06,
+     "value_sum": 0.03517187770000001
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/funding/2026-01.parquet",
+    "sha256": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1"
+   },
+   "month": "2026-01",
+   "open_interest": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2026-01-31T23:00:00Z",
+     "ts_min_utc": "2026-01-01T00:00:00Z",
+     "value_mean": 491363801.5337566,
+     "value_sum": 4752470688434.494
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/open_interest/2026-01.parquet",
+    "sha256": "ac9ba48be4bedeac3ac2b7cf8a2defd8f5d334f19c57f7b2ede788212e4d01db"
+   }
+  },
+  {
+   "candles_1h": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 8736,
+     "ts_max_utc": "2026-02-28T23:00:00Z",
+     "ts_min_utc": "2026-02-01T00:00:00Z",
+     "value_mean": 1129244.3786082896,
+     "value_sum": 9865078891.522018
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/candles_1h/2026-02.parquet",
+    "sha256": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+    "unique_hours": 672
+   },
+   "events": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 121342,
+     "ts_max_utc": "2026-02-28T23:39:16Z",
+     "ts_min_utc": "2026-02-01T00:05:07Z",
+     "value_mean": 16352.131073982406,
+     "value_sum": 1984200288.7791731
+    },
+    "census_all": {
+     "markets": 298,
+     "rows": 173549,
+     "ts_max_utc": "2026-02-28T23:47:24Z",
+     "ts_min_utc": "2026-02-01T00:03:00Z",
+     "value_mean": 13681.017370443786,
+     "value_sum": 2374326883.6231484
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "duplicate_rows": 0,
+    "path": "research_state/data_cache/ironflow_bulk/liquidations/2026-02.parquet",
+    "sha256": "8e27c2e1ca90baebbc768ea74a105f4547f85d2a85c81b67927f9c32d02ec18f"
+   },
+   "funding": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 8736,
+     "ts_max_utc": "2026-02-28T23:00:00Z",
+     "ts_min_utc": "2026-02-01T00:00:00Z",
+     "value_mean": -5.1564265796703294e-06,
+     "value_sum": -0.045046542599999996
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/funding/2026-02.parquet",
+    "sha256": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789"
+   },
+   "month": "2026-02",
+   "open_interest": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 8736,
+     "ts_max_utc": "2026-02-28T23:00:00Z",
+     "ts_min_utc": "2026-02-01T00:00:00Z",
+     "value_mean": 230709722.20898247,
+     "value_sum": 1943498699888.4683
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/open_interest/2026-02.parquet",
+    "sha256": "c346cb2a4f333da88da7f2ab93a6540eb435b802144d4e0c803bf2fbbd0307f7"
+   }
+  },
+  {
+   "candles_1h": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2026-03-31T23:00:00Z",
+     "ts_min_utc": "2026-03-01T00:00:00Z",
+     "value_mean": 666529.7944754529,
+     "value_sum": 6446676172.16658
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/candles_1h/2026-03.parquet",
+    "sha256": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+    "unique_hours": 744
+   },
+   "events": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 69004,
+     "ts_max_utc": "2026-03-31T21:55:29Z",
+     "ts_min_utc": "2026-03-01T00:32:42Z",
+     "value_mean": 19204.669910428136,
+     "value_sum": 1325199042.4991832
+    },
+    "census_all": {
+     "markets": 307,
+     "rows": 145298,
+     "ts_max_utc": "2026-03-31T23:58:33Z",
+     "ts_min_utc": "2026-03-01T00:15:06Z",
+     "value_mean": 14720.298166414224,
+     "value_sum": 2138829882.983654
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "duplicate_rows": 0,
+    "path": "research_state/data_cache/ironflow_bulk/liquidations/2026-03.parquet",
+    "sha256": "b2240b9ecc40ca27c34a4f3f18fd8b17f18f4dd3e9f83c91ca7040ecd2240e6d"
+   },
+   "funding": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2026-03-31T23:00:00Z",
+     "ts_min_utc": "2026-03-01T00:00:00Z",
+     "value_mean": -3.070346691480562e-06,
+     "value_sum": -0.029696393199999997
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/funding/2026-03.parquet",
+    "sha256": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a"
+   },
+   "month": "2026-03",
+   "open_interest": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9672,
+     "ts_max_utc": "2026-03-31T23:00:00Z",
+     "ts_min_utc": "2026-03-01T00:00:00Z",
+     "value_mean": 270670659.23737776,
+     "value_sum": 2617926616143.918
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/open_interest/2026-03.parquet",
+    "sha256": "1855bccbeca65a34573bb35580d32cb5de978fc565a0110699ddd00cd07452b3"
+   }
+  },
+  {
+   "candles_1h": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9360,
+     "ts_max_utc": "2026-04-30T23:00:00Z",
+     "ts_min_utc": "2026-04-01T00:00:00Z",
+     "value_mean": 852260.1129451849,
+     "value_sum": 7977154657.166931
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/candles_1h/2026-04.parquet",
+    "sha256": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180",
+    "unique_hours": 720
+   },
+   "events": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 48268,
+     "ts_max_utc": "2026-04-30T19:19:25Z",
+     "ts_min_utc": "2026-04-01T00:51:06Z",
+     "value_mean": 20311.767190010545,
+     "value_sum": 980408378.727429
+    },
+    "census_all": {
+     "markets": 325,
+     "rows": 108755,
+     "ts_max_utc": "2026-04-30T23:48:51Z",
+     "ts_min_utc": "2026-04-01T00:01:36Z",
+     "value_mean": 16102.068032010231,
+     "value_sum": 1751180408.8212726
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "duplicate_rows": 0,
+    "path": "research_state/data_cache/ironflow_bulk/liquidations/2026-04.parquet",
+    "sha256": "3d84969be4e65fea8abbc9c8b5950160e835c39ed0906d155cbefe46d23fd9b4"
+   },
+   "funding": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9360,
+     "ts_max_utc": "2026-04-30T23:00:00Z",
+     "ts_min_utc": "2026-04-01T00:00:00Z",
+     "value_mean": 3.1222321581196593e-07,
+     "value_sum": 0.0029224093000000013
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/funding/2026-04.parquet",
+    "sha256": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a"
+   },
+   "month": "2026-04",
+   "open_interest": {
+    "census_13coin": {
+     "markets": 13,
+     "rows": 9360,
+     "ts_max_utc": "2026-04-30T23:00:00Z",
+     "ts_min_utc": "2026-04-01T00:00:00Z",
+     "value_mean": 284963298.5411563,
+     "value_sum": 2667256474345.2227
+    },
+    "coins_present": [
+     "ADA",
+     "APT",
+     "ARB",
+     "AVAX",
+     "BNB",
+     "BTC",
+     "DOGE",
+     "ETH",
+     "LINK",
+     "OP",
+     "SOL",
+     "SUI",
+     "XRP"
+    ],
+    "path": "research_state/data_cache/ironflow_bulk/open_interest/2026-04.parquet",
+    "sha256": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237"
+   }
+  }
+ ],
+ "observed_liquidations": true,
+ "requires_api_key": false,
+ "session_id": "session_20261118T201919Z",
+ "source": "ironflow/hyperliquid-liquidations",
+ "source_url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations",
+ "timestamp_semantics": "Arrow datetime64 UTC -> integer milliseconds since epoch after normalization",
+ "totals": {
+  "candle_hours_13coin": 56472,
+  "event_rows_13coin": 537829,
+  "event_rows_all_markets": 904821,
+  "months": 6
+ },
+ "track": "A",
+ "unauthenticated": true,
+ "venue_filter": {
+  "dex": "",
+  "market_class": "perp"
+ },
+ "window_months": [
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04"
+ ]
+}

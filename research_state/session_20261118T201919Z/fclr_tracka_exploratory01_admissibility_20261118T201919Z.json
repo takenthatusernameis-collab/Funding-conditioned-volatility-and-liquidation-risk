@@ -1,0 +1,57 @@
+{
+ "alignment_yield": 1.0,
+ "blocks": 6,
+ "campaign_id": "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z",
+ "coins_with_events": [
+  "ADA",
+  "APT",
+  "ARB",
+  "AVAX",
+  "BNB",
+  "BTC",
+  "DOGE",
+  "ETH",
+  "LINK",
+  "OP",
+  "SOL",
+  "SUI",
+  "XRP"
+ ],
+ "complete_month": 6,
+ "confirmatory_design_registered": false,
+ "evidence": {
+  "alignment_summary": "fclr_tracka_exploratory01_alignment_20261118T201919Z.json",
+  "ingest_manifest": "fclr_tracka_exploratory01_ingest_20261118T201919Z.json",
+  "panel_csv_sha256": "45512ca71cbdb2d706a150cd71931cb7979cf3827ce6ad36f766093d0bad2791"
+ },
+ "gates": {
+  "g1_provenance_hashed": true,
+  "g2_instruments_ge_5": true,
+  "g3_complete_months_ge_3": true,
+  "g4_gap_rate_le_20pct": true,
+  "g5_observed_labels_only": true,
+  "g6_alignment_yield_ge_95pct": true
+ },
+ "generated_utc": "2026-11-19T01:30:11Z",
+ "instruments": 13,
+ "license": "cc-by-4.0",
+ "max_gap_rate": 0.0,
+ "modeled_or_proxy": false,
+ "next_action": "Register FCLR-LIQ-TRACKA-CONFIRMATORY-01 only after extending the candle/funding/OI cache to 2026-05..2026-10 and re-running this audit.",
+ "observed_labels": true,
+ "session_id": "session_20261118T201919Z",
+ "shortfalls": [],
+ "source": "ironflow/hyperliquid-liquidations",
+ "source_url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations",
+ "status": "ADMISSIBLE",
+ "unauthenticated": true,
+ "venue": "hyperliquid_perpetuals",
+ "window_months": [
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04"
+ ]
+}

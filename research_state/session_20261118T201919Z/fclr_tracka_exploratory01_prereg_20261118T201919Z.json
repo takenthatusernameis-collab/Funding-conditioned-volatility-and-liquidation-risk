@@ -1,0 +1,82 @@
+{
+ "admissibility_gates": {
+  "g1_provenance_hashed": "every source parquet sha256 recorded in the ingest manifest; license cc-by-4.0; unauthenticated access",
+  "g2_instruments_ge_5": "at least 5 coins with >=1 observed liquidation event in the window",
+  "g3_complete_months_ge_3": "at least 3 calendar months with <=20% candle gap for every coin",
+  "g4_gap_rate_le_20pct": "max per-coin-month 1h candle gap rate <= 0.20",
+  "g5_observed_labels_only": "no modeled/proxy/estimated liquidation column present; main-dex perps only",
+  "g6_alignment_yield_ge_95pct": ">=95% of observed liquidation events join to an existing candle hour"
+ },
+ "alignment_protocol": {
+  "funding_join": "floor funding timestamp to hour; join on (coin, hour)",
+  "join_keys": [
+   "coin",
+   "hour_utc"
+  ],
+  "label_aggregation": "per (coin, hour): liq_count, liq_long_count, liq_short_count, liq_fills, liq_notional_usd",
+  "open_interest_join": "floor OI timestamp to hour; join on (coin, hour)",
+  "panel_grid": "1h candle hours for main-dex perps",
+  "target_join": "floor event timestamp to hour (UTC ms since epoch); join on (coin, hour)",
+  "timezone": "UTC",
+  "tolerance": "floor-to-hour only; no cross-hour forward fill for labels"
+ },
+ "campaign_id": "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z",
+ "coins": [
+  "BTC",
+  "ETH",
+  "BNB",
+  "SOL",
+  "XRP",
+  "AVAX",
+  "DOGE",
+  "LINK",
+  "SUI",
+  "ARB",
+  "OP",
+  "APT",
+  "ADA"
+ ],
+ "confirmatory_not_registered_reason": "execution window limited to cached 2025-11..2026-04; confirmatory registration requires the 2026-05..2026-10 bulk extension plus a re-run of this frozen audit",
+ "coverage_census_inspected_before_freeze": true,
+ "fills_role": "fills parquet available in the dataset but not required for label counts; not ingested in this session",
+ "label_construction": {
+  "dedupe_rule": "drop exact duplicate rows on (tx_hash, wallet, market, timestamp)",
+  "definition": "observed Hyperliquid perpetual forced-liquidation event row; one row = one liquidation",
+  "normalization": "raw USD notional plus per-hour counts; no OI/volume normalization applied to the label itself",
+  "venue_filter": "dex == '' and market_class == 'perp' and market in {COIN}-PERP"
+ },
+ "missingness_rules": [
+  "absence from the feed is never treated as evidence of no liquidation",
+  "hours without a candle are excluded from the panel, not imputed",
+  "reporting caps and collector gaps are declared limits, not estimated away"
+ ],
+ "outcome_data_inspected_before_freeze": false,
+ "outcome_target_inspected_before_freeze": false,
+ "session_id": "session_20261118T201919Z",
+ "source_probe_2026_11_19": {
+  "access_method": "unauthenticated HTTPS GET of https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations",
+  "available_events_months": "2025-05 .. 2026-10 (18 files)",
+  "available_fills_months": "2025-05 .. 2026-10 (18 files)",
+  "downloads": 5040,
+  "last_modified_utc": "2026-11-13T07:20:34Z",
+  "license": "cc-by-4.0",
+  "n_siblings": 38,
+  "repo_id": "ironflow/hyperliquid-liquidations"
+ },
+ "source_urls": {
+  "api": "https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations",
+  "dataset": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations",
+  "events": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/events/<YYYY-MM>.parquet",
+  "fills": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations/resolve/main/data/fills/<YYYY-MM>.parquet"
+ },
+ "terms": "CC BY 4.0; attribution to ironflow; no requester-pays, no API key, no signature",
+ "window_months": [
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04"
+ ],
+ "generated_utc": "2026-11-19T01:35:44Z"
+}

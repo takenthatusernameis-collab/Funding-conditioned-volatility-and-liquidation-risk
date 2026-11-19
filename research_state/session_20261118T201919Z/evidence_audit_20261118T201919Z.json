@@ -1,0 +1,98 @@
+{
+ "artifacts": {
+  "admissibility": {
+   "files": [
+    "fclr_tracka_exploratory01_admissibility_20261118T201919Z.json",
+    "fclr_tracka_exploratory01_admissibility_20261118T201919Z.md"
+   ],
+   "gates_passed": 6,
+   "gates_total": 6,
+   "status": "COMPLETE",
+   "verdict": "ADMISSIBLE"
+  },
+  "alignment": {
+   "alignment_yield": 1.0,
+   "events_joined": 537829,
+   "events_unjoined": 0,
+   "files": [
+    "fclr_tracka_exploratory01_alignment_20261118T201919Z.py",
+    "fclr_tracka_exploratory01_alignment_20261118T201919Z.json",
+    "fclr_tracka_exploratory01_alignment_20261118T201919Z.md",
+    "fclr_tracka_exploratory01_panel_20261118T201919Z.csv"
+   ],
+   "hours_with_liq": 11106,
+   "max_gap_rate": 0.0,
+   "panel_rows": 56472,
+   "status": "COMPLETE"
+  },
+  "carry_forward": {
+   "RISK-06_package_from_session_20261118T182813Z": "copied verbatim",
+   "RISK-07_package_from_session_20261118T191945Z": "copied verbatim",
+   "ROBUST-05_package_from_session_20261118T143817Z": "copied verbatim",
+   "status": "COPIED"
+  },
+  "ingest": {
+   "event_rows_13coin": 537829,
+   "event_rows_all_markets": 904821,
+   "files": [
+    "fclr_tracka_exploratory01_ingest_20261118T201919Z.py",
+    "fclr_tracka_exploratory01_ingest_20261118T201919Z.json",
+    "fclr_tracka_exploratory01_ingest_20261118T201919Z.md"
+   ],
+   "months_hashed": 24,
+   "status": "COMPLETE"
+  },
+  "prereg": {
+   "files": [
+    "fclr_tracka_exploratory01_prereg_20261118T201919Z.json",
+    "fclr_tracka_exploratory01_prereg_20261118T201919Z.md"
+   ],
+   "status": "FROZEN_FIRST"
+  },
+  "recompute": {
+   "files": [
+    "recompute_tracka_exploratory01_20261118T201919Z.py",
+    "recompute_tracka_exploratory01_20261118T201919Z.json"
+   ],
+   "n_discrepancies": 0,
+   "status": "RECONCILED_ZERO_DISCREPANCIES"
+  },
+  "trigger_check": {
+   "files": [
+    "trigger_check_20261118T201919Z.json"
+   ],
+   "status": "COMPLETE"
+  }
+ },
+ "campaign": "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z",
+ "git_lfs_pull": false,
+ "honest_status": "EXPLORATORY ONLY. Ironflow observed liquidation labels are admissible on the cached 2025-11..2026-04 window for 13 main-dex Hyperliquid perps: 537,829 observed events, 56,472 coin-hours, 19.67% of coin-hours with >=1 liquidation, 1.000 alignment yield, 0.000 max candle gap, 0 duplicate rows. No confirmatory split, model, or claim was produced. The 2026-05..2026-10 extension is not cached and was not assessed.",
+ "installs": {
+  "note": "pyarrow 26.0.1 and pandas 3.1.1 installed with pip for parquet reads only; requirements.txt already pins them",
+  "packages": [
+   "pyarrow",
+   "pandas"
+  ],
+  "performed": true
+ },
+ "network_used": true,
+ "network_used_for": [
+  "HF dataset metadata probe (https://huggingface.co/api/datasets/ironflow/hyperliquid-liquidations)",
+  "pypi package install for parquet reads"
+ ],
+ "outcome_inspected_before_prereg_freeze": false,
+ "prohibitions_respected": {
+  "no_modeled_label_conflation": true,
+  "no_root_research_state_additions": true,
+  "no_sealed_artifact_mutation": true,
+  "no_sealed_month_read": true,
+  "no_track_c_qlike_rerun": true,
+  "no_workflow_edits": true,
+  "no_zero_byte_artifacts": true
+ },
+ "root_research_state_files_added": 0,
+ "schema": "evidence_audit",
+ "session_id": "session_20261118T201919Z",
+ "timestamp_utc": "20261118T201919Z",
+ "writes": "session dir only; AGENT_HANDOFF.md updated by the session-closing step"
+}

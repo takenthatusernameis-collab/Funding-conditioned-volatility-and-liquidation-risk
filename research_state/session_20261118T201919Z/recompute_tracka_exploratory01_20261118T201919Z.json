@@ -1,0 +1,40 @@
+{
+ "checks": {
+  "coins_with_events_match": true,
+  "hours_with_liq_match": true,
+  "liq_count_match": true,
+  "liq_notional_match": true,
+  "max_gap_match": true,
+  "panel_rows_match": true
+ },
+ "generated_utc": "2026-11-19T01:35:28Z",
+ "n_discrepancies": 0,
+ "network": false,
+ "pass": true,
+ "reads": [
+  "research_state/session_20261118T201919Z/fclr_tracka_exploratory01_panel_20261118T201919Z.csv"
+ ],
+ "recomputed": {
+  "coins_with_events": [
+   "ADA",
+   "APT",
+   "ARB",
+   "AVAX",
+   "BNB",
+   "BTC",
+   "DOGE",
+   "ETH",
+   "LINK",
+   "OP",
+   "SOL",
+   "SUI",
+   "XRP"
+  ],
+  "hours_with_liq": 11106,
+  "liq_count_total": 537829,
+  "liq_notional_usd_total": 13021418299.26863,
+  "max_gap_rate": 0.0,
+  "panel_rows": 56472
+ },
+ "script": "recompute_tracka_exploratory01"
+}
