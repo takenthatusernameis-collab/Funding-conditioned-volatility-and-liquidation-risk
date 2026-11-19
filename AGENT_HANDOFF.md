@@ -1,9 +1,9 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-19T19:53:21Z
-**Session:** Post-mortem of RISK-12 (UNDERPOWERED) → Next: FCLR-001 frozen starter protocol (Track C volatility forecasting)
+**Timestamp:** 2026-11-19T20:32:45Z
+**Session:** Post-mortem of RISK-12 (UNDERPOWERED) → Next: FCLR-001 frozen starter protocol (Track C volatility forecasting) — heavy-work campaign, no deferral
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-19T19:53:21Z)
-Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). Step 1 only this session: freeze `research_state/research_protocol.md` from RESEARCH_PROMPT.md §14 verbatim, build panel from Hyperliquid mark/index/funding/klines data reusing frozen panel where possible, hash+freeze eligible panel before target generation. Do NOT inspect holdout outcomes before freeze. No other task has higher expected information gain per unit of free compute. Track A is power-blocked; do not re-run RISK-09/10/11/12.
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-19T20:32:45Z)
+Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). Step 1 only this session: freeze `research_state/research_protocol.md` from RESEARCH_PROMPT.md §14 verbatim, build panel from Hyperliquid mark/index/funding/klines data reusing frozen panel where possible, hash+freeze eligible panel before target generation. Do NOT inspect holdout outcomes before freeze. No other task has higher expected information gain per unit of free compute. Track A is power-blocked; do not re-run RISK-09/10/11/12. This is a heavy-work campaign: future agents must complete protocol freeze + panel hash + B0/B1 metrics in one continuous session; no deferral, no placeholder artifacts.
 
 ---
 
