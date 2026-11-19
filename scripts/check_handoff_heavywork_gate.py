@@ -1014,6 +1014,7 @@ def _risk_08_state(handoff_text: str, latest_sid: str | None,
     out = {
         "campaign_id": None,
         "campaign_start_utc": None,
+        "artifact_family": None,
         "required": False,
         "required_artifacts": [],
         "missing_required_artifacts": [],
@@ -1040,9 +1041,19 @@ def _risk_08_state(handoff_text: str, latest_sid: str | None,
         p = latest_dir / name
         return p.is_file() and p.stat().st_size > 0
 
-    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in RISK_08_REQUIRED]
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (08 -> fclr_risk08_*, 09 -> fclr_risk09_*, ...). This keeps the
+    # gate enforcing heavy work after RISK-08 closes instead of deadlocking a
+    # RISK-09 session on impossible fclr_risk08_* filenames.
+    tag = f"risk{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_risk08_", f"fclr_{tag}_"), suffix)
+        for prefix, suffix in RISK_08_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
     out["required_artifacts"] = required
-    for label, (prefix, suffix) in zip(required, RISK_08_REQUIRED):
+    for label, (prefix, suffix) in zip(required, family):
         matches = sorted(
             f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
         )
