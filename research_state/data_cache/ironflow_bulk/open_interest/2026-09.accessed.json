@@ -1,0 +1,12 @@
+{
+  "api_key_required": false,
+  "bytes": 6903641,
+  "dataset": "open_interest",
+  "fetched_utc": "2026-11-19T01:50:06Z",
+  "license": "CC-BY-4.0",
+  "month": "2026-09",
+  "requester_pays": false,
+  "sha256": "7cb39a7d8ff30c51ce9caf0a6c361e9237e36054d11165032fc5b407e80f1f73",
+  "unauthenticated": true,
+  "url": "https://huggingface.co/datasets/ironflow/hyperliquid-open-interest/resolve/main/data/2026-09.parquet"
+}
