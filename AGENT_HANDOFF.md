@@ -1,14 +1,16 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-19T20:54:22Z
-**Session:** Bottleneck resolution → Next: FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
+**Timestamp:** 2026-11-19T21:03:12Z
+**Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
 **Latest heavy session:** session_20261119T180650Z (RISK-12: power audit UNDERPOWERED, MDE 0.002814 > plausible 0.001; evidence_audit + fclr_risk12_* + trigger_check)
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-19T20:54:22Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-19T21:03:12Z)
 
 Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). Step 1 only this session:
 
 1. **Freeze `research_state/research_protocol.md` from RESEARCH_PROMPT.md §14 verbatim** — unit (eligible linear perpetual × closed UTC hourly timestamp), timing (forecast at t after closed hour t; outcomes begin t+1), universe (broadest public listing/delisting metadata, no fixed top-N), primary target (next-24h realized variance, sum of squared log returns t+1..t+24), secondary horizons (6h/72h/168h, multiplicity-declared), frozen predictors (RV1h/RV24h/RV168h, signed funding, 90-day abs-funding percentile with min-30-obs rule, mark/index premium, mark/EMA24 distance), frozen baselines (B0 persistence RV24h; B1 HAR OLS log RV1h/RV24h/RV168h → log target; C1 = B1 + funding + percentile; C2 = C1 + premium + EMA24), 60/20/20 chronological split with 7-day purge/embargo, primary metric paired OOS QLIKE C2 vs B1 with block-bootstrap CI (≥2000 reps), gate ≥2% relative QLIKE reduction + CI supports improvement + Holm over family, minimum ≥5 instruments and ≥3 non-overlapping 30-day blocks. `outcome_data_inspected_before_freeze=false`.
+
 2. **Build panel from Hyperliquid mark/index/funding/klines data** — reuse frozen panel where possible; record source hashes, cutoff dates, eligible sample definition.
+
 3. **Hash and freeze eligible panel before target generation** — no target computed until panel hash is recorded.
 
 Do NOT inspect holdout outcomes before protocol freeze. No other task has higher expected information gain per unit of free compute. Track A is power-blocked (RISK-12 UNDERPOWERED, MDE 0.002814 > PLAUSIBLE_EFFECT_BRIER 0.001); do NOT re-run RISK-09/10/11/12. Track B is NOT_SUPPORTED (terminal). Track C volatility forecasting is the only agent-removable heavy path on admissible public mark-price data.
