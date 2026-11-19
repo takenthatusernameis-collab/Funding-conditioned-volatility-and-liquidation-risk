@@ -1,9 +1,9 @@
-# AGENT HANDOFF — 2026-11-19T03:45:00Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-19T04:30:53Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file under `research_state/` is tombstoned/historical and has no campaign authority.
 > No duplicate `AGENT_HANDOFF*` exists anywhere in the repo.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T03:45:00Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T04:30:53Z)
 
 **Execute `FCLR-LIQ-TRACKA-CONFIRMATORY-01-20261119T034500Z` now.** The 12-month Track A extension is **COMPLETE** in `session_20261119T033443Z`: alignment ADMISSIBLE over `2025-11 … 2026-10` (13 Hyperliquid perps, 113,880 coin-hours, 1.0 yield, 0.0 max gap, g1..g7 PASS), descriptive layer produced (1,128,446 observed liquidation events; 21,557 hours with ≥1 event), carry-forward packages copied verbatim, stdlib recompute `n_discrepancies=0`, confirmatory design registered outcome-blind, all verification commands PASS. The campaign is **fully unblocked and fully offline**: the Ironflow/Hyperliquid bulk cache for all 12 months is local and hash-verified (48/48 objects OK).
 
@@ -28,7 +28,7 @@ Do not idle. Do not run a descriptive-only or trigger-check-only session: the he
 
 ---
 
-## CURRENT STATE (verified 2026-11-19T03:45:00Z)
+## CURRENT STATE (verified 2026-11-19T04:30:53Z)
 
 - **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory **COMPLETE**; Track A 12-month extension **COMPLETE / ADMISSIBLE**; Track A confirmatory **REGISTERED, NOT EVALUATED**; next required campaign **READY**.
 - **Latest EXECUTED session:** `session_20261119T033443Z` — `FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z` — **COMPLETE**: descriptive layer (`fclr_tracka_extension01_descriptive_20261119T033443Z.{py,json,md}`), carry-forward packages, evidence audit, trigger check.
@@ -152,7 +152,7 @@ Baseline recorded now: heavywork gate **PASS**, drift **PASS 196/196**, bulk ver
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` post-2026-10-31 observed labels, ≥100-day depth — **OPEN**
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null) — **OPEN**
 
-## VERIFICATION RECORD — 2026-11-19T03:45:00Z
+## VERIFICATION RECORD — 2026-11-19T04:30:53Z
 - Track A exploratory: COMPLETE, `ADMISSIBLE`, 6/6 gates, `n_discrepancies=0` (frozen, immutable).
 - Track A extension (`session_20261119T022824Z`): alignment **ADMISSIBLE** over `2025-11 .. 2026-10` (g1..g7 PASS; 113,880 coin-hours; yield 1.0; max gap 0.0; 1,128,446 observed events); stdlib recompute `n_discrepancies=0`; confirmatory prereg registered (not evaluated).
 - Track A extension completion (`session_20261119T033443Z`): descriptive layer produced (18.93% of coin-hours with ≥1 event; RV decile incidence 6.33% → 36.02%; funding decile incidence 16.36% → 22.90%); full carry-forward copied verbatim; evidence audit + trigger check written.
