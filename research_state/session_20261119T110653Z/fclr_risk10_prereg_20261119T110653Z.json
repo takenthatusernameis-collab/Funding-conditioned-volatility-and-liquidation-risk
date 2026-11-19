@@ -1,0 +1,52 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-10-20261119T105200Z",
+  "session_utc": "20261119T110653Z",
+  "frozen_utc": "20261119T110653Z",
+  "outcome_blind": true,
+  "prereg_kind": "outcome-blind_power_restoration_design",
+  "contingency": "RISK-09 verdict UNDERPOWERED (all scored blocks mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER=0.001); RISK-10 = power restoration design per contingency ladder",
+  "family": "joint funding x RV x open-interest interaction family",
+  "n_family_members": 6,
+  "family_members": [
+    "member_1 funding_x_rv = funding_lag * rv_lag",
+    "member_2 funding_x_oi = funding_lag * oi_change_lag",
+    "member_3 rv_x_oi = rv_lag * oi_change_lag",
+    "member_4 three_way = funding_lag * rv_lag * oi_change_lag",
+    "member_5 funding_spline = piecewise-linear monotone spline on funding_lag (decile bins at 3/6/9)",
+    "member_6 decile_regime = indicator(funding_lag in top/bottom decile) x indicator(rv_lag in top decile)"
+  ],
+  "family_slimming": "none; all 6 members tested, family not slimmed",
+  "blocks": {
+    "block_1": {"test": "2025-11-01..2025-12-31", "train": "none", "note": "cold-start anchor; power only"},
+    "block_2": {"test": "2026-02-01..2026-04-30", "train": "2025-11-01..2025-12-31"},
+    "block_3": {"test": "2026-06-01..2026-08-31", "train": "2025-11-01..2026-01-31", "note": "primary block for headline claim (largest clean train set)"},
+    "pooled": {"test": "block_2 + block_3", "train": "2025-11-01..2026-01-31"}
+  },
+  "purges": ["2026-01", "2026-05"],
+  "reserve": "2026-09..2026-10 untouched and never scored",
+  "common_sample_rule": "drop a coin-hour for all models whenever any of rv_lag, funding_lag, oi_change_lag is null; all family members and RV-only scored on identical test rows",
+  "outcome": "y = 1 if liq_count >= 1 else 0 per (coin, hour); a zero means no event observed in the feed, not a confirmed no-liquidation hour",
+  "features": {
+    "ret_t": "ln(close_t / close_{t-1}) within coin, ordered by hour_utc",
+    "rv_lag": "statistics.stdev of trailing 24 hourly log returns ending at t-1 (ret_{t-24..t-1})",
+    "funding_lag": "funding_rate at t-1",
+    "premium_lag": "premium at t-1",
+    "oi_change_lag": "ln(open_interest_usd_{t-1} / open_interest_usd_{t-2}); null if t-2 missing"
+  },
+  "models": ["intercept-only", "RV-only (rv_lag)", "RV-only + each family member"],
+  "headline_contrast": "each family member vs RV-only baseline on Brier score, block_3 primary",
+  "metrics": ["Brier (headline)", "log-loss", "AUC", "calibration OLS slope/intercept on test probabilities"],
+  "placebo": "label-hour permutation within hour across coins, 1000 permutations, fixed seed 20261119; empirical p and 95th percentile of null Brier difference per member",
+  "multiplicity": "Holm over family = {member_1..member_6} x {scored blocks} at alpha=0.05; Holm family declared in prereg before outcomes",
+  "verdict_rule_per_member": "SUPPORT iff block_3 Brier improvement > 0, p_raw < 0.05, p_holm < 0.05, and placebo 95th percentile < observed improvement; otherwise NOT_MET",
+  "overall_verdict": "SUPPORT if any member passes; NOT_MET if all powered members fail; UNDERPOWERED if the power gate fails for all",
+  "power_gate": "recompute MDE from frozen block sizes and panel base rate; PLAUSIBLE_EFFECT_BRIER = 0.001 frozen; if all scored blocks' mde_brier_80pct > 0.001 then status=UNDERPOWERED, models_run=false, honest underpowered artifacts still written",
+  "mde_by_instrument_count": "vary number of coins included in panel (1..13, fixed alphabetical coin order BTC,ETH,BNB,SOL,XRP,AVAX,DOGE,LINK,SUI,ARB,OP,APT,ADA); recompute base_rate, n_test, mde_brier_80pct per block per coin count; outcome-blind (uses block sizes and base rate only, not model-comparison outcomes)",
+  "smallest_defensible_effect_rule": "smallest defensible effect = minimum mde_brier_80pct across scored blocks at full instrument count (block_3 primary); an incremental Brier effect is defensible only if >= that MDE; declare SUPPORT only if block_3 Brier improvement > 0 AND >= smallest defensible effect AND p_raw<0.05 AND p_holm<0.05 AND placebo 95th < observed improvement",
+  "smallest_defensible_effect_decision": "to be recorded in fclr_risk10_power_*.json after MDE recompute; frozen in this prereg as the rule above",
+  "implementation": "stdlib only (csv/math/statistics/random/hashlib/datetime/json); logistic regression fit by stdlib IRLS; no scipy/numpy/statsmodels/pandas/pyarrow in core path; no ingest/alignment re-run; no zero-byte artifacts",
+  "data_source": "frozen panel research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv (113,880 coin-hours, 13 coins, 12 months 2025-11..2026-10; extension verdict ADMISSIBLE, frozen)",
+  "prohibitions": ["no RISK-08 replay", "no RISK-09 replay", "no sealed Binance months for outcomes", "no post-hoc metric addition", "no ingest/alignment re-run", "no zero-byte artifacts", "no outcome mining", "no family slimming"],
+  "frozen_before_outcomes": true,
+  "outcome_inspected_before_freeze": false
+}

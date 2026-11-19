@@ -1,0 +1,32 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-10-20261119T105200Z",
+  "session_utc": "20261119T110653Z",
+  "audit_kind": "evidence_audit_per_RESEARCH_PROMPT_19",
+  "verdict": "UNDERPOWERED",
+  "power_status": "UNDERPOWERED",
+  "models_run": false,
+  "family": "joint funding x RV x open-interest interaction (6 members)",
+  "smallest_defensible_effect": 0.002817725360790807,
+  "plausible_effect_brier": 0.001,
+  "data": "frozen Track A panel session_20261119T022824Z (113,880 coin-hours, 13 coins, 2025-11..2026-10), common-sample kept 112,957",
+  "mde_brier_80pct": {"block_2": 0.004085, "block_3": 0.003886, "pooled": 0.002818},
+  "all_powered_blocks": false,
+  "member_verdicts": {"funding_x_rv":"NOT_MET","funding_x_oi":"NOT_MET","rv_x_oi":"NOT_MET","three_way":"NOT_MET","funding_spline":"NOT_MET","decile_regime":"NOT_MET"},
+  "evidence_supported": "none; power gate failed for all scored blocks, so no member can be declared SUPPORT or honestly NOT_MET on power grounds",
+  "evidence_contradicted": "none; no family member demonstrated block_3 Brier improvement over RV-only clearing p_raw<0.05, p_holm<0.05, and placebo-95th<improvement",
+  "evidence_unknown": "whether the true incremental Brier effect of funding-conditioned interactions over RV-only is exactly zero or merely below the ~0.0028-0.0041 MDE floor at this sample size",
+  "strongest_alternative_explanation": "the funding-conditioned interaction has negligible incremental out-of-sample forecast skill over realized-volatility-only at the detectable effect scale; any true effect is smaller than the plausible-effect threshold (0.001 Brier) and hence undetectable here",
+  "dominating_limitation": "statistical power (sample size × effect size), not data availability; the panel and labels are complete and admissible",
+  "concrete_falsifying_test": "RISK-11 (per ladder rule) — advance only if MDE <= plausible effect via MDE-by-instrument-count redesign or a larger/deeper panel; otherwise the null is preserved",
+  "highest_information_gain_task": "campaign RISK-10 power restoration design complete; no outcome mining; preserve the null",
+  "exact_artifact": "research_state/session_20261119T110653Z/fclr_risk10_evaluation_20261119T110653Z.json",
+  "verification_command": "python3 scripts/check_handoff_heavywork_gate.py --json (must PASS) and python3 research_state/session_20261119T110653Z/fclr_risk10_evaluation_20261119T110653Z.py (regenerates evaluation/power/recompute JSONs)",
+  "artifacts": [
+    "fclr_risk10_prereg_20261119T110653Z.{json,md}",
+    "fclr_risk10_power_20261119T110653Z.{py,json,md}",
+    "fclr_risk10_recompute_20261119T110653Z.{py,json}",
+    "fclr_risk10_evaluation_20261119T110653Z.{py,json,md}",
+    "evidence_audit_20261119T110653Z.{json,md}",
+    "trigger_check_20261119T110653Z.json"
+  ]
+}
