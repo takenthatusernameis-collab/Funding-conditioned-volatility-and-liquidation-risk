@@ -3,9 +3,11 @@
 > **Authority:** this file only. Every other handoff-like file under `research_state/` is tombstoned/historical and has no campaign authority. Verified this refresh: exactly one `AGENT_HANDOFF*` exists in the repo.
 > **Repo priority:** the repository is `Funding-conditioned-volatility-and-liquidation-risk`; the highest-value unexecuted work is therefore the **specification scan** for the joint funding×RV×OI interaction family, not descriptive or audit replays.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T10:52:00Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T11:03:00Z)
 
 **Campaign `FCLR-LIQ-RISK-ESCALATION-10-20261119T105200Z` is LIVE and machine-enforced.** RISK-09 completed in `session_20261119T095800Z` with verdict **UNDERPOWERED** (all scored blocks' mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER=0.001; `n_discrepancies=0`; honest underpowered artifacts written). Do not replay RISK-09. Do not re-audit it.
+
+Repo priority (Funding-conditioned-volatility-and-liquidation-risk): the funded×RV×OI interaction family is the in-scope heavy work. Descriptive/audit replays are NOT the campaign.
 
 Your session's deliverable is **RISK-10 power restoration design** (the RISK-09 → UNDERPOWERED contingency), in this exact order:
 
@@ -154,6 +156,7 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 - Never emit a zero-byte artifact. Never write sealed Binance months for outcomes. Never conflate observed liquidation labels with modeled boundary breaches.
 - Do not write to `.github/workflows`; do not install heavyweight stats packages.
 - Do not spend the session on handoff refresh, gate-only work, descriptive replay, or re-auditing certified results.
+- Root churn cap is tight (498/500 md+json on `research_state/` root). All new artifacts go under the new `session_<UTC>/` dir; never add root-level md/json files, or `test_tracka_hardening_125` and the gate fail closed.
 
 ---
 
