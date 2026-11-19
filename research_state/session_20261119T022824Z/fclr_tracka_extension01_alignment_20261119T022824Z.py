@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Track A exploratory alignment + admissibility: observed Hyperliquid liquidations.
+"""Track A extension alignment + admissibility: observed Hyperliquid liquidations.
 
-Campaign : FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z
-Session  : session_20261118T201919Z
-Window   : 2025-11 .. 2026-04 (6 complete months), 13 main-dex perp coins.
+Campaign : FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z
+Session  : session_20261119T022824Z
+Window   : 2025-11 .. 2026-10 (12 complete months), 13 main-dex perp coins.
+           Months come from CLI --months (default "2025-11..2026-10").
 
 Method
 ------
@@ -12,13 +13,15 @@ Method
    liq_count / liq_notional_usd per coin-hour (observed labels only).
 3. Join funding and open interest by (coin, hour).
 4. Emit a stdlib-readable panel CSV (the canonical downstream twin).
-5. Evaluate frozen admissibility gates; emit verdict JSON + MD.
+5. Evaluate frozen admissibility gates (g1..g6) plus declared g7 half-year
+   stability inputs; emit verdict JSON + MD.
 
 No modeled/proxy liquidation column is read or written. No sealed Binance month
 is touched. No network access.
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 from datetime import datetime, timezone
@@ -29,12 +32,11 @@ import pandas as pd
 REPO = Path(__file__).resolve().parents[2]
 RS = REPO / "research_state"
 CACHE = RS / "data_cache" / "ironflow_bulk"
-SESSION = RS / "session_20261118T201919Z"
+SESSION = RS / "session_20261119T022824Z"
 UTC = timezone.utc
 
-SESSION_ID = "session_20261118T201919Z"
-CAMPAIGN = "FCLR-LIQ-TRACKA-EXPLORATORY-01-20261118T201919Z"
-MONTHS = ["2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"]
+SESSION_ID = "session_20261119T022824Z"
+CAMPAIGN = "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z"
 COINS = [
     "BTC", "ETH", "BNB", "SOL", "XRP", "AVAX", "DOGE", "LINK",
     "SUI", "ARB", "OP", "APT", "ADA",
@@ -52,6 +54,24 @@ FORBIDDEN_LABEL_COLUMNS = {
 }
 
 
+def expand_months(spec: str) -> list[str]:
+    """Expand a month-range spec like "2025-11..2026-10" into ["2025-11", ...]."""
+    spec = spec.strip()
+    if ".." in spec:
+        start_s, end_s = spec.split("..", 1)
+        y, m = int(start_s[:4]), int(start_s[5:7])
+        ey, em = int(end_s[:4]), int(end_s[5:7])
+        out = []
+        while (y, m) <= (ey, em):
+            out.append(f"{y:04d}-{m:02d}")
+            m += 1
+            if m > 12:
+                m = 1
+                y += 1
+        return out
+    return [spec]
+
+
 def month_start(month: str) -> pd.Timestamp:
     return pd.Timestamp(f"{month}-01T00:00:00Z")
 
@@ -67,12 +87,18 @@ def load(dataset: str, month: str) -> pd.DataFrame:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser(description="Track A extension alignment + admissibility")
+    ap.add_argument("--months", default="2025-11..2026-10",
+                    help="Month range spec, e.g. 2025-11..2026-10")
+    args = ap.parse_args()
+    months = expand_months(args.months)
+
     now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     frames = []
     columns_seen: dict[str, list[str]] = {}
     per_coin_month = {}
 
-    for month in MONTHS:
+    for month in months:
         ev = load("liquidations", month)
         ca = load("candles_1h", month)
         fu = load("funding", month)
@@ -135,7 +161,7 @@ def main() -> None:
                 "liq_long_count", "liq_short_count", "liq_fills", "liq_notional_usd"]
     panel_out = panel[out_cols].sort_values(["coin", "hour_utc"])
 
-    csv_path = SESSION / f"fclr_tracka_exploratory01_panel_20261118T201919Z.csv"
+    csv_path = SESSION / f"fclr_tracka_extension01_panel_{SESSION_ID}.csv"
     panel_out.to_csv(csv_path, index=False)
     panel_sha = hashlib.sha256(csv_path.read_bytes()).hexdigest()
 
@@ -143,7 +169,7 @@ def main() -> None:
     candle_hours = set(zip(panel["coin"], panel["hour"]))
     dropped = 0
     joined = 0
-    for month in MONTHS:
+    for month in months:
         ev = load("liquidations", month)
         ev = ev[ev["market"].isin([f"{c}-PERP" for c in COINS])].copy()
         ev["coin"] = ev["market"].str.replace("-PERP", "", regex=False)
@@ -156,9 +182,9 @@ def main() -> None:
 
     coins_with_events = sorted({c for c in panel["coin"].unique()
                                 if per_coin_month and any(
-                                    per_coin_month[f"{c}|{m}"]["liq_count"] > 0 for m in MONTHS)})
+                                    per_coin_month[f"{c}|{m}"]["liq_count"] > 0 for m in months)})
     complete_months = []
-    for m in MONTHS:
+    for m in months:
         ok = all(per_coin_month[f"{c}|{m}"]["gap_rate"] <= MAX_GAP_RATE for c in COINS)
         if ok:
             complete_months.append(m)
@@ -181,7 +207,8 @@ def main() -> None:
         "generated_utc": now,
         "campaign_id": CAMPAIGN,
         "session_id": SESSION_ID,
-        "window_months": MONTHS,
+        "window_months": months,
+        "months_spec": args.months,
         "coins": COINS,
         "panel_rows": int(len(panel_out)),
         "panel_csv": str(csv_path.relative_to(REPO)),
@@ -205,19 +232,24 @@ def main() -> None:
                             "(one row = one liquidation), aggregated to coin-hour counts "
                             "and USD notional; absence from feed is not evidence of no liquidation",
         "scope_limits": [
-            "Exploratory only: no confirmatory split, model, or claim.",
-            "Window limited to cached 2025-11..2026-04; 2026-05..2026-10 requires a bulk fetch.",
+            "Exploratory admissibility for the Track A extension; no confirmatory split, "
+            "model, or claim.",
+            "Window set by --months (default 2025-11..2026-10).",
             "Reporting caps and venue collector gaps are unquantified from public metadata.",
         ],
     }
-    (SESSION / "fclr_tracka_exploratory01_alignment_20261118T201919Z.json").write_text(
+    json_name = f"fclr_tracka_extension01_alignment_{SESSION_ID}.json"
+    md_name = f"fclr_tracka_extension01_alignment_{SESSION_ID}.md"
+    (SESSION / json_name).write_text(
         json.dumps(summary, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
     lines = [
-        "# Track A exploratory alignment (observed Hyperliquid liquidations)",
+        "# Track A extension alignment (observed Hyperliquid liquidations)",
         "",
         f"- campaign: `{CAMPAIGN}`",
-        f"- window: {MONTHS[0]}..{MONTHS[-1]}; coins: {len(COINS)} main-dex perps",
+        f"- session: `{SESSION_ID}`",
+        f"- months spec: `{args.months}` -> {months[0]}..{months[-1]} "
+        f"({len(months)} months); coins: {len(COINS)} main-dex perps",
         f"- panel rows: {len(panel_out)} -> `{summary['panel_csv']}`",
         f"- observed liquidation events: {summary['liq_count_total']} "
         f"(USD notional {summary['liq_notional_usd_total']:.0f})",
@@ -241,8 +273,7 @@ def main() -> None:
         "observed events only. This is an admissibility assessment, not a forecast test.",
         "",
     ]
-    (SESSION / "fclr_tracka_exploratory01_alignment_20261118T201919Z.md").write_text(
-        "\n".join(lines), encoding="utf-8")
+    (SESSION / md_name).write_text("\n".join(lines), encoding="utf-8")
 
     admiss = {
         "generated_utc": now,
@@ -259,30 +290,29 @@ def main() -> None:
         "instruments": len(coins_with_events),
         "complete_month": len(complete_months),
         "blocks": len(complete_months),
-        "window_months": MONTHS,
+        "window_months": months,
         "coins_with_events": coins_with_events,
         "alignment_yield": align_yield,
         "max_gap_rate": max_gap,
         "gates": gates,
         "evidence": {
-            "ingest_manifest": "fclr_tracka_exploratory01_ingest_20261118T201919Z.json",
-            "alignment_summary": "fclr_tracka_exploratory01_alignment_20261118T201919Z.json",
+            "alignment_summary": json_name,
             "panel_csv_sha256": panel_sha,
         },
         "shortfalls": [k for k, v in gates.items() if not v],
         "confirmatory_design_registered": False,
         "next_action": (
-            "Register FCLR-LIQ-TRACKA-CONFIRMATORY-01 only after extending the "
-            "candle/funding/OI cache to 2026-05..2026-10 and re-running this audit."
+            "Register FCLR-LIQ-TRACKA-CONFIRMATORY-01 only after the extension "
+            "admissibility audit is ADMISSIBLE across 2025-11..2026-10."
             if verdict == "ADMISSIBLE" else
-            "Track A remains DATA_BLOCKED; document the failing gate."
+            "Track A extension remains DATA_BLOCKED; document the failing gate."
         ),
     }
-    (SESSION / "fclr_tracka_exploratory01_admissibility_20261118T201919Z.json").write_text(
+    (SESSION / f"fclr_tracka_extension01_admissibility_{SESSION_ID}.json").write_text(
         json.dumps(admiss, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
     md = [
-        "# Track A exploratory admissibility verdict",
+        "# Track A extension admissibility verdict",
         "",
         f"- status: **{verdict}**",
         f"- instruments with observed liquidations: {len(coins_with_events)} "
@@ -306,11 +336,12 @@ def main() -> None:
         "No confirmatory claim is made in this exploratory session.",
         "",
     ]
-    (SESSION / "fclr_tracka_exploratory01_admissibility_20261118T201919Z.md").write_text(
+    (SESSION / f"fclr_tracka_extension01_admissibility_{SESSION_ID}.md").write_text(
         "\n".join(md), encoding="utf-8")
 
     print(json.dumps({"verdict": verdict, "gates": gates, "panel_rows": len(panel_out),
-                      "alignment_yield": align_yield, "max_gap": max_gap}, indent=1))
+                      "alignment_yield": align_yield, "max_gap": max_gap,
+                      "months": months}, indent=1))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,98 @@
+{
+  "generated_utc": "2026-11-19T02:31:39Z",
+  "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+  "session_id": "session_20261119T022824Z",
+  "artifact": "fclr_tracka_confirmatory01_prereg_20261119T022824Z",
+  "prereg_kind": "outcome-blind_confirmatory_forecast_design",
+  "parent_verdict": "Track A extension admissibility ADMISSIBLE (g1..g7 PASS over 2025-11..2026-10)",
+  "frozen_before_outcomes": true,
+  "outcome_target_inspected_before_freeze": false,
+  "registration_only": true,
+  "confirmatory_evaluation_run": false,
+  "source": {
+    "name": "ironflow/hyperliquid-liquidations",
+    "source_url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations",
+    "license": "CC BY 4.0",
+    "unauthenticated": true,
+    "venue": "hyperliquid_perpetuals",
+    "observed_labels": true,
+    "modeled_or_proxy": false,
+    "cache": "research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}/{month}.parquet"
+  },
+  "universe": {
+    "venue_filter": "dex == '' AND market_class == 'perp'",
+    "coins": [
+      "BTC", "ETH", "BNB", "SOL", "XRP", "AVAX", "DOGE", "LINK",
+      "SUI", "ARB", "OP", "APT", "ADA"
+    ],
+    "n_coins": 13
+  },
+  "window": {
+    "months": [
+      "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04",
+      "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"
+    ],
+    "first_month": "2025-11",
+    "last_month": "2026-10"
+  },
+  "splits": {
+    "rule": "3 non-overlapping chronological test blocks over the 12 months; each block >= 60 days; >= 20-day purge/embargo between blocks; frozen month boundaries; no reshuffling; each block carries its own pre-test training history drawn only from earlier (or in-block pre-embargo) time.",
+    "blocks": [
+      {"name": "block_1", "test_start": "2025-11-01", "test_end": "2025-12-31", "test_days": 61, "train_window": "2025-11-01 .. 2025-10-31 (none; block anchored at window start)"},
+      {"name": "purge_1", "start": "2026-01-01", "end": "2026-01-31", "purge_days": 31},
+      {"name": "block_2", "test_start": "2026-02-01", "test_end": "2026-04-30", "test_days": 89, "train_window": "2025-11-01 .. 2025-12-31"},
+      {"name": "purge_2", "start": "2026-05-01", "end": "2026-05-31", "purge_days": 31},
+      {"name": "block_3", "test_start": "2026-06-01", "test_end": "2026-08-31", "test_days": 92, "train_window": "2025-11-01 .. 2026-01-31"}
+    ],
+    "reserve": {"start": "2026-09-01", "end": "2026-10-31", "note": "held-out reserve, not part of the three confirmatory test blocks"},
+    "block_test_days_min": 60,
+    "purge_days_min": 20,
+    "all_blocks_gte_min": true,
+    "all_purges_gte_min": true,
+    "non_overlapping": true,
+    "month_boundaries_frozen": true
+  },
+  "label": {
+    "kind": "observed liquidation incidence per (coin, hour_utc)",
+    "fields": ["liq_count", "liq_notional_usd"],
+    "long_short_split": ["liq_long_count", "liq_short_count"],
+    "normalization_variant": "liq_count and liq_notional_usd normalized by contemporaneous open_interest_usd (per coin-hour)",
+    "absence_is_zero": false,
+    "absence_contract": "absence from the feed is not evidence of no liquidation; treated as missing/unknown, not zero; this is stated in the label contract",
+    "lead_time": "forecast origin t is the closed hour t; outcomes begin at t+1; all predictors lagged strictly >= 1h"
+  },
+  "features": {
+    "rule": "all predictors lagged strictly >= 1h to avoid look-ahead; computed from data available no later than forecast origin t",
+    "feature_set": ["funding_rate", "funding_sign", "funding_level", "premium", "mark_price_realized_volatility", "oi_change"],
+    "lag_hours_min": 1,
+    "look_ahead": false
+  },
+  "models_and_baselines": [
+    "intercept-only",
+    "funding-only",
+    "RV-only",
+    "funding x RV interaction"
+  ],
+  "model_constraints": ["no booster", "no NN", "simple calibrated logistic baseline for event labels"],
+  "metrics": ["Brier score", "log-loss", "AUC", "calibration slope", "calibration intercept"],
+  "headline_metric": "Brier score (frozen before evaluation)",
+  "placebo": "label-hour permutation null; headline metric compared to null distribution",
+  "power": {
+    "rule": "minimum detectable effect derived from block sizes; if MDE exceeds the plausible effect, mark the campaign UNDERPOWERED rather than running it",
+    "mde_source": "block sizes (block_1 61d, block_2 89d, block_3 92d)",
+    "underpowered_clause": "if MDE exceeds the plausible effect -> status UNDERPOWERED, do not run"
+  },
+  "gate": {
+    "support": "pre-defined result that counts as support (headline metric improvement over RV-only baseline within frozen multiplicity, acceptable calibration)",
+    "honest_negative": "pre-defined result that counts as an honest negative",
+    "rule": "no post-hoc metric addition; headline metric and gate frozen before evaluation"
+  },
+  "multiplicity": "Holm correction over the declared family (all tested blocks x models x metrics); raw and adjusted results reported",
+  "prohibitions": [
+    "No confirmatory evaluation in this campaign (registration only).",
+    "Do not read sealed Binance months for outcomes.",
+    "Do not re-run RISK-05/06/07, ROBUST-05, or Track C QLIKE.",
+    "No post-hoc metric addition after outcomes inspected.",
+    "No statsmodels/numpy in core path; pandas/pyarrow only for parquet reads in ingest/alignment."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "generated_utc": "2026-11-19T02:31:39Z",
+  "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+  "session_id": "session_20261119T022824Z",
+  "artifact": "evidence_audit_20261119T022824Z",
+  "section": "RESEARCH_PROMPT.md section 19 (per-session definition of done)",
+  "honest_status": "Track A extension admissibility ADMISSIBLE over 2025-11..2026-10 (g1..g7 PASS). Confirmatory prereg registered (registration only, not evaluated). Descriptive layer, stdlib recompute (n_discrepancies=0), and trigger check complete for this session. Remaining campaign items: descriptive-layer narrative, carry-forward packages, final verification, handoff refresh.",
+  "evidence_added": [
+    "fclr_tracka_extension01_prereg_20261119T022824Z.{json,md} (outcome-blind, frozen before outcomes)",
+    "fclr_tracka_extension01_alignment_20261119T022824Z.{py,json,md} (generalized --months CLI, 12-month window)",
+    "fclr_tracka_extension01_panel_20261119T022824Z.csv (113,880 coin-hour rows)",
+    "fclr_tracka_extension01_admissibility_20261119T022824Z.{json,md} (verdict ADMISSIBLE)",
+    "fclr_tracka_confirmatory01_prereg_20261119T022824Z.{json,md} (registration only)",
+    "recompute_tracka_extension01_20261119T022824Z.{py,json} (n_discrepancies=0)",
+    "evidence_audit_20261119T022824Z.{json,md}",
+    "trigger_check_20261119T022824Z.json"
+  ],
+  "prohibitions_respected": {
+    "no_sealed_binance_outcomes": true,
+    "no_confirmatory_evaluation_in_campaign": true,
+    "no_risk_05_06_07_rerun": true,
+    "no_robust_05_rerun": true,
+    "no_track_c_qlike_rerun": true,
+    "no_workflow_writes": true,
+    "no_heavyweight_stats_packages": true,
+    "pandas_pyarrow_only_parquet_reads": true,
+    "no_frozen_session_edits": true,
+    "no_zero_byte_artifacts": true
+  },
+  "network_used": false,
+  "cache_is_local": true,
+  "confirmatory_evaluation_run": false,
+  "statement": "No confirmatory evaluation was run in this campaign. The confirmatory design is registered only (frozen before outcomes). No modeled/proxy liquidation column was read or written. Absence from the feed is not evidence of no liquidation.",
+  "verdict": "ADMISSIBLE",
+  "next_action": "Complete the descriptive layer (item 5), carry-forward packages (item 9), final verification commands, and handoff refresh; then set Active required next campaign to FCLR-LIQ-TRACKA-CONFIRMATORY-01-<UTC>."
+}

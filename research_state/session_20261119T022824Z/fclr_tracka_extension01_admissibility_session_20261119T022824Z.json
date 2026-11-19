@@ -1,0 +1,62 @@
+{
+ "alignment_yield": 1.0,
+ "blocks": 12,
+ "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+ "coins_with_events": [
+  "ADA",
+  "APT",
+  "ARB",
+  "AVAX",
+  "BNB",
+  "BTC",
+  "DOGE",
+  "ETH",
+  "LINK",
+  "OP",
+  "SOL",
+  "SUI",
+  "XRP"
+ ],
+ "complete_month": 12,
+ "confirmatory_design_registered": false,
+ "evidence": {
+  "alignment_summary": "fclr_tracka_extension01_alignment_session_20261119T022824Z.json",
+  "panel_csv_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9"
+ },
+ "gates": {
+  "g1_provenance_hashed": true,
+  "g2_instruments_ge_5": true,
+  "g3_complete_months_ge_3": true,
+  "g4_gap_rate_le_20pct": true,
+  "g5_observed_labels_only": true,
+  "g6_alignment_yield_ge_95pct": true
+ },
+ "generated_utc": "2026-11-19T02:34:34Z",
+ "instruments": 13,
+ "license": "cc-by-4.0",
+ "max_gap_rate": 0.0,
+ "modeled_or_proxy": false,
+ "next_action": "Register FCLR-LIQ-TRACKA-CONFIRMATORY-01 only after the extension admissibility audit is ADMISSIBLE across 2025-11..2026-10.",
+ "observed_labels": true,
+ "session_id": "session_20261119T022824Z",
+ "shortfalls": [],
+ "source": "ironflow/hyperliquid-liquidations",
+ "source_url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations",
+ "status": "ADMISSIBLE",
+ "unauthenticated": true,
+ "venue": "hyperliquid_perpetuals",
+ "window_months": [
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04",
+  "2026-05",
+  "2026-06",
+  "2026-07",
+  "2026-08",
+  "2026-09",
+  "2026-10"
+ ]
+}

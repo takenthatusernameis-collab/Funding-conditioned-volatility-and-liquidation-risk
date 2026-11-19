@@ -1,0 +1,55 @@
+{
+ "alignment_reference": {
+  "coins_with_events": [
+   "ADA",
+   "APT",
+   "ARB",
+   "AVAX",
+   "BNB",
+   "BTC",
+   "DOGE",
+   "ETH",
+   "LINK",
+   "OP",
+   "SOL",
+   "SUI",
+   "XRP"
+  ],
+  "hours_with_liq_total": 21557,
+  "liq_count_total": 1128446,
+  "liq_notional_usd_total": 20970455300.370354,
+  "max_gap_rate": 0.0,
+  "panel_rows": 113880
+ },
+ "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+ "discrepancies": [],
+ "generated_utc": "2026-11-19T02:37:38Z",
+ "method": "stdlib-only independent recompute from panel CSV",
+ "n_discrepancies": 0,
+ "panel_path": "research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv",
+ "panel_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9",
+ "recomputed": {
+  "coins_with_events": [
+   "ADA",
+   "APT",
+   "ARB",
+   "AVAX",
+   "BNB",
+   "BTC",
+   "DOGE",
+   "ETH",
+   "LINK",
+   "OP",
+   "SOL",
+   "SUI",
+   "XRP"
+  ],
+  "hours_with_liq_total": 21557,
+  "liq_count_total": 1128446,
+  "liq_notional_usd_total": 20970455300.37028,
+  "max_gap_rate": 0.0,
+  "panel_rows": 113880
+ },
+ "session_id": "session_20261119T022824Z",
+ "status": "PASS"
+}
