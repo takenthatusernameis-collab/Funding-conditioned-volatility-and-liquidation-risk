@@ -1,0 +1,12 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-11-20261119T120000Z",
+  "session_utc": "20261119T130817Z",
+  "triggers": {
+    "NEW_OBSERVED_LIQUIDATION_SOURCE": "FIRED",
+    "GATE4_BRANCH_1": "OPEN",
+    "HL_LABEL_EXTENSION": "OPEN",
+    "EXPANSION_ROBUSTNESS_REDO": "OPEN"
+  },
+  "trigger_re_evaluation": "all 4 registry triggers re-checked against current state; no new post-2026-10-31 observed-label source with >=100-day depth appeared, so HL_LABEL_EXTENSION remains OPEN; GATE4_BRANCH_1 and EXPANSION_ROBUSTNESS_REDO remain external-trigger-only",
+  "note": "trigger check re-evaluates all 4 registry triggers per AGENT_HANDOFF.md REOPEN TRIGGERS"
+}
