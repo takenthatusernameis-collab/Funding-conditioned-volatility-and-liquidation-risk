@@ -1,0 +1,889 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-10-20261119T105200Z",
+  "session_utc": "20261119T110653Z",
+  "verdict": "UNDERPOWERED",
+  "power_status": "UNDERPOWERED",
+  "models_run": false,
+  "family_members": [
+    "funding_x_rv",
+    "funding_x_oi",
+    "rv_x_oi",
+    "three_way",
+    "funding_spline",
+    "decile_regime"
+  ],
+  "member_verdicts": {
+    "funding_x_rv": "NOT_MET",
+    "funding_x_oi": "NOT_MET",
+    "rv_x_oi": "NOT_MET",
+    "three_way": "NOT_MET",
+    "funding_spline": "NOT_MET",
+    "decile_regime": "NOT_MET"
+  },
+  "blocks": {
+    "block_2": {
+      "n_test": 27443,
+      "n_train": 18993,
+      "rv_only": {
+        "n": 27443,
+        "brier": 0.15093699714017197,
+        "log_loss": 0.4792400859437644,
+        "auc": 0.560308866364508,
+        "calibration_slope": 2.0456583782686373,
+        "calibration_intercept": -0.24972057902488126,
+        "base_rate": 0.18554822723463177
+      },
+      "members": [
+        {
+          "member": "funding_x_rv",
+          "brier": 0.15093699714017197,
+          "log_loss": 0.4792400859437644,
+          "auc": 0.560308866364508,
+          "calibration_slope": 2.0456583782686373,
+          "calibration_intercept": -0.24972057902488126,
+          "base_rate": 0.18554822723463177,
+          "rv_only_brier": 0.15093699714017197,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "funding_x_oi",
+          "brier": 0.15093699714017197,
+          "log_loss": 0.4792400859437644,
+          "auc": 0.560308866364508,
+          "calibration_slope": 2.0456583782686373,
+          "calibration_intercept": -0.24972057902488126,
+          "base_rate": 0.18554822723463177,
+          "rv_only_brier": 0.15093699714017197,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "rv_x_oi",
+          "brier": 0.15093699714017197,
+          "log_loss": 0.4792400859437644,
+          "auc": 0.560308866364508,
+          "calibration_slope": 2.0456583782686373,
+          "calibration_intercept": -0.24972057902488126,
+          "base_rate": 0.18554822723463177,
+          "rv_only_brier": 0.15093699714017197,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "three_way",
+          "brier": 0.15093699714017197,
+          "log_loss": 0.4792400859437644,
+          "auc": 0.560308866364508,
+          "calibration_slope": 2.0456583782686373,
+          "calibration_intercept": -0.24972057902488126,
+          "base_rate": 0.18554822723463177,
+          "rv_only_brier": 0.15093699714017197,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "funding_spline",
+          "brier": 0.15093699714017197,
+          "log_loss": 0.4792400859437644,
+          "auc": 0.560308866364508,
+          "calibration_slope": 2.0456583782686373,
+          "calibration_intercept": -0.24972057902488126,
+          "base_rate": 0.18554822723463177,
+          "rv_only_brier": 0.15093699714017197,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "decile_regime",
+          "brier": 0.15093699714017197,
+          "log_loss": 0.4792400859437644,
+          "auc": 0.560308866364508,
+          "calibration_slope": 2.0456583782686373,
+          "calibration_intercept": -0.24972057902488126,
+          "base_rate": 0.18554822723463177,
+          "rv_only_brier": 0.15093699714017197,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        }
+      ]
+    },
+    "block_3": {
+      "n_test": 28379,
+      "n_train": 28665,
+      "rv_only": {
+        "n": 28379,
+        "brier": 0.14173147577916118,
+        "log_loss": 0.45779235360864007,
+        "auc": 0.5731222820259988,
+        "calibration_slope": 3.1510350962175293,
+        "calibration_intercept": -0.4724543078099782,
+        "base_rate": 0.1704781704781705
+      },
+      "members": [
+        {
+          "member": "funding_x_rv",
+          "brier": 0.14173147577916118,
+          "log_loss": 0.45779235360864007,
+          "auc": 0.5731222820259988,
+          "calibration_slope": 3.1510350962175293,
+          "calibration_intercept": -0.4724543078099782,
+          "base_rate": 0.1704781704781705,
+          "rv_only_brier": 0.14173147577916118,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "funding_x_oi",
+          "brier": 0.14173147577916118,
+          "log_loss": 0.45779235360864007,
+          "auc": 0.5731222820259988,
+          "calibration_slope": 3.1510350962175293,
+          "calibration_intercept": -0.4724543078099782,
+          "base_rate": 0.1704781704781705,
+          "rv_only_brier": 0.14173147577916118,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "rv_x_oi",
+          "brier": 0.14173147577916118,
+          "log_loss": 0.45779235360864007,
+          "auc": 0.5731222820259988,
+          "calibration_slope": 3.1510350962175293,
+          "calibration_intercept": -0.4724543078099782,
+          "base_rate": 0.1704781704781705,
+          "rv_only_brier": 0.14173147577916118,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "three_way",
+          "brier": 0.14173147577916118,
+          "log_loss": 0.45779235360864007,
+          "auc": 0.5731222820259988,
+          "calibration_slope": 3.1510350962175293,
+          "calibration_intercept": -0.4724543078099782,
+          "base_rate": 0.1704781704781705,
+          "rv_only_brier": 0.14173147577916118,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "funding_spline",
+          "brier": 0.14173147577916118,
+          "log_loss": 0.45779235360864007,
+          "auc": 0.5731222820259988,
+          "calibration_slope": 3.1510350962175293,
+          "calibration_intercept": -0.4724543078099782,
+          "base_rate": 0.1704781704781705,
+          "rv_only_brier": 0.14173147577916118,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "decile_regime",
+          "brier": 0.14173147577916118,
+          "log_loss": 0.45779235360864007,
+          "auc": 0.5731222820259988,
+          "calibration_slope": 3.1510350962175293,
+          "calibration_intercept": -0.4724543078099782,
+          "base_rate": 0.1704781704781705,
+          "rv_only_brier": 0.14173147577916118,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        }
+      ]
+    },
+    "pooled": {
+      "n_test": 55822,
+      "n_train": 47658,
+      "rv_only": {
+        "n": 55822,
+        "brier": 0.14622541013661813,
+        "log_loss": 0.46823767941866845,
+        "auc": 0.5690448672828688,
+        "calibration_slope": 2.496322734348255,
+        "calibration_intercept": -0.3403826293846641,
+        "base_rate": 0.177886854645122
+      },
+      "members": [
+        {
+          "member": "funding_x_rv",
+          "brier": 0.14622541013661813,
+          "log_loss": 0.46823767941866845,
+          "auc": 0.5690448672828688,
+          "calibration_slope": 2.496322734348255,
+          "calibration_intercept": -0.3403826293846641,
+          "base_rate": 0.177886854645122,
+          "rv_only_brier": 0.14622541013661813,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "funding_x_oi",
+          "brier": 0.14622541013661813,
+          "log_loss": 0.46823767941866845,
+          "auc": 0.5690448672828688,
+          "calibration_slope": 2.496322734348255,
+          "calibration_intercept": -0.3403826293846641,
+          "base_rate": 0.177886854645122,
+          "rv_only_brier": 0.14622541013661813,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "rv_x_oi",
+          "brier": 0.14622541013661813,
+          "log_loss": 0.46823767941866845,
+          "auc": 0.5690448672828688,
+          "calibration_slope": 2.496322734348255,
+          "calibration_intercept": -0.3403826293846641,
+          "base_rate": 0.177886854645122,
+          "rv_only_brier": 0.14622541013661813,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "three_way",
+          "brier": 0.14622541013661813,
+          "log_loss": 0.46823767941866845,
+          "auc": 0.5690448672828688,
+          "calibration_slope": 2.496322734348255,
+          "calibration_intercept": -0.3403826293846641,
+          "base_rate": 0.177886854645122,
+          "rv_only_brier": 0.14622541013661813,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "funding_spline",
+          "brier": 0.14622541013661813,
+          "log_loss": 0.46823767941866845,
+          "auc": 0.5690448672828688,
+          "calibration_slope": 2.496322734348255,
+          "calibration_intercept": -0.3403826293846641,
+          "base_rate": 0.177886854645122,
+          "rv_only_brier": 0.14622541013661813,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        },
+        {
+          "member": "decile_regime",
+          "brier": 0.14622541013661813,
+          "log_loss": 0.46823767941866845,
+          "auc": 0.5690448672828688,
+          "calibration_slope": 2.496322734348255,
+          "calibration_intercept": -0.3403826293846641,
+          "base_rate": 0.177886854645122,
+          "rv_only_brier": 0.14622541013661813,
+          "brier_improvement": 0.0,
+          "placebo_p": 1.0,
+          "placebo_p95": 0.0,
+          "p_raw": 1.0,
+          "p_holm": 1.0
+        }
+      ]
+    }
+  },
+  "holm_family": "members x scored blocks at alpha=0.05",
+  "common_sample_rule": "drop rows where rv_lag/funding_lag/oi_change_lag is null; identical rows for all models",
+  "placebo": "label-hour permutation within hour across coins, 1000 perms, seed 20261119",
+  "smallest_defensible_effect": 0.002817725360790807,
+  "smallest_defensible_effect_rule": "min mde_brier_80pct across scored blocks at full instrument count (block_3 primary); effect defensible only if >= this MDE",
+  "plausible_effect_brier": 0.001,
+  "mde_by_instrument_count": [
+    {
+      "coin_count": 1,
+      "coins": [
+        "BTC"
+      ],
+      "base_rate": 0.4726665899413051,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 2111,
+          "base_rate": 0.4726665899413051,
+          "sd_diff_proxy": 0.027307323478417262,
+          "mde_brier_80pct": 0.0016650943822793896,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 2183,
+          "base_rate": 0.4726665899413051,
+          "sd_diff_proxy": 0.027180797829286882,
+          "mde_brier_80pct": 0.0016298182244618513,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 4294,
+          "base_rate": 0.4726665899413051,
+          "sd_diff_proxy": 0.027323674004729057,
+          "mde_brier_80pct": 0.0011681857720297738,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 2,
+      "coins": [
+        "BTC",
+        "ETH"
+      ],
+      "base_rate": 0.4188629301415583,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 4222,
+          "base_rate": 0.4188629301415583,
+          "sd_diff_proxy": 0.08088312740166417,
+          "mde_brier_80pct": 0.0034874071852588244,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 4366,
+          "base_rate": 0.4188629301415583,
+          "sd_diff_proxy": 0.07904134760774718,
+          "mde_brier_80pct": 0.0033513231591544086,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 8588,
+          "base_rate": 0.4188629301415583,
+          "sd_diff_proxy": 0.08016580165126519,
+          "mde_brier_80pct": 0.0024235219596974054,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 3,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB"
+      ],
+      "base_rate": 0.30889630567384047,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 6333,
+          "base_rate": 0.30889630567384047,
+          "sd_diff_proxy": 0.180485041659983,
+          "mde_brier_80pct": 0.006353899003011032,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 6549,
+          "base_rate": 0.30889630567384047,
+          "sd_diff_proxy": 0.1714310609248348,
+          "mde_brier_80pct": 0.0059347968146660586,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 12882,
+          "base_rate": 0.30889630567384047,
+          "sd_diff_proxy": 0.17626530558796114,
+          "mde_brier_80pct": 0.004350899263118253,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 4,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL"
+      ],
+      "base_rate": 0.31911036943261595,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 8444,
+          "base_rate": 0.31911036943261595,
+          "sd_diff_proxy": 0.17216670565110254,
+          "mde_brier_80pct": 0.005249028060581933,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 8732,
+          "base_rate": 0.31911036943261595,
+          "sd_diff_proxy": 0.1641465457828555,
+          "mde_brier_80pct": 0.004921287327171487,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 17176,
+          "base_rate": 0.31911036943261595,
+          "sd_diff_proxy": 0.1684443827934156,
+          "mde_brier_80pct": 0.0036008029396696097,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 5,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP"
+      ],
+      "base_rate": 0.31276326389688114,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 10555,
+          "base_rate": 0.31276326389688114,
+          "sd_diff_proxy": 0.1766202995617036,
+          "mde_brier_80pct": 0.004816320015901579,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 10915,
+          "base_rate": 0.31276326389688114,
+          "sd_diff_proxy": 0.16929828223411195,
+          "mde_brier_80pct": 0.004539881519184083,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 21470,
+          "base_rate": 0.31276326389688114,
+          "sd_diff_proxy": 0.17316178353299894,
+          "mde_brier_80pct": 0.003310852745681247,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 6,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX"
+      ],
+      "base_rate": 0.2787432385775118,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 12666,
+          "base_rate": 0.2787432385775118,
+          "sd_diff_proxy": 0.2016166419049749,
+          "mde_brier_80pct": 0.0050189223015437755,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 13098,
+          "base_rate": 0.2787432385775118,
+          "sd_diff_proxy": 0.1925771765320521,
+          "mde_brier_80pct": 0.004714179980815786,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 25764,
+          "base_rate": 0.2787432385775118,
+          "sd_diff_proxy": 0.19727004828424644,
+          "mde_brier_80pct": 0.0034431690266425153,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 7,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE"
+      ],
+      "base_rate": 0.25804383210298737,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 14777,
+          "base_rate": 0.25804383210298737,
+          "sd_diff_proxy": 0.21533760990752793,
+          "mde_brier_80pct": 0.004962843600551879,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 15281,
+          "base_rate": 0.25804383210298737,
+          "sd_diff_proxy": 0.20472723581083593,
+          "mde_brier_80pct": 0.004639846063154991,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 30058,
+          "base_rate": 0.25804383210298737,
+          "sd_diff_proxy": 0.21021324646897085,
+          "mde_brier_80pct": 0.0033969087178682723,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 8,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK"
+      ],
+      "base_rate": 0.2398003222465186,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 16888,
+          "base_rate": 0.2398003222465186,
+          "sd_diff_proxy": 0.22482788344511473,
+          "mde_brier_80pct": 0.004846909370104886,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 17464,
+          "base_rate": 0.2398003222465186,
+          "sd_diff_proxy": 0.21413271918409588,
+          "mde_brier_80pct": 0.004539573037745312,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 34352,
+          "base_rate": 0.2398003222465186,
+          "sd_diff_proxy": 0.21961394209886784,
+          "mde_brier_80pct": 0.003319615100012667,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 9,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI"
+      ],
+      "base_rate": 0.23043183591002672,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 18999,
+          "base_rate": 0.23043183591002672,
+          "sd_diff_proxy": 0.2287627685678142,
+          "mde_brier_80pct": 0.004649687974949363,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 19647,
+          "base_rate": 0.23043183591002672,
+          "sd_diff_proxy": 0.21790329721007723,
+          "mde_brier_80pct": 0.004355314453900374,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 38646,
+          "base_rate": 0.23043183591002672,
+          "sd_diff_proxy": 0.22345005620554048,
+          "mde_brier_80pct": 0.0031844323762778948,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 10,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB"
+      ],
+      "base_rate": 0.2199562665439061,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 21110,
+          "base_rate": 0.2199562665439061,
+          "sd_diff_proxy": 0.23214150747949702,
+          "mde_brier_80pct": 0.004476231313085634,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 21830,
+          "base_rate": 0.2199562665439061,
+          "sd_diff_proxy": 0.22213206710461084,
+          "mde_brier_80pct": 0.004211998690575028,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 42940,
+          "base_rate": 0.2199562665439061,
+          "sd_diff_proxy": 0.22721159528581078,
+          "mde_brier_80pct": 0.0030718733638247417,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 11,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB",
+        "OP"
+      ],
+      "base_rate": 0.20559955638790947,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 23221,
+          "base_rate": 0.20559955638790947,
+          "sd_diff_proxy": 0.23830859439724894,
+          "mde_brier_80pct": 0.004381300923948288,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 24013,
+          "base_rate": 0.20559955638790947,
+          "sd_diff_proxy": 0.22700085816883506,
+          "mde_brier_80pct": 0.0041040073121699295,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 47234,
+          "base_rate": 0.20559955638790947,
+          "sd_diff_proxy": 0.23274065472127334,
+          "mde_brier_80pct": 0.0030001897733903616,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 12,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB",
+        "OP",
+        "APT"
+      ],
+      "base_rate": 0.19551540261633482,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 25332,
+          "base_rate": 0.19551540261633482,
+          "sd_diff_proxy": 0.24091272948607995,
+          "mde_brier_80pct": 0.004240615005031919,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 26196,
+          "base_rate": 0.19551540261633482,
+          "sd_diff_proxy": 0.2299847710338842,
+          "mde_brier_80pct": 0.003980938107686491,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 51528,
+          "base_rate": 0.19551540261633482,
+          "sd_diff_proxy": 0.23551267560355807,
+          "mde_brier_80pct": 0.002906675035454382,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 13,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB",
+        "OP",
+        "APT",
+        "ADA"
+      ],
+      "base_rate": 0.18931097674336253,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 27443,
+          "base_rate": 0.18931097674336253,
+          "sd_diff_proxy": 0.2415599379551142,
+          "mde_brier_80pct": 0.004085196525609372,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 28379,
+          "base_rate": 0.18931097674336253,
+          "sd_diff_proxy": 0.23367478668646058,
+          "mde_brier_80pct": 0.0038861284210082447,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 55822,
+          "base_rate": 0.18931097674336253,
+          "sd_diff_proxy": 0.23762794909975693,
+          "mde_brier_80pct": 0.002817725360790807,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    }
+  ],
+  "power_blocks": [
+    {
+      "name": "block_2",
+      "n_test": 27443,
+      "base_rate": 0.18931097674336253,
+      "sd_diff_proxy": 0.2415599379551142,
+      "mde_brier_80pct": 0.004085196525609372,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    },
+    {
+      "name": "block_3",
+      "n_test": 28379,
+      "base_rate": 0.18931097674336253,
+      "sd_diff_proxy": 0.23367478668646058,
+      "mde_brier_80pct": 0.0038861284210082447,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    },
+    {
+      "name": "pooled",
+      "n_test": 55822,
+      "base_rate": 0.18931097674336253,
+      "sd_diff_proxy": 0.23762794909975693,
+      "mde_brier_80pct": 0.002817725360790807,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    }
+  ],
+  "note_block_1": "cold-start anchor; power only, no model fit",
+  "recompute": {
+    "n_discrepancies": 0,
+    "panel_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9"
+  }
+}
