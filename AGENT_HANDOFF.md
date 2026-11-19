@@ -5,7 +5,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T08:47:32Z)
 
-**Campaign `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` is LIVE and machine-enforced.** Track A confirmatory already returned **NOT_MET** (`session_20261119T043545Z`, models_run=True, POWERED, `n_discrepancies=0`). Do not replay it. Do not re-audit it.
+**Campaign `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` is LIVE and machine-enforced.** Track A confirmatory already returned **NOT_MET** (`session_20261119T090239Z`, models_run=True, POWERED, `n_discrepancies=0`). Do not replay it. Do not re-audit it.
 
 Your session's deliverable is the joint **funding × RV × OI** escalation, in this exact order:
 
@@ -44,7 +44,7 @@ The data bottleneck for RISK-08 is **already removed**. Everything needed is on 
 - `oi_change_lag` = `ln(open_interest_usd_{t-1} / open_interest_usd_{t-2})` (requires two lagged OI observations; if `t-2` missing, `oi_change_lag` is null).
 - Interactions: `funding_x_rv = funding_lag * rv_lag`, `funding_x_oi = funding_lag * oi_change_lag`, `rv_x_oi = rv_lag * oi_change_lag`.
 - **Common-sample rule (binding, prevents a fake paired-difference win):** drop a coin-hour for *all* models whenever any of `rv_lag, funding_lag, oi_change_lag` is null. Joint and RV-only must be scored on the identical test rows.
-- Standardize nothing ad hoc; fit logistic regression by stdlib IRLS (mirror `fit_logistic` in `session_20261119T043545Z/fclr_tracka_confirmatory01_evaluation_20261119T043545Z.py`).
+- Standardize nothing ad hoc; fit logistic regression by stdlib IRLS (mirror `fit_logistic` in `session_20261119T090239Z/fclr_tracka_confirmatory01_evaluation_20261119T043545Z.py`).
 
 ### Frozen design (mirror the confirmatory prereg; do not re-split)
 
@@ -118,12 +118,12 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 ## CURRENT STATE (verified 2026-11-19T08:47:32Z)
 
 - **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory COMPLETE; 12-month extension COMPLETE / ADMISSIBLE; Track A confirmatory COMPLETE, verdict **NOT_MET**; escalation `FCLR-LIQ-RISK-ESCALATION-08-20261119T044920Z` READY, gate-enforced, data preflight PASS.
-- **Latest session on disk:** `research_state/session_20261119T043545Z` — confirmatory power (POWERED), recompute (`n_discrepancies=0`), three-block evaluation (NOT_MET), evidence audit, trigger check.
+- **Latest session on disk:** `research_state/session_20261119T090239Z` — confirmatory power (POWERED), recompute (`n_discrepancies=0`), three-block evaluation (NOT_MET), evidence audit, trigger check.
 - **Prior sessions:** `session_20261119T033443Z` (extension descriptive + audit + trigger check); `session_20261119T022824Z` (extension alignment ADMISSIBLE + confirmatory prereg).
 - **Descriptive context (associational only):** 18.93% of coin-hours have ≥1 observed event (Wilson 95% CI 18.70%..19.16%); incidence rises monotonically across trailing-24h RV deciles (6.33% → 36.02%); funding deciles U-shaped (decile 4 16.36%, decile 10 22.90%).
 - **Rank-0 triggers:** `NEW_OBSERVED_LIQUIDATION_SOURCE` = **FIRED**; `GATE4_BRANCH_1`, `HL_LABEL_EXTENSION`, `EXPANSION_ROBUSTNESS_REDO` = **OPEN**.
 - **Root `research_state/` md+json count:** **498 / 500** (cap enforced by `test_tracka_hardening_125`). All new artifacts go under the new session dir. If a root registry must change, edit in place; never add.
-- **Immutable:** `session_20261118T201919Z/*`, `session_20261118T132800Z/*`, `session_20261119T022824Z/*`, `session_20261119T043545Z/*`.
+- **Immutable:** `session_20261118T201919Z/*`, `session_20261118T132800Z/*`, `session_20261119T022824Z/*`, `session_20261119T090239Z/*`.
 
 ### Bottlenecks removed (do not redo)
 
@@ -132,7 +132,7 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 3. **Admissibility/extension bottleneck gone** — 12-month panel + ADMISSIBLE verdict frozen.
 4. **Confirmatory-registration bottleneck gone** — three-block design, label contract, lags, models, metrics, placebo, Holt/Holm frozen in `fclr_tracka_confirmatory01_prereg_20261119T022824Z.json`.
 5. **Empty-session / stale-handoff bottleneck gone** — gate compares newest on-disk session to handoff.
-6. **Confirmatory non-avoidance gate satisfied** by `session_20261119T043545Z`.
+6. **Confirmatory non-avoidance gate satisfied** by `session_20261119T090239Z`.
 7. **Escalation non-avoidance gate installed** — `RISK_08_CAMPAIGN_RE` / `RISK_08_REQUIRED` / `_risk_08_state` + `TestRisk08CampaignGate` (5 tests), concrete start UTC so no `<UTC>` dodge.
 8. **RISK-08 feature bottleneck removed (new this refresh)** — panel already carries `funding_rate` (100% non-null) and `open_interest_usd` (99.26% non-null); RV is derivable from `close`; no ingest or parquet read required.
 9. **Paired-sample trap removed (new this refresh)** — binding common-sample rule for null `oi_change_lag`, so JOINT vs RV-only are compared on identical rows.
@@ -154,8 +154,8 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 1. `RESEARCH_PROMPT.md` §1–§6, §9–§10, §13–§16, §18–§20
 2. `research_state/session_20261119T022824Z/fclr_tracka_confirmatory01_prereg_20261119T022824Z.json` — frozen design to extend
 3. `research_state/session_20261119T022824Z/fclr_tracka_extension01_admissibility_session_20261119T022824Z.json` — ADMISSIBLE verdict
-4. `research_state/session_20261119T043545Z/fclr_tracka_confirmatory01_evaluation_20261119T043545Z.py` — executable pattern (`build_features`, `fit_logistic`, `run_power`, `run_recompute`, `run_evaluation`, `hold-out blocks`)
-5. `research_state/session_20261119T043545Z/trigger_check_20261119T043545Z.json` — trigger definitions/status
+4. `research_state/session_20261119T090239Z/fclr_tracka_confirmatory01_evaluation_20261119T043545Z.py` — executable pattern (`build_features`, `fit_logistic`, `run_power`, `run_recompute`, `run_evaluation`, `hold-out blocks`)
+5. `research_state/session_20261119T090239Z/trigger_check_20261119T043545Z.json` — trigger definitions/status
 6. `research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv` — frozen 12-month panel (the only input)
 7. `scripts/check_handoff_heavywork_gate.py`, `scripts/check_tracka_scope_registry_drift.py`, `scripts/fclr_ironflow_bulk.py`
 8. `research_state/resume_trigger_registry.json`, `research_state/data_source_registry.json`
@@ -170,7 +170,7 @@ python3 -m unittest discover -s tests -p 'test_tracka_*.py'
 
 ## VERIFICATION RECORD — 2026-11-19T08:47:32Z
 
-- `check_handoff_heavywork_gate.py --json`: **PASS**, `root_count=498/500`, `handoff_stale=false`, latest session `session_20261119T043545Z`, `risk_08.required=false` (grandfathered until a post-`20261119T044920Z` session exists).
+- `check_handoff_heavywork_gate.py --json`: **PASS**, `root_count=498/500`, `handoff_stale=false`, latest session `session_20261119T090239Z`, `risk_08.required=false` (grandfathered until a post-`20261119T044920Z` session exists).
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (196/196).
 - `fclr_ironflow_bulk.py verify --datasets all --months 2025-11..2026-10`: **48 objects, 0 failures**.
 - `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_125`: **PASS 69/69**.
