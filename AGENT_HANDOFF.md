@@ -75,10 +75,10 @@ The data bottleneck for RISK-09 is **already removed**. Everything needed is on 
 | # | Requirement |
 |---|---|
 | 1 | New `research_state/session_<UTC>/` dir exists; UTC strictly greater than `20261119T095305Z` |
-| 2 | `fclr_risk09_prereg_<UTC>.{json,md}` exist, non-empty, and JSON has `frozen_utc` + `outcome_blind=true` + full contract above |
-| 3 | `fclr_risk09_power_<UTC>.{py,json,md}` exist, non-empty, JSON has explicit `status` |
-| 4 | `fclr_risk09_recompute_<UTC>.{py,json}` exist, non-empty, JSON has `n_discrepancies: 0` |
-| 5 | `fclr_risk09_evaluation_<UTC>.{py,json,md}` exist, non-empty, JSON has per-member per-block Brier/log-loss/AUC/calibration, placebo p, Holm p, verdict |
+| 2 | `fclr_risk10_prereg_<UTC>.{json,md}` exist, non-empty, and JSON has `frozen_utc` + `outcome_blind=true` + full contract above |
+| 3 | `fclr_risk10_power_<UTC>.{py,json,md}` exist, non-empty, JSON has explicit `status` |
+| 4 | `fclr_risk10_recompute_<UTC>.{py,json}` exist, non-empty, JSON has `n_discrepancies: 0` |
+| 5 | `fclr_risk10_evaluation_<UTC>.{py,json,md}` exist, non-empty, JSON has per-member per-block Brier/log-loss/AUC/calibration, placebo p, Holm p, verdict |
 | 6 | `evidence_audit_<UTC>.{json,md}` exist, non-empty, per `RESEARCH_PROMPT.md` §19 |
 | 7 | `trigger_check_<UTC>.json` exists, non-empty, re-evaluates all 4 registry triggers |
 | 8 | Every JSON embeds the campaign id `FCLR-LIQ-RISK-ESCALATION-10-20261119T095900Z` and the session UTC |
