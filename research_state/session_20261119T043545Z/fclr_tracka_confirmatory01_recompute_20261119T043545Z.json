@@ -1,0 +1,80 @@
+{
+  "campaign_id": "FCLR-LIQ-TRACKA-CONFIRMATORY-01-20261119T034500Z",
+  "session_id": "session_20261119T043545Z",
+  "artifact": "fclr_tracka_confirmatory01_recompute_20261119T043545Z",
+  "generated_utc": "2026-11-19T04:41:24Z",
+  "prereg": "fclr_tracka_confirmatory01_prereg_20261119T022824Z",
+  "panel_path": "research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv",
+  "panel_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9",
+  "panel_csv_rows": 113880,
+  "analysis_rows": 111761,
+  "analysis_events": 21261,
+  "analysis_base_rate": 0.19023630783547033,
+  "per_coin": {
+    "ADA": {
+      "rows": 8597,
+      "events": 997
+    },
+    "APT": {
+      "rows": 8597,
+      "events": 735
+    },
+    "ARB": {
+      "rows": 8597,
+      "events": 1079
+    },
+    "AVAX": {
+      "rows": 8597,
+      "events": 939
+    },
+    "BNB": {
+      "rows": 8597,
+      "events": 767
+    },
+    "BTC": {
+      "rows": 8597,
+      "events": 4081
+    },
+    "DOGE": {
+      "rows": 8597,
+      "events": 1160
+    },
+    "ETH": {
+      "rows": 8597,
+      "events": 3151
+    },
+    "LINK": {
+      "rows": 8597,
+      "events": 969
+    },
+    "OP": {
+      "rows": 8597,
+      "events": 538
+    },
+    "SOL": {
+      "rows": 8597,
+      "events": 3017
+    },
+    "SUI": {
+      "rows": 8597,
+      "events": 1347
+    },
+    "XRP": {
+      "rows": 8597,
+      "events": 2481
+    }
+  },
+  "block_membership": {
+    "block_1": 18395,
+    "block_2": 26845,
+    "block_3": 27755
+  },
+  "block_events": {
+    "block_1": 4115,
+    "block_2": 5023,
+    "block_3": 4761
+  },
+  "n_discrepancies": 0,
+  "discrepancies": [],
+  "note": "Independent stdlib recomputation (csv/hashlib only); n_discrepancies must be 0 for the frozen panel."
+}

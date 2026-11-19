@@ -1,0 +1,265 @@
+{
+  "campaign_id": "FCLR-LIQ-TRACKA-CONFIRMATORY-01-20261119T034500Z",
+  "session_id": "session_20261119T043545Z",
+  "artifact": "fclr_tracka_confirmatory01_evaluation_20261119T043545Z",
+  "generated_utc": "2026-11-19T04:41:29Z",
+  "prereg": "fclr_tracka_confirmatory01_prereg_20261119T022824Z",
+  "frozen_before_outcomes": true,
+  "headline_metric": "Brier score",
+  "models": [
+    "intercept-only",
+    "funding-only",
+    "RV-only",
+    "funding x RV interaction"
+  ],
+  "blocks": {
+    "block_1": {
+      "status": "COLD_START_NO_PRE_WINDOW_TRAINING",
+      "note": "block_1 is anchored at the window start with no pre-block training history per the frozen prereg; coefficient-based models are not out-of-sample estimable for block_1 and are not run. block_1 contributes to the power audit only.",
+      "n_train": 0,
+      "n_test": 18395
+    },
+    "block_2": {
+      "n_train": 18395,
+      "n_test": 26845,
+      "n_test_events": 5023,
+      "test_base_rate": 0.1871111938908549,
+      "train_base_rate": 0.22370209296004348,
+      "metrics": {
+        "intercept-only": {
+          "brier": 0.15343948890628534,
+          "log_loss": 0.48602663139333524,
+          "auc": 0.5,
+          "calibration_intercept": NaN,
+          "calibration_slope": NaN,
+          "n_test": 26845,
+          "n_test_events": 5023,
+          "test_base_rate": 0.1871111938908549
+        },
+        "funding-only": {
+          "brier": 0.15370347108754098,
+          "log_loss": 0.4868375847077421,
+          "auc": 0.46562006229505765,
+          "calibration_intercept": 0.10761574142190332,
+          "calibration_slope": -0.06264745505746291,
+          "n_test": 26845,
+          "n_test_events": 5023,
+          "test_base_rate": 0.1871111938908549
+        },
+        "RV-only": {
+          "brier": 0.15261487597658607,
+          "log_loss": 0.4836322713716625,
+          "auc": 0.5513240870020087,
+          "calibration_intercept": 0.8724519033816345,
+          "calibration_slope": 0.5402436205214372,
+          "n_test": 26845,
+          "n_test_events": 5023,
+          "test_base_rate": 0.1871111938908549
+        },
+        "funding_x_RV": {
+          "brier": 0.15274346527222527,
+          "log_loss": 0.4837653549075396,
+          "auc": 0.5076887085605464,
+          "calibration_intercept": 0.2829879012136291,
+          "calibration_slope": 0.07219912766446956,
+          "n_test": 26845,
+          "n_test_events": 5023,
+          "test_base_rate": 0.1871111938908549
+        }
+      }
+    },
+    "block_3": {
+      "n_train": 28067,
+      "n_test": 27755,
+      "n_test_events": 4761,
+      "test_base_rate": 0.17153666006125023,
+      "train_base_rate": 0.20721844158620445,
+      "metrics": {
+        "intercept-only": {
+          "brier": 0.14338502384907587,
+          "log_loss": 0.4623710243157526,
+          "auc": 0.5,
+          "calibration_intercept": NaN,
+          "calibration_slope": NaN,
+          "n_test": 27755,
+          "n_test_events": 4761,
+          "test_base_rate": 0.17153666006125023
+        },
+        "funding-only": {
+          "brier": 0.14293494436776477,
+          "log_loss": 0.46103259345362796,
+          "auc": 0.5322665335725782,
+          "calibration_intercept": 0.5390138884015525,
+          "calibration_slope": 0.27577706958183057,
+          "n_test": 27755,
+          "n_test_events": 4761,
+          "test_base_rate": 0.17153666006125023
+        },
+        "RV-only": {
+          "brier": 0.14291512194329245,
+          "log_loss": 0.4609392118632371,
+          "auc": 0.5654900942442872,
+          "calibration_intercept": 1.6108937227653888,
+          "calibration_slope": 1.0648576828550513,
+          "n_test": 27755,
+          "n_test_events": 4761,
+          "test_base_rate": 0.17153666006125023
+        },
+        "funding_x_RV": {
+          "brier": 0.14239308085125885,
+          "log_loss": 0.4591518184261665,
+          "auc": 0.5589843104372662,
+          "calibration_intercept": 0.4734582933536949,
+          "calibration_slope": 0.22316729670347749,
+          "n_test": 27755,
+          "n_test_events": 4761,
+          "test_base_rate": 0.17153666006125023
+        }
+      }
+    }
+  },
+  "family_size": 4,
+  "alpha": 0.05,
+  "multiplicity": "Holm correction over declared family (block x model-vs-RV on Brier)",
+  "placebo": "label-hour permutation null (200 permutations, seed 20261119)",
+  "family": [
+    {
+      "contrast": "block_3:funding-only_vs_RV_only",
+      "block": "block_3",
+      "model": "funding-only",
+      "baseline": "RV-only",
+      "metric": "Brier",
+      "brier_model": 0.14293494436776477,
+      "brier_baseline": 0.14291512194329245,
+      "brier_diff": 1.9822424472321076e-05,
+      "p_raw": 0.004975124378109453,
+      "p_holm": 1.0,
+      "reject_holm_005": false,
+      "model_metrics": {
+        "brier": 0.14293494436776477,
+        "log_loss": 0.46103259345362796,
+        "auc": 0.5322665335725782,
+        "calibration_intercept": 0.5390138884015525,
+        "calibration_slope": 0.27577706958183057
+      },
+      "baseline_metrics": {
+        "brier": 0.14291512194329245,
+        "log_loss": 0.4609392118632371,
+        "auc": 0.5654900942442872,
+        "calibration_intercept": 1.6108937227653888,
+        "calibration_slope": 1.0648576828550513
+      }
+    },
+    {
+      "contrast": "block_3:funding_x_RV_vs_RV_only",
+      "block": "block_3",
+      "model": "funding_x_RV",
+      "baseline": "RV-only",
+      "metric": "Brier",
+      "brier_model": 0.14239308085125885,
+      "brier_baseline": 0.14291512194329245,
+      "brier_diff": -0.0005220410920336038,
+      "p_raw": 0.004975124378109453,
+      "p_holm": 1.0,
+      "reject_holm_005": false,
+      "model_metrics": {
+        "brier": 0.14239308085125885,
+        "log_loss": 0.4591518184261665,
+        "auc": 0.5589843104372662,
+        "calibration_intercept": 0.4734582933536949,
+        "calibration_slope": 0.22316729670347749
+      },
+      "baseline_metrics": {
+        "brier": 0.14291512194329245,
+        "log_loss": 0.4609392118632371,
+        "auc": 0.5654900942442872,
+        "calibration_intercept": 1.6108937227653888,
+        "calibration_slope": 1.0648576828550513
+      }
+    },
+    {
+      "contrast": "block_2:funding_x_RV_vs_RV_only",
+      "block": "block_2",
+      "model": "funding_x_RV",
+      "baseline": "RV-only",
+      "metric": "Brier",
+      "brier_model": 0.15274346527222527,
+      "brier_baseline": 0.15261487597658607,
+      "brier_diff": 0.00012858929563919208,
+      "p_raw": 0.17412935323383086,
+      "p_holm": 1.0,
+      "reject_holm_005": false,
+      "model_metrics": {
+        "brier": 0.15274346527222527,
+        "log_loss": 0.4837653549075396,
+        "auc": 0.5076887085605464,
+        "calibration_intercept": 0.2829879012136291,
+        "calibration_slope": 0.07219912766446956
+      },
+      "baseline_metrics": {
+        "brier": 0.15261487597658607,
+        "log_loss": 0.4836322713716625,
+        "auc": 0.5513240870020087,
+        "calibration_intercept": 0.8724519033816345,
+        "calibration_slope": 0.5402436205214372
+      }
+    },
+    {
+      "contrast": "block_2:funding-only_vs_RV_only",
+      "block": "block_2",
+      "model": "funding-only",
+      "baseline": "RV-only",
+      "metric": "Brier",
+      "brier_model": 0.15370347108754098,
+      "brier_baseline": 0.15261487597658607,
+      "brier_diff": 0.0010885951109549097,
+      "p_raw": 1.0,
+      "p_holm": 1.0,
+      "reject_holm_005": false,
+      "model_metrics": {
+        "brier": 0.15370347108754098,
+        "log_loss": 0.4868375847077421,
+        "auc": 0.46562006229505765,
+        "calibration_intercept": 0.10761574142190332,
+        "calibration_slope": -0.06264745505746291
+      },
+      "baseline_metrics": {
+        "brier": 0.15261487597658607,
+        "log_loss": 0.4836322713716625,
+        "auc": 0.5513240870020087,
+        "calibration_intercept": 0.8724519033816345,
+        "calibration_slope": 0.5402436205214372
+      }
+    }
+  ],
+  "headline_contrast": {
+    "contrast": "block_3:funding_x_RV_vs_RV_only",
+    "block": "block_3",
+    "model": "funding_x_RV",
+    "baseline": "RV-only",
+    "metric": "Brier",
+    "brier_model": 0.14239308085125885,
+    "brier_baseline": 0.14291512194329245,
+    "brier_diff": -0.0005220410920336038,
+    "p_raw": 0.004975124378109453,
+    "p_holm": 1.0,
+    "reject_holm_005": false,
+    "model_metrics": {
+      "brier": 0.14239308085125885,
+      "log_loss": 0.4591518184261665,
+      "auc": 0.5589843104372662,
+      "calibration_intercept": 0.4734582933536949,
+      "calibration_slope": 0.22316729670347749
+    },
+    "baseline_metrics": {
+      "brier": 0.14291512194329245,
+      "log_loss": 0.4609392118632371,
+      "auc": 0.5654900942442872,
+      "calibration_intercept": 1.6108937227653888,
+      "calibration_slope": 1.0648576828550513
+    }
+  },
+  "verdict": "NOT_MET",
+  "models_run": true,
+  "statement": "Outcome-blind confirmatory evaluation on the frozen 12-month Track A panel. Absence from the feed is not evidence of no liquidation (missing, not zero). No sealed Binance month was read. No post-hoc metric added."
+}

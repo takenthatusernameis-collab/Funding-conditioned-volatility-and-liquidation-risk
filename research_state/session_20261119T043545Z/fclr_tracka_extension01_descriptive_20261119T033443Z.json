@@ -1,0 +1,3916 @@
+{
+  "aggregate_hour_of_day_profile": {
+    "00": {
+      "events": 46293.0,
+      "hours": 4745,
+      "hours_with_event": 772,
+      "incidence": 0.16269757639620652
+    },
+    "01": {
+      "events": 50562.0,
+      "hours": 4745,
+      "hours_with_event": 904,
+      "incidence": 0.1905163329820864
+    },
+    "02": {
+      "events": 45266.0,
+      "hours": 4745,
+      "hours_with_event": 880,
+      "incidence": 0.18545837723919917
+    },
+    "03": {
+      "events": 30409.0,
+      "hours": 4745,
+      "hours_with_event": 850,
+      "incidence": 0.1791359325605901
+    },
+    "04": {
+      "events": 26918.0,
+      "hours": 4745,
+      "hours_with_event": 764,
+      "incidence": 0.16101159114857744
+    },
+    "05": {
+      "events": 33096.0,
+      "hours": 4745,
+      "hours_with_event": 736,
+      "incidence": 0.15511064278187567
+    },
+    "06": {
+      "events": 25183.0,
+      "hours": 4745,
+      "hours_with_event": 682,
+      "incidence": 0.14373024236037935
+    },
+    "07": {
+      "events": 33297.0,
+      "hours": 4745,
+      "hours_with_event": 704,
+      "incidence": 0.14836670179135933
+    },
+    "08": {
+      "events": 40830.0,
+      "hours": 4745,
+      "hours_with_event": 779,
+      "incidence": 0.16417281348788199
+    },
+    "09": {
+      "events": 25697.0,
+      "hours": 4745,
+      "hours_with_event": 794,
+      "incidence": 0.1673340358271865
+    },
+    "10": {
+      "events": 18068.0,
+      "hours": 4745,
+      "hours_with_event": 689,
+      "incidence": 0.14520547945205478
+    },
+    "11": {
+      "events": 24999.0,
+      "hours": 4745,
+      "hours_with_event": 662,
+      "incidence": 0.13951527924130663
+    },
+    "12": {
+      "events": 51184.0,
+      "hours": 4745,
+      "hours_with_event": 920,
+      "incidence": 0.19388830347734456
+    },
+    "13": {
+      "events": 76130.0,
+      "hours": 4745,
+      "hours_with_event": 1149,
+      "incidence": 0.24214963119072708
+    },
+    "14": {
+      "events": 104273.0,
+      "hours": 4745,
+      "hours_with_event": 1440,
+      "incidence": 0.303477344573235
+    },
+    "15": {
+      "events": 115520.0,
+      "hours": 4745,
+      "hours_with_event": 1408,
+      "incidence": 0.29673340358271866
+    },
+    "16": {
+      "events": 60640.0,
+      "hours": 4745,
+      "hours_with_event": 1235,
+      "incidence": 0.2602739726027397
+    },
+    "17": {
+      "events": 61163.0,
+      "hours": 4745,
+      "hours_with_event": 1092,
+      "incidence": 0.23013698630136986
+    },
+    "18": {
+      "events": 60900.0,
+      "hours": 4745,
+      "hours_with_event": 1032,
+      "incidence": 0.21749209694415172
+    },
+    "19": {
+      "events": 34862.0,
+      "hours": 4745,
+      "hours_with_event": 905,
+      "incidence": 0.19072708113804004
+    },
+    "20": {
+      "events": 45777.0,
+      "hours": 4745,
+      "hours_with_event": 770,
+      "incidence": 0.16227608008429925
+    },
+    "21": {
+      "events": 35346.0,
+      "hours": 4745,
+      "hours_with_event": 787,
+      "incidence": 0.16585879873551107
+    },
+    "22": {
+      "events": 46066.0,
+      "hours": 4745,
+      "hours_with_event": 884,
+      "incidence": 0.1863013698630137
+    },
+    "23": {
+      "events": 35967.0,
+      "hours": 4745,
+      "hours_with_event": 719,
+      "incidence": 0.15152792413066385
+    }
+  },
+  "aggregate_weekday_profile": {
+    "Fri": {
+      "events": 207245.0,
+      "hours": 16224,
+      "hours_with_event": 3556,
+      "incidence": 0.21918145956607496
+    },
+    "Mon": {
+      "events": 179195.0,
+      "hours": 16224,
+      "hours_with_event": 3280,
+      "incidence": 0.20216962524654833
+    },
+    "Sat": {
+      "events": 78534.0,
+      "hours": 16536,
+      "hours_with_event": 2016,
+      "incidence": 0.12191582002902758
+    },
+    "Sun": {
+      "events": 103019.0,
+      "hours": 16224,
+      "hours_with_event": 2478,
+      "incidence": 0.15273668639053253
+    },
+    "Thu": {
+      "events": 203687.0,
+      "hours": 16224,
+      "hours_with_event": 3547,
+      "incidence": 0.2186267258382643
+    },
+    "Tue": {
+      "events": 176648.0,
+      "hours": 16224,
+      "hours_with_event": 3253,
+      "incidence": 0.20050542406311636
+    },
+    "Wed": {
+      "events": 180118.0,
+      "hours": 16224,
+      "hours_with_event": 3427,
+      "incidence": 0.2112302761341223
+    }
+  },
+  "artifact": "fclr_tracka_extension01_descriptive_20261119T033443Z",
+  "artifact_kind": "descriptive_layer",
+  "campaign_id": "FCLR-LIQ-TRACKA-EXTENSION-01-20261119T015256Z",
+  "coins": [
+    "ADA",
+    "APT",
+    "ARB",
+    "AVAX",
+    "BNB",
+    "BTC",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "OP",
+    "SOL",
+    "SUI",
+    "XRP"
+  ],
+  "confirmatory_evaluation_run": false,
+  "generated_utc": "2026-11-19T03:37:00Z",
+  "incidence_by_funding_decile": {
+    "bins": [
+      {
+        "decile": 1,
+        "funding_rate_max": 3.5493e-06,
+        "funding_rate_min": -0.0019499095,
+        "incidence": 0.21952932911837023,
+        "incidence_ci95_high": 0.22722572537052918,
+        "incidence_ci95_low": 0.21202209563147636,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2500
+      },
+      {
+        "decile": 2,
+        "funding_rate_max": 1.03406e-05,
+        "funding_rate_min": -4.73988e-05,
+        "incidence": 0.1828240252897787,
+        "incidence_ci95_high": 0.19002975013912118,
+        "incidence_ci95_low": 0.1758322190090453,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2082
+      },
+      {
+        "decile": 3,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": -3.04064e-05,
+        "incidence": 0.17966280295047418,
+        "incidence_ci95_high": 0.18682157912665862,
+        "incidence_ci95_low": 0.17272007742165577,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2046
+      },
+      {
+        "decile": 4,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": -1.95101e-05,
+        "incidence": 0.16359325605900948,
+        "incidence_ci95_high": 0.17050047479527952,
+        "incidence_ci95_low": 0.1569129260371197,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 1863
+      },
+      {
+        "decile": 5,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": -1.0761e-05,
+        "incidence": 0.18993677555321392,
+        "incidence_ci95_high": 0.1972452555982348,
+        "incidence_ci95_low": 0.1828374168995991,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2163
+      },
+      {
+        "decile": 6,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": -2.259e-06,
+        "incidence": 0.19661046715841238,
+        "incidence_ci95_high": 0.20401185814333955,
+        "incidence_ci95_low": 0.18941369650973783,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2239
+      },
+      {
+        "decile": 7,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": 5.9064e-06,
+        "incidence": 0.18106779065683176,
+        "incidence_ci95_high": 0.18824753196434288,
+        "incidence_ci95_low": 0.17410315240612803,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2062
+      },
+      {
+        "decile": 8,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": 1.25e-05,
+        "incidence": 0.16736916051984546,
+        "incidence_ci95_high": 0.17433749558089537,
+        "incidence_ci95_low": 0.16062516752354952,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 1906
+      },
+      {
+        "decile": 9,
+        "funding_rate_max": 1.25e-05,
+        "funding_rate_min": 1.25e-05,
+        "incidence": 0.1833508956796628,
+        "incidence_ci95_high": 0.19056436768220789,
+        "incidence_ci95_low": 0.17635098689926734,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2088
+      },
+      {
+        "decile": 10,
+        "funding_rate_max": 0.0003795082,
+        "funding_rate_min": 1.25e-05,
+        "incidence": 0.22901299613628381,
+        "incidence_ci95_high": 0.2368212843091056,
+        "incidence_ci95_low": 0.22138747449245638,
+        "n_coin_hours": 11388,
+        "n_hours_with_event": 2608
+      }
+    ],
+    "definition": "deciles assigned within each coin on the same-hour funding_rate; pooled across coins"
+  },
+  "incidence_by_rv_decile": {
+    "bins": [
+      {
+        "decile": 1,
+        "incidence": 0.06328111248019715,
+        "incidence_ci95_high": 0.06790722554637543,
+        "incidence_ci95_low": 0.05895021719679988,
+        "n_coin_hours": 11362,
+        "n_hours_with_event": 719,
+        "rv_24h_max": 0.025407749167481338,
+        "rv_24h_min": 0.002783653210361116
+      },
+      {
+        "decile": 2,
+        "incidence": 0.09787009329343425,
+        "incidence_ci95_high": 0.10347049574541138,
+        "incidence_ci95_low": 0.09254152680468296,
+        "n_coin_hours": 11362,
+        "n_hours_with_event": 1112,
+        "rv_24h_max": 0.029628868453593128,
+        "rv_24h_min": 0.00953463852834501
+      },
+      {
+        "decile": 3,
+        "incidence": 0.12908626310688168,
+        "incidence_ci95_high": 0.13538086602022978,
+        "incidence_ci95_low": 0.12304268143770361,
+        "n_coin_hours": 11349,
+        "n_hours_with_event": 1465,
+        "rv_24h_max": 0.033385019412659075,
+        "rv_24h_min": 0.012072640611013648
+      },
+      {
+        "decile": 4,
+        "incidence": 0.1534060904770287,
+        "incidence_ci95_high": 0.1601497042522503,
+        "incidence_ci95_low": 0.14689677086315164,
+        "n_coin_hours": 11362,
+        "n_hours_with_event": 1743,
+        "rv_24h_max": 0.03698952761713067,
+        "rv_24h_min": 0.014162298554880196
+      },
+      {
+        "decile": 5,
+        "incidence": 0.17631509384086705,
+        "incidence_ci95_high": 0.1834356572657229,
+        "incidence_ci95_low": 0.16941358886486704,
+        "n_coin_hours": 11349,
+        "n_hours_with_event": 2001,
+        "rv_24h_max": 0.04112517262282818,
+        "rv_24h_min": 0.016336658146032242
+      },
+      {
+        "decile": 6,
+        "incidence": 0.1888751980285161,
+        "incidence_ci95_high": 0.19617704923443752,
+        "incidence_ci95_low": 0.18178366420714348,
+        "n_coin_hours": 11362,
+        "n_hours_with_event": 2146,
+        "rv_24h_max": 0.04521361760416725,
+        "rv_24h_min": 0.018692899570875127
+      },
+      {
+        "decile": 7,
+        "incidence": 0.20797394824854779,
+        "incidence_ci95_high": 0.21553486167902272,
+        "incidence_ci95_low": 0.20061044163050082,
+        "n_coin_hours": 11362,
+        "n_hours_with_event": 2363,
+        "rv_24h_max": 0.05071961122734759,
+        "rv_24h_min": 0.021122525431923663
+      },
+      {
+        "decile": 8,
+        "incidence": 0.23852321790466122,
+        "incidence_ci95_high": 0.24645186019580237,
+        "incidence_ci95_low": 0.23077153381332402,
+        "n_coin_hours": 11349,
+        "n_hours_with_event": 2707,
+        "rv_24h_max": 0.058891523589974085,
+        "rv_24h_min": 0.023384952303503074
+      },
+      {
+        "decile": 9,
+        "incidence": 0.2816405562400986,
+        "incidence_ci95_high": 0.28998408568013606,
+        "incidence_ci95_low": 0.27344463569145167,
+        "n_coin_hours": 11362,
+        "n_hours_with_event": 3200,
+        "rv_24h_max": 0.07552462090123152,
+        "rv_24h_min": 0.026909418718906532
+      },
+      {
+        "decile": 10,
+        "incidence": 0.3602079478368138,
+        "incidence_ci95_high": 0.36908617359130225,
+        "incidence_ci95_low": 0.35142432837853055,
+        "n_coin_hours": 11349,
+        "n_hours_with_event": 4088,
+        "rv_24h_max": 0.17987034003766408,
+        "rv_24h_min": 0.032375644797378665
+      }
+    ],
+    "definition": "deciles assigned within each coin on trailing-24h realized volatility; hours without a full trailing window are excluded",
+    "n_coin_hours_with_rv": 113568
+  },
+  "interpretation": "Descriptive associations on observed liquidation labels. No model was fit, no out-of-sample forecast was evaluated, and no causal or predictive claim is made. The decile tables describe co-incidence in the same panel and must not be read as lead-lag evidence.",
+  "label_contract": {
+    "absence_contract": "an hour with liq_count == 0 is an hour with no observed event in the feed; it is not proof that no liquidation occurred",
+    "absence_is_zero": false,
+    "event": "liq_count >= 1 in the closed hour",
+    "modeled_or_proxy": false,
+    "observed_labels": true
+  },
+  "n_coins": 13,
+  "panel_rows": 113880,
+  "panel_source": "research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv",
+  "per_coin": [
+    {
+      "coin": "ADA",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 306.0,
+          "hours": 365,
+          "hours_with_event": 34
+        },
+        "01": {
+          "events": 244.0,
+          "hours": 365,
+          "hours_with_event": 37
+        },
+        "02": {
+          "events": 472.0,
+          "hours": 365,
+          "hours_with_event": 43
+        },
+        "03": {
+          "events": 178.0,
+          "hours": 365,
+          "hours_with_event": 39
+        },
+        "04": {
+          "events": 199.0,
+          "hours": 365,
+          "hours_with_event": 39
+        },
+        "05": {
+          "events": 356.0,
+          "hours": 365,
+          "hours_with_event": 33
+        },
+        "06": {
+          "events": 119.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "07": {
+          "events": 157.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "08": {
+          "events": 182.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "09": {
+          "events": 87.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "10": {
+          "events": 148.0,
+          "hours": 365,
+          "hours_with_event": 35
+        },
+        "11": {
+          "events": 85.0,
+          "hours": 365,
+          "hours_with_event": 23
+        },
+        "12": {
+          "events": 163.0,
+          "hours": 365,
+          "hours_with_event": 43
+        },
+        "13": {
+          "events": 164.0,
+          "hours": 365,
+          "hours_with_event": 54
+        },
+        "14": {
+          "events": 621.0,
+          "hours": 365,
+          "hours_with_event": 76
+        },
+        "15": {
+          "events": 691.0,
+          "hours": 365,
+          "hours_with_event": 81
+        },
+        "16": {
+          "events": 501.0,
+          "hours": 365,
+          "hours_with_event": 70
+        },
+        "17": {
+          "events": 253.0,
+          "hours": 365,
+          "hours_with_event": 46
+        },
+        "18": {
+          "events": 224.0,
+          "hours": 365,
+          "hours_with_event": 46
+        },
+        "19": {
+          "events": 161.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "20": {
+          "events": 149.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "21": {
+          "events": 205.0,
+          "hours": 365,
+          "hours_with_event": 37
+        },
+        "22": {
+          "events": 224.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "23": {
+          "events": 216.0,
+          "hours": 365,
+          "hours_with_event": 40
+        }
+      },
+      "hours_with_ge1_event": 1009,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.11518264840182649,
+      "share_hours_with_ge1_event_ci95_high": 0.12203734788483868,
+      "share_hours_with_ge1_event_ci95_low": 0.10866531565942254,
+      "top10_liquidation_hours": [
+        {
+          "close": 0.17568,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-21T05:00:00Z",
+          "liq_count": 188,
+          "liq_long_count": 0,
+          "liq_notional_usd": 111505.79516000001,
+          "liq_short_count": 188
+        },
+        {
+          "close": 0.22275,
+          "funding_rate": -1.35028e-05,
+          "hour_utc": "2026-10-15T02:00:00Z",
+          "liq_count": 145,
+          "liq_long_count": 145,
+          "liq_notional_usd": 225309.74292,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.23213,
+          "funding_rate": 3.8139e-06,
+          "hour_utc": "2026-09-20T16:00:00Z",
+          "liq_count": 120,
+          "liq_long_count": 0,
+          "liq_notional_usd": 47316.99756,
+          "liq_short_count": 120
+        },
+        {
+          "close": 0.18427,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-04T14:00:00Z",
+          "liq_count": 102,
+          "liq_long_count": 0,
+          "liq_notional_usd": 71276.63696,
+          "liq_short_count": 102
+        },
+        {
+          "close": 0.19088,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-04T15:00:00Z",
+          "liq_count": 102,
+          "liq_long_count": 0,
+          "liq_notional_usd": 55754.55377,
+          "liq_short_count": 102
+        },
+        {
+          "close": 0.25265,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 84,
+          "liq_long_count": 84,
+          "liq_notional_usd": 468150.43976,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.16587,
+          "funding_rate": -4.231e-07,
+          "hour_utc": "2026-07-08T08:00:00Z",
+          "liq_count": 84,
+          "liq_long_count": 84,
+          "liq_notional_usd": 18240.95892,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.15881,
+          "funding_rate": -2.98316e-05,
+          "hour_utc": "2026-07-27T14:00:00Z",
+          "liq_count": 81,
+          "liq_long_count": 81,
+          "liq_notional_usd": 13605.89158,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.14152,
+          "funding_rate": -2.15931e-05,
+          "hour_utc": "2026-06-24T16:00:00Z",
+          "liq_count": 79,
+          "liq_long_count": 79,
+          "liq_notional_usd": 91933.45141,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.20872,
+          "funding_rate": 3.4423e-06,
+          "hour_utc": "2026-08-06T15:00:00Z",
+          "liq_count": 77,
+          "liq_long_count": 0,
+          "liq_notional_usd": 231157.00389,
+          "liq_short_count": 77
+        }
+      ],
+      "total_liq_events": 6105,
+      "total_liq_long_count": 3758,
+      "total_liq_notional_usd": 15312926.71938,
+      "total_liq_short_count": 2347,
+      "weekday_profile": {
+        "Fri": {
+          "events": 762.0,
+          "hours": 1248,
+          "hours_with_event": 163
+        },
+        "Mon": {
+          "events": 901.0,
+          "hours": 1248,
+          "hours_with_event": 151
+        },
+        "Sat": {
+          "events": 766.0,
+          "hours": 1272,
+          "hours_with_event": 101
+        },
+        "Sun": {
+          "events": 675.0,
+          "hours": 1248,
+          "hours_with_event": 118
+        },
+        "Thu": {
+          "events": 1192.0,
+          "hours": 1248,
+          "hours_with_event": 166
+        },
+        "Tue": {
+          "events": 886.0,
+          "hours": 1248,
+          "hours_with_event": 145
+        },
+        "Wed": {
+          "events": 923.0,
+          "hours": 1248,
+          "hours_with_event": 165
+        }
+      }
+    },
+    {
+      "coin": "APT",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 203.0,
+          "hours": 365,
+          "hours_with_event": 25
+        },
+        "01": {
+          "events": 70.0,
+          "hours": 365,
+          "hours_with_event": 29
+        },
+        "02": {
+          "events": 98.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "03": {
+          "events": 77.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "04": {
+          "events": 37.0,
+          "hours": 365,
+          "hours_with_event": 24
+        },
+        "05": {
+          "events": 71.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "06": {
+          "events": 52.0,
+          "hours": 365,
+          "hours_with_event": 19
+        },
+        "07": {
+          "events": 78.0,
+          "hours": 365,
+          "hours_with_event": 21
+        },
+        "08": {
+          "events": 66.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "09": {
+          "events": 45.0,
+          "hours": 365,
+          "hours_with_event": 19
+        },
+        "10": {
+          "events": 21.0,
+          "hours": 365,
+          "hours_with_event": 17
+        },
+        "11": {
+          "events": 48.0,
+          "hours": 365,
+          "hours_with_event": 27
+        },
+        "12": {
+          "events": 58.0,
+          "hours": 365,
+          "hours_with_event": 35
+        },
+        "13": {
+          "events": 56.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "14": {
+          "events": 172.0,
+          "hours": 365,
+          "hours_with_event": 52
+        },
+        "15": {
+          "events": 194.0,
+          "hours": 365,
+          "hours_with_event": 52
+        },
+        "16": {
+          "events": 158.0,
+          "hours": 365,
+          "hours_with_event": 47
+        },
+        "17": {
+          "events": 177.0,
+          "hours": 365,
+          "hours_with_event": 40
+        },
+        "18": {
+          "events": 135.0,
+          "hours": 365,
+          "hours_with_event": 37
+        },
+        "19": {
+          "events": 77.0,
+          "hours": 365,
+          "hours_with_event": 23
+        },
+        "20": {
+          "events": 152.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "21": {
+          "events": 120.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "22": {
+          "events": 83.0,
+          "hours": 365,
+          "hours_with_event": 29
+        },
+        "23": {
+          "events": 76.0,
+          "hours": 365,
+          "hours_with_event": 23
+        }
+      },
+      "hours_with_ge1_event": 740,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.08447488584474885,
+      "share_hours_with_ge1_event_ci95_high": 0.09048235472731248,
+      "share_hours_with_ge1_event_ci95_low": 0.07883170498823508,
+      "top10_liquidation_hours": [
+        {
+          "close": 0.5858,
+          "funding_rate": 9.7248e-06,
+          "hour_utc": "2026-07-13T17:00:00Z",
+          "liq_count": 53,
+          "liq_long_count": 53,
+          "liq_notional_usd": 5576.255986,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.842,
+          "funding_rate": -0.0001166437,
+          "hour_utc": "2025-12-01T00:00:00Z",
+          "liq_count": 43,
+          "liq_long_count": 42,
+          "liq_notional_usd": 326032.07638499996,
+          "liq_short_count": 1
+        },
+        {
+          "close": 2.5421,
+          "funding_rate": -4.94303e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 40,
+          "liq_long_count": 40,
+          "liq_notional_usd": 66298.089605,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.5504,
+          "funding_rate": -1.32175e-05,
+          "hour_utc": "2026-08-01T18:00:00Z",
+          "liq_count": 37,
+          "liq_long_count": 37,
+          "liq_notional_usd": 10940.338957,
+          "liq_short_count": 0
+        },
+        {
+          "close": 2.8394,
+          "funding_rate": -5.15567e-05,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 33,
+          "liq_long_count": 33,
+          "liq_notional_usd": 95527.483239,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.602,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-30T00:00:00Z",
+          "liq_count": 33,
+          "liq_long_count": 32,
+          "liq_notional_usd": 31890.050663,
+          "liq_short_count": 1
+        },
+        {
+          "close": 0.6371,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-04T00:00:00Z",
+          "liq_count": 32,
+          "liq_long_count": 0,
+          "liq_notional_usd": 2691.491666,
+          "liq_short_count": 32
+        },
+        {
+          "close": 0.6212,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 30,
+          "liq_long_count": 30,
+          "liq_notional_usd": 51657.776709,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.0093,
+          "funding_rate": -2.05152e-05,
+          "hour_utc": "2026-02-06T00:00:00Z",
+          "liq_count": 27,
+          "liq_long_count": 27,
+          "liq_notional_usd": 25244.571637,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.5181,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-16T21:00:00Z",
+          "liq_count": 26,
+          "liq_long_count": 26,
+          "liq_notional_usd": 7430.465217,
+          "liq_short_count": 0
+        }
+      ],
+      "total_liq_events": 2324,
+      "total_liq_long_count": 1810,
+      "total_liq_notional_usd": 4884336.6625810005,
+      "total_liq_short_count": 514,
+      "weekday_profile": {
+        "Fri": {
+          "events": 500.0,
+          "hours": 1248,
+          "hours_with_event": 162
+        },
+        "Mon": {
+          "events": 411.0,
+          "hours": 1248,
+          "hours_with_event": 94
+        },
+        "Sat": {
+          "events": 330.0,
+          "hours": 1272,
+          "hours_with_event": 95
+        },
+        "Sun": {
+          "events": 232.0,
+          "hours": 1248,
+          "hours_with_event": 73
+        },
+        "Thu": {
+          "events": 353.0,
+          "hours": 1248,
+          "hours_with_event": 123
+        },
+        "Tue": {
+          "events": 273.0,
+          "hours": 1248,
+          "hours_with_event": 97
+        },
+        "Wed": {
+          "events": 225.0,
+          "hours": 1248,
+          "hours_with_event": 96
+        }
+      }
+    },
+    {
+      "coin": "ARB",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 787.0,
+          "hours": 365,
+          "hours_with_event": 44
+        },
+        "01": {
+          "events": 422.0,
+          "hours": 365,
+          "hours_with_event": 47
+        },
+        "02": {
+          "events": 587.0,
+          "hours": 365,
+          "hours_with_event": 42
+        },
+        "03": {
+          "events": 509.0,
+          "hours": 365,
+          "hours_with_event": 44
+        },
+        "04": {
+          "events": 358.0,
+          "hours": 365,
+          "hours_with_event": 46
+        },
+        "05": {
+          "events": 163.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "06": {
+          "events": 165.0,
+          "hours": 365,
+          "hours_with_event": 33
+        },
+        "07": {
+          "events": 366.0,
+          "hours": 365,
+          "hours_with_event": 42
+        },
+        "08": {
+          "events": 260.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "09": {
+          "events": 257.0,
+          "hours": 365,
+          "hours_with_event": 43
+        },
+        "10": {
+          "events": 270.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "11": {
+          "events": 228.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "12": {
+          "events": 302.0,
+          "hours": 365,
+          "hours_with_event": 50
+        },
+        "13": {
+          "events": 244.0,
+          "hours": 365,
+          "hours_with_event": 51
+        },
+        "14": {
+          "events": 662.0,
+          "hours": 365,
+          "hours_with_event": 68
+        },
+        "15": {
+          "events": 778.0,
+          "hours": 365,
+          "hours_with_event": 72
+        },
+        "16": {
+          "events": 550.0,
+          "hours": 365,
+          "hours_with_event": 64
+        },
+        "17": {
+          "events": 470.0,
+          "hours": 365,
+          "hours_with_event": 56
+        },
+        "18": {
+          "events": 692.0,
+          "hours": 365,
+          "hours_with_event": 46
+        },
+        "19": {
+          "events": 221.0,
+          "hours": 365,
+          "hours_with_event": 42
+        },
+        "20": {
+          "events": 402.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "21": {
+          "events": 354.0,
+          "hours": 365,
+          "hours_with_event": 42
+        },
+        "22": {
+          "events": 573.0,
+          "hours": 365,
+          "hours_with_event": 45
+        },
+        "23": {
+          "events": 220.0,
+          "hours": 365,
+          "hours_with_event": 38
+        }
+      },
+      "hours_with_ge1_event": 1097,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.1252283105022831,
+      "share_hours_with_ge1_event_ci95_high": 0.13232412569370752,
+      "share_hours_with_ge1_event_ci95_low": 0.1184610550881998,
+      "top10_liquidation_hours": [
+        {
+          "close": 0.19347,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-06T00:00:00Z",
+          "liq_count": 283,
+          "liq_long_count": 0,
+          "liq_notional_usd": 441975.56176199997,
+          "liq_short_count": 283
+        },
+        {
+          "close": 0.08991,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-09T18:00:00Z",
+          "liq_count": 264,
+          "liq_long_count": 0,
+          "liq_notional_usd": 75897.930593,
+          "liq_short_count": 264
+        },
+        {
+          "close": 0.08837,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-09T17:00:00Z",
+          "liq_count": 196,
+          "liq_long_count": 0,
+          "liq_notional_usd": 57835.069159,
+          "liq_short_count": 196
+        },
+        {
+          "close": 0.09253,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-10T02:00:00Z",
+          "liq_count": 170,
+          "liq_long_count": 0,
+          "liq_notional_usd": 68249.402011,
+          "liq_short_count": 170
+        },
+        {
+          "close": 0.16605,
+          "funding_rate": -4.9303e-06,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 160,
+          "liq_long_count": 160,
+          "liq_notional_usd": 392998.948156,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.15355,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-09T15:00:00Z",
+          "liq_count": 140,
+          "liq_long_count": 140,
+          "liq_notional_usd": 1288699.177537,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.07689,
+          "funding_rate": 8.1611e-06,
+          "hour_utc": "2026-07-27T22:00:00Z",
+          "liq_count": 139,
+          "liq_long_count": 139,
+          "liq_notional_usd": 77149.743914,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.15341,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 136,
+          "liq_long_count": 136,
+          "liq_notional_usd": 338788.0483750001,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.09707,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-07-11T14:00:00Z",
+          "liq_count": 122,
+          "liq_long_count": 0,
+          "liq_notional_usd": 43616.043112,
+          "liq_short_count": 122
+        },
+        {
+          "close": 0.17244,
+          "funding_rate": 7.82684e-05,
+          "hour_utc": "2026-09-05T21:00:00Z",
+          "liq_count": 110,
+          "liq_long_count": 0,
+          "liq_notional_usd": 233041.74572200002,
+          "liq_short_count": 110
+        }
+      ],
+      "total_liq_events": 9840,
+      "total_liq_long_count": 5306,
+      "total_liq_notional_usd": 22994842.101678,
+      "total_liq_short_count": 4534,
+      "weekday_profile": {
+        "Fri": {
+          "events": 1633.0,
+          "hours": 1248,
+          "hours_with_event": 185
+        },
+        "Mon": {
+          "events": 1346.0,
+          "hours": 1248,
+          "hours_with_event": 165
+        },
+        "Sat": {
+          "events": 1086.0,
+          "hours": 1272,
+          "hours_with_event": 110
+        },
+        "Sun": {
+          "events": 1187.0,
+          "hours": 1248,
+          "hours_with_event": 130
+        },
+        "Thu": {
+          "events": 2073.0,
+          "hours": 1248,
+          "hours_with_event": 179
+        },
+        "Tue": {
+          "events": 909.0,
+          "hours": 1248,
+          "hours_with_event": 149
+        },
+        "Wed": {
+          "events": 1606.0,
+          "hours": 1248,
+          "hours_with_event": 179
+        }
+      }
+    },
+    {
+      "coin": "AVAX",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 443.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "01": {
+          "events": 231.0,
+          "hours": 365,
+          "hours_with_event": 43
+        },
+        "02": {
+          "events": 304.0,
+          "hours": 365,
+          "hours_with_event": 39
+        },
+        "03": {
+          "events": 155.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "04": {
+          "events": 178.0,
+          "hours": 365,
+          "hours_with_event": 32
+        },
+        "05": {
+          "events": 173.0,
+          "hours": 365,
+          "hours_with_event": 26
+        },
+        "06": {
+          "events": 139.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "07": {
+          "events": 204.0,
+          "hours": 365,
+          "hours_with_event": 35
+        },
+        "08": {
+          "events": 105.0,
+          "hours": 365,
+          "hours_with_event": 27
+        },
+        "09": {
+          "events": 66.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "10": {
+          "events": 185.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "11": {
+          "events": 144.0,
+          "hours": 365,
+          "hours_with_event": 26
+        },
+        "12": {
+          "events": 126.0,
+          "hours": 365,
+          "hours_with_event": 40
+        },
+        "13": {
+          "events": 200.0,
+          "hours": 365,
+          "hours_with_event": 45
+        },
+        "14": {
+          "events": 390.0,
+          "hours": 365,
+          "hours_with_event": 55
+        },
+        "15": {
+          "events": 757.0,
+          "hours": 365,
+          "hours_with_event": 70
+        },
+        "16": {
+          "events": 263.0,
+          "hours": 365,
+          "hours_with_event": 65
+        },
+        "17": {
+          "events": 317.0,
+          "hours": 365,
+          "hours_with_event": 50
+        },
+        "18": {
+          "events": 366.0,
+          "hours": 365,
+          "hours_with_event": 45
+        },
+        "19": {
+          "events": 182.0,
+          "hours": 365,
+          "hours_with_event": 33
+        },
+        "20": {
+          "events": 188.0,
+          "hours": 365,
+          "hours_with_event": 35
+        },
+        "21": {
+          "events": 100.0,
+          "hours": 365,
+          "hours_with_event": 33
+        },
+        "22": {
+          "events": 132.0,
+          "hours": 365,
+          "hours_with_event": 46
+        },
+        "23": {
+          "events": 172.0,
+          "hours": 365,
+          "hours_with_event": 35
+        }
+      },
+      "hours_with_ge1_event": 950,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.10844748858447488,
+      "share_hours_with_ge1_event_ci95_high": 0.11513155185769865,
+      "share_hours_with_ge1_event_ci95_low": 0.10210669672041346,
+      "top10_liquidation_hours": [
+        {
+          "close": 6.4071,
+          "funding_rate": -4.3345e-06,
+          "hour_utc": "2026-08-06T10:00:00Z",
+          "liq_count": 137,
+          "liq_long_count": 137,
+          "liq_notional_usd": 60303.938064999995,
+          "liq_short_count": 0
+        },
+        {
+          "close": 8.2119,
+          "funding_rate": 1.5667e-06,
+          "hour_utc": "2026-10-30T00:00:00Z",
+          "liq_count": 116,
+          "liq_long_count": 116,
+          "liq_notional_usd": 217437.25556800002,
+          "liq_short_count": 0
+        },
+        {
+          "close": 16.344,
+          "funding_rate": -2.3577e-05,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 112,
+          "liq_long_count": 111,
+          "liq_notional_usd": 1704016.02768,
+          "liq_short_count": 1
+        },
+        {
+          "close": 6.2375,
+          "funding_rate": -8.542e-06,
+          "hour_utc": "2026-06-18T15:00:00Z",
+          "liq_count": 106,
+          "liq_long_count": 106,
+          "liq_notional_usd": 49958.140419,
+          "liq_short_count": 0
+        },
+        {
+          "close": 9.9903,
+          "funding_rate": -2.09827e-05,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 86,
+          "liq_long_count": 86,
+          "liq_notional_usd": 256964.57399,
+          "liq_short_count": 0
+        },
+        {
+          "close": 6.5623,
+          "funding_rate": -3.37e-07,
+          "hour_utc": "2026-08-19T15:00:00Z",
+          "liq_count": 85,
+          "liq_long_count": 0,
+          "liq_notional_usd": 21380.865639,
+          "liq_short_count": 85
+        },
+        {
+          "close": 6.2118,
+          "funding_rate": 3.0418e-06,
+          "hour_utc": "2026-08-11T15:00:00Z",
+          "liq_count": 80,
+          "liq_long_count": 80,
+          "liq_notional_usd": 28910.834871,
+          "liq_short_count": 0
+        },
+        {
+          "close": 6.7628,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-15T02:00:00Z",
+          "liq_count": 75,
+          "liq_long_count": 0,
+          "liq_notional_usd": 45662.24047200001,
+          "liq_short_count": 75
+        },
+        {
+          "close": 9.6428,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-15T02:00:00Z",
+          "liq_count": 73,
+          "liq_long_count": 73,
+          "liq_notional_usd": 313795.65492799995,
+          "liq_short_count": 0
+        },
+        {
+          "close": 10.41,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-20T11:00:00Z",
+          "liq_count": 73,
+          "liq_long_count": 0,
+          "liq_notional_usd": 292943.330115,
+          "liq_short_count": 73
+        }
+      ],
+      "total_liq_events": 5520,
+      "total_liq_long_count": 4115,
+      "total_liq_notional_usd": 26611474.10735,
+      "total_liq_short_count": 1405,
+      "weekday_profile": {
+        "Fri": {
+          "events": 917.0,
+          "hours": 1248,
+          "hours_with_event": 157
+        },
+        "Mon": {
+          "events": 711.0,
+          "hours": 1248,
+          "hours_with_event": 123
+        },
+        "Sat": {
+          "events": 728.0,
+          "hours": 1272,
+          "hours_with_event": 110
+        },
+        "Sun": {
+          "events": 628.0,
+          "hours": 1248,
+          "hours_with_event": 125
+        },
+        "Thu": {
+          "events": 1246.0,
+          "hours": 1248,
+          "hours_with_event": 169
+        },
+        "Tue": {
+          "events": 699.0,
+          "hours": 1248,
+          "hours_with_event": 124
+        },
+        "Wed": {
+          "events": 591.0,
+          "hours": 1248,
+          "hours_with_event": 142
+        }
+      }
+    },
+    {
+      "coin": "BNB",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 186.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "01": {
+          "events": 146.0,
+          "hours": 365,
+          "hours_with_event": 33
+        },
+        "02": {
+          "events": 205.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "03": {
+          "events": 115.0,
+          "hours": 365,
+          "hours_with_event": 29
+        },
+        "04": {
+          "events": 129.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "05": {
+          "events": 97.0,
+          "hours": 365,
+          "hours_with_event": 23
+        },
+        "06": {
+          "events": 834.0,
+          "hours": 365,
+          "hours_with_event": 24
+        },
+        "07": {
+          "events": 251.0,
+          "hours": 365,
+          "hours_with_event": 27
+        },
+        "08": {
+          "events": 89.0,
+          "hours": 365,
+          "hours_with_event": 22
+        },
+        "09": {
+          "events": 59.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "10": {
+          "events": 49.0,
+          "hours": 365,
+          "hours_with_event": 20
+        },
+        "11": {
+          "events": 61.0,
+          "hours": 365,
+          "hours_with_event": 24
+        },
+        "12": {
+          "events": 151.0,
+          "hours": 365,
+          "hours_with_event": 28
+        },
+        "13": {
+          "events": 105.0,
+          "hours": 365,
+          "hours_with_event": 44
+        },
+        "14": {
+          "events": 147.0,
+          "hours": 365,
+          "hours_with_event": 54
+        },
+        "15": {
+          "events": 2308.0,
+          "hours": 365,
+          "hours_with_event": 52
+        },
+        "16": {
+          "events": 306.0,
+          "hours": 365,
+          "hours_with_event": 51
+        },
+        "17": {
+          "events": 294.0,
+          "hours": 365,
+          "hours_with_event": 48
+        },
+        "18": {
+          "events": 234.0,
+          "hours": 365,
+          "hours_with_event": 39
+        },
+        "19": {
+          "events": 99.0,
+          "hours": 365,
+          "hours_with_event": 39
+        },
+        "20": {
+          "events": 279.0,
+          "hours": 365,
+          "hours_with_event": 26
+        },
+        "21": {
+          "events": 120.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "22": {
+          "events": 104.0,
+          "hours": 365,
+          "hours_with_event": 31
+        },
+        "23": {
+          "events": 64.0,
+          "hours": 365,
+          "hours_with_event": 26
+        }
+      },
+      "hours_with_ge1_event": 785,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.08961187214611872,
+      "share_hours_with_ge1_event_ci95_high": 0.09577452041959822,
+      "share_hours_with_ge1_event_ci95_low": 0.08380900833792745,
+      "top10_liquidation_hours": [
+        {
+          "close": 979.12,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 1706,
+          "liq_long_count": 1706,
+          "liq_notional_usd": 6602430.94415,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1031.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-03T06:00:00Z",
+          "liq_count": 731,
+          "liq_long_count": 731,
+          "liq_notional_usd": 639685.9634,
+          "liq_short_count": 0
+        },
+        {
+          "close": 730.95,
+          "funding_rate": 7.9538e-06,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 327,
+          "liq_long_count": 326,
+          "liq_notional_usd": 540667.22841,
+          "liq_short_count": 1
+        },
+        {
+          "close": 831.54,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 141,
+          "liq_long_count": 140,
+          "liq_notional_usd": 492645.1403,
+          "liq_short_count": 1
+        },
+        {
+          "close": 695.98,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 105,
+          "liq_long_count": 105,
+          "liq_notional_usd": 1017312.20282,
+          "liq_short_count": 0
+        },
+        {
+          "close": 920.21,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-04T20:00:00Z",
+          "liq_count": 73,
+          "liq_long_count": 73,
+          "liq_notional_usd": 403637.32039999997,
+          "liq_short_count": 0
+        },
+        {
+          "close": 614.11,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-06T00:00:00Z",
+          "liq_count": 71,
+          "liq_long_count": 67,
+          "liq_notional_usd": 103774.86842,
+          "liq_short_count": 4
+        },
+        {
+          "close": 658.1,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-05T15:00:00Z",
+          "liq_count": 55,
+          "liq_long_count": 55,
+          "liq_notional_usd": 58553.814739999994,
+          "liq_short_count": 0
+        },
+        {
+          "close": 913.57,
+          "funding_rate": -2.781e-06,
+          "hour_utc": "2025-11-14T04:00:00Z",
+          "liq_count": 53,
+          "liq_long_count": 53,
+          "liq_notional_usd": 100245.08025,
+          "liq_short_count": 0
+        },
+        {
+          "close": 724.05,
+          "funding_rate": -8.4464e-06,
+          "hour_utc": "2026-10-08T16:00:00Z",
+          "liq_count": 52,
+          "liq_long_count": 52,
+          "liq_notional_usd": 86292.56153,
+          "liq_short_count": 0
+        }
+      ],
+      "total_liq_events": 6432,
+      "total_liq_long_count": 5442,
+      "total_liq_notional_usd": 23831776.95069,
+      "total_liq_short_count": 990,
+      "weekday_profile": {
+        "Fri": {
+          "events": 683.0,
+          "hours": 1248,
+          "hours_with_event": 132
+        },
+        "Mon": {
+          "events": 2937.0,
+          "hours": 1248,
+          "hours_with_event": 117
+        },
+        "Sat": {
+          "events": 418.0,
+          "hours": 1272,
+          "hours_with_event": 93
+        },
+        "Sun": {
+          "events": 196.0,
+          "hours": 1248,
+          "hours_with_event": 73
+        },
+        "Thu": {
+          "events": 1150.0,
+          "hours": 1248,
+          "hours_with_event": 130
+        },
+        "Tue": {
+          "events": 527.0,
+          "hours": 1248,
+          "hours_with_event": 110
+        },
+        "Wed": {
+          "events": 521.0,
+          "hours": 1248,
+          "hours_with_event": 130
+        }
+      }
+    },
+    {
+      "coin": "BTC",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 24514.0,
+          "hours": 365,
+          "hours_with_event": 149
+        },
+        "01": {
+          "events": 33126.0,
+          "hours": 365,
+          "hours_with_event": 173
+        },
+        "02": {
+          "events": 26009.0,
+          "hours": 365,
+          "hours_with_event": 167
+        },
+        "03": {
+          "events": 17635.0,
+          "hours": 365,
+          "hours_with_event": 170
+        },
+        "04": {
+          "events": 16168.0,
+          "hours": 365,
+          "hours_with_event": 147
+        },
+        "05": {
+          "events": 18961.0,
+          "hours": 365,
+          "hours_with_event": 140
+        },
+        "06": {
+          "events": 15108.0,
+          "hours": 365,
+          "hours_with_event": 145
+        },
+        "07": {
+          "events": 20331.0,
+          "hours": 365,
+          "hours_with_event": 142
+        },
+        "08": {
+          "events": 27308.0,
+          "hours": 365,
+          "hours_with_event": 168
+        },
+        "09": {
+          "events": 16262.0,
+          "hours": 365,
+          "hours_with_event": 156
+        },
+        "10": {
+          "events": 10035.0,
+          "hours": 365,
+          "hours_with_event": 137
+        },
+        "11": {
+          "events": 15719.0,
+          "hours": 365,
+          "hours_with_event": 137
+        },
+        "12": {
+          "events": 33514.0,
+          "hours": 365,
+          "hours_with_event": 177
+        },
+        "13": {
+          "events": 51413.0,
+          "hours": 365,
+          "hours_with_event": 221
+        },
+        "14": {
+          "events": 64571.0,
+          "hours": 365,
+          "hours_with_event": 259
+        },
+        "15": {
+          "events": 68132.0,
+          "hours": 365,
+          "hours_with_event": 243
+        },
+        "16": {
+          "events": 34425.0,
+          "hours": 365,
+          "hours_with_event": 227
+        },
+        "17": {
+          "events": 34294.0,
+          "hours": 365,
+          "hours_with_event": 217
+        },
+        "18": {
+          "events": 33446.0,
+          "hours": 365,
+          "hours_with_event": 197
+        },
+        "19": {
+          "events": 19806.0,
+          "hours": 365,
+          "hours_with_event": 170
+        },
+        "20": {
+          "events": 24427.0,
+          "hours": 365,
+          "hours_with_event": 146
+        },
+        "21": {
+          "events": 19123.0,
+          "hours": 365,
+          "hours_with_event": 150
+        },
+        "22": {
+          "events": 27215.0,
+          "hours": 365,
+          "hours_with_event": 163
+        },
+        "23": {
+          "events": 20479.0,
+          "hours": 365,
+          "hours_with_event": 145
+        }
+      },
+      "hours_with_ge1_event": 4146,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.47328767123287674,
+      "share_hours_with_ge1_event_ci95_high": 0.48375280101989915,
+      "share_hours_with_ge1_event_ci95_low": 0.46284595996181466,
+      "top10_liquidation_hours": [
+        {
+          "close": 68532.0,
+          "funding_rate": -5.729e-07,
+          "hour_utc": "2026-08-19T15:00:00Z",
+          "liq_count": 5368,
+          "liq_long_count": 97,
+          "liq_notional_usd": 363394208.098662,
+          "liq_short_count": 5271
+        },
+        {
+          "close": 78830.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 4457,
+          "liq_long_count": 4449,
+          "liq_notional_usd": 70801485.65024,
+          "liq_short_count": 8
+        },
+        {
+          "close": 84030.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 4152,
+          "liq_long_count": 4106,
+          "liq_notional_usd": 255877985.559887,
+          "liq_short_count": 46
+        },
+        {
+          "close": 63725.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-05T20:00:00Z",
+          "liq_count": 2843,
+          "liq_long_count": 2691,
+          "liq_notional_usd": 89273399.80012,
+          "liq_short_count": 152
+        },
+        {
+          "close": 63493.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-06T00:00:00Z",
+          "liq_count": 2795,
+          "liq_long_count": 2083,
+          "liq_notional_usd": 75033204.11472501,
+          "liq_short_count": 712
+        },
+        {
+          "close": 83849.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-21T08:00:00Z",
+          "liq_count": 2722,
+          "liq_long_count": 0,
+          "liq_notional_usd": 62354931.45605,
+          "liq_short_count": 2722
+        },
+        {
+          "close": 67465.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-05T15:00:00Z",
+          "liq_count": 2605,
+          "liq_long_count": 2397,
+          "liq_notional_usd": 88105957.444,
+          "liq_short_count": 208
+        },
+        {
+          "close": 82426.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-01-30T01:00:00Z",
+          "liq_count": 2599,
+          "liq_long_count": 2597,
+          "liq_notional_usd": 116175326.84823,
+          "liq_short_count": 2
+        },
+        {
+          "close": 81499.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-15T02:00:00Z",
+          "liq_count": 2553,
+          "liq_long_count": 2531,
+          "liq_notional_usd": 53551007.445350006,
+          "liq_short_count": 22
+        },
+        {
+          "close": 58234.0,
+          "funding_rate": -2.1264e-06,
+          "hour_utc": "2026-06-25T13:00:00Z",
+          "liq_count": 2532,
+          "liq_long_count": 2529,
+          "liq_notional_usd": 112992129.0672801,
+          "liq_short_count": 3
+        }
+      ],
+      "total_liq_events": 672021,
+      "total_liq_long_count": 417307,
+      "total_liq_notional_usd": 13783643697.404057,
+      "total_liq_short_count": 254714,
+      "weekday_profile": {
+        "Fri": {
+          "events": 128900.0,
+          "hours": 1248,
+          "hours_with_event": 657
+        },
+        "Mon": {
+          "events": 109242.0,
+          "hours": 1248,
+          "hours_with_event": 697
+        },
+        "Sat": {
+          "events": 37064.0,
+          "hours": 1272,
+          "hours_with_event": 354
+        },
+        "Sun": {
+          "events": 57961.0,
+          "hours": 1248,
+          "hours_with_event": 452
+        },
+        "Thu": {
+          "events": 122666.0,
+          "hours": 1248,
+          "hours_with_event": 657
+        },
+        "Tue": {
+          "events": 108491.0,
+          "hours": 1248,
+          "hours_with_event": 666
+        },
+        "Wed": {
+          "events": 107697.0,
+          "hours": 1248,
+          "hours_with_event": 663
+        }
+      }
+    },
+    {
+      "coin": "DOGE",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 552.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "01": {
+          "events": 293.0,
+          "hours": 365,
+          "hours_with_event": 47
+        },
+        "02": {
+          "events": 586.0,
+          "hours": 365,
+          "hours_with_event": 50
+        },
+        "03": {
+          "events": 267.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "04": {
+          "events": 280.0,
+          "hours": 365,
+          "hours_with_event": 34
+        },
+        "05": {
+          "events": 380.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "06": {
+          "events": 318.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "07": {
+          "events": 389.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "08": {
+          "events": 161.0,
+          "hours": 365,
+          "hours_with_event": 34
+        },
+        "09": {
+          "events": 187.0,
+          "hours": 365,
+          "hours_with_event": 44
+        },
+        "10": {
+          "events": 110.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "11": {
+          "events": 138.0,
+          "hours": 365,
+          "hours_with_event": 32
+        },
+        "12": {
+          "events": 273.0,
+          "hours": 365,
+          "hours_with_event": 42
+        },
+        "13": {
+          "events": 329.0,
+          "hours": 365,
+          "hours_with_event": 61
+        },
+        "14": {
+          "events": 808.0,
+          "hours": 365,
+          "hours_with_event": 102
+        },
+        "15": {
+          "events": 1250.0,
+          "hours": 365,
+          "hours_with_event": 79
+        },
+        "16": {
+          "events": 555.0,
+          "hours": 365,
+          "hours_with_event": 69
+        },
+        "17": {
+          "events": 1226.0,
+          "hours": 365,
+          "hours_with_event": 68
+        },
+        "18": {
+          "events": 530.0,
+          "hours": 365,
+          "hours_with_event": 58
+        },
+        "19": {
+          "events": 247.0,
+          "hours": 365,
+          "hours_with_event": 45
+        },
+        "20": {
+          "events": 326.0,
+          "hours": 365,
+          "hours_with_event": 40
+        },
+        "21": {
+          "events": 288.0,
+          "hours": 365,
+          "hours_with_event": 45
+        },
+        "22": {
+          "events": 346.0,
+          "hours": 365,
+          "hours_with_event": 56
+        },
+        "23": {
+          "events": 244.0,
+          "hours": 365,
+          "hours_with_event": 36
+        }
+      },
+      "hours_with_ge1_event": 1172,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.13378995433789953,
+      "share_hours_with_ge1_event_ci95_high": 0.1410797058234783,
+      "share_hours_with_ge1_event_ci95_low": 0.1268212566950592,
+      "top10_liquidation_hours": [
+        {
+          "close": 0.15914,
+          "funding_rate": -1.11145e-05,
+          "hour_utc": "2025-11-04T17:00:00Z",
+          "liq_count": 692,
+          "liq_long_count": 692,
+          "liq_notional_usd": 351869.42603,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.090054,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 241,
+          "liq_long_count": 241,
+          "liq_notional_usd": 480418.875718,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.16689,
+          "funding_rate": -3.9105e-06,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 226,
+          "liq_long_count": 226,
+          "liq_notional_usd": 858562.7793,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.094941,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-23T14:00:00Z",
+          "liq_count": 207,
+          "liq_long_count": 206,
+          "liq_notional_usd": 675941.725019,
+          "liq_short_count": 1
+        },
+        {
+          "close": 0.082631,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 192,
+          "liq_long_count": 190,
+          "liq_notional_usd": 693208.479387,
+          "liq_short_count": 2
+        },
+        {
+          "close": 0.091947,
+          "funding_rate": 0.0001205346,
+          "hour_utc": "2026-08-22T05:00:00Z",
+          "liq_count": 188,
+          "liq_long_count": 182,
+          "liq_notional_usd": 1807752.874064,
+          "liq_short_count": 6
+        },
+        {
+          "close": 0.14023,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 151,
+          "liq_long_count": 150,
+          "liq_notional_usd": 1067173.2387200003,
+          "liq_short_count": 1
+        },
+        {
+          "close": 0.080762,
+          "funding_rate": 1.08549e-05,
+          "hour_utc": "2026-09-15T18:00:00Z",
+          "liq_count": 142,
+          "liq_long_count": 142,
+          "liq_notional_usd": 114491.051578,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.080103,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-15T02:00:00Z",
+          "liq_count": 122,
+          "liq_long_count": 122,
+          "liq_notional_usd": 1042137.534519,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.098856,
+          "funding_rate": -1.7546e-06,
+          "hour_utc": "2026-05-23T07:00:00Z",
+          "liq_count": 115,
+          "liq_long_count": 115,
+          "liq_notional_usd": 585902.966899,
+          "liq_short_count": 0
+        }
+      ],
+      "total_liq_events": 10083,
+      "total_liq_long_count": 8011,
+      "total_liq_notional_usd": 55379964.904808,
+      "total_liq_short_count": 2072,
+      "weekday_profile": {
+        "Fri": {
+          "events": 1317.0,
+          "hours": 1248,
+          "hours_with_event": 203
+        },
+        "Mon": {
+          "events": 1390.0,
+          "hours": 1248,
+          "hours_with_event": 157
+        },
+        "Sat": {
+          "events": 1200.0,
+          "hours": 1272,
+          "hours_with_event": 105
+        },
+        "Sun": {
+          "events": 588.0,
+          "hours": 1248,
+          "hours_with_event": 126
+        },
+        "Thu": {
+          "events": 1924.0,
+          "hours": 1248,
+          "hours_with_event": 193
+        },
+        "Tue": {
+          "events": 1957.0,
+          "hours": 1248,
+          "hours_with_event": 177
+        },
+        "Wed": {
+          "events": 1707.0,
+          "hours": 1248,
+          "hours_with_event": 211
+        }
+      }
+    },
+    {
+      "coin": "ETH",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 6561.0,
+          "hours": 365,
+          "hours_with_event": 115
+        },
+        "01": {
+          "events": 6258.0,
+          "hours": 365,
+          "hours_with_event": 144
+        },
+        "02": {
+          "events": 7664.0,
+          "hours": 365,
+          "hours_with_event": 134
+        },
+        "03": {
+          "events": 4365.0,
+          "hours": 365,
+          "hours_with_event": 127
+        },
+        "04": {
+          "events": 3409.0,
+          "hours": 365,
+          "hours_with_event": 108
+        },
+        "05": {
+          "events": 5135.0,
+          "hours": 365,
+          "hours_with_event": 96
+        },
+        "06": {
+          "events": 3586.0,
+          "hours": 365,
+          "hours_with_event": 99
+        },
+        "07": {
+          "events": 4066.0,
+          "hours": 365,
+          "hours_with_event": 105
+        },
+        "08": {
+          "events": 5466.0,
+          "hours": 365,
+          "hours_with_event": 113
+        },
+        "09": {
+          "events": 3954.0,
+          "hours": 365,
+          "hours_with_event": 126
+        },
+        "10": {
+          "events": 2624.0,
+          "hours": 365,
+          "hours_with_event": 111
+        },
+        "11": {
+          "events": 3328.0,
+          "hours": 365,
+          "hours_with_event": 102
+        },
+        "12": {
+          "events": 8125.0,
+          "hours": 365,
+          "hours_with_event": 141
+        },
+        "13": {
+          "events": 11384.0,
+          "hours": 365,
+          "hours_with_event": 176
+        },
+        "14": {
+          "events": 16047.0,
+          "hours": 365,
+          "hours_with_event": 211
+        },
+        "15": {
+          "events": 19115.0,
+          "hours": 365,
+          "hours_with_event": 199
+        },
+        "16": {
+          "events": 10652.0,
+          "hours": 365,
+          "hours_with_event": 178
+        },
+        "17": {
+          "events": 9091.0,
+          "hours": 365,
+          "hours_with_event": 160
+        },
+        "18": {
+          "events": 11567.0,
+          "hours": 365,
+          "hours_with_event": 147
+        },
+        "19": {
+          "events": 5128.0,
+          "hours": 365,
+          "hours_with_event": 136
+        },
+        "20": {
+          "events": 8853.0,
+          "hours": 365,
+          "hours_with_event": 117
+        },
+        "21": {
+          "events": 6974.0,
+          "hours": 365,
+          "hours_with_event": 119
+        },
+        "22": {
+          "events": 7453.0,
+          "hours": 365,
+          "hours_with_event": 127
+        },
+        "23": {
+          "events": 5530.0,
+          "hours": 365,
+          "hours_with_event": 110
+        }
+      },
+      "hours_with_ge1_event": 3201,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.3654109589041096,
+      "share_hours_with_ge1_event_ci95_high": 0.375552109278005,
+      "share_hours_with_ge1_event_ci95_low": 0.3553878018221682,
+      "top10_liquidation_hours": [
+        {
+          "close": 2219.0,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-19T20:00:00Z",
+          "liq_count": 1853,
+          "liq_long_count": 0,
+          "liq_notional_usd": 131299645.82554096,
+          "liq_short_count": 1853
+        },
+        {
+          "close": 1970.0,
+          "funding_rate": -1.53325e-05,
+          "hour_utc": "2026-08-19T14:00:00Z",
+          "liq_count": 1744,
+          "liq_long_count": 0,
+          "liq_notional_usd": 11921572.42089,
+          "liq_short_count": 1744
+        },
+        {
+          "close": 2085.3,
+          "funding_rate": 4.0671e-06,
+          "hour_utc": "2026-08-19T15:00:00Z",
+          "liq_count": 1604,
+          "liq_long_count": 5,
+          "liq_notional_usd": 53695888.265552,
+          "liq_short_count": 1599
+        },
+        {
+          "close": 2256.7,
+          "funding_rate": 6.0302e-06,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 1526,
+          "liq_long_count": 1524,
+          "liq_notional_usd": 29207981.487689998,
+          "liq_short_count": 2
+        },
+        {
+          "close": 1836.0,
+          "funding_rate": 9.6685e-06,
+          "hour_utc": "2026-08-01T18:00:00Z",
+          "liq_count": 1496,
+          "liq_long_count": 1496,
+          "liq_notional_usd": 12565608.37625,
+          "liq_short_count": 0
+        },
+        {
+          "close": 2719.2,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 1400,
+          "liq_long_count": 1390,
+          "liq_notional_usd": 113737388.29269697,
+          "liq_short_count": 10
+        },
+        {
+          "close": 2379.1,
+          "funding_rate": -6.8196e-06,
+          "hour_utc": "2026-10-15T02:00:00Z",
+          "liq_count": 1352,
+          "liq_long_count": 1348,
+          "liq_notional_usd": 43097835.46885,
+          "liq_short_count": 4
+        },
+        {
+          "close": 3586.1,
+          "funding_rate": -1.06274e-05,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 1297,
+          "liq_long_count": 1295,
+          "liq_notional_usd": 50547042.428059995,
+          "liq_short_count": 2
+        },
+        {
+          "close": 2611.8,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 1244,
+          "liq_long_count": 1244,
+          "liq_notional_usd": 34277400.72523,
+          "liq_short_count": 0
+        },
+        {
+          "close": 2434.0,
+          "funding_rate": 5.0617e-06,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 1120,
+          "liq_long_count": 1119,
+          "liq_notional_usd": 51063509.700370006,
+          "liq_short_count": 1
+        }
+      ],
+      "total_liq_events": 176335,
+      "total_liq_long_count": 119081,
+      "total_liq_notional_usd": 5059115855.21848,
+      "total_liq_short_count": 57254,
+      "weekday_profile": {
+        "Fri": {
+          "events": 31529.0,
+          "hours": 1248,
+          "hours_with_event": 498
+        },
+        "Mon": {
+          "events": 27145.0,
+          "hours": 1248,
+          "hours_with_event": 534
+        },
+        "Sat": {
+          "events": 13797.0,
+          "hours": 1272,
+          "hours_with_event": 258
+        },
+        "Sun": {
+          "events": 16552.0,
+          "hours": 1248,
+          "hours_with_event": 377
+        },
+        "Thu": {
+          "events": 28883.0,
+          "hours": 1248,
+          "hours_with_event": 511
+        },
+        "Tue": {
+          "events": 27388.0,
+          "hours": 1248,
+          "hours_with_event": 496
+        },
+        "Wed": {
+          "events": 31041.0,
+          "hours": 1248,
+          "hours_with_event": 527
+        }
+      }
+    },
+    {
+      "coin": "LINK",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 442.0,
+          "hours": 365,
+          "hours_with_event": 34
+        },
+        "01": {
+          "events": 209.0,
+          "hours": 365,
+          "hours_with_event": 37
+        },
+        "02": {
+          "events": 385.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "03": {
+          "events": 242.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "04": {
+          "events": 186.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "05": {
+          "events": 213.0,
+          "hours": 365,
+          "hours_with_event": 35
+        },
+        "06": {
+          "events": 192.0,
+          "hours": 365,
+          "hours_with_event": 25
+        },
+        "07": {
+          "events": 421.0,
+          "hours": 365,
+          "hours_with_event": 23
+        },
+        "08": {
+          "events": 153.0,
+          "hours": 365,
+          "hours_with_event": 40
+        },
+        "09": {
+          "events": 177.0,
+          "hours": 365,
+          "hours_with_event": 44
+        },
+        "10": {
+          "events": 102.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "11": {
+          "events": 72.0,
+          "hours": 365,
+          "hours_with_event": 21
+        },
+        "12": {
+          "events": 174.0,
+          "hours": 365,
+          "hours_with_event": 36
+        },
+        "13": {
+          "events": 202.0,
+          "hours": 365,
+          "hours_with_event": 58
+        },
+        "14": {
+          "events": 396.0,
+          "hours": 365,
+          "hours_with_event": 64
+        },
+        "15": {
+          "events": 727.0,
+          "hours": 365,
+          "hours_with_event": 75
+        },
+        "16": {
+          "events": 304.0,
+          "hours": 365,
+          "hours_with_event": 64
+        },
+        "17": {
+          "events": 399.0,
+          "hours": 365,
+          "hours_with_event": 49
+        },
+        "18": {
+          "events": 509.0,
+          "hours": 365,
+          "hours_with_event": 51
+        },
+        "19": {
+          "events": 227.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "20": {
+          "events": 602.0,
+          "hours": 365,
+          "hours_with_event": 37
+        },
+        "21": {
+          "events": 184.0,
+          "hours": 365,
+          "hours_with_event": 29
+        },
+        "22": {
+          "events": 165.0,
+          "hours": 365,
+          "hours_with_event": 38
+        },
+        "23": {
+          "events": 218.0,
+          "hours": 365,
+          "hours_with_event": 33
+        }
+      },
+      "hours_with_ge1_event": 976,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.11141552511415526,
+      "share_hours_with_ge1_event_ci95_high": 0.11817571931095214,
+      "share_hours_with_ge1_event_ci95_low": 0.10499600026919179,
+      "top10_liquidation_hours": [
+        {
+          "close": 10.578,
+          "funding_rate": -1.38414e-05,
+          "hour_utc": "2026-08-19T20:00:00Z",
+          "liq_count": 302,
+          "liq_long_count": 0,
+          "liq_notional_usd": 453292.8718,
+          "liq_short_count": 302
+        },
+        {
+          "close": 15.283,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 177,
+          "liq_long_count": 176,
+          "liq_notional_usd": 1415572.8808,
+          "liq_short_count": 1
+        },
+        {
+          "close": 11.564,
+          "funding_rate": 5.40907e-05,
+          "hour_utc": "2026-08-21T07:00:00Z",
+          "liq_count": 175,
+          "liq_long_count": 0,
+          "liq_notional_usd": 283115.71810000006,
+          "liq_short_count": 175
+        },
+        {
+          "close": 13.656,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-02T18:00:00Z",
+          "liq_count": 160,
+          "liq_long_count": 160,
+          "liq_notional_usd": 864020.2024,
+          "liq_short_count": 0
+        },
+        {
+          "close": 13.562,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 156,
+          "liq_long_count": 156,
+          "liq_notional_usd": 257284.9013,
+          "liq_short_count": 0
+        },
+        {
+          "close": 12.27,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 135,
+          "liq_long_count": 134,
+          "liq_notional_usd": 907248.2561000001,
+          "liq_short_count": 1
+        },
+        {
+          "close": 9.9137,
+          "funding_rate": -1.95769e-05,
+          "hour_utc": "2026-08-19T15:00:00Z",
+          "liq_count": 96,
+          "liq_long_count": 1,
+          "liq_notional_usd": 550421.60164,
+          "liq_short_count": 95
+        },
+        {
+          "close": 7.911,
+          "funding_rate": 8.057e-06,
+          "hour_utc": "2026-02-06T00:00:00Z",
+          "liq_count": 94,
+          "liq_long_count": 91,
+          "liq_notional_usd": 547703.60782,
+          "liq_short_count": 3
+        },
+        {
+          "close": 12.353,
+          "funding_rate": 1.02668e-05,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 88,
+          "liq_long_count": 88,
+          "liq_notional_usd": 454733.7123,
+          "liq_short_count": 0
+        },
+        {
+          "close": 9.6002,
+          "funding_rate": 3.4946e-06,
+          "hour_utc": "2026-01-31T17:00:00Z",
+          "liq_count": 82,
+          "liq_long_count": 80,
+          "liq_notional_usd": 500405.84998999996,
+          "liq_short_count": 2
+        }
+      ],
+      "total_liq_events": 6901,
+      "total_liq_long_count": 4838,
+      "total_liq_notional_usd": 33262791.93665,
+      "total_liq_short_count": 2063,
+      "weekday_profile": {
+        "Fri": {
+          "events": 1438.0,
+          "hours": 1248,
+          "hours_with_event": 178
+        },
+        "Mon": {
+          "events": 855.0,
+          "hours": 1248,
+          "hours_with_event": 127
+        },
+        "Sat": {
+          "events": 827.0,
+          "hours": 1272,
+          "hours_with_event": 87
+        },
+        "Sun": {
+          "events": 534.0,
+          "hours": 1248,
+          "hours_with_event": 112
+        },
+        "Thu": {
+          "events": 1178.0,
+          "hours": 1248,
+          "hours_with_event": 178
+        },
+        "Tue": {
+          "events": 730.0,
+          "hours": 1248,
+          "hours_with_event": 120
+        },
+        "Wed": {
+          "events": 1339.0,
+          "hours": 1248,
+          "hours_with_event": 174
+        }
+      }
+    },
+    {
+      "coin": "OP",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 203.0,
+          "hours": 365,
+          "hours_with_event": 16
+        },
+        "01": {
+          "events": 52.0,
+          "hours": 365,
+          "hours_with_event": 21
+        },
+        "02": {
+          "events": 77.0,
+          "hours": 365,
+          "hours_with_event": 23
+        },
+        "03": {
+          "events": 34.0,
+          "hours": 365,
+          "hours_with_event": 22
+        },
+        "04": {
+          "events": 25.0,
+          "hours": 365,
+          "hours_with_event": 15
+        },
+        "05": {
+          "events": 23.0,
+          "hours": 365,
+          "hours_with_event": 19
+        },
+        "06": {
+          "events": 34.0,
+          "hours": 365,
+          "hours_with_event": 17
+        },
+        "07": {
+          "events": 30.0,
+          "hours": 365,
+          "hours_with_event": 12
+        },
+        "08": {
+          "events": 36.0,
+          "hours": 365,
+          "hours_with_event": 24
+        },
+        "09": {
+          "events": 19.0,
+          "hours": 365,
+          "hours_with_event": 17
+        },
+        "10": {
+          "events": 14.0,
+          "hours": 365,
+          "hours_with_event": 12
+        },
+        "11": {
+          "events": 25.0,
+          "hours": 365,
+          "hours_with_event": 16
+        },
+        "12": {
+          "events": 35.0,
+          "hours": 365,
+          "hours_with_event": 23
+        },
+        "13": {
+          "events": 30.0,
+          "hours": 365,
+          "hours_with_event": 24
+        },
+        "14": {
+          "events": 67.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "15": {
+          "events": 107.0,
+          "hours": 365,
+          "hours_with_event": 35
+        },
+        "16": {
+          "events": 66.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "17": {
+          "events": 74.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "18": {
+          "events": 67.0,
+          "hours": 365,
+          "hours_with_event": 33
+        },
+        "19": {
+          "events": 41.0,
+          "hours": 365,
+          "hours_with_event": 26
+        },
+        "20": {
+          "events": 62.0,
+          "hours": 365,
+          "hours_with_event": 20
+        },
+        "21": {
+          "events": 22.0,
+          "hours": 365,
+          "hours_with_event": 16
+        },
+        "22": {
+          "events": 56.0,
+          "hours": 365,
+          "hours_with_event": 30
+        },
+        "23": {
+          "events": 28.0,
+          "hours": 365,
+          "hours_with_event": 20
+        }
+      },
+      "hours_with_ge1_event": 542,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.06187214611872146,
+      "share_hours_with_ge1_event_ci95_high": 0.06711199606777071,
+      "share_hours_with_ge1_event_ci95_low": 0.0570163998630731,
+      "top10_liquidation_hours": [
+        {
+          "close": 0.1272,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-13T00:00:00Z",
+          "liq_count": 127,
+          "liq_long_count": 127,
+          "liq_notional_usd": 10223.345855,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.35377,
+          "funding_rate": -1.52964e-05,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 22,
+          "liq_long_count": 22,
+          "liq_notional_usd": 60521.896029,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.09808,
+          "funding_rate": -5.85947e-05,
+          "hour_utc": "2026-10-30T00:00:00Z",
+          "liq_count": 21,
+          "liq_long_count": 21,
+          "liq_notional_usd": 104294.776706,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.13051,
+          "funding_rate": -0.0001895294,
+          "hour_utc": "2026-02-20T02:00:00Z",
+          "liq_count": 21,
+          "liq_long_count": 21,
+          "liq_notional_usd": 30379.375789,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.11508,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-23T01:00:00Z",
+          "liq_count": 18,
+          "liq_long_count": 18,
+          "liq_notional_usd": 182181.29851000002,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.17526,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-02-06T00:00:00Z",
+          "liq_count": 18,
+          "liq_long_count": 18,
+          "liq_notional_usd": 7401.385828,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.22361,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-01-31T18:00:00Z",
+          "liq_count": 17,
+          "liq_long_count": 16,
+          "liq_notional_usd": 8212.802634,
+          "liq_short_count": 1
+        },
+        {
+          "close": 0.10128,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 16,
+          "liq_long_count": 16,
+          "liq_notional_usd": 17406.012665000002,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.22609,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-01-31T17:00:00Z",
+          "liq_count": 15,
+          "liq_long_count": 13,
+          "liq_notional_usd": 3640.5987059999998,
+          "liq_short_count": 2
+        },
+        {
+          "close": 0.12321,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 14,
+          "liq_long_count": 14,
+          "liq_notional_usd": 16036.987636999998,
+          "liq_short_count": 0
+        }
+      ],
+      "total_liq_events": 1227,
+      "total_liq_long_count": 897,
+      "total_liq_notional_usd": 2983102.598241,
+      "total_liq_short_count": 330,
+      "weekday_profile": {
+        "Fri": {
+          "events": 262.0,
+          "hours": 1248,
+          "hours_with_event": 116
+        },
+        "Mon": {
+          "events": 164.0,
+          "hours": 1248,
+          "hours_with_event": 77
+        },
+        "Sat": {
+          "events": 130.0,
+          "hours": 1272,
+          "hours_with_event": 56
+        },
+        "Sun": {
+          "events": 74.0,
+          "hours": 1248,
+          "hours_with_event": 47
+        },
+        "Thu": {
+          "events": 216.0,
+          "hours": 1248,
+          "hours_with_event": 96
+        },
+        "Tue": {
+          "events": 247.0,
+          "hours": 1248,
+          "hours_with_event": 74
+        },
+        "Wed": {
+          "events": 134.0,
+          "hours": 1248,
+          "hours_with_event": 76
+        }
+      }
+    },
+    {
+      "coin": "SOL",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 8803.0,
+          "hours": 365,
+          "hours_with_event": 114
+        },
+        "01": {
+          "events": 6435.0,
+          "hours": 365,
+          "hours_with_event": 130
+        },
+        "02": {
+          "events": 5130.0,
+          "hours": 365,
+          "hours_with_event": 122
+        },
+        "03": {
+          "events": 4850.0,
+          "hours": 365,
+          "hours_with_event": 124
+        },
+        "04": {
+          "events": 3980.0,
+          "hours": 365,
+          "hours_with_event": 108
+        },
+        "05": {
+          "events": 4911.0,
+          "hours": 365,
+          "hours_with_event": 114
+        },
+        "06": {
+          "events": 3028.0,
+          "hours": 365,
+          "hours_with_event": 98
+        },
+        "07": {
+          "events": 4951.0,
+          "hours": 365,
+          "hours_with_event": 93
+        },
+        "08": {
+          "events": 4565.0,
+          "hours": 365,
+          "hours_with_event": 100
+        },
+        "09": {
+          "events": 3097.0,
+          "hours": 365,
+          "hours_with_event": 115
+        },
+        "10": {
+          "events": 2857.0,
+          "hours": 365,
+          "hours_with_event": 99
+        },
+        "11": {
+          "events": 3914.0,
+          "hours": 365,
+          "hours_with_event": 106
+        },
+        "12": {
+          "events": 5781.0,
+          "hours": 365,
+          "hours_with_event": 133
+        },
+        "13": {
+          "events": 7917.0,
+          "hours": 365,
+          "hours_with_event": 169
+        },
+        "14": {
+          "events": 14075.0,
+          "hours": 365,
+          "hours_with_event": 208
+        },
+        "15": {
+          "events": 15267.0,
+          "hours": 365,
+          "hours_with_event": 199
+        },
+        "16": {
+          "events": 9004.0,
+          "hours": 365,
+          "hours_with_event": 160
+        },
+        "17": {
+          "events": 11006.0,
+          "hours": 365,
+          "hours_with_event": 148
+        },
+        "18": {
+          "events": 8332.0,
+          "hours": 365,
+          "hours_with_event": 145
+        },
+        "19": {
+          "events": 6425.0,
+          "hours": 365,
+          "hours_with_event": 132
+        },
+        "20": {
+          "events": 6852.0,
+          "hours": 365,
+          "hours_with_event": 102
+        },
+        "21": {
+          "events": 5390.0,
+          "hours": 365,
+          "hours_with_event": 117
+        },
+        "22": {
+          "events": 6855.0,
+          "hours": 365,
+          "hours_with_event": 128
+        },
+        "23": {
+          "events": 5920.0,
+          "hours": 365,
+          "hours_with_event": 102
+        }
+      },
+      "hours_with_ge1_event": 3066,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.35,
+      "share_hours_with_ge1_event_ci95_high": 0.36005215126087964,
+      "share_hours_with_ge1_event_ci95_low": 0.3400793527133592,
+      "top10_liquidation_hours": [
+        {
+          "close": 166.55,
+          "funding_rate": -1.5682e-06,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 2386,
+          "liq_long_count": 2379,
+          "liq_notional_usd": 58712700.441452004,
+          "liq_short_count": 7
+        },
+        {
+          "close": 96.16,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 1833,
+          "liq_long_count": 1832,
+          "liq_notional_usd": 18182032.127530005,
+          "liq_short_count": 1
+        },
+        {
+          "close": 80.835,
+          "funding_rate": -1.44646e-05,
+          "hour_utc": "2026-08-19T14:00:00Z",
+          "liq_count": 1812,
+          "liq_long_count": 0,
+          "liq_notional_usd": 3486815.52645,
+          "liq_short_count": 1812
+        },
+        {
+          "close": 127.43,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 1739,
+          "liq_long_count": 1725,
+          "liq_notional_usd": 49151861.53537299,
+          "liq_short_count": 14
+        },
+        {
+          "close": 75.425,
+          "funding_rate": -2.08146e-05,
+          "hour_utc": "2026-02-06T00:00:00Z",
+          "liq_count": 1719,
+          "liq_long_count": 1488,
+          "liq_notional_usd": 29412433.963887006,
+          "liq_short_count": 231
+        },
+        {
+          "close": 157.6,
+          "funding_rate": -1.70668e-05,
+          "hour_utc": "2025-11-04T05:00:00Z",
+          "liq_count": 1403,
+          "liq_long_count": 1403,
+          "liq_notional_usd": 11753114.212,
+          "liq_short_count": 0
+        },
+        {
+          "close": 156.1,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-04T17:00:00Z",
+          "liq_count": 1399,
+          "liq_long_count": 1380,
+          "liq_notional_usd": 7004139.9689,
+          "liq_short_count": 19
+        },
+        {
+          "close": 94.834,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-30T00:00:00Z",
+          "liq_count": 1284,
+          "liq_long_count": 1283,
+          "liq_notional_usd": 8671445.7337,
+          "liq_short_count": 1
+        },
+        {
+          "close": 84.534,
+          "funding_rate": -8.2581e-06,
+          "hour_utc": "2026-02-05T15:00:00Z",
+          "liq_count": 983,
+          "liq_long_count": 977,
+          "liq_notional_usd": 9773807.01561,
+          "liq_short_count": 6
+        },
+        {
+          "close": 133.72,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-01-19T00:00:00Z",
+          "liq_count": 951,
+          "liq_long_count": 945,
+          "liq_notional_usd": 16745132.14165,
+          "liq_short_count": 6
+        }
+      ],
+      "total_liq_events": 159345,
+      "total_liq_long_count": 112403,
+      "total_liq_notional_usd": 1396805728.891878,
+      "total_liq_short_count": 46942,
+      "weekday_profile": {
+        "Fri": {
+          "events": 27421.0,
+          "hours": 1248,
+          "hours_with_event": 491
+        },
+        "Mon": {
+          "events": 24381.0,
+          "hours": 1248,
+          "hours_with_event": 465
+        },
+        "Sat": {
+          "events": 14584.0,
+          "hours": 1272,
+          "hours_with_event": 273
+        },
+        "Sun": {
+          "events": 17175.0,
+          "hours": 1248,
+          "hours_with_event": 380
+        },
+        "Thu": {
+          "events": 28209.0,
+          "hours": 1248,
+          "hours_with_event": 494
+        },
+        "Tue": {
+          "events": 23416.0,
+          "hours": 1248,
+          "hours_with_event": 505
+        },
+        "Wed": {
+          "events": 24159.0,
+          "hours": 1248,
+          "hours_with_event": 458
+        }
+      }
+    },
+    {
+      "coin": "SUI",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 839.0,
+          "hours": 365,
+          "hours_with_event": 46
+        },
+        "01": {
+          "events": 519.0,
+          "hours": 365,
+          "hours_with_event": 56
+        },
+        "02": {
+          "events": 1012.0,
+          "hours": 365,
+          "hours_with_event": 62
+        },
+        "03": {
+          "events": 310.0,
+          "hours": 365,
+          "hours_with_event": 48
+        },
+        "04": {
+          "events": 343.0,
+          "hours": 365,
+          "hours_with_event": 53
+        },
+        "05": {
+          "events": 352.0,
+          "hours": 365,
+          "hours_with_event": 48
+        },
+        "06": {
+          "events": 396.0,
+          "hours": 365,
+          "hours_with_event": 41
+        },
+        "07": {
+          "events": 578.0,
+          "hours": 365,
+          "hours_with_event": 51
+        },
+        "08": {
+          "events": 352.0,
+          "hours": 365,
+          "hours_with_event": 52
+        },
+        "09": {
+          "events": 246.0,
+          "hours": 365,
+          "hours_with_event": 44
+        },
+        "10": {
+          "events": 249.0,
+          "hours": 365,
+          "hours_with_event": 42
+        },
+        "11": {
+          "events": 212.0,
+          "hours": 365,
+          "hours_with_event": 43
+        },
+        "12": {
+          "events": 353.0,
+          "hours": 365,
+          "hours_with_event": 62
+        },
+        "13": {
+          "events": 487.0,
+          "hours": 365,
+          "hours_with_event": 72
+        },
+        "14": {
+          "events": 1029.0,
+          "hours": 365,
+          "hours_with_event": 90
+        },
+        "15": {
+          "events": 1249.0,
+          "hours": 365,
+          "hours_with_event": 88
+        },
+        "16": {
+          "events": 663.0,
+          "hours": 365,
+          "hours_with_event": 68
+        },
+        "17": {
+          "events": 671.0,
+          "hours": 365,
+          "hours_with_event": 66
+        },
+        "18": {
+          "events": 792.0,
+          "hours": 365,
+          "hours_with_event": 73
+        },
+        "19": {
+          "events": 399.0,
+          "hours": 365,
+          "hours_with_event": 62
+        },
+        "20": {
+          "events": 584.0,
+          "hours": 365,
+          "hours_with_event": 47
+        },
+        "21": {
+          "events": 375.0,
+          "hours": 365,
+          "hours_with_event": 55
+        },
+        "22": {
+          "events": 564.0,
+          "hours": 365,
+          "hours_with_event": 55
+        },
+        "23": {
+          "events": 591.0,
+          "hours": 365,
+          "hours_with_event": 39
+        }
+      },
+      "hours_with_ge1_event": 1363,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.15559360730593608,
+      "share_hours_with_ge1_event_ci95_high": 0.16333500634646067,
+      "share_hours_with_ge1_event_ci95_low": 0.14815414699469512,
+      "top10_liquidation_hours": [
+        {
+          "close": 0.85521,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-30T00:00:00Z",
+          "liq_count": 225,
+          "liq_long_count": 224,
+          "liq_notional_usd": 406440.536135,
+          "liq_short_count": 1
+        },
+        {
+          "close": 0.64832,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-18T02:00:00Z",
+          "liq_count": 217,
+          "liq_long_count": 217,
+          "liq_notional_usd": 206473.147483,
+          "liq_short_count": 0
+        },
+        {
+          "close": 0.87424,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 211,
+          "liq_long_count": 211,
+          "liq_notional_usd": 686445.061998,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.0263,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 206,
+          "liq_long_count": 204,
+          "liq_notional_usd": 1879987.96994,
+          "liq_short_count": 2
+        },
+        {
+          "close": 2.0425,
+          "funding_rate": -7.0339e-06,
+          "hour_utc": "2025-11-03T15:00:00Z",
+          "liq_count": 198,
+          "liq_long_count": 197,
+          "liq_notional_usd": 1151632.55115,
+          "liq_short_count": 1
+        },
+        {
+          "close": 1.3903,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2025-11-21T07:00:00Z",
+          "liq_count": 179,
+          "liq_long_count": 176,
+          "liq_notional_usd": 1078594.91101,
+          "liq_short_count": 3
+        },
+        {
+          "close": 0.87659,
+          "funding_rate": -1.03922e-05,
+          "hour_utc": "2026-05-31T14:00:00Z",
+          "liq_count": 155,
+          "liq_long_count": 155,
+          "liq_notional_usd": 358768.77309,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.3305,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-05-10T17:00:00Z",
+          "liq_count": 152,
+          "liq_long_count": 0,
+          "liq_notional_usd": 1776123.62072,
+          "liq_short_count": 152
+        },
+        {
+          "close": 0.98211,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-23T14:00:00Z",
+          "liq_count": 142,
+          "liq_long_count": 142,
+          "liq_notional_usd": 886618.418818,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.1373,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 141,
+          "liq_long_count": 141,
+          "liq_notional_usd": 1466012.41883,
+          "liq_short_count": 0
+        }
+      ],
+      "total_liq_events": 13165,
+      "total_liq_long_count": 9991,
+      "total_liq_notional_usd": 52907097.12369,
+      "total_liq_short_count": 3174,
+      "weekday_profile": {
+        "Fri": {
+          "events": 2321.0,
+          "hours": 1248,
+          "hours_with_event": 233
+        },
+        "Mon": {
+          "events": 1686.0,
+          "hours": 1248,
+          "hours_with_event": 181
+        },
+        "Sat": {
+          "events": 1280.0,
+          "hours": 1272,
+          "hours_with_event": 153
+        },
+        "Sun": {
+          "events": 1796.0,
+          "hours": 1248,
+          "hours_with_event": 165
+        },
+        "Thu": {
+          "events": 2608.0,
+          "hours": 1248,
+          "hours_with_event": 242
+        },
+        "Tue": {
+          "events": 1887.0,
+          "hours": 1248,
+          "hours_with_event": 180
+        },
+        "Wed": {
+          "events": 1587.0,
+          "hours": 1248,
+          "hours_with_event": 209
+        }
+      }
+    },
+    {
+      "coin": "XRP",
+      "hour_of_day_profile": {
+        "00": {
+          "events": 2454.0,
+          "hours": 365,
+          "hours_with_event": 93
+        },
+        "01": {
+          "events": 2557.0,
+          "hours": 365,
+          "hours_with_event": 107
+        },
+        "02": {
+          "events": 2737.0,
+          "hours": 365,
+          "hours_with_event": 102
+        },
+        "03": {
+          "events": 1672.0,
+          "hours": 365,
+          "hours_with_event": 99
+        },
+        "04": {
+          "events": 1626.0,
+          "hours": 365,
+          "hours_with_event": 94
+        },
+        "05": {
+          "events": 2261.0,
+          "hours": 365,
+          "hours_with_event": 89
+        },
+        "06": {
+          "events": 1212.0,
+          "hours": 365,
+          "hours_with_event": 82
+        },
+        "07": {
+          "events": 1475.0,
+          "hours": 365,
+          "hours_with_event": 84
+        },
+        "08": {
+          "events": 2087.0,
+          "hours": 365,
+          "hours_with_event": 96
+        },
+        "09": {
+          "events": 1241.0,
+          "hours": 365,
+          "hours_with_event": 91
+        },
+        "10": {
+          "events": 1404.0,
+          "hours": 365,
+          "hours_with_event": 82
+        },
+        "11": {
+          "events": 1025.0,
+          "hours": 365,
+          "hours_with_event": 74
+        },
+        "12": {
+          "events": 2129.0,
+          "hours": 365,
+          "hours_with_event": 110
+        },
+        "13": {
+          "events": 3599.0,
+          "hours": 365,
+          "hours_with_event": 143
+        },
+        "14": {
+          "events": 5288.0,
+          "hours": 365,
+          "hours_with_event": 171
+        },
+        "15": {
+          "events": 4945.0,
+          "hours": 365,
+          "hours_with_event": 163
+        },
+        "16": {
+          "events": 3193.0,
+          "hours": 365,
+          "hours_with_event": 131
+        },
+        "17": {
+          "events": 2891.0,
+          "hours": 365,
+          "hours_with_event": 114
+        },
+        "18": {
+          "events": 4006.0,
+          "hours": 365,
+          "hours_with_event": 115
+        },
+        "19": {
+          "events": 1849.0,
+          "hours": 365,
+          "hours_with_event": 118
+        },
+        "20": {
+          "events": 2901.0,
+          "hours": 365,
+          "hours_with_event": 97
+        },
+        "21": {
+          "events": 2091.0,
+          "hours": 365,
+          "hours_with_event": 85
+        },
+        "22": {
+          "events": 2296.0,
+          "hours": 365,
+          "hours_with_event": 98
+        },
+        "23": {
+          "events": 2209.0,
+          "hours": 365,
+          "hours_with_event": 72
+        }
+      },
+      "hours_with_ge1_event": 2510,
+      "n_coin_hours": 8760,
+      "rv_nonmissing_hours": 8736,
+      "rv_window_hours": 24,
+      "share_hours_with_ge1_event": 0.2865296803652968,
+      "share_hours_with_ge1_event_ci95_high": 0.29609004540418615,
+      "share_hours_with_ge1_event_ci95_low": 0.2771564632958342,
+      "top10_liquidation_hours": [
+        {
+          "close": 1.5305,
+          "funding_rate": 0.0001123861,
+          "hour_utc": "2026-08-22T05:00:00Z",
+          "liq_count": 966,
+          "liq_long_count": 830,
+          "liq_notional_usd": 15661103.5498,
+          "liq_short_count": 136
+        },
+        {
+          "close": 1.3244,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-09-15T18:00:00Z",
+          "liq_count": 723,
+          "liq_long_count": 699,
+          "liq_notional_usd": 3264339.0020999997,
+          "liq_short_count": 24
+        },
+        {
+          "close": 1.238,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-29T20:00:00Z",
+          "liq_count": 652,
+          "liq_long_count": 651,
+          "liq_notional_usd": 2474412.6874,
+          "liq_short_count": 1
+        },
+        {
+          "close": 1.23,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-20T18:00:00Z",
+          "liq_count": 573,
+          "liq_long_count": 573,
+          "liq_notional_usd": 2388103.3624,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.3456,
+          "funding_rate": 1.17386e-05,
+          "hour_utc": "2026-10-08T15:00:00Z",
+          "liq_count": 527,
+          "liq_long_count": 526,
+          "liq_notional_usd": 4196407.1953,
+          "liq_short_count": 1
+        },
+        {
+          "close": 1.3165,
+          "funding_rate": 6.071e-06,
+          "hour_utc": "2026-10-15T02:00:00Z",
+          "liq_count": 490,
+          "liq_long_count": 487,
+          "liq_notional_usd": 1786462.5179,
+          "liq_short_count": 3
+        },
+        {
+          "close": 1.3577,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-30T23:00:00Z",
+          "liq_count": 449,
+          "liq_long_count": 449,
+          "liq_notional_usd": 1807442.9145,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.4613,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-07T02:00:00Z",
+          "liq_count": 437,
+          "liq_long_count": 437,
+          "liq_notional_usd": 2747680.6315,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.4377,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-08-25T21:00:00Z",
+          "liq_count": 424,
+          "liq_long_count": 424,
+          "liq_notional_usd": 6052606.0112999985,
+          "liq_short_count": 0
+        },
+        {
+          "close": 1.2243,
+          "funding_rate": 1.25e-05,
+          "hour_utc": "2026-10-30T00:00:00Z",
+          "liq_count": 385,
+          "liq_long_count": 384,
+          "liq_notional_usd": 7859882.3418000005,
+          "liq_short_count": 1
+        }
+      ],
+      "total_liq_events": 59148,
+      "total_liq_long_count": 44893,
+      "total_liq_notional_usd": 492721705.75087005,
+      "total_liq_short_count": 14255,
+      "weekday_profile": {
+        "Fri": {
+          "events": 9562.0,
+          "hours": 1248,
+          "hours_with_event": 381
+        },
+        "Mon": {
+          "events": 8026.0,
+          "hours": 1248,
+          "hours_with_event": 392
+        },
+        "Sat": {
+          "events": 6324.0,
+          "hours": 1272,
+          "hours_with_event": 221
+        },
+        "Sun": {
+          "events": 5421.0,
+          "hours": 1248,
+          "hours_with_event": 300
+        },
+        "Thu": {
+          "events": 11989.0,
+          "hours": 1248,
+          "hours_with_event": 409
+        },
+        "Tue": {
+          "events": 9238.0,
+          "hours": 1248,
+          "hours_with_event": 410
+        },
+        "Wed": {
+          "events": 8588.0,
+          "hours": 1248,
+          "hours_with_event": 397
+        }
+      }
+    }
+  ],
+  "predictive_claim": false,
+  "prohibitions_respected": {
+    "no_confirmatory_evaluation": true,
+    "no_risk_05_06_07_rerun": true,
+    "no_robust_05_rerun": true,
+    "no_sealed_binance_outcomes": true,
+    "no_track_c_qlike_rerun": true,
+    "no_zero_byte_artifacts": true,
+    "stdlib_only": true
+  },
+  "rv_definition": "sqrt(sum of squared hourly log close-to-close returns over the trailing 24 closed hours, ending at the prior hour; missing for the first 24 rows of each coin",
+  "session_id": "session_20261119T033443Z",
+  "summary": {
+    "hours_with_ge1_event": 21557,
+    "n_coin_hours": 113880,
+    "share_hours_with_ge1_event": 0.18929574991218825,
+    "share_hours_with_ge1_event_ci95_high": 0.1915814920869159,
+    "share_hours_with_ge1_event_ci95_low": 0.18703096947233652,
+    "total_liq_events": 1128446.0,
+    "total_liq_notional_usd": 20970455300.37035
+  },
+  "window_months": [
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10"
+  ]
+}

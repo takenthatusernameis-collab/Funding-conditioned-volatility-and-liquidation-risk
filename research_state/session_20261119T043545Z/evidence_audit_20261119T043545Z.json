@@ -1,0 +1,35 @@
+{
+  "campaign_id": "FCLR-LIQ-TRACKA-CONFIRMATORY-01-20261119T034500Z",
+  "session_id": "session_20261119T043545Z",
+  "artifact": "evidence_audit_20261119T043545Z",
+  "generated_utc": "2026-11-19T04:41:29Z",
+  "section": "RESEARCH_PROMPT.md section 19 (per-session definition of done)",
+  "honest_status": "CONFIRMATORY_CAMPAIGN_EXECUTED: verdict=NOT_MET, power=POWERED, recompute n_discrepancies=0",
+  "evidence_added": [
+    "fclr_tracka_confirmatory01_power_20261119T043545Z.{py,json,md} (power/MDE audit, status=POWERED)",
+    "fclr_tracka_confirmatory01_recompute_20261119T043545Z.{py,json} (independent stdlib recompute, n_discrepancies=0)",
+    "fclr_tracka_confirmatory01_evaluation_20261119T043545Z.{py,json,md} (three-block confirmatory evaluation, verdict=NOT_MET)",
+    "evidence_audit_20261119T043545Z.{json,md}",
+    "trigger_check_20261119T043545Z.json"
+  ],
+  "power_audit": "POWERED",
+  "recompute_n_discrepancies": 0,
+  "confirmatory_verdict": "NOT_MET",
+  "headline_metric": "Brier score",
+  "network_used": false,
+  "cache_is_local": true,
+  "prohibitions_respected": {
+    "no_sealed_binance_outcomes": true,
+    "no_risk_05_06_07_rerun": true,
+    "no_robust_05_rerun": true,
+    "no_track_c_qlike_rerun": true,
+    "no_workflow_writes": true,
+    "no_heavyweight_stats_packages": true,
+    "pandas_pyarrow_only_parquet_reads": true,
+    "no_frozen_session_edits": true,
+    "no_zero_byte_artifacts": true,
+    "frozen_prereg_not_mutated": true,
+    "confirmatory_design_outcome_blind": true
+  },
+  "statement": "The frozen confirmatory prereg (fclr_tracka_confirmatory01_prereg_20261119T022824Z.json) was NOT mutated. No sealed Binance outcome month was read. The evaluation is outcome-blind: the design, splits, models, metrics, and Holm family were frozen before any outcome was computed. Absence from the liquidation feed is treated as missing/unknown, not zero. Core statistics are stdlib only; no statsmodels/numpy in the core path."
+}

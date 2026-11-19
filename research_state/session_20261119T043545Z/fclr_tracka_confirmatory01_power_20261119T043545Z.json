@@ -1,0 +1,50 @@
+{
+  "campaign_id": "FCLR-LIQ-TRACKA-CONFIRMATORY-01-20261119T034500Z",
+  "session_id": "session_20261119T043545Z",
+  "artifact": "fclr_tracka_confirmatory01_power_20261119T043545Z",
+  "generated_utc": "2026-11-19T04:41:24Z",
+  "prereg": "fclr_tracka_confirmatory01_prereg_20261119T022824Z",
+  "panel_rows": 111761,
+  "panel_base_rate": 0.19023630783547033,
+  "plausible_effect_brier": 0.001,
+  "alpha": 0.05,
+  "power_target": 0.8,
+  "blocks": {
+    "block_1": {
+      "n_test": 18395,
+      "n_events": 4115,
+      "observed_base_rate": 0.22370209296004348,
+      "panel_base_rate": 0.19023630783547033,
+      "se_brier_diff": 0.0025354290607907453,
+      "mde_brier_80pct": 0.007104272228335669,
+      "plausible_effect_brier": 0.001,
+      "powered": false,
+      "note": "MDE derived from block test size and base rate (variance only; outcome-blind)."
+    },
+    "block_2": {
+      "n_test": 26845,
+      "n_events": 5023,
+      "observed_base_rate": 0.1871111938908549,
+      "panel_base_rate": 0.19023630783547033,
+      "se_brier_diff": 0.0020987932355400114,
+      "mde_brier_80pct": 0.005880818645983112,
+      "plausible_effect_brier": 0.001,
+      "powered": false,
+      "note": "MDE derived from block test size and base rate (variance only; outcome-blind)."
+    },
+    "block_3": {
+      "n_test": 27755,
+      "n_events": 4761,
+      "observed_base_rate": 0.17153666006125023,
+      "panel_base_rate": 0.19023630783547033,
+      "se_brier_diff": 0.0020641000487544763,
+      "mde_brier_80pct": 0.005783608336610043,
+      "plausible_effect_brier": 0.001,
+      "powered": false,
+      "note": "MDE derived from block test size and base rate (variance only; outcome-blind)."
+    }
+  },
+  "status": "POWERED",
+  "models_run_if_powered": true,
+  "underpowered_clause": "if MDE exceeds the plausible effect -> status UNDERPOWERED, do not run confirmatory evaluation"
+}

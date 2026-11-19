@@ -1,0 +1,13 @@
+{
+  "campaign_id": "FCLR-LIQ-TRACKA-CONFIRMATORY-01-20261119T034500Z",
+  "session_id": "session_20261119T043545Z",
+  "artifact": "recompute_20261119T043545Z",
+  "panel_path": "research_state/session_20261119T022824Z/fclr_tracka_extension01_panel_session_20261119T022824Z.csv",
+  "panel_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9",
+  "panel_csv_rows": 113880,
+  "analysis_events": 21557,
+  "analysis_base_rate": 0.18929574991218825,
+  "n_discrepancies": 0,
+  "discrepancies": [],
+  "note": "Thin stdlib recompute sidecar; n_discrepancies must be 0 for the frozen panel."
+}
