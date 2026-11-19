@@ -301,6 +301,7 @@ RISK_08_REQUIRED = (
 # failing merely because the handoff records the latest audit session rather
 # than the older complete bundle.
 NEW_QUANT_PREFIXES = (
+    "fclr_risk",
     "independent_recompute_",
     "trigger_readiness_power_calibration_",
     "trigger_readiness_power_ledger_",

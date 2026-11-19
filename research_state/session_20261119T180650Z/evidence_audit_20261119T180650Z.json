@@ -1,0 +1,33 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-12-20261119T175557Z",
+  "session_utc": "20261119T180650Z",
+  "audit_kind": "evidence_audit_per_RESEARCH_PROMPT_19",
+  "verdict": "UNDERPOWERED",
+  "power_status": "UNDERPOWERED",
+  "models_run": false,
+  "family": "funding-shock transmission family (funding innovations)",
+  "n_family_members": 6,
+  "smallest_defensible_effect": 0.0028144136231997873,
+  "plausible_effect_brier": 0.001,
+  "data": "frozen Track A panel session_20261119T022824Z (113,880 coin-hours, 13 coins, 2025-11..2026-10), common-sample kept 112,671 (dropped 1,209)",
+  "mde_brier_80pct": {"block_2": 0.004080395099931475, "block_3": 0.003881560964664036, "pooled": 0.0028144136231997873},
+  "all_powered_blocks": false,
+  "member_verdicts": {"member_1":"NOT_MET","member_2":"NOT_MET","member_3":"NOT_MET","member_4":"NOT_MET","member_5":"NOT_MET","member_6":"NOT_MET"},
+  "evidence_supported": "none; power gate failed for all scored blocks, so no member can be declared SUPPORT",
+  "evidence_contradicted": "none; no family member demonstrated block_3 Brier improvement over RV-only clearing p_raw<0.05, p_holm<0.05, and placebo-95th<improvement",
+  "evidence_unknown": "whether the true incremental Brier effect of funding-shock transmission over RV-only is exactly zero or merely below the ~0.0028-0.0041 MDE floor at this sample size",
+  "strongest_alternative_explanation": "funding-shock innovations have negligible incremental out-of-sample forecast skill over realized-volatility-only at the detectable effect scale; any true effect is smaller than the plausible-effect threshold (0.001 Brier) and hence undetectable here",
+  "dominating_limitation": "statistical power (sample size x effect size), not data availability; the panel and labels are complete and admissible",
+  "concrete_falsifying_test": "RISK-13 per contingency ladder — advance only if MDE <= plausible effect via MDE-by-instrument-count redesign or a larger/deeper panel; otherwise the null is preserved",
+  "highest_information_gain_task": "complete RISK-12 underpowered session (all 11 artifacts), record session, bump campaign to RISK-13, then execute a distinct-mechanism campaign on the frozen panel per the contingency ladder (candidate queue: (i) liq_count-at-t-1 persistence family; (ii) within-hour cross-sectional funding-intensity contrast; (iii) UTC-hour / market-wide-RV conditioning of the funding effect)",
+  "exact_artifact": "research_state/session_20261119T180650Z/fclr_risk12_evaluation_20261119T180650Z.json",
+  "verification_command": "python3 scripts/check_handoff_heavywork_gate.py --json (must PASS) and python3 research_state/session_20261119T180650Z/fclr_risk12_evaluation_20261119T180650Z.py (regenerates evaluation JSON/MD)",
+  "artifacts": [
+    "fclr_risk12_prereg_20261119T180650Z.{json,md}",
+    "fclr_risk12_power_20261119T180650Z.{py,json,md}",
+    "fclr_risk12_recompute_20261119T180650Z.{py,json}",
+    "fclr_risk12_evaluation_20261119T180650Z.{py,json,md}",
+    "evidence_audit_20261119T180650Z.{json,md}",
+    "trigger_check_20261119T180650Z.json"
+  ]
+}
