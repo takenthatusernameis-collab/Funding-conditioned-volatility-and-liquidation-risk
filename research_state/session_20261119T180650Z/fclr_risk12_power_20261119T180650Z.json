@@ -1,0 +1,565 @@
+{
+  "campaign_id": "FCLR-LIQ-RISK-ESCALATION-12-20261119T175557Z",
+  "session_utc": "20261119T180650Z",
+  "status": "UNDERPOWERED",
+  "models_run": false,
+  "plausible_effect_brier": 0.001,
+  "base_rate": 0.18967613671663516,
+  "common_sample_dropped": 1209,
+  "common_sample_kept": 112671,
+  "blocks": [
+    {
+      "name": "block_2",
+      "n_test": 27443,
+      "base_rate": 0.18967613671663516,
+      "sd_diff_proxy": 0.24127602698985756,
+      "mde_brier_80pct": 0.004080395099931475,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    },
+    {
+      "name": "block_3",
+      "n_test": 28379,
+      "base_rate": 0.18967613671663516,
+      "sd_diff_proxy": 0.23340014332131523,
+      "mde_brier_80pct": 0.003881560964664036,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    },
+    {
+      "name": "pooled",
+      "n_test": 55822,
+      "base_rate": 0.18967613671663516,
+      "sd_diff_proxy": 0.23734865949167047,
+      "mde_brier_80pct": 0.0028144136231997873,
+      "plausible_effect_brier": 0.001,
+      "powered_block": false
+    }
+  ],
+  "mde_by_instrument_count": [
+    {
+      "coin_count": 1,
+      "coins": [
+        "BTC"
+      ],
+      "base_rate": 0.4736356293988693,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 2111,
+          "base_rate": 0.4736356293988693,
+          "sd_diff_proxy": 0.026339208856998628,
+          "mde_brier_80pct": 0.0016060625178492937,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 2183,
+          "base_rate": 0.4736356293988693,
+          "sd_diff_proxy": 0.026217168866486687,
+          "mde_brier_80pct": 0.0015720369902591234,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 4294,
+          "base_rate": 0.4736356293988693,
+          "sd_diff_proxy": 0.026354979715237023,
+          "mde_brier_80pct": 0.0011267705916907307,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 2,
+      "coins": [
+        "BTC",
+        "ETH"
+      ],
+      "base_rate": 0.41969539633091035,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 4222,
+          "base_rate": 0.41969539633091035,
+          "sd_diff_proxy": 0.08005326666145729,
+          "mde_brier_80pct": 0.0034516263938733746,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 4366,
+          "base_rate": 0.41969539633091035,
+          "sd_diff_proxy": 0.07823038352488007,
+          "mde_brier_80pct": 0.003316938589629577,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 8588,
+          "base_rate": 0.41969539633091035,
+          "sd_diff_proxy": 0.0793433006719543,
+          "mde_brier_80pct": 0.0023986566287935375,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 3,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB"
+      ],
+      "base_rate": 0.3095265566708973,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 6333,
+          "base_rate": 0.3095265566708973,
+          "sd_diff_proxy": 0.1798898104800671,
+          "mde_brier_80pct": 0.006332944142897176,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 6549,
+          "base_rate": 0.3095265566708973,
+          "sd_diff_proxy": 0.17086568934761145,
+          "mde_brier_80pct": 0.005915224133860688,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 12882,
+          "base_rate": 0.3095265566708973,
+          "sd_diff_proxy": 0.17568399089917372,
+          "mde_brier_80pct": 0.004336550201953617,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 4,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL"
+      ],
+      "base_rate": 0.3197473174108688,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 8444,
+          "base_rate": 0.3197473174108688,
+          "sd_diff_proxy": 0.1715604728076667,
+          "mde_brier_80pct": 0.005230545200063653,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 8732,
+          "base_rate": 0.3197473174108688,
+          "sd_diff_proxy": 0.16356855350023744,
+          "mde_brier_80pct": 0.004903958506256705,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 17176,
+          "base_rate": 0.3197473174108688,
+          "sd_diff_proxy": 0.16785125698110792,
+          "mde_brier_80pct": 0.003588123804081154,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 5,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP"
+      ],
+      "base_rate": 0.3133264105226722,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 10555,
+          "base_rate": 0.3133264105226722,
+          "sd_diff_proxy": 0.17608908369127954,
+          "mde_brier_80pct": 0.004801834106661039,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 10915,
+          "base_rate": 0.3133264105226722,
+          "sd_diff_proxy": 0.16878908858773345,
+          "mde_brier_80pct": 0.004526227046177186,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 21470,
+          "base_rate": 0.3133264105226722,
+          "sd_diff_proxy": 0.17264096974323676,
+          "mde_brier_80pct": 0.003300894787691665,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 6,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX"
+      ],
+      "base_rate": 0.27923926002846045,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 12666,
+          "base_rate": 0.27923926002846045,
+          "sd_diff_proxy": 0.20116465038792414,
+          "mde_brier_80pct": 0.005007670699078817,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 13098,
+          "base_rate": 0.27923926002846045,
+          "sd_diff_proxy": 0.1921454500170797,
+          "mde_brier_80pct": 0.00470361156076352,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 25764,
+          "base_rate": 0.27923926002846045,
+          "sd_diff_proxy": 0.19682780111878329,
+          "mde_brier_80pct": 0.0034354500051514826,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 7,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE"
+      ],
+      "base_rate": 0.2585010466630404,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 14777,
+          "base_rate": 0.2585010466630404,
+          "sd_diff_proxy": 0.2149306953352214,
+          "mde_brier_80pct": 0.004953465520327018,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 15281,
+          "base_rate": 0.2585010466630404,
+          "sd_diff_proxy": 0.20434037122347828,
+          "mde_brier_80pct": 0.004631078338013213,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 30058,
+          "base_rate": 0.2585010466630404,
+          "sd_diff_proxy": 0.20981601519424456,
+          "mde_brier_80pct": 0.0033904897200039926,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 8,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK"
+      ],
+      "base_rate": 0.24022152994115611,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 16888,
+          "base_rate": 0.24022152994115611,
+          "sd_diff_proxy": 0.2244639351293683,
+          "mde_brier_80pct": 0.004839063259227558,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 17464,
+          "base_rate": 0.24022152994115611,
+          "sd_diff_proxy": 0.21378608405459565,
+          "mde_brier_80pct": 0.004532224438737135,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 34352,
+          "base_rate": 0.24022152994115611,
+          "sd_diff_proxy": 0.21925843404036302,
+          "mde_brier_80pct": 0.0033142413522992483,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 9,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI"
+      ],
+      "base_rate": 0.2308500955091471,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 18999,
+          "base_rate": 0.2308500955091471,
+          "sd_diff_proxy": 0.22840782226249715,
+          "mde_brier_80pct": 0.004642473559868108,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 19647,
+          "base_rate": 0.2308500955091471,
+          "sd_diff_proxy": 0.2175652003652745,
+          "mde_brier_80pct": 0.004348556786192537,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 38646,
+          "base_rate": 0.2308500955091471,
+          "sd_diff_proxy": 0.22310335305812892,
+          "mde_brier_80pct": 0.0031794914389323284,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 10,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB"
+      ],
+      "base_rate": 0.22036460136148608,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 21110,
+          "base_rate": 0.22036460136148608,
+          "sd_diff_proxy": 0.23180301941929465,
+          "mde_brier_80pct": 0.004469704471459445,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 21830,
+          "base_rate": 0.22036460136148608,
+          "sd_diff_proxy": 0.22180817391842733,
+          "mde_brier_80pct": 0.004205857129413359,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 42940,
+          "base_rate": 0.22036460136148608,
+          "sd_diff_proxy": 0.22688029558426745,
+          "mde_brier_80pct": 0.0030673942318185875,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 11,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB",
+        "OP"
+      ],
+      "base_rate": 0.2059850844897574,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 23221,
+          "base_rate": 0.2059850844897574,
+          "sd_diff_proxy": 0.23799652061459844,
+          "mde_brier_80pct": 0.00437556345083816,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 24013,
+          "base_rate": 0.2059850844897574,
+          "sd_diff_proxy": 0.22670359227856018,
+          "mde_brier_80pct": 0.004098632965142398,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 47234,
+          "base_rate": 0.2059850844897574,
+          "sd_diff_proxy": 0.2324358723583916,
+          "mde_brier_80pct": 0.0029962609156266736,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 12,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB",
+        "OP",
+        "APT"
+      ],
+      "base_rate": 0.19588669666551287,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 25332,
+          "base_rate": 0.19588669666551287,
+          "sd_diff_proxy": 0.24061895612743384,
+          "mde_brier_80pct": 0.004235443922061704,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 26196,
+          "base_rate": 0.19588669666551287,
+          "sd_diff_proxy": 0.229704323426287,
+          "mde_brier_80pct": 0.003976083679442072,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 51528,
+          "base_rate": 0.19588669666551287,
+          "sd_diff_proxy": 0.23522548716871122,
+          "mde_brier_80pct": 0.0029031305831148163,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    },
+    {
+      "coin_count": 13,
+      "coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP",
+        "AVAX",
+        "DOGE",
+        "LINK",
+        "SUI",
+        "ARB",
+        "OP",
+        "APT",
+        "ADA"
+      ],
+      "base_rate": 0.18967613671663516,
+      "blocks": [
+        {
+          "name": "block_2",
+          "n_test": 27443,
+          "base_rate": 0.18967613671663516,
+          "sd_diff_proxy": 0.24127602698985756,
+          "mde_brier_80pct": 0.004080395099931475,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "block_3",
+          "n_test": 28379,
+          "base_rate": 0.18967613671663516,
+          "sd_diff_proxy": 0.23340014332131523,
+          "mde_brier_80pct": 0.003881560964664036,
+          "plausible_effect_brier": 0.001
+        },
+        {
+          "name": "pooled",
+          "n_test": 55822,
+          "base_rate": 0.18967613671663516,
+          "sd_diff_proxy": 0.23734865949167047,
+          "mde_brier_80pct": 0.0028144136231997873,
+          "plausible_effect_brier": 0.001
+        }
+      ]
+    }
+  ],
+  "smallest_defensible_effect": 0.0028144136231997873,
+  "smallest_defensible_effect_rule": "min mde_brier_80pct across scored blocks at full instrument count (block_3 primary); effect defensible only if >= this MDE",
+  "rule": "if all scored blocks' mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER then UNDERPOWERED",
+  "recompute": {
+    "n_discrepancies": 0,
+    "panel_sha256": "0448a56a676eaadc7094d0e42a6b90a5f407a80502da0da74e5141547725e7d9",
+    "rows": 113880,
+    "coins": 13,
+    "months": 12,
+    "first_month": "2025-11",
+    "last_month": "2026-10",
+    "funding_rate_nonnull": 113880,
+    "liq_count_nonnull": 113880,
+    "open_interest_usd_nonnull": 113035,
+    "common_sample_dropped": 1209,
+    "common_sample_kept": 112671
+  }
+}
