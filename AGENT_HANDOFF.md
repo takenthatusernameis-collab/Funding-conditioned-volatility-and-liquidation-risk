@@ -1,17 +1,17 @@
-# AGENT HANDOFF — 2026-11-19T16:53:32Z (SOLE DURABLE HANDOFF)
+# AGENT HANDOFF — 2026-11-19T16:57:34Z (SOLE DURABLE HANDOFF)
 
 > **Authority:** this file only. Every other handoff-like file under `research_state/` is tombstoned/historical and has no campaign authority. Verified this refresh: exactly one `AGENT_HANDOFF*` exists in the repo.
 > **Repo priority:** the repository is `Funding-conditioned-volatility-and-liquidation-risk`; RISK-11 is COMPLETE (verdict NOT_MET-with-bound, `session_20261119T130817Z`); the highest-value unexecuted work is therefore the **RISK-12** campaign — a new pre-registered confirmatory question on the frozen Track A panel, not descriptive or audit replays.
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T16:53:32Z)
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION — READ THIS BEFORE ANY OTHER ACTION (timestamped 2026-11-19T16:57:34Z)
 
-**Campaign `FCLR-LIQ-RISK-ESCALATION-12-20261119T165332Z` is LIVE and machine-enforced.** RISK-11 completed in `session_20261119T130817Z` with verdict **NOT_MET-with-bound** (power status UNDERPOWERED; all scored blocks' mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER=0.001; `n_discrepancies=0`; honest underpowered artifacts written; smallest defensible effect 0.002817725360790807). Do not replay RISK-11. Do not re-audit it. The interaction hypothesis is closed as not detectable at PLAUSIBLE_EFFECT_BRIER=0.001.
+**Campaign `FCLR-LIQ-RISK-ESCALATION-12-20261119T165734Z` is LIVE and machine-enforced.** RISK-11 completed in `session_20261119T130817Z` with verdict **NOT_MET-with-bound** (power status UNDERPOWERED; all scored blocks' mde_brier_80pct > PLAUSIBLE_EFFECT_BRIER=0.001; `n_discrepancies=0`; honest underpowered artifacts written; smallest defensible effect 0.002817725360790807). Do not replay RISK-11. Do not re-audit it. The interaction hypothesis is closed as not detectable at PLAUSIBLE_EFFECT_BRIER=0.001.
 
 Repo priority (Funding-conditioned-volatility-and-liquidation-risk): RISK-11 → NOT_MET-with-bound closes the funded×RV×OI interaction family. Per the contingency ladder, the next heavy campaign pivots to a **new pre-registered confirmatory question on the frozen Track A panel** (do not manufacture a new funded-data source). HL_LABEL_EXTENSION remains OPEN (no post-`2026-10-31` observed-label source with ≥100-day depth appeared). GATE4_BRANCH_1 and EXPANSION_ROBUSTNESS_REDO remain external-trigger-only.
 
 Your session's deliverable is **RISK-12**, in this exact order:
 
-1. Create `research_state/session_<UTC>/` (UTC at session start, strictly > `20261119T165332Z`).
+1. Create `research_state/session_<UTC>/` (UTC at session start, strictly > `20261119T165734Z`).
 2. Write the **outcome-blind** prereg `fclr_risk12_prereg_<UTC>.{json,md}` and freeze it **before** touching any outcome. Contract: new confirmatory question on the frozen Track A panel — preregister the hypothesis, smallest defensible effect, MDE-by-instrument-count table (1–13 coins, block_2/block_3/pooled), decision rule (verdict SUPPORT / NOT_MET-with-bound / UNDERPOWERED), same three blocks (block_2, block_3, pooled; block_1 cold-start power only), Holm over family at α=0.05, same placebo (label-hour permutation, 1000 perms, seed `20261119`), same metrics. Do not slim and do not outcome-mine.
 3. Run `fclr_risk12_power_<UTC>.{py,json,md}` with explicit `status` in `{POWERED, UNDERPOWERED}` (recompute MDE from frozen block sizes and panel base rate; `PLAUSIBLE_EFFECT_BRIER = 0.001` stays frozen).
 4. Run `fclr_risk12_recompute_<UTC>.{py,json}`; require `n_discrepancies=0`.
@@ -19,13 +19,13 @@ Your session's deliverable is **RISK-12**, in this exact order:
 6. Write `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json`.
 7. Run every verification command in this file; all must PASS. Only then may you update this handoff (and you must bump the campaign id to RISK-13 per the ladder rule below).
 
-`scripts/check_handoff_heavywork_gate.py` **fails closed** for any session dir stamped after `20261119T165332Z` that lacks the exact 11-file `fclr_risk12_*` package + non-empty `trigger_check_*.json`. A descriptive-only, trigger-check-only, gate-only, or arbitrary-`recompute_*` session cannot pass. Zero-byte artifacts fail. There is no cheaper legal session.
+`scripts/check_handoff_heavywork_gate.py` **fails closed** for any session dir stamped after `20261119T165734Z` that lacks the exact 11-file `fclr_risk12_*` package + non-empty `trigger_check_*.json`. A descriptive-only, trigger-check-only, gate-only, or arbitrary-`recompute_*` session cannot pass. Zero-byte artifacts fail. There is no cheaper legal session.
 
 **Forbidden starts:** RISK-09 replay, RISK-10 replay, RISK-11 replay, `FCLR-LIQ-TRACKA-CONFIRMATORY-02` (precondition UNDERPOWERED; verdict was NOT_MET), `FCLR-LIQ-TRACKA-DATA-EXTENSION-02` (no post-`2026-10-31` labels with ≥100-day depth), RISK-05/06/07, ROBUST-05, Track C QLIKE, and reading sealed Binance months (`2024-10 … 2026-11`) for outcomes.
 
 ---
 
-## UNBLOCKED PREFLIGHT — verified 2026-11-19T16:53:32Z (do NOT redo any of this)
+## UNBLOCKED PREFLIGHT — verified 2026-11-19T16:57:34Z (do NOT redo any of this)
 
 The data bottleneck for RISK-11 is **already removed**. Everything needed is on disk (same frozen panel as RISK-08/09/10/11):
 
@@ -70,14 +70,14 @@ The data bottleneck for RISK-11 is **already removed**. Everything needed is on 
 
 | # | Requirement |
 |---|---|
-| 1 | New `research_state/session_<UTC>/` dir exists; UTC strictly greater than `20261119T165332Z` |
+| 1 | New `research_state/session_<UTC>/` dir exists; UTC strictly greater than `20261119T165734Z` |
 | 2 | `fclr_risk12_prereg_<UTC>.{json,md}` exist, non-empty, and JSON has `frozen_utc` + `outcome_blind=true` + full contract above |
 | 3 | `fclr_risk12_power_<UTC>.{py,json,md}` exist, non-empty, JSON has explicit `status` |
 | 4 | `fclr_risk12_recompute_<UTC>.{py,json}` exist, non-empty, JSON has `n_discrepancies: 0` |
 | 5 | `fclr_risk12_evaluation_<UTC>.{py,json,md}` exist, non-empty, JSON has MDE-by-instrument-count table, preregistered decision, placebo p, Holm p, verdict |
 | 6 | `evidence_audit_<UTC>.{json,md}` exist, non-empty, per `RESEARCH_PROMPT.md` §19 |
 | 7 | `trigger_check_<UTC>.json` exists, non-empty, re-evaluates all 4 registry triggers |
-| 8 | Every JSON embeds the campaign id `FCLR-LIQ-RISK-ESCALATION-12-20261119T165332Z` and the session UTC |
+| 8 | Every JSON embeds the campaign id `FCLR-LIQ-RISK-ESCALATION-12-20261119T165734Z` and the session UTC |
 | 9 | Verification block below passes end-to-end |
 | 10 | Handoff updated only after 9 passes, with campaign id bumped to RISK-13 per the ladder rule |
 
@@ -115,9 +115,9 @@ The artifact family is bound to the campaign number written in **this** file. So
 
 ---
 
-## CURRENT STATE (verified 2026-11-19T16:53:32Z)
+## CURRENT STATE (verified 2026-11-19T16:57:34Z)
 
-- **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory COMPLETE; 12-month extension COMPLETE / ADMISSIBLE; Track A confirmatory COMPLETE, verdict **NOT_MET**; RISK-08 COMPLETE, verdict **NOT_MET** (POWERED, `n_discrepancies=0`); RISK-09 COMPLETE, verdict **UNDERPOWERED** (`n_discrepancies=0`); RISK-10 COMPLETE, verdict **UNDERPOWERED** (`n_discrepancies=0`, all six members NOT_MET, smallest defensible effect 0.0028); RISK-11 COMPLETE, verdict **NOT_MET-with-bound** (`n_discrepancies=0`, all six members NOT_MET, smallest defensible effect 0.002817725360790807); active campaign `FCLR-LIQ-RISK-ESCALATION-12-20261119T165332Z` (new pre-registered confirmatory question on frozen panel), gate-enforced, data preflight PASS.
+- **Campaign state:** `ACTIVE_CAMPAIGN`; Track A exploratory COMPLETE; 12-month extension COMPLETE / ADMISSIBLE; Track A confirmatory COMPLETE, verdict **NOT_MET**; RISK-08 COMPLETE, verdict **NOT_MET** (POWERED, `n_discrepancies=0`); RISK-09 COMPLETE, verdict **UNDERPOWERED** (`n_discrepancies=0`); RISK-10 COMPLETE, verdict **UNDERPOWERED** (`n_discrepancies=0`, all six members NOT_MET, smallest defensible effect 0.0028); RISK-11 COMPLETE, verdict **NOT_MET-with-bound** (`n_discrepancies=0`, all six members NOT_MET, smallest defensible effect 0.002817725360790807); active campaign `FCLR-LIQ-RISK-ESCALATION-12-20261119T165734Z` (new pre-registered confirmatory question on frozen panel), gate-enforced, data preflight PASS.
 - **Latest session on disk:** `research_state/session_20261119T130817Z` — RISK-11 complete package (`fclr_risk11_prereg/power/recompute/evaluation` + `evidence_audit` + `trigger_check`), verdict NOT_MET-with-bound.
 - **Prior sessions:** `session_20261119T110653Z` (RISK-10); `session_20261119T095800Z` (RISK-09); `session_20261119T090239Z` (RISK-08 phase B/C bundle); `session_20261119T033443Z` (extension descriptive + audit + trigger check); `session_20261119T022824Z` (extension alignment ADMISSIBLE + confirmatory prereg).
 - **Descriptive context (associational only):** 18.93% of coin-hours have ≥1 observed event (Wilson 95% CI 18.70%..19.16%); incidence rises monotonically across trailing-24h RV deciles (6.33% → 36.02%); funding deciles U-shaped (decile 4 16.36%, decile 10 22.90%).
@@ -170,7 +170,7 @@ The artifact family is bound to the campaign number written in **this** file. So
 - `HL_LABEL_EXTENSION`: `research_state/hl_label_extension_audit_<UTC>.{md,json}` post-2026-10-31 observed labels, ≥100-day depth — **OPEN**
 - `EXPANSION_ROBUSTNESS_REDO`: `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary (LOIO≥6/8 AND placebo>95th null) — **OPEN**
 
-## VERIFICATION RECORD — 2026-11-19T16:53:32Z
+## VERIFICATION RECORD — 2026-11-19T16:57:34Z
 
 - `check_handoff_heavywork_gate.py --json`: pending — will re-verify after RISK-12 artifacts exist
 - `check_tracka_scope_registry_drift.py --json`: **PASS** (196/196).
@@ -180,4 +180,4 @@ The artifact family is bound to the campaign number written in **this** file. So
 - Panel preflight: 113,880 rows, 13 coins, 12 months, `funding_rate` 100% non-null, `open_interest_usd` 113,035/113,880 non-null, `liq_count` 100% non-null.
 - Single durable handoff confirmed: exactly one `AGENT_HANDOFF*` in the repo.
 - RISK-11 package verified complete in `session_20261119T130817Z`: `fclr_risk11_prereg/power/recompute/evaluation` + `evidence_audit` + `trigger_check`, verdict NOT_MET-with-bound, `n_discrepancies=0`.
-- Active campaign `FCLR-LIQ-RISK-ESCALATION-12-20261119T165332Z` (new pre-registered confirmatory question on frozen panel) LIVE; next session must emit `fclr_risk12_*`.
+- Active campaign `FCLR-LIQ-RISK-ESCALATION-12-20261119T165734Z` (new pre-registered confirmatory question on frozen panel) LIVE; next session must emit `fclr_risk12_*`.
