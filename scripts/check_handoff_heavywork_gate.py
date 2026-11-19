@@ -32,6 +32,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -300,8 +301,35 @@ RISK_08_REQUIRED = (
 # evidence audit plus a new quantitative artifact. This keeps the gate from
 # failing merely because the handoff records the latest audit session rather
 # than the older complete bundle.
+# FCLR-STARTER-001 non-avoidance: the RESEARCH_PROMPT.md §14 frozen starter
+# protocol is the only open confirmatory path (Track A power-blocked by RISK-12,
+# Track B NOT_SUPPORTED). A post-start session must emit the protocol freeze
+# (hash-bound to §14), the panel hash freeze, and the B0/B1 baseline triad, plus
+# a trigger check. Any free-text claim of a frozen protocol without these
+# artifacts fails closed. The campaign must NOT overwrite the sealed legacy
+# research_state/research_protocol.md (that file is the FCLR-001 2024-01..03
+# experiment definition consumed by scripts/run_evaluation.py).
+STARTER_CAMPAIGN_RE = re.compile(r"FCLR-STARTER-(\d+)-(\d{8}T\d{6}Z)")
+STARTER_PROTOCOL_PREFIX = "fclr_starter001_protocol_freeze_"
+STARTER_PANEL_PREFIX = "fclr_starter001_panel_freeze_"
+STARTER_BASELINES_PREFIX = "fclr_starter001_baselines_"
+STARTER_REQUIRED = (
+    (STARTER_PROTOCOL_PREFIX, ".json"),
+    (STARTER_PROTOCOL_PREFIX, ".md"),
+    (STARTER_PANEL_PREFIX, ".json"),
+    (STARTER_PANEL_PREFIX, ".md"),
+    (STARTER_BASELINES_PREFIX, ".py"),
+    (STARTER_BASELINES_PREFIX, ".json"),
+    (STARTER_BASELINES_PREFIX, ".md"),
+    ("trigger_check_", ".json"),
+)
+# §14 body markers used by the freeze validator.
+STARTER_SECTION_HEADING = "## 14. Mandatory frozen starter protocol: FCLR-001"
+STARTER_SEALED_PROTOCOL = "research_state/research_protocol.md"
+
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
+    "fclr_starter",
     "independent_recompute_",
     "trigger_readiness_power_calibration_",
     "trigger_readiness_power_ledger_",
@@ -1075,6 +1103,202 @@ def _risk_08_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _normalize_text(s: str) -> str:
+    return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
+
+
+def section14_body(repo: Path) -> str | None:
+    """Return the normalized RESEARCH_PROMPT.md §14 body, or None.
+
+    The body includes the §14 heading and everything up to (excluding) §15.
+    """
+    prompt = repo / "RESEARCH_PROMPT.md"
+    if not prompt.exists():
+        return None
+    text = prompt.read_text(encoding="utf-8", errors="ignore")
+    start = text.find(STARTER_SECTION_HEADING)
+    if start < 0:
+        return None
+    end = text.find("\n## 15.", start)
+    if end < 0:
+        end = len(text)
+    return _normalize_text(text[start:end])
+
+
+def _sha256_text(s: str) -> str:
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
+
+
+def _load_json_lenient(p: Path) -> dict | None:
+    try:
+        data = json.loads(p.read_text(encoding="utf-8", errors="ignore"))
+    except Exception:
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def _starter_001_state(handoff_text: str, latest_sid: str | None,
+                       latest_files: list[str], latest_dir: Path | None,
+                       repo: Path = REPO) -> dict:
+    """Return FCLR-STARTER-001 non-avoidance state for the latest session.
+
+    After the campaign starts, a post-start session must emit the §14 protocol
+    freeze (hash-bound to the current RESEARCH_PROMPT.md §14 text), the panel
+    hash freeze (recorded before target generation), and the B0/B1 baseline
+    triad, plus a trigger check. The freeze validators are structural: a
+    placeholder JSON with the right filename fails closed. Sessions predating
+    the campaign are grandfathered so this handoff refresh stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "content_failures": [],
+        "section14_sha256": None,
+        "pass": True,
+    }
+    m = STARTER_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-STARTER-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in STARTER_REQUIRED]
+    out["required_artifacts"] = required
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    matches: dict[tuple[str, str], list[str]] = {}
+    for label, (prefix, suffix) in zip(required, STARTER_REQUIRED):
+        hits = sorted(f for f in latest_files if f.startswith(prefix) and f.endswith(suffix))
+        matches[(prefix, suffix)] = hits
+        if not hits:
+            out["missing_required_artifacts"].append(label)
+        elif not any(_nonempty(name) for name in hits):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+
+    section_body = section14_body(repo)
+    if section_body is None:
+        out["content_failures"].append("SECTION_14_HEADING_NOT_FOUND")
+    else:
+        out["section14_sha256"] = _sha256_text(section_body)
+
+    def _any_json(prefix: str) -> dict | None:
+        for name in matches.get((prefix, ".json"), []):
+            data = _load_json_lenient(latest_dir / name) if latest_dir else None
+            if data is not None:
+                return data
+        return None
+
+    # --- protocol freeze validator -------------------------------------
+    pf = _any_json(STARTER_PROTOCOL_PREFIX)
+    if pf is None:
+        if not out["missing_required_artifacts"] and not out["empty_required_artifacts"]:
+            out["content_failures"].append("PROTOCOL_FREEZE_JSON_UNREADABLE")
+    else:
+        if not str(pf.get("experiment_id", "")).startswith("FCLR-STARTER-001"):
+            out["content_failures"].append("PROTOCOL_FREEZE_EXPERIMENT_ID")
+        if pf.get("outcome_data_inspected_before_freeze") is not False:
+            out["content_failures"].append("PROTOCOL_FREEZE_OUTCOME_FLAG")
+        ppath = str(pf.get("protocol_path", "")).strip()
+        if not ppath:
+            out["content_failures"].append("PROTOCOL_FREEZE_PATH_MISSING")
+        else:
+            if _normalize_text(ppath) == STARTER_SEALED_PROTOCOL:
+                out["content_failures"].append("PROTOCOL_FREEZE_OVERWRITES_SEALED")
+            target = repo / ppath
+            if not target.is_file() or target.stat().st_size == 0:
+                out["content_failures"].append("PROTOCOL_FREEZE_FILE_MISSING")
+            elif section_body is not None:
+                ptext = _normalize_text(
+                    target.read_text(encoding="utf-8", errors="ignore")
+                )
+                if section_body not in ptext:
+                    out["content_failures"].append("PROTOCOL_FREEZE_SECTION14_MISMATCH")
+                if str(pf.get("section14_sha256", "")) != _sha256_text(section_body):
+                    out["content_failures"].append("PROTOCOL_FREEZE_SECTION14_HASH")
+                if str(pf.get("protocol_sha256", "")) != hashlib.sha256(
+                    target.read_bytes()
+                ).hexdigest():
+                    out["content_failures"].append("PROTOCOL_FREEZE_FILE_HASH")
+
+    # --- panel freeze validator ----------------------------------------
+    pn = _any_json(STARTER_PANEL_PREFIX)
+    if pn is None:
+        if not out["missing_required_artifacts"] and not out["empty_required_artifacts"]:
+            out["content_failures"].append("PANEL_FREEZE_JSON_UNREADABLE")
+    else:
+        if not str(pn.get("experiment_id", "")).startswith("FCLR-STARTER-001"):
+            out["content_failures"].append("PANEL_FREEZE_EXPERIMENT_ID")
+        sha = str(pn.get("panel_sha256", ""))
+        if not re.fullmatch(r"[0-9a-f]{64}", sha):
+            out["content_failures"].append("PANEL_FREEZE_SHA256")
+        src = pn.get("source_hashes")
+        if not isinstance(src, dict) or not src:
+            out["content_failures"].append("PANEL_FREEZE_SOURCE_HASHES")
+        if pn.get("panel_frozen_before_target_generation") is not True:
+            out["content_failures"].append("PANEL_FREEZE_ORDER")
+        if not str(pn.get("eligible_definition", "")).strip():
+            out["content_failures"].append("PANEL_FREEZE_ELIGIBLE_DEFINITION")
+        if not (pn.get("cutoff_utc") or pn.get("split_boundaries")):
+            out["content_failures"].append("PANEL_FREEZE_CUTOFF")
+
+    # --- B0/B1 baseline validator --------------------------------------
+    bl = _any_json(STARTER_BASELINES_PREFIX)
+    if bl is None:
+        if not out["missing_required_artifacts"] and not out["empty_required_artifacts"]:
+            out["content_failures"].append("BASELINES_JSON_UNREADABLE")
+    else:
+        if not str(bl.get("experiment_id", "")).startswith("FCLR-STARTER-001"):
+            out["content_failures"].append("BASELINES_EXPERIMENT_ID")
+        models = bl.get("models")
+        if not isinstance(models, dict) or not {"B0", "B1"}.issubset(models):
+            out["content_failures"].append("BASELINES_B0_B1_MISSING")
+        else:
+            for key in ("B0", "B1"):
+                entry = models.get(key)
+                if not isinstance(entry, dict):
+                    out["content_failures"].append(f"BASELINES_{key}_NOT_OBJECT")
+                    continue
+                q = entry.get("qlike")
+                if not isinstance(q, (int, float)) or q < 0:
+                    out["content_failures"].append(f"BASELINES_{key}_QLIKE")
+        if bl.get("holdout_opened") is not False:
+            out["content_failures"].append("BASELINES_HOLDOUT_FLAG")
+        split = str(bl.get("split_used", "")).lower()
+        if not ("dev" in split or "valid" in split):
+            out["content_failures"].append("BASELINES_SPLIT")
+        n = bl.get("n_obs", bl.get("n_rows"))
+        if not isinstance(n, int) or n <= 0:
+            out["content_failures"].append("BASELINES_N_OBS")
+
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and not out["content_failures"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _session_has_new_heavy(session_dir: Path) -> dict:
     """Return whether a session has the new-style evidence audit + fresh quant."""
     files = [p.name for p in session_dir.glob("*") if p.is_file()]
@@ -1128,6 +1352,7 @@ def check(repo: Path = REPO) -> dict:
         "risk_07": None,
         "tracka_confirmatory": None,
         "risk_08": None,
+        "starter_001": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -1429,6 +1654,35 @@ def check(repo: Path = REPO) -> dict:
                 if not r08["has_trigger_check"]:
                     payload["failures"].append(
                         f"RISK_08_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-STARTER-001: after the §14 starter campaign starts, require the
+            # hash-bound protocol freeze, panel hash freeze, B0/B1 baseline triad
+            # and trigger check. Placeholders and free-text claims fail closed; the
+            # sealed legacy research_protocol.md may never be overwritten.
+            st = _starter_001_state(
+                text, latest_sid, latest_info["files"], latest_sdir, repo
+            )
+            payload["starter_001"] = st
+            if st["required"]:
+                if st["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "STARTER_001_ARTIFACTS_MISSING:"
+                        + ",".join(st["missing_required_artifacts"])
+                    )
+                if st["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "STARTER_001_ARTIFACTS_EMPTY:"
+                        + ",".join(st["empty_required_artifacts"])
+                    )
+                if st["content_failures"]:
+                    payload["failures"].append(
+                        "STARTER_001_CONTENT_INVALID:"
+                        + ",".join(st["content_failures"])
+                    )
+                if not st["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"STARTER_001_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
