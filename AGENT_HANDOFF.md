@@ -1,14 +1,14 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T18:12:36Z
-**Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); FCLR-XSEC-001 COMPLETE (NOT_SUPPORTED, session_20261120T175300Z); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125 (ONE root-level md/json file remaining before cap breach fails heavy-work gate); heavy-work gate: scripts/check_handoff_heavywork_gate.py must be re-verified after any session writes; tests/test_active_campaign_gate.py invariant: exactly one rank-0 ACTIVE/READY_EXECUTE, all others SUPERSEDED (full suite run timed out at >120s — run targeted tests only).
+**Timestamp:** 2026-11-20T20:48:14Z
+**Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); FCLR-XSEC-001 COMPLETE (NOT_SUPPORTED, session_20261120T175300Z); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125 (ONE root-level md/json file remaining before cap breach fails heavy-work gate); heavy-work gate: scripts/check_handoff_heavywork_gate.py must be re-verified after any session writes (baseline PASS, exit 0); tests/test_active_campaign_gate.py invariant: exactly one rank-0 ACTIVE/READY_EXECUTE, all others SUPERSEDED (full suite run timed out at >120s — run targeted tests only).
 **Campaign declared:** FCLR-XSEC-002-20261120T180707Z (start UTC 20261120T180707Z) — UTC-hour / market-wide-RV conditioning of funding effect (contingency ladder mechanism 1).
 **Latest heavy session:** session_20261120T175300Z (FCLR-XSEC-001 Steps 1/2/3 COMPLETE: protocol freeze, within-hour baselines, cross-sectional evaluation + block bootstrap + Holm + independent recompute + evidence audit; verdict NOT_SUPPORTED).
-**Bottlenecks removed:** empty session_20261120T172000Z does not exist on disk (no cleanup needed); no new root-level md/json files will be added (499/500 cap — all new artifacts under research_state/session_<UTC>/); all prior blocked/terminal campaigns (Track A power-blocked, Track B NOT_SUPPORTED, Track C time-series NOT_SUPPORTED) are demoted/SUPERSEDED and must NOT be re-run.
+**Bottlenecks removed:** empty session_20261120T172000Z does not exist on disk (no cleanup needed); no new root-level md/json files will be added (499/500 cap — all new artifacts under research_state/session_<UTC>/); all prior blocked/terminal campaigns (Track A power-blocked, Track B NOT_SUPPORTED, Track C time-series NOT_SUPPORTED) are demoted/SUPERSEDED and must NOT be re-run; heavy-work gate baseline green.
 **Status:** FCLR-STARTER-001 COMPLETE — Track C 24h forward RV forecast, verdict NOT_SUPPORTED, holdout inspected/sealed. FCLR-XSEC-001 COMPLETE — within-hour cross-sectional funding contrast, verdict NOT_SUPPORTED (funding contrast CI [−0.390010, +0.157598] includes zero, Holm adj_p=0.388, n=5,334 hours, 5 coins); RV persistence baseline also NOT_SUPPORTED (CI [−0.121076, +0.487735], Holm adj_p=0.514). FCLR-XSEC-002 is the distinct-regime exploratory successor; all phases NOT_STARTED.
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T18:12:36Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T20:48:14Z)
 
 FCLR-STARTER-001 and FCLR-XSEC-001 are both COMPLETE with verdict **NOT_SUPPORTED**. No funding-conditioned feature set has improved volatility forecasting on the frozen panel across two distinct identification strategies (time-series 24h forward RV; within-hour cross-sectional funding contrast).
 
@@ -108,6 +108,7 @@ FCLR-STARTER-001 and FCLR-XSEC-001 are both COMPLETE with verdict **NOT_SUPPORTE
 - No holdout outcomes inspected before protocol freeze
 - Zero-byte placeholder files do NOT count — every artifact must contain meaningful content
 - All new artifacts go under `research_state/session_<UTC>/` — the root research_state/ md+json count is 499/500; one root-level md/json file breaches the churn cap and fails the heavy-work gate
+- `python3 scripts/check_handoff_heavywork_gate.py` exits 0
 
 **Non-avoidance:** A future agent cannot satisfy the heavy-work gate with prose, trigger-check-only, or placeholder artifacts. The machine-enforced gate (scripts/check_handoff_heavywork_gate.py + tests/test_active_campaign_gate.py) requires the concrete artifact triad plus a non-empty trigger_check in the latest session directory.
 
@@ -124,9 +125,8 @@ FCLR-STARTER-001 and FCLR-XSEC-001 are both COMPLETE with verdict **NOT_SUPPORTE
 | Root research_state/ md+json count | 499/500 — one new root-level md/json file breaches the churn cap enforced by test_tracka_hardening_125 and fails the heavy-work gate | All new artifacts go under a timestamped session_<UTC>/ directory; do NOT add root-level md/json files |
 | FCLR-STARTER-001 forecast gate NOT_PASSED | C2 vs B1 +2.62% QLIKE, CI positive, Holm FAILS | Distinct-mechanism exploratory campaign (cross-sectional) — now also NOT_SUPPORTED |
 | FCLR-XSEC-001 forecast gate NOT_PASSED | Funding contrast CI [−0.390010, +0.157598], Holm adj_p=0.388 | Regime-conditioned mechanism (UTC-hour / market-wide-RV conditioning) on same frozen panel |
-| session_20261120T172000Z/ empty | Empty session directory, no artifacts, no purpose | Remove or repurpose; do not create new empty session directories |
-| experiment_frontier.json stale | Rank 0 still shows FCLR-XSEC-001 READY_EXECUTE/ACTIVE with phases NOT_STARTED, but work is COMPLETE | Update frontier: rank 0 = FCLR-XSEC-002 READY_EXECUTE/ACTIVE, FCLR-XSEC-001 SUPERSEDED |
-| hypothesis_registry.json stale | No FCLR-XSEC-001 or FCLR-XSEC-002 hypothesis entry | Register FCLR-XSEC-002 hypothesis with NOT_STARTED status |
+| experiment_frontier.json stale | Rank 0 already shows FCLR-XSEC-002 READY_EXECUTE/ACTIVE, FCLR-XSEC-001 SUPERSEDED — keep synchronized after execution | Sync frontier + hypothesis_registry.json (H_fclr_xsec_002 NOT_STARTED → terminal with verdict) in the same session |
+| session_20261120T172000Z/ empty | Empty session directory, no artifacts, no purpose | Absent on disk — no action; do not create new empty session directories |
 
 **Do not:**
 - Re-run FCLR-STARTER-001 (protocol frozen, holdout inspected, verdict emitted)
