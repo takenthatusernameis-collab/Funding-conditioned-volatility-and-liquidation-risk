@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T14:02:32Z
+**Timestamp:** 2026-11-20T15:18:51Z
 **Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 = FCLR-XSEC-001-20261120T071741Z ACTIVE (READY_EXECUTE); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125
 **Campaign declared:** FCLR-XSEC-001-20261120T071741Z (start UTC 20261120T071741Z)
 **Latest heavy session:** session_20261120T052201Z (FCLR-STARTER-001 Step 2/3 confirmatory evaluation COMPLETE: C1/C2 vs B1 on sealed holdout; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction; verdict NOT_SUPPORTED)
