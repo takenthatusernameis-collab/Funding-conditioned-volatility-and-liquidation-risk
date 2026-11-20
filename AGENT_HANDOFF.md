@@ -55,21 +55,20 @@ Reference implementations to adapt (do not copy verbatim — change the estimand
 
 Create a NEW `research_state/session_<UTC>/` directory (UTC = this session's start time) and emit **all** of the following with meaningful, non-empty contents. Filenames must use the new session's UTC suffix `<UTC>`:
 
-1. `fclr_xsec002_protocol_freeze_<UTC>.json` + `.md` — preregistered protocol, `outcome_data_inspected_before_freeze=false`, panel_sha256 recorded, estimand distinct from FCLR-001 and FCLR-XSEC-001. **Freeze BEFORE inspecting any outcome.**
-2. `fclr_xsec002_baselines_<UTC>.py` + `.json` + `.md` — within-regime RV persistence baselines (per-regime metrics, sample counts, coins, hour ranges).
-3. `fclr_xsec002_evaluation_<UTC>.py` + `.json` + `.md` — regime-conditioned funding contrast, block bootstrap, Holm, verdict.
-4. `trigger_check_<UTC>.json` — non-empty; enumerate each acceptance check with PASS/FAIL.
+1. `fclr_xsec003_protocol_freeze_<UTC>.json` + `.md` — preregistered protocol, `outcome_data_inspected_before_freeze=false`, panel_sha256 recorded, estimand = regime-conditioned funding effect on next-hour RV (same estimand as SUPPORTED FCLR-XSEC-002, confirmed on a disjoint out-of-sample holdout; distinct from FCLR-001 and FCLR-XSEC-001). **Freeze BEFORE inspecting any holdout outcome.**
+2. `fclr_xsec003_evaluation_<UTC>.py` + `.json` + `.md` — regime-conditioned funding contrast on the holdout (high vs low market-wide-RV tercile), within-regime RV persistence baseline as specificity control, block bootstrap across holdout hours within regime (seed 20261120, >=2000 reps), Holm over the 4-test family, 2% materiality floor, verdict SUPPORTED or honest NOT_SUPPORTED.
+3. `trigger_check_<UTC>.json` — non-empty; enumerate each acceptance check with PASS/FAIL.
 
 Then synchronize state (no sealed mutation):
-- `research_state/experiment_frontier.json`: rank 0 = FCLR-XSEC-002, advance phases PREREG_FREEZE → BASELINES → EVALUATION_AND_GATE → TRIGGER_AND_FRONTIER to COMPLETE with the new UTC, set `last_verdict`, keep FCLR-XSEC-001 and all others SUPERSEDED.
-- `research_state/hypothesis_registry.json`: H_fclr_xsec_002 status → terminal with verdict (NOT_SUPPORTED or otherwise), `last_experiment`, `last_tested`, `last_verdict`, `terminal` accordingly.
+- `research_state/experiment_frontier.json`: rank 0 = FCLR-XSEC-003, advance phases PREREG_FREEZE → EVALUATION_AND_GATE → TRIGGER_AND_FRONTIER to COMPLETE with the new UTC, set `last_verdict`, demote FCLR-XSEC-002 to SUPERSEDED, keep FCLR-XSEC-001 and all others SUPERSEDED.
+- `research_state/hypothesis_registry.json`: H_fclr_xsec_003 status → terminal with verdict (SUPPORTED or NOT_SUPPORTED), `last_experiment`, `last_tested`, `last_verdict`, `terminal` accordingly.
 - This AGENT_HANDOFF.md: advance `Latest completed heavy session` to the new `<UTC>` and record the verdict, so the gate's latest-session check stays satisfied.
 
 ### Acceptance test (run these — they are the gate)
 - `python3 scripts/check_handoff_heavywork_gate.py` exits 0 (prints `[PASS] handoff-heavywork gate: ...`).
 - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures.
 - New `research_state/session_<UTC>/` holds the artifact triad above + non-empty `trigger_check_<UTC>.json`; no zero-byte placeholders.
-- `experiment_frontier.json` rank 0 = FCLR-XSEC-002 ACTIVE/READY_EXECUTE (or terminal if you complete it) with FCLR-XSEC-001 SUPERSEDED; `hypothesis_registry.json` H_fclr_xsec_002 terminal.
+- `experiment_frontier.json` rank 0 = FCLR-XSEC-003 ACTIVE/READY_EXECUTE (or terminal if you complete it) with FCLR-XSEC-002 SUPERSEDED; `hypothesis_registry.json` H_fclr_xsec_003 terminal.
 - No holdout outcomes inspected before the protocol freeze.
 
 **Non-avoidance:** prose, trigger-check-only, or placeholder artifacts do NOT satisfy the gate. The machine-enforced gate requires the concrete artifact triad plus a non-empty trigger check in the latest session directory, and the handoff's latest session id must match the newest on-disk session.
@@ -87,9 +86,9 @@ Then synchronize state (no sealed mutation):
 
 ---
 
-## 6. Contingency ladder (only if FCLR-XSEC-002 is structurally blocked)
+## 6. Contingency ladder (only if FCLR-XSEC-003 is structurally blocked)
 
-If FCLR-XSEC-002 hits a structural blocker (insufficient regime variation, funding rank collinear with RV within regimes, or too few coins per (hour, regime) cell to form a paired contrast), document the precise blocker with evidence in the session's `trigger_check_<UTC>.json`, preserve FCLR-XSEC-002 as rank-0 with the blocker recorded, and advance to the next distinct mechanism in order:
+If FCLR-XSEC-003 hits a structural blocker (insufficient regime variation, funding rank collinear with RV within regimes, or too few coins per (hour, regime) cell to form a paired contrast), document the precise blocker with evidence in the session's `trigger_check_<UTC>.json`, preserve FCLR-XSEC-003 as rank-0 with the blocker recorded, and advance to the next distinct mechanism in order:
 1. liq_count persistence family (t−1 liquidation count → t liquidation intensity; uses Track A labels already in the combined panel if coverage permits).
 2. RISK-13 (advance only if MDE ≤ plausible effect via MDE-by-instrument redesign or larger panel; requires new data).
 3. Track B modeled boundary-breach (only if contract specs / margin tiers verifiable from public sources).
