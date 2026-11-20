@@ -1,0 +1,48 @@
+{
+  "experiment_id": "FCLR-STARTER-001-20261120T052201Z",
+  "utc": "20261120T052201Z",
+  "campaign": "FCLR-STARTER-001-20261119T231806Z",
+  "step": 3,
+  "title": "FCLR-STARTER-001 Step 2/3: confirmatory evaluation on sealed holdout and verdict",
+  "actions": [
+    "Opened sealed holdout only after protocol freeze (holdout_opened=true); holdout is now inspected/development evidence",
+    "Ran C1 (B1 + funding + abs funding percentile) and C2 (C1 + mark/index premium + mark/EMA24 distance) vs B1 HAR-OLS on sealed holdout; paired forecast origins, identical eligible rows (n=10920)",
+    "Computed paired QLIKE diff C2 vs B1: +0.009396, 95% CI [+0.002400, +0.016382] entirely positive (C2 significantly worse), rel improvement -2.62%, p=0.025, Holm adj_p=0.075, holm_rejected=false",
+    "C1 vs B1: +0.015217, CI entirely positive, rel -4.24%; C2 vs C1: -0.005821 (C2 better than C1 by 1.56% but still worse than B1)",
+    "Gate criteria: rel improvement >=2% FAIL (-2.62%), CI supports improvement FAIL, Holm passes FAIL, min_instruments PASS (5), min_blocks PASS (3)",
+    "Emitted verdict NOT_SUPPORTED; preserved null result with no threshold shopping; robust across 5 instruments and 3 non-overlapping 30-day blocks",
+    "Panel hash 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4 matches frozen panel; sealed legacy research_state/research_protocol.md NOT overwritten"
+  ],
+  "artifacts": [
+    "research_state/session_20261120T052201Z/fclr_starter001_confirmatory_20261120T052201Z.json",
+    "research_state/session_20261120T052201Z/fclr_starter001_confirmatory_20261120T052201Z.md",
+    "research_state/session_20261120T052201Z/fclr_starter001_confirmatory_20261120T052201Z.py",
+    "research_state/session_20261120T052201Z/fclr_starter001_baselines_20261120T052201Z.json",
+    "research_state/session_20261120T052201Z/fclr_starter001_baselines_20261120T052201Z.md",
+    "research_state/session_20261120T052201Z/fclr_starter001_baselines_20261120T052201Z.py",
+    "research_state/session_20261120T052201Z/fclr_starter001_panel_freeze_20261120T052201Z.json",
+    "research_state/session_20261120T052201Z/fclr_starter001_panel_freeze_20261120T052201Z.md",
+    "research_state/session_20261120T052201Z/fclr_starter001_protocol_freeze_20261120T052201Z.json",
+    "research_state/session_20261120T052201Z/fclr_starter001_protocol_freeze_20261120T052201Z.md",
+    "research_state/session_20261120T052201Z/trigger_check_20261120T052201Z.json"
+  ],
+  "baseline_summary": {
+    "B0_qlike": 0.5742793328125579,
+    "B1_qlike": 0.3584791990261664,
+    "C1_qlike": 0.37369574646060233,
+    "C2_qlike": 0.3678748377552479,
+    "n_obs": 10920,
+    "holdout_opened": true
+  },
+  "gate": {
+    "verdict": "NOT_SUPPORTED",
+    "rel_improvement_pct": -2.6209718038328043,
+    "ci_supports_improvement": false,
+    "holm_passes": false,
+    "min_instruments": true,
+    "min_blocks": true,
+    "primary_diff_C2_vs_B1": 0.009395638729081501,
+    "primary_ci": [0.0023998667152102526, 0.01638231633390852],
+    "holm_adj_p": 0.075
+  }
+}

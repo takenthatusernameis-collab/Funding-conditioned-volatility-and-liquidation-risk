@@ -3,13 +3,80 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-XSEC-001-20261120T071741Z",
+    "generated": "20261120T071741Z",
+    "refreshed": "20261120T071741Z",
+    "last_checked": "20261120T071741Z",
+    "last_verdict": null,
+    "next_action_heavy": "Preregister and execute FCLR-XSEC-001: within-hour cross-sectional funding contrast on the frozen FCLR-001 panel (panel_sha256 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4). Unit: eligible linear perpetual contract x closed UTC hourly timestamp. Target: next-hour realized variance (rv1h at t+1). Predictor: cross-sectional funding rank within each hour (high vs low funding percentile). Baseline: within-hour RV persistence (coin own rv1h at t). Evaluation: within-hour paired comparison, block bootstrap across hours, Holm over family. Preregister protocol BEFORE examining outcomes; emit protocol freeze, baselines, evaluation, and trigger_check artifacts under a new timestamped session directory. Do NOT re-run FCLR-STARTER-001 (verdict NOT_SUPPORTED, holdout inspected).",
+    "next_unfinished_task": "FCLR-XSEC-001 Step 1: preregister protocol freeze (fclr_xsec001_protocol_freeze_<UTC>.json+.md, hash-bound, distinct estimand from FCLR-001). Step 2: within-hour baselines (fclr_xsec001_baselines_<UTC>.py+.json+.md). Step 3: cross-sectional evaluation (fclr_xsec001_evaluation_<UTC>.py+.json+.md) with block bootstrap + Holm. Emit trigger_check_<UTC>.json. Acceptance: experiment_frontier.json rank 0 = FCLR-XSEC-001 READY_EXECUTE/ACTIVE; python3 -m unittest discover tests returns 0 failures; no holdout outcomes inspected before protocol freeze.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None agent-removable: frozen FCLR-001 panel already built and hash-frozen (panel_sha256: 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4); no network, no paid/credentialed data needed for this exploratory mechanism; distinct estimand from NOT_SUPPORTED FCLR-STARTER-001 (cross-sectional within-hour funding contrast vs failed time-series 24h RV forecast).",
+    "evidence": {
+      "frontier_cells": 0,
+      "all_terminal": false,
+      "data_through": "2026-10",
+      "new_files_found": 0,
+      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "prior_campaign": "FCLR-STARTER-001",
+      "prior_verdict": "NOT_SUPPORTED",
+      "prior_session": "session_20261120T052201Z",
+      "mechanism": "within-hour cross-sectional funding-intensity contrast (RESEARCH_PROMPT.md section 16 contingency ladder, mechanism 3)"
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "NOT_STARTED",
+        "claim": "Freeze new prereg protocol research_state/protocol_fclr_xsec_001_<UTC>.md for within-hour cross-sectional funding contrast: unit, timing, universe (frozen panel), target (rv1h t+1), predictor (cross-sectional funding rank within hour), baseline (within-hour RV persistence), evaluation (paired comparison, block bootstrap across hours, Holm), materiality gate. outcome_data_inspected_before_freeze=false. Do NOT inspect holdout/outcomes before freeze.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec001_protocol_freeze_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec001_protocol_freeze_<UTC>.md"
+        ]
+      },
+      {
+        "phase": "BASELINES",
+        "status": "NOT_STARTED",
+        "claim": "Run within-hour RV persistence baseline on frozen panel; record per-coin and cross-sectional metrics.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec001_baselines_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec001_baselines_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec001_baselines_<UTC>.md"
+        ]
+      },
+      {
+        "phase": "EVALUATION_AND_GATE",
+        "status": "NOT_STARTED",
+        "claim": "Execute cross-sectional evaluation: within-hour paired comparison (high vs low funding percentile), block bootstrap across hours, Holm over family; emit verdict.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec001_evaluation_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec001_evaluation_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec001_evaluation_<UTC>.md"
+        ]
+      },
+      {
+        "phase": "TRIGGER_AND_FRONTIER",
+        "status": "NOT_STARTED",
+        "claim": "Emit non-empty trigger_check_<UTC>.json; keep experiment_frontier.json rank 0 = FCLR-XSEC-001 ACTIVE; sync hypothesis_registry.json and script registries; no sealed mutation, no workflows edits.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/trigger_check_<UTC>.json"
+        ]
+      }
+    ],
+    "note": "SENTINEL: FCLR-STARTER-001 Track C confirmatory (24h forward RV) is COMPLETE with verdict NOT_SUPPORTED; holdout inspected and sealed. FCLR-XSEC-001 is the distinct-mechanism exploratory successor per RESEARCH_PROMPT.md section 16 adaptive feasibility policy \u2014 same frozen panel, different identification strategy (cross-sectional within-hour variation vs time-series variation). tests/test_active_campaign_gate.py invariant: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED. No deferral, no placeholder artifacts, no trigger-gated wait."
+  },
+  {
+    "rank": 4,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T231806Z",
     "generated": "20261119T231806Z",
-    "refreshed": "20261120T033205Z",
-    "last_checked": "20261120T033205Z",
-    "last_verdict": null,
-    "next_action_heavy": "Step 2/3: C1 (B1 + funding + percentile) and C2 (C1 + premium + EMA24) on dev/validation/holdout; paired QLIKE diff C2 vs B1; block bootstrap CI (>=2000 reps); Holm over family; verdict. Holdout opened only after protocol freeze (already frozen). Do NOT overwrite research_state/research_protocol.md (sealed legacy).",
-    "next_unfinished_task": "FCLR-STARTER-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. Next: run C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap >=2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).",
+    "refreshed": "20261120T071741Z",
+    "last_checked": "20261120T071741Z",
+    "last_verdict": "NOT_SUPPORTED",
+    "next_action_heavy": null,
+    "next_unfinished_task": null,
     "resume_triggers": [],
     "trigger_status": {},
     "blockers": "None agent-removable: FCLR-001 \u00a714 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md holds the OLD 2026-11-06 sealed legacy protocol and must NOT be overwritten \u2014 FCLR-001 \u00a714 freeze written to a NEW timestamped path research_state/protocol_fclr_starter_001_<UTC>.md per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers \u2014 superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
@@ -48,7 +115,9 @@
         ]
       }
     ],
-    "note": "SENTINEL: all cached-data Track A/B estimands terminal (NOT_MET/NOT_REPLICATED/FRAGILE). FCLR-001 Track C volatility forecasting is the active rank-0 heavy campaign. No deferral, no placeholder artifacts, no trigger-gated wait. Complete protocol freeze + panel hash + B0/B1 metrics in one continuous session. tests/test_active_campaign_gate.py invariant preserved: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED."
+    "note": "DEMOTED: FCLR-STARTER-001 Track C confirmatory (24h forward RV forecasting) is COMPLETE with verdict NOT_SUPPORTED (session_20261120T052201Z, holdout_opened=true, C2 vs B1 diff +0.0094 CI[+0.0024,+0.0164] rel -2.62% Holm adj_p 0.075). All three steps done; holdout inspected and sealed. Superseded by FCLR-XSEC-001 (distinct-mechanism exploratory, within-hour cross-sectional funding contrast on the same frozen panel). Do not re-run FCLR-STARTER-001. All others SUPERSEDED per test_active_campaign_gate.py invariant.",
+    "superseded_by": "FCLR-XSEC-001-20261120T071741Z",
+    "superseded_at": "2026-11-20T07:17:41Z"
   },
   {
     "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional QLIKE, not cross-sectional rank-IC or per-coin time-series QLIKE). Uses 2 pristine metpie blocks never tested for this estimand.",
