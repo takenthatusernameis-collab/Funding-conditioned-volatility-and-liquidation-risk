@@ -526,7 +526,7 @@
       "id": "H_fclr_xsec_004",
       "description": "Regime-conditioned cross-sectional funding effect on NEXT-HOUR OBSERVED LIQUIDATION INTENSITY (not RV) on the frozen combined metpie+ironflow panel; out-of-sample-style confirmation extending the SUPPORTED volatility finding to the liquidation-risk half of the repository mandate.",
       "estimand": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_liquidation_intensity",
-      "experiment_id": "FCLR-XSEC-004-20261120T220500Z",
+      "experiment_id": "FCLR-XSEC-004-20261120T225115Z",
       "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "coins": 15,
       "hours": 10052,
