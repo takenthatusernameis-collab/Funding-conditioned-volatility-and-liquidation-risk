@@ -1,13 +1,13 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T03:23:10Z
+**Timestamp:** 2026-11-20T03:27:22Z
 **Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
-**Latest heavy session:** session_20261120T024217Z (FCLR-STARTER-001 Step 1 COMPLETE: protocol freeze + panel freeze + baselines + trigger_check emitted; heavy-work gate satisfied)
+**Latest heavy session:** session_20261120T024217Z (FCLR-STARTER-001 Step 1 COMPLETE: protocol freeze + panel freeze + B0/B1 baselines + trigger_check emitted; heavy-work gate satisfied)
 **Status:** Step 1 COMPLETE — protocol freeze, panel freeze, B0/B1 baselines, trigger_check all emitted under research_state/session_20261120T024217Z/. Next: Step 2/3 confirmatory evaluation (C1/C2 vs B1 on sealed holdout after 7-day purge/embargo; paired QLIKE diff, block bootstrap ≥2000 reps, Holm).
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T03:23:10Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T03:27:22Z)
 
 Execute FCLR-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. This session runs C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).
 
@@ -130,7 +130,7 @@ from src.eval.walkforward import *
 ```
 
 **Acceptance test for this session:**
-- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-20T02:41:54Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
+- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-20T03:27:22Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
 - `experiment_frontier.json` rank 0 = FCLR-001, status READY_EXECUTE / program_status ACTIVE, all 3 phases NOT_STARTED, every other entry SUPERSEDED (`python3 -m unittest tests.test_active_campaign_gate` passes)
 - FCLR-STARTER-001 gate contract documented: post-campaign sessions must emit protocol freeze (json+md, §14 hash-bound, not sealed legacy file), panel freeze (json+md), baselines triad (py+json+md), trigger_check (json); placeholders fail closed (`python3 -m unittest tests.test_fclr_starter_001_campaign_gate` passes)
 - `research_state/research_protocol.md` NOT overwritten (sealed legacy)
@@ -173,6 +173,6 @@ If FCLR-001 hits a structural blocker (e.g., mark-price data unavailable for ade
 
 ## 7. Next session must
 
-Read this handoff + RESEARCH_PROMPT.md completely, inspect working tree and latest artifacts, then execute Step 1 of FCLR-STARTER-001 (protocol freeze + panel hash + B0/B1 metrics). No other task has higher expected information gain per unit of free compute. The FCLR-STARTER-001 campaign is declared in this durable handoff; the machine-enforced handoff heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) requires the concrete artifact triad for any session after UTC 20261119T231806Z — future agents cannot satisfy it with prose or placeholders.
+Read this handoff + RESEARCH_PROMPT.md completely, inspect working tree and latest artifacts (session_20261120T024217Z/), then execute Step 2/3 of FCLR-STARTER-001 (confirmatory evaluation: C1/C2 vs B1 on sealed holdout after 7-day purge/embargo; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction). No other task has higher expected information gain per unit of free compute. The FCLR-STARTER-001 campaign is declared in this durable handoff; the machine-enforced handoff heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) requires the concrete artifact triad for any session after UTC 20261119T231806Z — future agents cannot satisfy it with prose or placeholders.
 
 (End of file)
