@@ -7,9 +7,16 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T02:41:54Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T03:22:34Z)
 
-Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). This session completes **Step 1 only**:
+Execute FCLR-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. This session runs C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).
+
+Required artifacts under research_state/session_<UTC>/:
+1. fclr_starter001_confirmatory_<UTC>.json + .md — verdict, paired QLIKE diff (C2 vs B1), block-bootstrap CI, Holm p-values, ≥5 instruments, ≥3 non-overlapping 30-day blocks, holdout_opened=true only after protocol freeze.
+2. fclr_starter001_c1c2_baselines_<UTC>.py + .json + .md — C1 (B1 + funding + percentile) and C2 (C1 + premium + EMA24) metrics on dev/validation/holdout.
+3. trigger_check_<UTC>.json — non-empty.
+
+Do NOT open holdout before protocol freeze (already frozen). Do NOT overwrite research_state/research_protocol.md (sealed legacy). Track A power-blocked, Track B NOT_SUPPORTED — do not re-run.
 
 1. **Campaign declaration (this handoff).** FCLR-STARTER-001-20261119T231806Z is the active rank-0 heavy campaign. Any session whose UTC is after 20261119T231806Z cannot satisfy the handoff heavy-work gate with prose, placeholders, or an arbitrary artifact. It must emit, under `research_state/session_<UTC>/`:
    - `fclr_starter001_protocol_freeze_<UTC>.json` + `.md` — §14 protocol freeze hash-bound to `RESEARCH_PROMPT.md` §14; `experiment_id` starts with `FCLR-STARTER-001`; `outcome_data_inspected_before_freeze=false`; `protocol_path` must NOT be `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03 definition consumed by `scripts/run_evaluation.py` — never overwrite it). The freeze body lives at a new timestamped path, e.g. `research_state/protocol_fclr_starter_001_<UTC>.md`, and contains §14 verbatim with matching `section14_sha256`/`protocol_sha256`.
