@@ -510,17 +510,50 @@
       "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
       "last_experiment": null,
       "last_tested": null,
+      "last_verdict": "SUPERSEDED",
+      "observed_only": true,
+      "reopen_requires": [],
+      "status": "SUPERSEDED",
+      "terminal": true,
+      "terminal_class": "SUPERSEDED",
+      "type": "primary_trackc_xsec_regime_conditioning_holdout",
+      "venue": "hyperliquid_perpetuals",
+      "verdict_recorded": false,
+      "note": "Thin RV-only holdout folded into heavier FCLR-XSEC-004 (liquidation-risk) per 2026-11-20T22:05:00Z handoff.",
+      "superseded_by": "H_fclr_xsec_004"
+    },
+    {
+      "id": "H_fclr_xsec_004",
+      "description": "Regime-conditioned cross-sectional funding effect on NEXT-HOUR OBSERVED LIQUIDATION INTENSITY (not RV) on the frozen combined metpie+ironflow panel; out-of-sample-style confirmation extending the SUPPORTED volatility finding to the liquidation-risk half of the repository mandate.",
+      "estimand": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_liquidation_intensity",
+      "experiment_id": "FCLR-XSEC-004-20261120T220500Z",
+      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "coins": 15,
+      "hours": 10052,
+      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+      "last_experiment": null,
+      "last_tested": null,
       "last_verdict": null,
       "observed_only": true,
+      "promotable": false,
       "reopen_requires": [],
       "status": "NOT_STARTED",
       "terminal": false,
       "terminal_class": null,
-      "type": "primary_trackc_xsec_regime_conditioning_holdout",
+      "type": "primary_trackc_xsec_liquidation_intensity",
       "venue": "hyperliquid_perpetuals",
       "verdict_recorded": false,
-      "note": "Rank-0 active heavy campaign FCLR-XSEC-003; holdout confirmation of FCLR-XSEC-002 (SUPPORTED). Preregister pre-outcomes before examining holdout outcomes."
+      "distinct_from": [
+        "FCLR-001",
+        "FCLR-XSEC-001",
+        "FCLR-XSEC-002",
+        "FCLR-XSEC-003",
+        "FCLR-LIQ-COMBINED (time-series)",
+        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+      ],
+      "note": "Rank-0 active heavy campaign FCLR-XSEC-004. Extends SUPPORTED RV regime-conditioning (FCLR-XSEC-002) to observed liquidation intensity. Preregister pre-outcomes before examining liquidation outcomes. Distinct estimand + materially different panel from all prior campaigns."
     }
   ],
-  "updated_utc": "2026-11-20T21:49:50Z"
+  "updated_utc": "2026-11-20T22:05:00Z"
 }

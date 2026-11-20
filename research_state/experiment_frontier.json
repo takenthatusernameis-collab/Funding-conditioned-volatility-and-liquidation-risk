@@ -3,6 +3,69 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-XSEC-004-20261120T220500Z",
+    "generated": "20261120T220500Z",
+    "refreshed": "20261120T220500Z",
+    "last_checked": "20261120T220500Z",
+    "last_verdict": null,
+    "next_action_heavy": "Preregister and execute FCLR-XSEC-004: regime-conditioned cross-sectional funding effect on NEXT-HOUR OBSERVED LIQUIDATION INTENSITY (not RV) on the frozen combined metpie+ironflow panel (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1740415 rows, 15 coins, 10052 hours, zero-null features). Freeze protocol pre-outcomes (outcome_data_inspected_before_freeze=false) BEFORE inspecting liquidation outcomes. Regime = market-wide RV tercile (high vs low) from panel rv24h/rv168h cross-sectional mean; predictor = within-(hour,regime) abs_fund_pct rank; outcome = next-hour liquidation intensity; baseline = within-regime RV-persistence; block bootstrap across whole UTC hours within regime (seed 20261120, >=2000 reps); Holm over 4-test family; 2% materiality floor. Emit protocol_freeze, evaluation, recompute, evidence_audit, and non-empty trigger_check under a new research_state/session_<UTC>/; sync experiment_frontier.json + hypothesis_registry.json. No new data, no network, no credentials. Do not re-run FCLR-STARTER-001/FCLR-XSEC-001/002/003.",
+    "next_unfinished_task": "FCLR-XSEC-004 Step 1: protocol_freeze (json+md) with panel_sha256 asserted, outcome_data_inspected_before_freeze=false, distinct estimand (liquidation intensity, regime-conditioned) from FCLR-001/XSEC-001/002/003. Step 2: evaluation (py+json+md) block bootstrap+Holm over 4 tests, 2% floor. Step 3: independent recompute (py+json). Step 4: evidence_audit (json+md). Step 5: non-empty trigger_check. Acceptance: check_handoff_heavywork_gate.py exits 0 and unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures; no liquidation outcomes inspected before freeze; zero-byte placeholders do NOT count.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None agent-removable: combined liquidation panel already built and hash-frozen; zero-null features; no network/paid/credentialed data needed; distinct estimand (liquidation intensity) from all prior RV campaigns. Root research_state/ md+json count 499/500: ALL new artifacts go under research_state/session_<UTC>/.",
+    "evidence": {
+      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "rows": 1740415,
+      "coins": 15,
+      "hours": 10052,
+      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+      "features_zero_null": true,
+      "mechanism": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_liquidation_intensity",
+      "distinct_from": [
+        "FCLR-001",
+        "FCLR-XSEC-001",
+        "FCLR-XSEC-002",
+        "FCLR-XSEC-003",
+        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+      ],
+      "supersedes": "FCLR-XSEC-003-20261120T214950Z"
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "NOT_STARTED",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec004_protocol_freeze_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec004_protocol_freeze_<UTC>.md"
+        ]
+      },
+      {
+        "phase": "EVALUATION_AND_GATE",
+        "status": "NOT_STARTED",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec004_evaluation_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec004_evaluation_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec004_evaluation_<UTC>.md",
+          "research_state/session_<UTC>/fclr_xsec004_recompute_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec004_recompute_<UTC>.json"
+        ]
+      },
+      {
+        "phase": "TRIGGER_AND_FRONTIER",
+        "status": "NOT_STARTED",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/trigger_check_<UTC>.json",
+          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
+          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-003-20261120T214950Z",
     "generated": "20261120T214950Z",
     "refreshed": "20261120T214950Z",
@@ -56,7 +119,8 @@
     ],
     "note": "FCLR-XSEC-003 is the rank-0 active heavy campaign (out-of-sample holdout confirmation of the SUPPORTED FCLR-XSEC-002 regime-conditioned funding effect). tests/test_active_campaign_gate.py invariant: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED.",
     "supersedes": "FCLR-XSEC-002-20261120T180707Z",
-    "superseded_at": null
+    "superseded_at": "2026-11-20T22:05:00Z",
+    "superseded_by": "FCLR-XSEC-004-20261120T220500Z"
   },
   {
     "rank": 1,
