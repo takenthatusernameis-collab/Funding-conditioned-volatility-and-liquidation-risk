@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T02:35:32Z
+**Timestamp:** 2026-11-20T02:39:18Z
 **Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261119T180650Z (RISK-12 Track A confirmatory power audit UNDERPOWERED, MDE 0.002814 > plausible 0.001; evidence_audit + fclr_risk12_* + trigger_check; terminal)
@@ -7,9 +7,9 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T02:35:32Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T02:39:18Z)
 
-Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). This session completes Step 1 only:
+Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). This session completes **Step 1 only**:
 
 1. **Campaign declaration (this handoff).** FCLR-STARTER-001-20261119T231806Z is the active rank-0 heavy campaign. Any session whose UTC is after 20261119T231806Z cannot satisfy the handoff heavy-work gate with prose, placeholders, or an arbitrary artifact. It must emit, under `research_state/session_<UTC>/`:
    - `fclr_starter001_protocol_freeze_<UTC>.json` + `.md` — §14 protocol freeze hash-bound to `RESEARCH_PROMPT.md` §14; `experiment_id` starts with `FCLR-STARTER-001`; `outcome_data_inspected_before_freeze=false`; `protocol_path` must NOT be `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03 definition consumed by `scripts/run_evaluation.py` — never overwrite it). The freeze body lives at a new timestamped path, e.g. `research_state/protocol_fclr_starter_001_<UTC>.md`, and contains §14 verbatim with matching `section14_sha256`/`protocol_sha256`.
@@ -123,7 +123,7 @@ from src.eval.walkforward import *
 ```
 
 **Acceptance test for this session:**
-- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-20T01:55:29Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
+- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-20T02:39:18Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
 - `experiment_frontier.json` rank 0 = FCLR-001, status READY_EXECUTE / program_status ACTIVE, all 3 phases NOT_STARTED, every other entry SUPERSEDED (`python3 -m unittest tests.test_active_campaign_gate` passes)
 - FCLR-STARTER-001 gate contract documented: post-campaign sessions must emit protocol freeze (json+md, §14 hash-bound, not sealed legacy file), panel freeze (json+md), baselines triad (py+json+md), trigger_check (json); placeholders fail closed (`python3 -m unittest tests.test_fclr_starter_001_campaign_gate` passes)
 - `research_state/research_protocol.md` NOT overwritten (sealed legacy)
