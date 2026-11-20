@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T05:30:14Z
+**Timestamp:** 2026-11-20T06:10:29Z
 **Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 synchronized — FCLR-STARTER-001 demoted to SUPERSEDED, FCLR-XSEC-001 rank-0 ACTIVE
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261120T052201Z (FCLR-STARTER-001 Step 2/3 confirmatory evaluation COMPLETE: C1/C2 vs B1 on sealed holdout; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction; verdict NOT_SUPPORTED)
@@ -7,7 +7,7 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T05:22:10Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T06:10:29Z)
 
 FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h forward realized variance forecasting) has been fully executed and the forecast gate verdict is **NOT_SUPPORTED**.
 
@@ -68,7 +68,7 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 
 **Execute a distinct-mechanism exploratory campaign on the frozen FCLR-001 panel (research_state/fclr011_recompute_panel_20261115T234700Z.parquet).**
 
-**Why:** FCLR-STARTER-001 confirmatory test is complete and NOT_SUPPORTED. The frozen panel (5 coins, Jan–Aug 2026, hourly mark-price, funding, RV features) is a verified, admissible dataset with proper splits and no leakage. Per RESEARCH_PROMPT.md §16 (adaptive feasibility policy) and the contingency ladder in the prior handoff, the next step is a distinct-mechanism exploratory campaign on this frozen panel — not a re-run of the same failed hypothesis.
+**Why:** FCLR-STARTER-001 confirmatory test is complete and NOT_SUPPORTED. The frozen panel (5 coins, Jan–Mar 2026, hourly mark-price, funding, RV features) is a verified, admissible dataset with proper splits and no leakage. Per RESEARCH_PROMPT.md §16 (adaptive feasibility policy) and the contingency ladder in the prior handoff, the next step is a distinct-mechanism exploratory campaign on this frozen panel — not a re-run of the same failed hypothesis.
 
 **Candidate mechanisms (from contingency ladder, prioritized by expected information gain):**
 1. **RISK-13** — Per RISK-12 evidence audit: advance only if MDE ≤ plausible effect via MDE-by-instrument redesign or larger panel (requires new data, lower priority)
@@ -76,7 +76,7 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 3. **Within-hour cross-sectional funding-intensity contrast** — Compare high vs low funding coins within the same hour to isolate funding effect from common market shocks
 4. **UTC-hour / market-wide-RV conditioning of funding effect** — Test if funding's predictive value is concentrated in specific regimes (e.g., high RV hours, specific UTC sessions)
 
-**Recommended: Mechanism 2 (within-hour cross-sectional funding contrast).** This is a distinct estimand from the failed FCLR-001 (which tested time-series predictability of RV). It uses the same frozen panel but a different identification strategy: cross-sectional variation within hour rather than time-series variation. This avoids the serial correlation and non-stationarity that plague time-series RV forecasts.
+**Recommended: Mechanism 3 (within-hour cross-sectional funding contrast).** This is a distinct estimand from the failed FCLR-001 (which tested time-series predictability of RV). It uses the same frozen panel but a different identification strategy: cross-sectional variation within hour rather than time-series variation. This avoids the serial correlation and non-stationarity that plague time-series RV forecasts.
 
 **Exact specification for next session:**
 - **Unit:** Eligible linear perpetual contract × closed UTC hourly timestamp (same as FCLR-001)
