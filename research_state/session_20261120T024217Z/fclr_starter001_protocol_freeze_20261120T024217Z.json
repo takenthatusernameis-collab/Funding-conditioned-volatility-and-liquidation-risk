@@ -2,7 +2,7 @@
   "experiment_id": "FCLR-STARTER-001-20261120T024217Z",
   "protocol_path": "research_state/protocol_fclr_starter_001_20261120T024217Z.md",
   "section14_sha256": "69258345a551d28491bcdb5db9bb735528a8ed932e2ebd6db20615dca06f4ba0",
-  "protocol_sha256": "243a0c095a3f3c7693c49378ba29befd9aa5db4d103895d079e1c57481d31aa2",
+  "protocol_sha256": "ab0cd0436bdb334c6dde77c3cf5cd1640fa3b655b4b10bf9777b0be5d69d9eb5",
   "outcome_data_inspected_before_freeze": false,
   "section14_heading": "## 14. Mandatory frozen starter protocol: FCLR-001",
   "source": "RESEARCH_PROMPT.md"
