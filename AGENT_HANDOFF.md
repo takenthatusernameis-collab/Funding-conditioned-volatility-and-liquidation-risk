@@ -1,15 +1,15 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T03:31:41Z
-**Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
+**Timestamp:** 2026-11-20T04:33:17Z
+**Session:** FCLR-STARTER-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261120T024217Z (FCLR-STARTER-001 Step 1 COMPLETE: protocol freeze + panel freeze + B0/B1 baselines + trigger_check emitted; heavy-work gate satisfied)
 **Status:** Step 1 COMPLETE — protocol freeze, panel freeze, B0/B1 baselines, trigger_check all emitted under research_state/session_20261120T024217Z/. Next: Step 2/3 confirmatory evaluation (C1/C2 vs B1 on sealed holdout after 7-day purge/embargo; paired QLIKE diff, block bootstrap ≥2000 reps, Holm).
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T03:31:41Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T04:33:17Z)
 
-Execute FCLR-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. This session runs C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).
+Execute FCLR-STARTER-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. This session runs C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).
 
 Required artifacts under research_state/session_<UTC>/:
 1. fclr_starter001_confirmatory_<UTC>.json + .md — verdict, paired QLIKE diff (C2 vs B1), block-bootstrap CI, Holm p-values, ≥5 instruments, ≥3 non-overlapping 30-day blocks, holdout_opened=true only after protocol freeze.
@@ -76,8 +76,9 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 |------|-------|--------|----------|
 | Source feasibility | All | PARTIAL | Hyperliquid mark/index/funding/klines admissible; Binance public archive not yet probed for sealed months |
 | Label decision | Track A | DECIDED | Hyperliquid observed labels (incomplete census, documented); Track B/C viable without Track A |
-| Protocol freeze (FCLR-001) | Track C | NOT_STARTED | Protocol fully specified in RESEARCH_PROMPT.md §14 — ready to freeze (this session, Step 1) |
-| Baseline first | Track C | NOT_STARTED | B0 (persistence) and B1 (RV-only HAR) implemented in `src/models/baselines.py` |
+| Protocol freeze (FCLR-001) | Track C | COMPLETE | `research_state/protocol_fclr_starter_001_20261120T024217Z.md` (hash-bound to §14) |
+| Panel freeze | Track C | COMPLETE | `research_state/session_20261120T024217Z/fclr_starter001_panel_freeze_20261120T024217Z.json` (panel_sha256, source_hashes, panel_frozen_before_target_generation=true) |
+| Baseline first | Track C | COMPLETE | B0 (persistence RV24h QLIKE=0.5743) and B1 (HAR OLS QLIKE=0.5413) on dev/validation under `session_20261120T024217Z/`; holdout_opened=false |
 | Incremental features | Track C | NOT_STARTED | Funding + price features in `src/features/{funding,price,volatility}.py` |
 | Forecast gate | Track C | NOT_STARTED | Requires FCLR-001 completion with ≥2% QLIKE reduction, block-bootstrap CI, Holm correction |
 | Overlay eligibility | — | BLOCKED | Requires forecast gate pass first |
@@ -86,9 +87,9 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 
 ## 3. Single highest-value next task
 
-**Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting), Step 1: protocol freeze + panel hash freeze + B0/B1 baselines.**
+**Execute FCLR-STARTER-001 frozen starter protocol (Track C: 24h forward realized variance forecasting), Step 2/3: confirmatory evaluation on sealed holdout.**
 
-**Why:** Track A power-blocked, Track B NOT_SUPPORTED, Track C is the only viable confirmatory path. FCLR-001 §14 is fully specified; infrastructure complete; no credentials, no paid data, no network required for Step 1 (uses cached Hyperliquid panel).
+**Why:** Track A power-blocked, Track B NOT_SUPPORTED, Track C is the only viable confirmatory path. FCLR-001 §14 is fully specified; infrastructure complete; protocol and panel frozen; B0/B1 baselines run on dev/validation.
 
 **Exact FCLR-001 specification (from RESEARCH_PROMPT.md §14):**
 - **Unit:** Eligible linear perpetual contract × closed UTC hourly timestamp
@@ -104,39 +105,41 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 
 ## 4. Precise command/check to verify completion
 
-**Step 1: Freeze protocol and build panel**
-```bash
-# 1. Create research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim
-#    (do NOT write research_state/research_protocol.md — sealed legacy)
-# 2. Build panel from Hyperliquid data (mark, index, funding, klines) — reuse frozen panel where possible
-# 3. Hash and freeze eligible panel before target generation
-```
-
-**Step 2: Run baselines (B0, B1)**
+**Step 2: Run C1 and C2 on dev/validation (holdout still closed)**
 ```bash
 python3 -c "
 from src.volatility.features import *
 from src.models.baselines import *
 from src.eval.walkforward import *
-# Load panel, construct features, run B0/B1 on development/validation
+# Load frozen panel, construct C1/C2 features, fit on dev, evaluate on validation
+# Record QLIKE/MAE/RMSE for C1 and C2 vs B1 on validation
 "
 ```
 
-**Step 3: Run confirmatory evaluation on sealed holdout** (later session, after protocol freeze)
+**Step 3: Run confirmatory evaluation on sealed holdout (after 7-day purge/embargo)**
 ```bash
-# After protocol freeze, run C1, C2 vs B1 on holdout
-# Compute paired QLIKE diff, block bootstrap CI, Holm correction
-# Verdict: FORECAST_GATE_PASSED or NOT_SUPPORTED
+python3 -c "
+from src.volatility.features import *
+from src.models.baselines import *
+from src.eval.walkforward import *
+from src.volatility.block_bootstrap import *
+# Open holdout (split_boundaries from panel_freeze, apply 7-day purge)
+# Fit C1/C2/B1 on dev+validation (per protocol), evaluate on holdout
+# Compute paired QLIKE diff C2 vs B1, block bootstrap ≥2000 reps (seed fixed)
+# Holm correction over family (C2 vs B1, C1 vs B1, C2 vs C1 × horizons)
+# Check ≥5 instruments, ≥3 non-overlapping 30-day blocks
+# Emit verdict: FORECAST_GATE_PASSED or NOT_SUPPORTED
+"
 ```
 
 **Acceptance test for this session:**
-- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-20T03:27:22Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
-- `experiment_frontier.json` rank 0 = FCLR-001, status READY_EXECUTE / program_status ACTIVE, all 3 phases NOT_STARTED, every other entry SUPERSEDED (`python3 -m unittest tests.test_active_campaign_gate` passes)
-- FCLR-STARTER-001 gate contract documented: post-campaign sessions must emit protocol freeze (json+md, §14 hash-bound, not sealed legacy file), panel freeze (json+md), baselines triad (py+json+md), trigger_check (json); placeholders fail closed (`python3 -m unittest tests.test_fclr_starter_001_campaign_gate` passes)
+- `AGENT_HANDOFF.md` carries the `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION` section, timestamped 2026-11-20T04:33:17Z, declaring campaign FCLR-STARTER-001-20261119T231806Z
+- `experiment_frontier.json` rank 0 = FCLR-001, status READY_EXECUTE / program_status ACTIVE, Step 2/3 phase NOT_STARTED, every other entry SUPERSEDED (`python3 -m unittest tests.test_active_campaign_gate` passes)
+- FCLR-STARTER-001 gate contract documented: post-campaign sessions must emit protocol freeze (json+md, §14 hash-bound, not sealed legacy file), panel freeze (json+md), baselines triad (py+json+md), trigger_check (json); placeholders fail closed (`python3 -m unittest tests.test_fclr_campaign_gate` passes)
 - `research_state/research_protocol.md` NOT overwritten (sealed legacy)
 - `python3 scripts/check_handoff_heavywork_gate.py --json` returns pass
 - `python3 -m unittest discover tests` returns 0 failures
-- No holdout outcomes inspected before protocol freeze
+- No holdout outcomes inspected before protocol freeze (already frozen — verified by `outcome_data_inspected_before_freeze=false`)
 
 ---
 
