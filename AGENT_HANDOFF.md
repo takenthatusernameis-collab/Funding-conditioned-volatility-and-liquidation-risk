@@ -1,12 +1,12 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T01:55:29Z
+**Timestamp:** 2026-11-20T02:31:30Z
 **Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261119T180650Z (RISK-12 Track A confirmatory power audit UNDERPOWERED, MDE 0.002814 > plausible 0.001; evidence_audit + fclr_risk12_* + trigger_check; terminal)
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T01:55:29Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T02:31:30Z)
 
 Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting). This session completes Step 1 only:
 
@@ -17,7 +17,8 @@ Execute FCLR-001 frozen starter protocol (Track C: 24h forward realized variance
    - `trigger_check_<UTC>.json` — non-empty.
    Placeholders (`{}` / zero-byte) fail closed; free-text "frozen" claims without these artifacts fail closed.
 
-2. **Freeze `research_state/protocol_fclr_starter_001_20261119T231806Z.md` from RESEARCH_PROMPT.md §14 verbatim** — unit (eligible linear perpetual × closed UTC hourly timestamp); timing (forecast at t after closed hour t; outcomes begin t+1); universe (broadest public listing/delisting metadata, no fixed top-N); primary target (next-24h realized variance, sum of squared log returns t+1..t+24); secondary horizons (6h/72h/168h, multiplicity-declared); frozen predictors (RV1h/RV24h/RV168h, signed funding, 90-day abs-funding percentile with min-30-obs rule, mark/index premium, mark/EMA24 distance); frozen baselines (B0 persistence RV24h; B1 HAR OLS log RV1h/RV24h/RV168h → log target; C1 = B1 + funding + percentile; C2 = C1 + premium + EMA24); 60/20/20 chronological split with 7-day purge/embargo; primary metric paired OOS QLIKE C2 vs B1 with block-bootstrap CI (≥2000 reps); gate ≥2% relative QLIKE reduction + CI supports improvement + Holm over family; minimum ≥5 instruments and ≥3 non-overlapping 30-day blocks. `outcome_data_inspected_before_freeze=false`.
+2. **Freeze `research_state/protocol_fclr_starter_001_<UTC>.md` from RESEARCH_PROMPT.md §14 verbatim** — unit (eligible linear perpetual × closed UTC hourly timestamp); timing (forecast at t after closed hour t; outcomes begin t+1); universe (broadest public listing/delisting metadata, no fixed top-N); primary target (next-24h realized variance, sum of squared log returns t+1..t+24); secondary horizons (6h/72h/168h, multiplicity-declared); frozen predictors (RV1h/RV24h/RV168h, signed funding, 90-day abs-funding percentile with min-30-obs rule, mark/index premium, mark/EMA24 distance); frozen baselines (B0 persistence RV24h; B1 HAR OLS log RV1h/RV24h/RV168h → log target; C1 = B1 + funding + percentile; C2 = C1 + premium + EMA24); 60/20/20 chronological split with 7-day purge/embargo; primary metric paired OOS QLIKE C2 vs B1 with block-bootstrap CI (≥2000 reps); gate ≥2% relative QLIKE reduction + CI supports improvement + Holm over family; minimum ≥5 instruments and ≥3 non-overlapping 30-day blocks. `outcome_data_inspected_before_freeze=false`.
+   - DO NOT write `research_state/research_protocol.md` — that is the sealed legacy FCLR-001 2024-01..03 definition consumed by `scripts/run_evaluation.py`. Overwriting it fails closed (`PROTOCOL_FREEZE_OVERWRITES_SEALED`).
 
 3. **Build panel from Hyperliquid mark/index/funding/klines data** — reuse frozen panel where possible; record source hashes, cutoff dates, eligible sample definition.
 
@@ -36,7 +37,9 @@ This is a heavy-work campaign: future agents must complete protocol freeze + pan
 | Blocker | Evidence | Resolution |
 |---------|----------|------------|
 | RISK-12 Track A confirmatory (session_20261119T180650Z) UNDERPOWERED; MDE 0.002814 > 0.001; all 6 family members NOT_MET | `research_state/session_20261119T180650Z/` (fclr_risk12_power/evaluation/recompute/prereg) + trigger_check | Terminal. Demoted; do NOT re-run RISK-09/10/11/12 variants (explicitly prohibited in RISK-12 prereg). Power limit, not data availability. |
+| Track B modeled boundary-breach: TB2 NOT_MET (Log Loss C2 vs B1 +1.68% rel, below 2% floor, CI crosses zero, Holm FAILS, only 2 blocks <3 required); TB1 degenerate/inadmissible | `research_state/` TB1/TB2 evaluation summaries; hypothesis_registry `H_trackb_modeled_breaches` terminal NOT_SUPPORTED | Terminal. NOT_SUPPORTED. Modeled breach proxy does not generalize. |
 | `research_state/research_protocol.md` holds sealed legacy 2026-11-06 protocol (4 coins, 2024-01..03), not FCLR-001 §14 spec | `research_state/research_protocol.md` frozen 2026-11-06T20:36:32Z; `scripts/run_evaluation.py:15` reads it as PROTOCOL | NOT overwritten (sealed legacy, consumed by run_evaluation.py). FCLR-001 §14 freeze written to a NEW timestamped path `research_state/protocol_fclr_starter_001_<UTC>.md` per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). |
+| `experiment_frontier.json` rank-0 `next_action_heavy` and PREREG_FREEZE phase pointed at sealed `research_state/research_protocol.md` | `research_state/experiment_frontier.json` rank-0 entry (pre-fix) | Fixed: rank-0 now targets `research_state/protocol_fclr_starter_001_<UTC>.md` (new timestamped path, never the sealed file). All rank-0 artifacts consistent with gate. |
 | `FCLR_HEAVY_CAMPAIGN_NEXT.md` referenced by prior frontier but missing | `research_state/experiment_frontier.json` lines 13, 48, 50, 64 | Superseded by FCLR-STARTER-001 campaign. Heavy work is protocol freeze + panel hash + B0/B1 metrics, defined in this handoff and RESEARCH_PROMPT.md §14. |
 | Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers (GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO) | `experiment_frontier.json` rank 0; `tests/test_active_campaign_gate.py` invariant | Rank 0 superseded: FCLR-001 is a fresh frozen protocol (§14), not a re-run of concluded cached-data estimands. Rank 0 = READY_EXECUTE / ACTIVE with concrete unfinished task + phases. All downstream campaigns remain SUPERSEDED (terminal). Invariant preserved: exactly one rank-0, non-terminal, concrete task, phases present. |
 

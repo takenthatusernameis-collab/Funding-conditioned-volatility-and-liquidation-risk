@@ -3,16 +3,16 @@
   "rank": 0,
   "status": "READY_EXECUTE",
   "program_status": "ACTIVE",
-  "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T203300Z",
-  "generated": "20261119T203300Z",
-  "refreshed": "20261119T203300Z",
-  "last_checked": "20261119T203300Z",
+  "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T231806Z",
+  "generated": "20261119T231806Z",
+  "refreshed": "20261119T231806Z",
+  "last_checked": "20261119T231806Z",
   "last_verdict": null,
-  "next_action_heavy": "Freeze research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim; build Hyperliquid mark/index/funding/klines panel; hash+freeze eligible panel before target generation; run B0/B1 baselines on development/validation.",
-  "next_unfinished_task": "FCLR-001 Step 1: protocol freeze + panel hash freeze (research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim). Then Step 2: B0/B1 baselines on dev/validation. No holdout outcomes inspected before protocol freeze. Track A power-blocked (RISK-12 UNDERPOWERED, MDE 0.002814 > PLAUSIBLE_EFFECT_BRIER 0.001); do not re-run RISK-09/10/11/12. Track C volatility forecasting is the only agent-removable heavy path on admissible public mark-price data. FCLR_HEAVY_CAMPAIGN_NEXT.md referenced by the prior frontier is superseded by this campaign.",
+  "next_action_heavy": "Freeze research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim (NOT research_state/research_protocol.md — sealed legacy); build Hyperliquid mark/index/funding/klines panel; hash+freeze eligible panel before target generation; run B0/B1 baselines on development/validation.",
+  "next_unfinished_task": "FCLR-001 Step 1: protocol freeze + panel hash freeze (research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim, hash-bound, outcome_data_inspected_before_freeze=false). Then Step 2: B0/B1 baselines on dev/validation. No holdout outcomes inspected before protocol freeze. Track A power-blocked (RISK-12 UNDERPOWERED, MDE 0.002814 > PLAUSIBLE_EFFECT_BRIER 0.001); do not re-run RISK-09/10/11/12. Track C volatility forecasting is the only agent-removable heavy path on admissible public mark-price data. FCLR_HEAVY_CAMPAIGN_NEXT.md referenced by the prior frontier is superseded by this campaign.",
   "resume_triggers": [],
   "trigger_status": {},
-  "blockers": "None agent-removable: FCLR-001 §14 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md currently holds the OLD 2026-11-06 protocol and must be replaced with the §14 spec (Step 1). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers — superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
+  "blockers": "None agent-removable: FCLR-001 §14 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md holds the OLD 2026-11-06 sealed legacy protocol and must NOT be overwritten — FCLR-001 §14 freeze written to a NEW timestamped path research_state/protocol_fclr_starter_001_<UTC>.md per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers — superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
   "evidence": {
    "frontier_cells": 0,
    "all_terminal": true,
@@ -21,14 +21,15 @@
    "suite_baseline": "1341 tests, 0 failures (after frontier repair)"
   },
   "phases": [
-   {
-    "phase": "PREREG_FREEZE",
-    "status": "NOT_STARTED",
-    "claim": "Freeze research_state/research_protocol.md from RESEARCH_PROMPT.md §14 verbatim (FCLR-001: unit, timing, universe, target, features, baselines, splits, metrics, inference, gate). outcome_data_inspected_before_freeze=false.",
-    "expected_artifacts": [
-     "research_state/research_protocol.md (matches RESEARCH_PROMPT.md §14 exactly)"
-    ]
-   },
+    {
+     "phase": "PREREG_FREEZE",
+     "status": "NOT_STARTED",
+     "claim": "Freeze research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim (FCLR-001: unit, timing, universe, target, features, baselines, splits, metrics, inference, gate). outcome_data_inspected_before_freeze=false. Do NOT write research_state/research_protocol.md (sealed legacy FCLR-001 2024-01..03).",
+     "expected_artifacts": [
+      "research_state/protocol_fclr_starter_001_<UTC>.md (matches RESEARCH_PROMPT.md §14 exactly)",
+      "research_state/protocol_fclr_starter_001_<UTC>.json (hash-bound, experiment_id starts with FCLR-STARTER-001, outcome_data_inspected_before_freeze=false, protocol_path not the sealed file)"
+     ]
+    },
    {
     "phase": "PANEL_BUILD_AND_HASH",
     "status": "NOT_STARTED",
