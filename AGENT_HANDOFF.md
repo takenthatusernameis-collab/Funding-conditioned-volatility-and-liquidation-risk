@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-20T22:55:55Z
+**Timestamp:** 2026-11-20T23:53:00Z
 **Sole active campaign:** FCLR-XSEC-004-20261120T225115Z (rank-0, READY_EXECUTE / ACTIVE, all phases NOT_STARTED)
 **Latest completed heavy session on disk:** session_20261120T210000Z (FCLR-XSEC-002, verdict SUPPORTED)
 **Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures.
@@ -10,7 +10,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T22:55:55Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T23:53:00Z)
 
 **Why this is the focus (repository-name priority + heaviest non-duplicative work):** This repository is `Funding-conditioned-volatility-and-liquidation-risk`. Every prior SUPPORTED finding is **volatility-only** (FCLR-XSEC-002, regime-conditioned next-hour RV). The **liquidation-risk** half of the mandate has only been tested *time-series-wise* (FCLR-010/TBRACKA expansion panels, all NOT_MET/FRAGILE) and has **never been tested as a regime-conditioned cross-sectional contrast on the combined metpie+ironflow observed-liquidation panel**. That is the single heaviest, highest-value, still-open question that matches the repo's dual mandate. It is a *distinct estimand* (liquidation intensity, not RV), uses a *materially different panel* (1.74M observed-liquidation events, 15 coins, 2025-03-22..2026-10-31), and is *feasible with zero new data / no network / no credentials* (panel already on disk with zero-null causal features). Enqueuing a thin RV-only holdout (the prior handoff's FCLR-XSEC-003) would leave the liquidation-risk half permanently avoided — so this handoff **supersedes FCLR-XSEC-003** and makes liquidation-risk the non-avoidable heavy campaign.
 
