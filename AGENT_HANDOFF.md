@@ -1,13 +1,14 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T18:07:07Z
+**Timestamp:** 2026-11-20T18:12:36Z
 **Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); FCLR-XSEC-001 COMPLETE (NOT_SUPPORTED, session_20261120T175300Z); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125 (ONE root-level md/json file remaining before cap breach fails heavy-work gate); heavy-work gate: scripts/check_handoff_heavywork_gate.py must be re-verified after any session writes; tests/test_active_campaign_gate.py invariant: exactly one rank-0 ACTIVE/READY_EXECUTE, all others SUPERSEDED (full suite run timed out at >120s — run targeted tests only).
 **Campaign declared:** FCLR-XSEC-002-20261120T180707Z (start UTC 20261120T180707Z) — UTC-hour / market-wide-RV conditioning of funding effect (contingency ladder mechanism 1).
 **Latest heavy session:** session_20261120T175300Z (FCLR-XSEC-001 Steps 1/2/3 COMPLETE: protocol freeze, within-hour baselines, cross-sectional evaluation + block bootstrap + Holm + independent recompute + evidence audit; verdict NOT_SUPPORTED).
+**Bottlenecks removed:** empty session_20261120T172000Z does not exist on disk (no cleanup needed); no new root-level md/json files will be added (499/500 cap — all new artifacts under research_state/session_<UTC>/); all prior blocked/terminal campaigns (Track A power-blocked, Track B NOT_SUPPORTED, Track C time-series NOT_SUPPORTED) are demoted/SUPERSEDED and must NOT be re-run.
 **Status:** FCLR-STARTER-001 COMPLETE — Track C 24h forward RV forecast, verdict NOT_SUPPORTED, holdout inspected/sealed. FCLR-XSEC-001 COMPLETE — within-hour cross-sectional funding contrast, verdict NOT_SUPPORTED (funding contrast CI [−0.390010, +0.157598] includes zero, Holm adj_p=0.388, n=5,334 hours, 5 coins); RV persistence baseline also NOT_SUPPORTED (CI [−0.121076, +0.487735], Holm adj_p=0.514). FCLR-XSEC-002 is the distinct-regime exploratory successor; all phases NOT_STARTED.
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T18:07:07Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T18:12:36Z)
 
 FCLR-STARTER-001 and FCLR-XSEC-001 are both COMPLETE with verdict **NOT_SUPPORTED**. No funding-conditioned feature set has improved volatility forecasting on the frozen panel across two distinct identification strategies (time-series 24h forward RV; within-hour cross-sectional funding contrast).
 
