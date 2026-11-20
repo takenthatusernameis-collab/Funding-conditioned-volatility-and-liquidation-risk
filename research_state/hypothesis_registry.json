@@ -460,7 +460,46 @@
       "terminal_class": "NOT_MET",
       "type": "confirmatory",
       "updated_utc": "2026-11-15T21:49:50Z"
+    },
+    {
+      "description": "Within-hour cross-sectional funding contrast (high vs low funding percentile within hour) predicts next-hour realized variance vs within-hour RV persistence baseline on frozen FCLR-001 panel.",
+      "estimand": "within_hour_cross_sectional_funding_contrast_rv1h",
+      "experiment_id": "FCLR-XSEC-001-20261120T071741Z",
+      "id": "H_fclr_xsec_001",
+      "last_experiment": "session_20261120T175300Z",
+      "last_tested": "2026-11-20T17:53:00Z",
+      "last_verdict": "NOT_SUPPORTED",
+      "observed_only": true,
+      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "reopen_requires": [],
+      "status": "NOT_SUPPORTED",
+      "terminal": true,
+      "terminal_class": "NOT_SUPPORTED",
+      "type": "primary_trackc_xsec_funding",
+      "venue": "hyperliquid_perpetuals",
+      "verdict_detail": "Funding contrast CI [−0.390010, +0.157598] includes zero (p=0.388, Holm adj_p=0.388); RV persistence baseline CI [−0.121076, +0.487735] includes zero (p=0.257, Holm adj_p=0.514); robust across 5 coins and 5,334+ hours.",
+      "verdict_recorded": true
+    },
+    {
+      "description": "UTC-hour / market-wide-RV conditioning: within-hour cross-sectional funding rank predicts next-hour realized variance within each market-wide RV regime (high vs low tercile or Asian/European/US UTC session buckets) vs within-regime RV persistence baseline on frozen FCLR-001 panel.",
+      "estimand": "utc_hour_market_wide_rv_conditioning_rv1h",
+      "experiment_id": "FCLR-XSEC-002-20261120T180707Z",
+      "id": "H_fclr_xsec_002",
+      "last_experiment": null,
+      "last_tested": null,
+      "last_verdict": null,
+      "observed_only": true,
+      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "reopen_requires": [],
+      "status": "NOT_STARTED",
+      "terminal": false,
+      "terminal_class": null,
+      "type": "primary_trackc_xsec_regime_conditioning",
+      "venue": "hyperliquid_perpetuals",
+      "verdict_recorded": false
     }
   ],
-  "updated_utc": "2026-11-15T21:49:50Z"
+  "updated_utc": "2026-11-20T18:07:07Z"
 }
