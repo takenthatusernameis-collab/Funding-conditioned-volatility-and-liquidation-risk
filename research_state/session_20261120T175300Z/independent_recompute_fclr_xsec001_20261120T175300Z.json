@@ -1,0 +1,22 @@
+{
+  "recompute_id": "independent_recompute_fclr_xsec001_20261120T175300Z",
+  "session_utc": "20261120T175300Z",
+  "experiment_id": "FCLR-XSEC-001-20261120T175300Z",
+  "panel_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_hash_verified": true,
+  "method": "numpy-only independent recomputation of within-hour cross-sectional funding contrast",
+  "n_coins": 5,
+  "n_hours": 5334,
+  "mean_diff_high_minus_low": -0.12575053849643078,
+  "ci_low": -0.3900097284546448,
+  "ci_high": 0.15759771737936945,
+  "p_value": 0.388,
+  "holm_adj_p": 0.776,
+  "positive_diff_count": 2290,
+  "ci_excludes_zero": false,
+  "holm_passes": false,
+  "verdict": "NOT_SUPPORTED",
+  "n_bootstrap_reps": 2000,
+  "bootstrap_seed": 20261120
+}

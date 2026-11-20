@@ -1,0 +1,29 @@
+{
+  "experiment_id": "FCLR-XSEC-001-20261120T175300Z",
+  "session_utc": "20261120T175300Z",
+  "panel_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_hash_verified": true,
+  "baseline": "within_hour_rv_persistence",
+  "estimand": "next_hour_rv1h_diff_high_minus_low_rv",
+  "outcome_data_inspected_before_freeze": false,
+  "n_coins": 5,
+  "coins": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "ts_min": "2026-01-01 00:00:00+00:00",
+  "ts_max": "2026-08-31 22:00:00+00:00",
+  "n_hours_total": 5785,
+  "n_rows_with_target": 23558,
+  "n_hours_both_groups": 5328,
+  "mean_diff_high_minus_low": 0.17679401097066752,
+  "std_diff": 11.301421621127048,
+  "positive_diff_count": 3200,
+  "positive_diff_share": 0.6006006006006006,
+  "holdout_opened": false,
+  "normalization": "none (pure within-hour comparison, no model fitting)"
+}

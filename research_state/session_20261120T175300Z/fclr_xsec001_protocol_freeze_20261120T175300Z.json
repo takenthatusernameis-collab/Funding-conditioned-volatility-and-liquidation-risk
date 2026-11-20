@@ -1,0 +1,38 @@
+{
+  "experiment_id": "FCLR-XSEC-001-20261120T175300Z",
+  "session_utc": "20261120T175300Z",
+  "protocol_path": "research_state/session_20261120T175300Z/fclr_xsec001_protocol_freeze_20261120T175300Z.md",
+  "panel_path": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_hash_verified": true,
+  "panel_frozen_before_target_generation": true,
+  "outcome_data_inspected_before_freeze": false,
+  "mechanism": "within-hour cross-sectional funding-intensity contrast",
+  "estimand": "next_hour_rv1h_diff_high_minus_low_funding",
+  "source": "RESEARCH_PROMPT.md section 16 contingency ladder, mechanism 3",
+  "distinct_from": "FCLR-STARTER-001 (time-series 24h forward RV forecast, verdict NOT_SUPPORTED)",
+  "n_coins": 5,
+  "coins": ["BNBUSDT", "BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT"],
+  "ts_min": "2026-01-01T00:00:00Z",
+  "ts_max": "2026-08-31T23:00:00Z",
+  "n_hours_total": 5785,
+  "alpha": 0.05,
+  "n_bootstrap_reps": 2000,
+  "bootstrap_seed": 20261120,
+  "family_size": 2,
+  "multiplicity_correction": "holm",
+  "gate_criteria": {
+    "ci_excludes_zero": true,
+    "holm_passes": true,
+    "min_instruments": true,
+    "min_blocks": true
+  },
+  "constraints": {
+    "no_holdout_before_freeze": true,
+    "no_sealed_protocol_overwrite": true,
+    "no_network": true,
+    "no_paid_data": true,
+    "no_root_level_artifacts": true,
+    "root_churn_cap": 500
+  }
+}

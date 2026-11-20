@@ -1,0 +1,59 @@
+{
+  "experiment_id": "FCLR-XSEC-001-20261120T175300Z",
+  "session_utc": "20261120T175300Z",
+  "non_empty": true,
+  "checks": [
+    {
+      "name": "protocol_freeze_emitted",
+      "status": "PASS",
+      "artifact": "fclr_xsec001_protocol_freeze_20261120T175300Z.md",
+      "outcome_data_inspected_before_freeze": false
+    },
+    {
+      "name": "panel_hash_verified",
+      "status": "PASS",
+      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "panel_frozen_before_target_generation": true
+    },
+    {
+      "name": "baselines_computed",
+      "status": "PASS",
+      "artifact": "fclr_xsec001_baselines_20261120T175300Z.json",
+      "holdout_opened": false
+    },
+    {
+      "name": "evaluation_executed",
+      "status": "PASS",
+      "artifact": "fclr_xsec001_evaluation_20261120T175300Z.json",
+      "verdict": "NOT_SUPPORTED"
+    },
+    {
+      "name": "block_bootstrap_2000_reps",
+      "status": "PASS",
+      "seed": 20261120
+    },
+    {
+      "name": "holm_correction_applied",
+      "status": "PASS",
+      "family_size": 2
+    },
+    {
+      "name": "gate_verdict_emitted",
+      "status": "PASS",
+      "verdict": "NOT_SUPPORTED"
+    },
+    {
+      "name": "no_root_level_artifacts",
+      "status": "PASS",
+      "root_churn_cap": 500,
+      "all_artifacts_under_session_directory": true
+    },
+    {
+      "name": "no_sealed_protocol_overwrite",
+      "status": "PASS"
+    }
+  ],
+  "heavy_work_required": true,
+  "artifact_triad_complete": true,
+  "trigger_gated_wait": false
+}
