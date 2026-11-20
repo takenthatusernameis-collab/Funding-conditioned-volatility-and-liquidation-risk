@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T03:31:17Z
+**Timestamp:** 2026-11-20T03:31:41Z
 **Session:** FCLR-001 frozen starter protocol (Track C: 24h forward realized variance forecasting) — heavy-work campaign, no deferral
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261120T024217Z (FCLR-STARTER-001 Step 1 COMPLETE: protocol freeze + panel freeze + B0/B1 baselines + trigger_check emitted; heavy-work gate satisfied)
@@ -7,7 +7,7 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T03:31:17Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T03:31:41Z)
 
 Execute FCLR-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. This session runs C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).
 
