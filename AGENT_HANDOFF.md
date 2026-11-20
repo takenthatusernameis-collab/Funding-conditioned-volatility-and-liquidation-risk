@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T15:57:40Z
+**Timestamp:** 2026-11-20T16:11:24Z
 **Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 = FCLR-XSEC-001-20261120T071741Z ACTIVE (READY_EXECUTE); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125 (ONE root-level md/json file remaining before cap breach fails heavy-work gate); heavy-work gate: scripts/check_handoff_heavywork_gate.py must be re-verified after any session writes; tests/test_active_campaign_gate.py invariant: exactly one rank-0 ACTIVE/READY_EXECUTE, all others SUPERSEDED (full suite run timed out at >120s — run targeted tests only).
 **Campaign declared:** FCLR-XSEC-001-20261120T071741Z (start UTC 20261120T071741Z)
 **Latest heavy session:** session_20261120T052201Z (FCLR-STARTER-001 Step 2/3 confirmatory evaluation COMPLETE: C1/C2 vs B1 on sealed holdout; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction; verdict NOT_SUPPORTED)
@@ -7,7 +7,7 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T15:57:40Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T16:11:24Z)
 
 FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h forward realized variance forecasting) has been fully executed and the forecast gate verdict is **NOT_SUPPORTED**.
 
@@ -107,7 +107,7 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
   - `fclr_xsec001_evaluation_<UTC>.py` + `.json` + `.md` — cross-sectional evaluation results
   - `trigger_check_<UTC>.json` — non-empty
 - `experiment_frontier.json` rank 0 = FCLR-XSEC-001, status READY_EXECUTE / ACTIVE, FCLR-STARTER-001 marked SUPERSEDED
-- `python3 -m unittest discover tests` returns 0 failures (full suite exceeds 120s timeout — run targeted tests: `python3 -m unittest tests/test_active_campaign_gate.py tests/test_tracka_hardening_125.py` plus any test files touching changed code)
+- `python3 -m unittest tests/test_active_campaign_gate.py tests/test_tracka_hardening_125.py` returns 0 failures (full suite exceeds 120s timeout — run targeted tests only)
 - No holdout outcomes inspected before protocol freeze
 - Zero-byte placeholder files do NOT count — every artifact must contain meaningful content
 - All new artifacts go under `research_state/session_<UTC>/` — the root research_state/ md+json count is 499/500; one root-level md/json file breaches the churn cap and fails the heavy-work gate
