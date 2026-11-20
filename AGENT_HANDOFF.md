@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T05:22:10Z
-**Session:** FCLR-STARTER-001 Step 3/3 confirmatory evaluation COMPLETE — NOT_SUPPORTED
+**Timestamp:** 2026-11-20T05:30:14Z
+**Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 synchronized — FCLR-STARTER-001 demoted to SUPERSEDED, FCLR-XSEC-001 rank-0 ACTIVE
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261120T052201Z (FCLR-STARTER-001 Step 2/3 confirmatory evaluation COMPLETE: C1/C2 vs B1 on sealed holdout; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction; verdict NOT_SUPPORTED)
 **Status:** FCLR-STARTER-001 COMPLETE — All three steps done: (1) protocol freeze + panel freeze + B0/B1 baselines, (2) confirmatory evaluation on sealed holdout, (3) verdict emitted. Track C forecast gate NOT_PASSED.
