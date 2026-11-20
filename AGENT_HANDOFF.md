@@ -1,24 +1,22 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Timestamp:** 2026-11-20T20:55:00Z
-**Sole active campaign:** FCLR-XSEC-002-20261120T180707Z (rank-0, READY_EXECUTE / ACTIVE, all phases NOT_STARTED)
+**Sole active campaign:** FCLR-XSEC-003-20261120T214950Z (rank-0, READY_EXECUTE / ACTIVE, all phases NOT_STARTED)
 **Latest completed heavy session on disk:** session_20261120T210000Z (FCLR-XSEC-002, verdict SUPPORTED)
 **Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures.
 **Environment:** `pip3 install -r requirements.txt` already run this session (numpy, pandas, scipy, pyarrow, requests). Python 3.12.3. The frozen panel loads and its sha256 is verified below.
 
-> This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-XSEC-002). All other campaigns are terminal and must not be re-run. A future session that does not emit the Section 4 artifact triad under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail.
+> This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-XSEC-003). All other campaigns are terminal and must not be re-run. A future session that does not emit the Section 4 artifact triad under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T20:55:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T21:49:50Z)
 
-You are continuing the continuous research program in **Funding-conditioned-volatility-and-liquidation-risk**. Two identification strategies on the frozen FCLR-001 panel have already returned **NOT_SUPPORTED**: the time-series 24h forward-RV forecast (FCLR-STARTER-001) and the within-hour cross-sectional funding-intensity contrast (FCLR-XSEC-001). The ONE remaining high-information, fully-blocked-free task is the pre-registered distinct-regime exploratory campaign:
+FCLR-XSEC-002 — UTC-hour / market-wide-RV conditioning of the funding effect — is **COMPLETE** (verdict **SUPPORTED**, heavy session `session_20261120T210000Z`). The frozen FCLR-001 panel (sha256 `41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4`) regime-conditioned funding contrast is significant in the high market-wide-RV regime (CI [0.0046, 0.2348], p=0.019, materiality effect 1.09 >= 0.02 floor; gate_passed=true) and independently reproduced by `recompute_fclr_xsec002_20261120T210000Z.py`. State synchronized: `experiment_frontier.json` rank 0 = FCLR-XSEC-002 COMPLETE; `hypothesis_registry.json` H_fclr_xsec_002 terminal SUPPORTED; handoff-heavywork gate PASS (exit 0); `tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures. FCLR-STARTER-001 and FCLR-XSEC-001 remain terminal NOT_SUPPORTED; all other campaigns SUPERSEDED. Root churn cap holds at 499/500 (all artifacts under `session_20261120T210000Z/`).
 
-### Execute FCLR-XSEC-002 — UTC-hour / market-wide-RV conditioning of the funding effect.
+### Next focus campaign: FCLR-XSEC-003 — out-of-sample / holdout recompute confirmation.
 
-This is mechanism 1 of the RESEARCH_PROMPT.md §16 contingency ladder. It is a **distinct estimand** from both prior campaigns: it conditions the within-hour funding contrast on the market-wide realized-variance regime, so a regime-masked effect (funding mattering only in high-RV hours/sessions) would surface here even though the pooled time-series and pooled cross-sectional tests were null. Same frozen panel, no new data, no network, no credentials.
-
-Do it now, in this session, on the frozen panel. Do not defer, do not write a prose-only or trigger-only handoff, do not emit placeholders.
+Execute a distinct, unblocked, heavy confirmation campaign on the SAME frozen FCLR-001 panel (no new data, no network, no credentials): hold out a disjoint set of UTC hours per coin never inspected by FCLR-XSEC-002 (out-of-sample holdout), pre-register the protocol freeze BEFORE examining holdout outcomes, recompute the regime-conditioned funding contrast (high vs low market-wide-RV tercile) on the holdout, run block bootstrap + Holm over the 4-test family with the 2% materiality floor, emit `protocol_freeze`, `evaluation`, and a non-empty `trigger_check` under a new `research_state/session_<UTC>/`, synchronize `experiment_frontier.json` + `hypothesis_registry.json`, and update this handoff's latest-session line. Acceptance: `python3 scripts/check_handoff_heavywork_gate.py` exits 0 and `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures. Do not write a prose-only or trigger-only handoff; do not emit placeholders; do not relax the materiality floor after seeing outcomes; an honest null on the holdout is preserved as NOT_SUPPORTED.
 
 ---
 

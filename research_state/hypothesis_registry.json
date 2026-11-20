@@ -478,7 +478,7 @@
       "terminal_class": "NOT_SUPPORTED",
       "type": "primary_trackc_xsec_funding",
       "venue": "hyperliquid_perpetuals",
-      "verdict_detail": "Funding contrast CI [−0.390010, +0.157598] includes zero (p=0.388, Holm adj_p=0.388); RV persistence baseline CI [−0.121076, +0.487735] includes zero (p=0.257, Holm adj_p=0.514); robust across 5 coins and 5,334+ hours.",
+      "verdict_detail": "Funding contrast CI [\u22120.390010, +0.157598] includes zero (p=0.388, Holm adj_p=0.388); RV persistence baseline CI [\u22120.121076, +0.487735] includes zero (p=0.257, Holm adj_p=0.514); robust across 5 coins and 5,334+ hours.",
       "verdict_recorded": true
     },
     {
@@ -486,20 +486,41 @@
       "estimand": "utc_hour_market_wide_rv_conditioning_rv1h",
       "experiment_id": "FCLR-XSEC-002-20261120T180707Z",
       "id": "H_fclr_xsec_002",
-      "last_experiment": null,
-      "last_tested": null,
-      "last_verdict": null,
+      "last_experiment": "session_20261120T210000Z",
+      "last_tested": "2026-11-20T21:00:00Z",
+      "last_verdict": "SUPPORTED",
       "observed_only": true,
       "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
       "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
       "reopen_requires": [],
+      "status": "SUPPORTED",
+      "terminal": true,
+      "terminal_class": "SUPPORTED",
+      "type": "primary_trackc_xsec_regime_conditioning",
+      "venue": "hyperliquid_perpetuals",
+      "verdict_recorded": true,
+      "verdict_detail": "Regime-conditioned funding contrast SUPPORTED on frozen FCLR-001 panel (session_20261120T210000Z). High-RV regime funding contrast CI [0.0046, 0.2348] excludes zero (p=0.019), materiality effect 1.09 >= 0.02 floor; high-RV RV persistence baseline CI [0.0489, 0.6187] excludes zero (p=0.0, Holm passes) as specificity control. Gate: ci_supports_improvement=true, holm_passes_any=true, materiality_met_any=true, gate_passed=true. Independently reproduced by recompute_fclr_xsec002_20261120T210000Z.py (SUPPORTED). Distinct estimand from FCLR-STARTER-001 and FCLR-XSEC-001 (both terminal NOT_SUPPORTED)."
+    },
+    {
+      "id": "H_fclr_xsec_003",
+      "description": "Out-of-sample holdout recompute confirmation of the regime-conditioned funding effect on next-hour realized variance within high/low market-wide-RV regimes on the frozen FCLR-001 panel.",
+      "estimand": "utc_hour_market_wide_rv_conditioning_rv1h_holdout",
+      "experiment_id": "FCLR-XSEC-003-20261120T214950Z",
+      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "last_experiment": null,
+      "last_tested": null,
+      "last_verdict": null,
+      "observed_only": true,
+      "reopen_requires": [],
       "status": "NOT_STARTED",
       "terminal": false,
       "terminal_class": null,
-      "type": "primary_trackc_xsec_regime_conditioning",
+      "type": "primary_trackc_xsec_regime_conditioning_holdout",
       "venue": "hyperliquid_perpetuals",
-      "verdict_recorded": false
+      "verdict_recorded": false,
+      "note": "Rank-0 active heavy campaign FCLR-XSEC-003; holdout confirmation of FCLR-XSEC-002 (SUPPORTED). Preregister pre-outcomes before examining holdout outcomes."
     }
   ],
-  "updated_utc": "2026-11-20T18:07:07Z"
+  "updated_utc": "2026-11-20T21:49:50Z"
 }

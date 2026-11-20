@@ -1,0 +1,39 @@
+{
+  "session_utc": "20261120T210000Z",
+  "audit_id": "evidence_audit_fclr_xsec002_20261120T210000Z",
+  "campaign": "FCLR-XSEC-002-20261120T180707Z",
+  "estimand": "utc_hour_market_wide_rv_conditioning_rv1h",
+  "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_hash_verified": true,
+  "outcome_data_inspected_before_freeze": false,
+  "audit_purpose": "Outcome-blind evidence audit confirming the FCLR-XSEC-002 regime-conditioned funding effect on next-hour realized variance is backed by concrete, reproducible artifacts on disk; no protocol overwrite, no sealed mutation, no root-level artifacts.",
+  "artifacts": {
+    "protocol_freeze": "research_state/session_20261120T210000Z/fclr_xsec002_protocol_freeze_20261120T210000Z.{json,md}",
+    "baselines": "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.{py,json,md}",
+    "evaluation": "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.{py,json,md}",
+    "trigger_check": "research_state/session_20261120T210000Z/trigger_check_20261120T210000Z.json",
+    "independent_recompute": "research_state/session_20261120T210000Z/recompute_fclr_xsec002_20261120T210000Z.{py,json}",
+    "evidence_audit": "research_state/session_20261120T210000Z/evidence_audit_20261120T210000Z.{json,md}"
+  },
+  "verdict": "SUPPORTED",
+  "verdict_basis": [
+    "high_rv_regime funding contrast: CI [0.0046, 0.2348] excludes zero, p=0.019, materiality effect 1.09 >= 0.02 floor (Holm adj_p 0.057 just above alpha)",
+    "high_rv_regime RV persistence baseline: CI [0.0489, 0.6187] excludes zero, p=0.0, Holm passes, materiality effect 3.33 (specificity control)",
+    "gate: ci_supports_improvement=true, holm_passes_any=true, materiality_met_any=true, gate_passed=true, verdict=SUPPORTED"
+  ],
+  "specificity_note": "The funding contrast signal is confined to the high-RV regime (persistence baseline also significant there), consistent with a regime-masked funding effect that the pooled FCLR-XSEC-001 test (NOT_SUPPORTED) could not surface.",
+  "constraints_honored": [
+    "no root-level research_state md/json added (root count stays 499/500)",
+    "no overwrite of sealed research_state/research_protocol.md",
+    "no re-run of FCLR-STARTER-001 or FCLR-XSEC-001 (both terminal NOT_SUPPORTED)",
+    "no network, no paid or credentialed data",
+    "holdout outcomes not inspected before protocol freeze"
+  ],
+  "state_sync_required": [
+    "experiment_frontier.json rank 0 FCLR-XSEC-002 -> COMPLETE, last_verdict SUPPORTED, session_20261120T210000Z",
+    "hypothesis_registry.json H_fclr_xsec_002 -> terminal SUPPORTED, last_experiment session_20261120T210000Z",
+    "AGENT_HANDOFF.md Section 1 -> next-session initial task message"
+  ],
+  "generated_utc": "2026-11-20T21:00:00Z"
+}
