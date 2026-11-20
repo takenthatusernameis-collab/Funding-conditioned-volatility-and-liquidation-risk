@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T20:48:14Z
+**Timestamp:** 2026-11-20T20:50:16Z
 **Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); FCLR-XSEC-001 COMPLETE (NOT_SUPPORTED, session_20261120T175300Z); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125 (ONE root-level md/json file remaining before cap breach fails heavy-work gate); heavy-work gate: scripts/check_handoff_heavywork_gate.py must be re-verified after any session writes (baseline PASS, exit 0); tests/test_active_campaign_gate.py invariant: exactly one rank-0 ACTIVE/READY_EXECUTE, all others SUPERSEDED (full suite run timed out at >120s — run targeted tests only).
 **Campaign declared:** FCLR-XSEC-002-20261120T180707Z (start UTC 20261120T180707Z) — UTC-hour / market-wide-RV conditioning of funding effect (contingency ladder mechanism 1).
 **Latest heavy session:** session_20261120T175300Z (FCLR-XSEC-001 Steps 1/2/3 COMPLETE: protocol freeze, within-hour baselines, cross-sectional evaluation + block bootstrap + Holm + independent recompute + evidence audit; verdict NOT_SUPPORTED).
@@ -8,7 +8,7 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T20:48:14Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T20:50:16Z)
 
 FCLR-STARTER-001 and FCLR-XSEC-001 are both COMPLETE with verdict **NOT_SUPPORTED**. No funding-conditioned feature set has improved volatility forecasting on the frozen panel across two distinct identification strategies (time-series 24h forward RV; within-hour cross-sectional funding contrast).
 
