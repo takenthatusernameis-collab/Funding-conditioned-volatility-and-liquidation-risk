@@ -1,299 +1,299 @@
 [
- {
-  "rank": 0,
-  "status": "READY_EXECUTE",
-  "program_status": "ACTIVE",
-  "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T231806Z",
-  "generated": "20261119T231806Z",
-  "refreshed": "20261119T231806Z",
-  "last_checked": "20261119T231806Z",
-  "last_verdict": null,
-  "next_action_heavy": "Freeze research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim (NOT research_state/research_protocol.md — sealed legacy); build Hyperliquid mark/index/funding/klines panel; hash+freeze eligible panel before target generation; run B0/B1 baselines on development/validation.",
-  "next_unfinished_task": "FCLR-001 Step 1: protocol freeze + panel hash freeze (research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim, hash-bound, outcome_data_inspected_before_freeze=false). Then Step 2: B0/B1 baselines on dev/validation. No holdout outcomes inspected before protocol freeze. Track A power-blocked (RISK-12 UNDERPOWERED, MDE 0.002814 > PLAUSIBLE_EFFECT_BRIER 0.001); do not re-run RISK-09/10/11/12. Track C volatility forecasting is the only agent-removable heavy path on admissible public mark-price data. FCLR_HEAVY_CAMPAIGN_NEXT.md referenced by the prior frontier is superseded by this campaign.",
-  "resume_triggers": [],
-  "trigger_status": {},
-  "blockers": "None agent-removable: FCLR-001 §14 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md holds the OLD 2026-11-06 sealed legacy protocol and must NOT be overwritten — FCLR-001 §14 freeze written to a NEW timestamped path research_state/protocol_fclr_starter_001_<UTC>.md per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers — superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
-  "evidence": {
-   "frontier_cells": 0,
-   "all_terminal": true,
-   "data_through": "2026-10",
-   "new_files_found": 0,
-   "suite_baseline": "1341 tests, 0 failures (after frontier repair)"
-  },
-  "phases": [
-    {
-     "phase": "PREREG_FREEZE",
-     "status": "NOT_STARTED",
-     "claim": "Freeze research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md §14 verbatim (FCLR-001: unit, timing, universe, target, features, baselines, splits, metrics, inference, gate). outcome_data_inspected_before_freeze=false. Do NOT write research_state/research_protocol.md (sealed legacy FCLR-001 2024-01..03).",
-     "expected_artifacts": [
-      "research_state/protocol_fclr_starter_001_<UTC>.md (matches RESEARCH_PROMPT.md §14 exactly)",
-      "research_state/protocol_fclr_starter_001_<UTC>.json (hash-bound, experiment_id starts with FCLR-STARTER-001, outcome_data_inspected_before_freeze=false, protocol_path not the sealed file)"
-     ]
+  {
+    "rank": 0,
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T231806Z",
+    "generated": "20261119T231806Z",
+    "refreshed": "20261120T033205Z",
+    "last_checked": "20261120T033205Z",
+    "last_verdict": null,
+    "next_action_heavy": "Step 2/3: C1 (B1 + funding + percentile) and C2 (C1 + premium + EMA24) on dev/validation/holdout; paired QLIKE diff C2 vs B1; block bootstrap CI (>=2000 reps); Holm over family; verdict. Holdout opened only after protocol freeze (already frozen). Do NOT overwrite research_state/research_protocol.md (sealed legacy).",
+    "next_unfinished_task": "FCLR-STARTER-001 Step 2/3 confirmatory evaluation (Track C: 24h forward realized variance forecasting). Step 1 (protocol freeze + panel freeze + B0/B1 baselines + trigger_check) COMPLETE under research_state/session_20261120T024217Z/. Next: run C1/C2 vs B1 on the sealed holdout after 7-day purge/embargo; compute paired QLIKE diff, block bootstrap >=2000 reps, Holm correction, and emit verdict (FORECAST_GATE_PASSED or NOT_SUPPORTED).",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None agent-removable: FCLR-001 \u00a714 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md holds the OLD 2026-11-06 sealed legacy protocol and must NOT be overwritten \u2014 FCLR-001 \u00a714 freeze written to a NEW timestamped path research_state/protocol_fclr_starter_001_<UTC>.md per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers \u2014 superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
+    "evidence": {
+      "frontier_cells": 0,
+      "all_terminal": true,
+      "data_through": "2026-10",
+      "new_files_found": 0,
+      "suite_baseline": "1341 tests, 0 failures (after frontier repair)"
     },
-   {
-    "phase": "PANEL_BUILD_AND_HASH",
-    "status": "NOT_STARTED",
-    "claim": "Build Hyperliquid mark/index/funding/klines panel reusing frozen panel where possible; record source hashes, cutoff dates, eligible sample definition; hash+freeze eligible panel before target generation.",
-    "expected_artifacts": [
-     "research_state/session_<UTC>/panel build report + panel hash",
-     "research_state/session_<UTC>/trigger_check_<UTC>.json"
-    ]
-   },
-   {
-    "phase": "BASELINE_B0_B1",
-    "status": "NOT_STARTED",
-    "claim": "Run B0 (persistence RV24h) and B1 (HAR-style OLS log RV1h/RV24h/RV168h -> log target) on development/validation; record QLIKE/MAE/RMSE metrics.",
-    "expected_artifacts": [
-     "research_state/session_<UTC>/baseline evaluation + metrics"
-    ]
-   }
-  ],
-  "note": "SENTINEL: all cached-data Track A/B estimands terminal (NOT_MET/NOT_REPLICATED/FRAGILE). FCLR-001 Track C volatility forecasting is the active rank-0 heavy campaign. No deferral, no placeholder artifacts, no trigger-gated wait. Complete protocol freeze + panel hash + B0/B1 metrics in one continuous session. tests/test_active_campaign_gate.py invariant preserved: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED."
- },
- {
-  "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional QLIKE, not cross-sectional rank-IC or per-coin time-series QLIKE). Uses 2 pristine metpie blocks never tested for this estimand.",
-  "evidence": {
-   "n_coins": 15,
-   "n_daily_rows": 7512,
-   "network_used_for_outcomes": false,
-   "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-   "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-   "prior_cell": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
-   "prior_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T203507Z",
-   "prior_verdict": "NOT_MET",
-   "promotable": false,
-   "sealed_artifacts_mutated": false
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "COMPLETE",
+        "claim": "Freeze research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md \u00a714 verbatim (FCLR-001: unit, timing, universe, target, features, baselines, splits, metrics, inference, gate). outcome_data_inspected_before_freeze=false. Do NOT write research_state/research_protocol.md (sealed legacy FCLR-001 2024-01..03).",
+        "expected_artifacts": [
+          "research_state/protocol_fclr_starter_001_<UTC>.md (matches RESEARCH_PROMPT.md \u00a714 exactly)",
+          "research_state/protocol_fclr_starter_001_<UTC>.json (hash-bound, experiment_id starts with FCLR-STARTER-001, outcome_data_inspected_before_freeze=false, protocol_path not the sealed file)"
+        ]
+      },
+      {
+        "phase": "PANEL_BUILD_AND_HASH",
+        "status": "COMPLETE",
+        "claim": "Build Hyperliquid mark/index/funding/klines panel reusing frozen panel where possible; record source hashes, cutoff dates, eligible sample definition; hash+freeze eligible panel before target generation.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/panel build report + panel hash",
+          "research_state/session_<UTC>/trigger_check_<UTC>.json"
+        ]
+      },
+      {
+        "phase": "BASELINE_B0_B1",
+        "status": "COMPLETE",
+        "claim": "Run B0 (persistence RV24h) and B1 (HAR-style OLS log RV1h/RV24h/RV168h -> log target) on development/validation; record QLIKE/MAE/RMSE metrics.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/baseline evaluation + metrics"
+        ]
+      }
+    ],
+    "note": "SENTINEL: all cached-data Track A/B estimands terminal (NOT_MET/NOT_REPLICATED/FRAGILE). FCLR-001 Track C volatility forecasting is the active rank-0 heavy campaign. No deferral, no placeholder artifacts, no trigger-gated wait. Complete protocol freeze + panel hash + B0/B1 metrics in one continuous session. tests/test_active_campaign_gate.py invariant preserved: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED."
   },
-  "generated": "20261115T203550Z",
-  "last_checked": "20261115T215045Z",
-  "last_evaluation": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
-  "last_verdict": "NOT_MET",
-  "next_action_heavy": null,
-  "next_unfinished_task": null,
-  "note": "CONCLUDED NOT_MET (FCLR-LIQ-XSEC-QLIKE-20261115T203550Z executed 2026-11-15: C2 worse than B1 on cross-sectional QLIKE, rel improvement -75.56%, only 2/3 blocks evaluable; H_fclr_liq_xsec_qlike_forecast terminal NOT_MET). Demoted to rank 1; superseded by the TRIGGER_ONLY sentinel. Do not re-run this estimand.",
-  "phases": [
-   {
-    "actual_artifacts": [
-     "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.json",
-     "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.md"
+  {
+    "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional QLIKE, not cross-sectional rank-IC or per-coin time-series QLIKE). Uses 2 pristine metpie blocks never tested for this estimand.",
+    "evidence": {
+      "n_coins": 15,
+      "n_daily_rows": 7512,
+      "network_used_for_outcomes": false,
+      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "prior_cell": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
+      "prior_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T203507Z",
+      "prior_verdict": "NOT_MET",
+      "promotable": false,
+      "sealed_artifacts_mutated": false
+    },
+    "generated": "20261115T203550Z",
+    "last_checked": "20261115T215045Z",
+    "last_evaluation": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
+    "last_verdict": "NOT_MET",
+    "next_action_heavy": null,
+    "next_unfinished_task": null,
+    "note": "CONCLUDED NOT_MET (FCLR-LIQ-XSEC-QLIKE-20261115T203550Z executed 2026-11-15: C2 worse than B1 on cross-sectional QLIKE, rel improvement -75.56%, only 2/3 blocks evaluable; H_fclr_liq_xsec_qlike_forecast terminal NOT_MET). Demoted to rank 1; superseded by the TRIGGER_ONLY sentinel. Do not re-run this estimand.",
+    "phases": [
+      {
+        "actual_artifacts": [
+          "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.json",
+          "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.md"
+        ],
+        "claim": "Freeze NEW pre-outcomes prereg for cross-sectional QLIKE of next-day liquidation intensity (C2 vs B1) on the 15-coin combined panel: daily cross-sectional QLIKE (primary) + rank-IC + top-3 hit-rate (secondary), expanding-window walk-forward, 3 non-overlapping 30d test blocks (2 pristine metpie + 1 estimand-novel ironflow), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
+        "expected_artifacts": [
+          "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.json",
+          "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.md"
+        ],
+        "phase": "PREREG_FREEZE",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.json",
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.md"
+        ],
+        "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional QLIKE / rank-IC / top-3 hit-rate verdict with block-bootstrap CI and Holm; run forecast gate.",
+        "expected_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.json",
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.md"
+        ],
+        "phase": "EVALUATION_AND_GATE",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/tracka_script_scope_registry.json (193->195 scripts)",
+          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
+        ],
+        "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_qlike_forecast); no sealed mutation, no workflows edits.",
+        "expected_artifacts": [
+          "research_state/tracka_script_scope_registry.json (191->193 scripts)",
+          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
+        ],
+        "phase": "REGISTRY_AND_FRONTIER",
+        "status": "COMPLETED"
+      }
     ],
-    "claim": "Freeze NEW pre-outcomes prereg for cross-sectional QLIKE of next-day liquidation intensity (C2 vs B1) on the 15-coin combined panel: daily cross-sectional QLIKE (primary) + rank-IC + top-3 hit-rate (secondary), expanding-window walk-forward, 3 non-overlapping 30d test blocks (2 pristine metpie + 1 estimand-novel ironflow), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
-    "expected_artifacts": [
-     "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.json",
-     "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.md"
+    "program_status": "SUPERSEDED",
+    "rank": 1,
+    "refreshed": "20261115T203550Z",
+    "resume_triggers": [
+      "GATE4_BRANCH_1",
+      "NEW_OBSERVED_LIQUIDATION_SOURCE"
     ],
-    "phase": "PREREG_FREEZE",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.json",
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.md"
-    ],
-    "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional QLIKE / rank-IC / top-3 hit-rate verdict with block-bootstrap CI and Holm; run forecast gate.",
-    "expected_artifacts": [
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.json",
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.md"
-    ],
-    "phase": "EVALUATION_AND_GATE",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/tracka_script_scope_registry.json (193->195 scripts)",
-     "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
-    ],
-    "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_qlike_forecast); no sealed mutation, no workflows edits.",
-    "expected_artifacts": [
-     "research_state/tracka_script_scope_registry.json (191->193 scripts)",
-     "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
-    ],
-    "phase": "REGISTRY_AND_FRONTIER",
-    "status": "COMPLETED"
-   }
-  ],
-  "program_status": "SUPERSEDED",
-  "rank": 1,
-  "refreshed": "20261115T203550Z",
-  "resume_triggers": [
-   "GATE4_BRANCH_1",
-   "NEW_OBSERVED_LIQUIDATION_SOURCE"
-  ],
-  "status": "SUPERSEDED",
-  "task": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
-  "previous_rank": 0,
-  "superseded_by": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z"
- },
- {
-  "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional ordering, not per-coin time-series QLIKE).",
-  "evidence": {
-   "n_coins": 15,
-   "n_daily_rows": 7512,
-   "network_used_for_outcomes": false,
-   "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-   "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-   "prior_cell": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
-   "prior_evaluation": "FCLR-LIQ-COMBINED-20261115T185844Z",
-   "prior_verdict": "NOT_MET",
-   "promotable": false,
-   "sealed_artifacts_mutated": false
+    "status": "SUPERSEDED",
+    "task": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
+    "previous_rank": 0,
+    "superseded_by": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z"
   },
-  "generated": "20261115T185957Z",
-  "last_checked": "20261115T203510Z",
-  "last_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T203507Z",
-  "last_verdict": "NOT_MET",
-  "next_action_heavy": null,
-  "next_unfinished_task": null,
-  "note": "CONCLUDED NOT_MET (forecast gate) on the combined metpie+ironflow 15-coin panel; demoted and superseded by the cross-sectional QLIKE cell. Heavy work is the DEFAULT path.",
-  "phases": [
-   {
-    "actual_artifacts": [
-     "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.json",
-     "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.md"
+  {
+    "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional ordering, not per-coin time-series QLIKE).",
+    "evidence": {
+      "n_coins": 15,
+      "n_daily_rows": 7512,
+      "network_used_for_outcomes": false,
+      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "prior_cell": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
+      "prior_evaluation": "FCLR-LIQ-COMBINED-20261115T185844Z",
+      "prior_verdict": "NOT_MET",
+      "promotable": false,
+      "sealed_artifacts_mutated": false
+    },
+    "generated": "20261115T185957Z",
+    "last_checked": "20261115T203510Z",
+    "last_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T203507Z",
+    "last_verdict": "NOT_MET",
+    "next_action_heavy": null,
+    "next_unfinished_task": null,
+    "note": "CONCLUDED NOT_MET (forecast gate) on the combined metpie+ironflow 15-coin panel; demoted and superseded by the cross-sectional QLIKE cell. Heavy work is the DEFAULT path.",
+    "phases": [
+      {
+        "actual_artifacts": [
+          "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.json",
+          "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.md"
+        ],
+        "claim": "Freeze NEW pre-outcomes prereg for cross-sectional liquidation ordering (C2 vs B1) on the 15-coin combined panel: daily rank-IC + top-3 hit-rate + cross-sectional QLIKE, expanding-window walk-forward, 3 non-overlapping 30d test blocks (2025-10, 2026-01, 2026-09), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
+        "expected_artifacts": [
+          "research_state/prereg_fclr_liq_combined_xsec_<UTC>.json",
+          "research_state/prereg_fclr_liq_combined_xsec_<UTC>.md"
+        ],
+        "phase": "PREREG_FREEZE",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.json",
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.md"
+        ],
+        "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional rank-IC / top-3 hit-rate / cross-sectional QLIKE verdict with block-bootstrap CI and Holm; run forecast gate.",
+        "expected_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.json",
+          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.md"
+        ],
+        "phase": "EVALUATION_AND_GATE",
+        "status": "COMPLETED"
+      },
+      {
+        "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_ordering_forecast); no sealed mutation, no workflows edits.",
+        "expected_artifacts": [
+          "research_state/tracka_script_scope_registry.json (191->193 scripts)",
+          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
+        ],
+        "phase": "REGISTRY_AND_FRONTIER",
+        "status": "COMPLETED"
+      }
     ],
-    "claim": "Freeze NEW pre-outcomes prereg for cross-sectional liquidation ordering (C2 vs B1) on the 15-coin combined panel: daily rank-IC + top-3 hit-rate + cross-sectional QLIKE, expanding-window walk-forward, 3 non-overlapping 30d test blocks (2025-10, 2026-01, 2026-09), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
-    "expected_artifacts": [
-     "research_state/prereg_fclr_liq_combined_xsec_<UTC>.json",
-     "research_state/prereg_fclr_liq_combined_xsec_<UTC>.md"
+    "program_status": "SUPERSEDED",
+    "rank": 2,
+    "refreshed": "20261115T185957Z",
+    "resume_triggers": [
+      "GATE4_BRANCH_1",
+      "NEW_OBSERVED_LIQUIDATION_SOURCE"
     ],
-    "phase": "PREREG_FREEZE",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.json",
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.md"
-    ],
-    "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional rank-IC / top-3 hit-rate / cross-sectional QLIKE verdict with block-bootstrap CI and Holm; run forecast gate.",
-    "expected_artifacts": [
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.json",
-     "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.md"
-    ],
-    "phase": "EVALUATION_AND_GATE",
-    "status": "COMPLETED"
-   },
-   {
-    "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_ordering_forecast); no sealed mutation, no workflows edits.",
-    "expected_artifacts": [
-     "research_state/tracka_script_scope_registry.json (191->193 scripts)",
-     "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
-    ],
-    "phase": "REGISTRY_AND_FRONTIER",
-    "status": "COMPLETED"
-   }
-  ],
-  "program_status": "SUPERSEDED",
-  "rank": 2,
-  "refreshed": "20261115T185957Z",
-  "resume_triggers": [
-   "GATE4_BRANCH_1",
-   "NEW_OBSERVED_LIQUIDATION_SOURCE"
-  ],
-  "status": "SUPERSEDED",
-  "superseded_at": "2026-11-15T20:35:50Z",
-  "superseded_by": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
-  "task": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
-  "previous_rank": 1
- },
- {
-  "blockers": "None agent-removable on cache: \u00a716 audit = ADMISSIBLE_PENDING_BOUNDED_ACQUISITION (see research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}); only the 2025-03..2025-10 HL candle/funding context must be fetched (bounded, unauthenticated). Not a re-probe: metpie is a materially new observed-liquidation source family never used for outcomes.",
-  "evidence": {
-   "audit": "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}",
-   "class": "CONFIRMATORY_PENDING_PREREG",
-   "combined_span_days": 588.5234,
-   "determination": "ADMISSIBLE_PENDING_BOUNDED_ACQUISITION",
-   "funded_coins_ge_min_events": 15,
-   "n_30d_blocks": 19,
-   "n_pristine_blocks": 2,
-   "network_used_for_outcomes": false,
-   "promotable": false,
-   "sealed_artifacts_mutated": false
+    "status": "SUPERSEDED",
+    "superseded_at": "2026-11-15T20:35:50Z",
+    "superseded_by": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
+    "task": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
+    "previous_rank": 1
   },
-  "generated": "20261115T170000Z",
-  "last_checked": "20261115T185845Z",
-  "last_evaluation": "FCLR-LIQ-COMBINED-20261115T185844Z",
-  "last_verdict": "NOT_MET",
-  "next_action_heavy": null,
-  "next_unfinished_task": null,
-  "note": "CONCLUDED NOT_MET (forecast gate) on the combined metpie+ironflow 15-coin panel; demoted and superseded by the cross-sectional liquidation-ordering cell. Heavy work is the DEFAULT path.",
-  "phases": [
-   {
-    "actual_artifacts": [
-     "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.json",
-     "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.md"
+  {
+    "blockers": "None agent-removable on cache: \u00a716 audit = ADMISSIBLE_PENDING_BOUNDED_ACQUISITION (see research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}); only the 2025-03..2025-10 HL candle/funding context must be fetched (bounded, unauthenticated). Not a re-probe: metpie is a materially new observed-liquidation source family never used for outcomes.",
+    "evidence": {
+      "audit": "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}",
+      "class": "CONFIRMATORY_PENDING_PREREG",
+      "combined_span_days": 588.5234,
+      "determination": "ADMISSIBLE_PENDING_BOUNDED_ACQUISITION",
+      "funded_coins_ge_min_events": 15,
+      "n_30d_blocks": 19,
+      "n_pristine_blocks": 2,
+      "network_used_for_outcomes": false,
+      "promotable": false,
+      "sealed_artifacts_mutated": false
+    },
+    "generated": "20261115T170000Z",
+    "last_checked": "20261115T185845Z",
+    "last_evaluation": "FCLR-LIQ-COMBINED-20261115T185844Z",
+    "last_verdict": "NOT_MET",
+    "next_action_heavy": null,
+    "next_unfinished_task": null,
+    "note": "CONCLUDED NOT_MET (forecast gate) on the combined metpie+ironflow 15-coin panel; demoted and superseded by the cross-sectional liquidation-ordering cell. Heavy work is the DEFAULT path.",
+    "phases": [
+      {
+        "actual_artifacts": [
+          "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.json",
+          "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.md"
+        ],
+        "claim": "\u00a716 admissibility + integration audit of the combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed-liquidation source. Determination ADMISSIBLE_PENDING_BOUNDED_ACQUISITION; all criteria PASS except aligned market context (cache covers 2025-11+ only).",
+        "expected_artifacts": [
+          "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.json",
+          "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.md"
+        ],
+        "phase": "ADMISSIBILITY_AUDIT",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/fclr_liq_combined_context_fetch_report_20261115T181320Z.json"
+        ],
+        "claim": "Bounded first-time unauthenticated Hyperliquid candle+funding acquisition for the 15 funded coins over 2025-03-22..2025-10-31 (cache currently 2025-11+). Idempotent, provenance-stamped, no keys.",
+        "expected_artifacts": [
+          "research_state/data_cache/hyperliquid_candles/<COIN>/2025-0[3-9].json",
+          "2025-10.json",
+          "research_state/data_cache/hyperliquid_funding/<COIN>.json (extended)"
+        ],
+        "phase": "BOUNDED_CONTEXT_ACQUISITION",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+          "research_state/fclr_liq_combined_panel_build_report_20261115T181405Z.json"
+        ],
+        "claim": "Unified observed-liquidation panel: metpie+ironflow events deduped on (coin,timestamp,notional_usd,tx-hash) + aligned 1h/4h funding, mark/index premium, RV24h features (causal, no look-ahead).",
+        "expected_artifacts": [
+          "research_state/fclr_liq_combined_panel_<UTC>.parquet",
+          "research_state/fclr_liq_combined_panel_build_report_<UTC>.json"
+        ],
+        "phase": "COMBINED_PANEL_BUILD",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/prereg_fclr_liq_combined_20261115T181449Z.json",
+          "research_state/prereg_fclr_liq_combined_20261115T181449Z.md"
+        ],
+        "claim": "Freeze NEW prereg PRE-OUTCOMES: 24h observed-liquidation-intensity QLIKE C2 vs B1 expanding-window walk-forward, >=5 instruments, >=3 non-overlapping 30d test blocks incl. the 2 pristine metpie blocks + estimand-novel 2025-05..2025-10 blocks, block bootstrap, Holm, 2% materiality floor.",
+        "expected_artifacts": [
+          "research_state/prereg_fclr_liq_combined_<UTC>.json",
+          "research_state/prereg_fclr_liq_combined_<UTC>.md"
+        ],
+        "phase": "PREREG_FREEZE",
+        "status": "COMPLETED"
+      },
+      {
+        "actual_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.json",
+          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.md"
+        ],
+        "claim": "Execute frozen prereg, emit verdict, run forecast gate; update frontier/hypothesis registry; no sealed mutation.",
+        "expected_artifacts": [
+          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.json",
+          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.md"
+        ],
+        "phase": "EVALUATION_AND_GATE",
+        "status": "COMPLETED"
+      }
     ],
-    "claim": "\u00a716 admissibility + integration audit of the combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed-liquidation source. Determination ADMISSIBLE_PENDING_BOUNDED_ACQUISITION; all criteria PASS except aligned market context (cache covers 2025-11+ only).",
-    "expected_artifacts": [
-     "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.json",
-     "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.md"
+    "program_status": "SUPERSEDED",
+    "rank": 3,
+    "refreshed": "20261115T170000Z",
+    "resume_triggers": [
+      "GATE4_BRANCH_1",
+      "NEW_OBSERVED_LIQUIDATION_SOURCE"
     ],
-    "phase": "ADMISSIBILITY_AUDIT",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/fclr_liq_combined_context_fetch_report_20261115T181320Z.json"
-    ],
-    "claim": "Bounded first-time unauthenticated Hyperliquid candle+funding acquisition for the 15 funded coins over 2025-03-22..2025-10-31 (cache currently 2025-11+). Idempotent, provenance-stamped, no keys.",
-    "expected_artifacts": [
-     "research_state/data_cache/hyperliquid_candles/<COIN>/2025-0[3-9].json",
-     "2025-10.json",
-     "research_state/data_cache/hyperliquid_funding/<COIN>.json (extended)"
-    ],
-    "phase": "BOUNDED_CONTEXT_ACQUISITION",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-     "research_state/fclr_liq_combined_panel_build_report_20261115T181405Z.json"
-    ],
-    "claim": "Unified observed-liquidation panel: metpie+ironflow events deduped on (coin,timestamp,notional_usd,tx-hash) + aligned 1h/4h funding, mark/index premium, RV24h features (causal, no look-ahead).",
-    "expected_artifacts": [
-     "research_state/fclr_liq_combined_panel_<UTC>.parquet",
-     "research_state/fclr_liq_combined_panel_build_report_<UTC>.json"
-    ],
-    "phase": "COMBINED_PANEL_BUILD",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/prereg_fclr_liq_combined_20261115T181449Z.json",
-     "research_state/prereg_fclr_liq_combined_20261115T181449Z.md"
-    ],
-    "claim": "Freeze NEW prereg PRE-OUTCOMES: 24h observed-liquidation-intensity QLIKE C2 vs B1 expanding-window walk-forward, >=5 instruments, >=3 non-overlapping 30d test blocks incl. the 2 pristine metpie blocks + estimand-novel 2025-05..2025-10 blocks, block bootstrap, Holm, 2% materiality floor.",
-    "expected_artifacts": [
-     "research_state/prereg_fclr_liq_combined_<UTC>.json",
-     "research_state/prereg_fclr_liq_combined_<UTC>.md"
-    ],
-    "phase": "PREREG_FREEZE",
-    "status": "COMPLETED"
-   },
-   {
-    "actual_artifacts": [
-     "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.json",
-     "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.md"
-    ],
-    "claim": "Execute frozen prereg, emit verdict, run forecast gate; update frontier/hypothesis registry; no sealed mutation.",
-    "expected_artifacts": [
-     "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.json",
-     "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.md"
-    ],
-    "phase": "EVALUATION_AND_GATE",
-    "status": "COMPLETED"
-   }
-  ],
-  "program_status": "SUPERSEDED",
-  "rank": 3,
-  "refreshed": "20261115T170000Z",
-  "resume_triggers": [
-   "GATE4_BRANCH_1",
-   "NEW_OBSERVED_LIQUIDATION_SOURCE"
-  ],
-  "status": "SUPERSEDED",
-  "superseded_at": "2026-11-15T18:59:57Z",
-  "superseded_by": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
-  "task": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
-  "previous_rank": 2
- }
+    "status": "SUPERSEDED",
+    "superseded_at": "2026-11-15T18:59:57Z",
+    "superseded_by": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
+    "task": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
+    "previous_rank": 2
+  }
 ]
