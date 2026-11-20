@@ -1,0 +1,36 @@
+# FCLR-STARTER-001 B0/B1 baselines (20261120T024217Z)
+
+{
+  "experiment_id": "FCLR-STARTER-001-20261120T024217Z",
+  "split_used": "train_validation_development_validation",
+  "holdout_opened": false,
+  "n_obs": 2799,
+  "eps": 1e-12,
+  "smearing_b1": 4.204126480865836,
+  "cutoff_utc": "2026-08-31T23:00:00Z",
+  "models": {
+    "B0": {
+      "kind": "persistence_rv24h",
+      "qlike": 0.5742793328125579,
+      "mae": 0.0003677741074897556,
+      "rmse": 0.0005141565650274183,
+      "n_obs": 2799
+    },
+    "B1": {
+      "kind": "har_ols_log_rv1h_rv24h_rv168h_to_log_target_duan_smearing",
+      "qlike": 0.5413234132343385,
+      "mae": 0.8239995489907972,
+      "rmse": 12.009868537949329,
+      "n_obs": 2799,
+      "smearing": 4.204126480865836
+    }
+  },
+  "feature_cols": [
+    "lr1",
+    "lr24",
+    "lr168"
+  ],
+  "target_col": "target_rv24h",
+  "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4"
+}

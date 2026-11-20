@@ -1,0 +1,27 @@
+{
+  "experiment_id": "FCLR-STARTER-001-20261120T024217Z",
+  "utc": "20261120T024217Z",
+  "checks": [
+    {
+      "name": "protocol_freeze_section14_hash_bound",
+      "status": "PASS"
+    },
+    {
+      "name": "panel_hash_recorded_before_target_generation",
+      "status": "PASS"
+    },
+    {
+      "name": "b0_b1_baselines_dev_validation",
+      "status": "PASS"
+    },
+    {
+      "name": "holdout_not_opened",
+      "status": "PASS"
+    },
+    {
+      "name": "sealed_protocol_not_overwritten",
+      "status": "PASS"
+    }
+  ],
+  "non_empty": true
+}
