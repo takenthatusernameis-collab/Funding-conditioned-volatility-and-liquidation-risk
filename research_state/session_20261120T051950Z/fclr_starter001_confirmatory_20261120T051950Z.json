@@ -1,0 +1,82 @@
+{
+  "experiment_id": "FCLR-STARTER-001-20261120T051950Z",
+  "protocol_freeze": "research_state/protocol_fclr_starter_001_20261120T024217Z.md",
+  "panel_freeze": "research_state/session_20261120T024217Z/fclr_starter001_panel_freeze_20261120T024217Z.json",
+  "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "holdout_opened": true,
+  "split_used": "train+validation/test",
+  "n_instruments": 5,
+  "n_test_blocks": 3,
+  "models": {
+    "B1": {
+      "qlike": 162.6814076857025,
+      "mae": 7.571145132283772e+86,
+      "rmse": 4.6427974794567914e+88,
+      "n_obs": 10905
+    },
+    "C1": {
+      "qlike": 158.84333865100342,
+      "mae": 3.1077912960366697e+84,
+      "rmse": 2.949227367760623e+86,
+      "n_obs": 10905
+    },
+    "C2": {
+      "qlike": 177.23587006088846,
+      "mae": 1.5861135423680616e+93,
+      "rmse": 1.5542537015834732e+95,
+      "n_obs": 10905
+    }
+  },
+  "comparisons": [
+    {
+      "alt": "C2",
+      "base": "B1",
+      "role": "primary",
+      "base_qlike": 162.6814076857025,
+      "alt_qlike": 177.23587006088846,
+      "diff": 14.554462375185949,
+      "ci_low": 14.40515656046486,
+      "ci_high": 14.716009328547415,
+      "rel_improvement_pct": -8.946604644155098,
+      "p_value": 0.025,
+      "holm_rejected": false,
+      "holm_adj_p": 0.07500000000000001
+    },
+    {
+      "alt": "C1",
+      "base": "B1",
+      "role": "secondary",
+      "base_qlike": 162.6814076857025,
+      "alt_qlike": 158.84333865100342,
+      "diff": -3.838069034699089,
+      "ci_low": -3.961230221032878,
+      "ci_high": -3.7043690406691496,
+      "rel_improvement_pct": 2.359254870792714,
+      "p_value": 0.025,
+      "holm_rejected": false,
+      "holm_adj_p": 0.0
+    },
+    {
+      "alt": "C2",
+      "base": "C1",
+      "role": "secondary",
+      "base_qlike": 158.84333865100342,
+      "alt_qlike": 177.23587006088846,
+      "diff": 18.392531409885038,
+      "ci_low": 18.359708622238628,
+      "ci_high": 18.429689007744685,
+      "rel_improvement_pct": -11.579038545831303,
+      "p_value": 0.025,
+      "holm_rejected": false,
+      "holm_adj_p": 0.0
+    }
+  ],
+  "gate": {
+    "rel_improvement_pct": -8.946604644155098,
+    "ci_supports_improvement": false,
+    "holm_passes": false,
+    "min_instruments": true,
+    "min_blocks": true,
+    "verdict": "NOT_SUPPORTED"
+  }
+}

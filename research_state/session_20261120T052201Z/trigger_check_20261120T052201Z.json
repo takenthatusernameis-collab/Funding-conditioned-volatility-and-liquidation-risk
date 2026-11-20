@@ -1,0 +1,31 @@
+{
+  "experiment_id": "FCLR-STARTER-001-20261120T052201Z",
+  "utc": "20261120T052201Z",
+  "checks": [
+    {
+      "name": "confirmatory_evaluation_completed",
+      "status": "PASS"
+    },
+    {
+      "name": "holdout_opened_after_protocol_freeze",
+      "status": "PASS"
+    },
+    {
+      "name": "paired_qlike_computed",
+      "status": "PASS"
+    },
+    {
+      "name": "block_bootstrap_2000_reps",
+      "status": "PASS"
+    },
+    {
+      "name": "holm_correction_applied",
+      "status": "PASS"
+    },
+    {
+      "name": "gate_verdict_emitted",
+      "status": "PASS"
+    }
+  ],
+  "non_empty": true
+}
