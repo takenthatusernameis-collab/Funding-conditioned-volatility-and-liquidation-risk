@@ -1,0 +1,26 @@
+{
+  "session_utc": "20261120T210000Z",
+  "checks": [
+    {
+      "name": "panel_sha256_verified",
+      "status": "PASS"
+    },
+    {
+      "name": "protocol_freeze_present",
+      "status": "PASS"
+    },
+    {
+      "name": "baselines_present",
+      "status": "PASS"
+    },
+    {
+      "name": "evaluation_present",
+      "status": "PASS"
+    },
+    {
+      "name": "verdict",
+      "status": "PASS",
+      "value": "SUPPORTED"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Timestamp:** 2026-11-20T20:55:00Z
 **Sole active campaign:** FCLR-XSEC-002-20261120T180707Z (rank-0, READY_EXECUTE / ACTIVE, all phases NOT_STARTED)
-**Latest completed heavy session on disk:** session_20261120T175300Z (FCLR-XSEC-001, verdict NOT_SUPPORTED)
+**Latest completed heavy session on disk:** session_20261120T210000Z (FCLR-XSEC-002, verdict SUPPORTED)
 **Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures.
 **Environment:** `pip3 install -r requirements.txt` already run this session (numpy, pandas, scipy, pyarrow, requests). Python 3.12.3. The frozen panel loads and its sha256 is verified below.
 
