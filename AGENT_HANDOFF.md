@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T08:22:41Z
-**Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 synchronized — FCLR-STARTER-001 demoted to SUPERSEDED, FCLR-XSEC-001 rank-0 ACTIVE (no agent-removable blockers; heavy-work gate requires concrete artifact triad)
+**Timestamp:** 2026-11-20T08:23:05Z
+**Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 synchronized — FCLR-STARTER-001 demoted to SUPERSEDED, FCLR-XSEC-001 rank-0 ACTIVE (no agent-removable blockers; heavy-work gate requires concrete artifact triad; root research_state/ md+json count 499/500 — one new root file breaches the churn cap and fails the gate; next session must NOT add root-level md/json artifacts, all new artifacts go under a timestamped session_<UTC>/ directory)
 **Campaign declared:** FCLR-STARTER-001-20261119T231806Z (start UTC 20261119T231806Z)
 **Latest heavy session:** session_20261120T052201Z (FCLR-STARTER-001 Step 2/3 confirmatory evaluation COMPLETE: C1/C2 vs B1 on sealed holdout; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction; verdict NOT_SUPPORTED)
 **Status:** FCLR-STARTER-001 COMPLETE — All three steps done: (1) protocol freeze + panel freeze + B0/B1 baselines, (2) confirmatory evaluation on sealed holdout, (3) verdict emitted. Track C forecast gate NOT_PASSED.
@@ -120,7 +120,9 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 | Track A power limit | RISK-12 MDE=0.0028 > plausible 0.001; 13 coins, 12 months insufficient | Cross-sectional mechanism uses within-hour variation, different statistical power profile |
 | Sealed Binance months unread | RESEARCH_PROMPT.md prohibits reading sealed months for outcomes | Frozen panel already available; no new data needed for exploratory mechanism |
 | No historical market-cap ranks | Free point-in-time ranks unavailable | Venue-native universe — all discoverable perpetuals from public listing metadata |
+| Sealed Binance months unread | RESEARCH_PROMPT.md prohibits reading sealed months for outcomes | Frozen panel already available; no new data needed for exploratory mechanism |
 | FCLR-001 forecast gate NOT_PASSED | C2 vs B1 +2.62% QLIKE, CI positive, Holm FAILS | Distinct-mechanism exploratory campaign (cross-sectional) on same frozen panel |
+| Root research_state/ md+json count | 499/500 — one new root-level md/json file breaches the churn cap enforced by test_tracka_hardening_125 and fails the heavy-work gate | All new artifacts go under a timestamped session_<UTC>/ directory; do NOT add root-level md/json files |
 
 **Do not:**
 - Re-run FCLR-STARTER-001 (protocol frozen, holdout inspected, verdict emitted)
