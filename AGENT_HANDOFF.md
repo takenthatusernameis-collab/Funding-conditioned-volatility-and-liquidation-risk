@@ -1,5 +1,5 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
-**Timestamp:** 2026-11-20T10:20:16Z
+**Timestamp:** 2026-11-20T10:20:43Z
 **Session:** FCLR-STARTER-001 COMPLETE (NOT_SUPPORTED); experiment_frontier.json rank-0 = FCLR-XSEC-001-20261120T071741Z ACTIVE (READY_EXECUTE); all prior campaigns SUPERSEDED; root research_state/ md+json count 499/500 — churn cap enforced by test_tracka_hardening_125
 **Campaign declared:** FCLR-XSEC-001-20261120T071741Z (start UTC 20261120T071741Z)
 **Latest heavy session:** session_20261120T052201Z (FCLR-STARTER-001 Step 2/3 confirmatory evaluation COMPLETE: C1/C2 vs B1 on sealed holdout; paired QLIKE diff, block bootstrap ≥2000 reps, Holm correction; verdict NOT_SUPPORTED)
@@ -7,7 +7,7 @@
 
 ---
 
-# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T10:20:16Z)
+# INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-20T10:20:43Z)
 
 FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h forward realized variance forecasting) has been fully executed and the forecast gate verdict is **NOT_SUPPORTED**.
 
@@ -64,7 +64,7 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 
 ---
 
-## 3. Single highest-value next task
+## 3. Single highest-value next task — FCLR-XSEC-001 (heavy work, non-deferrable)
 
 **Execute a distinct-mechanism exploratory campaign on the frozen FCLR-001 panel (research_state/fclr011_recompute_panel_20261115T234700Z.parquet).**
 
@@ -91,14 +91,14 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 
 ---
 
-## 4. Precise command/check to verify completion
+## 4. Precise command/check to verify completion — MACHINE-ENFORCED HEAVY-WORK GATE
 
 **Next session must:**
 1. Read this handoff + RESEARCH_PROMPT.md completely
 2. Inspect working tree and latest artifacts (session_20261120T052201Z/, session_20261120T024217Z/)
 3. Preregister a new exploratory protocol (FCLR-XSEC-001) for within-hour cross-sectional funding contrast
 4. Run the analysis on the frozen panel (panel_sha256 must match)
-5. Emit protocol freeze, panel reference, baseline, and evaluation artifacts under a new timestamped session directory
+5. Emit protocol freeze, baselines, evaluation, and trigger_check artifacts under a new timestamped session directory
 
 **Acceptance test for next session:**
 - New `research_state/session_<UTC>/` with:
@@ -109,6 +109,10 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 - `experiment_frontier.json` rank 0 = FCLR-XSEC-001, status READY_EXECUTE / ACTIVE, FCLR-STARTER-001 marked SUPERSEDED
 - `python3 -m unittest discover tests` returns 0 failures
 - No holdout outcomes inspected before protocol freeze
+- Zero-byte placeholder files do NOT count — every artifact must contain meaningful content
+- All new artifacts go under `research_state/session_<UTC>/` — the root research_state/ md+json count is 499/500; one root-level md/json file breaches the churn cap and fails the heavy-work gate
+
+**Non-avoidance:** A future agent cannot satisfy the heavy-work gate with prose, trigger-check-only, or placeholder artifacts. The machine-enforced gate (scripts/check_handoff_heavywork_gate.py + tests/test_active_campaign_gate.py) requires the concrete artifact triad plus a non-empty trigger_check in the latest session directory.
 
 ---
 
@@ -121,8 +125,8 @@ FCLR-STARTER-001 campaign is COMPLETE. The frozen starter protocol (Track C: 24h
 | Sealed Binance months unread | RESEARCH_PROMPT.md prohibits reading sealed months for outcomes | Frozen panel already available; no new data needed for exploratory mechanism |
 | No historical market-cap ranks | Free point-in-time ranks unavailable | Venue-native universe — all discoverable perpetuals from public listing metadata |
 | Sealed Binance months unread | RESEARCH_PROMPT.md prohibits reading sealed months for outcomes | Frozen panel already available; no new data needed for exploratory mechanism |
-| FCLR-001 forecast gate NOT_PASSED | C2 vs B1 +2.62% QLIKE, CI positive, Holm FAILS | Distinct-mechanism exploratory campaign (cross-sectional) on same frozen panel |
 | Root research_state/ md+json count | 499/500 — one new root-level md/json file breaches the churn cap enforced by test_tracka_hardening_125 and fails the heavy-work gate | All new artifacts go under a timestamped session_<UTC>/ directory; do NOT add root-level md/json files |
+| FCLR-001 forecast gate NOT_PASSED | C2 vs B1 +2.62% QLIKE, CI positive, Holm FAILS | Distinct-mechanism exploratory campaign (cross-sectional) on same frozen panel |
 
 **Do not:**
 - Re-run FCLR-STARTER-001 (protocol frozen, holdout inspected, verdict emitted)
