@@ -13,7 +13,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T16:32:18Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T16:38:54Z)
 
 **ALL HEAVY WORK IS COMPLETE. There is no remaining heavy work on frozen data.** FCLR-PANEL-FE-001 (rank-0, COMPLETE) was fully executed under `research_state/session_20261121T130159Z/`. The prereg freeze was outcome-blind (`outcome_data_inspected_before_freeze=false`, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
 
@@ -25,9 +25,9 @@
 - `trigger_check_20261121T130159Z.json` — non-empty trigger check (no external trigger required; frozen panels are sole inputs)
 
 **Verification (must stay green — run at the start of every session):**
-1. `python3 scripts/check_handoff_heavywork_gate.py` → prints `reason=OK` (verified 2026-11-21T14:21:46Z)
-2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail (verified 2026-11-21T14:21:46Z)
-3. `python3 scripts/next_campaign_status.py` → `== CAMPAIGN STATUS: no feasible 3-block design in ANY DOMAIN ==` (expected; panel route is the admissible path; verified 2026-11-21T14:21:46Z)
+1. `python3 scripts/check_handoff_heavywork_gate.py` → prints `reason=OK` (verified 2026-11-21T16:38:54Z)
+2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail (verified 2026-11-21T16:38:54Z)
+3. `python3 scripts/next_campaign_status.py` → `== CAMPAIGN STATUS: no feasible 3-block design in ANY DOMAIN ==` (expected; panel route is the admissible path; verified 2026-11-21T16:38:54Z)
 
 **Verdict:** NOT_SUPPORTED on both halves (H_panelfe_vol and H_panelfe_liq). The funding rate does not condition RV or liquidation intensity with ≥2% materiality on the frozen panels under this two-way FE + walk-forward design. The 2% materiality floor is frozen and was NOT relaxed after outcomes. A null is recorded as NOT_SUPPORTED, not threshold-shopped.
 
@@ -44,7 +44,7 @@
 **What was done this session (bottleneck removal + de-risking, already complete):**
 - Verified and repaired the Python environment (numpy/pandas/scipy/pyarrow were absent; reinstalled from `requirements.txt`; imports now succeed). This was a hard blocker for *any* heavy evaluation script.
 - **Completed the FCLR-PANEL-FE-001 prereg freeze** at `research_state/session_20261121T130159Z/fclr_panelfe01_prereg_20261121T130159Z.{json,md}` — outcome-blind (`outcome_data_inspected_before_freeze=false`), both panel sha256 asserted, hypotheses H_panelfe_vol + H_panelfe_liq, two-way FE models, inference plan, walk-forward protocol, 2% materiality floor, regime cuts, hard constraints. No RV/liquidation outcome statistic was inspected before the freeze.
-- **Re-verified all machine checks this session (2026-11-21T12:05:07Z):** gate `reason=OK` (exit 0) at that time; 79 tests OK; `next_campaign_status.py` → `no feasible 3-block design in ANY domain` (expected); both frozen panel sha256 re-asserted on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); rank-0 `experiment_frontier.json` = `FCLR-PANEL-FE-001-20261121T085602Z` COMPLETE / ALL PHASES COMPLETE (prereg + eval + recompute + evidence audit + trigger_check all emitted); root `research_state/` md+json count 499/500.
+- **Re-verified all machine checks this session (2026-11-21T16:38:54Z):** gate `reason=OK` (exit 0); 79 tests OK; `next_campaign_status.py` → `no feasible 3-block design in ANY domain` (expected); both frozen panel sha256 re-asserted on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); rank-0 `experiment_frontier.json` = `FCLR-PANEL-FE-001-20261121T085602Z` COMPLETE / ALL PHASES COMPLETE (prereg + eval + recompute + evidence audit + trigger_check all emitted); root `research_state/` md+json count 499/500.
 - **Completed a coverage-only feasibility audit** (no RV/liquidation outcome statistics were computed; metadata only):
   - **FCLR-001:** 29,136 rows × 22 cols, 5 coins (BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT), 2026-01-01 00:00 → 2026-08-31 23:00 UTC, 5,832 hourly steps per coin. `signed_funding` and `funding_asof_lag_h` non-null on 29,132/29,136 rows (99.99%); `rv1h` on 23,558; `log_rv1h` on 23,531; `target_rv24h` on 20,871. **`premium` is 100% null** (`NOT_COMPUTABLE_WITHOUT_INDEX_PRICE`) — panel-FE models must use `signed_funding` / `funding_asof_lag_h` / `abs_funding_pct_trail`, never `premium`.
   - **Combined liquidation panel:** 1,740,415 observed event rows, 15 coins (AAVE, ADA, AVAX, BNB, BTC, CRV, DOGE, ETH, LINK, LTC, NEAR, SOL, SUI, UNI, XRP), 2025-03-22 19:00 → 2026-10-31 22:00 UTC. `fundingRate`, `abs_fund_pct`, `notional_usd`, `rv24h`, `rv168h` non-null on all 1,740,415 rows. Sources: ironflow 1,555,142 + metpie 185,273. Observed liquidation-event data (Track A), so the old "Track A blocked on data" note is superseded.
