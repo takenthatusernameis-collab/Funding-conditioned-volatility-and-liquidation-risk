@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T14:23:04Z (refreshes the 2026-11-21T14:22:40Z handoff; ALL HEAVY WORK COMPLETE — gate reason=OK, 79 tests OK, no feasible 3-block design in any domain; green state re-verified this session)
+**Timestamp:** 2026-11-21T16:32:18Z (refreshes the 2026-11-21T14:23:04Z handoff; ALL HEAVY WORK COMPLETE — gate reason=OK, 79 tests OK, no feasible 3-block design in any domain; green state re-verified this session; experiment_frontier.json rank-0 and hypothesis_registry.json H_fclr_panelfe_001 reconciled from stale READY_EXECUTE/PENDING to COMPLETE/NOT_SUPPORTED)
 **Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, COMPLETE — prereg freeze + eval triad + recompute + evidence audit + trigger_check all emitted under `research_state/session_20261121T130159Z/`; verdict NOT_SUPPORTED on both halves; 2% materiality floor preserved)
 **Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE. All required artifacts emitted: `fclr_panelfe01_prereg_20261121T130159Z.{json,md}` (outcome-blind freeze), `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}` (panel-FE estimation + walk-forward evaluation triad), `fclr_panelfe01_recompute_20261121T130159Z.{py,json}` (independent stdlib/numpy recompute; concurs), `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}`, `evidence_audit_20261121T130159Z.json` (gate-critical `evidence_audit_` prefix), `trigger_check_20261121T130159Z.json` (non-empty). Both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation). Gate `reason=OK`; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (unchanged; no root-level files added).
 **Remaining heavy work:** None. The PANEL_FE_REQUIRED artifact set is complete under `session_20261121T130159Z/`; the gate that previously FAILED now PASSES. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, the Track A/B/C families, FCLR-SESSION-SYNTHESIS-01, and FCLR-PANEL-FE-001 itself) are terminal/superseded.
@@ -13,7 +13,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T14:23:04Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T16:32:18Z)
 
 **ALL HEAVY WORK IS COMPLETE. There is no remaining heavy work on frozen data.** FCLR-PANEL-FE-001 (rank-0, COMPLETE) was fully executed under `research_state/session_20261121T130159Z/`. The prereg freeze was outcome-blind (`outcome_data_inspected_before_freeze=false`, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
 
@@ -120,6 +120,7 @@ python3 scripts/next_campaign_status.py
 - **Track A data blocker superseded.** The combined liquidation panel is observed liquidation-event data (ironflow + metpie, 1.74M events, 15 coins). The old "Track A blocked / no admissible liquidation data" notes predate this panel and must not be used to justify idling.
 - **Stale branch, do not merge.** `origin/docs/fclr006-interval-flag-errata-20261030` is 2,158 commits behind `main` and only 2 ahead; it carries an old AGENT_HANDOFF.md plus accidental zip files. It is not a valid handoff and must not be merged over `main`. The sole durable handoff is `AGENT_HANDOFF.md` on `main`.
 - **Root churn cap.** Root `research_state/` is at 499/500 md+json files. Do not add any root-level `research_state/*.md` or `research_state/*.json`; all new artifacts go under `research_state/session_<UTC>/`.
+- **Registry staleness removed.** `experiment_frontier.json` rank-0 (FCLR-PANEL-FE-001) was reconciled from stale `READY_EXECUTE`/`PENDING` to `COMPLETE`/`NOT_SUPPORTED` (all phases COMPLETE; artifacts emitted under `session_20261121T130159Z/`), and `hypothesis_registry.json` H_fclr_panelfe_001 was reconciled from `FROZEN_PENDING_EVALUATION`/`PENDING` to terminal `NOT_SUPPORTED` (`verdict_recorded=true`). A future agent must not treat either registry as indicating unfinished heavy work.
 
 ---
 

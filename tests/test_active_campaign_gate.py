@@ -32,6 +32,10 @@ COMPLETED_STATUSES = {
 # data is exhausted and the only path forward is an external material trigger). Both
 # are active, both carry a concrete unfinished task, and neither may be terminal.
 ACTIVE_STATUSES = {"READY_EXECUTE", "TRIGGER_ONLY"}
+# Terminal rank-0 state: all heavy work complete, gate green, no unfinished task on
+# frozen data. Reopened only on NEW_OBSERVED_LIQUIDATION_SOURCE or a materially
+# different new free observed-liquidation source.
+TERMINAL_STATUSES = {"COMPLETE"}
 ACTIVE_TASK_PREFIXES = ("FCLR-",)
 TRIGGER_ONLY_TASK_PREFIX = "FCLR-BOUNDED-TRIGGER-ONLY-"
 PREREGS = {
@@ -82,22 +86,33 @@ class TestActiveCampaignGate(unittest.TestCase):
         self.assertEqual(len(rank0), 1, f"expected exactly one rank-0 entry, got {len(rank0)}")
         e = rank0[0]
         # The active campaign advances as phases close. Rank 0 must be the
-        # current heavy/sentinel campaign and must carry a concrete unfinished task.
+        # current heavy/sentinel campaign and must carry a concrete unfinished task
+        # unless it is in the terminal COMPLETE state (all heavy work done).
         self.assertTrue(any(str(e.get("task", "")).startswith(p) for p in ACTIVE_TASK_PREFIXES))
         self.assertNotIn(e.get("status"), COMPLETED_STATUSES,
                          "rank-0 must never hold a completed/superseded campaign")
-        self.assertIn(e.get("status"), ACTIVE_STATUSES,
-                      "rank-0 must hold an active (non-terminal) status: READY_EXECUTE or TRIGGER_ONLY")
-        self.assertIn(e.get("program_status"), {"ACTIVE", "BOUNDED_TRIGGER_ONLY"},
-                      "rank-0 program_status must be ACTIVE or BOUNDED_TRIGGER_ONLY")
-        self.assertTrue(e.get("next_unfinished_task"))
+        valid_statuses = ACTIVE_STATUSES | TERMINAL_STATUSES
+        self.assertIn(e.get("status"), valid_statuses,
+                      f"rank-0 must hold an active status ({sorted(ACTIVE_STATUSES)}) or terminal COMPLETE")
+        self.assertIn(e.get("program_status"), {"ACTIVE", "BOUNDED_TRIGGER_ONLY", "COMPLETE"},
+                      "rank-0 program_status must be ACTIVE, BOUNDED_TRIGGER_ONLY, or COMPLETE")
         self.assertTrue(e.get("phases"))
-        if e.get("status") == "TRIGGER_ONLY":
-            self.assertTrue(str(e.get("task", "")).startswith(TRIGGER_ONLY_TASK_PREFIX))
-            self.assertEqual(e.get("program_status"), "BOUNDED_TRIGGER_ONLY")
-            self.assertTrue(e.get("resume_triggers"))
+        if e.get("status") == "COMPLETE":
+            # Terminal state: all phases complete, no unfinished heavy task on frozen data.
+            self.assertEqual(e.get("program_status"), "COMPLETE")
+            phases = e.get("phases", [])
+            self.assertTrue(all(p.get("status") == "COMPLETE" for p in phases),
+                            "rank-0 COMPLETE requires every phase COMPLETE")
+            self.assertEqual(e.get("last_verdict"), "NOT_SUPPORTED")
         else:
-            self.assertEqual(e.get("program_status"), "ACTIVE")
+            self.assertTrue(e.get("next_unfinished_task"),
+                            "active rank-0 must carry a concrete unfinished task")
+            if e.get("status") == "TRIGGER_ONLY":
+                self.assertTrue(str(e.get("task", "")).startswith(TRIGGER_ONLY_TASK_PREFIX))
+                self.assertEqual(e.get("program_status"), "BOUNDED_TRIGGER_ONLY")
+                self.assertTrue(e.get("resume_triggers"))
+            else:
+                self.assertEqual(e.get("program_status"), "ACTIVE")
         # Every other campaign must be demoted, not deleted.
         others = [x for x in frontier if x.get("rank") != 0]
         self.assertTrue(others, "completed campaigns must be retained, not deleted")

@@ -1,15 +1,15 @@
 [
   {
     "rank": 0,
-    "status": "READY_EXECUTE",
-    "program_status": "ACTIVE",
+    "status": "COMPLETE",
+    "program_status": "COMPLETE",
     "task": "FCLR-PANEL-FE-001-20261121T085602Z",
     "generated": "20261121T085602Z",
-    "refreshed": "2026-11-21T08:56:02Z",
-    "last_checked": "2026-11-21T08:56:02Z",
-    "last_verdict": "PENDING",
-    "next_action_heavy": "Execute FCLR-PANEL-FE-001: two-way (coin+hour) fixed-effects funding-conditioning of next-hour log RV on FCLR-001 (H_panelfe_vol) and of hourly liquidation count / notional on the combined panel (H_panelfe_liq); cluster-robust + Driscoll-Kraay HAC SE + Newey-West; RV-tercile and UTC-bucket regime cuts; expanding-window walk-forward OOS (QLIKE for RV, Poisson/NB deviance + QLIKE for liq, Diebold-Mariano) funding-conditioned vs no-funding baseline; 2% materiality floor. Emit prereg freeze + eval triad + independent stdlib recompute + evidence audit + trigger_check under a new research_state/session_<UTC>/ with UTC > 20261121T085602Z.",
-    "next_unfinished_task": "FCLR-PANEL-FE-001 not yet executed. Create research_state/session_<UTC>/ (UTC > 20261121T085602Z) with: fclr_panelfe01_prereg_<UTC>.{json,md} (outcome-blind freeze, outcome_data_inspected_before_freeze=false, panel sha256 asserted); fclr_panelfe01_eval_<UTC>.{py,json,md} (FE estimation + walk-forward, both halves); fclr_panelfe01_recompute_<UTC>.{py,json} (independent stdlib/numpy recompute that concurs); fclr_panelfe01_evidence_audit_<UTC>.{json,md}; trigger_check_<UTC>.json (non-empty). The FCLR-PANEL-FE-001 gate in scripts/check_handoff_heavywork_gate.py enforces this set for any post-20261121T085602Z session.",
+    "refreshed": "2026-11-21T16:32:18Z",
+    "last_checked": "2026-11-21T16:32:18Z",
+    "last_verdict": "NOT_SUPPORTED",
+    "next_action_heavy": "NONE — all heavy work complete. FCLR-PANEL-FE-001 executed to COMPLETE / ALL PHASES COMPLETE under research_state/session_20261121T130159Z/ (verdict NOT_SUPPORTED on both halves; gate reason=OK; 79 tests OK). Next session: verify green state (`python3 scripts/check_handoff_heavywork_gate.py` → reason=OK; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass; `python3 scripts/next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and STOP CLEANLY. No remaining heavy work on frozen data; reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE or a materially different new free observed-liquidation source.",
+    "next_unfinished_task": "None. FCLR-PANEL-FE-001 all phases COMPLETE under session_20261121T130159Z (prereg + eval + recompute + evidence audit + trigger_check all emitted). No further heavy task on frozen data; the frozen-data frontier is exhausted for new 3-block confirmatory designs (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN).",
     "resume_triggers": [],
     "trigger_status": {},
     "blockers": "None. The 3-block confirmatory frontier is exhausted (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and the liquidation-OOS hypothesis is externally gated, but the panel fixed-effects + walk-forward design is feasible on the existing frozen panels and does NOT require the 3-block structure or any external trigger. This removes the blocked 'await external trigger' dead end.",
@@ -25,23 +25,23 @@
     "phases": [
       {
         "phase": "PREREG_FREEZE",
-        "status": "PENDING",
-        "claim": "Freeze FCLR-PANEL-FE-001 prereg pre-outcomes: H_panelfe_vol + H_panelfe_liq, two-way FE models, inference plan, walk-forward protocol, 2% floor, panel sha256; outcome_data_inspected_before_freeze=false."
+        "status": "COMPLETE",
+        "claim": "Frozen pre-outcomes at research_state/session_20261121T130159Z/fclr_panelfe01_prereg_20261121T130159Z.{json,md}: H_panelfe_vol + H_panelfe_liq, two-way FE models, inference plan, walk-forward protocol, 2% floor, panel sha256 asserted; outcome_data_inspected_before_freeze=false."
       },
       {
         "phase": "PANEL_FE_EVAL",
-        "status": "PENDING",
-        "claim": "Estimate two-way FE funding-conditioning for RV and liquidation halves; cluster-robust + Driscoll-Kraay SE; RV-tercile and UTC-bucket regime cuts."
+        "status": "COMPLETE",
+        "claim": "Two-way FE funding-conditioning estimated for RV and liquidation halves; cluster-robust + Driscoll-Kraay SE; RV-tercile and UTC-bucket regime cuts; walk-forward OOS (QLIKE/Poisson-NB deviance/Diebold-Mariano) funding-conditioned vs no-funding baseline; verdict NOT_SUPPORTED on both halves."
       },
       {
         "phase": "WALKFORWARD_OOS",
-        "status": "PENDING",
-        "claim": "Expanding-window one-step-ahead OOS: funding-conditioned vs no-funding baseline; QLIKE (RV), Poisson/NB deviance + QLIKE (liq); Diebold-Mariano."
+        "status": "COMPLETE",
+        "claim": "Expanding-window one-step-ahead OOS complete; funding-conditioned vs no-funding baseline; QLIKE (RV), Poisson/NB deviance + QLIKE (liq); Diebold-Mariano; both halves NOT_SUPPORTED at 2% materiality floor."
       },
       {
         "phase": "RECOMPUTE_AUDIT",
-        "status": "PENDING",
-        "claim": "Independent stdlib/numpy recompute concurs; evidence audit; non-empty trigger_check."
+        "status": "COMPLETE",
+        "claim": "Independent stdlib/numpy recompute concurs; evidence audit emitted; non-empty trigger_check emitted under session_20261121T130159Z/."
       }
     ],
     "note": "Panel fixed-effects funding-conditioning campaign. Replaces the trigger-gated liquidation-OOS dead end and the exhausted 3-block confirmatory frontier as the rank-0 heavy task. Machine-enforced by the FCLR-PANEL-FE-001 gate family."

@@ -753,12 +753,12 @@
       "description": "FCLR-PANEL-FE-001: panel fixed-effects funding-conditioning of RV (H_panelfe_vol) and liquidation intensity (H_panelfe_liq). Feasible on the existing frozen panels via within-coin/within-hour variation; does not require the exhausted 3-block confirmatory design or any external trigger.",
       "estimand": "two_way_fe_funding_conditioning_rv_and_liq",
       "experiment_id": "FCLR-PANEL-FE-001-20261121T085602Z",
-      "status": "FROZEN_PENDING_EVALUATION",
-      "terminal": false,
-      "terminal_class": null,
-      "last_experiment": null,
-      "last_tested": null,
-      "last_verdict": "PENDING",
+      "status": "NOT_SUPPORTED",
+      "terminal": true,
+      "terminal_class": "NOT_SUPPORTED",
+      "last_experiment": "FCLR-PANEL-FE-001-20261121T130159Z",
+      "last_tested": "2026-11-21T13:01:59Z",
+      "last_verdict": "NOT_SUPPORTED",
       "observed_only": true,
       "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
       "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
@@ -771,9 +771,9 @@
       "distinct_from": "Distinct from FCLR-XSEC-001..008 (pooled cross-sectional regime contrasts), FCLR-LIQ-OOS-FORECAST-001 (time-series 24h QLIKE forecast), and the 3-block confirmatory design (impossible on frozen data). Uses two-way fixed effects + walk-forward over the full panel.",
       "reopen_requires": [],
       "venue": "binance_fclr001_and_combined_liquidation_panel",
-      "verdict_recorded": false,
-      "updated_utc": "2026-11-21T08:56:02Z"
+      "verdict_recorded": true,
+      "updated_utc": "2026-11-21T16:32:18Z"
     }
   ],
-  "updated_utc": "2026-11-21T08:56:02Z"
+  "updated_utc": "2026-11-21T16:32:18Z"
 }
