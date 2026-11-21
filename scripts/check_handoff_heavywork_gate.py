@@ -330,6 +330,7 @@ STARTER_SEALED_PROTOCOL = "research_state/research_protocol.md"
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
+    "fclr_xsec007_",        # FCLR-XSEC-007 cross-panel reconciliation quantitative artifacts
     "independent_recompute_",
     "trigger_readiness_power_calibration_",
     "trigger_readiness_power_ledger_",

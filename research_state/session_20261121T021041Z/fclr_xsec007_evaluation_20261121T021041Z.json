@@ -1,0 +1,353 @@
+{
+  "experiment_id": "FCLR-XSEC-007-20261121T021041Z",
+  "session_utc": "20261121T021041Z",
+  "panel_path_fclr001": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256_fclr001": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_path_liquidation": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256_liquidation": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified_fclr001": true,
+  "panel_hash_verified_liquidation": true,
+  "mechanism": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
+  "estimand": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
+  "outcome_data_inspected_before_freeze": false,
+  "overlapping_coins": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP"
+  ],
+  "coin_name_mapping": {
+    "BTCUSDT": "BTC",
+    "ETHUSDT": "ETH",
+    "BNBUSDT": "BNB",
+    "SOLUSDT": "SOL",
+    "XRPUSDT": "XRP"
+  },
+  "overlap_ts_min": "2026-01-01T00:00:00Z",
+  "overlap_ts_max": "2026-08-31T23:00:00Z",
+  "n_joined_coin_hours": 8819,
+  "n_eval_eligible_coin_hours": 3503,
+  "n_unique_shared_hours": 941,
+  "hours_per_rv_tercile": {
+    "low": 314,
+    "mid": 313,
+    "high": 314
+  },
+  "hours_per_utc_bucket": {
+    "asian": 273,
+    "european": 360,
+    "us": 308
+  },
+  "bucket_edges_utc": {
+    "asian": [
+      0,
+      8
+    ],
+    "european": [
+      8,
+      16
+    ],
+    "us": [
+      16,
+      24
+    ]
+  },
+  "seed": 20261121,
+  "n_bootstrap_reps": 2000,
+  "alpha": 0.05,
+  "materiality_floor": 0.02,
+  "joint_family_size": 12,
+  "holm_correction": "holm",
+  "primary_a_tests": [
+    "rv_tercile_low_funding_contrast_rv",
+    "rv_tercile_mid_funding_contrast_rv",
+    "rv_tercile_high_funding_contrast_rv",
+    "utc_bucket_asian_funding_contrast_notional_weighted",
+    "utc_bucket_european_funding_contrast_notional_weighted",
+    "utc_bucket_us_funding_contrast_notional_weighted"
+  ],
+  "primary_b_tests": [
+    "utc_bucket_asian_funding_contrast_notional_weighted",
+    "utc_bucket_european_funding_contrast_notional_weighted",
+    "utc_bucket_us_funding_contrast_notional_weighted"
+  ],
+  "baseline_tests": [
+    "rv_tercile_low_rv_persistence_baseline_rv",
+    "rv_tercile_mid_rv_persistence_baseline_rv",
+    "rv_tercile_high_rv_persistence_baseline_rv",
+    "utc_bucket_asian_rv_persistence_baseline_notional_weighted",
+    "utc_bucket_european_rv_persistence_baseline_notional_weighted",
+    "utc_bucket_us_rv_persistence_baseline_notional_weighted"
+  ],
+  "tests": {
+    "rv_tercile_low_funding_contrast_rv": {
+      "n_hours": 314,
+      "mean_diff_high_minus_low": -5.882141792929038e-05,
+      "ci_low": -9.310964701411421e-05,
+      "ci_high": -2.569106704870425e-05,
+      "p_value": 0.001,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 114,
+      "positive_diff_share": 0.3630573248407643,
+      "mean_abs_outcome": 0.0005203555176047967,
+      "materiality_effect": 0.11304082677944137,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.006,
+      "holm_passes": true
+    },
+    "rv_tercile_mid_funding_contrast_rv": {
+      "n_hours": 313,
+      "mean_diff_high_minus_low": -8.591982793663028e-05,
+      "ci_low": -0.00013176968486304803,
+      "ci_high": -3.8698902723605036e-05,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 132,
+      "positive_diff_share": 0.4217252396166134,
+      "mean_abs_outcome": 0.000763955094879342,
+      "materiality_effect": 0.11246711817557856,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "rv_tercile_high_funding_contrast_rv": {
+      "n_hours": 305,
+      "mean_diff_high_minus_low": 0.6690333130425734,
+      "ci_low": -0.000373354225551998,
+      "ci_high": 2.0050188407412146,
+      "p_value": 0.272,
+      "ci_excludes_zero": false,
+      "positive_diff_count": 151,
+      "positive_diff_share": 0.49508196721311476,
+      "mean_abs_outcome": 1.0070687816584283,
+      "materiality_effect": 0.6643372580180846,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.8160000000000001,
+      "holm_passes": false
+    },
+    "rv_tercile_low_rv_persistence_baseline_rv": {
+      "n_hours": 314,
+      "mean_diff_high_minus_low": 0.00016494144720996713,
+      "ci_low": 0.00012521884742109818,
+      "ci_high": 0.00020308617627497893,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 257,
+      "positive_diff_share": 0.8184713375796179,
+      "mean_abs_outcome": 0.0005203555176047967,
+      "materiality_effect": 0.31697837657068534,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "rv_tercile_mid_rv_persistence_baseline_rv": {
+      "n_hours": 313,
+      "mean_diff_high_minus_low": 0.00034035879245693245,
+      "ci_low": 0.0002979236413398212,
+      "ci_high": 0.00038535989040202966,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 283,
+      "positive_diff_share": 0.9041533546325878,
+      "mean_abs_outcome": 0.000763955094879342,
+      "materiality_effect": 0.4455219877952228,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "rv_tercile_high_rv_persistence_baseline_rv": {
+      "n_hours": 305,
+      "mean_diff_high_minus_low": 0.6705315838888155,
+      "ci_low": 0.0011555836111023386,
+      "ci_high": 2.0064290128302384,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 278,
+      "positive_diff_share": 0.9114754098360656,
+      "mean_abs_outcome": 1.0070687816584283,
+      "materiality_effect": 0.6658250122544683,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "utc_bucket_asian_funding_contrast_notional_weighted": {
+      "n_hours": 272,
+      "mean_diff_high_minus_low": -306684.6424538297,
+      "ci_low": -936271.9256046205,
+      "ci_high": 268218.1845100056,
+      "p_value": 0.359,
+      "ci_excludes_zero": false,
+      "positive_diff_count": 123,
+      "positive_diff_share": 0.4522058823529412,
+      "mean_abs_outcome": 1280376.7201305754,
+      "materiality_effect": 0.23952688113741508,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.718,
+      "holm_passes": false
+    },
+    "utc_bucket_european_funding_contrast_notional_weighted": {
+      "n_hours": 359,
+      "mean_diff_high_minus_low": -487717.4391589842,
+      "ci_low": -1901715.83501342,
+      "ci_high": 459339.53197773406,
+      "p_value": 0.476,
+      "ci_excludes_zero": false,
+      "positive_diff_count": 171,
+      "positive_diff_share": 0.4763231197771588,
+      "mean_abs_outcome": 1452872.5296614377,
+      "materiality_effect": 0.3356918306333707,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.476,
+      "holm_passes": false
+    },
+    "utc_bucket_us_funding_contrast_notional_weighted": {
+      "n_hours": 301,
+      "mean_diff_high_minus_low": 995930.022363252,
+      "ci_low": 288461.1116623108,
+      "ci_high": 1920372.9255742708,
+      "p_value": 0.001,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 157,
+      "positive_diff_share": 0.521594684385382,
+      "mean_abs_outcome": 1196131.3889486615,
+      "materiality_effect": 0.8326259402310507,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.005,
+      "holm_passes": true
+    },
+    "utc_bucket_asian_rv_persistence_baseline_notional_weighted": {
+      "n_hours": 272,
+      "mean_diff_high_minus_low": -997309.0641236797,
+      "ci_low": -1622693.078550481,
+      "ci_high": -423259.13080899935,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 89,
+      "positive_diff_share": 0.3272058823529412,
+      "mean_abs_outcome": 1280376.7201305754,
+      "materiality_effect": 0.7789184608276634,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "utc_bucket_european_rv_persistence_baseline_notional_weighted": {
+      "n_hours": 359,
+      "mean_diff_high_minus_low": -1537437.2389026554,
+      "ci_low": -2619753.584156231,
+      "ci_high": -851932.9948158298,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 101,
+      "positive_diff_share": 0.28133704735376047,
+      "mean_abs_outcome": 1452872.5296614377,
+      "materiality_effect": 1.058205181469653,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "utc_bucket_us_rv_persistence_baseline_notional_weighted": {
+      "n_hours": 301,
+      "mean_diff_high_minus_low": -486771.5918591514,
+      "ci_low": -1100482.4038157326,
+      "ci_high": 383271.6272021883,
+      "p_value": 0.216,
+      "ci_excludes_zero": false,
+      "positive_diff_count": 90,
+      "positive_diff_share": 0.29900332225913623,
+      "mean_abs_outcome": 1196131.3889486615,
+      "materiality_effect": 0.4069549519028999,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.864,
+      "holm_passes": false
+    }
+  },
+  "primary_a_passed": false,
+  "primary_b_passed": true,
+  "gate": {
+    "ci_supports_improvement_primary_a": false,
+    "ci_supports_improvement_primary_b": true,
+    "holm_passes_primary_a": false,
+    "holm_passes_primary_b": true,
+    "materiality_met_primary_a": true,
+    "materiality_met_primary_b": true,
+    "gate_passed": false,
+    "verdict": "NOT_SUPPORTED"
+  },
+  "verdict": "NOT_SUPPORTED",
+  "cross_panel_reconciliation": {
+    "shared_hours": 941,
+    "primary_a_passed": false,
+    "primary_b_passed": true,
+    "joint_significance": false,
+    "sign_agreements": [
+      {
+        "bucket_test": "utc_bucket_asian_funding_contrast_notional_weighted",
+        "high_rv_sign": 1.0,
+        "bucket_sign": -1.0,
+        "sign_agreement": false
+      },
+      {
+        "bucket_test": "utc_bucket_european_funding_contrast_notional_weighted",
+        "high_rv_sign": 1.0,
+        "bucket_sign": -1.0,
+        "sign_agreement": false
+      },
+      {
+        "bucket_test": "utc_bucket_us_funding_contrast_notional_weighted",
+        "high_rv_sign": 1.0,
+        "bucket_sign": 1.0,
+        "sign_agreement": true
+      }
+    ],
+    "magnitude_correlation": [
+      {
+        "bucket": "asian",
+        "n_shared_hours": 96,
+        "effect_size_correlation": -0.04573716118814636
+      },
+      {
+        "bucket": "european",
+        "n_shared_hours": 112,
+        "effect_size_correlation": -0.18072131437262792
+      },
+      {
+        "bucket": "us",
+        "n_shared_hours": 97,
+        "effect_size_correlation": -0.02132694810967425
+      }
+    ]
+  },
+  "cross_reference": {
+    "fclr_xsec_002_high_rv_funding_ci": [
+      0.0046,
+      0.2348
+    ],
+    "fclr_xsec_002_verdict": "SUPPORTED (high-RV tercile, next-hour RV)",
+    "fclr_xsec_004_low_rv_funding_ci": [
+      448605.26,
+      841155.73
+    ],
+    "fclr_xsec_004_verdict": "SUPPORTED (count-based, low-RV tercile)",
+    "fclr_xsec_005_low_rv_funding_ci": [
+      452972.9,
+      850198.89
+    ],
+    "fclr_xsec_005_verdict": "SUPPORTED (notional-weighted, low-RV tercile)",
+    "fclr_xsec_006_all_buckets_funding_ci": {
+      "asian": [
+        162051,
+        521424
+      ],
+      "european": [
+        334550,
+        782272
+      ],
+      "us": [
+        94750,
+        698082
+      ]
+    },
+    "fclr_xsec_006_verdict": "SUPPORTED (notional-weighted, all three UTC session buckets)"
+  }
+}

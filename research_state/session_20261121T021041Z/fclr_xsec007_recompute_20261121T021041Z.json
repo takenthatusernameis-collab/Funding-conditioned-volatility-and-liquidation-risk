@@ -1,0 +1,271 @@
+{
+  "experiment_id": "FCLR-XSEC-007-RECOMPUTE-20261121T021041Z",
+  "session_utc": "20261121T021041Z",
+  "panel_path_a": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256_a": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_path_b": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256_b": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified_a": true,
+  "panel_hash_verified_b": true,
+  "estimand": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
+  "outcome_data_inspected_before_freeze": false,
+  "overlapping_coins": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP"
+  ],
+  "n_joined_rows": 8819,
+  "n_eval_coin_hours": 4129,
+  "n_shared_hours": 1383,
+  "hours_per_tercile": {
+    "lo": 511,
+    "md": 411,
+    "hi": 461
+  },
+  "hours_per_bucket": {
+    "asian": 392,
+    "european": 528,
+    "us": 463
+  },
+  "seed": 20261121,
+  "n_bootstrap_reps": 2000,
+  "alpha": 0.05,
+  "materiality_floor": 0.02,
+  "joint_family_size": 12,
+  "holm_correction": "holm",
+  "tests": {
+    "terc_lo_fund_to_rv": {
+      "n": 507,
+      "mean_diff": -0.00018518268066511557,
+      "ci_lo": -0.0003338889101332403,
+      "ci_hi": -4.216091948386961e-05,
+      "p": 0.013,
+      "excludes_zero": true,
+      "pos": 219,
+      "materiality": 0.14719456439994077,
+      "floor_met": true,
+      "holm_adj_p": 0.11699999999999999,
+      "holm_ok": false
+    },
+    "terc_md_fund_to_rv": {
+      "n": 354,
+      "mean_diff": 5.8055331784646915,
+      "ci_lo": 2.156405691204496,
+      "ci_hi": 9.905418098618975,
+      "p": 0.003,
+      "excludes_zero": true,
+      "pos": 150,
+      "materiality": 2.0285007552234116,
+      "floor_met": true,
+      "holm_adj_p": 0.03,
+      "holm_ok": true
+    },
+    "terc_hi_fund_to_rv": {
+      "n": 218,
+      "mean_diff": 2.868288664212503,
+      "ci_lo": -1.6817569633750116,
+      "ci_hi": 7.553128903018449,
+      "p": 0.229,
+      "excludes_zero": false,
+      "pos": 101,
+      "materiality": 0.5875615264454486,
+      "floor_met": true,
+      "holm_adj_p": 1.0,
+      "holm_ok": false
+    },
+    "terc_lo_rv_persist_to_rv": {
+      "n": 507,
+      "mean_diff": -0.00039762352842133165,
+      "ci_lo": -0.0005194152749191911,
+      "ci_hi": -0.000279262195815685,
+      "p": 0.0,
+      "excludes_zero": true,
+      "pos": 200,
+      "materiality": 0.3160555935951023,
+      "floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_ok": true
+    },
+    "terc_md_rv_persist_to_rv": {
+      "n": 357,
+      "mean_diff": -1.995308485600622,
+      "ci_lo": -5.603484788510451,
+      "ci_hi": 1.712801537432662,
+      "p": 0.31,
+      "excludes_zero": false,
+      "pos": 276,
+      "materiality": 0.6971770973523098,
+      "floor_met": true,
+      "holm_adj_p": 0.9299999999999999,
+      "holm_ok": false
+    },
+    "terc_hi_rv_persist_to_rv": {
+      "n": 223,
+      "mean_diff": -2.8592814899774965,
+      "ci_lo": -7.440102105889443,
+      "ci_hi": 1.5059003191041405,
+      "p": 0.246,
+      "excludes_zero": false,
+      "pos": 187,
+      "materiality": 0.5857164300614925,
+      "floor_met": true,
+      "holm_adj_p": 0.984,
+      "holm_ok": false
+    },
+    "bkt_asian_fund_to_liq": {
+      "n": 316,
+      "mean_diff": -395690.1619115718,
+      "ci_lo": -1000113.6110965512,
+      "ci_hi": 127254.98927356176,
+      "p": 0.133,
+      "excludes_zero": false,
+      "pos": 133,
+      "materiality": 0.3178767958753555,
+      "floor_met": true,
+      "holm_adj_p": 0.798,
+      "holm_ok": false
+    },
+    "bkt_european_fund_to_liq": {
+      "n": 409,
+      "mean_diff": -501696.9009362477,
+      "ci_lo": -1723792.9649571488,
+      "ci_hi": 306143.7304891007,
+      "p": 0.36,
+      "excludes_zero": false,
+      "pos": 192,
+      "materiality": 0.3364652838414549,
+      "floor_met": true,
+      "holm_adj_p": 0.72,
+      "holm_ok": false
+    },
+    "bkt_us_fund_to_liq": {
+      "n": 354,
+      "mean_diff": 852365.4253955844,
+      "ci_lo": -169220.6664690646,
+      "ci_hi": 1955507.2551111828,
+      "p": 0.104,
+      "excludes_zero": false,
+      "pos": 177,
+      "materiality": 0.5478271964043137,
+      "floor_met": true,
+      "holm_adj_p": 0.728,
+      "holm_ok": false
+    },
+    "bkt_asian_rv_persist_to_liq": {
+      "n": 317,
+      "mean_diff": -996444.1333473056,
+      "ci_lo": -1631384.1731671859,
+      "ci_hi": -478086.5658579431,
+      "p": 0.0,
+      "excludes_zero": true,
+      "pos": 136,
+      "materiality": 0.8004911389432597,
+      "floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_ok": true
+    },
+    "bkt_european_rv_persist_to_liq": {
+      "n": 415,
+      "mean_diff": 234976.25586581923,
+      "ci_lo": -479030.16711875354,
+      "ci_hi": 1208359.01711286,
+      "p": 0.642,
+      "excludes_zero": false,
+      "pos": 184,
+      "materiality": 0.15758788319870803,
+      "floor_met": true,
+      "holm_adj_p": 0.642,
+      "holm_ok": false
+    },
+    "bkt_us_rv_persist_to_liq": {
+      "n": 355,
+      "mean_diff": -985138.4852234226,
+      "ci_lo": -1922109.051942972,
+      "ci_hi": -188412.18653363935,
+      "p": 0.013,
+      "excludes_zero": true,
+      "pos": 137,
+      "materiality": 0.6331623014618065,
+      "floor_met": true,
+      "holm_adj_p": 0.104,
+      "holm_ok": false
+    }
+  },
+  "primary_a_tests": [
+    "terc_hi_fund_to_rv"
+  ],
+  "primary_b_tests": [
+    "bkt_asian_fund_to_liq",
+    "bkt_european_fund_to_liq",
+    "bkt_us_fund_to_liq"
+  ],
+  "primary_a_all_pass": false,
+  "primary_b_all_pass": false,
+  "gate_passed": false,
+  "verdict": "NOT_SUPPORTED",
+  "reproduces_fclr_xsec007_evaluation": null,
+  "cross_panel_reconciliation": {
+    "shared_hours": 1383,
+    "sign_agreements": [
+      {
+        "bucket_test": "bkt_asian_fund_to_liq",
+        "sign_agreement": false
+      },
+      {
+        "bucket_test": "bkt_european_fund_to_liq",
+        "sign_agreement": false
+      },
+      {
+        "bucket_test": "bkt_us_fund_to_liq",
+        "sign_agreement": true
+      }
+    ],
+    "magnitude_correlations": [
+      {
+        "bucket": "asian",
+        "n": 218,
+        "corr": -0.11519733915655285
+      },
+      {
+        "bucket": "european",
+        "n": 218,
+        "corr": -0.017176387736314996
+      },
+      {
+        "bucket": "us",
+        "n": 218,
+        "corr": 0.09612542414513675
+      }
+    ]
+  },
+  "cross_reference": {
+    "fclr_xsec_002_high_rv_funding_ci": [
+      0.0046,
+      0.2348
+    ],
+    "fclr_xsec_004_low_rv_funding_ci": [
+      448605.26,
+      841155.73
+    ],
+    "fclr_xsec_005_low_rv_funding_ci": [
+      452972.9,
+      850198.89
+    ],
+    "fclr_xsec_006_all_buckets_funding_ci": {
+      "asian": [
+        162051,
+        521424
+      ],
+      "european": [
+        334550,
+        782272
+      ],
+      "us": [
+        94750,
+        698082
+      ]
+    }
+  }
+}

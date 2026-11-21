@@ -1,0 +1,113 @@
+{
+  "session_utc": "20261121T021041Z",
+  "experiment_id": "FCLR-XSEC-007-20261121T021041Z",
+  "checks": [
+    {
+      "check": "panel_sha256_fclr001_matches_frozen",
+      "status": "PASS",
+      "detail": "FCLR-001 panel sha256 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4 asserted and verified in evaluation and recompute scripts"
+    },
+    {
+      "check": "panel_sha256_liquidation_matches_frozen",
+      "status": "PASS",
+      "detail": "Combined liquidation panel sha256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14 asserted and verified in evaluation and recompute scripts"
+    },
+    {
+      "check": "protocol_freeze_exists_pre_outcomes",
+      "status": "PASS",
+      "detail": "fclr_xsec007_protocol_freeze_20261121T021041Z.json and .md present; outcome_data_inspected_before_freeze=false"
+    },
+    {
+      "check": "outcome_data_inspected_before_freeze_false",
+      "status": "PASS",
+      "detail": "Protocol freeze and evaluation/recompute both record outcome_data_inspected_before_freeze=false"
+    },
+    {
+      "check": "evaluation_script_executes",
+      "status": "PASS",
+      "detail": "fclr_xsec007_evaluation_20261121T021041Z.py runs without error, emits evaluation JSON, verifies both panel hashes"
+    },
+    {
+      "check": "evaluation_verdict_recorded",
+      "status": "PASS",
+      "detail": "Evaluation verdict NOT_SUPPORTED recorded: Primary A (high-RV tercile funding -> next-hour RV) CI [-0.0004, 2.005] includes zero (p=0.272, Holm adj_p=0.816) does not pass; joint gate requires BOTH primaries"
+    },
+    {
+      "check": "recompute_script_executes",
+      "status": "PASS",
+      "detail": "fclr_xsec007_recompute_20261121T021041Z.py runs without error, emits recompute JSON under independent code path"
+    },
+    {
+      "check": "recompute_concurs_with_evaluation",
+      "status": "PASS",
+      "detail": "Independent recompute verdict NOT_SUPPORTED concur with evaluation; verdict not a single-implementation artifact"
+    },
+    {
+      "check": "evidence_audit_emitted",
+      "status": "PASS",
+      "detail": "evidence_audit_20261121T021041Z.json and .md present in session directory"
+    },
+    {
+      "check": "trigger_check_non_empty",
+      "status": "PASS",
+      "detail": "This trigger_check_20261121T021041Z.json is non-empty and enumerates all acceptance checks with PASS/FAIL"
+    },
+    {
+      "check": "no_sealed_protocol_overwritten",
+      "status": "PASS",
+      "detail": "research_state/research_protocol.md (sealed legacy FCLR-001 2024-01..03) not modified"
+    },
+    {
+      "check": "no_root_level_md_json_added",
+      "status": "PASS",
+      "detail": "All artifacts under research_state/session_20261121T021041Z/; root research_state/ md+json count unchanged at 499/500"
+    },
+    {
+      "check": "no_workflows_modified",
+      "status": "PASS",
+      "detail": ".github/workflows/ untouched"
+    },
+    {
+      "check": "no_terminal_campaigns_rerun",
+      "status": "PASS",
+      "detail": "FCLR-STARTER-001, FCLR-XSEC-001, FCLR-XSEC-002, FCLR-XSEC-003, FCLR-XSEC-004, FCLR-XSEC-005, FCLR-XSEC-006 not re-run"
+    },
+    {
+      "check": "no_network_or_paid_data",
+      "status": "PASS",
+      "detail": "Frozen panels used; no network calls, no credentials, no new data acquisition"
+    },
+    {
+      "check": "cross_reference_explicit",
+      "status": "PASS",
+      "detail": "Evaluation, recompute, and evidence_audit explicitly cross-reference FCLR-XSEC-002, XSEC-004, XSEC-005, XSEC-006"
+    },
+    {
+      "check": "track_separation_maintained",
+      "status": "PASS",
+      "detail": "Observed liquidations (Track A) only; no conflation with modeled boundary breaches (Track B) or RV forecasts"
+    },
+    {
+      "check": "heavy_artifact_triad_complete",
+      "status": "PASS",
+      "detail": "Protocol freeze, evaluation, recompute, evidence_audit, trigger_check all present and non-empty in session directory"
+    },
+    {
+      "check": "verdict_honest_null_not_threshold_shopped",
+      "status": "PASS",
+      "detail": "Verdict NOT_SUPPORTED preserved per protocol; 2% materiality floor not relaxed after seeing outcomes"
+    },
+    {
+      "check": "gate_check_passes",
+      "status": "PASS",
+      "detail": "python3 scripts/check_handoff_heavywork_gate.py exits 0 (verified this session)"
+    },
+    {
+      "check": "unit_tests_pass",
+      "status": "PASS",
+      "detail": "python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures (verified this session)"
+    }
+  ],
+  "all_pass": true,
+  "verdict": "NOT_SUPPORTED"
+}

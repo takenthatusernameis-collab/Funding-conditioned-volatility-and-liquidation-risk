@@ -271,6 +271,10 @@ def main() -> None:
     g_join = g[["coin", "hour", "notional_weighted_intensity", "abs_fund_pct", "rv24h", "next_hour_notional_weighted_intensity", "next_hour_event_count"]].copy()
 
     joined = f_join.merge(g_join, on=["coin", "hour"], how="inner", suffixes=("_fclr", "_liq"))
+    # Use the FCLR-001 funding + RV as the single consistent predictor/regime
+    # measure across both primaries so the "same coins drive both effects"
+    # reconciliation is clean (same predictor, same hours, two outcomes).
+    joined = joined.rename(columns={"rv24h_fclr": "rv24h", "abs_fund_pct_fclr": "abs_fund_pct"})
     print(f"Joined rows: {len(joined)}, unique hours: {joined['hour'].nunique()}")
 
     # --- Market-wide RV per hour + RV tercile ---
@@ -402,17 +406,15 @@ def main() -> None:
     # vs liq intensity contrast (each bucket) on shared hours.
     def hourly_effect(sub, group_col, outcome_col):
         both = paired_hourly_diff(sub, group_col, outcome_col)
-        return both[["diff"]].rename(columns={"diff": "effect"})
+        return both.reset_index()[["hour", "diff"]].rename(columns={"diff": "effect"})
 
     df_a_high = add_funding_groups(joined_eval[joined_eval["rv_tercile"] == "high"].copy(), "abs_fund_pct")
     rv_effect_by_hour = hourly_effect(df_a_high, "funding_group", "next_hour_rv")
-    rv_effect_by_hour["hour"] = rv_effect_by_hour.index
 
     mag_corr = []
     for bucket in BUCKET_ORDER:
         df_b_bucket = add_funding_groups(joined_eval[joined_eval["session_bucket"] == bucket].copy(), "abs_fund_pct")
         liq_effect_by_hour = hourly_effect(df_b_bucket, "funding_group", "next_hour_notional_weighted_intensity")
-        liq_effect_by_hour["hour"] = liq_effect_by_hour.index
         merged = rv_effect_by_hour.merge(liq_effect_by_hour, on="hour", suffixes=("_rv", "_liq"))
         if len(merged) > 3:
             corr = float(np.corrcoef(merged["effect_rv"], merged["effect_liq"])[0, 1])

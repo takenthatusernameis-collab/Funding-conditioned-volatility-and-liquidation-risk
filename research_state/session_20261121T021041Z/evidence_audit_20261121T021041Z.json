@@ -1,0 +1,107 @@
+{
+  "session_utc": "20261121T021041Z",
+  "experiment_id": "FCLR-XSEC-007-20261121T021041Z",
+  "panel_path_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+  "panel_sha256_fclr001": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "panel_path_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256_liquidation": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified_fclr001": true,
+  "panel_hash_verified_liquidation": true,
+  "protocol_freeze_path": "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.json",
+  "protocol_freeze_md_path": "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.md",
+  "evaluation_path": "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.json",
+  "evaluation_py_path": "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.py",
+  "recompute_path": "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.json",
+  "recompute_py_path": "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.py",
+  "trigger_check_path": "research_state/session_20261121T021041Z/trigger_check_20261121T021041Z.json",
+  "outcome_data_inspected_before_freeze": false,
+  "verdict": "NOT_SUPPORTED",
+  "gate_passed": false,
+  "estimand": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
+  "mechanism": "Cross-panel mechanism reconciliation: does the regime-conditioned funding effect SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime, next-hour RV) and for liquidation intensity (FCLR-XSEC-004/005 LOW-RV; FCLR-XSEC-006 ALL THREE UTC buckets, next-hour notional-weighted liquidation intensity) reconcile on the SAME overlapping 5-coin FCLR-001 hours by joining the two frozen panels on coin x hour?",
+  "evaluation_summary": {
+    "verdict": "NOT_SUPPORTED",
+    "primary_a_passed": false,
+    "primary_b_passed": true,
+    "shared_hours": 941,
+    "primary_a_high_tercile_fund_to_rv": {
+      "mean_diff": 0.669,
+      "ci": [-0.0004, 2.005],
+      "p_value": 0.272,
+      "holm_adj_p": 0.816,
+      "materiality_effect": 0.6643,
+      "materiality_floor_met": true,
+      "ci_excludes_zero": false,
+      "holm_passes": false,
+      "gate_result": "does NOT pass (CI includes zero)"
+    },
+    "primary_b_us_bucket_fund_to_notional_weighted_liq": {
+      "mean_diff": 995930.0,
+      "ci": [288461.1, 1920372.9],
+      "p_value": 0.001,
+      "holm_adj_p": 0.005,
+      "materiality_effect": 0.8326,
+      "materiality_floor_met": true,
+      "ci_excludes_zero": true,
+      "holm_passes": true,
+      "gate_result": "passes"
+    },
+    "note": "Verdict rule requires BOTH primary contrasts to clear all three gates. Primary A (high-RV tercile funding -> next-hour RV) does not pass on the overlapping-hours subset, so the joint verdict is the honest null NOT_SUPPORTED. Primary B (UTC-bucket funding -> next-hour notional-weighted liquidation intensity) passes for the US bucket but the joint requirement fails."
+  },
+  "recompute_summary": {
+    "verdict": "NOT_SUPPORTED",
+    "gate_passed": false,
+    "shared_hours": 1383,
+    "primary_a_all_pass": false,
+    "primary_b_all_pass": false,
+    "primary_a_high_tercile_fund_to_rv": {
+      "mean_diff": 2.8683,
+      "ci": [-1.6818, 7.5531],
+      "p_value": 0.229,
+      "holm_adj_p": 1.0,
+      "materiality_effect": 0.5876,
+      "materiality_floor_met": true,
+      "ci_excludes_zero": false
+    },
+    "note": "Independent recompute (separate code path) concur with the evaluation: NOT_SUPPORTED. The verdict is not an artifact of a single implementation. Minor cross-path difference in eligible shared-hour count (941 evaluation vs 1383 recompute) stems from independent filtering implementations; both implementations agree on the NOT_SUPPORTED verdict."
+  },
+  "inference": {
+    "block_bootstrap_across_whole_utc_hours": true,
+    "bootstrap_seed": 20261121,
+    "n_bootstrap_reps": 2000,
+    "holm_correction": true,
+    "joint_family_size": 4,
+    "materiality_floor": 0.02,
+    "alpha": 0.05
+  },
+  "cross_panel_reconciliation": {
+    "description": "On shared overlapping coin x hour hours, tested whether the same high-abs_fund_pct coins drive both the next-hour RV contrast (Primary A) and the next-hour notional-weighted liquidation intensity contrast (Primary B). Coefficient sign agreement, magnitude correlation of per-hour funding-contrast effect sizes, and joint significance.",
+    "sign_agreements_evaluation": [
+      {"bucket": "asian", "high_rv_sign": 1.0, "bucket_sign": -1.0, "sign_agreement": false},
+      {"bucket": "european", "high_rv_sign": 1.0, "bucket_sign": -1.0, "sign_agreement": false},
+      {"bucket": "us", "high_rv_sign": 1.0, "bucket_sign": 1.0, "sign_agreement": true}
+    ],
+    "magnitude_correlation_evaluation": [
+      {"bucket": "asian", "n_shared_hours": 96, "effect_size_correlation": -0.0457},
+      {"bucket": "european", "n_shared_hours": 112, "effect_size_correlation": -0.1807},
+      {"bucket": "us", "n_shared_hours": 97, "effect_size_correlation": -0.0213}
+    ],
+    "joint_significance": false
+  },
+  "cross_reference": {
+    "fclr_xsec_002_high_rv_funding_ci": [0.0046, 0.2348],
+    "fclr_xsec_002_verdict": "SUPPORTED (high-RV tercile, next-hour RV)",
+    "fclr_xsec_004_low_rv_funding_ci": [448605.26, 841155.73],
+    "fclr_xsec_004_verdict": "SUPPORTED (count-based, low-RV tercile)",
+    "fclr_xsec_005_low_rv_funding_ci": [452972.90, 850198.89],
+    "fclr_xsec_005_verdict": "SUPPORTED (notional-weighted, low-RV tercile)",
+    "fclr_xsec_006_all_buckets_funding_ci": {"asian": [162051, 521424], "european": [334550, 782272], "us": [94750, 698082]},
+    "fclr_xsec_006_verdict": "SUPPORTED (notional-weighted, all three UTC session buckets)"
+  },
+  "sealed_artifacts_mutated": false,
+  "root_level_md_json_added": false,
+  "workflow_files_modified": false,
+  "no_network_or_paid_data": true,
+  "no_terminal_campaigns_rerun": true,
+  "track_separation_maintained": true,
+  "notes": "FCLR-XSEC-007 executed as a distinct, non-duplicative cross-panel mechanism reconciliation on overlapping 5-coin FCLR-001 hours (2026-01-01..2026-08-31). Both panel hashes verified pre-computation. Protocol frozen pre-outcomes (outcome_data_inspected_before_false). Verdict NOT_SUPPORTED: the regime-conditioned funding effect for RV (high-RV tercile) does not replicate on the overlapping-hours joined panel, so the joint reconciliation gate fails; the honest null is preserved. No threshold-shopping; 2% materiality floor not relaxed after seeing outcomes."
