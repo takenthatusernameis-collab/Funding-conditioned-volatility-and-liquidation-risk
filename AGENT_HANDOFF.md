@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T14:14:07Z (refreshes the 2026-11-21T13:58:51Z handoff; FCLR-PANEL-FE-001 eval phase COMPLETE — gate reason=OK, 79 tests OK)
+**Timestamp:** 2026-11-21T14:17:40Z (refreshes the 2026-11-21T14:14:07Z handoff; FCLR-PANEL-FE-001 eval phase COMPLETE — gate reason=OK, 79 tests OK)
 **Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, COMPLETE — eval triad + recompute + evidence audit + trigger_check all emitted under `research_state/session_20261121T130159Z/`; verdict NOT_SUPPORTED on both halves; 2% materiality floor preserved)
 **Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE. All required artifacts emitted: `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}`, `fclr_panelfe01_recompute_20261121T130159Z.{py,json}`, `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}`, `evidence_audit_20261121T130159Z.json` (gate-critical `evidence_audit_` prefix), `trigger_check_20261121T130159Z.json` (non-empty). Both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation). Gate `reason=OK`; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (unchanged; no root-level files added).
 **Remaining heavy work:** None. The PANEL_FE_REQUIRED artifact set is complete under `session_20261121T130159Z/`; the gate that previously FAILED now PASSES. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, the Track A/B/C families, and FCLR-SESSION-SYNTHESIS-01) are terminal/superseded.
@@ -13,7 +13,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T14:14:07Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T14:17:40Z)
 
 **FCLR-PANEL-FE-001 is COMPLETE.** The panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with walk-forward out-of-sample evaluation, has been fully executed under `research_state/session_20261121T130159Z/`. The prereg freeze was ALREADY COMPLETE (session_20261121T130159Z, outcome-blind, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
 
