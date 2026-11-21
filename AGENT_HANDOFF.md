@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T01:54:18Z
+**Timestamp:** 2026-11-21T02:04:03Z
 **Sole active campaign:** FCLR-XSEC-007-20261121T015418Z (rank-0, READY_EXECUTE/ACTIVE, verdict pending)
 **Latest completed heavy session on disk:** session_20261121T010934Z (FCLR-XSEC-006, verdict SUPPORTED — UTC-session-bucketed notional-weighted funding contrast CI Asian [162051, 521424], European [334550, 782272], US [94750, 698082], all p≤0.013, Holm adj_p≤0.013, materiality 0.26-0.57 ≥ 0.02; independent recompute reproduces; cross-reference: FCLR-XSEC-004 count-based low-RV CI [448605, 841156] and FCLR-XSEC-005 notional-weighted low-RV CI [452973, 850199] both SUPPORTED; divergence: session-bucketed effect appears in ALL THREE buckets, not confined to low-RV regime)
 **Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures.
@@ -10,11 +10,11 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T01:54:18Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T02:04:03Z)
 
 **Why this is the focus (repository-name priority + heaviest non-duplicative work):** This repository is `Funding-conditioned-volatility-and-liquidation-risk`. As of session_20261121T010934Z **both halves of the mandate are now SUPPORTED across regime definitions**: FCLR-XSEC-002 (volatility, HIGH-RV regime) and FCLR-XSEC-004/005 (liquidation intensity, LOW-RV regime — count-based CI [448605, 841156] and notional-weighted CI [452973, 850199], both p=0.0, Holm adj_p 0.0, materiality ~0.80) AND FCLR-XSEC-006 (liquidation intensity, ALL THREE UTC session buckets — Asian CI [162051, 521424], European CI [334550, 782272], US CI [94750, 698082], all p≤0.013, materiality 0.26-0.57). The liquidation funding effect is NOT confined to low-RV periods; it persists across all trading sessions when regime is defined by UTC clock-hour buckets. The single heaviest, highest-value, **still-open, non-duplicative** next step matching the repo mandate is to test whether the regime-conditioned funding effects for RV (FCLR-XSEC-002, HIGH-RV) and for liquidation intensity (FCLR-XSEC-004/005/006) can be **reconciled on the same 5-coin FCLR-001 hours** by joining the two frozen panels on coin×hour. That is FCLR-XSEC-007 — a cross-panel mechanism reconciliation on overlapping coins/hours, feasible with zero new data / no network / no credentials. It is the contingency-ladder next mechanism and is *not* a re-run of any terminal campaign.
 
-**State synchronized (this session — 2026-11-21T01:54:18Z):**
+**State synchronized (this session — 2026-11-21T02:04:03Z):**
 - `experiment_frontier.json` rank 0 → FCLR-XSEC-007 READY_EXECUTE/ACTIVE; FCLR-XSEC-006 demoted to SUPERSEDED (last_verdict SUPPORTED); FCLR-XSEC-005 and all others SUPERSEDED.
 - `hypothesis_registry.json` H_fclr_xsec_006 terminal SUPPORTED (verdict_recorded=true, last_experiment session_20261121T010934Z, last_verdict SUPPORTED); H_fclr_xsec_007 NOT_STARTED (terminal=false).
 - handoff-heavywork gate PASS (exit 0); `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures; root churn cap 499/500 holds.
