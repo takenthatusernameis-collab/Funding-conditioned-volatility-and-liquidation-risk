@@ -800,6 +800,56 @@ def hl_extended_frontier() -> dict:
             "min_forward_design_days": MIN_FORWARD_DESIGN_DAYS}
 
 
+# FCLR-LIQ-CONTAGION-001: the cross-coin liquidation-contagion campaign operates
+# on the 1.74M observed-liquidation event panel, a DIFFERENT data domain from the
+# 3-block kline frontier above (Binance 5-symbol + Hyperliquid bulk). Reporting
+# only the exhausted klines would falsely tell the next session that no heavy work
+# remains (the exact failure mode this script exists to prevent). This surfaces the
+# rank-0 contagion campaign as active heavy work while it is unexecuted.
+CONTAGION_CAMPAIGN_PREFIX = "FCLR-LIQ-CONTAGION-"
+CONTAGION_PANEL = RS / "fclr_liq_combined_panel_20261115T181405Z.parquet"
+
+
+def contagion_campaign_status(rs: Path | None = None,
+                              panel: Path | None = None) -> dict:
+    """Report the active cross-coin liquidation-contagion campaign.
+
+    Reads the rank-0 experiment_frontier.json entry and the frozen liquidation
+    panel. Returns ``active_heavy_work=True`` only when rank-0 is the contagion
+    campaign, its program is ACTIVE/READY_EXECUTE, and no post-start session has
+    yet emitted the contagion evaluation artifact. This keeps the status tool
+    honest: the 3-block kline exhaustion does NOT cover the event-panel domain, so
+    a future session must not close the campaign on kline exhaustion.
+    """
+    rs = rs or RS
+    panel = panel or CONTAGION_PANEL
+    frontier = read_json(rs / "experiment_frontier.json")
+    rank0 = None
+    if isinstance(frontier, list):
+        rank0 = next((e for e in frontier if e.get("rank") == 0), None)
+    campaign_id = (rank0 or {}).get("task")
+    status = (rank0 or {}).get("status")
+    program_status = (rank0 or {}).get("program_status")
+    panel_present = panel.is_file()
+    executed = any(rs.glob("session_*/fclr_liq_contagion01_eval_*.json"))
+    active = bool(
+        campaign_id
+        and str(campaign_id).startswith(CONTAGION_CAMPAIGN_PREFIX)
+        and program_status == "ACTIVE"
+        and status in ("READY_EXECUTE", "ACTIVE")
+        and not executed
+    )
+    return {
+        "campaign_id": campaign_id,
+        "status": status,
+        "program_status": program_status,
+        "panel": panel.name,
+        "panel_present": panel_present,
+        "executed": executed,
+        "active_heavy_work": active,
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
