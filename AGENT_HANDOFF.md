@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T20:00:00Z (supersedes 2026-11-21T19:51:14Z)
+**Timestamp:** 2026-11-21T20:39:10Z (supersedes 2026-11-21T20:00:00Z)
 **Sole active campaign:** FCLR-LIQ-CONTAGION-002-20261121T200000Z (rank-0; edge-set robustness + per-edge materiality reconciliation on the frozen 1.74M panel)
 **Latest completed heavy session on disk:** session_20261121T193000Z (FCLR-LIQ-CONTAGION-001, COMPLETE — see §5)
 **Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 77 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-001 executed; the only remaining heavy frontier is CONTAGION-002 (reconciliation), which is feasible on the frozen panel.
@@ -12,7 +12,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T20:00:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T20:39:10Z)
 
 **PRIORITY-0 MISSION: Execute FCLR-LIQ-CONTAGION-002 — edge-set robustness and per-edge materiality reconciliation on the frozen 1.74M liquidation panel. This is HEAVY computation. Do NOT verify and stop.**
 
