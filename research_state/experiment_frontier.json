@@ -1,8 +1,81 @@
 [
   {
     "rank": 0,
-    "status": "COMPLETE",
+    "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-XSEC-006-20261121T005519Z",
+    "generated": "20261121T005519Z",
+    "refreshed": "2026-11-21T00:55:19Z",
+    "last_checked": "2026-11-21T00:55:19Z",
+    "last_verdict": null,
+    "next_action_heavy": "Preregister and execute FCLR-XSEC-006: UTC-session-bucketed (Asian/European/US) regime-conditioned cross-sectional funding effect on next-hour notional-weighted observed liquidation intensity on the frozen combined metpie+ironflow panel (panel_sha256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14). Distinct estimand from FCLR-XSEC-004 (count-based, RV tercile) and FCLR-XSEC-005 (notional-weighted, RV tercile): regime = UTC trading-session bucket at hour t instead of RV tercile; outcome = sum of notional_usd in next hour; predictor = within-(hour,session) abs_fund_pct rank; baseline = within-session RV persistence; block bootstrap across whole UTC hours within each session bucket (seed 20261121, >=2000 reps); Holm over the session-bucket x {funding contrast, persistence baseline} family; 2% materiality floor. Pre-register protocol freeze BEFORE examining liquidation outcomes (outcome_data_inspected_before_freeze=false). Emit protocol_freeze, evaluation, recompute, evidence_audit, and a non-empty trigger_check under a new research_state/session_<UTC>/; synchronize experiment_frontier.json + hypothesis_registry.json; advance AGENT_HANDOFF.md latest-session line. No new data, no network, no credentials. Do not re-run FCLR-STARTER-001 / FCLR-001 / FCLR-XSEC-001 / FCLR-XSEC-002 / FCLR-XSEC-003 / FCLR-XSEC-004 / FCLR-XSEC-005.",
+    "next_unfinished_task": "FCLR-XSEC-006 Step 1: preregister protocol freeze (fclr_xsec006_protocol_freeze_<UTC>.json+.md, session-bucket regime defined ex-ante, outcome_data_inspected_before_freeze=false, distinct estimand from XSEC-004/XSEC-005). Step 2: session-conditioned notional-weighted evaluation (fclr_xsec006_evaluation_<UTC>.py+.json+.md) with block bootstrap + Holm, 2% floor. Step 3: independent recompute + evidence_audit + non-empty trigger_check_<UTC>.json. Step 4: advance FCLR-XSEC-006 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-005 to SUPERSEDED; sync hypothesis_registry.json (H_fclr_xsec_006 terminal with verdict). Acceptance: python3 scripts/check_handoff_heavywork_gate.py exits 0 and python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures; no holdout outcomes inspected before freeze; zero-byte placeholders do NOT count.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None agent-removable: frozen combined panel already built and hash-frozen; no network, no paid/credentialed data needed; distinct estimand from terminal SUPPORTED FCLR-XSEC-002/004/005. Root research_state/ md+json count 499/500: ALL new artifacts go under research_state/session_<UTC>/.",
+    "evidence": {
+      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "rows": 1740415,
+      "coins": 15,
+      "hours": 10052,
+      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+      "features_zero_null": true,
+      "mechanism": "utc_session_bucket_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+      "distinct_from": [
+        "FCLR-001",
+        "FCLR-XSEC-001",
+        "FCLR-XSEC-002",
+        "FCLR-XSEC-003",
+        "FCLR-XSEC-004 (count-based, RV tercile)",
+        "FCLR-XSEC-005 (notional-weighted, RV tercile)",
+        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+      ],
+      "supersedes": "FCLR-XSEC-005-20261121T001225Z"
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "NOT_STARTED",
+        "claim": "Freeze FCLR-XSEC-006 protocol pre-outcomes: outcome = next-hour notional-weighted (sum notional_usd) liquidation intensity; regime = UTC trading-session bucket (Asian/European/US) at hour t; predictor = within-(hour,session) abs_fund_pct rank; baseline = within-session RV persistence; block bootstrap + Holm over session-bucket x {funding contrast, persistence baseline} family + 2% floor. outcome_data_inspected_before_freeze=false. Distinct from FCLR-XSEC-004 (count-based) and FCLR-XSEC-005 (notional-weighted, RV tercile).",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.md"
+        ],
+        "actual_artifacts": []
+      },
+      {
+        "phase": "EVALUATION_AND_GATE",
+        "status": "NOT_STARTED",
+        "claim": "Session-conditioned notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within session bucket (seed 20261121, >=2000 reps), Holm over the family, 2% materiality floor; independent recompute; verdict SUPPORTED or honest NOT_SUPPORTED; cross-reference FCLR-XSEC-004 and FCLR-XSEC-005.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.md",
+          "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.json"
+        ],
+        "actual_artifacts": []
+      },
+      {
+        "phase": "TRIGGER_AND_FRONTIER",
+        "status": "NOT_STARTED",
+        "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-006 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-005 to SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/trigger_check_<UTC>.json",
+          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
+          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
+        ],
+        "actual_artifacts": []
+      }
+    ],
+    "note": "Rank-0 active heavy campaign FCLR-XSEC-006 READY_EXECUTE/ACTIVE. UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation of FCLR-XSEC-004/005. Distinct regime variable (UTC session bucket vs RV tercile) + same frozen panel + same notional-weighted outcome. Heavy work required; not a trigger-check-only session."
+  },
+  {
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-005-20261121T001225Z",
     "generated": "20261121T000722Z",
     "refreshed": "2026-11-21T00:12:25Z",
@@ -13,6 +86,8 @@
     "resume_triggers": [],
     "trigger_status": {},
     "blockers": null,
+    "superseded_at": "2026-11-21T00:55:19Z",
+    "superseded_by": "FCLR-XSEC-006-20261121T005519Z",
     "evidence": {
       "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",

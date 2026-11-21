@@ -564,18 +564,19 @@
       "coins": 15,
       "hours": 10052,
       "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "last_experiment": null,
-      "last_tested": null,
-      "last_verdict": null,
+      "last_experiment": "session_20261121T001225Z",
+      "last_tested": "2026-11-21T00:12:25Z",
+      "last_verdict": "SUPPORTED",
       "observed_only": true,
       "promotable": false,
       "reopen_requires": [],
-      "status": "NOT_STARTED",
-      "terminal": false,
-      "terminal_class": null,
+      "status": "SUPPORTED",
+      "terminal": true,
+      "terminal_class": "SUPPORTED",
       "type": "primary_trackc_xsec_notional_weighted_liquidation_intensity",
       "venue": "hyperliquid_perpetuals",
-      "verdict_recorded": false,
+      "verdict_detail": "Notional-weighted low-RV regime funding contrast CI [452972.90, 850198.89], p=0.0, Holm adj_p 0.0, materiality 0.80 >= 0.02; high-RV regime honest null (CI incl. 0, p=0.324). Independent recompute reproduces SUPPORTED. Strong agreement with FCLR-XSEC-004 count-based low-RV CI [448605.26, 841155.73].",
+      "verdict_recorded": true,
       "distinct_from": [
         "FCLR-001",
         "FCLR-XSEC-001",
@@ -586,8 +587,42 @@
         "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
         "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
       ],
-      "note": "Rank-0 active heavy campaign FCLR-XSEC-005. Notional-weighted (dollar severity) confirmation of FCLR-XSEC-004. Distinct estimand (notional-weighted vs count) + same frozen panel. Preregister pre-outcomes before examining liquidation outcomes."
+      "note": "EXECUTED and SUPPORTED in session_20261121T001225Z. Notional-weighted (dollar severity) confirmation of FCLR-XSEC-004. Distinct estimand (notional-weighted vs count) + same frozen panel. Low-RV regime SUPPORTED, high-RV honest null; strong agreement with count-based result. Independent recompute reproduces. Demoted in frontier; succeeded by FCLR-XSEC-006 as rank-0 active heavy campaign."
+    },
+    {
+      "id": "H_fclr_xsec_006",
+      "description": "UTC-session-bucketed (Asian/European/US) regime-conditioned cross-sectional funding effect on NEXT-HOUR NOTIONAL-WEIGHTED OBSERVED LIQUIDATION INTENSITY (sum of notional_usd, not event count) on the frozen combined metpie+ironflow panel; distinct regime variable (UTC session bucket vs RV tercile) from FCLR-XSEC-004 (count-based) and FCLR-XSEC-005 (notional-weighted, RV tercile).",
+      "estimand": "utc_session_bucket_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+      "experiment_id": "FCLR-XSEC-006-20261121T005519Z",
+      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "coins": 15,
+      "hours": 10052,
+      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+      "last_experiment": null,
+      "last_tested": null,
+      "last_verdict": null,
+      "observed_only": true,
+      "promotable": false,
+      "reopen_requires": [],
+      "status": "NOT_STARTED",
+      "terminal": false,
+      "terminal_class": null,
+      "type": "primary_trackc_xsec_notional_weighted_liquidation_intensity_session_bucket",
+      "venue": "hyperliquid_perpetuals",
+      "verdict_recorded": false,
+      "distinct_from": [
+        "FCLR-001",
+        "FCLR-XSEC-001",
+        "FCLR-XSEC-002",
+        "FCLR-XSEC-003",
+        "FCLR-XSEC-004 (count-based, RV tercile)",
+        "FCLR-XSEC-005 (notional-weighted, RV tercile)",
+        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+      ],
+      "note": "Rank-0 active heavy campaign FCLR-XSEC-006 READY_EXECUTE/ACTIVE. UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation. Preregister protocol freeze pre-outcomes before examining liquidation outcomes."
     }
   ],
-  "updated_utc": "2026-11-21T00:07:22Z"
+  "updated_utc": "2026-11-21T00:55:19Z"
 }
