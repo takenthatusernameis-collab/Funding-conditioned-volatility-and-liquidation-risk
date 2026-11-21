@@ -1,0 +1,138 @@
+{
+  "experiment_id": "FCLR-PANEL-FE-001-20261121T130159Z",
+  "campaign": "FCLR-PANEL-FE-001",
+  "session": "session_20261121T130159Z",
+  "generated_utc": "2026-11-21T13:01:59Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "outcome_data_inspected_before_freeze_note": "This prereg was frozen before any RV or liquidation outcome statistic was computed. The only prior inspection was metadata/coverage (row counts, null fractions, timestamp ranges, per-coin event counts) required to make the design executable; no target distribution, coefficient, or forecast metric was observed.",
+  "repository": "Funding-conditioned-volatility-and-liquidation-risk",
+  "repository_name_priority": "Two scientific halves reconciled by funding conditioning: (a) does the funding rate condition realized volatility (RV)? (b) does it condition liquidation risk/intensity? This campaign attacks both halves with a two-way (coin + hour) fixed-effects panel on the full frozen panels, which uses within-coin, within-hour variation and therefore does not require the 3 mutually non-overlapping >=127-day contiguous blocks that the time-series frontier reports as unavailable.",
+
+  "frozen_inputs": {
+    "primary_panel_fclr001": {
+      "path": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "rows": 29136,
+      "cols": 22,
+      "coins": ["BNBUSDT", "BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT"],
+      "hourly_from": "2026-01-01T00:00:00Z",
+      "hourly_to": "2026-08-31T23:00:00Z",
+      "splits": {
+        "train": "2026-01-01T00:00:00Z..2026-03-17T23:00:00Z",
+        "validation": "2026-03-25T00:00:00Z..2026-04-30T23:00:00Z",
+        "test": "2026-05-08T00:00:00Z..2026-08-06T23:00:00Z",
+        "embargo_days": 7
+      },
+      "null_notes": "premium is 100% null (NOT_COMPUTABLE_WITHOUT_INDEX_PRICE) and must NOT be used. funding_asof_lag_h is HOURS-SINCE-LAST-FUNDING (values ~1,2,3,...), NOT a funding rate. The signed funding rate is signed_funding."
+    },
+    "combined_liquidation_panel": {
+      "path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "rows": 1740415,
+      "coins": ["AAVE", "ADA", "AVAX", "BNB", "BTC", "CRV", "DOGE", "ETH", "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP"],
+      "n_coins": 15,
+      "from": "2025-03-22T19:00:18Z",
+      "to": "2026-10-31T22:02:10Z",
+      "sources": {"ironflow": 1555142, "metpie": 185273},
+      "label_kind": "observed_liquidation_events_Track_A",
+      "null_notes": "fundingRate, abs_fund_pct, notional_usd, rv24h, rv168h are non-null on all rows."
+    }
+  },
+
+  "hypotheses": [
+    {
+      "id": "H_panelfe_vol",
+      "half": "a_volatility",
+      "directional_claim": "In a two-way (coin + hour) fixed-effects panel on FCLR-001, the coefficient on signed_funding in a regression of next-hour log RV is non-zero and economically material (>= 2% relative effect per 1-SD funding shock).",
+      "primary_outcome": "next-hour log_rv1h = log(rv1h) shifted one hour forward within coin",
+      "robustness_outcome": "target_rv24h (log)",
+      "predictor": "signed_funding (and abs_funding_pct_trail as a sign-blind robustness)",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "Implied change in log RV from a +1 sample-SD shock to signed_funding must be >= 0.02 in absolute value. The floor is frozen here and must NOT be relaxed after outcomes are seen."
+    },
+    {
+      "id": "H_panelfe_liq",
+      "half": "b_liquidation",
+      "directional_claim": "In a two-way (coin + hour) fixed-effects panel on the hourly-aggregated combined liquidation panel, the coefficient on fundingRate (and abs_fund_pct) in regressions of log(1+liq_count) and log(1+notional_usd) is non-zero and economically material (>= 2% relative effect per 1-SD funding shock).",
+      "primary_outcome": "log(1 + hourly liquidation count) and log(1 + hourly liquidation notional sum)",
+      "predictor": "fundingRate (hourly mean of events inside the hour) and abs_fund_pct (hourly mean)",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "Implied change in log(1+count) / log(1+notional) from a +1 sample-SD shock to fundingRate must be >= 0.02 in absolute value. Frozen; not relaxed post-outcomes."
+    }
+  ],
+
+  "models": {
+    "specification": "Two-way fixed-effects (coin + hour-of-day) panel regression estimated by the within (alternating-projection demeaning) transformation. y~ = beta * x~ + e~ where ~ denotes residuals after projecting out coin and hour-of-day fixed effects.",
+    "half_a": [
+      "A1: next_log_rv1h ~ coin_FE + hour_FE + signed_funding",
+      "A2 (robustness): log_target_rv24h ~ coin_FE + hour_FE + signed_funding",
+      "A3 (robustness): next_log_rv1h ~ coin_FE + hour_FE + abs_funding_pct_trail"
+    ],
+    "half_b": [
+      "B1: log1p(liq_count) ~ coin_FE + hour_FE + funding_rate_mean",
+      "B2: log1p(liq_notional) ~ coin_FE + hour_FE + funding_rate_mean",
+      "B3 (robustness): log1p(liq_count) ~ coin_FE + hour_FE + abs_fund_pct_mean"
+    ],
+    "hourly_aggregation_rule_half_b": "Collapse the event-level combined liquidation panel to (coin, floor-hour) by count of events and sum of notional_usd. Build the COMPLETE hourly grid over each coin's observed span so that zero-event hours are explicit zeros with has_event=False (flagged, not silently fabricated). The funding predictor for an hour is the mean of fundingRate across events observed inside that hour; for zero-event hours the funding rate is carried from the most recent prior in-panel funding observation (forward fill of FUNDING only, never of the outcome), flagged funding_is_ffill=True. If no prior funding exists, the hour is dropped and counted."
+  },
+
+  "inference": {
+    "primary_se": "cluster-robust (CR1) by coin",
+    "secondary_se": "Driscoll-Kraay HAC (Bartlett kernel) on the time-series of cross-sectional moment sums h_t = sum_i x_it e_it; lag L = floor(4*(T/100)^(2/9))",
+    "tertiary_se": "Newey-West HAC on the stacked within-transformed series (same lag rule)",
+    "report_all_three": true,
+    "few_clusters_caveat": "Only 5 coins in FCLR-001; cluster-robust SE with G=5 is reported but the effective number of clusters is small, so the Driscoll-Kraay / Newey-West time-series HAC SE are the more reliable dependence-robust measures. This caveat is stated in every verdict.",
+    "multiple_testing": "Holm familywise correction across the pre-registered primary contrasts within each half; raw and Holm-adjusted p-values both reported. Secondary/robustness contrasts are declared but not used to promote."
+  },
+
+  "walk_forward_oos": {
+    "design": "Strictly chronological expanding-window one-step-ahead. At each daily refit origin (00:00 UTC) the model is re-estimated using only data at or before the origin; all hours in the following day are forecast one-step-ahead. No future information enters any forecast origin. The frozen split boundaries are respected as a minimum (train precedes validation precedes test, with the 7-day embargo).",
+    "half_a": {
+      "target": "next-hour rv1h (level)",
+      "models": "funding-conditioned FE (coin+hour FE + signed_funding) vs no-funding baseline (coin+hour FE only)",
+      "forecast_map": "exp(predicted log rv1h) -> variance forecast; smearing not applied because the same monotone map is applied to both arms, so the QLIKE comparison is internally fair",
+      "metric": "QLIKE(rv_actual, rv_forecast) = rv_actual/rv_forecast - log(rv_actual/rv_forecast) - 1",
+      "relative_reduction": "(meanQLIKE_baseline - meanQLIKE_funding) / meanQLIKE_baseline",
+      "dm_test": "Diebold-Mariano on the daily-mean QLIKE loss differential with Newey-West HAC variance; H0: equal predictive accuracy"
+    },
+    "half_b": {
+      "target": "hourly liquidation notional intensity (level)",
+      "models": "funding-conditioned FE (coin+hour FE + funding_rate_mean) vs no-funding baseline (coin+hour FE only)",
+      "forecast_map": "expm1(predicted log1p(notional)) -> notional forecast",
+      "metric": "QLIKE(notional_actual, notional_forecast); Poisson deviance also reported as a robustness",
+      "relative_reduction": "(meanQLIKE_baseline - meanQLIKE_funding) / meanQLIKE_baseline",
+      "dm_test": "Diebold-Mariano on the daily-mean QLIKE loss differential with Newey-West HAC variance"
+    },
+    "no_random_split": true,
+    "purge_embargo_days": 7
+  },
+
+  "regime_cuts": [
+    "half_a: RV tercile of trailing rv24h (low/mid/high), UTC session bucket (Asia/EU/US)",
+    "half_b: UTC session bucket (Asia/EU/US) of the liquidation hour"
+  ],
+
+  "decision_rule": {
+    "support_requires": [
+      "coefficient non-zero under at least the Driscoll-Kraay or Newey-West HAC SE (95% CI excludes 0)",
+      "implied effect from a 1-SD funding shock >= 2% relative (materiality floor)",
+      "Holm-adjusted p < 0.05 within the declared family",
+      "walk-forward QLIKE relative reduction > 0 with Diebold-Mariano not rejecting equal accuracy in the wrong direction",
+      "not dominated by a single coin or a single time block"
+    ],
+    "a_null_is_recorded_as": "NOT_SUPPORTED",
+    "no_threshold_shopping": true
+  },
+
+  "hard_constraints_honored": [
+    "outcome_data_inspected_before_freeze=false",
+    "both frozen panel sha256 asserted in the eval script header before any read",
+    "premium never used (all-null)",
+    "funding_asof_lag_h is hours-since-funding and is NOT used as a rate",
+    "no random train/test split; strictly chronological walk-forward",
+    "materiality floor 0.02 frozen and not relaxed",
+    "observed liquidations kept distinct from modeled boundary breaches"
+  ]
+}
