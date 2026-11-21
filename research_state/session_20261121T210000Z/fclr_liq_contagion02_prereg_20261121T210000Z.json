@@ -1,0 +1,133 @@
+{
+  "experiment_id": "FCLR-LIQ-CONTAGION-002-20261121T210000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-002",
+  "session": "session_20261121T210000Z",
+  "generated_utc": "2026-11-21T21:00:00Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "outcome_data_inspected_before_freeze_note": "This prereg is frozen before any reconciliation statistic (per-edge variance-explained, robustness-ladder edge sets, tercile/stability overlap, block-bootstrap selection frequency) is computed. The only prior inspection is metadata/coverage (row counts, null fractions, timestamp ranges, per-coin event counts, panel sha256) required to make the design executable. No target distribution, edge weight, causality p-value, variance-explained value, or network metric was observed.",
+  "repository": "Funding-conditioned-volatility-and-liquidation-risk",
+  "campaign_rationale": "FCLR-LIQ-CONTAGION-001 (session_20261121T193000Z, COMPLETE) disclosed an unresolved methodological discrepancy: eval edge set = 11 edges (Granger-Bonferroni INTERSECT permutation-Bonferroni, density 0.0524) vs independent recompute edge set = 58 edges (empirical-p only, density 0.2762), disagreeing on 47 of 210 directed pairs. The declared 2% per-edge materiality floor was asserted True but never actually computed (no per-edge variance-explained field exists). Funding-tercile and temporal-stability results were never reconciled against the primary edge set. FCLR-LIQ-CONTAGION-002 reuses the SAME frozen panel (no new data, no external trigger, no credentials) to compute per-edge materiality and reconcile edge-set criteria.",
+  "frozen_inputs": {
+    "combined_liquidation_panel": {
+      "path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "rows": 1740415,
+      "n_coins": 15,
+      "coins": ["AAVE", "ADA", "AVAX", "BNB", "BTC", "CRV", "DOGE", "ETH", "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP"],
+      "from": "2025-03-22T19:00:18Z",
+      "to": "2026-10-31T22:02:10Z",
+      "sources": {"ironflow": 1555142, "metpie": 185273},
+      "label_kind": "observed_liquidation_events_Track_A",
+      "columns": ["timestamp", "coin", "notional_usd", "side", "source", "tx_hash", "fundingRate", "premium", "abs_fund_pct", "mark", "ema_dist", "rv24h", "rv168h"],
+      "null_notes": "fundingRate, abs_fund_pct, notional_usd, rv24h, rv168h are non-null on all 1,740,415 rows. premium is present but not required by this protocol."
+    },
+    "prior_campaign_artifacts": {
+      "eval": "research_state/session_20261121T193000Z/fclr_liq_contagion01_eval_20261121T193000Z.json",
+      "recompute": "research_state/session_20261121T193000Z/fclr_liq_contagion01_recompute_20261121T193000Z.json",
+      "evidence_audit": "research_state/session_20261121T193000Z/fclr_liq_contagion01_evidence_audit_20261121T193000Z.json",
+      "eval_edges": 11,
+      "eval_density": 0.05238095238095238,
+      "eval_method": "Granger-Bonferroni INTERSECT permutation-Bonferroni",
+      "recompute_edges": 58,
+      "recompute_density": 0.2761904761904762,
+      "recompute_method": "empirical-p only (300 permutations)",
+      "eval_n_granger_significant": 155,
+      "eval_n_permutation_significant": 16,
+      "disagreement_pairs": 47,
+      "total_pairs": 210,
+      "materiality_floor_asserted_but_uncomputed": true
+    }
+  },
+  "hypotheses": [
+    {
+      "id": "H_recon_materiality",
+      "type": "recon_materiality",
+      "description": "When the 2% per-edge variance-explained floor is actually computed within each VAR(6) Granger regression, the number of contagion edges clearing it is reported with a confidence interval, and the claim \"contagion is material\" is promoted or demoted accordingly (replacing CONTAGION-001's asserted-but-uncomputed flag).",
+      "estimand": "Partial R-squared / variance explained in coin B's hourly liquidation intensity attributable to coin A's lagged liquidations, beyond coin B's own lags, for each directed (A->B) pair.",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "An edge is material only if its partial variance explained >= 0.02 (2% of coin B's liquidation-intensity variance). Frozen; not relaxed after outcomes.",
+      "decision_rule": "Report per-edge variance_explained and the fraction/count of edges clearing 0.02, with a bootstrap confidence interval. If the count clearing the floor is 0, record NOT_SUPPORTED for H_recon_materiality; if > 0 with stable bootstrap support, record SUPPORTED."
+    },
+    {
+      "id": "H_recon_robustness",
+      "type": "recon_robustness",
+      "description": "The contagion edge set is characterised across raw p<0.01, Bonferroni (alpha=0.01/210), Benjamini-Hochberg FDR q=0.05, and permutation-empirical (1000 permutations/pair) criteria; the cross-criterion Jaccard agreement rate is reported, and any edge present under only one criterion is flagged as fragile. The eval-vs-recompute disagreement (47 of 210 pairs) is quantified, not hidden.",
+      "estimand": "Edge-set membership under each of four multiple-testing criteria applied to the same 210 directed Granger tests; pairwise Jaccard similarity between criteria's edge sets.",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "Robustness is assessed jointly with materiality: an edge is robust only if it clears a criterion AND its variance_explained >= 0.02.",
+      "decision_rule": "Report edge-set size and pairwise Jaccard for all six criterion pairs. Flag edges significant under exactly one criterion as fragile. Quantify eval-vs-recompute disagreement explicitly."
+    },
+    {
+      "id": "H_recon_stability",
+      "type": "recon_stability",
+      "description": "Block-bootstrap edge-set stability (per-edge selection frequency over 1000+ moving-block resamples) and tercile/temporal-stability reconciliation are reported against each primary criterion's edge set; an edge is \"stable\" only if it survives the bootstrap AND the criterion ladder.",
+      "estimand": "Per-edge selection frequency under moving-block bootstrap (1000+ resamples); 95% stability interval per edge; Jaccard overlap of funding-tercile (3 splits) and 90-day/30-day rolling edge sets with each primary criterion's edge set.",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "Stability requires both bootstrap selection frequency >= 0.5 (median) AND variance_explained >= 0.02.",
+      "decision_rule": "Report per-edge selection frequency and 95% interval. Report tercile/rolling Jaccard vs each criterion. Declare an edge stable only if it meets bootstrap, ladder, and materiality jointly."
+    }
+  ],
+  "hourly_aggregation": {
+    "rule": "Collapse the event-level combined liquidation panel to (coin, UTC floor-hour) by count of events and sum of notional_usd. Build the COMPLETE hourly grid over each coin's observed span so zero-event hours are explicit zeros (flagged has_event=False; not silently fabricated). Funding predictor for an hour = mean of fundingRate across events inside that hour; for zero-event hours funding is carried from the most recent prior in-panel funding observation (forward fill of FUNDING only, never of the outcome), flagged funding_is_ffill=True. Hours with no prior funding are dropped and counted.",
+    "inputs": "notional_usd (count + sum), fundingRate (hourly mean), rv24h, rv168h (hourly, carried forward within coin), mark/ema_dist (hourly).",
+    "expected_observations": "~50,000 hourly coin-observations (~14,000 per coin)."
+  },
+  "estimator_definitions": {
+    "var_order": 6,
+    "model": "For each directed pair (A->B), regress B's hourly liquidation count on B's own lags (1..6) plus A's lagged liquidation counts (1..6), with an intercept. The restricted model includes only B's own lags + intercept.",
+    "partial_variance_explained": "variance_explained = 1 - SSR_unrestricted / SSR_restricted, where SSR is the residual sum of squares of B on (own lags) vs (own lags + A lags). This is the per-edge materiality quantity CONTAGION-001 never computed.",
+    "granger_f_test": "Joint F-test of the 6 source-lag coefficients in the unrestricted model; p-value from F(6, df_resid).",
+    "raw_p_criterion": "Edge present if Granger p < 0.01 (uncorrected).",
+    "bonferroni_criterion": "Edge present if Granger p < 0.01 / 210 (Bonferroni across 210 directed tests).",
+    "bh_fdr_criterion": "Edge present if Granger p passes Benjamini-Hochberg step-up at q = 0.05 across 210 tests.",
+    "permutation_empirical_criterion": "1000 time-series permutations per directed pair; shuffle source coin's hourly series, recompute Granger F, build null; empirical p = fraction of null F >= observed F. Edge present if empirical p < 0.01.",
+    "jaccard": "Jaccard(A, B) = |A intersect B| / |A union B| over directed-pair edge sets.",
+    "funding_tercile": "Split hours by pair-level funding-rate differential into low/medium/high terciles; recompute the contagion network (Granger + lead-lag) within each tercile; report Jaccard vs each primary criterion's edge set.",
+    "temporal_stability": "Rolling windows: 90-day and 30-day windows, 30-day step, over the panel span; recompute edge set within each window; report edge persistence and Jaccard vs each primary criterion's edge set.",
+    "block_bootstrap": "1000+ moving-block bootstrap resamples of the hourly panel (contiguous UTC blocks, jointly across coins to preserve common market shocks and serial dependence), deterministic seed; per-edge selection frequency = fraction of resamples where the edge is selected under the primary criterion; 95% edge-set stability interval from the empirical quantiles of selection frequencies."
+  },
+  "inference": {
+    "primary_se": "Analytical F-test p-values plus permutation-empirical p-values (1000 permutations/pair).",
+    "multiple_testing": "Bonferroni across 210 directed Granger tests; Benjamini-Hochberg FDR q=0.05; raw p<0.01; permutation-empirical p<0.01. All four criteria reported with edge-set sizes and pairwise Jaccard.",
+    "block_bootstrap": "Block bootstrap across contiguous UTC time blocks (jointly across coins) to preserve common market shocks and serial dependence; deterministic seed 20261121; per-edge selection frequency and 95% stability interval reported.",
+    "no_random_split": true,
+    "chronological_only": true
+  },
+  "decision_rule": {
+    "support_requires_H_recon_materiality": [
+      "Per-edge variance_explained computed for all 210 directed pairs (replacing the uncomputed CONTAGION-001 flag)",
+      "Count of edges clearing the 0.02 floor reported with a bootstrap confidence interval",
+      "If count clearing floor == 0: H_recon_materiality = NOT_SUPPORTED; else SUPPORTED with CI"
+    ],
+    "support_requires_H_recon_robustness": [
+      "Edge-set size and pairwise Jaccard reported for all four criteria (raw, Bonferroni, BH-FDR, permutation-empirical)",
+      "Eval-vs-recompute disagreement (47 of 210 pairs) quantified explicitly",
+      "Edges significant under exactly one criterion flagged as fragile"
+    ],
+    "support_requires_H_recon_stability": [
+      "Per-edge block-bootstrap selection frequency and 95% interval reported for all 210 pairs",
+      "Funding-tercile and 90-day/30-day rolling Jaccard vs each primary criterion reported",
+      "Edge declared stable only if it survives bootstrap AND criterion ladder AND clears 0.02 materiality"
+    ],
+    "a_null_is_recorded_as": "NOT_SUPPORTED",
+    "no_threshold_shopping": true,
+    "outcome_data_inspected_before_freeze": false,
+    "materiality_floor_not_relaxed": true
+  },
+  "hard_constraints_honored": [
+    "outcome_data_inspected_before_freeze=false",
+    "panel sha256 asserted in recon/recompute script headers before any read",
+    "no random train/test split; strictly chronological",
+    "materiality floor 0.02 frozen and not relaxed after outcomes; preserve nulls as NOT_SUPPORTED",
+    "observed liquidations kept distinct from modeled boundary breaches (Track A observed events only)",
+    "no external trigger required; frozen panel is the sole input",
+    "no network, no paid data, no credentials, no new data acquisition",
+    "no root-level research_state/*.md|*.json added (root churn cap 499/500 respected); all artifacts under research_state/session_20261121T210000Z/",
+    "no .github/workflows modification",
+    "no overwrite of research_state/research_protocol.md",
+    "no zero-byte placeholder files; no empty session directory",
+    "recompute is a separate stdlib/numpy code path (no shared helpers with recon script)"
+  ]
+}
