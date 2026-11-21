@@ -359,6 +359,34 @@ PANEL_FE_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-LIQ-CONTAGION-001 hardening: the cross-coin liquidation-contagion and
+# funding-mediated spillover campaign is the current rank-0 focus. The handoff
+# claims it is "machine-enforced by the gate", so the gate must actually bind it:
+# once this campaign starts (start UTC 20261121T174500Z), a post-start session
+# cannot satisfy the gate with a trigger-only, prose-only, audit-only, or
+# arbitrary recompute_* session. It must emit the outcome-blind contagion prereg
+# freeze, the heavy contagion evaluation triad (py+json+md: hourly aggregation,
+# 15x15 lead-lag matrix, 210-pair Granger causality, 1000+ permutations,
+# funding-conditioned splits, temporal stability), the independent stdlib
+# recompute (py+json), the contagion evidence audit (json+md), the gate-critical
+# evidence_audit_ alias (json), and a trigger check, with no zero-byte
+# placeholders. Sessions predating the campaign start are grandfathered so this
+# handoff refresh stays green.
+CONTAGION_CAMPAIGN_RE = re.compile(r"FCLR-LIQ-CONTAGION-(\d+)-(\d{8}T\d{6}Z)")
+CONTAGION_REQUIRED = (
+    ("fclr_liq_contagion01_prereg_", ".json"),
+    ("fclr_liq_contagion01_prereg_", ".md"),
+    ("fclr_liq_contagion01_eval_", ".py"),
+    ("fclr_liq_contagion01_eval_", ".json"),
+    ("fclr_liq_contagion01_eval_", ".md"),
+    ("fclr_liq_contagion01_recompute_", ".py"),
+    ("fclr_liq_contagion01_recompute_", ".json"),
+    ("fclr_liq_contagion01_evidence_audit_", ".json"),
+    ("fclr_liq_contagion01_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -404,6 +432,7 @@ NEW_QUANT_PREFIXES = (
     "trigger_activation_",
     "fclr_session_synth",   # FCLR-SESSION-SYNTHESIS consolidation + quantitative meta-analysis artifacts
     "fclr_panelfe",         # FCLR-PANEL-FE panel fixed-effects funding-conditioning evaluation artifacts
+    "fclr_liq_contagion",   # FCLR-LIQ-CONTAGION cross-coin liquidation contagion + funding spillover artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1329,6 +1358,81 @@ def _panel_fe_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _contagion_state(handoff_text: str, latest_sid: str | None,
+                     latest_files: list[str],
+                     latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-CONTAGION-01 non-avoidance state.
+
+    After the cross-coin liquidation-contagion campaign starts, a post-start
+    session must emit the outcome-blind prereg freeze, the contagion evaluation
+    triad (py+json+md), the independent stdlib recompute (py+json), the contagion
+    evidence audit (json+md), the gate-critical evidence_audit_ alias (json), and
+    a trigger check. Trigger-only, prose-only, audit-only, or arbitrary
+    recompute_* sessions fail closed. Sessions that predate the campaign start
+    are grandfathered so the handoff refresh that announces the campaign stays
+    green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = CONTAGION_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIQ-CONTAGION-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (01 -> fclr_liq_contagion01_*, 02 -> fclr_liq_contagion02_*, ...).
+    tag = f"contagion{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_liq_contagion01_", f"fclr_liq_{tag}_"), suffix)
+        for prefix, suffix in CONTAGION_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -1581,6 +1685,7 @@ def check(repo: Path = REPO) -> dict:
         "starter_001": None,
         "session_synthesis": None,
         "panel_fe": None,
+        "contagion": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -1961,6 +2066,32 @@ def check(repo: Path = REPO) -> dict:
                 if not pfe["has_trigger_check"]:
                     payload["failures"].append(
                         f"PANEL_FE_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-CONTAGION-001: after the cross-coin liquidation-contagion
+            # campaign starts, require the outcome-blind prereg + contagion
+            # evaluation triad + independent stdlib recompute + evidence audit +
+            # gate-critical evidence_audit_ alias + trigger check. Zero-byte
+            # placeholders fail closed, so a future session cannot dodge the heavy
+            # contagion/network analysis with a trigger-only or audit-only session.
+            ct = _contagion_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["contagion"] = ct
+            if ct["required"]:
+                if ct["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "CONTAGION_ARTIFACTS_MISSING:"
+                        + ",".join(ct["missing_required_artifacts"])
+                    )
+                if ct["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "CONTAGION_ARTIFACTS_EMPTY:"
+                        + ",".join(ct["empty_required_artifacts"])
+                    )
+                if not ct["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"CONTAGION_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None

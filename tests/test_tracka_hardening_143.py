@@ -918,6 +918,87 @@ class TestPanelFeCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestContagionCampaignGate(unittest.TestCase):
+    """FCLR-LIQ-CONTAGION-001: once the cross-coin liquidation-contagion campaign
+    has started, a post-start session cannot satisfy the heavy-work gate with a
+    trigger-only, prose-only, audit-only, or arbitrary recompute_* session. It
+    must emit the outcome-blind contagion prereg, the evaluation triad, the
+    independent stdlib recompute, the contagion evidence audit, the gate-critical
+    evidence_audit_ alias, and a trigger check, with no zero-byte placeholders.
+    Sessions predating the campaign are grandfathered."""
+
+    START = "20261121T174500Z"
+
+    def _repo(self, latest_sid="session_20261121T180000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143ct_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the contagion contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-LIQ-CONTAGION-001-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_package(self, sdir, utc):
+        for prefix, suffix in gate.CONTAGION_REQUIRED:
+            if prefix in ("evidence_audit_", "trigger_check_"):
+                continue
+            (sdir / f"{prefix}{utc}{suffix}").write_text("x")
+        (sdir / f"evidence_audit_{utc}.json").write_text("{}")
+
+    def test_post_start_audit_only_fails_closed(self):
+        repo, sdir = self._repo()
+        (sdir / "trigger_check_20261121T180000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["contagion"]["required"])
+        self.assertTrue(res["contagion"]["missing_required_artifacts"])
+        self.assertTrue(any(f.startswith("CONTAGION_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_package_without_trigger_fails_closed(self):
+        repo, sdir = self._repo()
+        self._write_package(sdir, "20261121T180000Z")  # no trigger_check
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["contagion"]["required"])
+        self.assertTrue(any(f.startswith("CONTAGION_TRIGGER_CHECK_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_full_package_and_trigger_passes(self):
+        repo, sdir = self._repo()
+        self._write_package(sdir, "20261121T180000Z")
+        (sdir / "trigger_check_20261121T180000Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["contagion"]["pass"])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261121T130159Z")
+        # Generic new-style heavy work (audit + fresh quant) so only the
+        # grandfathering of the contagion contract is under test.
+        (sdir / "independent_recompute_x.json").write_text("{}")
+        (sdir / "trigger_check_20261121T130159Z.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["contagion"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffGateCliContract(unittest.TestCase):
     def test_cli_json_pass_shape(self):
         import subprocess

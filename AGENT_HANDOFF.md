@@ -1,21 +1,21 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T17:45:00Z (supersedes the 2026-11-21T17:32:28Z "ALL HEAVY WORK COMPLETE" handoff; that handoff was a structural bottleneck that falsely claimed completion while massive unexplored heavy work remains)
+**Timestamp:** 2026-11-21T17:40:00Z (supersedes the 2026-11-21T17:45:00Z handoff; that handoff *announced* FCLR-LIQ-CONTAGION-001 and *claimed* it was "machine-enforced by the gate", but the gate had **no** contagion check — a future session could ignore the campaign and still pass. This handoff removes that avoidance path: the gate now enforces the contagion artifact set. This is the SINGLE durable handoff.)
 **Sole active campaign:** FCLR-LIQ-CONTAGION-001-20261121T174500Z (rank-0, READY_EXECUTE — cross-coin liquidation contagion and funding-mediated spillover analysis on the 1.74M event panel)
-**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE (verdict NOT_SUPPORTED on both halves; this is terminal and must NOT be re-run)
-**Remaining heavy work:** MASSIVE. The 1.74M liquidation event panel (15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for cross-coin contagion, lead-lag dynamics, funding-mediated spillovers, or network structure. This is the highest-value unexplored research direction and requires heavy computation.
-**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (cap 500).
+**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE (verdict NOT_SUPPORTED on both halves; terminal, must NOT be re-run)
+**Remaining heavy work:** MASSIVE and now UN-AVOIDABLE. The 1.74M liquidation event panel (15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for cross-coin contagion, lead-lag dynamics, funding-mediated spillovers, or network structure. This is the highest-value unexplored research direction in the repository and the gate now fails closed until it is executed.
+**Machine-enforced gate baseline (verified at this timestamp):** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 83 pass, 0 fail (includes `TestContagionCampaignGate`). Root `research_state/` md+json count 499/500 (cap 500).
 **Environment:** Python 3.12.3; `numpy 2.5.5`, `pandas 3.1.1`, `scipy 1.18.1`, `pyarrow 26.0.1` verified importable.
 
 ---
 
-> This is the SINGLE durable handoff. It supersedes every prior prose handoff block and every prior `NEXT_SESSION_TASK.md`. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-LIQ-CONTAGION-001). All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, and the Track A/B/C families) are terminal/superseded and must NOT be re-run. A session that does not emit the Section 4 artifact set under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail.
+> This is the SINGLE durable handoff. It supersedes every prior prose handoff block and every prior `NEXT_SESSION_TASK.md`. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-LIQ-CONTAGION-001). All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, and the Track A/B/C families) are terminal/superseded and must NOT be re-run. A session that does not emit the Section 4 artifact set under a new `research_state/session_<UTC>/` directory (UTC > 20261121T174500Z) has NOT completed the handoff and the gate will FAIL.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T17:45:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T17:40:00Z)
 
-**MASSIVE HEAVY WORK REMAINS. The previous handoff falsely claimed completion while ignoring the richest unexplored dataset in the repository.**
+**MASSIVE HEAVY WORK REMAINS AND CAN NO LONGER BE SKIPPED. The previous handoff claimed the contagion campaign was gate-enforced; it was not. It now is.**
 
 The 1.74M liquidation event panel (`research_state/fclr_liq_combined_panel_20261115T181405Z.parquet`, 15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for:
 - **Cross-coin liquidation contagion**: Do liquidations in one coin predict liquidations in another?
@@ -24,14 +24,14 @@ The 1.74M liquidation event panel (`research_state/fclr_liq_combined_panel_20261
 - **Network structure**: What is the topology of liquidation co-occurrence?
 - **Volatility spillovers**: Does RV in one coin predict liquidations in another?
 
-This is the highest-value unexplored research direction and requires HEAVY computation (network analysis, Granger causality, lead-lag analysis, permutation tests, multiple coins).
+This is the highest-value unexplored research direction in a repository whose name is *Funding-conditioned volatility and liquidation risk*. It requires HEAVY computation (network analysis, Granger causality, lead-lag analysis, permutation tests, multiple coins).
 
-**Your task this session:** Execute FCLR-LIQ-CONTAGION-001. Do NOT verify the green state and stop. Do NOT claim completion. Emit the full artifact set under `research_state/session_<UTC>/` with genuine heavy analysis of the 1.74M liquidation panel.
+**Your task this session:** Execute FCLR-LIQ-CONTAGION-001. Do NOT verify the green state and stop. Do NOT claim completion. Emit the full artifact set under `research_state/session_<UTC>/` (UTC > 20261121T174500Z) with genuine heavy analysis of the 1.74M liquidation panel. The gate will reject an audit-only, trigger-only, prose-only, or arbitrary-recompute session.
 
 **Verification (must stay green — run at the start of every session):**
 1. `python3 scripts/check_handoff_heavywork_gate.py` → prints `reason=OK`
-2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail
-3. `python3 scripts/next_campaign_status.py` → confirms FCLR-LIQ-CONTAGION-001 is rank-0 ACTIVE
+2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 83 pass, 0 fail
+3. `python3 scripts/next_campaign_status.py` → confirms executable heavy work remains
 
 **What to do (heavy work required):**
 1. **Prereg freeze** (`fclr_liq_contagion01_prereg_<UTC>.json` + `.md`): Outcome-blind freeze BEFORE any contagion statistics are computed. Define:
@@ -50,7 +50,7 @@ This is the highest-value unexplored research direction and requires HEAVY compu
    - Report: network density, top edges, funding modulation effect, temporal stability
 3. **Independent recompute** (`fclr_liq_contagion01_recompute_<UTC>.py` + `.json`): Independent stdlib/numpy implementation that concurs with eval.
 4. **Evidence audit** (`fclr_liq_contagion01_evidence_audit_<UTC>.json` + `.md`): Tie each verdict to its artifacts.
-5. **Gate-critical evidence audit** (`evidence_audit_<UTC>.json`): REQUIRED by the gate (`evidence_audit_` prefix). A thin alias of the contagion evidence audit suffices.
+5. **Gate-critical evidence audit** (`evidence_audit_<UTC>.json`): REQUIRED by the gate. A thin alias of the contagion evidence audit suffices.
 6. **Trigger check** (`trigger_check_<UTC>.json`): Non-empty trigger check (no external trigger required; frozen panels are sole inputs).
 
 **Hard constraints (do not violate):**
@@ -58,7 +58,7 @@ This is the highest-value unexplored research direction and requires HEAVY compu
 - Do NOT modify `.github/workflows` (protected control plane).
 - Do NOT overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03).
 - Do NOT add any root-level `research_state/*.md` or `research_state/*.json` file — root md+json count is **499/500**; one more breaches the churn cap.
-- Do NOT create empty/placeholder files or empty session directories.
+- Do NOT create empty/placeholder files or empty session directories (the gate checks non-zero size).
 - Do NOT threshold-shop or relax the 2% materiality floor after seeing outcomes.
 - Do NOT claim completion without emitting the full artifact set under a new `research_state/session_<UTC>/`.
 
@@ -70,24 +70,22 @@ This is the highest-value unexplored research direction and requires HEAVY compu
 - Funding-conditioned analysis requires splitting by funding terciles and recomputing
 - Temporal stability requires rolling window analysis
 
-This is NOT a verification-only task. This is genuine heavy research that will take significant compute time.
+This is NOT a verification-only task. It is genuine heavy research that will take significant compute time.
 
 ---
 
 ## 2. Why the previous handoff was a bottleneck (and how this one removes it)
 
-The previous handoff (2026-11-21T17:32:28Z) claimed "ALL HEAVY WORK COMPLETE" and "structural stop" while:
-- The 1.74M liquidation panel had never been analyzed for contagion
-- The 15-coin cross-sectional structure had never been exploited
-- Lead-lag dynamics had never been tested
-- Network topology had never been mapped
-- Funding-mediated spillovers had never been investigated
+The previous handoff (2026-11-21T17:45:00Z) made two mistakes:
+1. It claimed FCLR-LIQ-CONTAGION-001 was "machine-enforced by the gate" when `scripts/check_handoff_heavywork_gate.py` contained **no** contagion check. A future session could satisfy the gate with any `evidence_audit_` + `fclr_panelfe*`/`recompute_*` artifact and never touch the 1.74M contagion panel.
+2. It correctly identified that the contagion panel had never been analyzed, but left enforcement to prose.
 
-This was a **structural bottleneck** that falsely claimed completion while massive unexplored heavy work remained. The new handoff removes this bottleneck by:
-1. Explicitly stating MASSIVE HEAVY WORK REMAINS
-2. Creating a new campaign (FCLR-LIQ-CONTAGION-001) that requires heavy computation
-3. Making it impossible to avoid the heavy work (full artifact set required)
-4. Providing a clear, actionable task that future agents cannot skip
+This handoff removes the bottleneck by making the claim true:
+1. `scripts/check_handoff_heavywork_gate.py` now has `CONTAGION_CAMPAIGN_RE`, `CONTAGION_REQUIRED`, `_contagion_state()`, and fail-closed wiring. After the campaign start (20261121T174500Z), a post-start session must emit the full contagion artifact set or the gate fails with `CONTAGION_ARTIFACTS_MISSING` / `CONTAGION_ARTIFACTS_EMPTY` / `CONTAGION_TRIGGER_CHECK_MISSING`.
+2. `tests/test_tracka_hardening_143.py::TestContagionCampaignGate` proves the fail-closed and pass-open behavior.
+3. The campaign is grandfathered at its start UTC, so the current green state is preserved while the mandate is now real.
+
+**Net effect:** future agents cannot "verify and stop" or satisfy the gate with an audit-only session. They must execute the heavy contagion/network analysis or emit a valid materially-different free-data route.
 
 ---
 
@@ -106,28 +104,28 @@ Create/extend `research_state/session_<UTC>/` (UTC > 20261121T174500Z) and emit,
 - `fclr_liq_contagion01_eval_<UTC>.py`, `.json`, `.md` — execute the frozen protocol on the 1.74M panel. HEAVY computation: hourly aggregation, 15×15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests, funding-conditioned analysis, temporal stability.
 - `fclr_liq_contagion01_recompute_<UTC>.py`, `.json` — independent stdlib/numpy recompute that concurs.
 - `fclr_liq_contagion01_evidence_audit_<UTC>.json` and `.md` — evidence audit tying each verdict to its artifacts.
-- `evidence_audit_<UTC>.json` — REQUIRED by the gate's new-style heavy-session check (`AUDIT_PREFIX="evidence_audit_"`). A thin alias of the contagion evidence audit suffices.
+- `evidence_audit_<UTC>.json` — REQUIRED by the gate. A thin alias of the contagion evidence audit suffices.
 - `trigger_check_<UTC>.json` — non-empty trigger check.
 
 ### Acceptance Tests (run these — they are the gate)
 
 ```bash
-# Gate must pass (exit 0)
+# Gate must pass (exit 0). Prints reason=OK.
 python3 scripts/check_handoff_heavywork_gate.py
 
-# Unit tests must pass (0 failures)
+# Unit tests must pass (0 failures); includes TestContagionCampaignGate.
 python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143
 
-# Frontier must show FCLR-LIQ-CONTAGION-001 as rank-0 ACTIVE
+# Frontier must show executable heavy work remaining (contagion is rank-0 ACTIVE).
 python3 scripts/next_campaign_status.py
 ```
 
 **Expected gate output:** `[PASS] handoff-heavywork gate: ... reason=OK`
-**Expected frontier output:** `== CAMPAIGN STATUS: FCLR-LIQ-CONTAGION-001-20261121T174500Z rank-0 ACTIVE ==`
+**Expected frontier state:** rank 0 = FCLR-LIQ-CONTAGION-001-20261121T174500Z ACTIVE / READY_EXECUTE.
 
 **State verification:**
 - `experiment_frontier.json` rank 0 = FCLR-LIQ-CONTAGION-001-20261121T174500Z ACTIVE / READY_EXECUTE
-- `hypothesis_registry.json` records new hypotheses H_contagion_liq and H_contagion_funding
+- `hypothesis_registry.json` records H_contagion_liq and H_contagion_funding
 - Root `research_state/` md+json count stays ≤ 500 (currently 499/500)
 
 ---
@@ -199,7 +197,7 @@ This is genuine heavy research that cannot be completed in a single verification
 - **Do NOT** modify `.github/workflows` (protected control plane).
 - **Do NOT** overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03).
 - **Do NOT** add any root-level `research_state/*.md` or `research_state/*.json` file — root md+json count is **499/500**; one more breaches the churn cap (enforced by `tests/test_tracka_hardening_125.py` and the gate). All new artifacts go under `research_state/session_<UTC>/`.
-- **Do NOT** create empty/placeholder files or empty session directories.
+- **Do NOT** create empty/placeholder files or empty session directories (the gate checks non-zero size).
 - **Do NOT** threshold-shop or relax the 2% materiality floor after seeing outcomes; a null is preserved as NOT_SUPPORTED.
 - **Do NOT** claim completion without emitting the full artifact set under a new `research_state/session_<UTC>/`. Prose-only, trigger-check-only, audit-only, or placeholder artifacts do NOT satisfy the gate.
 
@@ -207,6 +205,6 @@ This is genuine heavy research that cannot be completed in a single verification
 
 ## 8. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-LIQ-CONTAGION-001 (ACTIVE / READY_EXECUTE). No remaining eval triad/recompute/evidence audit/trigger_check to emit — all must be created under `research_state/session_<UTC>/`. **No prose-only, no trigger-check-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly — but DO NOT falsely claim completion while heavy work remains.
+Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-LIQ-CONTAGION-001 (ACTIVE / READY_EXECUTE). **No prose-only, no trigger-check-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly — but DO NOT falsely claim completion while heavy work remains.
 
 (End of handoff)
