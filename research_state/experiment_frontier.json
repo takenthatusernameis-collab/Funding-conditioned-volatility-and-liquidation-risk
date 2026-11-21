@@ -3,16 +3,16 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
-    "task": "FCLR-XSEC-008-20261121T054721Z",
-    "generated": "20261121T054721Z",
-    "refreshed": "2026-11-21T05:47:21Z",
-    "last_checked": "2026-11-21T05:47:21Z",
-    "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": "FCLR-XSEC-008 complete (verdict NOT_SUPPORTED, session_20261121T054721Z). Alternative regime conditioning executed on frozen panels: Primary A (voV HIGH tercile funding->next-hour RV) PASSES all gates (CI [-0.000160,-0.000060], p=0.0, Holm adj_p=0.0, materiality 0.145; sign negative vs XSEC-002 positive, reported honestly). Primary B (voV any-tercile funding->next-hour notional-weighted liq intensity) FAILS all terciles (CI include zero; Holm adj_p 0.297-0.857). Joint gate requires BOTH primaries -> NOT_SUPPORTED. Independent recompute concurs. Per \u00a76 contingency ladder, FCLR-XSEC-009 only if structurally blocked: XSEC-008 executed cleanly, NOT blocked, so contingency does not trigger; XSEC alternative-regime program reaches terminal state.",
-    "next_unfinished_task": "FCLR-XSEC-008 complete (verdict NOT_SUPPORTED, session_20261121T054721Z). Per \u00a76, FCLR-XSEC-009 (Hyperliquid native-perps cross-panel mechanism cross-check) activates only if XSEC-008 is structurally blocked; it is NOT blocked, so no further XSEC campaign. Next: regime-validation trigger or next RESEARCH_PROMPT.md priority.",
+    "task": "FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z",
+    "generated": "20261121T055825Z",
+    "refreshed": "2026-11-21T05:58:25Z",
+    "last_checked": "2026-11-21T05:58:25Z",
+    "last_verdict": null,
+    "next_action_heavy": "FCLR-LIQ-OOS-FORECAST-001 not yet executed. Out-of-sample liquidation-risk forecast validation on the verified frozen combined liquidation panel (sha256 81a100d5..., 15 coins, 2025-03-22 19:00 -> 2026-10-31 22:00 UTC). Preregister protocol pre-outcomes (outcome_data_inspected_before_freeze=false), freeze before inspecting outcomes, then execute C2 (RV+funding+premium+ema) vs B1 (RV-only) chronological walk-forward on next-24h observed notional-weighted liquidation intensity with block bootstrap + Holm over QLIKE/Brier/LogLoss, 2% materiality floor, verdict SUPPORTED only if ALL pass else honest NOT_SUPPORTED; independent recompute; non-empty trigger_check + evidence_audit. XSEC program terminal (FCLR-XSEC-008 NOT_SUPPORTED, session_20261121T054721Z; XSEC-009 not triggered).",
+    "next_unfinished_task": "FCLR-LIQ-OOS-FORECAST-001 heavy execution: create research_state/session_20261121T055825Z/ and emit fclr_liq_oos001_protocol_freeze, fclr_liq_oos001_evaluation (+recompute), evidence_audit, and non-empty trigger_check_20261121T055825Z.json; then advance frontier phases to COMPLETE, set last_verdict, synchronize hypothesis_registry, and update AGENT_HANDOFF.md latest session.",
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None: FCLR-XSEC-008 executed to verdict NOT_SUPPORTED; both frozen panels hash-verified; no network/paid data/credentials; root research_state/ md+json count 499/500 respected (all artifacts under session directory).",
+    "blockers": "None: gate green, no staleness, root md+json 499/500 respected (all new artifacts under session dir), both frozen panels hash-verified, no network/paid data/credentials needed.",
     "evidence": {
       "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
       "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
@@ -26,77 +26,55 @@
         "XRP"
       ],
       "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "mechanism": "alternative_regime_conditioning_rv168_rv24_or_funding_rate_volatility",
+      "mechanism": "out_of_sample_funding_conditioned_observed_liquidation_intensity_forecast",
       "distinct_from": [
         "FCLR-001",
-        "FCLR-XSEC-001",
-        "FCLR-XSEC-002 (RV tercile regime -> RV)",
-        "FCLR-XSEC-003 (thin holdout, folded into 004)",
-        "FCLR-XSEC-004 (count-based, RV tercile)",
-        "FCLR-XSEC-005 (notional-weighted, RV tercile)",
-        "FCLR-XSEC-006 (notional-weighted, UTC session bucket)",
-        "FCLR-XSEC-007 (cross-panel RV tercile vs UTC bucket reconciliation, terminal NOT_SUPPORTED)",
-        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
-        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+        "FCLR-XSEC-001..008 (terminal)",
+        "FCLR-XSEC-009 (not triggered)",
+        "Track B modeled breaches (NOT_MET)",
+        "Track A combined panel (NOT_MET)"
       ],
-      "supersedes": null,
-      "last_verdict": "NOT_SUPPORTED",
-      "session_utc": "20261121T054721Z",
-      "primary_a_verdict": "PASSES (voV HIGH tercile funding->RV, CI [-0.000160,-0.000060], materiality 0.145)",
-      "primary_b_verdict": "FAILS (voV any-tercile funding->notional-weighted liq intensity; all CI include zero)",
-      "joint_verdict": "NOT_SUPPORTED",
-      "recompute_concurs": true
+      "supersedes": "FCLR-XSEC-008-20261121T054721Z",
+      "last_verdict": null,
+      "session_utc": null
     },
     "phases": [
       {
         "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze FCLR-XSEC-008 protocol pre-outcomes: alternative-regime conditioning estimand; Primary A = within-(hour, alt-regime-tercile) funding rank -> next-hour RV (FCLR-XSEC-002 style); Primary B = within-(hour, alt-regime-bucket) funding rank -> next-hour notional-weighted liq intensity (FCLR-XSEC-006 style); block bootstrap + Holm over joint regime family + 2% floor. outcome_data_inspected_before_freeze=false. Both panel hashes recorded.",
+        "status": "PENDING",
+        "claim": "Freeze FCLR-LIQ-OOS-FORECAST-001 protocol pre-outcomes: OOS liquidation-risk forecast estimand; C2 vs B1 on next-24h observed notional-weighted liquidation intensity; chronological walk-forward; block bootstrap + Holm over QLIKE/Brier/LogLoss; 2% floor; outcome_data_inspected_before_freeze=false; combined panel hash recorded.",
         "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec008_protocol_freeze_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec008_protocol_freeze_<UTC>.md"
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.json",
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.md"
         ],
-        "actual_artifacts": [
-          "research_state/session_20261121T054721Z/fclr_xsec008_protocol_freeze_20261121T054721Z.json",
-          "research_state/session_20261121T054721Z/fclr_xsec008_protocol_freeze_20261121T054721Z.md"
-        ]
+        "actual_artifacts": []
       },
       {
         "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "Alternative-regime evaluation: both primary funding contrasts on overlapping hours, block bootstrap across holdout hours within each regime family (seed 20261121, >=2000 reps), Holm over joint family, 2% materiality floor; independent recompute; verdict SUPPORTED only if BOTH primary contrasts clear all gates; otherwise honest NOT_SUPPORTED; cross-reference FCLR-XSEC-002, XSEC-004, XSEC-005, XSEC-006, XSEC-007.",
+        "status": "PENDING",
+        "claim": "OOS evaluation: C2 vs B1 paired contrasts on QLIKE/Brier/LogLoss, block bootstrap >=2000 reps, Holm over joint metric family, 2% floor, independent recompute; verdict SUPPORTED only if all pass else honest NOT_SUPPORTED; cross-reference XSEC-002/004/005/006/007/008 and Track A/B.",
         "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec008_evaluation_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec008_evaluation_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec008_evaluation_<UTC>.md",
-          "research_state/session_<UTC>/fclr_xsec008_recompute_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec008_recompute_<UTC>.json"
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.py",
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.json",
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.md",
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.py",
+          "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.json"
         ],
-        "actual_artifacts": [
-          "research_state/session_20261121T054721Z/fclr_xsec008_evaluation_20261121T054721Z.py",
-          "research_state/session_20261121T054721Z/fclr_xsec008_evaluation_20261121T054721Z.json",
-          "research_state/session_20261121T054721Z/fclr_xsec008_evaluation_20261121T054721Z.md",
-          "research_state/session_20261121T054721Z/fclr_xsec008_recompute_20261121T054721Z.py",
-          "research_state/session_20261121T054721Z/fclr_xsec008_recompute_20261121T054721Z.json"
-        ]
+        "actual_artifacts": []
       },
       {
         "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-008 to COMPLETE with the new UTC, set last_verdict; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
+        "status": "PENDING",
+        "claim": "Emit non-empty trigger_check_20261121T055825Z.json + evidence_audit_20261121T055825Z.{json,md}; advance phases to COMPLETE with UTC 20261121T055825Z, set last_verdict; sync hypothesis_registry.json; update AGENT_HANDOFF.md latest session; no sealed mutation, no workflows edits, no root-level md/json.",
         "expected_artifacts": [
-          "research_state/session_<UTC>/trigger_check_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
+          "research_state/session_20261121T055825Z/trigger_check_20261121T055825Z.json",
+          "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.json",
+          "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.md"
         ],
-        "actual_artifacts": [
-          "research_state/session_20261121T054721Z/trigger_check_20261121T054721Z.json",
-          "research_state/session_20261121T054721Z/evidence_audit_20261121T054721Z.json",
-          "research_state/session_20261121T054721Z/evidence_audit_20261121T054721Z.md"
-        ]
+        "actual_artifacts": []
       }
     ],
-    "note": "Rank-0 heavy campaign FCLR-XSEC-008 COMPLETE (verdict NOT_SUPPORTED, session_20261121T054721Z). Alternative regime conditioning under RV168/RV24 voV terciles: Primary A (funding->RV) passes with sign reversal vs XSEC-002; Primary B (funding->liq intensity) fails; joint NOT_SUPPORTED. Independent recompute concurs. Kept READY_EXECUTE/ACTIVE at rank 0 per test_active_campaign_gate invariant (rank-0 must stay non-terminal); phases COMPLETE, verdict recorded. Per \u00a76, FCLR-XSEC-009 only if structurally blocked \u2014 not blocked, so XSEC program terminal."
+    "note": "Rank-0 heavy campaign FCLR-LIQ-OOS-FORECAST-001 READY_EXECUTE/ACTIVE, not yet executed. XSEC program terminal (FCLR-XSEC-008 NOT_SUPPORTED, session_20261121T054721Z; XSEC-009 not triggered). Next: out-of-sample liquidation-risk forecast validation per Section 4 of AGENT_HANDOFF.md."
   },
   {
     "rank": 1,

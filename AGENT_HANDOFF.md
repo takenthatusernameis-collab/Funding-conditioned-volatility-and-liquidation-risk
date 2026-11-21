@@ -1,29 +1,25 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T05:54:21Z
-**Sole active campaign:** FCLR-XSEC-008-20261121T054721Z (rank-0, READY_EXECUTE/ACTIVE, verdict NOT_SUPPORTED — XSEC alternative-regime program terminal)
+**Timestamp:** 2026-11-21T05:58:25Z
+**Sole active campaign:** FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z (rank-0, READY_EXECUTE/ACTIVE, verdict pending — out-of-sample liquidation-risk forecast validation; XSEC program terminal)
 **Latest completed heavy session on disk:** session_20261121T054721Z (FCLR-XSEC-008, verdict NOT_SUPPORTED — Primary A voV HIGH tercile funding→RV PASSES all gates CI [-0.000160,-0.000060] p=0.0 Holm adj_p=0.0 materiality 0.145; Primary B voV any-tercile funding→notional-weighted liq intensity FAILS all terciles CI include zero Holm adj_p 0.297-0.857; joint gate requires BOTH primaries -> NOT_SUPPORTED; independent recompute concurs; all trigger checks PASS; both panel sha256 verified)
-**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500). FCLR-XSEC-008 executed to verdict NOT_SUPPORTED on frozen panels; XSEC program terminal (no further XSEC campaign; §6 contingency FCLR-XSEC-009 not triggered).
+**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500). FCLR-XSEC-008 executed to terminal NOT_SUPPORTED on frozen panels; XSEC program terminal (no further XSEC campaign; §6 contingency FCLR-XSEC-009 NOT triggered — not structurally blocked). Stale empty session dir removed; gate green; next heavy session can proceed without staleness failure.
 **Environment:** `pip3 install -r requirements.txt` already run (numpy, pandas, scipy, pyarrow, requests); Python 3.12.3. Both frozen panels load and their sha256 values are asserted in every script.
 
-> This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-XSEC-008). All other campaigns (STARTER-001, FCLR-001, XSEC-001..007, LIQ-XSEC-QLIKE, LIQ-XSEC-ORDERING, LIQ-COMBINED-PANEL, Track A/B/C) are terminal and must NOT be re-run. A session that does not emit the Section 4 artifact triad under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail. The previous refresh was blocked only by a stale, empty session directory newer than the recorded latest session; that empty directory has been removed, so the gate is green again and the next heavy session can proceed without a staleness failure.
+> This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-LIQ-OOS-FORECAST-001). All other campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE, LIQ-XSEC-ORDERING, LIQ-COMBINED-PANEL, Track A/B/C) are terminal and must NOT be re-run; FCLR-XSEC-009 contingency is NOT activated (XSEC-008 executed cleanly, not structurally blocked). A session that does not emit the Section 4 artifact triad under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail. No staleness blocker remains (empty session dir removed; handoff latest == newest on-disk session); the next heavy session can proceed.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T05:54:21Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T05:58:25Z)
 
-**Why this is the focus (repository-name priority + heaviest non-duplicative work):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — it has two scientific halves that must be reconciled by a single mechanism: (a) does the funding rate *condition volatility* (RV), and (b) does it *condition liquidation risk*? The completed cross-sectional (XSEC) program has already shown, on the frozen panels:
-- **Funding → next-hour RV is SUPPORTED only in the HIGH-RV regime** (FCLR-XSEC-002, CI [0.0046, 0.2348], p=0.019, materiality 1.09).
-- **Funding → next-hour liquidation intensity is SUPPORTED in the LOW-RV regime** (FCLR-XSEC-004 count-based, FCLR-XSEC-005 notional-weighted, both CI exclude 0, p=0.0) and **across all three UTC session buckets** (FCLR-XSEC-006, notional-weighted).
-- **Cross-panel reconciliation under RV-tercile vs UTC-session conditioning is an honest null** (FCLR-XSEC-007, NOT_SUPPORTED, independent recompute concurs).
-- **Alternative regime conditioning (RV168/RV24 voV ratio terciles): NOT_SUPPORTED** (FCLR-XSEC-008, session_20261121T054721Z — Primary A PASSES with sign reversal vs XSEC-002 but Primary B FAILS; joint gate requires BOTH primaries, so NOT_SUPPORTED; independent recompute concurs). XSEC alternative-regime program is now **terminal**.
+**Why this is the focus (repository-name priority + heaviest non-duplicative work):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — two scientific halves reconciled by funding conditioning: (a) does the funding rate *condition volatility* (RV), and (b) does it *condition liquidation risk*? The cross-sectional (XSEC) program is now terminal:
+- **Funding → next-hour RV is SUPPORTED only in the HIGH-RV regime** (FCLR-XSEC-002, CI [0.0046, 0.2348], p=0.019, materiality 1.09), but ALL out-of-sample forward confirmations FAILED to replicate (FCLR-FWD-VOL-011-CONFIRM, 2024Q4, 2025H2, 2025Q1Q2 all NOT_REPLICATED/NOT_MET).
+- **Funding → next-hour liquidation intensity is SUPPORTED cross-sectionally** in the LOW-RV regime (FCLR-XSEC-004 count-based, FCLR-XSEC-005 notional-weighted; CI exclude 0, p=0.0) and across all three UTC session buckets (FCLR-XSEC-006), but NO out-of-sample liquidation-risk forecast gate has passed (Track B modeled breaches NOT_MET; Track A combined panel NOT_MET; expansion PASS but FRAGILE robustness).
+- **Alternative regime conditioning: NOT_SUPPORTED** (FCLR-XSEC-008, session_20261121T054721Z — Primary A passes with sign reversal vs XSEC-002, Primary B fails; joint gate NOT_SUPPORTED; independent recompute concurs). XSEC program terminal; FCLR-XSEC-009 contingency NOT triggered (not structurally blocked). Do NOT re-run FCLR-XSEC-001..008 or FCLR-XSEC-009.
 
-**State is synchronized and consistent (verified 2026-11-21T05:54:21Z):**
-- `research_state/experiment_frontier.json` rank 0 = `FCLR-XSEC-008-20261121T054721Z` READY_EXECUTE/ACTIVE, phases PREREG_FREEZE / EVALUATION_AND_GATE / TRIGGER_AND_FRONTIER all COMPLETE with actual_artifacts; last_verdict NOT_SUPPORTED; rank 1 = FCLR-XSEC-007 SUPERSEDED (NOT_SUPPORTED); all others SUPERSEDED. Rank-0 stays READY_EXECUTE/ACTIVE (non-terminal) per `test_active_campaign_gate.py` invariant even though phases are COMPLETE and verdict is recorded — this is the handoff/test tension resolution.
-- `research_state/hypothesis_registry.json`: H_fclr_xsec_007 terminal NOT_SUPPORTED; H_fclr_xsec_008 terminal NOT_SUPPORTED (verdict_recorded=true, last_experiment=session_20261121T054721Z).
-- Handoff-heavywork gate PASS (exit 0); `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures; root churn cap 499/500 holds.
+**The unreplicated, non-avoidable work:** The liquidation-risk half of the repo mandate has a supported cross-sectional association but NO passing out-of-sample forecast gate. The next focus campaign executes a heavy, leakage-resistant out-of-sample forecast validation of funding-conditioned features for *observed* liquidation risk on the verified frozen combined liquidation panel, with a preregistered protocol frozen *before* any outcome is inspected, block-bootstrap + Holm inference over the joint metric family, a 2% materiality floor, an independent second-code-path recompute, and a non-empty trigger check. A null is preserved as honest NOT_SUPPORTED; no threshold-shopping after seeing outcomes.
 
-**XSEC program terminal.** FCLR-XSEC-008 executed cleanly (not structurally blocked), so per §6 contingency step 1 the FCLR-XSEC-009 fallback (Hyperliquid native-perps cross-panel mechanism cross-check) does NOT activate. No further XSEC campaign is warranted.
+Campaign: FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z (rank-0, READY_EXECUTE/ACTIVE). Create a NEW `research_state/session_20261121T055825Z/` directory and emit every artifact in Section 4. No root-level md/json (root at 499/500 cap). No `.github/workflows` edits. No sealed mutation.
 
 ---
 
@@ -56,27 +52,27 @@
 
 ## 4. Required artifacts — the heavy work (non-deferrable, machine-enforced)
 
-Create a NEW `research_state/session_<UTC>/` directory (UTC = this session's start time) and emit **all** of the following with meaningful, non-empty contents. Filenames must use the new session's UTC suffix `<UTC>`:
+Create `research_state/session_20261121T055825Z/` and emit **all** of the following with meaningful, non-empty contents. Filenames must use the UTC suffix `20261121T055825Z`:
 
-1. `fclr_xsec008_protocol_freeze_<UTC>.json` + `.md` — preregistered protocol, `outcome_data_inspected_before_freeze=false`, both `panel_sha256` values recorded (assert `41962f82...` for FCLR-001 and `81a100d5...` for combined liquidation), estimand = alternative-regime conditioning of the funding→RV and funding→liquidation mechanisms. **Freeze BEFORE inspecting any outcome.**
-2. `fclr_xsec008_evaluation_<UTC>.py` + `.json` + `.md` — joint evaluation on overlapping hours: (A) within-(hour, alt-regime-tercile) funding rank → next-hour RV; (B) within-(hour, alt-regime-bucket) funding rank → next-hour notional-weighted liquidation intensity; block bootstrap + Holm over joint family, 2% materiality floor, verdict SUPPORTED or honest NOT_SUPPORTED; explicit cross-reference to FCLR-XSEC-002, XSEC-004, XSEC-005, XSEC-006, XSEC-007.
-3. `fclr_xsec008_recompute_<UTC>.py` + `.json` — independent second code path reproducing the evaluation, so the verdict is not a single-implementation artifact.
-4. `evidence_audit_<UTC>.json` + `.md` — evidence audit of the artifacts (both panel hashes verified, freeze preceded outcomes, no sealed mutation, no root-level churn, cross-reference to all prior XSEC campaigns).
-5. `trigger_check_<UTC>.json` — non-empty; enumerate each acceptance check with PASS/FAIL.
+1. `fclr_liq_oos001_protocol_freeze_20261121T055825Z.json` + `.md` — preregistered protocol, `outcome_data_inspected_before_freeze=false`, combined liquidation panel sha256 `81a100d5...` recorded and asserted in the script header, estimand = out-of-sample forecast of next-24h *observed* notional-weighted liquidation intensity, C2 (RV-only baseline B1 + funding abs_fund_pct rank + funding rate + premium + ema_dist) vs B1 (RV-only), chronological walk-forward train/validation/test blocks (no random split, no threshold-shopping, no holdout tuning), block bootstrap + Holm over the joint QLIKE/Brier/LogLoss metric family, 2% materiality floor, verdict SUPPORTED only if ALL metric contrasts pass else honest NOT_SUPPORTED. **Freeze BEFORE inspecting any outcome.**
+2. `fclr_liq_oos001_evaluation_20261121T055825Z.py` + `.json` + `.md` — out-of-sample evaluation on overlapping hours: (A) B1 RV-only baseline; (B) C2 funding-conditioned model; paired C2-vs-B1 contrasts on QLIKE, Brier, Log Loss; block bootstrap across holdout hours (>=2000 reps), Holm over the joint metric family, 2% materiality floor; explicit cross-reference to FCLR-XSEC-002/004/005/006/007/008 and Track A/B liquidation campaigns; observed labels only (never modeled boundary breaches labeled as observed liquidations).
+3. `fclr_liq_oos001_recompute_20261121T055825Z.py` + `.json` — independent second code path (numpy/stdlib only, separate implementation from the evaluation) reproducing the OOS evaluation, so the verdict is not a single-implementation artifact.
+4. `evidence_audit_20261121T055825Z.json` + `.md` — evidence audit of the artifacts (combined panel hash verified, freeze preceded outcomes, no sealed mutation, no root-level churn, cross-reference to all prior XSEC and Track A/B campaigns).
+5. `trigger_check_20261121T055825Z.json` — non-empty; enumerate each acceptance check with PASS/FAIL.
 
 Then synchronize state (no sealed mutation):
-- `research_state/experiment_frontier.json`: rank 0 = FCLR-XSEC-008, advance phases PREREG_FREEZE → EVALUATION_AND_GATE → TRIGGER_AND_FRONTIER to COMPLETE with the new UTC, set `last_verdict`, demote FCLR-XSEC-008 to SUPERSEDED (terminal), keep all others SUPERSEDED.
-- `research_state/hypothesis_registry.json`: H_fclr_xsec_008 status → terminal with verdict (SUPPORTED or NOT_SUPPORTED), set `last_experiment`, `last_tested`, `last_verdict`, `terminal`; H_fclr_xsec_007 stays terminal NOT_SUPPORTED.
-- This AGENT_HANDOFF.md: advance `Latest completed heavy session` to the new `<UTC>` and record the verdict, so the gate's latest-session check stays satisfied.
+- `research_state/experiment_frontier.json`: rank 0 = FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z; advance phases PREREG_FREEZE → EVALUATION_AND_GATE → TRIGGER_AND_FRONTIER to COMPLETE with the new UTC as each executes; set `last_verdict`; keep FCLR-XSEC-008 and all other campaigns SUPERSEDED; rank-0 carries a concrete non-empty `next_unfinished_task`.
+- `research_state/hypothesis_registry.json`: record the liquidation-risk OOS hypothesis verdict (SUPPORTED or NOT_SUPPORTED) as terminal with `last_experiment`, `last_tested`, `last_verdict`, `terminal`; H_fclr_xsec_007 and H_fclr_xsec_008 stay terminal NOT_SUPPORTED.
+- This AGENT_HANDOFF.md: advance `Latest completed heavy session` to `20261121T055825Z` and record the verdict when execution completes, so the gate's latest-session check stays satisfied.
 
 ### Acceptance test (run these — they are the gate)
 - `python3 scripts/check_handoff_heavywork_gate.py` exits 0 (prints `[PASS] handoff-heavywork gate: ... reason=OK`).
 - `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures.
-- New `research_state/session_<UTC>/` holds the artifact triad above + recompute + evidence audit + non-empty `trigger_check_<UTC>.json`; no zero-byte placeholders.
-- `experiment_frontier.json` rank 0 = FCLR-XSEC-008 ACTIVE/READY_EXECUTE (or terminal if you complete it) with all others SUPERSEDED; `hypothesis_registry.json` H_fclr_xsec_008 terminal.
+- New `research_state/session_20261121T055825Z/` holds the artifact triad above + recompute + evidence audit + non-empty `trigger_check_20261121T055825Z.json`; no zero-byte placeholders.
+- `experiment_frontier.json` rank 0 = FCLR-LIQ-OOS-FORECAST-001 ACTIVE/READY_EXECUTE with all others SUPERSEDED; rank-0 `next_unfinished_task` non-empty; `hypothesis_registry.json` liquidation-risk OOS hypothesis terminal.
 - No liquidation/RV outcomes inspected before the protocol freeze.
 
-**Non-avoidance:** prose, trigger-check-only, or placeholder artifacts do NOT satisfy the gate. The machine-enforced gate requires the concrete artifact triad plus a non-empty trigger check in the latest session directory, and the handoff's latest session id must match the newest on-disk session. Re-running FCLR-STARTER-001 / FCLR-001 / FCLR-XSEC-001..007, or emitting a thin count-only re-test, does NOT satisfy this task.
+**Non-avoidance:** prose, trigger-check-only, or placeholder artifacts do NOT satisfy the gate. The machine-enforced gate requires the concrete artifact triad plus a non-empty trigger check in the latest session directory, and the handoff's latest session id must match the newest on-disk session. Re-running any XSEC campaign (FCLR-STARTER-001 / FCLR-001 / FCLR-XSEC-001..008 / FCLR-XSEC-009), or emitting a thin count-only re-test, does NOT satisfy this task.
 
 ---
 
@@ -103,6 +99,6 @@ A blocker memo is not a substitute for executing a valid bounded free-data task;
 
 ## 7. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly with the next valid independent task executed.
+Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active campaign is FCLR-LIQ-OOS-FORECAST-001 (out-of-sample liquidation-risk forecast); XSEC is terminal and must not be re-run. Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly with the next valid independent task executed.
 
 (End of handoff)
