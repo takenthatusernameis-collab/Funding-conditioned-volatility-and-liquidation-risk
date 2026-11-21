@@ -126,7 +126,7 @@ ls -la research_state/session_20261121T220100Z/           # non-empty artifact s
 
 ## 5. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, update this AGENT_HANDOFF.md with: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; any blocker with the next materially different free-data route. **No active rank-0 campaign.** The frozen-data frontier is exhausted. **No prose-only, no trigger-only, no audit-only, no verify-and-stop sessions.** Commit nothing merely to show activity. If a final synthesis is produced, record it and stop cleanly. If no future session occurs, this handoff is the final record.
+Before finishing, update this AGENT_HANDOFF.md with: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; any blocker with the next materially different free-data route. **No active rank-0 campaign on frozen data.** The frozen-data frontier is exhausted. **No prose-only, no trigger-only, no audit-only, no verify-and-stop sessions.** Commit nothing merely to show activity. If a final synthesis is produced, record it and stop cleanly. If no future session occurs, this handoff is the final record.
 
 ---
 
