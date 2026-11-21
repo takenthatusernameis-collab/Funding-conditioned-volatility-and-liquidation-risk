@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T20:39:10Z (supersedes 2026-11-21T20:00:00Z)
+**Timestamp:** 2026-11-21T20:39:37Z (supersedes 2026-11-21T20:39:10Z)
 **Sole active campaign:** FCLR-LIQ-CONTAGION-002-20261121T200000Z (rank-0; edge-set robustness + per-edge materiality reconciliation on the frozen 1.74M panel)
 **Latest completed heavy session on disk:** session_20261121T193000Z (FCLR-LIQ-CONTAGION-001, COMPLETE — see §5)
 **Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 77 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-001 executed; the only remaining heavy frontier is CONTAGION-002 (reconciliation), which is feasible on the frozen panel.
@@ -12,7 +12,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T20:39:10Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T20:39:37Z)
 
 **PRIORITY-0 MISSION: Execute FCLR-LIQ-CONTAGION-002 — edge-set robustness and per-edge materiality reconciliation on the frozen 1.74M liquidation panel. This is HEAVY computation. Do NOT verify and stop.**
 
@@ -21,7 +21,7 @@
 - `fclr_liq_contagion01_eval_*.json`: **11 final edges** (density 0.0524). Method = Granger-Bonferroni-significant (155 pairs) **INTERSECT** permutation-significant (16 pairs) = 11 edges.
 - `fclr_liq_contagion01_recompute_*.json`: **58 edges** (density 0.2762). Method = empirical-p-only (300 permutations). `recompute_concurs_with_eval: false`.
 - The two edge sets **disagree on 47 of 210 directed pairs**. The contagion network's edge set is therefore an artifact of an unresolved multiple-testing choice, not a stable finding.
-- The **2% per-edge materiality floor** (`materiality_floor: 0.02`, `materiality_floor_respected: true`) was **asserted but never actually computed** — there is no per-edge variance-explained / R^2 field anywhere in the eval JSON. The "material" claim is unsupported by any computed quantity.
+- The **2% per-edge materiality floor** (`materiality_floor: 0.02`, `materiality_floor_respected: true`) was **asserted but never actually computed** — there is no per-edge variance-explained / R² field anywhere in the eval JSON. The "material" claim is unsupported by any computed quantity.
 - The funding-tercile split and 90-day rolling temporal-stability results were reported descriptively but **never reconciled** against the primary edge set.
 
 **FCLR-LIQ-CONTAGION-002 resolves exactly this.** It reuses the SAME frozen panel (no new data, no external trigger, no credentials) and does the heavy reconciliation work CONTAGION-001 skipped.
@@ -29,7 +29,7 @@
 **Your task THIS session (execute the full protocol; do not shortcut):**
 1. **Prereg freeze (outcome-blind, BEFORE any statistic):** Write `fclr_liq_contagion02_prereg_<UTC>.json` + `.md` under `research_state/session_<UTC>/` (UTC > 20261121T200000Z). Record: `experiment_id` starting `FCLR-LIQ-CONTAGION-002`, `outcome_data_inspected_before_freeze: false`, the frozen hypotheses (below), `materiality_floor: 0.02`, `panel_sha256: 81a100d5...`, and the exact estimator definitions. Assert the panel sha256 in the script header.
 2. **Reconciliation evaluation (HEAVY):** Write `fclr_liq_contagion02_recon_<UTC>.py` + `.json` + `.md`. On the 1.74M panel (hourly-aggregated, 15 coins, 2025-03-22..2026-10-31), for **all 210 directed pairs**:
-   - **Per-edge materiality:** within each VAR(6) Granger regression, compute the **R^2 / partial variance explained** by the source-coin lags (this is the quantity CONTAGION-001 never computed). Record per-edge `variance_explained` and the fraction of edges clearing the 0.02 floor.
+   - **Per-edge materiality:** within each VAR(6) Granger regression, compute the **R² / partial variance explained** by the source-coin lags (this is the quantity CONTAGION-001 never computed). Record per-edge `variance_explained` and the fraction of edges clearing the 0.02 floor.
    - **Multiple-testing robustness ladder:** re-derive the edge set under **four** criteria — (a) raw p<0.01, (b) Bonferroni across 210, (c) Benjamini-Hochberg FDR q=0.05, (d) permutation-empirical (1000 permutations/pair) — and report the **edge-set size and pairwise Jaccard agreement** across criteria. The eval-vs-recompute disagreement MUST be quantified here, not hidden.
    - **Tercile & stability reconciliation:** recompute the funding-tercile edge sets and the 90-day/30-day rolling edge sets, then report their overlap (Jaccard) with each of the four primary criteria' edge sets.
    - **Block-bootstrap edge-set stability:** 1000+ moving-block bootstrap resamples of the hourly panel; report the per-edge selection frequency and the 95% edge-set stability interval.
@@ -108,7 +108,7 @@ python3 scripts/next_campaign_status.py                   # CONTAGION-001 execut
 | `trigger_check_` | `.json` | Non-empty; `required: false` with reason |
 
 ### Heavy computation scope (why this is not a shortcut-able audit)
-- Per-edge **partial R^2 / variance explained** within 210 VAR(6) Granger regressions (the quantity CONTAGION-001 never computed).
+- Per-edge **partial R² / variance explained** within 210 VAR(6) Granger regressions (the quantity CONTAGION-001 never computed).
 - **Four-criterion robustness ladder** over all 210 pairs: raw p, Bonferroni, BH-FDR (q=0.05), permutation-empirical (1000 perms/pair). Report edge-set sizes + pairwise Jaccard.
 - **Funding-tercile** (3 splits) and **90-day/30-day rolling** edge-set recomputation, reconciled (Jaccard) against each primary criterion.
 - **Block-bootstrap**: 1000+ moving-block resamples; per-edge selection frequency + 95% stability interval.
