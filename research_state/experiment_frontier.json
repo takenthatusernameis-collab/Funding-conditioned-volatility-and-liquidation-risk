@@ -1,12 +1,12 @@
 [
   {
     "rank": 0,
-    "status": "READY_EXECUTE",
-    "program_status": "ACTIVE",
-    "task": "FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z",
-    "generated": "20261121T055825Z",
-    "refreshed": "2026-11-21T06:54:00Z",
-    "last_checked": "2026-11-21T06:54:00Z",
+    "status": "TRIGGER_ONLY",
+    "program_status": "BOUNDED_TRIGGER_ONLY",
+    "task": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
+    "generated": "20261121T071500Z",
+    "refreshed": "2026-11-21T07:07:40Z",
+    "last_checked": "2026-11-21T07:07:40Z",
     "last_verdict": "NOT_SUPPORTED",
     "next_action_heavy": "FCLR-LIQ-OOS-FORECAST-001 not yet executed. Out-of-sample liquidation-risk forecast validation on the verified frozen combined liquidation panel (sha256 81a100d5..., 15 coins, 2025-03-22 19:00 -> 2026-10-31 22:00 UTC). Preregister protocol pre-outcomes (outcome_data_inspected_before_freeze=false), freeze before inspecting outcomes, then execute C2 (RV+funding+premium+ema) vs B1 (RV-only) chronological walk-forward on next-24h observed notional-weighted liquidation intensity with block bootstrap + Holm over QLIKE/Brier/LogLoss, 2% materiality floor, verdict SUPPORTED only if ALL pass else honest NOT_SUPPORTED; independent recompute; non-empty trigger_check + evidence_audit. XSEC program terminal (FCLR-XSEC-008 NOT_SUPPORTED, session_20261121T054721Z; XSEC-009 not triggered).",
     "next_unfinished_task": "FCLR-LIQ-OOS-FORECAST-001 executed to terminal NOT_SUPPORTED in session_20261121T055825Z. Protocol freeze, OOS evaluation (QLIKE FAIL: rel -5.88%, CI includes zero, materiality not met; Brier PASS +11.48%; LogLoss PASS +8.63%; joint gate requires ALL -> NOT_SUPPORTED), independent numpy/stdlib recompute concurs NOT_SUPPORTED, evidence_audit + non-empty trigger_check emitted under session_20261121T055825Z/. Frontier phases advanced to COMPLETE; hypothesis_registry liquidation-risk OOS hypothesis terminal NOT_SUPPORTED; AGENT_HANDOFF.md latest session advanced to 20261121T055825Z. XSEC program terminal (no re-run). No further task for this campaign; next distinct heavy campaign TBD.",
